@@ -103,7 +103,6 @@ type ReadRequest_PageToken struct {
 
 type ReadRequest_Criteria struct {
 	// Read criteria.
-	//
 	// See [Criteria] for details.
 	Criteria *Criteria `protobuf:"bytes,2,opt,name=criteria,proto3,oneof"`
 }
@@ -119,17 +118,13 @@ type ReadResponse struct {
 	// List of matching log entries.
 	Entries []*LogEntry `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries,omitempty"`
 	// Token for getting the next page of the log entries.
-	//
 	// After getting log entries initially with [Criteria], you can use `next_page_token` as the value
 	// for the [ReadRequest.page_token] parameter in the next read request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	// Token for getting the previous page of the log entries.
-	//
 	// After getting log entries initially with [Criteria], you can use `previous_page_token` as the value
 	// for the [ReadRequest.page_token] parameter in the next read request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	PreviousPageToken string `protobuf:"bytes,4,opt,name=previous_page_token,json=previousPageToken,proto3" json:"previous_page_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -198,15 +193,12 @@ func (x *ReadResponse) GetPreviousPageToken() string {
 type Criteria struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to return.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// List of resource types to limit log entries to.
-	//
 	// Empty list disables filter.
 	ResourceTypes []string `protobuf:"bytes,2,rep,name=resource_types,json=resourceTypes,proto3" json:"resource_types,omitempty"`
 	// List of resource IDs to limit log entries to.
-	//
 	// Empty list disables filter.
 	ResourceIds []string `protobuf:"bytes,3,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
 	// Lower bound of log entries timestamps.
@@ -214,19 +206,16 @@ type Criteria struct {
 	// Upper bound of log entries timestamps.
 	Until *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=until,proto3" json:"until,omitempty"`
 	// List of log levels to limit log entries to.
-	//
 	// Empty list disables filter.
 	Levels []LogLevel_Level `protobuf:"varint,6,rep,packed,name=levels,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"levels,omitempty"`
 	// Filter expression. For details about filtering, see [documentation](/docs/logging/concepts/filter).
 	Filter string `protobuf:"bytes,7,opt,name=filter,proto3" json:"filter,omitempty"`
 	// List of stream names to limit log entries to.
-	//
 	// Empty list disables filter.
 	StreamNames []string `protobuf:"bytes,10,rep,name=stream_names,json=streamNames,proto3" json:"stream_names,omitempty"`
 	// The maximum number of results per page to return.
 	PageSize int64 `protobuf:"varint,8,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Limits response to maximum size in bytes. Prevents gRPC resource exhaustion.
-	//
 	// Default value for max response size is 3.5 MiB
 	MaxResponseSize int64 `protobuf:"varint,9,opt,name=max_response_size,json=maxResponseSize,proto3" json:"max_response_size,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -337,7 +326,7 @@ var File_yandex_cloud_logging_v1_log_reading_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_logging_v1_log_reading_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/logging/v1/log_reading_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\"{\n" +
+	"1yandex/cloud/logging/v1/log_reading_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"{\n" +
 	"\vReadRequest\x12\x1f\n" +
 	"\n" +
 	"page_token\x18\x01 \x01(\tH\x00R\tpageToken\x12?\n" +

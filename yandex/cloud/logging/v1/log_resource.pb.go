@@ -23,7 +23,6 @@ const (
 )
 
 // Log entry resource specification.
-//
 // May be used either by services and by user.
 type LogEntryResource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -83,7 +82,6 @@ func (x *LogEntryResource) GetId() string {
 type LogGroupResource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Resource type.
-	//
 	// Collected from log entries inside log group.
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	// List of resource IDs with the same resource type.

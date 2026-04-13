@@ -194,6 +194,10 @@ func (m *MultiSourceChartWidget_VisualizationSettings) SetTilesSettings(v *Multi
 	m.TilesSettings = v
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings) SetHidePartialData(v bool) {
+	m.HidePartialData = v
+}
+
 type MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isMultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {

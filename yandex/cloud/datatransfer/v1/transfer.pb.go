@@ -1578,13 +1578,13 @@ func (*SharderTransformerTypeRandom) Descriptor() ([]byte, []int) {
 // values will be used for calculating a hash to determine a shard.
 type SharderTransformer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of included and excluded tables
-	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
 	// Types that are valid to be assigned to SharderTransformerType:
 	//
 	//	*SharderTransformer_Columns
 	//	*SharderTransformer_Random
 	SharderTransformerType isSharderTransformer_SharderTransformerType `protobuf_oneof:"sharderTransformerType"`
+	// List of included and excluded tables
+	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
 	// Number of shards
 	ShardsCount   int64 `protobuf:"varint,3,opt,name=shards_count,json=shardsCount,proto3" json:"shards_count,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1621,13 +1621,6 @@ func (*SharderTransformer) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datatransfer_v1_transfer_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SharderTransformer) GetTables() *TablesFilter {
-	if x != nil {
-		return x.Tables
-	}
-	return nil
-}
-
 func (x *SharderTransformer) GetSharderTransformerType() isSharderTransformer_SharderTransformerType {
 	if x != nil {
 		return x.SharderTransformerType
@@ -1649,6 +1642,13 @@ func (x *SharderTransformer) GetRandom() *SharderTransformerTypeRandom {
 		if x, ok := x.SharderTransformerType.(*SharderTransformer_Random); ok {
 			return x.Random
 		}
+	}
+	return nil
+}
+
+func (x *SharderTransformer) GetTables() *TablesFilter {
+	if x != nil {
+		return x.Tables
 	}
 	return nil
 }
@@ -2258,10 +2258,10 @@ const file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc = "" +
 	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12E\n" +
 	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\"\x1e\n" +
 	"\x1cSharderTransformerTypeRandom\"\xb4\x02\n" +
-	"\x12SharderTransformer\x12B\n" +
-	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12G\n" +
+	"\x12SharderTransformer\x12G\n" +
 	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterH\x00R\acolumns\x12T\n" +
-	"\x06random\x18\x04 \x01(\v2:.yandex.cloud.datatransfer.v1.SharderTransformerTypeRandomH\x00R\x06random\x12!\n" +
+	"\x06random\x18\x04 \x01(\v2:.yandex.cloud.datatransfer.v1.SharderTransformerTypeRandomH\x00R\x06random\x12B\n" +
+	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12!\n" +
 	"\fshards_count\x18\x03 \x01(\x03R\vshardsCountB\x18\n" +
 	"\x16sharderTransformerType\"\x94\x01\n" +
 	"\x18TableSplitterTransformer\x12B\n" +
@@ -2408,9 +2408,9 @@ var file_yandex_cloud_datatransfer_v1_transfer_proto_depIdxs = []int32{
 	14, // 26: yandex.cloud.datatransfer.v1.ReplacePrimaryKeyTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
 	14, // 27: yandex.cloud.datatransfer.v1.ToStringTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
 	15, // 28: yandex.cloud.datatransfer.v1.ToStringTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
-	14, // 29: yandex.cloud.datatransfer.v1.SharderTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
-	15, // 30: yandex.cloud.datatransfer.v1.SharderTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
-	23, // 31: yandex.cloud.datatransfer.v1.SharderTransformer.random:type_name -> yandex.cloud.datatransfer.v1.SharderTransformerTypeRandom
+	15, // 29: yandex.cloud.datatransfer.v1.SharderTransformer.columns:type_name -> yandex.cloud.datatransfer.v1.ColumnsFilter
+	23, // 30: yandex.cloud.datatransfer.v1.SharderTransformer.random:type_name -> yandex.cloud.datatransfer.v1.SharderTransformerTypeRandom
+	14, // 31: yandex.cloud.datatransfer.v1.SharderTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
 	14, // 32: yandex.cloud.datatransfer.v1.TableSplitterTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
 	14, // 33: yandex.cloud.datatransfer.v1.FilterRowsTransformer.tables:type_name -> yandex.cloud.datatransfer.v1.TablesFilter
 	16, // 34: yandex.cloud.datatransfer.v1.Transformer.mask_field:type_name -> yandex.cloud.datatransfer.v1.MaskFieldTransformer

@@ -130,10 +130,6 @@ func (m *ProjectExecutionRequest) SetTarget(v ProjectExecutionRequest_Target) {
 	m.Target = v
 }
 
-func (m *ProjectExecutionRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
 func (m *ProjectExecutionRequest) SetNotebookId(v string) {
 	m.Target = &ProjectExecutionRequest_NotebookId{
 		NotebookId: v,
@@ -144,6 +140,10 @@ func (m *ProjectExecutionRequest) SetCellId(v string) {
 	m.Target = &ProjectExecutionRequest_CellId{
 		CellId: v,
 	}
+}
+
+func (m *ProjectExecutionRequest) SetProjectId(v string) {
+	m.ProjectId = v
 }
 
 func (m *ProjectExecutionRequest) SetInputVariables(v *structpb.Struct) {
@@ -160,10 +160,6 @@ func (m *ProjectExecutionMetadata) SetTarget(v ProjectExecutionMetadata_Target) 
 	m.Target = v
 }
 
-func (m *ProjectExecutionMetadata) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
 func (m *ProjectExecutionMetadata) SetNotebookId(v string) {
 	m.Target = &ProjectExecutionMetadata_NotebookId{
 		NotebookId: v,
@@ -174,4 +170,8 @@ func (m *ProjectExecutionMetadata) SetCellId(v string) {
 	m.Target = &ProjectExecutionMetadata_CellId{
 		CellId: v,
 	}
+}
+
+func (m *ProjectExecutionMetadata) SetProjectId(v string) {
+	m.ProjectId = v
 }

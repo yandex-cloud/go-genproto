@@ -154,10 +154,6 @@ func (m *ProjectExecutionRequest) SetTarget(v ProjectExecutionRequest_Target) {
 	m.Target = v
 }
 
-func (m *ProjectExecutionRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
 func (m *ProjectExecutionRequest) SetNotebookId(v string) {
 	m.Target = &ProjectExecutionRequest_NotebookId{
 		NotebookId: v,
@@ -168,6 +164,10 @@ func (m *ProjectExecutionRequest) SetCellId(v string) {
 	m.Target = &ProjectExecutionRequest_CellId{
 		CellId: v,
 	}
+}
+
+func (m *ProjectExecutionRequest) SetProjectId(v string) {
+	m.ProjectId = v
 }
 
 func (m *ProjectExecutionRequest) SetInputVariables(v *structpb.Struct) {
@@ -192,10 +192,6 @@ func (m *ProjectExecutionMetadata) SetTarget(v ProjectExecutionMetadata_Target) 
 	m.Target = v
 }
 
-func (m *ProjectExecutionMetadata) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
 func (m *ProjectExecutionMetadata) SetNotebookId(v string) {
 	m.Target = &ProjectExecutionMetadata_NotebookId{
 		NotebookId: v,
@@ -208,16 +204,12 @@ func (m *ProjectExecutionMetadata) SetCellId(v string) {
 	}
 }
 
+func (m *ProjectExecutionMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
 func (m *ProjectExecutionResponse) SetExecutionStatus(v ExecutionStatus) {
 	m.ExecutionStatus = v
-}
-
-func (m *SetProjectAccessBindingsMetadata) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *UpdateProjectAccessBindingsMetadata) SetProjectId(v string) {
-	m.ProjectId = v
 }
 
 func (m *AddResourceToProjectRequest) SetProjectId(v string) {
@@ -242,38 +234,6 @@ func (m *RemoveResourceFromProjectRequest) SetResourceType(v ResourceType) {
 
 func (m *RemoveResourceFromProjectRequest) SetResourceId(v string) {
 	m.ResourceId = v
-}
-
-func (m *GetProjectRestrictionsRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *SetProjectRestrictionsRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *SetProjectRestrictionsRequest) SetRestrictions(v []*Restriction) {
-	m.Restrictions = v
-}
-
-func (m *ResizeProjectDiskRequest) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *ResizeProjectDiskRequest) SetNewDiskSizeGb(v int64) {
-	m.NewDiskSizeGb = v
-}
-
-func (m *ResizeProjectDiskMetadata) SetProjectId(v string) {
-	m.ProjectId = v
-}
-
-func (m *ResizeProjectDiskMetadata) SetOldDiskSizeGb(v int64) {
-	m.OldDiskSizeGb = v
-}
-
-func (m *ResizeProjectDiskMetadata) SetNewDiskSizeGb(v int64) {
-	m.NewDiskSizeGb = v
 }
 
 func (m *DiskInfo) SetProjectId(v string) {
@@ -306,4 +266,44 @@ func (m *DiskInfo_DetailedDiskInfo) SetSystemDataGb(v float64) {
 
 func (m *DiskInfo_DetailedDiskInfo) SetFreeSpaceGb(v float64) {
 	m.FreeSpaceGb = v
+}
+
+func (m *ResizeProjectDiskRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ResizeProjectDiskRequest) SetNewDiskSizeGb(v int64) {
+	m.NewDiskSizeGb = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetOldDiskSizeGb(v int64) {
+	m.OldDiskSizeGb = v
+}
+
+func (m *ResizeProjectDiskMetadata) SetNewDiskSizeGb(v int64) {
+	m.NewDiskSizeGb = v
+}
+
+func (m *SetProjectAccessBindingsMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *UpdateProjectAccessBindingsMetadata) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *GetProjectRestrictionsRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SetProjectRestrictionsRequest) SetProjectId(v string) {
+	m.ProjectId = v
+}
+
+func (m *SetProjectRestrictionsRequest) SetRestrictions(v []*Restriction) {
+	m.Restrictions = v
 }

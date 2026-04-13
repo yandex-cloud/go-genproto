@@ -90,13 +90,10 @@ type ListStylePresetsRequest struct {
 	// Expressions consist of terms connected by logical operators.
 	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
 	// with inner quotes being backslash-escaped.
-	//
 	// Supported logical operators: ["AND", "OR"].
 	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
 	// Parentheses can be used to group logical expressions.
-	//
 	// Example: `title:'dark' AND id='preset-1'`
-	//
 	// Filterable fields: ["id", "title"].
 	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -797,7 +794,7 @@ const file_yandex_cloud_video_v1_style_preset_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10d\"\x91\x01\n" +
 	"\x18ListStylePresetsResponse\x12G\n" +
 	"\rstyle_presets\x18\x01 \x03(\v2\".yandex.cloud.video.v1.StylePresetR\fstylePresets\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xbc\t\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xb6\t\n" +
 	"\x18CreateStylePresetRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12\"\n" +
@@ -815,11 +812,9 @@ const file_yandex_cloud_video_v1_style_preset_service_proto_rawDesc = "" +
 	"\x11playlist_item_gap\x18\x11 \x01(\x03B\b\xfa\xc71\x040-50R\x0fplaylistItemGap\x12d\n" +
 	"\x11playlist_location\x18\x12 \x01(\x0e21.yandex.cloud.video.v1.StylePreset.WidgetLocationB\x04\xe8\xc71\x01R\x10playlistLocation\x12B\n" +
 	"\rright_widgets\x18\v \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\frightWidgets\x12D\n" +
-	"\x0ebottom_widgets\x18\f \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\rbottomWidgetsJ\x04\b\t\x10\n" +
-	"J\x04\b\n" +
-	"\x10\v\"C\n" +
+	"\x0ebottom_widgets\x18\f \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\rbottomWidgetsJ\x04\b\t\x10\v\"C\n" +
 	"\x19CreateStylePresetMetadata\x12&\n" +
-	"\x0fstyle_preset_id\x18\x01 \x01(\tR\rstylePresetId\"\xe5\t\n" +
+	"\x0fstyle_preset_id\x18\x01 \x01(\tR\rstylePresetId\"\xdf\t\n" +
 	"\x18UpdateStylePresetRequest\x124\n" +
 	"\x0fstyle_preset_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rstylePresetId\x12?\n" +
 	"\n" +
@@ -839,7 +834,7 @@ const file_yandex_cloud_video_v1_style_preset_service_proto_rawDesc = "" +
 	"\x11playlist_location\x18\x13 \x01(\x0e21.yandex.cloud.video.v1.StylePreset.WidgetLocationR\x10playlistLocation\x12B\n" +
 	"\rright_widgets\x18\f \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\frightWidgets\x12D\n" +
 	"\x0ebottom_widgets\x18\r \x03(\v2\x1d.yandex.cloud.video.v1.WidgetR\rbottomWidgetsJ\x04\b\n" +
-	"\x10\vJ\x04\b\v\x10\f\"C\n" +
+	"\x10\f\"C\n" +
 	"\x19UpdateStylePresetMetadata\x12&\n" +
 	"\x0fstyle_preset_id\x18\x01 \x01(\tR\rstylePresetId\"P\n" +
 	"\x18DeleteStylePresetRequest\x124\n" +

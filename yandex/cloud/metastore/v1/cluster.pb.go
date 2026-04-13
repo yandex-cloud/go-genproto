@@ -195,8 +195,10 @@ type Cluster struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,24,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Maintenance operation scheduled for the nearest maintenance window.
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,25,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Output only. Whether the cluster is configured for high availability (multiple zones).
+	IsHa          bool `protobuf:"varint,26,opt,name=is_ha,json=isHa,proto3" json:"is_ha,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -360,6 +362,13 @@ func (x *Cluster) GetPlannedOperation() *MaintenanceOperation {
 		return x.PlannedOperation
 	}
 	return nil
+}
+
+func (x *Cluster) GetIsHa() bool {
+	if x != nil {
+		return x.IsHa
+	}
+	return false
 }
 
 type Monitoring struct {
@@ -809,7 +818,7 @@ var File_yandex_cloud_metastore_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\n" +
+	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -835,7 +844,8 @@ const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\alogging\x18\x16 \x01(\v2(.yandex.cloud.metastore.v1.LoggingConfigR\alogging\x12B\n" +
 	"\anetwork\x18\x17 \x01(\v2(.yandex.cloud.metastore.v1.NetworkConfigR\anetwork\x12[\n" +
 	"\x12maintenance_window\x18\x18 \x01(\v2,.yandex.cloud.metastore.v1.MaintenanceWindowR\x11maintenanceWindow\x12\\\n" +
-	"\x11planned_operation\x18\x19 \x01(\v2/.yandex.cloud.metastore.v1.MaintenanceOperationR\x10plannedOperation\x1a9\n" +
+	"\x11planned_operation\x18\x19 \x01(\v2/.yandex.cloud.metastore.v1.MaintenanceOperationR\x10plannedOperation\x12\x13\n" +
+	"\x05is_ha\x18\x1a \x01(\bR\x04isHa\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +

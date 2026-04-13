@@ -426,7 +426,7 @@ var File_yandex_cloud_datasphere_v2_project_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datasphere_v2_project_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/datasphere/v2/project.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x99\v\n" +
+	"(yandex/cloud/datasphere/v2/project.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x93\v\n" +
 	"\aProject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x129\n" +
 	"\n" +
@@ -464,9 +464,7 @@ const file_yandex_cloud_datasphere_v2_project_proto_rawDesc = "" +
 	"\x17max_units_per_execution\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14maxUnitsPerExecution\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\n" +
-	"\x10\vJ\x04\b\t\x10\n" +
-	"Bk\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\vBk\n" +
 	"\x1eyandex.cloud.api.datasphere.v2ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/datasphere/v2;datasphereb\x06proto3"
 
 var (

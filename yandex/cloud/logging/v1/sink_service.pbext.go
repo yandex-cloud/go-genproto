@@ -41,6 +41,18 @@ func (m *CreateSinkRequest) SetSink(v CreateSinkRequest_Sink) {
 	m.Sink = v
 }
 
+func (m *CreateSinkRequest) SetYds(v *Sink_Yds) {
+	m.Sink = &CreateSinkRequest_Yds{
+		Yds: v,
+	}
+}
+
+func (m *CreateSinkRequest) SetS3(v *Sink_S3) {
+	m.Sink = &CreateSinkRequest_S3{
+		S3: v,
+	}
+}
+
 func (m *CreateSinkRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -61,18 +73,6 @@ func (m *CreateSinkRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
-func (m *CreateSinkRequest) SetYds(v *Sink_Yds) {
-	m.Sink = &CreateSinkRequest_Yds{
-		Yds: v,
-	}
-}
-
-func (m *CreateSinkRequest) SetS3(v *Sink_S3) {
-	m.Sink = &CreateSinkRequest_S3{
-		S3: v,
-	}
-}
-
 func (m *CreateSinkMetadata) SetSinkId(v string) {
 	m.SinkId = v
 }
@@ -81,6 +81,18 @@ type UpdateSinkRequest_Sink = isUpdateSinkRequest_Sink
 
 func (m *UpdateSinkRequest) SetSink(v UpdateSinkRequest_Sink) {
 	m.Sink = v
+}
+
+func (m *UpdateSinkRequest) SetYds(v *Sink_Yds) {
+	m.Sink = &UpdateSinkRequest_Yds{
+		Yds: v,
+	}
+}
+
+func (m *UpdateSinkRequest) SetS3(v *Sink_S3) {
+	m.Sink = &UpdateSinkRequest_S3{
+		S3: v,
+	}
 }
 
 func (m *UpdateSinkRequest) SetSinkId(v string) {
@@ -105,18 +117,6 @@ func (m *UpdateSinkRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateSinkRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
-}
-
-func (m *UpdateSinkRequest) SetYds(v *Sink_Yds) {
-	m.Sink = &UpdateSinkRequest_Yds{
-		Yds: v,
-	}
-}
-
-func (m *UpdateSinkRequest) SetS3(v *Sink_S3) {
-	m.Sink = &UpdateSinkRequest_S3{
-		S3: v,
-	}
 }
 
 func (m *UpdateSinkMetadata) SetSinkId(v string) {

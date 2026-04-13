@@ -64,6 +64,24 @@ func (m *CreateVideoRequest) SetAccessRights(v CreateVideoRequest_AccessRights) 
 	m.AccessRights = v
 }
 
+func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
+	m.Source = &CreateVideoRequest_Tusd{
+		Tusd: v,
+	}
+}
+
+func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
+	m.AccessRights = &CreateVideoRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *CreateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &CreateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *CreateVideoRequest) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -100,24 +118,6 @@ func (m *CreateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
-	m.Source = &CreateVideoRequest_Tusd{
-		Tusd: v,
-	}
-}
-
-func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
-	m.AccessRights = &CreateVideoRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *CreateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
-	m.AccessRights = &CreateVideoRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
-}
-
 func (m *VideoTUSDParams) SetFileSize(v int64) {
 	m.FileSize = v
 }
@@ -134,6 +134,18 @@ type UpdateVideoRequest_AccessRights = isUpdateVideoRequest_AccessRights
 
 func (m *UpdateVideoRequest) SetAccessRights(v UpdateVideoRequest_AccessRights) {
 	m.AccessRights = v
+}
+
+func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
 }
 
 func (m *UpdateVideoRequest) SetVideoId(v string) {
@@ -170,18 +182,6 @@ func (m *UpdateVideoRequest) SetEnableAd(v *wrapperspb.BoolValue) {
 
 func (m *UpdateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
-}
-
-func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
-	m.AccessRights = &UpdateVideoRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
-	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
 }
 
 func (m *UpdateVideoMetadata) SetVideoId(v string) {
@@ -298,10 +298,6 @@ func (m *PerformVideoActionRequest) SetAction(v PerformVideoActionRequest_Action
 	m.Action = v
 }
 
-func (m *PerformVideoActionRequest) SetVideoId(v string) {
-	m.VideoId = v
-}
-
 func (m *PerformVideoActionRequest) SetPublish(v *PublishVideoAction) {
 	m.Action = &PerformVideoActionRequest_Publish{
 		Publish: v,
@@ -312,6 +308,10 @@ func (m *PerformVideoActionRequest) SetUnpublish(v *UnpublishVideoAction) {
 	m.Action = &PerformVideoActionRequest_Unpublish{
 		Unpublish: v,
 	}
+}
+
+func (m *PerformVideoActionRequest) SetVideoId(v string) {
+	m.VideoId = v
 }
 
 func (m *PerformVideoActionMetadata) SetVideoId(v string) {
@@ -370,18 +370,18 @@ func (m *BatchGetVideoPlayerURLsResponse) SetPlayerUrls(v []string) {
 	m.PlayerUrls = v
 }
 
-func (m *GetVideoManifestsRequest) SetVideoId(v string) {
-	m.VideoId = v
-}
-
-func (m *GetVideoManifestsResponse) SetManifests(v []*Manifest) {
-	m.Manifests = v
-}
-
 func (m *GenerateVideoDownloadURLRequest) SetVideoId(v string) {
 	m.VideoId = v
 }
 
 func (m *GenerateVideoDownloadURLResponse) SetDownloadUrl(v string) {
 	m.DownloadUrl = v
+}
+
+func (m *GetVideoManifestsRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *GetVideoManifestsResponse) SetManifests(v []*Manifest) {
+	m.Manifests = v
 }

@@ -28,7 +28,6 @@ const (
 type GetEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the endpoint to return.
-	//
 	// To get the endpoint ID, make an [EndpointService.List] request.
 	EndpointId    string `protobuf:"bytes,1,opt,name=endpoint_id,json=endpointId,proto3" json:"endpoint_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -206,18 +205,15 @@ func (x *ListEndpointsResponse) GetNextPageToken() string {
 type CreateEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create the endpoint in.
-	//
 	// To get the folder ID, make a
 	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the endpoint.
-	//
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the endpoint.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Endpoint labels as `key:value` pairs.
-	//
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels        map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -344,7 +340,6 @@ type UpdateEndpointRequest struct {
 	// The new description for the endpoint.
 	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
 	// Endpoint labels as `key:value` pairs.
-	//
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels map[string]string `protobuf:"bytes,13,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -479,7 +474,6 @@ func (x *UpdateEndpointMetadata) GetEndpointId() string {
 type DeleteEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the endpoint to delete.
-	//
 	// To get the list of all available endpoints, make a [List] request.
 	EndpointId    string `protobuf:"bytes,1,opt,name=endpoint_id,json=endpointId,proto3" json:"endpoint_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -571,7 +565,7 @@ var File_yandex_cloud_datatransfer_v1_endpoint_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_datatransfer_v1_endpoint_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/datatransfer/v1/endpoint_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a+yandex/cloud/datatransfer/v1/endpoint.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"5\n" +
+	"3yandex/cloud/datatransfer/v1/endpoint_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/datatransfer/v1/endpoint.proto\x1a&yandex/cloud/operation/operation.proto\"5\n" +
 	"\x12GetEndpointRequest\x12\x1f\n" +
 	"\vendpoint_id\x18\x01 \x01(\tR\n" +
 	"endpointId\"o\n" +

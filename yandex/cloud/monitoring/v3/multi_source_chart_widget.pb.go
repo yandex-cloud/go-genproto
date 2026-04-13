@@ -1119,8 +1119,10 @@ type MultiSourceChartWidget_VisualizationSettings struct {
 	ShowLabels bool `protobuf:"varint,9,opt,name=show_labels,json=showLabels,proto3" json:"show_labels,omitempty"`
 	// Settings for stat widget.
 	TilesSettings *MultiSourceChartWidget_VisualizationSettings_TilesSettings `protobuf:"bytes,10,opt,name=tiles_settings,json=tilesSettings,proto3" json:"tiles_settings,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Hide chart partial data.
+	HidePartialData bool `protobuf:"varint,12,opt,name=hide_partial_data,json=hidePartialData,proto3" json:"hide_partial_data,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *MultiSourceChartWidget_VisualizationSettings) Reset() {
@@ -1221,6 +1223,13 @@ func (x *MultiSourceChartWidget_VisualizationSettings) GetTilesSettings() *Multi
 		return x.TilesSettings
 	}
 	return nil
+}
+
+func (x *MultiSourceChartWidget_VisualizationSettings) GetHidePartialData() bool {
+	if x != nil {
+		return x.HidePartialData
+	}
+	return false
 }
 
 // Series override settings.
@@ -2955,7 +2964,7 @@ var File_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto protoreflect
 
 const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\x88M\n" +
+	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xbaM\n" +
 	"\x16MultiSourceChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12S\n" +
 	"\atargets\x18\x02 \x03(\v29.yandex.cloud.monitoring.v3.MultiSourceChartWidget.TargetR\atargets\x12`\n" +
@@ -3000,7 +3009,7 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x14PrometheusDataSource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04step\x18\x02 \x01(\x03R\x04stepB\r\n" +
-	"\vdata_source\x1a\xb3!\n" +
+	"\vdata_source\x1a\xe5!\n" +
 	"\x15VisualizationSettings\x12n\n" +
 	"\x04type\x18\x01 \x01(\x0e2Z.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12v\n" +
@@ -3013,7 +3022,8 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\vshow_labels\x18\t \x01(\bR\n" +
 	"showLabels\x12}\n" +
 	"\x0etiles_settings\x18\n" +
-	" \x01(\v2V.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x1a\xe1\v\n" +
+	" \x01(\v2V.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x12*\n" +
+	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\xe1\v\n" +
 	"\x13ColorSchemeSettings\x12\x91\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2q.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x8e\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2p.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x8e\x01\n" +
@@ -3100,7 +3110,7 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x16SERIES_AGGREGATION_MIN\x10\x02\x12\x1a\n" +
 	"\x16SERIES_AGGREGATION_MAX\x10\x03\x12\x1b\n" +
 	"\x17SERIES_AGGREGATION_LAST\x10\x04\x12\x1a\n" +
-	"\x16SERIES_AGGREGATION_SUM\x10\x05\x1a\xc2\x13\n" +
+	"\x16SERIES_AGGREGATION_SUM\x10\x05J\x04\b\v\x10\f\x1a\xc2\x13\n" +
 	"\x0fSeriesOverrides\x12\x14\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x12#\n" +
 	"\ftarget_index\x18\x02 \x01(\tH\x00R\vtargetIndex\x12u\n" +

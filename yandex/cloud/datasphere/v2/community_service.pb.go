@@ -578,96 +578,6 @@ func (x *ListCommunitiesResponse) GetNextPageToken() string {
 	return ""
 }
 
-type SetCommunityAccessBindingsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the community which access bindings are set.
-	CommunityId   string `protobuf:"bytes,1,opt,name=community_id,json=communityId,proto3" json:"community_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetCommunityAccessBindingsMetadata) Reset() {
-	*x = SetCommunityAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetCommunityAccessBindingsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetCommunityAccessBindingsMetadata) ProtoMessage() {}
-
-func (x *SetCommunityAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetCommunityAccessBindingsMetadata.ProtoReflect.Descriptor instead.
-func (*SetCommunityAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *SetCommunityAccessBindingsMetadata) GetCommunityId() string {
-	if x != nil {
-		return x.CommunityId
-	}
-	return ""
-}
-
-type UpdateCommunityAccessBindingsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the community which access bindings are updated.
-	CommunityId   string `protobuf:"bytes,1,opt,name=community_id,json=communityId,proto3" json:"community_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateCommunityAccessBindingsMetadata) Reset() {
-	*x = UpdateCommunityAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateCommunityAccessBindingsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateCommunityAccessBindingsMetadata) ProtoMessage() {}
-
-func (x *UpdateCommunityAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateCommunityAccessBindingsMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateCommunityAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *UpdateCommunityAccessBindingsMetadata) GetCommunityId() string {
-	if x != nil {
-		return x.CommunityId
-	}
-	return ""
-}
-
 type AddCommunityResourceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CommunityId   string                 `protobuf:"bytes,1,opt,name=community_id,json=communityId,proto3" json:"community_id,omitempty"`
@@ -679,7 +589,7 @@ type AddCommunityResourceRequest struct {
 
 func (x *AddCommunityResourceRequest) Reset() {
 	*x = AddCommunityResourceRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -691,7 +601,7 @@ func (x *AddCommunityResourceRequest) String() string {
 func (*AddCommunityResourceRequest) ProtoMessage() {}
 
 func (x *AddCommunityResourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +614,7 @@ func (x *AddCommunityResourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCommunityResourceRequest.ProtoReflect.Descriptor instead.
 func (*AddCommunityResourceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AddCommunityResourceRequest) GetCommunityId() string {
@@ -739,7 +649,7 @@ type RemoveCommunityResourceRequest struct {
 
 func (x *RemoveCommunityResourceRequest) Reset() {
 	*x = RemoveCommunityResourceRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -751,7 +661,7 @@ func (x *RemoveCommunityResourceRequest) String() string {
 func (*RemoveCommunityResourceRequest) ProtoMessage() {}
 
 func (x *RemoveCommunityResourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -764,7 +674,7 @@ func (x *RemoveCommunityResourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveCommunityResourceRequest.ProtoReflect.Descriptor instead.
 func (*RemoveCommunityResourceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RemoveCommunityResourceRequest) GetCommunityId() string {
@@ -784,6 +694,96 @@ func (x *RemoveCommunityResourceRequest) GetResourceType() ResourceType {
 func (x *RemoveCommunityResourceRequest) GetResourceId() string {
 	if x != nil {
 		return x.ResourceId
+	}
+	return ""
+}
+
+type SetCommunityAccessBindingsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the community which access bindings are set.
+	CommunityId   string `protobuf:"bytes,1,opt,name=community_id,json=communityId,proto3" json:"community_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCommunityAccessBindingsMetadata) Reset() {
+	*x = SetCommunityAccessBindingsMetadata{}
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCommunityAccessBindingsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCommunityAccessBindingsMetadata) ProtoMessage() {}
+
+func (x *SetCommunityAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCommunityAccessBindingsMetadata.ProtoReflect.Descriptor instead.
+func (*SetCommunityAccessBindingsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SetCommunityAccessBindingsMetadata) GetCommunityId() string {
+	if x != nil {
+		return x.CommunityId
+	}
+	return ""
+}
+
+type UpdateCommunityAccessBindingsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the community which access bindings are updated.
+	CommunityId   string `protobuf:"bytes,1,opt,name=community_id,json=communityId,proto3" json:"community_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCommunityAccessBindingsMetadata) Reset() {
+	*x = UpdateCommunityAccessBindingsMetadata{}
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCommunityAccessBindingsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCommunityAccessBindingsMetadata) ProtoMessage() {}
+
+func (x *UpdateCommunityAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_community_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCommunityAccessBindingsMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateCommunityAccessBindingsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_community_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UpdateCommunityAccessBindingsMetadata) GetCommunityId() string {
+	if x != nil {
+		return x.CommunityId
 	}
 	return ""
 }
@@ -891,7 +891,7 @@ var File_yandex_cloud_datasphere_v2_community_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_datasphere_v2_community_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/datasphere/v2/community_service.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a*yandex/cloud/datasphere/v2/community.proto\x1a/yandex/cloud/datasphere/v2/resource_types.proto\x1a-yandex/cloud/datasphere/v2/restrictions.proto\"\x9b\x03\n" +
+	"2yandex/cloud/datasphere/v2/community_service.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/datasphere/v2/community.proto\x1a/yandex/cloud/datasphere/v2/resource_types.proto\x1a-yandex/cloud/datasphere/v2/restrictions.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\x03\n" +
 	"\x16CreateCommunityRequest\x12P\n" +
 	"\x04name\x18\x01 \x01(\tB<\xf2\xc710[a-zA-Z0-9ЁёА-я]\\S{1,61}[a-zA-Z0-9ЁёА-я]\x8a\xc81\x04<=63R\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12-\n" +
@@ -933,11 +933,7 @@ const file_yandex_cloud_datasphere_v2_community_service_proto_rawDesc = "" +
 	"\x0forganization_id\x18\a \x01(\tB\x04\xe8\xc71\x01R\x0eorganizationIdJ\x04\b\x04\x10\x05\"\x8a\x01\n" +
 	"\x17ListCommunitiesResponse\x12G\n" +
 	"\vcommunities\x18\x01 \x03(\v2%.yandex.cloud.datasphere.v2.CommunityR\vcommunities\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"G\n" +
-	"\"SetCommunityAccessBindingsMetadata\x12!\n" +
-	"\fcommunity_id\x18\x01 \x01(\tR\vcommunityId\"J\n" +
-	"%UpdateCommunityAccessBindingsMetadata\x12!\n" +
-	"\fcommunity_id\x18\x01 \x01(\tR\vcommunityId\"\xca\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xca\x01\n" +
 	"\x1bAddCommunityResourceRequest\x12/\n" +
 	"\fcommunity_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vcommunityId\x12S\n" +
 	"\rresource_type\x18\x02 \x01(\x0e2(.yandex.cloud.datasphere.v2.ResourceTypeB\x04\xe8\xc71\x01R\fresourceType\x12%\n" +
@@ -947,7 +943,11 @@ const file_yandex_cloud_datasphere_v2_community_service_proto_rawDesc = "" +
 	"\fcommunity_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vcommunityId\x12S\n" +
 	"\rresource_type\x18\x02 \x01(\x0e2(.yandex.cloud.datasphere.v2.ResourceTypeB\x04\xe8\xc71\x01R\fresourceType\x12%\n" +
 	"\vresource_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"resourceId\"J\n" +
+	"resourceId\"G\n" +
+	"\"SetCommunityAccessBindingsMetadata\x12!\n" +
+	"\fcommunity_id\x18\x01 \x01(\tR\vcommunityId\"J\n" +
+	"%UpdateCommunityAccessBindingsMetadata\x12!\n" +
+	"\fcommunity_id\x18\x01 \x01(\tR\vcommunityId\"J\n" +
 	"\x1fGetCommunityRestrictionsRequest\x12'\n" +
 	"\fcommunity_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vcommunityId\"\x97\x01\n" +
 	"\x1fSetCommunityRestrictionsRequest\x12'\n" +
@@ -997,10 +997,10 @@ var file_yandex_cloud_datasphere_v2_community_service_proto_goTypes = []any{
 	(*DeleteCommunityMetadata)(nil),               // 6: yandex.cloud.datasphere.v2.DeleteCommunityMetadata
 	(*ListCommunitiesRequest)(nil),                // 7: yandex.cloud.datasphere.v2.ListCommunitiesRequest
 	(*ListCommunitiesResponse)(nil),               // 8: yandex.cloud.datasphere.v2.ListCommunitiesResponse
-	(*SetCommunityAccessBindingsMetadata)(nil),    // 9: yandex.cloud.datasphere.v2.SetCommunityAccessBindingsMetadata
-	(*UpdateCommunityAccessBindingsMetadata)(nil), // 10: yandex.cloud.datasphere.v2.UpdateCommunityAccessBindingsMetadata
-	(*AddCommunityResourceRequest)(nil),           // 11: yandex.cloud.datasphere.v2.AddCommunityResourceRequest
-	(*RemoveCommunityResourceRequest)(nil),        // 12: yandex.cloud.datasphere.v2.RemoveCommunityResourceRequest
+	(*AddCommunityResourceRequest)(nil),           // 9: yandex.cloud.datasphere.v2.AddCommunityResourceRequest
+	(*RemoveCommunityResourceRequest)(nil),        // 10: yandex.cloud.datasphere.v2.RemoveCommunityResourceRequest
+	(*SetCommunityAccessBindingsMetadata)(nil),    // 11: yandex.cloud.datasphere.v2.SetCommunityAccessBindingsMetadata
+	(*UpdateCommunityAccessBindingsMetadata)(nil), // 12: yandex.cloud.datasphere.v2.UpdateCommunityAccessBindingsMetadata
 	(*GetCommunityRestrictionsRequest)(nil),       // 13: yandex.cloud.datasphere.v2.GetCommunityRestrictionsRequest
 	(*SetCommunityRestrictionsRequest)(nil),       // 14: yandex.cloud.datasphere.v2.SetCommunityRestrictionsRequest
 	nil,                                           // 15: yandex.cloud.datasphere.v2.CreateCommunityRequest.LabelsEntry
@@ -1034,8 +1034,8 @@ var file_yandex_cloud_datasphere_v2_community_service_proto_depIdxs = []int32{
 	21, // 12: yandex.cloud.datasphere.v2.CommunityService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	22, // 13: yandex.cloud.datasphere.v2.CommunityService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	23, // 14: yandex.cloud.datasphere.v2.CommunityService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	11, // 15: yandex.cloud.datasphere.v2.CommunityService.AddResource:input_type -> yandex.cloud.datasphere.v2.AddCommunityResourceRequest
-	12, // 16: yandex.cloud.datasphere.v2.CommunityService.RemoveResource:input_type -> yandex.cloud.datasphere.v2.RemoveCommunityResourceRequest
+	9,  // 15: yandex.cloud.datasphere.v2.CommunityService.AddResource:input_type -> yandex.cloud.datasphere.v2.AddCommunityResourceRequest
+	10, // 16: yandex.cloud.datasphere.v2.CommunityService.RemoveResource:input_type -> yandex.cloud.datasphere.v2.RemoveCommunityResourceRequest
 	24, // 17: yandex.cloud.datasphere.v2.CommunityService.GetRestrictionsMeta:input_type -> google.protobuf.Empty
 	13, // 18: yandex.cloud.datasphere.v2.CommunityService.GetRestrictions:input_type -> yandex.cloud.datasphere.v2.GetCommunityRestrictionsRequest
 	14, // 19: yandex.cloud.datasphere.v2.CommunityService.SetRestrictions:input_type -> yandex.cloud.datasphere.v2.SetCommunityRestrictionsRequest

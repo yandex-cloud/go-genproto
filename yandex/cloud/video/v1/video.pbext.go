@@ -20,6 +20,24 @@ func (m *Video) SetAccessRights(v Video_AccessRights) {
 	m.AccessRights = v
 }
 
+func (m *Video) SetTusd(v *VideoTUSDSource) {
+	m.Source = &Video_Tusd{
+		Tusd: v,
+	}
+}
+
+func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
+	m.AccessRights = &Video_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *Video) SetSignUrlAccess(v *VideoSignURLAccessRights) {
+	m.AccessRights = &Video_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *Video) SetId(v string) {
 	m.Id = v
 }
@@ -74,24 +92,6 @@ func (m *Video) SetSubtitleIds(v []string) {
 
 func (m *Video) SetFeatures(v *VideoFeatures) {
 	m.Features = v
-}
-
-func (m *Video) SetTusd(v *VideoTUSDSource) {
-	m.Source = &Video_Tusd{
-		Tusd: v,
-	}
-}
-
-func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
-	m.AccessRights = &Video_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *Video) SetSignUrlAccess(v *VideoSignURLAccessRights) {
-	m.AccessRights = &Video_SignUrlAccess{
-		SignUrlAccess: v,
-	}
 }
 
 func (m *Video) SetCreatedAt(v *timestamppb.Timestamp) {

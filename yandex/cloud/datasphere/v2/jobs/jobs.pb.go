@@ -817,14 +817,14 @@ func (*FileUploadError_LogFileName) isFileUploadError_FileType() {}
 
 type Environment struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Environment variables.
-	Vars map[string]string `protobuf:"bytes,1,rep,name=vars,proto3" json:"vars,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Types that are valid to be assigned to DockerImage:
 	//
 	//	*Environment_DockerImageResourceId
 	//	*Environment_DockerImageSpec
-	DockerImage   isEnvironment_DockerImage `protobuf_oneof:"docker_image"`
-	PythonEnv     *PythonEnv                `protobuf:"bytes,4,opt,name=python_env,json=pythonEnv,proto3" json:"python_env,omitempty"`
+	DockerImage isEnvironment_DockerImage `protobuf_oneof:"docker_image"`
+	// Environment variables.
+	Vars          map[string]string `protobuf:"bytes,1,rep,name=vars,proto3" json:"vars,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	PythonEnv     *PythonEnv        `protobuf:"bytes,4,opt,name=python_env,json=pythonEnv,proto3" json:"python_env,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -859,13 +859,6 @@ func (*Environment) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v2_jobs_jobs_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *Environment) GetVars() map[string]string {
-	if x != nil {
-		return x.Vars
-	}
-	return nil
-}
-
 func (x *Environment) GetDockerImage() isEnvironment_DockerImage {
 	if x != nil {
 		return x.DockerImage
@@ -887,6 +880,13 @@ func (x *Environment) GetDockerImageSpec() *DockerImageSpec {
 		if x, ok := x.DockerImage.(*Environment_DockerImageSpec); ok {
 			return x.DockerImageSpec
 		}
+	}
+	return nil
+}
+
+func (x *Environment) GetVars() map[string]string {
+	if x != nil {
+		return x.Vars
 	}
 	return nil
 }
@@ -917,17 +917,17 @@ func (*Environment_DockerImageSpec) isEnvironment_DockerImage() {}
 
 type DockerImageSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Docker image URL.
-	ImageUrl string `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
-	// Username for container registry.
-	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	// Password for container registry.
 	//
 	// Types that are valid to be assigned to Password:
 	//
 	//	*DockerImageSpec_PasswordPlainText
 	//	*DockerImageSpec_PasswordDsSecretName
-	Password      isDockerImageSpec_Password `protobuf_oneof:"password"`
+	Password isDockerImageSpec_Password `protobuf_oneof:"password"`
+	// Docker image URL.
+	ImageUrl string `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	// Username for container registry.
+	Username      string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -962,20 +962,6 @@ func (*DockerImageSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v2_jobs_jobs_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *DockerImageSpec) GetImageUrl() string {
-	if x != nil {
-		return x.ImageUrl
-	}
-	return ""
-}
-
-func (x *DockerImageSpec) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
 func (x *DockerImageSpec) GetPassword() isDockerImageSpec_Password {
 	if x != nil {
 		return x.Password
@@ -997,6 +983,20 @@ func (x *DockerImageSpec) GetPasswordDsSecretName() string {
 		if x, ok := x.Password.(*DockerImageSpec_PasswordDsSecretName); ok {
 			return x.PasswordDsSecretName
 		}
+	}
+	return ""
+}
+
+func (x *DockerImageSpec) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *DockerImageSpec) GetUsername() string {
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
@@ -1894,7 +1894,7 @@ var File_yandex_cloud_datasphere_v2_jobs_jobs_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datasphere_v2_jobs_jobs_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/datasphere/v2/jobs/jobs.proto\x12\x1fyandex.cloud.datasphere.v2.jobs\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/duration.proto\"\xce\a\n" +
+	"*yandex/cloud/datasphere/v2/jobs/jobs.proto\x12\x1fyandex.cloud.datasphere.v2.jobs\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xce\a\n" +
 	"\rJobParameters\x12F\n" +
 	"\vinput_files\x18\x01 \x03(\v2%.yandex.cloud.datasphere.v2.jobs.FileR\n" +
 	"inputFiles\x12L\n" +
@@ -1946,21 +1946,21 @@ const file_yandex_cloud_datasphere_v2_jobs_jobs_proto_rawDesc = "" +
 	"\rUPLOAD_FAILED\x10\x01\x12\r\n" +
 	"\tNOT_FOUND\x10\x02B\v\n" +
 	"\tfile_type\"\x88\x03\n" +
-	"\vEnvironment\x12J\n" +
-	"\x04vars\x18\x01 \x03(\v26.yandex.cloud.datasphere.v2.jobs.Environment.VarsEntryR\x04vars\x129\n" +
+	"\vEnvironment\x129\n" +
 	"\x18docker_image_resource_id\x18\x02 \x01(\tH\x00R\x15dockerImageResourceId\x12^\n" +
-	"\x11docker_image_spec\x18\x03 \x01(\v20.yandex.cloud.datasphere.v2.jobs.DockerImageSpecH\x00R\x0fdockerImageSpec\x12I\n" +
+	"\x11docker_image_spec\x18\x03 \x01(\v20.yandex.cloud.datasphere.v2.jobs.DockerImageSpecH\x00R\x0fdockerImageSpec\x12J\n" +
+	"\x04vars\x18\x01 \x03(\v26.yandex.cloud.datasphere.v2.jobs.Environment.VarsEntryR\x04vars\x12I\n" +
 	"\n" +
 	"python_env\x18\x04 \x01(\v2*.yandex.cloud.datasphere.v2.jobs.PythonEnvR\tpythonEnv\x1a7\n" +
 	"\tVarsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
 	"\fdocker_image\"\xc1\x01\n" +
-	"\x0fDockerImageSpec\x12\x1b\n" +
-	"\timage_url\x18\x01 \x01(\tR\bimageUrl\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busername\x120\n" +
+	"\x0fDockerImageSpec\x120\n" +
 	"\x13password_plain_text\x18\x03 \x01(\tH\x00R\x11passwordPlainText\x127\n" +
-	"\x17password_ds_secret_name\x18\x04 \x01(\tH\x00R\x14passwordDsSecretNameB\n" +
+	"\x17password_ds_secret_name\x18\x04 \x01(\tH\x00R\x14passwordDsSecretName\x12\x1b\n" +
+	"\timage_url\x18\x01 \x01(\tR\bimageUrl\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busernameB\n" +
 	"\n" +
 	"\bpassword\"\x8f\x02\n" +
 	"\tPythonEnv\x12\x1d\n" +
@@ -2126,8 +2126,8 @@ var file_yandex_cloud_datasphere_v2_jobs_jobs_proto_depIdxs = []int32{
 	8,  // 12: yandex.cloud.datasphere.v2.jobs.StorageFile.file:type_name -> yandex.cloud.datasphere.v2.jobs.File
 	10, // 13: yandex.cloud.datasphere.v2.jobs.FileUploadError.output_file_desc:type_name -> yandex.cloud.datasphere.v2.jobs.FileDesc
 	3,  // 14: yandex.cloud.datasphere.v2.jobs.FileUploadError.type:type_name -> yandex.cloud.datasphere.v2.jobs.FileUploadError.ErrorType
-	24, // 15: yandex.cloud.datasphere.v2.jobs.Environment.vars:type_name -> yandex.cloud.datasphere.v2.jobs.Environment.VarsEntry
-	13, // 16: yandex.cloud.datasphere.v2.jobs.Environment.docker_image_spec:type_name -> yandex.cloud.datasphere.v2.jobs.DockerImageSpec
+	13, // 15: yandex.cloud.datasphere.v2.jobs.Environment.docker_image_spec:type_name -> yandex.cloud.datasphere.v2.jobs.DockerImageSpec
+	24, // 16: yandex.cloud.datasphere.v2.jobs.Environment.vars:type_name -> yandex.cloud.datasphere.v2.jobs.Environment.VarsEntry
 	14, // 17: yandex.cloud.datasphere.v2.jobs.Environment.python_env:type_name -> yandex.cloud.datasphere.v2.jobs.PythonEnv
 	8,  // 18: yandex.cloud.datasphere.v2.jobs.PythonEnv.local_modules:type_name -> yandex.cloud.datasphere.v2.jobs.File
 	15, // 19: yandex.cloud.datasphere.v2.jobs.PythonEnv.pip_options:type_name -> yandex.cloud.datasphere.v2.jobs.PipOptions

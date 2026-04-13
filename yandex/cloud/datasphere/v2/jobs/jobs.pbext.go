@@ -143,10 +143,6 @@ func (m *Environment) SetDockerImage(v Environment_DockerImage) {
 	m.DockerImage = v
 }
 
-func (m *Environment) SetVars(v map[string]string) {
-	m.Vars = v
-}
-
 func (m *Environment) SetDockerImageResourceId(v string) {
 	m.DockerImage = &Environment_DockerImageResourceId{
 		DockerImageResourceId: v,
@@ -159,6 +155,10 @@ func (m *Environment) SetDockerImageSpec(v *DockerImageSpec) {
 	}
 }
 
+func (m *Environment) SetVars(v map[string]string) {
+	m.Vars = v
+}
+
 func (m *Environment) SetPythonEnv(v *PythonEnv) {
 	m.PythonEnv = v
 }
@@ -167,14 +167,6 @@ type DockerImageSpec_Password = isDockerImageSpec_Password
 
 func (m *DockerImageSpec) SetPassword(v DockerImageSpec_Password) {
 	m.Password = v
-}
-
-func (m *DockerImageSpec) SetImageUrl(v string) {
-	m.ImageUrl = v
-}
-
-func (m *DockerImageSpec) SetUsername(v string) {
-	m.Username = v
 }
 
 func (m *DockerImageSpec) SetPasswordPlainText(v string) {
@@ -187,6 +179,14 @@ func (m *DockerImageSpec) SetPasswordDsSecretName(v string) {
 	m.Password = &DockerImageSpec_PasswordDsSecretName{
 		PasswordDsSecretName: v,
 	}
+}
+
+func (m *DockerImageSpec) SetImageUrl(v string) {
+	m.ImageUrl = v
+}
+
+func (m *DockerImageSpec) SetUsername(v string) {
+	m.Username = v
 }
 
 func (m *PythonEnv) SetCondaYaml(v string) {

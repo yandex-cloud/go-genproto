@@ -21,12 +21,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ExportService_Run_FullMethodName                  = "/yandex.cloud.logging.v1.ExportService/Run"
 	ExportService_Get_FullMethodName                  = "/yandex.cloud.logging.v1.ExportService/Get"
 	ExportService_List_FullMethodName                 = "/yandex.cloud.logging.v1.ExportService/List"
 	ExportService_Create_FullMethodName               = "/yandex.cloud.logging.v1.ExportService/Create"
 	ExportService_Update_FullMethodName               = "/yandex.cloud.logging.v1.ExportService/Update"
 	ExportService_Delete_FullMethodName               = "/yandex.cloud.logging.v1.ExportService/Delete"
+	ExportService_Run_FullMethodName                  = "/yandex.cloud.logging.v1.ExportService/Run"
 	ExportService_ListOperations_FullMethodName       = "/yandex.cloud.logging.v1.ExportService/ListOperations"
 	ExportService_ListAccessBindings_FullMethodName   = "/yandex.cloud.logging.v1.ExportService/ListAccessBindings"
 	ExportService_SetAccessBindings_FullMethodName    = "/yandex.cloud.logging.v1.ExportService/SetAccessBindings"
@@ -39,10 +39,7 @@ const (
 //
 // A set of methods for managing log exports.
 type ExportServiceClient interface {
-	// Run new logs export from log group to sink
-	Run(ctx context.Context, in *RunExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified export.
-	//
 	// To get the list of all available exports, make a [List] request.
 	Get(ctx context.Context, in *GetExportRequest, opts ...grpc.CallOption) (*Export, error)
 	// Retrieves the list of exports in the specified folder.
@@ -53,6 +50,8 @@ type ExportServiceClient interface {
 	Update(ctx context.Context, in *UpdateExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified export.
 	Delete(ctx context.Context, in *DeleteExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Run new logs export from log group to sink
+	Run(ctx context.Context, in *RunExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified export.
 	ListOperations(ctx context.Context, in *ListExportOperationsRequest, opts ...grpc.CallOption) (*ListExportOperationsResponse, error)
 	// Lists existing access bindings for the specified export.
@@ -69,16 +68,6 @@ type exportServiceClient struct {
 
 func NewExportServiceClient(cc grpc.ClientConnInterface) ExportServiceClient {
 	return &exportServiceClient{cc}
-}
-
-func (c *exportServiceClient) Run(ctx context.Context, in *RunExportRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ExportService_Run_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *exportServiceClient) Get(ctx context.Context, in *GetExportRequest, opts ...grpc.CallOption) (*Export, error) {
@@ -131,6 +120,16 @@ func (c *exportServiceClient) Delete(ctx context.Context, in *DeleteExportReques
 	return out, nil
 }
 
+func (c *exportServiceClient) Run(ctx context.Context, in *RunExportRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ExportService_Run_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *exportServiceClient) ListOperations(ctx context.Context, in *ListExportOperationsRequest, opts ...grpc.CallOption) (*ListExportOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListExportOperationsResponse)
@@ -177,10 +176,7 @@ func (c *exportServiceClient) UpdateAccessBindings(ctx context.Context, in *acce
 //
 // A set of methods for managing log exports.
 type ExportServiceServer interface {
-	// Run new logs export from log group to sink
-	Run(context.Context, *RunExportRequest) (*operation.Operation, error)
 	// Returns the specified export.
-	//
 	// To get the list of all available exports, make a [List] request.
 	Get(context.Context, *GetExportRequest) (*Export, error)
 	// Retrieves the list of exports in the specified folder.
@@ -191,6 +187,8 @@ type ExportServiceServer interface {
 	Update(context.Context, *UpdateExportRequest) (*operation.Operation, error)
 	// Deletes the specified export.
 	Delete(context.Context, *DeleteExportRequest) (*operation.Operation, error)
+	// Run new logs export from log group to sink
+	Run(context.Context, *RunExportRequest) (*operation.Operation, error)
 	// Lists operations for the specified export.
 	ListOperations(context.Context, *ListExportOperationsRequest) (*ListExportOperationsResponse, error)
 	// Lists existing access bindings for the specified export.
@@ -208,9 +206,6 @@ type ExportServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedExportServiceServer struct{}
 
-func (UnimplementedExportServiceServer) Run(context.Context, *RunExportRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Run not implemented")
-}
 func (UnimplementedExportServiceServer) Get(context.Context, *GetExportRequest) (*Export, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
 }
@@ -225,6 +220,9 @@ func (UnimplementedExportServiceServer) Update(context.Context, *UpdateExportReq
 }
 func (UnimplementedExportServiceServer) Delete(context.Context, *DeleteExportRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedExportServiceServer) Run(context.Context, *RunExportRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Run not implemented")
 }
 func (UnimplementedExportServiceServer) ListOperations(context.Context, *ListExportOperationsRequest) (*ListExportOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
@@ -256,24 +254,6 @@ func RegisterExportServiceServer(s grpc.ServiceRegistrar, srv ExportServiceServe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&ExportService_ServiceDesc, srv)
-}
-
-func _ExportService_Run_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RunExportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ExportServiceServer).Run(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ExportService_Run_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ExportServiceServer).Run(ctx, req.(*RunExportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ExportService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -366,6 +346,24 @@ func _ExportService_Delete_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ExportService_Run_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExportServiceServer).Run(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ExportService_Run_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExportServiceServer).Run(ctx, req.(*RunExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ExportService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListExportOperationsRequest)
 	if err := dec(in); err != nil {
@@ -446,10 +444,6 @@ var ExportService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ExportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Run",
-			Handler:    _ExportService_Run_Handler,
-		},
-		{
 			MethodName: "Get",
 			Handler:    _ExportService_Get_Handler,
 		},
@@ -468,6 +462,10 @@ var ExportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _ExportService_Delete_Handler,
+		},
+		{
+			MethodName: "Run",
+			Handler:    _ExportService_Run_Handler,
 		},
 		{
 			MethodName: "ListOperations",

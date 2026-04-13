@@ -403,7 +403,7 @@ var File_yandex_cloud_datatransfer_v1_endpoint_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datatransfer_v1_endpoint_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/datatransfer/v1/endpoint.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a6yandex/cloud/datatransfer/v1/endpoint/clickhouse.proto\x1a2yandex/cloud/datatransfer/v1/endpoint/common.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/kafka.proto\x1a3yandex/cloud/datatransfer/v1/endpoint/metrika.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/mongo.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/mysql.proto\x1a4yandex/cloud/datatransfer/v1/endpoint/postgres.proto\x1a/yandex/cloud/datatransfer/v1/endpoint/ydb.proto\x1a/yandex/cloud/datatransfer/v1/endpoint/yds.proto\"\xcc\x02\n" +
+	"+yandex/cloud/datatransfer/v1/endpoint.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a6yandex/cloud/datatransfer/v1/endpoint/clickhouse.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/kafka.proto\x1a3yandex/cloud/datatransfer/v1/endpoint/metrika.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/mongo.proto\x1a1yandex/cloud/datatransfer/v1/endpoint/mysql.proto\x1a4yandex/cloud/datatransfer/v1/endpoint/postgres.proto\x1a/yandex/cloud/datatransfer/v1/endpoint/ydb.proto\x1a/yandex/cloud/datatransfer/v1/endpoint/yds.proto\"\xcc\x02\n" +
 	"\bEndpoint\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +

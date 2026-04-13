@@ -54,6 +54,14 @@ func (m *ChannelSettings) SetVideo(v *ChannelVideoSettings) {
 	m.Video = v
 }
 
+func (m *RefererVerificationSettings) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *RefererVerificationSettings) SetAllowedDomains(v []string) {
+	m.AllowedDomains = v
+}
+
 type AdvertisementSettings_Provider = isAdvertisementSettings_Provider
 
 func (m *AdvertisementSettings) SetProvider(v AdvertisementSettings_Provider) {
@@ -76,14 +84,6 @@ func (m *AdvertisementSettings_YandexDirect) SetPageId(v int64) {
 
 func (m *AdvertisementSettings_YandexDirect) SetCategory(v int64) {
 	m.Category = v
-}
-
-func (m *RefererVerificationSettings) SetEnable(v bool) {
-	m.Enable = v
-}
-
-func (m *RefererVerificationSettings) SetAllowedDomains(v []string) {
-	m.AllowedDomains = v
 }
 
 func (m *ChannelVideoSettings) SetShowSourceFileBeforeTranscoding(v bool) {

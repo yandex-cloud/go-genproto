@@ -114,6 +114,10 @@ func (m *ChartWidget_VisualizationSettings) SetTilesSettings(v *ChartWidget_Visu
 	m.TilesSettings = v
 }
 
+func (m *ChartWidget_VisualizationSettings) SetHidePartialData(v bool) {
+	m.HidePartialData = v
+}
+
 type ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {

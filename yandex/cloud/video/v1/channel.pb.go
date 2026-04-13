@@ -227,6 +227,67 @@ func (x *ChannelSettings) GetVideo() *ChannelVideoSettings {
 	return nil
 }
 
+// Settings for HTTP Referer verification to control where content can be embedded.
+// When enabled, the system checks the HTTP Referer request header to ensure
+// that content is only embedded on allowed domains.
+type RefererVerificationSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enables or disables Referer verification for this channel.
+	// When set to true, only requests from allowed domains will be permitted.
+	// When set to false, content can be embedded on any domain.
+	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
+	// List of domains allowed to embed content from this channel.
+	// Only relevant when enable is set to true.
+	// Supports wildcard notation (e.g., "*.example.com") to allow all subdomains.
+	AllowedDomains []string `protobuf:"bytes,2,rep,name=allowed_domains,json=allowedDomains,proto3" json:"allowed_domains,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RefererVerificationSettings) Reset() {
+	*x = RefererVerificationSettings{}
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefererVerificationSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefererVerificationSettings) ProtoMessage() {}
+
+func (x *RefererVerificationSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefererVerificationSettings.ProtoReflect.Descriptor instead.
+func (*RefererVerificationSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *RefererVerificationSettings) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *RefererVerificationSettings) GetAllowedDomains() []string {
+	if x != nil {
+		return x.AllowedDomains
+	}
+	return nil
+}
+
 // Settings for advertisement display and behavior in the channel.
 // These settings control whether and how advertisements are shown
 // with content in this channel, including both videos and streams.
@@ -245,7 +306,7 @@ type AdvertisementSettings struct {
 
 func (x *AdvertisementSettings) Reset() {
 	*x = AdvertisementSettings{}
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[2]
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -257,7 +318,7 @@ func (x *AdvertisementSettings) String() string {
 func (*AdvertisementSettings) ProtoMessage() {}
 
 func (x *AdvertisementSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[2]
+	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +331,7 @@ func (x *AdvertisementSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdvertisementSettings.ProtoReflect.Descriptor instead.
 func (*AdvertisementSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AdvertisementSettings) GetProvider() isAdvertisementSettings_Provider {
@@ -300,67 +361,6 @@ type AdvertisementSettings_YandexDirect_ struct {
 }
 
 func (*AdvertisementSettings_YandexDirect_) isAdvertisementSettings_Provider() {}
-
-// Settings for HTTP Referer verification to control where content can be embedded.
-// When enabled, the system checks the HTTP Referer request header to ensure
-// that content is only embedded on allowed domains.
-type RefererVerificationSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Enables or disables Referer verification for this channel.
-	// When set to true, only requests from allowed domains will be permitted.
-	// When set to false, content can be embedded on any domain.
-	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
-	// List of domains allowed to embed content from this channel.
-	// Only relevant when enable is set to true.
-	// Supports wildcard notation (e.g., "*.example.com") to allow all subdomains.
-	AllowedDomains []string `protobuf:"bytes,2,rep,name=allowed_domains,json=allowedDomains,proto3" json:"allowed_domains,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *RefererVerificationSettings) Reset() {
-	*x = RefererVerificationSettings{}
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RefererVerificationSettings) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RefererVerificationSettings) ProtoMessage() {}
-
-func (x *RefererVerificationSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_channel_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RefererVerificationSettings.ProtoReflect.Descriptor instead.
-func (*RefererVerificationSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RefererVerificationSettings) GetEnable() bool {
-	if x != nil {
-		return x.Enable
-	}
-	return false
-}
-
-func (x *RefererVerificationSettings) GetAllowedDomains() []string {
-	if x != nil {
-		return x.AllowedDomains
-	}
-	return nil
-}
 
 // Settings for displaying video
 type ChannelVideoSettings struct {
@@ -457,7 +457,7 @@ func (x *AdvertisementSettings_YandexDirect) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use AdvertisementSettings_YandexDirect.ProtoReflect.Descriptor instead.
 func (*AdvertisementSettings_YandexDirect) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{2, 0}
+	return file_yandex_cloud_video_v1_channel_proto_rawDescGZIP(), []int{3, 0}
 }
 
 func (x *AdvertisementSettings_YandexDirect) GetEnable() bool {
@@ -504,7 +504,10 @@ const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\x0fChannelSettings\x12R\n" +
 	"\radvertisement\x18\x01 \x01(\v2,.yandex.cloud.video.v1.AdvertisementSettingsR\radvertisement\x12e\n" +
 	"\x14referer_verification\x18\x03 \x01(\v22.yandex.cloud.video.v1.RefererVerificationSettingsR\x13refererVerification\x12A\n" +
-	"\x05video\x18\x04 \x01(\v2+.yandex.cloud.video.v1.ChannelVideoSettingsR\x05videoJ\x04\b\x02\x10\x03\"\xe8\x01\n" +
+	"\x05video\x18\x04 \x01(\v2+.yandex.cloud.video.v1.ChannelVideoSettingsR\x05videoJ\x04\b\x02\x10\x03\"\xb4\x01\n" +
+	"\x1bRefererVerificationSettings\x12\x16\n" +
+	"\x06enable\x18\x01 \x01(\bR\x06enable\x12}\n" +
+	"\x0fallowed_domains\x18\x02 \x03(\tBT\xf2\xc71>^(?:\\*\\.)?(?:[a-zA-Z0-9-]*\\.)+[a-zA-Z]{2,}$|^\\*\\.[a-zA-Z]{2,}$\x82\xc81\x05<=100\x8a\xc81\x054-255R\x0eallowedDomains\"\xe8\x01\n" +
 	"\x15AdvertisementSettings\x12`\n" +
 	"\ryandex_direct\x18d \x01(\v29.yandex.cloud.video.v1.AdvertisementSettings.YandexDirectH\x00R\fyandexDirect\x1a[\n" +
 	"\fYandexDirect\x12\x16\n" +
@@ -512,10 +515,7 @@ const file_yandex_cloud_video_v1_channel_proto_rawDesc = "" +
 	"\apage_id\x18\x02 \x01(\x03R\x06pageId\x12\x1a\n" +
 	"\bcategory\x18\x03 \x01(\x03R\bcategoryB\n" +
 	"\n" +
-	"\bproviderJ\x04\b\x01\x10d\"\xb4\x01\n" +
-	"\x1bRefererVerificationSettings\x12\x16\n" +
-	"\x06enable\x18\x01 \x01(\bR\x06enable\x12}\n" +
-	"\x0fallowed_domains\x18\x02 \x03(\tBT\xf2\xc71>^(?:\\*\\.)?(?:[a-zA-Z0-9-]*\\.)+[a-zA-Z]{2,}$|^\\*\\.[a-zA-Z]{2,}$\x82\xc81\x05<=100\x8a\xc81\x054-255R\x0eallowedDomains\"d\n" +
+	"\bproviderJ\x04\b\x01\x10d\"d\n" +
 	"\x14ChannelVideoSettings\x12L\n" +
 	"#show_source_file_before_transcoding\x18\x01 \x01(\bR\x1fshowSourceFileBeforeTranscodingB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
@@ -536,8 +536,8 @@ var file_yandex_cloud_video_v1_channel_proto_msgTypes = make([]protoimpl.Message
 var file_yandex_cloud_video_v1_channel_proto_goTypes = []any{
 	(*Channel)(nil),                            // 0: yandex.cloud.video.v1.Channel
 	(*ChannelSettings)(nil),                    // 1: yandex.cloud.video.v1.ChannelSettings
-	(*AdvertisementSettings)(nil),              // 2: yandex.cloud.video.v1.AdvertisementSettings
-	(*RefererVerificationSettings)(nil),        // 3: yandex.cloud.video.v1.RefererVerificationSettings
+	(*RefererVerificationSettings)(nil),        // 2: yandex.cloud.video.v1.RefererVerificationSettings
+	(*AdvertisementSettings)(nil),              // 3: yandex.cloud.video.v1.AdvertisementSettings
 	(*ChannelVideoSettings)(nil),               // 4: yandex.cloud.video.v1.ChannelVideoSettings
 	nil,                                        // 5: yandex.cloud.video.v1.Channel.LabelsEntry
 	(*AdvertisementSettings_YandexDirect)(nil), // 6: yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
@@ -548,8 +548,8 @@ var file_yandex_cloud_video_v1_channel_proto_depIdxs = []int32{
 	7, // 1: yandex.cloud.video.v1.Channel.updated_at:type_name -> google.protobuf.Timestamp
 	5, // 2: yandex.cloud.video.v1.Channel.labels:type_name -> yandex.cloud.video.v1.Channel.LabelsEntry
 	1, // 3: yandex.cloud.video.v1.Channel.settings:type_name -> yandex.cloud.video.v1.ChannelSettings
-	2, // 4: yandex.cloud.video.v1.ChannelSettings.advertisement:type_name -> yandex.cloud.video.v1.AdvertisementSettings
-	3, // 5: yandex.cloud.video.v1.ChannelSettings.referer_verification:type_name -> yandex.cloud.video.v1.RefererVerificationSettings
+	3, // 4: yandex.cloud.video.v1.ChannelSettings.advertisement:type_name -> yandex.cloud.video.v1.AdvertisementSettings
+	2, // 5: yandex.cloud.video.v1.ChannelSettings.referer_verification:type_name -> yandex.cloud.video.v1.RefererVerificationSettings
 	4, // 6: yandex.cloud.video.v1.ChannelSettings.video:type_name -> yandex.cloud.video.v1.ChannelVideoSettings
 	6, // 7: yandex.cloud.video.v1.AdvertisementSettings.yandex_direct:type_name -> yandex.cloud.video.v1.AdvertisementSettings.YandexDirect
 	8, // [8:8] is the sub-list for method output_type
@@ -564,7 +564,7 @@ func file_yandex_cloud_video_v1_channel_proto_init() {
 	if File_yandex_cloud_video_v1_channel_proto != nil {
 		return
 	}
-	file_yandex_cloud_video_v1_channel_proto_msgTypes[2].OneofWrappers = []any{
+	file_yandex_cloud_video_v1_channel_proto_msgTypes[3].OneofWrappers = []any{
 		(*AdvertisementSettings_YandexDirect_)(nil),
 	}
 	type x struct{}

@@ -83,6 +83,10 @@ func (m *Cluster) SetPlannedOperation(v *MaintenanceOperation) {
 	m.PlannedOperation = v
 }
 
+func (m *Cluster) SetIsHa(v bool) {
+	m.IsHa = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }

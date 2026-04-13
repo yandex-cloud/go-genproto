@@ -219,7 +219,7 @@ var File_yandex_cloud_datasphere_v1_folder_budget_service_proto protoreflect.Fil
 
 const file_yandex_cloud_datasphere_v1_folder_budget_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/datasphere/v1/folder_budget_service.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
+	"6yandex/cloud/datasphere/v1/folder_budget_service.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x16GetFolderBudgetRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"\xf7\x01\n" +
 	"\x17GetFolderBudgetResponse\x12>\n" +

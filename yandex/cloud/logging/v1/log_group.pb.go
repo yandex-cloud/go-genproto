@@ -28,7 +28,6 @@ type LogGroup_Status int32
 
 const (
 	// Unknown status.
-	//
 	// Should never occur.
 	LogGroup_STATUS_UNSPECIFIED LogGroup_Status = 0
 	// Log group is creating.
@@ -36,7 +35,6 @@ const (
 	// Log group is ready to accept messages,
 	LogGroup_ACTIVE LogGroup_Status = 2
 	// Log group is being deleted.
-	//
 	// No messages will be accepted.
 	LogGroup_DELETING LogGroup_Status = 3
 	// Log group is in failed state.
@@ -107,7 +105,6 @@ type LogGroup struct {
 	// Status of the log group.
 	Status LogGroup_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.logging.v1.LogGroup_Status" json:"status,omitempty"`
 	// Log group entry retention period.
-	//
 	// Entries will be present in group during this period.
 	RetentionPeriod *durationpb.Duration `protobuf:"bytes,9,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
 	// Data stream name

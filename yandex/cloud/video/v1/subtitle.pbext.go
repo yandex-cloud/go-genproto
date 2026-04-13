@@ -12,6 +12,12 @@ func (m *Subtitle) SetParentId(v Subtitle_ParentId) {
 	m.ParentId = v
 }
 
+func (m *Subtitle) SetVideoId(v string) {
+	m.ParentId = &Subtitle_VideoId{
+		VideoId: v,
+	}
+}
+
 func (m *Subtitle) SetId(v string) {
 	m.Id = v
 }
@@ -42,10 +48,4 @@ func (m *Subtitle) SetCreatedAt(v *timestamppb.Timestamp) {
 
 func (m *Subtitle) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
-}
-
-func (m *Subtitle) SetVideoId(v string) {
-	m.ParentId = &Subtitle_VideoId{
-		VideoId: v,
-	}
 }

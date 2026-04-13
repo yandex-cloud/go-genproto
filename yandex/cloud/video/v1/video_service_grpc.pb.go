@@ -81,7 +81,6 @@ type VideoServiceClient interface {
 	// Retrieves the manifest URLs for a specific video.
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
-	//
 	// Manifests and its url MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
@@ -274,7 +273,6 @@ type VideoServiceServer interface {
 	// Retrieves the manifest URLs for a specific video.
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
-	//
 	// Manifests and its url MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)

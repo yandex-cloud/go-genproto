@@ -64,10 +64,6 @@ func (m *CreateLogGroupRequest) SetDataStream(v string) {
 	m.DataStream = v
 }
 
-func (m *CreateLogGroupMetadata) SetLogGroupId(v string) {
-	m.LogGroupId = v
-}
-
 func (m *UpdateLogGroupRequest) SetLogGroupId(v string) {
 	m.LogGroupId = v
 }
@@ -94,6 +90,10 @@ func (m *UpdateLogGroupRequest) SetRetentionPeriod(v *durationpb.Duration) {
 
 func (m *UpdateLogGroupRequest) SetDataStream(v string) {
 	m.DataStream = v
+}
+
+func (m *CreateLogGroupMetadata) SetLogGroupId(v string) {
+	m.LogGroupId = v
 }
 
 func (m *UpdateLogGroupMetadata) SetLogGroupId(v string) {

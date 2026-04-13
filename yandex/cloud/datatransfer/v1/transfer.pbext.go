@@ -250,10 +250,6 @@ func (m *SharderTransformer) SetSharderTransformerType(v SharderTransformer_Shar
 	m.SharderTransformerType = v
 }
 
-func (m *SharderTransformer) SetTables(v *TablesFilter) {
-	m.Tables = v
-}
-
 func (m *SharderTransformer) SetColumns(v *ColumnsFilter) {
 	m.SharderTransformerType = &SharderTransformer_Columns{
 		Columns: v,
@@ -264,6 +260,10 @@ func (m *SharderTransformer) SetRandom(v *SharderTransformerTypeRandom) {
 	m.SharderTransformerType = &SharderTransformer_Random{
 		Random: v,
 	}
+}
+
+func (m *SharderTransformer) SetTables(v *TablesFilter) {
+	m.Tables = v
 }
 
 func (m *SharderTransformer) SetShardsCount(v int64) {

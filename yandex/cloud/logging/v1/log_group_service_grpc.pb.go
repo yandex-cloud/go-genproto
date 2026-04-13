@@ -41,7 +41,6 @@ const (
 // A set of methods for managing log groups.
 type LogGroupServiceClient interface {
 	// Returns the specified log group.
-	//
 	// To get the list of all available log groups, make a [List] request.
 	Get(ctx context.Context, in *GetLogGroupRequest, opts ...grpc.CallOption) (*LogGroup, error)
 	// Returns stats for the specified log group.
@@ -191,7 +190,6 @@ func (c *logGroupServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 // A set of methods for managing log groups.
 type LogGroupServiceServer interface {
 	// Returns the specified log group.
-	//
 	// To get the list of all available log groups, make a [List] request.
 	Get(context.Context, *GetLogGroupRequest) (*LogGroup, error)
 	// Returns stats for the specified log group.

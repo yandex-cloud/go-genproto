@@ -259,6 +259,19 @@ func (VideoFeatures_FeatureResult) EnumDescriptor() ([]byte, []int) {
 // Main entity representing a video in the platform.
 type Video struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the video upload source method (one source variant must be chosen).
+	//
+	// Types that are valid to be assigned to Source:
+	//
+	//	*Video_Tusd
+	Source isVideo_Source `protobuf_oneof:"source"`
+	// Specifies the video access permission settings.
+	//
+	// Types that are valid to be assigned to AccessRights:
+	//
+	//	*Video_PublicAccess
+	//	*Video_SignUrlAccess
+	AccessRights isVideo_AccessRights `protobuf_oneof:"access_rights"`
 	// Unique identifier of the video.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Identifier of the channel where the video is created and managed.
@@ -292,19 +305,6 @@ type Video struct {
 	SubtitleIds []string `protobuf:"bytes,12,rep,name=subtitle_ids,json=subtitleIds,proto3" json:"subtitle_ids,omitempty"`
 	// Additional video processing features and their results, such as summarization.
 	Features *VideoFeatures `protobuf:"bytes,13,opt,name=features,proto3" json:"features,omitempty"`
-	// Specifies the video upload source method (one source variant must be chosen).
-	//
-	// Types that are valid to be assigned to Source:
-	//
-	//	*Video_Tusd
-	Source isVideo_Source `protobuf_oneof:"source"`
-	// Specifies the video access permission settings.
-	//
-	// Types that are valid to be assigned to AccessRights:
-	//
-	//	*Video_PublicAccess
-	//	*Video_SignUrlAccess
-	AccessRights isVideo_AccessRights `protobuf_oneof:"access_rights"`
 	// Timestamp when the video was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the video or its metadata.
@@ -345,6 +345,47 @@ func (x *Video) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Video.ProtoReflect.Descriptor instead.
 func (*Video) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Video) GetSource() isVideo_Source {
+	if x != nil {
+		return x.Source
+	}
+	return nil
+}
+
+func (x *Video) GetTusd() *VideoTUSDSource {
+	if x != nil {
+		if x, ok := x.Source.(*Video_Tusd); ok {
+			return x.Tusd
+		}
+	}
+	return nil
+}
+
+func (x *Video) GetAccessRights() isVideo_AccessRights {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
+func (x *Video) GetPublicAccess() *VideoPublicAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Video_PublicAccess); ok {
+			return x.PublicAccess
+		}
+	}
+	return nil
+}
+
+func (x *Video) GetSignUrlAccess() *VideoSignURLAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Video_SignUrlAccess); ok {
+			return x.SignUrlAccess
+		}
+	}
+	return nil
 }
 
 func (x *Video) GetId() string {
@@ -441,47 +482,6 @@ func (x *Video) GetSubtitleIds() []string {
 func (x *Video) GetFeatures() *VideoFeatures {
 	if x != nil {
 		return x.Features
-	}
-	return nil
-}
-
-func (x *Video) GetSource() isVideo_Source {
-	if x != nil {
-		return x.Source
-	}
-	return nil
-}
-
-func (x *Video) GetTusd() *VideoTUSDSource {
-	if x != nil {
-		if x, ok := x.Source.(*Video_Tusd); ok {
-			return x.Tusd
-		}
-	}
-	return nil
-}
-
-func (x *Video) GetAccessRights() isVideo_AccessRights {
-	if x != nil {
-		return x.AccessRights
-	}
-	return nil
-}
-
-func (x *Video) GetPublicAccess() *VideoPublicAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Video_PublicAccess); ok {
-			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *Video) GetSignUrlAccess() *VideoSignURLAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Video_SignUrlAccess); ok {
-			return x.SignUrlAccess
-		}
 	}
 	return nil
 }
@@ -840,8 +840,11 @@ var File_yandex_cloud_video_v1_video_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/video/v1/video.proto\x12\x15yandex.cloud.video.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb7\v\n" +
-	"\x05Video\x12\x0e\n" +
+	"!yandex/cloud/video/v1/video.proto\x12\x15yandex.cloud.video.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xaf\v\n" +
+	"\x05Video\x12=\n" +
+	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDSourceH\x00R\x04tusd\x12V\n" +
+	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessRightsH\x01R\fpublicAccess\x12Z\n" +
+	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessRightsH\x01R\rsignUrlAccess\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
@@ -856,10 +859,7 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\x0fstyle_preset_id\x18\x10 \x01(\tR\rstylePresetId\x127\n" +
 	"\tenable_ad\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12!\n" +
 	"\fsubtitle_ids\x18\f \x03(\tR\vsubtitleIds\x12@\n" +
-	"\bfeatures\x18\r \x01(\v2$.yandex.cloud.video.v1.VideoFeaturesR\bfeatures\x12=\n" +
-	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDSourceH\x00R\x04tusd\x12V\n" +
-	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessRightsH\x01R\fpublicAccess\x12Z\n" +
-	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessRightsH\x01R\rsignUrlAccess\x129\n" +
+	"\bfeatures\x18\r \x01(\v2$.yandex.cloud.video.v1.VideoFeaturesR\bfeatures\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -881,8 +881,8 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\tPUBLISHED\x10\x01\x12\x0f\n" +
 	"\vUNPUBLISHED\x10\x02B\b\n" +
 	"\x06sourceB\x0f\n" +
-	"\raccess_rightsJ\x04\b\n" +
-	"\x10\vJ\x06\b\xd1\x0f\x10\xd2\x0fJ\x06\b\xd2\x0f\x10\xd3\x0fJ\x04\b\a\x10\bJ\x04\b\x0e\x10\x10J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0f\"@\n" +
+	"\raccess_rightsJ\x04\b\a\x10\bJ\x04\b\n" +
+	"\x10\vJ\x04\b\x0e\x10\x10J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0fJ\x06\b\xd1\x0f\x10\xd3\x0f\"@\n" +
 	"\x0fVideoTUSDSource\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1b\n" +
 	"\tfile_size\x18\x02 \x01(\x03R\bfileSize\"\x19\n" +
@@ -946,15 +946,15 @@ var file_yandex_cloud_video_v1_video_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),            // 14: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_video_proto_depIdxs = []int32{
-	1,  // 0: yandex.cloud.video.v1.Video.status:type_name -> yandex.cloud.video.v1.Video.VideoStatus
-	2,  // 1: yandex.cloud.video.v1.Video.visibility_status:type_name -> yandex.cloud.video.v1.Video.VisibilityStatus
-	12, // 2: yandex.cloud.video.v1.Video.duration:type_name -> google.protobuf.Duration
-	0,  // 3: yandex.cloud.video.v1.Video.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
-	13, // 4: yandex.cloud.video.v1.Video.enable_ad:type_name -> google.protobuf.BoolValue
-	8,  // 5: yandex.cloud.video.v1.Video.features:type_name -> yandex.cloud.video.v1.VideoFeatures
-	5,  // 6: yandex.cloud.video.v1.Video.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDSource
-	6,  // 7: yandex.cloud.video.v1.Video.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessRights
-	7,  // 8: yandex.cloud.video.v1.Video.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessRights
+	5,  // 0: yandex.cloud.video.v1.Video.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDSource
+	6,  // 1: yandex.cloud.video.v1.Video.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessRights
+	7,  // 2: yandex.cloud.video.v1.Video.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessRights
+	1,  // 3: yandex.cloud.video.v1.Video.status:type_name -> yandex.cloud.video.v1.Video.VideoStatus
+	2,  // 4: yandex.cloud.video.v1.Video.visibility_status:type_name -> yandex.cloud.video.v1.Video.VisibilityStatus
+	12, // 5: yandex.cloud.video.v1.Video.duration:type_name -> google.protobuf.Duration
+	0,  // 6: yandex.cloud.video.v1.Video.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
+	13, // 7: yandex.cloud.video.v1.Video.enable_ad:type_name -> google.protobuf.BoolValue
+	8,  // 8: yandex.cloud.video.v1.Video.features:type_name -> yandex.cloud.video.v1.VideoFeatures
 	14, // 9: yandex.cloud.video.v1.Video.created_at:type_name -> google.protobuf.Timestamp
 	14, // 10: yandex.cloud.video.v1.Video.updated_at:type_name -> google.protobuf.Timestamp
 	9,  // 11: yandex.cloud.video.v1.Video.labels:type_name -> yandex.cloud.video.v1.Video.LabelsEntry

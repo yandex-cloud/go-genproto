@@ -245,14 +245,6 @@ func (m *LogMessage) SetSource(v LogMessage_Source) {
 	m.Source = v
 }
 
-func (m *LogMessage) SetContent(v []byte) {
-	m.Content = v
-}
-
-func (m *LogMessage) SetCreatedAt(v *timestamppb.Timestamp) {
-	m.CreatedAt = v
-}
-
 func (m *LogMessage) SetStandardStream(v StandardStream) {
 	m.Source = &LogMessage_StandardStream{
 		StandardStream: v,
@@ -263,4 +255,12 @@ func (m *LogMessage) SetFilePath(v string) {
 	m.Source = &LogMessage_FilePath{
 		FilePath: v,
 	}
+}
+
+func (m *LogMessage) SetContent(v []byte) {
+	m.Content = v
+}
+
+func (m *LogMessage) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
 }

@@ -13,6 +13,18 @@ func (m *Stream) SetStreamType(v Stream_StreamType) {
 	m.StreamType = v
 }
 
+func (m *Stream) SetOnDemand(v *OnDemand) {
+	m.StreamType = &Stream_OnDemand{
+		OnDemand: v,
+	}
+}
+
+func (m *Stream) SetSchedule(v *Schedule) {
+	m.StreamType = &Stream_Schedule{
+		Schedule: v,
+	}
+}
+
 func (m *Stream) SetId(v string) {
 	m.Id = v
 }
@@ -55,18 +67,6 @@ func (m *Stream) SetFinishTime(v *timestamppb.Timestamp) {
 
 func (m *Stream) SetAutoPublish(v *wrapperspb.BoolValue) {
 	m.AutoPublish = v
-}
-
-func (m *Stream) SetOnDemand(v *OnDemand) {
-	m.StreamType = &Stream_OnDemand{
-		OnDemand: v,
-	}
-}
-
-func (m *Stream) SetSchedule(v *Schedule) {
-	m.StreamType = &Stream_Schedule{
-		Schedule: v,
-	}
 }
 
 func (m *Stream) SetCreatedAt(v *timestamppb.Timestamp) {

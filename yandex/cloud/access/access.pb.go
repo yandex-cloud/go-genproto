@@ -76,28 +76,25 @@ func (AccessBindingAction) EnumDescriptor() ([]byte, []int) {
 type Subject struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subject.
-	//
-	// It can contain one of the following values:
-	//   - `allAuthenticatedUsers`: A special public group that represents anyone
-	//     who is authenticated. It can be used only if the [type] is `system`.
-	//   - `allUsers`: A special public group that represents anyone. No authentication is required.
-	//     For example, you don't need to specify the IAM token in an API query.
-	//     It can be used only if the [type] is `system`.
-	//   - `group:organization:<id>:users`: A special system group that represents all members of organization
-	//     with given <id>. It can be used only if the [type] is `system`.
-	//   - `group:federation:<id>:users`: A special system group that represents all users of federation
-	//     with given <id>. It can be used only if the [type] is `system`.
-	//   - `<cloud generated id>`: An identifier that represents a user account.
-	//     It can be used only if the [type] is `userAccount`, `federatedUser` or `serviceAccount`.
+	// It can contain one of the following values:oauth
+	// * `allAuthenticatedUsers`: A special public group that represents anyone
+	// who is authenticated. It can be used only if the [type] is `system`.
+	// * `allUsers`: A special public group that represents anyone. No authentication is required.
+	// For example, you don't need to specify the IAM token in an API query.
+	// It can be used only if the [type] is `system`.
+	// * `group:organization:<id>:users`: A special system group that represents all members of organization
+	// with given <id>. It can be used only if the [type] is `system`.
+	// * `group:federation:<id>:users`: A special system group that represents all users of federation
+	// with given <id>. It can be used only if the [type] is `system`.
+	// * `<cloud generated id>`: An identifier that represents a user account.
+	// It can be used only if the [type] is `userAccount`, `federatedUser` or `serviceAccount`.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Type of the subject.
-	//
 	// It can contain one of the following values:
 	// * `userAccount`: An account on Yandex or Yandex Connect, added to Yandex Cloud.
 	// * `serviceAccount`: A service account. This type represents the [yandex.cloud.iam.v1.ServiceAccount] resource.
 	// * `federatedUser`: A federated account. This type represents a user from an identity federation, like Active Directory.
 	// * `system`: System group. This type represents several accounts with a common system identifier.
-	//
 	// For more information, see [Subject to which the role is assigned](/docs/iam/concepts/access-control/#subject).
 	Type          string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -269,10 +266,11 @@ func (x *AccessPolicy) GetDescription() string {
 type AccessPolicyBinding struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the access policy template being applied.
-	AccessPolicyTemplateId string            `protobuf:"bytes,1,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
-	Parameters             map[string]string `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	AccessPolicyTemplateId string `protobuf:"bytes,1,opt,name=access_policy_template_id,json=accessPolicyTemplateId,proto3" json:"access_policy_template_id,omitempty"`
+	// A list of access policy binding parameter KEY=VALUE pairs.
+	Parameters    map[string]string `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AccessPolicyBinding) Reset() {
@@ -322,9 +320,9 @@ func (x *AccessPolicyBinding) GetParameters() map[string]string {
 type BindAccessPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource for which access policy bindings are being set.
-	//
 	// To get the resource ID, use a corresponding List request.
-	ResourceId          string               `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Access policy binding. For more information, see [Access Bindings](/docs/iam/concepts/access-control/#access-policies).
 	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -377,7 +375,8 @@ func (x *BindAccessPolicyRequest) GetAccessPolicyBinding() *AccessPolicyBinding 
 type BindAccessPolicyMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource for which access policy bindings are being set.
-	ResourceId          string               `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Access policy binding. For more information, see [Access Bindings](/docs/iam/concepts/access-control/#access-policies).
 	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -466,7 +465,6 @@ func (*BindAccessPolicyResponse) Descriptor() ([]byte, []int) {
 type ListAccessBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource to list access bindings for.
-	//
 	// To get the resource ID, use a corresponding List request.
 	// For example, use the [yandex.cloud.resourcemanager.v1.CloudService.List] request to get the Cloud resource ID.
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
@@ -597,7 +595,6 @@ func (x *ListAccessBindingsResponse) GetNextPageToken() string {
 type ListAccessPolicyBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource to list access policy bindings for.
-	//
 	// To get the resource ID, use a corresponding List request.
 	// For example, use the [yandex.cloud.resourcemanager.v1.CloudService.List] request to get the Cloud resource ID.
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
@@ -729,7 +726,6 @@ func (x *ListAccessPolicyBindingsResponse) GetNextPageToken() string {
 type UnbindAccessPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource for which access policy bindings are being removed.
-	//
 	// To get the resource ID, use a corresponding List request.
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// ID of the access policy.
@@ -873,9 +869,11 @@ func (*UnbindAccessPolicyResponse) Descriptor() ([]byte, []int) {
 }
 
 type UpdateAccessPolicyBindingParametersRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId          string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	AccessPolicyBinding *AccessPolicyBinding   `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being updated.
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Identity for which access policy binding is being updated.
+	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -925,9 +923,11 @@ func (x *UpdateAccessPolicyBindingParametersRequest) GetAccessPolicyBinding() *A
 }
 
 type UpdateAccessPolicyBindingParametersMetadata struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	ResourceId          string                 `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	AccessPolicyBinding *AccessPolicyBinding   `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource for which access policy bindings are being updated.
+	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// Identity for which access policy binding is being updated.
+	AccessPolicyBinding *AccessPolicyBinding `protobuf:"bytes,2,opt,name=access_policy_binding,json=accessPolicyBinding,proto3" json:"access_policy_binding,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1015,7 +1015,6 @@ func (*UpdateAccessPolicyBindingParametersResponse) Descriptor() ([]byte, []int)
 type SetAccessBindingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource for which access bindings are being set.
-	//
 	// To get the resource ID, use a corresponding List request.
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// Access bindings to be set. For more information, see [Access Bindings](/docs/iam/concepts/access-control/#access-bindings).
@@ -1325,11 +1324,11 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\fAccessPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xf7\x01\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xa8\x02\n" +
 	"\x13AccessPolicyBinding\x12G\n" +
-	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\x12X\n" +
+	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\x12\x88\x01\n" +
 	"\n" +
-	"parameters\x18\x02 \x03(\v28.yandex.cloud.access.AccessPolicyBinding.ParametersEntryR\n" +
+	"parameters\x18\x02 \x03(\v28.yandex.cloud.access.AccessPolicyBinding.ParametersEntryB.\x82\xc81\x04<=64\x8a\xc81\x06<=1024\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\n" +
 	"parameters\x1a=\n" +
 	"\x0fParametersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +

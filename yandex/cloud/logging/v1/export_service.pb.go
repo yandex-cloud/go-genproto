@@ -28,238 +28,9 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type RunExportRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
-	Params         *ExportParams          `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
-	ResultFilename string                 `protobuf:"bytes,4,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
-	Since          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=since,proto3" json:"since,omitempty"`
-	Until          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=until,proto3" json:"until,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *RunExportRequest) Reset() {
-	*x = RunExportRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RunExportRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RunExportRequest) ProtoMessage() {}
-
-func (x *RunExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RunExportRequest.ProtoReflect.Descriptor instead.
-func (*RunExportRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *RunExportRequest) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *RunExportRequest) GetSinkId() string {
-	if x != nil {
-		return x.SinkId
-	}
-	return ""
-}
-
-func (x *RunExportRequest) GetParams() *ExportParams {
-	if x != nil {
-		return x.Params
-	}
-	return nil
-}
-
-func (x *RunExportRequest) GetResultFilename() string {
-	if x != nil {
-		return x.ResultFilename
-	}
-	return ""
-}
-
-func (x *RunExportRequest) GetSince() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Since
-	}
-	return nil
-}
-
-func (x *RunExportRequest) GetUntil() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Until
-	}
-	return nil
-}
-
-type RunExportDetails struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
-	Params         *ExportParams          `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
-	ResultFilename string                 `protobuf:"bytes,4,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
-	Since          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=since,proto3" json:"since,omitempty"`
-	Until          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=until,proto3" json:"until,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *RunExportDetails) Reset() {
-	*x = RunExportDetails{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RunExportDetails) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RunExportDetails) ProtoMessage() {}
-
-func (x *RunExportDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RunExportDetails.ProtoReflect.Descriptor instead.
-func (*RunExportDetails) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *RunExportDetails) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *RunExportDetails) GetSinkId() string {
-	if x != nil {
-		return x.SinkId
-	}
-	return ""
-}
-
-func (x *RunExportDetails) GetParams() *ExportParams {
-	if x != nil {
-		return x.Params
-	}
-	return nil
-}
-
-func (x *RunExportDetails) GetResultFilename() string {
-	if x != nil {
-		return x.ResultFilename
-	}
-	return ""
-}
-
-func (x *RunExportDetails) GetSince() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Since
-	}
-	return nil
-}
-
-func (x *RunExportDetails) GetUntil() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Until
-	}
-	return nil
-}
-
-type RunExportMetadata struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
-	ResultFilename string                 `protobuf:"bytes,3,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *RunExportMetadata) Reset() {
-	*x = RunExportMetadata{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RunExportMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RunExportMetadata) ProtoMessage() {}
-
-func (x *RunExportMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RunExportMetadata.ProtoReflect.Descriptor instead.
-func (*RunExportMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RunExportMetadata) GetGroupId() string {
-	if x != nil {
-		return x.GroupId
-	}
-	return ""
-}
-
-func (x *RunExportMetadata) GetSinkId() string {
-	if x != nil {
-		return x.SinkId
-	}
-	return ""
-}
-
-func (x *RunExportMetadata) GetResultFilename() string {
-	if x != nil {
-		return x.ResultFilename
-	}
-	return ""
-}
-
 type GetExportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the export to return.
-	//
 	// To get a export ID make a [ExportService.List] request.
 	ExportId      string `protobuf:"bytes,1,opt,name=export_id,json=exportId,proto3" json:"export_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -268,7 +39,7 @@ type GetExportRequest struct {
 
 func (x *GetExportRequest) Reset() {
 	*x = GetExportRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -280,7 +51,7 @@ func (x *GetExportRequest) String() string {
 func (*GetExportRequest) ProtoMessage() {}
 
 func (x *GetExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -293,7 +64,7 @@ func (x *GetExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetExportRequest.ProtoReflect.Descriptor instead.
 func (*GetExportRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GetExportRequest) GetExportId() string {
@@ -306,20 +77,17 @@ func (x *GetExportRequest) GetExportId() string {
 type ListExportsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Folder ID of the exports to return.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListExportssResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListExportsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters exports listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Export.name] field.
 	// 2. An `=` operator.
@@ -332,7 +100,7 @@ type ListExportsRequest struct {
 
 func (x *ListExportsRequest) Reset() {
 	*x = ListExportsRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -344,7 +112,7 @@ func (x *ListExportsRequest) String() string {
 func (*ListExportsRequest) ProtoMessage() {}
 
 func (x *ListExportsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -357,7 +125,7 @@ func (x *ListExportsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExportsRequest.ProtoReflect.Descriptor instead.
 func (*ListExportsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListExportsRequest) GetFolderId() string {
@@ -395,7 +163,6 @@ type ListExportsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListExportsRequest.page_size], use `next_page_token` as the value
 	// for the [ListExportsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -404,7 +171,7 @@ type ListExportsResponse struct {
 
 func (x *ListExportsResponse) Reset() {
 	*x = ListExportsResponse{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -416,7 +183,7 @@ func (x *ListExportsResponse) String() string {
 func (*ListExportsResponse) ProtoMessage() {}
 
 func (x *ListExportsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -429,7 +196,7 @@ func (x *ListExportsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListExportsResponse.ProtoReflect.Descriptor instead.
 func (*ListExportsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListExportsResponse) GetExports() []*Export {
@@ -449,7 +216,6 @@ func (x *ListExportsResponse) GetNextPageToken() string {
 type CreateExportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a export in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the export.
@@ -471,7 +237,7 @@ type CreateExportRequest struct {
 
 func (x *CreateExportRequest) Reset() {
 	*x = CreateExportRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +249,7 @@ func (x *CreateExportRequest) String() string {
 func (*CreateExportRequest) ProtoMessage() {}
 
 func (x *CreateExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +262,7 @@ func (x *CreateExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExportRequest.ProtoReflect.Descriptor instead.
 func (*CreateExportRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateExportRequest) GetFolderId() string {
@@ -558,7 +324,7 @@ type CreateExportMetadata struct {
 
 func (x *CreateExportMetadata) Reset() {
 	*x = CreateExportMetadata{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -570,7 +336,7 @@ func (x *CreateExportMetadata) String() string {
 func (*CreateExportMetadata) ProtoMessage() {}
 
 func (x *CreateExportMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -583,7 +349,7 @@ func (x *CreateExportMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateExportMetadata.ProtoReflect.Descriptor instead.
 func (*CreateExportMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateExportMetadata) GetExportId() string {
@@ -596,7 +362,6 @@ func (x *CreateExportMetadata) GetExportId() string {
 type UpdateExportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the export to update.
-	//
 	// To get a export ID make a [ExportService.List] request.
 	ExportId string `protobuf:"bytes,1,opt,name=export_id,json=exportId,proto3" json:"export_id,omitempty"`
 	// Field mask that specifies which attributes of the function should be updated.
@@ -620,7 +385,7 @@ type UpdateExportRequest struct {
 
 func (x *UpdateExportRequest) Reset() {
 	*x = UpdateExportRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -632,7 +397,7 @@ func (x *UpdateExportRequest) String() string {
 func (*UpdateExportRequest) ProtoMessage() {}
 
 func (x *UpdateExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -645,7 +410,7 @@ func (x *UpdateExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExportRequest.ProtoReflect.Descriptor instead.
 func (*UpdateExportRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateExportRequest) GetExportId() string {
@@ -714,7 +479,7 @@ type UpdateExportMetadata struct {
 
 func (x *UpdateExportMetadata) Reset() {
 	*x = UpdateExportMetadata{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -726,7 +491,7 @@ func (x *UpdateExportMetadata) String() string {
 func (*UpdateExportMetadata) ProtoMessage() {}
 
 func (x *UpdateExportMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,7 +504,7 @@ func (x *UpdateExportMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateExportMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateExportMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateExportMetadata) GetExportId() string {
@@ -752,7 +517,6 @@ func (x *UpdateExportMetadata) GetExportId() string {
 type DeleteExportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the export to delete.
-	//
 	// To get a export ID make a [ExportService.List] request.
 	ExportId      string `protobuf:"bytes,1,opt,name=export_id,json=exportId,proto3" json:"export_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -761,7 +525,7 @@ type DeleteExportRequest struct {
 
 func (x *DeleteExportRequest) Reset() {
 	*x = DeleteExportRequest{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -773,7 +537,7 @@ func (x *DeleteExportRequest) String() string {
 func (*DeleteExportRequest) ProtoMessage() {}
 
 func (x *DeleteExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -786,7 +550,7 @@ func (x *DeleteExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteExportRequest.ProtoReflect.Descriptor instead.
 func (*DeleteExportRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteExportRequest) GetExportId() string {
@@ -806,7 +570,7 @@ type DeleteExportMetadata struct {
 
 func (x *DeleteExportMetadata) Reset() {
 	*x = DeleteExportMetadata{}
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -818,7 +582,7 @@ func (x *DeleteExportMetadata) String() string {
 func (*DeleteExportMetadata) ProtoMessage() {}
 
 func (x *DeleteExportMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -831,7 +595,7 @@ func (x *DeleteExportMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteExportMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteExportMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteExportMetadata) GetExportId() string {
@@ -841,23 +605,248 @@ func (x *DeleteExportMetadata) GetExportId() string {
 	return ""
 }
 
+type RunExportRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
+	Params         *ExportParams          `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
+	ResultFilename string                 `protobuf:"bytes,4,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
+	Since          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=since,proto3" json:"since,omitempty"`
+	Until          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=until,proto3" json:"until,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RunExportRequest) Reset() {
+	*x = RunExportRequest{}
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RunExportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RunExportRequest) ProtoMessage() {}
+
+func (x *RunExportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RunExportRequest.ProtoReflect.Descriptor instead.
+func (*RunExportRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *RunExportRequest) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *RunExportRequest) GetSinkId() string {
+	if x != nil {
+		return x.SinkId
+	}
+	return ""
+}
+
+func (x *RunExportRequest) GetParams() *ExportParams {
+	if x != nil {
+		return x.Params
+	}
+	return nil
+}
+
+func (x *RunExportRequest) GetResultFilename() string {
+	if x != nil {
+		return x.ResultFilename
+	}
+	return ""
+}
+
+func (x *RunExportRequest) GetSince() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Since
+	}
+	return nil
+}
+
+func (x *RunExportRequest) GetUntil() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Until
+	}
+	return nil
+}
+
+type RunExportDetails struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
+	Params         *ExportParams          `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
+	ResultFilename string                 `protobuf:"bytes,4,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
+	Since          *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=since,proto3" json:"since,omitempty"`
+	Until          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=until,proto3" json:"until,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RunExportDetails) Reset() {
+	*x = RunExportDetails{}
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RunExportDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RunExportDetails) ProtoMessage() {}
+
+func (x *RunExportDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RunExportDetails.ProtoReflect.Descriptor instead.
+func (*RunExportDetails) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *RunExportDetails) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *RunExportDetails) GetSinkId() string {
+	if x != nil {
+		return x.SinkId
+	}
+	return ""
+}
+
+func (x *RunExportDetails) GetParams() *ExportParams {
+	if x != nil {
+		return x.Params
+	}
+	return nil
+}
+
+func (x *RunExportDetails) GetResultFilename() string {
+	if x != nil {
+		return x.ResultFilename
+	}
+	return ""
+}
+
+func (x *RunExportDetails) GetSince() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Since
+	}
+	return nil
+}
+
+func (x *RunExportDetails) GetUntil() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Until
+	}
+	return nil
+}
+
+type RunExportMetadata struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	GroupId        string                 `protobuf:"bytes,1,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	SinkId         string                 `protobuf:"bytes,2,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
+	ResultFilename string                 `protobuf:"bytes,3,opt,name=result_filename,json=resultFilename,proto3" json:"result_filename,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RunExportMetadata) Reset() {
+	*x = RunExportMetadata{}
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RunExportMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RunExportMetadata) ProtoMessage() {}
+
+func (x *RunExportMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_logging_v1_export_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RunExportMetadata.ProtoReflect.Descriptor instead.
+func (*RunExportMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RunExportMetadata) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *RunExportMetadata) GetSinkId() string {
+	if x != nil {
+		return x.SinkId
+	}
+	return ""
+}
+
+func (x *RunExportMetadata) GetResultFilename() string {
+	if x != nil {
+		return x.ResultFilename
+	}
+	return ""
+}
+
 type ListExportOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the export to list operations for.
-	//
 	// To get a export ID make a [ExportService.List] request.
 	ExportId string `protobuf:"bytes,1,opt,name=export_id,json=exportId,proto3" json:"export_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListExportOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListExportOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.description], [operation.Operation.created_at], [operation.Operation.modified_at], [operation.Operation.created_by], [operation.Operation.done] fields.
 	// 2. An `=` operator.
@@ -933,7 +922,6 @@ type ListExportOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListOExportperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListExportOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -988,25 +976,7 @@ var File_yandex_cloud_logging_v1_export_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_logging_v1_export_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/logging/v1/export_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/logging/v1/export.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xc6\x02\n" +
-	"\x10RunExportRequest\x12'\n" +
-	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\agroupId\x12%\n" +
-	"\asink_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x06sinkId\x12C\n" +
-	"\x06params\x18\x03 \x01(\v2%.yandex.cloud.logging.v1.ExportParamsB\x04\xe8\xc71\x01R\x06params\x12-\n" +
-	"\x0fresult_filename\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x0eresultFilename\x126\n" +
-	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\x05since\x126\n" +
-	"\x05until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\x05until\"\x92\x02\n" +
-	"\x10RunExportDetails\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x17\n" +
-	"\asink_id\x18\x02 \x01(\tR\x06sinkId\x12=\n" +
-	"\x06params\x18\x03 \x01(\v2%.yandex.cloud.logging.v1.ExportParamsR\x06params\x12'\n" +
-	"\x0fresult_filename\x18\x04 \x01(\tR\x0eresultFilename\x120\n" +
-	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x05since\x120\n" +
-	"\x05until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x05until\"p\n" +
-	"\x11RunExportMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x17\n" +
-	"\asink_id\x18\x02 \x01(\tR\x06sinkId\x12'\n" +
-	"\x0fresult_filename\x18\x03 \x01(\tR\x0eresultFilename\"=\n" +
+	",yandex/cloud/logging/v1/export_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/logging/v1/export.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"=\n" +
 	"\x10GetExportRequest\x12)\n" +
 	"\texport_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\bexportId\"\xb0\x01\n" +
 	"\x12ListExportsRequest\x12)\n" +
@@ -1050,7 +1020,25 @@ const file_yandex_cloud_logging_v1_export_service_proto_rawDesc = "" +
 	"\x13DeleteExportRequest\x12)\n" +
 	"\texport_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\bexportId\"3\n" +
 	"\x14DeleteExportMetadata\x12\x1b\n" +
-	"\texport_id\x18\x01 \x01(\tR\bexportId\"\xbf\x01\n" +
+	"\texport_id\x18\x01 \x01(\tR\bexportId\"\xc6\x02\n" +
+	"\x10RunExportRequest\x12'\n" +
+	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\agroupId\x12%\n" +
+	"\asink_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x06sinkId\x12C\n" +
+	"\x06params\x18\x03 \x01(\v2%.yandex.cloud.logging.v1.ExportParamsB\x04\xe8\xc71\x01R\x06params\x12-\n" +
+	"\x0fresult_filename\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x0eresultFilename\x126\n" +
+	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\x05since\x126\n" +
+	"\x05until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\x05until\"\x92\x02\n" +
+	"\x10RunExportDetails\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x17\n" +
+	"\asink_id\x18\x02 \x01(\tR\x06sinkId\x12=\n" +
+	"\x06params\x18\x03 \x01(\v2%.yandex.cloud.logging.v1.ExportParamsR\x06params\x12'\n" +
+	"\x0fresult_filename\x18\x04 \x01(\tR\x0eresultFilename\x120\n" +
+	"\x05since\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x05since\x120\n" +
+	"\x05until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x05until\"p\n" +
+	"\x11RunExportMetadata\x12\x19\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\x12\x17\n" +
+	"\asink_id\x18\x02 \x01(\tR\x06sinkId\x12'\n" +
+	"\x0fresult_filename\x18\x03 \x01(\tR\x0eresultFilename\"\xbf\x01\n" +
 	"\x1bListExportOperationsRequest\x12)\n" +
 	"\texport_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\bexportId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -1064,9 +1052,7 @@ const file_yandex_cloud_logging_v1_export_service_proto_rawDesc = "" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xec\r\n" +
-	"\rExportService\x12\x9f\x01\n" +
-	"\x03Run\x12).yandex.cloud.logging.v1.RunExportRequest\x1a!.yandex.cloud.operation.Operation\"J\xb2\xd2*%\n" +
-	"\x11RunExportMetadata\x12\x10RunExportDetails\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/logging/v1/run-export\x12z\n" +
+	"\rExportService\x12z\n" +
 	"\x03Get\x12).yandex.cloud.logging.v1.GetExportRequest\x1a\x1f.yandex.cloud.logging.v1.Export\"'\x82\xd3\xe4\x93\x02!\x12\x1f/logging/v1/exports/{export_id}\x12~\n" +
 	"\x04List\x12+.yandex.cloud.logging.v1.ListExportsRequest\x1a,.yandex.cloud.logging.v1.ListExportsResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/logging/v1/exports\x12\x9b\x01\n" +
 	"\x06Create\x12,.yandex.cloud.logging.v1.CreateExportRequest\x1a!.yandex.cloud.operation.Operation\"@\xb2\xd2*\x1e\n" +
@@ -1074,7 +1060,9 @@ const file_yandex_cloud_logging_v1_export_service_proto_rawDesc = "" +
 	"\x06Update\x12,.yandex.cloud.logging.v1.UpdateExportRequest\x1a!.yandex.cloud.operation.Operation\"L\xb2\xd2*\x1e\n" +
 	"\x14UpdateExportMetadata\x12\x06Export\x82\xd3\xe4\x93\x02$:\x01*2\x1f/logging/v1/exports/{export_id}\x12\xb3\x01\n" +
 	"\x06Delete\x12,.yandex.cloud.logging.v1.DeleteExportRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2*-\n" +
-	"\x14DeleteExportMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02!*\x1f/logging/v1/exports/{export_id}\x12\xb1\x01\n" +
+	"\x14DeleteExportMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02!*\x1f/logging/v1/exports/{export_id}\x12\x9f\x01\n" +
+	"\x03Run\x12).yandex.cloud.logging.v1.RunExportRequest\x1a!.yandex.cloud.operation.Operation\"J\xb2\xd2*%\n" +
+	"\x11RunExportMetadata\x12\x10RunExportDetails\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/logging/v1/run-export\x12\xb1\x01\n" +
 	"\x0eListOperations\x124.yandex.cloud.logging.v1.ListExportOperationsRequest\x1a5.yandex.cloud.logging.v1.ListExportOperationsResponse\"2\x82\xd3\xe4\x93\x02,\x12*/logging/v1/exports/{export_id}/operations\x12\xb3\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"<\x82\xd3\xe4\x93\x026\x124/logging/v1/exports/{resource_id}:listAccessBindings\x12\xe2\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*9\n" +
@@ -1097,26 +1085,26 @@ func file_yandex_cloud_logging_v1_export_service_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_logging_v1_export_service_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_yandex_cloud_logging_v1_export_service_proto_goTypes = []any{
-	(*RunExportRequest)(nil),                   // 0: yandex.cloud.logging.v1.RunExportRequest
-	(*RunExportDetails)(nil),                   // 1: yandex.cloud.logging.v1.RunExportDetails
-	(*RunExportMetadata)(nil),                  // 2: yandex.cloud.logging.v1.RunExportMetadata
-	(*GetExportRequest)(nil),                   // 3: yandex.cloud.logging.v1.GetExportRequest
-	(*ListExportsRequest)(nil),                 // 4: yandex.cloud.logging.v1.ListExportsRequest
-	(*ListExportsResponse)(nil),                // 5: yandex.cloud.logging.v1.ListExportsResponse
-	(*CreateExportRequest)(nil),                // 6: yandex.cloud.logging.v1.CreateExportRequest
-	(*CreateExportMetadata)(nil),               // 7: yandex.cloud.logging.v1.CreateExportMetadata
-	(*UpdateExportRequest)(nil),                // 8: yandex.cloud.logging.v1.UpdateExportRequest
-	(*UpdateExportMetadata)(nil),               // 9: yandex.cloud.logging.v1.UpdateExportMetadata
-	(*DeleteExportRequest)(nil),                // 10: yandex.cloud.logging.v1.DeleteExportRequest
-	(*DeleteExportMetadata)(nil),               // 11: yandex.cloud.logging.v1.DeleteExportMetadata
+	(*GetExportRequest)(nil),                   // 0: yandex.cloud.logging.v1.GetExportRequest
+	(*ListExportsRequest)(nil),                 // 1: yandex.cloud.logging.v1.ListExportsRequest
+	(*ListExportsResponse)(nil),                // 2: yandex.cloud.logging.v1.ListExportsResponse
+	(*CreateExportRequest)(nil),                // 3: yandex.cloud.logging.v1.CreateExportRequest
+	(*CreateExportMetadata)(nil),               // 4: yandex.cloud.logging.v1.CreateExportMetadata
+	(*UpdateExportRequest)(nil),                // 5: yandex.cloud.logging.v1.UpdateExportRequest
+	(*UpdateExportMetadata)(nil),               // 6: yandex.cloud.logging.v1.UpdateExportMetadata
+	(*DeleteExportRequest)(nil),                // 7: yandex.cloud.logging.v1.DeleteExportRequest
+	(*DeleteExportMetadata)(nil),               // 8: yandex.cloud.logging.v1.DeleteExportMetadata
+	(*RunExportRequest)(nil),                   // 9: yandex.cloud.logging.v1.RunExportRequest
+	(*RunExportDetails)(nil),                   // 10: yandex.cloud.logging.v1.RunExportDetails
+	(*RunExportMetadata)(nil),                  // 11: yandex.cloud.logging.v1.RunExportMetadata
 	(*ListExportOperationsRequest)(nil),        // 12: yandex.cloud.logging.v1.ListExportOperationsRequest
 	(*ListExportOperationsResponse)(nil),       // 13: yandex.cloud.logging.v1.ListExportOperationsResponse
 	nil,                                        // 14: yandex.cloud.logging.v1.CreateExportRequest.LabelsEntry
 	nil,                                        // 15: yandex.cloud.logging.v1.UpdateExportRequest.LabelsEntry
-	(*ExportParams)(nil),                       // 16: yandex.cloud.logging.v1.ExportParams
-	(*timestamppb.Timestamp)(nil),              // 17: google.protobuf.Timestamp
-	(*Export)(nil),                             // 18: yandex.cloud.logging.v1.Export
-	(*fieldmaskpb.FieldMask)(nil),              // 19: google.protobuf.FieldMask
+	(*Export)(nil),                             // 16: yandex.cloud.logging.v1.Export
+	(*ExportParams)(nil),                       // 17: yandex.cloud.logging.v1.ExportParams
+	(*fieldmaskpb.FieldMask)(nil),              // 18: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),              // 19: google.protobuf.Timestamp
 	(*operation.Operation)(nil),                // 20: yandex.cloud.operation.Operation
 	(*access.ListAccessBindingsRequest)(nil),   // 21: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),    // 22: yandex.cloud.access.SetAccessBindingsRequest
@@ -1124,35 +1112,35 @@ var file_yandex_cloud_logging_v1_export_service_proto_goTypes = []any{
 	(*access.ListAccessBindingsResponse)(nil),  // 24: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_logging_v1_export_service_proto_depIdxs = []int32{
-	16, // 0: yandex.cloud.logging.v1.RunExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
-	17, // 1: yandex.cloud.logging.v1.RunExportRequest.since:type_name -> google.protobuf.Timestamp
-	17, // 2: yandex.cloud.logging.v1.RunExportRequest.until:type_name -> google.protobuf.Timestamp
-	16, // 3: yandex.cloud.logging.v1.RunExportDetails.params:type_name -> yandex.cloud.logging.v1.ExportParams
-	17, // 4: yandex.cloud.logging.v1.RunExportDetails.since:type_name -> google.protobuf.Timestamp
-	17, // 5: yandex.cloud.logging.v1.RunExportDetails.until:type_name -> google.protobuf.Timestamp
-	18, // 6: yandex.cloud.logging.v1.ListExportsResponse.exports:type_name -> yandex.cloud.logging.v1.Export
-	14, // 7: yandex.cloud.logging.v1.CreateExportRequest.labels:type_name -> yandex.cloud.logging.v1.CreateExportRequest.LabelsEntry
-	16, // 8: yandex.cloud.logging.v1.CreateExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
-	19, // 9: yandex.cloud.logging.v1.UpdateExportRequest.update_mask:type_name -> google.protobuf.FieldMask
-	15, // 10: yandex.cloud.logging.v1.UpdateExportRequest.labels:type_name -> yandex.cloud.logging.v1.UpdateExportRequest.LabelsEntry
-	16, // 11: yandex.cloud.logging.v1.UpdateExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
+	16, // 0: yandex.cloud.logging.v1.ListExportsResponse.exports:type_name -> yandex.cloud.logging.v1.Export
+	14, // 1: yandex.cloud.logging.v1.CreateExportRequest.labels:type_name -> yandex.cloud.logging.v1.CreateExportRequest.LabelsEntry
+	17, // 2: yandex.cloud.logging.v1.CreateExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
+	18, // 3: yandex.cloud.logging.v1.UpdateExportRequest.update_mask:type_name -> google.protobuf.FieldMask
+	15, // 4: yandex.cloud.logging.v1.UpdateExportRequest.labels:type_name -> yandex.cloud.logging.v1.UpdateExportRequest.LabelsEntry
+	17, // 5: yandex.cloud.logging.v1.UpdateExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
+	17, // 6: yandex.cloud.logging.v1.RunExportRequest.params:type_name -> yandex.cloud.logging.v1.ExportParams
+	19, // 7: yandex.cloud.logging.v1.RunExportRequest.since:type_name -> google.protobuf.Timestamp
+	19, // 8: yandex.cloud.logging.v1.RunExportRequest.until:type_name -> google.protobuf.Timestamp
+	17, // 9: yandex.cloud.logging.v1.RunExportDetails.params:type_name -> yandex.cloud.logging.v1.ExportParams
+	19, // 10: yandex.cloud.logging.v1.RunExportDetails.since:type_name -> google.protobuf.Timestamp
+	19, // 11: yandex.cloud.logging.v1.RunExportDetails.until:type_name -> google.protobuf.Timestamp
 	20, // 12: yandex.cloud.logging.v1.ListExportOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 13: yandex.cloud.logging.v1.ExportService.Run:input_type -> yandex.cloud.logging.v1.RunExportRequest
-	3,  // 14: yandex.cloud.logging.v1.ExportService.Get:input_type -> yandex.cloud.logging.v1.GetExportRequest
-	4,  // 15: yandex.cloud.logging.v1.ExportService.List:input_type -> yandex.cloud.logging.v1.ListExportsRequest
-	6,  // 16: yandex.cloud.logging.v1.ExportService.Create:input_type -> yandex.cloud.logging.v1.CreateExportRequest
-	8,  // 17: yandex.cloud.logging.v1.ExportService.Update:input_type -> yandex.cloud.logging.v1.UpdateExportRequest
-	10, // 18: yandex.cloud.logging.v1.ExportService.Delete:input_type -> yandex.cloud.logging.v1.DeleteExportRequest
+	0,  // 13: yandex.cloud.logging.v1.ExportService.Get:input_type -> yandex.cloud.logging.v1.GetExportRequest
+	1,  // 14: yandex.cloud.logging.v1.ExportService.List:input_type -> yandex.cloud.logging.v1.ListExportsRequest
+	3,  // 15: yandex.cloud.logging.v1.ExportService.Create:input_type -> yandex.cloud.logging.v1.CreateExportRequest
+	5,  // 16: yandex.cloud.logging.v1.ExportService.Update:input_type -> yandex.cloud.logging.v1.UpdateExportRequest
+	7,  // 17: yandex.cloud.logging.v1.ExportService.Delete:input_type -> yandex.cloud.logging.v1.DeleteExportRequest
+	9,  // 18: yandex.cloud.logging.v1.ExportService.Run:input_type -> yandex.cloud.logging.v1.RunExportRequest
 	12, // 19: yandex.cloud.logging.v1.ExportService.ListOperations:input_type -> yandex.cloud.logging.v1.ListExportOperationsRequest
 	21, // 20: yandex.cloud.logging.v1.ExportService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	22, // 21: yandex.cloud.logging.v1.ExportService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	23, // 22: yandex.cloud.logging.v1.ExportService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	20, // 23: yandex.cloud.logging.v1.ExportService.Run:output_type -> yandex.cloud.operation.Operation
-	18, // 24: yandex.cloud.logging.v1.ExportService.Get:output_type -> yandex.cloud.logging.v1.Export
-	5,  // 25: yandex.cloud.logging.v1.ExportService.List:output_type -> yandex.cloud.logging.v1.ListExportsResponse
-	20, // 26: yandex.cloud.logging.v1.ExportService.Create:output_type -> yandex.cloud.operation.Operation
-	20, // 27: yandex.cloud.logging.v1.ExportService.Update:output_type -> yandex.cloud.operation.Operation
-	20, // 28: yandex.cloud.logging.v1.ExportService.Delete:output_type -> yandex.cloud.operation.Operation
+	16, // 23: yandex.cloud.logging.v1.ExportService.Get:output_type -> yandex.cloud.logging.v1.Export
+	2,  // 24: yandex.cloud.logging.v1.ExportService.List:output_type -> yandex.cloud.logging.v1.ListExportsResponse
+	20, // 25: yandex.cloud.logging.v1.ExportService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 26: yandex.cloud.logging.v1.ExportService.Update:output_type -> yandex.cloud.operation.Operation
+	20, // 27: yandex.cloud.logging.v1.ExportService.Delete:output_type -> yandex.cloud.operation.Operation
+	20, // 28: yandex.cloud.logging.v1.ExportService.Run:output_type -> yandex.cloud.operation.Operation
 	13, // 29: yandex.cloud.logging.v1.ExportService.ListOperations:output_type -> yandex.cloud.logging.v1.ListExportOperationsResponse
 	24, // 30: yandex.cloud.logging.v1.ExportService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
 	20, // 31: yandex.cloud.logging.v1.ExportService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation

@@ -850,13 +850,13 @@ func (x *SetUnitBalanceRequest) GetUnitBalance() *wrapperspb.Int64Value {
 
 type ProjectExecutionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project to execute notebook/cell in.
-	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//
 	//	*ProjectExecutionRequest_NotebookId
 	//	*ProjectExecutionRequest_CellId
 	Target isProjectExecutionRequest_Target `protobuf_oneof:"target"`
+	// ID of the project to execute notebook/cell in.
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Values of input variables.
 	InputVariables *structpb.Struct `protobuf:"bytes,4,opt,name=input_variables,json=inputVariables,proto3" json:"input_variables,omitempty"`
 	// Names of output variables.
@@ -895,13 +895,6 @@ func (*ProjectExecutionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v1_project_service_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *ProjectExecutionRequest) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
 func (x *ProjectExecutionRequest) GetTarget() isProjectExecutionRequest_Target {
 	if x != nil {
 		return x.Target
@@ -923,6 +916,13 @@ func (x *ProjectExecutionRequest) GetCellId() string {
 		if x, ok := x.Target.(*ProjectExecutionRequest_CellId); ok {
 			return x.CellId
 		}
+	}
+	return ""
+}
+
+func (x *ProjectExecutionRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
 	}
 	return ""
 }
@@ -961,13 +961,13 @@ func (*ProjectExecutionRequest_CellId) isProjectExecutionRequest_Target() {}
 
 type ProjectExecutionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project in which notebook is being executed.
-	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//
 	//	*ProjectExecutionMetadata_NotebookId
 	//	*ProjectExecutionMetadata_CellId
-	Target        isProjectExecutionMetadata_Target `protobuf_oneof:"target"`
+	Target isProjectExecutionMetadata_Target `protobuf_oneof:"target"`
+	// ID of the project in which notebook is being executed.
+	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1002,13 +1002,6 @@ func (*ProjectExecutionMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v1_project_service_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *ProjectExecutionMetadata) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
 func (x *ProjectExecutionMetadata) GetTarget() isProjectExecutionMetadata_Target {
 	if x != nil {
 		return x.Target
@@ -1030,6 +1023,13 @@ func (x *ProjectExecutionMetadata) GetCellId() string {
 		if x, ok := x.Target.(*ProjectExecutionMetadata_CellId); ok {
 			return x.CellId
 		}
+	}
+	return ""
+}
+
+func (x *ProjectExecutionMetadata) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
 	}
 	return ""
 }
@@ -1092,7 +1092,7 @@ var File_yandex_cloud_datasphere_v1_project_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_datasphere_v1_project_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/datasphere/v1/project_service.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a(yandex/cloud/datasphere/v1/project.proto\"\xbd\x02\n" +
+	"0yandex/cloud/datasphere/v1/project_service.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/datasphere/v1/project.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xbd\x02\n" +
 	"\x14CreateProjectRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12?\n" +
 	"\x04name\x18\x02 \x01(\tB+\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -1152,22 +1152,22 @@ const file_yandex_cloud_datasphere_v1_project_service_proto_rawDesc = "" +
 	"project_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=200R\tprojectId\x12>\n" +
 	"\funit_balance\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\vunitBalance\"\xa1\x02\n" +
 	"\x17ProjectExecutionRequest\x12,\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=200R\tprojectId\x12,\n" +
 	"\vnotebook_id\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\n" +
 	"notebookId\x12$\n" +
-	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellId\x12@\n" +
+	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellId\x12,\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=200R\tprojectId\x12@\n" +
 	"\x0finput_variables\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x0einputVariables\x122\n" +
 	"\x15output_variable_names\x18\x05 \x03(\tR\x13outputVariableNamesB\x0e\n" +
 	"\x06target\x12\x04\xc0\xc11\x01\"\x9d\x01\n" +
-	"\x18ProjectExecutionMetadata\x12\x1d\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tR\tprojectId\x12,\n" +
+	"\x18ProjectExecutionMetadata\x12,\n" +
 	"\vnotebook_id\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\n" +
 	"notebookId\x12$\n" +
-	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellIdB\x0e\n" +
-	"\x06target\x12\x04\xc0\xc11\x01\"&\n" +
-	"\x18ProjectExecutionResponseJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x032\xa5\f\n" +
+	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellId\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectIdB\x0e\n" +
+	"\x06target\x12\x04\xc0\xc11\x01\"\x1a\n" +
+	"\x18ProjectExecutionResponse2\xa5\f\n" +
 	"\x0eProjectService\x12\xa5\x01\n" +
 	"\x06Create\x120.yandex.cloud.datasphere.v1.CreateProjectRequest\x1a!.yandex.cloud.operation.Operation\"F\xb2\xd2* \n" +
 	"\x15CreateProjectMetadata\x12\aProject\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/datasphere/v1/projects\x12\xb2\x01\n" +

@@ -24,76 +24,59 @@ const (
 type PostgresObjectTransferSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Sequences
-	//
 	// CREATE SEQUENCE ...
 	Sequence ObjectTransferStage `protobuf:"varint,1,opt,name=sequence,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"sequence,omitempty"`
 	// Owned sequences
-	//
 	// CREATE SEQUENCE ... OWNED BY ...
 	SequenceOwnedBy ObjectTransferStage `protobuf:"varint,2,opt,name=sequence_owned_by,json=sequenceOwnedBy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"sequence_owned_by,omitempty"`
 	// Tables
-	//
 	// CREATE TABLE ...
 	Table ObjectTransferStage `protobuf:"varint,3,opt,name=table,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"table,omitempty"`
 	// Primary keys
-	//
 	// ALTER TABLE ... ADD PRIMARY KEY ...
 	PrimaryKey ObjectTransferStage `protobuf:"varint,4,opt,name=primary_key,json=primaryKey,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"primary_key,omitempty"`
 	// Foreign keys
-	//
 	// ALTER TABLE ... ADD FOREIGN KEY ...
 	FkConstraint ObjectTransferStage `protobuf:"varint,5,opt,name=fk_constraint,json=fkConstraint,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"fk_constraint,omitempty"`
 	// Default values
-	//
 	// ALTER TABLE ... ALTER COLUMN ... SET DEFAULT ...
 	DefaultValues ObjectTransferStage `protobuf:"varint,6,opt,name=default_values,json=defaultValues,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"default_values,omitempty"`
 	// Constraints
-	//
 	// ALTER TABLE ... ADD CONSTRAINT ...
 	Constraint ObjectTransferStage `protobuf:"varint,7,opt,name=constraint,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"constraint,omitempty"`
 	// Indexes
-	//
 	// CREATE INDEX ...
 	Index ObjectTransferStage `protobuf:"varint,8,opt,name=index,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"index,omitempty"`
 	// Views
-	//
 	// CREATE VIEW ...
 	View ObjectTransferStage `protobuf:"varint,9,opt,name=view,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"view,omitempty"`
 	// Functions
-	//
 	// CREATE FUNCTION ...
 	Function ObjectTransferStage `protobuf:"varint,10,opt,name=function,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"function,omitempty"`
 	// Triggers
-	//
 	// CREATE TRIGGER ...
 	Trigger ObjectTransferStage `protobuf:"varint,11,opt,name=trigger,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"trigger,omitempty"`
 	// Types
-	//
 	// CREATE TYPE ...
 	Type ObjectTransferStage `protobuf:"varint,12,opt,name=type,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"type,omitempty"`
 	// Rules
-	//
 	// CREATE RULE ...
 	Rule ObjectTransferStage `protobuf:"varint,13,opt,name=rule,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"rule,omitempty"`
 	// Collations
-	//
 	// CREATE COLLATION ...
 	Collation ObjectTransferStage `protobuf:"varint,14,opt,name=collation,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"collation,omitempty"`
 	// Policies
-	//
 	// CREATE POLICY ...
 	Policy ObjectTransferStage `protobuf:"varint,15,opt,name=policy,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"policy,omitempty"`
 	// Casts
-	//
 	// CREATE CAST ...
 	Cast ObjectTransferStage `protobuf:"varint,16,opt,name=cast,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"cast,omitempty"`
 	// Materialized views
-	//
 	// CREATE MATERIALIZED VIEW ...
 	MaterializedView ObjectTransferStage `protobuf:"varint,17,opt,name=materialized_view,json=materializedView,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"materialized_view,omitempty"`
-	SequenceSet   ObjectTransferStage `protobuf:"varint,18,opt,name=sequence_set,json=sequenceSet,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"sequence_set,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	SequenceSet      ObjectTransferStage `protobuf:"varint,18,opt,name=sequence_set,json=sequenceSet,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"sequence_set,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PostgresObjectTransferSettings) Reset() {

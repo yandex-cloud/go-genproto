@@ -92,6 +92,13 @@ func (Stream_StreamStatus) EnumDescriptor() ([]byte, []int) {
 // A stream is a real-time video broadcast linked to a specific stream line.
 type Stream struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the stream scheduling type.
+	//
+	// Types that are valid to be assigned to StreamType:
+	//
+	//	*Stream_OnDemand
+	//	*Stream_Schedule
+	StreamType isStream_StreamType `protobuf_oneof:"stream_type"`
 	// Unique identifier of the stream.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Identifier of the channel where the stream is created and managed.
@@ -115,13 +122,6 @@ type Stream struct {
 	// Controls automatic publishing of the stream when it's ready.
 	// When set to true, automatically switches status from READY to ONAIR.
 	AutoPublish *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=auto_publish,json=autoPublish,proto3" json:"auto_publish,omitempty"`
-	// Specifies the stream scheduling type.
-	//
-	// Types that are valid to be assigned to StreamType:
-	//
-	//	*Stream_OnDemand
-	//	*Stream_Schedule
-	StreamType isStream_StreamType `protobuf_oneof:"stream_type"`
 	// Timestamp when the stream was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the stream or its metadata.
@@ -163,6 +163,31 @@ func (x *Stream) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Stream.ProtoReflect.Descriptor instead.
 func (*Stream) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Stream) GetStreamType() isStream_StreamType {
+	if x != nil {
+		return x.StreamType
+	}
+	return nil
+}
+
+func (x *Stream) GetOnDemand() *OnDemand {
+	if x != nil {
+		if x, ok := x.StreamType.(*Stream_OnDemand); ok {
+			return x.OnDemand
+		}
+	}
+	return nil
+}
+
+func (x *Stream) GetSchedule() *Schedule {
+	if x != nil {
+		if x, ok := x.StreamType.(*Stream_Schedule); ok {
+			return x.Schedule
+		}
+	}
+	return nil
 }
 
 func (x *Stream) GetId() string {
@@ -238,31 +263,6 @@ func (x *Stream) GetFinishTime() *timestamppb.Timestamp {
 func (x *Stream) GetAutoPublish() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.AutoPublish
-	}
-	return nil
-}
-
-func (x *Stream) GetStreamType() isStream_StreamType {
-	if x != nil {
-		return x.StreamType
-	}
-	return nil
-}
-
-func (x *Stream) GetOnDemand() *OnDemand {
-	if x != nil {
-		if x, ok := x.StreamType.(*Stream_OnDemand); ok {
-			return x.OnDemand
-		}
-	}
-	return nil
-}
-
-func (x *Stream) GetSchedule() *Schedule {
-	if x != nil {
-		if x, ok := x.StreamType.(*Stream_Schedule); ok {
-			return x.Schedule
-		}
 	}
 	return nil
 }
@@ -406,7 +406,9 @@ var File_yandex_cloud_video_v1_stream_proto protoreflect.FileDescriptor
 const file_yandex_cloud_video_v1_stream_proto_rawDesc = "" +
 	"\n" +
 	"\"yandex/cloud/video/v1/stream.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xf4\a\n" +
-	"\x06Stream\x12\x0e\n" +
+	"\x06Stream\x12?\n" +
+	"\ton_demand\x18\xe8\a \x01(\v2\x1f.yandex.cloud.video.v1.OnDemandH\x00R\bonDemand\x12>\n" +
+	"\bschedule\x18\xe9\a \x01(\v2\x1f.yandex.cloud.video.v1.ScheduleH\x00R\bschedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x17\n" +
@@ -421,9 +423,7 @@ const file_yandex_cloud_video_v1_stream_proto_rawDesc = "" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\vpublishTime\x12;\n" +
 	"\vfinish_time\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"finishTime\x12=\n" +
-	"\fauto_publish\x18\f \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x12?\n" +
-	"\ton_demand\x18\xe8\a \x01(\v2\x1f.yandex.cloud.video.v1.OnDemandH\x00R\bonDemand\x12>\n" +
-	"\bschedule\x18\xe9\a \x01(\v2\x1f.yandex.cloud.video.v1.ScheduleH\x00R\bschedule\x129\n" +
+	"\fauto_publish\x18\f \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -473,13 +473,13 @@ var file_yandex_cloud_video_v1_stream_proto_goTypes = []any{
 	(*wrapperspb.BoolValue)(nil),  // 6: google.protobuf.BoolValue
 }
 var file_yandex_cloud_video_v1_stream_proto_depIdxs = []int32{
-	0,  // 0: yandex.cloud.video.v1.Stream.status:type_name -> yandex.cloud.video.v1.Stream.StreamStatus
-	5,  // 1: yandex.cloud.video.v1.Stream.start_time:type_name -> google.protobuf.Timestamp
-	5,  // 2: yandex.cloud.video.v1.Stream.publish_time:type_name -> google.protobuf.Timestamp
-	5,  // 3: yandex.cloud.video.v1.Stream.finish_time:type_name -> google.protobuf.Timestamp
-	6,  // 4: yandex.cloud.video.v1.Stream.auto_publish:type_name -> google.protobuf.BoolValue
-	2,  // 5: yandex.cloud.video.v1.Stream.on_demand:type_name -> yandex.cloud.video.v1.OnDemand
-	3,  // 6: yandex.cloud.video.v1.Stream.schedule:type_name -> yandex.cloud.video.v1.Schedule
+	2,  // 0: yandex.cloud.video.v1.Stream.on_demand:type_name -> yandex.cloud.video.v1.OnDemand
+	3,  // 1: yandex.cloud.video.v1.Stream.schedule:type_name -> yandex.cloud.video.v1.Schedule
+	0,  // 2: yandex.cloud.video.v1.Stream.status:type_name -> yandex.cloud.video.v1.Stream.StreamStatus
+	5,  // 3: yandex.cloud.video.v1.Stream.start_time:type_name -> google.protobuf.Timestamp
+	5,  // 4: yandex.cloud.video.v1.Stream.publish_time:type_name -> google.protobuf.Timestamp
+	5,  // 5: yandex.cloud.video.v1.Stream.finish_time:type_name -> google.protobuf.Timestamp
+	6,  // 6: yandex.cloud.video.v1.Stream.auto_publish:type_name -> google.protobuf.BoolValue
 	5,  // 7: yandex.cloud.video.v1.Stream.created_at:type_name -> google.protobuf.Timestamp
 	5,  // 8: yandex.cloud.video.v1.Stream.updated_at:type_name -> google.protobuf.Timestamp
 	4,  // 9: yandex.cloud.video.v1.Stream.labels:type_name -> yandex.cloud.video.v1.Stream.LabelsEntry

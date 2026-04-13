@@ -29,31 +29,24 @@ type LogLevel_Level int32
 
 const (
 	// Default log level.
-	//
 	// Equivalent to not specifying log level at all.
 	LogLevel_LEVEL_UNSPECIFIED LogLevel_Level = 0
 	// Trace log level.
-	//
 	// Possible use case: verbose logging of some business logic.
 	LogLevel_TRACE LogLevel_Level = 1
 	// Debug log level.
-	//
 	// Possible use case: debugging special cases in application logic.
 	LogLevel_DEBUG LogLevel_Level = 2
 	// Info log level.
-	//
 	// Mostly used for information messages.
 	LogLevel_INFO LogLevel_Level = 3
 	// Warn log level.
-	//
 	// May be used to alert about significant events.
 	LogLevel_WARN LogLevel_Level = 4
 	// Error log level.
-	//
 	// May be used to alert about errors in infrastructure, logic, etc.
 	LogLevel_ERROR LogLevel_Level = 5
 	// Fatal log level.
-	//
 	// May be used to alert about unrecoverable failures and events.
 	LogLevel_FATAL LogLevel_Level = 6
 )
@@ -110,11 +103,9 @@ func (LogLevel_Level) EnumDescriptor() ([]byte, []int) {
 type LogEntry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique entry ID.
-	//
 	// Useful for logs deduplication.
 	Uid string `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
 	// Entry resource specification.
-	//
 	// May contain information about source service and resource ID.
 	// Also may be provided by the user.
 	Resource *LogEntryResource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
@@ -123,11 +114,9 @@ type LogEntry struct {
 	// Entry ingestion time observed by [LogIngestionService].
 	IngestedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=ingested_at,json=ingestedAt,proto3" json:"ingested_at,omitempty"`
 	// Entry save time.
-	//
 	// Entry is ready to be read since this moment.
 	SavedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=saved_at,json=savedAt,proto3" json:"saved_at,omitempty"`
 	// Entry severity.
-	//
 	// See [LogLevel.Level] for details.
 	Level LogLevel_Level `protobuf:"varint,6,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
 	// Entry text message.
@@ -238,7 +227,6 @@ type IncomingLogEntry struct {
 	// Timestamp of the entry.
 	Timestamp *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	// Entry severity.
-	//
 	// See [LogLevel.Level] for details.
 	Level LogLevel_Level `protobuf:"varint,2,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
 	// Entry text message.
@@ -320,7 +308,6 @@ type LogEntryDefaults struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Default entry severity.
 	// Will be applied if entry level is unspecified.
-	//
 	// See [LogLevel.Level] for details.
 	Level LogLevel_Level `protobuf:"varint,2,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
 	// Default entry annotation.
@@ -473,7 +460,6 @@ func (*Destination_FolderId) isDestination_Destination() {}
 type LogLevel struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Entry level.
-	//
 	// See [Level] for possible values.
 	Level         LogLevel_Level `protobuf:"varint,1,opt,name=level,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -540,14 +526,14 @@ const file_yandex_cloud_logging_v1_log_entry_proto_rawDesc = "" +
 	"\amessage\x18\x03 \x01(\tB\f\xba\xc81\b<=819200R\amessage\x12H\n" +
 	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\f\xba\xc81\b<=819200R\vjsonPayload\x12)\n" +
 	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=63R\n" +
-	"streamName\"\xcb\x01\n" +
+	"streamName\"\xd1\x01\n" +
 	"\x10LogEntryDefaults\x12=\n" +
 	"\x05level\x18\x02 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12G\n" +
 	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\v\xba\xc81\a<=65536R\vjsonPayload\x12)\n" +
 	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=63R\n" +
-	"streamNameJ\x04\b\x03\x10\x04\"\xaf\x01\n" +
-	"\vDestination\x12G\n" +
-	"\flog_group_id\x18\x01 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
+	"streamNameJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x04\"\xb7\x01\n" +
+	"\vDestination\x12O\n" +
+	"\flog_group_id\x18\x01 \x01(\tB+\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?\x8a\xc81\x04<=63H\x00R\n" +
 	"logGroupId\x12B\n" +
 	"\tfolder_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderIdB\x13\n" +
 	"\vdestination\x12\x04\xc0\xc11\x01\"\xa9\x01\n" +

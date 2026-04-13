@@ -26,15 +26,15 @@ const (
 // Thumbnails provide preview images for channels, streams, episodes, videos, and stream lines.
 type Thumbnail struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Unique identifier of the thumbnail.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Identifier of the channel where the thumbnail is created and managed.
-	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*Thumbnail_EpisodeId
 	//	*Thumbnail_VideoId
 	ParentId isThumbnail_ParentId `protobuf_oneof:"parent_id"`
+	// Unique identifier of the thumbnail.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Identifier of the channel where the thumbnail is created and managed.
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Timestamp when the thumbnail was initially created in the system.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -71,20 +71,6 @@ func (*Thumbnail) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_thumbnail_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Thumbnail) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *Thumbnail) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
-	}
-	return ""
-}
-
 func (x *Thumbnail) GetParentId() isThumbnail_ParentId {
 	if x != nil {
 		return x.ParentId
@@ -106,6 +92,20 @@ func (x *Thumbnail) GetVideoId() string {
 		if x, ok := x.ParentId.(*Thumbnail_VideoId); ok {
 			return x.VideoId
 		}
+	}
+	return ""
+}
+
+func (x *Thumbnail) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Thumbnail) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
 	}
 	return ""
 }
@@ -139,17 +139,17 @@ var File_yandex_cloud_video_v1_thumbnail_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_thumbnail_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/video/v1/thumbnail.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe7\x01\n" +
-	"\tThumbnail\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\x12 \n" +
+	"%yandex/cloud/video/v1/thumbnail.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcf\x01\n" +
+	"\tThumbnail\x12 \n" +
 	"\n" +
 	"episode_id\x18\xeb\a \x01(\tH\x00R\tepisodeId\x12\x1c\n" +
-	"\bvideo_id\x18\xec\a \x01(\tH\x00R\avideoId\x129\n" +
+	"\bvideo_id\x18\xec\a \x01(\tH\x00R\avideoId\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x02 \x01(\tR\tchannelId\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB\v\n" +
-	"\tparent_idJ\x06\b\xe8\a\x10\xe9\aJ\x06\b\xe9\a\x10\xea\aJ\x04\b\x03\x10dJ\x05\be\x10\xe8\aJ\x06\b\xea\a\x10\xeb\aB\\\n" +
+	"\tparent_idJ\x04\b\x03\x10dJ\x05\be\x10\xeb\aB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (

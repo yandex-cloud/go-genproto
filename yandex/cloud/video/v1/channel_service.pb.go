@@ -91,13 +91,10 @@ type ListChannelsRequest struct {
 	// Expressions consist of terms connected by logical operators.
 	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
 	// with inner quotes being backslash-escaped.
-	//
 	// Supported logical operators: ["AND", "OR"].
 	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
 	// Parentheses can be used to group logical expressions.
-	//
 	// Example: `title:'news' AND id!='channel-123'`
-	//
 	// Filterable fields: ["id", "title"].
 	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -706,7 +703,7 @@ var File_yandex_cloud_video_v1_channel_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_channel_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/video/v1/channel_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a#yandex/cloud/video/v1/channel.proto\"@\n" +
+	"+yandex/cloud/video/v1/channel_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a#yandex/cloud/video/v1/channel.proto\"@\n" +
 	"\x11GetChannelRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\"\xef\x01\n" +

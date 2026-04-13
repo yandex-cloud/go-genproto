@@ -187,7 +187,7 @@ var File_yandex_cloud_datasphere_v2_secret_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datasphere_v2_secret_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/datasphere/v2/secret.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x03\n" +
+	"'yandex/cloud/datasphere/v2/secret.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1fgoogle/protobuf/timestamp.proto\"\x90\x03\n" +
 	"\x06Secret\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -202,8 +202,7 @@ const file_yandex_cloud_datasphere_v2_secret_proto_rawDesc = "" +
 	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\tJ\x04\b\n" +
-	"\x10\v\"g\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"g\n" +
 	"\x0fDecryptedSecret\x12:\n" +
 	"\x06secret\x18\x01 \x01(\v2\".yandex.cloud.datasphere.v2.SecretR\x06secret\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontentBk\n" +

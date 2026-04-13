@@ -12,6 +12,18 @@ func (m *Episode) SetAccessRights(v Episode_AccessRights) {
 	m.AccessRights = v
 }
 
+func (m *Episode) SetPublicAccess(v *EpisodePublicAccessRights) {
+	m.AccessRights = &Episode_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *Episode) SetSignUrlAccess(v *EpisodeSignURLAccessRights) {
+	m.AccessRights = &Episode_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *Episode) SetId(v string) {
 	m.Id = v
 }
@@ -54,18 +66,6 @@ func (m *Episode) SetVisibilityStatus(v Episode_VisibilityStatus) {
 
 func (m *Episode) SetStylePresetId(v string) {
 	m.StylePresetId = v
-}
-
-func (m *Episode) SetPublicAccess(v *EpisodePublicAccessRights) {
-	m.AccessRights = &Episode_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *Episode) SetSignUrlAccess(v *EpisodeSignURLAccessRights) {
-	m.AccessRights = &Episode_SignUrlAccess{
-		SignUrlAccess: v,
-	}
 }
 
 func (m *Episode) SetCreatedAt(v *timestamppb.Timestamp) {

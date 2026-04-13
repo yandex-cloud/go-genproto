@@ -34,7 +34,6 @@ type CreateTransferRequest struct {
 	// Description of the transfer.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder to create the transfer in.
-	//
 	// To get the folder ID, make a
 	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string       `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -43,7 +42,6 @@ type CreateTransferRequest struct {
 	// The transfer name. Must be unique within the folder.
 	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	// Transfer labels as `key:value` pairs.
-	//
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels             map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -229,7 +227,6 @@ type UpdateTransferRequest struct {
 	// the new value replaces the old one instead of being appended to the old one.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,5,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Transfer labels as `key:value` pairs.
-	//
 	// For details about the concept, see [documentation]({{ api-url-prefix
 	// }}/resource-manager/concepts/labels).
 	Labels             map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -477,7 +474,6 @@ func (x *DeleteTransferMetadata) GetTransferId() string {
 type ListTransfersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the folder containing the transfers to be listed.
-	//
 	// To get the folder ID, make a
 	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -612,7 +608,6 @@ func (x *ListTransfersResponse) GetNextPageToken() string {
 type GetTransferRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the transfer to be returned.
-	//
 	// To get the list of all available transfers, make a [List] request.
 	TransferId    string `protobuf:"bytes,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -659,7 +654,6 @@ func (x *GetTransferRequest) GetTransferId() string {
 type DeactivateTransferRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the transfer to be deactivated.
-	//
 	// To get the list of all available transfers, make a [List] request.
 	TransferId    string `protobuf:"bytes,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -750,7 +744,6 @@ func (x *DeactivateTransferMetadata) GetTransferId() string {
 type ActivateTransferRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Identifier of the transfer to be activated.
-	//
 	// To get the list of all available transfers, make a [List] request.
 	TransferId    string `protobuf:"bytes,1,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -842,7 +835,7 @@ var File_yandex_cloud_datatransfer_v1_transfer_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_datatransfer_v1_transfer_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/datatransfer/v1/transfer_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a+yandex/cloud/datatransfer/v1/transfer.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\x9b\x06\n" +
+	"3yandex/cloud/datatransfer/v1/transfer_service.proto\x12\x1cyandex.cloud.datatransfer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/datatransfer/v1/transfer.proto\x1a&yandex/cloud/operation/operation.proto\"\x9b\x06\n" +
 	"\x15CreateTransferRequest\x12\x1b\n" +
 	"\tsource_id\x18\x01 \x01(\tR\bsourceId\x12\x1b\n" +
 	"\ttarget_id\x18\x02 \x01(\tR\btargetId\x12 \n" +

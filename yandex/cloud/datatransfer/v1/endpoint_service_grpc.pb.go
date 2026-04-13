@@ -35,7 +35,6 @@ const (
 // }}/data-transfer/concepts/#endpoint).
 type EndpointServiceClient interface {
 	// Returns the specified endpoint.
-	//
 	// To get the list of all available endpoints, make a [List] request.
 	Get(ctx context.Context, in *GetEndpointRequest, opts ...grpc.CallOption) (*Endpoint, error)
 	// Lists endpoints in the specified folder.
@@ -114,7 +113,6 @@ func (c *endpointServiceClient) Delete(ctx context.Context, in *DeleteEndpointRe
 // }}/data-transfer/concepts/#endpoint).
 type EndpointServiceServer interface {
 	// Returns the specified endpoint.
-	//
 	// To get the list of all available endpoints, make a [List] request.
 	Get(context.Context, *GetEndpointRequest) (*Endpoint, error)
 	// Lists endpoints in the specified folder.

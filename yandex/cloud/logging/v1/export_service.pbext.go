@@ -8,66 +8,6 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (m *RunExportRequest) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *RunExportRequest) SetSinkId(v string) {
-	m.SinkId = v
-}
-
-func (m *RunExportRequest) SetParams(v *ExportParams) {
-	m.Params = v
-}
-
-func (m *RunExportRequest) SetResultFilename(v string) {
-	m.ResultFilename = v
-}
-
-func (m *RunExportRequest) SetSince(v *timestamppb.Timestamp) {
-	m.Since = v
-}
-
-func (m *RunExportRequest) SetUntil(v *timestamppb.Timestamp) {
-	m.Until = v
-}
-
-func (m *RunExportDetails) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *RunExportDetails) SetSinkId(v string) {
-	m.SinkId = v
-}
-
-func (m *RunExportDetails) SetParams(v *ExportParams) {
-	m.Params = v
-}
-
-func (m *RunExportDetails) SetResultFilename(v string) {
-	m.ResultFilename = v
-}
-
-func (m *RunExportDetails) SetSince(v *timestamppb.Timestamp) {
-	m.Since = v
-}
-
-func (m *RunExportDetails) SetUntil(v *timestamppb.Timestamp) {
-	m.Until = v
-}
-
-func (m *RunExportMetadata) SetGroupId(v string) {
-	m.GroupId = v
-}
-
-func (m *RunExportMetadata) SetSinkId(v string) {
-	m.SinkId = v
-}
-
-func (m *RunExportMetadata) SetResultFilename(v string) {
-	m.ResultFilename = v
-}
-
 func (m *GetExportRequest) SetExportId(v string) {
 	m.ExportId = v
 }
@@ -170,6 +110,66 @@ func (m *DeleteExportRequest) SetExportId(v string) {
 
 func (m *DeleteExportMetadata) SetExportId(v string) {
 	m.ExportId = v
+}
+
+func (m *RunExportRequest) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *RunExportRequest) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *RunExportRequest) SetParams(v *ExportParams) {
+	m.Params = v
+}
+
+func (m *RunExportRequest) SetResultFilename(v string) {
+	m.ResultFilename = v
+}
+
+func (m *RunExportRequest) SetSince(v *timestamppb.Timestamp) {
+	m.Since = v
+}
+
+func (m *RunExportRequest) SetUntil(v *timestamppb.Timestamp) {
+	m.Until = v
+}
+
+func (m *RunExportDetails) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *RunExportDetails) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *RunExportDetails) SetParams(v *ExportParams) {
+	m.Params = v
+}
+
+func (m *RunExportDetails) SetResultFilename(v string) {
+	m.ResultFilename = v
+}
+
+func (m *RunExportDetails) SetSince(v *timestamppb.Timestamp) {
+	m.Since = v
+}
+
+func (m *RunExportDetails) SetUntil(v *timestamppb.Timestamp) {
+	m.Until = v
+}
+
+func (m *RunExportMetadata) SetGroupId(v string) {
+	m.GroupId = v
+}
+
+func (m *RunExportMetadata) SetSinkId(v string) {
+	m.SinkId = v
+}
+
+func (m *RunExportMetadata) SetResultFilename(v string) {
+	m.ResultFilename = v
 }
 
 func (m *ListExportOperationsRequest) SetExportId(v string) {

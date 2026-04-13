@@ -39,7 +39,6 @@ const (
 // A set of methods for managing log sinks.
 type SinkServiceClient interface {
 	// Returns the specified sink.
-	//
 	// To get the list of all available sinks, make a [List] request.
 	Get(ctx context.Context, in *GetSinkRequest, opts ...grpc.CallOption) (*Sink, error)
 	// Retrieves the list of sinks in the specified folder.
@@ -165,7 +164,6 @@ func (c *sinkServiceClient) UpdateAccessBindings(ctx context.Context, in *access
 // A set of methods for managing log sinks.
 type SinkServiceServer interface {
 	// Returns the specified sink.
-	//
 	// To get the list of all available sinks, make a [List] request.
 	Get(context.Context, *GetSinkRequest) (*Sink, error)
 	// Retrieves the list of sinks in the specified folder.

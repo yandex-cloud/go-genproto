@@ -253,7 +253,7 @@ var File_yandex_cloud_datasphere_v1_project_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_datasphere_v1_project_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/datasphere/v1/project.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9b\x05\n" +
+	"(yandex/cloud/datasphere/v1/project.proto\x12\x1ayandex.cloud.datasphere.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa1\x05\n" +
 	"\aProject\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -267,10 +267,10 @@ const file_yandex_cloud_datasphere_v1_project_proto_rawDesc = "" +
 	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\x12\x1b\n" +
 	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\x12/\n" +
 	"\x14data_proc_cluster_id\x18\x03 \x01(\tR\x11dataProcClusterId\x12,\n" +
-	"\x12security_group_ids\x18\x05 \x03(\tR\x10securityGroupIdsJ\x04\b\x04\x10\x05\x1a\xa6\x01\n" +
+	"\x12security_group_ids\x18\x05 \x03(\tR\x10securityGroupIdsJ\x04\b\x04\x10\x05\x1a\xac\x01\n" +
 	"\x06Limits\x12H\n" +
 	"\x12max_units_per_hour\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxUnitsPerHour\x12R\n" +
-	"\x17max_units_per_execution\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14maxUnitsPerExecutionBk\n" +
+	"\x17max_units_per_execution\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14maxUnitsPerExecutionJ\x04\b\x01\x10\x02Bk\n" +
 	"\x1eyandex.cloud.api.datasphere.v1ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/datasphere/v1;datasphereb\x06proto3"
 
 var (

@@ -12,6 +12,18 @@ func (m *Sink) SetSink(v Sink_Sink) {
 	m.Sink = v
 }
 
+func (m *Sink) SetYds(v *Sink_Yds) {
+	m.Sink = &Sink_Yds_{
+		Yds: v,
+	}
+}
+
+func (m *Sink) SetS3(v *Sink_S3) {
+	m.Sink = &Sink_S3_{
+		S3: v,
+	}
+}
+
 func (m *Sink) SetId(v string) {
 	m.Id = v
 }
@@ -42,18 +54,6 @@ func (m *Sink) SetLabels(v map[string]string) {
 
 func (m *Sink) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
-}
-
-func (m *Sink) SetYds(v *Sink_Yds) {
-	m.Sink = &Sink_Yds_{
-		Yds: v,
-	}
-}
-
-func (m *Sink) SetS3(v *Sink_S3) {
-	m.Sink = &Sink_S3_{
-		S3: v,
-	}
 }
 
 func (m *Sink_Yds) SetStreamName(v string) {

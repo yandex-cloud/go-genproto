@@ -330,8 +330,10 @@ type UpdateUserRequest struct {
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// New set of permissions for the user.
 	Permissions []*Permission `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	Settings    *UserSettings `protobuf:"bytes,6,opt,name=settings,proto3" json:"settings,omitempty"`
-	Quotas      []*UserQuota  `protobuf:"bytes,7,rep,name=quotas,proto3" json:"quotas,omitempty"`
+	// New user settings.
+	Settings *UserSettings `protobuf:"bytes,6,opt,name=settings,proto3" json:"settings,omitempty"`
+	// New user quotas.
+	Quotas []*UserQuota `protobuf:"bytes,7,rep,name=quotas,proto3" json:"quotas,omitempty"`
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
 	unknownFields    protoimpl.UnknownFields

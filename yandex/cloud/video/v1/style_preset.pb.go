@@ -454,7 +454,7 @@ var File_yandex_cloud_video_v1_style_preset_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_style_preset_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/video/v1/style_preset.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xea\b\n" +
+	"(yandex/cloud/video/v1/style_preset.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe4\b\n" +
 	"\vStylePreset\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -483,7 +483,7 @@ const file_yandex_cloud_video_v1_style_preset_proto_rawDesc = "" +
 	"\x05RIGHT\x10\x01\x12\n" +
 	"\n" +
 	"\x06BOTTOM\x10\x02J\x04\b\n" +
-	"\x10\vJ\x04\b\v\x10\fJ\x04\b\x12\x10\x14J\x04\b\x16\x10d\"\xdc\x01\n" +
+	"\x10\fJ\x04\b\x12\x10\x14J\x04\b\x16\x10d\"\xdc\x01\n" +
 	"\x06Widget\x12S\n" +
 	"\rsummarization\x18\x01 \x01(\v2+.yandex.cloud.video.v1.Widget.SummarizationH\x00R\rsummarization\x12M\n" +
 	"\vdescription\x18\x02 \x01(\v2).yandex.cloud.video.v1.Widget.DescriptionH\x00R\vdescription\x1a\x0f\n" +

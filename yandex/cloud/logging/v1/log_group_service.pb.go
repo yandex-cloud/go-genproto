@@ -31,7 +31,6 @@ const (
 type GetLogGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to return.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId    string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -78,7 +77,6 @@ func (x *GetLogGroupRequest) GetLogGroupId() string {
 type GetLogGroupStatsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to return stats for.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId    string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -125,20 +123,17 @@ func (x *GetLogGroupStatsRequest) GetLogGroupId() string {
 type ListLogGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Folder ID of the log groups to return.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListLogGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListLogGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters log groups listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [LogGroup.name] field.
 	// 2. An `=` operator.
@@ -214,7 +209,6 @@ type ListLogGroupsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListLogGroupsRequest.page_size], use `next_page_token` as the value
 	// for the [ListLogGroupsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -268,7 +262,6 @@ func (x *ListLogGroupsResponse) GetNextPageToken() string {
 type CreateLogGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a log group in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the log group.
@@ -279,7 +272,6 @@ type CreateLogGroupRequest struct {
 	// Log group labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Log group entry retention period.
-	//
 	// Entries will be present in group during this period.
 	// If specified, must be non-negative.
 	// Empty or zero value is treated as no limit.
@@ -362,55 +354,9 @@ func (x *CreateLogGroupRequest) GetDataStream() string {
 	return ""
 }
 
-type CreateLogGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the log group being created.
-	LogGroupId    string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateLogGroupMetadata) Reset() {
-	*x = CreateLogGroupMetadata{}
-	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateLogGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateLogGroupMetadata) ProtoMessage() {}
-
-func (x *CreateLogGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateLogGroupMetadata.ProtoReflect.Descriptor instead.
-func (*CreateLogGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_log_group_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateLogGroupMetadata) GetLogGroupId() string {
-	if x != nil {
-		return x.LogGroupId
-	}
-	return ""
-}
-
 type UpdateLogGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to update.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// Field mask that specifies which attributes of the function should be updated.
@@ -423,7 +369,6 @@ type UpdateLogGroupRequest struct {
 	// New log group labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New log group entry retention period.
-	//
 	// Entries will be present in group during this period.
 	// If specified, must be non-negative.
 	// Empty or zero value is treated as no limit.
@@ -436,7 +381,7 @@ type UpdateLogGroupRequest struct {
 
 func (x *UpdateLogGroupRequest) Reset() {
 	*x = UpdateLogGroupRequest{}
-	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -448,7 +393,7 @@ func (x *UpdateLogGroupRequest) String() string {
 func (*UpdateLogGroupRequest) ProtoMessage() {}
 
 func (x *UpdateLogGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +406,7 @@ func (x *UpdateLogGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateLogGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateLogGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_logging_v1_log_group_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_logging_v1_log_group_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateLogGroupRequest) GetLogGroupId() string {
@@ -509,6 +454,51 @@ func (x *UpdateLogGroupRequest) GetRetentionPeriod() *durationpb.Duration {
 func (x *UpdateLogGroupRequest) GetDataStream() string {
 	if x != nil {
 		return x.DataStream
+	}
+	return ""
+}
+
+type CreateLogGroupMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the log group being created.
+	LogGroupId    string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateLogGroupMetadata) Reset() {
+	*x = CreateLogGroupMetadata{}
+	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateLogGroupMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateLogGroupMetadata) ProtoMessage() {}
+
+func (x *CreateLogGroupMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_logging_v1_log_group_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateLogGroupMetadata.ProtoReflect.Descriptor instead.
+func (*CreateLogGroupMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_logging_v1_log_group_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateLogGroupMetadata) GetLogGroupId() string {
+	if x != nil {
+		return x.LogGroupId
 	}
 	return ""
 }
@@ -561,7 +551,6 @@ func (x *UpdateLogGroupMetadata) GetLogGroupId() string {
 type DeleteLogGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to delete.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId    string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -653,11 +642,9 @@ func (x *DeleteLogGroupMetadata) GetLogGroupId() string {
 type ListResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to list resources for.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// Resource type to return resources for.
-	//
 	// If not specified, [ListResourcesResponse] will contain information about all resource types.
 	Type          string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -756,20 +743,17 @@ func (x *ListResourcesResponse) GetResources() []*LogGroupResource {
 type ListOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the log group to list operations for.
-	//
 	// To get a log group ID make a [LogGroupService.List] request.
 	LogGroupId string `protobuf:"bytes,1,opt,name=log_group_id,json=logGroupId,proto3" json:"log_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.description], [operation.Operation.created_at], [operation.Operation.modified_at], [operation.Operation.created_by], [operation.Operation.done] fields.
 	// 2. An `=` operator.
@@ -845,7 +829,6 @@ type ListOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -963,7 +946,7 @@ var File_yandex_cloud_logging_v1_log_group_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_logging_v1_log_group_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/logging/v1/log_group_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a'yandex/cloud/logging/v1/log_group.proto\x1a*yandex/cloud/logging/v1/log_resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"D\n" +
+	"/yandex/cloud/logging/v1/log_group_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/logging/v1/log_group.proto\x1a*yandex/cloud/logging/v1/log_resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"D\n" +
 	"\x12GetLogGroupRequest\x12.\n" +
 	"\flog_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"logGroupId\"I\n" +
@@ -990,10 +973,7 @@ const file_yandex_cloud_logging_v1_log_group_service_proto_rawDesc = "" +
 	"dataStream\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
-	"\x16CreateLogGroupMetadata\x12 \n" +
-	"\flog_group_id\x18\x01 \x01(\tR\n" +
-	"logGroupId\"\xac\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xac\x04\n" +
 	"\x15UpdateLogGroupRequest\x12.\n" +
 	"\flog_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"logGroupId\x12;\n" +
@@ -1008,6 +988,9 @@ const file_yandex_cloud_logging_v1_log_group_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
+	"\x16CreateLogGroupMetadata\x12 \n" +
+	"\flog_group_id\x18\x01 \x01(\tR\n" +
+	"logGroupId\":\n" +
 	"\x16UpdateLogGroupMetadata\x12 \n" +
 	"\flog_group_id\x18\x01 \x01(\tR\n" +
 	"logGroupId\"G\n" +
@@ -1080,8 +1063,8 @@ var file_yandex_cloud_logging_v1_log_group_service_proto_goTypes = []any{
 	(*ListLogGroupsRequest)(nil),               // 2: yandex.cloud.logging.v1.ListLogGroupsRequest
 	(*ListLogGroupsResponse)(nil),              // 3: yandex.cloud.logging.v1.ListLogGroupsResponse
 	(*CreateLogGroupRequest)(nil),              // 4: yandex.cloud.logging.v1.CreateLogGroupRequest
-	(*CreateLogGroupMetadata)(nil),             // 5: yandex.cloud.logging.v1.CreateLogGroupMetadata
-	(*UpdateLogGroupRequest)(nil),              // 6: yandex.cloud.logging.v1.UpdateLogGroupRequest
+	(*UpdateLogGroupRequest)(nil),              // 5: yandex.cloud.logging.v1.UpdateLogGroupRequest
+	(*CreateLogGroupMetadata)(nil),             // 6: yandex.cloud.logging.v1.CreateLogGroupMetadata
 	(*UpdateLogGroupMetadata)(nil),             // 7: yandex.cloud.logging.v1.UpdateLogGroupMetadata
 	(*DeleteLogGroupRequest)(nil),              // 8: yandex.cloud.logging.v1.DeleteLogGroupRequest
 	(*DeleteLogGroupMetadata)(nil),             // 9: yandex.cloud.logging.v1.DeleteLogGroupMetadata
@@ -1115,7 +1098,7 @@ var file_yandex_cloud_logging_v1_log_group_service_proto_depIdxs = []int32{
 	1,  // 9: yandex.cloud.logging.v1.LogGroupService.Stats:input_type -> yandex.cloud.logging.v1.GetLogGroupStatsRequest
 	2,  // 10: yandex.cloud.logging.v1.LogGroupService.List:input_type -> yandex.cloud.logging.v1.ListLogGroupsRequest
 	4,  // 11: yandex.cloud.logging.v1.LogGroupService.Create:input_type -> yandex.cloud.logging.v1.CreateLogGroupRequest
-	6,  // 12: yandex.cloud.logging.v1.LogGroupService.Update:input_type -> yandex.cloud.logging.v1.UpdateLogGroupRequest
+	5,  // 12: yandex.cloud.logging.v1.LogGroupService.Update:input_type -> yandex.cloud.logging.v1.UpdateLogGroupRequest
 	8,  // 13: yandex.cloud.logging.v1.LogGroupService.Delete:input_type -> yandex.cloud.logging.v1.DeleteLogGroupRequest
 	10, // 14: yandex.cloud.logging.v1.LogGroupService.ListResources:input_type -> yandex.cloud.logging.v1.ListResourcesRequest
 	12, // 15: yandex.cloud.logging.v1.LogGroupService.ListOperations:input_type -> yandex.cloud.logging.v1.ListOperationsRequest

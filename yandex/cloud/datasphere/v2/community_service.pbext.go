@@ -102,14 +102,6 @@ func (m *ListCommunitiesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *SetCommunityAccessBindingsMetadata) SetCommunityId(v string) {
-	m.CommunityId = v
-}
-
-func (m *UpdateCommunityAccessBindingsMetadata) SetCommunityId(v string) {
-	m.CommunityId = v
-}
-
 func (m *AddCommunityResourceRequest) SetCommunityId(v string) {
 	m.CommunityId = v
 }
@@ -132,6 +124,14 @@ func (m *RemoveCommunityResourceRequest) SetResourceType(v ResourceType) {
 
 func (m *RemoveCommunityResourceRequest) SetResourceId(v string) {
 	m.ResourceId = v
+}
+
+func (m *SetCommunityAccessBindingsMetadata) SetCommunityId(v string) {
+	m.CommunityId = v
+}
+
+func (m *UpdateCommunityAccessBindingsMetadata) SetCommunityId(v string) {
+	m.CommunityId = v
 }
 
 func (m *GetCommunityRestrictionsRequest) SetCommunityId(v string) {

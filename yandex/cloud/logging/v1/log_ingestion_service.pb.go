@@ -26,7 +26,6 @@ const (
 type WriteRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Log entries destination.
-	//
 	// See [Destination] for details.
 	Destination *Destination `protobuf:"bytes,1,opt,name=destination,proto3" json:"destination,omitempty"`
 	// Common resource (type, ID) specification for log entries.
@@ -34,7 +33,6 @@ type WriteRequest struct {
 	// List of log entries.
 	Entries []*IncomingLogEntry `protobuf:"bytes,3,rep,name=entries,proto3" json:"entries,omitempty"`
 	// Log entries defaults.
-	//
 	// See [LogEntryDefaults] for details.
 	Defaults      *LogEntryDefaults `protobuf:"bytes,4,opt,name=defaults,proto3" json:"defaults,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -102,7 +100,6 @@ func (x *WriteRequest) GetDefaults() *LogEntryDefaults {
 type WriteResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Map<idx, status> of ingest failures.
-	//
 	// If entry with idx N is absent, it was ingested successfully.
 	Errors        map[int64]*status.Status `protobuf:"bytes,1,rep,name=errors,proto3" json:"errors,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -150,10 +147,10 @@ var File_yandex_cloud_logging_v1_log_ingestion_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_logging_v1_log_ingestion_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/logging/v1/log_ingestion_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x17google/rpc/status.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a*yandex/cloud/logging/v1/log_resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xba\x02\n" +
+	"3yandex/cloud/logging/v1/log_ingestion_service.proto\x12\x17yandex.cloud.logging.v1\x1a\x17google/rpc/status.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a*yandex/cloud/logging/v1/log_resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xc0\x02\n" +
 	"\fWriteRequest\x12L\n" +
-	"\vdestination\x18\x01 \x01(\v2$.yandex.cloud.logging.v1.DestinationB\x04\xe8\xc71\x01R\vdestination\x12E\n" +
-	"\bresource\x18\x02 \x01(\v2).yandex.cloud.logging.v1.LogEntryResourceR\bresource\x12N\n" +
+	"\vdestination\x18\x01 \x01(\v2$.yandex.cloud.logging.v1.DestinationB\x04\xe8\xc71\x01R\vdestination\x12K\n" +
+	"\bresource\x18\x02 \x01(\v2).yandex.cloud.logging.v1.LogEntryResourceB\x04\xe8\xc71\x01R\bresource\x12N\n" +
 	"\aentries\x18\x03 \x03(\v2).yandex.cloud.logging.v1.IncomingLogEntryB\t\x82\xc81\x051-100R\aentries\x12E\n" +
 	"\bdefaults\x18\x04 \x01(\v2).yandex.cloud.logging.v1.LogEntryDefaultsR\bdefaults\"\xaa\x01\n" +
 	"\rWriteResponse\x12J\n" +

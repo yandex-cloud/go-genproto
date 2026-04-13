@@ -58,6 +58,18 @@ func (m *CreateStreamRequest) SetStreamType(v CreateStreamRequest_StreamType) {
 	m.StreamType = v
 }
 
+func (m *CreateStreamRequest) SetOnDemand(v *OnDemandParams) {
+	m.StreamType = &CreateStreamRequest_OnDemand{
+		OnDemand: v,
+	}
+}
+
+func (m *CreateStreamRequest) SetSchedule(v *ScheduleParams) {
+	m.StreamType = &CreateStreamRequest_Schedule{
+		Schedule: v,
+	}
+}
+
 func (m *CreateStreamRequest) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -86,18 +98,6 @@ func (m *CreateStreamRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateStreamRequest) SetOnDemand(v *OnDemandParams) {
-	m.StreamType = &CreateStreamRequest_OnDemand{
-		OnDemand: v,
-	}
-}
-
-func (m *CreateStreamRequest) SetSchedule(v *ScheduleParams) {
-	m.StreamType = &CreateStreamRequest_Schedule{
-		Schedule: v,
-	}
-}
-
 func (m *ScheduleParams) SetStartTime(v *timestamppb.Timestamp) {
 	m.StartTime = v
 }
@@ -114,6 +114,18 @@ type UpdateStreamRequest_StreamType = isUpdateStreamRequest_StreamType
 
 func (m *UpdateStreamRequest) SetStreamType(v UpdateStreamRequest_StreamType) {
 	m.StreamType = v
+}
+
+func (m *UpdateStreamRequest) SetOnDemand(v *OnDemandParams) {
+	m.StreamType = &UpdateStreamRequest_OnDemand{
+		OnDemand: v,
+	}
+}
+
+func (m *UpdateStreamRequest) SetSchedule(v *ScheduleParams) {
+	m.StreamType = &UpdateStreamRequest_Schedule{
+		Schedule: v,
+	}
 }
 
 func (m *UpdateStreamRequest) SetStreamId(v string) {
@@ -142,18 +154,6 @@ func (m *UpdateStreamRequest) SetAutoPublish(v *wrapperspb.BoolValue) {
 
 func (m *UpdateStreamRequest) SetLabels(v map[string]string) {
 	m.Labels = v
-}
-
-func (m *UpdateStreamRequest) SetOnDemand(v *OnDemandParams) {
-	m.StreamType = &UpdateStreamRequest_OnDemand{
-		OnDemand: v,
-	}
-}
-
-func (m *UpdateStreamRequest) SetSchedule(v *ScheduleParams) {
-	m.StreamType = &UpdateStreamRequest_Schedule{
-		Schedule: v,
-	}
 }
 
 func (m *UpdateStreamMetadata) SetStreamId(v string) {
@@ -186,10 +186,6 @@ func (m *PerformStreamActionRequest) SetAction(v PerformStreamActionRequest_Acti
 	m.Action = v
 }
 
-func (m *PerformStreamActionRequest) SetStreamId(v string) {
-	m.StreamId = v
-}
-
 func (m *PerformStreamActionRequest) SetPublish(v *PublishAction) {
 	m.Action = &PerformStreamActionRequest_Publish{
 		Publish: v,
@@ -200,6 +196,10 @@ func (m *PerformStreamActionRequest) SetStop(v *StopAction) {
 	m.Action = &PerformStreamActionRequest_Stop{
 		Stop: v,
 	}
+}
+
+func (m *PerformStreamActionRequest) SetStreamId(v string) {
+	m.StreamId = v
 }
 
 func (m *PerformStreamActionMetadata) SetStreamId(v string) {

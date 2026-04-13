@@ -1063,13 +1063,13 @@ func (x *SetUnitBalanceMetadata) GetProjectId() string {
 
 type ProjectExecutionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project to execute notebook/cell in.
-	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//
 	//	*ProjectExecutionRequest_NotebookId
 	//	*ProjectExecutionRequest_CellId
 	Target isProjectExecutionRequest_Target `protobuf_oneof:"target"`
+	// ID of the project to execute notebook/cell in.
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Values of input variables. Input variables will be available in the project as environment variables.
 	InputVariables *structpb.Struct `protobuf:"bytes,4,opt,name=input_variables,json=inputVariables,proto3" json:"input_variables,omitempty"`
 	// Names of output variables.
@@ -1112,13 +1112,6 @@ func (*ProjectExecutionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *ProjectExecutionRequest) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
 func (x *ProjectExecutionRequest) GetTarget() isProjectExecutionRequest_Target {
 	if x != nil {
 		return x.Target
@@ -1141,6 +1134,13 @@ func (x *ProjectExecutionRequest) GetCellId() string {
 		if x, ok := x.Target.(*ProjectExecutionRequest_CellId); ok {
 			return x.CellId
 		}
+	}
+	return ""
+}
+
+func (x *ProjectExecutionRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
 	}
 	return ""
 }
@@ -1179,7 +1179,6 @@ type isProjectExecutionRequest_Target interface {
 
 type ProjectExecutionRequest_NotebookId struct {
 	// The path to the executable notebook in the project storage. The maximum string length is 200 characters.
-	//
 	// To get the path, right-click on the notebook in JupyterLab and select `Copy path`.
 	NotebookId string `protobuf:"bytes,2,opt,name=notebook_id,json=notebookId,proto3,oneof"`
 }
@@ -1198,13 +1197,13 @@ func (*ProjectExecutionRequest_CellId) isProjectExecutionRequest_Target() {}
 
 type ProjectExecutionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project in which notebook is being executed.
-	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Types that are valid to be assigned to Target:
 	//
 	//	*ProjectExecutionMetadata_NotebookId
 	//	*ProjectExecutionMetadata_CellId
-	Target        isProjectExecutionMetadata_Target `protobuf_oneof:"target"`
+	Target isProjectExecutionMetadata_Target `protobuf_oneof:"target"`
+	// ID of the project in which notebook is being executed.
+	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1239,13 +1238,6 @@ func (*ProjectExecutionMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *ProjectExecutionMetadata) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
 func (x *ProjectExecutionMetadata) GetTarget() isProjectExecutionMetadata_Target {
 	if x != nil {
 		return x.Target
@@ -1267,6 +1259,13 @@ func (x *ProjectExecutionMetadata) GetCellId() string {
 		if x, ok := x.Target.(*ProjectExecutionMetadata_CellId); ok {
 			return x.CellId
 		}
+	}
+	return ""
+}
+
+func (x *ProjectExecutionMetadata) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
 	}
 	return ""
 }
@@ -1334,96 +1333,6 @@ func (x *ProjectExecutionResponse) GetExecutionStatus() ExecutionStatus {
 	return ExecutionStatus_EXECUTION_STATUS_UNSPECIFIED
 }
 
-type SetProjectAccessBindingsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project which access bindings are set.
-	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetProjectAccessBindingsMetadata) Reset() {
-	*x = SetProjectAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetProjectAccessBindingsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetProjectAccessBindingsMetadata) ProtoMessage() {}
-
-func (x *SetProjectAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetProjectAccessBindingsMetadata.ProtoReflect.Descriptor instead.
-func (*SetProjectAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *SetProjectAccessBindingsMetadata) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
-type UpdateProjectAccessBindingsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project which access bindings are updated.
-	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateProjectAccessBindingsMetadata) Reset() {
-	*x = UpdateProjectAccessBindingsMetadata{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateProjectAccessBindingsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateProjectAccessBindingsMetadata) ProtoMessage() {}
-
-func (x *UpdateProjectAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateProjectAccessBindingsMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateProjectAccessBindingsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *UpdateProjectAccessBindingsMetadata) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
 type AddResourceToProjectRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ProjectId     string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
@@ -1435,7 +1344,7 @@ type AddResourceToProjectRequest struct {
 
 func (x *AddResourceToProjectRequest) Reset() {
 	*x = AddResourceToProjectRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1447,7 +1356,7 @@ func (x *AddResourceToProjectRequest) String() string {
 func (*AddResourceToProjectRequest) ProtoMessage() {}
 
 func (x *AddResourceToProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1460,7 +1369,7 @@ func (x *AddResourceToProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddResourceToProjectRequest.ProtoReflect.Descriptor instead.
 func (*AddResourceToProjectRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *AddResourceToProjectRequest) GetProjectId() string {
@@ -1495,7 +1404,7 @@ type RemoveResourceFromProjectRequest struct {
 
 func (x *RemoveResourceFromProjectRequest) Reset() {
 	*x = RemoveResourceFromProjectRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1507,7 +1416,7 @@ func (x *RemoveResourceFromProjectRequest) String() string {
 func (*RemoveResourceFromProjectRequest) ProtoMessage() {}
 
 func (x *RemoveResourceFromProjectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1429,7 @@ func (x *RemoveResourceFromProjectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveResourceFromProjectRequest.ProtoReflect.Descriptor instead.
 func (*RemoveResourceFromProjectRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *RemoveResourceFromProjectRequest) GetProjectId() string {
@@ -1544,76 +1453,35 @@ func (x *RemoveResourceFromProjectRequest) GetResourceId() string {
 	return ""
 }
 
-type GetProjectRestrictionsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project.
-	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetProjectRestrictionsRequest) Reset() {
-	*x = GetProjectRestrictionsRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetProjectRestrictionsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetProjectRestrictionsRequest) ProtoMessage() {}
-
-func (x *GetProjectRestrictionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetProjectRestrictionsRequest.ProtoReflect.Descriptor instead.
-func (*GetProjectRestrictionsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *GetProjectRestrictionsRequest) GetProjectId() string {
-	if x != nil {
-		return x.ProjectId
-	}
-	return ""
-}
-
-type SetProjectRestrictionsRequest struct {
+type DiskInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the project.
 	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// List of restrictions to set.
-	Restrictions  []*Restriction `protobuf:"bytes,2,rep,name=restrictions,proto3" json:"restrictions,omitempty"`
+	// Project disk size in gigabytes.
+	DiskSizeGb float64 `protobuf:"fixed64,2,opt,name=disk_size_gb,json=diskSizeGb,proto3" json:"disk_size_gb,omitempty"`
+	// Used project disk in gigabytes.
+	DiskUsedGb float64 `protobuf:"fixed64,3,opt,name=disk_used_gb,json=diskUsedGb,proto3" json:"disk_used_gb,omitempty"`
+	// Detailed information about the project disk.
+	DetailedUsage *DiskInfo_DetailedDiskInfo `protobuf:"bytes,4,opt,name=detailed_usage,json=detailedUsage,proto3" json:"detailed_usage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SetProjectRestrictionsRequest) Reset() {
-	*x = SetProjectRestrictionsRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[24]
+func (x *DiskInfo) Reset() {
+	*x = DiskInfo{}
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SetProjectRestrictionsRequest) String() string {
+func (x *DiskInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetProjectRestrictionsRequest) ProtoMessage() {}
+func (*DiskInfo) ProtoMessage() {}
 
-func (x *SetProjectRestrictionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[24]
+func (x *DiskInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1624,21 +1492,35 @@ func (x *SetProjectRestrictionsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetProjectRestrictionsRequest.ProtoReflect.Descriptor instead.
-func (*SetProjectRestrictionsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{24}
+// Deprecated: Use DiskInfo.ProtoReflect.Descriptor instead.
+func (*DiskInfo) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *SetProjectRestrictionsRequest) GetProjectId() string {
+func (x *DiskInfo) GetProjectId() string {
 	if x != nil {
 		return x.ProjectId
 	}
 	return ""
 }
 
-func (x *SetProjectRestrictionsRequest) GetRestrictions() []*Restriction {
+func (x *DiskInfo) GetDiskSizeGb() float64 {
 	if x != nil {
-		return x.Restrictions
+		return x.DiskSizeGb
+	}
+	return 0
+}
+
+func (x *DiskInfo) GetDiskUsedGb() float64 {
+	if x != nil {
+		return x.DiskUsedGb
+	}
+	return 0
+}
+
+func (x *DiskInfo) GetDetailedUsage() *DiskInfo_DetailedDiskInfo {
+	if x != nil {
+		return x.DetailedUsage
 	}
 	return nil
 }
@@ -1655,7 +1537,7 @@ type ResizeProjectDiskRequest struct {
 
 func (x *ResizeProjectDiskRequest) Reset() {
 	*x = ResizeProjectDiskRequest{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1667,7 +1549,7 @@ func (x *ResizeProjectDiskRequest) String() string {
 func (*ResizeProjectDiskRequest) ProtoMessage() {}
 
 func (x *ResizeProjectDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1680,7 +1562,7 @@ func (x *ResizeProjectDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResizeProjectDiskRequest.ProtoReflect.Descriptor instead.
 func (*ResizeProjectDiskRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ResizeProjectDiskRequest) GetProjectId() string {
@@ -1711,7 +1593,7 @@ type ResizeProjectDiskMetadata struct {
 
 func (x *ResizeProjectDiskMetadata) Reset() {
 	*x = ResizeProjectDiskMetadata{}
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1723,7 +1605,7 @@ func (x *ResizeProjectDiskMetadata) String() string {
 func (*ResizeProjectDiskMetadata) ProtoMessage() {}
 
 func (x *ResizeProjectDiskMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1736,7 +1618,7 @@ func (x *ResizeProjectDiskMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResizeProjectDiskMetadata.ProtoReflect.Descriptor instead.
 func (*ResizeProjectDiskMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ResizeProjectDiskMetadata) GetProjectId() string {
@@ -1760,34 +1642,165 @@ func (x *ResizeProjectDiskMetadata) GetNewDiskSizeGb() int64 {
 	return 0
 }
 
-type DiskInfo struct {
+type SetProjectAccessBindingsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the project.
-	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// Project disk size in gigabytes.
-	DiskSizeGb float64 `protobuf:"fixed64,2,opt,name=disk_size_gb,json=diskSizeGb,proto3" json:"disk_size_gb,omitempty"`
-	// Used project disk in gigabytes.
-	DiskUsedGb float64 `protobuf:"fixed64,3,opt,name=disk_used_gb,json=diskUsedGb,proto3" json:"disk_used_gb,omitempty"`
-	// Detailed information about the project disk.
-	DetailedUsage *DiskInfo_DetailedDiskInfo `protobuf:"bytes,4,opt,name=detailed_usage,json=detailedUsage,proto3" json:"detailed_usage,omitempty"`
+	// ID of the project which access bindings are set.
+	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DiskInfo) Reset() {
-	*x = DiskInfo{}
+func (x *SetProjectAccessBindingsMetadata) Reset() {
+	*x = SetProjectAccessBindingsMetadata{}
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetProjectAccessBindingsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetProjectAccessBindingsMetadata) ProtoMessage() {}
+
+func (x *SetProjectAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetProjectAccessBindingsMetadata.ProtoReflect.Descriptor instead.
+func (*SetProjectAccessBindingsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *SetProjectAccessBindingsMetadata) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
+type UpdateProjectAccessBindingsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the project which access bindings are updated.
+	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProjectAccessBindingsMetadata) Reset() {
+	*x = UpdateProjectAccessBindingsMetadata{}
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProjectAccessBindingsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProjectAccessBindingsMetadata) ProtoMessage() {}
+
+func (x *UpdateProjectAccessBindingsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProjectAccessBindingsMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateProjectAccessBindingsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *UpdateProjectAccessBindingsMetadata) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
+type GetProjectRestrictionsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the project.
+	ProjectId     string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetProjectRestrictionsRequest) Reset() {
+	*x = GetProjectRestrictionsRequest{}
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetProjectRestrictionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetProjectRestrictionsRequest) ProtoMessage() {}
+
+func (x *GetProjectRestrictionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetProjectRestrictionsRequest.ProtoReflect.Descriptor instead.
+func (*GetProjectRestrictionsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetProjectRestrictionsRequest) GetProjectId() string {
+	if x != nil {
+		return x.ProjectId
+	}
+	return ""
+}
+
+type SetProjectRestrictionsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the project.
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// List of restrictions to set.
+	Restrictions  []*Restriction `protobuf:"bytes,2,rep,name=restrictions,proto3" json:"restrictions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetProjectRestrictionsRequest) Reset() {
+	*x = SetProjectRestrictionsRequest{}
 	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DiskInfo) String() string {
+func (x *SetProjectRestrictionsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DiskInfo) ProtoMessage() {}
+func (*SetProjectRestrictionsRequest) ProtoMessage() {}
 
-func (x *DiskInfo) ProtoReflect() protoreflect.Message {
+func (x *SetProjectRestrictionsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_datasphere_v2_project_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1799,35 +1812,21 @@ func (x *DiskInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DiskInfo.ProtoReflect.Descriptor instead.
-func (*DiskInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetProjectRestrictionsRequest.ProtoReflect.Descriptor instead.
+func (*SetProjectRestrictionsRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *DiskInfo) GetProjectId() string {
+func (x *SetProjectRestrictionsRequest) GetProjectId() string {
 	if x != nil {
 		return x.ProjectId
 	}
 	return ""
 }
 
-func (x *DiskInfo) GetDiskSizeGb() float64 {
+func (x *SetProjectRestrictionsRequest) GetRestrictions() []*Restriction {
 	if x != nil {
-		return x.DiskSizeGb
-	}
-	return 0
-}
-
-func (x *DiskInfo) GetDiskUsedGb() float64 {
-	if x != nil {
-		return x.DiskUsedGb
-	}
-	return 0
-}
-
-func (x *DiskInfo) GetDetailedUsage() *DiskInfo_DetailedDiskInfo {
-	if x != nil {
-		return x.DetailedUsage
+		return x.Restrictions
 	}
 	return nil
 }
@@ -1873,7 +1872,7 @@ func (x *DiskInfo_DetailedDiskInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiskInfo_DetailedDiskInfo.ProtoReflect.Descriptor instead.
 func (*DiskInfo_DetailedDiskInfo) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{27, 0}
+	return file_yandex_cloud_datasphere_v2_project_service_proto_rawDescGZIP(), []int{21, 0}
 }
 
 func (x *DiskInfo_DetailedDiskInfo) GetUserDataGb() float64 {
@@ -1908,7 +1907,7 @@ var File_yandex_cloud_datasphere_v2_project_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/datasphere/v2/project_service.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a(yandex/cloud/datasphere/v2/project.proto\x1a/yandex/cloud/datasphere/v2/resource_types.proto\x1a-yandex/cloud/datasphere/v2/restrictions.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x04\n" +
+	"0yandex/cloud/datasphere/v2/project_service.proto\x12\x1ayandex.cloud.datasphere.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/datasphere/v2/project.proto\x1a/yandex/cloud/datasphere/v2/resource_types.proto\x1a-yandex/cloud/datasphere/v2/restrictions.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x92\x04\n" +
 	"\x14CreateProjectRequest\x12/\n" +
 	"\fcommunity_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vcommunityId\x12?\n" +
 	"\x04name\x18\x02 \x01(\tB+\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -1918,7 +1917,7 @@ const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"\x06limits\x18\x06 \x01(\v2*.yandex.cloud.datasphere.v2.Project.LimitsR\x06limits\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\b\"6\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
 	"\x15CreateProjectMetadata\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tR\tprojectId\"\xcb\x04\n" +
@@ -1989,32 +1988,26 @@ const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"\x16SetUnitBalanceMetadata\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tR\tprojectId\"\xef\x02\n" +
-	"\x17ProjectExecutionRequest\x12+\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12,\n" +
+	"\x17ProjectExecutionRequest\x12,\n" +
 	"\vnotebook_id\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\n" +
 	"notebookId\x12&\n" +
-	"\acell_id\x18\x03 \x01(\tB\v\x8a\xc81\x05<=200\x18\x01H\x00R\x06cellId\x12@\n" +
+	"\acell_id\x18\x03 \x01(\tB\v\x8a\xc81\x05<=200\x18\x01H\x00R\x06cellId\x12+\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12@\n" +
 	"\x0finput_variables\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x0einputVariables\x122\n" +
 	"\x15output_variable_names\x18\x05 \x03(\tR\x13outputVariableNames\x12\x12\n" +
 	"\x04spec\x18\x06 \x01(\tR\x04spec\x127\n" +
 	"\x12spark_connector_id\x18\a \x01(\tB\t\x8a\xc81\x05<=200R\x10sparkConnectorIdB\x0e\n" +
 	"\x06target\x12\x04\xc0\xc11\x01\"\x9d\x01\n" +
-	"\x18ProjectExecutionMetadata\x12\x1d\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tR\tprojectId\x12,\n" +
+	"\x18ProjectExecutionMetadata\x12,\n" +
 	"\vnotebook_id\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\n" +
 	"notebookId\x12$\n" +
-	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellIdB\x0e\n" +
-	"\x06target\x12\x04\xc0\xc11\x01\"~\n" +
+	"\acell_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200H\x00R\x06cellId\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectIdB\x0e\n" +
+	"\x06target\x12\x04\xc0\xc11\x01\"x\n" +
 	"\x18ProjectExecutionResponse\x12V\n" +
-	"\x10execution_status\x18\x03 \x01(\x0e2+.yandex.cloud.datasphere.v2.ExecutionStatusR\x0fexecutionStatusJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"A\n" +
-	" SetProjectAccessBindingsMetadata\x12\x1d\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tR\tprojectId\"D\n" +
-	"#UpdateProjectAccessBindingsMetadata\x12\x1d\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tR\tprojectId\"\xc0\x01\n" +
+	"\x10execution_status\x18\x03 \x01(\x0e2+.yandex.cloud.datasphere.v2.ExecutionStatusR\x0fexecutionStatusJ\x04\b\x01\x10\x03\"\xc0\x01\n" +
 	"\x1bAddResourceToProjectRequest\x12+\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12M\n" +
@@ -2026,23 +2019,7 @@ const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12M\n" +
 	"\rresource_type\x18\x02 \x01(\x0e2(.yandex.cloud.datasphere.v2.ResourceTypeR\fresourceType\x12%\n" +
 	"\vresource_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"resourceId\"D\n" +
-	"\x1dGetProjectRestrictionsRequest\x12#\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tprojectId\"\x91\x01\n" +
-	"\x1dSetProjectRestrictionsRequest\x12#\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tprojectId\x12K\n" +
-	"\frestrictions\x18\x02 \x03(\v2'.yandex.cloud.datasphere.v2.RestrictionR\frestrictions\"p\n" +
-	"\x18ResizeProjectDiskRequest\x12+\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12'\n" +
-	"\x10new_disk_size_gb\x18\x02 \x01(\x03R\rnewDiskSizeGb\"\x8c\x01\n" +
-	"\x19ResizeProjectDiskMetadata\x12\x1d\n" +
-	"\n" +
-	"project_id\x18\x01 \x01(\tR\tprojectId\x12'\n" +
-	"\x10old_disk_size_gb\x18\x02 \x01(\x03R\roldDiskSizeGb\x12'\n" +
-	"\x10new_disk_size_gb\x18\x03 \x01(\x03R\rnewDiskSizeGb\"\xed\x02\n" +
+	"resourceId\"\xed\x02\n" +
 	"\bDiskInfo\x12\x1d\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tR\tprojectId\x12 \n" +
@@ -2057,7 +2034,29 @@ const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"\vpackages_gb\x18\x02 \x01(\x01R\n" +
 	"packagesGb\x12$\n" +
 	"\x0esystem_data_gb\x18\x03 \x01(\x01R\fsystemDataGb\x12\"\n" +
-	"\rfree_space_gb\x18\x04 \x01(\x01R\vfreeSpaceGb*S\n" +
+	"\rfree_space_gb\x18\x04 \x01(\x01R\vfreeSpaceGb\"p\n" +
+	"\x18ResizeProjectDiskRequest\x12+\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tprojectId\x12'\n" +
+	"\x10new_disk_size_gb\x18\x02 \x01(\x03R\rnewDiskSizeGb\"\x8c\x01\n" +
+	"\x19ResizeProjectDiskMetadata\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectId\x12'\n" +
+	"\x10old_disk_size_gb\x18\x02 \x01(\x03R\roldDiskSizeGb\x12'\n" +
+	"\x10new_disk_size_gb\x18\x03 \x01(\x03R\rnewDiskSizeGb\"A\n" +
+	" SetProjectAccessBindingsMetadata\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectId\"D\n" +
+	"#UpdateProjectAccessBindingsMetadata\x12\x1d\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tR\tprojectId\"D\n" +
+	"\x1dGetProjectRestrictionsRequest\x12#\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tprojectId\"\x91\x01\n" +
+	"\x1dSetProjectRestrictionsRequest\x12#\n" +
+	"\n" +
+	"project_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tprojectId\x12K\n" +
+	"\frestrictions\x18\x02 \x03(\v2'.yandex.cloud.datasphere.v2.RestrictionR\frestrictions*S\n" +
 	"\x0fExecutionStatus\x12 \n" +
 	"\x1cEXECUTION_STATUS_UNSPECIFIED\x10\x00\x12\x06\n" +
 	"\x02OK\x10\x01\x12\t\n" +
@@ -2071,7 +2070,7 @@ const file_yandex_cloud_datasphere_v2_project_service_proto_rawDesc = "" +
 	"\x06Delete\x120.yandex.cloud.datasphere.v2.DeleteProjectRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*.\n" +
 	"\x15DeleteProjectMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02&*$/datasphere/v2/projects/{project_id}\x12\xbd\x01\n" +
 	"\x04Open\x12..yandex.cloud.datasphere.v2.OpenProjectRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2**\n" +
-	"\x13OpenProjectMetadata\x12\x13OpenProjectResponse\x82\xd3\xe4\x93\x02.:\x01*\")/datasphere/v2/projects/{project_id}:open\x12\x87\x01\n" +
+	"\x13OpenProjectMetadata\x12\x13OpenProjectResponse\x82\xd3\xe4\x93\x02.:\x01*\")/datasphere/v2/projects/{project_id}/open\x12\x87\x01\n" +
 	"\x03Get\x12-.yandex.cloud.datasphere.v2.GetProjectRequest\x1a#.yandex.cloud.datasphere.v2.Project\",\x82\xd3\xe4\x93\x02&\x12$/datasphere/v2/projects/{project_id}\x12\x8a\x01\n" +
 	"\x04List\x12/.yandex.cloud.datasphere.v2.ListProjectsRequest\x1a0.yandex.cloud.datasphere.v2.ListProjectsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/datasphere/v2/projects\x12\xb1\x01\n" +
 	"\x0eGetUnitBalance\x121.yandex.cloud.datasphere.v2.GetUnitBalanceRequest\x1a2.yandex.cloud.datasphere.v2.GetUnitBalanceResponse\"8\x82\xd3\xe4\x93\x022\x120/datasphere/v2/projects/{project_id}:unitBalance\x12\xd6\x01\n" +
@@ -2130,15 +2129,15 @@ var file_yandex_cloud_datasphere_v2_project_service_proto_goTypes = []any{
 	(*ProjectExecutionRequest)(nil),             // 18: yandex.cloud.datasphere.v2.ProjectExecutionRequest
 	(*ProjectExecutionMetadata)(nil),            // 19: yandex.cloud.datasphere.v2.ProjectExecutionMetadata
 	(*ProjectExecutionResponse)(nil),            // 20: yandex.cloud.datasphere.v2.ProjectExecutionResponse
-	(*SetProjectAccessBindingsMetadata)(nil),    // 21: yandex.cloud.datasphere.v2.SetProjectAccessBindingsMetadata
-	(*UpdateProjectAccessBindingsMetadata)(nil), // 22: yandex.cloud.datasphere.v2.UpdateProjectAccessBindingsMetadata
-	(*AddResourceToProjectRequest)(nil),         // 23: yandex.cloud.datasphere.v2.AddResourceToProjectRequest
-	(*RemoveResourceFromProjectRequest)(nil),    // 24: yandex.cloud.datasphere.v2.RemoveResourceFromProjectRequest
-	(*GetProjectRestrictionsRequest)(nil),       // 25: yandex.cloud.datasphere.v2.GetProjectRestrictionsRequest
-	(*SetProjectRestrictionsRequest)(nil),       // 26: yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest
-	(*ResizeProjectDiskRequest)(nil),            // 27: yandex.cloud.datasphere.v2.ResizeProjectDiskRequest
-	(*ResizeProjectDiskMetadata)(nil),           // 28: yandex.cloud.datasphere.v2.ResizeProjectDiskMetadata
-	(*DiskInfo)(nil),                            // 29: yandex.cloud.datasphere.v2.DiskInfo
+	(*AddResourceToProjectRequest)(nil),         // 21: yandex.cloud.datasphere.v2.AddResourceToProjectRequest
+	(*RemoveResourceFromProjectRequest)(nil),    // 22: yandex.cloud.datasphere.v2.RemoveResourceFromProjectRequest
+	(*DiskInfo)(nil),                            // 23: yandex.cloud.datasphere.v2.DiskInfo
+	(*ResizeProjectDiskRequest)(nil),            // 24: yandex.cloud.datasphere.v2.ResizeProjectDiskRequest
+	(*ResizeProjectDiskMetadata)(nil),           // 25: yandex.cloud.datasphere.v2.ResizeProjectDiskMetadata
+	(*SetProjectAccessBindingsMetadata)(nil),    // 26: yandex.cloud.datasphere.v2.SetProjectAccessBindingsMetadata
+	(*UpdateProjectAccessBindingsMetadata)(nil), // 27: yandex.cloud.datasphere.v2.UpdateProjectAccessBindingsMetadata
+	(*GetProjectRestrictionsRequest)(nil),       // 28: yandex.cloud.datasphere.v2.GetProjectRestrictionsRequest
+	(*SetProjectRestrictionsRequest)(nil),       // 29: yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest
 	nil,                                         // 30: yandex.cloud.datasphere.v2.CreateProjectRequest.LabelsEntry
 	nil,                                         // 31: yandex.cloud.datasphere.v2.UpdateProjectRequest.LabelsEntry
 	(*DiskInfo_DetailedDiskInfo)(nil),           // 32: yandex.cloud.datasphere.v2.DiskInfo.DetailedDiskInfo
@@ -2175,8 +2174,8 @@ var file_yandex_cloud_datasphere_v2_project_service_proto_depIdxs = []int32{
 	0,  // 12: yandex.cloud.datasphere.v2.ProjectExecutionResponse.execution_status:type_name -> yandex.cloud.datasphere.v2.ExecutionStatus
 	39, // 13: yandex.cloud.datasphere.v2.AddResourceToProjectRequest.resource_type:type_name -> yandex.cloud.datasphere.v2.ResourceType
 	39, // 14: yandex.cloud.datasphere.v2.RemoveResourceFromProjectRequest.resource_type:type_name -> yandex.cloud.datasphere.v2.ResourceType
-	40, // 15: yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest.restrictions:type_name -> yandex.cloud.datasphere.v2.Restriction
-	32, // 16: yandex.cloud.datasphere.v2.DiskInfo.detailed_usage:type_name -> yandex.cloud.datasphere.v2.DiskInfo.DetailedDiskInfo
+	32, // 15: yandex.cloud.datasphere.v2.DiskInfo.detailed_usage:type_name -> yandex.cloud.datasphere.v2.DiskInfo.DetailedDiskInfo
+	40, // 16: yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest.restrictions:type_name -> yandex.cloud.datasphere.v2.Restriction
 	2,  // 17: yandex.cloud.datasphere.v2.ProjectService.Create:input_type -> yandex.cloud.datasphere.v2.CreateProjectRequest
 	4,  // 18: yandex.cloud.datasphere.v2.ProjectService.Update:input_type -> yandex.cloud.datasphere.v2.UpdateProjectRequest
 	6,  // 19: yandex.cloud.datasphere.v2.ProjectService.Delete:input_type -> yandex.cloud.datasphere.v2.DeleteProjectRequest
@@ -2189,12 +2188,12 @@ var file_yandex_cloud_datasphere_v2_project_service_proto_depIdxs = []int32{
 	41, // 26: yandex.cloud.datasphere.v2.ProjectService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	42, // 27: yandex.cloud.datasphere.v2.ProjectService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	43, // 28: yandex.cloud.datasphere.v2.ProjectService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	23, // 29: yandex.cloud.datasphere.v2.ProjectService.AddResource:input_type -> yandex.cloud.datasphere.v2.AddResourceToProjectRequest
-	24, // 30: yandex.cloud.datasphere.v2.ProjectService.RemoveResource:input_type -> yandex.cloud.datasphere.v2.RemoveResourceFromProjectRequest
-	27, // 31: yandex.cloud.datasphere.v2.ProjectService.ResizeDisk:input_type -> yandex.cloud.datasphere.v2.ResizeProjectDiskRequest
+	21, // 29: yandex.cloud.datasphere.v2.ProjectService.AddResource:input_type -> yandex.cloud.datasphere.v2.AddResourceToProjectRequest
+	22, // 30: yandex.cloud.datasphere.v2.ProjectService.RemoveResource:input_type -> yandex.cloud.datasphere.v2.RemoveResourceFromProjectRequest
+	24, // 31: yandex.cloud.datasphere.v2.ProjectService.ResizeDisk:input_type -> yandex.cloud.datasphere.v2.ResizeProjectDiskRequest
 	44, // 32: yandex.cloud.datasphere.v2.ProjectService.GetRestrictionsMeta:input_type -> google.protobuf.Empty
-	25, // 33: yandex.cloud.datasphere.v2.ProjectService.GetRestrictions:input_type -> yandex.cloud.datasphere.v2.GetProjectRestrictionsRequest
-	26, // 34: yandex.cloud.datasphere.v2.ProjectService.SetRestrictions:input_type -> yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest
+	28, // 33: yandex.cloud.datasphere.v2.ProjectService.GetRestrictions:input_type -> yandex.cloud.datasphere.v2.GetProjectRestrictionsRequest
+	29, // 34: yandex.cloud.datasphere.v2.ProjectService.SetRestrictions:input_type -> yandex.cloud.datasphere.v2.SetProjectRestrictionsRequest
 	45, // 35: yandex.cloud.datasphere.v2.ProjectService.Create:output_type -> yandex.cloud.operation.Operation
 	45, // 36: yandex.cloud.datasphere.v2.ProjectService.Update:output_type -> yandex.cloud.operation.Operation
 	45, // 37: yandex.cloud.datasphere.v2.ProjectService.Delete:output_type -> yandex.cloud.operation.Operation

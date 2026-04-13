@@ -90,6 +90,18 @@ func (m *CreateEpisodeRequest) SetLineId(v string) {
 	}
 }
 
+func (m *CreateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
+	m.AccessRights = &CreateEpisodeRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *CreateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
+	m.AccessRights = &CreateEpisodeRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *CreateEpisodeRequest) SetTitle(v string) {
 	m.Title = v
 }
@@ -118,18 +130,6 @@ func (m *CreateEpisodeRequest) SetStylePresetId(v string) {
 	m.StylePresetId = v
 }
 
-func (m *CreateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
-	m.AccessRights = &CreateEpisodeRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *CreateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
-	m.AccessRights = &CreateEpisodeRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
-}
-
 func (m *CreateEpisodeMetadata) SetEpisodeId(v string) {
 	m.EpisodeId = v
 }
@@ -138,6 +138,18 @@ type UpdateEpisodeRequest_AccessRights = isUpdateEpisodeRequest_AccessRights
 
 func (m *UpdateEpisodeRequest) SetAccessRights(v UpdateEpisodeRequest_AccessRights) {
 	m.AccessRights = v
+}
+
+func (m *UpdateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
+	m.AccessRights = &UpdateEpisodeRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *UpdateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
+	m.AccessRights = &UpdateEpisodeRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
 }
 
 func (m *UpdateEpisodeRequest) SetEpisodeId(v string) {
@@ -174,18 +186,6 @@ func (m *UpdateEpisodeRequest) SetDvrSeconds(v int64) {
 
 func (m *UpdateEpisodeRequest) SetStylePresetId(v string) {
 	m.StylePresetId = v
-}
-
-func (m *UpdateEpisodeRequest) SetPublicAccess(v *EpisodePublicAccessParams) {
-	m.AccessRights = &UpdateEpisodeRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *UpdateEpisodeRequest) SetSignUrlAccess(v *EpisodeSignURLAccessParams) {
-	m.AccessRights = &UpdateEpisodeRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
 }
 
 func (m *UpdateEpisodeMetadata) SetEpisodeId(v string) {
@@ -232,10 +232,6 @@ func (m *PerformEpisodeActionRequest) SetAction(v PerformEpisodeActionRequest_Ac
 	m.Action = v
 }
 
-func (m *PerformEpisodeActionRequest) SetEpisodeId(v string) {
-	m.EpisodeId = v
-}
-
 func (m *PerformEpisodeActionRequest) SetPublish(v *PublishEpisodeAction) {
 	m.Action = &PerformEpisodeActionRequest_Publish{
 		Publish: v,
@@ -246,6 +242,10 @@ func (m *PerformEpisodeActionRequest) SetUnpublish(v *UnpublishEpisodeAction) {
 	m.Action = &PerformEpisodeActionRequest_Unpublish{
 		Unpublish: v,
 	}
+}
+
+func (m *PerformEpisodeActionRequest) SetEpisodeId(v string) {
+	m.EpisodeId = v
 }
 
 func (m *PerformEpisodeActionMetadata) SetEpisodeId(v string) {

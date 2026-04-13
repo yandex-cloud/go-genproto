@@ -1022,7 +1022,7 @@ func (x *BruteforceProtectionPolicy) GetAttempts() int64 {
 // Policy that defines password blacklist requirements.
 type PasswordBlacklistPolicy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Whether check in common password database is enabled.
+	// Whether check in common password database is enabled. Default value is true.
 	CheckCommon   *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=check_common,json=checkCommon,proto3" json:"check_common,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
