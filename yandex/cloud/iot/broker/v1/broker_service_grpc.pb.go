@@ -41,7 +41,6 @@ const (
 // A set of methods for managing broker.
 type BrokerServiceClient interface {
 	// Returns the specified broker.
-	//
 	// To get the list of available brokers, make a [List] request.
 	Get(ctx context.Context, in *GetBrokerRequest, opts ...grpc.CallOption) (*Broker, error)
 	// Retrieves the list of brokers in the specified folder.
@@ -203,7 +202,6 @@ func (c *brokerServiceClient) ListOperations(ctx context.Context, in *ListBroker
 // A set of methods for managing broker.
 type BrokerServiceServer interface {
 	// Returns the specified broker.
-	//
 	// To get the list of available brokers, make a [List] request.
 	Get(context.Context, *GetBrokerRequest) (*Broker, error)
 	// Retrieves the list of brokers in the specified folder.

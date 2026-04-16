@@ -31,9 +31,7 @@ type PurgeCacheRequest struct {
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// Set of paths:
 	// Paths of the files to remove from the cache.
-	//
 	// You may use asterisk (`*`) as a wildcard character that substitutes any number of characters.
-	//
 	// If an empty array of paths is specified (`"paths": []`), the cache is purged entirely.
 	Paths         []string `protobuf:"bytes,2,rep,name=paths,proto3" json:"paths,omitempty"`
 	unknownFields protoimpl.UnknownFields

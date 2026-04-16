@@ -32,9 +32,7 @@ type Origin struct {
 	// Used if [meta] variant is `common`.
 	Source string `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`
 	// The setting allows to enable or disable an Origin source in the Origins group.
-	//
 	// It has two possible values:
-	//
 	// True - The origin is enabled and used as a source for the CDN. An origins
 	// group must contain at least one enabled origin.
 	// False - The origin is disabled and the CDN is not using it to pull content.
@@ -135,18 +133,15 @@ type OriginParams struct {
 	// Source: IP address or Domain name of your origin and the port (if custom).
 	Source string `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
 	// The setting allows to enable or disable an Origin source in the Origins group.
-	//
 	// It has two possible values:
-	//
 	// True - The origin is enabled and used as a source for the CDN. An origins
 	// group must contain at least one enabled origins. False - The origin is disabled
 	// and the CDN is not using it to pull content.
 	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// backup option has two possible values:
-	//
-	//	True - The option is active. The origin will not be used until one of
-	//	       active origins become unavailable.
-	//	False - The option is disabled.
+	// True - The option is active. The origin will not be used until one of
+	// active origins become unavailable.
+	// False - The option is disabled.
 	Backup bool `protobuf:"varint,3,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
 	Meta          *OriginMeta `protobuf:"bytes,4,opt,name=meta,proto3" json:"meta,omitempty"`

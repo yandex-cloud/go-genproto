@@ -38,12 +38,20 @@ func (m *UsageReportRequest) SetLabels(v map[string]*LabelList) {
 	m.Labels = v
 }
 
+func (m *UsageReportRequest) SetLabelsOrFilterLogic(v bool) {
+	m.LabelsOrFilterLogic = v
+}
+
 func (m *UsageReportRequest) SetResourceIds(v []string) {
 	m.ResourceIds = v
 }
 
 func (m *UsageReportRequest) SetAggregationPeriod(v TimeGrouping) {
 	m.AggregationPeriod = v
+}
+
+func (m *UsageReportRequest) SetServiceInstanceIds(v []string) {
+	m.ServiceInstanceIds = v
 }
 
 func (m *BillingAccountUsageReportResponse) SetCurrency(v Currency) {
@@ -183,5 +191,25 @@ func (m *LabelKeyUsageReportResponse) SetExpense(v *StringDecimal) {
 }
 
 func (m *LabelKeyUsageReportResponse) SetEntitiesData(v []*LabelUsageReportEntityData) {
+	m.EntitiesData = v
+}
+
+func (m *ServiceInstanceUsageReportResponse) SetCurrency(v Currency) {
+	m.Currency = v
+}
+
+func (m *ServiceInstanceUsageReportResponse) SetCost(v *StringDecimal) {
+	m.Cost = v
+}
+
+func (m *ServiceInstanceUsageReportResponse) SetCreditDetails(v *CreditDetails) {
+	m.CreditDetails = v
+}
+
+func (m *ServiceInstanceUsageReportResponse) SetExpense(v *StringDecimal) {
+	m.Expense = v
+}
+
+func (m *ServiceInstanceUsageReportResponse) SetEntitiesData(v []*ServiceInstanceUsageReportEntityData) {
 	m.EntitiesData = v
 }

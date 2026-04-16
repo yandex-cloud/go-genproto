@@ -29,7 +29,6 @@ const (
 type GetPrivateCloudConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Private cloud connection resource to return.
-	//
 	// To get the server ID, use a [PrivateCloudConnectionService.List] request.
 	PrivateCloudConnectionId string `protobuf:"bytes,1,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetPrivateCloudConnectionRequest) GetPrivateCloudConnectionId() string 
 type ListPrivateCloudConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list private cloud connections in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -95,7 +93,6 @@ type ListPrivateCloudConnectionRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -182,7 +179,6 @@ type ListPrivateCloudConnectionResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListPrivateCloudConnectionRequest.page_size], use `next_page_token` as the value
 	// for the [ListPrivateCloudConnectionRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -238,7 +234,6 @@ type CreatePrivateCloudConnectionRequest struct {
 	// ID of Cloud Router Routing Instance.
 	RoutingInstanceId string `protobuf:"bytes,4,opt,name=routing_instance_id,json=routingInstanceId,proto3" json:"routing_instance_id,omitempty"`
 	// ID of VRF that is connected to routing Instance.
-	//
 	// To get the VRF ID, use a [VrfService.List] request.
 	VrfId         string `protobuf:"bytes,5,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -337,7 +332,6 @@ func (x *CreatePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() str
 type UpdatePrivateCloudConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private cloud connection to update.
-	//
 	// To get the private cloud connection ID, use a [PrivateCloudConnectionService.List] request.
 	PrivateCloudConnectionId string `protobuf:"bytes,1,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
 	// Field mask that specifies which fields of the PrivateCloudConnection resource are going to be updated.
@@ -447,7 +441,6 @@ func (x *UpdatePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() str
 type DeletePrivateCloudConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private cloud connection to delete.
-	//
 	// To get the private cloud connection ID, use a [PrivateCloudConnectionService.List] request.
 	PrivateCloudConnectionId string `protobuf:"bytes,1,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -540,7 +533,7 @@ var File_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto p
 
 const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"Eyandex/cloud/baremetal/v1alpha/private_cloud_connection_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\"\x7f\n" +
+	"Eyandex/cloud/baremetal/v1alpha/private_cloud_connection_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x7f\n" +
 	" GetPrivateCloudConnectionRequest\x12[\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\xde\x01\n" +
 	"!ListPrivateCloudConnectionRequest\x129\n" +
@@ -552,10 +545,10 @@ const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_service_proto
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\xc6\x01\n" +
 	"\"ListPrivateCloudConnectionResponse\x12r\n" +
 	"\x19private_cloud_connections\x18\x01 \x03(\v26.yandex.cloud.baremetal.v1alpha.PrivateCloudConnectionR\x17privateCloudConnections\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xa3\x01\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x90\x01\n" +
 	"#CreatePrivateCloudConnectionRequest\x12.\n" +
 	"\x13routing_instance_id\x18\x04 \x01(\tR\x11routingInstanceId\x123\n" +
-	"\x06vrf_id\x18\x05 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x05vrfIdJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x05\b\x06\x10\xc9\x01\"e\n" +
+	"\x06vrf_id\x18\x05 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x05vrfIdJ\x04\b\x01\x10\x04\"e\n" +
 	"$CreatePrivateCloudConnectionMetadata\x12=\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\"\xef\x01\n" +
 	"#UpdatePrivateCloudConnectionRequest\x12[\n" +

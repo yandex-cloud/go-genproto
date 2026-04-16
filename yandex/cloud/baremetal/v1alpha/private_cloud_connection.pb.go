@@ -200,7 +200,7 @@ var File_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto protorefl
 
 const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto_rawDesc = "" +
 	"\n" +
-	"=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\x03\n" +
+	"=yandex/cloud/baremetal/v1alpha/private_cloud_connection.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x03\n" +
 	"\x16PrivateCloudConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12\x19\n" +
@@ -217,8 +217,8 @@ const file_yandex_cloud_baremetal_v1alpha_private_cloud_connection_proto_rawDesc
 	"\x05READY\x10\x02\x12\t\n" +
 	"\x05ERROR\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\f\n" +
-	"\bUPDATING\x10\x05J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\n" +
-	"\x10dJ\x05\be\x10\xc9\x01Br\n" +
+	"\bUPDATING\x10\x05J\x04\b\x02\x10\x04J\x04\b\n" +
+	"\x10dBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

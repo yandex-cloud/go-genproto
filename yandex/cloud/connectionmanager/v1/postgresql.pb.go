@@ -245,8 +245,8 @@ func (*PostgreSQLAuth_UserPassword) isPostgreSQLAuth_Security() {}
 
 type PostgreSQLCluster struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Hosts         []*PostgreSQLCluster_Host `protobuf:"bytes,4,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	TlsParams     *TLSParams                `protobuf:"bytes,3,opt,name=tls_params,json=tlsParams,proto3" json:"tls_params,omitempty"`
+	Hosts         []*PostgreSQLCluster_Host `protobuf:"bytes,4,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -281,16 +281,16 @@ func (*PostgreSQLCluster) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_postgresql_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *PostgreSQLCluster) GetHosts() []*PostgreSQLCluster_Host {
+func (x *PostgreSQLCluster) GetTlsParams() *TLSParams {
 	if x != nil {
-		return x.Hosts
+		return x.TlsParams
 	}
 	return nil
 }
 
-func (x *PostgreSQLCluster) GetTlsParams() *TLSParams {
+func (x *PostgreSQLCluster) GetHosts() []*PostgreSQLCluster_Host {
 	if x != nil {
-		return x.TlsParams
+		return x.Hosts
 	}
 	return nil
 }
@@ -451,11 +451,11 @@ const file_yandex_cloud_connectionmanager_v1_postgresql_proto_rawDesc = "" +
 	"\x0ePostgreSQLAuth\x12Z\n" +
 	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPasswordB\n" +
 	"\n" +
-	"\bsecurity\"\xde\x05\n" +
-	"\x11PostgreSQLCluster\x12O\n" +
-	"\x05hosts\x18\x04 \x03(\v29.yandex.cloud.connectionmanager.v1.PostgreSQLCluster.HostR\x05hosts\x12K\n" +
+	"\bsecurity\"\xd8\x05\n" +
+	"\x11PostgreSQLCluster\x12K\n" +
 	"\n" +
-	"tls_params\x18\x03 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x1a\x9e\x04\n" +
+	"tls_params\x18\x03 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x12O\n" +
+	"\x05hosts\x18\x04 \x03(\v29.yandex.cloud.connectionmanager.v1.PostgreSQLCluster.HostR\x05hosts\x1a\x9e\x04\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04host\x18\x01 \x01(\tR\x04host\x12\x12\n" +
 	"\x04port\x18\x02 \x01(\x03R\x04port\x12R\n" +
@@ -478,7 +478,7 @@ const file_yandex_cloud_connectionmanager_v1_postgresql_proto_rawDesc = "" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
 	"\bDEGRADED\x10\x03\x12\f\n" +
-	"\bREADONLY\x10\x04J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\xff\x01\n" +
+	"\bREADONLY\x10\x04J\x04\b\x01\x10\x03\"\xff\x01\n" +
 	"\x14PostgreSQLConnection\x12N\n" +
 	"\acluster\x18\x01 \x01(\v24.yandex.cloud.connectionmanager.v1.PostgreSQLClusterR\acluster\x12,\n" +
 	"\x12managed_cluster_id\x18\x02 \x01(\tR\x10managedClusterId\x12E\n" +
@@ -513,8 +513,8 @@ var file_yandex_cloud_connectionmanager_v1_postgresql_proto_goTypes = []any{
 }
 var file_yandex_cloud_connectionmanager_v1_postgresql_proto_depIdxs = []int32{
 	7, // 0: yandex.cloud.connectionmanager.v1.PostgreSQLAuth.user_password:type_name -> yandex.cloud.connectionmanager.v1.UserPasswordAuth
-	6, // 1: yandex.cloud.connectionmanager.v1.PostgreSQLCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLCluster.Host
-	8, // 2: yandex.cloud.connectionmanager.v1.PostgreSQLCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
+	8, // 1: yandex.cloud.connectionmanager.v1.PostgreSQLCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
+	6, // 2: yandex.cloud.connectionmanager.v1.PostgreSQLCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLCluster.Host
 	4, // 3: yandex.cloud.connectionmanager.v1.PostgreSQLConnection.cluster:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLCluster
 	3, // 4: yandex.cloud.connectionmanager.v1.PostgreSQLConnection.auth:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLAuth
 	0, // 5: yandex.cloud.connectionmanager.v1.PostgreSQLCluster.Host.role:type_name -> yandex.cloud.connectionmanager.v1.PostgreSQLCluster.Host.Role

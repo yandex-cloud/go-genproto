@@ -207,15 +207,15 @@ func (x *StoragePartition) GetMountPoint() string {
 // represent a plain disk or a software RAID of disks.
 type Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Array of partitions created on the storage.
-	Partitions []*StoragePartition `protobuf:"bytes,3,rep,name=partitions,proto3" json:"partitions,omitempty"`
 	// Storage type.
 	//
 	// Types that are valid to be assigned to StorageType:
 	//
 	//	*Storage_Disk
 	//	*Storage_Raid
-	StorageType   isStorage_StorageType `protobuf_oneof:"storage_type"`
+	StorageType isStorage_StorageType `protobuf_oneof:"storage_type"`
+	// Array of partitions created on the storage.
+	Partitions    []*StoragePartition `protobuf:"bytes,3,rep,name=partitions,proto3" json:"partitions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -250,13 +250,6 @@ func (*Storage) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v1alpha_storage_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Storage) GetPartitions() []*StoragePartition {
-	if x != nil {
-		return x.Partitions
-	}
-	return nil
-}
-
 func (x *Storage) GetStorageType() isStorage_StorageType {
 	if x != nil {
 		return x.StorageType
@@ -278,6 +271,13 @@ func (x *Storage) GetRaid() *Raid {
 		if x, ok := x.StorageType.(*Storage_Raid); ok {
 			return x.Raid
 		}
+	}
+	return nil
+}
+
+func (x *Storage) GetPartitions() []*StoragePartition {
+	if x != nil {
+		return x.Partitions
 	}
 	return nil
 }
@@ -364,14 +364,14 @@ const file_yandex_cloud_baremetal_v1alpha_storage_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e24.yandex.cloud.baremetal.v1alpha.StoragePartitionTypeR\x04type\x12\x19\n" +
 	"\bsize_gib\x18\x02 \x01(\x03R\asizeGib\x12\x1f\n" +
 	"\vmount_point\x18\x03 \x01(\tR\n" +
-	"mountPoint\"\xf5\x01\n" +
-	"\aStorage\x12P\n" +
+	"mountPoint\"\xef\x01\n" +
+	"\aStorage\x12:\n" +
+	"\x04disk\x18\x04 \x01(\v2$.yandex.cloud.baremetal.v1alpha.DiskH\x00R\x04disk\x12:\n" +
+	"\x04raid\x18\x05 \x01(\v2$.yandex.cloud.baremetal.v1alpha.RaidH\x00R\x04raid\x12P\n" +
 	"\n" +
 	"partitions\x18\x03 \x03(\v20.yandex.cloud.baremetal.v1alpha.StoragePartitionR\n" +
-	"partitions\x12:\n" +
-	"\x04disk\x18\x04 \x01(\v2$.yandex.cloud.baremetal.v1alpha.DiskH\x00R\x04disk\x12:\n" +
-	"\x04raid\x18\x05 \x01(\v2$.yandex.cloud.baremetal.v1alpha.RaidH\x00R\x04raidB\x14\n" +
-	"\fstorage_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\x80\x01\n" +
+	"partitionsB\x14\n" +
+	"\fstorage_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03\"\x80\x01\n" +
 	"\x04Raid\x12<\n" +
 	"\x04type\x18\x01 \x01(\x0e2(.yandex.cloud.baremetal.v1alpha.RaidTypeR\x04type\x12:\n" +
 	"\x05disks\x18\x02 \x03(\v2$.yandex.cloud.baremetal.v1alpha.DiskR\x05disks*e\n" +
@@ -413,9 +413,9 @@ var file_yandex_cloud_baremetal_v1alpha_storage_proto_goTypes = []any{
 }
 var file_yandex_cloud_baremetal_v1alpha_storage_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.baremetal.v1alpha.StoragePartition.type:type_name -> yandex.cloud.baremetal.v1alpha.StoragePartitionType
-	2, // 1: yandex.cloud.baremetal.v1alpha.Storage.partitions:type_name -> yandex.cloud.baremetal.v1alpha.StoragePartition
-	5, // 2: yandex.cloud.baremetal.v1alpha.Storage.disk:type_name -> yandex.cloud.baremetal.v1alpha.Disk
-	4, // 3: yandex.cloud.baremetal.v1alpha.Storage.raid:type_name -> yandex.cloud.baremetal.v1alpha.Raid
+	5, // 1: yandex.cloud.baremetal.v1alpha.Storage.disk:type_name -> yandex.cloud.baremetal.v1alpha.Disk
+	4, // 2: yandex.cloud.baremetal.v1alpha.Storage.raid:type_name -> yandex.cloud.baremetal.v1alpha.Raid
+	2, // 3: yandex.cloud.baremetal.v1alpha.Storage.partitions:type_name -> yandex.cloud.baremetal.v1alpha.StoragePartition
 	1, // 4: yandex.cloud.baremetal.v1alpha.Raid.type:type_name -> yandex.cloud.baremetal.v1alpha.RaidType
 	5, // 5: yandex.cloud.baremetal.v1alpha.Raid.disks:type_name -> yandex.cloud.baremetal.v1alpha.Disk
 	6, // [6:6] is the sub-list for method output_type

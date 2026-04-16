@@ -41,7 +41,6 @@ type OriginServiceClient interface {
 	// Creates origin inside origin group.
 	Create(ctx context.Context, in *CreateOriginRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified origin from the origin group.
-	//
 	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
 	// use the origin via a [CacheService.Purge] request.
 	Update(ctx context.Context, in *UpdateOriginRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -121,7 +120,6 @@ type OriginServiceServer interface {
 	// Creates origin inside origin group.
 	Create(context.Context, *CreateOriginRequest) (*operation.Operation, error)
 	// Updates the specified origin from the origin group.
-	//
 	// Changes may take up to 15 minutes to apply. Afterwards, it is recommended to purge cache of the resources that
 	// use the origin via a [CacheService.Purge] request.
 	Update(context.Context, *UpdateOriginRequest) (*operation.Operation, error)

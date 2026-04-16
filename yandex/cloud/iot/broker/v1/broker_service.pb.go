@@ -29,7 +29,6 @@ const (
 type GetBrokerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to return.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId      string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetBrokerRequest) GetBrokerId() string {
 type ListBrokersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list brokers in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -149,7 +147,6 @@ type ListBrokersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListBrokersRequest.page_size], use `next_page_token` as the value
 	// for the [ListBrokersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -203,7 +200,6 @@ func (x *ListBrokersResponse) GetNextPageToken() string {
 type CreateBrokerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a broker in.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the broker. The name must be unique within the folder.
@@ -215,7 +211,6 @@ type CreateBrokerRequest struct {
 	// Broker certificates.
 	Certificates []*CreateBrokerRequest_Certificate `protobuf:"bytes,5,rep,name=certificates,proto3" json:"certificates,omitempty"`
 	// Broker passwords.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
 	// Options for logging broker events
@@ -351,7 +346,6 @@ func (x *CreateBrokerMetadata) GetBrokerId() string {
 type UpdateBrokerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to update.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// Field mask that specifies which fields of the broker are going to be updated.
@@ -361,7 +355,6 @@ type UpdateBrokerRequest struct {
 	// Description of the broker.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Options for logging broker events
@@ -490,7 +483,6 @@ func (x *UpdateBrokerMetadata) GetBrokerId() string {
 type DeleteBrokerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to delete.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId      string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -672,7 +664,6 @@ func (x *ListBrokerCertificatesResponse) GetCertificates() []*BrokerCertificate 
 type AddBrokerCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker for which the certificate is being added.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// Public part of the certificate that is being added.
@@ -782,7 +773,6 @@ func (x *AddBrokerCertificateMetadata) GetFingerprint() string {
 type DeleteBrokerCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to delete a certificate for.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// Fingerprint of the certificate that is being deleted.
@@ -892,7 +882,6 @@ func (x *DeleteBrokerCertificateMetadata) GetFingerprint() string {
 type ListBrokerPasswordsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to list passwords in.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId      string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -984,11 +973,9 @@ func (x *ListBrokerPasswordsResponse) GetPasswords() []*BrokerPassword {
 type AddBrokerPasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to add a password for.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// Passwords for the broker.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password      string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1096,11 +1083,9 @@ func (x *AddBrokerPasswordMetadata) GetPasswordId() string {
 type DeleteBrokerPasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the broker to delete a password for.
-	//
 	// To get a broker ID make a [BrokerService.List] request.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// ID of the password to delete.
-	//
 	// To get a password ID make a [BrokerService.ListPasswords] request.
 	PasswordId    string `protobuf:"bytes,2,opt,name=password_id,json=passwordId,proto3" json:"password_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1156,7 +1141,6 @@ type DeleteBrokerPasswordMetadata struct {
 	// ID of a broker for which the password is being delete.
 	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
 	// ID of the password to delete.
-	//
 	// To get a password ID make a [BrokerService.ListPasswords] request.
 	PasswordId    string `protobuf:"bytes,2,opt,name=password_id,json=passwordId,proto3" json:"password_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1291,7 +1275,6 @@ type ListBrokerOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListBrokerOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListBrokerOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1353,7 +1336,7 @@ type CreateBrokerRequest_Certificate struct {
 
 func (x *CreateBrokerRequest_Certificate) Reset() {
 	*x = CreateBrokerRequest_Certificate{}
-	mi := &file_yandex_cloud_iot_broker_v1_broker_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_iot_broker_v1_broker_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1365,7 +1348,7 @@ func (x *CreateBrokerRequest_Certificate) String() string {
 func (*CreateBrokerRequest_Certificate) ProtoMessage() {}
 
 func (x *CreateBrokerRequest_Certificate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_broker_v1_broker_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_iot_broker_v1_broker_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1378,7 +1361,7 @@ func (x *CreateBrokerRequest_Certificate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBrokerRequest_Certificate.ProtoReflect.Descriptor instead.
 func (*CreateBrokerRequest_Certificate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_broker_v1_broker_service_proto_rawDescGZIP(), []int{3, 1}
+	return file_yandex_cloud_iot_broker_v1_broker_service_proto_rawDescGZIP(), []int{3, 0}
 }
 
 func (x *CreateBrokerRequest_Certificate) GetCertificateData() string {
@@ -1412,12 +1395,12 @@ const file_yandex_cloud_iot_broker_v1_broker_service_proto_rawDesc = "" +
 	"\fcertificates\x18\x05 \x03(\v2;.yandex.cloud.iot.broker.v1.CreateBrokerRequest.CertificateR\fcertificates\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12G\n" +
 	"\vlog_options\x18\a \x01(\v2&.yandex.cloud.iot.broker.v1.LogOptionsR\n" +
-	"logOptions\x1a9\n" +
+	"logOptions\x1a8\n" +
+	"\vCertificate\x12)\n" +
+	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a8\n" +
-	"\vCertificate\x12)\n" +
-	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\"3\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"3\n" +
 	"\x14CreateBrokerMetadata\x12\x1b\n" +
 	"\tbroker_id\x18\x01 \x01(\tR\bbrokerId\"\xf1\x03\n" +
 	"\x13UpdateBrokerRequest\x12)\n" +
@@ -1545,8 +1528,8 @@ var file_yandex_cloud_iot_broker_v1_broker_service_proto_goTypes = []any{
 	(*DeleteBrokerPasswordMetadata)(nil),    // 20: yandex.cloud.iot.broker.v1.DeleteBrokerPasswordMetadata
 	(*ListBrokerOperationsRequest)(nil),     // 21: yandex.cloud.iot.broker.v1.ListBrokerOperationsRequest
 	(*ListBrokerOperationsResponse)(nil),    // 22: yandex.cloud.iot.broker.v1.ListBrokerOperationsResponse
-	nil,                                     // 23: yandex.cloud.iot.broker.v1.CreateBrokerRequest.LabelsEntry
-	(*CreateBrokerRequest_Certificate)(nil), // 24: yandex.cloud.iot.broker.v1.CreateBrokerRequest.Certificate
+	(*CreateBrokerRequest_Certificate)(nil), // 23: yandex.cloud.iot.broker.v1.CreateBrokerRequest.Certificate
+	nil,                                     // 24: yandex.cloud.iot.broker.v1.CreateBrokerRequest.LabelsEntry
 	nil,                                     // 25: yandex.cloud.iot.broker.v1.UpdateBrokerRequest.LabelsEntry
 	(*Broker)(nil),                          // 26: yandex.cloud.iot.broker.v1.Broker
 	(*LogOptions)(nil),                      // 27: yandex.cloud.iot.broker.v1.LogOptions
@@ -1557,8 +1540,8 @@ var file_yandex_cloud_iot_broker_v1_broker_service_proto_goTypes = []any{
 }
 var file_yandex_cloud_iot_broker_v1_broker_service_proto_depIdxs = []int32{
 	26, // 0: yandex.cloud.iot.broker.v1.ListBrokersResponse.brokers:type_name -> yandex.cloud.iot.broker.v1.Broker
-	23, // 1: yandex.cloud.iot.broker.v1.CreateBrokerRequest.labels:type_name -> yandex.cloud.iot.broker.v1.CreateBrokerRequest.LabelsEntry
-	24, // 2: yandex.cloud.iot.broker.v1.CreateBrokerRequest.certificates:type_name -> yandex.cloud.iot.broker.v1.CreateBrokerRequest.Certificate
+	24, // 1: yandex.cloud.iot.broker.v1.CreateBrokerRequest.labels:type_name -> yandex.cloud.iot.broker.v1.CreateBrokerRequest.LabelsEntry
+	23, // 2: yandex.cloud.iot.broker.v1.CreateBrokerRequest.certificates:type_name -> yandex.cloud.iot.broker.v1.CreateBrokerRequest.Certificate
 	27, // 3: yandex.cloud.iot.broker.v1.CreateBrokerRequest.log_options:type_name -> yandex.cloud.iot.broker.v1.LogOptions
 	28, // 4: yandex.cloud.iot.broker.v1.UpdateBrokerRequest.update_mask:type_name -> google.protobuf.FieldMask
 	25, // 5: yandex.cloud.iot.broker.v1.UpdateBrokerRequest.labels:type_name -> yandex.cloud.iot.broker.v1.UpdateBrokerRequest.LabelsEntry

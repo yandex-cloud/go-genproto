@@ -42,7 +42,6 @@ const (
 // A set of methods for managing devices.
 type DeviceServiceClient interface {
 	// Returns the specified device.
-	//
 	// To get the list of available devices, make a [List] request.
 	Get(ctx context.Context, in *GetDeviceRequest, opts ...grpc.CallOption) (*Device, error)
 	GetByName(ctx context.Context, in *GetByNameDeviceRequest, opts ...grpc.CallOption) (*Device, error)
@@ -215,7 +214,6 @@ func (c *deviceServiceClient) ListOperations(ctx context.Context, in *ListDevice
 // A set of methods for managing devices.
 type DeviceServiceServer interface {
 	// Returns the specified device.
-	//
 	// To get the list of available devices, make a [List] request.
 	Get(context.Context, *GetDeviceRequest) (*Device, error)
 	GetByName(context.Context, *GetByNameDeviceRequest) (*Device, error)

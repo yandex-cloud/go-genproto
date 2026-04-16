@@ -30,7 +30,6 @@ const (
 // A set of methods to retrieve information about standard image .
 type StandardImageServiceClient interface {
 	// Returns the specific standard Image resource.
-	//
 	// To get the list of standard  resources, make a [List] request.
 	Get(ctx context.Context, in *GetStandardImageRequest, opts ...grpc.CallOption) (*StandardImage, error)
 	// Retrieves the list of Image resources in the specified folder. Pass the "baremetal-standard-images" folder to get general images.
@@ -72,7 +71,6 @@ func (c *standardImageServiceClient) List(ctx context.Context, in *ListStandardI
 // A set of methods to retrieve information about standard image .
 type StandardImageServiceServer interface {
 	// Returns the specific standard Image resource.
-	//
 	// To get the list of standard  resources, make a [List] request.
 	Get(context.Context, *GetStandardImageRequest) (*StandardImage, error)
 	// Retrieves the list of Image resources in the specified folder. Pass the "baremetal-standard-images" folder to get general images.

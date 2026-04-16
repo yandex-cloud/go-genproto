@@ -32,21 +32,18 @@ const (
 	Versioning_VERSIONING_UNSPECIFIED Versioning = 0
 	// The bucket is unversioned, i.e. versioning has never been enabled for the bucket, including at its creation.
 	// Objects that are stored in the bucket have a version ID of `null`.
-	//
 	// To enable versioning, change status to `VERSIONING_ENABLED` via a [BucketService.Update] request. Note that this
 	// action is irreversible, and a bucket with versioning enabled can never return to `VERSIONING_DISABLED` state.
 	Versioning_VERSIONING_DISABLED Versioning = 1
 	// Bucket versioning is enabled, i.e. all new objects are versioned and given a unique version ID, and objects that
 	// already existed at the time versioning was enabled will be versioned and given a unique version ID when modified
 	// by future requests.
-	//
 	// To suspend versioning, change status to `VERSIONING_SUSPENDED` via a [BucketService.Update] request. You cannot
 	// disable versioning altogether for a bucket that already had it enabled; objects that had version IDs will keep
 	// them.
 	Versioning_VERSIONING_ENABLED Versioning = 2
 	// Bucket versioning is suspended, i.e. new objects are not versioned, but objects that already existed at the time
 	// versioning was suspended are still versioned and keep their version IDs.
-	//
 	// To resume versioning, change status to `VERSIONING_ENABLED` via a [BucketService.Update] request.
 	Versioning_VERSIONING_SUSPENDED Versioning = 3
 )
@@ -101,28 +98,23 @@ const (
 	ACL_Grant_PERMISSION_UNSPECIFIED ACL_Grant_Permission = 0
 	// Allows grantee the `PERMISSION_WRITE`, `PERMISSION_WRITE_ACP`, `PERMISSION_READ`, and `PERMISSION_READ_ACP`
 	// on the bucket.
-	//
 	// Maps to `x-amz-grant-full-control` header for [bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of
 	// Amazon S3-compatible HTTP API.
 	ACL_Grant_PERMISSION_FULL_CONTROL ACL_Grant_Permission = 1
 	// Allows grantee to create new objects in the bucket. For the bucket and object owners of existing objects, also
 	// allows deletions and overwrites of those objects.
-	//
 	// Maps to `x-amz-grant-write` header for [bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of Amazon
 	// S3-compatible HTTP API.
 	ACL_Grant_PERMISSION_WRITE ACL_Grant_Permission = 2
 	// Allows grantee to write the ACL for the bucket.
-	//
 	// Maps to `x-amz-grant-write-acp` header for [bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of
 	// Amazon S3-compatible HTTP API.
 	ACL_Grant_PERMISSION_WRITE_ACP ACL_Grant_Permission = 3
 	// Allows grantee to list the objects in the bucket.
-	//
 	// Maps to `x-amz-grant-read` header for [bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of Amazon
 	// S3-compatible HTTP API.
 	ACL_Grant_PERMISSION_READ ACL_Grant_Permission = 4
 	// Allows grantee to read the bucket ACL
-	//
 	// Maps to `x-amz-grant-read-acp` header for [bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of
 	// Amazon S3-compatible HTTP API.
 	ACL_Grant_PERMISSION_READ_ACP ACL_Grant_Permission = 5
@@ -181,23 +173,19 @@ const (
 	// Grant type unspecified.
 	ACL_Grant_GRANT_TYPE_UNSPECIFIED ACL_Grant_GrantType = 0
 	// A grantee is an [account on the platform](/docs/iam/concepts/#accounts).
-	//
 	// For this grantee type, you need to specify the user ID in [Bucket.acl.grants.grantee_id] field. To get user ID, see
 	// [instruction](/docs/iam/operations/users/get).
-	//
 	// Maps to using `id="*"` value for `x-amz-grant-*` header ([bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput)
 	// method of Amazon S3-compatible HTTP API).
 	ACL_Grant_GRANT_TYPE_ACCOUNT ACL_Grant_GrantType = 1
 	// Grantees are all authenticated users, both from your clouds and other users' clouds. Access
 	// permission to this group allows any account on the platform to access the resource via a signed (authenticated)
 	// request.
-	//
 	// Maps to using `uri="http://acs.amazonaws.com/groups/global/AuthenticatedUsers"` value for `x-amz-grant-*`
 	// header ([bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of Amazon S3-compatible HTTP API).
 	ACL_Grant_GRANT_TYPE_ALL_AUTHENTICATED_USERS ACL_Grant_GrantType = 2
 	// Grantees are all internet users. Access permission to this group allows anyone in the world access to the
 	// resource via signed (authenticated) or unsigned (anonymous) requests.
-	//
 	// Maps to using `uri="http://acs.amazonaws.com/groups/global/AllUsers"` value for `x-amz-grant-*` header
 	// ([bucketPutAcl](/docs/storage/s3/api-ref/acl/bucketput) method of Amazon S3-compatible HTTP API).
 	ACL_Grant_GRANT_TYPE_ALL_USERS ACL_Grant_GrantType = 3
@@ -247,7 +235,6 @@ func (ACL_Grant_GrantType) EnumDescriptor() ([]byte, []int) {
 }
 
 // List of HTTP methods that are allowed by the CORS rule.
-//
 // When a client sends a CORS-preflight `options` request with the `Access-Control-Request-Method` header (see
 // S3-compatible API reference](/docs/storage/s3/api-ref/object/options)), the specified method is checked against the
 // list of the allowed methods. If there is a match, all the allowed methods are listed in the
@@ -781,7 +768,6 @@ type Bucket struct {
 	// ID of the bucket. Always equal to [name], which has priority.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the bucket.
-	//
 	// The name is unique within the platform. For naming limitations and rules, see
 	// [documentation](/docs/storage/concepts/bucket#naming).
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -1170,24 +1156,20 @@ type CorsRule struct {
 	// ID of the CORS rule.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// List of HTTP methods allowed by the CORS rule.
-	//
 	// When a client sends a CORS-preflight `options` request with the `Access-Control-Request-Method` header (see
 	// [S3-compatible API reference](/docs/storage/s3/api-ref/object/options)), the specified method is checked against
 	// the list of the allowed methods. If there is a match, all the allowed methods are listed in the
 	// `Access-Control-Allow-Methods` header of the response.
 	AllowedMethods []CorsRule_Method `protobuf:"varint,2,rep,packed,name=allowed_methods,json=allowedMethods,proto3,enum=yandex.cloud.storage.v1.CorsRule_Method" json:"allowed_methods,omitempty"`
 	// List of HTTP headers allowed by the CORS rule.
-	//
 	// When a client sends a CORS-preflight `options` request with the `Access-Control-Request-Headers` header (see
 	// [S3-compatible API reference](/docs/storage/s3/api-ref/object/options)), the specified headers are checked against
 	// the list of the allowed headers. If there is a match, the specified headers that are allowed are listed in the
 	// `Access-Control-Allow-Headers` header of the response.
-	//
 	// Each string in the list can contain at most one `*` wildcard character that matches 0 or more characters.
 	// For example, `x-amz-*` value will allow all Amazon S3-compatible headers.
 	AllowedHeaders []string `protobuf:"bytes,3,rep,name=allowed_headers,json=allowedHeaders,proto3" json:"allowed_headers,omitempty"`
 	// List of request origins allowed by the CORS rule.
-	//
 	// Each string in the list can contain at most one `*` wildcard character that matches 0 or more characters.
 	// For example, `http://*.example.com` value will allow requests originating from all subdomains of `example.com`.
 	AllowedOrigins []string `protobuf:"bytes,4,rep,name=allowed_origins,json=allowedOrigins,proto3" json:"allowed_origins,omitempty"`
@@ -1275,15 +1257,12 @@ func (x *CorsRule) GetMaxAgeSeconds() *wrapperspb.Int64Value {
 type WebsiteSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Key of the index page object that is returned when a response is made to the root of the website.
-	//
 	// Either [index] or [redirect_all_requests] must be specified in order for the bucket to host a static website.
-	//
 	// If specified, the index page object must be located in the root of the bucket.
 	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
 	// Key of the error page object that is returned when an error occurs.
 	Error string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
 	// Configuration for redirecting all requests sent to the website.
-	//
 	// Either [redirect_all_requests] or [index] must be specified in order for the bucket to host a static website.
 	// If [redirect_all_requests] is specified, it must be the only field in [Bucket.website_settings].
 	RedirectAllRequests *WebsiteSettings_Scheme `protobuf:"bytes,3,opt,name=redirect_all_requests,json=redirectAllRequests,proto3" json:"redirect_all_requests,omitempty"`
@@ -1360,31 +1339,23 @@ type LifecycleRule struct {
 	// Indicates whether the rule is in effect.
 	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Filter that identifies the objects to which the rule applies.
-	//
 	// If not specified, the rule applies to all objects in the bucket.
 	Filter *LifecycleRule_RuleFilter `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Expiration rule.
-	//
 	// The expiration of an object is described as follows.
-	//
 	// For the unversioned bucket ([Bucket.versioning] is `VERSIONING_DISABLED`), the object is deleted and cannot be
 	// recovered.
-	//
 	// For the bucket with versioning enabled ([Bucket.versioning] is `VERSIONING_ENABLED`), the current version of the
 	// object (if it exists and is not a delete marker) is retained as a non-current version, and a delete marker becomes
 	// the current version of the object.
-	//
 	// For the bucket with versioning suspended ([Bucket.versioning] is `VERSIONING_SUSPENDED`), the current version of
 	// the object is retained as a non-current version if it is not a delete marker, or is removed otherwise, and a
 	// delete marker becomes the current version of the object.
 	Expiration *LifecycleRule_Expiration `protobuf:"bytes,4,opt,name=expiration,proto3" json:"expiration,omitempty"`
 	// List of transition rules.
-	//
 	// The transition of an object is described as follows.
-	//
 	// For the unversioned bucket ([Bucket.versioning] is `VERSIONING_DISABLED`), the object is transitioned to the
 	// specified storage class.
-	//
 	// For the bucket with versioning enabled ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended
 	// (`VERSIONING_SUSPENDED`), the current version of the object is transitioned to the specified storage class.
 	Transitions []*LifecycleRule_Transition `protobuf:"bytes,5,rep,name=transitions,proto3" json:"transitions,omitempty"`
@@ -1392,18 +1363,15 @@ type LifecycleRule struct {
 	AbortIncompleteMultipartUpload *LifecycleRule_AfterDays `protobuf:"bytes,6,opt,name=abort_incomplete_multipart_upload,json=abortIncompleteMultipartUpload,proto3" json:"abort_incomplete_multipart_upload,omitempty"`
 	// Expiration rule for non-current versions of objects in a bucket with versioning enabled ([Bucket.versioning] is
 	// `VERSIONING_ENABLED`) or suspended (`VERSIONING_SUSPENDED`).
-	//
 	// At expiration, the non-current version of the object is deleted and cannot be recovered.
 	NoncurrentExpiration *LifecycleRule_NoncurrentExpiration `protobuf:"bytes,7,opt,name=noncurrent_expiration,json=noncurrentExpiration,proto3" json:"noncurrent_expiration,omitempty"`
 	// List of transition rules for non-current versions of objects in a bucket with versioning enabled
 	// ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended (`VERSIONING_SUSPENDED`).
-	//
 	// At transition, the non-current version of the object is transitioned to the specified storage class.
 	NoncurrentTransitions []*LifecycleRule_NoncurrentTransition `protobuf:"bytes,8,rep,name=noncurrent_transitions,json=noncurrentTransitions,proto3" json:"noncurrent_transitions,omitempty"`
 	// Expiration rule for non-current delete markers of an objects in a bucket with versioning
 	// enabled ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended (`VERSIONING_SUSPENDED`).
 	// Works in the same way as noncurrent_expiration rule, but only for delete markers.
-	//
 	// At expiration, the non-current delete marker of the object is deleted and cannot be recovered.
 	NoncurrentDeleteMarkers *LifecycleRule_NoncurrentDeleteMarkers `protobuf:"bytes,9,opt,name=noncurrent_delete_markers,json=noncurrentDeleteMarkers,proto3" json:"noncurrent_delete_markers,omitempty"`
 	unknownFields           protoimpl.UnknownFields
@@ -1921,7 +1889,6 @@ type HTTPSConfig struct {
 	// End of the TLS certificate validity period (Not After field)
 	NotAfter *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=not_after,json=notAfter,proto3" json:"not_after,omitempty"`
 	// ID of the TLS certificate in Certificate Manager.
-	//
 	// To get information about the certificate from Certificate Manager, make a
 	// [yandex.cloud.certificatemanager.v1.CertificateService.Get] request.
 	CertificateId string `protobuf:"bytes,8,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
@@ -2458,17 +2425,14 @@ type WebsiteSettings_Redirect struct {
 	// Hostname of the redirect URI.
 	Hostname string `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// HTTP status code of the redirect response.
-	//
 	// Default value: `"301"`.
 	HttpRedirectCode string `protobuf:"bytes,2,opt,name=http_redirect_code,json=httpRedirectCode,proto3" json:"http_redirect_code,omitempty"`
 	// Scheme of the redirect URI.
 	Protocol WebsiteSettings_Protocol `protobuf:"varint,3,opt,name=protocol,proto3,enum=yandex.cloud.storage.v1.WebsiteSettings_Protocol" json:"protocol,omitempty"`
 	// Substitution for the prefix of the object key specified in [Condition.key_prefix_equals].
-	//
 	// At most one of [replace_key_prefix_with] and [replace_key_with] can be specified.
 	ReplaceKeyPrefixWith string `protobuf:"bytes,4,opt,name=replace_key_prefix_with,json=replaceKeyPrefixWith,proto3" json:"replace_key_prefix_with,omitempty"`
 	// New object key.
-	//
 	// At most one of [replace_key_with] and [replace_key_prefix_with] can be specified.
 	ReplaceKeyWith string `protobuf:"bytes,5,opt,name=replace_key_with,json=replaceKeyWith,proto3" json:"replace_key_with,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -2735,7 +2699,6 @@ func (x *LifecycleRule_NoncurrentExpiration) GetNoncurrentDays() *wrapperspb.Int
 
 // List of transition rules for non-current versions of objects in a bucket with versioning enabled
 // ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended (`VERSIONING_SUSPENDED`).
-//
 // At transition, the non-current version of the object is transitioned to the specified storage class.
 type LifecycleRule_NoncurrentTransition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2743,7 +2706,6 @@ type LifecycleRule_NoncurrentTransition struct {
 	// version is transitioned.
 	NoncurrentDays *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=noncurrent_days,json=noncurrentDays,proto3" json:"noncurrent_days,omitempty"`
 	// Storage class to which a non-current version of an object is transitioned from standard storage.
-	//
 	// The only supported class is cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms). Transitions from cold
 	// to standard storage and transitions to or from ice storage are not allowed.
 	StorageClass  string `protobuf:"bytes,2,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
@@ -2796,30 +2758,23 @@ func (x *LifecycleRule_NoncurrentTransition) GetStorageClass() string {
 }
 
 // List of transition rules.
-//
 // The transition of an object is described as follows.
-//
 // For the unversioned bucket ([Bucket.versioning] is `VERSIONING_DISABLED`), the object is transitioned to the
 // specified storage class.
-//
 // For the bucket with versioning enabled ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended
 // (`VERSIONING_SUSPENDED`), the current version of the object is transitioned to the specified storage class.
 type LifecycleRule_Transition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Specific date of object transition.
-	//
 	// The rule continues to apply even after the date has passed, i.e. any new objects created in the bucket are
 	// transitioned immediately.
-	//
 	// At most one of [date] and [days] fields can be specified.
 	Date *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	// Time period, in number of days from the creation or modification of the object, after which an object is
 	// transitioned.
-	//
 	// At most one of [days] and [date] fields can be specified.
 	Days *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=days,proto3" json:"days,omitempty"`
 	// Storage class to which an object is transitioned from standard storage.
-	//
 	// The only supported class is cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms). Transitions from cold
 	// to standard storage and transitions to or from ice storage are not allowed.
 	StorageClass  string `protobuf:"bytes,4,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
@@ -2881,19 +2836,15 @@ func (x *LifecycleRule_Transition) GetStorageClass() string {
 type LifecycleRule_Expiration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Specific date of object expiration.
-	//
 	// The rule continues to apply even after the date has passed, i.e. any new objects created in the bucket expire
 	// immediately.
-	//
 	// Exactly one of [date], [days], and [expired_object_delete_marker] fields can be specified.
 	Date *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
 	// Time period, in number of days from the creation or modification of the object, after which an object expires.
-	//
 	// Exactly one of [days], [date], and [expired_object_delete_marker] fields can be specified.
 	Days *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=days,proto3" json:"days,omitempty"`
 	// Indicates whether a delete marker of an object with no non-current versions (referred to as an expired object
 	// delete marker) is removed at the object's expiration.
-	//
 	// Exactly one of [expired_object_delete_marker], [date], and [days] fields can be specified.
 	ExpiredObjectDeleteMarker *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=expired_object_delete_marker,json=expiredObjectDeleteMarker,proto3" json:"expired_object_delete_marker,omitempty"`
 	unknownFields             protoimpl.UnknownFields
@@ -3107,13 +3058,13 @@ func (x *LifecycleRule_RuleFilter_And) GetTag() []*Tag {
 // Default lock configuration for added objects
 type ObjectLock_DefaultRetention struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Mode
-	Mode ObjectLock_DefaultRetention_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.storage.v1.ObjectLock_DefaultRetention_Mode" json:"mode,omitempty"`
 	// Types that are valid to be assigned to Period:
 	//
 	//	*ObjectLock_DefaultRetention_Days
 	//	*ObjectLock_DefaultRetention_Years
-	Period        isObjectLock_DefaultRetention_Period `protobuf_oneof:"period"`
+	Period isObjectLock_DefaultRetention_Period `protobuf_oneof:"period"`
+	// Mode
+	Mode          ObjectLock_DefaultRetention_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.storage.v1.ObjectLock_DefaultRetention_Mode" json:"mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3148,13 +3099,6 @@ func (*ObjectLock_DefaultRetention) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_storage_v1_bucket_proto_rawDescGZIP(), []int{13, 0}
 }
 
-func (x *ObjectLock_DefaultRetention) GetMode() ObjectLock_DefaultRetention_Mode {
-	if x != nil {
-		return x.Mode
-	}
-	return ObjectLock_DefaultRetention_MODE_UNSPECIFIED
-}
-
 func (x *ObjectLock_DefaultRetention) GetPeriod() isObjectLock_DefaultRetention_Period {
 	if x != nil {
 		return x.Period
@@ -3178,6 +3122,13 @@ func (x *ObjectLock_DefaultRetention) GetYears() int64 {
 		}
 	}
 	return 0
+}
+
+func (x *ObjectLock_DefaultRetention) GetMode() ObjectLock_DefaultRetention_Mode {
+	if x != nil {
+		return x.Mode
+	}
+	return ObjectLock_DefaultRetention_MODE_UNSPECIFIED
 }
 
 type isObjectLock_DefaultRetention_Period interface {
@@ -3646,15 +3597,15 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"SourceType\x12\x1b\n" +
 	"\x17SOURCE_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18SOURCE_TYPE_SELF_MANAGED\x10\x01\x12.\n" +
-	"*SOURCE_TYPE_MANAGED_BY_CERTIFICATE_MANAGER\x10\x02\"\xa0\x04\n" +
+	"*SOURCE_TYPE_MANAGED_BY_CERTIFICATE_MANAGER\x10\x02\"\xa6\x04\n" +
 	"\n" +
 	"ObjectLock\x12L\n" +
 	"\x06status\x18\x02 \x01(\x0e24.yandex.cloud.storage.v1.ObjectLock.ObjectLockStatusR\x06status\x12a\n" +
 	"\x11default_retention\x18\x03 \x01(\v24.yandex.cloud.storage.v1.ObjectLock.DefaultRetentionR\x10defaultRetention\x1a\xe7\x01\n" +
-	"\x10DefaultRetention\x12M\n" +
-	"\x04mode\x18\x01 \x01(\x0e29.yandex.cloud.storage.v1.ObjectLock.DefaultRetention.ModeR\x04mode\x12\x14\n" +
+	"\x10DefaultRetention\x12\x14\n" +
 	"\x04days\x18\x02 \x01(\x03H\x00R\x04days\x12\x16\n" +
-	"\x05years\x18\x03 \x01(\x03H\x00R\x05years\"F\n" +
+	"\x05years\x18\x03 \x01(\x03H\x00R\x05years\x12M\n" +
+	"\x04mode\x18\x01 \x01(\x0e29.yandex.cloud.storage.v1.ObjectLock.DefaultRetention.ModeR\x04mode\"F\n" +
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fMODE_GOVERNANCE\x10\x01\x12\x13\n" +
@@ -3663,7 +3614,7 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x10ObjectLockStatus\x12\"\n" +
 	"\x1eOBJECT_LOCK_STATUS_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bOBJECT_LOCK_STATUS_DISABLED\x10\x01\x12\x1e\n" +
-	"\x1aOBJECT_LOCK_STATUS_ENABLED\x10\x02\"\xb8\x01\n" +
+	"\x1aOBJECT_LOCK_STATUS_ENABLED\x10\x02J\x04\b\x01\x10\x02\"\xb8\x01\n" +
 	"\n" +
 	"Encryption\x12H\n" +
 	"\x05rules\x18\x01 \x03(\v22.yandex.cloud.storage.v1.Encryption.EncryptionRuleR\x05rules\x1a`\n" +

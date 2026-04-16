@@ -31,7 +31,6 @@ type GetOriginGroupRequest struct {
 	// ID of the folder that the origin group belongs to.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the origin group to return.
-	//
 	// To get a origin group ID, make a [OriginGroupService.List] request.
 	OriginGroupId int64 `protobuf:"varint,2,opt,name=origin_group_id,json=originGroupId,proto3" json:"origin_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -215,23 +214,18 @@ type CreateOriginGroupRequest struct {
 	// Name of the origin group.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// This option have two possible conditions:
-	//
-	//	true - The option is active. In case the origin responds with 4XX or 5XX codes,
-	//	       use the next origin from the list.
-	//	false - The option is disabled.
-	//
-	//	default value is true
+	// true - The option is active. In case the origin responds with 4XX or 5XX codes,
+	// use the next origin from the list.
+	// false - The option is disabled.
+	// default value is true
 	UseNext *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins: IP addresses or Domain names of your origins and the port
 	// (if custom).
 	Origins []*OriginParams `protobuf:"bytes,4,rep,name=origins,proto3" json:"origins,omitempty"`
 	// Set up origin group provider
-	//
 	// It has two possible values:
-	//
 	// ourcdn - Based on Yandex technologies
 	// gcore - Based on an external partner infrastructure
-	//
 	// Default value: ourcdn
 	ProviderType  string `protobuf:"bytes,5,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -357,10 +351,9 @@ type UpdateOriginGroupRequest struct {
 	// Name of the origin group.
 	GroupName *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=group_name,json=groupName,proto3" json:"group_name,omitempty"`
 	// This option have two possible values:
-	//
-	//	True - The option is active. In case the origin responds with 4XX or 5XX
-	//	       codes, use the next origin from the list.
-	//	False - The option is disabled.
+	// True - The option is active. In case the origin responds with 4XX or 5XX
+	// codes, use the next origin from the list.
+	// False - The option is disabled.
 	UseNext *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins: IP addresses or Domain names of your origins and the port
 	// (if custom).

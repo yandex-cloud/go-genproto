@@ -16,18 +16,18 @@ func (m *Message) SetPayload(v Message_Payload) {
 	m.Payload = v
 }
 
+func (m *Message) SetText(v *TextPayload) {
+	m.Payload = &Message_Text{
+		Text: v,
+	}
+}
+
 func (m *Message) SetUserId(v string) {
 	m.UserId = v
 }
 
 func (m *Message) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
-}
-
-func (m *Message) SetText(v *TextPayload) {
-	m.Payload = &Message_Text{
-		Text: v,
-	}
 }
 
 func (m *TextPayload) SetText(v string) {

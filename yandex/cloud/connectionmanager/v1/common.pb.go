@@ -151,6 +151,10 @@ func (x *TLSConfig) GetCaCertificate() string {
 
 type Password struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to SecretKey:
+	//
+	//	*Password_LockboxSecretKey
+	SecretKey isPassword_SecretKey `protobuf_oneof:"secret_key"`
 	// When creating/updating Password, the field "raw" is mutually exclusive
 	// with "password_generation_options". In order to switch to the "raw"
 	// password you have to explicitly clear the "password_generation_options"
@@ -161,12 +165,8 @@ type Password struct {
 	// "password_generation_options" you have to explicitly clear the "raw"
 	// field.
 	PasswordGenerationOptions *PasswordGenerationOptions `protobuf:"bytes,3,opt,name=password_generation_options,json=passwordGenerationOptions,proto3" json:"password_generation_options,omitempty"`
-	// Types that are valid to be assigned to SecretKey:
-	//
-	//	*Password_LockboxSecretKey
-	SecretKey     isPassword_SecretKey `protobuf_oneof:"secret_key"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *Password) Reset() {
@@ -199,20 +199,6 @@ func (*Password) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *Password) GetRaw() string {
-	if x != nil {
-		return x.Raw
-	}
-	return ""
-}
-
-func (x *Password) GetPasswordGenerationOptions() *PasswordGenerationOptions {
-	if x != nil {
-		return x.PasswordGenerationOptions
-	}
-	return nil
-}
-
 func (x *Password) GetSecretKey() isPassword_SecretKey {
 	if x != nil {
 		return x.SecretKey
@@ -229,6 +215,20 @@ func (x *Password) GetLockboxSecretKey() string {
 	return ""
 }
 
+func (x *Password) GetRaw() string {
+	if x != nil {
+		return x.Raw
+	}
+	return ""
+}
+
+func (x *Password) GetPasswordGenerationOptions() *PasswordGenerationOptions {
+	if x != nil {
+		return x.PasswordGenerationOptions
+	}
+	return nil
+}
+
 type isPassword_SecretKey interface {
 	isPassword_SecretKey()
 }
@@ -242,18 +242,18 @@ func (*Password_LockboxSecretKey) isPassword_SecretKey() {}
 
 type PasswordGenerationOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to PasswordGenerationOptions:
+	//
+	//	*PasswordGenerationOptions_LockboxPasswordGenerationOptions
+	PasswordGenerationOptions isPasswordGenerationOptions_PasswordGenerationOptions `protobuf_oneof:"password_generation_options"`
 	// Cookie is an arbitrary non-sensitive string that is saved with the
 	// password. When updating PasswordGenerationOptions, if the cookie passed
 	// in the update request differs from the cookie in the current
 	// PasswordGenerationOptions, the password will be re-generated. If the
 	// same cookie is passed, the password will not change.
-	Cookie string `protobuf:"bytes,1,opt,name=cookie,proto3" json:"cookie,omitempty"`
-	// Types that are valid to be assigned to PasswordGenerationOptions:
-	//
-	//	*PasswordGenerationOptions_LockboxPasswordGenerationOptions
-	PasswordGenerationOptions isPasswordGenerationOptions_PasswordGenerationOptions `protobuf_oneof:"password_generation_options"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	Cookie        string `protobuf:"bytes,1,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PasswordGenerationOptions) Reset() {
@@ -286,13 +286,6 @@ func (*PasswordGenerationOptions) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *PasswordGenerationOptions) GetCookie() string {
-	if x != nil {
-		return x.Cookie
-	}
-	return ""
-}
-
 func (x *PasswordGenerationOptions) GetPasswordGenerationOptions() isPasswordGenerationOptions_PasswordGenerationOptions {
 	if x != nil {
 		return x.PasswordGenerationOptions
@@ -307,6 +300,13 @@ func (x *PasswordGenerationOptions) GetLockboxPasswordGenerationOptions() *Lockb
 		}
 	}
 	return nil
+}
+
+func (x *PasswordGenerationOptions) GetCookie() string {
+	if x != nil {
+		return x.Cookie
+	}
+	return ""
 }
 
 type isPasswordGenerationOptions_PasswordGenerationOptions interface {
@@ -486,15 +486,15 @@ const file_yandex_cloud_connectionmanager_v1_common_proto_rawDesc = "" +
 	"\btls_mode\"2\n" +
 	"\tTLSConfig\x12%\n" +
 	"\x0eca_certificate\x18\x01 \x01(\tR\rcaCertificate\"\xd8\x01\n" +
-	"\bPassword\x12\x10\n" +
+	"\bPassword\x12.\n" +
+	"\x12lockbox_secret_key\x18\x02 \x01(\tH\x00R\x10lockboxSecretKey\x12\x10\n" +
 	"\x03raw\x18\x01 \x01(\tR\x03raw\x12|\n" +
-	"\x1bpassword_generation_options\x18\x03 \x01(\v2<.yandex.cloud.connectionmanager.v1.PasswordGenerationOptionsR\x19passwordGenerationOptions\x12.\n" +
-	"\x12lockbox_secret_key\x18\x02 \x01(\tH\x00R\x10lockboxSecretKeyB\f\n" +
+	"\x1bpassword_generation_options\x18\x03 \x01(\v2<.yandex.cloud.connectionmanager.v1.PasswordGenerationOptionsR\x19passwordGenerationOptionsB\f\n" +
 	"\n" +
 	"secret_key\"\xe9\x01\n" +
-	"\x19PasswordGenerationOptions\x12\x16\n" +
-	"\x06cookie\x18\x01 \x01(\tR\x06cookie\x12\x94\x01\n" +
-	"#lockbox_password_generation_options\x18\x02 \x01(\v2C.yandex.cloud.connectionmanager.v1.LockboxPasswordGenerationOptionsH\x00R lockboxPasswordGenerationOptionsB\x1d\n" +
+	"\x19PasswordGenerationOptions\x12\x94\x01\n" +
+	"#lockbox_password_generation_options\x18\x02 \x01(\v2C.yandex.cloud.connectionmanager.v1.LockboxPasswordGenerationOptionsH\x00R lockboxPasswordGenerationOptions\x12\x16\n" +
+	"\x06cookie\x18\x01 \x01(\tR\x06cookieB\x1d\n" +
 	"\x1bpassword_generation_options\"\xc8\x03\n" +
 	" LockboxPasswordGenerationOptions\x12\x16\n" +
 	"\x06length\x18\x02 \x01(\x03R\x06length\x12G\n" +

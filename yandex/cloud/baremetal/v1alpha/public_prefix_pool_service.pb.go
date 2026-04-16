@@ -28,7 +28,6 @@ const (
 type GetPublicPrefixPoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Public prefix pool resource to return.
-	//
 	// To get the pool ID, use a [PublicPrefixPoolService.List] request.
 	PublicPrefixPoolId string `protobuf:"bytes,1,opt,name=public_prefix_pool_id,json=publicPrefixPoolId,proto3" json:"public_prefix_pool_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -75,7 +74,6 @@ func (x *GetPublicPrefixPoolRequest) GetPublicPrefixPoolId() string {
 type ListPublicPrefixPoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list public prefix pools in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -94,7 +92,6 @@ type ListPublicPrefixPoolRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -181,7 +178,6 @@ type ListPublicPrefixPoolResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListPublicPrefixPoolRequest.page_size], use `next_page_token` as the value
 	// for the [ListPublicPrefixPoolRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -235,7 +231,6 @@ func (x *ListPublicPrefixPoolResponse) GetNextPageToken() string {
 type UpdatePublicPrefixPoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the public prefix pool to update.
-	//
 	// To get the public prefix pool ID, use a [PublicPrefixPoolService.List] request.
 	PublicPrefixPoolId string `protobuf:"bytes,1,opt,name=public_prefix_pool_id,json=publicPrefixPoolId,proto3" json:"public_prefix_pool_id,omitempty"`
 	// Field mask that specifies which fields of the PublicPrefixPool resource are going to be updated.
@@ -525,7 +520,6 @@ type ListPublicPrefixPoolOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListPublicPrefixPoolOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListPublicPrefixPoolOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -621,13 +615,13 @@ const file_yandex_cloud_baremetal_v1alpha_public_prefix_pool_service_proto_rawDe
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xdf\x04\n" +
-	"\x17PublicPrefixPoolService\x12u\n" +
-	"\x03Get\x12:.yandex.cloud.baremetal.v1alpha.GetPublicPrefixPoolRequest\x1a0.yandex.cloud.baremetal.v1alpha.PublicPrefixPool\"\x00\x12\x83\x01\n" +
-	"\x04List\x12;.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolResponse\"\x00\x12\xa2\x01\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xd9\x04\n" +
+	"\x17PublicPrefixPoolService\x12s\n" +
+	"\x03Get\x12:.yandex.cloud.baremetal.v1alpha.GetPublicPrefixPoolRequest\x1a0.yandex.cloud.baremetal.v1alpha.PublicPrefixPool\x12\x81\x01\n" +
+	"\x04List\x12;.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolResponse\x12\xa2\x01\n" +
 	"\x06Update\x12=.yandex.cloud.baremetal.v1alpha.UpdatePublicPrefixPoolRequest\x1a!.yandex.cloud.operation.Operation\"6\xb2\xd2*2\n" +
-	"\x1eUpdatePublicPrefixPoolMetadata\x12\x10PublicPrefixPool\x12\xa1\x01\n" +
-	"\x0eListOperations\x12E.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsRequest\x1aF.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsResponse\"\x00Br\n" +
+	"\x1eUpdatePublicPrefixPoolMetadata\x12\x10PublicPrefixPool\x12\x9f\x01\n" +
+	"\x0eListOperations\x12E.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsRequest\x1aF.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsResponseBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

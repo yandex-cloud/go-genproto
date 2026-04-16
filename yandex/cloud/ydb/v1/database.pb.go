@@ -160,6 +160,7 @@ type Database struct {
 	ScalePolicy      *ScalePolicy           `protobuf:"bytes,11,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	NetworkId        string                 `protobuf:"bytes,12,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	SubnetIds        []string               `protobuf:"bytes,13,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
+	SecurityGroupIds []string               `protobuf:"bytes,27,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Types that are valid to be assigned to DatabaseType:
 	//
 	//	*Database_ZonalDatabase
@@ -176,7 +177,6 @@ type Database struct {
 	KafkaApiEndpoint    string                  `protobuf:"bytes,26,opt,name=kafka_api_endpoint,json=kafkaApiEndpoint,proto3" json:"kafka_api_endpoint,omitempty"`
 	MonitoringConfig    *MonitoringConfig       `protobuf:"bytes,24,opt,name=monitoring_config,json=monitoringConfig,proto3" json:"monitoring_config,omitempty"`
 	DeletionProtection  bool                    `protobuf:"varint,25,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	SecurityGroupIds    []string                `protobuf:"bytes,27,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -295,6 +295,13 @@ func (x *Database) GetSubnetIds() []string {
 	return nil
 }
 
+func (x *Database) GetSecurityGroupIds() []string {
+	if x != nil {
+		return x.SecurityGroupIds
+	}
+	return nil
+}
+
 func (x *Database) GetDatabaseType() isDatabase_DatabaseType {
 	if x != nil {
 		return x.DatabaseType
@@ -399,13 +406,6 @@ func (x *Database) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-func (x *Database) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
 }
 
 type isDatabase_DatabaseType interface {
@@ -778,8 +778,8 @@ type DedicatedDatabase struct {
 	ScalePolicy      *ScalePolicy           `protobuf:"bytes,3,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	NetworkId        string                 `protobuf:"bytes,4,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	SubnetIds        []string               `protobuf:"bytes,5,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
-	AssignPublicIps  bool                   `protobuf:"varint,6,opt,name=assign_public_ips,json=assignPublicIps,proto3" json:"assign_public_ips,omitempty"`
 	SecurityGroupIds []string               `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
+	AssignPublicIps  bool                   `protobuf:"varint,6,opt,name=assign_public_ips,json=assignPublicIps,proto3" json:"assign_public_ips,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -849,18 +849,18 @@ func (x *DedicatedDatabase) GetSubnetIds() []string {
 	return nil
 }
 
-func (x *DedicatedDatabase) GetAssignPublicIps() bool {
-	if x != nil {
-		return x.AssignPublicIps
-	}
-	return false
-}
-
 func (x *DedicatedDatabase) GetSecurityGroupIds() []string {
 	if x != nil {
 		return x.SecurityGroupIds
 	}
 	return nil
+}
+
+func (x *DedicatedDatabase) GetAssignPublicIps() bool {
+	if x != nil {
+		return x.AssignPublicIps
+	}
+	return false
 }
 
 type ServerlessDatabase struct {
@@ -1542,16 +1542,16 @@ func (x *ScalePolicy_FixedScale) GetSize() int64 {
 // Scale policy that dynamically changes the number of database nodes within a user-defined range.
 type ScalePolicy_AutoScale struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Minimum number of nodes to which autoscaling can scale the database.
-	MinSize int64 `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
-	// Maximum number of nodes to which autoscaling can scale the database.
-	MaxSize int64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	// Type of autoscaling algorithm.
 	//
 	// Types that are valid to be assigned to AutoScaleType:
 	//
 	//	*ScalePolicy_AutoScale_TargetTracking_
 	AutoScaleType isScalePolicy_AutoScale_AutoScaleType `protobuf_oneof:"auto_scale_type"`
+	// Minimum number of nodes to which autoscaling can scale the database.
+	MinSize int64 `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
+	// Maximum number of nodes to which autoscaling can scale the database.
+	MaxSize       int64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1586,20 +1586,6 @@ func (*ScalePolicy_AutoScale) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_ydb_v1_database_proto_rawDescGZIP(), []int{9, 1}
 }
 
-func (x *ScalePolicy_AutoScale) GetMinSize() int64 {
-	if x != nil {
-		return x.MinSize
-	}
-	return 0
-}
-
-func (x *ScalePolicy_AutoScale) GetMaxSize() int64 {
-	if x != nil {
-		return x.MaxSize
-	}
-	return 0
-}
-
 func (x *ScalePolicy_AutoScale) GetAutoScaleType() isScalePolicy_AutoScale_AutoScaleType {
 	if x != nil {
 		return x.AutoScaleType
@@ -1614,6 +1600,20 @@ func (x *ScalePolicy_AutoScale) GetTargetTracking() *ScalePolicy_AutoScale_Targe
 		}
 	}
 	return nil
+}
+
+func (x *ScalePolicy_AutoScale) GetMinSize() int64 {
+	if x != nil {
+		return x.MinSize
+	}
+	return 0
+}
+
+func (x *ScalePolicy_AutoScale) GetMaxSize() int64 {
+	if x != nil {
+		return x.MaxSize
+	}
+	return 0
 }
 
 type isScalePolicy_AutoScale_AutoScaleType interface {
@@ -1717,7 +1717,8 @@ const file_yandex_cloud_ydb_v1_database_proto_rawDesc = "" +
 	"\n" +
 	"network_id\x18\f \x01(\tR\tnetworkId\x12\x1d\n" +
 	"\n" +
-	"subnet_ids\x18\r \x03(\tR\tsubnetIds\x12K\n" +
+	"subnet_ids\x18\r \x03(\tR\tsubnetIds\x12,\n" +
+	"\x12security_group_ids\x18\x1b \x03(\tR\x10securityGroupIds\x12K\n" +
 	"\x0ezonal_database\x18\x0e \x01(\v2\".yandex.cloud.ydb.v1.ZonalDatabaseH\x00R\rzonalDatabase\x12T\n" +
 	"\x11regional_database\x18\x0f \x01(\v2%.yandex.cloud.ydb.v1.RegionalDatabaseH\x00R\x10regionalDatabase\x12W\n" +
 	"\x12dedicated_database\x18\x12 \x01(\v2&.yandex.cloud.ydb.v1.DedicatedDatabaseH\x00R\x11dedicatedDatabase\x12Z\n" +
@@ -1731,8 +1732,7 @@ const file_yandex_cloud_ydb_v1_database_proto_rawDesc = "" +
 	"\x14kinesis_api_endpoint\x18\x17 \x01(\tR\x12kinesisApiEndpoint\x12,\n" +
 	"\x12kafka_api_endpoint\x18\x1a \x01(\tR\x10kafkaApiEndpoint\x12R\n" +
 	"\x11monitoring_config\x18\x18 \x01(\v2%.yandex.cloud.ydb.v1.MonitoringConfigR\x10monitoringConfig\x12/\n" +
-	"\x13deletion_protection\x18\x19 \x01(\bR\x12deletionProtection\x12,\n" +
-	"\x12security_group_ids\x18\x1b \x03(\tR\x10securityGroupIds\x1a9\n" +
+	"\x13deletion_protection\x18\x19 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x81\x01\n" +
@@ -1789,9 +1789,9 @@ const file_yandex_cloud_ydb_v1_database_proto_rawDesc = "" +
 	"\n" +
 	"network_id\x18\x04 \x01(\tR\tnetworkId\x12\x1d\n" +
 	"\n" +
-	"subnet_ids\x18\x05 \x03(\tR\tsubnetIds\x12*\n" +
-	"\x11assign_public_ips\x18\x06 \x01(\bR\x0fassignPublicIps\x12,\n" +
-	"\x12security_group_ids\x18\a \x03(\tR\x10securityGroupIds\"\x93\x02\n" +
+	"subnet_ids\x18\x05 \x03(\tR\tsubnetIds\x12,\n" +
+	"\x12security_group_ids\x18\a \x03(\tR\x10securityGroupIds\x12*\n" +
+	"\x11assign_public_ips\x18\x06 \x01(\bR\x0fassignPublicIps\"\x93\x02\n" +
 	"\x12ServerlessDatabase\x120\n" +
 	"\x14throttling_rcu_limit\x18\x01 \x01(\x03R\x12throttlingRcuLimit\x12,\n" +
 	"\x12storage_size_limit\x18\x02 \x01(\x03R\x10storageSizeLimit\x12=\n" +
@@ -1810,10 +1810,10 @@ const file_yandex_cloud_ydb_v1_database_proto_rawDesc = "" +
 	"\n" +
 	"FixedScale\x12\x1b\n" +
 	"\x04size\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\x04size\x1a\xb9\x02\n" +
-	"\tAutoScale\x12\"\n" +
+	"\tAutoScale\x12d\n" +
+	"\x0ftarget_tracking\x18\x03 \x01(\v29.yandex.cloud.ydb.v1.ScalePolicy.AutoScale.TargetTrackingH\x00R\x0etargetTracking\x12\"\n" +
 	"\bmin_size\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\aminSize\x12\"\n" +
-	"\bmax_size\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\amaxSize\x12d\n" +
-	"\x0ftarget_tracking\x18\x03 \x01(\v29.yandex.cloud.ydb.v1.ScalePolicy.AutoScale.TargetTrackingH\x00R\x0etargetTracking\x1ae\n" +
+	"\bmax_size\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\amaxSize\x1ae\n" +
 	"\x0eTargetTracking\x12C\n" +
 	"\x17cpu_utilization_percent\x18\x01 \x01(\x03B\t\xfa\xc71\x0510-90H\x00R\x15cpuUtilizationPercentB\x0e\n" +
 	"\x06target\x12\x04\xc0\xc11\x01B\x17\n" +

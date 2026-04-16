@@ -456,13 +456,13 @@ func (x *SKUUsageReportEntityData) GetPeriodic() []*UsageReportPeriodicData {
 // containing both summary data for the entity across the entire period and a time series breakdown.
 type ResourceUsageReportEntityData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Total cost associated with this label group.
+	// Total cost associated with this resource.
 	Cost *StringDecimal `protobuf:"bytes,1,opt,name=cost,proto3" json:"cost,omitempty"`
 	// Total credits (discounts, grants, adjustments) applied to this label group.
 	CreditDetails *CreditDetails `protobuf:"bytes,2,opt,name=credit_details,json=creditDetails,proto3" json:"credit_details,omitempty"`
-	// Total expense (including cost and credit) for this label group.
+	// Total expense (including cost and credit) for this resource group.
 	Expense *StringDecimal `protobuf:"bytes,3,opt,name=expense,proto3" json:"expense,omitempty"`
-	// Metadata for the label-based grouping.
+	// Metadata for the resource-based grouping.
 	Resource *Resource `protobuf:"bytes,4,opt,name=resource,proto3" json:"resource,omitempty"`
 	// Time series with usage and billing details for each TimeGrouping period (e.g., daily).
 	Periodic      []*UsageReportPeriodicData `protobuf:"bytes,5,rep,name=periodic,proto3" json:"periodic,omitempty"`
@@ -619,6 +619,90 @@ func (x *LabelUsageReportEntityData) GetPeriodic() []*UsageReportPeriodicData {
 	return nil
 }
 
+// Usage and billing data for a service instance entity in the report.
+// This represents the second level in the response structure hierarchy (entity-level totals),
+// containing both summary data for the entity across the entire period and a time series breakdown.
+type ServiceInstanceUsageReportEntityData struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Total cost associated with this service instance.
+	Cost *StringDecimal `protobuf:"bytes,1,opt,name=cost,proto3" json:"cost,omitempty"`
+	// Total credits (discounts, grants, adjustments) applied to this service instance.
+	CreditDetails *CreditDetails `protobuf:"bytes,2,opt,name=credit_details,json=creditDetails,proto3" json:"credit_details,omitempty"`
+	// Total expense (including cost and credit) for this service instance.
+	Expense *StringDecimal `protobuf:"bytes,3,opt,name=expense,proto3" json:"expense,omitempty"`
+	// Metadata for the service instance entity.
+	ServiceInstance *ServiceInstance `protobuf:"bytes,4,opt,name=service_instance,json=serviceInstance,proto3" json:"service_instance,omitempty"`
+	// Time series with usage and billing details for each TimeGrouping period (e.g., daily).
+	Periodic      []*UsageReportPeriodicData `protobuf:"bytes,5,rep,name=periodic,proto3" json:"periodic,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ServiceInstanceUsageReportEntityData) Reset() {
+	*x = ServiceInstanceUsageReportEntityData{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServiceInstanceUsageReportEntityData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceInstanceUsageReportEntityData) ProtoMessage() {}
+
+func (x *ServiceInstanceUsageReportEntityData) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceInstanceUsageReportEntityData.ProtoReflect.Descriptor instead.
+func (*ServiceInstanceUsageReportEntityData) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ServiceInstanceUsageReportEntityData) GetCost() *StringDecimal {
+	if x != nil {
+		return x.Cost
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportEntityData) GetCreditDetails() *CreditDetails {
+	if x != nil {
+		return x.CreditDetails
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportEntityData) GetExpense() *StringDecimal {
+	if x != nil {
+		return x.Expense
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportEntityData) GetServiceInstance() *ServiceInstance {
+	if x != nil {
+		return x.ServiceInstance
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportEntityData) GetPeriodic() []*UsageReportPeriodicData {
+	if x != nil {
+		return x.Periodic
+	}
+	return nil
+}
+
 // Represents usage and billing data for a specific aggregation period (e.g., a single day, month).
 // This message is part of the third level in the response structure hierarchy, providing the
 // time series breakdown for entities. It appears in the 'periodic' field of each entity data object,
@@ -644,7 +728,7 @@ type UsageReportPeriodicData struct {
 
 func (x *UsageReportPeriodicData) Reset() {
 	*x = UsageReportPeriodicData{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[7]
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -656,7 +740,7 @@ func (x *UsageReportPeriodicData) String() string {
 func (*UsageReportPeriodicData) ProtoMessage() {}
 
 func (x *UsageReportPeriodicData) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[7]
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -669,7 +753,7 @@ func (x *UsageReportPeriodicData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UsageReportPeriodicData.ProtoReflect.Descriptor instead.
 func (*UsageReportPeriodicData) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UsageReportPeriodicData) GetCost() *StringDecimal {
@@ -747,6 +831,12 @@ const file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDesc 
 	"\x0ecredit_details\x18\x02 \x01(\v24.yandex.cloud.billing.usage_records.v1.CreditDetailsR\rcreditDetails\x12N\n" +
 	"\aexpense\x18\x03 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\aexpense\x12B\n" +
 	"\x05label\x18\x04 \x01(\v2,.yandex.cloud.billing.usage_records.v1.LabelR\x05label\x12Z\n" +
+	"\bperiodic\x18\x05 \x03(\v2>.yandex.cloud.billing.usage_records.v1.UsageReportPeriodicDataR\bperiodic\"\xdc\x03\n" +
+	"$ServiceInstanceUsageReportEntityData\x12H\n" +
+	"\x04cost\x18\x01 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\x04cost\x12[\n" +
+	"\x0ecredit_details\x18\x02 \x01(\v24.yandex.cloud.billing.usage_records.v1.CreditDetailsR\rcreditDetails\x12N\n" +
+	"\aexpense\x18\x03 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\aexpense\x12a\n" +
+	"\x10service_instance\x18\x04 \x01(\v26.yandex.cloud.billing.usage_records.v1.ServiceInstanceR\x0fserviceInstance\x12Z\n" +
 	"\bperiodic\x18\x05 \x03(\v2>.yandex.cloud.billing.usage_records.v1.UsageReportPeriodicDataR\bperiodic\"\xca\x02\n" +
 	"\x17UsageReportPeriodicData\x12H\n" +
 	"\x04cost\x18\x01 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\x04cost\x12[\n" +
@@ -767,73 +857,80 @@ func file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDescGZ
 	return file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDescData
 }
 
-var file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_goTypes = []any{
-	(*BillingAccountUsageReportEntityData)(nil), // 0: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
-	(*CloudUsageReportEntityData)(nil),          // 1: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
-	(*FolderUsageReportEntityData)(nil),         // 2: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
-	(*ServiceUsageReportEntityData)(nil),        // 3: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
-	(*SKUUsageReportEntityData)(nil),            // 4: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
-	(*ResourceUsageReportEntityData)(nil),       // 5: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
-	(*LabelUsageReportEntityData)(nil),          // 6: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
-	(*UsageReportPeriodicData)(nil),             // 7: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	(*StringDecimal)(nil),                       // 8: yandex.cloud.billing.usage_records.v1.StringDecimal
-	(*CreditDetails)(nil),                       // 9: yandex.cloud.billing.usage_records.v1.CreditDetails
-	(*BillingAccount)(nil),                      // 10: yandex.cloud.billing.usage_records.v1.BillingAccount
-	(*Cloud)(nil),                               // 11: yandex.cloud.billing.usage_records.v1.Cloud
-	(*Folder)(nil),                              // 12: yandex.cloud.billing.usage_records.v1.Folder
-	(*Service)(nil),                             // 13: yandex.cloud.billing.usage_records.v1.Service
-	(*SKU)(nil),                                 // 14: yandex.cloud.billing.usage_records.v1.SKU
-	(*Resource)(nil),                            // 15: yandex.cloud.billing.usage_records.v1.Resource
-	(*Label)(nil),                               // 16: yandex.cloud.billing.usage_records.v1.Label
-	(*timestamppb.Timestamp)(nil),               // 17: google.protobuf.Timestamp
+	(*BillingAccountUsageReportEntityData)(nil),  // 0: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
+	(*CloudUsageReportEntityData)(nil),           // 1: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
+	(*FolderUsageReportEntityData)(nil),          // 2: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
+	(*ServiceUsageReportEntityData)(nil),         // 3: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
+	(*SKUUsageReportEntityData)(nil),             // 4: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
+	(*ResourceUsageReportEntityData)(nil),        // 5: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
+	(*LabelUsageReportEntityData)(nil),           // 6: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
+	(*ServiceInstanceUsageReportEntityData)(nil), // 7: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData
+	(*UsageReportPeriodicData)(nil),              // 8: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	(*StringDecimal)(nil),                        // 9: yandex.cloud.billing.usage_records.v1.StringDecimal
+	(*CreditDetails)(nil),                        // 10: yandex.cloud.billing.usage_records.v1.CreditDetails
+	(*BillingAccount)(nil),                       // 11: yandex.cloud.billing.usage_records.v1.BillingAccount
+	(*Cloud)(nil),                                // 12: yandex.cloud.billing.usage_records.v1.Cloud
+	(*Folder)(nil),                               // 13: yandex.cloud.billing.usage_records.v1.Folder
+	(*Service)(nil),                              // 14: yandex.cloud.billing.usage_records.v1.Service
+	(*SKU)(nil),                                  // 15: yandex.cloud.billing.usage_records.v1.SKU
+	(*Resource)(nil),                             // 16: yandex.cloud.billing.usage_records.v1.Resource
+	(*Label)(nil),                                // 17: yandex.cloud.billing.usage_records.v1.Label
+	(*ServiceInstance)(nil),                      // 18: yandex.cloud.billing.usage_records.v1.ServiceInstance
+	(*timestamppb.Timestamp)(nil),                // 19: google.protobuf.Timestamp
 }
 var file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_depIdxs = []int32{
-	8,  // 0: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 1: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 2: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	10, // 3: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.billing_account:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccount
-	7,  // 4: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 5: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 6: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 7: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	11, // 8: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.cloud:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
-	7,  // 9: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 10: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 11: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 12: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	12, // 13: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.folder:type_name -> yandex.cloud.billing.usage_records.v1.Folder
-	7,  // 14: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 15: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 16: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 17: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 18: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.service:type_name -> yandex.cloud.billing.usage_records.v1.Service
-	7,  // 19: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 20: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 21: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 22: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	8,  // 23: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.pricing_quantity:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	14, // 24: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.sku:type_name -> yandex.cloud.billing.usage_records.v1.SKU
-	7,  // 25: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 26: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 27: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 28: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	15, // 29: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.resource:type_name -> yandex.cloud.billing.usage_records.v1.Resource
-	7,  // 30: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 31: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 32: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 33: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	16, // 34: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.label:type_name -> yandex.cloud.billing.usage_records.v1.Label
-	7,  // 35: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
-	8,  // 36: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	9,  // 37: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	8,  // 38: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	17, // 39: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.timestamp:type_name -> google.protobuf.Timestamp
-	40, // [40:40] is the sub-list for method output_type
-	40, // [40:40] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	9,  // 0: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 1: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 2: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	11, // 3: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.billing_account:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccount
+	8,  // 4: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 5: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 6: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 7: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	12, // 8: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.cloud:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
+	8,  // 9: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 10: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 11: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 12: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	13, // 13: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.folder:type_name -> yandex.cloud.billing.usage_records.v1.Folder
+	8,  // 14: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 15: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 16: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 17: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 18: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.service:type_name -> yandex.cloud.billing.usage_records.v1.Service
+	8,  // 19: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 20: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 21: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 22: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	9,  // 23: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.pricing_quantity:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	15, // 24: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.sku:type_name -> yandex.cloud.billing.usage_records.v1.SKU
+	8,  // 25: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 26: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 27: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 28: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	16, // 29: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.resource:type_name -> yandex.cloud.billing.usage_records.v1.Resource
+	8,  // 30: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 31: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 32: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 33: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	17, // 34: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.label:type_name -> yandex.cloud.billing.usage_records.v1.Label
+	8,  // 35: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 36: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 37: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 38: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	18, // 39: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData.service_instance:type_name -> yandex.cloud.billing.usage_records.v1.ServiceInstance
+	8,  // 40: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData.periodic:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData
+	9,  // 41: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	10, // 42: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	9,  // 43: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	19, // 44: yandex.cloud.billing.usage_records.v1.UsageReportPeriodicData.timestamp:type_name -> google.protobuf.Timestamp
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_init() }
@@ -850,7 +947,7 @@ func file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDesc), len(file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

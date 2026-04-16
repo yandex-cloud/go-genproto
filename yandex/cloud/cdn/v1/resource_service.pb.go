@@ -222,12 +222,9 @@ type CreateResourceRequest struct {
 	// Labels of the resource.
 	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Set up resource provider
-	//
 	// It has two possible values:
-	//
 	// ourcdn - Based on Yandex technologies
 	// gcore - Based on an external partner infrastructure
-	//
 	// Default value: ourcdn
 	ProviderType string `protobuf:"bytes,10,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	// TLS configuration for the resource.
@@ -1092,7 +1089,7 @@ var File_yandex_cloud_cdn_v1_resource_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_resource_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/cdn/v1/resource_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/cdn/v1/origin.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
+	"*yandex/cloud/cdn/v1/resource_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/cdn/v1/origin.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetResourceRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\"\x94\x01\n" +

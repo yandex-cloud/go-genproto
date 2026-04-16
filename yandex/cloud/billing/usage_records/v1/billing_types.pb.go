@@ -124,20 +124,96 @@ func (x *BillingAccount) GetName() string {
 	return ""
 }
 
+// Represents a service instance entity
+type ServiceInstance struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Identifier of the service instance entity.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Type of the service instance: tracker, datalens, cloud, etc.
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Human-readable display name of the service instance.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional billing account identifier associated with this service instance
+	// for requested consumption period.
+	BillingAccountId string `protobuf:"bytes,4,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ServiceInstance) Reset() {
+	*x = ServiceInstance{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServiceInstance) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceInstance) ProtoMessage() {}
+
+func (x *ServiceInstance) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceInstance.ProtoReflect.Descriptor instead.
+func (*ServiceInstance) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ServiceInstance) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ServiceInstance) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *ServiceInstance) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ServiceInstance) GetBillingAccountId() string {
+	if x != nil {
+		return x.BillingAccountId
+	}
+	return ""
+}
+
 // Represents a cloud entity
 type Cloud struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier of the cloud entity.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Human-readable display name of the cloud.
-	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Optional billing account identifier associated with this cloud.
+	BillingAccountId string `protobuf:"bytes,3,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Cloud) Reset() {
 	*x = Cloud{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[2]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +225,7 @@ func (x *Cloud) String() string {
 func (*Cloud) ProtoMessage() {}
 
 func (x *Cloud) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[2]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +238,7 @@ func (x *Cloud) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cloud.ProtoReflect.Descriptor instead.
 func (*Cloud) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Cloud) GetId() string {
@@ -175,6 +251,13 @@ func (x *Cloud) GetId() string {
 func (x *Cloud) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *Cloud) GetBillingAccountId() string {
+	if x != nil {
+		return x.BillingAccountId
 	}
 	return ""
 }
@@ -192,7 +275,7 @@ type Folder struct {
 
 func (x *Folder) Reset() {
 	*x = Folder{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[3]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -204,7 +287,7 @@ func (x *Folder) String() string {
 func (*Folder) ProtoMessage() {}
 
 func (x *Folder) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[3]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -217,7 +300,7 @@ func (x *Folder) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Folder.ProtoReflect.Descriptor instead.
 func (*Folder) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Folder) GetId() string {
@@ -249,7 +332,7 @@ type Service struct {
 
 func (x *Service) Reset() {
 	*x = Service{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[4]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +344,7 @@ func (x *Service) String() string {
 func (*Service) ProtoMessage() {}
 
 func (x *Service) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[4]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +357,7 @@ func (x *Service) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Service.ProtoReflect.Descriptor instead.
 func (*Service) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Service) GetId() string {
@@ -309,6 +392,8 @@ type SKU struct {
 	RuTranslation string `protobuf:"bytes,3,opt,name=ru_translation,json=ruTranslation,proto3" json:"ru_translation,omitempty"`
 	// English-language display name
 	EnTranslation string `protobuf:"bytes,4,opt,name=en_translation,json=enTranslation,proto3" json:"en_translation,omitempty"`
+	// Display name in language of `accept-language` header
+	Translation string `protobuf:"bytes,7,opt,name=translation,proto3" json:"translation,omitempty"`
 	// Unit of measurement for pricing (e.g., "hour", "byte", "1m*request").
 	PricingUnit string `protobuf:"bytes,5,opt,name=pricing_unit,json=pricingUnit,proto3" json:"pricing_unit,omitempty"`
 	// The service ID this SKU belongs to;
@@ -319,7 +404,7 @@ type SKU struct {
 
 func (x *SKU) Reset() {
 	*x = SKU{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[5]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -331,7 +416,7 @@ func (x *SKU) String() string {
 func (*SKU) ProtoMessage() {}
 
 func (x *SKU) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[5]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -344,7 +429,7 @@ func (x *SKU) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SKU.ProtoReflect.Descriptor instead.
 func (*SKU) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SKU) GetId() string {
@@ -375,6 +460,13 @@ func (x *SKU) GetEnTranslation() string {
 	return ""
 }
 
+func (x *SKU) GetTranslation() string {
+	if x != nil {
+		return x.Translation
+	}
+	return ""
+}
+
 func (x *SKU) GetPricingUnit() string {
 	if x != nil {
 		return x.PricingUnit
@@ -393,14 +485,18 @@ func (x *SKU) GetServiceId() string {
 type Resource struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier of the resource entity.
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Human-readable display name of the resource.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Type of the service instance this resource is bound to (e.g. "cloud", "tracker", "datalens").
+	ServiceInstanceType string `protobuf:"bytes,3,opt,name=service_instance_type,json=serviceInstanceType,proto3" json:"service_instance_type,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Resource) Reset() {
 	*x = Resource{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[6]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +508,7 @@ func (x *Resource) String() string {
 func (*Resource) ProtoMessage() {}
 
 func (x *Resource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[6]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,12 +521,26 @@ func (x *Resource) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Resource.ProtoReflect.Descriptor instead.
 func (*Resource) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Resource) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *Resource) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Resource) GetServiceInstanceType() string {
+	if x != nil {
+		return x.ServiceInstanceType
 	}
 	return ""
 }
@@ -449,7 +559,7 @@ type Label struct {
 
 func (x *Label) Reset() {
 	*x = Label{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[7]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -461,7 +571,7 @@ func (x *Label) String() string {
 func (*Label) ProtoMessage() {}
 
 func (x *Label) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[7]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -474,7 +584,7 @@ func (x *Label) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Label.ProtoReflect.Descriptor instead.
 func (*Label) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Label) GetKey() string {
@@ -500,27 +610,36 @@ const file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc = "
 	"\x06values\x18\x01 \x03(\tR\x06values\"4\n" +
 	"\x0eBillingAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"+\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"w\n" +
+	"\x0fServiceInstance\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12,\n" +
+	"\x12billing_account_id\x18\x04 \x01(\tR\x10billingAccountId\"Y\n" +
 	"\x05Cloud\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\",\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12,\n" +
+	"\x12billing_account_id\x18\x03 \x01(\tR\x10billingAccountId\",\n" +
 	"\x06Folder\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\"O\n" +
 	"\aService\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xb9\x01\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xdb\x01\n" +
 	"\x03SKU\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12%\n" +
 	"\x0eru_translation\x18\x03 \x01(\tR\rruTranslation\x12%\n" +
-	"\x0een_translation\x18\x04 \x01(\tR\renTranslation\x12!\n" +
+	"\x0een_translation\x18\x04 \x01(\tR\renTranslation\x12 \n" +
+	"\vtranslation\x18\a \x01(\tR\vtranslation\x12!\n" +
 	"\fpricing_unit\x18\x05 \x01(\tR\vpricingUnit\x12\x1d\n" +
 	"\n" +
-	"service_id\x18\x06 \x01(\tR\tserviceId\"\x1a\n" +
+	"service_id\x18\x06 \x01(\tR\tserviceId\"b\n" +
 	"\bResource\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"/\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x122\n" +
+	"\x15service_instance_type\x18\x03 \x01(\tR\x13serviceInstanceType\"/\n" +
 	"\x05Label\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05valueB\x83\x01\n" +
@@ -538,16 +657,17 @@ func file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(
 	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescData
 }
 
-var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_goTypes = []any{
-	(*LabelList)(nil),      // 0: yandex.cloud.billing.usage_records.v1.LabelList
-	(*BillingAccount)(nil), // 1: yandex.cloud.billing.usage_records.v1.BillingAccount
-	(*Cloud)(nil),          // 2: yandex.cloud.billing.usage_records.v1.Cloud
-	(*Folder)(nil),         // 3: yandex.cloud.billing.usage_records.v1.Folder
-	(*Service)(nil),        // 4: yandex.cloud.billing.usage_records.v1.Service
-	(*SKU)(nil),            // 5: yandex.cloud.billing.usage_records.v1.SKU
-	(*Resource)(nil),       // 6: yandex.cloud.billing.usage_records.v1.Resource
-	(*Label)(nil),          // 7: yandex.cloud.billing.usage_records.v1.Label
+	(*LabelList)(nil),       // 0: yandex.cloud.billing.usage_records.v1.LabelList
+	(*BillingAccount)(nil),  // 1: yandex.cloud.billing.usage_records.v1.BillingAccount
+	(*ServiceInstance)(nil), // 2: yandex.cloud.billing.usage_records.v1.ServiceInstance
+	(*Cloud)(nil),           // 3: yandex.cloud.billing.usage_records.v1.Cloud
+	(*Folder)(nil),          // 4: yandex.cloud.billing.usage_records.v1.Folder
+	(*Service)(nil),         // 5: yandex.cloud.billing.usage_records.v1.Service
+	(*SKU)(nil),             // 6: yandex.cloud.billing.usage_records.v1.SKU
+	(*Resource)(nil),        // 7: yandex.cloud.billing.usage_records.v1.Resource
+	(*Label)(nil),           // 8: yandex.cloud.billing.usage_records.v1.Label
 }
 var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -568,7 +688,7 @@ func file_yandex_cloud_billing_usage_records_v1_billing_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc), len(file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -243,7 +243,7 @@ type PrivateSubnet_VrfOptions struct {
 
 func (x *PrivateSubnet_VrfOptions) Reset() {
 	*x = PrivateSubnet_VrfOptions{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_msgTypes[2]
+	mi := &file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -255,7 +255,7 @@ func (x *PrivateSubnet_VrfOptions) String() string {
 func (*PrivateSubnet_VrfOptions) ProtoMessage() {}
 
 func (x *PrivateSubnet_VrfOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_msgTypes[2]
+	mi := &file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -268,7 +268,7 @@ func (x *PrivateSubnet_VrfOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrivateSubnet_VrfOptions.ProtoReflect.Descriptor instead.
 func (*PrivateSubnet_VrfOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_rawDescGZIP(), []int{0, 1}
+	return file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *PrivateSubnet_VrfOptions) GetVrfId() string {
@@ -317,17 +317,17 @@ const file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_rawDesc = "" +
 	"vrfOptions\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12R\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v29.yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntryR\x06labels\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\xa6\x01\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v29.yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntryR\x06labels\x1a\xa6\x01\n" +
 	"\n" +
 	"VrfOptions\x12\x15\n" +
 	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\x12\x12\n" +
 	"\x04cidr\x18\x02 \x01(\tR\x04cidr\x12N\n" +
 	"\fdhcp_options\x18\x03 \x01(\v2+.yandex.cloud.baremetal.v1alpha.DhcpOptionsR\vdhcpOptions\x12\x1d\n" +
 	"\n" +
-	"gateway_ip\x18\x04 \x01(\tR\tgatewayIp\"`\n" +
+	"gateway_ip\x18\x04 \x01(\tR\tgatewayIp\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"`\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\t\n" +
@@ -355,16 +355,16 @@ var file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_msgTypes = make([]p
 var file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_goTypes = []any{
 	(PrivateSubnet_Status)(0),        // 0: yandex.cloud.baremetal.v1alpha.PrivateSubnet.Status
 	(*PrivateSubnet)(nil),            // 1: yandex.cloud.baremetal.v1alpha.PrivateSubnet
-	nil,                              // 2: yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntry
-	(*PrivateSubnet_VrfOptions)(nil), // 3: yandex.cloud.baremetal.v1alpha.PrivateSubnet.VrfOptions
+	(*PrivateSubnet_VrfOptions)(nil), // 2: yandex.cloud.baremetal.v1alpha.PrivateSubnet.VrfOptions
+	nil,                              // 3: yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntry
 	(*timestamppb.Timestamp)(nil),    // 4: google.protobuf.Timestamp
 	(*DhcpOptions)(nil),              // 5: yandex.cloud.baremetal.v1alpha.DhcpOptions
 }
 var file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.baremetal.v1alpha.PrivateSubnet.status:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet.Status
-	3, // 1: yandex.cloud.baremetal.v1alpha.PrivateSubnet.vrf_options:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet.VrfOptions
+	2, // 1: yandex.cloud.baremetal.v1alpha.PrivateSubnet.vrf_options:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet.VrfOptions
 	4, // 2: yandex.cloud.baremetal.v1alpha.PrivateSubnet.created_at:type_name -> google.protobuf.Timestamp
-	2, // 3: yandex.cloud.baremetal.v1alpha.PrivateSubnet.labels:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntry
+	3, // 3: yandex.cloud.baremetal.v1alpha.PrivateSubnet.labels:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet.LabelsEntry
 	5, // 4: yandex.cloud.baremetal.v1alpha.PrivateSubnet.VrfOptions.dhcp_options:type_name -> yandex.cloud.baremetal.v1alpha.DhcpOptions
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type

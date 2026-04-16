@@ -115,10 +115,6 @@ func (m *NetworkInterfaceSpec) SetInterface(v NetworkInterfaceSpec_Interface) {
 	m.Interface = v
 }
 
-func (m *NetworkInterfaceSpec) SetId(v string) {
-	m.Id = v
-}
-
 func (m *NetworkInterfaceSpec) SetPrivateSubnet(v *PrivateSubnetNetworkInterface) {
 	m.Subnet = &NetworkInterfaceSpec_PrivateSubnet{
 		PrivateSubnet: v,
@@ -141,6 +137,54 @@ func (m *NetworkInterfaceSpec) SetPublicInterface(v *PublicNetworkInterface) {
 	m.Interface = &NetworkInterfaceSpec_PublicInterface{
 		PublicInterface: v,
 	}
+}
+
+func (m *NetworkInterfaceSpec) SetId(v string) {
+	m.Id = v
+}
+
+type OsSettingsSpec_SshKey = isOsSettingsSpec_SshKey
+
+func (m *OsSettingsSpec) SetSshKey(v OsSettingsSpec_SshKey) {
+	m.SshKey = v
+}
+
+type OsSettingsSpec_Password = isOsSettingsSpec_Password
+
+func (m *OsSettingsSpec) SetPassword(v OsSettingsSpec_Password) {
+	m.Password = v
+}
+
+func (m *OsSettingsSpec) SetSshPublicKey(v string) {
+	m.SshKey = &OsSettingsSpec_SshPublicKey{
+		SshPublicKey: v,
+	}
+}
+
+func (m *OsSettingsSpec) SetUserSshId(v string) {
+	m.SshKey = &OsSettingsSpec_UserSshId{
+		UserSshId: v,
+	}
+}
+
+func (m *OsSettingsSpec) SetPasswordPlainText(v string) {
+	m.Password = &OsSettingsSpec_PasswordPlainText{
+		PasswordPlainText: v,
+	}
+}
+
+func (m *OsSettingsSpec) SetPasswordLockboxSecret(v *LockboxSecret) {
+	m.Password = &OsSettingsSpec_PasswordLockboxSecret{
+		PasswordLockboxSecret: v,
+	}
+}
+
+func (m *OsSettingsSpec) SetImageId(v string) {
+	m.ImageId = v
+}
+
+func (m *OsSettingsSpec) SetStorages(v []*Storage) {
+	m.Storages = v
 }
 
 func (m *UpdateServerMetadata) SetServerId(v string) {
@@ -211,6 +255,18 @@ func (m *ListServerOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *LockboxSecret) SetSecretId(v string) {
+	m.SecretId = v
+}
+
+func (m *LockboxSecret) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *LockboxSecret) SetKey(v string) {
+	m.Key = v
+}
+
 func (m *BatchCreateServersRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -273,60 +329,4 @@ func (m *StopProlongationRequest) SetServerId(v string) {
 
 func (m *ServerSetProlongationMetadata) SetServerId(v string) {
 	m.ServerId = v
-}
-
-type OsSettingsSpec_SshKey = isOsSettingsSpec_SshKey
-
-func (m *OsSettingsSpec) SetSshKey(v OsSettingsSpec_SshKey) {
-	m.SshKey = v
-}
-
-type OsSettingsSpec_Password = isOsSettingsSpec_Password
-
-func (m *OsSettingsSpec) SetPassword(v OsSettingsSpec_Password) {
-	m.Password = v
-}
-
-func (m *OsSettingsSpec) SetImageId(v string) {
-	m.ImageId = v
-}
-
-func (m *OsSettingsSpec) SetStorages(v []*Storage) {
-	m.Storages = v
-}
-
-func (m *OsSettingsSpec) SetSshPublicKey(v string) {
-	m.SshKey = &OsSettingsSpec_SshPublicKey{
-		SshPublicKey: v,
-	}
-}
-
-func (m *OsSettingsSpec) SetUserSshId(v string) {
-	m.SshKey = &OsSettingsSpec_UserSshId{
-		UserSshId: v,
-	}
-}
-
-func (m *OsSettingsSpec) SetPasswordPlainText(v string) {
-	m.Password = &OsSettingsSpec_PasswordPlainText{
-		PasswordPlainText: v,
-	}
-}
-
-func (m *OsSettingsSpec) SetPasswordLockboxSecret(v *LockboxSecret) {
-	m.Password = &OsSettingsSpec_PasswordLockboxSecret{
-		PasswordLockboxSecret: v,
-	}
-}
-
-func (m *LockboxSecret) SetSecretId(v string) {
-	m.SecretId = v
-}
-
-func (m *LockboxSecret) SetVersionId(v string) {
-	m.VersionId = v
-}
-
-func (m *LockboxSecret) SetKey(v string) {
-	m.Key = v
 }

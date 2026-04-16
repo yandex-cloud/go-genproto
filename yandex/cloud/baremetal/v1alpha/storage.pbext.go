@@ -20,10 +20,6 @@ func (m *Storage) SetStorageType(v Storage_StorageType) {
 	m.StorageType = v
 }
 
-func (m *Storage) SetPartitions(v []*StoragePartition) {
-	m.Partitions = v
-}
-
 func (m *Storage) SetDisk(v *Disk) {
 	m.StorageType = &Storage_Disk{
 		Disk: v,
@@ -34,6 +30,10 @@ func (m *Storage) SetRaid(v *Raid) {
 	m.StorageType = &Storage_Raid{
 		Raid: v,
 	}
+}
+
+func (m *Storage) SetPartitions(v []*StoragePartition) {
+	m.Partitions = v
 }
 
 func (m *Raid) SetType(v RaidType) {

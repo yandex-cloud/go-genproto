@@ -27,6 +27,7 @@ const (
 	ArtifactService_ListAccessBindings_FullMethodName   = "/yandex.cloud.cloudregistry.v1.ArtifactService/ListAccessBindings"
 	ArtifactService_SetAccessBindings_FullMethodName    = "/yandex.cloud.cloudregistry.v1.ArtifactService/SetAccessBindings"
 	ArtifactService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.cloudregistry.v1.ArtifactService/UpdateAccessBindings"
+	ArtifactService_UpsertFolder_FullMethodName         = "/yandex.cloud.cloudregistry.v1.ArtifactService/UpsertFolder"
 )
 
 // ArtifactServiceClient is the client API for ArtifactService service.
@@ -49,6 +50,8 @@ type ArtifactServiceClient interface {
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified artifact (folder, package, artifact, etc).
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Upserts a folder at the specified path within the registry.
+	UpsertFolder(ctx context.Context, in *UpsertFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type artifactServiceClient struct {
@@ -119,6 +122,16 @@ func (c *artifactServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 	return out, nil
 }
 
+func (c *artifactServiceClient) UpsertFolder(ctx context.Context, in *UpsertFolderRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ArtifactService_UpsertFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ArtifactServiceServer is the server API for ArtifactService service.
 // All implementations should embed UnimplementedArtifactServiceServer
 // for forward compatibility.
@@ -139,6 +152,8 @@ type ArtifactServiceServer interface {
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified artifact (folder, package, artifact, etc).
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
+	// Upserts a folder at the specified path within the registry.
+	UpsertFolder(context.Context, *UpsertFolderRequest) (*operation.Operation, error)
 }
 
 // UnimplementedArtifactServiceServer should be embedded to have
@@ -165,6 +180,9 @@ func (UnimplementedArtifactServiceServer) SetAccessBindings(context.Context, *ac
 }
 func (UnimplementedArtifactServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAccessBindings not implemented")
+}
+func (UnimplementedArtifactServiceServer) UpsertFolder(context.Context, *UpsertFolderRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpsertFolder not implemented")
 }
 func (UnimplementedArtifactServiceServer) testEmbeddedByValue() {}
 
@@ -294,6 +312,24 @@ func _ArtifactService_UpdateAccessBindings_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ArtifactService_UpsertFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertFolderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArtifactServiceServer).UpsertFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArtifactService_UpsertFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArtifactServiceServer).UpsertFolder(ctx, req.(*UpsertFolderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ArtifactService_ServiceDesc is the grpc.ServiceDesc for ArtifactService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +360,10 @@ var ArtifactService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _ArtifactService_UpdateAccessBindings_Handler,
+		},
+		{
+			MethodName: "UpsertFolder",
+			Handler:    _ArtifactService_UpsertFolder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

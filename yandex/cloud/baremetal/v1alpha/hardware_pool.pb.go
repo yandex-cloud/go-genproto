@@ -27,7 +27,6 @@ type HardwarePool struct {
 	// ID of the hardware pool.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the zone where the hardware pool is located.
-	//
 	// To get the zone ID use a [ZoneService.List] request.
 	ZoneId        string `protobuf:"bytes,2,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields

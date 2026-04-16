@@ -1874,8 +1874,9 @@ func (x *CatalogSessionPropertyAccessRule) GetDescription() string {
 }
 
 type CatalogAccessRuleMatcher_CatalogIds struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of table names. The rule will be applied if a table name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1918,8 +1919,9 @@ func (x *CatalogAccessRuleMatcher_CatalogIds) GetAny() []string {
 }
 
 type CatalogAccessRuleMatcher_CatalogNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of catalog names. The rule will be applied if a catalog name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1962,8 +1964,9 @@ func (x *CatalogAccessRuleMatcher_CatalogNames) GetAny() []string {
 }
 
 type SchemaAccessRuleMatcher_SchemaNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of schema names. The rule will be applied if a schema name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2006,8 +2009,9 @@ func (x *SchemaAccessRuleMatcher_SchemaNames) GetAny() []string {
 }
 
 type TableAccessRuleMatcher_TableNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of table names. The rule will be applied if a table name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2050,8 +2054,9 @@ func (x *TableAccessRuleMatcher_TableNames) GetAny() []string {
 }
 
 type FunctionAccessRuleMatcher_FunctionNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of function names. The rule will be applied if a function name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2094,8 +2099,9 @@ func (x *FunctionAccessRuleMatcher_FunctionNames) GetAny() []string {
 }
 
 type ProcedureAccessRuleMatcher_ProcedureNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of procedure names. The rule will be applied if a procedure name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2138,8 +2144,9 @@ func (x *ProcedureAccessRuleMatcher_ProcedureNames) GetAny() []string {
 }
 
 type PropertyAccessRuleMatcher_PropertyNames struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Any           []string               `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of property names. The rule will be applied if a property name is within this list.
+	Any           []string `protobuf:"bytes,1,rep,name=any,proto3" json:"any,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2260,7 +2267,7 @@ const file_yandex_cloud_trino_v1_access_control_proto_rawDesc = "" +
 	"procedures\x12@\n" +
 	"\aqueries\x18\x06 \x03(\v2&.yandex.cloud.trino.v1.QueryAccessRuleR\aqueries\x12r\n" +
 	"\x19system_session_properties\x18\a \x03(\v26.yandex.cloud.trino.v1.SystemSessionPropertyAccessRuleR\x17systemSessionProperties\x12u\n" +
-	"\x1acatalog_session_properties\x18\b \x03(\v27.yandex.cloud.trino.v1.CatalogSessionPropertyAccessRuleR\x18catalogSessionProperties\"\xfc\x02\n" +
+	"\x1acatalog_session_properties\x18\b \x03(\v27.yandex.cloud.trino.v1.CatalogSessionPropertyAccessRuleR\x18catalogSessionProperties\"\xf6\x02\n" +
 	"\x18CatalogAccessRuleMatcher\x12,\n" +
 	"\vname_regexp\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256H\x00R\n" +
 	"nameRegexp\x12N\n" +
@@ -2271,7 +2278,7 @@ const file_yandex_cloud_trino_v1_access_control_proto_rawDesc = "" +
 	"\x03any\x18\x01 \x03(\tB\x15\x82\xc81\x05<=128\x8a\xc81\x04<=63\x90\xc81\x01R\x03any\x1a7\n" +
 	"\fCatalogNames\x12'\n" +
 	"\x03any\x18\x01 \x03(\tB\x15\x82\xc81\x05<=128\x8a\xc81\x04<=63\x90\xc81\x01R\x03anyB\x10\n" +
-	"\bmatch_by\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\xfa\x01\n" +
+	"\bmatch_by\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03\"\xfa\x01\n" +
 	"\x17SchemaAccessRuleMatcher\x12,\n" +
 	"\vname_regexp\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256H\x00R\n" +
 	"nameRegexp\x12R\n" +

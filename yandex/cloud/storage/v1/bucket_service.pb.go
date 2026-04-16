@@ -34,12 +34,10 @@ const (
 	// View unspecified.
 	GetBucketRequest_VIEW_UNSPECIFIED GetBucketRequest_View = 0
 	// Returns basic information about a bucket.
-	//
 	// The following fields will _not_ be returned: [Bucket.acl], [Bucket.cors], [Bucket.website_settings],
 	// [Bucket.lifecycle_rules], [Bucket.tags].
 	GetBucketRequest_VIEW_BASIC GetBucketRequest_View = 1
 	// Returns basic information and access control list (ACL) for the bucket.
-	//
 	// The following fields will _not_ be returned: [Bucket.cors], [Bucket.website_settings], [Bucket.lifecycle_rules],
 	// [Bucket.tags].
 	GetBucketRequest_VIEW_ACL GetBucketRequest_View = 2
@@ -93,11 +91,9 @@ func (GetBucketRequest_View) EnumDescriptor() ([]byte, []int) {
 type GetBucketRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the bucket to return.
-	//
 	// To get the bucket name, make a [BucketService.List] request.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Scope of information about the bucket to return.
-	//
 	// Access to scopes is managed via [Identity and Access Management roles](/docs/storage/security),
 	// bucket [ACL](/docs/storage/concepts/acl) and [policies](/docs/storage/concepts/policy).
 	View          GetBucketRequest_View `protobuf:"varint,2,opt,name=view,proto3,enum=yandex.cloud.storage.v1.GetBucketRequest_View" json:"view,omitempty"`
@@ -152,7 +148,6 @@ func (x *GetBucketRequest) GetView() GetBucketRequest_View {
 type ListBucketsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list buckets in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Indicates that the list is being continued on this bucket with a token.
@@ -268,15 +263,238 @@ func (x *ListBucketsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type CreateBucketMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the bucket that is being created.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateBucketMetadata) Reset() {
+	*x = CreateBucketMetadata{}
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateBucketMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateBucketMetadata) ProtoMessage() {}
+
+func (x *CreateBucketMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateBucketMetadata.ProtoReflect.Descriptor instead.
+func (*CreateBucketMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateBucketMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type UpdateBucketMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the bucket that is being updated.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBucketMetadata) Reset() {
+	*x = UpdateBucketMetadata{}
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBucketMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBucketMetadata) ProtoMessage() {}
+
+func (x *UpdateBucketMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBucketMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateBucketMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdateBucketMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type DeleteBucketMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the bucket that is being deleted.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBucketMetadata) Reset() {
+	*x = DeleteBucketMetadata{}
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBucketMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBucketMetadata) ProtoMessage() {}
+
+func (x *DeleteBucketMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBucketMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteBucketMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteBucketMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type SetBucketHTTPSConfigMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the bucket the HTTPS configuration is being updated for.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetBucketHTTPSConfigMetadata) Reset() {
+	*x = SetBucketHTTPSConfigMetadata{}
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetBucketHTTPSConfigMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetBucketHTTPSConfigMetadata) ProtoMessage() {}
+
+func (x *SetBucketHTTPSConfigMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetBucketHTTPSConfigMetadata.ProtoReflect.Descriptor instead.
+func (*SetBucketHTTPSConfigMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *SetBucketHTTPSConfigMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type DeleteBucketHTTPSConfigMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the bucket the HTTPS configuration is being deleted for.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBucketHTTPSConfigMetadata) Reset() {
+	*x = DeleteBucketHTTPSConfigMetadata{}
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBucketHTTPSConfigMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBucketHTTPSConfigMetadata) ProtoMessage() {}
+
+func (x *DeleteBucketHTTPSConfigMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBucketHTTPSConfigMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteBucketHTTPSConfigMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteBucketHTTPSConfigMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type CreateBucketRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the bucket.
-	//
 	// The name must be unique within the platform. For naming limitations and rules, see
 	// [documentation](/docs/storage/concepts/bucket#naming).
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the folder to create a bucket in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Default storage class for objects in the bucket. Supported classes are standard storage (`STANDARD`), cold storage
@@ -313,7 +531,7 @@ type CreateBucketRequest struct {
 
 func (x *CreateBucketRequest) Reset() {
 	*x = CreateBucketRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -325,7 +543,7 @@ func (x *CreateBucketRequest) String() string {
 func (*CreateBucketRequest) ProtoMessage() {}
 
 func (x *CreateBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,7 +556,7 @@ func (x *CreateBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBucketRequest.ProtoReflect.Descriptor instead.
 func (*CreateBucketRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateBucketRequest) GetName() string {
@@ -418,57 +636,10 @@ func (x *CreateBucketRequest) GetDisabledStatickeyAuth() bool {
 	return false
 }
 
-type CreateBucketMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket that is being created.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateBucketMetadata) Reset() {
-	*x = CreateBucketMetadata{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateBucketMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateBucketMetadata) ProtoMessage() {}
-
-func (x *CreateBucketMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateBucketMetadata.ProtoReflect.Descriptor instead.
-func (*CreateBucketMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CreateBucketMetadata) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 type UpdateBucketRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the bucket to update.
-	//
 	// The name cannot be updated.
-	//
 	// To get the bucket name, make a [BucketService.List] request.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Update mask that specifies which attributes of the bucket should be updated.
@@ -522,7 +693,7 @@ type UpdateBucketRequest struct {
 
 func (x *UpdateBucketRequest) Reset() {
 	*x = UpdateBucketRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -534,7 +705,7 @@ func (x *UpdateBucketRequest) String() string {
 func (*UpdateBucketRequest) ProtoMessage() {}
 
 func (x *UpdateBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -547,7 +718,7 @@ func (x *UpdateBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBucketRequest.ProtoReflect.Descriptor instead.
 func (*UpdateBucketRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateBucketRequest) GetName() string {
@@ -662,56 +833,10 @@ func (x *UpdateBucketRequest) GetDisabledStatickeyAuth() bool {
 	return false
 }
 
-type UpdateBucketMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket that is being updated.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateBucketMetadata) Reset() {
-	*x = UpdateBucketMetadata{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateBucketMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateBucketMetadata) ProtoMessage() {}
-
-func (x *UpdateBucketMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateBucketMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateBucketMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *UpdateBucketMetadata) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 // DeleteBucketRequest deletes requested bucket from the Cloud.
 type DeleteBucketRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the bucket to update.
-	//
 	// To get the bucket name, make a [BucketService.List] request.
 	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -720,7 +845,7 @@ type DeleteBucketRequest struct {
 
 func (x *DeleteBucketRequest) Reset() {
 	*x = DeleteBucketRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -732,7 +857,7 @@ func (x *DeleteBucketRequest) String() string {
 func (*DeleteBucketRequest) ProtoMessage() {}
 
 func (x *DeleteBucketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -745,55 +870,10 @@ func (x *DeleteBucketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBucketRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBucketRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteBucketRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type DeleteBucketMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket that is being deleted.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBucketMetadata) Reset() {
-	*x = DeleteBucketMetadata{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBucketMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBucketMetadata) ProtoMessage() {}
-
-func (x *DeleteBucketMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBucketMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteBucketMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *DeleteBucketMetadata) GetName() string {
 	if x != nil {
 		return x.Name
 	}
@@ -810,7 +890,7 @@ type GetBucketStatsRequest struct {
 
 func (x *GetBucketStatsRequest) Reset() {
 	*x = GetBucketStatsRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -822,7 +902,7 @@ func (x *GetBucketStatsRequest) String() string {
 func (*GetBucketStatsRequest) ProtoMessage() {}
 
 func (x *GetBucketStatsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -835,7 +915,7 @@ func (x *GetBucketStatsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBucketStatsRequest.ProtoReflect.Descriptor instead.
 func (*GetBucketStatsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetBucketStatsRequest) GetName() string {
@@ -855,7 +935,7 @@ type GetBucketHTTPSConfigRequest struct {
 
 func (x *GetBucketHTTPSConfigRequest) Reset() {
 	*x = GetBucketHTTPSConfigRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -867,7 +947,7 @@ func (x *GetBucketHTTPSConfigRequest) String() string {
 func (*GetBucketHTTPSConfigRequest) ProtoMessage() {}
 
 func (x *GetBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -880,7 +960,7 @@ func (x *GetBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetBucketHTTPSConfigRequest.ProtoReflect.Descriptor instead.
 func (*GetBucketHTTPSConfigRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetBucketHTTPSConfigRequest) GetName() string {
@@ -902,7 +982,7 @@ type SelfManagedHTTPSConfigParams struct {
 
 func (x *SelfManagedHTTPSConfigParams) Reset() {
 	*x = SelfManagedHTTPSConfigParams{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -914,7 +994,7 @@ func (x *SelfManagedHTTPSConfigParams) String() string {
 func (*SelfManagedHTTPSConfigParams) ProtoMessage() {}
 
 func (x *SelfManagedHTTPSConfigParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -927,7 +1007,7 @@ func (x *SelfManagedHTTPSConfigParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SelfManagedHTTPSConfigParams.ProtoReflect.Descriptor instead.
 func (*SelfManagedHTTPSConfigParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *SelfManagedHTTPSConfigParams) GetCertificatePem() string {
@@ -948,7 +1028,6 @@ func (x *SelfManagedHTTPSConfigParams) GetPrivateKeyPem() string {
 type CertificateManagerHTTPSConfigParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the certificate.
-	//
 	// To get the list of all available certificates, make a [yandex.cloud.certificatemanager.v1.CertificateService.List]
 	// request.
 	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
@@ -958,7 +1037,7 @@ type CertificateManagerHTTPSConfigParams struct {
 
 func (x *CertificateManagerHTTPSConfigParams) Reset() {
 	*x = CertificateManagerHTTPSConfigParams{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -970,7 +1049,7 @@ func (x *CertificateManagerHTTPSConfigParams) String() string {
 func (*CertificateManagerHTTPSConfigParams) ProtoMessage() {}
 
 func (x *CertificateManagerHTTPSConfigParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -983,7 +1062,7 @@ func (x *CertificateManagerHTTPSConfigParams) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use CertificateManagerHTTPSConfigParams.ProtoReflect.Descriptor instead.
 func (*CertificateManagerHTTPSConfigParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CertificateManagerHTTPSConfigParams) GetCertificateId() string {
@@ -995,22 +1074,22 @@ func (x *CertificateManagerHTTPSConfigParams) GetCertificateId() string {
 
 type SetBucketHTTPSConfigRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket to update the HTTPS configuration for.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// HTTPS configuration parameters.
 	//
 	// Types that are valid to be assigned to Params:
 	//
 	//	*SetBucketHTTPSConfigRequest_SelfManaged
 	//	*SetBucketHTTPSConfigRequest_CertificateManager
-	Params        isSetBucketHTTPSConfigRequest_Params `protobuf_oneof:"params"`
+	Params isSetBucketHTTPSConfigRequest_Params `protobuf_oneof:"params"`
+	// Name of the bucket to update the HTTPS configuration for.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetBucketHTTPSConfigRequest) Reset() {
 	*x = SetBucketHTTPSConfigRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1022,7 +1101,7 @@ func (x *SetBucketHTTPSConfigRequest) String() string {
 func (*SetBucketHTTPSConfigRequest) ProtoMessage() {}
 
 func (x *SetBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1035,14 +1114,7 @@ func (x *SetBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetBucketHTTPSConfigRequest.ProtoReflect.Descriptor instead.
 func (*SetBucketHTTPSConfigRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *SetBucketHTTPSConfigRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
+	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SetBucketHTTPSConfigRequest) GetParams() isSetBucketHTTPSConfigRequest_Params {
@@ -1070,20 +1142,25 @@ func (x *SetBucketHTTPSConfigRequest) GetCertificateManager() *CertificateManage
 	return nil
 }
 
+func (x *SetBucketHTTPSConfigRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 type isSetBucketHTTPSConfigRequest_Params interface {
 	isSetBucketHTTPSConfigRequest_Params()
 }
 
 type SetBucketHTTPSConfigRequest_SelfManaged struct {
 	// Your TLS certificate, uploaded directly.
-	//
 	// Object Storage only supports [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail)-encoded certificates.
 	SelfManaged *SelfManagedHTTPSConfigParams `protobuf:"bytes,2,opt,name=self_managed,json=selfManaged,proto3,oneof"`
 }
 
 type SetBucketHTTPSConfigRequest_CertificateManager struct {
 	// TLS certificate from Certificate Manager.
-	//
 	// To create a certificate in Certificate Manager, make a
 	// [yandex.cloud.certificatemanager.v1.CertificateService.Create] request.
 	CertificateManager *CertificateManagerHTTPSConfigParams `protobuf:"bytes,3,opt,name=certificate_manager,json=certificateManager,proto3,oneof"`
@@ -1092,51 +1169,6 @@ type SetBucketHTTPSConfigRequest_CertificateManager struct {
 func (*SetBucketHTTPSConfigRequest_SelfManaged) isSetBucketHTTPSConfigRequest_Params() {}
 
 func (*SetBucketHTTPSConfigRequest_CertificateManager) isSetBucketHTTPSConfigRequest_Params() {}
-
-type SetBucketHTTPSConfigMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket the HTTPS configuration is being updated for.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SetBucketHTTPSConfigMetadata) Reset() {
-	*x = SetBucketHTTPSConfigMetadata{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SetBucketHTTPSConfigMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SetBucketHTTPSConfigMetadata) ProtoMessage() {}
-
-func (x *SetBucketHTTPSConfigMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SetBucketHTTPSConfigMetadata.ProtoReflect.Descriptor instead.
-func (*SetBucketHTTPSConfigMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *SetBucketHTTPSConfigMetadata) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
 
 type DeleteBucketHTTPSConfigRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1148,7 +1180,7 @@ type DeleteBucketHTTPSConfigRequest struct {
 
 func (x *DeleteBucketHTTPSConfigRequest) Reset() {
 	*x = DeleteBucketHTTPSConfigRequest{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1160,7 +1192,7 @@ func (x *DeleteBucketHTTPSConfigRequest) String() string {
 func (*DeleteBucketHTTPSConfigRequest) ProtoMessage() {}
 
 func (x *DeleteBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1173,55 +1205,10 @@ func (x *DeleteBucketHTTPSConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBucketHTTPSConfigRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBucketHTTPSConfigRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *DeleteBucketHTTPSConfigRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type DeleteBucketHTTPSConfigMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket the HTTPS configuration is being deleted for.
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBucketHTTPSConfigMetadata) Reset() {
-	*x = DeleteBucketHTTPSConfigMetadata{}
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBucketHTTPSConfigMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBucketHTTPSConfigMetadata) ProtoMessage() {}
-
-func (x *DeleteBucketHTTPSConfigMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBucketHTTPSConfigMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteBucketHTTPSConfigMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_storage_v1_bucket_service_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *DeleteBucketHTTPSConfigMetadata) GetName() string {
+func (x *DeleteBucketHTTPSConfigRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
@@ -1618,7 +1605,17 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x04 \x01(\x03R\bpageSizeJ\x04\b\x02\x10\x03\"x\n" +
 	"\x13ListBucketsResponse\x129\n" +
 	"\abuckets\x18\x01 \x03(\v2\x1f.yandex.cloud.storage.v1.BucketR\abuckets\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xac\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"*\n" +
+	"\x14CreateBucketMetadata\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"*\n" +
+	"\x14UpdateBucketMetadata\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"*\n" +
+	"\x14DeleteBucketMetadata\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"2\n" +
+	"\x1cSetBucketHTTPSConfigMetadata\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
+	"\x1fDeleteBucketHTTPSConfigMetadata\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xac\x05\n" +
 	"\x13CreateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
@@ -1635,9 +1632,7 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	" \x01(\x0e2#.yandex.cloud.storage.v1.VersioningR\n" +
 	"versioning\x12r\n" +
 	"\x19allowed_private_endpoints\x18\v \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
-	"\x17disabled_statickey_auth\x18\f \x01(\bR\x15disabledStatickeyAuthJ\x04\b\x03\x10\x04\"*\n" +
-	"\x14CreateBucketMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x92\b\n" +
+	"\x17disabled_statickey_auth\x18\f \x01(\bR\x15disabledStatickeyAuthJ\x04\b\x03\x10\x04\"\x92\b\n" +
 	"\x13UpdateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12A\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\n" +
@@ -1661,13 +1656,9 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"encryption\x18\x0e \x01(\v2#.yandex.cloud.storage.v1.EncryptionR\n" +
 	"encryption\x12r\n" +
 	"\x19allowed_private_endpoints\x18\x0f \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
-	"\x17disabled_statickey_auth\x18\x10 \x01(\bR\x15disabledStatickeyAuth\"*\n" +
-	"\x14UpdateBucketMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"/\n" +
+	"\x17disabled_statickey_auth\x18\x10 \x01(\bR\x15disabledStatickeyAuth\"/\n" +
 	"\x13DeleteBucketRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\"*\n" +
-	"\x14DeleteBucketMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"1\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\"1\n" +
 	"\x15GetBucketStatsRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\"7\n" +
 	"\x1bGetBucketHTTPSConfigRequest\x12\x18\n" +
@@ -1677,17 +1668,13 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\x0fprivate_key_pem\x18\x02 \x01(\tB\r\x8a\xc81\t<=3145728R\rprivateKeyPem\"L\n" +
 	"#CertificateManagerHTTPSConfigParams\x12%\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\x94\x02\n" +
-	"\x1bSetBucketHTTPSConfigRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12Z\n" +
+	"\x1bSetBucketHTTPSConfigRequest\x12Z\n" +
 	"\fself_managed\x18\x02 \x01(\v25.yandex.cloud.storage.v1.SelfManagedHTTPSConfigParamsH\x00R\vselfManaged\x12o\n" +
-	"\x13certificate_manager\x18\x03 \x01(\v2<.yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParamsH\x00R\x12certificateManagerB\x0e\n" +
-	"\x06params\x12\x04\xc0\xc11\x01\"2\n" +
-	"\x1cSetBucketHTTPSConfigMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
+	"\x13certificate_manager\x18\x03 \x01(\v2<.yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParamsH\x00R\x12certificateManager\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04nameB\x0e\n" +
+	"\x06params\x12\x04\xc0\xc11\x01\":\n" +
 	"\x1eDeleteBucketHTTPSConfigRequest\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\"5\n" +
-	"\x1fDeleteBucketHTTPSConfigMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xbc\x01\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\"\xbc\x01\n" +
 	")CreateBucketInventoryConfigurationRequest\x12\x1c\n" +
 	"\x06bucket\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06bucket\x12\x14\n" +
 	"\x02id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12[\n" +
@@ -1756,20 +1743,20 @@ var file_yandex_cloud_storage_v1_bucket_service_proto_goTypes = []any{
 	(*GetBucketRequest)(nil),                           // 1: yandex.cloud.storage.v1.GetBucketRequest
 	(*ListBucketsRequest)(nil),                         // 2: yandex.cloud.storage.v1.ListBucketsRequest
 	(*ListBucketsResponse)(nil),                        // 3: yandex.cloud.storage.v1.ListBucketsResponse
-	(*CreateBucketRequest)(nil),                        // 4: yandex.cloud.storage.v1.CreateBucketRequest
-	(*CreateBucketMetadata)(nil),                       // 5: yandex.cloud.storage.v1.CreateBucketMetadata
-	(*UpdateBucketRequest)(nil),                        // 6: yandex.cloud.storage.v1.UpdateBucketRequest
-	(*UpdateBucketMetadata)(nil),                       // 7: yandex.cloud.storage.v1.UpdateBucketMetadata
-	(*DeleteBucketRequest)(nil),                        // 8: yandex.cloud.storage.v1.DeleteBucketRequest
-	(*DeleteBucketMetadata)(nil),                       // 9: yandex.cloud.storage.v1.DeleteBucketMetadata
-	(*GetBucketStatsRequest)(nil),                      // 10: yandex.cloud.storage.v1.GetBucketStatsRequest
-	(*GetBucketHTTPSConfigRequest)(nil),                // 11: yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
-	(*SelfManagedHTTPSConfigParams)(nil),               // 12: yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
-	(*CertificateManagerHTTPSConfigParams)(nil),        // 13: yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
-	(*SetBucketHTTPSConfigRequest)(nil),                // 14: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
-	(*SetBucketHTTPSConfigMetadata)(nil),               // 15: yandex.cloud.storage.v1.SetBucketHTTPSConfigMetadata
-	(*DeleteBucketHTTPSConfigRequest)(nil),             // 16: yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
-	(*DeleteBucketHTTPSConfigMetadata)(nil),            // 17: yandex.cloud.storage.v1.DeleteBucketHTTPSConfigMetadata
+	(*CreateBucketMetadata)(nil),                       // 4: yandex.cloud.storage.v1.CreateBucketMetadata
+	(*UpdateBucketMetadata)(nil),                       // 5: yandex.cloud.storage.v1.UpdateBucketMetadata
+	(*DeleteBucketMetadata)(nil),                       // 6: yandex.cloud.storage.v1.DeleteBucketMetadata
+	(*SetBucketHTTPSConfigMetadata)(nil),               // 7: yandex.cloud.storage.v1.SetBucketHTTPSConfigMetadata
+	(*DeleteBucketHTTPSConfigMetadata)(nil),            // 8: yandex.cloud.storage.v1.DeleteBucketHTTPSConfigMetadata
+	(*CreateBucketRequest)(nil),                        // 9: yandex.cloud.storage.v1.CreateBucketRequest
+	(*UpdateBucketRequest)(nil),                        // 10: yandex.cloud.storage.v1.UpdateBucketRequest
+	(*DeleteBucketRequest)(nil),                        // 11: yandex.cloud.storage.v1.DeleteBucketRequest
+	(*GetBucketStatsRequest)(nil),                      // 12: yandex.cloud.storage.v1.GetBucketStatsRequest
+	(*GetBucketHTTPSConfigRequest)(nil),                // 13: yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
+	(*SelfManagedHTTPSConfigParams)(nil),               // 14: yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
+	(*CertificateManagerHTTPSConfigParams)(nil),        // 15: yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
+	(*SetBucketHTTPSConfigRequest)(nil),                // 16: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
+	(*DeleteBucketHTTPSConfigRequest)(nil),             // 17: yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
 	(*CreateBucketInventoryConfigurationRequest)(nil),  // 18: yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest
 	(*CreateBucketInventoryConfigurationMetadata)(nil), // 19: yandex.cloud.storage.v1.CreateBucketInventoryConfigurationMetadata
 	(*GetBucketInventoryConfigurationRequest)(nil),     // 20: yandex.cloud.storage.v1.GetBucketInventoryConfigurationRequest
@@ -1820,19 +1807,19 @@ var file_yandex_cloud_storage_v1_bucket_service_proto_depIdxs = []int32{
 	37, // 17: yandex.cloud.storage.v1.UpdateBucketRequest.object_lock:type_name -> yandex.cloud.storage.v1.ObjectLock
 	29, // 18: yandex.cloud.storage.v1.UpdateBucketRequest.encryption:type_name -> yandex.cloud.storage.v1.Encryption
 	31, // 19: yandex.cloud.storage.v1.UpdateBucketRequest.allowed_private_endpoints:type_name -> yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
-	12, // 20: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.self_managed:type_name -> yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
-	13, // 21: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.certificate_manager:type_name -> yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
+	14, // 20: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.self_managed:type_name -> yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
+	15, // 21: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.certificate_manager:type_name -> yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
 	38, // 22: yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest.configuration:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
 	38, // 23: yandex.cloud.storage.v1.ListBucketInventoryConfigurationsResponse.configurations:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
 	2,  // 24: yandex.cloud.storage.v1.BucketService.List:input_type -> yandex.cloud.storage.v1.ListBucketsRequest
 	1,  // 25: yandex.cloud.storage.v1.BucketService.Get:input_type -> yandex.cloud.storage.v1.GetBucketRequest
-	4,  // 26: yandex.cloud.storage.v1.BucketService.Create:input_type -> yandex.cloud.storage.v1.CreateBucketRequest
-	6,  // 27: yandex.cloud.storage.v1.BucketService.Update:input_type -> yandex.cloud.storage.v1.UpdateBucketRequest
-	8,  // 28: yandex.cloud.storage.v1.BucketService.Delete:input_type -> yandex.cloud.storage.v1.DeleteBucketRequest
-	10, // 29: yandex.cloud.storage.v1.BucketService.GetStats:input_type -> yandex.cloud.storage.v1.GetBucketStatsRequest
-	11, // 30: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:input_type -> yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
-	14, // 31: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:input_type -> yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
-	16, // 32: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:input_type -> yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
+	9,  // 26: yandex.cloud.storage.v1.BucketService.Create:input_type -> yandex.cloud.storage.v1.CreateBucketRequest
+	10, // 27: yandex.cloud.storage.v1.BucketService.Update:input_type -> yandex.cloud.storage.v1.UpdateBucketRequest
+	11, // 28: yandex.cloud.storage.v1.BucketService.Delete:input_type -> yandex.cloud.storage.v1.DeleteBucketRequest
+	12, // 29: yandex.cloud.storage.v1.BucketService.GetStats:input_type -> yandex.cloud.storage.v1.GetBucketStatsRequest
+	13, // 30: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:input_type -> yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
+	16, // 31: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:input_type -> yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
+	17, // 32: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:input_type -> yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
 	39, // 33: yandex.cloud.storage.v1.BucketService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	40, // 34: yandex.cloud.storage.v1.BucketService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
 	41, // 35: yandex.cloud.storage.v1.BucketService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
@@ -1869,7 +1856,7 @@ func file_yandex_cloud_storage_v1_bucket_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_storage_v1_bucket_proto_init()
-	file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[13].OneofWrappers = []any{
+	file_yandex_cloud_storage_v1_bucket_service_proto_msgTypes[15].OneofWrappers = []any{
 		(*SetBucketHTTPSConfigRequest_SelfManaged)(nil),
 		(*SetBucketHTTPSConfigRequest_CertificateManager)(nil),
 	}

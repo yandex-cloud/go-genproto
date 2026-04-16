@@ -401,8 +401,8 @@ const file_yandex_cloud_speechsense_v1_assistant_proto_rawDesc = "" +
 	" ASSISTANT_FIELD_TYPE_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bASSISTANT_FIELD_TYPE_STRING\x10\x01\x12\x1f\n" +
 	"\x1bASSISTANT_FIELD_TYPE_NUMBER\x10\x02\x12 \n" +
-	"\x1cASSISTANT_FIELD_TYPE_DECIMAL\x10\x03B~\n" +
-	"\x1fyandex.cloud.api.speechsense.v1B\x0eAssistantProtoZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/speechsense/v1;speechsenseb\x06proto3"
+	"\x1cASSISTANT_FIELD_TYPE_DECIMAL\x10\x03B\x82\x01\n" +
+	"\x1fyandex.cloud.api.speechsense.v1B\x12AssistantPrivProtoZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/speechsense/v1;speechsenseb\x06proto3"
 
 var (
 	file_yandex_cloud_speechsense_v1_assistant_proto_rawDescOnce sync.Once

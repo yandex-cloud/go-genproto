@@ -21,3 +21,19 @@ func (m *GetArtifactByPathRequest) SetRegistryId(v string) {
 func (m *GetArtifactByPathRequest) SetPath(v string) {
 	m.Path = v
 }
+
+func (m *UpsertFolderRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *UpsertFolderRequest) SetPath(v string) {
+	m.Path = v
+}
+
+func (m *UpsertFolderMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *UpsertFolderMetadata) SetPath(v string) {
+	m.Path = v
+}

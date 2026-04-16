@@ -26,7 +26,6 @@ const (
 type ListRentalPeriodsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Configuration resource to return a Rental Period for.
-	//
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -100,7 +99,6 @@ type ListRentalPeriodsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListRentalPeriodsRequest.page_size], use `next_page_token` as the value
 	// for the [ListRentalPeriodsResponse.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -155,9 +153,9 @@ var File_yandex_cloud_baremetal_v1alpha_rental_period_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_rental_period_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/rental_period_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/rental_period.proto\x1a\x1dyandex/cloud/validation.proto\"\xac\x01\n" +
-	"\x18ListRentalPeriodsRequest\x12C\n" +
-	"\x10configuration_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x12&\n" +
+	":yandex/cloud/baremetal/v1alpha/rental_period_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/rental_period.proto\x1a\x1dyandex/cloud/validation.proto\"\xb0\x01\n" +
+	"\x18ListRentalPeriodsRequest\x12G\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x1c\xe8\xc71\x00\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x02\x10d\"\x9e\x01\n" +

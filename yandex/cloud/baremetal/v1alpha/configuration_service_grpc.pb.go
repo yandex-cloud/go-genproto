@@ -30,7 +30,6 @@ const (
 // A set of methods to retrieve information about Configuration resources.
 type ConfigurationServiceClient interface {
 	// Returns the specific Configuration resource.
-	//
 	// To get the list of available Configuration resources, make a [List] request.
 	Get(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error)
 	// Retrieves the list of Configuration resources.
@@ -72,7 +71,6 @@ func (c *configurationServiceClient) List(ctx context.Context, in *ListConfigura
 // A set of methods to retrieve information about Configuration resources.
 type ConfigurationServiceServer interface {
 	// Returns the specific Configuration resource.
-	//
 	// To get the list of available Configuration resources, make a [List] request.
 	Get(context.Context, *GetConfigurationRequest) (*Configuration, error)
 	// Retrieves the list of Configuration resources.

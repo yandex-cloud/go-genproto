@@ -576,7 +576,7 @@ var File_yandex_cloud_speechsense_v1_talk_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_speechsense_v1_talk_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/speechsense/v1/talk.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a5yandex/cloud/speechsense/v1/analysis/assistants.proto\x1aByandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x1a@yandex/cloud/speechsense/v1/analysis/interrupts_statistics.proto\x1a=yandex/cloud/speechsense/v1/analysis/silence_statistics.proto\x1a<yandex/cloud/speechsense/v1/analysis/speech_statistics.proto\x1a8yandex/cloud/speechsense/v1/analysis/summarization.proto\x1a8yandex/cloud/speechsense/v1/analysis/transcription.proto\x1a;yandex/cloud/speechsense/v1/analysis/text_classifiers.proto\x1a1yandex/cloud/speechsense/v1/analysis/points.proto\"\xc9\n" +
+	"&yandex/cloud/speechsense/v1/talk.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a5yandex/cloud/speechsense/v1/analysis/assistants.proto\x1aByandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x1a@yandex/cloud/speechsense/v1/analysis/interrupts_statistics.proto\x1a1yandex/cloud/speechsense/v1/analysis/points.proto\x1a=yandex/cloud/speechsense/v1/analysis/silence_statistics.proto\x1a<yandex/cloud/speechsense/v1/analysis/speech_statistics.proto\x1a8yandex/cloud/speechsense/v1/analysis/summarization.proto\x1a;yandex/cloud/speechsense/v1/analysis/text_classifiers.proto\x1a8yandex/cloud/speechsense/v1/analysis/transcription.proto\"\xc9\n" +
 	"\n" +
 	"\x04Talk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +

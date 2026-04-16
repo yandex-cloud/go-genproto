@@ -175,16 +175,16 @@ var File_yandex_cloud_devtools_ycvc_v1_control_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_devtools_ycvc_v1_control_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/devtools/ycvc/v1/control_service.proto\x12\x1dyandex.cloud.devtools.ycvc.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"P\n" +
-	"\vInitRequest\x12!\n" +
-	"\ttool_name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\btoolName\x12\x1e\n" +
-	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversion\"\xb3\x01\n" +
+	"3yandex/cloud/devtools/ycvc/v1/control_service.proto\x12\x1dyandex.cloud.devtools.ycvc.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
+	"\vInitRequest\x12$\n" +
+	"\ttool_name\x18\x01 \x01(\tB\a\xe0A\x02\xe8\xc71\x01R\btoolName\x12!\n" +
+	"\aversion\x18\x02 \x01(\tB\a\xe0A\x02\xe8\xc71\x01R\aversion\"\xb6\x01\n" +
 	"\fInitResponse\x12o\n" +
-	"\x13deprecation_warning\x18\x01 \x01(\v2>.yandex.cloud.devtools.ycvc.v1.InitResponse.DeprecationWarningR\x12deprecationWarning\x1a2\n" +
-	"\x12DeprecationWarning\x12\x1c\n" +
-	"\x06reason\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06reason2\xaf\x01\n" +
-	"\x15VersionControlService\x12\x95\x01\n" +
-	"\x04Init\x12*.yandex.cloud.devtools.ycvc.v1.InitRequest\x1a+.yandex.cloud.devtools.ycvc.v1.InitResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/obsolete_collections/{tool_name}:initB\x89\x01\n" +
+	"\x13deprecation_warning\x18\x01 \x01(\v2>.yandex.cloud.devtools.ycvc.v1.InitResponse.DeprecationWarningR\x12deprecationWarning\x1a5\n" +
+	"\x12DeprecationWarning\x12\x1f\n" +
+	"\x06reason\x18\x01 \x01(\tB\a\xe0A\x02\xe8\xc71\x01R\x06reason2\xc3\x01\n" +
+	"\x15VersionControlService\x12\xa9\x01\n" +
+	"\x04Init\x12*.yandex.cloud.devtools.ycvc.v1.InitRequest\x1a+.yandex.cloud.devtools.ycvc.v1.InitResponse\"H\xdaA\x11tool_name,version\x82\xd3\xe4\x93\x02.:\x01*\")/v1/obsolete_collections/{tool_name}:initB\x89\x01\n" +
 	"!yandex.cloud.api.devtools.ycvc.v1B\x1aVersionControlServiceProtoP\x01ZFgithub.com/yandex-cloud/go-genproto/yandex/cloud/devtools/ycvc/v1;ycvcb\x06proto3"
 
 var (

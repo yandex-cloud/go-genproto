@@ -39,7 +39,31 @@ type GetUsageRequest struct {
 	// The inclusive end of the date range for which to retrieve usage metadata.
 	// Must be specified, cannot be empty, and must be greater than or equal to start_date.
 	// The time portion is ignored; the date is considered to end at 23:59:59.
-	EndDate       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	EndDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	// Optional. Cloud IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes usage records where cloud_id matches any of the provided values.
+	// Acts as an OR condition (cloud_id IN cloud_ids).
+	// If empty, this filter is not applied.
+	CloudIds []string `protobuf:"bytes,4,rep,name=cloud_ids,json=cloudIds,proto3" json:"cloud_ids,omitempty"`
+	// Optional. Label keys filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes usage records where label_key matches any of the provided values.
+	// Acts as an OR condition (label_key IN label_keys).
+	// If empty, this filter is not applied.
+	LabelKeys []string `protobuf:"bytes,5,rep,name=label_keys,json=labelKeys,proto3" json:"label_keys,omitempty"`
+	// Optional. Service IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes usage records where service_id matches any of the provided values.
+	// Acts as an OR condition (service_id IN service_ids).
+	// If empty, this filter is not applied.
+	ServiceIds []string `protobuf:"bytes,6,rep,name=service_ids,json=serviceIds,proto3" json:"service_ids,omitempty"`
+	// Optional. SKU IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes usage records where sku_id matches any of the provided values.
+	// Acts as an OR condition (sku_id IN sku_ids).
+	// If empty, this filter is not applied.
+	SkuIds        []string `protobuf:"bytes,7,rep,name=sku_ids,json=skuIds,proto3" json:"sku_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -95,6 +119,34 @@ func (x *GetUsageRequest) GetEndDate() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *GetUsageRequest) GetCloudIds() []string {
+	if x != nil {
+		return x.CloudIds
+	}
+	return nil
+}
+
+func (x *GetUsageRequest) GetLabelKeys() []string {
+	if x != nil {
+		return x.LabelKeys
+	}
+	return nil
+}
+
+func (x *GetUsageRequest) GetServiceIds() []string {
+	if x != nil {
+		return x.ServiceIds
+	}
+	return nil
+}
+
+func (x *GetUsageRequest) GetSkuIds() []string {
+	if x != nil {
+		return x.SkuIds
+	}
+	return nil
+}
+
 // Response for usage metadata request
 type GetUsageResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -103,27 +155,33 @@ type GetUsageResponse struct {
 	//
 	// Note: Empty cloud_id values are considered as "consumption outside the cloud"
 	// and represented with an empty string id and name "Usage is out of scope of the Cloud"
+	// The list is sorted by cloud name in ascending order.
 	Clouds []*Cloud `protobuf:"bytes,1,rep,name=clouds,proto3" json:"clouds,omitempty"`
 	// List of available label keys for the current user/context (billing_account_id with sub-accounts)
 	// Contains all label keys that exist in usage records
 	// within the specified date range.
 	// These keys can be used for filtering and grouping in reports or
 	// passed to the GetLabel method to retrieve possible values.
+	// The list is sorted in ascending order.
 	LabelKeys []string `protobuf:"bytes,2,rep,name=label_keys,json=labelKeys,proto3" json:"label_keys,omitempty"`
 	// List of available services for the current user/context (billing_account_id with sub-accounts)
 	// Contains service entities with their IDs, names and descriptions that
 	// have usage records within the specified billing account and date range.
 	// Services represent the top-level grouping of cloud offerings.
+	// The list is sorted by service name in ascending order.
 	Services []*Service `protobuf:"bytes,3,rep,name=services,proto3" json:"services,omitempty"`
 	// List of available SKUs for the current user/context (billing_account_id with sub-accounts)
 	// Contains SKU entities with their IDs, names, translations and pricing units
 	// that have usage records within the specified billing account and date range.
 	// SKUs represent specific service offerings
+	// The list is sorted by SKU name in ascending order.
 	Skus []*SKU `protobuf:"bytes,4,rep,name=skus,proto3" json:"skus,omitempty"`
 	// List of available BillingAccounts for the current user/context (billing_account_id with sub-accounts)
 	// Contains billing account entities that the user has access to and
 	// that have usage records within the specified date range.
 	// Includes both the main account and any sub-accounts.
+	// Sub-accounts are sorted by name in ascending order.
+	// The master account is placed last in the list
 	BillingAccounts []*BillingAccount `protobuf:"bytes,5,rep,name=billing_accounts,json=billingAccounts,proto3" json:"billing_accounts,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -194,6 +252,139 @@ func (x *GetUsageResponse) GetBillingAccounts() []*BillingAccount {
 	return nil
 }
 
+// GetServiceInstanceRequest request for retrieving service instance usage metadata
+type GetServiceInstanceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. Billing account identifier.
+	// The ID of the billing account to retrieve usage metadata for.
+	// Must be a valid and accessible billing account ID.
+	BillingAccountId string `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	// Start date for data retrieval.
+	// The inclusive start of the date range for which to retrieve usage metadata.
+	// Must be specified and cannot be empty.
+	// The time portion is ignored; the date is considered to start at 00:00:00.
+	StartDate *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	// End date for data retrieval.
+	// The inclusive end of the date range for which to retrieve usage metadata.
+	// Must be specified, cannot be empty, and must be greater than or equal to start_date.
+	// The time portion is ignored; the date is considered to end at 23:59:59.
+	EndDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	// Optional. Service instance IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes usage records where service_instance_id matches any of the provided values.
+	// Acts as an OR condition (service_instance_id IN service_instance_ids).
+	// If empty, this filter is not applied.
+	ServiceInstanceIds []string `protobuf:"bytes,4,rep,name=service_instance_ids,json=serviceInstanceIds,proto3" json:"service_instance_ids,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetServiceInstanceRequest) Reset() {
+	*x = GetServiceInstanceRequest{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceInstanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceInstanceRequest) ProtoMessage() {}
+
+func (x *GetServiceInstanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceInstanceRequest.ProtoReflect.Descriptor instead.
+func (*GetServiceInstanceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetServiceInstanceRequest) GetBillingAccountId() string {
+	if x != nil {
+		return x.BillingAccountId
+	}
+	return ""
+}
+
+func (x *GetServiceInstanceRequest) GetStartDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.StartDate
+	}
+	return nil
+}
+
+func (x *GetServiceInstanceRequest) GetEndDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EndDate
+	}
+	return nil
+}
+
+func (x *GetServiceInstanceRequest) GetServiceInstanceIds() []string {
+	if x != nil {
+		return x.ServiceInstanceIds
+	}
+	return nil
+}
+
+// Response for service instance usage metadata request
+type GetServiceInstanceResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of available service instances for the current user/context (billing_account_id with sub-accounts)
+	// Contains service instance entities that the user has access to within the specified date range.
+	// The list is sorted by service instance name in ascending order.
+	ServiceInstances []*ServiceInstance `protobuf:"bytes,1,rep,name=service_instances,json=serviceInstances,proto3" json:"service_instances,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetServiceInstanceResponse) Reset() {
+	*x = GetServiceInstanceResponse{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetServiceInstanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetServiceInstanceResponse) ProtoMessage() {}
+
+func (x *GetServiceInstanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetServiceInstanceResponse.ProtoReflect.Descriptor instead.
+func (*GetServiceInstanceResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetServiceInstanceResponse) GetServiceInstances() []*ServiceInstance {
+	if x != nil {
+		return x.ServiceInstances
+	}
+	return nil
+}
+
 // Request for retrieving label metadata
 type GetLabelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -211,6 +402,18 @@ type GetLabelRequest struct {
 	// Must be specified, cannot be empty, and must be greater than or equal to start_date.
 	// The time portion is ignored; the date is considered to end at 23:59:59.
 	EndDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	// Optional. Cloud IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes labels where cloud_id matches any of the provided values.
+	// Acts as an OR condition (cloud_id IN cloud_ids).
+	// If empty, this filter is not applied.
+	CloudIds []string `protobuf:"bytes,9,rep,name=cloud_ids,json=cloudIds,proto3" json:"cloud_ids,omitempty"`
+	// Optional. Folder IDs filter.
+	// Additional filter that works alongside the billing_account_id and date range.
+	// When specified, includes labels where folder_id matches any of the provided values.
+	// Acts as an OR condition (folder_id IN folder_ids).
+	// If empty, this filter is not applied.
+	FolderIds []string `protobuf:"bytes,10,rep,name=folder_ids,json=folderIds,proto3" json:"folder_ids,omitempty"`
 	// Label key to filter values for. If specified, response will contain values
 	// for this specific key.
 	// Must be a non-empty string representing a valid label key.
@@ -238,7 +441,7 @@ type GetLabelRequest struct {
 
 func (x *GetLabelRequest) Reset() {
 	*x = GetLabelRequest{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -250,7 +453,7 @@ func (x *GetLabelRequest) String() string {
 func (*GetLabelRequest) ProtoMessage() {}
 
 func (x *GetLabelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,7 +466,7 @@ func (x *GetLabelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLabelRequest.ProtoReflect.Descriptor instead.
 func (*GetLabelRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetLabelRequest) GetBillingAccountId() string {
@@ -283,6 +486,20 @@ func (x *GetLabelRequest) GetStartDate() *timestamppb.Timestamp {
 func (x *GetLabelRequest) GetEndDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.EndDate
+	}
+	return nil
+}
+
+func (x *GetLabelRequest) GetCloudIds() []string {
+	if x != nil {
+		return x.CloudIds
+	}
+	return nil
+}
+
+func (x *GetLabelRequest) GetFolderIds() []string {
+	if x != nil {
+		return x.FolderIds
 	}
 	return nil
 }
@@ -349,7 +566,7 @@ type GetLabelResponse struct {
 
 func (x *GetLabelResponse) Reset() {
 	*x = GetLabelResponse{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -361,7 +578,7 @@ func (x *GetLabelResponse) String() string {
 func (*GetLabelResponse) ProtoMessage() {}
 
 func (x *GetLabelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -374,7 +591,7 @@ func (x *GetLabelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLabelResponse.ProtoReflect.Descriptor instead.
 func (*GetLabelResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetLabelResponse) GetLabelValues() []string {
@@ -447,7 +664,7 @@ type GetCloudRequest struct {
 
 func (x *GetCloudRequest) Reset() {
 	*x = GetCloudRequest{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +676,7 @@ func (x *GetCloudRequest) String() string {
 func (*GetCloudRequest) ProtoMessage() {}
 
 func (x *GetCloudRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +689,7 @@ func (x *GetCloudRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCloudRequest.ProtoReflect.Descriptor instead.
 func (*GetCloudRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetCloudRequest) GetBillingAccountId() string {
@@ -530,6 +747,7 @@ type GetCloudResponse struct {
 	// List of clouds matching the request criteria
 	// Contains CloudInfo objects for each cloud that matches the specified
 	// filtering criteria
+	// The list is sorted by cloud name in ascending order.
 	//
 	// Note: only clouds with at least one folder are included in the response.
 	Items []*GetCloudResponse_CloudInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
@@ -547,7 +765,7 @@ type GetCloudResponse struct {
 
 func (x *GetCloudResponse) Reset() {
 	*x = GetCloudResponse{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -559,7 +777,7 @@ func (x *GetCloudResponse) String() string {
 func (*GetCloudResponse) ProtoMessage() {}
 
 func (x *GetCloudResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -572,7 +790,7 @@ func (x *GetCloudResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCloudResponse.ProtoReflect.Descriptor instead.
 func (*GetCloudResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetCloudResponse) GetItems() []*GetCloudResponse_CloudInfo {
@@ -589,59 +807,70 @@ func (x *GetCloudResponse) GetNextPageToken() string {
 	return ""
 }
 
-// GetResourceIDsRequest request for retrieving resource IDs.
-// This message defines the parameters needed to fetch and filter resource IDs
+// GetResourcesRequest request for retrieving resources with associated service instances.
+// This message defines the parameters needed to fetch and filter resources
 // associated with a billing account within a date range.
-type GetResourceIDsRequest struct {
+type GetResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. Billing account identifier.
-	// The ID of the billing account to retrieve resource IDs for.
+	// The ID of the billing account to retrieve resources for.
 	// Must be a valid and accessible billing account ID.
 	BillingAccountId string `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// Start date for data retrieval.
-	// The inclusive start of the date range for which to retrieve resource IDs.
+	// The inclusive start of the date range for which to retrieve resources.
 	// Must be specified and cannot be empty.
 	// The time portion is ignored; the date is considered to start at 00:00:00.
 	StartDate *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
 	// End date for data retrieval.
-	// The inclusive end of the date range for which to retrieve resource IDs.
+	// The inclusive end of the date range for which to retrieve resources.
 	// Must be specified, cannot be empty, and must be greater than or equal to start_date.
 	// The time portion is ignored; the date is considered to end at 23:59:59.
 	EndDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	// Optional. Resource ID pattern for search filtering.
-	// When provided, the response will include only resource IDs
-	// that contain this string (case-insensitive substring match).
+	// Optional. List of service instances IDs to filter service instances by.
+	// Note: service_instances_ids filtering supports case-insensitive substring matching.
 	// No wildcards or regex patterns are supported - just simple substring matching.
-	ResourceId string `protobuf:"bytes,4,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	// The filter works with partial service instances IDs, and will match any service instances where
+	// the provided substring appears anywhere in the service_instances_id.
+	// For example, filter "abc" will match service_instances_ids like "abc123", "123abc", or "1abc2".
+	// If empty, no filtering by service instance ID is applied.
+	ServiceInstancesIds []string `protobuf:"bytes,4,rep,name=service_instances_ids,json=serviceInstancesIds,proto3" json:"service_instances_ids,omitempty"`
+	// Optional. List of resource IDs to filter resources by.
+	// Note: resource_ids filtering supports case-insensitive substring matching.
+	// No wildcards or regex patterns are supported - just simple substring matching.
+	// The filter works with partial resource IDs, and will match any resource where
+	// the provided substring appears anywhere in the resource_ids.
+	// For example, filter "abc" will match resource_ids like "abc123", "123abc", or "1abc2".
+	// If empty, no filtering by resource ID is applied.
+	ResourceIds []string `protobuf:"bytes,5,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
 	// Optional. Page size for paginated results.
 	// Specifies the maximum number of resource IDs to return per page.
 	// If not specified or set to 0, defaults to 10.
 	// If greater than 10000, will be coerced down to 10000.
-	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Optional. Page token for paginated results.
 	// Token from a previous GetResourceIDsResponse used to retrieve the next page.
 	// If empty, retrieves the first page.
 	// The token encodes the pagination state.
-	PageToken     string `protobuf:"bytes,6,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken     string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetResourceIDsRequest) Reset() {
-	*x = GetResourceIDsRequest{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[6]
+func (x *GetResourcesRequest) Reset() {
+	*x = GetResourcesRequest{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetResourceIDsRequest) String() string {
+func (x *GetResourcesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetResourceIDsRequest) ProtoMessage() {}
+func (*GetResourcesRequest) ProtoMessage() {}
 
-func (x *GetResourceIDsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[6]
+func (x *GetResourcesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,68 +881,76 @@ func (x *GetResourceIDsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetResourceIDsRequest.ProtoReflect.Descriptor instead.
-func (*GetResourceIDsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{6}
+// Deprecated: Use GetResourcesRequest.ProtoReflect.Descriptor instead.
+func (*GetResourcesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetResourceIDsRequest) GetBillingAccountId() string {
+func (x *GetResourcesRequest) GetBillingAccountId() string {
 	if x != nil {
 		return x.BillingAccountId
 	}
 	return ""
 }
 
-func (x *GetResourceIDsRequest) GetStartDate() *timestamppb.Timestamp {
+func (x *GetResourcesRequest) GetStartDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.StartDate
 	}
 	return nil
 }
 
-func (x *GetResourceIDsRequest) GetEndDate() *timestamppb.Timestamp {
+func (x *GetResourcesRequest) GetEndDate() *timestamppb.Timestamp {
 	if x != nil {
 		return x.EndDate
 	}
 	return nil
 }
 
-func (x *GetResourceIDsRequest) GetResourceId() string {
+func (x *GetResourcesRequest) GetServiceInstancesIds() []string {
 	if x != nil {
-		return x.ResourceId
+		return x.ServiceInstancesIds
 	}
-	return ""
+	return nil
 }
 
-func (x *GetResourceIDsRequest) GetPageSize() int64 {
+func (x *GetResourcesRequest) GetResourceIds() []string {
+	if x != nil {
+		return x.ResourceIds
+	}
+	return nil
+}
+
+func (x *GetResourcesRequest) GetPageSize() int64 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *GetResourceIDsRequest) GetPageToken() string {
+func (x *GetResourcesRequest) GetPageToken() string {
 	if x != nil {
 		return x.PageToken
 	}
 	return ""
 }
 
-// Response for resource IDs request.
-// This message contains a list of resource IDs that match the search criteria
+// The response for resources request.
+// This message contains a list of resource IDs splited by service instances that match the search criteria
 // specified in the request, along with pagination information.
-type GetResourceIDsResponse struct {
+type GetResourcesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of resource IDs matching the request criteria.
-	// These represent unique identifiers for resources within the billing account
-	// that had usage during the specified date range.
-	// If a resource_id filter was provided in the request, only IDs
-	// containing that substring (case-insensitive) will be included.
-	// Resource IDs are sorted alphabetically in ascending order.
-	ResourceIds []string `protobuf:"bytes,1,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
+	// List of service instances matching the request criteria
+	// Contains ServiceInstanceInfo objects for each service instance that matches the specified
+	// filtering criteria
+	// The list is sorted by service instance name in ascending order.
+	//
+	// Note: only service instances with at least one resource are included in the response.
+	Items []*GetResourcesResponse_ServiceInstanceInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Token for getting the next page of results.
-	// This token should be passed in the page_token field of subsequent requests.
-	// If empty, there are no more results available.
+	// If empty, there are no more results.
+	// Use this token in a subsequent request's page_token field to retrieve
+	// the next page of results.
 	// The token encodes the pagination state.
 	//
 	// It should be passed verbatim in subsequent requests.
@@ -722,21 +959,21 @@ type GetResourceIDsResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetResourceIDsResponse) Reset() {
-	*x = GetResourceIDsResponse{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[7]
+func (x *GetResourcesResponse) Reset() {
+	*x = GetResourcesResponse{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetResourceIDsResponse) String() string {
+func (x *GetResourcesResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetResourceIDsResponse) ProtoMessage() {}
+func (*GetResourcesResponse) ProtoMessage() {}
 
-func (x *GetResourceIDsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[7]
+func (x *GetResourcesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,19 +984,19 @@ func (x *GetResourceIDsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetResourceIDsResponse.ProtoReflect.Descriptor instead.
-func (*GetResourceIDsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{7}
+// Deprecated: Use GetResourcesResponse.ProtoReflect.Descriptor instead.
+func (*GetResourcesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetResourceIDsResponse) GetResourceIds() []string {
+func (x *GetResourcesResponse) GetItems() []*GetResourcesResponse_ServiceInstanceInfo {
 	if x != nil {
-		return x.ResourceIds
+		return x.Items
 	}
 	return nil
 }
 
-func (x *GetResourceIDsResponse) GetNextPageToken() string {
+func (x *GetResourcesResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
 	}
@@ -774,7 +1011,7 @@ type GetCloudResponse_CloudInfo struct {
 	// List of folders belonging to this cloud
 	// Contains folder entities that belong to this cloud
 	// and match any folder ID filtering criteria from the request.
-	// The list is sorted by folder ID in ascending order.
+	// The list is sorted by folder name in ascending order.
 	//
 	// Only folders that had usage during the specified date range are included.
 	Folders       []*Folder `protobuf:"bytes,2,rep,name=folders,proto3" json:"folders,omitempty"`
@@ -784,7 +1021,7 @@ type GetCloudResponse_CloudInfo struct {
 
 func (x *GetCloudResponse_CloudInfo) Reset() {
 	*x = GetCloudResponse_CloudInfo{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -796,7 +1033,7 @@ func (x *GetCloudResponse_CloudInfo) String() string {
 func (*GetCloudResponse_CloudInfo) ProtoMessage() {}
 
 func (x *GetCloudResponse_CloudInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -809,7 +1046,7 @@ func (x *GetCloudResponse_CloudInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCloudResponse_CloudInfo.ProtoReflect.Descriptor instead.
 func (*GetCloudResponse_CloudInfo) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{5, 0}
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *GetCloudResponse_CloudInfo) GetCloud() *Cloud {
@@ -826,28 +1063,106 @@ func (x *GetCloudResponse_CloudInfo) GetFolders() []*Folder {
 	return nil
 }
 
+// Information about a service instances and its resources
+type GetResourcesResponse_ServiceInstanceInfo struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Service instance information
+	ServiceInstance *ServiceInstance `protobuf:"bytes,1,opt,name=service_instance,json=serviceInstance,proto3" json:"service_instance,omitempty"`
+	// List of resources belonging to this service instances
+	// Contains resource entities that belong to this service instance
+	// and match any resource ID filtering criteria from the request.
+	// The list is sorted by resource ID in ascending order.
+	//
+	// Only resources that had usage during the specified date range are included.
+	Resources     []*Resource `protobuf:"bytes,2,rep,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetResourcesResponse_ServiceInstanceInfo) Reset() {
+	*x = GetResourcesResponse_ServiceInstanceInfo{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetResourcesResponse_ServiceInstanceInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetResourcesResponse_ServiceInstanceInfo) ProtoMessage() {}
+
+func (x *GetResourcesResponse_ServiceInstanceInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetResourcesResponse_ServiceInstanceInfo.ProtoReflect.Descriptor instead.
+func (*GetResourcesResponse_ServiceInstanceInfo) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZIP(), []int{9, 0}
+}
+
+func (x *GetResourcesResponse_ServiceInstanceInfo) GetServiceInstance() *ServiceInstance {
+	if x != nil {
+		return x.ServiceInstance
+	}
+	return nil
+}
+
+func (x *GetResourcesResponse_ServiceInstanceInfo) GetResources() []*Resource {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
 var File_yandex_cloud_billing_usage_records_v1_metadata_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/billing/usage_records/v1/metadata_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\x01\n" +
+	"<yandex/cloud/billing/usage_records/v1/metadata_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a\x1dyandex/cloud/validation.proto\"\xb9\x02\n" +
 	"\x0fGetUsageRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
 	"start_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartDate\x12;\n" +
-	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\"\xe5\x02\n" +
+	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x12\x1b\n" +
+	"\tcloud_ids\x18\x04 \x03(\tR\bcloudIds\x12\x1d\n" +
+	"\n" +
+	"label_keys\x18\x05 \x03(\tR\tlabelKeys\x12\x1f\n" +
+	"\vservice_ids\x18\x06 \x03(\tR\n" +
+	"serviceIds\x12\x17\n" +
+	"\asku_ids\x18\a \x03(\tR\x06skuIds\"\xe5\x02\n" +
 	"\x10GetUsageResponse\x12D\n" +
 	"\x06clouds\x18\x01 \x03(\v2,.yandex.cloud.billing.usage_records.v1.CloudR\x06clouds\x12\x1d\n" +
 	"\n" +
 	"label_keys\x18\x02 \x03(\tR\tlabelKeys\x12J\n" +
 	"\bservices\x18\x03 \x03(\v2..yandex.cloud.billing.usage_records.v1.ServiceR\bservices\x12>\n" +
 	"\x04skus\x18\x04 \x03(\v2*.yandex.cloud.billing.usage_records.v1.SKUR\x04skus\x12`\n" +
-	"\x10billing_accounts\x18\x05 \x03(\v25.yandex.cloud.billing.usage_records.v1.BillingAccountR\x0fbillingAccounts\"\xf1\x02\n" +
+	"\x10billing_accounts\x18\x05 \x03(\v25.yandex.cloud.billing.usage_records.v1.BillingAccountR\x0fbillingAccounts\"\xff\x01\n" +
+	"\x19GetServiceInstanceRequest\x122\n" +
+	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
+	"\n" +
+	"start_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartDate\x12;\n" +
+	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x120\n" +
+	"\x14service_instance_ids\x18\x04 \x03(\tR\x12serviceInstanceIds\"\x81\x01\n" +
+	"\x1aGetServiceInstanceResponse\x12c\n" +
+	"\x11service_instances\x18\x01 \x03(\v26.yandex.cloud.billing.usage_records.v1.ServiceInstanceR\x10serviceInstances\"\xad\x03\n" +
 	"\x0fGetLabelRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
 	"start_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartDate\x12;\n" +
-	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x12!\n" +
+	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x12\x1b\n" +
+	"\tcloud_ids\x18\t \x03(\tR\bcloudIds\x12\x1d\n" +
+	"\n" +
+	"folder_ids\x18\n" +
+	" \x03(\tR\tfolderIds\x12!\n" +
 	"\tlabel_key\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\blabelKey\x12\x1f\n" +
 	"\vlabel_value\x18\x05 \x01(\tR\n" +
 	"labelValue\x12,\n" +
@@ -858,7 +1173,7 @@ const file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc 
 	"\x10GetLabelResponse\x12!\n" +
 	"\flabel_values\x18\x01 \x03(\tR\vlabelValues\x12,\n" +
 	"\x12label_value_filter\x18\x02 \x03(\tR\x10labelValueFilter\x12&\n" +
-	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\xbb\x02\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\xc7\x02\n" +
 	"\x0fGetCloudRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
@@ -869,31 +1184,36 @@ const file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc 
 	"folder_ids\x18\x05 \x03(\tR\tfolderIds\x12\x1b\n" +
 	"\tpage_size\x18\x06 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tR\tpageToken\"\xae\x02\n" +
+	"page_token\x18\a \x01(\tR\tpageTokenJ\x04\b\b\x10\tJ\x04\b\t\x10\n" +
+	"\"\xae\x02\n" +
 	"\x10GetCloudResponse\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfoR\x05items\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\x98\x01\n" +
 	"\tCloudInfo\x12B\n" +
 	"\x05cloud\x18\x01 \x01(\v2,.yandex.cloud.billing.usage_records.v1.CloudR\x05cloud\x12G\n" +
-	"\afolders\x18\x02 \x03(\v2-.yandex.cloud.billing.usage_records.v1.FolderR\afolders\"\xa6\x02\n" +
-	"\x15GetResourceIDsRequest\x122\n" +
+	"\afolders\x18\x02 \x03(\v2-.yandex.cloud.billing.usage_records.v1.FolderR\afolders\"\xda\x02\n" +
+	"\x13GetResourcesRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
 	"start_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartDate\x12;\n" +
-	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x12\x1f\n" +
-	"\vresource_id\x18\x04 \x01(\tR\n" +
-	"resourceId\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x03R\bpageSize\x12\x1d\n" +
+	"\bend_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\aendDate\x122\n" +
+	"\x15service_instances_ids\x18\x04 \x03(\tR\x13serviceInstancesIds\x12!\n" +
+	"\fresource_ids\x18\x05 \x03(\tR\vresourceIds\x12\x1b\n" +
+	"\tpage_size\x18\x06 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x06 \x01(\tR\tpageToken\"c\n" +
-	"\x16GetResourceIDsResponse\x12!\n" +
-	"\fresource_ids\x18\x01 \x03(\tR\vresourceIds\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x98\x04\n" +
+	"page_token\x18\a \x01(\tR\tpageToken\"\xef\x02\n" +
+	"\x14GetResourcesResponse\x12e\n" +
+	"\x05items\x18\x01 \x03(\v2O.yandex.cloud.billing.usage_records.v1.GetResourcesResponse.ServiceInstanceInfoR\x05items\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\xc7\x01\n" +
+	"\x13ServiceInstanceInfo\x12a\n" +
+	"\x10service_instance\x18\x01 \x01(\v26.yandex.cloud.billing.usage_records.v1.ServiceInstanceR\x0fserviceInstance\x12M\n" +
+	"\tresources\x18\x02 \x03(\v2/.yandex.cloud.billing.usage_records.v1.ResourceR\tresources2\xae\x05\n" +
 	"\x0fMetadataService\x12{\n" +
-	"\bGetUsage\x126.yandex.cloud.billing.usage_records.v1.GetUsageRequest\x1a7.yandex.cloud.billing.usage_records.v1.GetUsageResponse\x12{\n" +
+	"\bGetUsage\x126.yandex.cloud.billing.usage_records.v1.GetUsageRequest\x1a7.yandex.cloud.billing.usage_records.v1.GetUsageResponse\x12\x99\x01\n" +
+	"\x12GetServiceInstance\x12@.yandex.cloud.billing.usage_records.v1.GetServiceInstanceRequest\x1aA.yandex.cloud.billing.usage_records.v1.GetServiceInstanceResponse\x12{\n" +
 	"\bGetLabel\x126.yandex.cloud.billing.usage_records.v1.GetLabelRequest\x1a7.yandex.cloud.billing.usage_records.v1.GetLabelResponse\x12{\n" +
-	"\bGetCloud\x126.yandex.cloud.billing.usage_records.v1.GetCloudRequest\x1a7.yandex.cloud.billing.usage_records.v1.GetCloudResponse\x12\x8d\x01\n" +
-	"\x0eGetResourceIDs\x12<.yandex.cloud.billing.usage_records.v1.GetResourceIDsRequest\x1a=.yandex.cloud.billing.usage_records.v1.GetResourceIDsResponseB\x83\x01\n" +
+	"\bGetCloud\x126.yandex.cloud.billing.usage_records.v1.GetCloudRequest\x1a7.yandex.cloud.billing.usage_records.v1.GetCloudResponse\x12\x87\x01\n" +
+	"\fGetResources\x12:.yandex.cloud.billing.usage_records.v1.GetResourcesRequest\x1a;.yandex.cloud.billing.usage_records.v1.GetResourcesResponseB\x83\x01\n" +
 	")yandex.cloud.api.billing.usage_records.v1ZVgithub.com/yandex-cloud/go-genproto/yandex/cloud/billing/usage_records/v1;usageRecordsb\x06proto3"
 
 var (
@@ -908,53 +1228,66 @@ func file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescGZ
 	return file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDescData
 }
 
-var file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_goTypes = []any{
-	(*GetUsageRequest)(nil),            // 0: yandex.cloud.billing.usage_records.v1.GetUsageRequest
-	(*GetUsageResponse)(nil),           // 1: yandex.cloud.billing.usage_records.v1.GetUsageResponse
-	(*GetLabelRequest)(nil),            // 2: yandex.cloud.billing.usage_records.v1.GetLabelRequest
-	(*GetLabelResponse)(nil),           // 3: yandex.cloud.billing.usage_records.v1.GetLabelResponse
-	(*GetCloudRequest)(nil),            // 4: yandex.cloud.billing.usage_records.v1.GetCloudRequest
-	(*GetCloudResponse)(nil),           // 5: yandex.cloud.billing.usage_records.v1.GetCloudResponse
-	(*GetResourceIDsRequest)(nil),      // 6: yandex.cloud.billing.usage_records.v1.GetResourceIDsRequest
-	(*GetResourceIDsResponse)(nil),     // 7: yandex.cloud.billing.usage_records.v1.GetResourceIDsResponse
-	(*GetCloudResponse_CloudInfo)(nil), // 8: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo
-	(*timestamppb.Timestamp)(nil),      // 9: google.protobuf.Timestamp
-	(*Cloud)(nil),                      // 10: yandex.cloud.billing.usage_records.v1.Cloud
-	(*Service)(nil),                    // 11: yandex.cloud.billing.usage_records.v1.Service
-	(*SKU)(nil),                        // 12: yandex.cloud.billing.usage_records.v1.SKU
-	(*BillingAccount)(nil),             // 13: yandex.cloud.billing.usage_records.v1.BillingAccount
-	(*Folder)(nil),                     // 14: yandex.cloud.billing.usage_records.v1.Folder
+	(*GetUsageRequest)(nil),                          // 0: yandex.cloud.billing.usage_records.v1.GetUsageRequest
+	(*GetUsageResponse)(nil),                         // 1: yandex.cloud.billing.usage_records.v1.GetUsageResponse
+	(*GetServiceInstanceRequest)(nil),                // 2: yandex.cloud.billing.usage_records.v1.GetServiceInstanceRequest
+	(*GetServiceInstanceResponse)(nil),               // 3: yandex.cloud.billing.usage_records.v1.GetServiceInstanceResponse
+	(*GetLabelRequest)(nil),                          // 4: yandex.cloud.billing.usage_records.v1.GetLabelRequest
+	(*GetLabelResponse)(nil),                         // 5: yandex.cloud.billing.usage_records.v1.GetLabelResponse
+	(*GetCloudRequest)(nil),                          // 6: yandex.cloud.billing.usage_records.v1.GetCloudRequest
+	(*GetCloudResponse)(nil),                         // 7: yandex.cloud.billing.usage_records.v1.GetCloudResponse
+	(*GetResourcesRequest)(nil),                      // 8: yandex.cloud.billing.usage_records.v1.GetResourcesRequest
+	(*GetResourcesResponse)(nil),                     // 9: yandex.cloud.billing.usage_records.v1.GetResourcesResponse
+	(*GetCloudResponse_CloudInfo)(nil),               // 10: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo
+	(*GetResourcesResponse_ServiceInstanceInfo)(nil), // 11: yandex.cloud.billing.usage_records.v1.GetResourcesResponse.ServiceInstanceInfo
+	(*timestamppb.Timestamp)(nil),                    // 12: google.protobuf.Timestamp
+	(*Cloud)(nil),                                    // 13: yandex.cloud.billing.usage_records.v1.Cloud
+	(*Service)(nil),                                  // 14: yandex.cloud.billing.usage_records.v1.Service
+	(*SKU)(nil),                                      // 15: yandex.cloud.billing.usage_records.v1.SKU
+	(*BillingAccount)(nil),                           // 16: yandex.cloud.billing.usage_records.v1.BillingAccount
+	(*ServiceInstance)(nil),                          // 17: yandex.cloud.billing.usage_records.v1.ServiceInstance
+	(*Folder)(nil),                                   // 18: yandex.cloud.billing.usage_records.v1.Folder
+	(*Resource)(nil),                                 // 19: yandex.cloud.billing.usage_records.v1.Resource
 }
 var file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.billing.usage_records.v1.GetUsageRequest.start_date:type_name -> google.protobuf.Timestamp
-	9,  // 1: yandex.cloud.billing.usage_records.v1.GetUsageRequest.end_date:type_name -> google.protobuf.Timestamp
-	10, // 2: yandex.cloud.billing.usage_records.v1.GetUsageResponse.clouds:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
-	11, // 3: yandex.cloud.billing.usage_records.v1.GetUsageResponse.services:type_name -> yandex.cloud.billing.usage_records.v1.Service
-	12, // 4: yandex.cloud.billing.usage_records.v1.GetUsageResponse.skus:type_name -> yandex.cloud.billing.usage_records.v1.SKU
-	13, // 5: yandex.cloud.billing.usage_records.v1.GetUsageResponse.billing_accounts:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccount
-	9,  // 6: yandex.cloud.billing.usage_records.v1.GetLabelRequest.start_date:type_name -> google.protobuf.Timestamp
-	9,  // 7: yandex.cloud.billing.usage_records.v1.GetLabelRequest.end_date:type_name -> google.protobuf.Timestamp
-	9,  // 8: yandex.cloud.billing.usage_records.v1.GetCloudRequest.start_date:type_name -> google.protobuf.Timestamp
-	9,  // 9: yandex.cloud.billing.usage_records.v1.GetCloudRequest.end_date:type_name -> google.protobuf.Timestamp
-	8,  // 10: yandex.cloud.billing.usage_records.v1.GetCloudResponse.items:type_name -> yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo
-	9,  // 11: yandex.cloud.billing.usage_records.v1.GetResourceIDsRequest.start_date:type_name -> google.protobuf.Timestamp
-	9,  // 12: yandex.cloud.billing.usage_records.v1.GetResourceIDsRequest.end_date:type_name -> google.protobuf.Timestamp
-	10, // 13: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo.cloud:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
-	14, // 14: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo.folders:type_name -> yandex.cloud.billing.usage_records.v1.Folder
-	0,  // 15: yandex.cloud.billing.usage_records.v1.MetadataService.GetUsage:input_type -> yandex.cloud.billing.usage_records.v1.GetUsageRequest
-	2,  // 16: yandex.cloud.billing.usage_records.v1.MetadataService.GetLabel:input_type -> yandex.cloud.billing.usage_records.v1.GetLabelRequest
-	4,  // 17: yandex.cloud.billing.usage_records.v1.MetadataService.GetCloud:input_type -> yandex.cloud.billing.usage_records.v1.GetCloudRequest
-	6,  // 18: yandex.cloud.billing.usage_records.v1.MetadataService.GetResourceIDs:input_type -> yandex.cloud.billing.usage_records.v1.GetResourceIDsRequest
-	1,  // 19: yandex.cloud.billing.usage_records.v1.MetadataService.GetUsage:output_type -> yandex.cloud.billing.usage_records.v1.GetUsageResponse
-	3,  // 20: yandex.cloud.billing.usage_records.v1.MetadataService.GetLabel:output_type -> yandex.cloud.billing.usage_records.v1.GetLabelResponse
-	5,  // 21: yandex.cloud.billing.usage_records.v1.MetadataService.GetCloud:output_type -> yandex.cloud.billing.usage_records.v1.GetCloudResponse
-	7,  // 22: yandex.cloud.billing.usage_records.v1.MetadataService.GetResourceIDs:output_type -> yandex.cloud.billing.usage_records.v1.GetResourceIDsResponse
-	19, // [19:23] is the sub-list for method output_type
-	15, // [15:19] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	12, // 0: yandex.cloud.billing.usage_records.v1.GetUsageRequest.start_date:type_name -> google.protobuf.Timestamp
+	12, // 1: yandex.cloud.billing.usage_records.v1.GetUsageRequest.end_date:type_name -> google.protobuf.Timestamp
+	13, // 2: yandex.cloud.billing.usage_records.v1.GetUsageResponse.clouds:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
+	14, // 3: yandex.cloud.billing.usage_records.v1.GetUsageResponse.services:type_name -> yandex.cloud.billing.usage_records.v1.Service
+	15, // 4: yandex.cloud.billing.usage_records.v1.GetUsageResponse.skus:type_name -> yandex.cloud.billing.usage_records.v1.SKU
+	16, // 5: yandex.cloud.billing.usage_records.v1.GetUsageResponse.billing_accounts:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccount
+	12, // 6: yandex.cloud.billing.usage_records.v1.GetServiceInstanceRequest.start_date:type_name -> google.protobuf.Timestamp
+	12, // 7: yandex.cloud.billing.usage_records.v1.GetServiceInstanceRequest.end_date:type_name -> google.protobuf.Timestamp
+	17, // 8: yandex.cloud.billing.usage_records.v1.GetServiceInstanceResponse.service_instances:type_name -> yandex.cloud.billing.usage_records.v1.ServiceInstance
+	12, // 9: yandex.cloud.billing.usage_records.v1.GetLabelRequest.start_date:type_name -> google.protobuf.Timestamp
+	12, // 10: yandex.cloud.billing.usage_records.v1.GetLabelRequest.end_date:type_name -> google.protobuf.Timestamp
+	12, // 11: yandex.cloud.billing.usage_records.v1.GetCloudRequest.start_date:type_name -> google.protobuf.Timestamp
+	12, // 12: yandex.cloud.billing.usage_records.v1.GetCloudRequest.end_date:type_name -> google.protobuf.Timestamp
+	10, // 13: yandex.cloud.billing.usage_records.v1.GetCloudResponse.items:type_name -> yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo
+	12, // 14: yandex.cloud.billing.usage_records.v1.GetResourcesRequest.start_date:type_name -> google.protobuf.Timestamp
+	12, // 15: yandex.cloud.billing.usage_records.v1.GetResourcesRequest.end_date:type_name -> google.protobuf.Timestamp
+	11, // 16: yandex.cloud.billing.usage_records.v1.GetResourcesResponse.items:type_name -> yandex.cloud.billing.usage_records.v1.GetResourcesResponse.ServiceInstanceInfo
+	13, // 17: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo.cloud:type_name -> yandex.cloud.billing.usage_records.v1.Cloud
+	18, // 18: yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfo.folders:type_name -> yandex.cloud.billing.usage_records.v1.Folder
+	17, // 19: yandex.cloud.billing.usage_records.v1.GetResourcesResponse.ServiceInstanceInfo.service_instance:type_name -> yandex.cloud.billing.usage_records.v1.ServiceInstance
+	19, // 20: yandex.cloud.billing.usage_records.v1.GetResourcesResponse.ServiceInstanceInfo.resources:type_name -> yandex.cloud.billing.usage_records.v1.Resource
+	0,  // 21: yandex.cloud.billing.usage_records.v1.MetadataService.GetUsage:input_type -> yandex.cloud.billing.usage_records.v1.GetUsageRequest
+	2,  // 22: yandex.cloud.billing.usage_records.v1.MetadataService.GetServiceInstance:input_type -> yandex.cloud.billing.usage_records.v1.GetServiceInstanceRequest
+	4,  // 23: yandex.cloud.billing.usage_records.v1.MetadataService.GetLabel:input_type -> yandex.cloud.billing.usage_records.v1.GetLabelRequest
+	6,  // 24: yandex.cloud.billing.usage_records.v1.MetadataService.GetCloud:input_type -> yandex.cloud.billing.usage_records.v1.GetCloudRequest
+	8,  // 25: yandex.cloud.billing.usage_records.v1.MetadataService.GetResources:input_type -> yandex.cloud.billing.usage_records.v1.GetResourcesRequest
+	1,  // 26: yandex.cloud.billing.usage_records.v1.MetadataService.GetUsage:output_type -> yandex.cloud.billing.usage_records.v1.GetUsageResponse
+	3,  // 27: yandex.cloud.billing.usage_records.v1.MetadataService.GetServiceInstance:output_type -> yandex.cloud.billing.usage_records.v1.GetServiceInstanceResponse
+	5,  // 28: yandex.cloud.billing.usage_records.v1.MetadataService.GetLabel:output_type -> yandex.cloud.billing.usage_records.v1.GetLabelResponse
+	7,  // 29: yandex.cloud.billing.usage_records.v1.MetadataService.GetCloud:output_type -> yandex.cloud.billing.usage_records.v1.GetCloudResponse
+	9,  // 30: yandex.cloud.billing.usage_records.v1.MetadataService.GetResources:output_type -> yandex.cloud.billing.usage_records.v1.GetResourcesResponse
+	26, // [26:31] is the sub-list for method output_type
+	21, // [21:26] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_init() }
@@ -969,7 +1302,7 @@ func file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc), len(file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

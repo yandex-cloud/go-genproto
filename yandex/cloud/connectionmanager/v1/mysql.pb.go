@@ -193,8 +193,8 @@ func (*MySQLAuth_UserPassword) isMySQLAuth_Security() {}
 
 type MySQLCluster struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Hosts         []*MySQLCluster_Host   `protobuf:"bytes,4,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	TlsParams     *TLSParams             `protobuf:"bytes,3,opt,name=tls_params,json=tlsParams,proto3" json:"tls_params,omitempty"`
+	Hosts         []*MySQLCluster_Host   `protobuf:"bytes,4,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -229,16 +229,16 @@ func (*MySQLCluster) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_mysql_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *MySQLCluster) GetHosts() []*MySQLCluster_Host {
+func (x *MySQLCluster) GetTlsParams() *TLSParams {
 	if x != nil {
-		return x.Hosts
+		return x.TlsParams
 	}
 	return nil
 }
 
-func (x *MySQLCluster) GetTlsParams() *TLSParams {
+func (x *MySQLCluster) GetHosts() []*MySQLCluster_Host {
 	if x != nil {
-		return x.TlsParams
+		return x.Hosts
 	}
 	return nil
 }
@@ -391,11 +391,11 @@ const file_yandex_cloud_connectionmanager_v1_mysql_proto_rawDesc = "" +
 	"\tMySQLAuth\x12Z\n" +
 	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPasswordB\n" +
 	"\n" +
-	"\bsecurity\"\x92\x04\n" +
-	"\fMySQLCluster\x12J\n" +
-	"\x05hosts\x18\x04 \x03(\v24.yandex.cloud.connectionmanager.v1.MySQLCluster.HostR\x05hosts\x12K\n" +
+	"\bsecurity\"\x8c\x04\n" +
+	"\fMySQLCluster\x12K\n" +
 	"\n" +
-	"tls_params\x18\x03 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x1a\xdc\x02\n" +
+	"tls_params\x18\x03 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x12J\n" +
+	"\x05hosts\x18\x04 \x03(\v24.yandex.cloud.connectionmanager.v1.MySQLCluster.HostR\x05hosts\x1a\xdc\x02\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04host\x18\x01 \x01(\tR\x04host\x12\x12\n" +
 	"\x04port\x18\x02 \x01(\x03R\x04port\x12M\n" +
@@ -411,7 +411,7 @@ const file_yandex_cloud_connectionmanager_v1_mysql_proto_rawDesc = "" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
 	"\bDEGRADED\x10\x03\x12\f\n" +
-	"\bREADONLY\x10\x04J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\xea\x01\n" +
+	"\bREADONLY\x10\x04J\x04\b\x01\x10\x03\"\xea\x01\n" +
 	"\x0fMySQLConnection\x12I\n" +
 	"\acluster\x18\x01 \x01(\v2/.yandex.cloud.connectionmanager.v1.MySQLClusterR\acluster\x12,\n" +
 	"\x12managed_cluster_id\x18\x02 \x01(\tR\x10managedClusterId\x12@\n" +
@@ -445,8 +445,8 @@ var file_yandex_cloud_connectionmanager_v1_mysql_proto_goTypes = []any{
 }
 var file_yandex_cloud_connectionmanager_v1_mysql_proto_depIdxs = []int32{
 	6, // 0: yandex.cloud.connectionmanager.v1.MySQLAuth.user_password:type_name -> yandex.cloud.connectionmanager.v1.UserPasswordAuth
-	5, // 1: yandex.cloud.connectionmanager.v1.MySQLCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.MySQLCluster.Host
-	7, // 2: yandex.cloud.connectionmanager.v1.MySQLCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
+	7, // 1: yandex.cloud.connectionmanager.v1.MySQLCluster.tls_params:type_name -> yandex.cloud.connectionmanager.v1.TLSParams
+	5, // 2: yandex.cloud.connectionmanager.v1.MySQLCluster.hosts:type_name -> yandex.cloud.connectionmanager.v1.MySQLCluster.Host
 	3, // 3: yandex.cloud.connectionmanager.v1.MySQLConnection.cluster:type_name -> yandex.cloud.connectionmanager.v1.MySQLCluster
 	2, // 4: yandex.cloud.connectionmanager.v1.MySQLConnection.auth:type_name -> yandex.cloud.connectionmanager.v1.MySQLAuth
 	0, // 5: yandex.cloud.connectionmanager.v1.MySQLCluster.Host.role:type_name -> yandex.cloud.connectionmanager.v1.MySQLCluster.Host.Role

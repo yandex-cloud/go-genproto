@@ -14,12 +14,12 @@ func (m *PostgreSQLAuth) SetUserPassword(v *UserPasswordAuth) {
 	}
 }
 
-func (m *PostgreSQLCluster) SetHosts(v []*PostgreSQLCluster_Host) {
-	m.Hosts = v
-}
-
 func (m *PostgreSQLCluster) SetTlsParams(v *TLSParams) {
 	m.TlsParams = v
+}
+
+func (m *PostgreSQLCluster) SetHosts(v []*PostgreSQLCluster_Host) {
+	m.Hosts = v
 }
 
 func (m *PostgreSQLCluster_Host) SetHost(v string) {

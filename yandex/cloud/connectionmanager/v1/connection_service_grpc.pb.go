@@ -38,10 +38,9 @@ type ConnectionServiceClient interface {
 	// Returns the specified connection.
 	Get(ctx context.Context, in *GetConnectionRequest, opts ...grpc.CallOption) (*Connection, error)
 	// Returns the connection with the resolved cluster; that is,
-	//   - for connections to the on-premise clusters is identical to the Get RPC;
-	//   - for connections to the managed clusters, resolves the cluster topology
-	//     and returns it in the `on_premise` field of the connection parameters.
-	//
+	// * for connections to the on-premise clusters is identical to the Get RPC;
+	// * for connections to the managed clusters, resolves the cluster topology
+	// and returns it in the `on_premise` field of the connection parameters.
 	// Requires `connection-manager.connections.resolveCluster` permission.
 	ResolveCluster(ctx context.Context, in *ResolveClusterRequest, opts ...grpc.CallOption) (*Connection, error)
 	// Retrieves the list of connections in the specified folder.
@@ -143,10 +142,9 @@ type ConnectionServiceServer interface {
 	// Returns the specified connection.
 	Get(context.Context, *GetConnectionRequest) (*Connection, error)
 	// Returns the connection with the resolved cluster; that is,
-	//   - for connections to the on-premise clusters is identical to the Get RPC;
-	//   - for connections to the managed clusters, resolves the cluster topology
-	//     and returns it in the `on_premise` field of the connection parameters.
-	//
+	// * for connections to the on-premise clusters is identical to the Get RPC;
+	// * for connections to the managed clusters, resolves the cluster topology
+	// and returns it in the `on_premise` field of the connection parameters.
 	// Requires `connection-manager.connections.resolveCluster` permission.
 	ResolveCluster(context.Context, *ResolveClusterRequest) (*Connection, error)
 	// Retrieves the list of connections in the specified folder.

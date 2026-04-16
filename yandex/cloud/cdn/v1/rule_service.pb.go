@@ -306,6 +306,9 @@ func (x *GetResourceRuleRequest) GetRuleId() int64 {
 
 type UpdateResourceRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Rules are ordered by weight in ascending order (lower weights execute first)
+	// Weight must be between 0 and 9999 inclusive
+	Weight *int64 `protobuf:"varint,6,opt,name=weight,proto3,oneof" json:"weight,omitempty"`
 	// ID of resource.
 	ResourceId string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// ID of updated resource rule.
@@ -313,11 +316,8 @@ type UpdateResourceRuleRequest struct {
 	// Name of updated resource rule.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource rule pattern.
-	RulePattern string           `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options     *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
-	// Rules are ordered by weight in ascending order (lower weights execute first)
-	// Weight must be between 0 and 9999 inclusive
-	Weight        *int64 `protobuf:"varint,6,opt,name=weight,proto3,oneof" json:"weight,omitempty"`
+	RulePattern   string           `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	Options       *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -350,6 +350,13 @@ func (x *UpdateResourceRuleRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateResourceRuleRequest.ProtoReflect.Descriptor instead.
 func (*UpdateResourceRuleRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cdn_v1_rule_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateResourceRuleRequest) GetWeight() int64 {
+	if x != nil && x.Weight != nil {
+		return *x.Weight
+	}
+	return 0
 }
 
 func (x *UpdateResourceRuleRequest) GetResourceId() string {
@@ -385,13 +392,6 @@ func (x *UpdateResourceRuleRequest) GetOptions() *ResourceOptions {
 		return x.Options
 	}
 	return nil
-}
-
-func (x *UpdateResourceRuleRequest) GetWeight() int64 {
-	if x != nil && x.Weight != nil {
-		return *x.Weight
-	}
-	return 0
 }
 
 type UpdateResourceRuleMetadata struct {
@@ -581,14 +581,14 @@ const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
 	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\"\x9f\x02\n" +
-	"\x19UpdateResourceRuleRequest\x12-\n" +
+	"\x19UpdateResourceRuleRequest\x12\x1b\n" +
+	"\x06weight\x18\x06 \x01(\x03H\x00R\x06weight\x88\x01\x01\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
 	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\x12\x1c\n" +
 	"\x04name\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12,\n" +
 	"\frule_pattern\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
-	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x1b\n" +
-	"\x06weight\x18\x06 \x01(\x03H\x00R\x06weight\x88\x01\x01B\t\n" +
+	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptionsB\t\n" +
 	"\a_weight\"l\n" +
 	"\x1aUpdateResourceRuleMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +

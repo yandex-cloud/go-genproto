@@ -26,7 +26,6 @@ const (
 type DefaultStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the configuration.
-	//
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// List of default storages.

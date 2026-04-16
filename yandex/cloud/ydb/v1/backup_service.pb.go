@@ -413,7 +413,7 @@ var File_yandex_cloud_ydb_v1_backup_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ydb_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/ydb/v1/backup_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/ydb/v1/backup.proto\"\x90\x01\n" +
+	"(yandex/cloud/ydb/v1/backup_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/ydb/v1/backup.proto\"\x90\x01\n" +
 	"\x10ListPathsRequest\x12)\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bbackupId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -443,14 +443,14 @@ const file_yandex_cloud_ydb_v1_backup_service_proto_rawDesc = "" +
 	"\rBackupService\x12n\n" +
 	"\x03Get\x12%.yandex.cloud.ydb.v1.GetBackupRequest\x1a\x1b.yandex.cloud.ydb.v1.Backup\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/ydb/v1/backups/{backup_id}\x12\x85\x01\n" +
 	"\tListPaths\x12%.yandex.cloud.ydb.v1.ListPathsRequest\x1a&.yandex.cloud.ydb.v1.ListPathsResponse\")\x82\xd3\xe4\x93\x02#\x12!/ydb/v1/backups/{backup_id}/paths\x12r\n" +
-	"\x04List\x12'.yandex.cloud.ydb.v1.ListBackupsRequest\x1a(.yandex.cloud.ydb.v1.ListBackupsResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/ydb/v1/backups\x12u\n" +
+	"\x04List\x12'.yandex.cloud.ydb.v1.ListBackupsRequest\x1a(.yandex.cloud.ydb.v1.ListBackupsResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/ydb/v1/backups\x12\xab\x01\n" +
+	"\x06Delete\x12(.yandex.cloud.ydb.v1.DeleteBackupRequest\x1a!.yandex.cloud.operation.Operation\"T\xb2\xd2*-\n" +
+	"\x14DeleteBackupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1d*\x1b/ydb/v1/backups/{backup_id}\x12u\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\x12\xa4\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"=\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x12\xad\x01\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"@\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x12\xab\x01\n" +
-	"\x06Delete\x12(.yandex.cloud.ydb.v1.DeleteBackupRequest\x1a!.yandex.cloud.operation.Operation\"T\xb2\xd2*-\n" +
-	"\x14DeleteBackupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1d*\x1b/ydb/v1/backups/{backup_id}BV\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.EmptyBV\n" +
 	"\x17yandex.cloud.api.ydb.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/ydb/v1;ydbb\x06proto3"
 
 var (
@@ -478,25 +478,25 @@ var file_yandex_cloud_ydb_v1_backup_service_proto_goTypes = []any{
 	(*access.ListAccessBindingsRequest)(nil),   // 8: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),    // 9: yandex.cloud.access.SetAccessBindingsRequest
 	(*access.UpdateAccessBindingsRequest)(nil), // 10: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 11: yandex.cloud.access.ListAccessBindingsResponse
-	(*operation.Operation)(nil),                // 12: yandex.cloud.operation.Operation
+	(*operation.Operation)(nil),                // 11: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsResponse)(nil),  // 12: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_ydb_v1_backup_service_proto_depIdxs = []int32{
 	7,  // 0: yandex.cloud.ydb.v1.ListBackupsResponse.backups:type_name -> yandex.cloud.ydb.v1.Backup
 	2,  // 1: yandex.cloud.ydb.v1.BackupService.Get:input_type -> yandex.cloud.ydb.v1.GetBackupRequest
 	0,  // 2: yandex.cloud.ydb.v1.BackupService.ListPaths:input_type -> yandex.cloud.ydb.v1.ListPathsRequest
 	3,  // 3: yandex.cloud.ydb.v1.BackupService.List:input_type -> yandex.cloud.ydb.v1.ListBackupsRequest
-	8,  // 4: yandex.cloud.ydb.v1.BackupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	9,  // 5: yandex.cloud.ydb.v1.BackupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	10, // 6: yandex.cloud.ydb.v1.BackupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	5,  // 7: yandex.cloud.ydb.v1.BackupService.Delete:input_type -> yandex.cloud.ydb.v1.DeleteBackupRequest
+	5,  // 4: yandex.cloud.ydb.v1.BackupService.Delete:input_type -> yandex.cloud.ydb.v1.DeleteBackupRequest
+	8,  // 5: yandex.cloud.ydb.v1.BackupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	9,  // 6: yandex.cloud.ydb.v1.BackupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	10, // 7: yandex.cloud.ydb.v1.BackupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
 	7,  // 8: yandex.cloud.ydb.v1.BackupService.Get:output_type -> yandex.cloud.ydb.v1.Backup
 	1,  // 9: yandex.cloud.ydb.v1.BackupService.ListPaths:output_type -> yandex.cloud.ydb.v1.ListPathsResponse
 	4,  // 10: yandex.cloud.ydb.v1.BackupService.List:output_type -> yandex.cloud.ydb.v1.ListBackupsResponse
-	11, // 11: yandex.cloud.ydb.v1.BackupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	12, // 12: yandex.cloud.ydb.v1.BackupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	12, // 13: yandex.cloud.ydb.v1.BackupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	12, // 14: yandex.cloud.ydb.v1.BackupService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // 11: yandex.cloud.ydb.v1.BackupService.Delete:output_type -> yandex.cloud.operation.Operation
+	12, // 12: yandex.cloud.ydb.v1.BackupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	11, // 13: yandex.cloud.ydb.v1.BackupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	11, // 14: yandex.cloud.ydb.v1.BackupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
 	8,  // [8:15] is the sub-list for method output_type
 	1,  // [1:8] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name

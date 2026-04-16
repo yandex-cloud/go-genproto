@@ -291,6 +291,10 @@ func (m *KafkaConfig2_8) SetSaslEnabledMechanisms(v []SaslMechanism) {
 	m.SaslEnabledMechanisms = v
 }
 
+func (m *KafkaConfig2_8) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value) {
+	m.TransactionalIdExpirationMs = v
+}
+
 func (m *KafkaConfig3) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -371,6 +375,10 @@ func (m *KafkaConfig3) SetSaslEnabledMechanisms(v []SaslMechanism) {
 	m.SaslEnabledMechanisms = v
 }
 
+func (m *KafkaConfig3) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value) {
+	m.TransactionalIdExpirationMs = v
+}
+
 func (m *KafkaConfig4) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -445,6 +453,10 @@ func (m *KafkaConfig4) SetOffsetsRetentionMinutes(v *wrapperspb.Int64Value) {
 
 func (m *KafkaConfig4) SetSaslEnabledMechanisms(v []SaslMechanism) {
 	m.SaslEnabledMechanisms = v
+}
+
+func (m *KafkaConfig4) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value) {
+	m.TransactionalIdExpirationMs = v
 }
 
 func (m *Host) SetName(v string) {

@@ -34,7 +34,6 @@ const (
 // A set of methods for managing Private cloud connection resources.
 type PrivateCloudConnectionServiceClient interface {
 	// Returns the specific Private cloud connection resource.
-	//
 	// To get the list of available Private cloud connection resources, make a [List] request.
 	Get(ctx context.Context, in *GetPrivateCloudConnectionRequest, opts ...grpc.CallOption) (*PrivateCloudConnection, error)
 	// Retrieves the list of Private cloud connection resources in the specified folder.
@@ -112,7 +111,6 @@ func (c *privateCloudConnectionServiceClient) Delete(ctx context.Context, in *De
 // A set of methods for managing Private cloud connection resources.
 type PrivateCloudConnectionServiceServer interface {
 	// Returns the specific Private cloud connection resource.
-	//
 	// To get the list of available Private cloud connection resources, make a [List] request.
 	Get(context.Context, *GetPrivateCloudConnectionRequest) (*PrivateCloudConnection, error)
 	// Retrieves the list of Private cloud connection resources in the specified folder.

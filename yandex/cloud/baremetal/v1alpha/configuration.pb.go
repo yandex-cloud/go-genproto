@@ -7,6 +7,7 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -275,13 +276,13 @@ var File_yandex_cloud_baremetal_v1alpha_configuration_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v1alpha/configuration.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\"\x97\x01\n" +
+	"2yandex/cloud/baremetal/v1alpha/configuration.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a\x1dyandex/cloud/validation.proto\"\x9f\x01\n" +
 	"\x03CPU\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06vendor\x18\x02 \x01(\tR\x06vendor\x12\x18\n" +
 	"\x05cores\x18\x03 \x01(\x03B\x02\x18\x01R\x05cores\x12%\n" +
-	"\x0ephysical_cores\x18\x04 \x01(\x03R\rphysicalCores\x12#\n" +
-	"\rfrequency_mhz\x18\x05 \x01(\x03R\ffrequencyMhz\"\x9e\x01\n" +
+	"\x0ephysical_cores\x18\x04 \x01(\x03R\rphysicalCores\x12+\n" +
+	"\rfrequency_mhz\x18\x05 \x01(\x03B\x06\xfa\xc71\x02>0R\ffrequencyMhz\"\x9e\x01\n" +
 	"\x16DiskDriveConfiguration\x12A\n" +
 	"\x04type\x18\x01 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x1d\n" +
 	"\n" +

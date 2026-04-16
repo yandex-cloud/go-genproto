@@ -29,7 +29,6 @@ const (
 type GetPrivateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the PrivateSubnet resource to return.
-	//
 	// To get the private subnet ID use a [PrivateSubnetService.List] request.
 	PrivateSubnetId string `protobuf:"bytes,2,opt,name=private_subnet_id,json=privateSubnetId,proto3" json:"private_subnet_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetPrivateSubnetRequest) GetPrivateSubnetId() string {
 type ListPrivateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list private subnets in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -95,7 +93,6 @@ type ListPrivateSubnetRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -182,7 +179,6 @@ type ListPrivateSubnetResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImagesRequest.page_size], use `next_page_token` as the value
 	// for the [ListImagesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -241,13 +237,11 @@ type CreatePrivateSubnetRequest struct {
 	// Description of the private subnet.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the hardware pool where the private subnet resides.
-	//
 	// To get a list of available hardware pools, use the [HardwarePoolService.List] request.
 	HardwarePoolId string `protobuf:"bytes,3,opt,name=hardware_pool_id,json=hardwarePoolId,proto3" json:"hardware_pool_id,omitempty"`
 	// VRF options. Optional.
 	VrfOptionsSpec *VrfOptionsSpec `protobuf:"bytes,4,opt,name=vrf_options_spec,json=vrfOptionsSpec,proto3" json:"vrf_options_spec,omitempty"`
 	// ID of the folder to create a private subnet in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Resource labels as `key:value` pairs.
@@ -331,7 +325,6 @@ func (x *CreatePrivateSubnetRequest) GetLabels() map[string]string {
 type VrfOptionsSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the VRF to create private subnet in.
-	//
 	// To get the VRF ID, use a [VrfService.List] request.
 	VrfId string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
 	// CIDR block.
@@ -511,7 +504,6 @@ func (x *CreatePrivateSubnetMetadata) GetPrivateSubnetId() string {
 type UpdatePrivateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the PrivateSubnet resource to update.
-	//
 	// To get the private subnet ID, use a [PrivateSubnetService.List] request.
 	PrivateSubnetId string `protobuf:"bytes,1,opt,name=private_subnet_id,json=privateSubnetId,proto3" json:"private_subnet_id,omitempty"`
 	// Field mask that specifies which fields of the PrivateSubnet resource are going to be updated.
@@ -524,7 +516,6 @@ type UpdatePrivateSubnetRequest struct {
 	// VRF options. Optional.
 	VrfOptionsSpec *VrfOptionsSpec `protobuf:"bytes,5,opt,name=vrf_options_spec,json=vrfOptionsSpec,proto3" json:"vrf_options_spec,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -651,7 +642,6 @@ func (x *UpdatePrivateSubnetMetadata) GetPrivateSubnetId() string {
 type DeletePrivateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private subnet to delete.
-	//
 	// To get the private subnet ID, use a [PrivateSubnetService.List] request.
 	PrivateSubnetId string `protobuf:"bytes,2,opt,name=private_subnet_id,json=privateSubnetId,proto3" json:"private_subnet_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -815,7 +805,6 @@ type ListPrivateSubnetOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImageOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListImageOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -872,10 +861,11 @@ const file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_rawDesc =
 	"\n" +
 	";yandex/cloud/baremetal/v1alpha/private_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/baremetal/v1alpha/private_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"e\n" +
 	"\x17GetPrivateSubnetRequest\x12D\n" +
-	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xd5\x01\n" +
+	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xd6\x01\n" +
 	"\x18ListPrivateSubnetRequest\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
@@ -922,10 +912,11 @@ const file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_rawDesc =
 	"\x1aDeletePrivateSubnetRequest\x12D\n" +
 	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"O\n" +
 	"\x1bDeletePrivateSubnetMetadata\x12*\n" +
-	"\x11private_subnet_id\x18\x02 \x01(\tR\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xbd\x01\n" +
+	"\x11private_subnet_id\x18\x02 \x01(\tR\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xbe\x01\n" +
 	"\"ListPrivateSubnetOperationsRequest\x12D\n" +
-	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x01\x10\x02J\x04\b\x03\x10d\"\x96\x01\n" +
 	"#ListPrivateSubnetOperationsResponse\x12A\n" +

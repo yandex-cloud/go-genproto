@@ -33,10 +33,10 @@ const (
 	RegistryService_AddPassword_FullMethodName            = "/yandex.cloud.iot.devices.v1.RegistryService/AddPassword"
 	RegistryService_DeletePassword_FullMethodName         = "/yandex.cloud.iot.devices.v1.RegistryService/DeletePassword"
 	RegistryService_ListDeviceTopicAliases_FullMethodName = "/yandex.cloud.iot.devices.v1.RegistryService/ListDeviceTopicAliases"
+	RegistryService_ListOperations_FullMethodName         = "/yandex.cloud.iot.devices.v1.RegistryService/ListOperations"
 	RegistryService_ListDataStreamExports_FullMethodName  = "/yandex.cloud.iot.devices.v1.RegistryService/ListDataStreamExports"
 	RegistryService_AddDataStreamExport_FullMethodName    = "/yandex.cloud.iot.devices.v1.RegistryService/AddDataStreamExport"
 	RegistryService_DeleteDataStreamExport_FullMethodName = "/yandex.cloud.iot.devices.v1.RegistryService/DeleteDataStreamExport"
-	RegistryService_ListOperations_FullMethodName         = "/yandex.cloud.iot.devices.v1.RegistryService/ListOperations"
 	RegistryService_Disable_FullMethodName                = "/yandex.cloud.iot.devices.v1.RegistryService/Disable"
 	RegistryService_Enable_FullMethodName                 = "/yandex.cloud.iot.devices.v1.RegistryService/Enable"
 )
@@ -48,7 +48,6 @@ const (
 // A set of methods for managing registry.
 type RegistryServiceClient interface {
 	// Returns the specified registry.
-	//
 	// To get the list of available registries, make a [List] request.
 	Get(ctx context.Context, in *GetRegistryRequest, opts ...grpc.CallOption) (*Registry, error)
 	GetByName(ctx context.Context, in *GetByNameRegistryRequest, opts ...grpc.CallOption) (*Registry, error)
@@ -74,14 +73,14 @@ type RegistryServiceClient interface {
 	DeletePassword(ctx context.Context, in *DeleteRegistryPasswordRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves the list of device topic aliases for the specified registry.
 	ListDeviceTopicAliases(ctx context.Context, in *ListDeviceTopicAliasesRequest, opts ...grpc.CallOption) (*ListDeviceTopicAliasesResponse, error)
+	// Lists operations for the specified registry.
+	ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error)
 	// Retrieves the list of YDS exports for the specified registry.
 	ListDataStreamExports(ctx context.Context, in *ListDataStreamExportsRequest, opts ...grpc.CallOption) (*ListDataStreamExportsResponse, error)
 	// Adds YDS export for the specified registry.
 	AddDataStreamExport(ctx context.Context, in *AddDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified YDS export.
 	DeleteDataStreamExport(ctx context.Context, in *DeleteDataStreamExportRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Lists operations for the specified registry.
-	ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error)
 	// Disables the specified registry.
 	Disable(ctx context.Context, in *DisableRegistryRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables the specified registry.
@@ -226,6 +225,16 @@ func (c *registryServiceClient) ListDeviceTopicAliases(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *registryServiceClient) ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListRegistryOperationsResponse)
+	err := c.cc.Invoke(ctx, RegistryService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *registryServiceClient) ListDataStreamExports(ctx context.Context, in *ListDataStreamExportsRequest, opts ...grpc.CallOption) (*ListDataStreamExportsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDataStreamExportsResponse)
@@ -250,16 +259,6 @@ func (c *registryServiceClient) DeleteDataStreamExport(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, RegistryService_DeleteDataStreamExport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *registryServiceClient) ListOperations(ctx context.Context, in *ListRegistryOperationsRequest, opts ...grpc.CallOption) (*ListRegistryOperationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListRegistryOperationsResponse)
-	err := c.cc.Invoke(ctx, RegistryService_ListOperations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -293,7 +292,6 @@ func (c *registryServiceClient) Enable(ctx context.Context, in *EnableRegistryRe
 // A set of methods for managing registry.
 type RegistryServiceServer interface {
 	// Returns the specified registry.
-	//
 	// To get the list of available registries, make a [List] request.
 	Get(context.Context, *GetRegistryRequest) (*Registry, error)
 	GetByName(context.Context, *GetByNameRegistryRequest) (*Registry, error)
@@ -319,14 +317,14 @@ type RegistryServiceServer interface {
 	DeletePassword(context.Context, *DeleteRegistryPasswordRequest) (*operation.Operation, error)
 	// Retrieves the list of device topic aliases for the specified registry.
 	ListDeviceTopicAliases(context.Context, *ListDeviceTopicAliasesRequest) (*ListDeviceTopicAliasesResponse, error)
+	// Lists operations for the specified registry.
+	ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error)
 	// Retrieves the list of YDS exports for the specified registry.
 	ListDataStreamExports(context.Context, *ListDataStreamExportsRequest) (*ListDataStreamExportsResponse, error)
 	// Adds YDS export for the specified registry.
 	AddDataStreamExport(context.Context, *AddDataStreamExportRequest) (*operation.Operation, error)
 	// Deletes the specified YDS export.
 	DeleteDataStreamExport(context.Context, *DeleteDataStreamExportRequest) (*operation.Operation, error)
-	// Lists operations for the specified registry.
-	ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error)
 	// Disables the specified registry.
 	Disable(context.Context, *DisableRegistryRequest) (*operation.Operation, error)
 	// Enables the specified registry.
@@ -379,6 +377,9 @@ func (UnimplementedRegistryServiceServer) DeletePassword(context.Context, *Delet
 func (UnimplementedRegistryServiceServer) ListDeviceTopicAliases(context.Context, *ListDeviceTopicAliasesRequest) (*ListDeviceTopicAliasesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListDeviceTopicAliases not implemented")
 }
+func (UnimplementedRegistryServiceServer) ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
+}
 func (UnimplementedRegistryServiceServer) ListDataStreamExports(context.Context, *ListDataStreamExportsRequest) (*ListDataStreamExportsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListDataStreamExports not implemented")
 }
@@ -387,9 +388,6 @@ func (UnimplementedRegistryServiceServer) AddDataStreamExport(context.Context, *
 }
 func (UnimplementedRegistryServiceServer) DeleteDataStreamExport(context.Context, *DeleteDataStreamExportRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteDataStreamExport not implemented")
-}
-func (UnimplementedRegistryServiceServer) ListOperations(context.Context, *ListRegistryOperationsRequest) (*ListRegistryOperationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedRegistryServiceServer) Disable(context.Context, *DisableRegistryRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Disable not implemented")
@@ -651,6 +649,24 @@ func _RegistryService_ListDeviceTopicAliases_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RegistryService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRegistryOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegistryServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RegistryService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegistryServiceServer).ListOperations(ctx, req.(*ListRegistryOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _RegistryService_ListDataStreamExports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDataStreamExportsRequest)
 	if err := dec(in); err != nil {
@@ -701,24 +717,6 @@ func _RegistryService_DeleteDataStreamExport_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RegistryServiceServer).DeleteDataStreamExport(ctx, req.(*DeleteDataStreamExportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RegistryService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRegistryOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RegistryServiceServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RegistryService_ListOperations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegistryServiceServer).ListOperations(ctx, req.(*ListRegistryOperationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -819,6 +817,10 @@ var RegistryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RegistryService_ListDeviceTopicAliases_Handler,
 		},
 		{
+			MethodName: "ListOperations",
+			Handler:    _RegistryService_ListOperations_Handler,
+		},
+		{
 			MethodName: "ListDataStreamExports",
 			Handler:    _RegistryService_ListDataStreamExports_Handler,
 		},
@@ -829,10 +831,6 @@ var RegistryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDataStreamExport",
 			Handler:    _RegistryService_DeleteDataStreamExport_Handler,
-		},
-		{
-			MethodName: "ListOperations",
-			Handler:    _RegistryService_ListOperations_Handler,
 		},
 		{
 			MethodName: "Disable",

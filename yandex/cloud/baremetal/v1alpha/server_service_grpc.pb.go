@@ -29,9 +29,9 @@ const (
 	ServerService_PowerOn_FullMethodName           = "/yandex.cloud.baremetal.v1alpha.ServerService/PowerOn"
 	ServerService_Reboot_FullMethodName            = "/yandex.cloud.baremetal.v1alpha.ServerService/Reboot"
 	ServerService_Reinstall_FullMethodName         = "/yandex.cloud.baremetal.v1alpha.ServerService/Reinstall"
+	ServerService_ListOperations_FullMethodName    = "/yandex.cloud.baremetal.v1alpha.ServerService/ListOperations"
 	ServerService_StartProlongation_FullMethodName = "/yandex.cloud.baremetal.v1alpha.ServerService/StartProlongation"
 	ServerService_StopProlongation_FullMethodName  = "/yandex.cloud.baremetal.v1alpha.ServerService/StopProlongation"
-	ServerService_ListOperations_FullMethodName    = "/yandex.cloud.baremetal.v1alpha.ServerService/ListOperations"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -41,7 +41,6 @@ const (
 // A set of methods for managing Server resources.
 type ServerServiceClient interface {
 	// Returns the specific Server resource.
-	//
 	// To get the list of available Server resources, make a [List] request.
 	Get(ctx context.Context, in *GetServerRequest, opts ...grpc.CallOption) (*Server, error)
 	// Retrieves the list of Server resources in the specified folder.
@@ -53,35 +52,27 @@ type ServerServiceClient interface {
 	// Updates the specified server.
 	Update(ctx context.Context, in *UpdateServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Powers off the specified server.
 	PowerOff(ctx context.Context, in *PowerOffServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Powers on the specified server.
 	PowerOn(ctx context.Context, in *PowerOnServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Reboots the specified server.
 	Reboot(ctx context.Context, in *RebootServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Reinstalls the specified server.
 	Reinstall(ctx context.Context, in *ReinstallServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified server.
+	ListOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error)
 	// Starts prolongation of the specified server.
 	StartProlongation(ctx context.Context, in *StartProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops prolongation of the specified server.
 	StopProlongation(ctx context.Context, in *StopProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Lists operations for the specified server.
-	ListOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error)
 }
 
 type serverServiceClient struct {
@@ -182,6 +173,16 @@ func (c *serverServiceClient) Reinstall(ctx context.Context, in *ReinstallServer
 	return out, nil
 }
 
+func (c *serverServiceClient) ListOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListServerOperationsResponse)
+	err := c.cc.Invoke(ctx, ServerService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *serverServiceClient) StartProlongation(ctx context.Context, in *StartProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -202,16 +203,6 @@ func (c *serverServiceClient) StopProlongation(ctx context.Context, in *StopProl
 	return out, nil
 }
 
-func (c *serverServiceClient) ListOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListServerOperationsResponse)
-	err := c.cc.Invoke(ctx, ServerService_ListOperations_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -219,7 +210,6 @@ func (c *serverServiceClient) ListOperations(ctx context.Context, in *ListServer
 // A set of methods for managing Server resources.
 type ServerServiceServer interface {
 	// Returns the specific Server resource.
-	//
 	// To get the list of available Server resources, make a [List] request.
 	Get(context.Context, *GetServerRequest) (*Server, error)
 	// Retrieves the list of Server resources in the specified folder.
@@ -231,35 +221,27 @@ type ServerServiceServer interface {
 	// Updates the specified server.
 	Update(context.Context, *UpdateServerRequest) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Powers off the specified server.
 	PowerOff(context.Context, *PowerOffServerRequest) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Powers on the specified server.
 	PowerOn(context.Context, *PowerOnServerRequest) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Reboots the specified server.
 	Reboot(context.Context, *RebootServerRequest) (*operation.Operation, error)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	//
-	//	Required for backward compatibility with old clients. --)
-	//
+	// Required for backward compatibility with old clients. --)
 	// Reinstalls the specified server.
 	Reinstall(context.Context, *ReinstallServerRequest) (*operation.Operation, error)
+	// Lists operations for the specified server.
+	ListOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error)
 	// Starts prolongation of the specified server.
 	StartProlongation(context.Context, *StartProlongationRequest) (*operation.Operation, error)
 	// Stops prolongation of the specified server.
 	StopProlongation(context.Context, *StopProlongationRequest) (*operation.Operation, error)
-	// Lists operations for the specified server.
-	ListOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -296,14 +278,14 @@ func (UnimplementedServerServiceServer) Reboot(context.Context, *RebootServerReq
 func (UnimplementedServerServiceServer) Reinstall(context.Context, *ReinstallServerRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Reinstall not implemented")
 }
+func (UnimplementedServerServiceServer) ListOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
+}
 func (UnimplementedServerServiceServer) StartProlongation(context.Context, *StartProlongationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartProlongation not implemented")
 }
 func (UnimplementedServerServiceServer) StopProlongation(context.Context, *StopProlongationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StopProlongation not implemented")
-}
-func (UnimplementedServerServiceServer) ListOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -487,6 +469,24 @@ func _ServerService_Reinstall_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListServerOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).ListOperations(ctx, req.(*ListServerOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ServerService_StartProlongation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartProlongationRequest)
 	if err := dec(in); err != nil {
@@ -519,24 +519,6 @@ func _ServerService_StopProlongation_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServerServiceServer).StopProlongation(ctx, req.(*StopProlongationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServerService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListServerOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServerServiceServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServerService_ListOperations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).ListOperations(ctx, req.(*ListServerOperationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -585,16 +567,16 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ServerService_Reinstall_Handler,
 		},
 		{
+			MethodName: "ListOperations",
+			Handler:    _ServerService_ListOperations_Handler,
+		},
+		{
 			MethodName: "StartProlongation",
 			Handler:    _ServerService_StartProlongation_Handler,
 		},
 		{
 			MethodName: "StopProlongation",
 			Handler:    _ServerService_StopProlongation_Handler,
-		},
-		{
-			MethodName: "ListOperations",
-			Handler:    _ServerService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

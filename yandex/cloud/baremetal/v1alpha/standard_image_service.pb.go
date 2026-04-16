@@ -26,7 +26,6 @@ const (
 type GetStandardImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the StandardImage resource to return.
-	//
 	// To get the standard image ID, use a [StandardImageService.List] request.
 	StandardImageId string `protobuf:"bytes,1,opt,name=standard_image_id,json=standardImageId,proto3" json:"standard_image_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -88,7 +87,6 @@ type ListStandardImagesRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -100,7 +98,6 @@ type ListStandardImagesRequest struct {
 	// Both snake_case and camelCase are supported for fields.
 	Filter string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	// ID of the folder to return a StandardImage resource for.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request. Pass the "baremetal-standard-images" folder to get general images.
 	FolderId      string `protobuf:"bytes,104,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -179,7 +176,6 @@ type ListStandardImagesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListStandardImagesRequest.page_size], use `next_page_token` as the value
 	// for the [ListStandardImagesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -236,14 +232,15 @@ const file_yandex_cloud_baremetal_v1alpha_standard_image_service_proto_rawDesc =
 	"\n" +
 	";yandex/cloud/baremetal/v1alpha/standard_image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a3yandex/cloud/baremetal/v1alpha/standard_image.proto\x1a\x1dyandex/cloud/validation.proto\"O\n" +
 	"\x17GetStandardImageRequest\x124\n" +
-	"\x11standard_image_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x0fstandardImageId\"\xd0\x01\n" +
-	"\x19ListStandardImagesRequest\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\x11standard_image_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x0fstandardImageId\"\xd7\x01\n" +
+	"\x19ListStandardImagesRequest\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
 	"\x06filter\x18g \x01(\tR\x06filter\x129\n" +
-	"\tfolder_id\x18h \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\"\xa2\x01\n" +
+	"\tfolder_id\x18h \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderIdJ\x04\b\x01\x10d\"\xa2\x01\n" +
 	"\x1aListStandardImagesResponse\x12V\n" +
 	"\x0fstandard_images\x18\x01 \x03(\v2-.yandex.cloud.baremetal.v1alpha.StandardImageR\x0estandardImages\x12&\n" +
 	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xf0\x02\n" +

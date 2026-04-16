@@ -46,18 +46,15 @@ const (
 // A set of methods for managing buckets.
 type BucketServiceClient interface {
 	// Retrieves the list of buckets in the specified folder.
-	//
 	// The following fields will not be returned for buckets in the list: [Bucket.policy], [Bucket.acl], [Bucket.cors],
 	// [Bucket.website_settings], [Bucket.lifecycle_rules], [Bucket.tags].
 	List(ctx context.Context, in *ListBucketsRequest, opts ...grpc.CallOption) (*ListBucketsResponse, error)
 	// Returns the specified bucket.
-	//
 	// To get the list of all available buckets, make a [List] request.
 	Get(ctx context.Context, in *GetBucketRequest, opts ...grpc.CallOption) (*Bucket, error)
 	// Creates a bucket in the specified folder.
 	Create(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified bucket.
-	//
 	// In most cases, `storage.editor` role (see [documentation](/docs/storage/security/#storage-editor)) should be enough
 	// to update a bucket, subject to its [policy](/docs/storage/concepts/policy).
 	Update(ctx context.Context, in *UpdateBucketRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -68,20 +65,17 @@ type BucketServiceClient interface {
 	// Returns the HTTPS configuration for the specified bucket.
 	GetHTTPSConfig(ctx context.Context, in *GetBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*HTTPSConfig, error)
 	// Updates the HTTPS configuration for the specified bucket.
-	//
 	// The updated configuration could take up to 30 minutes to apply to the bucket.
 	SetHTTPSConfig(ctx context.Context, in *SetBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	//
-	//	for compatibility with old format --)
+	// for compatibility with old format --)
 	DeleteHTTPSConfig(ctx context.Context, in *DeleteBucketHTTPSConfigRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Sets access bindings for the specified bucket.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates access bindings for the specified bucket.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	//
-	//	for compatibility with old format --)
+	// for compatibility with old format --)
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the specified bucket.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -270,18 +264,15 @@ func (c *bucketServiceClient) ListInventoryConfigurations(ctx context.Context, i
 // A set of methods for managing buckets.
 type BucketServiceServer interface {
 	// Retrieves the list of buckets in the specified folder.
-	//
 	// The following fields will not be returned for buckets in the list: [Bucket.policy], [Bucket.acl], [Bucket.cors],
 	// [Bucket.website_settings], [Bucket.lifecycle_rules], [Bucket.tags].
 	List(context.Context, *ListBucketsRequest) (*ListBucketsResponse, error)
 	// Returns the specified bucket.
-	//
 	// To get the list of all available buckets, make a [List] request.
 	Get(context.Context, *GetBucketRequest) (*Bucket, error)
 	// Creates a bucket in the specified folder.
 	Create(context.Context, *CreateBucketRequest) (*operation.Operation, error)
 	// Updates the specified bucket.
-	//
 	// In most cases, `storage.editor` role (see [documentation](/docs/storage/security/#storage-editor)) should be enough
 	// to update a bucket, subject to its [policy](/docs/storage/concepts/policy).
 	Update(context.Context, *UpdateBucketRequest) (*operation.Operation, error)
@@ -292,20 +283,17 @@ type BucketServiceServer interface {
 	// Returns the HTTPS configuration for the specified bucket.
 	GetHTTPSConfig(context.Context, *GetBucketHTTPSConfigRequest) (*HTTPSConfig, error)
 	// Updates the HTTPS configuration for the specified bucket.
-	//
 	// The updated configuration could take up to 30 minutes to apply to the bucket.
 	SetHTTPSConfig(context.Context, *SetBucketHTTPSConfigRequest) (*operation.Operation, error)
 	// Deletes the HTTPS configuration for the specified bucket.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	//
-	//	for compatibility with old format --)
+	// for compatibility with old format --)
 	DeleteHTTPSConfig(context.Context, *DeleteBucketHTTPSConfigRequest) (*operation.Operation, error)
 	// Sets access bindings for the specified bucket.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
 	// Updates access bindings for the specified bucket.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	//
-	//	for compatibility with old format --)
+	// for compatibility with old format --)
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 	// Lists access bindings for the specified bucket.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

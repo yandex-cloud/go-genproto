@@ -80,7 +80,72 @@ func (x Registry_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Registry_Status.Descriptor instead.
 func (Registry_Status) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{0, 0}
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{1, 0}
+}
+
+// A device topic alias.
+// Alias is an alternate name of a device topic assigned by the user. Map alias to canonical topic name prefix, e.g. `my/custom/alias` match to `$device/abcdef/events`. For more information, see [Using topic aliases](/docs/iot-core/concepts/topic#aliases).
+type DeviceAlias struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the device that the alias belongs to.
+	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	// Prefix of a canonical topic name to be aliased, e.g. `$devices/abcdef`.
+	TopicPrefix string `protobuf:"bytes,2,opt,name=topic_prefix,json=topicPrefix,proto3" json:"topic_prefix,omitempty"`
+	// Alias of a device topic.
+	Alias         string `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeviceAlias) Reset() {
+	*x = DeviceAlias{}
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceAlias) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceAlias) ProtoMessage() {}
+
+func (x *DeviceAlias) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceAlias.ProtoReflect.Descriptor instead.
+func (*DeviceAlias) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DeviceAlias) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *DeviceAlias) GetTopicPrefix() string {
+	if x != nil {
+		return x.TopicPrefix
+	}
+	return ""
+}
+
+func (x *DeviceAlias) GetAlias() string {
+	if x != nil {
+		return x.Alias
+	}
+	return ""
 }
 
 // A registry. For more information, see [Registry](/docs/iot-core/concepts/index#registry).
@@ -110,7 +175,7 @@ type Registry struct {
 
 func (x *Registry) Reset() {
 	*x = Registry{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[0]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -122,7 +187,7 @@ func (x *Registry) String() string {
 func (*Registry) ProtoMessage() {}
 
 func (x *Registry) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[0]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -135,7 +200,7 @@ func (x *Registry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Registry.ProtoReflect.Descriptor instead.
 func (*Registry) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Registry) GetId() string {
@@ -218,7 +283,7 @@ type RegistryCertificate struct {
 
 func (x *RegistryCertificate) Reset() {
 	*x = RegistryCertificate{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -230,7 +295,7 @@ func (x *RegistryCertificate) String() string {
 func (*RegistryCertificate) ProtoMessage() {}
 
 func (x *RegistryCertificate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -243,7 +308,7 @@ func (x *RegistryCertificate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegistryCertificate.ProtoReflect.Descriptor instead.
 func (*RegistryCertificate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *RegistryCertificate) GetRegistryId() string {
@@ -272,72 +337,6 @@ func (x *RegistryCertificate) GetCreatedAt() *timestamppb.Timestamp {
 		return x.CreatedAt
 	}
 	return nil
-}
-
-// A device topic alias.
-//
-// Alias is an alternate name of a device topic assigned by the user. Map alias to canonical topic name prefix, e.g. `my/custom/alias` match to `$device/abcdef/events`. For more information, see [Using topic aliases](/docs/iot-core/concepts/topic#aliases).
-type DeviceAlias struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the device that the alias belongs to.
-	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	// Prefix of a canonical topic name to be aliased, e.g. `$devices/abcdef`.
-	TopicPrefix string `protobuf:"bytes,2,opt,name=topic_prefix,json=topicPrefix,proto3" json:"topic_prefix,omitempty"`
-	// Alias of a device topic.
-	Alias         string `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeviceAlias) Reset() {
-	*x = DeviceAlias{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeviceAlias) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeviceAlias) ProtoMessage() {}
-
-func (x *DeviceAlias) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeviceAlias.ProtoReflect.Descriptor instead.
-func (*DeviceAlias) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *DeviceAlias) GetDeviceId() string {
-	if x != nil {
-		return x.DeviceId
-	}
-	return ""
-}
-
-func (x *DeviceAlias) GetTopicPrefix() string {
-	if x != nil {
-		return x.TopicPrefix
-	}
-	return ""
-}
-
-func (x *DeviceAlias) GetAlias() string {
-	if x != nil {
-		return x.Alias
-	}
-	return ""
 }
 
 // A registry password.
@@ -404,6 +403,111 @@ func (x *RegistryPassword) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type LogOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Log entries destination.
+	//
+	// Types that are valid to be assigned to Destination:
+	//
+	//	*LogOptions_LogGroupId
+	//	*LogOptions_FolderId
+	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
+	// Is logging from registry disabled.
+	Disabled bool `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	// Minimum log entry level.
+	// See [LogLevel.Level] for details.
+	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LogOptions) Reset() {
+	*x = LogOptions{}
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LogOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LogOptions) ProtoMessage() {}
+
+func (x *LogOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogOptions.ProtoReflect.Descriptor instead.
+func (*LogOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *LogOptions) GetDestination() isLogOptions_Destination {
+	if x != nil {
+		return x.Destination
+	}
+	return nil
+}
+
+func (x *LogOptions) GetLogGroupId() string {
+	if x != nil {
+		if x, ok := x.Destination.(*LogOptions_LogGroupId); ok {
+			return x.LogGroupId
+		}
+	}
+	return ""
+}
+
+func (x *LogOptions) GetFolderId() string {
+	if x != nil {
+		if x, ok := x.Destination.(*LogOptions_FolderId); ok {
+			return x.FolderId
+		}
+	}
+	return ""
+}
+
+func (x *LogOptions) GetDisabled() bool {
+	if x != nil {
+		return x.Disabled
+	}
+	return false
+}
+
+func (x *LogOptions) GetMinLevel() v1.LogLevel_Level {
+	if x != nil {
+		return x.MinLevel
+	}
+	return v1.LogLevel_Level(0)
+}
+
+type isLogOptions_Destination interface {
+	isLogOptions_Destination()
+}
+
+type LogOptions_LogGroupId struct {
+	// Entry should be written to log group resolved by ID.
+	LogGroupId string `protobuf:"bytes,2,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
+}
+
+type LogOptions_FolderId struct {
+	// Entry should be written to default log group for specified folder.
+	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3,oneof"`
+}
+
+func (*LogOptions_LogGroupId) isLogOptions_Destination() {}
+
+func (*LogOptions_FolderId) isLogOptions_Destination() {}
+
 // A Yandex Data Streams export.
 type DataStreamExport struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -429,7 +533,7 @@ type DataStreamExport struct {
 
 func (x *DataStreamExport) Reset() {
 	*x = DataStreamExport{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -441,7 +545,7 @@ func (x *DataStreamExport) String() string {
 func (*DataStreamExport) ProtoMessage() {}
 
 func (x *DataStreamExport) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -454,7 +558,7 @@ func (x *DataStreamExport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataStreamExport.ProtoReflect.Descriptor instead.
 func (*DataStreamExport) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DataStreamExport) GetId() string {
@@ -513,117 +617,15 @@ func (x *DataStreamExport) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-type LogOptions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Is logging from registry disabled.
-	Disabled bool `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	// Log entries destination.
-	//
-	// Types that are valid to be assigned to Destination:
-	//
-	//	*LogOptions_LogGroupId
-	//	*LogOptions_FolderId
-	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
-	// Minimum log entry level.
-	//
-	// See [LogLevel.Level] for details.
-	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *LogOptions) Reset() {
-	*x = LogOptions{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *LogOptions) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LogOptions) ProtoMessage() {}
-
-func (x *LogOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use LogOptions.ProtoReflect.Descriptor instead.
-func (*LogOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *LogOptions) GetDisabled() bool {
-	if x != nil {
-		return x.Disabled
-	}
-	return false
-}
-
-func (x *LogOptions) GetDestination() isLogOptions_Destination {
-	if x != nil {
-		return x.Destination
-	}
-	return nil
-}
-
-func (x *LogOptions) GetLogGroupId() string {
-	if x != nil {
-		if x, ok := x.Destination.(*LogOptions_LogGroupId); ok {
-			return x.LogGroupId
-		}
-	}
-	return ""
-}
-
-func (x *LogOptions) GetFolderId() string {
-	if x != nil {
-		if x, ok := x.Destination.(*LogOptions_FolderId); ok {
-			return x.FolderId
-		}
-	}
-	return ""
-}
-
-func (x *LogOptions) GetMinLevel() v1.LogLevel_Level {
-	if x != nil {
-		return x.MinLevel
-	}
-	return v1.LogLevel_Level(0)
-}
-
-type isLogOptions_Destination interface {
-	isLogOptions_Destination()
-}
-
-type LogOptions_LogGroupId struct {
-	// Entry should be written to log group resolved by ID.
-	LogGroupId string `protobuf:"bytes,2,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
-}
-
-type LogOptions_FolderId struct {
-	// Entry should be written to default log group for specified folder.
-	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3,oneof"`
-}
-
-func (*LogOptions_LogGroupId) isLogOptions_Destination() {}
-
-func (*LogOptions_FolderId) isLogOptions_Destination() {}
-
 var File_yandex_cloud_iot_devices_v1_registry_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iot_devices_v1_registry_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/iot/devices/v1/registry.proto\x12\x1byandex.cloud.iot.devices.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xb8\x04\n" +
+	"*yandex/cloud/iot/devices/v1/registry.proto\x12\x1byandex.cloud.iot.devices.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"c\n" +
+	"\vDeviceAlias\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\x12!\n" +
+	"\ftopic_prefix\x18\x02 \x01(\tR\vtopicPrefix\x12\x14\n" +
+	"\x05alias\x18\x03 \x01(\tR\x05alias\"\xb8\x04\n" +
 	"\bRegistry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -653,17 +655,21 @@ const file_yandex_cloud_iot_devices_v1_registry_proto_rawDesc = "" +
 	"\vfingerprint\x18\x02 \x01(\tR\vfingerprint\x12)\n" +
 	"\x10certificate_data\x18\x03 \x01(\tR\x0fcertificateData\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"c\n" +
-	"\vDeviceAlias\x12\x1b\n" +
-	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\x12!\n" +
-	"\ftopic_prefix\x18\x02 \x01(\tR\vtopicPrefix\x12\x14\n" +
-	"\x05alias\x18\x03 \x01(\tR\x05alias\"~\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"~\n" +
 	"\x10RegistryPassword\x12\x1f\n" +
 	"\vregistry_id\x18\x01 \x01(\tR\n" +
 	"registryId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xa0\x02\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x8a\x02\n" +
+	"\n" +
+	"LogOptions\x12G\n" +
+	"\flog_group_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
+	"logGroupId\x12B\n" +
+	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12\x1a\n" +
+	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12D\n" +
+	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
+	"\vdestination\"\xa0\x02\n" +
 	"\x10DataStreamExport\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
@@ -674,15 +680,7 @@ const file_yandex_cloud_iot_devices_v1_registry_proto_rawDesc = "" +
 	"\x06stream\x18\x06 \x01(\tR\x06stream\x12,\n" +
 	"\x12service_account_id\x18\a \x01(\tR\x10serviceAccountId\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x8a\x02\n" +
-	"\n" +
-	"LogOptions\x12\x1a\n" +
-	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12G\n" +
-	"\flog_group_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
-	"logGroupId\x12B\n" +
-	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12D\n" +
-	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestinationBj\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtBj\n" +
 	"\x1fyandex.cloud.api.iot.devices.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/iot/devices/v1;devicesb\x06proto3"
 
 var (
@@ -701,12 +699,12 @@ var file_yandex_cloud_iot_devices_v1_registry_proto_enumTypes = make([]protoimpl
 var file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_iot_devices_v1_registry_proto_goTypes = []any{
 	(Registry_Status)(0),          // 0: yandex.cloud.iot.devices.v1.Registry.Status
-	(*Registry)(nil),              // 1: yandex.cloud.iot.devices.v1.Registry
-	(*RegistryCertificate)(nil),   // 2: yandex.cloud.iot.devices.v1.RegistryCertificate
-	(*DeviceAlias)(nil),           // 3: yandex.cloud.iot.devices.v1.DeviceAlias
+	(*DeviceAlias)(nil),           // 1: yandex.cloud.iot.devices.v1.DeviceAlias
+	(*Registry)(nil),              // 2: yandex.cloud.iot.devices.v1.Registry
+	(*RegistryCertificate)(nil),   // 3: yandex.cloud.iot.devices.v1.RegistryCertificate
 	(*RegistryPassword)(nil),      // 4: yandex.cloud.iot.devices.v1.RegistryPassword
-	(*DataStreamExport)(nil),      // 5: yandex.cloud.iot.devices.v1.DataStreamExport
-	(*LogOptions)(nil),            // 6: yandex.cloud.iot.devices.v1.LogOptions
+	(*LogOptions)(nil),            // 5: yandex.cloud.iot.devices.v1.LogOptions
+	(*DataStreamExport)(nil),      // 6: yandex.cloud.iot.devices.v1.DataStreamExport
 	nil,                           // 7: yandex.cloud.iot.devices.v1.Registry.LabelsEntry
 	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
 	(v1.LogLevel_Level)(0),        // 9: yandex.cloud.logging.v1.LogLevel.Level
@@ -715,11 +713,11 @@ var file_yandex_cloud_iot_devices_v1_registry_proto_depIdxs = []int32{
 	8, // 0: yandex.cloud.iot.devices.v1.Registry.created_at:type_name -> google.protobuf.Timestamp
 	7, // 1: yandex.cloud.iot.devices.v1.Registry.labels:type_name -> yandex.cloud.iot.devices.v1.Registry.LabelsEntry
 	0, // 2: yandex.cloud.iot.devices.v1.Registry.status:type_name -> yandex.cloud.iot.devices.v1.Registry.Status
-	6, // 3: yandex.cloud.iot.devices.v1.Registry.log_options:type_name -> yandex.cloud.iot.devices.v1.LogOptions
+	5, // 3: yandex.cloud.iot.devices.v1.Registry.log_options:type_name -> yandex.cloud.iot.devices.v1.LogOptions
 	8, // 4: yandex.cloud.iot.devices.v1.RegistryCertificate.created_at:type_name -> google.protobuf.Timestamp
 	8, // 5: yandex.cloud.iot.devices.v1.RegistryPassword.created_at:type_name -> google.protobuf.Timestamp
-	8, // 6: yandex.cloud.iot.devices.v1.DataStreamExport.created_at:type_name -> google.protobuf.Timestamp
-	9, // 7: yandex.cloud.iot.devices.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	9, // 6: yandex.cloud.iot.devices.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	8, // 7: yandex.cloud.iot.devices.v1.DataStreamExport.created_at:type_name -> google.protobuf.Timestamp
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name
@@ -732,7 +730,7 @@ func file_yandex_cloud_iot_devices_v1_registry_proto_init() {
 	if File_yandex_cloud_iot_devices_v1_registry_proto != nil {
 		return
 	}
-	file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[5].OneofWrappers = []any{
+	file_yandex_cloud_iot_devices_v1_registry_proto_msgTypes[4].OneofWrappers = []any{
 		(*LogOptions_LogGroupId)(nil),
 		(*LogOptions_FolderId)(nil),
 	}

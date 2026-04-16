@@ -107,6 +107,18 @@ func (m *Connection) SetSecretSpec(v Connection_SecretSpec) {
 	m.SecretSpec = v
 }
 
+func (m *Connection) SetLockboxSecret(v *LockboxSecret) {
+	m.Secret = &Connection_LockboxSecret{
+		LockboxSecret: v,
+	}
+}
+
+func (m *Connection) SetLockboxSecretSpec(v *LockboxSecretSpec) {
+	m.SecretSpec = &Connection_LockboxSecretSpec{
+		LockboxSecretSpec: v,
+	}
+}
+
 func (m *Connection) SetId(v string) {
 	m.Id = v
 }
@@ -141,18 +153,6 @@ func (m *Connection) SetCreatedBy(v string) {
 
 func (m *Connection) SetParams(v *ConnectionParams) {
 	m.Params = v
-}
-
-func (m *Connection) SetLockboxSecret(v *LockboxSecret) {
-	m.Secret = &Connection_LockboxSecret{
-		LockboxSecret: v,
-	}
-}
-
-func (m *Connection) SetLockboxSecretSpec(v *LockboxSecretSpec) {
-	m.SecretSpec = &Connection_LockboxSecretSpec{
-		LockboxSecretSpec: v,
-	}
 }
 
 func (m *Connection) SetIsManaged(v bool) {

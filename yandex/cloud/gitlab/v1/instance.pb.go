@@ -340,7 +340,7 @@ var File_yandex_cloud_gitlab_v1_instance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_gitlab_v1_instance_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/gitlab/v1/instance.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\x1a(yandex/cloud/gitlab/v1/maintenance.proto\"\xf2\t\n" +
+	"%yandex/cloud/gitlab/v1/instance.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(yandex/cloud/gitlab/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xf2\t\n" +
 	"\bInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +

@@ -383,11 +383,11 @@ const file_yandex_cloud_connectionmanager_v1_opensearch_proto_rawDesc = "" +
 	"\x0eOpenSearchAuth\x12Z\n" +
 	"\ruser_password\x18\x01 \x01(\v23.yandex.cloud.connectionmanager.v1.UserPasswordAuthH\x00R\fuserPasswordB\n" +
 	"\n" +
-	"\bsecurity\"\xbc\x04\n" +
+	"\bsecurity\"\xb6\x04\n" +
 	"\x11OpenSearchCluster\x12O\n" +
 	"\x05hosts\x18\x01 \x03(\v29.yandex.cloud.connectionmanager.v1.OpenSearchCluster.HostR\x05hosts\x12K\n" +
 	"\n" +
-	"tls_params\x18\x02 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x1a\x88\x03\n" +
+	"tls_params\x18\x02 \x01(\v2,.yandex.cloud.connectionmanager.v1.TLSParamsR\ttlsParams\x1a\x82\x03\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04host\x18\x03 \x01(\tR\x04host\x12\x12\n" +
 	"\x04port\x18\x04 \x01(\x03R\x04port\x12X\n" +
@@ -402,7 +402,7 @@ const file_yandex_cloud_connectionmanager_v1_opensearch_proto_rawDesc = "" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
 	"\bDEGRADED\x10\x03\x12\f\n" +
-	"\bREADONLY\x10\x04J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x05\x10\x06\"\xe1\x01\n" +
+	"\bREADONLY\x10\x04J\x04\b\x01\x10\x03J\x04\b\x05\x10\x06\"\xe1\x01\n" +
 	"\x14OpenSearchConnection\x12N\n" +
 	"\acluster\x18\x01 \x01(\v24.yandex.cloud.connectionmanager.v1.OpenSearchClusterR\acluster\x12,\n" +
 	"\x12managed_cluster_id\x18\x02 \x01(\tR\x10managedClusterId\x12E\n" +

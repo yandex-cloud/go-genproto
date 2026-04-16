@@ -35,7 +35,6 @@ const (
 // A set of methods for managing PrivateSubnet resources.
 type PrivateSubnetServiceClient interface {
 	// Returns the specific PrivateSubnet resource.
-	//
 	// To get the list of available PrivateSubnet resources, make a [List] request.
 	Get(ctx context.Context, in *GetPrivateSubnetRequest, opts ...grpc.CallOption) (*PrivateSubnet, error)
 	// Retrieves the list of PrivateSubnet resources in the specified folder.
@@ -45,7 +44,6 @@ type PrivateSubnetServiceClient interface {
 	// Updates the specified private subnet.
 	Update(ctx context.Context, in *UpdatePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified private subnet.
-	//
 	// Deleting a private subnet removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeletePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified private subnet.
@@ -127,7 +125,6 @@ func (c *privateSubnetServiceClient) ListOperations(ctx context.Context, in *Lis
 // A set of methods for managing PrivateSubnet resources.
 type PrivateSubnetServiceServer interface {
 	// Returns the specific PrivateSubnet resource.
-	//
 	// To get the list of available PrivateSubnet resources, make a [List] request.
 	Get(context.Context, *GetPrivateSubnetRequest) (*PrivateSubnet, error)
 	// Retrieves the list of PrivateSubnet resources in the specified folder.
@@ -137,7 +134,6 @@ type PrivateSubnetServiceServer interface {
 	// Updates the specified private subnet.
 	Update(context.Context, *UpdatePrivateSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified private subnet.
-	//
 	// Deleting a private subnet removes its data permanently and is irreversible.
 	Delete(context.Context, *DeletePrivateSubnetRequest) (*operation.Operation, error)
 	// Lists operations for the specified private subnet.

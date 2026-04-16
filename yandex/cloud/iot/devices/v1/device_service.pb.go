@@ -29,7 +29,6 @@ const (
 type GetDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to return.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// Specifies which parts of the device resource should be returned
@@ -86,11 +85,9 @@ func (x *GetDeviceRequest) GetDeviceView() DeviceView {
 type GetByNameDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to get device.
-	//
 	// To get a registry ID make a [yandex.cloud.iot.devices.v1.RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Name of the device to return.
-	//
 	// To get a device name make a [DeviceService.List] request.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// Specifies which parts of the device resource should be returned
@@ -255,14 +252,12 @@ type isListDevicesRequest_Id interface {
 
 type ListDevicesRequest_RegistryId struct {
 	// ID of the registry to list devices in.
-	//
 	// To get a registry ID make a [yandex.cloud.iot.devices.v1.RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3,oneof"`
 }
 
 type ListDevicesRequest_FolderId struct {
 	// ID of the folder to list devices in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
@@ -278,7 +273,6 @@ type ListDevicesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDevicesRequest.page_size], use `next_page_token` as the value
 	// for the [ListDevicesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -332,7 +326,6 @@ func (x *ListDevicesResponse) GetNextPageToken() string {
 type CreateDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to create a device in.
-	//
 	// To get a registry ID, make a [yandex.cloud.iot.devices.v1.RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Name of the device. The name must be unique within the registry.
@@ -342,11 +335,9 @@ type CreateDeviceRequest struct {
 	// Device certificate.
 	Certificates []*CreateDeviceRequest_Certificate `protobuf:"bytes,4,rep,name=certificates,proto3" json:"certificates,omitempty"`
 	// Alias of a device topic.
-	//
 	// Alias is an alternate name of a device topic assigned by the user. Map alias to canonical topic name prefix, e.g. `my/custom/alias` match to `$device/{id}/events`.
 	TopicAliases map[string]string `protobuf:"bytes,5,rep,name=topic_aliases,json=topicAliases,proto3" json:"topic_aliases,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Device password.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
 	// Resource labels as `key:value` pairs.
@@ -482,7 +473,6 @@ func (x *CreateDeviceMetadata) GetDeviceId() string {
 type UpdateDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to update.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// Field mask that specifies which fields of the device are going to be updated.
@@ -492,7 +482,6 @@ type UpdateDeviceRequest struct {
 	// Description of the device.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Alias of a device topic.
-	//
 	// Alias is an alternate name of a device topic assigned by the user. Map alias to canonical topic name prefix, e.g. `my/custom/alias` match to `$device/{id}/events`.
 	TopicAliases map[string]string `protobuf:"bytes,5,rep,name=topic_aliases,json=topicAliases,proto3" json:"topic_aliases,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Resource labels as `key:value` pairs.
@@ -621,7 +610,6 @@ func (x *UpdateDeviceMetadata) GetDeviceId() string {
 type DeleteDeviceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to delete.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId      string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -803,7 +791,6 @@ func (x *ListDeviceCertificatesResponse) GetCertificates() []*DeviceCertificate 
 type AddDeviceCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device for which the certificate is being added.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// Public part of the certificate.
@@ -913,7 +900,6 @@ func (x *AddDeviceCertificateMetadata) GetFingerprint() string {
 type DeleteDeviceCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to delete a certificate for.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// Fingerprint of the certificate to delete.
@@ -1023,7 +1009,6 @@ func (x *DeleteDeviceCertificateMetadata) GetFingerprint() string {
 type ListDevicePasswordsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list passwords in.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	DeviceId      string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1115,11 +1100,9 @@ func (x *ListDevicePasswordsResponse) GetPasswords() []*DevicePassword {
 type AddDevicePasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to add a password for.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// Passwords for the device.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password      string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1227,11 +1210,9 @@ func (x *AddDevicePasswordMetadata) GetPasswordId() string {
 type DeleteDevicePasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to delete a password for.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// ID of the password to delete.
-	//
 	// To get a password ID make a [DeviceService.ListPasswords] request.
 	PasswordId    string `protobuf:"bytes,2,opt,name=password_id,json=passwordId,proto3" json:"password_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1339,7 +1320,6 @@ func (x *DeleteDevicePasswordMetadata) GetPasswordId() string {
 type ListDeviceOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the device to list operations for.
-	//
 	// To get a device ID make a [DeviceService.List] request.
 	DeviceId string `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -1422,7 +1402,6 @@ type ListDeviceOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDeviceOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListDeviceOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1484,7 +1463,7 @@ type CreateDeviceRequest_Certificate struct {
 
 func (x *CreateDeviceRequest_Certificate) Reset() {
 	*x = CreateDeviceRequest_Certificate{}
-	mi := &file_yandex_cloud_iot_devices_v1_device_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_iot_devices_v1_device_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1496,7 +1475,7 @@ func (x *CreateDeviceRequest_Certificate) String() string {
 func (*CreateDeviceRequest_Certificate) ProtoMessage() {}
 
 func (x *CreateDeviceRequest_Certificate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_device_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_iot_devices_v1_device_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1509,7 +1488,7 @@ func (x *CreateDeviceRequest_Certificate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDeviceRequest_Certificate.ProtoReflect.Descriptor instead.
 func (*CreateDeviceRequest_Certificate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_device_service_proto_rawDescGZIP(), []int{4, 2}
+	return file_yandex_cloud_iot_devices_v1_device_service_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *CreateDeviceRequest_Certificate) GetCertificateData() string {
@@ -1557,15 +1536,15 @@ const file_yandex_cloud_iot_devices_v1_device_service_proto_rawDesc = "" +
 	"\fcertificates\x18\x04 \x03(\v2<.yandex.cloud.iot.devices.v1.CreateDeviceRequest.CertificateR\fcertificates\x12g\n" +
 	"\rtopic_aliases\x18\x05 \x03(\v2B.yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntryR\ftopicAliases\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x91\x01\n" +
-	"\x06labels\x18\a \x03(\v2<.yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a?\n" +
+	"\x06labels\x18\a \x03(\v2<.yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a8\n" +
+	"\vCertificate\x12)\n" +
+	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\x1a?\n" +
 	"\x11TopicAliasesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a8\n" +
-	"\vCertificate\x12)\n" +
-	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\"3\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"3\n" +
 	"\x14CreateDeviceMetadata\x12\x1b\n" +
 	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\"\xd3\x04\n" +
 	"\x13UpdateDeviceRequest\x12)\n" +
@@ -1697,9 +1676,9 @@ var file_yandex_cloud_iot_devices_v1_device_service_proto_goTypes = []any{
 	(*DeleteDevicePasswordMetadata)(nil),    // 21: yandex.cloud.iot.devices.v1.DeleteDevicePasswordMetadata
 	(*ListDeviceOperationsRequest)(nil),     // 22: yandex.cloud.iot.devices.v1.ListDeviceOperationsRequest
 	(*ListDeviceOperationsResponse)(nil),    // 23: yandex.cloud.iot.devices.v1.ListDeviceOperationsResponse
-	nil,                                     // 24: yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntry
-	nil,                                     // 25: yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntry
-	(*CreateDeviceRequest_Certificate)(nil), // 26: yandex.cloud.iot.devices.v1.CreateDeviceRequest.Certificate
+	(*CreateDeviceRequest_Certificate)(nil), // 24: yandex.cloud.iot.devices.v1.CreateDeviceRequest.Certificate
+	nil,                                     // 25: yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntry
+	nil,                                     // 26: yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntry
 	nil,                                     // 27: yandex.cloud.iot.devices.v1.UpdateDeviceRequest.TopicAliasesEntry
 	nil,                                     // 28: yandex.cloud.iot.devices.v1.UpdateDeviceRequest.LabelsEntry
 	(DeviceView)(0),                         // 29: yandex.cloud.iot.devices.v1.DeviceView
@@ -1714,9 +1693,9 @@ var file_yandex_cloud_iot_devices_v1_device_service_proto_depIdxs = []int32{
 	29, // 1: yandex.cloud.iot.devices.v1.GetByNameDeviceRequest.device_view:type_name -> yandex.cloud.iot.devices.v1.DeviceView
 	29, // 2: yandex.cloud.iot.devices.v1.ListDevicesRequest.device_view:type_name -> yandex.cloud.iot.devices.v1.DeviceView
 	30, // 3: yandex.cloud.iot.devices.v1.ListDevicesResponse.devices:type_name -> yandex.cloud.iot.devices.v1.Device
-	26, // 4: yandex.cloud.iot.devices.v1.CreateDeviceRequest.certificates:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.Certificate
-	24, // 5: yandex.cloud.iot.devices.v1.CreateDeviceRequest.topic_aliases:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntry
-	25, // 6: yandex.cloud.iot.devices.v1.CreateDeviceRequest.labels:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntry
+	24, // 4: yandex.cloud.iot.devices.v1.CreateDeviceRequest.certificates:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.Certificate
+	25, // 5: yandex.cloud.iot.devices.v1.CreateDeviceRequest.topic_aliases:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.TopicAliasesEntry
+	26, // 6: yandex.cloud.iot.devices.v1.CreateDeviceRequest.labels:type_name -> yandex.cloud.iot.devices.v1.CreateDeviceRequest.LabelsEntry
 	31, // 7: yandex.cloud.iot.devices.v1.UpdateDeviceRequest.update_mask:type_name -> google.protobuf.FieldMask
 	27, // 8: yandex.cloud.iot.devices.v1.UpdateDeviceRequest.topic_aliases:type_name -> yandex.cloud.iot.devices.v1.UpdateDeviceRequest.TopicAliasesEntry
 	28, // 9: yandex.cloud.iot.devices.v1.UpdateDeviceRequest.labels:type_name -> yandex.cloud.iot.devices.v1.UpdateDeviceRequest.LabelsEntry

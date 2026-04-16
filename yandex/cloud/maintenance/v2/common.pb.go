@@ -147,11 +147,9 @@ type Maintenance struct {
 	// represented as a hierarchy from specific resource to top-level container.
 	// Example for a Compute instance with ID "I" in folder "F" and cloud "C":
 	// resource_path = [
-	//
-	//	{ "compute.instance", "I" },
-	//	{ "resource-manager.folder", "F" },
-	//	{ "resource-manager.cloud", "C" }
-	//
+	// { "compute.instance", "I" },
+	// { "resource-manager.folder", "F" },
+	// { "resource-manager.cloud", "C" }
 	// ]
 	ResourcePath []*Maintenance_Resource `protobuf:"bytes,2,rep,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
 	// Describes action to be performed.
@@ -762,7 +760,7 @@ const file_yandex_cloud_maintenance_v2_common_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x05 \x01(\tB\t\x8a\xc81\x05<=500R\tpageToken\x12$\n" +
 	"\border_by\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\x12!\n" +
-	"\x06filter\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\x06filterB\v\n" +
+	"\x06filter\x18\a \x01(\tB\t\x8a\xc81\x05<=300R\x06filterB\v\n" +
 	"\tcontainer\"\x90\x01\n" +
 	"\x18ListMaintenancesResponse\x12L\n" +
 	"\fmaintenances\x18\x01 \x03(\v2(.yandex.cloud.maintenance.v2.MaintenanceR\fmaintenances\x12&\n" +

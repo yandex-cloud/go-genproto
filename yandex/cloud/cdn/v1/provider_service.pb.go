@@ -30,7 +30,6 @@ type ActivateProviderRequest struct {
 	// ID of the folder that the activate provider belongs to.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Specify provider brand/type.
-	//
 	// Possible values: `gcore`.
 	ProviderType  string `protobuf:"bytes,2,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields

@@ -122,8 +122,6 @@ func (x *AssistantResult) GetResults() []*AssistantFieldResult {
 
 type AssistantFieldResult struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Assistant result field id
-	FieldId string `protobuf:"bytes,1,opt,name=field_id,json=fieldId,proto3" json:"field_id,omitempty"`
 	// Parsed model answer for the field.
 	// If the model answer could not be parsed, no result fields will be set.
 	//
@@ -132,7 +130,9 @@ type AssistantFieldResult struct {
 	//	*AssistantFieldResult_StringResult
 	//	*AssistantFieldResult_IntResult
 	//	*AssistantFieldResult_FloatResult
-	FieldType     isAssistantFieldResult_FieldType `protobuf_oneof:"field_type"`
+	FieldType isAssistantFieldResult_FieldType `protobuf_oneof:"field_type"`
+	// Assistant result field id
+	FieldId       string `protobuf:"bytes,1,opt,name=field_id,json=fieldId,proto3" json:"field_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -167,13 +167,6 @@ func (*AssistantFieldResult) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_speechsense_v1_analysis_assistants_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AssistantFieldResult) GetFieldId() string {
-	if x != nil {
-		return x.FieldId
-	}
-	return ""
-}
-
 func (x *AssistantFieldResult) GetFieldType() isAssistantFieldResult_FieldType {
 	if x != nil {
 		return x.FieldType
@@ -206,6 +199,13 @@ func (x *AssistantFieldResult) GetFloatResult() float64 {
 		}
 	}
 	return 0
+}
+
+func (x *AssistantFieldResult) GetFieldId() string {
+	if x != nil {
+		return x.FieldId
+	}
+	return ""
 }
 
 type isAssistantFieldResult_FieldType interface {
@@ -244,12 +244,12 @@ const file_yandex_cloud_speechsense_v1_analysis_assistants_proto_rawDesc = "" +
 	"\x0fAssistantResult\x12!\n" +
 	"\fassistant_id\x18\x01 \x01(\tR\vassistantId\x12T\n" +
 	"\aresults\x18\x02 \x03(\v2:.yandex.cloud.speechsense.v1.analysis.AssistantFieldResultR\aresults\"\xac\x01\n" +
-	"\x14AssistantFieldResult\x12\x19\n" +
-	"\bfield_id\x18\x01 \x01(\tR\afieldId\x12%\n" +
+	"\x14AssistantFieldResult\x12%\n" +
 	"\rstring_result\x18\x02 \x01(\tH\x00R\fstringResult\x12\x1f\n" +
 	"\n" +
 	"int_result\x18\x03 \x01(\x03H\x00R\tintResult\x12#\n" +
-	"\ffloat_result\x18\x04 \x01(\x01H\x00R\vfloatResultB\f\n" +
+	"\ffloat_result\x18\x04 \x01(\x01H\x00R\vfloatResult\x12\x19\n" +
+	"\bfield_id\x18\x01 \x01(\tR\afieldIdB\f\n" +
 	"\n" +
 	"field_typeB\x91\x01\n" +
 	"(yandex.cloud.api.speechsense.v1.analysisB\x0fAssistantsProtoZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/speechsense/v1/analysis;speechsenseb\x06proto3"

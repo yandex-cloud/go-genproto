@@ -7,6 +7,18 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func (m *DeviceAlias) SetDeviceId(v string) {
+	m.DeviceId = v
+}
+
+func (m *DeviceAlias) SetTopicPrefix(v string) {
+	m.TopicPrefix = v
+}
+
+func (m *DeviceAlias) SetAlias(v string) {
+	m.Alias = v
+}
+
 func (m *Registry) SetId(v string) {
 	m.Id = v
 }
@@ -59,18 +71,6 @@ func (m *RegistryCertificate) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
-func (m *DeviceAlias) SetDeviceId(v string) {
-	m.DeviceId = v
-}
-
-func (m *DeviceAlias) SetTopicPrefix(v string) {
-	m.TopicPrefix = v
-}
-
-func (m *DeviceAlias) SetAlias(v string) {
-	m.Alias = v
-}
-
 func (m *RegistryPassword) SetRegistryId(v string) {
 	m.RegistryId = v
 }
@@ -81,6 +81,32 @@ func (m *RegistryPassword) SetId(v string) {
 
 func (m *RegistryPassword) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
+}
+
+type LogOptions_Destination = isLogOptions_Destination
+
+func (m *LogOptions) SetDestination(v LogOptions_Destination) {
+	m.Destination = v
+}
+
+func (m *LogOptions) SetLogGroupId(v string) {
+	m.Destination = &LogOptions_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *LogOptions) SetFolderId(v string) {
+	m.Destination = &LogOptions_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *LogOptions) SetDisabled(v bool) {
+	m.Disabled = v
+}
+
+func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
+	m.MinLevel = v
 }
 
 func (m *DataStreamExport) SetId(v string) {
@@ -113,30 +139,4 @@ func (m *DataStreamExport) SetServiceAccountId(v string) {
 
 func (m *DataStreamExport) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
-}
-
-type LogOptions_Destination = isLogOptions_Destination
-
-func (m *LogOptions) SetDestination(v LogOptions_Destination) {
-	m.Destination = v
-}
-
-func (m *LogOptions) SetDisabled(v bool) {
-	m.Disabled = v
-}
-
-func (m *LogOptions) SetLogGroupId(v string) {
-	m.Destination = &LogOptions_LogGroupId{
-		LogGroupId: v,
-	}
-}
-
-func (m *LogOptions) SetFolderId(v string) {
-	m.Destination = &LogOptions_FolderId{
-		FolderId: v,
-	}
-}
-
-func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
-	m.MinLevel = v
 }

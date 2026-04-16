@@ -447,7 +447,7 @@ const file_yandex_cloud_connectionmanager_v1_redis_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\tR\x04user\x12G\n" +
 	"\bpassword\x18\x02 \x01(\v2+.yandex.cloud.connectionmanager.v1.PasswordR\bpasswordB\n" +
 	"\n" +
-	"\bsecurity\"\xce\x04\n" +
+	"\bsecurity\"\xc8\x04\n" +
 	"\fRedisCluster\x12J\n" +
 	"\x05hosts\x18\x06 \x03(\v24.yandex.cloud.connectionmanager.v1.RedisCluster.HostR\x05hosts\x12#\n" +
 	"\rsentinel_port\x18\x03 \x01(\x03R\fsentinelPort\x12K\n" +
@@ -469,7 +469,7 @@ const file_yandex_cloud_connectionmanager_v1_redis_proto_rawDesc = "" +
 	"\x12HEALTH_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
-	"\bDEGRADED\x10\x03J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x05\x10\x06\"\xc2\x01\n" +
+	"\bDEGRADED\x10\x03J\x04\b\x01\x10\x03J\x04\b\x05\x10\x06\"\xc2\x01\n" +
 	"\x0fRedisConnection\x12I\n" +
 	"\acluster\x18\x01 \x01(\v2/.yandex.cloud.connectionmanager.v1.RedisClusterR\acluster\x12@\n" +
 	"\x04auth\x18\x03 \x01(\v2,.yandex.cloud.connectionmanager.v1.RedisAuthR\x04auth\x12\x1c\n" +

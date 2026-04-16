@@ -27,6 +27,250 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type StartDatabaseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartDatabaseRequest) Reset() {
+	*x = StartDatabaseRequest{}
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartDatabaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartDatabaseRequest) ProtoMessage() {}
+
+func (x *StartDatabaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartDatabaseRequest.ProtoReflect.Descriptor instead.
+func (*StartDatabaseRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *StartDatabaseRequest) GetDatabaseId() string {
+	if x != nil {
+		return x.DatabaseId
+	}
+	return ""
+}
+
+type StartDatabaseMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
+	DatabaseName  string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartDatabaseMetadata) Reset() {
+	*x = StartDatabaseMetadata{}
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartDatabaseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartDatabaseMetadata) ProtoMessage() {}
+
+func (x *StartDatabaseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartDatabaseMetadata.ProtoReflect.Descriptor instead.
+func (*StartDatabaseMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StartDatabaseMetadata) GetDatabaseId() string {
+	if x != nil {
+		return x.DatabaseId
+	}
+	return ""
+}
+
+func (x *StartDatabaseMetadata) GetDatabaseName() string {
+	if x != nil {
+		return x.DatabaseName
+	}
+	return ""
+}
+
+type StopDatabaseRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopDatabaseRequest) Reset() {
+	*x = StopDatabaseRequest{}
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopDatabaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopDatabaseRequest) ProtoMessage() {}
+
+func (x *StopDatabaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopDatabaseRequest.ProtoReflect.Descriptor instead.
+func (*StopDatabaseRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *StopDatabaseRequest) GetDatabaseId() string {
+	if x != nil {
+		return x.DatabaseId
+	}
+	return ""
+}
+
+type StopDatabaseMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
+	DatabaseName  string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopDatabaseMetadata) Reset() {
+	*x = StopDatabaseMetadata{}
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopDatabaseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopDatabaseMetadata) ProtoMessage() {}
+
+func (x *StopDatabaseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopDatabaseMetadata.ProtoReflect.Descriptor instead.
+func (*StopDatabaseMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StopDatabaseMetadata) GetDatabaseId() string {
+	if x != nil {
+		return x.DatabaseId
+	}
+	return ""
+}
+
+func (x *StopDatabaseMetadata) GetDatabaseName() string {
+	if x != nil {
+		return x.DatabaseName
+	}
+	return ""
+}
+
+type BackupDatabaseMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	BackupId      string                 `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	DatabaseId    string                 `protobuf:"bytes,2,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupDatabaseMetadata) Reset() {
+	*x = BackupDatabaseMetadata{}
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupDatabaseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupDatabaseMetadata) ProtoMessage() {}
+
+func (x *BackupDatabaseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupDatabaseMetadata.ProtoReflect.Descriptor instead.
+func (*BackupDatabaseMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *BackupDatabaseMetadata) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+func (x *BackupDatabaseMetadata) GetDatabaseId() string {
+	if x != nil {
+		return x.DatabaseId
+	}
+	return ""
+}
+
 type MoveDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the YDB instance to move.
@@ -39,7 +283,7 @@ type MoveDatabaseRequest struct {
 
 func (x *MoveDatabaseRequest) Reset() {
 	*x = MoveDatabaseRequest{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51,7 +295,7 @@ func (x *MoveDatabaseRequest) String() string {
 func (*MoveDatabaseRequest) ProtoMessage() {}
 
 func (x *MoveDatabaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +308,7 @@ func (x *MoveDatabaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveDatabaseRequest.ProtoReflect.Descriptor instead.
 func (*MoveDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MoveDatabaseRequest) GetDatabaseId() string {
@@ -91,7 +335,7 @@ type MoveDatabaseMetadata struct {
 
 func (x *MoveDatabaseMetadata) Reset() {
 	*x = MoveDatabaseMetadata{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -103,7 +347,7 @@ func (x *MoveDatabaseMetadata) String() string {
 func (*MoveDatabaseMetadata) ProtoMessage() {}
 
 func (x *MoveDatabaseMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -116,7 +360,7 @@ func (x *MoveDatabaseMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveDatabaseMetadata.ProtoReflect.Descriptor instead.
 func (*MoveDatabaseMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MoveDatabaseMetadata) GetDatabaseId() string {
@@ -150,7 +394,7 @@ type RestoreBackupRequest struct {
 
 func (x *RestoreBackupRequest) Reset() {
 	*x = RestoreBackupRequest{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -162,7 +406,7 @@ func (x *RestoreBackupRequest) String() string {
 func (*RestoreBackupRequest) ProtoMessage() {}
 
 func (x *RestoreBackupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -175,7 +419,7 @@ func (x *RestoreBackupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreBackupRequest.ProtoReflect.Descriptor instead.
 func (*RestoreBackupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *RestoreBackupRequest) GetBackupId() string {
@@ -216,7 +460,7 @@ type RestoreBackupMetadata struct {
 
 func (x *RestoreBackupMetadata) Reset() {
 	*x = RestoreBackupMetadata{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -228,7 +472,7 @@ func (x *RestoreBackupMetadata) String() string {
 func (*RestoreBackupMetadata) ProtoMessage() {}
 
 func (x *RestoreBackupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +485,7 @@ func (x *RestoreBackupMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreBackupMetadata.ProtoReflect.Descriptor instead.
 func (*RestoreBackupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *RestoreBackupMetadata) GetBackupId() string {
@@ -269,7 +513,7 @@ type BackupDatabaseRequest struct {
 
 func (x *BackupDatabaseRequest) Reset() {
 	*x = BackupDatabaseRequest{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -281,7 +525,7 @@ func (x *BackupDatabaseRequest) String() string {
 func (*BackupDatabaseRequest) ProtoMessage() {}
 
 func (x *BackupDatabaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -294,7 +538,7 @@ func (x *BackupDatabaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupDatabaseRequest.ProtoReflect.Descriptor instead.
 func (*BackupDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BackupDatabaseRequest) GetDatabaseId() string {
@@ -309,250 +553,6 @@ func (x *BackupDatabaseRequest) GetBackupSettings() *BackupSettings {
 		return x.BackupSettings
 	}
 	return nil
-}
-
-type BackupDatabaseMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BackupId      string                 `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	DatabaseId    string                 `protobuf:"bytes,2,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BackupDatabaseMetadata) Reset() {
-	*x = BackupDatabaseMetadata{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BackupDatabaseMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BackupDatabaseMetadata) ProtoMessage() {}
-
-func (x *BackupDatabaseMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BackupDatabaseMetadata.ProtoReflect.Descriptor instead.
-func (*BackupDatabaseMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *BackupDatabaseMetadata) GetBackupId() string {
-	if x != nil {
-		return x.BackupId
-	}
-	return ""
-}
-
-func (x *BackupDatabaseMetadata) GetDatabaseId() string {
-	if x != nil {
-		return x.DatabaseId
-	}
-	return ""
-}
-
-type StartDatabaseRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartDatabaseRequest) Reset() {
-	*x = StartDatabaseRequest{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartDatabaseRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartDatabaseRequest) ProtoMessage() {}
-
-func (x *StartDatabaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartDatabaseRequest.ProtoReflect.Descriptor instead.
-func (*StartDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *StartDatabaseRequest) GetDatabaseId() string {
-	if x != nil {
-		return x.DatabaseId
-	}
-	return ""
-}
-
-type StartDatabaseMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	DatabaseName  string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartDatabaseMetadata) Reset() {
-	*x = StartDatabaseMetadata{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartDatabaseMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartDatabaseMetadata) ProtoMessage() {}
-
-func (x *StartDatabaseMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartDatabaseMetadata.ProtoReflect.Descriptor instead.
-func (*StartDatabaseMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *StartDatabaseMetadata) GetDatabaseId() string {
-	if x != nil {
-		return x.DatabaseId
-	}
-	return ""
-}
-
-func (x *StartDatabaseMetadata) GetDatabaseName() string {
-	if x != nil {
-		return x.DatabaseName
-	}
-	return ""
-}
-
-type StopDatabaseRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopDatabaseRequest) Reset() {
-	*x = StopDatabaseRequest{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopDatabaseRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopDatabaseRequest) ProtoMessage() {}
-
-func (x *StopDatabaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopDatabaseRequest.ProtoReflect.Descriptor instead.
-func (*StopDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *StopDatabaseRequest) GetDatabaseId() string {
-	if x != nil {
-		return x.DatabaseId
-	}
-	return ""
-}
-
-type StopDatabaseMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	DatabaseName  string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopDatabaseMetadata) Reset() {
-	*x = StopDatabaseMetadata{}
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopDatabaseMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopDatabaseMetadata) ProtoMessage() {}
-
-func (x *StopDatabaseMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopDatabaseMetadata.ProtoReflect.Descriptor instead.
-func (*StopDatabaseMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *StopDatabaseMetadata) GetDatabaseId() string {
-	if x != nil {
-		return x.DatabaseId
-	}
-	return ""
-}
-
-func (x *StopDatabaseMetadata) GetDatabaseName() string {
-	if x != nil {
-		return x.DatabaseName
-	}
-	return ""
 }
 
 type GetDatabaseRequest struct {
@@ -733,6 +733,7 @@ type CreateDatabaseRequest struct {
 	ScalePolicy      *ScalePolicy           `protobuf:"bytes,6,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	NetworkId        string                 `protobuf:"bytes,7,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	SubnetIds        []string               `protobuf:"bytes,8,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
+	SecurityGroupIds []string               `protobuf:"bytes,19,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Types that are valid to be assigned to DatabaseType:
 	//
 	//	*CreateDatabaseRequest_ZonalDatabase
@@ -746,7 +747,6 @@ type CreateDatabaseRequest struct {
 	BackupConfig       *BackupConfig                        `protobuf:"bytes,16,opt,name=backup_config,json=backupConfig,proto3" json:"backup_config,omitempty"`
 	MonitoringConfig   *MonitoringConfig                    `protobuf:"bytes,17,opt,name=monitoring_config,json=monitoringConfig,proto3" json:"monitoring_config,omitempty"`
 	DeletionProtection bool                                 `protobuf:"varint,18,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	SecurityGroupIds   []string                             `protobuf:"bytes,19,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -837,6 +837,13 @@ func (x *CreateDatabaseRequest) GetSubnetIds() []string {
 	return nil
 }
 
+func (x *CreateDatabaseRequest) GetSecurityGroupIds() []string {
+	if x != nil {
+		return x.SecurityGroupIds
+	}
+	return nil
+}
+
 func (x *CreateDatabaseRequest) GetDatabaseType() isCreateDatabaseRequest_DatabaseType {
 	if x != nil {
 		return x.DatabaseType
@@ -920,13 +927,6 @@ func (x *CreateDatabaseRequest) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-func (x *CreateDatabaseRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
 }
 
 type isCreateDatabaseRequest_DatabaseType interface {
@@ -1025,6 +1025,7 @@ type UpdateDatabaseRequest struct {
 	ScalePolicy      *ScalePolicy           `protobuf:"bytes,8,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	NetworkId        string                 `protobuf:"bytes,9,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	SubnetIds        []string               `protobuf:"bytes,10,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
+	SecurityGroupIds []string               `protobuf:"bytes,21,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Types that are valid to be assigned to DatabaseType:
 	//
 	//	*UpdateDatabaseRequest_ZonalDatabase
@@ -1038,7 +1039,6 @@ type UpdateDatabaseRequest struct {
 	BackupConfig       *BackupConfig                        `protobuf:"bytes,18,opt,name=backup_config,json=backupConfig,proto3" json:"backup_config,omitempty"`
 	MonitoringConfig   *MonitoringConfig                    `protobuf:"bytes,19,opt,name=monitoring_config,json=monitoringConfig,proto3" json:"monitoring_config,omitempty"`
 	DeletionProtection bool                                 `protobuf:"varint,20,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	SecurityGroupIds   []string                             `protobuf:"bytes,21,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1143,6 +1143,13 @@ func (x *UpdateDatabaseRequest) GetSubnetIds() []string {
 	return nil
 }
 
+func (x *UpdateDatabaseRequest) GetSecurityGroupIds() []string {
+	if x != nil {
+		return x.SecurityGroupIds
+	}
+	return nil
+}
+
 func (x *UpdateDatabaseRequest) GetDatabaseType() isUpdateDatabaseRequest_DatabaseType {
 	if x != nil {
 		return x.DatabaseType
@@ -1226,13 +1233,6 @@ func (x *UpdateDatabaseRequest) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-func (x *UpdateDatabaseRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
 }
 
 type isUpdateDatabaseRequest_DatabaseType interface {
@@ -1415,7 +1415,25 @@ var File_yandex_cloud_ydb_v1_database_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/ydb/v1/database_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\"yandex/cloud/ydb/v1/database.proto\x1a yandex/cloud/ydb/v1/backup.proto\"\x86\x01\n" +
+	"*yandex/cloud/ydb/v1/database_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/ydb/v1/backup.proto\x1a\"yandex/cloud/ydb/v1/database.proto\"E\n" +
+	"\x14StartDatabaseRequest\x12-\n" +
+	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"databaseId\"]\n" +
+	"\x15StartDatabaseMetadata\x12\x1f\n" +
+	"\vdatabase_id\x18\x01 \x01(\tR\n" +
+	"databaseId\x12#\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"D\n" +
+	"\x13StopDatabaseRequest\x12-\n" +
+	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"databaseId\"\\\n" +
+	"\x14StopDatabaseMetadata\x12\x1f\n" +
+	"\vdatabase_id\x18\x01 \x01(\tR\n" +
+	"databaseId\x12#\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"V\n" +
+	"\x16BackupDatabaseMetadata\x12\x1b\n" +
+	"\tbackup_id\x18\x01 \x01(\tR\bbackupId\x12\x1f\n" +
+	"\vdatabase_id\x18\x02 \x01(\tR\n" +
+	"databaseId\"\x86\x01\n" +
 	"\x13MoveDatabaseRequest\x12-\n" +
 	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"databaseId\x12@\n" +
@@ -1438,25 +1456,7 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\x15BackupDatabaseRequest\x12\x1f\n" +
 	"\vdatabase_id\x18\x01 \x01(\tR\n" +
 	"databaseId\x12L\n" +
-	"\x0fbackup_settings\x18\x02 \x01(\v2#.yandex.cloud.ydb.v1.BackupSettingsR\x0ebackupSettings\"V\n" +
-	"\x16BackupDatabaseMetadata\x12\x1b\n" +
-	"\tbackup_id\x18\x01 \x01(\tR\bbackupId\x12\x1f\n" +
-	"\vdatabase_id\x18\x02 \x01(\tR\n" +
-	"databaseId\"E\n" +
-	"\x14StartDatabaseRequest\x12-\n" +
-	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"databaseId\"]\n" +
-	"\x15StartDatabaseMetadata\x12\x1f\n" +
-	"\vdatabase_id\x18\x01 \x01(\tR\n" +
-	"databaseId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"D\n" +
-	"\x13StopDatabaseRequest\x12-\n" +
-	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"databaseId\"\\\n" +
-	"\x14StopDatabaseMetadata\x12\x1f\n" +
-	"\vdatabase_id\x18\x01 \x01(\tR\n" +
-	"databaseId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"C\n" +
+	"\x0fbackup_settings\x18\x02 \x01(\v2#.yandex.cloud.ydb.v1.BackupSettingsR\x0ebackupSettings\"C\n" +
 	"\x12GetDatabaseRequest\x12-\n" +
 	"\vdatabase_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"databaseId\"\x86\x01\n" +
@@ -1479,7 +1479,8 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\n" +
 	"network_id\x18\a \x01(\tR\tnetworkId\x12\x1d\n" +
 	"\n" +
-	"subnet_ids\x18\b \x03(\tR\tsubnetIds\x12K\n" +
+	"subnet_ids\x18\b \x03(\tR\tsubnetIds\x12,\n" +
+	"\x12security_group_ids\x18\x13 \x03(\tR\x10securityGroupIds\x12K\n" +
 	"\x0ezonal_database\x18\t \x01(\v2\".yandex.cloud.ydb.v1.ZonalDatabaseH\x00R\rzonalDatabase\x12T\n" +
 	"\x11regional_database\x18\n" +
 	" \x01(\v2%.yandex.cloud.ydb.v1.RegionalDatabaseH\x00R\x10regionalDatabase\x12W\n" +
@@ -1491,8 +1492,7 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\x06labels\x18\x0f \x03(\v26.yandex.cloud.ydb.v1.CreateDatabaseRequest.LabelsEntryR\x06labels\x12F\n" +
 	"\rbackup_config\x18\x10 \x01(\v2!.yandex.cloud.ydb.v1.BackupConfigR\fbackupConfig\x12R\n" +
 	"\x11monitoring_config\x18\x11 \x01(\v2%.yandex.cloud.ydb.v1.MonitoringConfigR\x10monitoringConfig\x12/\n" +
-	"\x13deletion_protection\x18\x12 \x01(\bR\x12deletionProtection\x12,\n" +
-	"\x12security_group_ids\x18\x13 \x03(\tR\x10securityGroupIds\x1a9\n" +
+	"\x13deletion_protection\x18\x12 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
@@ -1517,7 +1517,8 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"network_id\x18\t \x01(\tR\tnetworkId\x12\x1d\n" +
 	"\n" +
 	"subnet_ids\x18\n" +
-	" \x03(\tR\tsubnetIds\x12K\n" +
+	" \x03(\tR\tsubnetIds\x12,\n" +
+	"\x12security_group_ids\x18\x15 \x03(\tR\x10securityGroupIds\x12K\n" +
 	"\x0ezonal_database\x18\v \x01(\v2\".yandex.cloud.ydb.v1.ZonalDatabaseH\x00R\rzonalDatabase\x12T\n" +
 	"\x11regional_database\x18\f \x01(\v2%.yandex.cloud.ydb.v1.RegionalDatabaseH\x00R\x10regionalDatabase\x12W\n" +
 	"\x12dedicated_database\x18\x0f \x01(\v2&.yandex.cloud.ydb.v1.DedicatedDatabaseH\x00R\x11dedicatedDatabase\x12Z\n" +
@@ -1528,8 +1529,7 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\x06labels\x18\x11 \x03(\v26.yandex.cloud.ydb.v1.UpdateDatabaseRequest.LabelsEntryR\x06labels\x12F\n" +
 	"\rbackup_config\x18\x12 \x01(\v2!.yandex.cloud.ydb.v1.BackupConfigR\fbackupConfig\x12R\n" +
 	"\x11monitoring_config\x18\x13 \x01(\v2%.yandex.cloud.ydb.v1.MonitoringConfigR\x10monitoringConfig\x12/\n" +
-	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x12,\n" +
-	"\x12security_group_ids\x18\x15 \x03(\tR\x10securityGroupIds\x1a9\n" +
+	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
@@ -1555,20 +1555,20 @@ const file_yandex_cloud_ydb_v1_database_service_proto_rawDesc = "" +
 	"\x05Start\x12).yandex.cloud.ydb.v1.StartDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"R\xb2\xd2*!\n" +
 	"\x15StartDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02'\"%/ydb/v1/databases/{database_id}:start\x12\xa5\x01\n" +
 	"\x04Stop\x12(.yandex.cloud.ydb.v1.StopDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"P\xb2\xd2* \n" +
-	"\x14StopDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02&\"$/ydb/v1/databases/{database_id}:stop\x12\xa8\x01\n" +
+	"\x14StopDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02&\"$/ydb/v1/databases/{database_id}:stop\x12\xb3\x01\n" +
+	"\x06Delete\x12*.yandex.cloud.ydb.v1.DeleteDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*/\n" +
+	"\x16DeleteDatabaseMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02!*\x1f/ydb/v1/databases/{database_id}\x12\xa2\x01\n" +
+	"\aRestore\x12).yandex.cloud.ydb.v1.RestoreBackupRequest\x1a!.yandex.cloud.operation.Operation\"I\xb2\xd2*!\n" +
+	"\x15RestoreBackupMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/ydb/v1/databases:restore\x12\xa2\x01\n" +
+	"\x06Backup\x12*.yandex.cloud.ydb.v1.BackupDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"I\xb2\xd2*\"\n" +
+	"\x16BackupDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/ydb/v1/databases:backup\x12\xa8\x01\n" +
 	"\x04Move\x12(.yandex.cloud.ydb.v1.MoveDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2* \n" +
 	"\x14MoveDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02):\x01*\"$/ydb/v1/databases/{database_id}:move\x12u\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\x12\xa4\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"=\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x12\xad\x01\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"@\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x12\xb3\x01\n" +
-	"\x06Delete\x12*.yandex.cloud.ydb.v1.DeleteDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*/\n" +
-	"\x16DeleteDatabaseMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02!*\x1f/ydb/v1/databases/{database_id}\x12\xa2\x01\n" +
-	"\aRestore\x12).yandex.cloud.ydb.v1.RestoreBackupRequest\x1a!.yandex.cloud.operation.Operation\"I\xb2\xd2*!\n" +
-	"\x15RestoreBackupMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/ydb/v1/databases:restore\x12\xa2\x01\n" +
-	"\x06Backup\x12*.yandex.cloud.ydb.v1.BackupDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"I\xb2\xd2*\"\n" +
-	"\x16BackupDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/ydb/v1/databases:backupBV\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.EmptyBV\n" +
 	"\x17yandex.cloud.api.ydb.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/ydb/v1;ydbb\x06proto3"
 
 var (
@@ -1585,16 +1585,16 @@ func file_yandex_cloud_ydb_v1_database_service_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_ydb_v1_database_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_yandex_cloud_ydb_v1_database_service_proto_goTypes = []any{
-	(*MoveDatabaseRequest)(nil),                // 0: yandex.cloud.ydb.v1.MoveDatabaseRequest
-	(*MoveDatabaseMetadata)(nil),               // 1: yandex.cloud.ydb.v1.MoveDatabaseMetadata
-	(*RestoreBackupRequest)(nil),               // 2: yandex.cloud.ydb.v1.RestoreBackupRequest
-	(*RestoreBackupMetadata)(nil),              // 3: yandex.cloud.ydb.v1.RestoreBackupMetadata
-	(*BackupDatabaseRequest)(nil),              // 4: yandex.cloud.ydb.v1.BackupDatabaseRequest
-	(*BackupDatabaseMetadata)(nil),             // 5: yandex.cloud.ydb.v1.BackupDatabaseMetadata
-	(*StartDatabaseRequest)(nil),               // 6: yandex.cloud.ydb.v1.StartDatabaseRequest
-	(*StartDatabaseMetadata)(nil),              // 7: yandex.cloud.ydb.v1.StartDatabaseMetadata
-	(*StopDatabaseRequest)(nil),                // 8: yandex.cloud.ydb.v1.StopDatabaseRequest
-	(*StopDatabaseMetadata)(nil),               // 9: yandex.cloud.ydb.v1.StopDatabaseMetadata
+	(*StartDatabaseRequest)(nil),               // 0: yandex.cloud.ydb.v1.StartDatabaseRequest
+	(*StartDatabaseMetadata)(nil),              // 1: yandex.cloud.ydb.v1.StartDatabaseMetadata
+	(*StopDatabaseRequest)(nil),                // 2: yandex.cloud.ydb.v1.StopDatabaseRequest
+	(*StopDatabaseMetadata)(nil),               // 3: yandex.cloud.ydb.v1.StopDatabaseMetadata
+	(*BackupDatabaseMetadata)(nil),             // 4: yandex.cloud.ydb.v1.BackupDatabaseMetadata
+	(*MoveDatabaseRequest)(nil),                // 5: yandex.cloud.ydb.v1.MoveDatabaseRequest
+	(*MoveDatabaseMetadata)(nil),               // 6: yandex.cloud.ydb.v1.MoveDatabaseMetadata
+	(*RestoreBackupRequest)(nil),               // 7: yandex.cloud.ydb.v1.RestoreBackupRequest
+	(*RestoreBackupMetadata)(nil),              // 8: yandex.cloud.ydb.v1.RestoreBackupMetadata
+	(*BackupDatabaseRequest)(nil),              // 9: yandex.cloud.ydb.v1.BackupDatabaseRequest
 	(*GetDatabaseRequest)(nil),                 // 10: yandex.cloud.ydb.v1.GetDatabaseRequest
 	(*ListDatabasesRequest)(nil),               // 11: yandex.cloud.ydb.v1.ListDatabasesRequest
 	(*ListDatabasesResponse)(nil),              // 12: yandex.cloud.ydb.v1.ListDatabasesResponse
@@ -1649,28 +1649,28 @@ var file_yandex_cloud_ydb_v1_database_service_proto_depIdxs = []int32{
 	11, // 22: yandex.cloud.ydb.v1.DatabaseService.List:input_type -> yandex.cloud.ydb.v1.ListDatabasesRequest
 	13, // 23: yandex.cloud.ydb.v1.DatabaseService.Create:input_type -> yandex.cloud.ydb.v1.CreateDatabaseRequest
 	15, // 24: yandex.cloud.ydb.v1.DatabaseService.Update:input_type -> yandex.cloud.ydb.v1.UpdateDatabaseRequest
-	6,  // 25: yandex.cloud.ydb.v1.DatabaseService.Start:input_type -> yandex.cloud.ydb.v1.StartDatabaseRequest
-	8,  // 26: yandex.cloud.ydb.v1.DatabaseService.Stop:input_type -> yandex.cloud.ydb.v1.StopDatabaseRequest
-	0,  // 27: yandex.cloud.ydb.v1.DatabaseService.Move:input_type -> yandex.cloud.ydb.v1.MoveDatabaseRequest
-	32, // 28: yandex.cloud.ydb.v1.DatabaseService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	33, // 29: yandex.cloud.ydb.v1.DatabaseService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	34, // 30: yandex.cloud.ydb.v1.DatabaseService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	17, // 31: yandex.cloud.ydb.v1.DatabaseService.Delete:input_type -> yandex.cloud.ydb.v1.DeleteDatabaseRequest
-	2,  // 32: yandex.cloud.ydb.v1.DatabaseService.Restore:input_type -> yandex.cloud.ydb.v1.RestoreBackupRequest
-	4,  // 33: yandex.cloud.ydb.v1.DatabaseService.Backup:input_type -> yandex.cloud.ydb.v1.BackupDatabaseRequest
+	0,  // 25: yandex.cloud.ydb.v1.DatabaseService.Start:input_type -> yandex.cloud.ydb.v1.StartDatabaseRequest
+	2,  // 26: yandex.cloud.ydb.v1.DatabaseService.Stop:input_type -> yandex.cloud.ydb.v1.StopDatabaseRequest
+	17, // 27: yandex.cloud.ydb.v1.DatabaseService.Delete:input_type -> yandex.cloud.ydb.v1.DeleteDatabaseRequest
+	7,  // 28: yandex.cloud.ydb.v1.DatabaseService.Restore:input_type -> yandex.cloud.ydb.v1.RestoreBackupRequest
+	9,  // 29: yandex.cloud.ydb.v1.DatabaseService.Backup:input_type -> yandex.cloud.ydb.v1.BackupDatabaseRequest
+	5,  // 30: yandex.cloud.ydb.v1.DatabaseService.Move:input_type -> yandex.cloud.ydb.v1.MoveDatabaseRequest
+	32, // 31: yandex.cloud.ydb.v1.DatabaseService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	33, // 32: yandex.cloud.ydb.v1.DatabaseService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	34, // 33: yandex.cloud.ydb.v1.DatabaseService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
 	22, // 34: yandex.cloud.ydb.v1.DatabaseService.Get:output_type -> yandex.cloud.ydb.v1.Database
 	12, // 35: yandex.cloud.ydb.v1.DatabaseService.List:output_type -> yandex.cloud.ydb.v1.ListDatabasesResponse
 	35, // 36: yandex.cloud.ydb.v1.DatabaseService.Create:output_type -> yandex.cloud.operation.Operation
 	35, // 37: yandex.cloud.ydb.v1.DatabaseService.Update:output_type -> yandex.cloud.operation.Operation
 	35, // 38: yandex.cloud.ydb.v1.DatabaseService.Start:output_type -> yandex.cloud.operation.Operation
 	35, // 39: yandex.cloud.ydb.v1.DatabaseService.Stop:output_type -> yandex.cloud.operation.Operation
-	35, // 40: yandex.cloud.ydb.v1.DatabaseService.Move:output_type -> yandex.cloud.operation.Operation
-	36, // 41: yandex.cloud.ydb.v1.DatabaseService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	35, // 42: yandex.cloud.ydb.v1.DatabaseService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	35, // 43: yandex.cloud.ydb.v1.DatabaseService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	35, // 44: yandex.cloud.ydb.v1.DatabaseService.Delete:output_type -> yandex.cloud.operation.Operation
-	35, // 45: yandex.cloud.ydb.v1.DatabaseService.Restore:output_type -> yandex.cloud.operation.Operation
-	35, // 46: yandex.cloud.ydb.v1.DatabaseService.Backup:output_type -> yandex.cloud.operation.Operation
+	35, // 40: yandex.cloud.ydb.v1.DatabaseService.Delete:output_type -> yandex.cloud.operation.Operation
+	35, // 41: yandex.cloud.ydb.v1.DatabaseService.Restore:output_type -> yandex.cloud.operation.Operation
+	35, // 42: yandex.cloud.ydb.v1.DatabaseService.Backup:output_type -> yandex.cloud.operation.Operation
+	35, // 43: yandex.cloud.ydb.v1.DatabaseService.Move:output_type -> yandex.cloud.operation.Operation
+	36, // 44: yandex.cloud.ydb.v1.DatabaseService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	35, // 45: yandex.cloud.ydb.v1.DatabaseService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	35, // 46: yandex.cloud.ydb.v1.DatabaseService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
 	34, // [34:47] is the sub-list for method output_type
 	21, // [21:34] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
@@ -1683,8 +1683,8 @@ func file_yandex_cloud_ydb_v1_database_service_proto_init() {
 	if File_yandex_cloud_ydb_v1_database_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_ydb_v1_database_proto_init()
 	file_yandex_cloud_ydb_v1_backup_proto_init()
+	file_yandex_cloud_ydb_v1_database_proto_init()
 	file_yandex_cloud_ydb_v1_database_service_proto_msgTypes[13].OneofWrappers = []any{
 		(*CreateDatabaseRequest_ZonalDatabase)(nil),
 		(*CreateDatabaseRequest_RegionalDatabase)(nil),

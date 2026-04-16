@@ -14,12 +14,32 @@ func (m *BillingAccount) SetName(v string) {
 	m.Name = v
 }
 
+func (m *ServiceInstance) SetId(v string) {
+	m.Id = v
+}
+
+func (m *ServiceInstance) SetType(v string) {
+	m.Type = v
+}
+
+func (m *ServiceInstance) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ServiceInstance) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
+}
+
 func (m *Cloud) SetId(v string) {
 	m.Id = v
 }
 
 func (m *Cloud) SetName(v string) {
 	m.Name = v
+}
+
+func (m *Cloud) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
 }
 
 func (m *Folder) SetId(v string) {
@@ -58,6 +78,10 @@ func (m *SKU) SetEnTranslation(v string) {
 	m.EnTranslation = v
 }
 
+func (m *SKU) SetTranslation(v string) {
+	m.Translation = v
+}
+
 func (m *SKU) SetPricingUnit(v string) {
 	m.PricingUnit = v
 }
@@ -68,6 +92,14 @@ func (m *SKU) SetServiceId(v string) {
 
 func (m *Resource) SetId(v string) {
 	m.Id = v
+}
+
+func (m *Resource) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Resource) SetServiceInstanceType(v string) {
+	m.ServiceInstanceType = v
 }
 
 func (m *Label) SetKey(v string) {

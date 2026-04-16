@@ -191,26 +191,6 @@ func (m *DeleteRegistryPasswordMetadata) SetPasswordId(v string) {
 	m.PasswordId = v
 }
 
-func (m *ListDeviceTopicAliasesRequest) SetRegistryId(v string) {
-	m.RegistryId = v
-}
-
-func (m *ListDeviceTopicAliasesRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListDeviceTopicAliasesRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListDeviceTopicAliasesResponse) SetAliases(v []*DeviceAlias) {
-	m.Aliases = v
-}
-
-func (m *ListDeviceTopicAliasesResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
-}
-
 func (m *ListRegistryOperationsRequest) SetRegistryId(v string) {
 	m.RegistryId = v
 }
@@ -232,6 +212,26 @@ func (m *ListRegistryOperationsResponse) SetOperations(v []*operation.Operation)
 }
 
 func (m *ListRegistryOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListDeviceTopicAliasesRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ListDeviceTopicAliasesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDeviceTopicAliasesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListDeviceTopicAliasesResponse) SetAliases(v []*DeviceAlias) {
+	m.Aliases = v
+}
+
+func (m *ListDeviceTopicAliasesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 

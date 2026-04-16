@@ -32,9 +32,7 @@ type OriginGroup struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// This option have two possible conditions:
 	// true - the option is active. In case the origin responds with 4XX or 5XX codes,
-	//
-	//	use the next origin from the list.
-	//
+	// use the next origin from the list.
 	// false - the option is disabled.
 	UseNext bool `protobuf:"varint,4,opt,name=use_next,json=useNext,proto3" json:"use_next,omitempty"`
 	// List of origins.

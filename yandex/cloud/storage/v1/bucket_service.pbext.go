@@ -35,6 +35,26 @@ func (m *ListBucketsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *CreateBucketMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateBucketMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *DeleteBucketMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *SetBucketHTTPSConfigMetadata) SetName(v string) {
+	m.Name = v
+}
+
+func (m *DeleteBucketHTTPSConfigMetadata) SetName(v string) {
+	m.Name = v
+}
+
 func (m *CreateBucketRequest) SetName(v string) {
 	m.Name = v
 }
@@ -77,10 +97,6 @@ func (m *CreateBucketRequest) SetAllowedPrivateEndpoints(v *BucketAllowedPrivate
 
 func (m *CreateBucketRequest) SetDisabledStatickeyAuth(v bool) {
 	m.DisabledStatickeyAuth = v
-}
-
-func (m *CreateBucketMetadata) SetName(v string) {
-	m.Name = v
 }
 
 func (m *UpdateBucketRequest) SetName(v string) {
@@ -147,15 +163,7 @@ func (m *UpdateBucketRequest) SetDisabledStatickeyAuth(v bool) {
 	m.DisabledStatickeyAuth = v
 }
 
-func (m *UpdateBucketMetadata) SetName(v string) {
-	m.Name = v
-}
-
 func (m *DeleteBucketRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *DeleteBucketMetadata) SetName(v string) {
 	m.Name = v
 }
 
@@ -185,10 +193,6 @@ func (m *SetBucketHTTPSConfigRequest) SetParams(v SetBucketHTTPSConfigRequest_Pa
 	m.Params = v
 }
 
-func (m *SetBucketHTTPSConfigRequest) SetName(v string) {
-	m.Name = v
-}
-
 func (m *SetBucketHTTPSConfigRequest) SetSelfManaged(v *SelfManagedHTTPSConfigParams) {
 	m.Params = &SetBucketHTTPSConfigRequest_SelfManaged{
 		SelfManaged: v,
@@ -201,15 +205,11 @@ func (m *SetBucketHTTPSConfigRequest) SetCertificateManager(v *CertificateManage
 	}
 }
 
-func (m *SetBucketHTTPSConfigMetadata) SetName(v string) {
+func (m *SetBucketHTTPSConfigRequest) SetName(v string) {
 	m.Name = v
 }
 
 func (m *DeleteBucketHTTPSConfigRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *DeleteBucketHTTPSConfigMetadata) SetName(v string) {
 	m.Name = v
 }
 

@@ -32,7 +32,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Rules management service.
-//
 // Used for Resources Rules management.
 type ResourceRulesServiceClient interface {
 	// List all rules for specified resource.
@@ -110,7 +109,6 @@ func (c *resourceRulesServiceClient) Delete(ctx context.Context, in *DeleteResou
 // for forward compatibility.
 //
 // Rules management service.
-//
 // Used for Resources Rules management.
 type ResourceRulesServiceServer interface {
 	// List all rules for specified resource.

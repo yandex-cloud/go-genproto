@@ -923,6 +923,10 @@ func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 	m.BackupRetainPeriodDays = v
 }
 
+func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
+	m.PerformanceDiagnostics = v
+}
+
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {
 	m.Config = v
 }

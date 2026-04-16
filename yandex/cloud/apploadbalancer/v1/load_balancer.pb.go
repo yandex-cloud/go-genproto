@@ -109,7 +109,9 @@ const (
 	TargetState_UNHEALTHY TargetState_Status = 3
 	// Target is being deleted and the application load balancer is no longer sending traffic to this target.
 	TargetState_DRAINING TargetState_Status = 4
-	TargetState_TIMEOUT  TargetState_Status = 5
+	// Health check results are not yet available for the target, e.g. the load balancer has just started
+	// sending health check requests to the target or the target has not responded in time.
+	TargetState_TIMEOUT TargetState_Status = 5
 )
 
 // Enum value maps for TargetState_Status.
@@ -1227,8 +1229,11 @@ type HttpHandler struct {
 	ProtocolSettings isHttpHandler_ProtocolSettings `protobuf_oneof:"protocol_settings"`
 	// When unset, will preserve the incoming x-request-id header, otherwise would rewrite it with a new value.
 	RewriteRequestId bool `protobuf:"varint,4,opt,name=rewrite_request_id,json=rewriteRequestId,proto3" json:"rewrite_request_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// When enabled, preserves the original casing of HTTP/1.1 header names (e.g. "CONTENT-Type" -> "CONTENT-Type").
+	// Has no effect on HTTP/2 connections where headers are always lowercase per RFC 7540.
+	PreserveHttp1HeaderCasing bool `protobuf:"varint,5,opt,name=preserve_http1_header_casing,json=preserveHttp1HeaderCasing,proto3" json:"preserve_http1_header_casing,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *HttpHandler) Reset() {
@@ -1296,6 +1301,13 @@ func (x *HttpHandler) GetAllowHttp10() bool {
 func (x *HttpHandler) GetRewriteRequestId() bool {
 	if x != nil {
 		return x.RewriteRequestId
+	}
+	return false
+}
+
+func (x *HttpHandler) GetPreserveHttp1HeaderCasing() bool {
+	if x != nil {
+		return x.PreserveHttp1HeaderCasing
 	}
 	return false
 }
@@ -1856,12 +1868,13 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_rawDesc = "" +
 	"\x16max_concurrent_streams\x18\x01 \x01(\x03R\x14maxConcurrentStreams\"}\n" +
 	"\rStreamHandler\x12.\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12<\n" +
-	"\fidle_timeout\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\vidleTimeout\"\xf1\x01\n" +
+	"\fidle_timeout\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\vidleTimeout\"\xb2\x02\n" +
 	"\vHttpHandler\x12$\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12T\n" +
 	"\rhttp2_options\x18\x02 \x01(\v2-.yandex.cloud.apploadbalancer.v1.Http2OptionsH\x00R\fhttp2Options\x12#\n" +
 	"\fallow_http10\x18\x03 \x01(\bH\x00R\vallowHttp10\x12,\n" +
-	"\x12rewrite_request_id\x18\x04 \x01(\bR\x10rewriteRequestIdB\x13\n" +
+	"\x12rewrite_request_id\x18\x04 \x01(\bR\x10rewriteRequestId\x12?\n" +
+	"\x1cpreserve_http1_header_casing\x18\x05 \x01(\bR\x19preserveHttp1HeaderCasingB\x13\n" +
 	"\x11protocol_settings\"/\n" +
 	"\tRedirects\x12\"\n" +
 	"\rhttp_to_https\x18\x01 \x01(\bR\vhttpToHttps\"\x9c\x01\n" +

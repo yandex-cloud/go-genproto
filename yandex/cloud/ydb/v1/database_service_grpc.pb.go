@@ -27,13 +27,13 @@ const (
 	DatabaseService_Update_FullMethodName               = "/yandex.cloud.ydb.v1.DatabaseService/Update"
 	DatabaseService_Start_FullMethodName                = "/yandex.cloud.ydb.v1.DatabaseService/Start"
 	DatabaseService_Stop_FullMethodName                 = "/yandex.cloud.ydb.v1.DatabaseService/Stop"
+	DatabaseService_Delete_FullMethodName               = "/yandex.cloud.ydb.v1.DatabaseService/Delete"
+	DatabaseService_Restore_FullMethodName              = "/yandex.cloud.ydb.v1.DatabaseService/Restore"
+	DatabaseService_Backup_FullMethodName               = "/yandex.cloud.ydb.v1.DatabaseService/Backup"
 	DatabaseService_Move_FullMethodName                 = "/yandex.cloud.ydb.v1.DatabaseService/Move"
 	DatabaseService_ListAccessBindings_FullMethodName   = "/yandex.cloud.ydb.v1.DatabaseService/ListAccessBindings"
 	DatabaseService_SetAccessBindings_FullMethodName    = "/yandex.cloud.ydb.v1.DatabaseService/SetAccessBindings"
 	DatabaseService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.ydb.v1.DatabaseService/UpdateAccessBindings"
-	DatabaseService_Delete_FullMethodName               = "/yandex.cloud.ydb.v1.DatabaseService/Delete"
-	DatabaseService_Restore_FullMethodName              = "/yandex.cloud.ydb.v1.DatabaseService/Restore"
-	DatabaseService_Backup_FullMethodName               = "/yandex.cloud.ydb.v1.DatabaseService/Backup"
 )
 
 // DatabaseServiceClient is the client API for DatabaseService service.
@@ -54,15 +54,15 @@ type DatabaseServiceClient interface {
 	Start(ctx context.Context, in *StartDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified database.
 	Stop(ctx context.Context, in *StopDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	Move(ctx context.Context, in *MoveDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified database.
 	Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Restores the specified backup
 	Restore(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	Backup(ctx context.Context, in *BackupDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Move(ctx context.Context, in *MoveDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type databaseServiceClient struct {
@@ -133,6 +133,36 @@ func (c *databaseServiceClient) Stop(ctx context.Context, in *StopDatabaseReques
 	return out, nil
 }
 
+func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DatabaseService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *databaseServiceClient) Restore(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DatabaseService_Restore_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *databaseServiceClient) Backup(ctx context.Context, in *BackupDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DatabaseService_Backup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *databaseServiceClient) Move(ctx context.Context, in *MoveDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -173,36 +203,6 @@ func (c *databaseServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 	return out, nil
 }
 
-func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DatabaseService_Delete_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *databaseServiceClient) Restore(ctx context.Context, in *RestoreBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DatabaseService_Restore_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *databaseServiceClient) Backup(ctx context.Context, in *BackupDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DatabaseService_Backup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // DatabaseServiceServer is the server API for DatabaseService service.
 // All implementations should embed UnimplementedDatabaseServiceServer
 // for forward compatibility.
@@ -221,15 +221,15 @@ type DatabaseServiceServer interface {
 	Start(context.Context, *StartDatabaseRequest) (*operation.Operation, error)
 	// Stops the specified database.
 	Stop(context.Context, *StopDatabaseRequest) (*operation.Operation, error)
-	Move(context.Context, *MoveDatabaseRequest) (*operation.Operation, error)
-	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 	// Deletes the specified database.
 	Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error)
 	// Restores the specified backup
 	Restore(context.Context, *RestoreBackupRequest) (*operation.Operation, error)
 	Backup(context.Context, *BackupDatabaseRequest) (*operation.Operation, error)
+	Move(context.Context, *MoveDatabaseRequest) (*operation.Operation, error)
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDatabaseServiceServer should be embedded to have
@@ -257,6 +257,15 @@ func (UnimplementedDatabaseServiceServer) Start(context.Context, *StartDatabaseR
 func (UnimplementedDatabaseServiceServer) Stop(context.Context, *StopDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
 }
+func (UnimplementedDatabaseServiceServer) Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedDatabaseServiceServer) Restore(context.Context, *RestoreBackupRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Restore not implemented")
+}
+func (UnimplementedDatabaseServiceServer) Backup(context.Context, *BackupDatabaseRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Backup not implemented")
+}
 func (UnimplementedDatabaseServiceServer) Move(context.Context, *MoveDatabaseRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
 }
@@ -268,15 +277,6 @@ func (UnimplementedDatabaseServiceServer) SetAccessBindings(context.Context, *ac
 }
 func (UnimplementedDatabaseServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAccessBindings not implemented")
-}
-func (UnimplementedDatabaseServiceServer) Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
-}
-func (UnimplementedDatabaseServiceServer) Restore(context.Context, *RestoreBackupRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Restore not implemented")
-}
-func (UnimplementedDatabaseServiceServer) Backup(context.Context, *BackupDatabaseRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Backup not implemented")
 }
 func (UnimplementedDatabaseServiceServer) testEmbeddedByValue() {}
 
@@ -406,6 +406,60 @@ func _DatabaseService_Stop_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatabaseService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatabaseService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).Delete(ctx, req.(*DeleteDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DatabaseService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreBackupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).Restore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatabaseService_Restore_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).Restore(ctx, req.(*RestoreBackupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DatabaseService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupDatabaseRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseServiceServer).Backup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatabaseService_Backup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseServiceServer).Backup(ctx, req.(*BackupDatabaseRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _DatabaseService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MoveDatabaseRequest)
 	if err := dec(in); err != nil {
@@ -478,60 +532,6 @@ func _DatabaseService_UpdateAccessBindings_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DatabaseService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteDatabaseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DatabaseServiceServer).Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DatabaseService_Delete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DatabaseServiceServer).Delete(ctx, req.(*DeleteDatabaseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DatabaseService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RestoreBackupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DatabaseServiceServer).Restore(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DatabaseService_Restore_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DatabaseServiceServer).Restore(ctx, req.(*RestoreBackupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DatabaseService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BackupDatabaseRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DatabaseServiceServer).Backup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DatabaseService_Backup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DatabaseServiceServer).Backup(ctx, req.(*BackupDatabaseRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // DatabaseService_ServiceDesc is the grpc.ServiceDesc for DatabaseService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -564,6 +564,18 @@ var DatabaseService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DatabaseService_Stop_Handler,
 		},
 		{
+			MethodName: "Delete",
+			Handler:    _DatabaseService_Delete_Handler,
+		},
+		{
+			MethodName: "Restore",
+			Handler:    _DatabaseService_Restore_Handler,
+		},
+		{
+			MethodName: "Backup",
+			Handler:    _DatabaseService_Backup_Handler,
+		},
+		{
 			MethodName: "Move",
 			Handler:    _DatabaseService_Move_Handler,
 		},
@@ -578,18 +590,6 @@ var DatabaseService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _DatabaseService_UpdateAccessBindings_Handler,
-		},
-		{
-			MethodName: "Delete",
-			Handler:    _DatabaseService_Delete_Handler,
-		},
-		{
-			MethodName: "Restore",
-			Handler:    _DatabaseService_Restore_Handler,
-		},
-		{
-			MethodName: "Backup",
-			Handler:    _DatabaseService_Backup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

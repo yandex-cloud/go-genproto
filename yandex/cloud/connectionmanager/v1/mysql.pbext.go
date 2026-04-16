@@ -14,12 +14,12 @@ func (m *MySQLAuth) SetUserPassword(v *UserPasswordAuth) {
 	}
 }
 
-func (m *MySQLCluster) SetHosts(v []*MySQLCluster_Host) {
-	m.Hosts = v
-}
-
 func (m *MySQLCluster) SetTlsParams(v *TLSParams) {
 	m.TlsParams = v
+}
+
+func (m *MySQLCluster) SetHosts(v []*MySQLCluster_Host) {
+	m.Hosts = v
 }
 
 func (m *MySQLCluster_Host) SetHost(v string) {

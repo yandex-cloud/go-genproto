@@ -20,10 +20,6 @@ func (m *AssistantFieldResult) SetFieldType(v AssistantFieldResult_FieldType) {
 	m.FieldType = v
 }
 
-func (m *AssistantFieldResult) SetFieldId(v string) {
-	m.FieldId = v
-}
-
 func (m *AssistantFieldResult) SetStringResult(v string) {
 	m.FieldType = &AssistantFieldResult_StringResult{
 		StringResult: v,
@@ -40,4 +36,8 @@ func (m *AssistantFieldResult) SetFloatResult(v float64) {
 	m.FieldType = &AssistantFieldResult_FloatResult{
 		FloatResult: v,
 	}
+}
+
+func (m *AssistantFieldResult) SetFieldId(v string) {
+	m.FieldId = v
 }

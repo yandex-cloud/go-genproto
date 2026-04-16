@@ -90,7 +90,6 @@ type RawLogsSettings struct {
 	// Bucket region, unused for now, could be blank.
 	BucketRegion string `protobuf:"bytes,2,opt,name=bucket_region,json=bucketRegion,proto3" json:"bucket_region,omitempty"`
 	// file_prefix: prefix each log object name with specified prefix.
-	//
 	// The prefix makes it simpler for you to locate the log objects.
 	// For example, if you specify the prefix value logs/, each log object that
 	// S3 creates begins with the logs/ prefix in its key, so pseudo S3 folders

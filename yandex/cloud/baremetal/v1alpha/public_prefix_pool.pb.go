@@ -38,7 +38,6 @@ type PublicPrefixPool struct {
 	// CIDR block of the public prefix pool.
 	Cidr string `protobuf:"bytes,6,opt,name=cidr,proto3" json:"cidr,omitempty"`
 	// Minimal prefix that could be used for subnet creation
-	//
 	// Read only.
 	MinAvailablePrefix *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=min_available_prefix,json=minAvailablePrefix,proto3" json:"min_available_prefix,omitempty"`
 	// Creation timestamp.

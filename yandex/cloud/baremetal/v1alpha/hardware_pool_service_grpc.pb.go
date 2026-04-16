@@ -30,7 +30,6 @@ const (
 // A set of methods to retrieve information about HardwarePool resources.
 type HardwarePoolServiceClient interface {
 	// Returns the specific HardwarePool resource.
-	//
 	// To get the list of available HardwarePool resource, make a [List] request.
 	Get(ctx context.Context, in *GetHardwarePoolRequest, opts ...grpc.CallOption) (*HardwarePool, error)
 	// Retrieves the list of HardwarePool resources.
@@ -72,7 +71,6 @@ func (c *hardwarePoolServiceClient) List(ctx context.Context, in *ListHardwarePo
 // A set of methods to retrieve information about HardwarePool resources.
 type HardwarePoolServiceServer interface {
 	// Returns the specific HardwarePool resource.
-	//
 	// To get the list of available HardwarePool resource, make a [List] request.
 	Get(context.Context, *GetHardwarePoolRequest) (*HardwarePool, error)
 	// Retrieves the list of HardwarePool resources.

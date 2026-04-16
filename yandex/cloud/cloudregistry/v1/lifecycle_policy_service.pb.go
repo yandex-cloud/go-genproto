@@ -15,6 +15,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -595,11 +596,173 @@ func (x *ChangeLifecyclePolicyStateRequest) GetState() LifecyclePolicyState {
 	return LifecyclePolicyState_LIFECYCLE_POLICY_STATE_UNSPECIFIED
 }
 
+type DryRunLifecyclePolicyRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the lifecycle policy.
+	PolicyId      string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DryRunLifecyclePolicyRequest) Reset() {
+	*x = DryRunLifecyclePolicyRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DryRunLifecyclePolicyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DryRunLifecyclePolicyRequest) ProtoMessage() {}
+
+func (x *DryRunLifecyclePolicyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DryRunLifecyclePolicyRequest.ProtoReflect.Descriptor instead.
+func (*DryRunLifecyclePolicyRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DryRunLifecyclePolicyRequest) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+type DryRunLifecyclePolicyMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the lifecycle policy.
+	PolicyId      string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DryRunLifecyclePolicyMetadata) Reset() {
+	*x = DryRunLifecyclePolicyMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DryRunLifecyclePolicyMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DryRunLifecyclePolicyMetadata) ProtoMessage() {}
+
+func (x *DryRunLifecyclePolicyMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DryRunLifecyclePolicyMetadata.ProtoReflect.Descriptor instead.
+func (*DryRunLifecyclePolicyMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DryRunLifecyclePolicyMetadata) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+type DryRunLifecyclePolicyResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the lifecycle policy.
+	PolicyId string `protobuf:"bytes,1,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	// Time when the dry run started.
+	RunAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=run_at,json=runAt,proto3" json:"run_at,omitempty"`
+	// Count of artifacts to be hard deleted.
+	ArtifactsToHardDeleteCount int64 `protobuf:"varint,3,opt,name=artifacts_to_hard_delete_count,json=artifactsToHardDeleteCount,proto3" json:"artifacts_to_hard_delete_count,omitempty"`
+	// Count of artifacts to be soft deleted.
+	ArtifactsToSoftDeleteCount int64 `protobuf:"varint,4,opt,name=artifacts_to_soft_delete_count,json=artifactsToSoftDeleteCount,proto3" json:"artifacts_to_soft_delete_count,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *DryRunLifecyclePolicyResponse) Reset() {
+	*x = DryRunLifecyclePolicyResponse{}
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DryRunLifecyclePolicyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DryRunLifecyclePolicyResponse) ProtoMessage() {}
+
+func (x *DryRunLifecyclePolicyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DryRunLifecyclePolicyResponse.ProtoReflect.Descriptor instead.
+func (*DryRunLifecyclePolicyResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DryRunLifecyclePolicyResponse) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+func (x *DryRunLifecyclePolicyResponse) GetRunAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.RunAt
+	}
+	return nil
+}
+
+func (x *DryRunLifecyclePolicyResponse) GetArtifactsToHardDeleteCount() int64 {
+	if x != nil {
+		return x.ArtifactsToHardDeleteCount
+	}
+	return 0
+}
+
+func (x *DryRunLifecyclePolicyResponse) GetArtifactsToSoftDeleteCount() int64 {
+	if x != nil {
+		return x.ArtifactsToSoftDeleteCount
+	}
+	return 0
+}
+
 var File_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/cloudregistry/v1/lifecycle_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/cloudregistry/v1/lifecycle_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xc1\x02\n" +
+	"<yandex/cloud/cloudregistry/v1/lifecycle_policy_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/cloudregistry/v1/lifecycle_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xc1\x02\n" +
 	"\x1cCreateLifecyclePolicyRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x125\n" +
@@ -638,7 +801,16 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc 
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9f\x01\n" +
 	"!ChangeLifecyclePolicyStateRequest\x12)\n" +
 	"\tpolicy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bpolicyId\x12O\n" +
-	"\x05state\x18\x02 \x01(\x0e23.yandex.cloud.cloudregistry.v1.LifecyclePolicyStateB\x04\xe8\xc71\x01R\x05state2\xb0\t\n" +
+	"\x05state\x18\x02 \x01(\x0e23.yandex.cloud.cloudregistry.v1.LifecyclePolicyStateB\x04\xe8\xc71\x01R\x05state\"I\n" +
+	"\x1cDryRunLifecyclePolicyRequest\x12)\n" +
+	"\tpolicy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bpolicyId\"<\n" +
+	"\x1dDryRunLifecyclePolicyMetadata\x12\x1b\n" +
+	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\"\xf7\x01\n" +
+	"\x1dDryRunLifecyclePolicyResponse\x12\x1b\n" +
+	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x121\n" +
+	"\x06run_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x05runAt\x12B\n" +
+	"\x1eartifacts_to_hard_delete_count\x18\x03 \x01(\x03R\x1aartifactsToHardDeleteCount\x12B\n" +
+	"\x1eartifacts_to_soft_delete_count\x18\x04 \x01(\x03R\x1aartifactsToSoftDeleteCount2\xa2\v\n" +
 	"\x16LifecyclePolicyService\x12\xcd\x01\n" +
 	"\x06Create\x12;.yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest\x1a!.yandex.cloud.operation.Operation\"c\xb2\xd2*0\n" +
 	"\x1dCreateLifecyclePolicyMetadata\x12\x0fLifecyclePolicy\x82\xd3\xe4\x93\x02):\x01*\"$/cloud-registry/v1/lifecyclePolicies\x12\xd9\x01\n" +
@@ -648,7 +820,9 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc 
 	"\x1dDeleteLifecyclePolicyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x022*0/cloud-registry/v1/lifecyclePolicies/{policy_id}\x12\xa9\x01\n" +
 	"\x03Get\x128.yandex.cloud.cloudregistry.v1.GetLifecyclePolicyRequest\x1a..yandex.cloud.cloudregistry.v1.LifecyclePolicy\"8\x82\xd3\xe4\x93\x022\x120/cloud-registry/v1/lifecyclePolicies/{policy_id}\x12\xab\x01\n" +
 	"\x04List\x129.yandex.cloud.cloudregistry.v1.ListLifecyclePolicyRequest\x1a:.yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse\",\x82\xd3\xe4\x93\x02&\x12$/cloud-registry/v1/lifecyclePolicies\x12\xb0\x01\n" +
-	"\vChangeState\x12@.yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest\x1a\x16.google.protobuf.Empty\"G\x82\xd3\xe4\x93\x02A:\x01*\"</cloud-registry/v1/lifecyclePolicies/{policy_id}:changeStateBt\n" +
+	"\vChangeState\x12@.yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest\x1a\x16.google.protobuf.Empty\"G\x82\xd3\xe4\x93\x02A:\x01*\"</cloud-registry/v1/lifecyclePolicies/{policy_id}:changeState\x12\xef\x01\n" +
+	"\x06DryRun\x12;.yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*>\n" +
+	"\x1dDryRunLifecyclePolicyMetadata\x12\x1dDryRunLifecyclePolicyResponse\x82\xd3\xe4\x93\x02<:\x01*\"7/cloud-registry/v1/lifecyclePolicies/{policy_id}:dryRunBt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
@@ -663,7 +837,7 @@ func file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDescGZ
 	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_goTypes = []any{
 	(*CreateLifecyclePolicyRequest)(nil),      // 0: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest
 	(*CreateLifecyclePolicyMetadata)(nil),     // 1: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyMetadata
@@ -675,38 +849,45 @@ var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_goTypes = 
 	(*ListLifecyclePolicyRequest)(nil),        // 7: yandex.cloud.cloudregistry.v1.ListLifecyclePolicyRequest
 	(*ListLifecyclePolicyResponse)(nil),       // 8: yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse
 	(*ChangeLifecyclePolicyStateRequest)(nil), // 9: yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest
-	(*LifecycleRule)(nil),                     // 10: yandex.cloud.cloudregistry.v1.LifecycleRule
-	(LifecyclePolicyState)(0),                 // 11: yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	(*fieldmaskpb.FieldMask)(nil),             // 12: google.protobuf.FieldMask
-	(*LifecyclePolicy)(nil),                   // 13: yandex.cloud.cloudregistry.v1.LifecyclePolicy
-	(*operation.Operation)(nil),               // 14: yandex.cloud.operation.Operation
-	(*emptypb.Empty)(nil),                     // 15: google.protobuf.Empty
+	(*DryRunLifecyclePolicyRequest)(nil),      // 10: yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyRequest
+	(*DryRunLifecyclePolicyMetadata)(nil),     // 11: yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyMetadata
+	(*DryRunLifecyclePolicyResponse)(nil),     // 12: yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyResponse
+	(*LifecycleRule)(nil),                     // 13: yandex.cloud.cloudregistry.v1.LifecycleRule
+	(LifecyclePolicyState)(0),                 // 14: yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	(*fieldmaskpb.FieldMask)(nil),             // 15: google.protobuf.FieldMask
+	(*LifecyclePolicy)(nil),                   // 16: yandex.cloud.cloudregistry.v1.LifecyclePolicy
+	(*timestamppb.Timestamp)(nil),             // 17: google.protobuf.Timestamp
+	(*operation.Operation)(nil),               // 18: yandex.cloud.operation.Operation
+	(*emptypb.Empty)(nil),                     // 19: google.protobuf.Empty
 }
 var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
-	11, // 1: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	12, // 2: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.update_mask:type_name -> google.protobuf.FieldMask
-	10, // 3: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
-	11, // 4: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	13, // 5: yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse.policies:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicy
-	11, // 6: yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	0,  // 7: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Create:input_type -> yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest
-	2,  // 8: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Update:input_type -> yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest
-	4,  // 9: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteLifecyclePolicyRequest
-	6,  // 10: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Get:input_type -> yandex.cloud.cloudregistry.v1.GetLifecyclePolicyRequest
-	7,  // 11: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.List:input_type -> yandex.cloud.cloudregistry.v1.ListLifecyclePolicyRequest
-	9,  // 12: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.ChangeState:input_type -> yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest
-	14, // 13: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Create:output_type -> yandex.cloud.operation.Operation
-	14, // 14: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Update:output_type -> yandex.cloud.operation.Operation
-	14, // 15: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Delete:output_type -> yandex.cloud.operation.Operation
-	13, // 16: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Get:output_type -> yandex.cloud.cloudregistry.v1.LifecyclePolicy
-	8,  // 17: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.List:output_type -> yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse
-	15, // 18: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.ChangeState:output_type -> google.protobuf.Empty
-	13, // [13:19] is the sub-list for method output_type
-	7,  // [7:13] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	13, // 0: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
+	14, // 1: yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	15, // 2: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.update_mask:type_name -> google.protobuf.FieldMask
+	13, // 3: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
+	14, // 4: yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	16, // 5: yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse.policies:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicy
+	14, // 6: yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	17, // 7: yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyResponse.run_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Create:input_type -> yandex.cloud.cloudregistry.v1.CreateLifecyclePolicyRequest
+	2,  // 9: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Update:input_type -> yandex.cloud.cloudregistry.v1.UpdateLifecyclePolicyRequest
+	4,  // 10: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteLifecyclePolicyRequest
+	6,  // 11: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Get:input_type -> yandex.cloud.cloudregistry.v1.GetLifecyclePolicyRequest
+	7,  // 12: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.List:input_type -> yandex.cloud.cloudregistry.v1.ListLifecyclePolicyRequest
+	9,  // 13: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.ChangeState:input_type -> yandex.cloud.cloudregistry.v1.ChangeLifecyclePolicyStateRequest
+	10, // 14: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.DryRun:input_type -> yandex.cloud.cloudregistry.v1.DryRunLifecyclePolicyRequest
+	18, // 15: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 16: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 17: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Delete:output_type -> yandex.cloud.operation.Operation
+	16, // 18: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.Get:output_type -> yandex.cloud.cloudregistry.v1.LifecyclePolicy
+	8,  // 19: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.List:output_type -> yandex.cloud.cloudregistry.v1.ListLifecyclePolicyResponse
+	19, // 20: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.ChangeState:output_type -> google.protobuf.Empty
+	18, // 21: yandex.cloud.cloudregistry.v1.LifecyclePolicyService.DryRun:output_type -> yandex.cloud.operation.Operation
+	15, // [15:22] is the sub-list for method output_type
+	8,  // [8:15] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_init() }
@@ -721,7 +902,7 @@ func file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

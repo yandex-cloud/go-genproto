@@ -45,6 +45,18 @@ func (m *CreatePublicSubnetRequest) SetCidrAllocationMethod(v CreatePublicSubnet
 	m.CidrAllocationMethod = v
 }
 
+func (m *CreatePublicSubnetRequest) SetAutoAllocation(v *CreatePublicSubnetRequest_AutoAllocation) {
+	m.CidrAllocationMethod = &CreatePublicSubnetRequest_AutoAllocation_{
+		AutoAllocation: v,
+	}
+}
+
+func (m *CreatePublicSubnetRequest) SetManualAllocation(v *CreatePublicSubnetRequest_ManualAllocation) {
+	m.CidrAllocationMethod = &CreatePublicSubnetRequest_ManualAllocation_{
+		ManualAllocation: v,
+	}
+}
+
 func (m *CreatePublicSubnetRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -63,18 +75,6 @@ func (m *CreatePublicSubnetRequest) SetHardwarePoolIds(v []string) {
 
 func (m *CreatePublicSubnetRequest) SetPrefixLength(v int64) {
 	m.PrefixLength = v
-}
-
-func (m *CreatePublicSubnetRequest) SetAutoAllocation(v *CreatePublicSubnetRequest_AutoAllocation) {
-	m.CidrAllocationMethod = &CreatePublicSubnetRequest_AutoAllocation_{
-		AutoAllocation: v,
-	}
-}
-
-func (m *CreatePublicSubnetRequest) SetManualAllocation(v *CreatePublicSubnetRequest_ManualAllocation) {
-	m.CidrAllocationMethod = &CreatePublicSubnetRequest_ManualAllocation_{
-		ManualAllocation: v,
-	}
 }
 
 func (m *CreatePublicSubnetRequest) SetLabels(v map[string]string) {

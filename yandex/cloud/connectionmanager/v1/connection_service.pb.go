@@ -29,6 +29,12 @@ const (
 // Request message for creating a new connection.
 type CreateConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Secret specification for authentication.
+	//
+	// Types that are valid to be assigned to SecretSpec:
+	//
+	//	*CreateConnectionRequest_LockboxSecretSpec
+	SecretSpec isCreateConnectionRequest_SecretSpec `protobuf_oneof:"secret_spec"`
 	// ID of the folder to create the connection in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the connection.
@@ -38,13 +44,7 @@ type CreateConnectionRequest struct {
 	// Connection labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Connection parameters specific to the database or service type.
-	Params *ConnectionParams `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
-	// Secret specification for authentication.
-	//
-	// Types that are valid to be assigned to SecretSpec:
-	//
-	//	*CreateConnectionRequest_LockboxSecretSpec
-	SecretSpec    isCreateConnectionRequest_SecretSpec `protobuf_oneof:"secret_spec"`
+	Params        *ConnectionParams `protobuf:"bytes,5,opt,name=params,proto3" json:"params,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -79,6 +79,22 @@ func (*CreateConnectionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *CreateConnectionRequest) GetSecretSpec() isCreateConnectionRequest_SecretSpec {
+	if x != nil {
+		return x.SecretSpec
+	}
+	return nil
+}
+
+func (x *CreateConnectionRequest) GetLockboxSecretSpec() *LockboxSecretSpec {
+	if x != nil {
+		if x, ok := x.SecretSpec.(*CreateConnectionRequest_LockboxSecretSpec); ok {
+			return x.LockboxSecretSpec
+		}
+	}
+	return nil
+}
+
 func (x *CreateConnectionRequest) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
@@ -110,22 +126,6 @@ func (x *CreateConnectionRequest) GetLabels() map[string]string {
 func (x *CreateConnectionRequest) GetParams() *ConnectionParams {
 	if x != nil {
 		return x.Params
-	}
-	return nil
-}
-
-func (x *CreateConnectionRequest) GetSecretSpec() isCreateConnectionRequest_SecretSpec {
-	if x != nil {
-		return x.SecretSpec
-	}
-	return nil
-}
-
-func (x *CreateConnectionRequest) GetLockboxSecretSpec() *LockboxSecretSpec {
-	if x != nil {
-		if x, ok := x.SecretSpec.(*CreateConnectionRequest_LockboxSecretSpec); ok {
-			return x.LockboxSecretSpec
-		}
 	}
 	return nil
 }
@@ -543,7 +543,6 @@ type ListConnectionResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListConnectionRequest.page_size], use `next_page_token` as the value
 	// for the [ListConnectionRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -864,20 +863,20 @@ var File_yandex_cloud_connectionmanager_v1_connection_service_proto protoreflect
 
 const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/connectionmanager/v1/connection_service.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a2yandex/cloud/connectionmanager/v1/connection.proto\"\xd1\x03\n" +
-	"\x17CreateConnectionRequest\x12\x1b\n" +
+	":yandex/cloud/connectionmanager/v1/connection_service.proto\x12!yandex.cloud.connectionmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/connectionmanager/v1/connection.proto\x1a&yandex/cloud/operation/operation.proto\"\xd1\x03\n" +
+	"\x17CreateConnectionRequest\x12f\n" +
+	"\x13lockbox_secret_spec\x18\v \x01(\v24.yandex.cloud.connectionmanager.v1.LockboxSecretSpecH\x00R\x11lockboxSecretSpec\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12^\n" +
 	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntryR\x06labels\x12K\n" +
-	"\x06params\x18\x05 \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x12f\n" +
-	"\x13lockbox_secret_spec\x18\v \x01(\v24.yandex.cloud.connectionmanager.v1.LockboxSecretSpecH\x00R\x11lockboxSecretSpec\x1a9\n" +
+	"\x06params\x18\x05 \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
 	"\vsecret_specJ\x04\b\x06\x10\v\"?\n" +
 	"\x18CreateConnectionMetadata\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x9f\x03\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x99\x03\n" +
 	"\x17UpdateConnectionRequest\x12#\n" +
 	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -888,8 +887,7 @@ const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = 
 	"\x06params\x18\x06 \x01(\v23.yandex.cloud.connectionmanager.v1.ConnectionParamsR\x06params\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\n" +
-	"\"?\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x18UpdateConnectionMetadata\x12#\n" +
 	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\">\n" +
 	"\x17DeleteConnectionRequest\x12#\n" +
@@ -913,11 +911,11 @@ const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = 
 	"\n" +
 	"connection\x18\x01 \x03(\v2-.yandex.cloud.connectionmanager.v1.ConnectionR\n" +
 	"connection\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"G\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\";\n" +
 	"\x14GetConnectionRequest\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionIdJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04\"B\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"<\n" +
 	"\x15ResolveClusterRequest\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionIdJ\x04\b\x02\x10\x03\"[\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"[\n" +
 	"\x15DeleteVersionMetadata\x12#\n" +
 	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\x12\x1d\n" +
 	"\n" +
@@ -931,10 +929,10 @@ const file_yandex_cloud_connectionmanager_v1_connection_service_proto_rawDesc = 
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xc3\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xca\t\n" +
 	"\x11ConnectionService\x12\x95\x01\n" +
-	"\x03Get\x127.yandex.cloud.connectionmanager.v1.GetConnectionRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"&\x82\xd3\xe4\x93\x02 \x12\x1e/v1/connection/{connection_id}\x12\xa9\x01\n" +
-	"\x0eResolveCluster\x128.yandex.cloud.connectionmanager.v1.ResolveClusterRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\".\x82\xd3\xe4\x93\x02(\x12&/v1/connection/{connection_id}:resolve\x12\x94\x01\n" +
+	"\x03Get\x127.yandex.cloud.connectionmanager.v1.GetConnectionRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"&\x82\xd3\xe4\x93\x02 \x12\x1e/v1/connection/{connection_id}\x12\xb0\x01\n" +
+	"\x0eResolveCluster\x128.yandex.cloud.connectionmanager.v1.ResolveClusterRequest\x1a-.yandex.cloud.connectionmanager.v1.Connection\"5\x82\xd3\xe4\x93\x02/\x12-/v1/connection/resolveCluster/{connection_id}\x12\x94\x01\n" +
 	"\x04List\x128.yandex.cloud.connectionmanager.v1.ListConnectionRequest\x1a9.yandex.cloud.connectionmanager.v1.ListConnectionResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/connections\x12\xac\x01\n" +
 	"\x06Create\x12:.yandex.cloud.connectionmanager.v1.CreateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"C\xb2\xd2*&\n" +
 	"\x18CreateConnectionMetadata\x12\n" +
@@ -976,8 +974,8 @@ var file_yandex_cloud_connectionmanager_v1_connection_service_proto_goTypes = []
 	(*ListOperationsResponse)(nil),   // 12: yandex.cloud.connectionmanager.v1.ListOperationsResponse
 	nil,                              // 13: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntry
 	nil,                              // 14: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.LabelsEntry
-	(*ConnectionParams)(nil),         // 15: yandex.cloud.connectionmanager.v1.ConnectionParams
-	(*LockboxSecretSpec)(nil),        // 16: yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	(*LockboxSecretSpec)(nil),        // 15: yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	(*ConnectionParams)(nil),         // 16: yandex.cloud.connectionmanager.v1.ConnectionParams
 	(*fieldmaskpb.FieldMask)(nil),    // 17: google.protobuf.FieldMask
 	(*wrapperspb.BoolValue)(nil),     // 18: google.protobuf.BoolValue
 	(DBType)(0),                      // 19: yandex.cloud.connectionmanager.v1.DBType
@@ -985,12 +983,12 @@ var file_yandex_cloud_connectionmanager_v1_connection_service_proto_goTypes = []
 	(*operation.Operation)(nil),      // 21: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_connectionmanager_v1_connection_service_proto_depIdxs = []int32{
-	13, // 0: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntry
-	15, // 1: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
-	16, // 2: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.lockbox_secret_spec:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	15, // 0: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.lockbox_secret_spec:type_name -> yandex.cloud.connectionmanager.v1.LockboxSecretSpec
+	13, // 1: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.CreateConnectionRequest.LabelsEntry
+	16, // 2: yandex.cloud.connectionmanager.v1.CreateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
 	17, // 3: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
 	14, // 4: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.labels:type_name -> yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.LabelsEntry
-	15, // 5: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
+	16, // 5: yandex.cloud.connectionmanager.v1.UpdateConnectionRequest.params:type_name -> yandex.cloud.connectionmanager.v1.ConnectionParams
 	18, // 6: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_onpremise:type_name -> google.protobuf.BoolValue
 	18, // 7: yandex.cloud.connectionmanager.v1.ListConnectionRequest.is_manual:type_name -> google.protobuf.BoolValue
 	19, // 8: yandex.cloud.connectionmanager.v1.ListConnectionRequest.db_type:type_name -> yandex.cloud.connectionmanager.v1.DBType

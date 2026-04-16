@@ -464,7 +464,7 @@ var File_yandex_cloud_speechsense_v1_analysis_transcription_proto protoreflect.F
 
 const file_yandex_cloud_speechsense_v1_analysis_transcription_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/speechsense/v1/analysis/transcription.proto\x12$yandex.cloud.speechsense.v1.analysis\x1a\x1fgoogle/protobuf/timestamp.proto\x1a?yandex/cloud/speechsense/v1/analysis/utterance_statistics.proto\x1aAyandex/cloud/speechsense/v1/analysis/predefined_classifiers.proto\"\xc1\x01\n" +
+	"8yandex/cloud/speechsense/v1/analysis/transcription.proto\x12$yandex.cloud.speechsense.v1.analysis\x1a\x1fgoogle/protobuf/timestamp.proto\x1aAyandex/cloud/speechsense/v1/analysis/predefined_classifiers.proto\x1a?yandex/cloud/speechsense/v1/analysis/utterance_statistics.proto\"\xc1\x01\n" +
 	"\rTranscription\x12F\n" +
 	"\aphrases\x18\x01 \x03(\v2,.yandex.cloud.speechsense.v1.analysis.PhraseR\aphrases\x12h\n" +
 	"\x13algorithms_metadata\x18\x02 \x03(\v27.yandex.cloud.speechsense.v1.analysis.AlgorithmMetadataR\x12algorithmsMetadata\"\xfa\x02\n" +
@@ -550,8 +550,8 @@ func file_yandex_cloud_speechsense_v1_analysis_transcription_proto_init() {
 	if File_yandex_cloud_speechsense_v1_analysis_transcription_proto != nil {
 		return
 	}
-	file_yandex_cloud_speechsense_v1_analysis_utterance_statistics_proto_init()
 	file_yandex_cloud_speechsense_v1_analysis_predefined_classifiers_proto_init()
+	file_yandex_cloud_speechsense_v1_analysis_utterance_statistics_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -327,8 +327,6 @@ func (x *BrokerPassword) GetCreatedAt() *timestamppb.Timestamp {
 
 type LogOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Is logging from broker disabled.
-	Disabled bool `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	// Log entries destination.
 	//
 	// Types that are valid to be assigned to Destination:
@@ -336,8 +334,9 @@ type LogOptions struct {
 	//	*LogOptions_LogGroupId
 	//	*LogOptions_FolderId
 	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
+	// Is logging from broker disabled.
+	Disabled bool `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	// Minimum log entry level.
-	//
 	// See [LogLevel.Level] for details.
 	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -374,13 +373,6 @@ func (*LogOptions) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_iot_broker_v1_broker_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *LogOptions) GetDisabled() bool {
-	if x != nil {
-		return x.Disabled
-	}
-	return false
-}
-
 func (x *LogOptions) GetDestination() isLogOptions_Destination {
 	if x != nil {
 		return x.Destination
@@ -404,6 +396,13 @@ func (x *LogOptions) GetFolderId() string {
 		}
 	}
 	return ""
+}
+
+func (x *LogOptions) GetDisabled() bool {
+	if x != nil {
+		return x.Disabled
+	}
+	return false
 }
 
 func (x *LogOptions) GetMinLevel() v1.LogLevel_Level {
@@ -468,11 +467,11 @@ const file_yandex_cloud_iot_broker_v1_broker_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x8a\x02\n" +
 	"\n" +
-	"LogOptions\x12\x1a\n" +
-	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12G\n" +
+	"LogOptions\x12G\n" +
 	"\flog_group_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
 	"logGroupId\x12B\n" +
-	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12D\n" +
+	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12\x1a\n" +
+	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
 	"\vdestinationBg\n" +
 	"\x1eyandex.cloud.api.iot.broker.v1ZEgithub.com/yandex-cloud/go-genproto/yandex/cloud/iot/broker/v1;brokerb\x06proto3"

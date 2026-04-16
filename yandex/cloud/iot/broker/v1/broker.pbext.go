@@ -73,10 +73,6 @@ func (m *LogOptions) SetDestination(v LogOptions_Destination) {
 	m.Destination = v
 }
 
-func (m *LogOptions) SetDisabled(v bool) {
-	m.Disabled = v
-}
-
 func (m *LogOptions) SetLogGroupId(v string) {
 	m.Destination = &LogOptions_LogGroupId{
 		LogGroupId: v,
@@ -87,6 +83,10 @@ func (m *LogOptions) SetFolderId(v string) {
 	m.Destination = &LogOptions_FolderId{
 		FolderId: v,
 	}
+}
+
+func (m *LogOptions) SetDisabled(v bool) {
+	m.Disabled = v
 }
 
 func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {

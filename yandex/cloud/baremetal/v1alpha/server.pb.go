@@ -192,6 +192,8 @@ type Server struct {
 	// Array of network interfaces that are attached to the instance.
 	NetworkInterfaces []*NetworkInterface `protobuf:"bytes,18,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// ID of the configuration that was used to create the server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
 	ConfigurationId string `protobuf:"bytes,20,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// Array of disks that are attached to the server.
 	Disks []*Disk `protobuf:"bytes,21,rep,name=disks,proto3" json:"disks,omitempty"`
@@ -303,6 +305,7 @@ func (x *Server) GetNetworkInterfaces() []*NetworkInterface {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
 func (x *Server) GetConfigurationId() string {
 	if x != nil {
 		return x.ConfigurationId
@@ -333,19 +336,6 @@ func (x *Server) GetLabels() map[string]string {
 
 type NetworkInterface struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network interface.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// MAC address that is assigned to the network interface.
-	//
-	// Read only field.
-	MacAddress string `protobuf:"bytes,2,opt,name=mac_address,json=macAddress,proto3" json:"mac_address,omitempty"`
-	// @deprecated. Use `interface.ipaddress` instead.
-	// IPv4 address that is assigned to the server for this network interface.
-	//
-	// Read only field.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
-	IpAddress string `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
 	// @deprecated. Use `interface` instead.
 	// Subnet that the network interface belongs to.
 	//
@@ -358,7 +348,18 @@ type NetworkInterface struct {
 	//
 	//	*NetworkInterface_PrivateInterface
 	//	*NetworkInterface_PublicInterface
-	Interface     isNetworkInterface_Interface `protobuf_oneof:"interface"`
+	Interface isNetworkInterface_Interface `protobuf_oneof:"interface"`
+	// ID of the network interface.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// MAC address that is assigned to the network interface.
+	// Read only field.
+	MacAddress string `protobuf:"bytes,2,opt,name=mac_address,json=macAddress,proto3" json:"mac_address,omitempty"`
+	// @deprecated. Use `interface.ipaddress` instead.
+	// IPv4 address that is assigned to the server for this network interface.
+	// Read only field.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
+	IpAddress     string `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -391,28 +392,6 @@ func (x *NetworkInterface) ProtoReflect() protoreflect.Message {
 // Deprecated: Use NetworkInterface.ProtoReflect.Descriptor instead.
 func (*NetworkInterface) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v1alpha_server_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *NetworkInterface) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *NetworkInterface) GetMacAddress() string {
-	if x != nil {
-		return x.MacAddress
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
-func (x *NetworkInterface) GetIpAddress() string {
-	if x != nil {
-		return x.IpAddress
-	}
-	return ""
 }
 
 func (x *NetworkInterface) GetSubnet() isNetworkInterface_Subnet {
@@ -467,6 +446,28 @@ func (x *NetworkInterface) GetPublicInterface() *PublicNetworkInterface {
 	return nil
 }
 
+func (x *NetworkInterface) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *NetworkInterface) GetMacAddress() string {
+	if x != nil {
+		return x.MacAddress
+	}
+	return ""
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
+func (x *NetworkInterface) GetIpAddress() string {
+	if x != nil {
+		return x.IpAddress
+	}
+	return ""
+}
+
 type isNetworkInterface_Subnet interface {
 	isNetworkInterface_Subnet()
 }
@@ -512,11 +513,9 @@ type PrivateNetworkInterface struct {
 	// ID of the private subnet which is used as native subnet for interface.
 	NativeSubnetId string `protobuf:"bytes,1,opt,name=native_subnet_id,json=nativeSubnetId,proto3" json:"native_subnet_id,omitempty"`
 	// IPv4 address that is assigned to the server for this network interface.
-	//
 	// Read only field.
 	IpAddress string `protobuf:"bytes,2,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
 	// Limit of MAC addresses in the native subnet.
-	//
 	// Read only field.
 	MacLimit int64 `protobuf:"varint,3,opt,name=mac_limit,json=macLimit,proto3" json:"mac_limit,omitempty"`
 	// Array of VLAN subinterfaces. Additional tagged subnets for the interface.
@@ -588,11 +587,9 @@ type VLANSubinterface struct {
 	// ID of the private subnet which is used as tagged subnet for interface.
 	TaggedSubnetId string `protobuf:"bytes,1,opt,name=tagged_subnet_id,json=taggedSubnetId,proto3" json:"tagged_subnet_id,omitempty"`
 	// IPv4 address that is assigned to the VLAN subinterface.
-	//
 	// Read only field.
 	IpAddress string `protobuf:"bytes,2,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
 	// Limit of MAC addresses in the tagged subnet.
-	//
 	// Read only field.
 	MacLimit      int64 `protobuf:"varint,3,opt,name=mac_limit,json=macLimit,proto3" json:"mac_limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -652,20 +649,7 @@ func (x *VLANSubinterface) GetMacLimit() int64 {
 
 type PublicNetworkInterface struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// IPv4 address that is assigned to the server for this network interface.
-	//
-	// Read only field.
-	IpAddress string `protobuf:"bytes,1,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	// ID of the public subnet which is used as native subnet for interface.
-	//
-	// Read only field.
-	NativeSubnetId string `protobuf:"bytes,2,opt,name=native_subnet_id,json=nativeSubnetId,proto3" json:"native_subnet_id,omitempty"`
-	// Limit of MAC addresses in the native subnet.
-	//
-	// Read only field.
-	MacLimit int64 `protobuf:"varint,3,opt,name=mac_limit,json=macLimit,proto3" json:"mac_limit,omitempty"`
 	// Native subnet configuration.
-	//
 	// Input only field.
 	//
 	// Types that are valid to be assigned to NativeSubnetConfig:
@@ -673,8 +657,17 @@ type PublicNetworkInterface struct {
 	//	*PublicNetworkInterface_NativeSubnet_
 	//	*PublicNetworkInterface_NewNativeSubnet_
 	NativeSubnetConfig isPublicNetworkInterface_NativeSubnetConfig `protobuf_oneof:"native_subnet_config"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// IPv4 address that is assigned to the server for this network interface.
+	// Read only field.
+	IpAddress string `protobuf:"bytes,1,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
+	// ID of the public subnet which is used as native subnet for interface.
+	// Read only field.
+	NativeSubnetId string `protobuf:"bytes,2,opt,name=native_subnet_id,json=nativeSubnetId,proto3" json:"native_subnet_id,omitempty"`
+	// Limit of MAC addresses in the native subnet.
+	// Read only field.
+	MacLimit      int64 `protobuf:"varint,3,opt,name=mac_limit,json=macLimit,proto3" json:"mac_limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PublicNetworkInterface) Reset() {
@@ -707,27 +700,6 @@ func (*PublicNetworkInterface) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v1alpha_server_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *PublicNetworkInterface) GetIpAddress() string {
-	if x != nil {
-		return x.IpAddress
-	}
-	return ""
-}
-
-func (x *PublicNetworkInterface) GetNativeSubnetId() string {
-	if x != nil {
-		return x.NativeSubnetId
-	}
-	return ""
-}
-
-func (x *PublicNetworkInterface) GetMacLimit() int64 {
-	if x != nil {
-		return x.MacLimit
-	}
-	return 0
-}
-
 func (x *PublicNetworkInterface) GetNativeSubnetConfig() isPublicNetworkInterface_NativeSubnetConfig {
 	if x != nil {
 		return x.NativeSubnetConfig
@@ -753,20 +725,39 @@ func (x *PublicNetworkInterface) GetNewNativeSubnet() *PublicNetworkInterface_Ne
 	return nil
 }
 
+func (x *PublicNetworkInterface) GetIpAddress() string {
+	if x != nil {
+		return x.IpAddress
+	}
+	return ""
+}
+
+func (x *PublicNetworkInterface) GetNativeSubnetId() string {
+	if x != nil {
+		return x.NativeSubnetId
+	}
+	return ""
+}
+
+func (x *PublicNetworkInterface) GetMacLimit() int64 {
+	if x != nil {
+		return x.MacLimit
+	}
+	return 0
+}
+
 type isPublicNetworkInterface_NativeSubnetConfig interface {
 	isPublicNetworkInterface_NativeSubnetConfig()
 }
 
 type PublicNetworkInterface_NativeSubnet_ struct {
 	// Use existing native subnet.
-	//
 	// Input only field.
 	NativeSubnet *PublicNetworkInterface_NativeSubnet `protobuf:"bytes,6,opt,name=native_subnet,json=nativeSubnet,proto3,oneof"`
 }
 
 type PublicNetworkInterface_NewNativeSubnet_ struct {
 	// Create new native subnet.
-	//
 	// Input only field.
 	NewNativeSubnet *PublicNetworkInterface_NewNativeSubnet `protobuf:"bytes,7,opt,name=new_native_subnet,json=newNativeSubnet,proto3,oneof"`
 }
@@ -823,7 +814,6 @@ func (x *PrivateSubnetNetworkInterface) GetPrivateSubnetId() string {
 type PublicSubnetNetworkInterface struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the public subnet.
-	//
 	// A new ephemeral public subnet will be created if not specified.
 	PublicSubnetId string `protobuf:"bytes,1,opt,name=public_subnet_id,json=publicSubnetId,proto3" json:"public_subnet_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -1026,7 +1016,7 @@ var File_yandex_cloud_baremetal_v1alpha_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\"\x86\b\n" +
+	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\"\xe6\a\n" +
 	"\x06Server\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
@@ -1039,8 +1029,8 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\vos_settings\x18\n" +
 	" \x01(\v2*.yandex.cloud.baremetal.v1alpha.OsSettingsR\n" +
 	"osSettings\x12_\n" +
-	"\x12network_interfaces\x18\x12 \x03(\v20.yandex.cloud.baremetal.v1alpha.NetworkInterfaceR\x11networkInterfaces\x12)\n" +
-	"\x10configuration_id\x18\x14 \x01(\tR\x0fconfigurationId\x12:\n" +
+	"\x12network_interfaces\x18\x12 \x03(\v20.yandex.cloud.baremetal.v1alpha.NetworkInterfaceR\x11networkInterfaces\x12-\n" +
+	"\x10configuration_id\x18\x14 \x01(\tB\x02\x18\x01R\x0fconfigurationId\x12:\n" +
 	"\x05disks\x18\x15 \x03(\v2$.yandex.cloud.baremetal.v1alpha.DiskR\x05disks\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12K\n" +
@@ -1062,21 +1052,19 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\bUPDATING\x10\n" +
 	"\x12\x0f\n" +
 	"\vQUARANTINED\x10\f\x12\v\n" +
-	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rJ\x04\b\b\x10\tJ\x04\b\v\x10\fJ\x04\b\f\x10\rJ\x04\b\x0f\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10\x17J\x04\b\x17\x10\x18J\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fJ\x04\b\x18\x10dJ\x05\be\x10\xc8\x01\"\xb7\x04\n" +
-	"\x10NetworkInterface\x12\x0e\n" +
+	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10dJ\x05\be\x10\xc8\x01\"\xab\x04\n" +
+	"\x10NetworkInterface\x12j\n" +
+	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +
+	"\rpublic_subnet\x18\b \x01(\v2<.yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterfaceB\x02\x18\x01H\x00R\fpublicSubnet\x12f\n" +
+	"\x11private_interface\x18\f \x01(\v27.yandex.cloud.baremetal.v1alpha.PrivateNetworkInterfaceH\x01R\x10privateInterface\x12c\n" +
+	"\x10public_interface\x18\r \x01(\v26.yandex.cloud.baremetal.v1alpha.PublicNetworkInterfaceH\x01R\x0fpublicInterface\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
 	"macAddress\x12!\n" +
 	"\n" +
-	"ip_address\x18\x03 \x01(\tB\x02\x18\x01R\tipAddress\x12j\n" +
-	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +
-	"\rpublic_subnet\x18\b \x01(\v2<.yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterfaceB\x02\x18\x01H\x00R\fpublicSubnet\x12f\n" +
-	"\x11private_interface\x18\f \x01(\v27.yandex.cloud.baremetal.v1alpha.PrivateNetworkInterfaceH\x01R\x10privateInterface\x12c\n" +
-	"\x10public_interface\x18\r \x01(\v26.yandex.cloud.baremetal.v1alpha.PublicNetworkInterfaceH\x01R\x0fpublicInterfaceB\b\n" +
+	"ip_address\x18\x03 \x01(\tB\x02\x18\x01R\tipAddressB\b\n" +
 	"\x06subnetB\v\n" +
-	"\tinterfaceJ\x04\b\x04\x10\aJ\x04\b\t\x10\n" +
-	"J\x04\b\n" +
-	"\x10\vJ\x04\b\v\x10\f\"\xe0\x01\n" +
+	"\tinterfaceJ\x04\b\x04\x10\aJ\x04\b\t\x10\f\"\xe0\x01\n" +
 	"\x17PrivateNetworkInterface\x12(\n" +
 	"\x10native_subnet_id\x18\x01 \x01(\tR\x0enativeSubnetId\x12\x1d\n" +
 	"\n" +
@@ -1087,14 +1075,14 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\x10tagged_subnet_id\x18\x01 \x01(\tR\x0etaggedSubnetId\x12\x1d\n" +
 	"\n" +
 	"ip_address\x18\x02 \x01(\tR\tipAddress\x12\x1b\n" +
-	"\tmac_limit\x18\x03 \x01(\x03R\bmacLimit\"\x8e\x05\n" +
-	"\x16PublicNetworkInterface\x12\x1d\n" +
+	"\tmac_limit\x18\x03 \x01(\x03R\bmacLimit\"\x88\x05\n" +
+	"\x16PublicNetworkInterface\x12j\n" +
+	"\rnative_subnet\x18\x06 \x01(\v2C.yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NativeSubnetH\x00R\fnativeSubnet\x12t\n" +
+	"\x11new_native_subnet\x18\a \x01(\v2F.yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnetH\x00R\x0fnewNativeSubnet\x12\x1d\n" +
 	"\n" +
 	"ip_address\x18\x01 \x01(\tR\tipAddress\x12(\n" +
 	"\x10native_subnet_id\x18\x02 \x01(\tR\x0enativeSubnetId\x12\x1b\n" +
-	"\tmac_limit\x18\x03 \x01(\x03R\bmacLimit\x12j\n" +
-	"\rnative_subnet\x18\x06 \x01(\v2C.yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NativeSubnetH\x00R\fnativeSubnet\x12t\n" +
-	"\x11new_native_subnet\x18\a \x01(\v2F.yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnetH\x00R\x0fnewNativeSubnet\x1a+\n" +
+	"\tmac_limit\x18\x03 \x01(\x03R\bmacLimit\x1a+\n" +
 	"\fNativeSubnet\x12\x1b\n" +
 	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x1a\xda\x01\n" +
 	"\x0fNewNativeSubnet\x12~\n" +
@@ -1104,7 +1092,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\x04DHCP\x10\x01\x12\n" +
 	"\n" +
 	"\x06STATIC\x10\x02B\x16\n" +
-	"\x14native_subnet_configJ\x04\b\x04\x10\x05J\x04\b\x05\x10\x06\"K\n" +
+	"\x14native_subnet_configJ\x04\b\x04\x10\x06\"K\n" +
 	"\x1dPrivateSubnetNetworkInterface\x12*\n" +
 	"\x11private_subnet_id\x18\x01 \x01(\tR\x0fprivateSubnetId\"H\n" +
 	"\x1cPublicSubnetNetworkInterface\x12(\n" +

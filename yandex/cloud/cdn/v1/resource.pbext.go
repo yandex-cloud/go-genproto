@@ -236,10 +236,6 @@ func (m *ResourceOptions_EdgeCacheSettings) SetValuesVariant(v ResourceOptions_E
 	m.ValuesVariant = v
 }
 
-func (m *ResourceOptions_EdgeCacheSettings) SetEnabled(v bool) {
-	m.Enabled = v
-}
-
 func (m *ResourceOptions_EdgeCacheSettings) SetValue(v *ResourceOptions_CachingTimes) {
 	m.ValuesVariant = &ResourceOptions_EdgeCacheSettings_Value{
 		Value: v,
@@ -250,6 +246,10 @@ func (m *ResourceOptions_EdgeCacheSettings) SetDefaultValue(v int64) {
 	m.ValuesVariant = &ResourceOptions_EdgeCacheSettings_DefaultValue{
 		DefaultValue: v,
 	}
+}
+
+func (m *ResourceOptions_EdgeCacheSettings) SetEnabled(v bool) {
+	m.Enabled = v
 }
 
 func (m *ResourceOptions_StringVariableMapOption) SetEnabled(v bool) {

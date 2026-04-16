@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MetadataService_GetUsage_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetUsage"
-	MetadataService_GetLabel_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetLabel"
-	MetadataService_GetCloud_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetCloud"
-	MetadataService_GetResourceIDs_FullMethodName = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetResourceIDs"
+	MetadataService_GetUsage_FullMethodName           = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetUsage"
+	MetadataService_GetServiceInstance_FullMethodName = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetServiceInstance"
+	MetadataService_GetLabel_FullMethodName           = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetLabel"
+	MetadataService_GetCloud_FullMethodName           = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetCloud"
+	MetadataService_GetResources_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.MetadataService/GetResources"
 )
 
 // MetadataServiceClient is the client API for MetadataService service.
@@ -65,15 +66,43 @@ type MetadataServiceClient interface {
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
 	//
+	// This method supports additional filtering by cloud_ids, label_keys, service_ids, and sku_ids.
+	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
+	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
+	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetUsage(ctx context.Context, in *GetUsageRequest, opts ...grpc.CallOption) (*GetUsageResponse, error)
+	// GetServiceInstance returns service instance usage metadata for a specific billing account and date range.
+	//
+	// This method provides a view of all available service instance entities
+	// that can be used for usage reporting within the specified date range
+	// for the billing account and all its sub-accounts.
+	//
+	// Implementation details:
+	// - All data is filtered to only include items that had usage during the specified date range
+	//
+	// Error handling:
+	// - Returns INVALID_ARGUMENT if the request parameters fail validation
+	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
+	// - Returns PERMISSION_DENIED if the user lacks required permissions
+	// - Returns INTERNAL for internal server errors
+	//
+	// This method supports additional filtering by service_instance_ids.
+	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
+	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
+	//
+	// Required permissions:
+	// - `billing.accounts.getReport` on the specified billing account
+	GetServiceInstance(ctx context.Context, in *GetServiceInstanceRequest, opts ...grpc.CallOption) (*GetServiceInstanceResponse, error)
 	// GetLabel returns available label keys and values for a specific billing account
 	// with pagination support.
 	//
 	// This method retrieves all available label values for a specified label key
 	// within the given date range. It supports filtering by label value substring
 	// and provides pagination for handling large result sets.
+	//
+	// This method can additionally filter label values by provided clouds and folders.
 	//
 	// The method can be used in several ways:
 	//   - With label_key only: Returns all values for that key with pagination
@@ -123,16 +152,21 @@ type MetadataServiceClient interface {
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetCloud(ctx context.Context, in *GetCloudRequest, opts ...grpc.CallOption) (*GetCloudResponse, error)
-	// GetResourceIDs returns all resource IDs for a specific billing account and date range
-	// with pagination support.
+	// GetResources returns available resources for specified service instances within a billing account
+	// with optional filtering by service instance IDs, resource IDs and pagination support.
 	//
-	// This method retrieves a list of all resource IDs that have usage records
-	// within the specified date range and billing account. The results can be
-	// filtered by a case-insensitive substring search on the resource ID.
+	// This method returns a hierarchical view of service instances and their resources that the user
+	// has access to within the specified date range. Results can be filtered by
+	// specific service instance IDs and/or resource IDs, and pagination is supported for handling
+	// large result sets.
 	//
 	// Implementation details:
+	// - Filtering by resources is done using case-insensitive substring matching
 	// - Filtering is done using case-insensitive substring matching
-	// - Only resource IDs with actual usage in the period are returned
+	// - Only service instances with at least one resource are included in the response
+	// - Resource pagination is based on resource IDs, ordered alphabetically
+	// - NextPageToken is only returned when there are more results available
+	// - Base64-encoded page tokens are used for pagination state
 	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
@@ -142,9 +176,7 @@ type MetadataServiceClient interface {
 	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
-	//
-	// Note: This RPC method is not yet implemented and will return UNIMPLEMENTED.
-	GetResourceIDs(ctx context.Context, in *GetResourceIDsRequest, opts ...grpc.CallOption) (*GetResourceIDsResponse, error)
+	GetResources(ctx context.Context, in *GetResourcesRequest, opts ...grpc.CallOption) (*GetResourcesResponse, error)
 }
 
 type metadataServiceClient struct {
@@ -159,6 +191,16 @@ func (c *metadataServiceClient) GetUsage(ctx context.Context, in *GetUsageReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUsageResponse)
 	err := c.cc.Invoke(ctx, MetadataService_GetUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *metadataServiceClient) GetServiceInstance(ctx context.Context, in *GetServiceInstanceRequest, opts ...grpc.CallOption) (*GetServiceInstanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceInstanceResponse)
+	err := c.cc.Invoke(ctx, MetadataService_GetServiceInstance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -185,10 +227,10 @@ func (c *metadataServiceClient) GetCloud(ctx context.Context, in *GetCloudReques
 	return out, nil
 }
 
-func (c *metadataServiceClient) GetResourceIDs(ctx context.Context, in *GetResourceIDsRequest, opts ...grpc.CallOption) (*GetResourceIDsResponse, error) {
+func (c *metadataServiceClient) GetResources(ctx context.Context, in *GetResourcesRequest, opts ...grpc.CallOption) (*GetResourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResourceIDsResponse)
-	err := c.cc.Invoke(ctx, MetadataService_GetResourceIDs_FullMethodName, in, out, cOpts...)
+	out := new(GetResourcesResponse)
+	err := c.cc.Invoke(ctx, MetadataService_GetResources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -235,15 +277,43 @@ type MetadataServiceServer interface {
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
 	//
+	// This method supports additional filtering by cloud_ids, label_keys, service_ids, and sku_ids.
+	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
+	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
+	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetUsage(context.Context, *GetUsageRequest) (*GetUsageResponse, error)
+	// GetServiceInstance returns service instance usage metadata for a specific billing account and date range.
+	//
+	// This method provides a view of all available service instance entities
+	// that can be used for usage reporting within the specified date range
+	// for the billing account and all its sub-accounts.
+	//
+	// Implementation details:
+	// - All data is filtered to only include items that had usage during the specified date range
+	//
+	// Error handling:
+	// - Returns INVALID_ARGUMENT if the request parameters fail validation
+	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
+	// - Returns PERMISSION_DENIED if the user lacks required permissions
+	// - Returns INTERNAL for internal server errors
+	//
+	// This method supports additional filtering by service_instance_ids.
+	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
+	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
+	//
+	// Required permissions:
+	// - `billing.accounts.getReport` on the specified billing account
+	GetServiceInstance(context.Context, *GetServiceInstanceRequest) (*GetServiceInstanceResponse, error)
 	// GetLabel returns available label keys and values for a specific billing account
 	// with pagination support.
 	//
 	// This method retrieves all available label values for a specified label key
 	// within the given date range. It supports filtering by label value substring
 	// and provides pagination for handling large result sets.
+	//
+	// This method can additionally filter label values by provided clouds and folders.
 	//
 	// The method can be used in several ways:
 	//   - With label_key only: Returns all values for that key with pagination
@@ -293,16 +363,21 @@ type MetadataServiceServer interface {
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetCloud(context.Context, *GetCloudRequest) (*GetCloudResponse, error)
-	// GetResourceIDs returns all resource IDs for a specific billing account and date range
-	// with pagination support.
+	// GetResources returns available resources for specified service instances within a billing account
+	// with optional filtering by service instance IDs, resource IDs and pagination support.
 	//
-	// This method retrieves a list of all resource IDs that have usage records
-	// within the specified date range and billing account. The results can be
-	// filtered by a case-insensitive substring search on the resource ID.
+	// This method returns a hierarchical view of service instances and their resources that the user
+	// has access to within the specified date range. Results can be filtered by
+	// specific service instance IDs and/or resource IDs, and pagination is supported for handling
+	// large result sets.
 	//
 	// Implementation details:
+	// - Filtering by resources is done using case-insensitive substring matching
 	// - Filtering is done using case-insensitive substring matching
-	// - Only resource IDs with actual usage in the period are returned
+	// - Only service instances with at least one resource are included in the response
+	// - Resource pagination is based on resource IDs, ordered alphabetically
+	// - NextPageToken is only returned when there are more results available
+	// - Base64-encoded page tokens are used for pagination state
 	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
@@ -312,9 +387,7 @@ type MetadataServiceServer interface {
 	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
-	//
-	// Note: This RPC method is not yet implemented and will return UNIMPLEMENTED.
-	GetResourceIDs(context.Context, *GetResourceIDsRequest) (*GetResourceIDsResponse, error)
+	GetResources(context.Context, *GetResourcesRequest) (*GetResourcesResponse, error)
 }
 
 // UnimplementedMetadataServiceServer should be embedded to have
@@ -327,14 +400,17 @@ type UnimplementedMetadataServiceServer struct{}
 func (UnimplementedMetadataServiceServer) GetUsage(context.Context, *GetUsageRequest) (*GetUsageResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUsage not implemented")
 }
+func (UnimplementedMetadataServiceServer) GetServiceInstance(context.Context, *GetServiceInstanceRequest) (*GetServiceInstanceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetServiceInstance not implemented")
+}
 func (UnimplementedMetadataServiceServer) GetLabel(context.Context, *GetLabelRequest) (*GetLabelResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetLabel not implemented")
 }
 func (UnimplementedMetadataServiceServer) GetCloud(context.Context, *GetCloudRequest) (*GetCloudResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetCloud not implemented")
 }
-func (UnimplementedMetadataServiceServer) GetResourceIDs(context.Context, *GetResourceIDsRequest) (*GetResourceIDsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetResourceIDs not implemented")
+func (UnimplementedMetadataServiceServer) GetResources(context.Context, *GetResourcesRequest) (*GetResourcesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetResources not implemented")
 }
 func (UnimplementedMetadataServiceServer) testEmbeddedByValue() {}
 
@@ -370,6 +446,24 @@ func _MetadataService_GetUsage_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MetadataServiceServer).GetUsage(ctx, req.(*GetUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MetadataService_GetServiceInstance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MetadataServiceServer).GetServiceInstance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MetadataService_GetServiceInstance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MetadataServiceServer).GetServiceInstance(ctx, req.(*GetServiceInstanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -410,20 +504,20 @@ func _MetadataService_GetCloud_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MetadataService_GetResourceIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetResourceIDsRequest)
+func _MetadataService_GetResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourcesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MetadataServiceServer).GetResourceIDs(ctx, in)
+		return srv.(MetadataServiceServer).GetResources(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MetadataService_GetResourceIDs_FullMethodName,
+		FullMethod: MetadataService_GetResources_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetadataServiceServer).GetResourceIDs(ctx, req.(*GetResourceIDsRequest))
+		return srv.(MetadataServiceServer).GetResources(ctx, req.(*GetResourcesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -440,6 +534,10 @@ var MetadataService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MetadataService_GetUsage_Handler,
 		},
 		{
+			MethodName: "GetServiceInstance",
+			Handler:    _MetadataService_GetServiceInstance_Handler,
+		},
+		{
 			MethodName: "GetLabel",
 			Handler:    _MetadataService_GetLabel_Handler,
 		},
@@ -448,8 +546,8 @@ var MetadataService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MetadataService_GetCloud_Handler,
 		},
 		{
-			MethodName: "GetResourceIDs",
-			Handler:    _MetadataService_GetResourceIDs_Handler,
+			MethodName: "GetResources",
+			Handler:    _MetadataService_GetResources_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

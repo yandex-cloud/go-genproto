@@ -233,6 +233,10 @@ func (m *HttpHandler) SetRewriteRequestId(v bool) {
 	m.RewriteRequestId = v
 }
 
+func (m *HttpHandler) SetPreserveHttp1HeaderCasing(v bool) {
+	m.PreserveHttp1HeaderCasing = v
+}
+
 func (m *Redirects) SetHttpToHttps(v bool) {
 	m.HttpToHttps = v
 }

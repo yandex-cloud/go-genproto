@@ -85,6 +85,22 @@ type UsageReportRequest struct {
 	// Note: The filter logic is (value1 OR value2 OR ...) for each key,
 	// and (key1 AND key2 AND ...) between different keys.
 	Labels map[string]*LabelList `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Optional. Controls the logic for combining different label filters.
+	// When false (default): AND logic between different label keys - resources
+	// must match ALL specified label conditions. When true: OR logic between
+	// different label keys - resources must match ANY specified label condition.
+	// Example with labels_or_filter_logic = false (AND logic):
+	// labels = {"env": ["prod"], "team": ["finance"]}
+	// Returns resources that have BOTH env=prod AND team=finance
+	//
+	// Example with labels_or_filter_logic = true (OR logic):
+	// labels = {"env": ["prod"], "team": ["finance"]}
+	// Returns resources that have EITHER env=prod OR team=finance (or both)
+	//
+	// Note: Within each label key, multiple values are always combined with OR
+	// logic. For example: {"env": ["prod", "test"]} always means env=prod OR
+	// env=test
+	LabelsOrFilterLogic bool `protobuf:"varint,12,opt,name=labels_or_filter_logic,json=labelsOrFilterLogic,proto3" json:"labels_or_filter_logic,omitempty"`
 	// Optional. List of resource IDs to filter the data.
 	// If specified, only usage data from these specific resources (e.g., individual VMs, disks) will be included.
 	// If omitted, data from all resources used by the billing account will be included.
@@ -101,8 +117,13 @@ type UsageReportRequest struct {
 	// This setting affects the time series data returned in the periodic field of each entity.
 	// If omitted, the service will typically use DAY as the default granularity.
 	AggregationPeriod TimeGrouping `protobuf:"varint,10,opt,name=aggregation_period,json=aggregationPeriod,proto3,enum=yandex.cloud.billing.usage_records.v1.TimeGrouping" json:"aggregation_period,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Optional. List of service instance IDs to filter the data.
+	// If specified, only usage data from these specific service instances (e.g., cloud instances,
+	// DataLens instances, Tracker instances, Cloud Video instances) will be included.
+	// If omitted, data from all service instances used by the billing account will be included.
+	ServiceInstanceIds []string `protobuf:"bytes,11,rep,name=service_instance_ids,json=serviceInstanceIds,proto3" json:"service_instance_ids,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UsageReportRequest) Reset() {
@@ -191,6 +212,13 @@ func (x *UsageReportRequest) GetLabels() map[string]*LabelList {
 	return nil
 }
 
+func (x *UsageReportRequest) GetLabelsOrFilterLogic() bool {
+	if x != nil {
+		return x.LabelsOrFilterLogic
+	}
+	return false
+}
+
 func (x *UsageReportRequest) GetResourceIds() []string {
 	if x != nil {
 		return x.ResourceIds
@@ -203,6 +231,13 @@ func (x *UsageReportRequest) GetAggregationPeriod() TimeGrouping {
 		return x.AggregationPeriod
 	}
 	return TimeGrouping_TIME_GROUPING_UNSPECIFIED
+}
+
+func (x *UsageReportRequest) GetServiceInstanceIds() []string {
+	if x != nil {
+		return x.ServiceInstanceIds
+	}
+	return nil
 }
 
 // Response for usage report requests by billing account.
@@ -713,7 +748,7 @@ func (x *SKUUsageReportResponse) GetEntitiesData() []*SKUUsageReportEntityData {
 // with both summary totals and detailed breakdowns for each individual resource.
 // The response includes:
 // 1. Overall totals for the entire period (cost, credits, expense)
-// 2. Entity-level totals for each resource
+// 2. Entity-level totals for each unique resource-id and service instance type combination
 // 3. Time series breakdown for each resource according to the requested aggregation period
 type ResourceUsageReportResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -908,11 +943,113 @@ func (x *LabelKeyUsageReportResponse) GetEntitiesData() []*LabelUsageReportEntit
 	return nil
 }
 
+// Response for usage report requests by service instance.
+//
+// Contains aggregated usage, cost, and credit information organized by service instance entities,
+// with both summary totals and detailed breakdowns for each service instance. Service instances
+// represent individual billable entities such as cloud instances, DataLens instances, Tracker
+// instances, Cloud Video instances, and other service-specific instances.
+// The response includes:
+// 1. Overall totals for the entire period (cost, credits, expense)
+// 2. Entity-level totals for each service instance
+// 3. Time series breakdown for each service instance according to the requested aggregation period
+type ServiceInstanceUsageReportResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Currency code (e.g., "RUB", "USD") for all monetary values in the response.
+	// Determined by the billing account's settings.
+	Currency Currency `protobuf:"varint,1,opt,name=currency,proto3,enum=yandex.cloud.billing.usage_records.v1.Currency" json:"currency,omitempty"`
+	// Total usage cost for the selected time period.
+	// This represents the raw cost before any credits or discounts are applied.
+	// Calculated based on the resource consumption and the corresponding price rates.
+	Cost *StringDecimal `protobuf:"bytes,2,opt,name=cost,proto3" json:"cost,omitempty"`
+	// Total credits (monetary grants, volume incentives, committed use discounts, and free credits) applied in the selected period.
+	// Contains a detailed breakdown of all credit types that reduced the final billable amount.
+	CreditDetails *CreditDetails `protobuf:"bytes,3,opt,name=credit_details,json=creditDetails,proto3" json:"credit_details,omitempty"`
+	// Total expense (including cost and credit) for the selected time period.
+	// This is the final billable amount after all credits have been applied.
+	// Formula: expense = cost - sum of all credits.
+	Expense *StringDecimal `protobuf:"bytes,4,opt,name=expense,proto3" json:"expense,omitempty"`
+	// Detailed usage and billing data for each service instance entity.
+	// This field contains a structured breakdown of costs, credits, and expenses
+	// for each individual service instance, including:
+	// 1. Entity-level totals for the entire period (cost, credits, expense)
+	// 2. Time series data broken down by the specified aggregation period (day/week/month/quarter/year)
+	// This represents the second and third levels in the overall three-level response structure.
+	EntitiesData  []*ServiceInstanceUsageReportEntityData `protobuf:"bytes,5,rep,name=entities_data,json=entitiesData,proto3" json:"entities_data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ServiceInstanceUsageReportResponse) Reset() {
+	*x = ServiceInstanceUsageReportResponse{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServiceInstanceUsageReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServiceInstanceUsageReportResponse) ProtoMessage() {}
+
+func (x *ServiceInstanceUsageReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServiceInstanceUsageReportResponse.ProtoReflect.Descriptor instead.
+func (*ServiceInstanceUsageReportResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ServiceInstanceUsageReportResponse) GetCurrency() Currency {
+	if x != nil {
+		return x.Currency
+	}
+	return Currency_CURRENCY_UNSPECIFIED
+}
+
+func (x *ServiceInstanceUsageReportResponse) GetCost() *StringDecimal {
+	if x != nil {
+		return x.Cost
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportResponse) GetCreditDetails() *CreditDetails {
+	if x != nil {
+		return x.CreditDetails
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportResponse) GetExpense() *StringDecimal {
+	if x != nil {
+		return x.Expense
+	}
+	return nil
+}
+
+func (x *ServiceInstanceUsageReportResponse) GetEntitiesData() []*ServiceInstanceUsageReportEntityData {
+	if x != nil {
+		return x.EntitiesData
+	}
+	return nil
+}
+
 var File_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDesc = "" +
 	"\n" +
-	"Dyandex/cloud/billing/usage_records/v1/consumption_core_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a8yandex/cloud/billing/usage_records/v1/common_types.proto\x1a2yandex/cloud/billing/usage_records/v1/credit.proto\x1a<yandex/cloud/billing/usage_records/v1/consumption_core.proto\x1a\x1dyandex/cloud/validation.proto\"\x8f\x05\n" +
+	"Dyandex/cloud/billing/usage_records/v1/consumption_core_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a8yandex/cloud/billing/usage_records/v1/common_types.proto\x1a2yandex/cloud/billing/usage_records/v1/credit.proto\x1a<yandex/cloud/billing/usage_records/v1/consumption_core.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x05\n" +
 	"\x12UsageReportRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
@@ -924,10 +1061,12 @@ const file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_
 	"\vservice_ids\x18\x06 \x03(\tR\n" +
 	"serviceIds\x12\x17\n" +
 	"\asku_ids\x18\a \x03(\tR\x06skuIds\x12]\n" +
-	"\x06labels\x18\b \x03(\v2E.yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntryR\x06labels\x12!\n" +
+	"\x06labels\x18\b \x03(\v2E.yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntryR\x06labels\x123\n" +
+	"\x16labels_or_filter_logic\x18\f \x01(\bR\x13labelsOrFilterLogic\x12!\n" +
 	"\fresource_ids\x18\t \x03(\tR\vresourceIds\x12b\n" +
 	"\x12aggregation_period\x18\n" +
-	" \x01(\x0e23.yandex.cloud.billing.usage_records.v1.TimeGroupingR\x11aggregationPeriod\x1ak\n" +
+	" \x01(\x0e23.yandex.cloud.billing.usage_records.v1.TimeGroupingR\x11aggregationPeriod\x120\n" +
+	"\x14service_instance_ids\x18\v \x03(\tR\x12serviceInstanceIds\x1ak\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12F\n" +
 	"\x05value\x18\x02 \x01(\v20.yandex.cloud.billing.usage_records.v1.LabelListR\x05value:\x028\x01\"\xd8\x03\n" +
@@ -972,7 +1111,13 @@ const file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_
 	"\x04cost\x18\x02 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\x04cost\x12[\n" +
 	"\x0ecredit_details\x18\x03 \x01(\v24.yandex.cloud.billing.usage_records.v1.CreditDetailsR\rcreditDetails\x12N\n" +
 	"\aexpense\x18\x04 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\aexpense\x12f\n" +
-	"\rentities_data\x18\x05 \x03(\v2A.yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityDataR\fentitiesData2\xc4\b\n" +
+	"\rentities_data\x18\x05 \x03(\v2A.yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityDataR\fentitiesData\"\xda\x03\n" +
+	"\"ServiceInstanceUsageReportResponse\x12K\n" +
+	"\bcurrency\x18\x01 \x01(\x0e2/.yandex.cloud.billing.usage_records.v1.CurrencyR\bcurrency\x12H\n" +
+	"\x04cost\x18\x02 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\x04cost\x12[\n" +
+	"\x0ecredit_details\x18\x03 \x01(\v24.yandex.cloud.billing.usage_records.v1.CreditDetailsR\rcreditDetails\x12N\n" +
+	"\aexpense\x18\x04 \x01(\v24.yandex.cloud.billing.usage_records.v1.StringDecimalR\aexpense\x12p\n" +
+	"\rentities_data\x18\x05 \x03(\v2K.yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityDataR\fentitiesData2\xec\t\n" +
 	"\x16ConsumptionCoreService\x12\xa3\x01\n" +
 	"\x1cGetBillingAccountUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aH.yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse\x12\x91\x01\n" +
 	"\x13GetCloudUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1a?.yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse\x12\x93\x01\n" +
@@ -980,7 +1125,8 @@ const file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_
 	"\x15GetServiceUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aA.yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse\x12\x8d\x01\n" +
 	"\x11GetSKUUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1a=.yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse\x12\x97\x01\n" +
 	"\x16GetResourceUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aB.yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse\x12\x97\x01\n" +
-	"\x16GetLabelKeyUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aB.yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponseB\x83\x01\n" +
+	"\x16GetLabelKeyUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aB.yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse\x12\xa5\x01\n" +
+	"\x1dGetServiceInstanceUsageReport\x129.yandex.cloud.billing.usage_records.v1.UsageReportRequest\x1aI.yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponseB\x83\x01\n" +
 	")yandex.cloud.api.billing.usage_records.v1ZVgithub.com/yandex-cloud/go-genproto/yandex/cloud/billing/usage_records/v1;usageRecordsb\x06proto3"
 
 var (
@@ -995,91 +1141,100 @@ func file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_r
 	return file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDescData
 }
 
-var file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_goTypes = []any{
-	(*UsageReportRequest)(nil),                  // 0: yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	(*BillingAccountUsageReportResponse)(nil),   // 1: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse
-	(*CloudUsageReportResponse)(nil),            // 2: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse
-	(*FolderUsageReportResponse)(nil),           // 3: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse
-	(*ServiceUsageReportResponse)(nil),          // 4: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse
-	(*SKUUsageReportResponse)(nil),              // 5: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse
-	(*ResourceUsageReportResponse)(nil),         // 6: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse
-	(*LabelKeyUsageReportResponse)(nil),         // 7: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse
-	nil,                                         // 8: yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry
-	(*timestamppb.Timestamp)(nil),               // 9: google.protobuf.Timestamp
-	(TimeGrouping)(0),                           // 10: yandex.cloud.billing.usage_records.v1.TimeGrouping
-	(Currency)(0),                               // 11: yandex.cloud.billing.usage_records.v1.Currency
-	(*StringDecimal)(nil),                       // 12: yandex.cloud.billing.usage_records.v1.StringDecimal
-	(*CreditDetails)(nil),                       // 13: yandex.cloud.billing.usage_records.v1.CreditDetails
-	(*BillingAccountUsageReportEntityData)(nil), // 14: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
-	(*CloudUsageReportEntityData)(nil),          // 15: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
-	(*FolderUsageReportEntityData)(nil),         // 16: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
-	(*ServiceUsageReportEntityData)(nil),        // 17: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
-	(*SKUUsageReportEntityData)(nil),            // 18: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
-	(*ResourceUsageReportEntityData)(nil),       // 19: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
-	(*LabelUsageReportEntityData)(nil),          // 20: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
-	(*LabelList)(nil),                           // 21: yandex.cloud.billing.usage_records.v1.LabelList
+	(*UsageReportRequest)(nil),                 // 0: yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	(*BillingAccountUsageReportResponse)(nil),  // 1: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse
+	(*CloudUsageReportResponse)(nil),           // 2: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse
+	(*FolderUsageReportResponse)(nil),          // 3: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse
+	(*ServiceUsageReportResponse)(nil),         // 4: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse
+	(*SKUUsageReportResponse)(nil),             // 5: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse
+	(*ResourceUsageReportResponse)(nil),        // 6: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse
+	(*LabelKeyUsageReportResponse)(nil),        // 7: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse
+	(*ServiceInstanceUsageReportResponse)(nil), // 8: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse
+	nil,                           // 9: yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
+	(TimeGrouping)(0),             // 11: yandex.cloud.billing.usage_records.v1.TimeGrouping
+	(Currency)(0),                 // 12: yandex.cloud.billing.usage_records.v1.Currency
+	(*StringDecimal)(nil),         // 13: yandex.cloud.billing.usage_records.v1.StringDecimal
+	(*CreditDetails)(nil),         // 14: yandex.cloud.billing.usage_records.v1.CreditDetails
+	(*BillingAccountUsageReportEntityData)(nil),  // 15: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
+	(*CloudUsageReportEntityData)(nil),           // 16: yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
+	(*FolderUsageReportEntityData)(nil),          // 17: yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
+	(*ServiceUsageReportEntityData)(nil),         // 18: yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
+	(*SKUUsageReportEntityData)(nil),             // 19: yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
+	(*ResourceUsageReportEntityData)(nil),        // 20: yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
+	(*LabelUsageReportEntityData)(nil),           // 21: yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
+	(*ServiceInstanceUsageReportEntityData)(nil), // 22: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData
+	(*LabelList)(nil),                            // 23: yandex.cloud.billing.usage_records.v1.LabelList
 }
 var file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.billing.usage_records.v1.UsageReportRequest.start_date:type_name -> google.protobuf.Timestamp
-	9,  // 1: yandex.cloud.billing.usage_records.v1.UsageReportRequest.end_date:type_name -> google.protobuf.Timestamp
-	8,  // 2: yandex.cloud.billing.usage_records.v1.UsageReportRequest.labels:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry
-	10, // 3: yandex.cloud.billing.usage_records.v1.UsageReportRequest.aggregation_period:type_name -> yandex.cloud.billing.usage_records.v1.TimeGrouping
-	11, // 4: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 5: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 6: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 7: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	14, // 8: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
-	11, // 9: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 10: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 11: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 12: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	15, // 13: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
-	11, // 14: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 15: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 16: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 17: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	16, // 18: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
-	11, // 19: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 20: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 21: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 22: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	17, // 23: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
-	11, // 24: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 25: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 26: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 27: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	18, // 28: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
-	11, // 29: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 30: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 31: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 32: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	19, // 33: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
-	11, // 34: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
-	12, // 35: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	13, // 36: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
-	12, // 37: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
-	20, // 38: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
-	21, // 39: yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry.value:type_name -> yandex.cloud.billing.usage_records.v1.LabelList
-	0,  // 40: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetBillingAccountUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 41: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetCloudUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 42: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetFolderUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 43: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 44: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetSKUUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 45: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetResourceUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	0,  // 46: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetLabelKeyUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
-	1,  // 47: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetBillingAccountUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse
-	2,  // 48: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetCloudUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse
-	3,  // 49: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetFolderUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse
-	4,  // 50: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse
-	5,  // 51: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetSKUUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse
-	6,  // 52: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetResourceUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse
-	7,  // 53: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetLabelKeyUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse
-	47, // [47:54] is the sub-list for method output_type
-	40, // [40:47] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	10, // 0: yandex.cloud.billing.usage_records.v1.UsageReportRequest.start_date:type_name -> google.protobuf.Timestamp
+	10, // 1: yandex.cloud.billing.usage_records.v1.UsageReportRequest.end_date:type_name -> google.protobuf.Timestamp
+	9,  // 2: yandex.cloud.billing.usage_records.v1.UsageReportRequest.labels:type_name -> yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry
+	11, // 3: yandex.cloud.billing.usage_records.v1.UsageReportRequest.aggregation_period:type_name -> yandex.cloud.billing.usage_records.v1.TimeGrouping
+	12, // 4: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 5: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 6: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 7: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	15, // 8: yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportEntityData
+	12, // 9: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 10: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 11: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 12: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	16, // 13: yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.CloudUsageReportEntityData
+	12, // 14: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 15: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 16: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 17: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	17, // 18: yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.FolderUsageReportEntityData
+	12, // 19: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 20: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 21: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 22: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	18, // 23: yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.ServiceUsageReportEntityData
+	12, // 24: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 25: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 26: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 27: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	19, // 28: yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.SKUUsageReportEntityData
+	12, // 29: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 30: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 31: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 32: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	20, // 33: yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.ResourceUsageReportEntityData
+	12, // 34: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 35: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 36: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 37: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	21, // 38: yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.LabelUsageReportEntityData
+	12, // 39: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse.currency:type_name -> yandex.cloud.billing.usage_records.v1.Currency
+	13, // 40: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse.cost:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	14, // 41: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse.credit_details:type_name -> yandex.cloud.billing.usage_records.v1.CreditDetails
+	13, // 42: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse.expense:type_name -> yandex.cloud.billing.usage_records.v1.StringDecimal
+	22, // 43: yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse.entities_data:type_name -> yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportEntityData
+	23, // 44: yandex.cloud.billing.usage_records.v1.UsageReportRequest.LabelsEntry.value:type_name -> yandex.cloud.billing.usage_records.v1.LabelList
+	0,  // 45: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetBillingAccountUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 46: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetCloudUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 47: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetFolderUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 48: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 49: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetSKUUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 50: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetResourceUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 51: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetLabelKeyUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	0,  // 52: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceInstanceUsageReport:input_type -> yandex.cloud.billing.usage_records.v1.UsageReportRequest
+	1,  // 53: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetBillingAccountUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.BillingAccountUsageReportResponse
+	2,  // 54: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetCloudUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.CloudUsageReportResponse
+	3,  // 55: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetFolderUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.FolderUsageReportResponse
+	4,  // 56: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.ServiceUsageReportResponse
+	5,  // 57: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetSKUUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.SKUUsageReportResponse
+	6,  // 58: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetResourceUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.ResourceUsageReportResponse
+	7,  // 59: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetLabelKeyUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.LabelKeyUsageReportResponse
+	8,  // 60: yandex.cloud.billing.usage_records.v1.ConsumptionCoreService.GetServiceInstanceUsageReport:output_type -> yandex.cloud.billing.usage_records.v1.ServiceInstanceUsageReportResponse
+	53, // [53:61] is the sub-list for method output_type
+	45, // [45:53] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_init() }
@@ -1097,7 +1252,7 @@ func file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_i
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDesc), len(file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

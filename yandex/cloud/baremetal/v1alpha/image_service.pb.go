@@ -29,7 +29,6 @@ const (
 type GetImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image resource to return.
-	//
 	// To get the image ID, use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetImageRequest) GetImageId() string {
 type ListImagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list images in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -95,7 +93,6 @@ type ListImagesRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -182,7 +179,6 @@ type ListImagesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImagesRequest.page_size], use `next_page_token` as the value
 	// for the [ListImagesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -236,7 +232,6 @@ func (x *ListImagesResponse) GetNextPageToken() string {
 type CreateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an image in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the image.
@@ -367,7 +362,6 @@ func (x *CreateImageMetadata) GetImageId() string {
 type UpdateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image resource to update.
-	//
 	// To get the image ID, use a [ImageService.List] request.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// Field mask that specifies which fields of the Image resource are going to be updated.
@@ -378,7 +372,6 @@ type UpdateImageRequest struct {
 	// Description of the image.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -498,7 +491,6 @@ func (x *UpdateImageMetadata) GetImageId() string {
 type DeleteImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the image to delete.
-	//
 	// To get the image ID, use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -662,7 +654,6 @@ type ListImageOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImageOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListImageOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -719,10 +710,11 @@ const file_yandex_cloud_baremetal_v1alpha_image_service_proto_rawDesc = "" +
 	"\n" +
 	"2yandex/cloud/baremetal/v1alpha/image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/baremetal/v1alpha/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
 	"\x0fGetImageRequest\x123\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\"\xce\x01\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\"\xcf\x01\n" +
 	"\x11ListImagesRequest\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
@@ -758,10 +750,11 @@ const file_yandex_cloud_baremetal_v1alpha_image_service_proto_rawDesc = "" +
 	"\x12DeleteImageRequest\x123\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\"0\n" +
 	"\x13DeleteImageMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\x9e\x01\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\x9f\x01\n" +
 	"\x1aListImageOperationsRequest\x123\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\aimageId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x02\x10d\"\x8e\x01\n" +
 	"\x1bListImageOperationsResponse\x12A\n" +

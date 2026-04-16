@@ -6,6 +6,38 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
+func (m *StartDatabaseRequest) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *StartDatabaseMetadata) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *StartDatabaseMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *StopDatabaseRequest) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *StopDatabaseMetadata) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *StopDatabaseMetadata) SetDatabaseName(v string) {
+	m.DatabaseName = v
+}
+
+func (m *BackupDatabaseMetadata) SetBackupId(v string) {
+	m.BackupId = v
+}
+
+func (m *BackupDatabaseMetadata) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
 func (m *MoveDatabaseRequest) SetDatabaseId(v string) {
 	m.DatabaseId = v
 }
@@ -52,38 +84,6 @@ func (m *BackupDatabaseRequest) SetDatabaseId(v string) {
 
 func (m *BackupDatabaseRequest) SetBackupSettings(v *BackupSettings) {
 	m.BackupSettings = v
-}
-
-func (m *BackupDatabaseMetadata) SetBackupId(v string) {
-	m.BackupId = v
-}
-
-func (m *BackupDatabaseMetadata) SetDatabaseId(v string) {
-	m.DatabaseId = v
-}
-
-func (m *StartDatabaseRequest) SetDatabaseId(v string) {
-	m.DatabaseId = v
-}
-
-func (m *StartDatabaseMetadata) SetDatabaseId(v string) {
-	m.DatabaseId = v
-}
-
-func (m *StartDatabaseMetadata) SetDatabaseName(v string) {
-	m.DatabaseName = v
-}
-
-func (m *StopDatabaseRequest) SetDatabaseId(v string) {
-	m.DatabaseId = v
-}
-
-func (m *StopDatabaseMetadata) SetDatabaseId(v string) {
-	m.DatabaseId = v
-}
-
-func (m *StopDatabaseMetadata) SetDatabaseName(v string) {
-	m.DatabaseName = v
 }
 
 func (m *GetDatabaseRequest) SetDatabaseId(v string) {
@@ -148,6 +148,10 @@ func (m *CreateDatabaseRequest) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
 
+func (m *CreateDatabaseRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *CreateDatabaseRequest) SetZonalDatabase(v *ZonalDatabase) {
 	m.DatabaseType = &CreateDatabaseRequest_ZonalDatabase{
 		ZonalDatabase: v,
@@ -194,10 +198,6 @@ func (m *CreateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
 
 func (m *CreateDatabaseRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *CreateDatabaseRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
 }
 
 func (m *CreateDatabaseMetadata) SetDatabaseId(v string) {
@@ -254,6 +254,10 @@ func (m *UpdateDatabaseRequest) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
 
+func (m *UpdateDatabaseRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *UpdateDatabaseRequest) SetZonalDatabase(v *ZonalDatabase) {
 	m.DatabaseType = &UpdateDatabaseRequest_ZonalDatabase{
 		ZonalDatabase: v,
@@ -300,10 +304,6 @@ func (m *UpdateDatabaseRequest) SetMonitoringConfig(v *MonitoringConfig) {
 
 func (m *UpdateDatabaseRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *UpdateDatabaseRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
 }
 
 func (m *UpdateDatabaseMetadata) SetDatabaseId(v string) {

@@ -215,6 +215,114 @@ func (x *GetArtifactByPathRequest) GetPath() string {
 	return ""
 }
 
+type UpsertFolderRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the registry to upsert a folder in.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// Path of the folder to upsert.
+	Path          string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpsertFolderRequest) Reset() {
+	*x = UpsertFolderRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpsertFolderRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpsertFolderRequest) ProtoMessage() {}
+
+func (x *UpsertFolderRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpsertFolderRequest.ProtoReflect.Descriptor instead.
+func (*UpsertFolderRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpsertFolderRequest) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *UpsertFolderRequest) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+type UpsertFolderMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the registry that the folder is being upserted in.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// Path of the folder that is being upserted.
+	Path          string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpsertFolderMetadata) Reset() {
+	*x = UpsertFolderMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpsertFolderMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpsertFolderMetadata) ProtoMessage() {}
+
+func (x *UpsertFolderMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpsertFolderMetadata.ProtoReflect.Descriptor instead.
+func (*UpsertFolderMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpsertFolderMetadata) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *UpsertFolderMetadata) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
 var File_yandex_cloud_cloudregistry_v1_artifact_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
@@ -232,7 +340,15 @@ const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"\x18GetArtifactByPathRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x12\x18\n" +
-	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path2\xd6\t\n" +
+	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path\"^\n" +
+	"\x13UpsertFolderRequest\x12-\n" +
+	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"registryId\x12\x18\n" +
+	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path\"K\n" +
+	"\x14UpsertFolderMetadata\x12\x1f\n" +
+	"\vregistry_id\x18\x01 \x01(\tR\n" +
+	"registryId\x12\x12\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path2\xb1\v\n" +
 	"\x0fArtifactService\x12\x95\x01\n" +
 	"\x03Get\x121.yandex.cloud.cloudregistry.v1.GetArtifactRequest\x1a'.yandex.cloud.cloudregistry.v1.Artifact\"2\x82\xd3\xe4\x93\x02,\x12*/cloud-registry/v1/artifacts/{artifact_id}\x12\xb6\x01\n" +
 	"\tGetByPath\x127.yandex.cloud.cloudregistry.v1.GetArtifactByPathRequest\x1a'.yandex.cloud.cloudregistry.v1.Artifact\"G\x82\xd3\xe4\x93\x02A\x12?/cloud-registry/v1/registries/{registry_id}/artifacts:getByPath\x12\xc8\x01\n" +
@@ -242,7 +358,9 @@ const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02A:\x01*\"</cloud-registry/v1/artifacts/{resource_id}:setAccessBindings\x12\xf8\x01\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8a\x01\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*2?/cloud-registry/v1/artifacts/{resource_id}:updateAccessBindingsBt\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*2?/cloud-registry/v1/artifacts/{resource_id}:updateAccessBindings\x12\xd8\x01\n" +
+	"\fUpsertFolder\x122.yandex.cloud.cloudregistry.v1.UpsertFolderRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2* \n" +
+	"\x14UpsertFolderMetadata\x12\bArtifact\x82\xd3\xe4\x93\x02G:\x01*\"B/cloud-registry/v1/registries/{registry_id}/artifacts:upsertFolderBt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
@@ -257,37 +375,41 @@ func file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDescGZIP() []b
 	return file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_goTypes = []any{
 	(*GetArtifactRequest)(nil),                 // 0: yandex.cloud.cloudregistry.v1.GetArtifactRequest
 	(*DeleteArtifactRequest)(nil),              // 1: yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
 	(*DeleteArtifactMetadata)(nil),             // 2: yandex.cloud.cloudregistry.v1.DeleteArtifactMetadata
 	(*GetArtifactByPathRequest)(nil),           // 3: yandex.cloud.cloudregistry.v1.GetArtifactByPathRequest
-	(*access.ListAccessBindingsRequest)(nil),   // 4: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 5: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 6: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*Artifact)(nil),                           // 7: yandex.cloud.cloudregistry.v1.Artifact
-	(*operation.Operation)(nil),                // 8: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsResponse)(nil),  // 9: yandex.cloud.access.ListAccessBindingsResponse
+	(*UpsertFolderRequest)(nil),                // 4: yandex.cloud.cloudregistry.v1.UpsertFolderRequest
+	(*UpsertFolderMetadata)(nil),               // 5: yandex.cloud.cloudregistry.v1.UpsertFolderMetadata
+	(*access.ListAccessBindingsRequest)(nil),   // 6: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 7: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 8: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*Artifact)(nil),                           // 9: yandex.cloud.cloudregistry.v1.Artifact
+	(*operation.Operation)(nil),                // 10: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsResponse)(nil),  // 11: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_cloudregistry_v1_artifact_service_proto_depIdxs = []int32{
-	0, // 0: yandex.cloud.cloudregistry.v1.ArtifactService.Get:input_type -> yandex.cloud.cloudregistry.v1.GetArtifactRequest
-	3, // 1: yandex.cloud.cloudregistry.v1.ArtifactService.GetByPath:input_type -> yandex.cloud.cloudregistry.v1.GetArtifactByPathRequest
-	1, // 2: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
-	4, // 3: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	5, // 4: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	6, // 5: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	7, // 6: yandex.cloud.cloudregistry.v1.ArtifactService.Get:output_type -> yandex.cloud.cloudregistry.v1.Artifact
-	7, // 7: yandex.cloud.cloudregistry.v1.ArtifactService.GetByPath:output_type -> yandex.cloud.cloudregistry.v1.Artifact
-	8, // 8: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:output_type -> yandex.cloud.operation.Operation
-	9, // 9: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	8, // 10: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	8, // 11: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: yandex.cloud.cloudregistry.v1.ArtifactService.Get:input_type -> yandex.cloud.cloudregistry.v1.GetArtifactRequest
+	3,  // 1: yandex.cloud.cloudregistry.v1.ArtifactService.GetByPath:input_type -> yandex.cloud.cloudregistry.v1.GetArtifactByPathRequest
+	1,  // 2: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:input_type -> yandex.cloud.cloudregistry.v1.DeleteArtifactRequest
+	6,  // 3: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	7,  // 4: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	8,  // 5: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	4,  // 6: yandex.cloud.cloudregistry.v1.ArtifactService.UpsertFolder:input_type -> yandex.cloud.cloudregistry.v1.UpsertFolderRequest
+	9,  // 7: yandex.cloud.cloudregistry.v1.ArtifactService.Get:output_type -> yandex.cloud.cloudregistry.v1.Artifact
+	9,  // 8: yandex.cloud.cloudregistry.v1.ArtifactService.GetByPath:output_type -> yandex.cloud.cloudregistry.v1.Artifact
+	10, // 9: yandex.cloud.cloudregistry.v1.ArtifactService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // 10: yandex.cloud.cloudregistry.v1.ArtifactService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	10, // 11: yandex.cloud.cloudregistry.v1.ArtifactService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	10, // 12: yandex.cloud.cloudregistry.v1.ArtifactService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	10, // 13: yandex.cloud.cloudregistry.v1.ArtifactService.UpsertFolder:output_type -> yandex.cloud.operation.Operation
+	7,  // [7:14] is the sub-list for method output_type
+	0,  // [0:7] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cloudregistry_v1_artifact_service_proto_init() }
@@ -302,7 +424,7 @@ func file_yandex_cloud_cloudregistry_v1_artifact_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

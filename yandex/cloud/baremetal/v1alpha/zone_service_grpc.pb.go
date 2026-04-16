@@ -30,7 +30,6 @@ const (
 // A set of methods to retrieve information about availability zones.
 type ZoneServiceClient interface {
 	// Returns the specific Zone resource.
-	//
 	// To get the list of Zone resources, make a [List] request.
 	Get(ctx context.Context, in *GetZoneRequest, opts ...grpc.CallOption) (*Zone, error)
 	// Retrieves the list of Zone resources.
@@ -72,7 +71,6 @@ func (c *zoneServiceClient) List(ctx context.Context, in *ListZonesRequest, opts
 // A set of methods to retrieve information about availability zones.
 type ZoneServiceServer interface {
 	// Returns the specific Zone resource.
-	//
 	// To get the list of Zone resources, make a [List] request.
 	Get(context.Context, *GetZoneRequest) (*Zone, error)
 	// Retrieves the list of Zone resources.

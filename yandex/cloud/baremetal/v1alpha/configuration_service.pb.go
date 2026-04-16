@@ -26,11 +26,9 @@ const (
 type GetConfigurationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Configuration resource to return.
-	//
 	// To get the configuration ID, use a [ConfigurationService.List] request.
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// ID of the folder to return a Configuration resource for.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId      string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -99,7 +97,6 @@ type ListConfigurationsRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -111,7 +108,6 @@ type ListConfigurationsRequest struct {
 	// Both snake_case and camelCase are supported for fields.
 	Filter string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
 	// ID of the folder to return a Configuration resource for.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId      string `protobuf:"bytes,104,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -190,7 +186,6 @@ type ListConfigurationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListConfigurationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListConfigurationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -248,9 +243,10 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = 
 	":yandex/cloud/baremetal/v1alpha/configuration_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\x01\n" +
 	"\x17GetConfigurationRequest\x12C\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x129\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\"\xd6\x01\n" +
-	"\x19ListConfigurationsRequest\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\"\xd7\x01\n" +
+	"\x19ListConfigurationsRequest\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +

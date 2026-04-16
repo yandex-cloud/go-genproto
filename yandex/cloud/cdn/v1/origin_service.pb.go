@@ -189,27 +189,21 @@ type CreateOriginRequest struct {
 	// Used if [meta] variant is `common`.
 	Source string `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`
 	// The setting allows to enable or disable an Origin source in the Origins group.
-	//
 	// It has two possible values:
-	//
 	// True - The origin is enabled and used as a source for the CDN. An origins
 	// group must contain at least one enabled origin. Default value.
 	// False - The origin is disabled and the CDN is not using it to pull content.
 	Enabled *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Specifies whether the origin is used in its origin group as backup.
 	// A backup origin is used when one of active origins becomes unavailable.
-	//
 	// Default value: False.
 	Backup *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up origin of the content.
 	Meta *OriginMeta `protobuf:"bytes,6,opt,name=meta,proto3" json:"meta,omitempty"`
 	// Set up origin provider
-	//
 	// It has two possible values:
-	//
 	// ourcdn - Based on Yandex technologies
 	// gcore - Based on an external partner infrastructure
-	//
 	// Default value: ourcdn
 	ProviderType  string `protobuf:"bytes,7,opt,name=provider_type,json=providerType,proto3" json:"provider_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -360,18 +354,14 @@ type UpdateOriginRequest struct {
 	// Required.
 	Source string `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`
 	// The setting allows to enable or disable an Origin source in the Origins group.
-	//
 	// It has two possible values:
-	//
 	// True - The origin is enabled and used as a source for the CDN. An origins
 	// group must contain at least one enabled origin. Default value.
 	// False - The origin is disabled and the CDN is not using it to pull content.
-	//
 	// Required.
 	Enabled bool `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Specifies whether the origin is used in its origin group as backup.
 	// A backup origin is used when one of active origins becomes unavailable.
-	//
 	// Required.
 	Backup bool `protobuf:"varint,5,opt,name=backup,proto3" json:"backup,omitempty"`
 	// Set up type of the origin.

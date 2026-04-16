@@ -848,7 +848,7 @@ var File_yandex_cloud_ydb_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ydb_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	" yandex/cloud/ydb/v1/backup.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1dyandex/cloud/validation.proto\"\x97\x03\n" +
+	" yandex/cloud/ydb/v1/backup.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1dyandex/cloud/validation.proto\"\x97\x03\n" +
 	"\x0eBackupSchedule\x12^\n" +
 	"\x15daily_backup_schedule\x18\x01 \x01(\v2(.yandex.cloud.ydb.v1.DailyBackupScheduleH\x00R\x13dailyBackupSchedule\x12a\n" +
 	"\x16weekly_backup_schedule\x18\x02 \x01(\v2).yandex.cloud.ydb.v1.WeeklyBackupScheduleH\x00R\x14weeklyBackupSchedule\x12j\n" +

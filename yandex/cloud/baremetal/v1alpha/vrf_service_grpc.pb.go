@@ -35,7 +35,6 @@ const (
 // A set of methods for managing VRF resources.
 type VrfServiceClient interface {
 	// Returns the specific VRF resource.
-	//
 	// To get the list of available VRFs, make a [List] request.
 	Get(ctx context.Context, in *GetVrfRequest, opts ...grpc.CallOption) (*Vrf, error)
 	// Retrieves the list of VRF resources in the specified folder.
@@ -45,7 +44,6 @@ type VrfServiceClient interface {
 	// Updates the specified VRF resource.
 	Update(ctx context.Context, in *UpdateVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified VRF resource.
-	//
 	// Deleting a VRF removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeleteVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified VRF.
@@ -127,7 +125,6 @@ func (c *vrfServiceClient) ListOperations(ctx context.Context, in *ListVrfOperat
 // A set of methods for managing VRF resources.
 type VrfServiceServer interface {
 	// Returns the specific VRF resource.
-	//
 	// To get the list of available VRFs, make a [List] request.
 	Get(context.Context, *GetVrfRequest) (*Vrf, error)
 	// Retrieves the list of VRF resources in the specified folder.
@@ -137,7 +134,6 @@ type VrfServiceServer interface {
 	// Updates the specified VRF resource.
 	Update(context.Context, *UpdateVrfRequest) (*operation.Operation, error)
 	// Deletes the specified VRF resource.
-	//
 	// Deleting a VRF removes its data permanently and is irreversible.
 	Delete(context.Context, *DeleteVrfRequest) (*operation.Operation, error)
 	// Lists operations for the specified VRF.

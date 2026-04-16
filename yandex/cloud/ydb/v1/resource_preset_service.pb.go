@@ -188,7 +188,7 @@ var File_yandex_cloud_ydb_v1_resource_preset_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_ydb_v1_resource_preset_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/ydb/v1/resource_preset_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a)yandex/cloud/ydb/v1/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"N\n" +
+	"1yandex/cloud/ydb/v1/resource_preset_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/ydb/v1/resource_preset.proto\"N\n" +
 	"\x18GetResourcePresetRequest\x122\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"o\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +

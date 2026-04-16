@@ -35,7 +35,6 @@ const (
 // A set of methods for managing Image resources.
 type ImageServiceClient interface {
 	// Returns the specific Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
 	// Retrieves the list of Image resources in the specified folder.
@@ -45,7 +44,6 @@ type ImageServiceClient interface {
 	// Updates the specified image.
 	Update(ctx context.Context, in *UpdateImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified image.
-	//
 	// Deleting an image removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeleteImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified image.
@@ -127,7 +125,6 @@ func (c *imageServiceClient) ListOperations(ctx context.Context, in *ListImageOp
 // A set of methods for managing Image resources.
 type ImageServiceServer interface {
 	// Returns the specific Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(context.Context, *GetImageRequest) (*Image, error)
 	// Retrieves the list of Image resources in the specified folder.
@@ -137,7 +134,6 @@ type ImageServiceServer interface {
 	// Updates the specified image.
 	Update(context.Context, *UpdateImageRequest) (*operation.Operation, error)
 	// Deletes the specified image.
-	//
 	// Deleting an image removes its data permanently and is irreversible.
 	Delete(context.Context, *DeleteImageRequest) (*operation.Operation, error)
 	// Lists operations for the specified image.

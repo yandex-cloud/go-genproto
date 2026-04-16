@@ -60,6 +60,10 @@ func (m *Database) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
 
+func (m *Database) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
 func (m *Database) SetZonalDatabase(v *ZonalDatabase) {
 	m.DatabaseType = &Database_ZonalDatabase{
 		ZonalDatabase: v,
@@ -118,10 +122,6 @@ func (m *Database) SetMonitoringConfig(v *MonitoringConfig) {
 
 func (m *Database) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *Database) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
 }
 
 type AlertParameter_Parameter = isAlertParameter_Parameter
@@ -264,12 +264,12 @@ func (m *DedicatedDatabase) SetSubnetIds(v []string) {
 	m.SubnetIds = v
 }
 
-func (m *DedicatedDatabase) SetAssignPublicIps(v bool) {
-	m.AssignPublicIps = v
-}
-
 func (m *DedicatedDatabase) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
+}
+
+func (m *DedicatedDatabase) SetAssignPublicIps(v bool) {
+	m.AssignPublicIps = v
 }
 
 func (m *ServerlessDatabase) SetThrottlingRcuLimit(v int64) {
@@ -328,18 +328,18 @@ func (m *ScalePolicy_AutoScale) SetAutoScaleType(v ScalePolicy_AutoScale_AutoSca
 	m.AutoScaleType = v
 }
 
+func (m *ScalePolicy_AutoScale) SetTargetTracking(v *ScalePolicy_AutoScale_TargetTracking) {
+	m.AutoScaleType = &ScalePolicy_AutoScale_TargetTracking_{
+		TargetTracking: v,
+	}
+}
+
 func (m *ScalePolicy_AutoScale) SetMinSize(v int64) {
 	m.MinSize = v
 }
 
 func (m *ScalePolicy_AutoScale) SetMaxSize(v int64) {
 	m.MaxSize = v
-}
-
-func (m *ScalePolicy_AutoScale) SetTargetTracking(v *ScalePolicy_AutoScale_TargetTracking) {
-	m.AutoScaleType = &ScalePolicy_AutoScale_TargetTracking_{
-		TargetTracking: v,
-	}
 }
 
 type ScalePolicy_AutoScale_TargetTracking_Target = isScalePolicy_AutoScale_TargetTracking_Target

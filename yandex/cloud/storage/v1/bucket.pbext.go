@@ -458,10 +458,6 @@ func (m *ObjectLock_DefaultRetention) SetPeriod(v ObjectLock_DefaultRetention_Pe
 	m.Period = v
 }
 
-func (m *ObjectLock_DefaultRetention) SetMode(v ObjectLock_DefaultRetention_Mode) {
-	m.Mode = v
-}
-
 func (m *ObjectLock_DefaultRetention) SetDays(v int64) {
 	m.Period = &ObjectLock_DefaultRetention_Days{
 		Days: v,
@@ -472,6 +468,10 @@ func (m *ObjectLock_DefaultRetention) SetYears(v int64) {
 	m.Period = &ObjectLock_DefaultRetention_Years{
 		Years: v,
 	}
+}
+
+func (m *ObjectLock_DefaultRetention) SetMode(v ObjectLock_DefaultRetention_Mode) {
+	m.Mode = v
 }
 
 func (m *Encryption) SetRules(v []*Encryption_EncryptionRule) {

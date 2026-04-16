@@ -18,6 +18,22 @@ func (m *GetUsageRequest) SetEndDate(v *timestamppb.Timestamp) {
 	m.EndDate = v
 }
 
+func (m *GetUsageRequest) SetCloudIds(v []string) {
+	m.CloudIds = v
+}
+
+func (m *GetUsageRequest) SetLabelKeys(v []string) {
+	m.LabelKeys = v
+}
+
+func (m *GetUsageRequest) SetServiceIds(v []string) {
+	m.ServiceIds = v
+}
+
+func (m *GetUsageRequest) SetSkuIds(v []string) {
+	m.SkuIds = v
+}
+
 func (m *GetUsageResponse) SetClouds(v []*Cloud) {
 	m.Clouds = v
 }
@@ -38,6 +54,26 @@ func (m *GetUsageResponse) SetBillingAccounts(v []*BillingAccount) {
 	m.BillingAccounts = v
 }
 
+func (m *GetServiceInstanceRequest) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
+}
+
+func (m *GetServiceInstanceRequest) SetStartDate(v *timestamppb.Timestamp) {
+	m.StartDate = v
+}
+
+func (m *GetServiceInstanceRequest) SetEndDate(v *timestamppb.Timestamp) {
+	m.EndDate = v
+}
+
+func (m *GetServiceInstanceRequest) SetServiceInstanceIds(v []string) {
+	m.ServiceInstanceIds = v
+}
+
+func (m *GetServiceInstanceResponse) SetServiceInstances(v []*ServiceInstance) {
+	m.ServiceInstances = v
+}
+
 func (m *GetLabelRequest) SetBillingAccountId(v string) {
 	m.BillingAccountId = v
 }
@@ -48,6 +84,14 @@ func (m *GetLabelRequest) SetStartDate(v *timestamppb.Timestamp) {
 
 func (m *GetLabelRequest) SetEndDate(v *timestamppb.Timestamp) {
 	m.EndDate = v
+}
+
+func (m *GetLabelRequest) SetCloudIds(v []string) {
+	m.CloudIds = v
+}
+
+func (m *GetLabelRequest) SetFolderIds(v []string) {
+	m.FolderIds = v
 }
 
 func (m *GetLabelRequest) SetLabelKey(v string) {
@@ -126,34 +170,46 @@ func (m *GetCloudResponse_CloudInfo) SetFolders(v []*Folder) {
 	m.Folders = v
 }
 
-func (m *GetResourceIDsRequest) SetBillingAccountId(v string) {
+func (m *GetResourcesRequest) SetBillingAccountId(v string) {
 	m.BillingAccountId = v
 }
 
-func (m *GetResourceIDsRequest) SetStartDate(v *timestamppb.Timestamp) {
+func (m *GetResourcesRequest) SetStartDate(v *timestamppb.Timestamp) {
 	m.StartDate = v
 }
 
-func (m *GetResourceIDsRequest) SetEndDate(v *timestamppb.Timestamp) {
+func (m *GetResourcesRequest) SetEndDate(v *timestamppb.Timestamp) {
 	m.EndDate = v
 }
 
-func (m *GetResourceIDsRequest) SetResourceId(v string) {
-	m.ResourceId = v
+func (m *GetResourcesRequest) SetServiceInstancesIds(v []string) {
+	m.ServiceInstancesIds = v
 }
 
-func (m *GetResourceIDsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *GetResourceIDsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *GetResourceIDsResponse) SetResourceIds(v []string) {
+func (m *GetResourcesRequest) SetResourceIds(v []string) {
 	m.ResourceIds = v
 }
 
-func (m *GetResourceIDsResponse) SetNextPageToken(v string) {
+func (m *GetResourcesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *GetResourcesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *GetResourcesResponse) SetItems(v []*GetResourcesResponse_ServiceInstanceInfo) {
+	m.Items = v
+}
+
+func (m *GetResourcesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *GetResourcesResponse_ServiceInstanceInfo) SetServiceInstance(v *ServiceInstance) {
+	m.ServiceInstance = v
+}
+
+func (m *GetResourcesResponse_ServiceInstanceInfo) SetResources(v []*Resource) {
+	m.Resources = v
 }

@@ -84,17 +84,28 @@ func (ResourceGroupConfig_SchedulingPolicy) EnumDescriptor() ([]byte, []int) {
 type SelectorRuleConfig_QueryType int32
 
 const (
+	// Query type is unspecified.
 	SelectorRuleConfig_QUERY_TYPE_UNSPECIFIED SelectorRuleConfig_QueryType = 0
-	SelectorRuleConfig_SELECT                 SelectorRuleConfig_QueryType = 1
-	SelectorRuleConfig_EXPLAIN                SelectorRuleConfig_QueryType = 2
-	SelectorRuleConfig_DESCRIBE               SelectorRuleConfig_QueryType = 3
-	SelectorRuleConfig_INSERT                 SelectorRuleConfig_QueryType = 4
-	SelectorRuleConfig_UPDATE                 SelectorRuleConfig_QueryType = 5
-	SelectorRuleConfig_MERGE                  SelectorRuleConfig_QueryType = 6
-	SelectorRuleConfig_DELETE                 SelectorRuleConfig_QueryType = 7
-	SelectorRuleConfig_ANALYZE                SelectorRuleConfig_QueryType = 8
-	SelectorRuleConfig_DATA_DEFINITION        SelectorRuleConfig_QueryType = 9
-	SelectorRuleConfig_ALTER_TABLE_EXECUTE    SelectorRuleConfig_QueryType = 10
+	// SELECT query.
+	SelectorRuleConfig_SELECT SelectorRuleConfig_QueryType = 1
+	// EXPLAIN query.
+	SelectorRuleConfig_EXPLAIN SelectorRuleConfig_QueryType = 2
+	// DESCRIBE query.
+	SelectorRuleConfig_DESCRIBE SelectorRuleConfig_QueryType = 3
+	// INSERT query.
+	SelectorRuleConfig_INSERT SelectorRuleConfig_QueryType = 4
+	// UPDATE query.
+	SelectorRuleConfig_UPDATE SelectorRuleConfig_QueryType = 5
+	// MERGE query.
+	SelectorRuleConfig_MERGE SelectorRuleConfig_QueryType = 6
+	// DELECT query.
+	SelectorRuleConfig_DELETE SelectorRuleConfig_QueryType = 7
+	// ANALYZE query.
+	SelectorRuleConfig_ANALYZE SelectorRuleConfig_QueryType = 8
+	// Data definition query.
+	SelectorRuleConfig_DATA_DEFINITION SelectorRuleConfig_QueryType = 9
+	// ALTER TABLE EXECUTE query.
+	SelectorRuleConfig_ALTER_TABLE_EXECUTE SelectorRuleConfig_QueryType = 10
 )
 
 // Enum value maps for SelectorRuleConfig_QueryType.
@@ -571,7 +582,7 @@ const file_yandex_cloud_trino_v1_resource_management_proto_rawDesc = "" +
 	"\bWEIGHTED\x10\x02\x12\x11\n" +
 	"\rWEIGHTED_FAIR\x10\x03\x12\x12\n" +
 	"\x0eQUERY_PRIORITY\x10\x04J\x04\b\n" +
-	"\x10\v\"\xb7\x03\n" +
+	"\x10\v\"\xb1\x03\n" +
 	"\x12SelectorRuleConfig\x12\x12\n" +
 	"\x04user\x18\x01 \x01(\tR\x04user\x12\x1d\n" +
 	"\n" +
@@ -598,7 +609,7 @@ const file_yandex_cloud_trino_v1_resource_management_proto_rawDesc = "" +
 	"\aANALYZE\x10\b\x12\x13\n" +
 	"\x0fDATA_DEFINITION\x10\t\x12\x17\n" +
 	"\x13ALTER_TABLE_EXECUTE\x10\n" +
-	"J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04B\\\n" +
+	"J\x04\b\x02\x10\x04B\\\n" +
 	"\x19yandex.cloud.api.trino.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/trino/v1;trinob\x06proto3"
 
 var (

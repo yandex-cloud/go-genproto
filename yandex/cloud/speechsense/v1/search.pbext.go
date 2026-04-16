@@ -14,10 +14,6 @@ func (m *Filter) SetFilter(v Filter_Filter) {
 	m.Filter = v
 }
 
-func (m *Filter) SetKey(v string) {
-	m.Key = v
-}
-
 func (m *Filter) SetAnyMatch(v *AnyMatchFilter) {
 	m.Filter = &Filter_AnyMatch{
 		AnyMatch: v,
@@ -52,6 +48,10 @@ func (m *Filter) SetBooleanMatch(v *BooleanFilter) {
 	m.Filter = &Filter_BooleanMatch{
 		BooleanMatch: v,
 	}
+}
+
+func (m *Filter) SetKey(v string) {
+	m.Key = v
 }
 
 func (m *Filter) SetInverse(v bool) {

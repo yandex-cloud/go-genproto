@@ -79,7 +79,7 @@ var File_yandex_cloud_speechsense_v1_analysis_conversation_statistics_proto prot
 
 const file_yandex_cloud_speechsense_v1_analysis_conversation_statistics_proto_rawDesc = "" +
 	"\n" +
-	"Byandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x12$yandex.cloud.speechsense.v1.analysis\x1a<yandex/cloud/speechsense/v1/analysis/statistics_common.proto\x1a=yandex/cloud/speechsense/v1/analysis/speaker_statistics.proto\"\xf7\x01\n" +
+	"Byandex/cloud/speechsense/v1/analysis/conversation_statistics.proto\x12$yandex.cloud.speechsense.v1.analysis\x1a=yandex/cloud/speechsense/v1/analysis/speaker_statistics.proto\x1a<yandex/cloud/speechsense/v1/analysis/statistics_common.proto\"\xf7\x01\n" +
 	"\x16ConversationStatistics\x12u\n" +
 	"\x17conversation_boundaries\x18\x01 \x01(\v2<.yandex.cloud.speechsense.v1.analysis.AudioSegmentBoundariesR\x16conversationBoundaries\x12f\n" +
 	"\x12speaker_statistics\x18\x02 \x03(\v27.yandex.cloud.speechsense.v1.analysis.SpeakerStatisticsR\x11speakerStatisticsB\x9d\x01\n" +
@@ -118,8 +118,8 @@ func file_yandex_cloud_speechsense_v1_analysis_conversation_statistics_proto_ini
 	if File_yandex_cloud_speechsense_v1_analysis_conversation_statistics_proto != nil {
 		return
 	}
-	file_yandex_cloud_speechsense_v1_analysis_statistics_common_proto_init()
 	file_yandex_cloud_speechsense_v1_analysis_speaker_statistics_proto_init()
+	file_yandex_cloud_speechsense_v1_analysis_statistics_common_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

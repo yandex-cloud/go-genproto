@@ -770,9 +770,7 @@ type ResourceOptions struct {
 	// Set up [QueryParamsOptions].
 	QueryParamsOptions *ResourceOptions_QueryParamsOptions `protobuf:"bytes,5,opt,name=query_params_options,json=queryParamsOptions,proto3" json:"query_params_options,omitempty"`
 	// Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte.
-	//
 	// The origin must support HTTP Range requests.
-	//
 	// By default the option is disabled.
 	Slice *ResourceOptions_BoolOption `protobuf:"bytes,6,opt,name=slice,proto3" json:"slice,omitempty"`
 	// Set up compression variant.
@@ -788,7 +786,6 @@ type ResourceOptions struct {
 	// [Read more](/docs/cdn/concepts/cors).
 	Cors *ResourceOptions_StringsListOption `protobuf:"bytes,11,opt,name=cors,proto3" json:"cors,omitempty"`
 	// List of errors which instruct CDN servers to serve stale content to clients.
-	//
 	// Possible values: `error`, `http_403`, `http_404`, `http_429`, `http_500`, `http_502`, `http_503`, `http_504`, `invalid_header`, `timeout`, `updating`.
 	Stale *ResourceOptions_StringsListOption `protobuf:"bytes,12,opt,name=stale,proto3" json:"stale,omitempty"`
 	// HTTP methods for your CDN content. By default the following methods
@@ -1677,14 +1674,14 @@ func (x *ResourceOptions_CachingTimes) GetCustomValues() map[string]int64 {
 // A set of the edge cache parameters.
 type ResourceOptions_EdgeCacheSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// True - the option is enabled and its `values_variant` is applied to the resource.
-	// False - the option is disabled and its default value is used for the resource.
-	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Types that are valid to be assigned to ValuesVariant:
 	//
 	//	*ResourceOptions_EdgeCacheSettings_Value
 	//	*ResourceOptions_EdgeCacheSettings_DefaultValue
 	ValuesVariant isResourceOptions_EdgeCacheSettings_ValuesVariant `protobuf_oneof:"values_variant"`
+	// True - the option is enabled and its `values_variant` is applied to the resource.
+	// False - the option is disabled and its default value is used for the resource.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1719,13 +1716,6 @@ func (*ResourceOptions_EdgeCacheSettings) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cdn_v1_resource_proto_rawDescGZIP(), []int{2, 6}
 }
 
-func (x *ResourceOptions_EdgeCacheSettings) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
-}
-
 func (x *ResourceOptions_EdgeCacheSettings) GetValuesVariant() isResourceOptions_EdgeCacheSettings_ValuesVariant {
 	if x != nil {
 		return x.ValuesVariant
@@ -1749,6 +1739,13 @@ func (x *ResourceOptions_EdgeCacheSettings) GetDefaultValue() int64 {
 		}
 	}
 	return 0
+}
+
+func (x *ResourceOptions_EdgeCacheSettings) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
 }
 
 type isResourceOptions_EdgeCacheSettings_ValuesVariant interface {
@@ -2101,9 +2098,7 @@ type isResourceOptions_HostOptions_HostVariant interface {
 
 type ResourceOptions_HostOptions_Host struct {
 	// Custom value for the Host header.
-	//
 	// Your server must be able to process requests with the chosen header.
-	//
 	// Default value (if [StringOption.enabled] is `false`) is [Resource.cname].
 	Host *ResourceOptions_StringOption `protobuf:"bytes,1,opt,name=host,proto3,oneof"`
 }
@@ -2214,9 +2209,7 @@ type ResourceOptions_CompressionOptions_GzipOn struct {
 
 type ResourceOptions_CompressionOptions_BrotliCompression struct {
 	// The option allows to compress content with brotli on the CDN's end.
-	//
 	// Compression is performed on the Origin Shielding. If a pre-cache server doesn't active for a resource, compression does not occur even if the option is enabled.
-	//
 	// Specify the content-type for each type of content you wish to have compressed. CDN servers will request only uncompressed content from the origin.
 	BrotliCompression *ResourceOptions_StringsListOption `protobuf:"bytes,3,opt,name=brotli_compression,json=brotliCompression,proto3,oneof"`
 }
@@ -2237,7 +2230,6 @@ type ResourceOptions_RewriteOption struct {
 	// False - the option is disabled and its default value of the [flag] is used for the resource.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Pattern for rewrite.
-	//
 	// The value must have the following format: `<source path> <destination path>`, where both paths are regular expressions which use at least one group. E.g., `/foo/(.*) /bar/$1`.
 	Body string `protobuf:"bytes,2,opt,name=body,proto3" json:"body,omitempty"`
 	// Break flag is applied to the option by default.
@@ -2659,10 +2651,10 @@ type ResourceOptions_ReferrerACLOption struct {
 	// Access mode for the referrer list.
 	Mode ResourceOptions_ReferrerACLOption_Mode `protobuf:"varint,2,opt,name=mode,proto3,enum=yandex.cloud.cdn.v1.ResourceOptions_ReferrerACLOption_Mode" json:"mode,omitempty"`
 	// List of referer patterns. Supports three types of values:
-	//  1. Domain without scheme with or without query, e.g. "google.com", "ya.ru/abc"
-	//  2. Wildcard pattern with dot separator, e.g. "*.hello.com", "staging.*"
-	//     Note: dot must be present before or after `*` (so "*abc.com" is NOT valid)
-	//  3. Regular expression starting with `~`, e.g. "~^prod\..*\.company.org/abc"
+	// 1. Domain without scheme with or without query, e.g. "google.com", "ya.ru/abc"
+	// 2. Wildcard pattern with dot separator, e.g. "*.hello.com", "staging.*"
+	// Note: dot must be present before or after `*` (so "*abc.com" is NOT valid)
+	// 3. Regular expression starting with `~`, e.g. "~^prod\..*\.company.org/abc"
 	Referrers     []string `protobuf:"bytes,3,rep,name=referrers,proto3" json:"referrers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2958,10 +2950,10 @@ const file_yandex_cloud_cdn_v1_resource_proto_rawDesc = "" +
 	"\x11CustomValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x03R\x05value:\x028\x01\x1a\xb1\x01\n" +
-	"\x11EdgeCacheSettings\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\x12I\n" +
+	"\x11EdgeCacheSettings\x12I\n" +
 	"\x05value\x18\x02 \x01(\v21.yandex.cloud.cdn.v1.ResourceOptions.CachingTimesH\x00R\x05value\x12%\n" +
-	"\rdefault_value\x18\x03 \x01(\x03H\x00R\fdefaultValueB\x10\n" +
+	"\rdefault_value\x18\x03 \x01(\x03H\x00R\fdefaultValue\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabledB\x10\n" +
 	"\x0evalues_variant\x1a\xd5\x03\n" +
 	"\x17StringVariableMapOption\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12]\n" +

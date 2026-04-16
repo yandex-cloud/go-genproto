@@ -19,13 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ConsumptionCoreService_GetBillingAccountUsageReport_FullMethodName = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetBillingAccountUsageReport"
-	ConsumptionCoreService_GetCloudUsageReport_FullMethodName          = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetCloudUsageReport"
-	ConsumptionCoreService_GetFolderUsageReport_FullMethodName         = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetFolderUsageReport"
-	ConsumptionCoreService_GetServiceUsageReport_FullMethodName        = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetServiceUsageReport"
-	ConsumptionCoreService_GetSKUUsageReport_FullMethodName            = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetSKUUsageReport"
-	ConsumptionCoreService_GetResourceUsageReport_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetResourceUsageReport"
-	ConsumptionCoreService_GetLabelKeyUsageReport_FullMethodName       = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetLabelKeyUsageReport"
+	ConsumptionCoreService_GetBillingAccountUsageReport_FullMethodName  = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetBillingAccountUsageReport"
+	ConsumptionCoreService_GetCloudUsageReport_FullMethodName           = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetCloudUsageReport"
+	ConsumptionCoreService_GetFolderUsageReport_FullMethodName          = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetFolderUsageReport"
+	ConsumptionCoreService_GetServiceUsageReport_FullMethodName         = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetServiceUsageReport"
+	ConsumptionCoreService_GetSKUUsageReport_FullMethodName             = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetSKUUsageReport"
+	ConsumptionCoreService_GetResourceUsageReport_FullMethodName        = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetResourceUsageReport"
+	ConsumptionCoreService_GetLabelKeyUsageReport_FullMethodName        = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetLabelKeyUsageReport"
+	ConsumptionCoreService_GetServiceInstanceUsageReport_FullMethodName = "/yandex.cloud.billing.usage_records.v1.ConsumptionCoreService/GetServiceInstanceUsageReport"
 )
 
 // ConsumptionCoreServiceClient is the client API for ConsumptionCoreService service.
@@ -172,7 +173,8 @@ type ConsumptionCoreServiceClient interface {
 	// entity types and aggregated at different time granularities.
 	//
 	// Implementation details:
-	// - Results are organized by resource, with each resource's usage, costs, and credits detailed
+	// - Results are organized by resource, with each resource's usage, costs, and credits detailed.
+	// - Each resource-id + service-instance-type unique combination results in one entry in entity data.
 	// - If resource_ids are specified, only data for those resources is included (using OR logic)
 	// - When no resource_ids are specified, data for all resources under the billing account is returned
 	// - Other filters (cloud_ids, folder_ids, service_ids, sku_ids, labels) are always applied if present
@@ -211,6 +213,29 @@ type ConsumptionCoreServiceClient interface {
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
 	GetLabelKeyUsageReport(ctx context.Context, in *UsageReportRequest, opts ...grpc.CallOption) (*LabelKeyUsageReportResponse, error)
+	// Returns aggregated usage report for the specified service instances
+	// under the specified billing account.
+	//
+	// This method provides detailed usage and cost information grouped by service instances
+	// within the specified billing account. Service instances represent individual billable
+	// entities such as cloud instances, DataLens instances, Tracker instances, Cloud Video
+	// instances, and other service-specific instances. The data can be filtered by various
+	// entity types and aggregated at different time granularities.
+	//
+	// Implementation details:
+	//   - Results are organized by service instance, with each instance's usage, costs, and credits detailed
+	//   - If service_instance_ids are specified, only data for those instances is included (using OR logic)
+	//   - When no service_instance_ids are specified, data for all service instances under the billing account is returned
+	//   - Other filters (cloud_ids, folder_ids, service_ids, sku_ids, resource_ids, labels) are always applied if present
+	//   - If both cloud_ids and service_instance_ids are specified in the request, the results are filtered
+	//     by the intersection of these filters (AND logic).
+	//
+	// Error handling:
+	// - Returns INVALID_ARGUMENT if the request parameters fail validation
+	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
+	// - Returns PERMISSION_DENIED if the user lacks required permissions
+	// - Returns INTERNAL for internal server errors
+	GetServiceInstanceUsageReport(ctx context.Context, in *UsageReportRequest, opts ...grpc.CallOption) (*ServiceInstanceUsageReportResponse, error)
 }
 
 type consumptionCoreServiceClient struct {
@@ -285,6 +310,16 @@ func (c *consumptionCoreServiceClient) GetLabelKeyUsageReport(ctx context.Contex
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LabelKeyUsageReportResponse)
 	err := c.cc.Invoke(ctx, ConsumptionCoreService_GetLabelKeyUsageReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *consumptionCoreServiceClient) GetServiceInstanceUsageReport(ctx context.Context, in *UsageReportRequest, opts ...grpc.CallOption) (*ServiceInstanceUsageReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ServiceInstanceUsageReportResponse)
+	err := c.cc.Invoke(ctx, ConsumptionCoreService_GetServiceInstanceUsageReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -435,7 +470,8 @@ type ConsumptionCoreServiceServer interface {
 	// entity types and aggregated at different time granularities.
 	//
 	// Implementation details:
-	// - Results are organized by resource, with each resource's usage, costs, and credits detailed
+	// - Results are organized by resource, with each resource's usage, costs, and credits detailed.
+	// - Each resource-id + service-instance-type unique combination results in one entry in entity data.
 	// - If resource_ids are specified, only data for those resources is included (using OR logic)
 	// - When no resource_ids are specified, data for all resources under the billing account is returned
 	// - Other filters (cloud_ids, folder_ids, service_ids, sku_ids, labels) are always applied if present
@@ -474,6 +510,29 @@ type ConsumptionCoreServiceServer interface {
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
 	GetLabelKeyUsageReport(context.Context, *UsageReportRequest) (*LabelKeyUsageReportResponse, error)
+	// Returns aggregated usage report for the specified service instances
+	// under the specified billing account.
+	//
+	// This method provides detailed usage and cost information grouped by service instances
+	// within the specified billing account. Service instances represent individual billable
+	// entities such as cloud instances, DataLens instances, Tracker instances, Cloud Video
+	// instances, and other service-specific instances. The data can be filtered by various
+	// entity types and aggregated at different time granularities.
+	//
+	// Implementation details:
+	//   - Results are organized by service instance, with each instance's usage, costs, and credits detailed
+	//   - If service_instance_ids are specified, only data for those instances is included (using OR logic)
+	//   - When no service_instance_ids are specified, data for all service instances under the billing account is returned
+	//   - Other filters (cloud_ids, folder_ids, service_ids, sku_ids, resource_ids, labels) are always applied if present
+	//   - If both cloud_ids and service_instance_ids are specified in the request, the results are filtered
+	//     by the intersection of these filters (AND logic).
+	//
+	// Error handling:
+	// - Returns INVALID_ARGUMENT if the request parameters fail validation
+	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
+	// - Returns PERMISSION_DENIED if the user lacks required permissions
+	// - Returns INTERNAL for internal server errors
+	GetServiceInstanceUsageReport(context.Context, *UsageReportRequest) (*ServiceInstanceUsageReportResponse, error)
 }
 
 // UnimplementedConsumptionCoreServiceServer should be embedded to have
@@ -503,6 +562,9 @@ func (UnimplementedConsumptionCoreServiceServer) GetResourceUsageReport(context.
 }
 func (UnimplementedConsumptionCoreServiceServer) GetLabelKeyUsageReport(context.Context, *UsageReportRequest) (*LabelKeyUsageReportResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetLabelKeyUsageReport not implemented")
+}
+func (UnimplementedConsumptionCoreServiceServer) GetServiceInstanceUsageReport(context.Context, *UsageReportRequest) (*ServiceInstanceUsageReportResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetServiceInstanceUsageReport not implemented")
 }
 func (UnimplementedConsumptionCoreServiceServer) testEmbeddedByValue() {}
 
@@ -650,6 +712,24 @@ func _ConsumptionCoreService_GetLabelKeyUsageReport_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConsumptionCoreService_GetServiceInstanceUsageReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UsageReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConsumptionCoreServiceServer).GetServiceInstanceUsageReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConsumptionCoreService_GetServiceInstanceUsageReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConsumptionCoreServiceServer).GetServiceInstanceUsageReport(ctx, req.(*UsageReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConsumptionCoreService_ServiceDesc is the grpc.ServiceDesc for ConsumptionCoreService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -684,6 +764,10 @@ var ConsumptionCoreService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLabelKeyUsageReport",
 			Handler:    _ConsumptionCoreService_GetLabelKeyUsageReport_Handler,
+		},
+		{
+			MethodName: "GetServiceInstanceUsageReport",
+			Handler:    _ConsumptionCoreService_GetServiceInstanceUsageReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

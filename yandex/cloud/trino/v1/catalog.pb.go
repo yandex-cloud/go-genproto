@@ -2630,17 +2630,17 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x06labels\x18\x05 \x03(\v2*.yandex.cloud.trino.v1.Catalog.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf5\x02\n" +
-	"\vCatalogSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12D\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x82\x03\n" +
+	"\vCatalogSpec\x12?\n" +
+	"\x04name\x18\x01 \x01(\tB+\xe8\xc71\x01\xf2\xc71\x1b[a-z]([a-z0-9_-]*[a-z0-9])?\x8a\xc81\x04<=63R\x04name\x12D\n" +
 	"\tconnector\x18\x02 \x01(\v2 .yandex.cloud.trino.v1.ConnectorB\x04\xe8\xc71\x01R\tconnector\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x83\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2..yandex.cloud.trino.v1.CatalogSpec.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf7\x02\n" +
-	"\x11CatalogUpdateSpec\x12.\n" +
-	"\x04name\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12>\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x03\n" +
+	"\x11CatalogUpdateSpec\x12;\n" +
+	"\x04name\x18\x01 \x01(\tB'\xf2\xc71\x1b[a-z]([a-z0-9_-]*[a-z0-9])?\x8a\xc81\x04<=63R\x04name\x12>\n" +
 	"\tconnector\x18\x02 \x01(\v2 .yandex.cloud.trino.v1.ConnectorR\tconnector\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x89\x01\n" +
 	"\x06labels\x18\x04 \x03(\v24.yandex.cloud.trino.v1.CatalogUpdateSpec.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
@@ -2653,17 +2653,17 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x03uri\x18\x01 \x01(\tH\x00R\x03uriB\x12\n" +
 	"\n" +
 	"connection\x12\x04\xc0\xc11\x01B\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\x86\x03\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\x97\x03\n" +
 	"\n" +
 	"FileSystem\x12@\n" +
 	"\x02s3\x18\x01 \x01(\v2..yandex.cloud.trino.v1.FileSystem.S3FileSystemH\x00R\x02s3\x12Y\n" +
 	"\vexternal_s3\x18\x02 \x01(\v26.yandex.cloud.trino.v1.FileSystem.ExternalS3FileSystemH\x00R\n" +
 	"externalS3\x1a\x0e\n" +
-	"\fS3FileSystem\x1a\xbc\x01\n" +
+	"\fS3FileSystem\x1a\xcd\x01\n" +
 	"\x14ExternalS3FileSystem\x12*\n" +
 	"\x0eaws_access_key\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fawsAccessKey\x12*\n" +
-	"\x0eaws_secret_key\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\fawsSecretKey\x12'\n" +
-	"\faws_endpoint\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\vawsEndpoint\x12#\n" +
+	"\x0eaws_secret_key\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\fawsSecretKey\x128\n" +
+	"\faws_endpoint\x18\x03 \x01(\tB\x15\xe8\xc71\x01\xf2\xc71\r^https?://.+$R\vawsEndpoint\x12#\n" +
 	"\n" +
 	"aws_region\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\tawsRegionB\f\n" +
 	"\x04type\x12\x04\xc0\xc11\x01\"\xa9\x03\n" +

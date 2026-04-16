@@ -75,8 +75,6 @@ func (SortOrder) EnumDescriptor() ([]byte, []int) {
 
 type Filter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// metadata key (user.some_key / system.created_at / analysis.speechkit.duration)
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// Types that are valid to be assigned to Filter:
 	//
 	//	*Filter_AnyMatch
@@ -85,8 +83,10 @@ type Filter struct {
 	//	*Filter_DateRange
 	//	*Filter_DurationRange
 	//	*Filter_BooleanMatch
-	Filter  isFilter_Filter `protobuf_oneof:"filter"`
-	Inverse bool            `protobuf:"varint,7,opt,name=inverse,proto3" json:"inverse,omitempty"`
+	Filter isFilter_Filter `protobuf_oneof:"filter"`
+	// metadata key (user.some_key / system.created_at / analysis.speechkit.duration)
+	Key     string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Inverse bool   `protobuf:"varint,7,opt,name=inverse,proto3" json:"inverse,omitempty"`
 	// channel number to apply filter for, starting with 0. applies to all channels if not specified
 	ChannelNumber *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=channel_number,json=channelNumber,proto3" json:"channel_number,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -121,13 +121,6 @@ func (x *Filter) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Filter.ProtoReflect.Descriptor instead.
 func (*Filter) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_speechsense_v1_search_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Filter) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
 }
 
 func (x *Filter) GetFilter() isFilter_Filter {
@@ -189,6 +182,13 @@ func (x *Filter) GetBooleanMatch() *BooleanFilter {
 		}
 	}
 	return nil
+}
+
+func (x *Filter) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
 }
 
 func (x *Filter) GetInverse() bool {
@@ -809,15 +809,15 @@ var File_yandex_cloud_speechsense_v1_search_proto protoreflect.FileDescriptor
 const file_yandex_cloud_speechsense_v1_search_proto_rawDesc = "" +
 	"\n" +
 	"(yandex/cloud/speechsense/v1/search.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xec\x04\n" +
-	"\x06Filter\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12J\n" +
+	"\x06Filter\x12J\n" +
 	"\tany_match\x18\x02 \x01(\v2+.yandex.cloud.speechsense.v1.AnyMatchFilterH\x00R\banyMatch\x12J\n" +
 	"\tint_range\x18\x03 \x01(\v2+.yandex.cloud.speechsense.v1.IntRangeFilterH\x00R\bintRange\x12S\n" +
 	"\fdouble_range\x18\x04 \x01(\v2..yandex.cloud.speechsense.v1.DoubleRangeFilterH\x00R\vdoubleRange\x12M\n" +
 	"\n" +
 	"date_range\x18\x05 \x01(\v2,.yandex.cloud.speechsense.v1.DateRangeFilterH\x00R\tdateRange\x12Y\n" +
 	"\x0eduration_range\x18\x06 \x01(\v20.yandex.cloud.speechsense.v1.DurationRangeFilterH\x00R\rdurationRange\x12Q\n" +
-	"\rboolean_match\x18\t \x01(\v2*.yandex.cloud.speechsense.v1.BooleanFilterH\x00R\fbooleanMatch\x12\x18\n" +
+	"\rboolean_match\x18\t \x01(\v2*.yandex.cloud.speechsense.v1.BooleanFilterH\x00R\fbooleanMatch\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x18\n" +
 	"\ainverse\x18\a \x01(\bR\ainverse\x12B\n" +
 	"\x0echannel_number\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\rchannelNumberB\b\n" +
 	"\x06filter\"y\n" +

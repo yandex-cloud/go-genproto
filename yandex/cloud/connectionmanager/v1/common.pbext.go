@@ -35,6 +35,12 @@ func (m *Password) SetSecretKey(v Password_SecretKey) {
 	m.SecretKey = v
 }
 
+func (m *Password) SetLockboxSecretKey(v string) {
+	m.SecretKey = &Password_LockboxSecretKey{
+		LockboxSecretKey: v,
+	}
+}
+
 func (m *Password) SetRaw(v string) {
 	m.Raw = v
 }
@@ -43,26 +49,20 @@ func (m *Password) SetPasswordGenerationOptions(v *PasswordGenerationOptions) {
 	m.PasswordGenerationOptions = v
 }
 
-func (m *Password) SetLockboxSecretKey(v string) {
-	m.SecretKey = &Password_LockboxSecretKey{
-		LockboxSecretKey: v,
-	}
-}
-
 type PasswordGenerationOptions_PasswordGenerationOptions = isPasswordGenerationOptions_PasswordGenerationOptions
 
 func (m *PasswordGenerationOptions) SetPasswordGenerationOptions(v PasswordGenerationOptions_PasswordGenerationOptions) {
 	m.PasswordGenerationOptions = v
 }
 
-func (m *PasswordGenerationOptions) SetCookie(v string) {
-	m.Cookie = v
-}
-
 func (m *PasswordGenerationOptions) SetLockboxPasswordGenerationOptions(v *LockboxPasswordGenerationOptions) {
 	m.PasswordGenerationOptions = &PasswordGenerationOptions_LockboxPasswordGenerationOptions{
 		LockboxPasswordGenerationOptions: v,
 	}
+}
+
+func (m *PasswordGenerationOptions) SetCookie(v string) {
+	m.Cookie = v
 }
 
 func (m *LockboxPasswordGenerationOptions) SetLength(v int64) {

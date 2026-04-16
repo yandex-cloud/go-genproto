@@ -35,7 +35,6 @@ const (
 // A set of methods for managing PublicSubnet resources.
 type PublicSubnetServiceClient interface {
 	// Returns the specific PublicSubnet resource.
-	//
 	// To get the list of available PublicSubnet resources, make a [List] request.
 	Get(ctx context.Context, in *GetPublicSubnetRequest, opts ...grpc.CallOption) (*PublicSubnet, error)
 	// Retrieves the list of PublicSubnet resources in the specified folder.
@@ -45,7 +44,6 @@ type PublicSubnetServiceClient interface {
 	// Updates the specified public subnet.
 	Update(ctx context.Context, in *UpdatePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified public subnet.
-	//
 	// Deleting a public subnet removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeletePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified public subnet.
@@ -127,7 +125,6 @@ func (c *publicSubnetServiceClient) ListOperations(ctx context.Context, in *List
 // A set of methods for managing PublicSubnet resources.
 type PublicSubnetServiceServer interface {
 	// Returns the specific PublicSubnet resource.
-	//
 	// To get the list of available PublicSubnet resources, make a [List] request.
 	Get(context.Context, *GetPublicSubnetRequest) (*PublicSubnet, error)
 	// Retrieves the list of PublicSubnet resources in the specified folder.
@@ -137,7 +134,6 @@ type PublicSubnetServiceServer interface {
 	// Updates the specified public subnet.
 	Update(context.Context, *UpdatePublicSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified public subnet.
-	//
 	// Deleting a public subnet removes its data permanently and is irreversible.
 	Delete(context.Context, *DeletePublicSubnetRequest) (*operation.Operation, error)
 	// Lists operations for the specified public subnet.

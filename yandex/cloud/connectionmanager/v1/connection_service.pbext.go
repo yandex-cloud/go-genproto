@@ -14,6 +14,12 @@ func (m *CreateConnectionRequest) SetSecretSpec(v CreateConnectionRequest_Secret
 	m.SecretSpec = v
 }
 
+func (m *CreateConnectionRequest) SetLockboxSecretSpec(v *LockboxSecretSpec) {
+	m.SecretSpec = &CreateConnectionRequest_LockboxSecretSpec{
+		LockboxSecretSpec: v,
+	}
+}
+
 func (m *CreateConnectionRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -32,12 +38,6 @@ func (m *CreateConnectionRequest) SetLabels(v map[string]string) {
 
 func (m *CreateConnectionRequest) SetParams(v *ConnectionParams) {
 	m.Params = v
-}
-
-func (m *CreateConnectionRequest) SetLockboxSecretSpec(v *LockboxSecretSpec) {
-	m.SecretSpec = &CreateConnectionRequest_LockboxSecretSpec{
-		LockboxSecretSpec: v,
-	}
 }
 
 func (m *CreateConnectionMetadata) SetConnectionId(v string) {

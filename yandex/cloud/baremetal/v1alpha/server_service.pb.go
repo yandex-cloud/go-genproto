@@ -29,7 +29,6 @@ const (
 type GetServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Server resource to return.
-	//
 	// To get the server ID, use a [ServerService.List] request.
 	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetServerRequest) GetServerId() string {
 type ListServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list servers in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -95,7 +93,6 @@ type ListServerRequest struct {
 	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
@@ -182,7 +179,6 @@ type ListServerResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListServerRequest.page_size], use `next_page_token` as the value
 	// for the [ListServerRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -236,7 +232,6 @@ func (x *ListServerResponse) GetNextPageToken() string {
 type CreateServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create server in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the server.
@@ -245,15 +240,14 @@ type CreateServerRequest struct {
 	// Description of the server.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the hardware pool that the server belongs to.
-	//
 	// To get the hardware pool ID, use a [HardwarePoolService.List] request.
 	HardwarePoolId string `protobuf:"bytes,4,opt,name=hardware_pool_id,json=hardwarePoolId,proto3" json:"hardware_pool_id,omitempty"`
 	// ID of the configuration to use for the server.
-	//
 	// To get the configuration ID, use a [ConfigurationService.List] request.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server_service.proto.
 	ConfigurationId string `protobuf:"bytes,5,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// A period of time for which the server is rented.
-	//
 	// To get the rental period ID, use a [RentalPeriodService.List] request.
 	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
@@ -328,6 +322,7 @@ func (x *CreateServerRequest) GetHardwarePoolId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server_service.proto.
 func (x *CreateServerRequest) GetConfigurationId() string {
 	if x != nil {
 		return x.ConfigurationId
@@ -411,7 +406,6 @@ func (x *CreateServerMetadata) GetServerId() string {
 type UpdateServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the server to update.
-	//
 	// To get the server ID, use a [ServerService.List] request.
 	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	// Field mask that specifies which fields of the Server resource are going to be updated.
@@ -505,12 +499,9 @@ func (x *UpdateServerRequest) GetLabels() map[string]string {
 }
 
 // (-- api-linter: yc::1704::file-separation=disabled
-//
-//	Required for backward compatibility with old clients. --)
+// Required for backward compatibility with old clients. --)
 type NetworkInterfaceSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the network interface. Should not be specified when creating a server.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// @deprecated. Use `interface` instead.
 	// Subnet specific interface params.
 	//
@@ -523,7 +514,9 @@ type NetworkInterfaceSpec struct {
 	//
 	//	*NetworkInterfaceSpec_PrivateInterface
 	//	*NetworkInterfaceSpec_PublicInterface
-	Interface     isNetworkInterfaceSpec_Interface `protobuf_oneof:"interface"`
+	Interface isNetworkInterfaceSpec_Interface `protobuf_oneof:"interface"`
+	// ID of the network interface. Should not be specified when creating a server.
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -556,13 +549,6 @@ func (x *NetworkInterfaceSpec) ProtoReflect() protoreflect.Message {
 // Deprecated: Use NetworkInterfaceSpec.ProtoReflect.Descriptor instead.
 func (*NetworkInterfaceSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *NetworkInterfaceSpec) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
 }
 
 func (x *NetworkInterfaceSpec) GetSubnet() isNetworkInterfaceSpec_Subnet {
@@ -617,6 +603,13 @@ func (x *NetworkInterfaceSpec) GetPublicInterface() *PublicNetworkInterface {
 	return nil
 }
 
+func (x *NetworkInterfaceSpec) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 type isNetworkInterfaceSpec_Subnet interface {
 	isNetworkInterfaceSpec_Subnet()
 }
@@ -657,1064 +650,8 @@ func (*NetworkInterfaceSpec_PrivateInterface) isNetworkInterfaceSpec_Interface()
 
 func (*NetworkInterfaceSpec_PublicInterface) isNetworkInterfaceSpec_Interface() {}
 
-type UpdateServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being updated.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateServerMetadata) Reset() {
-	*x = UpdateServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateServerMetadata) ProtoMessage() {}
-
-func (x *UpdateServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateServerMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *UpdateServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type DeleteServerRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to delete.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteServerRequest) Reset() {
-	*x = DeleteServerRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteServerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteServerRequest) ProtoMessage() {}
-
-func (x *DeleteServerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteServerRequest.ProtoReflect.Descriptor instead.
-func (*DeleteServerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *DeleteServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type DeleteServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being deleted.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteServerMetadata) Reset() {
-	*x = DeleteServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteServerMetadata) ProtoMessage() {}
-
-func (x *DeleteServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteServerMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *DeleteServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type PowerOffServerRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to power off.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PowerOffServerRequest) Reset() {
-	*x = PowerOffServerRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PowerOffServerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PowerOffServerRequest) ProtoMessage() {}
-
-func (x *PowerOffServerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PowerOffServerRequest.ProtoReflect.Descriptor instead.
-func (*PowerOffServerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *PowerOffServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type PowerOffServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being powered off.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PowerOffServerMetadata) Reset() {
-	*x = PowerOffServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PowerOffServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PowerOffServerMetadata) ProtoMessage() {}
-
-func (x *PowerOffServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PowerOffServerMetadata.ProtoReflect.Descriptor instead.
-func (*PowerOffServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *PowerOffServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type PowerOnServerRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to power on.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PowerOnServerRequest) Reset() {
-	*x = PowerOnServerRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PowerOnServerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PowerOnServerRequest) ProtoMessage() {}
-
-func (x *PowerOnServerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PowerOnServerRequest.ProtoReflect.Descriptor instead.
-func (*PowerOnServerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *PowerOnServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type PowerOnServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being powered on.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PowerOnServerMetadata) Reset() {
-	*x = PowerOnServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PowerOnServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PowerOnServerMetadata) ProtoMessage() {}
-
-func (x *PowerOnServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PowerOnServerMetadata.ProtoReflect.Descriptor instead.
-func (*PowerOnServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *PowerOnServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type RebootServerRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to reboot.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RebootServerRequest) Reset() {
-	*x = RebootServerRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RebootServerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RebootServerRequest) ProtoMessage() {}
-
-func (x *RebootServerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RebootServerRequest.ProtoReflect.Descriptor instead.
-func (*RebootServerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *RebootServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type RebootServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being rebooted.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RebootServerMetadata) Reset() {
-	*x = RebootServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RebootServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RebootServerMetadata) ProtoMessage() {}
-
-func (x *RebootServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RebootServerMetadata.ProtoReflect.Descriptor instead.
-func (*RebootServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *RebootServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type ReinstallServerRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to reinstall.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	// Operating system specific settings for provisioning the server.
-	OsSettingsSpec *OsSettingsSpec `protobuf:"bytes,9,opt,name=os_settings_spec,json=osSettingsSpec,proto3" json:"os_settings_spec,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *ReinstallServerRequest) Reset() {
-	*x = ReinstallServerRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ReinstallServerRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReinstallServerRequest) ProtoMessage() {}
-
-func (x *ReinstallServerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReinstallServerRequest.ProtoReflect.Descriptor instead.
-func (*ReinstallServerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *ReinstallServerRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-func (x *ReinstallServerRequest) GetOsSettingsSpec() *OsSettingsSpec {
-	if x != nil {
-		return x.OsSettingsSpec
-	}
-	return nil
-}
-
-type ReinstallServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource that is being reinstalled.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ReinstallServerMetadata) Reset() {
-	*x = ReinstallServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ReinstallServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ReinstallServerMetadata) ProtoMessage() {}
-
-func (x *ReinstallServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ReinstallServerMetadata.ProtoReflect.Descriptor instead.
-func (*ReinstallServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{17}
-}
-
-func (x *ReinstallServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type ListServerOperationsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Server resource to list operations for.
-	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is greater than `page_size`,
-	// the service returns a [ListServerOperationsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	// Default value is 20.
-	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set `page_token` to the
-	// [ListServerOperationsResponse.next_page_token] returned by a previous list request.
-	PageToken     string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListServerOperationsRequest) Reset() {
-	*x = ListServerOperationsRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListServerOperationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListServerOperationsRequest) ProtoMessage() {}
-
-func (x *ListServerOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListServerOperationsRequest.ProtoReflect.Descriptor instead.
-func (*ListServerOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{18}
-}
-
-func (x *ListServerOperationsRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-func (x *ListServerOperationsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListServerOperationsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListServerOperationsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of operations for the specified Server resource.
-	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// Token for getting the next page of the list. If the number of results is greater than
-	// [ListServerOperationsRequest.page_size], use `next_page_token` as the value
-	// for the [ListServerOperationsRequest.page_token] parameter in the next list request.
-	//
-	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListServerOperationsResponse) Reset() {
-	*x = ListServerOperationsResponse{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListServerOperationsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListServerOperationsResponse) ProtoMessage() {}
-
-func (x *ListServerOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListServerOperationsResponse.ProtoReflect.Descriptor instead.
-func (*ListServerOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{19}
-}
-
-func (x *ListServerOperationsResponse) GetOperations() []*operation.Operation {
-	if x != nil {
-		return x.Operations
-	}
-	return nil
-}
-
-func (x *ListServerOperationsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type BatchCreateServersRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to list images in.
-	//
-	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the server.
-	// The name must be unique within the folder.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the server.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the hardware pool that the server belongs to.
-	//
-	// To get the hardware pool ID, use a [HardwarePoolService.List] request.
-	HardwarePoolId string `protobuf:"bytes,4,opt,name=hardware_pool_id,json=hardwarePoolId,proto3" json:"hardware_pool_id,omitempty"`
-	// ID of the configuration to use for the server.
-	//
-	// To get the configuration ID, use a [ConfigurationService.List] request.
-	ConfigurationId string `protobuf:"bytes,5,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
-	// A period of time for which the server is rented.
-	//
-	// To get the rental period ID, use a [RentalPeriodService.List] request.
-	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
-	// Network configuration for the server. Specifies how the network interface is configured
-	// to interact with other servers on the internal network and on the internet.
-	// Currently up to 2 network interfaces are supported: required private network interface and
-	// optional public network interface.
-	NetworkInterfaces []*NetworkInterfaceSpec `protobuf:"bytes,15,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	// Operating system specific settings for provisioning the server. Optional, if omitted, the
-	// server will be created without an operating system.
-	OsSettingsSpec *OsSettingsSpec `protobuf:"bytes,16,opt,name=os_settings_spec,json=osSettingsSpec,proto3" json:"os_settings_spec,omitempty"`
-	// Resource labels as `key:value` pairs.
-	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Number of servers to create.
-	Count         int64 `protobuf:"varint,300,opt,name=count,proto3" json:"count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BatchCreateServersRequest) Reset() {
-	*x = BatchCreateServersRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BatchCreateServersRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BatchCreateServersRequest) ProtoMessage() {}
-
-func (x *BatchCreateServersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BatchCreateServersRequest.ProtoReflect.Descriptor instead.
-func (*BatchCreateServersRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *BatchCreateServersRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetHardwarePoolId() string {
-	if x != nil {
-		return x.HardwarePoolId
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetConfigurationId() string {
-	if x != nil {
-		return x.ConfigurationId
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetRentalPeriodId() string {
-	if x != nil {
-		return x.RentalPeriodId
-	}
-	return ""
-}
-
-func (x *BatchCreateServersRequest) GetNetworkInterfaces() []*NetworkInterfaceSpec {
-	if x != nil {
-		return x.NetworkInterfaces
-	}
-	return nil
-}
-
-func (x *BatchCreateServersRequest) GetOsSettingsSpec() *OsSettingsSpec {
-	if x != nil {
-		return x.OsSettingsSpec
-	}
-	return nil
-}
-
-func (x *BatchCreateServersRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *BatchCreateServersRequest) GetCount() int64 {
-	if x != nil {
-		return x.Count
-	}
-	return 0
-}
-
-type BatchCreateServersResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Server resources that were created.
-	Servers       []*Server `protobuf:"bytes,1,rep,name=servers,proto3" json:"servers,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BatchCreateServersResponse) Reset() {
-	*x = BatchCreateServersResponse{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BatchCreateServersResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BatchCreateServersResponse) ProtoMessage() {}
-
-func (x *BatchCreateServersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BatchCreateServersResponse.ProtoReflect.Descriptor instead.
-func (*BatchCreateServersResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *BatchCreateServersResponse) GetServers() []*Server {
-	if x != nil {
-		return x.Servers
-	}
-	return nil
-}
-
-type BatchCreateServersMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// IDs of the servers that were created.
-	ServerIds     []string `protobuf:"bytes,1,rep,name=server_ids,json=serverIds,proto3" json:"server_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BatchCreateServersMetadata) Reset() {
-	*x = BatchCreateServersMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BatchCreateServersMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BatchCreateServersMetadata) ProtoMessage() {}
-
-func (x *BatchCreateServersMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BatchCreateServersMetadata.ProtoReflect.Descriptor instead.
-func (*BatchCreateServersMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *BatchCreateServersMetadata) GetServerIds() []string {
-	if x != nil {
-		return x.ServerIds
-	}
-	return nil
-}
-
-type QuarantineServerMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server that is being quarantined.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *QuarantineServerMetadata) Reset() {
-	*x = QuarantineServerMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *QuarantineServerMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*QuarantineServerMetadata) ProtoMessage() {}
-
-func (x *QuarantineServerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use QuarantineServerMetadata.ProtoReflect.Descriptor instead.
-func (*QuarantineServerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *QuarantineServerMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type StartProlongationRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server that is being prolonged.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartProlongationRequest) Reset() {
-	*x = StartProlongationRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartProlongationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartProlongationRequest) ProtoMessage() {}
-
-func (x *StartProlongationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartProlongationRequest.ProtoReflect.Descriptor instead.
-func (*StartProlongationRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *StartProlongationRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type StopProlongationRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server to stop prolongation for.
-	//
-	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StopProlongationRequest) Reset() {
-	*x = StopProlongationRequest{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[25]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StopProlongationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StopProlongationRequest) ProtoMessage() {}
-
-func (x *StopProlongationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[25]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StopProlongationRequest.ProtoReflect.Descriptor instead.
-func (*StopProlongationRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{25}
-}
-
-func (x *StopProlongationRequest) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
-type ServerSetProlongationMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the server for which the prolongation is being set.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ServerSetProlongationMetadata) Reset() {
-	*x = ServerSetProlongationMetadata{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[26]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ServerSetProlongationMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ServerSetProlongationMetadata) ProtoMessage() {}
-
-func (x *ServerSetProlongationMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[26]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ServerSetProlongationMetadata.ProtoReflect.Descriptor instead.
-func (*ServerSetProlongationMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{26}
-}
-
-func (x *ServerSetProlongationMetadata) GetServerId() string {
-	if x != nil {
-		return x.ServerId
-	}
-	return ""
-}
-
 type OsSettingsSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the image that the server was created from.
-	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	// List of storages to be created on the server. If not specified, the default value based on the
-	// selected configuration will be used as the field value.
-	Storages []*Storage `protobuf:"bytes,2,rep,name=storages,proto3" json:"storages,omitempty"`
 	// Root user SSH key.
 	//
 	// Types that are valid to be assigned to SshKey:
@@ -1728,14 +665,19 @@ type OsSettingsSpec struct {
 	//
 	//	*OsSettingsSpec_PasswordPlainText
 	//	*OsSettingsSpec_PasswordLockboxSecret
-	Password      isOsSettingsSpec_Password `protobuf_oneof:"password"`
+	Password isOsSettingsSpec_Password `protobuf_oneof:"password"`
+	// ID of the image that the server was created from.
+	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	// List of storages to be created on the server. If not specified, the default value based on the
+	// selected configuration will be used as the field value.
+	Storages      []*Storage `protobuf:"bytes,2,rep,name=storages,proto3" json:"storages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OsSettingsSpec) Reset() {
 	*x = OsSettingsSpec{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1747,7 +689,7 @@ func (x *OsSettingsSpec) String() string {
 func (*OsSettingsSpec) ProtoMessage() {}
 
 func (x *OsSettingsSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1760,21 +702,7 @@ func (x *OsSettingsSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OsSettingsSpec.ProtoReflect.Descriptor instead.
 func (*OsSettingsSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{27}
-}
-
-func (x *OsSettingsSpec) GetImageId() string {
-	if x != nil {
-		return x.ImageId
-	}
-	return ""
-}
-
-func (x *OsSettingsSpec) GetStorages() []*Storage {
-	if x != nil {
-		return x.Storages
-	}
-	return nil
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *OsSettingsSpec) GetSshKey() isOsSettingsSpec_SshKey {
@@ -1827,6 +755,20 @@ func (x *OsSettingsSpec) GetPasswordLockboxSecret() *LockboxSecret {
 	return nil
 }
 
+func (x *OsSettingsSpec) GetImageId() string {
+	if x != nil {
+		return x.ImageId
+	}
+	return ""
+}
+
+func (x *OsSettingsSpec) GetStorages() []*Storage {
+	if x != nil {
+		return x.Storages
+	}
+	return nil
+}
+
 type isOsSettingsSpec_SshKey interface {
 	isOsSettingsSpec_SshKey()
 }
@@ -1838,7 +780,6 @@ type OsSettingsSpec_SshPublicKey struct {
 
 type OsSettingsSpec_UserSshId struct {
 	// ID of the user SSH key to use for the server.
-	//
 	// To get the user SSH key ID, use a [yandex.cloud.organizationmanager.v1.UserSshKeyService.List] request.
 	UserSshId string `protobuf:"bytes,5,opt,name=user_ssh_id,json=userSshId,proto3,oneof"`
 }
@@ -1865,6 +806,640 @@ func (*OsSettingsSpec_PasswordPlainText) isOsSettingsSpec_Password() {}
 
 func (*OsSettingsSpec_PasswordLockboxSecret) isOsSettingsSpec_Password() {}
 
+type UpdateServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being updated.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateServerMetadata) Reset() {
+	*x = UpdateServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateServerMetadata) ProtoMessage() {}
+
+func (x *UpdateServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateServerMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdateServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type DeleteServerRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to delete.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteServerRequest) Reset() {
+	*x = DeleteServerRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteServerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteServerRequest) ProtoMessage() {}
+
+func (x *DeleteServerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteServerRequest.ProtoReflect.Descriptor instead.
+func (*DeleteServerRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DeleteServerRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type DeleteServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being deleted.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteServerMetadata) Reset() {
+	*x = DeleteServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteServerMetadata) ProtoMessage() {}
+
+func (x *DeleteServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteServerMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type PowerOffServerRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to power off.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PowerOffServerRequest) Reset() {
+	*x = PowerOffServerRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PowerOffServerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PowerOffServerRequest) ProtoMessage() {}
+
+func (x *PowerOffServerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PowerOffServerRequest.ProtoReflect.Descriptor instead.
+func (*PowerOffServerRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PowerOffServerRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type PowerOffServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being powered off.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PowerOffServerMetadata) Reset() {
+	*x = PowerOffServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PowerOffServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PowerOffServerMetadata) ProtoMessage() {}
+
+func (x *PowerOffServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PowerOffServerMetadata.ProtoReflect.Descriptor instead.
+func (*PowerOffServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PowerOffServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type PowerOnServerRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to power on.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PowerOnServerRequest) Reset() {
+	*x = PowerOnServerRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PowerOnServerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PowerOnServerRequest) ProtoMessage() {}
+
+func (x *PowerOnServerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PowerOnServerRequest.ProtoReflect.Descriptor instead.
+func (*PowerOnServerRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *PowerOnServerRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type PowerOnServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being powered on.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PowerOnServerMetadata) Reset() {
+	*x = PowerOnServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PowerOnServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PowerOnServerMetadata) ProtoMessage() {}
+
+func (x *PowerOnServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PowerOnServerMetadata.ProtoReflect.Descriptor instead.
+func (*PowerOnServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *PowerOnServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type RebootServerRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to reboot.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RebootServerRequest) Reset() {
+	*x = RebootServerRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RebootServerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RebootServerRequest) ProtoMessage() {}
+
+func (x *RebootServerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RebootServerRequest.ProtoReflect.Descriptor instead.
+func (*RebootServerRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *RebootServerRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type RebootServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being rebooted.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RebootServerMetadata) Reset() {
+	*x = RebootServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RebootServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RebootServerMetadata) ProtoMessage() {}
+
+func (x *RebootServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RebootServerMetadata.ProtoReflect.Descriptor instead.
+func (*RebootServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *RebootServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type ReinstallServerRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to reinstall.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	// Operating system specific settings for provisioning the server.
+	OsSettingsSpec *OsSettingsSpec `protobuf:"bytes,9,opt,name=os_settings_spec,json=osSettingsSpec,proto3" json:"os_settings_spec,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ReinstallServerRequest) Reset() {
+	*x = ReinstallServerRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReinstallServerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReinstallServerRequest) ProtoMessage() {}
+
+func (x *ReinstallServerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReinstallServerRequest.ProtoReflect.Descriptor instead.
+func (*ReinstallServerRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ReinstallServerRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+func (x *ReinstallServerRequest) GetOsSettingsSpec() *OsSettingsSpec {
+	if x != nil {
+		return x.OsSettingsSpec
+	}
+	return nil
+}
+
+type ReinstallServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource that is being reinstalled.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReinstallServerMetadata) Reset() {
+	*x = ReinstallServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReinstallServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReinstallServerMetadata) ProtoMessage() {}
+
+func (x *ReinstallServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReinstallServerMetadata.ProtoReflect.Descriptor instead.
+func (*ReinstallServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ReinstallServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type ListServerOperationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Server resource to list operations for.
+	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListServerOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListServerOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListServerOperationsRequest) Reset() {
+	*x = ListServerOperationsRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListServerOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListServerOperationsRequest) ProtoMessage() {}
+
+func (x *ListServerOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListServerOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListServerOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ListServerOperationsRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+func (x *ListServerOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListServerOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListServerOperationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations for the specified Server resource.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListServerOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListServerOperationsRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListServerOperationsResponse) Reset() {
+	*x = ListServerOperationsResponse{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListServerOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListServerOperationsResponse) ProtoMessage() {}
+
+func (x *ListServerOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListServerOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListServerOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ListServerOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListServerOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 type LockboxSecret struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The unique identifier for the lockbox secret that contains the user password.
@@ -1880,7 +1455,7 @@ type LockboxSecret struct {
 
 func (x *LockboxSecret) Reset() {
 	*x = LockboxSecret{}
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1892,7 +1467,7 @@ func (x *LockboxSecret) String() string {
 func (*LockboxSecret) ProtoMessage() {}
 
 func (x *LockboxSecret) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1905,7 +1480,7 @@ func (x *LockboxSecret) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LockboxSecret.ProtoReflect.Descriptor instead.
 func (*LockboxSecret) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *LockboxSecret) GetSecretId() string {
@@ -1929,30 +1504,440 @@ func (x *LockboxSecret) GetKey() string {
 	return ""
 }
 
+type BatchCreateServersRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to list images in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the server.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the server.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the hardware pool that the server belongs to.
+	// To get the hardware pool ID, use a [HardwarePoolService.List] request.
+	HardwarePoolId string `protobuf:"bytes,4,opt,name=hardware_pool_id,json=hardwarePoolId,proto3" json:"hardware_pool_id,omitempty"`
+	// ID of the configuration to use for the server.
+	// To get the configuration ID, use a [ConfigurationService.List] request.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server_service.proto.
+	ConfigurationId string `protobuf:"bytes,5,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
+	// A period of time for which the server is rented.
+	// To get the rental period ID, use a [RentalPeriodService.List] request.
+	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
+	// Network configuration for the server. Specifies how the network interface is configured
+	// to interact with other servers on the internal network and on the internet.
+	// Currently up to 2 network interfaces are supported: required private network interface and
+	// optional public network interface.
+	NetworkInterfaces []*NetworkInterfaceSpec `protobuf:"bytes,15,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
+	// Operating system specific settings for provisioning the server. Optional, if omitted, the
+	// server will be created without an operating system.
+	OsSettingsSpec *OsSettingsSpec `protobuf:"bytes,16,opt,name=os_settings_spec,json=osSettingsSpec,proto3" json:"os_settings_spec,omitempty"`
+	// Resource labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Number of servers to create.
+	Count         int64 `protobuf:"varint,300,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateServersRequest) Reset() {
+	*x = BatchCreateServersRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateServersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateServersRequest) ProtoMessage() {}
+
+func (x *BatchCreateServersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateServersRequest.ProtoReflect.Descriptor instead.
+func (*BatchCreateServersRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *BatchCreateServersRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *BatchCreateServersRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *BatchCreateServersRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *BatchCreateServersRequest) GetHardwarePoolId() string {
+	if x != nil {
+		return x.HardwarePoolId
+	}
+	return ""
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server_service.proto.
+func (x *BatchCreateServersRequest) GetConfigurationId() string {
+	if x != nil {
+		return x.ConfigurationId
+	}
+	return ""
+}
+
+func (x *BatchCreateServersRequest) GetRentalPeriodId() string {
+	if x != nil {
+		return x.RentalPeriodId
+	}
+	return ""
+}
+
+func (x *BatchCreateServersRequest) GetNetworkInterfaces() []*NetworkInterfaceSpec {
+	if x != nil {
+		return x.NetworkInterfaces
+	}
+	return nil
+}
+
+func (x *BatchCreateServersRequest) GetOsSettingsSpec() *OsSettingsSpec {
+	if x != nil {
+		return x.OsSettingsSpec
+	}
+	return nil
+}
+
+func (x *BatchCreateServersRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *BatchCreateServersRequest) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+type BatchCreateServersResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of Server resources that were created.
+	Servers       []*Server `protobuf:"bytes,1,rep,name=servers,proto3" json:"servers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateServersResponse) Reset() {
+	*x = BatchCreateServersResponse{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateServersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateServersResponse) ProtoMessage() {}
+
+func (x *BatchCreateServersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateServersResponse.ProtoReflect.Descriptor instead.
+func (*BatchCreateServersResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *BatchCreateServersResponse) GetServers() []*Server {
+	if x != nil {
+		return x.Servers
+	}
+	return nil
+}
+
+type BatchCreateServersMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// IDs of the servers that were created.
+	ServerIds     []string `protobuf:"bytes,1,rep,name=server_ids,json=serverIds,proto3" json:"server_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchCreateServersMetadata) Reset() {
+	*x = BatchCreateServersMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchCreateServersMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchCreateServersMetadata) ProtoMessage() {}
+
+func (x *BatchCreateServersMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchCreateServersMetadata.ProtoReflect.Descriptor instead.
+func (*BatchCreateServersMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *BatchCreateServersMetadata) GetServerIds() []string {
+	if x != nil {
+		return x.ServerIds
+	}
+	return nil
+}
+
+type QuarantineServerMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server that is being quarantined.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QuarantineServerMetadata) Reset() {
+	*x = QuarantineServerMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuarantineServerMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuarantineServerMetadata) ProtoMessage() {}
+
+func (x *QuarantineServerMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuarantineServerMetadata.ProtoReflect.Descriptor instead.
+func (*QuarantineServerMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *QuarantineServerMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type StartProlongationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server that is being prolonged.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartProlongationRequest) Reset() {
+	*x = StartProlongationRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartProlongationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartProlongationRequest) ProtoMessage() {}
+
+func (x *StartProlongationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartProlongationRequest.ProtoReflect.Descriptor instead.
+func (*StartProlongationRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *StartProlongationRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type StopProlongationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server to stop prolongation for.
+	// To get the server ID, use a [ServerService.List] request.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StopProlongationRequest) Reset() {
+	*x = StopProlongationRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopProlongationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopProlongationRequest) ProtoMessage() {}
+
+func (x *StopProlongationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopProlongationRequest.ProtoReflect.Descriptor instead.
+func (*StopProlongationRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *StopProlongationRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+type ServerSetProlongationMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the server for which the prolongation is being set.
+	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ServerSetProlongationMetadata) Reset() {
+	*x = ServerSetProlongationMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServerSetProlongationMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServerSetProlongationMetadata) ProtoMessage() {}
+
+func (x *ServerSetProlongationMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServerSetProlongationMetadata.ProtoReflect.Descriptor instead.
+func (*ServerSetProlongationMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *ServerSetProlongationMetadata) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v1alpha_server_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\n" +
 	"3yandex/cloud/baremetal/v1alpha/server_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/baremetal/v1alpha/server.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x10GetServerRequest\x125\n" +
-	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"\xce\x01\n" +
+	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"\xcf\x01\n" +
 	"\x11ListServerRequest\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
 	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\x84\x01\n" +
 	"\x12ListServerResponse\x12@\n" +
 	"\aservers\x18\x01 \x03(\v2&.yandex.cloud.baremetal.v1alpha.ServerR\aservers\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x99\x06\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x9f\x06\n" +
 	"\x13CreateServerRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
-	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
-	"\x10configuration_id\x18\x05 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x122\n" +
+	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12I\n" +
+	"\x10configuration_id\x18\x05 \x01(\tB\x1e\xe8\xc71\x00\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220\x18\x01R\x0fconfigurationId\x122\n" +
 	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
 	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +
 	"\x10os_settings_spec\x18\x10 \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpec\x12\x95\x01\n" +
@@ -1974,15 +1959,26 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x05\b\x06\x10\xc8\x01\"\x84\x04\n" +
-	"\x14NetworkInterfaceSpec\x12-\n" +
-	"\x02id\x18\x01 \x01(\tB\x1d\xf2\xc71\x11([a-z][a-z0-9]*)?\x8a\xc81\x04<=20R\x02id\x12j\n" +
+	"\x14NetworkInterfaceSpec\x12j\n" +
 	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +
 	"\rpublic_subnet\x18\b \x01(\v2<.yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterfaceB\x02\x18\x01H\x00R\fpublicSubnet\x12f\n" +
 	"\x11private_interface\x18\t \x01(\v27.yandex.cloud.baremetal.v1alpha.PrivateNetworkInterfaceH\x01R\x10privateInterface\x12c\n" +
 	"\x10public_interface\x18\n" +
-	" \x01(\v26.yandex.cloud.baremetal.v1alpha.PublicNetworkInterfaceH\x01R\x0fpublicInterfaceB\b\n" +
+	" \x01(\v26.yandex.cloud.baremetal.v1alpha.PublicNetworkInterfaceH\x01R\x0fpublicInterface\x12-\n" +
+	"\x02id\x18\x01 \x01(\tB\x1d\xf2\xc71\x11([a-z][a-z0-9]*)?\x8a\xc81\x04<=20R\x02idB\b\n" +
 	"\x06subnetB\v\n" +
-	"\tinterfaceJ\x04\b\x02\x10\a\"3\n" +
+	"\tinterfaceJ\x04\b\x02\x10\a\"\xc0\x03\n" +
+	"\x0eOsSettingsSpec\x123\n" +
+	"\x0essh_public_key\x18\x04 \x01(\tB\v\x8a\xc81\a<=20000H\x00R\fsshPublicKey\x12*\n" +
+	"\vuser_ssh_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tuserSshId\x129\n" +
+	"\x13password_plain_text\x18\n" +
+	" \x01(\tB\a\x8a\xc81\x03>=6H\x01R\x11passwordPlainText\x12g\n" +
+	"\x17password_lockbox_secret\x18\v \x01(\v2-.yandex.cloud.baremetal.v1alpha.LockboxSecretH\x01R\x15passwordLockboxSecret\x125\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x04<=20R\aimageId\x12C\n" +
+	"\bstorages\x18\x02 \x03(\v2'.yandex.cloud.baremetal.v1alpha.StorageR\bstoragesB\x0f\n" +
+	"\assh_key\x12\x04\xc0\xc11\x01B\x10\n" +
+	"\bpassword\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04J\x04\b\x06\x10\n" +
+	"\"3\n" +
 	"\x14UpdateServerMetadata\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\"L\n" +
 	"\x13DeleteServerRequest\x125\n" +
@@ -2000,10 +1996,10 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x13RebootServerRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"3\n" +
 	"\x14RebootServerMetadata\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xc1\x01\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xaf\x01\n" +
 	"\x16ReinstallServerRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\x12X\n" +
-	"\x10os_settings_spec\x18\t \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpecJ\x04\b\x02\x10\x06J\x04\b\a\x10\bJ\x04\b\b\x10\tJ\x04\b\x06\x10\a\"6\n" +
+	"\x10os_settings_spec\x18\t \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpecJ\x04\b\x02\x10\t\"6\n" +
 	"\x17ReinstallServerMetadata\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xa1\x01\n" +
 	"\x1bListServerOperationsRequest\x125\n" +
@@ -2015,14 +2011,19 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xcf\x06\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"i\n" +
+	"\rLockboxSecret\x12!\n" +
+	"\tsecret_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bsecretId\x12\x1d\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\x12\x16\n" +
+	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key\"\xd5\x06\n" +
 	"\x19BatchCreateServersRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
-	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12C\n" +
-	"\x10configuration_id\x18\x05 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x122\n" +
+	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12I\n" +
+	"\x10configuration_id\x18\x05 \x01(\tB\x1e\xe8\xc71\x00\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220\x18\x01R\x0fconfigurationId\x122\n" +
 	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
 	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +
 	"\x10os_settings_spec\x18\x10 \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpec\x12\x9b\x01\n" +
@@ -2043,23 +2044,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x17StopProlongationRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"<\n" +
 	"\x1dServerSetProlongationMetadata\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xc0\x03\n" +
-	"\x0eOsSettingsSpec\x125\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x04<=20R\aimageId\x12C\n" +
-	"\bstorages\x18\x02 \x03(\v2'.yandex.cloud.baremetal.v1alpha.StorageR\bstorages\x123\n" +
-	"\x0essh_public_key\x18\x04 \x01(\tB\v\x8a\xc81\a<=20000H\x00R\fsshPublicKey\x12*\n" +
-	"\vuser_ssh_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tuserSshId\x129\n" +
-	"\x13password_plain_text\x18\n" +
-	" \x01(\tB\a\x8a\xc81\x03>=6H\x01R\x11passwordPlainText\x12g\n" +
-	"\x17password_lockbox_secret\x18\v \x01(\v2-.yandex.cloud.baremetal.v1alpha.LockboxSecretH\x01R\x15passwordLockboxSecretB\x0f\n" +
-	"\assh_key\x12\x04\xc0\xc11\x01B\x10\n" +
-	"\bpassword\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04J\x04\b\x06\x10\n" +
-	"\"i\n" +
-	"\rLockboxSecret\x12!\n" +
-	"\tsecret_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bsecretId\x12\x1d\n" +
-	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12\x16\n" +
-	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key2\xd2\x12\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId2\xd2\x12\n" +
 	"\rServerService\x12\x8f\x01\n" +
 	"\x03Get\x120.yandex.cloud.baremetal.v1alpha.GetServerRequest\x1a&.yandex.cloud.baremetal.v1alpha.Server\".\x82\xd3\xe4\x93\x02(\x12&/baremetal/v1alpha/servers/{server_id}\x12\x91\x01\n" +
 	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListServerRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListServerResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/baremetal/v1alpha/servers\x12\xa9\x01\n" +
@@ -2076,12 +2061,12 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x06Reboot\x123.yandex.cloud.baremetal.v1alpha.RebootServerRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*-\n" +
 	"\x14RebootServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x022:\x01*\"-/baremetal/v1alpha/servers/{server_id}:reboot\x12\xd7\x01\n" +
 	"\tReinstall\x126.yandex.cloud.baremetal.v1alpha.ReinstallServerRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*0\n" +
-	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x025:\x01*\"0/baremetal/v1alpha/servers/{server_id}:reinstall\x12\xe0\x01\n" +
+	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x025:\x01*\"0/baremetal/v1alpha/servers/{server_id}:reinstall\x12\xc6\x01\n" +
+	"\x0eListOperations\x12;.yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse\"9\x82\xd3\xe4\x93\x023\x121/baremetal/v1alpha/servers/{server_id}/operations\x12\xe0\x01\n" +
 	"\x11StartProlongation\x128.yandex.cloud.baremetal.v1alpha.StartProlongationRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*'\n" +
 	"\x1dServerSetProlongationMetadata\x12\x06Server\x82\xd3\xe4\x93\x02=:\x01*\"8/baremetal/v1alpha/servers/{server_id}:startProlongation\x12\xdd\x01\n" +
 	"\x10StopProlongation\x127.yandex.cloud.baremetal.v1alpha.StopProlongationRequest\x1a!.yandex.cloud.operation.Operation\"m\xb2\xd2*'\n" +
-	"\x1dServerSetProlongationMetadata\x12\x06Server\x82\xd3\xe4\x93\x02<:\x01*\"7/baremetal/v1alpha/servers/{server_id}:stopProlongation\x12\xc6\x01\n" +
-	"\x0eListOperations\x12;.yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse\"9\x82\xd3\xe4\x93\x023\x121/baremetal/v1alpha/servers/{server_id}/operationsBr\n" +
+	"\x1dServerSetProlongationMetadata\x12\x06Server\x82\xd3\xe4\x93\x02<:\x01*\"7/baremetal/v1alpha/servers/{server_id}:stopProlongationBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (
@@ -2105,28 +2090,28 @@ var file_yandex_cloud_baremetal_v1alpha_server_service_proto_goTypes = []any{
 	(*CreateServerMetadata)(nil),          // 4: yandex.cloud.baremetal.v1alpha.CreateServerMetadata
 	(*UpdateServerRequest)(nil),           // 5: yandex.cloud.baremetal.v1alpha.UpdateServerRequest
 	(*NetworkInterfaceSpec)(nil),          // 6: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	(*UpdateServerMetadata)(nil),          // 7: yandex.cloud.baremetal.v1alpha.UpdateServerMetadata
-	(*DeleteServerRequest)(nil),           // 8: yandex.cloud.baremetal.v1alpha.DeleteServerRequest
-	(*DeleteServerMetadata)(nil),          // 9: yandex.cloud.baremetal.v1alpha.DeleteServerMetadata
-	(*PowerOffServerRequest)(nil),         // 10: yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
-	(*PowerOffServerMetadata)(nil),        // 11: yandex.cloud.baremetal.v1alpha.PowerOffServerMetadata
-	(*PowerOnServerRequest)(nil),          // 12: yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
-	(*PowerOnServerMetadata)(nil),         // 13: yandex.cloud.baremetal.v1alpha.PowerOnServerMetadata
-	(*RebootServerRequest)(nil),           // 14: yandex.cloud.baremetal.v1alpha.RebootServerRequest
-	(*RebootServerMetadata)(nil),          // 15: yandex.cloud.baremetal.v1alpha.RebootServerMetadata
-	(*ReinstallServerRequest)(nil),        // 16: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
-	(*ReinstallServerMetadata)(nil),       // 17: yandex.cloud.baremetal.v1alpha.ReinstallServerMetadata
-	(*ListServerOperationsRequest)(nil),   // 18: yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
-	(*ListServerOperationsResponse)(nil),  // 19: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
-	(*BatchCreateServersRequest)(nil),     // 20: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
-	(*BatchCreateServersResponse)(nil),    // 21: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse
-	(*BatchCreateServersMetadata)(nil),    // 22: yandex.cloud.baremetal.v1alpha.BatchCreateServersMetadata
-	(*QuarantineServerMetadata)(nil),      // 23: yandex.cloud.baremetal.v1alpha.QuarantineServerMetadata
-	(*StartProlongationRequest)(nil),      // 24: yandex.cloud.baremetal.v1alpha.StartProlongationRequest
-	(*StopProlongationRequest)(nil),       // 25: yandex.cloud.baremetal.v1alpha.StopProlongationRequest
-	(*ServerSetProlongationMetadata)(nil), // 26: yandex.cloud.baremetal.v1alpha.ServerSetProlongationMetadata
-	(*OsSettingsSpec)(nil),                // 27: yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	(*LockboxSecret)(nil),                 // 28: yandex.cloud.baremetal.v1alpha.LockboxSecret
+	(*OsSettingsSpec)(nil),                // 7: yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	(*UpdateServerMetadata)(nil),          // 8: yandex.cloud.baremetal.v1alpha.UpdateServerMetadata
+	(*DeleteServerRequest)(nil),           // 9: yandex.cloud.baremetal.v1alpha.DeleteServerRequest
+	(*DeleteServerMetadata)(nil),          // 10: yandex.cloud.baremetal.v1alpha.DeleteServerMetadata
+	(*PowerOffServerRequest)(nil),         // 11: yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
+	(*PowerOffServerMetadata)(nil),        // 12: yandex.cloud.baremetal.v1alpha.PowerOffServerMetadata
+	(*PowerOnServerRequest)(nil),          // 13: yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
+	(*PowerOnServerMetadata)(nil),         // 14: yandex.cloud.baremetal.v1alpha.PowerOnServerMetadata
+	(*RebootServerRequest)(nil),           // 15: yandex.cloud.baremetal.v1alpha.RebootServerRequest
+	(*RebootServerMetadata)(nil),          // 16: yandex.cloud.baremetal.v1alpha.RebootServerMetadata
+	(*ReinstallServerRequest)(nil),        // 17: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
+	(*ReinstallServerMetadata)(nil),       // 18: yandex.cloud.baremetal.v1alpha.ReinstallServerMetadata
+	(*ListServerOperationsRequest)(nil),   // 19: yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
+	(*ListServerOperationsResponse)(nil),  // 20: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
+	(*LockboxSecret)(nil),                 // 21: yandex.cloud.baremetal.v1alpha.LockboxSecret
+	(*BatchCreateServersRequest)(nil),     // 22: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
+	(*BatchCreateServersResponse)(nil),    // 23: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse
+	(*BatchCreateServersMetadata)(nil),    // 24: yandex.cloud.baremetal.v1alpha.BatchCreateServersMetadata
+	(*QuarantineServerMetadata)(nil),      // 25: yandex.cloud.baremetal.v1alpha.QuarantineServerMetadata
+	(*StartProlongationRequest)(nil),      // 26: yandex.cloud.baremetal.v1alpha.StartProlongationRequest
+	(*StopProlongationRequest)(nil),       // 27: yandex.cloud.baremetal.v1alpha.StopProlongationRequest
+	(*ServerSetProlongationMetadata)(nil), // 28: yandex.cloud.baremetal.v1alpha.ServerSetProlongationMetadata
 	nil,                                   // 29: yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
 	nil,                                   // 30: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntry
 	nil,                                   // 31: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
@@ -2136,13 +2121,13 @@ var file_yandex_cloud_baremetal_v1alpha_server_service_proto_goTypes = []any{
 	(*PublicSubnetNetworkInterface)(nil),  // 35: yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
 	(*PrivateNetworkInterface)(nil),       // 36: yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
 	(*PublicNetworkInterface)(nil),        // 37: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
-	(*operation.Operation)(nil),           // 38: yandex.cloud.operation.Operation
-	(*Storage)(nil),                       // 39: yandex.cloud.baremetal.v1alpha.Storage
+	(*Storage)(nil),                       // 38: yandex.cloud.baremetal.v1alpha.Storage
+	(*operation.Operation)(nil),           // 39: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_server_service_proto_depIdxs = []int32{
 	32, // 0: yandex.cloud.baremetal.v1alpha.ListServerResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
 	6,  // 1: yandex.cloud.baremetal.v1alpha.CreateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	27, // 2: yandex.cloud.baremetal.v1alpha.CreateServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	7,  // 2: yandex.cloud.baremetal.v1alpha.CreateServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
 	29, // 3: yandex.cloud.baremetal.v1alpha.CreateServerRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
 	33, // 4: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.update_mask:type_name -> google.protobuf.FieldMask
 	6,  // 5: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
@@ -2151,38 +2136,38 @@ var file_yandex_cloud_baremetal_v1alpha_server_service_proto_depIdxs = []int32{
 	35, // 8: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
 	36, // 9: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.private_interface:type_name -> yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
 	37, // 10: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_interface:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
-	27, // 11: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	38, // 12: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	6,  // 13: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	27, // 14: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	31, // 15: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
-	32, // 16: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
-	39, // 17: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
-	28, // 18: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v1alpha.LockboxSecret
+	21, // 11: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v1alpha.LockboxSecret
+	38, // 12: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
+	7,  // 13: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	39, // 14: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	6,  // 15: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
+	7,  // 16: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	31, // 17: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
+	32, // 18: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
 	0,  // 19: yandex.cloud.baremetal.v1alpha.ServerService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetServerRequest
 	1,  // 20: yandex.cloud.baremetal.v1alpha.ServerService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListServerRequest
 	3,  // 21: yandex.cloud.baremetal.v1alpha.ServerService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateServerRequest
-	20, // 22: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:input_type -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
+	22, // 22: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:input_type -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
 	5,  // 23: yandex.cloud.baremetal.v1alpha.ServerService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateServerRequest
-	10, // 24: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:input_type -> yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
-	12, // 25: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:input_type -> yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
-	14, // 26: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:input_type -> yandex.cloud.baremetal.v1alpha.RebootServerRequest
-	16, // 27: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:input_type -> yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
-	24, // 28: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StartProlongationRequest
-	25, // 29: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StopProlongationRequest
-	18, // 30: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
+	11, // 24: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:input_type -> yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
+	13, // 25: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:input_type -> yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
+	15, // 26: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:input_type -> yandex.cloud.baremetal.v1alpha.RebootServerRequest
+	17, // 27: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:input_type -> yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
+	19, // 28: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
+	26, // 29: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StartProlongationRequest
+	27, // 30: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StopProlongationRequest
 	32, // 31: yandex.cloud.baremetal.v1alpha.ServerService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Server
 	2,  // 32: yandex.cloud.baremetal.v1alpha.ServerService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListServerResponse
-	38, // 33: yandex.cloud.baremetal.v1alpha.ServerService.Create:output_type -> yandex.cloud.operation.Operation
-	38, // 34: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:output_type -> yandex.cloud.operation.Operation
-	38, // 35: yandex.cloud.baremetal.v1alpha.ServerService.Update:output_type -> yandex.cloud.operation.Operation
-	38, // 36: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:output_type -> yandex.cloud.operation.Operation
-	38, // 37: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:output_type -> yandex.cloud.operation.Operation
-	38, // 38: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:output_type -> yandex.cloud.operation.Operation
-	38, // 39: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:output_type -> yandex.cloud.operation.Operation
-	38, // 40: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:output_type -> yandex.cloud.operation.Operation
-	38, // 41: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:output_type -> yandex.cloud.operation.Operation
-	19, // 42: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
+	39, // 33: yandex.cloud.baremetal.v1alpha.ServerService.Create:output_type -> yandex.cloud.operation.Operation
+	39, // 34: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:output_type -> yandex.cloud.operation.Operation
+	39, // 35: yandex.cloud.baremetal.v1alpha.ServerService.Update:output_type -> yandex.cloud.operation.Operation
+	39, // 36: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:output_type -> yandex.cloud.operation.Operation
+	39, // 37: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:output_type -> yandex.cloud.operation.Operation
+	39, // 38: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:output_type -> yandex.cloud.operation.Operation
+	39, // 39: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:output_type -> yandex.cloud.operation.Operation
+	20, // 40: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
+	39, // 41: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:output_type -> yandex.cloud.operation.Operation
+	39, // 42: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:output_type -> yandex.cloud.operation.Operation
 	31, // [31:43] is the sub-list for method output_type
 	19, // [19:31] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
@@ -2203,7 +2188,7 @@ func file_yandex_cloud_baremetal_v1alpha_server_service_proto_init() {
 		(*NetworkInterfaceSpec_PrivateInterface)(nil),
 		(*NetworkInterfaceSpec_PublicInterface)(nil),
 	}
-	file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[27].OneofWrappers = []any{
+	file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes[7].OneofWrappers = []any{
 		(*OsSettingsSpec_SshPublicKey)(nil),
 		(*OsSettingsSpec_UserSshId)(nil),
 		(*OsSettingsSpec_PasswordPlainText)(nil),

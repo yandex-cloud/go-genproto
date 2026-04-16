@@ -28,7 +28,6 @@ const (
 //
 // Version Control Service for managing tool version blacklists.
 // This service manages obsolete (deprecated/blocked) versions only.
-//
 // API Behavior:
 // - Supported versions: Return successful InitResponse.
 // - Deprecated versions: Return successful InitResponse with deprecation_warning.
@@ -63,7 +62,6 @@ func (c *versionControlServiceClient) Init(ctx context.Context, in *InitRequest,
 //
 // Version Control Service for managing tool version blacklists.
 // This service manages obsolete (deprecated/blocked) versions only.
-//
 // API Behavior:
 // - Supported versions: Return successful InitResponse.
 // - Deprecated versions: Return successful InitResponse with deprecation_warning.

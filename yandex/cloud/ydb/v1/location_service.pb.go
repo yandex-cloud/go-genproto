@@ -188,7 +188,7 @@ var File_yandex_cloud_ydb_v1_location_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ydb_v1_location_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/ydb/v1/location_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"yandex/cloud/ydb/v1/location.proto\x1a\x1dyandex/cloud/validation.proto\";\n" +
+	"*yandex/cloud/ydb/v1/location_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a\"yandex/cloud/ydb/v1/location.proto\";\n" +
 	"\x12GetLocationRequest\x12%\n" +
 	"\vlocation_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"locationId\"i\n" +

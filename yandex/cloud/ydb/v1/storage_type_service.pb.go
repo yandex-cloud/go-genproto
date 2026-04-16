@@ -188,7 +188,7 @@ var File_yandex_cloud_ydb_v1_storage_type_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_ydb_v1_storage_type_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/ydb/v1/storage_type_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a&yandex/cloud/ydb/v1/storage_type.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
+	".yandex/cloud/ydb/v1/storage_type_service.proto\x12\x13yandex.cloud.ydb.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/ydb/v1/storage_type.proto\"E\n" +
 	"\x15GetStorageTypeRequest\x12,\n" +
 	"\x0fstorage_type_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\rstorageTypeId\"l\n" +
 	"\x17ListStorageTypesRequest\x12'\n" +

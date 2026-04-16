@@ -4,6 +4,7 @@ package cloudregistry
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *CreateLifecyclePolicyRequest) SetRegistryId(v string) {
@@ -96,4 +97,28 @@ func (m *ChangeLifecyclePolicyStateRequest) SetPolicyId(v string) {
 
 func (m *ChangeLifecyclePolicyStateRequest) SetState(v LifecyclePolicyState) {
 	m.State = v
+}
+
+func (m *DryRunLifecyclePolicyRequest) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *DryRunLifecyclePolicyMetadata) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *DryRunLifecyclePolicyResponse) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *DryRunLifecyclePolicyResponse) SetRunAt(v *timestamppb.Timestamp) {
+	m.RunAt = v
+}
+
+func (m *DryRunLifecyclePolicyResponse) SetArtifactsToHardDeleteCount(v int64) {
+	m.ArtifactsToHardDeleteCount = v
+}
+
+func (m *DryRunLifecyclePolicyResponse) SetArtifactsToSoftDeleteCount(v int64) {
+	m.ArtifactsToSoftDeleteCount = v
 }

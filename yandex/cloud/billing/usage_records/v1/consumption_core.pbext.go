@@ -150,6 +150,26 @@ func (m *LabelUsageReportEntityData) SetPeriodic(v []*UsageReportPeriodicData) {
 	m.Periodic = v
 }
 
+func (m *ServiceInstanceUsageReportEntityData) SetCost(v *StringDecimal) {
+	m.Cost = v
+}
+
+func (m *ServiceInstanceUsageReportEntityData) SetCreditDetails(v *CreditDetails) {
+	m.CreditDetails = v
+}
+
+func (m *ServiceInstanceUsageReportEntityData) SetExpense(v *StringDecimal) {
+	m.Expense = v
+}
+
+func (m *ServiceInstanceUsageReportEntityData) SetServiceInstance(v *ServiceInstance) {
+	m.ServiceInstance = v
+}
+
+func (m *ServiceInstanceUsageReportEntityData) SetPeriodic(v []*UsageReportPeriodicData) {
+	m.Periodic = v
+}
+
 func (m *UsageReportPeriodicData) SetCost(v *StringDecimal) {
 	m.Cost = v
 }

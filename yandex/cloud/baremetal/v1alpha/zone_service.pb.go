@@ -26,7 +26,6 @@ const (
 type GetZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Zone resource to return.
-	//
 	// To get the zone ID, use a [ZoneService.List] request.
 	ZoneId        string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -136,7 +135,6 @@ type ListZonesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListZonesRequest.page_size], use `next_page_token` as the value
 	// for the [ListZonesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -193,9 +191,10 @@ const file_yandex_cloud_baremetal_v1alpha_zone_service_proto_rawDesc = "" +
 	"\n" +
 	"1yandex/cloud/baremetal/v1alpha/zone_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a)yandex/cloud/baremetal/v1alpha/zone.proto\x1a\x1dyandex/cloud/validation.proto\"3\n" +
 	"\x0eGetZoneRequest\x12!\n" +
-	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x06zoneId\"_\n" +
-	"\x10ListZonesRequest\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x06zoneId\"`\n" +
+	"\x10ListZonesRequest\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x01\x10d\"}\n" +
 	"\x11ListZonesResponse\x12:\n" +

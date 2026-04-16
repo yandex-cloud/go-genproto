@@ -891,8 +891,10 @@ type KafkaConfig2_8 struct {
 	OffsetsRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=offsets_retention_minutes,json=offsetsRetentionMinutes,proto3" json:"offsets_retention_minutes,omitempty"`
 	// The list of SASL mechanisms enabled in the Kafka server. Default: [SCRAM_SHA_512].
 	SaslEnabledMechanisms []SaslMechanism `protobuf:"varint,20,rep,packed,name=sasl_enabled_mechanisms,json=saslEnabledMechanisms,proto3,enum=yandex.cloud.mdb.kafka.v1.SaslMechanism" json:"sasl_enabled_mechanisms,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Timeout for transactional ids to expire in ms. Default: 604800000 (7 days).
+	TransactionalIdExpirationMs *wrapperspb.Int64Value `protobuf:"bytes,21,opt,name=transactional_id_expiration_ms,json=transactionalIdExpirationMs,proto3" json:"transactional_id_expiration_ms,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *KafkaConfig2_8) Reset() {
@@ -1066,6 +1068,13 @@ func (x *KafkaConfig2_8) GetSaslEnabledMechanisms() []SaslMechanism {
 	return nil
 }
 
+func (x *KafkaConfig2_8) GetTransactionalIdExpirationMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.TransactionalIdExpirationMs
+	}
+	return nil
+}
+
 // Kafka version 3.x broker configuration.
 type KafkaConfig3 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1131,8 +1140,10 @@ type KafkaConfig3 struct {
 	OffsetsRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=offsets_retention_minutes,json=offsetsRetentionMinutes,proto3" json:"offsets_retention_minutes,omitempty"`
 	// The list of SASL mechanisms enabled in the Kafka server. Default: [SCRAM_SHA_512].
 	SaslEnabledMechanisms []SaslMechanism `protobuf:"varint,20,rep,packed,name=sasl_enabled_mechanisms,json=saslEnabledMechanisms,proto3,enum=yandex.cloud.mdb.kafka.v1.SaslMechanism" json:"sasl_enabled_mechanisms,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Timeout for transactional ids to expire in ms. Default: 604800000 (7 days).
+	TransactionalIdExpirationMs *wrapperspb.Int64Value `protobuf:"bytes,21,opt,name=transactional_id_expiration_ms,json=transactionalIdExpirationMs,proto3" json:"transactional_id_expiration_ms,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *KafkaConfig3) Reset() {
@@ -1306,6 +1317,13 @@ func (x *KafkaConfig3) GetSaslEnabledMechanisms() []SaslMechanism {
 	return nil
 }
 
+func (x *KafkaConfig3) GetTransactionalIdExpirationMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.TransactionalIdExpirationMs
+	}
+	return nil
+}
+
 // Kafka version 4.x broker configuration.
 type KafkaConfig4 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1364,8 +1382,10 @@ type KafkaConfig4 struct {
 	OffsetsRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=offsets_retention_minutes,json=offsetsRetentionMinutes,proto3" json:"offsets_retention_minutes,omitempty"`
 	// The list of SASL mechanisms enabled in the Kafka server. Default: [SCRAM_SHA_512].
 	SaslEnabledMechanisms []SaslMechanism `protobuf:"varint,20,rep,packed,name=sasl_enabled_mechanisms,json=saslEnabledMechanisms,proto3,enum=yandex.cloud.mdb.kafka.v1.SaslMechanism" json:"sasl_enabled_mechanisms,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Timeout for transactional ids to expire in ms. Default: 604800000 (7 days).
+	TransactionalIdExpirationMs *wrapperspb.Int64Value `protobuf:"bytes,21,opt,name=transactional_id_expiration_ms,json=transactionalIdExpirationMs,proto3" json:"transactional_id_expiration_ms,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *KafkaConfig4) Reset() {
@@ -1527,6 +1547,13 @@ func (x *KafkaConfig4) GetOffsetsRetentionMinutes() *wrapperspb.Int64Value {
 func (x *KafkaConfig4) GetSaslEnabledMechanisms() []SaslMechanism {
 	if x != nil {
 		return x.SaslEnabledMechanisms
+	}
+	return nil
+}
+
+func (x *KafkaConfig4) GetTransactionalIdExpirationMs() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.TransactionalIdExpirationMs
 	}
 	return nil
 }
@@ -2181,7 +2208,7 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
 	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
-	"diskTypeId\"\xe6\f\n" +
+	"diskTypeId\"\xc8\r\n" +
 	"\x0eKafkaConfig2_8\x12U\n" +
 	"\x10compression_type\x18\x01 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12Z\n" +
 	"\x1blog_flush_interval_messages\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x18logFlushIntervalMessages\x12N\n" +
@@ -2203,7 +2230,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x17replica_fetch_max_bytes\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14replicaFetchMaxBytes\x12*\n" +
 	"\x11ssl_cipher_suites\x18\x12 \x03(\tR\x0fsslCipherSuites\x12W\n" +
 	"\x19offsets_retention_minutes\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17offsetsRetentionMinutes\x12`\n" +
-	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\"\xe4\f\n" +
+	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\x12`\n" +
+	"\x1etransactional_id_expiration_ms\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1btransactionalIdExpirationMs\"\xc6\r\n" +
 	"\fKafkaConfig3\x12U\n" +
 	"\x10compression_type\x18\x01 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12Z\n" +
 	"\x1blog_flush_interval_messages\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x18logFlushIntervalMessages\x12N\n" +
@@ -2225,7 +2253,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x17replica_fetch_max_bytes\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14replicaFetchMaxBytes\x12*\n" +
 	"\x11ssl_cipher_suites\x18\x12 \x03(\tR\x0fsslCipherSuites\x12W\n" +
 	"\x19offsets_retention_minutes\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17offsetsRetentionMinutes\x12`\n" +
-	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\"\xa1\f\n" +
+	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\x12`\n" +
+	"\x1etransactional_id_expiration_ms\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1btransactionalIdExpirationMs\"\x83\r\n" +
 	"\fKafkaConfig4\x12U\n" +
 	"\x10compression_type\x18\x01 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12Z\n" +
 	"\x1blog_flush_interval_messages\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x18logFlushIntervalMessages\x12N\n" +
@@ -2245,7 +2274,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x17replica_fetch_max_bytes\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14replicaFetchMaxBytes\x12*\n" +
 	"\x11ssl_cipher_suites\x18\x12 \x03(\tR\x0fsslCipherSuites\x12W\n" +
 	"\x19offsets_retention_minutes\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17offsetsRetentionMinutes\x12`\n" +
-	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanismsJ\x04\b\n" +
+	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\x12`\n" +
+	"\x1etransactional_id_expiration_ms\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1btransactionalIdExpirationMsJ\x04\b\n" +
 	"\x10\v\"\xda\x03\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
@@ -2360,57 +2390,60 @@ var file_yandex_cloud_mdb_kafka_v1_cluster_proto_depIdxs = []int32{
 	26, // 35: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
 	26, // 36: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.offsets_retention_minutes:type_name -> google.protobuf.Int64Value
 	29, // 37: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.sasl_enabled_mechanisms:type_name -> yandex.cloud.mdb.kafka.v1.SaslMechanism
-	27, // 38: yandex.cloud.mdb.kafka.v1.KafkaConfig3.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
-	26, // 39: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_interval_messages:type_name -> google.protobuf.Int64Value
-	26, // 40: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_interval_ms:type_name -> google.protobuf.Int64Value
-	26, // 41: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_scheduler_interval_ms:type_name -> google.protobuf.Int64Value
-	26, // 42: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_bytes:type_name -> google.protobuf.Int64Value
-	26, // 43: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_hours:type_name -> google.protobuf.Int64Value
-	26, // 44: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_minutes:type_name -> google.protobuf.Int64Value
-	26, // 45: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_ms:type_name -> google.protobuf.Int64Value
-	26, // 46: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_segment_bytes:type_name -> google.protobuf.Int64Value
-	28, // 47: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_preallocate:type_name -> google.protobuf.BoolValue
-	26, // 48: yandex.cloud.mdb.kafka.v1.KafkaConfig3.socket_send_buffer_bytes:type_name -> google.protobuf.Int64Value
-	26, // 49: yandex.cloud.mdb.kafka.v1.KafkaConfig3.socket_receive_buffer_bytes:type_name -> google.protobuf.Int64Value
-	28, // 50: yandex.cloud.mdb.kafka.v1.KafkaConfig3.auto_create_topics_enable:type_name -> google.protobuf.BoolValue
-	26, // 51: yandex.cloud.mdb.kafka.v1.KafkaConfig3.num_partitions:type_name -> google.protobuf.Int64Value
-	26, // 52: yandex.cloud.mdb.kafka.v1.KafkaConfig3.default_replication_factor:type_name -> google.protobuf.Int64Value
-	26, // 53: yandex.cloud.mdb.kafka.v1.KafkaConfig3.message_max_bytes:type_name -> google.protobuf.Int64Value
-	26, // 54: yandex.cloud.mdb.kafka.v1.KafkaConfig3.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
-	26, // 55: yandex.cloud.mdb.kafka.v1.KafkaConfig3.offsets_retention_minutes:type_name -> google.protobuf.Int64Value
-	29, // 56: yandex.cloud.mdb.kafka.v1.KafkaConfig3.sasl_enabled_mechanisms:type_name -> yandex.cloud.mdb.kafka.v1.SaslMechanism
-	27, // 57: yandex.cloud.mdb.kafka.v1.KafkaConfig4.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
-	26, // 58: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_interval_messages:type_name -> google.protobuf.Int64Value
-	26, // 59: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_interval_ms:type_name -> google.protobuf.Int64Value
-	26, // 60: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_scheduler_interval_ms:type_name -> google.protobuf.Int64Value
-	26, // 61: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_bytes:type_name -> google.protobuf.Int64Value
-	26, // 62: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_hours:type_name -> google.protobuf.Int64Value
-	26, // 63: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_minutes:type_name -> google.protobuf.Int64Value
-	26, // 64: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_ms:type_name -> google.protobuf.Int64Value
-	26, // 65: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_segment_bytes:type_name -> google.protobuf.Int64Value
-	26, // 66: yandex.cloud.mdb.kafka.v1.KafkaConfig4.socket_send_buffer_bytes:type_name -> google.protobuf.Int64Value
-	26, // 67: yandex.cloud.mdb.kafka.v1.KafkaConfig4.socket_receive_buffer_bytes:type_name -> google.protobuf.Int64Value
-	28, // 68: yandex.cloud.mdb.kafka.v1.KafkaConfig4.auto_create_topics_enable:type_name -> google.protobuf.BoolValue
-	26, // 69: yandex.cloud.mdb.kafka.v1.KafkaConfig4.num_partitions:type_name -> google.protobuf.Int64Value
-	26, // 70: yandex.cloud.mdb.kafka.v1.KafkaConfig4.default_replication_factor:type_name -> google.protobuf.Int64Value
-	26, // 71: yandex.cloud.mdb.kafka.v1.KafkaConfig4.message_max_bytes:type_name -> google.protobuf.Int64Value
-	26, // 72: yandex.cloud.mdb.kafka.v1.KafkaConfig4.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
-	26, // 73: yandex.cloud.mdb.kafka.v1.KafkaConfig4.offsets_retention_minutes:type_name -> google.protobuf.Int64Value
-	29, // 74: yandex.cloud.mdb.kafka.v1.KafkaConfig4.sasl_enabled_mechanisms:type_name -> yandex.cloud.mdb.kafka.v1.SaslMechanism
-	3,  // 75: yandex.cloud.mdb.kafka.v1.Host.role:type_name -> yandex.cloud.mdb.kafka.v1.Host.Role
-	8,  // 76: yandex.cloud.mdb.kafka.v1.Host.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
-	4,  // 77: yandex.cloud.mdb.kafka.v1.Host.health:type_name -> yandex.cloud.mdb.kafka.v1.Host.Health
-	8,  // 78: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
-	9,  // 79: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_2_8:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig2_8
-	10, // 80: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_3:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig3
-	11, // 81: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_4:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig4
-	8,  // 82: yandex.cloud.mdb.kafka.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
-	8,  // 83: yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaft.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
-	84, // [84:84] is the sub-list for method output_type
-	84, // [84:84] is the sub-list for method input_type
-	84, // [84:84] is the sub-list for extension type_name
-	84, // [84:84] is the sub-list for extension extendee
-	0,  // [0:84] is the sub-list for field type_name
+	26, // 38: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.transactional_id_expiration_ms:type_name -> google.protobuf.Int64Value
+	27, // 39: yandex.cloud.mdb.kafka.v1.KafkaConfig3.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
+	26, // 40: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_interval_messages:type_name -> google.protobuf.Int64Value
+	26, // 41: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_interval_ms:type_name -> google.protobuf.Int64Value
+	26, // 42: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_flush_scheduler_interval_ms:type_name -> google.protobuf.Int64Value
+	26, // 43: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_bytes:type_name -> google.protobuf.Int64Value
+	26, // 44: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_hours:type_name -> google.protobuf.Int64Value
+	26, // 45: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_minutes:type_name -> google.protobuf.Int64Value
+	26, // 46: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_retention_ms:type_name -> google.protobuf.Int64Value
+	26, // 47: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_segment_bytes:type_name -> google.protobuf.Int64Value
+	28, // 48: yandex.cloud.mdb.kafka.v1.KafkaConfig3.log_preallocate:type_name -> google.protobuf.BoolValue
+	26, // 49: yandex.cloud.mdb.kafka.v1.KafkaConfig3.socket_send_buffer_bytes:type_name -> google.protobuf.Int64Value
+	26, // 50: yandex.cloud.mdb.kafka.v1.KafkaConfig3.socket_receive_buffer_bytes:type_name -> google.protobuf.Int64Value
+	28, // 51: yandex.cloud.mdb.kafka.v1.KafkaConfig3.auto_create_topics_enable:type_name -> google.protobuf.BoolValue
+	26, // 52: yandex.cloud.mdb.kafka.v1.KafkaConfig3.num_partitions:type_name -> google.protobuf.Int64Value
+	26, // 53: yandex.cloud.mdb.kafka.v1.KafkaConfig3.default_replication_factor:type_name -> google.protobuf.Int64Value
+	26, // 54: yandex.cloud.mdb.kafka.v1.KafkaConfig3.message_max_bytes:type_name -> google.protobuf.Int64Value
+	26, // 55: yandex.cloud.mdb.kafka.v1.KafkaConfig3.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
+	26, // 56: yandex.cloud.mdb.kafka.v1.KafkaConfig3.offsets_retention_minutes:type_name -> google.protobuf.Int64Value
+	29, // 57: yandex.cloud.mdb.kafka.v1.KafkaConfig3.sasl_enabled_mechanisms:type_name -> yandex.cloud.mdb.kafka.v1.SaslMechanism
+	26, // 58: yandex.cloud.mdb.kafka.v1.KafkaConfig3.transactional_id_expiration_ms:type_name -> google.protobuf.Int64Value
+	27, // 59: yandex.cloud.mdb.kafka.v1.KafkaConfig4.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
+	26, // 60: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_interval_messages:type_name -> google.protobuf.Int64Value
+	26, // 61: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_interval_ms:type_name -> google.protobuf.Int64Value
+	26, // 62: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_flush_scheduler_interval_ms:type_name -> google.protobuf.Int64Value
+	26, // 63: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_bytes:type_name -> google.protobuf.Int64Value
+	26, // 64: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_hours:type_name -> google.protobuf.Int64Value
+	26, // 65: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_minutes:type_name -> google.protobuf.Int64Value
+	26, // 66: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_retention_ms:type_name -> google.protobuf.Int64Value
+	26, // 67: yandex.cloud.mdb.kafka.v1.KafkaConfig4.log_segment_bytes:type_name -> google.protobuf.Int64Value
+	26, // 68: yandex.cloud.mdb.kafka.v1.KafkaConfig4.socket_send_buffer_bytes:type_name -> google.protobuf.Int64Value
+	26, // 69: yandex.cloud.mdb.kafka.v1.KafkaConfig4.socket_receive_buffer_bytes:type_name -> google.protobuf.Int64Value
+	28, // 70: yandex.cloud.mdb.kafka.v1.KafkaConfig4.auto_create_topics_enable:type_name -> google.protobuf.BoolValue
+	26, // 71: yandex.cloud.mdb.kafka.v1.KafkaConfig4.num_partitions:type_name -> google.protobuf.Int64Value
+	26, // 72: yandex.cloud.mdb.kafka.v1.KafkaConfig4.default_replication_factor:type_name -> google.protobuf.Int64Value
+	26, // 73: yandex.cloud.mdb.kafka.v1.KafkaConfig4.message_max_bytes:type_name -> google.protobuf.Int64Value
+	26, // 74: yandex.cloud.mdb.kafka.v1.KafkaConfig4.replica_fetch_max_bytes:type_name -> google.protobuf.Int64Value
+	26, // 75: yandex.cloud.mdb.kafka.v1.KafkaConfig4.offsets_retention_minutes:type_name -> google.protobuf.Int64Value
+	29, // 76: yandex.cloud.mdb.kafka.v1.KafkaConfig4.sasl_enabled_mechanisms:type_name -> yandex.cloud.mdb.kafka.v1.SaslMechanism
+	26, // 77: yandex.cloud.mdb.kafka.v1.KafkaConfig4.transactional_id_expiration_ms:type_name -> google.protobuf.Int64Value
+	3,  // 78: yandex.cloud.mdb.kafka.v1.Host.role:type_name -> yandex.cloud.mdb.kafka.v1.Host.Role
+	8,  // 79: yandex.cloud.mdb.kafka.v1.Host.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
+	4,  // 80: yandex.cloud.mdb.kafka.v1.Host.health:type_name -> yandex.cloud.mdb.kafka.v1.Host.Health
+	8,  // 81: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
+	9,  // 82: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_2_8:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig2_8
+	10, // 83: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_3:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig3
+	11, // 84: yandex.cloud.mdb.kafka.v1.ConfigSpec.Kafka.kafka_config_4:type_name -> yandex.cloud.mdb.kafka.v1.KafkaConfig4
+	8,  // 85: yandex.cloud.mdb.kafka.v1.ConfigSpec.Zookeeper.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
+	8,  // 86: yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaft.resources:type_name -> yandex.cloud.mdb.kafka.v1.Resources
+	87, // [87:87] is the sub-list for method output_type
+	87, // [87:87] is the sub-list for method input_type
+	87, // [87:87] is the sub-list for extension type_name
+	87, // [87:87] is the sub-list for extension extendee
+	0,  // [0:87] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_kafka_v1_cluster_proto_init() }

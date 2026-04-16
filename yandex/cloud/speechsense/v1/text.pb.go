@@ -67,13 +67,13 @@ func (x *TextContent) GetMessages() []*Message {
 }
 
 type Message struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	UserId    string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Timestamp *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Payload:
 	//
 	//	*Message_Text
-	Payload       isMessage_Payload `protobuf_oneof:"payload"`
+	Payload       isMessage_Payload      `protobuf_oneof:"payload"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -108,20 +108,6 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_speechsense_v1_text_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Message) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-func (x *Message) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 func (x *Message) GetPayload() isMessage_Payload {
 	if x != nil {
 		return x.Payload
@@ -134,6 +120,20 @@ func (x *Message) GetText() *TextPayload {
 		if x, ok := x.Payload.(*Message_Text); ok {
 			return x.Text
 		}
+	}
+	return nil
+}
+
+func (x *Message) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Message) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
 	}
 	return nil
 }
@@ -199,10 +199,10 @@ const file_yandex_cloud_speechsense_v1_text_proto_rawDesc = "" +
 	"&yandex/cloud/speechsense/v1/text.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"O\n" +
 	"\vTextContent\x12@\n" +
 	"\bmessages\x18\x01 \x03(\v2$.yandex.cloud.speechsense.v1.MessageR\bmessages\"\xa7\x01\n" +
-	"\aMessage\x12\x17\n" +
+	"\aMessage\x12>\n" +
+	"\x04text\x18\x03 \x01(\v2(.yandex.cloud.speechsense.v1.TextPayloadH\x00R\x04text\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x128\n" +
-	"\ttimestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12>\n" +
-	"\x04text\x18\x03 \x01(\v2(.yandex.cloud.speechsense.v1.TextPayloadH\x00R\x04textB\t\n" +
+	"\ttimestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestampB\t\n" +
 	"\apayload\"!\n" +
 	"\vTextPayload\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04textBy\n" +
@@ -229,8 +229,8 @@ var file_yandex_cloud_speechsense_v1_text_proto_goTypes = []any{
 }
 var file_yandex_cloud_speechsense_v1_text_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.speechsense.v1.TextContent.messages:type_name -> yandex.cloud.speechsense.v1.Message
-	3, // 1: yandex.cloud.speechsense.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
-	2, // 2: yandex.cloud.speechsense.v1.Message.text:type_name -> yandex.cloud.speechsense.v1.TextPayload
+	2, // 1: yandex.cloud.speechsense.v1.Message.text:type_name -> yandex.cloud.speechsense.v1.TextPayload
+	3, // 2: yandex.cloud.speechsense.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

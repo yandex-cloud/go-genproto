@@ -27,6 +27,7 @@ const (
 	LifecyclePolicyService_Get_FullMethodName         = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Get"
 	LifecyclePolicyService_List_FullMethodName        = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/List"
 	LifecyclePolicyService_ChangeState_FullMethodName = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/ChangeState"
+	LifecyclePolicyService_DryRun_FullMethodName      = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/DryRun"
 )
 
 // LifecyclePolicyServiceClient is the client API for LifecyclePolicyService service.
@@ -47,6 +48,8 @@ type LifecyclePolicyServiceClient interface {
 	List(ctx context.Context, in *ListLifecyclePolicyRequest, opts ...grpc.CallOption) (*ListLifecyclePolicyResponse, error)
 	// Changes the state of the specified lifecycle policy.
 	ChangeState(ctx context.Context, in *ChangeLifecyclePolicyStateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Creates a request of a dry run of the lifecycle policy.
+	DryRun(ctx context.Context, in *DryRunLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type lifecyclePolicyServiceClient struct {
@@ -117,6 +120,16 @@ func (c *lifecyclePolicyServiceClient) ChangeState(ctx context.Context, in *Chan
 	return out, nil
 }
 
+func (c *lifecyclePolicyServiceClient) DryRun(ctx context.Context, in *DryRunLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, LifecyclePolicyService_DryRun_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LifecyclePolicyServiceServer is the server API for LifecyclePolicyService service.
 // All implementations should embed UnimplementedLifecyclePolicyServiceServer
 // for forward compatibility.
@@ -135,6 +148,8 @@ type LifecyclePolicyServiceServer interface {
 	List(context.Context, *ListLifecyclePolicyRequest) (*ListLifecyclePolicyResponse, error)
 	// Changes the state of the specified lifecycle policy.
 	ChangeState(context.Context, *ChangeLifecyclePolicyStateRequest) (*emptypb.Empty, error)
+	// Creates a request of a dry run of the lifecycle policy.
+	DryRun(context.Context, *DryRunLifecyclePolicyRequest) (*operation.Operation, error)
 }
 
 // UnimplementedLifecyclePolicyServiceServer should be embedded to have
@@ -161,6 +176,9 @@ func (UnimplementedLifecyclePolicyServiceServer) List(context.Context, *ListLife
 }
 func (UnimplementedLifecyclePolicyServiceServer) ChangeState(context.Context, *ChangeLifecyclePolicyStateRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method ChangeState not implemented")
+}
+func (UnimplementedLifecyclePolicyServiceServer) DryRun(context.Context, *DryRunLifecyclePolicyRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method DryRun not implemented")
 }
 func (UnimplementedLifecyclePolicyServiceServer) testEmbeddedByValue() {}
 
@@ -290,6 +308,24 @@ func _LifecyclePolicyService_ChangeState_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LifecyclePolicyService_DryRun_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DryRunLifecyclePolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LifecyclePolicyServiceServer).DryRun(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LifecyclePolicyService_DryRun_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LifecyclePolicyServiceServer).DryRun(ctx, req.(*DryRunLifecyclePolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LifecyclePolicyService_ServiceDesc is the grpc.ServiceDesc for LifecyclePolicyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -320,6 +356,10 @@ var LifecyclePolicyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ChangeState",
 			Handler:    _LifecyclePolicyService_ChangeState_Handler,
+		},
+		{
+			MethodName: "DryRun",
+			Handler:    _LifecyclePolicyService_DryRun_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

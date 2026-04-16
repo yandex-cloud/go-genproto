@@ -918,7 +918,7 @@ var File_yandex_cloud_speechsense_v1_talk_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_speechsense_v1_talk_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/speechsense/v1/talk_service.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a'yandex/cloud/speechsense/v1/audio.proto\x1a&yandex/cloud/speechsense/v1/text.proto\x1a(yandex/cloud/speechsense/v1/search.proto\x1a&yandex/cloud/speechsense/v1/talk.proto\"\xb1\x01\n" +
+	".yandex/cloud/speechsense/v1/talk_service.proto\x12\x1byandex.cloud.speechsense.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a'yandex/cloud/speechsense/v1/audio.proto\x1a(yandex/cloud/speechsense/v1/search.proto\x1a&yandex/cloud/speechsense/v1/talk.proto\x1a&yandex/cloud/speechsense/v1/text.proto\"\xb1\x01\n" +
 	"\x11StreamTalkRequest\x12G\n" +
 	"\bmetadata\x18\x01 \x01(\v2).yandex.cloud.speechsense.v1.TalkMetadataH\x00R\bmetadata\x12J\n" +
 	"\x05audio\x18\x02 \x01(\v22.yandex.cloud.speechsense.v1.AudioStreamingRequestH\x00R\x05audioB\a\n" +
@@ -985,12 +985,12 @@ const file_yandex_cloud_speechsense_v1_talk_service_proto_rawDesc = "" +
 	"\x15USER_ROLE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_ROLE_OPERATOR\x10\x01\x12\x14\n" +
 	"\x10USER_ROLE_CLIENT\x10\x02\x12\x11\n" +
-	"\rUSER_ROLE_BOT\x10\x032\x93\x06\n" +
+	"\rUSER_ROLE_BOT\x10\x032\xe7\x06\n" +
 	"\vTalkService\x12s\n" +
-	"\x0eUploadAsStream\x12..yandex.cloud.speechsense.v1.StreamTalkRequest\x1a/.yandex.cloud.speechsense.v1.UploadTalkResponse(\x01\x12k\n" +
-	"\x06Upload\x12..yandex.cloud.speechsense.v1.UploadTalkRequest\x1a/.yandex.cloud.speechsense.v1.UploadTalkResponse\"\x00\x12o\n" +
+	"\x0eUploadAsStream\x12..yandex.cloud.speechsense.v1.StreamTalkRequest\x1a/.yandex.cloud.speechsense.v1.UploadTalkResponse(\x01\x12\x92\x01\n" +
+	"\x06Upload\x12..yandex.cloud.speechsense.v1.UploadTalkRequest\x1a/.yandex.cloud.speechsense.v1.UploadTalkResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/speechsense/v1/talks/upload\x12\x9a\x01\n" +
 	"\n" +
-	"UploadText\x12..yandex.cloud.speechsense.v1.UploadTextRequest\x1a/.yandex.cloud.speechsense.v1.UploadTextResponse\"\x00\x12\x92\x01\n" +
+	"UploadText\x12..yandex.cloud.speechsense.v1.UploadTextRequest\x1a/.yandex.cloud.speechsense.v1.UploadTextResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /speechsense/v1/talks/uploadText\x12\x92\x01\n" +
 	"\vUploadBadge\x12..yandex.cloud.speechsense.v1.StreamTalkRequest\x1a!.yandex.cloud.operation.Operation\".\xb2\xd2**\n" +
 	"\x13UploadBadgeMetadata\x12\x13UploadBadgeResponse(\x01\x12\x92\x01\n" +
 	"\x06Search\x12..yandex.cloud.speechsense.v1.SearchTalkRequest\x1a/.yandex.cloud.speechsense.v1.SearchTalkResponse\"'\x82\xd3\xe4\x93\x02!:\x01*\"\x1c/speechsense/v1/talks/search\x12\x86\x01\n" +
@@ -1079,9 +1079,9 @@ func file_yandex_cloud_speechsense_v1_talk_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_speechsense_v1_audio_proto_init()
-	file_yandex_cloud_speechsense_v1_text_proto_init()
 	file_yandex_cloud_speechsense_v1_search_proto_init()
 	file_yandex_cloud_speechsense_v1_talk_proto_init()
+	file_yandex_cloud_speechsense_v1_text_proto_init()
 	file_yandex_cloud_speechsense_v1_talk_service_proto_msgTypes[0].OneofWrappers = []any{
 		(*StreamTalkRequest_Metadata)(nil),
 		(*StreamTalkRequest_Audio)(nil),

@@ -876,7 +876,7 @@ var File_yandex_cloud_gitlab_v1_instance_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/gitlab/v1/instance_service.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/gitlab/v1/instance.proto\"C\n" +
+	"-yandex/cloud/gitlab/v1/instance_service.proto\x12\x16yandex.cloud.gitlab.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/gitlab/v1/instance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetInstanceRequest\x12-\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"instanceId\"\x94\x01\n" +
@@ -912,20 +912,20 @@ const file_yandex_cloud_gitlab_v1_instance_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\v\x10\fJ\x04\b\r\x10\x0eJ\x04\b\x10\x10\x13\"9\n" +
 	"\x16CreateInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xb5\x06\n" +
+	"instanceId\"\xc9\x06\n" +
 	"\x15UpdateInstanceRequest\x12-\n" +
 	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"instanceId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8e\x01\n" +
-	"\x06labels\x18\x04 \x03(\v29.yandex.cloud.gitlab.v1.UpdateInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x129\n" +
-	"\x19backup_retain_period_days\x18\x06 \x01(\x03R\x16backupRetainPeriodDays\x12,\n" +
-	"\x12resource_preset_id\x18\a \x01(\tR\x10resourcePresetId\x12>\n" +
+	"\x06labels\x18\x04 \x03(\v29.yandex.cloud.gitlab.v1.UpdateInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12?\n" +
+	"\x19backup_retain_period_days\x18\x06 \x01(\x03B\x04\xe8\xc71\x00R\x16backupRetainPeriodDays\x122\n" +
+	"\x12resource_preset_id\x18\a \x01(\tB\x04\xe8\xc71\x00R\x10resourcePresetId\x12>\n" +
 	"\x1bmaintenance_delete_untagged\x18\n" +
 	" \x01(\bR\x19maintenanceDeleteUntagged\x12/\n" +
-	"\x13deletion_protection\x18\v \x01(\bR\x12deletionProtection\x124\n" +
-	"\x11approval_rules_id\x18\f \x01(\tB\b\x8a\xc81\x04<=30R\x0fapprovalRulesId\x12;\n" +
-	"\x14approval_rules_token\x18\r \x01(\tB\t\x8a\xc81\x05<=100R\x12approvalRulesToken\x12\x1b\n" +
+	"\x13deletion_protection\x18\v \x01(\bR\x12deletionProtection\x128\n" +
+	"\x11approval_rules_id\x18\f \x01(\tB\f\xe8\xc71\x00\x8a\xc81\x04<=30R\x0fapprovalRulesId\x12?\n" +
+	"\x14approval_rules_token\x18\r \x01(\tB\r\xe8\xc71\x00\x8a\xc81\x05<=100R\x12approvalRulesToken\x12\x1b\n" +
 	"\tdisk_size\x18\x15 \x01(\x03R\bdiskSize\x12;\n" +
 	"\vupdate_mask\x18\x18 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x1a9\n" +

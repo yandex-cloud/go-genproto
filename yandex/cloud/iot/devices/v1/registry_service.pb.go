@@ -29,7 +29,6 @@ const (
 type GetRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to return.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId    string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,11 +75,9 @@ func (x *GetRegistryRequest) GetRegistryId() string {
 type GetByNameRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list registries in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the registry to return.
-	//
 	// To get a registry Name make a [RegistryService.List] request.
 	RegistryName  string `protobuf:"bytes,2,opt,name=registry_name,json=registryName,proto3" json:"registry_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -134,7 +131,6 @@ func (x *GetByNameRegistryRequest) GetRegistryName() string {
 type ListRegistriesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list registries in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -207,7 +203,6 @@ type ListRegistriesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListRegistriesRequest.page_size], use `next_page_token` as the value
 	// for the [ListRegistriesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -261,7 +256,6 @@ func (x *ListRegistriesResponse) GetNextPageToken() string {
 type CreateRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a registry in.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the registry. The name must be unique within the folder.
@@ -273,7 +267,6 @@ type CreateRegistryRequest struct {
 	// Registry certificates.
 	Certificates []*CreateRegistryRequest_Certificate `protobuf:"bytes,5,rep,name=certificates,proto3" json:"certificates,omitempty"`
 	// Registry passwords.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
 	// Options for logging registry events
@@ -409,7 +402,6 @@ func (x *CreateRegistryMetadata) GetRegistryId() string {
 type UpdateRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to update.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Field mask that specifies which fields of the registry are going to be updated.
@@ -419,7 +411,6 @@ type UpdateRegistryRequest struct {
 	// Description of the registry.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Options for logging registry events
@@ -548,7 +539,6 @@ func (x *UpdateRegistryMetadata) GetRegistryId() string {
 type DeleteRegistryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to delete.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId    string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -730,7 +720,6 @@ func (x *ListRegistryCertificatesResponse) GetCertificates() []*RegistryCertific
 type AddRegistryCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry for which the certificate is being added.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Public part of the certificate that is being added.
@@ -840,7 +829,6 @@ func (x *AddRegistryCertificateMetadata) GetFingerprint() string {
 type DeleteRegistryCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to delete a certificate for.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Fingerprint of the certificate that is being deleted.
@@ -950,7 +938,6 @@ func (x *DeleteRegistryCertificateMetadata) GetFingerprint() string {
 type ListRegistryPasswordsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list passwords in.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId    string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1042,11 +1029,9 @@ func (x *ListRegistryPasswordsResponse) GetPasswords() []*RegistryPassword {
 type AddRegistryPasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to add a password for.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// Passwords for the registry.
-	//
 	// The password must contain at least three character categories among the following: upper case latin, lower case latin, numbers and special symbols.
 	Password      string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1154,11 +1139,9 @@ func (x *AddRegistryPasswordMetadata) GetPasswordId() string {
 type DeleteRegistryPasswordRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to delete a password for.
-	//
 	// To get a registry ID make a [DeviceService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// ID of the password to delete.
-	//
 	// To get a password ID make a [RegistryService.ListPasswords] request.
 	PasswordId    string `protobuf:"bytes,2,opt,name=password_id,json=passwordId,proto3" json:"password_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1214,7 +1197,6 @@ type DeleteRegistryPasswordMetadata struct {
 	// ID of a registry for which the password is being delete.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// ID of the password to delete.
-	//
 	// To get a password ID make a [RegistryService.ListPasswords] request.
 	PasswordId    string `protobuf:"bytes,2,opt,name=password_id,json=passwordId,proto3" json:"password_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1265,133 +1247,6 @@ func (x *DeleteRegistryPasswordMetadata) GetPasswordId() string {
 	return ""
 }
 
-type ListDeviceTopicAliasesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the registry to list aliases for device topic.
-	//
-	// To get a registry ID make a [RegistryService.List] request.
-	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
-	// The maximum number of results per page that should be returned. If the number of available
-	// results is larger than `page_size`, the service returns a [ListDeviceTopicAliasesResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	// Default value: 100.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set `page_token` to the
-	// [ListDeviceTopicAliasesResponse.next_page_token] returned by a previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListDeviceTopicAliasesRequest) Reset() {
-	*x = ListDeviceTopicAliasesRequest{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListDeviceTopicAliasesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListDeviceTopicAliasesRequest) ProtoMessage() {}
-
-func (x *ListDeviceTopicAliasesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListDeviceTopicAliasesRequest.ProtoReflect.Descriptor instead.
-func (*ListDeviceTopicAliasesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *ListDeviceTopicAliasesRequest) GetRegistryId() string {
-	if x != nil {
-		return x.RegistryId
-	}
-	return ""
-}
-
-func (x *ListDeviceTopicAliasesRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListDeviceTopicAliasesRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListDeviceTopicAliasesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of device aliases for the specified registry.
-	Aliases []*DeviceAlias `protobuf:"bytes,1,rep,name=aliases,proto3" json:"aliases,omitempty"`
-	// Token for getting the next page of the list. If the number of results is greater than
-	// the specified [ListDeviceTopicAliasesRequest.page_size], use `next_page_token` as the value
-	// for the [ListDeviceTopicAliasesRequest.page_token] parameter in the next list request.
-	//
-	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListDeviceTopicAliasesResponse) Reset() {
-	*x = ListDeviceTopicAliasesResponse{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListDeviceTopicAliasesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListDeviceTopicAliasesResponse) ProtoMessage() {}
-
-func (x *ListDeviceTopicAliasesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListDeviceTopicAliasesResponse.ProtoReflect.Descriptor instead.
-func (*ListDeviceTopicAliasesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *ListDeviceTopicAliasesResponse) GetAliases() []*DeviceAlias {
-	if x != nil {
-		return x.Aliases
-	}
-	return nil
-}
-
-func (x *ListDeviceTopicAliasesResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
 type ListRegistryOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list operations for.
@@ -1413,7 +1268,7 @@ type ListRegistryOperationsRequest struct {
 
 func (x *ListRegistryOperationsRequest) Reset() {
 	*x = ListRegistryOperationsRequest{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1425,7 +1280,7 @@ func (x *ListRegistryOperationsRequest) String() string {
 func (*ListRegistryOperationsRequest) ProtoMessage() {}
 
 func (x *ListRegistryOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1438,7 +1293,7 @@ func (x *ListRegistryOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRegistryOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListRegistryOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListRegistryOperationsRequest) GetRegistryId() string {
@@ -1476,7 +1331,6 @@ type ListRegistryOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListRegistryOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListRegistryOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1485,7 +1339,7 @@ type ListRegistryOperationsResponse struct {
 
 func (x *ListRegistryOperationsResponse) Reset() {
 	*x = ListRegistryOperationsResponse{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1497,7 +1351,7 @@ func (x *ListRegistryOperationsResponse) String() string {
 func (*ListRegistryOperationsResponse) ProtoMessage() {}
 
 func (x *ListRegistryOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1510,7 +1364,7 @@ func (x *ListRegistryOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRegistryOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListRegistryOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListRegistryOperationsResponse) GetOperations() []*operation.Operation {
@@ -1527,12 +1381,136 @@ func (x *ListRegistryOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ListDeviceTopicAliasesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the registry to list aliases for device topic.
+	// To get a registry ID make a [RegistryService.List] request.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// The maximum number of results per page that should be returned. If the number of available
+	// results is larger than `page_size`, the service returns a [ListDeviceTopicAliasesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListDeviceTopicAliasesResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDeviceTopicAliasesRequest) Reset() {
+	*x = ListDeviceTopicAliasesRequest{}
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDeviceTopicAliasesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDeviceTopicAliasesRequest) ProtoMessage() {}
+
+func (x *ListDeviceTopicAliasesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDeviceTopicAliasesRequest.ProtoReflect.Descriptor instead.
+func (*ListDeviceTopicAliasesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ListDeviceTopicAliasesRequest) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *ListDeviceTopicAliasesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListDeviceTopicAliasesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListDeviceTopicAliasesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of device aliases for the specified registry.
+	Aliases []*DeviceAlias `protobuf:"bytes,1,rep,name=aliases,proto3" json:"aliases,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// the specified [ListDeviceTopicAliasesRequest.page_size], use `next_page_token` as the value
+	// for the [ListDeviceTopicAliasesRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDeviceTopicAliasesResponse) Reset() {
+	*x = ListDeviceTopicAliasesResponse{}
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDeviceTopicAliasesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDeviceTopicAliasesResponse) ProtoMessage() {}
+
+func (x *ListDeviceTopicAliasesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDeviceTopicAliasesResponse.ProtoReflect.Descriptor instead.
+func (*ListDeviceTopicAliasesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ListDeviceTopicAliasesResponse) GetAliases() []*DeviceAlias {
+	if x != nil {
+		return x.Aliases
+	}
+	return nil
+}
+
+func (x *ListDeviceTopicAliasesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 type AddDataStreamExportRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the YDS export. The name must be unique within the folder.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the registry to add a YDS export for.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,2,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// MQTT topic whose messages export to YDS.
@@ -1784,7 +1762,6 @@ func (x *DeleteDataStreamExportMetadata) GetDataStreamExportId() string {
 type ListDataStreamExportsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry to list YDS exports in.
-	//
 	// To get a registry ID make a [RegistryService.List] request.
 	RegistryId    string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2064,7 +2041,7 @@ type CreateRegistryRequest_Certificate struct {
 
 func (x *CreateRegistryRequest_Certificate) Reset() {
 	*x = CreateRegistryRequest_Certificate{}
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2076,7 +2053,7 @@ func (x *CreateRegistryRequest_Certificate) String() string {
 func (*CreateRegistryRequest_Certificate) ProtoMessage() {}
 
 func (x *CreateRegistryRequest_Certificate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_iot_devices_v1_registry_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +2066,7 @@ func (x *CreateRegistryRequest_Certificate) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use CreateRegistryRequest_Certificate.ProtoReflect.Descriptor instead.
 func (*CreateRegistryRequest_Certificate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{4, 1}
+	return file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *CreateRegistryRequest_Certificate) GetCertificateData() string {
@@ -2129,12 +2106,12 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\fcertificates\x18\x05 \x03(\v2>.yandex.cloud.iot.devices.v1.CreateRegistryRequest.CertificateR\fcertificates\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12H\n" +
 	"\vlog_options\x18\a \x01(\v2'.yandex.cloud.iot.devices.v1.LogOptionsR\n" +
-	"logOptions\x1a9\n" +
+	"logOptions\x1a8\n" +
+	"\vCertificate\x12)\n" +
+	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a8\n" +
-	"\vCertificate\x12)\n" +
-	"\x10certificate_data\x18\x01 \x01(\tR\x0fcertificateData\"9\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x16CreateRegistryMetadata\x12\x1f\n" +
 	"\vregistry_id\x18\x01 \x01(\tR\n" +
 	"registryId\"\xfb\x03\n" +
@@ -2204,17 +2181,7 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"registryId\x12-\n" +
 	"\vpassword_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"passwordId\"\xa1\x01\n" +
-	"\x1dListDeviceTopicAliasesRequest\x12-\n" +
-	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8c\x01\n" +
-	"\x1eListDeviceTopicAliasesResponse\x12B\n" +
-	"\aaliases\x18\x01 \x03(\v2(.yandex.cloud.iot.devices.v1.DeviceAliasR\aaliases\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbd\x01\n" +
+	"passwordId\"\xbd\x01\n" +
 	"\x1dListRegistryOperationsRequest\x12%\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"registryId\x12'\n" +
@@ -2228,6 +2195,16 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa1\x01\n" +
+	"\x1dListDeviceTopicAliasesRequest\x12-\n" +
+	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"registryId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8c\x01\n" +
+	"\x1eListDeviceTopicAliasesResponse\x12B\n" +
+	"\aaliases\x18\x01 \x03(\v2(.yandex.cloud.iot.devices.v1.DeviceAliasR\aaliases\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc7\x02\n" +
 	"\x1aAddDataStreamExportRequest\x12.\n" +
 	"\x04name\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=50R\x04name\x12-\n" +
@@ -2287,13 +2264,13 @@ const file_yandex_cloud_iot_devices_v1_registry_service_proto_rawDesc = "" +
 	"\x1bAddRegistryPasswordMetadata\x12\x10RegistryPassword\x82\xd3\xe4\x93\x027:\x01*\"2/iot-devices/v1/registries/{registry_id}/passwords\x12\xf5\x01\n" +
 	"\x0eDeletePassword\x12:.yandex.cloud.iot.devices.v1.DeleteRegistryPasswordRequest\x1a!.yandex.cloud.operation.Operation\"\x83\x01\xb2\xd2*7\n" +
 	"\x1eDeleteRegistryPasswordMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B*@/iot-devices/v1/registries/{registry_id}/passwords/{password_id}\x12\xda\x01\n" +
-	"\x16ListDeviceTopicAliases\x12:.yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest\x1a;.yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse\"G\x82\xd3\xe4\x93\x02A\x12?/iot-devices/v1/registries/{registry_id}:listDeviceTopicAliases\x12\x8e\x01\n" +
+	"\x16ListDeviceTopicAliases\x12:.yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest\x1a;.yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse\"G\x82\xd3\xe4\x93\x02A\x12?/iot-devices/v1/registries/{registry_id}:listDeviceTopicAliases\x12\xc6\x01\n" +
+	"\x0eListOperations\x12:.yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest\x1a;.yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse\";\x82\xd3\xe4\x93\x025\x123/iot-devices/v1/registries/{registry_id}/operations\x12\x8e\x01\n" +
 	"\x15ListDataStreamExports\x129.yandex.cloud.iot.devices.v1.ListDataStreamExportsRequest\x1a:.yandex.cloud.iot.devices.v1.ListDataStreamExportsResponse\x12\xa6\x01\n" +
 	"\x13AddDataStreamExport\x127.yandex.cloud.iot.devices.v1.AddDataStreamExportRequest\x1a!.yandex.cloud.operation.Operation\"3\xb2\xd2*/\n" +
 	"\x1bAddDataStreamExportMetadata\x12\x10DataStreamExport\x12\xb4\x01\n" +
 	"\x16DeleteDataStreamExport\x12:.yandex.cloud.iot.devices.v1.DeleteDataStreamExportRequest\x1a!.yandex.cloud.operation.Operation\";\xb2\xd2*7\n" +
-	"\x1eDeleteDataStreamExportMetadata\x12\x15google.protobuf.Empty\x12\xc6\x01\n" +
-	"\x0eListOperations\x12:.yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest\x1a;.yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse\";\x82\xd3\xe4\x93\x025\x123/iot-devices/v1/registries/{registry_id}/operations\x12\xc2\x01\n" +
+	"\x1eDeleteDataStreamExportMetadata\x12\x15google.protobuf.Empty\x12\xc2\x01\n" +
 	"\aDisable\x123.yandex.cloud.iot.devices.v1.DisableRegistryRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*#\n" +
 	"\x17DisableRegistryMetadata\x12\bRegistry\x82\xd3\xe4\x93\x022\"0/iot-devices/v1/registries/{registry_id}:disable\x12\xbe\x01\n" +
 	"\x06Enable\x122.yandex.cloud.iot.devices.v1.EnableRegistryRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2*\"\n" +
@@ -2336,10 +2313,10 @@ var file_yandex_cloud_iot_devices_v1_registry_service_proto_goTypes = []any{
 	(*AddRegistryPasswordMetadata)(nil),       // 19: yandex.cloud.iot.devices.v1.AddRegistryPasswordMetadata
 	(*DeleteRegistryPasswordRequest)(nil),     // 20: yandex.cloud.iot.devices.v1.DeleteRegistryPasswordRequest
 	(*DeleteRegistryPasswordMetadata)(nil),    // 21: yandex.cloud.iot.devices.v1.DeleteRegistryPasswordMetadata
-	(*ListDeviceTopicAliasesRequest)(nil),     // 22: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest
-	(*ListDeviceTopicAliasesResponse)(nil),    // 23: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse
-	(*ListRegistryOperationsRequest)(nil),     // 24: yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest
-	(*ListRegistryOperationsResponse)(nil),    // 25: yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse
+	(*ListRegistryOperationsRequest)(nil),     // 22: yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest
+	(*ListRegistryOperationsResponse)(nil),    // 23: yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse
+	(*ListDeviceTopicAliasesRequest)(nil),     // 24: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest
+	(*ListDeviceTopicAliasesResponse)(nil),    // 25: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse
 	(*AddDataStreamExportRequest)(nil),        // 26: yandex.cloud.iot.devices.v1.AddDataStreamExportRequest
 	(*AddDataStreamExportMetadata)(nil),       // 27: yandex.cloud.iot.devices.v1.AddDataStreamExportMetadata
 	(*DeleteDataStreamExportRequest)(nil),     // 28: yandex.cloud.iot.devices.v1.DeleteDataStreamExportRequest
@@ -2350,30 +2327,30 @@ var file_yandex_cloud_iot_devices_v1_registry_service_proto_goTypes = []any{
 	(*DisableRegistryMetadata)(nil),           // 33: yandex.cloud.iot.devices.v1.DisableRegistryMetadata
 	(*EnableRegistryRequest)(nil),             // 34: yandex.cloud.iot.devices.v1.EnableRegistryRequest
 	(*EnableRegistryMetadata)(nil),            // 35: yandex.cloud.iot.devices.v1.EnableRegistryMetadata
-	nil,                                       // 36: yandex.cloud.iot.devices.v1.CreateRegistryRequest.LabelsEntry
-	(*CreateRegistryRequest_Certificate)(nil), // 37: yandex.cloud.iot.devices.v1.CreateRegistryRequest.Certificate
+	(*CreateRegistryRequest_Certificate)(nil), // 36: yandex.cloud.iot.devices.v1.CreateRegistryRequest.Certificate
+	nil,                           // 37: yandex.cloud.iot.devices.v1.CreateRegistryRequest.LabelsEntry
 	nil,                           // 38: yandex.cloud.iot.devices.v1.UpdateRegistryRequest.LabelsEntry
 	(*Registry)(nil),              // 39: yandex.cloud.iot.devices.v1.Registry
 	(*LogOptions)(nil),            // 40: yandex.cloud.iot.devices.v1.LogOptions
 	(*fieldmaskpb.FieldMask)(nil), // 41: google.protobuf.FieldMask
 	(*RegistryCertificate)(nil),   // 42: yandex.cloud.iot.devices.v1.RegistryCertificate
 	(*RegistryPassword)(nil),      // 43: yandex.cloud.iot.devices.v1.RegistryPassword
-	(*DeviceAlias)(nil),           // 44: yandex.cloud.iot.devices.v1.DeviceAlias
-	(*operation.Operation)(nil),   // 45: yandex.cloud.operation.Operation
+	(*operation.Operation)(nil),   // 44: yandex.cloud.operation.Operation
+	(*DeviceAlias)(nil),           // 45: yandex.cloud.iot.devices.v1.DeviceAlias
 	(*DataStreamExport)(nil),      // 46: yandex.cloud.iot.devices.v1.DataStreamExport
 }
 var file_yandex_cloud_iot_devices_v1_registry_service_proto_depIdxs = []int32{
 	39, // 0: yandex.cloud.iot.devices.v1.ListRegistriesResponse.registries:type_name -> yandex.cloud.iot.devices.v1.Registry
-	36, // 1: yandex.cloud.iot.devices.v1.CreateRegistryRequest.labels:type_name -> yandex.cloud.iot.devices.v1.CreateRegistryRequest.LabelsEntry
-	37, // 2: yandex.cloud.iot.devices.v1.CreateRegistryRequest.certificates:type_name -> yandex.cloud.iot.devices.v1.CreateRegistryRequest.Certificate
+	37, // 1: yandex.cloud.iot.devices.v1.CreateRegistryRequest.labels:type_name -> yandex.cloud.iot.devices.v1.CreateRegistryRequest.LabelsEntry
+	36, // 2: yandex.cloud.iot.devices.v1.CreateRegistryRequest.certificates:type_name -> yandex.cloud.iot.devices.v1.CreateRegistryRequest.Certificate
 	40, // 3: yandex.cloud.iot.devices.v1.CreateRegistryRequest.log_options:type_name -> yandex.cloud.iot.devices.v1.LogOptions
 	41, // 4: yandex.cloud.iot.devices.v1.UpdateRegistryRequest.update_mask:type_name -> google.protobuf.FieldMask
 	38, // 5: yandex.cloud.iot.devices.v1.UpdateRegistryRequest.labels:type_name -> yandex.cloud.iot.devices.v1.UpdateRegistryRequest.LabelsEntry
 	40, // 6: yandex.cloud.iot.devices.v1.UpdateRegistryRequest.log_options:type_name -> yandex.cloud.iot.devices.v1.LogOptions
 	42, // 7: yandex.cloud.iot.devices.v1.ListRegistryCertificatesResponse.certificates:type_name -> yandex.cloud.iot.devices.v1.RegistryCertificate
 	43, // 8: yandex.cloud.iot.devices.v1.ListRegistryPasswordsResponse.passwords:type_name -> yandex.cloud.iot.devices.v1.RegistryPassword
-	44, // 9: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse.aliases:type_name -> yandex.cloud.iot.devices.v1.DeviceAlias
-	45, // 10: yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	44, // 9: yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	45, // 10: yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse.aliases:type_name -> yandex.cloud.iot.devices.v1.DeviceAlias
 	46, // 11: yandex.cloud.iot.devices.v1.ListDataStreamExportsResponse.data_stream_exports:type_name -> yandex.cloud.iot.devices.v1.DataStreamExport
 	0,  // 12: yandex.cloud.iot.devices.v1.RegistryService.Get:input_type -> yandex.cloud.iot.devices.v1.GetRegistryRequest
 	1,  // 13: yandex.cloud.iot.devices.v1.RegistryService.GetByName:input_type -> yandex.cloud.iot.devices.v1.GetByNameRegistryRequest
@@ -2387,32 +2364,32 @@ var file_yandex_cloud_iot_devices_v1_registry_service_proto_depIdxs = []int32{
 	16, // 21: yandex.cloud.iot.devices.v1.RegistryService.ListPasswords:input_type -> yandex.cloud.iot.devices.v1.ListRegistryPasswordsRequest
 	18, // 22: yandex.cloud.iot.devices.v1.RegistryService.AddPassword:input_type -> yandex.cloud.iot.devices.v1.AddRegistryPasswordRequest
 	20, // 23: yandex.cloud.iot.devices.v1.RegistryService.DeletePassword:input_type -> yandex.cloud.iot.devices.v1.DeleteRegistryPasswordRequest
-	22, // 24: yandex.cloud.iot.devices.v1.RegistryService.ListDeviceTopicAliases:input_type -> yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest
-	30, // 25: yandex.cloud.iot.devices.v1.RegistryService.ListDataStreamExports:input_type -> yandex.cloud.iot.devices.v1.ListDataStreamExportsRequest
-	26, // 26: yandex.cloud.iot.devices.v1.RegistryService.AddDataStreamExport:input_type -> yandex.cloud.iot.devices.v1.AddDataStreamExportRequest
-	28, // 27: yandex.cloud.iot.devices.v1.RegistryService.DeleteDataStreamExport:input_type -> yandex.cloud.iot.devices.v1.DeleteDataStreamExportRequest
-	24, // 28: yandex.cloud.iot.devices.v1.RegistryService.ListOperations:input_type -> yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest
+	24, // 24: yandex.cloud.iot.devices.v1.RegistryService.ListDeviceTopicAliases:input_type -> yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesRequest
+	22, // 25: yandex.cloud.iot.devices.v1.RegistryService.ListOperations:input_type -> yandex.cloud.iot.devices.v1.ListRegistryOperationsRequest
+	30, // 26: yandex.cloud.iot.devices.v1.RegistryService.ListDataStreamExports:input_type -> yandex.cloud.iot.devices.v1.ListDataStreamExportsRequest
+	26, // 27: yandex.cloud.iot.devices.v1.RegistryService.AddDataStreamExport:input_type -> yandex.cloud.iot.devices.v1.AddDataStreamExportRequest
+	28, // 28: yandex.cloud.iot.devices.v1.RegistryService.DeleteDataStreamExport:input_type -> yandex.cloud.iot.devices.v1.DeleteDataStreamExportRequest
 	32, // 29: yandex.cloud.iot.devices.v1.RegistryService.Disable:input_type -> yandex.cloud.iot.devices.v1.DisableRegistryRequest
 	34, // 30: yandex.cloud.iot.devices.v1.RegistryService.Enable:input_type -> yandex.cloud.iot.devices.v1.EnableRegistryRequest
 	39, // 31: yandex.cloud.iot.devices.v1.RegistryService.Get:output_type -> yandex.cloud.iot.devices.v1.Registry
 	39, // 32: yandex.cloud.iot.devices.v1.RegistryService.GetByName:output_type -> yandex.cloud.iot.devices.v1.Registry
 	3,  // 33: yandex.cloud.iot.devices.v1.RegistryService.List:output_type -> yandex.cloud.iot.devices.v1.ListRegistriesResponse
-	45, // 34: yandex.cloud.iot.devices.v1.RegistryService.Create:output_type -> yandex.cloud.operation.Operation
-	45, // 35: yandex.cloud.iot.devices.v1.RegistryService.Update:output_type -> yandex.cloud.operation.Operation
-	45, // 36: yandex.cloud.iot.devices.v1.RegistryService.Delete:output_type -> yandex.cloud.operation.Operation
+	44, // 34: yandex.cloud.iot.devices.v1.RegistryService.Create:output_type -> yandex.cloud.operation.Operation
+	44, // 35: yandex.cloud.iot.devices.v1.RegistryService.Update:output_type -> yandex.cloud.operation.Operation
+	44, // 36: yandex.cloud.iot.devices.v1.RegistryService.Delete:output_type -> yandex.cloud.operation.Operation
 	11, // 37: yandex.cloud.iot.devices.v1.RegistryService.ListCertificates:output_type -> yandex.cloud.iot.devices.v1.ListRegistryCertificatesResponse
-	45, // 38: yandex.cloud.iot.devices.v1.RegistryService.AddCertificate:output_type -> yandex.cloud.operation.Operation
-	45, // 39: yandex.cloud.iot.devices.v1.RegistryService.DeleteCertificate:output_type -> yandex.cloud.operation.Operation
+	44, // 38: yandex.cloud.iot.devices.v1.RegistryService.AddCertificate:output_type -> yandex.cloud.operation.Operation
+	44, // 39: yandex.cloud.iot.devices.v1.RegistryService.DeleteCertificate:output_type -> yandex.cloud.operation.Operation
 	17, // 40: yandex.cloud.iot.devices.v1.RegistryService.ListPasswords:output_type -> yandex.cloud.iot.devices.v1.ListRegistryPasswordsResponse
-	45, // 41: yandex.cloud.iot.devices.v1.RegistryService.AddPassword:output_type -> yandex.cloud.operation.Operation
-	45, // 42: yandex.cloud.iot.devices.v1.RegistryService.DeletePassword:output_type -> yandex.cloud.operation.Operation
-	23, // 43: yandex.cloud.iot.devices.v1.RegistryService.ListDeviceTopicAliases:output_type -> yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse
-	31, // 44: yandex.cloud.iot.devices.v1.RegistryService.ListDataStreamExports:output_type -> yandex.cloud.iot.devices.v1.ListDataStreamExportsResponse
-	45, // 45: yandex.cloud.iot.devices.v1.RegistryService.AddDataStreamExport:output_type -> yandex.cloud.operation.Operation
-	45, // 46: yandex.cloud.iot.devices.v1.RegistryService.DeleteDataStreamExport:output_type -> yandex.cloud.operation.Operation
-	25, // 47: yandex.cloud.iot.devices.v1.RegistryService.ListOperations:output_type -> yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse
-	45, // 48: yandex.cloud.iot.devices.v1.RegistryService.Disable:output_type -> yandex.cloud.operation.Operation
-	45, // 49: yandex.cloud.iot.devices.v1.RegistryService.Enable:output_type -> yandex.cloud.operation.Operation
+	44, // 41: yandex.cloud.iot.devices.v1.RegistryService.AddPassword:output_type -> yandex.cloud.operation.Operation
+	44, // 42: yandex.cloud.iot.devices.v1.RegistryService.DeletePassword:output_type -> yandex.cloud.operation.Operation
+	25, // 43: yandex.cloud.iot.devices.v1.RegistryService.ListDeviceTopicAliases:output_type -> yandex.cloud.iot.devices.v1.ListDeviceTopicAliasesResponse
+	23, // 44: yandex.cloud.iot.devices.v1.RegistryService.ListOperations:output_type -> yandex.cloud.iot.devices.v1.ListRegistryOperationsResponse
+	31, // 45: yandex.cloud.iot.devices.v1.RegistryService.ListDataStreamExports:output_type -> yandex.cloud.iot.devices.v1.ListDataStreamExportsResponse
+	44, // 46: yandex.cloud.iot.devices.v1.RegistryService.AddDataStreamExport:output_type -> yandex.cloud.operation.Operation
+	44, // 47: yandex.cloud.iot.devices.v1.RegistryService.DeleteDataStreamExport:output_type -> yandex.cloud.operation.Operation
+	44, // 48: yandex.cloud.iot.devices.v1.RegistryService.Disable:output_type -> yandex.cloud.operation.Operation
+	44, // 49: yandex.cloud.iot.devices.v1.RegistryService.Enable:output_type -> yandex.cloud.operation.Operation
 	31, // [31:50] is the sub-list for method output_type
 	12, // [12:31] is the sub-list for method input_type
 	12, // [12:12] is the sub-list for extension type_name

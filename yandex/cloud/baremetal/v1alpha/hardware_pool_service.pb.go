@@ -26,7 +26,6 @@ const (
 type GetHardwarePoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HardwarePool resource to return.
-	//
 	// To get the hardware pool ID, use a [HardwarePoolService.List] request.
 	HardwarePoolId string `protobuf:"bytes,1,opt,name=hardware_pool_id,json=hardwarePoolId,proto3" json:"hardware_pool_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -136,7 +135,6 @@ type ListHardwarePoolsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListHardwarePoolsResponse.page_size], use `next_page_token` as the value
 	// for the [ListHardwarePoolsResponse.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -193,9 +191,10 @@ const file_yandex_cloud_baremetal_v1alpha_hardware_pool_service_proto_rawDesc = 
 	"\n" +
 	":yandex/cloud/baremetal/v1alpha/hardware_pool_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/hardware_pool.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
 	"\x16GetHardwarePoolRequest\x122\n" +
-	"\x10hardware_pool_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x0ehardwarePoolId\"g\n" +
-	"\x18ListHardwarePoolsRequest\x12&\n" +
-	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
+	"\x10hardware_pool_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=20R\x0ehardwarePoolId\"h\n" +
+	"\x18ListHardwarePoolsRequest\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x01\x10d\"\x9e\x01\n" +
 	"\x19ListHardwarePoolsResponse\x12S\n" +
