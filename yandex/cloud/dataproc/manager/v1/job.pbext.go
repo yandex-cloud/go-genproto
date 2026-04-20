@@ -40,10 +40,6 @@ func (m *Job) SetCreatedBy(v string) {
 	m.CreatedBy = v
 }
 
-func (m *Job) SetStatus(v Job_Status) {
-	m.Status = v
-}
-
 func (m *Job) SetMapreduceJob(v *MapreduceJob) {
 	m.JobSpec = &Job_MapreduceJob{
 		MapreduceJob: v,
@@ -66,6 +62,10 @@ func (m *Job) SetHiveJob(v *HiveJob) {
 	m.JobSpec = &Job_HiveJob{
 		HiveJob: v,
 	}
+}
+
+func (m *Job) SetStatus(v Job_Status) {
+	m.Status = v
 }
 
 func (m *Job) SetApplicationInfo(v *ApplicationInfo) {

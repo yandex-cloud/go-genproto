@@ -1203,9 +1203,9 @@ const file_yandex_cloud_dataproc_manager_v1_manager_service_proto_rawDesc = "" +
 	"\x06FAILED\x10\x01\x12\x0e\n" +
 	"\n" +
 	"SUCCESSFUL\x10\x02\x12\x0f\n" +
-	"\vIN_PROGRESS\x10\x032\x84\x01\n" +
-	"\x16DataprocManagerService\x12j\n" +
-	"\x06Report\x12/.yandex.cloud.dataproc.manager.v1.ReportRequest\x1a-.yandex.cloud.dataproc.manager.v1.ReportReply\"\x00B}\n" +
+	"\vIN_PROGRESS\x10\x032\x82\x01\n" +
+	"\x16DataprocManagerService\x12h\n" +
+	"\x06Report\x12/.yandex.cloud.dataproc.manager.v1.ReportRequest\x1a-.yandex.cloud.dataproc.manager.v1.ReportReplyB}\n" +
 	"$yandex.cloud.api.dataproc.manager.v1ZUgithub.com/yandex-cloud/go-genproto/yandex/cloud/dataproc/manager/v1;dataproc_managerb\x06proto3"
 
 var (

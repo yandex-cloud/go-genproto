@@ -187,9 +187,9 @@ var File_yandex_cloud_dataproc_v1_resource_preset_service_proto protoreflect.Fil
 
 const file_yandex_cloud_dataproc_v1_resource_preset_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/dataproc/v1/resource_preset_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/dataproc/v1/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"N\n" +
-	"\x18GetResourcePresetRequest\x122\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"o\n" +
+	"6yandex/cloud/dataproc/v1/resource_preset_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/dataproc/v1/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
+	"\x18GetResourcePresetRequest\x12:\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10resourcePresetId\"o\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +
 	"\tpage_size\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +

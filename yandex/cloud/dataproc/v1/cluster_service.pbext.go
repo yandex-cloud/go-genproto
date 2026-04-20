@@ -63,6 +63,18 @@ func (m *CreateSubclusterConfigSpec) SetAutoscalingConfig(v *AutoscalingConfig) 
 	m.AutoscalingConfig = v
 }
 
+func (m *CreateClusterConfigSpec) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *CreateClusterConfigSpec) SetHadoop(v *HadoopConfig) {
+	m.Hadoop = v
+}
+
+func (m *CreateClusterConfigSpec) SetSubclustersSpec(v []*CreateSubclusterConfigSpec) {
+	m.SubclustersSpec = v
+}
+
 func (m *UpdateSubclusterConfigSpec) SetId(v string) {
 	m.Id = v
 }
@@ -83,24 +95,12 @@ func (m *UpdateSubclusterConfigSpec) SetAutoscalingConfig(v *AutoscalingConfig) 
 	m.AutoscalingConfig = v
 }
 
-func (m *CreateClusterConfigSpec) SetVersionId(v string) {
-	m.VersionId = v
-}
-
-func (m *CreateClusterConfigSpec) SetHadoop(v *HadoopConfig) {
+func (m *UpdateClusterConfigSpec) SetHadoop(v *HadoopConfig) {
 	m.Hadoop = v
-}
-
-func (m *CreateClusterConfigSpec) SetSubclustersSpec(v []*CreateSubclusterConfigSpec) {
-	m.SubclustersSpec = v
 }
 
 func (m *UpdateClusterConfigSpec) SetSubclustersSpec(v []*UpdateSubclusterConfigSpec) {
 	m.SubclustersSpec = v
-}
-
-func (m *UpdateClusterConfigSpec) SetHadoop(v *HadoopConfig) {
-	m.Hadoop = v
 }
 
 func (m *CreateClusterRequest) SetFolderId(v string) {
@@ -127,24 +127,24 @@ func (m *CreateClusterRequest) SetZoneId(v string) {
 	m.ZoneId = v
 }
 
-func (m *CreateClusterRequest) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
 func (m *CreateClusterRequest) SetBucket(v string) {
 	m.Bucket = v
+}
+
+func (m *CreateClusterRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }
 
 func (m *CreateClusterRequest) SetUiProxy(v bool) {
 	m.UiProxy = v
 }
 
-func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
-}
-
 func (m *CreateClusterRequest) SetHostGroupIds(v []string) {
 	m.HostGroupIds = v
+}
+
+func (m *CreateClusterRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
 }
 
 func (m *CreateClusterRequest) SetDeletionProtection(v bool) {

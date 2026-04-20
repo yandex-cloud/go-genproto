@@ -34,7 +34,6 @@ const (
 // A set of methods for managing Yandex Data Processing subclusters.
 type SubclusterServiceClient interface {
 	// Returns the specified subcluster.
-	//
 	// To get the list of all available subclusters, make a [SubclusterService.List] request.
 	Get(ctx context.Context, in *GetSubclusterRequest, opts ...grpc.CallOption) (*Subcluster, error)
 	// Retrieves a list of subclusters in the specified cluster.
@@ -112,7 +111,6 @@ func (c *subclusterServiceClient) Delete(ctx context.Context, in *DeleteSubclust
 // A set of methods for managing Yandex Data Processing subclusters.
 type SubclusterServiceServer interface {
 	// Returns the specified subcluster.
-	//
 	// To get the list of all available subclusters, make a [SubclusterService.List] request.
 	Get(context.Context, *GetSubclusterRequest) (*Subcluster, error)
 	// Retrieves a list of subclusters in the specified cluster.

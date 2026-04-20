@@ -31,7 +31,6 @@ type GetSubclusterRequest struct {
 	// ID of the Yandex Data Processing cluster that the subcluster belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the subcluster to return.
-	//
 	// To get a subcluster ID make a [SubclusterService.List] request.
 	SubclusterId  string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -95,7 +94,6 @@ type ListSubclustersRequest struct {
 	// [ListSubclustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters subclusters listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Subcluster.name] field.
 	// 2. An `=` operator.
@@ -171,7 +169,6 @@ type ListSubclustersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSubclustersRequest.page_size], use `next_page_token` as the value
 	// for the [ListSubclustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -225,7 +222,6 @@ func (x *ListSubclustersResponse) GetNextPageToken() string {
 type CreateSubclusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Yandex Data Processing cluster to create a subcluster in.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the subcluster. The name must be unique within the cluster. The name can't be
@@ -381,11 +377,9 @@ func (x *CreateSubclusterMetadata) GetSubclusterId() string {
 type UpdateSubclusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update a subcluster in.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the subcluster to update.
-	//
 	// To get a subcluster ID, make a [SubclusterService.List] request.
 	SubclusterId string `protobuf:"bytes,2,opt,name=subcluster_id,json=subclusterId,proto3" json:"subcluster_id,omitempty"`
 	// Field mask that specifies which attributes of the subcluster should be updated.
@@ -547,7 +541,6 @@ func (x *UpdateSubclusterMetadata) GetSubclusterId() string {
 type DeleteSubclusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to remove a subcluster from.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the subcluster to delete.
@@ -667,7 +660,7 @@ var File_yandex_cloud_dataproc_v1_subcluster_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_dataproc_v1_subcluster_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/dataproc/v1/subcluster_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a&yandex/cloud/operation/operation.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a)yandex/cloud/dataproc/v1/subcluster.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"v\n" +
+	"1yandex/cloud/dataproc/v1/subcluster_service.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a)yandex/cloud/dataproc/v1/subcluster.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"v\n" +
 	"\x14GetSubclusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
@@ -680,24 +673,24 @@ const file_yandex_cloud_dataproc_v1_subcluster_service_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x89\x01\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"\x94\x01\n" +
 	"\x17ListSubclustersResponse\x12F\n" +
-	"\vsubclusters\x18\x01 \x03(\v2$.yandex.cloud.dataproc.v1.SubclusterR\vsubclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x03\n" +
+	"\vsubclusters\x18\x01 \x03(\v2$.yandex.cloud.dataproc.v1.SubclusterR\vsubclusters\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xb1\x03\n" +
 	"\x17CreateSubclusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x128\n" +
 	"\x04role\x18\x03 \x01(\x0e2\x1e.yandex.cloud.dataproc.v1.RoleB\x04\xe8\xc71\x01R\x04role\x12G\n" +
 	"\tresources\x18\x04 \x01(\v2#.yandex.cloud.dataproc.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12)\n" +
-	"\tsubnet_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12,\n" +
-	"\vhosts_count\x18\x06 \x01(\x03B\v\xe8\xc71\x01\xfa\xc71\x03>=1R\n" +
+	"\tsubnet_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
+	"\vhosts_count\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\n" +
 	"hostsCount\x12Z\n" +
-	"\x12autoscaling_config\x18\a \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"r\n" +
-	"\x18CreateSubclusterMetadata\x12'\n" +
+	"\x12autoscaling_config\x18\a \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"z\n" +
+	"\x18CreateSubclusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12-\n" +
-	"\rsubcluster_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\fsubclusterId\"\xfa\x03\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
+	"\rsubcluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fsubclusterId\"\xf6\x03\n" +
 	"\x17UpdateSubclusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
@@ -705,24 +698,24 @@ const file_yandex_cloud_dataproc_v1_subcluster_service_proto_rawDesc = "" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12A\n" +
 	"\tresources\x18\x04 \x01(\v2#.yandex.cloud.dataproc.v1.ResourcesR\tresources\x125\n" +
-	"\x04name\x18\x05 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12,\n" +
-	"\vhosts_count\x18\x06 \x01(\x03B\v\xe8\xc71\x01\xfa\xc71\x03>=1R\n" +
+	"\x04name\x18\x05 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12(\n" +
+	"\vhosts_count\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\n" +
 	"hostsCount\x12>\n" +
 	"\x14decommission_timeout\x18\a \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\x12Z\n" +
-	"\x12autoscaling_config\x18\b \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"r\n" +
-	"\x18UpdateSubclusterMetadata\x12'\n" +
+	"\x12autoscaling_config\x18\b \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"z\n" +
+	"\x18UpdateSubclusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12-\n" +
-	"\rsubcluster_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\fsubclusterId\"\xb9\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
+	"\rsubcluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fsubclusterId\"\xb9\x01\n" +
 	"\x17DeleteSubclusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
 	"\rsubcluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fsubclusterId\x12>\n" +
-	"\x14decommission_timeout\x18\x03 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"r\n" +
-	"\x18DeleteSubclusterMetadata\x12'\n" +
+	"\x14decommission_timeout\x18\x03 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"z\n" +
+	"\x18DeleteSubclusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12-\n" +
-	"\rsubcluster_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\fsubclusterId2\xd9\a\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
+	"\rsubcluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fsubclusterId2\xd9\a\n" +
 	"\x11SubclusterService\x12\xa3\x01\n" +
 	"\x03Get\x12..yandex.cloud.dataproc.v1.GetSubclusterRequest\x1a$.yandex.cloud.dataproc.v1.Subcluster\"F\x82\xd3\xe4\x93\x02@\x12>/dataproc/v1/clusters/{cluster_id}/subclusters/{subcluster_id}\x12\xa3\x01\n" +
 	"\x04List\x120.yandex.cloud.dataproc.v1.ListSubclustersRequest\x1a1.yandex.cloud.dataproc.v1.ListSubclustersResponse\"6\x82\xd3\xe4\x93\x020\x12./dataproc/v1/clusters/{cluster_id}/subclusters\x12\xc3\x01\n" +

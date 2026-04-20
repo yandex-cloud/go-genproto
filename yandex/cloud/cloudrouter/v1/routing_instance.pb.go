@@ -413,7 +413,7 @@ var File_yandex_cloud_cloudrouter_v1_routing_instance_proto protoreflect.FileDes
 
 const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\t\n" +
+	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\t\n" +
 	"\x0fRoutingInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -430,16 +430,16 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1ac\n" +
 	"\x18CicPrivateConnectionInfo\x12G\n" +
-	"\x19cic_private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16cicPrivateConnectionId\x1a\x9e\x01\n" +
+	"\x19cic_private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16cicPrivateConnectionId\x1a\x9a\x01\n" +
 	"\aVpcInfo\x122\n" +
-	"\x0evpc_network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12_\n" +
-	"\baz_infos\x18\x02 \x03(\v26.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcAzInfoB\f\xe8\xc71\x01\x82\xc81\x041-50R\aazInfos\x1at\n" +
+	"\x0evpc_network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12[\n" +
+	"\baz_infos\x18\x02 \x03(\v26.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcAzInfoB\b\x82\xc81\x040-50R\aazInfos\x1at\n" +
 	"\tVpcAzInfo\x12a\n" +
 	"\vmanual_info\x18\x02 \x01(\v2:.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcManualInfoB\x04\xe8\xc71\x01R\n" +
-	"manualInfoJ\x04\b\x01\x10\x02\x1ae\n" +
+	"manualInfoJ\x04\b\x01\x10\x02\x1aa\n" +
 	"\rVpcManualInfo\x12!\n" +
-	"\x05az_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12+\n" +
-	"\bprefixes\x18\x05 \x03(\tB\x0f\xe8\xc71\x01\x82\xc81\a1-10000R\bprefixesJ\x04\b\x02\x10\x05\"V\n" +
+	"\x05az_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12'\n" +
+	"\bprefixes\x18\x05 \x03(\tB\v\x82\xc81\a0-10000R\bprefixesJ\x04\b\x02\x10\x05\"V\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\f\n" +

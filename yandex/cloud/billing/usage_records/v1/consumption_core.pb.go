@@ -721,6 +721,8 @@ type UsageReportPeriodicData struct {
 	// Formula: expense = cost + credit_details.credit
 	Expense *StringDecimal `protobuf:"bytes,3,opt,name=expense,proto3" json:"expense,omitempty"`
 	// Timestamp indicating the beginning of the TimeGrouping period.
+	// For aggregation by week/month/quarter/year
+	// returns the maximum between the start date and the usage date.
 	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -37,3 +37,7 @@ func (m *ApiKey) SetScopes(v []string) {
 func (m *ApiKey) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }
+
+func (m *ApiKey) SetMaskedSecret(v string) {
+	m.MaskedSecret = v
+}

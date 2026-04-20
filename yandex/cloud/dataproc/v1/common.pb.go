@@ -7,6 +7,7 @@
 package dataproc
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -148,12 +149,12 @@ var File_yandex_cloud_dataproc_v1_common_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dataproc_v1_common_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/dataproc/v1/common.proto\x12\x18yandex.cloud.dataproc.v1\"x\n" +
-	"\tResources\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12 \n" +
-	"\fdisk_type_id\x18\x02 \x01(\tR\n" +
-	"diskTypeId\x12\x1b\n" +
-	"\tdisk_size\x18\x03 \x01(\x03R\bdiskSize*?\n" +
+	"%yandex/cloud/dataproc/v1/common.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1dyandex/cloud/validation.proto\"\x95\x01\n" +
+	"\tResources\x126\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x10resourcePresetId\x12*\n" +
+	"\fdisk_type_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
+	"diskTypeId\x12$\n" +
+	"\tdisk_size\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\bdiskSize*?\n" +
 	"\x06Health\x12\x12\n" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +

@@ -43,7 +43,6 @@ const (
 // A set of methods for managing Yandex Data Processing clusters.
 type ClusterServiceClient interface {
 	// Returns the specified cluster.
-	//
 	// To get the list of all available clusters, make a [ClusterService.List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of clusters in the specified folder.
@@ -217,7 +216,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing Yandex Data Processing clusters.
 type ClusterServiceServer interface {
 	// Returns the specified cluster.
-	//
 	// To get the list of all available clusters, make a [ClusterService.List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of clusters in the specified folder.

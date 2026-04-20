@@ -71,10 +71,6 @@ func (m *CreateRoutingInstanceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreateRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
 func (m *UpdateRoutingInstanceRequest) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }
@@ -107,10 +103,6 @@ func (m *UpdateRoutingInstanceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *UpdateRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
 func (m *UpsertPrefixesRequest) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }
@@ -133,6 +125,22 @@ func (m *RemovePrefixesRequest) SetVpcNetworkId(v string) {
 
 func (m *RemovePrefixesRequest) SetVpcAzInfoPrefixes(v []*VpcAzInfoPrefixes) {
 	m.VpcAzInfoPrefixes = v
+}
+
+func (m *AddPrivateConnectionRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *AddPrivateConnectionRequest) SetCicPrivateConnectionId(v string) {
+	m.CicPrivateConnectionId = v
+}
+
+func (m *RemovePrivateConnectionRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *RemovePrivateConnectionRequest) SetCicPrivateConnectionId(v string) {
+	m.CicPrivateConnectionId = v
 }
 
 func (m *UpdateNetworksRequest) SetRoutingInstanceId(v string) {
@@ -169,6 +177,54 @@ func (m *VpcAzInfoPrefixes) SetAzId(v string) {
 
 func (m *VpcAzInfoPrefixes) SetPrefixes(v []string) {
 	m.Prefixes = v
+}
+
+func (m *CreateRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *UpdateRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *DeleteRoutingInstanceRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *DeleteRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *MoveRoutingInstanceRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *MoveRoutingInstanceRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *ListRoutingInstanceOperationsRequest) SetRoutingInstanceId(v string) {
+	m.RoutingInstanceId = v
+}
+
+func (m *ListRoutingInstanceOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListRoutingInstanceOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListRoutingInstanceOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListRoutingInstanceOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *MovePrefixRequest) SetRoutingInstanceId(v string) {
@@ -217,60 +273,4 @@ func (m *UpdatePrefixMaskRequest) SetNewMask(v int64) {
 
 func (m *UpdatePrefixMaskRequest) SetRemoveSubPrefixes(v bool) {
 	m.RemoveSubPrefixes = v
-}
-
-func (m *AddPrivateConnectionRequest) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *AddPrivateConnectionRequest) SetCicPrivateConnectionId(v string) {
-	m.CicPrivateConnectionId = v
-}
-
-func (m *RemovePrivateConnectionRequest) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *RemovePrivateConnectionRequest) SetCicPrivateConnectionId(v string) {
-	m.CicPrivateConnectionId = v
-}
-
-func (m *DeleteRoutingInstanceRequest) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *DeleteRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *MoveRoutingInstanceRequest) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *MoveRoutingInstanceRequest) SetDestinationFolderId(v string) {
-	m.DestinationFolderId = v
-}
-
-func (m *MoveRoutingInstanceMetadata) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *ListRoutingInstanceOperationsRequest) SetRoutingInstanceId(v string) {
-	m.RoutingInstanceId = v
-}
-
-func (m *ListRoutingInstanceOperationsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListRoutingInstanceOperationsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListRoutingInstanceOperationsResponse) SetOperations(v []*operation.Operation) {
-	m.Operations = v
-}
-
-func (m *ListRoutingInstanceOperationsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
 }

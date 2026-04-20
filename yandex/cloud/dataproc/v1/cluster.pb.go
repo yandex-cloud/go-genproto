@@ -512,7 +512,6 @@ type HadoopConfig struct {
 	Services []HadoopConfig_Service `protobuf:"varint,1,rep,packed,name=services,proto3,enum=yandex.cloud.dataproc.v1.HadoopConfig_Service" json:"services,omitempty"`
 	// Properties set for all hosts in `*-site.xml` configurations. The key should indicate
 	// the service and the property.
-	//
 	// For example, use the key 'hdfs:dfs.replication' to set the `dfs.replication` property
 	// in the file `/etc/hadoop/conf/hdfs-site.xml`.
 	Properties map[string]string `protobuf:"bytes,2,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -713,9 +712,9 @@ var File_yandex_cloud_dataproc_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dataproc_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/dataproc/v1/cluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xba\t\n" +
-	"\aCluster\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"&yandex/cloud/dataproc/v1/cluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xc8\t\n" +
+	"\aCluster\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1c\n" +

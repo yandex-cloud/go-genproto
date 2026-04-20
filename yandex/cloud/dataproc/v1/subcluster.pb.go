@@ -29,7 +29,6 @@ type Role int32
 const (
 	Role_ROLE_UNSPECIFIED Role = 0
 	// The subcluster fulfills the master role.
-	//
 	// Master can run the following services, depending on the requested components:
 	// * HDFS: Namenode, Secondary Namenode
 	// * YARN: ResourceManager, Timeline Server
@@ -40,7 +39,6 @@ const (
 	// * ZooKeeper
 	Role_MASTERNODE Role = 1
 	// The subcluster is a DATANODE in a Yandex Data Processing cluster.
-	//
 	// DATANODE can run the following services, depending on the requested components:
 	// * HDFS DataNode
 	// * YARN NodeManager
@@ -48,7 +46,6 @@ const (
 	// * Spark libraries
 	Role_DATANODE Role = 2
 	// The subcluster is a COMPUTENODE in a Yandex Data Processing cluster.
-	//
 	// COMPUTENODE can run the following services, depending on the requested components:
 	// * YARN NodeManager
 	// * Spark libraries
@@ -427,7 +424,7 @@ var File_yandex_cloud_dataproc_v1_subcluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dataproc_v1_subcluster_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/dataproc/v1/subcluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/duration.proto\"\xf4\x03\n" +
+	")yandex/cloud/dataproc/v1/subcluster.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a%yandex/cloud/dataproc/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xf4\x03\n" +
 	"\x11AutoscalingConfig\x121\n" +
 	"\x0fmax_hosts_count\x18\x01 \x01(\x03B\t\xfa\xc71\x051-100R\rmaxHostsCount\x12 \n" +
 	"\vpreemptible\x18\x02 \x01(\bR\vpreemptible\x12\\\n" +

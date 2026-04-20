@@ -30,7 +30,6 @@ const (
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Yandex Data Processing cluster.
-	//
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -77,7 +76,6 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list clusters in.
-	//
 	// To get the folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -89,7 +87,6 @@ type ListClustersRequest struct {
 	// [ListClustersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters clusters listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Cluster.name] field.
 	// 2. An `=` operator.
@@ -165,7 +162,6 @@ type ListClustersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListClustersRequest.page_size], use `next_page_token` as the value
 	// for the [ListClustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -315,10 +311,73 @@ func (x *CreateSubclusterConfigSpec) GetAutoscalingConfig() *AutoscalingConfig {
 	return nil
 }
 
+type CreateClusterConfigSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Version of the image for cluster provisioning.
+	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
+	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	// Yandex Data Processing specific options.
+	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
+	// Specification for creating subclusters.
+	SubclustersSpec []*CreateSubclusterConfigSpec `protobuf:"bytes,3,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *CreateClusterConfigSpec) Reset() {
+	*x = CreateClusterConfigSpec{}
+	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateClusterConfigSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateClusterConfigSpec) ProtoMessage() {}
+
+func (x *CreateClusterConfigSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateClusterConfigSpec.ProtoReflect.Descriptor instead.
+func (*CreateClusterConfigSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateClusterConfigSpec) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+func (x *CreateClusterConfigSpec) GetHadoop() *HadoopConfig {
+	if x != nil {
+		return x.Hadoop
+	}
+	return nil
+}
+
+func (x *CreateClusterConfigSpec) GetSubclustersSpec() []*CreateSubclusterConfigSpec {
+	if x != nil {
+		return x.SubclustersSpec
+	}
+	return nil
+}
+
 type UpdateSubclusterConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subcluster to update.
-	//
 	// To get the subcluster ID make a [SubclusterService.List] request.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the subcluster.
@@ -335,7 +394,7 @@ type UpdateSubclusterConfigSpec struct {
 
 func (x *UpdateSubclusterConfigSpec) Reset() {
 	*x = UpdateSubclusterConfigSpec{}
-	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -347,7 +406,7 @@ func (x *UpdateSubclusterConfigSpec) String() string {
 func (*UpdateSubclusterConfigSpec) ProtoMessage() {}
 
 func (x *UpdateSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -360,7 +419,7 @@ func (x *UpdateSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSubclusterConfigSpec.ProtoReflect.Descriptor instead.
 func (*UpdateSubclusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateSubclusterConfigSpec) GetId() string {
@@ -398,79 +457,14 @@ func (x *UpdateSubclusterConfigSpec) GetAutoscalingConfig() *AutoscalingConfig {
 	return nil
 }
 
-type CreateClusterConfigSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of the image for cluster provisioning.
-	//
-	// All available versions are listed in the [documentation](/docs/data-proc/concepts/environment).
-	VersionId string `protobuf:"bytes,1,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
-	// Yandex Data Processing specific options.
-	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
-	// Specification for creating subclusters.
-	SubclustersSpec []*CreateSubclusterConfigSpec `protobuf:"bytes,3,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *CreateClusterConfigSpec) Reset() {
-	*x = CreateClusterConfigSpec{}
-	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateClusterConfigSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateClusterConfigSpec) ProtoMessage() {}
-
-func (x *CreateClusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_dataproc_v1_cluster_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateClusterConfigSpec.ProtoReflect.Descriptor instead.
-func (*CreateClusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateClusterConfigSpec) GetVersionId() string {
-	if x != nil {
-		return x.VersionId
-	}
-	return ""
-}
-
-func (x *CreateClusterConfigSpec) GetHadoop() *HadoopConfig {
-	if x != nil {
-		return x.Hadoop
-	}
-	return nil
-}
-
-func (x *CreateClusterConfigSpec) GetSubclustersSpec() []*CreateSubclusterConfigSpec {
-	if x != nil {
-		return x.SubclustersSpec
-	}
-	return nil
-}
-
 type UpdateClusterConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Hadoop specific options
+	Hadoop *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
 	// New configuration for subclusters in a cluster.
 	SubclustersSpec []*UpdateSubclusterConfigSpec `protobuf:"bytes,1,rep,name=subclusters_spec,json=subclustersSpec,proto3" json:"subclusters_spec,omitempty"`
-	// Hadoop specific options
-	Hadoop        *HadoopConfig `protobuf:"bytes,2,opt,name=hadoop,proto3" json:"hadoop,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *UpdateClusterConfigSpec) Reset() {
@@ -503,13 +497,6 @@ func (*UpdateClusterConfigSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UpdateClusterConfigSpec) GetSubclustersSpec() []*UpdateSubclusterConfigSpec {
-	if x != nil {
-		return x.SubclustersSpec
-	}
-	return nil
-}
-
 func (x *UpdateClusterConfigSpec) GetHadoop() *HadoopConfig {
 	if x != nil {
 		return x.Hadoop
@@ -517,10 +504,16 @@ func (x *UpdateClusterConfigSpec) GetHadoop() *HadoopConfig {
 	return nil
 }
 
+func (x *UpdateClusterConfigSpec) GetSubclustersSpec() []*UpdateSubclusterConfigSpec {
+	if x != nil {
+		return x.SubclustersSpec
+	}
+	return nil
+}
+
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a cluster in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the cluster. The name must be unique within the folder.
@@ -533,19 +526,18 @@ type CreateClusterRequest struct {
 	// Configuration and resources for hosts that should be created with the cluster.
 	ConfigSpec *CreateClusterConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// ID of the availability zone where the cluster should be placed.
-	//
 	// To get the list of available zones make a [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,7,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the service account to be used by the Yandex Data Processing manager agent.
-	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Name of the Object Storage bucket to use for Yandex Data Processing jobs.
 	Bucket string `protobuf:"bytes,9,opt,name=bucket,proto3" json:"bucket,omitempty"`
+	// ID of the service account to be used by the Yandex Data Processing manager agent.
+	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Enable UI Proxy feature.
 	UiProxy bool `protobuf:"varint,10,opt,name=ui_proxy,json=uiProxy,proto3" json:"ui_proxy,omitempty"`
-	// User security groups.
-	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Host groups to place VMs of cluster on.
 	HostGroupIds []string `protobuf:"bytes,12,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
+	// User security groups.
+	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,13,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// ID of the cloud logging log group to write logs. If not set, logs will not be sent to logging service
@@ -630,16 +622,16 @@ func (x *CreateClusterRequest) GetZoneId() string {
 	return ""
 }
 
-func (x *CreateClusterRequest) GetServiceAccountId() string {
+func (x *CreateClusterRequest) GetBucket() string {
 	if x != nil {
-		return x.ServiceAccountId
+		return x.Bucket
 	}
 	return ""
 }
 
-func (x *CreateClusterRequest) GetBucket() string {
+func (x *CreateClusterRequest) GetServiceAccountId() string {
 	if x != nil {
-		return x.Bucket
+		return x.ServiceAccountId
 	}
 	return ""
 }
@@ -651,16 +643,16 @@ func (x *CreateClusterRequest) GetUiProxy() bool {
 	return false
 }
 
-func (x *CreateClusterRequest) GetSecurityGroupIds() []string {
+func (x *CreateClusterRequest) GetHostGroupIds() []string {
 	if x != nil {
-		return x.SecurityGroupIds
+		return x.HostGroupIds
 	}
 	return nil
 }
 
-func (x *CreateClusterRequest) GetHostGroupIds() []string {
+func (x *CreateClusterRequest) GetSecurityGroupIds() []string {
 	if x != nil {
-		return x.HostGroupIds
+		return x.SecurityGroupIds
 	}
 	return nil
 }
@@ -741,7 +733,6 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Field mask that specifies which attributes of the cluster should be updated.
@@ -950,7 +941,6 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Timeout to gracefully decommission nodes. In seconds. Default value: 0
@@ -1051,7 +1041,6 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to start.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1143,7 +1132,6 @@ func (x *StartClusterMetadata) GetClusterId() string {
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to stop.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Timeout to gracefully decommission nodes. In seconds. Default value: 0
@@ -1315,7 +1303,6 @@ type ListClusterOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListClusterOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListClusterOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1369,7 +1356,6 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list hosts for.
-	//
 	// To get a cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -1381,7 +1367,6 @@ type ListClusterHostsRequest struct {
 	// [ListClusterHostsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters hosts listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Cluster.name] field.
 	// 2. An `=` operator.
@@ -1457,7 +1442,6 @@ type ListClusterHostsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListClusterHostsRequest.page_size], use `next_page_token` as the value
 	// for the [ListClusterHostsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1665,10 +1649,10 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"}\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"\x88\x01\n" +
 	"\x14ListClustersResponse\x12=\n" +
-	"\bclusters\x18\x01 \x03(\v2!.yandex.cloud.dataproc.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb1\x03\n" +
+	"\bclusters\x18\x01 \x03(\v2!.yandex.cloud.dataproc.v1.ClusterR\bclusters\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xb1\x03\n" +
 	"\x1aCreateSubclusterConfigSpec\x125\n" +
 	"\x04name\x18\x01 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x128\n" +
 	"\x04role\x18\x02 \x01(\x0e2\x1e.yandex.cloud.dataproc.v1.RoleB\x04\xe8\xc71\x01R\x04role\x12G\n" +
@@ -1677,36 +1661,36 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\vhosts_count\x18\x05 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
 	"hostsCount\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12Z\n" +
-	"\x12autoscaling_config\x18\a \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"\xac\x02\n" +
-	"\x1aUpdateSubclusterConfigSpec\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12A\n" +
-	"\tresources\x18\x03 \x01(\v2#.yandex.cloud.dataproc.v1.ResourcesR\tresources\x12(\n" +
-	"\vhosts_count\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
-	"hostsCount\x12Z\n" +
-	"\x12autoscaling_config\x18\x05 \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"\xd9\x01\n" +
+	"\x12autoscaling_config\x18\a \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"\xd9\x01\n" +
 	"\x17CreateClusterConfigSpec\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12>\n" +
 	"\x06hadoop\x18\x02 \x01(\v2&.yandex.cloud.dataproc.v1.HadoopConfigR\x06hadoop\x12_\n" +
-	"\x10subclusters_spec\x18\x03 \x03(\v24.yandex.cloud.dataproc.v1.CreateSubclusterConfigSpecR\x0fsubclustersSpec\"\xba\x01\n" +
-	"\x17UpdateClusterConfigSpec\x12_\n" +
-	"\x10subclusters_spec\x18\x01 \x03(\v24.yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpecR\x0fsubclustersSpec\x12>\n" +
-	"\x06hadoop\x18\x02 \x01(\v2&.yandex.cloud.dataproc.v1.HadoopConfigR\x06hadoop\"\x9d\a\n" +
+	"\x10subclusters_spec\x18\x03 \x03(\v24.yandex.cloud.dataproc.v1.CreateSubclusterConfigSpecR\x0fsubclustersSpec\"\xba\x02\n" +
+	"\x1aUpdateSubclusterConfigSpec\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x125\n" +
+	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12A\n" +
+	"\tresources\x18\x03 \x01(\v2#.yandex.cloud.dataproc.v1.ResourcesR\tresources\x12(\n" +
+	"\vhosts_count\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
+	"hostsCount\x12Z\n" +
+	"\x12autoscaling_config\x18\x05 \x01(\v2+.yandex.cloud.dataproc.v1.AutoscalingConfigR\x11autoscalingConfig\"\xba\x01\n" +
+	"\x17UpdateClusterConfigSpec\x12>\n" +
+	"\x06hadoop\x18\x02 \x01(\v2&.yandex.cloud.dataproc.v1.HadoopConfigR\x06hadoop\x12_\n" +
+	"\x10subclusters_spec\x18\x01 \x03(\v24.yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpecR\x0fsubclustersSpec\"\xa1\a\n" +
 	"\x14CreateClusterRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
+	"\x04name\x18\x02 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8f\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2:.yandex.cloud.dataproc.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12X\n" +
 	"\vconfig_spec\x18\x06 \x01(\v21.yandex.cloud.dataproc.v1.CreateClusterConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12%\n" +
-	"\azone_id\x18\a \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x122\n" +
-	"\x12service_account_id\x18\b \x01(\tB\x04\xe8\xc71\x01R\x10serviceAccountId\x12\x16\n" +
-	"\x06bucket\x18\t \x01(\tR\x06bucket\x12\x19\n" +
+	"\azone_id\x18\a \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12\x16\n" +
+	"\x06bucket\x18\t \x01(\tR\x06bucket\x122\n" +
+	"\x12service_account_id\x18\b \x01(\tB\x04\xe8\xc71\x01R\x10serviceAccountId\x12\x19\n" +
 	"\bui_proxy\x18\n" +
-	" \x01(\bR\auiProxy\x12,\n" +
-	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12$\n" +
-	"\x0ehost_group_ids\x18\f \x03(\tR\fhostGroupIds\x12/\n" +
+	" \x01(\bR\auiProxy\x12$\n" +
+	"\x0ehost_group_ids\x18\f \x03(\tR\fhostGroupIds\x12,\n" +
+	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\r \x01(\bR\x12deletionProtection\x12 \n" +
 	"\flog_group_id\x18\x0e \x01(\tR\n" +
 	"logGroupId\x12O\n" +
@@ -1714,13 +1698,13 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x1eautoscaling_service_account_id\x18\x10 \x01(\tR\x1bautoscalingServiceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"6\n" +
-	"\x15CreateClusterMetadata\x12\x1d\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"D\n" +
+	"\x15CreateClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xe8\x06\n" +
-	"\x14UpdateClusterRequest\x12'\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xec\x06\n" +
+	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8f\x01\n" +
@@ -1740,57 +1724,57 @@ const file_yandex_cloud_dataproc_v1_cluster_service_proto_rawDesc = "" +
 	"\x1eautoscaling_service_account_id\x18\x0e \x01(\tR\x1bautoscalingServiceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
-	"\x15UpdateClusterMetadata\x12\x1d\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
+	"\x15UpdateClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x83\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\x83\x01\n" +
 	"\x14DeleteClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12>\n" +
-	"\x14decommission_timeout\x18\x02 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"6\n" +
-	"\x15DeleteClusterMetadata\x12\x1d\n" +
+	"\x14decommission_timeout\x18\x02 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"D\n" +
+	"\x15DeleteClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"B\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"B\n" +
 	"\x13StartClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"5\n" +
-	"\x14StartClusterMetadata\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"C\n" +
+	"\x14StartClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x81\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\x81\x01\n" +
 	"\x12StopClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12>\n" +
-	"\x14decommission_timeout\x18\x02 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"4\n" +
-	"\x13StopClusterMetadata\x12\x1d\n" +
+	"\x14decommission_timeout\x18\x02 \x01(\x03B\v\xfa\xc71\a0-86400R\x13decommissionTimeout\"B\n" +
+	"\x13StopClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x9e\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\x9e\x01\n" +
 	"\x1cListClusterOperationsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
 	"\x1dListClusterOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
-	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb9\x01\n" +
-	"\x17ListClusterHostsRequest\x12'\n" +
+	"operations\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xbd\x01\n" +
+	"\x17ListClusterHostsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"x\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"\x83\x01\n" +
 	"\x18ListClusterHostsResponse\x124\n" +
-	"\x05hosts\x18\x01 \x03(\v2\x1e.yandex.cloud.dataproc.v1.HostR\x05hosts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"=\n" +
-	"\x12ListUILinksRequest\x12'\n" +
+	"\x05hosts\x18\x01 \x03(\v2\x1e.yandex.cloud.dataproc.v1.HostR\x05hosts\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"A\n" +
+	"\x12ListUILinksRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\".\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\".\n" +
 	"\x06UILink\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
 	"\x03url\x18\x02 \x01(\tR\x03url\"M\n" +
@@ -1837,8 +1821,8 @@ var file_yandex_cloud_dataproc_v1_cluster_service_proto_goTypes = []any{
 	(*ListClustersRequest)(nil),                // 1: yandex.cloud.dataproc.v1.ListClustersRequest
 	(*ListClustersResponse)(nil),               // 2: yandex.cloud.dataproc.v1.ListClustersResponse
 	(*CreateSubclusterConfigSpec)(nil),         // 3: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec
-	(*UpdateSubclusterConfigSpec)(nil),         // 4: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
-	(*CreateClusterConfigSpec)(nil),            // 5: yandex.cloud.dataproc.v1.CreateClusterConfigSpec
+	(*CreateClusterConfigSpec)(nil),            // 4: yandex.cloud.dataproc.v1.CreateClusterConfigSpec
+	(*UpdateSubclusterConfigSpec)(nil),         // 5: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
 	(*UpdateClusterConfigSpec)(nil),            // 6: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec
 	(*CreateClusterRequest)(nil),               // 7: yandex.cloud.dataproc.v1.CreateClusterRequest
 	(*CreateClusterMetadata)(nil),              // 8: yandex.cloud.dataproc.v1.CreateClusterMetadata
@@ -1878,14 +1862,14 @@ var file_yandex_cloud_dataproc_v1_cluster_service_proto_depIdxs = []int32{
 	27, // 1: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec.role:type_name -> yandex.cloud.dataproc.v1.Role
 	28, // 2: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec.resources:type_name -> yandex.cloud.dataproc.v1.Resources
 	29, // 3: yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec.autoscaling_config:type_name -> yandex.cloud.dataproc.v1.AutoscalingConfig
-	28, // 4: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec.resources:type_name -> yandex.cloud.dataproc.v1.Resources
-	29, // 5: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec.autoscaling_config:type_name -> yandex.cloud.dataproc.v1.AutoscalingConfig
-	30, // 6: yandex.cloud.dataproc.v1.CreateClusterConfigSpec.hadoop:type_name -> yandex.cloud.dataproc.v1.HadoopConfig
-	3,  // 7: yandex.cloud.dataproc.v1.CreateClusterConfigSpec.subclusters_spec:type_name -> yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec
-	4,  // 8: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec.subclusters_spec:type_name -> yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
-	30, // 9: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec.hadoop:type_name -> yandex.cloud.dataproc.v1.HadoopConfig
+	30, // 4: yandex.cloud.dataproc.v1.CreateClusterConfigSpec.hadoop:type_name -> yandex.cloud.dataproc.v1.HadoopConfig
+	3,  // 5: yandex.cloud.dataproc.v1.CreateClusterConfigSpec.subclusters_spec:type_name -> yandex.cloud.dataproc.v1.CreateSubclusterConfigSpec
+	28, // 6: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec.resources:type_name -> yandex.cloud.dataproc.v1.Resources
+	29, // 7: yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec.autoscaling_config:type_name -> yandex.cloud.dataproc.v1.AutoscalingConfig
+	30, // 8: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec.hadoop:type_name -> yandex.cloud.dataproc.v1.HadoopConfig
+	5,  // 9: yandex.cloud.dataproc.v1.UpdateClusterConfigSpec.subclusters_spec:type_name -> yandex.cloud.dataproc.v1.UpdateSubclusterConfigSpec
 	24, // 10: yandex.cloud.dataproc.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.dataproc.v1.CreateClusterRequest.LabelsEntry
-	5,  // 11: yandex.cloud.dataproc.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.dataproc.v1.CreateClusterConfigSpec
+	4,  // 11: yandex.cloud.dataproc.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.dataproc.v1.CreateClusterConfigSpec
 	31, // 12: yandex.cloud.dataproc.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.dataproc.v1.Cluster.Environment
 	32, // 13: yandex.cloud.dataproc.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
 	25, // 14: yandex.cloud.dataproc.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.dataproc.v1.UpdateClusterRequest.LabelsEntry

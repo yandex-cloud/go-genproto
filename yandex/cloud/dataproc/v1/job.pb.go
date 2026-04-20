@@ -7,6 +7,7 @@
 package dataproc
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -956,11 +957,11 @@ var File_yandex_cloud_dataproc_v1_job_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_dataproc_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\"yandex/cloud/dataproc/v1/job.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd8\x06\n" +
-	"\x03Job\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
+	"\"yandex/cloud/dataproc/v1/job.proto\x12\x18yandex.cloud.dataproc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf4\x06\n" +
+	"\x03Job\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x129\n" +
+	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -995,68 +996,68 @@ const file_yandex_cloud_dataproc_v1_job_proto_rawDesc = "" +
 	"\x0fam_container_id\x18\x02 \x01(\tR\ramContainerId\"\x82\x01\n" +
 	"\x0fApplicationInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12_\n" +
-	"\x14application_attempts\x18\x02 \x03(\v2,.yandex.cloud.dataproc.v1.ApplicationAttemptR\x13applicationAttempts\"\xf5\x02\n" +
-	"\fMapreduceJob\x12\x12\n" +
-	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
-	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x03 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x04 \x03(\tR\varchiveUris\x12V\n" +
+	"\x14application_attempts\x18\x02 \x03(\v2,.yandex.cloud.dataproc.v1.ApplicationAttemptR\x13applicationAttempts\"\x93\x04\n" +
+	"\fMapreduceJob\x12&\n" +
+	"\x04args\x18\x01 \x03(\tB\x12\x82\xc81\x04<=32\x8a\xc81\x06<=1024R\x04args\x126\n" +
+	"\rjar_file_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x8e\x01\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v26.yandex.cloud.dataproc.v1.MapreduceJob.PropertiesEntryR\n" +
-	"properties\x12+\n" +
-	"\x11main_jar_file_uri\x18\x06 \x01(\tH\x00R\x0emainJarFileUri\x12\x1f\n" +
+	"properties\x18\x05 \x03(\v26.yandex.cloud.dataproc.v1.MapreduceJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x126\n" +
+	"\x11main_jar_file_uri\x18\x06 \x01(\tB\t\x8a\xc81\x05<2048H\x00R\x0emainJarFileUri\x12)\n" +
 	"\n" +
-	"main_class\x18\a \x01(\tH\x00R\tmainClass\x1a=\n" +
+	"main_class\x18\a \x01(\tB\b\x8a\xc81\x04<256H\x00R\tmainClass\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
-	"\x06driver\"\xca\x03\n" +
-	"\bSparkJob\x12\x12\n" +
-	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
-	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x03 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x04 \x03(\tR\varchiveUris\x12R\n" +
+	"\x06driver\"\xa7\x05\n" +
+	"\bSparkJob\x12(\n" +
+	"\x04args\x18\x01 \x03(\tB\x14\x82\xc81\x05<=256\x8a\xc81\a<=10000R\x04args\x126\n" +
+	"\rjar_file_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x8a\x01\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v22.yandex.cloud.dataproc.v1.SparkJob.PropertiesEntryR\n" +
-	"properties\x12)\n" +
-	"\x11main_jar_file_uri\x18\x06 \x01(\tR\x0emainJarFileUri\x12\x1d\n" +
+	"properties\x18\x05 \x03(\v22.yandex.cloud.dataproc.v1.SparkJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x128\n" +
+	"\x11main_jar_file_uri\x18\x06 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<2048R\x0emainJarFileUri\x12'\n" +
 	"\n" +
-	"main_class\x18\a \x01(\tR\tmainClass\x12\x1a\n" +
-	"\bpackages\x18\b \x03(\tR\bpackages\x12\"\n" +
-	"\frepositories\x18\t \x03(\tR\frepositories\x12)\n" +
+	"main_class\x18\a \x01(\tB\b\x8a\xc81\x04<256R\tmainClass\x12-\n" +
+	"\bpackages\x18\b \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\bpackages\x125\n" +
+	"\frepositories\x18\t \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x05<2048R\frepositories\x12<\n" +
 	"\x10exclude_packages\x18\n" +
-	" \x03(\tR\x0fexcludePackages\x1a=\n" +
+	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdf\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xca\x05\n" +
 	"\n" +
-	"PysparkJob\x12\x12\n" +
-	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
-	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x03 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x04 \x03(\tR\varchiveUris\x12T\n" +
+	"PysparkJob\x12*\n" +
+	"\x04args\x18\x01 \x03(\tB\x16\x82\xc81\x06<=2500\x8a\xc81\b<=100000R\x04args\x126\n" +
+	"\rjar_file_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x8e\x01\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v24.yandex.cloud.dataproc.v1.PysparkJob.PropertiesEntryR\n" +
-	"properties\x12/\n" +
-	"\x14main_python_file_uri\x18\x06 \x01(\tR\x11mainPythonFileUri\x12(\n" +
-	"\x10python_file_uris\x18\a \x03(\tR\x0epythonFileUris\x12\x1a\n" +
-	"\bpackages\x18\b \x03(\tR\bpackages\x12\"\n" +
-	"\frepositories\x18\t \x03(\tR\frepositories\x12)\n" +
+	"properties\x18\x05 \x03(\v24.yandex.cloud.dataproc.v1.PysparkJob.PropertiesEntryB8\x82\xc81\x05<=100\x8a\xc81\a<=10000\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x12>\n" +
+	"\x14main_python_file_uri\x18\x06 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<2048R\x11mainPythonFileUri\x12<\n" +
+	"\x10python_file_uris\x18\a \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\x0epythonFileUris\x12-\n" +
+	"\bpackages\x18\b \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\bpackages\x125\n" +
+	"\frepositories\x18\t \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x05<2048R\frepositories\x12<\n" +
 	"\x10exclude_packages\x18\n" +
-	" \x03(\tR\x0fexcludePackages\x1a=\n" +
+	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"%\n" +
-	"\tQueryList\x12\x18\n" +
-	"\aqueries\x18\x01 \x03(\tR\aqueries\"\x92\x04\n" +
-	"\aHiveJob\x12Q\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\":\n" +
+	"\tQueryList\x12-\n" +
+	"\aqueries\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<10240R\aqueries\"\xa2\x05\n" +
+	"\aHiveJob\x12\x89\x01\n" +
 	"\n" +
-	"properties\x18\x01 \x03(\v21.yandex.cloud.dataproc.v1.HiveJob.PropertiesEntryR\n" +
+	"properties\x18\x01 \x03(\v21.yandex.cloud.dataproc.v1.HiveJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
 	"properties\x12.\n" +
-	"\x13continue_on_failure\x18\x02 \x01(\bR\x11continueOnFailure\x12a\n" +
-	"\x10script_variables\x18\x03 \x03(\v26.yandex.cloud.dataproc.v1.HiveJob.ScriptVariablesEntryR\x0fscriptVariables\x12\"\n" +
-	"\rjar_file_uris\x18\x04 \x03(\tR\vjarFileUris\x12&\n" +
-	"\x0equery_file_uri\x18\x05 \x01(\tH\x00R\fqueryFileUri\x12D\n" +
+	"\x13continue_on_failure\x18\x02 \x01(\bR\x11continueOnFailure\x12\x98\x01\n" +
+	"\x10script_variables\x18\x03 \x03(\v26.yandex.cloud.dataproc.v1.HiveJob.ScriptVariablesEntryB5\x82\xc81\x05<=100\x8a\xc81\x06<=2048\xb2\xc81\x1e\x12\x15[a-zA-Z][_0-9a-zA-Z]*\x1a\x051-128R\x0fscriptVariables\x126\n" +
+	"\rjar_file_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x121\n" +
+	"\x0equery_file_uri\x18\x05 \x01(\tB\t\x8a\xc81\x05<2048H\x00R\fqueryFileUri\x12D\n" +
 	"\n" +
 	"query_list\x18\x06 \x01(\v2#.yandex.cloud.dataproc.v1.QueryListH\x00R\tqueryList\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
@@ -1066,8 +1067,8 @@ const file_yandex_cloud_dataproc_v1_job_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
-	"query_typeBj\n" +
-	"\x1cyandex.cloud.api.dataproc.v1B\x03PHJZEgithub.com/yandex-cloud/go-genproto/yandex/cloud/dataproc/v1;dataprocb\x06proto3"
+	"query_typeBe\n" +
+	"\x1cyandex.cloud.api.dataproc.v1ZEgithub.com/yandex-cloud/go-genproto/yandex/cloud/dataproc/v1;dataprocb\x06proto3"
 
 var (
 	file_yandex_cloud_dataproc_v1_job_proto_rawDescOnce sync.Once

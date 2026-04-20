@@ -28,14 +28,14 @@ const (
 	RoutingInstanceService_Update_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Update"
 	RoutingInstanceService_UpsertPrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpsertPrefixes"
 	RoutingInstanceService_RemovePrefixes_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrefixes"
-	RoutingInstanceService_UpdateNetworks_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdateNetworks"
-	RoutingInstanceService_MovePrefix_FullMethodName                  = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/MovePrefix"
-	RoutingInstanceService_UpdatePrefixMask_FullMethodName            = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdatePrefixMask"
 	RoutingInstanceService_AddPrivateConnection_FullMethodName        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/AddPrivateConnection"
 	RoutingInstanceService_RemovePrivateConnection_FullMethodName     = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/RemovePrivateConnection"
+	RoutingInstanceService_UpdateNetworks_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdateNetworks"
 	RoutingInstanceService_Delete_FullMethodName                      = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Delete"
 	RoutingInstanceService_Move_FullMethodName                        = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/Move"
 	RoutingInstanceService_ListOperations_FullMethodName              = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/ListOperations"
+	RoutingInstanceService_MovePrefix_FullMethodName                  = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/MovePrefix"
+	RoutingInstanceService_UpdatePrefixMask_FullMethodName            = "/yandex.cloud.cloudrouter.v1.RoutingInstanceService/UpdatePrefixMask"
 )
 
 // RoutingInstanceServiceClient is the client API for RoutingInstanceService service.
@@ -45,15 +45,12 @@ const (
 // A set of methods for managing RoutingInstance resources.
 type RoutingInstanceServiceClient interface {
 	// Returns the specified RoutingInstance resource.
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	Get(ctx context.Context, in *GetRoutingInstanceRequest, opts ...grpc.CallOption) (*RoutingInstance, error)
 	// Returns the RoutingInstance resource by vpcNetworkId
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	GetByVpcNetworkId(ctx context.Context, in *GetRoutingInstanceByVpcNetworkIdRequest, opts ...grpc.CallOption) (*RoutingInstance, error)
 	// Returns the RoutingInstance resource by cicPrivateConnectionId
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	GetByCicPrivateConnectionId(ctx context.Context, in *GetRoutingInstanceByCicPrivateConnectionIdRequest, opts ...grpc.CallOption) (*RoutingInstance, error)
 	// Retrieves the list of RoutingInstance resources in the specified folder.
@@ -70,21 +67,17 @@ type RoutingInstanceServiceClient interface {
 	// Removes specified prefixes from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrefixes(ctx context.Context, in *RemovePrefixesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates multiple vpc using the data specified in the request.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Moves the specified prefix between availability zones of the RoutingInstance.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Removes specified PrivateConnection from a RoutingInstance resource.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	UpdatePrefixMask(ctx context.Context, in *UpdatePrefixMaskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Adds specified PrivateConnection to a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	AddPrivateConnection(ctx context.Context, in *AddPrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Removes specified PrivateConnection from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrivateConnection(ctx context.Context, in *RemovePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates multiple vpc using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(ctx context.Context, in *DeleteRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -92,6 +85,12 @@ type RoutingInstanceServiceClient interface {
 	Move(ctx context.Context, in *MoveRoutingInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified RoutingInstance.
 	ListOperations(ctx context.Context, in *ListRoutingInstanceOperationsRequest, opts ...grpc.CallOption) (*ListRoutingInstanceOperationsResponse, error)
+	// Moves the specified prefix between availability zones of the RoutingInstance.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Removes specified PrivateConnection from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdatePrefixMask(ctx context.Context, in *UpdatePrefixMaskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type routingInstanceServiceClient struct {
@@ -182,36 +181,7 @@ func (c *routingInstanceServiceClient) RemovePrefixes(ctx context.Context, in *R
 	return out, nil
 }
 
-func (c *routingInstanceServiceClient) UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, RoutingInstanceService_UpdateNetworks_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *routingInstanceServiceClient) MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, RoutingInstanceService_MovePrefix_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *routingInstanceServiceClient) UpdatePrefixMask(ctx context.Context, in *UpdatePrefixMaskRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, RoutingInstanceService_UpdatePrefixMask_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
+// Deprecated: Do not use.
 func (c *routingInstanceServiceClient) AddPrivateConnection(ctx context.Context, in *AddPrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -222,10 +192,21 @@ func (c *routingInstanceServiceClient) AddPrivateConnection(ctx context.Context,
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *routingInstanceServiceClient) RemovePrivateConnection(ctx context.Context, in *RemovePrivateConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, RoutingInstanceService_RemovePrivateConnection_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) UpdateNetworks(ctx context.Context, in *UpdateNetworksRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_UpdateNetworks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -262,6 +243,26 @@ func (c *routingInstanceServiceClient) ListOperations(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *routingInstanceServiceClient) MovePrefix(ctx context.Context, in *MovePrefixRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_MovePrefix_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routingInstanceServiceClient) UpdatePrefixMask(ctx context.Context, in *UpdatePrefixMaskRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, RoutingInstanceService_UpdatePrefixMask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RoutingInstanceServiceServer is the server API for RoutingInstanceService service.
 // All implementations should embed UnimplementedRoutingInstanceServiceServer
 // for forward compatibility.
@@ -269,15 +270,12 @@ func (c *routingInstanceServiceClient) ListOperations(ctx context.Context, in *L
 // A set of methods for managing RoutingInstance resources.
 type RoutingInstanceServiceServer interface {
 	// Returns the specified RoutingInstance resource.
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	Get(context.Context, *GetRoutingInstanceRequest) (*RoutingInstance, error)
 	// Returns the RoutingInstance resource by vpcNetworkId
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	GetByVpcNetworkId(context.Context, *GetRoutingInstanceByVpcNetworkIdRequest) (*RoutingInstance, error)
 	// Returns the RoutingInstance resource by cicPrivateConnectionId
-	//
 	// To get the list of available RoutingInstance resources, make a [List] request.
 	GetByCicPrivateConnectionId(context.Context, *GetRoutingInstanceByCicPrivateConnectionIdRequest) (*RoutingInstance, error)
 	// Retrieves the list of RoutingInstance resources in the specified folder.
@@ -294,21 +292,17 @@ type RoutingInstanceServiceServer interface {
 	// Removes specified prefixes from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error)
-	// Updates multiple vpc using the data specified in the request.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error)
-	// Moves the specified prefix between availability zones of the RoutingInstance.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error)
-	// Removes specified PrivateConnection from a RoutingInstance resource.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	UpdatePrefixMask(context.Context, *UpdatePrefixMaskRequest) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Adds specified PrivateConnection to a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	AddPrivateConnection(context.Context, *AddPrivateConnectionRequest) (*operation.Operation, error)
+	// Deprecated: Do not use.
 	// Removes specified PrivateConnection from a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemovePrivateConnection(context.Context, *RemovePrivateConnectionRequest) (*operation.Operation, error)
+	// Updates multiple vpc using the data specified in the request.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error)
 	// Deletes a RoutingInstance resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error)
@@ -316,6 +310,12 @@ type RoutingInstanceServiceServer interface {
 	Move(context.Context, *MoveRoutingInstanceRequest) (*operation.Operation, error)
 	// Lists operations for the specified RoutingInstance.
 	ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error)
+	// Moves the specified prefix between availability zones of the RoutingInstance.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error)
+	// Removes specified PrivateConnection from a RoutingInstance resource.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	UpdatePrefixMask(context.Context, *UpdatePrefixMaskRequest) (*operation.Operation, error)
 }
 
 // UnimplementedRoutingInstanceServiceServer should be embedded to have
@@ -349,20 +349,14 @@ func (UnimplementedRoutingInstanceServiceServer) UpsertPrefixes(context.Context,
 func (UnimplementedRoutingInstanceServiceServer) RemovePrefixes(context.Context, *RemovePrefixesRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemovePrefixes not implemented")
 }
-func (UnimplementedRoutingInstanceServiceServer) UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateNetworks not implemented")
-}
-func (UnimplementedRoutingInstanceServiceServer) MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method MovePrefix not implemented")
-}
-func (UnimplementedRoutingInstanceServiceServer) UpdatePrefixMask(context.Context, *UpdatePrefixMaskRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdatePrefixMask not implemented")
-}
 func (UnimplementedRoutingInstanceServiceServer) AddPrivateConnection(context.Context, *AddPrivateConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddPrivateConnection not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) RemovePrivateConnection(context.Context, *RemovePrivateConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemovePrivateConnection not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) UpdateNetworks(context.Context, *UpdateNetworksRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateNetworks not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) Delete(context.Context, *DeleteRoutingInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
@@ -372,6 +366,12 @@ func (UnimplementedRoutingInstanceServiceServer) Move(context.Context, *MoveRout
 }
 func (UnimplementedRoutingInstanceServiceServer) ListOperations(context.Context, *ListRoutingInstanceOperationsRequest) (*ListRoutingInstanceOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) MovePrefix(context.Context, *MovePrefixRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method MovePrefix not implemented")
+}
+func (UnimplementedRoutingInstanceServiceServer) UpdatePrefixMask(context.Context, *UpdatePrefixMaskRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePrefixMask not implemented")
 }
 func (UnimplementedRoutingInstanceServiceServer) testEmbeddedByValue() {}
 
@@ -537,60 +537,6 @@ func _RoutingInstanceService_RemovePrefixes_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RoutingInstanceService_UpdateNetworks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateNetworksRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoutingInstanceService_UpdateNetworks_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, req.(*UpdateNetworksRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoutingInstanceService_MovePrefix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MovePrefixRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoutingInstanceServiceServer).MovePrefix(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoutingInstanceService_MovePrefix_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoutingInstanceServiceServer).MovePrefix(ctx, req.(*MovePrefixRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _RoutingInstanceService_UpdatePrefixMask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePrefixMaskRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RoutingInstanceServiceServer).UpdatePrefixMask(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: RoutingInstanceService_UpdatePrefixMask_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoutingInstanceServiceServer).UpdatePrefixMask(ctx, req.(*UpdatePrefixMaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _RoutingInstanceService_AddPrivateConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddPrivateConnectionRequest)
 	if err := dec(in); err != nil {
@@ -623,6 +569,24 @@ func _RoutingInstanceService_RemovePrivateConnection_Handler(srv interface{}, ct
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RoutingInstanceServiceServer).RemovePrivateConnection(ctx, req.(*RemovePrivateConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_UpdateNetworks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNetworksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_UpdateNetworks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).UpdateNetworks(ctx, req.(*UpdateNetworksRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -681,6 +645,42 @@ func _RoutingInstanceService_ListOperations_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RoutingInstanceService_MovePrefix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MovePrefixRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).MovePrefix(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_MovePrefix_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).MovePrefix(ctx, req.(*MovePrefixRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RoutingInstanceService_UpdatePrefixMask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePrefixMaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RoutingInstanceServiceServer).UpdatePrefixMask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RoutingInstanceService_UpdatePrefixMask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RoutingInstanceServiceServer).UpdatePrefixMask(ctx, req.(*UpdatePrefixMaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // RoutingInstanceService_ServiceDesc is the grpc.ServiceDesc for RoutingInstanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -721,24 +721,16 @@ var RoutingInstanceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _RoutingInstanceService_RemovePrefixes_Handler,
 		},
 		{
-			MethodName: "UpdateNetworks",
-			Handler:    _RoutingInstanceService_UpdateNetworks_Handler,
-		},
-		{
-			MethodName: "MovePrefix",
-			Handler:    _RoutingInstanceService_MovePrefix_Handler,
-		},
-		{
-			MethodName: "UpdatePrefixMask",
-			Handler:    _RoutingInstanceService_UpdatePrefixMask_Handler,
-		},
-		{
 			MethodName: "AddPrivateConnection",
 			Handler:    _RoutingInstanceService_AddPrivateConnection_Handler,
 		},
 		{
 			MethodName: "RemovePrivateConnection",
 			Handler:    _RoutingInstanceService_RemovePrivateConnection_Handler,
+		},
+		{
+			MethodName: "UpdateNetworks",
+			Handler:    _RoutingInstanceService_UpdateNetworks_Handler,
 		},
 		{
 			MethodName: "Delete",
@@ -751,6 +743,14 @@ var RoutingInstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _RoutingInstanceService_ListOperations_Handler,
+		},
+		{
+			MethodName: "MovePrefix",
+			Handler:    _RoutingInstanceService_MovePrefix_Handler,
+		},
+		{
+			MethodName: "UpdatePrefixMask",
+			Handler:    _RoutingInstanceService_UpdatePrefixMask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

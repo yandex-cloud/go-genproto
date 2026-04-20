@@ -168,8 +168,6 @@ type Job struct {
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
 	// The id of the user who created the job
 	CreatedBy string `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	// Status.
-	Status Job_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.dataproc.manager.v1.Job_Status" json:"status,omitempty"`
 	// Job specification.
 	//
 	// Types that are valid to be assigned to JobSpec:
@@ -179,6 +177,8 @@ type Job struct {
 	//	*Job_PysparkJob
 	//	*Job_HiveJob
 	JobSpec isJob_JobSpec `protobuf_oneof:"job_spec"`
+	// Status.
+	Status Job_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.dataproc.manager.v1.Job_Status" json:"status,omitempty"`
 	// Attributes of YARN application.
 	ApplicationInfo *ApplicationInfo `protobuf:"bytes,13,opt,name=application_info,json=applicationInfo,proto3" json:"application_info,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -264,13 +264,6 @@ func (x *Job) GetCreatedBy() string {
 	return ""
 }
 
-func (x *Job) GetStatus() Job_Status {
-	if x != nil {
-		return x.Status
-	}
-	return Job_STATUS_UNSPECIFIED
-}
-
 func (x *Job) GetJobSpec() isJob_JobSpec {
 	if x != nil {
 		return x.JobSpec
@@ -312,6 +305,13 @@ func (x *Job) GetHiveJob() *HiveJob {
 		}
 	}
 	return nil
+}
+
+func (x *Job) GetStatus() Job_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Job_STATUS_UNSPECIFIED
 }
 
 func (x *Job) GetApplicationInfo() *ApplicationInfo {
@@ -1137,14 +1137,14 @@ const file_yandex_cloud_dataproc_manager_v1_job_proto_rawDesc = "" +
 	"finishedAt\x12\x12\n" +
 	"\x04name\x18\x06 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\f \x01(\tR\tcreatedBy\x12D\n" +
-	"\x06status\x18\a \x01(\x0e2,.yandex.cloud.dataproc.manager.v1.Job.StatusR\x06status\x12U\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x12U\n" +
 	"\rmapreduce_job\x18\b \x01(\v2..yandex.cloud.dataproc.manager.v1.MapreduceJobH\x00R\fmapreduceJob\x12I\n" +
 	"\tspark_job\x18\t \x01(\v2*.yandex.cloud.dataproc.manager.v1.SparkJobH\x00R\bsparkJob\x12O\n" +
 	"\vpyspark_job\x18\n" +
 	" \x01(\v2,.yandex.cloud.dataproc.manager.v1.PysparkJobH\x00R\n" +
 	"pysparkJob\x12F\n" +
-	"\bhive_job\x18\v \x01(\v2).yandex.cloud.dataproc.manager.v1.HiveJobH\x00R\ahiveJob\x12\\\n" +
+	"\bhive_job\x18\v \x01(\v2).yandex.cloud.dataproc.manager.v1.HiveJobH\x00R\ahiveJob\x12D\n" +
+	"\x06status\x18\a \x01(\x0e2,.yandex.cloud.dataproc.manager.v1.Job.StatusR\x06status\x12\\\n" +
 	"\x10application_info\x18\r \x01(\v21.yandex.cloud.dataproc.manager.v1.ApplicationInfoR\x0fapplicationInfo\"\x80\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x10\n" +
@@ -1300,11 +1300,11 @@ var file_yandex_cloud_dataproc_manager_v1_job_proto_depIdxs = []int32{
 	16, // 0: yandex.cloud.dataproc.manager.v1.Job.created_at:type_name -> google.protobuf.Timestamp
 	16, // 1: yandex.cloud.dataproc.manager.v1.Job.started_at:type_name -> google.protobuf.Timestamp
 	16, // 2: yandex.cloud.dataproc.manager.v1.Job.finished_at:type_name -> google.protobuf.Timestamp
-	0,  // 3: yandex.cloud.dataproc.manager.v1.Job.status:type_name -> yandex.cloud.dataproc.manager.v1.Job.Status
-	5,  // 4: yandex.cloud.dataproc.manager.v1.Job.mapreduce_job:type_name -> yandex.cloud.dataproc.manager.v1.MapreduceJob
-	6,  // 5: yandex.cloud.dataproc.manager.v1.Job.spark_job:type_name -> yandex.cloud.dataproc.manager.v1.SparkJob
-	7,  // 6: yandex.cloud.dataproc.manager.v1.Job.pyspark_job:type_name -> yandex.cloud.dataproc.manager.v1.PysparkJob
-	9,  // 7: yandex.cloud.dataproc.manager.v1.Job.hive_job:type_name -> yandex.cloud.dataproc.manager.v1.HiveJob
+	5,  // 3: yandex.cloud.dataproc.manager.v1.Job.mapreduce_job:type_name -> yandex.cloud.dataproc.manager.v1.MapreduceJob
+	6,  // 4: yandex.cloud.dataproc.manager.v1.Job.spark_job:type_name -> yandex.cloud.dataproc.manager.v1.SparkJob
+	7,  // 5: yandex.cloud.dataproc.manager.v1.Job.pyspark_job:type_name -> yandex.cloud.dataproc.manager.v1.PysparkJob
+	9,  // 6: yandex.cloud.dataproc.manager.v1.Job.hive_job:type_name -> yandex.cloud.dataproc.manager.v1.HiveJob
+	0,  // 7: yandex.cloud.dataproc.manager.v1.Job.status:type_name -> yandex.cloud.dataproc.manager.v1.Job.Status
 	4,  // 8: yandex.cloud.dataproc.manager.v1.Job.application_info:type_name -> yandex.cloud.dataproc.manager.v1.ApplicationInfo
 	3,  // 9: yandex.cloud.dataproc.manager.v1.ApplicationInfo.application_attempts:type_name -> yandex.cloud.dataproc.manager.v1.ApplicationAttempt
 	11, // 10: yandex.cloud.dataproc.manager.v1.MapreduceJob.properties:type_name -> yandex.cloud.dataproc.manager.v1.MapreduceJob.PropertiesEntry

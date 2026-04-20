@@ -43,7 +43,9 @@ type ApiKey struct {
 	// Scopes of the API key. 0-256 characters long.
 	Scopes []string `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	// API key expiration timestamp.
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Masked value of the API key's secret part: `\*{4}[a-zA-Z0-9_]{6}`
+	MaskedSecret  string `protobuf:"bytes,9,opt,name=masked_secret,json=maskedSecret,proto3" json:"masked_secret,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,11 +137,18 @@ func (x *ApiKey) GetExpiresAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ApiKey) GetMaskedSecret() string {
+	if x != nil {
+		return x.MaskedSecret
+	}
+	return ""
+}
+
 var File_yandex_cloud_iam_v1_api_key_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_api_key_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/iam/v1/api_key.proto\x12\x13yandex.cloud.iam.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xce\x02\n" +
+	"!yandex/cloud/iam/v1/api_key.proto\x12\x13yandex.cloud.iam.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf3\x02\n" +
 	"\x06ApiKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12,\n" +
 	"\x12service_account_id\x18\x02 \x01(\tR\x10serviceAccountId\x129\n" +
@@ -151,7 +160,8 @@ const file_yandex_cloud_iam_v1_api_key_proto_rawDesc = "" +
 	"\x05scope\x18\x06 \x01(\tB\x02\x18\x01R\x05scope\x12\x16\n" +
 	"\x06scopes\x18\b \x03(\tR\x06scopes\x129\n" +
 	"\n" +
-	"expires_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAtBV\n" +
+	"expires_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12#\n" +
+	"\rmasked_secret\x18\t \x01(\tR\fmaskedSecretBV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (

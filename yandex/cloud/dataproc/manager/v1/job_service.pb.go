@@ -488,7 +488,7 @@ var File_yandex_cloud_dataproc_manager_v1_job_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_dataproc_manager_v1_job_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/dataproc/manager/v1/job_service.proto\x12 yandex.cloud.dataproc.manager.v1\x1a\x1dyandex/cloud/validation.proto\x1a*yandex/cloud/dataproc/manager/v1/job.proto\"\xb1\x01\n" +
+	"2yandex/cloud/dataproc/manager/v1/job_service.proto\x12 yandex.cloud.dataproc.manager.v1\x1a*yandex/cloud/dataproc/manager/v1/job.proto\x1a\x1dyandex/cloud/validation.proto\"\xb1\x01\n" +
 	"\x0fListJobsRequest\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -497,20 +497,20 @@ const file_yandex_cloud_dataproc_manager_v1_job_service_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"u\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"\x80\x01\n" +
 	"\x10ListJobsResponse\x129\n" +
-	"\x04jobs\x18\x01 \x03(\v2%.yandex.cloud.dataproc.manager.v1.JobR\x04jobs\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x86\x02\n" +
+	"\x04jobs\x18\x01 \x03(\v2%.yandex.cloud.dataproc.manager.v1.JobR\x04jobs\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\x86\x02\n" +
 	"\x16UpdateJobStatusRequest\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12\x1f\n" +
 	"\x06job_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05jobId\x12D\n" +
 	"\x06status\x18\x03 \x01(\x0e2,.yandex.cloud.dataproc.manager.v1.Job.StatusR\x06status\x12\\\n" +
 	"\x10application_info\x18\x04 \x01(\v21.yandex.cloud.dataproc.manager.v1.ApplicationInfoR\x0fapplicationInfo\"\x19\n" +
-	"\x17UpdateJobStatusResponse\"\x83\x01\n" +
+	"\x17UpdateJobStatusResponse\"\x8e\x01\n" +
 	"\x17ListSupportJobsResponse\x12@\n" +
-	"\x04jobs\x18\x01 \x03(\v2,.yandex.cloud.dataproc.manager.v1.SupportJobR\x04jobs\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb6\x01\n" +
+	"\x04jobs\x18\x01 \x03(\v2,.yandex.cloud.dataproc.manager.v1.SupportJobR\x04jobs\x121\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xb6\x01\n" +
 	"\x1dUpdateSupportJobStatusRequest\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12\x1f\n" +
@@ -521,15 +521,15 @@ const file_yandex_cloud_dataproc_manager_v1_job_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId\x12\x1f\n" +
 	"\x06job_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05jobId\x12\x16\n" +
 	"\x06output\x18\x03 \x01(\tR\x06output\"\x1b\n" +
-	"\x19SaveSupportJobLogResponse2\xb5\x05\n" +
+	"\x19SaveSupportJobLogResponse2\xab\x05\n" +
 	"\n" +
-	"JobService\x12u\n" +
+	"JobService\x12s\n" +
 	"\n" +
-	"ListActive\x121.yandex.cloud.dataproc.manager.v1.ListJobsRequest\x1a2.yandex.cloud.dataproc.manager.v1.ListJobsResponse\"\x00\x12\x85\x01\n" +
-	"\fUpdateStatus\x128.yandex.cloud.dataproc.manager.v1.UpdateJobStatusRequest\x1a9.yandex.cloud.dataproc.manager.v1.UpdateJobStatusResponse\"\x00\x12\x83\x01\n" +
-	"\x11ListSupportActive\x121.yandex.cloud.dataproc.manager.v1.ListJobsRequest\x1a9.yandex.cloud.dataproc.manager.v1.ListSupportJobsResponse\"\x00\x12\x93\x01\n" +
-	"\x13UpdateSupportStatus\x12?.yandex.cloud.dataproc.manager.v1.UpdateSupportJobStatusRequest\x1a9.yandex.cloud.dataproc.manager.v1.UpdateJobStatusResponse\"\x00\x12\x8b\x01\n" +
-	"\x0eSaveSupportLog\x12:.yandex.cloud.dataproc.manager.v1.SaveSupportJobLogRequest\x1a;.yandex.cloud.dataproc.manager.v1.SaveSupportJobLogResponse\"\x00B}\n" +
+	"ListActive\x121.yandex.cloud.dataproc.manager.v1.ListJobsRequest\x1a2.yandex.cloud.dataproc.manager.v1.ListJobsResponse\x12\x83\x01\n" +
+	"\fUpdateStatus\x128.yandex.cloud.dataproc.manager.v1.UpdateJobStatusRequest\x1a9.yandex.cloud.dataproc.manager.v1.UpdateJobStatusResponse\x12\x81\x01\n" +
+	"\x11ListSupportActive\x121.yandex.cloud.dataproc.manager.v1.ListJobsRequest\x1a9.yandex.cloud.dataproc.manager.v1.ListSupportJobsResponse\x12\x91\x01\n" +
+	"\x13UpdateSupportStatus\x12?.yandex.cloud.dataproc.manager.v1.UpdateSupportJobStatusRequest\x1a9.yandex.cloud.dataproc.manager.v1.UpdateJobStatusResponse\x12\x89\x01\n" +
+	"\x0eSaveSupportLog\x12:.yandex.cloud.dataproc.manager.v1.SaveSupportJobLogRequest\x1a;.yandex.cloud.dataproc.manager.v1.SaveSupportJobLogResponseB}\n" +
 	"$yandex.cloud.api.dataproc.manager.v1ZUgithub.com/yandex-cloud/go-genproto/yandex/cloud/dataproc/manager/v1;dataproc_managerb\x06proto3"
 
 var (
