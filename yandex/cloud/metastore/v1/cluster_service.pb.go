@@ -1449,11 +1449,11 @@ const file_yandex_cloud_metastore_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa0\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa6\x01\n" +
 	"\n" +
 	"ConfigSpec\x12B\n" +
-	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources\x12H\n" +
-	"\twarehouse\x18\x03 \x01(\v2*.yandex.cloud.metastore.v1.WarehouseConfigR\twarehouseJ\x04\b\x01\x10\x02\"\xa7\x01\n" +
+	"\tresources\x18\x02 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources\x12N\n" +
+	"\twarehouse\x18\x03 \x01(\v2*.yandex.cloud.metastore.v1.WarehouseConfigB\x04\xe8\xc71\x01R\twarehouseJ\x04\b\x01\x10\x02\"\xa7\x01\n" +
 	"\x17UpdateClusterConfigSpec\x12B\n" +
 	"\tresources\x18\x01 \x01(\v2$.yandex.cloud.metastore.v1.ResourcesR\tresources\x12H\n" +
 	"\twarehouse\x18\x02 \x01(\v2*.yandex.cloud.metastore.v1.WarehouseConfigR\twarehouse\"G\n" +

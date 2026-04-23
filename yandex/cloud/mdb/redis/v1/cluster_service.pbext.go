@@ -339,6 +339,10 @@ func (m *StartClusterFailoverRequest) SetHostNames(v []string) {
 	m.HostNames = v
 }
 
+func (m *StartClusterFailoverRequest) SetFailoverType(v StartClusterFailoverRequest_FailoverType) {
+	m.FailoverType = v
+}
+
 func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

@@ -907,7 +907,7 @@ const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = 
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\x9d\x01\n" +
 	"\x18ListPublicSubnetResponse\x12S\n" +
 	"\x0epublic_subnets\x18\x01 \x03(\v2,.yandex.cloud.baremetal.v1alpha.PublicSubnetR\rpublicSubnets\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x85\a\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xfd\x06\n" +
 	"\x19CreatePublicSubnetRequest\x12s\n" +
 	"\x0fauto_allocation\x18\x06 \x01(\v2H.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.AutoAllocationH\x00R\x0eautoAllocation\x12y\n" +
 	"\x11manual_allocation\x18\a \x01(\v2J.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.ManualAllocationH\x00R\x10manualAllocation\x12\x1b\n" +
@@ -915,9 +915,8 @@ const file_yandex_cloud_baremetal_v1alpha_public_subnet_service_proto_rawDesc = 
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x12*\n" +
-	"\x11hardware_pool_ids\x18\x04 \x03(\tR\x0fhardwarePoolIds\x12/\n" +
-	"\rprefix_length\x18\x05 \x01(\x03B\n" +
-	"\xfa\xc71\x041-31\x18\x01R\fprefixLength\x12\x9b\x01\n" +
+	"\x11hardware_pool_ids\x18\x04 \x03(\tR\x0fhardwarePoolIds\x12'\n" +
+	"\rprefix_length\x18\x05 \x01(\x03B\x02\x18\x01R\fprefixLength\x12\x9b\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2E.yandex.cloud.baremetal.v1alpha.CreatePublicSubnetRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a?\n" +
 	"\x0eAutoAllocation\x12-\n" +
 	"\rprefix_length\x18\x01 \x01(\x03B\b\xfa\xc71\x041-31R\fprefixLength\x1aY\n" +

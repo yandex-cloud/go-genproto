@@ -155,7 +155,7 @@ const file_yandex_cloud_baremetal_v1alpha_rental_period_service_proto_rawDesc = 
 	"\n" +
 	":yandex/cloud/baremetal/v1alpha/rental_period_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a2yandex/cloud/baremetal/v1alpha/rental_period.proto\x1a\x1dyandex/cloud/validation.proto\"\xb0\x01\n" +
 	"\x18ListRentalPeriodsRequest\x12G\n" +
-	"\x10configuration_id\x18\x01 \x01(\tB\x1c\xe8\xc71\x00\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x12&\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x1c\xe8\xc71\x00\xf2\xc71\x14([a-z][a-z0-9]{19})|R\x0fconfigurationId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18e \x01(\tR\tpageTokenJ\x04\b\x02\x10d\"\x9e\x01\n" +

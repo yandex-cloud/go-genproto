@@ -188,6 +188,14 @@ func (ThresholdType) EnumDescriptor() ([]byte, []int) {
 // A Budget resource. For more information, see [/docs/billing/concepts/budget].
 type Budget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specification of the budget.
+	//
+	// Types that are valid to be assigned to BudgetSpec:
+	//
+	//	*Budget_CostBudget
+	//	*Budget_ExpenseBudget
+	//	*Budget_BalanceBudget
+	BudgetSpec isBudget_BudgetSpec `protobuf_oneof:"budget_spec"`
 	// ID of the budget.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the budget.
@@ -197,15 +205,7 @@ type Budget struct {
 	// ID of the billing account that the budget belongs to.
 	BillingAccountId string `protobuf:"bytes,4,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// Status of the budget.
-	Status BudgetStatus `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.billing.v1.BudgetStatus" json:"status,omitempty"`
-	// Specification of the budget.
-	//
-	// Types that are valid to be assigned to BudgetSpec:
-	//
-	//	*Budget_CostBudget
-	//	*Budget_ExpenseBudget
-	//	*Budget_BalanceBudget
-	BudgetSpec    isBudget_BudgetSpec `protobuf_oneof:"budget_spec"`
+	Status        BudgetStatus `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.billing.v1.BudgetStatus" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -238,6 +238,40 @@ func (x *Budget) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Budget.ProtoReflect.Descriptor instead.
 func (*Budget) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_billing_v1_budget_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Budget) GetBudgetSpec() isBudget_BudgetSpec {
+	if x != nil {
+		return x.BudgetSpec
+	}
+	return nil
+}
+
+func (x *Budget) GetCostBudget() *CostBudgetSpec {
+	if x != nil {
+		if x, ok := x.BudgetSpec.(*Budget_CostBudget); ok {
+			return x.CostBudget
+		}
+	}
+	return nil
+}
+
+func (x *Budget) GetExpenseBudget() *ExpenseBudgetSpec {
+	if x != nil {
+		if x, ok := x.BudgetSpec.(*Budget_ExpenseBudget); ok {
+			return x.ExpenseBudget
+		}
+	}
+	return nil
+}
+
+func (x *Budget) GetBalanceBudget() *BalanceBudgetSpec {
+	if x != nil {
+		if x, ok := x.BudgetSpec.(*Budget_BalanceBudget); ok {
+			return x.BalanceBudget
+		}
+	}
+	return nil
 }
 
 func (x *Budget) GetId() string {
@@ -275,40 +309,6 @@ func (x *Budget) GetStatus() BudgetStatus {
 	return BudgetStatus_BUDGET_STATUS_UNSPECIFIED
 }
 
-func (x *Budget) GetBudgetSpec() isBudget_BudgetSpec {
-	if x != nil {
-		return x.BudgetSpec
-	}
-	return nil
-}
-
-func (x *Budget) GetCostBudget() *CostBudgetSpec {
-	if x != nil {
-		if x, ok := x.BudgetSpec.(*Budget_CostBudget); ok {
-			return x.CostBudget
-		}
-	}
-	return nil
-}
-
-func (x *Budget) GetExpenseBudget() *ExpenseBudgetSpec {
-	if x != nil {
-		if x, ok := x.BudgetSpec.(*Budget_ExpenseBudget); ok {
-			return x.ExpenseBudget
-		}
-	}
-	return nil
-}
-
-func (x *Budget) GetBalanceBudget() *BalanceBudgetSpec {
-	if x != nil {
-		if x, ok := x.BudgetSpec.(*Budget_BalanceBudget); ok {
-			return x.BalanceBudget
-		}
-	}
-	return nil
-}
-
 type isBudget_BudgetSpec interface {
 	isBudget_BudgetSpec()
 }
@@ -337,6 +337,13 @@ func (*Budget_BalanceBudget) isBudget_BudgetSpec() {}
 // Cost budget specification describes budget that can be used to control cost of cloud resources usage.
 type CostBudgetSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Start type of the budget.
+	//
+	// Types that are valid to be assigned to StartType:
+	//
+	//	*CostBudgetSpec_ResetPeriod
+	//	*CostBudgetSpec_StartDate
+	StartType isCostBudgetSpec_StartType `protobuf_oneof:"start_type"`
 	// Max cost threshold of the budget. Amount currency is the same as corresponding [yandex.cloud.billing.v1.BillingAccount.currency].
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// User account IDs.
@@ -347,13 +354,6 @@ type CostBudgetSpec struct {
 	ThresholdRules []*ThresholdRule `protobuf:"bytes,3,rep,name=threshold_rules,json=thresholdRules,proto3" json:"threshold_rules,omitempty"`
 	// Filter that can be used for specific resources selection. Only consumption cost of selected resources are used for the budget calculation.
 	Filter *ConsumptionFilter `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	// Start type of the budget.
-	//
-	// Types that are valid to be assigned to StartType:
-	//
-	//	*CostBudgetSpec_ResetPeriod
-	//	*CostBudgetSpec_StartDate
-	StartType isCostBudgetSpec_StartType `protobuf_oneof:"start_type"`
 	// End date of the budget.
 	// Must be the last day of a month and must be formatted like YYYY-MM-DD.
 	EndDate       string `protobuf:"bytes,7,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
@@ -391,6 +391,31 @@ func (*CostBudgetSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_billing_v1_budget_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *CostBudgetSpec) GetStartType() isCostBudgetSpec_StartType {
+	if x != nil {
+		return x.StartType
+	}
+	return nil
+}
+
+func (x *CostBudgetSpec) GetResetPeriod() ResetPeriodType {
+	if x != nil {
+		if x, ok := x.StartType.(*CostBudgetSpec_ResetPeriod); ok {
+			return x.ResetPeriod
+		}
+	}
+	return ResetPeriodType_RESET_PERIOD_TYPE_UNSPECIFIED
+}
+
+func (x *CostBudgetSpec) GetStartDate() string {
+	if x != nil {
+		if x, ok := x.StartType.(*CostBudgetSpec_StartDate); ok {
+			return x.StartDate
+		}
+	}
+	return ""
+}
+
 func (x *CostBudgetSpec) GetAmount() string {
 	if x != nil {
 		return x.Amount
@@ -417,31 +442,6 @@ func (x *CostBudgetSpec) GetFilter() *ConsumptionFilter {
 		return x.Filter
 	}
 	return nil
-}
-
-func (x *CostBudgetSpec) GetStartType() isCostBudgetSpec_StartType {
-	if x != nil {
-		return x.StartType
-	}
-	return nil
-}
-
-func (x *CostBudgetSpec) GetResetPeriod() ResetPeriodType {
-	if x != nil {
-		if x, ok := x.StartType.(*CostBudgetSpec_ResetPeriod); ok {
-			return x.ResetPeriod
-		}
-	}
-	return ResetPeriodType_RESET_PERIOD_TYPE_UNSPECIFIED
-}
-
-func (x *CostBudgetSpec) GetStartDate() string {
-	if x != nil {
-		if x, ok := x.StartType.(*CostBudgetSpec_StartDate); ok {
-			return x.StartDate
-		}
-	}
-	return ""
 }
 
 func (x *CostBudgetSpec) GetEndDate() string {
@@ -474,6 +474,13 @@ func (*CostBudgetSpec_StartDate) isCostBudgetSpec_StartType() {}
 // Expense budget specification describes budget that can be used to control expense of cloud resources usage.
 type ExpenseBudgetSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Start type of the budget.
+	//
+	// Types that are valid to be assigned to StartType:
+	//
+	//	*ExpenseBudgetSpec_ResetPeriod
+	//	*ExpenseBudgetSpec_StartDate
+	StartType isExpenseBudgetSpec_StartType `protobuf_oneof:"start_type"`
 	// Max expense threshold of the budget. Amount currency is the same as corresponding [yandex.cloud.billing.v1.BillingAccount.currency].
 	Amount string `protobuf:"bytes,1,opt,name=amount,proto3" json:"amount,omitempty"`
 	// User account IDs.
@@ -484,13 +491,6 @@ type ExpenseBudgetSpec struct {
 	ThresholdRules []*ThresholdRule `protobuf:"bytes,3,rep,name=threshold_rules,json=thresholdRules,proto3" json:"threshold_rules,omitempty"`
 	// Filter that can be used for specific resources selection. Only consumption expense of selected resources are used for the budget calculation.
 	Filter *ConsumptionFilter `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	// Start type of the budget.
-	//
-	// Types that are valid to be assigned to StartType:
-	//
-	//	*ExpenseBudgetSpec_ResetPeriod
-	//	*ExpenseBudgetSpec_StartDate
-	StartType isExpenseBudgetSpec_StartType `protobuf_oneof:"start_type"`
 	// End date of the budget.
 	// Must be the last day of a month and must be formatted like YYYY-MM-DD.
 	EndDate       string `protobuf:"bytes,7,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
@@ -528,6 +528,31 @@ func (*ExpenseBudgetSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_billing_v1_budget_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *ExpenseBudgetSpec) GetStartType() isExpenseBudgetSpec_StartType {
+	if x != nil {
+		return x.StartType
+	}
+	return nil
+}
+
+func (x *ExpenseBudgetSpec) GetResetPeriod() ResetPeriodType {
+	if x != nil {
+		if x, ok := x.StartType.(*ExpenseBudgetSpec_ResetPeriod); ok {
+			return x.ResetPeriod
+		}
+	}
+	return ResetPeriodType_RESET_PERIOD_TYPE_UNSPECIFIED
+}
+
+func (x *ExpenseBudgetSpec) GetStartDate() string {
+	if x != nil {
+		if x, ok := x.StartType.(*ExpenseBudgetSpec_StartDate); ok {
+			return x.StartDate
+		}
+	}
+	return ""
+}
+
 func (x *ExpenseBudgetSpec) GetAmount() string {
 	if x != nil {
 		return x.Amount
@@ -554,31 +579,6 @@ func (x *ExpenseBudgetSpec) GetFilter() *ConsumptionFilter {
 		return x.Filter
 	}
 	return nil
-}
-
-func (x *ExpenseBudgetSpec) GetStartType() isExpenseBudgetSpec_StartType {
-	if x != nil {
-		return x.StartType
-	}
-	return nil
-}
-
-func (x *ExpenseBudgetSpec) GetResetPeriod() ResetPeriodType {
-	if x != nil {
-		if x, ok := x.StartType.(*ExpenseBudgetSpec_ResetPeriod); ok {
-			return x.ResetPeriod
-		}
-	}
-	return ResetPeriodType_RESET_PERIOD_TYPE_UNSPECIFIED
-}
-
-func (x *ExpenseBudgetSpec) GetStartDate() string {
-	if x != nil {
-		if x, ok := x.StartType.(*ExpenseBudgetSpec_StartDate); ok {
-			return x.StartDate
-		}
-	}
-	return ""
 }
 
 func (x *ExpenseBudgetSpec) GetEndDate() string {
@@ -817,8 +817,8 @@ type ThresholdRule struct {
 	// Type of the rule.
 	Type ThresholdType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.billing.v1.ThresholdType" json:"type,omitempty"`
 	// Amount of the rule.
-	//   - Must be less than 100 if type is PERCENT.
-	//   - Must be less than budget's amount if type is AMOUNT.
+	// * Must be less than 100 if type is PERCENT.
+	// * Must be less than budget's amount if type is AMOUNT.
 	Amount string `protobuf:"bytes,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	// User account IDs.
 	// Specified users will be be notified if the threshold exceeds.
@@ -883,37 +883,37 @@ var File_yandex_cloud_billing_v1_budget_proto protoreflect.FileDescriptor
 const file_yandex_cloud_billing_v1_budget_proto_rawDesc = "" +
 	"\n" +
 	"$yandex/cloud/billing/v1/budget.proto\x12\x17yandex.cloud.billing.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xdf\x03\n" +
-	"\x06Budget\x12\x0e\n" +
+	"\x06Budget\x12J\n" +
+	"\vcost_budget\x18\x06 \x01(\v2'.yandex.cloud.billing.v1.CostBudgetSpecH\x00R\n" +
+	"costBudget\x12S\n" +
+	"\x0eexpense_budget\x18\a \x01(\v2*.yandex.cloud.billing.v1.ExpenseBudgetSpecH\x00R\rexpenseBudget\x12S\n" +
+	"\x0ebalance_budget\x18\b \x01(\v2*.yandex.cloud.billing.v1.BalanceBudgetSpecH\x00R\rbalanceBudget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12,\n" +
 	"\x12billing_account_id\x18\x04 \x01(\tR\x10billingAccountId\x12=\n" +
-	"\x06status\x18\x05 \x01(\x0e2%.yandex.cloud.billing.v1.BudgetStatusR\x06status\x12J\n" +
-	"\vcost_budget\x18\x06 \x01(\v2'.yandex.cloud.billing.v1.CostBudgetSpecH\x00R\n" +
-	"costBudget\x12S\n" +
-	"\x0eexpense_budget\x18\a \x01(\v2*.yandex.cloud.billing.v1.ExpenseBudgetSpecH\x00R\rexpenseBudget\x12S\n" +
-	"\x0ebalance_budget\x18\b \x01(\v2*.yandex.cloud.billing.v1.BalanceBudgetSpecH\x00R\rbalanceBudgetB\x13\n" +
+	"\x06status\x18\x05 \x01(\x0e2%.yandex.cloud.billing.v1.BudgetStatusR\x06statusB\x13\n" +
 	"\vbudget_spec\x12\x04\xc0\xc11\x01\"\xb4\x03\n" +
-	"\x0eCostBudgetSpec\x12\x1c\n" +
+	"\x0eCostBudgetSpec\x12M\n" +
+	"\freset_period\x18\x05 \x01(\x0e2(.yandex.cloud.billing.v1.ResetPeriodTypeH\x00R\vresetPeriod\x12\x1f\n" +
+	"\n" +
+	"start_date\x18\x06 \x01(\tH\x00R\tstartDate\x12\x1c\n" +
 	"\x06amount\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06amount\x12J\n" +
 	"\x1dnotification_user_account_ids\x18\x02 \x03(\tB\a\x82\xc81\x03>=1R\x1anotificationUserAccountIds\x12O\n" +
 	"\x0fthreshold_rules\x18\x03 \x03(\v2&.yandex.cloud.billing.v1.ThresholdRuleR\x0ethresholdRules\x12B\n" +
-	"\x06filter\x18\x04 \x01(\v2*.yandex.cloud.billing.v1.ConsumptionFilterR\x06filter\x12M\n" +
-	"\freset_period\x18\x05 \x01(\x0e2(.yandex.cloud.billing.v1.ResetPeriodTypeH\x00R\vresetPeriod\x12\x1f\n" +
-	"\n" +
-	"start_date\x18\x06 \x01(\tH\x00R\tstartDate\x12\x1f\n" +
+	"\x06filter\x18\x04 \x01(\v2*.yandex.cloud.billing.v1.ConsumptionFilterR\x06filter\x12\x1f\n" +
 	"\bend_date\x18\a \x01(\tB\x04\xe8\xc71\x01R\aendDateB\x12\n" +
 	"\n" +
 	"start_type\x12\x04\xc0\xc11\x01\"\xb7\x03\n" +
-	"\x11ExpenseBudgetSpec\x12\x1c\n" +
+	"\x11ExpenseBudgetSpec\x12M\n" +
+	"\freset_period\x18\x05 \x01(\x0e2(.yandex.cloud.billing.v1.ResetPeriodTypeH\x00R\vresetPeriod\x12\x1f\n" +
+	"\n" +
+	"start_date\x18\x06 \x01(\tH\x00R\tstartDate\x12\x1c\n" +
 	"\x06amount\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06amount\x12J\n" +
 	"\x1dnotification_user_account_ids\x18\x02 \x03(\tB\a\x82\xc81\x03>=1R\x1anotificationUserAccountIds\x12O\n" +
 	"\x0fthreshold_rules\x18\x03 \x03(\v2&.yandex.cloud.billing.v1.ThresholdRuleR\x0ethresholdRules\x12B\n" +
-	"\x06filter\x18\x04 \x01(\v2*.yandex.cloud.billing.v1.ConsumptionFilterR\x06filter\x12M\n" +
-	"\freset_period\x18\x05 \x01(\x0e2(.yandex.cloud.billing.v1.ResetPeriodTypeH\x00R\vresetPeriod\x12\x1f\n" +
-	"\n" +
-	"start_date\x18\x06 \x01(\tH\x00R\tstartDate\x12\x1f\n" +
+	"\x06filter\x18\x04 \x01(\v2*.yandex.cloud.billing.v1.ConsumptionFilterR\x06filter\x12\x1f\n" +
 	"\bend_date\x18\a \x01(\tB\x04\xe8\xc71\x01R\aendDateB\x12\n" +
 	"\n" +
 	"start_type\x12\x04\xc0\xc11\x01\"\x8e\x02\n" +
@@ -982,17 +982,17 @@ var file_yandex_cloud_billing_v1_budget_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),         // 10: google.protobuf.Timestamp
 }
 var file_yandex_cloud_billing_v1_budget_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.billing.v1.Budget.created_at:type_name -> google.protobuf.Timestamp
-	0,  // 1: yandex.cloud.billing.v1.Budget.status:type_name -> yandex.cloud.billing.v1.BudgetStatus
-	4,  // 2: yandex.cloud.billing.v1.Budget.cost_budget:type_name -> yandex.cloud.billing.v1.CostBudgetSpec
-	5,  // 3: yandex.cloud.billing.v1.Budget.expense_budget:type_name -> yandex.cloud.billing.v1.ExpenseBudgetSpec
-	6,  // 4: yandex.cloud.billing.v1.Budget.balance_budget:type_name -> yandex.cloud.billing.v1.BalanceBudgetSpec
-	9,  // 5: yandex.cloud.billing.v1.CostBudgetSpec.threshold_rules:type_name -> yandex.cloud.billing.v1.ThresholdRule
-	7,  // 6: yandex.cloud.billing.v1.CostBudgetSpec.filter:type_name -> yandex.cloud.billing.v1.ConsumptionFilter
-	1,  // 7: yandex.cloud.billing.v1.CostBudgetSpec.reset_period:type_name -> yandex.cloud.billing.v1.ResetPeriodType
-	9,  // 8: yandex.cloud.billing.v1.ExpenseBudgetSpec.threshold_rules:type_name -> yandex.cloud.billing.v1.ThresholdRule
-	7,  // 9: yandex.cloud.billing.v1.ExpenseBudgetSpec.filter:type_name -> yandex.cloud.billing.v1.ConsumptionFilter
-	1,  // 10: yandex.cloud.billing.v1.ExpenseBudgetSpec.reset_period:type_name -> yandex.cloud.billing.v1.ResetPeriodType
+	4,  // 0: yandex.cloud.billing.v1.Budget.cost_budget:type_name -> yandex.cloud.billing.v1.CostBudgetSpec
+	5,  // 1: yandex.cloud.billing.v1.Budget.expense_budget:type_name -> yandex.cloud.billing.v1.ExpenseBudgetSpec
+	6,  // 2: yandex.cloud.billing.v1.Budget.balance_budget:type_name -> yandex.cloud.billing.v1.BalanceBudgetSpec
+	10, // 3: yandex.cloud.billing.v1.Budget.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 4: yandex.cloud.billing.v1.Budget.status:type_name -> yandex.cloud.billing.v1.BudgetStatus
+	1,  // 5: yandex.cloud.billing.v1.CostBudgetSpec.reset_period:type_name -> yandex.cloud.billing.v1.ResetPeriodType
+	9,  // 6: yandex.cloud.billing.v1.CostBudgetSpec.threshold_rules:type_name -> yandex.cloud.billing.v1.ThresholdRule
+	7,  // 7: yandex.cloud.billing.v1.CostBudgetSpec.filter:type_name -> yandex.cloud.billing.v1.ConsumptionFilter
+	1,  // 8: yandex.cloud.billing.v1.ExpenseBudgetSpec.reset_period:type_name -> yandex.cloud.billing.v1.ResetPeriodType
+	9,  // 9: yandex.cloud.billing.v1.ExpenseBudgetSpec.threshold_rules:type_name -> yandex.cloud.billing.v1.ThresholdRule
+	7,  // 10: yandex.cloud.billing.v1.ExpenseBudgetSpec.filter:type_name -> yandex.cloud.billing.v1.ConsumptionFilter
 	9,  // 11: yandex.cloud.billing.v1.BalanceBudgetSpec.threshold_rules:type_name -> yandex.cloud.billing.v1.ThresholdRule
 	8,  // 12: yandex.cloud.billing.v1.ConsumptionFilter.cloud_folders_filters:type_name -> yandex.cloud.billing.v1.CloudFoldersConsumptionFilter
 	2,  // 13: yandex.cloud.billing.v1.ThresholdRule.type:type_name -> yandex.cloud.billing.v1.ThresholdType

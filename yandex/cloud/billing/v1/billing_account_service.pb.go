@@ -422,14 +422,14 @@ var File_yandex_cloud_billing_v1_billing_account_service_proto protoreflect.File
 
 const file_yandex_cloud_billing_v1_billing_account_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/billing/v1/billing_account_service.proto\x12\x17yandex.cloud.billing.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a-yandex/cloud/billing/v1/billing_account.proto\x1a-yandex/cloud/billing/v1/billable_object.proto\x1a&yandex/cloud/operation/operation.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
+	"5yandex/cloud/billing/v1/billing_account_service.proto\x12\x17yandex.cloud.billing.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/billing/v1/billable_object.proto\x1a-yandex/cloud/billing/v1/billing_account.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
 	"\x18GetBillingAccountRequest\x12\x1c\n" +
-	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\"o\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\"u\n" +
 	"\x1aListBillingAccountsRequest\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x99\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageTokenJ\x04\b\x01\x10\x02\"\x99\x01\n" +
 	"\x1bListBillingAccountsResponse\x12R\n" +
 	"\x10billing_accounts\x18\x01 \x03(\v2'.yandex.cloud.billing.v1.BillingAccountR\x0fbillingAccounts\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb2\x01\n" +
@@ -515,8 +515,8 @@ func file_yandex_cloud_billing_v1_billing_account_service_proto_init() {
 	if File_yandex_cloud_billing_v1_billing_account_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_billing_v1_billing_account_proto_init()
 	file_yandex_cloud_billing_v1_billable_object_proto_init()
+	file_yandex_cloud_billing_v1_billing_account_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

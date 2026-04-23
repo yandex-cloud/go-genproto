@@ -32,14 +32,6 @@ func (m *CreateBudgetRequest) SetBudgetSpec(v CreateBudgetRequest_BudgetSpec) {
 	m.BudgetSpec = v
 }
 
-func (m *CreateBudgetRequest) SetBillingAccountId(v string) {
-	m.BillingAccountId = v
-}
-
-func (m *CreateBudgetRequest) SetName(v string) {
-	m.Name = v
-}
-
 func (m *CreateBudgetRequest) SetCostBudgetSpec(v *CostBudgetSpec) {
 	m.BudgetSpec = &CreateBudgetRequest_CostBudgetSpec{
 		CostBudgetSpec: v,
@@ -56,6 +48,14 @@ func (m *CreateBudgetRequest) SetBalanceBudgetSpec(v *BalanceBudgetSpec) {
 	m.BudgetSpec = &CreateBudgetRequest_BalanceBudgetSpec{
 		BalanceBudgetSpec: v,
 	}
+}
+
+func (m *CreateBudgetRequest) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
+}
+
+func (m *CreateBudgetRequest) SetName(v string) {
+	m.Name = v
 }
 
 func (m *CreateBudgetMetadata) SetBudgetId(v string) {

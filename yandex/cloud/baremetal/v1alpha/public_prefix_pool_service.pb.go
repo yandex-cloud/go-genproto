@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -574,7 +575,7 @@ var File_yandex_cloud_baremetal_v1alpha_public_prefix_pool_service_proto protore
 
 const file_yandex_cloud_baremetal_v1alpha_public_prefix_pool_service_proto_rawDesc = "" +
 	"\n" +
-	"?yandex/cloud/baremetal/v1alpha/public_prefix_pool_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a7yandex/cloud/baremetal/v1alpha/public_prefix_pool.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"m\n" +
+	"?yandex/cloud/baremetal/v1alpha/public_prefix_pool_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a7yandex/cloud/baremetal/v1alpha/public_prefix_pool.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"m\n" +
 	"\x1aGetPublicPrefixPoolRequest\x12O\n" +
 	"\x15public_prefix_pool_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x12publicPrefixPoolId\"\xbb\x01\n" +
 	"\x1bListPublicPrefixPoolRequest\x12\x1b\n" +
@@ -615,13 +616,13 @@ const file_yandex_cloud_baremetal_v1alpha_public_prefix_pool_service_proto_rawDe
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xd9\x04\n" +
-	"\x17PublicPrefixPoolService\x12s\n" +
-	"\x03Get\x12:.yandex.cloud.baremetal.v1alpha.GetPublicPrefixPoolRequest\x1a0.yandex.cloud.baremetal.v1alpha.PublicPrefixPool\x12\x81\x01\n" +
-	"\x04List\x12;.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolResponse\x12\xa2\x01\n" +
-	"\x06Update\x12=.yandex.cloud.baremetal.v1alpha.UpdatePublicPrefixPoolRequest\x1a!.yandex.cloud.operation.Operation\"6\xb2\xd2*2\n" +
-	"\x1eUpdatePublicPrefixPoolMetadata\x12\x10PublicPrefixPool\x12\x9f\x01\n" +
-	"\x0eListOperations\x12E.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsRequest\x1aF.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsResponseBr\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xe6\x06\n" +
+	"\x17PublicPrefixPoolService\x12\xb9\x01\n" +
+	"\x03Get\x12:.yandex.cloud.baremetal.v1alpha.GetPublicPrefixPoolRequest\x1a0.yandex.cloud.baremetal.v1alpha.PublicPrefixPool\"D\x82\xd3\xe4\x93\x02>\x12</baremetal/v1alpha/publicPrefixPools/{public_prefix_pool_id}\x12\xaf\x01\n" +
+	"\x04List\x12;.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolRequest\x1a<.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolResponse\",\x82\xd3\xe4\x93\x02&\x12$/baremetal/v1alpha/publicPrefixPools\x12\xe9\x01\n" +
+	"\x06Update\x12=.yandex.cloud.baremetal.v1alpha.UpdatePublicPrefixPoolRequest\x1a!.yandex.cloud.operation.Operation\"}\xb2\xd2*2\n" +
+	"\x1eUpdatePublicPrefixPoolMetadata\x12\x10PublicPrefixPool\x82\xd3\xe4\x93\x02A:\x01*2</baremetal/v1alpha/publicPrefixPools/{public_prefix_pool_id}\x12\xf0\x01\n" +
+	"\x0eListOperations\x12E.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsRequest\x1aF.yandex.cloud.baremetal.v1alpha.ListPublicPrefixPoolOperationsResponse\"O\x82\xd3\xe4\x93\x02I\x12G/baremetal/v1alpha/publicPrefixPools/{public_prefix_pool_id}/operationsBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

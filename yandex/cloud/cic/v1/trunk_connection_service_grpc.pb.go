@@ -22,7 +22,6 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	TrunkConnectionService_Get_FullMethodName                    = "/yandex.cloud.cic.v1.TrunkConnectionService/Get"
 	TrunkConnectionService_List_FullMethodName                   = "/yandex.cloud.cic.v1.TrunkConnectionService/List"
-	TrunkConnectionService_Create_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Create"
 	TrunkConnectionService_Update_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Update"
 	TrunkConnectionService_Delete_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Delete"
 	TrunkConnectionService_Move_FullMethodName                   = "/yandex.cloud.cic.v1.TrunkConnectionService/Move"
@@ -43,9 +42,6 @@ type TrunkConnectionServiceClient interface {
 	Get(ctx context.Context, in *GetTrunkConnectionRequest, opts ...grpc.CallOption) (*TrunkConnection, error)
 	// Retrieves the list of TrunkConnection resources in the specified folder.
 	List(ctx context.Context, in *ListTrunkConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionsResponse, error)
-	// Creates a TrunkConnection resource in the specified folder using the data specified in the request.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	Create(ctx context.Context, in *CreateTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates a TrunkConnection resource using the data specified in the request.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(ctx context.Context, in *UpdateTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -84,16 +80,6 @@ func (c *trunkConnectionServiceClient) List(ctx context.Context, in *ListTrunkCo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListTrunkConnectionsResponse)
 	err := c.cc.Invoke(ctx, TrunkConnectionService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trunkConnectionServiceClient) Create(ctx context.Context, in *CreateTrunkConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, TrunkConnectionService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,9 +158,6 @@ type TrunkConnectionServiceServer interface {
 	Get(context.Context, *GetTrunkConnectionRequest) (*TrunkConnection, error)
 	// Retrieves the list of TrunkConnection resources in the specified folder.
 	List(context.Context, *ListTrunkConnectionsRequest) (*ListTrunkConnectionsResponse, error)
-	// Creates a TrunkConnection resource in the specified folder using the data specified in the request.
-	// Method starts an asynchronous operation that can be cancelled while it is in progress.
-	Create(context.Context, *CreateTrunkConnectionRequest) (*operation.Operation, error)
 	// Updates a TrunkConnection resource using the data specified in the request.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Update(context.Context, *UpdateTrunkConnectionRequest) (*operation.Operation, error)
@@ -203,9 +186,6 @@ func (UnimplementedTrunkConnectionServiceServer) Get(context.Context, *GetTrunkC
 }
 func (UnimplementedTrunkConnectionServiceServer) List(context.Context, *ListTrunkConnectionsRequest) (*ListTrunkConnectionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
-func (UnimplementedTrunkConnectionServiceServer) Create(context.Context, *CreateTrunkConnectionRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedTrunkConnectionServiceServer) Update(context.Context, *UpdateTrunkConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
@@ -277,24 +257,6 @@ func _TrunkConnectionService_List_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TrunkConnectionServiceServer).List(ctx, req.(*ListTrunkConnectionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _TrunkConnectionService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateTrunkConnectionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrunkConnectionServiceServer).Create(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TrunkConnectionService_Create_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrunkConnectionServiceServer).Create(ctx, req.(*CreateTrunkConnectionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -421,10 +383,6 @@ var TrunkConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _TrunkConnectionService_List_Handler,
-		},
-		{
-			MethodName: "Create",
-			Handler:    _TrunkConnectionService_Create_Handler,
 		},
 		{
 			MethodName: "Update",

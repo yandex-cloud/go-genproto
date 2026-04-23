@@ -891,9 +891,9 @@ const file_yandex_cloud_dns_v1_dns_firewall_service_proto_rawDesc = "" +
 	"\n" +
 	".yandex/cloud/dns/v1/dns_firewall_service.proto\x12\x13yandex.cloud.dns.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/dns/v1/dns_firewall.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
 	"\x15GetDnsFirewallRequest\x12,\n" +
-	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\rdnsFirewallId\"\xb4\x01\n" +
-	"\x17ListDnsFirewallsRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12'\n" +
+	"\x0fdns_firewall_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\rdnsFirewallId\"\xbc\x01\n" +
+	"\x17ListDnsFirewallsRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
 	"\n" +

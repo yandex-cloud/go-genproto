@@ -214,13 +214,6 @@ func (x *ListSinksResponse) GetNextPageToken() string {
 
 type CreateSinkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Logs destination
-	//
-	// Types that are valid to be assigned to Sink:
-	//
-	//	*CreateSinkRequest_Yds
-	//	*CreateSinkRequest_S3
-	Sink isCreateSinkRequest_Sink `protobuf_oneof:"sink"`
 	// ID of the folder to create a sink in.
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -233,8 +226,15 @@ type CreateSinkRequest struct {
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Logs will be written to the sink on behalf of this service account
 	ServiceAccountId string `protobuf:"bytes,5,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Logs destination
+	//
+	// Types that are valid to be assigned to Sink:
+	//
+	//	*CreateSinkRequest_Yds
+	//	*CreateSinkRequest_S3
+	Sink          isCreateSinkRequest_Sink `protobuf_oneof:"sink"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateSinkRequest) Reset() {
@@ -265,31 +265,6 @@ func (x *CreateSinkRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateSinkRequest.ProtoReflect.Descriptor instead.
 func (*CreateSinkRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_logging_v1_sink_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *CreateSinkRequest) GetSink() isCreateSinkRequest_Sink {
-	if x != nil {
-		return x.Sink
-	}
-	return nil
-}
-
-func (x *CreateSinkRequest) GetYds() *Sink_Yds {
-	if x != nil {
-		if x, ok := x.Sink.(*CreateSinkRequest_Yds); ok {
-			return x.Yds
-		}
-	}
-	return nil
-}
-
-func (x *CreateSinkRequest) GetS3() *Sink_S3 {
-	if x != nil {
-		if x, ok := x.Sink.(*CreateSinkRequest_S3); ok {
-			return x.S3
-		}
-	}
-	return nil
 }
 
 func (x *CreateSinkRequest) GetFolderId() string {
@@ -325,6 +300,31 @@ func (x *CreateSinkRequest) GetServiceAccountId() string {
 		return x.ServiceAccountId
 	}
 	return ""
+}
+
+func (x *CreateSinkRequest) GetSink() isCreateSinkRequest_Sink {
+	if x != nil {
+		return x.Sink
+	}
+	return nil
+}
+
+func (x *CreateSinkRequest) GetYds() *Sink_Yds {
+	if x != nil {
+		if x, ok := x.Sink.(*CreateSinkRequest_Yds); ok {
+			return x.Yds
+		}
+	}
+	return nil
+}
+
+func (x *CreateSinkRequest) GetS3() *Sink_S3 {
+	if x != nil {
+		if x, ok := x.Sink.(*CreateSinkRequest_S3); ok {
+			return x.S3
+		}
+	}
+	return nil
 }
 
 type isCreateSinkRequest_Sink interface {
@@ -392,13 +392,6 @@ func (x *CreateSinkMetadata) GetSinkId() string {
 
 type UpdateSinkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// New logs destination
-	//
-	// Types that are valid to be assigned to Sink:
-	//
-	//	*UpdateSinkRequest_Yds
-	//	*UpdateSinkRequest_S3
-	Sink isUpdateSinkRequest_Sink `protobuf_oneof:"sink"`
 	// ID of the sink to update.
 	// To get a sink ID make a [SinkService.List] request.
 	SinkId string `protobuf:"bytes,1,opt,name=sink_id,json=sinkId,proto3" json:"sink_id,omitempty"`
@@ -413,8 +406,15 @@ type UpdateSinkRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// new service account to use for logs writing to the sink.
 	ServiceAccountId string `protobuf:"bytes,6,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// New logs destination
+	//
+	// Types that are valid to be assigned to Sink:
+	//
+	//	*UpdateSinkRequest_Yds
+	//	*UpdateSinkRequest_S3
+	Sink          isUpdateSinkRequest_Sink `protobuf_oneof:"sink"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateSinkRequest) Reset() {
@@ -445,31 +445,6 @@ func (x *UpdateSinkRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateSinkRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSinkRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_logging_v1_sink_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateSinkRequest) GetSink() isUpdateSinkRequest_Sink {
-	if x != nil {
-		return x.Sink
-	}
-	return nil
-}
-
-func (x *UpdateSinkRequest) GetYds() *Sink_Yds {
-	if x != nil {
-		if x, ok := x.Sink.(*UpdateSinkRequest_Yds); ok {
-			return x.Yds
-		}
-	}
-	return nil
-}
-
-func (x *UpdateSinkRequest) GetS3() *Sink_S3 {
-	if x != nil {
-		if x, ok := x.Sink.(*UpdateSinkRequest_S3); ok {
-			return x.S3
-		}
-	}
-	return nil
 }
 
 func (x *UpdateSinkRequest) GetSinkId() string {
@@ -512,6 +487,31 @@ func (x *UpdateSinkRequest) GetServiceAccountId() string {
 		return x.ServiceAccountId
 	}
 	return ""
+}
+
+func (x *UpdateSinkRequest) GetSink() isUpdateSinkRequest_Sink {
+	if x != nil {
+		return x.Sink
+	}
+	return nil
+}
+
+func (x *UpdateSinkRequest) GetYds() *Sink_Yds {
+	if x != nil {
+		if x, ok := x.Sink.(*UpdateSinkRequest_Yds); ok {
+			return x.Yds
+		}
+	}
+	return nil
+}
+
+func (x *UpdateSinkRequest) GetS3() *Sink_S3 {
+	if x != nil {
+		if x, ok := x.Sink.(*UpdateSinkRequest_S3); ok {
+			return x.S3
+		}
+	}
+	return nil
 }
 
 type isUpdateSinkRequest_Sink interface {
@@ -824,30 +824,30 @@ const file_yandex_cloud_logging_v1_sink_service_proto_rawDesc = "" +
 	"\x11ListSinksResponse\x123\n" +
 	"\x05sinks\x18\x01 \x03(\v2\x1d.yandex.cloud.logging.v1.SinkR\x05sinks\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x04\n" +
-	"\x11CreateSinkRequest\x125\n" +
-	"\x03yds\x18\x06 \x01(\v2!.yandex.cloud.logging.v1.Sink.YdsH\x00R\x03yds\x122\n" +
-	"\x02s3\x18\a \x01(\v2 .yandex.cloud.logging.v1.Sink.S3H\x00R\x02s3\x12)\n" +
+	"\x11CreateSinkRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\bfolderId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8b\x01\n" +
 	"\x06labels\x18\x04 \x03(\v26.yandex.cloud.logging.v1.CreateSinkRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x126\n" +
-	"\x12service_account_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=64R\x10serviceAccountId\x1a9\n" +
+	"\x12service_account_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=64R\x10serviceAccountId\x125\n" +
+	"\x03yds\x18\x06 \x01(\v2!.yandex.cloud.logging.v1.Sink.YdsH\x00R\x03yds\x122\n" +
+	"\x02s3\x18\a \x01(\v2 .yandex.cloud.logging.v1.Sink.S3H\x00R\x02s3\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\x04sink\x12\x04\xc0\xc11\x01\"-\n" +
 	"\x12CreateSinkMetadata\x12\x17\n" +
 	"\asink_id\x18\x01 \x01(\tR\x06sinkId\"\xd5\x04\n" +
-	"\x11UpdateSinkRequest\x125\n" +
-	"\x03yds\x18\a \x01(\v2!.yandex.cloud.logging.v1.Sink.YdsH\x00R\x03yds\x122\n" +
-	"\x02s3\x18\b \x01(\v2 .yandex.cloud.logging.v1.Sink.S3H\x00R\x02s3\x12%\n" +
+	"\x11UpdateSinkRequest\x12%\n" +
 	"\asink_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x06sinkId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x125\n" +
 	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8b\x01\n" +
 	"\x06labels\x18\x05 \x03(\v26.yandex.cloud.logging.v1.UpdateSinkRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x126\n" +
-	"\x12service_account_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=64R\x10serviceAccountId\x1a9\n" +
+	"\x12service_account_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=64R\x10serviceAccountId\x125\n" +
+	"\x03yds\x18\a \x01(\v2!.yandex.cloud.logging.v1.Sink.YdsH\x00R\x03yds\x122\n" +
+	"\x02s3\x18\b \x01(\v2 .yandex.cloud.logging.v1.Sink.S3H\x00R\x02s3\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
@@ -927,13 +927,13 @@ var file_yandex_cloud_logging_v1_sink_service_proto_goTypes = []any{
 }
 var file_yandex_cloud_logging_v1_sink_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.logging.v1.ListSinksResponse.sinks:type_name -> yandex.cloud.logging.v1.Sink
-	14, // 1: yandex.cloud.logging.v1.CreateSinkRequest.yds:type_name -> yandex.cloud.logging.v1.Sink.Yds
-	15, // 2: yandex.cloud.logging.v1.CreateSinkRequest.s3:type_name -> yandex.cloud.logging.v1.Sink.S3
-	11, // 3: yandex.cloud.logging.v1.CreateSinkRequest.labels:type_name -> yandex.cloud.logging.v1.CreateSinkRequest.LabelsEntry
-	14, // 4: yandex.cloud.logging.v1.UpdateSinkRequest.yds:type_name -> yandex.cloud.logging.v1.Sink.Yds
-	15, // 5: yandex.cloud.logging.v1.UpdateSinkRequest.s3:type_name -> yandex.cloud.logging.v1.Sink.S3
-	16, // 6: yandex.cloud.logging.v1.UpdateSinkRequest.update_mask:type_name -> google.protobuf.FieldMask
-	12, // 7: yandex.cloud.logging.v1.UpdateSinkRequest.labels:type_name -> yandex.cloud.logging.v1.UpdateSinkRequest.LabelsEntry
+	11, // 1: yandex.cloud.logging.v1.CreateSinkRequest.labels:type_name -> yandex.cloud.logging.v1.CreateSinkRequest.LabelsEntry
+	14, // 2: yandex.cloud.logging.v1.CreateSinkRequest.yds:type_name -> yandex.cloud.logging.v1.Sink.Yds
+	15, // 3: yandex.cloud.logging.v1.CreateSinkRequest.s3:type_name -> yandex.cloud.logging.v1.Sink.S3
+	16, // 4: yandex.cloud.logging.v1.UpdateSinkRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 5: yandex.cloud.logging.v1.UpdateSinkRequest.labels:type_name -> yandex.cloud.logging.v1.UpdateSinkRequest.LabelsEntry
+	14, // 6: yandex.cloud.logging.v1.UpdateSinkRequest.yds:type_name -> yandex.cloud.logging.v1.Sink.Yds
+	15, // 7: yandex.cloud.logging.v1.UpdateSinkRequest.s3:type_name -> yandex.cloud.logging.v1.Sink.S3
 	17, // 8: yandex.cloud.logging.v1.ListSinkOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 9: yandex.cloud.logging.v1.SinkService.Get:input_type -> yandex.cloud.logging.v1.GetSinkRequest
 	1,  // 10: yandex.cloud.logging.v1.SinkService.List:input_type -> yandex.cloud.logging.v1.ListSinksRequest

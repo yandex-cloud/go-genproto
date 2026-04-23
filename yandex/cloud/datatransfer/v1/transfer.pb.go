@@ -1489,9 +1489,11 @@ type ToStringTransformer struct {
 	// List of included and excluded tables
 	Tables *TablesFilter `protobuf:"bytes,1,opt,name=tables,proto3" json:"tables,omitempty"`
 	// List of included and excluded columns
-	Columns       *ColumnsFilter `protobuf:"bytes,2,opt,name=columns,proto3" json:"columns,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Columns *ColumnsFilter `protobuf:"bytes,2,opt,name=columns,proto3" json:"columns,omitempty"`
+	// When true, time values keep their original timezone, otherwise time values converts (normalizes) to UTC.
+	SkipUtcConversion bool `protobuf:"varint,3,opt,name=skip_utc_conversion,json=skipUtcConversion,proto3" json:"skip_utc_conversion,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ToStringTransformer) Reset() {
@@ -1536,6 +1538,13 @@ func (x *ToStringTransformer) GetColumns() *ColumnsFilter {
 		return x.Columns
 	}
 	return nil
+}
+
+func (x *ToStringTransformer) GetSkipUtcConversion() bool {
+	if x != nil {
+		return x.SkipUtcConversion
+	}
+	return false
 }
 
 type SharderTransformerTypeRandom struct {
@@ -2253,10 +2262,11 @@ const file_yandex_cloud_datatransfer_v1_transfer_proto_rawDesc = "" +
 	"\rrename_tables\x18\x01 \x03(\v2).yandex.cloud.datatransfer.v1.RenameTableR\frenameTables\"v\n" +
 	"\x1cReplacePrimaryKeyTransformer\x12B\n" +
 	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12\x12\n" +
-	"\x04keys\x18\x02 \x03(\tR\x04keys\"\xa0\x01\n" +
+	"\x04keys\x18\x02 \x03(\tR\x04keys\"\xd0\x01\n" +
 	"\x13ToStringTransformer\x12B\n" +
 	"\x06tables\x18\x01 \x01(\v2*.yandex.cloud.datatransfer.v1.TablesFilterR\x06tables\x12E\n" +
-	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\"\x1e\n" +
+	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterR\acolumns\x12.\n" +
+	"\x13skip_utc_conversion\x18\x03 \x01(\bR\x11skipUtcConversion\"\x1e\n" +
 	"\x1cSharderTransformerTypeRandom\"\xb4\x02\n" +
 	"\x12SharderTransformer\x12G\n" +
 	"\acolumns\x18\x02 \x01(\v2+.yandex.cloud.datatransfer.v1.ColumnsFilterH\x00R\acolumns\x12T\n" +

@@ -363,9 +363,9 @@ const file_yandex_cloud_billing_v1_sku_proto_rawDesc = "" +
 	"\x0ePricingVersion\x12?\n" +
 	"\x04type\x18\x01 \x01(\x0e2+.yandex.cloud.billing.v1.PricingVersionTypeR\x04type\x12A\n" +
 	"\x0eeffective_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\reffectiveTime\x12[\n" +
-	"\x13pricing_expressions\x18\x03 \x03(\v2*.yandex.cloud.billing.v1.PricingExpressionR\x12pricingExpressions\"H\n" +
+	"\x13pricing_expressions\x18\x03 \x03(\v2*.yandex.cloud.billing.v1.PricingExpressionR\x12pricingExpressions\"N\n" +
 	"\x11PricingExpression\x123\n" +
-	"\x05rates\x18\x02 \x03(\v2\x1d.yandex.cloud.billing.v1.RateR\x05rates\"w\n" +
+	"\x05rates\x18\x02 \x03(\v2\x1d.yandex.cloud.billing.v1.RateR\x05ratesJ\x04\b\x01\x10\x02\"w\n" +
 	"\x04Rate\x124\n" +
 	"\x16start_pricing_quantity\x18\x01 \x01(\tR\x14startPricingQuantity\x12\x1d\n" +
 	"\n" +

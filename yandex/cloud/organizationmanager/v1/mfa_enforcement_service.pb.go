@@ -188,7 +188,7 @@ type CreateMfaEnforcementRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// organization id of the MFA enforcement
 	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// acr id for the MFA enforcement. one of 'any-mfa' or 'phr',
+	// acr id for the MFA enforcement. one of 'any-mfa', 'any-except-sms' or 'phr',
 	// specification https://yandex.cloud/en/docs/organization/concepts/mfa?utm_referrer=https%3A%2F%2Fa.yandex-team.ru%2F#mfa-factors
 	AcrId string `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
 	// the period during which the entered MFA factor will be considered valid and the
@@ -352,7 +352,7 @@ type UpdateMfaEnforcementRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// id of the MFA enforcement
 	MfaEnforcementId string `protobuf:"bytes,1,opt,name=mfa_enforcement_id,json=mfaEnforcementId,proto3" json:"mfa_enforcement_id,omitempty"`
-	// acr id for the MFA enforcement. one of 'any-mfa' or 'phr',
+	// acr id for the MFA enforcement. one of 'any-mfa', 'any-except-sms' or 'phr',
 	// specification https://yandex.cloud/en/docs/organization/concepts/mfa?utm_referrer=https%3A%2F%2Fa.yandex-team.ru%2F#mfa-factors
 	AcrId string `protobuf:"bytes,2,opt,name=acr_id,json=acrId,proto3" json:"acr_id,omitempty"`
 	// the period during which the entered MFA factor will be considered valid and the

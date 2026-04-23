@@ -201,11 +201,6 @@ func (x *ListBudgetsResponse) GetNextPageToken() string {
 
 type CreateBudgetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the billing account to list budgets corresponding to.
-	// To get the billing account ID, use [yandex.cloud.billing.v1.BillingAccountService.List] request.
-	BillingAccountId string `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
-	// Name of the budget.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Specification of the budget.
 	//
 	// Types that are valid to be assigned to BudgetSpec:
@@ -213,7 +208,12 @@ type CreateBudgetRequest struct {
 	//	*CreateBudgetRequest_CostBudgetSpec
 	//	*CreateBudgetRequest_ExpenseBudgetSpec
 	//	*CreateBudgetRequest_BalanceBudgetSpec
-	BudgetSpec    isCreateBudgetRequest_BudgetSpec `protobuf_oneof:"budget_spec"`
+	BudgetSpec isCreateBudgetRequest_BudgetSpec `protobuf_oneof:"budget_spec"`
+	// ID of the billing account to list budgets corresponding to.
+	// To get the billing account ID, use [yandex.cloud.billing.v1.BillingAccountService.List] request.
+	BillingAccountId string `protobuf:"bytes,1,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	// Name of the budget.
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,20 +248,6 @@ func (*CreateBudgetRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_billing_v1_budget_service_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateBudgetRequest) GetBillingAccountId() string {
-	if x != nil {
-		return x.BillingAccountId
-	}
-	return ""
-}
-
-func (x *CreateBudgetRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
 func (x *CreateBudgetRequest) GetBudgetSpec() isCreateBudgetRequest_BudgetSpec {
 	if x != nil {
 		return x.BudgetSpec
@@ -294,6 +280,20 @@ func (x *CreateBudgetRequest) GetBalanceBudgetSpec() *BalanceBudgetSpec {
 		}
 	}
 	return nil
+}
+
+func (x *CreateBudgetRequest) GetBillingAccountId() string {
+	if x != nil {
+		return x.BillingAccountId
+	}
+	return ""
+}
+
+func (x *CreateBudgetRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
 }
 
 type isCreateBudgetRequest_BudgetSpec interface {
@@ -370,7 +370,7 @@ var File_yandex_cloud_billing_v1_budget_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_billing_v1_budget_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/billing/v1/budget_service.proto\x12\x17yandex.cloud.billing.v1\x1a\x1cgoogle/api/annotations.proto\x1a$yandex/cloud/billing/v1/budget.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"0\n" +
+	",yandex/cloud/billing/v1/budget_service.proto\x12\x17yandex.cloud.billing.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/billing/v1/budget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"0\n" +
 	"\x10GetBudgetRequest\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\"\xa3\x01\n" +
 	"\x12ListBudgetsRequest\x12:\n" +
@@ -382,12 +382,12 @@ const file_yandex_cloud_billing_v1_budget_service_proto_rawDesc = "" +
 	"\x13ListBudgetsResponse\x129\n" +
 	"\abudgets\x18\x01 \x03(\v2\x1f.yandex.cloud.billing.v1.BudgetR\abudgets\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x91\x03\n" +
-	"\x13CreateBudgetRequest\x12:\n" +
-	"\x12billing_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x12\x18\n" +
-	"\x04name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12S\n" +
+	"\x13CreateBudgetRequest\x12S\n" +
 	"\x10cost_budget_spec\x18\x03 \x01(\v2'.yandex.cloud.billing.v1.CostBudgetSpecH\x00R\x0ecostBudgetSpec\x12\\\n" +
 	"\x13expense_budget_spec\x18\x04 \x01(\v2*.yandex.cloud.billing.v1.ExpenseBudgetSpecH\x00R\x11expenseBudgetSpec\x12\\\n" +
-	"\x13balance_budget_spec\x18\x05 \x01(\v2*.yandex.cloud.billing.v1.BalanceBudgetSpecH\x00R\x11balanceBudgetSpecB\x13\n" +
+	"\x13balance_budget_spec\x18\x05 \x01(\v2*.yandex.cloud.billing.v1.BalanceBudgetSpecH\x00R\x11balanceBudgetSpec\x12:\n" +
+	"\x12billing_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x12\x18\n" +
+	"\x04name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04nameB\x13\n" +
 	"\vbudget_spec\x12\x04\xc0\xc11\x01\"3\n" +
 	"\x14CreateBudgetMetadata\x12\x1b\n" +
 	"\tbudget_id\x18\x01 \x01(\tR\bbudgetId2\xa2\x03\n" +

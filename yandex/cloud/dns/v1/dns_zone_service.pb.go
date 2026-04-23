@@ -1444,9 +1444,9 @@ const file_yandex_cloud_dns_v1_dns_zone_service_proto_rawDesc = "" +
 	"$UpdateDnsZonePrivateNetworksMetadata\x12\x1e\n" +
 	"\vdns_zone_id\x18\x01 \x01(\tR\tdnsZoneId\"9\n" +
 	"\x11GetDnsZoneRequest\x12$\n" +
-	"\vdns_zone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tdnsZoneId\"\xb0\x01\n" +
-	"\x13ListDnsZonesRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12'\n" +
+	"\vdns_zone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tdnsZoneId\"\xb8\x01\n" +
+	"\x13ListDnsZonesRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
 	"\n" +

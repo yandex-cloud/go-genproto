@@ -518,19 +518,19 @@ const file_yandex_cloud_logging_v1_log_entry_proto_rawDesc = "" +
 	"\x05level\x18\x06 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12\x18\n" +
 	"\amessage\x18\a \x01(\tR\amessage\x12:\n" +
 	"\fjson_payload\x18\b \x01(\v2\x17.google.protobuf.StructR\vjsonPayload\x12)\n" +
-	"\vstream_name\x18\t \x01(\tB\b\x8a\xc81\x04<=63R\n" +
-	"streamName\"\xae\x02\n" +
+	"\vstream_name\x18\t \x01(\tB\b\x8a\xc81\x04<=71R\n" +
+	"streamName\"\xb0\x02\n" +
 	"\x10IncomingLogEntry\x12>\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\ttimestamp\x12=\n" +
-	"\x05level\x18\x02 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12&\n" +
-	"\amessage\x18\x03 \x01(\tB\f\xba\xc81\b<=819200R\amessage\x12H\n" +
-	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\f\xba\xc81\b<=819200R\vjsonPayload\x12)\n" +
-	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=63R\n" +
-	"streamName\"\xd1\x01\n" +
+	"\x05level\x18\x02 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12'\n" +
+	"\amessage\x18\x03 \x01(\tB\r\xba\xc81\t<=1048576R\amessage\x12I\n" +
+	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\r\xba\xc81\t<=1048576R\vjsonPayload\x12)\n" +
+	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=71R\n" +
+	"streamName\"\xd3\x01\n" +
 	"\x10LogEntryDefaults\x12=\n" +
-	"\x05level\x18\x02 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12G\n" +
-	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\v\xba\xc81\a<=65536R\vjsonPayload\x12)\n" +
-	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=63R\n" +
+	"\x05level\x18\x02 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\x05level\x12I\n" +
+	"\fjson_payload\x18\x04 \x01(\v2\x17.google.protobuf.StructB\r\xba\xc81\t<=1048576R\vjsonPayload\x12)\n" +
+	"\vstream_name\x18\x05 \x01(\tB\b\x8a\xc81\x04<=71R\n" +
 	"streamNameJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x04\"\xb7\x01\n" +
 	"\vDestination\x12O\n" +
 	"\flog_group_id\x18\x01 \x01(\tB+\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?\x8a\xc81\x04<=63H\x00R\n" +

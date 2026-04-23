@@ -1326,7 +1326,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\"\xa8\x02\n" +
 	"\x13AccessPolicyBinding\x12G\n" +
-	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16accessPolicyTemplateId\x12\x88\x01\n" +
+	"\x19access_policy_template_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x16accessPolicyTemplateId\x12\x88\x01\n" +
 	"\n" +
 	"parameters\x18\x02 \x03(\v28.yandex.cloud.access.AccessPolicyBinding.ParametersEntryB.\x82\xc81\x04<=64\x8a\xc81\x06<=1024\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\n" +
 	"parameters\x1a=\n" +

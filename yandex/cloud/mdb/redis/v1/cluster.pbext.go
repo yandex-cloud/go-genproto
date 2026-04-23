@@ -291,10 +291,22 @@ func (m *ValkeySearch) SetWriterThreads(v *wrapperspb.Int64Value) {
 	m.WriterThreads = v
 }
 
+func (m *ValkeySearch) SetVersion(v string) {
+	m.Version = v
+}
+
 func (m *ValkeyJson) SetEnabled(v bool) {
 	m.Enabled = v
 }
 
+func (m *ValkeyJson) SetVersion(v string) {
+	m.Version = v
+}
+
 func (m *ValkeyBloom) SetEnabled(v bool) {
 	m.Enabled = v
+}
+
+func (m *ValkeyBloom) SetVersion(v string) {
+	m.Version = v
 }

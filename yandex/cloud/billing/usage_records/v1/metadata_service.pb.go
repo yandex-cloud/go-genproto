@@ -152,36 +152,29 @@ type GetUsageResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of available clouds for the current user/context (billing_account_id with sub-accounts)
 	// Contains cloud entities that the user has access to within the specified date range.
-	//
 	// Note: Empty cloud_id values are considered as "consumption outside the cloud"
 	// and represented with an empty string id and name "Usage is out of scope of the Cloud"
-	// The list is sorted by cloud name in ascending order.
 	Clouds []*Cloud `protobuf:"bytes,1,rep,name=clouds,proto3" json:"clouds,omitempty"`
 	// List of available label keys for the current user/context (billing_account_id with sub-accounts)
 	// Contains all label keys that exist in usage records
 	// within the specified date range.
 	// These keys can be used for filtering and grouping in reports or
 	// passed to the GetLabel method to retrieve possible values.
-	// The list is sorted in ascending order.
 	LabelKeys []string `protobuf:"bytes,2,rep,name=label_keys,json=labelKeys,proto3" json:"label_keys,omitempty"`
 	// List of available services for the current user/context (billing_account_id with sub-accounts)
 	// Contains service entities with their IDs, names and descriptions that
 	// have usage records within the specified billing account and date range.
 	// Services represent the top-level grouping of cloud offerings.
-	// The list is sorted by service name in ascending order.
 	Services []*Service `protobuf:"bytes,3,rep,name=services,proto3" json:"services,omitempty"`
 	// List of available SKUs for the current user/context (billing_account_id with sub-accounts)
 	// Contains SKU entities with their IDs, names, translations and pricing units
 	// that have usage records within the specified billing account and date range.
 	// SKUs represent specific service offerings
-	// The list is sorted by SKU name in ascending order.
 	Skus []*SKU `protobuf:"bytes,4,rep,name=skus,proto3" json:"skus,omitempty"`
 	// List of available BillingAccounts for the current user/context (billing_account_id with sub-accounts)
 	// Contains billing account entities that the user has access to and
 	// that have usage records within the specified date range.
 	// Includes both the main account and any sub-accounts.
-	// Sub-accounts are sorted by name in ascending order.
-	// The master account is placed last in the list
 	BillingAccounts []*BillingAccount `protobuf:"bytes,5,rep,name=billing_accounts,json=billingAccounts,proto3" json:"billing_accounts,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -342,7 +335,6 @@ type GetServiceInstanceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of available service instances for the current user/context (billing_account_id with sub-accounts)
 	// Contains service instance entities that the user has access to within the specified date range.
-	// The list is sorted by service instance name in ascending order.
 	ServiceInstances []*ServiceInstance `protobuf:"bytes,1,rep,name=service_instances,json=serviceInstances,proto3" json:"service_instances,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -406,12 +398,14 @@ type GetLabelRequest struct {
 	// Additional filter that works alongside the billing_account_id and date range.
 	// When specified, includes labels where cloud_id matches any of the provided values.
 	// Acts as an OR condition (cloud_id IN cloud_ids).
+	// If specified, will be used for addditional authorization check to provided clouds.
 	// If empty, this filter is not applied.
 	CloudIds []string `protobuf:"bytes,9,rep,name=cloud_ids,json=cloudIds,proto3" json:"cloud_ids,omitempty"`
 	// Optional. Folder IDs filter.
 	// Additional filter that works alongside the billing_account_id and date range.
 	// When specified, includes labels where folder_id matches any of the provided values.
 	// Acts as an OR condition (folder_id IN folder_ids).
+	// If specified, will be used for addditional authorization check to provided folders.
 	// If empty, this filter is not applied.
 	FolderIds []string `protobuf:"bytes,10,rep,name=folder_ids,json=folderIds,proto3" json:"folder_ids,omitempty"`
 	// Label key to filter values for. If specified, response will contain values
@@ -557,7 +551,6 @@ type GetLabelResponse struct {
 	// Use this token in a subsequent request's page_token field to retrieve
 	// the next page of results.
 	// The token encodes the pagination state.
-	//
 	// It should be passed verbatim in subsequent requests.
 	NextPageToken string `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -747,8 +740,6 @@ type GetCloudResponse struct {
 	// List of clouds matching the request criteria
 	// Contains CloudInfo objects for each cloud that matches the specified
 	// filtering criteria
-	// The list is sorted by cloud name in ascending order.
-	//
 	// Note: only clouds with at least one folder are included in the response.
 	Items []*GetCloudResponse_CloudInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Token for getting the next page of results.
@@ -756,7 +747,6 @@ type GetCloudResponse struct {
 	// Use this token in a subsequent request's page_token field to retrieve
 	// the next page of results.
 	// The token encodes the pagination state.
-	//
 	// It should be passed verbatim in subsequent requests.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -943,8 +933,6 @@ type GetResourcesResponse struct {
 	// List of service instances matching the request criteria
 	// Contains ServiceInstanceInfo objects for each service instance that matches the specified
 	// filtering criteria
-	// The list is sorted by service instance name in ascending order.
-	//
 	// Note: only service instances with at least one resource are included in the response.
 	Items []*GetResourcesResponse_ServiceInstanceInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Token for getting the next page of results.
@@ -952,7 +940,6 @@ type GetResourcesResponse struct {
 	// Use this token in a subsequent request's page_token field to retrieve
 	// the next page of results.
 	// The token encodes the pagination state.
-	//
 	// It should be passed verbatim in subsequent requests.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1011,8 +998,7 @@ type GetCloudResponse_CloudInfo struct {
 	// List of folders belonging to this cloud
 	// Contains folder entities that belong to this cloud
 	// and match any folder ID filtering criteria from the request.
-	// The list is sorted by folder name in ascending order.
-	//
+	// The list is sorted by folder ID in ascending order.
 	// Only folders that had usage during the specified date range are included.
 	Folders       []*Folder `protobuf:"bytes,2,rep,name=folders,proto3" json:"folders,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1072,7 +1058,6 @@ type GetResourcesResponse_ServiceInstanceInfo struct {
 	// Contains resource entities that belong to this service instance
 	// and match any resource ID filtering criteria from the request.
 	// The list is sorted by resource ID in ascending order.
-	//
 	// Only resources that had usage during the specified date range are included.
 	Resources     []*Resource `protobuf:"bytes,2,rep,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1173,7 +1158,7 @@ const file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc 
 	"\x10GetLabelResponse\x12!\n" +
 	"\flabel_values\x18\x01 \x03(\tR\vlabelValues\x12,\n" +
 	"\x12label_value_filter\x18\x02 \x03(\tR\x10labelValueFilter\x12&\n" +
-	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\xc7\x02\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\xbb\x02\n" +
 	"\x0fGetCloudRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
@@ -1184,8 +1169,7 @@ const file_yandex_cloud_billing_usage_records_v1_metadata_service_proto_rawDesc 
 	"folder_ids\x18\x05 \x03(\tR\tfolderIds\x12\x1b\n" +
 	"\tpage_size\x18\x06 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tR\tpageTokenJ\x04\b\b\x10\tJ\x04\b\t\x10\n" +
-	"\"\xae\x02\n" +
+	"page_token\x18\a \x01(\tR\tpageToken\"\xae\x02\n" +
 	"\x10GetCloudResponse\x12W\n" +
 	"\x05items\x18\x01 \x03(\v2A.yandex.cloud.billing.usage_records.v1.GetCloudResponse.CloudInfoR\x05items\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\x98\x01\n" +

@@ -24,7 +24,6 @@ const (
 )
 
 // Request for retrieving usage report data.
-//
 // This message defines the parameters for requesting usage reports across
 // all ConsumptionCoreService methods. It supports filtering by various
 // entity types and specifying the time range and aggregation period.
@@ -73,15 +72,12 @@ type UsageReportRequest struct {
 	// Optional. Filter by labels: key is label key (e.g., "env", "team", "region"),
 	// value is list of label values to match (e.g., ["prod", "stage"] for key "env").
 	// This allows filtering resources based on their attached labels.
-	//
 	// Example: To filter resources that have either (env=prod OR env=test) AND (team=finance),
 	// use the following filter:
-	//
-	//	{
-	//	  "env": { "values": ["prod", "test"] },
-	//	  "team": { "values": ["finance"] }
-	//	}
-	//
+	// {
+	// "env": { "values": ["prod", "test"] },
+	// "team": { "values": ["finance"] }
+	// }
 	// Note: The filter logic is (value1 OR value2 OR ...) for each key,
 	// and (key1 AND key2 AND ...) between different keys.
 	Labels map[string]*LabelList `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -92,16 +88,14 @@ type UsageReportRequest struct {
 	// Example with labels_or_filter_logic = false (AND logic):
 	// labels = {"env": ["prod"], "team": ["finance"]}
 	// Returns resources that have BOTH env=prod AND team=finance
-	//
 	// Example with labels_or_filter_logic = true (OR logic):
 	// labels = {"env": ["prod"], "team": ["finance"]}
 	// Returns resources that have EITHER env=prod OR team=finance (or both)
-	//
 	// Note: Within each label key, multiple values are always combined with OR
 	// logic. For example: {"env": ["prod", "test"]} always means env=prod OR
 	// env=test
 	LabelsOrFilterLogic bool `protobuf:"varint,12,opt,name=labels_or_filter_logic,json=labelsOrFilterLogic,proto3" json:"labels_or_filter_logic,omitempty"`
-	// Optional for all requests except GetResourceUsageReport. List of resource IDs to filter the data.
+	// Optional. List of resource IDs to filter the data.
 	// If specified, only usage data from these specific resources (e.g., individual VMs, disks) will be included.
 	// If omitted, data from all resources used by the billing account will be included.
 	// Filter is applied with OR logic (results include data matching any of the specified resource IDs).
@@ -113,7 +107,6 @@ type UsageReportRequest struct {
 	// - MONTH: Group metrics by month, providing monthly breakdowns
 	// - QUARTER: Group metrics by quarter, providing quarterly breakdowns
 	// - YEAR: Group metrics by year, providing yearly breakdowns
-	//
 	// This setting affects the time series data returned in the periodic field of each entity.
 	// If omitted, the service will typically use DAY as the default granularity.
 	AggregationPeriod TimeGrouping `protobuf:"varint,10,opt,name=aggregation_period,json=aggregationPeriod,proto3,enum=yandex.cloud.billing.usage_records.v1.TimeGrouping" json:"aggregation_period,omitempty"`
@@ -241,7 +234,6 @@ func (x *UsageReportRequest) GetServiceInstanceIds() []string {
 }
 
 // Response for usage report requests by billing account.
-//
 // Contains aggregated usage, cost, and credit information for a billing account,
 // with both summary totals and detailed breakdowns by billing account entity.
 // The response includes:
@@ -341,7 +333,6 @@ func (x *BillingAccountUsageReportResponse) GetEntitiesData() []*BillingAccountU
 }
 
 // Response for usage report requests by cloud.
-//
 // Contains aggregated usage, cost, and credit information organized by cloud entities,
 // with both summary totals and detailed breakdowns for each cloud.
 // The response includes:
@@ -441,7 +432,6 @@ func (x *CloudUsageReportResponse) GetEntitiesData() []*CloudUsageReportEntityDa
 }
 
 // Response for usage report requests by folder.
-//
 // Contains aggregated usage, cost, and credit information organized by folder entities,
 // with both summary totals and detailed breakdowns for each folder.
 // The response includes:
@@ -541,7 +531,6 @@ func (x *FolderUsageReportResponse) GetEntitiesData() []*FolderUsageReportEntity
 }
 
 // Response for usage report requests by service.
-//
 // Contains aggregated usage, cost, and credit information organized by service entities,
 // with both summary totals and detailed breakdowns for each service. Services represent
 // broad product categories (like Compute, Storage, AI) that can contain multiple SKUs.
@@ -642,7 +631,6 @@ func (x *ServiceUsageReportResponse) GetEntitiesData() []*ServiceUsageReportEnti
 }
 
 // Response for usage report requests by SKU.
-//
 // Contains aggregated usage, cost, and credit information organized by SKU (Stock Keeping Unit) entities,
 // with both summary totals and detailed breakdowns for each SKU. SKUs are specific billable offerings
 // (like particular VM types or disk types) that belong to a parent service.
@@ -743,12 +731,11 @@ func (x *SKUUsageReportResponse) GetEntitiesData() []*SKUUsageReportEntityData {
 }
 
 // Response for usage report requests by resource.
-//
 // Contains aggregated usage, cost, and credit information organized by resource entities,
 // with both summary totals and detailed breakdowns for each individual resource.
 // The response includes:
 // 1. Overall totals for the entire period (cost, credits, expense)
-// 2. Entity-level totals for each unique resource-id and service instance type combination
+// 2. Entity-level totals for each resource
 // 3. Time series breakdown for each resource according to the requested aggregation period
 type ResourceUsageReportResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -843,7 +830,6 @@ func (x *ResourceUsageReportResponse) GetEntitiesData() []*ResourceUsageReportEn
 }
 
 // Response for usage report requests by label-based grouping.
-//
 // Contains aggregated usage, cost, and credit information organized by label key-value pairs
 // (e.g., "env:prod", "team:finance"), with both summary totals and detailed breakdowns for each label group.
 // This allows analyzing costs across custom business dimensions defined by user-attached labels.
@@ -944,7 +930,6 @@ func (x *LabelKeyUsageReportResponse) GetEntitiesData() []*LabelUsageReportEntit
 }
 
 // Response for usage report requests by service instance.
-//
 // Contains aggregated usage, cost, and credit information organized by service instance entities,
 // with both summary totals and detailed breakdowns for each service instance. Service instances
 // represent individual billable entities such as cloud instances, DataLens instances, Tracker
@@ -1049,7 +1034,7 @@ var File_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto pr
 
 const file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_rawDesc = "" +
 	"\n" +
-	"Dyandex/cloud/billing/usage_records/v1/consumption_core_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a8yandex/cloud/billing/usage_records/v1/common_types.proto\x1a2yandex/cloud/billing/usage_records/v1/credit.proto\x1a<yandex/cloud/billing/usage_records/v1/consumption_core.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x05\n" +
+	"Dyandex/cloud/billing/usage_records/v1/consumption_core_service.proto\x12%yandex.cloud.billing.usage_records.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a9yandex/cloud/billing/usage_records/v1/billing_types.proto\x1a8yandex/cloud/billing/usage_records/v1/common_types.proto\x1a<yandex/cloud/billing/usage_records/v1/consumption_core.proto\x1a2yandex/cloud/billing/usage_records/v1/credit.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x05\n" +
 	"\x12UsageReportRequest\x122\n" +
 	"\x12billing_account_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10billingAccountId\x12?\n" +
 	"\n" +
@@ -1244,8 +1229,8 @@ func file_yandex_cloud_billing_usage_records_v1_consumption_core_service_proto_i
 	}
 	file_yandex_cloud_billing_usage_records_v1_billing_types_proto_init()
 	file_yandex_cloud_billing_usage_records_v1_common_types_proto_init()
-	file_yandex_cloud_billing_usage_records_v1_credit_proto_init()
 	file_yandex_cloud_billing_usage_records_v1_consumption_core_proto_init()
+	file_yandex_cloud_billing_usage_records_v1_credit_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

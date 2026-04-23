@@ -350,7 +350,7 @@ const file_yandex_cloud_logging_v1_log_reading_service_proto_rawDesc = "" +
 	"\x06filter\x18\a \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x124\n" +
 	"\fstream_names\x18\n" +
-	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<=63R\vstreamNames\x12'\n" +
+	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<=71R\vstreamNames\x12'\n" +
 	"\tpage_size\x18\b \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12:\n" +
 	"\x11max_response_size\x18\t \x01(\x03B\x0e\xfa\xc71\n" +

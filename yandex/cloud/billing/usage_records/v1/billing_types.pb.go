@@ -131,7 +131,7 @@ type ServiceInstance struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Type of the service instance: tracker, datalens, cloud, etc.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Human-readable display name of the service instance.
+	// Human-readable display name of the serice instance.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional billing account identifier associated with this service instance
 	// for requested consumption period.

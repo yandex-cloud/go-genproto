@@ -9,7 +9,6 @@ package cic
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
-	common "github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1/common"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -214,238 +213,6 @@ func (x *ListTrunkConnectionsResponse) GetNextPageToken() string {
 	return ""
 }
 
-type CreateTrunkConnectionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the trunkConnection.
-	// The name must be unique within the folder.
-	// Value must match the regular expression “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Optional description of the trunkConnection. 0-256 characters long.
-	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the folder that the trunkConnection belongs to.
-	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the region that the trunkConnection belongs to.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// Special trunkConnection config
-	//
-	// Types that are valid to be assigned to Joint:
-	//
-	//	*CreateTrunkConnectionRequest_SinglePortDirectJoint_
-	//	*CreateTrunkConnectionRequest_LagDirectJoint_
-	//	*CreateTrunkConnectionRequest_PartnerJointInfo
-	Joint isCreateTrunkConnectionRequest_Joint `protobuf_oneof:"joint"`
-	// ID of pointOfPresence that the trunkConnection is deployed on.
-	PointOfPresenceId *wrapperspb.StringValue `protobuf:"bytes,13,opt,name=point_of_presence_id,json=pointOfPresenceId,proto3" json:"point_of_presence_id,omitempty"`
-	// Capacity of the trunkConnection
-	Capacity TrunkConnection_Capacity `protobuf:"varint,17,opt,name=capacity,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Capacity" json:"capacity,omitempty"`
-	// Resource labels, `key:value` pairs.
-	// No more than 64 per resource.
-	// The maximum string length in characters for each value is 63.
-	// Each value must match the regular expression `[-_0-9a-z]*`.
-	// The string length in characters for each key must be 1-63.
-	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
-	Labels map[string]string `protobuf:"bytes,18,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deletion protection flag.
-	// Optional.
-	// If set prohibits deletion of the trunkConnection.
-	DeletionProtection bool `protobuf:"varint,20,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *CreateTrunkConnectionRequest) Reset() {
-	*x = CreateTrunkConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTrunkConnectionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTrunkConnectionRequest) ProtoMessage() {}
-
-func (x *CreateTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTrunkConnectionRequest.ProtoReflect.Descriptor instead.
-func (*CreateTrunkConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *CreateTrunkConnectionRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CreateTrunkConnectionRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *CreateTrunkConnectionRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-func (x *CreateTrunkConnectionRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-func (x *CreateTrunkConnectionRequest) GetJoint() isCreateTrunkConnectionRequest_Joint {
-	if x != nil {
-		return x.Joint
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetSinglePortDirectJoint() *CreateTrunkConnectionRequest_SinglePortDirectJoint {
-	if x != nil {
-		if x, ok := x.Joint.(*CreateTrunkConnectionRequest_SinglePortDirectJoint_); ok {
-			return x.SinglePortDirectJoint
-		}
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetLagDirectJoint() *CreateTrunkConnectionRequest_LagDirectJoint {
-	if x != nil {
-		if x, ok := x.Joint.(*CreateTrunkConnectionRequest_LagDirectJoint_); ok {
-			return x.LagDirectJoint
-		}
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetPartnerJointInfo() *CreateTrunkConnectionRequest_PartnerJoint {
-	if x != nil {
-		if x, ok := x.Joint.(*CreateTrunkConnectionRequest_PartnerJointInfo); ok {
-			return x.PartnerJointInfo
-		}
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetPointOfPresenceId() *wrapperspb.StringValue {
-	if x != nil {
-		return x.PointOfPresenceId
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetCapacity() TrunkConnection_Capacity {
-	if x != nil {
-		return x.Capacity
-	}
-	return TrunkConnection_CAPACITY_UNSPECIFIED
-}
-
-func (x *CreateTrunkConnectionRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *CreateTrunkConnectionRequest) GetDeletionProtection() bool {
-	if x != nil {
-		return x.DeletionProtection
-	}
-	return false
-}
-
-type isCreateTrunkConnectionRequest_Joint interface {
-	isCreateTrunkConnectionRequest_Joint()
-}
-
-type CreateTrunkConnectionRequest_SinglePortDirectJoint_ struct {
-	// Single port trunkConnection config
-	SinglePortDirectJoint *CreateTrunkConnectionRequest_SinglePortDirectJoint `protobuf:"bytes,10,opt,name=single_port_direct_joint,json=singlePortDirectJoint,proto3,oneof"`
-}
-
-type CreateTrunkConnectionRequest_LagDirectJoint_ struct {
-	// LAG trunkConnection config
-	LagDirectJoint *CreateTrunkConnectionRequest_LagDirectJoint `protobuf:"bytes,11,opt,name=lag_direct_joint,json=lagDirectJoint,proto3,oneof"`
-}
-
-type CreateTrunkConnectionRequest_PartnerJointInfo struct {
-	// PartnerJoint trunkConnection config
-	PartnerJointInfo *CreateTrunkConnectionRequest_PartnerJoint `protobuf:"bytes,12,opt,name=partner_joint_info,json=partnerJointInfo,proto3,oneof"`
-}
-
-func (*CreateTrunkConnectionRequest_SinglePortDirectJoint_) isCreateTrunkConnectionRequest_Joint() {}
-
-func (*CreateTrunkConnectionRequest_LagDirectJoint_) isCreateTrunkConnectionRequest_Joint() {}
-
-func (*CreateTrunkConnectionRequest_PartnerJointInfo) isCreateTrunkConnectionRequest_Joint() {}
-
-type CreateTrunkConnectionMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the TrunkConnection resource.
-	TrunkConnectionId string `protobuf:"bytes,1,opt,name=trunk_connection_id,json=trunkConnectionId,proto3" json:"trunk_connection_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *CreateTrunkConnectionMetadata) Reset() {
-	*x = CreateTrunkConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTrunkConnectionMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTrunkConnectionMetadata) ProtoMessage() {}
-
-func (x *CreateTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTrunkConnectionMetadata.ProtoReflect.Descriptor instead.
-func (*CreateTrunkConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CreateTrunkConnectionMetadata) GetTrunkConnectionId() string {
-	if x != nil {
-		return x.TrunkConnectionId
-	}
-	return ""
-}
-
 type UpdateTrunkConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the TrunkConnection resource to return.
@@ -485,7 +252,7 @@ type UpdateTrunkConnectionRequest struct {
 
 func (x *UpdateTrunkConnectionRequest) Reset() {
 	*x = UpdateTrunkConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +264,7 @@ func (x *UpdateTrunkConnectionRequest) String() string {
 func (*UpdateTrunkConnectionRequest) ProtoMessage() {}
 
 func (x *UpdateTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +277,7 @@ func (x *UpdateTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTrunkConnectionRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTrunkConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateTrunkConnectionRequest) GetTrunkConnectionId() string {
@@ -588,7 +355,7 @@ type UpdateTrunkConnectionMetadata struct {
 
 func (x *UpdateTrunkConnectionMetadata) Reset() {
 	*x = UpdateTrunkConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -600,7 +367,7 @@ func (x *UpdateTrunkConnectionMetadata) String() string {
 func (*UpdateTrunkConnectionMetadata) ProtoMessage() {}
 
 func (x *UpdateTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -613,7 +380,7 @@ func (x *UpdateTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTrunkConnectionMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateTrunkConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateTrunkConnectionMetadata) GetTrunkConnectionId() string {
@@ -633,7 +400,7 @@ type DeleteTrunkConnectionRequest struct {
 
 func (x *DeleteTrunkConnectionRequest) Reset() {
 	*x = DeleteTrunkConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -645,7 +412,7 @@ func (x *DeleteTrunkConnectionRequest) String() string {
 func (*DeleteTrunkConnectionRequest) ProtoMessage() {}
 
 func (x *DeleteTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -658,7 +425,7 @@ func (x *DeleteTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTrunkConnectionRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTrunkConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteTrunkConnectionRequest) GetTrunkConnectionId() string {
@@ -678,7 +445,7 @@ type DeleteTrunkConnectionMetadata struct {
 
 func (x *DeleteTrunkConnectionMetadata) Reset() {
 	*x = DeleteTrunkConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -690,7 +457,7 @@ func (x *DeleteTrunkConnectionMetadata) String() string {
 func (*DeleteTrunkConnectionMetadata) ProtoMessage() {}
 
 func (x *DeleteTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +470,7 @@ func (x *DeleteTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTrunkConnectionMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteTrunkConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteTrunkConnectionMetadata) GetTrunkConnectionId() string {
@@ -727,7 +494,7 @@ type MoveTrunkConnectionRequest struct {
 
 func (x *MoveTrunkConnectionRequest) Reset() {
 	*x = MoveTrunkConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -739,7 +506,7 @@ func (x *MoveTrunkConnectionRequest) String() string {
 func (*MoveTrunkConnectionRequest) ProtoMessage() {}
 
 func (x *MoveTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -752,7 +519,7 @@ func (x *MoveTrunkConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveTrunkConnectionRequest.ProtoReflect.Descriptor instead.
 func (*MoveTrunkConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *MoveTrunkConnectionRequest) GetTrunkConnectionId() string {
@@ -779,7 +546,7 @@ type MoveTrunkConnectionMetadata struct {
 
 func (x *MoveTrunkConnectionMetadata) Reset() {
 	*x = MoveTrunkConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -791,7 +558,7 @@ func (x *MoveTrunkConnectionMetadata) String() string {
 func (*MoveTrunkConnectionMetadata) ProtoMessage() {}
 
 func (x *MoveTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -804,7 +571,7 @@ func (x *MoveTrunkConnectionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveTrunkConnectionMetadata.ProtoReflect.Descriptor instead.
 func (*MoveTrunkConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *MoveTrunkConnectionMetadata) GetTrunkConnectionId() string {
@@ -835,7 +602,7 @@ type ListTrunkConnectionPrivateConnectionsRequest struct {
 
 func (x *ListTrunkConnectionPrivateConnectionsRequest) Reset() {
 	*x = ListTrunkConnectionPrivateConnectionsRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +614,7 @@ func (x *ListTrunkConnectionPrivateConnectionsRequest) String() string {
 func (*ListTrunkConnectionPrivateConnectionsRequest) ProtoMessage() {}
 
 func (x *ListTrunkConnectionPrivateConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,7 +627,7 @@ func (x *ListTrunkConnectionPrivateConnectionsRequest) ProtoReflect() protorefle
 
 // Deprecated: Use ListTrunkConnectionPrivateConnectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionPrivateConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ListTrunkConnectionPrivateConnectionsRequest) GetTrunkConnectionId() string {
@@ -908,7 +675,7 @@ type ListTrunkConnectionPrivateConnectionsResponse struct {
 
 func (x *ListTrunkConnectionPrivateConnectionsResponse) Reset() {
 	*x = ListTrunkConnectionPrivateConnectionsResponse{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -920,7 +687,7 @@ func (x *ListTrunkConnectionPrivateConnectionsResponse) String() string {
 func (*ListTrunkConnectionPrivateConnectionsResponse) ProtoMessage() {}
 
 func (x *ListTrunkConnectionPrivateConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -933,7 +700,7 @@ func (x *ListTrunkConnectionPrivateConnectionsResponse) ProtoReflect() protorefl
 
 // Deprecated: Use ListTrunkConnectionPrivateConnectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionPrivateConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListTrunkConnectionPrivateConnectionsResponse) GetPrivateConnections() []*PrivateConnection {
@@ -971,7 +738,7 @@ type ListTrunkConnectionPublicConnectionsRequest struct {
 
 func (x *ListTrunkConnectionPublicConnectionsRequest) Reset() {
 	*x = ListTrunkConnectionPublicConnectionsRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -983,7 +750,7 @@ func (x *ListTrunkConnectionPublicConnectionsRequest) String() string {
 func (*ListTrunkConnectionPublicConnectionsRequest) ProtoMessage() {}
 
 func (x *ListTrunkConnectionPublicConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -996,7 +763,7 @@ func (x *ListTrunkConnectionPublicConnectionsRequest) ProtoReflect() protoreflec
 
 // Deprecated: Use ListTrunkConnectionPublicConnectionsRequest.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionPublicConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListTrunkConnectionPublicConnectionsRequest) GetTrunkConnectionId() string {
@@ -1044,7 +811,7 @@ type ListTrunkConnectionPublicConnectionsResponse struct {
 
 func (x *ListTrunkConnectionPublicConnectionsResponse) Reset() {
 	*x = ListTrunkConnectionPublicConnectionsResponse{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1056,7 +823,7 @@ func (x *ListTrunkConnectionPublicConnectionsResponse) String() string {
 func (*ListTrunkConnectionPublicConnectionsResponse) ProtoMessage() {}
 
 func (x *ListTrunkConnectionPublicConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1069,7 +836,7 @@ func (x *ListTrunkConnectionPublicConnectionsResponse) ProtoReflect() protorefle
 
 // Deprecated: Use ListTrunkConnectionPublicConnectionsResponse.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionPublicConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListTrunkConnectionPublicConnectionsResponse) GetPublicConnections() []*PublicConnection {
@@ -1104,7 +871,7 @@ type ListTrunkConnectionOperationsRequest struct {
 
 func (x *ListTrunkConnectionOperationsRequest) Reset() {
 	*x = ListTrunkConnectionOperationsRequest{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1116,7 +883,7 @@ func (x *ListTrunkConnectionOperationsRequest) String() string {
 func (*ListTrunkConnectionOperationsRequest) ProtoMessage() {}
 
 func (x *ListTrunkConnectionOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1129,7 +896,7 @@ func (x *ListTrunkConnectionOperationsRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ListTrunkConnectionOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListTrunkConnectionOperationsRequest) GetTrunkConnectionId() string {
@@ -1170,7 +937,7 @@ type ListTrunkConnectionOperationsResponse struct {
 
 func (x *ListTrunkConnectionOperationsResponse) Reset() {
 	*x = ListTrunkConnectionOperationsResponse{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1182,7 +949,7 @@ func (x *ListTrunkConnectionOperationsResponse) String() string {
 func (*ListTrunkConnectionOperationsResponse) ProtoMessage() {}
 
 func (x *ListTrunkConnectionOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1195,7 +962,7 @@ func (x *ListTrunkConnectionOperationsResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListTrunkConnectionOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListTrunkConnectionOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListTrunkConnectionOperationsResponse) GetOperations() []*operation.Operation {
@@ -1212,158 +979,11 @@ func (x *ListTrunkConnectionOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
-// Config of trunkConnection that is deployed on single port.
-type CreateTrunkConnectionRequest_SinglePortDirectJoint struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of transceiver that the trunkConnection is deployed on.
-	TransceiverType common.TransceiverType `protobuf:"varint,1,opt,name=transceiver_type,json=transceiverType,proto3,enum=yandex.cloud.cic.v1.common.TransceiverType" json:"transceiver_type,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *CreateTrunkConnectionRequest_SinglePortDirectJoint) Reset() {
-	*x = CreateTrunkConnectionRequest_SinglePortDirectJoint{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTrunkConnectionRequest_SinglePortDirectJoint) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTrunkConnectionRequest_SinglePortDirectJoint) ProtoMessage() {}
-
-func (x *CreateTrunkConnectionRequest_SinglePortDirectJoint) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTrunkConnectionRequest_SinglePortDirectJoint.ProtoReflect.Descriptor instead.
-func (*CreateTrunkConnectionRequest_SinglePortDirectJoint) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{3, 1}
-}
-
-func (x *CreateTrunkConnectionRequest_SinglePortDirectJoint) GetTransceiverType() common.TransceiverType {
-	if x != nil {
-		return x.TransceiverType
-	}
-	return common.TransceiverType(0)
-}
-
-// Config of trunkConnection that is deployed on lag.
-type CreateTrunkConnectionRequest_LagDirectJoint struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of transceiver that the trunkConnection is deployed on.
-	TransceiverType common.TransceiverType `protobuf:"varint,1,opt,name=transceiver_type,json=transceiverType,proto3,enum=yandex.cloud.cic.v1.common.TransceiverType" json:"transceiver_type,omitempty"`
-	// LAG allocation settings that the trunkConnection is deployed on.
-	LagAllocationSettings *common.LagAllocationSettingsRequest `protobuf:"bytes,3,opt,name=lag_allocation_settings,json=lagAllocationSettings,proto3" json:"lag_allocation_settings,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *CreateTrunkConnectionRequest_LagDirectJoint) Reset() {
-	*x = CreateTrunkConnectionRequest_LagDirectJoint{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTrunkConnectionRequest_LagDirectJoint) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTrunkConnectionRequest_LagDirectJoint) ProtoMessage() {}
-
-func (x *CreateTrunkConnectionRequest_LagDirectJoint) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTrunkConnectionRequest_LagDirectJoint.ProtoReflect.Descriptor instead.
-func (*CreateTrunkConnectionRequest_LagDirectJoint) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{3, 2}
-}
-
-func (x *CreateTrunkConnectionRequest_LagDirectJoint) GetTransceiverType() common.TransceiverType {
-	if x != nil {
-		return x.TransceiverType
-	}
-	return common.TransceiverType(0)
-}
-
-func (x *CreateTrunkConnectionRequest_LagDirectJoint) GetLagAllocationSettings() *common.LagAllocationSettingsRequest {
-	if x != nil {
-		return x.LagAllocationSettings
-	}
-	return nil
-}
-
-// Config of trunkConnection that is deployed on partner joint.
-type CreateTrunkConnectionRequest_PartnerJoint struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of partner that the trunkConnection is deployed on.
-	PartnerId     *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateTrunkConnectionRequest_PartnerJoint) Reset() {
-	*x = CreateTrunkConnectionRequest_PartnerJoint{}
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateTrunkConnectionRequest_PartnerJoint) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateTrunkConnectionRequest_PartnerJoint) ProtoMessage() {}
-
-func (x *CreateTrunkConnectionRequest_PartnerJoint) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateTrunkConnectionRequest_PartnerJoint.ProtoReflect.Descriptor instead.
-func (*CreateTrunkConnectionRequest_PartnerJoint) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP(), []int{3, 3}
-}
-
-func (x *CreateTrunkConnectionRequest_PartnerJoint) GetPartnerId() *wrapperspb.StringValue {
-	if x != nil {
-		return x.PartnerId
-	}
-	return nil
-}
-
 var File_yandex_cloud_cic_v1_trunk_connection_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/cic/v1/trunk_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a1yandex/cloud/cic/v1/common/transceiver_type.proto\x1a8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x1a*yandex/cloud/cic/v1/trunk_connection.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\"Y\n" +
+	"2yandex/cloud/cic/v1/trunk_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a*yandex/cloud/cic/v1/trunk_connection.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\"Y\n" +
 	"\x19GetTrunkConnectionRequest\x12<\n" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\"\xbf\x01\n" +
 	"\x1bListTrunkConnectionsRequest\x12)\n" +
@@ -1376,36 +996,7 @@ const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x99\x01\n" +
 	"\x1cListTrunkConnectionsResponse\x12Q\n" +
 	"\x11trunk_connections\x18\x01 \x03(\v2$.yandex.cloud.cic.v1.TrunkConnectionR\x10trunkConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd3\v\n" +
-	"\x1cCreateTrunkConnectionRequest\x12B\n" +
-	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
-	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tregion_id\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12\x82\x01\n" +
-	"\x18single_port_direct_joint\x18\n" +
-	" \x01(\v2G.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.SinglePortDirectJointH\x00R\x15singlePortDirectJoint\x12l\n" +
-	"\x10lag_direct_joint\x18\v \x01(\v2@.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJointH\x00R\x0elagDirectJoint\x12n\n" +
-	"\x12partner_joint_info\x18\f \x01(\v2>.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJointH\x00R\x10partnerJointInfo\x12S\n" +
-	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueB\x04\xe8\xc71\x01R\x11pointOfPresenceId\x12O\n" +
-	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityB\x04\xe8\xc71\x01R\bcapacity\x12\x92\x01\n" +
-	"\x06labels\x18\x12 \x03(\v2=.yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
-	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a{\n" +
-	"\x15SinglePortDirectJoint\x12\\\n" +
-	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeB\x04\xe8\xc71\x01R\x0ftransceiverTypeJ\x04\b\x02\x10\x05\x1a\xec\x01\n" +
-	"\x0eLagDirectJoint\x12\\\n" +
-	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeB\x04\xe8\xc71\x01R\x0ftransceiverType\x12v\n" +
-	"\x17lag_allocation_settings\x18\x03 \x01(\v28.yandex.cloud.cic.v1.common.LagAllocationSettingsRequestB\x04\xe8\xc71\x01R\x15lagAllocationSettingsJ\x04\b\x02\x10\x03\x1aW\n" +
-	"\fPartnerJoint\x12A\n" +
-	"\n" +
-	"partner_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x04\xe8\xc71\x01R\tpartnerIdJ\x04\b\x01\x10\x04B\a\n" +
-	"\x05jointJ\x04\b\x03\x10\x04J\x04\b\x06\x10\n" +
-	"J\x04\b\x0e\x10\x11J\x04\b\x13\x10\x14\"O\n" +
-	"\x1dCreateTrunkConnectionMetadata\x12.\n" +
-	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\xf0\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf0\x05\n" +
 	"\x1cUpdateTrunkConnectionRequest\x12<\n" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1464,12 +1055,10 @@ const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x8d\x0e\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd3\f\n" +
 	"\x16TrunkConnectionService\x12\x93\x01\n" +
 	"\x03Get\x12..yandex.cloud.cic.v1.GetTrunkConnectionRequest\x1a$.yandex.cloud.cic.v1.TrunkConnection\"6\x82\xd3\xe4\x93\x020\x12./cic/v1/trunkConnections/{trunk_connection_id}\x12\x8d\x01\n" +
-	"\x04List\x120.yandex.cloud.cic.v1.ListTrunkConnectionsRequest\x1a1.yandex.cloud.cic.v1.ListTrunkConnectionsResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/cic/v1/trunkConnections\x12\xb7\x01\n" +
-	"\x06Create\x121.yandex.cloud.cic.v1.CreateTrunkConnectionRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2*0\n" +
-	"\x1dCreateTrunkConnectionMetadata\x12\x0fTrunkConnection\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/cic/v1/trunkConnections\x12\xcd\x01\n" +
+	"\x04List\x120.yandex.cloud.cic.v1.ListTrunkConnectionsRequest\x1a1.yandex.cloud.cic.v1.ListTrunkConnectionsResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/cic/v1/trunkConnections\x12\xcd\x01\n" +
 	"\x06Update\x121.yandex.cloud.cic.v1.UpdateTrunkConnectionRequest\x1a!.yandex.cloud.operation.Operation\"m\xb2\xd2*0\n" +
 	"\x1dUpdateTrunkConnectionMetadata\x12\x0fTrunkConnection\x82\xd3\xe4\x93\x023:\x01*2./cic/v1/trunkConnections/{trunk_connection_id}\x12\xd0\x01\n" +
 	"\x06Delete\x121.yandex.cloud.cic.v1.DeleteTrunkConnectionRequest\x1a!.yandex.cloud.operation.Operation\"p\xb2\xd2*6\n" +
@@ -1493,82 +1082,62 @@ func file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_yandex_cloud_cic_v1_trunk_connection_service_proto_goTypes = []any{
 	(*GetTrunkConnectionRequest)(nil),                     // 0: yandex.cloud.cic.v1.GetTrunkConnectionRequest
 	(*ListTrunkConnectionsRequest)(nil),                   // 1: yandex.cloud.cic.v1.ListTrunkConnectionsRequest
 	(*ListTrunkConnectionsResponse)(nil),                  // 2: yandex.cloud.cic.v1.ListTrunkConnectionsResponse
-	(*CreateTrunkConnectionRequest)(nil),                  // 3: yandex.cloud.cic.v1.CreateTrunkConnectionRequest
-	(*CreateTrunkConnectionMetadata)(nil),                 // 4: yandex.cloud.cic.v1.CreateTrunkConnectionMetadata
-	(*UpdateTrunkConnectionRequest)(nil),                  // 5: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
-	(*UpdateTrunkConnectionMetadata)(nil),                 // 6: yandex.cloud.cic.v1.UpdateTrunkConnectionMetadata
-	(*DeleteTrunkConnectionRequest)(nil),                  // 7: yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
-	(*DeleteTrunkConnectionMetadata)(nil),                 // 8: yandex.cloud.cic.v1.DeleteTrunkConnectionMetadata
-	(*MoveTrunkConnectionRequest)(nil),                    // 9: yandex.cloud.cic.v1.MoveTrunkConnectionRequest
-	(*MoveTrunkConnectionMetadata)(nil),                   // 10: yandex.cloud.cic.v1.MoveTrunkConnectionMetadata
-	(*ListTrunkConnectionPrivateConnectionsRequest)(nil),  // 11: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
-	(*ListTrunkConnectionPrivateConnectionsResponse)(nil), // 12: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
-	(*ListTrunkConnectionPublicConnectionsRequest)(nil),   // 13: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
-	(*ListTrunkConnectionPublicConnectionsResponse)(nil),  // 14: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
-	(*ListTrunkConnectionOperationsRequest)(nil),          // 15: yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
-	(*ListTrunkConnectionOperationsResponse)(nil),         // 16: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
-	nil, // 17: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LabelsEntry
-	(*CreateTrunkConnectionRequest_SinglePortDirectJoint)(nil), // 18: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.SinglePortDirectJoint
-	(*CreateTrunkConnectionRequest_LagDirectJoint)(nil),        // 19: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJoint
-	(*CreateTrunkConnectionRequest_PartnerJoint)(nil),          // 20: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJoint
-	nil,                                         // 21: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
-	(*TrunkConnection)(nil),                     // 22: yandex.cloud.cic.v1.TrunkConnection
-	(*wrapperspb.StringValue)(nil),              // 23: google.protobuf.StringValue
-	(TrunkConnection_Capacity)(0),               // 24: yandex.cloud.cic.v1.TrunkConnection.Capacity
-	(*fieldmaskpb.FieldMask)(nil),               // 25: google.protobuf.FieldMask
-	(*PrivateConnection)(nil),                   // 26: yandex.cloud.cic.v1.PrivateConnection
-	(*PublicConnection)(nil),                    // 27: yandex.cloud.cic.v1.PublicConnection
-	(*operation.Operation)(nil),                 // 28: yandex.cloud.operation.Operation
-	(common.TransceiverType)(0),                 // 29: yandex.cloud.cic.v1.common.TransceiverType
-	(*common.LagAllocationSettingsRequest)(nil), // 30: yandex.cloud.cic.v1.common.LagAllocationSettingsRequest
+	(*UpdateTrunkConnectionRequest)(nil),                  // 3: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
+	(*UpdateTrunkConnectionMetadata)(nil),                 // 4: yandex.cloud.cic.v1.UpdateTrunkConnectionMetadata
+	(*DeleteTrunkConnectionRequest)(nil),                  // 5: yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
+	(*DeleteTrunkConnectionMetadata)(nil),                 // 6: yandex.cloud.cic.v1.DeleteTrunkConnectionMetadata
+	(*MoveTrunkConnectionRequest)(nil),                    // 7: yandex.cloud.cic.v1.MoveTrunkConnectionRequest
+	(*MoveTrunkConnectionMetadata)(nil),                   // 8: yandex.cloud.cic.v1.MoveTrunkConnectionMetadata
+	(*ListTrunkConnectionPrivateConnectionsRequest)(nil),  // 9: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
+	(*ListTrunkConnectionPrivateConnectionsResponse)(nil), // 10: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
+	(*ListTrunkConnectionPublicConnectionsRequest)(nil),   // 11: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
+	(*ListTrunkConnectionPublicConnectionsResponse)(nil),  // 12: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
+	(*ListTrunkConnectionOperationsRequest)(nil),          // 13: yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
+	(*ListTrunkConnectionOperationsResponse)(nil),         // 14: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
+	nil,                            // 15: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
+	(*TrunkConnection)(nil),        // 16: yandex.cloud.cic.v1.TrunkConnection
+	(*fieldmaskpb.FieldMask)(nil),  // 17: google.protobuf.FieldMask
+	(*wrapperspb.StringValue)(nil), // 18: google.protobuf.StringValue
+	(TrunkConnection_Capacity)(0),  // 19: yandex.cloud.cic.v1.TrunkConnection.Capacity
+	(*PrivateConnection)(nil),      // 20: yandex.cloud.cic.v1.PrivateConnection
+	(*PublicConnection)(nil),       // 21: yandex.cloud.cic.v1.PublicConnection
+	(*operation.Operation)(nil),    // 22: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cic_v1_trunk_connection_service_proto_depIdxs = []int32{
-	22, // 0: yandex.cloud.cic.v1.ListTrunkConnectionsResponse.trunk_connections:type_name -> yandex.cloud.cic.v1.TrunkConnection
-	18, // 1: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.single_port_direct_joint:type_name -> yandex.cloud.cic.v1.CreateTrunkConnectionRequest.SinglePortDirectJoint
-	19, // 2: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.lag_direct_joint:type_name -> yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJoint
-	20, // 3: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.partner_joint_info:type_name -> yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJoint
-	23, // 4: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.point_of_presence_id:type_name -> google.protobuf.StringValue
-	24, // 5: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.capacity:type_name -> yandex.cloud.cic.v1.TrunkConnection.Capacity
-	17, // 6: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LabelsEntry
-	25, // 7: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	23, // 8: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.point_of_presence_id:type_name -> google.protobuf.StringValue
-	24, // 9: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.capacity:type_name -> yandex.cloud.cic.v1.TrunkConnection.Capacity
-	21, // 10: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
-	26, // 11: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
-	27, // 12: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
-	28, // 13: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	29, // 14: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.SinglePortDirectJoint.transceiver_type:type_name -> yandex.cloud.cic.v1.common.TransceiverType
-	29, // 15: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJoint.transceiver_type:type_name -> yandex.cloud.cic.v1.common.TransceiverType
-	30, // 16: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.LagDirectJoint.lag_allocation_settings:type_name -> yandex.cloud.cic.v1.common.LagAllocationSettingsRequest
-	23, // 17: yandex.cloud.cic.v1.CreateTrunkConnectionRequest.PartnerJoint.partner_id:type_name -> google.protobuf.StringValue
-	0,  // 18: yandex.cloud.cic.v1.TrunkConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetTrunkConnectionRequest
-	1,  // 19: yandex.cloud.cic.v1.TrunkConnectionService.List:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionsRequest
-	3,  // 20: yandex.cloud.cic.v1.TrunkConnectionService.Create:input_type -> yandex.cloud.cic.v1.CreateTrunkConnectionRequest
-	5,  // 21: yandex.cloud.cic.v1.TrunkConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
-	7,  // 22: yandex.cloud.cic.v1.TrunkConnectionService.Delete:input_type -> yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
-	9,  // 23: yandex.cloud.cic.v1.TrunkConnectionService.Move:input_type -> yandex.cloud.cic.v1.MoveTrunkConnectionRequest
-	11, // 24: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
-	13, // 25: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
-	15, // 26: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
-	22, // 27: yandex.cloud.cic.v1.TrunkConnectionService.Get:output_type -> yandex.cloud.cic.v1.TrunkConnection
-	2,  // 28: yandex.cloud.cic.v1.TrunkConnectionService.List:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionsResponse
-	28, // 29: yandex.cloud.cic.v1.TrunkConnectionService.Create:output_type -> yandex.cloud.operation.Operation
-	28, // 30: yandex.cloud.cic.v1.TrunkConnectionService.Update:output_type -> yandex.cloud.operation.Operation
-	28, // 31: yandex.cloud.cic.v1.TrunkConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
-	28, // 32: yandex.cloud.cic.v1.TrunkConnectionService.Move:output_type -> yandex.cloud.operation.Operation
-	12, // 33: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
-	14, // 34: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
-	16, // 35: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
-	27, // [27:36] is the sub-list for method output_type
-	18, // [18:27] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	16, // 0: yandex.cloud.cic.v1.ListTrunkConnectionsResponse.trunk_connections:type_name -> yandex.cloud.cic.v1.TrunkConnection
+	17, // 1: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	18, // 2: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.point_of_presence_id:type_name -> google.protobuf.StringValue
+	19, // 3: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.capacity:type_name -> yandex.cloud.cic.v1.TrunkConnection.Capacity
+	15, // 4: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
+	20, // 5: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
+	21, // 6: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
+	22, // 7: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 8: yandex.cloud.cic.v1.TrunkConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetTrunkConnectionRequest
+	1,  // 9: yandex.cloud.cic.v1.TrunkConnectionService.List:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionsRequest
+	3,  // 10: yandex.cloud.cic.v1.TrunkConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
+	5,  // 11: yandex.cloud.cic.v1.TrunkConnectionService.Delete:input_type -> yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
+	7,  // 12: yandex.cloud.cic.v1.TrunkConnectionService.Move:input_type -> yandex.cloud.cic.v1.MoveTrunkConnectionRequest
+	9,  // 13: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
+	11, // 14: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
+	13, // 15: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
+	16, // 16: yandex.cloud.cic.v1.TrunkConnectionService.Get:output_type -> yandex.cloud.cic.v1.TrunkConnection
+	2,  // 17: yandex.cloud.cic.v1.TrunkConnectionService.List:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionsResponse
+	22, // 18: yandex.cloud.cic.v1.TrunkConnectionService.Update:output_type -> yandex.cloud.operation.Operation
+	22, // 19: yandex.cloud.cic.v1.TrunkConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
+	22, // 20: yandex.cloud.cic.v1.TrunkConnectionService.Move:output_type -> yandex.cloud.operation.Operation
+	10, // 21: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
+	12, // 22: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
+	14, // 23: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
+	16, // [16:24] is the sub-list for method output_type
+	8,  // [8:16] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cic_v1_trunk_connection_service_proto_init() }
@@ -1579,18 +1148,13 @@ func file_yandex_cloud_cic_v1_trunk_connection_service_proto_init() {
 	file_yandex_cloud_cic_v1_trunk_connection_proto_init()
 	file_yandex_cloud_cic_v1_private_connection_proto_init()
 	file_yandex_cloud_cic_v1_public_connection_proto_init()
-	file_yandex_cloud_cic_v1_trunk_connection_service_proto_msgTypes[3].OneofWrappers = []any{
-		(*CreateTrunkConnectionRequest_SinglePortDirectJoint_)(nil),
-		(*CreateTrunkConnectionRequest_LagDirectJoint_)(nil),
-		(*CreateTrunkConnectionRequest_PartnerJointInfo)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc), len(file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

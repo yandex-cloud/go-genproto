@@ -30,23 +30,19 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// # MetadataService service for retrieving metadata related to usage records
-//
+// MetadataService service for retrieving metadata related to usage records
 // The MetadataService provides a set of methods for retrieving metadata and reference information
 // about billing usage records within a specific billing account and date range. This metadata
 // includes information about clouds, services, SKUs, labels, and resources
 // to understand the available entity structure before building detailed usage reports.
-//
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
-//
 // Rate limits:
 // This API is limited to 1 request per minute per IP address.
 type MetadataServiceClient interface {
 	// GetUsage returns usage metadata including available clouds, services, SKUs, label keys, and date ranges
 	// for a specific billing account and date range.
-	//
 	// This method provides a view of all available entities
 	// that can be used for usage reporting within the specified date range
 	// for the billing account and all its sub-accounts including:
@@ -55,86 +51,65 @@ type MetadataServiceClient interface {
 	// - Available services
 	// - Available SKUs
 	// - Available billing accounts (user billing account and his sub-accounts)
-	//
 	// Implementation details:
 	// - Empty cloud_id values are translated to a "Usage is out of scope of the Cloud" designation
 	// - All data is filtered to only include items that had usage during the specified date range
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
-	// This method supports additional filtering by cloud_ids, label_keys, service_ids, and sku_ids.
-	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
-	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetUsage(ctx context.Context, in *GetUsageRequest, opts ...grpc.CallOption) (*GetUsageResponse, error)
 	// GetServiceInstance returns service instance usage metadata for a specific billing account and date range.
-	//
 	// This method provides a view of all available service instance entities
 	// that can be used for usage reporting within the specified date range
-	// for the billing account and all its sub-accounts.
-	//
+	// for the billing account and all its sub-accounts including:
 	// Implementation details:
 	// - All data is filtered to only include items that had usage during the specified date range
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// This method supports additional filtering by service_instance_ids.
 	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
 	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
-	//
 	// Required permissions:
-	// - `billing.accounts.getReport` on the specified billing account
+	// - `billing.accounts.getReport` or `billingInternal.accounts.getReport` on the specified billing account
 	GetServiceInstance(ctx context.Context, in *GetServiceInstanceRequest, opts ...grpc.CallOption) (*GetServiceInstanceResponse, error)
 	// GetLabel returns available label keys and values for a specific billing account
 	// with pagination support.
-	//
 	// This method retrieves all available label values for a specified label key
 	// within the given date range. It supports filtering by label value substring
 	// and provides pagination for handling large result sets.
-	//
-	// This method can additionally filter label values by provided clouds and folders.
-	//
 	// The method can be used in several ways:
-	//   - With label_key only: Returns all values for that key with pagination
-	//   - With label_key and label_value: Returns array of matching labelValues with pagination
-	//   - With label_key and label_value_filter: Returns all values for that key with pagination
-	//     and a separate array of labelValues from the labelValueFilters parameter
-	//   - With label_key, label_value and label_value_filter: returns only an array of matching labelValues
-	//     with pagination and ignores labelValueFilters (i.e., labelValueFilters won't be returned)
-	//
+	// - With label_key only: Returns all values for that key with pagination
+	// - With label_key and label_value: Returns array of matching labelValues with pagination
+	// - With label_key and label_value_filter: Returns all values for that key with pagination
+	// and a separate array of labelValues from the labelValueFilters parameter
+	// - With label_key, label_value and label_value_filter: returns only an array of matching labelValues
+	// with pagination and ignores labelValueFilters (i.e., labelValueFilters won't be returned)
 	// Implementation details:
 	// - Case-insensitive label value matching when label_value is provided
 	// - When label_value is specified, label_value_filter is ignored
 	// - Label values are sorted alphabetically
 	// - Pagination occurs when results exceed page_size
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetLabel(ctx context.Context, in *GetLabelRequest, opts ...grpc.CallOption) (*GetLabelResponse, error)
 	// GetCloud returns available folders for specified clouds within a billing account
 	// with optional filtering by cloud IDs, folder IDs and pagination support.
-	//
 	// This method returns a hierarchical view of clouds and their folders that the user
 	// has access to within the specified date range. Results can be filtered by
 	// specific cloud IDs and/or folder IDs, and pagination is supported for handling
 	// large result sets.
-	//
 	// Implementation details:
 	// - The method result does not contain empty cloud id information
 	// - Filtering is done using case-insensitive substring matching
@@ -142,24 +117,20 @@ type MetadataServiceClient interface {
 	// - Folder pagination is based on folder IDs, ordered alphabetically
 	// - NextPageToken is only returned when there are more results available
 	// - Base64-encoded page tokens are used for pagination state
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetCloud(ctx context.Context, in *GetCloudRequest, opts ...grpc.CallOption) (*GetCloudResponse, error)
 	// GetResources returns available resources for specified service instances within a billing account
 	// with optional filtering by service instance IDs, resource IDs and pagination support.
-	//
 	// This method returns a hierarchical view of service instances and their resources that the user
 	// has access to within the specified date range. Results can be filtered by
 	// specific service instance IDs and/or resource IDs, and pagination is supported for handling
 	// large result sets.
-	//
 	// Implementation details:
 	// - Filtering by resources is done using case-insensitive substring matching
 	// - Filtering is done using case-insensitive substring matching
@@ -167,15 +138,13 @@ type MetadataServiceClient interface {
 	// - Resource pagination is based on resource IDs, ordered alphabetically
 	// - NextPageToken is only returned when there are more results available
 	// - Base64-encoded page tokens are used for pagination state
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
-	// - `billing.accounts.getReport` on the specified billing account
+	// - `billing.accounts.getReport` or `billingInternal.accounts.getReport` on the specified billing account
 	GetResources(ctx context.Context, in *GetResourcesRequest, opts ...grpc.CallOption) (*GetResourcesResponse, error)
 }
 
@@ -241,23 +210,19 @@ func (c *metadataServiceClient) GetResources(ctx context.Context, in *GetResourc
 // All implementations should embed UnimplementedMetadataServiceServer
 // for forward compatibility.
 //
-// # MetadataService service for retrieving metadata related to usage records
-//
+// MetadataService service for retrieving metadata related to usage records
 // The MetadataService provides a set of methods for retrieving metadata and reference information
 // about billing usage records within a specific billing account and date range. This metadata
 // includes information about clouds, services, SKUs, labels, and resources
 // to understand the available entity structure before building detailed usage reports.
-//
 // Required permissions:
 // All methods in this service require one of the following permissions on the specified billing account:
 // - `billing.accounts.getReport`
-//
 // Rate limits:
 // This API is limited to 1 request per minute per IP address.
 type MetadataServiceServer interface {
 	// GetUsage returns usage metadata including available clouds, services, SKUs, label keys, and date ranges
 	// for a specific billing account and date range.
-	//
 	// This method provides a view of all available entities
 	// that can be used for usage reporting within the specified date range
 	// for the billing account and all its sub-accounts including:
@@ -266,86 +231,65 @@ type MetadataServiceServer interface {
 	// - Available services
 	// - Available SKUs
 	// - Available billing accounts (user billing account and his sub-accounts)
-	//
 	// Implementation details:
 	// - Empty cloud_id values are translated to a "Usage is out of scope of the Cloud" designation
 	// - All data is filtered to only include items that had usage during the specified date range
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
-	// This method supports additional filtering by cloud_ids, label_keys, service_ids, and sku_ids.
-	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
-	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetUsage(context.Context, *GetUsageRequest) (*GetUsageResponse, error)
 	// GetServiceInstance returns service instance usage metadata for a specific billing account and date range.
-	//
 	// This method provides a view of all available service instance entities
 	// that can be used for usage reporting within the specified date range
-	// for the billing account and all its sub-accounts.
-	//
+	// for the billing account and all its sub-accounts including:
 	// Implementation details:
 	// - All data is filtered to only include items that had usage during the specified date range
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// This method supports additional filtering by service_instance_ids.
 	// These filters work as supplementary conditions to the primary billing_account_id and date range filters.
 	// When provided, they further narrow down the results by applying additional OR conditions for each filter type.
-	//
 	// Required permissions:
-	// - `billing.accounts.getReport` on the specified billing account
+	// - `billing.accounts.getReport` or `billingInternal.accounts.getReport` on the specified billing account
 	GetServiceInstance(context.Context, *GetServiceInstanceRequest) (*GetServiceInstanceResponse, error)
 	// GetLabel returns available label keys and values for a specific billing account
 	// with pagination support.
-	//
 	// This method retrieves all available label values for a specified label key
 	// within the given date range. It supports filtering by label value substring
 	// and provides pagination for handling large result sets.
-	//
-	// This method can additionally filter label values by provided clouds and folders.
-	//
 	// The method can be used in several ways:
-	//   - With label_key only: Returns all values for that key with pagination
-	//   - With label_key and label_value: Returns array of matching labelValues with pagination
-	//   - With label_key and label_value_filter: Returns all values for that key with pagination
-	//     and a separate array of labelValues from the labelValueFilters parameter
-	//   - With label_key, label_value and label_value_filter: returns only an array of matching labelValues
-	//     with pagination and ignores labelValueFilters (i.e., labelValueFilters won't be returned)
-	//
+	// - With label_key only: Returns all values for that key with pagination
+	// - With label_key and label_value: Returns array of matching labelValues with pagination
+	// - With label_key and label_value_filter: Returns all values for that key with pagination
+	// and a separate array of labelValues from the labelValueFilters parameter
+	// - With label_key, label_value and label_value_filter: returns only an array of matching labelValues
+	// with pagination and ignores labelValueFilters (i.e., labelValueFilters won't be returned)
 	// Implementation details:
 	// - Case-insensitive label value matching when label_value is provided
 	// - When label_value is specified, label_value_filter is ignored
 	// - Label values are sorted alphabetically
 	// - Pagination occurs when results exceed page_size
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetLabel(context.Context, *GetLabelRequest) (*GetLabelResponse, error)
 	// GetCloud returns available folders for specified clouds within a billing account
 	// with optional filtering by cloud IDs, folder IDs and pagination support.
-	//
 	// This method returns a hierarchical view of clouds and their folders that the user
 	// has access to within the specified date range. Results can be filtered by
 	// specific cloud IDs and/or folder IDs, and pagination is supported for handling
 	// large result sets.
-	//
 	// Implementation details:
 	// - The method result does not contain empty cloud id information
 	// - Filtering is done using case-insensitive substring matching
@@ -353,24 +297,20 @@ type MetadataServiceServer interface {
 	// - Folder pagination is based on folder IDs, ordered alphabetically
 	// - NextPageToken is only returned when there are more results available
 	// - Base64-encoded page tokens are used for pagination state
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
 	// - `billing.accounts.getReport` on the specified billing account
 	GetCloud(context.Context, *GetCloudRequest) (*GetCloudResponse, error)
 	// GetResources returns available resources for specified service instances within a billing account
 	// with optional filtering by service instance IDs, resource IDs and pagination support.
-	//
 	// This method returns a hierarchical view of service instances and their resources that the user
 	// has access to within the specified date range. Results can be filtered by
 	// specific service instance IDs and/or resource IDs, and pagination is supported for handling
 	// large result sets.
-	//
 	// Implementation details:
 	// - Filtering by resources is done using case-insensitive substring matching
 	// - Filtering is done using case-insensitive substring matching
@@ -378,15 +318,13 @@ type MetadataServiceServer interface {
 	// - Resource pagination is based on resource IDs, ordered alphabetically
 	// - NextPageToken is only returned when there are more results available
 	// - Base64-encoded page tokens are used for pagination state
-	//
 	// Error handling:
 	// - Returns INVALID_ARGUMENT if the request parameters fail validation
 	// - Returns UNAUTHENTICATED if the user is not authenticated or the billing account does not exist
 	// - Returns PERMISSION_DENIED if the user lacks required permissions
 	// - Returns INTERNAL for internal server errors
-	//
 	// Required permissions:
-	// - `billing.accounts.getReport` on the specified billing account
+	// - `billing.accounts.getReport` or `billingInternal.accounts.getReport` on the specified billing account
 	GetResources(context.Context, *GetResourcesRequest) (*GetResourcesResponse, error)
 }
 

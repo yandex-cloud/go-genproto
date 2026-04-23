@@ -456,13 +456,13 @@ func (x *SKUUsageReportEntityData) GetPeriodic() []*UsageReportPeriodicData {
 // containing both summary data for the entity across the entire period and a time series breakdown.
 type ResourceUsageReportEntityData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Total cost associated with this resource.
+	// Total cost associated with this label group.
 	Cost *StringDecimal `protobuf:"bytes,1,opt,name=cost,proto3" json:"cost,omitempty"`
 	// Total credits (discounts, grants, adjustments) applied to this label group.
 	CreditDetails *CreditDetails `protobuf:"bytes,2,opt,name=credit_details,json=creditDetails,proto3" json:"credit_details,omitempty"`
-	// Total expense (including cost and credit) for this resource group.
+	// Total expense (including cost and credit) for this label group.
 	Expense *StringDecimal `protobuf:"bytes,3,opt,name=expense,proto3" json:"expense,omitempty"`
-	// Metadata for the resource-based grouping.
+	// Metadata for the label-based grouping.
 	Resource *Resource `protobuf:"bytes,4,opt,name=resource,proto3" json:"resource,omitempty"`
 	// Time series with usage and billing details for each TimeGrouping period (e.g., daily).
 	Periodic      []*UsageReportPeriodicData `protobuf:"bytes,5,rep,name=periodic,proto3" json:"periodic,omitempty"`

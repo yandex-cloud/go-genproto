@@ -80,35 +80,27 @@ func (x *Customer) GetBillingAccountId() string {
 type CustomerPerson struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional. Name of the person.
-	//
 	// String length is not limited.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional. Long name of the person.
-	//
 	// String length is not limited.
 	Longname string `protobuf:"bytes,2,opt,name=longname,proto3" json:"longname,omitempty"`
 	// Optional. Phone of the person.
-	//
 	// Must be a valid telephone number or a valid [phoneword](https://en.m.wikipedia.org/wiki/Phoneword).
 	Phone string `protobuf:"bytes,3,opt,name=phone,proto3" json:"phone,omitempty"`
 	// Optional. Email of the person.
-	//
 	// Must be a valid [email address](https://en.wikipedia.org/wiki/Email_address).
 	Email string `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
 	// Optional. Post code of the person.
-	//
 	// String length is not limited.
 	PostCode string `protobuf:"bytes,5,opt,name=post_code,json=postCode,proto3" json:"post_code,omitempty"`
 	// Optional. Post address of the person.
-	//
 	// String length is not limited.
 	PostAddress string `protobuf:"bytes,6,opt,name=post_address,json=postAddress,proto3" json:"post_address,omitempty"`
 	// Optional. Legal address of the person.
-	//
 	// String length is not limited.
 	LegalAddress string `protobuf:"bytes,7,opt,name=legal_address,json=legalAddress,proto3" json:"legal_address,omitempty"`
 	// Optional. Tax identification number of the person.
-	//
 	// String length is not limited.
 	Tin           string `protobuf:"bytes,8,opt,name=tin,proto3" json:"tin,omitempty"`
 	unknownFields protoimpl.UnknownFields

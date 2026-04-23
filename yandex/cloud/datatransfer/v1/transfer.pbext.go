@@ -244,6 +244,10 @@ func (m *ToStringTransformer) SetColumns(v *ColumnsFilter) {
 	m.Columns = v
 }
 
+func (m *ToStringTransformer) SetSkipUtcConversion(v bool) {
+	m.SkipUtcConversion = v
+}
+
 type SharderTransformer_SharderTransformerType = isSharderTransformer_SharderTransformerType
 
 func (m *SharderTransformer) SetSharderTransformerType(v SharderTransformer_SharderTransformerType) {

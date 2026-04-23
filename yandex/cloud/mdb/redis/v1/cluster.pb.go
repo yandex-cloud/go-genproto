@@ -1477,6 +1477,8 @@ type ValkeySearch struct {
 	ReaderThreads *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=reader_threads,json=readerThreads,proto3" json:"reader_threads,omitempty"`
 	// Controls the amount of threads processing index mutations
 	WriterThreads *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=writer_threads,json=writerThreads,proto3" json:"writer_threads,omitempty"`
+	// Module version
+	Version       string `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1532,10 +1534,19 @@ func (x *ValkeySearch) GetWriterThreads() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *ValkeySearch) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
 type ValkeyJson struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Enable valkey-json module
-	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Module version
+	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1577,10 +1588,19 @@ func (x *ValkeyJson) GetEnabled() bool {
 	return false
 }
 
+func (x *ValkeyJson) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
 type ValkeyBloom struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Enable valkey-bloom module
-	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Module version
+	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1620,6 +1640,13 @@ func (x *ValkeyBloom) GetEnabled() bool {
 		return x.Enabled
 	}
 	return false
+}
+
+func (x *ValkeyBloom) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
 }
 
 var File_yandex_cloud_mdb_redis_v1_cluster_proto protoreflect.FileDescriptor
@@ -1760,16 +1787,19 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\rvalkey_search\x18\x01 \x01(\v2'.yandex.cloud.mdb.redis.v1.ValkeySearchR\fvalkeySearch\x12F\n" +
 	"\vvalkey_json\x18\x02 \x01(\v2%.yandex.cloud.mdb.redis.v1.ValkeyJsonR\n" +
 	"valkeyJson\x12I\n" +
-	"\fvalkey_bloom\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.ValkeyBloomR\vvalkeyBloom\"\xca\x01\n" +
+	"\fvalkey_bloom\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.ValkeyBloomR\vvalkeyBloom\"\xe4\x01\n" +
 	"\fValkeySearch\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12O\n" +
 	"\x0ereader_threads\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xe8\xc71\x00\xfa\xc71\x03>=0R\rreaderThreads\x12O\n" +
-	"\x0ewriter_threads\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xe8\xc71\x00\xfa\xc71\x03>=0R\rwriterThreads\"&\n" +
+	"\x0ewriter_threads\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xe8\xc71\x00\xfa\xc71\x03>=0R\rwriterThreads\x12\x18\n" +
+	"\aversion\x18\x04 \x01(\tR\aversion\"@\n" +
 	"\n" +
 	"ValkeyJson\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\"'\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\"A\n" +
 	"\vValkeyBloom\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabledBd\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversionBd\n" +
 	"\x1dyandex.cloud.api.mdb.redis.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1;redisb\x06proto3"
 
 var (
