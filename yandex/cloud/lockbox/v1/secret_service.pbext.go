@@ -16,10 +16,6 @@ func (m *PayloadEntryChange) SetValue(v PayloadEntryChange_Value) {
 	m.Value = v
 }
 
-func (m *PayloadEntryChange) SetKey(v string) {
-	m.Key = v
-}
-
 func (m *PayloadEntryChange) SetTextValue(v string) {
 	m.Value = &PayloadEntryChange_TextValue{
 		TextValue: v,
@@ -30,6 +26,10 @@ func (m *PayloadEntryChange) SetBinaryValue(v []byte) {
 	m.Value = &PayloadEntryChange_BinaryValue{
 		BinaryValue: v,
 	}
+}
+
+func (m *PayloadEntryChange) SetKey(v string) {
+	m.Key = v
 }
 
 func (m *GetSecretRequest) SetSecretId(v string) {
@@ -60,6 +60,12 @@ type CreateSecretRequest_PayloadSpecification = isCreateSecretRequest_PayloadSpe
 
 func (m *CreateSecretRequest) SetPayloadSpecification(v CreateSecretRequest_PayloadSpecification) {
 	m.PayloadSpecification = v
+}
+
+func (m *CreateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &CreateSecretRequest_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
 }
 
 func (m *CreateSecretRequest) SetFolderId(v string) {
@@ -94,12 +100,6 @@ func (m *CreateSecretRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
-func (m *CreateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
-	m.PayloadSpecification = &CreateSecretRequest_PasswordPayloadSpecification{
-		PasswordPayloadSpecification: v,
-	}
-}
-
 func (m *CreateSecretRequest) SetCreateVersion(v *wrapperspb.BoolValue) {
 	m.CreateVersion = v
 }
@@ -116,6 +116,12 @@ type UpdateSecretRequest_PayloadSpecification = isUpdateSecretRequest_PayloadSpe
 
 func (m *UpdateSecretRequest) SetPayloadSpecification(v UpdateSecretRequest_PayloadSpecification) {
 	m.PayloadSpecification = v
+}
+
+func (m *UpdateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &UpdateSecretRequest_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
 }
 
 func (m *UpdateSecretRequest) SetSecretId(v string) {
@@ -140,12 +146,6 @@ func (m *UpdateSecretRequest) SetLabels(v map[string]string) {
 
 func (m *UpdateSecretRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *UpdateSecretRequest) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
-	m.PayloadSpecification = &UpdateSecretRequest_PasswordPayloadSpecification{
-		PasswordPayloadSpecification: v,
-	}
 }
 
 func (m *UpdateSecretMetadata) SetSecretId(v string) {

@@ -41,7 +41,6 @@ const (
 // A set of methods for managing certificates.
 type CertificateServiceClient interface {
 	// Returns the specified certificate.
-	//
 	// To get the list of available certificates, make a [List] request.
 	Get(ctx context.Context, in *GetCertificateRequest, opts ...grpc.CallOption) (*Certificate, error)
 	// Returns the list of certificates in the specified folder.
@@ -190,7 +189,6 @@ func (c *certificateServiceClient) UpdateAccessBindings(ctx context.Context, in 
 // A set of methods for managing certificates.
 type CertificateServiceServer interface {
 	// Returns the specified certificate.
-	//
 	// To get the list of available certificates, make a [List] request.
 	Get(context.Context, *GetCertificateRequest) (*Certificate, error)
 	// Returns the list of certificates in the specified folder.

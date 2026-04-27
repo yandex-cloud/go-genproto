@@ -304,6 +304,11 @@ func (x *AdvancedRateLimiterProfile) GetCloudId() string {
 // A AdvancedRateLimiterRule object, see [Rules](/docs/smartwebsecurity/concepts/arl#traffic-conditions).
 type AdvancedRateLimiterRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to RuleSpecifier:
+	//
+	//	*AdvancedRateLimiterRule_StaticQuota_
+	//	*AdvancedRateLimiterRule_DynamicQuota_
+	RuleSpecifier isAdvancedRateLimiterRule_RuleSpecifier `protobuf_oneof:"rule_specifier"`
 	// Name of the rule. The name is unique within the ARL profile. 1-50 characters long.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Determines the priority in case there are several matched rules.
@@ -315,12 +320,7 @@ type AdvancedRateLimiterRule struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// This allows you to evaluate backend capabilities and find the optimum limit values.
 	// Requests will not be blocked in this mode.
-	DryRun bool `protobuf:"varint,4,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
-	// Types that are valid to be assigned to RuleSpecifier:
-	//
-	//	*AdvancedRateLimiterRule_StaticQuota_
-	//	*AdvancedRateLimiterRule_DynamicQuota_
-	RuleSpecifier isAdvancedRateLimiterRule_RuleSpecifier `protobuf_oneof:"rule_specifier"`
+	DryRun        bool `protobuf:"varint,4,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -355,6 +355,31 @@ func (*AdvancedRateLimiterRule) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_limiter_profile_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *AdvancedRateLimiterRule) GetRuleSpecifier() isAdvancedRateLimiterRule_RuleSpecifier {
+	if x != nil {
+		return x.RuleSpecifier
+	}
+	return nil
+}
+
+func (x *AdvancedRateLimiterRule) GetStaticQuota() *AdvancedRateLimiterRule_StaticQuota {
+	if x != nil {
+		if x, ok := x.RuleSpecifier.(*AdvancedRateLimiterRule_StaticQuota_); ok {
+			return x.StaticQuota
+		}
+	}
+	return nil
+}
+
+func (x *AdvancedRateLimiterRule) GetDynamicQuota() *AdvancedRateLimiterRule_DynamicQuota {
+	if x != nil {
+		if x, ok := x.RuleSpecifier.(*AdvancedRateLimiterRule_DynamicQuota_); ok {
+			return x.DynamicQuota
+		}
+	}
+	return nil
+}
+
 func (x *AdvancedRateLimiterRule) GetName() string {
 	if x != nil {
 		return x.Name
@@ -381,31 +406,6 @@ func (x *AdvancedRateLimiterRule) GetDryRun() bool {
 		return x.DryRun
 	}
 	return false
-}
-
-func (x *AdvancedRateLimiterRule) GetRuleSpecifier() isAdvancedRateLimiterRule_RuleSpecifier {
-	if x != nil {
-		return x.RuleSpecifier
-	}
-	return nil
-}
-
-func (x *AdvancedRateLimiterRule) GetStaticQuota() *AdvancedRateLimiterRule_StaticQuota {
-	if x != nil {
-		if x, ok := x.RuleSpecifier.(*AdvancedRateLimiterRule_StaticQuota_); ok {
-			return x.StaticQuota
-		}
-	}
-	return nil
-}
-
-func (x *AdvancedRateLimiterRule) GetDynamicQuota() *AdvancedRateLimiterRule_DynamicQuota {
-	if x != nil {
-		if x, ok := x.RuleSpecifier.(*AdvancedRateLimiterRule_DynamicQuota_); ok {
-			return x.DynamicQuota
-		}
-	}
-	return nil
 }
 
 type isAdvancedRateLimiterRule_RuleSpecifier interface {
@@ -796,21 +796,21 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"\bcloud_id\x18\t \x01(\tR\acloudId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"\xc7\x12\n" +
-	"\x17AdvancedRateLimiterRule\x12>\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"\xd3\x12\n" +
+	"\x17AdvancedRateLimiterRule\x12\x80\x01\n" +
+	"\fstatic_quota\x18\x05 \x01(\v2[.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuotaH\x00R\vstaticQuota\x12\x83\x01\n" +
+	"\rdynamic_quota\x18\x06 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuotaH\x00R\fdynamicQuota\x12>\n" +
 	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12(\n" +
 	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x17\n" +
-	"\adry_run\x18\x04 \x01(\bR\x06dryRun\x12\x80\x01\n" +
-	"\fstatic_quota\x18\x05 \x01(\v2[.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuotaH\x00R\vstaticQuota\x12\x83\x01\n" +
-	"\rdynamic_quota\x18\x06 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuotaH\x00R\fdynamicQuota\x1a\xc9\x02\n" +
-	"\vStaticQuota\x12n\n" +
-	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionR\x06action\x12I\n" +
+	"\adry_run\x18\x04 \x01(\bR\x06dryRun\x1a\xcf\x02\n" +
+	"\vStaticQuota\x12t\n" +
+	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\x12)\n" +
 	"\x05limit\x18\x03 \x01(\x03B\x13\xfa\xc71\x0f1-9999999999999R\x05limit\x12T\n" +
-	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x1a\xe2\v\n" +
-	"\fDynamicQuota\x12n\n" +
-	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionR\x06action\x12I\n" +
+	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x1a\xe8\v\n" +
+	"\fDynamicQuota\x12t\n" +
+	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\x12)\n" +
 	"\x05limit\x18\x03 \x01(\x03B\x13\xfa\xc71\x0f1-9999999999999R\x05limit\x12T\n" +
 	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x12\x9e\x01\n" +

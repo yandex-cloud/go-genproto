@@ -141,12 +141,12 @@ var File_yandex_cloud_cic_v1_common_lag_allocation_settings_proto protoreflect.F
 
 const file_yandex_cloud_cic_v1_common_lag_allocation_settings_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x12\x1ayandex.cloud.cic.v1.common\x1a)yandex/cloud/cic/v1/common/lag_info.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
-	"\x1cLagAllocationSettingsRequest\x12)\n" +
-	"\blag_size\x18\r \x01(\x03B\f\xe8\xc71\x01\xfa\xc71\x041-10H\x00R\alagSizeB\x05\n" +
-	"\x03lagJ\x04\b\x0e\x10\x0f\"W\n" +
+	"8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x12\x1ayandex.cloud.cic.v1.common\x1a)yandex/cloud/cic/v1/common/lag_info.proto\x1a\x1dyandex/cloud/validation.proto\"R\n" +
+	"\x1cLagAllocationSettingsRequest\x12%\n" +
+	"\blag_size\x18\r \x01(\x03B\b\xfa\xc71\x041-10H\x00R\alagSizeB\x05\n" +
+	"\x03lagJ\x04\b\x01\x10\r\"]\n" +
 	"\x15LagAllocationSettings\x12>\n" +
-	"\blag_info\x18\x0e \x01(\v2#.yandex.cloud.cic.v1.common.LagInfoR\alagInfoBd\n" +
+	"\blag_info\x18\x0e \x01(\v2#.yandex.cloud.cic.v1.common.LagInfoR\alagInfoJ\x04\b\x01\x10\x0eBd\n" +
 	"\x1eyandex.cloud.api.cic.v1.commonZBgithub.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1/common;cicb\x06proto3"
 
 var (

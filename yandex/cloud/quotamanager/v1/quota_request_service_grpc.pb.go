@@ -21,9 +21,9 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	QuotaRequestService_Get_FullMethodName            = "/yandex.cloud.quotamanager.v1.QuotaRequestService/Get"
+	QuotaRequestService_List_FullMethodName           = "/yandex.cloud.quotamanager.v1.QuotaRequestService/List"
 	QuotaRequestService_Create_FullMethodName         = "/yandex.cloud.quotamanager.v1.QuotaRequestService/Create"
 	QuotaRequestService_Cancel_FullMethodName         = "/yandex.cloud.quotamanager.v1.QuotaRequestService/Cancel"
-	QuotaRequestService_List_FullMethodName           = "/yandex.cloud.quotamanager.v1.QuotaRequestService/List"
 	QuotaRequestService_ListOperations_FullMethodName = "/yandex.cloud.quotamanager.v1.QuotaRequestService/ListOperations"
 )
 
@@ -35,12 +35,12 @@ const (
 type QuotaRequestServiceClient interface {
 	// Returns the specified quota request.
 	Get(ctx context.Context, in *GetQuotaRequestRequest, opts ...grpc.CallOption) (*QuotaRequest, error)
+	// Retrieves the list of quota requests in the specified resource.
+	List(ctx context.Context, in *ListQuotaRequestRequest, opts ...grpc.CallOption) (*ListQuotaRequestResponse, error)
 	// Creates a quota request in the specified resource.
 	Create(ctx context.Context, in *CreateQuotaRequestRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Cancels quotas in the specified quota request.
 	Cancel(ctx context.Context, in *CancelQuotaRequestRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves the list of quota requests in the specified resource.
-	List(ctx context.Context, in *ListQuotaRequestRequest, opts ...grpc.CallOption) (*ListQuotaRequestResponse, error)
 	// Lists operations for the specified quota request.
 	ListOperations(ctx context.Context, in *ListQuotaRequestOperationsRequest, opts ...grpc.CallOption) (*ListQuotaRequestOperationsResponse, error)
 }
@@ -57,6 +57,16 @@ func (c *quotaRequestServiceClient) Get(ctx context.Context, in *GetQuotaRequest
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(QuotaRequest)
 	err := c.cc.Invoke(ctx, QuotaRequestService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *quotaRequestServiceClient) List(ctx context.Context, in *ListQuotaRequestRequest, opts ...grpc.CallOption) (*ListQuotaRequestResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListQuotaRequestResponse)
+	err := c.cc.Invoke(ctx, QuotaRequestService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,16 +93,6 @@ func (c *quotaRequestServiceClient) Cancel(ctx context.Context, in *CancelQuotaR
 	return out, nil
 }
 
-func (c *quotaRequestServiceClient) List(ctx context.Context, in *ListQuotaRequestRequest, opts ...grpc.CallOption) (*ListQuotaRequestResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListQuotaRequestResponse)
-	err := c.cc.Invoke(ctx, QuotaRequestService_List_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *quotaRequestServiceClient) ListOperations(ctx context.Context, in *ListQuotaRequestOperationsRequest, opts ...grpc.CallOption) (*ListQuotaRequestOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListQuotaRequestOperationsResponse)
@@ -111,12 +111,12 @@ func (c *quotaRequestServiceClient) ListOperations(ctx context.Context, in *List
 type QuotaRequestServiceServer interface {
 	// Returns the specified quota request.
 	Get(context.Context, *GetQuotaRequestRequest) (*QuotaRequest, error)
+	// Retrieves the list of quota requests in the specified resource.
+	List(context.Context, *ListQuotaRequestRequest) (*ListQuotaRequestResponse, error)
 	// Creates a quota request in the specified resource.
 	Create(context.Context, *CreateQuotaRequestRequest) (*operation.Operation, error)
 	// Cancels quotas in the specified quota request.
 	Cancel(context.Context, *CancelQuotaRequestRequest) (*operation.Operation, error)
-	// Retrieves the list of quota requests in the specified resource.
-	List(context.Context, *ListQuotaRequestRequest) (*ListQuotaRequestResponse, error)
 	// Lists operations for the specified quota request.
 	ListOperations(context.Context, *ListQuotaRequestOperationsRequest) (*ListQuotaRequestOperationsResponse, error)
 }
@@ -131,14 +131,14 @@ type UnimplementedQuotaRequestServiceServer struct{}
 func (UnimplementedQuotaRequestServiceServer) Get(context.Context, *GetQuotaRequestRequest) (*QuotaRequest, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
 }
+func (UnimplementedQuotaRequestServiceServer) List(context.Context, *ListQuotaRequestRequest) (*ListQuotaRequestResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
+}
 func (UnimplementedQuotaRequestServiceServer) Create(context.Context, *CreateQuotaRequestRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedQuotaRequestServiceServer) Cancel(context.Context, *CancelQuotaRequestRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Cancel not implemented")
-}
-func (UnimplementedQuotaRequestServiceServer) List(context.Context, *ListQuotaRequestRequest) (*ListQuotaRequestResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedQuotaRequestServiceServer) ListOperations(context.Context, *ListQuotaRequestOperationsRequest) (*ListQuotaRequestOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
@@ -181,6 +181,24 @@ func _QuotaRequestService_Get_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _QuotaRequestService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListQuotaRequestRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuotaRequestServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuotaRequestService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuotaRequestServiceServer).List(ctx, req.(*ListQuotaRequestRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _QuotaRequestService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateQuotaRequestRequest)
 	if err := dec(in); err != nil {
@@ -217,24 +235,6 @@ func _QuotaRequestService_Cancel_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _QuotaRequestService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListQuotaRequestRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QuotaRequestServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: QuotaRequestService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QuotaRequestServiceServer).List(ctx, req.(*ListQuotaRequestRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _QuotaRequestService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListQuotaRequestOperationsRequest)
 	if err := dec(in); err != nil {
@@ -265,16 +265,16 @@ var QuotaRequestService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _QuotaRequestService_Get_Handler,
 		},
 		{
+			MethodName: "List",
+			Handler:    _QuotaRequestService_List_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _QuotaRequestService_Create_Handler,
 		},
 		{
 			MethodName: "Cancel",
 			Handler:    _QuotaRequestService_Cancel_Handler,
-		},
-		{
-			MethodName: "List",
-			Handler:    _QuotaRequestService_List_Handler,
 		},
 		{
 			MethodName: "ListOperations",

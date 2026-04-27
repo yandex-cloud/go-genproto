@@ -24,6 +24,12 @@ func (m *CreateWafProfileRequest) SetRuleSet(v CreateWafProfileRequest_RuleSet) 
 	m.RuleSet = v
 }
 
+func (m *CreateWafProfileRequest) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
+	m.RuleSet = &CreateWafProfileRequest_CoreRuleSet{
+		CoreRuleSet: v,
+	}
+}
+
 func (m *CreateWafProfileRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -48,12 +54,6 @@ func (m *CreateWafProfileRequest) SetExclusionRules(v []*WafProfileExclusionRule
 	m.ExclusionRules = v
 }
 
-func (m *CreateWafProfileRequest) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
-	m.RuleSet = &CreateWafProfileRequest_CoreRuleSet{
-		CoreRuleSet: v,
-	}
-}
-
 func (m *CreateWafProfileRequest) SetAnalyzeRequestBody(v *WafProfile_AnalyzeRequestBody) {
 	m.AnalyzeRequestBody = v
 }
@@ -74,6 +74,12 @@ type UpdateWafProfileRequest_RuleSet = isUpdateWafProfileRequest_RuleSet
 
 func (m *UpdateWafProfileRequest) SetRuleSet(v UpdateWafProfileRequest_RuleSet) {
 	m.RuleSet = v
+}
+
+func (m *UpdateWafProfileRequest) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
+	m.RuleSet = &UpdateWafProfileRequest_CoreRuleSet{
+		CoreRuleSet: v,
+	}
 }
 
 func (m *UpdateWafProfileRequest) SetWafProfileId(v string) {
@@ -102,12 +108,6 @@ func (m *UpdateWafProfileRequest) SetRules(v []*WafProfileRule) {
 
 func (m *UpdateWafProfileRequest) SetExclusionRules(v []*WafProfileExclusionRule) {
 	m.ExclusionRules = v
-}
-
-func (m *UpdateWafProfileRequest) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
-	m.RuleSet = &UpdateWafProfileRequest_CoreRuleSet{
-		CoreRuleSet: v,
-	}
 }
 
 func (m *UpdateWafProfileRequest) SetAnalyzeRequestBody(v *WafProfile_AnalyzeRequestBody) {

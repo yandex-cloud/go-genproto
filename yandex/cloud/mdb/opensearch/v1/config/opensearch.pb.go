@@ -201,9 +201,9 @@ var File_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa5\x03\n" +
-	"\x11OpenSearchConfig2\x12Y\n" +
-	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x10max_clause_count\x122\n" +
+	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa1\x03\n" +
+	"\x11OpenSearchConfig2\x12U\n" +
+	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b32-32768R\x10max_clause_count\x122\n" +
 	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12]\n" +
 	"\x12search_max_buckets\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12search_max_buckets\x12:\n" +
 	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelist\x12`\n" +

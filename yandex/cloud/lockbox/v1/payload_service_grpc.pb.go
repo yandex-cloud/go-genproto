@@ -30,7 +30,6 @@ const (
 // Set of methods to access payload of secrets.
 type PayloadServiceClient interface {
 	// Returns the payload of the specified secret.
-	//
 	// To get the list of all available secrets, make a [SecretService.List] request.
 	Get(ctx context.Context, in *GetPayloadRequest, opts ...grpc.CallOption) (*Payload, error)
 	GetEx(ctx context.Context, in *GetExRequest, opts ...grpc.CallOption) (*GetExResponse, error)
@@ -71,7 +70,6 @@ func (c *payloadServiceClient) GetEx(ctx context.Context, in *GetExRequest, opts
 // Set of methods to access payload of secrets.
 type PayloadServiceServer interface {
 	// Returns the payload of the specified secret.
-	//
 	// To get the list of all available secrets, make a [SecretService.List] request.
 	Get(context.Context, *GetPayloadRequest) (*Payload, error)
 	GetEx(context.Context, *GetExRequest) (*GetExResponse, error)

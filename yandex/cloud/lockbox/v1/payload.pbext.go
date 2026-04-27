@@ -16,10 +16,6 @@ func (m *Payload_Entry) SetValue(v Payload_Entry_Value) {
 	m.Value = v
 }
 
-func (m *Payload_Entry) SetKey(v string) {
-	m.Key = v
-}
-
 func (m *Payload_Entry) SetTextValue(v string) {
 	m.Value = &Payload_Entry_TextValue{
 		TextValue: v,
@@ -30,4 +26,8 @@ func (m *Payload_Entry) SetBinaryValue(v []byte) {
 	m.Value = &Payload_Entry_BinaryValue{
 		BinaryValue: v,
 	}
+}
+
+func (m *Payload_Entry) SetKey(v string) {
+	m.Key = v
 }

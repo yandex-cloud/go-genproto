@@ -32,15 +32,15 @@ const (
 
 type PayloadEntryChange struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Non-confidential key of the entry.
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// Confidential value of the entry.
 	//
 	// Types that are valid to be assigned to Value:
 	//
 	//	*PayloadEntryChange_TextValue
 	//	*PayloadEntryChange_BinaryValue
-	Value         isPayloadEntryChange_Value `protobuf_oneof:"value"`
+	Value isPayloadEntryChange_Value `protobuf_oneof:"value"`
+	// Non-confidential key of the entry.
+	Key           string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -75,13 +75,6 @@ func (*PayloadEntryChange) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PayloadEntryChange) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
 func (x *PayloadEntryChange) GetValue() isPayloadEntryChange_Value {
 	if x != nil {
 		return x.Value
@@ -107,6 +100,13 @@ func (x *PayloadEntryChange) GetBinaryValue() []byte {
 	return nil
 }
 
+func (x *PayloadEntryChange) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
 type isPayloadEntryChange_Value interface {
 	isPayloadEntryChange_Value()
 }
@@ -128,7 +128,6 @@ func (*PayloadEntryChange_BinaryValue) isPayloadEntryChange_Value() {}
 type GetSecretRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the secret to return.
-	//
 	// To get a secret ID make a [List] request.
 	SecretId      string `protobuf:"bytes,1,opt,name=secret_id,json=secretId,proto3" json:"secret_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -299,6 +298,10 @@ func (x *ListSecretsResponse) GetNextPageToken() string {
 
 type CreateSecretRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to PayloadSpecification:
+	//
+	//	*CreateSecretRequest_PasswordPayloadSpecification
+	PayloadSpecification isCreateSecretRequest_PayloadSpecification `protobuf_oneof:"payload_specification"`
 	// ID of the folder to create a secret in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the secret.
@@ -316,10 +319,6 @@ type CreateSecretRequest struct {
 	VersionPayloadEntries []*PayloadEntryChange `protobuf:"bytes,7,rep,name=version_payload_entries,json=versionPayloadEntries,proto3" json:"version_payload_entries,omitempty"`
 	// Flag that inhibits deletion of the secret.
 	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Types that are valid to be assigned to PayloadSpecification:
-	//
-	//	*CreateSecretRequest_PasswordPayloadSpecification
-	PayloadSpecification isCreateSecretRequest_PayloadSpecification `protobuf_oneof:"payload_specification"`
 	// If true: a version will be created with either version_payload_entries or password_payload_specification (one is required).
 	// If false: a version is NOT created, no matter version_payload_entries or password_payload_specification.
 	// Default: a version is created IF either version_payload_entries or password_payload_specification are specified.
@@ -357,6 +356,22 @@ func (x *CreateSecretRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateSecretRequest.ProtoReflect.Descriptor instead.
 func (*CreateSecretRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateSecretRequest) GetPayloadSpecification() isCreateSecretRequest_PayloadSpecification {
+	if x != nil {
+		return x.PayloadSpecification
+	}
+	return nil
+}
+
+func (x *CreateSecretRequest) GetPasswordPayloadSpecification() *PasswordPayloadSpecification {
+	if x != nil {
+		if x, ok := x.PayloadSpecification.(*CreateSecretRequest_PasswordPayloadSpecification); ok {
+			return x.PasswordPayloadSpecification
+		}
+	}
+	return nil
 }
 
 func (x *CreateSecretRequest) GetFolderId() string {
@@ -413,22 +428,6 @@ func (x *CreateSecretRequest) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-func (x *CreateSecretRequest) GetPayloadSpecification() isCreateSecretRequest_PayloadSpecification {
-	if x != nil {
-		return x.PayloadSpecification
-	}
-	return nil
-}
-
-func (x *CreateSecretRequest) GetPasswordPayloadSpecification() *PasswordPayloadSpecification {
-	if x != nil {
-		if x, ok := x.PayloadSpecification.(*CreateSecretRequest_PasswordPayloadSpecification); ok {
-			return x.PasswordPayloadSpecification
-		}
-	}
-	return nil
 }
 
 func (x *CreateSecretRequest) GetCreateVersion() *wrapperspb.BoolValue {
@@ -505,6 +504,10 @@ func (x *CreateSecretMetadata) GetVersionId() string {
 
 type UpdateSecretRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to PayloadSpecification:
+	//
+	//	*UpdateSecretRequest_PasswordPayloadSpecification
+	PayloadSpecification isUpdateSecretRequest_PayloadSpecification `protobuf_oneof:"payload_specification"`
 	// ID of the secret to update.
 	SecretId string `protobuf:"bytes,1,opt,name=secret_id,json=secretId,proto3" json:"secret_id,omitempty"`
 	// Field mask that specifies which attributes of the secret are going to be updated.
@@ -517,12 +520,8 @@ type UpdateSecretRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Flag that inhibits deletion of the secret.
 	DeletionProtection bool `protobuf:"varint,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Types that are valid to be assigned to PayloadSpecification:
-	//
-	//	*UpdateSecretRequest_PasswordPayloadSpecification
-	PayloadSpecification isUpdateSecretRequest_PayloadSpecification `protobuf_oneof:"payload_specification"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UpdateSecretRequest) Reset() {
@@ -553,6 +552,22 @@ func (x *UpdateSecretRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateSecretRequest.ProtoReflect.Descriptor instead.
 func (*UpdateSecretRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateSecretRequest) GetPayloadSpecification() isUpdateSecretRequest_PayloadSpecification {
+	if x != nil {
+		return x.PayloadSpecification
+	}
+	return nil
+}
+
+func (x *UpdateSecretRequest) GetPasswordPayloadSpecification() *PasswordPayloadSpecification {
+	if x != nil {
+		if x, ok := x.PayloadSpecification.(*UpdateSecretRequest_PasswordPayloadSpecification); ok {
+			return x.PasswordPayloadSpecification
+		}
+	}
+	return nil
 }
 
 func (x *UpdateSecretRequest) GetSecretId() string {
@@ -595,22 +610,6 @@ func (x *UpdateSecretRequest) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-func (x *UpdateSecretRequest) GetPayloadSpecification() isUpdateSecretRequest_PayloadSpecification {
-	if x != nil {
-		return x.PayloadSpecification
-	}
-	return nil
-}
-
-func (x *UpdateSecretRequest) GetPasswordPayloadSpecification() *PasswordPayloadSpecification {
-	if x != nil {
-		if x, ok := x.PayloadSpecification.(*UpdateSecretRequest_PasswordPayloadSpecification); ok {
-			return x.PasswordPayloadSpecification
-		}
-	}
-	return nil
 }
 
 type isUpdateSecretRequest_PayloadSpecification interface {
@@ -1554,11 +1553,11 @@ var File_yandex_cloud_lockbox_v1_secret_service_proto protoreflect.FileDescripto
 const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\n" +
 	",yandex/cloud/lockbox/v1/secret_service.proto\x12\x17yandex.cloud.lockbox.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/lockbox/v1/secret.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xb5\x01\n" +
-	"\x12PayloadEntryChange\x126\n" +
-	"\x03key\x18\x01 \x01(\tB$\xe8\xc71\x01\xf2\xc71\x13[-_./\\\\@0-9a-zA-Z]+\x8a\xc81\x05<=256R\x03key\x12,\n" +
+	"\x12PayloadEntryChange\x12,\n" +
 	"\n" +
 	"text_value\x18\x02 \x01(\tB\v\x8a\xc81\a<=65536H\x00R\ttextValue\x120\n" +
-	"\fbinary_value\x18\x03 \x01(\fB\v\x8a\xc81\a<=65536H\x00R\vbinaryValueB\a\n" +
+	"\fbinary_value\x18\x03 \x01(\fB\v\x8a\xc81\a<=65536H\x00R\vbinaryValue\x126\n" +
+	"\x03key\x18\x01 \x01(\tB$\xe8\xc71\x01\xf2\xc71\x13[-_./\\\\@0-9a-zA-Z]+\x8a\xc81\x05<=256R\x03keyB\a\n" +
 	"\x05value\"=\n" +
 	"\x10GetSecretRequest\x12)\n" +
 	"\tsecret_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsecretId\"\x92\x01\n" +
@@ -1571,7 +1570,8 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\x13ListSecretsResponse\x129\n" +
 	"\asecrets\x18\x01 \x03(\v2\x1f.yandex.cloud.lockbox.v1.SecretR\asecrets\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xad\x06\n" +
-	"\x13CreateSecretRequest\x12)\n" +
+	"\x13CreateSecretRequest\x12}\n" +
+	"\x1epassword_payload_specification\x18\t \x01(\v25.yandex.cloud.lockbox.v1.PasswordPayloadSpecificationH\x00R\x1cpasswordPayloadSpecification\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\x04name\x12,\n" +
 	"\vdescription\x18\x03 \x01(\tB\n" +
@@ -1581,8 +1581,7 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"kms_key_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bkmsKeyId\x12:\n" +
 	"\x13version_description\x18\x06 \x01(\tB\t\x8a\xc81\x05<=256R\x12versionDescription\x12c\n" +
 	"\x17version_payload_entries\x18\a \x03(\v2+.yandex.cloud.lockbox.v1.PayloadEntryChangeR\x15versionPayloadEntries\x12/\n" +
-	"\x13deletion_protection\x18\b \x01(\bR\x12deletionProtection\x12}\n" +
-	"\x1epassword_payload_specification\x18\t \x01(\v25.yandex.cloud.lockbox.v1.PasswordPayloadSpecificationH\x00R\x1cpasswordPayloadSpecification\x12A\n" +
+	"\x13deletion_protection\x18\b \x01(\bR\x12deletionProtection\x12A\n" +
 	"\x0ecreate_version\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\rcreateVersion\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -1593,7 +1592,8 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\tsecret_id\x18\x01 \x01(\tR\bsecretId\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x02 \x01(\tR\tversionId\"\xe4\x04\n" +
-	"\x13UpdateSecretRequest\x12)\n" +
+	"\x13UpdateSecretRequest\x12}\n" +
+	"\x1epassword_payload_specification\x18\a \x01(\v25.yandex.cloud.lockbox.v1.PasswordPayloadSpecificationH\x00R\x1cpasswordPayloadSpecification\x12)\n" +
 	"\tsecret_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsecretId\x12A\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\n" +
 	"updateMask\x12\x1d\n" +
@@ -1601,8 +1601,7 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x12\x8d\x01\n" +
 	"\x06labels\x18\x05 \x03(\v28.yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12/\n" +
-	"\x13deletion_protection\x18\x06 \x01(\bR\x12deletionProtection\x12}\n" +
-	"\x1epassword_payload_specification\x18\a \x01(\v25.yandex.cloud.lockbox.v1.PasswordPayloadSpecificationH\x00R\x1cpasswordPayloadSpecification\x1a9\n" +
+	"\x13deletion_protection\x18\x06 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x17\n" +
@@ -1755,13 +1754,13 @@ var file_yandex_cloud_lockbox_v1_secret_service_proto_goTypes = []any{
 }
 var file_yandex_cloud_lockbox_v1_secret_service_proto_depIdxs = []int32{
 	26, // 0: yandex.cloud.lockbox.v1.ListSecretsResponse.secrets:type_name -> yandex.cloud.lockbox.v1.Secret
-	24, // 1: yandex.cloud.lockbox.v1.CreateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
-	0,  // 2: yandex.cloud.lockbox.v1.CreateSecretRequest.version_payload_entries:type_name -> yandex.cloud.lockbox.v1.PayloadEntryChange
-	27, // 3: yandex.cloud.lockbox.v1.CreateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	27, // 1: yandex.cloud.lockbox.v1.CreateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	24, // 2: yandex.cloud.lockbox.v1.CreateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
+	0,  // 3: yandex.cloud.lockbox.v1.CreateSecretRequest.version_payload_entries:type_name -> yandex.cloud.lockbox.v1.PayloadEntryChange
 	28, // 4: yandex.cloud.lockbox.v1.CreateSecretRequest.create_version:type_name -> google.protobuf.BoolValue
-	29, // 5: yandex.cloud.lockbox.v1.UpdateSecretRequest.update_mask:type_name -> google.protobuf.FieldMask
-	25, // 6: yandex.cloud.lockbox.v1.UpdateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
-	27, // 7: yandex.cloud.lockbox.v1.UpdateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	27, // 5: yandex.cloud.lockbox.v1.UpdateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	29, // 6: yandex.cloud.lockbox.v1.UpdateSecretRequest.update_mask:type_name -> google.protobuf.FieldMask
+	25, // 7: yandex.cloud.lockbox.v1.UpdateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
 	0,  // 8: yandex.cloud.lockbox.v1.AddVersionRequest.payload_entries:type_name -> yandex.cloud.lockbox.v1.PayloadEntryChange
 	30, // 9: yandex.cloud.lockbox.v1.ListVersionsResponse.versions:type_name -> yandex.cloud.lockbox.v1.Version
 	31, // 10: yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest.pending_period:type_name -> google.protobuf.Duration

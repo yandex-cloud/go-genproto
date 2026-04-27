@@ -323,7 +323,7 @@ var File_yandex_cloud_cic_v1_public_connection_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_public_connection_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/cic/v1/public_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\xdf\t\n" +
+	"+yandex/cloud/cic/v1/public_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\xdf\t\n" +
 	"\x10PublicConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +

@@ -30,7 +30,6 @@ const (
 // A set of methods for managing Partner resources.
 type PartnerServiceClient interface {
 	// Returns the specified Partner resource.
-	//
 	// To get the list of available Partner resources, make a [List] request.
 	Get(ctx context.Context, in *GetPartnerRequest, opts ...grpc.CallOption) (*Partner, error)
 	// Retrieves the list of Partner resources in the specified folder.
@@ -72,7 +71,6 @@ func (c *partnerServiceClient) List(ctx context.Context, in *ListPartnersRequest
 // A set of methods for managing Partner resources.
 type PartnerServiceServer interface {
 	// Returns the specified Partner resource.
-	//
 	// To get the list of available Partner resources, make a [List] request.
 	Get(context.Context, *GetPartnerRequest) (*Partner, error)
 	// Retrieves the list of Partner resources in the specified folder.

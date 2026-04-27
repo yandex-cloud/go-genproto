@@ -214,10 +214,6 @@ func (m *Trail_DataEventsFiltering) SetServiceSpecificRules(v Trail_DataEventsFi
 	m.ServiceSpecificRules = v
 }
 
-func (m *Trail_DataEventsFiltering) SetService(v string) {
-	m.Service = v
-}
-
 func (m *Trail_DataEventsFiltering) SetIncludedEvents(v *Trail_EventTypes) {
 	m.AdditionalRules = &Trail_DataEventsFiltering_IncludedEvents{
 		IncludedEvents: v,
@@ -234,6 +230,10 @@ func (m *Trail_DataEventsFiltering) SetDnsFilter(v *Trail_DnsDataEventsFilter) {
 	m.ServiceSpecificRules = &Trail_DataEventsFiltering_DnsFilter{
 		DnsFilter: v,
 	}
+}
+
+func (m *Trail_DataEventsFiltering) SetService(v string) {
+	m.Service = v
 }
 
 func (m *Trail_DataEventsFiltering) SetResourceScopes(v []*Trail_Resource) {

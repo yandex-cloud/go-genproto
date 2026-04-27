@@ -42,8 +42,7 @@ type AsymmetricEncryptionKeyServiceClient interface {
 	// Creates an asymmetric KMS key in the specified folder.
 	Create(ctx context.Context, in *CreateAsymmetricEncryptionKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified asymmetric KMS key.
-	//
-	//	To get the list of available asymmetric KMS keys, make a [SymmetricKeyService.List] request.
+	// To get the list of available asymmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(ctx context.Context, in *GetAsymmetricEncryptionKeyRequest, opts ...grpc.CallOption) (*AsymmetricEncryptionKey, error)
 	// Returns the list of asymmetric KMS keys in the specified folder.
 	List(ctx context.Context, in *ListAsymmetricEncryptionKeysRequest, opts ...grpc.CallOption) (*ListAsymmetricEncryptionKeysResponse, error)
@@ -51,7 +50,6 @@ type AsymmetricEncryptionKeyServiceClient interface {
 	Update(ctx context.Context, in *UpdateAsymmetricEncryptionKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified asymmetric KMS key. This action also automatically schedules
 	// the destruction of all of the key's versions in 72 hours.
-	//
 	// The key and its versions appear absent in [AsymmetricEncryptionKeyService.Get] and [AsymmetricEncryptionKeyService.List]
 	// requests, but can be restored within 72 hours with a request to tech support.
 	Delete(ctx context.Context, in *DeleteAsymmetricEncryptionKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -173,8 +171,7 @@ type AsymmetricEncryptionKeyServiceServer interface {
 	// Creates an asymmetric KMS key in the specified folder.
 	Create(context.Context, *CreateAsymmetricEncryptionKeyRequest) (*operation.Operation, error)
 	// Returns the specified asymmetric KMS key.
-	//
-	//	To get the list of available asymmetric KMS keys, make a [SymmetricKeyService.List] request.
+	// To get the list of available asymmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(context.Context, *GetAsymmetricEncryptionKeyRequest) (*AsymmetricEncryptionKey, error)
 	// Returns the list of asymmetric KMS keys in the specified folder.
 	List(context.Context, *ListAsymmetricEncryptionKeysRequest) (*ListAsymmetricEncryptionKeysResponse, error)
@@ -182,7 +179,6 @@ type AsymmetricEncryptionKeyServiceServer interface {
 	Update(context.Context, *UpdateAsymmetricEncryptionKeyRequest) (*operation.Operation, error)
 	// Deletes the specified asymmetric KMS key. This action also automatically schedules
 	// the destruction of all of the key's versions in 72 hours.
-	//
 	// The key and its versions appear absent in [AsymmetricEncryptionKeyService.Get] and [AsymmetricEncryptionKeyService.List]
 	// requests, but can be restored within 72 hours with a request to tech support.
 	Delete(context.Context, *DeleteAsymmetricEncryptionKeyRequest) (*operation.Operation, error)

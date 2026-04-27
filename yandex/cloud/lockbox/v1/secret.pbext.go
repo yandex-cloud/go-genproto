@@ -13,6 +13,12 @@ func (m *Secret) SetPayloadSpecification(v Secret_PayloadSpecification) {
 	m.PayloadSpecification = v
 }
 
+func (m *Secret) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &Secret_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
+}
+
 func (m *Secret) SetId(v string) {
 	m.Id = v
 }
@@ -53,16 +59,16 @@ func (m *Secret) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
-func (m *Secret) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
-	m.PayloadSpecification = &Secret_PasswordPayloadSpecification{
-		PasswordPayloadSpecification: v,
-	}
-}
-
 type Version_PayloadSpecification = isVersion_PayloadSpecification
 
 func (m *Version) SetPayloadSpecification(v Version_PayloadSpecification) {
 	m.PayloadSpecification = v
+}
+
+func (m *Version) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
+	m.PayloadSpecification = &Version_PasswordPayloadSpecification{
+		PasswordPayloadSpecification: v,
+	}
 }
 
 func (m *Version) SetId(v string) {
@@ -91,12 +97,6 @@ func (m *Version) SetStatus(v Version_Status) {
 
 func (m *Version) SetPayloadEntryKeys(v []string) {
 	m.PayloadEntryKeys = v
-}
-
-func (m *Version) SetPasswordPayloadSpecification(v *PasswordPayloadSpecification) {
-	m.PayloadSpecification = &Version_PasswordPayloadSpecification{
-		PasswordPayloadSpecification: v,
-	}
 }
 
 func (m *PasswordPayloadSpecification) SetPasswordKey(v string) {

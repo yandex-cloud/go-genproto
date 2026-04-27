@@ -78,7 +78,6 @@ func (CertificateView) EnumDescriptor() ([]byte, []int) {
 type GetCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the certificate to return.
-	//
 	// To get the ID of a certificate use a [CertificateService.List] request.
 	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
 	// The output type of the certificate.
@@ -395,8 +394,6 @@ type CreateCertificateRequest struct {
 	// Name of the certificate.
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the certificate.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Labels for the certificate as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// PEM-encoded certificate content of the certificate.
@@ -405,6 +402,8 @@ type CreateCertificateRequest struct {
 	Chain string `protobuf:"bytes,6,opt,name=chain,proto3" json:"chain,omitempty"`
 	// PEM-encoded private key content of the certificate.
 	PrivateKey string `protobuf:"bytes,7,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
+	// Description of the certificate.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Flag that protects deletion of the certificate
 	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -455,13 +454,6 @@ func (x *CreateCertificateRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateCertificateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
 func (x *CreateCertificateRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
@@ -490,6 +482,13 @@ func (x *CreateCertificateRequest) GetPrivateKey() string {
 	return ""
 }
 
+func (x *CreateCertificateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *CreateCertificateRequest) GetDeletionProtection() bool {
 	if x != nil {
 		return x.DeletionProtection
@@ -497,28 +496,40 @@ func (x *CreateCertificateRequest) GetDeletionProtection() bool {
 	return false
 }
 
-type CreateCertificateMetadata struct {
+type RequestNewCertificateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the certificate being created.
-	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// ID of the folder to create a certificate in.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the certificate.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Labels for the certificate as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Fully qualified domain names of the certificate.
+	Domains []string `protobuf:"bytes,5,rep,name=domains,proto3" json:"domains,omitempty"`
+	// Type of the domain validation challenge.
+	ChallengeType ChallengeType `protobuf:"varint,6,opt,name=challenge_type,json=challengeType,proto3,enum=yandex.cloud.certificatemanager.v1.ChallengeType" json:"challenge_type,omitempty"`
+	// Description of the certificate.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Flag that protects deletion of the certificate
+	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
-func (x *CreateCertificateMetadata) Reset() {
-	*x = CreateCertificateMetadata{}
+func (x *RequestNewCertificateRequest) Reset() {
+	*x = RequestNewCertificateRequest{}
 	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateCertificateMetadata) String() string {
+func (x *RequestNewCertificateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateCertificateMetadata) ProtoMessage() {}
+func (*RequestNewCertificateRequest) ProtoMessage() {}
 
-func (x *CreateCertificateMetadata) ProtoReflect() protoreflect.Message {
+func (x *RequestNewCertificateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -530,16 +541,58 @@ func (x *CreateCertificateMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateCertificateMetadata.ProtoReflect.Descriptor instead.
-func (*CreateCertificateMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use RequestNewCertificateRequest.ProtoReflect.Descriptor instead.
+func (*RequestNewCertificateRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *CreateCertificateMetadata) GetCertificateId() string {
+func (x *RequestNewCertificateRequest) GetFolderId() string {
 	if x != nil {
-		return x.CertificateId
+		return x.FolderId
 	}
 	return ""
+}
+
+func (x *RequestNewCertificateRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RequestNewCertificateRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *RequestNewCertificateRequest) GetDomains() []string {
+	if x != nil {
+		return x.Domains
+	}
+	return nil
+}
+
+func (x *RequestNewCertificateRequest) GetChallengeType() ChallengeType {
+	if x != nil {
+		return x.ChallengeType
+	}
+	return ChallengeType_CHALLENGE_TYPE_UNSPECIFIED
+}
+
+func (x *RequestNewCertificateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *RequestNewCertificateRequest) GetDeletionProtection() bool {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return false
 }
 
 type UpdateCertificateRequest struct {
@@ -551,8 +604,6 @@ type UpdateCertificateRequest struct {
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the certificate.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// New description for the certificate.
-	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// New labels for the certificate as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New PEM-encoded certificate content for the certificate. Used only for imported certificates.
@@ -561,6 +612,8 @@ type UpdateCertificateRequest struct {
 	Chain string `protobuf:"bytes,7,opt,name=chain,proto3" json:"chain,omitempty"`
 	// New PEM-encoded private key content for the certificate. Used only for imported certificates.
 	PrivateKey string `protobuf:"bytes,8,opt,name=private_key,json=privateKey,proto3" json:"private_key,omitempty"`
+	// New description for the certificate.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Flag that protects deletion of the certificate
 	DeletionProtection bool `protobuf:"varint,9,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -618,13 +671,6 @@ func (x *UpdateCertificateRequest) GetName() string {
 	return ""
 }
 
-func (x *UpdateCertificateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
 func (x *UpdateCertificateRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
@@ -653,56 +699,18 @@ func (x *UpdateCertificateRequest) GetPrivateKey() string {
 	return ""
 }
 
+func (x *UpdateCertificateRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *UpdateCertificateRequest) GetDeletionProtection() bool {
 	if x != nil {
 		return x.DeletionProtection
 	}
 	return false
-}
-
-type UpdateCertificateMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the certificate being updated.
-	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateCertificateMetadata) Reset() {
-	*x = UpdateCertificateMetadata{}
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateCertificateMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateCertificateMetadata) ProtoMessage() {}
-
-func (x *UpdateCertificateMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateCertificateMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateCertificateMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *UpdateCertificateMetadata) GetCertificateId() string {
-	if x != nil {
-		return x.CertificateId
-	}
-	return ""
 }
 
 type DeleteCertificateRequest struct {
@@ -715,7 +723,7 @@ type DeleteCertificateRequest struct {
 
 func (x *DeleteCertificateRequest) Reset() {
 	*x = DeleteCertificateRequest{}
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +735,7 @@ func (x *DeleteCertificateRequest) String() string {
 func (*DeleteCertificateRequest) ProtoMessage() {}
 
 func (x *DeleteCertificateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,10 +748,100 @@ func (x *DeleteCertificateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCertificateRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCertificateRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteCertificateRequest) GetCertificateId() string {
+	if x != nil {
+		return x.CertificateId
+	}
+	return ""
+}
+
+type CreateCertificateMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the certificate being created.
+	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateCertificateMetadata) Reset() {
+	*x = CreateCertificateMetadata{}
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateCertificateMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCertificateMetadata) ProtoMessage() {}
+
+func (x *CreateCertificateMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCertificateMetadata.ProtoReflect.Descriptor instead.
+func (*CreateCertificateMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CreateCertificateMetadata) GetCertificateId() string {
+	if x != nil {
+		return x.CertificateId
+	}
+	return ""
+}
+
+type UpdateCertificateMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the certificate being updated.
+	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateCertificateMetadata) Reset() {
+	*x = UpdateCertificateMetadata{}
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateCertificateMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCertificateMetadata) ProtoMessage() {}
+
+func (x *UpdateCertificateMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCertificateMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateCertificateMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *UpdateCertificateMetadata) GetCertificateId() string {
 	if x != nil {
 		return x.CertificateId
 	}
@@ -760,7 +858,7 @@ type DeleteCertificateMetadata struct {
 
 func (x *DeleteCertificateMetadata) Reset() {
 	*x = DeleteCertificateMetadata{}
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -772,7 +870,7 @@ func (x *DeleteCertificateMetadata) String() string {
 func (*DeleteCertificateMetadata) ProtoMessage() {}
 
 func (x *DeleteCertificateMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -785,7 +883,7 @@ func (x *DeleteCertificateMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCertificateMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteCertificateMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteCertificateMetadata) GetCertificateId() string {
@@ -793,105 +891,6 @@ func (x *DeleteCertificateMetadata) GetCertificateId() string {
 		return x.CertificateId
 	}
 	return ""
-}
-
-type RequestNewCertificateRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create a certificate in.
-	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the certificate.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the certificate.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Labels for the certificate as `key:value` pairs.
-	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Fully qualified domain names of the certificate.
-	Domains []string `protobuf:"bytes,5,rep,name=domains,proto3" json:"domains,omitempty"`
-	// Type of the domain validation challenge.
-	ChallengeType ChallengeType `protobuf:"varint,6,opt,name=challenge_type,json=challengeType,proto3,enum=yandex.cloud.certificatemanager.v1.ChallengeType" json:"challenge_type,omitempty"`
-	// Flag that protects deletion of the certificate
-	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *RequestNewCertificateRequest) Reset() {
-	*x = RequestNewCertificateRequest{}
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RequestNewCertificateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RequestNewCertificateRequest) ProtoMessage() {}
-
-func (x *RequestNewCertificateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_certificatemanager_v1_certificate_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RequestNewCertificateRequest.ProtoReflect.Descriptor instead.
-func (*RequestNewCertificateRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *RequestNewCertificateRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *RequestNewCertificateRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *RequestNewCertificateRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *RequestNewCertificateRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *RequestNewCertificateRequest) GetDomains() []string {
-	if x != nil {
-		return x.Domains
-	}
-	return nil
-}
-
-func (x *RequestNewCertificateRequest) GetChallengeType() ChallengeType {
-	if x != nil {
-		return x.ChallengeType
-	}
-	return ChallengeType_CHALLENGE_TYPE_UNSPECIFIED
-}
-
-func (x *RequestNewCertificateRequest) GetDeletionProtection() bool {
-	if x != nil {
-		return x.DeletionProtection
-	}
-	return false
 }
 
 type RequestNewCertificateMetadata struct {
@@ -942,7 +941,6 @@ func (x *RequestNewCertificateMetadata) GetCertificateId() string {
 type ListCertificateOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the certificate to list operations for.
-	//
 	// To get the certificate ID, use a [CertificateService.List] request.
 	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -1094,54 +1092,54 @@ const file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDesc 
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc0\x04\n" +
 	"\x18CreateCertificateRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12,\n" +
-	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\x9d\x01\n" +
+	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12\x9d\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2H.yandex.cloud.certificatemanager.v1.CreateCertificateRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12-\n" +
 	"\vcertificate\x18\x05 \x01(\tB\v\x8a\xc81\a<=32768R\vcertificate\x12#\n" +
 	"\x05chain\x18\x06 \x01(\tB\r\x8a\xc81\t<=2097152R\x05chain\x121\n" +
 	"\vprivate_key\x18\a \x01(\tB\x10\xe8\xc71\x01\x8a\xc81\b1-524288R\n" +
-	"privateKey\x12/\n" +
+	"privateKey\x12,\n" +
+	"\vdescription\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12/\n" +
 	"\x13deletion_protection\x18\b \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"B\n" +
-	"\x19CreateCertificateMetadata\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\x83\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb5\x04\n" +
+	"\x1cRequestNewCertificateRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
+	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12\xa1\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2L.yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12\x18\n" +
+	"\adomains\x18\x05 \x03(\tR\adomains\x12X\n" +
+	"\x0echallenge_type\x18\x06 \x01(\x0e21.yandex.cloud.certificatemanager.v1.ChallengeTypeR\rchallengeType\x12,\n" +
+	"\vdescription\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12/\n" +
+	"\x13deletion_protection\x18\a \x01(\bR\x12deletionProtection\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x83\x05\n" +
 	"\x18UpdateCertificateRequest\x123\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12,\n" +
-	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\x9d\x01\n" +
+	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12\x9d\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2H.yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12-\n" +
 	"\vcertificate\x18\x06 \x01(\tB\v\x8a\xc81\a<=32768R\vcertificate\x12#\n" +
 	"\x05chain\x18\a \x01(\tB\r\x8a\xc81\t<=2097152R\x05chain\x12-\n" +
 	"\vprivate_key\x18\b \x01(\tB\f\x8a\xc81\b<=524288R\n" +
-	"privateKey\x12/\n" +
+	"privateKey\x12,\n" +
+	"\vdescription\x18\x04 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12/\n" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"B\n" +
-	"\x19UpdateCertificateMetadata\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"O\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"O\n" +
 	"\x18DeleteCertificateRequest\x123\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\"B\n" +
+	"\x19CreateCertificateMetadata\x12%\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"B\n" +
+	"\x19UpdateCertificateMetadata\x12%\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"B\n" +
 	"\x19DeleteCertificateMetadata\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\xb5\x04\n" +
-	"\x1cRequestNewCertificateRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12,\n" +
-	"\vdescription\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\xa1\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2L.yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12\x18\n" +
-	"\adomains\x18\x05 \x03(\tR\adomains\x12X\n" +
-	"\x0echallenge_type\x18\x06 \x01(\x0e21.yandex.cloud.certificatemanager.v1.ChallengeTypeR\rchallengeType\x12/\n" +
-	"\x13deletion_protection\x18\a \x01(\bR\x12deletionProtection\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"F\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"F\n" +
 	"\x1dRequestNewCertificateMetadata\x12%\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\xaa\x01\n" +
 	" ListCertificateOperationsRequest\x123\n" +
@@ -1201,22 +1199,22 @@ var file_yandex_cloud_certificatemanager_v1_certificate_service_proto_goTypes = 
 	(*ListVersionsRequest)(nil),               // 4: yandex.cloud.certificatemanager.v1.ListVersionsRequest
 	(*ListVersionsResponse)(nil),              // 5: yandex.cloud.certificatemanager.v1.ListVersionsResponse
 	(*CreateCertificateRequest)(nil),          // 6: yandex.cloud.certificatemanager.v1.CreateCertificateRequest
-	(*CreateCertificateMetadata)(nil),         // 7: yandex.cloud.certificatemanager.v1.CreateCertificateMetadata
+	(*RequestNewCertificateRequest)(nil),      // 7: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest
 	(*UpdateCertificateRequest)(nil),          // 8: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest
-	(*UpdateCertificateMetadata)(nil),         // 9: yandex.cloud.certificatemanager.v1.UpdateCertificateMetadata
-	(*DeleteCertificateRequest)(nil),          // 10: yandex.cloud.certificatemanager.v1.DeleteCertificateRequest
-	(*DeleteCertificateMetadata)(nil),         // 11: yandex.cloud.certificatemanager.v1.DeleteCertificateMetadata
-	(*RequestNewCertificateRequest)(nil),      // 12: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest
+	(*DeleteCertificateRequest)(nil),          // 9: yandex.cloud.certificatemanager.v1.DeleteCertificateRequest
+	(*CreateCertificateMetadata)(nil),         // 10: yandex.cloud.certificatemanager.v1.CreateCertificateMetadata
+	(*UpdateCertificateMetadata)(nil),         // 11: yandex.cloud.certificatemanager.v1.UpdateCertificateMetadata
+	(*DeleteCertificateMetadata)(nil),         // 12: yandex.cloud.certificatemanager.v1.DeleteCertificateMetadata
 	(*RequestNewCertificateMetadata)(nil),     // 13: yandex.cloud.certificatemanager.v1.RequestNewCertificateMetadata
 	(*ListCertificateOperationsRequest)(nil),  // 14: yandex.cloud.certificatemanager.v1.ListCertificateOperationsRequest
 	(*ListCertificateOperationsResponse)(nil), // 15: yandex.cloud.certificatemanager.v1.ListCertificateOperationsResponse
 	nil,                                      // 16: yandex.cloud.certificatemanager.v1.CreateCertificateRequest.LabelsEntry
-	nil,                                      // 17: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.LabelsEntry
-	nil,                                      // 18: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntry
+	nil,                                      // 17: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntry
+	nil,                                      // 18: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.LabelsEntry
 	(*Certificate)(nil),                      // 19: yandex.cloud.certificatemanager.v1.Certificate
 	(*Version)(nil),                          // 20: yandex.cloud.certificatemanager.v1.Version
-	(*fieldmaskpb.FieldMask)(nil),            // 21: google.protobuf.FieldMask
-	(ChallengeType)(0),                       // 22: yandex.cloud.certificatemanager.v1.ChallengeType
+	(ChallengeType)(0),                       // 21: yandex.cloud.certificatemanager.v1.ChallengeType
+	(*fieldmaskpb.FieldMask)(nil),            // 22: google.protobuf.FieldMask
 	(*operation.Operation)(nil),              // 23: yandex.cloud.operation.Operation
 	(*access.ListAccessBindingsRequest)(nil), // 24: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),  // 25: yandex.cloud.access.SetAccessBindingsRequest
@@ -1229,18 +1227,18 @@ var file_yandex_cloud_certificatemanager_v1_certificate_service_proto_depIdxs = 
 	19, // 2: yandex.cloud.certificatemanager.v1.ListCertificatesResponse.certificates:type_name -> yandex.cloud.certificatemanager.v1.Certificate
 	20, // 3: yandex.cloud.certificatemanager.v1.ListVersionsResponse.versions:type_name -> yandex.cloud.certificatemanager.v1.Version
 	16, // 4: yandex.cloud.certificatemanager.v1.CreateCertificateRequest.labels:type_name -> yandex.cloud.certificatemanager.v1.CreateCertificateRequest.LabelsEntry
-	21, // 5: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.update_mask:type_name -> google.protobuf.FieldMask
-	17, // 6: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.labels:type_name -> yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.LabelsEntry
-	18, // 7: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.labels:type_name -> yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntry
-	22, // 8: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.challenge_type:type_name -> yandex.cloud.certificatemanager.v1.ChallengeType
+	17, // 5: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.labels:type_name -> yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.LabelsEntry
+	21, // 6: yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest.challenge_type:type_name -> yandex.cloud.certificatemanager.v1.ChallengeType
+	22, // 7: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.update_mask:type_name -> google.protobuf.FieldMask
+	18, // 8: yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.labels:type_name -> yandex.cloud.certificatemanager.v1.UpdateCertificateRequest.LabelsEntry
 	23, // 9: yandex.cloud.certificatemanager.v1.ListCertificateOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	1,  // 10: yandex.cloud.certificatemanager.v1.CertificateService.Get:input_type -> yandex.cloud.certificatemanager.v1.GetCertificateRequest
 	2,  // 11: yandex.cloud.certificatemanager.v1.CertificateService.List:input_type -> yandex.cloud.certificatemanager.v1.ListCertificatesRequest
 	4,  // 12: yandex.cloud.certificatemanager.v1.CertificateService.ListVersions:input_type -> yandex.cloud.certificatemanager.v1.ListVersionsRequest
 	6,  // 13: yandex.cloud.certificatemanager.v1.CertificateService.Create:input_type -> yandex.cloud.certificatemanager.v1.CreateCertificateRequest
 	8,  // 14: yandex.cloud.certificatemanager.v1.CertificateService.Update:input_type -> yandex.cloud.certificatemanager.v1.UpdateCertificateRequest
-	10, // 15: yandex.cloud.certificatemanager.v1.CertificateService.Delete:input_type -> yandex.cloud.certificatemanager.v1.DeleteCertificateRequest
-	12, // 16: yandex.cloud.certificatemanager.v1.CertificateService.RequestNew:input_type -> yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest
+	9,  // 15: yandex.cloud.certificatemanager.v1.CertificateService.Delete:input_type -> yandex.cloud.certificatemanager.v1.DeleteCertificateRequest
+	7,  // 16: yandex.cloud.certificatemanager.v1.CertificateService.RequestNew:input_type -> yandex.cloud.certificatemanager.v1.RequestNewCertificateRequest
 	14, // 17: yandex.cloud.certificatemanager.v1.CertificateService.ListOperations:input_type -> yandex.cloud.certificatemanager.v1.ListCertificateOperationsRequest
 	24, // 18: yandex.cloud.certificatemanager.v1.CertificateService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	25, // 19: yandex.cloud.certificatemanager.v1.CertificateService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest

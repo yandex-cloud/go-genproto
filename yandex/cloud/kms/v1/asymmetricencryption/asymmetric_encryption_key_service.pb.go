@@ -573,7 +573,6 @@ func (x *DeleteAsymmetricEncryptionKeyMetadata) GetKeyId() string {
 type ListAsymmetricEncryptionKeyOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the symmetric KMS key to get operations for.
-	//
 	// To get the key ID, use a [AsymmetricKeyEncryptionService.List] request.
 	KeyId string `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -700,7 +699,7 @@ var File_yandex_cloud_kms_v1_asymmetricencryption_asymmetric_encryption_key_serv
 
 const file_yandex_cloud_kms_v1_asymmetricencryption_asymmetric_encryption_key_service_proto_rawDesc = "" +
 	"\n" +
-	"Pyandex/cloud/kms/v1/asymmetricencryption/asymmetric_encryption_key_service.proto\x12(yandex.cloud.kms.v1.asymmetricencryption\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1aHyandex/cloud/kms/v1/asymmetricencryption/asymmetric_encryption_key.proto\"\xb8\x04\n" +
+	"Pyandex/cloud/kms/v1/asymmetricencryption/asymmetric_encryption_key_service.proto\x12(yandex.cloud.kms.v1.asymmetricencryption\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1aHyandex/cloud/kms/v1/asymmetricencryption/asymmetric_encryption_key.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xb8\x04\n" +
 	"$CreateAsymmetricEncryptionKeyRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\x04name\x12,\n" +

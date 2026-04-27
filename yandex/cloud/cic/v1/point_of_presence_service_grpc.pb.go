@@ -30,7 +30,6 @@ const (
 // A set of methods for managing PointOfPresence resources.
 type PointOfPresenceServiceClient interface {
 	// Returns the specified PointOfPresence resource.
-	//
 	// To get the list of available PointOfPresence resources, make a [List] request.
 	Get(ctx context.Context, in *GetPointOfPresenceRequest, opts ...grpc.CallOption) (*PointOfPresence, error)
 	// Retrieves the list of PointOfPresence resources in the specified folder.
@@ -72,7 +71,6 @@ func (c *pointOfPresenceServiceClient) List(ctx context.Context, in *ListPointOf
 // A set of methods for managing PointOfPresence resources.
 type PointOfPresenceServiceServer interface {
 	// Returns the specified PointOfPresence resource.
-	//
 	// To get the list of available PointOfPresence resources, make a [List] request.
 	Get(context.Context, *GetPointOfPresenceRequest) (*PointOfPresence, error)
 	// Retrieves the list of PointOfPresence resources in the specified folder.

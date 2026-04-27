@@ -32,7 +32,6 @@ const (
 // A set of methods for managing PublicConnection resources.
 type PublicConnectionServiceClient interface {
 	// Returns the specified PublicConnection resource.
-	//
 	// To get the list of available PublicConnection resources, make a [List] request.
 	Get(ctx context.Context, in *GetPublicConnectionRequest, opts ...grpc.CallOption) (*PublicConnection, error)
 	// Retrieves the list of PublicConnection resources in the specified folder.
@@ -86,7 +85,6 @@ func (c *publicConnectionServiceClient) Move(ctx context.Context, in *MovePublic
 // A set of methods for managing PublicConnection resources.
 type PublicConnectionServiceServer interface {
 	// Returns the specified PublicConnection resource.
-	//
 	// To get the list of available PublicConnection resources, make a [List] request.
 	Get(context.Context, *GetPublicConnectionRequest) (*PublicConnection, error)
 	// Retrieves the list of PublicConnection resources in the specified folder.

@@ -50,12 +50,12 @@ func (m *SecurityProfile) SetAdvancedRateLimiterProfileId(v string) {
 	m.AdvancedRateLimiterProfileId = v
 }
 
-func (m *SecurityProfile) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeRequestBody) {
-	m.AnalyzeRequestBody = v
-}
-
 func (m *SecurityProfile) SetDisallowDataProcessing(v bool) {
 	m.DisallowDataProcessing = v
+}
+
+func (m *SecurityProfile) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeRequestBody) {
+	m.AnalyzeRequestBody = v
 }
 
 func (m *SecurityProfile) SetLogOptions(v *SecurityProfile_LogOptions) {
@@ -108,18 +108,6 @@ func (m *SecurityRule) SetRuleSpecifier(v SecurityRule_RuleSpecifier) {
 	m.RuleSpecifier = v
 }
 
-func (m *SecurityRule) SetName(v string) {
-	m.Name = v
-}
-
-func (m *SecurityRule) SetPriority(v int64) {
-	m.Priority = v
-}
-
-func (m *SecurityRule) SetDryRun(v bool) {
-	m.DryRun = v
-}
-
 func (m *SecurityRule) SetRuleCondition(v *SecurityRule_RuleCondition) {
 	m.RuleSpecifier = &SecurityRule_RuleCondition_{
 		RuleCondition: v,
@@ -136,6 +124,18 @@ func (m *SecurityRule) SetWaf(v *SecurityRule_Waf) {
 	m.RuleSpecifier = &SecurityRule_Waf_{
 		Waf: v,
 	}
+}
+
+func (m *SecurityRule) SetName(v string) {
+	m.Name = v
+}
+
+func (m *SecurityRule) SetPriority(v int64) {
+	m.Priority = v
+}
+
+func (m *SecurityRule) SetDryRun(v bool) {
+	m.DryRun = v
 }
 
 func (m *SecurityRule) SetDescription(v string) {

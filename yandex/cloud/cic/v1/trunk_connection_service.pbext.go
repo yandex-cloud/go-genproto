@@ -84,18 +84,6 @@ func (m *DeleteTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
 
-func (m *MoveTrunkConnectionRequest) SetTrunkConnectionId(v string) {
-	m.TrunkConnectionId = v
-}
-
-func (m *MoveTrunkConnectionRequest) SetDestinationFolderId(v string) {
-	m.DestinationFolderId = v
-}
-
-func (m *MoveTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
-	m.TrunkConnectionId = v
-}
-
 func (m *ListTrunkConnectionPrivateConnectionsRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
@@ -142,6 +130,18 @@ func (m *ListTrunkConnectionPublicConnectionsResponse) SetPublicConnections(v []
 
 func (m *ListTrunkConnectionPublicConnectionsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *MoveTrunkConnectionRequest) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
+}
+
+func (m *MoveTrunkConnectionRequest) SetDestinationFolderId(v string) {
+	m.DestinationFolderId = v
+}
+
+func (m *MoveTrunkConnectionMetadata) SetTrunkConnectionId(v string) {
+	m.TrunkConnectionId = v
 }
 
 func (m *ListTrunkConnectionOperationsRequest) SetTrunkConnectionId(v string) {

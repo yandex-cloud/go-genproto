@@ -364,9 +364,9 @@ const file_yandex_cloud_kms_v1_asymmetricsignature_asymmetric_signature_crypto_s
 	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1c\n" +
 	"\tsignature\x18\x02 \x01(\fR\tsignature\"D\n" +
 	"\x1dAsymmetricGetPublicKeyRequest\x12#\n" +
-	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\"V\n" +
-	"\x1eAsymmetricGetPublicKeyResponse\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1d\n" +
+	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\"d\n" +
+	"\x1eAsymmetricGetPublicKeyResponse\x12#\n" +
+	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\x12\x1d\n" +
 	"\n" +
 	"public_key\x18\x02 \x01(\tR\tpublicKey2\x98\x05\n" +
 	" AsymmetricSignatureCryptoService\x12\xc1\x01\n" +

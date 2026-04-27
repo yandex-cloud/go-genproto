@@ -1179,7 +1179,6 @@ func (x *CancelSymmetricKeyVersionDestructionMetadata) GetVersionId() string {
 type ListSymmetricKeyOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the symmetric KMS key to get operations for.
-	//
 	// To get the key ID, use a [SymmetricKeyService.List] request.
 	KeyId string `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -1306,7 +1305,7 @@ var File_yandex_cloud_kms_v1_symmetric_key_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_kms_v1_symmetric_key_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/kms/v1/symmetric_key_service.proto\x12\x13yandex.cloud.kms.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/kms/v1/symmetric_key.proto\"\xb1\x04\n" +
+	"/yandex/cloud/kms/v1/symmetric_key_service.proto\x12\x13yandex.cloud.kms.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/kms/v1/symmetric_key.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xb1\x04\n" +
 	"\x19CreateSymmetricKeyRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\x04name\x12,\n" +

@@ -480,10 +480,10 @@ type SecurityProfile struct {
 	CaptchaId string `protobuf:"bytes,11,opt,name=captcha_id,json=captchaId,proto3" json:"captcha_id,omitempty"`
 	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
 	AdvancedRateLimiterProfileId string `protobuf:"bytes,12,opt,name=advanced_rate_limiter_profile_id,json=advancedRateLimiterProfileId,proto3" json:"advanced_rate_limiter_profile_id,omitempty"`
-	// Parameters for request body analyzer.
-	AnalyzeRequestBody *SecurityProfile_AnalyzeRequestBody `protobuf:"bytes,13,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
 	// Disables the use of HTTP request data for training and improving the service's ML models.
 	DisallowDataProcessing bool `protobuf:"varint,14,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
+	// Parameters for request body analyzer.
+	AnalyzeRequestBody *SecurityProfile_AnalyzeRequestBody `protobuf:"bytes,13,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
 	// Configures logging of requests processed by SWS to Audit Trails and Cloud Logging.
 	LogOptions *SecurityProfile_LogOptions `protobuf:"bytes,15,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
 	// ID of the Cloud Logging log group to write SWS logs to.
@@ -601,18 +601,18 @@ func (x *SecurityProfile) GetAdvancedRateLimiterProfileId() string {
 	return ""
 }
 
-func (x *SecurityProfile) GetAnalyzeRequestBody() *SecurityProfile_AnalyzeRequestBody {
-	if x != nil {
-		return x.AnalyzeRequestBody
-	}
-	return nil
-}
-
 func (x *SecurityProfile) GetDisallowDataProcessing() bool {
 	if x != nil {
 		return x.DisallowDataProcessing
 	}
 	return false
+}
+
+func (x *SecurityProfile) GetAnalyzeRequestBody() *SecurityProfile_AnalyzeRequestBody {
+	if x != nil {
+		return x.AnalyzeRequestBody
+	}
+	return nil
 }
 
 func (x *SecurityProfile) GetLogOptions() *SecurityProfile_LogOptions {
@@ -639,6 +639,12 @@ func (x *SecurityProfile) GetCustomPageId() string {
 // A SecurityRule object, see [Rules](/docs/smartwebsecurity/concepts/rules).
 type SecurityRule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to RuleSpecifier:
+	//
+	//	*SecurityRule_RuleCondition_
+	//	*SecurityRule_SmartProtection_
+	//	*SecurityRule_Waf_
+	RuleSpecifier isSecurityRule_RuleSpecifier `protobuf_oneof:"rule_specifier"`
 	// Name of the rule. The name is unique within the security profile. 1-50 characters long.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Determines the priority for checking the incoming traffic.
@@ -651,12 +657,6 @@ type SecurityRule struct {
 	// For example, you can have the number of alarms for a specific rule displayed.
 	// Note: if this option is true, no real action affecting your traffic regarding this rule will be taken.
 	DryRun bool `protobuf:"varint,3,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
-	// Types that are valid to be assigned to RuleSpecifier:
-	//
-	//	*SecurityRule_RuleCondition_
-	//	*SecurityRule_SmartProtection_
-	//	*SecurityRule_Waf_
-	RuleSpecifier isSecurityRule_RuleSpecifier `protobuf_oneof:"rule_specifier"`
 	// Optional description of the rule. 0-512 characters long.
 	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the custom page shown to the user when the rule denies a request.
@@ -695,27 +695,6 @@ func (*SecurityRule) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SecurityRule) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *SecurityRule) GetPriority() int64 {
-	if x != nil {
-		return x.Priority
-	}
-	return 0
-}
-
-func (x *SecurityRule) GetDryRun() bool {
-	if x != nil {
-		return x.DryRun
-	}
-	return false
-}
-
 func (x *SecurityRule) GetRuleSpecifier() isSecurityRule_RuleSpecifier {
 	if x != nil {
 		return x.RuleSpecifier
@@ -748,6 +727,27 @@ func (x *SecurityRule) GetWaf() *SecurityRule_Waf {
 		}
 	}
 	return nil
+}
+
+func (x *SecurityRule) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *SecurityRule) GetPriority() int64 {
+	if x != nil {
+		return x.Priority
+	}
+	return 0
+}
+
+func (x *SecurityRule) GetDryRun() bool {
+	if x != nil {
+		return x.DryRun
+	}
+	return false
 }
 
 func (x *SecurityRule) GetDescription() string {
@@ -2800,18 +2800,18 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	" \x01(\tR\acloudId\x12\x1d\n" +
 	"\n" +
 	"captcha_id\x18\v \x01(\tR\tcaptchaId\x12F\n" +
-	" advanced_rate_limiter_profile_id\x18\f \x01(\tR\x1cadvancedRateLimiterProfileId\x12v\n" +
-	"\x14analyze_request_body\x18\r \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x128\n" +
-	"\x18disallow_data_processing\x18\x0e \x01(\bR\x16disallowDataProcessing\x12]\n" +
+	" advanced_rate_limiter_profile_id\x18\f \x01(\tR\x1cadvancedRateLimiterProfileId\x128\n" +
+	"\x18disallow_data_processing\x18\x0e \x01(\bR\x16disallowDataProcessing\x12v\n" +
+	"\x14analyze_request_body\x18\r \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x12]\n" +
 	"\vlog_options\x18\x0f \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptionsR\n" +
 	"logOptions\x12 \n" +
 	"\flog_group_id\x18\x10 \x01(\tR\n" +
 	"logGroupId\x12$\n" +
-	"\x0ecustom_page_id\x18\x13 \x01(\tR\fcustomPageId\x1a\x82\x02\n" +
+	"\x0ecustom_page_id\x18\x13 \x01(\tR\fcustomPageId\x1a\x88\x02\n" +
 	"\x12AnalyzeRequestBody\x12;\n" +
 	"\n" +
-	"size_limit\x18\x01 \x01(\x03B\x1c\xfa\xc71\x180,8,16,32,64,128,256,512R\tsizeLimit\x12w\n" +
-	"\x11size_limit_action\x18\x02 \x01(\x0e2K.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.ActionR\x0fsizeLimitAction\"6\n" +
+	"size_limit\x18\x01 \x01(\x03B\x1c\xfa\xc71\x180,8,16,32,64,128,256,512R\tsizeLimit\x12}\n" +
+	"\x11size_limit_action\x18\x02 \x01(\x0e2K.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody.ActionB\x04\xe8\xc71\x01R\x0fsizeLimitAction\"6\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -2848,39 +2848,40 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x1aDEFAULT_ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
 	"\x04DENY\x10\x02J\x04\b\t\x10\n" +
-	"J\x04\b\x11\x10\x12J\x04\b\x12\x10\x13\"\xef\t\n" +
-	"\fSecurityRule\x12>\n" +
-	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12(\n" +
-	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12\x17\n" +
-	"\adry_run\x18\x03 \x01(\bR\x06dryRun\x12e\n" +
+	"J\x04\b\x11\x10\x13\"\x81\n" +
+	"\n" +
+	"\fSecurityRule\x12e\n" +
 	"\x0erule_condition\x18\x04 \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleConditionH\x00R\rruleCondition\x12k\n" +
 	"\x10smart_protection\x18\x05 \x01(\v2>.yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtectionH\x00R\x0fsmartProtection\x12F\n" +
-	"\x03waf\x18\x06 \x01(\v22.yandex.cloud.smartwebsecurity.v1.SecurityRule.WafH\x00R\x03waf\x12+\n" +
+	"\x03waf\x18\x06 \x01(\v22.yandex.cloud.smartwebsecurity.v1.SecurityRule.WafH\x00R\x03waf\x12>\n" +
+	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12(\n" +
+	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12\x17\n" +
+	"\adry_run\x18\x03 \x01(\bR\x06dryRun\x12+\n" +
 	"\vdescription\x18\a \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12$\n" +
-	"\x0ecustom_page_id\x18\t \x01(\tR\fcustomPageId\x1a\xee\x01\n" +
-	"\rRuleCondition\x12[\n" +
-	"\x06action\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.ActionR\x06action\x12I\n" +
+	"\x0ecustom_page_id\x18\t \x01(\tR\fcustomPageId\x1a\xf4\x01\n" +
+	"\rRuleCondition\x12a\n" +
+	"\x06action\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"5\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02\x1a\xe6\x01\n" +
-	"\x0fSmartProtection\x12W\n" +
-	"\x04mode\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.ModeR\x04mode\x12I\n" +
+	"\x04DENY\x10\x02\x1a\xec\x01\n" +
+	"\x0fSmartProtection\x12]\n" +
+	"\x04mode\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.ModeB\x04\xe8\xc71\x01R\x04mode\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"/\n" +
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04FULL\x10\x01\x12\a\n" +
-	"\x03API\x10\x02\x1a\xfa\x01\n" +
-	"\x03Waf\x12K\n" +
-	"\x04mode\x18\x01 \x01(\x0e27.yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.ModeR\x04mode\x12I\n" +
+	"\x03API\x10\x02\x1a\x80\x02\n" +
+	"\x03Waf\x12Q\n" +
+	"\x04mode\x18\x01 \x01(\x0e27.yandex.cloud.smartwebsecurity.v1.SecurityRule.Waf.ModeB\x04\xe8\xc71\x01R\x04mode\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\x12*\n" +
 	"\x0ewaf_profile_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\fwafProfileId\"/\n" +
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04FULL\x10\x01\x12\a\n" +
 	"\x03API\x10\x02B\x10\n" +
-	"\x0erule_specifierJ\x04\b\b\x10\t\"\xf2.\n" +
+	"\x0erule_specifierJ\x04\b\b\x10\t\"\x92/\n" +
 	"\tCondition\x12Z\n" +
 	"\tauthority\x18\x01 \x01(\v2<.yandex.cloud.smartwebsecurity.v1.Condition.AuthorityMatcherR\tauthority\x12^\n" +
 	"\vhttp_method\x18\x02 \x01(\v2=.yandex.cloud.smartwebsecurity.v1.Condition.HttpMethodMatcherR\n" +
@@ -2906,9 +2907,9 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x14pire_regex_not_match\x18\x06 \x01(\tB\t\x8a\xc81\x050-255H\x00R\x11pireRegexNotMatch\x12\x1a\n" +
 	"\adefined\x18\a \x01(\bH\x00R\adefined\x12b\n" +
 	"\x0elists_matchers\x18\b \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatchersH\x00R\rlistsMatchersB\a\n" +
-	"\x05match\x1a)\n" +
-	"\fListsMatcher\x12\x19\n" +
-	"\blist_ids\x18\x01 \x03(\tR\alistIds\x1a\xb3\x03\n" +
+	"\x05match\x1a7\n" +
+	"\fListsMatcher\x12'\n" +
+	"\blist_ids\x18\x01 \x03(\tB\f\x82\xc81\x041-10\x90\xc81\x01R\alistIds\x1a\xb3\x03\n" +
 	"\rListsMatchers\x12`\n" +
 	"\x0fstr_lists_match\x18\x01 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\rstrListsMatch\x12g\n" +
 	"\x13str_lists_not_match\x18\x02 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10strListsNotMatch\x12g\n" +
@@ -2943,13 +2944,13 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x14asn_ranges_not_match\x18\b \x01(\v2<.yandex.cloud.smartwebsecurity.v1.Condition.AsnRangesMatcherR\x11asnRangesNotMatch\x12`\n" +
 	"\x0fasn_lists_match\x18\t \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\rasnListsMatch\x12g\n" +
 	"\x13asn_lists_not_match\x18\n" +
-	" \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10asnListsNotMatch\x1a\x81\x02\n" +
+	" \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x10asnListsNotMatch\x1a\x87\x02\n" +
 	"\x12BotCategoryMatcher\x12q\n" +
 	"\x18bot_category_lists_match\x18\x05 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x15botCategoryListsMatch\x12x\n" +
-	"\x1cbot_category_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x18botCategoryListsNotMatch\x1a\xed\x01\n" +
+	"\x1cbot_category_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x18botCategoryListsNotMatchJ\x04\b\x01\x10\x05\x1a\xf3\x01\n" +
 	"\x0eBotNameMatcher\x12i\n" +
 	"\x14bot_name_lists_match\x18\x05 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x11botNameListsMatch\x12p\n" +
-	"\x18bot_name_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x14botNameListsNotMatch\x1a#\n" +
+	"\x18bot_name_lists_not_match\x18\x06 \x01(\v28.yandex.cloud.smartwebsecurity.v1.Condition.ListsMatcherR\x14botNameListsNotMatchJ\x04\b\x01\x10\x05\x1a#\n" +
 	"\vBoolMatcher\x12\x14\n" +
 	"\x05match\x18\x01 \x01(\bR\x05match\x1a$\n" +
 	"\fIntLEMatcher\x12\x14\n" +
@@ -2981,9 +2982,9 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\vja3_matcher\x18\x03 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\n" +
 	"ja3Matcher\x12Z\n" +
 	"\vja4_matcher\x18\x04 \x01(\v29.yandex.cloud.smartwebsecurity.v1.Condition.StringMatcherR\n" +
-	"ja4Matcher\x1a;\n" +
-	"\x0fIpRangesMatcher\x12(\n" +
-	"\tip_ranges\x18\x01 \x03(\tB\v\x82\xc81\a<=10000R\bipRanges\x1a>\n" +
+	"ja4Matcher\x1aA\n" +
+	"\x0fIpRangesMatcher\x12.\n" +
+	"\tip_ranges\x18\x01 \x03(\tB\x11\x82\xc81\a<=10000\x8a\xc81\x02>0R\bipRanges\x1a>\n" +
 	"\fGeoIpMatcher\x12.\n" +
 	"\tlocations\x18\x01 \x03(\tB\x10\x82\xc81\x03>=1\x8a\xc81\x012\x90\xc81\x01R\tlocations\x1aN\n" +
 	"\x10AsnRangesMatcher\x12:\n" +

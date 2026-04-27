@@ -45,7 +45,6 @@ const (
 // A set of methods for managing secrets.
 type SecretServiceClient interface {
 	// Returns the specified secret.
-	//
 	// To get the list of all available secrets, make a [List] request.
 	// Use [PayloadService.Get] to get the payload (confidential data themselves) of the secret.
 	Get(ctx context.Context, in *GetSecretRequest, opts ...grpc.CallOption) (*Secret, error)
@@ -66,7 +65,6 @@ type SecretServiceClient interface {
 	// Adds new version based on a previous one.
 	AddVersion(ctx context.Context, in *AddVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Schedules the specified version for destruction.
-	//
 	// Scheduled destruction can be cancelled with the [SecretService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(ctx context.Context, in *ScheduleVersionDestructionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Cancels previously scheduled version destruction, if the version hasn't been destroyed yet.
@@ -246,7 +244,6 @@ func (c *secretServiceClient) UpdateAccessBindings(ctx context.Context, in *acce
 // A set of methods for managing secrets.
 type SecretServiceServer interface {
 	// Returns the specified secret.
-	//
 	// To get the list of all available secrets, make a [List] request.
 	// Use [PayloadService.Get] to get the payload (confidential data themselves) of the secret.
 	Get(context.Context, *GetSecretRequest) (*Secret, error)
@@ -267,7 +264,6 @@ type SecretServiceServer interface {
 	// Adds new version based on a previous one.
 	AddVersion(context.Context, *AddVersionRequest) (*operation.Operation, error)
 	// Schedules the specified version for destruction.
-	//
 	// Scheduled destruction can be cancelled with the [SecretService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(context.Context, *ScheduleVersionDestructionRequest) (*operation.Operation, error)
 	// Cancels previously scheduled version destruction, if the version hasn't been destroyed yet.

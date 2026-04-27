@@ -451,13 +451,13 @@ var File_yandex_cloud_quotamanager_v1_quota_limit_service_proto protoreflect.Fil
 
 const file_yandex_cloud_quotamanager_v1_quota_limit_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/quotamanager/v1/quota_limit_service.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x89\x01\n" +
+	"6yandex/cloud/quotamanager/v1/quota_limit_service.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\x89\x01\n" +
 	"\x14GetQuotaLimitRequest\x12H\n" +
 	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12'\n" +
-	"\bquota_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\aquotaId\"\xd6\x01\n" +
+	"\bquota_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\aquotaId\"\xde\x01\n" +
 	"\x16ListQuotaLimitsRequest\x12H\n" +
-	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\x1e\n" +
-	"\aservice\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aservice\x12'\n" +
+	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12&\n" +
+	"\aservice\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\aservice\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
@@ -466,9 +466,9 @@ const file_yandex_cloud_quotamanager_v1_quota_limit_service_proto_rawDesc = "" +
 	"\x17ListQuotaLimitsResponse\x12B\n" +
 	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x12K\n" +
 	"\fquota_limits\x18\x02 \x03(\v2(.yandex.cloud.quotamanager.v1.QuotaLimitR\vquotaLimits\x12&\n" +
-	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\x94\x01\n" +
-	"\x13ListServicesRequest\x12)\n" +
-	"\rresource_type\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fresourceType\x12'\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\x9c\x01\n" +
+	"\x13ListServicesRequest\x121\n" +
+	"\rresource_type\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\fresourceType\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +

@@ -87,63 +87,6 @@ func (SymmetricAlgorithm) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{0}
 }
 
-type SymmetricKey_Status int32
-
-const (
-	SymmetricKey_STATUS_UNSPECIFIED SymmetricKey_Status = 0
-	// The key is being created.
-	SymmetricKey_CREATING SymmetricKey_Status = 1
-	// The key is active and can be used for encryption and decryption.
-	// Can be set to INACTIVE using the [SymmetricKeyService.Update] method.
-	SymmetricKey_ACTIVE SymmetricKey_Status = 2
-	// The key is inactive and unusable.
-	// Can be set to ACTIVE using the [SymmetricKeyService.Update] method.
-	SymmetricKey_INACTIVE SymmetricKey_Status = 3
-)
-
-// Enum value maps for SymmetricKey_Status.
-var (
-	SymmetricKey_Status_name = map[int32]string{
-		0: "STATUS_UNSPECIFIED",
-		1: "CREATING",
-		2: "ACTIVE",
-		3: "INACTIVE",
-	}
-	SymmetricKey_Status_value = map[string]int32{
-		"STATUS_UNSPECIFIED": 0,
-		"CREATING":           1,
-		"ACTIVE":             2,
-		"INACTIVE":           3,
-	}
-)
-
-func (x SymmetricKey_Status) Enum() *SymmetricKey_Status {
-	p := new(SymmetricKey_Status)
-	*p = x
-	return p
-}
-
-func (x SymmetricKey_Status) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (SymmetricKey_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[1].Descriptor()
-}
-
-func (SymmetricKey_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[1]
-}
-
-func (x SymmetricKey_Status) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use SymmetricKey_Status.Descriptor instead.
-func (SymmetricKey_Status) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{0, 0}
-}
-
 // Possible version status.
 type SymmetricKeyVersion_Status int32
 
@@ -185,11 +128,11 @@ func (x SymmetricKeyVersion_Status) String() string {
 }
 
 func (SymmetricKeyVersion_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[1].Descriptor()
 }
 
 func (SymmetricKeyVersion_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[2]
+	return &file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[1]
 }
 
 func (x SymmetricKeyVersion_Status) Number() protoreflect.EnumNumber {
@@ -198,7 +141,175 @@ func (x SymmetricKeyVersion_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SymmetricKeyVersion_Status.Descriptor instead.
 func (SymmetricKeyVersion_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{0, 0}
+}
+
+type SymmetricKey_Status int32
+
+const (
+	SymmetricKey_STATUS_UNSPECIFIED SymmetricKey_Status = 0
+	// The key is being created.
+	SymmetricKey_CREATING SymmetricKey_Status = 1
+	// The key is active and can be used for encryption and decryption.
+	// Can be set to INACTIVE using the [SymmetricKeyService.Update] method.
+	SymmetricKey_ACTIVE SymmetricKey_Status = 2
+	// The key is inactive and unusable.
+	// Can be set to ACTIVE using the [SymmetricKeyService.Update] method.
+	SymmetricKey_INACTIVE SymmetricKey_Status = 3
+)
+
+// Enum value maps for SymmetricKey_Status.
+var (
+	SymmetricKey_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "CREATING",
+		2: "ACTIVE",
+		3: "INACTIVE",
+	}
+	SymmetricKey_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"CREATING":           1,
+		"ACTIVE":             2,
+		"INACTIVE":           3,
+	}
+)
+
+func (x SymmetricKey_Status) Enum() *SymmetricKey_Status {
+	p := new(SymmetricKey_Status)
+	*p = x
+	return p
+}
+
+func (x SymmetricKey_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SymmetricKey_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[2].Descriptor()
+}
+
+func (SymmetricKey_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes[2]
+}
+
+func (x SymmetricKey_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SymmetricKey_Status.Descriptor instead.
+func (SymmetricKey_Status) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{1, 0}
+}
+
+// Symmetric KMS key version: metadata about actual cryptographic data.
+type SymmetricKeyVersion struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the key version.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the symmetric KMS key that the version belongs to.
+	KeyId string `protobuf:"bytes,2,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	// Status of the key version.
+	Status SymmetricKeyVersion_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.kms.v1.SymmetricKeyVersion_Status" json:"status,omitempty"`
+	// Encryption algorithm that should be used when using the key version to encrypt plaintext.
+	Algorithm SymmetricAlgorithm `protobuf:"varint,4,opt,name=algorithm,proto3,enum=yandex.cloud.kms.v1.SymmetricAlgorithm" json:"algorithm,omitempty"`
+	// Time when the key version was created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Indication of a primary version, that is to be used by default for all cryptographic
+	// operations that don't have a key version explicitly specified.
+	Primary bool `protobuf:"varint,6,opt,name=primary,proto3" json:"primary,omitempty"`
+	// Time when the key version is going to be destroyed. Empty unless the status
+	// is `SCHEDULED_FOR_DESTRUCTION`.
+	DestroyAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=destroy_at,json=destroyAt,proto3" json:"destroy_at,omitempty"`
+	// Indication of the version that is hosted by HSM.
+	HostedByHsm   bool `protobuf:"varint,8,opt,name=hosted_by_hsm,json=hostedByHsm,proto3" json:"hosted_by_hsm,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SymmetricKeyVersion) Reset() {
+	*x = SymmetricKeyVersion{}
+	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SymmetricKeyVersion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SymmetricKeyVersion) ProtoMessage() {}
+
+func (x *SymmetricKeyVersion) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SymmetricKeyVersion.ProtoReflect.Descriptor instead.
+func (*SymmetricKeyVersion) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SymmetricKeyVersion) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *SymmetricKeyVersion) GetKeyId() string {
+	if x != nil {
+		return x.KeyId
+	}
+	return ""
+}
+
+func (x *SymmetricKeyVersion) GetStatus() SymmetricKeyVersion_Status {
+	if x != nil {
+		return x.Status
+	}
+	return SymmetricKeyVersion_STATUS_UNSPECIFIED
+}
+
+func (x *SymmetricKeyVersion) GetAlgorithm() SymmetricAlgorithm {
+	if x != nil {
+		return x.Algorithm
+	}
+	return SymmetricAlgorithm_SYMMETRIC_ALGORITHM_UNSPECIFIED
+}
+
+func (x *SymmetricKeyVersion) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *SymmetricKeyVersion) GetPrimary() bool {
+	if x != nil {
+		return x.Primary
+	}
+	return false
+}
+
+func (x *SymmetricKeyVersion) GetDestroyAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DestroyAt
+	}
+	return nil
+}
+
+func (x *SymmetricKeyVersion) GetHostedByHsm() bool {
+	if x != nil {
+		return x.HostedByHsm
+	}
+	return false
 }
 
 // A symmetric KMS key that may contain several versions of the cryptographic material.
@@ -236,7 +347,7 @@ type SymmetricKey struct {
 
 func (x *SymmetricKey) Reset() {
 	*x = SymmetricKey{}
-	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[0]
+	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -248,7 +359,7 @@ func (x *SymmetricKey) String() string {
 func (*SymmetricKey) ProtoMessage() {}
 
 func (x *SymmetricKey) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[0]
+	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,7 +372,7 @@ func (x *SymmetricKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SymmetricKey.ProtoReflect.Descriptor instead.
 func (*SymmetricKey) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SymmetricKey) GetId() string {
@@ -348,122 +459,28 @@ func (x *SymmetricKey) GetDeletionProtection() bool {
 	return false
 }
 
-// Symmetric KMS key version: metadata about actual cryptographic data.
-type SymmetricKeyVersion struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the key version.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the symmetric KMS key that the version belongs to.
-	KeyId string `protobuf:"bytes,2,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
-	// Status of the key version.
-	Status SymmetricKeyVersion_Status `protobuf:"varint,3,opt,name=status,proto3,enum=yandex.cloud.kms.v1.SymmetricKeyVersion_Status" json:"status,omitempty"`
-	// Encryption algorithm that should be used when using the key version to encrypt plaintext.
-	Algorithm SymmetricAlgorithm `protobuf:"varint,4,opt,name=algorithm,proto3,enum=yandex.cloud.kms.v1.SymmetricAlgorithm" json:"algorithm,omitempty"`
-	// Time when the key version was created.
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Indication of a primary version, that is to be used by default for all cryptographic
-	// operations that don't have a key version explicitly specified.
-	Primary bool `protobuf:"varint,6,opt,name=primary,proto3" json:"primary,omitempty"`
-	// Time when the key version is going to be destroyed. Empty unless the status
-	// is `SCHEDULED_FOR_DESTRUCTION`.
-	DestroyAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=destroy_at,json=destroyAt,proto3" json:"destroy_at,omitempty"`
-	// Indication of the version that is hosted by HSM.
-	HostedByHsm   bool `protobuf:"varint,8,opt,name=hosted_by_hsm,json=hostedByHsm,proto3" json:"hosted_by_hsm,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SymmetricKeyVersion) Reset() {
-	*x = SymmetricKeyVersion{}
-	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SymmetricKeyVersion) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SymmetricKeyVersion) ProtoMessage() {}
-
-func (x *SymmetricKeyVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SymmetricKeyVersion.ProtoReflect.Descriptor instead.
-func (*SymmetricKeyVersion) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_kms_v1_symmetric_key_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *SymmetricKeyVersion) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *SymmetricKeyVersion) GetKeyId() string {
-	if x != nil {
-		return x.KeyId
-	}
-	return ""
-}
-
-func (x *SymmetricKeyVersion) GetStatus() SymmetricKeyVersion_Status {
-	if x != nil {
-		return x.Status
-	}
-	return SymmetricKeyVersion_STATUS_UNSPECIFIED
-}
-
-func (x *SymmetricKeyVersion) GetAlgorithm() SymmetricAlgorithm {
-	if x != nil {
-		return x.Algorithm
-	}
-	return SymmetricAlgorithm_SYMMETRIC_ALGORITHM_UNSPECIFIED
-}
-
-func (x *SymmetricKeyVersion) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *SymmetricKeyVersion) GetPrimary() bool {
-	if x != nil {
-		return x.Primary
-	}
-	return false
-}
-
-func (x *SymmetricKeyVersion) GetDestroyAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.DestroyAt
-	}
-	return nil
-}
-
-func (x *SymmetricKeyVersion) GetHostedByHsm() bool {
-	if x != nil {
-		return x.HostedByHsm
-	}
-	return false
-}
-
 var File_yandex_cloud_kms_v1_symmetric_key_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_kms_v1_symmetric_key_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/kms/v1/symmetric_key.proto\x12\x13yandex.cloud.kms.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\"\x93\x06\n" +
+	"'yandex/cloud/kms/v1/symmetric_key.proto\x12\x13yandex.cloud.kms.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdc\x03\n" +
+	"\x13SymmetricKeyVersion\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
+	"\x06key_id\x18\x02 \x01(\tR\x05keyId\x12G\n" +
+	"\x06status\x18\x03 \x01(\x0e2/.yandex.cloud.kms.v1.SymmetricKeyVersion.StatusR\x06status\x12E\n" +
+	"\talgorithm\x18\x04 \x01(\x0e2'.yandex.cloud.kms.v1.SymmetricAlgorithmR\talgorithm\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x18\n" +
+	"\aprimary\x18\x06 \x01(\bR\aprimary\x129\n" +
+	"\n" +
+	"destroy_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdestroyAt\x12\"\n" +
+	"\rhosted_by_hsm\x18\b \x01(\bR\vhostedByHsm\"Z\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
+	"\n" +
+	"\x06ACTIVE\x10\x01\x12\x1d\n" +
+	"\x19SCHEDULED_FOR_DESTRUCTION\x10\x02\x12\r\n" +
+	"\tDESTROYED\x10\x03\"\x93\x06\n" +
 	"\fSymmetricKey\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -488,24 +505,7 @@ const file_yandex_cloud_kms_v1_symmetric_key_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bINACTIVE\x10\x03\"\xdc\x03\n" +
-	"\x13SymmetricKeyVersion\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
-	"\x06key_id\x18\x02 \x01(\tR\x05keyId\x12G\n" +
-	"\x06status\x18\x03 \x01(\x0e2/.yandex.cloud.kms.v1.SymmetricKeyVersion.StatusR\x06status\x12E\n" +
-	"\talgorithm\x18\x04 \x01(\x0e2'.yandex.cloud.kms.v1.SymmetricAlgorithmR\talgorithm\x129\n" +
-	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x18\n" +
-	"\aprimary\x18\x06 \x01(\bR\aprimary\x129\n" +
-	"\n" +
-	"destroy_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tdestroyAt\x12\"\n" +
-	"\rhosted_by_hsm\x18\b \x01(\bR\vhostedByHsm\"Z\n" +
-	"\x06Status\x12\x16\n" +
-	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
-	"\n" +
-	"\x06ACTIVE\x10\x01\x12\x1d\n" +
-	"\x19SCHEDULED_FOR_DESTRUCTION\x10\x02\x12\r\n" +
-	"\tDESTROYED\x10\x03*\x89\x01\n" +
+	"\bINACTIVE\x10\x03*\x89\x01\n" +
 	"\x12SymmetricAlgorithm\x12#\n" +
 	"\x1fSYMMETRIC_ALGORITHM_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aAES_128\x10\x01\x12\v\n" +
@@ -531,26 +531,26 @@ var file_yandex_cloud_kms_v1_symmetric_key_proto_enumTypes = make([]protoimpl.En
 var file_yandex_cloud_kms_v1_symmetric_key_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_kms_v1_symmetric_key_proto_goTypes = []any{
 	(SymmetricAlgorithm)(0),         // 0: yandex.cloud.kms.v1.SymmetricAlgorithm
-	(SymmetricKey_Status)(0),        // 1: yandex.cloud.kms.v1.SymmetricKey.Status
-	(SymmetricKeyVersion_Status)(0), // 2: yandex.cloud.kms.v1.SymmetricKeyVersion.Status
-	(*SymmetricKey)(nil),            // 3: yandex.cloud.kms.v1.SymmetricKey
-	(*SymmetricKeyVersion)(nil),     // 4: yandex.cloud.kms.v1.SymmetricKeyVersion
+	(SymmetricKeyVersion_Status)(0), // 1: yandex.cloud.kms.v1.SymmetricKeyVersion.Status
+	(SymmetricKey_Status)(0),        // 2: yandex.cloud.kms.v1.SymmetricKey.Status
+	(*SymmetricKeyVersion)(nil),     // 3: yandex.cloud.kms.v1.SymmetricKeyVersion
+	(*SymmetricKey)(nil),            // 4: yandex.cloud.kms.v1.SymmetricKey
 	nil,                             // 5: yandex.cloud.kms.v1.SymmetricKey.LabelsEntry
 	(*timestamppb.Timestamp)(nil),   // 6: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),     // 7: google.protobuf.Duration
 }
 var file_yandex_cloud_kms_v1_symmetric_key_proto_depIdxs = []int32{
-	6,  // 0: yandex.cloud.kms.v1.SymmetricKey.created_at:type_name -> google.protobuf.Timestamp
-	5,  // 1: yandex.cloud.kms.v1.SymmetricKey.labels:type_name -> yandex.cloud.kms.v1.SymmetricKey.LabelsEntry
-	1,  // 2: yandex.cloud.kms.v1.SymmetricKey.status:type_name -> yandex.cloud.kms.v1.SymmetricKey.Status
-	4,  // 3: yandex.cloud.kms.v1.SymmetricKey.primary_version:type_name -> yandex.cloud.kms.v1.SymmetricKeyVersion
-	0,  // 4: yandex.cloud.kms.v1.SymmetricKey.default_algorithm:type_name -> yandex.cloud.kms.v1.SymmetricAlgorithm
-	6,  // 5: yandex.cloud.kms.v1.SymmetricKey.rotated_at:type_name -> google.protobuf.Timestamp
-	7,  // 6: yandex.cloud.kms.v1.SymmetricKey.rotation_period:type_name -> google.protobuf.Duration
-	2,  // 7: yandex.cloud.kms.v1.SymmetricKeyVersion.status:type_name -> yandex.cloud.kms.v1.SymmetricKeyVersion.Status
-	0,  // 8: yandex.cloud.kms.v1.SymmetricKeyVersion.algorithm:type_name -> yandex.cloud.kms.v1.SymmetricAlgorithm
-	6,  // 9: yandex.cloud.kms.v1.SymmetricKeyVersion.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 10: yandex.cloud.kms.v1.SymmetricKeyVersion.destroy_at:type_name -> google.protobuf.Timestamp
+	1,  // 0: yandex.cloud.kms.v1.SymmetricKeyVersion.status:type_name -> yandex.cloud.kms.v1.SymmetricKeyVersion.Status
+	0,  // 1: yandex.cloud.kms.v1.SymmetricKeyVersion.algorithm:type_name -> yandex.cloud.kms.v1.SymmetricAlgorithm
+	6,  // 2: yandex.cloud.kms.v1.SymmetricKeyVersion.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 3: yandex.cloud.kms.v1.SymmetricKeyVersion.destroy_at:type_name -> google.protobuf.Timestamp
+	6,  // 4: yandex.cloud.kms.v1.SymmetricKey.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 5: yandex.cloud.kms.v1.SymmetricKey.labels:type_name -> yandex.cloud.kms.v1.SymmetricKey.LabelsEntry
+	2,  // 6: yandex.cloud.kms.v1.SymmetricKey.status:type_name -> yandex.cloud.kms.v1.SymmetricKey.Status
+	3,  // 7: yandex.cloud.kms.v1.SymmetricKey.primary_version:type_name -> yandex.cloud.kms.v1.SymmetricKeyVersion
+	0,  // 8: yandex.cloud.kms.v1.SymmetricKey.default_algorithm:type_name -> yandex.cloud.kms.v1.SymmetricAlgorithm
+	6,  // 9: yandex.cloud.kms.v1.SymmetricKey.rotated_at:type_name -> google.protobuf.Timestamp
+	7,  // 10: yandex.cloud.kms.v1.SymmetricKey.rotation_period:type_name -> google.protobuf.Duration
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name

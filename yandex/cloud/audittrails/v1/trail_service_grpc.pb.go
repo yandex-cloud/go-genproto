@@ -39,7 +39,6 @@ const (
 // A set of methods for managing trails.
 type TrailServiceClient interface {
 	// Returns the specified trail.
-	//
 	// To get the list of all available trails, make a [List] request.
 	Get(ctx context.Context, in *GetTrailRequest, opts ...grpc.CallOption) (*Trail, error)
 	// Retrieves the list of trails in the specified folder.
@@ -165,7 +164,6 @@ func (c *trailServiceClient) UpdateAccessBindings(ctx context.Context, in *acces
 // A set of methods for managing trails.
 type TrailServiceServer interface {
 	// Returns the specified trail.
-	//
 	// To get the list of all available trails, make a [List] request.
 	Get(context.Context, *GetTrailRequest) (*Trail, error)
 	// Retrieves the list of trails in the specified folder.

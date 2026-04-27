@@ -45,6 +45,18 @@ func (m *AdvancedRateLimiterRule) SetRuleSpecifier(v AdvancedRateLimiterRule_Rul
 	m.RuleSpecifier = v
 }
 
+func (m *AdvancedRateLimiterRule) SetStaticQuota(v *AdvancedRateLimiterRule_StaticQuota) {
+	m.RuleSpecifier = &AdvancedRateLimiterRule_StaticQuota_{
+		StaticQuota: v,
+	}
+}
+
+func (m *AdvancedRateLimiterRule) SetDynamicQuota(v *AdvancedRateLimiterRule_DynamicQuota) {
+	m.RuleSpecifier = &AdvancedRateLimiterRule_DynamicQuota_{
+		DynamicQuota: v,
+	}
+}
+
 func (m *AdvancedRateLimiterRule) SetName(v string) {
 	m.Name = v
 }
@@ -59,18 +71,6 @@ func (m *AdvancedRateLimiterRule) SetDescription(v string) {
 
 func (m *AdvancedRateLimiterRule) SetDryRun(v bool) {
 	m.DryRun = v
-}
-
-func (m *AdvancedRateLimiterRule) SetStaticQuota(v *AdvancedRateLimiterRule_StaticQuota) {
-	m.RuleSpecifier = &AdvancedRateLimiterRule_StaticQuota_{
-		StaticQuota: v,
-	}
-}
-
-func (m *AdvancedRateLimiterRule) SetDynamicQuota(v *AdvancedRateLimiterRule_DynamicQuota) {
-	m.RuleSpecifier = &AdvancedRateLimiterRule_DynamicQuota_{
-		DynamicQuota: v,
-	}
 }
 
 func (m *AdvancedRateLimiterRule_StaticQuota) SetAction(v AdvancedRateLimiterRule_Action) {

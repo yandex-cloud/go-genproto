@@ -13,6 +13,12 @@ func (m *WafProfile) SetRuleSet(v WafProfile_RuleSet) {
 	m.RuleSet = v
 }
 
+func (m *WafProfile) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
+	m.RuleSet = &WafProfile_CoreRuleSet_{
+		CoreRuleSet: v,
+	}
+}
+
 func (m *WafProfile) SetId(v string) {
 	m.Id = v
 }
@@ -47,12 +53,6 @@ func (m *WafProfile) SetRules(v []*WafProfileRule) {
 
 func (m *WafProfile) SetExclusionRules(v []*WafProfileExclusionRule) {
 	m.ExclusionRules = v
-}
-
-func (m *WafProfile) SetCoreRuleSet(v *WafProfile_CoreRuleSet) {
-	m.RuleSet = &WafProfile_CoreRuleSet_{
-		CoreRuleSet: v,
-	}
 }
 
 func (m *WafProfile) SetAnalyzeRequestBody(v *WafProfile_AnalyzeRequestBody) {

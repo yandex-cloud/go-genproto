@@ -425,11 +425,11 @@ const file_yandex_cloud_certificatemanager_v1_certificate_content_service_proto_
 	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\x12+\n" +
 	"\x11certificate_chain\x18\x03 \x03(\tR\x10certificateChain\x12\x1f\n" +
 	"\vprivate_key\x18\x04 \x01(\tR\n" +
-	"privateKeyJ\x04\b\x02\x10\x03\"\xc8\x01\n" +
-	"\x1cGetCertificateContentRequest\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\x12\x1d\n" +
+	"privateKeyJ\x04\b\x02\x10\x03\"\xe0\x01\n" +
+	"\x1cGetCertificateContentRequest\x123\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\x12'\n" +
 	"\n" +
-	"version_id\x18\x02 \x01(\tR\tversionId\x12b\n" +
+	"version_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\tversionId\x12b\n" +
 	"\x12private_key_format\x18\x03 \x01(\x0e24.yandex.cloud.certificatemanager.v1.PrivateKeyFormatR\x10privateKeyFormat\"\xd7\x02\n" +
 	"\x1eGetExCertificateContentRequest\x121\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\rcertificateId\x12[\n" +

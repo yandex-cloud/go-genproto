@@ -247,9 +247,9 @@ const file_yandex_cloud_kms_v1_asymmetricencryption_asymmetric_encryption_crypto
 	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1c\n" +
 	"\tplaintext\x18\x02 \x01(\fR\tplaintext\"D\n" +
 	"\x1dAsymmetricGetPublicKeyRequest\x12#\n" +
-	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\"V\n" +
-	"\x1eAsymmetricGetPublicKeyResponse\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId\x12\x1d\n" +
+	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\"d\n" +
+	"\x1eAsymmetricGetPublicKeyResponse\x12#\n" +
+	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\x12\x1d\n" +
 	"\n" +
 	"public_key\x18\x02 \x01(\tR\tpublicKey2\xd7\x03\n" +
 	"!AsymmetricEncryptionCryptoService\x12\xd0\x01\n" +

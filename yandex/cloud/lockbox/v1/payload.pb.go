@@ -78,15 +78,15 @@ func (x *Payload) GetEntries() []*Payload_Entry {
 
 type Payload_Entry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Non-confidential key of the entry.
-	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// Confidential value of the entry.
 	//
 	// Types that are valid to be assigned to Value:
 	//
 	//	*Payload_Entry_TextValue
 	//	*Payload_Entry_BinaryValue
-	Value         isPayload_Entry_Value `protobuf_oneof:"value"`
+	Value isPayload_Entry_Value `protobuf_oneof:"value"`
+	// Non-confidential key of the entry.
+	Key           string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -121,13 +121,6 @@ func (*Payload_Entry) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_lockbox_v1_payload_proto_rawDescGZIP(), []int{0, 0}
 }
 
-func (x *Payload_Entry) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
 func (x *Payload_Entry) GetValue() isPayload_Entry_Value {
 	if x != nil {
 		return x.Value
@@ -151,6 +144,13 @@ func (x *Payload_Entry) GetBinaryValue() []byte {
 		}
 	}
 	return nil
+}
+
+func (x *Payload_Entry) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
 }
 
 type isPayload_Entry_Value interface {
@@ -180,11 +180,11 @@ const file_yandex_cloud_lockbox_v1_payload_proto_rawDesc = "" +
 	"\n" +
 	"version_id\x18\x01 \x01(\tR\tversionId\x12@\n" +
 	"\aentries\x18\x02 \x03(\v2&.yandex.cloud.lockbox.v1.Payload.EntryR\aentries\x1ah\n" +
-	"\x05Entry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1f\n" +
+	"\x05Entry\x12\x1f\n" +
 	"\n" +
 	"text_value\x18\x02 \x01(\tH\x00R\ttextValue\x12#\n" +
-	"\fbinary_value\x18\x03 \x01(\fH\x00R\vbinaryValueB\a\n" +
+	"\fbinary_value\x18\x03 \x01(\fH\x00R\vbinaryValue\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03keyB\a\n" +
 	"\x05valueBb\n" +
 	"\x1byandex.cloud.api.lockbox.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/lockbox/v1;lockboxb\x06proto3"
 

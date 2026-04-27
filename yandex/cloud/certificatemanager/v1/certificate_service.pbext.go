@@ -67,10 +67,6 @@ func (m *CreateCertificateRequest) SetName(v string) {
 	m.Name = v
 }
 
-func (m *CreateCertificateRequest) SetDescription(v string) {
-	m.Description = v
-}
-
 func (m *CreateCertificateRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -87,12 +83,40 @@ func (m *CreateCertificateRequest) SetPrivateKey(v string) {
 	m.PrivateKey = v
 }
 
+func (m *CreateCertificateRequest) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *CreateCertificateRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
-func (m *CreateCertificateMetadata) SetCertificateId(v string) {
-	m.CertificateId = v
+func (m *RequestNewCertificateRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *RequestNewCertificateRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *RequestNewCertificateRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *RequestNewCertificateRequest) SetDomains(v []string) {
+	m.Domains = v
+}
+
+func (m *RequestNewCertificateRequest) SetChallengeType(v ChallengeType) {
+	m.ChallengeType = v
+}
+
+func (m *RequestNewCertificateRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *RequestNewCertificateRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateCertificateRequest) SetCertificateId(v string) {
@@ -105,10 +129,6 @@ func (m *UpdateCertificateRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateCertificateRequest) SetName(v string) {
 	m.Name = v
-}
-
-func (m *UpdateCertificateRequest) SetDescription(v string) {
-	m.Description = v
 }
 
 func (m *UpdateCertificateRequest) SetLabels(v map[string]string) {
@@ -127,48 +147,28 @@ func (m *UpdateCertificateRequest) SetPrivateKey(v string) {
 	m.PrivateKey = v
 }
 
-func (m *UpdateCertificateRequest) SetDeletionProtection(v bool) {
-	m.DeletionProtection = v
+func (m *UpdateCertificateRequest) SetDescription(v string) {
+	m.Description = v
 }
 
-func (m *UpdateCertificateMetadata) SetCertificateId(v string) {
-	m.CertificateId = v
+func (m *UpdateCertificateRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *DeleteCertificateRequest) SetCertificateId(v string) {
 	m.CertificateId = v
 }
 
-func (m *DeleteCertificateMetadata) SetCertificateId(v string) {
+func (m *CreateCertificateMetadata) SetCertificateId(v string) {
 	m.CertificateId = v
 }
 
-func (m *RequestNewCertificateRequest) SetFolderId(v string) {
-	m.FolderId = v
+func (m *UpdateCertificateMetadata) SetCertificateId(v string) {
+	m.CertificateId = v
 }
 
-func (m *RequestNewCertificateRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *RequestNewCertificateRequest) SetDescription(v string) {
-	m.Description = v
-}
-
-func (m *RequestNewCertificateRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
-func (m *RequestNewCertificateRequest) SetDomains(v []string) {
-	m.Domains = v
-}
-
-func (m *RequestNewCertificateRequest) SetChallengeType(v ChallengeType) {
-	m.ChallengeType = v
-}
-
-func (m *RequestNewCertificateRequest) SetDeletionProtection(v bool) {
-	m.DeletionProtection = v
+func (m *DeleteCertificateMetadata) SetCertificateId(v string) {
+	m.CertificateId = v
 }
 
 func (m *RequestNewCertificateMetadata) SetCertificateId(v string) {

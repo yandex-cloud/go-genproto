@@ -342,51 +342,6 @@ func (x *CreatePrivateConnectionRequest) GetLabels() map[string]string {
 	return nil
 }
 
-type CreatePrivateConnectionMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the PrivateConnection resource.
-	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
-}
-
-func (x *CreatePrivateConnectionMetadata) Reset() {
-	*x = CreatePrivateConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreatePrivateConnectionMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreatePrivateConnectionMetadata) ProtoMessage() {}
-
-func (x *CreatePrivateConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreatePrivateConnectionMetadata.ProtoReflect.Descriptor instead.
-func (*CreatePrivateConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CreatePrivateConnectionMetadata) GetPrivateConnectionId() string {
-	if x != nil {
-		return x.PrivateConnectionId
-	}
-	return ""
-}
-
 type UpdatePrivateConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the PrivateConnection resource.
@@ -426,7 +381,7 @@ type UpdatePrivateConnectionRequest struct {
 
 func (x *UpdatePrivateConnectionRequest) Reset() {
 	*x = UpdatePrivateConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -438,7 +393,7 @@ func (x *UpdatePrivateConnectionRequest) String() string {
 func (*UpdatePrivateConnectionRequest) ProtoMessage() {}
 
 func (x *UpdatePrivateConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -451,7 +406,7 @@ func (x *UpdatePrivateConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePrivateConnectionRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePrivateConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdatePrivateConnectionRequest) GetPrivateConnectionId() string {
@@ -523,6 +478,51 @@ func (x *UpdatePrivateConnectionRequest) GetLabels() map[string]string {
 		return x.Labels
 	}
 	return nil
+}
+
+type CreatePrivateConnectionMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the PrivateConnection resource.
+	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *CreatePrivateConnectionMetadata) Reset() {
+	*x = CreatePrivateConnectionMetadata{}
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePrivateConnectionMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePrivateConnectionMetadata) ProtoMessage() {}
+
+func (x *CreatePrivateConnectionMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePrivateConnectionMetadata.ProtoReflect.Descriptor instead.
+func (*CreatePrivateConnectionMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreatePrivateConnectionMetadata) GetPrivateConnectionId() string {
+	if x != nil {
+		return x.PrivateConnectionId
+	}
+	return ""
 }
 
 type UpdatePrivateConnectionMetadata struct {
@@ -660,30 +660,32 @@ func (x *DeletePrivateConnectionMetadata) GetPrivateConnectionId() string {
 	return ""
 }
 
-type UpsertStaticRouteRequest struct {
+type MovePrivateConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the PrivateConnection resource.
+	// ID of the PrivateConnection resource to move.
+	// To get the privateConnection ID use a [PrivateConnectionService.List] request.
 	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
-	// IPv4 StaticRoute configs to upsert
-	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,2,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// ID of the folder to which privateConnection will be moved.
+	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
-func (x *UpsertStaticRouteRequest) Reset() {
-	*x = UpsertStaticRouteRequest{}
+func (x *MovePrivateConnectionRequest) Reset() {
+	*x = MovePrivateConnectionRequest{}
 	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpsertStaticRouteRequest) String() string {
+func (x *MovePrivateConnectionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpsertStaticRouteRequest) ProtoMessage() {}
+func (*MovePrivateConnectionRequest) ProtoMessage() {}
 
-func (x *UpsertStaticRouteRequest) ProtoReflect() protoreflect.Message {
+func (x *MovePrivateConnectionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -695,23 +697,68 @@ func (x *UpsertStaticRouteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpsertStaticRouteRequest.ProtoReflect.Descriptor instead.
-func (*UpsertStaticRouteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use MovePrivateConnectionRequest.ProtoReflect.Descriptor instead.
+func (*MovePrivateConnectionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *UpsertStaticRouteRequest) GetPrivateConnectionId() string {
+func (x *MovePrivateConnectionRequest) GetPrivateConnectionId() string {
 	if x != nil {
 		return x.PrivateConnectionId
 	}
 	return ""
 }
 
-func (x *UpsertStaticRouteRequest) GetIpv4StaticRoutes() []*PrivateConnection_StaticRoute {
+func (x *MovePrivateConnectionRequest) GetDestinationFolderId() string {
 	if x != nil {
-		return x.Ipv4StaticRoutes
+		return x.DestinationFolderId
 	}
-	return nil
+	return ""
+}
+
+type MovePrivateConnectionMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the privateConnection that is being moved.
+	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *MovePrivateConnectionMetadata) Reset() {
+	*x = MovePrivateConnectionMetadata{}
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MovePrivateConnectionMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MovePrivateConnectionMetadata) ProtoMessage() {}
+
+func (x *MovePrivateConnectionMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MovePrivateConnectionMetadata.ProtoReflect.Descriptor instead.
+func (*MovePrivateConnectionMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *MovePrivateConnectionMetadata) GetPrivateConnectionId() string {
+	if x != nil {
+		return x.PrivateConnectionId
+	}
+	return ""
 }
 
 type UpsertStaticRouteMetadata struct {
@@ -724,7 +771,7 @@ type UpsertStaticRouteMetadata struct {
 
 func (x *UpsertStaticRouteMetadata) Reset() {
 	*x = UpsertStaticRouteMetadata{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +783,7 @@ func (x *UpsertStaticRouteMetadata) String() string {
 func (*UpsertStaticRouteMetadata) ProtoMessage() {}
 
 func (x *UpsertStaticRouteMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +796,7 @@ func (x *UpsertStaticRouteMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpsertStaticRouteMetadata.ProtoReflect.Descriptor instead.
 func (*UpsertStaticRouteMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpsertStaticRouteMetadata) GetPrivateConnectionId() string {
@@ -757,60 +804,6 @@ func (x *UpsertStaticRouteMetadata) GetPrivateConnectionId() string {
 		return x.PrivateConnectionId
 	}
 	return ""
-}
-
-type RemoveStaticRouteRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the PrivateConnection resource.
-	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
-	// IPv4 StaticRoute configs to remove
-	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,2,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *RemoveStaticRouteRequest) Reset() {
-	*x = RemoveStaticRouteRequest{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RemoveStaticRouteRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RemoveStaticRouteRequest) ProtoMessage() {}
-
-func (x *RemoveStaticRouteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RemoveStaticRouteRequest.ProtoReflect.Descriptor instead.
-func (*RemoveStaticRouteRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *RemoveStaticRouteRequest) GetPrivateConnectionId() string {
-	if x != nil {
-		return x.PrivateConnectionId
-	}
-	return ""
-}
-
-func (x *RemoveStaticRouteRequest) GetIpv4StaticRoutes() []*PrivateConnection_StaticRoute {
-	if x != nil {
-		return x.Ipv4StaticRoutes
-	}
-	return nil
 }
 
 type RemoveStaticRouteMetadata struct {
@@ -858,107 +851,6 @@ func (x *RemoveStaticRouteMetadata) GetPrivateConnectionId() string {
 	return ""
 }
 
-type MovePrivateConnectionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the PrivateConnection resource to move.
-	// To get the privateConnection ID use a [PrivateConnectionService.List] request.
-	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
-	// ID of the folder to which privateConnection will be moved.
-	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
-}
-
-func (x *MovePrivateConnectionRequest) Reset() {
-	*x = MovePrivateConnectionRequest{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MovePrivateConnectionRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MovePrivateConnectionRequest) ProtoMessage() {}
-
-func (x *MovePrivateConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MovePrivateConnectionRequest.ProtoReflect.Descriptor instead.
-func (*MovePrivateConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *MovePrivateConnectionRequest) GetPrivateConnectionId() string {
-	if x != nil {
-		return x.PrivateConnectionId
-	}
-	return ""
-}
-
-func (x *MovePrivateConnectionRequest) GetDestinationFolderId() string {
-	if x != nil {
-		return x.DestinationFolderId
-	}
-	return ""
-}
-
-type MovePrivateConnectionMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the privateConnection that is being moved.
-	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
-}
-
-func (x *MovePrivateConnectionMetadata) Reset() {
-	*x = MovePrivateConnectionMetadata{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MovePrivateConnectionMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MovePrivateConnectionMetadata) ProtoMessage() {}
-
-func (x *MovePrivateConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MovePrivateConnectionMetadata.ProtoReflect.Descriptor instead.
-func (*MovePrivateConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *MovePrivateConnectionMetadata) GetPrivateConnectionId() string {
-	if x != nil {
-		return x.PrivateConnectionId
-	}
-	return ""
-}
-
 type ListPrivateConnectionOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the PrivateConnection resource.
@@ -977,7 +869,7 @@ type ListPrivateConnectionOperationsRequest struct {
 
 func (x *ListPrivateConnectionOperationsRequest) Reset() {
 	*x = ListPrivateConnectionOperationsRequest{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -989,7 +881,7 @@ func (x *ListPrivateConnectionOperationsRequest) String() string {
 func (*ListPrivateConnectionOperationsRequest) ProtoMessage() {}
 
 func (x *ListPrivateConnectionOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1002,7 +894,7 @@ func (x *ListPrivateConnectionOperationsRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListPrivateConnectionOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListPrivateConnectionOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListPrivateConnectionOperationsRequest) GetPrivateConnectionId() string {
@@ -1043,7 +935,7 @@ type ListPrivateConnectionOperationsResponse struct {
 
 func (x *ListPrivateConnectionOperationsResponse) Reset() {
 	*x = ListPrivateConnectionOperationsResponse{}
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1055,7 +947,7 @@ func (x *ListPrivateConnectionOperationsResponse) String() string {
 func (*ListPrivateConnectionOperationsResponse) ProtoMessage() {}
 
 func (x *ListPrivateConnectionOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1068,7 +960,7 @@ func (x *ListPrivateConnectionOperationsResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListPrivateConnectionOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListPrivateConnectionOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListPrivateConnectionOperationsResponse) GetOperations() []*operation.Operation {
@@ -1085,11 +977,119 @@ func (x *ListPrivateConnectionOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type UpsertStaticRouteRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the PrivateConnection resource.
+	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
+	// IPv4 StaticRoute configs to upsert
+	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,2,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *UpsertStaticRouteRequest) Reset() {
+	*x = UpsertStaticRouteRequest{}
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpsertStaticRouteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpsertStaticRouteRequest) ProtoMessage() {}
+
+func (x *UpsertStaticRouteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpsertStaticRouteRequest.ProtoReflect.Descriptor instead.
+func (*UpsertStaticRouteRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *UpsertStaticRouteRequest) GetPrivateConnectionId() string {
+	if x != nil {
+		return x.PrivateConnectionId
+	}
+	return ""
+}
+
+func (x *UpsertStaticRouteRequest) GetIpv4StaticRoutes() []*PrivateConnection_StaticRoute {
+	if x != nil {
+		return x.Ipv4StaticRoutes
+	}
+	return nil
+}
+
+type RemoveStaticRouteRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the PrivateConnection resource.
+	PrivateConnectionId string `protobuf:"bytes,1,opt,name=private_connection_id,json=privateConnectionId,proto3" json:"private_connection_id,omitempty"`
+	// IPv4 StaticRoute configs to remove
+	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,2,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *RemoveStaticRouteRequest) Reset() {
+	*x = RemoveStaticRouteRequest{}
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveStaticRouteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveStaticRouteRequest) ProtoMessage() {}
+
+func (x *RemoveStaticRouteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_private_connection_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveStaticRouteRequest.ProtoReflect.Descriptor instead.
+func (*RemoveStaticRouteRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_private_connection_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *RemoveStaticRouteRequest) GetPrivateConnectionId() string {
+	if x != nil {
+		return x.PrivateConnectionId
+	}
+	return ""
+}
+
+func (x *RemoveStaticRouteRequest) GetIpv4StaticRoutes() []*PrivateConnection_StaticRoute {
+	if x != nil {
+		return x.Ipv4StaticRoutes
+	}
+	return nil
+}
+
 var File_yandex_cloud_cic_v1_private_connection_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/cic/v1/private_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a!yandex/cloud/cic/v1/peering.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\"_\n" +
+	"4yandex/cloud/cic/v1/private_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a!yandex/cloud/cic/v1/peering.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"_\n" +
 	"\x1bGetPrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\"\xc1\x01\n" +
 	"\x1dListPrivateConnectionsRequest\x12)\n" +
@@ -1119,9 +1119,7 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\n" +
-	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"U\n" +
-	"\x1fCreatePrivateConnectionMetadata\x122\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xc0\x06\n" +
+	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"\xc0\x06\n" +
 	"\x1eUpdatePrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1140,26 +1138,22 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\aJ\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"U\n" +
+	"\x1fCreatePrivateConnectionMetadata\x122\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"U\n" +
 	"\x1fUpdatePrivateConnectionMetadata\x122\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"b\n" +
 	"\x1eDeletePrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\"U\n" +
 	"\x1fDeletePrivateConnectionMetadata\x122\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xc4\x01\n" +
-	"\x18UpsertStaticRouteRequest\x12@\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12`\n" +
-	"\x12ipv4_static_routes\x18\x02 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutesJ\x04\b\x03\x10\x04\"O\n" +
-	"\x19UpsertStaticRouteMetadata\x122\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xc4\x01\n" +
-	"\x18RemoveStaticRouteRequest\x12@\n" +
-	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12`\n" +
-	"\x12ipv4_static_routes\x18\x02 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutesJ\x04\b\x03\x10\x04\"O\n" +
-	"\x19RemoveStaticRouteMetadata\x122\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xa2\x01\n" +
 	"\x1cMovePrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"S\n" +
 	"\x1dMovePrivateConnectionMetadata\x122\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"O\n" +
+	"\x19UpsertStaticRouteMetadata\x122\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"O\n" +
+	"\x19RemoveStaticRouteMetadata\x122\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tR\x13privateConnectionId\"\xbd\x01\n" +
 	"&ListPrivateConnectionOperationsRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12'\n" +
@@ -1171,7 +1165,13 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd5\x0e\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbe\x01\n" +
+	"\x18UpsertStaticRouteRequest\x12@\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12`\n" +
+	"\x12ipv4_static_routes\x18\x02 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes\"\xbe\x01\n" +
+	"\x18RemoveStaticRouteRequest\x12@\n" +
+	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\x12`\n" +
+	"\x12ipv4_static_routes\x18\x02 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes2\xd5\x0e\n" +
 	"\x18PrivateConnectionService\x12\x9b\x01\n" +
 	"\x03Get\x120.yandex.cloud.cic.v1.GetPrivateConnectionRequest\x1a&.yandex.cloud.cic.v1.PrivateConnection\":\x82\xd3\xe4\x93\x024\x122/cic/v1/privateConnections/{private_connection_id}\x12\x93\x01\n" +
 	"\x04List\x122.yandex.cloud.cic.v1.ListPrivateConnectionsRequest\x1a3.yandex.cloud.cic.v1.ListPrivateConnectionsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/cic/v1/privateConnections\x12\xbf\x01\n" +
@@ -1180,14 +1180,14 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x06Update\x123.yandex.cloud.cic.v1.UpdatePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*4\n" +
 	"\x1fUpdatePrivateConnectionMetadata\x12\x11PrivateConnection\x82\xd3\xe4\x93\x027:\x01*22/cic/v1/privateConnections/{private_connection_id}\x12\xd8\x01\n" +
 	"\x06Delete\x123.yandex.cloud.cic.v1.DeletePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"v\xb2\xd2*8\n" +
-	"\x1fDeletePrivateConnectionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x024*2/cic/v1/privateConnections/{private_connection_id}\x12\xee\x01\n" +
+	"\x1fDeletePrivateConnectionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x024*2/cic/v1/privateConnections/{private_connection_id}\x12\xd6\x01\n" +
+	"\x04Move\x121.yandex.cloud.cic.v1.MovePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*2\n" +
+	"\x1dMovePrivateConnectionMetadata\x12\x11PrivateConnection\x82\xd3\xe4\x93\x02<:\x01*\"7/cic/v1/privateConnections/{private_connection_id}:move\x12\xd2\x01\n" +
+	"\x0eListOperations\x12;.yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest\x1a<.yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/cic/v1/privateConnections/{private_connection_id}/operations\x12\xee\x01\n" +
 	"\x11UpsertStaticRoute\x12-.yandex.cloud.cic.v1.UpsertStaticRouteRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*2\n" +
 	"\x19UpsertStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:upsertStaticRoutes\x12\xee\x01\n" +
 	"\x11RemoveStaticRoute\x12-.yandex.cloud.cic.v1.RemoveStaticRouteRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*2\n" +
-	"\x19RemoveStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:removeStaticRoutes\x12\xd6\x01\n" +
-	"\x04Move\x121.yandex.cloud.cic.v1.MovePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*2\n" +
-	"\x1dMovePrivateConnectionMetadata\x12\x11PrivateConnection\x82\xd3\xe4\x93\x02<:\x01*\"7/cic/v1/privateConnections/{private_connection_id}:move\x12\xd2\x01\n" +
-	"\x0eListOperations\x12;.yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest\x1a<.yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/cic/v1/privateConnections/{private_connection_id}/operationsBV\n" +
+	"\x19RemoveStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:removeStaticRoutesBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (
@@ -1208,27 +1208,27 @@ var file_yandex_cloud_cic_v1_private_connection_service_proto_goTypes = []any{
 	(*ListPrivateConnectionsRequest)(nil),           // 1: yandex.cloud.cic.v1.ListPrivateConnectionsRequest
 	(*ListPrivateConnectionsResponse)(nil),          // 2: yandex.cloud.cic.v1.ListPrivateConnectionsResponse
 	(*CreatePrivateConnectionRequest)(nil),          // 3: yandex.cloud.cic.v1.CreatePrivateConnectionRequest
-	(*CreatePrivateConnectionMetadata)(nil),         // 4: yandex.cloud.cic.v1.CreatePrivateConnectionMetadata
-	(*UpdatePrivateConnectionRequest)(nil),          // 5: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest
+	(*UpdatePrivateConnectionRequest)(nil),          // 4: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest
+	(*CreatePrivateConnectionMetadata)(nil),         // 5: yandex.cloud.cic.v1.CreatePrivateConnectionMetadata
 	(*UpdatePrivateConnectionMetadata)(nil),         // 6: yandex.cloud.cic.v1.UpdatePrivateConnectionMetadata
 	(*DeletePrivateConnectionRequest)(nil),          // 7: yandex.cloud.cic.v1.DeletePrivateConnectionRequest
 	(*DeletePrivateConnectionMetadata)(nil),         // 8: yandex.cloud.cic.v1.DeletePrivateConnectionMetadata
-	(*UpsertStaticRouteRequest)(nil),                // 9: yandex.cloud.cic.v1.UpsertStaticRouteRequest
-	(*UpsertStaticRouteMetadata)(nil),               // 10: yandex.cloud.cic.v1.UpsertStaticRouteMetadata
-	(*RemoveStaticRouteRequest)(nil),                // 11: yandex.cloud.cic.v1.RemoveStaticRouteRequest
+	(*MovePrivateConnectionRequest)(nil),            // 9: yandex.cloud.cic.v1.MovePrivateConnectionRequest
+	(*MovePrivateConnectionMetadata)(nil),           // 10: yandex.cloud.cic.v1.MovePrivateConnectionMetadata
+	(*UpsertStaticRouteMetadata)(nil),               // 11: yandex.cloud.cic.v1.UpsertStaticRouteMetadata
 	(*RemoveStaticRouteMetadata)(nil),               // 12: yandex.cloud.cic.v1.RemoveStaticRouteMetadata
-	(*MovePrivateConnectionRequest)(nil),            // 13: yandex.cloud.cic.v1.MovePrivateConnectionRequest
-	(*MovePrivateConnectionMetadata)(nil),           // 14: yandex.cloud.cic.v1.MovePrivateConnectionMetadata
-	(*ListPrivateConnectionOperationsRequest)(nil),  // 15: yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest
-	(*ListPrivateConnectionOperationsResponse)(nil), // 16: yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
-	nil,                                   // 17: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.LabelsEntry
-	nil,                                   // 18: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntry
-	(*PrivateConnection)(nil),             // 19: yandex.cloud.cic.v1.PrivateConnection
-	(*wrapperspb.Int64Value)(nil),         // 20: google.protobuf.Int64Value
-	(*Peering)(nil),                       // 21: yandex.cloud.cic.v1.Peering
-	(*PrivateConnection_StaticRoute)(nil), // 22: yandex.cloud.cic.v1.PrivateConnection.StaticRoute
-	(*fieldmaskpb.FieldMask)(nil),         // 23: google.protobuf.FieldMask
-	(*operation.Operation)(nil),           // 24: yandex.cloud.operation.Operation
+	(*ListPrivateConnectionOperationsRequest)(nil),  // 13: yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest
+	(*ListPrivateConnectionOperationsResponse)(nil), // 14: yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
+	(*UpsertStaticRouteRequest)(nil),                // 15: yandex.cloud.cic.v1.UpsertStaticRouteRequest
+	(*RemoveStaticRouteRequest)(nil),                // 16: yandex.cloud.cic.v1.RemoveStaticRouteRequest
+	nil,                                             // 17: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.LabelsEntry
+	nil,                                             // 18: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntry
+	(*PrivateConnection)(nil),                       // 19: yandex.cloud.cic.v1.PrivateConnection
+	(*wrapperspb.Int64Value)(nil),                   // 20: google.protobuf.Int64Value
+	(*Peering)(nil),                                 // 21: yandex.cloud.cic.v1.Peering
+	(*PrivateConnection_StaticRoute)(nil),           // 22: yandex.cloud.cic.v1.PrivateConnection.StaticRoute
+	(*fieldmaskpb.FieldMask)(nil),                   // 23: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                     // 24: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cic_v1_private_connection_service_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.cic.v1.ListPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
@@ -1241,27 +1241,27 @@ var file_yandex_cloud_cic_v1_private_connection_service_proto_depIdxs = []int32{
 	21, // 7: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.ipv4_peering:type_name -> yandex.cloud.cic.v1.Peering
 	22, // 8: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
 	18, // 9: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntry
-	22, // 10: yandex.cloud.cic.v1.UpsertStaticRouteRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
-	22, // 11: yandex.cloud.cic.v1.RemoveStaticRouteRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
-	24, // 12: yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	24, // 10: yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	22, // 11: yandex.cloud.cic.v1.UpsertStaticRouteRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
+	22, // 12: yandex.cloud.cic.v1.RemoveStaticRouteRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
 	0,  // 13: yandex.cloud.cic.v1.PrivateConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetPrivateConnectionRequest
 	1,  // 14: yandex.cloud.cic.v1.PrivateConnectionService.List:input_type -> yandex.cloud.cic.v1.ListPrivateConnectionsRequest
 	3,  // 15: yandex.cloud.cic.v1.PrivateConnectionService.Create:input_type -> yandex.cloud.cic.v1.CreatePrivateConnectionRequest
-	5,  // 16: yandex.cloud.cic.v1.PrivateConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdatePrivateConnectionRequest
+	4,  // 16: yandex.cloud.cic.v1.PrivateConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdatePrivateConnectionRequest
 	7,  // 17: yandex.cloud.cic.v1.PrivateConnectionService.Delete:input_type -> yandex.cloud.cic.v1.DeletePrivateConnectionRequest
-	9,  // 18: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:input_type -> yandex.cloud.cic.v1.UpsertStaticRouteRequest
-	11, // 19: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:input_type -> yandex.cloud.cic.v1.RemoveStaticRouteRequest
-	13, // 20: yandex.cloud.cic.v1.PrivateConnectionService.Move:input_type -> yandex.cloud.cic.v1.MovePrivateConnectionRequest
-	15, // 21: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest
+	9,  // 18: yandex.cloud.cic.v1.PrivateConnectionService.Move:input_type -> yandex.cloud.cic.v1.MovePrivateConnectionRequest
+	13, // 19: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest
+	15, // 20: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:input_type -> yandex.cloud.cic.v1.UpsertStaticRouteRequest
+	16, // 21: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:input_type -> yandex.cloud.cic.v1.RemoveStaticRouteRequest
 	19, // 22: yandex.cloud.cic.v1.PrivateConnectionService.Get:output_type -> yandex.cloud.cic.v1.PrivateConnection
 	2,  // 23: yandex.cloud.cic.v1.PrivateConnectionService.List:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionsResponse
 	24, // 24: yandex.cloud.cic.v1.PrivateConnectionService.Create:output_type -> yandex.cloud.operation.Operation
 	24, // 25: yandex.cloud.cic.v1.PrivateConnectionService.Update:output_type -> yandex.cloud.operation.Operation
 	24, // 26: yandex.cloud.cic.v1.PrivateConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
-	24, // 27: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:output_type -> yandex.cloud.operation.Operation
-	24, // 28: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:output_type -> yandex.cloud.operation.Operation
-	24, // 29: yandex.cloud.cic.v1.PrivateConnectionService.Move:output_type -> yandex.cloud.operation.Operation
-	16, // 30: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
+	24, // 27: yandex.cloud.cic.v1.PrivateConnectionService.Move:output_type -> yandex.cloud.operation.Operation
+	14, // 28: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
+	24, // 29: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:output_type -> yandex.cloud.operation.Operation
+	24, // 30: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:output_type -> yandex.cloud.operation.Operation
 	22, // [22:31] is the sub-list for method output_type
 	13, // [13:22] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name

@@ -316,7 +316,7 @@ var File_yandex_cloud_cic_v1_public_connection_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_cic_v1_public_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/cic/v1/public_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\"\\\n" +
+	"3yandex/cloud/cic/v1/public_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\\\n" +
 	"\x1aGetPublicConnectionRequest\x12>\n" +
 	"\x14public_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12publicConnectionId\"\xc0\x01\n" +
 	"\x1cListPublicConnectionsRequest\x12)\n" +

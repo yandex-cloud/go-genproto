@@ -72,10 +72,6 @@ func (m *CreatePrivateConnectionRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *CreatePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
-	m.PrivateConnectionId = v
-}
-
 func (m *UpdatePrivateConnectionRequest) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
@@ -116,6 +112,10 @@ func (m *UpdatePrivateConnectionRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreatePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
 func (m *UpdatePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
@@ -128,30 +128,6 @@ func (m *DeletePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
 
-func (m *UpsertStaticRouteRequest) SetPrivateConnectionId(v string) {
-	m.PrivateConnectionId = v
-}
-
-func (m *UpsertStaticRouteRequest) SetIpv4StaticRoutes(v []*PrivateConnection_StaticRoute) {
-	m.Ipv4StaticRoutes = v
-}
-
-func (m *UpsertStaticRouteMetadata) SetPrivateConnectionId(v string) {
-	m.PrivateConnectionId = v
-}
-
-func (m *RemoveStaticRouteRequest) SetPrivateConnectionId(v string) {
-	m.PrivateConnectionId = v
-}
-
-func (m *RemoveStaticRouteRequest) SetIpv4StaticRoutes(v []*PrivateConnection_StaticRoute) {
-	m.Ipv4StaticRoutes = v
-}
-
-func (m *RemoveStaticRouteMetadata) SetPrivateConnectionId(v string) {
-	m.PrivateConnectionId = v
-}
-
 func (m *MovePrivateConnectionRequest) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
@@ -161,6 +137,14 @@ func (m *MovePrivateConnectionRequest) SetDestinationFolderId(v string) {
 }
 
 func (m *MovePrivateConnectionMetadata) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
+func (m *UpsertStaticRouteMetadata) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
+func (m *RemoveStaticRouteMetadata) SetPrivateConnectionId(v string) {
 	m.PrivateConnectionId = v
 }
 
@@ -182,4 +166,20 @@ func (m *ListPrivateConnectionOperationsResponse) SetOperations(v []*operation.O
 
 func (m *ListPrivateConnectionOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *UpsertStaticRouteRequest) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
+func (m *UpsertStaticRouteRequest) SetIpv4StaticRoutes(v []*PrivateConnection_StaticRoute) {
+	m.Ipv4StaticRoutes = v
+}
+
+func (m *RemoveStaticRouteRequest) SetPrivateConnectionId(v string) {
+	m.PrivateConnectionId = v
+}
+
+func (m *RemoveStaticRouteRequest) SetIpv4StaticRoutes(v []*PrivateConnection_StaticRoute) {
+	m.Ipv4StaticRoutes = v
 }

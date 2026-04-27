@@ -165,17 +165,16 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_rule_set_descriptor_proto protoref
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_rule_set_descriptor_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1dyandex/cloud/validation.proto\"\xdc\x02\n" +
+	">yandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1dyandex/cloud/validation.proto\"\xb7\x02\n" +
 	"\x11RuleSetDescriptor\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1e\n" +
 	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversion\x12\x14\n" +
 	"\x02id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12]\n" +
-	"\x05rules\x18\x04 \x03(\v2G.yandex.cloud.smartwebsecurity.v1.waf.RuleSetDescriptor.RuleDescriptionR\x05rules\x1a\x97\x01\n" +
+	"\x05rules\x18\x04 \x03(\v2G.yandex.cloud.smartwebsecurity.v1.waf.RuleSetDescriptor.RuleDescriptionR\x05rules\x1as\n" +
 	"\x0fRuleDescription\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12#\n" +
 	"\ranomaly_score\x18\b \x01(\x03R\fanomalyScore\x12%\n" +
-	"\x0eparanoia_level\x18\t \x01(\x03R\rparanoiaLevelJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\x06\x10\aJ\x04\b\a\x10\bJ\x04\b\n" +
-	"\x10\vB\x85\x01\n" +
+	"\x0eparanoia_level\x18\t \x01(\x03R\rparanoiaLevelJ\x04\b\x02\x10\bB\x85\x01\n" +
 	"(yandex.cloud.api.smartwebsecurity.v1.wafZYgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartwebsecurity/v1/waf;smartwebsecurityb\x06proto3"
 
 var (

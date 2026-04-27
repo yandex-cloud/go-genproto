@@ -257,39 +257,39 @@ type Certificate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the certificate. Generated at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the certificate.
+	// The name is unique within the folder.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Certificate labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the folder that the certificate belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the certificate.
-	// The name is unique within the folder.
-	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the certificate.
-	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Certificate labels as `key:value` pairs.
-	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Time when the certificate is updated.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Type of the certificate.
 	Type CertificateType `protobuf:"varint,7,opt,name=type,proto3,enum=yandex.cloud.certificatemanager.v1.CertificateType" json:"type,omitempty"`
 	// Fully qualified domain names of the certificate.
 	Domains []string `protobuf:"bytes,8,rep,name=domains,proto3" json:"domains,omitempty"`
-	// Status of the certificate.
-	Status Certificate_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.certificatemanager.v1.Certificate_Status" json:"status,omitempty"`
 	// [Distinguished Name](https://tools.ietf.org/html/rfc1779) of the certificate authority that issued the certificate.
 	Issuer string `protobuf:"bytes,10,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	// [Distinguished Name](https://tools.ietf.org/html/rfc1779) of the entity that is associated with the public key contained in the certificate.
-	Subject string `protobuf:"bytes,11,opt,name=subject,proto3" json:"subject,omitempty"`
-	// Serial number of the certificate.
-	Serial string `protobuf:"bytes,12,opt,name=serial,proto3" json:"serial,omitempty"`
-	// Time when the certificate is updated.
-	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Time when the certificate is issued.
 	IssuedAt *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=issued_at,json=issuedAt,proto3" json:"issued_at,omitempty"`
 	// Time after which the certificate is not valid.
 	NotAfter *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=not_after,json=notAfter,proto3" json:"not_after,omitempty"`
 	// Time before which the certificate is not valid.
 	NotBefore *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=not_before,json=notBefore,proto3" json:"not_before,omitempty"`
+	// Serial number of the certificate.
+	Serial string `protobuf:"bytes,12,opt,name=serial,proto3" json:"serial,omitempty"`
+	// Status of the certificate.
+	Status Certificate_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.certificatemanager.v1.Certificate_Status" json:"status,omitempty"`
 	// Domains validation challenges of the certificate. Used only for managed certificates.
 	Challenges []*Challenge `protobuf:"bytes,17,rep,name=challenges,proto3" json:"challenges,omitempty"`
+	// [Distinguished Name](https://tools.ietf.org/html/rfc1779) of the entity that is associated with the public key contained in the certificate.
+	Subject string `protobuf:"bytes,11,opt,name=subject,proto3" json:"subject,omitempty"`
+	// Description of the certificate.
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	// Flag that protects deletion of the certificate
 	DeletionProtection bool `protobuf:"varint,18,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Mark imported certificates without uploaded chain or with chain which not lead to root certificate
@@ -335,6 +335,20 @@ func (x *Certificate) GetId() string {
 	return ""
 }
 
+func (x *Certificate) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Certificate) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
 func (x *Certificate) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
@@ -349,23 +363,9 @@ func (x *Certificate) GetCreatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Certificate) GetName() string {
+func (x *Certificate) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *Certificate) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *Certificate) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
+		return x.UpdatedAt
 	}
 	return nil
 }
@@ -384,39 +384,11 @@ func (x *Certificate) GetDomains() []string {
 	return nil
 }
 
-func (x *Certificate) GetStatus() Certificate_Status {
-	if x != nil {
-		return x.Status
-	}
-	return Certificate_STATUS_UNSPECIFIED
-}
-
 func (x *Certificate) GetIssuer() string {
 	if x != nil {
 		return x.Issuer
 	}
 	return ""
-}
-
-func (x *Certificate) GetSubject() string {
-	if x != nil {
-		return x.Subject
-	}
-	return ""
-}
-
-func (x *Certificate) GetSerial() string {
-	if x != nil {
-		return x.Serial
-	}
-	return ""
-}
-
-func (x *Certificate) GetUpdatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
 }
 
 func (x *Certificate) GetIssuedAt() *timestamppb.Timestamp {
@@ -440,11 +412,39 @@ func (x *Certificate) GetNotBefore() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Certificate) GetSerial() string {
+	if x != nil {
+		return x.Serial
+	}
+	return ""
+}
+
+func (x *Certificate) GetStatus() Certificate_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Certificate_STATUS_UNSPECIFIED
+}
+
 func (x *Certificate) GetChallenges() []*Challenge {
 	if x != nil {
 		return x.Challenges
 	}
 	return nil
+}
+
+func (x *Certificate) GetSubject() string {
+	if x != nil {
+		return x.Subject
+	}
+	return ""
+}
+
+func (x *Certificate) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 func (x *Certificate) GetDeletionProtection() bool {
@@ -464,27 +464,27 @@ func (x *Certificate) GetIncompleteChain() bool {
 // Domain validation challenge.
 type Challenge struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Domain of the challenge.
-	Domain string `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	// Type of the challenge.
-	Type ChallengeType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.certificatemanager.v1.ChallengeType" json:"type,omitempty"`
-	// Time when the challenge is created.
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Time when the challenge is updated.
-	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	// Status of the challenge.
-	Status Challenge_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.certificatemanager.v1.Challenge_Status" json:"status,omitempty"`
-	// Description of the challenge.
-	Message string `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
-	// Error of the challenge.
-	Error string `protobuf:"bytes,7,opt,name=error,proto3" json:"error,omitempty"`
 	// Data of the challenge.
 	//
 	// Types that are valid to be assigned to Challenge:
 	//
 	//	*Challenge_DnsChallenge
 	//	*Challenge_HttpChallenge
-	Challenge     isChallenge_Challenge `protobuf_oneof:"challenge"`
+	Challenge isChallenge_Challenge `protobuf_oneof:"challenge"`
+	// Time when the challenge is created.
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Time when the challenge is updated.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Domain of the challenge.
+	Domain string `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	// Type of the challenge.
+	Type ChallengeType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.certificatemanager.v1.ChallengeType" json:"type,omitempty"`
+	// Status of the challenge.
+	Status Challenge_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.certificatemanager.v1.Challenge_Status" json:"status,omitempty"`
+	// Description of the challenge.
+	Message string `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	// Error of the challenge.
+	Error         string `protobuf:"bytes,7,opt,name=error,proto3" json:"error,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -519,55 +519,6 @@ func (*Challenge) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Challenge) GetDomain() string {
-	if x != nil {
-		return x.Domain
-	}
-	return ""
-}
-
-func (x *Challenge) GetType() ChallengeType {
-	if x != nil {
-		return x.Type
-	}
-	return ChallengeType_CHALLENGE_TYPE_UNSPECIFIED
-}
-
-func (x *Challenge) GetCreatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreatedAt
-	}
-	return nil
-}
-
-func (x *Challenge) GetUpdatedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.UpdatedAt
-	}
-	return nil
-}
-
-func (x *Challenge) GetStatus() Challenge_Status {
-	if x != nil {
-		return x.Status
-	}
-	return Challenge_STATUS_UNSPECIFIED
-}
-
-func (x *Challenge) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-func (x *Challenge) GetError() string {
-	if x != nil {
-		return x.Error
-	}
-	return ""
-}
-
 func (x *Challenge) GetChallenge() isChallenge_Challenge {
 	if x != nil {
 		return x.Challenge
@@ -591,6 +542,55 @@ func (x *Challenge) GetHttpChallenge() *Challenge_HttpFile {
 		}
 	}
 	return nil
+}
+
+func (x *Challenge) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Challenge) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *Challenge) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *Challenge) GetType() ChallengeType {
+	if x != nil {
+		return x.Type
+	}
+	return ChallengeType_CHALLENGE_TYPE_UNSPECIFIED
+}
+
+func (x *Challenge) GetStatus() Challenge_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Challenge_STATUS_UNSPECIFIED
+}
+
+func (x *Challenge) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *Challenge) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
 }
 
 type isChallenge_Challenge interface {
@@ -798,29 +798,29 @@ const file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDesc = "" +
 	"\n" +
 	"4yandex/cloud/certificatemanager/v1/certificate.proto\x12\"yandex.cloud.certificatemanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc5\b\n" +
 	"\vCertificate\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12S\n" +
+	"\x06labels\x18\x06 \x03(\v2;.yandex.cloud.certificatemanager.v1.Certificate.LabelsEntryR\x06labels\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12S\n" +
-	"\x06labels\x18\x06 \x03(\v2;.yandex.cloud.certificatemanager.v1.Certificate.LabelsEntryR\x06labels\x12G\n" +
-	"\x04type\x18\a \x01(\x0e23.yandex.cloud.certificatemanager.v1.CertificateTypeR\x04type\x12\x18\n" +
-	"\adomains\x18\b \x03(\tR\adomains\x12N\n" +
-	"\x06status\x18\t \x01(\x0e26.yandex.cloud.certificatemanager.v1.Certificate.StatusR\x06status\x12\x16\n" +
-	"\x06issuer\x18\n" +
-	" \x01(\tR\x06issuer\x12\x18\n" +
-	"\asubject\x18\v \x01(\tR\asubject\x12\x16\n" +
-	"\x06serial\x18\f \x01(\tR\x06serial\x129\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x127\n" +
+	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12G\n" +
+	"\x04type\x18\a \x01(\x0e23.yandex.cloud.certificatemanager.v1.CertificateTypeR\x04type\x12\x18\n" +
+	"\adomains\x18\b \x03(\tR\adomains\x12\x16\n" +
+	"\x06issuer\x18\n" +
+	" \x01(\tR\x06issuer\x127\n" +
 	"\tissued_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\bissuedAt\x127\n" +
 	"\tnot_after\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\bnotAfter\x129\n" +
 	"\n" +
-	"not_before\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tnotBefore\x12M\n" +
+	"not_before\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tnotBefore\x12\x16\n" +
+	"\x06serial\x18\f \x01(\tR\x06serial\x12N\n" +
+	"\x06status\x18\t \x01(\x0e26.yandex.cloud.certificatemanager.v1.Certificate.StatusR\x06status\x12M\n" +
 	"\n" +
 	"challenges\x18\x11 \x03(\v2-.yandex.cloud.certificatemanager.v1.ChallengeR\n" +
-	"challenges\x12/\n" +
+	"challenges\x12\x18\n" +
+	"\asubject\x18\v \x01(\tR\asubject\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12/\n" +
 	"\x13deletion_protection\x18\x12 \x01(\bR\x12deletionProtection\x12)\n" +
 	"\x10incomplete_chain\x18\x13 \x01(\bR\x0fincompleteChain\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -836,18 +836,18 @@ const file_yandex_cloud_certificatemanager_v1_certificate_proto_rawDesc = "" +
 	"\aREVOKED\x10\x04\x12\f\n" +
 	"\bRENEWING\x10\x05\x12\x12\n" +
 	"\x0eRENEWAL_FAILED\x10\x06\"\x86\x06\n" +
-	"\tChallenge\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\x12E\n" +
-	"\x04type\x18\x02 \x01(\x0e21.yandex.cloud.certificatemanager.v1.ChallengeTypeR\x04type\x129\n" +
+	"\tChallenge\x12^\n" +
+	"\rdns_challenge\x18\b \x01(\v27.yandex.cloud.certificatemanager.v1.Challenge.DnsRecordH\x00R\fdnsChallenge\x12_\n" +
+	"\x0ehttp_challenge\x18\t \x01(\v26.yandex.cloud.certificatemanager.v1.Challenge.HttpFileH\x00R\rhttpChallenge\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12L\n" +
+	"updated_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12E\n" +
+	"\x04type\x18\x02 \x01(\x0e21.yandex.cloud.certificatemanager.v1.ChallengeTypeR\x04type\x12L\n" +
 	"\x06status\x18\x05 \x01(\x0e24.yandex.cloud.certificatemanager.v1.Challenge.StatusR\x06status\x12\x18\n" +
 	"\amessage\x18\x06 \x01(\tR\amessage\x12\x14\n" +
-	"\x05error\x18\a \x01(\tR\x05error\x12^\n" +
-	"\rdns_challenge\x18\b \x01(\v27.yandex.cloud.certificatemanager.v1.Challenge.DnsRecordH\x00R\fdnsChallenge\x12_\n" +
-	"\x0ehttp_challenge\x18\t \x01(\v26.yandex.cloud.certificatemanager.v1.Challenge.HttpFileH\x00R\rhttpChallenge\x1aI\n" +
+	"\x05error\x18\a \x01(\tR\x05error\x1aI\n" +
 	"\tDnsRecord\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x14\n" +
@@ -906,21 +906,21 @@ var file_yandex_cloud_certificatemanager_v1_certificate_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
 }
 var file_yandex_cloud_certificatemanager_v1_certificate_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.certificatemanager.v1.Certificate.created_at:type_name -> google.protobuf.Timestamp
-	7,  // 1: yandex.cloud.certificatemanager.v1.Certificate.labels:type_name -> yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
-	0,  // 2: yandex.cloud.certificatemanager.v1.Certificate.type:type_name -> yandex.cloud.certificatemanager.v1.CertificateType
-	2,  // 3: yandex.cloud.certificatemanager.v1.Certificate.status:type_name -> yandex.cloud.certificatemanager.v1.Certificate.Status
-	10, // 4: yandex.cloud.certificatemanager.v1.Certificate.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 5: yandex.cloud.certificatemanager.v1.Certificate.issued_at:type_name -> google.protobuf.Timestamp
-	10, // 6: yandex.cloud.certificatemanager.v1.Certificate.not_after:type_name -> google.protobuf.Timestamp
-	10, // 7: yandex.cloud.certificatemanager.v1.Certificate.not_before:type_name -> google.protobuf.Timestamp
+	7,  // 0: yandex.cloud.certificatemanager.v1.Certificate.labels:type_name -> yandex.cloud.certificatemanager.v1.Certificate.LabelsEntry
+	10, // 1: yandex.cloud.certificatemanager.v1.Certificate.created_at:type_name -> google.protobuf.Timestamp
+	10, // 2: yandex.cloud.certificatemanager.v1.Certificate.updated_at:type_name -> google.protobuf.Timestamp
+	0,  // 3: yandex.cloud.certificatemanager.v1.Certificate.type:type_name -> yandex.cloud.certificatemanager.v1.CertificateType
+	10, // 4: yandex.cloud.certificatemanager.v1.Certificate.issued_at:type_name -> google.protobuf.Timestamp
+	10, // 5: yandex.cloud.certificatemanager.v1.Certificate.not_after:type_name -> google.protobuf.Timestamp
+	10, // 6: yandex.cloud.certificatemanager.v1.Certificate.not_before:type_name -> google.protobuf.Timestamp
+	2,  // 7: yandex.cloud.certificatemanager.v1.Certificate.status:type_name -> yandex.cloud.certificatemanager.v1.Certificate.Status
 	5,  // 8: yandex.cloud.certificatemanager.v1.Certificate.challenges:type_name -> yandex.cloud.certificatemanager.v1.Challenge
-	1,  // 9: yandex.cloud.certificatemanager.v1.Challenge.type:type_name -> yandex.cloud.certificatemanager.v1.ChallengeType
-	10, // 10: yandex.cloud.certificatemanager.v1.Challenge.created_at:type_name -> google.protobuf.Timestamp
-	10, // 11: yandex.cloud.certificatemanager.v1.Challenge.updated_at:type_name -> google.protobuf.Timestamp
-	3,  // 12: yandex.cloud.certificatemanager.v1.Challenge.status:type_name -> yandex.cloud.certificatemanager.v1.Challenge.Status
-	8,  // 13: yandex.cloud.certificatemanager.v1.Challenge.dns_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
-	9,  // 14: yandex.cloud.certificatemanager.v1.Challenge.http_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.HttpFile
+	8,  // 9: yandex.cloud.certificatemanager.v1.Challenge.dns_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.DnsRecord
+	9,  // 10: yandex.cloud.certificatemanager.v1.Challenge.http_challenge:type_name -> yandex.cloud.certificatemanager.v1.Challenge.HttpFile
+	10, // 11: yandex.cloud.certificatemanager.v1.Challenge.created_at:type_name -> google.protobuf.Timestamp
+	10, // 12: yandex.cloud.certificatemanager.v1.Challenge.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 13: yandex.cloud.certificatemanager.v1.Challenge.type:type_name -> yandex.cloud.certificatemanager.v1.ChallengeType
+	3,  // 14: yandex.cloud.certificatemanager.v1.Challenge.status:type_name -> yandex.cloud.certificatemanager.v1.Challenge.Status
 	10, // 15: yandex.cloud.certificatemanager.v1.Version.created_at:type_name -> google.protobuf.Timestamp
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type

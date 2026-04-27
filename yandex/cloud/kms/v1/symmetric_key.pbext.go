@@ -7,6 +7,38 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func (m *SymmetricKeyVersion) SetId(v string) {
+	m.Id = v
+}
+
+func (m *SymmetricKeyVersion) SetKeyId(v string) {
+	m.KeyId = v
+}
+
+func (m *SymmetricKeyVersion) SetStatus(v SymmetricKeyVersion_Status) {
+	m.Status = v
+}
+
+func (m *SymmetricKeyVersion) SetAlgorithm(v SymmetricAlgorithm) {
+	m.Algorithm = v
+}
+
+func (m *SymmetricKeyVersion) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *SymmetricKeyVersion) SetPrimary(v bool) {
+	m.Primary = v
+}
+
+func (m *SymmetricKeyVersion) SetDestroyAt(v *timestamppb.Timestamp) {
+	m.DestroyAt = v
+}
+
+func (m *SymmetricKeyVersion) SetHostedByHsm(v bool) {
+	m.HostedByHsm = v
+}
+
 func (m *SymmetricKey) SetId(v string) {
 	m.Id = v
 }
@@ -53,36 +85,4 @@ func (m *SymmetricKey) SetRotationPeriod(v *durationpb.Duration) {
 
 func (m *SymmetricKey) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *SymmetricKeyVersion) SetId(v string) {
-	m.Id = v
-}
-
-func (m *SymmetricKeyVersion) SetKeyId(v string) {
-	m.KeyId = v
-}
-
-func (m *SymmetricKeyVersion) SetStatus(v SymmetricKeyVersion_Status) {
-	m.Status = v
-}
-
-func (m *SymmetricKeyVersion) SetAlgorithm(v SymmetricAlgorithm) {
-	m.Algorithm = v
-}
-
-func (m *SymmetricKeyVersion) SetCreatedAt(v *timestamppb.Timestamp) {
-	m.CreatedAt = v
-}
-
-func (m *SymmetricKeyVersion) SetPrimary(v bool) {
-	m.Primary = v
-}
-
-func (m *SymmetricKeyVersion) SetDestroyAt(v *timestamppb.Timestamp) {
-	m.DestroyAt = v
-}
-
-func (m *SymmetricKeyVersion) SetHostedByHsm(v bool) {
-	m.HostedByHsm = v
 }

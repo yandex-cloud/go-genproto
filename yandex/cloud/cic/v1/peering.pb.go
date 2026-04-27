@@ -124,14 +124,14 @@ var File_yandex_cloud_cic_v1_peering_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_peering_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/cic/v1/peering.proto\x12\x13yandex.cloud.cic.v1\x1a\x1dyandex/cloud/validation.proto\"\x96\x02\n" +
+	"!yandex/cloud/cic/v1/peering.proto\x12\x13yandex.cloud.cic.v1\x1a\x1dyandex/cloud/validation.proto\"\x9a\x02\n" +
 	"\aPeering\x123\n" +
 	"\x0epeering_subnet\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rpeeringSubnet\x12%\n" +
 	"\apeer_ip\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06peerIp\x12'\n" +
-	"\bcloud_ip\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudIp\x12&\n" +
-	"\fpeer_bgp_asn\x18\x04 \x01(\x03B\x04\xe8\xc71\x01R\n" +
-	"peerBgpAsn\x12*\n" +
-	"\rcloud_bgp_asn\x18\x05 \x01(\x03B\x06\xe8\xc71\x01\x18\x01R\vcloudBgpAsn\x122\n" +
+	"\bcloud_ip\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudIp\x12(\n" +
+	"\fpeer_bgp_asn\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\n" +
+	"peerBgpAsn\x12,\n" +
+	"\rcloud_bgp_asn\x18\x05 \x01(\x03B\b\xfa\xc71\x02>0\x18\x01R\vcloudBgpAsn\x122\n" +
 	"\x10peer_bgp_md5_key\x18\x06 \x01(\tB\t\x8a\xc81\x05<=200R\rpeerBgpMd5KeyBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 

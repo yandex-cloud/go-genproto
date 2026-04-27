@@ -70,204 +70,6 @@ func (x *GetQuotaRequestRequest) GetQuotaRequestId() string {
 	return ""
 }
 
-type CreateQuotaRequestRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Resource to create a quota request in.
-	Resource *Resource `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
-	// Desired quota limits
-	DesiredQuotaLimits []*CreateQuotaRequestRequest_DesiredQuotaLimit `protobuf:"bytes,2,rep,name=desired_quota_limits,json=desiredQuotaLimits,proto3" json:"desired_quota_limits,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *CreateQuotaRequestRequest) Reset() {
-	*x = CreateQuotaRequestRequest{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateQuotaRequestRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateQuotaRequestRequest) ProtoMessage() {}
-
-func (x *CreateQuotaRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateQuotaRequestRequest.ProtoReflect.Descriptor instead.
-func (*CreateQuotaRequestRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CreateQuotaRequestRequest) GetResource() *Resource {
-	if x != nil {
-		return x.Resource
-	}
-	return nil
-}
-
-func (x *CreateQuotaRequestRequest) GetDesiredQuotaLimits() []*CreateQuotaRequestRequest_DesiredQuotaLimit {
-	if x != nil {
-		return x.DesiredQuotaLimits
-	}
-	return nil
-}
-
-type CreateQuotaRequestMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the quota request that is being created.
-	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *CreateQuotaRequestMetadata) Reset() {
-	*x = CreateQuotaRequestMetadata{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateQuotaRequestMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateQuotaRequestMetadata) ProtoMessage() {}
-
-func (x *CreateQuotaRequestMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateQuotaRequestMetadata.ProtoReflect.Descriptor instead.
-func (*CreateQuotaRequestMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CreateQuotaRequestMetadata) GetQuotaRequestId() string {
-	if x != nil {
-		return x.QuotaRequestId
-	}
-	return ""
-}
-
-type CancelQuotaRequestRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the quota request to update.
-	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
-	// Quota IDs that is being canceled.
-	QuotaIds      []string `protobuf:"bytes,2,rep,name=quota_ids,json=quotaIds,proto3" json:"quota_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CancelQuotaRequestRequest) Reset() {
-	*x = CancelQuotaRequestRequest{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CancelQuotaRequestRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CancelQuotaRequestRequest) ProtoMessage() {}
-
-func (x *CancelQuotaRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CancelQuotaRequestRequest.ProtoReflect.Descriptor instead.
-func (*CancelQuotaRequestRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *CancelQuotaRequestRequest) GetQuotaRequestId() string {
-	if x != nil {
-		return x.QuotaRequestId
-	}
-	return ""
-}
-
-func (x *CancelQuotaRequestRequest) GetQuotaIds() []string {
-	if x != nil {
-		return x.QuotaIds
-	}
-	return nil
-}
-
-type CancelQuotaRequestMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the quota request that is being updated.
-	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *CancelQuotaRequestMetadata) Reset() {
-	*x = CancelQuotaRequestMetadata{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CancelQuotaRequestMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CancelQuotaRequestMetadata) ProtoMessage() {}
-
-func (x *CancelQuotaRequestMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CancelQuotaRequestMetadata.ProtoReflect.Descriptor instead.
-func (*CancelQuotaRequestMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CancelQuotaRequestMetadata) GetQuotaRequestId() string {
-	if x != nil {
-		return x.QuotaRequestId
-	}
-	return ""
-}
-
 type ListQuotaRequestRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Resource to list quota requests in.
@@ -294,7 +96,7 @@ type ListQuotaRequestRequest struct {
 
 func (x *ListQuotaRequestRequest) Reset() {
 	*x = ListQuotaRequestRequest{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -306,7 +108,7 @@ func (x *ListQuotaRequestRequest) String() string {
 func (*ListQuotaRequestRequest) ProtoMessage() {}
 
 func (x *ListQuotaRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -319,7 +121,7 @@ func (x *ListQuotaRequestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListQuotaRequestRequest.ProtoReflect.Descriptor instead.
 func (*ListQuotaRequestRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListQuotaRequestRequest) GetResource() *Resource {
@@ -367,7 +169,7 @@ type ListQuotaRequestResponse struct {
 
 func (x *ListQuotaRequestResponse) Reset() {
 	*x = ListQuotaRequestResponse{}
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -379,7 +181,7 @@ func (x *ListQuotaRequestResponse) String() string {
 func (*ListQuotaRequestResponse) ProtoMessage() {}
 
 func (x *ListQuotaRequestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -392,7 +194,7 @@ func (x *ListQuotaRequestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListQuotaRequestResponse.ProtoReflect.Descriptor instead.
 func (*ListQuotaRequestResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListQuotaRequestResponse) GetQuotaRequests() []*QuotaRequest {
@@ -405,6 +207,204 @@ func (x *ListQuotaRequestResponse) GetQuotaRequests() []*QuotaRequest {
 func (x *ListQuotaRequestResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateQuotaRequestRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resource to create a quota request in.
+	Resource *Resource `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
+	// Desired quota limits
+	DesiredQuotaLimits []*CreateQuotaRequestRequest_DesiredQuotaLimit `protobuf:"bytes,2,rep,name=desired_quota_limits,json=desiredQuotaLimits,proto3" json:"desired_quota_limits,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *CreateQuotaRequestRequest) Reset() {
+	*x = CreateQuotaRequestRequest{}
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateQuotaRequestRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateQuotaRequestRequest) ProtoMessage() {}
+
+func (x *CreateQuotaRequestRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateQuotaRequestRequest.ProtoReflect.Descriptor instead.
+func (*CreateQuotaRequestRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateQuotaRequestRequest) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
+func (x *CreateQuotaRequestRequest) GetDesiredQuotaLimits() []*CreateQuotaRequestRequest_DesiredQuotaLimit {
+	if x != nil {
+		return x.DesiredQuotaLimits
+	}
+	return nil
+}
+
+type CreateQuotaRequestMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the quota request that is being created.
+	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateQuotaRequestMetadata) Reset() {
+	*x = CreateQuotaRequestMetadata{}
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateQuotaRequestMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateQuotaRequestMetadata) ProtoMessage() {}
+
+func (x *CreateQuotaRequestMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateQuotaRequestMetadata.ProtoReflect.Descriptor instead.
+func (*CreateQuotaRequestMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateQuotaRequestMetadata) GetQuotaRequestId() string {
+	if x != nil {
+		return x.QuotaRequestId
+	}
+	return ""
+}
+
+type CancelQuotaRequestRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the quota request to update.
+	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
+	// Quota IDs that is being canceled.
+	QuotaIds      []string `protobuf:"bytes,2,rep,name=quota_ids,json=quotaIds,proto3" json:"quota_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelQuotaRequestRequest) Reset() {
+	*x = CancelQuotaRequestRequest{}
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelQuotaRequestRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelQuotaRequestRequest) ProtoMessage() {}
+
+func (x *CancelQuotaRequestRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelQuotaRequestRequest.ProtoReflect.Descriptor instead.
+func (*CancelQuotaRequestRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CancelQuotaRequestRequest) GetQuotaRequestId() string {
+	if x != nil {
+		return x.QuotaRequestId
+	}
+	return ""
+}
+
+func (x *CancelQuotaRequestRequest) GetQuotaIds() []string {
+	if x != nil {
+		return x.QuotaIds
+	}
+	return nil
+}
+
+type CancelQuotaRequestMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the quota request that is being updated.
+	QuotaRequestId string `protobuf:"bytes,1,opt,name=quota_request_id,json=quotaRequestId,proto3" json:"quota_request_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CancelQuotaRequestMetadata) Reset() {
+	*x = CancelQuotaRequestMetadata{}
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelQuotaRequestMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelQuotaRequestMetadata) ProtoMessage() {}
+
+func (x *CancelQuotaRequestMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelQuotaRequestMetadata.ProtoReflect.Descriptor instead.
+func (*CancelQuotaRequestMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CancelQuotaRequestMetadata) GetQuotaRequestId() string {
+	if x != nil {
+		return x.QuotaRequestId
 	}
 	return ""
 }
@@ -571,7 +571,7 @@ func (x *CreateQuotaRequestRequest_DesiredQuotaLimit) ProtoReflect() protoreflec
 
 // Deprecated: Use CreateQuotaRequestRequest_DesiredQuotaLimit.ProtoReflect.Descriptor instead.
 func (*CreateQuotaRequestRequest_DesiredQuotaLimit) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{1, 0}
+	return file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP(), []int{3, 0}
 }
 
 func (x *CreateQuotaRequestRequest_DesiredQuotaLimit) GetQuotaId() string {
@@ -592,9 +592,20 @@ var File_yandex_cloud_quotamanager_v1_quota_request_service_proto protoreflect.F
 
 const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/quotamanager/v1/quota_request_service.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a0yandex/cloud/quotamanager/v1/quota_request.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"P\n" +
+	"8yandex/cloud/quotamanager/v1/quota_request_service.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a0yandex/cloud/quotamanager/v1/quota_request.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"P\n" +
 	"\x16GetQuotaRequestRequest\x126\n" +
-	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\"\xec\x02\n" +
+	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\"\xda\x01\n" +
+	"\x17ListQuotaRequestRequest\x12H\n" +
+	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\"\n" +
+	"\x06filter\x18\x02 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12'\n" +
+	"\tpage_size\x18\x03 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\n" +
+	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
+	"\x18ListQuotaRequestResponse\x12Q\n" +
+	"\x0equota_requests\x18\x01 \x03(\v2*.yandex.cloud.quotamanager.v1.QuotaRequestR\rquotaRequests\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xec\x02\n" +
 	"\x19CreateQuotaRequestRequest\x12H\n" +
 	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\x86\x01\n" +
 	"\x14desired_quota_limits\x18\x02 \x03(\v2I.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimitB\t\x82\xc81\x051-100R\x12desiredQuotaLimits\x1a|\n" +
@@ -607,18 +618,7 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\x12/\n" +
 	"\tquota_ids\x18\x02 \x03(\tB\x12\x82\xc81\x061-1000\x8a\xc81\x04<=64R\bquotaIds\"F\n" +
 	"\x1aCancelQuotaRequestMetadata\x12(\n" +
-	"\x10quota_request_id\x18\x01 \x01(\tR\x0equotaRequestId\"\xda\x01\n" +
-	"\x17ListQuotaRequestRequest\x12H\n" +
-	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\"\n" +
-	"\x06filter\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12'\n" +
-	"\tpage_size\x18\x03 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
-	"\n" +
-	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
-	"\x18ListQuotaRequestResponse\x12Q\n" +
-	"\x0equota_requests\x18\x01 \x03(\v2*.yandex.cloud.quotamanager.v1.QuotaRequestR\rquotaRequests\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xae\x01\n" +
+	"\x10quota_request_id\x18\x01 \x01(\tR\x0equotaRequestId\"\xae\x01\n" +
 	"!ListQuotaRequestOperationsRequest\x126\n" +
 	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -631,12 +631,12 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"operations\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd5\a\n" +
 	"\x13QuotaRequestService\x12\xa3\x01\n" +
-	"\x03Get\x124.yandex.cloud.quotamanager.v1.GetQuotaRequestRequest\x1a*.yandex.cloud.quotamanager.v1.QuotaRequest\":\x82\xd3\xe4\x93\x024\x122/quota-manager/v1/quotaRequests/{quota_request_id}\x12\xbe\x01\n" +
+	"\x03Get\x124.yandex.cloud.quotamanager.v1.GetQuotaRequestRequest\x1a*.yandex.cloud.quotamanager.v1.QuotaRequest\":\x82\xd3\xe4\x93\x024\x122/quota-manager/v1/quotaRequests/{quota_request_id}\x12\x9e\x01\n" +
+	"\x04List\x125.yandex.cloud.quotamanager.v1.ListQuotaRequestRequest\x1a6.yandex.cloud.quotamanager.v1.ListQuotaRequestResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/quota-manager/v1/quotaRequests\x12\xbe\x01\n" +
 	"\x06Create\x127.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2**\n" +
 	"\x1aCreateQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/quota-manager/v1/quotaRequests\x12\xd8\x01\n" +
 	"\x06Cancel\x127.yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2**\n" +
-	"\x1aCancelQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02>:\x01*\"9/quota-manager/v1/quotaRequests/{quota_request_id}/cancel\x12\x9e\x01\n" +
-	"\x04List\x125.yandex.cloud.quotamanager.v1.ListQuotaRequestRequest\x1a6.yandex.cloud.quotamanager.v1.ListQuotaRequestResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/quota-manager/v1/quotaRequests\x12\xda\x01\n" +
+	"\x1aCancelQuotaRequestMetadata\x12\fQuotaRequest\x82\xd3\xe4\x93\x02>:\x01*\"9/quota-manager/v1/quotaRequests/{quota_request_id}/cancel\x12\xda\x01\n" +
 	"\x0eListOperations\x12?.yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsRequest\x1a@.yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/quota-manager/v1/quotaRequests/{quota_request_id}/operationsBq\n" +
 	" yandex.cloud.api.quotamanager.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/quotamanager/v1;quotamanagerb\x06proto3"
 
@@ -655,12 +655,12 @@ func file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDescGZIP()
 var file_yandex_cloud_quotamanager_v1_quota_request_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_yandex_cloud_quotamanager_v1_quota_request_service_proto_goTypes = []any{
 	(*GetQuotaRequestRequest)(nil),                      // 0: yandex.cloud.quotamanager.v1.GetQuotaRequestRequest
-	(*CreateQuotaRequestRequest)(nil),                   // 1: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest
-	(*CreateQuotaRequestMetadata)(nil),                  // 2: yandex.cloud.quotamanager.v1.CreateQuotaRequestMetadata
-	(*CancelQuotaRequestRequest)(nil),                   // 3: yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest
-	(*CancelQuotaRequestMetadata)(nil),                  // 4: yandex.cloud.quotamanager.v1.CancelQuotaRequestMetadata
-	(*ListQuotaRequestRequest)(nil),                     // 5: yandex.cloud.quotamanager.v1.ListQuotaRequestRequest
-	(*ListQuotaRequestResponse)(nil),                    // 6: yandex.cloud.quotamanager.v1.ListQuotaRequestResponse
+	(*ListQuotaRequestRequest)(nil),                     // 1: yandex.cloud.quotamanager.v1.ListQuotaRequestRequest
+	(*ListQuotaRequestResponse)(nil),                    // 2: yandex.cloud.quotamanager.v1.ListQuotaRequestResponse
+	(*CreateQuotaRequestRequest)(nil),                   // 3: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest
+	(*CreateQuotaRequestMetadata)(nil),                  // 4: yandex.cloud.quotamanager.v1.CreateQuotaRequestMetadata
+	(*CancelQuotaRequestRequest)(nil),                   // 5: yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest
+	(*CancelQuotaRequestMetadata)(nil),                  // 6: yandex.cloud.quotamanager.v1.CancelQuotaRequestMetadata
 	(*ListQuotaRequestOperationsRequest)(nil),           // 7: yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsRequest
 	(*ListQuotaRequestOperationsResponse)(nil),          // 8: yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsResponse
 	(*CreateQuotaRequestRequest_DesiredQuotaLimit)(nil), // 9: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimit
@@ -669,20 +669,20 @@ var file_yandex_cloud_quotamanager_v1_quota_request_service_proto_goTypes = []an
 	(*operation.Operation)(nil),                         // 12: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_quotamanager_v1_quota_request_service_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.resource:type_name -> yandex.cloud.quotamanager.v1.Resource
-	9,  // 1: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.desired_quota_limits:type_name -> yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimit
-	10, // 2: yandex.cloud.quotamanager.v1.ListQuotaRequestRequest.resource:type_name -> yandex.cloud.quotamanager.v1.Resource
-	11, // 3: yandex.cloud.quotamanager.v1.ListQuotaRequestResponse.quota_requests:type_name -> yandex.cloud.quotamanager.v1.QuotaRequest
+	10, // 0: yandex.cloud.quotamanager.v1.ListQuotaRequestRequest.resource:type_name -> yandex.cloud.quotamanager.v1.Resource
+	11, // 1: yandex.cloud.quotamanager.v1.ListQuotaRequestResponse.quota_requests:type_name -> yandex.cloud.quotamanager.v1.QuotaRequest
+	10, // 2: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.resource:type_name -> yandex.cloud.quotamanager.v1.Resource
+	9,  // 3: yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.desired_quota_limits:type_name -> yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimit
 	12, // 4: yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 5: yandex.cloud.quotamanager.v1.QuotaRequestService.Get:input_type -> yandex.cloud.quotamanager.v1.GetQuotaRequestRequest
-	1,  // 6: yandex.cloud.quotamanager.v1.QuotaRequestService.Create:input_type -> yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest
-	3,  // 7: yandex.cloud.quotamanager.v1.QuotaRequestService.Cancel:input_type -> yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest
-	5,  // 8: yandex.cloud.quotamanager.v1.QuotaRequestService.List:input_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestRequest
+	1,  // 6: yandex.cloud.quotamanager.v1.QuotaRequestService.List:input_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestRequest
+	3,  // 7: yandex.cloud.quotamanager.v1.QuotaRequestService.Create:input_type -> yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest
+	5,  // 8: yandex.cloud.quotamanager.v1.QuotaRequestService.Cancel:input_type -> yandex.cloud.quotamanager.v1.CancelQuotaRequestRequest
 	7,  // 9: yandex.cloud.quotamanager.v1.QuotaRequestService.ListOperations:input_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsRequest
 	11, // 10: yandex.cloud.quotamanager.v1.QuotaRequestService.Get:output_type -> yandex.cloud.quotamanager.v1.QuotaRequest
-	12, // 11: yandex.cloud.quotamanager.v1.QuotaRequestService.Create:output_type -> yandex.cloud.operation.Operation
-	12, // 12: yandex.cloud.quotamanager.v1.QuotaRequestService.Cancel:output_type -> yandex.cloud.operation.Operation
-	6,  // 13: yandex.cloud.quotamanager.v1.QuotaRequestService.List:output_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestResponse
+	2,  // 11: yandex.cloud.quotamanager.v1.QuotaRequestService.List:output_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestResponse
+	12, // 12: yandex.cloud.quotamanager.v1.QuotaRequestService.Create:output_type -> yandex.cloud.operation.Operation
+	12, // 13: yandex.cloud.quotamanager.v1.QuotaRequestService.Cancel:output_type -> yandex.cloud.operation.Operation
 	8,  // 14: yandex.cloud.quotamanager.v1.QuotaRequestService.ListOperations:output_type -> yandex.cloud.quotamanager.v1.ListQuotaRequestOperationsResponse
 	10, // [10:15] is the sub-list for method output_type
 	5,  // [5:10] is the sub-list for method input_type

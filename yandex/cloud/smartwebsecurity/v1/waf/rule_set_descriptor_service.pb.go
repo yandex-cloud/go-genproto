@@ -81,7 +81,7 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_rule_set_descriptor_service_proto 
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_rule_set_descriptor_service_proto_rawDesc = "" +
 	"\n" +
-	"Fyandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor_service.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a>yandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"W\n" +
+	"Fyandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor_service.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1cgoogle/api/annotations.proto\x1a>yandex/cloud/smartwebsecurity/v1/waf/rule_set_descriptor.proto\x1a\x1dyandex/cloud/validation.proto\"W\n" +
 	"\x1bGetRuleSetDescriptorRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1e\n" +
 	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversion2\xe3\x01\n" +

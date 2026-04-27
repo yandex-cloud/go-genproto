@@ -76,12 +76,12 @@ func (m *TrunkConnection) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
 
-func (m *TrunkConnection_PartnerJointInfo) SetServiceKey(v string) {
-	m.ServiceKey = v
-}
-
 func (m *TrunkConnection_PartnerJointInfo) SetPartnerId(v *wrapperspb.StringValue) {
 	m.PartnerId = v
+}
+
+func (m *TrunkConnection_PartnerJointInfo) SetServiceKey(v string) {
+	m.ServiceKey = v
 }
 
 func (m *TrunkConnection_SinglePortDirectJoint) SetTransceiverType(v common.TransceiverType) {

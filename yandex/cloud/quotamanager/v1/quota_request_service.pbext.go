@@ -10,6 +10,30 @@ func (m *GetQuotaRequestRequest) SetQuotaRequestId(v string) {
 	m.QuotaRequestId = v
 }
 
+func (m *ListQuotaRequestRequest) SetResource(v *Resource) {
+	m.Resource = v
+}
+
+func (m *ListQuotaRequestRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListQuotaRequestRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListQuotaRequestRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListQuotaRequestResponse) SetQuotaRequests(v []*QuotaRequest) {
+	m.QuotaRequests = v
+}
+
+func (m *ListQuotaRequestResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *CreateQuotaRequestRequest) SetResource(v *Resource) {
 	m.Resource = v
 }
@@ -40,30 +64,6 @@ func (m *CancelQuotaRequestRequest) SetQuotaIds(v []string) {
 
 func (m *CancelQuotaRequestMetadata) SetQuotaRequestId(v string) {
 	m.QuotaRequestId = v
-}
-
-func (m *ListQuotaRequestRequest) SetResource(v *Resource) {
-	m.Resource = v
-}
-
-func (m *ListQuotaRequestRequest) SetFilter(v string) {
-	m.Filter = v
-}
-
-func (m *ListQuotaRequestRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListQuotaRequestRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListQuotaRequestResponse) SetQuotaRequests(v []*QuotaRequest) {
-	m.QuotaRequests = v
-}
-
-func (m *ListQuotaRequestResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
 }
 
 func (m *ListQuotaRequestOperationsRequest) SetQuotaRequestId(v string) {

@@ -203,7 +203,7 @@ var File_yandex_cloud_cic_v1_partner_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_partner_service_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/cic/v1/partner_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a!yandex/cloud/cic/v1/partner.proto\"@\n" +
+	")yandex/cloud/cic/v1/partner_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a!yandex/cloud/cic/v1/partner.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetPartnerRequest\x12+\n" +
 	"\n" +
 	"partner_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tpartnerId\"\x92\x01\n" +

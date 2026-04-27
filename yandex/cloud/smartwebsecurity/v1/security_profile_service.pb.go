@@ -590,7 +590,7 @@ var File_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto protore
 
 const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDesc = "" +
 	"\n" +
-	"?yandex/cloud/smartwebsecurity/v1/security_profile_service.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\"Q\n" +
+	"?yandex/cloud/smartwebsecurity/v1/security_profile_service.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"Q\n" +
 	"\x19GetSecurityProfileRequest\x124\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x11securityProfileId\"@\n" +
 	"\x1bListSecurityProfilesRequest\x12!\n" +

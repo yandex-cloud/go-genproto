@@ -46,8 +46,7 @@ type SymmetricKeyServiceClient interface {
 	// Creates a symmetric KMS key in the specified folder.
 	Create(ctx context.Context, in *CreateSymmetricKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified symmetric KMS key.
-	//
-	//	To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
+	// To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(ctx context.Context, in *GetSymmetricKeyRequest, opts ...grpc.CallOption) (*SymmetricKey, error)
 	// Returns the list of symmetric KMS keys in the specified folder.
 	List(ctx context.Context, in *ListSymmetricKeysRequest, opts ...grpc.CallOption) (*ListSymmetricKeysResponse, error)
@@ -57,7 +56,6 @@ type SymmetricKeyServiceClient interface {
 	Update(ctx context.Context, in *UpdateSymmetricKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified symmetric KMS key. This action also automatically schedules
 	// the destruction of all of the key's versions in 72 hours.
-	//
 	// The key and its versions appear absent in [SymmetricKeyService.Get] and [SymmetricKeyService.List]
 	// requests, but can be restored within 72 hours with a request to tech support.
 	Delete(ctx context.Context, in *DeleteSymmetricKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -65,7 +63,6 @@ type SymmetricKeyServiceClient interface {
 	// by default for all encrypt/decrypt operations where no version ID is specified.
 	SetPrimaryVersion(ctx context.Context, in *SetPrimarySymmetricKeyVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Schedules the specified key version for destruction.
-	//
 	// Scheduled destruction can be cancelled with the [SymmetricKeyService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(ctx context.Context, in *ScheduleSymmetricKeyVersionDestructionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Cancels previously scheduled version destruction, if the version hasn't been destroyed yet.
@@ -240,8 +237,7 @@ type SymmetricKeyServiceServer interface {
 	// Creates a symmetric KMS key in the specified folder.
 	Create(context.Context, *CreateSymmetricKeyRequest) (*operation.Operation, error)
 	// Returns the specified symmetric KMS key.
-	//
-	//	To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
+	// To get the list of available symmetric KMS keys, make a [SymmetricKeyService.List] request.
 	Get(context.Context, *GetSymmetricKeyRequest) (*SymmetricKey, error)
 	// Returns the list of symmetric KMS keys in the specified folder.
 	List(context.Context, *ListSymmetricKeysRequest) (*ListSymmetricKeysResponse, error)
@@ -251,7 +247,6 @@ type SymmetricKeyServiceServer interface {
 	Update(context.Context, *UpdateSymmetricKeyRequest) (*operation.Operation, error)
 	// Deletes the specified symmetric KMS key. This action also automatically schedules
 	// the destruction of all of the key's versions in 72 hours.
-	//
 	// The key and its versions appear absent in [SymmetricKeyService.Get] and [SymmetricKeyService.List]
 	// requests, but can be restored within 72 hours with a request to tech support.
 	Delete(context.Context, *DeleteSymmetricKeyRequest) (*operation.Operation, error)
@@ -259,7 +254,6 @@ type SymmetricKeyServiceServer interface {
 	// by default for all encrypt/decrypt operations where no version ID is specified.
 	SetPrimaryVersion(context.Context, *SetPrimarySymmetricKeyVersionRequest) (*operation.Operation, error)
 	// Schedules the specified key version for destruction.
-	//
 	// Scheduled destruction can be cancelled with the [SymmetricKeyService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(context.Context, *ScheduleSymmetricKeyVersionDestructionRequest) (*operation.Operation, error)
 	// Cancels previously scheduled version destruction, if the version hasn't been destroyed yet.

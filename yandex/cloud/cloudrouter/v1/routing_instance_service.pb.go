@@ -1659,11 +1659,11 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x05az_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04azId\x12$\n" +
 	"\x06prefix\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06prefix\x12#\n" +
 	"\bnew_mask\x18\x05 \x01(\x03B\b\xfa\xc71\x040-31R\anewMask\x12.\n" +
-	"\x13remove_sub_prefixes\x18\x06 \x01(\bR\x11removeSubPrefixes2\xa4\x19\n" +
+	"\x13remove_sub_prefixes\x18\x06 \x01(\bR\x11removeSubPrefixes2\xa4\x1b\n" +
 	"\x16RoutingInstanceService\x12\xab\x01\n" +
-	"\x03Get\x126.yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\">\x82\xd3\xe4\x93\x028\x126/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\x87\x01\n" +
-	"\x11GetByVpcNetworkId\x12D.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\x12\x9b\x01\n" +
-	"\x1bGetByCicPrivateConnectionId\x12N.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\x12\xa5\x01\n" +
+	"\x03Get\x126.yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\">\x82\xd3\xe4\x93\x028\x126/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\xd4\x01\n" +
+	"\x11GetByVpcNetworkId\x12D.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"K\x82\xd3\xe4\x93\x02E\x12C/cloudrouter/v1/routingInstances:getByVpcNetworkId/{vpc_network_id}\x12\xfd\x01\n" +
+	"\x1bGetByCicPrivateConnectionId\x12N.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"`\x82\xd3\xe4\x93\x02Z\x12X/cloudrouter/v1/routingInstances:getByCicPrivateConnectionId/{cic_private_connection_id}\x12\xa5\x01\n" +
 	"\x04List\x128.yandex.cloud.cloudrouter.v1.ListRoutingInstancesRequest\x1a9.yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /cloudrouter/v1/routingInstances\x12\xc7\x01\n" +
 	"\x06Create\x129.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*0\n" +
 	"\x1dCreateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02%:\x01*\" /cloudrouter/v1/routingInstances\x12\xc7\x01\n" +
@@ -1676,9 +1676,9 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x14AddPrivateConnection\x128.yandex.cloud.cloudrouter.v1.AddPrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\x8d\x01\xb2\xd2*0\n" +
 	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02P:\x01*\"K/cloudrouter/v1/routingInstances/{routing_instance_id}:addPrivateConnection\x88\x02\x01\x12\x8c\x02\n" +
 	"\x17RemovePrivateConnection\x12;.yandex.cloud.cloudrouter.v1.RemovePrivateConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\x90\x01\xb2\xd2*0\n" +
-	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02S:\x01*\"N/cloudrouter/v1/routingInstances/{routing_instance_id}:removePrivateConnection\x88\x02\x01\x12\x9d\x01\n" +
-	"\x0eUpdateNetworks\x122.yandex.cloud.cloudrouter.v1.UpdateNetworksRequest\x1a!.yandex.cloud.operation.Operation\"4\xb2\xd2*0\n" +
-	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x12\xe0\x01\n" +
+	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02S:\x01*\"N/cloudrouter/v1/routingInstances/{routing_instance_id}:removePrivateConnection\x88\x02\x01\x12\xee\x01\n" +
+	"\x0eUpdateNetworks\x122.yandex.cloud.cloudrouter.v1.UpdateNetworksRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*0\n" +
+	"\x1dUpdateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02J:\x01*\"E/cloudrouter/v1/routingInstances/{routing_instance_id}:updateNetworks\x12\xe0\x01\n" +
 	"\x06Delete\x129.yandex.cloud.cloudrouter.v1.DeleteRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*6\n" +
 	"\x1dDeleteRoutingInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x028*6/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\xdc\x01\n" +
 	"\x04Move\x127.yandex.cloud.cloudrouter.v1.MoveRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*.\n" +

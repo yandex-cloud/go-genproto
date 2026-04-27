@@ -203,7 +203,7 @@ var File_yandex_cloud_cic_v1_point_of_presence_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_cic_v1_point_of_presence_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/cic/v1/point_of_presence_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a+yandex/cloud/cic/v1/point_of_presence.proto\"Z\n" +
+	"3yandex/cloud/cic/v1/point_of_presence_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a+yandex/cloud/cic/v1/point_of_presence.proto\x1a\x1dyandex/cloud/validation.proto\"Z\n" +
 	"\x19GetPointOfPresenceRequest\x12=\n" +
 	"\x14point_of_presence_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11pointOfPresenceId\"\x9a\x01\n" +
 	"\x1bListPointOfPresencesRequest\x12'\n" +

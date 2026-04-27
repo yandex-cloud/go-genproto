@@ -386,10 +386,10 @@ func (*TrunkConnection_PartnerJointInfo_) isTrunkConnection_Joint() {}
 // Config of trunkConnection that is deployed on partner joint.
 type TrunkConnection_PartnerJointInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Reserved for future using;
-	ServiceKey string `protobuf:"bytes,3,opt,name=service_key,json=serviceKey,proto3" json:"service_key,omitempty"`
 	// ID of partner that the trunkConnection is deployed on.
-	PartnerId     *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
+	PartnerId *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=partner_id,json=partnerId,proto3" json:"partner_id,omitempty"`
+	// Reserved for future using;
+	ServiceKey    string `protobuf:"bytes,3,opt,name=service_key,json=serviceKey,proto3" json:"service_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -424,18 +424,18 @@ func (*TrunkConnection_PartnerJointInfo) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cic_v1_trunk_connection_proto_rawDescGZIP(), []int{0, 1}
 }
 
-func (x *TrunkConnection_PartnerJointInfo) GetServiceKey() string {
-	if x != nil {
-		return x.ServiceKey
-	}
-	return ""
-}
-
 func (x *TrunkConnection_PartnerJointInfo) GetPartnerId() *wrapperspb.StringValue {
 	if x != nil {
 		return x.PartnerId
 	}
 	return nil
+}
+
+func (x *TrunkConnection_PartnerJointInfo) GetServiceKey() string {
+	if x != nil {
+		return x.ServiceKey
+	}
+	return ""
 }
 
 // Config of trunkConnection that is deployed on single port.
@@ -570,7 +570,7 @@ var File_yandex_cloud_cic_v1_trunk_connection_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_trunk_connection_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/cic/v1/trunk_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a1yandex/cloud/cic/v1/common/transceiver_type.proto\x1a8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\"\xab\x10\n" +
+	"*yandex/cloud/cic/v1/trunk_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x1a1yandex/cloud/cic/v1/common/transceiver_type.proto\"\xab\x10\n" +
 	"\x0fTrunkConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -591,11 +591,11 @@ const file_yandex_cloud_cic_v1_trunk_connection_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1av\n" +
-	"\x10PartnerJointInfo\x12\x1f\n" +
-	"\vservice_key\x18\x03 \x01(\tR\n" +
-	"serviceKey\x12;\n" +
+	"\x10PartnerJointInfo\x12;\n" +
 	"\n" +
-	"partner_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\tpartnerIdJ\x04\b\x01\x10\x03\x1a\xde\x01\n" +
+	"partner_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\tpartnerId\x12\x1f\n" +
+	"\vservice_key\x18\x03 \x01(\tR\n" +
+	"serviceKeyJ\x04\b\x01\x10\x03\x1a\xde\x01\n" +
 	"\x15SinglePortDirectJoint\x12V\n" +
 	"\x10transceiver_type\x18\x01 \x01(\x0e2+.yandex.cloud.cic.v1.common.TransceiverTypeR\x0ftransceiverType\x129\n" +
 	"\tport_name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\bportName\x12,\n" +

@@ -30,7 +30,6 @@ const (
 type GetTrailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trail to return.
-	//
 	// To get a trail ID make a [List] request.
 	TrailId       string `protobuf:"bytes,1,opt,name=trail_id,json=trailId,proto3" json:"trail_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,7 +86,6 @@ type ListTrailsRequest struct {
 	// [ListTrailsRequest.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters subscription locks listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering on [Trail.name, Trail.created_at] fields.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
@@ -766,9 +764,9 @@ var File_yandex_cloud_audittrails_v1_trail_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_audittrails_v1_trail_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/audittrails/v1/trail_service.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/audittrails/v1/trail.proto\x1a yandex/cloud/access/access.proto\"@\n" +
+	"/yandex/cloud/audittrails/v1/trail_service.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/audittrails/v1/trail.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
 	"\x0fGetTrailRequest\x12'\n" +
-	"\btrail_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\atrailIdJ\x04\b\x02\x10\x03\"\xc4\x01\n" +
+	"\btrail_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\atrailId\"\xc4\x01\n" +
 	"\x11ListTrailsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
