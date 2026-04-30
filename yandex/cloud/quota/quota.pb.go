@@ -240,14 +240,14 @@ const file_yandex_cloud_quota_quota_proto_rawDesc = "" +
 	"\x05usage\x18\x04 \x01(\x01R\x05usageJ\x04\b\x02\x10\x03\"7\n" +
 	"\vMetricLimit\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x03R\x05limit\"\xbc\x01\n" +
+	"\x05limit\x18\x02 \x01(\x03R\x05limit\"\xc2\x01\n" +
 	"\fQuotaFailure\x12J\n" +
 	"\n" +
 	"violations\x18\x02 \x03(\v2*.yandex.cloud.quota.QuotaFailure.ViolationR\n" +
 	"violations\x1a`\n" +
 	"\tViolation\x127\n" +
 	"\x06metric\x18\x01 \x01(\v2\x1f.yandex.cloud.quota.QuotaMetricR\x06metric\x12\x1a\n" +
-	"\brequired\x18\x02 \x01(\x03R\brequiredBV\n" +
+	"\brequired\x18\x02 \x01(\x03R\brequiredJ\x04\b\x01\x10\x02BV\n" +
 	"\x16yandex.cloud.api.quotaZ<github.com/yandex-cloud/go-genproto/yandex/cloud/quota;quotab\x06proto3"
 
 var (

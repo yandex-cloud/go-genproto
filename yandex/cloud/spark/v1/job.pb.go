@@ -7,6 +7,7 @@
 package spark
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -22,9 +23,11 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Job Status enumeration.
 type Job_Status int32
 
 const (
+	// Job status is unknown.
 	Job_STATUS_UNSPECIFIED Job_Status = 0
 	// Job created and is waiting to acquire.
 	Job_PROVISIONING Job_Status = 1
@@ -109,9 +112,9 @@ type Job struct {
 	FinishedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
 	// Name of the Spark job.
 	Name string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	// The id of the user who created the job
+	// The id of the user who created the job.
 	CreatedBy string `protobuf:"bytes,7,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	// Status.
+	// Job Status.
 	Status Job_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.spark.v1.Job_Status" json:"status,omitempty"`
 	// Job specification.
 	//
@@ -277,14 +280,17 @@ type isJob_JobSpec interface {
 }
 
 type Job_SparkJob struct {
+	// Spark Job.
 	SparkJob *SparkJob `protobuf:"bytes,9,opt,name=spark_job,json=sparkJob,proto3,oneof"`
 }
 
 type Job_PysparkJob struct {
+	// Pyspark Job.
 	PysparkJob *PysparkJob `protobuf:"bytes,10,opt,name=pyspark_job,json=pysparkJob,proto3,oneof"`
 }
 
 type Job_SparkConnectJob struct {
+	// Spark-connect Job.
 	SparkConnectJob *SparkConnectJob `protobuf:"bytes,20,opt,name=spark_connect_job,json=sparkConnectJob,proto3,oneof"`
 }
 
@@ -294,6 +300,7 @@ func (*Job_PysparkJob) isJob_JobSpec() {}
 
 func (*Job_SparkConnectJob) isJob_JobSpec() {}
 
+// Spark Job.
 type SparkJob struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional arguments to pass to the driver.
@@ -306,7 +313,7 @@ type SparkJob struct {
 	ArchiveUris []string `protobuf:"bytes,4,rep,name=archive_uris,json=archiveUris,proto3" json:"archive_uris,omitempty"`
 	// A mapping of property names to values, used to configure Spark.
 	Properties map[string]string `protobuf:"bytes,5,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// URI of the jar file containing the main class.
+	// The HCFS URI of the jar file containing the main class.
 	MainJarFileUri string `protobuf:"bytes,6,opt,name=main_jar_file_uri,json=mainJarFileUri,proto3" json:"main_jar_file_uri,omitempty"`
 	// The name of the driver's main class.
 	MainClass string `protobuf:"bytes,7,opt,name=main_class,json=mainClass,proto3" json:"main_class,omitempty"`
@@ -420,6 +427,7 @@ func (x *SparkJob) GetExcludePackages() []string {
 	return nil
 }
 
+// Spark-connect Job.
 type SparkConnectJob struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Jar file URIs to add to the CLASSPATHs of the Spark driver and tasks.
@@ -519,6 +527,7 @@ func (x *SparkConnectJob) GetExcludePackages() []string {
 	return nil
 }
 
+// Pyspark Job.
 type PysparkJob struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Optional arguments to pass to the driver.
@@ -535,7 +544,7 @@ type PysparkJob struct {
 	MainPythonFileUri string `protobuf:"bytes,6,opt,name=main_python_file_uri,json=mainPythonFileUri,proto3" json:"main_python_file_uri,omitempty"`
 	// URIs of Python files to pass to the PySpark framework.
 	PythonFileUris []string `protobuf:"bytes,7,rep,name=python_file_uris,json=pythonFileUris,proto3" json:"python_file_uris,omitempty"`
-	// List of maven coordinates of jars to include on the driver and executor classpaths.
+	// List of maven coordinates of jars (groupId:artifactId:version) to include on the driver and executor classpaths.
 	Packages []string `protobuf:"bytes,8,rep,name=packages,proto3" json:"packages,omitempty"`
 	// List of additional remote repositories to search for the maven coordinates given with --packages.
 	Repositories []string `protobuf:"bytes,9,rep,name=repositories,proto3" json:"repositories,omitempty"`
@@ -649,11 +658,11 @@ var File_yandex_cloud_spark_v1_job_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x06\n" +
-	"\x03Job\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
+	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd8\x06\n" +
+	"\x03Job\x12\x1c\n" +
+	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x129\n" +
+	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -669,8 +678,8 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	" \x01(\v2!.yandex.cloud.spark.v1.PysparkJobH\x00R\n" +
 	"pysparkJob\x12T\n" +
 	"\x11spark_connect_job\x18\x14 \x01(\v2&.yandex.cloud.spark.v1.SparkConnectJobH\x00R\x0fsparkConnectJob\x12\x15\n" +
-	"\x06ui_url\x18\f \x01(\tR\x05uiUrl\x12,\n" +
-	"\x12service_account_id\x18\r \x01(\tR\x10serviceAccountId\x12\x1f\n" +
+	"\x06ui_url\x18\f \x01(\tR\x05uiUrl\x126\n" +
+	"\x12service_account_id\x18\r \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12\x1f\n" +
 	"\vconnect_url\x18\x0e \x01(\tR\n" +
 	"connectUrl\"\x80\x01\n" +
 	"\x06Status\x12\x16\n" +
@@ -684,53 +693,53 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\n" +
 	"CANCELLING\x10\aB\n" +
 	"\n" +
-	"\bjob_specJ\x04\b\v\x10\fJ\x04\b\x0f\x10\x14\"\xc7\x03\n" +
-	"\bSparkJob\x12\x12\n" +
-	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
-	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x03 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x04 \x03(\tR\varchiveUris\x12O\n" +
+	"\bjob_specJ\x04\b\v\x10\fJ\x04\b\x0f\x10\x14\"\xa2\x05\n" +
+	"\bSparkJob\x12&\n" +
+	"\x04args\x18\x01 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\x04args\x126\n" +
+	"\rjar_file_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x87\x01\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v2/.yandex.cloud.spark.v1.SparkJob.PropertiesEntryR\n" +
-	"properties\x12)\n" +
-	"\x11main_jar_file_uri\x18\x06 \x01(\tR\x0emainJarFileUri\x12\x1d\n" +
+	"properties\x18\x05 \x03(\v2/.yandex.cloud.spark.v1.SparkJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x128\n" +
+	"\x11main_jar_file_uri\x18\x06 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<2048R\x0emainJarFileUri\x12'\n" +
 	"\n" +
-	"main_class\x18\a \x01(\tR\tmainClass\x12\x1a\n" +
-	"\bpackages\x18\b \x03(\tR\bpackages\x12\"\n" +
-	"\frepositories\x18\t \x03(\tR\frepositories\x12)\n" +
+	"main_class\x18\a \x01(\tB\b\x8a\xc81\x04<256R\tmainClass\x12-\n" +
+	"\bpackages\x18\b \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\bpackages\x125\n" +
+	"\frepositories\x18\t \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x05<2048R\frepositories\x12<\n" +
 	"\x10exclude_packages\x18\n" +
-	" \x03(\tR\x0fexcludePackages\x1a=\n" +
+	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf7\x02\n" +
-	"\x0fSparkConnectJob\x12\"\n" +
-	"\rjar_file_uris\x18\x01 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x02 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x03 \x03(\tR\varchiveUris\x12V\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa5\x04\n" +
+	"\x0fSparkConnectJob\x126\n" +
+	"\rjar_file_uris\x18\x01 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x8e\x01\n" +
 	"\n" +
-	"properties\x18\x04 \x03(\v26.yandex.cloud.spark.v1.SparkConnectJob.PropertiesEntryR\n" +
-	"properties\x12\x1a\n" +
-	"\bpackages\x18\x05 \x03(\tR\bpackages\x12\"\n" +
-	"\frepositories\x18\x06 \x03(\tR\frepositories\x12)\n" +
-	"\x10exclude_packages\x18\a \x03(\tR\x0fexcludePackages\x1a=\n" +
+	"properties\x18\x04 \x03(\v26.yandex.cloud.spark.v1.SparkConnectJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x12-\n" +
+	"\bpackages\x18\x05 \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\bpackages\x125\n" +
+	"\frepositories\x18\x06 \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x05<2048R\frepositories\x12<\n" +
+	"\x10exclude_packages\x18\a \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdc\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x05\n" +
 	"\n" +
-	"PysparkJob\x12\x12\n" +
-	"\x04args\x18\x01 \x03(\tR\x04args\x12\"\n" +
-	"\rjar_file_uris\x18\x02 \x03(\tR\vjarFileUris\x12\x1b\n" +
-	"\tfile_uris\x18\x03 \x03(\tR\bfileUris\x12!\n" +
-	"\farchive_uris\x18\x04 \x03(\tR\varchiveUris\x12Q\n" +
+	"PysparkJob\x12&\n" +
+	"\x04args\x18\x01 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\x04args\x126\n" +
+	"\rjar_file_uris\x18\x02 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\vjarFileUris\x12/\n" +
+	"\tfile_uris\x18\x03 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\bfileUris\x125\n" +
+	"\farchive_uris\x18\x04 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\varchiveUris\x12\x89\x01\n" +
 	"\n" +
-	"properties\x18\x05 \x03(\v21.yandex.cloud.spark.v1.PysparkJob.PropertiesEntryR\n" +
-	"properties\x12/\n" +
-	"\x14main_python_file_uri\x18\x06 \x01(\tR\x11mainPythonFileUri\x12(\n" +
-	"\x10python_file_uris\x18\a \x03(\tR\x0epythonFileUris\x12\x1a\n" +
-	"\bpackages\x18\b \x03(\tR\bpackages\x12\"\n" +
-	"\frepositories\x18\t \x03(\tR\frepositories\x12)\n" +
+	"properties\x18\x05 \x03(\v21.yandex.cloud.spark.v1.PysparkJob.PropertiesEntryB6\x82\xc81\x05<=100\x8a\xc81\x05<=256\xb2\xc81 \x12\x17[a-zA-Z][-_0-9a-zA-Z.]*\x1a\x051-128R\n" +
+	"properties\x12>\n" +
+	"\x14main_python_file_uri\x18\x06 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<2048R\x11mainPythonFileUri\x12<\n" +
+	"\x10python_file_uris\x18\a \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<2048R\x0epythonFileUris\x12-\n" +
+	"\bpackages\x18\b \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\bpackages\x125\n" +
+	"\frepositories\x18\t \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x05<2048R\frepositories\x12<\n" +
 	"\x10exclude_packages\x18\n" +
-	" \x03(\tR\x0fexcludePackages\x1a=\n" +
+	" \x03(\tB\x11\x82\xc81\x05<=100\x8a\xc81\x04<256R\x0fexcludePackages\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\\\n" +

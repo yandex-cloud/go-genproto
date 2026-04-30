@@ -27,6 +27,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Get Cluster Request.
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster to return.
@@ -72,6 +73,7 @@ func (x *GetClusterRequest) GetClusterId() string {
 	return ""
 }
 
+// List Clusters Request.
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list Spark clusters in.
@@ -148,6 +150,7 @@ func (x *ListClustersRequest) GetFilter() string {
 	return ""
 }
 
+// List Clusters Response.
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Requested list of Spark clusters.
@@ -206,6 +209,7 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Create Cluster Request.
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create Spark cluster in.
@@ -213,15 +217,18 @@ type CreateClusterRequest struct {
 	// Name of the Spark cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Spark cluster. 0-256 characters long.
-	Description string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Config      *ClusterConfig    `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
-	Network     *NetworkConfig    `protobuf:"bytes,6,opt,name=network,proto3" json:"network,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Cluster Labels.
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Configuration of the Spark cluster.
+	Config *ClusterConfig `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
+	// Cluster Network Configuration.
+	Network *NetworkConfig `protobuf:"bytes,6,opt,name=network,proto3" json:"network,omitempty"`
+	// Deletion Protection inhibits deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Service account that will be used to access YC resources
+	// Service account that will be used to access YC resources.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
+	// Cloud logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,9,opt,name=logging,proto3" json:"logging,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,10,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
@@ -329,6 +336,7 @@ func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
+// Create Cluster Metadata.
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the creating Spark cluster.
@@ -374,22 +382,27 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+// Update Cluster Request.
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster.
-	ClusterId  string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Cluster Update Field Mask.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	Name       string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Spark cluster. 0-256 characters long.
-	Description string                   `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string        `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	ConfigSpec  *UpdateClusterConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Cluster Labels.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Cluster Update Configuration.
+	ConfigSpec *UpdateClusterConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	// Network Update Configuration.
 	NetworkSpec *UpdateNetworkConfigSpec `protobuf:"bytes,7,opt,name=network_spec,json=networkSpec,proto3" json:"network_spec,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// Deletion Protection inhibits deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Service account used to access Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
+	// Cloud logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,10,opt,name=logging,proto3" json:"logging,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,11,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
@@ -504,6 +517,7 @@ func (x *UpdateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
+// Update Cluster Metadata.
 type UpdateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the updating Spark cluster.
@@ -549,9 +563,10 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+// Delete Cluster Request.
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Spark cluster to delete.
+	// ID of the Spark cluster that is being deleted.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -594,6 +609,7 @@ func (x *DeleteClusterRequest) GetClusterId() string {
 	return ""
 }
 
+// Delete Cluster Metadata.
 type DeleteClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the deleting Spark cluster.
@@ -639,6 +655,7 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+// Start Cluster Request.
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster that is being started.
@@ -684,6 +701,7 @@ func (x *StartClusterRequest) GetClusterId() string {
 	return ""
 }
 
+// Start Cluster Metadata.
 type StartClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster.
@@ -729,6 +747,7 @@ func (x *StartClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+// Stop Cluster Request.
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster that is being stopped.
@@ -774,6 +793,7 @@ func (x *StopClusterRequest) GetClusterId() string {
 	return ""
 }
 
+// Stop Cluster Metadata.
 type StopClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster.
@@ -819,6 +839,7 @@ func (x *StopClusterMetadata) GetClusterId() string {
 	return ""
 }
 
+// List Cluster Operations Request.
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Spark cluster.
@@ -886,8 +907,10 @@ func (x *ListClusterOperationsRequest) GetPageToken() string {
 	return ""
 }
 
+// List Cluster Operations Response.
 type ListClusterOperationsResponse struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for ListOperations requests,
 	// if the number of results is larger than `page_size` specified in the request.
@@ -947,7 +970,7 @@ var File_yandex_cloud_spark_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
+	"+yandex/cloud/spark/v1/cluster_service.proto\x12\x15yandex.cloud.spark.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a#yandex/cloud/spark/v1/cluster.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -976,10 +999,10 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2(.yandex.cloud.spark.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"<\n" +
-	"\x15CreateClusterMetadata\x12#\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
+	"\x15CreateClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xd4\x06\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xd4\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -1004,22 +1027,22 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"C\n" +
 	"\x14DeleteClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"<\n" +
-	"\x15DeleteClusterMetadata\x12#\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"D\n" +
+	"\x15DeleteClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"B\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"B\n" +
 	"\x13StartClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"5\n" +
-	"\x14StartClusterMetadata\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"C\n" +
+	"\x14StartClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"A\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"A\n" +
 	"\x12StopClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
-	"\x13StopClusterMetadata\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"B\n" +
+	"\x13StopClusterMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x9e\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\x9e\x01\n" +
 	"\x1cListClusterOperationsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -1031,10 +1054,10 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\x8c\r\n" +
-	"\x0eClusterService\x12Q\n" +
-	"\x03Get\x12(.yandex.cloud.spark.v1.GetClusterRequest\x1a\x1e.yandex.cloud.spark.v1.Cluster\"\x00\x12a\n" +
-	"\x04List\x12*.yandex.cloud.spark.v1.ListClustersRequest\x1a+.yandex.cloud.spark.v1.ListClustersResponse\"\x00\x12~\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\x86\r\n" +
+	"\x0eClusterService\x12O\n" +
+	"\x03Get\x12(.yandex.cloud.spark.v1.GetClusterRequest\x1a\x1e.yandex.cloud.spark.v1.Cluster\x12_\n" +
+	"\x04List\x12*.yandex.cloud.spark.v1.ListClustersRequest\x1a+.yandex.cloud.spark.v1.ListClustersResponse\x12~\n" +
 	"\x06Create\x12+.yandex.cloud.spark.v1.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
 	"\x15CreateClusterMetadata\x12\aCluster\x12~\n" +
 	"\x06Update\x12+.yandex.cloud.spark.v1.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"$\xb2\xd2* \n" +
@@ -1044,8 +1067,8 @@ const file_yandex_cloud_spark_v1_cluster_service_proto_rawDesc = "" +
 	"\x05Start\x12*.yandex.cloud.spark.v1.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"#\xb2\xd2*\x1f\n" +
 	"\x14StartClusterMetadata\x12\aCluster\x12x\n" +
 	"\x04Stop\x12).yandex.cloud.spark.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"\"\xb2\xd2*\x1e\n" +
-	"\x13StopClusterMetadata\x12\aCluster\x12}\n" +
-	"\x0eListOperations\x123.yandex.cloud.spark.v1.ListClusterOperationsRequest\x1a4.yandex.cloud.spark.v1.ListClusterOperationsResponse\"\x00\x12\xba\x01\n" +
+	"\x13StopClusterMetadata\x12\aCluster\x12{\n" +
+	"\x0eListOperations\x123.yandex.cloud.spark.v1.ListClusterOperationsRequest\x1a4.yandex.cloud.spark.v1.ListClusterOperationsResponse\x12\xba\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/managed-spark/v1/clusters/{resource_id}:listAccessBindings\x12\xf9\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x91\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02?:\x01*\":/managed-spark/v1/clusters/{resource_id}:setAccessBindings\x12\x85\x02\n" +

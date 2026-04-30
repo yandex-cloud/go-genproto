@@ -313,3 +313,99 @@ func (m *ResolvedUser) SetUserpoolId(v string) {
 func (m *ResolveExternalIdsResponse) SetResolvedUsers(v []*ResolvedUser) {
 	m.ResolvedUsers = v
 }
+
+func (m *PasswordWritebackErrorDetails) SetErrorCode(v PasswordWritebackErrorDetails_PasswordWritebackErrorCode) {
+	m.ErrorCode = v
+}
+
+func (m *PasswordWritebackErrorDetails) SetErrorMessage(v string) {
+	m.ErrorMessage = v
+}
+
+func (m *GetPasswordChangesRequest) SetUserpoolId(v string) {
+	m.UserpoolId = v
+}
+
+func (m *GetPasswordChangesRequest) SetAgentId(v string) {
+	m.AgentId = v
+}
+
+func (m *GetPasswordChangesRequest) SetOffset(v int64) {
+	m.Offset = v
+}
+
+func (m *GetPasswordChangesResponse) SetExternalUserId(v string) {
+	m.ExternalUserId = v
+}
+
+func (m *GetPasswordChangesResponse) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *GetPasswordChangesResponse) SetModifyingOperationId(v string) {
+	m.ModifyingOperationId = v
+}
+
+func (m *GetPasswordChangesResponse) SetNeedChange(v bool) {
+	m.NeedChange = v
+}
+
+func (m *GetPasswordChangesResponse) SetOffset(v int64) {
+	m.Offset = v
+}
+
+func (m *GetPasswordChangesResponse) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
+func (m *GetPasswordChangesResponse) SetOperationExpiresAt(v *timestamppb.Timestamp) {
+	m.OperationExpiresAt = v
+}
+
+func (m *GetPasswordChangesResponse) SetGenerated(v bool) {
+	m.Generated = v
+}
+
+func (m *CommitPasswordRequest) SetExternalUserId(v string) {
+	m.ExternalUserId = v
+}
+
+func (m *CommitPasswordRequest) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *CommitPasswordRequest) SetModifyingOperationId(v string) {
+	m.ModifyingOperationId = v
+}
+
+func (m *CommitPasswordRequest) SetNeedChange(v bool) {
+	m.NeedChange = v
+}
+
+func (m *CommitPasswordRequest) SetErrorDetails(v *PasswordWritebackErrorDetails) {
+	m.ErrorDetails = v
+}
+
+func (m *CommitPasswordRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
+func (m *CommitPasswordRequest) SetGenerated(v bool) {
+	m.Generated = v
+}
+
+func (m *CommitPasswordRequest) SetUserpoolId(v string) {
+	m.UserpoolId = v
+}
+
+func (m *CommitPasswordMetadata) SetExternalUserId(v string) {
+	m.ExternalUserId = v
+}
+
+func (m *CommitPasswordMetadata) SetModifyingOperationId(v string) {
+	m.ModifyingOperationId = v
+}
+
+func (m *CommitPasswordMetadata) SetUserpoolId(v string) {
+	m.UserpoolId = v
+}

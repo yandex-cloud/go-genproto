@@ -55,10 +55,6 @@ func (m *CreateRoutingInstanceRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *CreateRoutingInstanceRequest) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *CreateRoutingInstanceRequest) SetVpcInfo(v []*RoutingInstance_VpcInfo) {
 	m.VpcInfo = v
 }
@@ -85,10 +81,6 @@ func (m *UpdateRoutingInstanceRequest) SetName(v string) {
 
 func (m *UpdateRoutingInstanceRequest) SetDescription(v string) {
 	m.Description = v
-}
-
-func (m *UpdateRoutingInstanceRequest) SetRegionId(v string) {
-	m.RegionId = v
 }
 
 func (m *UpdateRoutingInstanceRequest) SetVpcInfo(v []*RoutingInstance_VpcInfo) {

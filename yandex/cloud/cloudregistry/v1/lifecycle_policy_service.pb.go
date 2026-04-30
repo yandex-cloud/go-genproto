@@ -789,11 +789,12 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_service_proto_rawDesc 
 	"\x1dDeleteLifecyclePolicyMetadata\x12)\n" +
 	"\tpolicy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bpolicyId\"F\n" +
 	"\x19GetLifecyclePolicyRequest\x12)\n" +
-	"\tpolicy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bpolicyId\"\x99\x01\n" +
+	"\tpolicy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bpolicyId\"\x9a\x01\n" +
 	"\x1aListLifecyclePolicyRequest\x12)\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
-	"registryId\x12&\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\bpageSize\x12(\n" +
+	"registryId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x91\x01\n" +
 	"\x1bListLifecyclePolicyResponse\x12J\n" +

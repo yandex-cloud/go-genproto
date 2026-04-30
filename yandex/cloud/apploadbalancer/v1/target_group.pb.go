@@ -142,8 +142,11 @@ type Target struct {
 	// 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
 	// Only one of `subnet_id` or `private_ipv4_address` should be set.
 	PrivateIpv4Address bool `protobuf:"varint,4,opt,name=private_ipv4_address,json=privateIpv4Address,proto3" json:"private_ipv4_address,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// If set, will not require `subnet_id` to validate the target.
+	// Only one of `subnet_id` or `external_address` should be set.
+	ExternalAddress bool `protobuf:"varint,5,opt,name=external_address,json=externalAddress,proto3" json:"external_address,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Target) Reset() {
@@ -206,6 +209,13 @@ func (x *Target) GetPrivateIpv4Address() bool {
 	return false
 }
 
+func (x *Target) GetExternalAddress() bool {
+	if x != nil {
+		return x.ExternalAddress
+	}
+	return false
+}
+
 type isTarget_AddressType interface {
 	isTarget_AddressType()
 }
@@ -233,12 +243,13 @@ const file_yandex_cloud_apploadbalancer_v1_target_group_proto_rawDesc = "" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x94\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbf\x01\n" +
 	"\x06Target\x12\x1f\n" +
 	"\n" +
 	"ip_address\x18\x01 \x01(\tH\x00R\tipAddress\x12\x1b\n" +
 	"\tsubnet_id\x18\x03 \x01(\tR\bsubnetId\x120\n" +
-	"\x14private_ipv4_address\x18\x04 \x01(\bR\x12privateIpv4AddressB\x14\n" +
+	"\x14private_ipv4_address\x18\x04 \x01(\bR\x12privateIpv4Address\x12)\n" +
+	"\x10external_address\x18\x05 \x01(\bR\x0fexternalAddressB\x14\n" +
 	"\faddress_type\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03Bz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 

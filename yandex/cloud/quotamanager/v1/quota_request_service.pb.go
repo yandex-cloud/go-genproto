@@ -594,9 +594,9 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"\n" +
 	"8yandex/cloud/quotamanager/v1/quota_request_service.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a0yandex/cloud/quotamanager/v1/quota_request.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"P\n" +
 	"\x16GetQuotaRequestRequest\x126\n" +
-	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\"\xda\x01\n" +
-	"\x17ListQuotaRequestRequest\x12H\n" +
-	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\"\n" +
+	"\x10quota_request_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0equotaRequestId\"\xd4\x01\n" +
+	"\x17ListQuotaRequestRequest\x12B\n" +
+	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x12\"\n" +
 	"\x06filter\x18\x02 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
@@ -605,9 +605,9 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
 	"\x18ListQuotaRequestResponse\x12Q\n" +
 	"\x0equota_requests\x18\x01 \x03(\v2*.yandex.cloud.quotamanager.v1.QuotaRequestR\rquotaRequests\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xec\x02\n" +
-	"\x19CreateQuotaRequestRequest\x12H\n" +
-	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12\x86\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe6\x02\n" +
+	"\x19CreateQuotaRequestRequest\x12B\n" +
+	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x12\x86\x01\n" +
 	"\x14desired_quota_limits\x18\x02 \x03(\v2I.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimitB\t\x82\xc81\x051-100R\x12desiredQuotaLimits\x1a|\n" +
 	"\x11DesiredQuotaLimit\x12'\n" +
 	"\bquota_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\aquotaId\x12>\n" +

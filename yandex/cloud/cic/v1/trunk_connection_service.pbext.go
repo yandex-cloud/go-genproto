@@ -5,7 +5,6 @@ package cic
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetTrunkConnectionRequest) SetTrunkConnectionId(v string) {
@@ -50,14 +49,6 @@ func (m *UpdateTrunkConnectionRequest) SetName(v string) {
 
 func (m *UpdateTrunkConnectionRequest) SetDescription(v string) {
 	m.Description = v
-}
-
-func (m *UpdateTrunkConnectionRequest) SetRegionId(v string) {
-	m.RegionId = v
-}
-
-func (m *UpdateTrunkConnectionRequest) SetPointOfPresenceId(v *wrapperspb.StringValue) {
-	m.PointOfPresenceId = v
 }
 
 func (m *UpdateTrunkConnectionRequest) SetCapacity(v TrunkConnection_Capacity) {

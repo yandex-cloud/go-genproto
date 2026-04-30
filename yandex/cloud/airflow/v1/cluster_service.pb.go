@@ -231,12 +231,12 @@ type CreateClusterRequest struct {
 	ServiceAccountId string `protobuf:"bytes,10,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Cloud Logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,11,opt,name=logging,proto3" json:"logging,omitempty"`
-	// Password of user `admin`.
-	AdminPassword string `protobuf:"bytes,12,opt,name=admin_password,json=adminPassword,proto3" json:"admin_password,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,13,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Password of user `admin`.
+	AdminPassword string `protobuf:"bytes,12,opt,name=admin_password,json=adminPassword,proto3" json:"admin_password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateClusterRequest) Reset() {
@@ -339,18 +339,18 @@ func (x *CreateClusterRequest) GetLogging() *LoggingConfig {
 	return nil
 }
 
-func (x *CreateClusterRequest) GetAdminPassword() string {
-	if x != nil {
-		return x.AdminPassword
-	}
-	return ""
-}
-
 func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	if x != nil {
 		return x.MaintenanceWindow
 	}
 	return nil
+}
+
+func (x *CreateClusterRequest) GetAdminPassword() string {
+	if x != nil {
+		return x.AdminPassword
+	}
+	return ""
 }
 
 type CreateClusterMetadata struct {
@@ -580,7 +580,6 @@ type UpdateClusterRequest struct {
 	// New description of the Apache Airflow cluster.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Apache Airflow cluster as “ key:value “ pairs. For example, "env": "prod".
-	//
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1159,7 +1158,7 @@ var File_yandex_cloud_airflow_v1_cluster_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/airflow/v1/cluster_service.proto\x12\x17yandex.cloud.airflow.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a%yandex/cloud/airflow/v1/cluster.proto\x1a)yandex/cloud/airflow/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"@\n" +
+	"-yandex/cloud/airflow/v1/cluster_service.proto\x12\x17yandex.cloud.airflow.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a%yandex/cloud/airflow/v1/cluster.proto\x1a)yandex/cloud/airflow/v1/maintenance.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -1185,9 +1184,9 @@ const file_yandex_cloud_airflow_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x126\n" +
 	"\x12service_account_id\x18\n" +
 	" \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12@\n" +
-	"\alogging\x18\v \x01(\v2&.yandex.cloud.airflow.v1.LoggingConfigR\alogging\x124\n" +
-	"\x0eadmin_password\x18\f \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\radminPassword\x12Y\n" +
-	"\x12maintenance_window\x18\r \x01(\v2*.yandex.cloud.airflow.v1.MaintenanceWindowR\x11maintenanceWindow\x1a9\n" +
+	"\alogging\x18\v \x01(\v2&.yandex.cloud.airflow.v1.LoggingConfigR\alogging\x12Y\n" +
+	"\x12maintenance_window\x18\r \x01(\v2*.yandex.cloud.airflow.v1.MaintenanceWindowR\x11maintenanceWindow\x124\n" +
+	"\x0eadmin_password\x18\f \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\radminPassword\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"6\n" +

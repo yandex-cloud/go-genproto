@@ -27,9 +27,15 @@ type PointOfPresence struct {
 	// ID of the pointOfPresence.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the region that the pointOfPresence belongs to.
-	RegionId      string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// Name of the pointOfPresence.
+	Name string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	// Location address of the pointOfPresence.
+	LocationAddress string `protobuf:"bytes,9,opt,name=location_address,json=locationAddress,proto3" json:"location_address,omitempty"`
+	// Links to info about the connection points.
+	ConnectionPoints []string `protobuf:"bytes,10,rep,name=connection_points,json=connectionPoints,proto3" json:"connection_points,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *PointOfPresence) Reset() {
@@ -76,14 +82,39 @@ func (x *PointOfPresence) GetRegionId() string {
 	return ""
 }
 
+func (x *PointOfPresence) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PointOfPresence) GetLocationAddress() string {
+	if x != nil {
+		return x.LocationAddress
+	}
+	return ""
+}
+
+func (x *PointOfPresence) GetConnectionPoints() []string {
+	if x != nil {
+		return x.ConnectionPoints
+	}
+	return nil
+}
+
 var File_yandex_cloud_cic_v1_point_of_presence_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_point_of_presence_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/cic/v1/point_of_presence.proto\x12\x13yandex.cloud.cic.v1\"D\n" +
+	"+yandex/cloud/cic/v1/point_of_presence.proto\x12\x13yandex.cloud.cic.v1\"\xb6\x01\n" +
 	"\x0fPointOfPresence\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tregion_id\x18\x06 \x01(\tR\bregionIdJ\x04\b\x02\x10\x06BV\n" +
+	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12\x12\n" +
+	"\x04name\x18\b \x01(\tR\x04name\x12)\n" +
+	"\x10location_address\x18\t \x01(\tR\x0flocationAddress\x12+\n" +
+	"\x11connection_points\x18\n" +
+	" \x03(\tR\x10connectionPointsJ\x04\b\x02\x10\x06J\x04\b\a\x10\bBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (

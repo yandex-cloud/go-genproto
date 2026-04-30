@@ -314,10 +314,6 @@ type CreateRoutingInstanceRequest struct {
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the RoutingInstance belongs to.
 	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the region that the routingInstance belongs to.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
-	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// List of the info about vpcNetworks which are attached to the RoutingInstance.
 	VpcInfo []*RoutingInstance_VpcInfo `protobuf:"bytes,6,rep,name=vpc_info,json=vpcInfo,proto3" json:"vpc_info,omitempty"`
 	// List of the info about privateConnections which are attached to the RoutingInstance.
@@ -384,14 +380,6 @@ func (x *CreateRoutingInstanceRequest) GetFolderId() string {
 	return ""
 }
 
-// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
-func (x *CreateRoutingInstanceRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
 func (x *CreateRoutingInstanceRequest) GetVpcInfo() []*RoutingInstance_VpcInfo {
 	if x != nil {
 		return x.VpcInfo
@@ -425,10 +413,6 @@ type UpdateRoutingInstanceRequest struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the RoutingInstance. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the region that the routingInstance belongs to.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
-	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// List of the info about vpcNetworks which are attached to the RoutingInstance.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
@@ -502,14 +486,6 @@ func (x *UpdateRoutingInstanceRequest) GetName() string {
 func (x *UpdateRoutingInstanceRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/cloudrouter/v1/routing_instance_service.proto.
-func (x *UpdateRoutingInstanceRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
 	}
 	return ""
 }
@@ -1568,33 +1544,29 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1cListRoutingInstancesResponse\x12Y\n" +
 	"\x11routing_instances\x18\x01 \x03(\v2,.yandex.cloud.cloudrouter.v1.RoutingInstanceR\x10routingInstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb6\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x93\x05\n" +
 	"\x1cCreateRoutingInstanceRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
-	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tregion_id\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12\\\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\\\n" +
 	"\bvpc_info\x18\x06 \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\v\x82\xc81\a<=10000R\avpcInfo\x12\x8e\x01\n" +
 	"\x1bcic_private_connection_info\x18\a \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\b\x82\xc81\x04<=50R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
 	"\x06labels\x18\f \x03(\v2E.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\b\x10\f\"\xf7\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\x05\x10\x06J\x04\b\b\x10\f\"\xce\x05\n" +
 	"\x1cUpdateRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12B\n" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12'\n" +
-	"\tregion_id\x18\a \x01(\tB\n" +
-	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12S\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12S\n" +
 	"\bvpc_info\x18\b \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\x02\x18\x01R\avpcInfo\x12\x88\x01\n" +
 	"\x1bcic_private_connection_info\x18\t \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\x02\x18\x01R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
 	"\x06labels\x18\x0e \x03(\v2E.yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\aJ\x04\b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\bJ\x04\b\n" +
 	"\x10\x0e\"\xf4\x01\n" +
 	"\x15UpsertPrefixesRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x122\n" +
@@ -1662,8 +1634,8 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x13remove_sub_prefixes\x18\x06 \x01(\bR\x11removeSubPrefixes2\xa4\x1b\n" +
 	"\x16RoutingInstanceService\x12\xab\x01\n" +
 	"\x03Get\x126.yandex.cloud.cloudrouter.v1.GetRoutingInstanceRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\">\x82\xd3\xe4\x93\x028\x126/cloudrouter/v1/routingInstances/{routing_instance_id}\x12\xd4\x01\n" +
-	"\x11GetByVpcNetworkId\x12D.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"K\x82\xd3\xe4\x93\x02E\x12C/cloudrouter/v1/routingInstances:getByVpcNetworkId/{vpc_network_id}\x12\xfd\x01\n" +
-	"\x1bGetByCicPrivateConnectionId\x12N.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"`\x82\xd3\xe4\x93\x02Z\x12X/cloudrouter/v1/routingInstances:getByCicPrivateConnectionId/{cic_private_connection_id}\x12\xa5\x01\n" +
+	"\x11GetByVpcNetworkId\x12D.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByVpcNetworkIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"K\x82\xd3\xe4\x93\x02E\x12C/cloudrouter/v1/routingInstances/getByVpcNetworkId/{vpc_network_id}\x12\xfd\x01\n" +
+	"\x1bGetByCicPrivateConnectionId\x12N.yandex.cloud.cloudrouter.v1.GetRoutingInstanceByCicPrivateConnectionIdRequest\x1a,.yandex.cloud.cloudrouter.v1.RoutingInstance\"`\x82\xd3\xe4\x93\x02Z\x12X/cloudrouter/v1/routingInstances/getByCicPrivateConnectionId/{cic_private_connection_id}\x12\xa5\x01\n" +
 	"\x04List\x128.yandex.cloud.cloudrouter.v1.ListRoutingInstancesRequest\x1a9.yandex.cloud.cloudrouter.v1.ListRoutingInstancesResponse\"(\x82\xd3\xe4\x93\x02\"\x12 /cloudrouter/v1/routingInstances\x12\xc7\x01\n" +
 	"\x06Create\x129.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*0\n" +
 	"\x1dCreateRoutingInstanceMetadata\x12\x0fRoutingInstance\x82\xd3\xe4\x93\x02%:\x01*\" /cloudrouter/v1/routingInstances\x12\xc7\x01\n" +

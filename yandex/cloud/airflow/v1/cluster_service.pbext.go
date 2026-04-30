@@ -75,12 +75,12 @@ func (m *CreateClusterRequest) SetLogging(v *LoggingConfig) {
 	m.Logging = v
 }
 
-func (m *CreateClusterRequest) SetAdminPassword(v string) {
-	m.AdminPassword = v
-}
-
 func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
+}
+
+func (m *CreateClusterRequest) SetAdminPassword(v string) {
+	m.AdminPassword = v
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {

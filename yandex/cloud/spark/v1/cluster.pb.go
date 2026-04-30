@@ -23,6 +23,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Cluster Health.
 type Health int32
 
 const (
@@ -79,12 +80,13 @@ func (Health) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0}
 }
 
+// Cluster Status Enumeration.
 type Cluster_Status int32
 
 const (
-	// Cluster status is unknown
+	// Cluster status is unknown.
 	Cluster_STATUS_UNKNOWN Cluster_Status = 0
-	// Cluster is being created
+	// Cluster is being created.
 	Cluster_CREATING Cluster_Status = 1
 	// Cluster is running normally.
 	Cluster_RUNNING Cluster_Status = 2
@@ -165,22 +167,24 @@ type Cluster struct {
 	// The name is unique within the folder. 1-64 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Spark cluster. 0-256 characters long.
-	Description string            `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	Labels      map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	// Cluster Labels.
+	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Configuration of the Spark cluster.
 	Config *ClusterConfig `protobuf:"bytes,7,opt,name=config,proto3" json:"config,omitempty"`
 	// Cluster status.
-	Status  Cluster_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.spark.v1.Cluster_Status" json:"status,omitempty"`
+	Status Cluster_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.spark.v1.Cluster_Status" json:"status,omitempty"`
+	// Cluster Network Configuration.
 	Network *NetworkConfig `protobuf:"bytes,9,opt,name=network,proto3" json:"network,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
+	// Deletion Protection inhibits deletion of the cluster.
 	DeletionProtection bool `protobuf:"varint,10,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// Service account that will be used to access a YC resources
+	// Service account that will be used to access a YC resources.
 	ServiceAccountId string `protobuf:"bytes,11,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Cloud logging configuration.
 	Logging *LoggingConfig `protobuf:"bytes,12,opt,name=logging,proto3" json:"logging,omitempty"`
 	// Aggregated cluster health.
 	Health Health `protobuf:"varint,13,opt,name=health,proto3,enum=yandex.cloud.spark.v1.Health" json:"health,omitempty"`
-	// UI URLs
+	// UI URLs.
 	Links []*UILink `protobuf:"bytes,14,rep,name=links,proto3" json:"links,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,15,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
@@ -332,16 +336,18 @@ func (x *Cluster) GetPlannedOperation() *MaintenanceOperation {
 	return nil
 }
 
+// Configuration of the Spark cluster.
 type ClusterConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourcePools *ResourcePools         `protobuf:"bytes,1,opt,name=resource_pools,json=resourcePools,proto3" json:"resource_pools,omitempty"`
-	// Configuration for HistoryServer
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resource Pools.
+	ResourcePools *ResourcePools `protobuf:"bytes,1,opt,name=resource_pools,json=resourcePools,proto3" json:"resource_pools,omitempty"`
+	// Configuration for HistoryServer.
 	HistoryServer *HistoryServerConfig `protobuf:"bytes,2,opt,name=history_server,json=historyServer,proto3" json:"history_server,omitempty"`
-	// Container custom environment dependencies
+	// Container custom environment dependencies.
 	Dependencies *Dependencies `protobuf:"bytes,3,opt,name=dependencies,proto3" json:"dependencies,omitempty"`
-	// Metastore Cluster
+	// Metastore Cluster.
 	Metastore *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
-	// Spark version. Format: "Major.Minor"
+	// Spark version. Format: "Major.Minor".
 	SparkVersion  string `protobuf:"bytes,5,opt,name=spark_version,json=sparkVersion,proto3" json:"spark_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -412,16 +418,18 @@ func (x *ClusterConfig) GetSparkVersion() string {
 	return ""
 }
 
+// Cluster Update Configuration.
 type UpdateClusterConfigSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourcePools *ResourcePools         `protobuf:"bytes,1,opt,name=resource_pools,json=resourcePools,proto3" json:"resource_pools,omitempty"`
-	// Configuration for HistoryServer
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resource Pools.
+	ResourcePools *ResourcePools `protobuf:"bytes,1,opt,name=resource_pools,json=resourcePools,proto3" json:"resource_pools,omitempty"`
+	// Configuration for HistoryServer.
 	HistoryServer *HistoryServerConfig `protobuf:"bytes,2,opt,name=history_server,json=historyServer,proto3" json:"history_server,omitempty"`
-	// Container custom environment dependencies
+	// Container custom environment dependencies.
 	Dependencies *Dependencies `protobuf:"bytes,3,opt,name=dependencies,proto3" json:"dependencies,omitempty"`
-	// Metastore Cluster
+	// Metastore Cluster.
 	Metastore *Metastore `protobuf:"bytes,4,opt,name=metastore,proto3" json:"metastore,omitempty"`
-	// Spark version. Format: "Major.Minor"
+	// Spark version. Format: "Major.Minor".
 	SparkVersion  string `protobuf:"bytes,5,opt,name=spark_version,json=sparkVersion,proto3" json:"spark_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -492,9 +500,11 @@ func (x *UpdateClusterConfigSpec) GetSparkVersion() string {
 	return ""
 }
 
+// Configuration for HistoryServer.
 type HistoryServerConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Enabled       bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// History Server is enabled.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -536,11 +546,12 @@ func (x *HistoryServerConfig) GetEnabled() bool {
 	return false
 }
 
+// Cluster Network Configuration.
 type NetworkConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// IDs of VPC network subnets where instances of the cluster are attached.
 	SubnetIds []string `protobuf:"bytes,1,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
-	// User security groups
+	// User security groups.
 	SecurityGroupIds []string `protobuf:"bytes,2,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -590,6 +601,7 @@ func (x *NetworkConfig) GetSecurityGroupIds() []string {
 	return nil
 }
 
+// Network Update Configuration.
 type UpdateNetworkConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// User security groups.
@@ -635,10 +647,13 @@ func (x *UpdateNetworkConfigSpec) GetSecurityGroupIds() []string {
 	return nil
 }
 
+// Resource Pools.
 type ResourcePools struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Driver        *ResourcePool          `protobuf:"bytes,1,opt,name=driver,proto3" json:"driver,omitempty"`
-	Executor      *ResourcePool          `protobuf:"bytes,2,opt,name=executor,proto3" json:"executor,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Driver Resource Pool.
+	Driver *ResourcePool `protobuf:"bytes,1,opt,name=driver,proto3" json:"driver,omitempty"`
+	// Executor Resource Pool.
+	Executor      *ResourcePool `protobuf:"bytes,2,opt,name=executor,proto3" json:"executor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -687,13 +702,15 @@ func (x *ResourcePools) GetExecutor() *ResourcePool {
 	return nil
 }
 
+// Resource Pool.
 type ResourcePool struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the preset for computational resources allocated to a instance (e.g., CPU, memory, etc.).
-	ResourcePresetId string       `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
-	ScalePolicy      *ScalePolicy `protobuf:"bytes,2,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
+	// Scale Policy.
+	ScalePolicy   *ScalePolicy `protobuf:"bytes,2,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ResourcePool) Reset() {
@@ -740,8 +757,11 @@ func (x *ResourcePool) GetScalePolicy() *ScalePolicy {
 	return nil
 }
 
+// Scale Policy.
 type ScalePolicy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Scale Type.
+	//
 	// Types that are valid to be assigned to ScaleType:
 	//
 	//	*ScalePolicy_FixedScale_
@@ -811,10 +831,12 @@ type isScalePolicy_ScaleType interface {
 }
 
 type ScalePolicy_FixedScale_ struct {
+	// Fixed Scale Policy.
 	FixedScale *ScalePolicy_FixedScale `protobuf:"bytes,1,opt,name=fixed_scale,json=fixedScale,proto3,oneof"`
 }
 
 type ScalePolicy_AutoScale_ struct {
+	// Auto Scale Policy.
 	AutoScale *ScalePolicy_AutoScale `protobuf:"bytes,2,opt,name=auto_scale,json=autoScale,proto3,oneof"`
 }
 
@@ -822,10 +844,13 @@ func (*ScalePolicy_FixedScale_) isScalePolicy_ScaleType() {}
 
 func (*ScalePolicy_AutoScale_) isScalePolicy_ScaleType() {}
 
+// Cluster Dependencies.
 type Dependencies struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PipPackages   []string               `protobuf:"bytes,1,rep,name=pip_packages,json=pipPackages,proto3" json:"pip_packages,omitempty"`
-	DebPackages   []string               `protobuf:"bytes,2,rep,name=deb_packages,json=debPackages,proto3" json:"deb_packages,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Pip Packages.
+	PipPackages []string `protobuf:"bytes,1,rep,name=pip_packages,json=pipPackages,proto3" json:"pip_packages,omitempty"`
+	// Deb Packages.
+	DebPackages   []string `protobuf:"bytes,2,rep,name=deb_packages,json=debPackages,proto3" json:"deb_packages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -874,9 +899,11 @@ func (x *Dependencies) GetDebPackages() []string {
 	return nil
 }
 
+// Metastore Cluster.
 type Metastore struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cluster ID.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -918,9 +945,13 @@ func (x *Metastore) GetClusterId() string {
 	return ""
 }
 
+// Logging Config.
 type LoggingConfig struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Logging is enabled.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Destination.
+	//
 	// Types that are valid to be assigned to Destination:
 	//
 	//	*LoggingConfig_FolderId
@@ -997,10 +1028,12 @@ type isLoggingConfig_Destination interface {
 }
 
 type LoggingConfig_FolderId struct {
+	// Folder ID.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
 type LoggingConfig_LogGroupId struct {
+	// Logging Group ID.
 	LogGroupId string `protobuf:"bytes,3,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
 }
 
@@ -1008,10 +1041,13 @@ func (*LoggingConfig_FolderId) isLoggingConfig_Destination() {}
 
 func (*LoggingConfig_LogGroupId) isLoggingConfig_Destination() {}
 
+// UI URL.
 type UILink struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// URL.
+	Url           string `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1060,9 +1096,11 @@ func (x *UILink) GetUrl() string {
 	return ""
 }
 
+// Fixed Scale Policy.
 type ScalePolicy_FixedScale struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          int64                  `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Fixed Size.
+	Size          int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1104,10 +1142,13 @@ func (x *ScalePolicy_FixedScale) GetSize() int64 {
 	return 0
 }
 
+// Auto Scale Policy.
 type ScalePolicy_AutoScale struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	MinSize       int64                  `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
-	MaxSize       int64                  `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Min Size.
+	MinSize int64 `protobuf:"varint,1,opt,name=min_size,json=minSize,proto3" json:"min_size,omitempty"`
+	// Max Size.
+	MaxSize       int64 `protobuf:"varint,2,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1160,7 +1201,7 @@ var File_yandex_cloud_spark_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/spark/v1/cluster.proto\x12\x15yandex.cloud.spark.v1\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\b\n" +
+	"#yandex/cloud/spark/v1/cluster.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xb4\b\n" +
 	"\aCluster\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +

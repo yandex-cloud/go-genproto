@@ -9,3 +9,15 @@ func (m *PointOfPresence) SetId(v string) {
 func (m *PointOfPresence) SetRegionId(v string) {
 	m.RegionId = v
 }
+
+func (m *PointOfPresence) SetName(v string) {
+	m.Name = v
+}
+
+func (m *PointOfPresence) SetLocationAddress(v string) {
+	m.LocationAddress = v
+}
+
+func (m *PointOfPresence) SetConnectionPoints(v []string) {
+	m.ConnectionPoints = v
+}

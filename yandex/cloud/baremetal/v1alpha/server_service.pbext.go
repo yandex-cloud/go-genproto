@@ -5,6 +5,7 @@ package baremetal
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetServerRequest) SetServerId(v string) {
@@ -141,6 +142,10 @@ func (m *NetworkInterfaceSpec) SetPublicInterface(v *PublicNetworkInterface) {
 
 func (m *NetworkInterfaceSpec) SetId(v string) {
 	m.Id = v
+}
+
+func (m *NetworkInterfaceSpec) SetConfigurationNetworkInterfaceId(v *wrapperspb.StringValue) {
+	m.ConfigurationNetworkInterfaceId = v
 }
 
 type OsSettingsSpec_SshKey = isOsSettingsSpec_SshKey

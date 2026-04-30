@@ -14,7 +14,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -225,14 +224,6 @@ type UpdateTrunkConnectionRequest struct {
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the trunkConnection. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// ID of the region that the trunkConnection belongs to.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-	RegionId string `protobuf:"bytes,7,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// ID of pointOfPresence that the trunkConnection is deployed on.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-	PointOfPresenceId *wrapperspb.StringValue `protobuf:"bytes,13,opt,name=point_of_presence_id,json=pointOfPresenceId,proto3" json:"point_of_presence_id,omitempty"`
 	// Capacity of the trunkConnection
 	Capacity TrunkConnection_Capacity `protobuf:"varint,17,opt,name=capacity,proto3,enum=yandex.cloud.cic.v1.TrunkConnection_Capacity" json:"capacity,omitempty"`
 	// Resource labels, `key:value` pairs.
@@ -306,22 +297,6 @@ func (x *UpdateTrunkConnectionRequest) GetDescription() string {
 		return x.Description
 	}
 	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-func (x *UpdateTrunkConnectionRequest) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/trunk_connection_service.proto.
-func (x *UpdateTrunkConnectionRequest) GetPointOfPresenceId() *wrapperspb.StringValue {
-	if x != nil {
-		return x.PointOfPresenceId
-	}
-	return nil
 }
 
 func (x *UpdateTrunkConnectionRequest) GetCapacity() TrunkConnection_Capacity {
@@ -983,7 +958,7 @@ var File_yandex_cloud_cic_v1_trunk_connection_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/cic/v1/trunk_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\x1a*yandex/cloud/cic/v1/trunk_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"Y\n" +
+	"2yandex/cloud/cic/v1/trunk_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a+yandex/cloud/cic/v1/public_connection.proto\x1a*yandex/cloud/cic/v1/trunk_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"Y\n" +
 	"\x19GetTrunkConnectionRequest\x12<\n" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\"\xbf\x01\n" +
 	"\x1bListTrunkConnectionsRequest\x12)\n" +
@@ -996,22 +971,19 @@ const file_yandex_cloud_cic_v1_trunk_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x99\x01\n" +
 	"\x1cListTrunkConnectionsResponse\x12Q\n" +
 	"\x11trunk_connections\x18\x01 \x03(\v2$.yandex.cloud.cic.v1.TrunkConnectionR\x10trunkConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf0\x05\n" +
-	"\x1cUpdateTrunkConnectionRequest\x12<\n" +
-	"\x13trunk_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11trunkConnectionId\x12;\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xde\x04\n" +
+	"\x1cUpdateTrunkConnectionRequest\x128\n" +
+	"\x13trunk_connection_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x11trunkConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12B\n" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12'\n" +
-	"\tregion_id\x18\a \x01(\tB\n" +
-	"\x8a\xc81\x04<=50\x18\x01R\bregionId\x12Q\n" +
-	"\x14point_of_presence_id\x18\r \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\x11pointOfPresenceId\x12O\n" +
-	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityB\x04\xe8\xc71\x01R\bcapacity\x12\x92\x01\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12I\n" +
+	"\bcapacity\x18\x11 \x01(\x0e2-.yandex.cloud.cic.v1.TrunkConnection.CapacityR\bcapacity\x12\x92\x01\n" +
 	"\x06labels\x18\x12 \x03(\v2=.yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
 	"\x13deletion_protection\x18\x14 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\aJ\x04\b\b\x10\rJ\x04\b\x0e\x10\x11J\x04\b\x13\x10\x14\"O\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x11J\x04\b\x13\x10\x14\"O\n" +
 	"\x1dUpdateTrunkConnectionMetadata\x12.\n" +
 	"\x13trunk_connection_id\x18\x01 \x01(\tR\x11trunkConnectionId\"\\\n" +
 	"\x1cDeleteTrunkConnectionRequest\x12<\n" +
@@ -1099,45 +1071,43 @@ var file_yandex_cloud_cic_v1_trunk_connection_service_proto_goTypes = []any{
 	(*MoveTrunkConnectionMetadata)(nil),                   // 12: yandex.cloud.cic.v1.MoveTrunkConnectionMetadata
 	(*ListTrunkConnectionOperationsRequest)(nil),          // 13: yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
 	(*ListTrunkConnectionOperationsResponse)(nil),         // 14: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
-	nil,                            // 15: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
-	(*TrunkConnection)(nil),        // 16: yandex.cloud.cic.v1.TrunkConnection
-	(*fieldmaskpb.FieldMask)(nil),  // 17: google.protobuf.FieldMask
-	(*wrapperspb.StringValue)(nil), // 18: google.protobuf.StringValue
-	(TrunkConnection_Capacity)(0),  // 19: yandex.cloud.cic.v1.TrunkConnection.Capacity
-	(*PrivateConnection)(nil),      // 20: yandex.cloud.cic.v1.PrivateConnection
-	(*PublicConnection)(nil),       // 21: yandex.cloud.cic.v1.PublicConnection
-	(*operation.Operation)(nil),    // 22: yandex.cloud.operation.Operation
+	nil,                           // 15: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
+	(*TrunkConnection)(nil),       // 16: yandex.cloud.cic.v1.TrunkConnection
+	(*fieldmaskpb.FieldMask)(nil), // 17: google.protobuf.FieldMask
+	(TrunkConnection_Capacity)(0), // 18: yandex.cloud.cic.v1.TrunkConnection.Capacity
+	(*PrivateConnection)(nil),     // 19: yandex.cloud.cic.v1.PrivateConnection
+	(*PublicConnection)(nil),      // 20: yandex.cloud.cic.v1.PublicConnection
+	(*operation.Operation)(nil),   // 21: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cic_v1_trunk_connection_service_proto_depIdxs = []int32{
 	16, // 0: yandex.cloud.cic.v1.ListTrunkConnectionsResponse.trunk_connections:type_name -> yandex.cloud.cic.v1.TrunkConnection
 	17, // 1: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
-	18, // 2: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.point_of_presence_id:type_name -> google.protobuf.StringValue
-	19, // 3: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.capacity:type_name -> yandex.cloud.cic.v1.TrunkConnection.Capacity
-	15, // 4: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
-	20, // 5: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
-	21, // 6: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
-	22, // 7: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 8: yandex.cloud.cic.v1.TrunkConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetTrunkConnectionRequest
-	1,  // 9: yandex.cloud.cic.v1.TrunkConnectionService.List:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionsRequest
-	3,  // 10: yandex.cloud.cic.v1.TrunkConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
-	5,  // 11: yandex.cloud.cic.v1.TrunkConnectionService.Delete:input_type -> yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
-	7,  // 12: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
-	9,  // 13: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
-	11, // 14: yandex.cloud.cic.v1.TrunkConnectionService.Move:input_type -> yandex.cloud.cic.v1.MoveTrunkConnectionRequest
-	13, // 15: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
-	16, // 16: yandex.cloud.cic.v1.TrunkConnectionService.Get:output_type -> yandex.cloud.cic.v1.TrunkConnection
-	2,  // 17: yandex.cloud.cic.v1.TrunkConnectionService.List:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionsResponse
-	22, // 18: yandex.cloud.cic.v1.TrunkConnectionService.Update:output_type -> yandex.cloud.operation.Operation
-	22, // 19: yandex.cloud.cic.v1.TrunkConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
-	8,  // 20: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
-	10, // 21: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
-	22, // 22: yandex.cloud.cic.v1.TrunkConnectionService.Move:output_type -> yandex.cloud.operation.Operation
-	14, // 23: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
-	16, // [16:24] is the sub-list for method output_type
-	8,  // [8:16] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	18, // 2: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.capacity:type_name -> yandex.cloud.cic.v1.TrunkConnection.Capacity
+	15, // 3: yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest.LabelsEntry
+	19, // 4: yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
+	20, // 5: yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
+	21, // 6: yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 7: yandex.cloud.cic.v1.TrunkConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetTrunkConnectionRequest
+	1,  // 8: yandex.cloud.cic.v1.TrunkConnectionService.List:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionsRequest
+	3,  // 9: yandex.cloud.cic.v1.TrunkConnectionService.Update:input_type -> yandex.cloud.cic.v1.UpdateTrunkConnectionRequest
+	5,  // 10: yandex.cloud.cic.v1.TrunkConnectionService.Delete:input_type -> yandex.cloud.cic.v1.DeleteTrunkConnectionRequest
+	7,  // 11: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsRequest
+	9,  // 12: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsRequest
+	11, // 13: yandex.cloud.cic.v1.TrunkConnectionService.Move:input_type -> yandex.cloud.cic.v1.MoveTrunkConnectionRequest
+	13, // 14: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsRequest
+	16, // 15: yandex.cloud.cic.v1.TrunkConnectionService.Get:output_type -> yandex.cloud.cic.v1.TrunkConnection
+	2,  // 16: yandex.cloud.cic.v1.TrunkConnectionService.List:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionsResponse
+	21, // 17: yandex.cloud.cic.v1.TrunkConnectionService.Update:output_type -> yandex.cloud.operation.Operation
+	21, // 18: yandex.cloud.cic.v1.TrunkConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
+	8,  // 19: yandex.cloud.cic.v1.TrunkConnectionService.ListPrivateConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPrivateConnectionsResponse
+	10, // 20: yandex.cloud.cic.v1.TrunkConnectionService.ListPublicConnections:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionPublicConnectionsResponse
+	21, // 21: yandex.cloud.cic.v1.TrunkConnectionService.Move:output_type -> yandex.cloud.operation.Operation
+	14, // 22: yandex.cloud.cic.v1.TrunkConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListTrunkConnectionOperationsResponse
+	15, // [15:23] is the sub-list for method output_type
+	7,  // [7:15] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cic_v1_trunk_connection_service_proto_init() }

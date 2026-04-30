@@ -107,6 +107,10 @@ func (m *ClusterConfig) SetScheduler(v *SchedulerConfig) {
 	m.Scheduler = v
 }
 
+func (m *ClusterConfig) SetDagProcessor(v *DagProcessorConfig) {
+	m.DagProcessor = v
+}
+
 func (m *ClusterConfig) SetTriggerer(v *TriggererConfig) {
 	m.Triggerer = v
 }
@@ -129,10 +133,6 @@ func (m *ClusterConfig) SetAirflowVersion(v string) {
 
 func (m *ClusterConfig) SetPythonVersion(v string) {
 	m.PythonVersion = v
-}
-
-func (m *ClusterConfig) SetDagProcessor(v *DagProcessorConfig) {
-	m.DagProcessor = v
 }
 
 func (m *AirflowConfig) SetConfig(v map[string]string) {
@@ -243,10 +243,6 @@ func (m *LoggingConfig) SetDestination(v LoggingConfig_Destination) {
 	m.Destination = v
 }
 
-func (m *LoggingConfig) SetEnabled(v bool) {
-	m.Enabled = v
-}
-
 func (m *LoggingConfig) SetFolderId(v string) {
 	m.Destination = &LoggingConfig_FolderId{
 		FolderId: v,
@@ -257,6 +253,10 @@ func (m *LoggingConfig) SetLogGroupId(v string) {
 	m.Destination = &LoggingConfig_LogGroupId{
 		LogGroupId: v,
 	}
+}
+
+func (m *LoggingConfig) SetEnabled(v bool) {
+	m.Enabled = v
 }
 
 func (m *LoggingConfig) SetMinLevel(v v1.LogLevel_Level) {

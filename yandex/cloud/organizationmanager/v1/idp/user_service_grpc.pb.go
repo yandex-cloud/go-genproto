@@ -35,6 +35,8 @@ const (
 	UserService_ConvertToExternal_FullMethodName       = "/yandex.cloud.organizationmanager.v1.idp.UserService/ConvertToExternal"
 	UserService_SetPasswordHash_FullMethodName         = "/yandex.cloud.organizationmanager.v1.idp.UserService/SetPasswordHash"
 	UserService_ResolveExternalIds_FullMethodName      = "/yandex.cloud.organizationmanager.v1.idp.UserService/ResolveExternalIds"
+	UserService_GetPasswordChanges_FullMethodName      = "/yandex.cloud.organizationmanager.v1.idp.UserService/GetPasswordChanges"
+	UserService_CommitPassword_FullMethodName          = "/yandex.cloud.organizationmanager.v1.idp.UserService/CommitPassword"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -73,6 +75,10 @@ type UserServiceClient interface {
 	SetPasswordHash(ctx context.Context, in *SetPasswordHashRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resolves external IDs to internal user IDs.
 	ResolveExternalIds(ctx context.Context, in *ResolveExternalIdsRequest, opts ...grpc.CallOption) (*ResolveExternalIdsResponse, error)
+	// Streams password changes for a IdentityHub sync agent to process.
+	GetPasswordChanges(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetPasswordChangesRequest, GetPasswordChangesResponse], error)
+	// Commits the result of a password writeback operation.
+	CommitPassword(ctx context.Context, in *CommitPasswordRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type userServiceClient struct {
@@ -223,6 +229,29 @@ func (c *userServiceClient) ResolveExternalIds(ctx context.Context, in *ResolveE
 	return out, nil
 }
 
+func (c *userServiceClient) GetPasswordChanges(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[GetPasswordChangesRequest, GetPasswordChangesResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &UserService_ServiceDesc.Streams[0], UserService_GetPasswordChanges_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[GetPasswordChangesRequest, GetPasswordChangesResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type UserService_GetPasswordChangesClient = grpc.BidiStreamingClient[GetPasswordChangesRequest, GetPasswordChangesResponse]
+
+func (c *userServiceClient) CommitPassword(ctx context.Context, in *CommitPasswordRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, UserService_CommitPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -259,6 +288,10 @@ type UserServiceServer interface {
 	SetPasswordHash(context.Context, *SetPasswordHashRequest) (*operation.Operation, error)
 	// Resolves external IDs to internal user IDs.
 	ResolveExternalIds(context.Context, *ResolveExternalIdsRequest) (*ResolveExternalIdsResponse, error)
+	// Streams password changes for a IdentityHub sync agent to process.
+	GetPasswordChanges(grpc.BidiStreamingServer[GetPasswordChangesRequest, GetPasswordChangesResponse]) error
+	// Commits the result of a password writeback operation.
+	CommitPassword(context.Context, *CommitPasswordRequest) (*operation.Operation, error)
 }
 
 // UnimplementedUserServiceServer should be embedded to have
@@ -309,6 +342,12 @@ func (UnimplementedUserServiceServer) SetPasswordHash(context.Context, *SetPassw
 }
 func (UnimplementedUserServiceServer) ResolveExternalIds(context.Context, *ResolveExternalIdsRequest) (*ResolveExternalIdsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveExternalIds not implemented")
+}
+func (UnimplementedUserServiceServer) GetPasswordChanges(grpc.BidiStreamingServer[GetPasswordChangesRequest, GetPasswordChangesResponse]) error {
+	return status.Error(codes.Unimplemented, "method GetPasswordChanges not implemented")
+}
+func (UnimplementedUserServiceServer) CommitPassword(context.Context, *CommitPasswordRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CommitPassword not implemented")
 }
 func (UnimplementedUserServiceServer) testEmbeddedByValue() {}
 
@@ -582,6 +621,31 @@ func _UserService_ResolveExternalIds_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_GetPasswordChanges_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(UserServiceServer).GetPasswordChanges(&grpc.GenericServerStream[GetPasswordChangesRequest, GetPasswordChangesResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type UserService_GetPasswordChangesServer = grpc.BidiStreamingServer[GetPasswordChangesRequest, GetPasswordChangesResponse]
+
+func _UserService_CommitPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CommitPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).CommitPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_CommitPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).CommitPassword(ctx, req.(*CommitPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -645,7 +709,18 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ResolveExternalIds",
 			Handler:    _UserService_ResolveExternalIds_Handler,
 		},
+		{
+			MethodName: "CommitPassword",
+			Handler:    _UserService_CommitPassword_Handler,
+		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetPasswordChanges",
+			Handler:       _UserService_GetPasswordChanges_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "yandex/cloud/organizationmanager/v1/idp/user_service.proto",
 }

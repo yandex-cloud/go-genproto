@@ -50,10 +50,11 @@ type ClusterServiceClient interface {
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Spark cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified Spark cluster.
+	// Start the specified Spark Cluster resource.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stops the specified Spark cluster
+	// Stops the specified Spark Cluster resource.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves a list of all Spark clusters for Health service.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of access bindings for the specified Spark cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -197,10 +198,11 @@ type ClusterServiceServer interface {
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Spark cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Start the specified Spark cluster.
+	// Start the specified Spark Cluster resource.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stops the specified Spark cluster
+	// Stops the specified Spark Cluster resource.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
+	// Retrieves a list of all Spark clusters for Health service.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of access bindings for the specified Spark cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

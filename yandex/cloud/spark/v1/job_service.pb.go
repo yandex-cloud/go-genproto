@@ -583,7 +583,7 @@ var File_yandex_cloud_spark_v1_job_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/spark/v1/job_service.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fyandex/cloud/spark/v1/job.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\"a\n" +
+	"'yandex/cloud/spark/v1/job_service.proto\x12\x15yandex.cloud.spark.v1\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1fyandex/cloud/spark/v1/job.proto\x1a\x1dyandex/cloud/validation.proto\"a\n" +
 	"\rGetJobRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -599,18 +599,18 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"u\n" +
 	"\x10ListJobsResponse\x12.\n" +
 	"\x04jobs\x18\x01 \x03(\v2\x1a.yandex.cloud.spark.v1.JobR\x04jobs\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xa2\x03\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xa4\x03\n" +
 	"\x10CreateJobRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12>\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\x04name\x18\x02 \x01(\tB)\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]\x8a\xc81\x04<256R\x04name\x12>\n" +
 	"\tspark_job\x18\x03 \x01(\v2\x1f.yandex.cloud.spark.v1.SparkJobH\x00R\bsparkJob\x12D\n" +
 	"\vpyspark_job\x18\x04 \x01(\v2!.yandex.cloud.spark.v1.PysparkJobH\x00R\n" +
 	"pysparkJob\x12T\n" +
 	"\x11spark_connect_job\x18\x05 \x01(\v2&.yandex.cloud.spark.v1.SparkConnectJobH\x00R\x0fsparkConnectJob\x126\n" +
 	"\x12service_account_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountIdB\n" +
 	"\n" +
-	"\bjob_specJ\x04\b\x06\x10\aJ\x04\b\a\x10\b\"a\n" +
+	"\bjob_specJ\x04\b\x06\x10\b\"a\n" +
 	"\x11CreateJobMetadata\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\x1f\n" +
@@ -628,14 +628,14 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=200R\tpageToken\"a\n" +
 	"\x12ListJobLogResponse\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xfc\x03\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xf6\x03\n" +
 	"\n" +
-	"JobService\x12Y\n" +
-	"\x04List\x12&.yandex.cloud.spark.v1.ListJobsRequest\x1a'.yandex.cloud.spark.v1.ListJobsResponse\"\x00\x12r\n" +
+	"JobService\x12W\n" +
+	"\x04List\x12&.yandex.cloud.spark.v1.ListJobsRequest\x1a'.yandex.cloud.spark.v1.ListJobsResponse\x12r\n" +
 	"\x06Create\x12'.yandex.cloud.spark.v1.CreateJobRequest\x1a!.yandex.cloud.operation.Operation\"\x1c\xb2\xd2*\x18\n" +
-	"\x11CreateJobMetadata\x12\x03Job\x12I\n" +
-	"\x03Get\x12$.yandex.cloud.spark.v1.GetJobRequest\x1a\x1a.yandex.cloud.spark.v1.Job\"\x00\x12`\n" +
-	"\aListLog\x12(.yandex.cloud.spark.v1.ListJobLogRequest\x1a).yandex.cloud.spark.v1.ListJobLogResponse\"\x00\x12r\n" +
+	"\x11CreateJobMetadata\x12\x03Job\x12G\n" +
+	"\x03Get\x12$.yandex.cloud.spark.v1.GetJobRequest\x1a\x1a.yandex.cloud.spark.v1.Job\x12^\n" +
+	"\aListLog\x12(.yandex.cloud.spark.v1.ListJobLogRequest\x1a).yandex.cloud.spark.v1.ListJobLogResponse\x12r\n" +
 	"\x06Cancel\x12'.yandex.cloud.spark.v1.CancelJobRequest\x1a!.yandex.cloud.operation.Operation\"\x1c\xb2\xd2*\x18\n" +
 	"\x11CreateJobMetadata\x12\x03JobB\\\n" +
 	"\x19yandex.cloud.api.spark.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/spark/v1;sparkb\x06proto3"

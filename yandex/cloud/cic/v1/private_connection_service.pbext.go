@@ -48,10 +48,6 @@ func (m *CreatePrivateConnectionRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *CreatePrivateConnectionRequest) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *CreatePrivateConnectionRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
@@ -86,10 +82,6 @@ func (m *UpdatePrivateConnectionRequest) SetName(v string) {
 
 func (m *UpdatePrivateConnectionRequest) SetDescription(v string) {
 	m.Description = v
-}
-
-func (m *UpdatePrivateConnectionRequest) SetRegionId(v string) {
-	m.RegionId = v
 }
 
 func (m *UpdatePrivateConnectionRequest) SetTrunkConnectionId(v string) {
