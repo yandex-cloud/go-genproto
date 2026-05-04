@@ -658,11 +658,11 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_service_proto_rawDes
 	"\x16ListWafProfilesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"n\n" +
 	"\x17ListWafProfilesResponse\x12S\n" +
-	"\fwaf_profiles\x18\x01 \x03(\v20.yandex.cloud.smartwebsecurity.v1.waf.WafProfileR\vwafProfiles\"\xb5\x06\n" +
+	"\fwaf_profiles\x18\x01 \x03(\v20.yandex.cloud.smartwebsecurity.v1.waf.WafProfileR\vwafProfiles\"\xe1\x06\n" +
 	"\x17CreateWafProfileRequest\x12b\n" +
 	"\rcore_rule_set\x18\a \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetH\x00R\vcoreRuleSet\x12\x1b\n" +
-	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12>\n" +
+	"\x04name\x18\x02 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12a\n" +
 	"\x06labels\x18\x04 \x03(\v2I.yandex.cloud.smartwebsecurity.v1.waf.CreateWafProfileRequest.LabelsEntryR\x06labels\x12J\n" +
 	"\x05rules\x18\x05 \x03(\v24.yandex.cloud.smartwebsecurity.v1.waf.WafProfileRuleR\x05rules\x12f\n" +
@@ -677,13 +677,13 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_service_proto_rawDes
 	"\n" +
 	"\brule_set\"@\n" +
 	"\x18CreateWafProfileMetadata\x12$\n" +
-	"\x0ewaf_profile_id\x18\x01 \x01(\tR\fwafProfileId\"\x81\a\n" +
+	"\x0ewaf_profile_id\x18\x01 \x01(\tR\fwafProfileId\"\xad\a\n" +
 	"\x17UpdateWafProfileRequest\x12b\n" +
 	"\rcore_rule_set\x18\b \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetH\x00R\vcoreRuleSet\x12*\n" +
 	"\x0ewaf_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fwafProfileId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"updateMask\x12>\n" +
+	"\x04name\x18\x03 \x01(\tB*\xe8\xc71\x00\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12a\n" +
 	"\x06labels\x18\x05 \x03(\v2I.yandex.cloud.smartwebsecurity.v1.waf.UpdateWafProfileRequest.LabelsEntryR\x06labels\x12J\n" +
 	"\x05rules\x18\x06 \x03(\v24.yandex.cloud.smartwebsecurity.v1.waf.WafProfileRuleR\x05rules\x12f\n" +

@@ -20,24 +20,6 @@ func (m *Video) SetAccessRights(v Video_AccessRights) {
 	m.AccessRights = v
 }
 
-func (m *Video) SetTusd(v *VideoTUSDSource) {
-	m.Source = &Video_Tusd{
-		Tusd: v,
-	}
-}
-
-func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
-	m.AccessRights = &Video_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *Video) SetSignUrlAccess(v *VideoSignURLAccessRights) {
-	m.AccessRights = &Video_SignUrlAccess{
-		SignUrlAccess: v,
-	}
-}
-
 func (m *Video) SetId(v string) {
 	m.Id = v
 }
@@ -94,6 +76,24 @@ func (m *Video) SetFeatures(v *VideoFeatures) {
 	m.Features = v
 }
 
+func (m *Video) SetTusd(v *VideoTUSDSource) {
+	m.Source = &Video_Tusd{
+		Tusd: v,
+	}
+}
+
+func (m *Video) SetPublicAccess(v *VideoPublicAccessRights) {
+	m.AccessRights = &Video_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *Video) SetSignUrlAccess(v *VideoSignURLAccessRights) {
+	m.AccessRights = &Video_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *Video) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
@@ -118,6 +118,10 @@ func (m *VideoFeatures) SetSummary(v *VideoFeatures_Summary) {
 	m.Summary = v
 }
 
+func (m *VideoFeatures) SetSpeechToText(v *VideoFeatures_SpeechToText) {
+	m.SpeechToText = v
+}
+
 func (m *VideoFeatures_Summary) SetResult(v VideoFeatures_FeatureResult) {
 	m.Result = v
 }
@@ -135,5 +139,25 @@ func (m *VideoFeatures_Summary_SummaryURL) SetTrackIndex(v int64) {
 }
 
 func (m *VideoFeatures_Summary_SummaryURL) SetSrcLang(v string) {
+	m.SrcLang = v
+}
+
+func (m *VideoFeatures_SpeechToText) SetResult(v VideoFeatures_FeatureResult) {
+	m.Result = v
+}
+
+func (m *VideoFeatures_SpeechToText) SetUrls(v []*VideoFeatures_SpeechToText_SpeechToTextURL) {
+	m.Urls = v
+}
+
+func (m *VideoFeatures_SpeechToText_SpeechToTextURL) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *VideoFeatures_SpeechToText_SpeechToTextURL) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *VideoFeatures_SpeechToText_SpeechToTextURL) SetSrcLang(v string) {
 	m.SrcLang = v
 }

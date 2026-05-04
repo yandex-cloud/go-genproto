@@ -944,7 +944,7 @@ var File_yandex_cloud_searchapi_v2_wordstat_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_searchapi_v2_wordstat_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/searchapi/v2/wordstat_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf5\x01\n" +
+	"0yandex/cloud/searchapi/v2/wordstat_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf5\x01\n" +
 	"\rGetTopRequest\x12%\n" +
 	"\x06phrase\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=400R\x06phrase\x12+\n" +
 	"\vnum_phrases\x18\x02 \x01(\x03B\n" +

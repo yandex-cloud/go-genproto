@@ -91,64 +91,6 @@ func (m *ListDesktopGroupOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-type UpdateDesktopGroupRequest_UpdatePolicy = isUpdateDesktopGroupRequest_UpdatePolicy
-
-func (m *UpdateDesktopGroupRequest) SetUpdatePolicy(v UpdateDesktopGroupRequest_UpdatePolicy) {
-	m.UpdatePolicy = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetDesktopGroupId(v string) {
-	m.DesktopGroupId = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetDesktopImageId(v string) {
-	m.DesktopImageId = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetDescription(v string) {
-	m.Description = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetResourcesSpec(v *ResourcesSpec) {
-	m.ResourcesSpec = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetGroupConfig(v *DesktopGroupConfiguration) {
-	m.GroupConfig = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetBootDiskSpec(v *DiskSpec) {
-	m.BootDiskSpec = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetDataDiskSpec(v *DiskSpec) {
-	m.DataDiskSpec = v
-}
-
-func (m *UpdateDesktopGroupRequest) SetAutoUpdatePolicy(v *AutoUpdatePolicy) {
-	m.UpdatePolicy = &UpdateDesktopGroupRequest_AutoUpdatePolicy{
-		AutoUpdatePolicy: v,
-	}
-}
-
-func (m *UpdateDesktopGroupRequest) SetManualUpdatePolicy(v *ManualUpdatePolicy) {
-	m.UpdatePolicy = &UpdateDesktopGroupRequest_ManualUpdatePolicy{
-		ManualUpdatePolicy: v,
-	}
-}
-
 func (m *CreateDesktopGroupRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -163,6 +105,10 @@ func (m *CreateDesktopGroupRequest) SetName(v string) {
 
 func (m *CreateDesktopGroupRequest) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *CreateDesktopGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
 }
 
 func (m *CreateDesktopGroupRequest) SetResourcesSpec(v *ResourcesSpec) {
@@ -185,10 +131,6 @@ func (m *CreateDesktopGroupRequest) SetGroupConfig(v *DesktopGroupConfiguration)
 	m.GroupConfig = v
 }
 
-func (m *CreateDesktopGroupRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
 func (m *CreateDesktopGroupMetadata) SetDesktopGroupId(v string) {
 	m.DesktopGroupId = v
 }
@@ -203,4 +145,62 @@ func (m *DeleteDesktopGroupMetadata) SetDesktopGroupId(v string) {
 
 func (m *UpdateDesktopGroupMetadata) SetDesktopGroupId(v string) {
 	m.DesktopGroupId = v
+}
+
+type UpdateDesktopGroupRequest_UpdatePolicy = isUpdateDesktopGroupRequest_UpdatePolicy
+
+func (m *UpdateDesktopGroupRequest) SetUpdatePolicy(v UpdateDesktopGroupRequest_UpdatePolicy) {
+	m.UpdatePolicy = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetDesktopGroupId(v string) {
+	m.DesktopGroupId = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetDesktopImageId(v string) {
+	m.DesktopImageId = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetResourcesSpec(v *ResourcesSpec) {
+	m.ResourcesSpec = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetBootDiskSpec(v *DiskSpec) {
+	m.BootDiskSpec = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetDataDiskSpec(v *DiskSpec) {
+	m.DataDiskSpec = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetGroupConfig(v *DesktopGroupConfiguration) {
+	m.GroupConfig = v
+}
+
+func (m *UpdateDesktopGroupRequest) SetAutoUpdatePolicy(v *AutoUpdatePolicy) {
+	m.UpdatePolicy = &UpdateDesktopGroupRequest_AutoUpdatePolicy{
+		AutoUpdatePolicy: v,
+	}
+}
+
+func (m *UpdateDesktopGroupRequest) SetManualUpdatePolicy(v *ManualUpdatePolicy) {
+	m.UpdatePolicy = &UpdateDesktopGroupRequest_ManualUpdatePolicy{
+		ManualUpdatePolicy: v,
+	}
 }

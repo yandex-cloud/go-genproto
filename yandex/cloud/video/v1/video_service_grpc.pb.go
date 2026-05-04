@@ -33,6 +33,8 @@ const (
 	VideoService_BatchGetPlayerURLs_FullMethodName  = "/yandex.cloud.video.v1.VideoService/BatchGetPlayerURLs"
 	VideoService_GetManifests_FullMethodName        = "/yandex.cloud.video.v1.VideoService/GetManifests"
 	VideoService_GenerateDownloadURL_FullMethodName = "/yandex.cloud.video.v1.VideoService/GenerateDownloadURL"
+	VideoService_GetScreenshots_FullMethodName      = "/yandex.cloud.video.v1.VideoService/GetScreenshots"
+	VideoService_BatchGetScreenshots_FullMethodName = "/yandex.cloud.video.v1.VideoService/BatchGetScreenshots"
 )
 
 // VideoServiceClient is the client API for VideoService service.
@@ -62,7 +64,7 @@ type VideoServiceClient interface {
 	// Initiates or updates video transcoding with specified parameters.
 	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
 	// or to re-process a completed video with new transcoding settings.
-	// Supports additional features like subtitle processing, translation, and summarization.
+	// Supports additional features like subtitle processing, translation, summarization, and speech-to-text.
 	Transcode(ctx context.Context, in *TranscodeVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes a specific video by its ID.
 	Delete(ctx context.Context, in *DeleteVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -81,12 +83,17 @@ type VideoServiceClient interface {
 	// Retrieves the manifest URLs for a specific video.
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
-	// Manifests and its url MUST not be cached.
+	// Manifests and their urls MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(ctx context.Context, in *GetVideoManifestsRequest, opts ...grpc.CallOption) (*GetVideoManifestsResponse, error)
 	// Generates a URL for downloading the original video file.
 	// This URL is time-limited and provides direct access to the source video.
 	GenerateDownloadURL(ctx context.Context, in *GenerateVideoDownloadURLRequest, opts ...grpc.CallOption) (*GenerateVideoDownloadURLResponse, error)
+	// Retrieves screenshots taken during the video transcoding process.
+	GetScreenshots(ctx context.Context, in *GetVideoScreenshotsRequest, opts ...grpc.CallOption) (*GetVideoScreenshotsResponse, error)
+	// Retrieves screenshots taken during the video transcoding process for a list of videos.
+	// This is more efficient than making multiple GetScreenshots requests when retrieving screenshots for several videos.
+	BatchGetScreenshots(ctx context.Context, in *BatchGetVideoScreenshotsRequest, opts ...grpc.CallOption) (*BatchGetVideoScreenshotsResponse, error)
 }
 
 type videoServiceClient struct {
@@ -227,6 +234,26 @@ func (c *videoServiceClient) GenerateDownloadURL(ctx context.Context, in *Genera
 	return out, nil
 }
 
+func (c *videoServiceClient) GetScreenshots(ctx context.Context, in *GetVideoScreenshotsRequest, opts ...grpc.CallOption) (*GetVideoScreenshotsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVideoScreenshotsResponse)
+	err := c.cc.Invoke(ctx, VideoService_GetScreenshots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *videoServiceClient) BatchGetScreenshots(ctx context.Context, in *BatchGetVideoScreenshotsRequest, opts ...grpc.CallOption) (*BatchGetVideoScreenshotsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetVideoScreenshotsResponse)
+	err := c.cc.Invoke(ctx, VideoService_BatchGetScreenshots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VideoServiceServer is the server API for VideoService service.
 // All implementations should embed UnimplementedVideoServiceServer
 // for forward compatibility.
@@ -254,7 +281,7 @@ type VideoServiceServer interface {
 	// Initiates or updates video transcoding with specified parameters.
 	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
 	// or to re-process a completed video with new transcoding settings.
-	// Supports additional features like subtitle processing, translation, and summarization.
+	// Supports additional features like subtitle processing, translation, summarization, and speech-to-text.
 	Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error)
 	// Deletes a specific video by its ID.
 	Delete(context.Context, *DeleteVideoRequest) (*operation.Operation, error)
@@ -273,12 +300,17 @@ type VideoServiceServer interface {
 	// Retrieves the manifest URLs for a specific video.
 	// Manifests are used by video players to access the video content with adaptive bitrate streaming.
 	// Supports different manifest types (HLS, DASH) and configuration parameters.
-	// Manifests and its url MUST not be cached.
+	// Manifests and their urls MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(context.Context, *GetVideoManifestsRequest) (*GetVideoManifestsResponse, error)
 	// Generates a URL for downloading the original video file.
 	// This URL is time-limited and provides direct access to the source video.
 	GenerateDownloadURL(context.Context, *GenerateVideoDownloadURLRequest) (*GenerateVideoDownloadURLResponse, error)
+	// Retrieves screenshots taken during the video transcoding process.
+	GetScreenshots(context.Context, *GetVideoScreenshotsRequest) (*GetVideoScreenshotsResponse, error)
+	// Retrieves screenshots taken during the video transcoding process for a list of videos.
+	// This is more efficient than making multiple GetScreenshots requests when retrieving screenshots for several videos.
+	BatchGetScreenshots(context.Context, *BatchGetVideoScreenshotsRequest) (*BatchGetVideoScreenshotsResponse, error)
 }
 
 // UnimplementedVideoServiceServer should be embedded to have
@@ -326,6 +358,12 @@ func (UnimplementedVideoServiceServer) GetManifests(context.Context, *GetVideoMa
 }
 func (UnimplementedVideoServiceServer) GenerateDownloadURL(context.Context, *GenerateVideoDownloadURLRequest) (*GenerateVideoDownloadURLResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GenerateDownloadURL not implemented")
+}
+func (UnimplementedVideoServiceServer) GetScreenshots(context.Context, *GetVideoScreenshotsRequest) (*GetVideoScreenshotsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetScreenshots not implemented")
+}
+func (UnimplementedVideoServiceServer) BatchGetScreenshots(context.Context, *BatchGetVideoScreenshotsRequest) (*BatchGetVideoScreenshotsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGetScreenshots not implemented")
 }
 func (UnimplementedVideoServiceServer) testEmbeddedByValue() {}
 
@@ -581,6 +619,42 @@ func _VideoService_GenerateDownloadURL_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VideoService_GetScreenshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVideoScreenshotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).GetScreenshots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_GetScreenshots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).GetScreenshots(ctx, req.(*GetVideoScreenshotsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VideoService_BatchGetScreenshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetVideoScreenshotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).BatchGetScreenshots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_BatchGetScreenshots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).BatchGetScreenshots(ctx, req.(*BatchGetVideoScreenshotsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VideoService_ServiceDesc is the grpc.ServiceDesc for VideoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -639,6 +713,14 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateDownloadURL",
 			Handler:    _VideoService_GenerateDownloadURL_Handler,
+		},
+		{
+			MethodName: "GetScreenshots",
+			Handler:    _VideoService_GetScreenshots_Handler,
+		},
+		{
+			MethodName: "BatchGetScreenshots",
+			Handler:    _VideoService_BatchGetScreenshots_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

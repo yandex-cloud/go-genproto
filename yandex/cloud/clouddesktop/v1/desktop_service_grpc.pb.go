@@ -25,13 +25,13 @@ const (
 	DesktopService_List_FullMethodName             = "/yandex.cloud.clouddesktop.v1.api.DesktopService/List"
 	DesktopService_ListOperations_FullMethodName   = "/yandex.cloud.clouddesktop.v1.api.DesktopService/ListOperations"
 	DesktopService_Create_FullMethodName           = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Create"
-	DesktopService_UpdateProperties_FullMethodName = "/yandex.cloud.clouddesktop.v1.api.DesktopService/UpdateProperties"
-	DesktopService_Delete_FullMethodName           = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Delete"
 	DesktopService_ResetPassword_FullMethodName    = "/yandex.cloud.clouddesktop.v1.api.DesktopService/ResetPassword"
 	DesktopService_Restart_FullMethodName          = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Restart"
-	DesktopService_Update_FullMethodName           = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Update"
 	DesktopService_Start_FullMethodName            = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Start"
 	DesktopService_Stop_FullMethodName             = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Stop"
+	DesktopService_Update_FullMethodName           = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Update"
+	DesktopService_UpdateProperties_FullMethodName = "/yandex.cloud.clouddesktop.v1.api.DesktopService/UpdateProperties"
+	DesktopService_Delete_FullMethodName           = "/yandex.cloud.clouddesktop.v1.api.DesktopService/Delete"
 )
 
 // DesktopServiceClient is the client API for DesktopService service.
@@ -41,7 +41,6 @@ const (
 // A set of methods for managing desktop resources.
 type DesktopServiceClient interface {
 	// Returns the specified desktop resource.
-	//
 	// To get the list of available desktops, make a [List] request.
 	Get(ctx context.Context, in *GetDesktopRequest, opts ...grpc.CallOption) (*Desktop, error)
 	// Returns a RDP file for the specified desktop.
@@ -52,20 +51,20 @@ type DesktopServiceClient interface {
 	ListOperations(ctx context.Context, in *ListDesktopOperationsRequest, opts ...grpc.CallOption) (*ListDesktopOperationsResponse, error)
 	// Creates desktop in the specified folder.
 	Create(ctx context.Context, in *CreateDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates desktop properties.
-	UpdateProperties(ctx context.Context, in *UpdatePropertiesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified desktop.
-	Delete(ctx context.Context, in *DeleteDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reset password
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	// Restart the specified desktop.
 	Restart(ctx context.Context, in *RestartRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Sync desktop with group configuration
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Start the specified desktop.
 	Start(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stop the specified desktop.
 	Stop(ctx context.Context, in *StopRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Sync desktop with group configuration
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates desktop properties.
+	UpdateProperties(ctx context.Context, in *UpdatePropertiesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified desktop.
+	Delete(ctx context.Context, in *DeleteDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type desktopServiceClient struct {
@@ -126,26 +125,6 @@ func (c *desktopServiceClient) Create(ctx context.Context, in *CreateDesktopRequ
 	return out, nil
 }
 
-func (c *desktopServiceClient) UpdateProperties(ctx context.Context, in *UpdatePropertiesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopService_UpdateProperties_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *desktopServiceClient) Delete(ctx context.Context, in *DeleteDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopService_Delete_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *desktopServiceClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetPasswordResponse)
@@ -160,16 +139,6 @@ func (c *desktopServiceClient) Restart(ctx context.Context, in *RestartRequest, 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, DesktopService_Restart_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *desktopServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -196,6 +165,36 @@ func (c *desktopServiceClient) Stop(ctx context.Context, in *StopRequest, opts .
 	return out, nil
 }
 
+func (c *desktopServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DesktopService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *desktopServiceClient) UpdateProperties(ctx context.Context, in *UpdatePropertiesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DesktopService_UpdateProperties_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *desktopServiceClient) Delete(ctx context.Context, in *DeleteDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, DesktopService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DesktopServiceServer is the server API for DesktopService service.
 // All implementations should embed UnimplementedDesktopServiceServer
 // for forward compatibility.
@@ -203,7 +202,6 @@ func (c *desktopServiceClient) Stop(ctx context.Context, in *StopRequest, opts .
 // A set of methods for managing desktop resources.
 type DesktopServiceServer interface {
 	// Returns the specified desktop resource.
-	//
 	// To get the list of available desktops, make a [List] request.
 	Get(context.Context, *GetDesktopRequest) (*Desktop, error)
 	// Returns a RDP file for the specified desktop.
@@ -214,20 +212,20 @@ type DesktopServiceServer interface {
 	ListOperations(context.Context, *ListDesktopOperationsRequest) (*ListDesktopOperationsResponse, error)
 	// Creates desktop in the specified folder.
 	Create(context.Context, *CreateDesktopRequest) (*operation.Operation, error)
-	// Updates desktop properties.
-	UpdateProperties(context.Context, *UpdatePropertiesRequest) (*operation.Operation, error)
-	// Deletes the specified desktop.
-	Delete(context.Context, *DeleteDesktopRequest) (*operation.Operation, error)
 	// Reset password
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	// Restart the specified desktop.
 	Restart(context.Context, *RestartRequest) (*operation.Operation, error)
-	// Sync desktop with group configuration
-	Update(context.Context, *UpdateRequest) (*operation.Operation, error)
 	// Start the specified desktop.
 	Start(context.Context, *StartRequest) (*operation.Operation, error)
 	// Stop the specified desktop.
 	Stop(context.Context, *StopRequest) (*operation.Operation, error)
+	// Sync desktop with group configuration
+	Update(context.Context, *UpdateRequest) (*operation.Operation, error)
+	// Updates desktop properties.
+	UpdateProperties(context.Context, *UpdatePropertiesRequest) (*operation.Operation, error)
+	// Deletes the specified desktop.
+	Delete(context.Context, *DeleteDesktopRequest) (*operation.Operation, error)
 }
 
 // UnimplementedDesktopServiceServer should be embedded to have
@@ -252,26 +250,26 @@ func (UnimplementedDesktopServiceServer) ListOperations(context.Context, *ListDe
 func (UnimplementedDesktopServiceServer) Create(context.Context, *CreateDesktopRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedDesktopServiceServer) UpdateProperties(context.Context, *UpdatePropertiesRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method UpdateProperties not implemented")
-}
-func (UnimplementedDesktopServiceServer) Delete(context.Context, *DeleteDesktopRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
-}
 func (UnimplementedDesktopServiceServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResetPassword not implemented")
 }
 func (UnimplementedDesktopServiceServer) Restart(context.Context, *RestartRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Restart not implemented")
 }
-func (UnimplementedDesktopServiceServer) Update(context.Context, *UpdateRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
-}
 func (UnimplementedDesktopServiceServer) Start(context.Context, *StartRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
 }
 func (UnimplementedDesktopServiceServer) Stop(context.Context, *StopRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
+}
+func (UnimplementedDesktopServiceServer) Update(context.Context, *UpdateRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedDesktopServiceServer) UpdateProperties(context.Context, *UpdatePropertiesRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateProperties not implemented")
+}
+func (UnimplementedDesktopServiceServer) Delete(context.Context, *DeleteDesktopRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedDesktopServiceServer) testEmbeddedByValue() {}
 
@@ -383,42 +381,6 @@ func _DesktopService_Create_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DesktopService_UpdateProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePropertiesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DesktopServiceServer).UpdateProperties(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DesktopService_UpdateProperties_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DesktopServiceServer).UpdateProperties(ctx, req.(*UpdatePropertiesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DesktopService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteDesktopRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DesktopServiceServer).Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DesktopService_Delete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DesktopServiceServer).Delete(ctx, req.(*DeleteDesktopRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _DesktopService_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPasswordRequest)
 	if err := dec(in); err != nil {
@@ -451,24 +413,6 @@ func _DesktopService_Restart_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DesktopServiceServer).Restart(ctx, req.(*RestartRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DesktopService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DesktopServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DesktopService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DesktopServiceServer).Update(ctx, req.(*UpdateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -509,6 +453,60 @@ func _DesktopService_Stop_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DesktopService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DesktopServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DesktopService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DesktopServiceServer).Update(ctx, req.(*UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DesktopService_UpdateProperties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePropertiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DesktopServiceServer).UpdateProperties(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DesktopService_UpdateProperties_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DesktopServiceServer).UpdateProperties(ctx, req.(*UpdatePropertiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DesktopService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDesktopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DesktopServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DesktopService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DesktopServiceServer).Delete(ctx, req.(*DeleteDesktopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DesktopService_ServiceDesc is the grpc.ServiceDesc for DesktopService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -537,14 +535,6 @@ var DesktopService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DesktopService_Create_Handler,
 		},
 		{
-			MethodName: "UpdateProperties",
-			Handler:    _DesktopService_UpdateProperties_Handler,
-		},
-		{
-			MethodName: "Delete",
-			Handler:    _DesktopService_Delete_Handler,
-		},
-		{
 			MethodName: "ResetPassword",
 			Handler:    _DesktopService_ResetPassword_Handler,
 		},
@@ -553,16 +543,24 @@ var DesktopService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DesktopService_Restart_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _DesktopService_Update_Handler,
-		},
-		{
 			MethodName: "Start",
 			Handler:    _DesktopService_Start_Handler,
 		},
 		{
 			MethodName: "Stop",
 			Handler:    _DesktopService_Stop_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DesktopService_Update_Handler,
+		},
+		{
+			MethodName: "UpdateProperties",
+			Handler:    _DesktopService_UpdateProperties_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _DesktopService_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

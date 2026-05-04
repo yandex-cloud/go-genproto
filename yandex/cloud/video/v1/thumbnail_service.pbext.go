@@ -12,6 +12,10 @@ func (m *ListThumbnailRequest) SetParentId(v ListThumbnailRequest_ParentId) {
 	m.ParentId = v
 }
 
+func (m *ListThumbnailRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
 func (m *ListThumbnailRequest) SetEpisodeId(v string) {
 	m.ParentId = &ListThumbnailRequest_EpisodeId{
 		EpisodeId: v,
@@ -22,10 +26,6 @@ func (m *ListThumbnailRequest) SetVideoId(v string) {
 	m.ParentId = &ListThumbnailRequest_VideoId{
 		VideoId: v,
 	}
-}
-
-func (m *ListThumbnailRequest) SetChannelId(v string) {
-	m.ChannelId = v
 }
 
 func (m *ListThumbnailRequest) SetPageSize(v int64) {

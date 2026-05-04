@@ -8,6 +8,7 @@ package postgresql
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -475,7 +476,11 @@ type User struct {
 	// The default is “ password_encryption “ setting for cluster.
 	UserPasswordEncryption UserPasswordEncryption `protobuf:"varint,9,opt,name=user_password_encryption,json=userPasswordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.UserPasswordEncryption" json:"user_password_encryption,omitempty"`
 	// Connection Manager Connection and settings associated with user. Read only field.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/user.proto.
 	ConnectionManager *ConnectionManager `protobuf:"bytes,10,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
+	// Connection Manager Connection and settings associated with user
+	UserConnectionManager *v1.UserConnectionManager `protobuf:"bytes,12,opt,name=user_connection_manager,json=userConnectionManager,proto3" json:"user_connection_manager,omitempty"`
 	// Auth method for user
 	AuthMethod    AuthMethod `protobuf:"varint,11,opt,name=auth_method,json=authMethod,proto3,enum=yandex.cloud.mdb.postgresql.v1.AuthMethod" json:"auth_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -575,9 +580,17 @@ func (x *User) GetUserPasswordEncryption() UserPasswordEncryption {
 	return UserPasswordEncryption_USER_PASSWORD_ENCRYPTION_UNSPECIFIED
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/user.proto.
 func (x *User) GetConnectionManager() *ConnectionManager {
 	if x != nil {
 		return x.ConnectionManager
+	}
+	return nil
+}
+
+func (x *User) GetUserConnectionManager() *v1.UserConnectionManager {
+	if x != nil {
+		return x.UserConnectionManager
 	}
 	return nil
 }
@@ -634,6 +647,7 @@ func (x *Permission) GetDatabaseName() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/user.proto.
 type ConnectionManager struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of Connection Manager Connection
@@ -716,9 +730,11 @@ type UserSpec struct {
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
 	// Auth method for user
-	AuthMethod    AuthMethod `protobuf:"varint,11,opt,name=auth_method,json=authMethod,proto3,enum=yandex.cloud.mdb.postgresql.v1.AuthMethod" json:"auth_method,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AuthMethod AuthMethod `protobuf:"varint,11,opt,name=auth_method,json=authMethod,proto3,enum=yandex.cloud.mdb.postgresql.v1.AuthMethod" json:"auth_method,omitempty"`
+	// Connection Manager Connection and settings associated with user
+	UserConnectionManager *v1.UserConnectionManager `protobuf:"bytes,12,opt,name=user_connection_manager,json=userConnectionManager,proto3" json:"user_connection_manager,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UserSpec) Reset() {
@@ -826,6 +842,13 @@ func (x *UserSpec) GetAuthMethod() AuthMethod {
 		return x.AuthMethod
 	}
 	return AuthMethod_AUTH_METHOD_UNSPECIFIED
+}
+
+func (x *UserSpec) GetUserConnectionManager() *v1.UserConnectionManager {
+	if x != nil {
+		return x.UserConnectionManager
+	}
+	return nil
 }
 
 type PGAuditSettings struct {
@@ -1106,7 +1129,7 @@ var File_yandex_cloud_mdb_postgresql_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/mdb/postgresql/v1/user.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\x05\n" +
+	")yandex/cloud/mdb/postgresql/v1/user.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a+yandex/cloud/mdb/v1/connectionmanager.proto\x1a\x1dyandex/cloud/validation.proto\"\xab\x06\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -1118,16 +1141,17 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\x05login\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x121\n" +
 	"\x06grants\x18\a \x03(\tB\x19\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
 	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\x12p\n" +
-	"\x18user_password_encryption\x18\t \x01(\x0e26.yandex.cloud.mdb.postgresql.v1.UserPasswordEncryptionR\x16userPasswordEncryption\x12`\n" +
+	"\x18user_password_encryption\x18\t \x01(\x0e26.yandex.cloud.mdb.postgresql.v1.UserPasswordEncryptionR\x16userPasswordEncryption\x12d\n" +
 	"\x12connection_manager\x18\n" +
-	" \x01(\v21.yandex.cloud.mdb.postgresql.v1.ConnectionManagerR\x11connectionManager\x12K\n" +
+	" \x01(\v21.yandex.cloud.mdb.postgresql.v1.ConnectionManagerB\x02\x18\x01R\x11connectionManager\x12b\n" +
+	"\x17user_connection_manager\x18\f \x01(\v2*.yandex.cloud.mdb.v1.UserConnectionManagerR\x15userConnectionManager\x12K\n" +
 	"\vauth_method\x18\v \x01(\x0e2*.yandex.cloud.mdb.postgresql.v1.AuthMethodR\n" +
 	"authMethod\"1\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"8\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"<\n" +
 	"\x11ConnectionManager\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x83\x06\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId:\x02\x18\x01\"\xe7\x06\n" +
 	"\bUserSpec\x124\n" +
 	"\x04name\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\x04name\x12)\n" +
 	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12L\n" +
@@ -1142,7 +1166,8 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\x11generate_password\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\x12K\n" +
 	"\vauth_method\x18\v \x01(\x0e2*.yandex.cloud.mdb.postgresql.v1.AuthMethodR\n" +
-	"authMethod\"\x8d\x03\n" +
+	"authMethod\x12b\n" +
+	"\x17user_connection_manager\x18\f \x01(\v2*.yandex.cloud.mdb.v1.UserConnectionManagerR\x15userConnectionManager\"\x8d\x03\n" +
 	"\x0fPGAuditSettings\x12T\n" +
 	"\x03log\x18\x01 \x03(\x0e2B.yandex.cloud.mdb.postgresql.v1.PGAuditSettings.PGAuditSettingsLogR\x03log\"\xa3\x02\n" +
 	"\x12PGAuditSettingsLog\x12%\n" +
@@ -1234,7 +1259,8 @@ var file_yandex_cloud_mdb_postgresql_v1_user_proto_goTypes = []any{
 	(*PGAuditSettings)(nil),                 // 11: yandex.cloud.mdb.postgresql.v1.PGAuditSettings
 	(*UserSettings)(nil),                    // 12: yandex.cloud.mdb.postgresql.v1.UserSettings
 	(*wrapperspb.BoolValue)(nil),            // 13: google.protobuf.BoolValue
-	(*wrapperspb.Int64Value)(nil),           // 14: google.protobuf.Int64Value
+	(*v1.UserConnectionManager)(nil),        // 14: yandex.cloud.mdb.v1.UserConnectionManager
+	(*wrapperspb.Int64Value)(nil),           // 15: google.protobuf.Int64Value
 }
 var file_yandex_cloud_mdb_postgresql_v1_user_proto_depIdxs = []int32{
 	8,  // 0: yandex.cloud.mdb.postgresql.v1.User.permissions:type_name -> yandex.cloud.mdb.postgresql.v1.Permission
@@ -1243,35 +1269,37 @@ var file_yandex_cloud_mdb_postgresql_v1_user_proto_depIdxs = []int32{
 	13, // 3: yandex.cloud.mdb.postgresql.v1.User.deletion_protection:type_name -> google.protobuf.BoolValue
 	1,  // 4: yandex.cloud.mdb.postgresql.v1.User.user_password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.UserPasswordEncryption
 	9,  // 5: yandex.cloud.mdb.postgresql.v1.User.connection_manager:type_name -> yandex.cloud.mdb.postgresql.v1.ConnectionManager
-	0,  // 6: yandex.cloud.mdb.postgresql.v1.User.auth_method:type_name -> yandex.cloud.mdb.postgresql.v1.AuthMethod
-	8,  // 7: yandex.cloud.mdb.postgresql.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.postgresql.v1.Permission
-	14, // 8: yandex.cloud.mdb.postgresql.v1.UserSpec.conn_limit:type_name -> google.protobuf.Int64Value
-	12, // 9: yandex.cloud.mdb.postgresql.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings
-	13, // 10: yandex.cloud.mdb.postgresql.v1.UserSpec.login:type_name -> google.protobuf.BoolValue
-	13, // 11: yandex.cloud.mdb.postgresql.v1.UserSpec.deletion_protection:type_name -> google.protobuf.BoolValue
-	1,  // 12: yandex.cloud.mdb.postgresql.v1.UserSpec.user_password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.UserPasswordEncryption
-	13, // 13: yandex.cloud.mdb.postgresql.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
-	0,  // 14: yandex.cloud.mdb.postgresql.v1.UserSpec.auth_method:type_name -> yandex.cloud.mdb.postgresql.v1.AuthMethod
-	2,  // 15: yandex.cloud.mdb.postgresql.v1.PGAuditSettings.log:type_name -> yandex.cloud.mdb.postgresql.v1.PGAuditSettings.PGAuditSettingsLog
-	5,  // 16: yandex.cloud.mdb.postgresql.v1.UserSettings.default_transaction_isolation:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.TransactionIsolation
-	14, // 17: yandex.cloud.mdb.postgresql.v1.UserSettings.lock_timeout:type_name -> google.protobuf.Int64Value
-	14, // 18: yandex.cloud.mdb.postgresql.v1.UserSettings.log_min_duration_statement:type_name -> google.protobuf.Int64Value
-	3,  // 19: yandex.cloud.mdb.postgresql.v1.UserSettings.synchronous_commit:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.SynchronousCommit
-	14, // 20: yandex.cloud.mdb.postgresql.v1.UserSettings.temp_file_limit:type_name -> google.protobuf.Int64Value
-	4,  // 21: yandex.cloud.mdb.postgresql.v1.UserSettings.log_statement:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.LogStatement
-	6,  // 22: yandex.cloud.mdb.postgresql.v1.UserSettings.pool_mode:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.PoolingMode
-	13, // 23: yandex.cloud.mdb.postgresql.v1.UserSettings.prepared_statements_pooling:type_name -> google.protobuf.BoolValue
-	14, // 24: yandex.cloud.mdb.postgresql.v1.UserSettings.catchup_timeout:type_name -> google.protobuf.Int64Value
-	14, // 25: yandex.cloud.mdb.postgresql.v1.UserSettings.wal_sender_timeout:type_name -> google.protobuf.Int64Value
-	14, // 26: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
-	14, // 27: yandex.cloud.mdb.postgresql.v1.UserSettings.statement_timeout:type_name -> google.protobuf.Int64Value
-	11, // 28: yandex.cloud.mdb.postgresql.v1.UserSettings.pgaudit:type_name -> yandex.cloud.mdb.postgresql.v1.PGAuditSettings
-	14, // 29: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_session_timeout:type_name -> google.protobuf.Int64Value
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	14, // 6: yandex.cloud.mdb.postgresql.v1.User.user_connection_manager:type_name -> yandex.cloud.mdb.v1.UserConnectionManager
+	0,  // 7: yandex.cloud.mdb.postgresql.v1.User.auth_method:type_name -> yandex.cloud.mdb.postgresql.v1.AuthMethod
+	8,  // 8: yandex.cloud.mdb.postgresql.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.postgresql.v1.Permission
+	15, // 9: yandex.cloud.mdb.postgresql.v1.UserSpec.conn_limit:type_name -> google.protobuf.Int64Value
+	12, // 10: yandex.cloud.mdb.postgresql.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings
+	13, // 11: yandex.cloud.mdb.postgresql.v1.UserSpec.login:type_name -> google.protobuf.BoolValue
+	13, // 12: yandex.cloud.mdb.postgresql.v1.UserSpec.deletion_protection:type_name -> google.protobuf.BoolValue
+	1,  // 13: yandex.cloud.mdb.postgresql.v1.UserSpec.user_password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.UserPasswordEncryption
+	13, // 14: yandex.cloud.mdb.postgresql.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	0,  // 15: yandex.cloud.mdb.postgresql.v1.UserSpec.auth_method:type_name -> yandex.cloud.mdb.postgresql.v1.AuthMethod
+	14, // 16: yandex.cloud.mdb.postgresql.v1.UserSpec.user_connection_manager:type_name -> yandex.cloud.mdb.v1.UserConnectionManager
+	2,  // 17: yandex.cloud.mdb.postgresql.v1.PGAuditSettings.log:type_name -> yandex.cloud.mdb.postgresql.v1.PGAuditSettings.PGAuditSettingsLog
+	5,  // 18: yandex.cloud.mdb.postgresql.v1.UserSettings.default_transaction_isolation:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.TransactionIsolation
+	15, // 19: yandex.cloud.mdb.postgresql.v1.UserSettings.lock_timeout:type_name -> google.protobuf.Int64Value
+	15, // 20: yandex.cloud.mdb.postgresql.v1.UserSettings.log_min_duration_statement:type_name -> google.protobuf.Int64Value
+	3,  // 21: yandex.cloud.mdb.postgresql.v1.UserSettings.synchronous_commit:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.SynchronousCommit
+	15, // 22: yandex.cloud.mdb.postgresql.v1.UserSettings.temp_file_limit:type_name -> google.protobuf.Int64Value
+	4,  // 23: yandex.cloud.mdb.postgresql.v1.UserSettings.log_statement:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.LogStatement
+	6,  // 24: yandex.cloud.mdb.postgresql.v1.UserSettings.pool_mode:type_name -> yandex.cloud.mdb.postgresql.v1.UserSettings.PoolingMode
+	13, // 25: yandex.cloud.mdb.postgresql.v1.UserSettings.prepared_statements_pooling:type_name -> google.protobuf.BoolValue
+	15, // 26: yandex.cloud.mdb.postgresql.v1.UserSettings.catchup_timeout:type_name -> google.protobuf.Int64Value
+	15, // 27: yandex.cloud.mdb.postgresql.v1.UserSettings.wal_sender_timeout:type_name -> google.protobuf.Int64Value
+	15, // 28: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_in_transaction_session_timeout:type_name -> google.protobuf.Int64Value
+	15, // 29: yandex.cloud.mdb.postgresql.v1.UserSettings.statement_timeout:type_name -> google.protobuf.Int64Value
+	11, // 30: yandex.cloud.mdb.postgresql.v1.UserSettings.pgaudit:type_name -> yandex.cloud.mdb.postgresql.v1.PGAuditSettings
+	15, // 31: yandex.cloud.mdb.postgresql.v1.UserSettings.idle_session_timeout:type_name -> google.protobuf.Int64Value
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_user_proto_init() }

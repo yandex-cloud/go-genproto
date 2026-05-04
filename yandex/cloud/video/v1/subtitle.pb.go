@@ -133,12 +133,6 @@ func (Subtitle_SubtitleSourceType) EnumDescriptor() ([]byte, []int) {
 // and multilingual support for video content.
 type Subtitle struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the parent content this subtitle is associated with.
-	//
-	// Types that are valid to be assigned to ParentId:
-	//
-	//	*Subtitle_VideoId
-	ParentId isSubtitle_ParentId `protobuf_oneof:"parent_id"`
 	// Unique identifier of the subtitle track.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Language of the subtitle content according to ISO 639-2/T.
@@ -154,7 +148,13 @@ type Subtitle struct {
 	// Timestamp when the subtitle was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the subtitle or its metadata.
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	// Specifies the parent content this subtitle is associated with.
+	//
+	// Types that are valid to be assigned to ParentId:
+	//
+	//	*Subtitle_VideoId
+	ParentId      isSubtitle_ParentId `protobuf_oneof:"parent_id"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -187,22 +187,6 @@ func (x *Subtitle) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Subtitle.ProtoReflect.Descriptor instead.
 func (*Subtitle) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_subtitle_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Subtitle) GetParentId() isSubtitle_ParentId {
-	if x != nil {
-		return x.ParentId
-	}
-	return nil
-}
-
-func (x *Subtitle) GetVideoId() string {
-	if x != nil {
-		if x, ok := x.ParentId.(*Subtitle_VideoId); ok {
-			return x.VideoId
-		}
-	}
-	return ""
 }
 
 func (x *Subtitle) GetId() string {
@@ -261,6 +245,22 @@ func (x *Subtitle) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Subtitle) GetParentId() isSubtitle_ParentId {
+	if x != nil {
+		return x.ParentId
+	}
+	return nil
+}
+
+func (x *Subtitle) GetVideoId() string {
+	if x != nil {
+		if x, ok := x.ParentId.(*Subtitle_VideoId); ok {
+			return x.VideoId
+		}
+	}
+	return ""
+}
+
 type isSubtitle_ParentId interface {
 	isSubtitle_ParentId()
 }
@@ -277,8 +277,7 @@ var File_yandex_cloud_video_v1_subtitle_proto protoreflect.FileDescriptor
 const file_yandex_cloud_video_v1_subtitle_proto_rawDesc = "" +
 	"\n" +
 	"$yandex/cloud/video/v1/subtitle.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdf\x04\n" +
-	"\bSubtitle\x12\x1c\n" +
-	"\bvideo_id\x18\xe8\a \x01(\tH\x00R\avideoId\x12\x0e\n" +
+	"\bSubtitle\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\blanguage\x18\x02 \x01(\tR\blanguage\x12\x14\n" +
 	"\x05label\x18\x03 \x01(\tR\x05label\x12F\n" +
@@ -289,7 +288,8 @@ const file_yandex_cloud_video_v1_subtitle_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"S\n" +
+	"updated_at\x18e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1c\n" +
+	"\bvideo_id\x18\xe8\a \x01(\tH\x00R\avideoId\"S\n" +
 	"\x0eSubtitleStatus\x12\x1f\n" +
 	"\x1bSUBTITLE_STATUS_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eWAIT_UPLOADING\x10\x01\x12\f\n" +

@@ -23,8 +23,8 @@ const (
 	DesktopImageService_List_FullMethodName            = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/List"
 	DesktopImageService_Get_FullMethodName             = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/Get"
 	DesktopImageService_Copy_FullMethodName            = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/Copy"
-	DesktopImageService_Update_FullMethodName          = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/Update"
 	DesktopImageService_CopyFromDesktop_FullMethodName = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/CopyFromDesktop"
+	DesktopImageService_Update_FullMethodName          = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/Update"
 	DesktopImageService_Delete_FullMethodName          = "/yandex.cloud.clouddesktop.v1.api.DesktopImageService/Delete"
 )
 
@@ -40,10 +40,10 @@ type DesktopImageServiceClient interface {
 	Get(ctx context.Context, in *GetDesktopImageRequest, opts ...grpc.CallOption) (*DesktopImage, error)
 	// Copies the specified image to desktop image.
 	Copy(ctx context.Context, in *CopyDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates desktop image properties.
-	Update(ctx context.Context, in *UpdateDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Copies the specified desktop image from the specified desktop.
 	CopyFromDesktop(ctx context.Context, in *CopyFromDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates desktop image properties.
+	Update(ctx context.Context, in *UpdateDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified desktop image.
 	Delete(ctx context.Context, in *DeleteDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -86,20 +86,20 @@ func (c *desktopImageServiceClient) Copy(ctx context.Context, in *CopyDesktopIma
 	return out, nil
 }
 
-func (c *desktopImageServiceClient) Update(ctx context.Context, in *UpdateDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *desktopImageServiceClient) CopyFromDesktop(ctx context.Context, in *CopyFromDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopImageService_Update_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DesktopImageService_CopyFromDesktop_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *desktopImageServiceClient) CopyFromDesktop(ctx context.Context, in *CopyFromDesktopRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *desktopImageServiceClient) Update(ctx context.Context, in *UpdateDesktopImageRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopImageService_CopyFromDesktop_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DesktopImageService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,10 +128,10 @@ type DesktopImageServiceServer interface {
 	Get(context.Context, *GetDesktopImageRequest) (*DesktopImage, error)
 	// Copies the specified image to desktop image.
 	Copy(context.Context, *CopyDesktopImageRequest) (*operation.Operation, error)
-	// Updates desktop image properties.
-	Update(context.Context, *UpdateDesktopImageRequest) (*operation.Operation, error)
 	// Copies the specified desktop image from the specified desktop.
 	CopyFromDesktop(context.Context, *CopyFromDesktopRequest) (*operation.Operation, error)
+	// Updates desktop image properties.
+	Update(context.Context, *UpdateDesktopImageRequest) (*operation.Operation, error)
 	// Deletes the specified desktop image.
 	Delete(context.Context, *DeleteDesktopImageRequest) (*operation.Operation, error)
 }
@@ -152,11 +152,11 @@ func (UnimplementedDesktopImageServiceServer) Get(context.Context, *GetDesktopIm
 func (UnimplementedDesktopImageServiceServer) Copy(context.Context, *CopyDesktopImageRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Copy not implemented")
 }
-func (UnimplementedDesktopImageServiceServer) Update(context.Context, *UpdateDesktopImageRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
-}
 func (UnimplementedDesktopImageServiceServer) CopyFromDesktop(context.Context, *CopyFromDesktopRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method CopyFromDesktop not implemented")
+}
+func (UnimplementedDesktopImageServiceServer) Update(context.Context, *UpdateDesktopImageRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedDesktopImageServiceServer) Delete(context.Context, *DeleteDesktopImageRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
@@ -235,24 +235,6 @@ func _DesktopImageService_Copy_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DesktopImageService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDesktopImageRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DesktopImageServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DesktopImageService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DesktopImageServiceServer).Update(ctx, req.(*UpdateDesktopImageRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _DesktopImageService_CopyFromDesktop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CopyFromDesktopRequest)
 	if err := dec(in); err != nil {
@@ -267,6 +249,24 @@ func _DesktopImageService_CopyFromDesktop_Handler(srv interface{}, ctx context.C
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DesktopImageServiceServer).CopyFromDesktop(ctx, req.(*CopyFromDesktopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DesktopImageService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDesktopImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DesktopImageServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DesktopImageService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DesktopImageServiceServer).Update(ctx, req.(*UpdateDesktopImageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -309,12 +309,12 @@ var DesktopImageService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DesktopImageService_Copy_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _DesktopImageService_Update_Handler,
-		},
-		{
 			MethodName: "CopyFromDesktop",
 			Handler:    _DesktopImageService_CopyFromDesktop_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DesktopImageService_Update_Handler,
 		},
 		{
 			MethodName: "Delete",

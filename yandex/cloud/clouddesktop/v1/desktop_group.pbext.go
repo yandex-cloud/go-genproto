@@ -37,16 +37,16 @@ func (m *DesktopGroup) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *DesktopGroup) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
 func (m *DesktopGroup) SetResourcesSpec(v *ResourcesSpec) {
 	m.ResourcesSpec = v
 }
 
 func (m *DesktopGroup) SetNetworkInterfaceSpec(v *NetworkInterfaceSpec) {
 	m.NetworkInterfaceSpec = v
-}
-
-func (m *DesktopGroup) SetLabels(v map[string]string) {
-	m.Labels = v
 }
 
 func (m *DesktopGroup) SetBootDiskSpec(v *DiskSpec) {
@@ -89,6 +89,14 @@ func (m *DesktopGroupConfiguration) SetMembers(v []*access.Subject) {
 	m.Members = v
 }
 
+func (m *NetworkInterfaceSpec) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {
+	m.SubnetIds = v
+}
+
 func (m *ResourcesSpec) SetMemory(v int64) {
 	m.Memory = v
 }
@@ -99,12 +107,4 @@ func (m *ResourcesSpec) SetCores(v int64) {
 
 func (m *ResourcesSpec) SetCoreFraction(v int64) {
 	m.CoreFraction = v
-}
-
-func (m *NetworkInterfaceSpec) SetNetworkId(v string) {
-	m.NetworkId = v
-}
-
-func (m *NetworkInterfaceSpec) SetSubnetIds(v []string) {
-	m.SubnetIds = v
 }

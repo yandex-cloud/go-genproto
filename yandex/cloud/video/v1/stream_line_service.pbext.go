@@ -62,6 +62,14 @@ func (m *CreateStreamLineRequest) SetLineTypeParams(v CreateStreamLineRequest_Li
 	m.LineTypeParams = v
 }
 
+func (m *CreateStreamLineRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *CreateStreamLineRequest) SetTitle(v string) {
+	m.Title = v
+}
+
 func (m *CreateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	m.InputParams = &CreateStreamLineRequest_RtmpPush{
 		RtmpPush: v,
@@ -92,14 +100,6 @@ func (m *CreateStreamLineRequest) SetAutoLine(v *AutoLineParams) {
 	}
 }
 
-func (m *CreateStreamLineRequest) SetChannelId(v string) {
-	m.ChannelId = v
-}
-
-func (m *CreateStreamLineRequest) SetTitle(v string) {
-	m.Title = v
-}
-
 func (m *CreateStreamLineRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -112,6 +112,18 @@ type UpdateStreamLineRequest_InputParams = isUpdateStreamLineRequest_InputParams
 
 func (m *UpdateStreamLineRequest) SetInputParams(v UpdateStreamLineRequest_InputParams) {
 	m.InputParams = v
+}
+
+func (m *UpdateStreamLineRequest) SetStreamLineId(v string) {
+	m.StreamLineId = v
+}
+
+func (m *UpdateStreamLineRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
+	m.FieldMask = v
+}
+
+func (m *UpdateStreamLineRequest) SetTitle(v string) {
+	m.Title = v
 }
 
 func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
@@ -130,18 +142,6 @@ func (m *UpdateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_SrtPull{
 		SrtPull: v,
 	}
-}
-
-func (m *UpdateStreamLineRequest) SetStreamLineId(v string) {
-	m.StreamLineId = v
-}
-
-func (m *UpdateStreamLineRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
-	m.FieldMask = v
-}
-
-func (m *UpdateStreamLineRequest) SetTitle(v string) {
-	m.Title = v
 }
 
 func (m *UpdateStreamLineRequest) SetLabels(v map[string]string) {
@@ -178,6 +178,10 @@ func (m *PerformLineActionRequest) SetAction(v PerformLineActionRequest_Action) 
 	m.Action = v
 }
 
+func (m *PerformLineActionRequest) SetStreamLineId(v string) {
+	m.StreamLineId = v
+}
+
 func (m *PerformLineActionRequest) SetActivate(v *ActivateAction) {
 	m.Action = &PerformLineActionRequest_Activate{
 		Activate: v,
@@ -188,10 +192,6 @@ func (m *PerformLineActionRequest) SetDeactivate(v *DeactivateAction) {
 	m.Action = &PerformLineActionRequest_Deactivate{
 		Deactivate: v,
 	}
-}
-
-func (m *PerformLineActionRequest) SetStreamLineId(v string) {
-	m.StreamLineId = v
 }
 
 func (m *PerformLineActionMetadata) SetStreamLineId(v string) {

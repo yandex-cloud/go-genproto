@@ -26,8 +26,8 @@ const (
 	DesktopGroupService_ListDesktops_FullMethodName         = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/ListDesktops"
 	DesktopGroupService_ListOperations_FullMethodName       = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/ListOperations"
 	DesktopGroupService_Create_FullMethodName               = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/Create"
-	DesktopGroupService_Update_FullMethodName               = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/Update"
 	DesktopGroupService_Delete_FullMethodName               = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/Delete"
+	DesktopGroupService_Update_FullMethodName               = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/Update"
 	DesktopGroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/ListAccessBindings"
 	DesktopGroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/SetAccessBindings"
 	DesktopGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.clouddesktop.v1.api.DesktopGroupService/UpdateAccessBindings"
@@ -40,7 +40,6 @@ const (
 // A set of methods for managing desktop group resources.
 type DesktopGroupServiceClient interface {
 	// Returns the specified desktop group resource.
-	//
 	// To get the list of available desktop groups, make a [List] request.
 	Get(ctx context.Context, in *GetDesktopGroupRequest, opts ...grpc.CallOption) (*DesktopGroup, error)
 	// Retrieves the list of desktop group resources.
@@ -51,10 +50,10 @@ type DesktopGroupServiceClient interface {
 	ListOperations(ctx context.Context, in *ListDesktopGroupOperationsRequest, opts ...grpc.CallOption) (*ListDesktopGroupOperationsResponse, error)
 	// Creates desktop group in the specified folder.
 	Create(ctx context.Context, in *CreateDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates desktop group properties
-	Update(ctx context.Context, in *UpdateDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified desktop group.
 	Delete(ctx context.Context, in *DeleteDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates desktop group properties
+	Update(ctx context.Context, in *UpdateDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns a list of the access bindings for the specified desktop group.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified desktop group.
@@ -121,20 +120,20 @@ func (c *desktopGroupServiceClient) Create(ctx context.Context, in *CreateDeskto
 	return out, nil
 }
 
-func (c *desktopGroupServiceClient) Update(ctx context.Context, in *UpdateDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *desktopGroupServiceClient) Delete(ctx context.Context, in *DeleteDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopGroupService_Update_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DesktopGroupService_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *desktopGroupServiceClient) Delete(ctx context.Context, in *DeleteDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *desktopGroupServiceClient) Update(ctx context.Context, in *UpdateDesktopGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, DesktopGroupService_Delete_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, DesktopGroupService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -178,7 +177,6 @@ func (c *desktopGroupServiceClient) UpdateAccessBindings(ctx context.Context, in
 // A set of methods for managing desktop group resources.
 type DesktopGroupServiceServer interface {
 	// Returns the specified desktop group resource.
-	//
 	// To get the list of available desktop groups, make a [List] request.
 	Get(context.Context, *GetDesktopGroupRequest) (*DesktopGroup, error)
 	// Retrieves the list of desktop group resources.
@@ -189,10 +187,10 @@ type DesktopGroupServiceServer interface {
 	ListOperations(context.Context, *ListDesktopGroupOperationsRequest) (*ListDesktopGroupOperationsResponse, error)
 	// Creates desktop group in the specified folder.
 	Create(context.Context, *CreateDesktopGroupRequest) (*operation.Operation, error)
-	// Updates desktop group properties
-	Update(context.Context, *UpdateDesktopGroupRequest) (*operation.Operation, error)
 	// Deletes the specified desktop group.
 	Delete(context.Context, *DeleteDesktopGroupRequest) (*operation.Operation, error)
+	// Updates desktop group properties
+	Update(context.Context, *UpdateDesktopGroupRequest) (*operation.Operation, error)
 	// Returns a list of the access bindings for the specified desktop group.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified desktop group.
@@ -223,11 +221,11 @@ func (UnimplementedDesktopGroupServiceServer) ListOperations(context.Context, *L
 func (UnimplementedDesktopGroupServiceServer) Create(context.Context, *CreateDesktopGroupRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedDesktopGroupServiceServer) Update(context.Context, *UpdateDesktopGroupRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
-}
 func (UnimplementedDesktopGroupServiceServer) Delete(context.Context, *DeleteDesktopGroupRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedDesktopGroupServiceServer) Update(context.Context, *UpdateDesktopGroupRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedDesktopGroupServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -348,24 +346,6 @@ func _DesktopGroupService_Create_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DesktopGroupService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDesktopGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DesktopGroupServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DesktopGroupService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DesktopGroupServiceServer).Update(ctx, req.(*UpdateDesktopGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _DesktopGroupService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteDesktopGroupRequest)
 	if err := dec(in); err != nil {
@@ -380,6 +360,24 @@ func _DesktopGroupService_Delete_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DesktopGroupServiceServer).Delete(ctx, req.(*DeleteDesktopGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DesktopGroupService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDesktopGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DesktopGroupServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DesktopGroupService_Update_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DesktopGroupServiceServer).Update(ctx, req.(*UpdateDesktopGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -466,12 +464,12 @@ var DesktopGroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DesktopGroupService_Create_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _DesktopGroupService_Update_Handler,
-		},
-		{
 			MethodName: "Delete",
 			Handler:    _DesktopGroupService_Delete_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _DesktopGroupService_Update_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

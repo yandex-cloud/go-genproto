@@ -30,6 +30,14 @@ func (m *Desktop) SetName(v string) {
 	m.Name = v
 }
 
+func (m *Desktop) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *Desktop) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *Desktop) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -40,14 +48,6 @@ func (m *Desktop) SetNetworkInterfaces(v []*NetworkInterface) {
 
 func (m *Desktop) SetUsers(v []*User) {
 	m.Users = v
-}
-
-func (m *Desktop) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
-func (m *Desktop) SetDescription(v string) {
-	m.Description = v
 }
 
 func (m *Resources) SetMemory(v int64) {
@@ -62,18 +62,18 @@ func (m *Resources) SetCoreFraction(v int64) {
 	m.CoreFraction = v
 }
 
-func (m *User) SetSubjectId(v string) {
-	m.SubjectId = v
-}
-
-func (m *User) SetSubjectType(v string) {
-	m.SubjectType = v
-}
-
 func (m *NetworkInterface) SetNetworkId(v string) {
 	m.NetworkId = v
 }
 
 func (m *NetworkInterface) SetSubnetId(v string) {
 	m.SubnetId = v
+}
+
+func (m *User) SetSubjectId(v string) {
+	m.SubjectId = v
+}
+
+func (m *User) SetSubjectType(v string) {
+	m.SubjectType = v
 }

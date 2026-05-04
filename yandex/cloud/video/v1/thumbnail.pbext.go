@@ -12,6 +12,14 @@ func (m *Thumbnail) SetParentId(v Thumbnail_ParentId) {
 	m.ParentId = v
 }
 
+func (m *Thumbnail) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Thumbnail) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
 func (m *Thumbnail) SetEpisodeId(v string) {
 	m.ParentId = &Thumbnail_EpisodeId{
 		EpisodeId: v,
@@ -22,14 +30,6 @@ func (m *Thumbnail) SetVideoId(v string) {
 	m.ParentId = &Thumbnail_VideoId{
 		VideoId: v,
 	}
-}
-
-func (m *Thumbnail) SetId(v string) {
-	m.Id = v
-}
-
-func (m *Thumbnail) SetChannelId(v string) {
-	m.ChannelId = v
 }
 
 func (m *Thumbnail) SetCreatedAt(v *timestamppb.Timestamp) {

@@ -77,10 +77,10 @@ func (DiskSpec_Type) EnumDescriptor() ([]byte, []int) {
 // Disk specificaton.
 type DiskSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Type of disk.
-	Type DiskSpec_Type `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.clouddesktop.v1.api.DiskSpec_Type" json:"type,omitempty"`
 	// Size of disk.
-	Size          int64 `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	Size int64 `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	// Type of disk.
+	Type          DiskSpec_Type `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.clouddesktop.v1.api.DiskSpec_Type" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,13 +115,6 @@ func (*DiskSpec) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_clouddesktop_v1_disk_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *DiskSpec) GetType() DiskSpec_Type {
-	if x != nil {
-		return x.Type
-	}
-	return DiskSpec_TYPE_UNSPECIFIED
-}
-
 func (x *DiskSpec) GetSize() int64 {
 	if x != nil {
 		return x.Size
@@ -129,18 +122,25 @@ func (x *DiskSpec) GetSize() int64 {
 	return 0
 }
 
+func (x *DiskSpec) GetType() DiskSpec_Type {
+	if x != nil {
+		return x.Type
+	}
+	return DiskSpec_TYPE_UNSPECIFIED
+}
+
 var File_yandex_cloud_clouddesktop_v1_disk_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_disk_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/clouddesktop/v1/disk.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1dyandex/cloud/validation.proto\"\xa1\x01\n" +
-	"\bDiskSpec\x12I\n" +
-	"\x04type\x18\x03 \x01(\x0e2/.yandex.cloud.clouddesktop.v1.api.DiskSpec.TypeB\x04\xe8\xc71\x01R\x04type\x12\x1a\n" +
-	"\x04size\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\x04size\".\n" +
+	"'yandex/cloud/clouddesktop/v1/disk.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1dyandex/cloud/validation.proto\"\xa7\x01\n" +
+	"\bDiskSpec\x12\x1a\n" +
+	"\x04size\x18\x04 \x01(\x03B\x06\xfa\xc71\x02>0R\x04size\x12I\n" +
+	"\x04type\x18\x03 \x01(\x0e2/.yandex.cloud.clouddesktop.v1.api.DiskSpec.TypeB\x04\xe8\xc71\x01R\x04type\".\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03HDD\x10\x01\x12\a\n" +
-	"\x03SSD\x10\x02Bw\n" +
+	"\x03SSD\x10\x02J\x04\b\x01\x10\x03Bw\n" +
 	" yandex.cloud.api.clouddesktop.v1B\x04PADDZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/clouddesktop/v1;clouddesktopb\x06proto3"
 
 var (

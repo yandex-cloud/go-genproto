@@ -325,19 +325,6 @@ func (x *BatchGetVideosResponse) GetVideos() []*Video {
 
 type CreateVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the video upload source method (exactly one must be chosen).
-	//
-	// Types that are valid to be assigned to Source:
-	//
-	//	*CreateVideoRequest_Tusd
-	Source isCreateVideoRequest_Source `protobuf_oneof:"source"`
-	// Video access permission settings (exactly one must be chosen).
-	//
-	// Types that are valid to be assigned to AccessRights:
-	//
-	//	*CreateVideoRequest_PublicAccess
-	//	*CreateVideoRequest_SignUrlAccess
-	AccessRights isCreateVideoRequest_AccessRights `protobuf_oneof:"access_rights"`
 	// ID of the channel where the video will be created.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Title of the video to be displayed in interfaces and players.
@@ -367,7 +354,20 @@ type CreateVideoRequest struct {
 	// Maximum 64 labels per video.
 	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
 	// Values can contain alphanumeric characters and various symbols.
-	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Specifies the video upload source method (exactly one must be chosen).
+	//
+	// Types that are valid to be assigned to Source:
+	//
+	//	*CreateVideoRequest_Tusd
+	Source isCreateVideoRequest_Source `protobuf_oneof:"source"`
+	// Video access permission settings (exactly one must be chosen).
+	//
+	// Types that are valid to be assigned to AccessRights:
+	//
+	//	*CreateVideoRequest_PublicAccess
+	//	*CreateVideoRequest_SignUrlAccess
+	AccessRights  isCreateVideoRequest_AccessRights `protobuf_oneof:"access_rights"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -400,47 +400,6 @@ func (x *CreateVideoRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateVideoRequest.ProtoReflect.Descriptor instead.
 func (*CreateVideoRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateVideoRequest) GetSource() isCreateVideoRequest_Source {
-	if x != nil {
-		return x.Source
-	}
-	return nil
-}
-
-func (x *CreateVideoRequest) GetTusd() *VideoTUSDParams {
-	if x != nil {
-		if x, ok := x.Source.(*CreateVideoRequest_Tusd); ok {
-			return x.Tusd
-		}
-	}
-	return nil
-}
-
-func (x *CreateVideoRequest) GetAccessRights() isCreateVideoRequest_AccessRights {
-	if x != nil {
-		return x.AccessRights
-	}
-	return nil
-}
-
-func (x *CreateVideoRequest) GetPublicAccess() *VideoPublicAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*CreateVideoRequest_PublicAccess); ok {
-			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *CreateVideoRequest) GetSignUrlAccess() *VideoSignURLAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*CreateVideoRequest_SignUrlAccess); ok {
-			return x.SignUrlAccess
-		}
-	}
-	return nil
 }
 
 func (x *CreateVideoRequest) GetChannelId() string {
@@ -506,6 +465,47 @@ func (x *CreateVideoRequest) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *CreateVideoRequest) GetSource() isCreateVideoRequest_Source {
+	if x != nil {
+		return x.Source
+	}
+	return nil
+}
+
+func (x *CreateVideoRequest) GetTusd() *VideoTUSDParams {
+	if x != nil {
+		if x, ok := x.Source.(*CreateVideoRequest_Tusd); ok {
+			return x.Tusd
+		}
+	}
+	return nil
+}
+
+func (x *CreateVideoRequest) GetAccessRights() isCreateVideoRequest_AccessRights {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
+func (x *CreateVideoRequest) GetPublicAccess() *VideoPublicAccessParams {
+	if x != nil {
+		if x, ok := x.AccessRights.(*CreateVideoRequest_PublicAccess); ok {
+			return x.PublicAccess
+		}
+	}
+	return nil
+}
+
+func (x *CreateVideoRequest) GetSignUrlAccess() *VideoSignURLAccessParams {
+	if x != nil {
+		if x, ok := x.AccessRights.(*CreateVideoRequest_SignUrlAccess); ok {
+			return x.SignUrlAccess
+		}
+	}
+	return nil
+}
+
 type isCreateVideoRequest_Source interface {
 	isCreateVideoRequest_Source()
 }
@@ -539,10 +539,15 @@ func (*CreateVideoRequest_SignUrlAccess) isCreateVideoRequest_AccessRights() {}
 type VideoTUSDParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Total size of the file to be uploaded, in bytes.
+	// MUST be positive if upload length is not deferred, otherwise MUST be 0.
 	FileSize int64 `protobuf:"varint,1,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
 	// Original name of the file being uploaded.
 	// This is used for reference and does not affect the upload process.
-	FileName      string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	FileName string `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	// Defer upload file size.
+	// File size MUST be provided by first client's PATCH request.
+	// @see https://tus.io/protocols/resumable-upload#post
+	IsDeferred    bool `protobuf:"varint,3,opt,name=is_deferred,json=isDeferred,proto3" json:"is_deferred,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -589,6 +594,13 @@ func (x *VideoTUSDParams) GetFileName() string {
 		return x.FileName
 	}
 	return ""
+}
+
+func (x *VideoTUSDParams) GetIsDeferred() bool {
+	if x != nil {
+		return x.IsDeferred
+	}
+	return false
 }
 
 // Parameters for video public access rights.
@@ -712,13 +724,6 @@ func (x *CreateVideoMetadata) GetVideoId() string {
 
 type UpdateVideoRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// New access rights setting for the video.
-	//
-	// Types that are valid to be assigned to AccessRights:
-	//
-	//	*UpdateVideoRequest_PublicAccess
-	//	*UpdateVideoRequest_SignUrlAccess
-	AccessRights isUpdateVideoRequest_AccessRights `protobuf_oneof:"access_rights"`
 	// ID of the video to update.
 	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	// Field mask specifying which fields of the video should be updated.
@@ -743,7 +748,14 @@ type UpdateVideoRequest struct {
 	// New custom labels for the video as `key:value` pairs.
 	// Maximum 64 labels per video.
 	// If provided, replaces all existing labels.
-	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// New access rights setting for the video.
+	//
+	// Types that are valid to be assigned to AccessRights:
+	//
+	//	*UpdateVideoRequest_PublicAccess
+	//	*UpdateVideoRequest_SignUrlAccess
+	AccessRights  isUpdateVideoRequest_AccessRights `protobuf_oneof:"access_rights"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -776,31 +788,6 @@ func (x *UpdateVideoRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateVideoRequest.ProtoReflect.Descriptor instead.
 func (*UpdateVideoRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *UpdateVideoRequest) GetAccessRights() isUpdateVideoRequest_AccessRights {
-	if x != nil {
-		return x.AccessRights
-	}
-	return nil
-}
-
-func (x *UpdateVideoRequest) GetPublicAccess() *VideoPublicAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*UpdateVideoRequest_PublicAccess); ok {
-			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *UpdateVideoRequest) GetSignUrlAccess() *VideoSignURLAccessParams {
-	if x != nil {
-		if x, ok := x.AccessRights.(*UpdateVideoRequest_SignUrlAccess); ok {
-			return x.SignUrlAccess
-		}
-	}
-	return nil
 }
 
 func (x *UpdateVideoRequest) GetVideoId() string {
@@ -862,6 +849,31 @@ func (x *UpdateVideoRequest) GetEnableAd() *wrapperspb.BoolValue {
 func (x *UpdateVideoRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateVideoRequest) GetAccessRights() isUpdateVideoRequest_AccessRights {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
+func (x *UpdateVideoRequest) GetPublicAccess() *VideoPublicAccessParams {
+	if x != nil {
+		if x, ok := x.AccessRights.(*UpdateVideoRequest_PublicAccess); ok {
+			return x.PublicAccess
+		}
+	}
+	return nil
+}
+
+func (x *UpdateVideoRequest) GetSignUrlAccess() *VideoSignURLAccessParams {
+	if x != nil {
+		if x, ok := x.AccessRights.(*UpdateVideoRequest_SignUrlAccess); ok {
+			return x.SignUrlAccess
+		}
 	}
 	return nil
 }
@@ -947,8 +959,11 @@ type TranscodeVideoRequest struct {
 	// Settings for automatic video content summarization.
 	// Defines which audio tracks should be processed to generate text summaries.
 	SummarizationSettings *VideoSummarizationSettings `protobuf:"bytes,5,opt,name=summarization_settings,json=summarizationSettings,proto3" json:"summarization_settings,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Settings for automatic speech recognition (speech-to-text).
+	// Defines which audio tracks should be transcribed to generate text transcripts.
+	SpeechToTextSettings *VideoSpeechToTextSettings `protobuf:"bytes,6,opt,name=speech_to_text_settings,json=speechToTextSettings,proto3" json:"speech_to_text_settings,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TranscodeVideoRequest) Reset() {
@@ -1012,6 +1027,13 @@ func (x *TranscodeVideoRequest) GetTranslationSettings() *VideoTranslationSettin
 func (x *TranscodeVideoRequest) GetSummarizationSettings() *VideoSummarizationSettings {
 	if x != nil {
 		return x.SummarizationSettings
+	}
+	return nil
+}
+
+func (x *TranscodeVideoRequest) GetSpeechToTextSettings() *VideoSpeechToTextSettings {
+	if x != nil {
+		return x.SpeechToTextSettings
 	}
 	return nil
 }
@@ -1118,6 +1140,63 @@ func (x *VideoSummarizationSettings) GetProcessAllTracks() bool {
 	return false
 }
 
+type VideoSpeechToTextSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Speech-to-text settings for each track.
+	Tracks []*VideoSpeechToTextSettings_SpeechToTextTrack `protobuf:"bytes,1,rep,name=tracks,proto3" json:"tracks,omitempty"`
+	// Recognize speech from all available tracks.
+	// If enabled, `tracks` parameter is ignored.
+	// Enables automatic source language deduction for each track
+	// and thus may lead to performance degradation.
+	ProcessAllTracks bool `protobuf:"varint,2,opt,name=process_all_tracks,json=processAllTracks,proto3" json:"process_all_tracks,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *VideoSpeechToTextSettings) Reset() {
+	*x = VideoSpeechToTextSettings{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoSpeechToTextSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoSpeechToTextSettings) ProtoMessage() {}
+
+func (x *VideoSpeechToTextSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoSpeechToTextSettings.ProtoReflect.Descriptor instead.
+func (*VideoSpeechToTextSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *VideoSpeechToTextSettings) GetTracks() []*VideoSpeechToTextSettings_SpeechToTextTrack {
+	if x != nil {
+		return x.Tracks
+	}
+	return nil
+}
+
+func (x *VideoSpeechToTextSettings) GetProcessAllTracks() bool {
+	if x != nil {
+		return x.ProcessAllTracks
+	}
+	return false
+}
+
 type TranscodeVideoMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the video.
@@ -1128,7 +1207,7 @@ type TranscodeVideoMetadata struct {
 
 func (x *TranscodeVideoMetadata) Reset() {
 	*x = TranscodeVideoMetadata{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1140,7 +1219,7 @@ func (x *TranscodeVideoMetadata) String() string {
 func (*TranscodeVideoMetadata) ProtoMessage() {}
 
 func (x *TranscodeVideoMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1153,7 +1232,7 @@ func (x *TranscodeVideoMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TranscodeVideoMetadata.ProtoReflect.Descriptor instead.
 func (*TranscodeVideoMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *TranscodeVideoMetadata) GetVideoId() string {
@@ -1173,7 +1252,7 @@ type DeleteVideoRequest struct {
 
 func (x *DeleteVideoRequest) Reset() {
 	*x = DeleteVideoRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1185,7 +1264,7 @@ func (x *DeleteVideoRequest) String() string {
 func (*DeleteVideoRequest) ProtoMessage() {}
 
 func (x *DeleteVideoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1198,7 +1277,7 @@ func (x *DeleteVideoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteVideoRequest.ProtoReflect.Descriptor instead.
 func (*DeleteVideoRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteVideoRequest) GetVideoId() string {
@@ -1219,7 +1298,7 @@ type DeleteVideoMetadata struct {
 
 func (x *DeleteVideoMetadata) Reset() {
 	*x = DeleteVideoMetadata{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +1310,7 @@ func (x *DeleteVideoMetadata) String() string {
 func (*DeleteVideoMetadata) ProtoMessage() {}
 
 func (x *DeleteVideoMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1323,7 @@ func (x *DeleteVideoMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteVideoMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteVideoMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeleteVideoMetadata) GetVideoId() string {
@@ -1266,7 +1345,7 @@ type BatchDeleteVideosRequest struct {
 
 func (x *BatchDeleteVideosRequest) Reset() {
 	*x = BatchDeleteVideosRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1278,7 +1357,7 @@ func (x *BatchDeleteVideosRequest) String() string {
 func (*BatchDeleteVideosRequest) ProtoMessage() {}
 
 func (x *BatchDeleteVideosRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1291,7 +1370,7 @@ func (x *BatchDeleteVideosRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchDeleteVideosRequest.ProtoReflect.Descriptor instead.
 func (*BatchDeleteVideosRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *BatchDeleteVideosRequest) GetChannelId() string {
@@ -1320,7 +1399,7 @@ type BatchDeleteVideosMetadata struct {
 
 func (x *BatchDeleteVideosMetadata) Reset() {
 	*x = BatchDeleteVideosMetadata{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1332,7 +1411,7 @@ func (x *BatchDeleteVideosMetadata) String() string {
 func (*BatchDeleteVideosMetadata) ProtoMessage() {}
 
 func (x *BatchDeleteVideosMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1345,7 +1424,7 @@ func (x *BatchDeleteVideosMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchDeleteVideosMetadata.ProtoReflect.Descriptor instead.
 func (*BatchDeleteVideosMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *BatchDeleteVideosMetadata) GetVideoIds() []string {
@@ -1357,22 +1436,22 @@ func (x *BatchDeleteVideosMetadata) GetVideoIds() []string {
 
 type PerformVideoActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the video on which to perform the action.
+	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
 	// Specifies the action to perform on the video (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformVideoActionRequest_Publish
 	//	*PerformVideoActionRequest_Unpublish
-	Action isPerformVideoActionRequest_Action `protobuf_oneof:"action"`
-	// ID of the video on which to perform the action.
-	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	Action        isPerformVideoActionRequest_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PerformVideoActionRequest) Reset() {
 	*x = PerformVideoActionRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1384,7 +1463,7 @@ func (x *PerformVideoActionRequest) String() string {
 func (*PerformVideoActionRequest) ProtoMessage() {}
 
 func (x *PerformVideoActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1397,7 +1476,14 @@ func (x *PerformVideoActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformVideoActionRequest.ProtoReflect.Descriptor instead.
 func (*PerformVideoActionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *PerformVideoActionRequest) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
 }
 
 func (x *PerformVideoActionRequest) GetAction() isPerformVideoActionRequest_Action {
@@ -1423,13 +1509,6 @@ func (x *PerformVideoActionRequest) GetUnpublish() *UnpublishVideoAction {
 		}
 	}
 	return nil
-}
-
-func (x *PerformVideoActionRequest) GetVideoId() string {
-	if x != nil {
-		return x.VideoId
-	}
-	return ""
 }
 
 type isPerformVideoActionRequest_Action interface {
@@ -1461,7 +1540,7 @@ type PublishVideoAction struct {
 
 func (x *PublishVideoAction) Reset() {
 	*x = PublishVideoAction{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1473,7 +1552,7 @@ func (x *PublishVideoAction) String() string {
 func (*PublishVideoAction) ProtoMessage() {}
 
 func (x *PublishVideoAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1486,7 +1565,7 @@ func (x *PublishVideoAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishVideoAction.ProtoReflect.Descriptor instead.
 func (*PublishVideoAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{22}
 }
 
 // Parameters for the unpublish action.
@@ -1498,7 +1577,7 @@ type UnpublishVideoAction struct {
 
 func (x *UnpublishVideoAction) Reset() {
 	*x = UnpublishVideoAction{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1510,7 +1589,7 @@ func (x *UnpublishVideoAction) String() string {
 func (*UnpublishVideoAction) ProtoMessage() {}
 
 func (x *UnpublishVideoAction) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1523,7 +1602,7 @@ func (x *UnpublishVideoAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnpublishVideoAction.ProtoReflect.Descriptor instead.
 func (*UnpublishVideoAction) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{23}
 }
 
 type PerformVideoActionMetadata struct {
@@ -1538,7 +1617,7 @@ type PerformVideoActionMetadata struct {
 
 func (x *PerformVideoActionMetadata) Reset() {
 	*x = PerformVideoActionMetadata{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1550,7 +1629,7 @@ func (x *PerformVideoActionMetadata) String() string {
 func (*PerformVideoActionMetadata) ProtoMessage() {}
 
 func (x *PerformVideoActionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1563,7 +1642,7 @@ func (x *PerformVideoActionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PerformVideoActionMetadata.ProtoReflect.Descriptor instead.
 func (*PerformVideoActionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *PerformVideoActionMetadata) GetVideoId() string {
@@ -1589,7 +1668,7 @@ type GetVideoPlayerURLRequest struct {
 
 func (x *GetVideoPlayerURLRequest) Reset() {
 	*x = GetVideoPlayerURLRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1601,7 +1680,7 @@ func (x *GetVideoPlayerURLRequest) String() string {
 func (*GetVideoPlayerURLRequest) ProtoMessage() {}
 
 func (x *GetVideoPlayerURLRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1614,7 +1693,7 @@ func (x *GetVideoPlayerURLRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVideoPlayerURLRequest.ProtoReflect.Descriptor instead.
 func (*GetVideoPlayerURLRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetVideoPlayerURLRequest) GetVideoId() string {
@@ -1655,7 +1734,7 @@ type VideoPlayerParams struct {
 
 func (x *VideoPlayerParams) Reset() {
 	*x = VideoPlayerParams{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1667,7 +1746,7 @@ func (x *VideoPlayerParams) String() string {
 func (*VideoPlayerParams) ProtoMessage() {}
 
 func (x *VideoPlayerParams) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1680,7 +1759,7 @@ func (x *VideoPlayerParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VideoPlayerParams.ProtoReflect.Descriptor instead.
 func (*VideoPlayerParams) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *VideoPlayerParams) GetMute() bool {
@@ -1719,7 +1798,7 @@ type GetVideoPlayerURLResponse struct {
 
 func (x *GetVideoPlayerURLResponse) Reset() {
 	*x = GetVideoPlayerURLResponse{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1731,7 +1810,7 @@ func (x *GetVideoPlayerURLResponse) String() string {
 func (*GetVideoPlayerURLResponse) ProtoMessage() {}
 
 func (x *GetVideoPlayerURLResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1744,7 +1823,7 @@ func (x *GetVideoPlayerURLResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVideoPlayerURLResponse.ProtoReflect.Descriptor instead.
 func (*GetVideoPlayerURLResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetVideoPlayerURLResponse) GetPlayerUrl() string {
@@ -1781,7 +1860,7 @@ type BatchGetVideoPlayerURLsRequest struct {
 
 func (x *BatchGetVideoPlayerURLsRequest) Reset() {
 	*x = BatchGetVideoPlayerURLsRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1793,7 +1872,7 @@ func (x *BatchGetVideoPlayerURLsRequest) String() string {
 func (*BatchGetVideoPlayerURLsRequest) ProtoMessage() {}
 
 func (x *BatchGetVideoPlayerURLsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1806,7 +1885,7 @@ func (x *BatchGetVideoPlayerURLsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetVideoPlayerURLsRequest.ProtoReflect.Descriptor instead.
 func (*BatchGetVideoPlayerURLsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *BatchGetVideoPlayerURLsRequest) GetChannelId() string {
@@ -1848,7 +1927,7 @@ type BatchGetVideoPlayerURLsResponse struct {
 
 func (x *BatchGetVideoPlayerURLsResponse) Reset() {
 	*x = BatchGetVideoPlayerURLsResponse{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1860,7 +1939,7 @@ func (x *BatchGetVideoPlayerURLsResponse) String() string {
 func (*BatchGetVideoPlayerURLsResponse) ProtoMessage() {}
 
 func (x *BatchGetVideoPlayerURLsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1873,7 +1952,7 @@ func (x *BatchGetVideoPlayerURLsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetVideoPlayerURLsResponse.ProtoReflect.Descriptor instead.
 func (*BatchGetVideoPlayerURLsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *BatchGetVideoPlayerURLsResponse) GetPlayerUrls() []string {
@@ -1893,7 +1972,7 @@ type GenerateVideoDownloadURLRequest struct {
 
 func (x *GenerateVideoDownloadURLRequest) Reset() {
 	*x = GenerateVideoDownloadURLRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1905,7 +1984,7 @@ func (x *GenerateVideoDownloadURLRequest) String() string {
 func (*GenerateVideoDownloadURLRequest) ProtoMessage() {}
 
 func (x *GenerateVideoDownloadURLRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1918,7 +1997,7 @@ func (x *GenerateVideoDownloadURLRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateVideoDownloadURLRequest.ProtoReflect.Descriptor instead.
 func (*GenerateVideoDownloadURLRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GenerateVideoDownloadURLRequest) GetVideoId() string {
@@ -1940,7 +2019,7 @@ type GenerateVideoDownloadURLResponse struct {
 
 func (x *GenerateVideoDownloadURLResponse) Reset() {
 	*x = GenerateVideoDownloadURLResponse{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1952,7 +2031,7 @@ func (x *GenerateVideoDownloadURLResponse) String() string {
 func (*GenerateVideoDownloadURLResponse) ProtoMessage() {}
 
 func (x *GenerateVideoDownloadURLResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1965,7 +2044,7 @@ func (x *GenerateVideoDownloadURLResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateVideoDownloadURLResponse.ProtoReflect.Descriptor instead.
 func (*GenerateVideoDownloadURLResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GenerateVideoDownloadURLResponse) GetDownloadUrl() string {
@@ -1985,7 +2064,7 @@ type GetVideoManifestsRequest struct {
 
 func (x *GetVideoManifestsRequest) Reset() {
 	*x = GetVideoManifestsRequest{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1997,7 +2076,7 @@ func (x *GetVideoManifestsRequest) String() string {
 func (*GetVideoManifestsRequest) ProtoMessage() {}
 
 func (x *GetVideoManifestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2010,7 +2089,7 @@ func (x *GetVideoManifestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVideoManifestsRequest.ProtoReflect.Descriptor instead.
 func (*GetVideoManifestsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetVideoManifestsRequest) GetVideoId() string {
@@ -2031,7 +2110,7 @@ type GetVideoManifestsResponse struct {
 
 func (x *GetVideoManifestsResponse) Reset() {
 	*x = GetVideoManifestsResponse{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2043,7 +2122,7 @@ func (x *GetVideoManifestsResponse) String() string {
 func (*GetVideoManifestsResponse) ProtoMessage() {}
 
 func (x *GetVideoManifestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2056,12 +2135,259 @@ func (x *GetVideoManifestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVideoManifestsResponse.ProtoReflect.Descriptor instead.
 func (*GetVideoManifestsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *GetVideoManifestsResponse) GetManifests() []*Manifest {
 	if x != nil {
 		return x.Manifests
+	}
+	return nil
+}
+
+type GetVideoScreenshotsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the video for which to retrieve screenshots.
+	VideoId       string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVideoScreenshotsRequest) Reset() {
+	*x = GetVideoScreenshotsRequest{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVideoScreenshotsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVideoScreenshotsRequest) ProtoMessage() {}
+
+func (x *GetVideoScreenshotsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVideoScreenshotsRequest.ProtoReflect.Descriptor instead.
+func (*GetVideoScreenshotsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetVideoScreenshotsRequest) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
+}
+
+type GetVideoScreenshotsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of URLs to screenshots taken during the video transcoding process.
+	// These screenshots can be used for thumbnail selection or content preview.
+	// Screenshots are typically taken at regular intervals throughout the video.
+	Screenshots   []string `protobuf:"bytes,1,rep,name=screenshots,proto3" json:"screenshots,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetVideoScreenshotsResponse) Reset() {
+	*x = GetVideoScreenshotsResponse{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetVideoScreenshotsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetVideoScreenshotsResponse) ProtoMessage() {}
+
+func (x *GetVideoScreenshotsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetVideoScreenshotsResponse.ProtoReflect.Descriptor instead.
+func (*GetVideoScreenshotsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetVideoScreenshotsResponse) GetScreenshots() []string {
+	if x != nil {
+		return x.Screenshots
+	}
+	return nil
+}
+
+type BatchGetVideoScreenshotsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the channel containing the videos.
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// List of video IDs for which to retrieve screenshots.
+	VideoIds      []string `protobuf:"bytes,2,rep,name=video_ids,json=videoIds,proto3" json:"video_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BatchGetVideoScreenshotsRequest) Reset() {
+	*x = BatchGetVideoScreenshotsRequest{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchGetVideoScreenshotsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchGetVideoScreenshotsRequest) ProtoMessage() {}
+
+func (x *BatchGetVideoScreenshotsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchGetVideoScreenshotsRequest.ProtoReflect.Descriptor instead.
+func (*BatchGetVideoScreenshotsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *BatchGetVideoScreenshotsRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *BatchGetVideoScreenshotsRequest) GetVideoIds() []string {
+	if x != nil {
+		return x.VideoIds
+	}
+	return nil
+}
+
+type BatchGetVideoScreenshotsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of screenshots for the requested videos.
+	VideoScreenshots []*VideoScreenshots `protobuf:"bytes,1,rep,name=video_screenshots,json=videoScreenshots,proto3" json:"video_screenshots,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *BatchGetVideoScreenshotsResponse) Reset() {
+	*x = BatchGetVideoScreenshotsResponse{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BatchGetVideoScreenshotsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BatchGetVideoScreenshotsResponse) ProtoMessage() {}
+
+func (x *BatchGetVideoScreenshotsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BatchGetVideoScreenshotsResponse.ProtoReflect.Descriptor instead.
+func (*BatchGetVideoScreenshotsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *BatchGetVideoScreenshotsResponse) GetVideoScreenshots() []*VideoScreenshots {
+	if x != nil {
+		return x.VideoScreenshots
+	}
+	return nil
+}
+
+type VideoScreenshots struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the video for which screenshots are retrieved.
+	VideoId string `protobuf:"bytes,1,opt,name=video_id,json=videoId,proto3" json:"video_id,omitempty"`
+	// List of URLs to screenshots taken during the video transcoding process.
+	// These screenshots can be used for thumbnail selection or content preview.
+	// Screenshots are typically taken at regular intervals throughout the video.
+	Screenshots   []string `protobuf:"bytes,2,rep,name=screenshots,proto3" json:"screenshots,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VideoScreenshots) Reset() {
+	*x = VideoScreenshots{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoScreenshots) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoScreenshots) ProtoMessage() {}
+
+func (x *VideoScreenshots) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoScreenshots.ProtoReflect.Descriptor instead.
+func (*VideoScreenshots) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *VideoScreenshots) GetVideoId() string {
+	if x != nil {
+		return x.VideoId
+	}
+	return ""
+}
+
+func (x *VideoScreenshots) GetScreenshots() []string {
+	if x != nil {
+		return x.Screenshots
 	}
 	return nil
 }
@@ -2080,7 +2406,7 @@ type VideoTranslationSettings_TranslationTrack struct {
 
 func (x *VideoTranslationSettings_TranslationTrack) Reset() {
 	*x = VideoTranslationSettings_TranslationTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2092,7 +2418,7 @@ func (x *VideoTranslationSettings_TranslationTrack) String() string {
 func (*VideoTranslationSettings_TranslationTrack) ProtoMessage() {}
 
 func (x *VideoTranslationSettings_TranslationTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2144,7 +2470,7 @@ type VideoTranslationSettings_InputTrack struct {
 
 func (x *VideoTranslationSettings_InputTrack) Reset() {
 	*x = VideoTranslationSettings_InputTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2156,7 +2482,7 @@ func (x *VideoTranslationSettings_InputTrack) String() string {
 func (*VideoTranslationSettings_InputTrack) ProtoMessage() {}
 
 func (x *VideoTranslationSettings_InputTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2198,7 +2524,7 @@ type VideoTranslationSettings_SubtitleTrack struct {
 
 func (x *VideoTranslationSettings_SubtitleTrack) Reset() {
 	*x = VideoTranslationSettings_SubtitleTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2210,7 +2536,7 @@ func (x *VideoTranslationSettings_SubtitleTrack) String() string {
 func (*VideoTranslationSettings_SubtitleTrack) ProtoMessage() {}
 
 func (x *VideoTranslationSettings_SubtitleTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2252,7 +2578,7 @@ type VideoTranslationSettings_AudioTrack struct {
 
 func (x *VideoTranslationSettings_AudioTrack) Reset() {
 	*x = VideoTranslationSettings_AudioTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2264,7 +2590,7 @@ func (x *VideoTranslationSettings_AudioTrack) String() string {
 func (*VideoTranslationSettings_AudioTrack) ProtoMessage() {}
 
 func (x *VideoTranslationSettings_AudioTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2304,7 +2630,7 @@ type VideoSummarizationSettings_SummarizationTrack struct {
 
 func (x *VideoSummarizationSettings_SummarizationTrack) Reset() {
 	*x = VideoSummarizationSettings_SummarizationTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2316,7 +2642,7 @@ func (x *VideoSummarizationSettings_SummarizationTrack) String() string {
 func (*VideoSummarizationSettings_SummarizationTrack) ProtoMessage() {}
 
 func (x *VideoSummarizationSettings_SummarizationTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2354,7 +2680,7 @@ type VideoSummarizationSettings_InputTrack struct {
 
 func (x *VideoSummarizationSettings_InputTrack) Reset() {
 	*x = VideoSummarizationSettings_InputTrack{}
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2366,7 +2692,7 @@ func (x *VideoSummarizationSettings_InputTrack) String() string {
 func (*VideoSummarizationSettings_InputTrack) ProtoMessage() {}
 
 func (x *VideoSummarizationSettings_InputTrack) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2390,6 +2716,108 @@ func (x *VideoSummarizationSettings_InputTrack) GetTrackIndex() int64 {
 }
 
 func (x *VideoSummarizationSettings_InputTrack) GetSrcLang() string {
+	if x != nil {
+		return x.SrcLang
+	}
+	return ""
+}
+
+type VideoSpeechToTextSettings_SpeechToTextTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Input track settings.
+	InputTrack    *VideoSpeechToTextSettings_InputTrack `protobuf:"bytes,1,opt,name=input_track,json=inputTrack,proto3" json:"input_track,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VideoSpeechToTextSettings_SpeechToTextTrack) Reset() {
+	*x = VideoSpeechToTextSettings_SpeechToTextTrack{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoSpeechToTextSettings_SpeechToTextTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoSpeechToTextSettings_SpeechToTextTrack) ProtoMessage() {}
+
+func (x *VideoSpeechToTextSettings_SpeechToTextTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoSpeechToTextSettings_SpeechToTextTrack.ProtoReflect.Descriptor instead.
+func (*VideoSpeechToTextSettings_SpeechToTextTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{15, 0}
+}
+
+func (x *VideoSpeechToTextSettings_SpeechToTextTrack) GetInputTrack() *VideoSpeechToTextSettings_InputTrack {
+	if x != nil {
+		return x.InputTrack
+	}
+	return nil
+}
+
+type VideoSpeechToTextSettings_InputTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Input audio track index (one-based).
+	TrackIndex int64 `protobuf:"varint,1,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
+	// It will be deduced automatically if not provided.
+	// In the latter case the deduction accuracy is not guaranteed.
+	// For better performance please do specify the source track language when possible.
+	SrcLang       string `protobuf:"bytes,2,opt,name=src_lang,json=srcLang,proto3" json:"src_lang,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VideoSpeechToTextSettings_InputTrack) Reset() {
+	*x = VideoSpeechToTextSettings_InputTrack{}
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoSpeechToTextSettings_InputTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoSpeechToTextSettings_InputTrack) ProtoMessage() {}
+
+func (x *VideoSpeechToTextSettings_InputTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_service_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoSpeechToTextSettings_InputTrack.ProtoReflect.Descriptor instead.
+func (*VideoSpeechToTextSettings_InputTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP(), []int{15, 1}
+}
+
+func (x *VideoSpeechToTextSettings_InputTrack) GetTrackIndex() int64 {
+	if x != nil {
+		return x.TrackIndex
+	}
+	return 0
+}
+
+func (x *VideoSpeechToTextSettings_InputTrack) GetSrcLang() string {
 	if x != nil {
 		return x.SrcLang
 	}
@@ -2421,10 +2849,7 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\tvideo_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\bvideoIds\"N\n" +
 	"\x16BatchGetVideosResponse\x124\n" +
 	"\x06videos\x18\x01 \x03(\v2\x1c.yandex.cloud.video.v1.VideoR\x06videos\"\xc1\a\n" +
-	"\x12CreateVideoRequest\x12=\n" +
-	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDParamsH\x00R\x04tusd\x12V\n" +
-	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessParamsH\x01R\fpublicAccess\x12Z\n" +
-	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessParamsH\x01R\rsignUrlAccess\x12+\n" +
+	"\x12CreateVideoRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
 	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12,\n" +
@@ -2435,22 +2860,25 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\x0fstyle_preset_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x12=\n" +
 	"\fauto_publish\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x127\n" +
 	"\tenable_ad\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12\x92\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.CreateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.CreateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12=\n" +
+	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDParamsH\x00R\x04tusd\x12V\n" +
+	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessParamsH\x01R\fpublicAccess\x12Z\n" +
+	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessParamsH\x01R\rsignUrlAccess\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
 	"\x06source\x12\x04\xc0\xc11\x01B\x15\n" +
-	"\raccess_rights\x12\x04\xc0\xc11\x01J\x05\b\t\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0fJ\x06\b\xd1\x0f\x10\xd3\x0f\"S\n" +
-	"\x0fVideoTUSDParams\x12#\n" +
-	"\tfile_size\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\bfileSize\x12\x1b\n" +
-	"\tfile_name\x18\x02 \x01(\tR\bfileName\"\x19\n" +
+	"\raccess_rights\x12\x04\xc0\xc11\x01J\x05\b\t\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xd0\x0fJ\x06\b\xd1\x0f\x10\xd3\x0f\"u\n" +
+	"\x0fVideoTUSDParams\x12$\n" +
+	"\tfile_size\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\bfileSize\x12\x1b\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\x12\x1f\n" +
+	"\vis_deferred\x18\x03 \x01(\bR\n" +
+	"isDeferred\"\x19\n" +
 	"\x17VideoPublicAccessParams\"\x1a\n" +
 	"\x18VideoSignURLAccessParams\"0\n" +
 	"\x13CreateVideoMetadata\x12\x19\n" +
 	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xde\x06\n" +
-	"\x12UpdateVideoRequest\x12V\n" +
-	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessParamsH\x00R\fpublicAccess\x12Z\n" +
-	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessParamsH\x00R\rsignUrlAccess\x12'\n" +
+	"\x12UpdateVideoRequest\x12'\n" +
 	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
@@ -2461,20 +2889,23 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\x0eauto_transcode\x18\x06 \x01(\x0e2$.yandex.cloud.video.v1.AutoTranscodeR\rautoTranscode\x120\n" +
 	"\x0fstyle_preset_id\x18\a \x01(\tB\b\x8a\xc81\x04<=50R\rstylePresetId\x127\n" +
 	"\tenable_ad\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12\x92\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v25.yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
+	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessParamsH\x00R\fpublicAccess\x12Z\n" +
+	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessParamsH\x00R\rsignUrlAccess\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
 	"\raccess_rightsJ\x05\b\t\x10\xc8\x01J\x06\b\xc9\x01\x10\xd0\x0fJ\x06\b\xd1\x0f\x10\xd3\x0f\"0\n" +
 	"\x13UpdateVideoMetadata\x12\x19\n" +
-	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xf2\x02\n" +
+	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"\xdb\x03\n" +
 	"\x15TranscodeVideoRequest\x12'\n" +
 	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12!\n" +
 	"\fsubtitle_ids\x18\x03 \x03(\tR\vsubtitleIds\x12b\n" +
 	"\x14translation_settings\x18\x04 \x01(\v2/.yandex.cloud.video.v1.VideoTranslationSettingsR\x13translationSettings\x12h\n" +
-	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\"\xa2\x06\n" +
+	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\x12g\n" +
+	"\x17speech_to_text_settings\x18\x06 \x01(\v20.yandex.cloud.video.v1.VideoSpeechToTextSettingsR\x14speechToTextSettings\"\xa2\x06\n" +
 	"\x18VideoTranslationSettings\x12X\n" +
 	"\x06tracks\x18\x01 \x03(\v2@.yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrackR\x06tracks\x1a\xa4\x02\n" +
 	"\x10TranslationTrack\x12a\n" +
@@ -2504,7 +2935,18 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
 	"trackIndex\x12R\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLangJ\x04\b\x01\x10\x02\"3\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLangJ\x04\b\x01\x10\x02\"\xab\x03\n" +
+	"\x19VideoSpeechToTextSettings\x12Z\n" +
+	"\x06tracks\x18\x01 \x03(\v2B.yandex.cloud.video.v1.VideoSpeechToTextSettings.SpeechToTextTrackR\x06tracks\x12,\n" +
+	"\x12process_all_tracks\x18\x02 \x01(\bR\x10processAllTracks\x1aw\n" +
+	"\x11SpeechToTextTrack\x12b\n" +
+	"\vinput_track\x18\x01 \x01(\v2;.yandex.cloud.video.v1.VideoSpeechToTextSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
+	"inputTrack\x1a\x8a\x01\n" +
+	"\n" +
+	"InputTrack\x12(\n" +
+	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
+	"trackIndex\x12R\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLang\"3\n" +
 	"\x16TranscodeVideoMetadata\x12\x19\n" +
 	"\bvideo_id\x18\x01 \x01(\tR\avideoId\"=\n" +
 	"\x12DeleteVideoRequest\x12'\n" +
@@ -2517,10 +2959,10 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\tvideo_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\bvideoIds\"8\n" +
 	"\x19BatchDeleteVideosMetadata\x12\x1b\n" +
 	"\tvideo_ids\x18\x01 \x03(\tR\bvideoIds\"\xf1\x01\n" +
-	"\x19PerformVideoActionRequest\x12F\n" +
+	"\x19PerformVideoActionRequest\x12'\n" +
+	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\x12F\n" +
 	"\apublish\x18\xe8\a \x01(\v2).yandex.cloud.video.v1.PublishVideoActionH\x00R\apublish\x12L\n" +
-	"\tunpublish\x18\xe9\a \x01(\v2+.yandex.cloud.video.v1.UnpublishVideoActionH\x00R\tunpublish\x12'\n" +
-	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoIdB\x0e\n" +
+	"\tunpublish\x18\xe9\a \x01(\v2+.yandex.cloud.video.v1.UnpublishVideoActionH\x00R\tunpublishB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x05\b\x02\x10\xe8\a\"\x14\n" +
 	"\x12PublishVideoAction\"\x16\n" +
 	"\x14UnpublishVideoAction\"7\n" +
@@ -2554,7 +2996,20 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\x18GetVideoManifestsRequest\x12'\n" +
 	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\"Z\n" +
 	"\x19GetVideoManifestsResponse\x12=\n" +
-	"\tmanifests\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.ManifestR\tmanifests2\xec\x10\n" +
+	"\tmanifests\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.ManifestR\tmanifests\"E\n" +
+	"\x1aGetVideoScreenshotsRequest\x12'\n" +
+	"\bvideo_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\avideoId\"?\n" +
+	"\x1bGetVideoScreenshotsResponse\x12 \n" +
+	"\vscreenshots\x18\x01 \x03(\tR\vscreenshots\"~\n" +
+	"\x1fBatchGetVideoScreenshotsRequest\x12+\n" +
+	"\n" +
+	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12.\n" +
+	"\tvideo_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\bvideoIds\"x\n" +
+	" BatchGetVideoScreenshotsResponse\x12T\n" +
+	"\x11video_screenshots\x18\x01 \x03(\v2'.yandex.cloud.video.v1.VideoScreenshotsR\x10videoScreenshots\"O\n" +
+	"\x10VideoScreenshots\x12\x19\n" +
+	"\bvideo_id\x18\x01 \x01(\tR\avideoId\x12 \n" +
+	"\vscreenshots\x18\x02 \x03(\tR\vscreenshots2\xd4\x13\n" +
 	"\fVideoService\x12p\n" +
 	"\x03Get\x12&.yandex.cloud.video.v1.GetVideoRequest\x1a\x1c.yandex.cloud.video.v1.Video\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/video/v1/videos/{video_id}\x12s\n" +
 	"\x04List\x12'.yandex.cloud.video.v1.ListVideoRequest\x1a(.yandex.cloud.video.v1.ListVideoResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/video/v1/videos\x12\x8d\x01\n" +
@@ -2574,7 +3029,9 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\fGetPlayerURL\x12/.yandex.cloud.video.v1.GetVideoPlayerURLRequest\x1a0.yandex.cloud.video.v1.GetVideoPlayerURLResponse\"0\x82\xd3\xe4\x93\x02*\x12(/video/v1/videos/{video_id}:getPlayerURL\x12\xb3\x01\n" +
 	"\x12BatchGetPlayerURLs\x125.yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest\x1a6.yandex.cloud.video.v1.BatchGetVideoPlayerURLsResponse\".\x82\xd3\xe4\x93\x02(:\x01*\"#/video/v1/videos:batchGetPlayerURLs\x12\xa3\x01\n" +
 	"\fGetManifests\x12/.yandex.cloud.video.v1.GetVideoManifestsRequest\x1a0.yandex.cloud.video.v1.GetVideoManifestsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/video/v1/videos/{video_id}:getManifests\x12\xc2\x01\n" +
-	"\x13GenerateDownloadURL\x126.yandex.cloud.video.v1.GenerateVideoDownloadURLRequest\x1a7.yandex.cloud.video.v1.GenerateVideoDownloadURLResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//video/v1/videos/{video_id}:generateDownloadURLB\\\n" +
+	"\x13GenerateDownloadURL\x126.yandex.cloud.video.v1.GenerateVideoDownloadURLRequest\x1a7.yandex.cloud.video.v1.GenerateVideoDownloadURLResponse\":\x82\xd3\xe4\x93\x024:\x01*\"//video/v1/videos/{video_id}:generateDownloadURL\x12\xab\x01\n" +
+	"\x0eGetScreenshots\x121.yandex.cloud.video.v1.GetVideoScreenshotsRequest\x1a2.yandex.cloud.video.v1.GetVideoScreenshotsResponse\"2\x82\xd3\xe4\x93\x02,\x12*/video/v1/videos/{video_id}:getScreenshots\x12\xb7\x01\n" +
+	"\x13BatchGetScreenshots\x126.yandex.cloud.video.v1.BatchGetVideoScreenshotsRequest\x1a7.yandex.cloud.video.v1.BatchGetVideoScreenshotsResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/video/v1/videos:batchGetScreenshotsB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (
@@ -2589,7 +3046,7 @@ func file_yandex_cloud_video_v1_video_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_video_service_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_video_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
+var file_yandex_cloud_video_v1_video_service_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
 var file_yandex_cloud_video_v1_video_service_proto_goTypes = []any{
 	(*GetVideoRequest)(nil),                               // 0: yandex.cloud.video.v1.GetVideoRequest
 	(*ListVideoRequest)(nil),                              // 1: yandex.cloud.video.v1.ListVideoRequest
@@ -2606,103 +3063,119 @@ var file_yandex_cloud_video_v1_video_service_proto_goTypes = []any{
 	(*TranscodeVideoRequest)(nil),                         // 12: yandex.cloud.video.v1.TranscodeVideoRequest
 	(*VideoTranslationSettings)(nil),                      // 13: yandex.cloud.video.v1.VideoTranslationSettings
 	(*VideoSummarizationSettings)(nil),                    // 14: yandex.cloud.video.v1.VideoSummarizationSettings
-	(*TranscodeVideoMetadata)(nil),                        // 15: yandex.cloud.video.v1.TranscodeVideoMetadata
-	(*DeleteVideoRequest)(nil),                            // 16: yandex.cloud.video.v1.DeleteVideoRequest
-	(*DeleteVideoMetadata)(nil),                           // 17: yandex.cloud.video.v1.DeleteVideoMetadata
-	(*BatchDeleteVideosRequest)(nil),                      // 18: yandex.cloud.video.v1.BatchDeleteVideosRequest
-	(*BatchDeleteVideosMetadata)(nil),                     // 19: yandex.cloud.video.v1.BatchDeleteVideosMetadata
-	(*PerformVideoActionRequest)(nil),                     // 20: yandex.cloud.video.v1.PerformVideoActionRequest
-	(*PublishVideoAction)(nil),                            // 21: yandex.cloud.video.v1.PublishVideoAction
-	(*UnpublishVideoAction)(nil),                          // 22: yandex.cloud.video.v1.UnpublishVideoAction
-	(*PerformVideoActionMetadata)(nil),                    // 23: yandex.cloud.video.v1.PerformVideoActionMetadata
-	(*GetVideoPlayerURLRequest)(nil),                      // 24: yandex.cloud.video.v1.GetVideoPlayerURLRequest
-	(*VideoPlayerParams)(nil),                             // 25: yandex.cloud.video.v1.VideoPlayerParams
-	(*GetVideoPlayerURLResponse)(nil),                     // 26: yandex.cloud.video.v1.GetVideoPlayerURLResponse
-	(*BatchGetVideoPlayerURLsRequest)(nil),                // 27: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest
-	(*BatchGetVideoPlayerURLsResponse)(nil),               // 28: yandex.cloud.video.v1.BatchGetVideoPlayerURLsResponse
-	(*GenerateVideoDownloadURLRequest)(nil),               // 29: yandex.cloud.video.v1.GenerateVideoDownloadURLRequest
-	(*GenerateVideoDownloadURLResponse)(nil),              // 30: yandex.cloud.video.v1.GenerateVideoDownloadURLResponse
-	(*GetVideoManifestsRequest)(nil),                      // 31: yandex.cloud.video.v1.GetVideoManifestsRequest
-	(*GetVideoManifestsResponse)(nil),                     // 32: yandex.cloud.video.v1.GetVideoManifestsResponse
-	nil,                                                   // 33: yandex.cloud.video.v1.CreateVideoRequest.LabelsEntry
-	nil,                                                   // 34: yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntry
-	(*VideoTranslationSettings_TranslationTrack)(nil),     // 35: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack
-	(*VideoTranslationSettings_InputTrack)(nil),           // 36: yandex.cloud.video.v1.VideoTranslationSettings.InputTrack
-	(*VideoTranslationSettings_SubtitleTrack)(nil),        // 37: yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrack
-	(*VideoTranslationSettings_AudioTrack)(nil),           // 38: yandex.cloud.video.v1.VideoTranslationSettings.AudioTrack
-	(*VideoSummarizationSettings_SummarizationTrack)(nil), // 39: yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack
-	(*VideoSummarizationSettings_InputTrack)(nil),         // 40: yandex.cloud.video.v1.VideoSummarizationSettings.InputTrack
-	(*Video)(nil),                                         // 41: yandex.cloud.video.v1.Video
-	(AutoTranscode)(0),                                    // 42: yandex.cloud.video.v1.AutoTranscode
-	(*wrapperspb.BoolValue)(nil),                          // 43: google.protobuf.BoolValue
-	(*fieldmaskpb.FieldMask)(nil),                         // 44: google.protobuf.FieldMask
-	(*durationpb.Duration)(nil),                           // 45: google.protobuf.Duration
-	(*Manifest)(nil),                                      // 46: yandex.cloud.video.v1.Manifest
-	(*operation.Operation)(nil),                           // 47: yandex.cloud.operation.Operation
+	(*VideoSpeechToTextSettings)(nil),                     // 15: yandex.cloud.video.v1.VideoSpeechToTextSettings
+	(*TranscodeVideoMetadata)(nil),                        // 16: yandex.cloud.video.v1.TranscodeVideoMetadata
+	(*DeleteVideoRequest)(nil),                            // 17: yandex.cloud.video.v1.DeleteVideoRequest
+	(*DeleteVideoMetadata)(nil),                           // 18: yandex.cloud.video.v1.DeleteVideoMetadata
+	(*BatchDeleteVideosRequest)(nil),                      // 19: yandex.cloud.video.v1.BatchDeleteVideosRequest
+	(*BatchDeleteVideosMetadata)(nil),                     // 20: yandex.cloud.video.v1.BatchDeleteVideosMetadata
+	(*PerformVideoActionRequest)(nil),                     // 21: yandex.cloud.video.v1.PerformVideoActionRequest
+	(*PublishVideoAction)(nil),                            // 22: yandex.cloud.video.v1.PublishVideoAction
+	(*UnpublishVideoAction)(nil),                          // 23: yandex.cloud.video.v1.UnpublishVideoAction
+	(*PerformVideoActionMetadata)(nil),                    // 24: yandex.cloud.video.v1.PerformVideoActionMetadata
+	(*GetVideoPlayerURLRequest)(nil),                      // 25: yandex.cloud.video.v1.GetVideoPlayerURLRequest
+	(*VideoPlayerParams)(nil),                             // 26: yandex.cloud.video.v1.VideoPlayerParams
+	(*GetVideoPlayerURLResponse)(nil),                     // 27: yandex.cloud.video.v1.GetVideoPlayerURLResponse
+	(*BatchGetVideoPlayerURLsRequest)(nil),                // 28: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest
+	(*BatchGetVideoPlayerURLsResponse)(nil),               // 29: yandex.cloud.video.v1.BatchGetVideoPlayerURLsResponse
+	(*GenerateVideoDownloadURLRequest)(nil),               // 30: yandex.cloud.video.v1.GenerateVideoDownloadURLRequest
+	(*GenerateVideoDownloadURLResponse)(nil),              // 31: yandex.cloud.video.v1.GenerateVideoDownloadURLResponse
+	(*GetVideoManifestsRequest)(nil),                      // 32: yandex.cloud.video.v1.GetVideoManifestsRequest
+	(*GetVideoManifestsResponse)(nil),                     // 33: yandex.cloud.video.v1.GetVideoManifestsResponse
+	(*GetVideoScreenshotsRequest)(nil),                    // 34: yandex.cloud.video.v1.GetVideoScreenshotsRequest
+	(*GetVideoScreenshotsResponse)(nil),                   // 35: yandex.cloud.video.v1.GetVideoScreenshotsResponse
+	(*BatchGetVideoScreenshotsRequest)(nil),               // 36: yandex.cloud.video.v1.BatchGetVideoScreenshotsRequest
+	(*BatchGetVideoScreenshotsResponse)(nil),              // 37: yandex.cloud.video.v1.BatchGetVideoScreenshotsResponse
+	(*VideoScreenshots)(nil),                              // 38: yandex.cloud.video.v1.VideoScreenshots
+	nil,                                                   // 39: yandex.cloud.video.v1.CreateVideoRequest.LabelsEntry
+	nil,                                                   // 40: yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntry
+	(*VideoTranslationSettings_TranslationTrack)(nil),     // 41: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack
+	(*VideoTranslationSettings_InputTrack)(nil),           // 42: yandex.cloud.video.v1.VideoTranslationSettings.InputTrack
+	(*VideoTranslationSettings_SubtitleTrack)(nil),        // 43: yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrack
+	(*VideoTranslationSettings_AudioTrack)(nil),           // 44: yandex.cloud.video.v1.VideoTranslationSettings.AudioTrack
+	(*VideoSummarizationSettings_SummarizationTrack)(nil), // 45: yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack
+	(*VideoSummarizationSettings_InputTrack)(nil),         // 46: yandex.cloud.video.v1.VideoSummarizationSettings.InputTrack
+	(*VideoSpeechToTextSettings_SpeechToTextTrack)(nil),   // 47: yandex.cloud.video.v1.VideoSpeechToTextSettings.SpeechToTextTrack
+	(*VideoSpeechToTextSettings_InputTrack)(nil),          // 48: yandex.cloud.video.v1.VideoSpeechToTextSettings.InputTrack
+	(*Video)(nil),                                         // 49: yandex.cloud.video.v1.Video
+	(AutoTranscode)(0),                                    // 50: yandex.cloud.video.v1.AutoTranscode
+	(*wrapperspb.BoolValue)(nil),                          // 51: google.protobuf.BoolValue
+	(*fieldmaskpb.FieldMask)(nil),                         // 52: google.protobuf.FieldMask
+	(*durationpb.Duration)(nil),                           // 53: google.protobuf.Duration
+	(*Manifest)(nil),                                      // 54: yandex.cloud.video.v1.Manifest
+	(*operation.Operation)(nil),                           // 55: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_video_v1_video_service_proto_depIdxs = []int32{
-	41, // 0: yandex.cloud.video.v1.ListVideoResponse.videos:type_name -> yandex.cloud.video.v1.Video
-	41, // 1: yandex.cloud.video.v1.BatchGetVideosResponse.videos:type_name -> yandex.cloud.video.v1.Video
-	6,  // 2: yandex.cloud.video.v1.CreateVideoRequest.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDParams
-	7,  // 3: yandex.cloud.video.v1.CreateVideoRequest.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessParams
-	8,  // 4: yandex.cloud.video.v1.CreateVideoRequest.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessParams
-	42, // 5: yandex.cloud.video.v1.CreateVideoRequest.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
-	43, // 6: yandex.cloud.video.v1.CreateVideoRequest.auto_publish:type_name -> google.protobuf.BoolValue
-	43, // 7: yandex.cloud.video.v1.CreateVideoRequest.enable_ad:type_name -> google.protobuf.BoolValue
-	33, // 8: yandex.cloud.video.v1.CreateVideoRequest.labels:type_name -> yandex.cloud.video.v1.CreateVideoRequest.LabelsEntry
-	7,  // 9: yandex.cloud.video.v1.UpdateVideoRequest.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessParams
-	8,  // 10: yandex.cloud.video.v1.UpdateVideoRequest.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessParams
-	44, // 11: yandex.cloud.video.v1.UpdateVideoRequest.field_mask:type_name -> google.protobuf.FieldMask
-	42, // 12: yandex.cloud.video.v1.UpdateVideoRequest.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
-	43, // 13: yandex.cloud.video.v1.UpdateVideoRequest.enable_ad:type_name -> google.protobuf.BoolValue
-	34, // 14: yandex.cloud.video.v1.UpdateVideoRequest.labels:type_name -> yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntry
-	44, // 15: yandex.cloud.video.v1.TranscodeVideoRequest.field_mask:type_name -> google.protobuf.FieldMask
+	49, // 0: yandex.cloud.video.v1.ListVideoResponse.videos:type_name -> yandex.cloud.video.v1.Video
+	49, // 1: yandex.cloud.video.v1.BatchGetVideosResponse.videos:type_name -> yandex.cloud.video.v1.Video
+	50, // 2: yandex.cloud.video.v1.CreateVideoRequest.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
+	51, // 3: yandex.cloud.video.v1.CreateVideoRequest.auto_publish:type_name -> google.protobuf.BoolValue
+	51, // 4: yandex.cloud.video.v1.CreateVideoRequest.enable_ad:type_name -> google.protobuf.BoolValue
+	39, // 5: yandex.cloud.video.v1.CreateVideoRequest.labels:type_name -> yandex.cloud.video.v1.CreateVideoRequest.LabelsEntry
+	6,  // 6: yandex.cloud.video.v1.CreateVideoRequest.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDParams
+	7,  // 7: yandex.cloud.video.v1.CreateVideoRequest.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessParams
+	8,  // 8: yandex.cloud.video.v1.CreateVideoRequest.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessParams
+	52, // 9: yandex.cloud.video.v1.UpdateVideoRequest.field_mask:type_name -> google.protobuf.FieldMask
+	50, // 10: yandex.cloud.video.v1.UpdateVideoRequest.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
+	51, // 11: yandex.cloud.video.v1.UpdateVideoRequest.enable_ad:type_name -> google.protobuf.BoolValue
+	40, // 12: yandex.cloud.video.v1.UpdateVideoRequest.labels:type_name -> yandex.cloud.video.v1.UpdateVideoRequest.LabelsEntry
+	7,  // 13: yandex.cloud.video.v1.UpdateVideoRequest.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessParams
+	8,  // 14: yandex.cloud.video.v1.UpdateVideoRequest.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessParams
+	52, // 15: yandex.cloud.video.v1.TranscodeVideoRequest.field_mask:type_name -> google.protobuf.FieldMask
 	13, // 16: yandex.cloud.video.v1.TranscodeVideoRequest.translation_settings:type_name -> yandex.cloud.video.v1.VideoTranslationSettings
 	14, // 17: yandex.cloud.video.v1.TranscodeVideoRequest.summarization_settings:type_name -> yandex.cloud.video.v1.VideoSummarizationSettings
-	35, // 18: yandex.cloud.video.v1.VideoTranslationSettings.tracks:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack
-	39, // 19: yandex.cloud.video.v1.VideoSummarizationSettings.tracks:type_name -> yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack
-	21, // 20: yandex.cloud.video.v1.PerformVideoActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishVideoAction
-	22, // 21: yandex.cloud.video.v1.PerformVideoActionRequest.unpublish:type_name -> yandex.cloud.video.v1.UnpublishVideoAction
-	25, // 22: yandex.cloud.video.v1.GetVideoPlayerURLRequest.params:type_name -> yandex.cloud.video.v1.VideoPlayerParams
-	45, // 23: yandex.cloud.video.v1.GetVideoPlayerURLRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
-	25, // 24: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest.params:type_name -> yandex.cloud.video.v1.VideoPlayerParams
-	45, // 25: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
-	46, // 26: yandex.cloud.video.v1.GetVideoManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
-	36, // 27: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.input_track:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.InputTrack
-	37, // 28: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.subtitles:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrack
-	38, // 29: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.audio:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.AudioTrack
-	40, // 30: yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack.input_track:type_name -> yandex.cloud.video.v1.VideoSummarizationSettings.InputTrack
-	0,  // 31: yandex.cloud.video.v1.VideoService.Get:input_type -> yandex.cloud.video.v1.GetVideoRequest
-	1,  // 32: yandex.cloud.video.v1.VideoService.List:input_type -> yandex.cloud.video.v1.ListVideoRequest
-	3,  // 33: yandex.cloud.video.v1.VideoService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetVideosRequest
-	5,  // 34: yandex.cloud.video.v1.VideoService.Create:input_type -> yandex.cloud.video.v1.CreateVideoRequest
-	10, // 35: yandex.cloud.video.v1.VideoService.Update:input_type -> yandex.cloud.video.v1.UpdateVideoRequest
-	12, // 36: yandex.cloud.video.v1.VideoService.Transcode:input_type -> yandex.cloud.video.v1.TranscodeVideoRequest
-	16, // 37: yandex.cloud.video.v1.VideoService.Delete:input_type -> yandex.cloud.video.v1.DeleteVideoRequest
-	18, // 38: yandex.cloud.video.v1.VideoService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteVideosRequest
-	20, // 39: yandex.cloud.video.v1.VideoService.PerformAction:input_type -> yandex.cloud.video.v1.PerformVideoActionRequest
-	24, // 40: yandex.cloud.video.v1.VideoService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetVideoPlayerURLRequest
-	27, // 41: yandex.cloud.video.v1.VideoService.BatchGetPlayerURLs:input_type -> yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest
-	31, // 42: yandex.cloud.video.v1.VideoService.GetManifests:input_type -> yandex.cloud.video.v1.GetVideoManifestsRequest
-	29, // 43: yandex.cloud.video.v1.VideoService.GenerateDownloadURL:input_type -> yandex.cloud.video.v1.GenerateVideoDownloadURLRequest
-	41, // 44: yandex.cloud.video.v1.VideoService.Get:output_type -> yandex.cloud.video.v1.Video
-	2,  // 45: yandex.cloud.video.v1.VideoService.List:output_type -> yandex.cloud.video.v1.ListVideoResponse
-	4,  // 46: yandex.cloud.video.v1.VideoService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetVideosResponse
-	47, // 47: yandex.cloud.video.v1.VideoService.Create:output_type -> yandex.cloud.operation.Operation
-	47, // 48: yandex.cloud.video.v1.VideoService.Update:output_type -> yandex.cloud.operation.Operation
-	47, // 49: yandex.cloud.video.v1.VideoService.Transcode:output_type -> yandex.cloud.operation.Operation
-	47, // 50: yandex.cloud.video.v1.VideoService.Delete:output_type -> yandex.cloud.operation.Operation
-	47, // 51: yandex.cloud.video.v1.VideoService.BatchDelete:output_type -> yandex.cloud.operation.Operation
-	47, // 52: yandex.cloud.video.v1.VideoService.PerformAction:output_type -> yandex.cloud.operation.Operation
-	26, // 53: yandex.cloud.video.v1.VideoService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetVideoPlayerURLResponse
-	28, // 54: yandex.cloud.video.v1.VideoService.BatchGetPlayerURLs:output_type -> yandex.cloud.video.v1.BatchGetVideoPlayerURLsResponse
-	32, // 55: yandex.cloud.video.v1.VideoService.GetManifests:output_type -> yandex.cloud.video.v1.GetVideoManifestsResponse
-	30, // 56: yandex.cloud.video.v1.VideoService.GenerateDownloadURL:output_type -> yandex.cloud.video.v1.GenerateVideoDownloadURLResponse
-	44, // [44:57] is the sub-list for method output_type
-	31, // [31:44] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	15, // 18: yandex.cloud.video.v1.TranscodeVideoRequest.speech_to_text_settings:type_name -> yandex.cloud.video.v1.VideoSpeechToTextSettings
+	41, // 19: yandex.cloud.video.v1.VideoTranslationSettings.tracks:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack
+	45, // 20: yandex.cloud.video.v1.VideoSummarizationSettings.tracks:type_name -> yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack
+	47, // 21: yandex.cloud.video.v1.VideoSpeechToTextSettings.tracks:type_name -> yandex.cloud.video.v1.VideoSpeechToTextSettings.SpeechToTextTrack
+	22, // 22: yandex.cloud.video.v1.PerformVideoActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishVideoAction
+	23, // 23: yandex.cloud.video.v1.PerformVideoActionRequest.unpublish:type_name -> yandex.cloud.video.v1.UnpublishVideoAction
+	26, // 24: yandex.cloud.video.v1.GetVideoPlayerURLRequest.params:type_name -> yandex.cloud.video.v1.VideoPlayerParams
+	53, // 25: yandex.cloud.video.v1.GetVideoPlayerURLRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
+	26, // 26: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest.params:type_name -> yandex.cloud.video.v1.VideoPlayerParams
+	53, // 27: yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest.signed_url_expiration_duration:type_name -> google.protobuf.Duration
+	54, // 28: yandex.cloud.video.v1.GetVideoManifestsResponse.manifests:type_name -> yandex.cloud.video.v1.Manifest
+	38, // 29: yandex.cloud.video.v1.BatchGetVideoScreenshotsResponse.video_screenshots:type_name -> yandex.cloud.video.v1.VideoScreenshots
+	42, // 30: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.input_track:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.InputTrack
+	43, // 31: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.subtitles:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.SubtitleTrack
+	44, // 32: yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrack.audio:type_name -> yandex.cloud.video.v1.VideoTranslationSettings.AudioTrack
+	46, // 33: yandex.cloud.video.v1.VideoSummarizationSettings.SummarizationTrack.input_track:type_name -> yandex.cloud.video.v1.VideoSummarizationSettings.InputTrack
+	48, // 34: yandex.cloud.video.v1.VideoSpeechToTextSettings.SpeechToTextTrack.input_track:type_name -> yandex.cloud.video.v1.VideoSpeechToTextSettings.InputTrack
+	0,  // 35: yandex.cloud.video.v1.VideoService.Get:input_type -> yandex.cloud.video.v1.GetVideoRequest
+	1,  // 36: yandex.cloud.video.v1.VideoService.List:input_type -> yandex.cloud.video.v1.ListVideoRequest
+	3,  // 37: yandex.cloud.video.v1.VideoService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetVideosRequest
+	5,  // 38: yandex.cloud.video.v1.VideoService.Create:input_type -> yandex.cloud.video.v1.CreateVideoRequest
+	10, // 39: yandex.cloud.video.v1.VideoService.Update:input_type -> yandex.cloud.video.v1.UpdateVideoRequest
+	12, // 40: yandex.cloud.video.v1.VideoService.Transcode:input_type -> yandex.cloud.video.v1.TranscodeVideoRequest
+	17, // 41: yandex.cloud.video.v1.VideoService.Delete:input_type -> yandex.cloud.video.v1.DeleteVideoRequest
+	19, // 42: yandex.cloud.video.v1.VideoService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteVideosRequest
+	21, // 43: yandex.cloud.video.v1.VideoService.PerformAction:input_type -> yandex.cloud.video.v1.PerformVideoActionRequest
+	25, // 44: yandex.cloud.video.v1.VideoService.GetPlayerURL:input_type -> yandex.cloud.video.v1.GetVideoPlayerURLRequest
+	28, // 45: yandex.cloud.video.v1.VideoService.BatchGetPlayerURLs:input_type -> yandex.cloud.video.v1.BatchGetVideoPlayerURLsRequest
+	32, // 46: yandex.cloud.video.v1.VideoService.GetManifests:input_type -> yandex.cloud.video.v1.GetVideoManifestsRequest
+	30, // 47: yandex.cloud.video.v1.VideoService.GenerateDownloadURL:input_type -> yandex.cloud.video.v1.GenerateVideoDownloadURLRequest
+	34, // 48: yandex.cloud.video.v1.VideoService.GetScreenshots:input_type -> yandex.cloud.video.v1.GetVideoScreenshotsRequest
+	36, // 49: yandex.cloud.video.v1.VideoService.BatchGetScreenshots:input_type -> yandex.cloud.video.v1.BatchGetVideoScreenshotsRequest
+	49, // 50: yandex.cloud.video.v1.VideoService.Get:output_type -> yandex.cloud.video.v1.Video
+	2,  // 51: yandex.cloud.video.v1.VideoService.List:output_type -> yandex.cloud.video.v1.ListVideoResponse
+	4,  // 52: yandex.cloud.video.v1.VideoService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetVideosResponse
+	55, // 53: yandex.cloud.video.v1.VideoService.Create:output_type -> yandex.cloud.operation.Operation
+	55, // 54: yandex.cloud.video.v1.VideoService.Update:output_type -> yandex.cloud.operation.Operation
+	55, // 55: yandex.cloud.video.v1.VideoService.Transcode:output_type -> yandex.cloud.operation.Operation
+	55, // 56: yandex.cloud.video.v1.VideoService.Delete:output_type -> yandex.cloud.operation.Operation
+	55, // 57: yandex.cloud.video.v1.VideoService.BatchDelete:output_type -> yandex.cloud.operation.Operation
+	55, // 58: yandex.cloud.video.v1.VideoService.PerformAction:output_type -> yandex.cloud.operation.Operation
+	27, // 59: yandex.cloud.video.v1.VideoService.GetPlayerURL:output_type -> yandex.cloud.video.v1.GetVideoPlayerURLResponse
+	29, // 60: yandex.cloud.video.v1.VideoService.BatchGetPlayerURLs:output_type -> yandex.cloud.video.v1.BatchGetVideoPlayerURLsResponse
+	33, // 61: yandex.cloud.video.v1.VideoService.GetManifests:output_type -> yandex.cloud.video.v1.GetVideoManifestsResponse
+	31, // 62: yandex.cloud.video.v1.VideoService.GenerateDownloadURL:output_type -> yandex.cloud.video.v1.GenerateVideoDownloadURLResponse
+	35, // 63: yandex.cloud.video.v1.VideoService.GetScreenshots:output_type -> yandex.cloud.video.v1.GetVideoScreenshotsResponse
+	37, // 64: yandex.cloud.video.v1.VideoService.BatchGetScreenshots:output_type -> yandex.cloud.video.v1.BatchGetVideoScreenshotsResponse
+	50, // [50:65] is the sub-list for method output_type
+	35, // [35:50] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_video_service_proto_init() }
@@ -2721,7 +3194,7 @@ func file_yandex_cloud_video_v1_video_service_proto_init() {
 		(*UpdateVideoRequest_PublicAccess)(nil),
 		(*UpdateVideoRequest_SignUrlAccess)(nil),
 	}
-	file_yandex_cloud_video_v1_video_service_proto_msgTypes[20].OneofWrappers = []any{
+	file_yandex_cloud_video_v1_video_service_proto_msgTypes[21].OneofWrappers = []any{
 		(*PerformVideoActionRequest_Publish)(nil),
 		(*PerformVideoActionRequest_Unpublish)(nil),
 	}
@@ -2731,7 +3204,7 @@ func file_yandex_cloud_video_v1_video_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_video_service_proto_rawDesc), len(file_yandex_cloud_video_v1_video_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   41,
+			NumMessages:   49,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

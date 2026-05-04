@@ -30,14 +30,14 @@ func (m *DesktopImage) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *DesktopImage) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *DesktopImage) SetStorageSize(v int64) {
 	m.StorageSize = v
 }
 
 func (m *DesktopImage) SetMinDiskSize(v int64) {
 	m.MinDiskSize = v
-}
-
-func (m *DesktopImage) SetDescription(v string) {
-	m.Description = v
 }

@@ -203,12 +203,56 @@ func (m *WafProfileExclusionRule) SetLogExcluded(v bool) {
 	m.LogExcluded = v
 }
 
+func (m *WafProfileExclusionRule) SetRequestCondition(v *WafProfileExclusionRule_RequestCondition) {
+	m.RequestCondition = v
+}
+
 func (m *WafProfileExclusionRule_ExcludeRules) SetExcludeAll(v bool) {
 	m.ExcludeAll = v
 }
 
 func (m *WafProfileExclusionRule_ExcludeRules) SetRuleIds(v []string) {
 	m.RuleIds = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition) SetParamMatcher(v *WafProfileExclusionRule_RequestCondition_RequestParamMatcher) {
+	m.ParamMatcher = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition) SetHeaderMatcher(v *WafProfileExclusionRule_RequestCondition_HeaderMatcher) {
+	m.HeaderMatcher = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition) SetCookieMatcher(v *WafProfileExclusionRule_RequestCondition_CookieMatcher) {
+	m.CookieMatcher = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition) SetBodyMatcher(v *WafProfileExclusionRule_RequestCondition_BodyMatcher) {
+	m.BodyMatcher = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_StringMatcher) SetValue(v string) {
+	m.Value = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_StringMatcher) SetCaseSensitive(v bool) {
+	m.CaseSensitive = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_RequestParamMatcher) SetParamNames(v []*WafProfileExclusionRule_RequestCondition_StringMatcher) {
+	m.ParamNames = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_HeaderMatcher) SetHeaderNames(v []*WafProfileExclusionRule_RequestCondition_StringMatcher) {
+	m.HeaderNames = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_CookieMatcher) SetCookieNames(v []*WafProfileExclusionRule_RequestCondition_StringMatcher) {
+	m.CookieNames = v
+}
+
+func (m *WafProfileExclusionRule_RequestCondition_BodyMatcher) SetBodyValues(v []*WafProfileExclusionRule_RequestCondition_StringMatcher) {
+	m.BodyValues = v
 }
 
 func (m *RuleSet) SetName(v string) {

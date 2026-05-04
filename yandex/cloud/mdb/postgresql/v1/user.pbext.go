@@ -3,6 +3,7 @@
 package postgresql
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -44,6 +45,10 @@ func (m *User) SetUserPasswordEncryption(v UserPasswordEncryption) {
 
 func (m *User) SetConnectionManager(v *ConnectionManager) {
 	m.ConnectionManager = v
+}
+
+func (m *User) SetUserConnectionManager(v *v1.UserConnectionManager) {
+	m.UserConnectionManager = v
 }
 
 func (m *User) SetAuthMethod(v AuthMethod) {
@@ -100,6 +105,10 @@ func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
 
 func (m *UserSpec) SetAuthMethod(v AuthMethod) {
 	m.AuthMethod = v
+}
+
+func (m *UserSpec) SetUserConnectionManager(v *v1.UserConnectionManager) {
+	m.UserConnectionManager = v
 }
 
 func (m *PGAuditSettings) SetLog(v []PGAuditSettings_PGAuditSettingsLog) {

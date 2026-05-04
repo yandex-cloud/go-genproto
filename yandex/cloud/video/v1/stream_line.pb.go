@@ -22,7 +22,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Enum representing the status of an automatic stream line.
+// Status of an automatic stream line.
 // Indicates whether the automatic line is active or deactivated.
 type AutoLine_AutoLineStatus int32
 
@@ -79,6 +79,12 @@ func (AutoLine_AutoLineStatus) EnumDescriptor() ([]byte, []int) {
 // Entity representing the incoming video signal settings.
 type StreamLine struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the line.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// ID of the channel to which this stream line belongs.
+	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	// Title of the stream line.
+	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	// Specifies the input type and settings for the video signal source.
 	//
 	// Types that are valid to be assigned to InputType:
@@ -94,12 +100,6 @@ type StreamLine struct {
 	//	*StreamLine_ManualLine
 	//	*StreamLine_AutoLine
 	LineType isStreamLine_LineType `protobuf_oneof:"line_type"`
-	// ID of the line.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the channel to which this stream line belongs.
-	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// Title of the stream line.
-	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
 	// Timestamp when the stream line was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the stream line or its metadata.
@@ -140,6 +140,27 @@ func (x *StreamLine) ProtoReflect() protoreflect.Message {
 // Deprecated: Use StreamLine.ProtoReflect.Descriptor instead.
 func (*StreamLine) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *StreamLine) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *StreamLine) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *StreamLine) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
 }
 
 func (x *StreamLine) GetInputType() isStreamLine_InputType {
@@ -199,27 +220,6 @@ func (x *StreamLine) GetAutoLine() *AutoLine {
 		}
 	}
 	return nil
-}
-
-func (x *StreamLine) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *StreamLine) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
-	}
-	return ""
-}
-
-func (x *StreamLine) GetTitle() string {
-	if x != nil {
-		return x.Title
-	}
-	return ""
 }
 
 func (x *StreamLine) GetCreatedAt() *timestamppb.Timestamp {
@@ -566,17 +566,17 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\n" +
 	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe1\x05\n" +
 	"\n" +
-	"StreamLine\x12D\n" +
+	"StreamLine\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12D\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.RTMPPushInputH\x00R\brtmpPush\x12D\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2$.yandex.cloud.video.v1.RTMPPullInputH\x00R\brtmpPull\x12A\n" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2#.yandex.cloud.video.v1.SRTPullInputH\x00R\asrtPull\x12E\n" +
 	"\vmanual_line\x18\xd0\x0f \x01(\v2!.yandex.cloud.video.v1.ManualLineH\x01R\n" +
 	"manualLine\x12?\n" +
-	"\tauto_line\x18\xd1\x0f \x01(\v2\x1f.yandex.cloud.video.v1.AutoLineH\x01R\bautoLine\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
-	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x129\n" +
+	"\tauto_line\x18\xd1\x0f \x01(\v2\x1f.yandex.cloud.video.v1.AutoLineH\x01R\bautoLine\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +

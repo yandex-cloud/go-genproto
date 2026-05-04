@@ -42,10 +42,6 @@ func (m *CopyDesktopImageRequest) SetName(v string) {
 	m.Name = v
 }
 
-func (m *CopyDesktopImageRequest) SetImageId(v string) {
-	m.ImageId = v
-}
-
 func (m *CopyDesktopImageRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -54,12 +50,44 @@ func (m *CopyDesktopImageRequest) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *UpdateDesktopImageRequest) SetImageId(v string) {
+func (m *CopyDesktopImageRequest) SetImageId(v string) {
+	m.ImageId = v
+}
+
+func (m *CopyFromDesktopRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CopyFromDesktopRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *CopyFromDesktopRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *CopyFromDesktopRequest) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *CopyFromDesktopRequest) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *CopyDesktopImageMetadata) SetImageId(v string) {
+	m.ImageId = v
+}
+
+func (m *CopyFromDesktopMetadata) SetImageId(v string) {
 	m.ImageId = v
 }
 
 func (m *UpdateDesktopImageRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
+}
+
+func (m *UpdateDesktopImageRequest) SetImageId(v string) {
+	m.ImageId = v
 }
 
 func (m *UpdateDesktopImageRequest) SetName(v string) {
@@ -74,31 +102,7 @@ func (m *UpdateDesktopImageRequest) SetDescription(v string) {
 	m.Description = v
 }
 
-func (m *CopyFromDesktopRequest) SetFolderId(v string) {
-	m.FolderId = v
-}
-
-func (m *CopyFromDesktopRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *CopyFromDesktopRequest) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *CopyFromDesktopRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
-func (m *CopyFromDesktopRequest) SetDescription(v string) {
-	m.Description = v
-}
-
-func (m *CopyDesktopImageMetadata) SetImageId(v string) {
-	m.ImageId = v
-}
-
-func (m *CopyFromDesktopMetadata) SetImageId(v string) {
+func (m *UpdateDesktopImageMetadata) SetImageId(v string) {
 	m.ImageId = v
 }
 
@@ -111,9 +115,5 @@ func (m *DeleteDesktopImageMetadata) SetImageId(v string) {
 }
 
 func (m *GetDesktopImageRequest) SetImageId(v string) {
-	m.ImageId = v
-}
-
-func (m *UpdateDesktopImageMetadata) SetImageId(v string) {
 	m.ImageId = v
 }

@@ -656,7 +656,7 @@ var File_yandex_cloud_searchapi_v2_search_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_searchapi_v2_search_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/searchapi/v2/search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"\xcf\x02\n" +
+	".yandex/cloud/searchapi/v2/search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x02\n" +
 	"\bSortSpec\x12I\n" +
 	"\tsort_mode\x18\x01 \x01(\x0e2,.yandex.cloud.searchapi.v2.SortSpec.SortModeR\bsortMode\x12L\n" +
 	"\n" +

@@ -80,13 +80,6 @@ func (Episode_VisibilityStatus) EnumDescriptor() ([]byte, []int) {
 // and provide a way to reference specific portions of the corresponding content.
 type Episode struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the episode access permission settings.
-	//
-	// Types that are valid to be assigned to AccessRights:
-	//
-	//	*Episode_PublicAccess
-	//	*Episode_SignUrlAccess
-	AccessRights isEpisode_AccessRights `protobuf_oneof:"access_rights"`
 	// Unique identifier of the episode.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Identifier of the stream this episode is linked to.
@@ -115,6 +108,13 @@ type Episode struct {
 	VisibilityStatus Episode_VisibilityStatus `protobuf:"varint,10,opt,name=visibility_status,json=visibilityStatus,proto3,enum=yandex.cloud.video.v1.Episode_VisibilityStatus" json:"visibility_status,omitempty"`
 	// Identifier of the style preset used in the player during episode playback.
 	StylePresetId string `protobuf:"bytes,12,opt,name=style_preset_id,json=stylePresetId,proto3" json:"style_preset_id,omitempty"`
+	// Specifies the episode access permission settings.
+	//
+	// Types that are valid to be assigned to AccessRights:
+	//
+	//	*Episode_PublicAccess
+	//	*Episode_SignUrlAccess
+	AccessRights isEpisode_AccessRights `protobuf_oneof:"access_rights"`
 	// Timestamp when the episode was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the episode or its metadata.
@@ -151,31 +151,6 @@ func (x *Episode) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Episode.ProtoReflect.Descriptor instead.
 func (*Episode) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_episode_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Episode) GetAccessRights() isEpisode_AccessRights {
-	if x != nil {
-		return x.AccessRights
-	}
-	return nil
-}
-
-func (x *Episode) GetPublicAccess() *EpisodePublicAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Episode_PublicAccess); ok {
-			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *Episode) GetSignUrlAccess() *EpisodeSignURLAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Episode_SignUrlAccess); ok {
-			return x.SignUrlAccess
-		}
-	}
-	return nil
 }
 
 func (x *Episode) GetId() string {
@@ -253,6 +228,31 @@ func (x *Episode) GetStylePresetId() string {
 		return x.StylePresetId
 	}
 	return ""
+}
+
+func (x *Episode) GetAccessRights() isEpisode_AccessRights {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
+func (x *Episode) GetPublicAccess() *EpisodePublicAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Episode_PublicAccess); ok {
+			return x.PublicAccess
+		}
+	}
+	return nil
+}
+
+func (x *Episode) GetSignUrlAccess() *EpisodeSignURLAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Episode_SignUrlAccess); ok {
+			return x.SignUrlAccess
+		}
+	}
+	return nil
 }
 
 func (x *Episode) GetCreatedAt() *timestamppb.Timestamp {
@@ -369,9 +369,7 @@ var File_yandex_cloud_video_v1_episode_proto protoreflect.FileDescriptor
 const file_yandex_cloud_video_v1_episode_proto_rawDesc = "" +
 	"\n" +
 	"#yandex/cloud/video/v1/episode.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfa\x06\n" +
-	"\aEpisode\x12X\n" +
-	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessRightsH\x00R\fpublicAccess\x12\\\n" +
-	"\x0fsign_url_access\x18\xeb\a \x01(\v21.yandex.cloud.video.v1.EpisodeSignURLAccessRightsH\x00R\rsignUrlAccess\x12\x0e\n" +
+	"\aEpisode\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tstream_id\x18\x02 \x01(\tR\bstreamId\x12\x17\n" +
 	"\aline_id\x18\x03 \x01(\tR\x06lineId\x12\x14\n" +
@@ -386,7 +384,9 @@ const file_yandex_cloud_video_v1_episode_proto_rawDesc = "" +
 	"dvrSeconds\x12\\\n" +
 	"\x11visibility_status\x18\n" +
 	" \x01(\x0e2/.yandex.cloud.video.v1.Episode.VisibilityStatusR\x10visibilityStatus\x12&\n" +
-	"\x0fstyle_preset_id\x18\f \x01(\tR\rstylePresetId\x129\n" +
+	"\x0fstyle_preset_id\x18\f \x01(\tR\rstylePresetId\x12X\n" +
+	"\rpublic_access\x18\xe8\a \x01(\v20.yandex.cloud.video.v1.EpisodePublicAccessRightsH\x00R\fpublicAccess\x12\\\n" +
+	"\x0fsign_url_access\x18\xeb\a \x01(\v21.yandex.cloud.video.v1.EpisodeSignURLAccessRightsH\x00R\rsignUrlAccess\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -422,11 +422,11 @@ var file_yandex_cloud_video_v1_episode_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),      // 4: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_episode_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.video.v1.Episode.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessRights
-	3, // 1: yandex.cloud.video.v1.Episode.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessRights
-	4, // 2: yandex.cloud.video.v1.Episode.start_time:type_name -> google.protobuf.Timestamp
-	4, // 3: yandex.cloud.video.v1.Episode.finish_time:type_name -> google.protobuf.Timestamp
-	0, // 4: yandex.cloud.video.v1.Episode.visibility_status:type_name -> yandex.cloud.video.v1.Episode.VisibilityStatus
+	4, // 0: yandex.cloud.video.v1.Episode.start_time:type_name -> google.protobuf.Timestamp
+	4, // 1: yandex.cloud.video.v1.Episode.finish_time:type_name -> google.protobuf.Timestamp
+	0, // 2: yandex.cloud.video.v1.Episode.visibility_status:type_name -> yandex.cloud.video.v1.Episode.VisibilityStatus
+	2, // 3: yandex.cloud.video.v1.Episode.public_access:type_name -> yandex.cloud.video.v1.EpisodePublicAccessRights
+	3, // 4: yandex.cloud.video.v1.Episode.sign_url_access:type_name -> yandex.cloud.video.v1.EpisodeSignURLAccessRights
 	4, // 5: yandex.cloud.video.v1.Episode.created_at:type_name -> google.protobuf.Timestamp
 	4, // 6: yandex.cloud.video.v1.Episode.updated_at:type_name -> google.protobuf.Timestamp
 	7, // [7:7] is the sub-list for method output_type

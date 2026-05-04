@@ -182,12 +182,12 @@ type CopyDesktopImageRequest struct {
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the image.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the compute image to copy the image from.
-	ImageId string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// Desktop image labels.
 	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Desktop image description.
-	Description   string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
+	Description string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the compute image to copy the image from.
+	ImageId       string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -236,13 +236,6 @@ func (x *CopyDesktopImageRequest) GetName() string {
 	return ""
 }
 
-func (x *CopyDesktopImageRequest) GetImageId() string {
-	if x != nil {
-		return x.ImageId
-	}
-	return ""
-}
-
 func (x *CopyDesktopImageRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
@@ -257,12 +250,190 @@ func (x *CopyDesktopImageRequest) GetDescription() string {
 	return ""
 }
 
+func (x *CopyDesktopImageRequest) GetImageId() string {
+	if x != nil {
+		return x.ImageId
+	}
+	return ""
+}
+
+type CopyFromDesktopRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to copy the image to.
+	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Name of the image.
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// Desktop image labels.
+	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Desktop image description.
+	Description string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
+	// ID of the desktop to copy the image from.
+	DesktopId     string `protobuf:"bytes,8,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CopyFromDesktopRequest) Reset() {
+	*x = CopyFromDesktopRequest{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CopyFromDesktopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyFromDesktopRequest) ProtoMessage() {}
+
+func (x *CopyFromDesktopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyFromDesktopRequest.ProtoReflect.Descriptor instead.
+func (*CopyFromDesktopRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CopyFromDesktopRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *CopyFromDesktopRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CopyFromDesktopRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *CopyFromDesktopRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CopyFromDesktopRequest) GetDesktopId() string {
+	if x != nil {
+		return x.DesktopId
+	}
+	return ""
+}
+
+type CopyDesktopImageMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the new image.
+	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CopyDesktopImageMetadata) Reset() {
+	*x = CopyDesktopImageMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CopyDesktopImageMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyDesktopImageMetadata) ProtoMessage() {}
+
+func (x *CopyDesktopImageMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyDesktopImageMetadata.ProtoReflect.Descriptor instead.
+func (*CopyDesktopImageMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CopyDesktopImageMetadata) GetImageId() string {
+	if x != nil {
+		return x.ImageId
+	}
+	return ""
+}
+
+type CopyFromDesktopMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the new image.
+	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CopyFromDesktopMetadata) Reset() {
+	*x = CopyFromDesktopMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CopyFromDesktopMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CopyFromDesktopMetadata) ProtoMessage() {}
+
+func (x *CopyFromDesktopMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CopyFromDesktopMetadata.ProtoReflect.Descriptor instead.
+func (*CopyFromDesktopMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CopyFromDesktopMetadata) GetImageId() string {
+	if x != nil {
+		return x.ImageId
+	}
+	return ""
+}
+
 type UpdateDesktopImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Id of image to update.
-	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// Mask of fields that need to be update.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Id of image to update.
+	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// New desktop image name.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New desktop image labels.
@@ -275,7 +446,7 @@ type UpdateDesktopImageRequest struct {
 
 func (x *UpdateDesktopImageRequest) Reset() {
 	*x = UpdateDesktopImageRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -287,7 +458,7 @@ func (x *UpdateDesktopImageRequest) String() string {
 func (*UpdateDesktopImageRequest) ProtoMessage() {}
 
 func (x *UpdateDesktopImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -300,14 +471,7 @@ func (x *UpdateDesktopImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDesktopImageRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDesktopImageRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *UpdateDesktopImageRequest) GetImageId() string {
-	if x != nil {
-		return x.ImageId
-	}
-	return ""
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateDesktopImageRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
@@ -315,6 +479,13 @@ func (x *UpdateDesktopImageRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 		return x.UpdateMask
 	}
 	return nil
+}
+
+func (x *UpdateDesktopImageRequest) GetImageId() string {
+	if x != nil {
+		return x.ImageId
+	}
+	return ""
 }
 
 func (x *UpdateDesktopImageRequest) GetName() string {
@@ -338,110 +509,29 @@ func (x *UpdateDesktopImageRequest) GetDescription() string {
 	return ""
 }
 
-type CopyFromDesktopRequest struct {
+type UpdateDesktopImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to copy the image to.
-	FolderId string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the image.
-	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the desktop to copy the image from.
-	DesktopId string `protobuf:"bytes,8,opt,name=desktop_id,json=desktopId,proto3" json:"desktop_id,omitempty"`
-	// Desktop image labels.
-	Labels map[string]string `protobuf:"bytes,9,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Desktop image description.
-	Description   string `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CopyFromDesktopRequest) Reset() {
-	*x = CopyFromDesktopRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CopyFromDesktopRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CopyFromDesktopRequest) ProtoMessage() {}
-
-func (x *CopyFromDesktopRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CopyFromDesktopRequest.ProtoReflect.Descriptor instead.
-func (*CopyFromDesktopRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CopyFromDesktopRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *CopyFromDesktopRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CopyFromDesktopRequest) GetDesktopId() string {
-	if x != nil {
-		return x.DesktopId
-	}
-	return ""
-}
-
-func (x *CopyFromDesktopRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *CopyFromDesktopRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-type CopyDesktopImageMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the new image.
+	// ID of the image to update.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CopyDesktopImageMetadata) Reset() {
-	*x = CopyDesktopImageMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[5]
+func (x *UpdateDesktopImageMetadata) Reset() {
+	*x = UpdateDesktopImageMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CopyDesktopImageMetadata) String() string {
+func (x *UpdateDesktopImageMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CopyDesktopImageMetadata) ProtoMessage() {}
+func (*UpdateDesktopImageMetadata) ProtoMessage() {}
 
-func (x *CopyDesktopImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[5]
+func (x *UpdateDesktopImageMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,57 +542,12 @@ func (x *CopyDesktopImageMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyDesktopImageMetadata.ProtoReflect.Descriptor instead.
-func (*CopyDesktopImageMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{5}
+// Deprecated: Use UpdateDesktopImageMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateDesktopImageMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CopyDesktopImageMetadata) GetImageId() string {
-	if x != nil {
-		return x.ImageId
-	}
-	return ""
-}
-
-type CopyFromDesktopMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the new image.
-	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CopyFromDesktopMetadata) Reset() {
-	*x = CopyFromDesktopMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CopyFromDesktopMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CopyFromDesktopMetadata) ProtoMessage() {}
-
-func (x *CopyFromDesktopMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CopyFromDesktopMetadata.ProtoReflect.Descriptor instead.
-func (*CopyFromDesktopMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *CopyFromDesktopMetadata) GetImageId() string {
+func (x *UpdateDesktopImageMetadata) GetImageId() string {
 	if x != nil {
 		return x.ImageId
 	}
@@ -519,7 +564,7 @@ type DeleteDesktopImageRequest struct {
 
 func (x *DeleteDesktopImageRequest) Reset() {
 	*x = DeleteDesktopImageRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -531,7 +576,7 @@ func (x *DeleteDesktopImageRequest) String() string {
 func (*DeleteDesktopImageRequest) ProtoMessage() {}
 
 func (x *DeleteDesktopImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -544,7 +589,7 @@ func (x *DeleteDesktopImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDesktopImageRequest.ProtoReflect.Descriptor instead.
 func (*DeleteDesktopImageRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteDesktopImageRequest) GetImageId() string {
@@ -564,7 +609,7 @@ type DeleteDesktopImageMetadata struct {
 
 func (x *DeleteDesktopImageMetadata) Reset() {
 	*x = DeleteDesktopImageMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -576,7 +621,7 @@ func (x *DeleteDesktopImageMetadata) String() string {
 func (*DeleteDesktopImageMetadata) ProtoMessage() {}
 
 func (x *DeleteDesktopImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -589,7 +634,7 @@ func (x *DeleteDesktopImageMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDesktopImageMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteDesktopImageMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteDesktopImageMetadata) GetImageId() string {
@@ -609,7 +654,7 @@ type GetDesktopImageRequest struct {
 
 func (x *GetDesktopImageRequest) Reset() {
 	*x = GetDesktopImageRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -621,7 +666,7 @@ func (x *GetDesktopImageRequest) String() string {
 func (*GetDesktopImageRequest) ProtoMessage() {}
 
 func (x *GetDesktopImageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -634,55 +679,10 @@ func (x *GetDesktopImageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDesktopImageRequest.ProtoReflect.Descriptor instead.
 func (*GetDesktopImageRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *GetDesktopImageRequest) GetImageId() string {
-	if x != nil {
-		return x.ImageId
-	}
-	return ""
-}
-
-type UpdateDesktopImageMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the image to update.
-	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateDesktopImageMetadata) Reset() {
-	*x = UpdateDesktopImageMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateDesktopImageMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateDesktopImageMetadata) ProtoMessage() {}
-
-func (x *UpdateDesktopImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateDesktopImageMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateDesktopImageMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *UpdateDesktopImageMetadata) GetImageId() string {
+func (x *GetDesktopImageRequest) GetImageId() string {
 	if x != nil {
 		return x.ImageId
 	}
@@ -693,7 +693,7 @@ var File_yandex_cloud_clouddesktop_v1_desktop_image_service_proto protoreflect.F
 
 const file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/clouddesktop/v1/desktop_image_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a0yandex/cloud/clouddesktop/v1/desktop_image.proto\x1a google/protobuf/field_mask.proto\"\xe8\x01\n" +
+	"8yandex/cloud/clouddesktop/v1/desktop_image_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a0yandex/cloud/clouddesktop/v1/desktop_image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xe8\x01\n" +
 	"\x18ListDesktopImagesRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x15 \x01(\x03B\n" +
@@ -708,59 +708,59 @@ const file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_rawDesc = ""
 	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\x9b\x03\n" +
 	"\x17CopyDesktopImageRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12 \n" +
-	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x12'\n" +
-	"\bimage_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\x12\x9a\x01\n" +
+	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x12\x9a\x01\n" +
 	"\x06labels\x18\t \x03(\v2E.yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
 	"\vdescription\x18\n" +
 	" \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12'\n" +
+	"\bimage_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\b\"\x9f\x03\n" +
-	"\x19UpdateDesktopImageRequest\x12\x1f\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\x12;\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\b\"\x9b\x03\n" +
+	"\x16CopyFromDesktopRequest\x12%\n" +
+	"\tfolder_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12\x1c\n" +
+	"\x04name\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12\x99\x01\n" +
+	"\x06labels\x18\t \x03(\v2D.yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
+	"\vdescription\x18\n" +
+	" \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12+\n" +
+	"\n" +
+	"desktop_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tdesktopId\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x03J\x04\b\x05\x10\b\"5\n" +
+	"\x18CopyDesktopImageMetadata\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"4\n" +
+	"\x17CopyFromDesktopMetadata\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\x9f\x03\n" +
+	"\x19UpdateDesktopImageRequest\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12\x1c\n" +
+	"updateMask\x12\x1f\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\x12\x1c\n" +
 	"\x04name\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12\x9c\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2G.yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
 	"\vdescription\x18\x05 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x95\x03\n" +
-	"\x16CopyFromDesktopRequest\x12%\n" +
-	"\tfolder_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12\x1c\n" +
-	"\x04name\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12+\n" +
-	"\n" +
-	"desktop_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tdesktopId\x12\x99\x01\n" +
-	"\x06labels\x18\t \x03(\v2D.yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12,\n" +
-	"\vdescription\x18\n" +
-	" \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\b\"5\n" +
-	"\x18CopyDesktopImageMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"4\n" +
-	"\x17CopyFromDesktopMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"<\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
+	"\x1aUpdateDesktopImageMetadata\x12\x1f\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\"<\n" +
 	"\x19DeleteDesktopImageRequest\x12\x1f\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\"7\n" +
 	"\x1aDeleteDesktopImageMetadata\x12\x19\n" +
 	"\bimage_id\x18\x01 \x01(\tR\aimageId\"9\n" +
 	"\x16GetDesktopImageRequest\x12\x1f\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId\"=\n" +
-	"\x1aUpdateDesktopImageMetadata\x12\x1f\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aimageId2\xfe\b\n" +
 	"\x13DesktopImageService\x12\xa1\x01\n" +
 	"\x04List\x12:.yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest\x1a;.yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/cloud-desktop/v1/images\x12\x9c\x01\n" +
 	"\x03Get\x128.yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest\x1a..yandex.cloud.clouddesktop.v1.api.DesktopImage\"+\x82\xd3\xe4\x93\x02%\x12#/cloud-desktop/v1/images/{image_id}\x12\xba\x01\n" +
 	"\x04Copy\x129.yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest\x1a!.yandex.cloud.operation.Operation\"T\xb2\xd2*(\n" +
-	"\x18CopyDesktopImageMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/cloud-desktop/v1/images:copy\x12\xc6\x01\n" +
-	"\x06Update\x12;.yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2**\n" +
-	"\x1aUpdateDesktopImageMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02(:\x01*2#/cloud-desktop/v1/images/{image_id}\x12\xce\x01\n" +
+	"\x18CopyDesktopImageMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/cloud-desktop/v1/images:copy\x12\xce\x01\n" +
 	"\x0fCopyFromDesktop\x128.yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*'\n" +
-	"\x17CopyFromDesktopMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02-:\x01*\"(/cloud-desktop/v1/images:copyFromDesktop\x12\xcc\x01\n" +
+	"\x17CopyFromDesktopMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02-:\x01*\"(/cloud-desktop/v1/images:copyFromDesktop\x12\xc6\x01\n" +
+	"\x06Update\x12;.yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2**\n" +
+	"\x1aUpdateDesktopImageMetadata\x12\fDesktopImage\x82\xd3\xe4\x93\x02(:\x01*2#/cloud-desktop/v1/images/{image_id}\x12\xcc\x01\n" +
 	"\x06Delete\x12;.yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2*3\n" +
 	"\x1aDeleteDesktopImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02%*#/cloud-desktop/v1/images/{image_id}Bq\n" +
 	" yandex.cloud.api.clouddesktop.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/clouddesktop/v1;clouddesktopb\x06proto3"
@@ -782,17 +782,17 @@ var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_goTypes = []an
 	(*ListDesktopImagesRequest)(nil),   // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest
 	(*ListDesktopImagesResponse)(nil),  // 1: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse
 	(*CopyDesktopImageRequest)(nil),    // 2: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest
-	(*UpdateDesktopImageRequest)(nil),  // 3: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
-	(*CopyFromDesktopRequest)(nil),     // 4: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
-	(*CopyDesktopImageMetadata)(nil),   // 5: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageMetadata
-	(*CopyFromDesktopMetadata)(nil),    // 6: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopMetadata
-	(*DeleteDesktopImageRequest)(nil),  // 7: yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
-	(*DeleteDesktopImageMetadata)(nil), // 8: yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageMetadata
-	(*GetDesktopImageRequest)(nil),     // 9: yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
-	(*UpdateDesktopImageMetadata)(nil), // 10: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageMetadata
+	(*CopyFromDesktopRequest)(nil),     // 3: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
+	(*CopyDesktopImageMetadata)(nil),   // 4: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageMetadata
+	(*CopyFromDesktopMetadata)(nil),    // 5: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopMetadata
+	(*UpdateDesktopImageRequest)(nil),  // 6: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
+	(*UpdateDesktopImageMetadata)(nil), // 7: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageMetadata
+	(*DeleteDesktopImageRequest)(nil),  // 8: yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
+	(*DeleteDesktopImageMetadata)(nil), // 9: yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageMetadata
+	(*GetDesktopImageRequest)(nil),     // 10: yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
 	nil,                                // 11: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntry
-	nil,                                // 12: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
-	nil,                                // 13: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	nil,                                // 12: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	nil,                                // 13: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
 	(*DesktopImage)(nil),               // 14: yandex.cloud.clouddesktop.v1.api.DesktopImage
 	(*fieldmaskpb.FieldMask)(nil),      // 15: google.protobuf.FieldMask
 	(*operation.Operation)(nil),        // 16: yandex.cloud.operation.Operation
@@ -800,20 +800,20 @@ var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_goTypes = []an
 var file_yandex_cloud_clouddesktop_v1_desktop_image_service_proto_depIdxs = []int32{
 	14, // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse.desktop_images:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopImage
 	11, // 1: yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest.LabelsEntry
-	15, // 2: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.update_mask:type_name -> google.protobuf.FieldMask
-	12, // 3: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
-	13, // 4: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	12, // 2: yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest.LabelsEntry
+	15, // 3: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.update_mask:type_name -> google.protobuf.FieldMask
+	13, // 4: yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest.LabelsEntry
 	0,  // 5: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesRequest
-	9,  // 6: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
+	10, // 6: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopImageRequest
 	2,  // 7: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:input_type -> yandex.cloud.clouddesktop.v1.api.CopyDesktopImageRequest
-	3,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
-	4,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:input_type -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
-	7,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
+	3,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:input_type -> yandex.cloud.clouddesktop.v1.api.CopyFromDesktopRequest
+	6,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopImageRequest
+	8,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopImageRequest
 	1,  // 11: yandex.cloud.clouddesktop.v1.api.DesktopImageService.List:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopImagesResponse
 	14, // 12: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Get:output_type -> yandex.cloud.clouddesktop.v1.api.DesktopImage
 	16, // 13: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Copy:output_type -> yandex.cloud.operation.Operation
-	16, // 14: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 15: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:output_type -> yandex.cloud.operation.Operation
+	16, // 14: yandex.cloud.clouddesktop.v1.api.DesktopImageService.CopyFromDesktop:output_type -> yandex.cloud.operation.Operation
+	16, // 15: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Update:output_type -> yandex.cloud.operation.Operation
 	16, // 16: yandex.cloud.clouddesktop.v1.api.DesktopImageService.Delete:output_type -> yandex.cloud.operation.Operation
 	11, // [11:17] is the sub-list for method output_type
 	5,  // [5:11] is the sub-list for method input_type

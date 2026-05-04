@@ -46,6 +46,14 @@ func (m *CreateSubtitleRequest) SetSource(v CreateSubtitleRequest_Source) {
 	m.Source = v
 }
 
+func (m *CreateSubtitleRequest) SetLanguage(v string) {
+	m.Language = v
+}
+
+func (m *CreateSubtitleRequest) SetLabel(v string) {
+	m.Label = v
+}
+
 func (m *CreateSubtitleRequest) SetVideoId(v string) {
 	m.ParentId = &CreateSubtitleRequest_VideoId{
 		VideoId: v,
@@ -56,14 +64,6 @@ func (m *CreateSubtitleRequest) SetUpload(v *SubtitleUploadParams) {
 	m.Source = &CreateSubtitleRequest_Upload{
 		Upload: v,
 	}
-}
-
-func (m *CreateSubtitleRequest) SetLanguage(v string) {
-	m.Language = v
-}
-
-func (m *CreateSubtitleRequest) SetLabel(v string) {
-	m.Label = v
 }
 
 func (m *SubtitleUploadParams) SetFilename(v string) {

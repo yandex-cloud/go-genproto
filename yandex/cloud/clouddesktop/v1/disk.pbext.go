@@ -2,10 +2,10 @@
 
 package clouddesktop
 
-func (m *DiskSpec) SetType(v DiskSpec_Type) {
-	m.Type = v
-}
-
 func (m *DiskSpec) SetSize(v int64) {
 	m.Size = v
+}
+
+func (m *DiskSpec) SetType(v DiskSpec_Type) {
+	m.Type = v
 }

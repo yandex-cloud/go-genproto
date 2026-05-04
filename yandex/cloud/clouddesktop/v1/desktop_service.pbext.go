@@ -7,38 +7,6 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
-func (m *UpdatePropertiesRequest) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *UpdatePropertiesRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
-	m.UpdateMask = v
-}
-
-func (m *UpdatePropertiesRequest) SetName(v string) {
-	m.Name = v
-}
-
-func (m *UpdatePropertiesRequest) SetLabels(v map[string]string) {
-	m.Labels = v
-}
-
-func (m *UpdatePropertiesRequest) SetDescription(v string) {
-	m.Description = v
-}
-
-func (m *StartRequest) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *StopRequest) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *UpdateRequest) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
 func (m *GetDesktopRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }
@@ -119,10 +87,6 @@ func (m *CreateDesktopRequest) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
-func (m *CreateDesktopRequest) SetUsers(v []*User) {
-	m.Users = v
-}
-
 func (m *CreateDesktopRequest) SetName(v string) {
 	m.Name = v
 }
@@ -135,6 +99,10 @@ func (m *CreateDesktopRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateDesktopRequest) SetUsers(v []*User) {
+	m.Users = v
+}
+
 func (m *CreateDesktopMetadata) SetDesktopId(v string) {
 	m.DesktopId = v
 }
@@ -143,7 +111,51 @@ func (m *DeleteDesktopRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }
 
+func (m *UpdateRequest) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *UpdatePropertiesRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *UpdatePropertiesRequest) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *UpdatePropertiesRequest) SetName(v string) {
+	m.Name = v
+}
+
+func (m *UpdatePropertiesRequest) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *UpdatePropertiesRequest) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *DeleteDesktopMetadata) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *UpdateDesktopMetadata) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *UpdateDesktopPropertiesMetadata) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *RestartDesktopMetadata) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *StartDesktopMetadata) SetDesktopId(v string) {
+	m.DesktopId = v
+}
+
+func (m *StopDesktopMetadata) SetDesktopId(v string) {
 	m.DesktopId = v
 }
 
@@ -163,22 +175,10 @@ func (m *RestartRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }
 
-func (m *RestartDesktopMetadata) SetDesktopId(v string) {
+func (m *StartRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }
 
-func (m *UpdateDesktopPropertiesMetadata) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *StartDesktopMetadata) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *StopDesktopMetadata) SetDesktopId(v string) {
-	m.DesktopId = v
-}
-
-func (m *UpdateDesktopMetadata) SetDesktopId(v string) {
+func (m *StopRequest) SetDesktopId(v string) {
 	m.DesktopId = v
 }

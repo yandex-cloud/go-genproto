@@ -216,6 +216,12 @@ func (x *ListSubtitlesResponse) GetNextPageToken() string {
 
 type CreateSubtitleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Subtitle language represented as a three-letter code according to ISO 639-2/T.
+	Language string `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
+	// Contains the subtitle label (or title) that will be displayed on screen during video playback.
+	// Should provide a concise and accurate representation of the spoken content.
+	// If not provided, it will be auto-generated based on the specified language.
+	Label string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*CreateSubtitleRequest_VideoId
@@ -225,13 +231,7 @@ type CreateSubtitleRequest struct {
 	// Types that are valid to be assigned to Source:
 	//
 	//	*CreateSubtitleRequest_Upload
-	Source isCreateSubtitleRequest_Source `protobuf_oneof:"source"`
-	// Subtitle language represented as a three-letter code according to ISO 639-2/T.
-	Language string `protobuf:"bytes,1,opt,name=language,proto3" json:"language,omitempty"`
-	// Contains the subtitle label (or title) that will be displayed on screen during video playback.
-	// Should provide a concise and accurate representation of the spoken content.
-	// If not provided, it will be auto-generated based on the specified language.
-	Label         string `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	Source        isCreateSubtitleRequest_Source `protobuf_oneof:"source"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -266,6 +266,20 @@ func (*CreateSubtitleRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{3}
 }
 
+func (x *CreateSubtitleRequest) GetLanguage() string {
+	if x != nil {
+		return x.Language
+	}
+	return ""
+}
+
+func (x *CreateSubtitleRequest) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
 func (x *CreateSubtitleRequest) GetParentId() isCreateSubtitleRequest_ParentId {
 	if x != nil {
 		return x.ParentId
@@ -296,20 +310,6 @@ func (x *CreateSubtitleRequest) GetUpload() *SubtitleUploadParams {
 		}
 	}
 	return nil
-}
-
-func (x *CreateSubtitleRequest) GetLanguage() string {
-	if x != nil {
-		return x.Language
-	}
-	return ""
-}
-
-func (x *CreateSubtitleRequest) GetLabel() string {
-	if x != nil {
-		return x.Label
-	}
-	return ""
 }
 
 type isCreateSubtitleRequest_ParentId interface {
@@ -624,11 +624,11 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"\x15ListSubtitlesResponse\x12=\n" +
 	"\tsubtitles\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.SubtitleR\tsubtitles\x12&\n" +
 	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xb3\x02\n" +
-	"\x15CreateSubtitleRequest\x12&\n" +
-	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12F\n" +
-	"\x06upload\x18\xcc\b \x01(\v2+.yandex.cloud.video.v1.SubtitleUploadParamsH\x01R\x06upload\x12X\n" +
+	"\x15CreateSubtitleRequest\x12X\n" +
 	"\blanguage\x18\x01 \x01(\tB<\xf2\xc713ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|zho\x8a\xc81\x013R\blanguage\x12\x1e\n" +
-	"\x05label\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05labelB\x11\n" +
+	"\x05label\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05label\x12&\n" +
+	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12F\n" +
+	"\x06upload\x18\xcc\b \x01(\v2+.yandex.cloud.video.v1.SubtitleUploadParamsH\x01R\x06uploadB\x11\n" +
 	"\tparent_id\x12\x04\xc0\xc11\x01B\x0e\n" +
 	"\x06source\x12\x04\xc0\xc11\x01J\x05\b\x03\x10\xe8\aJ\x06\b\xe9\a\x10\xcc\b\"8\n" +
 	"\x14SubtitleUploadParams\x12 \n" +

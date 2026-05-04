@@ -847,7 +847,7 @@ var File_yandex_cloud_searchapi_v2_gen_search_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"x\n" +
+	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1cgoogle/api/annotations.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1dyandex/cloud/validation.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
 	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xa0\v\n" +

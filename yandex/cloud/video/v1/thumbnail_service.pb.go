@@ -130,6 +130,10 @@ func (x *GetThumbnailRequest) GetThumbnailId() string {
 
 type ListThumbnailRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// [Deprecated] ID of the channel.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/video/v1/thumbnail_service.proto.
+	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Specifies the parent resource to list thumbnails from (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to ParentId:
@@ -137,10 +141,6 @@ type ListThumbnailRequest struct {
 	//	*ListThumbnailRequest_EpisodeId
 	//	*ListThumbnailRequest_VideoId
 	ParentId isListThumbnailRequest_ParentId `protobuf_oneof:"parent_id"`
-	// [Deprecated] ID of the channel.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/video/v1/thumbnail_service.proto.
-	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// The maximum number of thumbnails to return per page.
 	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token for retrieving the next page of results.
@@ -180,6 +180,14 @@ func (*ListThumbnailRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_thumbnail_service_proto_rawDescGZIP(), []int{1}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/video/v1/thumbnail_service.proto.
+func (x *ListThumbnailRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
 func (x *ListThumbnailRequest) GetParentId() isListThumbnailRequest_ParentId {
 	if x != nil {
 		return x.ParentId
@@ -201,14 +209,6 @@ func (x *ListThumbnailRequest) GetVideoId() string {
 		if x, ok := x.ParentId.(*ListThumbnailRequest_VideoId); ok {
 			return x.VideoId
 		}
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/video/v1/thumbnail_service.proto.
-func (x *ListThumbnailRequest) GetChannelId() string {
-	if x != nil {
-		return x.ChannelId
 	}
 	return ""
 }
@@ -864,13 +864,13 @@ const file_yandex_cloud_video_v1_thumbnail_service_proto_rawDesc = "" +
 	"-yandex/cloud/video/v1/thumbnail_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/video/v1/thumbnail.proto\"F\n" +
 	"\x13GetThumbnailRequest\x12/\n" +
 	"\fthumbnail_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vthumbnailId\"\x83\x02\n" +
-	"\x14ListThumbnailRequest\x12*\n" +
-	"\n" +
-	"episode_id\x18\xeb\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tepisodeId\x12&\n" +
-	"\bvideo_id\x18\xec\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12)\n" +
+	"\x14ListThumbnailRequest\x12)\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\n" +
-	"\x8a\xc81\x04<=50\x18\x01R\tchannelId\x12&\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\tchannelId\x12*\n" +
+	"\n" +
+	"episode_id\x18\xeb\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\tepisodeId\x12&\n" +
+	"\bvideo_id\x18\xec\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12*\n" +
 	"\n" +
 	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageTokenB\v\n" +

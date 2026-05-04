@@ -524,24 +524,24 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"&ListAdvancedRateLimiterProfilesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"\xc3\x01\n" +
 	"'ListAdvancedRateLimiterProfilesResponse\x12\x97\x01\n" +
-	"\x1eadvanced_rate_limiter_profiles\x18\x01 \x03(\v2R.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfileR\x1badvancedRateLimiterProfiles\"\xd4\x03\n" +
+	"\x1eadvanced_rate_limiter_profiles\x18\x01 \x03(\v2R.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfileR\x1badvancedRateLimiterProfiles\"\x80\x04\n" +
 	"'CreateAdvancedRateLimiterProfileRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x83\x01\n" +
-	"\x06labels\x18\x02 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.CreateAdvancedRateLimiterProfileRequest.LabelsEntryR\x06labels\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\x06labels\x18\x02 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.CreateAdvancedRateLimiterProfileRequest.LabelsEntryR\x06labels\x12>\n" +
+	"\x04name\x18\x03 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x8e\x01\n" +
 	"\x1badvanced_rate_limiter_rules\x18\x05 \x03(\v2O.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRuleR\x18advancedRateLimiterRules\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"r\n" +
 	"(CreateAdvancedRateLimiterProfileMetadata\x12F\n" +
-	" advanced_rate_limiter_profile_id\x18\x01 \x01(\tR\x1cadvancedRateLimiterProfileId\"\xbc\x04\n" +
+	" advanced_rate_limiter_profile_id\x18\x01 \x01(\tR\x1cadvancedRateLimiterProfileId\"\xe8\x04\n" +
 	"'UpdateAdvancedRateLimiterProfileRequest\x12L\n" +
 	" advanced_rate_limiter_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x1cadvancedRateLimiterProfileId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x83\x01\n" +
-	"\x06labels\x18\x03 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.UpdateAdvancedRateLimiterProfileRequest.LabelsEntryR\x06labels\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"\x06labels\x18\x03 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.UpdateAdvancedRateLimiterProfileRequest.LabelsEntryR\x06labels\x12>\n" +
+	"\x04name\x18\x04 \x01(\tB*\xe8\xc71\x00\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x8e\x01\n" +
 	"\x1badvanced_rate_limiter_rules\x18\x06 \x03(\v2O.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRuleR\x18advancedRateLimiterRules\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +

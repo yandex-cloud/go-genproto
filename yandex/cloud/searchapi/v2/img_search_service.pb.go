@@ -816,7 +816,7 @@ var File_yandex_cloud_searchapi_v2_img_search_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_searchapi_v2_img_search_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/searchapi/v2/img_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1cgoogle/api/annotations.proto\"\xa2\b\n" +
+	"2yandex/cloud/searchapi/v2/img_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1cgoogle/api/annotations.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1dyandex/cloud/validation.proto\"\xa2\b\n" +
 	"\tImageSpec\x12H\n" +
 	"\x06format\x18\x01 \x01(\x0e20.yandex.cloud.searchapi.v2.ImageSpec.ImageFormatR\x06format\x12B\n" +
 	"\x04size\x18\x02 \x01(\x0e2..yandex.cloud.searchapi.v2.ImageSpec.ImageSizeR\x04size\x12W\n" +

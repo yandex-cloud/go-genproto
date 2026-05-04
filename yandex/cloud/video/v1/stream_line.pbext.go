@@ -18,6 +18,18 @@ func (m *StreamLine) SetLineType(v StreamLine_LineType) {
 	m.LineType = v
 }
 
+func (m *StreamLine) SetId(v string) {
+	m.Id = v
+}
+
+func (m *StreamLine) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *StreamLine) SetTitle(v string) {
+	m.Title = v
+}
+
 func (m *StreamLine) SetRtmpPush(v *RTMPPushInput) {
 	m.InputType = &StreamLine_RtmpPush{
 		RtmpPush: v,
@@ -46,18 +58,6 @@ func (m *StreamLine) SetAutoLine(v *AutoLine) {
 	m.LineType = &StreamLine_AutoLine{
 		AutoLine: v,
 	}
-}
-
-func (m *StreamLine) SetId(v string) {
-	m.Id = v
-}
-
-func (m *StreamLine) SetChannelId(v string) {
-	m.ChannelId = v
-}
-
-func (m *StreamLine) SetTitle(v string) {
-	m.Title = v
 }
 
 func (m *StreamLine) SetCreatedAt(v *timestamppb.Timestamp) {

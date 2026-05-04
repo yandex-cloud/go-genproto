@@ -596,11 +596,11 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x1bListSecurityProfilesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"~\n" +
 	"\x1cListSecurityProfilesResponse\x12^\n" +
-	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xb4\x05\n" +
+	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xe0\x05\n" +
 	"\x1cCreateSecurityProfileRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12b\n" +
-	"\x06labels\x18\x02 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.LabelsEntryR\x06labels\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\x06labels\x18\x02 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.LabelsEntryR\x06labels\x12>\n" +
+	"\x04name\x18\x03 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12f\n" +
 	"\x0edefault_action\x18\x05 \x01(\x0e2?.yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultActionR\rdefaultAction\x12U\n" +
 	"\x0esecurity_rules\x18\x06 \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x12\x1d\n" +
@@ -612,13 +612,13 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"O\n" +
 	"\x1dCreateSecurityProfileMetadata\x12.\n" +
-	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\"\x84\x06\n" +
+	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\"\xb0\x06\n" +
 	"\x1cUpdateSecurityProfileRequest\x124\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x11securityProfileId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12b\n" +
-	"\x06labels\x18\x03 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.LabelsEntryR\x06labels\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"\x06labels\x18\x03 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.LabelsEntryR\x06labels\x12>\n" +
+	"\x04name\x18\x04 \x01(\tB*\xe8\xc71\x00\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12f\n" +
 	"\x0edefault_action\x18\x06 \x01(\x0e2?.yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultActionR\rdefaultAction\x12U\n" +
 	"\x0esecurity_rules\x18\a \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x12\x1d\n" +

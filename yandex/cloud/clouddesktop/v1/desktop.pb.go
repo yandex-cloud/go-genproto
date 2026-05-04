@@ -125,16 +125,16 @@ type Desktop struct {
 	Status Desktop_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.clouddesktop.v1.api.Desktop_Status" json:"status,omitempty"`
 	// Name of the desktop.
 	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
+	// Labels of the desktop.
+	Labels map[string]string `protobuf:"bytes,24,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Description of the desktop.
+	Description string `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
 	// Resources of the desktop.
 	Resources *Resources `protobuf:"bytes,21,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Network interfaces of the desktop.
 	NetworkInterfaces []*NetworkInterface `protobuf:"bytes,22,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// Users of the desktop.
-	Users []*User `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
-	// Labels of the desktop.
-	Labels map[string]string `protobuf:"bytes,24,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Description of the desktop.
-	Description   string `protobuf:"bytes,25,opt,name=description,proto3" json:"description,omitempty"`
+	Users         []*User `protobuf:"bytes,23,rep,name=users,proto3" json:"users,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -211,6 +211,20 @@ func (x *Desktop) GetName() string {
 	return ""
 }
 
+func (x *Desktop) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *Desktop) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
 func (x *Desktop) GetResources() *Resources {
 	if x != nil {
 		return x.Resources
@@ -232,20 +246,6 @@ func (x *Desktop) GetUsers() []*User {
 	return nil
 }
 
-func (x *Desktop) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *Desktop) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
 type Resources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The amount of memory available to the desktop, specified in bytes.
@@ -254,7 +254,6 @@ type Resources struct {
 	Cores int64 `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
 	// Baseline level of CPU performance with the ability to burst performance above that baseline level.
 	// This field sets baseline performance for each core.
-	//
 	// For example, if you need only 5% of the CPU performance, you can set core_fraction=5.
 	CoreFraction  int64 `protobuf:"varint,3,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -312,60 +311,6 @@ func (x *Resources) GetCoreFraction() int64 {
 	return 0
 }
 
-type User struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identity of the access binding.
-	SubjectId string `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
-	// Type of the access binding, e.g. userAccount, serviceAccount, system.
-	SubjectType   string `protobuf:"bytes,2,opt,name=subject_type,json=subjectType,proto3" json:"subject_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *User) Reset() {
-	*x = User{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *User) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*User) ProtoMessage() {}
-
-func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use User.ProtoReflect.Descriptor instead.
-func (*User) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *User) GetSubjectId() string {
-	if x != nil {
-		return x.SubjectId
-	}
-	return ""
-}
-
-func (x *User) GetSubjectType() string {
-	if x != nil {
-		return x.SubjectType
-	}
-	return ""
-}
-
 type NetworkInterface struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network.
@@ -378,7 +323,7 @@ type NetworkInterface struct {
 
 func (x *NetworkInterface) Reset() {
 	*x = NetworkInterface{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[3]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -390,7 +335,7 @@ func (x *NetworkInterface) String() string {
 func (*NetworkInterface) ProtoMessage() {}
 
 func (x *NetworkInterface) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[3]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -403,7 +348,7 @@ func (x *NetworkInterface) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkInterface.ProtoReflect.Descriptor instead.
 func (*NetworkInterface) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *NetworkInterface) GetNetworkId() string {
@@ -420,6 +365,60 @@ func (x *NetworkInterface) GetSubnetId() string {
 	return ""
 }
 
+type User struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Identity of the access binding.
+	SubjectId string `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
+	// Type of the access binding, e.g. userAccount, serviceAccount, system.
+	SubjectType   string `protobuf:"bytes,2,opt,name=subject_type,json=subjectType,proto3" json:"subject_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *User) GetSubjectId() string {
+	if x != nil {
+		return x.SubjectId
+	}
+	return ""
+}
+
+func (x *User) GetSubjectType() string {
+	if x != nil {
+		return x.SubjectType
+	}
+	return ""
+}
+
 var File_yandex_cloud_clouddesktop_v1_desktop_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
@@ -432,12 +431,12 @@ const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12H\n" +
 	"\x06status\x18\x05 \x01(\x0e20.yandex.cloud.clouddesktop.v1.api.Desktop.StatusR\x06status\x12\x12\n" +
-	"\x04name\x18\v \x01(\tR\x04name\x12I\n" +
+	"\x04name\x18\v \x01(\tR\x04name\x12M\n" +
+	"\x06labels\x18\x18 \x03(\v25.yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntryR\x06labels\x12 \n" +
+	"\vdescription\x18\x19 \x01(\tR\vdescription\x12I\n" +
 	"\tresources\x18\x15 \x01(\v2+.yandex.cloud.clouddesktop.v1.api.ResourcesR\tresources\x12a\n" +
 	"\x12network_interfaces\x18\x16 \x03(\v22.yandex.cloud.clouddesktop.v1.api.NetworkInterfaceR\x11networkInterfaces\x12<\n" +
-	"\x05users\x18\x17 \x03(\v2&.yandex.cloud.clouddesktop.v1.api.UserR\x05users\x12M\n" +
-	"\x06labels\x18\x18 \x03(\v25.yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntryR\x06labels\x12 \n" +
-	"\vdescription\x18\x19 \x01(\tR\vdescription\x1a9\n" +
+	"\x05users\x18\x17 \x03(\v2&.yandex.cloud.clouddesktop.v1.api.UserR\x05users\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x01\n" +
@@ -456,19 +455,19 @@ const file_yandex_cloud_clouddesktop_v1_desktop_proto_rawDesc = "" +
 	"\x05ERROR\x10\t\x12\x13\n" +
 	"\x0fCREATION_FAILED\x10\n" +
 	"\x12\x10\n" +
-	"\fHEALTH_CHECK\x10\vJ\x04\b\f\x10\x15J\x04\b\x06\x10\v\"{\n" +
+	"\fHEALTH_CHECK\x10\vJ\x04\b\x06\x10\vJ\x04\b\f\x10\x15\"{\n" +
 	"\tResources\x12\x1f\n" +
 	"\x06memory\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\x06memory\x12\x1d\n" +
 	"\x05cores\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\x05cores\x12.\n" +
-	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\fcoreFraction\"f\n" +
-	"\x04User\x12,\n" +
-	"\n" +
-	"subject_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\tsubjectId\x120\n" +
-	"\fsubject_type\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vsubjectType\"j\n" +
+	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\fcoreFraction\"j\n" +
 	"\x10NetworkInterface\x12+\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12)\n" +
-	"\tsubnet_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetIdBq\n" +
+	"\tsubnet_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\"f\n" +
+	"\x04User\x12,\n" +
+	"\n" +
+	"subject_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\tsubjectId\x120\n" +
+	"\fsubject_type\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vsubjectTypeBq\n" +
 	" yandex.cloud.api.clouddesktop.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/clouddesktop/v1;clouddesktopb\x06proto3"
 
 var (
@@ -489,18 +488,18 @@ var file_yandex_cloud_clouddesktop_v1_desktop_proto_goTypes = []any{
 	(Desktop_Status)(0),           // 0: yandex.cloud.clouddesktop.v1.api.Desktop.Status
 	(*Desktop)(nil),               // 1: yandex.cloud.clouddesktop.v1.api.Desktop
 	(*Resources)(nil),             // 2: yandex.cloud.clouddesktop.v1.api.Resources
-	(*User)(nil),                  // 3: yandex.cloud.clouddesktop.v1.api.User
-	(*NetworkInterface)(nil),      // 4: yandex.cloud.clouddesktop.v1.api.NetworkInterface
+	(*NetworkInterface)(nil),      // 3: yandex.cloud.clouddesktop.v1.api.NetworkInterface
+	(*User)(nil),                  // 4: yandex.cloud.clouddesktop.v1.api.User
 	nil,                           // 5: yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntry
 	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_proto_depIdxs = []int32{
 	6, // 0: yandex.cloud.clouddesktop.v1.api.Desktop.created_at:type_name -> google.protobuf.Timestamp
 	0, // 1: yandex.cloud.clouddesktop.v1.api.Desktop.status:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop.Status
-	2, // 2: yandex.cloud.clouddesktop.v1.api.Desktop.resources:type_name -> yandex.cloud.clouddesktop.v1.api.Resources
-	4, // 3: yandex.cloud.clouddesktop.v1.api.Desktop.network_interfaces:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterface
-	3, // 4: yandex.cloud.clouddesktop.v1.api.Desktop.users:type_name -> yandex.cloud.clouddesktop.v1.api.User
-	5, // 5: yandex.cloud.clouddesktop.v1.api.Desktop.labels:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntry
+	5, // 2: yandex.cloud.clouddesktop.v1.api.Desktop.labels:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop.LabelsEntry
+	2, // 3: yandex.cloud.clouddesktop.v1.api.Desktop.resources:type_name -> yandex.cloud.clouddesktop.v1.api.Resources
+	3, // 4: yandex.cloud.clouddesktop.v1.api.Desktop.network_interfaces:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterface
+	4, // 5: yandex.cloud.clouddesktop.v1.api.Desktop.users:type_name -> yandex.cloud.clouddesktop.v1.api.User
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name

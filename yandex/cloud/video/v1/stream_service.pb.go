@@ -325,13 +325,6 @@ func (x *BatchGetStreamsResponse) GetStreams() []*Stream {
 
 type CreateStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the stream scheduling type (exactly one must be chosen).
-	//
-	// Types that are valid to be assigned to StreamType:
-	//
-	//	*CreateStreamRequest_OnDemand
-	//	*CreateStreamRequest_Schedule
-	StreamType isCreateStreamRequest_StreamType `protobuf_oneof:"stream_type"`
 	// ID of the channel where the stream will be created.
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// ID of the stream line to which this stream will be linked.
@@ -353,7 +346,14 @@ type CreateStreamRequest struct {
 	// Maximum 64 labels per stream.
 	// Keys must be lowercase alphanumeric strings with optional hyphens/underscores.
 	// Values can contain alphanumeric characters and various symbols.
-	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Specifies the stream scheduling type (exactly one must be chosen).
+	//
+	// Types that are valid to be assigned to StreamType:
+	//
+	//	*CreateStreamRequest_OnDemand
+	//	*CreateStreamRequest_Schedule
+	StreamType    isCreateStreamRequest_StreamType `protobuf_oneof:"stream_type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -386,31 +386,6 @@ func (x *CreateStreamRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateStreamRequest.ProtoReflect.Descriptor instead.
 func (*CreateStreamRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateStreamRequest) GetStreamType() isCreateStreamRequest_StreamType {
-	if x != nil {
-		return x.StreamType
-	}
-	return nil
-}
-
-func (x *CreateStreamRequest) GetOnDemand() *OnDemandParams {
-	if x != nil {
-		if x, ok := x.StreamType.(*CreateStreamRequest_OnDemand); ok {
-			return x.OnDemand
-		}
-	}
-	return nil
-}
-
-func (x *CreateStreamRequest) GetSchedule() *ScheduleParams {
-	if x != nil {
-		if x, ok := x.StreamType.(*CreateStreamRequest_Schedule); ok {
-			return x.Schedule
-		}
-	}
-	return nil
 }
 
 func (x *CreateStreamRequest) GetChannelId() string {
@@ -458,6 +433,31 @@ func (x *CreateStreamRequest) GetAutoPublish() *wrapperspb.BoolValue {
 func (x *CreateStreamRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
+	}
+	return nil
+}
+
+func (x *CreateStreamRequest) GetStreamType() isCreateStreamRequest_StreamType {
+	if x != nil {
+		return x.StreamType
+	}
+	return nil
+}
+
+func (x *CreateStreamRequest) GetOnDemand() *OnDemandParams {
+	if x != nil {
+		if x, ok := x.StreamType.(*CreateStreamRequest_OnDemand); ok {
+			return x.OnDemand
+		}
+	}
+	return nil
+}
+
+func (x *CreateStreamRequest) GetSchedule() *ScheduleParams {
+	if x != nil {
+		if x, ok := x.StreamType.(*CreateStreamRequest_Schedule); ok {
+			return x.Schedule
+		}
 	}
 	return nil
 }
@@ -625,13 +625,6 @@ func (x *CreateStreamMetadata) GetStreamId() string {
 
 type UpdateStreamRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stream type.
-	//
-	// Types that are valid to be assigned to StreamType:
-	//
-	//	*UpdateStreamRequest_OnDemand
-	//	*UpdateStreamRequest_Schedule
-	StreamType isUpdateStreamRequest_StreamType `protobuf_oneof:"stream_type"`
 	// ID of the stream.
 	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	// Field mask specifying which fields of the stream should be updated.
@@ -651,7 +644,14 @@ type UpdateStreamRequest struct {
 	// New custom labels for the stream as `key:value` pairs.
 	// Maximum 64 labels per stream.
 	// If provided, replaces all existing labels.
-	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Stream type.
+	//
+	// Types that are valid to be assigned to StreamType:
+	//
+	//	*UpdateStreamRequest_OnDemand
+	//	*UpdateStreamRequest_Schedule
+	StreamType    isUpdateStreamRequest_StreamType `protobuf_oneof:"stream_type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -684,31 +684,6 @@ func (x *UpdateStreamRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use UpdateStreamRequest.ProtoReflect.Descriptor instead.
 func (*UpdateStreamRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *UpdateStreamRequest) GetStreamType() isUpdateStreamRequest_StreamType {
-	if x != nil {
-		return x.StreamType
-	}
-	return nil
-}
-
-func (x *UpdateStreamRequest) GetOnDemand() *OnDemandParams {
-	if x != nil {
-		if x, ok := x.StreamType.(*UpdateStreamRequest_OnDemand); ok {
-			return x.OnDemand
-		}
-	}
-	return nil
-}
-
-func (x *UpdateStreamRequest) GetSchedule() *ScheduleParams {
-	if x != nil {
-		if x, ok := x.StreamType.(*UpdateStreamRequest_Schedule); ok {
-			return x.Schedule
-		}
-	}
-	return nil
 }
 
 func (x *UpdateStreamRequest) GetStreamId() string {
@@ -756,6 +731,31 @@ func (x *UpdateStreamRequest) GetAutoPublish() *wrapperspb.BoolValue {
 func (x *UpdateStreamRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateStreamRequest) GetStreamType() isUpdateStreamRequest_StreamType {
+	if x != nil {
+		return x.StreamType
+	}
+	return nil
+}
+
+func (x *UpdateStreamRequest) GetOnDemand() *OnDemandParams {
+	if x != nil {
+		if x, ok := x.StreamType.(*UpdateStreamRequest_OnDemand); ok {
+			return x.OnDemand
+		}
+	}
+	return nil
+}
+
+func (x *UpdateStreamRequest) GetSchedule() *ScheduleParams {
+	if x != nil {
+		if x, ok := x.StreamType.(*UpdateStreamRequest_Schedule); ok {
+			return x.Schedule
+		}
 	}
 	return nil
 }
@@ -1020,15 +1020,15 @@ func (x *BatchDeleteStreamsMetadata) GetStreamIds() []string {
 
 type PerformStreamActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the stream on which to perform the action.
+	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
 	// Specifies which action to perform on the stream (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformStreamActionRequest_Publish
 	//	*PerformStreamActionRequest_Stop
-	Action isPerformStreamActionRequest_Action `protobuf_oneof:"action"`
-	// ID of the stream on which to perform the action.
-	StreamId      string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	Action        isPerformStreamActionRequest_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1063,6 +1063,13 @@ func (*PerformStreamActionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{15}
 }
 
+func (x *PerformStreamActionRequest) GetStreamId() string {
+	if x != nil {
+		return x.StreamId
+	}
+	return ""
+}
+
 func (x *PerformStreamActionRequest) GetAction() isPerformStreamActionRequest_Action {
 	if x != nil {
 		return x.Action
@@ -1086,13 +1093,6 @@ func (x *PerformStreamActionRequest) GetStop() *StopAction {
 		}
 	}
 	return nil
-}
-
-func (x *PerformStreamActionRequest) GetStreamId() string {
-	if x != nil {
-		return x.StreamId
-	}
-	return ""
 }
 
 type isPerformStreamActionRequest_Action interface {
@@ -1264,9 +1264,7 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"stream_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\tstreamIds\"R\n" +
 	"\x17BatchGetStreamsResponse\x127\n" +
 	"\astreams\x18\x01 \x03(\v2\x1d.yandex.cloud.video.v1.StreamR\astreams\"\xaa\x05\n" +
-	"\x13CreateStreamRequest\x12E\n" +
-	"\ton_demand\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.OnDemandParamsH\x00R\bonDemand\x12D\n" +
-	"\bschedule\x18\xe9\a \x01(\v2%.yandex.cloud.video.v1.ScheduleParamsH\x00R\bschedule\x12+\n" +
+	"\x13CreateStreamRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12%\n" +
 	"\aline_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06lineId\x12#\n" +
@@ -1275,7 +1273,9 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12=\n" +
 	"\fauto_publish\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x12\x93\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v26.yandex.cloud.video.v1.CreateStreamRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v26.yandex.cloud.video.v1.CreateStreamRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12E\n" +
+	"\ton_demand\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.OnDemandParamsH\x00R\bonDemand\x12D\n" +
+	"\bschedule\x18\xe9\a \x01(\v2%.yandex.cloud.video.v1.ScheduleParamsH\x00R\bschedule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x13\n" +
@@ -1288,9 +1288,7 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"finishTime\"3\n" +
 	"\x14CreateStreamMetadata\x12\x1b\n" +
 	"\tstream_id\x18\x01 \x01(\tR\bstreamId\"\xbe\x05\n" +
-	"\x13UpdateStreamRequest\x12E\n" +
-	"\ton_demand\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.OnDemandParamsH\x00R\bonDemand\x12D\n" +
-	"\bschedule\x18\xe9\a \x01(\v2%.yandex.cloud.video.v1.ScheduleParamsH\x00R\bschedule\x12)\n" +
+	"\x13UpdateStreamRequest\x12)\n" +
 	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
@@ -1299,7 +1297,9 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=4000R\vdescription\x12+\n" +
 	"\fthumbnail_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\vthumbnailId\x12=\n" +
 	"\fauto_publish\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\vautoPublish\x12\x93\x01\n" +
-	"\x06labels\x18\xc8\x01 \x03(\v26.yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x1a9\n" +
+	"\x06labels\x18\xc8\x01 \x03(\v26.yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntryBB\xf2\xc71\x12[-_.@:/0-9a-zA-Z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12E\n" +
+	"\ton_demand\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.OnDemandParamsH\x00R\bonDemand\x12D\n" +
+	"\bschedule\x18\xe9\a \x01(\v2%.yandex.cloud.video.v1.ScheduleParamsH\x00R\bschedule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\r\n" +
@@ -1318,10 +1318,10 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\x1aBatchDeleteStreamsMetadata\x12\x1d\n" +
 	"\n" +
 	"stream_ids\x18\x01 \x03(\tR\tstreamIds\"\xe3\x01\n" +
-	"\x1aPerformStreamActionRequest\x12A\n" +
+	"\x1aPerformStreamActionRequest\x12)\n" +
+	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamId\x12A\n" +
 	"\apublish\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.PublishActionH\x00R\apublish\x128\n" +
-	"\x04stop\x18\xea\a \x01(\v2!.yandex.cloud.video.v1.StopActionH\x00R\x04stop\x12)\n" +
-	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamIdB\x0e\n" +
+	"\x04stop\x18\xea\a \x01(\v2!.yandex.cloud.video.v1.StopActionH\x00R\x04stopB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x05\b\x02\x10\xe8\aJ\x06\b\xe9\a\x10\xea\a\"\x0f\n" +
 	"\rPublishAction\"\f\n" +
 	"\n" +
@@ -1389,17 +1389,17 @@ var file_yandex_cloud_video_v1_stream_service_proto_goTypes = []any{
 var file_yandex_cloud_video_v1_stream_service_proto_depIdxs = []int32{
 	21, // 0: yandex.cloud.video.v1.ListStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
 	21, // 1: yandex.cloud.video.v1.BatchGetStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
-	6,  // 2: yandex.cloud.video.v1.CreateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
-	7,  // 3: yandex.cloud.video.v1.CreateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
-	22, // 4: yandex.cloud.video.v1.CreateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
-	19, // 5: yandex.cloud.video.v1.CreateStreamRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
+	22, // 2: yandex.cloud.video.v1.CreateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
+	19, // 3: yandex.cloud.video.v1.CreateStreamRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
+	6,  // 4: yandex.cloud.video.v1.CreateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
+	7,  // 5: yandex.cloud.video.v1.CreateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
 	23, // 6: yandex.cloud.video.v1.ScheduleParams.start_time:type_name -> google.protobuf.Timestamp
 	23, // 7: yandex.cloud.video.v1.ScheduleParams.finish_time:type_name -> google.protobuf.Timestamp
-	6,  // 8: yandex.cloud.video.v1.UpdateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
-	7,  // 9: yandex.cloud.video.v1.UpdateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
-	24, // 10: yandex.cloud.video.v1.UpdateStreamRequest.field_mask:type_name -> google.protobuf.FieldMask
-	22, // 11: yandex.cloud.video.v1.UpdateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
-	20, // 12: yandex.cloud.video.v1.UpdateStreamRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
+	24, // 8: yandex.cloud.video.v1.UpdateStreamRequest.field_mask:type_name -> google.protobuf.FieldMask
+	22, // 9: yandex.cloud.video.v1.UpdateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
+	20, // 10: yandex.cloud.video.v1.UpdateStreamRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
+	6,  // 11: yandex.cloud.video.v1.UpdateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
+	7,  // 12: yandex.cloud.video.v1.UpdateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
 	16, // 13: yandex.cloud.video.v1.PerformStreamActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishAction
 	17, // 14: yandex.cloud.video.v1.PerformStreamActionRequest.stop:type_name -> yandex.cloud.video.v1.StopAction
 	0,  // 15: yandex.cloud.video.v1.StreamService.Get:input_type -> yandex.cloud.video.v1.GetStreamRequest

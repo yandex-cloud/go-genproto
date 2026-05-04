@@ -30,7 +30,6 @@ const (
 type GetDesktopGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the desktop group resource to return.
-	//
 	// To get the desktop group ID use a [DesktopGroupService.List] request.
 	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -77,7 +76,6 @@ func (x *GetDesktopGroupRequest) GetDesktopGroupId() string {
 type ListDesktopGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list desktop groups in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -513,12 +511,321 @@ func (x *ListDesktopGroupOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type CreateDesktopGroupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to create a DesktopGroup in.
+	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// An image used to create a desktop boot disk
+	DesktopImageId string `protobuf:"bytes,3,opt,name=desktop_image_id,json=desktopImageId,proto3" json:"desktop_image_id,omitempty"`
+	// Name of the DesktopGroup.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the DesktopGroup.
+	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// Desktop group labels.
+	Labels map[string]string `protobuf:"bytes,26,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Resource specification of the desktop group.
+	ResourcesSpec *ResourcesSpec `protobuf:"bytes,21,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
+	// Network interface specification of the desktop group.
+	NetworkInterfaceSpec *NetworkInterfaceSpec `protobuf:"bytes,22,opt,name=network_interface_spec,json=networkInterfaceSpec,proto3" json:"network_interface_spec,omitempty"`
+	// Boot disk specification of the desktop group.
+	BootDiskSpec *DiskSpec `protobuf:"bytes,23,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
+	// Data disk specification of the desktop group.
+	DataDiskSpec *DiskSpec `protobuf:"bytes,24,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
+	// Configuration of the desktop group.
+	GroupConfig   *DesktopGroupConfiguration `protobuf:"bytes,25,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateDesktopGroupRequest) Reset() {
+	*x = CreateDesktopGroupRequest{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDesktopGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDesktopGroupRequest) ProtoMessage() {}
+
+func (x *CreateDesktopGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDesktopGroupRequest.ProtoReflect.Descriptor instead.
+func (*CreateDesktopGroupRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateDesktopGroupRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *CreateDesktopGroupRequest) GetDesktopImageId() string {
+	if x != nil {
+		return x.DesktopImageId
+	}
+	return ""
+}
+
+func (x *CreateDesktopGroupRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateDesktopGroupRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateDesktopGroupRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *CreateDesktopGroupRequest) GetResourcesSpec() *ResourcesSpec {
+	if x != nil {
+		return x.ResourcesSpec
+	}
+	return nil
+}
+
+func (x *CreateDesktopGroupRequest) GetNetworkInterfaceSpec() *NetworkInterfaceSpec {
+	if x != nil {
+		return x.NetworkInterfaceSpec
+	}
+	return nil
+}
+
+func (x *CreateDesktopGroupRequest) GetBootDiskSpec() *DiskSpec {
+	if x != nil {
+		return x.BootDiskSpec
+	}
+	return nil
+}
+
+func (x *CreateDesktopGroupRequest) GetDataDiskSpec() *DiskSpec {
+	if x != nil {
+		return x.DataDiskSpec
+	}
+	return nil
+}
+
+func (x *CreateDesktopGroupRequest) GetGroupConfig() *DesktopGroupConfiguration {
+	if x != nil {
+		return x.GroupConfig
+	}
+	return nil
+}
+
+type CreateDesktopGroupMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop group that is being created.
+	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CreateDesktopGroupMetadata) Reset() {
+	*x = CreateDesktopGroupMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateDesktopGroupMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateDesktopGroupMetadata) ProtoMessage() {}
+
+func (x *CreateDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateDesktopGroupMetadata.ProtoReflect.Descriptor instead.
+func (*CreateDesktopGroupMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *CreateDesktopGroupMetadata) GetDesktopGroupId() string {
+	if x != nil {
+		return x.DesktopGroupId
+	}
+	return ""
+}
+
+type DeleteDesktopGroupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop group to delete.
+	// To get a desktop group ID make a [DesktopGroupService.List] request.
+	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *DeleteDesktopGroupRequest) Reset() {
+	*x = DeleteDesktopGroupRequest{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteDesktopGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteDesktopGroupRequest) ProtoMessage() {}
+
+func (x *DeleteDesktopGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteDesktopGroupRequest.ProtoReflect.Descriptor instead.
+func (*DeleteDesktopGroupRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DeleteDesktopGroupRequest) GetDesktopGroupId() string {
+	if x != nil {
+		return x.DesktopGroupId
+	}
+	return ""
+}
+
+type DeleteDesktopGroupMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop group that is being deleted.
+	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *DeleteDesktopGroupMetadata) Reset() {
+	*x = DeleteDesktopGroupMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteDesktopGroupMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteDesktopGroupMetadata) ProtoMessage() {}
+
+func (x *DeleteDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteDesktopGroupMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteDesktopGroupMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *DeleteDesktopGroupMetadata) GetDesktopGroupId() string {
+	if x != nil {
+		return x.DesktopGroupId
+	}
+	return ""
+}
+
+type UpdateDesktopGroupMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the desktop group that is being updated.
+	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateDesktopGroupMetadata) Reset() {
+	*x = UpdateDesktopGroupMetadata{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateDesktopGroupMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateDesktopGroupMetadata) ProtoMessage() {}
+
+func (x *UpdateDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateDesktopGroupMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateDesktopGroupMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *UpdateDesktopGroupMetadata) GetDesktopGroupId() string {
+	if x != nil {
+		return x.DesktopGroupId
+	}
+	return ""
+}
+
 type UpdateDesktopGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the desktop group to update.
-	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
 	// Field mask that specifies which fields of the desktop group should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// ID of the desktop group to update.
+	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
 	// New desktop image ID.
 	DesktopImageId string `protobuf:"bytes,3,opt,name=desktop_image_id,json=desktopImageId,proto3" json:"desktop_image_id,omitempty"`
 	// New desktop group name.
@@ -529,12 +836,12 @@ type UpdateDesktopGroupRequest struct {
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Resources specification of the desktop group.
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,7,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
-	// Configuration of the desktop group.
-	GroupConfig *DesktopGroupConfiguration `protobuf:"bytes,10,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
 	// Boot disk specification of the desktop group.
 	BootDiskSpec *DiskSpec `protobuf:"bytes,11,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
 	// Data disk specification of the desktop group.
 	DataDiskSpec *DiskSpec `protobuf:"bytes,12,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
+	// Configuration of the desktop group.
+	GroupConfig *DesktopGroupConfiguration `protobuf:"bytes,10,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
 	// Update policy of the desktop group.
 	//
 	// Types that are valid to be assigned to UpdatePolicy:
@@ -548,7 +855,7 @@ type UpdateDesktopGroupRequest struct {
 
 func (x *UpdateDesktopGroupRequest) Reset() {
 	*x = UpdateDesktopGroupRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -560,7 +867,7 @@ func (x *UpdateDesktopGroupRequest) String() string {
 func (*UpdateDesktopGroupRequest) ProtoMessage() {}
 
 func (x *UpdateDesktopGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -573,14 +880,7 @@ func (x *UpdateDesktopGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDesktopGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDesktopGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *UpdateDesktopGroupRequest) GetDesktopGroupId() string {
-	if x != nil {
-		return x.DesktopGroupId
-	}
-	return ""
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateDesktopGroupRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
@@ -588,6 +888,13 @@ func (x *UpdateDesktopGroupRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
 		return x.UpdateMask
 	}
 	return nil
+}
+
+func (x *UpdateDesktopGroupRequest) GetDesktopGroupId() string {
+	if x != nil {
+		return x.DesktopGroupId
+	}
+	return ""
 }
 
 func (x *UpdateDesktopGroupRequest) GetDesktopImageId() string {
@@ -625,13 +932,6 @@ func (x *UpdateDesktopGroupRequest) GetResourcesSpec() *ResourcesSpec {
 	return nil
 }
 
-func (x *UpdateDesktopGroupRequest) GetGroupConfig() *DesktopGroupConfiguration {
-	if x != nil {
-		return x.GroupConfig
-	}
-	return nil
-}
-
 func (x *UpdateDesktopGroupRequest) GetBootDiskSpec() *DiskSpec {
 	if x != nil {
 		return x.BootDiskSpec
@@ -642,6 +942,13 @@ func (x *UpdateDesktopGroupRequest) GetBootDiskSpec() *DiskSpec {
 func (x *UpdateDesktopGroupRequest) GetDataDiskSpec() *DiskSpec {
 	if x != nil {
 		return x.DataDiskSpec
+	}
+	return nil
+}
+
+func (x *UpdateDesktopGroupRequest) GetGroupConfig() *DesktopGroupConfiguration {
+	if x != nil {
+		return x.GroupConfig
 	}
 	return nil
 }
@@ -689,322 +996,11 @@ func (*UpdateDesktopGroupRequest_AutoUpdatePolicy) isUpdateDesktopGroupRequest_U
 
 func (*UpdateDesktopGroupRequest_ManualUpdatePolicy) isUpdateDesktopGroupRequest_UpdatePolicy() {}
 
-type CreateDesktopGroupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create a DesktopGroup in.
-	//
-	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// An image used to create a desktop boot disk
-	DesktopImageId string `protobuf:"bytes,3,opt,name=desktop_image_id,json=desktopImageId,proto3" json:"desktop_image_id,omitempty"`
-	// Name of the DesktopGroup.
-	// The name must be unique within the folder.
-	Name string `protobuf:"bytes,11,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the DesktopGroup.
-	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource specification of the desktop group.
-	ResourcesSpec *ResourcesSpec `protobuf:"bytes,21,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
-	// Network interface specification of the desktop group.
-	NetworkInterfaceSpec *NetworkInterfaceSpec `protobuf:"bytes,22,opt,name=network_interface_spec,json=networkInterfaceSpec,proto3" json:"network_interface_spec,omitempty"`
-	// Boot disk specification of the desktop group.
-	BootDiskSpec *DiskSpec `protobuf:"bytes,23,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
-	// Data disk specification of the desktop group.
-	DataDiskSpec *DiskSpec `protobuf:"bytes,24,opt,name=data_disk_spec,json=dataDiskSpec,proto3" json:"data_disk_spec,omitempty"`
-	// Configuration of the desktop group.
-	GroupConfig *DesktopGroupConfiguration `protobuf:"bytes,25,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
-	// Desktop group labels.
-	Labels        map[string]string `protobuf:"bytes,26,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateDesktopGroupRequest) Reset() {
-	*x = CreateDesktopGroupRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateDesktopGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateDesktopGroupRequest) ProtoMessage() {}
-
-func (x *CreateDesktopGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateDesktopGroupRequest.ProtoReflect.Descriptor instead.
-func (*CreateDesktopGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *CreateDesktopGroupRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *CreateDesktopGroupRequest) GetDesktopImageId() string {
-	if x != nil {
-		return x.DesktopImageId
-	}
-	return ""
-}
-
-func (x *CreateDesktopGroupRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *CreateDesktopGroupRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *CreateDesktopGroupRequest) GetResourcesSpec() *ResourcesSpec {
-	if x != nil {
-		return x.ResourcesSpec
-	}
-	return nil
-}
-
-func (x *CreateDesktopGroupRequest) GetNetworkInterfaceSpec() *NetworkInterfaceSpec {
-	if x != nil {
-		return x.NetworkInterfaceSpec
-	}
-	return nil
-}
-
-func (x *CreateDesktopGroupRequest) GetBootDiskSpec() *DiskSpec {
-	if x != nil {
-		return x.BootDiskSpec
-	}
-	return nil
-}
-
-func (x *CreateDesktopGroupRequest) GetDataDiskSpec() *DiskSpec {
-	if x != nil {
-		return x.DataDiskSpec
-	}
-	return nil
-}
-
-func (x *CreateDesktopGroupRequest) GetGroupConfig() *DesktopGroupConfiguration {
-	if x != nil {
-		return x.GroupConfig
-	}
-	return nil
-}
-
-func (x *CreateDesktopGroupRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-type CreateDesktopGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the desktop group that is being created.
-	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *CreateDesktopGroupMetadata) Reset() {
-	*x = CreateDesktopGroupMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateDesktopGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateDesktopGroupMetadata) ProtoMessage() {}
-
-func (x *CreateDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateDesktopGroupMetadata.ProtoReflect.Descriptor instead.
-func (*CreateDesktopGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *CreateDesktopGroupMetadata) GetDesktopGroupId() string {
-	if x != nil {
-		return x.DesktopGroupId
-	}
-	return ""
-}
-
-type DeleteDesktopGroupRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the desktop group to delete.
-	//
-	// To get a desktop group ID make a [DesktopGroupService.List] request.
-	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *DeleteDesktopGroupRequest) Reset() {
-	*x = DeleteDesktopGroupRequest{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteDesktopGroupRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteDesktopGroupRequest) ProtoMessage() {}
-
-func (x *DeleteDesktopGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteDesktopGroupRequest.ProtoReflect.Descriptor instead.
-func (*DeleteDesktopGroupRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *DeleteDesktopGroupRequest) GetDesktopGroupId() string {
-	if x != nil {
-		return x.DesktopGroupId
-	}
-	return ""
-}
-
-type DeleteDesktopGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the desktop group that is being deleted.
-	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *DeleteDesktopGroupMetadata) Reset() {
-	*x = DeleteDesktopGroupMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteDesktopGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteDesktopGroupMetadata) ProtoMessage() {}
-
-func (x *DeleteDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteDesktopGroupMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteDesktopGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *DeleteDesktopGroupMetadata) GetDesktopGroupId() string {
-	if x != nil {
-		return x.DesktopGroupId
-	}
-	return ""
-}
-
-type UpdateDesktopGroupMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the desktop group that is being updated.
-	DesktopGroupId string `protobuf:"bytes,1,opt,name=desktop_group_id,json=desktopGroupId,proto3" json:"desktop_group_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *UpdateDesktopGroupMetadata) Reset() {
-	*x = UpdateDesktopGroupMetadata{}
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateDesktopGroupMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateDesktopGroupMetadata) ProtoMessage() {}
-
-func (x *UpdateDesktopGroupMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateDesktopGroupMetadata.ProtoReflect.Descriptor instead.
-func (*UpdateDesktopGroupMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *UpdateDesktopGroupMetadata) GetDesktopGroupId() string {
-	if x != nil {
-		return x.DesktopGroupId
-	}
-	return ""
-}
-
 var File_yandex_cloud_clouddesktop_v1_desktop_group_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/clouddesktop/v1/desktop_group_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/clouddesktop/v1/desktop.proto\x1a0yandex/cloud/clouddesktop/v1/desktop_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\"P\n" +
+	"8yandex/cloud/clouddesktop/v1/desktop_group_service.proto\x12 yandex.cloud.clouddesktop.v1.api\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/clouddesktop/v1/desktop.proto\x1a0yandex/cloud/clouddesktop/v1/desktop_group.proto\x1a'yandex/cloud/clouddesktop/v1/disk.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"P\n" +
 	"\x16GetDesktopGroupRequest\x126\n" +
 	"\x10desktop_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopGroupId\"\xe8\x01\n" +
 	"\x18ListDesktopGroupsRequest\x12)\n" +
@@ -1043,43 +1039,22 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDesc = ""
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\xc6\b\n" +
-	"\x19UpdateDesktopGroupRequest\x126\n" +
-	"\x10desktop_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopGroupId\x12;\n" +
-	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x122\n" +
-	"\x10desktop_image_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x0edesktopImageId\x127\n" +
-	"\x04name\x18\x04 \x01(\tB#\xf2\xc71\x1f|[a-z]([-a-z0-9]{0,61}[a-z0-9])R\x04name\x12,\n" +
-	"\vdescription\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12\x9c\x01\n" +
-	"\x06labels\x18\x06 \x03(\v2G.yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12V\n" +
-	"\x0eresources_spec\x18\a \x01(\v2/.yandex.cloud.clouddesktop.v1.api.ResourcesSpecR\rresourcesSpec\x12^\n" +
-	"\fgroup_config\x18\n" +
-	" \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x12P\n" +
-	"\x0eboot_disk_spec\x18\v \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fbootDiskSpec\x12P\n" +
-	"\x0edata_disk_spec\x18\f \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x12b\n" +
-	"\x12auto_update_policy\x18\r \x01(\v22.yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicyH\x00R\x10autoUpdatePolicy\x12h\n" +
-	"\x14manual_update_policy\x18\x0e \x01(\v24.yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicyH\x00R\x12manualUpdatePolicy\x1a9\n" +
-	"\vLabelsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
-	"\rupdate_policyJ\x04\b\b\x10\n" +
-	"\"\x94\a\n" +
+	"\x0fnext_page_token\x18\x16 \x01(\tR\rnextPageTokenJ\x04\b\x02\x10\x16\"\x9a\a\n" +
 	"\x19CreateDesktopGroupRequest\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x126\n" +
 	"\x10desktop_image_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopImageId\x126\n" +
 	"\x04name\x18\v \x01(\tB\"\xf2\xc71\x1e[a-z]([-a-z0-9]{0,61}[a-z0-9])R\x04name\x12,\n" +
 	"\vdescription\x18\f \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12V\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12\x9c\x01\n" +
+	"\x06labels\x18\x1a \x03(\v2G.yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12V\n" +
 	"\x0eresources_spec\x18\x15 \x01(\v2/.yandex.cloud.clouddesktop.v1.api.ResourcesSpecR\rresourcesSpec\x12l\n" +
 	"\x16network_interface_spec\x18\x16 \x01(\v26.yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpecR\x14networkInterfaceSpec\x12P\n" +
 	"\x0eboot_disk_spec\x18\x17 \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fbootDiskSpec\x12P\n" +
 	"\x0edata_disk_spec\x18\x18 \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x12^\n" +
-	"\fgroup_config\x18\x19 \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x12\x9c\x01\n" +
-	"\x06labels\x18\x1a \x03(\v2G.yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\fgroup_config\x18\x19 \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\r\x10\x15J\x04\b\x04\x10\v\"F\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x02J\x04\b\x04\x10\vJ\x04\b\r\x10\x15\"F\n" +
 	"\x1aCreateDesktopGroupMetadata\x12(\n" +
 	"\x10desktop_group_id\x18\x01 \x01(\tR\x0edesktopGroupId\"S\n" +
 	"\x19DeleteDesktopGroupRequest\x126\n" +
@@ -1087,18 +1062,39 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_rawDesc = ""
 	"\x1aDeleteDesktopGroupMetadata\x12(\n" +
 	"\x10desktop_group_id\x18\x01 \x01(\tR\x0edesktopGroupId\"F\n" +
 	"\x1aUpdateDesktopGroupMetadata\x12(\n" +
-	"\x10desktop_group_id\x18\x01 \x01(\tR\x0edesktopGroupId2\xe6\x10\n" +
+	"\x10desktop_group_id\x18\x01 \x01(\tR\x0edesktopGroupId\"\xc6\b\n" +
+	"\x19UpdateDesktopGroupRequest\x12;\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\x126\n" +
+	"\x10desktop_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0edesktopGroupId\x122\n" +
+	"\x10desktop_image_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x0edesktopImageId\x127\n" +
+	"\x04name\x18\x04 \x01(\tB#\xf2\xc71\x1f|[a-z]([-a-z0-9]{0,61}[a-z0-9])R\x04name\x12,\n" +
+	"\vdescription\x18\x05 \x01(\tB\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12\x9c\x01\n" +
+	"\x06labels\x18\x06 \x03(\v2G.yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12V\n" +
+	"\x0eresources_spec\x18\a \x01(\v2/.yandex.cloud.clouddesktop.v1.api.ResourcesSpecR\rresourcesSpec\x12P\n" +
+	"\x0eboot_disk_spec\x18\v \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fbootDiskSpec\x12P\n" +
+	"\x0edata_disk_spec\x18\f \x01(\v2*.yandex.cloud.clouddesktop.v1.api.DiskSpecR\fdataDiskSpec\x12^\n" +
+	"\fgroup_config\x18\n" +
+	" \x01(\v2;.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfigurationR\vgroupConfig\x12b\n" +
+	"\x12auto_update_policy\x18\r \x01(\v22.yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicyH\x00R\x10autoUpdatePolicy\x12h\n" +
+	"\x14manual_update_policy\x18\x0e \x01(\v24.yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicyH\x00R\x12manualUpdatePolicy\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
+	"\rupdate_policyJ\x04\b\b\x10\n" +
+	"2\xe6\x10\n" +
 	"\x13DesktopGroupService\x12\xab\x01\n" +
 	"\x03Get\x128.yandex.cloud.clouddesktop.v1.api.GetDesktopGroupRequest\x1a..yandex.cloud.clouddesktop.v1.api.DesktopGroup\":\x82\xd3\xe4\x93\x024\x122/cloud-desktop/v1/desktopGroups/{desktop_group_id}\x12\xa8\x01\n" +
 	"\x04List\x12:.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsRequest\x1a;.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/cloud-desktop/v1/desktopGroups\x12\xda\x01\n" +
 	"\fListDesktops\x12A.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsRequest\x1aB.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/cloud-desktop/v1/desktopGroups/{desktop_group_id}/desktops\x12\xe2\x01\n" +
 	"\x0eListOperations\x12C.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsRequest\x1aD.yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse\"E\x82\xd3\xe4\x93\x02?\x12=/cloud-desktop/v1/desktopGroups/{desktop_group_id}/operations\x12\xc2\x01\n" +
 	"\x06Create\x12;.yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2**\n" +
-	"\x1aCreateDesktopGroupMetadata\x12\fDesktopGroup\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/cloud-desktop/v1/desktopGroups\x12\xde\x01\n" +
-	"\x06Update\x12;.yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*3\n" +
-	"\x1aUpdateDesktopGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x027:\x01*22/cloud-desktop/v1/desktopGroups/{desktop_group_id}\x12\xdb\x01\n" +
+	"\x1aCreateDesktopGroupMetadata\x12\fDesktopGroup\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/cloud-desktop/v1/desktopGroups\x12\xdb\x01\n" +
 	"\x06Delete\x12;.yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*3\n" +
-	"\x1aDeleteDesktopGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x024*2/cloud-desktop/v1/desktopGroups/{desktop_group_id}\x12\xbf\x01\n" +
+	"\x1aDeleteDesktopGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x024*2/cloud-desktop/v1/desktopGroups/{desktop_group_id}\x12\xde\x01\n" +
+	"\x06Update\x12;.yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*3\n" +
+	"\x1aUpdateDesktopGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x027:\x01*22/cloud-desktop/v1/desktopGroups/{desktop_group_id}\x12\xbf\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"H\x82\xd3\xe4\x93\x02B\x12@/cloud-desktop/v1/desktopGroups/{resource_id}:listAccessBindings\x12\xef\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x87\x01\xb2\xd2*9\n" +
 	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D:\x01*\"?/cloud-desktop/v1/desktopGroups/{resource_id}:setAccessBindings\x12\xfb\x01\n" +
@@ -1127,24 +1123,24 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_goTypes = []an
 	(*ListDesktopGroupDesktopsResponse)(nil),   // 4: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse
 	(*ListDesktopGroupOperationsRequest)(nil),  // 5: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsRequest
 	(*ListDesktopGroupOperationsResponse)(nil), // 6: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse
-	(*UpdateDesktopGroupRequest)(nil),          // 7: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
-	(*CreateDesktopGroupRequest)(nil),          // 8: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
-	(*CreateDesktopGroupMetadata)(nil),         // 9: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupMetadata
-	(*DeleteDesktopGroupRequest)(nil),          // 10: yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
-	(*DeleteDesktopGroupMetadata)(nil),         // 11: yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupMetadata
-	(*UpdateDesktopGroupMetadata)(nil),         // 12: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupMetadata
-	nil,                                        // 13: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntry
-	nil,                                        // 14: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntry
+	(*CreateDesktopGroupRequest)(nil),          // 7: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
+	(*CreateDesktopGroupMetadata)(nil),         // 8: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupMetadata
+	(*DeleteDesktopGroupRequest)(nil),          // 9: yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
+	(*DeleteDesktopGroupMetadata)(nil),         // 10: yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupMetadata
+	(*UpdateDesktopGroupMetadata)(nil),         // 11: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupMetadata
+	(*UpdateDesktopGroupRequest)(nil),          // 12: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
+	nil,                                        // 13: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntry
+	nil,                                        // 14: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntry
 	(*DesktopGroup)(nil),                       // 15: yandex.cloud.clouddesktop.v1.api.DesktopGroup
 	(*Desktop)(nil),                            // 16: yandex.cloud.clouddesktop.v1.api.Desktop
 	(*operation.Operation)(nil),                // 17: yandex.cloud.operation.Operation
-	(*fieldmaskpb.FieldMask)(nil),              // 18: google.protobuf.FieldMask
-	(*ResourcesSpec)(nil),                      // 19: yandex.cloud.clouddesktop.v1.api.ResourcesSpec
-	(*DesktopGroupConfiguration)(nil),          // 20: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
-	(*DiskSpec)(nil),                           // 21: yandex.cloud.clouddesktop.v1.api.DiskSpec
-	(*AutoUpdatePolicy)(nil),                   // 22: yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
-	(*ManualUpdatePolicy)(nil),                 // 23: yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
-	(*NetworkInterfaceSpec)(nil),               // 24: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
+	(*ResourcesSpec)(nil),                      // 18: yandex.cloud.clouddesktop.v1.api.ResourcesSpec
+	(*NetworkInterfaceSpec)(nil),               // 19: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
+	(*DiskSpec)(nil),                           // 20: yandex.cloud.clouddesktop.v1.api.DiskSpec
+	(*DesktopGroupConfiguration)(nil),          // 21: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
+	(*fieldmaskpb.FieldMask)(nil),              // 22: google.protobuf.FieldMask
+	(*AutoUpdatePolicy)(nil),                   // 23: yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	(*ManualUpdatePolicy)(nil),                 // 24: yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
 	(*access.ListAccessBindingsRequest)(nil),   // 25: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),    // 26: yandex.cloud.access.SetAccessBindingsRequest
 	(*access.UpdateAccessBindingsRequest)(nil), // 27: yandex.cloud.access.UpdateAccessBindingsRequest
@@ -1154,27 +1150,27 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_depIdxs = []in
 	15, // 0: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsResponse.desktop_groups:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup
 	16, // 1: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse.desktops:type_name -> yandex.cloud.clouddesktop.v1.api.Desktop
 	17, // 2: yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	18, // 3: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	13, // 4: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntry
-	19, // 5: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
-	20, // 6: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
-	21, // 7: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	21, // 8: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	22, // 9: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.auto_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
-	23, // 10: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.manual_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
-	19, // 11: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
-	24, // 12: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	21, // 13: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	21, // 14: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	20, // 15: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
-	14, // 16: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntry
+	13, // 3: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.LabelsEntry
+	18, // 4: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
+	19, // 5: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
+	20, // 6: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	20, // 7: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	21, // 8: yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
+	22, // 9: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	14, // 10: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.labels:type_name -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.LabelsEntry
+	18, // 11: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
+	20, // 12: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	20, // 13: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	21, // 14: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
+	23, // 15: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.auto_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
+	24, // 16: yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest.manual_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
 	0,  // 17: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Get:input_type -> yandex.cloud.clouddesktop.v1.api.GetDesktopGroupRequest
 	1,  // 18: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.List:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupsRequest
 	3,  // 19: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsRequest
 	5,  // 20: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:input_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsRequest
-	8,  // 21: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
-	7,  // 22: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
-	10, // 23: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
+	7,  // 21: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:input_type -> yandex.cloud.clouddesktop.v1.api.CreateDesktopGroupRequest
+	9,  // 22: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:input_type -> yandex.cloud.clouddesktop.v1.api.DeleteDesktopGroupRequest
+	12, // 23: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:input_type -> yandex.cloud.clouddesktop.v1.api.UpdateDesktopGroupRequest
 	25, // 24: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	26, // 25: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	27, // 26: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
@@ -1183,8 +1179,8 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_depIdxs = []in
 	4,  // 29: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListDesktops:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupDesktopsResponse
 	6,  // 30: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListOperations:output_type -> yandex.cloud.clouddesktop.v1.api.ListDesktopGroupOperationsResponse
 	17, // 31: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Create:output_type -> yandex.cloud.operation.Operation
-	17, // 32: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:output_type -> yandex.cloud.operation.Operation
-	17, // 33: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	17, // 32: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	17, // 33: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.Update:output_type -> yandex.cloud.operation.Operation
 	28, // 34: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
 	17, // 35: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
 	17, // 36: yandex.cloud.clouddesktop.v1.api.DesktopGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
@@ -1203,7 +1199,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_init() {
 	file_yandex_cloud_clouddesktop_v1_desktop_proto_init()
 	file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init()
 	file_yandex_cloud_clouddesktop_v1_disk_proto_init()
-	file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[7].OneofWrappers = []any{
+	file_yandex_cloud_clouddesktop_v1_desktop_group_service_proto_msgTypes[12].OneofWrappers = []any{
 		(*UpdateDesktopGroupRequest_AutoUpdatePolicy)(nil),
 		(*UpdateDesktopGroupRequest_ManualUpdatePolicy)(nil),
 	}

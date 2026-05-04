@@ -259,19 +259,6 @@ func (VideoFeatures_FeatureResult) EnumDescriptor() ([]byte, []int) {
 // Main entity representing a video in the platform.
 type Video struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the video upload source method (one source variant must be chosen).
-	//
-	// Types that are valid to be assigned to Source:
-	//
-	//	*Video_Tusd
-	Source isVideo_Source `protobuf_oneof:"source"`
-	// Specifies the video access permission settings.
-	//
-	// Types that are valid to be assigned to AccessRights:
-	//
-	//	*Video_PublicAccess
-	//	*Video_SignUrlAccess
-	AccessRights isVideo_AccessRights `protobuf_oneof:"access_rights"`
 	// Unique identifier of the video.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Identifier of the channel where the video is created and managed.
@@ -305,6 +292,19 @@ type Video struct {
 	SubtitleIds []string `protobuf:"bytes,12,rep,name=subtitle_ids,json=subtitleIds,proto3" json:"subtitle_ids,omitempty"`
 	// Additional video processing features and their results, such as summarization.
 	Features *VideoFeatures `protobuf:"bytes,13,opt,name=features,proto3" json:"features,omitempty"`
+	// Specifies the video upload source method (one source variant must be chosen).
+	//
+	// Types that are valid to be assigned to Source:
+	//
+	//	*Video_Tusd
+	Source isVideo_Source `protobuf_oneof:"source"`
+	// Specifies the video access permission settings.
+	//
+	// Types that are valid to be assigned to AccessRights:
+	//
+	//	*Video_PublicAccess
+	//	*Video_SignUrlAccess
+	AccessRights isVideo_AccessRights `protobuf_oneof:"access_rights"`
 	// Timestamp when the video was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the video or its metadata.
@@ -345,47 +345,6 @@ func (x *Video) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Video.ProtoReflect.Descriptor instead.
 func (*Video) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Video) GetSource() isVideo_Source {
-	if x != nil {
-		return x.Source
-	}
-	return nil
-}
-
-func (x *Video) GetTusd() *VideoTUSDSource {
-	if x != nil {
-		if x, ok := x.Source.(*Video_Tusd); ok {
-			return x.Tusd
-		}
-	}
-	return nil
-}
-
-func (x *Video) GetAccessRights() isVideo_AccessRights {
-	if x != nil {
-		return x.AccessRights
-	}
-	return nil
-}
-
-func (x *Video) GetPublicAccess() *VideoPublicAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Video_PublicAccess); ok {
-			return x.PublicAccess
-		}
-	}
-	return nil
-}
-
-func (x *Video) GetSignUrlAccess() *VideoSignURLAccessRights {
-	if x != nil {
-		if x, ok := x.AccessRights.(*Video_SignUrlAccess); ok {
-			return x.SignUrlAccess
-		}
-	}
-	return nil
 }
 
 func (x *Video) GetId() string {
@@ -482,6 +441,47 @@ func (x *Video) GetSubtitleIds() []string {
 func (x *Video) GetFeatures() *VideoFeatures {
 	if x != nil {
 		return x.Features
+	}
+	return nil
+}
+
+func (x *Video) GetSource() isVideo_Source {
+	if x != nil {
+		return x.Source
+	}
+	return nil
+}
+
+func (x *Video) GetTusd() *VideoTUSDSource {
+	if x != nil {
+		if x, ok := x.Source.(*Video_Tusd); ok {
+			return x.Tusd
+		}
+	}
+	return nil
+}
+
+func (x *Video) GetAccessRights() isVideo_AccessRights {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
+func (x *Video) GetPublicAccess() *VideoPublicAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Video_PublicAccess); ok {
+			return x.PublicAccess
+		}
+	}
+	return nil
+}
+
+func (x *Video) GetSignUrlAccess() *VideoSignURLAccessRights {
+	if x != nil {
+		if x, ok := x.AccessRights.(*Video_SignUrlAccess); ok {
+			return x.SignUrlAccess
+		}
 	}
 	return nil
 }
@@ -675,7 +675,9 @@ func (*VideoSignURLAccessRights) Descriptor() ([]byte, []int) {
 type VideoFeatures struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Results of the video content summarization process.
-	Summary       *VideoFeatures_Summary `protobuf:"bytes,1,opt,name=summary,proto3" json:"summary,omitempty"`
+	Summary *VideoFeatures_Summary `protobuf:"bytes,1,opt,name=summary,proto3" json:"summary,omitempty"`
+	// Results of the speech recognition process.
+	SpeechToText  *VideoFeatures_SpeechToText `protobuf:"bytes,2,opt,name=speech_to_text,json=speechToText,proto3" json:"speech_to_text,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -713,6 +715,13 @@ func (*VideoFeatures) Descriptor() ([]byte, []int) {
 func (x *VideoFeatures) GetSummary() *VideoFeatures_Summary {
 	if x != nil {
 		return x.Summary
+	}
+	return nil
+}
+
+func (x *VideoFeatures) GetSpeechToText() *VideoFeatures_SpeechToText {
+	if x != nil {
+		return x.SpeechToText
 	}
 	return nil
 }
@@ -772,6 +781,61 @@ func (x *VideoFeatures_Summary) GetUrls() []*VideoFeatures_Summary_SummaryURL {
 	return nil
 }
 
+// Contains the results of speech-to-text processing.
+type VideoFeatures_SpeechToText struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Current status of the speech-to-text process.
+	Result VideoFeatures_FeatureResult `protobuf:"varint,1,opt,name=result,proto3,enum=yandex.cloud.video.v1.VideoFeatures_FeatureResult" json:"result,omitempty"`
+	// List of URLs to speech-to-text results for different audio tracks.
+	Urls          []*VideoFeatures_SpeechToText_SpeechToTextURL `protobuf:"bytes,3,rep,name=urls,proto3" json:"urls,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VideoFeatures_SpeechToText) Reset() {
+	*x = VideoFeatures_SpeechToText{}
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoFeatures_SpeechToText) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoFeatures_SpeechToText) ProtoMessage() {}
+
+func (x *VideoFeatures_SpeechToText) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoFeatures_SpeechToText.ProtoReflect.Descriptor instead.
+func (*VideoFeatures_SpeechToText) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{4, 1}
+}
+
+func (x *VideoFeatures_SpeechToText) GetResult() VideoFeatures_FeatureResult {
+	if x != nil {
+		return x.Result
+	}
+	return VideoFeatures_FEATURE_RESULT_UNSPECIFIED
+}
+
+func (x *VideoFeatures_SpeechToText) GetUrls() []*VideoFeatures_SpeechToText_SpeechToTextURL {
+	if x != nil {
+		return x.Urls
+	}
+	return nil
+}
+
 // Contains a URL to a summarization result for a specific audio track.
 type VideoFeatures_Summary_SummaryURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -787,7 +851,7 @@ type VideoFeatures_Summary_SummaryURL struct {
 
 func (x *VideoFeatures_Summary_SummaryURL) Reset() {
 	*x = VideoFeatures_Summary_SummaryURL{}
-	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[7]
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -799,7 +863,7 @@ func (x *VideoFeatures_Summary_SummaryURL) String() string {
 func (*VideoFeatures_Summary_SummaryURL) ProtoMessage() {}
 
 func (x *VideoFeatures_Summary_SummaryURL) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[7]
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -836,15 +900,76 @@ func (x *VideoFeatures_Summary_SummaryURL) GetSrcLang() string {
 	return ""
 }
 
+// Contains a URL to a speech-to-text result for a specific audio track.
+type VideoFeatures_SpeechToText_SpeechToTextURL struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// URL to the speech-to-text result file.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// Input audio track index (one-based) that was transcribed.
+	TrackIndex int64 `protobuf:"varint,2,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
+	SrcLang       string `protobuf:"bytes,3,opt,name=src_lang,json=srcLang,proto3" json:"src_lang,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) Reset() {
+	*x = VideoFeatures_SpeechToText_SpeechToTextURL{}
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoFeatures_SpeechToText_SpeechToTextURL) ProtoMessage() {}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_video_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoFeatures_SpeechToText_SpeechToTextURL.ProtoReflect.Descriptor instead.
+func (*VideoFeatures_SpeechToText_SpeechToTextURL) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_video_proto_rawDescGZIP(), []int{4, 1, 0}
+}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) GetTrackIndex() int64 {
+	if x != nil {
+		return x.TrackIndex
+	}
+	return 0
+}
+
+func (x *VideoFeatures_SpeechToText_SpeechToTextURL) GetSrcLang() string {
+	if x != nil {
+		return x.SrcLang
+	}
+	return ""
+}
+
 var File_yandex_cloud_video_v1_video_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\n" +
 	"!yandex/cloud/video/v1/video.proto\x12\x15yandex.cloud.video.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xaf\v\n" +
-	"\x05Video\x12=\n" +
-	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDSourceH\x00R\x04tusd\x12V\n" +
-	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessRightsH\x01R\fpublicAccess\x12Z\n" +
-	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessRightsH\x01R\rsignUrlAccess\x12\x0e\n" +
+	"\x05Video\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
@@ -859,7 +984,10 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\x0fstyle_preset_id\x18\x10 \x01(\tR\rstylePresetId\x127\n" +
 	"\tenable_ad\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueR\benableAd\x12!\n" +
 	"\fsubtitle_ids\x18\f \x03(\tR\vsubtitleIds\x12@\n" +
-	"\bfeatures\x18\r \x01(\v2$.yandex.cloud.video.v1.VideoFeaturesR\bfeatures\x129\n" +
+	"\bfeatures\x18\r \x01(\v2$.yandex.cloud.video.v1.VideoFeaturesR\bfeatures\x12=\n" +
+	"\x04tusd\x18\xe8\a \x01(\v2&.yandex.cloud.video.v1.VideoTUSDSourceH\x00R\x04tusd\x12V\n" +
+	"\rpublic_access\x18\xd0\x0f \x01(\v2..yandex.cloud.video.v1.VideoPublicAccessRightsH\x01R\fpublicAccess\x12Z\n" +
+	"\x0fsign_url_access\x18\xd3\x0f \x01(\v2/.yandex.cloud.video.v1.VideoSignURLAccessRightsH\x01R\rsignUrlAccess\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -887,14 +1015,23 @@ const file_yandex_cloud_video_v1_video_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1b\n" +
 	"\tfile_size\x18\x02 \x01(\x03R\bfileSize\"\x19\n" +
 	"\x17VideoPublicAccessRights\"\x1a\n" +
-	"\x18VideoSignURLAccessRights\"\xcb\x03\n" +
+	"\x18VideoSignURLAccessRights\"\xbf\x06\n" +
 	"\rVideoFeatures\x12F\n" +
-	"\asummary\x18\x01 \x01(\v2,.yandex.cloud.video.v1.VideoFeatures.SummaryR\asummary\x1a\x84\x02\n" +
+	"\asummary\x18\x01 \x01(\v2,.yandex.cloud.video.v1.VideoFeatures.SummaryR\asummary\x12W\n" +
+	"\x0espeech_to_text\x18\x02 \x01(\v21.yandex.cloud.video.v1.VideoFeatures.SpeechToTextR\fspeechToText\x1a\x84\x02\n" +
 	"\aSummary\x12J\n" +
 	"\x06result\x18\x01 \x01(\x0e22.yandex.cloud.video.v1.VideoFeatures.FeatureResultR\x06result\x12K\n" +
 	"\x04urls\x18\x03 \x03(\v27.yandex.cloud.video.v1.VideoFeatures.Summary.SummaryURLR\x04urls\x1aZ\n" +
 	"\n" +
 	"SummaryURL\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1f\n" +
+	"\vtrack_index\x18\x02 \x01(\x03R\n" +
+	"trackIndex\x12\x19\n" +
+	"\bsrc_lang\x18\x03 \x01(\tR\asrcLangJ\x04\b\x02\x10\x03\x1a\x98\x02\n" +
+	"\fSpeechToText\x12J\n" +
+	"\x06result\x18\x01 \x01(\x0e22.yandex.cloud.video.v1.VideoFeatures.FeatureResultR\x06result\x12U\n" +
+	"\x04urls\x18\x03 \x03(\v2A.yandex.cloud.video.v1.VideoFeatures.SpeechToText.SpeechToTextURLR\x04urls\x1a_\n" +
+	"\x0fSpeechToTextURL\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1f\n" +
 	"\vtrack_index\x18\x02 \x01(\x03R\n" +
 	"trackIndex\x12\x19\n" +
@@ -927,45 +1064,50 @@ func file_yandex_cloud_video_v1_video_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_video_v1_video_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_yandex_cloud_video_v1_video_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_video_v1_video_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_yandex_cloud_video_v1_video_proto_goTypes = []any{
-	(AutoTranscode)(0),                       // 0: yandex.cloud.video.v1.AutoTranscode
-	(Video_VideoStatus)(0),                   // 1: yandex.cloud.video.v1.Video.VideoStatus
-	(Video_VisibilityStatus)(0),              // 2: yandex.cloud.video.v1.Video.VisibilityStatus
-	(VideoFeatures_FeatureResult)(0),         // 3: yandex.cloud.video.v1.VideoFeatures.FeatureResult
-	(*Video)(nil),                            // 4: yandex.cloud.video.v1.Video
-	(*VideoTUSDSource)(nil),                  // 5: yandex.cloud.video.v1.VideoTUSDSource
-	(*VideoPublicAccessRights)(nil),          // 6: yandex.cloud.video.v1.VideoPublicAccessRights
-	(*VideoSignURLAccessRights)(nil),         // 7: yandex.cloud.video.v1.VideoSignURLAccessRights
-	(*VideoFeatures)(nil),                    // 8: yandex.cloud.video.v1.VideoFeatures
-	nil,                                      // 9: yandex.cloud.video.v1.Video.LabelsEntry
-	(*VideoFeatures_Summary)(nil),            // 10: yandex.cloud.video.v1.VideoFeatures.Summary
-	(*VideoFeatures_Summary_SummaryURL)(nil), // 11: yandex.cloud.video.v1.VideoFeatures.Summary.SummaryURL
-	(*durationpb.Duration)(nil),              // 12: google.protobuf.Duration
-	(*wrapperspb.BoolValue)(nil),             // 13: google.protobuf.BoolValue
-	(*timestamppb.Timestamp)(nil),            // 14: google.protobuf.Timestamp
+	(AutoTranscode)(0),                                 // 0: yandex.cloud.video.v1.AutoTranscode
+	(Video_VideoStatus)(0),                             // 1: yandex.cloud.video.v1.Video.VideoStatus
+	(Video_VisibilityStatus)(0),                        // 2: yandex.cloud.video.v1.Video.VisibilityStatus
+	(VideoFeatures_FeatureResult)(0),                   // 3: yandex.cloud.video.v1.VideoFeatures.FeatureResult
+	(*Video)(nil),                                      // 4: yandex.cloud.video.v1.Video
+	(*VideoTUSDSource)(nil),                            // 5: yandex.cloud.video.v1.VideoTUSDSource
+	(*VideoPublicAccessRights)(nil),                    // 6: yandex.cloud.video.v1.VideoPublicAccessRights
+	(*VideoSignURLAccessRights)(nil),                   // 7: yandex.cloud.video.v1.VideoSignURLAccessRights
+	(*VideoFeatures)(nil),                              // 8: yandex.cloud.video.v1.VideoFeatures
+	nil,                                                // 9: yandex.cloud.video.v1.Video.LabelsEntry
+	(*VideoFeatures_Summary)(nil),                      // 10: yandex.cloud.video.v1.VideoFeatures.Summary
+	(*VideoFeatures_SpeechToText)(nil),                 // 11: yandex.cloud.video.v1.VideoFeatures.SpeechToText
+	(*VideoFeatures_Summary_SummaryURL)(nil),           // 12: yandex.cloud.video.v1.VideoFeatures.Summary.SummaryURL
+	(*VideoFeatures_SpeechToText_SpeechToTextURL)(nil), // 13: yandex.cloud.video.v1.VideoFeatures.SpeechToText.SpeechToTextURL
+	(*durationpb.Duration)(nil),                        // 14: google.protobuf.Duration
+	(*wrapperspb.BoolValue)(nil),                       // 15: google.protobuf.BoolValue
+	(*timestamppb.Timestamp)(nil),                      // 16: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_video_proto_depIdxs = []int32{
-	5,  // 0: yandex.cloud.video.v1.Video.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDSource
-	6,  // 1: yandex.cloud.video.v1.Video.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessRights
-	7,  // 2: yandex.cloud.video.v1.Video.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessRights
-	1,  // 3: yandex.cloud.video.v1.Video.status:type_name -> yandex.cloud.video.v1.Video.VideoStatus
-	2,  // 4: yandex.cloud.video.v1.Video.visibility_status:type_name -> yandex.cloud.video.v1.Video.VisibilityStatus
-	12, // 5: yandex.cloud.video.v1.Video.duration:type_name -> google.protobuf.Duration
-	0,  // 6: yandex.cloud.video.v1.Video.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
-	13, // 7: yandex.cloud.video.v1.Video.enable_ad:type_name -> google.protobuf.BoolValue
-	8,  // 8: yandex.cloud.video.v1.Video.features:type_name -> yandex.cloud.video.v1.VideoFeatures
-	14, // 9: yandex.cloud.video.v1.Video.created_at:type_name -> google.protobuf.Timestamp
-	14, // 10: yandex.cloud.video.v1.Video.updated_at:type_name -> google.protobuf.Timestamp
+	1,  // 0: yandex.cloud.video.v1.Video.status:type_name -> yandex.cloud.video.v1.Video.VideoStatus
+	2,  // 1: yandex.cloud.video.v1.Video.visibility_status:type_name -> yandex.cloud.video.v1.Video.VisibilityStatus
+	14, // 2: yandex.cloud.video.v1.Video.duration:type_name -> google.protobuf.Duration
+	0,  // 3: yandex.cloud.video.v1.Video.auto_transcode:type_name -> yandex.cloud.video.v1.AutoTranscode
+	15, // 4: yandex.cloud.video.v1.Video.enable_ad:type_name -> google.protobuf.BoolValue
+	8,  // 5: yandex.cloud.video.v1.Video.features:type_name -> yandex.cloud.video.v1.VideoFeatures
+	5,  // 6: yandex.cloud.video.v1.Video.tusd:type_name -> yandex.cloud.video.v1.VideoTUSDSource
+	6,  // 7: yandex.cloud.video.v1.Video.public_access:type_name -> yandex.cloud.video.v1.VideoPublicAccessRights
+	7,  // 8: yandex.cloud.video.v1.Video.sign_url_access:type_name -> yandex.cloud.video.v1.VideoSignURLAccessRights
+	16, // 9: yandex.cloud.video.v1.Video.created_at:type_name -> google.protobuf.Timestamp
+	16, // 10: yandex.cloud.video.v1.Video.updated_at:type_name -> google.protobuf.Timestamp
 	9,  // 11: yandex.cloud.video.v1.Video.labels:type_name -> yandex.cloud.video.v1.Video.LabelsEntry
 	10, // 12: yandex.cloud.video.v1.VideoFeatures.summary:type_name -> yandex.cloud.video.v1.VideoFeatures.Summary
-	3,  // 13: yandex.cloud.video.v1.VideoFeatures.Summary.result:type_name -> yandex.cloud.video.v1.VideoFeatures.FeatureResult
-	11, // 14: yandex.cloud.video.v1.VideoFeatures.Summary.urls:type_name -> yandex.cloud.video.v1.VideoFeatures.Summary.SummaryURL
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	11, // 13: yandex.cloud.video.v1.VideoFeatures.speech_to_text:type_name -> yandex.cloud.video.v1.VideoFeatures.SpeechToText
+	3,  // 14: yandex.cloud.video.v1.VideoFeatures.Summary.result:type_name -> yandex.cloud.video.v1.VideoFeatures.FeatureResult
+	12, // 15: yandex.cloud.video.v1.VideoFeatures.Summary.urls:type_name -> yandex.cloud.video.v1.VideoFeatures.Summary.SummaryURL
+	3,  // 16: yandex.cloud.video.v1.VideoFeatures.SpeechToText.result:type_name -> yandex.cloud.video.v1.VideoFeatures.FeatureResult
+	13, // 17: yandex.cloud.video.v1.VideoFeatures.SpeechToText.urls:type_name -> yandex.cloud.video.v1.VideoFeatures.SpeechToText.SpeechToTextURL
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_video_proto_init() }
@@ -984,7 +1126,7 @@ func file_yandex_cloud_video_v1_video_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_video_proto_rawDesc), len(file_yandex_cloud_video_v1_video_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

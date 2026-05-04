@@ -2790,7 +2790,7 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x92\x01\n" +
 	"\x06labels\x18\x03 \x03(\v2=.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12>\n" +
-	"\x04name\x18\x04 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12+\n" +
+	"\x04name\x18\x04 \x01(\tB*\xe8\xc71\x00\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12+\n" +
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12l\n" +
 	"\x0edefault_action\x18\x06 \x01(\x0e2?.yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultActionB\x04\xe8\xc71\x01R\rdefaultAction\x12U\n" +
 	"\x0esecurity_rules\x18\a \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x129\n" +

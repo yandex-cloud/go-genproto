@@ -64,24 +64,6 @@ func (m *CreateVideoRequest) SetAccessRights(v CreateVideoRequest_AccessRights) 
 	m.AccessRights = v
 }
 
-func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
-	m.Source = &CreateVideoRequest_Tusd{
-		Tusd: v,
-	}
-}
-
-func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
-	m.AccessRights = &CreateVideoRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *CreateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
-	m.AccessRights = &CreateVideoRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
-}
-
 func (m *CreateVideoRequest) SetChannelId(v string) {
 	m.ChannelId = v
 }
@@ -118,12 +100,34 @@ func (m *CreateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateVideoRequest) SetTusd(v *VideoTUSDParams) {
+	m.Source = &CreateVideoRequest_Tusd{
+		Tusd: v,
+	}
+}
+
+func (m *CreateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
+	m.AccessRights = &CreateVideoRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *CreateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &CreateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *VideoTUSDParams) SetFileSize(v int64) {
 	m.FileSize = v
 }
 
 func (m *VideoTUSDParams) SetFileName(v string) {
 	m.FileName = v
+}
+
+func (m *VideoTUSDParams) SetIsDeferred(v bool) {
+	m.IsDeferred = v
 }
 
 func (m *CreateVideoMetadata) SetVideoId(v string) {
@@ -134,18 +138,6 @@ type UpdateVideoRequest_AccessRights = isUpdateVideoRequest_AccessRights
 
 func (m *UpdateVideoRequest) SetAccessRights(v UpdateVideoRequest_AccessRights) {
 	m.AccessRights = v
-}
-
-func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
-	m.AccessRights = &UpdateVideoRequest_PublicAccess{
-		PublicAccess: v,
-	}
-}
-
-func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
-	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
-		SignUrlAccess: v,
-	}
 }
 
 func (m *UpdateVideoRequest) SetVideoId(v string) {
@@ -184,6 +176,18 @@ func (m *UpdateVideoRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdateVideoRequest) SetPublicAccess(v *VideoPublicAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_PublicAccess{
+		PublicAccess: v,
+	}
+}
+
+func (m *UpdateVideoRequest) SetSignUrlAccess(v *VideoSignURLAccessParams) {
+	m.AccessRights = &UpdateVideoRequest_SignUrlAccess{
+		SignUrlAccess: v,
+	}
+}
+
 func (m *UpdateVideoMetadata) SetVideoId(v string) {
 	m.VideoId = v
 }
@@ -206,6 +210,10 @@ func (m *TranscodeVideoRequest) SetTranslationSettings(v *VideoTranslationSettin
 
 func (m *TranscodeVideoRequest) SetSummarizationSettings(v *VideoSummarizationSettings) {
 	m.SummarizationSettings = v
+}
+
+func (m *TranscodeVideoRequest) SetSpeechToTextSettings(v *VideoSpeechToTextSettings) {
+	m.SpeechToTextSettings = v
 }
 
 func (m *VideoTranslationSettings) SetTracks(v []*VideoTranslationSettings_TranslationTrack) {
@@ -268,6 +276,26 @@ func (m *VideoSummarizationSettings_InputTrack) SetSrcLang(v string) {
 	m.SrcLang = v
 }
 
+func (m *VideoSpeechToTextSettings) SetTracks(v []*VideoSpeechToTextSettings_SpeechToTextTrack) {
+	m.Tracks = v
+}
+
+func (m *VideoSpeechToTextSettings) SetProcessAllTracks(v bool) {
+	m.ProcessAllTracks = v
+}
+
+func (m *VideoSpeechToTextSettings_SpeechToTextTrack) SetInputTrack(v *VideoSpeechToTextSettings_InputTrack) {
+	m.InputTrack = v
+}
+
+func (m *VideoSpeechToTextSettings_InputTrack) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *VideoSpeechToTextSettings_InputTrack) SetSrcLang(v string) {
+	m.SrcLang = v
+}
+
 func (m *TranscodeVideoMetadata) SetVideoId(v string) {
 	m.VideoId = v
 }
@@ -298,6 +326,10 @@ func (m *PerformVideoActionRequest) SetAction(v PerformVideoActionRequest_Action
 	m.Action = v
 }
 
+func (m *PerformVideoActionRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
 func (m *PerformVideoActionRequest) SetPublish(v *PublishVideoAction) {
 	m.Action = &PerformVideoActionRequest_Publish{
 		Publish: v,
@@ -308,10 +340,6 @@ func (m *PerformVideoActionRequest) SetUnpublish(v *UnpublishVideoAction) {
 	m.Action = &PerformVideoActionRequest_Unpublish{
 		Unpublish: v,
 	}
-}
-
-func (m *PerformVideoActionRequest) SetVideoId(v string) {
-	m.VideoId = v
 }
 
 func (m *PerformVideoActionMetadata) SetVideoId(v string) {
@@ -384,4 +412,32 @@ func (m *GetVideoManifestsRequest) SetVideoId(v string) {
 
 func (m *GetVideoManifestsResponse) SetManifests(v []*Manifest) {
 	m.Manifests = v
+}
+
+func (m *GetVideoScreenshotsRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *GetVideoScreenshotsResponse) SetScreenshots(v []string) {
+	m.Screenshots = v
+}
+
+func (m *BatchGetVideoScreenshotsRequest) SetChannelId(v string) {
+	m.ChannelId = v
+}
+
+func (m *BatchGetVideoScreenshotsRequest) SetVideoIds(v []string) {
+	m.VideoIds = v
+}
+
+func (m *BatchGetVideoScreenshotsResponse) SetVideoScreenshots(v []*VideoScreenshots) {
+	m.VideoScreenshots = v
+}
+
+func (m *VideoScreenshots) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *VideoScreenshots) SetScreenshots(v []string) {
+	m.Screenshots = v
 }
