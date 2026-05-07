@@ -30,7 +30,6 @@ const (
 // A set of methods for managing subscription instances.
 type InstanceServiceClient interface {
 	// Returns the specified subscription instance.
-	//
 	// To get the list of all available subscription instances, make a [List] request.
 	Get(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
 	// Retrieves the list of subscription instances in the specified folder.
@@ -72,7 +71,6 @@ func (c *instanceServiceClient) List(ctx context.Context, in *ListInstancesReque
 // A set of methods for managing subscription instances.
 type InstanceServiceServer interface {
 	// Returns the specified subscription instance.
-	//
 	// To get the list of all available subscription instances, make a [List] request.
 	Get(context.Context, *GetInstanceRequest) (*Instance, error)
 	// Retrieves the list of subscription instances in the specified folder.

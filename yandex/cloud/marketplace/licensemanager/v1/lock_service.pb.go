@@ -427,7 +427,6 @@ type ListLocksRequest struct {
 	// [ListLocksResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters subscription locks listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Lock.product_id] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
@@ -519,7 +518,6 @@ type ListLocksResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListLocksRequest.page_size], use `next_page_token` as the value
 	// for the [ListLocksRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields

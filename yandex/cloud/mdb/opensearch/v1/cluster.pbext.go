@@ -116,6 +116,10 @@ func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
 }
 
+func (m *ClusterConfig) SetAuditLog(v *AuditLog) {
+	m.AuditLog = v
+}
+
 type OpenSearch_Config = isOpenSearch_Config
 
 func (m *OpenSearch) SetConfig(v OpenSearch_Config) {
@@ -310,6 +314,38 @@ func (m *Access) SetDataTransfer(v bool) {
 
 func (m *Access) SetServerless(v bool) {
 	m.Serverless = v
+}
+
+func (m *AuditLog) SetComplianceEnabled(v *wrapperspb.BoolValue) {
+	m.ComplianceEnabled = v
+}
+
+func (m *AuditLog) SetLogRequestBody(v *wrapperspb.BoolValue) {
+	m.LogRequestBody = v
+}
+
+func (m *AuditLog) SetLogSearchQueries(v *wrapperspb.BoolValue) {
+	m.LogSearchQueries = v
+}
+
+func (m *AuditLog) SetLogDataModifications(v *wrapperspb.BoolValue) {
+	m.LogDataModifications = v
+}
+
+func (m *AuditLog) SetLogIndexMetadataAccess(v *wrapperspb.BoolValue) {
+	m.LogIndexMetadataAccess = v
+}
+
+func (m *AuditLog) SetLogMonitoringChecks(v *wrapperspb.BoolValue) {
+	m.LogMonitoringChecks = v
+}
+
+func (m *AuditLog) SetLogIndexMaintenance(v *wrapperspb.BoolValue) {
+	m.LogIndexMaintenance = v
+}
+
+func (m *AuditLog) SetLogBackupOperations(v *wrapperspb.BoolValue) {
+	m.LogBackupOperations = v
 }
 
 func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v int64) {

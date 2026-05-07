@@ -96,6 +96,10 @@ func (m *LifecycleRule) SetVersionRegexp(v string) {
 	m.VersionRegexp = v
 }
 
+func (m *LifecycleRule) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *DockerFilters) SetTagStatus(v DockerFilters_TagStatus) {
 	m.TagStatus = v
 }

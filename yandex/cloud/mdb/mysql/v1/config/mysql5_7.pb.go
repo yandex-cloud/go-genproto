@@ -26,38 +26,70 @@ const (
 type MysqlConfig5_7_SQLMode int32
 
 const (
-	MysqlConfig5_7_SQLMODE_UNSPECIFIED        MysqlConfig5_7_SQLMode = 0
-	MysqlConfig5_7_ALLOW_INVALID_DATES        MysqlConfig5_7_SQLMode = 1
-	MysqlConfig5_7_ANSI_QUOTES                MysqlConfig5_7_SQLMode = 2
+	// Unspecified.
+	MysqlConfig5_7_SQLMODE_UNSPECIFIED MysqlConfig5_7_SQLMode = 0
+	// Allow dates where the day or month part is 0. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_allow_invalid_dates).
+	MysqlConfig5_7_ALLOW_INVALID_DATES MysqlConfig5_7_SQLMode = 1
+	// Treat `"` as an identifier quote character (like the “ ` “ quote character) rather than as a string quote character. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_ansi_quotes).
+	MysqlConfig5_7_ANSI_QUOTES MysqlConfig5_7_SQLMode = 2
+	// Produce an error for divisions by zero. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_error_for_division_by_zero).
 	MysqlConfig5_7_ERROR_FOR_DIVISION_BY_ZERO MysqlConfig5_7_SQLMode = 3
-	MysqlConfig5_7_HIGH_NOT_PRECEDENCE        MysqlConfig5_7_SQLMode = 4
-	MysqlConfig5_7_IGNORE_SPACE               MysqlConfig5_7_SQLMode = 5
-	MysqlConfig5_7_NO_AUTO_VALUE_ON_ZERO      MysqlConfig5_7_SQLMode = 6
-	MysqlConfig5_7_NO_BACKSLASH_ESCAPES       MysqlConfig5_7_SQLMode = 7
-	MysqlConfig5_7_NO_ENGINE_SUBSTITUTION     MysqlConfig5_7_SQLMode = 8
-	MysqlConfig5_7_NO_UNSIGNED_SUBTRACTION    MysqlConfig5_7_SQLMode = 9
-	MysqlConfig5_7_NO_ZERO_DATE               MysqlConfig5_7_SQLMode = 10
-	MysqlConfig5_7_NO_ZERO_IN_DATE            MysqlConfig5_7_SQLMode = 11
-	MysqlConfig5_7_NO_FIELD_OPTIONS           MysqlConfig5_7_SQLMode = 12
-	MysqlConfig5_7_NO_KEY_OPTIONS             MysqlConfig5_7_SQLMode = 13
-	MysqlConfig5_7_NO_TABLE_OPTIONS           MysqlConfig5_7_SQLMode = 14
-	MysqlConfig5_7_ONLY_FULL_GROUP_BY         MysqlConfig5_7_SQLMode = 15
-	MysqlConfig5_7_PAD_CHAR_TO_FULL_LENGTH    MysqlConfig5_7_SQLMode = 16
-	MysqlConfig5_7_PIPES_AS_CONCAT            MysqlConfig5_7_SQLMode = 17
-	MysqlConfig5_7_REAL_AS_FLOAT              MysqlConfig5_7_SQLMode = 18
-	MysqlConfig5_7_STRICT_ALL_TABLES          MysqlConfig5_7_SQLMode = 19
-	MysqlConfig5_7_STRICT_TRANS_TABLES        MysqlConfig5_7_SQLMode = 20
-	MysqlConfig5_7_ANSI                       MysqlConfig5_7_SQLMode = 21
-	MysqlConfig5_7_TRADITIONAL                MysqlConfig5_7_SQLMode = 22
-	MysqlConfig5_7_DB2                        MysqlConfig5_7_SQLMode = 23
-	MysqlConfig5_7_MAXDB                      MysqlConfig5_7_SQLMode = 24
-	MysqlConfig5_7_MSSQL                      MysqlConfig5_7_SQLMode = 25
-	MysqlConfig5_7_MYSQL323                   MysqlConfig5_7_SQLMode = 26
-	MysqlConfig5_7_MYSQL40                    MysqlConfig5_7_SQLMode = 27
-	MysqlConfig5_7_ORACLE                     MysqlConfig5_7_SQLMode = 28
-	MysqlConfig5_7_POSTGRESQL                 MysqlConfig5_7_SQLMode = 29
-	MysqlConfig5_7_NO_AUTO_CREATE_USER        MysqlConfig5_7_SQLMode = 30
-	MysqlConfig5_7_NO_DIR_IN_CREATE           MysqlConfig5_7_SQLMode = 31
+	// Give `NOT` higher precedence in negation than it has in non-high-precedence mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_high_not_precedence).
+	MysqlConfig5_7_HIGH_NOT_PRECEDENCE MysqlConfig5_7_SQLMode = 4
+	// Allow spaces between a function name and the `(` character. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_ignore_space).
+	MysqlConfig5_7_IGNORE_SPACE MysqlConfig5_7_SQLMode = 5
+	// Do not reset the AUTO_INCREMENT column to 0 when inserting 0 into it. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_auto_value_on_zero).
+	MysqlConfig5_7_NO_AUTO_VALUE_ON_ZERO MysqlConfig5_7_SQLMode = 6
+	// Disable the use of the backslash character (`\`) as an escape character within strings. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_backslash_escapes).
+	MysqlConfig5_7_NO_BACKSLASH_ESCAPES MysqlConfig5_7_SQLMode = 7
+	// Do not substitute the default storage engine when a statement specifies a storage engine that is disabled or not compiled in. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_engine_substitution).
+	MysqlConfig5_7_NO_ENGINE_SUBSTITUTION MysqlConfig5_7_SQLMode = 8
+	// Disable unsigned subtraction so that subtraction results are always signed. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_unsigned_subtraction).
+	MysqlConfig5_7_NO_UNSIGNED_SUBTRACTION MysqlConfig5_7_SQLMode = 9
+	// Disable the MySQL-specific date `0000-00-00`. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_date).
+	MysqlConfig5_7_NO_ZERO_DATE MysqlConfig5_7_SQLMode = 10
+	// Disable month or day parts of `0` in dates. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_zero_in_date).
+	MysqlConfig5_7_NO_ZERO_IN_DATE MysqlConfig5_7_SQLMode = 11
+	// Ignore field options in `CREATE TABLE` statements (MySQL 5.7 compatibility). See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_field_options).
+	MysqlConfig5_7_NO_FIELD_OPTIONS MysqlConfig5_7_SQLMode = 12
+	// Ignore key options in `CREATE TABLE` statements (MySQL 5.7 compatibility). See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_key_options).
+	MysqlConfig5_7_NO_KEY_OPTIONS MysqlConfig5_7_SQLMode = 13
+	// Ignore table options in `CREATE TABLE` statements (MySQL 5.7 compatibility). See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_table_options).
+	MysqlConfig5_7_NO_TABLE_OPTIONS MysqlConfig5_7_SQLMode = 14
+	// Reject queries for which the select list, `HAVING` condition, or `ORDER BY` list refer to non-aggregated columns that are not named in the `GROUP BY` clause. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_only_full_group_by).
+	MysqlConfig5_7_ONLY_FULL_GROUP_BY MysqlConfig5_7_SQLMode = 15
+	// Pad `CHAR` column values with spaces to the full column length when retrieving them. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_pad_char_to_full_length).
+	MysqlConfig5_7_PAD_CHAR_TO_FULL_LENGTH MysqlConfig5_7_SQLMode = 16
+	// Treat `||` as a string concatenation operator rather than as `OR`. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_pipes_as_concat).
+	MysqlConfig5_7_PIPES_AS_CONCAT MysqlConfig5_7_SQLMode = 17
+	// Treat `REAL` as a synonym for `FLOAT` rather than `DOUBLE`. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_real_as_float).
+	MysqlConfig5_7_REAL_AS_FLOAT MysqlConfig5_7_SQLMode = 18
+	// Strict mode for all storage engines. Invalid data values cause errors, not warnings. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_strict_all_tables).
+	MysqlConfig5_7_STRICT_ALL_TABLES MysqlConfig5_7_SQLMode = 19
+	// Strict mode for transactional storage engines. Invalid data values cause errors, not warnings. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_strict_trans_tables).
+	MysqlConfig5_7_STRICT_TRANS_TABLES MysqlConfig5_7_SQLMode = 20
+	// Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, and `ONLY_FULL_GROUP_BY`. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_ansi).
+	MysqlConfig5_7_ANSI MysqlConfig5_7_SQLMode = 21
+	// Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, and `NO_AUTO_CREATE_USER`. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_traditional).
+	MysqlConfig5_7_TRADITIONAL MysqlConfig5_7_SQLMode = 22
+	// IBM DB2 compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_db2).
+	MysqlConfig5_7_DB2 MysqlConfig5_7_SQLMode = 23
+	// SAP MaxDB compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_maxdb).
+	MysqlConfig5_7_MAXDB MysqlConfig5_7_SQLMode = 24
+	// Microsoft SQL Server compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_mssql).
+	MysqlConfig5_7_MSSQL MysqlConfig5_7_SQLMode = 25
+	// MySQL 3.23 compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_mysql323).
+	MysqlConfig5_7_MYSQL323 MysqlConfig5_7_SQLMode = 26
+	// MySQL 4.0 compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_mysql40).
+	MysqlConfig5_7_MYSQL40 MysqlConfig5_7_SQLMode = 27
+	// Oracle compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_oracle).
+	MysqlConfig5_7_ORACLE MysqlConfig5_7_SQLMode = 28
+	// PostgreSQL compatibility mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_postgresql).
+	MysqlConfig5_7_POSTGRESQL MysqlConfig5_7_SQLMode = 29
+	// Prevent `GRANT` from creating new users implicitly. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_auto_create_user).
+	MysqlConfig5_7_NO_AUTO_CREATE_USER MysqlConfig5_7_SQLMode = 30
+	// Prevent the use of `..` in directory paths in `CREATE TABLE` statements. See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_dir_in_create).
+	MysqlConfig5_7_NO_DIR_IN_CREATE MysqlConfig5_7_SQLMode = 31
 )
 
 // Enum value maps for MysqlConfig5_7_SQLMode.
@@ -162,9 +194,12 @@ func (MysqlConfig5_7_SQLMode) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_AuthPlugin int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_AUTH_PLUGIN_UNSPECIFIED MysqlConfig5_7_AuthPlugin = 0
 	// Using [Native Pluggable Authentication](https://dev.mysql.com/doc/refman/5.7/en/native-pluggable-authentication.html).
 	MysqlConfig5_7_MYSQL_NATIVE_PASSWORD MysqlConfig5_7_AuthPlugin = 1
+	// Using [Caching SHA-2 Pluggable Authentication](https://dev.mysql.com/doc/refman/5.7/en/caching-sha2-pluggable-authentication.html).
+	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto.
 	MysqlConfig5_7_CACHING_SHA2_PASSWORD MysqlConfig5_7_AuthPlugin = 2
 	// Using [SHA-256 Pluggable Authentication](https://dev.mysql.com/doc/refman/5.7/en/sha256-pluggable-authentication.html).
@@ -225,10 +260,14 @@ func (MysqlConfig5_7_AuthPlugin) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_TransactionIsolation int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_TRANSACTION_ISOLATION_UNSPECIFIED MysqlConfig5_7_TransactionIsolation = 0
-	MysqlConfig5_7_READ_COMMITTED                    MysqlConfig5_7_TransactionIsolation = 1
-	MysqlConfig5_7_REPEATABLE_READ                   MysqlConfig5_7_TransactionIsolation = 2
-	MysqlConfig5_7_SERIALIZABLE                      MysqlConfig5_7_TransactionIsolation = 3
+	// Read committed isolation level. A consistent read within the same transaction reads the snapshot established by the first read.
+	MysqlConfig5_7_READ_COMMITTED MysqlConfig5_7_TransactionIsolation = 1
+	// Repeatable read isolation level. All consistent reads within the same transaction read the snapshot established by the first read.
+	MysqlConfig5_7_REPEATABLE_READ MysqlConfig5_7_TransactionIsolation = 2
+	// Serializable isolation level. All statements implicitly convert to SELECT ... FOR SHARE if autocommit is disabled.
+	MysqlConfig5_7_SERIALIZABLE MysqlConfig5_7_TransactionIsolation = 3
 )
 
 // Enum value maps for MysqlConfig5_7_TransactionIsolation.
@@ -277,10 +316,14 @@ func (MysqlConfig5_7_TransactionIsolation) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_BinlogRowImage int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_BINLOG_ROW_IMAGE_UNSPECIFIED MysqlConfig5_7_BinlogRowImage = 0
-	MysqlConfig5_7_FULL                         MysqlConfig5_7_BinlogRowImage = 1
-	MysqlConfig5_7_MINIMAL                      MysqlConfig5_7_BinlogRowImage = 2
-	MysqlConfig5_7_NOBLOB                       MysqlConfig5_7_BinlogRowImage = 3
+	// Log all columns (full row image).
+	MysqlConfig5_7_FULL MysqlConfig5_7_BinlogRowImage = 1
+	// Log only changed columns and columns needed to identify the row.
+	MysqlConfig5_7_MINIMAL MysqlConfig5_7_BinlogRowImage = 2
+	// Log all columns except BLOB and TEXT columns.
+	MysqlConfig5_7_NOBLOB MysqlConfig5_7_BinlogRowImage = 3
 )
 
 // Enum value maps for MysqlConfig5_7_BinlogRowImage.
@@ -329,9 +372,12 @@ func (MysqlConfig5_7_BinlogRowImage) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_SlaveParallelType int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_SLAVE_PARALLEL_TYPE_UNSPECIFIED MysqlConfig5_7_SlaveParallelType = 0
-	MysqlConfig5_7_DATABASE                        MysqlConfig5_7_SlaveParallelType = 1
-	MysqlConfig5_7_LOGICAL_CLOCK                   MysqlConfig5_7_SlaveParallelType = 2
+	// Transactions are parallelized per database (schema).
+	MysqlConfig5_7_DATABASE MysqlConfig5_7_SlaveParallelType = 1
+	// Transactions are parallelized using the logical clock algorithm based on the binary log group commit.
+	MysqlConfig5_7_LOGICAL_CLOCK MysqlConfig5_7_SlaveParallelType = 2
 )
 
 // Enum value maps for MysqlConfig5_7_SlaveParallelType.
@@ -378,9 +424,12 @@ func (MysqlConfig5_7_SlaveParallelType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_LogSlowRateType int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_LOG_SLOW_RATE_TYPE_UNSPECIFIED MysqlConfig5_7_LogSlowRateType = 0
-	MysqlConfig5_7_SESSION                        MysqlConfig5_7_LogSlowRateType = 1
-	MysqlConfig5_7_QUERY                          MysqlConfig5_7_LogSlowRateType = 2
+	// Logging is controlled per session.
+	MysqlConfig5_7_SESSION MysqlConfig5_7_LogSlowRateType = 1
+	// Logging is controlled per query.
+	MysqlConfig5_7_QUERY MysqlConfig5_7_LogSlowRateType = 2
 )
 
 // Enum value maps for MysqlConfig5_7_LogSlowRateType.
@@ -427,13 +476,20 @@ func (MysqlConfig5_7_LogSlowRateType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_LogSlowFilterType int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_LOG_SLOW_FILTER_TYPE_UNSPECIFIED MysqlConfig5_7_LogSlowFilterType = 0
-	MysqlConfig5_7_FULL_SCAN                        MysqlConfig5_7_LogSlowFilterType = 1
-	MysqlConfig5_7_FULL_JOIN                        MysqlConfig5_7_LogSlowFilterType = 2
-	MysqlConfig5_7_TMP_TABLE                        MysqlConfig5_7_LogSlowFilterType = 3
-	MysqlConfig5_7_TMP_TABLE_ON_DISK                MysqlConfig5_7_LogSlowFilterType = 4
-	MysqlConfig5_7_FILESORT                         MysqlConfig5_7_LogSlowFilterType = 5
-	MysqlConfig5_7_FILESORT_ON_DISK                 MysqlConfig5_7_LogSlowFilterType = 6
+	// Queries that perform a full table scan.
+	MysqlConfig5_7_FULL_SCAN MysqlConfig5_7_LogSlowFilterType = 1
+	// Queries that perform a full join (a join without indexes).
+	MysqlConfig5_7_FULL_JOIN MysqlConfig5_7_LogSlowFilterType = 2
+	// Queries that create an implicit internal temporary table.
+	MysqlConfig5_7_TMP_TABLE MysqlConfig5_7_LogSlowFilterType = 3
+	// Queries that create an implicit internal temporary table on disk.
+	MysqlConfig5_7_TMP_TABLE_ON_DISK MysqlConfig5_7_LogSlowFilterType = 4
+	// Queries that use a filesort.
+	MysqlConfig5_7_FILESORT MysqlConfig5_7_LogSlowFilterType = 5
+	// Queries that use a filesort on disk.
+	MysqlConfig5_7_FILESORT_ON_DISK MysqlConfig5_7_LogSlowFilterType = 6
 )
 
 // Enum value maps for MysqlConfig5_7_LogSlowFilterType.
@@ -488,10 +544,14 @@ func (MysqlConfig5_7_LogSlowFilterType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_BinlogTransactionDependencyTracking int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_BINLOG_TRANSACTION_DEPENDENCY_TRACKING_UNSPECIFIED MysqlConfig5_7_BinlogTransactionDependencyTracking = 0
-	MysqlConfig5_7_COMMIT_ORDER                                       MysqlConfig5_7_BinlogTransactionDependencyTracking = 1
-	MysqlConfig5_7_WRITESET                                           MysqlConfig5_7_BinlogTransactionDependencyTracking = 2
-	MysqlConfig5_7_WRITESET_SESSION                                   MysqlConfig5_7_BinlogTransactionDependencyTracking = 3
+	// Transactions are made dependent based on commit order.
+	MysqlConfig5_7_COMMIT_ORDER MysqlConfig5_7_BinlogTransactionDependencyTracking = 1
+	// Transactions are made dependent based on the write set of rows modified by the transaction.
+	MysqlConfig5_7_WRITESET MysqlConfig5_7_BinlogTransactionDependencyTracking = 2
+	// Transactions are made dependent based on the write set and the commit order within a session.
+	MysqlConfig5_7_WRITESET_SESSION MysqlConfig5_7_BinlogTransactionDependencyTracking = 3
 )
 
 // Enum value maps for MysqlConfig5_7_BinlogTransactionDependencyTracking.
@@ -540,11 +600,16 @@ func (MysqlConfig5_7_BinlogTransactionDependencyTracking) EnumDescriptor() ([]by
 type MysqlConfig5_7_AuditLogPolicy int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_AUDIT_LOG_POLICY_UNSPECIFIED MysqlConfig5_7_AuditLogPolicy = 0
-	MysqlConfig5_7_ALL                          MysqlConfig5_7_AuditLogPolicy = 1
-	MysqlConfig5_7_LOGINS                       MysqlConfig5_7_AuditLogPolicy = 2
-	MysqlConfig5_7_QUERIES                      MysqlConfig5_7_AuditLogPolicy = 3
-	MysqlConfig5_7_NONE                         MysqlConfig5_7_AuditLogPolicy = 4
+	// Log all events.
+	MysqlConfig5_7_ALL MysqlConfig5_7_AuditLogPolicy = 1
+	// Log only login events.
+	MysqlConfig5_7_LOGINS MysqlConfig5_7_AuditLogPolicy = 2
+	// Log only query events.
+	MysqlConfig5_7_QUERIES MysqlConfig5_7_AuditLogPolicy = 3
+	// Do not log events.
+	MysqlConfig5_7_NONE MysqlConfig5_7_AuditLogPolicy = 4
 )
 
 // Enum value maps for MysqlConfig5_7_AuditLogPolicy.
@@ -595,13 +660,20 @@ func (MysqlConfig5_7_AuditLogPolicy) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7_InnodbChangeBuffering int32
 
 const (
+	// Unspecified.
 	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_UNSPECIFIED MysqlConfig5_7_InnodbChangeBuffering = 0
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_NONE        MysqlConfig5_7_InnodbChangeBuffering = 1
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_INSERTS     MysqlConfig5_7_InnodbChangeBuffering = 2
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_DELETES     MysqlConfig5_7_InnodbChangeBuffering = 3
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_CHANGES     MysqlConfig5_7_InnodbChangeBuffering = 4
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_PURGES      MysqlConfig5_7_InnodbChangeBuffering = 5
-	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_ALL         MysqlConfig5_7_InnodbChangeBuffering = 6
+	// Do not buffer any operations.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_NONE MysqlConfig5_7_InnodbChangeBuffering = 1
+	// Buffer insert operations.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_INSERTS MysqlConfig5_7_InnodbChangeBuffering = 2
+	// Buffer delete-marking operations.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_DELETES MysqlConfig5_7_InnodbChangeBuffering = 3
+	// Buffer insert and delete-marking operations.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_CHANGES MysqlConfig5_7_InnodbChangeBuffering = 4
+	// Buffer operations where undo log records are discarded.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_PURGES MysqlConfig5_7_InnodbChangeBuffering = 5
+	// Buffer all types of eligible operations.
+	MysqlConfig5_7_INNODB_CHANGE_BUFFERING_ALL MysqlConfig5_7_InnodbChangeBuffering = 6
 )
 
 // Enum value maps for MysqlConfig5_7_InnodbChangeBuffering.
@@ -788,7 +860,7 @@ type MysqlConfig5_7 struct {
 	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_thread_stack) for details.
 	ThreadStack *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=thread_stack,json=threadStack,proto3" json:"thread_stack,omitempty"`
-	// The minimum size of the buffer that is used for plain index scans, range index scans, and joins that do not use indexes and thus perform full table scans.
+	// The minimum size of the buffer that is used for plain index scans, range index scans, and joins that don't use indexes and thus perform full table scans.
 	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_join_buffer_size) for details.
 	JoinBufferSize *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=join_buffer_size,json=joinBufferSize,proto3" json:"join_buffer_size,omitempty"`
@@ -1018,8 +1090,12 @@ type MysqlConfig5_7 struct {
 	//
 	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_write_lock_count).
 	MaxWriteLockCount *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=max_write_lock_count,json=maxWriteLockCount,proto3" json:"max_write_lock_count,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Partitions the adaptive hash index search system.
+	//
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index_parts)
+	InnodbAdaptiveHashIndexParts *wrapperspb.Int64Value `protobuf:"bytes,93,opt,name=innodb_adaptive_hash_index_parts,json=innodbAdaptiveHashIndexParts,proto3" json:"innodb_adaptive_hash_index_parts,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *MysqlConfig5_7) Reset() {
@@ -1696,6 +1772,13 @@ func (x *MysqlConfig5_7) GetMaxWriteLockCount() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *MysqlConfig5_7) GetInnodbAdaptiveHashIndexParts() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.InnodbAdaptiveHashIndexParts
+	}
+	return nil
+}
+
 type MysqlConfigSet5_7 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a MySQL 5.7 cluster (a combination of settings defined
@@ -1764,7 +1847,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x93Q\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x83R\n" +
 	"\x0eMysqlConfig5_7\x12a\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12R\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x0emaxConnections\x12P\n" +
@@ -1875,7 +1958,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\x15innodb_lru_scan_depth\x18Y \x01(\v2\x1b.google.protobuf.Int64ValueB\x12\xfa\xc71\x0e100-4294967295R\x12innodbLruScanDepth\x12>\n" +
 	"\rmdb_force_ssl\x18Z \x01(\v2\x1a.google.protobuf.BoolValueR\vmdbForceSsl\x12~\n" +
 	"\x17innodb_change_buffering\x18[ \x01(\x0e2F.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.InnodbChangeBufferingR\x15innodbChangeBuffering\x12U\n" +
-	"\x14max_write_lock_count\x18\\ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x11maxWriteLockCount\"\x99\x05\n" +
+	"\x14max_write_lock_count\x18\\ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x11maxWriteLockCount\x12n\n" +
+	" innodb_adaptive_hash_index_parts\x18] \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-512R\x1cinnodbAdaptiveHashIndexParts\"\x99\x05\n" +
 	"\aSQLMode\x12\x17\n" +
 	"\x13SQLMODE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ALLOW_INVALID_DATES\x10\x01\x12\x0f\n" +
@@ -2094,14 +2178,15 @@ var file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_depIdxs = []int32{
 	14, // 85: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_force_ssl:type_name -> google.protobuf.BoolValue
 	9,  // 86: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_change_buffering:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.InnodbChangeBuffering
 	12, // 87: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.max_write_lock_count:type_name -> google.protobuf.Int64Value
-	10, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	10, // 90: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	91, // [91:91] is the sub-list for method output_type
-	91, // [91:91] is the sub-list for method input_type
-	91, // [91:91] is the sub-list for extension type_name
-	91, // [91:91] is the sub-list for extension extendee
-	0,  // [0:91] is the sub-list for field type_name
+	12, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_adaptive_hash_index_parts:type_name -> google.protobuf.Int64Value
+	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	10, // 90: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	10, // 91: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet5_7.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	92, // [92:92] is the sub-list for method output_type
+	92, // [92:92] is the sub-list for method input_type
+	92, // [92:92] is the sub-list for extension type_name
+	92, // [92:92] is the sub-list for extension extendee
+	0,  // [0:92] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_init() }

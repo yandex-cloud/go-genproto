@@ -199,12 +199,15 @@ func (*MysqlConnection_ConnectionManagerConnection) isMysqlConnection_Connection
 type MysqlObjectTransferSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Views
+	//
 	// CREATE VIEW ...
 	View ObjectTransferStage `protobuf:"varint,1,opt,name=view,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"view,omitempty"`
 	// Routines
+	//
 	// CREATE PROCEDURE ... ; CREATE FUNCTION ... ;
 	Routine ObjectTransferStage `protobuf:"varint,2,opt,name=routine,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"routine,omitempty"`
 	// Triggers
+	//
 	// CREATE TRIGGER ...
 	Trigger       ObjectTransferStage `protobuf:"varint,3,opt,name=trigger,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"trigger,omitempty"`
 	Tables        ObjectTransferStage `protobuf:"varint,4,opt,name=tables,proto3,enum=yandex.cloud.datatransfer.v1.endpoint.ObjectTransferStage" json:"tables,omitempty"`
@@ -276,6 +279,7 @@ type MysqlSource struct {
 	// Database connection settings
 	Connection *MysqlConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Name of the database to transfer
+	//
 	// You can leave it empty, then it will be possible to transfer tables from several
 	// databases at the same time from this source.
 	Database string `protobuf:"bytes,2,opt,name=database,proto3" json:"database,omitempty"`
@@ -284,6 +288,7 @@ type MysqlSource struct {
 	// Password for database access.
 	Password *Secret `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// Database timezone
+	//
 	// Is used for parsing timestamps for saving source timezones. Accepts values from
 	// IANA timezone database. Default: local timezone.
 	Timezone string `protobuf:"bytes,8,opt,name=timezone,proto3" json:"timezone,omitempty"`
@@ -417,6 +422,7 @@ type MysqlTarget struct {
 	// Database connection settings
 	Connection *MysqlConnection `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
 	// Database name
+	//
 	// Allowed to leave it empty, then the tables will be created in databases with the
 	// same names as on the source. If this field is empty, then you must fill below db
 	// schema for service table.
@@ -437,6 +443,7 @@ type MysqlTarget struct {
 	// cascading operations
 	SkipConstraintChecks bool `protobuf:"varint,6,opt,name=skip_constraint_checks,json=skipConstraintChecks,proto3" json:"skip_constraint_checks,omitempty"`
 	// Database timezone
+	//
 	// Is used for parsing timestamps for saving source timezones. Accepts values from
 	// IANA timezone database. Default: local timezone.
 	Timezone string `protobuf:"bytes,7,opt,name=timezone,proto3" json:"timezone,omitempty"`

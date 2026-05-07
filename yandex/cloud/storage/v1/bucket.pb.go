@@ -3436,17 +3436,17 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x17disabled_statickey_auth\x18\x13 \x01(\bR\x15disabledStatickeyAuth\"-\n" +
 	"\x03Tag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xc6\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value\"\xc7\x04\n" +
 	"\x03ACL\x12:\n" +
-	"\x06grants\x18\x01 \x03(\v2\".yandex.cloud.storage.v1.ACL.GrantR\x06grants\x1a\x82\x04\n" +
+	"\x06grants\x18\x01 \x03(\v2\".yandex.cloud.storage.v1.ACL.GrantR\x06grants\x1a\x83\x04\n" +
 	"\x05Grant\x12S\n" +
 	"\n" +
 	"permission\x18\x01 \x01(\x0e2-.yandex.cloud.storage.v1.ACL.Grant.PermissionB\x04\xe8\xc71\x01R\n" +
 	"permission\x12Q\n" +
 	"\n" +
-	"grant_type\x18\x02 \x01(\x0e2,.yandex.cloud.storage.v1.ACL.Grant.GrantTypeB\x04\xe8\xc71\x01R\tgrantType\x12'\n" +
+	"grant_type\x18\x02 \x01(\x0e2,.yandex.cloud.storage.v1.ACL.Grant.GrantTypeB\x04\xe8\xc71\x01R\tgrantType\x12(\n" +
 	"\n" +
-	"grantee_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\tgranteeId\"\xa3\x01\n" +
+	"grantee_id\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tgranteeId\"\xa3\x01\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\x1b\n" +

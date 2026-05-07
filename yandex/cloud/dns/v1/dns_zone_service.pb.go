@@ -478,6 +478,7 @@ func (x *CreateDnsZoneMetadata) GetDnsZoneId() string {
 type UpdateDnsZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to update.
+	//
 	// To get the DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// Field mask specifying which fields of the DNS zone resource are going to be updated.
@@ -1034,6 +1035,7 @@ func (x *ListDnsZoneRecordSetsResponse) GetNextPageToken() string {
 type UpdateRecordSetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to update record sets in.
+	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// List of record sets to delete.
@@ -1134,6 +1136,7 @@ func (*UpdateRecordSetsMetadata) Descriptor() ([]byte, []int) {
 type UpsertRecordSetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS zone to upsert record sets to.
+	//
 	// To get a DNS zone ID, make a [DnsZoneService.List] request.
 	DnsZoneId string `protobuf:"bytes,1,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// Delete only specified records from corresponding record sets.

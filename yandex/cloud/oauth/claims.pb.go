@@ -296,7 +296,7 @@ var File_yandex_cloud_oauth_claims_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_oauth_claims_proto_rawDesc = "" +
 	"\n" +
-	"\x1fyandex/cloud/oauth/claims.proto\x12\x12yandex.cloud.oauth\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xbb\x04\n" +
+	"\x1fyandex/cloud/oauth/claims.proto\x12\x12yandex.cloud.oauth\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xa9\x04\n" +
 	"\rSubjectClaims\x12\x1e\n" +
 	"\x03sub\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x03sub\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -314,8 +314,8 @@ const file_yandex_cloud_oauth_claims_proto_rawDesc = "" +
 	"\n" +
 	"federation\x18d \x01(\v2\x1e.yandex.cloud.oauth.FederationR\n" +
 	"federation\x12N\n" +
-	"\x15last_authenticated_at\x18i \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAtJ\x04\b\b\x10\tJ\x04\b\n" +
-	"\x10\vJ\x04\b\f\x10\x0fJ\x04\b\x12\x10cJ\x04\b\x05\x10\aJ\x04\be\x10fJ\x04\bf\x10gJ\x04\bg\x10hJ\x04\bh\x10i\"D\n" +
+	"\x15last_authenticated_at\x18i \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAtJ\x04\b\x05\x10\aJ\x04\b\b\x10\tJ\x04\b\n" +
+	"\x10\vJ\x04\b\f\x10\x0fJ\x04\b\x12\x10cJ\x04\be\x10i\"D\n" +
 	"\n" +
 	"Federation\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12\x12\n" +

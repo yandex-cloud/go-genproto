@@ -7,6 +7,7 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -359,9 +360,13 @@ type NetworkInterface struct {
 	// Read only field.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/server.proto.
-	IpAddress     string `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	IpAddress string `protobuf:"bytes,3,opt,name=ip_address,json=ipAddress,proto3" json:"ip_address,omitempty"`
+	// ID of the configuration network interface that determines the network interface configuration.
+	// The configuration network interface defines available modes (public/private) and other properties
+	// for the network interface.
+	ConfigurationNetworkInterfaceId string `protobuf:"bytes,14,opt,name=configuration_network_interface_id,json=configurationNetworkInterfaceId,proto3" json:"configuration_network_interface_id,omitempty"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *NetworkInterface) Reset() {
@@ -464,6 +469,13 @@ func (x *NetworkInterface) GetMacAddress() string {
 func (x *NetworkInterface) GetIpAddress() string {
 	if x != nil {
 		return x.IpAddress
+	}
+	return ""
+}
+
+func (x *NetworkInterface) GetConfigurationNetworkInterfaceId() string {
+	if x != nil {
+		return x.ConfigurationNetworkInterfaceId
 	}
 	return ""
 }
@@ -1016,7 +1028,7 @@ var File_yandex_cloud_baremetal_v1alpha_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\"\xe6\a\n" +
+	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\xe6\a\n" +
 	"\x06Server\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
@@ -1052,7 +1064,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\bUPDATING\x10\n" +
 	"\x12\x0f\n" +
 	"\vQUARANTINED\x10\f\x12\v\n" +
-	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10dJ\x05\be\x10\xc8\x01\"\xab\x04\n" +
+	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10dJ\x05\be\x10\xc8\x01\"\x97\x05\n" +
 	"\x10NetworkInterface\x12j\n" +
 	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +
 	"\rpublic_subnet\x18\b \x01(\v2<.yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterfaceB\x02\x18\x01H\x00R\fpublicSubnet\x12f\n" +
@@ -1062,7 +1074,8 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
 	"macAddress\x12!\n" +
 	"\n" +
-	"ip_address\x18\x03 \x01(\tB\x02\x18\x01R\tipAddressB\b\n" +
+	"ip_address\x18\x03 \x01(\tB\x02\x18\x01R\tipAddress\x12j\n" +
+	"\"configuration_network_interface_id\x18\x0e \x01(\tB\x1d\xf2\xc71\x11([a-z][a-z0-9]*)?\x8a\xc81\x04<=20R\x1fconfigurationNetworkInterfaceIdB\b\n" +
 	"\x06subnetB\v\n" +
 	"\tinterfaceJ\x04\b\x04\x10\aJ\x04\b\t\x10\f\"\xe0\x01\n" +
 	"\x17PrivateNetworkInterface\x12(\n" +

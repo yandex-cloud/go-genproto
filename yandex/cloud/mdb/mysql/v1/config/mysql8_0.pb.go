@@ -26,28 +26,50 @@ const (
 type MysqlConfig8_0_SQLMode int32
 
 const (
-	MysqlConfig8_0_SQLMODE_UNSPECIFIED        MysqlConfig8_0_SQLMode = 0
-	MysqlConfig8_0_ALLOW_INVALID_DATES        MysqlConfig8_0_SQLMode = 1
-	MysqlConfig8_0_ANSI_QUOTES                MysqlConfig8_0_SQLMode = 2
+	// Unspecified.
+	MysqlConfig8_0_SQLMODE_UNSPECIFIED MysqlConfig8_0_SQLMode = 0
+	// Allow dates where the day or month part is 0. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_allow_invalid_dates).
+	MysqlConfig8_0_ALLOW_INVALID_DATES MysqlConfig8_0_SQLMode = 1
+	// Treat `"` as an identifier quote character (like the “ ` “ quote character) rather than as a string quote character. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi_quotes).
+	MysqlConfig8_0_ANSI_QUOTES MysqlConfig8_0_SQLMode = 2
+	// Produce an error for divisions by zero. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_error_for_division_by_zero).
 	MysqlConfig8_0_ERROR_FOR_DIVISION_BY_ZERO MysqlConfig8_0_SQLMode = 3
-	MysqlConfig8_0_HIGH_NOT_PRECEDENCE        MysqlConfig8_0_SQLMode = 4
-	MysqlConfig8_0_IGNORE_SPACE               MysqlConfig8_0_SQLMode = 5
-	MysqlConfig8_0_NO_AUTO_VALUE_ON_ZERO      MysqlConfig8_0_SQLMode = 6
-	MysqlConfig8_0_NO_BACKSLASH_ESCAPES       MysqlConfig8_0_SQLMode = 7
-	MysqlConfig8_0_NO_ENGINE_SUBSTITUTION     MysqlConfig8_0_SQLMode = 8
-	MysqlConfig8_0_NO_UNSIGNED_SUBTRACTION    MysqlConfig8_0_SQLMode = 9
-	MysqlConfig8_0_NO_ZERO_DATE               MysqlConfig8_0_SQLMode = 10
-	MysqlConfig8_0_NO_ZERO_IN_DATE            MysqlConfig8_0_SQLMode = 11
-	MysqlConfig8_0_ONLY_FULL_GROUP_BY         MysqlConfig8_0_SQLMode = 15
-	MysqlConfig8_0_PAD_CHAR_TO_FULL_LENGTH    MysqlConfig8_0_SQLMode = 16
-	MysqlConfig8_0_PIPES_AS_CONCAT            MysqlConfig8_0_SQLMode = 17
-	MysqlConfig8_0_REAL_AS_FLOAT              MysqlConfig8_0_SQLMode = 18
-	MysqlConfig8_0_STRICT_ALL_TABLES          MysqlConfig8_0_SQLMode = 19
-	MysqlConfig8_0_STRICT_TRANS_TABLES        MysqlConfig8_0_SQLMode = 20
-	MysqlConfig8_0_TIME_TRUNCATE_FRACTIONAL   MysqlConfig8_0_SQLMode = 21
-	MysqlConfig8_0_ANSI                       MysqlConfig8_0_SQLMode = 22
-	MysqlConfig8_0_TRADITIONAL                MysqlConfig8_0_SQLMode = 23
-	MysqlConfig8_0_NO_DIR_IN_CREATE           MysqlConfig8_0_SQLMode = 24
+	// Give `NOT` higher precedence in negation than it has in non-high-precedence mode. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_high_not_precedence).
+	MysqlConfig8_0_HIGH_NOT_PRECEDENCE MysqlConfig8_0_SQLMode = 4
+	// Allow spaces between a function name and the `(` character. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ignore_space).
+	MysqlConfig8_0_IGNORE_SPACE MysqlConfig8_0_SQLMode = 5
+	// Do not reset the AUTO_INCREMENT column to 0 when inserting 0 into it. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_auto_value_on_zero).
+	MysqlConfig8_0_NO_AUTO_VALUE_ON_ZERO MysqlConfig8_0_SQLMode = 6
+	// Disable the use of the backslash character (`\`) as an escape character within strings. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_backslash_escapes).
+	MysqlConfig8_0_NO_BACKSLASH_ESCAPES MysqlConfig8_0_SQLMode = 7
+	// Do not substitute the default storage engine when a statement specifies a storage engine that is disabled or not compiled in. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_engine_substitution).
+	MysqlConfig8_0_NO_ENGINE_SUBSTITUTION MysqlConfig8_0_SQLMode = 8
+	// Disable unsigned subtraction so that subtraction results are always signed. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_unsigned_subtraction).
+	MysqlConfig8_0_NO_UNSIGNED_SUBTRACTION MysqlConfig8_0_SQLMode = 9
+	// Disable the MySQL-specific date `0000-00-00`. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_zero_date).
+	MysqlConfig8_0_NO_ZERO_DATE MysqlConfig8_0_SQLMode = 10
+	// Disable month or day parts of `0` in dates. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_zero_in_date).
+	MysqlConfig8_0_NO_ZERO_IN_DATE MysqlConfig8_0_SQLMode = 11
+	// Reject queries for which the select list, `HAVING` condition, or `ORDER BY` list refer to non-aggregated columns that are not named in the `GROUP BY` clause. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by).
+	MysqlConfig8_0_ONLY_FULL_GROUP_BY MysqlConfig8_0_SQLMode = 15
+	// Pad `CHAR` column values with spaces to the full column length when retrieving them. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_pad_char_to_full_length).
+	MysqlConfig8_0_PAD_CHAR_TO_FULL_LENGTH MysqlConfig8_0_SQLMode = 16
+	// Treat `||` as a string concatenation operator rather than as `OR`. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_pipes_as_concat).
+	MysqlConfig8_0_PIPES_AS_CONCAT MysqlConfig8_0_SQLMode = 17
+	// Treat `REAL` as a synonym for `FLOAT` rather than `DOUBLE`. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_real_as_float).
+	MysqlConfig8_0_REAL_AS_FLOAT MysqlConfig8_0_SQLMode = 18
+	// Strict mode for all storage engines. Invalid data values cause errors, not warnings. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_strict_all_tables).
+	MysqlConfig8_0_STRICT_ALL_TABLES MysqlConfig8_0_SQLMode = 19
+	// Strict mode for transactional storage engines. Invalid data values cause errors, not warnings. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_strict_trans_tables).
+	MysqlConfig8_0_STRICT_TRANS_TABLES MysqlConfig8_0_SQLMode = 20
+	// Causes fractional seconds to be truncated rather than rounded when inserting into a column that has a data type with a fractional seconds part. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_time_truncate_fractional).
+	MysqlConfig8_0_TIME_TRUNCATE_FRACTIONAL MysqlConfig8_0_SQLMode = 21
+	// Equivalent to `REAL_AS_FLOAT`, `PIPES_AS_CONCAT`, `ANSI_QUOTES`, `IGNORE_SPACE`, and `ONLY_FULL_GROUP_BY`. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi).
+	MysqlConfig8_0_ANSI MysqlConfig8_0_SQLMode = 22
+	// Equivalent to `STRICT_TRANS_TABLES`, `STRICT_ALL_TABLES`, `NO_ZERO_IN_DATE`, `NO_ZERO_DATE`, `ERROR_FOR_DIVISION_BY_ZERO`, and `NO_ENGINE_SUBSTITUTION`. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_traditional).
+	MysqlConfig8_0_TRADITIONAL MysqlConfig8_0_SQLMode = 23
+	// Prevent the use of `..` in directory paths in `CREATE TABLE` statements. See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_no_dir_in_create).
+	MysqlConfig8_0_NO_DIR_IN_CREATE MysqlConfig8_0_SQLMode = 24
 )
 
 // Enum value maps for MysqlConfig8_0_SQLMode.
@@ -132,6 +154,7 @@ func (MysqlConfig8_0_SQLMode) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_AuthPlugin int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_AUTH_PLUGIN_UNSPECIFIED MysqlConfig8_0_AuthPlugin = 0
 	// Using [Native Pluggable Authentication](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html).
 	MysqlConfig8_0_MYSQL_NATIVE_PASSWORD MysqlConfig8_0_AuthPlugin = 1
@@ -195,10 +218,14 @@ func (MysqlConfig8_0_AuthPlugin) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_TransactionIsolation int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_TRANSACTION_ISOLATION_UNSPECIFIED MysqlConfig8_0_TransactionIsolation = 0
-	MysqlConfig8_0_READ_COMMITTED                    MysqlConfig8_0_TransactionIsolation = 1
-	MysqlConfig8_0_REPEATABLE_READ                   MysqlConfig8_0_TransactionIsolation = 2
-	MysqlConfig8_0_SERIALIZABLE                      MysqlConfig8_0_TransactionIsolation = 3
+	// Read committed isolation level. A consistent read within the same transaction reads the snapshot established by the first read.
+	MysqlConfig8_0_READ_COMMITTED MysqlConfig8_0_TransactionIsolation = 1
+	// Repeatable read isolation level. All consistent reads within the same transaction read the snapshot established by the first read.
+	MysqlConfig8_0_REPEATABLE_READ MysqlConfig8_0_TransactionIsolation = 2
+	// Serializable isolation level. All statements implicitly convert to SELECT ... FOR SHARE if autocommit is disabled.
+	MysqlConfig8_0_SERIALIZABLE MysqlConfig8_0_TransactionIsolation = 3
 )
 
 // Enum value maps for MysqlConfig8_0_TransactionIsolation.
@@ -247,10 +274,14 @@ func (MysqlConfig8_0_TransactionIsolation) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_BinlogRowImage int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_BINLOG_ROW_IMAGE_UNSPECIFIED MysqlConfig8_0_BinlogRowImage = 0
-	MysqlConfig8_0_FULL                         MysqlConfig8_0_BinlogRowImage = 1
-	MysqlConfig8_0_MINIMAL                      MysqlConfig8_0_BinlogRowImage = 2
-	MysqlConfig8_0_NOBLOB                       MysqlConfig8_0_BinlogRowImage = 3
+	// Log all columns (full row image).
+	MysqlConfig8_0_FULL MysqlConfig8_0_BinlogRowImage = 1
+	// Log only changed columns and columns needed to identify the row.
+	MysqlConfig8_0_MINIMAL MysqlConfig8_0_BinlogRowImage = 2
+	// Log all columns except BLOB and TEXT columns.
+	MysqlConfig8_0_NOBLOB MysqlConfig8_0_BinlogRowImage = 3
 )
 
 // Enum value maps for MysqlConfig8_0_BinlogRowImage.
@@ -299,9 +330,12 @@ func (MysqlConfig8_0_BinlogRowImage) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_SlaveParallelType int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_SLAVE_PARALLEL_TYPE_UNSPECIFIED MysqlConfig8_0_SlaveParallelType = 0
-	MysqlConfig8_0_DATABASE                        MysqlConfig8_0_SlaveParallelType = 1
-	MysqlConfig8_0_LOGICAL_CLOCK                   MysqlConfig8_0_SlaveParallelType = 2
+	// Transactions are parallelized per database (schema).
+	MysqlConfig8_0_DATABASE MysqlConfig8_0_SlaveParallelType = 1
+	// Transactions are parallelized using the logical clock algorithm based on the binary log group commit.
+	MysqlConfig8_0_LOGICAL_CLOCK MysqlConfig8_0_SlaveParallelType = 2
 )
 
 // Enum value maps for MysqlConfig8_0_SlaveParallelType.
@@ -348,9 +382,12 @@ func (MysqlConfig8_0_SlaveParallelType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_LogSlowRateType int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_LOG_SLOW_RATE_TYPE_UNSPECIFIED MysqlConfig8_0_LogSlowRateType = 0
-	MysqlConfig8_0_SESSION                        MysqlConfig8_0_LogSlowRateType = 1
-	MysqlConfig8_0_QUERY                          MysqlConfig8_0_LogSlowRateType = 2
+	// Logging is controlled per session.
+	MysqlConfig8_0_SESSION MysqlConfig8_0_LogSlowRateType = 1
+	// Logging is controlled per query.
+	MysqlConfig8_0_QUERY MysqlConfig8_0_LogSlowRateType = 2
 )
 
 // Enum value maps for MysqlConfig8_0_LogSlowRateType.
@@ -397,13 +434,20 @@ func (MysqlConfig8_0_LogSlowRateType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_LogSlowFilterType int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_LOG_SLOW_FILTER_TYPE_UNSPECIFIED MysqlConfig8_0_LogSlowFilterType = 0
-	MysqlConfig8_0_FULL_SCAN                        MysqlConfig8_0_LogSlowFilterType = 1
-	MysqlConfig8_0_FULL_JOIN                        MysqlConfig8_0_LogSlowFilterType = 2
-	MysqlConfig8_0_TMP_TABLE                        MysqlConfig8_0_LogSlowFilterType = 3
-	MysqlConfig8_0_TMP_TABLE_ON_DISK                MysqlConfig8_0_LogSlowFilterType = 4
-	MysqlConfig8_0_FILESORT                         MysqlConfig8_0_LogSlowFilterType = 5
-	MysqlConfig8_0_FILESORT_ON_DISK                 MysqlConfig8_0_LogSlowFilterType = 6
+	// Queries that perform a full table scan.
+	MysqlConfig8_0_FULL_SCAN MysqlConfig8_0_LogSlowFilterType = 1
+	// Queries that perform a full join (a join without indexes).
+	MysqlConfig8_0_FULL_JOIN MysqlConfig8_0_LogSlowFilterType = 2
+	// Queries that create an implicit internal temporary table.
+	MysqlConfig8_0_TMP_TABLE MysqlConfig8_0_LogSlowFilterType = 3
+	// Queries that create an implicit internal temporary table on disk.
+	MysqlConfig8_0_TMP_TABLE_ON_DISK MysqlConfig8_0_LogSlowFilterType = 4
+	// Queries that use a filesort.
+	MysqlConfig8_0_FILESORT MysqlConfig8_0_LogSlowFilterType = 5
+	// Queries that use a filesort on disk.
+	MysqlConfig8_0_FILESORT_ON_DISK MysqlConfig8_0_LogSlowFilterType = 6
 )
 
 // Enum value maps for MysqlConfig8_0_LogSlowFilterType.
@@ -458,10 +502,14 @@ func (MysqlConfig8_0_LogSlowFilterType) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_BinlogTransactionDependencyTracking int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_BINLOG_TRANSACTION_DEPENDENCY_TRACKING_UNSPECIFIED MysqlConfig8_0_BinlogTransactionDependencyTracking = 0
-	MysqlConfig8_0_COMMIT_ORDER                                       MysqlConfig8_0_BinlogTransactionDependencyTracking = 1
-	MysqlConfig8_0_WRITESET                                           MysqlConfig8_0_BinlogTransactionDependencyTracking = 2
-	MysqlConfig8_0_WRITESET_SESSION                                   MysqlConfig8_0_BinlogTransactionDependencyTracking = 3
+	// Transactions are made dependent based on commit order.
+	MysqlConfig8_0_COMMIT_ORDER MysqlConfig8_0_BinlogTransactionDependencyTracking = 1
+	// Transactions are made dependent based on the write set of rows modified by the transaction.
+	MysqlConfig8_0_WRITESET MysqlConfig8_0_BinlogTransactionDependencyTracking = 2
+	// Transactions are made dependent based on the write set and the commit order within a session.
+	MysqlConfig8_0_WRITESET_SESSION MysqlConfig8_0_BinlogTransactionDependencyTracking = 3
 )
 
 // Enum value maps for MysqlConfig8_0_BinlogTransactionDependencyTracking.
@@ -510,11 +558,16 @@ func (MysqlConfig8_0_BinlogTransactionDependencyTracking) EnumDescriptor() ([]by
 type MysqlConfig8_0_AuditLogPolicy int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_AUDIT_LOG_POLICY_UNSPECIFIED MysqlConfig8_0_AuditLogPolicy = 0
-	MysqlConfig8_0_ALL                          MysqlConfig8_0_AuditLogPolicy = 1
-	MysqlConfig8_0_LOGINS                       MysqlConfig8_0_AuditLogPolicy = 2
-	MysqlConfig8_0_QUERIES                      MysqlConfig8_0_AuditLogPolicy = 3
-	MysqlConfig8_0_NONE                         MysqlConfig8_0_AuditLogPolicy = 4
+	// Log all events.
+	MysqlConfig8_0_ALL MysqlConfig8_0_AuditLogPolicy = 1
+	// Log only login events.
+	MysqlConfig8_0_LOGINS MysqlConfig8_0_AuditLogPolicy = 2
+	// Log only query events.
+	MysqlConfig8_0_QUERIES MysqlConfig8_0_AuditLogPolicy = 3
+	// Do not log events.
+	MysqlConfig8_0_NONE MysqlConfig8_0_AuditLogPolicy = 4
 )
 
 // Enum value maps for MysqlConfig8_0_AuditLogPolicy.
@@ -565,13 +618,20 @@ func (MysqlConfig8_0_AuditLogPolicy) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig8_0_InnodbChangeBuffering int32
 
 const (
+	// Unspecified.
 	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_UNSPECIFIED MysqlConfig8_0_InnodbChangeBuffering = 0
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_NONE        MysqlConfig8_0_InnodbChangeBuffering = 1
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_INSERTS     MysqlConfig8_0_InnodbChangeBuffering = 2
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_DELETES     MysqlConfig8_0_InnodbChangeBuffering = 3
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_CHANGES     MysqlConfig8_0_InnodbChangeBuffering = 4
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_PURGES      MysqlConfig8_0_InnodbChangeBuffering = 5
-	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_ALL         MysqlConfig8_0_InnodbChangeBuffering = 6
+	// Do not buffer any operations.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_NONE MysqlConfig8_0_InnodbChangeBuffering = 1
+	// Buffer insert operations.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_INSERTS MysqlConfig8_0_InnodbChangeBuffering = 2
+	// Buffer delete-marking operations.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_DELETES MysqlConfig8_0_InnodbChangeBuffering = 3
+	// Buffer insert and delete-marking operations.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_CHANGES MysqlConfig8_0_InnodbChangeBuffering = 4
+	// Buffer operations where undo log records are discarded.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_PURGES MysqlConfig8_0_InnodbChangeBuffering = 5
+	// Buffer all types of eligible operations.
+	MysqlConfig8_0_INNODB_CHANGE_BUFFERING_ALL MysqlConfig8_0_InnodbChangeBuffering = 6
 )
 
 // Enum value maps for MysqlConfig8_0_InnodbChangeBuffering.
@@ -758,7 +818,7 @@ type MysqlConfig8_0 struct {
 	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_thread_stack) for details.
 	ThreadStack *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=thread_stack,json=threadStack,proto3" json:"thread_stack,omitempty"`
-	// The minimum size of the buffer that is used for plain index scans, range index scans, and joins that do not use indexes and thus perform full table scans.
+	// The minimum size of the buffer that is used for plain index scans, range index scans, and joins that don't use indexes and thus perform full table scans.
 	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_join_buffer_size) for details.
 	JoinBufferSize *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=join_buffer_size,json=joinBufferSize,proto3" json:"join_buffer_size,omitempty"`
@@ -984,8 +1044,12 @@ type MysqlConfig8_0 struct {
 	//
 	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_write_lock_count).
 	MaxWriteLockCount *wrapperspb.Int64Value `protobuf:"bytes,91,opt,name=max_write_lock_count,json=maxWriteLockCount,proto3" json:"max_write_lock_count,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Partitions the adaptive hash index search system.
+	//
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index_parts)
+	InnodbAdaptiveHashIndexParts *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=innodb_adaptive_hash_index_parts,json=innodbAdaptiveHashIndexParts,proto3" json:"innodb_adaptive_hash_index_parts,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *MysqlConfig8_0) Reset() {
@@ -1655,6 +1719,13 @@ func (x *MysqlConfig8_0) GetMaxWriteLockCount() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *MysqlConfig8_0) GetInnodbAdaptiveHashIndexParts() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.InnodbAdaptiveHashIndexParts
+	}
+	return nil
+}
+
 type MysqlConfigSet8_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a MySQL 8.0 cluster (a combination of settings defined
@@ -1723,7 +1794,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql8_0_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql8_0_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x82P\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf2P\n" +
 	"\x0eMysqlConfig8_0\x12a\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12R\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x0emaxConnections\x12D\n" +
@@ -1832,7 +1903,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_0_proto_rawDesc = "" +
 	"\x17sql_require_primary_key\x18X \x01(\v2\x1a.google.protobuf.BoolValueR\x14sqlRequirePrimaryKey\x12>\n" +
 	"\rmdb_force_ssl\x18Y \x01(\v2\x1a.google.protobuf.BoolValueR\vmdbForceSsl\x12~\n" +
 	"\x17innodb_change_buffering\x18Z \x01(\x0e2F.yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.InnodbChangeBufferingR\x15innodbChangeBuffering\x12U\n" +
-	"\x14max_write_lock_count\x18[ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x11maxWriteLockCount\"\x88\x04\n" +
+	"\x14max_write_lock_count\x18[ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x11maxWriteLockCount\x12n\n" +
+	" innodb_adaptive_hash_index_parts\x18\\ \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-512R\x1cinnodbAdaptiveHashIndexParts\"\x88\x04\n" +
 	"\aSQLMode\x12\x17\n" +
 	"\x13SQLMODE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13ALLOW_INVALID_DATES\x10\x01\x12\x0f\n" +
@@ -2038,14 +2110,15 @@ var file_yandex_cloud_mdb_mysql_v1_config_mysql8_0_proto_depIdxs = []int32{
 	14, // 84: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.mdb_force_ssl:type_name -> google.protobuf.BoolValue
 	9,  // 85: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.innodb_change_buffering:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.InnodbChangeBuffering
 	12, // 86: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.max_write_lock_count:type_name -> google.protobuf.Int64Value
-	10, // 87: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
-	10, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
-	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
-	90, // [90:90] is the sub-list for method output_type
-	90, // [90:90] is the sub-list for method input_type
-	90, // [90:90] is the sub-list for extension type_name
-	90, // [90:90] is the sub-list for extension extendee
-	0,  // [0:90] is the sub-list for field type_name
+	12, // 87: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0.innodb_adaptive_hash_index_parts:type_name -> google.protobuf.Int64Value
+	10, // 88: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.effective_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
+	10, // 89: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.user_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
+	10, // 90: yandex.cloud.mdb.mysql.v1.config.MysqlConfigSet8_0.default_config:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
+	91, // [91:91] is the sub-list for method output_type
+	91, // [91:91] is the sub-list for method input_type
+	91, // [91:91] is the sub-list for extension type_name
+	91, // [91:91] is the sub-list for extension extendee
+	0,  // [0:91] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_config_mysql8_0_proto_init() }

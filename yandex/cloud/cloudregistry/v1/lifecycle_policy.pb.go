@@ -385,6 +385,8 @@ type LifecycleRule struct {
 	PathPrefix string `protobuf:"bytes,1,opt,name=path_prefix,json=pathPrefix,proto3" json:"path_prefix,omitempty"`
 	// Regular expression pattern to match package version or docker tag.
 	VersionRegexp string `protobuf:"bytes,7,opt,name=version_regexp,json=versionRegexp,proto3" json:"version_regexp,omitempty"`
+	// Description of the lifecycle policy rule
+	Description   string `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -488,6 +490,13 @@ func (x *LifecycleRule) GetPathPrefix() string {
 func (x *LifecycleRule) GetVersionRegexp() string {
 	if x != nil {
 		return x.VersionRegexp
+	}
+	return ""
+}
+
+func (x *LifecycleRule) GetDescription() string {
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -908,7 +917,7 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"created_by\x18\t \x01(\tR\tcreatedBy\x12\x1f\n" +
 	"\vmodified_by\x18\n" +
 	" \x01(\tR\n" +
-	"modifiedBy\"\xa0\x04\n" +
+	"modifiedBy\"\xc2\x04\n" +
 	"\rLifecycleRule\x12W\n" +
 	"\vkeep_by_age\x18\x02 \x01(\v25.yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRuleH\x00R\tkeepByAge\x12c\n" +
 	"\x0fkeep_by_version\x18\x03 \x01(\v29.yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRuleH\x00R\rkeepByVersion\x12L\n" +
@@ -917,7 +926,8 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\rmaven_filters\x18\x06 \x01(\v2+.yandex.cloud.cloudregistry.v1.MavenFiltersH\x01R\fmavenFilters\x12\x1f\n" +
 	"\vpath_prefix\x18\x01 \x01(\tR\n" +
 	"pathPrefix\x12%\n" +
-	"\x0eversion_regexp\x18\a \x01(\tR\rversionRegexpB\x06\n" +
+	"\x0eversion_regexp\x18\a \x01(\tR\rversionRegexp\x12 \n" +
+	"\vdescription\x18\b \x01(\tR\vdescriptionB\x06\n" +
 	"\x04kindB\b\n" +
 	"\x06filter\"\xbd\x01\n" +
 	"\rDockerFilters\x12U\n" +

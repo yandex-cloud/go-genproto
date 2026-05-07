@@ -90,10 +90,13 @@ type ListPlaylistsRequest struct {
 	// Expressions consist of terms connected by logical operators.
 	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
 	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
 	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
 	// Parentheses can be used to group logical expressions.
+	//
 	// Example: `title:'highlights' AND id='playlist-1'`
+	//
 	// Filterable fields: ["id", "title"].
 	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`

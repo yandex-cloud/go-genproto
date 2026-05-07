@@ -374,6 +374,10 @@ func (m *MysqlConfig5_7) SetMaxWriteLockCount(v *wrapperspb.Int64Value) {
 	m.MaxWriteLockCount = v
 }
 
+func (m *MysqlConfig5_7) SetInnodbAdaptiveHashIndexParts(v *wrapperspb.Int64Value) {
+	m.InnodbAdaptiveHashIndexParts = v
+}
+
 func (m *MysqlConfigSet5_7) SetEffectiveConfig(v *MysqlConfig5_7) {
 	m.EffectiveConfig = v
 }

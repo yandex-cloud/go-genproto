@@ -97,10 +97,13 @@ type ListEpisodesRequest struct {
 	// Expressions consist of terms connected by logical operators.
 	// Values containing spaces or quotes must be enclosed in quotes (`'` or `"`)
 	// with inner quotes being backslash-escaped.
+	//
 	// Supported logical operators: ["AND", "OR"].
 	// Supported comparison operators: ["=", "!=", ":"] where ":" enables substring matching.
 	// Parentheses can be used to group logical expressions.
+	//
 	// Example: `title:'highlight' AND id='episode-1'`
+	//
 	// Filterable fields: ["id", "title"].
 	// Both snake_case and camelCase field names are supported.
 	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -707,6 +710,7 @@ type UpdateEpisodeRequest struct {
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
 	// Enables episode DVR mode.
 	// Determines how many last seconds of the stream are available.
+	//
 	// Possible values:
 	// * `0`: infinite dvr size, the full length of the stream allowed to display
 	// * `>0`: size of dvr window in seconds, the minimum value is 30s

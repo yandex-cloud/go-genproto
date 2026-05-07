@@ -39,6 +39,8 @@ const (
 	PublicConnection_CLOUD_SERVICE_YANDEX_GPT         PublicConnection_CloudServiceType = 9
 	PublicConnection_CLOUD_SERVICES_ALL_API_ENDPOINT  PublicConnection_CloudServiceType = 10
 	PublicConnection_CLOUD_SERVICE_YMQ                PublicConnection_CloudServiceType = 11
+	PublicConnection_CLOUD_SERVICE_SPEECH_SENSE       PublicConnection_CloudServiceType = 12
+	PublicConnection_CLOUD_SERVICE_AI_ASSISTANT       PublicConnection_CloudServiceType = 13
 )
 
 // Enum value maps for PublicConnection_CloudServiceType.
@@ -56,6 +58,8 @@ var (
 		9:  "CLOUD_SERVICE_YANDEX_GPT",
 		10: "CLOUD_SERVICES_ALL_API_ENDPOINT",
 		11: "CLOUD_SERVICE_YMQ",
+		12: "CLOUD_SERVICE_SPEECH_SENSE",
+		13: "CLOUD_SERVICE_AI_ASSISTANT",
 	}
 	PublicConnection_CloudServiceType_value = map[string]int32{
 		"CLOUD_SERVICE_TYPE_UNSPECIFIED":   0,
@@ -70,6 +74,8 @@ var (
 		"CLOUD_SERVICE_YANDEX_GPT":         9,
 		"CLOUD_SERVICES_ALL_API_ENDPOINT":  10,
 		"CLOUD_SERVICE_YMQ":                11,
+		"CLOUD_SERVICE_SPEECH_SENSE":       12,
+		"CLOUD_SERVICE_AI_ASSISTANT":       13,
 	}
 )
 
@@ -323,7 +329,8 @@ var File_yandex_cloud_cic_v1_public_connection_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_public_connection_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/cic/v1/public_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\xdf\t\n" +
+	"+yandex/cloud/cic/v1/public_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\x9f\n" +
+	"\n" +
 	"\x10PublicConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -341,7 +348,7 @@ const file_yandex_cloud_cic_v1_public_connection_proto_rawDesc = "" +
 	"created_at\x18\x15 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf0\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb0\x03\n" +
 	"\x10CloudServiceType\x12\"\n" +
 	"\x1eCLOUD_SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x14CLOUD_SERVICE_YANDEX\x10\x01\x1a\x02\b\x01\x12\x1c\n" +
@@ -355,7 +362,9 @@ const file_yandex_cloud_cic_v1_public_connection_proto_rawDesc = "" +
 	"\x18CLOUD_SERVICE_YANDEX_GPT\x10\t\x12#\n" +
 	"\x1fCLOUD_SERVICES_ALL_API_ENDPOINT\x10\n" +
 	"\x12\x15\n" +
-	"\x11CLOUD_SERVICE_YMQ\x10\v\"V\n" +
+	"\x11CLOUD_SERVICE_YMQ\x10\v\x12\x1e\n" +
+	"\x1aCLOUD_SERVICE_SPEECH_SENSE\x10\f\x12\x1e\n" +
+	"\x1aCLOUD_SERVICE_AI_ASSISTANT\x10\r\"V\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\f\n" +

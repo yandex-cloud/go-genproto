@@ -144,7 +144,7 @@ var File_yandex_cloud_marketplace_metering_v1_image_product_usage_service_proto 
 
 const file_yandex_cloud_marketplace_metering_v1_image_product_usage_service_proto_rawDesc = "" +
 	"\n" +
-	"Fyandex/cloud/marketplace/metering/v1/image_product_usage_service.proto\x12$yandex.cloud.marketplace.metering.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a7yandex/cloud/marketplace/metering/v1/usage_record.proto\"\xd3\x01\n" +
+	"Fyandex/cloud/marketplace/metering/v1/image_product_usage_service.proto\x12$yandex.cloud.marketplace.metering.v1\x1a\x1cgoogle/api/annotations.proto\x1a7yandex/cloud/marketplace/metering/v1/usage_record.proto\x1a\x1dyandex/cloud/validation.proto\"\xd3\x01\n" +
 	"\x1dWriteImageProductUsageRequest\x12#\n" +
 	"\rvalidate_only\x18\x01 \x01(\bR\fvalidateOnly\x12+\n" +
 	"\n" +

@@ -242,11 +242,11 @@ const file_yandex_cloud_marketplace_licensemanager_saas_v1_lock_service_proto_ra
 	"resourceId\x12%\n" +
 	"\vinstance_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"instanceId2\xfd\x04\n" +
-	"\vLockService\x12\xdd\x01\n" +
-	"\x06Ensure\x12B.yandex.cloud.marketplace.licensemanager.saas.v1.EnsureLockRequest\x1a!.yandex.cloud.operation.Operation\"l\xb2\xd2*,\n" +
-	"\x12EnsureLockMetadata\x12\x16licensemanager.v1.Lock\x82\xd3\xe4\x93\x026:\x01*\"1/marketplace/license-manager/saas/v1/locks/ensure\x12\xb6\x01\n" +
+	"\vLockService\x12\xb6\x01\n" +
 	"\x03Get\x12?.yandex.cloud.marketplace.licensemanager.saas.v1.GetLockRequest\x1a0.yandex.cloud.marketplace.licensemanager.v1.Lock\"<\x82\xd3\xe4\x93\x026\x124/marketplace/license-manager/saas/v1/locks/{lock_id}\x12\xd4\x01\n" +
-	"\x0fGetByResourceID\x12K.yandex.cloud.marketplace.licensemanager.saas.v1.GetLockByResourceIDRequest\x1a0.yandex.cloud.marketplace.licensemanager.v1.Lock\"B\x82\xd3\xe4\x93\x02<\x12:/marketplace/license-manager/saas/v1/locks:getByResourceIDB\x99\x01\n" +
+	"\x0fGetByResourceID\x12K.yandex.cloud.marketplace.licensemanager.saas.v1.GetLockByResourceIDRequest\x1a0.yandex.cloud.marketplace.licensemanager.v1.Lock\"B\x82\xd3\xe4\x93\x02<\x12:/marketplace/license-manager/saas/v1/locks:getByResourceID\x12\xdd\x01\n" +
+	"\x06Ensure\x12B.yandex.cloud.marketplace.licensemanager.saas.v1.EnsureLockRequest\x1a!.yandex.cloud.operation.Operation\"l\xb2\xd2*,\n" +
+	"\x12EnsureLockMetadata\x12\x16licensemanager.v1.Lock\x82\xd3\xe4\x93\x026:\x01*\"1/marketplace/license-manager/saas/v1/locks/ensureB\x99\x01\n" +
 	"3yandex.cloud.api.marketplace.licensemanager.saas.v1Zbgithub.com/yandex-cloud/go-genproto/yandex/cloud/marketplace/licensemanager/saas/v1;licensemanagerb\x06proto3"
 
 var (
@@ -267,16 +267,16 @@ var file_yandex_cloud_marketplace_licensemanager_saas_v1_lock_service_proto_goTy
 	(*EnsureLockMetadata)(nil),         // 1: yandex.cloud.marketplace.licensemanager.saas.v1.EnsureLockMetadata
 	(*GetLockRequest)(nil),             // 2: yandex.cloud.marketplace.licensemanager.saas.v1.GetLockRequest
 	(*GetLockByResourceIDRequest)(nil), // 3: yandex.cloud.marketplace.licensemanager.saas.v1.GetLockByResourceIDRequest
-	(*operation.Operation)(nil),        // 4: yandex.cloud.operation.Operation
-	(*v1.Lock)(nil),                    // 5: yandex.cloud.marketplace.licensemanager.v1.Lock
+	(*v1.Lock)(nil),                    // 4: yandex.cloud.marketplace.licensemanager.v1.Lock
+	(*operation.Operation)(nil),        // 5: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_marketplace_licensemanager_saas_v1_lock_service_proto_depIdxs = []int32{
-	0, // 0: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Ensure:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.EnsureLockRequest
-	2, // 1: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Get:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.GetLockRequest
-	3, // 2: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.GetByResourceID:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.GetLockByResourceIDRequest
-	4, // 3: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Ensure:output_type -> yandex.cloud.operation.Operation
-	5, // 4: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Get:output_type -> yandex.cloud.marketplace.licensemanager.v1.Lock
-	5, // 5: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.GetByResourceID:output_type -> yandex.cloud.marketplace.licensemanager.v1.Lock
+	2, // 0: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Get:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.GetLockRequest
+	3, // 1: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.GetByResourceID:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.GetLockByResourceIDRequest
+	0, // 2: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Ensure:input_type -> yandex.cloud.marketplace.licensemanager.saas.v1.EnsureLockRequest
+	4, // 3: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Get:output_type -> yandex.cloud.marketplace.licensemanager.v1.Lock
+	4, // 4: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.GetByResourceID:output_type -> yandex.cloud.marketplace.licensemanager.v1.Lock
+	5, // 5: yandex.cloud.marketplace.licensemanager.saas.v1.LockService.Ensure:output_type -> yandex.cloud.operation.Operation
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

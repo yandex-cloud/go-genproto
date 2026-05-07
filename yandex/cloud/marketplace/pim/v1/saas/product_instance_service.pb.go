@@ -209,7 +209,7 @@ var File_yandex_cloud_marketplace_pim_v1_saas_product_instance_service_proto pro
 
 const file_yandex_cloud_marketplace_pim_v1_saas_product_instance_service_proto_rawDesc = "" +
 	"\n" +
-	"Cyandex/cloud/marketplace/pim/v1/saas/product_instance_service.proto\x12$yandex.cloud.marketplace.pim.v1.saas\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a;yandex/cloud/marketplace/pim/v1/saas/product_instance.proto\"Y\n" +
+	"Cyandex/cloud/marketplace/pim/v1/saas/product_instance_service.proto\x12$yandex.cloud.marketplace.pim.v1.saas\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a;yandex/cloud/marketplace/pim/v1/saas/product_instance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"Y\n" +
 	"\x19GetProductInstanceRequest\x12<\n" +
 	"\x13product_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11productInstanceId\"\xb9\x01\n" +
 	"\x1bClaimProductInstanceRequest\x12$\n" +

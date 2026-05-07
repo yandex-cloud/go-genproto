@@ -379,6 +379,7 @@ func (x *CreateDnsFirewallMetadata) GetDnsFirewallId() string {
 type UpdateDnsFirewallRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the DNS firewall to update.
+	//
 	// To get the DNS firewall ID, make a [DnsFirewallService.List] request.
 	DnsFirewallId string `protobuf:"bytes,1,opt,name=dns_firewall_id,json=dnsFirewallId,proto3" json:"dns_firewall_id,omitempty"`
 	// Field mask specifying which fields of the DNS firewall resource are going to be updated.

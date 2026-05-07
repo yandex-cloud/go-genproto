@@ -343,6 +343,10 @@ func (m *ConfigCreateSpec) SetSnapshotManagement(v *SnapshotManagement) {
 	m.SnapshotManagement = v
 }
 
+func (m *ConfigCreateSpec) SetAuditLog(v *AuditLog) {
+	m.AuditLog = v
+}
+
 func (m *KeystoreSetting) SetName(v string) {
 	m.Name = v
 }
@@ -461,6 +465,10 @@ func (m *ConfigUpdateSpec) SetAccess(v *Access) {
 
 func (m *ConfigUpdateSpec) SetSnapshotManagement(v *SnapshotManagement) {
 	m.SnapshotManagement = v
+}
+
+func (m *ConfigUpdateSpec) SetAuditLog(v *AuditLog) {
+	m.AuditLog = v
 }
 
 type OpenSearchClusterUpdateSpec_Config = isOpenSearchClusterUpdateSpec_Config

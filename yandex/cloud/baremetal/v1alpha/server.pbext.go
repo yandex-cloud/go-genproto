@@ -110,6 +110,10 @@ func (m *NetworkInterface) SetIpAddress(v string) {
 	m.IpAddress = v
 }
 
+func (m *NetworkInterface) SetConfigurationNetworkInterfaceId(v string) {
+	m.ConfigurationNetworkInterfaceId = v
+}
+
 func (m *PrivateNetworkInterface) SetNativeSubnetId(v string) {
 	m.NativeSubnetId = v
 }
