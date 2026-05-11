@@ -33,7 +33,6 @@ const (
 // A set of methods for managing OAuthClientSecret resources.
 type OAuthClientSecretServiceClient interface {
 	// Returns the sepcified OAuthClientSecret resource.
-	//
 	// To get the list of available OAuthClientSecret resources, make a [List] request.
 	Get(ctx context.Context, in *GetOAuthClientSecretRequest, opts ...grpc.CallOption) (*OAuthClientSecret, error)
 	// Retrieves the list of OAuthClientSecret resources of the specified OAuthClient.
@@ -99,7 +98,6 @@ func (c *oAuthClientSecretServiceClient) Delete(ctx context.Context, in *DeleteO
 // A set of methods for managing OAuthClientSecret resources.
 type OAuthClientSecretServiceServer interface {
 	// Returns the sepcified OAuthClientSecret resource.
-	//
 	// To get the list of available OAuthClientSecret resources, make a [List] request.
 	Get(context.Context, *GetOAuthClientSecretRequest) (*OAuthClientSecret, error)
 	// Retrieves the list of OAuthClientSecret resources of the specified OAuthClient.

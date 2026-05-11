@@ -201,12 +201,12 @@ var File_yandex_cloud_iam_v1_role_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_role_service_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/iam/v1/role_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1eyandex/cloud/iam/v1/role.proto\"7\n" +
+	"&yandex/cloud/iam/v1/role_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1eyandex/cloud/iam/v1/role.proto\x1a\x1dyandex/cloud/validation.proto\"7\n" +
 	"\x0eGetRoleRequest\x12%\n" +
 	"\arole_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06roleId\"\x8a\x01\n" +
 	"\x10ListRolesRequest\x12'\n" +
 	"\tpage_size\x18\x01 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +

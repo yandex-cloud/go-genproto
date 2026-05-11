@@ -92,7 +92,6 @@ type ListRefreshTokensRequest struct {
 	// returned by a previous list request.
 	PageToken string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters refresh tokens listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [RefreshToken.client_instance_info], [RefreshToken.client_id] or [RefreshToken.protection_level] fields.
 	// 2. The operator. An `=` operator can be used for all fields. An 'IN' operator can be used for [RefreshToken.protection_level].
@@ -443,7 +442,7 @@ const file_yandex_cloud_iam_v1_refresh_token_service_proto_rawDesc = "" +
 	"\x1aRevokeRefreshTokenMetadata\x12\x1d\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tR\tsubjectId\x12*\n" +
-	"\x11refresh_token_ids\x18\x02 \x03(\tR\x0frefreshTokenIds\"\xc7\x01\n" +
+	"\x11refresh_token_ids\x18\x02 \x03(\tR\x0frefreshTokenIds\"\xc1\x01\n" +
 	"\x18ListRefreshTokensRequest\x12'\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\tsubjectId\x12'\n" +
@@ -453,7 +452,7 @@ const file_yandex_cloud_iam_v1_refresh_token_service_proto_rawDesc = "" +
 	"page_token\x18\x05 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x06 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04\"\x8d\x01\n" +
+	"\x8a\xc81\x06<=1000R\x06filterJ\x04\b\x02\x10\x04\"\x8d\x01\n" +
 	"\x19ListRefreshTokensResponse\x12H\n" +
 	"\x0erefresh_tokens\x18\x01 \x03(\v2!.yandex.cloud.iam.v1.RefreshTokenR\rrefreshTokens\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xde\x01\n" +

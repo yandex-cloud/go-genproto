@@ -230,7 +230,7 @@ type CreatePrivateConnectionRequest struct {
 	// Value range: [1, 4095]
 	VlanId *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=vlan_id,json=vlanId,proto3" json:"vlan_id,omitempty"`
 	// IPv4 peering config of connection
-	Ipv4Peering *Peering `protobuf:"bytes,10,opt,name=ipv4_peering,json=ipv4Peering,proto3" json:"ipv4_peering,omitempty"`
+	Ipv4Peering *PeeringRequest `protobuf:"bytes,10,opt,name=ipv4_peering,json=ipv4Peering,proto3" json:"ipv4_peering,omitempty"`
 	// IPv4 StaticRoute config of connection
 	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,19,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
 	// Resource labels, `key:value` pairs.
@@ -309,7 +309,7 @@ func (x *CreatePrivateConnectionRequest) GetVlanId() *wrapperspb.Int64Value {
 	return nil
 }
 
-func (x *CreatePrivateConnectionRequest) GetIpv4Peering() *Peering {
+func (x *CreatePrivateConnectionRequest) GetIpv4Peering() *PeeringRequest {
 	if x != nil {
 		return x.Ipv4Peering
 	}
@@ -349,7 +349,7 @@ type UpdatePrivateConnectionRequest struct {
 	// Value range: [1, 4095]
 	VlanId *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=vlan_id,json=vlanId,proto3" json:"vlan_id,omitempty"`
 	// IPv4 peering config of connection
-	Ipv4Peering *Peering `protobuf:"bytes,10,opt,name=ipv4_peering,json=ipv4Peering,proto3" json:"ipv4_peering,omitempty"`
+	Ipv4Peering *PeeringRequest `protobuf:"bytes,10,opt,name=ipv4_peering,json=ipv4Peering,proto3" json:"ipv4_peering,omitempty"`
 	// IPv4 StaticRoute config of connection
 	Ipv4StaticRoutes []*PrivateConnection_StaticRoute `protobuf:"bytes,19,rep,name=ipv4_static_routes,json=ipv4StaticRoutes,proto3" json:"ipv4_static_routes,omitempty"`
 	// Resource labels, `key:value` pairs.
@@ -435,7 +435,7 @@ func (x *UpdatePrivateConnectionRequest) GetVlanId() *wrapperspb.Int64Value {
 	return nil
 }
 
-func (x *UpdatePrivateConnectionRequest) GetIpv4Peering() *Peering {
+func (x *UpdatePrivateConnectionRequest) GetIpv4Peering() *PeeringRequest {
 	if x != nil {
 		return x.Ipv4Peering
 	}
@@ -1065,7 +1065,7 @@ var File_yandex_cloud_cic_v1_private_connection_service_proto protoreflect.FileD
 
 const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/cic/v1/private_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a!yandex/cloud/cic/v1/peering.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"_\n" +
+	"4yandex/cloud/cic/v1/private_connection_service.proto\x12\x13yandex.cloud.cic.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/cic/v1/peering_request.proto\x1a,yandex/cloud/cic/v1/private_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"_\n" +
 	"\x1bGetPrivateConnectionRequest\x12@\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13privateConnectionId\"\xc1\x01\n" +
 	"\x1dListPrivateConnectionsRequest\x12)\n" +
@@ -1078,21 +1078,21 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1eListPrivateConnectionsResponse\x12W\n" +
 	"\x13private_connections\x18\x01 \x03(\v2&.yandex.cloud.cic.v1.PrivateConnectionR\x12privateConnections\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbb\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc2\x05\n" +
 	"\x1eCreatePrivateConnectionRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12%\n" +
 	"\tfolder_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x128\n" +
 	"\x13trunk_connection_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\x11trunkConnectionId\x124\n" +
-	"\avlan_id\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +
+	"\avlan_id\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12F\n" +
 	"\fipv4_peering\x18\n" +
-	" \x01(\v2\x1c.yandex.cloud.cic.v1.PeeringR\vipv4Peering\x12`\n" +
+	" \x01(\v2#.yandex.cloud.cic.v1.PeeringRequestR\vipv4Peering\x12`\n" +
 	"\x12ipv4_static_routes\x18\x13 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes\x12\x94\x01\n" +
 	"\x06labels\x18\x1a \x03(\v2?.yandex.cloud.cic.v1.CreatePrivateConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\x05\x10\x06J\x04\b\b\x10\n" +
-	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"\x83\x06\n" +
+	"J\x04\b\v\x10\x13J\x04\b\x14\x10\x1a\"\x8a\x06\n" +
 	"\x1eUpdatePrivateConnectionRequest\x12<\n" +
 	"\x15private_connection_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x13privateConnectionId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1100,9 +1100,9 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x128\n" +
 	"\x13trunk_connection_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x11trunkConnectionId\x124\n" +
-	"\avlan_id\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +
+	"\avlan_id\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12F\n" +
 	"\fipv4_peering\x18\n" +
-	" \x01(\v2\x1c.yandex.cloud.cic.v1.PeeringR\vipv4Peering\x12`\n" +
+	" \x01(\v2#.yandex.cloud.cic.v1.PeeringRequestR\vipv4Peering\x12`\n" +
 	"\x12ipv4_static_routes\x18\x13 \x03(\v22.yandex.cloud.cic.v1.PrivateConnection.StaticRouteR\x10ipv4StaticRoutes\x12\x94\x01\n" +
 	"\x06labels\x18\x1a \x03(\v2?.yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -1195,7 +1195,7 @@ var file_yandex_cloud_cic_v1_private_connection_service_proto_goTypes = []any{
 	nil,                                             // 18: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntry
 	(*PrivateConnection)(nil),                       // 19: yandex.cloud.cic.v1.PrivateConnection
 	(*wrapperspb.Int64Value)(nil),                   // 20: google.protobuf.Int64Value
-	(*Peering)(nil),                                 // 21: yandex.cloud.cic.v1.Peering
+	(*PeeringRequest)(nil),                          // 21: yandex.cloud.cic.v1.PeeringRequest
 	(*PrivateConnection_StaticRoute)(nil),           // 22: yandex.cloud.cic.v1.PrivateConnection.StaticRoute
 	(*fieldmaskpb.FieldMask)(nil),                   // 23: google.protobuf.FieldMask
 	(*operation.Operation)(nil),                     // 24: yandex.cloud.operation.Operation
@@ -1203,12 +1203,12 @@ var file_yandex_cloud_cic_v1_private_connection_service_proto_goTypes = []any{
 var file_yandex_cloud_cic_v1_private_connection_service_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.cic.v1.ListPrivateConnectionsResponse.private_connections:type_name -> yandex.cloud.cic.v1.PrivateConnection
 	20, // 1: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.vlan_id:type_name -> google.protobuf.Int64Value
-	21, // 2: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.ipv4_peering:type_name -> yandex.cloud.cic.v1.Peering
+	21, // 2: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.ipv4_peering:type_name -> yandex.cloud.cic.v1.PeeringRequest
 	22, // 3: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
 	17, // 4: yandex.cloud.cic.v1.CreatePrivateConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.CreatePrivateConnectionRequest.LabelsEntry
 	23, // 5: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
 	20, // 6: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.vlan_id:type_name -> google.protobuf.Int64Value
-	21, // 7: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.ipv4_peering:type_name -> yandex.cloud.cic.v1.Peering
+	21, // 7: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.ipv4_peering:type_name -> yandex.cloud.cic.v1.PeeringRequest
 	22, // 8: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.ipv4_static_routes:type_name -> yandex.cloud.cic.v1.PrivateConnection.StaticRoute
 	18, // 9: yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.labels:type_name -> yandex.cloud.cic.v1.UpdatePrivateConnectionRequest.LabelsEntry
 	24, // 10: yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
@@ -1244,7 +1244,7 @@ func file_yandex_cloud_cic_v1_private_connection_service_proto_init() {
 	if File_yandex_cloud_cic_v1_private_connection_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_cic_v1_peering_proto_init()
+	file_yandex_cloud_cic_v1_peering_request_proto_init()
 	file_yandex_cloud_cic_v1_private_connection_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

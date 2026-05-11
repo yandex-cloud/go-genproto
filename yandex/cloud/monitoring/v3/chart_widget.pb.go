@@ -2613,7 +2613,7 @@ var File_yandex_cloud_monitoring_v3_chart_widget_proto protoreflect.FileDescript
 
 const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xdeB\n" +
+	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xeaB\n" +
 	"\vChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12I\n" +
 	"\aqueries\x18\x02 \x01(\v2/.yandex.cloud.monitoring.v3.ChartWidget.QueriesR\aqueries\x12t\n" +
@@ -2636,7 +2636,7 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x1b\n" +
 	"\ttext_mode\x18\x02 \x01(\bR\btextMode\x12\x16\n" +
 	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x1a\x9d \n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x1a\xa9 \n" +
 	"\x15VisualizationSettings\x12c\n" +
 	"\x04type\x18\x01 \x01(\x0e2O.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12k\n" +
@@ -2650,7 +2650,7 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"showLabels\x12r\n" +
 	"\x0etiles_settings\x18\n" +
 	" \x01(\v2K.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x12*\n" +
-	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\x93\v\n" +
+	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\x99\v\n" +
 	"\x13ColorSchemeSettings\x12\x86\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2f.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x83\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2e.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x83\x01\n" +
@@ -2661,13 +2661,13 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"thresholds\x12\x83\x01\n" +
 	"\bconstant\x18\x06 \x01(\v2e.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorSchemeH\x00R\bconstant\x1a\x16\n" +
 	"\x14AutomaticColorScheme\x1a\x15\n" +
-	"\x13StandardColorScheme\x1a\x99\x01\n" +
+	"\x13StandardColorScheme\x1a\x9f\x01\n" +
 	"\x13GradientColorScheme\x12\x1f\n" +
 	"\vgreen_value\x18\x02 \x01(\tR\n" +
 	"greenValue\x12!\n" +
 	"\fyellow_value\x18\x03 \x01(\tR\vyellowValue\x12\x1b\n" +
 	"\tred_value\x18\x04 \x01(\tR\bredValue\x12!\n" +
-	"\fviolet_value\x18\x05 \x01(\tR\vvioletValue\x1a\x11\n" +
+	"\fviolet_value\x18\x05 \x01(\tR\vvioletValueJ\x04\b\x01\x10\x02\x1a\x11\n" +
 	"\x0fHashColorScheme\x1a+\n" +
 	"\x13ConstantColorScheme\x12\x14\n" +
 	"\x05color\x18\x01 \x01(\tR\x05color\x1a\xc6\x02\n" +
@@ -2680,13 +2680,13 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x0fAGGREGATION_MAX\x10\x03\x12\x13\n" +
 	"\x0fAGGREGATION_AVG\x10\x04\x12\x13\n" +
 	"\x0fAGGREGATION_SUM\x10\x05B\b\n" +
-	"\x06scheme\x1a\x95\x01\n" +
+	"\x06scheme\x1a\x9b\x01\n" +
 	"\x0fHeatmapSettings\x12\x1f\n" +
 	"\vgreen_value\x18\x02 \x01(\tR\n" +
 	"greenValue\x12!\n" +
 	"\fyellow_value\x18\x03 \x01(\tR\vyellowValue\x12\x1b\n" +
 	"\tred_value\x18\x04 \x01(\tR\bredValue\x12!\n" +
-	"\fviolet_value\x18\x05 \x01(\tR\vvioletValue\x1a\xa2\x02\n" +
+	"\fviolet_value\x18\x05 \x01(\tR\vvioletValueJ\x04\b\x01\x10\x02\x1a\xa2\x02\n" +
 	"\x05Yaxis\x12[\n" +
 	"\x04type\x18\x01 \x01(\x0e2G.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisTypeR\x04type\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x10\n" +
@@ -2941,8 +2941,8 @@ func file_yandex_cloud_monitoring_v3_chart_widget_proto_init() {
 	}
 	file_yandex_cloud_monitoring_v3_downsampling_proto_init()
 	file_yandex_cloud_monitoring_v3_sort_order_proto_init()
-	file_yandex_cloud_monitoring_v3_unit_format_proto_init()
 	file_yandex_cloud_monitoring_v3_thresholds_proto_init()
+	file_yandex_cloud_monitoring_v3_unit_format_proto_init()
 	file_yandex_cloud_monitoring_v3_chart_widget_proto_msgTypes[3].OneofWrappers = []any{
 		(*ChartWidget_SeriesOverrides_Name)(nil),
 		(*ChartWidget_SeriesOverrides_TargetIndex)(nil),

@@ -28,20 +28,20 @@ const (
 	Service_STATUS_UNSPECIFIED Service_Status = 0
 	// The service is enabled.
 	Service_ENABLED Service_Status = 1
-	// The service is paused.
-	Service_PAUSED Service_Status = 2
 	// The service is disabled.
 	Service_DISABLED Service_Status = 3
 	// The service is being enabled.
 	Service_ENABLING Service_Status = 4
-	// The service is being resumed.
-	Service_RESUMING Service_Status = 5
-	// The service is being paused.
-	Service_PAUSING Service_Status = 6
 	// The service is being disabled.
 	Service_DISABLING Service_Status = 7
 	// The service is in error state.
 	Service_ERROR Service_Status = 8
+	// The service is paused.
+	Service_PAUSED Service_Status = 2
+	// The service is being paused.
+	Service_PAUSING Service_Status = 6
+	// The service is being resumed.
+	Service_RESUMING Service_Status = 5
 	// The service could be auto enabled.
 	Service_DEFAULT Service_Status = 9
 )
@@ -51,25 +51,25 @@ var (
 	Service_Status_name = map[int32]string{
 		0: "STATUS_UNSPECIFIED",
 		1: "ENABLED",
-		2: "PAUSED",
 		3: "DISABLED",
 		4: "ENABLING",
-		5: "RESUMING",
-		6: "PAUSING",
 		7: "DISABLING",
 		8: "ERROR",
+		2: "PAUSED",
+		6: "PAUSING",
+		5: "RESUMING",
 		9: "DEFAULT",
 	}
 	Service_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
 		"ENABLED":            1,
-		"PAUSED":             2,
 		"DISABLED":           3,
 		"ENABLING":           4,
-		"RESUMING":           5,
-		"PAUSING":            6,
 		"DISABLING":          7,
 		"ERROR":              8,
+		"PAUSED":             2,
+		"PAUSING":            6,
+		"RESUMING":           5,
 		"DEFAULT":            9,
 	}
 )
@@ -251,15 +251,15 @@ const file_yandex_cloud_iam_v1_service_control_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\x0e2#.yandex.cloud.iam.v1.Service.StatusR\x06status\"\x97\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
-	"\aENABLED\x10\x01\x12\n" +
-	"\n" +
-	"\x06PAUSED\x10\x02\x12\f\n" +
+	"\aENABLED\x10\x01\x12\f\n" +
 	"\bDISABLED\x10\x03\x12\f\n" +
-	"\bENABLING\x10\x04\x12\f\n" +
-	"\bRESUMING\x10\x05\x12\v\n" +
-	"\aPAUSING\x10\x06\x12\r\n" +
+	"\bENABLING\x10\x04\x12\r\n" +
 	"\tDISABLING\x10\a\x12\t\n" +
-	"\x05ERROR\x10\b\x12\v\n" +
+	"\x05ERROR\x10\b\x12\n" +
+	"\n" +
+	"\x06PAUSED\x10\x02\x12\v\n" +
+	"\aPAUSING\x10\x06\x12\f\n" +
+	"\bRESUMING\x10\x05\x12\v\n" +
 	"\aDEFAULT\x10\t\"\x84\x01\n" +
 	"\fServiceAgent\x12,\n" +
 	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\x12\x1d\n" +

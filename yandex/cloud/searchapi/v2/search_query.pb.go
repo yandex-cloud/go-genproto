@@ -282,10 +282,7 @@ type SearchMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Search flags, `key:value` pairs.
 	// No more than 64.
-	// The maximum string length in characters for each value is 63.
-	// Each value must match the regular expression `[-_0-9a-z]*`.
 	// The string length in characters for each key must be 1-63.
-	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
 	Fields        map[string]string `protobuf:"bytes,1,rep,name=fields,proto3" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -360,9 +357,9 @@ const file_yandex_cloud_searchapi_v2_search_query_proto_rawDesc = "" +
 	"\vFixTypoMode\x12\x1d\n" +
 	"\x19FIX_TYPO_MODE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10FIX_TYPO_MODE_ON\x10\x01\x12\x15\n" +
-	"\x11FIX_TYPO_MODE_OFF\x10\x02\"\xd8\x01\n" +
-	"\x0eSearchMetadata\x12\x8a\x01\n" +
-	"\x06fields\x18\x01 \x03(\v25.yandex.cloud.searchapi.v2.SearchMetadata.FieldsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06fields\x1a9\n" +
+	"\x11FIX_TYPO_MODE_OFF\x10\x02\"\xc8\x01\n" +
+	"\x0eSearchMetadata\x12{\n" +
+	"\x06fields\x18\x01 \x03(\v25.yandex.cloud.searchapi.v2.SearchMetadata.FieldsEntryB,\x82\xc81\x04<=64\x8a\xc81\x06<=1024\xb2\xc81\x16\x12\x0e[-_0-9a-zA-Z]+\x1a\x041-63R\x06fields\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01Be\n" +

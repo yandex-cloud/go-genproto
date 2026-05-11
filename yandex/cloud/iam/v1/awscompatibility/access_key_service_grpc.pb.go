@@ -37,7 +37,6 @@ type AccessKeyServiceClient interface {
 	// Retrieves the list of access keys for the specified service account.
 	List(ctx context.Context, in *ListAccessKeysRequest, opts ...grpc.CallOption) (*ListAccessKeysResponse, error)
 	// Returns the specified access key.
-	//
 	// To get the list of available access keys, make a [List] request.
 	Get(ctx context.Context, in *GetAccessKeyRequest, opts ...grpc.CallOption) (*AccessKey, error)
 	// Creates an access key for the specified service account.
@@ -127,7 +126,6 @@ type AccessKeyServiceServer interface {
 	// Retrieves the list of access keys for the specified service account.
 	List(context.Context, *ListAccessKeysRequest) (*ListAccessKeysResponse, error)
 	// Returns the specified access key.
-	//
 	// To get the list of available access keys, make a [List] request.
 	Get(context.Context, *GetAccessKeyRequest) (*AccessKey, error)
 	// Creates an access key for the specified service account.

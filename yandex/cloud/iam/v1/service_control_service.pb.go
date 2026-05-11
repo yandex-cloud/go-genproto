@@ -30,7 +30,6 @@ type GetServiceRequest struct {
 	// ID of the Service.
 	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
 	// Resource container to get a service information in.
-	//
 	// It is supported only resource-manager.cloud resource container now.
 	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -81,10 +80,227 @@ func (x *GetServiceRequest) GetResource() *Resource {
 	return nil
 }
 
+type EnableServiceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Service.
+	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	// Resource container to enable a service in.
+	// It is supported only resource-manager.cloud resource container now.
+	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableServiceRequest) Reset() {
+	*x = EnableServiceRequest{}
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableServiceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableServiceRequest) ProtoMessage() {}
+
+func (x *EnableServiceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableServiceRequest.ProtoReflect.Descriptor instead.
+func (*EnableServiceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *EnableServiceRequest) GetServiceId() string {
+	if x != nil {
+		return x.ServiceId
+	}
+	return ""
+}
+
+func (x *EnableServiceRequest) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
+type EnableServiceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Service.
+	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	// Resource container.
+	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableServiceMetadata) Reset() {
+	*x = EnableServiceMetadata{}
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableServiceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableServiceMetadata) ProtoMessage() {}
+
+func (x *EnableServiceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableServiceMetadata.ProtoReflect.Descriptor instead.
+func (*EnableServiceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *EnableServiceMetadata) GetServiceId() string {
+	if x != nil {
+		return x.ServiceId
+	}
+	return ""
+}
+
+func (x *EnableServiceMetadata) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
+type DisableServiceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Service.
+	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	// Resource container to disable a service in.
+	// It is supported only resource-manager.cloud resource container now.
+	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableServiceRequest) Reset() {
+	*x = DisableServiceRequest{}
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableServiceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableServiceRequest) ProtoMessage() {}
+
+func (x *DisableServiceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableServiceRequest.ProtoReflect.Descriptor instead.
+func (*DisableServiceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DisableServiceRequest) GetServiceId() string {
+	if x != nil {
+		return x.ServiceId
+	}
+	return ""
+}
+
+func (x *DisableServiceRequest) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
+type DisableServiceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Service.
+	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	// Resource container.
+	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableServiceMetadata) Reset() {
+	*x = DisableServiceMetadata{}
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableServiceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableServiceMetadata) ProtoMessage() {}
+
+func (x *DisableServiceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableServiceMetadata.ProtoReflect.Descriptor instead.
+func (*DisableServiceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DisableServiceMetadata) GetServiceId() string {
+	if x != nil {
+		return x.ServiceId
+	}
+	return ""
+}
+
+func (x *DisableServiceMetadata) GetResource() *Resource {
+	if x != nil {
+		return x.Resource
+	}
+	return nil
+}
+
 type ListServicesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Resource container to list a services.
-	//
 	// It is supported only resource-manager.cloud resource container now.
 	Resource *Resource `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -103,7 +319,7 @@ type ListServicesRequest struct {
 
 func (x *ListServicesRequest) Reset() {
 	*x = ListServicesRequest{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -115,7 +331,7 @@ func (x *ListServicesRequest) String() string {
 func (*ListServicesRequest) ProtoMessage() {}
 
 func (x *ListServicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -128,7 +344,7 @@ func (x *ListServicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServicesRequest.ProtoReflect.Descriptor instead.
 func (*ListServicesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListServicesRequest) GetResource() *Resource {
@@ -169,7 +385,7 @@ type ListServicesResponse struct {
 
 func (x *ListServicesResponse) Reset() {
 	*x = ListServicesResponse{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -181,7 +397,7 @@ func (x *ListServicesResponse) String() string {
 func (*ListServicesResponse) ProtoMessage() {}
 
 func (x *ListServicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -194,7 +410,7 @@ func (x *ListServicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServicesResponse.ProtoReflect.Descriptor instead.
 func (*ListServicesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListServicesResponse) GetServices() []*Service {
@@ -209,226 +425,6 @@ func (x *ListServicesResponse) GetNextPageToken() string {
 		return x.NextPageToken
 	}
 	return ""
-}
-
-type EnableServiceRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Service.
-	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
-	// Resource container to enable a service in.
-	//
-	// It is supported only resource-manager.cloud resource container now.
-	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EnableServiceRequest) Reset() {
-	*x = EnableServiceRequest{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EnableServiceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EnableServiceRequest) ProtoMessage() {}
-
-func (x *EnableServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EnableServiceRequest.ProtoReflect.Descriptor instead.
-func (*EnableServiceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *EnableServiceRequest) GetServiceId() string {
-	if x != nil {
-		return x.ServiceId
-	}
-	return ""
-}
-
-func (x *EnableServiceRequest) GetResource() *Resource {
-	if x != nil {
-		return x.Resource
-	}
-	return nil
-}
-
-type EnableServiceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Service.
-	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
-	// Resource container.
-	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EnableServiceMetadata) Reset() {
-	*x = EnableServiceMetadata{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EnableServiceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EnableServiceMetadata) ProtoMessage() {}
-
-func (x *EnableServiceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EnableServiceMetadata.ProtoReflect.Descriptor instead.
-func (*EnableServiceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *EnableServiceMetadata) GetServiceId() string {
-	if x != nil {
-		return x.ServiceId
-	}
-	return ""
-}
-
-func (x *EnableServiceMetadata) GetResource() *Resource {
-	if x != nil {
-		return x.Resource
-	}
-	return nil
-}
-
-type DisableServiceRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Service.
-	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
-	// Resource container to disable a service in.
-	//
-	// It is supported only resource-manager.cloud resource container now.
-	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DisableServiceRequest) Reset() {
-	*x = DisableServiceRequest{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DisableServiceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DisableServiceRequest) ProtoMessage() {}
-
-func (x *DisableServiceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DisableServiceRequest.ProtoReflect.Descriptor instead.
-func (*DisableServiceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *DisableServiceRequest) GetServiceId() string {
-	if x != nil {
-		return x.ServiceId
-	}
-	return ""
-}
-
-func (x *DisableServiceRequest) GetResource() *Resource {
-	if x != nil {
-		return x.Resource
-	}
-	return nil
-}
-
-type DisableServiceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Service.
-	ServiceId string `protobuf:"bytes,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
-	// Resource container.
-	Resource      *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DisableServiceMetadata) Reset() {
-	*x = DisableServiceMetadata{}
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DisableServiceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DisableServiceMetadata) ProtoMessage() {}
-
-func (x *DisableServiceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DisableServiceMetadata.ProtoReflect.Descriptor instead.
-func (*DisableServiceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *DisableServiceMetadata) GetServiceId() string {
-	if x != nil {
-		return x.ServiceId
-	}
-	return ""
-}
-
-func (x *DisableServiceMetadata) GetResource() *Resource {
-	if x != nil {
-		return x.Resource
-	}
-	return nil
 }
 
 type ResolveServiceAgentRequest struct {
@@ -502,17 +498,7 @@ const file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc = "" +
 	"\x11GetServiceRequest\x12+\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tserviceId\x12?\n" +
-	"\bresource\x18\x02 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceB\x04\xe8\xc71\x01R\bresource\"\xaa\x01\n" +
-	"\x13ListServicesRequest\x12?\n" +
-	"\bresource\x18\x01 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\"x\n" +
-	"\x14ListServicesResponse\x128\n" +
-	"\bservices\x18\x01 \x03(\v2\x1c.yandex.cloud.iam.v1.ServiceR\bservices\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x84\x01\n" +
+	"\bresource\x18\x02 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceB\x04\xe8\xc71\x01R\bresource\"\x84\x01\n" +
 	"\x14EnableServiceRequest\x12+\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tserviceId\x12?\n" +
@@ -528,7 +514,17 @@ const file_yandex_cloud_iam_v1_service_control_service_proto_rawDesc = "" +
 	"\x16DisableServiceMetadata\x12\x1d\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tR\tserviceId\x129\n" +
-	"\bresource\x18\x02 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceR\bresource\"\xbd\x01\n" +
+	"\bresource\x18\x02 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceR\bresource\"\xaa\x01\n" +
+	"\x13ListServicesRequest\x12?\n" +
+	"\bresource\x18\x01 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceB\x04\xe8\xc71\x01R\bresource\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\"x\n" +
+	"\x14ListServicesResponse\x128\n" +
+	"\bservices\x18\x01 \x03(\v2\x1c.yandex.cloud.iam.v1.ServiceR\bservices\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbd\x01\n" +
 	"\x1aResolveServiceAgentRequest\x12+\n" +
 	"\n" +
 	"service_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tserviceId\x121\n" +
@@ -559,12 +555,12 @@ func file_yandex_cloud_iam_v1_service_control_service_proto_rawDescGZIP() []byte
 var file_yandex_cloud_iam_v1_service_control_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_iam_v1_service_control_service_proto_goTypes = []any{
 	(*GetServiceRequest)(nil),          // 0: yandex.cloud.iam.v1.GetServiceRequest
-	(*ListServicesRequest)(nil),        // 1: yandex.cloud.iam.v1.ListServicesRequest
-	(*ListServicesResponse)(nil),       // 2: yandex.cloud.iam.v1.ListServicesResponse
-	(*EnableServiceRequest)(nil),       // 3: yandex.cloud.iam.v1.EnableServiceRequest
-	(*EnableServiceMetadata)(nil),      // 4: yandex.cloud.iam.v1.EnableServiceMetadata
-	(*DisableServiceRequest)(nil),      // 5: yandex.cloud.iam.v1.DisableServiceRequest
-	(*DisableServiceMetadata)(nil),     // 6: yandex.cloud.iam.v1.DisableServiceMetadata
+	(*EnableServiceRequest)(nil),       // 1: yandex.cloud.iam.v1.EnableServiceRequest
+	(*EnableServiceMetadata)(nil),      // 2: yandex.cloud.iam.v1.EnableServiceMetadata
+	(*DisableServiceRequest)(nil),      // 3: yandex.cloud.iam.v1.DisableServiceRequest
+	(*DisableServiceMetadata)(nil),     // 4: yandex.cloud.iam.v1.DisableServiceMetadata
+	(*ListServicesRequest)(nil),        // 5: yandex.cloud.iam.v1.ListServicesRequest
+	(*ListServicesResponse)(nil),       // 6: yandex.cloud.iam.v1.ListServicesResponse
 	(*ResolveServiceAgentRequest)(nil), // 7: yandex.cloud.iam.v1.ResolveServiceAgentRequest
 	(*Resource)(nil),                   // 8: yandex.cloud.iam.v1.Resource
 	(*Service)(nil),                    // 9: yandex.cloud.iam.v1.Service
@@ -573,20 +569,20 @@ var file_yandex_cloud_iam_v1_service_control_service_proto_goTypes = []any{
 }
 var file_yandex_cloud_iam_v1_service_control_service_proto_depIdxs = []int32{
 	8,  // 0: yandex.cloud.iam.v1.GetServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	8,  // 1: yandex.cloud.iam.v1.ListServicesRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	9,  // 2: yandex.cloud.iam.v1.ListServicesResponse.services:type_name -> yandex.cloud.iam.v1.Service
-	8,  // 3: yandex.cloud.iam.v1.EnableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	8,  // 4: yandex.cloud.iam.v1.EnableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
-	8,  // 5: yandex.cloud.iam.v1.DisableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
-	8,  // 6: yandex.cloud.iam.v1.DisableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	8,  // 1: yandex.cloud.iam.v1.EnableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	8,  // 2: yandex.cloud.iam.v1.EnableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	8,  // 3: yandex.cloud.iam.v1.DisableServiceRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	8,  // 4: yandex.cloud.iam.v1.DisableServiceMetadata.resource:type_name -> yandex.cloud.iam.v1.Resource
+	8,  // 5: yandex.cloud.iam.v1.ListServicesRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
+	9,  // 6: yandex.cloud.iam.v1.ListServicesResponse.services:type_name -> yandex.cloud.iam.v1.Service
 	8,  // 7: yandex.cloud.iam.v1.ResolveServiceAgentRequest.resource:type_name -> yandex.cloud.iam.v1.Resource
 	0,  // 8: yandex.cloud.iam.v1.ServiceControlService.Get:input_type -> yandex.cloud.iam.v1.GetServiceRequest
-	1,  // 9: yandex.cloud.iam.v1.ServiceControlService.List:input_type -> yandex.cloud.iam.v1.ListServicesRequest
-	3,  // 10: yandex.cloud.iam.v1.ServiceControlService.Enable:input_type -> yandex.cloud.iam.v1.EnableServiceRequest
-	5,  // 11: yandex.cloud.iam.v1.ServiceControlService.Disable:input_type -> yandex.cloud.iam.v1.DisableServiceRequest
+	5,  // 9: yandex.cloud.iam.v1.ServiceControlService.List:input_type -> yandex.cloud.iam.v1.ListServicesRequest
+	1,  // 10: yandex.cloud.iam.v1.ServiceControlService.Enable:input_type -> yandex.cloud.iam.v1.EnableServiceRequest
+	3,  // 11: yandex.cloud.iam.v1.ServiceControlService.Disable:input_type -> yandex.cloud.iam.v1.DisableServiceRequest
 	7,  // 12: yandex.cloud.iam.v1.ServiceControlService.ResolveAgent:input_type -> yandex.cloud.iam.v1.ResolveServiceAgentRequest
 	9,  // 13: yandex.cloud.iam.v1.ServiceControlService.Get:output_type -> yandex.cloud.iam.v1.Service
-	2,  // 14: yandex.cloud.iam.v1.ServiceControlService.List:output_type -> yandex.cloud.iam.v1.ListServicesResponse
+	6,  // 14: yandex.cloud.iam.v1.ServiceControlService.List:output_type -> yandex.cloud.iam.v1.ListServicesResponse
 	10, // 15: yandex.cloud.iam.v1.ServiceControlService.Enable:output_type -> yandex.cloud.operation.Operation
 	10, // 16: yandex.cloud.iam.v1.ServiceControlService.Disable:output_type -> yandex.cloud.operation.Operation
 	11, // 17: yandex.cloud.iam.v1.ServiceControlService.ResolveAgent:output_type -> yandex.cloud.iam.v1.ServiceAgent

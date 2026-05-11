@@ -34,7 +34,6 @@ const (
 // A set of methods for managing OAuthClient resources.
 type OAuthClientServiceClient interface {
 	// Returns the sepcified OAuthClient resource.
-	//
 	// To get the list of available OAuthClient resources, make a [List] request.
 	Get(ctx context.Context, in *GetOAuthClientRequest, opts ...grpc.CallOption) (*OAuthClient, error)
 	// Retrieves the list of OAuthClient resources views in the specified folder
@@ -112,7 +111,6 @@ func (c *oAuthClientServiceClient) Delete(ctx context.Context, in *DeleteOAuthCl
 // A set of methods for managing OAuthClient resources.
 type OAuthClientServiceServer interface {
 	// Returns the sepcified OAuthClient resource.
-	//
 	// To get the list of available OAuthClient resources, make a [List] request.
 	Get(context.Context, *GetOAuthClientRequest) (*OAuthClient, error)
 	// Retrieves the list of OAuthClient resources views in the specified folder

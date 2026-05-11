@@ -6,10 +6,6 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
-func (m *GetOAuthClientRequest) SetOauthClientId(v string) {
-	m.OauthClientId = v
-}
-
 func (m *ListOAuthClientsRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
@@ -30,12 +26,20 @@ func (m *ListOAuthClientsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *GetOAuthClientRequest) SetOauthClientId(v string) {
+	m.OauthClientId = v
+}
+
 func (m *OAuthClientListView) SetId(v string) {
 	m.Id = v
 }
 
 func (m *OAuthClientListView) SetName(v string) {
 	m.Name = v
+}
+
+func (m *CreateOAuthClientMetadata) SetOauthClientId(v string) {
+	m.OauthClientId = v
 }
 
 func (m *UpdateOAuthClientMetadata) SetOauthClientId(v string) {
@@ -60,10 +64,6 @@ func (m *CreateOAuthClientRequest) SetScopes(v []string) {
 
 func (m *CreateOAuthClientRequest) SetFolderId(v string) {
 	m.FolderId = v
-}
-
-func (m *CreateOAuthClientMetadata) SetOauthClientId(v string) {
-	m.OauthClientId = v
 }
 
 func (m *UpdateOAuthClientRequest) SetOauthClientId(v string) {

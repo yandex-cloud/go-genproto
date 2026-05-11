@@ -253,7 +253,7 @@ var File_yandex_cloud_monitoring_v3_widget_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_widget_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/monitoring/v3/widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a-yandex/cloud/monitoring/v3/chart_widget.proto\x1a,yandex/cloud/monitoring/v3/text_widget.proto\x1a-yandex/cloud/monitoring/v3/title_widget.proto\x1a:yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a-yandex/cloud/monitoring/v3/group_widget.proto\"\xd8\x04\n" +
+	"'yandex/cloud/monitoring/v3/widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a-yandex/cloud/monitoring/v3/chart_widget.proto\x1a-yandex/cloud/monitoring/v3/group_widget.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a:yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x1a,yandex/cloud/monitoring/v3/text_widget.proto\x1a-yandex/cloud/monitoring/v3/title_widget.proto\"\xd8\x04\n" +
 	"\x06Widget\x12M\n" +
 	"\bposition\x18\x01 \x01(\v21.yandex.cloud.monitoring.v3.Widget.LayoutPositionR\bposition\x12<\n" +
 	"\x04text\x18\x02 \x01(\v2&.yandex.cloud.monitoring.v3.TextWidgetH\x00R\x04text\x12?\n" +
@@ -316,11 +316,11 @@ func file_yandex_cloud_monitoring_v3_widget_proto_init() {
 		return
 	}
 	file_yandex_cloud_monitoring_v3_chart_widget_proto_init()
+	file_yandex_cloud_monitoring_v3_group_widget_proto_init()
+	file_yandex_cloud_monitoring_v3_link_item_proto_init()
+	file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_text_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_title_widget_proto_init()
-	file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init()
-	file_yandex_cloud_monitoring_v3_link_item_proto_init()
-	file_yandex_cloud_monitoring_v3_group_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_widget_proto_msgTypes[0].OneofWrappers = []any{
 		(*Widget_Text)(nil),
 		(*Widget_Title)(nil),

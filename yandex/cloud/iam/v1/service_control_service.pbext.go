@@ -10,26 +10,6 @@ func (m *GetServiceRequest) SetResource(v *Resource) {
 	m.Resource = v
 }
 
-func (m *ListServicesRequest) SetResource(v *Resource) {
-	m.Resource = v
-}
-
-func (m *ListServicesRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListServicesRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListServicesResponse) SetServices(v []*Service) {
-	m.Services = v
-}
-
-func (m *ListServicesResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
-}
-
 func (m *EnableServiceRequest) SetServiceId(v string) {
 	m.ServiceId = v
 }
@@ -60,6 +40,26 @@ func (m *DisableServiceMetadata) SetServiceId(v string) {
 
 func (m *DisableServiceMetadata) SetResource(v *Resource) {
 	m.Resource = v
+}
+
+func (m *ListServicesRequest) SetResource(v *Resource) {
+	m.Resource = v
+}
+
+func (m *ListServicesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListServicesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListServicesResponse) SetServices(v []*Service) {
+	m.Services = v
+}
+
+func (m *ListServicesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *ResolveServiceAgentRequest) SetServiceId(v string) {

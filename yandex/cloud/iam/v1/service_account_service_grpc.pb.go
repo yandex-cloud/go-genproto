@@ -39,7 +39,6 @@ const (
 // A set of methods for managing ServiceAccount resources.
 type ServiceAccountServiceClient interface {
 	// Returns the specified ServiceAccount resource.
-	//
 	// To get the list of available ServiceAccount resources, make a [List] request.
 	Get(ctx context.Context, in *GetServiceAccountRequest, opts ...grpc.CallOption) (*ServiceAccount, error)
 	// Retrieves the list of ServiceAccount resources in the specified folder.
@@ -165,7 +164,6 @@ func (c *serviceAccountServiceClient) ListOperations(ctx context.Context, in *Li
 // A set of methods for managing ServiceAccount resources.
 type ServiceAccountServiceServer interface {
 	// Returns the specified ServiceAccount resource.
-	//
 	// To get the list of available ServiceAccount resources, make a [List] request.
 	Get(context.Context, *GetServiceAccountRequest) (*ServiceAccount, error)
 	// Retrieves the list of ServiceAccount resources in the specified folder.

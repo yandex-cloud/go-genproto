@@ -721,7 +721,7 @@ var File_yandex_cloud_iam_v1_key_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_key_service_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/iam/v1/key_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1dyandex/cloud/iam/v1/key.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"l\n" +
+	"%yandex/cloud/iam/v1/key_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/iam/v1/key.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"l\n" +
 	"\rGetKeyRequest\x12#\n" +
 	"\x06key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05keyId\x126\n" +
 	"\x06format\x18\x02 \x01(\x0e2\x1e.yandex.cloud.iam.v1.KeyFormatR\x06format\"\xd5\x01\n" +
@@ -729,7 +729,7 @@ const file_yandex_cloud_iam_v1_key_service_proto_rawDesc = "" +
 	"\x06format\x18\x01 \x01(\x0e2\x1e.yandex.cloud.iam.v1.KeyFormatR\x06format\x126\n" +
 	"\x12service_account_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"h\n" +

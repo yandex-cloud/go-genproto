@@ -73,135 +73,6 @@ func (x *GetFederationRequest) GetFederationId() string {
 	return ""
 }
 
-type ListFederationsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to list OIDC workload identity federations in.
-	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// The maximum number of results per page to return. If the number of available
-	// results is larger than [page_size],
-	// the service returns a [ListFederationsResponse.next_page_token]
-	// that can be used to get the next page of results in subsequent list requests.
-	// Default value: 100
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token]
-	// to the [ListFederationsResponse.next_page_token]
-	// returned by a previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListFederationsRequest) Reset() {
-	*x = ListFederationsRequest{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListFederationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListFederationsRequest) ProtoMessage() {}
-
-func (x *ListFederationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListFederationsRequest.ProtoReflect.Descriptor instead.
-func (*ListFederationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ListFederationsRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *ListFederationsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListFederationsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListFederationsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of OIDC workload identity federations.
-	Federations []*Federation `protobuf:"bytes,1,rep,name=federations,proto3" json:"federations,omitempty"`
-	// This token allows you to get the next page of results for list requests. If the number of results
-	// is larger than [ListFederationsRequest.page_size], use
-	// the [next_page_token] as the value
-	// for the [ListFederationsRequest.page_token] query parameter
-	// in the next list request. Each subsequent list request will have its own
-	// [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListFederationsResponse) Reset() {
-	*x = ListFederationsResponse{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListFederationsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListFederationsResponse) ProtoMessage() {}
-
-func (x *ListFederationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListFederationsResponse.ProtoReflect.Descriptor instead.
-func (*ListFederationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ListFederationsResponse) GetFederations() []*Federation {
-	if x != nil {
-		return x.Federations
-	}
-	return nil
-}
-
-func (x *ListFederationsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
 type CreateFederationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an OIDC workload identity federation in.
@@ -229,7 +100,7 @@ type CreateFederationRequest struct {
 
 func (x *CreateFederationRequest) Reset() {
 	*x = CreateFederationRequest{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +112,7 @@ func (x *CreateFederationRequest) String() string {
 func (*CreateFederationRequest) ProtoMessage() {}
 
 func (x *CreateFederationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +125,7 @@ func (x *CreateFederationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateFederationRequest.ProtoReflect.Descriptor instead.
 func (*CreateFederationRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateFederationRequest) GetFolderId() string {
@@ -323,7 +194,7 @@ type CreateFederationMetadata struct {
 
 func (x *CreateFederationMetadata) Reset() {
 	*x = CreateFederationMetadata{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -335,7 +206,7 @@ func (x *CreateFederationMetadata) String() string {
 func (*CreateFederationMetadata) ProtoMessage() {}
 
 func (x *CreateFederationMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -348,7 +219,7 @@ func (x *CreateFederationMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateFederationMetadata.ProtoReflect.Descriptor instead.
 func (*CreateFederationMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateFederationMetadata) GetFederationId() string {
@@ -385,7 +256,7 @@ type UpdateFederationRequest struct {
 
 func (x *UpdateFederationRequest) Reset() {
 	*x = UpdateFederationRequest{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -397,7 +268,7 @@ func (x *UpdateFederationRequest) String() string {
 func (*UpdateFederationRequest) ProtoMessage() {}
 
 func (x *UpdateFederationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -410,7 +281,7 @@ func (x *UpdateFederationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateFederationRequest.ProtoReflect.Descriptor instead.
 func (*UpdateFederationRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateFederationRequest) GetFederationId() string {
@@ -479,7 +350,7 @@ type UpdateFederationMetadata struct {
 
 func (x *UpdateFederationMetadata) Reset() {
 	*x = UpdateFederationMetadata{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -491,7 +362,7 @@ func (x *UpdateFederationMetadata) String() string {
 func (*UpdateFederationMetadata) ProtoMessage() {}
 
 func (x *UpdateFederationMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -504,7 +375,7 @@ func (x *UpdateFederationMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateFederationMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateFederationMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateFederationMetadata) GetFederationId() string {
@@ -525,7 +396,7 @@ type DeleteFederationRequest struct {
 
 func (x *DeleteFederationRequest) Reset() {
 	*x = DeleteFederationRequest{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -537,7 +408,7 @@ func (x *DeleteFederationRequest) String() string {
 func (*DeleteFederationRequest) ProtoMessage() {}
 
 func (x *DeleteFederationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -550,7 +421,7 @@ func (x *DeleteFederationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteFederationRequest.ProtoReflect.Descriptor instead.
 func (*DeleteFederationRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteFederationRequest) GetFederationId() string {
@@ -570,7 +441,7 @@ type DeleteFederationMetadata struct {
 
 func (x *DeleteFederationMetadata) Reset() {
 	*x = DeleteFederationMetadata{}
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -582,7 +453,7 @@ func (x *DeleteFederationMetadata) String() string {
 func (*DeleteFederationMetadata) ProtoMessage() {}
 
 func (x *DeleteFederationMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,12 +466,141 @@ func (x *DeleteFederationMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteFederationMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteFederationMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteFederationMetadata) GetFederationId() string {
 	if x != nil {
 		return x.FederationId
+	}
+	return ""
+}
+
+type ListFederationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to list OIDC workload identity federations in.
+	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is larger than [page_size],
+	// the service returns a [ListFederationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value: 100
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token]
+	// to the [ListFederationsResponse.next_page_token]
+	// returned by a previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFederationsRequest) Reset() {
+	*x = ListFederationsRequest{}
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFederationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFederationsRequest) ProtoMessage() {}
+
+func (x *ListFederationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFederationsRequest.ProtoReflect.Descriptor instead.
+func (*ListFederationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListFederationsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListFederationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListFederationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListFederationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of OIDC workload identity federations.
+	Federations []*Federation `protobuf:"bytes,1,rep,name=federations,proto3" json:"federations,omitempty"`
+	// This token allows you to get the next page of results for list requests. If the number of results
+	// is larger than [ListFederationsRequest.page_size], use
+	// the [next_page_token] as the value
+	// for the [ListFederationsRequest.page_token] query parameter
+	// in the next list request. Each subsequent list request will have its own
+	// [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFederationsResponse) Reset() {
+	*x = ListFederationsResponse{}
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFederationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFederationsResponse) ProtoMessage() {}
+
+func (x *ListFederationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFederationsResponse.ProtoReflect.Descriptor instead.
+func (*ListFederationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListFederationsResponse) GetFederations() []*Federation {
+	if x != nil {
+		return x.Federations
+	}
+	return nil
+}
+
+func (x *ListFederationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -611,17 +611,7 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\n" +
 	":yandex/cloud/iam/v1/workload/oidc/federation_service.proto\x12!yandex.cloud.iam.v1.workload.oidc\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/iam/v1/workload/oidc/federation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x14GetFederationRequest\x121\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\"\x97\x01\n" +
-	"\x16ListFederationsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
-	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\"\x92\x01\n" +
-	"\x17ListFederationsResponse\x12O\n" +
-	"\vfederations\x18\x01 \x03(\v2-.yandex.cloud.iam.v1.workload.oidc.FederationR\vfederations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xea\x03\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\"\xf0\x03\n" +
 	"\x17CreateFederationRequest\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
 	"\x04name\x18\x03 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -633,7 +623,7 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\x06labels\x18\t \x03(\v2F.yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x01\x10\x02\"?\n" +
 	"\x18CreateFederationMetadata\x12#\n" +
 	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\xff\x03\n" +
 	"\x17UpdateFederationRequest\x121\n" +
@@ -655,10 +645,19 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\x17DeleteFederationRequest\x121\n" +
 	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\"?\n" +
 	"\x18DeleteFederationMetadata\x12#\n" +
-	"\rfederation_id\x18\x01 \x01(\tR\ffederationId2\xad\r\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\x97\x01\n" +
+	"\x16ListFederationsRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\"\x92\x01\n" +
+	"\x17ListFederationsResponse\x12O\n" +
+	"\vfederations\x18\x01 \x03(\v2-.yandex.cloud.iam.v1.workload.oidc.FederationR\vfederations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xad\r\n" +
 	"\x11FederationService\x12\xa8\x01\n" +
-	"\x03Get\x127.yandex.cloud.iam.v1.workload.oidc.GetFederationRequest\x1a-.yandex.cloud.iam.v1.workload.oidc.Federation\"9\x82\xd3\xe4\x93\x023\x121/iam/v1/workload/oidc/federations/{federation_id}\x12\xa8\x01\n" +
-	"\x04List\x129.yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest\x1a:.yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/iam/v1/workload/oidc/federations\x12\xbf\x01\n" +
+	"\x03Get\x127.yandex.cloud.iam.v1.workload.oidc.GetFederationRequest\x1a-.yandex.cloud.iam.v1.workload.oidc.Federation\"9\x82\xd3\xe4\x93\x023\x121/iam/v1/workload/oidc/federations/{federation_id}\x12\xbf\x01\n" +
 	"\x06Create\x12:.yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest\x1a!.yandex.cloud.operation.Operation\"V\xb2\xd2*&\n" +
 	"\x18CreateFederationMetadata\x12\n" +
 	"Federation\x82\xd3\xe4\x93\x02&:\x01*\"!/iam/v1/workload/oidc/federations\x12\xcf\x01\n" +
@@ -666,7 +665,8 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\x18UpdateFederationMetadata\x12\n" +
 	"Federation\x82\xd3\xe4\x93\x026:\x01*21/iam/v1/workload/oidc/federations/{federation_id}\x12\xd7\x01\n" +
 	"\x06Delete\x12:.yandex.cloud.iam.v1.workload.oidc.DeleteFederationRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*1\n" +
-	"\x18DeleteFederationMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x023*1/iam/v1/workload/oidc/federations/{federation_id}\x12\xc1\x01\n" +
+	"\x18DeleteFederationMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x023*1/iam/v1/workload/oidc/federations/{federation_id}\x12\xa8\x01\n" +
+	"\x04List\x129.yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest\x1a:.yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/iam/v1/workload/oidc/federations\x12\xc1\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"J\x82\xd3\xe4\x93\x02D\x12B/iam/v1/workload/oidc/federations/{resource_id}:listAccessBindings\x12\x80\x02\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x98\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02F:\x01*\"A/iam/v1/workload/oidc/federations/{resource_id}:setAccessBindings\x12\x8c\x02\n" +
@@ -689,18 +689,18 @@ func file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDescGZIP
 var file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_goTypes = []any{
 	(*GetFederationRequest)(nil),               // 0: yandex.cloud.iam.v1.workload.oidc.GetFederationRequest
-	(*ListFederationsRequest)(nil),             // 1: yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest
-	(*ListFederationsResponse)(nil),            // 2: yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse
-	(*CreateFederationRequest)(nil),            // 3: yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest
-	(*CreateFederationMetadata)(nil),           // 4: yandex.cloud.iam.v1.workload.oidc.CreateFederationMetadata
-	(*UpdateFederationRequest)(nil),            // 5: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest
-	(*UpdateFederationMetadata)(nil),           // 6: yandex.cloud.iam.v1.workload.oidc.UpdateFederationMetadata
-	(*DeleteFederationRequest)(nil),            // 7: yandex.cloud.iam.v1.workload.oidc.DeleteFederationRequest
-	(*DeleteFederationMetadata)(nil),           // 8: yandex.cloud.iam.v1.workload.oidc.DeleteFederationMetadata
+	(*CreateFederationRequest)(nil),            // 1: yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest
+	(*CreateFederationMetadata)(nil),           // 2: yandex.cloud.iam.v1.workload.oidc.CreateFederationMetadata
+	(*UpdateFederationRequest)(nil),            // 3: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest
+	(*UpdateFederationMetadata)(nil),           // 4: yandex.cloud.iam.v1.workload.oidc.UpdateFederationMetadata
+	(*DeleteFederationRequest)(nil),            // 5: yandex.cloud.iam.v1.workload.oidc.DeleteFederationRequest
+	(*DeleteFederationMetadata)(nil),           // 6: yandex.cloud.iam.v1.workload.oidc.DeleteFederationMetadata
+	(*ListFederationsRequest)(nil),             // 7: yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest
+	(*ListFederationsResponse)(nil),            // 8: yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse
 	nil,                                        // 9: yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.LabelsEntry
 	nil,                                        // 10: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.LabelsEntry
-	(*Federation)(nil),                         // 11: yandex.cloud.iam.v1.workload.oidc.Federation
-	(*fieldmaskpb.FieldMask)(nil),              // 12: google.protobuf.FieldMask
+	(*fieldmaskpb.FieldMask)(nil),              // 11: google.protobuf.FieldMask
+	(*Federation)(nil),                         // 12: yandex.cloud.iam.v1.workload.oidc.Federation
 	(*access.ListAccessBindingsRequest)(nil),   // 13: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),    // 14: yandex.cloud.access.SetAccessBindingsRequest
 	(*access.UpdateAccessBindingsRequest)(nil), // 15: yandex.cloud.access.UpdateAccessBindingsRequest
@@ -708,23 +708,23 @@ var file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_goTypes = []
 	(*access.ListAccessBindingsResponse)(nil),  // 17: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse.federations:type_name -> yandex.cloud.iam.v1.workload.oidc.Federation
-	9,  // 1: yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.labels:type_name -> yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.LabelsEntry
-	12, // 2: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
-	10, // 3: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.labels:type_name -> yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.LabelsEntry
+	9,  // 0: yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.labels:type_name -> yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.LabelsEntry
+	11, // 1: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.update_mask:type_name -> google.protobuf.FieldMask
+	10, // 2: yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.labels:type_name -> yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.LabelsEntry
+	12, // 3: yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse.federations:type_name -> yandex.cloud.iam.v1.workload.oidc.Federation
 	0,  // 4: yandex.cloud.iam.v1.workload.oidc.FederationService.Get:input_type -> yandex.cloud.iam.v1.workload.oidc.GetFederationRequest
-	1,  // 5: yandex.cloud.iam.v1.workload.oidc.FederationService.List:input_type -> yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest
-	3,  // 6: yandex.cloud.iam.v1.workload.oidc.FederationService.Create:input_type -> yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest
-	5,  // 7: yandex.cloud.iam.v1.workload.oidc.FederationService.Update:input_type -> yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest
-	7,  // 8: yandex.cloud.iam.v1.workload.oidc.FederationService.Delete:input_type -> yandex.cloud.iam.v1.workload.oidc.DeleteFederationRequest
+	1,  // 5: yandex.cloud.iam.v1.workload.oidc.FederationService.Create:input_type -> yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest
+	3,  // 6: yandex.cloud.iam.v1.workload.oidc.FederationService.Update:input_type -> yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest
+	5,  // 7: yandex.cloud.iam.v1.workload.oidc.FederationService.Delete:input_type -> yandex.cloud.iam.v1.workload.oidc.DeleteFederationRequest
+	7,  // 8: yandex.cloud.iam.v1.workload.oidc.FederationService.List:input_type -> yandex.cloud.iam.v1.workload.oidc.ListFederationsRequest
 	13, // 9: yandex.cloud.iam.v1.workload.oidc.FederationService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	14, // 10: yandex.cloud.iam.v1.workload.oidc.FederationService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	15, // 11: yandex.cloud.iam.v1.workload.oidc.FederationService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	11, // 12: yandex.cloud.iam.v1.workload.oidc.FederationService.Get:output_type -> yandex.cloud.iam.v1.workload.oidc.Federation
-	2,  // 13: yandex.cloud.iam.v1.workload.oidc.FederationService.List:output_type -> yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse
-	16, // 14: yandex.cloud.iam.v1.workload.oidc.FederationService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 15: yandex.cloud.iam.v1.workload.oidc.FederationService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 16: yandex.cloud.iam.v1.workload.oidc.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
+	12, // 12: yandex.cloud.iam.v1.workload.oidc.FederationService.Get:output_type -> yandex.cloud.iam.v1.workload.oidc.Federation
+	16, // 13: yandex.cloud.iam.v1.workload.oidc.FederationService.Create:output_type -> yandex.cloud.operation.Operation
+	16, // 14: yandex.cloud.iam.v1.workload.oidc.FederationService.Update:output_type -> yandex.cloud.operation.Operation
+	16, // 15: yandex.cloud.iam.v1.workload.oidc.FederationService.Delete:output_type -> yandex.cloud.operation.Operation
+	8,  // 16: yandex.cloud.iam.v1.workload.oidc.FederationService.List:output_type -> yandex.cloud.iam.v1.workload.oidc.ListFederationsResponse
 	17, // 17: yandex.cloud.iam.v1.workload.oidc.FederationService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
 	16, // 18: yandex.cloud.iam.v1.workload.oidc.FederationService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
 	16, // 19: yandex.cloud.iam.v1.workload.oidc.FederationService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation

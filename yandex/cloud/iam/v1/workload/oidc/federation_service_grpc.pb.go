@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	FederationService_Get_FullMethodName                  = "/yandex.cloud.iam.v1.workload.oidc.FederationService/Get"
-	FederationService_List_FullMethodName                 = "/yandex.cloud.iam.v1.workload.oidc.FederationService/List"
 	FederationService_Create_FullMethodName               = "/yandex.cloud.iam.v1.workload.oidc.FederationService/Create"
 	FederationService_Update_FullMethodName               = "/yandex.cloud.iam.v1.workload.oidc.FederationService/Update"
 	FederationService_Delete_FullMethodName               = "/yandex.cloud.iam.v1.workload.oidc.FederationService/Delete"
+	FederationService_List_FullMethodName                 = "/yandex.cloud.iam.v1.workload.oidc.FederationService/List"
 	FederationService_ListAccessBindings_FullMethodName   = "/yandex.cloud.iam.v1.workload.oidc.FederationService/ListAccessBindings"
 	FederationService_SetAccessBindings_FullMethodName    = "/yandex.cloud.iam.v1.workload.oidc.FederationService/SetAccessBindings"
 	FederationService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.iam.v1.workload.oidc.FederationService/UpdateAccessBindings"
@@ -38,17 +38,16 @@ const (
 // A set of methods for managing OIDC workload identity federations.
 type FederationServiceClient interface {
 	// Returns the specified OIDC workload identity federation.
-	//
 	// To get the list of available OIDC workload identity federation, make a [List] request.
 	Get(ctx context.Context, in *GetFederationRequest, opts ...grpc.CallOption) (*Federation, error)
-	// Retrieves the list of OIDC workload identity federations in the specified folder.
-	List(ctx context.Context, in *ListFederationsRequest, opts ...grpc.CallOption) (*ListFederationsResponse, error)
 	// Creates an OIDC workload identity federation in the specified folder.
 	Create(ctx context.Context, in *CreateFederationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified OIDC workload identity federation.
 	Update(ctx context.Context, in *UpdateFederationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified OIDC workload identity federation.
 	Delete(ctx context.Context, in *DeleteFederationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves the list of OIDC workload identity federations in the specified folder.
+	List(ctx context.Context, in *ListFederationsRequest, opts ...grpc.CallOption) (*ListFederationsResponse, error)
 	// Lists access bindings for the specified OIDC workload identity federation.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified OIDC workload identity federation.
@@ -69,16 +68,6 @@ func (c *federationServiceClient) Get(ctx context.Context, in *GetFederationRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Federation)
 	err := c.cc.Invoke(ctx, FederationService_Get_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *federationServiceClient) List(ctx context.Context, in *ListFederationsRequest, opts ...grpc.CallOption) (*ListFederationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListFederationsResponse)
-	err := c.cc.Invoke(ctx, FederationService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,6 +98,16 @@ func (c *federationServiceClient) Delete(ctx context.Context, in *DeleteFederati
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, FederationService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *federationServiceClient) List(ctx context.Context, in *ListFederationsRequest, opts ...grpc.CallOption) (*ListFederationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListFederationsResponse)
+	err := c.cc.Invoke(ctx, FederationService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -152,17 +151,16 @@ func (c *federationServiceClient) UpdateAccessBindings(ctx context.Context, in *
 // A set of methods for managing OIDC workload identity federations.
 type FederationServiceServer interface {
 	// Returns the specified OIDC workload identity federation.
-	//
 	// To get the list of available OIDC workload identity federation, make a [List] request.
 	Get(context.Context, *GetFederationRequest) (*Federation, error)
-	// Retrieves the list of OIDC workload identity federations in the specified folder.
-	List(context.Context, *ListFederationsRequest) (*ListFederationsResponse, error)
 	// Creates an OIDC workload identity federation in the specified folder.
 	Create(context.Context, *CreateFederationRequest) (*operation.Operation, error)
 	// Updates the specified OIDC workload identity federation.
 	Update(context.Context, *UpdateFederationRequest) (*operation.Operation, error)
 	// Deletes the specified OIDC workload identity federation.
 	Delete(context.Context, *DeleteFederationRequest) (*operation.Operation, error)
+	// Retrieves the list of OIDC workload identity federations in the specified folder.
+	List(context.Context, *ListFederationsRequest) (*ListFederationsResponse, error)
 	// Lists access bindings for the specified OIDC workload identity federation.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the specified OIDC workload identity federation.
@@ -181,9 +179,6 @@ type UnimplementedFederationServiceServer struct{}
 func (UnimplementedFederationServiceServer) Get(context.Context, *GetFederationRequest) (*Federation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedFederationServiceServer) List(context.Context, *ListFederationsRequest) (*ListFederationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
 func (UnimplementedFederationServiceServer) Create(context.Context, *CreateFederationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
@@ -192,6 +187,9 @@ func (UnimplementedFederationServiceServer) Update(context.Context, *UpdateFeder
 }
 func (UnimplementedFederationServiceServer) Delete(context.Context, *DeleteFederationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedFederationServiceServer) List(context.Context, *ListFederationsRequest) (*ListFederationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedFederationServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -236,24 +234,6 @@ func _FederationService_Get_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FederationServiceServer).Get(ctx, req.(*GetFederationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FederationService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListFederationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FederationServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FederationService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FederationServiceServer).List(ctx, req.(*ListFederationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -308,6 +288,24 @@ func _FederationService_Delete_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FederationServiceServer).Delete(ctx, req.(*DeleteFederationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FederationService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListFederationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FederationServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FederationService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FederationServiceServer).List(ctx, req.(*ListFederationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -378,10 +376,6 @@ var FederationService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FederationService_Get_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _FederationService_List_Handler,
-		},
-		{
 			MethodName: "Create",
 			Handler:    _FederationService_Create_Handler,
 		},
@@ -392,6 +386,10 @@ var FederationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _FederationService_Delete_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _FederationService_List_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

@@ -56,7 +56,7 @@ func (m *CreatePrivateConnectionRequest) SetVlanId(v *wrapperspb.Int64Value) {
 	m.VlanId = v
 }
 
-func (m *CreatePrivateConnectionRequest) SetIpv4Peering(v *Peering) {
+func (m *CreatePrivateConnectionRequest) SetIpv4Peering(v *PeeringRequest) {
 	m.Ipv4Peering = v
 }
 
@@ -92,7 +92,7 @@ func (m *UpdatePrivateConnectionRequest) SetVlanId(v *wrapperspb.Int64Value) {
 	m.VlanId = v
 }
 
-func (m *UpdatePrivateConnectionRequest) SetIpv4Peering(v *Peering) {
+func (m *UpdatePrivateConnectionRequest) SetIpv4Peering(v *PeeringRequest) {
 	m.Ipv4Peering = v
 }
 

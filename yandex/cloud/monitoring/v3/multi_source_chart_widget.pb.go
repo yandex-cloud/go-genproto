@@ -2964,7 +2964,7 @@ var File_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto protoreflect
 
 const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\"\xbaM\n" +
+	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xc6M\n" +
 	"\x16MultiSourceChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12S\n" +
 	"\atargets\x18\x02 \x03(\v29.yandex.cloud.monitoring.v3.MultiSourceChartWidget.TargetR\atargets\x12`\n" +
@@ -3009,7 +3009,7 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x14PrometheusDataSource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04step\x18\x02 \x01(\x03R\x04stepB\r\n" +
-	"\vdata_source\x1a\xe5!\n" +
+	"\vdata_source\x1a\xf1!\n" +
 	"\x15VisualizationSettings\x12n\n" +
 	"\x04type\x18\x01 \x01(\x0e2Z.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12v\n" +
@@ -3023,7 +3023,7 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"showLabels\x12}\n" +
 	"\x0etiles_settings\x18\n" +
 	" \x01(\v2V.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x12*\n" +
-	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\xe1\v\n" +
+	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\xe7\v\n" +
 	"\x13ColorSchemeSettings\x12\x91\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2q.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x8e\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2p.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x8e\x01\n" +
@@ -3034,13 +3034,13 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"thresholds\x12\x8e\x01\n" +
 	"\bconstant\x18\x06 \x01(\v2p.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorSchemeH\x00R\bconstant\x1a\x16\n" +
 	"\x14AutomaticColorScheme\x1a\x15\n" +
-	"\x13StandardColorScheme\x1a\x99\x01\n" +
+	"\x13StandardColorScheme\x1a\x9f\x01\n" +
 	"\x13GradientColorScheme\x12\x1f\n" +
 	"\vgreen_value\x18\x02 \x01(\tR\n" +
 	"greenValue\x12!\n" +
 	"\fyellow_value\x18\x03 \x01(\tR\vyellowValue\x12\x1b\n" +
 	"\tred_value\x18\x04 \x01(\tR\bredValue\x12!\n" +
-	"\fviolet_value\x18\x05 \x01(\tR\vvioletValue\x1a\x11\n" +
+	"\fviolet_value\x18\x05 \x01(\tR\vvioletValueJ\x04\b\x01\x10\x02\x1a\x11\n" +
 	"\x0fHashColorScheme\x1a+\n" +
 	"\x13ConstantColorScheme\x12\x14\n" +
 	"\x05color\x18\x01 \x01(\tR\x05color\x1a\xd1\x02\n" +
@@ -3053,13 +3053,13 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x0fAGGREGATION_MAX\x10\x03\x12\x13\n" +
 	"\x0fAGGREGATION_AVG\x10\x04\x12\x13\n" +
 	"\x0fAGGREGATION_SUM\x10\x05B\b\n" +
-	"\x06scheme\x1a\x95\x01\n" +
+	"\x06scheme\x1a\x9b\x01\n" +
 	"\x0fHeatmapSettings\x12\x1f\n" +
 	"\vgreen_value\x18\x02 \x01(\tR\n" +
 	"greenValue\x12!\n" +
 	"\fyellow_value\x18\x03 \x01(\tR\vyellowValue\x12\x1b\n" +
 	"\tred_value\x18\x04 \x01(\tR\bredValue\x12!\n" +
-	"\fviolet_value\x18\x05 \x01(\tR\vvioletValue\x1a\xad\x02\n" +
+	"\fviolet_value\x18\x05 \x01(\tR\vvioletValueJ\x04\b\x01\x10\x02\x1a\xad\x02\n" +
 	"\x05Yaxis\x12f\n" +
 	"\x04type\x18\x01 \x01(\x0e2R.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisTypeR\x04type\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x10\n" +
@@ -3322,8 +3322,8 @@ func file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init() {
 	}
 	file_yandex_cloud_monitoring_v3_downsampling_proto_init()
 	file_yandex_cloud_monitoring_v3_sort_order_proto_init()
-	file_yandex_cloud_monitoring_v3_unit_format_proto_init()
 	file_yandex_cloud_monitoring_v3_thresholds_proto_init()
+	file_yandex_cloud_monitoring_v3_unit_format_proto_init()
 	file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_msgTypes[1].OneofWrappers = []any{
 		(*MultiSourceChartWidget_Target_MonitoringTarget_)(nil),
 		(*MultiSourceChartWidget_Target_PrometheusTarget_)(nil),

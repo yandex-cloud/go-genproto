@@ -112,9 +112,9 @@ type isLink_Type interface {
 type Link_Url struct {
 	// Url that can be a template with mustache expressions ({{expression}})
 	// Variables available for template:
-	//   - Dashboard time interval in diverse formats. Variables: __from:<format>, __to:<format>,
-	//     where format is one of: iso, seconds or milliseconds.
-	//   - Dashboard parameters
+	// - Dashboard time interval in diverse formats. Variables: __from:<format>, __to:<format>,
+	// where format is one of: iso, seconds or milliseconds.
+	// - Dashboard parameters
 	Url string `protobuf:"bytes,3,opt,name=url,proto3,oneof"`
 }
 

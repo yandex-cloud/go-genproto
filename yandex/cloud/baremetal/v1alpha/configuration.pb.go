@@ -22,6 +22,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type MountingAvailability int32
+
+const (
+	// Unspecified mounting availability.
+	MountingAvailability_MOUNTING_AVAILABILITY_UNSPECIFIED MountingAvailability = 0
+	// Mounting is available.
+	MountingAvailability_AVAILABLE MountingAvailability = 1
+	// Mounting is unavailable.
+	MountingAvailability_UNAVAILABLE MountingAvailability = 2
+)
+
+// Enum value maps for MountingAvailability.
+var (
+	MountingAvailability_name = map[int32]string{
+		0: "MOUNTING_AVAILABILITY_UNSPECIFIED",
+		1: "AVAILABLE",
+		2: "UNAVAILABLE",
+	}
+	MountingAvailability_value = map[string]int32{
+		"MOUNTING_AVAILABILITY_UNSPECIFIED": 0,
+		"AVAILABLE":                         1,
+		"UNAVAILABLE":                       2,
+	}
+)
+
+func (x MountingAvailability) Enum() *MountingAvailability {
+	p := new(MountingAvailability)
+	*p = x
+	return p
+}
+
+func (x MountingAvailability) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MountingAvailability) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v1alpha_configuration_proto_enumTypes[0].Descriptor()
+}
+
+func (MountingAvailability) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v1alpha_configuration_proto_enumTypes[0]
+}
+
+func (x MountingAvailability) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MountingAvailability.Descriptor instead.
+func (MountingAvailability) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDescGZIP(), []int{0}
+}
+
 // CPU configuration.
 type CPU struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -187,9 +239,11 @@ type Configuration struct {
 	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
 	NetworkCapacityGbps int64 `protobuf:"varint,6,opt,name=network_capacity_gbps,json=networkCapacityGbps,proto3" json:"network_capacity_gbps,omitempty"`
 	// Number of cpu.
-	CpuNum        int64 `protobuf:"varint,8,opt,name=cpu_num,json=cpuNum,proto3" json:"cpu_num,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	CpuNum int64 `protobuf:"varint,8,opt,name=cpu_num,json=cpuNum,proto3" json:"cpu_num,omitempty"`
+	// Indicates whether the mounting option is available or not for this configuration.
+	MountingAvailability MountingAvailability `protobuf:"varint,26,opt,name=mounting_availability,json=mountingAvailability,proto3,enum=yandex.cloud.baremetal.v1alpha.MountingAvailability" json:"mounting_availability,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Configuration) Reset() {
@@ -272,6 +326,13 @@ func (x *Configuration) GetCpuNum() int64 {
 	return 0
 }
 
+func (x *Configuration) GetMountingAvailability() MountingAvailability {
+	if x != nil {
+		return x.MountingAvailability
+	}
+	return MountingAvailability_MOUNTING_AVAILABILITY_UNSPECIFIED
+}
+
 var File_yandex_cloud_baremetal_v1alpha_configuration_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
@@ -287,7 +348,7 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"\x04type\x18\x01 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x1d\n" +
 	"\n" +
 	"disk_count\x18\x02 \x01(\x03R\tdiskCount\x12\"\n" +
-	"\rdisk_size_gib\x18\x03 \x01(\x03R\vdiskSizeGib\"\xb9\x02\n" +
+	"\rdisk_size_gib\x18\x03 \x01(\x03R\vdiskSizeGib\"\xaa\x03\n" +
 	"\rConfiguration\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
@@ -297,7 +358,12 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"\vdisk_drives\x18\x05 \x03(\v26.yandex.cloud.baremetal.v1alpha.DiskDriveConfigurationR\n" +
 	"diskDrives\x126\n" +
 	"\x15network_capacity_gbps\x18\x06 \x01(\x03B\x02\x18\x01R\x13networkCapacityGbps\x12\x17\n" +
-	"\acpu_num\x18\b \x01(\x03R\x06cpuNumJ\x04\b\a\x10\bBr\n" +
+	"\acpu_num\x18\b \x01(\x03R\x06cpuNum\x12i\n" +
+	"\x15mounting_availability\x18\x1a \x01(\x0e24.yandex.cloud.baremetal.v1alpha.MountingAvailabilityR\x14mountingAvailabilityJ\x04\b\a\x10\bJ\x04\b\t\x10\x1a*]\n" +
+	"\x14MountingAvailability\x12%\n" +
+	"!MOUNTING_AVAILABILITY_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tAVAILABLE\x10\x01\x12\x0f\n" +
+	"\vUNAVAILABLE\x10\x02Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (
@@ -312,22 +378,25 @@ func file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDescData
 }
 
+var file_yandex_cloud_baremetal_v1alpha_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v1alpha_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_baremetal_v1alpha_configuration_proto_goTypes = []any{
-	(*CPU)(nil),                    // 0: yandex.cloud.baremetal.v1alpha.CPU
-	(*DiskDriveConfiguration)(nil), // 1: yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration
-	(*Configuration)(nil),          // 2: yandex.cloud.baremetal.v1alpha.Configuration
-	(DiskDriveType)(0),             // 3: yandex.cloud.baremetal.v1alpha.DiskDriveType
+	(MountingAvailability)(0),      // 0: yandex.cloud.baremetal.v1alpha.MountingAvailability
+	(*CPU)(nil),                    // 1: yandex.cloud.baremetal.v1alpha.CPU
+	(*DiskDriveConfiguration)(nil), // 2: yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration
+	(*Configuration)(nil),          // 3: yandex.cloud.baremetal.v1alpha.Configuration
+	(DiskDriveType)(0),             // 4: yandex.cloud.baremetal.v1alpha.DiskDriveType
 }
 var file_yandex_cloud_baremetal_v1alpha_configuration_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v1alpha.DiskDriveType
-	0, // 1: yandex.cloud.baremetal.v1alpha.Configuration.cpu:type_name -> yandex.cloud.baremetal.v1alpha.CPU
-	1, // 2: yandex.cloud.baremetal.v1alpha.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 0: yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v1alpha.DiskDriveType
+	1, // 1: yandex.cloud.baremetal.v1alpha.Configuration.cpu:type_name -> yandex.cloud.baremetal.v1alpha.CPU
+	2, // 2: yandex.cloud.baremetal.v1alpha.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v1alpha.DiskDriveConfiguration
+	0, // 3: yandex.cloud.baremetal.v1alpha.Configuration.mounting_availability:type_name -> yandex.cloud.baremetal.v1alpha.MountingAvailability
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_configuration_proto_init() }
@@ -341,13 +410,14 @@ func file_yandex_cloud_baremetal_v1alpha_configuration_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v1alpha_configuration_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v1alpha_configuration_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_baremetal_v1alpha_configuration_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_baremetal_v1alpha_configuration_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_baremetal_v1alpha_configuration_proto = out.File

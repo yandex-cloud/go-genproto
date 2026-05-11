@@ -242,7 +242,7 @@ var File_yandex_cloud_monitoring_v3_dashboard_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/monitoring/v3/dashboard.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"\xcc\x06\n" +
+	"*yandex/cloud/monitoring/v3/dashboard.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\"\xcc\x06\n" +
 	"\tDashboard\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x129\n" +
@@ -269,7 +269,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
-	"\tcontainerJ\x04\b\x04\x10\x14J\x04\b\x02\x10\x03J\x04\b\x1f\x10 Bk\n" +
+	"\tcontainerJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x14J\x04\b\x1f\x10 Bk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (
@@ -314,10 +314,10 @@ func file_yandex_cloud_monitoring_v3_dashboard_proto_init() {
 	if File_yandex_cloud_monitoring_v3_dashboard_proto != nil {
 		return
 	}
-	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
-	file_yandex_cloud_monitoring_v3_widget_proto_init()
-	file_yandex_cloud_monitoring_v3_timeline_proto_init()
 	file_yandex_cloud_monitoring_v3_link_item_proto_init()
+	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
+	file_yandex_cloud_monitoring_v3_timeline_proto_init()
+	file_yandex_cloud_monitoring_v3_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_dashboard_proto_msgTypes[0].OneofWrappers = []any{
 		(*Dashboard_FolderId)(nil),
 	}

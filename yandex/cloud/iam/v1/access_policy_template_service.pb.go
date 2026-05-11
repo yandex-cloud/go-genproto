@@ -144,13 +144,13 @@ var File_yandex_cloud_iam_v1_access_policy_template_service_proto protoreflect.F
 
 const file_yandex_cloud_iam_v1_access_policy_template_service_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/iam/v1/access_policy_template_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\"v\n" +
+	"8yandex/cloud/iam/v1/access_policy_template_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a\x1dyandex/cloud/validation.proto\"|\n" +
 	" ListAccessPolicyTemplatesRequest\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\"\xa6\x01\n" +
+	"\x8a\xc81\x06<=2000R\tpageTokenJ\x04\b\x01\x10\x03\"\xa6\x01\n" +
 	"!ListAccessPolicyTemplatesResponse\x12Y\n" +
 	"\x17access_policy_templates\x18\x01 \x03(\v2!.yandex.cloud.access.AccessPolicyR\x15accessPolicyTemplates\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xbc\x01\n" +

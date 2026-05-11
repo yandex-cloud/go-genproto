@@ -448,7 +448,7 @@ var File_yandex_cloud_iam_v1_oauth_client_secret_service_proto protoreflect.File
 
 const file_yandex_cloud_iam_v1_oauth_client_secret_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/iam/v1/oauth_client_secret_service.proto\x12\x13yandex.cloud.iam.v1\x1a-yandex/cloud/iam/v1/oauth_client_secret.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"`\n" +
+	"5yandex/cloud/iam/v1/oauth_client_secret_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/iam/v1/oauth_client_secret.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"`\n" +
 	"\x1bGetOAuthClientSecretRequest\x12A\n" +
 	"\x16oauth_client_secret_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13oauthClientSecretId\"\xa9\x01\n" +
 	"\x1dListOAuthClientSecretsRequest\x12'\n" +

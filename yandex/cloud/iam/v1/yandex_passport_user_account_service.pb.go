@@ -72,9 +72,9 @@ var File_yandex_cloud_iam_v1_yandex_passport_user_account_service_proto protoref
 
 const file_yandex_cloud_iam_v1_yandex_passport_user_account_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/iam/v1/yandex_passport_user_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a&yandex/cloud/iam/v1/user_account.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
-	"\x1cGetUserAccountByLoginRequest\x12\x1a\n" +
-	"\x05login\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x05login2\xba\x01\n" +
+	">yandex/cloud/iam/v1/yandex_passport_user_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a&yandex/cloud/iam/v1/user_account.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
+	"\x1cGetUserAccountByLoginRequest\x12#\n" +
+	"\x05login\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x05login2\xba\x01\n" +
 	" YandexPassportUserAccountService\x12\x95\x01\n" +
 	"\n" +
 	"GetByLogin\x121.yandex.cloud.iam.v1.GetUserAccountByLoginRequest\x1a .yandex.cloud.iam.v1.UserAccount\"2\x82\xd3\xe4\x93\x02,\x12*/iam/v1/yandexPassportUserAccounts:byLoginBV\n" +

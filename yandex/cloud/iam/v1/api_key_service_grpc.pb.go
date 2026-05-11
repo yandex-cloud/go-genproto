@@ -38,7 +38,6 @@ type ApiKeyServiceClient interface {
 	// Retrieves the list of API keys for the specified service account.
 	List(ctx context.Context, in *ListApiKeysRequest, opts ...grpc.CallOption) (*ListApiKeysResponse, error)
 	// Returns the specified API key.
-	//
 	// To get the list of available API keys, make a [List] request.
 	Get(ctx context.Context, in *GetApiKeyRequest, opts ...grpc.CallOption) (*ApiKey, error)
 	// Creates an API key for the specified service account.
@@ -140,7 +139,6 @@ type ApiKeyServiceServer interface {
 	// Retrieves the list of API keys for the specified service account.
 	List(context.Context, *ListApiKeysRequest) (*ListApiKeysResponse, error)
 	// Returns the specified API key.
-	//
 	// To get the list of available API keys, make a [List] request.
 	Get(context.Context, *GetApiKeyRequest) (*ApiKey, error)
 	// Creates an API key for the specified service account.

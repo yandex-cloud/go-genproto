@@ -35,7 +35,6 @@ const (
 // A set of methods for managing Key resources.
 type KeyServiceClient interface {
 	// Returns the specified Key resource.
-	//
 	// To get the list of available Key resources, make a [List] request.
 	Get(ctx context.Context, in *GetKeyRequest, opts ...grpc.CallOption) (*Key, error)
 	// Retrieves the list of Key resources for the specified service account.
@@ -125,7 +124,6 @@ func (c *keyServiceClient) ListOperations(ctx context.Context, in *ListKeyOperat
 // A set of methods for managing Key resources.
 type KeyServiceServer interface {
 	// Returns the specified Key resource.
-	//
 	// To get the list of available Key resources, make a [List] request.
 	Get(context.Context, *GetKeyRequest) (*Key, error)
 	// Retrieves the list of Key resources for the specified service account.

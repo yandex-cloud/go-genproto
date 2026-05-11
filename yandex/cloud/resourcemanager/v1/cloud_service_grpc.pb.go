@@ -43,7 +43,6 @@ const (
 // A set of methods for managing Cloud resources.
 type CloudServiceClient interface {
 	// Returns the specified Cloud resource.
-	//
 	// To get the list of available Cloud resources, make a [List] request.
 	Get(ctx context.Context, in *GetCloudRequest, opts ...grpc.CallOption) (*Cloud, error)
 	// Retrieves the list of Cloud resources.
@@ -217,7 +216,6 @@ func (c *cloudServiceClient) UpdateAccessPolicyBindingParameters(ctx context.Con
 // A set of methods for managing Cloud resources.
 type CloudServiceServer interface {
 	// Returns the specified Cloud resource.
-	//
 	// To get the list of available Cloud resources, make a [List] request.
 	Get(context.Context, *GetCloudRequest) (*Cloud, error)
 	// Retrieves the list of Cloud resources.

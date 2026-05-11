@@ -110,10 +110,53 @@ func (*CreateIamTokenRequest_YandexPassportOauthToken) isCreateIamTokenRequest_I
 
 func (*CreateIamTokenRequest_Jwt) isCreateIamTokenRequest_Identity() {}
 
+type CreateIamTokenForServiceAccountRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ServiceAccountId string                 `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CreateIamTokenForServiceAccountRequest) Reset() {
+	*x = CreateIamTokenForServiceAccountRequest{}
+	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateIamTokenForServiceAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateIamTokenForServiceAccountRequest) ProtoMessage() {}
+
+func (x *CreateIamTokenForServiceAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateIamTokenForServiceAccountRequest.ProtoReflect.Descriptor instead.
+func (*CreateIamTokenForServiceAccountRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_iam_token_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateIamTokenForServiceAccountRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
 type CreateIamTokenResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// IAM token for the specified identity.
-	//
 	// You should pass the token in the `Authorization` header for any further API requests.
 	// For example, `Authorization: Bearer [iam_token]`.
 	IamToken string `protobuf:"bytes,1,opt,name=iam_token,json=iamToken,proto3" json:"iam_token,omitempty"`
@@ -125,7 +168,7 @@ type CreateIamTokenResponse struct {
 
 func (x *CreateIamTokenResponse) Reset() {
 	*x = CreateIamTokenResponse{}
-	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -137,7 +180,7 @@ func (x *CreateIamTokenResponse) String() string {
 func (*CreateIamTokenResponse) ProtoMessage() {}
 
 func (x *CreateIamTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -150,7 +193,7 @@ func (x *CreateIamTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateIamTokenResponse.ProtoReflect.Descriptor instead.
 func (*CreateIamTokenResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_iam_token_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_iam_v1_iam_token_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateIamTokenResponse) GetIamToken() string {
@@ -165,50 +208,6 @@ func (x *CreateIamTokenResponse) GetExpiresAt() *timestamppb.Timestamp {
 		return x.ExpiresAt
 	}
 	return nil
-}
-
-type CreateIamTokenForServiceAccountRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	ServiceAccountId string                 `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *CreateIamTokenForServiceAccountRequest) Reset() {
-	*x = CreateIamTokenForServiceAccountRequest{}
-	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateIamTokenForServiceAccountRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateIamTokenForServiceAccountRequest) ProtoMessage() {}
-
-func (x *CreateIamTokenForServiceAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateIamTokenForServiceAccountRequest.ProtoReflect.Descriptor instead.
-func (*CreateIamTokenForServiceAccountRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_iam_token_service_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *CreateIamTokenForServiceAccountRequest) GetServiceAccountId() string {
-	if x != nil {
-		return x.ServiceAccountId
-	}
-	return ""
 }
 
 type RevokeIamTokenRequest struct {
@@ -303,19 +302,21 @@ var File_yandex_cloud_iam_v1_iam_token_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_iam_token_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/iam/v1/iam_token_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"~\n" +
-	"\x15CreateIamTokenRequest\x12?\n" +
-	"\x1byandex_passport_oauth_token\x18\x01 \x01(\tH\x00R\x18yandexPassportOauthToken\x12\x12\n" +
-	"\x03jwt\x18\x02 \x01(\tH\x00R\x03jwtB\x10\n" +
-	"\bidentity\x12\x04\xc0\xc11\x01\"p\n" +
+	"+yandex/cloud/iam/v1/iam_token_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x96\x01\n" +
+	"\x15CreateIamTokenRequest\x12K\n" +
+	"\x1byandex_passport_oauth_token\x18\x01 \x01(\tB\n" +
+	"\x8a\xc81\x06<=4000H\x00R\x18yandexPassportOauthToken\x12\x1e\n" +
+	"\x03jwt\x18\x02 \x01(\tB\n" +
+	"\x8a\xc81\x06<=8000H\x00R\x03jwtB\x10\n" +
+	"\bidentity\x12\x04\xc0\xc11\x01\"d\n" +
+	"&CreateIamTokenForServiceAccountRequest\x12:\n" +
+	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"p\n" +
 	"\x16CreateIamTokenResponse\x12\x1b\n" +
 	"\tiam_token\x18\x01 \x01(\tR\biamToken\x129\n" +
 	"\n" +
-	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"d\n" +
-	"&CreateIamTokenForServiceAccountRequest\x12:\n" +
-	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\":\n" +
-	"\x15RevokeIamTokenRequest\x12!\n" +
-	"\tiam_token\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\biamToken\"7\n" +
+	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"D\n" +
+	"\x15RevokeIamTokenRequest\x12+\n" +
+	"\tiam_token\x18\x01 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=4096R\biamToken\"7\n" +
 	"\x16RevokeIamTokenResponse\x12\x1d\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tR\tsubjectId2\xce\x03\n" +
@@ -340,8 +341,8 @@ func file_yandex_cloud_iam_v1_iam_token_service_proto_rawDescGZIP() []byte {
 var file_yandex_cloud_iam_v1_iam_token_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_iam_v1_iam_token_service_proto_goTypes = []any{
 	(*CreateIamTokenRequest)(nil),                  // 0: yandex.cloud.iam.v1.CreateIamTokenRequest
-	(*CreateIamTokenResponse)(nil),                 // 1: yandex.cloud.iam.v1.CreateIamTokenResponse
-	(*CreateIamTokenForServiceAccountRequest)(nil), // 2: yandex.cloud.iam.v1.CreateIamTokenForServiceAccountRequest
+	(*CreateIamTokenForServiceAccountRequest)(nil), // 1: yandex.cloud.iam.v1.CreateIamTokenForServiceAccountRequest
+	(*CreateIamTokenResponse)(nil),                 // 2: yandex.cloud.iam.v1.CreateIamTokenResponse
 	(*RevokeIamTokenRequest)(nil),                  // 3: yandex.cloud.iam.v1.RevokeIamTokenRequest
 	(*RevokeIamTokenResponse)(nil),                 // 4: yandex.cloud.iam.v1.RevokeIamTokenResponse
 	(*timestamppb.Timestamp)(nil),                  // 5: google.protobuf.Timestamp
@@ -349,10 +350,10 @@ var file_yandex_cloud_iam_v1_iam_token_service_proto_goTypes = []any{
 var file_yandex_cloud_iam_v1_iam_token_service_proto_depIdxs = []int32{
 	5, // 0: yandex.cloud.iam.v1.CreateIamTokenResponse.expires_at:type_name -> google.protobuf.Timestamp
 	0, // 1: yandex.cloud.iam.v1.IamTokenService.Create:input_type -> yandex.cloud.iam.v1.CreateIamTokenRequest
-	2, // 2: yandex.cloud.iam.v1.IamTokenService.CreateForServiceAccount:input_type -> yandex.cloud.iam.v1.CreateIamTokenForServiceAccountRequest
+	1, // 2: yandex.cloud.iam.v1.IamTokenService.CreateForServiceAccount:input_type -> yandex.cloud.iam.v1.CreateIamTokenForServiceAccountRequest
 	3, // 3: yandex.cloud.iam.v1.IamTokenService.Revoke:input_type -> yandex.cloud.iam.v1.RevokeIamTokenRequest
-	1, // 4: yandex.cloud.iam.v1.IamTokenService.Create:output_type -> yandex.cloud.iam.v1.CreateIamTokenResponse
-	1, // 5: yandex.cloud.iam.v1.IamTokenService.CreateForServiceAccount:output_type -> yandex.cloud.iam.v1.CreateIamTokenResponse
+	2, // 4: yandex.cloud.iam.v1.IamTokenService.Create:output_type -> yandex.cloud.iam.v1.CreateIamTokenResponse
+	2, // 5: yandex.cloud.iam.v1.IamTokenService.CreateForServiceAccount:output_type -> yandex.cloud.iam.v1.CreateIamTokenResponse
 	4, // 6: yandex.cloud.iam.v1.IamTokenService.Revoke:output_type -> yandex.cloud.iam.v1.RevokeIamTokenResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type

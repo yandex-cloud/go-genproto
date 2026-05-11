@@ -820,26 +820,26 @@ const file_yandex_cloud_iam_v1_api_key_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"u\n" +
 	"\x13ListApiKeysResponse\x126\n" +
 	"\bapi_keys\x18\x01 \x03(\v2\x1b.yandex.cloud.iam.v1.ApiKeyR\aapiKeys\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x84\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc1\x02\n" +
 	"\x13CreateApiKeyRequest\x126\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12!\n" +
-	"\x05scope\x18\x03 \x01(\tB\v\x8a\xc81\x05<=256\x18\x01R\x05scope\x12*\n" +
-	"\x06scopes\x18\x05 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<=256R\x06scopes\x129\n" +
+	"\x05scope\x18\x03 \x01(\tB\v\x8a\xc81\x05<=256\x18\x01R\x05scope\x12.\n" +
+	"\x06scopes\x18\x05 \x03(\tB\x16\x82\xc81\x05<=100\x8a\xc81\x05<=256\x90\xc81\x01R\x06scopes\x12r\n" +
 	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"d\n" +
+	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\"d\n" +
 	"\x14CreateApiKeyResponse\x124\n" +
 	"\aapi_key\x18\x01 \x01(\v2\x1b.yandex.cloud.iam.v1.ApiKeyR\x06apiKey\x12\x16\n" +
-	"\x06secret\x18\x02 \x01(\tR\x06secret\"\x92\x02\n" +
+	"\x06secret\x18\x02 \x01(\tR\x06secret\"\xcf\x02\n" +
 	"\x13UpdateApiKeyRequest\x12*\n" +
 	"\n" +
 	"api_key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bapiKeyId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12*\n" +
-	"\x06scopes\x18\x04 \x03(\tB\x12\x82\xc81\x051-100\x8a\xc81\x05<=256R\x06scopes\x129\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12.\n" +
+	"\x06scopes\x18\x04 \x03(\tB\x16\x82\xc81\x051-100\x8a\xc81\x05<=256\x90\xc81\x01R\x06scopes\x12r\n" +
 	"\n" +
-	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"4\n" +
+	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\"4\n" +
 	"\x14UpdateApiKeyMetadata\x12\x1c\n" +
 	"\n" +
 	"api_key_id\x18\x01 \x01(\tR\bapiKeyId\"A\n" +
@@ -870,7 +870,7 @@ const file_yandex_cloud_iam_v1_api_key_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"Z\n" +
 	"\x18ListApiKeyScopesResponse\x12\x16\n" +
 	"\x06scopes\x18\x01 \x03(\tR\x06scopes\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xf6\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xf4\a\n" +
 	"\rApiKeyService\x12r\n" +
 	"\x04List\x12'.yandex.cloud.iam.v1.ListApiKeysRequest\x1a(.yandex.cloud.iam.v1.ListApiKeysResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/iam/v1/apiKeys\x12o\n" +
 	"\x03Get\x12%.yandex.cloud.iam.v1.GetApiKeyRequest\x1a\x1b.yandex.cloud.iam.v1.ApiKey\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/iam/v1/apiKeys/{api_key_id}\x12y\n" +
@@ -879,9 +879,9 @@ const file_yandex_cloud_iam_v1_api_key_service_proto_rawDesc = "" +
 	"\x14UpdateApiKeyMetadata\x12\x06ApiKey\x82\xd3\xe4\x93\x02!:\x01*2\x1c/iam/v1/apiKeys/{api_key_id}\x12\xac\x01\n" +
 	"\x06Delete\x12(.yandex.cloud.iam.v1.DeleteApiKeyRequest\x1a!.yandex.cloud.operation.Operation\"U\xb2\xd2*-\n" +
 	"\x14DeleteApiKeyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1e*\x1c/iam/v1/apiKeys/{api_key_id}\x12\xa6\x01\n" +
-	"\x0eListOperations\x120.yandex.cloud.iam.v1.ListApiKeyOperationsRequest\x1a1.yandex.cloud.iam.v1.ListApiKeyOperationsResponse\"/\x82\xd3\xe4\x93\x02)\x12'/iam/v1/apiKeys/{api_key_id}/operations\x12\x89\x01\n" +
+	"\x0eListOperations\x120.yandex.cloud.iam.v1.ListApiKeyOperationsRequest\x1a1.yandex.cloud.iam.v1.ListApiKeyOperationsResponse\"/\x82\xd3\xe4\x93\x02)\x12'/iam/v1/apiKeys/{api_key_id}/operations\x12\x87\x01\n" +
 	"\n" +
-	"ListScopes\x12,.yandex.cloud.iam.v1.ListApiKeyScopesRequest\x1a-.yandex.cloud.iam.v1.ListApiKeyScopesResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/iam/v1/apiKeys/scopesBV\n" +
+	"ListScopes\x12,.yandex.cloud.iam.v1.ListApiKeyScopesRequest\x1a-.yandex.cloud.iam.v1.ListApiKeyScopesResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/iam/v1/apiKeyScopesBV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (

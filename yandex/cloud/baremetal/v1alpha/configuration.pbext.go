@@ -61,3 +61,7 @@ func (m *Configuration) SetNetworkCapacityGbps(v int64) {
 func (m *Configuration) SetCpuNum(v int64) {
 	m.CpuNum = v
 }
+
+func (m *Configuration) SetMountingAvailability(v MountingAvailability) {
+	m.MountingAvailability = v
+}

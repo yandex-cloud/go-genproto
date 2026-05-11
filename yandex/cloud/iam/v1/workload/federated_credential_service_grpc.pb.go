@@ -33,7 +33,6 @@ const (
 // A set of methods for managing federated credentials.
 type FederatedCredentialServiceClient interface {
 	// Returns the specified federated credential.
-	//
 	// To get the list of available federated credentials, make a [List] request.
 	Get(ctx context.Context, in *GetFederatedCredentialRequest, opts ...grpc.CallOption) (*FederatedCredential, error)
 	// Retrieves the list of federated credentials for the specified service account.
@@ -99,7 +98,6 @@ func (c *federatedCredentialServiceClient) Delete(ctx context.Context, in *Delet
 // A set of methods for managing federated credentials.
 type FederatedCredentialServiceServer interface {
 	// Returns the specified federated credential.
-	//
 	// To get the list of available federated credentials, make a [List] request.
 	Get(context.Context, *GetFederatedCredentialRequest) (*FederatedCredential, error)
 	// Retrieves the list of federated credentials for the specified service account.

@@ -1154,14 +1154,14 @@ var File_yandex_cloud_monitoring_v3_parametrization_proto protoreflect.FileDescr
 
 const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/monitoring/v3/parametrization.proto\x12\x1ayandex.cloud.monitoring.v3\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xd4\x01\n" +
+	"0yandex/cloud/monitoring/v3/parametrization.proto\x12\x1ayandex.cloud.monitoring.v3\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xda\x01\n" +
 	"\x14LabelValuesParameter\x12\x1d\n" +
 	"\tfolder_id\x18\x02 \x01(\tH\x00R\bfolderId\x12\x1c\n" +
 	"\tselectors\x18\x13 \x01(\tR\tselectors\x12\x1b\n" +
 	"\tlabel_key\x18\x14 \x01(\tR\blabelKey\x12(\n" +
 	"\x0fmultiselectable\x18\x15 \x01(\bR\x0fmultiselectable\x12%\n" +
 	"\x0edefault_values\x18\x16 \x03(\tR\rdefaultValuesB\v\n" +
-	"\tcontainerJ\x04\b\x03\x10\x13\"z\n" +
+	"\tcontainerJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x13\"z\n" +
 	"\x0fCustomParameter\x12\x16\n" +
 	"\x06values\x18\x01 \x03(\tR\x06values\x12(\n" +
 	"\x0fmultiselectable\x18\x02 \x01(\bR\x0fmultiselectable\x12%\n" +

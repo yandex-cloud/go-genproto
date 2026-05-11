@@ -682,13 +682,13 @@ var File_yandex_cloud_iam_v1_service_account_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/iam/v1/service_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/iam/v1/service_account.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
+	"1yandex/cloud/iam/v1/service_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/iam/v1/service_account.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
 	"\x18GetServiceAccountRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xbf\x01\n" +
 	"\x1aListServiceAccountsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
@@ -696,22 +696,22 @@ const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x95\x01\n" +
 	"\x1bListServiceAccountsResponse\x12N\n" +
 	"\x10service_accounts\x18\x01 \x03(\v2#.yandex.cloud.iam.v1.ServiceAccountR\x0fserviceAccounts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xff\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x81\x03\n" +
 	"\x1bCreateServiceAccountRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
+	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
 	"\x1cCreateServiceAccountMetadata\x12,\n" +
-	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\xcd\x03\n" +
+	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\xcf\x03\n" +
 	"\x1bUpdateServiceAccountRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"updateMask\x12;\n" +
+	"\x04name\x18\x03 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2<.yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -726,7 +726,7 @@ const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"#ListServiceAccountOperationsRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"\x91\x01\n" +

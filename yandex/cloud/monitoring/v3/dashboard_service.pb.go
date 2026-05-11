@@ -463,7 +463,6 @@ type UpdateDashboardRequest struct {
 	// Dashboard description.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Dashboard title.
@@ -1126,11 +1125,11 @@ var File_yandex_cloud_monitoring_v3_dashboard_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\"F\n" +
+	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
 	"\x13GetDashboardRequest\x12/\n" +
-	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xb1\x02\n" +
-	"\x15ListDashboardsRequest\x12+\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x12'\n" +
+	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xa9\x02\n" +
+	"\x15ListDashboardsRequest\x12\x1d\n" +
+	"\tfolder_id\x18\x02 \x01(\tH\x00R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x13 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
@@ -1140,17 +1139,17 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\tselectors\x18\x16 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\tselectors\x127\n" +
 	"\tread_mask\x18\x17 \x01(\v2\x1a.google.protobuf.FieldMaskR\breadMaskB\v\n" +
-	"\tcontainerJ\x04\b\x03\x10\x13\"\x87\x01\n" +
+	"\tcontainerJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x13\"\x87\x01\n" +
 	"\x16ListDashboardsResponse\x12E\n" +
 	"\n" +
 	"dashboards\x18\x01 \x03(\v2%.yandex.cloud.monitoring.v3.DashboardR\n" +
 	"dashboards\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8f\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x05\n" +
 	"\x16CreateDashboardRequest\x12+\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x128\n" +
-	"\x04name\x18\x13 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x14 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
-	"\x06labels\x18\x15 \x03(\v2>.yandex.cloud.monitoring.v3.CreateDashboardRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x14\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x12\x12\n" +
+	"\x04name\x18\x13 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x14 \x01(\tR\vdescription\x12\x88\x01\n" +
+	"\x06labels\x18\x15 \x03(\v2>.yandex.cloud.monitoring.v3.CreateDashboardRequest.LabelsEntryB0\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x14\n" +
 	"\x05title\x18\x16 \x01(\tR\x05title\x12<\n" +
 	"\awidgets\x18\x17 \x03(\v2\".yandex.cloud.monitoring.v3.WidgetR\awidgets\x12U\n" +
 	"\x0fparametrization\x18\x18 \x01(\v2+.yandex.cloud.monitoring.v3.ParametrizationR\x0fparametrization\x12\x1d\n" +
@@ -1162,14 +1161,14 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
-	"\tcontainerJ\x04\b\x03\x10\x13J\x04\b\x1e\x10\"J\x04\b\x19\x10\x1a\"<\n" +
+	"\tcontainerJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x13J\x04\b\x19\x10\x1aJ\x04\b\x1e\x10\"\"<\n" +
 	"\x17CreateDashboardMetadata\x12!\n" +
-	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\x94\x06\n" +
+	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\xca\x05\n" +
 	"\x16UpdateDashboardRequest\x12/\n" +
-	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2>.yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x14\n" +
+	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x88\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2>.yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntryB0\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x14\n" +
 	"\x05title\x18\x05 \x01(\tR\x05title\x12<\n" +
 	"\awidgets\x18\x06 \x03(\v2\".yandex.cloud.monitoring.v3.WidgetR\awidgets\x12U\n" +
 	"\x0fparametrization\x18\a \x01(\v2+.yandex.cloud.monitoring.v3.ParametrizationR\x0fparametrization\x12\x12\n" +
@@ -1181,7 +1180,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x1e\x10\"J\x04\b\t\x10\x1a\"<\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\x1a\"<\n" +
 	"\x17UpdateDashboardMetadata\x12!\n" +
 	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"]\n" +
 	"\x16DeleteDashboardRequest\x12/\n" +
@@ -1311,10 +1310,10 @@ func file_yandex_cloud_monitoring_v3_dashboard_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_monitoring_v3_dashboard_proto_init()
-	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
-	file_yandex_cloud_monitoring_v3_widget_proto_init()
-	file_yandex_cloud_monitoring_v3_timeline_proto_init()
 	file_yandex_cloud_monitoring_v3_link_item_proto_init()
+	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
+	file_yandex_cloud_monitoring_v3_timeline_proto_init()
+	file_yandex_cloud_monitoring_v3_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_dashboard_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*ListDashboardsRequest_FolderId)(nil),
 	}

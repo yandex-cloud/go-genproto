@@ -648,7 +648,7 @@ const file_yandex_cloud_iam_v1_awscompatibility_access_key_service_proto_rawDesc
 	"\x15ListAccessKeysRequest\x126\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"\x92\x01\n" +

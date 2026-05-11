@@ -30,7 +30,6 @@ const (
 // A set of methods for managing Role resources.
 type RoleServiceClient interface {
 	// Returns the specified Role resource.
-	//
 	// To get the list of available Role resources, make a [List] request.
 	Get(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*Role, error)
 	// Retrieves the list of Role resources.
@@ -72,7 +71,6 @@ func (c *roleServiceClient) List(ctx context.Context, in *ListRolesRequest, opts
 // A set of methods for managing Role resources.
 type RoleServiceServer interface {
 	// Returns the specified Role resource.
-	//
 	// To get the list of available Role resources, make a [List] request.
 	Get(context.Context, *GetRoleRequest) (*Role, error)
 	// Retrieves the list of Role resources.

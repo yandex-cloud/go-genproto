@@ -36,10 +36,6 @@ func (m *ListCloudsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *CreateCloudRequest) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
 func (m *CreateCloudRequest) SetName(v string) {
 	m.Name = v
 }
@@ -48,32 +44,16 @@ func (m *CreateCloudRequest) SetDescription(v string) {
 	m.Description = v
 }
 
+func (m *CreateCloudRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
 func (m *CreateCloudRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
 func (m *CreateCloudMetadata) SetCloudId(v string) {
 	m.CloudId = v
-}
-
-func (m *ListCloudOperationsRequest) SetCloudId(v string) {
-	m.CloudId = v
-}
-
-func (m *ListCloudOperationsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListCloudOperationsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListCloudOperationsResponse) SetOperations(v []*operation.Operation) {
-	m.Operations = v
-}
-
-func (m *ListCloudOperationsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
 }
 
 func (m *UpdateCloudRequest) SetCloudId(v string) {
@@ -122,4 +102,24 @@ func (m *DeleteCloudMetadata) SetCancelledBy(v string) {
 
 func (m *DeleteCloudMetadata) SetCancelledAt(v *timestamppb.Timestamp) {
 	m.CancelledAt = v
+}
+
+func (m *ListCloudOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListCloudOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListCloudOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListCloudOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListCloudOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

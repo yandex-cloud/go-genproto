@@ -24,16 +24,16 @@ func (m *CreateIamTokenRequest) SetJwt(v string) {
 	}
 }
 
+func (m *CreateIamTokenForServiceAccountRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
 func (m *CreateIamTokenResponse) SetIamToken(v string) {
 	m.IamToken = v
 }
 
 func (m *CreateIamTokenResponse) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
-}
-
-func (m *CreateIamTokenForServiceAccountRequest) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
 }
 
 func (m *RevokeIamTokenRequest) SetIamToken(v string) {

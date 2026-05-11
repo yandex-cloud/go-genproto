@@ -43,7 +43,6 @@ const (
 // A set of methods for managing Folder resources.
 type FolderServiceClient interface {
 	// Returns the specified Folder resource.
-	//
 	// To get the list of available Folder resources, make a [List] request.
 	Get(ctx context.Context, in *GetFolderRequest, opts ...grpc.CallOption) (*Folder, error)
 	// Retrieves the list of Folder resources in the specified cloud.
@@ -217,7 +216,6 @@ func (c *folderServiceClient) UpdateAccessPolicyBindingParameters(ctx context.Co
 // A set of methods for managing Folder resources.
 type FolderServiceServer interface {
 	// Returns the specified Folder resource.
-	//
 	// To get the list of available Folder resources, make a [List] request.
 	Get(context.Context, *GetFolderRequest) (*Folder, error)
 	// Retrieves the list of Folder resources in the specified cloud.

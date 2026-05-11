@@ -10,26 +10,6 @@ func (m *GetFederationRequest) SetFederationId(v string) {
 	m.FederationId = v
 }
 
-func (m *ListFederationsRequest) SetFolderId(v string) {
-	m.FolderId = v
-}
-
-func (m *ListFederationsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListFederationsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListFederationsResponse) SetFederations(v []*Federation) {
-	m.Federations = v
-}
-
-func (m *ListFederationsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
-}
-
 func (m *CreateFederationRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -108,4 +88,24 @@ func (m *DeleteFederationRequest) SetFederationId(v string) {
 
 func (m *DeleteFederationMetadata) SetFederationId(v string) {
 	m.FederationId = v
+}
+
+func (m *ListFederationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListFederationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListFederationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListFederationsResponse) SetFederations(v []*Federation) {
+	m.Federations = v
+}
+
+func (m *ListFederationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

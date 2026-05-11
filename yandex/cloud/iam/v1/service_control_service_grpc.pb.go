@@ -34,7 +34,6 @@ const (
 // A set of methods for managing Service resources.
 type ServiceControlServiceClient interface {
 	// Returns the Service information in the specified resource container.
-	//
 	// To get the list of available Services, make a [List] request.
 	Get(ctx context.Context, in *GetServiceRequest, opts ...grpc.CallOption) (*Service, error)
 	// Retrieves the list of Service in the specified resource container.
@@ -112,7 +111,6 @@ func (c *serviceControlServiceClient) ResolveAgent(ctx context.Context, in *Reso
 // A set of methods for managing Service resources.
 type ServiceControlServiceServer interface {
 	// Returns the Service information in the specified resource container.
-	//
 	// To get the list of available Services, make a [List] request.
 	Get(context.Context, *GetServiceRequest) (*Service, error)
 	// Retrieves the list of Service in the specified resource container.
