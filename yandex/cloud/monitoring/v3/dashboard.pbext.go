@@ -81,3 +81,7 @@ func (m *Dashboard) SetTimeline(v *Timeline) {
 func (m *Dashboard) SetLinks(v []*LinkItem) {
 	m.Links = v
 }
+
+func (m *Dashboard) SetPresetItems(v []*PresetItem) {
+	m.PresetItems = v
+}

@@ -41,7 +41,6 @@ const (
 // A set of methods for managing Organization resources.
 type OrganizationServiceClient interface {
 	// Returns the specified Organization resource.
-	//
 	// To get the list of available Organization resources, make a [List] request.
 	Get(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*Organization, error)
 	// Retrieves the list of Organization resources.
@@ -191,7 +190,6 @@ func (c *organizationServiceClient) UpdateAccessPolicyBindingParameters(ctx cont
 // A set of methods for managing Organization resources.
 type OrganizationServiceServer interface {
 	// Returns the specified Organization resource.
-	//
 	// To get the list of available Organization resources, make a [List] request.
 	Get(context.Context, *GetOrganizationRequest) (*Organization, error)
 	// Retrieves the list of Organization resources.

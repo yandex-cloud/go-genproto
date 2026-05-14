@@ -1624,7 +1624,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_application_saml_application_se
 
 const file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_service_proto_rawDesc = "" +
 	"\n" +
-	"Ryandex/cloud/organizationmanager/v1/idp/application/saml/application_service.proto\x128yandex.cloud.organizationmanager.v1.idp.application.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1aJyandex/cloud/organizationmanager/v1/idp/application/saml/application.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
+	"Ryandex/cloud/organizationmanager/v1/idp/application/saml/application_service.proto\x128yandex.cloud.organizationmanager.v1.idp.application.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aJyandex/cloud/organizationmanager/v1/idp/application/saml/application.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
 	"\x15GetApplicationRequest\x123\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rapplicationId\"\xc8\x01\n" +
 	"\x17ListApplicationsRequest\x125\n" +
@@ -1652,11 +1652,11 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x97\x01\n" +
 	"\x14SecuritySettingsSpec\x12\x7f\n" +
-	"\x0esignature_mode\x18\x01 \x01(\x0e2X.yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureModeR\rsignatureMode\"\x89\x01\n" +
+	"\x0esignature_mode\x18\x01 \x01(\x0e2X.yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureModeR\rsignatureMode\"\x93\x01\n" +
 	"\n" +
 	"NameIdSpec\x12e\n" +
-	"\x06format\x18\x01 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.FormatB\x04\xe8\xc71\x01R\x06format\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xea\x01\n" +
+	"\x06format\x18\x01 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.FormatB\x04\xe8\xc71\x01R\x06format\x12\x1e\n" +
+	"\x05value\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05value\"\xea\x01\n" +
 	"\x14AttributeMappingSpec\x12c\n" +
 	"\aname_id\x18\x01 \x01(\v2D.yandex.cloud.organizationmanager.v1.idp.application.saml.NameIdSpecB\x04\xe8\xc71\x01R\x06nameId\x12m\n" +
 	"\n" +

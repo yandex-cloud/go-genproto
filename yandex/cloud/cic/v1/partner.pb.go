@@ -24,9 +24,12 @@ const (
 type Partner_Status int32
 
 const (
+	// Status is unspecified.
 	Partner_STATUS_UNSPECIFIED Partner_Status = 0
-	Partner_UP                 Partner_Status = 1
-	Partner_DOWN               Partner_Status = 2
+	// Partner is up and operational.
+	Partner_UP Partner_Status = 1
+	// Partner is down and not operational.
+	Partner_DOWN Partner_Status = 2
 )
 
 // Enum value maps for Partner_Status.
@@ -77,6 +80,12 @@ type Partner struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the region that the partner belongs to.
 	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// Name of the partner.
+	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	// Link to info about the partner.
+	Url string `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
+	// List of pointOfPresence IDs that the partner is connected to.
+	PopIds []string `protobuf:"bytes,9,rep,name=pop_ids,json=popIds,proto3" json:"pop_ids,omitempty"`
 	// Status of the partner.
 	Status        Partner_Status `protobuf:"varint,11,opt,name=status,proto3,enum=yandex.cloud.cic.v1.Partner_Status" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -127,6 +136,27 @@ func (x *Partner) GetRegionId() string {
 	return ""
 }
 
+func (x *Partner) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Partner) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *Partner) GetPopIds() []string {
+	if x != nil {
+		return x.PopIds
+	}
+	return nil
+}
+
 func (x *Partner) GetStatus() Partner_Status {
 	if x != nil {
 		return x.Status
@@ -138,15 +168,19 @@ var File_yandex_cloud_cic_v1_partner_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_partner_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/cic/v1/partner.proto\x12\x13yandex.cloud.cic.v1\"\xb3\x01\n" +
+	"!yandex/cloud/cic/v1/partner.proto\x12\x13yandex.cloud.cic.v1\"\xf2\x01\n" +
 	"\aPartner\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12;\n" +
+	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12\x12\n" +
+	"\x04name\x18\a \x01(\tR\x04name\x12\x10\n" +
+	"\x03url\x18\b \x01(\tR\x03url\x12\x17\n" +
+	"\apop_ids\x18\t \x03(\tR\x06popIds\x12;\n" +
 	"\x06status\x18\v \x01(\x0e2#.yandex.cloud.cic.v1.Partner.StatusR\x06status\"2\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x06\n" +
 	"\x02UP\x10\x01\x12\b\n" +
-	"\x04DOWN\x10\x02J\x04\b\x02\x10\x06J\x04\b\a\x10\vBV\n" +
+	"\x04DOWN\x10\x02J\x04\b\x02\x10\x06J\x04\b\n" +
+	"\x10\vBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (

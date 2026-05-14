@@ -28,8 +28,6 @@ type User_Status int32
 const (
 	// The status is not specified.
 	User_STATUS_UNSPECIFIED User_Status = 0
-	// The user is in the process of being created.
-	User_CREATING User_Status = 4
 	// The user is active and can authenticate.
 	// Active users have full access to the system according to their permissions.
 	User_ACTIVE User_Status = 1
@@ -39,23 +37,25 @@ const (
 	// The user is in the process of being deleted.
 	// This is a transitional state before the user is completely removed from the system.
 	User_DELETING User_Status = 3
+	// The user is in the process of being created.
+	User_CREATING User_Status = 4
 )
 
 // Enum value maps for User_Status.
 var (
 	User_Status_name = map[int32]string{
 		0: "STATUS_UNSPECIFIED",
-		4: "CREATING",
 		1: "ACTIVE",
 		2: "SUSPENDED",
 		3: "DELETING",
+		4: "CREATING",
 	}
 	User_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
-		"CREATING":           4,
 		"ACTIVE":             1,
 		"SUSPENDED":          2,
 		"DELETING":           3,
+		"CREATING":           4,
 	}
 )
 
@@ -87,7 +87,6 @@ func (User_Status) EnumDescriptor() ([]byte, []int) {
 }
 
 // A user in the Identity Provider system.
-//
 // Users are created within a userpool and can authenticate to access cloud resources.
 // Each user has a unique identifier, credentials, and profile information.
 type User struct {
@@ -311,12 +310,12 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\vemployee_id\x18\x11 \x01(\tR\n" +
 	"employeeId\"W\n" +
 	"\x06Status\x12\x16\n" +
-	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
-	"\bCREATING\x10\x04\x12\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\r\n" +
 	"\tSUSPENDED\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03J\x04\b\x05\x10\x06B~\n" +
+	"\bDELETING\x10\x03\x12\f\n" +
+	"\bCREATING\x10\x04J\x04\b\x05\x10\x06B~\n" +
 	"+yandex.cloud.api.organizationmanager.v1.idpZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp;idpb\x06proto3"
 
 var (

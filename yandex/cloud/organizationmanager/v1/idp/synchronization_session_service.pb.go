@@ -1324,7 +1324,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_synchronization_session_service
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_session_service_proto_rawDesc = "" +
 	"\n" +
-	"Myandex/cloud/organizationmanager/v1/idp/synchronization_session_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdc\x01\n" +
+	"Myandex/cloud/organizationmanager/v1/idp/synchronization_session_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\"\xdc\x01\n" +
 	"\x12OpenSessionRequest\x12>\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12'\n" +
 	"\bagent_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aagentId\x12]\n" +

@@ -236,6 +236,164 @@ func (x *ListConfigurationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ListConfigurationNetworkInterfaceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder to list ConfigurationNetworkInterface resources in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListConfigurationNetworkInterfaceResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListConfigurationNetworkInterfaceResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// By which column the listing should be ordered and in which direction,
+	// format is "createdAt desc". "id asc" if omitted.
+	// Supported fields: ["id", "name"].
+	// Both snake_case and camelCase are supported for fields.
+	OrderBy string `protobuf:"bytes,102,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	// The expression consists of one or more conditions united by `AND` (or `and`) operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
+	// Each condition has the form `<field> <operator> <value>`, where:
+	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
+	// 2. `<operator>` is a logical operator, one of `=` (equal), `:` (substring).
+	// 3. `<value>` represents a value.
+	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// Example: "key1='value' AND key2='value'"
+	// Supported operators: ["AND"].
+	// Supported fields: ["id", "name", "configurationId"].
+	// Both snake_case and camelCase are supported for fields.
+	Filter        string `protobuf:"bytes,103,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) Reset() {
+	*x = ListConfigurationNetworkInterfaceRequest{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListConfigurationNetworkInterfaceRequest) ProtoMessage() {}
+
+func (x *ListConfigurationNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListConfigurationNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
+func (*ListConfigurationNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListConfigurationNetworkInterfaceRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type ListConfigurationNetworkInterfaceResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of ConfigurationNetworkInterface resources.
+	ConfigurationNetworkInterfaces []*ConfigurationNetworkInterface `protobuf:"bytes,1,rep,name=configuration_network_interfaces,json=configurationNetworkInterfaces,proto3" json:"configuration_network_interfaces,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListConfigurationNetworkInterfaceRequest.page_size], use `next_page_token` as the value
+	// for the [ListConfigurationNetworkInterfaceRequest.page_token] parameter in the next list request.
+	//
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,100,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListConfigurationNetworkInterfaceResponse) Reset() {
+	*x = ListConfigurationNetworkInterfaceResponse{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListConfigurationNetworkInterfaceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListConfigurationNetworkInterfaceResponse) ProtoMessage() {}
+
+func (x *ListConfigurationNetworkInterfaceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListConfigurationNetworkInterfaceResponse.ProtoReflect.Descriptor instead.
+func (*ListConfigurationNetworkInterfaceResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListConfigurationNetworkInterfaceResponse) GetConfigurationNetworkInterfaces() []*ConfigurationNetworkInterface {
+	if x != nil {
+		return x.ConfigurationNetworkInterfaces
+	}
+	return nil
+}
+
+func (x *ListConfigurationNetworkInterfaceResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v1alpha_configuration_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = "" +
@@ -254,10 +412,22 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc = 
 	"\tfolder_id\x18h \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderIdJ\x04\b\x01\x10d\"\xa1\x01\n" +
 	"\x1aListConfigurationsResponse\x12U\n" +
 	"\x0econfigurations\x18\x01 \x03(\v2-.yandex.cloud.baremetal.v1alpha.ConfigurationR\x0econfigurations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xef\x02\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xc8\x01\n" +
+	"(ListConfigurationNetworkInterfaceRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12'\n" +
+	"\tpage_size\x18d \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18e \x01(\tR\tpageToken\x12\x19\n" +
+	"\border_by\x18f \x01(\tR\aorderBy\x12\x16\n" +
+	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\xe3\x01\n" +
+	")ListConfigurationNetworkInterfaceResponse\x12\x87\x01\n" +
+	" configuration_network_interfaces\x18\x01 \x03(\v2=.yandex.cloud.baremetal.v1alpha.ConfigurationNetworkInterfaceR\x1econfigurationNetworkInterfaces\x12&\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xe5\x04\n" +
 	"\x14ConfigurationService\x12\xab\x01\n" +
 	"\x03Get\x127.yandex.cloud.baremetal.v1alpha.GetConfigurationRequest\x1a-.yandex.cloud.baremetal.v1alpha.Configuration\"<\x82\xd3\xe4\x93\x026\x124/baremetal/v1alpha/configurations/{configuration_id}\x12\xa8\x01\n" +
-	"\x04List\x129.yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest\x1a:.yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/baremetal/v1alpha/configurationsBr\n" +
+	"\x04List\x129.yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest\x1a:.yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse\")\x82\xd3\xe4\x93\x02#\x12!/baremetal/v1alpha/configurations\x12\xf3\x01\n" +
+	"!ListConfigurationNetworkInterface\x12H.yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceRequest\x1aI.yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceResponse\"9\x82\xd3\xe4\x93\x023\x121/baremetal/v1alpha/configurationNetworkInterfacesBr\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (
@@ -272,24 +442,30 @@ func file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDescGZIP
 	return file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_goTypes = []any{
-	(*GetConfigurationRequest)(nil),    // 0: yandex.cloud.baremetal.v1alpha.GetConfigurationRequest
-	(*ListConfigurationsRequest)(nil),  // 1: yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest
-	(*ListConfigurationsResponse)(nil), // 2: yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse
-	(*Configuration)(nil),              // 3: yandex.cloud.baremetal.v1alpha.Configuration
+	(*GetConfigurationRequest)(nil),                   // 0: yandex.cloud.baremetal.v1alpha.GetConfigurationRequest
+	(*ListConfigurationsRequest)(nil),                 // 1: yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest
+	(*ListConfigurationsResponse)(nil),                // 2: yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse
+	(*ListConfigurationNetworkInterfaceRequest)(nil),  // 3: yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceRequest
+	(*ListConfigurationNetworkInterfaceResponse)(nil), // 4: yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceResponse
+	(*Configuration)(nil),                             // 5: yandex.cloud.baremetal.v1alpha.Configuration
+	(*ConfigurationNetworkInterface)(nil),             // 6: yandex.cloud.baremetal.v1alpha.ConfigurationNetworkInterface
 }
 var file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse.configurations:type_name -> yandex.cloud.baremetal.v1alpha.Configuration
-	0, // 1: yandex.cloud.baremetal.v1alpha.ConfigurationService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetConfigurationRequest
-	1, // 2: yandex.cloud.baremetal.v1alpha.ConfigurationService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest
-	3, // 3: yandex.cloud.baremetal.v1alpha.ConfigurationService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Configuration
-	2, // 4: yandex.cloud.baremetal.v1alpha.ConfigurationService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse.configurations:type_name -> yandex.cloud.baremetal.v1alpha.Configuration
+	6, // 1: yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceResponse.configuration_network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.ConfigurationNetworkInterface
+	0, // 2: yandex.cloud.baremetal.v1alpha.ConfigurationService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetConfigurationRequest
+	1, // 3: yandex.cloud.baremetal.v1alpha.ConfigurationService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationsRequest
+	3, // 4: yandex.cloud.baremetal.v1alpha.ConfigurationService.ListConfigurationNetworkInterface:input_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceRequest
+	5, // 5: yandex.cloud.baremetal.v1alpha.ConfigurationService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Configuration
+	2, // 6: yandex.cloud.baremetal.v1alpha.ConfigurationService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationsResponse
+	4, // 7: yandex.cloud.baremetal.v1alpha.ConfigurationService.ListConfigurationNetworkInterface:output_type -> yandex.cloud.baremetal.v1alpha.ListConfigurationNetworkInterfaceResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_init() }
@@ -304,7 +480,7 @@ func file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_configuration_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

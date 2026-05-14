@@ -34,7 +34,6 @@ const (
 // A set of methods for managing signature certificates for SAML applications.
 type SignatureCertificateServiceClient interface {
 	// Returns the specified signature certificate.
-	//
 	// To get the list of available certificates, make a [List] request.
 	Get(ctx context.Context, in *GetSignatureCertificateRequest, opts ...grpc.CallOption) (*SignatureCertificate, error)
 	// Retrieves the list of signature certificates for the specified SAML application.
@@ -112,7 +111,6 @@ func (c *signatureCertificateServiceClient) Delete(ctx context.Context, in *Dele
 // A set of methods for managing signature certificates for SAML applications.
 type SignatureCertificateServiceServer interface {
 	// Returns the specified signature certificate.
-	//
 	// To get the list of available certificates, make a [List] request.
 	Get(context.Context, *GetSignatureCertificateRequest) (*SignatureCertificate, error)
 	// Retrieves the list of signature certificates for the specified SAML application.

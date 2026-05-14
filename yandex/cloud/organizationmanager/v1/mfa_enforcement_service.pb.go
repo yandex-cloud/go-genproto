@@ -1650,30 +1650,30 @@ var File_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto proto
 
 const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_rawDesc = "" +
 	"\n" +
-	"Ayandex/cloud/organizationmanager/v1/mfa_enforcement_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a9yandex/cloud/organizationmanager/v1/mfa_enforcement.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x04\n" +
+	"Ayandex/cloud/organizationmanager/v1/mfa_enforcement_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a9yandex/cloud/organizationmanager/v1/mfa_enforcement.proto\x1a\x1dyandex/cloud/validation.proto\"\x95\x05\n" +
 	"\x1bCreateMfaEnforcementRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12#\n" +
-	"\x06acr_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05acrId\x12<\n" +
-	"\x03ttl\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\x0f\xe8\xc71\x01\xfa\xc71\a<=8760hR\x03ttl\x12e\n" +
-	"\x06status\x18\x04 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.StatusB\x04\xe8\xc71\x01R\x06status\x125\n" +
-	"\bapply_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\aapplyAt\x12D\n" +
-	"\renroll_window\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\fenrollWindow\x12;\n" +
+	"\x06acr_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05acrId\x12=\n" +
+	"\x03ttl\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\x10\xe8\xc71\x01\xfa\xc71\b5m-8760hR\x03ttl\x12e\n" +
+	"\x06status\x18\x04 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.CreateMfaEnforcementRequest.StatusB\x04\xe8\xc71\x01R\x06status\x12n\n" +
+	"\bapply_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\aapplyAt\x12P\n" +
+	"\renroll_window\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x10\xe8\xc71\x01\xfa\xc71\b5m-8760hR\fenrollWindow\x12;\n" +
 	"\x04name\x18\a \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\b \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\"H\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rSTATUS_ACTIVE\x10\x01\x12\x13\n" +
-	"\x0fSTATUS_INACTIVE\x10\x02\"u\n" +
+	"\x0fSTATUS_INACTIVE\x10\x02\"{\n" +
 	"\x1cCreateMfaEnforcementMetadata\x12'\n" +
 	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x03 \x01(\tR\x10mfaEnforcementId\"\xfa\x04\n" +
+	"\x12mfa_enforcement_id\x18\x03 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"\xc2\x05\n" +
 	"\x1bUpdateMfaEnforcementRequest\x12:\n" +
 	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12\x1f\n" +
-	"\x06acr_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05acrId\x128\n" +
-	"\x03ttl\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\v\xfa\xc71\a<=8760hR\x03ttl\x12_\n" +
-	"\x06status\x18\x04 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.StatusR\x06status\x125\n" +
-	"\bapply_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\aapplyAt\x12>\n" +
-	"\renroll_window\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\fenrollWindow\x12;\n" +
+	"\x06acr_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05acrId\x129\n" +
+	"\x03ttl\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b5m-8760hR\x03ttl\x12_\n" +
+	"\x06status\x18\x04 \x01(\x0e2G.yandex.cloud.organizationmanager.v1.UpdateMfaEnforcementRequest.StatusR\x06status\x12n\n" +
+	"\bapply_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\aapplyAt\x12L\n" +
+	"\renroll_window\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b5m-8760hR\fenrollWindow\x12;\n" +
 	"\vupdate_mask\x18\a \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\b \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -1681,21 +1681,21 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rSTATUS_ACTIVE\x10\x01\x12\x13\n" +
-	"\x0fSTATUS_INACTIVE\x10\x02\"L\n" +
+	"\x0fSTATUS_INACTIVE\x10\x02\"R\n" +
 	"\x1cUpdateMfaEnforcementMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"[\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"[\n" +
 	"\x1dActivateMfaEnforcementRequest\x12:\n" +
-	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"N\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"T\n" +
 	"\x1eActivateMfaEnforcementMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"]\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"]\n" +
 	"\x1fDeactivateMfaEnforcementRequest\x12:\n" +
-	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"P\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"V\n" +
 	" DeactivateMfaEnforcementMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"Y\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"Y\n" +
 	"\x1bDeleteMfaEnforcementRequest\x12:\n" +
-	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"L\n" +
+	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"R\n" +
 	"\x1cDeleteMfaEnforcementMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"V\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"V\n" +
 	"\x18GetMfaEnforcementRequest\x12:\n" +
 	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\"\xa7\x01\n" +
 	"\x1aListMfaEnforcementsRequest\x125\n" +
@@ -1723,9 +1723,9 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"ACTION_ADD\x10\x01\x12\x11\n" +
-	"\rACTION_REMOVE\x10\x02\"F\n" +
+	"\rACTION_REMOVE\x10\x02\"L\n" +
 	"\x16UpdateAudienceMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"\xa5\x01\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"\xa5\x01\n" +
 	"\x13ListAudienceRequest\x12:\n" +
 	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -1745,9 +1745,9 @@ const file_yandex_cloud_organizationmanager_v1_mfa_enforcement_service_proto_raw
 	"\x82\xc81\x061-1000R\x0eaudienceDeltas\"\xbb\x01\n" +
 	"\x1eUpdateExcludedAudienceResponse\x12:\n" +
 	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12]\n" +
-	"\x10effective_deltas\x18\x02 \x03(\v22.yandex.cloud.organizationmanager.v1.AudienceDeltaR\x0feffectiveDeltas\"N\n" +
+	"\x10effective_deltas\x18\x02 \x03(\v22.yandex.cloud.organizationmanager.v1.AudienceDeltaR\x0feffectiveDeltas\"T\n" +
 	"\x1eUpdateExcludedAudienceMetadata\x12,\n" +
-	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementId\"\xad\x01\n" +
+	"\x12mfa_enforcement_id\x18\x02 \x01(\tR\x10mfaEnforcementIdJ\x04\b\x01\x10\x02\"\xad\x01\n" +
 	"\x1bListExcludedAudienceRequest\x12:\n" +
 	"\x12mfa_enforcement_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10mfaEnforcementId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +

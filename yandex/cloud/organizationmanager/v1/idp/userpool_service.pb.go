@@ -1289,7 +1289,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto protoref
 
 const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/organizationmanager/v1/idp/userpool_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/organizationmanager/v1/idp/userpool.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\"C\n" +
+	">yandex/cloud/organizationmanager/v1/idp/userpool_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/organizationmanager/v1/idp/userpool.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetUserpoolRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"userpoolId\"\xc5\x01\n" +
@@ -1348,11 +1348,11 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDes
 	"userpoolId\"9\n" +
 	"\x16DeleteUserpoolMetadata\x12\x1f\n" +
 	"\vuserpool_id\x18\x01 \x01(\tR\n" +
-	"userpoolId\"g\n" +
+	"userpoolId\"p\n" +
 	"\x18GetUserpoolDomainRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"userpoolId\x12\x1c\n" +
-	"\x06domain\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06domain\"\xc3\x01\n" +
+	"userpoolId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"\xc3\x01\n" +
 	"\x1aListUserpoolDomainsRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"userpoolId\x12'\n" +
@@ -1365,27 +1365,27 @@ const file_yandex_cloud_organizationmanager_v1_idp_userpool_service_proto_rawDes
 	"\x8a\xc81\x06<=1000R\x06filter\"\x90\x01\n" +
 	"\x1bListUserpoolDomainsResponse\x12I\n" +
 	"\adomains\x18\x01 \x03(\v2/.yandex.cloud.organizationmanager.v1.idp.DomainR\adomains\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"g\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"p\n" +
 	"\x18AddUserpoolDomainRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"userpoolId\x12\x1c\n" +
-	"\x06domain\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06domain\"T\n" +
+	"userpoolId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"T\n" +
 	"\x19AddUserpoolDomainMetadata\x12\x1f\n" +
 	"\vuserpool_id\x18\x01 \x01(\tR\n" +
 	"userpoolId\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"l\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"u\n" +
 	"\x1dValidateUserpoolDomainRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"userpoolId\x12\x1c\n" +
-	"\x06domain\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06domain\"Y\n" +
+	"userpoolId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"Y\n" +
 	"\x1eValidateUserpoolDomainMetadata\x12\x1f\n" +
 	"\vuserpool_id\x18\x01 \x01(\tR\n" +
 	"userpoolId\x12\x16\n" +
-	"\x06domain\x18\x02 \x01(\tR\x06domain\"j\n" +
+	"\x06domain\x18\x02 \x01(\tR\x06domain\"s\n" +
 	"\x1bDeleteUserpoolDomainRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"userpoolId\x12\x1c\n" +
-	"\x06domain\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06domain\"W\n" +
+	"userpoolId\x12%\n" +
+	"\x06domain\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\"W\n" +
 	"\x1cDeleteUserpoolDomainMetadata\x12\x1f\n" +
 	"\vuserpool_id\x18\x01 \x01(\tR\n" +
 	"userpoolId\x12\x16\n" +

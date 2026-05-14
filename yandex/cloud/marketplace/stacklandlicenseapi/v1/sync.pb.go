@@ -39,6 +39,8 @@ const (
 	ProductType_PRODUCT_TYPE_SPEECHSENSE ProductType = 4
 	// Robotics AI product.
 	ProductType_PRODUCT_TYPE_ROBOTICS_AI ProductType = 5
+	// S3 product.
+	ProductType_PRODUCT_TYPE_S3 ProductType = 6
 )
 
 // Enum value maps for ProductType.
@@ -50,6 +52,7 @@ var (
 		3: "PRODUCT_TYPE_AI_STUDIO",
 		4: "PRODUCT_TYPE_SPEECHSENSE",
 		5: "PRODUCT_TYPE_ROBOTICS_AI",
+		6: "PRODUCT_TYPE_S3",
 	}
 	ProductType_value = map[string]int32{
 		"PRODUCT_TYPE_UNSPECIFIED": 0,
@@ -58,6 +61,7 @@ var (
 		"PRODUCT_TYPE_AI_STUDIO":   3,
 		"PRODUCT_TYPE_SPEECHSENSE": 4,
 		"PRODUCT_TYPE_ROBOTICS_AI": 5,
+		"PRODUCT_TYPE_S3":          6,
 	}
 )
 
@@ -707,14 +711,15 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\x11SyncUsageMetadata\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12,\n" +
 	"\x12billing_account_id\x18\x02 \x01(\tR\x10billingAccountId\x12*\n" +
-	"\x11license_server_id\x18\x03 \x01(\tR\x0flicenseServerId*\xba\x01\n" +
+	"\x11license_server_id\x18\x03 \x01(\tR\x0flicenseServerId*\xcf\x01\n" +
 	"\vProductType\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PRODUCT_TYPE_STACKLAND\x10\x01\x12\x19\n" +
 	"\x15PRODUCT_TYPE_DATALENS\x10\x02\x12\x1a\n" +
 	"\x16PRODUCT_TYPE_AI_STUDIO\x10\x03\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_SPEECHSENSE\x10\x04\x12\x1c\n" +
-	"\x18PRODUCT_TYPE_ROBOTICS_AI\x10\x05*I\n" +
+	"\x18PRODUCT_TYPE_ROBOTICS_AI\x10\x05\x12\x13\n" +
+	"\x0fPRODUCT_TYPE_S3\x10\x06*I\n" +
 	"\n" +
 	"SyncStatus\x12\x1b\n" +
 	"\x17SYNC_STATUS_UNSPECIFIED\x10\x00\x12\x06\n" +

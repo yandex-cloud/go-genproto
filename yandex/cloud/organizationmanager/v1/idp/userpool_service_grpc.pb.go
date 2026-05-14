@@ -44,7 +44,6 @@ const (
 // A set of methods for managing userpools.
 type UserpoolServiceClient interface {
 	// Returns the specified userpool.
-	//
 	// To get the list of available userpools, make a [List] request.
 	Get(ctx context.Context, in *GetUserpoolRequest, opts ...grpc.CallOption) (*Userpool, error)
 	// Retrieves the list of userpools in the specified organization.
@@ -230,7 +229,6 @@ func (c *userpoolServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 // A set of methods for managing userpools.
 type UserpoolServiceServer interface {
 	// Returns the specified userpool.
-	//
 	// To get the list of available userpools, make a [List] request.
 	Get(context.Context, *GetUserpoolRequest) (*Userpool, error)
 	// Retrieves the list of userpools in the specified organization.

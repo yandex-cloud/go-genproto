@@ -199,8 +199,10 @@ type Mount_Mode int32
 
 const (
 	Mount_MODE_UNSPECIFIED Mount_Mode = 0
-	Mount_READ_ONLY        Mount_Mode = 1
-	Mount_READ_WRITE       Mount_Mode = 2
+	// Mount is available for read access only.
+	Mount_READ_ONLY Mount_Mode = 1
+	// Mount is available for both read and write access.
+	Mount_READ_WRITE Mount_Mode = 2
 )
 
 // Enum value maps for Mount_Mode.
@@ -720,7 +722,10 @@ type Connectivity struct {
 	// It's essential to specify network with subnets in all availability zones.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Complete list of subnets (from the same network) the version can be attached to.
-	// It's essential to specify at least one subnet for each availability zones.
+	//
+	// Deprecated, it is sufficient to specify only network_id, without the list of subnet_ids.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/serverless/functions/v1/function.proto.
 	SubnetId      []string `protobuf:"bytes,2,rep,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -763,6 +768,7 @@ func (x *Connectivity) GetNetworkId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/serverless/functions/v1/function.proto.
 func (x *Connectivity) GetSubnetId() []string {
 	if x != nil {
 		return x.SubnetId
@@ -1741,12 +1747,11 @@ const file_yandex_cloud_serverless_functions_v1_function_proto_rawDesc = "" +
 	"bucketName\x12%\n" +
 	"\vobject_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"objectName\x12\x16\n" +
-	"\x06sha256\x18\x03 \x01(\tR\x06sha256\"V\n" +
+	"\x06sha256\x18\x03 \x01(\tR\x06sha256\"X\n" +
 	"\fConnectivity\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\x12'\n" +
-	"\tsubnet_id\x18\x02 \x03(\tB\n" +
-	"\x8a\xc81\x02>0\x90\xc81\x01R\bsubnetId\"\xe2\x02\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12)\n" +
+	"\tsubnet_id\x18\x02 \x03(\tB\f\x8a\xc81\x02>0\x90\xc81\x01\x18\x01R\bsubnetId\"\xe2\x02\n" +
 	"\rScalingPolicy\x12\x1f\n" +
 	"\vfunction_id\x18\x01 \x01(\tR\n" +
 	"functionId\x12\x10\n" +

@@ -37,3 +37,31 @@ func (m *ListConfigurationsResponse) SetConfigurations(v []*Configuration) {
 func (m *ListConfigurationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *ListConfigurationNetworkInterfaceRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListConfigurationNetworkInterfaceRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListConfigurationNetworkInterfaceRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListConfigurationNetworkInterfaceRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListConfigurationNetworkInterfaceRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListConfigurationNetworkInterfaceResponse) SetConfigurationNetworkInterfaces(v []*ConfigurationNetworkInterface) {
+	m.ConfigurationNetworkInterfaces = v
+}
+
+func (m *ListConfigurationNetworkInterfaceResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

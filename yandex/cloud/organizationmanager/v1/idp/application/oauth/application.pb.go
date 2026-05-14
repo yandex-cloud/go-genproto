@@ -393,10 +393,10 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa0\x01\n" +
 	"\x13GroupClaimsSettings\x12\x88\x01\n" +
-	"\x17group_distribution_type\x18\x01 \x01(\x0e2P.yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionTypeR\x15groupDistributionType\"z\n" +
+	"\x17group_distribution_type\x18\x01 \x01(\x0e2P.yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionTypeR\x15groupDistributionType\"\x8a\x01\n" +
 	"\vClientGrant\x12)\n" +
-	"\tclient_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bclientId\x12@\n" +
-	"\x11authorized_scopes\x18\x02 \x03(\tB\x13\x82\xc81\x061-1000\x8a\xc81\x05<=255R\x10authorizedScopes*W\n" +
+	"\tclient_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bclientId\x12P\n" +
+	"\x11authorized_scopes\x18\x02 \x03(\tB#\xf2\xc71\f[!#-\\[\\]-~]+\x82\xc81\x061-1000\x8a\xc81\x05<=255R\x10authorizedScopes*W\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +

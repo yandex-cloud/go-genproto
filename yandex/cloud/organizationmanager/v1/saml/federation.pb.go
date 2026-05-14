@@ -320,7 +320,6 @@ type Federation struct {
 	// Add new users automatically on successful authentication.
 	// The user becomes member of the organization automatically,
 	// but you need to grant other roles to them.
-	//
 	// If the value is `false`, users who aren't added to the organization
 	// can't log in, even if they have authenticated on your server.
 	AutoCreateAccountOnLogin bool `protobuf:"varint,7,opt,name=auto_create_account_on_login,json=autoCreateAccountOnLogin,proto3" json:"auto_create_account_on_login,omitempty"`
@@ -328,7 +327,6 @@ type Federation struct {
 	// The IdP server also responds to IAM with this ID after the user authenticates.
 	Issuer string `protobuf:"bytes,8,opt,name=issuer,proto3" json:"issuer,omitempty"`
 	// Single sign-on endpoint binding type. Most Identity Providers support the `POST` binding type.
-	//
 	// SAML Binding is a mapping of a SAML protocol message onto standard messaging
 	// formats and/or communications protocols.
 	SsoBinding BindingType `protobuf:"varint,9,opt,name=sso_binding,json=ssoBinding,proto3,enum=yandex.cloud.organizationmanager.v1.saml.BindingType" json:"sso_binding,omitempty"`

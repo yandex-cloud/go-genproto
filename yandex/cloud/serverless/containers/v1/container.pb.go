@@ -195,8 +195,10 @@ type Mount_Mode int32
 
 const (
 	Mount_MODE_UNSPECIFIED Mount_Mode = 0
-	Mount_READ_ONLY        Mount_Mode = 1
-	Mount_READ_WRITE       Mount_Mode = 2
+	// Mount is available for read access only.
+	Mount_READ_ONLY Mount_Mode = 1
+	// Mount is available for both read and write access.
+	Mount_READ_WRITE Mount_Mode = 2
 )
 
 // Enum value maps for Mount_Mode.
@@ -968,9 +970,11 @@ type Connectivity struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Network the revision will have access to.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// The list of subnets (from the same network) the revision can be attached to.
+	// Complete list of subnets (from the same network) the revision can be attached to.
 	//
 	// Deprecated, it is sufficient to specify only network_id, without the list of subnet_ids.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
 	SubnetIds     []string `protobuf:"bytes,2,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1013,6 +1017,7 @@ func (x *Connectivity) GetNetworkId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
 func (x *Connectivity) GetSubnetIds() []string {
 	if x != nil {
 		return x.SubnetIds
@@ -1808,13 +1813,12 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"version_id\x18\x02 \x01(\tR\tversionId\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x123\n" +
 	"\x14environment_variable\x18\x04 \x01(\tH\x00R\x13environmentVariableB\v\n" +
-	"\treference\"X\n" +
+	"\treference\"Z\n" +
 	"\fConnectivity\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\x12)\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12+\n" +
 	"\n" +
-	"subnet_ids\x18\x02 \x03(\tB\n" +
-	"\x8a\xc81\x02>0\x90\xc81\x01R\tsubnetIds\"\x8a\x02\n" +
+	"subnet_ids\x18\x02 \x03(\tB\f\x8a\xc81\x02>0\x90\xc81\x01\x18\x01R\tsubnetIds\"\x8a\x02\n" +
 	"\n" +
 	"LogOptions\x12\x1a\n" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12G\n" +

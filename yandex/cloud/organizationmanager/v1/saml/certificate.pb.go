@@ -118,7 +118,7 @@ var File_yandex_cloud_organizationmanager_v1_saml_certificate_proto protoreflect
 
 const file_yandex_cloud_organizationmanager_v1_saml_certificate_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/organizationmanager/v1/saml/certificate.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x02\n" +
+	":yandex/cloud/organizationmanager/v1/saml/certificate.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xa2\x02\n" +
 	"\vCertificate\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x121\n" +
 	"\rfederation_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x125\n" +

@@ -10,6 +10,18 @@ func (m *Partner) SetRegionId(v string) {
 	m.RegionId = v
 }
 
+func (m *Partner) SetName(v string) {
+	m.Name = v
+}
+
+func (m *Partner) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *Partner) SetPopIds(v []string) {
+	m.PopIds = v
+}
+
 func (m *Partner) SetStatus(v Partner_Status) {
 	m.Status = v
 }

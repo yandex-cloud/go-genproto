@@ -153,9 +153,13 @@ type Registry_Type int32
 const (
 	Registry_TYPE_UNSPECIFIED Registry_Type = 0
 	// Registry type is local.
-	Registry_LOCAL   Registry_Type = 1
-	Registry_REMOTE  Registry_Type = 2
+	Registry_LOCAL Registry_Type = 1
+	// Registry type is remote.
+	Registry_REMOTE Registry_Type = 2
+	// Registry type is virtual.
 	Registry_VIRTUAL Registry_Type = 3
+	// Registry type is transitional.
+	Registry_TRANSITIONAL Registry_Type = 4
 )
 
 // Enum value maps for Registry_Type.
@@ -165,12 +169,14 @@ var (
 		1: "LOCAL",
 		2: "REMOTE",
 		3: "VIRTUAL",
+		4: "TRANSITIONAL",
 	}
 	Registry_Type_value = map[string]int32{
 		"TYPE_UNSPECIFIED": 0,
 		"LOCAL":            1,
 		"REMOTE":           2,
 		"VIRTUAL":          3,
+		"TRANSITIONAL":     4,
 	}
 )
 
@@ -341,7 +347,7 @@ var File_yandex_cloud_cloudregistry_v1_registry_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc8\a\n" +
+	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xda\a\n" +
 	"\bRegistry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
@@ -382,13 +388,14 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\x05NUGET\x10\x04\x12\b\n" +
 	"\x04PYPI\x10\x06\x12\n" +
 	"\n" +
-	"\x06BINARY\x10\a\"@\n" +
+	"\x06BINARY\x10\a\"R\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05LOCAL\x10\x01\x12\n" +
 	"\n" +
 	"\x06REMOTE\x10\x02\x12\v\n" +
-	"\aVIRTUAL\x10\x03Bt\n" +
+	"\aVIRTUAL\x10\x03\x12\x10\n" +
+	"\fTRANSITIONAL\x10\x04Bt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (

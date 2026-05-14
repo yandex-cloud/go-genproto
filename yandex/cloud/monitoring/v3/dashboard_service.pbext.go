@@ -103,6 +103,10 @@ func (m *CreateDashboardRequest) SetLinks(v []*LinkItem) {
 	m.Links = v
 }
 
+func (m *CreateDashboardRequest) SetPresetItems(v []*PresetItem) {
+	m.PresetItems = v
+}
+
 func (m *CreateDashboardMetadata) SetDashboardId(v string) {
 	m.DashboardId = v
 }
@@ -153,6 +157,10 @@ func (m *UpdateDashboardRequest) SetTimeline(v *Timeline) {
 
 func (m *UpdateDashboardRequest) SetLinks(v []*LinkItem) {
 	m.Links = v
+}
+
+func (m *UpdateDashboardRequest) SetPresetItems(v []*PresetItem) {
+	m.PresetItems = v
 }
 
 func (m *UpdateDashboardMetadata) SetDashboardId(v string) {

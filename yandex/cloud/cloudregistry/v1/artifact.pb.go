@@ -87,6 +87,8 @@ const (
 	Artifact_ACTIVE Artifact_Status = 2
 	// Artifact status is being deleted.
 	Artifact_DELETING Artifact_Status = 3
+	// Artifact status is deleted.
+	Artifact_DELETED Artifact_Status = 4
 )
 
 // Enum value maps for Artifact_Status.
@@ -96,12 +98,14 @@ var (
 		1: "CREATING",
 		2: "ACTIVE",
 		3: "DELETING",
+		4: "DELETED",
 	}
 	Artifact_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
 		"CREATING":           1,
 		"ACTIVE":             2,
 		"DELETING":           3,
+		"DELETED":            4,
 	}
 )
 
@@ -340,7 +344,7 @@ var File_yandex_cloud_cloudregistry_v1_artifact_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/docker_content.proto\"\xed\x05\n" +
+	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/docker_content.proto\"\xfa\x05\n" +
 	"\bArtifact\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12\x12\n" +
@@ -368,13 +372,14 @@ const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\n" +
 	"\x06FOLDER\x10\x01\x12\v\n" +
 	"\aPACKAGE\x10\x02\x12\f\n" +
-	"\bARTIFACT\x10\x03\"H\n" +
+	"\bARTIFACT\x10\x03\"U\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03\"Y\n" +
+	"\bDELETING\x10\x03\x12\v\n" +
+	"\aDELETED\x10\x04\"Y\n" +
 	"\aContent\x12F\n" +
 	"\x06docker\x18\x01 \x01(\v2,.yandex.cloud.cloudregistry.v1.DockerContentH\x00R\x06dockerB\x06\n" +
 	"\x04specBt\n" +

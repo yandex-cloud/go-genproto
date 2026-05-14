@@ -680,9 +680,9 @@ var File_yandex_cloud_organizationmanager_v1_saml_certificate_service_proto prot
 
 const file_yandex_cloud_organizationmanager_v1_saml_certificate_service_proto_rawDesc = "" +
 	"\n" +
-	"Byandex/cloud/organizationmanager/v1/saml/certificate_service.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a:yandex/cloud/organizationmanager/v1/saml/certificate.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
-	"\x15GetCertificateRequest\x12/\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\rcertificateId\"\xc4\x01\n" +
+	"Byandex/cloud/organizationmanager/v1/saml/certificate_service.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a:yandex/cloud/organizationmanager/v1/saml/certificate.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
+	"\x15GetCertificateRequest\x123\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\"\xc4\x01\n" +
 	"\x17ListCertificatesRequest\x121\n" +
 	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -694,16 +694,16 @@ const file_yandex_cloud_organizationmanager_v1_saml_certificate_service_proto_ra
 	"\x8a\xc81\x06<=1000R\x06filter\"\x9d\x01\n" +
 	"\x18ListCertificatesResponse\x12Y\n" +
 	"\fcertificates\x18\x01 \x03(\v25.yandex.cloud.organizationmanager.v1.saml.CertificateR\fcertificates\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd0\x01\n" +
-	"\x18CreateCertificateRequest\x12-\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\ffederationId\x127\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd8\x01\n" +
+	"\x18CreateCertificateRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x127\n" +
 	"\x04name\x18\x02 \x01(\tB#\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1f\n" +
-	"\x04data\x18\x04 \x01(\tB\v\x8a\xc81\a<=32000R\x04data\"B\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12#\n" +
+	"\x04data\x18\x04 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=32000R\x04data\"B\n" +
 	"\x19CreateCertificateMetadata\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\x90\x02\n" +
-	"\x18UpdateCertificateRequest\x12/\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\rcertificateId\x12;\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\x94\x02\n" +
+	"\x18UpdateCertificateRequest\x123\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -714,9 +714,9 @@ const file_yandex_cloud_organizationmanager_v1_saml_certificate_service_proto_ra
 	"\x18DeleteCertificateRequest\x12/\n" +
 	"\x0ecertificate_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\rcertificateId\"B\n" +
 	"\x19DeleteCertificateMetadata\x12%\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\xa7\x01\n" +
-	" ListCertificateOperationsRequest\x12/\n" +
-	"\x0ecertificate_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\rcertificateId\x12'\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tR\rcertificateId\"\xab\x01\n" +
+	" ListCertificateOperationsRequest\x123\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rcertificateId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +

@@ -45,7 +45,6 @@ const (
 // A set of methods for managing federations.
 type FederationServiceClient interface {
 	// Returns the specified federation.
-	//
 	// To get the list of available federations, make a [List] request.
 	Get(ctx context.Context, in *GetFederationRequest, opts ...grpc.CallOption) (*Federation, error)
 	// Retrieves the list of federations in the specified organization.
@@ -65,7 +64,6 @@ type FederationServiceClient interface {
 	// Lists operations for the specified federation.
 	ListOperations(ctx context.Context, in *ListFederationOperationsRequest, opts ...grpc.CallOption) (*ListFederationOperationsResponse, error)
 	// Returns the specified domain in the federation.
-	//
 	// To get the list of available domains, make a [ListDomains] request.
 	GetDomain(ctx context.Context, in *GetFederationDomainRequest, opts ...grpc.CallOption) (*Domain, error)
 	// Retrieves the list of domains in the specified federation.
@@ -259,7 +257,6 @@ func (c *federationServiceClient) ReactivateUserAccounts(ctx context.Context, in
 // A set of methods for managing federations.
 type FederationServiceServer interface {
 	// Returns the specified federation.
-	//
 	// To get the list of available federations, make a [List] request.
 	Get(context.Context, *GetFederationRequest) (*Federation, error)
 	// Retrieves the list of federations in the specified organization.
@@ -279,7 +276,6 @@ type FederationServiceServer interface {
 	// Lists operations for the specified federation.
 	ListOperations(context.Context, *ListFederationOperationsRequest) (*ListFederationOperationsResponse, error)
 	// Returns the specified domain in the federation.
-	//
 	// To get the list of available domains, make a [ListDomains] request.
 	GetDomain(context.Context, *GetFederationDomainRequest) (*Domain, error)
 	// Retrieves the list of domains in the specified federation.

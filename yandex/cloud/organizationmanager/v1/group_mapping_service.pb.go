@@ -814,9 +814,9 @@ const file_yandex_cloud_organizationmanager_v1_group_mapping_service_proto_rawDe
 	"\n" +
 	"\x06REMOVE\x10\x02\"F\n" +
 	"\x1fUpdateGroupMappingItemsMetadata\x12#\n" +
-	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\x98\x01\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\x9e\x01\n" +
 	"\x1fUpdateGroupMappingItemsResponse\x12u\n" +
-	"\x19group_mapping_item_deltas\x18\x04 \x03(\v2:.yandex.cloud.organizationmanager.v1.GroupMappingItemDeltaR\x16groupMappingItemDeltas\"\xc9\x01\n" +
+	"\x19group_mapping_item_deltas\x18\x04 \x03(\v2:.yandex.cloud.organizationmanager.v1.GroupMappingItemDeltaR\x16groupMappingItemDeltasJ\x04\b\x01\x10\x04\"\xc9\x01\n" +
 	"\x1cListGroupMappingItemsRequest\x121\n" +
 	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +

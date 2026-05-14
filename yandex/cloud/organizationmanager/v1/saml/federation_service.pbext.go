@@ -13,10 +13,6 @@ func (m *GetFederationRequest) SetFederationId(v string) {
 	m.FederationId = v
 }
 
-func (m *ListFederationsRequest) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
 func (m *ListFederationsRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
@@ -27,6 +23,10 @@ func (m *ListFederationsRequest) SetPageToken(v string) {
 
 func (m *ListFederationsRequest) SetFilter(v string) {
 	m.Filter = v
+}
+
+func (m *ListFederationsRequest) SetOrganizationId(v string) {
+	m.OrganizationId = v
 }
 
 func (m *ListFederationsResponse) SetFederations(v []*Federation) {

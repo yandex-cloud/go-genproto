@@ -1332,7 +1332,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_s
 
 const file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_service_proto_rawDesc = "" +
 	"\n" +
-	"Syandex/cloud/organizationmanager/v1/idp/application/oauth/application_service.proto\x129yandex.cloud.organizationmanager.v1.idp.application.oauth\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1aKyandex/cloud/organizationmanager/v1/idp/application/oauth/application.proto\x1a\x1dyandex/cloud/validation.proto\x1a google/protobuf/field_mask.proto\"L\n" +
+	"Syandex/cloud/organizationmanager/v1/idp/application/oauth/application_service.proto\x129yandex.cloud.organizationmanager.v1.idp.application.oauth\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aKyandex/cloud/organizationmanager/v1/idp/application/oauth/application.proto\x1a\x1dyandex/cloud/validation.proto\"L\n" +
 	"\x15GetApplicationRequest\x123\n" +
 	"\x0eapplication_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rapplicationId\"\xc8\x01\n" +
 	"\x17ListApplicationsRequest\x125\n" +

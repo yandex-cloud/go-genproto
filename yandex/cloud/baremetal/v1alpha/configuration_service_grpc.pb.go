@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ConfigurationService_Get_FullMethodName  = "/yandex.cloud.baremetal.v1alpha.ConfigurationService/Get"
-	ConfigurationService_List_FullMethodName = "/yandex.cloud.baremetal.v1alpha.ConfigurationService/List"
+	ConfigurationService_Get_FullMethodName                               = "/yandex.cloud.baremetal.v1alpha.ConfigurationService/Get"
+	ConfigurationService_List_FullMethodName                              = "/yandex.cloud.baremetal.v1alpha.ConfigurationService/List"
+	ConfigurationService_ListConfigurationNetworkInterface_FullMethodName = "/yandex.cloud.baremetal.v1alpha.ConfigurationService/ListConfigurationNetworkInterface"
 )
 
 // ConfigurationServiceClient is the client API for ConfigurationService service.
@@ -34,6 +35,10 @@ type ConfigurationServiceClient interface {
 	Get(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error)
 	// Retrieves the list of Configuration resources.
 	List(ctx context.Context, in *ListConfigurationsRequest, opts ...grpc.CallOption) (*ListConfigurationsResponse, error)
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// ConfigurationNetworkInterface is not a resource. --)
+	// Retrieves the list of ConfigurationNetworkInterface resources.
+	ListConfigurationNetworkInterface(ctx context.Context, in *ListConfigurationNetworkInterfaceRequest, opts ...grpc.CallOption) (*ListConfigurationNetworkInterfaceResponse, error)
 }
 
 type configurationServiceClient struct {
@@ -64,6 +69,16 @@ func (c *configurationServiceClient) List(ctx context.Context, in *ListConfigura
 	return out, nil
 }
 
+func (c *configurationServiceClient) ListConfigurationNetworkInterface(ctx context.Context, in *ListConfigurationNetworkInterfaceRequest, opts ...grpc.CallOption) (*ListConfigurationNetworkInterfaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListConfigurationNetworkInterfaceResponse)
+	err := c.cc.Invoke(ctx, ConfigurationService_ListConfigurationNetworkInterface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConfigurationServiceServer is the server API for ConfigurationService service.
 // All implementations should embed UnimplementedConfigurationServiceServer
 // for forward compatibility.
@@ -75,6 +90,10 @@ type ConfigurationServiceServer interface {
 	Get(context.Context, *GetConfigurationRequest) (*Configuration, error)
 	// Retrieves the list of Configuration resources.
 	List(context.Context, *ListConfigurationsRequest) (*ListConfigurationsResponse, error)
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// ConfigurationNetworkInterface is not a resource. --)
+	// Retrieves the list of ConfigurationNetworkInterface resources.
+	ListConfigurationNetworkInterface(context.Context, *ListConfigurationNetworkInterfaceRequest) (*ListConfigurationNetworkInterfaceResponse, error)
 }
 
 // UnimplementedConfigurationServiceServer should be embedded to have
@@ -89,6 +108,9 @@ func (UnimplementedConfigurationServiceServer) Get(context.Context, *GetConfigur
 }
 func (UnimplementedConfigurationServiceServer) List(context.Context, *ListConfigurationsRequest) (*ListConfigurationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedConfigurationServiceServer) ListConfigurationNetworkInterface(context.Context, *ListConfigurationNetworkInterfaceRequest) (*ListConfigurationNetworkInterfaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListConfigurationNetworkInterface not implemented")
 }
 func (UnimplementedConfigurationServiceServer) testEmbeddedByValue() {}
 
@@ -146,6 +168,24 @@ func _ConfigurationService_List_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConfigurationService_ListConfigurationNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListConfigurationNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigurationServiceServer).ListConfigurationNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigurationService_ListConfigurationNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigurationServiceServer).ListConfigurationNetworkInterface(ctx, req.(*ListConfigurationNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConfigurationService_ServiceDesc is the grpc.ServiceDesc for ConfigurationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -160,6 +200,10 @@ var ConfigurationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _ConfigurationService_List_Handler,
+		},
+		{
+			MethodName: "ListConfigurationNetworkInterface",
+			Handler:    _ConfigurationService_ListConfigurationNetworkInterface_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

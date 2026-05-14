@@ -76,9 +76,6 @@ func (x *GetFederationRequest) GetFederationId() string {
 
 type ListFederationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the organization to list federations in.
-	// To get the organization ID, make a [yandex.cloud.organizationmanager.v1.OrganizationService.List] request.
-	OrganizationId string `protobuf:"bytes,6,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListFederationsResponse.next_page_token]
@@ -94,9 +91,12 @@ type ListFederationsRequest struct {
 	// 1. The field name. Currently you can use filtering only on the [Federation.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Filter string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
+	// ID of the organization to list federations in.
+	// To get the organization ID, make a [yandex.cloud.organizationmanager.v1.OrganizationService.List] request.
+	OrganizationId string `protobuf:"bytes,6,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *ListFederationsRequest) Reset() {
@@ -129,13 +129,6 @@ func (*ListFederationsRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListFederationsRequest) GetOrganizationId() string {
-	if x != nil {
-		return x.OrganizationId
-	}
-	return ""
-}
-
 func (x *ListFederationsRequest) GetPageSize() int64 {
 	if x != nil {
 		return x.PageSize
@@ -153,6 +146,13 @@ func (x *ListFederationsRequest) GetPageToken() string {
 func (x *ListFederationsRequest) GetFilter() string {
 	if x != nil {
 		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListFederationsRequest) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
 	}
 	return ""
 }
@@ -234,7 +234,6 @@ type CreateFederationRequest struct {
 	// Add new users automatically on successful authentication.
 	// The user becomes member of the organization automatically,
 	// but you need to grant other roles to them.
-	//
 	// If the value is `false`, users who aren't added to the organization
 	// can't log in, even if they have authenticated on your server.
 	AutoCreateAccountOnLogin bool `protobuf:"varint,5,opt,name=auto_create_account_on_login,json=autoCreateAccountOnLogin,proto3" json:"auto_create_account_on_login,omitempty"`
@@ -242,7 +241,6 @@ type CreateFederationRequest struct {
 	// The IdP server also responds to IAM with this ID after the user authenticates.
 	Issuer string `protobuf:"bytes,6,opt,name=issuer,proto3" json:"issuer,omitempty"`
 	// Single sign-on endpoint binding type. Most Identity Providers support the `POST` binding type.
-	//
 	// SAML Binding is a mapping of a SAML protocol message onto standard messaging
 	// formats and/or communications protocols.
 	SsoBinding BindingType `protobuf:"varint,7,opt,name=sso_binding,json=ssoBinding,proto3,enum=yandex.cloud.organizationmanager.v1.saml.BindingType" json:"sso_binding,omitempty"`
@@ -431,7 +429,6 @@ type UpdateFederationRequest struct {
 	// Add new users automatically on successful authentication.
 	// The user becomes member of the organization automatically,
 	// but you need to grant other roles to them.
-	//
 	// If the value is `false`, users who aren't added to the organization
 	// can't log in, even if they have authenticated on your server.
 	AutoCreateAccountOnLogin bool `protobuf:"varint,6,opt,name=auto_create_account_on_login,json=autoCreateAccountOnLogin,proto3" json:"auto_create_account_on_login,omitempty"`
@@ -439,7 +436,6 @@ type UpdateFederationRequest struct {
 	// The IdP server also responds to IAM with this ID after the user authenticates.
 	Issuer string `protobuf:"bytes,7,opt,name=issuer,proto3" json:"issuer,omitempty"`
 	// Single sign-on endpoint binding type. Most Identity Providers support the `POST` binding type.
-	//
 	// SAML Binding is a mapping of a SAML protocol message onto standard messaging
 	// formats and/or communications protocols.
 	SsoBinding BindingType `protobuf:"varint,8,opt,name=sso_binding,json=ssoBinding,proto3,enum=yandex.cloud.organizationmanager.v1.saml.BindingType" json:"sso_binding,omitempty"`
@@ -1019,10 +1015,10 @@ type ListFederatedUserAccountsRequest struct {
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
-	//  1. The field name. Currently you can use filtering only on the [name_id] field.
-	//  2. An `=` operator.
-	//  3. The value in double quotes (`"`). Must be 1-1000 characters long and match the regular expression
-	//     `[a-z0-9A-Z/@_.\-=+*\\]+`.
+	// 1. The field name. Currently you can use filtering only on the [name_id] field.
+	// 2. An `=` operator.
+	// 3. The value in double quotes (`"`). Must be 1-1000 characters long and match the regular expression
+	// `[a-z0-9A-Z/@_.\-=+*\\]+`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1344,11 +1340,9 @@ type ListFederationDomainsRequest struct {
 	// - `IN` for multiple values: `status IN ('NEED_TO_VALIDATE', 'VALID')`
 	// - `contains` for domain substring search: `domain contains '3'`
 	// - `AND` for combining conditions: `status = 'INVALID' AND domain contains '3'`
-	//
 	// Available fields for filtering:
 	// - `domain` - domain name
 	// - `status` - domain validation status
-	//
 	// Must be 1-1000 characters long.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2128,29 +2122,29 @@ var File_yandex_cloud_organizationmanager_v1_saml_federation_service_proto proto
 
 const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_rawDesc = "" +
 	"\n" +
-	"Ayandex/cloud/organizationmanager/v1/saml/federation_service.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a9yandex/cloud/organizationmanager/v1/saml/federation.proto\x1a6yandex/cloud/organizationmanager/v1/user_account.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
-	"\x14GetFederationRequest\x12-\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\ffederationId\"\xc7\x01\n" +
-	"\x16ListFederationsRequest\x125\n" +
-	"\x0forganization_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12'\n" +
+	"Ayandex/cloud/organizationmanager/v1/saml/federation_service.proto\x12(yandex.cloud.organizationmanager.v1.saml\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a9yandex/cloud/organizationmanager/v1/saml/federation.proto\x1a6yandex/cloud/organizationmanager/v1/user_account.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
+	"\x14GetFederationRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\"\xcd\x01\n" +
+	"\x16ListFederationsRequest\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x99\x01\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x125\n" +
+	"\x0forganization_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationIdJ\x04\b\x01\x10\x03\"\x99\x01\n" +
 	"\x17ListFederationsResponse\x12V\n" +
 	"\vfederations\x18\x01 \x03(\v24.yandex.cloud.organizationmanager.v1.saml.FederationR\vfederations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf7\x06\n" +
-	"\x17CreateFederationRequest\x121\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x0eorganizationId\x127\n" +
-	"\x04name\x18\x02 \x01(\tB#\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x85\a\n" +
+	"\x17CreateFederationRequest\x125\n" +
+	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12;\n" +
+	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12L\n" +
 	"\x0ecookie_max_age\x18\x04 \x01(\v2\x19.google.protobuf.DurationB\v\xfa\xc71\a10m-12hR\fcookieMaxAge\x12>\n" +
 	"\x1cauto_create_account_on_login\x18\x05 \x01(\bR\x18autoCreateAccountOnLogin\x12&\n" +
-	"\x06issuer\x18\x06 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06issuer\x12V\n" +
-	"\vsso_binding\x18\a \x01(\x0e25.yandex.cloud.organizationmanager.v1.saml.BindingTypeR\n" +
+	"\x06issuer\x18\x06 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06issuer\x12\\\n" +
+	"\vsso_binding\x18\a \x01(\x0e25.yandex.cloud.organizationmanager.v1.saml.BindingTypeB\x04\xe8\xc71\x01R\n" +
 	"ssoBinding\x12'\n" +
 	"\asso_url\x18\b \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06ssoUrl\x12q\n" +
 	"\x11security_settings\x18\t \x01(\v2D.yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettingsR\x10securitySettings\x129\n" +
@@ -2161,19 +2155,21 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x18CreateFederationMetadata\x12#\n" +
-	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\xb7\a\n" +
-	"\x17UpdateFederationRequest\x12-\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\ffederationId\x12;\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\xb3\a\n" +
+	"\x17UpdateFederationRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12L\n" +
 	"\x0ecookie_max_age\x18\x05 \x01(\v2\x19.google.protobuf.DurationB\v\xfa\xc71\a10m-12hR\fcookieMaxAge\x12>\n" +
-	"\x1cauto_create_account_on_login\x18\x06 \x01(\bR\x18autoCreateAccountOnLogin\x12&\n" +
-	"\x06issuer\x18\a \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06issuer\x12V\n" +
+	"\x1cauto_create_account_on_login\x18\x06 \x01(\bR\x18autoCreateAccountOnLogin\x12\"\n" +
+	"\x06issuer\x18\a \x01(\tB\n" +
+	"\x8a\xc81\x06<=8000R\x06issuer\x12V\n" +
 	"\vsso_binding\x18\b \x01(\x0e25.yandex.cloud.organizationmanager.v1.saml.BindingTypeR\n" +
-	"ssoBinding\x12'\n" +
-	"\asso_url\x18\t \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06ssoUrl\x12q\n" +
+	"ssoBinding\x12#\n" +
+	"\asso_url\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=8000R\x06ssoUrl\x12q\n" +
 	"\x11security_settings\x18\n" +
 	" \x01(\v2D.yandex.cloud.organizationmanager.v1.saml.FederationSecuritySettingsR\x10securitySettings\x129\n" +
 	"\x19case_insensitive_name_ids\x18\f \x01(\bR\x16caseInsensitiveNameIds\x12\xa2\x01\n" +
@@ -2182,15 +2178,14 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\v\x10\f\"?\n" +
 	"\x18UpdateFederationMetadata\x12#\n" +
-	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"H\n" +
-	"\x17DeleteFederationRequest\x12-\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\ffederationId\"?\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"L\n" +
+	"\x17DeleteFederationRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\"?\n" +
 	"\x18DeleteFederationMetadata\x12#\n" +
-	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"w\n" +
-	"\x1fAddFederatedUserAccountsRequest\x12-\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\ffederationId\x12%\n" +
-	"\bname_ids\x18\x02 \x03(\tB\n" +
-	"\x8a\xc81\x06<=1000R\anameIds\"G\n" +
+	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\x85\x01\n" +
+	"\x1fAddFederatedUserAccountsRequest\x121\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12/\n" +
+	"\bname_ids\x18\x02 \x03(\tB\x14\x82\xc81\x061-1000\x8a\xc81\x061-1000R\anameIds\"G\n" +
 	" AddFederatedUserAccountsMetadata\x12#\n" +
 	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"y\n" +
 	" AddFederatedUserAccountsResponse\x12U\n" +
@@ -2203,16 +2198,15 @@ const file_yandex_cloud_organizationmanager_v1_saml_federation_service_proto_raw
 	"\rfederation_id\x18\x01 \x01(\tR\ffederationId\"\x84\x01\n" +
 	"#DeleteFederatedUserAccountsResponse\x12)\n" +
 	"\x10deleted_subjects\x18\x01 \x03(\tR\x0fdeletedSubjects\x122\n" +
-	"\x15non_existing_subjects\x18\x02 \x03(\tR\x13nonExistingSubjects\"\xcd\x01\n" +
+	"\x15non_existing_subjects\x18\x02 \x03(\tR\x13nonExistingSubjects\"\xcc\x01\n" +
 	" ListFederatedUserAccountsRequest\x121\n" +
 	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1010R\x06filter\"\xa2\x01\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\x12!\n" +
+	"\x06filter\x18\x04 \x01(\tB\t\x8a\xc81\x05<1000R\x06filter\"\xa2\x01\n" +
 	"!ListFederatedUserAccountsResponse\x12U\n" +
 	"\ruser_accounts\x18\x01 \x03(\v20.yandex.cloud.organizationmanager.v1.UserAccountR\fuserAccounts\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa4\x01\n" +

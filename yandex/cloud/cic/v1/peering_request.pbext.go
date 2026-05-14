@@ -18,10 +18,6 @@ func (m *PeeringRequest) SetPeerBgpAsn(v int64) {
 	m.PeerBgpAsn = v
 }
 
-func (m *PeeringRequest) SetCloudBgpAsn(v int64) {
-	m.CloudBgpAsn = v
-}
-
 func (m *PeeringRequest) SetPeerBgpMd5Key(v string) {
 	m.PeerBgpMd5Key = v
 }

@@ -277,7 +277,9 @@ type CreateDashboardRequest struct {
 	// Refresh and time window settings
 	Timeline *Timeline `protobuf:"bytes,28,opt,name=timeline,proto3" json:"timeline,omitempty"`
 	// Dashboard links
-	Links         []*LinkItem `protobuf:"bytes,29,rep,name=links,proto3" json:"links,omitempty"`
+	Links []*LinkItem `protobuf:"bytes,29,rep,name=links,proto3" json:"links,omitempty"`
+	// Parameters / Infra events / Logs overlays presets list
+	PresetItems   []*PresetItem `protobuf:"bytes,34,rep,name=preset_items,json=presetItems,proto3" json:"preset_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -398,6 +400,13 @@ func (x *CreateDashboardRequest) GetLinks() []*LinkItem {
 	return nil
 }
 
+func (x *CreateDashboardRequest) GetPresetItems() []*PresetItem {
+	if x != nil {
+		return x.PresetItems
+	}
+	return nil
+}
+
 type isCreateDashboardRequest_Container interface {
 	isCreateDashboardRequest_Container()
 }
@@ -482,7 +491,9 @@ type UpdateDashboardRequest struct {
 	// Refresh and time window settings
 	Timeline *Timeline `protobuf:"bytes,28,opt,name=timeline,proto3" json:"timeline,omitempty"`
 	// Dashboard links
-	Links         []*LinkItem `protobuf:"bytes,29,rep,name=links,proto3" json:"links,omitempty"`
+	Links []*LinkItem `protobuf:"bytes,29,rep,name=links,proto3" json:"links,omitempty"`
+	// Parameters / Infra events / Logs overlays presets list
+	PresetItems   []*PresetItem `protobuf:"bytes,32,rep,name=preset_items,json=presetItems,proto3" json:"preset_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -597,6 +608,13 @@ func (x *UpdateDashboardRequest) GetTimeline() *Timeline {
 func (x *UpdateDashboardRequest) GetLinks() []*LinkItem {
 	if x != nil {
 		return x.Links
+	}
+	return nil
+}
+
+func (x *UpdateDashboardRequest) GetPresetItems() []*PresetItem {
+	if x != nil {
+		return x.PresetItems
 	}
 	return nil
 }
@@ -869,13 +887,15 @@ func (x *ListDashboardOperationsResponse) GetNextPageToken() string {
 }
 
 type ListDashboardLabelNamesRequest struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	ProjectId string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project ID
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Contains substring of name(aka key). All label names containing this string will be returned
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
 	// Filters alerts by this selectors.
-	Selectors     string `protobuf:"bytes,3,opt,name=selectors,proto3" json:"selectors,omitempty"`
-	PageSize      int64  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Selectors string `protobuf:"bytes,3,opt,name=selectors,proto3" json:"selectors,omitempty"`
+	// Page size
+	PageSize      int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -939,9 +959,11 @@ func (x *ListDashboardLabelNamesRequest) GetPageSize() int64 {
 }
 
 type ListDashboardLabelNamesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	LabelNames    []string               `protobuf:"bytes,1,rep,name=label_names,json=labelNames,proto3" json:"label_names,omitempty"`
-	Truncated     bool                   `protobuf:"varint,2,opt,name=truncated,proto3" json:"truncated,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of label names
+	LabelNames []string `protobuf:"bytes,1,rep,name=label_names,json=labelNames,proto3" json:"label_names,omitempty"`
+	// Is truncated
+	Truncated     bool `protobuf:"varint,2,opt,name=truncated,proto3" json:"truncated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -991,15 +1013,17 @@ func (x *ListDashboardLabelNamesResponse) GetTruncated() bool {
 }
 
 type ListDashboardLabelValuesRequest struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	ProjectId string                 `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project ID
+	ProjectId string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Filters alerts by this selectors.
 	Selectors string `protobuf:"bytes,2,opt,name=selectors,proto3" json:"selectors,omitempty"`
 	// Contains full name (aka key), for which existing values are gathered.
 	LabelName string `protobuf:"bytes,3,opt,name=label_name,json=labelName,proto3" json:"label_name,omitempty"`
 	// Contains substring of value. All label values containing this string will be returned
-	Text          string `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
-	PageSize      int64  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Text string `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
+	// Page size
+	PageSize      int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1070,9 +1094,11 @@ func (x *ListDashboardLabelValuesRequest) GetPageSize() int64 {
 }
 
 type ListDashboardLabelValuesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	LabelValues   []string               `protobuf:"bytes,1,rep,name=label_values,json=labelValues,proto3" json:"label_values,omitempty"`
-	Truncated     bool                   `protobuf:"varint,2,opt,name=truncated,proto3" json:"truncated,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of label values
+	LabelValues []string `protobuf:"bytes,1,rep,name=label_values,json=labelValues,proto3" json:"label_values,omitempty"`
+	// Is truncated
+	Truncated     bool `protobuf:"varint,2,opt,name=truncated,proto3" json:"truncated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1125,7 +1151,7 @@ var File_yandex_cloud_monitoring_v3_dashboard_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
+	"2yandex/cloud/monitoring/v3/dashboard_service.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/monitoring/v3/dashboard.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a,yandex/cloud/monitoring/v3/preset_item.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"F\n" +
 	"\x13GetDashboardRequest\x12/\n" +
 	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\"\xa9\x02\n" +
 	"\x15ListDashboardsRequest\x12\x1d\n" +
@@ -1144,7 +1170,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\n" +
 	"dashboards\x18\x01 \x03(\v2%.yandex.cloud.monitoring.v3.DashboardR\n" +
 	"dashboards\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x06\n" +
 	"\x16CreateDashboardRequest\x12+\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50H\x00R\bfolderId\x12\x12\n" +
 	"\x04name\x18\x13 \x01(\tR\x04name\x12 \n" +
@@ -1157,13 +1183,14 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"managed_by\x18\x1a \x01(\tR\tmanagedBy\x12!\n" +
 	"\fmanaged_link\x18\x1b \x01(\tR\vmanagedLink\x12@\n" +
 	"\btimeline\x18\x1c \x01(\v2$.yandex.cloud.monitoring.v3.TimelineR\btimeline\x12:\n" +
-	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x1a9\n" +
+	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x12I\n" +
+	"\fpreset_items\x18\" \x03(\v2&.yandex.cloud.monitoring.v3.PresetItemR\vpresetItems\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\tcontainerJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x13J\x04\b\x19\x10\x1aJ\x04\b\x1e\x10\"\"<\n" +
 	"\x17CreateDashboardMetadata\x12!\n" +
-	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\xca\x05\n" +
+	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\x9b\x06\n" +
 	"\x16UpdateDashboardRequest\x12/\n" +
 	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1177,10 +1204,11 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"managed_by\x18\x1a \x01(\tR\tmanagedBy\x12!\n" +
 	"\fmanaged_link\x18\x1b \x01(\tR\vmanagedLink\x12@\n" +
 	"\btimeline\x18\x1c \x01(\v2$.yandex.cloud.monitoring.v3.TimelineR\btimeline\x12:\n" +
-	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x1a9\n" +
+	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x12I\n" +
+	"\fpreset_items\x18  \x03(\v2&.yandex.cloud.monitoring.v3.PresetItemR\vpresetItems\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\x1a\"<\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\x1aJ\x04\b\x1e\x10 \"<\n" +
 	"\x17UpdateDashboardMetadata\x12!\n" +
 	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"]\n" +
 	"\x16DeleteDashboardRequest\x12/\n" +
@@ -1269,7 +1297,8 @@ var file_yandex_cloud_monitoring_v3_dashboard_service_proto_goTypes = []any{
 	(*Parametrization)(nil),                  // 20: yandex.cloud.monitoring.v3.Parametrization
 	(*Timeline)(nil),                         // 21: yandex.cloud.monitoring.v3.Timeline
 	(*LinkItem)(nil),                         // 22: yandex.cloud.monitoring.v3.LinkItem
-	(*operation.Operation)(nil),              // 23: yandex.cloud.operation.Operation
+	(*PresetItem)(nil),                       // 23: yandex.cloud.monitoring.v3.PresetItem
+	(*operation.Operation)(nil),              // 24: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_monitoring_v3_dashboard_service_proto_depIdxs = []int32{
 	17, // 0: yandex.cloud.monitoring.v3.ListDashboardsRequest.read_mask:type_name -> google.protobuf.FieldMask
@@ -1279,29 +1308,31 @@ var file_yandex_cloud_monitoring_v3_dashboard_service_proto_depIdxs = []int32{
 	20, // 4: yandex.cloud.monitoring.v3.CreateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
 	21, // 5: yandex.cloud.monitoring.v3.CreateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
 	22, // 6: yandex.cloud.monitoring.v3.CreateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	16, // 7: yandex.cloud.monitoring.v3.UpdateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntry
-	19, // 8: yandex.cloud.monitoring.v3.UpdateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
-	20, // 9: yandex.cloud.monitoring.v3.UpdateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
-	21, // 10: yandex.cloud.monitoring.v3.UpdateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
-	22, // 11: yandex.cloud.monitoring.v3.UpdateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	23, // 12: yandex.cloud.monitoring.v3.ListDashboardOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 13: yandex.cloud.monitoring.v3.DashboardService.Get:input_type -> yandex.cloud.monitoring.v3.GetDashboardRequest
-	1,  // 14: yandex.cloud.monitoring.v3.DashboardService.List:input_type -> yandex.cloud.monitoring.v3.ListDashboardsRequest
-	3,  // 15: yandex.cloud.monitoring.v3.DashboardService.Create:input_type -> yandex.cloud.monitoring.v3.CreateDashboardRequest
-	5,  // 16: yandex.cloud.monitoring.v3.DashboardService.Update:input_type -> yandex.cloud.monitoring.v3.UpdateDashboardRequest
-	7,  // 17: yandex.cloud.monitoring.v3.DashboardService.Delete:input_type -> yandex.cloud.monitoring.v3.DeleteDashboardRequest
-	9,  // 18: yandex.cloud.monitoring.v3.DashboardService.ListOperations:input_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsRequest
-	18, // 19: yandex.cloud.monitoring.v3.DashboardService.Get:output_type -> yandex.cloud.monitoring.v3.Dashboard
-	2,  // 20: yandex.cloud.monitoring.v3.DashboardService.List:output_type -> yandex.cloud.monitoring.v3.ListDashboardsResponse
-	23, // 21: yandex.cloud.monitoring.v3.DashboardService.Create:output_type -> yandex.cloud.operation.Operation
-	23, // 22: yandex.cloud.monitoring.v3.DashboardService.Update:output_type -> yandex.cloud.operation.Operation
-	23, // 23: yandex.cloud.monitoring.v3.DashboardService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 24: yandex.cloud.monitoring.v3.DashboardService.ListOperations:output_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsResponse
-	19, // [19:25] is the sub-list for method output_type
-	13, // [13:19] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	23, // 7: yandex.cloud.monitoring.v3.CreateDashboardRequest.preset_items:type_name -> yandex.cloud.monitoring.v3.PresetItem
+	16, // 8: yandex.cloud.monitoring.v3.UpdateDashboardRequest.labels:type_name -> yandex.cloud.monitoring.v3.UpdateDashboardRequest.LabelsEntry
+	19, // 9: yandex.cloud.monitoring.v3.UpdateDashboardRequest.widgets:type_name -> yandex.cloud.monitoring.v3.Widget
+	20, // 10: yandex.cloud.monitoring.v3.UpdateDashboardRequest.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
+	21, // 11: yandex.cloud.monitoring.v3.UpdateDashboardRequest.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
+	22, // 12: yandex.cloud.monitoring.v3.UpdateDashboardRequest.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
+	23, // 13: yandex.cloud.monitoring.v3.UpdateDashboardRequest.preset_items:type_name -> yandex.cloud.monitoring.v3.PresetItem
+	24, // 14: yandex.cloud.monitoring.v3.ListDashboardOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 15: yandex.cloud.monitoring.v3.DashboardService.Get:input_type -> yandex.cloud.monitoring.v3.GetDashboardRequest
+	1,  // 16: yandex.cloud.monitoring.v3.DashboardService.List:input_type -> yandex.cloud.monitoring.v3.ListDashboardsRequest
+	3,  // 17: yandex.cloud.monitoring.v3.DashboardService.Create:input_type -> yandex.cloud.monitoring.v3.CreateDashboardRequest
+	5,  // 18: yandex.cloud.monitoring.v3.DashboardService.Update:input_type -> yandex.cloud.monitoring.v3.UpdateDashboardRequest
+	7,  // 19: yandex.cloud.monitoring.v3.DashboardService.Delete:input_type -> yandex.cloud.monitoring.v3.DeleteDashboardRequest
+	9,  // 20: yandex.cloud.monitoring.v3.DashboardService.ListOperations:input_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsRequest
+	18, // 21: yandex.cloud.monitoring.v3.DashboardService.Get:output_type -> yandex.cloud.monitoring.v3.Dashboard
+	2,  // 22: yandex.cloud.monitoring.v3.DashboardService.List:output_type -> yandex.cloud.monitoring.v3.ListDashboardsResponse
+	24, // 23: yandex.cloud.monitoring.v3.DashboardService.Create:output_type -> yandex.cloud.operation.Operation
+	24, // 24: yandex.cloud.monitoring.v3.DashboardService.Update:output_type -> yandex.cloud.operation.Operation
+	24, // 25: yandex.cloud.monitoring.v3.DashboardService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 26: yandex.cloud.monitoring.v3.DashboardService.ListOperations:output_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsResponse
+	21, // [21:27] is the sub-list for method output_type
+	15, // [15:21] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_dashboard_service_proto_init() }
@@ -1312,6 +1343,7 @@ func file_yandex_cloud_monitoring_v3_dashboard_service_proto_init() {
 	file_yandex_cloud_monitoring_v3_dashboard_proto_init()
 	file_yandex_cloud_monitoring_v3_link_item_proto_init()
 	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
+	file_yandex_cloud_monitoring_v3_preset_item_proto_init()
 	file_yandex_cloud_monitoring_v3_timeline_proto_init()
 	file_yandex_cloud_monitoring_v3_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_dashboard_service_proto_msgTypes[1].OneofWrappers = []any{

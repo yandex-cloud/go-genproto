@@ -64,7 +64,9 @@ type Dashboard struct {
 	// Refresh and time window settings
 	Timeline *Timeline `protobuf:"bytes,34,opt,name=timeline,proto3" json:"timeline,omitempty"`
 	// Dashboard links
-	Links         []*LinkItem `protobuf:"bytes,35,rep,name=links,proto3" json:"links,omitempty"`
+	Links []*LinkItem `protobuf:"bytes,35,rep,name=links,proto3" json:"links,omitempty"`
+	// Parameters / Infra events / Logs overlays presets list
+	PresetItems   []*PresetItem `protobuf:"bytes,37,rep,name=preset_items,json=presetItems,proto3" json:"preset_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -227,6 +229,13 @@ func (x *Dashboard) GetLinks() []*LinkItem {
 	return nil
 }
 
+func (x *Dashboard) GetPresetItems() []*PresetItem {
+	if x != nil {
+		return x.PresetItems
+	}
+	return nil
+}
+
 type isDashboard_Container interface {
 	isDashboard_Container()
 }
@@ -242,7 +251,7 @@ var File_yandex_cloud_monitoring_v3_dashboard_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/monitoring/v3/dashboard.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\"\xcc\x06\n" +
+	"*yandex/cloud/monitoring/v3/dashboard.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*yandex/cloud/monitoring/v3/link_item.proto\x1a0yandex/cloud/monitoring/v3/parametrization.proto\x1a,yandex/cloud/monitoring/v3/preset_item.proto\x1a)yandex/cloud/monitoring/v3/timeline.proto\x1a'yandex/cloud/monitoring/v3/widget.proto\"\x9d\a\n" +
 	"\tDashboard\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x129\n" +
@@ -265,11 +274,12 @@ const file_yandex_cloud_monitoring_v3_dashboard_proto_rawDesc = "" +
 	"managed_by\x18  \x01(\tR\tmanagedBy\x12!\n" +
 	"\fmanaged_link\x18! \x01(\tR\vmanagedLink\x12@\n" +
 	"\btimeline\x18\" \x01(\v2$.yandex.cloud.monitoring.v3.TimelineR\btimeline\x12:\n" +
-	"\x05links\x18# \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x1a9\n" +
+	"\x05links\x18# \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x12I\n" +
+	"\fpreset_items\x18% \x03(\v2&.yandex.cloud.monitoring.v3.PresetItemR\vpresetItems\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
-	"\tcontainerJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x14J\x04\b\x1f\x10 Bk\n" +
+	"\tcontainerJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x14J\x04\b\x1f\x10 J\x04\b$\x10%Bk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (
@@ -293,6 +303,7 @@ var file_yandex_cloud_monitoring_v3_dashboard_proto_goTypes = []any{
 	(*Parametrization)(nil),       // 4: yandex.cloud.monitoring.v3.Parametrization
 	(*Timeline)(nil),              // 5: yandex.cloud.monitoring.v3.Timeline
 	(*LinkItem)(nil),              // 6: yandex.cloud.monitoring.v3.LinkItem
+	(*PresetItem)(nil),            // 7: yandex.cloud.monitoring.v3.PresetItem
 }
 var file_yandex_cloud_monitoring_v3_dashboard_proto_depIdxs = []int32{
 	2, // 0: yandex.cloud.monitoring.v3.Dashboard.created_at:type_name -> google.protobuf.Timestamp
@@ -302,11 +313,12 @@ var file_yandex_cloud_monitoring_v3_dashboard_proto_depIdxs = []int32{
 	4, // 4: yandex.cloud.monitoring.v3.Dashboard.parametrization:type_name -> yandex.cloud.monitoring.v3.Parametrization
 	5, // 5: yandex.cloud.monitoring.v3.Dashboard.timeline:type_name -> yandex.cloud.monitoring.v3.Timeline
 	6, // 6: yandex.cloud.monitoring.v3.Dashboard.links:type_name -> yandex.cloud.monitoring.v3.LinkItem
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7, // 7: yandex.cloud.monitoring.v3.Dashboard.preset_items:type_name -> yandex.cloud.monitoring.v3.PresetItem
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_dashboard_proto_init() }
@@ -316,6 +328,7 @@ func file_yandex_cloud_monitoring_v3_dashboard_proto_init() {
 	}
 	file_yandex_cloud_monitoring_v3_link_item_proto_init()
 	file_yandex_cloud_monitoring_v3_parametrization_proto_init()
+	file_yandex_cloud_monitoring_v3_preset_item_proto_init()
 	file_yandex_cloud_monitoring_v3_timeline_proto_init()
 	file_yandex_cloud_monitoring_v3_widget_proto_init()
 	file_yandex_cloud_monitoring_v3_dashboard_proto_msgTypes[0].OneofWrappers = []any{

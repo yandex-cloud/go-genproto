@@ -1023,7 +1023,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto p
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDesc = "" +
 	"\n" +
-	"Eyandex/cloud/organizationmanager/v1/idp/synchronization_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\"\xc1\x06\n" +
+	"Eyandex/cloud/organizationmanager/v1/idp/synchronization_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\"\xc1\x06\n" +
 	"$CreateSynchronizationSettingsRequest\x12>\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12\\\n" +
 	"\x06filter\x18\x02 \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.SynchronizationFilterB\x04\xe8\xc71\x01R\x06filter\x128\n" +

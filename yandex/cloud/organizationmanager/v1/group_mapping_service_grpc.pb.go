@@ -36,12 +36,9 @@ const (
 type GroupMappingServiceClient interface {
 	// Returns a group mapping configured for the specific federation
 	// If a federation does not exist this call will return an error
-	//
-	//	NOT_FOUND will be returned
-	//
+	// NOT_FOUND will be returned
 	// If a federation exist, but has not ever been configured for group mapping
-	//
-	//	the call FAILED_PRECONDITION will be returned.
+	// the call FAILED_PRECONDITION will be returned.
 	Get(ctx context.Context, in *GetGroupMappingRequest, opts ...grpc.CallOption) (*GetGroupMappingResponse, error)
 	// Adds a group mapping for a federation
 	// If mapping already exist, ALREADY_EXISTS will be returned
@@ -50,7 +47,6 @@ type GroupMappingServiceClient interface {
 	// Errors:
 	// - if federation is not found
 	// In case of any error, no changes are applied to existing group mapping
-	//
 	// This call is idempotent. The following actions do nothing:
 	// - enabling when already enabled
 	// - disabling when disabled
@@ -60,7 +56,6 @@ type GroupMappingServiceClient interface {
 	// cascade.
 	Delete(ctx context.Context, in *DeleteGroupMappingRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns all the group mappings items
-	//
 	// Filtering is only supported by external_group_id or internal_group_id
 	ListItems(ctx context.Context, in *ListGroupMappingItemsRequest, opts ...grpc.CallOption) (*ListGroupMappingItemsResponse, error)
 	// Updates group mapping items for a specified federation
@@ -68,7 +63,6 @@ type GroupMappingServiceClient interface {
 	// - if federation is not found
 	// - if internal group in the mapping added does not exist
 	// In case of any error, no changes are applied to existing group mapping
-	//
 	// This call is idempotent. The following actions do nothing:
 	// - adding group mapping items that are already present
 	// - removing group mapping items that are not present
@@ -152,12 +146,9 @@ func (c *groupMappingServiceClient) UpdateItems(ctx context.Context, in *UpdateG
 type GroupMappingServiceServer interface {
 	// Returns a group mapping configured for the specific federation
 	// If a federation does not exist this call will return an error
-	//
-	//	NOT_FOUND will be returned
-	//
+	// NOT_FOUND will be returned
 	// If a federation exist, but has not ever been configured for group mapping
-	//
-	//	the call FAILED_PRECONDITION will be returned.
+	// the call FAILED_PRECONDITION will be returned.
 	Get(context.Context, *GetGroupMappingRequest) (*GetGroupMappingResponse, error)
 	// Adds a group mapping for a federation
 	// If mapping already exist, ALREADY_EXISTS will be returned
@@ -166,7 +157,6 @@ type GroupMappingServiceServer interface {
 	// Errors:
 	// - if federation is not found
 	// In case of any error, no changes are applied to existing group mapping
-	//
 	// This call is idempotent. The following actions do nothing:
 	// - enabling when already enabled
 	// - disabling when disabled
@@ -176,7 +166,6 @@ type GroupMappingServiceServer interface {
 	// cascade.
 	Delete(context.Context, *DeleteGroupMappingRequest) (*operation.Operation, error)
 	// Returns all the group mappings items
-	//
 	// Filtering is only supported by external_group_id or internal_group_id
 	ListItems(context.Context, *ListGroupMappingItemsRequest) (*ListGroupMappingItemsResponse, error)
 	// Updates group mapping items for a specified federation
@@ -184,7 +173,6 @@ type GroupMappingServiceServer interface {
 	// - if federation is not found
 	// - if internal group in the mapping added does not exist
 	// In case of any error, no changes are applied to existing group mapping
-	//
 	// This call is idempotent. The following actions do nothing:
 	// - adding group mapping items that are already present
 	// - removing group mapping items that are not present

@@ -62,6 +62,38 @@ func (m *Configuration) SetCpuNum(v int64) {
 	m.CpuNum = v
 }
 
+func (m *Configuration) SetNetworkInterfaces(v []*ConfigurationNetworkInterface) {
+	m.NetworkInterfaces = v
+}
+
 func (m *Configuration) SetMountingAvailability(v MountingAvailability) {
 	m.MountingAvailability = v
+}
+
+func (m *ConfigurationNetworkInterface) SetId(v string) {
+	m.Id = v
+}
+
+func (m *ConfigurationNetworkInterface) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ConfigurationNetworkInterface) SetConfigurationId(v string) {
+	m.ConfigurationId = v
+}
+
+func (m *ConfigurationNetworkInterface) SetLinkSpeedGbps(v int64) {
+	m.LinkSpeedGbps = v
+}
+
+func (m *ConfigurationNetworkInterface) SetAvailableModes(v []ConfigurationNetworkInterface_InterfaceMode) {
+	m.AvailableModes = v
+}
+
+func (m *ConfigurationNetworkInterface) SetMcLagOptions(v *ConfigurationNetworkInterface_MCLagAggregationOptions) {
+	m.McLagOptions = v
+}
+
+func (m *ConfigurationNetworkInterface_MCLagAggregationOptions) SetInterfaceCount(v int64) {
+	m.InterfaceCount = v
 }

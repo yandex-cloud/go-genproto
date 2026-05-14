@@ -1494,7 +1494,6 @@ type GroupMember struct {
 	// ID of the subject.
 	SubjectId string `protobuf:"bytes,1,opt,name=subject_id,json=subjectId,proto3" json:"subject_id,omitempty"`
 	// Type of the subject.
-	//
 	// It can contain one of the following values:
 	// * `userAccount`: An account on Yandex, added to Yandex Cloud.
 	// * `federatedUser`: A federated account. This type represents a user from an identity federation, like Active Directory.
@@ -1652,7 +1651,6 @@ type MemberDelta struct {
 	// The action that is being performed on a group member.
 	Action MemberDelta_MemberAction `protobuf:"varint,1,opt,name=action,proto3,enum=yandex.cloud.organizationmanager.v1.MemberDelta_MemberAction" json:"action,omitempty"`
 	// ID of the subject that is being added or removed from a group.
-	//
 	// Subject type can be one of following values:
 	// * `userAccount`: An account on Yandex, added to Yandex Cloud.
 	// * `federatedUser`: A federated account. This type represents a user from an identity federation, like Active Directory.
@@ -1728,11 +1726,9 @@ type ListEffectiveRequest struct {
 	// - `IN` for multiple values: `id IN ('id1', 'id2')`
 	// - `contains` for domain substring search: `name contains 'example'`
 	// - `AND` for combining conditions: `name contains 'my-group' AND name contains 'name'`
-	//
 	// Available fields for filtering:
 	// - `id` - group ID
 	// - `name` - group name
-	//
 	// Must be 1-1000 characters long.
 	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1920,12 +1916,12 @@ var File_yandex_cloud_organizationmanager_v1_group_service_proto protoreflect.Fi
 
 const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/organizationmanager/v1/group_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/organizationmanager/v1/group.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
+	"7yandex/cloud/organizationmanager/v1/group_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a/yandex/cloud/organizationmanager/v1/group.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
 	"\x0fGetGroupRequest\x12'\n" +
-	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\"\x84\x01\n" +
+	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\"\x8e\x01\n" +
 	"\x1bResolveExternalGroupRequest\x12>\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12/\n" +
+	"\vexternal_id\x18\x02 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1024R\n" +
 	"externalId\"\xc2\x01\n" +
 	"\x11ListGroupsRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12'\n" +
@@ -1960,13 +1956,13 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"0\n" +
 	"\x13CreateGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xaf\x04\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xb9\x04\n" +
 	"\x1aCreateExternalGroupRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12G\n" +
 	"\x04name\x18\x02 \x01(\tB3\xe8\xc71\x01\xf2\xc71+[a-zA-Z]([-a-zA-Z0-9._-]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12>\n" +
-	"\x14subject_container_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"\x14subject_container_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12/\n" +
+	"\vexternal_id\x18\x05 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1024R\n" +
 	"externalId\x12\x1f\n" +
 	"\vmake_editor\x18\x06 \x01(\bR\n" +
 	"makeEditor\x12\xa0\x01\n" +
@@ -1995,11 +1991,11 @@ const file_yandex_cloud_organizationmanager_v1_group_service_proto_rawDesc = "" 
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"0\n" +
 	"\x13UpdateGroupMetadata\x12\x19\n" +
-	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xd0\x01\n" +
+	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\xda\x01\n" +
 	"\x1dConvertToExternalGroupRequest\x12'\n" +
 	"\bgroup_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\agroupId\x12>\n" +
-	"\x14subject_container_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12%\n" +
-	"\vexternal_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"\x14subject_container_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12/\n" +
+	"\vexternal_id\x18\x03 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1024R\n" +
 	"externalId\x12\x1f\n" +
 	"\vmake_editor\x18\x04 \x01(\bR\n" +
 	"makeEditor\"\xaf\x01\n" +

@@ -36,10 +36,6 @@ type PeeringRequest struct {
 	// PeerBgpAsn.
 	// PeerAsn excluding rfc5398 (excluding 64496 - 64511 and 65536 - 65551).
 	PeerBgpAsn int64 `protobuf:"varint,4,opt,name=peer_bgp_asn,json=peerBgpAsn,proto3" json:"peer_bgp_asn,omitempty"`
-	// CloudBgpAsn.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/peering_request.proto.
-	CloudBgpAsn int64 `protobuf:"varint,5,opt,name=cloud_bgp_asn,json=cloudBgpAsn,proto3" json:"cloud_bgp_asn,omitempty"`
 	// PeerBgpMd5Key.
 	// Optional.
 	PeerBgpMd5Key string `protobuf:"bytes,6,opt,name=peer_bgp_md5_key,json=peerBgpMd5Key,proto3" json:"peer_bgp_md5_key,omitempty"`
@@ -105,14 +101,6 @@ func (x *PeeringRequest) GetPeerBgpAsn() int64 {
 	return 0
 }
 
-// Deprecated: Marked as deprecated in yandex/cloud/cic/v1/peering_request.proto.
-func (x *PeeringRequest) GetCloudBgpAsn() int64 {
-	if x != nil {
-		return x.CloudBgpAsn
-	}
-	return 0
-}
-
 func (x *PeeringRequest) GetPeerBgpMd5Key() string {
 	if x != nil {
 		return x.PeerBgpMd5Key
@@ -124,15 +112,14 @@ var File_yandex_cloud_cic_v1_peering_request_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_peering_request_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/cic/v1/peering_request.proto\x12\x13yandex.cloud.cic.v1\x1a\x1dyandex/cloud/validation.proto\"\x87\x02\n" +
+	")yandex/cloud/cic/v1/peering_request.proto\x12\x13yandex.cloud.cic.v1\x1a\x1dyandex/cloud/validation.proto\"\xe5\x01\n" +
 	"\x0ePeeringRequest\x12/\n" +
 	"\x0epeering_subnet\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\rpeeringSubnet\x12!\n" +
 	"\apeer_ip\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x06peerIp\x12#\n" +
 	"\bcloud_ip\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\acloudIp\x12 \n" +
 	"\fpeer_bgp_asn\x18\x04 \x01(\x03R\n" +
-	"peerBgpAsn\x12&\n" +
-	"\rcloud_bgp_asn\x18\x05 \x01(\x03B\x02\x18\x01R\vcloudBgpAsn\x122\n" +
-	"\x10peer_bgp_md5_key\x18\x06 \x01(\tB\t\x8a\xc81\x05<=200R\rpeerBgpMd5KeyBV\n" +
+	"peerBgpAsn\x122\n" +
+	"\x10peer_bgp_md5_key\x18\x06 \x01(\tB\t\x8a\xc81\x05<=200R\rpeerBgpMd5KeyJ\x04\b\x05\x10\x06BV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (

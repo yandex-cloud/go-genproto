@@ -47,7 +47,6 @@ const (
 // A set of methods for managing groups.
 type GroupServiceClient interface {
 	// Returns the specified Group resource.
-	//
 	// To get the list of available Group resources, make a [List] request.
 	Get(ctx context.Context, in *GetGroupRequest, opts ...grpc.CallOption) (*Group, error)
 	// Returns external group by subject container and external id
@@ -269,7 +268,6 @@ func (c *groupServiceClient) ListEffective(ctx context.Context, in *ListEffectiv
 // A set of methods for managing groups.
 type GroupServiceServer interface {
 	// Returns the specified Group resource.
-	//
 	// To get the list of available Group resources, make a [List] request.
 	Get(context.Context, *GetGroupRequest) (*Group, error)
 	// Returns external group by subject container and external id

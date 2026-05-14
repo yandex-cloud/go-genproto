@@ -470,7 +470,7 @@ var File_yandex_cloud_organizationmanager_v1_organization_service_proto protoref
 
 const file_yandex_cloud_organizationmanager_v1_organization_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/organizationmanager/v1/organization_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a6yandex/cloud/organizationmanager/v1/organization.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"O\n" +
+	">yandex/cloud/organizationmanager/v1/organization_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/organizationmanager/v1/organization.proto\x1a\x1dyandex/cloud/validation.proto\"O\n" +
 	"\x16GetOrganizationRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\"\x92\x01\n" +
 	"\x18ListOrganizationsRequest\x12'\n" +

@@ -43,7 +43,6 @@ const (
 // A set of methods for managing OAuth application.
 type ApplicationServiceClient interface {
 	// Returns the specified OAuth application resource.
-	//
 	// To get the list of available OAuth applications, make a [List] request.
 	Get(ctx context.Context, in *GetApplicationRequest, opts ...grpc.CallOption) (*Application, error)
 	// Retrieves the list of OAuth applications in the specified organization.
@@ -217,7 +216,6 @@ func (c *applicationServiceClient) UpdateAssignments(ctx context.Context, in *Up
 // A set of methods for managing OAuth application.
 type ApplicationServiceServer interface {
 	// Returns the specified OAuth application resource.
-	//
 	// To get the list of available OAuth applications, make a [List] request.
 	Get(context.Context, *GetApplicationRequest) (*Application, error)
 	// Retrieves the list of OAuth applications in the specified organization.

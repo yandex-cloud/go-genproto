@@ -523,7 +523,7 @@ var File_yandex_cloud_organizationmanager_v1_user_ssh_key_service_proto protoref
 
 const file_yandex_cloud_organizationmanager_v1_user_ssh_key_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a6yandex/cloud/organizationmanager/v1/user_ssh_key.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"K\n" +
+	">yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto\x12#yandex.cloud.organizationmanager.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/organizationmanager/v1/user_ssh_key.proto\x1a\x1dyandex/cloud/validation.proto\"K\n" +
 	"\x14GetUserSshKeyRequest\x123\n" +
 	"\x0fuser_ssh_key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fuserSshKeyId\"\xcc\x01\n" +
 	"\x16ListUserSshKeysRequest\x125\n" +
@@ -537,25 +537,25 @@ const file_yandex_cloud_organizationmanager_v1_user_ssh_key_service_proto_rawDes
 	"\x8a\xc81\x06<=2000R\tpageToken\"\x8d\x01\n" +
 	"\x17ListUserSshKeysResponse\x12J\n" +
 	"\bssh_keys\x18\x01 \x03(\v2/.yandex.cloud.organizationmanager.v1.UserSshKeyR\asshKeys\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfc\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x02\n" +
 	"\x17CreateUserSshKeyRequest\x125\n" +
 	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12+\n" +
 	"\n" +
 	"subject_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tsubjectId\x12\x1d\n" +
 	"\x04name\x18\x03 \x01(\tB\t\x8a\xc81\x05<=255R\x04name\x12#\n" +
-	"\x04data\x18\x04 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=20000R\x04data\x129\n" +
+	"\x04data\x18\x04 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=20000R\x04data\x12r\n" +
 	"\n" +
-	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"j\n" +
+	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\"j\n" +
 	"\x18CreateUserSshKeyMetadata\x12%\n" +
 	"\x0fuser_ssh_key_id\x18\x01 \x01(\tR\fuserSshKeyId\x12'\n" +
-	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\"\xe5\x01\n" +
+	"\x0forganization_id\x18\x02 \x01(\tR\x0eorganizationId\"\x9e\x02\n" +
 	"\x17UpdateUserSshKeyRequest\x123\n" +
 	"\x0fuser_ssh_key_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fuserSshKeyId\x12\x1d\n" +
 	"\x04name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=255R\x04name\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
+	"updateMask\x12r\n" +
 	"\n" +
-	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"A\n" +
+	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\"A\n" +
 	"\x18UpdateUserSshKeyMetadata\x12%\n" +
 	"\x0fuser_ssh_key_id\x18\x01 \x01(\tR\fuserSshKeyId\"N\n" +
 	"\x17DeleteUserSshKeyRequest\x123\n" +

@@ -526,7 +526,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_application_saml_signature_cert
 
 const file_yandex_cloud_organizationmanager_v1_idp_application_saml_signature_certificate_service_proto_rawDesc = "" +
 	"\n" +
-	"\\yandex/cloud/organizationmanager/v1/idp/application/saml/signature_certificate_service.proto\x128yandex.cloud.organizationmanager.v1.idp.application.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1aTyandex/cloud/organizationmanager/v1/idp/application/saml/signature_certificate.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"h\n" +
+	"\\yandex/cloud/organizationmanager/v1/idp/application/saml/signature_certificate_service.proto\x128yandex.cloud.organizationmanager.v1.idp.application.saml\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aTyandex/cloud/organizationmanager/v1/idp/application/saml/signature_certificate.proto\x1a\x1dyandex/cloud/validation.proto\"h\n" +
 	"\x1eGetSignatureCertificateRequest\x12F\n" +
 	"\x18signature_certificate_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16signatureCertificateId\"\xcf\x01\n" +
 	" ListSignatureCertificatesRequest\x123\n" +

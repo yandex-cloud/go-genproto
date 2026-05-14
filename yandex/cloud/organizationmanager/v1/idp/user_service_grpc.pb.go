@@ -46,7 +46,6 @@ const (
 // A set of methods for managing users in the Identity Provider system.
 type UserServiceClient interface {
 	// Returns the specified user.
-	//
 	// To get the list of available users, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of users in the specified userpool.
@@ -259,7 +258,6 @@ func (c *userServiceClient) CommitPassword(ctx context.Context, in *CommitPasswo
 // A set of methods for managing users in the Identity Provider system.
 type UserServiceServer interface {
 	// Returns the specified user.
-	//
 	// To get the list of available users, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of users in the specified userpool.
