@@ -239,7 +239,7 @@ func (x Mount_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Mount_Mode.Descriptor instead.
 func (Mount_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{12, 0}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13, 0}
 }
 
 type Container struct {
@@ -365,7 +365,6 @@ type Revision struct {
 	// Resources allocated to the revision.
 	Resources *Resources `protobuf:"bytes,6,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Timeout for the execution of the revision.
-	//
 	// If the timeout is exceeded, Serverless Containers responds with a 504 HTTP code.
 	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,7,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
 	// The number of concurrent requests allowed per container instance.
@@ -374,18 +373,17 @@ type Revision struct {
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Status of the revision.
 	Status Revision_Status `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.serverless.containers.v1.Revision_Status" json:"status,omitempty"`
-	// Yandex Lockbox secrets to be used by the revision.
-	Secrets []*Secret `protobuf:"bytes,11,rep,name=secrets,proto3" json:"secrets,omitempty"`
 	// Network access. If specified the revision will be attached to specified network/subnet(s).
 	Connectivity *Connectivity `protobuf:"bytes,12,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Policy for provisioning instances of the revision.
-	//
 	// The policy is only applied when the revision is ACTIVE.
 	ProvisionPolicy *ProvisionPolicy `protobuf:"bytes,13,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
-	// Policy for scaling instances of the revision.
-	ScalingPolicy *ScalingPolicy `protobuf:"bytes,14,opt,name=scaling_policy,json=scalingPolicy,proto3" json:"scaling_policy,omitempty"`
+	// Yandex Lockbox secrets to be used by the revision.
+	Secrets []*Secret `protobuf:"bytes,11,rep,name=secrets,proto3" json:"secrets,omitempty"`
 	// Options for logging from the container.
 	LogOptions *LogOptions `protobuf:"bytes,15,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
+	// Policy for scaling instances of the revision.
+	ScalingPolicy *ScalingPolicy `protobuf:"bytes,14,opt,name=scaling_policy,json=scalingPolicy,proto3" json:"scaling_policy,omitempty"`
 	// S3 mounts to be used by the revision.
 	StorageMounts []*StorageMount `protobuf:"bytes,16,rep,name=storage_mounts,json=storageMounts,proto3" json:"storage_mounts,omitempty"`
 	// Mounts to be used by the revision.
@@ -500,13 +498,6 @@ func (x *Revision) GetStatus() Revision_Status {
 	return Revision_STATUS_UNSPECIFIED
 }
 
-func (x *Revision) GetSecrets() []*Secret {
-	if x != nil {
-		return x.Secrets
-	}
-	return nil
-}
-
 func (x *Revision) GetConnectivity() *Connectivity {
 	if x != nil {
 		return x.Connectivity
@@ -521,9 +512,9 @@ func (x *Revision) GetProvisionPolicy() *ProvisionPolicy {
 	return nil
 }
 
-func (x *Revision) GetScalingPolicy() *ScalingPolicy {
+func (x *Revision) GetSecrets() []*Secret {
 	if x != nil {
-		return x.ScalingPolicy
+		return x.Secrets
 	}
 	return nil
 }
@@ -531,6 +522,13 @@ func (x *Revision) GetScalingPolicy() *ScalingPolicy {
 func (x *Revision) GetLogOptions() *LogOptions {
 	if x != nil {
 		return x.LogOptions
+	}
+	return nil
+}
+
+func (x *Revision) GetScalingPolicy() *ScalingPolicy {
+	if x != nil {
+		return x.ScalingPolicy
 	}
 	return nil
 }
@@ -570,6 +568,91 @@ func (x *Revision) GetAsyncInvocationConfig() *AsyncInvocationConfig {
 	return nil
 }
 
+// The container's execution mode
+type Runtime struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Type:
+	//
+	//	*Runtime_Http_
+	//	*Runtime_Task_
+	Type          isRuntime_Type `protobuf_oneof:"type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Runtime) Reset() {
+	*x = Runtime{}
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Runtime) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Runtime) ProtoMessage() {}
+
+func (x *Runtime) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Runtime.ProtoReflect.Descriptor instead.
+func (*Runtime) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Runtime) GetType() isRuntime_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
+func (x *Runtime) GetHttp() *Runtime_Http {
+	if x != nil {
+		if x, ok := x.Type.(*Runtime_Http_); ok {
+			return x.Http
+		}
+	}
+	return nil
+}
+
+func (x *Runtime) GetTask() *Runtime_Task {
+	if x != nil {
+		if x, ok := x.Type.(*Runtime_Task_); ok {
+			return x.Task
+		}
+	}
+	return nil
+}
+
+type isRuntime_Type interface {
+	isRuntime_Type()
+}
+
+type Runtime_Http_ struct {
+	// The classic one. You need to run an HTTP server inside the container.
+	Http *Runtime_Http `protobuf:"bytes,1,opt,name=http,proto3,oneof"`
+}
+
+type Runtime_Task_ struct {
+	// We run a process from ENTRYPOINT inside the container for each user request.
+	Task *Runtime_Task `protobuf:"bytes,2,opt,name=task,proto3,oneof"`
+}
+
+func (*Runtime_Http_) isRuntime_Type() {}
+
+func (*Runtime_Task_) isRuntime_Type() {}
+
 // Revision image specification.
 type Image struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -591,7 +674,7 @@ type Image struct {
 
 func (x *Image) Reset() {
 	*x = Image{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -603,7 +686,7 @@ func (x *Image) String() string {
 func (*Image) ProtoMessage() {}
 
 func (x *Image) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -616,7 +699,7 @@ func (x *Image) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Image.ProtoReflect.Descriptor instead.
 func (*Image) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Image) GetImageUrl() string {
@@ -664,7 +747,6 @@ func (x *Image) GetWorkingDir() string {
 type Command struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Command that will override ENTRYPOINT of an image.
-	//
 	// Commands will be executed as is. The runtime will not substitute environment
 	// variables or execute shell commands. If one wants to do that, they should
 	// invoke shell interpreter with an appropriate shell script.
@@ -675,7 +757,7 @@ type Command struct {
 
 func (x *Command) Reset() {
 	*x = Command{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[3]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -687,7 +769,7 @@ func (x *Command) String() string {
 func (*Command) ProtoMessage() {}
 
 func (x *Command) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[3]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -700,7 +782,7 @@ func (x *Command) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Command.ProtoReflect.Descriptor instead.
 func (*Command) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Command) GetCommand() []string {
@@ -713,7 +795,6 @@ func (x *Command) GetCommand() []string {
 type Args struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Arguments that will override CMD of an image.
-	//
 	// Arguments will be passed as is. The runtime will not substitute environment
 	// variables or execute shell commands. If one wants to do that, they should
 	// invoke shell interpreter with an appropriate shell script.
@@ -724,7 +805,7 @@ type Args struct {
 
 func (x *Args) Reset() {
 	*x = Args{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[4]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -736,7 +817,7 @@ func (x *Args) String() string {
 func (*Args) ProtoMessage() {}
 
 func (x *Args) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[4]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -749,7 +830,7 @@ func (x *Args) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Args.ProtoReflect.Descriptor instead.
 func (*Args) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Args) GetArgs() []string {
@@ -775,7 +856,7 @@ type Resources struct {
 
 func (x *Resources) Reset() {
 	*x = Resources{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[5]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -787,7 +868,7 @@ func (x *Resources) String() string {
 func (*Resources) ProtoMessage() {}
 
 func (x *Resources) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[5]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -800,7 +881,7 @@ func (x *Resources) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Resources.ProtoReflect.Descriptor instead.
 func (*Resources) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Resources) GetMemory() int64 {
@@ -824,6 +905,65 @@ func (x *Resources) GetCoreFraction() int64 {
 	return 0
 }
 
+// Revision connectivity specification.
+type Connectivity struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Network the revision will have access to.
+	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// The list of subnets (from the same network) the revision can be attached to.
+	// Deprecated, it is sufficient to specify only network_id, without the list of subnet_ids.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
+	SubnetIds     []string `protobuf:"bytes,2,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Connectivity) Reset() {
+	*x = Connectivity{}
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Connectivity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Connectivity) ProtoMessage() {}
+
+func (x *Connectivity) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Connectivity.ProtoReflect.Descriptor instead.
+func (*Connectivity) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Connectivity) GetNetworkId() string {
+	if x != nil {
+		return x.NetworkId
+	}
+	return ""
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
+func (x *Connectivity) GetSubnetIds() []string {
+	if x != nil {
+		return x.SubnetIds
+	}
+	return nil
+}
+
 type ProvisionPolicy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Minimum number of guaranteed provisioned container instances for all zones
@@ -835,7 +975,7 @@ type ProvisionPolicy struct {
 
 func (x *ProvisionPolicy) Reset() {
 	*x = ProvisionPolicy{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[6]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +987,7 @@ func (x *ProvisionPolicy) String() string {
 func (*ProvisionPolicy) ProtoMessage() {}
 
 func (x *ProvisionPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[6]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,7 +1000,7 @@ func (x *ProvisionPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvisionPolicy.ProtoReflect.Descriptor instead.
 func (*ProvisionPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ProvisionPolicy) GetMinInstances() int64 {
@@ -889,7 +1029,7 @@ type Secret struct {
 
 func (x *Secret) Reset() {
 	*x = Secret{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -901,7 +1041,7 @@ func (x *Secret) String() string {
 func (*Secret) ProtoMessage() {}
 
 func (x *Secret) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -914,7 +1054,7 @@ func (x *Secret) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Secret.ProtoReflect.Descriptor instead.
 func (*Secret) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Secret) GetId() string {
@@ -965,66 +1105,6 @@ type Secret_EnvironmentVariable struct {
 
 func (*Secret_EnvironmentVariable) isSecret_Reference() {}
 
-// Revision connectivity specification.
-type Connectivity struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Network the revision will have access to.
-	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// Complete list of subnets (from the same network) the revision can be attached to.
-	//
-	// Deprecated, it is sufficient to specify only network_id, without the list of subnet_ids.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
-	SubnetIds     []string `protobuf:"bytes,2,rep,name=subnet_ids,json=subnetIds,proto3" json:"subnet_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Connectivity) Reset() {
-	*x = Connectivity{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Connectivity) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Connectivity) ProtoMessage() {}
-
-func (x *Connectivity) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Connectivity.ProtoReflect.Descriptor instead.
-func (*Connectivity) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *Connectivity) GetNetworkId() string {
-	if x != nil {
-		return x.NetworkId
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/serverless/containers/v1/container.proto.
-func (x *Connectivity) GetSubnetIds() []string {
-	if x != nil {
-		return x.SubnetIds
-	}
-	return nil
-}
-
 type LogOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Is logging from container disabled.
@@ -1037,7 +1117,6 @@ type LogOptions struct {
 	//	*LogOptions_FolderId
 	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
 	// Minimum log entry level.
-	//
 	// See [LogLevel.Level] for details.
 	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1046,7 +1125,7 @@ type LogOptions struct {
 
 func (x *LogOptions) Reset() {
 	*x = LogOptions{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[9]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1058,7 +1137,7 @@ func (x *LogOptions) String() string {
 func (*LogOptions) ProtoMessage() {}
 
 func (x *LogOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[9]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1071,7 +1150,7 @@ func (x *LogOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogOptions.ProtoReflect.Descriptor instead.
 func (*LogOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *LogOptions) GetDisabled() bool {
@@ -1145,7 +1224,7 @@ type ScalingPolicy struct {
 
 func (x *ScalingPolicy) Reset() {
 	*x = ScalingPolicy{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[10]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1157,7 +1236,7 @@ func (x *ScalingPolicy) String() string {
 func (*ScalingPolicy) ProtoMessage() {}
 
 func (x *ScalingPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[10]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1170,7 +1249,7 @@ func (x *ScalingPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScalingPolicy.ProtoReflect.Descriptor instead.
 func (*ScalingPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ScalingPolicy) GetZoneInstancesLimit() int64 {
@@ -1204,7 +1283,7 @@ type StorageMount struct {
 
 func (x *StorageMount) Reset() {
 	*x = StorageMount{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[11]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1216,7 +1295,7 @@ func (x *StorageMount) String() string {
 func (*StorageMount) ProtoMessage() {}
 
 func (x *StorageMount) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[11]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +1308,7 @@ func (x *StorageMount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageMount.ProtoReflect.Descriptor instead.
 func (*StorageMount) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StorageMount) GetBucketId() string {
@@ -1280,7 +1359,7 @@ type Mount struct {
 
 func (x *Mount) Reset() {
 	*x = Mount{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[12]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1292,7 +1371,7 @@ func (x *Mount) String() string {
 func (*Mount) ProtoMessage() {}
 
 func (x *Mount) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[12]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1305,7 +1384,7 @@ func (x *Mount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mount.ProtoReflect.Descriptor instead.
 func (*Mount) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Mount) GetMountPointPath() string {
@@ -1364,91 +1443,6 @@ type Mount_EphemeralDiskSpec struct {
 func (*Mount_ObjectStorage_) isMount_Target() {}
 
 func (*Mount_EphemeralDiskSpec) isMount_Target() {}
-
-// The container's execution mode
-type Runtime struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*Runtime_Http_
-	//	*Runtime_Task_
-	Type          isRuntime_Type `protobuf_oneof:"type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Runtime) Reset() {
-	*x = Runtime{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Runtime) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Runtime) ProtoMessage() {}
-
-func (x *Runtime) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Runtime.ProtoReflect.Descriptor instead.
-func (*Runtime) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *Runtime) GetType() isRuntime_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
-func (x *Runtime) GetHttp() *Runtime_Http {
-	if x != nil {
-		if x, ok := x.Type.(*Runtime_Http_); ok {
-			return x.Http
-		}
-	}
-	return nil
-}
-
-func (x *Runtime) GetTask() *Runtime_Task {
-	if x != nil {
-		if x, ok := x.Type.(*Runtime_Task_); ok {
-			return x.Task
-		}
-	}
-	return nil
-}
-
-type isRuntime_Type interface {
-	isRuntime_Type()
-}
-
-type Runtime_Http_ struct {
-	// The classic one. You need to run an HTTP server inside the container.
-	Http *Runtime_Http `protobuf:"bytes,1,opt,name=http,proto3,oneof"`
-}
-
-type Runtime_Task_ struct {
-	// We run a process from ENTRYPOINT inside the container for each user request.
-	Task *Runtime_Task `protobuf:"bytes,2,opt,name=task,proto3,oneof"`
-}
-
-func (*Runtime_Http_) isRuntime_Type() {}
-
-func (*Runtime_Task_) isRuntime_Type() {}
 
 type MetadataOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1549,6 +1543,78 @@ func (x *AsyncInvocationConfig) GetServiceAccountId() string {
 	return ""
 }
 
+type Runtime_Http struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Runtime_Http) Reset() {
+	*x = Runtime_Http{}
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Runtime_Http) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Runtime_Http) ProtoMessage() {}
+
+func (x *Runtime_Http) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Runtime_Http.ProtoReflect.Descriptor instead.
+func (*Runtime_Http) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{2, 0}
+}
+
+type Runtime_Task struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Runtime_Task) Reset() {
+	*x = Runtime_Task{}
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Runtime_Task) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Runtime_Task) ProtoMessage() {}
+
+func (x *Runtime_Task) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Runtime_Task.ProtoReflect.Descriptor instead.
+func (*Runtime_Task) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{2, 1}
+}
+
 // ObjectStorage as a mount
 type Mount_ObjectStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1562,7 +1628,7 @@ type Mount_ObjectStorage struct {
 
 func (x *Mount_ObjectStorage) Reset() {
 	*x = Mount_ObjectStorage{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[18]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1574,7 +1640,7 @@ func (x *Mount_ObjectStorage) String() string {
 func (*Mount_ObjectStorage) ProtoMessage() {}
 
 func (x *Mount_ObjectStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[18]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1587,7 +1653,7 @@ func (x *Mount_ObjectStorage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mount_ObjectStorage.ProtoReflect.Descriptor instead.
 func (*Mount_ObjectStorage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{12, 0}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13, 0}
 }
 
 func (x *Mount_ObjectStorage) GetBucketId() string {
@@ -1617,7 +1683,7 @@ type Mount_DiskSpec struct {
 
 func (x *Mount_DiskSpec) Reset() {
 	*x = Mount_DiskSpec{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[19]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1629,7 +1695,7 @@ func (x *Mount_DiskSpec) String() string {
 func (*Mount_DiskSpec) ProtoMessage() {}
 
 func (x *Mount_DiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[19]
+	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1642,7 +1708,7 @@ func (x *Mount_DiskSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mount_DiskSpec.ProtoReflect.Descriptor instead.
 func (*Mount_DiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{12, 1}
+	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13, 1}
 }
 
 func (x *Mount_DiskSpec) GetSize() int64 {
@@ -1657,78 +1723,6 @@ func (x *Mount_DiskSpec) GetBlockSize() int64 {
 		return x.BlockSize
 	}
 	return 0
-}
-
-type Runtime_Http struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Runtime_Http) Reset() {
-	*x = Runtime_Http{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Runtime_Http) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Runtime_Http) ProtoMessage() {}
-
-func (x *Runtime_Http) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Runtime_Http.ProtoReflect.Descriptor instead.
-func (*Runtime_Http) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13, 0}
-}
-
-type Runtime_Task struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Runtime_Task) Reset() {
-	*x = Runtime_Task{}
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Runtime_Task) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Runtime_Task) ProtoMessage() {}
-
-func (x *Runtime_Task) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Runtime_Task.ProtoReflect.Descriptor instead.
-func (*Runtime_Task) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_containers_v1_container_proto_rawDescGZIP(), []int{13, 1}
 }
 
 var File_yandex_cloud_serverless_containers_v1_container_proto protoreflect.FileDescriptor
@@ -1768,13 +1762,13 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"\vconcurrency\x18\b \x01(\x03R\vconcurrency\x12,\n" +
 	"\x12service_account_id\x18\t \x01(\tR\x10serviceAccountId\x12N\n" +
 	"\x06status\x18\n" +
-	" \x01(\x0e26.yandex.cloud.serverless.containers.v1.Revision.StatusR\x06status\x12G\n" +
-	"\asecrets\x18\v \x03(\v2-.yandex.cloud.serverless.containers.v1.SecretR\asecrets\x12W\n" +
+	" \x01(\x0e26.yandex.cloud.serverless.containers.v1.Revision.StatusR\x06status\x12W\n" +
 	"\fconnectivity\x18\f \x01(\v23.yandex.cloud.serverless.containers.v1.ConnectivityR\fconnectivity\x12a\n" +
-	"\x10provision_policy\x18\r \x01(\v26.yandex.cloud.serverless.containers.v1.ProvisionPolicyR\x0fprovisionPolicy\x12[\n" +
-	"\x0escaling_policy\x18\x0e \x01(\v24.yandex.cloud.serverless.containers.v1.ScalingPolicyR\rscalingPolicy\x12R\n" +
+	"\x10provision_policy\x18\r \x01(\v26.yandex.cloud.serverless.containers.v1.ProvisionPolicyR\x0fprovisionPolicy\x12G\n" +
+	"\asecrets\x18\v \x03(\v2-.yandex.cloud.serverless.containers.v1.SecretR\asecrets\x12R\n" +
 	"\vlog_options\x18\x0f \x01(\v21.yandex.cloud.serverless.containers.v1.LogOptionsR\n" +
-	"logOptions\x12Z\n" +
+	"logOptions\x12[\n" +
+	"\x0escaling_policy\x18\x0e \x01(\v24.yandex.cloud.serverless.containers.v1.ScalingPolicyR\rscalingPolicy\x12Z\n" +
 	"\x0estorage_mounts\x18\x10 \x03(\v23.yandex.cloud.serverless.containers.v1.StorageMountR\rstorageMounts\x12D\n" +
 	"\x06mounts\x18\x11 \x03(\v2,.yandex.cloud.serverless.containers.v1.MountR\x06mounts\x12H\n" +
 	"\aruntime\x18\x12 \x01(\v2..yandex.cloud.serverless.containers.v1.RuntimeR\aruntime\x12a\n" +
@@ -1785,7 +1779,13 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bOBSOLETE\x10\x03\"\xbc\x03\n" +
+	"\bOBSOLETE\x10\x03\"\xbd\x01\n" +
+	"\aRuntime\x12I\n" +
+	"\x04http\x18\x01 \x01(\v23.yandex.cloud.serverless.containers.v1.Runtime.HttpH\x00R\x04http\x12I\n" +
+	"\x04task\x18\x02 \x01(\v23.yandex.cloud.serverless.containers.v1.Runtime.TaskH\x00R\x04task\x1a\x06\n" +
+	"\x04Http\x1a\x06\n" +
+	"\x04TaskB\f\n" +
+	"\x04type\x12\x04\xc0\xc11\x01\"\xbc\x03\n" +
 	"\x05Image\x12\x1b\n" +
 	"\timage_url\x18\x01 \x01(\tR\bimageUrl\x12!\n" +
 	"\fimage_digest\x18\x02 \x01(\tR\vimageDigest\x12H\n" +
@@ -1804,7 +1804,12 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"\tResources\x120\n" +
 	"\x06memory\x18\x01 \x01(\x03B\x18\xfa\xc71\x14134217728-8589934592R\x06memory\x12\x1d\n" +
 	"\x05cores\x18\x02 \x01(\x03B\a\xfa\xc71\x030-4R\x05cores\x12.\n" +
-	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\fcoreFraction\"6\n" +
+	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\fcoreFraction\"Z\n" +
+	"\fConnectivity\x12\x1d\n" +
+	"\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12+\n" +
+	"\n" +
+	"subnet_ids\x18\x02 \x03(\tB\f\x8a\xc81\x02>0\x90\xc81\x01\x18\x01R\tsubnetIds\"6\n" +
 	"\x0fProvisionPolicy\x12#\n" +
 	"\rmin_instances\x18\x01 \x01(\x03R\fminInstances\"\x8b\x01\n" +
 	"\x06Secret\x12\x0e\n" +
@@ -1813,12 +1818,7 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"version_id\x18\x02 \x01(\tR\tversionId\x12\x10\n" +
 	"\x03key\x18\x03 \x01(\tR\x03key\x123\n" +
 	"\x14environment_variable\x18\x04 \x01(\tH\x00R\x13environmentVariableB\v\n" +
-	"\treference\"Z\n" +
-	"\fConnectivity\x12\x1d\n" +
-	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\x12+\n" +
-	"\n" +
-	"subnet_ids\x18\x02 \x03(\tB\f\x8a\xc81\x02>0\x90\xc81\x01\x18\x01R\tsubnetIds\"\x8a\x02\n" +
+	"\treference\"\x8a\x02\n" +
 	"\n" +
 	"LogOptions\x12\x1a\n" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12G\n" +
@@ -1853,14 +1853,8 @@ const file_yandex_cloud_serverless_containers_v1_container_proto_rawDesc = "" +
 	"\tREAD_ONLY\x10\x01\x12\x0e\n" +
 	"\n" +
 	"READ_WRITE\x10\x02B\x0e\n" +
-	"\x06target\x12\x04\xc0\xc11\x01J\x04\b\x04\x10\n" +
-	"J\x04\b\x01\x10\x02\"\xbd\x01\n" +
-	"\aRuntime\x12I\n" +
-	"\x04http\x18\x01 \x01(\v23.yandex.cloud.serverless.containers.v1.Runtime.HttpH\x00R\x04http\x12I\n" +
-	"\x04task\x18\x02 \x01(\v23.yandex.cloud.serverless.containers.v1.Runtime.TaskH\x00R\x04task\x1a\x06\n" +
-	"\x04Http\x1a\x06\n" +
-	"\x04TaskB\f\n" +
-	"\x04type\x12\x04\xc0\xc11\x01\"\xdc\x01\n" +
+	"\x06target\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x04\x10\n" +
+	"\"\xdc\x01\n" +
 	"\x0fMetadataOptions\x12a\n" +
 	"\x11gce_http_endpoint\x18\x01 \x01(\x0e25.yandex.cloud.serverless.containers.v1.MetadataOptionR\x0fgceHttpEndpoint\x12f\n" +
 	"\x14aws_v1_http_endpoint\x18\x02 \x01(\x0e25.yandex.cloud.serverless.containers.v1.MetadataOptionR\x11awsV1HttpEndpoint\"E\n" +
@@ -1893,26 +1887,26 @@ var file_yandex_cloud_serverless_containers_v1_container_proto_goTypes = []any{
 	(Mount_Mode)(0),               // 3: yandex.cloud.serverless.containers.v1.Mount.Mode
 	(*Container)(nil),             // 4: yandex.cloud.serverless.containers.v1.Container
 	(*Revision)(nil),              // 5: yandex.cloud.serverless.containers.v1.Revision
-	(*Image)(nil),                 // 6: yandex.cloud.serverless.containers.v1.Image
-	(*Command)(nil),               // 7: yandex.cloud.serverless.containers.v1.Command
-	(*Args)(nil),                  // 8: yandex.cloud.serverless.containers.v1.Args
-	(*Resources)(nil),             // 9: yandex.cloud.serverless.containers.v1.Resources
-	(*ProvisionPolicy)(nil),       // 10: yandex.cloud.serverless.containers.v1.ProvisionPolicy
-	(*Secret)(nil),                // 11: yandex.cloud.serverless.containers.v1.Secret
-	(*Connectivity)(nil),          // 12: yandex.cloud.serverless.containers.v1.Connectivity
-	(*LogOptions)(nil),            // 13: yandex.cloud.serverless.containers.v1.LogOptions
-	(*ScalingPolicy)(nil),         // 14: yandex.cloud.serverless.containers.v1.ScalingPolicy
-	(*StorageMount)(nil),          // 15: yandex.cloud.serverless.containers.v1.StorageMount
-	(*Mount)(nil),                 // 16: yandex.cloud.serverless.containers.v1.Mount
-	(*Runtime)(nil),               // 17: yandex.cloud.serverless.containers.v1.Runtime
+	(*Runtime)(nil),               // 6: yandex.cloud.serverless.containers.v1.Runtime
+	(*Image)(nil),                 // 7: yandex.cloud.serverless.containers.v1.Image
+	(*Command)(nil),               // 8: yandex.cloud.serverless.containers.v1.Command
+	(*Args)(nil),                  // 9: yandex.cloud.serverless.containers.v1.Args
+	(*Resources)(nil),             // 10: yandex.cloud.serverless.containers.v1.Resources
+	(*Connectivity)(nil),          // 11: yandex.cloud.serverless.containers.v1.Connectivity
+	(*ProvisionPolicy)(nil),       // 12: yandex.cloud.serverless.containers.v1.ProvisionPolicy
+	(*Secret)(nil),                // 13: yandex.cloud.serverless.containers.v1.Secret
+	(*LogOptions)(nil),            // 14: yandex.cloud.serverless.containers.v1.LogOptions
+	(*ScalingPolicy)(nil),         // 15: yandex.cloud.serverless.containers.v1.ScalingPolicy
+	(*StorageMount)(nil),          // 16: yandex.cloud.serverless.containers.v1.StorageMount
+	(*Mount)(nil),                 // 17: yandex.cloud.serverless.containers.v1.Mount
 	(*MetadataOptions)(nil),       // 18: yandex.cloud.serverless.containers.v1.MetadataOptions
 	(*AsyncInvocationConfig)(nil), // 19: yandex.cloud.serverless.containers.v1.AsyncInvocationConfig
 	nil,                           // 20: yandex.cloud.serverless.containers.v1.Container.LabelsEntry
-	nil,                           // 21: yandex.cloud.serverless.containers.v1.Image.EnvironmentEntry
-	(*Mount_ObjectStorage)(nil),   // 22: yandex.cloud.serverless.containers.v1.Mount.ObjectStorage
-	(*Mount_DiskSpec)(nil),        // 23: yandex.cloud.serverless.containers.v1.Mount.DiskSpec
-	(*Runtime_Http)(nil),          // 24: yandex.cloud.serverless.containers.v1.Runtime.Http
-	(*Runtime_Task)(nil),          // 25: yandex.cloud.serverless.containers.v1.Runtime.Task
+	(*Runtime_Http)(nil),          // 21: yandex.cloud.serverless.containers.v1.Runtime.Http
+	(*Runtime_Task)(nil),          // 22: yandex.cloud.serverless.containers.v1.Runtime.Task
+	nil,                           // 23: yandex.cloud.serverless.containers.v1.Image.EnvironmentEntry
+	(*Mount_ObjectStorage)(nil),   // 24: yandex.cloud.serverless.containers.v1.Mount.ObjectStorage
+	(*Mount_DiskSpec)(nil),        // 25: yandex.cloud.serverless.containers.v1.Mount.DiskSpec
 	(*timestamppb.Timestamp)(nil), // 26: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),   // 27: google.protobuf.Duration
 	(v1.LogLevel_Level)(0),        // 28: yandex.cloud.logging.v1.LogLevel.Level
@@ -1922,29 +1916,29 @@ var file_yandex_cloud_serverless_containers_v1_container_proto_depIdxs = []int32
 	20, // 1: yandex.cloud.serverless.containers.v1.Container.labels:type_name -> yandex.cloud.serverless.containers.v1.Container.LabelsEntry
 	1,  // 2: yandex.cloud.serverless.containers.v1.Container.status:type_name -> yandex.cloud.serverless.containers.v1.Container.Status
 	26, // 3: yandex.cloud.serverless.containers.v1.Revision.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 4: yandex.cloud.serverless.containers.v1.Revision.image:type_name -> yandex.cloud.serverless.containers.v1.Image
-	9,  // 5: yandex.cloud.serverless.containers.v1.Revision.resources:type_name -> yandex.cloud.serverless.containers.v1.Resources
+	7,  // 4: yandex.cloud.serverless.containers.v1.Revision.image:type_name -> yandex.cloud.serverless.containers.v1.Image
+	10, // 5: yandex.cloud.serverless.containers.v1.Revision.resources:type_name -> yandex.cloud.serverless.containers.v1.Resources
 	27, // 6: yandex.cloud.serverless.containers.v1.Revision.execution_timeout:type_name -> google.protobuf.Duration
 	2,  // 7: yandex.cloud.serverless.containers.v1.Revision.status:type_name -> yandex.cloud.serverless.containers.v1.Revision.Status
-	11, // 8: yandex.cloud.serverless.containers.v1.Revision.secrets:type_name -> yandex.cloud.serverless.containers.v1.Secret
-	12, // 9: yandex.cloud.serverless.containers.v1.Revision.connectivity:type_name -> yandex.cloud.serverless.containers.v1.Connectivity
-	10, // 10: yandex.cloud.serverless.containers.v1.Revision.provision_policy:type_name -> yandex.cloud.serverless.containers.v1.ProvisionPolicy
-	14, // 11: yandex.cloud.serverless.containers.v1.Revision.scaling_policy:type_name -> yandex.cloud.serverless.containers.v1.ScalingPolicy
-	13, // 12: yandex.cloud.serverless.containers.v1.Revision.log_options:type_name -> yandex.cloud.serverless.containers.v1.LogOptions
-	15, // 13: yandex.cloud.serverless.containers.v1.Revision.storage_mounts:type_name -> yandex.cloud.serverless.containers.v1.StorageMount
-	16, // 14: yandex.cloud.serverless.containers.v1.Revision.mounts:type_name -> yandex.cloud.serverless.containers.v1.Mount
-	17, // 15: yandex.cloud.serverless.containers.v1.Revision.runtime:type_name -> yandex.cloud.serverless.containers.v1.Runtime
+	11, // 8: yandex.cloud.serverless.containers.v1.Revision.connectivity:type_name -> yandex.cloud.serverless.containers.v1.Connectivity
+	12, // 9: yandex.cloud.serverless.containers.v1.Revision.provision_policy:type_name -> yandex.cloud.serverless.containers.v1.ProvisionPolicy
+	13, // 10: yandex.cloud.serverless.containers.v1.Revision.secrets:type_name -> yandex.cloud.serverless.containers.v1.Secret
+	14, // 11: yandex.cloud.serverless.containers.v1.Revision.log_options:type_name -> yandex.cloud.serverless.containers.v1.LogOptions
+	15, // 12: yandex.cloud.serverless.containers.v1.Revision.scaling_policy:type_name -> yandex.cloud.serverless.containers.v1.ScalingPolicy
+	16, // 13: yandex.cloud.serverless.containers.v1.Revision.storage_mounts:type_name -> yandex.cloud.serverless.containers.v1.StorageMount
+	17, // 14: yandex.cloud.serverless.containers.v1.Revision.mounts:type_name -> yandex.cloud.serverless.containers.v1.Mount
+	6,  // 15: yandex.cloud.serverless.containers.v1.Revision.runtime:type_name -> yandex.cloud.serverless.containers.v1.Runtime
 	18, // 16: yandex.cloud.serverless.containers.v1.Revision.metadata_options:type_name -> yandex.cloud.serverless.containers.v1.MetadataOptions
 	19, // 17: yandex.cloud.serverless.containers.v1.Revision.async_invocation_config:type_name -> yandex.cloud.serverless.containers.v1.AsyncInvocationConfig
-	7,  // 18: yandex.cloud.serverless.containers.v1.Image.command:type_name -> yandex.cloud.serverless.containers.v1.Command
-	8,  // 19: yandex.cloud.serverless.containers.v1.Image.args:type_name -> yandex.cloud.serverless.containers.v1.Args
-	21, // 20: yandex.cloud.serverless.containers.v1.Image.environment:type_name -> yandex.cloud.serverless.containers.v1.Image.EnvironmentEntry
-	28, // 21: yandex.cloud.serverless.containers.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	3,  // 22: yandex.cloud.serverless.containers.v1.Mount.mode:type_name -> yandex.cloud.serverless.containers.v1.Mount.Mode
-	22, // 23: yandex.cloud.serverless.containers.v1.Mount.object_storage:type_name -> yandex.cloud.serverless.containers.v1.Mount.ObjectStorage
-	23, // 24: yandex.cloud.serverless.containers.v1.Mount.ephemeral_disk_spec:type_name -> yandex.cloud.serverless.containers.v1.Mount.DiskSpec
-	24, // 25: yandex.cloud.serverless.containers.v1.Runtime.http:type_name -> yandex.cloud.serverless.containers.v1.Runtime.Http
-	25, // 26: yandex.cloud.serverless.containers.v1.Runtime.task:type_name -> yandex.cloud.serverless.containers.v1.Runtime.Task
+	21, // 18: yandex.cloud.serverless.containers.v1.Runtime.http:type_name -> yandex.cloud.serverless.containers.v1.Runtime.Http
+	22, // 19: yandex.cloud.serverless.containers.v1.Runtime.task:type_name -> yandex.cloud.serverless.containers.v1.Runtime.Task
+	8,  // 20: yandex.cloud.serverless.containers.v1.Image.command:type_name -> yandex.cloud.serverless.containers.v1.Command
+	9,  // 21: yandex.cloud.serverless.containers.v1.Image.args:type_name -> yandex.cloud.serverless.containers.v1.Args
+	23, // 22: yandex.cloud.serverless.containers.v1.Image.environment:type_name -> yandex.cloud.serverless.containers.v1.Image.EnvironmentEntry
+	28, // 23: yandex.cloud.serverless.containers.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	3,  // 24: yandex.cloud.serverless.containers.v1.Mount.mode:type_name -> yandex.cloud.serverless.containers.v1.Mount.Mode
+	24, // 25: yandex.cloud.serverless.containers.v1.Mount.object_storage:type_name -> yandex.cloud.serverless.containers.v1.Mount.ObjectStorage
+	25, // 26: yandex.cloud.serverless.containers.v1.Mount.ephemeral_disk_spec:type_name -> yandex.cloud.serverless.containers.v1.Mount.DiskSpec
 	0,  // 27: yandex.cloud.serverless.containers.v1.MetadataOptions.gce_http_endpoint:type_name -> yandex.cloud.serverless.containers.v1.MetadataOption
 	0,  // 28: yandex.cloud.serverless.containers.v1.MetadataOptions.aws_v1_http_endpoint:type_name -> yandex.cloud.serverless.containers.v1.MetadataOption
 	29, // [29:29] is the sub-list for method output_type
@@ -1959,20 +1953,20 @@ func file_yandex_cloud_serverless_containers_v1_container_proto_init() {
 	if File_yandex_cloud_serverless_containers_v1_container_proto != nil {
 		return
 	}
-	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[7].OneofWrappers = []any{
-		(*Secret_EnvironmentVariable)(nil),
+	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[2].OneofWrappers = []any{
+		(*Runtime_Http_)(nil),
+		(*Runtime_Task_)(nil),
 	}
 	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[9].OneofWrappers = []any{
+		(*Secret_EnvironmentVariable)(nil),
+	}
+	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[10].OneofWrappers = []any{
 		(*LogOptions_LogGroupId)(nil),
 		(*LogOptions_FolderId)(nil),
 	}
-	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13].OneofWrappers = []any{
 		(*Mount_ObjectStorage_)(nil),
 		(*Mount_EphemeralDiskSpec)(nil),
-	}
-	file_yandex_cloud_serverless_containers_v1_container_proto_msgTypes[13].OneofWrappers = []any{
-		(*Runtime_Http_)(nil),
-		(*Runtime_Task_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

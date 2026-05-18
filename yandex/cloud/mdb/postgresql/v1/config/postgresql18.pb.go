@@ -697,6 +697,8 @@ const (
 	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_ANON PostgresqlConfig18_SharedPreloadLibraries = 9
 	// Required for the [age](https://age.apache.org/) extension.
 	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_AGE PostgresqlConfig18_SharedPreloadLibraries = 10
+	// Required for the [spqrguard](https://github.com/pg-sharding/spqrguard) extension.
+	PostgresqlConfig18_SHARED_PRELOAD_LIBRARIES_SPQRGUARD PostgresqlConfig18_SharedPreloadLibraries = 11
 )
 
 // Enum value maps for PostgresqlConfig18_SharedPreloadLibraries.
@@ -713,6 +715,7 @@ var (
 		8:  "SHARED_PRELOAD_LIBRARIES_PGAUDIT",
 		9:  "SHARED_PRELOAD_LIBRARIES_ANON",
 		10: "SHARED_PRELOAD_LIBRARIES_AGE",
+		11: "SHARED_PRELOAD_LIBRARIES_SPQRGUARD",
 	}
 	PostgresqlConfig18_SharedPreloadLibraries_value = map[string]int32{
 		"SHARED_PRELOAD_LIBRARIES_UNSPECIFIED":  0,
@@ -726,6 +729,7 @@ var (
 		"SHARED_PRELOAD_LIBRARIES_PGAUDIT":      8,
 		"SHARED_PRELOAD_LIBRARIES_ANON":         9,
 		"SHARED_PRELOAD_LIBRARIES_AGE":          10,
+		"SHARED_PRELOAD_LIBRARIES_SPQRGUARD":    11,
 	}
 )
 
@@ -2464,7 +2468,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"Ό\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x8c\x01\n" +
 	"\x12PostgresqlConfig18\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2714,7 +2718,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = ""
 	"\x1bPLAN_CACHE_MODE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PLAN_CACHE_MODE_AUTO\x10\x01\x12%\n" +
 	"!PLAN_CACHE_MODE_FORCE_CUSTOM_PLAN\x10\x02\x12&\n" +
-	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\xcf\x03\n" +
+	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\xf7\x03\n" +
 	"\x16SharedPreloadLibraries\x12(\n" +
 	"$SHARED_PRELOAD_LIBRARIES_UNSPECIFIED\x10\x00\x12)\n" +
 	"%SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN\x10\x01\x12)\n" +
@@ -2727,7 +2731,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_proto_rawDesc = ""
 	" SHARED_PRELOAD_LIBRARIES_PGAUDIT\x10\b\x12!\n" +
 	"\x1dSHARED_PRELOAD_LIBRARIES_ANON\x10\t\x12 \n" +
 	"\x1cSHARED_PRELOAD_LIBRARIES_AGE\x10\n" +
-	"\"\xd6\x01\n" +
+	"\x12&\n" +
+	"\"SHARED_PRELOAD_LIBRARIES_SPQRGUARD\x10\v\"\xd6\x01\n" +
 	"\x11SynchronousCommit\x12\"\n" +
 	"\x1eSYNCHRONOUS_COMMIT_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SYNCHRONOUS_COMMIT_ON\x10\x01\x12\x1a\n" +

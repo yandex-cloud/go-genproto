@@ -641,7 +641,6 @@ type LogOptions struct {
 	//	*LogOptions_FolderId
 	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
 	// Minimum logs level.
-	//
 	// See [LogLevel.Level] for details.
 	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1779,7 +1778,7 @@ var File_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto protoreflect.Fi
 
 const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/serverless/mcpgateway/v1/mcp_gateway.proto\x12%yandex.cloud.serverless.mcpgateway.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xca\x06\n" +
+	"7yandex/cloud/serverless/mcpgateway/v1/mcp_gateway.proto\x12%yandex.cloud.serverless.mcpgateway.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xd0\x06\n" +
 	"\n" +
 	"McpGateway\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
@@ -1789,8 +1788,8 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x12\x18\n" +
 	"\x04name\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12U\n" +
-	"\x06labels\x18\a \x03(\v2=.yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntryR\x06labels\x12P\n" +
-	"\x06status\x18\b \x01(\x0e28.yandex.cloud.serverless.mcpgateway.v1.McpGateway.StatusR\x06status\x12\x1f\n" +
+	"\x06labels\x18\a \x03(\v2=.yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntryR\x06labels\x12V\n" +
+	"\x06status\x18\b \x01(\x0e28.yandex.cloud.serverless.mcpgateway.v1.McpGateway.StatusB\x04\xe8\xc71\x01R\x06status\x12\x1f\n" +
 	"\vbase_domain\x18\t \x01(\tR\n" +
 	"baseDomain\x12R\n" +
 	"\vlog_options\x18\n" +

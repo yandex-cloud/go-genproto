@@ -158,10 +158,6 @@ func (m *DeployContainerRevisionRequest) SetConcurrency(v int64) {
 	m.Concurrency = v
 }
 
-func (m *DeployContainerRevisionRequest) SetSecrets(v []*Secret) {
-	m.Secrets = v
-}
-
 func (m *DeployContainerRevisionRequest) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
@@ -170,12 +166,16 @@ func (m *DeployContainerRevisionRequest) SetProvisionPolicy(v *ProvisionPolicy) 
 	m.ProvisionPolicy = v
 }
 
-func (m *DeployContainerRevisionRequest) SetScalingPolicy(v *ScalingPolicy) {
-	m.ScalingPolicy = v
+func (m *DeployContainerRevisionRequest) SetSecrets(v []*Secret) {
+	m.Secrets = v
 }
 
 func (m *DeployContainerRevisionRequest) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
+}
+
+func (m *DeployContainerRevisionRequest) SetScalingPolicy(v *ScalingPolicy) {
+	m.ScalingPolicy = v
 }
 
 func (m *DeployContainerRevisionRequest) SetStorageMounts(v []*StorageMount) {

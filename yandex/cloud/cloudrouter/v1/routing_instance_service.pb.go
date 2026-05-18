@@ -324,9 +324,10 @@ type CreateRoutingInstanceRequest struct {
 	// Each value must match the regular expression `[-_0-9a-z]*`.
 	// The string length in characters for each key must be 1-63.
 	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
-	Labels        map[string]string `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Labels             map[string]string `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DeletionProtection bool              `protobuf:"varint,17,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CreateRoutingInstanceRequest) Reset() {
@@ -401,6 +402,13 @@ func (x *CreateRoutingInstanceRequest) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *CreateRoutingInstanceRequest) GetDeletionProtection() bool {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return false
+}
+
 type UpdateRoutingInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RoutingInstance resource to return.
@@ -427,9 +435,10 @@ type UpdateRoutingInstanceRequest struct {
 	// Each value must match the regular expression `[-_0-9a-z]*`.
 	// The string length in characters for each key must be 1-63.
 	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
-	Labels        map[string]string `protobuf:"bytes,14,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Labels             map[string]string `protobuf:"bytes,14,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	DeletionProtection bool              `protobuf:"varint,19,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UpdateRoutingInstanceRequest) Reset() {
@@ -511,6 +520,13 @@ func (x *UpdateRoutingInstanceRequest) GetLabels() map[string]string {
 		return x.Labels
 	}
 	return nil
+}
+
+func (x *UpdateRoutingInstanceRequest) GetDeletionProtection() bool {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return false
 }
 
 type UpsertPrefixesRequest struct {
@@ -1544,17 +1560,18 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\xa1\x01\n" +
 	"\x1cListRoutingInstancesResponse\x12Y\n" +
 	"\x11routing_instances\x18\x01 \x03(\v2,.yandex.cloud.cloudrouter.v1.RoutingInstanceR\x10routingInstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x93\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xca\x05\n" +
 	"\x1cCreateRoutingInstanceRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12)\n" +
 	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\\\n" +
 	"\bvpc_info\x18\x06 \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\v\x82\xc81\a<=10000R\avpcInfo\x12\x8e\x01\n" +
 	"\x1bcic_private_connection_info\x18\a \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\b\x82\xc81\x04<=50R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
-	"\x06labels\x18\f \x03(\v2E.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\f \x03(\v2E.yandex.cloud.cloudrouter.v1.CreateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
+	"\x13deletion_protection\x18\x11 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\x05\x10\x06J\x04\b\b\x10\f\"\xce\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\x05\x10\x06J\x04\b\b\x10\fJ\x04\b\r\x10\x11\"\x85\x06\n" +
 	"\x1cUpdateRoutingInstanceRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -1563,11 +1580,12 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_service_proto_rawDesc = 
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12S\n" +
 	"\bvpc_info\x18\b \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoB\x02\x18\x01R\avpcInfo\x12\x88\x01\n" +
 	"\x1bcic_private_connection_info\x18\t \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoB\x02\x18\x01R\x18cicPrivateConnectionInfo\x12\x9a\x01\n" +
-	"\x06labels\x18\x0e \x03(\v2E.yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\x0e \x03(\v2E.yandex.cloud.cloudrouter.v1.UpdateRoutingInstanceRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12/\n" +
+	"\x13deletion_protection\x18\x13 \x01(\bR\x12deletionProtection\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\bJ\x04\b\n" +
-	"\x10\x0e\"\xf4\x01\n" +
+	"\x10\x0eJ\x04\b\x0f\x10\x13\"\xf4\x01\n" +
 	"\x15UpsertPrefixesRequest\x12<\n" +
 	"\x13routing_instance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11routingInstanceId\x122\n" +
 	"\x0evpc_network_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fvpcNetworkId\x12i\n" +

@@ -258,6 +258,60 @@ func (x *Workflow) GetExecutionUrl() string {
 	return ""
 }
 
+type WorkflowSchedule struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cron expression for the Workflow schedule.
+	CronExpression string `protobuf:"bytes,1,opt,name=cron_expression,json=cronExpression,proto3" json:"cron_expression,omitempty"`
+	// Timezone for the Workflow schedule.
+	Timezone      string `protobuf:"bytes,2,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WorkflowSchedule) Reset() {
+	*x = WorkflowSchedule{}
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WorkflowSchedule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WorkflowSchedule) ProtoMessage() {}
+
+func (x *WorkflowSchedule) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WorkflowSchedule.ProtoReflect.Descriptor instead.
+func (*WorkflowSchedule) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *WorkflowSchedule) GetCronExpression() string {
+	if x != nil {
+		return x.CronExpression
+	}
+	return ""
+}
+
+func (x *WorkflowSchedule) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
 type WorkflowPreview struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Workflow. Generated at creation time.
@@ -292,7 +346,7 @@ type WorkflowPreview struct {
 
 func (x *WorkflowPreview) Reset() {
 	*x = WorkflowPreview{}
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[1]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +358,7 @@ func (x *WorkflowPreview) String() string {
 func (*WorkflowPreview) ProtoMessage() {}
 
 func (x *WorkflowPreview) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[1]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +371,7 @@ func (x *WorkflowPreview) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowPreview.ProtoReflect.Descriptor instead.
 func (*WorkflowPreview) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *WorkflowPreview) GetId() string {
@@ -423,7 +477,7 @@ type WorkflowSpecification struct {
 
 func (x *WorkflowSpecification) Reset() {
 	*x = WorkflowSpecification{}
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +489,7 @@ func (x *WorkflowSpecification) String() string {
 func (*WorkflowSpecification) ProtoMessage() {}
 
 func (x *WorkflowSpecification) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +502,7 @@ func (x *WorkflowSpecification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkflowSpecification.ProtoReflect.Descriptor instead.
 func (*WorkflowSpecification) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *WorkflowSpecification) GetSpec() isWorkflowSpecification_Spec {
@@ -488,7 +542,6 @@ type LogOptions struct {
 	//	*LogOptions_FolderId
 	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
 	// Minimum logs level.
-	//
 	// See [LogLevel.Level] for details.
 	MinLevel      v1.LogLevel_Level `protobuf:"varint,4,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -497,7 +550,7 @@ type LogOptions struct {
 
 func (x *LogOptions) Reset() {
 	*x = LogOptions{}
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -509,7 +562,7 @@ func (x *LogOptions) String() string {
 func (*LogOptions) ProtoMessage() {}
 
 func (x *LogOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3]
+	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +575,7 @@ func (x *LogOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogOptions.ProtoReflect.Descriptor instead.
 func (*LogOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *LogOptions) GetDisabled() bool {
@@ -582,75 +635,21 @@ func (*LogOptions_LogGroupId) isLogOptions_Destination() {}
 
 func (*LogOptions_FolderId) isLogOptions_Destination() {}
 
-type WorkflowSchedule struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Cron expression for the Workflow schedule.
-	CronExpression string `protobuf:"bytes,1,opt,name=cron_expression,json=cronExpression,proto3" json:"cron_expression,omitempty"`
-	// Timezone for the Workflow schedule.
-	Timezone      string `protobuf:"bytes,2,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *WorkflowSchedule) Reset() {
-	*x = WorkflowSchedule{}
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *WorkflowSchedule) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WorkflowSchedule) ProtoMessage() {}
-
-func (x *WorkflowSchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use WorkflowSchedule.ProtoReflect.Descriptor instead.
-func (*WorkflowSchedule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *WorkflowSchedule) GetCronExpression() string {
-	if x != nil {
-		return x.CronExpression
-	}
-	return ""
-}
-
-func (x *WorkflowSchedule) GetTimezone() string {
-	if x != nil {
-		return x.Timezone
-	}
-	return ""
-}
-
 var File_yandex_cloud_serverless_workflows_v1_workflow_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/serverless/workflows/v1/workflow.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\x9c\a\n" +
-	"\bWorkflow\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12a\n" +
-	"\rspecification\x18\x03 \x01(\v2;.yandex.cloud.serverless.workflows.v1.WorkflowSpecificationR\rspecification\x129\n" +
+	"3yandex/cloud/serverless/workflows/v1/workflow.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xc0\a\n" +
+	"\bWorkflow\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12g\n" +
+	"\rspecification\x18\x03 \x01(\v2;.yandex.cloud.serverless.workflows.v1.WorkflowSpecificationB\x04\xe8\xc71\x01R\rspecification\x12?\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04name\x18\x05 \x01(\tR\x04name\x12 \n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x12\x18\n" +
+	"\x04name\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12R\n" +
-	"\x06labels\x18\a \x03(\v2:.yandex.cloud.serverless.workflows.v1.Workflow.LabelsEntryR\x06labels\x12M\n" +
-	"\x06status\x18\b \x01(\x0e25.yandex.cloud.serverless.workflows.v1.Workflow.StatusR\x06status\x12Q\n" +
+	"\x06labels\x18\a \x03(\v2:.yandex.cloud.serverless.workflows.v1.Workflow.LabelsEntryR\x06labels\x12S\n" +
+	"\x06status\x18\b \x01(\x0e25.yandex.cloud.serverless.workflows.v1.Workflow.StatusB\x04\xe8\xc71\x01R\x06status\x12Q\n" +
 	"\vlog_options\x18\t \x01(\v20.yandex.cloud.serverless.workflows.v1.LogOptionsR\n" +
 	"logOptions\x12\x1d\n" +
 	"\n" +
@@ -671,16 +670,19 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
 	"\bUPDATING\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\t\n" +
-	"\x05ERROR\x10\x05\"\x90\x05\n" +
-	"\x0fWorkflowPreview\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
+	"\x05ERROR\x10\x05\"l\n" +
+	"\x10WorkflowSchedule\x126\n" +
+	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12 \n" +
+	"\btimezone\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\btimezone\"\xae\x05\n" +
+	"\x0fWorkflowPreview\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12?\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x12\x18\n" +
+	"\x04name\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12Y\n" +
-	"\x06labels\x18\x06 \x03(\v2A.yandex.cloud.serverless.workflows.v1.WorkflowPreview.LabelsEntryR\x06labels\x12M\n" +
-	"\x06status\x18\a \x01(\x0e25.yandex.cloud.serverless.workflows.v1.Workflow.StatusR\x06status\x12Q\n" +
+	"\x06labels\x18\x06 \x03(\v2A.yandex.cloud.serverless.workflows.v1.WorkflowPreview.LabelsEntryR\x06labels\x12S\n" +
+	"\x06status\x18\a \x01(\x0e25.yandex.cloud.serverless.workflows.v1.Workflow.StatusB\x04\xe8\xc71\x01R\x06status\x12Q\n" +
 	"\vlog_options\x18\b \x01(\v20.yandex.cloud.serverless.workflows.v1.LogOptionsR\n" +
 	"logOptions\x12\x1d\n" +
 	"\n" +
@@ -703,10 +705,7 @@ const file_yandex_cloud_serverless_workflows_v1_workflow_proto_rawDesc = "" +
 	"logGroupId\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestination\"l\n" +
-	"\x10WorkflowSchedule\x126\n" +
-	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12 \n" +
-	"\btimezone\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\btimezoneB~\n" +
+	"\vdestinationB~\n" +
 	"(yandex.cloud.api.serverless.workflows.v1ZRgithub.com/yandex-cloud/go-genproto/yandex/cloud/serverless/workflows/v1;workflowsb\x06proto3"
 
 var (
@@ -726,26 +725,26 @@ var file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes = make([]p
 var file_yandex_cloud_serverless_workflows_v1_workflow_proto_goTypes = []any{
 	(Workflow_Status)(0),          // 0: yandex.cloud.serverless.workflows.v1.Workflow.Status
 	(*Workflow)(nil),              // 1: yandex.cloud.serverless.workflows.v1.Workflow
-	(*WorkflowPreview)(nil),       // 2: yandex.cloud.serverless.workflows.v1.WorkflowPreview
-	(*WorkflowSpecification)(nil), // 3: yandex.cloud.serverless.workflows.v1.WorkflowSpecification
-	(*LogOptions)(nil),            // 4: yandex.cloud.serverless.workflows.v1.LogOptions
-	(*WorkflowSchedule)(nil),      // 5: yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	(*WorkflowSchedule)(nil),      // 2: yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	(*WorkflowPreview)(nil),       // 3: yandex.cloud.serverless.workflows.v1.WorkflowPreview
+	(*WorkflowSpecification)(nil), // 4: yandex.cloud.serverless.workflows.v1.WorkflowSpecification
+	(*LogOptions)(nil),            // 5: yandex.cloud.serverless.workflows.v1.LogOptions
 	nil,                           // 6: yandex.cloud.serverless.workflows.v1.Workflow.LabelsEntry
 	nil,                           // 7: yandex.cloud.serverless.workflows.v1.WorkflowPreview.LabelsEntry
 	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
 	(v1.LogLevel_Level)(0),        // 9: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_serverless_workflows_v1_workflow_proto_depIdxs = []int32{
-	3,  // 0: yandex.cloud.serverless.workflows.v1.Workflow.specification:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSpecification
+	4,  // 0: yandex.cloud.serverless.workflows.v1.Workflow.specification:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSpecification
 	8,  // 1: yandex.cloud.serverless.workflows.v1.Workflow.created_at:type_name -> google.protobuf.Timestamp
 	6,  // 2: yandex.cloud.serverless.workflows.v1.Workflow.labels:type_name -> yandex.cloud.serverless.workflows.v1.Workflow.LabelsEntry
 	0,  // 3: yandex.cloud.serverless.workflows.v1.Workflow.status:type_name -> yandex.cloud.serverless.workflows.v1.Workflow.Status
-	4,  // 4: yandex.cloud.serverless.workflows.v1.Workflow.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
-	5,  // 5: yandex.cloud.serverless.workflows.v1.Workflow.schedule:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSchedule
+	5,  // 4: yandex.cloud.serverless.workflows.v1.Workflow.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
+	2,  // 5: yandex.cloud.serverless.workflows.v1.Workflow.schedule:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowSchedule
 	8,  // 6: yandex.cloud.serverless.workflows.v1.WorkflowPreview.created_at:type_name -> google.protobuf.Timestamp
 	7,  // 7: yandex.cloud.serverless.workflows.v1.WorkflowPreview.labels:type_name -> yandex.cloud.serverless.workflows.v1.WorkflowPreview.LabelsEntry
 	0,  // 8: yandex.cloud.serverless.workflows.v1.WorkflowPreview.status:type_name -> yandex.cloud.serverless.workflows.v1.Workflow.Status
-	4,  // 9: yandex.cloud.serverless.workflows.v1.WorkflowPreview.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
+	5,  // 9: yandex.cloud.serverless.workflows.v1.WorkflowPreview.log_options:type_name -> yandex.cloud.serverless.workflows.v1.LogOptions
 	9,  // 10: yandex.cloud.serverless.workflows.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
@@ -759,10 +758,10 @@ func file_yandex_cloud_serverless_workflows_v1_workflow_proto_init() {
 	if File_yandex_cloud_serverless_workflows_v1_workflow_proto != nil {
 		return
 	}
-	file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[2].OneofWrappers = []any{
+	file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3].OneofWrappers = []any{
 		(*WorkflowSpecification_SpecYaml)(nil),
 	}
-	file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[3].OneofWrappers = []any{
+	file_yandex_cloud_serverless_workflows_v1_workflow_proto_msgTypes[4].OneofWrappers = []any{
 		(*LogOptions_LogGroupId)(nil),
 		(*LogOptions_FolderId)(nil),
 	}

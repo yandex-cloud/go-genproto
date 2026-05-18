@@ -11,6 +11,14 @@ func (m *GetTrunkConnectionRequest) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }
 
+func (m *BatchGetTrunkConnectionsRequest) SetTrunkConnectionIds(v []string) {
+	m.TrunkConnectionIds = v
+}
+
+func (m *BatchGetTrunkConnectionsResponse) SetTrunkConnections(v []*TrunkConnection) {
+	m.TrunkConnections = v
+}
+
 func (m *ListTrunkConnectionsRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -49,10 +57,6 @@ func (m *UpdateTrunkConnectionRequest) SetName(v string) {
 
 func (m *UpdateTrunkConnectionRequest) SetDescription(v string) {
 	m.Description = v
-}
-
-func (m *UpdateTrunkConnectionRequest) SetCapacity(v TrunkConnection_Capacity) {
-	m.Capacity = v
 }
 
 func (m *UpdateTrunkConnectionRequest) SetLabels(v map[string]string) {

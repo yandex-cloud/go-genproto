@@ -67,6 +67,10 @@ func (m *CreateRoutingInstanceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateRoutingInstanceRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *UpdateRoutingInstanceRequest) SetRoutingInstanceId(v string) {
 	m.RoutingInstanceId = v
 }
@@ -93,6 +97,10 @@ func (m *UpdateRoutingInstanceRequest) SetCicPrivateConnectionInfo(v []*RoutingI
 
 func (m *UpdateRoutingInstanceRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *UpdateRoutingInstanceRequest) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
 }
 
 func (m *UpsertPrefixesRequest) SetRoutingInstanceId(v string) {

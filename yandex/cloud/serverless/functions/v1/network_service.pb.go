@@ -221,7 +221,6 @@ type ListUsedNetworksRequest struct {
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListUsedNetworksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
@@ -330,7 +329,6 @@ type ListUsedNetworksResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListUsedNetworksRequest.page_size], use `nextPageToken` as the value
 	// for the [ListUsedNetworksRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -386,7 +384,6 @@ type ListConnectedResourcesRequest struct {
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListConnectedResourcesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
@@ -512,7 +509,6 @@ type ListConnectedResourcesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListConnectedResourcesRequest.page_size], use `nextPageToken` as the value
 	// for the [ListConnectedResourcesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields

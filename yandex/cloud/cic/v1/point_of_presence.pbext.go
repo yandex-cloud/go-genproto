@@ -6,10 +6,6 @@ func (m *PointOfPresence) SetId(v string) {
 	m.Id = v
 }
 
-func (m *PointOfPresence) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *PointOfPresence) SetName(v string) {
 	m.Name = v
 }

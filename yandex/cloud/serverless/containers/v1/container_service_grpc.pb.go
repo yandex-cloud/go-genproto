@@ -43,7 +43,6 @@ const (
 // A set of methods for managing serverless containers.
 type ContainerServiceClient interface {
 	// Returns the specified container.
-	//
 	// To get the list of all available containers, make a [List] request.
 	Get(ctx context.Context, in *GetContainerRequest, opts ...grpc.CallOption) (*Container, error)
 	// Retrieves the list of containers in the specified folder.
@@ -59,7 +58,6 @@ type ContainerServiceClient interface {
 	// Rollback the specified container to an old revision.
 	Rollback(ctx context.Context, in *RollbackContainerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified revision of a container.
-	//
 	// To get the list of available revisions, make a [ListRevisions] request.
 	GetRevision(ctx context.Context, in *GetContainerRevisionRequest, opts ...grpc.CallOption) (*Revision, error)
 	// Retrieves the list of revisions for the specified container, or of all container revisions
@@ -220,7 +218,6 @@ func (c *containerServiceClient) UpdateAccessBindings(ctx context.Context, in *a
 // A set of methods for managing serverless containers.
 type ContainerServiceServer interface {
 	// Returns the specified container.
-	//
 	// To get the list of all available containers, make a [List] request.
 	Get(context.Context, *GetContainerRequest) (*Container, error)
 	// Retrieves the list of containers in the specified folder.
@@ -236,7 +233,6 @@ type ContainerServiceServer interface {
 	// Rollback the specified container to an old revision.
 	Rollback(context.Context, *RollbackContainerRequest) (*operation.Operation, error)
 	// Returns the specified revision of a container.
-	//
 	// To get the list of available revisions, make a [ListRevisions] request.
 	GetRevision(context.Context, *GetContainerRevisionRequest) (*Revision, error)
 	// Retrieves the list of revisions for the specified container, or of all container revisions

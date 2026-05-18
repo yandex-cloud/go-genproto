@@ -2,14 +2,6 @@
 
 package cic
 
-import (
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-)
-
-func (m *LagInfo) SetLagId(v *wrapperspb.Int64Value) {
-	m.LagId = v
-}
-
 func (m *LagInfo) SetPortNames(v []string) {
 	m.PortNames = v
 }

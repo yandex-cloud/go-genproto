@@ -491,17 +491,17 @@ var File_yandex_cloud_serverless_workflows_v1_execution_proto protoreflect.FileD
 
 const file_yandex_cloud_serverless_workflows_v1_execution_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/serverless/workflows/v1/execution.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1dyandex/cloud/validation.proto\"\xd9\x04\n" +
-	"\tExecution\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
-	"\vworkflow_id\x18\x02 \x01(\tR\n" +
+	"4yandex/cloud/serverless/workflows/v1/execution.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf1\x04\n" +
+	"\tExecution\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12%\n" +
+	"\vworkflow_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"workflowId\x12J\n" +
 	"\x05input\x18\x04 \x01(\v24.yandex.cloud.serverless.workflows.v1.ExecutionInputR\x05input\x12M\n" +
 	"\x06result\x18\x05 \x01(\v25.yandex.cloud.serverless.workflows.v1.ExecutionResultR\x06result\x12J\n" +
-	"\x05error\x18\x06 \x01(\v24.yandex.cloud.serverless.workflows.v1.ExecutionErrorR\x05error\x12N\n" +
-	"\x06status\x18\a \x01(\x0e26.yandex.cloud.serverless.workflows.v1.Execution.StatusR\x06status\x129\n" +
+	"\x05error\x18\x06 \x01(\v24.yandex.cloud.serverless.workflows.v1.ExecutionErrorR\x05error\x12T\n" +
+	"\x06status\x18\a \x01(\x0e26.yandex.cloud.serverless.workflows.v1.Execution.StatusB\x04\xe8\xc71\x01R\x06status\x12?\n" +
 	"\n" +
-	"started_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x125\n" +
+	"started_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartedAt\x125\n" +
 	"\bduration\x18\t \x01(\v2\x19.google.protobuf.DurationR\bduration\"l\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
@@ -513,14 +513,14 @@ const file_yandex_cloud_serverless_workflows_v1_execution_proto_rawDesc = "" +
 	"\aSTOPPED\x10\x04\x12\n" +
 	"\n" +
 	"\x06FAILED\x10\x05\x12\f\n" +
-	"\bFINISHED\x10\x06J\x04\b\x03\x10\x04\"\x8b\x02\n" +
-	"\x10ExecutionPreview\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
-	"\vworkflow_id\x18\x02 \x01(\tR\n" +
-	"workflowId\x12N\n" +
-	"\x06status\x18\x04 \x01(\x0e26.yandex.cloud.serverless.workflows.v1.Execution.StatusR\x06status\x129\n" +
+	"\bFINISHED\x10\x06J\x04\b\x03\x10\x04\"\xa3\x02\n" +
+	"\x10ExecutionPreview\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12%\n" +
+	"\vworkflow_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"workflowId\x12T\n" +
+	"\x06status\x18\x04 \x01(\x0e26.yandex.cloud.serverless.workflows.v1.Execution.StatusB\x04\xe8\xc71\x01R\x06status\x12?\n" +
 	"\n" +
-	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x125\n" +
+	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartedAt\x125\n" +
 	"\bduration\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\bdurationJ\x04\b\x03\x10\x04\"{\n" +
 	"\x0eExecutionInput\x12\x1f\n" +
 	"\n" +

@@ -441,7 +441,7 @@ func (x *UpdateHelmReleaseMetadata) GetProductVersionId() string {
 
 type UninstallHelmReleaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the Helm release to retrieve.
+	// The ID of the Helm release to uninstall.
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -663,7 +663,7 @@ var File_yandex_cloud_k8s_marketplace_v1_helm_release_service_proto protoreflect
 
 const file_yandex_cloud_k8s_marketplace_v1_helm_release_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/k8s/marketplace/v1/helm_release_service.proto\x12\x1fyandex.cloud.k8s.marketplace.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a2yandex/cloud/k8s/marketplace/v1/helm_release.proto\"\x91\x01\n" +
+	":yandex/cloud/k8s/marketplace/v1/helm_release_service.proto\x12\x1fyandex.cloud.k8s.marketplace.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/k8s/marketplace/v1/helm_release.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\x01\n" +
 	"\x17ListHelmReleasesRequest\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12'\n" +

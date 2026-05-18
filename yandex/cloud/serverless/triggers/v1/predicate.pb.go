@@ -237,15 +237,15 @@ type isFieldValuePredicate_Value interface {
 }
 
 type FieldValuePredicate_Exact struct {
-	Exact string `protobuf:"bytes,3,opt,name=exact,proto3,oneof"` // string representation of the value matches exactly to the given string
+	Exact string `protobuf:"bytes,3,opt,name=exact,proto3,oneof"` // string representation of the value matches exactly to the given string.
 }
 
 type FieldValuePredicate_Prefix struct {
-	Prefix string `protobuf:"bytes,8,opt,name=prefix,proto3,oneof"` // value has given prefix
+	Prefix string `protobuf:"bytes,8,opt,name=prefix,proto3,oneof"` // value has given prefix.
 }
 
 type FieldValuePredicate_Suffix struct {
-	Suffix string `protobuf:"bytes,9,opt,name=suffix,proto3,oneof"` // value has given suffix
+	Suffix string `protobuf:"bytes,9,opt,name=suffix,proto3,oneof"` // value has given suffix.
 }
 
 func (*FieldValuePredicate_Exact) isFieldValuePredicate_Value() {}
@@ -258,11 +258,11 @@ var File_yandex_cloud_serverless_triggers_v1_predicate_proto protoreflect.FileDe
 
 const file_yandex_cloud_serverless_triggers_v1_predicate_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/serverless/triggers/v1/predicate.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1dyandex/cloud/validation.proto\"\xee\x01\n" +
+	"3yandex/cloud/serverless/triggers/v1/predicate.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1dyandex/cloud/validation.proto\"\xf4\x01\n" +
 	"\tPredicate\x12X\n" +
 	"\rand_predicate\x18\x02 \x01(\v21.yandex.cloud.serverless.triggers.v1.AndPredicateH\x00R\fandPredicate\x12n\n" +
 	"\x15field_value_predicate\x18\x04 \x01(\v28.yandex.cloud.serverless.triggers.v1.FieldValuePredicateH\x00R\x13fieldValuePredicateB\x11\n" +
-	"\tpredicate\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04\"\\\n" +
+	"\tpredicate\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x03\x10\x04\"\\\n" +
 	"\fAndPredicate\x12L\n" +
 	"\tpredicate\x18\x01 \x03(\v2..yandex.cloud.serverless.triggers.v1.PredicateR\tpredicate\"\xa1\x01\n" +
 	"\x13FieldValuePredicate\x12#\n" +
@@ -271,7 +271,7 @@ const file_yandex_cloud_serverless_triggers_v1_predicate_proto_rawDesc = "" +
 	"\x05exact\x18\x03 \x01(\tH\x00R\x05exact\x12\x18\n" +
 	"\x06prefix\x18\b \x01(\tH\x00R\x06prefix\x12\x18\n" +
 	"\x06suffix\x18\t \x01(\tH\x00R\x06suffixB\r\n" +
-	"\x05value\x12\x04\xc0\xc11\x01J\x04\b\x04\x10\bJ\x04\b\x02\x10\x03B{\n" +
+	"\x05value\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03J\x04\b\x04\x10\bB{\n" +
 	"'yandex.cloud.api.serverless.triggers.v1ZPgithub.com/yandex-cloud/go-genproto/yandex/cloud/serverless/triggers/v1;triggersb\x06proto3"
 
 var (

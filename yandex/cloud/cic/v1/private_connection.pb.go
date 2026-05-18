@@ -91,8 +91,6 @@ type PrivateConnection struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the privateConnection belongs to.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the region that the privateConnection belongs to.
-	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of the trunk_connection that the privateConnection belongs to.
 	TrunkConnectionId string `protobuf:"bytes,7,opt,name=trunk_connection_id,json=trunkConnectionId,proto3" json:"trunk_connection_id,omitempty"`
 	// VLAN_ID that the privateConnection uses in multiplexing.
@@ -172,13 +170,6 @@ func (x *PrivateConnection) GetDescription() string {
 func (x *PrivateConnection) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
-	}
-	return ""
-}
-
-func (x *PrivateConnection) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
 	}
 	return ""
 }
@@ -282,13 +273,12 @@ var File_yandex_cloud_cic_v1_private_connection_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_cic_v1_private_connection_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cic/v1/private_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\xbc\x06\n" +
+	",yandex/cloud/cic/v1/private_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!yandex/cloud/cic/v1/peering.proto\"\xa5\x06\n" +
 	"\x11PrivateConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
-	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x12\x1b\n" +
-	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12.\n" +
+	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x12.\n" +
 	"\x13trunk_connection_id\x18\a \x01(\tR\x11trunkConnectionId\x124\n" +
 	"\avlan_id\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x06vlanId\x12?\n" +
 	"\fipv4_peering\x18\t \x01(\v2\x1c.yandex.cloud.cic.v1.PeeringR\vipv4Peering\x12`\n" +
@@ -308,7 +298,7 @@ const file_yandex_cloud_cic_v1_private_connection_proto_rawDesc = "" +
 	"\bUPDATING\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\n" +
 	"\n" +
-	"\x06ACTIVE\x10\x04J\x04\b\x04\x10\x05J\x04\b\n" +
+	"\x06ACTIVE\x10\x04J\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\n" +
 	"\x10\x12J\x04\b\x13\x10\x18J\x04\b\x1a\x10\x1bBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 

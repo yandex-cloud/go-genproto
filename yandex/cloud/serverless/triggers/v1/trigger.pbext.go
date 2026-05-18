@@ -112,172 +112,6 @@ func (m *Trigger_Rule) SetMail(v *Mail) {
 	}
 }
 
-type Trigger_Timer_Action = isTrigger_Timer_Action
-
-func (m *Trigger_Timer) SetAction(v Trigger_Timer_Action) {
-	m.Action = v
-}
-
-func (m *Trigger_Timer) SetCronExpression(v string) {
-	m.CronExpression = v
-}
-
-func (m *Trigger_Timer) SetPayload(v string) {
-	m.Payload = v
-}
-
-func (m *Trigger_Timer) SetInvokeFunction(v *InvokeFunctionOnce) {
-	m.Action = &Trigger_Timer_InvokeFunction{
-		InvokeFunction: v,
-	}
-}
-
-func (m *Trigger_Timer) SetInvokeFunctionWithRetry(v *InvokeFunctionWithRetry) {
-	m.Action = &Trigger_Timer_InvokeFunctionWithRetry{
-		InvokeFunctionWithRetry: v,
-	}
-}
-
-func (m *Trigger_Timer) SetInvokeContainerWithRetry(v *InvokeContainerWithRetry) {
-	m.Action = &Trigger_Timer_InvokeContainerWithRetry{
-		InvokeContainerWithRetry: v,
-	}
-}
-
-func (m *Trigger_Timer) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
-	m.Action = &Trigger_Timer_GatewayWebsocketBroadcast{
-		GatewayWebsocketBroadcast: v,
-	}
-}
-
-func (m *Trigger_Timer) SetStartWorkflow(v *StartWorkflowWithRetry) {
-	m.Action = &Trigger_Timer_StartWorkflow{
-		StartWorkflow: v,
-	}
-}
-
-type Trigger_MessageQueue_Action = isTrigger_MessageQueue_Action
-
-func (m *Trigger_MessageQueue) SetAction(v Trigger_MessageQueue_Action) {
-	m.Action = v
-}
-
-func (m *Trigger_MessageQueue) SetQueueId(v string) {
-	m.QueueId = v
-}
-
-func (m *Trigger_MessageQueue) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
-func (m *Trigger_MessageQueue) SetBatchSettings(v *BatchSettings) {
-	m.BatchSettings = v
-}
-
-func (m *Trigger_MessageQueue) SetVisibilityTimeout(v *durationpb.Duration) {
-	m.VisibilityTimeout = v
-}
-
-func (m *Trigger_MessageQueue) SetInvokeFunction(v *InvokeFunctionOnce) {
-	m.Action = &Trigger_MessageQueue_InvokeFunction{
-		InvokeFunction: v,
-	}
-}
-
-func (m *Trigger_MessageQueue) SetInvokeContainer(v *InvokeContainerOnce) {
-	m.Action = &Trigger_MessageQueue_InvokeContainer{
-		InvokeContainer: v,
-	}
-}
-
-func (m *Trigger_MessageQueue) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
-	m.Action = &Trigger_MessageQueue_GatewayWebsocketBroadcast{
-		GatewayWebsocketBroadcast: v,
-	}
-}
-
-func (m *Trigger_MessageQueue) SetStartWorkflow(v *StartWorkflowOnce) {
-	m.Action = &Trigger_MessageQueue_StartWorkflow{
-		StartWorkflow: v,
-	}
-}
-
-type Trigger_IoTMessage_Action = isTrigger_IoTMessage_Action
-
-func (m *Trigger_IoTMessage) SetAction(v Trigger_IoTMessage_Action) {
-	m.Action = v
-}
-
-func (m *Trigger_IoTMessage) SetRegistryId(v string) {
-	m.RegistryId = v
-}
-
-func (m *Trigger_IoTMessage) SetDeviceId(v string) {
-	m.DeviceId = v
-}
-
-func (m *Trigger_IoTMessage) SetMqttTopic(v string) {
-	m.MqttTopic = v
-}
-
-func (m *Trigger_IoTMessage) SetBatchSettings(v *BatchSettings) {
-	m.BatchSettings = v
-}
-
-func (m *Trigger_IoTMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
-	m.Action = &Trigger_IoTMessage_InvokeFunction{
-		InvokeFunction: v,
-	}
-}
-
-func (m *Trigger_IoTMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
-	m.Action = &Trigger_IoTMessage_InvokeContainer{
-		InvokeContainer: v,
-	}
-}
-
-func (m *Trigger_IoTMessage) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
-	m.Action = &Trigger_IoTMessage_GatewayWebsocketBroadcast{
-		GatewayWebsocketBroadcast: v,
-	}
-}
-
-type Trigger_IoTBrokerMessage_Action = isTrigger_IoTBrokerMessage_Action
-
-func (m *Trigger_IoTBrokerMessage) SetAction(v Trigger_IoTBrokerMessage_Action) {
-	m.Action = v
-}
-
-func (m *Trigger_IoTBrokerMessage) SetBrokerId(v string) {
-	m.BrokerId = v
-}
-
-func (m *Trigger_IoTBrokerMessage) SetMqttTopic(v string) {
-	m.MqttTopic = v
-}
-
-func (m *Trigger_IoTBrokerMessage) SetBatchSettings(v *BatchSettings) {
-	m.BatchSettings = v
-}
-
-func (m *Trigger_IoTBrokerMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
-	m.Action = &Trigger_IoTBrokerMessage_InvokeFunction{
-		InvokeFunction: v,
-	}
-}
-
-func (m *Trigger_IoTBrokerMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
-	m.Action = &Trigger_IoTBrokerMessage_InvokeContainer{
-		InvokeContainer: v,
-	}
-}
-
-func (m *Trigger_IoTBrokerMessage) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
-	m.Action = &Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast{
-		GatewayWebsocketBroadcast: v,
-	}
-}
-
 type Trigger_ObjectStorage_Action = isTrigger_ObjectStorage_Action
 
 func (m *Trigger_ObjectStorage) SetAction(v Trigger_ObjectStorage_Action) {
@@ -455,6 +289,172 @@ func (m *Trigger_Logging) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadc
 func (m *Trigger_Logging) SetStartWorkflow(v *StartWorkflowWithRetry) {
 	m.Action = &Trigger_Logging_StartWorkflow{
 		StartWorkflow: v,
+	}
+}
+
+type Trigger_Timer_Action = isTrigger_Timer_Action
+
+func (m *Trigger_Timer) SetAction(v Trigger_Timer_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_Timer) SetCronExpression(v string) {
+	m.CronExpression = v
+}
+
+func (m *Trigger_Timer) SetPayload(v string) {
+	m.Payload = v
+}
+
+func (m *Trigger_Timer) SetInvokeFunction(v *InvokeFunctionOnce) {
+	m.Action = &Trigger_Timer_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_Timer) SetInvokeFunctionWithRetry(v *InvokeFunctionWithRetry) {
+	m.Action = &Trigger_Timer_InvokeFunctionWithRetry{
+		InvokeFunctionWithRetry: v,
+	}
+}
+
+func (m *Trigger_Timer) SetInvokeContainerWithRetry(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_Timer_InvokeContainerWithRetry{
+		InvokeContainerWithRetry: v,
+	}
+}
+
+func (m *Trigger_Timer) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
+	m.Action = &Trigger_Timer_GatewayWebsocketBroadcast{
+		GatewayWebsocketBroadcast: v,
+	}
+}
+
+func (m *Trigger_Timer) SetStartWorkflow(v *StartWorkflowWithRetry) {
+	m.Action = &Trigger_Timer_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
+type Trigger_MessageQueue_Action = isTrigger_MessageQueue_Action
+
+func (m *Trigger_MessageQueue) SetAction(v Trigger_MessageQueue_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_MessageQueue) SetQueueId(v string) {
+	m.QueueId = v
+}
+
+func (m *Trigger_MessageQueue) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *Trigger_MessageQueue) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
+}
+
+func (m *Trigger_MessageQueue) SetVisibilityTimeout(v *durationpb.Duration) {
+	m.VisibilityTimeout = v
+}
+
+func (m *Trigger_MessageQueue) SetInvokeFunction(v *InvokeFunctionOnce) {
+	m.Action = &Trigger_MessageQueue_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_MessageQueue) SetInvokeContainer(v *InvokeContainerOnce) {
+	m.Action = &Trigger_MessageQueue_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+func (m *Trigger_MessageQueue) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
+	m.Action = &Trigger_MessageQueue_GatewayWebsocketBroadcast{
+		GatewayWebsocketBroadcast: v,
+	}
+}
+
+func (m *Trigger_MessageQueue) SetStartWorkflow(v *StartWorkflowOnce) {
+	m.Action = &Trigger_MessageQueue_StartWorkflow{
+		StartWorkflow: v,
+	}
+}
+
+type Trigger_IoTMessage_Action = isTrigger_IoTMessage_Action
+
+func (m *Trigger_IoTMessage) SetAction(v Trigger_IoTMessage_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_IoTMessage) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *Trigger_IoTMessage) SetDeviceId(v string) {
+	m.DeviceId = v
+}
+
+func (m *Trigger_IoTMessage) SetMqttTopic(v string) {
+	m.MqttTopic = v
+}
+
+func (m *Trigger_IoTMessage) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
+}
+
+func (m *Trigger_IoTMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &Trigger_IoTMessage_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_IoTMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_IoTMessage_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+func (m *Trigger_IoTMessage) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
+	m.Action = &Trigger_IoTMessage_GatewayWebsocketBroadcast{
+		GatewayWebsocketBroadcast: v,
+	}
+}
+
+type Trigger_IoTBrokerMessage_Action = isTrigger_IoTBrokerMessage_Action
+
+func (m *Trigger_IoTBrokerMessage) SetAction(v Trigger_IoTBrokerMessage_Action) {
+	m.Action = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetBrokerId(v string) {
+	m.BrokerId = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetMqttTopic(v string) {
+	m.MqttTopic = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetBatchSettings(v *BatchSettings) {
+	m.BatchSettings = v
+}
+
+func (m *Trigger_IoTBrokerMessage) SetInvokeFunction(v *InvokeFunctionWithRetry) {
+	m.Action = &Trigger_IoTBrokerMessage_InvokeFunction{
+		InvokeFunction: v,
+	}
+}
+
+func (m *Trigger_IoTBrokerMessage) SetInvokeContainer(v *InvokeContainerWithRetry) {
+	m.Action = &Trigger_IoTBrokerMessage_InvokeContainer{
+		InvokeContainer: v,
+	}
+}
+
+func (m *Trigger_IoTBrokerMessage) SetGatewayWebsocketBroadcast(v *GatewayWebsocketBroadcast) {
+	m.Action = &Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast{
+		GatewayWebsocketBroadcast: v,
 	}
 }
 

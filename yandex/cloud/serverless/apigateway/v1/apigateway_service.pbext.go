@@ -140,11 +140,11 @@ func (m *DeleteApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
-func (m *ResumeApiGatewayRequest) SetApiGatewayId(v string) {
+func (m *StopApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
-func (m *StopApiGatewayRequest) SetApiGatewayId(v string) {
+func (m *ResumeApiGatewayRequest) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
@@ -180,11 +180,11 @@ func (m *DeleteApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
-func (m *ResumeApiGatewayMetadata) SetApiGatewayId(v string) {
+func (m *StopApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 
-func (m *StopApiGatewayMetadata) SetApiGatewayId(v string) {
+func (m *ResumeApiGatewayMetadata) SetApiGatewayId(v string) {
 	m.ApiGatewayId = v
 }
 

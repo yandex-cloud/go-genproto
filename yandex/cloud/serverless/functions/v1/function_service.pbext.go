@@ -235,16 +235,20 @@ func (m *CreateFunctionVersionRequest) SetEnvironment(v map[string]string) {
 	m.Environment = v
 }
 
+func (m *CreateFunctionVersionRequest) SetNamedServiceAccounts(v map[string]string) {
+	m.NamedServiceAccounts = v
+}
+
 func (m *CreateFunctionVersionRequest) SetTag(v []string) {
 	m.Tag = v
 }
 
-func (m *CreateFunctionVersionRequest) SetConnectivity(v *Connectivity) {
-	m.Connectivity = v
+func (m *CreateFunctionVersionRequest) SetConcurrency(v int64) {
+	m.Concurrency = v
 }
 
-func (m *CreateFunctionVersionRequest) SetNamedServiceAccounts(v map[string]string) {
-	m.NamedServiceAccounts = v
+func (m *CreateFunctionVersionRequest) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
 }
 
 func (m *CreateFunctionVersionRequest) SetSecrets(v []*Secret) {
@@ -265,10 +269,6 @@ func (m *CreateFunctionVersionRequest) SetAsyncInvocationConfig(v *AsyncInvocati
 
 func (m *CreateFunctionVersionRequest) SetTmpfsSize(v int64) {
 	m.TmpfsSize = v
-}
-
-func (m *CreateFunctionVersionRequest) SetConcurrency(v int64) {
-	m.Concurrency = v
 }
 
 func (m *CreateFunctionVersionRequest) SetMounts(v []*Mount) {

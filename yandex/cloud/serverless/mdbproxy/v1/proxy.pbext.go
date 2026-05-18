@@ -52,26 +52,6 @@ func (m *Target) SetPostgresql(v *Target_PostgreSQL) {
 	}
 }
 
-func (m *Target_PostgreSQL) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *Target_PostgreSQL) SetUser(v string) {
-	m.User = v
-}
-
-func (m *Target_PostgreSQL) SetPassword(v string) {
-	m.Password = v
-}
-
-func (m *Target_PostgreSQL) SetDb(v string) {
-	m.Db = v
-}
-
-func (m *Target_PostgreSQL) SetEndpoint(v string) {
-	m.Endpoint = v
-}
-
 func (m *Target_ClickHouse) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -89,5 +69,25 @@ func (m *Target_ClickHouse) SetDb(v string) {
 }
 
 func (m *Target_ClickHouse) SetEndpoint(v string) {
+	m.Endpoint = v
+}
+
+func (m *Target_PostgreSQL) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *Target_PostgreSQL) SetUser(v string) {
+	m.User = v
+}
+
+func (m *Target_PostgreSQL) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *Target_PostgreSQL) SetDb(v string) {
+	m.Db = v
+}
+
+func (m *Target_PostgreSQL) SetEndpoint(v string) {
 	m.Endpoint = v
 }

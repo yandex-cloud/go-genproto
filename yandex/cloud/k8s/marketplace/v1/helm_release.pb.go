@@ -26,7 +26,7 @@ type HelmRelease_Status int32
 
 const (
 	HelmRelease_STATUS_UNSPECIFIED HelmRelease_Status = 0
-	// Helm release status is unknown
+	// Helm release status is unknown.
 	HelmRelease_UNKNOWN HelmRelease_Status = 1
 	// Helm release deployed.
 	HelmRelease_DEPLOYED HelmRelease_Status = 2
@@ -104,7 +104,7 @@ func (HelmRelease_Status) EnumDescriptor() ([]byte, []int) {
 // A Helm Release.
 type HelmRelease struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of a helm release.
+	// ID of a Helm release.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the Kubernetes cluster.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
@@ -112,13 +112,13 @@ type HelmRelease struct {
 	AppName string `protobuf:"bytes,3,opt,name=app_name,json=appName,proto3" json:"app_name,omitempty"`
 	// Namespace of the application.
 	AppNamespace string `protobuf:"bytes,4,opt,name=app_namespace,json=appNamespace,proto3" json:"app_namespace,omitempty"`
-	// Kubernetes marketplace product id.
+	// Kubernetes marketplace product ID.
 	ProductId string `protobuf:"bytes,5,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	// Kubernetes marketplace product name.
 	ProductName string `protobuf:"bytes,6,opt,name=product_name,json=productName,proto3" json:"product_name,omitempty"`
 	// Kubernetes marketplace product version.
 	ProductVersion string `protobuf:"bytes,10,opt,name=product_version,json=productVersion,proto3" json:"product_version,omitempty"`
-	// Status of a helm release.
+	// Status of the Helm release.
 	Status HelmRelease_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.k8s.marketplace.v1.HelmRelease_Status" json:"status,omitempty"`
 	// Creation timestamp.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`

@@ -423,95 +423,27 @@ func (x *HistoryEntryError) GetErrorCode() string {
 	return ""
 }
 
-type HistoryEntry_FailedAttempt struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Start timestamp for the attempt.
-	StartedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
-	// Duration of the attempt.
-	Duration *durationpb.Duration `protobuf:"bytes,2,opt,name=duration,proto3" json:"duration,omitempty"`
-	// Error details.
-	Error         *HistoryEntryError `protobuf:"bytes,3,opt,name=error,proto3" json:"error,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HistoryEntry_FailedAttempt) Reset() {
-	*x = HistoryEntry_FailedAttempt{}
-	mi := &file_yandex_cloud_serverless_workflows_v1_history_entry_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HistoryEntry_FailedAttempt) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HistoryEntry_FailedAttempt) ProtoMessage() {}
-
-func (x *HistoryEntry_FailedAttempt) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_workflows_v1_history_entry_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HistoryEntry_FailedAttempt.ProtoReflect.Descriptor instead.
-func (*HistoryEntry_FailedAttempt) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_workflows_v1_history_entry_proto_rawDescGZIP(), []int{0, 0}
-}
-
-func (x *HistoryEntry_FailedAttempt) GetStartedAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.StartedAt
-	}
-	return nil
-}
-
-func (x *HistoryEntry_FailedAttempt) GetDuration() *durationpb.Duration {
-	if x != nil {
-		return x.Duration
-	}
-	return nil
-}
-
-func (x *HistoryEntry_FailedAttempt) GetError() *HistoryEntryError {
-	if x != nil {
-		return x.Error
-	}
-	return nil
-}
-
 var File_yandex_cloud_serverless_workflows_v1_history_entry_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_workflows_v1_history_entry_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/serverless/workflows/v1/history_entry.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf0\a\n" +
-	"\fHistoryEntry\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x129\n" +
+	"8yandex/cloud/serverless/workflows/v1/history_entry.proto\x12$yandex.cloud.serverless.workflows.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xb5\x06\n" +
+	"\fHistoryEntry\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1a\n" +
+	"\x05title\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05title\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12?\n" +
 	"\n" +
-	"started_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x125\n" +
+	"started_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartedAt\x125\n" +
 	"\bduration\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\bduration\x12M\n" +
 	"\x05input\x18\x06 \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryInputR\x05input\x12P\n" +
 	"\x06output\x18\a \x01(\v28.yandex.cloud.serverless.workflows.v1.HistoryEntryOutputR\x06output\x12M\n" +
-	"\x05error\x18\b \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryErrorR\x05error\x12Q\n" +
-	"\x06status\x18\t \x01(\x0e29.yandex.cloud.serverless.workflows.v1.HistoryEntry.StatusR\x06status\x12\x12\n" +
+	"\x05error\x18\b \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryErrorR\x05error\x12W\n" +
+	"\x06status\x18\t \x01(\x0e29.yandex.cloud.serverless.workflows.v1.HistoryEntry.StatusB\x04\xe8\xc71\x01R\x06status\x12\x18\n" +
 	"\x04type\x18\n" +
-	" \x01(\tR\x04type\x12\x1a\n" +
+	" \x01(\tB\x04\xe8\xc71\x01R\x04type\x12\x1a\n" +
 	"\battempts\x18\f \x01(\x03R\battempts\x12V\n" +
 	"\n" +
-	"last_error\x18\r \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryErrorR\tlastError\x1a\xd6\x01\n" +
-	"\rFailedAttempt\x12?\n" +
-	"\n" +
-	"started_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartedAt\x125\n" +
-	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\bduration\x12M\n" +
-	"\x05error\x18\x03 \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryErrorR\x05error\"|\n" +
+	"last_error\x18\r \x01(\v27.yandex.cloud.serverless.workflows.v1.HistoryEntryErrorR\tlastError\"|\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tSCHEDULED\x10\x01\x12\v\n" +
@@ -548,33 +480,29 @@ func file_yandex_cloud_serverless_workflows_v1_history_entry_proto_rawDescGZIP()
 }
 
 var file_yandex_cloud_serverless_workflows_v1_history_entry_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_serverless_workflows_v1_history_entry_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_serverless_workflows_v1_history_entry_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_serverless_workflows_v1_history_entry_proto_goTypes = []any{
-	(HistoryEntry_Status)(0),           // 0: yandex.cloud.serverless.workflows.v1.HistoryEntry.Status
-	(*HistoryEntry)(nil),               // 1: yandex.cloud.serverless.workflows.v1.HistoryEntry
-	(*HistoryEntryInput)(nil),          // 2: yandex.cloud.serverless.workflows.v1.HistoryEntryInput
-	(*HistoryEntryOutput)(nil),         // 3: yandex.cloud.serverless.workflows.v1.HistoryEntryOutput
-	(*HistoryEntryError)(nil),          // 4: yandex.cloud.serverless.workflows.v1.HistoryEntryError
-	(*HistoryEntry_FailedAttempt)(nil), // 5: yandex.cloud.serverless.workflows.v1.HistoryEntry.FailedAttempt
-	(*timestamppb.Timestamp)(nil),      // 6: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),        // 7: google.protobuf.Duration
+	(HistoryEntry_Status)(0),      // 0: yandex.cloud.serverless.workflows.v1.HistoryEntry.Status
+	(*HistoryEntry)(nil),          // 1: yandex.cloud.serverless.workflows.v1.HistoryEntry
+	(*HistoryEntryInput)(nil),     // 2: yandex.cloud.serverless.workflows.v1.HistoryEntryInput
+	(*HistoryEntryOutput)(nil),    // 3: yandex.cloud.serverless.workflows.v1.HistoryEntryOutput
+	(*HistoryEntryError)(nil),     // 4: yandex.cloud.serverless.workflows.v1.HistoryEntryError
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),   // 6: google.protobuf.Duration
 }
 var file_yandex_cloud_serverless_workflows_v1_history_entry_proto_depIdxs = []int32{
-	6,  // 0: yandex.cloud.serverless.workflows.v1.HistoryEntry.started_at:type_name -> google.protobuf.Timestamp
-	7,  // 1: yandex.cloud.serverless.workflows.v1.HistoryEntry.duration:type_name -> google.protobuf.Duration
-	2,  // 2: yandex.cloud.serverless.workflows.v1.HistoryEntry.input:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryInput
-	3,  // 3: yandex.cloud.serverless.workflows.v1.HistoryEntry.output:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryOutput
-	4,  // 4: yandex.cloud.serverless.workflows.v1.HistoryEntry.error:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryError
-	0,  // 5: yandex.cloud.serverless.workflows.v1.HistoryEntry.status:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntry.Status
-	4,  // 6: yandex.cloud.serverless.workflows.v1.HistoryEntry.last_error:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryError
-	6,  // 7: yandex.cloud.serverless.workflows.v1.HistoryEntry.FailedAttempt.started_at:type_name -> google.protobuf.Timestamp
-	7,  // 8: yandex.cloud.serverless.workflows.v1.HistoryEntry.FailedAttempt.duration:type_name -> google.protobuf.Duration
-	4,  // 9: yandex.cloud.serverless.workflows.v1.HistoryEntry.FailedAttempt.error:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryError
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	5, // 0: yandex.cloud.serverless.workflows.v1.HistoryEntry.started_at:type_name -> google.protobuf.Timestamp
+	6, // 1: yandex.cloud.serverless.workflows.v1.HistoryEntry.duration:type_name -> google.protobuf.Duration
+	2, // 2: yandex.cloud.serverless.workflows.v1.HistoryEntry.input:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryInput
+	3, // 3: yandex.cloud.serverless.workflows.v1.HistoryEntry.output:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryOutput
+	4, // 4: yandex.cloud.serverless.workflows.v1.HistoryEntry.error:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryError
+	0, // 5: yandex.cloud.serverless.workflows.v1.HistoryEntry.status:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntry.Status
+	4, // 6: yandex.cloud.serverless.workflows.v1.HistoryEntry.last_error:type_name -> yandex.cloud.serverless.workflows.v1.HistoryEntryError
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_workflows_v1_history_entry_proto_init() }
@@ -594,7 +522,7 @@ func file_yandex_cloud_serverless_workflows_v1_history_entry_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_serverless_workflows_v1_history_entry_proto_rawDesc), len(file_yandex_cloud_serverless_workflows_v1_history_entry_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

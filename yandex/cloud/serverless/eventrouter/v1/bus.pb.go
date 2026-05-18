@@ -86,7 +86,6 @@ type LogOptions struct {
 	//	*LogOptions_FolderId
 	Destination isLogOptions_Destination `protobuf_oneof:"destination"`
 	// Minimum log entry level.
-	//
 	// See [LogLevel.Level] for details.
 	MinLevel      v1.LogLevel_Level `protobuf:"varint,3,opt,name=min_level,json=minLevel,proto3,enum=yandex.cloud.logging.v1.LogLevel_Level" json:"min_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -312,14 +311,14 @@ var File_yandex_cloud_serverless_eventrouter_v1_bus_proto protoreflect.FileDescr
 
 const file_yandex_cloud_serverless_eventrouter_v1_bus_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/serverless/eventrouter/v1/bus.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xbe\x01\n" +
+	"0yandex/cloud/serverless/eventrouter/v1/bus.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x01\n" +
 	"\n" +
-	"LogOptions\x12,\n" +
-	"\flog_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\n" +
-	"logGroupId\x12'\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\bfolderId\x12D\n" +
+	"LogOptions\x12O\n" +
+	"\flog_group_id\x18\x01 \x01(\tB+\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?\x8a\xc81\x04<=50H\x00R\n" +
+	"logGroupId\x12J\n" +
+	"\tfolder_id\x18\x02 \x01(\tB+\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?\x8a\xc81\x04<=50H\x00R\bfolderId\x12D\n" +
 	"\tmin_level\x18\x03 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestinationJ\x04\b\x04\x10\x05\"\x8f\x05\n" +
+	"\vdestination\"\x8f\x05\n" +
 	"\x03Bus\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x19\n" +

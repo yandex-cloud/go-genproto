@@ -30,6 +30,8 @@ type Connector_Status int32
 const (
 	Connector_STATUS_UNSPECIFIED Connector_Status = 0
 	Connector_RUNNING            Connector_Status = 1
+	// creation in progress
+	Connector_CREATING Connector_Status = 8
 	// disabled by user
 	Connector_STOPPED Connector_Status = 2
 	// source does not exist
@@ -40,8 +42,6 @@ const (
 	Connector_SUBJECT_NOT_FOUND Connector_Status = 5
 	// deletion in progress
 	Connector_DELETING Connector_Status = 7
-	// creation in progress
-	Connector_CREATING Connector_Status = 8
 )
 
 // Enum value maps for Connector_Status.
@@ -49,22 +49,22 @@ var (
 	Connector_Status_name = map[int32]string{
 		0: "STATUS_UNSPECIFIED",
 		1: "RUNNING",
+		8: "CREATING",
 		2: "STOPPED",
 		3: "RESOURCE_NOT_FOUND",
 		4: "PERMISSION_DENIED",
 		5: "SUBJECT_NOT_FOUND",
 		7: "DELETING",
-		8: "CREATING",
 	}
 	Connector_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
 		"RUNNING":            1,
+		"CREATING":           8,
 		"STOPPED":            2,
 		"RESOURCE_NOT_FOUND": 3,
 		"PERMISSION_DENIED":  4,
 		"SUBJECT_NOT_FOUND":  5,
 		"DELETING":           7,
-		"CREATING":           8,
 	}
 )
 
@@ -236,8 +236,8 @@ type Source struct {
 	//
 	//	*Source_DataStream
 	//	*Source_MessageQueue
-	//	*Source_Timer
 	//	*Source_EventServiceSource
+	//	*Source_Timer
 	//	*Source_AuditTrails
 	Source        isSource_Source `protobuf_oneof:"source"`
 	unknownFields protoimpl.UnknownFields
@@ -299,19 +299,19 @@ func (x *Source) GetMessageQueue() *MessageQueue {
 	return nil
 }
 
-func (x *Source) GetTimer() *Timer {
+func (x *Source) GetEventServiceSource() *EventServiceSource {
 	if x != nil {
-		if x, ok := x.Source.(*Source_Timer); ok {
-			return x.Timer
+		if x, ok := x.Source.(*Source_EventServiceSource); ok {
+			return x.EventServiceSource
 		}
 	}
 	return nil
 }
 
-func (x *Source) GetEventServiceSource() *EventServiceSource {
+func (x *Source) GetTimer() *Timer {
 	if x != nil {
-		if x, ok := x.Source.(*Source_EventServiceSource); ok {
-			return x.EventServiceSource
+		if x, ok := x.Source.(*Source_Timer); ok {
+			return x.Timer
 		}
 	}
 	return nil
@@ -338,12 +338,12 @@ type Source_MessageQueue struct {
 	MessageQueue *MessageQueue `protobuf:"bytes,2,opt,name=message_queue,json=messageQueue,proto3,oneof"`
 }
 
-type Source_Timer struct {
-	Timer *Timer `protobuf:"bytes,3,opt,name=timer,proto3,oneof"`
-}
-
 type Source_EventServiceSource struct {
 	EventServiceSource *EventServiceSource `protobuf:"bytes,4,opt,name=event_service_source,json=eventServiceSource,proto3,oneof"`
+}
+
+type Source_Timer struct {
+	Timer *Timer `protobuf:"bytes,3,opt,name=timer,proto3,oneof"`
 }
 
 type Source_AuditTrails struct {
@@ -354,9 +354,9 @@ func (*Source_DataStream) isSource_Source() {}
 
 func (*Source_MessageQueue) isSource_Source() {}
 
-func (*Source_Timer) isSource_Source() {}
-
 func (*Source_EventServiceSource) isSource_Source() {}
+
+func (*Source_Timer) isSource_Source() {}
 
 func (*Source_AuditTrails) isSource_Source() {}
 
@@ -674,19 +674,19 @@ const file_yandex_cloud_serverless_eventrouter_v1_connector_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
-	"\aRUNNING\x10\x01\x12\v\n" +
+	"\aRUNNING\x10\x01\x12\f\n" +
+	"\bCREATING\x10\b\x12\v\n" +
 	"\aSTOPPED\x10\x02\x12\x16\n" +
 	"\x12RESOURCE_NOT_FOUND\x10\x03\x12\x15\n" +
 	"\x11PERMISSION_DENIED\x10\x04\x12\x15\n" +
 	"\x11SUBJECT_NOT_FOUND\x10\x05\x12\f\n" +
-	"\bDELETING\x10\a\x12\f\n" +
-	"\bCREATING\x10\b\"\xdd\x03\n" +
+	"\bDELETING\x10\a\"\xdd\x03\n" +
 	"\x06Source\x12U\n" +
 	"\vdata_stream\x18\x01 \x01(\v22.yandex.cloud.serverless.eventrouter.v1.DataStreamH\x00R\n" +
 	"dataStream\x12[\n" +
-	"\rmessage_queue\x18\x02 \x01(\v24.yandex.cloud.serverless.eventrouter.v1.MessageQueueH\x00R\fmessageQueue\x12E\n" +
-	"\x05timer\x18\x03 \x01(\v2-.yandex.cloud.serverless.eventrouter.v1.TimerH\x00R\x05timer\x12n\n" +
-	"\x14event_service_source\x18\x04 \x01(\v2:.yandex.cloud.serverless.eventrouter.v1.EventServiceSourceH\x00R\x12eventServiceSource\x12X\n" +
+	"\rmessage_queue\x18\x02 \x01(\v24.yandex.cloud.serverless.eventrouter.v1.MessageQueueH\x00R\fmessageQueue\x12n\n" +
+	"\x14event_service_source\x18\x04 \x01(\v2:.yandex.cloud.serverless.eventrouter.v1.EventServiceSourceH\x00R\x12eventServiceSource\x12E\n" +
+	"\x05timer\x18\x03 \x01(\v2-.yandex.cloud.serverless.eventrouter.v1.TimerH\x00R\x05timer\x12X\n" +
 	"\faudit_trails\x18\x05 \x01(\v23.yandex.cloud.serverless.eventrouter.v1.AuditTrailsH\x00R\vauditTrailsB\x0e\n" +
 	"\x06source\x12\x04\xc0\xc11\x01\"\xab\x01\n" +
 	"\n" +
@@ -746,8 +746,8 @@ var file_yandex_cloud_serverless_eventrouter_v1_connector_proto_depIdxs = []int3
 	0,  // 3: yandex.cloud.serverless.eventrouter.v1.Connector.status:type_name -> yandex.cloud.serverless.eventrouter.v1.Connector.Status
 	3,  // 4: yandex.cloud.serverless.eventrouter.v1.Source.data_stream:type_name -> yandex.cloud.serverless.eventrouter.v1.DataStream
 	4,  // 5: yandex.cloud.serverless.eventrouter.v1.Source.message_queue:type_name -> yandex.cloud.serverless.eventrouter.v1.MessageQueue
-	6,  // 6: yandex.cloud.serverless.eventrouter.v1.Source.timer:type_name -> yandex.cloud.serverless.eventrouter.v1.Timer
-	5,  // 7: yandex.cloud.serverless.eventrouter.v1.Source.event_service_source:type_name -> yandex.cloud.serverless.eventrouter.v1.EventServiceSource
+	5,  // 6: yandex.cloud.serverless.eventrouter.v1.Source.event_service_source:type_name -> yandex.cloud.serverless.eventrouter.v1.EventServiceSource
+	6,  // 7: yandex.cloud.serverless.eventrouter.v1.Source.timer:type_name -> yandex.cloud.serverless.eventrouter.v1.Timer
 	7,  // 8: yandex.cloud.serverless.eventrouter.v1.Source.audit_trails:type_name -> yandex.cloud.serverless.eventrouter.v1.AuditTrails
 	10, // 9: yandex.cloud.serverless.eventrouter.v1.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
 	10, // 10: yandex.cloud.serverless.eventrouter.v1.MessageQueue.polling_timeout:type_name -> google.protobuf.Duration
@@ -766,8 +766,8 @@ func file_yandex_cloud_serverless_eventrouter_v1_connector_proto_init() {
 	file_yandex_cloud_serverless_eventrouter_v1_connector_proto_msgTypes[1].OneofWrappers = []any{
 		(*Source_DataStream)(nil),
 		(*Source_MessageQueue)(nil),
-		(*Source_Timer)(nil),
 		(*Source_EventServiceSource)(nil),
+		(*Source_Timer)(nil),
 		(*Source_AuditTrails)(nil),
 	}
 	type x struct{}

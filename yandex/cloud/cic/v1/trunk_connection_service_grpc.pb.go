@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	TrunkConnectionService_Get_FullMethodName                    = "/yandex.cloud.cic.v1.TrunkConnectionService/Get"
+	TrunkConnectionService_BatchGet_FullMethodName               = "/yandex.cloud.cic.v1.TrunkConnectionService/BatchGet"
 	TrunkConnectionService_List_FullMethodName                   = "/yandex.cloud.cic.v1.TrunkConnectionService/List"
 	TrunkConnectionService_Update_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Update"
 	TrunkConnectionService_Delete_FullMethodName                 = "/yandex.cloud.cic.v1.TrunkConnectionService/Delete"
@@ -39,6 +40,7 @@ type TrunkConnectionServiceClient interface {
 	// Returns the specified TrunkConnection resource.
 	// To get the list of available TrunkConnection resources, make a [List] request.
 	Get(ctx context.Context, in *GetTrunkConnectionRequest, opts ...grpc.CallOption) (*TrunkConnection, error)
+	BatchGet(ctx context.Context, in *BatchGetTrunkConnectionsRequest, opts ...grpc.CallOption) (*BatchGetTrunkConnectionsResponse, error)
 	// Retrieves the list of TrunkConnection resources in the specified folder.
 	List(ctx context.Context, in *ListTrunkConnectionsRequest, opts ...grpc.CallOption) (*ListTrunkConnectionsResponse, error)
 	// Updates a TrunkConnection resource using the data specified in the request.
@@ -69,6 +71,16 @@ func (c *trunkConnectionServiceClient) Get(ctx context.Context, in *GetTrunkConn
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TrunkConnection)
 	err := c.cc.Invoke(ctx, TrunkConnectionService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *trunkConnectionServiceClient) BatchGet(ctx context.Context, in *BatchGetTrunkConnectionsRequest, opts ...grpc.CallOption) (*BatchGetTrunkConnectionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetTrunkConnectionsResponse)
+	err := c.cc.Invoke(ctx, TrunkConnectionService_BatchGet_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -154,6 +166,7 @@ type TrunkConnectionServiceServer interface {
 	// Returns the specified TrunkConnection resource.
 	// To get the list of available TrunkConnection resources, make a [List] request.
 	Get(context.Context, *GetTrunkConnectionRequest) (*TrunkConnection, error)
+	BatchGet(context.Context, *BatchGetTrunkConnectionsRequest) (*BatchGetTrunkConnectionsResponse, error)
 	// Retrieves the list of TrunkConnection resources in the specified folder.
 	List(context.Context, *ListTrunkConnectionsRequest) (*ListTrunkConnectionsResponse, error)
 	// Updates a TrunkConnection resource using the data specified in the request.
@@ -181,6 +194,9 @@ type UnimplementedTrunkConnectionServiceServer struct{}
 
 func (UnimplementedTrunkConnectionServiceServer) Get(context.Context, *GetTrunkConnectionRequest) (*TrunkConnection, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedTrunkConnectionServiceServer) BatchGet(context.Context, *BatchGetTrunkConnectionsRequest) (*BatchGetTrunkConnectionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGet not implemented")
 }
 func (UnimplementedTrunkConnectionServiceServer) List(context.Context, *ListTrunkConnectionsRequest) (*ListTrunkConnectionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
@@ -237,6 +253,24 @@ func _TrunkConnectionService_Get_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TrunkConnectionServiceServer).Get(ctx, req.(*GetTrunkConnectionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TrunkConnectionService_BatchGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetTrunkConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TrunkConnectionServiceServer).BatchGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TrunkConnectionService_BatchGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TrunkConnectionServiceServer).BatchGet(ctx, req.(*BatchGetTrunkConnectionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -377,6 +411,10 @@ var TrunkConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _TrunkConnectionService_Get_Handler,
+		},
+		{
+			MethodName: "BatchGet",
+			Handler:    _TrunkConnectionService_BatchGet_Handler,
 		},
 		{
 			MethodName: "List",

@@ -78,8 +78,6 @@ type Partner struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the partner.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the region that the partner belongs to.
-	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// Name of the partner.
 	Name string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	// Link to info about the partner.
@@ -129,13 +127,6 @@ func (x *Partner) GetId() string {
 	return ""
 }
 
-func (x *Partner) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
 func (x *Partner) GetName() string {
 	if x != nil {
 		return x.Name
@@ -168,10 +159,9 @@ var File_yandex_cloud_cic_v1_partner_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_partner_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/cic/v1/partner.proto\x12\x13yandex.cloud.cic.v1\"\xf2\x01\n" +
+	"!yandex/cloud/cic/v1/partner.proto\x12\x13yandex.cloud.cic.v1\"\xd5\x01\n" +
 	"\aPartner\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\a \x01(\tR\x04name\x12\x10\n" +
 	"\x03url\x18\b \x01(\tR\x03url\x12\x17\n" +
 	"\apop_ids\x18\t \x03(\tR\x06popIds\x12;\n" +
@@ -179,7 +169,7 @@ const file_yandex_cloud_cic_v1_partner_proto_rawDesc = "" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x06\n" +
 	"\x02UP\x10\x01\x12\b\n" +
-	"\x04DOWN\x10\x02J\x04\b\x02\x10\x06J\x04\b\n" +
+	"\x04DOWN\x10\x02J\x04\b\x02\x10\aJ\x04\b\n" +
 	"\x10\vBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 

@@ -20,9 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PublicConnectionService_Get_FullMethodName  = "/yandex.cloud.cic.v1.PublicConnectionService/Get"
-	PublicConnectionService_List_FullMethodName = "/yandex.cloud.cic.v1.PublicConnectionService/List"
-	PublicConnectionService_Move_FullMethodName = "/yandex.cloud.cic.v1.PublicConnectionService/Move"
+	PublicConnectionService_Get_FullMethodName            = "/yandex.cloud.cic.v1.PublicConnectionService/Get"
+	PublicConnectionService_List_FullMethodName           = "/yandex.cloud.cic.v1.PublicConnectionService/List"
+	PublicConnectionService_Move_FullMethodName           = "/yandex.cloud.cic.v1.PublicConnectionService/Move"
+	PublicConnectionService_ListOperations_FullMethodName = "/yandex.cloud.cic.v1.PublicConnectionService/ListOperations"
 )
 
 // PublicConnectionServiceClient is the client API for PublicConnectionService service.
@@ -38,6 +39,7 @@ type PublicConnectionServiceClient interface {
 	List(ctx context.Context, in *ListPublicConnectionsRequest, opts ...grpc.CallOption) (*ListPublicConnectionsResponse, error)
 	// Moves the specified PublicConnection to another folder.
 	Move(ctx context.Context, in *MovePublicConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	ListOperations(ctx context.Context, in *ListPublicConnectionOperationsRequest, opts ...grpc.CallOption) (*ListPublicConnectionOperationsResponse, error)
 }
 
 type publicConnectionServiceClient struct {
@@ -78,6 +80,16 @@ func (c *publicConnectionServiceClient) Move(ctx context.Context, in *MovePublic
 	return out, nil
 }
 
+func (c *publicConnectionServiceClient) ListOperations(ctx context.Context, in *ListPublicConnectionOperationsRequest, opts ...grpc.CallOption) (*ListPublicConnectionOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPublicConnectionOperationsResponse)
+	err := c.cc.Invoke(ctx, PublicConnectionService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PublicConnectionServiceServer is the server API for PublicConnectionService service.
 // All implementations should embed UnimplementedPublicConnectionServiceServer
 // for forward compatibility.
@@ -91,6 +103,7 @@ type PublicConnectionServiceServer interface {
 	List(context.Context, *ListPublicConnectionsRequest) (*ListPublicConnectionsResponse, error)
 	// Moves the specified PublicConnection to another folder.
 	Move(context.Context, *MovePublicConnectionRequest) (*operation.Operation, error)
+	ListOperations(context.Context, *ListPublicConnectionOperationsRequest) (*ListPublicConnectionOperationsResponse, error)
 }
 
 // UnimplementedPublicConnectionServiceServer should be embedded to have
@@ -108,6 +121,9 @@ func (UnimplementedPublicConnectionServiceServer) List(context.Context, *ListPub
 }
 func (UnimplementedPublicConnectionServiceServer) Move(context.Context, *MovePublicConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
+}
+func (UnimplementedPublicConnectionServiceServer) ListOperations(context.Context, *ListPublicConnectionOperationsRequest) (*ListPublicConnectionOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedPublicConnectionServiceServer) testEmbeddedByValue() {}
 
@@ -183,6 +199,24 @@ func _PublicConnectionService_Move_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PublicConnectionService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPublicConnectionOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicConnectionServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PublicConnectionService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicConnectionServiceServer).ListOperations(ctx, req.(*ListPublicConnectionOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PublicConnectionService_ServiceDesc is the grpc.ServiceDesc for PublicConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -201,6 +235,10 @@ var PublicConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _PublicConnectionService_Move_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _PublicConnectionService_ListOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -80,10 +80,6 @@ func (m *Revision) SetStatus(v Revision_Status) {
 	m.Status = v
 }
 
-func (m *Revision) SetSecrets(v []*Secret) {
-	m.Secrets = v
-}
-
 func (m *Revision) SetConnectivity(v *Connectivity) {
 	m.Connectivity = v
 }
@@ -92,12 +88,16 @@ func (m *Revision) SetProvisionPolicy(v *ProvisionPolicy) {
 	m.ProvisionPolicy = v
 }
 
-func (m *Revision) SetScalingPolicy(v *ScalingPolicy) {
-	m.ScalingPolicy = v
+func (m *Revision) SetSecrets(v []*Secret) {
+	m.Secrets = v
 }
 
 func (m *Revision) SetLogOptions(v *LogOptions) {
 	m.LogOptions = v
+}
+
+func (m *Revision) SetScalingPolicy(v *ScalingPolicy) {
+	m.ScalingPolicy = v
 }
 
 func (m *Revision) SetStorageMounts(v []*StorageMount) {
@@ -118,6 +118,24 @@ func (m *Revision) SetMetadataOptions(v *MetadataOptions) {
 
 func (m *Revision) SetAsyncInvocationConfig(v *AsyncInvocationConfig) {
 	m.AsyncInvocationConfig = v
+}
+
+type Runtime_Type = isRuntime_Type
+
+func (m *Runtime) SetType(v Runtime_Type) {
+	m.Type = v
+}
+
+func (m *Runtime) SetHttp(v *Runtime_Http) {
+	m.Type = &Runtime_Http_{
+		Http: v,
+	}
+}
+
+func (m *Runtime) SetTask(v *Runtime_Task) {
+	m.Type = &Runtime_Task_{
+		Task: v,
+	}
 }
 
 func (m *Image) SetImageUrl(v string) {
@@ -164,6 +182,14 @@ func (m *Resources) SetCoreFraction(v int64) {
 	m.CoreFraction = v
 }
 
+func (m *Connectivity) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
+func (m *Connectivity) SetSubnetIds(v []string) {
+	m.SubnetIds = v
+}
+
 func (m *ProvisionPolicy) SetMinInstances(v int64) {
 	m.MinInstances = v
 }
@@ -190,14 +216,6 @@ func (m *Secret) SetEnvironmentVariable(v string) {
 	m.Reference = &Secret_EnvironmentVariable{
 		EnvironmentVariable: v,
 	}
-}
-
-func (m *Connectivity) SetNetworkId(v string) {
-	m.NetworkId = v
-}
-
-func (m *Connectivity) SetSubnetIds(v []string) {
-	m.SubnetIds = v
 }
 
 type LogOptions_Destination = isLogOptions_Destination
@@ -290,24 +308,6 @@ func (m *Mount_DiskSpec) SetSize(v int64) {
 
 func (m *Mount_DiskSpec) SetBlockSize(v int64) {
 	m.BlockSize = v
-}
-
-type Runtime_Type = isRuntime_Type
-
-func (m *Runtime) SetType(v Runtime_Type) {
-	m.Type = v
-}
-
-func (m *Runtime) SetHttp(v *Runtime_Http) {
-	m.Type = &Runtime_Http_{
-		Http: v,
-	}
-}
-
-func (m *Runtime) SetTask(v *Runtime_Task) {
-	m.Type = &Runtime_Task_{
-		Task: v,
-	}
 }
 
 func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {

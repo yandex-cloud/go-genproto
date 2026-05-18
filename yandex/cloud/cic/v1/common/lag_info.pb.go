@@ -9,7 +9,6 @@ package cic
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -24,10 +23,6 @@ const (
 
 type LagInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of LAG.
-	// Optional.
-	// If is not set scheduler selects it by himself.
-	LagId *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=lag_id,json=lagId,proto3" json:"lag_id,omitempty"`
 	// List of port names that the LAG is deployed on.
 	PortNames     []string `protobuf:"bytes,2,rep,name=port_names,json=portNames,proto3" json:"port_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -64,13 +59,6 @@ func (*LagInfo) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_cic_v1_common_lag_info_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *LagInfo) GetLagId() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.LagId
-	}
-	return nil
-}
-
 func (x *LagInfo) GetPortNames() []string {
 	if x != nil {
 		return x.PortNames
@@ -82,11 +70,10 @@ var File_yandex_cloud_cic_v1_common_lag_info_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_common_lag_info_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/cic/v1/common/lag_info.proto\x12\x1ayandex.cloud.cic.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\"\\\n" +
-	"\aLagInfo\x122\n" +
-	"\x06lag_id\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x05lagId\x12\x1d\n" +
+	")yandex/cloud/cic/v1/common/lag_info.proto\x12\x1ayandex.cloud.cic.v1.common\".\n" +
+	"\aLagInfo\x12\x1d\n" +
 	"\n" +
-	"port_names\x18\x02 \x03(\tR\tportNamesBd\n" +
+	"port_names\x18\x02 \x03(\tR\tportNamesJ\x04\b\x01\x10\x02Bd\n" +
 	"\x1eyandex.cloud.api.cic.v1.commonZBgithub.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1/common;cicb\x06proto3"
 
 var (
@@ -103,16 +90,14 @@ func file_yandex_cloud_cic_v1_common_lag_info_proto_rawDescGZIP() []byte {
 
 var file_yandex_cloud_cic_v1_common_lag_info_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_yandex_cloud_cic_v1_common_lag_info_proto_goTypes = []any{
-	(*LagInfo)(nil),               // 0: yandex.cloud.cic.v1.common.LagInfo
-	(*wrapperspb.Int64Value)(nil), // 1: google.protobuf.Int64Value
+	(*LagInfo)(nil), // 0: yandex.cloud.cic.v1.common.LagInfo
 }
 var file_yandex_cloud_cic_v1_common_lag_info_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.cic.v1.common.LagInfo.lag_id:type_name -> google.protobuf.Int64Value
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cic_v1_common_lag_info_proto_init() }

@@ -97,7 +97,8 @@ type RoutingInstance struct {
 	// List of the info about privateConnections which are attached to routingInstance.
 	CicPrivateConnectionInfo []*RoutingInstance_CicPrivateConnectionInfo `protobuf:"bytes,8,rep,name=cic_private_connection_info,json=cicPrivateConnectionInfo,proto3" json:"cic_private_connection_info,omitempty"`
 	// Status of the routingInstance.
-	Status RoutingInstance_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.cloudrouter.v1.RoutingInstance_Status" json:"status,omitempty"`
+	Status             RoutingInstance_Status `protobuf:"varint,9,opt,name=status,proto3,enum=yandex.cloud.cloudrouter.v1.RoutingInstance_Status" json:"status,omitempty"`
+	DeletionProtection bool                   `protobuf:"varint,10,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Resource labels, `key:value` pairs.
@@ -195,6 +196,13 @@ func (x *RoutingInstance) GetStatus() RoutingInstance_Status {
 		return x.Status
 	}
 	return RoutingInstance_STATUS_UNSPECIFIED
+}
+
+func (x *RoutingInstance) GetDeletionProtection() bool {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return false
 }
 
 func (x *RoutingInstance) GetCreatedAt() *timestamppb.Timestamp {
@@ -413,7 +421,7 @@ var File_yandex_cloud_cloudrouter_v1_routing_instance_proto protoreflect.FileDes
 
 const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\t\n" +
+	"2yandex/cloud/cloudrouter/v1/routing_instance.proto\x12\x1byandex.cloud.cloudrouter.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xee\t\n" +
 	"\x0fRoutingInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -422,7 +430,9 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\tregion_id\x18\x06 \x01(\tR\bregionId\x12O\n" +
 	"\bvpc_info\x18\a \x03(\v24.yandex.cloud.cloudrouter.v1.RoutingInstance.VpcInfoR\avpcInfo\x12\x84\x01\n" +
 	"\x1bcic_private_connection_info\x18\b \x03(\v2E.yandex.cloud.cloudrouter.v1.RoutingInstance.CicPrivateConnectionInfoR\x18cicPrivateConnectionInfo\x12K\n" +
-	"\x06status\x18\t \x01(\x0e23.yandex.cloud.cloudrouter.v1.RoutingInstance.StatusR\x06status\x129\n" +
+	"\x06status\x18\t \x01(\x0e23.yandex.cloud.cloudrouter.v1.RoutingInstance.StatusR\x06status\x12/\n" +
+	"\x13deletion_protection\x18\n" +
+	" \x01(\bR\x12deletionProtection\x129\n" +
 	"\n" +
 	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12P\n" +
 	"\x06labels\x18\x18 \x03(\v28.yandex.cloud.cloudrouter.v1.RoutingInstance.LabelsEntryR\x06labels\x1a9\n" +
@@ -446,8 +456,7 @@ const file_yandex_cloud_cloudrouter_v1_routing_instance_proto_rawDesc = "" +
 	"\bUPDATING\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\n" +
 	"\n" +
-	"\x06ACTIVE\x10\x04J\x04\b\x04\x10\x05J\x04\b\n" +
-	"\x10\vJ\x04\b\f\x10\x18Bn\n" +
+	"\x06ACTIVE\x10\x04J\x04\b\x04\x10\x05J\x04\b\f\x10\x18Bn\n" +
 	"\x1fyandex.cloud.api.cloudrouter.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudrouter/v1;cloudrouterb\x06proto3"
 
 var (

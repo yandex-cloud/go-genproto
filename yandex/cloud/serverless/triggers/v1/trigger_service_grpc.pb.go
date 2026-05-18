@@ -37,7 +37,6 @@ const (
 // A set of methods for managing triggers for serverless functions.
 type TriggerServiceClient interface {
 	// Returns the specified trigger.
-	//
 	// To get the list of all available triggers, make a [List] request.
 	Get(ctx context.Context, in *GetTriggerRequest, opts ...grpc.CallOption) (*Trigger, error)
 	// Retrieves the list of triggers in the specified folder.
@@ -151,7 +150,6 @@ func (c *triggerServiceClient) ListOperations(ctx context.Context, in *ListTrigg
 // A set of methods for managing triggers for serverless functions.
 type TriggerServiceServer interface {
 	// Returns the specified trigger.
-	//
 	// To get the list of all available triggers, make a [List] request.
 	Get(context.Context, *GetTriggerRequest) (*Trigger, error)
 	// Retrieves the list of triggers in the specified folder.

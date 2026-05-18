@@ -30,10 +30,6 @@ func (m *TrunkConnection) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *TrunkConnection) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *TrunkConnection) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

@@ -29,7 +29,6 @@ const (
 type GetTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trigger to return.
-	//
 	// To get a trigger ID make a [TriggerService.List] request.
 	TriggerId     string `protobuf:"bytes,1,opt,name=trigger_id,json=triggerId,proto3" json:"trigger_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,20 +75,17 @@ func (x *GetTriggerRequest) GetTriggerId() string {
 type ListTriggersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list triggers in.
-	//
 	// To get a folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListTriggersResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListTriggersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters triggers listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Trigger.name] field.
 	// 2. An `=` operator.
@@ -165,7 +161,6 @@ type ListTriggersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListTriggersRequest.page_size], use `nextPageToken` as the value
 	// for the [ListTriggersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -219,7 +214,6 @@ func (x *ListTriggersResponse) GetNextPageToken() string {
 type CreateTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a trigger in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the trigger.
@@ -348,7 +342,6 @@ func (x *CreateTriggerMetadata) GetTriggerId() string {
 type UpdateTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trigger to update.
-	//
 	// To get a trigger ID make a [TriggerService.List] request.
 	TriggerId string `protobuf:"bytes,1,opt,name=trigger_id,json=triggerId,proto3" json:"trigger_id,omitempty"`
 	// Field mask that specifies which attributes of the trigger should be updated.
@@ -359,7 +352,6 @@ type UpdateTriggerRequest struct {
 	// New description of the trigger.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Trigger labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label, request the current set of labels with a [TriggerService.Get] request.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -489,7 +481,6 @@ func (x *UpdateTriggerMetadata) GetTriggerId() string {
 type DeleteTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trigger to delete.
-	//
 	// To get a trigger ID make a [TriggerService.List] request.
 	TriggerId     string `protobuf:"bytes,1,opt,name=trigger_id,json=triggerId,proto3" json:"trigger_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -581,7 +572,6 @@ func (x *DeleteTriggerMetadata) GetTriggerId() string {
 type PauseTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trigger to pause
-	//
 	// To get a trigger ID make a [TriggerService.List] request.
 	TriggerId     string `protobuf:"bytes,1,opt,name=trigger_id,json=triggerId,proto3" json:"trigger_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -673,7 +663,6 @@ func (x *PauseTriggerMetadata) GetTriggerId() string {
 type ResumeTriggerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the trigger to pause
-	//
 	// To get a trigger ID make a [TriggerService.List] request.
 	TriggerId     string `protobuf:"bytes,1,opt,name=trigger_id,json=triggerId,proto3" json:"trigger_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -769,14 +758,12 @@ type ListTriggerOperationsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListTriggerOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListTriggerOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Trigger.name] field.
 	// 2. An `=` operator.
@@ -852,7 +839,6 @@ type ListTriggerOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListTriggerOperationsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListTriggerOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -907,7 +893,7 @@ var File_yandex_cloud_serverless_triggers_v1_trigger_service_proto protoreflect.
 
 const file_yandex_cloud_serverless_triggers_v1_trigger_service_proto_rawDesc = "" +
 	"\n" +
-	"9yandex/cloud/serverless/triggers/v1/trigger_service.proto\x12#yandex.cloud.serverless.triggers.v1\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/serverless/triggers/v1/trigger.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
+	"9yandex/cloud/serverless/triggers/v1/trigger_service.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a1yandex/cloud/serverless/triggers/v1/trigger.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
 	"\x11GetTriggerRequest\x12#\n" +
 	"\n" +
 	"trigger_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ttriggerId\"\x8c\x01\n" +
@@ -923,7 +909,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_service_proto_rawDesc = "
 	"\x14CreateTriggerRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa2\x01\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=500R\vdescription\x12\xa2\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2E.yandex.cloud.serverless.triggers.v1.CreateTriggerRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12K\n" +
 	"\x04rule\x18\x05 \x01(\v21.yandex.cloud.serverless.triggers.v1.Trigger.RuleB\x04\xe8\xc71\x01R\x04rule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -938,7 +924,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_service_proto_rawDesc = "
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x125\n" +
 	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa2\x01\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=500R\vdescription\x12\xa2\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2E.yandex.cloud.serverless.triggers.v1.UpdateTriggerRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12E\n" +
 	"\x04rule\x18\x06 \x01(\v21.yandex.cloud.serverless.triggers.v1.Trigger.RuleR\x04rule\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +

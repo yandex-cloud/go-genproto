@@ -80,7 +80,6 @@ func (GetOpenapiSpecRequest_Format) EnumDescriptor() ([]byte, []int) {
 type GetApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the API gateway to return.
-	//
 	// To get a API gateway ID make a [ApiGatewayService.List] request.
 	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -127,20 +126,17 @@ func (x *GetApiGatewayRequest) GetApiGatewayId() string {
 type ListApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list API gateways in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListApiGatewayResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListApiGatewayResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters functions listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [ApiGateway.name](index) field.
 	// 2. An `=` operator.
@@ -216,7 +212,6 @@ type ListApiGatewayResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListApiGatewayRequest.page_size], use `nextPageToken` as the value
 	// for the [ListApiGatewayRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -270,7 +265,6 @@ func (x *ListApiGatewayResponse) GetNextPageToken() string {
 type CreateApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an API gateway in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the API gateway.
@@ -423,7 +417,6 @@ func (*CreateApiGatewayRequest_OpenapiSpec) isCreateApiGatewayRequest_Spec() {}
 type UpdateApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the API gateway to update.
-	//
 	// To get a API gateway ID make a [ApiGatewayService.List] request.
 	ApiGatewayId string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
 	// Field mask that specifies which attributes of the API gateway should be updated.
@@ -434,7 +427,6 @@ type UpdateApiGatewayRequest struct {
 	// New description for the API gateway.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// API gateway labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label, request the current set of labels with a [yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Get] request.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -588,7 +580,6 @@ func (*UpdateApiGatewayRequest_OpenapiSpec) isUpdateApiGatewayRequest_Spec() {}
 type DeleteApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the API gateway to update.
-	//
 	// To get a API gateway ID make a [ApiGatewayService.List] request.
 	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -632,57 +623,9 @@ func (x *DeleteApiGatewayRequest) GetApiGatewayId() string {
 	return ""
 }
 
-type ResumeApiGatewayRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the API gateway to update.
-	//
-	// To get a API gateway ID make a [ApiGatewayService.List] request.
-	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResumeApiGatewayRequest) Reset() {
-	*x = ResumeApiGatewayRequest{}
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResumeApiGatewayRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeApiGatewayRequest) ProtoMessage() {}
-
-func (x *ResumeApiGatewayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeApiGatewayRequest.ProtoReflect.Descriptor instead.
-func (*ResumeApiGatewayRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *ResumeApiGatewayRequest) GetApiGatewayId() string {
-	if x != nil {
-		return x.ApiGatewayId
-	}
-	return ""
-}
-
 type StopApiGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the API gateway to update.
-	//
 	// To get a API gateway ID make a [ApiGatewayService.List] request.
 	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -691,7 +634,7 @@ type StopApiGatewayRequest struct {
 
 func (x *StopApiGatewayRequest) Reset() {
 	*x = StopApiGatewayRequest{}
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +646,7 @@ func (x *StopApiGatewayRequest) String() string {
 func (*StopApiGatewayRequest) ProtoMessage() {}
 
 func (x *StopApiGatewayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,10 +659,56 @@ func (x *StopApiGatewayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopApiGatewayRequest.ProtoReflect.Descriptor instead.
 func (*StopApiGatewayRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *StopApiGatewayRequest) GetApiGatewayId() string {
+	if x != nil {
+		return x.ApiGatewayId
+	}
+	return ""
+}
+
+type ResumeApiGatewayRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the API gateway to update.
+	// To get a API gateway ID make a [ApiGatewayService.List] request.
+	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResumeApiGatewayRequest) Reset() {
+	*x = ResumeApiGatewayRequest{}
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResumeApiGatewayRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResumeApiGatewayRequest) ProtoMessage() {}
+
+func (x *ResumeApiGatewayRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResumeApiGatewayRequest.ProtoReflect.Descriptor instead.
+func (*ResumeApiGatewayRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ResumeApiGatewayRequest) GetApiGatewayId() string {
 	if x != nil {
 		return x.ApiGatewayId
 	}
@@ -978,51 +967,6 @@ func (x *DeleteApiGatewayMetadata) GetApiGatewayId() string {
 	return ""
 }
 
-type ResumeApiGatewayMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the API gateway that is being resumed.
-	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ResumeApiGatewayMetadata) Reset() {
-	*x = ResumeApiGatewayMetadata{}
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResumeApiGatewayMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeApiGatewayMetadata) ProtoMessage() {}
-
-func (x *ResumeApiGatewayMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeApiGatewayMetadata.ProtoReflect.Descriptor instead.
-func (*ResumeApiGatewayMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *ResumeApiGatewayMetadata) GetApiGatewayId() string {
-	if x != nil {
-		return x.ApiGatewayId
-	}
-	return ""
-}
-
 type StopApiGatewayMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the API gateway that is being stopped.
@@ -1033,7 +977,7 @@ type StopApiGatewayMetadata struct {
 
 func (x *StopApiGatewayMetadata) Reset() {
 	*x = StopApiGatewayMetadata{}
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +989,7 @@ func (x *StopApiGatewayMetadata) String() string {
 func (*StopApiGatewayMetadata) ProtoMessage() {}
 
 func (x *StopApiGatewayMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1058,10 +1002,55 @@ func (x *StopApiGatewayMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopApiGatewayMetadata.ProtoReflect.Descriptor instead.
 func (*StopApiGatewayMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StopApiGatewayMetadata) GetApiGatewayId() string {
+	if x != nil {
+		return x.ApiGatewayId
+	}
+	return ""
+}
+
+type ResumeApiGatewayMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the API gateway that is being resumed.
+	ApiGatewayId  string `protobuf:"bytes,1,opt,name=api_gateway_id,json=apiGatewayId,proto3" json:"api_gateway_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResumeApiGatewayMetadata) Reset() {
+	*x = ResumeApiGatewayMetadata{}
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResumeApiGatewayMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResumeApiGatewayMetadata) ProtoMessage() {}
+
+func (x *ResumeApiGatewayMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResumeApiGatewayMetadata.ProtoReflect.Descriptor instead.
+func (*ResumeApiGatewayMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ResumeApiGatewayMetadata) GetApiGatewayId() string {
 	if x != nil {
 		return x.ApiGatewayId
 	}
@@ -1201,14 +1190,12 @@ type ListOperationsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.done], [operation.Operation.created_by] field.
 	// 2. An `=` operator.
@@ -1284,7 +1271,6 @@ type ListOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListOperationsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1447,7 +1433,7 @@ var File_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto protoref
 
 const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/serverless/apigateway/v1/apigateway_service.proto\x12%yandex.cloud.serverless.apigateway.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/duration.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/serverless/apigateway/v1/apigateway.proto\x1a\x1dyandex/cloud/validation.proto\"B\n" +
+	">yandex/cloud/serverless/apigateway/v1/apigateway_service.proto\x12%yandex.cloud.serverless.apigateway.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/serverless/apigateway/v1/apigateway.proto\x1a\x1dyandex/cloud/validation.proto\"B\n" +
 	"\x14GetApiGatewayRequest\x12*\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\"\x8e\x01\n" +
 	"\x15ListApiGatewayRequest\x12!\n" +
@@ -1502,10 +1488,10 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"\x05value\x18\x02 \x01(\v24.yandex.cloud.serverless.apigateway.v1.VariableInputR\x05value:\x028\x01B\f\n" +
 	"\x04spec\x12\x04\xc0\xc11\x01\"E\n" +
 	"\x17DeleteApiGatewayRequest\x12*\n" +
-	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\"E\n" +
-	"\x17ResumeApiGatewayRequest\x12*\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\"C\n" +
 	"\x15StopApiGatewayRequest\x12*\n" +
+	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\"E\n" +
+	"\x17ResumeApiGatewayRequest\x12*\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\"\x8c\x01\n" +
 	"\x10AddDomainRequest\x12*\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fapiGatewayId\x12\x1f\n" +
@@ -1520,10 +1506,10 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"\x18UpdateApiGatewayMetadata\x12$\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\"@\n" +
 	"\x18DeleteApiGatewayMetadata\x12$\n" +
-	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\"@\n" +
-	"\x18ResumeApiGatewayMetadata\x12$\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\">\n" +
 	"\x16StopApiGatewayMetadata\x12$\n" +
+	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\"@\n" +
+	"\x18ResumeApiGatewayMetadata\x12$\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\"\x9e\x01\n" +
 	"\x11AddDomainMetadata\x12$\n" +
 	"\x0eapi_gateway_id\x18\x01 \x01(\tR\fapiGatewayId\x12\x1b\n" +
@@ -1567,12 +1553,12 @@ const file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_rawDes
 	"\x18UpdateApiGatewayMetadata\x12\n" +
 	"ApiGateway\x82\xd3\xe4\x93\x021:\x01*2,/apigateways/v1/apigateways/{api_gateway_id}\x12\xd6\x01\n" +
 	"\x06Delete\x12>.yandex.cloud.serverless.apigateway.v1.DeleteApiGatewayRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*1\n" +
-	"\x18DeleteApiGatewayMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02.*,/apigateways/v1/apigateways/{api_gateway_id}\x12\xd5\x01\n" +
+	"\x18DeleteApiGatewayMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02.*,/apigateways/v1/apigateways/{api_gateway_id}\x12\xd8\x01\n" +
+	"\x04Stop\x12<.yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*/\n" +
+	"\x16StopApiGatewayMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x026:\x01*\"1/apigateways/v1/apigateways/{api_gateway_id}:stop\x12\xd5\x01\n" +
 	"\x06Resume\x12>.yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayRequest\x1a!.yandex.cloud.operation.Operation\"h\xb2\xd2*&\n" +
 	"\x18ResumeApiGatewayMetadata\x12\n" +
 	"ApiGateway\x82\xd3\xe4\x93\x028:\x01*\"3/apigateways/v1/apigateways/{api_gateway_id}:resume\x12\xd8\x01\n" +
-	"\x04Stop\x12<.yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*/\n" +
-	"\x16StopApiGatewayMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x026:\x01*\"1/apigateways/v1/apigateways/{api_gateway_id}:stop\x12\xd8\x01\n" +
 	"\tAddDomain\x127.yandex.cloud.serverless.apigateway.v1.AddDomainRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2**\n" +
 	"\x11AddDomainMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02;:\x01*\"6/apigateways/v1/apigateways/{api_gateway_id}:addDomain\x12\xe4\x01\n" +
 	"\fRemoveDomain\x12:.yandex.cloud.serverless.apigateway.v1.RemoveDomainRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*-\n" +
@@ -1608,15 +1594,15 @@ var file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_goTypes 
 	(*CreateApiGatewayRequest)(nil),            // 4: yandex.cloud.serverless.apigateway.v1.CreateApiGatewayRequest
 	(*UpdateApiGatewayRequest)(nil),            // 5: yandex.cloud.serverless.apigateway.v1.UpdateApiGatewayRequest
 	(*DeleteApiGatewayRequest)(nil),            // 6: yandex.cloud.serverless.apigateway.v1.DeleteApiGatewayRequest
-	(*ResumeApiGatewayRequest)(nil),            // 7: yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayRequest
-	(*StopApiGatewayRequest)(nil),              // 8: yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest
+	(*StopApiGatewayRequest)(nil),              // 7: yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest
+	(*ResumeApiGatewayRequest)(nil),            // 8: yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayRequest
 	(*AddDomainRequest)(nil),                   // 9: yandex.cloud.serverless.apigateway.v1.AddDomainRequest
 	(*RemoveDomainRequest)(nil),                // 10: yandex.cloud.serverless.apigateway.v1.RemoveDomainRequest
 	(*CreateApiGatewayMetadata)(nil),           // 11: yandex.cloud.serverless.apigateway.v1.CreateApiGatewayMetadata
 	(*UpdateApiGatewayMetadata)(nil),           // 12: yandex.cloud.serverless.apigateway.v1.UpdateApiGatewayMetadata
 	(*DeleteApiGatewayMetadata)(nil),           // 13: yandex.cloud.serverless.apigateway.v1.DeleteApiGatewayMetadata
-	(*ResumeApiGatewayMetadata)(nil),           // 14: yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayMetadata
-	(*StopApiGatewayMetadata)(nil),             // 15: yandex.cloud.serverless.apigateway.v1.StopApiGatewayMetadata
+	(*StopApiGatewayMetadata)(nil),             // 14: yandex.cloud.serverless.apigateway.v1.StopApiGatewayMetadata
+	(*ResumeApiGatewayMetadata)(nil),           // 15: yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayMetadata
 	(*AddDomainMetadata)(nil),                  // 16: yandex.cloud.serverless.apigateway.v1.AddDomainMetadata
 	(*RemoveDomainMetadata)(nil),               // 17: yandex.cloud.serverless.apigateway.v1.RemoveDomainMetadata
 	(*ListOperationsRequest)(nil),              // 18: yandex.cloud.serverless.apigateway.v1.ListOperationsRequest
@@ -1664,8 +1650,8 @@ var file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_depIdxs 
 	4,  // 20: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Create:input_type -> yandex.cloud.serverless.apigateway.v1.CreateApiGatewayRequest
 	5,  // 21: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Update:input_type -> yandex.cloud.serverless.apigateway.v1.UpdateApiGatewayRequest
 	6,  // 22: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Delete:input_type -> yandex.cloud.serverless.apigateway.v1.DeleteApiGatewayRequest
-	7,  // 23: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Resume:input_type -> yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayRequest
-	8,  // 24: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Stop:input_type -> yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest
+	7,  // 23: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Stop:input_type -> yandex.cloud.serverless.apigateway.v1.StopApiGatewayRequest
+	8,  // 24: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Resume:input_type -> yandex.cloud.serverless.apigateway.v1.ResumeApiGatewayRequest
 	9,  // 25: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.AddDomain:input_type -> yandex.cloud.serverless.apigateway.v1.AddDomainRequest
 	10, // 26: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.RemoveDomain:input_type -> yandex.cloud.serverless.apigateway.v1.RemoveDomainRequest
 	20, // 27: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.GetOpenapiSpec:input_type -> yandex.cloud.serverless.apigateway.v1.GetOpenapiSpecRequest
@@ -1678,8 +1664,8 @@ var file_yandex_cloud_serverless_apigateway_v1_apigateway_service_proto_depIdxs 
 	32, // 34: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Create:output_type -> yandex.cloud.operation.Operation
 	32, // 35: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Update:output_type -> yandex.cloud.operation.Operation
 	32, // 36: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Delete:output_type -> yandex.cloud.operation.Operation
-	32, // 37: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Resume:output_type -> yandex.cloud.operation.Operation
-	32, // 38: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Stop:output_type -> yandex.cloud.operation.Operation
+	32, // 37: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Stop:output_type -> yandex.cloud.operation.Operation
+	32, // 38: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.Resume:output_type -> yandex.cloud.operation.Operation
 	32, // 39: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.AddDomain:output_type -> yandex.cloud.operation.Operation
 	32, // 40: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.RemoveDomain:output_type -> yandex.cloud.operation.Operation
 	21, // 41: yandex.cloud.serverless.apigateway.v1.ApiGatewayService.GetOpenapiSpec:output_type -> yandex.cloud.serverless.apigateway.v1.GetOpenapiSpecResponse

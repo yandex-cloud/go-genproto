@@ -32,7 +32,6 @@ const (
 	// The trigger is activated on a timer.
 	TriggerType_TIMER TriggerType = 2
 	// The trigger is activated by messages from a message queue.
-	//
 	// Only Message Queue is currently supported.
 	TriggerType_MESSAGE_QUEUE TriggerType = 3
 	// The trigger is activated by messages from IoT Core.
@@ -1942,593 +1941,6 @@ func (*Trigger_Rule_DataStream) isTrigger_Rule_Rule() {}
 
 func (*Trigger_Rule_Mail) isTrigger_Rule_Rule() {}
 
-// Rule for activating a timed trigger.
-type Trigger_Timer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Description of a schedule as a [cron expression](/docs/functions/concepts/trigger/timer).
-	CronExpression string `protobuf:"bytes,1,opt,name=cron_expression,json=cronExpression,proto3" json:"cron_expression,omitempty"`
-	// Payload to be passed to function.
-	Payload string `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
-	// Action to be executed when the current time matches the [cron_expression].
-	//
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Trigger_Timer_InvokeFunction
-	//	*Trigger_Timer_InvokeFunctionWithRetry
-	//	*Trigger_Timer_InvokeContainerWithRetry
-	//	*Trigger_Timer_GatewayWebsocketBroadcast
-	//	*Trigger_Timer_StartWorkflow
-	Action        isTrigger_Timer_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Trigger_Timer) Reset() {
-	*x = Trigger_Timer{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Trigger_Timer) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Trigger_Timer) ProtoMessage() {}
-
-func (x *Trigger_Timer) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Trigger_Timer.ProtoReflect.Descriptor instead.
-func (*Trigger_Timer) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 2}
-}
-
-func (x *Trigger_Timer) GetCronExpression() string {
-	if x != nil {
-		return x.CronExpression
-	}
-	return ""
-}
-
-func (x *Trigger_Timer) GetPayload() string {
-	if x != nil {
-		return x.Payload
-	}
-	return ""
-}
-
-func (x *Trigger_Timer) GetAction() isTrigger_Timer_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
-func (x *Trigger_Timer) GetInvokeFunction() *InvokeFunctionOnce {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_Timer_InvokeFunction); ok {
-			return x.InvokeFunction
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_Timer) GetInvokeFunctionWithRetry() *InvokeFunctionWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_Timer_InvokeFunctionWithRetry); ok {
-			return x.InvokeFunctionWithRetry
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_Timer) GetInvokeContainerWithRetry() *InvokeContainerWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_Timer_InvokeContainerWithRetry); ok {
-			return x.InvokeContainerWithRetry
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_Timer) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_Timer_GatewayWebsocketBroadcast); ok {
-			return x.GatewayWebsocketBroadcast
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_Timer) GetStartWorkflow() *StartWorkflowWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_Timer_StartWorkflow); ok {
-			return x.StartWorkflow
-		}
-	}
-	return nil
-}
-
-type isTrigger_Timer_Action interface {
-	isTrigger_Timer_Action()
-}
-
-type Trigger_Timer_InvokeFunction struct {
-	// Instructions for invoking a function once.
-	//
-	// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
-	InvokeFunction *InvokeFunctionOnce `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
-}
-
-type Trigger_Timer_InvokeFunctionWithRetry struct {
-	// Instructions for invoking a function with retry.
-	InvokeFunctionWithRetry *InvokeFunctionWithRetry `protobuf:"bytes,103,opt,name=invoke_function_with_retry,json=invokeFunctionWithRetry,proto3,oneof"`
-}
-
-type Trigger_Timer_InvokeContainerWithRetry struct {
-	// Instructions for invoking a container with retry.
-	InvokeContainerWithRetry *InvokeContainerWithRetry `protobuf:"bytes,104,opt,name=invoke_container_with_retry,json=invokeContainerWithRetry,proto3,oneof"`
-}
-
-type Trigger_Timer_GatewayWebsocketBroadcast struct {
-	// Instructions for broadcasting to API gateway websocket once.
-	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,105,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
-}
-
-type Trigger_Timer_StartWorkflow struct {
-	// Instructions for starting a workflow with retry.
-	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,106,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
-}
-
-func (*Trigger_Timer_InvokeFunction) isTrigger_Timer_Action() {}
-
-func (*Trigger_Timer_InvokeFunctionWithRetry) isTrigger_Timer_Action() {}
-
-func (*Trigger_Timer_InvokeContainerWithRetry) isTrigger_Timer_Action() {}
-
-func (*Trigger_Timer_GatewayWebsocketBroadcast) isTrigger_Timer_Action() {}
-
-func (*Trigger_Timer_StartWorkflow) isTrigger_Timer_Action() {}
-
-// Rule for activating a message queue trigger.
-type Trigger_MessageQueue struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the message queue in Message Queue.
-	QueueId string `protobuf:"bytes,11,opt,name=queue_id,json=queueId,proto3" json:"queue_id,omitempty"`
-	// ID of the service account which has read access to the message queue.
-	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Batch settings for processing messages in the queue.
-	BatchSettings *BatchSettings `protobuf:"bytes,4,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
-	// Queue visibility timeout override.
-	VisibilityTimeout *durationpb.Duration `protobuf:"bytes,5,opt,name=visibility_timeout,json=visibilityTimeout,proto3" json:"visibility_timeout,omitempty"`
-	// Action to be executed when the there's a new message in the queue.
-	//
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Trigger_MessageQueue_InvokeFunction
-	//	*Trigger_MessageQueue_InvokeContainer
-	//	*Trigger_MessageQueue_GatewayWebsocketBroadcast
-	//	*Trigger_MessageQueue_StartWorkflow
-	Action        isTrigger_MessageQueue_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Trigger_MessageQueue) Reset() {
-	*x = Trigger_MessageQueue{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Trigger_MessageQueue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Trigger_MessageQueue) ProtoMessage() {}
-
-func (x *Trigger_MessageQueue) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Trigger_MessageQueue.ProtoReflect.Descriptor instead.
-func (*Trigger_MessageQueue) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 3}
-}
-
-func (x *Trigger_MessageQueue) GetQueueId() string {
-	if x != nil {
-		return x.QueueId
-	}
-	return ""
-}
-
-func (x *Trigger_MessageQueue) GetServiceAccountId() string {
-	if x != nil {
-		return x.ServiceAccountId
-	}
-	return ""
-}
-
-func (x *Trigger_MessageQueue) GetBatchSettings() *BatchSettings {
-	if x != nil {
-		return x.BatchSettings
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetVisibilityTimeout() *durationpb.Duration {
-	if x != nil {
-		return x.VisibilityTimeout
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetAction() isTrigger_MessageQueue_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetInvokeFunction() *InvokeFunctionOnce {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_MessageQueue_InvokeFunction); ok {
-			return x.InvokeFunction
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetInvokeContainer() *InvokeContainerOnce {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_MessageQueue_InvokeContainer); ok {
-			return x.InvokeContainer
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_MessageQueue_GatewayWebsocketBroadcast); ok {
-			return x.GatewayWebsocketBroadcast
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_MessageQueue) GetStartWorkflow() *StartWorkflowOnce {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_MessageQueue_StartWorkflow); ok {
-			return x.StartWorkflow
-		}
-	}
-	return nil
-}
-
-type isTrigger_MessageQueue_Action interface {
-	isTrigger_MessageQueue_Action()
-}
-
-type Trigger_MessageQueue_InvokeFunction struct {
-	// Instructions for invoking a function once.
-	InvokeFunction *InvokeFunctionOnce `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
-}
-
-type Trigger_MessageQueue_InvokeContainer struct {
-	// Instructions for invoking a container once.
-	InvokeContainer *InvokeContainerOnce `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
-}
-
-type Trigger_MessageQueue_GatewayWebsocketBroadcast struct {
-	// Instructions for broadcasting to API gateway websocket once.
-	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
-}
-
-type Trigger_MessageQueue_StartWorkflow struct {
-	// Instructions for starting a workflow once.
-	StartWorkflow *StartWorkflowOnce `protobuf:"bytes,104,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
-}
-
-func (*Trigger_MessageQueue_InvokeFunction) isTrigger_MessageQueue_Action() {}
-
-func (*Trigger_MessageQueue_InvokeContainer) isTrigger_MessageQueue_Action() {}
-
-func (*Trigger_MessageQueue_GatewayWebsocketBroadcast) isTrigger_MessageQueue_Action() {}
-
-func (*Trigger_MessageQueue_StartWorkflow) isTrigger_MessageQueue_Action() {}
-
-// Rule for activating a IoT Core trigger.
-type Trigger_IoTMessage struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the IoT Core registry.
-	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
-	// ID of the IoT Core device in the registry.
-	DeviceId string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
-	// MQTT topic whose messages activate the trigger.
-	MqttTopic string `protobuf:"bytes,3,opt,name=mqtt_topic,json=mqttTopic,proto3" json:"mqtt_topic,omitempty"`
-	// Batch settings for processing events.
-	BatchSettings *BatchSettings `protobuf:"bytes,4,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
-	// Action to be executed when the there's a new message in the MQTT topic.
-	//
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Trigger_IoTMessage_InvokeFunction
-	//	*Trigger_IoTMessage_InvokeContainer
-	//	*Trigger_IoTMessage_GatewayWebsocketBroadcast
-	Action        isTrigger_IoTMessage_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Trigger_IoTMessage) Reset() {
-	*x = Trigger_IoTMessage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Trigger_IoTMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Trigger_IoTMessage) ProtoMessage() {}
-
-func (x *Trigger_IoTMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Trigger_IoTMessage.ProtoReflect.Descriptor instead.
-func (*Trigger_IoTMessage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 4}
-}
-
-func (x *Trigger_IoTMessage) GetRegistryId() string {
-	if x != nil {
-		return x.RegistryId
-	}
-	return ""
-}
-
-func (x *Trigger_IoTMessage) GetDeviceId() string {
-	if x != nil {
-		return x.DeviceId
-	}
-	return ""
-}
-
-func (x *Trigger_IoTMessage) GetMqttTopic() string {
-	if x != nil {
-		return x.MqttTopic
-	}
-	return ""
-}
-
-func (x *Trigger_IoTMessage) GetBatchSettings() *BatchSettings {
-	if x != nil {
-		return x.BatchSettings
-	}
-	return nil
-}
-
-func (x *Trigger_IoTMessage) GetAction() isTrigger_IoTMessage_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
-func (x *Trigger_IoTMessage) GetInvokeFunction() *InvokeFunctionWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTMessage_InvokeFunction); ok {
-			return x.InvokeFunction
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_IoTMessage) GetInvokeContainer() *InvokeContainerWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTMessage_InvokeContainer); ok {
-			return x.InvokeContainer
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_IoTMessage) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTMessage_GatewayWebsocketBroadcast); ok {
-			return x.GatewayWebsocketBroadcast
-		}
-	}
-	return nil
-}
-
-type isTrigger_IoTMessage_Action interface {
-	isTrigger_IoTMessage_Action()
-}
-
-type Trigger_IoTMessage_InvokeFunction struct {
-	// Instructions for invoking a function with retries as needed.
-	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
-}
-
-type Trigger_IoTMessage_InvokeContainer struct {
-	// Instructions for invoking a container with retries as needed.
-	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
-}
-
-type Trigger_IoTMessage_GatewayWebsocketBroadcast struct {
-	// Instructions for broadcasting to API gateway websocket once.
-	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
-}
-
-func (*Trigger_IoTMessage_InvokeFunction) isTrigger_IoTMessage_Action() {}
-
-func (*Trigger_IoTMessage_InvokeContainer) isTrigger_IoTMessage_Action() {}
-
-func (*Trigger_IoTMessage_GatewayWebsocketBroadcast) isTrigger_IoTMessage_Action() {}
-
-// Rule for activating a IoT Core Broker trigger.
-type Trigger_IoTBrokerMessage struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the IoT Core broker.
-	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
-	// MQTT topic whose messages activate the trigger.
-	MqttTopic string `protobuf:"bytes,2,opt,name=mqtt_topic,json=mqttTopic,proto3" json:"mqtt_topic,omitempty"`
-	// Batch settings for processing events.
-	BatchSettings *BatchSettings `protobuf:"bytes,3,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
-	// Action to be executed when the there's a new message in the MQTT topic.
-	//
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Trigger_IoTBrokerMessage_InvokeFunction
-	//	*Trigger_IoTBrokerMessage_InvokeContainer
-	//	*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast
-	Action        isTrigger_IoTBrokerMessage_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Trigger_IoTBrokerMessage) Reset() {
-	*x = Trigger_IoTBrokerMessage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Trigger_IoTBrokerMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Trigger_IoTBrokerMessage) ProtoMessage() {}
-
-func (x *Trigger_IoTBrokerMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Trigger_IoTBrokerMessage.ProtoReflect.Descriptor instead.
-func (*Trigger_IoTBrokerMessage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 5}
-}
-
-func (x *Trigger_IoTBrokerMessage) GetBrokerId() string {
-	if x != nil {
-		return x.BrokerId
-	}
-	return ""
-}
-
-func (x *Trigger_IoTBrokerMessage) GetMqttTopic() string {
-	if x != nil {
-		return x.MqttTopic
-	}
-	return ""
-}
-
-func (x *Trigger_IoTBrokerMessage) GetBatchSettings() *BatchSettings {
-	if x != nil {
-		return x.BatchSettings
-	}
-	return nil
-}
-
-func (x *Trigger_IoTBrokerMessage) GetAction() isTrigger_IoTBrokerMessage_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
-func (x *Trigger_IoTBrokerMessage) GetInvokeFunction() *InvokeFunctionWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_InvokeFunction); ok {
-			return x.InvokeFunction
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_IoTBrokerMessage) GetInvokeContainer() *InvokeContainerWithRetry {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_InvokeContainer); ok {
-			return x.InvokeContainer
-		}
-	}
-	return nil
-}
-
-func (x *Trigger_IoTBrokerMessage) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
-	if x != nil {
-		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast); ok {
-			return x.GatewayWebsocketBroadcast
-		}
-	}
-	return nil
-}
-
-type isTrigger_IoTBrokerMessage_Action interface {
-	isTrigger_IoTBrokerMessage_Action()
-}
-
-type Trigger_IoTBrokerMessage_InvokeFunction struct {
-	// Instructions for invoking a function with retries as needed.
-	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
-}
-
-type Trigger_IoTBrokerMessage_InvokeContainer struct {
-	// Instructions for invoking a container with retries as needed.
-	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
-}
-
-type Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast struct {
-	// Instructions for broadcasting to API gateway websocket once.
-	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
-}
-
-func (*Trigger_IoTBrokerMessage_InvokeFunction) isTrigger_IoTBrokerMessage_Action() {}
-
-func (*Trigger_IoTBrokerMessage_InvokeContainer) isTrigger_IoTBrokerMessage_Action() {}
-
-func (*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast) isTrigger_IoTBrokerMessage_Action() {}
-
 type Trigger_ObjectStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Type (name) of events, at least one value is required.
@@ -2554,7 +1966,7 @@ type Trigger_ObjectStorage struct {
 
 func (x *Trigger_ObjectStorage) Reset() {
 	*x = Trigger_ObjectStorage{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2566,7 +1978,7 @@ func (x *Trigger_ObjectStorage) String() string {
 func (*Trigger_ObjectStorage) ProtoMessage() {}
 
 func (x *Trigger_ObjectStorage) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2579,7 +1991,7 @@ func (x *Trigger_ObjectStorage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trigger_ObjectStorage.ProtoReflect.Descriptor instead.
 func (*Trigger_ObjectStorage) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 6}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 2}
 }
 
 func (x *Trigger_ObjectStorage) GetEventType() []Trigger_ObjectStorageEventType {
@@ -2717,7 +2129,7 @@ type Trigger_ContainerRegistry struct {
 
 func (x *Trigger_ContainerRegistry) Reset() {
 	*x = Trigger_ContainerRegistry{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2729,7 +2141,7 @@ func (x *Trigger_ContainerRegistry) String() string {
 func (*Trigger_ContainerRegistry) ProtoMessage() {}
 
 func (x *Trigger_ContainerRegistry) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2742,7 +2154,7 @@ func (x *Trigger_ContainerRegistry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trigger_ContainerRegistry.ProtoReflect.Descriptor instead.
 func (*Trigger_ContainerRegistry) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 7}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *Trigger_ContainerRegistry) GetEventType() []Trigger_ContainerRegistryEventType {
@@ -2873,7 +2285,7 @@ type Trigger_CloudLogs struct {
 
 func (x *Trigger_CloudLogs) Reset() {
 	*x = Trigger_CloudLogs{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2885,7 +2297,7 @@ func (x *Trigger_CloudLogs) String() string {
 func (*Trigger_CloudLogs) ProtoMessage() {}
 
 func (x *Trigger_CloudLogs) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2898,7 +2310,7 @@ func (x *Trigger_CloudLogs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trigger_CloudLogs.ProtoReflect.Descriptor instead.
 func (*Trigger_CloudLogs) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 8}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 4}
 }
 
 func (x *Trigger_CloudLogs) GetLogGroupId() []string {
@@ -2985,7 +2397,7 @@ type Trigger_Logging struct {
 
 func (x *Trigger_Logging) Reset() {
 	*x = Trigger_Logging{}
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2997,7 +2409,7 @@ func (x *Trigger_Logging) String() string {
 func (*Trigger_Logging) ProtoMessage() {}
 
 func (x *Trigger_Logging) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3010,7 +2422,7 @@ func (x *Trigger_Logging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trigger_Logging.ProtoReflect.Descriptor instead.
 func (*Trigger_Logging) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 9}
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 5}
 }
 
 func (x *Trigger_Logging) GetLogGroupId() string {
@@ -3130,24 +2542,611 @@ func (*Trigger_Logging_GatewayWebsocketBroadcast) isTrigger_Logging_Action() {}
 
 func (*Trigger_Logging_StartWorkflow) isTrigger_Logging_Action() {}
 
+// Rule for activating a timed trigger.
+type Trigger_Timer struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Description of a schedule as a [cron expression](/docs/functions/concepts/trigger/timer).
+	CronExpression string `protobuf:"bytes,1,opt,name=cron_expression,json=cronExpression,proto3" json:"cron_expression,omitempty"`
+	// Payload to be passed to function.
+	Payload string `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
+	// Action to be executed when the current time matches the [cron_expression].
+	//
+	// Types that are valid to be assigned to Action:
+	//
+	//	*Trigger_Timer_InvokeFunction
+	//	*Trigger_Timer_InvokeFunctionWithRetry
+	//	*Trigger_Timer_InvokeContainerWithRetry
+	//	*Trigger_Timer_GatewayWebsocketBroadcast
+	//	*Trigger_Timer_StartWorkflow
+	Action        isTrigger_Timer_Action `protobuf_oneof:"action"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trigger_Timer) Reset() {
+	*x = Trigger_Timer{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trigger_Timer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trigger_Timer) ProtoMessage() {}
+
+func (x *Trigger_Timer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trigger_Timer.ProtoReflect.Descriptor instead.
+func (*Trigger_Timer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 6}
+}
+
+func (x *Trigger_Timer) GetCronExpression() string {
+	if x != nil {
+		return x.CronExpression
+	}
+	return ""
+}
+
+func (x *Trigger_Timer) GetPayload() string {
+	if x != nil {
+		return x.Payload
+	}
+	return ""
+}
+
+func (x *Trigger_Timer) GetAction() isTrigger_Timer_Action {
+	if x != nil {
+		return x.Action
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
+func (x *Trigger_Timer) GetInvokeFunction() *InvokeFunctionOnce {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_InvokeFunction); ok {
+			return x.InvokeFunction
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_Timer) GetInvokeFunctionWithRetry() *InvokeFunctionWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_InvokeFunctionWithRetry); ok {
+			return x.InvokeFunctionWithRetry
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_Timer) GetInvokeContainerWithRetry() *InvokeContainerWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_InvokeContainerWithRetry); ok {
+			return x.InvokeContainerWithRetry
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_Timer) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_GatewayWebsocketBroadcast); ok {
+			return x.GatewayWebsocketBroadcast
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_Timer) GetStartWorkflow() *StartWorkflowWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_Timer_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
+type isTrigger_Timer_Action interface {
+	isTrigger_Timer_Action()
+}
+
+type Trigger_Timer_InvokeFunction struct {
+	// Instructions for invoking a function once.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/serverless/triggers/v1/trigger.proto.
+	InvokeFunction *InvokeFunctionOnce `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
+}
+
+type Trigger_Timer_InvokeFunctionWithRetry struct {
+	// Instructions for invoking a function with retry.
+	InvokeFunctionWithRetry *InvokeFunctionWithRetry `protobuf:"bytes,103,opt,name=invoke_function_with_retry,json=invokeFunctionWithRetry,proto3,oneof"`
+}
+
+type Trigger_Timer_InvokeContainerWithRetry struct {
+	// Instructions for invoking a container with retry.
+	InvokeContainerWithRetry *InvokeContainerWithRetry `protobuf:"bytes,104,opt,name=invoke_container_with_retry,json=invokeContainerWithRetry,proto3,oneof"`
+}
+
+type Trigger_Timer_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
+	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,105,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+type Trigger_Timer_StartWorkflow struct {
+	// Instructions for starting a workflow with retry.
+	StartWorkflow *StartWorkflowWithRetry `protobuf:"bytes,106,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
+func (*Trigger_Timer_InvokeFunction) isTrigger_Timer_Action() {}
+
+func (*Trigger_Timer_InvokeFunctionWithRetry) isTrigger_Timer_Action() {}
+
+func (*Trigger_Timer_InvokeContainerWithRetry) isTrigger_Timer_Action() {}
+
+func (*Trigger_Timer_GatewayWebsocketBroadcast) isTrigger_Timer_Action() {}
+
+func (*Trigger_Timer_StartWorkflow) isTrigger_Timer_Action() {}
+
+// Rule for activating a message queue trigger.
+type Trigger_MessageQueue struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the message queue in Message Queue.
+	QueueId string `protobuf:"bytes,11,opt,name=queue_id,json=queueId,proto3" json:"queue_id,omitempty"`
+	// ID of the service account which has read access to the message queue.
+	ServiceAccountId string `protobuf:"bytes,3,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Batch settings for processing messages in the queue.
+	BatchSettings *BatchSettings `protobuf:"bytes,4,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
+	// Queue visibility timeout override.
+	VisibilityTimeout *durationpb.Duration `protobuf:"bytes,5,opt,name=visibility_timeout,json=visibilityTimeout,proto3" json:"visibility_timeout,omitempty"`
+	// Action to be executed when the there's a new message in the queue.
+	//
+	// Types that are valid to be assigned to Action:
+	//
+	//	*Trigger_MessageQueue_InvokeFunction
+	//	*Trigger_MessageQueue_InvokeContainer
+	//	*Trigger_MessageQueue_GatewayWebsocketBroadcast
+	//	*Trigger_MessageQueue_StartWorkflow
+	Action        isTrigger_MessageQueue_Action `protobuf_oneof:"action"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trigger_MessageQueue) Reset() {
+	*x = Trigger_MessageQueue{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trigger_MessageQueue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trigger_MessageQueue) ProtoMessage() {}
+
+func (x *Trigger_MessageQueue) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trigger_MessageQueue.ProtoReflect.Descriptor instead.
+func (*Trigger_MessageQueue) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 7}
+}
+
+func (x *Trigger_MessageQueue) GetQueueId() string {
+	if x != nil {
+		return x.QueueId
+	}
+	return ""
+}
+
+func (x *Trigger_MessageQueue) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *Trigger_MessageQueue) GetBatchSettings() *BatchSettings {
+	if x != nil {
+		return x.BatchSettings
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetVisibilityTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.VisibilityTimeout
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetAction() isTrigger_MessageQueue_Action {
+	if x != nil {
+		return x.Action
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetInvokeFunction() *InvokeFunctionOnce {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_MessageQueue_InvokeFunction); ok {
+			return x.InvokeFunction
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetInvokeContainer() *InvokeContainerOnce {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_MessageQueue_InvokeContainer); ok {
+			return x.InvokeContainer
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_MessageQueue_GatewayWebsocketBroadcast); ok {
+			return x.GatewayWebsocketBroadcast
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_MessageQueue) GetStartWorkflow() *StartWorkflowOnce {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_MessageQueue_StartWorkflow); ok {
+			return x.StartWorkflow
+		}
+	}
+	return nil
+}
+
+type isTrigger_MessageQueue_Action interface {
+	isTrigger_MessageQueue_Action()
+}
+
+type Trigger_MessageQueue_InvokeFunction struct {
+	// Instructions for invoking a function once.
+	InvokeFunction *InvokeFunctionOnce `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
+}
+
+type Trigger_MessageQueue_InvokeContainer struct {
+	// Instructions for invoking a container once.
+	InvokeContainer *InvokeContainerOnce `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
+}
+
+type Trigger_MessageQueue_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
+	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+type Trigger_MessageQueue_StartWorkflow struct {
+	// Instructions for starting a workflow once.
+	StartWorkflow *StartWorkflowOnce `protobuf:"bytes,104,opt,name=start_workflow,json=startWorkflow,proto3,oneof"`
+}
+
+func (*Trigger_MessageQueue_InvokeFunction) isTrigger_MessageQueue_Action() {}
+
+func (*Trigger_MessageQueue_InvokeContainer) isTrigger_MessageQueue_Action() {}
+
+func (*Trigger_MessageQueue_GatewayWebsocketBroadcast) isTrigger_MessageQueue_Action() {}
+
+func (*Trigger_MessageQueue_StartWorkflow) isTrigger_MessageQueue_Action() {}
+
+// Rule for activating a IoT Core trigger.
+type Trigger_IoTMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the IoT Core registry.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// ID of the IoT Core device in the registry.
+	DeviceId string `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	// MQTT topic whose messages activate the trigger.
+	MqttTopic string `protobuf:"bytes,3,opt,name=mqtt_topic,json=mqttTopic,proto3" json:"mqtt_topic,omitempty"`
+	// Batch settings for processing events.
+	BatchSettings *BatchSettings `protobuf:"bytes,4,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
+	// Action to be executed when the there's a new message in the MQTT topic.
+	//
+	// Types that are valid to be assigned to Action:
+	//
+	//	*Trigger_IoTMessage_InvokeFunction
+	//	*Trigger_IoTMessage_InvokeContainer
+	//	*Trigger_IoTMessage_GatewayWebsocketBroadcast
+	Action        isTrigger_IoTMessage_Action `protobuf_oneof:"action"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trigger_IoTMessage) Reset() {
+	*x = Trigger_IoTMessage{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trigger_IoTMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trigger_IoTMessage) ProtoMessage() {}
+
+func (x *Trigger_IoTMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trigger_IoTMessage.ProtoReflect.Descriptor instead.
+func (*Trigger_IoTMessage) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 8}
+}
+
+func (x *Trigger_IoTMessage) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *Trigger_IoTMessage) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *Trigger_IoTMessage) GetMqttTopic() string {
+	if x != nil {
+		return x.MqttTopic
+	}
+	return ""
+}
+
+func (x *Trigger_IoTMessage) GetBatchSettings() *BatchSettings {
+	if x != nil {
+		return x.BatchSettings
+	}
+	return nil
+}
+
+func (x *Trigger_IoTMessage) GetAction() isTrigger_IoTMessage_Action {
+	if x != nil {
+		return x.Action
+	}
+	return nil
+}
+
+func (x *Trigger_IoTMessage) GetInvokeFunction() *InvokeFunctionWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTMessage_InvokeFunction); ok {
+			return x.InvokeFunction
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_IoTMessage) GetInvokeContainer() *InvokeContainerWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTMessage_InvokeContainer); ok {
+			return x.InvokeContainer
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_IoTMessage) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTMessage_GatewayWebsocketBroadcast); ok {
+			return x.GatewayWebsocketBroadcast
+		}
+	}
+	return nil
+}
+
+type isTrigger_IoTMessage_Action interface {
+	isTrigger_IoTMessage_Action()
+}
+
+type Trigger_IoTMessage_InvokeFunction struct {
+	// Instructions for invoking a function with retries as needed.
+	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
+}
+
+type Trigger_IoTMessage_InvokeContainer struct {
+	// Instructions for invoking a container with retries as needed.
+	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
+}
+
+type Trigger_IoTMessage_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
+	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+func (*Trigger_IoTMessage_InvokeFunction) isTrigger_IoTMessage_Action() {}
+
+func (*Trigger_IoTMessage_InvokeContainer) isTrigger_IoTMessage_Action() {}
+
+func (*Trigger_IoTMessage_GatewayWebsocketBroadcast) isTrigger_IoTMessage_Action() {}
+
+// Rule for activating a IoT Core Broker trigger.
+type Trigger_IoTBrokerMessage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the IoT Core broker.
+	BrokerId string `protobuf:"bytes,1,opt,name=broker_id,json=brokerId,proto3" json:"broker_id,omitempty"`
+	// MQTT topic whose messages activate the trigger.
+	MqttTopic string `protobuf:"bytes,2,opt,name=mqtt_topic,json=mqttTopic,proto3" json:"mqtt_topic,omitempty"`
+	// Batch settings for processing events.
+	BatchSettings *BatchSettings `protobuf:"bytes,3,opt,name=batch_settings,json=batchSettings,proto3" json:"batch_settings,omitempty"`
+	// Action to be executed when the there's a new message in the MQTT topic.
+	//
+	// Types that are valid to be assigned to Action:
+	//
+	//	*Trigger_IoTBrokerMessage_InvokeFunction
+	//	*Trigger_IoTBrokerMessage_InvokeContainer
+	//	*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast
+	Action        isTrigger_IoTBrokerMessage_Action `protobuf_oneof:"action"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trigger_IoTBrokerMessage) Reset() {
+	*x = Trigger_IoTBrokerMessage{}
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trigger_IoTBrokerMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trigger_IoTBrokerMessage) ProtoMessage() {}
+
+func (x *Trigger_IoTBrokerMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trigger_IoTBrokerMessage.ProtoReflect.Descriptor instead.
+func (*Trigger_IoTBrokerMessage) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDescGZIP(), []int{0, 9}
+}
+
+func (x *Trigger_IoTBrokerMessage) GetBrokerId() string {
+	if x != nil {
+		return x.BrokerId
+	}
+	return ""
+}
+
+func (x *Trigger_IoTBrokerMessage) GetMqttTopic() string {
+	if x != nil {
+		return x.MqttTopic
+	}
+	return ""
+}
+
+func (x *Trigger_IoTBrokerMessage) GetBatchSettings() *BatchSettings {
+	if x != nil {
+		return x.BatchSettings
+	}
+	return nil
+}
+
+func (x *Trigger_IoTBrokerMessage) GetAction() isTrigger_IoTBrokerMessage_Action {
+	if x != nil {
+		return x.Action
+	}
+	return nil
+}
+
+func (x *Trigger_IoTBrokerMessage) GetInvokeFunction() *InvokeFunctionWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_InvokeFunction); ok {
+			return x.InvokeFunction
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_IoTBrokerMessage) GetInvokeContainer() *InvokeContainerWithRetry {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_InvokeContainer); ok {
+			return x.InvokeContainer
+		}
+	}
+	return nil
+}
+
+func (x *Trigger_IoTBrokerMessage) GetGatewayWebsocketBroadcast() *GatewayWebsocketBroadcast {
+	if x != nil {
+		if x, ok := x.Action.(*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast); ok {
+			return x.GatewayWebsocketBroadcast
+		}
+	}
+	return nil
+}
+
+type isTrigger_IoTBrokerMessage_Action interface {
+	isTrigger_IoTBrokerMessage_Action()
+}
+
+type Trigger_IoTBrokerMessage_InvokeFunction struct {
+	// Instructions for invoking a function with retries as needed.
+	InvokeFunction *InvokeFunctionWithRetry `protobuf:"bytes,101,opt,name=invoke_function,json=invokeFunction,proto3,oneof"`
+}
+
+type Trigger_IoTBrokerMessage_InvokeContainer struct {
+	// Instructions for invoking a container with retries as needed.
+	InvokeContainer *InvokeContainerWithRetry `protobuf:"bytes,102,opt,name=invoke_container,json=invokeContainer,proto3,oneof"`
+}
+
+type Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast struct {
+	// Instructions for broadcasting to API gateway websocket once.
+	GatewayWebsocketBroadcast *GatewayWebsocketBroadcast `protobuf:"bytes,103,opt,name=gateway_websocket_broadcast,json=gatewayWebsocketBroadcast,proto3,oneof"`
+}
+
+func (*Trigger_IoTBrokerMessage_InvokeFunction) isTrigger_IoTBrokerMessage_Action() {}
+
+func (*Trigger_IoTBrokerMessage_InvokeContainer) isTrigger_IoTBrokerMessage_Action() {}
+
+func (*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast) isTrigger_IoTBrokerMessage_Action() {}
+
 var File_yandex_cloud_serverless_triggers_v1_trigger_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/serverless/triggers/v1/trigger.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xf9:\n" +
+	"1yandex/cloud/serverless/triggers/v1/trigger.proto\x12#yandex.cloud.serverless.triggers.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\x91;\n" +
 	"\aTrigger\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1c\n" +
 	"\x04name\x18\x04 \x01(\tB\b\x8a\xc81\x043-63R\x04name\x12+\n" +
-	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x050-256R\vdescription\x12P\n" +
+	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x050-500R\vdescription\x12P\n" +
 	"\x06labels\x18\x06 \x03(\v28.yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntryR\x06labels\x12K\n" +
 	"\x04rule\x18\b \x01(\v21.yandex.cloud.serverless.triggers.v1.Trigger.RuleB\x04\xe8\xc71\x01R\x04rule\x12K\n" +
 	"\x06status\x18\t \x01(\x0e23.yandex.cloud.serverless.triggers.v1.Trigger.StatusR\x06status\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\x86\b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\x8c\b\n" +
 	"\x04Rule\x12J\n" +
 	"\x05timer\x18\x02 \x01(\v22.yandex.cloud.serverless.triggers.v1.Trigger.TimerH\x00R\x05timer\x12`\n" +
 	"\rmessage_queue\x18\x03 \x01(\v29.yandex.cloud.serverless.triggers.v1.Trigger.MessageQueueH\x00R\fmessageQueue\x12Z\n" +
@@ -3164,48 +3163,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\vdata_stream\x18\f \x01(\v2/.yandex.cloud.serverless.triggers.v1.DataStreamH\x00R\n" +
 	"dataStream\x12?\n" +
 	"\x04mail\x18\r \x01(\v2).yandex.cloud.serverless.triggers.v1.MailH\x00R\x04mailB\f\n" +
-	"\x04rule\x12\x04\xc0\xc11\x01J\x04\b\a\x10\t\x1a\xcf\x05\n" +
-	"\x05Timer\x126\n" +
-	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12$\n" +
-	"\apayload\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=4096R\apayload\x12f\n" +
-	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceB\x02\x18\x01H\x00R\x0einvokeFunction\x12{\n" +
-	"\x1ainvoke_function_with_retry\x18g \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x17invokeFunctionWithRetry\x12~\n" +
-	"\x1binvoke_container_with_retry\x18h \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x18invokeContainerWithRetry\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18i \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
-	"\x0estart_workflow\x18j \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x03\x10e\x1a\xec\x05\n" +
-	"\fMessageQueue\x12\x1f\n" +
-	"\bqueue_id\x18\v \x01(\tB\x04\xe8\xc71\x01R\aqueueId\x12:\n" +
-	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12_\n" +
-	"\x0ebatch_settings\x18\x04 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsB\x04\xe8\xc71\x01R\rbatchSettings\x12S\n" +
-	"\x12visibility_timeout\x18\x05 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x05<=12hR\x11visibilityTimeout\x12b\n" +
-	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceH\x00R\x0einvokeFunction\x12e\n" +
-	"\x10invoke_container\x18f \x01(\v28.yandex.cloud.serverless.triggers.v1.InvokeContainerOnceH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12_\n" +
-	"\x0estart_workflow\x18h \x01(\v26.yandex.cloud.serverless.triggers.v1.StartWorkflowOnceH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\f\x10eJ\x04\b\x06\x10\v\x1a\xb8\x04\n" +
-	"\n" +
-	"IoTMessage\x12%\n" +
-	"\vregistry_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"registryId\x12\x1b\n" +
-	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\x12\x1d\n" +
-	"\n" +
-	"mqtt_topic\x18\x03 \x01(\tR\tmqttTopic\x12Y\n" +
-	"\x0ebatch_settings\x18\x04 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
-	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
-	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x05\x10e\x1a\x9d\x04\n" +
-	"\x10IoTBrokerMessage\x12!\n" +
-	"\tbroker_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbrokerId\x12\x1d\n" +
-	"\n" +
-	"mqtt_topic\x18\x02 \x01(\tR\tmqttTopic\x12Y\n" +
-	"\x0ebatch_settings\x18\x03 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
-	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
-	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
-	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x04\x10e\x1a\xfd\x05\n" +
+	"\x04rule\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\a\x10\t\x1a\x83\x06\n" +
 	"\rObjectStorage\x12j\n" +
 	"\n" +
 	"event_type\x18\x03 \x03(\x0e2C.yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventTypeB\x06\x82\xc81\x02>0R\teventType\x12\x1b\n" +
@@ -3217,7 +3175,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18h \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\t\x10eJ\x04\b\x05\x10\x06\x1a\x84\x06\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03J\x04\b\x05\x10\x06J\x04\b\t\x10e\x1a\x8a\x06\n" +
 	"\x11ContainerRegistry\x12n\n" +
 	"\n" +
 	"event_type\x18\x03 \x03(\x0e2G.yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventTypeB\x06\x82\xc81\x02>0R\teventType\x12\x1f\n" +
@@ -3231,7 +3189,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18h \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\b\x10e\x1a\x82\x03\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03J\x04\b\b\x10e\x1a\x82\x03\n" +
 	"\tCloudLogs\x12 \n" +
 	"\flog_group_id\x18\x01 \x03(\tR\n" +
 	"logGroupId\x12h\n" +
@@ -3253,7 +3211,48 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\b\x10eJ\x04\bf\x10gJ\x04\b\x02\x10\x03\"\xca\x01\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03J\x04\b\b\x10eJ\x04\bf\x10g\x1a\xcf\x05\n" +
+	"\x05Timer\x126\n" +
+	"\x0fcron_expression\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0ecronExpression\x12$\n" +
+	"\apayload\x18\x02 \x01(\tB\n" +
+	"\x8a\xc81\x06<=4096R\apayload\x12f\n" +
+	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceB\x02\x18\x01H\x00R\x0einvokeFunction\x12{\n" +
+	"\x1ainvoke_function_with_retry\x18g \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x17invokeFunctionWithRetry\x12~\n" +
+	"\x1binvoke_container_with_retry\x18h \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x18invokeContainerWithRetry\x12\x80\x01\n" +
+	"\x1bgateway_websocket_broadcast\x18i \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
+	"\x0estart_workflow\x18j \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x03\x10eJ\x04\bf\x10g\x1a\xf2\x05\n" +
+	"\fMessageQueue\x12\x1f\n" +
+	"\bqueue_id\x18\v \x01(\tB\x04\xe8\xc71\x01R\aqueueId\x12:\n" +
+	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12_\n" +
+	"\x0ebatch_settings\x18\x04 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsB\x04\xe8\xc71\x01R\rbatchSettings\x12S\n" +
+	"\x12visibility_timeout\x18\x05 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x05<=12hR\x11visibilityTimeout\x12b\n" +
+	"\x0finvoke_function\x18e \x01(\v27.yandex.cloud.serverless.triggers.v1.InvokeFunctionOnceH\x00R\x0einvokeFunction\x12e\n" +
+	"\x10invoke_container\x18f \x01(\v28.yandex.cloud.serverless.triggers.v1.InvokeContainerOnceH\x00R\x0finvokeContainer\x12\x80\x01\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12_\n" +
+	"\x0estart_workflow\x18h \x01(\v26.yandex.cloud.serverless.triggers.v1.StartWorkflowOnceH\x00R\rstartWorkflowB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03J\x04\b\x06\x10\vJ\x04\b\f\x10e\x1a\xb8\x04\n" +
+	"\n" +
+	"IoTMessage\x12%\n" +
+	"\vregistry_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
+	"registryId\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\x12\x1d\n" +
+	"\n" +
+	"mqtt_topic\x18\x03 \x01(\tR\tmqttTopic\x12Y\n" +
+	"\x0ebatch_settings\x18\x04 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
+	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
+	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x05\x10e\x1a\x9d\x04\n" +
+	"\x10IoTBrokerMessage\x12!\n" +
+	"\tbroker_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbrokerId\x12\x1d\n" +
+	"\n" +
+	"mqtt_topic\x18\x02 \x01(\tR\tmqttTopic\x12Y\n" +
+	"\x0ebatch_settings\x18\x03 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12g\n" +
+	"\x0finvoke_function\x18e \x01(\v2<.yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetryH\x00R\x0einvokeFunction\x12j\n" +
+	"\x10invoke_container\x18f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
+	"\x1bgateway_websocket_broadcast\x18g \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcastB\x0e\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x04\x10e\"\xca\x01\n" +
 	"\x16ObjectStorageEventType\x12)\n" +
 	"%OBJECT_STORAGE_EVENT_TYPE_UNSPECIFIED\x10\x00\x12+\n" +
 	"'OBJECT_STORAGE_EVENT_TYPE_CREATE_OBJECT\x10\x01\x12+\n" +
@@ -3307,10 +3306,10 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\n" +
 	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path\x12:\n" +
-	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"n\n" +
+	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"t\n" +
 	"\x0fPutQueueMessage\x12\x19\n" +
 	"\bqueue_id\x18\v \x01(\tR\aqueueId\x12:\n" +
-	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountIdJ\x04\b\x03\x10\v\"h\n" +
+	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountIdJ\x04\b\x01\x10\x02J\x04\b\x03\x10\v\"h\n" +
 	"\rBatchSettings\x12\x1e\n" +
 	"\x04size\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\x04size\x127\n" +
@@ -3332,7 +3331,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x03\x10e\"x\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x03\x10eJ\x04\bf\x10g\"x\n" +
 	"\x17DataStreamBatchSettings\x12\x1f\n" +
 	"\x04size\x18\x01 \x01(\x03B\v\xfa\xc71\a1-65536R\x04size\x12<\n" +
 	"\x06cutoff\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x051s-1mR\x06cutoff\"\xc9\x05\n" +
@@ -3347,10 +3346,10 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18\x0f \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18\x10 \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18\x11 \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x0e\x10\x0fJ\x04\b\x06\x10\r\"\x92\x01\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x06\x10\rJ\x04\b\x0e\x10\x0f\"\x92\x01\n" +
 	"\x1bObjectStorageBucketSettings\x127\n" +
 	"\tbucket_id\x18\x01 \x01(\tB\x1a\xf2\xc71\x0e[-.0-9a-zA-Z]*\x8a\xc81\x043-63R\bbucketId\x12:\n" +
-	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xc2\x05\n" +
+	"\x12service_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xc8\x05\n" +
 	"\x04Mail\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12Y\n" +
 	"\x0ebatch_settings\x18\x03 \x01(\v22.yandex.cloud.serverless.triggers.v1.BatchSettingsR\rbatchSettings\x12o\n" +
@@ -3359,7 +3358,7 @@ const file_yandex_cloud_serverless_triggers_v1_trigger_proto_rawDesc = "" +
 	"\x10invoke_container\x18g \x01(\v2=.yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetryH\x00R\x0finvokeContainer\x12\x80\x01\n" +
 	"\x1bgateway_websocket_broadcast\x18h \x01(\v2>.yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcastH\x00R\x19gatewayWebsocketBroadcast\x12d\n" +
 	"\x0estart_workflow\x18i \x01(\v2;.yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetryH\x00R\rstartWorkflowB\x0e\n" +
-	"\x06action\x12\x04\xc0\xc11\x01J\x04\bf\x10gJ\x04\b\x05\x10e*\xe2\x01\n" +
+	"\x06action\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02J\x04\b\x05\x10eJ\x04\bf\x10g*\xe2\x01\n" +
 	"\vTriggerType\x12\x1c\n" +
 	"\x18TRIGGER_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05TIMER\x10\x02\x12\x11\n" +
@@ -3416,14 +3415,14 @@ var file_yandex_cloud_serverless_triggers_v1_trigger_proto_goTypes = []any{
 	(*Mail)(nil),                            // 21: yandex.cloud.serverless.triggers.v1.Mail
 	nil,                                     // 22: yandex.cloud.serverless.triggers.v1.Trigger.LabelsEntry
 	(*Trigger_Rule)(nil),                    // 23: yandex.cloud.serverless.triggers.v1.Trigger.Rule
-	(*Trigger_Timer)(nil),                   // 24: yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	(*Trigger_MessageQueue)(nil),            // 25: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	(*Trigger_IoTMessage)(nil),              // 26: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	(*Trigger_IoTBrokerMessage)(nil),        // 27: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	(*Trigger_ObjectStorage)(nil),           // 28: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	(*Trigger_ContainerRegistry)(nil),       // 29: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	(*Trigger_CloudLogs)(nil),               // 30: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	(*Trigger_Logging)(nil),                 // 31: yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	(*Trigger_ObjectStorage)(nil),           // 24: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	(*Trigger_ContainerRegistry)(nil),       // 25: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	(*Trigger_CloudLogs)(nil),               // 26: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	(*Trigger_Logging)(nil),                 // 27: yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	(*Trigger_Timer)(nil),                   // 28: yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	(*Trigger_MessageQueue)(nil),            // 29: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	(*Trigger_IoTMessage)(nil),              // 30: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	(*Trigger_IoTBrokerMessage)(nil),        // 31: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
 	(*timestamppb.Timestamp)(nil),           // 32: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),             // 33: google.protobuf.Duration
 	(v1.LogLevel_Level)(0),                  // 34: yandex.cloud.logging.v1.LogLevel.Level
@@ -3459,57 +3458,57 @@ var file_yandex_cloud_serverless_triggers_v1_trigger_proto_depIdxs = []int32{
 	8,  // 27: yandex.cloud.serverless.triggers.v1.Mail.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
 	11, // 28: yandex.cloud.serverless.triggers.v1.Mail.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
 	10, // 29: yandex.cloud.serverless.triggers.v1.Mail.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
-	24, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
-	25, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
-	26, // 32: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
-	27, // 33: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
-	28, // 34: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
-	29, // 35: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
-	30, // 36: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
-	31, // 37: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
+	28, // 30: yandex.cloud.serverless.triggers.v1.Trigger.Rule.timer:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Timer
+	29, // 31: yandex.cloud.serverless.triggers.v1.Trigger.Rule.message_queue:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue
+	30, // 32: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage
+	31, // 33: yandex.cloud.serverless.triggers.v1.Trigger.Rule.iot_broker_message:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage
+	24, // 34: yandex.cloud.serverless.triggers.v1.Trigger.Rule.object_storage:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage
+	25, // 35: yandex.cloud.serverless.triggers.v1.Trigger.Rule.container_registry:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry
+	26, // 36: yandex.cloud.serverless.triggers.v1.Trigger.Rule.cloud_logs:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs
+	27, // 37: yandex.cloud.serverless.triggers.v1.Trigger.Rule.logging:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.Logging
 	17, // 38: yandex.cloud.serverless.triggers.v1.Trigger.Rule.billing_budget:type_name -> yandex.cloud.serverless.triggers.v1.BillingBudget
 	19, // 39: yandex.cloud.serverless.triggers.v1.Trigger.Rule.data_stream:type_name -> yandex.cloud.serverless.triggers.v1.DataStream
 	21, // 40: yandex.cloud.serverless.triggers.v1.Trigger.Rule.mail:type_name -> yandex.cloud.serverless.triggers.v1.Mail
-	5,  // 41: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	6,  // 42: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 43: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 44: yandex.cloud.serverless.triggers.v1.Trigger.Timer.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	10, // 45: yandex.cloud.serverless.triggers.v1.Trigger.Timer.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
-	13, // 46: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	33, // 47: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
-	5,  // 48: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
-	7,  // 49: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
-	11, // 50: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	9,  // 51: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowOnce
-	13, // 52: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 53: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 54: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 55: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	13, // 56: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 57: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 58: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 59: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	1,  // 60: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
-	13, // 61: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 62: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 63: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 64: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	10, // 65: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
-	2,  // 66: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
-	13, // 67: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
-	6,  // 68: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 69: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 70: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	10, // 71: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
-	14, // 72: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
-	6,  // 73: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 74: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	34, // 75: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	15, // 76: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
-	6,  // 77: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
-	8,  // 78: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
-	11, // 79: yandex.cloud.serverless.triggers.v1.Trigger.Logging.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
-	10, // 80: yandex.cloud.serverless.triggers.v1.Trigger.Logging.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	1,  // 41: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorageEventType
+	13, // 42: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 43: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 44: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 45: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 46: yandex.cloud.serverless.triggers.v1.Trigger.ObjectStorage.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	2,  // 47: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistryEventType
+	13, // 48: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 49: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 50: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 51: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 52: yandex.cloud.serverless.triggers.v1.Trigger.ContainerRegistry.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	14, // 53: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.CloudLogsBatchSettings
+	6,  // 54: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 55: yandex.cloud.serverless.triggers.v1.Trigger.CloudLogs.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	34, // 56: yandex.cloud.serverless.triggers.v1.Trigger.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	15, // 57: yandex.cloud.serverless.triggers.v1.Trigger.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.LoggingBatchSettings
+	6,  // 58: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 59: yandex.cloud.serverless.triggers.v1.Trigger.Logging.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 60: yandex.cloud.serverless.triggers.v1.Trigger.Logging.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 61: yandex.cloud.serverless.triggers.v1.Trigger.Logging.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	5,  // 62: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	6,  // 63: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_function_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 64: yandex.cloud.serverless.triggers.v1.Trigger.Timer.invoke_container_with_retry:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 65: yandex.cloud.serverless.triggers.v1.Trigger.Timer.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	10, // 66: yandex.cloud.serverless.triggers.v1.Trigger.Timer.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowWithRetry
+	13, // 67: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	33, // 68: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.visibility_timeout:type_name -> google.protobuf.Duration
+	5,  // 69: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionOnce
+	7,  // 70: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerOnce
+	11, // 71: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	9,  // 72: yandex.cloud.serverless.triggers.v1.Trigger.MessageQueue.start_workflow:type_name -> yandex.cloud.serverless.triggers.v1.StartWorkflowOnce
+	13, // 73: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 74: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 75: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 76: yandex.cloud.serverless.triggers.v1.Trigger.IoTMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
+	13, // 77: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v1.BatchSettings
+	6,  // 78: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_function:type_name -> yandex.cloud.serverless.triggers.v1.InvokeFunctionWithRetry
+	8,  // 79: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.invoke_container:type_name -> yandex.cloud.serverless.triggers.v1.InvokeContainerWithRetry
+	11, // 80: yandex.cloud.serverless.triggers.v1.Trigger.IoTBrokerMessage.gateway_websocket_broadcast:type_name -> yandex.cloud.serverless.triggers.v1.GatewayWebsocketBroadcast
 	81, // [81:81] is the sub-list for method output_type
 	81, // [81:81] is the sub-list for method input_type
 	81, // [81:81] is the sub-list for extension type_name
@@ -3554,49 +3553,49 @@ func file_yandex_cloud_serverless_triggers_v1_trigger_proto_init() {
 		(*Trigger_Rule_Mail)(nil),
 	}
 	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[20].OneofWrappers = []any{
+		(*Trigger_ObjectStorage_InvokeFunction)(nil),
+		(*Trigger_ObjectStorage_InvokeContainer)(nil),
+		(*Trigger_ObjectStorage_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_ObjectStorage_StartWorkflow)(nil),
+	}
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []any{
+		(*Trigger_ContainerRegistry_InvokeFunction)(nil),
+		(*Trigger_ContainerRegistry_InvokeContainer)(nil),
+		(*Trigger_ContainerRegistry_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_ContainerRegistry_StartWorkflow)(nil),
+	}
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []any{
+		(*Trigger_CloudLogs_InvokeFunction)(nil),
+		(*Trigger_CloudLogs_InvokeContainer)(nil),
+	}
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []any{
+		(*Trigger_Logging_InvokeFunction)(nil),
+		(*Trigger_Logging_InvokeContainer)(nil),
+		(*Trigger_Logging_GatewayWebsocketBroadcast)(nil),
+		(*Trigger_Logging_StartWorkflow)(nil),
+	}
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].OneofWrappers = []any{
 		(*Trigger_Timer_InvokeFunction)(nil),
 		(*Trigger_Timer_InvokeFunctionWithRetry)(nil),
 		(*Trigger_Timer_InvokeContainerWithRetry)(nil),
 		(*Trigger_Timer_GatewayWebsocketBroadcast)(nil),
 		(*Trigger_Timer_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[21].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25].OneofWrappers = []any{
 		(*Trigger_MessageQueue_InvokeFunction)(nil),
 		(*Trigger_MessageQueue_InvokeContainer)(nil),
 		(*Trigger_MessageQueue_GatewayWebsocketBroadcast)(nil),
 		(*Trigger_MessageQueue_StartWorkflow)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[22].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26].OneofWrappers = []any{
 		(*Trigger_IoTMessage_InvokeFunction)(nil),
 		(*Trigger_IoTMessage_InvokeContainer)(nil),
 		(*Trigger_IoTMessage_GatewayWebsocketBroadcast)(nil),
 	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[23].OneofWrappers = []any{
+	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27].OneofWrappers = []any{
 		(*Trigger_IoTBrokerMessage_InvokeFunction)(nil),
 		(*Trigger_IoTBrokerMessage_InvokeContainer)(nil),
 		(*Trigger_IoTBrokerMessage_GatewayWebsocketBroadcast)(nil),
-	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[24].OneofWrappers = []any{
-		(*Trigger_ObjectStorage_InvokeFunction)(nil),
-		(*Trigger_ObjectStorage_InvokeContainer)(nil),
-		(*Trigger_ObjectStorage_GatewayWebsocketBroadcast)(nil),
-		(*Trigger_ObjectStorage_StartWorkflow)(nil),
-	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[25].OneofWrappers = []any{
-		(*Trigger_ContainerRegistry_InvokeFunction)(nil),
-		(*Trigger_ContainerRegistry_InvokeContainer)(nil),
-		(*Trigger_ContainerRegistry_GatewayWebsocketBroadcast)(nil),
-		(*Trigger_ContainerRegistry_StartWorkflow)(nil),
-	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[26].OneofWrappers = []any{
-		(*Trigger_CloudLogs_InvokeFunction)(nil),
-		(*Trigger_CloudLogs_InvokeContainer)(nil),
-	}
-	file_yandex_cloud_serverless_triggers_v1_trigger_proto_msgTypes[27].OneofWrappers = []any{
-		(*Trigger_Logging_InvokeFunction)(nil),
-		(*Trigger_Logging_InvokeContainer)(nil),
-		(*Trigger_Logging_GatewayWebsocketBroadcast)(nil),
-		(*Trigger_Logging_StartWorkflow)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

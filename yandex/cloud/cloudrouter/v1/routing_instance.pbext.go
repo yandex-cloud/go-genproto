@@ -38,6 +38,10 @@ func (m *RoutingInstance) SetStatus(v RoutingInstance_Status) {
 	m.Status = v
 }
 
+func (m *RoutingInstance) SetDeletionProtection(v bool) {
+	m.DeletionProtection = v
+}
+
 func (m *RoutingInstance) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }

@@ -92,12 +92,16 @@ func (m *Version) SetEnvironment(v map[string]string) {
 	m.Environment = v
 }
 
-func (m *Version) SetConnectivity(v *Connectivity) {
-	m.Connectivity = v
-}
-
 func (m *Version) SetNamedServiceAccounts(v map[string]string) {
 	m.NamedServiceAccounts = v
+}
+
+func (m *Version) SetConcurrency(v int64) {
+	m.Concurrency = v
+}
+
+func (m *Version) SetConnectivity(v *Connectivity) {
+	m.Connectivity = v
 }
 
 func (m *Version) SetSecrets(v []*Secret) {
@@ -120,16 +124,54 @@ func (m *Version) SetTmpfsSize(v int64) {
 	m.TmpfsSize = v
 }
 
-func (m *Version) SetConcurrency(v int64) {
-	m.Concurrency = v
-}
-
 func (m *Version) SetMounts(v []*Mount) {
 	m.Mounts = v
 }
 
 func (m *Version) SetMetadataOptions(v *MetadataOptions) {
 	m.MetadataOptions = v
+}
+
+func (m *AsyncInvocationConfig) SetRetriesCount(v int64) {
+	m.RetriesCount = v
+}
+
+func (m *AsyncInvocationConfig) SetSuccessTarget(v *AsyncInvocationConfig_ResponseTarget) {
+	m.SuccessTarget = v
+}
+
+func (m *AsyncInvocationConfig) SetFailureTarget(v *AsyncInvocationConfig_ResponseTarget) {
+	m.FailureTarget = v
+}
+
+func (m *AsyncInvocationConfig) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+type AsyncInvocationConfig_ResponseTarget_Target = isAsyncInvocationConfig_ResponseTarget_Target
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetTarget(v AsyncInvocationConfig_ResponseTarget_Target) {
+	m.Target = v
+}
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetEmptyTarget(v *EmptyTarget) {
+	m.Target = &AsyncInvocationConfig_ResponseTarget_EmptyTarget{
+		EmptyTarget: v,
+	}
+}
+
+func (m *AsyncInvocationConfig_ResponseTarget) SetYmqTarget(v *YMQTarget) {
+	m.Target = &AsyncInvocationConfig_ResponseTarget_YmqTarget{
+		YmqTarget: v,
+	}
+}
+
+func (m *YMQTarget) SetQueueArn(v string) {
+	m.QueueArn = v
+}
+
+func (m *YMQTarget) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }
 
 func (m *Resources) SetMemory(v int64) {
@@ -290,48 +332,6 @@ func (m *Mount_DiskSpec) SetSize(v int64) {
 
 func (m *Mount_DiskSpec) SetBlockSize(v int64) {
 	m.BlockSize = v
-}
-
-func (m *AsyncInvocationConfig) SetRetriesCount(v int64) {
-	m.RetriesCount = v
-}
-
-func (m *AsyncInvocationConfig) SetSuccessTarget(v *AsyncInvocationConfig_ResponseTarget) {
-	m.SuccessTarget = v
-}
-
-func (m *AsyncInvocationConfig) SetFailureTarget(v *AsyncInvocationConfig_ResponseTarget) {
-	m.FailureTarget = v
-}
-
-func (m *AsyncInvocationConfig) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
-}
-
-type AsyncInvocationConfig_ResponseTarget_Target = isAsyncInvocationConfig_ResponseTarget_Target
-
-func (m *AsyncInvocationConfig_ResponseTarget) SetTarget(v AsyncInvocationConfig_ResponseTarget_Target) {
-	m.Target = v
-}
-
-func (m *AsyncInvocationConfig_ResponseTarget) SetEmptyTarget(v *EmptyTarget) {
-	m.Target = &AsyncInvocationConfig_ResponseTarget_EmptyTarget{
-		EmptyTarget: v,
-	}
-}
-
-func (m *AsyncInvocationConfig_ResponseTarget) SetYmqTarget(v *YMQTarget) {
-	m.Target = &AsyncInvocationConfig_ResponseTarget_YmqTarget{
-		YmqTarget: v,
-	}
-}
-
-func (m *YMQTarget) SetQueueArn(v string) {
-	m.QueueArn = v
-}
-
-func (m *YMQTarget) SetServiceAccountId(v string) {
-	m.ServiceAccountId = v
 }
 
 func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {

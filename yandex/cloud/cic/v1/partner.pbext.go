@@ -6,10 +6,6 @@ func (m *Partner) SetId(v string) {
 	m.Id = v
 }
 
-func (m *Partner) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *Partner) SetName(v string) {
 	m.Name = v
 }

@@ -689,6 +689,8 @@ const (
 	PostgresqlConfig14_SHARED_PRELOAD_LIBRARIES_PG_PREWARM PostgresqlConfig14_SharedPreloadLibraries = 7
 	// Required for the [pgaudit](https://www.pgaudit.org/) extension.
 	PostgresqlConfig14_SHARED_PRELOAD_LIBRARIES_PGAUDIT PostgresqlConfig14_SharedPreloadLibraries = 8
+	// Required for the [spqrguard](https://github.com/pg-sharding/spqrguard) extension.
+	PostgresqlConfig14_SHARED_PRELOAD_LIBRARIES_SPQRGUARD PostgresqlConfig14_SharedPreloadLibraries = 9
 )
 
 // Enum value maps for PostgresqlConfig14_SharedPreloadLibraries.
@@ -703,6 +705,7 @@ var (
 		6: "SHARED_PRELOAD_LIBRARIES_PGLOGICAL",
 		7: "SHARED_PRELOAD_LIBRARIES_PG_PREWARM",
 		8: "SHARED_PRELOAD_LIBRARIES_PGAUDIT",
+		9: "SHARED_PRELOAD_LIBRARIES_SPQRGUARD",
 	}
 	PostgresqlConfig14_SharedPreloadLibraries_value = map[string]int32{
 		"SHARED_PRELOAD_LIBRARIES_UNSPECIFIED":  0,
@@ -714,6 +717,7 @@ var (
 		"SHARED_PRELOAD_LIBRARIES_PGLOGICAL":    6,
 		"SHARED_PRELOAD_LIBRARIES_PG_PREWARM":   7,
 		"SHARED_PRELOAD_LIBRARIES_PGAUDIT":      8,
+		"SHARED_PRELOAD_LIBRARIES_SPQRGUARD":    9,
 	}
 )
 
@@ -2420,7 +2424,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x94\x89\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbc\x89\x01\n" +
 	"\x12PostgresqlConfig14\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2663,7 +2667,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = ""
 	"\x1bPLAN_CACHE_MODE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PLAN_CACHE_MODE_AUTO\x10\x01\x12%\n" +
 	"!PLAN_CACHE_MODE_FORCE_CUSTOM_PLAN\x10\x02\x12&\n" +
-	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\x8a\x03\n" +
+	"\"PLAN_CACHE_MODE_FORCE_GENERIC_PLAN\x10\x03\"\xb2\x03\n" +
 	"\x16SharedPreloadLibraries\x12(\n" +
 	"$SHARED_PRELOAD_LIBRARIES_UNSPECIFIED\x10\x00\x12)\n" +
 	"%SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN\x10\x01\x12)\n" +
@@ -2673,7 +2677,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = ""
 	" SHARED_PRELOAD_LIBRARIES_PG_CRON\x10\x05\x12&\n" +
 	"\"SHARED_PRELOAD_LIBRARIES_PGLOGICAL\x10\x06\x12'\n" +
 	"#SHARED_PRELOAD_LIBRARIES_PG_PREWARM\x10\a\x12$\n" +
-	" SHARED_PRELOAD_LIBRARIES_PGAUDIT\x10\b\"\xd6\x01\n" +
+	" SHARED_PRELOAD_LIBRARIES_PGAUDIT\x10\b\x12&\n" +
+	"\"SHARED_PRELOAD_LIBRARIES_SPQRGUARD\x10\t\"\xd6\x01\n" +
 	"\x11SynchronousCommit\x12\"\n" +
 	"\x1eSYNCHRONOUS_COMMIT_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SYNCHRONOUS_COMMIT_ON\x10\x01\x12\x1a\n" +

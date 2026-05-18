@@ -67,6 +67,14 @@ func (m *Workflow) SetExecutionUrl(v string) {
 	m.ExecutionUrl = v
 }
 
+func (m *WorkflowSchedule) SetCronExpression(v string) {
+	m.CronExpression = v
+}
+
+func (m *WorkflowSchedule) SetTimezone(v string) {
+	m.Timezone = v
+}
+
 func (m *WorkflowPreview) SetId(v string) {
 	m.Id = v
 }
@@ -155,12 +163,4 @@ func (m *LogOptions) SetFolderId(v string) {
 
 func (m *LogOptions) SetMinLevel(v v1.LogLevel_Level) {
 	m.MinLevel = v
-}
-
-func (m *WorkflowSchedule) SetCronExpression(v string) {
-	m.CronExpression = v
-}
-
-func (m *WorkflowSchedule) SetTimezone(v string) {
-	m.Timezone = v
 }

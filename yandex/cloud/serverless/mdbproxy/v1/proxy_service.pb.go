@@ -30,7 +30,6 @@ const (
 type GetProxyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the proxy to return.
-	//
 	// To get a proxy ID make a [ProxyService.List] request.
 	ProxyId       string `protobuf:"bytes,1,opt,name=proxy_id,json=proxyId,proto3" json:"proxy_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -77,20 +76,17 @@ func (x *GetProxyRequest) GetProxyId() string {
 type ListProxyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list proxies in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListProxyResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListProxyResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters proxies listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Proxy.name] field.
 	// 2. An `=` operator.
@@ -166,7 +162,6 @@ type ListProxyResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListProxyRequest.page_size], use `nextPageToken` as the value
 	// for the [ListProxyRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -220,7 +215,6 @@ func (x *ListProxyResponse) GetNextPageToken() string {
 type CreateProxyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a proxy in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the proxy.
@@ -579,14 +573,12 @@ type ListProxyOperationsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListProxyOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListProxyOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.done], [operation.Operation.created_by] field.
 	// 2. An `=` operator.
@@ -662,7 +654,6 @@ type ListProxyOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListProxyOperationsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListProxyOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -717,7 +708,7 @@ var File_yandex_cloud_serverless_mdbproxy_v1_proxy_service_proto protoreflect.Fi
 
 const file_yandex_cloud_serverless_mdbproxy_v1_proxy_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/serverless/mdbproxy/v1/proxy_service.proto\x12#yandex.cloud.serverless.mdbproxy.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a/yandex/cloud/serverless/mdbproxy/v1/proxy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
+	"7yandex/cloud/serverless/mdbproxy/v1/proxy_service.proto\x12#yandex.cloud.serverless.mdbproxy.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a/yandex/cloud/serverless/mdbproxy/v1/proxy.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
 	"\x0fGetProxyRequest\x12'\n" +
 	"\bproxy_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aproxyId\"\xb4\x01\n" +
 	"\x10ListProxyRequest\x12)\n" +

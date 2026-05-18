@@ -71,7 +71,7 @@ func (x SendToConnectionRequest_DataType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SendToConnectionRequest_DataType.Descriptor instead.
 func (SendToConnectionRequest_DataType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{1, 0}
+	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{2, 0}
 }
 
 type GetConnectionRequest struct {
@@ -119,6 +119,51 @@ func (x *GetConnectionRequest) GetConnectionId() string {
 	return ""
 }
 
+type DisconnectRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the connection to disconnect.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisconnectRequest) Reset() {
+	*x = DisconnectRequest{}
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisconnectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisconnectRequest) ProtoMessage() {}
+
+func (x *DisconnectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisconnectRequest.ProtoReflect.Descriptor instead.
+func (*DisconnectRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DisconnectRequest) GetConnectionId() string {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return ""
+}
+
 type SendToConnectionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the connection to which send.
@@ -133,7 +178,7 @@ type SendToConnectionRequest struct {
 
 func (x *SendToConnectionRequest) Reset() {
 	*x = SendToConnectionRequest{}
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -145,7 +190,7 @@ func (x *SendToConnectionRequest) String() string {
 func (*SendToConnectionRequest) ProtoMessage() {}
 
 func (x *SendToConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -158,7 +203,7 @@ func (x *SendToConnectionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendToConnectionRequest.ProtoReflect.Descriptor instead.
 func (*SendToConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SendToConnectionRequest) GetConnectionId() string {
@@ -190,7 +235,7 @@ type SendToConnectionResponse struct {
 
 func (x *SendToConnectionResponse) Reset() {
 	*x = SendToConnectionResponse{}
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +247,7 @@ func (x *SendToConnectionResponse) String() string {
 func (*SendToConnectionResponse) ProtoMessage() {}
 
 func (x *SendToConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,52 +260,7 @@ func (x *SendToConnectionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendToConnectionResponse.ProtoReflect.Descriptor instead.
 func (*SendToConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{2}
-}
-
-type DisconnectRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the connection to disconnect.
-	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DisconnectRequest) Reset() {
-	*x = DisconnectRequest{}
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DisconnectRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DisconnectRequest) ProtoMessage() {}
-
-func (x *DisconnectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DisconnectRequest.ProtoReflect.Descriptor instead.
-func (*DisconnectRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *DisconnectRequest) GetConnectionId() string {
-	if x != nil {
-		return x.ConnectionId
-	}
-	return ""
 }
 
 type DisconnectResponse struct {
@@ -303,8 +303,10 @@ var File_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_prot
 
 const file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"Hyandex/cloud/serverless/apigateway/websocket/v1/connection_service.proto\x12/yandex.cloud.serverless.apigateway.websocket.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a@yandex/cloud/serverless/apigateway/websocket/v1/connection.proto\"I\n" +
+	"Hyandex/cloud/serverless/apigateway/websocket/v1/connection_service.proto\x12/yandex.cloud.serverless.apigateway.websocket.v1\x1a\x1cgoogle/api/annotations.proto\x1a@yandex/cloud/serverless/apigateway/websocket/v1/connection.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x14GetConnectionRequest\x121\n" +
+	"\rconnection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fconnectionId\"F\n" +
+	"\x11DisconnectRequest\x121\n" +
 	"\rconnection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fconnectionId\"\x96\x02\n" +
 	"\x17SendToConnectionRequest\x121\n" +
 	"\rconnection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fconnectionId\x12$\n" +
@@ -315,9 +317,7 @@ const file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_pr
 	"\n" +
 	"\x06BINARY\x10\x01\x12\b\n" +
 	"\x04TEXT\x10\x02\"\x1a\n" +
-	"\x18SendToConnectionResponse\"F\n" +
-	"\x11DisconnectRequest\x121\n" +
-	"\rconnection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fconnectionId\"\x14\n" +
+	"\x18SendToConnectionResponse\"\x14\n" +
 	"\x12DisconnectResponse2\x9a\x05\n" +
 	"\x11ConnectionService\x12\xc8\x01\n" +
 	"\x03Get\x12E.yandex.cloud.serverless.apigateway.websocket.v1.GetConnectionRequest\x1a;.yandex.cloud.serverless.apigateway.websocket.v1.Connection\"=\x82\xd3\xe4\x93\x027\x125/apigateways/websocket/v1/connections/{connection_id}\x12\xe2\x01\n" +
@@ -343,19 +343,19 @@ var file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_prot
 var file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_goTypes = []any{
 	(SendToConnectionRequest_DataType)(0), // 0: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest.DataType
 	(*GetConnectionRequest)(nil),          // 1: yandex.cloud.serverless.apigateway.websocket.v1.GetConnectionRequest
-	(*SendToConnectionRequest)(nil),       // 2: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest
-	(*SendToConnectionResponse)(nil),      // 3: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionResponse
-	(*DisconnectRequest)(nil),             // 4: yandex.cloud.serverless.apigateway.websocket.v1.DisconnectRequest
+	(*DisconnectRequest)(nil),             // 2: yandex.cloud.serverless.apigateway.websocket.v1.DisconnectRequest
+	(*SendToConnectionRequest)(nil),       // 3: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest
+	(*SendToConnectionResponse)(nil),      // 4: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionResponse
 	(*DisconnectResponse)(nil),            // 5: yandex.cloud.serverless.apigateway.websocket.v1.DisconnectResponse
 	(*Connection)(nil),                    // 6: yandex.cloud.serverless.apigateway.websocket.v1.Connection
 }
 var file_yandex_cloud_serverless_apigateway_websocket_v1_connection_service_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest.type:type_name -> yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest.DataType
 	1, // 1: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Get:input_type -> yandex.cloud.serverless.apigateway.websocket.v1.GetConnectionRequest
-	2, // 2: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Send:input_type -> yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest
-	4, // 3: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Disconnect:input_type -> yandex.cloud.serverless.apigateway.websocket.v1.DisconnectRequest
+	3, // 2: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Send:input_type -> yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionRequest
+	2, // 3: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Disconnect:input_type -> yandex.cloud.serverless.apigateway.websocket.v1.DisconnectRequest
 	6, // 4: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Get:output_type -> yandex.cloud.serverless.apigateway.websocket.v1.Connection
-	3, // 5: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Send:output_type -> yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionResponse
+	4, // 5: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Send:output_type -> yandex.cloud.serverless.apigateway.websocket.v1.SendToConnectionResponse
 	5, // 6: yandex.cloud.serverless.apigateway.websocket.v1.ConnectionService.Disconnect:output_type -> yandex.cloud.serverless.apigateway.websocket.v1.DisconnectResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type

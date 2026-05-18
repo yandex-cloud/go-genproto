@@ -87,9 +87,8 @@ type ListConnectorsRequest struct {
 	// `next_page_token` returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Supported fields for filter:
-	//
-	//	name
-	//	created_at
+	// name
+	// created_at
 	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -622,12 +621,11 @@ type ListConnectorOperationsRequest struct {
 	// `next_page_token` returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Supported attributes for filter:
-	//
-	//	description
-	//	created_at
-	//	modified_at
-	//	created_by
-	//	done
+	// description
+	// created_at
+	// modified_at
+	// created_by
+	// done
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -929,7 +927,7 @@ var File_yandex_cloud_serverless_eventrouter_v1_connector_service_proto protoref
 
 const file_yandex_cloud_serverless_eventrouter_v1_connector_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/serverless/eventrouter/v1/connector_service.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a yandex/cloud/access/access.proto\x1a6yandex/cloud/serverless/eventrouter/v1/connector.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\">\n" +
+	">yandex/cloud/serverless/eventrouter/v1/connector_service.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/serverless/eventrouter/v1/connector.proto\x1a\x1dyandex/cloud/validation.proto\">\n" +
 	"\x13GetConnectorRequest\x12'\n" +
 	"\fconnector_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vconnectorId\"\xb9\x01\n" +
 	"\x15ListConnectorsRequest\x12\x17\n" +

@@ -206,87 +206,6 @@ func (*Target_Clickhouse) isTarget_Mdb() {}
 
 func (*Target_Postgresql) isTarget_Mdb() {}
 
-type Target_PostgreSQL struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Cluster identifier for postgresql.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// PostgreSQL user.
-	User string `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
-	// PostgreSQL password, input only field.
-	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// PostgreSQL database name.
-	Db string `protobuf:"bytes,4,opt,name=db,proto3" json:"db,omitempty"`
-	// PostgreSQL proxy-host for connection, output only field.
-	Endpoint      string `protobuf:"bytes,5,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Target_PostgreSQL) Reset() {
-	*x = Target_PostgreSQL{}
-	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Target_PostgreSQL) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Target_PostgreSQL) ProtoMessage() {}
-
-func (x *Target_PostgreSQL) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Target_PostgreSQL.ProtoReflect.Descriptor instead.
-func (*Target_PostgreSQL) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDescGZIP(), []int{1, 0}
-}
-
-func (x *Target_PostgreSQL) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *Target_PostgreSQL) GetUser() string {
-	if x != nil {
-		return x.User
-	}
-	return ""
-}
-
-func (x *Target_PostgreSQL) GetPassword() string {
-	if x != nil {
-		return x.Password
-	}
-	return ""
-}
-
-func (x *Target_PostgreSQL) GetDb() string {
-	if x != nil {
-		return x.Db
-	}
-	return ""
-}
-
-func (x *Target_PostgreSQL) GetEndpoint() string {
-	if x != nil {
-		return x.Endpoint
-	}
-	return ""
-}
-
 type Target_ClickHouse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Cluster identifier for clickhouse.
@@ -305,7 +224,7 @@ type Target_ClickHouse struct {
 
 func (x *Target_ClickHouse) Reset() {
 	*x = Target_ClickHouse{}
-	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[4]
+	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -317,7 +236,7 @@ func (x *Target_ClickHouse) String() string {
 func (*Target_ClickHouse) ProtoMessage() {}
 
 func (x *Target_ClickHouse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[4]
+	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +249,7 @@ func (x *Target_ClickHouse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Target_ClickHouse.ProtoReflect.Descriptor instead.
 func (*Target_ClickHouse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDescGZIP(), []int{1, 1}
+	return file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDescGZIP(), []int{1, 0}
 }
 
 func (x *Target_ClickHouse) GetClusterId() string {
@@ -368,6 +287,87 @@ func (x *Target_ClickHouse) GetEndpoint() string {
 	return ""
 }
 
+type Target_PostgreSQL struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Cluster identifier for postgresql.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// PostgreSQL user.
+	User string `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// PostgreSQL password, input only field.
+	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	// PostgreSQL database name.
+	Db string `protobuf:"bytes,4,opt,name=db,proto3" json:"db,omitempty"`
+	// PostgreSQL proxy-host for connection, output only field.
+	Endpoint      string `protobuf:"bytes,5,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Target_PostgreSQL) Reset() {
+	*x = Target_PostgreSQL{}
+	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Target_PostgreSQL) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Target_PostgreSQL) ProtoMessage() {}
+
+func (x *Target_PostgreSQL) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Target_PostgreSQL.ProtoReflect.Descriptor instead.
+func (*Target_PostgreSQL) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDescGZIP(), []int{1, 1}
+}
+
+func (x *Target_PostgreSQL) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *Target_PostgreSQL) GetUser() string {
+	if x != nil {
+		return x.User
+	}
+	return ""
+}
+
+func (x *Target_PostgreSQL) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *Target_PostgreSQL) GetDb() string {
+	if x != nil {
+		return x.Db
+	}
+	return ""
+}
+
+func (x *Target_PostgreSQL) GetEndpoint() string {
+	if x != nil {
+		return x.Endpoint
+	}
+	return ""
+}
+
 var File_yandex_cloud_serverless_mdbproxy_v1_proxy_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDesc = "" +
@@ -391,20 +391,20 @@ const file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_rawDesc = "" +
 	"clickhouse\x12X\n" +
 	"\n" +
 	"postgresql\x18\x02 \x01(\v26.yandex.cloud.serverless.mdbproxy.v1.Target.PostgreSQLH\x00R\n" +
-	"postgresql\x1a\xd5\x01\n" +
-	"\n" +
-	"PostgreSQL\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x122\n" +
-	"\x04user\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04user\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12.\n" +
-	"\x02db\x18\x04 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x02db\x12\x1a\n" +
-	"\bendpoint\x18\x05 \x01(\tR\bendpoint\x1a\xd4\x01\n" +
+	"postgresql\x1a\xd4\x01\n" +
 	"\n" +
 	"ClickHouse\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
 	"\x04user\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\x04user\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12.\n" +
+	"\x02db\x18\x04 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x02db\x12\x1a\n" +
+	"\bendpoint\x18\x05 \x01(\tR\bendpoint\x1a\xd5\x01\n" +
+	"\n" +
+	"PostgreSQL\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x122\n" +
+	"\x04user\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04user\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12.\n" +
 	"\x02db\x18\x04 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x02db\x12\x1a\n" +
 	"\bendpoint\x18\x05 \x01(\tR\bendpointB\v\n" +
@@ -428,16 +428,16 @@ var file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_goTypes = []any{
 	(*Proxy)(nil),                 // 0: yandex.cloud.serverless.mdbproxy.v1.Proxy
 	(*Target)(nil),                // 1: yandex.cloud.serverless.mdbproxy.v1.Target
 	nil,                           // 2: yandex.cloud.serverless.mdbproxy.v1.Proxy.LabelsEntry
-	(*Target_PostgreSQL)(nil),     // 3: yandex.cloud.serverless.mdbproxy.v1.Target.PostgreSQL
-	(*Target_ClickHouse)(nil),     // 4: yandex.cloud.serverless.mdbproxy.v1.Target.ClickHouse
+	(*Target_ClickHouse)(nil),     // 3: yandex.cloud.serverless.mdbproxy.v1.Target.ClickHouse
+	(*Target_PostgreSQL)(nil),     // 4: yandex.cloud.serverless.mdbproxy.v1.Target.PostgreSQL
 	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_yandex_cloud_serverless_mdbproxy_v1_proxy_proto_depIdxs = []int32{
 	5, // 0: yandex.cloud.serverless.mdbproxy.v1.Proxy.created_at:type_name -> google.protobuf.Timestamp
 	2, // 1: yandex.cloud.serverless.mdbproxy.v1.Proxy.labels:type_name -> yandex.cloud.serverless.mdbproxy.v1.Proxy.LabelsEntry
 	1, // 2: yandex.cloud.serverless.mdbproxy.v1.Proxy.target:type_name -> yandex.cloud.serverless.mdbproxy.v1.Target
-	4, // 3: yandex.cloud.serverless.mdbproxy.v1.Target.clickhouse:type_name -> yandex.cloud.serverless.mdbproxy.v1.Target.ClickHouse
-	3, // 4: yandex.cloud.serverless.mdbproxy.v1.Target.postgresql:type_name -> yandex.cloud.serverless.mdbproxy.v1.Target.PostgreSQL
+	3, // 3: yandex.cloud.serverless.mdbproxy.v1.Target.clickhouse:type_name -> yandex.cloud.serverless.mdbproxy.v1.Target.ClickHouse
+	4, // 4: yandex.cloud.serverless.mdbproxy.v1.Target.postgresql:type_name -> yandex.cloud.serverless.mdbproxy.v1.Target.PostgreSQL
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

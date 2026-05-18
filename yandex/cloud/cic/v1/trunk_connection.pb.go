@@ -189,8 +189,6 @@ type TrunkConnection struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the folder that the trunkConnection belongs to.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// ID of the region that the trunkConnection belongs to.
-	RegionId string `protobuf:"bytes,6,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Special trunkConnection config
@@ -274,13 +272,6 @@ func (x *TrunkConnection) GetDescription() string {
 func (x *TrunkConnection) GetFolderId() string {
 	if x != nil {
 		return x.FolderId
-	}
-	return ""
-}
-
-func (x *TrunkConnection) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
 	}
 	return ""
 }
@@ -570,13 +561,12 @@ var File_yandex_cloud_cic_v1_trunk_connection_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_trunk_connection_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/cic/v1/trunk_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x1a1yandex/cloud/cic/v1/common/transceiver_type.proto\"\xab\x10\n" +
+	"*yandex/cloud/cic/v1/trunk_connection.proto\x12\x13yandex.cloud.cic.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a8yandex/cloud/cic/v1/common/lag_allocation_settings.proto\x1a1yandex/cloud/cic/v1/common/transceiver_type.proto\"\x94\x10\n" +
 	"\x0fTrunkConnection\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
-	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x12\x1b\n" +
-	"\tregion_id\x18\x06 \x01(\tR\bregionId\x129\n" +
+	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12u\n" +
 	"\x18single_port_direct_joint\x18\t \x01(\v2:.yandex.cloud.cic.v1.TrunkConnection.SinglePortDirectJointH\x00R\x15singlePortDirectJoint\x12_\n" +
@@ -632,7 +622,7 @@ const file_yandex_cloud_cic_v1_trunk_connection_proto_rawDesc = "" +
 	"\bDELETING\x10\x03\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x04B\a\n" +
-	"\x05jointJ\x04\b\x04\x10\x05J\x04\b\b\x10\tJ\x04\b\r\x10\x16BV\n" +
+	"\x05jointJ\x04\b\x04\x10\x05J\x04\b\x06\x10\aJ\x04\b\b\x10\tJ\x04\b\r\x10\x16BV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (

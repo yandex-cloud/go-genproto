@@ -39,7 +39,6 @@ const (
 // A set of methods for managing serverless MDB proxy.
 type ProxyServiceClient interface {
 	// Returns the specified proxy.
-	//
 	// To get the list of all available proxies, make a [List] request.
 	Get(ctx context.Context, in *GetProxyRequest, opts ...grpc.CallOption) (*Proxy, error)
 	// Retrieves the list of proxies in the specified folder.
@@ -165,7 +164,6 @@ func (c *proxyServiceClient) UpdateAccessBindings(ctx context.Context, in *acces
 // A set of methods for managing serverless MDB proxy.
 type ProxyServiceServer interface {
 	// Returns the specified proxy.
-	//
 	// To get the list of all available proxies, make a [List] request.
 	Get(context.Context, *GetProxyRequest) (*Proxy, error)
 	// Retrieves the list of proxies in the specified folder.

@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -226,7 +227,7 @@ var File_yandex_cloud_baremetal_v1alpha_mounted_image_service_proto protoreflect
 
 const file_yandex_cloud_baremetal_v1alpha_mounted_image_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/baremetal/v1alpha/mounted_image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"_\n" +
+	":yandex/cloud/baremetal/v1alpha/mounted_image_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"_\n" +
 	"\x19CreateMountedImageRequest\x12!\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bserverId\x12\x1f\n" +
 	"\bimage_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aimageId\">\n" +
@@ -237,11 +238,11 @@ const file_yandex_cloud_baremetal_v1alpha_mounted_image_service_proto_rawDesc = 
 	"\x17GetMountedImageResponse\x12\x19\n" +
 	"\bimage_id\x18\x01 \x01(\tR\aimageId\x129\n" +
 	"\n" +
-	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAtJ\x04\b\x02\x10\x032\xc7\x02\n" +
-	"\x13MountedImageService\x12[\n" +
-	"\x06Create\x129.yandex.cloud.baremetal.v1alpha.CreateMountedImageRequest\x1a\x16.google.protobuf.Empty\x12[\n" +
-	"\x06Delete\x129.yandex.cloud.baremetal.v1alpha.DeleteMountedImageRequest\x1a\x16.google.protobuf.Empty\x12v\n" +
-	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetMountedImageRequest\x1a7.yandex.cloud.baremetal.v1alpha.GetMountedImageResponseBr\n" +
+	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAtJ\x04\b\x02\x10\x032\xe3\x03\n" +
+	"\x13MountedImageService\x12\x88\x01\n" +
+	"\x06Create\x129.yandex.cloud.baremetal.v1alpha.CreateMountedImageRequest\x1a\x16.google.protobuf.Empty\"+\x82\xd3\xe4\x93\x02%:\x01*\" /baremetal/v1alpha/mountedImages\x12\x91\x01\n" +
+	"\x06Delete\x129.yandex.cloud.baremetal.v1alpha.DeleteMountedImageRequest\x1a\x16.google.protobuf.Empty\"4\x82\xd3\xe4\x93\x02.*,/baremetal/v1alpha/mountedImages/{server_id}\x12\xac\x01\n" +
+	"\x03Get\x126.yandex.cloud.baremetal.v1alpha.GetMountedImageRequest\x1a7.yandex.cloud.baremetal.v1alpha.GetMountedImageResponse\"4\x82\xd3\xe4\x93\x02.\x12,/baremetal/v1alpha/mountedImages/{server_id}Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (

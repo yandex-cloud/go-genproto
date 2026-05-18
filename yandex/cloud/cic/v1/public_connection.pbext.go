@@ -23,10 +23,6 @@ func (m *PublicConnection) SetFolderId(v string) {
 	m.FolderId = v
 }
 
-func (m *PublicConnection) SetRegionId(v string) {
-	m.RegionId = v
-}
-
 func (m *PublicConnection) SetTrunkConnectionId(v string) {
 	m.TrunkConnectionId = v
 }

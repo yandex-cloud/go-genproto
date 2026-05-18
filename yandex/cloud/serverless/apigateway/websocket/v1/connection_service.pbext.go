@@ -6,6 +6,10 @@ func (m *GetConnectionRequest) SetConnectionId(v string) {
 	m.ConnectionId = v
 }
 
+func (m *DisconnectRequest) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
 func (m *SendToConnectionRequest) SetConnectionId(v string) {
 	m.ConnectionId = v
 }
@@ -16,8 +20,4 @@ func (m *SendToConnectionRequest) SetData(v []byte) {
 
 func (m *SendToConnectionRequest) SetType(v SendToConnectionRequest_DataType) {
 	m.Type = v
-}
-
-func (m *DisconnectRequest) SetConnectionId(v string) {
-	m.ConnectionId = v
 }

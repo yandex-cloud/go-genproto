@@ -32,7 +32,6 @@ const (
 type GetFunctionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to return.
-	//
 	// To get a function ID make a [FunctionService.List] request.
 	FunctionId    string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -79,7 +78,6 @@ func (x *GetFunctionRequest) GetFunctionId() string {
 type GetFunctionVersionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the version to return.
-	//
 	// To get a version ID make a [FunctionService.ListVersions] request.
 	FunctionVersionId string `protobuf:"bytes,1,opt,name=function_version_id,json=functionVersionId,proto3" json:"function_version_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -126,11 +124,9 @@ func (x *GetFunctionVersionRequest) GetFunctionVersionId() string {
 type GetFunctionVersionByTagRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function whose versions should be listed.
-	//
 	// To get a function ID use a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Version tag.
-	//
 	// To get the history of version tags make a [FunctionService.ListTagHistory] request.
 	Tag           string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -184,20 +180,17 @@ func (x *GetFunctionVersionByTagRequest) GetTag() string {
 type ListFunctionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list functions in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListFunctionsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListFunctionsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters functions listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Function.name] field.
 	// 2. An `=` operator.
@@ -273,7 +266,6 @@ type ListFunctionsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFunctionsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListFunctionsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -327,7 +319,6 @@ func (x *ListFunctionsResponse) GetNextPageToken() string {
 type CreateFunctionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a function in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the function.
@@ -447,7 +438,6 @@ func (x *CreateFunctionMetadata) GetFunctionId() string {
 type UpdateFunctionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to update.
-	//
 	// To get a function ID make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Field mask that specifies which attributes of the function should be updated.
@@ -458,7 +448,6 @@ type UpdateFunctionRequest struct {
 	// New description for the function.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Function labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label, request the current set of labels with a [FunctionService.Get] request.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -672,7 +661,6 @@ type DeleteFunctionVersionRequest struct {
 	// ID of the function's version to delete.
 	FunctionVersionId string `protobuf:"bytes,2,opt,name=function_version_id,json=functionVersionId,proto3" json:"function_version_id,omitempty"`
 	// Forces deletion of the version tags.
-	//
 	// If the value equals false and the function has tags with the selected version then request returns an error.
 	Force         bool `protobuf:"varint,3,opt,name=force,proto3" json:"force,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -859,14 +847,12 @@ type ListFunctionsVersionsRequest struct {
 	// The maximum number of results per page to return. If the number of available results
 	// is larger than `pageSize`, the service returns a [ListFunctionsVersionsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListFunctionsVersionsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Version.status] and [Version.runtime] fields.
 	// 2. An `=` operator.
@@ -980,7 +966,6 @@ type ListFunctionsVersionsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFunctionsVersionsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListFunctionsVersionsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1038,14 +1023,12 @@ type ListFunctionOperationsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListFunctionOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListFunctionOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.done], [operation.Operation.created_by] field.
 	// 2. An `=` operator.
@@ -1121,7 +1104,6 @@ type ListFunctionOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFunctionOperationsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListFunctionOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1175,7 +1157,6 @@ func (x *ListFunctionOperationsResponse) GetNextPageToken() string {
 type CreateFunctionVersionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to create a version for.
-	//
 	// To get a function ID, make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Runtime environment for the version.
@@ -1187,7 +1168,6 @@ type CreateFunctionVersionRequest struct {
 	// Resources allocated to the version.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Timeout for the execution of the version.
-	//
 	// If the timeout is exceeded, Cloud Functions responds with a 504 HTTP code.
 	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,6,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
 	// ID of the service account to associate with the version.
@@ -1202,12 +1182,14 @@ type CreateFunctionVersionRequest struct {
 	PackageSource isCreateFunctionVersionRequest_PackageSource `protobuf_oneof:"package_source"`
 	// Environment settings for the version.
 	Environment map[string]string `protobuf:"bytes,12,rep,name=environment,proto3" json:"environment,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Function version tags. For details, see [Version tag](/docs/functions/concepts/function#tag).
-	Tag []string `protobuf:"bytes,13,rep,name=tag,proto3" json:"tag,omitempty"`
-	// Function version connectivity. If specified the version will be attached to specified network/subnet(s).
-	Connectivity *Connectivity `protobuf:"bytes,17,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Additional service accounts to be used by the version.
 	NamedServiceAccounts map[string]string `protobuf:"bytes,15,rep,name=named_service_accounts,json=namedServiceAccounts,proto3" json:"named_service_accounts,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Function version tags. For details, see [Version tag](/docs/functions/concepts/function#tag).
+	Tag []string `protobuf:"bytes,13,rep,name=tag,proto3" json:"tag,omitempty"`
+	// The maximum number of requests processed by a function instance at the same time
+	Concurrency int64 `protobuf:"varint,24,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
+	// Function version connectivity. If specified the version will be attached to specified network/subnet(s).
+	Connectivity *Connectivity `protobuf:"bytes,17,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Yandex Lockbox secrets to be used by the version.
 	Secrets []*Secret `protobuf:"bytes,18,rep,name=secrets,proto3" json:"secrets,omitempty"`
 	// Options for logging from the function
@@ -1218,11 +1200,8 @@ type CreateFunctionVersionRequest struct {
 	AsyncInvocationConfig *AsyncInvocationConfig `protobuf:"bytes,22,opt,name=async_invocation_config,json=asyncInvocationConfig,proto3" json:"async_invocation_config,omitempty"`
 	// Optional size of in-memory mounted /tmp directory in bytes.
 	// Available for versions with resources.memory greater or equal to 1024 MiB.
-	//
 	// 0 or in range from 512 MiB to 3/4 of resources.memory.
 	TmpfsSize int64 `protobuf:"varint,23,opt,name=tmpfs_size,json=tmpfsSize,proto3" json:"tmpfs_size,omitempty"`
-	// The maximum number of requests processed by a function instance at the same time
-	Concurrency int64 `protobuf:"varint,24,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
 	// Mounts to be used by the version.
 	Mounts []*Mount `protobuf:"bytes,25,rep,name=mounts,proto3" json:"mounts,omitempty"`
 	// Metadata options for the version.
@@ -1351,6 +1330,13 @@ func (x *CreateFunctionVersionRequest) GetEnvironment() map[string]string {
 	return nil
 }
 
+func (x *CreateFunctionVersionRequest) GetNamedServiceAccounts() map[string]string {
+	if x != nil {
+		return x.NamedServiceAccounts
+	}
+	return nil
+}
+
 func (x *CreateFunctionVersionRequest) GetTag() []string {
 	if x != nil {
 		return x.Tag
@@ -1358,16 +1344,16 @@ func (x *CreateFunctionVersionRequest) GetTag() []string {
 	return nil
 }
 
+func (x *CreateFunctionVersionRequest) GetConcurrency() int64 {
+	if x != nil {
+		return x.Concurrency
+	}
+	return 0
+}
+
 func (x *CreateFunctionVersionRequest) GetConnectivity() *Connectivity {
 	if x != nil {
 		return x.Connectivity
-	}
-	return nil
-}
-
-func (x *CreateFunctionVersionRequest) GetNamedServiceAccounts() map[string]string {
-	if x != nil {
-		return x.NamedServiceAccounts
 	}
 	return nil
 }
@@ -1403,13 +1389,6 @@ func (x *CreateFunctionVersionRequest) GetAsyncInvocationConfig() *AsyncInvocati
 func (x *CreateFunctionVersionRequest) GetTmpfsSize() int64 {
 	if x != nil {
 		return x.TmpfsSize
-	}
-	return 0
-}
-
-func (x *CreateFunctionVersionRequest) GetConcurrency() int64 {
-	if x != nil {
-		return x.Concurrency
 	}
 	return 0
 }
@@ -1502,7 +1481,6 @@ func (x *CreateFunctionVersionMetadata) GetFunctionVersionId() string {
 type SetFunctionTagRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the version to set the tag for.
-	//
 	// To get a version ID make a [FunctionService.ListVersions] request.
 	FunctionVersionId string `protobuf:"bytes,1,opt,name=function_version_id,json=functionVersionId,proto3" json:"function_version_id,omitempty"`
 	// Tag to set for the version.
@@ -1558,7 +1536,6 @@ func (x *SetFunctionTagRequest) GetTag() string {
 type RemoveFunctionTagRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the version to remove a tag from.
-	//
 	// To get the a version ID make a [FunctionService.ListVersions] request.
 	FunctionVersionId string `protobuf:"bytes,1,opt,name=function_version_id,json=functionVersionId,proto3" json:"function_version_id,omitempty"`
 	// Tag to remove from the specified version.
@@ -1704,7 +1681,6 @@ func (x *RemoveFunctionTagMetadata) GetFunctionVersionId() string {
 type ListFunctionTagHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to retrieve tag history for.
-	//
 	// To get a function ID, make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Specific tag that history should be limited to.
@@ -1718,7 +1694,6 @@ type ListFunctionTagHistoryRequest struct {
 	// [ListFunctionOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [FunctionTagHistoryRecord.effective_from] and [FunctionTagHistoryRecord.effective_to] fields.
 	// 2. An `=` or `>` or `<` operator.
@@ -1801,7 +1776,6 @@ type ListFunctionTagHistoryResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFunctionTagHistoryRequest.page_size], use `nextPageToken` as the value
 	// for the [ListFunctionTagHistoryRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1855,13 +1829,11 @@ func (x *ListFunctionTagHistoryResponse) GetNextPageToken() string {
 type ListScalingPoliciesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to retrieve scaling policies for.
-	//
 	// To get a function ID, make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListScalingPoliciesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
@@ -1929,7 +1901,6 @@ type ListScalingPoliciesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListScalingPoliciesRequest.page_size], use `nextPageToken` as the value
 	// for the [ListScalingPoliciesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1983,11 +1954,9 @@ func (x *ListScalingPoliciesResponse) GetNextPageToken() string {
 type SetScalingPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to retrieve scaling policies for.
-	//
 	// To get a function ID, make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Version tag.
-	//
 	// To get the history of version tags make a [FunctionService.ListTagHistory] request.
 	Tag string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
 	// Minimum guaranteed provisioned instances count for all zones in total.
@@ -2116,11 +2085,9 @@ func (x *SetScalingPolicyMetadata) GetFunctionId() string {
 type RemoveScalingPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the function to remove scaling policies for.
-	//
 	// To get a function ID, make a [FunctionService.List] request.
 	FunctionId string `protobuf:"bytes,1,opt,name=function_id,json=functionId,proto3" json:"function_id,omitempty"`
 	// Version tag.
-	//
 	// To get the history of version tags make a [FunctionService.ListTagHistory] request.
 	Tag           string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2324,7 +2291,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\x15CreateFunctionRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x125\n" +
 	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa4\x01\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=600R\vdescription\x12\xa4\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2G.yandex.cloud.serverless.functions.v1.CreateFunctionRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2338,7 +2305,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x125\n" +
 	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa4\x01\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=600R\vdescription\x12\xa4\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2G.yandex.cloud.serverless.functions.v1.UpdateFunctionRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2393,7 +2360,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\vfunction_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"functionId\x12\x1e\n" +
 	"\aruntime\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aruntime\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x050-256R\vdescription\x12$\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x050-600R\vdescription\x12$\n" +
 	"\n" +
 	"entrypoint\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"entrypoint\x12S\n" +
@@ -2406,18 +2373,18 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"<=52428800H\x00R\acontent\x12\x1f\n" +
 	"\n" +
 	"version_id\x18\v \x01(\tH\x00R\tversionId\x12\x9c\x01\n" +
-	"\venvironment\x18\f \x03(\v2S.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.EnvironmentEntryB%\x8a\xc81\x06<=4096\xb2\xc81\x17\x12\x15[a-zA-Z][a-zA-Z0-9_]*R\venvironment\x12&\n" +
-	"\x03tag\x18\r \x03(\tB\x14\xf2\xc71\x10[a-z][-_0-9a-z]*R\x03tag\x12V\n" +
-	"\fconnectivity\x18\x11 \x01(\v22.yandex.cloud.serverless.functions.v1.ConnectivityR\fconnectivity\x12\x92\x01\n" +
-	"\x16named_service_accounts\x18\x0f \x03(\v2\\.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.NamedServiceAccountsEntryR\x14namedServiceAccounts\x12F\n" +
+	"\venvironment\x18\f \x03(\v2S.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.EnvironmentEntryB%\x8a\xc81\x06<=4096\xb2\xc81\x17\x12\x15[a-zA-Z][a-zA-Z0-9_]*R\venvironment\x12\x92\x01\n" +
+	"\x16named_service_accounts\x18\x0f \x03(\v2\\.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.NamedServiceAccountsEntryR\x14namedServiceAccounts\x12&\n" +
+	"\x03tag\x18\r \x03(\tB\x14\xf2\xc71\x10[a-z][-_0-9a-z]*R\x03tag\x12*\n" +
+	"\vconcurrency\x18\x18 \x01(\x03B\b\xfa\xc71\x040-16R\vconcurrency\x12V\n" +
+	"\fconnectivity\x18\x11 \x01(\v22.yandex.cloud.serverless.functions.v1.ConnectivityR\fconnectivity\x12F\n" +
 	"\asecrets\x18\x12 \x03(\v2,.yandex.cloud.serverless.functions.v1.SecretR\asecrets\x12Q\n" +
 	"\vlog_options\x18\x13 \x01(\v20.yandex.cloud.serverless.functions.v1.LogOptionsR\n" +
 	"logOptions\x12Y\n" +
 	"\x0estorage_mounts\x18\x14 \x03(\v22.yandex.cloud.serverless.functions.v1.StorageMountR\rstorageMounts\x12s\n" +
 	"\x17async_invocation_config\x18\x16 \x01(\v2;.yandex.cloud.serverless.functions.v1.AsyncInvocationConfigR\x15asyncInvocationConfig\x12\x1d\n" +
 	"\n" +
-	"tmpfs_size\x18\x17 \x01(\x03R\ttmpfsSize\x12*\n" +
-	"\vconcurrency\x18\x18 \x01(\x03B\b\xfa\xc71\x040-16R\vconcurrency\x12C\n" +
+	"tmpfs_size\x18\x17 \x01(\x03R\ttmpfsSize\x12C\n" +
 	"\x06mounts\x18\x19 \x03(\v2+.yandex.cloud.serverless.functions.v1.MountR\x06mounts\x12`\n" +
 	"\x10metadata_options\x18\x1a \x01(\v25.yandex.cloud.serverless.functions.v1.MetadataOptionsR\x0fmetadataOptions\x1a>\n" +
 	"\x10EnvironmentEntry\x12\x10\n" +
@@ -2426,7 +2393,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\x19NamedServiceAccountsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x16\n" +
-	"\x0epackage_source\x12\x04\xc0\xc11\x01J\x04\b\x0e\x10\x0fJ\x04\b\x10\x10\x11J\x04\b\x15\x10\x16J\x04\b\b\x10\t\"O\n" +
+	"\x0epackage_source\x12\x04\xc0\xc11\x01J\x04\b\b\x10\tJ\x04\b\x0e\x10\x0fJ\x04\b\x10\x10\x11J\x04\b\x15\x10\x16\"O\n" +
 	"\x1dCreateFunctionVersionMetadata\x12.\n" +
 	"\x13function_version_id\x18\x01 \x01(\tR\x11functionVersionId\"u\n" +
 	"\x15SetFunctionTagRequest\x124\n" +
@@ -2485,7 +2452,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\x03tag\x18\x02 \x01(\tB\"\xe8\xc71\x01\xf2\xc71\x1a[a-z][-_0-9a-z]*|[$]latestR\x03tag\">\n" +
 	"\x1bRemoveScalingPolicyMetadata\x12\x1f\n" +
 	"\vfunction_id\x18\x01 \x01(\tR\n" +
-	"functionId2\xc4!\n" +
+	"functionId2\xdb'\n" +
 	"\x0fFunctionService\x12\x9e\x01\n" +
 	"\x03Get\x128.yandex.cloud.serverless.functions.v1.GetFunctionRequest\x1a..yandex.cloud.serverless.functions.v1.Function\"-\x82\xd3\xe4\x93\x02'\x12%/functions/v1/functions/{function_id}\x12\xa0\x01\n" +
 	"\x04List\x12:.yandex.cloud.serverless.functions.v1.ListFunctionsRequest\x1a;.yandex.cloud.serverless.functions.v1.ListFunctionsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/functions/v1/functions\x12\xb2\x01\n" +
@@ -2494,20 +2461,26 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\x06Update\x12;.yandex.cloud.serverless.functions.v1.UpdateFunctionRequest\x1a!.yandex.cloud.operation.Operation\"V\xb2\xd2*\"\n" +
 	"\x16UpdateFunctionMetadata\x12\bFunction\x82\xd3\xe4\x93\x02*:\x01*2%/functions/v1/functions/{function_id}\x12\xca\x01\n" +
 	"\x06Delete\x12;.yandex.cloud.serverless.functions.v1.DeleteFunctionRequest\x1a!.yandex.cloud.operation.Operation\"`\xb2\xd2*/\n" +
-	"\x16DeleteFunctionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02'*%/functions/v1/functions/{function_id}\x12\xb2\x01\n" +
-	"\n" +
-	"GetVersion\x12?.yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"4\x82\xd3\xe4\x93\x02.\x12,/functions/v1/versions/{function_version_id}\x12\xac\x01\n" +
-	"\x0fGetVersionByTag\x12D.yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/functions/v1/versions:byTag\x12\xb7\x01\n" +
-	"\fListVersions\x12B.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest\x1aC.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/functions/v1/versions\x12\xe6\x01\n" +
+	"\x16DeleteFunctionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02'*%/functions/v1/functions/{function_id}\x12\xe6\x01\n" +
 	"\rDeleteVersion\x12B.yandex.cloud.serverless.functions.v1.DeleteFunctionVersionRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*6\n" +
-	"\x1dDeleteFunctionVersionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02.*,/functions/v1/versions/{function_version_id}\x12\xcd\x01\n" +
+	"\x1dDeleteFunctionVersionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02.*,/functions/v1/versions/{function_version_id}\x12\xb2\x01\n" +
+	"\n" +
+	"GetVersion\x12?.yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"4\x82\xd3\xe4\x93\x02.\x12,/functions/v1/versions/{function_version_id}\x12\x86\x01\n" +
+	"\x12GetFunctionVersion\x12?.yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"\x00\x12\xac\x01\n" +
+	"\x0fGetVersionByTag\x12D.yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/functions/v1/versions:byTag\x12\x90\x01\n" +
+	"\x17GetFunctionVersionByTag\x12D.yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest\x1a-.yandex.cloud.serverless.functions.v1.Version\"\x00\x12\xb7\x01\n" +
+	"\fListVersions\x12B.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest\x1aC.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/functions/v1/versions\x12\xa1\x01\n" +
+	"\x14ListFunctionVersions\x12B.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest\x1aC.yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse\"\x00\x12\xcd\x01\n" +
 	"\x06SetTag\x12;.yandex.cloud.serverless.functions.v1.SetFunctionTagRequest\x1a!.yandex.cloud.operation.Operation\"c\xb2\xd2*!\n" +
 	"\x16SetFunctionTagMetadata\x12\aVersion\x82\xd3\xe4\x93\x028:\x01*\"3/functions/v1/versions/{function_version_id}:setTag\x12\xd9\x01\n" +
 	"\tRemoveTag\x12>.yandex.cloud.serverless.functions.v1.RemoveFunctionTagRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*$\n" +
 	"\x19RemoveFunctionTagMetadata\x12\aVersion\x82\xd3\xe4\x93\x02;:\x01*\"6/functions/v1/versions/{function_version_id}:removeTag\x12\xd5\x01\n" +
-	"\x0eListTagHistory\x12C.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest\x1aD.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse\"8\x82\xd3\xe4\x93\x022\x120/functions/v1/functions/{function_id}:tagHistory\x12\xc5\x01\n" +
+	"\x0eListTagHistory\x12C.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest\x1aD.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse\"8\x82\xd3\xe4\x93\x022\x120/functions/v1/functions/{function_id}:tagHistory\x12\xa5\x01\n" +
+	"\x16ListFunctionTagHistory\x12C.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest\x1aD.yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse\"\x00\x12\xc5\x01\n" +
 	"\rCreateVersion\x12B.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest\x1a!.yandex.cloud.operation.Operation\"M\xb2\xd2*(\n" +
-	"\x1dCreateFunctionVersionMetadata\x12\aVersion\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/functions/v1/versions\x12\xa5\x01\n" +
+	"\x1dCreateFunctionVersionMetadata\x12\aVersion\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/functions/v1/versions\x12\xac\x01\n" +
+	"\x15CreateFunctionVersion\x12B.yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest\x1a!.yandex.cloud.operation.Operation\",\xb2\xd2*(\n" +
+	"\x1dCreateFunctionVersionMetadata\x12\aVersion\x12\xa5\x01\n" +
 	"\fListRuntimes\x129.yandex.cloud.serverless.functions.v1.ListRuntimesRequest\x1a:.yandex.cloud.serverless.functions.v1.ListRuntimesResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/functions/v1/runtimes\x12\xd5\x01\n" +
 	"\x0eListOperations\x12C.yandex.cloud.serverless.functions.v1.ListFunctionOperationsRequest\x1aD.yandex.cloud.serverless.functions.v1.ListFunctionOperationsResponse\"8\x82\xd3\xe4\x93\x022\x120/functions/v1/functions/{function_id}/operations\x12\xb7\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"@\x82\xd3\xe4\x93\x02:\x128/functions/v1/functions/{resource_id}:listAccessBindings\x12\xe6\x01\n" +
@@ -2606,8 +2579,8 @@ var file_yandex_cloud_serverless_functions_v1_function_service_proto_depIdxs = [
 	43, // 7: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.execution_timeout:type_name -> google.protobuf.Duration
 	44, // 8: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.package:type_name -> yandex.cloud.serverless.functions.v1.Package
 	35, // 9: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.environment:type_name -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.EnvironmentEntry
-	45, // 10: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.connectivity:type_name -> yandex.cloud.serverless.functions.v1.Connectivity
-	36, // 11: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.named_service_accounts:type_name -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.NamedServiceAccountsEntry
+	36, // 10: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.named_service_accounts:type_name -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.NamedServiceAccountsEntry
+	45, // 11: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.connectivity:type_name -> yandex.cloud.serverless.functions.v1.Connectivity
 	46, // 12: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.secrets:type_name -> yandex.cloud.serverless.functions.v1.Secret
 	47, // 13: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.log_options:type_name -> yandex.cloud.serverless.functions.v1.LogOptions
 	48, // 14: yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest.storage_mounts:type_name -> yandex.cloud.serverless.functions.v1.StorageMount
@@ -2623,45 +2596,55 @@ var file_yandex_cloud_serverless_functions_v1_function_service_proto_depIdxs = [
 	5,  // 24: yandex.cloud.serverless.functions.v1.FunctionService.Create:input_type -> yandex.cloud.serverless.functions.v1.CreateFunctionRequest
 	7,  // 25: yandex.cloud.serverless.functions.v1.FunctionService.Update:input_type -> yandex.cloud.serverless.functions.v1.UpdateFunctionRequest
 	9,  // 26: yandex.cloud.serverless.functions.v1.FunctionService.Delete:input_type -> yandex.cloud.serverless.functions.v1.DeleteFunctionRequest
-	1,  // 27: yandex.cloud.serverless.functions.v1.FunctionService.GetVersion:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest
-	2,  // 28: yandex.cloud.serverless.functions.v1.FunctionService.GetVersionByTag:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest
-	15, // 29: yandex.cloud.serverless.functions.v1.FunctionService.ListVersions:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest
-	11, // 30: yandex.cloud.serverless.functions.v1.FunctionService.DeleteVersion:input_type -> yandex.cloud.serverless.functions.v1.DeleteFunctionVersionRequest
-	21, // 31: yandex.cloud.serverless.functions.v1.FunctionService.SetTag:input_type -> yandex.cloud.serverless.functions.v1.SetFunctionTagRequest
-	22, // 32: yandex.cloud.serverless.functions.v1.FunctionService.RemoveTag:input_type -> yandex.cloud.serverless.functions.v1.RemoveFunctionTagRequest
-	25, // 33: yandex.cloud.serverless.functions.v1.FunctionService.ListTagHistory:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest
-	19, // 34: yandex.cloud.serverless.functions.v1.FunctionService.CreateVersion:input_type -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest
-	13, // 35: yandex.cloud.serverless.functions.v1.FunctionService.ListRuntimes:input_type -> yandex.cloud.serverless.functions.v1.ListRuntimesRequest
-	17, // 36: yandex.cloud.serverless.functions.v1.FunctionService.ListOperations:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionOperationsRequest
-	54, // 37: yandex.cloud.serverless.functions.v1.FunctionService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	55, // 38: yandex.cloud.serverless.functions.v1.FunctionService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	56, // 39: yandex.cloud.serverless.functions.v1.FunctionService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	27, // 40: yandex.cloud.serverless.functions.v1.FunctionService.ListScalingPolicies:input_type -> yandex.cloud.serverless.functions.v1.ListScalingPoliciesRequest
-	29, // 41: yandex.cloud.serverless.functions.v1.FunctionService.SetScalingPolicy:input_type -> yandex.cloud.serverless.functions.v1.SetScalingPolicyRequest
-	31, // 42: yandex.cloud.serverless.functions.v1.FunctionService.RemoveScalingPolicy:input_type -> yandex.cloud.serverless.functions.v1.RemoveScalingPolicyRequest
-	38, // 43: yandex.cloud.serverless.functions.v1.FunctionService.Get:output_type -> yandex.cloud.serverless.functions.v1.Function
-	4,  // 44: yandex.cloud.serverless.functions.v1.FunctionService.List:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionsResponse
-	41, // 45: yandex.cloud.serverless.functions.v1.FunctionService.Create:output_type -> yandex.cloud.operation.Operation
-	41, // 46: yandex.cloud.serverless.functions.v1.FunctionService.Update:output_type -> yandex.cloud.operation.Operation
-	41, // 47: yandex.cloud.serverless.functions.v1.FunctionService.Delete:output_type -> yandex.cloud.operation.Operation
-	40, // 48: yandex.cloud.serverless.functions.v1.FunctionService.GetVersion:output_type -> yandex.cloud.serverless.functions.v1.Version
-	40, // 49: yandex.cloud.serverless.functions.v1.FunctionService.GetVersionByTag:output_type -> yandex.cloud.serverless.functions.v1.Version
-	16, // 50: yandex.cloud.serverless.functions.v1.FunctionService.ListVersions:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse
-	41, // 51: yandex.cloud.serverless.functions.v1.FunctionService.DeleteVersion:output_type -> yandex.cloud.operation.Operation
-	41, // 52: yandex.cloud.serverless.functions.v1.FunctionService.SetTag:output_type -> yandex.cloud.operation.Operation
-	41, // 53: yandex.cloud.serverless.functions.v1.FunctionService.RemoveTag:output_type -> yandex.cloud.operation.Operation
-	26, // 54: yandex.cloud.serverless.functions.v1.FunctionService.ListTagHistory:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse
-	41, // 55: yandex.cloud.serverless.functions.v1.FunctionService.CreateVersion:output_type -> yandex.cloud.operation.Operation
-	14, // 56: yandex.cloud.serverless.functions.v1.FunctionService.ListRuntimes:output_type -> yandex.cloud.serverless.functions.v1.ListRuntimesResponse
-	18, // 57: yandex.cloud.serverless.functions.v1.FunctionService.ListOperations:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionOperationsResponse
-	57, // 58: yandex.cloud.serverless.functions.v1.FunctionService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	41, // 59: yandex.cloud.serverless.functions.v1.FunctionService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	41, // 60: yandex.cloud.serverless.functions.v1.FunctionService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	28, // 61: yandex.cloud.serverless.functions.v1.FunctionService.ListScalingPolicies:output_type -> yandex.cloud.serverless.functions.v1.ListScalingPoliciesResponse
-	41, // 62: yandex.cloud.serverless.functions.v1.FunctionService.SetScalingPolicy:output_type -> yandex.cloud.operation.Operation
-	41, // 63: yandex.cloud.serverless.functions.v1.FunctionService.RemoveScalingPolicy:output_type -> yandex.cloud.operation.Operation
-	43, // [43:64] is the sub-list for method output_type
-	22, // [22:43] is the sub-list for method input_type
+	11, // 27: yandex.cloud.serverless.functions.v1.FunctionService.DeleteVersion:input_type -> yandex.cloud.serverless.functions.v1.DeleteFunctionVersionRequest
+	1,  // 28: yandex.cloud.serverless.functions.v1.FunctionService.GetVersion:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest
+	1,  // 29: yandex.cloud.serverless.functions.v1.FunctionService.GetFunctionVersion:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionRequest
+	2,  // 30: yandex.cloud.serverless.functions.v1.FunctionService.GetVersionByTag:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest
+	2,  // 31: yandex.cloud.serverless.functions.v1.FunctionService.GetFunctionVersionByTag:input_type -> yandex.cloud.serverless.functions.v1.GetFunctionVersionByTagRequest
+	15, // 32: yandex.cloud.serverless.functions.v1.FunctionService.ListVersions:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest
+	15, // 33: yandex.cloud.serverless.functions.v1.FunctionService.ListFunctionVersions:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsRequest
+	21, // 34: yandex.cloud.serverless.functions.v1.FunctionService.SetTag:input_type -> yandex.cloud.serverless.functions.v1.SetFunctionTagRequest
+	22, // 35: yandex.cloud.serverless.functions.v1.FunctionService.RemoveTag:input_type -> yandex.cloud.serverless.functions.v1.RemoveFunctionTagRequest
+	25, // 36: yandex.cloud.serverless.functions.v1.FunctionService.ListTagHistory:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest
+	25, // 37: yandex.cloud.serverless.functions.v1.FunctionService.ListFunctionTagHistory:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryRequest
+	19, // 38: yandex.cloud.serverless.functions.v1.FunctionService.CreateVersion:input_type -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest
+	19, // 39: yandex.cloud.serverless.functions.v1.FunctionService.CreateFunctionVersion:input_type -> yandex.cloud.serverless.functions.v1.CreateFunctionVersionRequest
+	13, // 40: yandex.cloud.serverless.functions.v1.FunctionService.ListRuntimes:input_type -> yandex.cloud.serverless.functions.v1.ListRuntimesRequest
+	17, // 41: yandex.cloud.serverless.functions.v1.FunctionService.ListOperations:input_type -> yandex.cloud.serverless.functions.v1.ListFunctionOperationsRequest
+	54, // 42: yandex.cloud.serverless.functions.v1.FunctionService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	55, // 43: yandex.cloud.serverless.functions.v1.FunctionService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	56, // 44: yandex.cloud.serverless.functions.v1.FunctionService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	27, // 45: yandex.cloud.serverless.functions.v1.FunctionService.ListScalingPolicies:input_type -> yandex.cloud.serverless.functions.v1.ListScalingPoliciesRequest
+	29, // 46: yandex.cloud.serverless.functions.v1.FunctionService.SetScalingPolicy:input_type -> yandex.cloud.serverless.functions.v1.SetScalingPolicyRequest
+	31, // 47: yandex.cloud.serverless.functions.v1.FunctionService.RemoveScalingPolicy:input_type -> yandex.cloud.serverless.functions.v1.RemoveScalingPolicyRequest
+	38, // 48: yandex.cloud.serverless.functions.v1.FunctionService.Get:output_type -> yandex.cloud.serverless.functions.v1.Function
+	4,  // 49: yandex.cloud.serverless.functions.v1.FunctionService.List:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionsResponse
+	41, // 50: yandex.cloud.serverless.functions.v1.FunctionService.Create:output_type -> yandex.cloud.operation.Operation
+	41, // 51: yandex.cloud.serverless.functions.v1.FunctionService.Update:output_type -> yandex.cloud.operation.Operation
+	41, // 52: yandex.cloud.serverless.functions.v1.FunctionService.Delete:output_type -> yandex.cloud.operation.Operation
+	41, // 53: yandex.cloud.serverless.functions.v1.FunctionService.DeleteVersion:output_type -> yandex.cloud.operation.Operation
+	40, // 54: yandex.cloud.serverless.functions.v1.FunctionService.GetVersion:output_type -> yandex.cloud.serverless.functions.v1.Version
+	40, // 55: yandex.cloud.serverless.functions.v1.FunctionService.GetFunctionVersion:output_type -> yandex.cloud.serverless.functions.v1.Version
+	40, // 56: yandex.cloud.serverless.functions.v1.FunctionService.GetVersionByTag:output_type -> yandex.cloud.serverless.functions.v1.Version
+	40, // 57: yandex.cloud.serverless.functions.v1.FunctionService.GetFunctionVersionByTag:output_type -> yandex.cloud.serverless.functions.v1.Version
+	16, // 58: yandex.cloud.serverless.functions.v1.FunctionService.ListVersions:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse
+	16, // 59: yandex.cloud.serverless.functions.v1.FunctionService.ListFunctionVersions:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionsVersionsResponse
+	41, // 60: yandex.cloud.serverless.functions.v1.FunctionService.SetTag:output_type -> yandex.cloud.operation.Operation
+	41, // 61: yandex.cloud.serverless.functions.v1.FunctionService.RemoveTag:output_type -> yandex.cloud.operation.Operation
+	26, // 62: yandex.cloud.serverless.functions.v1.FunctionService.ListTagHistory:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse
+	26, // 63: yandex.cloud.serverless.functions.v1.FunctionService.ListFunctionTagHistory:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionTagHistoryResponse
+	41, // 64: yandex.cloud.serverless.functions.v1.FunctionService.CreateVersion:output_type -> yandex.cloud.operation.Operation
+	41, // 65: yandex.cloud.serverless.functions.v1.FunctionService.CreateFunctionVersion:output_type -> yandex.cloud.operation.Operation
+	14, // 66: yandex.cloud.serverless.functions.v1.FunctionService.ListRuntimes:output_type -> yandex.cloud.serverless.functions.v1.ListRuntimesResponse
+	18, // 67: yandex.cloud.serverless.functions.v1.FunctionService.ListOperations:output_type -> yandex.cloud.serverless.functions.v1.ListFunctionOperationsResponse
+	57, // 68: yandex.cloud.serverless.functions.v1.FunctionService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	41, // 69: yandex.cloud.serverless.functions.v1.FunctionService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	41, // 70: yandex.cloud.serverless.functions.v1.FunctionService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	28, // 71: yandex.cloud.serverless.functions.v1.FunctionService.ListScalingPolicies:output_type -> yandex.cloud.serverless.functions.v1.ListScalingPoliciesResponse
+	41, // 72: yandex.cloud.serverless.functions.v1.FunctionService.SetScalingPolicy:output_type -> yandex.cloud.operation.Operation
+	41, // 73: yandex.cloud.serverless.functions.v1.FunctionService.RemoveScalingPolicy:output_type -> yandex.cloud.operation.Operation
+	48, // [48:74] is the sub-list for method output_type
+	22, // [22:48] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
 	22, // [22:22] is the sub-list for extension extendee
 	0,  // [0:22] is the sub-list for field type_name

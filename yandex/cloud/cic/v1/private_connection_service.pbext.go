@@ -175,3 +175,11 @@ func (m *RemoveStaticRouteRequest) SetPrivateConnectionId(v string) {
 func (m *RemoveStaticRouteRequest) SetIpv4StaticRoutes(v []*PrivateConnection_StaticRoute) {
 	m.Ipv4StaticRoutes = v
 }
+
+func (m *BatchGetPrivateConnectionsRequest) SetPrivateConnectionIds(v []string) {
+	m.PrivateConnectionIds = v
+}
+
+func (m *BatchGetPrivateConnectionsResponse) SetPrivateConnections(v []*PrivateConnection) {
+	m.PrivateConnections = v
+}

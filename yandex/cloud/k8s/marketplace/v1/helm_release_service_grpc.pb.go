@@ -37,11 +37,11 @@ type HelmReleaseServiceClient interface {
 	List(ctx context.Context, in *ListHelmReleasesRequest, opts ...grpc.CallOption) (*ListHelmReleasesResponse, error)
 	// Returns the specified Helm release.
 	Get(ctx context.Context, in *GetHelmReleaseRequest, opts ...grpc.CallOption) (*HelmRelease, error)
-	// Installs helm release into specified Kubernetes Cluster.
+	// Installs Helm release into specified Kubernetes Cluster.
 	Install(ctx context.Context, in *InstallHelmReleaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates helm release.
+	// Updates Helm release.
 	Update(ctx context.Context, in *UpdateHelmReleaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Uninstalls helm release.
+	// Uninstalls Helm release.
 	Uninstall(ctx context.Context, in *UninstallHelmReleaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -113,11 +113,11 @@ type HelmReleaseServiceServer interface {
 	List(context.Context, *ListHelmReleasesRequest) (*ListHelmReleasesResponse, error)
 	// Returns the specified Helm release.
 	Get(context.Context, *GetHelmReleaseRequest) (*HelmRelease, error)
-	// Installs helm release into specified Kubernetes Cluster.
+	// Installs Helm release into specified Kubernetes Cluster.
 	Install(context.Context, *InstallHelmReleaseRequest) (*operation.Operation, error)
-	// Updates helm release.
+	// Updates Helm release.
 	Update(context.Context, *UpdateHelmReleaseRequest) (*operation.Operation, error)
-	// Uninstalls helm release.
+	// Uninstalls Helm release.
 	Uninstall(context.Context, *UninstallHelmReleaseRequest) (*operation.Operation, error)
 }
 

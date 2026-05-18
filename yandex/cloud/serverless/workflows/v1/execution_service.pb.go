@@ -498,14 +498,12 @@ type ListExecutionsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListExecutionsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListExecutionsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the following fields: status, started_at, finished_at.
 	// 2. Operator: `=`, `<` or `>`.
@@ -581,7 +579,6 @@ type ListExecutionsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListExecutionsRequest.page_size], use `next_page_token` as the value
 	// for the [ListExecutionsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -640,25 +637,25 @@ const file_yandex_cloud_serverless_workflows_v1_execution_service_proto_rawDesc 
 	"\x15StartExecutionRequest\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"workflowId\x12J\n" +
-	"\x05input\x18\x03 \x01(\v24.yandex.cloud.serverless.workflows.v1.ExecutionInputR\x05inputJ\x04\b\x02\x10\x03\";\n" +
-	"\x16StartExecutionResponse\x12!\n" +
-	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\"?\n" +
-	"\x14StopExecutionRequest\x12'\n" +
-	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\":\n" +
-	"\x15StopExecutionResponse\x12!\n" +
-	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\"D\n" +
-	"\x19TerminateExecutionRequest\x12'\n" +
+	"\x05input\x18\x03 \x01(\v24.yandex.cloud.serverless.workflows.v1.ExecutionInputR\x05inputJ\x04\b\x02\x10\x03\"A\n" +
+	"\x16StartExecutionResponse\x12'\n" +
 	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"?\n" +
-	"\x1aTerminateExecutionResponse\x12!\n" +
-	"\fexecution_id\x18\x01 \x01(\tR\vexecutionId\">\n" +
+	"\x14StopExecutionRequest\x12'\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"@\n" +
+	"\x15StopExecutionResponse\x12'\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"D\n" +
+	"\x19TerminateExecutionRequest\x12'\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"E\n" +
+	"\x1aTerminateExecutionResponse\x12'\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\">\n" +
 	"\x13GetExecutionRequest\x12'\n" +
-	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"e\n" +
-	"\x14GetExecutionResponse\x12M\n" +
-	"\texecution\x18\x01 \x01(\v2/.yandex.cloud.serverless.workflows.v1.ExecutionR\texecution\"E\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"k\n" +
+	"\x14GetExecutionResponse\x12S\n" +
+	"\texecution\x18\x01 \x01(\v2/.yandex.cloud.serverless.workflows.v1.ExecutionB\x04\xe8\xc71\x01R\texecution\"E\n" +
 	"\x1aGetExecutionHistoryRequest\x12'\n" +
-	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"\xc9\x01\n" +
-	"\x1bGetExecutionHistoryResponse\x12T\n" +
-	"\texecution\x18\x01 \x01(\v26.yandex.cloud.serverless.workflows.v1.ExecutionPreviewR\texecution\x12T\n" +
+	"\fexecution_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vexecutionId\"\xcf\x01\n" +
+	"\x1bGetExecutionHistoryResponse\x12Z\n" +
+	"\texecution\x18\x01 \x01(\v26.yandex.cloud.serverless.workflows.v1.ExecutionPreviewB\x04\xe8\xc71\x01R\texecution\x12T\n" +
 	"\aentries\x18\x02 \x03(\v22.yandex.cloud.serverless.workflows.v1.HistoryEntryB\x06\x82\xc81\x02>0R\aentries\"\xa4\x01\n" +
 	"\x15ListExecutionsRequest\x12%\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +

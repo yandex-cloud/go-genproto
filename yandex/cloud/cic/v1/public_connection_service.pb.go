@@ -312,6 +312,118 @@ func (x *MovePublicConnectionMetadata) GetPublicConnectionId() string {
 	return ""
 }
 
+type ListPublicConnectionOperationsRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	PublicConnectionId string                 `protobuf:"bytes,1,opt,name=public_connection_id,json=publicConnectionId,proto3" json:"public_connection_id,omitempty"`
+	PageSize           int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken          string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ListPublicConnectionOperationsRequest) Reset() {
+	*x = ListPublicConnectionOperationsRequest{}
+	mi := &file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPublicConnectionOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPublicConnectionOperationsRequest) ProtoMessage() {}
+
+func (x *ListPublicConnectionOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPublicConnectionOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListPublicConnectionOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_public_connection_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListPublicConnectionOperationsRequest) GetPublicConnectionId() string {
+	if x != nil {
+		return x.PublicConnectionId
+	}
+	return ""
+}
+
+func (x *ListPublicConnectionOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListPublicConnectionOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListPublicConnectionOperationsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Operations    []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPublicConnectionOperationsResponse) Reset() {
+	*x = ListPublicConnectionOperationsResponse{}
+	mi := &file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPublicConnectionOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPublicConnectionOperationsResponse) ProtoMessage() {}
+
+func (x *ListPublicConnectionOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPublicConnectionOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListPublicConnectionOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cic_v1_public_connection_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListPublicConnectionOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListPublicConnectionOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_cic_v1_public_connection_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cic_v1_public_connection_service_proto_rawDesc = "" +
@@ -334,12 +446,23 @@ const file_yandex_cloud_cic_v1_public_connection_service_proto_rawDesc = "" +
 	"\x14public_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12publicConnectionId\x12@\n" +
 	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"P\n" +
 	"\x1cMovePublicConnectionMetadata\x120\n" +
-	"\x14public_connection_id\x18\x01 \x01(\tR\x12publicConnectionId2\x9a\x04\n" +
+	"\x14public_connection_id\x18\x01 \x01(\tR\x12publicConnectionId\"\xa3\x01\n" +
+	"%ListPublicConnectionOperationsRequest\x12>\n" +
+	"\x14public_connection_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12publicConnectionId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x93\x01\n" +
+	"&ListPublicConnectionOperationsResponse\x12A\n" +
+	"\n" +
+	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
+	"operations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xeb\x05\n" +
 	"\x17PublicConnectionService\x12\x97\x01\n" +
 	"\x03Get\x12/.yandex.cloud.cic.v1.GetPublicConnectionRequest\x1a%.yandex.cloud.cic.v1.PublicConnection\"8\x82\xd3\xe4\x93\x022\x120/cic/v1/publicConnections/{public_connection_id}\x12\x90\x01\n" +
 	"\x04List\x121.yandex.cloud.cic.v1.ListPublicConnectionsRequest\x1a2.yandex.cloud.cic.v1.ListPublicConnectionsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/cic/v1/publicConnections\x12\xd1\x01\n" +
 	"\x04Move\x120.yandex.cloud.cic.v1.MovePublicConnectionRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*0\n" +
-	"\x1cMovePublicConnectionMetadata\x12\x10PublicConnection\x82\xd3\xe4\x93\x02::\x01*\"5/cic/v1/publicConnections/{public_connection_id}:moveBV\n" +
+	"\x1cMovePublicConnectionMetadata\x12\x10PublicConnection\x82\xd3\xe4\x93\x02::\x01*\"5/cic/v1/publicConnections/{public_connection_id}:move\x12\xce\x01\n" +
+	"\x0eListOperations\x12:.yandex.cloud.cic.v1.ListPublicConnectionOperationsRequest\x1a;.yandex.cloud.cic.v1.ListPublicConnectionOperationsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/cic/v1/publicConnections/{public_connection_id}/operationsBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (
@@ -354,29 +477,34 @@ func file_yandex_cloud_cic_v1_public_connection_service_proto_rawDescGZIP() []by
 	return file_yandex_cloud_cic_v1_public_connection_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_cic_v1_public_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_cic_v1_public_connection_service_proto_goTypes = []any{
-	(*GetPublicConnectionRequest)(nil),    // 0: yandex.cloud.cic.v1.GetPublicConnectionRequest
-	(*ListPublicConnectionsRequest)(nil),  // 1: yandex.cloud.cic.v1.ListPublicConnectionsRequest
-	(*ListPublicConnectionsResponse)(nil), // 2: yandex.cloud.cic.v1.ListPublicConnectionsResponse
-	(*MovePublicConnectionRequest)(nil),   // 3: yandex.cloud.cic.v1.MovePublicConnectionRequest
-	(*MovePublicConnectionMetadata)(nil),  // 4: yandex.cloud.cic.v1.MovePublicConnectionMetadata
-	(*PublicConnection)(nil),              // 5: yandex.cloud.cic.v1.PublicConnection
-	(*operation.Operation)(nil),           // 6: yandex.cloud.operation.Operation
+	(*GetPublicConnectionRequest)(nil),             // 0: yandex.cloud.cic.v1.GetPublicConnectionRequest
+	(*ListPublicConnectionsRequest)(nil),           // 1: yandex.cloud.cic.v1.ListPublicConnectionsRequest
+	(*ListPublicConnectionsResponse)(nil),          // 2: yandex.cloud.cic.v1.ListPublicConnectionsResponse
+	(*MovePublicConnectionRequest)(nil),            // 3: yandex.cloud.cic.v1.MovePublicConnectionRequest
+	(*MovePublicConnectionMetadata)(nil),           // 4: yandex.cloud.cic.v1.MovePublicConnectionMetadata
+	(*ListPublicConnectionOperationsRequest)(nil),  // 5: yandex.cloud.cic.v1.ListPublicConnectionOperationsRequest
+	(*ListPublicConnectionOperationsResponse)(nil), // 6: yandex.cloud.cic.v1.ListPublicConnectionOperationsResponse
+	(*PublicConnection)(nil),                       // 7: yandex.cloud.cic.v1.PublicConnection
+	(*operation.Operation)(nil),                    // 8: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cic_v1_public_connection_service_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.cic.v1.ListPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
-	0, // 1: yandex.cloud.cic.v1.PublicConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetPublicConnectionRequest
-	1, // 2: yandex.cloud.cic.v1.PublicConnectionService.List:input_type -> yandex.cloud.cic.v1.ListPublicConnectionsRequest
-	3, // 3: yandex.cloud.cic.v1.PublicConnectionService.Move:input_type -> yandex.cloud.cic.v1.MovePublicConnectionRequest
-	5, // 4: yandex.cloud.cic.v1.PublicConnectionService.Get:output_type -> yandex.cloud.cic.v1.PublicConnection
-	2, // 5: yandex.cloud.cic.v1.PublicConnectionService.List:output_type -> yandex.cloud.cic.v1.ListPublicConnectionsResponse
-	6, // 6: yandex.cloud.cic.v1.PublicConnectionService.Move:output_type -> yandex.cloud.operation.Operation
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	7, // 0: yandex.cloud.cic.v1.ListPublicConnectionsResponse.public_connections:type_name -> yandex.cloud.cic.v1.PublicConnection
+	8, // 1: yandex.cloud.cic.v1.ListPublicConnectionOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0, // 2: yandex.cloud.cic.v1.PublicConnectionService.Get:input_type -> yandex.cloud.cic.v1.GetPublicConnectionRequest
+	1, // 3: yandex.cloud.cic.v1.PublicConnectionService.List:input_type -> yandex.cloud.cic.v1.ListPublicConnectionsRequest
+	3, // 4: yandex.cloud.cic.v1.PublicConnectionService.Move:input_type -> yandex.cloud.cic.v1.MovePublicConnectionRequest
+	5, // 5: yandex.cloud.cic.v1.PublicConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListPublicConnectionOperationsRequest
+	7, // 6: yandex.cloud.cic.v1.PublicConnectionService.Get:output_type -> yandex.cloud.cic.v1.PublicConnection
+	2, // 7: yandex.cloud.cic.v1.PublicConnectionService.List:output_type -> yandex.cloud.cic.v1.ListPublicConnectionsResponse
+	8, // 8: yandex.cloud.cic.v1.PublicConnectionService.Move:output_type -> yandex.cloud.operation.Operation
+	6, // 9: yandex.cloud.cic.v1.PublicConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListPublicConnectionOperationsResponse
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cic_v1_public_connection_service_proto_init() }
@@ -391,7 +519,7 @@ func file_yandex_cloud_cic_v1_public_connection_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cic_v1_public_connection_service_proto_rawDesc), len(file_yandex_cloud_cic_v1_public_connection_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

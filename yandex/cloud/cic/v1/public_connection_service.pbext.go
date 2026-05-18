@@ -2,6 +2,10 @@
 
 package cic
 
+import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+)
+
 func (m *GetPublicConnectionRequest) SetPublicConnectionId(v string) {
 	m.PublicConnectionId = v
 }
@@ -40,4 +44,24 @@ func (m *MovePublicConnectionRequest) SetDestinationFolderId(v string) {
 
 func (m *MovePublicConnectionMetadata) SetPublicConnectionId(v string) {
 	m.PublicConnectionId = v
+}
+
+func (m *ListPublicConnectionOperationsRequest) SetPublicConnectionId(v string) {
+	m.PublicConnectionId = v
+}
+
+func (m *ListPublicConnectionOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListPublicConnectionOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListPublicConnectionOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListPublicConnectionOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

@@ -1325,7 +1325,7 @@ var File_yandex_cloud_serverless_eventrouter_v1_rule_proto protoreflect.FileDesc
 
 const file_yandex_cloud_serverless_eventrouter_v1_rule_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/serverless/eventrouter/v1/rule.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xef\x05\n" +
+	"1yandex/cloud/serverless/eventrouter/v1/rule.proto\x12&yandex.cloud.serverless.eventrouter.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xe9\x05\n" +
 	"\x04Rule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
 	"\x06bus_id\x18\x02 \x01(\tR\x05busId\x12\x1b\n" +
@@ -1349,9 +1349,7 @@ const file_yandex_cloud_serverless_eventrouter_v1_rule_proto_rawDesc = "" +
 	"\aENABLED\x10\x02\x12\f\n" +
 	"\bUPDATING\x10\x03\x12\f\n" +
 	"\bDISABLED\x10\x04\x12\f\n" +
-	"\bDELETING\x10\x05J\x04\b\t\x10\n" +
-	"J\x04\b\n" +
-	"\x10\v\"F\n" +
+	"\bDELETING\x10\x05J\x04\b\t\x10\v\"F\n" +
 	"\x06Filter\x12)\n" +
 	"\tjq_filter\x18\x01 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1024H\x00R\bjqFilterB\x11\n" +
@@ -1411,12 +1409,12 @@ const file_yandex_cloud_serverless_eventrouter_v1_rule_proto_rawDesc = "" +
 	"logGroupId\x12'\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=63H\x00R\bfolderId\x12:\n" +
 	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountIdB\x13\n" +
-	"\vdestination\x12\x04\xc0\xc11\x01\"\xe5\x01\n" +
+	"\vdestination\x12\x04\xc0\xc11\x01\"\xdf\x01\n" +
 	"\x0eWorkflowTarget\x12-\n" +
 	"\vworkflow_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"workflowId\x12:\n" +
 	"\x12service_account_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12\\\n" +
-	"\x0ebatch_settings\x18\x05 \x01(\v25.yandex.cloud.serverless.eventrouter.v1.BatchSettingsR\rbatchSettingsJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04\"\x87\x01\n" +
+	"\x0ebatch_settings\x18\x05 \x01(\v25.yandex.cloud.serverless.eventrouter.v1.BatchSettingsR\rbatchSettingsJ\x04\b\x02\x10\x04\"\x87\x01\n" +
 	"\rRetrySettings\x12/\n" +
 	"\x0eretry_attempts\x18\x01 \x01(\x03B\b\xfa\xc71\x040-10R\rretryAttempts\x12E\n" +
 	"\vmaximum_age\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\t\xfa\xc71\x05<=24hR\n" +

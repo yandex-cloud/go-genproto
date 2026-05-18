@@ -31,7 +31,6 @@ const (
 type GetContainerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the container to return.
-	//
 	// To get a container ID make a [ContainerService.List] request.
 	ContainerId   string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -78,20 +77,17 @@ func (x *GetContainerRequest) GetContainerId() string {
 type ListContainersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list containers in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListContainersResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListContainersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters containers listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Container.name] field.
 	// 2. An `=` operator.
@@ -167,7 +163,6 @@ type ListContainersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListContainersRequest.page_size], use `nextPageToken` as the value
 	// for the [ListContainersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -221,7 +216,6 @@ func (x *ListContainersResponse) GetNextPageToken() string {
 type CreateContainerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a container in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the container.
@@ -341,7 +335,6 @@ func (x *CreateContainerMetadata) GetContainerId() string {
 type UpdateContainerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the container to update.
-	//
 	// To get a container ID make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 	// Field mask that specifies which attributes of the container should be updated.
@@ -352,7 +345,6 @@ type UpdateContainerRequest struct {
 	// New description for the container.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Container labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label, request the current set of labels with a [ContainerService.Get] request.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -564,7 +556,6 @@ func (x *DeleteContainerMetadata) GetContainerId() string {
 type GetContainerRevisionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the revision to return.
-	//
 	// To get a revision ID make a [ContainerService.ListRevisions] request.
 	ContainerRevisionId string `protobuf:"bytes,1,opt,name=container_revision_id,json=containerRevisionId,proto3" json:"container_revision_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -618,14 +609,12 @@ type ListContainersRevisionsRequest struct {
 	// The maximum number of results per page to return. If the number of available results
 	// is larger than `pageSize`, the service returns a [ListContainersRevisionsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListContainersRevisionsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can only be applied to the [Revision.status] and [Revision.runtime] fields.
 	// 2. An `=` operator.
@@ -739,7 +728,6 @@ type ListContainersRevisionsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListContainersRevisionsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListContainersRevisionsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -793,7 +781,6 @@ func (x *ListContainersRevisionsResponse) GetNextPageToken() string {
 type DeployContainerRevisionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the container to create a revision for.
-	//
 	// To get a container ID, make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 	// Description of the revision.
@@ -801,7 +788,6 @@ type DeployContainerRevisionRequest struct {
 	// Resources allocated to the revision.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Timeout for the execution of the revision.
-	//
 	// If the timeout is exceeded, Serverless Containers responds with a 504 HTTP code.
 	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,6,opt,name=execution_timeout,json=executionTimeout,proto3" json:"execution_timeout,omitempty"`
 	// ID of the service account to associate with the revision.
@@ -809,21 +795,19 @@ type DeployContainerRevisionRequest struct {
 	// Image configuration for the revision.
 	ImageSpec *ImageSpec `protobuf:"bytes,8,opt,name=image_spec,json=imageSpec,proto3" json:"image_spec,omitempty"`
 	// The number of concurrent requests allowed per container instance.
-	//
 	// The default value is 1.
 	Concurrency int64 `protobuf:"varint,9,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
-	// Yandex Lockbox secrets to be used by the revision.
-	Secrets []*Secret `protobuf:"bytes,10,rep,name=secrets,proto3" json:"secrets,omitempty"`
 	// Network access. If specified the revision will be attached to specified network/subnet(s).
 	Connectivity *Connectivity `protobuf:"bytes,11,opt,name=connectivity,proto3" json:"connectivity,omitempty"`
 	// Policy for provisioning instances of the revision.
-	//
 	// The policy is only applied when the revision is ACTIVE.
 	ProvisionPolicy *ProvisionPolicy `protobuf:"bytes,12,opt,name=provision_policy,json=provisionPolicy,proto3" json:"provision_policy,omitempty"`
-	// Policy for scaling instances of the revision.
-	ScalingPolicy *ScalingPolicy `protobuf:"bytes,13,opt,name=scaling_policy,json=scalingPolicy,proto3" json:"scaling_policy,omitempty"`
+	// Yandex Lockbox secrets to be used by the revision.
+	Secrets []*Secret `protobuf:"bytes,10,rep,name=secrets,proto3" json:"secrets,omitempty"`
 	// Options for logging from the container.
 	LogOptions *LogOptions `protobuf:"bytes,14,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
+	// Policy for scaling instances of the revision.
+	ScalingPolicy *ScalingPolicy `protobuf:"bytes,13,opt,name=scaling_policy,json=scalingPolicy,proto3" json:"scaling_policy,omitempty"`
 	// S3 mounts to be used by the revision.
 	StorageMounts []*StorageMount `protobuf:"bytes,15,rep,name=storage_mounts,json=storageMounts,proto3" json:"storage_mounts,omitempty"`
 	// Mounts to be used by the revision.
@@ -917,13 +901,6 @@ func (x *DeployContainerRevisionRequest) GetConcurrency() int64 {
 	return 0
 }
 
-func (x *DeployContainerRevisionRequest) GetSecrets() []*Secret {
-	if x != nil {
-		return x.Secrets
-	}
-	return nil
-}
-
 func (x *DeployContainerRevisionRequest) GetConnectivity() *Connectivity {
 	if x != nil {
 		return x.Connectivity
@@ -938,9 +915,9 @@ func (x *DeployContainerRevisionRequest) GetProvisionPolicy() *ProvisionPolicy {
 	return nil
 }
 
-func (x *DeployContainerRevisionRequest) GetScalingPolicy() *ScalingPolicy {
+func (x *DeployContainerRevisionRequest) GetSecrets() []*Secret {
 	if x != nil {
-		return x.ScalingPolicy
+		return x.Secrets
 	}
 	return nil
 }
@@ -948,6 +925,13 @@ func (x *DeployContainerRevisionRequest) GetScalingPolicy() *ScalingPolicy {
 func (x *DeployContainerRevisionRequest) GetLogOptions() *LogOptions {
 	if x != nil {
 		return x.LogOptions
+	}
+	return nil
+}
+
+func (x *DeployContainerRevisionRequest) GetScalingPolicy() *ScalingPolicy {
+	if x != nil {
+		return x.ScalingPolicy
 	}
 	return nil
 }
@@ -1117,11 +1101,9 @@ func (x *DeployContainerRevisionMetadata) GetContainerRevisionId() string {
 type RollbackContainerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the container to rollback to an old revision.
-	//
 	// To get a container ID, make a [ContainerService.List] request.
 	ContainerId string `protobuf:"bytes,1,opt,name=container_id,json=containerId,proto3" json:"container_id,omitempty"`
 	// ID of the revision to rollback to.
-	//
 	// To get a revision ID make a [ContainerService.ListRevisions] request.
 	RevisionId    string `protobuf:"bytes,2,opt,name=revision_id,json=revisionId,proto3" json:"revision_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1233,14 +1215,12 @@ type ListContainerOperationsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `pageSize`, the service returns a [ListContainerOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `pageToken` to the
 	// [ListContainerOperationsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [operation.Operation.done], [operation.Operation.created_by] field.
 	// 2. An `=` operator.
@@ -1316,7 +1296,6 @@ type ListContainerOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListContainerOperationsRequest.page_size], use `nextPageToken` as the value
 	// for the [ListContainerOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `nextPageToken` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1436,19 +1415,19 @@ const file_yandex_cloud_serverless_containers_v1_container_service_proto_rawDesc
 	"\x12service_account_id\x18\a \x01(\tR\x10serviceAccountId\x12U\n" +
 	"\n" +
 	"image_spec\x18\b \x01(\v20.yandex.cloud.serverless.containers.v1.ImageSpecB\x04\xe8\xc71\x01R\timageSpec\x12 \n" +
-	"\vconcurrency\x18\t \x01(\x03R\vconcurrency\x12G\n" +
-	"\asecrets\x18\n" +
-	" \x03(\v2-.yandex.cloud.serverless.containers.v1.SecretR\asecrets\x12W\n" +
+	"\vconcurrency\x18\t \x01(\x03R\vconcurrency\x12W\n" +
 	"\fconnectivity\x18\v \x01(\v23.yandex.cloud.serverless.containers.v1.ConnectivityR\fconnectivity\x12a\n" +
-	"\x10provision_policy\x18\f \x01(\v26.yandex.cloud.serverless.containers.v1.ProvisionPolicyR\x0fprovisionPolicy\x12[\n" +
-	"\x0escaling_policy\x18\r \x01(\v24.yandex.cloud.serverless.containers.v1.ScalingPolicyR\rscalingPolicy\x12R\n" +
+	"\x10provision_policy\x18\f \x01(\v26.yandex.cloud.serverless.containers.v1.ProvisionPolicyR\x0fprovisionPolicy\x12G\n" +
+	"\asecrets\x18\n" +
+	" \x03(\v2-.yandex.cloud.serverless.containers.v1.SecretR\asecrets\x12R\n" +
 	"\vlog_options\x18\x0e \x01(\v21.yandex.cloud.serverless.containers.v1.LogOptionsR\n" +
-	"logOptions\x12Z\n" +
+	"logOptions\x12[\n" +
+	"\x0escaling_policy\x18\r \x01(\v24.yandex.cloud.serverless.containers.v1.ScalingPolicyR\rscalingPolicy\x12Z\n" +
 	"\x0estorage_mounts\x18\x0f \x03(\v23.yandex.cloud.serverless.containers.v1.StorageMountR\rstorageMounts\x12D\n" +
 	"\x06mounts\x18\x10 \x03(\v2,.yandex.cloud.serverless.containers.v1.MountR\x06mounts\x12H\n" +
 	"\aruntime\x18\x11 \x01(\v2..yandex.cloud.serverless.containers.v1.RuntimeR\aruntime\x12a\n" +
 	"\x10metadata_options\x18\x12 \x01(\v26.yandex.cloud.serverless.containers.v1.MetadataOptionsR\x0fmetadataOptions\x12t\n" +
-	"\x17async_invocation_config\x18\x13 \x01(\v2<.yandex.cloud.serverless.containers.v1.AsyncInvocationConfigR\x15asyncInvocationConfigJ\x04\b\x04\x10\x05J\x04\b\x02\x10\x03\"\xa7\x03\n" +
+	"\x17async_invocation_config\x18\x13 \x01(\v2<.yandex.cloud.serverless.containers.v1.AsyncInvocationConfigR\x15asyncInvocationConfigJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x05\"\xa7\x03\n" +
 	"\tImageSpec\x12!\n" +
 	"\timage_url\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bimageUrl\x12H\n" +
 	"\acommand\x18\x02 \x01(\v2..yandex.cloud.serverless.containers.v1.CommandR\acommand\x12?\n" +
@@ -1546,11 +1525,11 @@ var file_yandex_cloud_serverless_containers_v1_container_service_proto_goTypes =
 	(*Revision)(nil),                           // 24: yandex.cloud.serverless.containers.v1.Revision
 	(*Resources)(nil),                          // 25: yandex.cloud.serverless.containers.v1.Resources
 	(*durationpb.Duration)(nil),                // 26: google.protobuf.Duration
-	(*Secret)(nil),                             // 27: yandex.cloud.serverless.containers.v1.Secret
-	(*Connectivity)(nil),                       // 28: yandex.cloud.serverless.containers.v1.Connectivity
-	(*ProvisionPolicy)(nil),                    // 29: yandex.cloud.serverless.containers.v1.ProvisionPolicy
-	(*ScalingPolicy)(nil),                      // 30: yandex.cloud.serverless.containers.v1.ScalingPolicy
-	(*LogOptions)(nil),                         // 31: yandex.cloud.serverless.containers.v1.LogOptions
+	(*Connectivity)(nil),                       // 27: yandex.cloud.serverless.containers.v1.Connectivity
+	(*ProvisionPolicy)(nil),                    // 28: yandex.cloud.serverless.containers.v1.ProvisionPolicy
+	(*Secret)(nil),                             // 29: yandex.cloud.serverless.containers.v1.Secret
+	(*LogOptions)(nil),                         // 30: yandex.cloud.serverless.containers.v1.LogOptions
+	(*ScalingPolicy)(nil),                      // 31: yandex.cloud.serverless.containers.v1.ScalingPolicy
 	(*StorageMount)(nil),                       // 32: yandex.cloud.serverless.containers.v1.StorageMount
 	(*Mount)(nil),                              // 33: yandex.cloud.serverless.containers.v1.Mount
 	(*Runtime)(nil),                            // 34: yandex.cloud.serverless.containers.v1.Runtime
@@ -1573,11 +1552,11 @@ var file_yandex_cloud_serverless_containers_v1_container_service_proto_depIdxs =
 	25, // 5: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.resources:type_name -> yandex.cloud.serverless.containers.v1.Resources
 	26, // 6: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.execution_timeout:type_name -> google.protobuf.Duration
 	13, // 7: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.image_spec:type_name -> yandex.cloud.serverless.containers.v1.ImageSpec
-	27, // 8: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.secrets:type_name -> yandex.cloud.serverless.containers.v1.Secret
-	28, // 9: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.connectivity:type_name -> yandex.cloud.serverless.containers.v1.Connectivity
-	29, // 10: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.provision_policy:type_name -> yandex.cloud.serverless.containers.v1.ProvisionPolicy
-	30, // 11: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.scaling_policy:type_name -> yandex.cloud.serverless.containers.v1.ScalingPolicy
-	31, // 12: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.log_options:type_name -> yandex.cloud.serverless.containers.v1.LogOptions
+	27, // 8: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.connectivity:type_name -> yandex.cloud.serverless.containers.v1.Connectivity
+	28, // 9: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.provision_policy:type_name -> yandex.cloud.serverless.containers.v1.ProvisionPolicy
+	29, // 10: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.secrets:type_name -> yandex.cloud.serverless.containers.v1.Secret
+	30, // 11: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.log_options:type_name -> yandex.cloud.serverless.containers.v1.LogOptions
+	31, // 12: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.scaling_policy:type_name -> yandex.cloud.serverless.containers.v1.ScalingPolicy
 	32, // 13: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.storage_mounts:type_name -> yandex.cloud.serverless.containers.v1.StorageMount
 	33, // 14: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.mounts:type_name -> yandex.cloud.serverless.containers.v1.Mount
 	34, // 15: yandex.cloud.serverless.containers.v1.DeployContainerRevisionRequest.runtime:type_name -> yandex.cloud.serverless.containers.v1.Runtime
