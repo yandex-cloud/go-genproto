@@ -331,26 +331,6 @@ func (m *RestoreClusterMetadata) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *StartClusterFailoverRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StartClusterFailoverRequest) SetHostNames(v []string) {
-	m.HostNames = v
-}
-
-func (m *StartClusterFailoverRequest) SetFailoverType(v StartClusterFailoverRequest_FailoverType) {
-	m.FailoverType = v
-}
-
-func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StartClusterFailoverMetadata) SetHostNames(v []string) {
-	m.HostNames = v
-}
-
 func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -369,6 +349,26 @@ func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 
 func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
 	m.DelayedUntil = v
+}
+
+func (m *StartClusterFailoverRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StartClusterFailoverRequest) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *StartClusterFailoverRequest) SetFailoverType(v StartClusterFailoverRequest_FailoverType) {
+	m.FailoverType = v
+}
+
+func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StartClusterFailoverMetadata) SetHostNames(v []string) {
+	m.HostNames = v
 }
 
 func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {

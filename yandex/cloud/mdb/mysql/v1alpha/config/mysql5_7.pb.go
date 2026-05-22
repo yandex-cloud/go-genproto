@@ -27,15 +27,12 @@ const (
 type MysqlConfig5_7 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Size of the InnoDB buffer pool used for caching table and index data.
-	//
 	// For details, see [MySQL documentation for the parameter](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size).
 	InnodbBufferPoolSize *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=innodb_buffer_pool_size,json=innodbBufferPoolSize,proto3" json:"innodb_buffer_pool_size,omitempty"`
 	// The maximum permitted number of simultaneous client connections.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
 	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
 	// Time that it takes to process a query before it is considered slow.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_long_query_time).
 	LongQueryTime *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=long_query_time,json=longQueryTime,proto3" json:"long_query_time,omitempty"`
 	unknownFields protoimpl.UnknownFields

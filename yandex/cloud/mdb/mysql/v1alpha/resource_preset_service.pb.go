@@ -189,18 +189,18 @@ const file_yandex_cloud_mdb_mysql_v1alpha_resource_preset_service_proto_rawDesc 
 	"\n" +
 	"<yandex/cloud/mdb/mysql/v1alpha/resource_preset_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a4yandex/cloud/mdb/mysql/v1alpha/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"N\n" +
 	"\x18GetResourcePresetRequest\x122\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"o\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"u\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xab\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageTokenJ\x04\b\x01\x10\x02\"\xab\x01\n" +
 	"\x1bListResourcePresetsResponse\x12Y\n" +
 	"\x10resource_presets\x18\x01 \x03(\v2..yandex.cloud.mdb.mysql.v1alpha.ResourcePresetR\x0fresourcePresets\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\rnextPageToken2\x80\x03\n" +
-	"\x15ResourcePresetService\x12\xb4\x01\n" +
-	"\x03Get\x128.yandex.cloud.mdb.mysql.v1alpha.GetResourcePresetRequest\x1a..yandex.cloud.mdb.mysql.v1alpha.ResourcePreset\"C\x82\xd3\xe4\x93\x02=\x12;/managed-mysql/v1alpha/resourcePresets/{resource_preset_id}\x12\xaf\x01\n" +
-	"\x04List\x12:.yandex.cloud.mdb.mysql.v1alpha.ListResourcePresetsRequest\x1a;.yandex.cloud.mdb.mysql.v1alpha.ListResourcePresetsResponse\".\x82\xd3\xe4\x93\x02(\x12&/managed-mysql/v1alpha/resourcePresetsBn\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\rnextPageToken2\xf8\x02\n" +
+	"\x15ResourcePresetService\x12\xb0\x01\n" +
+	"\x03Get\x128.yandex.cloud.mdb.mysql.v1alpha.GetResourcePresetRequest\x1a..yandex.cloud.mdb.mysql.v1alpha.ResourcePreset\"?\x82\xd3\xe4\x93\x029\x127/mdb/mysql/v1alpha/resourcePresets/{resource_preset_id}\x12\xab\x01\n" +
+	"\x04List\x12:.yandex.cloud.mdb.mysql.v1alpha.ListResourcePresetsRequest\x1a;.yandex.cloud.mdb.mysql.v1alpha.ListResourcePresetsResponse\"*\x82\xd3\xe4\x93\x02$\x12\"/mdb/mysql/v1alpha/resourcePresetsBn\n" +
 	"\"yandex.cloud.api.mdb.mysql.v1alphaZHgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha;mysqlb\x06proto3"
 
 var (

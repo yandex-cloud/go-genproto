@@ -729,209 +729,158 @@ func (MysqlConfig5_7_InnodbChangeBuffering) EnumDescriptor() ([]byte, []int) {
 type MysqlConfig5_7 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Size of the InnoDB buffer pool used for caching table and index data.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size) for details.
 	InnodbBufferPoolSize *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=innodb_buffer_pool_size,json=innodbBufferPoolSize,proto3" json:"innodb_buffer_pool_size,omitempty"`
 	// The maximum permitted number of simultaneous client connections.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections) for details.
 	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
 	// Time that it takes to process a query before it is considered slow.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_long_query_time) for details.
 	LongQueryTime *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=long_query_time,json=longQueryTime,proto3" json:"long_query_time,omitempty"`
 	// Enable writing of general query log of MySQL.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_general_log) for details.
 	GeneralLog *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=general_log,json=generalLog,proto3" json:"general_log,omitempty"`
 	// Enable writing of audit log of MySQL.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/mysql-security-excerpt/5.7/en/audit-log-reference.html#audit-log-options-variables) for details.
 	AuditLog *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	// Server SQL mode of MySQL.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sql-mode-setting) for details.
 	SqlMode []MysqlConfig5_7_SQLMode `protobuf:"varint,6,rep,packed,name=sql_mode,json=sqlMode,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_SQLMode" json:"sql_mode,omitempty"`
 	// The maximum size in bytes of one packet.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_allowed_packet) for details.
 	MaxAllowedPacket *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=max_allowed_packet,json=maxAllowedPacket,proto3" json:"max_allowed_packet,omitempty"`
 	// Authentication plugin used in the managed MySQL cluster.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_default_authentication_plugin) for details.
 	DefaultAuthenticationPlugin MysqlConfig5_7_AuthPlugin `protobuf:"varint,8,opt,name=default_authentication_plugin,json=defaultAuthenticationPlugin,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_AuthPlugin" json:"default_authentication_plugin,omitempty"`
 	// Transaction log flush behaviour.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit) for details.
 	InnodbFlushLogAtTrxCommit *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=innodb_flush_log_at_trx_commit,json=innodbFlushLogAtTrxCommit,proto3" json:"innodb_flush_log_at_trx_commit,omitempty"`
 	// Max time in seconds for a transaction to wait for a row lock.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lock_wait_timeout) for details.
 	InnodbLockWaitTimeout *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=innodb_lock_wait_timeout,json=innodbLockWaitTimeout,proto3" json:"innodb_lock_wait_timeout,omitempty"`
 	// Default transaction isolation level.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_transaction_isolation) for details.
 	TransactionIsolation MysqlConfig5_7_TransactionIsolation `protobuf:"varint,11,opt,name=transaction_isolation,json=transactionIsolation,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_TransactionIsolation" json:"transaction_isolation,omitempty"`
 	// Print information about deadlocks in error log.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_print_all_deadlocks) for details.
 	InnodbPrintAllDeadlocks *wrapperspb.BoolValue `protobuf:"bytes,12,opt,name=innodb_print_all_deadlocks,json=innodbPrintAllDeadlocks,proto3" json:"innodb_print_all_deadlocks,omitempty"`
 	// The number of seconds to wait for more data from a connection before aborting the read.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_net_read_timeout) for details.
 	NetReadTimeout *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=net_read_timeout,json=netReadTimeout,proto3" json:"net_read_timeout,omitempty"`
 	// The number of seconds to wait for a block to be written to a connection before aborting the write.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_net_write_timeout) for details.
 	NetWriteTimeout *wrapperspb.Int64Value `protobuf:"bytes,14,opt,name=net_write_timeout,json=netWriteTimeout,proto3" json:"net_write_timeout,omitempty"`
 	// The maximum permitted result length in bytes for the GROUP_CONCAT() function.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_group_concat_max_len) for details.
 	GroupConcatMaxLen *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=group_concat_max_len,json=groupConcatMaxLen,proto3" json:"group_concat_max_len,omitempty"`
 	// The maximum size of internal in-memory temporary tables.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_tmp_table_size) for details.
 	TmpTableSize *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=tmp_table_size,json=tmpTableSize,proto3" json:"tmp_table_size,omitempty"`
 	// This variable sets the maximum size to which user-created MEMORY tables are permitted to grow.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_heap_table_size) for details.
 	MaxHeapTableSize *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=max_heap_table_size,json=maxHeapTableSize,proto3" json:"max_heap_table_size,omitempty"`
 	// The servers default time zone.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_default-time-zone) for details.
 	DefaultTimeZone string `protobuf:"bytes,18,opt,name=default_time_zone,json=defaultTimeZone,proto3" json:"default_time_zone,omitempty"`
 	// The servers default character set.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_character_set_server) for details.
 	CharacterSetServer string `protobuf:"bytes,19,opt,name=character_set_server,json=characterSetServer,proto3" json:"character_set_server,omitempty"`
 	// The server default collation.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_collation_server) for details.
 	CollationServer string `protobuf:"bytes,20,opt,name=collation_server,json=collationServer,proto3" json:"collation_server,omitempty"`
 	// Enables InnoDB adaptive hash index.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index) for details.
 	InnodbAdaptiveHashIndex *wrapperspb.BoolValue `protobuf:"bytes,21,opt,name=innodb_adaptive_hash_index,json=innodbAdaptiveHashIndex,proto3" json:"innodb_adaptive_hash_index,omitempty"`
 	// Enables the NUMA interleave memory policy for allocation of the InnoDB buffer pool.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_numa_interleave) for details.
 	InnodbNumaInterleave *wrapperspb.BoolValue `protobuf:"bytes,22,opt,name=innodb_numa_interleave,json=innodbNumaInterleave,proto3" json:"innodb_numa_interleave,omitempty"`
 	// The size in bytes of the buffer that InnoDB uses to write to the log files on disk.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_log_buffer_size) for details.
 	InnodbLogBufferSize *wrapperspb.Int64Value `protobuf:"bytes,23,opt,name=innodb_log_buffer_size,json=innodbLogBufferSize,proto3" json:"innodb_log_buffer_size,omitempty"`
 	// The size in bytes of the single InnoDB Redo log file.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_log_file_size) for details.
 	InnodbLogFileSize *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=innodb_log_file_size,json=innodbLogFileSize,proto3" json:"innodb_log_file_size,omitempty"`
 	// Limits IO available for InnoDB background tasks.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_io_capacity) for details.
 	InnodbIoCapacity *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=innodb_io_capacity,json=innodbIoCapacity,proto3" json:"innodb_io_capacity,omitempty"`
 	// Limits IO available for InnoDB background tasks.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_io_capacity_max) for details.
 	InnodbIoCapacityMax *wrapperspb.Int64Value `protobuf:"bytes,26,opt,name=innodb_io_capacity_max,json=innodbIoCapacityMax,proto3" json:"innodb_io_capacity_max,omitempty"`
 	// The number of I/O threads for read operations in InnoDB.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_read_io_threads) for details.
 	InnodbReadIoThreads *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=innodb_read_io_threads,json=innodbReadIoThreads,proto3" json:"innodb_read_io_threads,omitempty"`
 	// The number of I/O threads for write operations in InnoDB.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_write_io_threads) for details.
 	InnodbWriteIoThreads *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=innodb_write_io_threads,json=innodbWriteIoThreads,proto3" json:"innodb_write_io_threads,omitempty"`
 	// The number of background threads devoted to the InnoDB purge operation.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_purge_threads) for details.
 	InnodbPurgeThreads *wrapperspb.Int64Value `protobuf:"bytes,29,opt,name=innodb_purge_threads,json=innodbPurgeThreads,proto3" json:"innodb_purge_threads,omitempty"`
 	// Defines the maximum number of threads permitted inside of InnoDB.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_thread_concurrency) for details.
 	InnodbThreadConcurrency *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=innodb_thread_concurrency,json=innodbThreadConcurrency,proto3" json:"innodb_thread_concurrency,omitempty"`
 	// Limits the max size of InnoDB temp tablespace.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_temp_data_file_path) for details.
 	InnodbTempDataFileMaxSize *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=innodb_temp_data_file_max_size,json=innodbTempDataFileMaxSize,proto3" json:"innodb_temp_data_file_max_size,omitempty"`
 	// A number of threads the server should cache for reuse.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_thread_cache_size) for details.
 	ThreadCacheSize *wrapperspb.Int64Value `protobuf:"bytes,32,opt,name=thread_cache_size,json=threadCacheSize,proto3" json:"thread_cache_size,omitempty"`
 	// The stack size for each thread. The default is large enough for normal operation.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_thread_stack) for details.
 	ThreadStack *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=thread_stack,json=threadStack,proto3" json:"thread_stack,omitempty"`
 	// The minimum size of the buffer that is used for plain index scans, range index scans, and joins that don't use indexes and thus perform full table scans.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_join_buffer_size) for details.
 	JoinBufferSize *wrapperspb.Int64Value `protobuf:"bytes,34,opt,name=join_buffer_size,json=joinBufferSize,proto3" json:"join_buffer_size,omitempty"`
 	// Each session that must perform a sort allocates a buffer of this size.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_sort_buffer_size) for details.
 	SortBufferSize *wrapperspb.Int64Value `protobuf:"bytes,35,opt,name=sort_buffer_size,json=sortBufferSize,proto3" json:"sort_buffer_size,omitempty"`
 	// The number of table definitions that can be stored in the definition cache.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_definition_cache) for details.
 	TableDefinitionCache *wrapperspb.Int64Value `protobuf:"bytes,36,opt,name=table_definition_cache,json=tableDefinitionCache,proto3" json:"table_definition_cache,omitempty"`
 	// The number of open tables for all threads.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_open_cache) for details.
 	TableOpenCache *wrapperspb.Int64Value `protobuf:"bytes,37,opt,name=table_open_cache,json=tableOpenCache,proto3" json:"table_open_cache,omitempty"`
 	// The number of open tables cache instances.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_open_cache_instances) for details.
 	TableOpenCacheInstances *wrapperspb.Int64Value `protobuf:"bytes,38,opt,name=table_open_cache_instances,json=tableOpenCacheInstances,proto3" json:"table_open_cache_instances,omitempty"`
 	// Determines whether the server enables certain nonstandard behaviors for default values and NULL-value handling in TIMESTAMP columns.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_explicit_defaults_for_timestamp) for details.
 	ExplicitDefaultsForTimestamp *wrapperspb.BoolValue `protobuf:"bytes,39,opt,name=explicit_defaults_for_timestamp,json=explicitDefaultsForTimestamp,proto3" json:"explicit_defaults_for_timestamp,omitempty"`
 	// Can be used to control the operation of AUTO_INCREMENT columns.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-source.html#sysvar_auto_increment_increment) for details.
 	AutoIncrementIncrement *wrapperspb.Int64Value `protobuf:"bytes,40,opt,name=auto_increment_increment,json=autoIncrementIncrement,proto3" json:"auto_increment_increment,omitempty"`
 	// Can be used to control the operation of AUTO_INCREMENT columns.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-source.html#sysvar_auto_increment_offset) for details.
 	AutoIncrementOffset *wrapperspb.Int64Value `protobuf:"bytes,41,opt,name=auto_increment_offset,json=autoIncrementOffset,proto3" json:"auto_increment_offset,omitempty"`
 	// Controls how often the MySQL server synchronizes the binary log to disk.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_sync_binlog) for details.
 	SyncBinlog *wrapperspb.Int64Value `protobuf:"bytes,42,opt,name=sync_binlog,json=syncBinlog,proto3" json:"sync_binlog,omitempty"`
 	// The size of the cache to hold changes to the binary log during a transaction.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_cache_size) for details.
 	BinlogCacheSize *wrapperspb.Int64Value `protobuf:"bytes,43,opt,name=binlog_cache_size,json=binlogCacheSize,proto3" json:"binlog_cache_size,omitempty"`
 	// Controls how many microseconds the binary log commit waits before synchronizing the binary log file to disk.
-	//
 	// See [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_group_commit_sync_delay) for details.
 	BinlogGroupCommitSyncDelay *wrapperspb.Int64Value `protobuf:"bytes,44,opt,name=binlog_group_commit_sync_delay,json=binlogGroupCommitSyncDelay,proto3" json:"binlog_group_commit_sync_delay,omitempty"`
 	// For MySQL row-based replication, this variable determines how row images are written to the binary log.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image) for details.
 	BinlogRowImage MysqlConfig5_7_BinlogRowImage `protobuf:"varint,45,opt,name=binlog_row_image,json=binlogRowImage,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_BinlogRowImage" json:"binlog_row_image,omitempty"`
 	// When enabled, it causes the server to write informational log events such as row query log events into its binary log.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_rows_query_log_events) for details.
 	BinlogRowsQueryLogEvents *wrapperspb.BoolValue `protobuf:"bytes,46,opt,name=binlog_rows_query_log_events,json=binlogRowsQueryLogEvents,proto3" json:"binlog_rows_query_log_events,omitempty"`
 	// The number of replica acknowledgments the source must receive per transaction before proceeding.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-source.html#sysvar_rpl_semi_sync_master_wait_for_slave_count) for details.
 	RplSemiSyncMasterWaitForSlaveCount *wrapperspb.Int64Value `protobuf:"bytes,47,opt,name=rpl_semi_sync_master_wait_for_slave_count,json=rplSemiSyncMasterWaitForSlaveCount,proto3" json:"rpl_semi_sync_master_wait_for_slave_count,omitempty"`
 	// When using a multi-threaded replica, this variable specifies the policy used to decide which transactions are allowed to execute in parallel on the replica.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#sysvar_slave_parallel_type) for details.
 	SlaveParallelType MysqlConfig5_7_SlaveParallelType `protobuf:"varint,48,opt,name=slave_parallel_type,json=slaveParallelType,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_SlaveParallelType" json:"slave_parallel_type,omitempty"`
 	// Sets the number of applier threads for executing replication transactions in parallel.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#sysvar_slave_parallel_workers) for details.
 	SlaveParallelWorkers *wrapperspb.Int64Value `protobuf:"bytes,49,opt,name=slave_parallel_workers,json=slaveParallelWorkers,proto3" json:"slave_parallel_workers,omitempty"`
 	// The size of the binary log to hold.
 	MdbPreserveBinlogBytes *wrapperspb.Int64Value `protobuf:"bytes,50,opt,name=mdb_preserve_binlog_bytes,json=mdbPreserveBinlogBytes,proto3" json:"mdb_preserve_binlog_bytes,omitempty"`
 	// The number of seconds the server waits for activity on an interactive connection before closing it.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_interactive_timeout) for details.
 	InteractiveTimeout *wrapperspb.Int64Value `protobuf:"bytes,51,opt,name=interactive_timeout,json=interactiveTimeout,proto3" json:"interactive_timeout,omitempty"`
 	// The number of seconds the server waits for activity on a noninteractive connection before closing it.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout) for details.
 	WaitTimeout *wrapperspb.Int64Value `protobuf:"bytes,52,opt,name=wait_timeout,json=waitTimeout,proto3" json:"wait_timeout,omitempty"`
 	// Replication lag threshold (seconds) which will switch MySQL to 'offline_mode = ON' to prevent users from reading stale data.
@@ -940,158 +889,121 @@ type MysqlConfig5_7 struct {
 	// Should be less than mdb_offline_mode_enable_lag value.
 	MdbOfflineModeDisableLag *wrapperspb.Int64Value `protobuf:"bytes,54,opt,name=mdb_offline_mode_disable_lag,json=mdbOfflineModeDisableLag,proto3" json:"mdb_offline_mode_disable_lag,omitempty"`
 	// The limit on memory consumption for the range optimizer.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_range_optimizer_max_mem_size) for details.
 	RangeOptimizerMaxMemSize *wrapperspb.Int64Value `protobuf:"bytes,55,opt,name=range_optimizer_max_mem_size,json=rangeOptimizerMaxMemSize,proto3" json:"range_optimizer_max_mem_size,omitempty"`
+	// The limit in bytes on the size of the temporary log files used during online DDL operations
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_online_alter_log_max_size).
+	InnodbOnlineAlterLogMaxSize *wrapperspb.Int64Value `protobuf:"bytes,64,opt,name=innodb_online_alter_log_max_size,json=innodbOnlineAlterLogMaxSize,proto3" json:"innodb_online_alter_log_max_size,omitempty"`
+	// Minimum length of words that are stored in an InnoDB FULLTEXT index
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_ft_min_token_size).
+	InnodbFtMinTokenSize *wrapperspb.Int64Value `protobuf:"bytes,65,opt,name=innodb_ft_min_token_size,json=innodbFtMinTokenSize,proto3" json:"innodb_ft_min_token_size,omitempty"`
+	// Maximum length of words that are stored in an InnoDB FULLTEXT index
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_ft_max_token_size).
+	InnodbFtMaxTokenSize *wrapperspb.Int64Value `protobuf:"bytes,66,opt,name=innodb_ft_max_token_size,json=innodbFtMaxTokenSize,proto3" json:"innodb_ft_max_token_size,omitempty"`
+	// Table names storage and comparison strategy
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names).
+	LowerCaseTableNames *wrapperspb.Int64Value `protobuf:"bytes,67,opt,name=lower_case_table_names,json=lowerCaseTableNames,proto3" json:"lower_case_table_names,omitempty"`
+	// Manages MySQL 5.6 compatibility
+	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_show_compatibility_56).
+	ShowCompatibility_56 *wrapperspb.BoolValue `protobuf:"bytes,68,opt,name=show_compatibility_56,json=showCompatibility_56,proto3" json:"show_compatibility_56,omitempty"`
 	// Manages slow query log.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_slow_query_log) for details.
 	SlowQueryLog *wrapperspb.BoolValue `protobuf:"bytes,56,opt,name=slow_query_log,json=slowQueryLog,proto3" json:"slow_query_log,omitempty"`
 	// Query execution time, after which query to be logged unconditionally, that is, `log_slow_rate_limit“ will not apply to it.
-	//
 	// See [Percona documentation](https://www.percona.com/doc/percona-server/8.0/diagnostics/slow_extended.html#slow_query_log_always_write_time) for details.
 	SlowQueryLogAlwaysWriteTime *wrapperspb.DoubleValue `protobuf:"bytes,57,opt,name=slow_query_log_always_write_time,json=slowQueryLogAlwaysWriteTime,proto3" json:"slow_query_log_always_write_time,omitempty"`
 	// Specifies slow log granularity for `log_slow_rate_limit` values QUERY or SESSION.
-	//
 	// See [Percona documentation](https://www.percona.com/doc/percona-server/8.0/diagnostics/slow_extended.html#log_slow_rate_type) for details.
 	LogSlowRateType MysqlConfig5_7_LogSlowRateType `protobuf:"varint,58,opt,name=log_slow_rate_type,json=logSlowRateType,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_LogSlowRateType" json:"log_slow_rate_type,omitempty"`
 	// Specifies what fraction of session/query should be logged. Logging is enabled for every nth session/query.
-	//
 	// See [Percona documentation](https://www.percona.com/doc/percona-server/8.0/diagnostics/slow_extended.html#log_slow_rate_limit) for details.
 	LogSlowRateLimit *wrapperspb.Int64Value `protobuf:"bytes,59,opt,name=log_slow_rate_limit,json=logSlowRateLimit,proto3" json:"log_slow_rate_limit,omitempty"`
 	// When TRUE, statements executed by stored procedures are logged to the slow log.
-	//
 	// See [Percona documentation](https://www.percona.com/doc/percona-server/8.0/diagnostics/slow_extended.html#log_slow_sp_statements) for details.
 	LogSlowSpStatements *wrapperspb.BoolValue `protobuf:"bytes,60,opt,name=log_slow_sp_statements,json=logSlowSpStatements,proto3" json:"log_slow_sp_statements,omitempty"`
 	// Filters the slow log by the query's execution plan.
-	//
 	// See [Percona documentation](https://www.percona.com/doc/percona-server/8.0/diagnostics/slow_extended.html#log_slow_filter) for details.
 	LogSlowFilter []MysqlConfig5_7_LogSlowFilterType `protobuf:"varint,61,rep,packed,name=log_slow_filter,json=logSlowFilter,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_LogSlowFilterType" json:"log_slow_filter,omitempty"`
 	// Replication lag threshold (seconds) which allows replica to be promoted to master while executing "switchover from".
 	// Should be less than mdb_offline_mode_disable_lag.
 	MdbPriorityChoiceMaxLag *wrapperspb.Int64Value `protobuf:"bytes,62,opt,name=mdb_priority_choice_max_lag,json=mdbPriorityChoiceMaxLag,proto3" json:"mdb_priority_choice_max_lag,omitempty"`
 	// Specifies the page size for InnoDB tablespaces.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_page_size).
 	InnodbPageSize *wrapperspb.Int64Value `protobuf:"bytes,63,opt,name=innodb_page_size,json=innodbPageSize,proto3" json:"innodb_page_size,omitempty"`
-	// The limit in bytes on the size of the temporary log files used during online DDL operations
-	//
-	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_online_alter_log_max_size).
-	InnodbOnlineAlterLogMaxSize *wrapperspb.Int64Value `protobuf:"bytes,64,opt,name=innodb_online_alter_log_max_size,json=innodbOnlineAlterLogMaxSize,proto3" json:"innodb_online_alter_log_max_size,omitempty"`
-	// Minimum length of words that are stored in an InnoDB FULLTEXT index
-	//
-	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_ft_min_token_size).
-	InnodbFtMinTokenSize *wrapperspb.Int64Value `protobuf:"bytes,65,opt,name=innodb_ft_min_token_size,json=innodbFtMinTokenSize,proto3" json:"innodb_ft_min_token_size,omitempty"`
-	// Maximum length of words that are stored in an InnoDB FULLTEXT index
-	//
-	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_ft_max_token_size).
-	InnodbFtMaxTokenSize *wrapperspb.Int64Value `protobuf:"bytes,66,opt,name=innodb_ft_max_token_size,json=innodbFtMaxTokenSize,proto3" json:"innodb_ft_max_token_size,omitempty"`
-	// Table names storage and comparison strategy
-	//
-	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names).
-	LowerCaseTableNames *wrapperspb.Int64Value `protobuf:"bytes,67,opt,name=lower_case_table_names,json=lowerCaseTableNames,proto3" json:"lower_case_table_names,omitempty"`
-	// Manages MySQL 5.6 compatibility
-	//
-	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_show_compatibility_56).
-	ShowCompatibility_56 *wrapperspb.BoolValue `protobuf:"bytes,68,opt,name=show_compatibility_56,json=showCompatibility_56,proto3" json:"show_compatibility_56,omitempty"`
 	// The number of times that any given stored procedure may be called recursively.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_sp_recursion_depth).
 	MaxSpRecursionDepth *wrapperspb.Int64Value `protobuf:"bytes,69,opt,name=max_sp_recursion_depth,json=maxSpRecursionDepth,proto3" json:"max_sp_recursion_depth,omitempty"`
 	// The level of zlib compression to use for InnoDB compressed tables and indexes.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_compression_level).
 	InnodbCompressionLevel *wrapperspb.Int64Value `protobuf:"bytes,70,opt,name=innodb_compression_level,json=innodbCompressionLevel,proto3" json:"innodb_compression_level,omitempty"`
 	// Specifies how the source mysqld generates the dependency information that it writes in the binary log to help replicas determine which transactions can be executed in parallel.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_transaction_dependency_tracking).
 	BinlogTransactionDependencyTracking MysqlConfig5_7_BinlogTransactionDependencyTracking `protobuf:"varint,71,opt,name=binlog_transaction_dependency_tracking,json=binlogTransactionDependencyTracking,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_BinlogTransactionDependencyTracking" json:"binlog_transaction_dependency_tracking,omitempty"`
 	// Config specific will be all changes to a table take effect immediately or you must use COMMIT to accept a transaction or ROLLBACK to cancel it.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_autocommit).
 	Autocommit *wrapperspb.BoolValue `protobuf:"bytes,72,opt,name=autocommit,proto3" json:"autocommit,omitempty"`
 	// Enables or disables periodic output for the standard InnoDB Monitor.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_status_output).
 	InnodbStatusOutput *wrapperspb.BoolValue `protobuf:"bytes,73,opt,name=innodb_status_output,json=innodbStatusOutput,proto3" json:"innodb_status_output,omitempty"`
 	// When innodb_strict_mode is enabled, InnoDB returns errors rather than warnings when checking for invalid or incompatible table options.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_strict_mode).
 	InnodbStrictMode *wrapperspb.BoolValue `protobuf:"bytes,74,opt,name=innodb_strict_mode,json=innodbStrictMode,proto3" json:"innodb_strict_mode,omitempty"`
 	// Makes InnoDB to write information about all lock wait timeout errors into the log file.
-	//
 	// For details, see [Percona documentation for the variable](https://docs.percona.com/percona-server/5.7/diagnostics/innodb_show_status.html?highlight=innodb_print_lock_wait_timeout_info).
 	InnodbPrintLockWaitTimeoutInfo *wrapperspb.BoolValue `protobuf:"bytes,75,opt,name=innodb_print_lock_wait_timeout_info,json=innodbPrintLockWaitTimeoutInfo,proto3" json:"innodb_print_lock_wait_timeout_info,omitempty"`
 	// System variable specifies the verbosity for handling events intended for the error log
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_log_error_verbosity).
 	LogErrorVerbosity *wrapperspb.Int64Value `protobuf:"bytes,76,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3" json:"log_error_verbosity,omitempty"`
 	// The maximum number of bytes of memory reserved per session for computation of normalized statement digests.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_digest_length).
 	MaxDigestLength *wrapperspb.Int64Value `protobuf:"bytes,77,opt,name=max_digest_length,json=maxDigestLength,proto3" json:"max_digest_length,omitempty"`
 	// Do not cache results that are larger than this number of bytes.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_query_cache_limit).
 	QueryCacheLimit *wrapperspb.Int64Value `protobuf:"bytes,78,opt,name=query_cache_limit,json=queryCacheLimit,proto3" json:"query_cache_limit,omitempty"`
 	// The amount of memory allocated for caching query results.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_query_cache_size).
 	QueryCacheSize *wrapperspb.Int64Value `protobuf:"bytes,79,opt,name=query_cache_size,json=queryCacheSize,proto3" json:"query_cache_size,omitempty"`
 	// Set the query cache type.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_query_cache_type).
 	QueryCacheType *wrapperspb.Int64Value `protobuf:"bytes,80,opt,name=query_cache_type,json=queryCacheType,proto3" json:"query_cache_type,omitempty"`
 	// // This variable specifies the timeout in seconds for attempts to acquire metadata locks
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lock_wait_timeout).
 	LockWaitTimeout *wrapperspb.Int64Value `protobuf:"bytes,81,opt,name=lock_wait_timeout,json=lockWaitTimeout,proto3" json:"lock_wait_timeout,omitempty"`
 	// This variable limits the total number of prepared statements in the server.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_prepared_stmt_count).
 	MaxPreparedStmtCount *wrapperspb.Int64Value `protobuf:"bytes,82,opt,name=max_prepared_stmt_count,json=maxPreparedStmtCount,proto3" json:"max_prepared_stmt_count,omitempty"`
 	// The system variable enables control over optimizer behavior.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_optimizer_switch)
 	// https://dev.mysql.com/doc/refman/5.7/en/switchable-optimizations.html
 	OptimizerSwitch string `protobuf:"bytes,83,opt,name=optimizer_switch,json=optimizerSwitch,proto3" json:"optimizer_switch,omitempty"`
 	// The maximum depth of search performed by the query optimizer
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html)
 	OptimizerSearchDepth *wrapperspb.Int64Value `protobuf:"bytes,84,opt,name=optimizer_search_depth,json=optimizerSearchDepth,proto3" json:"optimizer_search_depth,omitempty"`
 	// Enables and disables collection of query times
-	//
 	// For details, see [Percona documentation for the variable](https://docs.percona.com/percona-server/5.7/diagnostics/response_time_distribution.html#query_response_time_stats).
 	QueryResponseTimeStats *wrapperspb.BoolValue `protobuf:"bytes,85,opt,name=query_response_time_stats,json=queryResponseTimeStats,proto3" json:"query_response_time_stats,omitempty"`
 	// Enables or disables collection of statistics
-	//
 	// For details, see [Percona documentation for the variable](https://docs.percona.com/percona-server/5.7/diagnostics/user_stats.html#userstat).
 	Userstat *wrapperspb.BoolValue `protobuf:"bytes,86,opt,name=userstat,proto3" json:"userstat,omitempty"`
 	// The execution timeout for SELECT statements, in milliseconds. If the value is 0, timeouts are not enabled.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_execution_time)
 	MaxExecutionTime *wrapperspb.Int64Value `protobuf:"bytes,87,opt,name=max_execution_time,json=maxExecutionTime,proto3" json:"max_execution_time,omitempty"`
 	// The policy controlling how the audit log plugin writes events to its log file
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/audit-log-reference.html#sysvar_audit_log_policy)
 	AuditLogPolicy MysqlConfig5_7_AuditLogPolicy `protobuf:"varint,88,opt,name=audit_log_policy,json=auditLogPolicy,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_AuditLogPolicy" json:"audit_log_policy,omitempty"`
 	// A parameter that influences the algorithms and heuristics for the flush operation for the InnoDB buffer pool
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_lru_scan_depth)
 	InnodbLruScanDepth *wrapperspb.Int64Value `protobuf:"bytes,89,opt,name=innodb_lru_scan_depth,json=innodbLruScanDepth,proto3" json:"innodb_lru_scan_depth,omitempty"`
 	// Force ssl on all hosts (require_secure_transport)
 	MdbForceSsl *wrapperspb.BoolValue `protobuf:"bytes,90,opt,name=mdb_force_ssl,json=mdbForceSsl,proto3" json:"mdb_force_ssl,omitempty"`
 	// An optimization for change buffering
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_change_buffering).
 	InnodbChangeBuffering MysqlConfig5_7_InnodbChangeBuffering `protobuf:"varint,91,opt,name=innodb_change_buffering,json=innodbChangeBuffering,proto3,enum=yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7_InnodbChangeBuffering" json:"innodb_change_buffering,omitempty"`
 	// Permit some pending read lock requests interval
 	// P.S. Should be UInt64, but java fails to handle UInt64 limits
-	//
 	// For details, see [Percona documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_write_lock_count).
 	MaxWriteLockCount *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=max_write_lock_count,json=maxWriteLockCount,proto3" json:"max_write_lock_count,omitempty"`
 	// Partitions the adaptive hash index search system.
-	//
 	// For details, see [MySQL documentation for the variable](https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index_parts)
 	InnodbAdaptiveHashIndexParts *wrapperspb.Int64Value `protobuf:"bytes,93,opt,name=innodb_adaptive_hash_index_parts,json=innodbAdaptiveHashIndexParts,proto3" json:"innodb_adaptive_hash_index_parts,omitempty"`
 	unknownFields                protoimpl.UnknownFields
@@ -1513,6 +1425,41 @@ func (x *MysqlConfig5_7) GetRangeOptimizerMaxMemSize() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *MysqlConfig5_7) GetInnodbOnlineAlterLogMaxSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.InnodbOnlineAlterLogMaxSize
+	}
+	return nil
+}
+
+func (x *MysqlConfig5_7) GetInnodbFtMinTokenSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.InnodbFtMinTokenSize
+	}
+	return nil
+}
+
+func (x *MysqlConfig5_7) GetInnodbFtMaxTokenSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.InnodbFtMaxTokenSize
+	}
+	return nil
+}
+
+func (x *MysqlConfig5_7) GetLowerCaseTableNames() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.LowerCaseTableNames
+	}
+	return nil
+}
+
+func (x *MysqlConfig5_7) GetShowCompatibility_56() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ShowCompatibility_56
+	}
+	return nil
+}
+
 func (x *MysqlConfig5_7) GetSlowQueryLog() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.SlowQueryLog
@@ -1565,41 +1512,6 @@ func (x *MysqlConfig5_7) GetMdbPriorityChoiceMaxLag() *wrapperspb.Int64Value {
 func (x *MysqlConfig5_7) GetInnodbPageSize() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.InnodbPageSize
-	}
-	return nil
-}
-
-func (x *MysqlConfig5_7) GetInnodbOnlineAlterLogMaxSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.InnodbOnlineAlterLogMaxSize
-	}
-	return nil
-}
-
-func (x *MysqlConfig5_7) GetInnodbFtMinTokenSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.InnodbFtMinTokenSize
-	}
-	return nil
-}
-
-func (x *MysqlConfig5_7) GetInnodbFtMaxTokenSize() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.InnodbFtMaxTokenSize
-	}
-	return nil
-}
-
-func (x *MysqlConfig5_7) GetLowerCaseTableNames() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.LowerCaseTableNames
-	}
-	return nil
-}
-
-func (x *MysqlConfig5_7) GetShowCompatibility_56() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.ShowCompatibility_56
 	}
 	return nil
 }
@@ -1847,7 +1759,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x83R\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa1R\n" +
 	"\x0eMysqlConfig5_7\x12a\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12R\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-16384R\x0emaxConnections\x12P\n" +
@@ -1916,9 +1828,15 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\fwait_timeout\x184 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t600-86400R\vwaitTimeout\x12g\n" +
 	"\x1bmdb_offline_mode_enable_lag\x185 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b30-86400R\x17mdbOfflineModeEnableLag\x12i\n" +
 	"\x1cmdb_offline_mode_disable_lag\x186 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-86400R\x18mdbOfflineModeDisableLag\x12r\n" +
-	"\x1crange_optimizer_max_mem_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\x15\xfa\xc71\x111048576-268435456R\x18rangeOptimizerMaxMemSize\x12@\n" +
-	"\x0eslow_query_log\x188 \x01(\v2\x1a.google.protobuf.BoolValueR\fslowQueryLog\x12c\n" +
-	" slow_query_log_always_write_time\x189 \x01(\v2\x1c.google.protobuf.DoubleValueR\x1bslowQueryLogAlwaysWriteTime\x12m\n" +
+	"\x1crange_optimizer_max_mem_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\x15\xfa\xc71\x111048576-268435456R\x18rangeOptimizerMaxMemSize\x12z\n" +
+	" innodb_online_alter_log_max_size\x18@ \x01(\v2\x1b.google.protobuf.Int64ValueB\x16\xfa\xc71\x1265536-107374182400R\x1binnodbOnlineAlterLogMaxSize\x12]\n" +
+	"\x18innodb_ft_min_token_size\x18A \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x040-16R\x14innodbFtMinTokenSize\x12^\n" +
+	"\x18innodb_ft_max_token_size\x18B \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x0510-84R\x14innodbFtMaxTokenSize\x12Y\n" +
+	"\x16lower_case_table_names\x18C \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x13lowerCaseTableNames\x12O\n" +
+	"\x15show_compatibility_56\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14showCompatibility_56\x12@\n" +
+	"\x0eslow_query_log\x188 \x01(\v2\x1a.google.protobuf.BoolValueR\fslowQueryLog\x12o\n" +
+	" slow_query_log_always_write_time\x189 \x01(\v2\x1c.google.protobuf.DoubleValueB\n" +
+	"\xfa\xc71\x060-3600R\x1bslowQueryLogAlwaysWriteTime\x12m\n" +
 	"\x12log_slow_rate_type\x18: \x01(\x0e2@.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowRateTypeR\x0flogSlowRateType\x12V\n" +
 	"\x13log_slow_rate_limit\x18; \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
 	"\xfa\xc71\x061-1000R\x10logSlowRateLimit\x12O\n" +
@@ -1926,12 +1844,7 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\x0flog_slow_filter\x18= \x03(\x0e2B.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowFilterTypeR\rlogSlowFilter\x12f\n" +
 	"\x1bmdb_priority_choice_max_lag\x18> \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-86400R\x17mdbPriorityChoiceMaxLag\x12U\n" +
 	"\x10innodb_page_size\x18? \x01(\v2\x1b.google.protobuf.Int64ValueB\x0e\xfa\xc71\n" +
-	"4096-65536R\x0einnodbPageSize\x12z\n" +
-	" innodb_online_alter_log_max_size\x18@ \x01(\v2\x1b.google.protobuf.Int64ValueB\x16\xfa\xc71\x1265536-107374182400R\x1binnodbOnlineAlterLogMaxSize\x12]\n" +
-	"\x18innodb_ft_min_token_size\x18A \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x040-16R\x14innodbFtMinTokenSize\x12^\n" +
-	"\x18innodb_ft_max_token_size\x18B \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x0510-84R\x14innodbFtMaxTokenSize\x12Y\n" +
-	"\x16lower_case_table_names\x18C \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x13lowerCaseTableNames\x12O\n" +
-	"\x15show_compatibility_56\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14showCompatibility_56\x12[\n" +
+	"4096-65536R\x0einnodbPageSize\x12[\n" +
 	"\x16max_sp_recursion_depth\x18E \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-255R\x13maxSpRecursionDepth\x12^\n" +
 	"\x18innodb_compression_level\x18F \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-9R\x16innodbCompressionLevel\x12\xa9\x01\n" +
 	"&binlog_transaction_dependency_tracking\x18G \x01(\x0e2T.yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.BinlogTransactionDependencyTrackingR#binlogTransactionDependencyTracking\x12:\n" +
@@ -1942,8 +1855,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_rawDesc = "" +
 	"\x12innodb_strict_mode\x18J \x01(\v2\x1a.google.protobuf.BoolValueR\x10innodbStrictMode\x12g\n" +
 	"#innodb_print_lock_wait_timeout_info\x18K \x01(\v2\x1a.google.protobuf.BoolValueR\x1einnodbPrintLockWaitTimeoutInfo\x12T\n" +
 	"\x13log_error_verbosity\x18L \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x031-3R\x11logErrorVerbosity\x12V\n" +
-	"\x11max_digest_length\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-1048576R\x0fmaxDigestLength\x12G\n" +
-	"\x11query_cache_limit\x18N \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fqueryCacheLimit\x12E\n" +
+	"\x11max_digest_length\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-1048576R\x0fmaxDigestLength\x12Y\n" +
+	"\x11query_cache_limit\x18N \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-4294967295R\x0fqueryCacheLimit\x12E\n" +
 	"\x10query_cache_size\x18O \x01(\v2\x1b.google.protobuf.Int64ValueR\x0equeryCacheSize\x12N\n" +
 	"\x10query_cache_type\x18P \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-2R\x0equeryCacheType\x12W\n" +
 	"\x11lock_wait_timeout\x18Q \x01(\v2\x1b.google.protobuf.Int64ValueB\x0e\xfa\xc71\n" +
@@ -2142,19 +2055,19 @@ var file_yandex_cloud_mdb_mysql_v1_config_mysql5_7_proto_depIdxs = []int32{
 	12, // 49: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_offline_mode_enable_lag:type_name -> google.protobuf.Int64Value
 	12, // 50: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_offline_mode_disable_lag:type_name -> google.protobuf.Int64Value
 	12, // 51: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.range_optimizer_max_mem_size:type_name -> google.protobuf.Int64Value
-	14, // 52: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.slow_query_log:type_name -> google.protobuf.BoolValue
-	13, // 53: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.slow_query_log_always_write_time:type_name -> google.protobuf.DoubleValue
-	5,  // 54: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_rate_type:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowRateType
-	12, // 55: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_rate_limit:type_name -> google.protobuf.Int64Value
-	14, // 56: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_sp_statements:type_name -> google.protobuf.BoolValue
-	6,  // 57: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_filter:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowFilterType
-	12, // 58: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_priority_choice_max_lag:type_name -> google.protobuf.Int64Value
-	12, // 59: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_page_size:type_name -> google.protobuf.Int64Value
-	12, // 60: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_online_alter_log_max_size:type_name -> google.protobuf.Int64Value
-	12, // 61: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_ft_min_token_size:type_name -> google.protobuf.Int64Value
-	12, // 62: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_ft_max_token_size:type_name -> google.protobuf.Int64Value
-	12, // 63: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.lower_case_table_names:type_name -> google.protobuf.Int64Value
-	14, // 64: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.show_compatibility_56:type_name -> google.protobuf.BoolValue
+	12, // 52: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_online_alter_log_max_size:type_name -> google.protobuf.Int64Value
+	12, // 53: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_ft_min_token_size:type_name -> google.protobuf.Int64Value
+	12, // 54: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_ft_max_token_size:type_name -> google.protobuf.Int64Value
+	12, // 55: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.lower_case_table_names:type_name -> google.protobuf.Int64Value
+	14, // 56: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.show_compatibility_56:type_name -> google.protobuf.BoolValue
+	14, // 57: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.slow_query_log:type_name -> google.protobuf.BoolValue
+	13, // 58: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.slow_query_log_always_write_time:type_name -> google.protobuf.DoubleValue
+	5,  // 59: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_rate_type:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowRateType
+	12, // 60: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_rate_limit:type_name -> google.protobuf.Int64Value
+	14, // 61: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_sp_statements:type_name -> google.protobuf.BoolValue
+	6,  // 62: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.log_slow_filter:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.LogSlowFilterType
+	12, // 63: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.mdb_priority_choice_max_lag:type_name -> google.protobuf.Int64Value
+	12, // 64: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_page_size:type_name -> google.protobuf.Int64Value
 	12, // 65: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.max_sp_recursion_depth:type_name -> google.protobuf.Int64Value
 	12, // 66: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.innodb_compression_level:type_name -> google.protobuf.Int64Value
 	7,  // 67: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.binlog_transaction_dependency_tracking:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7.BinlogTransactionDependencyTracking

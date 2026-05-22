@@ -33,7 +33,6 @@ const (
 	// using the `SHOW SLAVE HOSTS`, `SHOW RELAYLOG EVENTS` and `SHOW BINLOG EVENTS` statements.
 	GlobalPermission_REPLICATION_SLAVE GlobalPermission = 2
 	// Enables display of information about the the statements currently being performed by sessions (the set of threads executing within the server).
-	//
 	// The privilege enables use of `SHOW PROCESSLIST` or `mysqladmin` processlist to see threads belonging to other users.
 	// You can always see your own threads. The `PROCESS` privilege also enables use of `SHOW ENGINE`.
 	GlobalPermission_PROCESS GlobalPermission = 3
@@ -195,9 +194,7 @@ const (
 	// Using `LOCK TABLES` statement for tables available with `SELECT` privilege.
 	Permission_LOCK_TABLES Permission_Privilege = 14
 	// Selecting rows from tables.
-	//
 	// Some `SELECT` statements can be allowed without the `SELECT` privilege. All statements that read column values require the `SELECT` privilege.
-	//
 	// See [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_select) for details.
 	Permission_SELECT Permission_Privilege = 15
 	// Using the `SHOW CREATE VIEW` statement. Also needed for views used with `EXPLAIN`.
@@ -286,7 +283,6 @@ func (Permission_Privilege) EnumDescriptor() ([]byte, []int) {
 }
 
 // An object that represents MySQL user.
-//
 // See [the documentation](/docs/managed-mysql/operations/cluster-users) for details.
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -305,7 +301,6 @@ type User struct {
 	// Connection Manager Connection and settings associated with user. Read only field.
 	ConnectionManager *ConnectionManager `protobuf:"bytes,7,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
 	// Deletion Protection inhibits deletion of the user
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,8,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -403,7 +398,6 @@ type Permission struct {
 	// Name of the database that the permission grants access to.
 	DatabaseName string `protobuf:"bytes,1,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	// Roles granted to the user within the database.
-	//
 	// See [the documentation](/docs/managed-mysql/operations/grant) for details.
 	Roles         []Permission_Privilege `protobuf:"varint,2,rep,packed,name=roles,proto3,enum=yandex.cloud.mdb.mysql.v1.Permission_Privilege" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -579,7 +573,6 @@ type UserSpec struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Set of permissions granted to the user to access specific databases.
 	// One permission per database.
-	//
 	// When a permission for a database is set, the user will have access to the database.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
 	// Set of global permissions to grant to the user.
@@ -591,7 +584,6 @@ type UserSpec struct {
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
 	// Deletion Protection inhibits deletion of the user
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,8,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -688,7 +680,7 @@ var File_yandex_cloud_mdb_mysql_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/mdb/mysql/v1/user.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"\xde\x04\n" +
+	"$yandex/cloud/mdb/mysql/v1/user.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a\x1dyandex/cloud/validation.proto\"\xde\x04\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +

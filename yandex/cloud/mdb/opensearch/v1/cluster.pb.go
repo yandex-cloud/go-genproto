@@ -215,7 +215,7 @@ const (
 	OpenSearch_DATA OpenSearch_GroupRole = 1
 	// Manager nodes perform cluster coordination.
 	OpenSearch_MANAGER OpenSearch_GroupRole = 2
-	// Warm nodes provide access to searchable snapshots and store search cache.
+	// Warm nodes provide access to searchable snapshots and manage search cache for these snapshots.
 	OpenSearch_WARM OpenSearch_GroupRole = 3
 	// Ingest nodes provides indexed data processing.
 	// If no node groups have INGEST role explicitly set, then all DATA nodes will implicitly have INGEST role.

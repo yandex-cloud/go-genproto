@@ -171,6 +171,26 @@ func (m *DeleteClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *AddClusterZookeeperRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterZookeeperRequest) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *AddClusterZookeeperRequest) SetHostSpecs(v []*HostSpec) {
+	m.HostSpecs = v
+}
+
+func (m *AddClusterZookeeperRequest) SetConvertTablesToReplicated(v *wrapperspb.BoolValue) {
+	m.ConvertTablesToReplicated = v
+}
+
+func (m *AddClusterZookeeperMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
 func (m *StartClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -205,26 +225,6 @@ func (m *MoveClusterMetadata) SetSourceFolderId(v string) {
 
 func (m *MoveClusterMetadata) SetDestinationFolderId(v string) {
 	m.DestinationFolderId = v
-}
-
-func (m *AddClusterZookeeperRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *AddClusterZookeeperRequest) SetResources(v *Resources) {
-	m.Resources = v
-}
-
-func (m *AddClusterZookeeperRequest) SetHostSpecs(v []*HostSpec) {
-	m.HostSpecs = v
-}
-
-func (m *AddClusterZookeeperRequest) SetConvertTablesToReplicated(v *wrapperspb.BoolValue) {
-	m.ConvertTablesToReplicated = v
-}
-
-func (m *AddClusterZookeeperMetadata) SetClusterId(v string) {
-	m.ClusterId = v
 }
 
 func (m *BackupClusterRequest) SetClusterId(v string) {
@@ -283,6 +283,10 @@ func (m *RestoreClusterRequest) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *RestoreClusterRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
 }
@@ -293,10 +297,6 @@ func (m *RestoreClusterRequest) SetShardSpecs(v []*ShardSpec) {
 
 func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
 	m.DiskEncryptionKeyId = v
-}
-
-func (m *RestoreClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
-	m.MaintenanceWindow = v
 }
 
 func (m *RestoreClusterRequest) SetPartialRestore(v *PartialRestoreSpec) {
@@ -607,14 +607,6 @@ func (m *AddClusterShardRequest) SetCopySchema(v *wrapperspb.BoolValue) {
 	m.CopySchema = v
 }
 
-func (m *AddClusterShardMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *AddClusterShardMetadata) SetShardName(v string) {
-	m.ShardName = v
-}
-
 func (m *AddClusterShardsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -629,6 +621,14 @@ func (m *AddClusterShardsRequest) SetHostSpecs(v []*HostSpec) {
 
 func (m *AddClusterShardsRequest) SetCopySchema(v *wrapperspb.BoolValue) {
 	m.CopySchema = v
+}
+
+func (m *AddClusterShardMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterShardMetadata) SetShardName(v string) {
+	m.ShardName = v
 }
 
 func (m *AddClusterShardsMetadata) SetClusterId(v string) {
@@ -675,20 +675,20 @@ func (m *DeleteClusterShardRequest) SetShardName(v string) {
 	m.ShardName = v
 }
 
-func (m *DeleteClusterShardMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *DeleteClusterShardMetadata) SetShardName(v string) {
-	m.ShardName = v
-}
-
 func (m *DeleteClusterShardsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
 func (m *DeleteClusterShardsRequest) SetShardNames(v []string) {
 	m.ShardNames = v
+}
+
+func (m *DeleteClusterShardMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterShardMetadata) SetShardName(v string) {
+	m.ShardName = v
 }
 
 func (m *DeleteClusterShardsMetadata) SetClusterId(v string) {

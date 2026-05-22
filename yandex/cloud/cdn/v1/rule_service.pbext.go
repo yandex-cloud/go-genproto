@@ -2,6 +2,10 @@
 
 package cdn
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *ListResourceRulesRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
@@ -28,6 +32,14 @@ func (m *CreateResourceRuleRequest) SetOptions(v *ResourceOptions) {
 
 func (m *CreateResourceRuleRequest) SetWeight(v int64) {
 	m.Weight = v
+}
+
+func (m *CreateResourceRuleRequest) SetOriginsGroupId(v int64) {
+	m.OriginsGroupId = v
+}
+
+func (m *CreateResourceRuleRequest) SetOriginProtocol(v OriginProtocol) {
+	m.OriginProtocol = v
 }
 
 func (m *CreateResourceRuleMetadata) SetResourceId(v string) {
@@ -68,6 +80,14 @@ func (m *UpdateResourceRuleRequest) SetRulePattern(v string) {
 
 func (m *UpdateResourceRuleRequest) SetOptions(v *ResourceOptions) {
 	m.Options = v
+}
+
+func (m *UpdateResourceRuleRequest) SetOriginsGroupId(v *wrapperspb.Int64Value) {
+	m.OriginsGroupId = v
+}
+
+func (m *UpdateResourceRuleRequest) SetOriginProtocol(v OriginProtocol) {
+	m.OriginProtocol = v
 }
 
 func (m *UpdateResourceRuleMetadata) SetResourceId(v string) {

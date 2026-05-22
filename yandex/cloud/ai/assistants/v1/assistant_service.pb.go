@@ -741,7 +741,7 @@ var File_yandex_cloud_ai_assistants_v1_assistant_service_proto protoreflect.File
 
 const file_yandex_cloud_ai_assistants_v1_assistant_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/ai/assistants/v1/assistant_service.proto\x12\x1dyandex.cloud.ai.assistants.v1\x1a#yandex/cloud/ai/common/common.proto\x1a-yandex/cloud/ai/assistants/v1/assistant.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\"\x8b\x06\n" +
+	"5yandex/cloud/ai/assistants/v1/assistant_service.proto\x12\x1dyandex.cloud.ai.assistants.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a-yandex/cloud/ai/assistants/v1/assistant.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a#yandex/cloud/ai/common/common.proto\x1a\x1dyandex/cloud/validation.proto\"\x8b\x06\n" +
 	"\x16CreateAssistantRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +

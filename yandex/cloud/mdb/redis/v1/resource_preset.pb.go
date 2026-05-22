@@ -7,6 +7,7 @@
 package redis
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -98,9 +99,9 @@ var File_yandex_cloud_mdb_redis_v1_resource_preset_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_redis_v1_resource_preset_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/redis/v1/resource_preset.proto\x12\x19yandex.cloud.mdb.redis.v1\"i\n" +
-	"\x0eResourcePreset\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
+	"/yandex/cloud/mdb/redis/v1/resource_preset.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1dyandex/cloud/validation.proto\"o\n" +
+	"\x0eResourcePreset\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x19\n" +
 	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\x12\x16\n" +
 	"\x06memory\x18\x03 \x01(\x03R\x06memory\x12\x14\n" +
 	"\x05cores\x18\x04 \x01(\x03R\x05coresBd\n" +

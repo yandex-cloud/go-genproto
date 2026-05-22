@@ -625,7 +625,7 @@ var File_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_se
 
 const file_yandex_cloud_ai_foundation_models_v1_text_generation_text_generation_service_proto_rawDesc = "" +
 	"\n" +
-	"Ryandex/cloud/ai/foundation_models/v1/text_generation/text_generation_service.proto\x12$yandex.cloud.ai.foundation_models.v1\x1a\x1cgoogle/api/annotations.proto\x1a6yandex/cloud/ai/foundation_models/v1/text_common.proto\x1aFyandex/cloud/ai/foundation_models/v1/batch_inference_task_status.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xce\x04\n" +
+	"Ryandex/cloud/ai/foundation_models/v1/text_generation/text_generation_service.proto\x12$yandex.cloud.ai.foundation_models.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1aFyandex/cloud/ai/foundation_models/v1/batch_inference_task_status.proto\x1a6yandex/cloud/ai/foundation_models/v1/text_common.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\xce\x04\n" +
 	"\x11CompletionRequest\x12\x1b\n" +
 	"\tmodel_uri\x18\x01 \x01(\tR\bmodelUri\x12f\n" +
 	"\x12completion_options\x18\x02 \x01(\v27.yandex.cloud.ai.foundation_models.v1.CompletionOptionsR\x11completionOptions\x12I\n" +

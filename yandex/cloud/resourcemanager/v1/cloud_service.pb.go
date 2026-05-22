@@ -726,7 +726,7 @@ const file_yandex_cloud_resourcemanager_v1_cloud_service_proto_rawDesc = "" +
 	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\"\xbe\x01\n" +
 	"\x11ListCloudsRequest\x12'\n" +
 	"\tpage_size\x18\x01 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
@@ -769,7 +769,7 @@ const file_yandex_cloud_resourcemanager_v1_cloud_service_proto_rawDesc = "" +
 	"\x1aListCloudOperationsRequest\x12'\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"\x88\x01\n" +

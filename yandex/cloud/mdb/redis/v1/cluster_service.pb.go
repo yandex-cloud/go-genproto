@@ -31,55 +31,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StartClusterFailoverRequest_FailoverType int32
-
-const (
-	StartClusterFailoverRequest_FAILOVER_TYPE_UNSPECIFIED StartClusterFailoverRequest_FailoverType = 0
-	StartClusterFailoverRequest_SWITCH_TO_HOSTNAMES       StartClusterFailoverRequest_FailoverType = 1
-	StartClusterFailoverRequest_SWITCH_FROM_HOSTNAMES     StartClusterFailoverRequest_FailoverType = 2
-)
-
-// Enum value maps for StartClusterFailoverRequest_FailoverType.
-var (
-	StartClusterFailoverRequest_FailoverType_name = map[int32]string{
-		0: "FAILOVER_TYPE_UNSPECIFIED",
-		1: "SWITCH_TO_HOSTNAMES",
-		2: "SWITCH_FROM_HOSTNAMES",
-	}
-	StartClusterFailoverRequest_FailoverType_value = map[string]int32{
-		"FAILOVER_TYPE_UNSPECIFIED": 0,
-		"SWITCH_TO_HOSTNAMES":       1,
-		"SWITCH_FROM_HOSTNAMES":     2,
-	}
-)
-
-func (x StartClusterFailoverRequest_FailoverType) Enum() *StartClusterFailoverRequest_FailoverType {
-	p := new(StartClusterFailoverRequest_FailoverType)
-	*p = x
-	return p
-}
-
-func (x StartClusterFailoverRequest_FailoverType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (StartClusterFailoverRequest_FailoverType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[0].Descriptor()
-}
-
-func (StartClusterFailoverRequest_FailoverType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[0]
-}
-
-func (x StartClusterFailoverRequest_FailoverType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use StartClusterFailoverRequest_FailoverType.Descriptor instead.
-func (StartClusterFailoverRequest_FailoverType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{23, 0}
-}
-
 type RescheduleMaintenanceRequest_RescheduleType int32
 
 const (
@@ -119,11 +70,11 @@ func (x RescheduleMaintenanceRequest_RescheduleType) String() string {
 }
 
 func (RescheduleMaintenanceRequest_RescheduleType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[0].Descriptor()
 }
 
 func (RescheduleMaintenanceRequest_RescheduleType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[1]
+	return &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[0]
 }
 
 func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumNumber {
@@ -132,6 +83,57 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{23, 0}
+}
+
+type StartClusterFailoverRequest_FailoverType int32
+
+const (
+	StartClusterFailoverRequest_FAILOVER_TYPE_UNSPECIFIED StartClusterFailoverRequest_FailoverType = 0
+	// Switch master role to hosts identified by the provided hostnames.
+	StartClusterFailoverRequest_SWITCH_TO_HOSTNAMES StartClusterFailoverRequest_FailoverType = 1
+	// Switch master role away from hosts identified by the provided hostnames.
+	StartClusterFailoverRequest_SWITCH_FROM_HOSTNAMES StartClusterFailoverRequest_FailoverType = 2
+)
+
+// Enum value maps for StartClusterFailoverRequest_FailoverType.
+var (
+	StartClusterFailoverRequest_FailoverType_name = map[int32]string{
+		0: "FAILOVER_TYPE_UNSPECIFIED",
+		1: "SWITCH_TO_HOSTNAMES",
+		2: "SWITCH_FROM_HOSTNAMES",
+	}
+	StartClusterFailoverRequest_FailoverType_value = map[string]int32{
+		"FAILOVER_TYPE_UNSPECIFIED": 0,
+		"SWITCH_TO_HOSTNAMES":       1,
+		"SWITCH_FROM_HOSTNAMES":     2,
+	}
+)
+
+func (x StartClusterFailoverRequest_FailoverType) Enum() *StartClusterFailoverRequest_FailoverType {
+	p := new(StartClusterFailoverRequest_FailoverType)
+	*p = x
+	return p
+}
+
+func (x StartClusterFailoverRequest_FailoverType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StartClusterFailoverRequest_FailoverType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[1].Descriptor()
+}
+
+func (StartClusterFailoverRequest_FailoverType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes[1]
+}
+
+func (x StartClusterFailoverRequest_FailoverType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StartClusterFailoverRequest_FailoverType.Descriptor instead.
+func (StartClusterFailoverRequest_FailoverType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{25, 0}
 }
 
@@ -230,8 +232,9 @@ func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
 }
 
 type EnableShardingClusterMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Redis cluster that is being switched to sharded mode.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -756,7 +759,6 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Redis cluster as “ key:value “ pairs. Maximum 64 per cluster.
 	// For example, "project": "mvp" or "source": "dictionary".
-	//
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1800,123 +1802,6 @@ func (x *RestoreClusterMetadata) GetBackupId() string {
 	return ""
 }
 
-type StartClusterFailoverRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to start failover on.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// List of hostnames. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
-	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
-	// The type of failover request.
-	FailoverType  StartClusterFailoverRequest_FailoverType `protobuf:"varint,3,opt,name=failover_type,json=failoverType,proto3,enum=yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest_FailoverType" json:"failover_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartClusterFailoverRequest) Reset() {
-	*x = StartClusterFailoverRequest{}
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartClusterFailoverRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartClusterFailoverRequest) ProtoMessage() {}
-
-func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartClusterFailoverRequest.ProtoReflect.Descriptor instead.
-func (*StartClusterFailoverRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *StartClusterFailoverRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *StartClusterFailoverRequest) GetHostNames() []string {
-	if x != nil {
-		return x.HostNames
-	}
-	return nil
-}
-
-func (x *StartClusterFailoverRequest) GetFailoverType() StartClusterFailoverRequest_FailoverType {
-	if x != nil {
-		return x.FailoverType
-	}
-	return StartClusterFailoverRequest_FAILOVER_TYPE_UNSPECIFIED
-}
-
-type StartClusterFailoverMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster on which failover will be initiated.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// List of hostnames which should not be masters. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartClusterFailoverMetadata) Reset() {
-	*x = StartClusterFailoverMetadata{}
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartClusterFailoverMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartClusterFailoverMetadata) ProtoMessage() {}
-
-func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartClusterFailoverMetadata.ProtoReflect.Descriptor instead.
-func (*StartClusterFailoverMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *StartClusterFailoverMetadata) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *StartClusterFailoverMetadata) GetHostNames() []string {
-	if x != nil {
-		return x.HostNames
-	}
-	return nil
-}
-
 type RescheduleMaintenanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Redis cluster to reschedule the maintenance operation for.
@@ -1931,7 +1816,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1943,7 +1828,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1956,7 +1841,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1992,7 +1877,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2004,7 +1889,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2017,7 +1902,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -2030,6 +1915,123 @@ func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
 func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp {
 	if x != nil {
 		return x.DelayedUntil
+	}
+	return nil
+}
+
+type StartClusterFailoverRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Redis cluster to start failover on.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// List of hostnames. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
+	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	// The type of failover request.
+	FailoverType  StartClusterFailoverRequest_FailoverType `protobuf:"varint,3,opt,name=failover_type,json=failoverType,proto3,enum=yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest_FailoverType" json:"failover_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartClusterFailoverRequest) Reset() {
+	*x = StartClusterFailoverRequest{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartClusterFailoverRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartClusterFailoverRequest) ProtoMessage() {}
+
+func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartClusterFailoverRequest.ProtoReflect.Descriptor instead.
+func (*StartClusterFailoverRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *StartClusterFailoverRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *StartClusterFailoverRequest) GetHostNames() []string {
+	if x != nil {
+		return x.HostNames
+	}
+	return nil
+}
+
+func (x *StartClusterFailoverRequest) GetFailoverType() StartClusterFailoverRequest_FailoverType {
+	if x != nil {
+		return x.FailoverType
+	}
+	return StartClusterFailoverRequest_FAILOVER_TYPE_UNSPECIFIED
+}
+
+type StartClusterFailoverMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Redis cluster on which failover will be initiated.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// List of hostnames which should not be masters. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
+	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartClusterFailoverMetadata) Reset() {
+	*x = StartClusterFailoverMetadata{}
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartClusterFailoverMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartClusterFailoverMetadata) ProtoMessage() {}
+
+func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartClusterFailoverMetadata.ProtoReflect.Descriptor instead.
+func (*StartClusterFailoverMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *StartClusterFailoverMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *StartClusterFailoverMetadata) GetHostNames() []string {
+	if x != nil {
+		return x.HostNames
 	}
 	return nil
 }
@@ -2095,8 +2097,9 @@ type ListClusterLogsRequest struct {
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
 	// If no columns are specified, entire log records are returned.
-	ColumnFilter []string                           `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	ServiceType  ListClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.redis.v1.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
+	// Type of the service to request logs about.
+	ServiceType ListClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.redis.v1.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
@@ -2311,8 +2314,9 @@ type StreamClusterLogsRequest struct {
 	// Required. ID of the Redis cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
-	ColumnFilter []string                             `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	ServiceType  StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.redis.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
+	// Type of the service to request logs about.
+	ServiceType StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.redis.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
@@ -3598,7 +3602,6 @@ type HostSpec struct {
 	// Works only for non-sharded clusters. Default value is 100.
 	ReplicaPriority *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=replica_priority,json=replicaPriority,proto3" json:"replica_priority,omitempty"`
 	// Whether the host should get a public IP address on creation.
-	//
 	// Possible values:
 	// * false - don't assign a public IP to the host.
 	// * true - the host should have a public IP address.
@@ -4021,7 +4024,21 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xc1\x02\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xf3\x02\n" +
+	"\x1cRescheduleMaintenanceRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12u\n" +
+	"\x0freschedule_type\x18\x02 \x01(\x0e2F.yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleTypeB\x04\xe8\xc71\x01R\x0erescheduleType\x12?\n" +
+	"\rdelayed_until\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntil\"n\n" +
+	"\x0eRescheduleType\x12\x1f\n" +
+	"\x1bRESCHEDULE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tIMMEDIATE\x10\x01\x12\x19\n" +
+	"\x15NEXT_AVAILABLE_WINDOW\x10\x02\x12\x11\n" +
+	"\rSPECIFIC_TIME\x10\x03\"\x93\x01\n" +
+	"\x1dRescheduleMaintenanceMetadata\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12?\n" +
+	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xc1\x02\n" +
 	"\x1bStartClusterFailoverRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12(\n" +
@@ -4036,21 +4053,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\xf3\x02\n" +
-	"\x1cRescheduleMaintenanceRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12u\n" +
-	"\x0freschedule_type\x18\x02 \x01(\x0e2F.yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleTypeB\x04\xe8\xc71\x01R\x0erescheduleType\x12?\n" +
-	"\rdelayed_until\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntil\"n\n" +
-	"\x0eRescheduleType\x12\x1f\n" +
-	"\x1bRESCHEDULE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
-	"\tIMMEDIATE\x10\x01\x12\x19\n" +
-	"\x15NEXT_AVAILABLE_WINDOW\x10\x02\x12\x11\n" +
-	"\rSPECIFIC_TIME\x10\x03\"\x85\x01\n" +
-	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12?\n" +
-	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xce\x01\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"\xce\x01\n" +
 	"\tLogRecord\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12K\n" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.redis.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
@@ -4126,10 +4129,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12J\n" +
 	"\n" +
-	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"W\n" +
-	"\x17AddClusterHostsMetadata\x12\x1d\n" +
+	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"e\n" +
+	"\x17AddClusterHostsMetadata\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\x1d\n" +
 	"\n" +
 	"host_names\x18\x02 \x03(\tR\thostNames\"x\n" +
 	"\x19DeleteClusterHostsRequest\x12+\n" +
@@ -4190,14 +4193,14 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x10replica_priority\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0freplicaPriority\x12(\n" +
 	"\x10assign_public_ip\x18\x03 \x01(\bR\x0eassignPublicIp\x12;\n" +
 	"\vupdate_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\"\xed\x01\n" +
-	"\bHostSpec\x12\x17\n" +
-	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12\x1b\n" +
-	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\x129\n" +
+	"updateMask\"\x81\x02\n" +
+	"\bHostSpec\x12!\n" +
+	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
+	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x129\n" +
 	"\n" +
 	"shard_name\x18\x03 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12F\n" +
 	"\x10replica_priority\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0freplicaPriority\x12(\n" +
-	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\xc2\a\n" +
+	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\xcc\a\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12]\n" +
@@ -4209,8 +4212,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x129\n" +
 	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessR\x06access\x12C\n" +
 	"\x05redis\x18\v \x01(\v2-.yandex.cloud.mdb.redis.v1.config.RedisConfigR\x05redis\x12b\n" +
-	"\x15disk_size_autoscaling\x18\f \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12V\n" +
-	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12B\n" +
+	"\x15disk_size_autoscaling\x18\f \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12`\n" +
+	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x047-60R\x16backupRetainPeriodDays\x12B\n" +
 	"\amodules\x18\x0e \x01(\v2(.yandex.cloud.mdb.redis.v1.ValkeyModulesR\amodulesB\f\n" +
 	"\n" +
 	"redis_specJ\x04\b\t\x10\v2\xae,\n" +
@@ -4282,8 +4285,8 @@ func file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDescGZIP() []byte {
 var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
 var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_goTypes = []any{
-	(StartClusterFailoverRequest_FailoverType)(0),    // 0: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverType
-	(RescheduleMaintenanceRequest_RescheduleType)(0), // 1: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleType
+	(RescheduleMaintenanceRequest_RescheduleType)(0), // 0: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleType
+	(StartClusterFailoverRequest_FailoverType)(0),    // 1: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverType
 	(ListClusterLogsRequest_ServiceType)(0),          // 2: yandex.cloud.mdb.redis.v1.ListClusterLogsRequest.ServiceType
 	(StreamClusterLogsRequest_ServiceType)(0),        // 3: yandex.cloud.mdb.redis.v1.StreamClusterLogsRequest.ServiceType
 	(*EnableShardingClusterMetadata)(nil),            // 4: yandex.cloud.mdb.redis.v1.EnableShardingClusterMetadata
@@ -4309,10 +4312,10 @@ var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_goTypes = []any{
 	(*BackupClusterMetadata)(nil),                    // 24: yandex.cloud.mdb.redis.v1.BackupClusterMetadata
 	(*RestoreClusterRequest)(nil),                    // 25: yandex.cloud.mdb.redis.v1.RestoreClusterRequest
 	(*RestoreClusterMetadata)(nil),                   // 26: yandex.cloud.mdb.redis.v1.RestoreClusterMetadata
-	(*StartClusterFailoverRequest)(nil),              // 27: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest
-	(*StartClusterFailoverMetadata)(nil),             // 28: yandex.cloud.mdb.redis.v1.StartClusterFailoverMetadata
-	(*RescheduleMaintenanceRequest)(nil),             // 29: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),            // 30: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceMetadata
+	(*RescheduleMaintenanceRequest)(nil),             // 27: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),            // 28: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceMetadata
+	(*StartClusterFailoverRequest)(nil),              // 29: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest
+	(*StartClusterFailoverMetadata)(nil),             // 30: yandex.cloud.mdb.redis.v1.StartClusterFailoverMetadata
 	(*LogRecord)(nil),                                // 31: yandex.cloud.mdb.redis.v1.LogRecord
 	(*ListClusterLogsRequest)(nil),                   // 32: yandex.cloud.mdb.redis.v1.ListClusterLogsRequest
 	(*ListClusterLogsResponse)(nil),                  // 33: yandex.cloud.mdb.redis.v1.ListClusterLogsResponse
@@ -4399,10 +4402,10 @@ var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_depIdxs = []int32{
 	66, // 22: yandex.cloud.mdb.redis.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.redis.v1.MaintenanceWindow
 	68, // 23: yandex.cloud.mdb.redis.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
 	67, // 24: yandex.cloud.mdb.redis.v1.RestoreClusterRequest.user_specs:type_name -> yandex.cloud.mdb.redis.v1.UserSpec
-	0,  // 25: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.failover_type:type_name -> yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverType
-	1,  // 26: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleType
-	70, // 27: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	70, // 28: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	0,  // 25: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.RescheduleType
+	70, // 26: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	70, // 27: yandex.cloud.mdb.redis.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	1,  // 28: yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.failover_type:type_name -> yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverType
 	70, // 29: yandex.cloud.mdb.redis.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
 	61, // 30: yandex.cloud.mdb.redis.v1.LogRecord.message:type_name -> yandex.cloud.mdb.redis.v1.LogRecord.MessageEntry
 	2,  // 31: yandex.cloud.mdb.redis.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.redis.v1.ListClusterLogsRequest.ServiceType
@@ -4443,8 +4446,8 @@ var file_yandex_cloud_mdb_redis_v1_cluster_service_proto_depIdxs = []int32{
 	19, // 66: yandex.cloud.mdb.redis.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.redis.v1.MoveClusterRequest
 	23, // 67: yandex.cloud.mdb.redis.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.redis.v1.BackupClusterRequest
 	25, // 68: yandex.cloud.mdb.redis.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.redis.v1.RestoreClusterRequest
-	29, // 69: yandex.cloud.mdb.redis.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest
-	27, // 70: yandex.cloud.mdb.redis.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest
+	27, // 69: yandex.cloud.mdb.redis.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest
+	29, // 70: yandex.cloud.mdb.redis.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest
 	32, // 71: yandex.cloud.mdb.redis.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.redis.v1.ListClusterLogsRequest
 	35, // 72: yandex.cloud.mdb.redis.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.redis.v1.StreamClusterLogsRequest
 	36, // 73: yandex.cloud.mdb.redis.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.redis.v1.ListClusterOperationsRequest

@@ -32,7 +32,6 @@ const (
 // A set of methods for managing MongoDB Backup resources.
 type BackupServiceClient interface {
 	// Returns the specified MongoDB backup.
-	//
 	// To get the list of available MongoDB backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.
@@ -86,7 +85,6 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // A set of methods for managing MongoDB Backup resources.
 type BackupServiceServer interface {
 	// Returns the specified MongoDB backup.
-	//
 	// To get the list of available MongoDB backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.

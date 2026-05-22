@@ -68,6 +68,18 @@ func (m *AudioVariable) SetVariableLengthMs(v int64) {
 	m.VariableLengthMs = v
 }
 
+func (m *WordTiming) SetWord(v string) {
+	m.Word = v
+}
+
+func (m *WordTiming) SetStartMs(v int64) {
+	m.StartMs = v
+}
+
+func (m *WordTiming) SetLengthMs(v int64) {
+	m.LengthMs = v
+}
+
 func (m *UtteranceSynthesisResponse) SetAudioChunk(v *AudioChunk) {
 	m.AudioChunk = v
 }
@@ -82,6 +94,10 @@ func (m *UtteranceSynthesisResponse) SetStartMs(v int64) {
 
 func (m *UtteranceSynthesisResponse) SetLengthMs(v int64) {
 	m.LengthMs = v
+}
+
+func (m *UtteranceSynthesisResponse) SetWordTimings(v []*WordTiming) {
+	m.WordTimings = v
 }
 
 func (m *AudioTemplate) SetAudio(v *AudioContent) {
@@ -280,4 +296,8 @@ func (m *StreamSynthesisResponse) SetStartMs(v int64) {
 
 func (m *StreamSynthesisResponse) SetLengthMs(v int64) {
 	m.LengthMs = v
+}
+
+func (m *StreamSynthesisResponse) SetWordTimings(v []*WordTiming) {
+	m.WordTimings = v
 }

@@ -25,10 +25,10 @@ var File_yandex_cloud_ai_tts_v3_tts_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_tts_v3_tts_service_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/ai/tts/v3/tts_service.proto\x12\x10speechkit.tts.v3\x1a yandex/cloud/ai/tts/v3/tts.proto\x1a\x1cgoogle/api/annotations.proto2\x96\x02\n" +
+	"(yandex/cloud/ai/tts/v3/tts_service.proto\x12\x10speechkit.tts.v3\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/ai/tts/v3/tts.proto2\x94\x02\n" +
 	"\vSynthesizer\x12\x98\x01\n" +
-	"\x12UtteranceSynthesis\x12+.speechkit.tts.v3.UtteranceSynthesisRequest\x1a,.speechkit.tts.v3.UtteranceSynthesisResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/tts/v3/utteranceSynthesis0\x01\x12l\n" +
-	"\x0fStreamSynthesis\x12(.speechkit.tts.v3.StreamSynthesisRequest\x1a).speechkit.tts.v3.StreamSynthesisResponse\"\x00(\x010\x01B\\\n" +
+	"\x12UtteranceSynthesis\x12+.speechkit.tts.v3.UtteranceSynthesisRequest\x1a,.speechkit.tts.v3.UtteranceSynthesisResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/tts/v3/utteranceSynthesis0\x01\x12j\n" +
+	"\x0fStreamSynthesis\x12(.speechkit.tts.v3.StreamSynthesisRequest\x1a).speechkit.tts.v3.StreamSynthesisResponse(\x010\x01B\\\n" +
 	"\x1ayandex.cloud.api.ai.tts.v3Z>github.com/yandex-cloud/go-genproto/yandex/cloud/ai/tts/v3;ttsb\x06proto3"
 
 var file_yandex_cloud_ai_tts_v3_tts_service_proto_goTypes = []any{

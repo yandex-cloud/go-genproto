@@ -62,14 +62,14 @@ func (m *ChatRequest) SetGenerationOptions(v *GenerationOptions) {
 	m.GenerationOptions = v
 }
 
+func (m *ChatRequest) SetMessages(v []*Message) {
+	m.Messages = v
+}
+
 func (m *ChatRequest) SetInstructionText(v string) {
 	m.Instruction = &ChatRequest_InstructionText{
 		InstructionText: v,
 	}
-}
-
-func (m *ChatRequest) SetMessages(v []*Message) {
-	m.Messages = v
 }
 
 func (m *ChatResponse) SetMessage(v *Message) {

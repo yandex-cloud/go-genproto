@@ -28,6 +28,7 @@ type ListVersionsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListVersionsResponse.next_page_token] that can be used
 	// to get the next page of results in subsequent ListVersions requests.
+	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set [page_token] to the [ListVersionsResponse.next_page_token] returned by a previous ListVersions
@@ -143,7 +144,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_versions_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_clickhouse_v1_versions_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/clickhouse/v1/versions_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/mdb/clickhouse/v1/version.proto\"h\n" +
+	"5yandex/cloud/mdb/clickhouse/v1/versions_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a,yandex/cloud/mdb/clickhouse/v1/version.proto\x1a\x1dyandex/cloud/validation.proto\"h\n" +
 	"\x13ListVersionsRequest\x12'\n" +
 	"\tpage_size\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +

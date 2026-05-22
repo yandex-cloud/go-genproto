@@ -595,14 +595,14 @@ var File_yandex_cloud_iam_v1_oauth_client_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/iam/v1/oauth_client_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/iam/v1/oauth_client.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x01\n" +
+	".yandex/cloud/iam/v1/oauth_client_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/iam/v1/oauth_client.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x94\x01\n" +
 	"\x17ListOAuthClientsRequest\x12'\n" +
 	"\tpage_size\x18\x01 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=2000R\tpageToken\x12)\n" +
-	"\tfolder_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"\x91\x01\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\x12%\n" +
+	"\tfolder_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"\x91\x01\n" +
 	"\x18ListOAuthClientsResponse\x12M\n" +
 	"\roauth_clients\x18\x01 \x03(\v2(.yandex.cloud.iam.v1.OAuthClientListViewR\foauthClients\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"M\n" +

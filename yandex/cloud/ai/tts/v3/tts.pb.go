@@ -228,7 +228,7 @@ func (x DurationHint_DurationHintPolicy) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use DurationHint_DurationHintPolicy.Descriptor instead.
 func (DurationHint_DurationHintPolicy) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{11, 0}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{12, 0}
 }
 
 type UtteranceSynthesisRequest_LoudnessNormalizationType int32
@@ -279,7 +279,7 @@ func (x UtteranceSynthesisRequest_LoudnessNormalizationType) Number() protorefle
 
 // Deprecated: Use UtteranceSynthesisRequest_LoudnessNormalizationType.Descriptor instead.
 func (UtteranceSynthesisRequest_LoudnessNormalizationType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{13, 0}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{14, 0}
 }
 
 type AudioContent struct {
@@ -659,6 +659,69 @@ func (x *AudioVariable) GetVariableLengthMs() int64 {
 	return 0
 }
 
+type WordTiming struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// A word from a normalized text for synthesis.
+	Word string `protobuf:"bytes,1,opt,name=word,proto3" json:"word,omitempty"`
+	// Start of the word in milliseconds, relative to the beginning of the full audio stream.
+	StartMs int64 `protobuf:"varint,2,opt,name=start_ms,json=startMs,proto3" json:"start_ms,omitempty"`
+	// Length of the word in milliseconds.
+	LengthMs      int64 `protobuf:"varint,3,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WordTiming) Reset() {
+	*x = WordTiming{}
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WordTiming) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WordTiming) ProtoMessage() {}
+
+func (x *WordTiming) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WordTiming.ProtoReflect.Descriptor instead.
+func (*WordTiming) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *WordTiming) GetWord() string {
+	if x != nil {
+		return x.Word
+	}
+	return ""
+}
+
+func (x *WordTiming) GetStartMs() int64 {
+	if x != nil {
+		return x.StartMs
+	}
+	return 0
+}
+
+func (x *WordTiming) GetLengthMs() int64 {
+	if x != nil {
+		return x.LengthMs
+	}
+	return 0
+}
+
 type UtteranceSynthesisResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Part of synthesized audio.
@@ -668,14 +731,16 @@ type UtteranceSynthesisResponse struct {
 	// Start time of the audio chunk in milliseconds.
 	StartMs int64 `protobuf:"varint,3,opt,name=start_ms,json=startMs,proto3" json:"start_ms,omitempty"`
 	// Length of the audio chunk in milliseconds.
-	LengthMs      int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
+	LengthMs int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
+	// Per-word timings for this audio chunk.
+	WordTimings   []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UtteranceSynthesisResponse) Reset() {
 	*x = UtteranceSynthesisResponse{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[6]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -687,7 +752,7 @@ func (x *UtteranceSynthesisResponse) String() string {
 func (*UtteranceSynthesisResponse) ProtoMessage() {}
 
 func (x *UtteranceSynthesisResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[6]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -700,7 +765,7 @@ func (x *UtteranceSynthesisResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UtteranceSynthesisResponse.ProtoReflect.Descriptor instead.
 func (*UtteranceSynthesisResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UtteranceSynthesisResponse) GetAudioChunk() *AudioChunk {
@@ -731,6 +796,13 @@ func (x *UtteranceSynthesisResponse) GetLengthMs() int64 {
 	return 0
 }
 
+func (x *UtteranceSynthesisResponse) GetWordTimings() []*WordTiming {
+	if x != nil {
+		return x.WordTimings
+	}
+	return nil
+}
+
 type AudioTemplate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Audio file.
@@ -745,7 +817,7 @@ type AudioTemplate struct {
 
 func (x *AudioTemplate) Reset() {
 	*x = AudioTemplate{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[7]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -757,7 +829,7 @@ func (x *AudioTemplate) String() string {
 func (*AudioTemplate) ProtoMessage() {}
 
 func (x *AudioTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[7]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -770,7 +842,7 @@ func (x *AudioTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioTemplate.ProtoReflect.Descriptor instead.
 func (*AudioTemplate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AudioTemplate) GetAudio() *AudioContent {
@@ -804,7 +876,7 @@ type AudioChunk struct {
 
 func (x *AudioChunk) Reset() {
 	*x = AudioChunk{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -816,7 +888,7 @@ func (x *AudioChunk) String() string {
 func (*AudioChunk) ProtoMessage() {}
 
 func (x *AudioChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,7 +901,7 @@ func (x *AudioChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AudioChunk.ProtoReflect.Descriptor instead.
 func (*AudioChunk) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AudioChunk) GetData() []byte {
@@ -849,7 +921,7 @@ type TextChunk struct {
 
 func (x *TextChunk) Reset() {
 	*x = TextChunk{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[9]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -861,7 +933,7 @@ func (x *TextChunk) String() string {
 func (*TextChunk) ProtoMessage() {}
 
 func (x *TextChunk) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[9]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -874,7 +946,7 @@ func (x *TextChunk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextChunk.ProtoReflect.Descriptor instead.
 func (*TextChunk) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *TextChunk) GetText() string {
@@ -887,11 +959,9 @@ func (x *TextChunk) GetText() string {
 type TextTemplate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Template text.
-	//
 	// Sample:`The {animal} goes to the {place}.`
 	TextTemplate string `protobuf:"bytes,1,opt,name=text_template,json=textTemplate,proto3" json:"text_template,omitempty"`
 	// Defining variables in template text.
-	//
 	// Sample: `{animal: cat, place: forest}`
 	Variables     []*TextVariable `protobuf:"bytes,2,rep,name=variables,proto3" json:"variables,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -900,7 +970,7 @@ type TextTemplate struct {
 
 func (x *TextTemplate) Reset() {
 	*x = TextTemplate{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[10]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -912,7 +982,7 @@ func (x *TextTemplate) String() string {
 func (*TextTemplate) ProtoMessage() {}
 
 func (x *TextTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[10]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -925,7 +995,7 @@ func (x *TextTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextTemplate.ProtoReflect.Descriptor instead.
 func (*TextTemplate) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *TextTemplate) GetTextTemplate() string {
@@ -954,7 +1024,7 @@ type DurationHint struct {
 
 func (x *DurationHint) Reset() {
 	*x = DurationHint{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[11]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -966,7 +1036,7 @@ func (x *DurationHint) String() string {
 func (*DurationHint) ProtoMessage() {}
 
 func (x *DurationHint) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[11]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -979,7 +1049,7 @@ func (x *DurationHint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DurationHint.ProtoReflect.Descriptor instead.
 func (*DurationHint) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *DurationHint) GetPolicy() DurationHint_DurationHintPolicy {
@@ -1016,7 +1086,7 @@ type Hints struct {
 
 func (x *Hints) Reset() {
 	*x = Hints{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1028,7 +1098,7 @@ func (x *Hints) String() string {
 func (*Hints) ProtoMessage() {}
 
 func (x *Hints) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1041,7 +1111,7 @@ func (x *Hints) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Hints.ProtoReflect.Descriptor instead.
 func (*Hints) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Hints) GetHint() isHints_Hint {
@@ -1196,7 +1266,7 @@ type UtteranceSynthesisRequest struct {
 
 func (x *UtteranceSynthesisRequest) Reset() {
 	*x = UtteranceSynthesisRequest{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1208,7 +1278,7 @@ func (x *UtteranceSynthesisRequest) String() string {
 func (*UtteranceSynthesisRequest) ProtoMessage() {}
 
 func (x *UtteranceSynthesisRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1221,7 +1291,7 @@ func (x *UtteranceSynthesisRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UtteranceSynthesisRequest.ProtoReflect.Descriptor instead.
 func (*UtteranceSynthesisRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UtteranceSynthesisRequest) GetModel() string {
@@ -1328,7 +1398,7 @@ type SynthesisOptions struct {
 
 func (x *SynthesisOptions) Reset() {
 	*x = SynthesisOptions{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1340,7 +1410,7 @@ func (x *SynthesisOptions) String() string {
 func (*SynthesisOptions) ProtoMessage() {}
 
 func (x *SynthesisOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1353,7 +1423,7 @@ func (x *SynthesisOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SynthesisOptions.ProtoReflect.Descriptor instead.
 func (*SynthesisOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SynthesisOptions) GetModel() string {
@@ -1423,7 +1493,7 @@ type SynthesisInput struct {
 
 func (x *SynthesisInput) Reset() {
 	*x = SynthesisInput{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1435,7 +1505,7 @@ func (x *SynthesisInput) String() string {
 func (*SynthesisInput) ProtoMessage() {}
 
 func (x *SynthesisInput) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1448,7 +1518,7 @@ func (x *SynthesisInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SynthesisInput.ProtoReflect.Descriptor instead.
 func (*SynthesisInput) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SynthesisInput) GetText() string {
@@ -1467,7 +1537,7 @@ type ForceSynthesisEvent struct {
 
 func (x *ForceSynthesisEvent) Reset() {
 	*x = ForceSynthesisEvent{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1479,7 +1549,7 @@ func (x *ForceSynthesisEvent) String() string {
 func (*ForceSynthesisEvent) ProtoMessage() {}
 
 func (x *ForceSynthesisEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[16]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1492,7 +1562,7 @@ func (x *ForceSynthesisEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ForceSynthesisEvent.ProtoReflect.Descriptor instead.
 func (*ForceSynthesisEvent) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{17}
 }
 
 // Sent by client to control or provide data during streaming synthesis.
@@ -1510,7 +1580,7 @@ type StreamSynthesisRequest struct {
 
 func (x *StreamSynthesisRequest) Reset() {
 	*x = StreamSynthesisRequest{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1522,7 +1592,7 @@ func (x *StreamSynthesisRequest) String() string {
 func (*StreamSynthesisRequest) ProtoMessage() {}
 
 func (x *StreamSynthesisRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[17]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1535,7 +1605,7 @@ func (x *StreamSynthesisRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamSynthesisRequest.ProtoReflect.Descriptor instead.
 func (*StreamSynthesisRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *StreamSynthesisRequest) GetEvent() isStreamSynthesisRequest_Event {
@@ -1606,14 +1676,16 @@ type StreamSynthesisResponse struct {
 	// Start time of the audio chunk in milliseconds.
 	StartMs int64 `protobuf:"varint,3,opt,name=start_ms,json=startMs,proto3" json:"start_ms,omitempty"`
 	// Length of the audio chunk in milliseconds.
-	LengthMs      int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
+	LengthMs int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
+	// Per-word timings for this audio chunk (milliseconds from stream start).
+	WordTimings   []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *StreamSynthesisResponse) Reset() {
 	*x = StreamSynthesisResponse{}
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1625,7 +1697,7 @@ func (x *StreamSynthesisResponse) String() string {
 func (*StreamSynthesisResponse) ProtoMessage() {}
 
 func (x *StreamSynthesisResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1638,7 +1710,7 @@ func (x *StreamSynthesisResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamSynthesisResponse.ProtoReflect.Descriptor instead.
 func (*StreamSynthesisResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *StreamSynthesisResponse) GetAudioChunk() *AudioChunk {
@@ -1667,6 +1739,13 @@ func (x *StreamSynthesisResponse) GetLengthMs() int64 {
 		return x.LengthMs
 	}
 	return 0
+}
+
+func (x *StreamSynthesisResponse) GetWordTimings() []*WordTiming {
+	if x != nil {
+		return x.WordTimings
+	}
+	return nil
 }
 
 var File_yandex_cloud_ai_tts_v3_tts_proto protoreflect.FileDescriptor
@@ -1702,14 +1781,20 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"\rAudioVariable\x12#\n" +
 	"\rvariable_name\x18\x01 \x01(\tR\fvariableName\x12*\n" +
 	"\x11variable_start_ms\x18\x02 \x01(\x03R\x0fvariableStartMs\x12,\n" +
-	"\x12variable_length_ms\x18\x03 \x01(\x03R\x10variableLengthMs\"\xcf\x01\n" +
+	"\x12variable_length_ms\x18\x03 \x01(\x03R\x10variableLengthMs\"X\n" +
+	"\n" +
+	"WordTiming\x12\x12\n" +
+	"\x04word\x18\x01 \x01(\tR\x04word\x12\x19\n" +
+	"\bstart_ms\x18\x02 \x01(\x03R\astartMs\x12\x1b\n" +
+	"\tlength_ms\x18\x03 \x01(\x03R\blengthMs\"\x90\x02\n" +
 	"\x1aUtteranceSynthesisResponse\x12=\n" +
 	"\vaudio_chunk\x18\x01 \x01(\v2\x1c.speechkit.tts.v3.AudioChunkR\n" +
 	"audioChunk\x12:\n" +
 	"\n" +
 	"text_chunk\x18\x02 \x01(\v2\x1b.speechkit.tts.v3.TextChunkR\ttextChunk\x12\x19\n" +
 	"\bstart_ms\x18\x03 \x01(\x03R\astartMs\x12\x1b\n" +
-	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs\"\xc9\x01\n" +
+	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs\x12?\n" +
+	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings\"\xc9\x01\n" +
 	"\rAudioTemplate\x124\n" +
 	"\x05audio\x18\x01 \x01(\v2\x1e.speechkit.tts.v3.AudioContentR\x05audio\x12C\n" +
 	"\rtext_template\x18\x02 \x01(\v2\x1e.speechkit.tts.v3.TextTemplateR\ftextTemplate\x12=\n" +
@@ -1772,14 +1857,15 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"\aoptions\x18\x01 \x01(\v2\".speechkit.tts.v3.SynthesisOptionsH\x00R\aoptions\x12K\n" +
 	"\x0fsynthesis_input\x18\x02 \x01(\v2 .speechkit.tts.v3.SynthesisInputH\x00R\x0esynthesisInput\x12P\n" +
 	"\x0fforce_synthesis\x18\x03 \x01(\v2%.speechkit.tts.v3.ForceSynthesisEventH\x00R\x0eforceSynthesisB\a\n" +
-	"\x05Event\"\xcc\x01\n" +
+	"\x05Event\"\x8d\x02\n" +
 	"\x17StreamSynthesisResponse\x12=\n" +
 	"\vaudio_chunk\x18\x01 \x01(\v2\x1c.speechkit.tts.v3.AudioChunkR\n" +
 	"audioChunk\x12:\n" +
 	"\n" +
 	"text_chunk\x18\x02 \x01(\v2\x1b.speechkit.tts.v3.TextChunkR\ttextChunk\x12\x19\n" +
 	"\bstart_ms\x18\x03 \x01(\x03R\astartMs\x12\x1b\n" +
-	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs*`\n" +
+	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs\x12?\n" +
+	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings*`\n" +
 	"\x19LoudnessNormalizationType\x12+\n" +
 	"'LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bMAX_PEAK\x10\x01\x12\b\n" +
@@ -1799,7 +1885,7 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_yandex_cloud_ai_tts_v3_tts_proto_goTypes = []any{
 	(LoudnessNormalizationType)(0),                           // 0: speechkit.tts.v3.LoudnessNormalizationType
 	(RawAudio_AudioEncoding)(0),                              // 1: speechkit.tts.v3.RawAudio.AudioEncoding
@@ -1812,19 +1898,20 @@ var file_yandex_cloud_ai_tts_v3_tts_proto_goTypes = []any{
 	(*ContainerAudio)(nil),                                   // 8: speechkit.tts.v3.ContainerAudio
 	(*TextVariable)(nil),                                     // 9: speechkit.tts.v3.TextVariable
 	(*AudioVariable)(nil),                                    // 10: speechkit.tts.v3.AudioVariable
-	(*UtteranceSynthesisResponse)(nil),                       // 11: speechkit.tts.v3.UtteranceSynthesisResponse
-	(*AudioTemplate)(nil),                                    // 12: speechkit.tts.v3.AudioTemplate
-	(*AudioChunk)(nil),                                       // 13: speechkit.tts.v3.AudioChunk
-	(*TextChunk)(nil),                                        // 14: speechkit.tts.v3.TextChunk
-	(*TextTemplate)(nil),                                     // 15: speechkit.tts.v3.TextTemplate
-	(*DurationHint)(nil),                                     // 16: speechkit.tts.v3.DurationHint
-	(*Hints)(nil),                                            // 17: speechkit.tts.v3.Hints
-	(*UtteranceSynthesisRequest)(nil),                        // 18: speechkit.tts.v3.UtteranceSynthesisRequest
-	(*SynthesisOptions)(nil),                                 // 19: speechkit.tts.v3.SynthesisOptions
-	(*SynthesisInput)(nil),                                   // 20: speechkit.tts.v3.SynthesisInput
-	(*ForceSynthesisEvent)(nil),                              // 21: speechkit.tts.v3.ForceSynthesisEvent
-	(*StreamSynthesisRequest)(nil),                           // 22: speechkit.tts.v3.StreamSynthesisRequest
-	(*StreamSynthesisResponse)(nil),                          // 23: speechkit.tts.v3.StreamSynthesisResponse
+	(*WordTiming)(nil),                                       // 11: speechkit.tts.v3.WordTiming
+	(*UtteranceSynthesisResponse)(nil),                       // 12: speechkit.tts.v3.UtteranceSynthesisResponse
+	(*AudioTemplate)(nil),                                    // 13: speechkit.tts.v3.AudioTemplate
+	(*AudioChunk)(nil),                                       // 14: speechkit.tts.v3.AudioChunk
+	(*TextChunk)(nil),                                        // 15: speechkit.tts.v3.TextChunk
+	(*TextTemplate)(nil),                                     // 16: speechkit.tts.v3.TextTemplate
+	(*DurationHint)(nil),                                     // 17: speechkit.tts.v3.DurationHint
+	(*Hints)(nil),                                            // 18: speechkit.tts.v3.Hints
+	(*UtteranceSynthesisRequest)(nil),                        // 19: speechkit.tts.v3.UtteranceSynthesisRequest
+	(*SynthesisOptions)(nil),                                 // 20: speechkit.tts.v3.SynthesisOptions
+	(*SynthesisInput)(nil),                                   // 21: speechkit.tts.v3.SynthesisInput
+	(*ForceSynthesisEvent)(nil),                              // 22: speechkit.tts.v3.ForceSynthesisEvent
+	(*StreamSynthesisRequest)(nil),                           // 23: speechkit.tts.v3.StreamSynthesisRequest
+	(*StreamSynthesisResponse)(nil),                          // 24: speechkit.tts.v3.StreamSynthesisResponse
 }
 var file_yandex_cloud_ai_tts_v3_tts_proto_depIdxs = []int32{
 	6,  // 0: speechkit.tts.v3.AudioContent.audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
@@ -1832,31 +1919,33 @@ var file_yandex_cloud_ai_tts_v3_tts_proto_depIdxs = []int32{
 	8,  // 2: speechkit.tts.v3.AudioFormatOptions.container_audio:type_name -> speechkit.tts.v3.ContainerAudio
 	1,  // 3: speechkit.tts.v3.RawAudio.audio_encoding:type_name -> speechkit.tts.v3.RawAudio.AudioEncoding
 	2,  // 4: speechkit.tts.v3.ContainerAudio.container_audio_type:type_name -> speechkit.tts.v3.ContainerAudio.ContainerAudioType
-	13, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
-	14, // 6: speechkit.tts.v3.UtteranceSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
-	5,  // 7: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
-	15, // 8: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	10, // 9: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
-	9,  // 10: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
-	3,  // 11: speechkit.tts.v3.DurationHint.policy:type_name -> speechkit.tts.v3.DurationHint.DurationHintPolicy
-	12, // 12: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
-	16, // 13: speechkit.tts.v3.Hints.duration:type_name -> speechkit.tts.v3.DurationHint
-	15, // 14: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	17, // 15: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
-	6,  // 16: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	4,  // 17: speechkit.tts.v3.UtteranceSynthesisRequest.loudness_normalization_type:type_name -> speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
-	6,  // 18: speechkit.tts.v3.SynthesisOptions.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	0,  // 19: speechkit.tts.v3.SynthesisOptions.loudness_normalization_type:type_name -> speechkit.tts.v3.LoudnessNormalizationType
-	19, // 20: speechkit.tts.v3.StreamSynthesisRequest.options:type_name -> speechkit.tts.v3.SynthesisOptions
-	20, // 21: speechkit.tts.v3.StreamSynthesisRequest.synthesis_input:type_name -> speechkit.tts.v3.SynthesisInput
-	21, // 22: speechkit.tts.v3.StreamSynthesisRequest.force_synthesis:type_name -> speechkit.tts.v3.ForceSynthesisEvent
-	13, // 23: speechkit.tts.v3.StreamSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
-	14, // 24: speechkit.tts.v3.StreamSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
-	25, // [25:25] is the sub-list for method output_type
-	25, // [25:25] is the sub-list for method input_type
-	25, // [25:25] is the sub-list for extension type_name
-	25, // [25:25] is the sub-list for extension extendee
-	0,  // [0:25] is the sub-list for field type_name
+	14, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
+	15, // 6: speechkit.tts.v3.UtteranceSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
+	11, // 7: speechkit.tts.v3.UtteranceSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
+	5,  // 8: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
+	16, // 9: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	10, // 10: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
+	9,  // 11: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
+	3,  // 12: speechkit.tts.v3.DurationHint.policy:type_name -> speechkit.tts.v3.DurationHint.DurationHintPolicy
+	13, // 13: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
+	17, // 14: speechkit.tts.v3.Hints.duration:type_name -> speechkit.tts.v3.DurationHint
+	16, // 15: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	18, // 16: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
+	6,  // 17: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	4,  // 18: speechkit.tts.v3.UtteranceSynthesisRequest.loudness_normalization_type:type_name -> speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
+	6,  // 19: speechkit.tts.v3.SynthesisOptions.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	0,  // 20: speechkit.tts.v3.SynthesisOptions.loudness_normalization_type:type_name -> speechkit.tts.v3.LoudnessNormalizationType
+	20, // 21: speechkit.tts.v3.StreamSynthesisRequest.options:type_name -> speechkit.tts.v3.SynthesisOptions
+	21, // 22: speechkit.tts.v3.StreamSynthesisRequest.synthesis_input:type_name -> speechkit.tts.v3.SynthesisInput
+	22, // 23: speechkit.tts.v3.StreamSynthesisRequest.force_synthesis:type_name -> speechkit.tts.v3.ForceSynthesisEvent
+	14, // 24: speechkit.tts.v3.StreamSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
+	15, // 25: speechkit.tts.v3.StreamSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
+	11, // 26: speechkit.tts.v3.StreamSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_tts_v3_tts_proto_init() }
@@ -1871,7 +1960,7 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_init() {
 		(*AudioFormatOptions_RawAudio)(nil),
 		(*AudioFormatOptions_ContainerAudio)(nil),
 	}
-	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13].OneofWrappers = []any{
 		(*Hints_Voice)(nil),
 		(*Hints_AudioTemplate)(nil),
 		(*Hints_Speed)(nil),
@@ -1880,11 +1969,11 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_init() {
 		(*Hints_PitchShift)(nil),
 		(*Hints_Duration)(nil),
 	}
-	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[13].OneofWrappers = []any{
+	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[14].OneofWrappers = []any{
 		(*UtteranceSynthesisRequest_Text)(nil),
 		(*UtteranceSynthesisRequest_TextTemplate)(nil),
 	}
-	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[17].OneofWrappers = []any{
+	file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes[18].OneofWrappers = []any{
 		(*StreamSynthesisRequest_Options)(nil),
 		(*StreamSynthesisRequest_SynthesisInput)(nil),
 		(*StreamSynthesisRequest_ForceSynthesis)(nil),
@@ -1895,7 +1984,7 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc), len(file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   19,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

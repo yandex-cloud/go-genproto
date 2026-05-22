@@ -28,7 +28,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // A set of methods for managing MySQL resource presets.
-//
 // See [the documentation](/docs/managed-mysql/concepts/instance-types) for details.
 type ResourcePresetServiceClient interface {
 	// Retrieves information about a resource preset.
@@ -70,7 +69,6 @@ func (c *resourcePresetServiceClient) List(ctx context.Context, in *ListResource
 // for forward compatibility.
 //
 // A set of methods for managing MySQL resource presets.
-//
 // See [the documentation](/docs/managed-mysql/concepts/instance-types) for details.
 type ResourcePresetServiceServer interface {
 	// Retrieves information about a resource preset.

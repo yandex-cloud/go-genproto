@@ -29,11 +29,9 @@ const (
 type GetDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster that the database belongs to.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to return information about.
-	//
 	// To get this name, make a [DatabaseService.List] request.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,15 +85,12 @@ func (x *GetDatabaseRequest) GetDatabaseName() string {
 type ListDatabasesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list databases in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListDatabasesResponse.next_page_token] that can be used to get the next page of results in the subsequent [DatabaseService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListDatabasesResponse.next_page_token] returned by the previous [DatabaseService.List] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -158,9 +153,7 @@ type ListDatabasesResponse struct {
 	// List of databases.
 	Databases []*Database `protobuf:"bytes,1,rep,name=databases,proto3" json:"databases,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListDatabasesRequest.page_size], use the [next_page_token] as the value for the [ListDatabasesRequest.page_token] in the subsequent [DatabaseService.List] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [DatabaseService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -214,7 +207,6 @@ func (x *ListDatabasesResponse) GetNextPageToken() string {
 type CreateDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to create the database in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the database.
@@ -324,17 +316,14 @@ func (x *CreateDatabaseMetadata) GetDatabaseName() string {
 type UpdateDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update a database in.
-	//
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to update.
-	//
 	// To get the name of the database use a [DatabaseService.List] request.
 	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	// Field mask that specifies which fields of the Database resource should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Deletion Protection inhibits deletion of the database
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,4,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -456,11 +445,9 @@ func (x *UpdateDatabaseMetadata) GetDatabaseName() string {
 type DeleteDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete the database from.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to delete.
-	//
 	// To get this name, make a [DatabaseService.List] request.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -569,7 +556,7 @@ var File_yandex_cloud_mdb_mysql_v1_database_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_mdb_mysql_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/mdb/mysql/v1/database_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a(yandex/cloud/mdb/mysql/v1/database.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"\x86\x01\n" +
+	"0yandex/cloud/mdb/mysql/v1/database_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/mdb/mysql/v1/database.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +

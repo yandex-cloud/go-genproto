@@ -492,8 +492,8 @@ const file_yandex_cloud_ai_batch_inference_v1_batch_inference_task_proto_rawDesc
 	"\n" +
 	"\x06FAILED\x10\x05\x12\f\n" +
 	"\bCANCELED\x10\x06B\t\n" +
-	"\arequestBu\n" +
-	"&yandex.cloud.api.ai.batch_inference.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
+	"\arequestB{\n" +
+	"&yandex.cloud.api.ai.batch_inference.v1B\x04FBITZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
 
 var (
 	file_yandex_cloud_ai_batch_inference_v1_batch_inference_task_proto_rawDescOnce sync.Once

@@ -170,6 +170,18 @@ func (m *FinishMultipartUploadDraftResponse) SetDatasetId(v string) {
 	m.DatasetId = v
 }
 
+func (m *GetDownloadUrlsRequest) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDownloadUrlsResponse) SetDatasetId(v string) {
+	m.DatasetId = v
+}
+
+func (m *GetDownloadUrlsResponse) SetDownloadUrls(v []*DatasetFileDownloadUrl) {
+	m.DownloadUrls = v
+}
+
 func (m *ListDatasetsRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -244,18 +256,6 @@ func (m *GetDatasetPreviewResponse) SetDatasetId(v string) {
 
 func (m *GetDatasetPreviewResponse) SetPreviewLines(v []string) {
 	m.PreviewLines = v
-}
-
-func (m *GetDownloadUrlsRequest) SetDatasetId(v string) {
-	m.DatasetId = v
-}
-
-func (m *GetDownloadUrlsResponse) SetDatasetId(v string) {
-	m.DatasetId = v
-}
-
-func (m *GetDownloadUrlsResponse) SetDownloadUrls(v []*DatasetFileDownloadUrl) {
-	m.DownloadUrls = v
 }
 
 func (m *ListOperationsIdsRequest) SetDatasetId(v []string) {

@@ -197,7 +197,7 @@ var File_yandex_cloud_mdb_mysql_v1alpha_backup_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_mysql_v1alpha_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/mysql/v1alpha/backup_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a+yandex/cloud/mdb/mysql/v1alpha/backup.proto\"5\n" +
+	"3yandex/cloud/mdb/mysql/v1alpha/backup_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a+yandex/cloud/mdb/mysql/v1alpha/backup.proto\x1a\x1dyandex/cloud/validation.proto\"5\n" +
 	"\x10GetBackupRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\x92\x01\n" +
 	"\x12ListBackupsRequest\x12)\n" +
@@ -208,10 +208,10 @@ const file_yandex_cloud_mdb_mysql_v1alpha_backup_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
 	"\x13ListBackupsResponse\x12@\n" +
 	"\abackups\x18\x01 \x03(\v2&.yandex.cloud.mdb.mysql.v1alpha.BackupR\abackups\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\rnextPageToken2\xbf\x02\n" +
-	"\rBackupService\x12\x93\x01\n" +
-	"\x03Get\x120.yandex.cloud.mdb.mysql.v1alpha.GetBackupRequest\x1a&.yandex.cloud.mdb.mysql.v1alpha.Backup\"2\x82\xd3\xe4\x93\x02,\x12*/managed-mysql/v1alpha/backups/{backup_id}\x12\x97\x01\n" +
-	"\x04List\x122.yandex.cloud.mdb.mysql.v1alpha.ListBackupsRequest\x1a3.yandex.cloud.mdb.mysql.v1alpha.ListBackupsResponse\"&\x82\xd3\xe4\x93\x02 \x12\x1e/managed-mysql/v1alpha/backupsBn\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\rnextPageToken2\xb7\x02\n" +
+	"\rBackupService\x12\x8f\x01\n" +
+	"\x03Get\x120.yandex.cloud.mdb.mysql.v1alpha.GetBackupRequest\x1a&.yandex.cloud.mdb.mysql.v1alpha.Backup\".\x82\xd3\xe4\x93\x02(\x12&/mdb/mysql/v1alpha/backups/{backup_id}\x12\x93\x01\n" +
+	"\x04List\x122.yandex.cloud.mdb.mysql.v1alpha.ListBackupsRequest\x1a3.yandex.cloud.mdb.mysql.v1alpha.ListBackupsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/mdb/mysql/v1alpha/backupsBn\n" +
 	"\"yandex.cloud.api.mdb.mysql.v1alphaZHgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha;mysqlb\x06proto3"
 
 var (

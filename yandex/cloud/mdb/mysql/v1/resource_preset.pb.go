@@ -23,7 +23,6 @@ const (
 
 // An object that represents MySQL resource preset.
 // A resource preset defines hardware configuration for cluster hosts.
-//
 // See [the documentation](/docs/managed-mysql/concepts/instance-types) for details.
 type ResourcePreset struct {
 	state protoimpl.MessageState `protogen:"open.v1"`

@@ -194,11 +194,11 @@ var File_yandex_cloud_mdb_clickhouse_v1_database_proto protoreflect.FileDescript
 
 const file_yandex_cloud_mdb_clickhouse_v1_database_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/mdb/clickhouse/v1/database.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1dyandex/cloud/validation.proto\"\x85\x01\n" +
-	"\bDatabase\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"-yandex/cloud/mdb/clickhouse/v1/database.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1dyandex/cloud/validation.proto\"\x91\x01\n" +
+	"\bDatabase\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12F\n" +
+	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12F\n" +
 	"\x06engine\x18\x03 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.DatabaseEngineR\x06engine\"\x8a\x01\n" +
 	"\fDatabaseSpec\x122\n" +
 	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12F\n" +

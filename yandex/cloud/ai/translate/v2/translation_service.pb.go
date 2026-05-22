@@ -78,7 +78,6 @@ type TranslateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The text language to translate from.
 	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
-	//
 	// Required for translating with [glossary](/docs/translate/concepts/glossary).
 	SourceLanguageCode string `protobuf:"bytes,1,opt,name=source_language_code,json=sourceLanguageCode,proto3" json:"source_language_code,omitempty"`
 	// The target language to translate the text.
@@ -259,7 +258,6 @@ func (*TranslateGlossaryConfig_GlossaryData) isTranslateGlossaryConfig_GlossaryS
 type GlossaryData struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Array of text pairs.
-	//
 	// The maximum total length of all source texts is 10000 characters.
 	// The maximum total length of all translated texts is 10000 characters.
 	GlossaryPairs []*GlossaryPair `protobuf:"bytes,1,rep,name=glossary_pairs,json=glossaryPairs,proto3" json:"glossary_pairs,omitempty"`
@@ -418,7 +416,6 @@ type DetectLanguageRequest struct {
 	Text string `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
 	// List of the most likely languages. These languages will be given preference when detecting the text language.
 	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
-	//
 	// To get the list of supported languages, use a [TranslationService.ListLanguages] request.
 	LanguageCodeHints []string `protobuf:"bytes,2,rep,name=language_code_hints,json=languageCodeHints,proto3" json:"language_code_hints,omitempty"`
 	// ID of the folder to which you have access.
@@ -483,7 +480,6 @@ func (x *DetectLanguageRequest) GetFolderId() string {
 type DetectLanguageResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Most languages are specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, “ ru “), but the field are not limited to it.
-	//
 	// To get the language name, use a [TranslationService.ListLanguages] request.
 	LanguageCode  string `protobuf:"bytes,1,opt,name=language_code,json=languageCode,proto3" json:"language_code,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -623,7 +619,7 @@ var File_yandex_cloud_ai_translate_v2_translation_service_proto protoreflect.Fil
 
 const file_yandex_cloud_ai_translate_v2_translation_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/ai/translate/v2/translation_service.proto\x12\x1cyandex.cloud.ai.translate.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a.yandex/cloud/ai/translate/v2/translation.proto\"\xf6\x03\n" +
+	"6yandex/cloud/ai/translate/v2/translation_service.proto\x12\x1cyandex.cloud.ai.translate.v2\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/ai/translate/v2/translation.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x03\n" +
 	"\x10TranslateRequest\x129\n" +
 	"\x14source_language_code\x18\x01 \x01(\tB\a\x8a\xc81\x03<=3R\x12sourceLanguageCode\x12=\n" +
 	"\x14target_language_code\x18\x02 \x01(\tB\v\xe8\xc71\x01\x8a\xc81\x03<=3R\x12targetLanguageCode\x12M\n" +

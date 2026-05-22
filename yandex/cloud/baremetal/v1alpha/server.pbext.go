@@ -6,6 +6,24 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+type Server_Configuration = isServer_Configuration
+
+func (m *Server) SetConfiguration(v Server_Configuration) {
+	m.Configuration = v
+}
+
+func (m *Server) SetCustomConfiguration(v *Configuration) {
+	m.Configuration = &Server_CustomConfiguration{
+		CustomConfiguration: v,
+	}
+}
+
+func (m *Server) SetStockConfigurationId(v string) {
+	m.Configuration = &Server_StockConfigurationId{
+		StockConfigurationId: v,
+	}
+}
+
 func (m *Server) SetId(v string) {
 	m.Id = v
 }

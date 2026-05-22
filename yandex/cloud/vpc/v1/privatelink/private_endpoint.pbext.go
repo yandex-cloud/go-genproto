@@ -58,6 +58,16 @@ func (m *PrivateEndpoint) SetObjectStorage(v *PrivateEndpoint_ObjectStorage) {
 	}
 }
 
+func (m *PrivateEndpoint) SetServiceName(v string) {
+	m.Service = &PrivateEndpoint_ServiceName{
+		ServiceName: v,
+	}
+}
+
+func (m *PrivateEndpoint) SetDnsRecords(v []*PrivateEndpoint_DnsRecord) {
+	m.DnsRecords = v
+}
+
 func (m *PrivateEndpoint_DnsOptions) SetPrivateDnsRecordsEnabled(v bool) {
 	m.PrivateDnsRecordsEnabled = v
 }
@@ -72,4 +82,8 @@ func (m *PrivateEndpoint_EndpointAddress) SetAddress(v string) {
 
 func (m *PrivateEndpoint_EndpointAddress) SetAddressId(v string) {
 	m.AddressId = v
+}
+
+func (m *PrivateEndpoint_DnsRecord) SetName(v string) {
+	m.Name = v
 }

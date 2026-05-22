@@ -36,7 +36,7 @@ const (
 type ResourceRulesServiceClient interface {
 	// List all rules for specified resource.
 	List(ctx context.Context, in *ListResourceRulesRequest, opts ...grpc.CallOption) (*ListResourceRulesResponse, error)
-	// Create new resource rule with specified unique name and rule patter.
+	// Create new resource rule with specified unique name and rule pattern.
 	Create(ctx context.Context, in *CreateResourceRuleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Get specified by id resource rule.
 	Get(ctx context.Context, in *GetResourceRuleRequest, opts ...grpc.CallOption) (*Rule, error)
@@ -113,7 +113,7 @@ func (c *resourceRulesServiceClient) Delete(ctx context.Context, in *DeleteResou
 type ResourceRulesServiceServer interface {
 	// List all rules for specified resource.
 	List(context.Context, *ListResourceRulesRequest) (*ListResourceRulesResponse, error)
-	// Create new resource rule with specified unique name and rule patter.
+	// Create new resource rule with specified unique name and rule pattern.
 	Create(context.Context, *CreateResourceRuleRequest) (*operation.Operation, error)
 	// Get specified by id resource rule.
 	Get(context.Context, *GetResourceRuleRequest) (*Rule, error)

@@ -30,11 +30,9 @@ const (
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster the user belongs to.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to return information about.
-	//
 	// To get this name, make a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -88,15 +86,12 @@ func (x *GetUserRequest) GetUserName() string {
 type ListUsersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list the users in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListUsersResponse.next_page_token] that can be used to get the next page of results in the subsequent [UserService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListUsersResponse.next_page_token] returned by the previous [UserService.List] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -159,9 +154,7 @@ type ListUsersResponse struct {
 	// List of users.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value for the [ListUsersRequest.page_token] in the subsequent [UserService.List] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [UserService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -215,7 +208,6 @@ func (x *ListUsersResponse) GetNextPageToken() string {
 type CreateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to create the user in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the user.
@@ -325,11 +317,9 @@ func (x *CreateUserMetadata) GetUserName() string {
 type UpdateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update the user in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to update.
-	//
 	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	// Field mask that specifies which settings of the user should be updated.
@@ -347,7 +337,6 @@ type UpdateUserRequest struct {
 	// Generate password using Connection Manager.
 	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
 	// Deletion Protection inhibits deletion of the user
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,10,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -511,11 +500,9 @@ func (x *UpdateUserMetadata) GetUserName() string {
 type DeleteUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete the user from.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to delete.
-	//
 	// To get this name, make a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -623,11 +610,9 @@ func (x *DeleteUserMetadata) GetUserName() string {
 type GrantUserPermissionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to grant permission to the user in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to grant permission to.
-	//
 	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	// Permission that should be granted to the specified user.
@@ -744,11 +729,9 @@ func (x *GrantUserPermissionMetadata) GetUserName() string {
 type RevokeUserPermissionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to revoke permission from the user in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to revoke permission from.
-	//
 	// To get this name, make a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	// Permission that should be revoked from the user.
@@ -866,7 +849,7 @@ var File_yandex_cloud_mdb_mysql_v1_user_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"z\n" +
+	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"z\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -1029,8 +1012,8 @@ func file_yandex_cloud_mdb_mysql_v1_user_service_proto_init() {
 	if File_yandex_cloud_mdb_mysql_v1_user_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_mdb_mysql_v1_user_proto_init()
 	file_yandex_cloud_mdb_mysql_v1_deletion_protection_proto_init()
+	file_yandex_cloud_mdb_mysql_v1_user_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

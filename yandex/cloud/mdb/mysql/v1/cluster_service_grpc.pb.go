@@ -69,11 +69,9 @@ type ClusterServiceClient interface {
 	// Moves a cluster to a folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a backup for a cluster.
-	//
 	// To get information about a backup, make a [BackupService.Get] request.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Restores a backup to a new cluster.
-	//
 	// See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
@@ -81,17 +79,14 @@ type ClusterServiceClient interface {
 	// Starts a manual failover for a cluster.
 	StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for a cluster.
-	//
 	// Alternatively, logs can be streamed using [StreamLogs].
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Retrieves a log stream for a cluster.
-	//
 	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves a list of operations for a cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of backups for a cluster.
-	//
 	// To list all backups in a folder, make a [BackupService.List] request.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for a cluster.
@@ -380,11 +375,9 @@ type ClusterServiceServer interface {
 	// Moves a cluster to a folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
 	// Creates a backup for a cluster.
-	//
 	// To get information about a backup, make a [BackupService.Get] request.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Restores a backup to a new cluster.
-	//
 	// See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
@@ -392,17 +385,14 @@ type ClusterServiceServer interface {
 	// Starts a manual failover for a cluster.
 	StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error)
 	// Retrieves logs for a cluster.
-	//
 	// Alternatively, logs can be streamed using [StreamLogs].
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Retrieves a log stream for a cluster.
-	//
 	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves a list of operations for a cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of backups for a cluster.
-	//
 	// To list all backups in a folder, make a [BackupService.List] request.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for a cluster.

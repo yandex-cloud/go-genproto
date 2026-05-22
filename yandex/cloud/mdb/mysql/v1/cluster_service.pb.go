@@ -83,7 +83,7 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{15, 0}
+	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{13, 0}
 }
 
 type ListClusterLogsRequest_ServiceType int32
@@ -207,7 +207,6 @@ func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to return information about.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -254,19 +253,15 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list clusters in.
-	//
 	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListClustersResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token] returned by the previous [ClusterService.List] request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that selects clusters listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An `=` operator.
@@ -339,9 +334,7 @@ type ListClustersResponse struct {
 	// List of clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value for the [ListClustersRequest.page_token] in the subsequent [ClusterService.List] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ClusterService.List] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -395,7 +388,6 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create the cluster in.
-	//
 	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the cluster. The name must be unique within the folder.
@@ -613,7 +605,6 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Field mask that specifies which settings of the cluster should be updated.
@@ -621,7 +612,6 @@ type UpdateClusterRequest struct {
 	// New description of the cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// New set of custom labels for the cluster as `key:value` pairs.
-	//
 	// This set will completely replace the current one.
 	// To add a label, request the current label set with the [ClusterService.Get] request, then send an [ClusterService.Update] request with the new label added to the current set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -789,7 +779,6 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -881,7 +870,6 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 type BackupClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to back up.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -982,7 +970,6 @@ func (x *BackupClusterMetadata) GetBackupId() string {
 type RestoreClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backup to restore from.
-	//
 	// To get this ID, make a [BackupService.List] request (lists all backups in a folder) or a [ClusterService.ListBackups] request (lists all backups for an existing cluster).
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Timestamp of the moment to which the MySQL cluster should be restored.
@@ -1206,114 +1193,9 @@ func (x *RestoreClusterMetadata) GetBackupId() string {
 	return ""
 }
 
-type StartClusterFailoverRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the cluster to start failover for.
-	//
-	// To get this ID, make a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Host name to switch master role to.
-	// If not provided, then the master role is switched to the most up-to-date replica host.
-	//
-	// To get this name, make a [ClusterService.ListHosts] request.
-	HostName      string `protobuf:"bytes,2,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartClusterFailoverRequest) Reset() {
-	*x = StartClusterFailoverRequest{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartClusterFailoverRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartClusterFailoverRequest) ProtoMessage() {}
-
-func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartClusterFailoverRequest.ProtoReflect.Descriptor instead.
-func (*StartClusterFailoverRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *StartClusterFailoverRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *StartClusterFailoverRequest) GetHostName() string {
-	if x != nil {
-		return x.HostName
-	}
-	return ""
-}
-
-type StartClusterFailoverMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the cluster that is being failovered.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StartClusterFailoverMetadata) Reset() {
-	*x = StartClusterFailoverMetadata{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartClusterFailoverMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartClusterFailoverMetadata) ProtoMessage() {}
-
-func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StartClusterFailoverMetadata.ProtoReflect.Descriptor instead.
-func (*StartClusterFailoverMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *StartClusterFailoverMetadata) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
 type RescheduleMaintenanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to reschedule the maintenance operation for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The type of reschedule request.
@@ -1328,7 +1210,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1340,7 +1222,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1353,7 +1235,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1389,7 +1271,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1401,7 +1283,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1414,7 +1296,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -1429,6 +1311,108 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 		return x.DelayedUntil
 	}
 	return nil
+}
+
+type StartClusterFailoverRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cluster to start failover for.
+	// To get this ID, make a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Host name to switch master role to.
+	// If not provided, then the master role is switched to the most up-to-date replica host.
+	// To get this name, make a [ClusterService.ListHosts] request.
+	HostName      string `protobuf:"bytes,2,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartClusterFailoverRequest) Reset() {
+	*x = StartClusterFailoverRequest{}
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartClusterFailoverRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartClusterFailoverRequest) ProtoMessage() {}
+
+func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartClusterFailoverRequest.ProtoReflect.Descriptor instead.
+func (*StartClusterFailoverRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *StartClusterFailoverRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *StartClusterFailoverRequest) GetHostName() string {
+	if x != nil {
+		return x.HostName
+	}
+	return ""
+}
+
+type StartClusterFailoverMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cluster that is being failovered.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartClusterFailoverMetadata) Reset() {
+	*x = StartClusterFailoverMetadata{}
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartClusterFailoverMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartClusterFailoverMetadata) ProtoMessage() {}
+
+func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartClusterFailoverMetadata.ProtoReflect.Descriptor instead.
+func (*StartClusterFailoverMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *StartClusterFailoverMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
 }
 
 // A single log record.
@@ -1489,7 +1473,6 @@ func (x *LogRecord) GetMessage() map[string]string {
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to request logs for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
@@ -1504,11 +1487,9 @@ type ListClusterLogsRequest struct {
 	// The logs in the response will be within [from_time] to [to_time] range.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListClusterLogsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListLogs] requests.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterLogsResponse.next_page_token] returned by the previous [ClusterService.ListLogs] request.
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Option that controls the behavior of result pagination.
@@ -1609,11 +1590,8 @@ type ListClusterLogsResponse struct {
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value for the [ListClusterLogsRequest.page_token] in the subsequent [ClusterService.ListLogs] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ClusterService.ListLogs] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
-	//
 	// This value is interchangeable with [StreamLogRecord.next_record_token] from [ClusterService.StreamLogs] method.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1671,7 +1649,6 @@ type StreamLogRecord struct {
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// The token that can be used to continue streaming logs starting from the exact same record.
 	// To continue streaming, specify value of [next_record_token] as the [StreamClusterLogsRequest.record_token] value in the next [ClusterService.StreamLogs] request.
-	//
 	// This value is interchangeable with [ListClusterLogsResponse.next_page_token] from [ClusterService.ListLogs] method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1725,7 +1702,6 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to stream logs for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
@@ -1737,15 +1713,12 @@ type StreamClusterLogsRequest struct {
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
 	// If this field is not set, all existing log records beginning from [from_time] will be returned first, and then the new records will be returned as they appear.
-	//
 	// In essence it has `tail -f` command semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// Record token that can be used to control logs streaming.
-	//
 	// Set [record_token] to the [StreamLogRecord.next_record_token], returned by the previous [ClusterService.StreamLogs] request to start streaming from the next log record.
 	RecordToken string `protobuf:"bytes,6,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 	// A filter expression that selects clusters logs listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.hostname] field.
 	// 2. An `=` operator.
@@ -1838,15 +1811,12 @@ func (x *StreamClusterLogsRequest) GetFilter() string {
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list operations for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListOperations] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token] returned by the previous [ClusterService.ListOperations] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1909,9 +1879,7 @@ type ListClusterOperationsResponse struct {
 	// List of operations in the cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] in the subsequent [ClusterService.ListOperations] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ClusterService.ListOperations] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1965,15 +1933,12 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 type ListClusterBackupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list backups for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListClusterBackupsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListBackups] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token] returned by the previous [ClusterService.ListBackups] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2036,9 +2001,7 @@ type ListClusterBackupsResponse struct {
 	// List of the cluster backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value for the [ListClusterBackupsRequest.page_token] in the subsequent [ClusterService.ListBackups] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ClusterService.ListBackups] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2092,15 +2055,12 @@ func (x *ListClusterBackupsResponse) GetNextPageToken() string {
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to list hosts for.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ClusterService.ListHosts] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token] returned by the previous [ClusterService.ListHosts] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2163,9 +2123,7 @@ type ListClusterHostsResponse struct {
 	// List of hosts in the cluster.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value for the [ListClusterHostsRequest.page_token] in the subsequent [ClusterService.ListHosts] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ClusterService.ListHosts] requests should use the [next_page_token] value returned by the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2219,7 +2177,6 @@ func (x *ListClusterHostsResponse) GetNextPageToken() string {
 type AddClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to add hosts to.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the newly added hosts.
@@ -2329,11 +2286,9 @@ func (x *AddClusterHostsMetadata) GetHostNames() []string {
 type DeleteClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete hosts from.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts to delete.
-	//
 	// To get these names, make a [ClusterService.ListHosts] request.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2441,7 +2396,6 @@ func (x *DeleteClusterHostsMetadata) GetHostNames() []string {
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to start.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2533,7 +2487,6 @@ func (x *StartClusterMetadata) GetClusterId() string {
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to stop.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2625,11 +2578,9 @@ func (x *StopClusterMetadata) GetClusterId() string {
 type MoveClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to move.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
-	//
 	// To get this ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -2947,18 +2898,14 @@ func (x *UpdateHostSpec) GetPriority() int64 {
 type HostSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the availability zone where the host resides.
-	//
 	// To get a list of available zones, make the [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the subnet to assign to the host.
-	//
 	// This subnet should be a part of the cluster network (the network ID is specified in the [ClusterService.CreateClusterRequest.network_id]).
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Option that enables public IP address for the host so that the host can be accessed from the internet.
-	//
 	// After a host has been created, this setting cannot be changed.
 	// To remove an assigned public IP address, or to assign a public IP address to a host without one, recreate the host with the appropriate [assign_public_ip] value set.
-	//
 	// Possible values:
 	// * `false` - don't assign a public IP address to the host.
 	// * `true` - assign a public IP address to the host.
@@ -3048,7 +2995,6 @@ func (x *HostSpec) GetPriority() int64 {
 type ConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Version of MySQL used in the cluster.
-	//
 	// Possible values: `5.7`, `8.0`, `8.4`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"` // No formal validation, a list of supported versions should suffice.
 	// Cluster-wide MySQL configuration.
@@ -3064,7 +3010,6 @@ type ConfigSpec struct {
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy for external services.
-	//
 	// If the specific services need to access the cluster, then set the necessary values in this policy.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
 	// Configuration of the performance diagnostics service.
@@ -3322,14 +3267,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"r\n" +
-	"\x1bStartClusterFailoverRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12&\n" +
-	"\thost_name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=253R\bhostName\"=\n" +
-	"\x1cStartClusterFailoverMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xf3\x02\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xf3\x02\n" +
 	"\x1cRescheduleMaintenanceRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12u\n" +
@@ -3343,7 +3281,14 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12?\n" +
-	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xce\x01\n" +
+	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"r\n" +
+	"\x1bStartClusterFailoverRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12&\n" +
+	"\thost_name\x18\x02 \x01(\tB\t\x8a\xc81\x05<=253R\bhostName\"=\n" +
+	"\x1cStartClusterFailoverMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xce\x01\n" +
 	"\tLogRecord\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12K\n" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.mysql.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
@@ -3574,10 +3519,10 @@ var file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_goTypes = []any{
 	(*BackupClusterMetadata)(nil),                    // 13: yandex.cloud.mdb.mysql.v1.BackupClusterMetadata
 	(*RestoreClusterRequest)(nil),                    // 14: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest
 	(*RestoreClusterMetadata)(nil),                   // 15: yandex.cloud.mdb.mysql.v1.RestoreClusterMetadata
-	(*StartClusterFailoverRequest)(nil),              // 16: yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
-	(*StartClusterFailoverMetadata)(nil),             // 17: yandex.cloud.mdb.mysql.v1.StartClusterFailoverMetadata
-	(*RescheduleMaintenanceRequest)(nil),             // 18: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),            // 19: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceMetadata
+	(*RescheduleMaintenanceRequest)(nil),             // 16: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),            // 17: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceMetadata
+	(*StartClusterFailoverRequest)(nil),              // 18: yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
+	(*StartClusterFailoverMetadata)(nil),             // 19: yandex.cloud.mdb.mysql.v1.StartClusterFailoverMetadata
 	(*LogRecord)(nil),                                // 20: yandex.cloud.mdb.mysql.v1.LogRecord
 	(*ListClusterLogsRequest)(nil),                   // 21: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest
 	(*ListClusterLogsResponse)(nil),                  // 22: yandex.cloud.mdb.mysql.v1.ListClusterLogsResponse
@@ -3692,8 +3637,8 @@ var file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_depIdxs = []int32{
 	39, // 55: yandex.cloud.mdb.mysql.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.mysql.v1.MoveClusterRequest
 	12, // 56: yandex.cloud.mdb.mysql.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.mysql.v1.BackupClusterRequest
 	14, // 57: yandex.cloud.mdb.mysql.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.mysql.v1.RestoreClusterRequest
-	18, // 58: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
-	16, // 59: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
+	16, // 58: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
+	18, // 59: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
 	21, // 60: yandex.cloud.mdb.mysql.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest
 	24, // 61: yandex.cloud.mdb.mysql.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest
 	25, // 62: yandex.cloud.mdb.mysql.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterOperationsRequest

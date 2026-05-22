@@ -34,7 +34,6 @@ const (
 // NOTE: these methods are available only if database management through SQL is disabled.
 type DatabaseServiceClient interface {
 	// Returns the specified ClickHouse Database resource.
-	//
 	// To get the list of available ClickHouse Database resources, make a [List] request.
 	Get(ctx context.Context, in *GetDatabaseRequest, opts ...grpc.CallOption) (*Database, error)
 	// Retrieves the list of ClickHouse Database resources in the specified cluster.
@@ -101,7 +100,6 @@ func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRe
 // NOTE: these methods are available only if database management through SQL is disabled.
 type DatabaseServiceServer interface {
 	// Returns the specified ClickHouse Database resource.
-	//
 	// To get the list of available ClickHouse Database resources, make a [List] request.
 	Get(context.Context, *GetDatabaseRequest) (*Database, error)
 	// Retrieves the list of ClickHouse Database resources in the specified cluster.

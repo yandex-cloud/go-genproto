@@ -731,12 +731,12 @@ type ClusterConfig struct {
 	EmbeddedKeeper *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=embedded_keeper,json=embeddedKeeper,proto3" json:"embedded_keeper,omitempty"`
 	// Retain period of automatically created backup in days
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
-	// Full version
-	FullVersion string `protobuf:"bytes,11,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	// Configuration performance diagnostics
 	PerformanceDiagnostics *PerformanceDiagnostics `protobuf:"bytes,12,opt,name=performance_diagnostics,json=performanceDiagnostics,proto3" json:"performance_diagnostics,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Full version
+	FullVersion   string `protobuf:"bytes,11,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ClusterConfig) Reset() {
@@ -839,18 +839,18 @@ func (x *ClusterConfig) GetBackupRetainPeriodDays() *wrapperspb.Int64Value {
 	return nil
 }
 
-func (x *ClusterConfig) GetFullVersion() string {
-	if x != nil {
-		return x.FullVersion
-	}
-	return ""
-}
-
 func (x *ClusterConfig) GetPerformanceDiagnostics() *PerformanceDiagnostics {
 	if x != nil {
 		return x.PerformanceDiagnostics
 	}
 	return nil
+}
+
+func (x *ClusterConfig) GetFullVersion() string {
+	if x != nil {
+		return x.FullVersion
+	}
+	return ""
 }
 
 type Shard struct {
@@ -1081,7 +1081,6 @@ type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the ClickHouse host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
-	//
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the ClickHouse host. The ID is assigned by MDB at creation time.
@@ -1332,11 +1331,9 @@ type Access struct {
 	// Allow to export data from the cluster to DataLens.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
 	// Allow SQL queries to the cluster databases from the management console.
-	//
 	// See [SQL queries in the management console](/docs/managed-clickhouse/operations/web-sql-query) for more details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
 	// Allow to import data from Yandex Metrica and AppMetrica to the cluster.
-	//
 	// See [AppMetrica documentation](https://appmetrica.yandex.com/docs/cloud/index.html) for more details.
 	Metrika bool `protobuf:"varint,3,opt,name=metrika,proto3" json:"metrika,omitempty"`
 	// Allow access to cluster for Serverless.
@@ -1739,6 +1736,7 @@ type ShardConfig_Clickhouse struct {
 	// Computational resources for a shard.
 	Resources *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Relative weight of a shard considered when writing data to the cluster.
+	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/operations/table_engines/distributed/).
 	Weight *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=weight,proto3" json:"weight,omitempty"`
 	// Disk size autoscaling settings.
@@ -1809,10 +1807,9 @@ var File_yandex_cloud_mdb_clickhouse_v1_cluster_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/clickhouse/v1/cluster.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1egoogle/protobuf/duration.proto\x1a6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x1a0yandex/cloud/mdb/clickhouse/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xfa\n" +
-	"\n" +
-	"\aCluster\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	",yandex/cloud/mdb/clickhouse/v1/cluster.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x1a0yandex/cloud/mdb/clickhouse/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\x80\v\n" +
+	"\aCluster\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
@@ -1876,9 +1873,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x13sql_user_management\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x11sqlUserManagement\x12C\n" +
 	"\x0fembedded_keeper\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0eembeddedKeeper\x12V\n" +
 	"\x19backup_retain_period_days\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12!\n" +
-	"\ffull_version\x18\v \x01(\tR\vfullVersion\x12o\n" +
-	"\x17performance_diagnostics\x18\f \x01(\v26.yandex.cloud.mdb.clickhouse.v1.PerformanceDiagnosticsR\x16performanceDiagnostics\x1a\x92\x02\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12o\n" +
+	"\x17performance_diagnostics\x18\f \x01(\v26.yandex.cloud.mdb.clickhouse.v1.PerformanceDiagnosticsR\x16performanceDiagnostics\x12!\n" +
+	"\ffull_version\x18\v \x01(\tR\vfullVersion\x1a\x92\x02\n" +
 	"\n" +
 	"Clickhouse\x12R\n" +
 	"\x06config\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSetR\x06config\x12G\n" +
@@ -1911,11 +1908,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_proto_rawDesc = "" +
 	"\x06config\x18\x01 \x01(\v2:.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSetR\x06config\x12G\n" +
 	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x123\n" +
 	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\x12g\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xea\x04\n" +
-	"\x04Host\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xf6\x04\n" +
+	"\x04Host\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12\x17\n" +
+	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12\x17\n" +
 	"\azone_id\x18\x03 \x01(\tR\x06zoneId\x12=\n" +
 	"\x04type\x18\x04 \x01(\x0e2).yandex.cloud.mdb.clickhouse.v1.Host.TypeR\x04type\x12G\n" +
 	"\tresources\x18\x05 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x12C\n" +

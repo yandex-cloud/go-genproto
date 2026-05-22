@@ -34,7 +34,6 @@ const (
 // A set of methods for managing machine learning models.
 type MlModelServiceClient interface {
 	// Returns the specified machine learning model.
-	//
 	// To get the list of all available models, make a [List] request.
 	Get(ctx context.Context, in *GetMlModelRequest, opts ...grpc.CallOption) (*MlModel, error)
 	// Retrieves the list of machine learning models in the specified cluster.
@@ -112,7 +111,6 @@ func (c *mlModelServiceClient) Delete(ctx context.Context, in *DeleteMlModelRequ
 // A set of methods for managing machine learning models.
 type MlModelServiceServer interface {
 	// Returns the specified machine learning model.
-	//
 	// To get the list of all available models, make a [List] request.
 	Get(context.Context, *GetMlModelRequest) (*MlModel, error)
 	// Retrieves the list of machine learning models in the specified cluster.

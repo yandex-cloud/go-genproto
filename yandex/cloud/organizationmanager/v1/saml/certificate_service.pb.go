@@ -694,10 +694,10 @@ const file_yandex_cloud_organizationmanager_v1_saml_certificate_service_proto_ra
 	"\x8a\xc81\x06<=1000R\x06filter\"\x9d\x01\n" +
 	"\x18ListCertificatesResponse\x12Y\n" +
 	"\fcertificates\x18\x01 \x03(\v25.yandex.cloud.organizationmanager.v1.saml.CertificateR\fcertificates\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd8\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd9\x01\n" +
 	"\x18CreateCertificateRequest\x121\n" +
-	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x127\n" +
-	"\x04name\x18\x02 \x01(\tB#\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"\rfederation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffederationId\x128\n" +
+	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12#\n" +
 	"\x04data\x18\x04 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=32000R\x04data\"B\n" +
 	"\x19CreateCertificateMetadata\x12%\n" +

@@ -873,7 +873,7 @@ var File_yandex_cloud_ai_assistants_v1_runs_run_service_proto protoreflect.FileD
 
 const file_yandex_cloud_ai_assistants_v1_runs_run_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/ai/assistants/v1/runs/run_service.proto\x12\"yandex.cloud.ai.assistants.v1.runs\x1a#yandex/cloud/ai/common/common.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a,yandex/cloud/ai/assistants/v1/runs/run.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xff\x05\n" +
+	"4yandex/cloud/ai/assistants/v1/runs/run_service.proto\x12\"yandex.cloud.ai.assistants.v1.runs\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a,yandex/cloud/ai/assistants/v1/runs/run.proto\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a#yandex/cloud/ai/common/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xff\x05\n" +
 	"\x10CreateRunRequest\x12'\n" +
 	"\fassistant_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\vassistantId\x12!\n" +
 	"\tthread_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bthreadId\x12X\n" +
@@ -933,9 +933,9 @@ const file_yandex_cloud_ai_assistants_v1_runs_run_service_proto_rawDesc = "" +
 	"\x13SubmitToRunResponse2\x86\b\n" +
 	"\n" +
 	"RunService\x12\x87\x01\n" +
-	"\x06Create\x124.yandex.cloud.ai.assistants.v1.runs.CreateRunRequest\x1a'.yandex.cloud.ai.assistants.v1.runs.Run\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/assistants/v1/runs\x12\x95\x01\n" +
-	"\x06Listen\x124.yandex.cloud.ai.assistants.v1.runs.ListenRunRequest\x1a/.yandex.cloud.ai.assistants.v1.runs.StreamEvent\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/assistants/v1/runs/listen0\x01\x12s\n" +
-	"\x06Attach\x124.yandex.cloud.ai.assistants.v1.runs.AttachRunRequest\x1a/.yandex.cloud.ai.assistants.v1.runs.StreamEvent(\x010\x01\x12\x87\x01\n" +
+	"\x06Create\x124.yandex.cloud.ai.assistants.v1.runs.CreateRunRequest\x1a'.yandex.cloud.ai.assistants.v1.runs.Run\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/assistants/v1/runs\x12s\n" +
+	"\x06Attach\x124.yandex.cloud.ai.assistants.v1.runs.AttachRunRequest\x1a/.yandex.cloud.ai.assistants.v1.runs.StreamEvent(\x010\x01\x12\x95\x01\n" +
+	"\x06Listen\x124.yandex.cloud.ai.assistants.v1.runs.ListenRunRequest\x1a/.yandex.cloud.ai.assistants.v1.runs.StreamEvent\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/assistants/v1/runs/listen0\x01\x12\x87\x01\n" +
 	"\x03Get\x121.yandex.cloud.ai.assistants.v1.runs.GetRunRequest\x1a'.yandex.cloud.ai.assistants.v1.runs.Run\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/assistants/v1/runs/{run_id}\x12\xa2\x01\n" +
 	"\x0fGetLastByThread\x12=.yandex.cloud.ai.assistants.v1.runs.GetLastRunByThreadRequest\x1a'.yandex.cloud.ai.assistants.v1.runs.Run\"'\x82\xd3\xe4\x93\x02!\x12\x1f/assistants/v1/runs:getByThread\x12\x8e\x01\n" +
 	"\x04List\x123.yandex.cloud.ai.assistants.v1.runs.ListRunsRequest\x1a4.yandex.cloud.ai.assistants.v1.runs.ListRunsResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/assistants/v1/runs\x12\xa0\x01\n" +
@@ -1002,15 +1002,15 @@ var file_yandex_cloud_ai_assistants_v1_runs_run_service_proto_depIdxs = []int32{
 	24, // 15: yandex.cloud.ai.assistants.v1.runs.StreamEvent.tool_call_list:type_name -> yandex.cloud.ai.assistants.v1.ToolCallList
 	19, // 16: yandex.cloud.ai.assistants.v1.runs.SubmitToRunRequest.tool_result_list:type_name -> yandex.cloud.ai.assistants.v1.ToolResultList
 	1,  // 17: yandex.cloud.ai.assistants.v1.runs.RunService.Create:input_type -> yandex.cloud.ai.assistants.v1.runs.CreateRunRequest
-	2,  // 18: yandex.cloud.ai.assistants.v1.runs.RunService.Listen:input_type -> yandex.cloud.ai.assistants.v1.runs.ListenRunRequest
-	3,  // 19: yandex.cloud.ai.assistants.v1.runs.RunService.Attach:input_type -> yandex.cloud.ai.assistants.v1.runs.AttachRunRequest
+	3,  // 18: yandex.cloud.ai.assistants.v1.runs.RunService.Attach:input_type -> yandex.cloud.ai.assistants.v1.runs.AttachRunRequest
+	2,  // 19: yandex.cloud.ai.assistants.v1.runs.RunService.Listen:input_type -> yandex.cloud.ai.assistants.v1.runs.ListenRunRequest
 	4,  // 20: yandex.cloud.ai.assistants.v1.runs.RunService.Get:input_type -> yandex.cloud.ai.assistants.v1.runs.GetRunRequest
 	5,  // 21: yandex.cloud.ai.assistants.v1.runs.RunService.GetLastByThread:input_type -> yandex.cloud.ai.assistants.v1.runs.GetLastRunByThreadRequest
 	6,  // 22: yandex.cloud.ai.assistants.v1.runs.RunService.List:input_type -> yandex.cloud.ai.assistants.v1.runs.ListRunsRequest
 	10, // 23: yandex.cloud.ai.assistants.v1.runs.RunService.Submit:input_type -> yandex.cloud.ai.assistants.v1.runs.SubmitToRunRequest
 	20, // 24: yandex.cloud.ai.assistants.v1.runs.RunService.Create:output_type -> yandex.cloud.ai.assistants.v1.runs.Run
-	9,  // 25: yandex.cloud.ai.assistants.v1.runs.RunService.Listen:output_type -> yandex.cloud.ai.assistants.v1.runs.StreamEvent
-	9,  // 26: yandex.cloud.ai.assistants.v1.runs.RunService.Attach:output_type -> yandex.cloud.ai.assistants.v1.runs.StreamEvent
+	9,  // 25: yandex.cloud.ai.assistants.v1.runs.RunService.Attach:output_type -> yandex.cloud.ai.assistants.v1.runs.StreamEvent
+	9,  // 26: yandex.cloud.ai.assistants.v1.runs.RunService.Listen:output_type -> yandex.cloud.ai.assistants.v1.runs.StreamEvent
 	20, // 27: yandex.cloud.ai.assistants.v1.runs.RunService.Get:output_type -> yandex.cloud.ai.assistants.v1.runs.Run
 	20, // 28: yandex.cloud.ai.assistants.v1.runs.RunService.GetLastByThread:output_type -> yandex.cloud.ai.assistants.v1.runs.Run
 	7,  // 29: yandex.cloud.ai.assistants.v1.runs.RunService.List:output_type -> yandex.cloud.ai.assistants.v1.runs.ListRunsResponse

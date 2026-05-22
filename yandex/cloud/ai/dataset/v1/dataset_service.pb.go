@@ -1045,6 +1045,104 @@ func (x *FinishMultipartUploadDraftResponse) GetDatasetId() string {
 	return ""
 }
 
+type GetDownloadUrlsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the dataset.
+	DatasetId     string `protobuf:"bytes,1,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDownloadUrlsRequest) Reset() {
+	*x = GetDownloadUrlsRequest{}
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDownloadUrlsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDownloadUrlsRequest) ProtoMessage() {}
+
+func (x *GetDownloadUrlsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDownloadUrlsRequest.ProtoReflect.Descriptor instead.
+func (*GetDownloadUrlsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetDownloadUrlsRequest) GetDatasetId() string {
+	if x != nil {
+		return x.DatasetId
+	}
+	return ""
+}
+
+type GetDownloadUrlsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the dataset.
+	DatasetId     string                    `protobuf:"bytes,1,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
+	DownloadUrls  []*DatasetFileDownloadUrl `protobuf:"bytes,2,rep,name=download_urls,json=downloadUrls,proto3" json:"download_urls,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetDownloadUrlsResponse) Reset() {
+	*x = GetDownloadUrlsResponse{}
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetDownloadUrlsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetDownloadUrlsResponse) ProtoMessage() {}
+
+func (x *GetDownloadUrlsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetDownloadUrlsResponse.ProtoReflect.Descriptor instead.
+func (*GetDownloadUrlsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetDownloadUrlsResponse) GetDatasetId() string {
+	if x != nil {
+		return x.DatasetId
+	}
+	return ""
+}
+
+func (x *GetDownloadUrlsResponse) GetDownloadUrls() []*DatasetFileDownloadUrl {
+	if x != nil {
+		return x.DownloadUrls
+	}
+	return nil
+}
+
 type ListDatasetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Folder ID of the datasets to list.
@@ -1071,7 +1169,7 @@ type ListDatasetsRequest struct {
 
 func (x *ListDatasetsRequest) Reset() {
 	*x = ListDatasetsRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +1181,7 @@ func (x *ListDatasetsRequest) String() string {
 func (*ListDatasetsRequest) ProtoMessage() {}
 
 func (x *ListDatasetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +1194,7 @@ func (x *ListDatasetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatasetsRequest.ProtoReflect.Descriptor instead.
 func (*ListDatasetsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListDatasetsRequest) GetFolderId() string {
@@ -1164,7 +1262,7 @@ type ListDatasetsResponse struct {
 
 func (x *ListDatasetsResponse) Reset() {
 	*x = ListDatasetsResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1176,7 +1274,7 @@ func (x *ListDatasetsResponse) String() string {
 func (*ListDatasetsResponse) ProtoMessage() {}
 
 func (x *ListDatasetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1189,7 +1287,7 @@ func (x *ListDatasetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListDatasetsResponse.ProtoReflect.Descriptor instead.
 func (*ListDatasetsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListDatasetsResponse) GetDatasets() []*DatasetInfo {
@@ -1216,7 +1314,7 @@ type ListUploadFormatsRequest struct {
 
 func (x *ListUploadFormatsRequest) Reset() {
 	*x = ListUploadFormatsRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1228,7 +1326,7 @@ func (x *ListUploadFormatsRequest) String() string {
 func (*ListUploadFormatsRequest) ProtoMessage() {}
 
 func (x *ListUploadFormatsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1241,7 +1339,7 @@ func (x *ListUploadFormatsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUploadFormatsRequest.ProtoReflect.Descriptor instead.
 func (*ListUploadFormatsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListUploadFormatsRequest) GetTaskType() string {
@@ -1261,7 +1359,7 @@ type ListUploadFormatsResponse struct {
 
 func (x *ListUploadFormatsResponse) Reset() {
 	*x = ListUploadFormatsResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1273,7 +1371,7 @@ func (x *ListUploadFormatsResponse) String() string {
 func (*ListUploadFormatsResponse) ProtoMessage() {}
 
 func (x *ListUploadFormatsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1286,7 +1384,7 @@ func (x *ListUploadFormatsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUploadFormatsResponse.ProtoReflect.Descriptor instead.
 func (*ListUploadFormatsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListUploadFormatsResponse) GetFormats() []string {
@@ -1308,7 +1406,7 @@ type ListUploadSchemasRequest struct {
 
 func (x *ListUploadSchemasRequest) Reset() {
 	*x = ListUploadSchemasRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1320,7 +1418,7 @@ func (x *ListUploadSchemasRequest) String() string {
 func (*ListUploadSchemasRequest) ProtoMessage() {}
 
 func (x *ListUploadSchemasRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1333,7 +1431,7 @@ func (x *ListUploadSchemasRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUploadSchemasRequest.ProtoReflect.Descriptor instead.
 func (*ListUploadSchemasRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListUploadSchemasRequest) GetTaskType() string {
@@ -1360,7 +1458,7 @@ type ListUploadSchemasResponse struct {
 
 func (x *ListUploadSchemasResponse) Reset() {
 	*x = ListUploadSchemasResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1372,7 +1470,7 @@ func (x *ListUploadSchemasResponse) String() string {
 func (*ListUploadSchemasResponse) ProtoMessage() {}
 
 func (x *ListUploadSchemasResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1385,7 +1483,7 @@ func (x *ListUploadSchemasResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUploadSchemasResponse.ProtoReflect.Descriptor instead.
 func (*ListUploadSchemasResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListUploadSchemasResponse) GetSchemas() []*DatasetUploadSchema {
@@ -1405,7 +1503,7 @@ type ListTypesRequest struct {
 
 func (x *ListTypesRequest) Reset() {
 	*x = ListTypesRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1417,7 +1515,7 @@ func (x *ListTypesRequest) String() string {
 func (*ListTypesRequest) ProtoMessage() {}
 
 func (x *ListTypesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1430,7 +1528,7 @@ func (x *ListTypesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTypesRequest.ProtoReflect.Descriptor instead.
 func (*ListTypesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListTypesRequest) GetFolderId() string {
@@ -1450,7 +1548,7 @@ type ListTypesResponse struct {
 
 func (x *ListTypesResponse) Reset() {
 	*x = ListTypesResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1462,7 +1560,7 @@ func (x *ListTypesResponse) String() string {
 func (*ListTypesResponse) ProtoMessage() {}
 
 func (x *ListTypesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1475,7 +1573,7 @@ func (x *ListTypesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTypesResponse.ProtoReflect.Descriptor instead.
 func (*ListTypesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListTypesResponse) GetTypes() []string {
@@ -1495,7 +1593,7 @@ type GetDatasetPreviewRequest struct {
 
 func (x *GetDatasetPreviewRequest) Reset() {
 	*x = GetDatasetPreviewRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1507,7 +1605,7 @@ func (x *GetDatasetPreviewRequest) String() string {
 func (*GetDatasetPreviewRequest) ProtoMessage() {}
 
 func (x *GetDatasetPreviewRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1520,7 +1618,7 @@ func (x *GetDatasetPreviewRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDatasetPreviewRequest.ProtoReflect.Descriptor instead.
 func (*GetDatasetPreviewRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetDatasetPreviewRequest) GetDatasetId() string {
@@ -1542,7 +1640,7 @@ type GetDatasetPreviewResponse struct {
 
 func (x *GetDatasetPreviewResponse) Reset() {
 	*x = GetDatasetPreviewResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1554,7 +1652,7 @@ func (x *GetDatasetPreviewResponse) String() string {
 func (*GetDatasetPreviewResponse) ProtoMessage() {}
 
 func (x *GetDatasetPreviewResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1567,7 +1665,7 @@ func (x *GetDatasetPreviewResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDatasetPreviewResponse.ProtoReflect.Descriptor instead.
 func (*GetDatasetPreviewResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *GetDatasetPreviewResponse) GetDatasetId() string {
@@ -1580,104 +1678,6 @@ func (x *GetDatasetPreviewResponse) GetDatasetId() string {
 func (x *GetDatasetPreviewResponse) GetPreviewLines() []string {
 	if x != nil {
 		return x.PreviewLines
-	}
-	return nil
-}
-
-type GetDownloadUrlsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the dataset.
-	DatasetId     string `protobuf:"bytes,1,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetDownloadUrlsRequest) Reset() {
-	*x = GetDownloadUrlsRequest{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[28]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetDownloadUrlsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetDownloadUrlsRequest) ProtoMessage() {}
-
-func (x *GetDownloadUrlsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[28]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetDownloadUrlsRequest.ProtoReflect.Descriptor instead.
-func (*GetDownloadUrlsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{28}
-}
-
-func (x *GetDownloadUrlsRequest) GetDatasetId() string {
-	if x != nil {
-		return x.DatasetId
-	}
-	return ""
-}
-
-type GetDownloadUrlsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the dataset.
-	DatasetId     string                    `protobuf:"bytes,1,opt,name=dataset_id,json=datasetId,proto3" json:"dataset_id,omitempty"`
-	DownloadUrls  []*DatasetFileDownloadUrl `protobuf:"bytes,2,rep,name=download_urls,json=downloadUrls,proto3" json:"download_urls,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetDownloadUrlsResponse) Reset() {
-	*x = GetDownloadUrlsResponse{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetDownloadUrlsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetDownloadUrlsResponse) ProtoMessage() {}
-
-func (x *GetDownloadUrlsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_service_proto_msgTypes[29]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetDownloadUrlsResponse.ProtoReflect.Descriptor instead.
-func (*GetDownloadUrlsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescGZIP(), []int{29}
-}
-
-func (x *GetDownloadUrlsResponse) GetDatasetId() string {
-	if x != nil {
-		return x.DatasetId
-	}
-	return ""
-}
-
-func (x *GetDownloadUrlsResponse) GetDownloadUrls() []*DatasetFileDownloadUrl {
-	if x != nil {
-		return x.DownloadUrls
 	}
 	return nil
 }
@@ -1774,7 +1774,7 @@ var File_yandex_cloud_ai_dataset_v1_dataset_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/ai/dataset/v1/dataset_service.proto\x12\x1ayandex.cloud.ai.dataset.v1\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a(yandex/cloud/ai/dataset/v1/dataset.proto\x1a google/protobuf/field_mask.proto\"=\n" +
+	"0yandex/cloud/ai/dataset/v1/dataset_service.proto\x12\x1ayandex.cloud.ai.dataset.v1\x1a google/protobuf/field_mask.proto\x1a(yandex/cloud/ai/dataset/v1/dataset.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"=\n" +
 	"\x16DescribeDatasetRequest\x12#\n" +
 	"\n" +
 	"dataset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tdatasetId\"\\\n" +
@@ -1858,7 +1858,14 @@ const file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDesc = "" +
 	"\x0euploaded_parts\x18\x02 \x03(\v2,.yandex.cloud.ai.dataset.v1.UploadedPartInfoR\ruploadedParts\"C\n" +
 	"\"FinishMultipartUploadDraftResponse\x12\x1d\n" +
 	"\n" +
-	"dataset_id\x18\x01 \x01(\tR\tdatasetId\"\xb9\x02\n" +
+	"dataset_id\x18\x01 \x01(\tR\tdatasetId\"=\n" +
+	"\x16GetDownloadUrlsRequest\x12#\n" +
+	"\n" +
+	"dataset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tdatasetId\"\x91\x01\n" +
+	"\x17GetDownloadUrlsResponse\x12\x1d\n" +
+	"\n" +
+	"dataset_id\x18\x01 \x01(\tR\tdatasetId\x12W\n" +
+	"\rdownload_urls\x18\x02 \x03(\v22.yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrlR\fdownloadUrls\"\xb9\x02\n" +
 	"\x13ListDatasetsRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12F\n" +
 	"\x06status\x18\x02 \x03(\x0e2..yandex.cloud.ai.dataset.v1.DatasetInfo.StatusR\x06status\x120\n" +
@@ -1891,14 +1898,7 @@ const file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDesc = "" +
 	"\x19GetDatasetPreviewResponse\x12\x1d\n" +
 	"\n" +
 	"dataset_id\x18\x01 \x01(\tR\tdatasetId\x12#\n" +
-	"\rpreview_lines\x18\x02 \x03(\tR\fpreviewLines\"=\n" +
-	"\x16GetDownloadUrlsRequest\x12#\n" +
-	"\n" +
-	"dataset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tdatasetId\"\x91\x01\n" +
-	"\x17GetDownloadUrlsResponse\x12\x1d\n" +
-	"\n" +
-	"dataset_id\x18\x01 \x01(\tR\tdatasetId\x12W\n" +
-	"\rdownload_urls\x18\x02 \x03(\v22.yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrlR\fdownloadUrls\"9\n" +
+	"\rpreview_lines\x18\x02 \x03(\tR\fpreviewLines\"9\n" +
 	"\x18ListOperationsIdsRequest\x12\x1d\n" +
 	"\n" +
 	"dataset_id\x18\x01 \x03(\tR\tdatasetId\"\xf6\x01\n" +
@@ -1911,21 +1911,21 @@ const file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDesc = "" +
 	"\bDescribe\x122.yandex.cloud.ai.dataset.v1.DescribeDatasetRequest\x1a3.yandex.cloud.ai.dataset.v1.DescribeDatasetResponse\x12\x99\x01\n" +
 	"\bValidate\x122.yandex.cloud.ai.dataset.v1.ValidateDatasetRequest\x1a!.yandex.cloud.operation.Operation\"6\xb2\xd2*2\n" +
 	"\x17ValidateDatasetMetadata\x12\x17ValidateDatasetResponse\x12m\n" +
+	"\x06Delete\x120.yandex.cloud.ai.dataset.v1.DeleteDatasetRequest\x1a1.yandex.cloud.ai.dataset.v1.DeleteDatasetResponse\x12m\n" +
 	"\x06Create\x120.yandex.cloud.ai.dataset.v1.CreateDatasetRequest\x1a1.yandex.cloud.ai.dataset.v1.CreateDatasetResponse\x12m\n" +
-	"\x06Update\x120.yandex.cloud.ai.dataset.v1.UpdateDatasetRequest\x1a1.yandex.cloud.ai.dataset.v1.UpdateDatasetResponse\x12m\n" +
-	"\x06Delete\x120.yandex.cloud.ai.dataset.v1.DeleteDatasetRequest\x1a1.yandex.cloud.ai.dataset.v1.DeleteDatasetResponse\x12i\n" +
-	"\x04List\x12/.yandex.cloud.ai.dataset.v1.ListDatasetsRequest\x1a0.yandex.cloud.ai.dataset.v1.ListDatasetsResponse\x12\x85\x01\n" +
-	"\x11ListUploadFormats\x124.yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest\x1a5.yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse\"\x03\x88\x02\x01\x12\x80\x01\n" +
-	"\x11ListUploadSchemas\x124.yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest\x1a5.yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse\x12\x80\x01\n" +
-	"\x11GetUploadDraftUrl\x124.yandex.cloud.ai.dataset.v1.GetUploadDraftUrlRequest\x1a5.yandex.cloud.ai.dataset.v1.GetUploadDraftUrlResponse\x12z\n" +
-	"\x0fGetDownloadUrls\x122.yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest\x1a3.yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse\x12\x98\x01\n" +
+	"\x06Update\x120.yandex.cloud.ai.dataset.v1.UpdateDatasetRequest\x1a1.yandex.cloud.ai.dataset.v1.UpdateDatasetResponse\x12i\n" +
+	"\x04List\x12/.yandex.cloud.ai.dataset.v1.ListDatasetsRequest\x1a0.yandex.cloud.ai.dataset.v1.ListDatasetsResponse\x12\x80\x01\n" +
+	"\x11GetUploadDraftUrl\x124.yandex.cloud.ai.dataset.v1.GetUploadDraftUrlRequest\x1a5.yandex.cloud.ai.dataset.v1.GetUploadDraftUrlResponse\x12\x98\x01\n" +
 	"\x19StartMultipartUploadDraft\x12<.yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftRequest\x1a=.yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftResponse\x12\x9b\x01\n" +
-	"\x1aFinishMultipartUploadDraft\x12=.yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest\x1a>.yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftResponse\x12h\n" +
+	"\x1aFinishMultipartUploadDraft\x12=.yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest\x1a>.yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftResponse\x12z\n" +
+	"\x0fGetDownloadUrls\x122.yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest\x1a3.yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse\x12\x85\x01\n" +
+	"\x11ListUploadFormats\x124.yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest\x1a5.yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse\"\x03\x88\x02\x01\x12\x80\x01\n" +
+	"\x11ListUploadSchemas\x124.yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest\x1a5.yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse\x12h\n" +
 	"\tListTypes\x12,.yandex.cloud.ai.dataset.v1.ListTypesRequest\x1a-.yandex.cloud.ai.dataset.v1.ListTypesResponse\x12y\n" +
 	"\n" +
 	"GetPreview\x124.yandex.cloud.ai.dataset.v1.GetDatasetPreviewRequest\x1a5.yandex.cloud.ai.dataset.v1.GetDatasetPreviewResponse\x12\x80\x01\n" +
-	"\x11ListOperationsIds\x124.yandex.cloud.ai.dataset.v1.ListOperationsIdsRequest\x1a5.yandex.cloud.ai.dataset.v1.ListOperationsIdsResponseBe\n" +
-	"\x1eyandex.cloud.api.ai.dataset.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/dataset/v1;fomob\x06proto3"
+	"\x11ListOperationsIds\x124.yandex.cloud.ai.dataset.v1.ListOperationsIdsRequest\x1a5.yandex.cloud.ai.dataset.v1.ListOperationsIdsResponseBj\n" +
+	"\x1eyandex.cloud.api.ai.dataset.v1B\x03DSSZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/dataset/v1;fomob\x06proto3"
 
 var (
 	file_yandex_cloud_ai_dataset_v1_dataset_service_proto_rawDescOnce sync.Once
@@ -1959,18 +1959,18 @@ var file_yandex_cloud_ai_dataset_v1_dataset_service_proto_goTypes = []any{
 	(*UploadedPartInfo)(nil),                   // 15: yandex.cloud.ai.dataset.v1.UploadedPartInfo
 	(*FinishMultipartUploadDraftRequest)(nil),  // 16: yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest
 	(*FinishMultipartUploadDraftResponse)(nil), // 17: yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftResponse
-	(*ListDatasetsRequest)(nil),                // 18: yandex.cloud.ai.dataset.v1.ListDatasetsRequest
-	(*ListDatasetsResponse)(nil),               // 19: yandex.cloud.ai.dataset.v1.ListDatasetsResponse
-	(*ListUploadFormatsRequest)(nil),           // 20: yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest
-	(*ListUploadFormatsResponse)(nil),          // 21: yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse
-	(*ListUploadSchemasRequest)(nil),           // 22: yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest
-	(*ListUploadSchemasResponse)(nil),          // 23: yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse
-	(*ListTypesRequest)(nil),                   // 24: yandex.cloud.ai.dataset.v1.ListTypesRequest
-	(*ListTypesResponse)(nil),                  // 25: yandex.cloud.ai.dataset.v1.ListTypesResponse
-	(*GetDatasetPreviewRequest)(nil),           // 26: yandex.cloud.ai.dataset.v1.GetDatasetPreviewRequest
-	(*GetDatasetPreviewResponse)(nil),          // 27: yandex.cloud.ai.dataset.v1.GetDatasetPreviewResponse
-	(*GetDownloadUrlsRequest)(nil),             // 28: yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest
-	(*GetDownloadUrlsResponse)(nil),            // 29: yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse
+	(*GetDownloadUrlsRequest)(nil),             // 18: yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest
+	(*GetDownloadUrlsResponse)(nil),            // 19: yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse
+	(*ListDatasetsRequest)(nil),                // 20: yandex.cloud.ai.dataset.v1.ListDatasetsRequest
+	(*ListDatasetsResponse)(nil),               // 21: yandex.cloud.ai.dataset.v1.ListDatasetsResponse
+	(*ListUploadFormatsRequest)(nil),           // 22: yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest
+	(*ListUploadFormatsResponse)(nil),          // 23: yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse
+	(*ListUploadSchemasRequest)(nil),           // 24: yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest
+	(*ListUploadSchemasResponse)(nil),          // 25: yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse
+	(*ListTypesRequest)(nil),                   // 26: yandex.cloud.ai.dataset.v1.ListTypesRequest
+	(*ListTypesResponse)(nil),                  // 27: yandex.cloud.ai.dataset.v1.ListTypesResponse
+	(*GetDatasetPreviewRequest)(nil),           // 28: yandex.cloud.ai.dataset.v1.GetDatasetPreviewRequest
+	(*GetDatasetPreviewResponse)(nil),          // 29: yandex.cloud.ai.dataset.v1.GetDatasetPreviewResponse
 	(*ListOperationsIdsRequest)(nil),           // 30: yandex.cloud.ai.dataset.v1.ListOperationsIdsRequest
 	(*ListOperationsIdsResponse)(nil),          // 31: yandex.cloud.ai.dataset.v1.ListOperationsIdsResponse
 	nil,                                        // 32: yandex.cloud.ai.dataset.v1.CreateDatasetRequest.LabelsEntry
@@ -1979,9 +1979,9 @@ var file_yandex_cloud_ai_dataset_v1_dataset_service_proto_goTypes = []any{
 	(*DatasetInfo)(nil),                        // 35: yandex.cloud.ai.dataset.v1.DatasetInfo
 	(*ValidationError)(nil),                    // 36: yandex.cloud.ai.dataset.v1.ValidationError
 	(*fieldmaskpb.FieldMask)(nil),              // 37: google.protobuf.FieldMask
-	(DatasetInfo_Status)(0),                    // 38: yandex.cloud.ai.dataset.v1.DatasetInfo.Status
-	(*DatasetUploadSchema)(nil),                // 39: yandex.cloud.ai.dataset.v1.DatasetUploadSchema
-	(*DatasetFileDownloadUrl)(nil),             // 40: yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	(*DatasetFileDownloadUrl)(nil),             // 38: yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	(DatasetInfo_Status)(0),                    // 39: yandex.cloud.ai.dataset.v1.DatasetInfo.Status
+	(*DatasetUploadSchema)(nil),                // 40: yandex.cloud.ai.dataset.v1.DatasetUploadSchema
 	(*operation.Operation)(nil),                // 41: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ai_dataset_v1_dataset_service_proto_depIdxs = []int32{
@@ -1993,40 +1993,40 @@ var file_yandex_cloud_ai_dataset_v1_dataset_service_proto_depIdxs = []int32{
 	33, // 5: yandex.cloud.ai.dataset.v1.UpdateDatasetRequest.labels:type_name -> yandex.cloud.ai.dataset.v1.UpdateDatasetRequest.LabelsEntry
 	35, // 6: yandex.cloud.ai.dataset.v1.UpdateDatasetResponse.dataset:type_name -> yandex.cloud.ai.dataset.v1.DatasetInfo
 	15, // 7: yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest.uploaded_parts:type_name -> yandex.cloud.ai.dataset.v1.UploadedPartInfo
-	38, // 8: yandex.cloud.ai.dataset.v1.ListDatasetsRequest.status:type_name -> yandex.cloud.ai.dataset.v1.DatasetInfo.Status
-	35, // 9: yandex.cloud.ai.dataset.v1.ListDatasetsResponse.datasets:type_name -> yandex.cloud.ai.dataset.v1.DatasetInfo
-	39, // 10: yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse.schemas:type_name -> yandex.cloud.ai.dataset.v1.DatasetUploadSchema
-	40, // 11: yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse.download_urls:type_name -> yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	38, // 8: yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse.download_urls:type_name -> yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	39, // 9: yandex.cloud.ai.dataset.v1.ListDatasetsRequest.status:type_name -> yandex.cloud.ai.dataset.v1.DatasetInfo.Status
+	35, // 10: yandex.cloud.ai.dataset.v1.ListDatasetsResponse.datasets:type_name -> yandex.cloud.ai.dataset.v1.DatasetInfo
+	40, // 11: yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse.schemas:type_name -> yandex.cloud.ai.dataset.v1.DatasetUploadSchema
 	34, // 12: yandex.cloud.ai.dataset.v1.ListOperationsIdsResponse.dataset_id_to_operation_id:type_name -> yandex.cloud.ai.dataset.v1.ListOperationsIdsResponse.DatasetIdToOperationIdEntry
 	0,  // 13: yandex.cloud.ai.dataset.v1.DatasetService.Describe:input_type -> yandex.cloud.ai.dataset.v1.DescribeDatasetRequest
 	2,  // 14: yandex.cloud.ai.dataset.v1.DatasetService.Validate:input_type -> yandex.cloud.ai.dataset.v1.ValidateDatasetRequest
-	7,  // 15: yandex.cloud.ai.dataset.v1.DatasetService.Create:input_type -> yandex.cloud.ai.dataset.v1.CreateDatasetRequest
-	9,  // 16: yandex.cloud.ai.dataset.v1.DatasetService.Update:input_type -> yandex.cloud.ai.dataset.v1.UpdateDatasetRequest
-	5,  // 17: yandex.cloud.ai.dataset.v1.DatasetService.Delete:input_type -> yandex.cloud.ai.dataset.v1.DeleteDatasetRequest
-	18, // 18: yandex.cloud.ai.dataset.v1.DatasetService.List:input_type -> yandex.cloud.ai.dataset.v1.ListDatasetsRequest
-	20, // 19: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadFormats:input_type -> yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest
-	22, // 20: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadSchemas:input_type -> yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest
-	11, // 21: yandex.cloud.ai.dataset.v1.DatasetService.GetUploadDraftUrl:input_type -> yandex.cloud.ai.dataset.v1.GetUploadDraftUrlRequest
-	28, // 22: yandex.cloud.ai.dataset.v1.DatasetService.GetDownloadUrls:input_type -> yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest
-	13, // 23: yandex.cloud.ai.dataset.v1.DatasetService.StartMultipartUploadDraft:input_type -> yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftRequest
-	16, // 24: yandex.cloud.ai.dataset.v1.DatasetService.FinishMultipartUploadDraft:input_type -> yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest
-	24, // 25: yandex.cloud.ai.dataset.v1.DatasetService.ListTypes:input_type -> yandex.cloud.ai.dataset.v1.ListTypesRequest
-	26, // 26: yandex.cloud.ai.dataset.v1.DatasetService.GetPreview:input_type -> yandex.cloud.ai.dataset.v1.GetDatasetPreviewRequest
+	5,  // 15: yandex.cloud.ai.dataset.v1.DatasetService.Delete:input_type -> yandex.cloud.ai.dataset.v1.DeleteDatasetRequest
+	7,  // 16: yandex.cloud.ai.dataset.v1.DatasetService.Create:input_type -> yandex.cloud.ai.dataset.v1.CreateDatasetRequest
+	9,  // 17: yandex.cloud.ai.dataset.v1.DatasetService.Update:input_type -> yandex.cloud.ai.dataset.v1.UpdateDatasetRequest
+	20, // 18: yandex.cloud.ai.dataset.v1.DatasetService.List:input_type -> yandex.cloud.ai.dataset.v1.ListDatasetsRequest
+	11, // 19: yandex.cloud.ai.dataset.v1.DatasetService.GetUploadDraftUrl:input_type -> yandex.cloud.ai.dataset.v1.GetUploadDraftUrlRequest
+	13, // 20: yandex.cloud.ai.dataset.v1.DatasetService.StartMultipartUploadDraft:input_type -> yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftRequest
+	16, // 21: yandex.cloud.ai.dataset.v1.DatasetService.FinishMultipartUploadDraft:input_type -> yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftRequest
+	18, // 22: yandex.cloud.ai.dataset.v1.DatasetService.GetDownloadUrls:input_type -> yandex.cloud.ai.dataset.v1.GetDownloadUrlsRequest
+	22, // 23: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadFormats:input_type -> yandex.cloud.ai.dataset.v1.ListUploadFormatsRequest
+	24, // 24: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadSchemas:input_type -> yandex.cloud.ai.dataset.v1.ListUploadSchemasRequest
+	26, // 25: yandex.cloud.ai.dataset.v1.DatasetService.ListTypes:input_type -> yandex.cloud.ai.dataset.v1.ListTypesRequest
+	28, // 26: yandex.cloud.ai.dataset.v1.DatasetService.GetPreview:input_type -> yandex.cloud.ai.dataset.v1.GetDatasetPreviewRequest
 	30, // 27: yandex.cloud.ai.dataset.v1.DatasetService.ListOperationsIds:input_type -> yandex.cloud.ai.dataset.v1.ListOperationsIdsRequest
 	1,  // 28: yandex.cloud.ai.dataset.v1.DatasetService.Describe:output_type -> yandex.cloud.ai.dataset.v1.DescribeDatasetResponse
 	41, // 29: yandex.cloud.ai.dataset.v1.DatasetService.Validate:output_type -> yandex.cloud.operation.Operation
-	8,  // 30: yandex.cloud.ai.dataset.v1.DatasetService.Create:output_type -> yandex.cloud.ai.dataset.v1.CreateDatasetResponse
-	10, // 31: yandex.cloud.ai.dataset.v1.DatasetService.Update:output_type -> yandex.cloud.ai.dataset.v1.UpdateDatasetResponse
-	6,  // 32: yandex.cloud.ai.dataset.v1.DatasetService.Delete:output_type -> yandex.cloud.ai.dataset.v1.DeleteDatasetResponse
-	19, // 33: yandex.cloud.ai.dataset.v1.DatasetService.List:output_type -> yandex.cloud.ai.dataset.v1.ListDatasetsResponse
-	21, // 34: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadFormats:output_type -> yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse
-	23, // 35: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadSchemas:output_type -> yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse
-	12, // 36: yandex.cloud.ai.dataset.v1.DatasetService.GetUploadDraftUrl:output_type -> yandex.cloud.ai.dataset.v1.GetUploadDraftUrlResponse
-	29, // 37: yandex.cloud.ai.dataset.v1.DatasetService.GetDownloadUrls:output_type -> yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse
-	14, // 38: yandex.cloud.ai.dataset.v1.DatasetService.StartMultipartUploadDraft:output_type -> yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftResponse
-	17, // 39: yandex.cloud.ai.dataset.v1.DatasetService.FinishMultipartUploadDraft:output_type -> yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftResponse
-	25, // 40: yandex.cloud.ai.dataset.v1.DatasetService.ListTypes:output_type -> yandex.cloud.ai.dataset.v1.ListTypesResponse
-	27, // 41: yandex.cloud.ai.dataset.v1.DatasetService.GetPreview:output_type -> yandex.cloud.ai.dataset.v1.GetDatasetPreviewResponse
+	6,  // 30: yandex.cloud.ai.dataset.v1.DatasetService.Delete:output_type -> yandex.cloud.ai.dataset.v1.DeleteDatasetResponse
+	8,  // 31: yandex.cloud.ai.dataset.v1.DatasetService.Create:output_type -> yandex.cloud.ai.dataset.v1.CreateDatasetResponse
+	10, // 32: yandex.cloud.ai.dataset.v1.DatasetService.Update:output_type -> yandex.cloud.ai.dataset.v1.UpdateDatasetResponse
+	21, // 33: yandex.cloud.ai.dataset.v1.DatasetService.List:output_type -> yandex.cloud.ai.dataset.v1.ListDatasetsResponse
+	12, // 34: yandex.cloud.ai.dataset.v1.DatasetService.GetUploadDraftUrl:output_type -> yandex.cloud.ai.dataset.v1.GetUploadDraftUrlResponse
+	14, // 35: yandex.cloud.ai.dataset.v1.DatasetService.StartMultipartUploadDraft:output_type -> yandex.cloud.ai.dataset.v1.StartMultipartUploadDraftResponse
+	17, // 36: yandex.cloud.ai.dataset.v1.DatasetService.FinishMultipartUploadDraft:output_type -> yandex.cloud.ai.dataset.v1.FinishMultipartUploadDraftResponse
+	19, // 37: yandex.cloud.ai.dataset.v1.DatasetService.GetDownloadUrls:output_type -> yandex.cloud.ai.dataset.v1.GetDownloadUrlsResponse
+	23, // 38: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadFormats:output_type -> yandex.cloud.ai.dataset.v1.ListUploadFormatsResponse
+	25, // 39: yandex.cloud.ai.dataset.v1.DatasetService.ListUploadSchemas:output_type -> yandex.cloud.ai.dataset.v1.ListUploadSchemasResponse
+	27, // 40: yandex.cloud.ai.dataset.v1.DatasetService.ListTypes:output_type -> yandex.cloud.ai.dataset.v1.ListTypesResponse
+	29, // 41: yandex.cloud.ai.dataset.v1.DatasetService.GetPreview:output_type -> yandex.cloud.ai.dataset.v1.GetDatasetPreviewResponse
 	31, // 42: yandex.cloud.ai.dataset.v1.DatasetService.ListOperationsIds:output_type -> yandex.cloud.ai.dataset.v1.ListOperationsIdsResponse
 	28, // [28:43] is the sub-list for method output_type
 	13, // [13:28] is the sub-list for method input_type

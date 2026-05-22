@@ -7,6 +7,7 @@
 package redis
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -180,15 +181,15 @@ var File_yandex_cloud_mdb_redis_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_redis_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/mdb/redis/v1/backup.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8d\x03\n" +
-	"\x06Backup\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
+	"&yandex/cloud/mdb/redis/v1/backup.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xab\x03\n" +
+	"\x06Backup\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12?\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12*\n" +
-	"\x11source_cluster_id\x18\x04 \x01(\tR\x0fsourceClusterId\x129\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x120\n" +
+	"\x11source_cluster_id\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x0fsourceClusterId\x12?\n" +
 	"\n" +
-	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12,\n" +
+	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tstartedAt\x12,\n" +
 	"\x12source_shard_names\x18\x06 \x03(\tR\x10sourceShardNames\x12@\n" +
 	"\x04type\x18\a \x01(\x0e2,.yandex.cloud.mdb.redis.v1.Backup.BackupTypeR\x04type\"D\n" +
 	"\n" +

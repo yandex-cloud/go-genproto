@@ -210,9 +210,12 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Cluster_PersistenceMode int32
 
 const (
-	Cluster_ON          Cluster_PersistenceMode = 0 // cluster persistence mode on
-	Cluster_OFF         Cluster_PersistenceMode = 1 // cluster persistence mode off
-	Cluster_ON_REPLICAS Cluster_PersistenceMode = 2 // cluster persistence on replicas only
+	// Cluster persistence mode is on.
+	Cluster_ON Cluster_PersistenceMode = 0
+	// Cluster persistence mode is off.
+	Cluster_OFF Cluster_PersistenceMode = 1
+	// Cluster persistence is on for replicas only.
+	Cluster_ON_REPLICAS Cluster_PersistenceMode = 2
 )
 
 // Enum value maps for Cluster_PersistenceMode.
@@ -496,8 +499,9 @@ type Cluster struct {
 	// Description of monitoring systems relevant to the Redis cluster.
 	Monitoring []*Monitoring `protobuf:"bytes,8,rep,name=monitoring,proto3" json:"monitoring,omitempty"`
 	// Configuration of the Redis cluster.
-	Config    *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
-	NetworkId string         `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	Config *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
+	// ID of the network that the cluster belongs to.
+	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Aggregated cluster health.
 	Health Cluster_Health `protobuf:"varint,11,opt,name=health,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Health" json:"health,omitempty"`
 	// Cluster status.
@@ -1033,7 +1037,6 @@ type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the Redis host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
-	//
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Redis cluster. The ID is assigned by MDB at creation time.
@@ -1049,8 +1052,9 @@ type Host struct {
 	// Aggregated health of the host. If the field has default value, it is not returned in the response.
 	Health Host_Health `protobuf:"varint,7,opt,name=health,proto3,enum=yandex.cloud.mdb.redis.v1.Host_Health" json:"health,omitempty"`
 	// Services provided by the host.
-	Services  []*Service `protobuf:"bytes,8,rep,name=services,proto3" json:"services,omitempty"`
-	ShardName string     `protobuf:"bytes,9,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
+	Services []*Service `protobuf:"bytes,8,rep,name=services,proto3" json:"services,omitempty"`
+	// Name of the shard that the host belongs to.
+	ShardName string `protobuf:"bytes,9,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	// A replica with a low priority number is considered better for promotion.
 	// A replica with priority of 0 will never be selected by Redis Sentinel for promotion.
 	// Works only for non-sharded clusters. Default value is 100.
@@ -1653,27 +1657,27 @@ var File_yandex_cloud_mdb_redis_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/redis/v1/cluster.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/mdb/redis/v1/config/redis.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis5_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_2.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis7_0.proto\x1a+yandex/cloud/mdb/redis/v1/maintenance.proto\"\xc1\f\n" +
-	"\aCluster\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
-	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
+	"'yandex/cloud/mdb/redis/v1/cluster.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a,yandex/cloud/mdb/redis/v1/config/redis.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis5_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_2.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis7_0.proto\x1a+yandex/cloud/mdb/redis/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xfd\f\n" +
+	"\aCluster\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12?\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x12\x18\n" +
+	"\x04name\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12F\n" +
-	"\x06labels\x18\x06 \x03(\v2..yandex.cloud.mdb.redis.v1.Cluster.LabelsEntryR\x06labels\x12P\n" +
-	"\venvironment\x18\a \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentR\venvironment\x12E\n" +
+	"\x06labels\x18\x06 \x03(\v2..yandex.cloud.mdb.redis.v1.Cluster.LabelsEntryR\x06labels\x12V\n" +
+	"\venvironment\x18\a \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12E\n" +
 	"\n" +
 	"monitoring\x18\b \x03(\v2%.yandex.cloud.mdb.redis.v1.MonitoringR\n" +
-	"monitoring\x12@\n" +
-	"\x06config\x18\t \x01(\v2(.yandex.cloud.mdb.redis.v1.ClusterConfigR\x06config\x12\x1d\n" +
+	"monitoring\x12F\n" +
+	"\x06config\x18\t \x01(\v2(.yandex.cloud.mdb.redis.v1.ClusterConfigB\x04\xe8\xc71\x01R\x06config\x12#\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tR\tnetworkId\x12A\n" +
-	"\x06health\x18\v \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.HealthR\x06health\x12A\n" +
-	"\x06status\x18\f \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.StatusR\x06status\x12\x18\n" +
-	"\asharded\x18\r \x01(\bR\asharded\x12[\n" +
-	"\x12maintenance_window\x18\x0e \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowR\x11maintenanceWindow\x12\\\n" +
+	" \x01(\tB\x04\xe8\xc71\x01R\tnetworkId\x12G\n" +
+	"\x06health\x18\v \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.HealthB\x04\xe8\xc71\x01R\x06health\x12G\n" +
+	"\x06status\x18\f \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.StatusB\x04\xe8\xc71\x01R\x06status\x12\x18\n" +
+	"\asharded\x18\r \x01(\bR\asharded\x12a\n" +
+	"\x12maintenance_window\x18\x0e \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowB\x04\xe8\xc71\x01R\x11maintenanceWindow\x12\\\n" +
 	"\x11planned_operation\x18\x0f \x01(\v2/.yandex.cloud.mdb.redis.v1.MaintenanceOperationR\x10plannedOperation\x12,\n" +
 	"\x12security_group_ids\x18\x10 \x03(\tR\x10securityGroupIds\x12\x1f\n" +
 	"\vtls_enabled\x18\x11 \x01(\bR\n" +
@@ -1708,41 +1712,41 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x0fPersistenceMode\x12\x06\n" +
 	"\x02ON\x10\x00\x12\a\n" +
 	"\x03OFF\x10\x01\x12\x0f\n" +
-	"\vON_REPLICAS\x10\x02\"V\n" +
+	"\vON_REPLICAS\x10\x02\"b\n" +
 	"\n" +
-	"Monitoring\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xff\a\n" +
+	"Monitoring\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x18\n" +
+	"\x04link\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04link\"\x91\b\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12`\n" +
 	"\x10redis_config_5_0\x18\x02 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0H\x00R\x0fredisConfig_5_0\x12`\n" +
 	"\x10redis_config_6_0\x18\x06 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0H\x00R\x0fredisConfig_6_0\x12`\n" +
 	"\x10redis_config_6_2\x18\a \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2H\x00R\x0fredisConfig_6_2\x12`\n" +
-	"\x10redis_config_7_0\x18\b \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0H\x00R\x0fredisConfig_7_0\x12B\n" +
-	"\tresources\x18\x03 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesR\tresources\x12F\n" +
-	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x129\n" +
-	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessR\x06access\x12F\n" +
-	"\x05redis\x18\t \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfigSetR\x05redis\x12b\n" +
+	"\x10redis_config_7_0\x18\b \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0H\x00R\x0fredisConfig_7_0\x12H\n" +
+	"\tresources\x18\x03 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12L\n" +
+	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayB\x04\xe8\xc71\x01R\x11backupWindowStart\x12?\n" +
+	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessB\x04\xe8\xc71\x01R\x06access\x12L\n" +
+	"\x05redis\x18\t \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfigSetB\x04\xe8\xc71\x01R\x05redis\x12b\n" +
 	"\x15disk_size_autoscaling\x18\n" +
 	" \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12V\n" +
 	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12B\n" +
 	"\amodules\x18\x0e \x01(\v2(.yandex.cloud.mdb.redis.v1.ValkeyModulesR\amodules\x12!\n" +
 	"\ffull_version\x18\x0f \x01(\tR\vfullVersionB\x0e\n" +
-	"\fredis_configJ\x04\b\v\x10\fJ\x04\b\f\x10\r\":\n" +
-	"\x05Shard\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"\fredis_configJ\x04\b\v\x10\r\"F\n" +
+	"\x05Shard\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\"\xf2\x04\n" +
-	"\x04Host\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
+	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\x96\x05\n" +
+	"\x04Host\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12\x17\n" +
-	"\azone_id\x18\x03 \x01(\tR\x06zoneId\x12\x1b\n" +
-	"\tsubnet_id\x18\x04 \x01(\tR\bsubnetId\x12B\n" +
-	"\tresources\x18\x05 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesR\tresources\x128\n" +
-	"\x04role\x18\x06 \x01(\x0e2$.yandex.cloud.mdb.redis.v1.Host.RoleR\x04role\x12>\n" +
-	"\x06health\x18\a \x01(\x0e2&.yandex.cloud.mdb.redis.v1.Host.HealthR\x06health\x12>\n" +
+	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12\x1d\n" +
+	"\azone_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12\x1b\n" +
+	"\tsubnet_id\x18\x04 \x01(\tR\bsubnetId\x12H\n" +
+	"\tresources\x18\x05 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12>\n" +
+	"\x04role\x18\x06 \x01(\x0e2$.yandex.cloud.mdb.redis.v1.Host.RoleB\x04\xe8\xc71\x01R\x04role\x12D\n" +
+	"\x06health\x18\a \x01(\x0e2&.yandex.cloud.mdb.redis.v1.Host.HealthB\x04\xe8\xc71\x01R\x06health\x12>\n" +
 	"\bservices\x18\b \x03(\v2\".yandex.cloud.mdb.redis.v1.ServiceR\bservices\x12\x1d\n" +
 	"\n" +
 	"shard_name\x18\t \x01(\tR\tshardName\x12F\n" +
@@ -1758,10 +1762,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
-	"\bDEGRADED\x10\x03\"\x85\x02\n" +
+	"\bDEGRADED\x10\x03\"\x8b\x02\n" +
 	"\aService\x12;\n" +
-	"\x04type\x18\x01 \x01(\x0e2'.yandex.cloud.mdb.redis.v1.Service.TypeR\x04type\x12A\n" +
-	"\x06health\x18\x02 \x01(\x0e2).yandex.cloud.mdb.redis.v1.Service.HealthR\x06health\"G\n" +
+	"\x04type\x18\x01 \x01(\x0e2'.yandex.cloud.mdb.redis.v1.Service.TypeR\x04type\x12G\n" +
+	"\x06health\x18\x02 \x01(\x0e2).yandex.cloud.mdb.redis.v1.Service.HealthB\x04\xe8\xc71\x01R\x06health\"G\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05REDIS\x10\x01\x12\v\n" +
@@ -1770,9 +1774,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x06Health\x12\x12\n" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
-	"\x04DEAD\x10\x02\"x\n" +
-	"\tResources\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
+	"\x04DEAD\x10\x02\"~\n" +
+	"\tResources\x122\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
 	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
 	"diskTypeId\">\n" +

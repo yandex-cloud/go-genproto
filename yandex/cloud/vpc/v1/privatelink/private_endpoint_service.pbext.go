@@ -77,6 +77,12 @@ func (m *CreatePrivateEndpointRequest) SetObjectStorage(v *PrivateEndpoint_Objec
 	}
 }
 
+func (m *CreatePrivateEndpointRequest) SetServiceName(v string) {
+	m.Service = &CreatePrivateEndpointRequest_ServiceName{
+		ServiceName: v,
+	}
+}
+
 func (m *CreatePrivateEndpointMetadata) SetPrivateEndpointId(v string) {
 	m.PrivateEndpointId = v
 }

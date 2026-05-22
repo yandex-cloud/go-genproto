@@ -605,10 +605,11 @@ const file_yandex_cloud_quotamanager_v1_quota_request_service_proto_rawDesc = ""
 	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
 	"\x18ListQuotaRequestResponse\x12Q\n" +
 	"\x0equota_requests\x18\x01 \x03(\v2*.yandex.cloud.quotamanager.v1.QuotaRequestR\rquotaRequests\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe6\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe7\x02\n" +
 	"\x19CreateQuotaRequestRequest\x12B\n" +
-	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x12\x86\x01\n" +
-	"\x14desired_quota_limits\x18\x02 \x03(\v2I.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimitB\t\x82\xc81\x051-100R\x12desiredQuotaLimits\x1a|\n" +
+	"\bresource\x18\x01 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x12\x87\x01\n" +
+	"\x14desired_quota_limits\x18\x02 \x03(\v2I.yandex.cloud.quotamanager.v1.CreateQuotaRequestRequest.DesiredQuotaLimitB\n" +
+	"\x82\xc81\x061-1000R\x12desiredQuotaLimits\x1a|\n" +
 	"\x11DesiredQuotaLimit\x12'\n" +
 	"\bquota_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\aquotaId\x12>\n" +
 	"\rdesired_limit\x18\x02 \x01(\x01B\x19\xfa\xc71\x150-9223372036854775807R\fdesiredLimit\"F\n" +

@@ -32,7 +32,6 @@ const (
 // A set of methods for managing ClickHouse Backup resources.
 type BackupServiceClient interface {
 	// Returns the specified ClickHouse Backup resource.
-	//
 	// To get the list of available ClickHouse Backup resources, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of Backup resources available for the specified folder.
@@ -86,7 +85,6 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // A set of methods for managing ClickHouse Backup resources.
 type BackupServiceServer interface {
 	// Returns the specified ClickHouse Backup resource.
-	//
 	// To get the list of available ClickHouse Backup resources, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of Backup resources available for the specified folder.

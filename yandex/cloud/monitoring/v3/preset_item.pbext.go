@@ -10,7 +10,7 @@ func (m *ParameterPresetValue) SetParameterName(v string) {
 	m.ParameterName = v
 }
 
-func (m *ParameterPresetValue) SetValue(v string) {
+func (m *ParameterPresetValue) SetValue(v []string) {
 	m.Value = v
 }
 

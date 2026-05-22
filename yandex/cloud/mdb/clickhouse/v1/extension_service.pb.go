@@ -191,7 +191,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_extension_service_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_extension_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/extension_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a.yandex/cloud/mdb/clickhouse/v1/extension.proto\"q\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/extension_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/mdb/clickhouse/v1/extension.proto\x1a\x1dyandex/cloud/validation.proto\"q\n" +
 	"\x13GetExtensionRequest\x123\n" +
 	"\x0eextension_name\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\rextensionName\x12%\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"\x91\x01\n" +

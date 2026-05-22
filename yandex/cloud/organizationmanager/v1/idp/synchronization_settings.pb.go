@@ -348,8 +348,10 @@ type SynchronizationSettings struct {
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Domain replacement configuration.
 	ReplacementDomain string `protobuf:"bytes,10,opt,name=replacement_domain,json=replacementDomain,proto3" json:"replacement_domain,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Enables password writeback feature.
+	EnablePasswordWriteback bool `protobuf:"varint,11,opt,name=enable_password_writeback,json=enablePasswordWriteback,proto3" json:"enable_password_writeback,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *SynchronizationSettings) Reset() {
@@ -450,6 +452,13 @@ func (x *SynchronizationSettings) GetReplacementDomain() string {
 		return x.ReplacementDomain
 	}
 	return ""
+}
+
+func (x *SynchronizationSettings) GetEnablePasswordWriteback() bool {
+	if x != nil {
+		return x.EnablePasswordWriteback
+	}
+	return false
 }
 
 // Filter configuration for synchronization.
@@ -648,7 +657,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto 
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDesc = "" +
 	"\n" +
-	"Fyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xaf\x06\n" +
+	"Fyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xeb\x06\n" +
 	"\x17SynchronizationSettings\x120\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\x12V\n" +
 	"\x06filter\x18\x02 \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.SynchronizationFilterR\x06filter\x12m\n" +
@@ -661,7 +670,8 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	"\n" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
 	"\x12replacement_domain\x18\n" +
-	" \x01(\tR\x11replacementDomain\"\xab\x01\n" +
+	" \x01(\tR\x11replacementDomain\x12:\n" +
+	"\x19enable_password_writeback\x18\v \x01(\bR\x17enablePasswordWriteback\"\xab\x01\n" +
 	"\x15SynchronizationFilter\x12%\n" +
 	"\x06domain\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\x12)\n" +
 	"\x06groups\x18\x02 \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x051-253R\x06groups\x12@\n" +

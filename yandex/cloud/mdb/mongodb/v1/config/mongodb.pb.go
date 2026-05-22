@@ -2452,7 +2452,7 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto protoreflect.FileDescr
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xd7%\n" +
+	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xdd%\n" +
 	"\fMongodConfig\x12R\n" +
 	"\astorage\x18\x01 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.StorageR\astorage\x12t\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfilingR\x12operationProfiling\x12J\n" +
@@ -2461,7 +2461,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\taudit_log\x18\x05 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.AuditLogR\bauditLog\x12b\n" +
 	"\rset_parameter\x18\x06 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameterR\fsetParameter\x12L\n" +
 	"\x05oplog\x18\a \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OplogR\x05oplog\x12E\n" +
-	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\x85\t\n" +
+	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\x8b\t\n" +
 	"\aStorage\x12d\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTigerR\n" +
 	"wiredTiger\x12Z\n" +
@@ -2486,9 +2486,9 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x04ZLIB\x10\x03\x12\b\n" +
 	"\x04ZSTD\x10\x04\x1aX\n" +
 	"\vIndexConfig\x12I\n" +
-	"\x12prefix_compression\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11prefixCompression\x1aZ\n" +
+	"\x12prefix_compression\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11prefixCompression\x1a`\n" +
 	"\aJournal\x12O\n" +
-	"\x0fcommit_interval\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\x0ecommitInterval\x1a\xd6\x02\n" +
+	"\x0fcommit_interval\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\x0ecommitIntervalJ\x04\b\x01\x10\x02\x1a\xd6\x02\n" +
 	"\x12OperationProfiling\x12\\\n" +
 	"\x04mode\x18\x01 \x01(\x0e2H.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfiling.ModeR\x04mode\x12O\n" +
 	"\x11slow_op_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x0fslowOpThreshold\x12T\n" +
@@ -2581,7 +2581,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x06filter\x18\x01 \x01(\tR\x06filter\x1a\x9c\x01\n" +
 	"\x05Oplog\x12E\n" +
 	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizePercent\x12L\n" +
-	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHoursJ\x04\b\a\x10\b\"\xf7\x13\n" +
+	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHoursJ\x04\b\a\x10\b\"\xfd\x13\n" +
 	"\fMongosConfig\x12J\n" +
 	"\x03net\x18\x03 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.NetworkR\x03net\x12b\n" +
 	"\rset_parameter\x18\x04 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameterR\fsetParameter\x12V\n" +
@@ -2618,7 +2618,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"7sharding_task_executor_pool_min_size_for_config_servers\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR/shardingTaskExecutorPoolMinSizeForConfigServers\x12O\n" +
 	"\x16redact_client_log_data\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR\x13redactClientLogData\x1a\"\n" +
 	"\bAuditLog\x12\x16\n" +
-	"\x06filter\x18\x01 \x01(\tR\x06filter\"\x9a\x02\n" +
+	"\x06filter\x18\x01 \x01(\tR\x06filterJ\x04\b\x01\x10\x03\"\x9a\x02\n" +
 	"\x0fMongodConfigSet\x12[\n" +
 	"\x10effective_config\x18\x01 \x01(\v20.yandex.cloud.mdb.mongodb.v1.config.MongodConfigR\x0feffectiveConfig\x12Q\n" +
 	"\vuser_config\x18\x02 \x01(\v20.yandex.cloud.mdb.mongodb.v1.config.MongodConfigR\n" +

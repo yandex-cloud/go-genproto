@@ -2355,7 +2355,7 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf7\r\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf3\r\n" +
 	"\x1cCreateFunctionVersionRequest\x12%\n" +
 	"\vfunction_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"functionId\x12\x1e\n" +
@@ -2364,8 +2364,8 @@ const file_yandex_cloud_serverless_functions_v1_function_service_proto_rawDesc =
 	"\n" +
 	"entrypoint\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"entrypoint\x12S\n" +
-	"\tresources\x18\x05 \x01(\v2/.yandex.cloud.serverless.functions.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12X\n" +
-	"\x11execution_timeout\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\x10\xe8\xc71\x01\xfa\xc71\b0s-3600sR\x10executionTimeout\x12,\n" +
+	"\tresources\x18\x05 \x01(\v2/.yandex.cloud.serverless.functions.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12T\n" +
+	"\x11execution_timeout\x18\x06 \x01(\v2\x19.google.protobuf.DurationB\f\xfa\xc71\b0s-3600sR\x10executionTimeout\x12,\n" +
 	"\x12service_account_id\x18\a \x01(\tR\x10serviceAccountId\x12I\n" +
 	"\apackage\x18\t \x01(\v2-.yandex.cloud.serverless.functions.v1.PackageH\x00R\apackage\x12*\n" +
 	"\acontent\x18\n" +

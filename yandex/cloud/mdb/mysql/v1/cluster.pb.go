@@ -425,12 +425,10 @@ func (Service_Health) EnumDescriptor() ([]byte, []int) {
 }
 
 // An object that represents MySQL cluster.
-//
 // See [the documentation](/docs/managed-mysql/concepts) for details.
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster.
-	//
 	// This ID is assigned by the platform at the time of creation.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the cluster belongs to.
@@ -869,7 +867,6 @@ func (*ClusterConfig_MysqlConfig_8_4) isClusterConfig_MysqlConfig() {}
 type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the host.
-	//
 	// This name is assigned by the platform at the time of creation.
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -1071,19 +1068,16 @@ func (x *Service) GetHealth() Service_Health {
 type Resources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource preset that defines available computational resources (vCPU, RAM, etc.) for a cluster host.
-	//
 	// All available presets are listed in [the documentation](/docs/managed-mysql/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage (for each cluster host, in bytes).
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
 	// Type of the storage.
-	//
 	// Possible values:
 	// * `network-hdd` - standard network storage
 	// * `network-ssd` - fast network storage
 	// * `network-ssd-nonreplicated` - fast network nonreplicated storage
 	// * `local-ssd` - fast local storage.
-	//
 	// See [the documentation](/docs/managed-mysql/concepts/storage) for details.
 	DiskTypeId    string `protobuf:"bytes,3,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1144,11 +1138,9 @@ func (x *Resources) GetDiskTypeId() string {
 type Access struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Allows access from DataLens.
-	//
 	// See [the documentation](/docs/managed-mysql/operations/datalens-connect) for details.
 	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
 	// Allows SQL queries to the cluster databases from management console.
-	//
 	// See [the documentation](/docs/managed-mysql/operations/web-sql-query) for details.
 	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
 	// Allow access for DataTransfer.
@@ -1347,7 +1339,7 @@ var File_yandex_cloud_mdb_mysql_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/mysql/v1/cluster.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1dyandex/cloud/validation.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x1a+yandex/cloud/mdb/mysql/v1/maintenance.proto\"\xca\n" +
+	"'yandex/cloud/mdb/mysql/v1/cluster.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x1a+yandex/cloud/mdb/mysql/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xca\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +

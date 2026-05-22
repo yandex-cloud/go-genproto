@@ -772,6 +772,62 @@ func (x *FunctionTool) GetStrict() bool {
 	return false
 }
 
+// Represents the invocation of a function with specific arguments.
+type FunctionCall struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The name of the function being called.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The structured arguments passed to the function.
+	// These arguments must adhere to the JSON Schema defined in the corresponding function's parameters.
+	Arguments     *structpb.Struct `protobuf:"bytes,2,opt,name=arguments,proto3" json:"arguments,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FunctionCall) Reset() {
+	*x = FunctionCall{}
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FunctionCall) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FunctionCall) ProtoMessage() {}
+
+func (x *FunctionCall) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FunctionCall.ProtoReflect.Descriptor instead.
+func (*FunctionCall) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *FunctionCall) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *FunctionCall) GetArguments() *structpb.Struct {
+	if x != nil {
+		return x.Arguments
+	}
+	return nil
+}
+
 // Represents a call to a tool.
 type ToolCall struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -785,7 +841,7 @@ type ToolCall struct {
 
 func (x *ToolCall) Reset() {
 	*x = ToolCall{}
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -797,7 +853,7 @@ func (x *ToolCall) String() string {
 func (*ToolCall) ProtoMessage() {}
 
 func (x *ToolCall) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[8]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -810,7 +866,7 @@ func (x *ToolCall) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToolCall.ProtoReflect.Descriptor instead.
 func (*ToolCall) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ToolCall) GetToolCallType() isToolCall_ToolCallType {
@@ -839,62 +895,6 @@ type ToolCall_FunctionCall struct {
 }
 
 func (*ToolCall_FunctionCall) isToolCall_ToolCallType() {}
-
-// Represents the invocation of a function with specific arguments.
-type FunctionCall struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The name of the function being called.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The structured arguments passed to the function.
-	// These arguments must adhere to the JSON Schema defined in the corresponding function's parameters.
-	Arguments     *structpb.Struct `protobuf:"bytes,2,opt,name=arguments,proto3" json:"arguments,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FunctionCall) Reset() {
-	*x = FunctionCall{}
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FunctionCall) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FunctionCall) ProtoMessage() {}
-
-func (x *FunctionCall) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FunctionCall.ProtoReflect.Descriptor instead.
-func (*FunctionCall) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *FunctionCall) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *FunctionCall) GetArguments() *structpb.Struct {
-	if x != nil {
-		return x.Arguments
-	}
-	return nil
-}
 
 // Represents a list of tool calls.
 type ToolCallList struct {
@@ -942,74 +942,6 @@ func (x *ToolCallList) GetToolCalls() []*ToolCall {
 	return nil
 }
 
-// Represents the result of a tool call.
-type ToolResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ToolResultType:
-	//
-	//	*ToolResult_FunctionResult
-	ToolResultType isToolResult_ToolResultType `protobuf_oneof:"ToolResultType"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *ToolResult) Reset() {
-	*x = ToolResult{}
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ToolResult) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ToolResult) ProtoMessage() {}
-
-func (x *ToolResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ToolResult.ProtoReflect.Descriptor instead.
-func (*ToolResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *ToolResult) GetToolResultType() isToolResult_ToolResultType {
-	if x != nil {
-		return x.ToolResultType
-	}
-	return nil
-}
-
-func (x *ToolResult) GetFunctionResult() *FunctionResult {
-	if x != nil {
-		if x, ok := x.ToolResultType.(*ToolResult_FunctionResult); ok {
-			return x.FunctionResult
-		}
-	}
-	return nil
-}
-
-type isToolResult_ToolResultType interface {
-	isToolResult_ToolResultType()
-}
-
-type ToolResult_FunctionResult struct {
-	// Represents the result of a function call.
-	FunctionResult *FunctionResult `protobuf:"bytes,1,opt,name=function_result,json=functionResult,proto3,oneof"`
-}
-
-func (*ToolResult_FunctionResult) isToolResult_ToolResultType() {}
-
 // Represents the result of a function call.
 type FunctionResult struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1025,7 +957,7 @@ type FunctionResult struct {
 
 func (x *FunctionResult) Reset() {
 	*x = FunctionResult{}
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1037,7 +969,7 @@ func (x *FunctionResult) String() string {
 func (*FunctionResult) ProtoMessage() {}
 
 func (x *FunctionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12]
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1050,7 +982,7 @@ func (x *FunctionResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FunctionResult.ProtoReflect.Descriptor instead.
 func (*FunctionResult) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *FunctionResult) GetName() string {
@@ -1087,6 +1019,74 @@ type FunctionResult_Content struct {
 }
 
 func (*FunctionResult_Content) isFunctionResult_ContentType() {}
+
+// Represents the result of a tool call.
+type ToolResult struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ToolResultType:
+	//
+	//	*ToolResult_FunctionResult
+	ToolResultType isToolResult_ToolResultType `protobuf_oneof:"ToolResultType"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ToolResult) Reset() {
+	*x = ToolResult{}
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToolResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToolResult) ProtoMessage() {}
+
+func (x *ToolResult) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToolResult.ProtoReflect.Descriptor instead.
+func (*ToolResult) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ToolResult) GetToolResultType() isToolResult_ToolResultType {
+	if x != nil {
+		return x.ToolResultType
+	}
+	return nil
+}
+
+func (x *ToolResult) GetFunctionResult() *FunctionResult {
+	if x != nil {
+		if x, ok := x.ToolResultType.(*ToolResult_FunctionResult); ok {
+			return x.FunctionResult
+		}
+	}
+	return nil
+}
+
+type isToolResult_ToolResultType interface {
+	isToolResult_ToolResultType()
+}
+
+type ToolResult_FunctionResult struct {
+	// Represents the result of a function call.
+	FunctionResult *FunctionResult `protobuf:"bytes,1,opt,name=function_result,json=functionResult,proto3,oneof"`
+}
+
+func (*ToolResult_FunctionResult) isToolResult_ToolResultType() {}
 
 // Represents a list of tool results.
 type ToolResultList struct {
@@ -1366,24 +1366,24 @@ const file_yandex_cloud_ai_foundation_models_v1_text_common_proto_rawDesc = "" +
 	"\n" +
 	"parameters\x18\x03 \x01(\v2\x17.google.protobuf.StructR\n" +
 	"parameters\x12\x16\n" +
-	"\x06strict\x18\x04 \x01(\bR\x06strict\"u\n" +
-	"\bToolCall\x12Y\n" +
-	"\rfunction_call\x18\x01 \x01(\v22.yandex.cloud.ai.foundation_models.v1.FunctionCallH\x00R\ffunctionCallB\x0e\n" +
-	"\fToolCallType\"Y\n" +
+	"\x06strict\x18\x04 \x01(\bR\x06strict\"Y\n" +
 	"\fFunctionCall\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x125\n" +
-	"\targuments\x18\x02 \x01(\v2\x17.google.protobuf.StructR\targuments\"]\n" +
+	"\targuments\x18\x02 \x01(\v2\x17.google.protobuf.StructR\targuments\"u\n" +
+	"\bToolCall\x12Y\n" +
+	"\rfunction_call\x18\x01 \x01(\v22.yandex.cloud.ai.foundation_models.v1.FunctionCallH\x00R\ffunctionCallB\x0e\n" +
+	"\fToolCallType\"]\n" +
 	"\fToolCallList\x12M\n" +
 	"\n" +
-	"tool_calls\x18\x01 \x03(\v2..yandex.cloud.ai.foundation_models.v1.ToolCallR\ttoolCalls\"\x7f\n" +
-	"\n" +
-	"ToolResult\x12_\n" +
-	"\x0ffunction_result\x18\x01 \x01(\v24.yandex.cloud.ai.foundation_models.v1.FunctionResultH\x00R\x0efunctionResultB\x10\n" +
-	"\x0eToolResultType\"O\n" +
+	"tool_calls\x18\x01 \x03(\v2..yandex.cloud.ai.foundation_models.v1.ToolCallR\ttoolCalls\"O\n" +
 	"\x0eFunctionResult\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\acontent\x18\x02 \x01(\tH\x00R\acontentB\r\n" +
-	"\vContentType\"e\n" +
+	"\vContentType\"\x7f\n" +
+	"\n" +
+	"ToolResult\x12_\n" +
+	"\x0ffunction_result\x18\x01 \x01(\v24.yandex.cloud.ai.foundation_models.v1.FunctionResultH\x00R\x0efunctionResultB\x10\n" +
+	"\x0eToolResultType\"e\n" +
 	"\x0eToolResultList\x12S\n" +
 	"\ftool_results\x18\x01 \x03(\v20.yandex.cloud.ai.foundation_models.v1.ToolResultR\vtoolResults\"=\n" +
 	"\n" +
@@ -1428,11 +1428,11 @@ var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_goTypes = []any{
 	(*Token)(nil),                                // 8: yandex.cloud.ai.foundation_models.v1.Token
 	(*Tool)(nil),                                 // 9: yandex.cloud.ai.foundation_models.v1.Tool
 	(*FunctionTool)(nil),                         // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool
-	(*ToolCall)(nil),                             // 11: yandex.cloud.ai.foundation_models.v1.ToolCall
-	(*FunctionCall)(nil),                         // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall
+	(*FunctionCall)(nil),                         // 11: yandex.cloud.ai.foundation_models.v1.FunctionCall
+	(*ToolCall)(nil),                             // 12: yandex.cloud.ai.foundation_models.v1.ToolCall
 	(*ToolCallList)(nil),                         // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList
-	(*ToolResult)(nil),                           // 14: yandex.cloud.ai.foundation_models.v1.ToolResult
-	(*FunctionResult)(nil),                       // 15: yandex.cloud.ai.foundation_models.v1.FunctionResult
+	(*FunctionResult)(nil),                       // 14: yandex.cloud.ai.foundation_models.v1.FunctionResult
+	(*ToolResult)(nil),                           // 15: yandex.cloud.ai.foundation_models.v1.ToolResult
 	(*ToolResultList)(nil),                       // 16: yandex.cloud.ai.foundation_models.v1.ToolResultList
 	(*JsonSchema)(nil),                           // 17: yandex.cloud.ai.foundation_models.v1.JsonSchema
 	(*ToolChoice)(nil),                           // 18: yandex.cloud.ai.foundation_models.v1.ToolChoice
@@ -1453,11 +1453,11 @@ var file_yandex_cloud_ai_foundation_models_v1_text_common_proto_depIdxs = []int3
 	1,  // 8: yandex.cloud.ai.foundation_models.v1.Alternative.status:type_name -> yandex.cloud.ai.foundation_models.v1.Alternative.AlternativeStatus
 	10, // 9: yandex.cloud.ai.foundation_models.v1.Tool.function:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionTool
 	22, // 10: yandex.cloud.ai.foundation_models.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
-	12, // 11: yandex.cloud.ai.foundation_models.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionCall
-	22, // 12: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
-	11, // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCall
-	15, // 14: yandex.cloud.ai.foundation_models.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionResult
-	14, // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResult
+	22, // 11: yandex.cloud.ai.foundation_models.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
+	11, // 12: yandex.cloud.ai.foundation_models.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionCall
+	12, // 13: yandex.cloud.ai.foundation_models.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.foundation_models.v1.ToolCall
+	14, // 14: yandex.cloud.ai.foundation_models.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.foundation_models.v1.FunctionResult
+	15, // 15: yandex.cloud.ai.foundation_models.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.foundation_models.v1.ToolResult
 	22, // 16: yandex.cloud.ai.foundation_models.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
 	2,  // 17: yandex.cloud.ai.foundation_models.v1.ToolChoice.mode:type_name -> yandex.cloud.ai.foundation_models.v1.ToolChoice.ToolChoiceMode
 	18, // [18:18] is the sub-list for method output_type
@@ -1480,14 +1480,14 @@ func file_yandex_cloud_ai_foundation_models_v1_text_common_proto_init() {
 	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[6].OneofWrappers = []any{
 		(*Tool_Function)(nil),
 	}
-	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[8].OneofWrappers = []any{
+	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[9].OneofWrappers = []any{
 		(*ToolCall_FunctionCall)(nil),
 	}
 	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[11].OneofWrappers = []any{
-		(*ToolResult_FunctionResult)(nil),
+		(*FunctionResult_Content)(nil),
 	}
 	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[12].OneofWrappers = []any{
-		(*FunctionResult_Content)(nil),
+		(*ToolResult_FunctionResult)(nil),
 	}
 	file_yandex_cloud_ai_foundation_models_v1_text_common_proto_msgTypes[15].OneofWrappers = []any{
 		(*ToolChoice_Mode)(nil),

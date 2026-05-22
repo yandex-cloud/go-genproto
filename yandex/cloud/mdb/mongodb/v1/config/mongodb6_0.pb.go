@@ -1552,12 +1552,12 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/mongodb/v1/config/mongodb6_0.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe8\x13\n" +
+	"3yandex/cloud/mdb/mongodb/v1/config/mongodb6_0.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xee\x13\n" +
 	"\x0fMongodConfig6_0\x12U\n" +
 	"\astorage\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.StorageR\astorage\x12w\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2F.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.OperationProfilingR\x12operationProfiling\x12M\n" +
 	"\x03net\x18\x03 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.NetworkR\x03net\x12e\n" +
-	"\rset_parameter\x18\x04 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.SetParameterR\fsetParameter\x1a\xd9\b\n" +
+	"\rset_parameter\x18\x04 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.SetParameterR\fsetParameter\x1a\xdf\b\n" +
 	"\aStorage\x12g\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2F.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.Storage.WiredTigerR\n" +
 	"wiredTiger\x12]\n" +
@@ -1580,9 +1580,9 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\x04ZLIB\x10\x03\x12\b\n" +
 	"\x04ZSTD\x10\x04\x1aX\n" +
 	"\vIndexConfig\x12I\n" +
-	"\x12prefix_compression\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11prefixCompression\x1aZ\n" +
+	"\x12prefix_compression\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11prefixCompression\x1a`\n" +
 	"\aJournal\x12O\n" +
-	"\x0fcommit_interval\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\x0ecommitInterval\x1a\xd9\x02\n" +
+	"\x0fcommit_interval\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\x0ecommitIntervalJ\x04\b\x01\x10\x02\x1a\xd9\x02\n" +
 	"\x12OperationProfiling\x12_\n" +
 	"\x04mode\x18\x01 \x01(\x0e2K.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0.OperationProfiling.ModeR\x04mode\x12O\n" +
 	"\x11slow_op_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x0fslowOpThreshold\x12T\n" +
@@ -1629,7 +1629,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa3\x04\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa9\x04\n" +
 	"\x0fMongosConfig6_0\x12M\n" +
 	"\x03net\x18\x03 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0.NetworkR\x03net\x1a\xc0\x03\n" +
 	"\aNetwork\x12c\n" +
@@ -1644,7 +1644,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb6_0_proto_rawDesc = "" +
 	"\x06SNAPPY\x10\x01\x12\b\n" +
 	"\x04ZLIB\x10\x02\x12\b\n" +
 	"\x04ZSTD\x10\x03\x12\f\n" +
-	"\bDISABLED\x10\x04\"\xa6\x02\n" +
+	"\bDISABLED\x10\x04J\x04\b\x01\x10\x03\"\xa6\x02\n" +
 	"\x12MongodConfigSet6_0\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig6_0R\n" +

@@ -73,7 +73,7 @@ type ParameterPresetValue struct {
 	// Parameter name (id)
 	ParameterName string `protobuf:"bytes,1,opt,name=parameter_name,json=parameterName,proto3" json:"parameter_name,omitempty"`
 	// Parameter value.
-	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Value         []string `protobuf:"bytes,2,rep,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -115,11 +115,11 @@ func (x *ParameterPresetValue) GetParameterName() string {
 	return ""
 }
 
-func (x *ParameterPresetValue) GetValue() string {
+func (x *ParameterPresetValue) GetValue() []string {
 	if x != nil {
 		return x.Value
 	}
-	return ""
+	return nil
 }
 
 // Selected logs overlay
@@ -251,7 +251,7 @@ const file_yandex_cloud_monitoring_v3_preset_item_proto_rawDesc = "" +
 	"service_id\x18\x01 \x01(\tR\tserviceId\"S\n" +
 	"\x14ParameterPresetValue\x12%\n" +
 	"\x0eparameter_name\x18\x01 \x01(\tR\rparameterName\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\",\n" +
+	"\x05value\x18\x02 \x03(\tR\x05value\",\n" +
 	"\x16LogsOverlayPresetValue\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\xb4\x02\n" +
 	"\n" +

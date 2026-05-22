@@ -428,7 +428,7 @@ var File_yandex_cloud_mdb_mysql_v1alpha_database_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_mysql_v1alpha_database_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/mysql/v1alpha/database_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a-yandex/cloud/mdb/mysql/v1alpha/database.proto\"\x86\x01\n" +
+	"5yandex/cloud/mdb/mysql/v1alpha/database_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/mysql/v1alpha/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
@@ -458,14 +458,14 @@ const file_yandex_cloud_mdb_mysql_v1alpha_database_service_proto_rawDesc = "" +
 	"\x16DeleteDatabaseMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName2\xb4\x06\n" +
-	"\x0fDatabaseService\x12\xb3\x01\n" +
-	"\x03Get\x122.yandex.cloud.mdb.mysql.v1alpha.GetDatabaseRequest\x1a(.yandex.cloud.mdb.mysql.v1alpha.Database\"N\x82\xd3\xe4\x93\x02H\x12F/managed-mysql/v1alpha/clusters/{cluster_id}/databases/{database_name}\x12\xb3\x01\n" +
-	"\x04List\x124.yandex.cloud.mdb.mysql.v1alpha.ListDatabasesRequest\x1a5.yandex.cloud.mdb.mysql.v1alpha.ListDatabasesResponse\">\x82\xd3\xe4\x93\x028\x126/managed-mysql/v1alpha/clusters/{cluster_id}/databases\x12\xcb\x01\n" +
-	"\x06Create\x125.yandex.cloud.mdb.mysql.v1alpha.CreateDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"g\xb2\xd2*\"\n" +
-	"\x16CreateDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02;:\x01*\"6/managed-mysql/v1alpha/clusters/{cluster_id}/databases\x12\xe6\x01\n" +
-	"\x06Delete\x125.yandex.cloud.mdb.mysql.v1alpha.DeleteDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"\x81\x01\xb2\xd2*/\n" +
-	"\x16DeleteDatabaseMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H*F/managed-mysql/v1alpha/clusters/{cluster_id}/databases/{database_name}Bn\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName2\xa3\x06\n" +
+	"\x0fDatabaseService\x12\xaf\x01\n" +
+	"\x03Get\x122.yandex.cloud.mdb.mysql.v1alpha.GetDatabaseRequest\x1a(.yandex.cloud.mdb.mysql.v1alpha.Database\"J\x82\xd3\xe4\x93\x02D\x12B/mdb/mysql/v1alpha/clusters/{cluster_id}/databases/{database_name}\x12\xaf\x01\n" +
+	"\x04List\x124.yandex.cloud.mdb.mysql.v1alpha.ListDatabasesRequest\x1a5.yandex.cloud.mdb.mysql.v1alpha.ListDatabasesResponse\":\x82\xd3\xe4\x93\x024\x122/mdb/mysql/v1alpha/clusters/{cluster_id}/databases\x12\xc7\x01\n" +
+	"\x06Create\x125.yandex.cloud.mdb.mysql.v1alpha.CreateDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"c\xb2\xd2*\"\n" +
+	"\x16CreateDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x027:\x01*\"2/mdb/mysql/v1alpha/clusters/{cluster_id}/databases\x12\xe1\x01\n" +
+	"\x06Delete\x125.yandex.cloud.mdb.mysql.v1alpha.DeleteDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"}\xb2\xd2*/\n" +
+	"\x16DeleteDatabaseMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02D*B/mdb/mysql/v1alpha/clusters/{cluster_id}/databases/{database_name}Bn\n" +
 	"\"yandex.cloud.api.mdb.mysql.v1alphaZHgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha;mysqlb\x06proto3"
 
 var (

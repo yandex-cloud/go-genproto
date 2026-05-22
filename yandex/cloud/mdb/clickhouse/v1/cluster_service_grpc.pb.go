@@ -26,10 +26,10 @@ const (
 	ClusterService_Create_FullMethodName                   = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Create"
 	ClusterService_Update_FullMethodName                   = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Update"
 	ClusterService_Delete_FullMethodName                   = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Delete"
+	ClusterService_AddZookeeper_FullMethodName             = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddZookeeper"
 	ClusterService_Start_FullMethodName                    = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Start"
 	ClusterService_Stop_FullMethodName                     = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Stop"
 	ClusterService_Move_FullMethodName                     = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Move"
-	ClusterService_AddZookeeper_FullMethodName             = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/AddZookeeper"
 	ClusterService_Backup_FullMethodName                   = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Backup"
 	ClusterService_Restore_FullMethodName                  = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/Restore"
 	ClusterService_RescheduleMaintenance_FullMethodName    = "/yandex.cloud.mdb.clickhouse.v1.ClusterService/RescheduleMaintenance"
@@ -70,7 +70,6 @@ const (
 // A set of methods for managing ClickHouse clusters.
 type ClusterServiceClient interface {
 	// Returns the specified ClickHouse cluster.
-	//
 	// To get the list of available ClickHouse clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves a list of ClickHouse clusters that belong
@@ -82,14 +81,14 @@ type ClusterServiceClient interface {
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified ClickHouse cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Adds a ZooKeeper subcluster to the specified ClickHouse cluster.
+	AddZookeeper(ctx context.Context, in *AddClusterZookeeperRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the specified ClickHouse cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified ClickHouse cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves a ClickHouse cluster to the specified folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Adds a ZooKeeper subcluster to the specified ClickHouse cluster.
-	AddZookeeper(ctx context.Context, in *AddClusterZookeeperRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a backup for the specified ClickHouse cluster.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates a new ClickHouse cluster using the specified backup.
@@ -215,6 +214,16 @@ func (c *clusterServiceClient) Delete(ctx context.Context, in *DeleteClusterRequ
 	return out, nil
 }
 
+func (c *clusterServiceClient) AddZookeeper(ctx context.Context, in *AddClusterZookeeperRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_AddZookeeper_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -239,16 +248,6 @@ func (c *clusterServiceClient) Move(ctx context.Context, in *MoveClusterRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Move_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) AddZookeeper(ctx context.Context, in *AddClusterZookeeperRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_AddZookeeper_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -583,7 +582,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing ClickHouse clusters.
 type ClusterServiceServer interface {
 	// Returns the specified ClickHouse cluster.
-	//
 	// To get the list of available ClickHouse clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves a list of ClickHouse clusters that belong
@@ -595,14 +593,14 @@ type ClusterServiceServer interface {
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified ClickHouse cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
+	// Adds a ZooKeeper subcluster to the specified ClickHouse cluster.
+	AddZookeeper(context.Context, *AddClusterZookeeperRequest) (*operation.Operation, error)
 	// Starts the specified ClickHouse cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Stops the specified ClickHouse cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
 	// Moves a ClickHouse cluster to the specified folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
-	// Adds a ZooKeeper subcluster to the specified ClickHouse cluster.
-	AddZookeeper(context.Context, *AddClusterZookeeperRequest) (*operation.Operation, error)
 	// Creates a backup for the specified ClickHouse cluster.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
 	// Creates a new ClickHouse cluster using the specified backup.
@@ -692,6 +690,9 @@ func (UnimplementedClusterServiceServer) Update(context.Context, *UpdateClusterR
 func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
+func (UnimplementedClusterServiceServer) AddZookeeper(context.Context, *AddClusterZookeeperRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddZookeeper not implemented")
+}
 func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
 }
@@ -700,9 +701,6 @@ func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterReque
 }
 func (UnimplementedClusterServiceServer) Move(context.Context, *MoveClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
-}
-func (UnimplementedClusterServiceServer) AddZookeeper(context.Context, *AddClusterZookeeperRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method AddZookeeper not implemented")
 }
 func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Backup not implemented")
@@ -907,6 +905,24 @@ func _ClusterService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_AddZookeeper_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddClusterZookeeperRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).AddZookeeper(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_AddZookeeper_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).AddZookeeper(ctx, req.(*AddClusterZookeeperRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartClusterRequest)
 	if err := dec(in); err != nil {
@@ -957,24 +973,6 @@ func _ClusterService_Move_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Move(ctx, req.(*MoveClusterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_AddZookeeper_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddClusterZookeeperRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).AddZookeeper(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_AddZookeeper_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).AddZookeeper(ctx, req.(*AddClusterZookeeperRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1558,6 +1556,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_Delete_Handler,
 		},
 		{
+			MethodName: "AddZookeeper",
+			Handler:    _ClusterService_AddZookeeper_Handler,
+		},
+		{
 			MethodName: "Start",
 			Handler:    _ClusterService_Start_Handler,
 		},
@@ -1568,10 +1570,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _ClusterService_Move_Handler,
-		},
-		{
-			MethodName: "AddZookeeper",
-			Handler:    _ClusterService_AddZookeeper_Handler,
 		},
 		{
 			MethodName: "Backup",

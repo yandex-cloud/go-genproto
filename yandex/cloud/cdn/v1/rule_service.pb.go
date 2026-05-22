@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -25,6 +26,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// A request to list resource rules.
 type ListResourceRulesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -70,6 +72,7 @@ func (x *ListResourceRulesRequest) GetResourceId() string {
 	return ""
 }
 
+// A response to list resource rules.
 type ListResourceRulesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of the resource rules.
@@ -115,6 +118,7 @@ func (x *ListResourceRulesResponse) GetRules() []*Rule {
 	return nil
 }
 
+// A request to create a resource rule.
 type CreateResourceRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -122,13 +126,18 @@ type CreateResourceRuleRequest struct {
 	// Name of created resource rule.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource rule pattern.
-	RulePattern string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options     *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	RulePattern string `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	// Resource options.
+	Options *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
 	// Rules are ordered by weight in ascending order (lower weights execute first)
 	// Weight must be between 0 and 9999 inclusive
-	Weight        int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Weight int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
+	// ID of origins group. Specify non zero value to override parent origin group.
+	OriginsGroupId int64 `protobuf:"varint,6,opt,name=origins_group_id,json=originsGroupId,proto3" json:"origins_group_id,omitempty"`
+	// Protocol used for communication with origin. Required if origins_group_id is specified.
+	OriginProtocol OriginProtocol `protobuf:"varint,7,opt,name=origin_protocol,json=originProtocol,proto3,enum=yandex.cloud.cdn.v1.OriginProtocol" json:"origin_protocol,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateResourceRuleRequest) Reset() {
@@ -196,6 +205,21 @@ func (x *CreateResourceRuleRequest) GetWeight() int64 {
 	return 0
 }
 
+func (x *CreateResourceRuleRequest) GetOriginsGroupId() int64 {
+	if x != nil {
+		return x.OriginsGroupId
+	}
+	return 0
+}
+
+func (x *CreateResourceRuleRequest) GetOriginProtocol() OriginProtocol {
+	if x != nil {
+		return x.OriginProtocol
+	}
+	return OriginProtocol_ORIGIN_PROTOCOL_UNSPECIFIED
+}
+
+// A metadata for create resource rule operation.
 type CreateResourceRuleMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -250,6 +274,7 @@ func (x *CreateResourceRuleMetadata) GetRuleId() int64 {
 	return 0
 }
 
+// A request to get a resource rule.
 type GetResourceRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -304,6 +329,7 @@ func (x *GetResourceRuleRequest) GetRuleId() int64 {
 	return 0
 }
 
+// A request to update a resource rule.
 type UpdateResourceRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Rules are ordered by weight in ascending order (lower weights execute first)
@@ -316,10 +342,17 @@ type UpdateResourceRuleRequest struct {
 	// Name of updated resource rule.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Resource rule pattern.
-	RulePattern   string           `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options       *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	RulePattern string `protobuf:"bytes,4,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	// Resource options.
+	Options *ResourceOptions `protobuf:"bytes,5,opt,name=options,proto3" json:"options,omitempty"`
+	// ID of origins group.
+	// Set non zero value to override parent origin group, `0` to use parent origin group and `null` to make no changes.
+	OriginsGroupId *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=origins_group_id,json=originsGroupId,proto3" json:"origins_group_id,omitempty"`
+	// Protocol used for communication with origin.
+	// Required if enabling origins_group_id.
+	OriginProtocol OriginProtocol `protobuf:"varint,8,opt,name=origin_protocol,json=originProtocol,proto3,enum=yandex.cloud.cdn.v1.OriginProtocol" json:"origin_protocol,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *UpdateResourceRuleRequest) Reset() {
@@ -394,6 +427,21 @@ func (x *UpdateResourceRuleRequest) GetOptions() *ResourceOptions {
 	return nil
 }
 
+func (x *UpdateResourceRuleRequest) GetOriginsGroupId() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.OriginsGroupId
+	}
+	return nil
+}
+
+func (x *UpdateResourceRuleRequest) GetOriginProtocol() OriginProtocol {
+	if x != nil {
+		return x.OriginProtocol
+	}
+	return OriginProtocol_ORIGIN_PROTOCOL_UNSPECIFIED
+}
+
+// A metadata for update resource rule operation.
 type UpdateResourceRuleMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -448,6 +496,7 @@ func (x *UpdateResourceRuleMetadata) GetRuleId() int64 {
 	return 0
 }
 
+// A request to delete a resource rule.
 type DeleteResourceRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -502,6 +551,7 @@ func (x *DeleteResourceRuleRequest) GetRuleId() int64 {
 	return 0
 }
 
+// A metadata for delete resource rule operation.
 type DeleteResourceRuleMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of resource.
@@ -560,19 +610,21 @@ var File_yandex_cloud_cdn_v1_rule_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/cdn/v1/rule_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1eyandex/cloud/cdn/v1/rule.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
+	"&yandex/cloud/cdn/v1/rule_service.proto\x12\x13yandex.cloud.cdn.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1eyandex/cloud/cdn/v1/rule.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
 	"\x18ListResourceRulesRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\"L\n" +
 	"\x19ListResourceRulesResponse\x12/\n" +
-	"\x05rules\x18\x01 \x03(\v2\x19.yandex.cloud.cdn.v1.RuleR\x05rules\"\xf6\x01\n" +
+	"\x05rules\x18\x01 \x03(\v2\x19.yandex.cloud.cdn.v1.RuleR\x05rules\"\xee\x02\n" +
 	"\x19CreateResourceRuleRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12 \n" +
 	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x120\n" +
 	"\frule_pattern\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
 	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x16\n" +
-	"\x06weight\x18\x05 \x01(\x03R\x06weight\"l\n" +
+	"\x06weight\x18\x05 \x01(\x03R\x06weight\x12(\n" +
+	"\x10origins_group_id\x18\x06 \x01(\x03R\x0eoriginsGroupId\x12L\n" +
+	"\x0forigin_protocol\x18\a \x01(\x0e2#.yandex.cloud.cdn.v1.OriginProtocolR\x0eoriginProtocol\"l\n" +
 	"\x1aCreateResourceRuleMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
@@ -580,7 +632,7 @@ const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\x16GetResourceRuleRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"resourceId\x12\x1f\n" +
-	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\"\x9f\x02\n" +
+	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\"\xb4\x03\n" +
 	"\x19UpdateResourceRuleRequest\x12\x1b\n" +
 	"\x06weight\x18\x06 \x01(\x03H\x00R\x06weight\x88\x01\x01\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
@@ -588,7 +640,9 @@ const file_yandex_cloud_cdn_v1_rule_service_proto_rawDesc = "" +
 	"\arule_id\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\x06ruleId\x12\x1c\n" +
 	"\x04name\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x04name\x12,\n" +
 	"\frule_pattern\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
-	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptionsB\t\n" +
+	"\aoptions\x18\x05 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12E\n" +
+	"\x10origins_group_id\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x0eoriginsGroupId\x12L\n" +
+	"\x0forigin_protocol\x18\b \x01(\x0e2#.yandex.cloud.cdn.v1.OriginProtocolR\x0eoriginProtocolB\t\n" +
 	"\a_weight\"l\n" +
 	"\x1aUpdateResourceRuleMetadata\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
@@ -638,27 +692,32 @@ var file_yandex_cloud_cdn_v1_rule_service_proto_goTypes = []any{
 	(*DeleteResourceRuleMetadata)(nil), // 8: yandex.cloud.cdn.v1.DeleteResourceRuleMetadata
 	(*Rule)(nil),                       // 9: yandex.cloud.cdn.v1.Rule
 	(*ResourceOptions)(nil),            // 10: yandex.cloud.cdn.v1.ResourceOptions
-	(*operation.Operation)(nil),        // 11: yandex.cloud.operation.Operation
+	(OriginProtocol)(0),                // 11: yandex.cloud.cdn.v1.OriginProtocol
+	(*wrapperspb.Int64Value)(nil),      // 12: google.protobuf.Int64Value
+	(*operation.Operation)(nil),        // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cdn_v1_rule_service_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.cdn.v1.ListResourceRulesResponse.rules:type_name -> yandex.cloud.cdn.v1.Rule
 	10, // 1: yandex.cloud.cdn.v1.CreateResourceRuleRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
-	10, // 2: yandex.cloud.cdn.v1.UpdateResourceRuleRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
-	0,  // 3: yandex.cloud.cdn.v1.ResourceRulesService.List:input_type -> yandex.cloud.cdn.v1.ListResourceRulesRequest
-	2,  // 4: yandex.cloud.cdn.v1.ResourceRulesService.Create:input_type -> yandex.cloud.cdn.v1.CreateResourceRuleRequest
-	4,  // 5: yandex.cloud.cdn.v1.ResourceRulesService.Get:input_type -> yandex.cloud.cdn.v1.GetResourceRuleRequest
-	5,  // 6: yandex.cloud.cdn.v1.ResourceRulesService.Update:input_type -> yandex.cloud.cdn.v1.UpdateResourceRuleRequest
-	7,  // 7: yandex.cloud.cdn.v1.ResourceRulesService.Delete:input_type -> yandex.cloud.cdn.v1.DeleteResourceRuleRequest
-	1,  // 8: yandex.cloud.cdn.v1.ResourceRulesService.List:output_type -> yandex.cloud.cdn.v1.ListResourceRulesResponse
-	11, // 9: yandex.cloud.cdn.v1.ResourceRulesService.Create:output_type -> yandex.cloud.operation.Operation
-	9,  // 10: yandex.cloud.cdn.v1.ResourceRulesService.Get:output_type -> yandex.cloud.cdn.v1.Rule
-	11, // 11: yandex.cloud.cdn.v1.ResourceRulesService.Update:output_type -> yandex.cloud.operation.Operation
-	11, // 12: yandex.cloud.cdn.v1.ResourceRulesService.Delete:output_type -> yandex.cloud.operation.Operation
-	8,  // [8:13] is the sub-list for method output_type
-	3,  // [3:8] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	11, // 2: yandex.cloud.cdn.v1.CreateResourceRuleRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
+	10, // 3: yandex.cloud.cdn.v1.UpdateResourceRuleRequest.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
+	12, // 4: yandex.cloud.cdn.v1.UpdateResourceRuleRequest.origins_group_id:type_name -> google.protobuf.Int64Value
+	11, // 5: yandex.cloud.cdn.v1.UpdateResourceRuleRequest.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
+	0,  // 6: yandex.cloud.cdn.v1.ResourceRulesService.List:input_type -> yandex.cloud.cdn.v1.ListResourceRulesRequest
+	2,  // 7: yandex.cloud.cdn.v1.ResourceRulesService.Create:input_type -> yandex.cloud.cdn.v1.CreateResourceRuleRequest
+	4,  // 8: yandex.cloud.cdn.v1.ResourceRulesService.Get:input_type -> yandex.cloud.cdn.v1.GetResourceRuleRequest
+	5,  // 9: yandex.cloud.cdn.v1.ResourceRulesService.Update:input_type -> yandex.cloud.cdn.v1.UpdateResourceRuleRequest
+	7,  // 10: yandex.cloud.cdn.v1.ResourceRulesService.Delete:input_type -> yandex.cloud.cdn.v1.DeleteResourceRuleRequest
+	1,  // 11: yandex.cloud.cdn.v1.ResourceRulesService.List:output_type -> yandex.cloud.cdn.v1.ListResourceRulesResponse
+	13, // 12: yandex.cloud.cdn.v1.ResourceRulesService.Create:output_type -> yandex.cloud.operation.Operation
+	9,  // 13: yandex.cloud.cdn.v1.ResourceRulesService.Get:output_type -> yandex.cloud.cdn.v1.Rule
+	13, // 14: yandex.cloud.cdn.v1.ResourceRulesService.Update:output_type -> yandex.cloud.operation.Operation
+	13, // 15: yandex.cloud.cdn.v1.ResourceRulesService.Delete:output_type -> yandex.cloud.operation.Operation
+	11, // [11:16] is the sub-list for method output_type
+	6,  // [6:11] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cdn_v1_rule_service_proto_init() }

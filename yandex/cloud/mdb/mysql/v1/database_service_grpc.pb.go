@@ -32,7 +32,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // A set of methods for managing MySQL databases in a cluster.
-//
 // See [the documentation](/docs/managed-mysql/operations/databases) for details.
 type DatabaseServiceClient interface {
 	// Retrieves information about the specified database.
@@ -110,7 +109,6 @@ func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRe
 // for forward compatibility.
 //
 // A set of methods for managing MySQL databases in a cluster.
-//
 // See [the documentation](/docs/managed-mysql/operations/databases) for details.
 type DatabaseServiceServer interface {
 	// Retrieves information about the specified database.

@@ -24,7 +24,6 @@ const (
 type TextAnnotation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Pages of the recognized file.
-	//
 	// For JPEG and PNG files contains only 1 page.
 	Pages         []*Page `protobuf:"bytes,1,rep,name=pages,proto3" json:"pages,omitempty"`
 	unknownFields protoimpl.UnknownFields

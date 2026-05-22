@@ -97,8 +97,10 @@ type CreateSynchronizationSettingsRequest struct {
 	UserAttributeMappings []*UserAttributeMapping `protobuf:"bytes,8,rep,name=user_attribute_mappings,json=userAttributeMappings,proto3" json:"user_attribute_mappings,omitempty"`
 	// Group attribute mappings.
 	GroupAttributeMappings []*GroupAttributeMapping `protobuf:"bytes,9,rep,name=group_attribute_mappings,json=groupAttributeMappings,proto3" json:"group_attribute_mappings,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	// Enables password writeback feature.
+	EnablePasswordWriteback bool `protobuf:"varint,10,opt,name=enable_password_writeback,json=enablePasswordWriteback,proto3" json:"enable_password_writeback,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CreateSynchronizationSettingsRequest) Reset() {
@@ -194,6 +196,13 @@ func (x *CreateSynchronizationSettingsRequest) GetGroupAttributeMappings() []*Gr
 	return nil
 }
 
+func (x *CreateSynchronizationSettingsRequest) GetEnablePasswordWriteback() bool {
+	if x != nil {
+		return x.EnablePasswordWriteback
+	}
+	return false
+}
+
 // Metadata for the [SynchronizationService.CreateSynchronizationSettings] operation.
 type CreateSynchronizationSettingsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -262,9 +271,11 @@ type UpdateSynchronizationSettingsRequest struct {
 	// Group attribute mappings.
 	GroupAttributeMappings []*GroupAttributeMapping `protobuf:"bytes,9,rep,name=group_attribute_mappings,json=groupAttributeMappings,proto3" json:"group_attribute_mappings,omitempty"`
 	// Field mask that specifies which fields are going to be updated.
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,10,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,10,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Enables password writeback feature.
+	EnablePasswordWriteback bool `protobuf:"varint,11,opt,name=enable_password_writeback,json=enablePasswordWriteback,proto3" json:"enable_password_writeback,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *UpdateSynchronizationSettingsRequest) Reset() {
@@ -365,6 +376,13 @@ func (x *UpdateSynchronizationSettingsRequest) GetUpdateMask() *fieldmaskpb.Fiel
 		return x.UpdateMask
 	}
 	return nil
+}
+
+func (x *UpdateSynchronizationSettingsRequest) GetEnablePasswordWriteback() bool {
+	if x != nil {
+		return x.EnablePasswordWriteback
+	}
+	return false
 }
 
 // Metadata for the [SynchronizationService.UpdateSynchronizationSettings] operation.
@@ -1023,7 +1041,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto p
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDesc = "" +
 	"\n" +
-	"Eyandex/cloud/organizationmanager/v1/idp/synchronization_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\"\xc1\x06\n" +
+	"Eyandex/cloud/organizationmanager/v1/idp/synchronization_service.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1aFyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x1a\x1dyandex/cloud/validation.proto\"\xfd\x06\n" +
 	"$CreateSynchronizationSettingsRequest\x12>\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12\\\n" +
 	"\x06filter\x18\x02 \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.SynchronizationFilterB\x04\xe8\xc71\x01R\x06filter\x128\n" +
@@ -1034,9 +1052,11 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto
 	"\x16allow_to_capture_users\x18\x06 \x01(\bR\x13allowToCaptureUsers\x125\n" +
 	"\x17allow_to_capture_groups\x18\a \x01(\bR\x14allowToCaptureGroups\x12\x7f\n" +
 	"\x17user_attribute_mappings\x18\b \x03(\v2=.yandex.cloud.organizationmanager.v1.idp.UserAttributeMappingB\b\x82\xc81\x04<=50R\x15userAttributeMappings\x12\x82\x01\n" +
-	"\x18group_attribute_mappings\x18\t \x03(\v2>.yandex.cloud.organizationmanager.v1.idp.GroupAttributeMappingB\b\x82\xc81\x04<=50R\x16groupAttributeMappings\"Y\n" +
+	"\x18group_attribute_mappings\x18\t \x03(\v2>.yandex.cloud.organizationmanager.v1.idp.GroupAttributeMappingB\b\x82\xc81\x04<=50R\x16groupAttributeMappings\x12:\n" +
+	"\x19enable_password_writeback\x18\n" +
+	" \x01(\bR\x17enablePasswordWriteback\"Y\n" +
 	"%CreateSynchronizationSettingsMetadata\x120\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\"\xf8\x06\n" +
+	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\"\xb4\a\n" +
 	"$UpdateSynchronizationSettingsRequest\x12>\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12V\n" +
 	"\x06filter\x18\x02 \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.SynchronizationFilterR\x06filter\x128\n" +
@@ -1050,7 +1070,8 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto
 	"\x18group_attribute_mappings\x18\t \x03(\v2>.yandex.cloud.organizationmanager.v1.idp.GroupAttributeMappingB\b\x82\xc81\x04<=50R\x16groupAttributeMappings\x12;\n" +
 	"\vupdate_mask\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\"Y\n" +
+	"updateMask\x12:\n" +
+	"\x19enable_password_writeback\x18\v \x01(\bR\x17enablePasswordWriteback\"Y\n" +
 	"%UpdateSynchronizationSettingsMetadata\x120\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\"f\n" +
 	"$DeleteSynchronizationSettingsRequest\x12>\n" +

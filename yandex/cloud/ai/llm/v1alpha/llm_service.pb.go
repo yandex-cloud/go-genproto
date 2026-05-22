@@ -286,15 +286,15 @@ type ChatRequest struct {
 	Model string `protobuf:"bytes,1,opt,name=model,proto3" json:"model,omitempty"`
 	// Configuration options for text generation.
 	GenerationOptions *GenerationOptions `protobuf:"bytes,2,opt,name=generation_options,json=generationOptions,proto3" json:"generation_options,omitempty"`
+	// A list of messages in the conversation.
+	Messages []*Message `protobuf:"bytes,4,rep,name=messages,proto3" json:"messages,omitempty"`
 	// Text precondition or context of the request.
 	// For example, the instruction may be "You are a helpful assistant".
 	//
 	// Types that are valid to be assigned to Instruction:
 	//
 	//	*ChatRequest_InstructionText
-	Instruction isChatRequest_Instruction `protobuf_oneof:"Instruction"`
-	// A list of messages in the conversation.
-	Messages      []*Message `protobuf:"bytes,4,rep,name=messages,proto3" json:"messages,omitempty"`
+	Instruction   isChatRequest_Instruction `protobuf_oneof:"Instruction"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -343,6 +343,13 @@ func (x *ChatRequest) GetGenerationOptions() *GenerationOptions {
 	return nil
 }
 
+func (x *ChatRequest) GetMessages() []*Message {
+	if x != nil {
+		return x.Messages
+	}
+	return nil
+}
+
 func (x *ChatRequest) GetInstruction() isChatRequest_Instruction {
 	if x != nil {
 		return x.Instruction
@@ -357,13 +364,6 @@ func (x *ChatRequest) GetInstructionText() string {
 		}
 	}
 	return ""
-}
-
-func (x *ChatRequest) GetMessages() []*Message {
-	if x != nil {
-		return x.Messages
-	}
-	return nil
 }
 
 type isChatRequest_Instruction interface {
@@ -657,7 +657,7 @@ var File_yandex_cloud_ai_llm_v1alpha_llm_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_ai_llm_v1alpha_llm_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/ai/llm/v1alpha/llm_service.proto\x12\x1byandex.cloud.ai.llm.v1alpha\x1a%yandex/cloud/ai/llm/v1alpha/llm.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\xa7\x02\n" +
+	"-yandex/cloud/ai/llm/v1alpha/llm_service.proto\x12\x1byandex.cloud.ai.llm.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a%yandex/cloud/ai/llm/v1alpha/llm.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xa7\x02\n" +
 	"\x0fInstructRequest\x12\x1e\n" +
 	"\x05model\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x05model\x12]\n" +
 	"\x12generation_options\x18\x02 \x01(\v2..yandex.cloud.ai.llm.v1alpha.GenerationOptionsR\x11generationOptions\x12+\n" +
@@ -671,9 +671,9 @@ const file_yandex_cloud_ai_llm_v1alpha_llm_service_proto_rawDesc = "" +
 	"\x11num_prompt_tokens\x18\x02 \x01(\x03R\x0fnumPromptTokens\"\x8a\x02\n" +
 	"\vChatRequest\x12\x1e\n" +
 	"\x05model\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x05model\x12]\n" +
-	"\x12generation_options\x18\x02 \x01(\v2..yandex.cloud.ai.llm.v1alpha.GenerationOptionsR\x11generationOptions\x12+\n" +
-	"\x10instruction_text\x18\x03 \x01(\tH\x00R\x0finstructionText\x12@\n" +
-	"\bmessages\x18\x04 \x03(\v2$.yandex.cloud.ai.llm.v1alpha.MessageR\bmessagesB\r\n" +
+	"\x12generation_options\x18\x02 \x01(\v2..yandex.cloud.ai.llm.v1alpha.GenerationOptionsR\x11generationOptions\x12@\n" +
+	"\bmessages\x18\x04 \x03(\v2$.yandex.cloud.ai.llm.v1alpha.MessageR\bmessages\x12+\n" +
+	"\x10instruction_text\x18\x03 \x01(\tH\x00R\x0finstructionTextB\r\n" +
 	"\vInstruction\"m\n" +
 	"\fChatResponse\x12>\n" +
 	"\amessage\x18\x01 \x01(\v2$.yandex.cloud.ai.llm.v1alpha.MessageR\amessage\x12\x1d\n" +

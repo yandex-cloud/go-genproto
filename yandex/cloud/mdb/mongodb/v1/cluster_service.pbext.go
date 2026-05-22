@@ -1471,3 +1471,7 @@ func (m *ConfigSpec) SetAccess(v *Access) {
 func (m *ConfigSpec) SetMongodb(v *MongodbSpec) {
 	m.Mongodb = v
 }
+
+func (m *ConfigSpec) SetAutocompactConfig(v *AutoCompactConfig) {
+	m.AutocompactConfig = v
+}

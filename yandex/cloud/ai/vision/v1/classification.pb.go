@@ -24,7 +24,6 @@ const (
 type ClassAnnotation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Properties extracted by a specified model.
-	//
 	// For example, if you ask to evaluate the image quality,
 	// the service could return such properties as `good` and `bad`.
 	Properties    []*Property `protobuf:"bytes,1,rep,name=properties,proto3" json:"properties,omitempty"`

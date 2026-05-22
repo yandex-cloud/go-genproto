@@ -73,6 +73,7 @@ func (x *GetResourceRequest) GetResourceId() string {
 	return ""
 }
 
+// A request to list resources.
 type ListResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to request listing for.

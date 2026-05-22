@@ -537,7 +537,7 @@ var File_yandex_cloud_ai_assistants_v1_searchindex_search_index_proto protorefle
 
 const file_yandex_cloud_ai_assistants_v1_searchindex_search_index_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/ai/assistants/v1/searchindex/search_index.proto\x12)yandex.cloud.ai.assistants.v1.searchindex\x1a#yandex/cloud/ai/common/common.proto\x1a6yandex/cloud/ai/assistants/v1/searchindex/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\a\n" +
+	"<yandex/cloud/ai/assistants/v1/searchindex/search_index.proto\x12)yandex.cloud.ai.assistants.v1.searchindex\x1a\x1fgoogle/protobuf/timestamp.proto\x1a6yandex/cloud/ai/assistants/v1/searchindex/common.proto\x1a#yandex/cloud/ai/common/common.proto\"\xa4\a\n" +
 	"\vSearchIndex\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +

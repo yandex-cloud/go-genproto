@@ -202,7 +202,7 @@ var File_yandex_cloud_ai_assistants_v1_threads_message_service_proto protoreflec
 
 const file_yandex_cloud_ai_assistants_v1_threads_message_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/ai/assistants/v1/threads/message_service.proto\x12%yandex.cloud.ai.assistants.v1.threads\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"\xf3\x02\n" +
+	";yandex/cloud/ai/assistants/v1/threads/message_service.proto\x12%yandex.cloud.ai.assistants.v1.threads\x1a\x1cgoogle/api/annotations.proto\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a\x1dyandex/cloud/validation.proto\"\xf3\x02\n" +
 	"\x14CreateMessageRequest\x12!\n" +
 	"\tthread_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bthreadId\x12E\n" +
 	"\x06author\x18\x02 \x01(\v2-.yandex.cloud.ai.assistants.v1.threads.AuthorR\x06author\x12_\n" +

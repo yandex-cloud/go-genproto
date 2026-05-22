@@ -341,7 +341,7 @@ var File_yandex_cloud_ai_batch_inference_v1_inference_options_proto protoreflect
 
 const file_yandex_cloud_ai_batch_inference_v1_inference_options_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/ai/batch_inference/v1/inference_options.proto\x12\"yandex.cloud.ai.batch_inference.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1dyandex/cloud/validation.proto\"\x8f\x03\n" +
+	":yandex/cloud/ai/batch_inference/v1/inference_options.proto\x12\"yandex.cloud.ai.batch_inference.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8f\x03\n" +
 	"\x16BatchCompletionRequest\x12!\n" +
 	"\tmodel_uri\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bmodelUri\x120\n" +
 	"\x11source_dataset_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0fsourceDatasetId\x12d\n" +
@@ -365,8 +365,8 @@ const file_yandex_cloud_ai_batch_inference_v1_inference_options_proto_rawDesc = 
 	"\x0eENABLED_HIDDEN\x10\x02\"=\n" +
 	"\n" +
 	"JsonSchema\x12/\n" +
-	"\x06schema\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x06schemaBu\n" +
-	"&yandex.cloud.api.ai.batch_inference.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
+	"\x06schema\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x06schemaBz\n" +
+	"&yandex.cloud.api.ai.batch_inference.v1B\x03FIOZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
 
 var (
 	file_yandex_cloud_ai_batch_inference_v1_inference_options_proto_rawDescOnce sync.Once

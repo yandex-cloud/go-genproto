@@ -20,8 +20,8 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	RunService_Create_FullMethodName          = "/yandex.cloud.ai.assistants.v1.runs.RunService/Create"
-	RunService_Listen_FullMethodName          = "/yandex.cloud.ai.assistants.v1.runs.RunService/Listen"
 	RunService_Attach_FullMethodName          = "/yandex.cloud.ai.assistants.v1.runs.RunService/Attach"
+	RunService_Listen_FullMethodName          = "/yandex.cloud.ai.assistants.v1.runs.RunService/Listen"
 	RunService_Get_FullMethodName             = "/yandex.cloud.ai.assistants.v1.runs.RunService/Get"
 	RunService_GetLastByThread_FullMethodName = "/yandex.cloud.ai.assistants.v1.runs.RunService/GetLastByThread"
 	RunService_List_FullMethodName            = "/yandex.cloud.ai.assistants.v1.runs.RunService/List"
@@ -36,14 +36,14 @@ const (
 type RunServiceClient interface {
 	// Create a new run for a given assistant and thread.
 	Create(ctx context.Context, in *CreateRunRequest, opts ...grpc.CallOption) (*Run, error)
-	// Listen to events from a specific run.
-	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
-	// and will not stream partial messages or intermediate events.
-	Listen(ctx context.Context, in *ListenRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamEvent], error)
 	// Bi-directional streaming method to interact with a specific run.
 	// Like `Listen`, `Attach` streams events from the run, but also allows clients to send events back.
 	// For example, it can be used to submit function call results when the run is waiting for user input.
 	Attach(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AttachRunRequest, StreamEvent], error)
+	// Listen to events from a specific run.
+	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
+	// and will not stream partial messages or intermediate events.
+	Listen(ctx context.Context, in *ListenRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamEvent], error)
 	// Retrieve details of a specific run by its ID.
 	Get(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*Run, error)
 	// Retrieves the most recent run for a specific thread.
@@ -73,9 +73,22 @@ func (c *runServiceClient) Create(ctx context.Context, in *CreateRunRequest, opt
 	return out, nil
 }
 
+func (c *runServiceClient) Attach(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AttachRunRequest, StreamEvent], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &RunService_ServiceDesc.Streams[0], RunService_Attach_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[AttachRunRequest, StreamEvent]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type RunService_AttachClient = grpc.BidiStreamingClient[AttachRunRequest, StreamEvent]
+
 func (c *runServiceClient) Listen(ctx context.Context, in *ListenRunRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &RunService_ServiceDesc.Streams[0], RunService_Listen_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &RunService_ServiceDesc.Streams[1], RunService_Listen_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -91,19 +104,6 @@ func (c *runServiceClient) Listen(ctx context.Context, in *ListenRunRequest, opt
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RunService_ListenClient = grpc.ServerStreamingClient[StreamEvent]
-
-func (c *runServiceClient) Attach(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AttachRunRequest, StreamEvent], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &RunService_ServiceDesc.Streams[1], RunService_Attach_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[AttachRunRequest, StreamEvent]{ClientStream: stream}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RunService_AttachClient = grpc.BidiStreamingClient[AttachRunRequest, StreamEvent]
 
 func (c *runServiceClient) Get(ctx context.Context, in *GetRunRequest, opts ...grpc.CallOption) (*Run, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -153,14 +153,14 @@ func (c *runServiceClient) Submit(ctx context.Context, in *SubmitToRunRequest, o
 type RunServiceServer interface {
 	// Create a new run for a given assistant and thread.
 	Create(context.Context, *CreateRunRequest) (*Run, error)
-	// Listen to events from a specific run.
-	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
-	// and will not stream partial messages or intermediate events.
-	Listen(*ListenRunRequest, grpc.ServerStreamingServer[StreamEvent]) error
 	// Bi-directional streaming method to interact with a specific run.
 	// Like `Listen`, `Attach` streams events from the run, but also allows clients to send events back.
 	// For example, it can be used to submit function call results when the run is waiting for user input.
 	Attach(grpc.BidiStreamingServer[AttachRunRequest, StreamEvent]) error
+	// Listen to events from a specific run.
+	// If the run was created with `stream = false`, Listen will only respond with the final status of the run
+	// and will not stream partial messages or intermediate events.
+	Listen(*ListenRunRequest, grpc.ServerStreamingServer[StreamEvent]) error
 	// Retrieve details of a specific run by its ID.
 	Get(context.Context, *GetRunRequest) (*Run, error)
 	// Retrieves the most recent run for a specific thread.
@@ -182,11 +182,11 @@ type UnimplementedRunServiceServer struct{}
 func (UnimplementedRunServiceServer) Create(context.Context, *CreateRunRequest) (*Run, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedRunServiceServer) Listen(*ListenRunRequest, grpc.ServerStreamingServer[StreamEvent]) error {
-	return status.Error(codes.Unimplemented, "method Listen not implemented")
-}
 func (UnimplementedRunServiceServer) Attach(grpc.BidiStreamingServer[AttachRunRequest, StreamEvent]) error {
 	return status.Error(codes.Unimplemented, "method Attach not implemented")
+}
+func (UnimplementedRunServiceServer) Listen(*ListenRunRequest, grpc.ServerStreamingServer[StreamEvent]) error {
+	return status.Error(codes.Unimplemented, "method Listen not implemented")
 }
 func (UnimplementedRunServiceServer) Get(context.Context, *GetRunRequest) (*Run, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
@@ -238,6 +238,13 @@ func _RunService_Create_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _RunService_Attach_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(RunServiceServer).Attach(&grpc.GenericServerStream[AttachRunRequest, StreamEvent]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type RunService_AttachServer = grpc.BidiStreamingServer[AttachRunRequest, StreamEvent]
+
 func _RunService_Listen_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListenRunRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -248,13 +255,6 @@ func _RunService_Listen_Handler(srv interface{}, stream grpc.ServerStream) error
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type RunService_ListenServer = grpc.ServerStreamingServer[StreamEvent]
-
-func _RunService_Attach_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(RunServiceServer).Attach(&grpc.GenericServerStream[AttachRunRequest, StreamEvent]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type RunService_AttachServer = grpc.BidiStreamingServer[AttachRunRequest, StreamEvent]
 
 func _RunService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRunRequest)
@@ -358,15 +358,15 @@ var RunService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "Listen",
-			Handler:       _RunService_Listen_Handler,
-			ServerStreams: true,
-		},
-		{
 			StreamName:    "Attach",
 			Handler:       _RunService_Attach_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "Listen",
+			Handler:       _RunService_Listen_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "yandex/cloud/ai/assistants/v1/runs/run_service.proto",

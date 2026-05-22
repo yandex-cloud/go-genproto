@@ -1319,7 +1319,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x02id\x12!\n" +
 	"\x04type\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x04type\"t\n" +
 	"\rAccessBinding\x12%\n" +
-	"\arole_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06roleId\x12<\n" +
+	"\arole_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x06roleId\x12<\n" +
 	"\asubject\x18\x02 \x01(\v2\x1c.yandex.cloud.access.SubjectB\x04\xe8\xc71\x01R\asubject\"T\n" +
 	"\fAccessPolicy\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -1334,7 +1334,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xac\x01\n" +
 	"\x17BindAccessPolicyRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12b\n" +
 	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingB\x04\xe8\xc71\x01R\x13accessPolicyBinding\"\x99\x01\n" +
 	"\x18BindAccessPolicyMetadata\x12\x1f\n" +
@@ -1343,17 +1343,17 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingR\x13accessPolicyBinding\"\x1a\n" +
 	"\x18BindAccessPolicyResponse\"\x9d\x01\n" +
 	"\x19ListAccessBindingsRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x91\x01\n" +
 	"\x1aListAccessBindingsResponse\x12K\n" +
 	"\x0faccess_bindings\x18\x01 \x03(\v2\".yandex.cloud.access.AccessBindingR\x0eaccessBindings\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa3\x01\n" +
 	"\x1fListAccessPolicyBindingsRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
@@ -1363,7 +1363,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x16access_policy_bindings\x18\x01 \x03(\v2(.yandex.cloud.access.AccessPolicyBindingR\x14accessPolicyBindings\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8b\x01\n" +
 	"\x19UnbindAccessPolicyRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12?\n" +
 	"\x19access_policy_template_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x16accessPolicyTemplateId\"x\n" +
 	"\x1aUnbindAccessPolicyMetadata\x12\x1f\n" +
@@ -1372,7 +1372,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x19access_policy_template_id\x18\x02 \x01(\tR\x16accessPolicyTemplateId\"\x1c\n" +
 	"\x1aUnbindAccessPolicyResponse\"\xbf\x01\n" +
 	"*UpdateAccessPolicyBindingParametersRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12b\n" +
 	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingB\x04\xe8\xc71\x01R\x13accessPolicyBinding\"\xac\x01\n" +
 	"+UpdateAccessPolicyBindingParametersMetadata\x12\x1f\n" +
@@ -1381,7 +1381,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingR\x13accessPolicyBinding\"-\n" +
 	"+UpdateAccessPolicyBindingParametersResponse\"\xa2\x01\n" +
 	"\x18SetAccessBindingsRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12W\n" +
 	"\x0faccess_bindings\x18\x02 \x03(\v2\".yandex.cloud.access.AccessBindingB\n" +
 	"\x82\xc81\x06<=1000R\x0eaccessBindings\"<\n" +
@@ -1389,7 +1389,7 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\vresource_id\x18\x01 \x01(\tR\n" +
 	"resourceId\"\xb5\x01\n" +
 	"\x1bUpdateAccessBindingsRequest\x12-\n" +
-	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12g\n" +
 	"\x15access_binding_deltas\x18\x02 \x03(\v2'.yandex.cloud.access.AccessBindingDeltaB\n" +
 	"\x82\xc81\x061-1000R\x13accessBindingDeltas\"?\n" +

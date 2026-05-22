@@ -60,7 +60,6 @@ const (
 // A set of methods for managing MongoDB Cluster resources.
 type ClusterServiceClient interface {
 	// Returns the specified MongoDB Cluster resource.
-	//
 	// To get the list of available MongoDB Cluster resources, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of MongoDB Cluster resources that belong
@@ -88,6 +87,7 @@ type ClusterServiceClient interface {
 	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -98,8 +98,10 @@ type ClusterServiceClient interface {
 	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified parameters for the host.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables sharding for the cluster:
 	// creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
@@ -110,6 +112,7 @@ type ClusterServiceClient interface {
 	// Retrieves a list of shards.
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
+	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -451,7 +454,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing MongoDB Cluster resources.
 type ClusterServiceServer interface {
 	// Returns the specified MongoDB Cluster resource.
-	//
 	// To get the list of available MongoDB Cluster resources, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of MongoDB Cluster resources that belong
@@ -479,6 +481,7 @@ type ClusterServiceServer interface {
 	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
@@ -489,8 +492,10 @@ type ClusterServiceServer interface {
 	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified parameters for the host.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Enables sharding for the cluster:
 	// creates 3 mongoinfra (or 3 mongocfg and 2 mongos) hosts
@@ -501,6 +506,7 @@ type ClusterServiceServer interface {
 	// Retrieves a list of shards.
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
+	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)

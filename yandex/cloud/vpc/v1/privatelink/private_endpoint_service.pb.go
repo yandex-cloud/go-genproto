@@ -237,6 +237,7 @@ type CreatePrivateEndpointRequest struct {
 	// Types that are valid to be assigned to Service:
 	//
 	//	*CreatePrivateEndpointRequest_ObjectStorage
+	//	*CreatePrivateEndpointRequest_ServiceName
 	Service       isCreatePrivateEndpointRequest_Service `protobuf_oneof:"service"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -337,6 +338,15 @@ func (x *CreatePrivateEndpointRequest) GetObjectStorage() *PrivateEndpoint_Objec
 	return nil
 }
 
+func (x *CreatePrivateEndpointRequest) GetServiceName() string {
+	if x != nil {
+		if x, ok := x.Service.(*CreatePrivateEndpointRequest_ServiceName); ok {
+			return x.ServiceName
+		}
+	}
+	return ""
+}
+
 type isCreatePrivateEndpointRequest_Service interface {
 	isCreatePrivateEndpointRequest_Service()
 }
@@ -346,7 +356,14 @@ type CreatePrivateEndpointRequest_ObjectStorage struct {
 	ObjectStorage *PrivateEndpoint_ObjectStorage `protobuf:"bytes,9,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
+type CreatePrivateEndpointRequest_ServiceName struct {
+	// Yandex Cloud service name.
+	ServiceName string `protobuf:"bytes,10,opt,name=service_name,json=serviceName,proto3,oneof"`
+}
+
 func (*CreatePrivateEndpointRequest_ObjectStorage) isCreatePrivateEndpointRequest_Service() {}
+
+func (*CreatePrivateEndpointRequest_ServiceName) isCreatePrivateEndpointRequest_Service() {}
 
 type CreatePrivateEndpointMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -958,7 +975,7 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_rawDes
 	"\n" +
 	"address_id\x18\x01 \x01(\tH\x00R\taddressId\x12w\n" +
 	"\x1ainternal_ipv4_address_spec\x18\x02 \x01(\v28.yandex.cloud.vpc.v1.privatelink.InternalIpv4AddressSpecH\x00R\x17internalIpv4AddressSpecB\t\n" +
-	"\aaddress\"\xf0\x05\n" +
+	"\aaddress\"\x95\x06\n" +
 	"\x1cCreatePrivateEndpointRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
 	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
@@ -969,7 +986,9 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_rawDes
 	"\faddress_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.privatelink.AddressSpecR\vaddressSpec\x12\\\n" +
 	"\vdns_options\x18\b \x01(\v2;.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptionsR\n" +
 	"dnsOptions\x12g\n" +
-	"\x0eobject_storage\x18\t \x01(\v2>.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorageH\x00R\robjectStorage\x1a9\n" +
+	"\x0eobject_storage\x18\t \x01(\v2>.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorageH\x00R\robjectStorage\x12#\n" +
+	"\fservice_name\x18\n" +
+	" \x01(\tH\x00R\vserviceName\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
@@ -1110,6 +1129,7 @@ func file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_init() 
 	}
 	file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_msgTypes[3].OneofWrappers = []any{
 		(*CreatePrivateEndpointRequest_ObjectStorage)(nil),
+		(*CreatePrivateEndpointRequest_ServiceName)(nil),
 	}
 	file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_msgTypes[9].OneofWrappers = []any{
 		(*ListPrivateEndpointsRequest_FolderId)(nil),

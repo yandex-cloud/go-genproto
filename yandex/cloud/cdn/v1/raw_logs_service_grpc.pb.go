@@ -29,10 +29,16 @@ const (
 // RawLogsServiceClient is the client API for RawLogsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// Raw logs management service.
 type RawLogsServiceClient interface {
+	// Activate raw log export.
 	Activate(ctx context.Context, in *ActivateRawLogsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deactivate raw log export.
 	Deactivate(ctx context.Context, in *DeactivateRawLogsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Get configuration of raw log export.
 	Get(ctx context.Context, in *GetRawLogsRequest, opts ...grpc.CallOption) (*GetRawLogsResponse, error)
+	// Update configuration of raw log export.
 	Update(ctx context.Context, in *UpdateRawLogsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -87,10 +93,16 @@ func (c *rawLogsServiceClient) Update(ctx context.Context, in *UpdateRawLogsRequ
 // RawLogsServiceServer is the server API for RawLogsService service.
 // All implementations should embed UnimplementedRawLogsServiceServer
 // for forward compatibility.
+//
+// Raw logs management service.
 type RawLogsServiceServer interface {
+	// Activate raw log export.
 	Activate(context.Context, *ActivateRawLogsRequest) (*operation.Operation, error)
+	// Deactivate raw log export.
 	Deactivate(context.Context, *DeactivateRawLogsRequest) (*operation.Operation, error)
+	// Get configuration of raw log export.
 	Get(context.Context, *GetRawLogsRequest) (*GetRawLogsResponse, error)
+	// Update configuration of raw log export.
 	Update(context.Context, *UpdateRawLogsRequest) (*operation.Operation, error)
 }
 

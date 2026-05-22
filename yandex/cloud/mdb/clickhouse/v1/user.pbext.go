@@ -190,6 +190,14 @@ func (m *UserSettings) SetMaxBytesBeforeExternalGroupBy(v *wrapperspb.Int64Value
 	m.MaxBytesBeforeExternalGroupBy = v
 }
 
+func (m *UserSettings) SetMaxBytesRatioBeforeExternalGroupBy(v *wrapperspb.DoubleValue) {
+	m.MaxBytesRatioBeforeExternalGroupBy = v
+}
+
+func (m *UserSettings) SetMaxBytesRatioBeforeExternalSort(v *wrapperspb.DoubleValue) {
+	m.MaxBytesRatioBeforeExternalSort = v
+}
+
 func (m *UserSettings) SetMaxBytesBeforeExternalSort(v *wrapperspb.Int64Value) {
 	m.MaxBytesBeforeExternalSort = v
 }

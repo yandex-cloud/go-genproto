@@ -55,7 +55,6 @@ const (
 	// Using LOCK TABLES statement for tables available with SELECT privilege.
 	Permission_LOCK_TABLES Permission_Privilege = 14
 	// Selecting rows from tables.
-	//
 	// Some SELECT statements can be allowed without the SELECT privilege. All statements that read column values require the SELECT privilege. See details in [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html#priv_select).
 	Permission_SELECT Permission_Privilege = 15
 	// Using the SHOW CREATE VIEW statement. Also needed for views used with EXPLAIN.

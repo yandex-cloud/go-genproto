@@ -729,7 +729,7 @@ const file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDesc = "" +
 	"\x12ListFoldersRequest\x12'\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\x12\"\n" +
@@ -747,12 +747,12 @@ const file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"3\n" +
 	"\x14CreateFolderMetadata\x12\x1b\n" +
-	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\"\xbb\x03\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\"\xb7\x03\n" +
 	"\x13UpdateFolderRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12<\n" +
-	"\x04name\x18\x03 \x01(\tB(\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
+	"updateMask\x128\n" +
+	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x95\x01\n" +
 	"\x06labels\x18\x05 \x03(\v2@.yandex.cloud.resourcemanager.v1.UpdateFolderRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -771,7 +771,7 @@ const file_yandex_cloud_resourcemanager_v1_folder_service_proto_rawDesc = "" +
 	"\x1bListFolderOperationsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x06<=2000R\tpageToken\"\x89\x01\n" +

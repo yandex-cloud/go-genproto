@@ -219,7 +219,7 @@ var File_yandex_cloud_ai_assistants_v1_assistant_proto protoreflect.FileDescript
 
 const file_yandex_cloud_ai_assistants_v1_assistant_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/ai/assistants/v1/assistant.proto\x12\x1dyandex.cloud.ai.assistants.v1\x1a#yandex/cloud/ai/common/common.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe4\a\n" +
+	"-yandex/cloud/ai/assistants/v1/assistant.proto\x12\x1dyandex.cloud.ai.assistants.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a#yandex/cloud/ai/common/common.proto\"\xe4\a\n" +
 	"\tAssistant\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +

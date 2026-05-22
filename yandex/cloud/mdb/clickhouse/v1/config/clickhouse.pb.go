@@ -89,6 +89,7 @@ func (ClickhouseConfig_LogLevel) EnumDescriptor() ([]byte, []int) {
 }
 
 // Determines the behavior of background merges for MergeTree tables with projections.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#deduplicate_merge_projection_mode).
 type ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode int32
 
@@ -264,6 +265,7 @@ func (ClickhouseConfig_Compression_Method) EnumDescriptor() ([]byte, []int) {
 }
 
 // Layout type.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/sql-reference/dictionaries#ways-to-store-dictionaries-in-memory).
 type ClickhouseConfig_ExternalDictionary_Layout_Type int32
 
@@ -371,6 +373,7 @@ func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte,
 }
 
 // Mode of SSL TCP/IP connection to a PostgreSQL host.
+//
 // For details, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html).
 type ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode int32
 
@@ -767,18 +770,15 @@ type ClickhouseConfig struct {
 	// Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_pool_size).
 	BackgroundPoolSize *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
 	// Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
-	//
 	// For example, if the ratio equals to **2** and **background_pool_size** is set to **16** then ClickHouse can execute **32** background merges concurrently.
 	// This is possible, because background operations could be suspended and postponed. This is needed to give small merges more execution priority.
 	//
 	// Default value: **2**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_merges_mutations_concurrency_ratio).
@@ -787,7 +787,6 @@ type ClickhouseConfig struct {
 	// for replicated tables, Kafka streaming, and DNS cache updates.
 	//
 	// Default value: **512**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_schedule_pool_size).
@@ -795,7 +794,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
 	//
 	// Default value: **32** for versions 25.1 and higher, **16** for versions 24.12 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_fetches_pool_size).
@@ -803,7 +801,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
 	//
 	// Default value: **8**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_move_pool_size).
@@ -811,7 +808,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for executing distributed sends.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_distributed_schedule_pool_size).
@@ -819,7 +815,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_buffer_flush_schedule_pool_size).
@@ -827,7 +822,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for executing background operations for message streaming.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_message_broker_schedule_pool_size).
@@ -835,7 +829,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
 	//
 	// Default value: **8**.
-	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_common_pool_size).
@@ -843,7 +836,6 @@ type ClickhouseConfig struct {
 	// Lazy loading of dictionaries. If enabled, then each dictionary is loaded on the first use. Otherwise, the server loads all dictionaries at startup.
 	//
 	// Default value: **true** for versions 25.1 and higher, **false** for versions 24.12 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#dictionaries_lazy_load).
@@ -862,7 +854,6 @@ type ClickhouseConfig struct {
 	// Enables or disables query_thread_log system table.
 	//
 	// Default value: **true**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_thread_log).
@@ -890,7 +881,6 @@ type ClickhouseConfig struct {
 	// Enables or disables metric_log system table.
 	//
 	// Default value: **false** for versions 25.1 and higher, **true** for versions 24.12 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/metric_log).
@@ -908,7 +898,6 @@ type ClickhouseConfig struct {
 	// Enables or disables trace_log system table.
 	//
 	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/trace_log).
@@ -926,7 +915,6 @@ type ClickhouseConfig struct {
 	// Enables or disables text_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/text_log).
@@ -944,13 +932,11 @@ type ClickhouseConfig struct {
 	// Logging level for text_log system table.
 	//
 	// Default value: **TRACE**.
-	//
 	// Change of the setting is applied with restart.
 	TextLogLevel ClickhouseConfig_LogLevel `protobuf:"varint,32,opt,name=text_log_level,json=textLogLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"text_log_level,omitempty"`
 	// Enables or disables opentelemetry_span_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/opentelemetry_span_log).
@@ -968,7 +954,6 @@ type ClickhouseConfig struct {
 	// Enables or disables query_views_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_views_log).
@@ -986,7 +971,6 @@ type ClickhouseConfig struct {
 	// Enables or disables asynchronous_metric_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_metric_log).
@@ -1004,7 +988,6 @@ type ClickhouseConfig struct {
 	// Enables or disables session_log system table.
 	//
 	// Default value: **true** for versions 25.3 and higher, **false** for versions 25.2 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/session_log).
@@ -1022,7 +1005,6 @@ type ClickhouseConfig struct {
 	// Enables or disables zookeeper_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/zookeeper_log).
@@ -1040,7 +1022,6 @@ type ClickhouseConfig struct {
 	// Enables or disables asynchronous_insert_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_insert_log).
@@ -1058,7 +1039,6 @@ type ClickhouseConfig struct {
 	// Enables or disables processors_profile_log system table.
 	//
 	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/processors_profile_log).
@@ -1076,7 +1056,6 @@ type ClickhouseConfig struct {
 	// Enables or disables error_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/error_log).
@@ -1094,7 +1073,6 @@ type ClickhouseConfig struct {
 	// Enables or disables query_metric_log system table.
 	//
 	// Default value: **false**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_metric_log).
@@ -1114,7 +1092,6 @@ type ClickhouseConfig struct {
 	// Maximum number of inbound connections.
 	//
 	// Default value: **4096**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_connections).
@@ -1140,7 +1117,6 @@ type ClickhouseConfig struct {
 	// The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
 	//
 	// Default value: **3** for versions 25.10 and higher, **30** for versions 25.9 and lower.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#keep_alive_timeout).
@@ -1156,7 +1132,6 @@ type ClickhouseConfig struct {
 	// The server's time zone to be used in DateTime fields conversions. Specified as an IANA identifier.
 	//
 	// Default value: **Europe/Moscow**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#timezone).
@@ -1164,17 +1139,14 @@ type ClickhouseConfig struct {
 	// Enables or disables geobase.
 	//
 	// Default value: **false** for versions 25.8 and higher, **true** for versions 25.7 and lower.
-	//
 	// Change of the setting is applied with restart.
 	GeobaseEnabled *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=geobase_enabled,json=geobaseEnabled,proto3" json:"geobase_enabled,omitempty"`
 	// Address of the archive with the user geobase in Object Storage.
-	//
 	// Change of the setting is applied with restart.
 	GeobaseUri string `protobuf:"bytes,15,opt,name=geobase_uri,json=geobaseUri,proto3" json:"geobase_uri,omitempty"`
 	// The default database.
 	//
 	// Default value: **default**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#default_database).
@@ -1183,7 +1155,6 @@ type ClickhouseConfig struct {
 	// the allocating stack trace. **0** means disabled memory profiler.
 	//
 	// Default value: **0**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_profiler_step).
@@ -1192,7 +1163,6 @@ type ClickhouseConfig struct {
 	// with trace_type equal to a MemorySample with the specified probability.
 	//
 	// Default value: **0**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_tracker_sample_probability).
@@ -1200,7 +1170,6 @@ type ClickhouseConfig struct {
 	// Maximum number of threads to parse and insert data in background. If set to **0**, asynchronous mode is disabled.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#async_insert_threads).
@@ -1208,7 +1177,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to execute **BACKUP** requests.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#backup_threads).
@@ -1216,7 +1184,6 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to execute **RESTORE** requests.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#restore_threads).
@@ -1224,7 +1191,6 @@ type ClickhouseConfig struct {
 	// Size of cache for vector similarity indexes, in bytes. **0** means disabled.
 	//
 	// Default value: **5368709120** (5 GiB).
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#vector_similarity_index_cache_size).
@@ -1232,7 +1198,6 @@ type ClickhouseConfig struct {
 	// Size of cache for vector similarity indexes, in entries. **0** means disabled.
 	//
 	// Default value: **10000000**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#vector_similarity_index_cache_max_entries).
@@ -1240,61 +1205,50 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to use for building vector indexes. **0** means unlimited.
 	//
 	// Default value: **16**.
-	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_build_vector_similarity_index_thread_pool_size).
 	MaxBuildVectorSimilarityIndexThreadPoolSize *wrapperspb.Int64Value `protobuf:"bytes,88,opt,name=max_build_vector_similarity_index_thread_pool_size,json=maxBuildVectorSimilarityIndexThreadPoolSize,proto3" json:"max_build_vector_similarity_index_thread_pool_size,omitempty"`
 	// Settings for the MergeTree table engine family.
-	//
 	// Change of the settings of **merge_tree** is applied with restart.
 	MergeTree *ClickhouseConfig_MergeTree `protobuf:"bytes,2,opt,name=merge_tree,json=mergeTree,proto3" json:"merge_tree,omitempty"`
 	// Data compression settings for MergeTree engine tables.
-	//
 	// Change of the settings of **compression** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
 	Compression []*ClickhouseConfig_Compression `protobuf:"bytes,3,rep,name=compression,proto3" json:"compression,omitempty"`
 	// Configuration of external dictionaries.
-	//
 	// Change of the settings of **dictionaries** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries).
 	Dictionaries []*ClickhouseConfig_ExternalDictionary `protobuf:"bytes,4,rep,name=dictionaries,proto3" json:"dictionaries,omitempty"`
 	// Rollup settings for the GraphiteMergeTree engine tables.
-	//
 	// Change of the settings of **graphite_rollup** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite_rollup).
 	GraphiteRollup []*ClickhouseConfig_GraphiteRollup `protobuf:"bytes,5,rep,name=graphite_rollup,json=graphiteRollup,proto3" json:"graphite_rollup,omitempty"`
 	// Kafka integration settings.
-	//
 	// Change of the settings of **kafka** is applied with restart.
 	Kafka *ClickhouseConfig_Kafka `protobuf:"bytes,35,opt,name=kafka,proto3" json:"kafka,omitempty"`
 	// Per-topic Kafka integration settings.
-	//
 	// Change of the settings of **kafka_topics** is applied with restart.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
 	KafkaTopics []*ClickhouseConfig_KafkaTopic `protobuf:"bytes,36,rep,name=kafka_topics,json=kafkaTopics,proto3" json:"kafka_topics,omitempty"`
 	// RabbitMQ integration settings.
-	//
 	// Change of the settings of **rabbitmq** is applied with restart.
 	Rabbitmq *ClickhouseConfig_Rabbitmq `protobuf:"bytes,37,opt,name=rabbitmq,proto3" json:"rabbitmq,omitempty"`
 	// Regexp-based rules, which will be applied to queries as well as all log messages before storing them in server logs,
 	// system.query_log, system.text_log, system.processes tables, and in logs sent to the client. That allows preventing
 	// sensitive data leakage from SQL queries (like names, emails, personal identifiers or credit card numbers) to logs.
-	//
 	// Change of the settings of **query_masking_rules** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#query_masking_rules).
 	QueryMaskingRules []*ClickhouseConfig_QueryMaskingRule `protobuf:"bytes,67,rep,name=query_masking_rules,json=queryMaskingRules,proto3" json:"query_masking_rules,omitempty"`
 	// [Query cache](https://clickhouse.com/docs/operations/query-cache) configuration.
-	//
 	// Change of the settings of **query_cache** is applied with restart.
 	QueryCache *ClickhouseConfig_QueryCache `protobuf:"bytes,69,opt,name=query_cache,json=queryCache,proto3" json:"query_cache,omitempty"`
 	// JDBC bridge configuration for queries to external databases.
-	//
 	// Change of the settings of **jdbc_bridge** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/integrations/jdbc/jdbc-with-clickhouse).
@@ -2031,6 +1985,7 @@ func (x *ClickhouseConfigSet) GetDefaultConfig() *ClickhouseConfig {
 }
 
 // Access control settings.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#access_control_improvements).
 type ClickhouseConfig_AccessControlImprovements struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2629,6 +2584,7 @@ func (x *ClickhouseConfig_MergeTree) GetAllowRemoteFsZeroCopyReplication() *wrap
 }
 
 // Compression settings.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
 type ClickhouseConfig_Compression struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2923,6 +2879,7 @@ func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource_) isClickhouseConfig
 }
 
 // Rollup settings for the GraphiteMergeTree table engine.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite-rollup).
 type ClickhouseConfig_GraphiteRollup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3023,6 +2980,7 @@ func (x *ClickhouseConfig_GraphiteRollup) GetVersionColumnName() string {
 }
 
 // Kafka configuration settings.
+//
 // For details, see [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
 type ClickhouseConfig_Kafka struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3234,6 +3192,7 @@ func (x *ClickhouseConfig_KafkaTopic) GetSettings() *ClickhouseConfig_Kafka {
 }
 
 // RabbitMQ integration settings.
+//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/engines/table-engines/integrations/rabbitmq).
 type ClickhouseConfig_Rabbitmq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -4823,7 +4782,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xee\xad\x01\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xff\xa9\x01\n" +
 	"\x10ClickhouseConfig\x12V\n" +
 	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
 	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
@@ -4835,17 +4794,17 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	",background_message_broker_schedule_pool_size\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R'backgroundMessageBrokerSchedulePoolSize\x12c\n" +
 	"\x1bbackground_common_pool_size\x18/ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x18backgroundCommonPoolSize\x12P\n" +
 	"\x16dictionaries_lazy_load\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14dictionariesLazyLoad\x12]\n" +
-	"\tlog_level\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\blogLevel\x12]\n" +
-	"\x18query_log_retention_size\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15queryLogRetentionSize\x12]\n" +
-	"\x18query_log_retention_time\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15queryLogRetentionTime\x12S\n" +
-	"\x18query_thread_log_enabled\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryThreadLogEnabled\x12j\n" +
-	"\x1fquery_thread_log_retention_size\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryThreadLogRetentionSize\x12j\n" +
-	"\x1fquery_thread_log_retention_time\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryThreadLogRetentionTime\x12[\n" +
-	"\x17part_log_retention_size\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14partLogRetentionSize\x12[\n" +
-	"\x17part_log_retention_time\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14partLogRetentionTime\x12H\n" +
-	"\x12metric_log_enabled\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR\x10metricLogEnabled\x12_\n" +
-	"\x19metric_log_retention_size\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16metricLogRetentionSize\x12_\n" +
-	"\x19metric_log_retention_time\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16metricLogRetentionTime\x12F\n" +
+	"\tlog_level\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\blogLevel\x12T\n" +
+	"\x18query_log_retention_size\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15queryLogRetentionSize\x12T\n" +
+	"\x18query_log_retention_time\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15queryLogRetentionTime\x12S\n" +
+	"\x18query_thread_log_enabled\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryThreadLogEnabled\x12a\n" +
+	"\x1fquery_thread_log_retention_size\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryThreadLogRetentionSize\x12a\n" +
+	"\x1fquery_thread_log_retention_time\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryThreadLogRetentionTime\x12R\n" +
+	"\x17part_log_retention_size\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14partLogRetentionSize\x12R\n" +
+	"\x17part_log_retention_time\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueR\x14partLogRetentionTime\x12H\n" +
+	"\x12metric_log_enabled\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR\x10metricLogEnabled\x12V\n" +
+	"\x19metric_log_retention_size\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueR\x16metricLogRetentionSize\x12V\n" +
+	"\x19metric_log_retention_time\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueR\x16metricLogRetentionTime\x12F\n" +
 	"\x11trace_log_enabled\x18\x1a \x01(\v2\x1a.google.protobuf.BoolValueR\x0ftraceLogEnabled\x12T\n" +
 	"\x18trace_log_retention_size\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueR\x15traceLogRetentionSize\x12T\n" +
 	"\x18trace_log_retention_time\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueR\x15traceLogRetentionTime\x12D\n" +
@@ -4853,38 +4812,38 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x17text_log_retention_size\x18\x1e \x01(\v2\x1b.google.protobuf.Int64ValueR\x14textLogRetentionSize\x12R\n" +
 	"\x17text_log_retention_time\x18\x1f \x01(\v2\x1b.google.protobuf.Int64ValueR\x14textLogRetentionTime\x12f\n" +
 	"\x0etext_log_level\x18  \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\ftextLogLevel\x12_\n" +
-	"\x1eopentelemetry_span_log_enabled\x18* \x01(\v2\x1a.google.protobuf.BoolValueR\x1bopentelemetrySpanLogEnabled\x12v\n" +
-	"%opentelemetry_span_log_retention_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!opentelemetrySpanLogRetentionSize\x12v\n" +
-	"%opentelemetry_span_log_retention_time\x188 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!opentelemetrySpanLogRetentionTime\x12Q\n" +
-	"\x17query_views_log_enabled\x181 \x01(\v2\x1a.google.protobuf.BoolValueR\x14queryViewsLogEnabled\x12h\n" +
-	"\x1equery_views_log_retention_size\x182 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1aqueryViewsLogRetentionSize\x12h\n" +
-	"\x1equery_views_log_retention_time\x183 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1aqueryViewsLogRetentionTime\x12a\n" +
-	"\x1fasynchronous_metric_log_enabled\x184 \x01(\v2\x1a.google.protobuf.BoolValueR\x1casynchronousMetricLogEnabled\x12x\n" +
-	"&asynchronous_metric_log_retention_size\x185 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousMetricLogRetentionSize\x12x\n" +
-	"&asynchronous_metric_log_retention_time\x186 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousMetricLogRetentionTime\x12J\n" +
-	"\x13session_log_enabled\x189 \x01(\v2\x1a.google.protobuf.BoolValueR\x11sessionLogEnabled\x12a\n" +
-	"\x1asession_log_retention_size\x18: \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x17sessionLogRetentionSize\x12a\n" +
-	"\x1asession_log_retention_time\x18; \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x17sessionLogRetentionTime\x12N\n" +
-	"\x15zookeeper_log_enabled\x18< \x01(\v2\x1a.google.protobuf.BoolValueR\x13zookeeperLogEnabled\x12e\n" +
-	"\x1czookeeper_log_retention_size\x18= \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x19zookeeperLogRetentionSize\x12e\n" +
-	"\x1czookeeper_log_retention_time\x18> \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x19zookeeperLogRetentionTime\x12a\n" +
-	"\x1fasynchronous_insert_log_enabled\x18? \x01(\v2\x1a.google.protobuf.BoolValueR\x1casynchronousInsertLogEnabled\x12x\n" +
-	"&asynchronous_insert_log_retention_size\x18@ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousInsertLogRetentionSize\x12x\n" +
-	"&asynchronous_insert_log_retention_time\x18A \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\"asynchronousInsertLogRetentionTime\x12_\n" +
-	"\x1eprocessors_profile_log_enabled\x18G \x01(\v2\x1a.google.protobuf.BoolValueR\x1bprocessorsProfileLogEnabled\x12v\n" +
-	"%processors_profile_log_retention_size\x18H \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!processorsProfileLogRetentionSize\x12v\n" +
-	"%processors_profile_log_retention_time\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!processorsProfileLogRetentionTime\x12F\n" +
-	"\x11error_log_enabled\x18K \x01(\v2\x1a.google.protobuf.BoolValueR\x0ferrorLogEnabled\x12]\n" +
-	"\x18error_log_retention_size\x18L \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionSize\x12]\n" +
-	"\x18error_log_retention_time\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15errorLogRetentionTime\x12S\n" +
-	"\x18query_metric_log_enabled\x18S \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryMetricLogEnabled\x12j\n" +
-	"\x1fquery_metric_log_retention_size\x18T \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryMetricLogRetentionSize\x12j\n" +
-	"\x1fquery_metric_log_retention_time\x18U \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1bqueryMetricLogRetentionTime\x12\x91\x01\n" +
+	"\x1eopentelemetry_span_log_enabled\x18* \x01(\v2\x1a.google.protobuf.BoolValueR\x1bopentelemetrySpanLogEnabled\x12m\n" +
+	"%opentelemetry_span_log_retention_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueR!opentelemetrySpanLogRetentionSize\x12m\n" +
+	"%opentelemetry_span_log_retention_time\x188 \x01(\v2\x1b.google.protobuf.Int64ValueR!opentelemetrySpanLogRetentionTime\x12Q\n" +
+	"\x17query_views_log_enabled\x181 \x01(\v2\x1a.google.protobuf.BoolValueR\x14queryViewsLogEnabled\x12_\n" +
+	"\x1equery_views_log_retention_size\x182 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1aqueryViewsLogRetentionSize\x12_\n" +
+	"\x1equery_views_log_retention_time\x183 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1aqueryViewsLogRetentionTime\x12a\n" +
+	"\x1fasynchronous_metric_log_enabled\x184 \x01(\v2\x1a.google.protobuf.BoolValueR\x1casynchronousMetricLogEnabled\x12o\n" +
+	"&asynchronous_metric_log_retention_size\x185 \x01(\v2\x1b.google.protobuf.Int64ValueR\"asynchronousMetricLogRetentionSize\x12o\n" +
+	"&asynchronous_metric_log_retention_time\x186 \x01(\v2\x1b.google.protobuf.Int64ValueR\"asynchronousMetricLogRetentionTime\x12J\n" +
+	"\x13session_log_enabled\x189 \x01(\v2\x1a.google.protobuf.BoolValueR\x11sessionLogEnabled\x12X\n" +
+	"\x1asession_log_retention_size\x18: \x01(\v2\x1b.google.protobuf.Int64ValueR\x17sessionLogRetentionSize\x12X\n" +
+	"\x1asession_log_retention_time\x18; \x01(\v2\x1b.google.protobuf.Int64ValueR\x17sessionLogRetentionTime\x12N\n" +
+	"\x15zookeeper_log_enabled\x18< \x01(\v2\x1a.google.protobuf.BoolValueR\x13zookeeperLogEnabled\x12\\\n" +
+	"\x1czookeeper_log_retention_size\x18= \x01(\v2\x1b.google.protobuf.Int64ValueR\x19zookeeperLogRetentionSize\x12\\\n" +
+	"\x1czookeeper_log_retention_time\x18> \x01(\v2\x1b.google.protobuf.Int64ValueR\x19zookeeperLogRetentionTime\x12a\n" +
+	"\x1fasynchronous_insert_log_enabled\x18? \x01(\v2\x1a.google.protobuf.BoolValueR\x1casynchronousInsertLogEnabled\x12o\n" +
+	"&asynchronous_insert_log_retention_size\x18@ \x01(\v2\x1b.google.protobuf.Int64ValueR\"asynchronousInsertLogRetentionSize\x12o\n" +
+	"&asynchronous_insert_log_retention_time\x18A \x01(\v2\x1b.google.protobuf.Int64ValueR\"asynchronousInsertLogRetentionTime\x12_\n" +
+	"\x1eprocessors_profile_log_enabled\x18G \x01(\v2\x1a.google.protobuf.BoolValueR\x1bprocessorsProfileLogEnabled\x12m\n" +
+	"%processors_profile_log_retention_size\x18H \x01(\v2\x1b.google.protobuf.Int64ValueR!processorsProfileLogRetentionSize\x12m\n" +
+	"%processors_profile_log_retention_time\x18I \x01(\v2\x1b.google.protobuf.Int64ValueR!processorsProfileLogRetentionTime\x12F\n" +
+	"\x11error_log_enabled\x18K \x01(\v2\x1a.google.protobuf.BoolValueR\x0ferrorLogEnabled\x12T\n" +
+	"\x18error_log_retention_size\x18L \x01(\v2\x1b.google.protobuf.Int64ValueR\x15errorLogRetentionSize\x12T\n" +
+	"\x18error_log_retention_time\x18M \x01(\v2\x1b.google.protobuf.Int64ValueR\x15errorLogRetentionTime\x12S\n" +
+	"\x18query_metric_log_enabled\x18S \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryMetricLogEnabled\x12a\n" +
+	"\x1fquery_metric_log_retention_size\x18T \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryMetricLogRetentionSize\x12a\n" +
+	"\x1fquery_metric_log_retention_time\x18U \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryMetricLogRetentionTime\x12\x91\x01\n" +
 	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12R\n" +
 	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b128-8192R\x0emaxConnections\x12\\\n" +
-	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x05>=100R\x14maxConcurrentQueries\x12X\n" +
-	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxTableSizeToDrop\x12`\n" +
-	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x16maxPartitionSizeToDrop\x12I\n" +
+	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x05>=100R\x14maxConcurrentQueries\x12O\n" +
+	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxTableSizeToDrop\x12W\n" +
+	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16maxPartitionSizeToDrop\x12I\n" +
 	"\x12keep_alive_timeout\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x10keepAliveTimeout\x12S\n" +
 	"\x17uncompressed_cache_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x15uncompressedCacheSize\x12C\n" +
 	"\x0fmark_cache_size\x18\n" +
@@ -4895,13 +4854,13 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"geobaseUri\x12G\n" +
 	"\x10default_database\x18+ \x01(\v2\x1c.google.protobuf.StringValueR\x0fdefaultDatabase\x12X\n" +
 	"\x1atotal_memory_profiler_step\x18, \x01(\v2\x1b.google.protobuf.Int64ValueR\x17totalMemoryProfilerStep\x12r\n" +
-	"'total_memory_tracker_sample_probability\x18- \x01(\v2\x1c.google.protobuf.DoubleValueR#totalMemoryTrackerSampleProbability\x12V\n" +
-	"\x14async_insert_threads\x18O \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12asyncInsertThreads\x12B\n" +
+	"'total_memory_tracker_sample_probability\x18- \x01(\v2\x1c.google.protobuf.DoubleValueR#totalMemoryTrackerSampleProbability\x12M\n" +
+	"\x14async_insert_threads\x18O \x01(\v2\x1b.google.protobuf.Int64ValueR\x12asyncInsertThreads\x12B\n" +
 	"\x0ebackup_threads\x18P \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackupThreads\x12D\n" +
-	"\x0frestore_threads\x18Q \x01(\v2\x1b.google.protobuf.Int64ValueR\x0erestoreThreads\x12p\n" +
-	"\"vector_similarity_index_cache_size\x18V \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1evectorSimilarityIndexCacheSize\x12}\n" +
-	")vector_similarity_index_cache_max_entries\x18W \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R$vectorSimilarityIndexCacheMaxEntries\x12\x8d\x01\n" +
-	"2max_build_vector_similarity_index_thread_pool_size\x18X \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R+maxBuildVectorSimilarityIndexThreadPoolSize\x12`\n" +
+	"\x0frestore_threads\x18Q \x01(\v2\x1b.google.protobuf.Int64ValueR\x0erestoreThreads\x12g\n" +
+	"\"vector_similarity_index_cache_size\x18V \x01(\v2\x1b.google.protobuf.Int64ValueR\x1evectorSimilarityIndexCacheSize\x12t\n" +
+	")vector_similarity_index_cache_max_entries\x18W \x01(\v2\x1b.google.protobuf.Int64ValueR$vectorSimilarityIndexCacheMaxEntries\x12\x84\x01\n" +
+	"2max_build_vector_similarity_index_thread_pool_size\x18X \x01(\v2\x1b.google.protobuf.Int64ValueR+maxBuildVectorSimilarityIndexThreadPoolSize\x12`\n" +
 	"\n" +
 	"merge_tree\x18\x02 \x01(\v2A.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTreeR\tmergeTree\x12e\n" +
 	"\vcompression\x18\x03 \x03(\v2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.CompressionR\vcompression\x12n\n" +
@@ -4920,28 +4879,28 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"$builtin_dictionaries_reload_interval\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R!builtinDictionariesReloadInterval\x1a\x83\x02\n" +
 	"\x19AccessControlImprovements\x12i\n" +
 	"$select_from_system_db_requires_grant\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1fselectFromSystemDbRequiresGrant\x12{\n" +
-	"-select_from_information_schema_requires_grant\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR(selectFromInformationSchemaRequiresGrant\x1a\xcc\"\n" +
+	"-select_from_information_schema_requires_grant\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR(selectFromInformationSchemaRequiresGrant\x1a\xfb!\n" +
 	"\tMergeTree\x12N\n" +
 	"\x15parts_to_delay_insert\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToDelayInsert\x12N\n" +
-	"\x15parts_to_throw_insert\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToThrowInsert\x12h\n" +
-	"\x1einactive_parts_to_delay_insert\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1ainactivePartsToDelayInsert\x12h\n" +
+	"\x15parts_to_throw_insert\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12partsToThrowInsert\x12_\n" +
+	"\x1einactive_parts_to_delay_insert\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x1ainactivePartsToDelayInsert\x12_\n" +
 	"\x1einactive_parts_to_throw_insert\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1ainactivePartsToThrowInsert\x12q\n" +
-	"$max_avg_part_size_for_too_many_parts\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1dmaxAvgPartSizeForTooManyParts\x12H\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x1ainactivePartsToThrowInsert\x12h\n" +
+	"$max_avg_part_size_for_too_many_parts\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1dmaxAvgPartSizeForTooManyParts\x12H\n" +
 	"\x12max_parts_in_total\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxPartsInTotal\x12_\n" +
 	"\x1emax_replicated_merges_in_queue\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1amaxReplicatedMergesInQueue\x12\x8e\x01\n" +
 	"9number_of_free_entries_in_pool_to_lower_max_size_of_merge\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR.numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge\x12\x83\x01\n" +
 	"2number_of_free_entries_in_pool_to_execute_mutation\x18\x14 \x01(\v2\x1b.google.protobuf.Int64ValueR*numberOfFreeEntriesInPoolToExecuteMutation\x12\xa3\x01\n" +
 	"Cnumber_of_free_entries_in_pool_to_execute_optimize_entire_partition\x18% \x01(\v2\x1b.google.protobuf.Int64ValueR9numberOfFreeEntriesInPoolToExecuteOptimizeEntirePartition\x12m\n" +
-	"'max_bytes_to_merge_at_min_space_in_pool\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMinSpaceInPool\x12v\n" +
-	"'max_bytes_to_merge_at_max_space_in_pool\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1fmaxBytesToMergeAtMaxSpaceInPool\x12Q\n" +
+	"'max_bytes_to_merge_at_min_space_in_pool\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMinSpaceInPool\x12m\n" +
+	"'max_bytes_to_merge_at_max_space_in_pool\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fmaxBytesToMergeAtMaxSpaceInPool\x12Q\n" +
 	"\x17min_bytes_for_wide_part\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x13minBytesForWidePart\x12O\n" +
-	"\x16min_rows_for_wide_part\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x12minRowsForWidePart\x12V\n" +
-	"\x14cleanup_delay_period\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12cleanupDelayPeriod\x12]\n" +
-	"\x18max_cleanup_delay_period\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15maxCleanupDelayPeriod\x12]\n" +
-	"\x18merge_selecting_sleep_ms\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15mergeSelectingSleepMs\x12d\n" +
-	"\x1cmax_merge_selecting_sleep_ms\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x18maxMergeSelectingSleepMs\x12g\n" +
-	"\x1emin_age_to_force_merge_seconds\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x19minAgeToForceMergeSeconds\x12o\n" +
+	"\x16min_rows_for_wide_part\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x12minRowsForWidePart\x12M\n" +
+	"\x14cleanup_delay_period\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12cleanupDelayPeriod\x12T\n" +
+	"\x18max_cleanup_delay_period\x18\x1c \x01(\v2\x1b.google.protobuf.Int64ValueR\x15maxCleanupDelayPeriod\x12T\n" +
+	"\x18merge_selecting_sleep_ms\x18\x18 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15mergeSelectingSleepMs\x12[\n" +
+	"\x1cmax_merge_selecting_sleep_ms\x18\x1b \x01(\v2\x1b.google.protobuf.Int64ValueR\x18maxMergeSelectingSleepMs\x12^\n" +
+	"\x1emin_age_to_force_merge_seconds\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueR\x19minAgeToForceMergeSeconds\x12o\n" +
 	"(min_age_to_force_merge_on_partition_only\x18\x17 \x01(\v2\x1a.google.protobuf.BoolValueR!minAgeToForceMergeOnPartitionOnly\x12L\n" +
 	"\x14merge_max_block_size\x18\x19 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11mergeMaxBlockSize\x12\xab\x01\n" +
 	"!deduplicate_merge_projection_mode\x18\x1d \x01(\x0e2`.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionModeR\x1ededuplicateMergeProjectionMode\x12\xb4\x01\n" +
@@ -4980,7 +4939,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x12METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03LZ4\x10\x01\x12\b\n" +
 	"\x04ZSTD\x10\x02\x12\t\n" +
-	"\x05LZ4HC\x10\x03\x1a\x9e'\n" +
+	"\x05LZ4HC\x10\x03\x1a\xd6&\n" +
 	"\x12ExternalDictionary\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12x\n" +
 	"\tstructure\x18\x02 \x01(\v2T.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.StructureB\x04\xe8\xc71\x01R\tstructure\x12o\n" +
@@ -5017,18 +4976,18 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"expression\x18\x04 \x01(\tR\n" +
 	"expression\x12\"\n" +
 	"\fhierarchical\x18\x05 \x01(\bR\fhierarchical\x12\x1c\n" +
-	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\xe9\a\n" +
+	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\xaa\a\n" +
 	"\x06Layout\x12p\n" +
-	"\x04type\x18\x01 \x01(\x0e2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.TypeB\x04\xe8\xc71\x01R\x04type\x12+\n" +
-	"\rsize_in_cells\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\vsizeInCells\x12Q\n" +
-	"\x17allow_read_expired_keys\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x14allowReadExpiredKeys\x12:\n" +
-	"\x15max_update_queue_size\x18\x06 \x01(\x03B\a\xfa\xc71\x03>=0R\x12maxUpdateQueueSize\x12[\n" +
-	"&update_queue_push_timeout_milliseconds\x18\a \x01(\x03B\a\xfa\xc71\x03>=0R\"updateQueuePushTimeoutMilliseconds\x12N\n" +
-	"\x1fquery_wait_timeout_milliseconds\x18\b \x01(\x03B\a\xfa\xc71\x03>=0R\x1cqueryWaitTimeoutMilliseconds\x12>\n" +
-	"\x17max_threads_for_updates\x18\t \x01(\x03B\a\xfa\xc71\x03>=0R\x14maxThreadsForUpdates\x125\n" +
+	"\x04type\x18\x01 \x01(\x0e2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.TypeB\x04\xe8\xc71\x01R\x04type\x12\"\n" +
+	"\rsize_in_cells\x18\x02 \x01(\x03R\vsizeInCells\x12Q\n" +
+	"\x17allow_read_expired_keys\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x14allowReadExpiredKeys\x121\n" +
+	"\x15max_update_queue_size\x18\x06 \x01(\x03R\x12maxUpdateQueueSize\x12R\n" +
+	"&update_queue_push_timeout_milliseconds\x18\a \x01(\x03R\"updateQueuePushTimeoutMilliseconds\x12E\n" +
+	"\x1fquery_wait_timeout_milliseconds\x18\b \x01(\x03R\x1cqueryWaitTimeoutMilliseconds\x125\n" +
+	"\x17max_threads_for_updates\x18\t \x01(\x03R\x14maxThreadsForUpdates\x12,\n" +
 	"\x12initial_array_size\x18\n" +
-	" \x01(\x03B\a\xfa\xc71\x03>=0R\x10initialArraySize\x12-\n" +
-	"\x0emax_array_size\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\fmaxArraySize\x12\\\n" +
+	" \x01(\x03R\x10initialArraySize\x12$\n" +
+	"\x0emax_array_size\x18\x03 \x01(\x03R\fmaxArraySize\x12\\\n" +
 	"\x1daccess_to_key_from_attributes\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x19accessToKeyFromAttributes\"\xff\x01\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
@@ -5057,7 +5016,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\aheaders\x18\x03 \x03(\v2\\.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.HeaderR\aheaders\x1a>\n" +
 	"\x06Header\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
-	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\x86\x05\n" +
+	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\xfd\x04\n" +
 	"\vMysqlSource\x12\x14\n" +
 	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
 	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1f\n" +
@@ -5069,10 +5028,10 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x10invalidate_query\x18\b \x01(\tR\x0finvalidateQuery\x12E\n" +
 	"\x10close_connection\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0fcloseConnection\x12E\n" +
 	"\x10share_connection\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\xa2\x01\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\x99\x01\n" +
 	"\aReplica\x12!\n" +
-	"\x04host\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12#\n" +
-	"\bpriority\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\bpriority\x12\x1f\n" +
+	"\x04host\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12\x1a\n" +
+	"\bpriority\x18\x02 \x01(\x03R\bpriority\x12\x1f\n" +
 	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x12\n" +
 	"\x04user\x18\x04 \x01(\tR\x04user\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x1a\x84\x02\n" +
@@ -5127,15 +5086,15 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\tretention\x18\x03 \x03(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.RetentionR\tretention\x1a;\n" +
 	"\tRetention\x12\x10\n" +
 	"\x03age\x18\x01 \x01(\x03R\x03age\x12\x1c\n" +
-	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xe8\x0f\n" +
+	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xd6\x0f\n" +
 	"\x05Kafka\x12{\n" +
 	"\x11security_protocol\x18\x01 \x01(\x0e2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocolR\x10securityProtocol\x12r\n" +
 	"\x0esasl_mechanism\x18\x02 \x01(\x0e2K.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanismR\rsaslMechanism\x12#\n" +
 	"\rsasl_username\x18\x03 \x01(\tR\fsaslUsername\x12#\n" +
 	"\rsasl_password\x18\x04 \x01(\tR\fsaslPassword\x12i\n" +
-	"#enable_ssl_certificate_verification\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR enableSslCertificateVerification\x12U\n" +
-	"\x14max_poll_interval_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x11maxPollIntervalMs\x12R\n" +
-	"\x12session_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x10sessionTimeoutMs\x12Y\n" +
+	"#enable_ssl_certificate_verification\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR enableSslCertificateVerification\x12L\n" +
+	"\x14max_poll_interval_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11maxPollIntervalMs\x12I\n" +
+	"\x12session_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x10sessionTimeoutMs\x12Y\n" +
 	"\x05debug\x18\b \x01(\x0e2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.DebugR\x05debug\x12y\n" +
 	"\x11auto_offset_reset\x18\t \x01(\x0e2M.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetResetR\x0fautoOffsetReset\x12\\\n" +
 	"\x11message_max_bytes\x18\n" +
@@ -5201,14 +5160,14 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x10QueryMaskingRule\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
 	"\x06regexp\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06regexp\x12\x18\n" +
-	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xda\x02\n" +
+	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xb6\x02\n" +
 	"\n" +
-	"QueryCache\x12O\n" +
-	"\x11max_size_in_bytes\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x0emaxSizeInBytes\x12E\n" +
-	"\vmax_entries\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\n" +
-	"maxEntries\x12Z\n" +
-	"\x17max_entry_size_in_bytes\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x13maxEntrySizeInBytes\x12X\n" +
-	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxEntrySizeInRows\x1a^\n" +
+	"QueryCache\x12F\n" +
+	"\x11max_size_in_bytes\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizeInBytes\x12<\n" +
+	"\vmax_entries\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\n" +
+	"maxEntries\x12Q\n" +
+	"\x17max_entry_size_in_bytes\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x13maxEntrySizeInBytes\x12O\n" +
+	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxEntrySizeInRows\x1a^\n" +
 	"\n" +
 	"JdbcBridge\x12\x12\n" +
 	"\x04host\x18\x01 \x01(\tR\x04host\x12<\n" +

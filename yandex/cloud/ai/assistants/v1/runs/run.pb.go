@@ -418,7 +418,7 @@ var File_yandex_cloud_ai_assistants_v1_runs_run_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_ai_assistants_v1_runs_run_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/ai/assistants/v1/runs/run.proto\x12\"yandex.cloud.ai.assistants.v1.runs\x1a#yandex/cloud/ai/common/common.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd2\x06\n" +
+	",yandex/cloud/ai/assistants/v1/runs/run.proto\x12\"yandex.cloud.ai.assistants.v1.runs\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*yandex/cloud/ai/assistants/v1/common.proto\x1a3yandex/cloud/ai/assistants/v1/threads/message.proto\x1a#yandex/cloud/ai/common/common.proto\"\xd2\x06\n" +
 	"\x03Run\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fassistant_id\x18\x02 \x01(\tR\vassistantId\x12\x1b\n" +

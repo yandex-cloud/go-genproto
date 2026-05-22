@@ -36,7 +36,6 @@ const (
 // A set of methods for managing MongoDB User resources.
 type UserServiceClient interface {
 	// Returns the specified MongoDB User resource.
-	//
 	// To get the list of available MongoDB User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of MongoDB User resources in the specified cluster.
@@ -138,7 +137,6 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // A set of methods for managing MongoDB User resources.
 type UserServiceServer interface {
 	// Returns the specified MongoDB User resource.
-	//
 	// To get the list of available MongoDB User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of MongoDB User resources in the specified cluster.

@@ -43,6 +43,10 @@ func (m *CreateSynchronizationSettingsRequest) SetGroupAttributeMappings(v []*Gr
 	m.GroupAttributeMappings = v
 }
 
+func (m *CreateSynchronizationSettingsRequest) SetEnablePasswordWriteback(v bool) {
+	m.EnablePasswordWriteback = v
+}
+
 func (m *CreateSynchronizationSettingsMetadata) SetSubjectContainerId(v string) {
 	m.SubjectContainerId = v
 }
@@ -85,6 +89,10 @@ func (m *UpdateSynchronizationSettingsRequest) SetGroupAttributeMappings(v []*Gr
 
 func (m *UpdateSynchronizationSettingsRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
+}
+
+func (m *UpdateSynchronizationSettingsRequest) SetEnablePasswordWriteback(v bool) {
+	m.EnablePasswordWriteback = v
 }
 
 func (m *UpdateSynchronizationSettingsMetadata) SetSubjectContainerId(v string) {

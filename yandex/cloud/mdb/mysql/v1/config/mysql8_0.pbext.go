@@ -230,6 +230,22 @@ func (m *MysqlConfig8_0) SetRangeOptimizerMaxMemSize(v *wrapperspb.Int64Value) {
 	m.RangeOptimizerMaxMemSize = v
 }
 
+func (m *MysqlConfig8_0) SetInnodbOnlineAlterLogMaxSize(v *wrapperspb.Int64Value) {
+	m.InnodbOnlineAlterLogMaxSize = v
+}
+
+func (m *MysqlConfig8_0) SetInnodbFtMinTokenSize(v *wrapperspb.Int64Value) {
+	m.InnodbFtMinTokenSize = v
+}
+
+func (m *MysqlConfig8_0) SetInnodbFtMaxTokenSize(v *wrapperspb.Int64Value) {
+	m.InnodbFtMaxTokenSize = v
+}
+
+func (m *MysqlConfig8_0) SetLowerCaseTableNames(v *wrapperspb.Int64Value) {
+	m.LowerCaseTableNames = v
+}
+
 func (m *MysqlConfig8_0) SetSlowQueryLog(v *wrapperspb.BoolValue) {
 	m.SlowQueryLog = v
 }
@@ -260,22 +276,6 @@ func (m *MysqlConfig8_0) SetMdbPriorityChoiceMaxLag(v *wrapperspb.Int64Value) {
 
 func (m *MysqlConfig8_0) SetInnodbPageSize(v *wrapperspb.Int64Value) {
 	m.InnodbPageSize = v
-}
-
-func (m *MysqlConfig8_0) SetInnodbOnlineAlterLogMaxSize(v *wrapperspb.Int64Value) {
-	m.InnodbOnlineAlterLogMaxSize = v
-}
-
-func (m *MysqlConfig8_0) SetInnodbFtMinTokenSize(v *wrapperspb.Int64Value) {
-	m.InnodbFtMinTokenSize = v
-}
-
-func (m *MysqlConfig8_0) SetInnodbFtMaxTokenSize(v *wrapperspb.Int64Value) {
-	m.InnodbFtMaxTokenSize = v
-}
-
-func (m *MysqlConfig8_0) SetLowerCaseTableNames(v *wrapperspb.Int64Value) {
-	m.LowerCaseTableNames = v
 }
 
 func (m *MysqlConfig8_0) SetMaxSpRecursionDepth(v *wrapperspb.Int64Value) {

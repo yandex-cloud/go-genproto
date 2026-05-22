@@ -948,52 +948,6 @@ type FunctionResult_Content struct {
 
 func (*FunctionResult_Content) isFunctionResult_ContentType() {}
 
-// Options for configuring the rephrasing the last user message for search using context from previous conversation.
-type RephraserOptions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The ID of the model used to rephrase the last user message for search.
-	RephraserUri  string `protobuf:"bytes,1,opt,name=rephraser_uri,json=rephraserUri,proto3" json:"rephraser_uri,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RephraserOptions) Reset() {
-	*x = RephraserOptions{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RephraserOptions) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RephraserOptions) ProtoMessage() {}
-
-func (x *RephraserOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RephraserOptions.ProtoReflect.Descriptor instead.
-func (*RephraserOptions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *RephraserOptions) GetRephraserUri() string {
-	if x != nil {
-		return x.RephraserUri
-	}
-	return ""
-}
-
 // Represents the expected structure of the model's response using a JSON Schema.
 type JsonSchema struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1005,7 +959,7 @@ type JsonSchema struct {
 
 func (x *JsonSchema) Reset() {
 	*x = JsonSchema{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1017,7 +971,7 @@ func (x *JsonSchema) String() string {
 func (*JsonSchema) ProtoMessage() {}
 
 func (x *JsonSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1030,7 +984,7 @@ func (x *JsonSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JsonSchema.ProtoReflect.Descriptor instead.
 func (*JsonSchema) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *JsonSchema) GetSchema() *structpb.Struct {
@@ -1054,7 +1008,7 @@ type ResponseFormat struct {
 
 func (x *ResponseFormat) Reset() {
 	*x = ResponseFormat{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1066,7 +1020,7 @@ func (x *ResponseFormat) String() string {
 func (*ResponseFormat) ProtoMessage() {}
 
 func (x *ResponseFormat) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1079,7 +1033,7 @@ func (x *ResponseFormat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResponseFormat.ProtoReflect.Descriptor instead.
 func (*ResponseFormat) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ResponseFormat) GetResponseFormat() isResponseFormat_ResponseFormat {
@@ -1139,7 +1093,7 @@ type GenSearchTool struct {
 
 func (x *GenSearchTool) Reset() {
 	*x = GenSearchTool{}
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1151,7 +1105,7 @@ func (x *GenSearchTool) String() string {
 func (*GenSearchTool) ProtoMessage() {}
 
 func (x *GenSearchTool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1164,7 +1118,7 @@ func (x *GenSearchTool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenSearchTool.ProtoReflect.Descriptor instead.
 func (*GenSearchTool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GenSearchTool) GetOptions() *GenSearchOptions {
@@ -1177,6 +1131,52 @@ func (x *GenSearchTool) GetOptions() *GenSearchOptions {
 func (x *GenSearchTool) GetDescription() string {
 	if x != nil {
 		return x.Description
+	}
+	return ""
+}
+
+// Options for configuring the rephrasing the last user message for search using context from previous conversation.
+type RephraserOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The ID of the model used to rephrase the last user message for search.
+	RephraserUri  string `protobuf:"bytes,1,opt,name=rephraser_uri,json=rephraserUri,proto3" json:"rephraser_uri,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RephraserOptions) Reset() {
+	*x = RephraserOptions{}
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RephraserOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RephraserOptions) ProtoMessage() {}
+
+func (x *RephraserOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RephraserOptions.ProtoReflect.Descriptor instead.
+func (*RephraserOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_common_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *RephraserOptions) GetRephraserUri() string {
+	if x != nil {
+		return x.RephraserUri
 	}
 	return ""
 }
@@ -1727,11 +1727,11 @@ const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
 	"\fAutoStrategy\x1a9\n" +
 	"\x14LastMessagesStrategy\x12!\n" +
 	"\fnum_messages\x18\x01 \x01(\x03R\vnumMessagesB\x14\n" +
-	"\x12TruncationStrategy\"\x8f\x01\n" +
+	"\x12TruncationStrategy\"\x95\x01\n" +
 	"\x11CompletionOptions\x12:\n" +
 	"\n" +
 	"max_tokens\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\tmaxTokens\x12>\n" +
-	"\vtemperature\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\vtemperature\"\x81\x02\n" +
+	"\vtemperature\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\vtemperatureJ\x04\b\x01\x10\x02\"\x81\x02\n" +
 	"\x04Tool\x12S\n" +
 	"\fsearch_index\x18\x01 \x01(\v2..yandex.cloud.ai.assistants.v1.SearchIndexToolH\x00R\vsearchIndex\x12I\n" +
 	"\bfunction\x18\x02 \x01(\v2+.yandex.cloud.ai.assistants.v1.FunctionToolH\x00R\bfunction\x12M\n" +
@@ -1780,8 +1780,6 @@ const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\acontent\x18\x02 \x01(\tH\x00R\acontentB\r\n" +
 	"\vContentType\"=\n" +
-	"\x10RephraserOptions\x12)\n" +
-	"\rrephraser_uri\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\frephraserUri\"=\n" +
 	"\n" +
 	"JsonSchema\x12/\n" +
 	"\x06schema\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x06schema\"\x93\x01\n" +
@@ -1793,7 +1791,9 @@ const file_yandex_cloud_ai_assistants_v1_common_proto_rawDesc = "" +
 	"\x0eResponseFormat\"\x82\x01\n" +
 	"\rGenSearchTool\x12I\n" +
 	"\aoptions\x18\x01 \x01(\v2/.yandex.cloud.ai.assistants.v1.GenSearchOptionsR\aoptions\x12&\n" +
-	"\vdescription\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\vdescription\"\x84\b\n" +
+	"\vdescription\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\vdescription\"=\n" +
+	"\x10RephraserOptions\x12)\n" +
+	"\rrephraser_uri\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\frephraserUri\"\x84\b\n" +
 	"\x10GenSearchOptions\x12P\n" +
 	"\x04site\x18\x01 \x01(\v2:.yandex.cloud.ai.assistants.v1.GenSearchOptions.SiteOptionH\x00R\x04site\x12P\n" +
 	"\x04host\x18\x02 \x01(\v2:.yandex.cloud.ai.assistants.v1.GenSearchOptions.HostOptionH\x00R\x04host\x12M\n" +
@@ -1857,10 +1857,10 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_goTypes = []any{
 	(*FunctionTool)(nil),                                 // 10: yandex.cloud.ai.assistants.v1.FunctionTool
 	(*FunctionCall)(nil),                                 // 11: yandex.cloud.ai.assistants.v1.FunctionCall
 	(*FunctionResult)(nil),                               // 12: yandex.cloud.ai.assistants.v1.FunctionResult
-	(*RephraserOptions)(nil),                             // 13: yandex.cloud.ai.assistants.v1.RephraserOptions
-	(*JsonSchema)(nil),                                   // 14: yandex.cloud.ai.assistants.v1.JsonSchema
-	(*ResponseFormat)(nil),                               // 15: yandex.cloud.ai.assistants.v1.ResponseFormat
-	(*GenSearchTool)(nil),                                // 16: yandex.cloud.ai.assistants.v1.GenSearchTool
+	(*JsonSchema)(nil),                                   // 13: yandex.cloud.ai.assistants.v1.JsonSchema
+	(*ResponseFormat)(nil),                               // 14: yandex.cloud.ai.assistants.v1.ResponseFormat
+	(*GenSearchTool)(nil),                                // 15: yandex.cloud.ai.assistants.v1.GenSearchTool
+	(*RephraserOptions)(nil),                             // 16: yandex.cloud.ai.assistants.v1.RephraserOptions
 	(*GenSearchOptions)(nil),                             // 17: yandex.cloud.ai.assistants.v1.GenSearchOptions
 	(*PromptTruncationOptions_AutoStrategy)(nil),         // 18: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.AutoStrategy
 	(*PromptTruncationOptions_LastMessagesStrategy)(nil), // 19: yandex.cloud.ai.assistants.v1.PromptTruncationOptions.LastMessagesStrategy
@@ -1882,20 +1882,20 @@ var file_yandex_cloud_ai_assistants_v1_common_proto_depIdxs = []int32{
 	27, // 4: yandex.cloud.ai.assistants.v1.CompletionOptions.temperature:type_name -> google.protobuf.DoubleValue
 	8,  // 5: yandex.cloud.ai.assistants.v1.Tool.search_index:type_name -> yandex.cloud.ai.assistants.v1.SearchIndexTool
 	10, // 6: yandex.cloud.ai.assistants.v1.Tool.function:type_name -> yandex.cloud.ai.assistants.v1.FunctionTool
-	16, // 7: yandex.cloud.ai.assistants.v1.Tool.gen_search:type_name -> yandex.cloud.ai.assistants.v1.GenSearchTool
+	15, // 7: yandex.cloud.ai.assistants.v1.Tool.gen_search:type_name -> yandex.cloud.ai.assistants.v1.GenSearchTool
 	11, // 8: yandex.cloud.ai.assistants.v1.ToolCall.function_call:type_name -> yandex.cloud.ai.assistants.v1.FunctionCall
 	4,  // 9: yandex.cloud.ai.assistants.v1.ToolCallList.tool_calls:type_name -> yandex.cloud.ai.assistants.v1.ToolCall
 	12, // 10: yandex.cloud.ai.assistants.v1.ToolResult.function_result:type_name -> yandex.cloud.ai.assistants.v1.FunctionResult
 	6,  // 11: yandex.cloud.ai.assistants.v1.ToolResultList.tool_results:type_name -> yandex.cloud.ai.assistants.v1.ToolResult
 	26, // 12: yandex.cloud.ai.assistants.v1.SearchIndexTool.max_num_results:type_name -> google.protobuf.Int64Value
-	13, // 13: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
+	16, // 13: yandex.cloud.ai.assistants.v1.SearchIndexTool.rephraser_options:type_name -> yandex.cloud.ai.assistants.v1.RephraserOptions
 	9,  // 14: yandex.cloud.ai.assistants.v1.SearchIndexTool.call_strategy:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy
 	20, // 15: yandex.cloud.ai.assistants.v1.CallStrategy.always_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AlwaysCall
 	21, // 16: yandex.cloud.ai.assistants.v1.CallStrategy.auto_call:type_name -> yandex.cloud.ai.assistants.v1.CallStrategy.AutoCall
 	28, // 17: yandex.cloud.ai.assistants.v1.FunctionTool.parameters:type_name -> google.protobuf.Struct
 	28, // 18: yandex.cloud.ai.assistants.v1.FunctionCall.arguments:type_name -> google.protobuf.Struct
 	28, // 19: yandex.cloud.ai.assistants.v1.JsonSchema.schema:type_name -> google.protobuf.Struct
-	14, // 20: yandex.cloud.ai.assistants.v1.ResponseFormat.json_schema:type_name -> yandex.cloud.ai.assistants.v1.JsonSchema
+	13, // 20: yandex.cloud.ai.assistants.v1.ResponseFormat.json_schema:type_name -> yandex.cloud.ai.assistants.v1.JsonSchema
 	17, // 21: yandex.cloud.ai.assistants.v1.GenSearchTool.options:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions
 	22, // 22: yandex.cloud.ai.assistants.v1.GenSearchOptions.site:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.SiteOption
 	24, // 23: yandex.cloud.ai.assistants.v1.GenSearchOptions.host:type_name -> yandex.cloud.ai.assistants.v1.GenSearchOptions.HostOption
@@ -1936,7 +1936,7 @@ func file_yandex_cloud_ai_assistants_v1_common_proto_init() {
 	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[11].OneofWrappers = []any{
 		(*FunctionResult_Content)(nil),
 	}
-	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[14].OneofWrappers = []any{
+	file_yandex_cloud_ai_assistants_v1_common_proto_msgTypes[13].OneofWrappers = []any{
 		(*ResponseFormat_JsonObject)(nil),
 		(*ResponseFormat_JsonSchema)(nil),
 	}

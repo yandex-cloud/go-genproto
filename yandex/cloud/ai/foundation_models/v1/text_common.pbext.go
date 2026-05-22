@@ -123,6 +123,14 @@ func (m *FunctionTool) SetStrict(v bool) {
 	m.Strict = v
 }
 
+func (m *FunctionCall) SetName(v string) {
+	m.Name = v
+}
+
+func (m *FunctionCall) SetArguments(v *structpb.Struct) {
+	m.Arguments = v
+}
+
 type ToolCall_ToolCallType = isToolCall_ToolCallType
 
 func (m *ToolCall) SetToolCallType(v ToolCall_ToolCallType) {
@@ -135,28 +143,8 @@ func (m *ToolCall) SetFunctionCall(v *FunctionCall) {
 	}
 }
 
-func (m *FunctionCall) SetName(v string) {
-	m.Name = v
-}
-
-func (m *FunctionCall) SetArguments(v *structpb.Struct) {
-	m.Arguments = v
-}
-
 func (m *ToolCallList) SetToolCalls(v []*ToolCall) {
 	m.ToolCalls = v
-}
-
-type ToolResult_ToolResultType = isToolResult_ToolResultType
-
-func (m *ToolResult) SetToolResultType(v ToolResult_ToolResultType) {
-	m.ToolResultType = v
-}
-
-func (m *ToolResult) SetFunctionResult(v *FunctionResult) {
-	m.ToolResultType = &ToolResult_FunctionResult{
-		FunctionResult: v,
-	}
 }
 
 type FunctionResult_ContentType = isFunctionResult_ContentType
@@ -172,6 +160,18 @@ func (m *FunctionResult) SetName(v string) {
 func (m *FunctionResult) SetContent(v string) {
 	m.ContentType = &FunctionResult_Content{
 		Content: v,
+	}
+}
+
+type ToolResult_ToolResultType = isToolResult_ToolResultType
+
+func (m *ToolResult) SetToolResultType(v ToolResult_ToolResultType) {
+	m.ToolResultType = v
+}
+
+func (m *ToolResult) SetFunctionResult(v *FunctionResult) {
+	m.ToolResultType = &ToolResult_FunctionResult{
+		FunctionResult: v,
 	}
 }
 

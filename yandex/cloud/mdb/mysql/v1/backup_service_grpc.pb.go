@@ -30,13 +30,11 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // A set of methods for managing MySQL backups.
-//
 // See [the documentation](/docs/managed-mysql/operations/cluster-backups) for details.
 type BackupServiceClient interface {
 	// Retrieves information about the specified backup.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of backups in a folder.
-	//
 	// To list backups for an existing cluster, make a [ClusterService.ListBackups] request.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
 	// Deletes the specified MySQL cluster backup.
@@ -86,13 +84,11 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // for forward compatibility.
 //
 // A set of methods for managing MySQL backups.
-//
 // See [the documentation](/docs/managed-mysql/operations/cluster-backups) for details.
 type BackupServiceServer interface {
 	// Retrieves information about the specified backup.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of backups in a folder.
-	//
 	// To list backups for an existing cluster, make a [ClusterService.ListBackups] request.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
 	// Deletes the specified MySQL cluster backup.

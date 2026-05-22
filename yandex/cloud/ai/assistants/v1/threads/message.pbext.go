@@ -48,6 +48,18 @@ func (m *MessageContent) SetContent(v []*ContentPart) {
 	m.Content = v
 }
 
+type ContentPart_PartType = isContentPart_PartType
+
+func (m *ContentPart) SetPartType(v ContentPart_PartType) {
+	m.PartType = v
+}
+
+func (m *ContentPart) SetText(v *Text) {
+	m.PartType = &ContentPart_Text{
+		Text: v,
+	}
+}
+
 func (m *MessageData) SetAuthor(v *Author) {
 	m.Author = v
 }
@@ -62,18 +74,6 @@ func (m *MessageData) SetContent(v *MessageContent) {
 
 func (m *Text) SetContent(v string) {
 	m.Content = v
-}
-
-type ContentPart_PartType = isContentPart_PartType
-
-func (m *ContentPart) SetPartType(v ContentPart_PartType) {
-	m.PartType = v
-}
-
-func (m *ContentPart) SetText(v *Text) {
-	m.PartType = &ContentPart_Text{
-		Text: v,
-	}
 }
 
 func (m *Author) SetId(v string) {

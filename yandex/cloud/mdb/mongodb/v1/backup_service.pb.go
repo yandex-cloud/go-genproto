@@ -289,7 +289,7 @@ var File_yandex_cloud_mdb_mongodb_v1_backup_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_mdb_mongodb_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/mdb/mongodb/v1/backup_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a(yandex/cloud/mdb/mongodb/v1/backup.proto\"5\n" +
+	"0yandex/cloud/mdb/mongodb/v1/backup_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/mdb/mongodb/v1/backup.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"5\n" +
 	"\x10GetBackupRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\x92\x01\n" +
 	"\x12ListBackupsRequest\x12)\n" +

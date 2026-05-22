@@ -175,10 +175,6 @@ func (m *FunctionResult) SetContent(v string) {
 	}
 }
 
-func (m *RephraserOptions) SetRephraserUri(v string) {
-	m.RephraserUri = v
-}
-
 func (m *JsonSchema) SetSchema(v *structpb.Struct) {
 	m.Schema = v
 }
@@ -207,6 +203,10 @@ func (m *GenSearchTool) SetOptions(v *GenSearchOptions) {
 
 func (m *GenSearchTool) SetDescription(v string) {
 	m.Description = v
+}
+
+func (m *RephraserOptions) SetRephraserUri(v string) {
+	m.RephraserUri = v
 }
 
 type GenSearchOptions_SiteOptions = isGenSearchOptions_SiteOptions

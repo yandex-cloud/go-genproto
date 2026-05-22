@@ -230,6 +230,8 @@ type ListBatchInferencesRequest struct {
 	PageSize  int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Batch inference status for filtering
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/ai/batch_inference/v1/batch_inference_service.proto.
 	Status        BatchInferenceTask_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.ai.batch_inference.v1.BatchInferenceTask_Status" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -286,6 +288,7 @@ func (x *ListBatchInferencesRequest) GetPageToken() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/ai/batch_inference/v1/batch_inference_service.proto.
 func (x *ListBatchInferencesRequest) GetStatus() BatchInferenceTask_Status {
 	if x != nil {
 		return x.Status
@@ -527,7 +530,7 @@ var File_yandex_cloud_ai_batch_inference_v1_batch_inference_service_proto protor
 
 const file_yandex_cloud_ai_batch_inference_v1_batch_inference_service_proto_rawDesc = "" +
 	"\n" +
-	"@yandex/cloud/ai/batch_inference/v1/batch_inference_service.proto\x12\"yandex.cloud.ai.batch_inference.v1\x1a\x1dyandex/cloud/validation.proto\x1a=yandex/cloud/ai/batch_inference/v1/batch_inference_task.proto\"\xe3\x01\n" +
+	"@yandex/cloud/ai/batch_inference/v1/batch_inference_service.proto\x12\"yandex.cloud.ai.batch_inference.v1\x1a=yandex/cloud/ai/batch_inference/v1/batch_inference_task.proto\x1a\x1dyandex/cloud/validation.proto\"\xe3\x01\n" +
 	"\x16BatchInferenceMetadata\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12^\n" +
 	"\vtask_status\x18\x02 \x01(\x0e2=.yandex.cloud.ai.batch_inference.v1.BatchInferenceTask.StatusR\n" +
@@ -539,13 +542,13 @@ const file_yandex_cloud_ai_batch_inference_v1_batch_inference_service_proto_rawD
 	"\x1dDescribeBatchInferenceRequest\x12\x1d\n" +
 	"\atask_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06taskId\"l\n" +
 	"\x1eDescribeBatchInferenceResponse\x12J\n" +
-	"\x04task\x18\x01 \x01(\v26.yandex.cloud.ai.batch_inference.v1.BatchInferenceTaskR\x04task\"\xd2\x01\n" +
+	"\x04task\x18\x01 \x01(\v26.yandex.cloud.ai.batch_inference.v1.BatchInferenceTaskR\x04task\"\xd6\x01\n" +
 	"\x1aListBatchInferencesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\x12U\n" +
-	"\x06status\x18\x04 \x01(\x0e2=.yandex.cloud.ai.batch_inference.v1.BatchInferenceTask.StatusR\x06status\"\x93\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12Y\n" +
+	"\x06status\x18\x04 \x01(\x0e2=.yandex.cloud.ai.batch_inference.v1.BatchInferenceTask.StatusB\x02\x18\x01R\x06status\"\x93\x01\n" +
 	"\x1bListBatchInferencesResponse\x12L\n" +
 	"\x05tasks\x18\x01 \x03(\v26.yandex.cloud.ai.batch_inference.v1.BatchInferenceTaskR\x05tasks\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"<\n" +
@@ -561,8 +564,8 @@ const file_yandex_cloud_ai_batch_inference_v1_batch_inference_service_proto_rawD
 	"\bDescribe\x12A.yandex.cloud.ai.batch_inference.v1.DescribeBatchInferenceRequest\x1aB.yandex.cloud.ai.batch_inference.v1.DescribeBatchInferenceResponse\x12\x87\x01\n" +
 	"\x04List\x12>.yandex.cloud.ai.batch_inference.v1.ListBatchInferencesRequest\x1a?.yandex.cloud.ai.batch_inference.v1.ListBatchInferencesResponse\x12\x8b\x01\n" +
 	"\x06Cancel\x12?.yandex.cloud.ai.batch_inference.v1.CancelBatchInferenceRequest\x1a@.yandex.cloud.ai.batch_inference.v1.CancelBatchInferenceResponse\x12\x8b\x01\n" +
-	"\x06Delete\x12?.yandex.cloud.ai.batch_inference.v1.DeleteBatchInferenceRequest\x1a@.yandex.cloud.ai.batch_inference.v1.DeleteBatchInferenceResponseBu\n" +
-	"&yandex.cloud.api.ai.batch_inference.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
+	"\x06Delete\x12?.yandex.cloud.ai.batch_inference.v1.DeleteBatchInferenceRequest\x1a@.yandex.cloud.ai.batch_inference.v1.DeleteBatchInferenceResponseB{\n" +
+	"&yandex.cloud.api.ai.batch_inference.v1B\x04FBISZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/batch_inference/v1;fomob\x06proto3"
 
 var (
 	file_yandex_cloud_ai_batch_inference_v1_batch_inference_service_proto_rawDescOnce sync.Once

@@ -337,6 +337,58 @@ func (x *ValidationError) GetRowNumbers() []int64 {
 	return nil
 }
 
+type DatasetFileDownloadUrl struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DatasetFileDownloadUrl) Reset() {
+	*x = DatasetFileDownloadUrl{}
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DatasetFileDownloadUrl) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DatasetFileDownloadUrl) ProtoMessage() {}
+
+func (x *DatasetFileDownloadUrl) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DatasetFileDownloadUrl.ProtoReflect.Descriptor instead.
+func (*DatasetFileDownloadUrl) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DatasetFileDownloadUrl) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *DatasetFileDownloadUrl) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 type DatasetUploadSchema struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskType      string                 `protobuf:"bytes,1,opt,name=task_type,json=taskType,proto3" json:"task_type,omitempty"`
@@ -348,7 +400,7 @@ type DatasetUploadSchema struct {
 
 func (x *DatasetUploadSchema) Reset() {
 	*x = DatasetUploadSchema{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -360,7 +412,7 @@ func (x *DatasetUploadSchema) String() string {
 func (*DatasetUploadSchema) ProtoMessage() {}
 
 func (x *DatasetUploadSchema) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,7 +425,7 @@ func (x *DatasetUploadSchema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatasetUploadSchema.ProtoReflect.Descriptor instead.
 func (*DatasetUploadSchema) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *DatasetUploadSchema) GetTaskType() string {
@@ -393,58 +445,6 @@ func (x *DatasetUploadSchema) GetUploadFormat() string {
 func (x *DatasetUploadSchema) GetSchema() string {
 	if x != nil {
 		return x.Schema
-	}
-	return ""
-}
-
-type DatasetFileDownloadUrl struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DatasetFileDownloadUrl) Reset() {
-	*x = DatasetFileDownloadUrl{}
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DatasetFileDownloadUrl) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DatasetFileDownloadUrl) ProtoMessage() {}
-
-func (x *DatasetFileDownloadUrl) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_dataset_v1_dataset_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DatasetFileDownloadUrl.ProtoReflect.Descriptor instead.
-func (*DatasetFileDownloadUrl) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *DatasetFileDownloadUrl) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *DatasetFileDownloadUrl) GetUrl() string {
-	if x != nil {
-		return x.Url
 	}
 	return ""
 }
@@ -494,15 +494,15 @@ const file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDesc = "" +
 	"\x05error\x18\x01 \x01(\tR\x05error\x12+\n" +
 	"\x11error_description\x18\x02 \x01(\tR\x10errorDescription\x12\x1f\n" +
 	"\vrow_numbers\x18\x03 \x03(\x03R\n" +
-	"rowNumbers\"o\n" +
+	"rowNumbers\"<\n" +
+	"\x16DatasetFileDownloadUrl\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"o\n" +
 	"\x13DatasetUploadSchema\x12\x1b\n" +
 	"\ttask_type\x18\x01 \x01(\tR\btaskType\x12#\n" +
 	"\rupload_format\x18\x02 \x01(\tR\fuploadFormat\x12\x16\n" +
-	"\x06schema\x18\x03 \x01(\tR\x06schema\"<\n" +
-	"\x16DatasetFileDownloadUrl\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03urlBe\n" +
-	"\x1eyandex.cloud.api.ai.dataset.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/dataset/v1;fomob\x06proto3"
+	"\x06schema\x18\x03 \x01(\tR\x06schemaBi\n" +
+	"\x1eyandex.cloud.api.ai.dataset.v1B\x02DSZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/dataset/v1;fomob\x06proto3"
 
 var (
 	file_yandex_cloud_ai_dataset_v1_dataset_proto_rawDescOnce sync.Once
@@ -522,8 +522,8 @@ var file_yandex_cloud_ai_dataset_v1_dataset_proto_goTypes = []any{
 	(DatasetInfo_Status)(0),        // 0: yandex.cloud.ai.dataset.v1.DatasetInfo.Status
 	(*DatasetInfo)(nil),            // 1: yandex.cloud.ai.dataset.v1.DatasetInfo
 	(*ValidationError)(nil),        // 2: yandex.cloud.ai.dataset.v1.ValidationError
-	(*DatasetUploadSchema)(nil),    // 3: yandex.cloud.ai.dataset.v1.DatasetUploadSchema
-	(*DatasetFileDownloadUrl)(nil), // 4: yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	(*DatasetFileDownloadUrl)(nil), // 3: yandex.cloud.ai.dataset.v1.DatasetFileDownloadUrl
+	(*DatasetUploadSchema)(nil),    // 4: yandex.cloud.ai.dataset.v1.DatasetUploadSchema
 	nil,                            // 5: yandex.cloud.ai.dataset.v1.DatasetInfo.LabelsEntry
 	(*timestamppb.Timestamp)(nil),  // 6: google.protobuf.Timestamp
 }

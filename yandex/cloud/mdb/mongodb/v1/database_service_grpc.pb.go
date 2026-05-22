@@ -33,7 +33,6 @@ const (
 // A set of methods for managing MongoDB Database resources.
 type DatabaseServiceClient interface {
 	// Returns the specified MongoDB Database resource.
-	//
 	// To get the list of available MongoDB Database resources, make a [List] request.
 	Get(ctx context.Context, in *GetDatabaseRequest, opts ...grpc.CallOption) (*Database, error)
 	// Retrieves the list of MongoDB Database resources in the specified cluster.
@@ -99,7 +98,6 @@ func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRe
 // A set of methods for managing MongoDB Database resources.
 type DatabaseServiceServer interface {
 	// Returns the specified MongoDB Database resource.
-	//
 	// To get the list of available MongoDB Database resources, make a [List] request.
 	Get(context.Context, *GetDatabaseRequest) (*Database, error)
 	// Retrieves the list of MongoDB Database resources in the specified cluster.

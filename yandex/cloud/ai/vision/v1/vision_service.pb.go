@@ -86,7 +86,6 @@ func (Feature_Type) EnumDescriptor() ([]byte, []int) {
 type BatchAnalyzeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// A list of specifications. Each specification contains the file to analyze and features to use for analysis.
-	//
 	// Restrictions:
 	// * Supported file formats: `JPEG`, `PNG`.
 	// * Maximum file size: 1 MB.
@@ -152,7 +151,6 @@ type AnalyzeSpec struct {
 	//	*AnalyzeSpec_Signature
 	Source isAnalyzeSpec_Source `protobuf_oneof:"source"`
 	// Requested features to use for analysis.
-	//
 	// Max count of requested features for one file is 8.
 	Features []*Feature `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
 	// [MIME type](https://en.wikipedia.org/wiki/Media_type) of content (for example, “ application/pdf “).
@@ -676,7 +674,7 @@ var File_yandex_cloud_ai_vision_v1_vision_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_ai_vision_v1_vision_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/ai/vision/v1/vision_service.proto\x12\x19yandex.cloud.ai.vision.v1\x1a.yandex/cloud/ai/vision/v1/text_detection.proto\x1a.yandex/cloud/ai/vision/v1/classification.proto\x1a.yandex/cloud/ai/vision/v1/face_detection.proto\x1a1yandex/cloud/ai/vision/v1/image_copy_search.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/rpc/status.proto\"\x92\x01\n" +
+	".yandex/cloud/ai/vision/v1/vision_service.proto\x12\x19yandex.cloud.ai.vision.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/rpc/status.proto\x1a.yandex/cloud/ai/vision/v1/classification.proto\x1a.yandex/cloud/ai/vision/v1/face_detection.proto\x1a1yandex/cloud/ai/vision/v1/image_copy_search.proto\x1a.yandex/cloud/ai/vision/v1/text_detection.proto\x1a\x1dyandex/cloud/validation.proto\"\x92\x01\n" +
 	"\x13BatchAnalyzeRequest\x12T\n" +
 	"\ranalyze_specs\x18\x01 \x03(\v2&.yandex.cloud.ai.vision.v1.AnalyzeSpecB\a\x82\xc81\x031-8R\fanalyzeSpecs\x12%\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"\xed\x01\n" +
@@ -777,10 +775,10 @@ func file_yandex_cloud_ai_vision_v1_vision_service_proto_init() {
 	if File_yandex_cloud_ai_vision_v1_vision_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_ai_vision_v1_text_detection_proto_init()
 	file_yandex_cloud_ai_vision_v1_classification_proto_init()
 	file_yandex_cloud_ai_vision_v1_face_detection_proto_init()
 	file_yandex_cloud_ai_vision_v1_image_copy_search_proto_init()
+	file_yandex_cloud_ai_vision_v1_text_detection_proto_init()
 	file_yandex_cloud_ai_vision_v1_vision_service_proto_msgTypes[1].OneofWrappers = []any{
 		(*AnalyzeSpec_Content)(nil),
 		(*AnalyzeSpec_Signature)(nil),

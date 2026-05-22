@@ -4289,9 +4289,9 @@ const file_yandex_cloud_ai_stt_v3_stt_proto_rawDesc = "" +
 	"\n" +
 	"confidence\x18\x05 \x01(\x01R\n" +
 	"confidence\x12B\n" +
-	"\tlanguages\x18\x06 \x03(\v2$.speechkit.stt.v3.LanguageEstimationR\tlanguages\"$\n" +
+	"\tlanguages\x18\x06 \x03(\v2$.speechkit.stt.v3.LanguageEstimationR\tlanguages\"*\n" +
 	"\tEouUpdate\x12\x17\n" +
-	"\atime_ms\x18\x02 \x01(\x03R\x06timeMs\"{\n" +
+	"\atime_ms\x18\x02 \x01(\x03R\x06timeMsJ\x04\b\x01\x10\x02\"{\n" +
 	"\x11AlternativeUpdate\x12A\n" +
 	"\falternatives\x18\x01 \x03(\v2\x1d.speechkit.stt.v3.AlternativeR\falternatives\x12#\n" +
 	"\vchannel_tag\x18\x02 \x01(\tB\x02\x18\x01R\n" +

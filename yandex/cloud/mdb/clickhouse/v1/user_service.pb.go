@@ -832,7 +832,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_user_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/clickhouse/v1/user_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a&yandex/cloud/operation/operation.proto\x1a)yandex/cloud/mdb/clickhouse/v1/user.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
+	"1yandex/cloud/mdb/clickhouse/v1/user_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/clickhouse/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
@@ -850,11 +850,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\x11CreateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
-	"\tuser_spec\x18\x02 \x01(\v2(.yandex.cloud.mdb.clickhouse.v1.UserSpecB\x04\xe8\xc71\x01R\buserSpec\"P\n" +
-	"\x12CreateUserMetadata\x12\x1d\n" +
+	"\tuser_spec\x18\x02 \x01(\v2(.yandex.cloud.mdb.clickhouse.v1.UserSpecB\x04\xe8\xc71\x01R\buserSpec\"\\\n" +
+	"\x12CreateUserMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\x84\x04\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\x84\x04\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
@@ -865,39 +865,39 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\vpermissions\x18\x05 \x03(\v2*.yandex.cloud.mdb.clickhouse.v1.PermissionR\vpermissions\x12H\n" +
 	"\bsettings\x18\x06 \x01(\v2,.yandex.cloud.mdb.clickhouse.v1.UserSettingsR\bsettings\x12A\n" +
 	"\x06quotas\x18\a \x03(\v2).yandex.cloud.mdb.clickhouse.v1.UserQuotaR\x06quotas\x12G\n" +
-	"\x11generate_password\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\"P\n" +
-	"\x12UpdateUserMetadata\x12\x1d\n" +
+	"\x11generate_password\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\"\\\n" +
+	"\x12UpdateUserMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"|\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"|\n" +
 	"\x11DeleteUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\"P\n" +
-	"\x12DeleteUserMetadata\x12\x1d\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\"\\\n" +
+	"\x12DeleteUserMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd1\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xd7\x01\n" +
 	"\x1aGrantUserPermissionRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12J\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12P\n" +
 	"\n" +
-	"permission\x18\x03 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.PermissionR\n" +
-	"permission\"Y\n" +
-	"\x1bGrantUserPermissionMetadata\x12\x1d\n" +
+	"permission\x18\x03 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.PermissionB\x04\xe8\xc71\x01R\n" +
+	"permission\"e\n" +
+	"\x1bGrantUserPermissionMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xc7\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xcb\x01\n" +
 	"\x1bRevokeUserPermissionRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12?\n" +
-	"\rdatabase_name\x18\x03 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"Z\n" +
-	"\x1cRevokeUserPermissionMetadata\x12\x1d\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12C\n" +
+	"\rdatabase_name\x18\x03 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"f\n" +
+	"\x1cRevokeUserPermissionMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName2\xad\v\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName2\xad\v\n" +
 	"\vUserService\x12\xa3\x01\n" +
 	"\x03Get\x12..yandex.cloud.mdb.clickhouse.v1.GetUserRequest\x1a$.yandex.cloud.mdb.clickhouse.v1.User\"F\x82\xd3\xe4\x93\x02@\x12>/managed-clickhouse/v1/clusters/{cluster_id}/users/{user_name}\x12\xa7\x01\n" +
 	"\x04List\x120.yandex.cloud.mdb.clickhouse.v1.ListUsersRequest\x1a1.yandex.cloud.mdb.clickhouse.v1.ListUsersResponse\":\x82\xd3\xe4\x93\x024\x122/managed-clickhouse/v1/clusters/{cluster_id}/users\x12\xbb\x01\n" +

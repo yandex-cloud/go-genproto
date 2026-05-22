@@ -86,6 +86,14 @@ func (m *ValidationError) SetRowNumbers(v []int64) {
 	m.RowNumbers = v
 }
 
+func (m *DatasetFileDownloadUrl) SetKey(v string) {
+	m.Key = v
+}
+
+func (m *DatasetFileDownloadUrl) SetUrl(v string) {
+	m.Url = v
+}
+
 func (m *DatasetUploadSchema) SetTaskType(v string) {
 	m.TaskType = v
 }
@@ -96,12 +104,4 @@ func (m *DatasetUploadSchema) SetUploadFormat(v string) {
 
 func (m *DatasetUploadSchema) SetSchema(v string) {
 	m.Schema = v
-}
-
-func (m *DatasetFileDownloadUrl) SetKey(v string) {
-	m.Key = v
-}
-
-func (m *DatasetFileDownloadUrl) SetUrl(v string) {
-	m.Url = v
 }

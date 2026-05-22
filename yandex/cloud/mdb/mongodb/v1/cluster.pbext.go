@@ -185,6 +185,10 @@ func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
 }
 
+func (m *ClusterConfig) SetAutocompactConfig(v *AutoCompactConfig) {
+	m.AutocompactConfig = v
+}
+
 func (m *Mongodb3_6) SetMongod(v *Mongodb3_6_Mongod) {
 	m.Mongod = v
 }
@@ -983,4 +987,20 @@ func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v *wrapperspb.Int64Valu
 
 func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v *wrapperspb.Int64Value) {
 	m.DiskSizeLimit = v
+}
+
+func (m *AutoCompactConfig) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *AutoCompactConfig) SetTargetFreeSpace(v *wrapperspb.Int64Value) {
+	m.TargetFreeSpace = v
+}
+
+func (m *AutoCompactConfig) SetBloatPercent(v *wrapperspb.DoubleValue) {
+	m.BloatPercent = v
+}
+
+func (m *AutoCompactConfig) SetCompactionType(v AutoCompactConfig_CompactionType) {
+	m.CompactionType = v
 }

@@ -301,7 +301,7 @@ var File_yandex_cloud_ai_assistants_v1_searchindex_search_index_file_service_pro
 
 const file_yandex_cloud_ai_assistants_v1_searchindex_search_index_file_service_proto_rawDesc = "" +
 	"\n" +
-	"Iyandex/cloud/ai/assistants/v1/searchindex/search_index_file_service.proto\x12)yandex.cloud.ai.assistants.v1.searchindex\x1aAyandex/cloud/ai/assistants/v1/searchindex/search_index_file.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1cgoogle/api/annotations.proto\"t\n" +
+	"Iyandex/cloud/ai/assistants/v1/searchindex/search_index_file_service.proto\x12)yandex.cloud.ai.assistants.v1.searchindex\x1a\x1cgoogle/api/annotations.proto\x1aAyandex/cloud/ai/assistants/v1/searchindex/search_index_file.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"t\n" +
 	"!BatchCreateSearchIndexFileRequest\x12!\n" +
 	"\bfile_ids\x18\x01 \x03(\tB\x06\x82\xc81\x02>0R\afileIds\x12,\n" +
 	"\x0fsearch_index_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\rsearchIndexId\"v\n" +

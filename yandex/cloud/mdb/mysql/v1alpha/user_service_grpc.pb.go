@@ -36,7 +36,6 @@ const (
 // A set of methods for managing MySQL users.
 type UserServiceClient interface {
 	// Returns the specified MySQL user.
-	//
 	// To get the list of available MySQL users, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves a list of MySQL users in the specified cluster.
@@ -138,7 +137,6 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // A set of methods for managing MySQL users.
 type UserServiceServer interface {
 	// Returns the specified MySQL user.
-	//
 	// To get the list of available MySQL users, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves a list of MySQL users in the specified cluster.

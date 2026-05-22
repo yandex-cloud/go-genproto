@@ -170,6 +170,13 @@ func (PublicNetworkInterface_NewNativeSubnet_AddressingType) EnumDescriptor() ([
 // A Server resource.
 type Server struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Configuration of the server.
+	//
+	// Types that are valid to be assigned to Configuration:
+	//
+	//	*Server_CustomConfiguration
+	//	*Server_StockConfigurationId
+	Configuration isServer_Configuration `protobuf_oneof:"configuration"`
 	// ID of the server.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the cloud that the server belongs to.
@@ -234,6 +241,31 @@ func (x *Server) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Server.ProtoReflect.Descriptor instead.
 func (*Server) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v1alpha_server_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Server) GetConfiguration() isServer_Configuration {
+	if x != nil {
+		return x.Configuration
+	}
+	return nil
+}
+
+func (x *Server) GetCustomConfiguration() *Configuration {
+	if x != nil {
+		if x, ok := x.Configuration.(*Server_CustomConfiguration); ok {
+			return x.CustomConfiguration
+		}
+	}
+	return nil
+}
+
+func (x *Server) GetStockConfigurationId() string {
+	if x != nil {
+		if x, ok := x.Configuration.(*Server_StockConfigurationId); ok {
+			return x.StockConfigurationId
+		}
+	}
+	return ""
 }
 
 func (x *Server) GetId() string {
@@ -334,6 +366,24 @@ func (x *Server) GetLabels() map[string]string {
 	}
 	return nil
 }
+
+type isServer_Configuration interface {
+	isServer_Configuration()
+}
+
+type Server_CustomConfiguration struct {
+	// Custom configuration.
+	CustomConfiguration *Configuration `protobuf:"bytes,24,opt,name=custom_configuration,json=customConfiguration,proto3,oneof"`
+}
+
+type Server_StockConfigurationId struct {
+	// ID of the stock configuration.
+	StockConfigurationId string `protobuf:"bytes,25,opt,name=stock_configuration_id,json=stockConfigurationId,proto3,oneof"`
+}
+
+func (*Server_CustomConfiguration) isServer_Configuration() {}
+
+func (*Server_StockConfigurationId) isServer_Configuration() {}
 
 type NetworkInterface struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1028,8 +1078,10 @@ var File_yandex_cloud_baremetal_v1alpha_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\xe6\a\n" +
-	"\x06Server\x12\x0e\n" +
+	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\t\n" +
+	"\x06Server\x12b\n" +
+	"\x14custom_configuration\x18\x18 \x01(\v2-.yandex.cloud.baremetal.v1alpha.ConfigurationH\x00R\x13customConfiguration\x126\n" +
+	"\x16stock_configuration_id\x18\x19 \x01(\tH\x00R\x14stockConfigurationId\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x19\n" +
 	"\bcloud_id\x18\x02 \x01(\tR\acloudId\x12\x1b\n" +
 	"\tfolder_id\x18\x03 \x01(\tR\bfolderId\x12\x12\n" +
@@ -1064,7 +1116,8 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\bUPDATING\x10\n" +
 	"\x12\x0f\n" +
 	"\vQUARANTINED\x10\f\x12\v\n" +
-	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10dJ\x05\be\x10\xc8\x01\"\x97\x05\n" +
+	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rB\x0f\n" +
+	"\rconfigurationJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10\x18J\x04\b\x1a\x10dJ\x05\be\x10\xc8\x01\"\x97\x05\n" +
 	"\x10NetworkInterface\x12j\n" +
 	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +
 	"\rpublic_subnet\x18\b \x01(\v2<.yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterfaceB\x02\x18\x01H\x00R\fpublicSubnet\x12f\n" +
@@ -1145,31 +1198,33 @@ var file_yandex_cloud_baremetal_v1alpha_server_proto_goTypes = []any{
 	nil,                                            // 10: yandex.cloud.baremetal.v1alpha.Server.LabelsEntry
 	(*PublicNetworkInterface_NativeSubnet)(nil),    // 11: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NativeSubnet
 	(*PublicNetworkInterface_NewNativeSubnet)(nil), // 12: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet
-	(*Disk)(nil),                                   // 13: yandex.cloud.baremetal.v1alpha.Disk
-	(*timestamppb.Timestamp)(nil),                  // 14: google.protobuf.Timestamp
-	(*Storage)(nil),                                // 15: yandex.cloud.baremetal.v1alpha.Storage
+	(*Configuration)(nil),                          // 13: yandex.cloud.baremetal.v1alpha.Configuration
+	(*Disk)(nil),                                   // 14: yandex.cloud.baremetal.v1alpha.Disk
+	(*timestamppb.Timestamp)(nil),                  // 15: google.protobuf.Timestamp
+	(*Storage)(nil),                                // 16: yandex.cloud.baremetal.v1alpha.Storage
 }
 var file_yandex_cloud_baremetal_v1alpha_server_proto_depIdxs = []int32{
-	0,  // 0: yandex.cloud.baremetal.v1alpha.Server.status:type_name -> yandex.cloud.baremetal.v1alpha.Server.Status
-	9,  // 1: yandex.cloud.baremetal.v1alpha.Server.os_settings:type_name -> yandex.cloud.baremetal.v1alpha.OsSettings
-	3,  // 2: yandex.cloud.baremetal.v1alpha.Server.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterface
-	13, // 3: yandex.cloud.baremetal.v1alpha.Server.disks:type_name -> yandex.cloud.baremetal.v1alpha.Disk
-	14, // 4: yandex.cloud.baremetal.v1alpha.Server.created_at:type_name -> google.protobuf.Timestamp
-	10, // 5: yandex.cloud.baremetal.v1alpha.Server.labels:type_name -> yandex.cloud.baremetal.v1alpha.Server.LabelsEntry
-	7,  // 6: yandex.cloud.baremetal.v1alpha.NetworkInterface.private_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
-	8,  // 7: yandex.cloud.baremetal.v1alpha.NetworkInterface.public_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
-	4,  // 8: yandex.cloud.baremetal.v1alpha.NetworkInterface.private_interface:type_name -> yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
-	6,  // 9: yandex.cloud.baremetal.v1alpha.NetworkInterface.public_interface:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
-	5,  // 10: yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface.vlan_subinterfaces:type_name -> yandex.cloud.baremetal.v1alpha.VLANSubinterface
-	11, // 11: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.native_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NativeSubnet
-	12, // 12: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.new_native_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet
-	15, // 13: yandex.cloud.baremetal.v1alpha.OsSettings.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
-	1,  // 14: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet.addressing_type:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet.AddressingType
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	13, // 0: yandex.cloud.baremetal.v1alpha.Server.custom_configuration:type_name -> yandex.cloud.baremetal.v1alpha.Configuration
+	0,  // 1: yandex.cloud.baremetal.v1alpha.Server.status:type_name -> yandex.cloud.baremetal.v1alpha.Server.Status
+	9,  // 2: yandex.cloud.baremetal.v1alpha.Server.os_settings:type_name -> yandex.cloud.baremetal.v1alpha.OsSettings
+	3,  // 3: yandex.cloud.baremetal.v1alpha.Server.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterface
+	14, // 4: yandex.cloud.baremetal.v1alpha.Server.disks:type_name -> yandex.cloud.baremetal.v1alpha.Disk
+	15, // 5: yandex.cloud.baremetal.v1alpha.Server.created_at:type_name -> google.protobuf.Timestamp
+	10, // 6: yandex.cloud.baremetal.v1alpha.Server.labels:type_name -> yandex.cloud.baremetal.v1alpha.Server.LabelsEntry
+	7,  // 7: yandex.cloud.baremetal.v1alpha.NetworkInterface.private_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
+	8,  // 8: yandex.cloud.baremetal.v1alpha.NetworkInterface.public_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
+	4,  // 9: yandex.cloud.baremetal.v1alpha.NetworkInterface.private_interface:type_name -> yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
+	6,  // 10: yandex.cloud.baremetal.v1alpha.NetworkInterface.public_interface:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
+	5,  // 11: yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface.vlan_subinterfaces:type_name -> yandex.cloud.baremetal.v1alpha.VLANSubinterface
+	11, // 12: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.native_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NativeSubnet
+	12, // 13: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.new_native_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet
+	16, // 14: yandex.cloud.baremetal.v1alpha.OsSettings.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
+	1,  // 15: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet.addressing_type:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface.NewNativeSubnet.AddressingType
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_server_proto_init() }
@@ -1177,8 +1232,13 @@ func file_yandex_cloud_baremetal_v1alpha_server_proto_init() {
 	if File_yandex_cloud_baremetal_v1alpha_server_proto != nil {
 		return
 	}
+	file_yandex_cloud_baremetal_v1alpha_configuration_proto_init()
 	file_yandex_cloud_baremetal_v1alpha_disk_proto_init()
 	file_yandex_cloud_baremetal_v1alpha_storage_proto_init()
+	file_yandex_cloud_baremetal_v1alpha_server_proto_msgTypes[0].OneofWrappers = []any{
+		(*Server_CustomConfiguration)(nil),
+		(*Server_StockConfigurationId)(nil),
+	}
 	file_yandex_cloud_baremetal_v1alpha_server_proto_msgTypes[1].OneofWrappers = []any{
 		(*NetworkInterface_PrivateSubnet)(nil),
 		(*NetworkInterface_PublicSubnet)(nil),

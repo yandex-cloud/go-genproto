@@ -786,7 +786,7 @@ var File_yandex_cloud_mdb_mysql_v1alpha_user_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_mysql_v1alpha_user_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/mysql/v1alpha/user_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/mdb/mysql/v1alpha/user.proto\"y\n" +
+	"1yandex/cloud/mdb/mysql/v1alpha/user_service.proto\x12\x1eyandex.cloud.mdb.mysql.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/mysql/v1alpha/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
@@ -848,20 +848,20 @@ const file_yandex_cloud_mdb_mysql_v1alpha_user_service_proto_rawDesc = "" +
 	"\x1cRevokeUserPermissionMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName2\xad\v\n" +
-	"\vUserService\x12\xa3\x01\n" +
-	"\x03Get\x12..yandex.cloud.mdb.mysql.v1alpha.GetUserRequest\x1a$.yandex.cloud.mdb.mysql.v1alpha.User\"F\x82\xd3\xe4\x93\x02@\x12>/managed-mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xa7\x01\n" +
-	"\x04List\x120.yandex.cloud.mdb.mysql.v1alpha.ListUsersRequest\x1a1.yandex.cloud.mdb.mysql.v1alpha.ListUsersResponse\":\x82\xd3\xe4\x93\x024\x122/managed-mysql/v1alpha/clusters/{cluster_id}/users\x12\xbb\x01\n" +
-	"\x06Create\x121.yandex.cloud.mdb.mysql.v1alpha.CreateUserRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*\x1a\n" +
-	"\x12CreateUserMetadata\x12\x04User\x82\xd3\xe4\x93\x027:\x01*\"2/managed-mysql/v1alpha/clusters/{cluster_id}/users\x12\xc7\x01\n" +
-	"\x06Update\x121.yandex.cloud.mdb.mysql.v1alpha.UpdateUserRequest\x1a!.yandex.cloud.operation.Operation\"g\xb2\xd2*\x1a\n" +
-	"\x12UpdateUserMetadata\x12\x04User\x82\xd3\xe4\x93\x02C:\x01*2>/managed-mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xd5\x01\n" +
-	"\x06Delete\x121.yandex.cloud.mdb.mysql.v1alpha.DeleteUserRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*+\n" +
-	"\x12DeleteUserMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02@*>/managed-mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xf3\x01\n" +
-	"\x0fGrantPermission\x12:.yandex.cloud.mdb.mysql.v1alpha.GrantUserPermissionRequest\x1a!.yandex.cloud.operation.Operation\"\x80\x01\xb2\xd2*#\n" +
-	"\x1bGrantUserPermissionMetadata\x12\x04User\x82\xd3\xe4\x93\x02S:\x01*\"N/managed-mysql/v1alpha/clusters/{cluster_id}/users/{user_name}:grantPermission\x12\xf7\x01\n" +
-	"\x10RevokePermission\x12;.yandex.cloud.mdb.mysql.v1alpha.RevokeUserPermissionRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*$\n" +
-	"\x1cRevokeUserPermissionMetadata\x12\x04User\x82\xd3\xe4\x93\x02T:\x01*\"O/managed-mysql/v1alpha/clusters/{cluster_id}/users/{user_name}:revokePermissionBn\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName2\x8f\v\n" +
+	"\vUserService\x12\x9f\x01\n" +
+	"\x03Get\x12..yandex.cloud.mdb.mysql.v1alpha.GetUserRequest\x1a$.yandex.cloud.mdb.mysql.v1alpha.User\"B\x82\xd3\xe4\x93\x02<\x12:/mdb/mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xa3\x01\n" +
+	"\x04List\x120.yandex.cloud.mdb.mysql.v1alpha.ListUsersRequest\x1a1.yandex.cloud.mdb.mysql.v1alpha.ListUsersResponse\"6\x82\xd3\xe4\x93\x020\x12./mdb/mysql/v1alpha/clusters/{cluster_id}/users\x12\xb7\x01\n" +
+	"\x06Create\x121.yandex.cloud.mdb.mysql.v1alpha.CreateUserRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2*\x1a\n" +
+	"\x12CreateUserMetadata\x12\x04User\x82\xd3\xe4\x93\x023:\x01*\"./mdb/mysql/v1alpha/clusters/{cluster_id}/users\x12\xc3\x01\n" +
+	"\x06Update\x121.yandex.cloud.mdb.mysql.v1alpha.UpdateUserRequest\x1a!.yandex.cloud.operation.Operation\"c\xb2\xd2*\x1a\n" +
+	"\x12UpdateUserMetadata\x12\x04User\x82\xd3\xe4\x93\x02?:\x01*2:/mdb/mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xd1\x01\n" +
+	"\x06Delete\x121.yandex.cloud.mdb.mysql.v1alpha.DeleteUserRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*+\n" +
+	"\x12DeleteUserMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02<*:/mdb/mysql/v1alpha/clusters/{cluster_id}/users/{user_name}\x12\xee\x01\n" +
+	"\x0fGrantPermission\x12:.yandex.cloud.mdb.mysql.v1alpha.GrantUserPermissionRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*#\n" +
+	"\x1bGrantUserPermissionMetadata\x12\x04User\x82\xd3\xe4\x93\x02O:\x01*\"J/mdb/mysql/v1alpha/clusters/{cluster_id}/users/{user_name}:grantPermission\x12\xf2\x01\n" +
+	"\x10RevokePermission\x12;.yandex.cloud.mdb.mysql.v1alpha.RevokeUserPermissionRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*$\n" +
+	"\x1cRevokeUserPermissionMetadata\x12\x04User\x82\xd3\xe4\x93\x02P:\x01*\"K/mdb/mysql/v1alpha/clusters/{cluster_id}/users/{user_name}:revokePermissionBn\n" +
 	"\"yandex.cloud.api.mdb.mysql.v1alphaZHgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha;mysqlb\x06proto3"
 
 var (

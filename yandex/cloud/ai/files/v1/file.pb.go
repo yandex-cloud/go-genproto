@@ -171,7 +171,7 @@ var File_yandex_cloud_ai_files_v1_file_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_files_v1_file_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/ai/files/v1/file.proto\x12\x18yandex.cloud.ai.files.v1\x1a#yandex/cloud/ai/common/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcb\x04\n" +
+	"#yandex/cloud/ai/files/v1/file.proto\x12\x18yandex.cloud.ai.files.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#yandex/cloud/ai/common/common.proto\"\xcb\x04\n" +
 	"\x04File\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +

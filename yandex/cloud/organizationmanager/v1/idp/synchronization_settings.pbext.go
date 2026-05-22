@@ -47,6 +47,10 @@ func (m *SynchronizationSettings) SetReplacementDomain(v string) {
 	m.ReplacementDomain = v
 }
 
+func (m *SynchronizationSettings) SetEnablePasswordWriteback(v bool) {
+	m.EnablePasswordWriteback = v
+}
+
 func (m *SynchronizationFilter) SetDomain(v string) {
 	m.Domain = v
 }

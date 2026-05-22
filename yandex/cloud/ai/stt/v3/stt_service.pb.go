@@ -74,12 +74,12 @@ var File_yandex_cloud_ai_stt_v3_stt_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_stt_v3_stt_service_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/ai/stt/v3/stt_service.proto\x12\x10speechkit.stt.v3\x1a yandex/cloud/ai/stt/v3/stt.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"H\n" +
+	"(yandex/cloud/ai/stt/v3/stt_service.proto\x12\x10speechkit.stt.v3\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a yandex/cloud/ai/stt/v3/stt.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
 	"\x15GetRecognitionRequest\x12/\n" +
-	"\foperation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\voperationId2q\n" +
+	"\foperation_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\voperationId2o\n" +
 	"\n" +
-	"Recognizer\x12c\n" +
-	"\x12RecognizeStreaming\x12\".speechkit.stt.v3.StreamingRequest\x1a#.speechkit.stt.v3.StreamingResponse\"\x00(\x010\x012\xaf\x03\n" +
+	"Recognizer\x12a\n" +
+	"\x12RecognizeStreaming\x12\".speechkit.stt.v3.StreamingRequest\x1a#.speechkit.stt.v3.StreamingResponse(\x010\x012\xaf\x03\n" +
 	"\x0fAsyncRecognizer\x12\x9c\x01\n" +
 	"\rRecognizeFile\x12&.speechkit.stt.v3.RecognizeFileRequest\x1a!.yandex.cloud.operation.Operation\"@\xb2\xd2*\x17\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/stt/v3/recognizeFileAsync\x12\x80\x01\n" +
 	"\x0eGetRecognition\x12'.speechkit.stt.v3.GetRecognitionRequest\x1a#.speechkit.stt.v3.StreamingResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/stt/v3/getRecognition0\x01\x12z\n" +

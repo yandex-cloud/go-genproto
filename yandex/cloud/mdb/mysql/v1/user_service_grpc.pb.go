@@ -34,7 +34,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // A set of methods for managing MySQL users.
-//
 // See [the documentation](/docs/managed-mysql/operations/cluster-users) for details.
 type UserServiceClient interface {
 	// Retrieves information about the specified user.
@@ -136,7 +135,6 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // for forward compatibility.
 //
 // A set of methods for managing MySQL users.
-//
 // See [the documentation](/docs/managed-mysql/operations/cluster-users) for details.
 type UserServiceServer interface {
 	// Retrieves information about the specified user.

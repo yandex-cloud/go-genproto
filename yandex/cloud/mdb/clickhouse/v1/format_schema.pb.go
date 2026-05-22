@@ -77,7 +77,6 @@ type FormatSchema struct {
 	// ClickHouse cluster ID.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Schema type. Possible values are the following:
-	//
 	// * FORMAT_SCHEMA_TYPE_PROTOBUF - [Protobuf](https://protobuf.dev/) data format (including [ProtobufSingle](https://clickhouse.com/docs/en/interfaces/formats#protobufsingle)).
 	// * FORMAT_SCHEMA_TYPE_CAPNPROTO - [Cap'n Proto](https://capnproto.org/) data format.
 	Type FormatSchemaType `protobuf:"varint,3,opt,name=type,proto3,enum=yandex.cloud.mdb.clickhouse.v1.FormatSchemaType" json:"type,omitempty"`

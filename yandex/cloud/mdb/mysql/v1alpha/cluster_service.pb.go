@@ -442,7 +442,6 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the MySQL cluster as `key:value` pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
-	//
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1984,10 +1983,8 @@ type HostSpec struct {
 	// The ID of the network is set in the field [Cluster.network_id].
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Whether the host should get a public IP address on creation.
-	//
 	// After a host has been created, this setting cannot be changed. To remove an assigned public IP, or to assign
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
-	//
 	// Possible values:
 	// * false - don't assign a public IP to the host.
 	// * true - the host should have a public IP address.
@@ -2338,32 +2335,32 @@ const file_yandex_cloud_mdb_mysql_v1alpha_cluster_service_proto_rawDesc = "" +
 	"\x10mysql_config_5_7\x18\x02 \x01(\v25.yandex.cloud.mdb.mysql.v1alpha.config.MysqlConfig5_7H\x00R\x0fmysqlConfig_5_7\x12G\n" +
 	"\tresources\x18\x03 \x01(\v2).yandex.cloud.mdb.mysql.v1alpha.ResourcesR\tresources\x12F\n" +
 	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStartB\x0e\n" +
-	"\fmysql_config2\xee\x16\n" +
-	"\x0eClusterService\x12\x97\x01\n" +
-	"\x03Get\x121.yandex.cloud.mdb.mysql.v1alpha.GetClusterRequest\x1a'.yandex.cloud.mdb.mysql.v1alpha.Cluster\"4\x82\xd3\xe4\x93\x02.\x12,/managed-mysql/v1alpha/clusters/{cluster_id}\x12\x9a\x01\n" +
-	"\x04List\x123.yandex.cloud.mdb.mysql.v1alpha.ListClustersRequest\x1a4.yandex.cloud.mdb.mysql.v1alpha.ListClustersResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/managed-mysql/v1alpha/clusters\x12\xb1\x01\n" +
-	"\x06Create\x124.yandex.cloud.mdb.mysql.v1alpha.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"N\xb2\xd2* \n" +
-	"\x15CreateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/managed-mysql/v1alpha/clusters\x12\xbe\x01\n" +
-	"\x06Update\x124.yandex.cloud.mdb.mysql.v1alpha.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2* \n" +
-	"\x15UpdateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x021:\x01*2,/managed-mysql/v1alpha/clusters/{cluster_id}\x12\xc9\x01\n" +
-	"\x06Delete\x124.yandex.cloud.mdb.mysql.v1alpha.DeleteClusterRequest\x1a!.yandex.cloud.operation.Operation\"f\xb2\xd2*.\n" +
-	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02.*,/managed-mysql/v1alpha/clusters/{cluster_id}\x12\xbe\x01\n" +
-	"\x05Start\x123.yandex.cloud.mdb.mysql.v1alpha.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2*\x1f\n" +
-	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x024\"2/managed-mysql/v1alpha/clusters/{cluster_id}:start\x12\xba\x01\n" +
-	"\x04Stop\x122.yandex.cloud.mdb.mysql.v1alpha.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*\x1e\n" +
-	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x023\"1/managed-mysql/v1alpha/clusters/{cluster_id}:stop\x12\xc2\x01\n" +
-	"\x06Backup\x124.yandex.cloud.mdb.mysql.v1alpha.BackupClusterRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2* \n" +
-	"\x15BackupClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x025\"3/managed-mysql/v1alpha/clusters/{cluster_id}:backup\x12\xbc\x01\n" +
-	"\aRestore\x125.yandex.cloud.mdb.mysql.v1alpha.RestoreClusterRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2*!\n" +
-	"\x16RestoreClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02,:\x01*\"'/managed-mysql/v1alpha/clusters:restore\x12\xb6\x01\n" +
-	"\bListLogs\x126.yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsRequest\x1a7.yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsResponse\"9\x82\xd3\xe4\x93\x023\x121/managed-mysql/v1alpha/clusters/{cluster_id}:logs\x12\xce\x01\n" +
-	"\x0eListOperations\x12<.yandex.cloud.mdb.mysql.v1alpha.ListClusterOperationsRequest\x1a=.yandex.cloud.mdb.mysql.v1alpha.ListClusterOperationsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-mysql/v1alpha/clusters/{cluster_id}/operations\x12\xc2\x01\n" +
-	"\vListBackups\x129.yandex.cloud.mdb.mysql.v1alpha.ListClusterBackupsRequest\x1a:.yandex.cloud.mdb.mysql.v1alpha.ListClusterBackupsResponse\"<\x82\xd3\xe4\x93\x026\x124/managed-mysql/v1alpha/clusters/{cluster_id}/backups\x12\xba\x01\n" +
-	"\tListHosts\x127.yandex.cloud.mdb.mysql.v1alpha.ListClusterHostsRequest\x1a8.yandex.cloud.mdb.mysql.v1alpha.ListClusterHostsResponse\":\x82\xd3\xe4\x93\x024\x122/managed-mysql/v1alpha/clusters/{cluster_id}/hosts\x12\xe4\x01\n" +
-	"\bAddHosts\x126.yandex.cloud.mdb.mysql.v1alpha.AddClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"}\xb2\xd2*0\n" +
-	"\x17AddClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C:\x01*\">/managed-mysql/v1alpha/clusters/{cluster_id}/hosts:batchCreate\x12\xee\x01\n" +
-	"\vDeleteHosts\x129.yandex.cloud.mdb.mysql.v1alpha.DeleteClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"\x80\x01\xb2\xd2*3\n" +
-	"\x1aDeleteClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C:\x01*\">/managed-mysql/v1alpha/clusters/{cluster_id}/hosts:batchDeleteBn\n" +
+	"\fmysql_config2\xb1\x16\n" +
+	"\x0eClusterService\x12\x93\x01\n" +
+	"\x03Get\x121.yandex.cloud.mdb.mysql.v1alpha.GetClusterRequest\x1a'.yandex.cloud.mdb.mysql.v1alpha.Cluster\"0\x82\xd3\xe4\x93\x02*\x12(/mdb/mysql/v1alpha/clusters/{cluster_id}\x12\x96\x01\n" +
+	"\x04List\x123.yandex.cloud.mdb.mysql.v1alpha.ListClustersRequest\x1a4.yandex.cloud.mdb.mysql.v1alpha.ListClustersResponse\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/mdb/mysql/v1alpha/clusters\x12\xad\x01\n" +
+	"\x06Create\x124.yandex.cloud.mdb.mysql.v1alpha.CreateClusterRequest\x1a!.yandex.cloud.operation.Operation\"J\xb2\xd2* \n" +
+	"\x15CreateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/mdb/mysql/v1alpha/clusters\x12\xba\x01\n" +
+	"\x06Update\x124.yandex.cloud.mdb.mysql.v1alpha.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2* \n" +
+	"\x15UpdateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02-:\x01*2(/mdb/mysql/v1alpha/clusters/{cluster_id}\x12\xc5\x01\n" +
+	"\x06Delete\x124.yandex.cloud.mdb.mysql.v1alpha.DeleteClusterRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2*.\n" +
+	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/mdb/mysql/v1alpha/clusters/{cluster_id}\x12\xba\x01\n" +
+	"\x05Start\x123.yandex.cloud.mdb.mysql.v1alpha.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"Y\xb2\xd2*\x1f\n" +
+	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x020\"./mdb/mysql/v1alpha/clusters/{cluster_id}:start\x12\xb6\x01\n" +
+	"\x04Stop\x122.yandex.cloud.mdb.mysql.v1alpha.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2*\x1e\n" +
+	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02/\"-/mdb/mysql/v1alpha/clusters/{cluster_id}:stop\x12\xbe\x01\n" +
+	"\x06Backup\x124.yandex.cloud.mdb.mysql.v1alpha.BackupClusterRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2* \n" +
+	"\x15BackupClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x021\"//mdb/mysql/v1alpha/clusters/{cluster_id}:backup\x12\xb8\x01\n" +
+	"\aRestore\x125.yandex.cloud.mdb.mysql.v1alpha.RestoreClusterRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2*!\n" +
+	"\x16RestoreClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02(:\x01*\"#/mdb/mysql/v1alpha/clusters:restore\x12\xb2\x01\n" +
+	"\bListLogs\x126.yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsRequest\x1a7.yandex.cloud.mdb.mysql.v1alpha.ListClusterLogsResponse\"5\x82\xd3\xe4\x93\x02/\x12-/mdb/mysql/v1alpha/clusters/{cluster_id}:logs\x12\xca\x01\n" +
+	"\x0eListOperations\x12<.yandex.cloud.mdb.mysql.v1alpha.ListClusterOperationsRequest\x1a=.yandex.cloud.mdb.mysql.v1alpha.ListClusterOperationsResponse\";\x82\xd3\xe4\x93\x025\x123/mdb/mysql/v1alpha/clusters/{cluster_id}/operations\x12\xbe\x01\n" +
+	"\vListBackups\x129.yandex.cloud.mdb.mysql.v1alpha.ListClusterBackupsRequest\x1a:.yandex.cloud.mdb.mysql.v1alpha.ListClusterBackupsResponse\"8\x82\xd3\xe4\x93\x022\x120/mdb/mysql/v1alpha/clusters/{cluster_id}/backups\x12\xb6\x01\n" +
+	"\tListHosts\x127.yandex.cloud.mdb.mysql.v1alpha.ListClusterHostsRequest\x1a8.yandex.cloud.mdb.mysql.v1alpha.ListClusterHostsResponse\"6\x82\xd3\xe4\x93\x020\x12./mdb/mysql/v1alpha/clusters/{cluster_id}/hosts\x12\xe0\x01\n" +
+	"\bAddHosts\x126.yandex.cloud.mdb.mysql.v1alpha.AddClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"y\xb2\xd2*0\n" +
+	"\x17AddClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?:\x01*\":/mdb/mysql/v1alpha/clusters/{cluster_id}/hosts:batchCreate\x12\xe9\x01\n" +
+	"\vDeleteHosts\x129.yandex.cloud.mdb.mysql.v1alpha.DeleteClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*3\n" +
+	"\x1aDeleteClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?:\x01*\":/mdb/mysql/v1alpha/clusters/{cluster_id}/hosts:batchDeleteBn\n" +
 	"\"yandex.cloud.api.mdb.mysql.v1alphaZHgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1alpha;mysqlb\x06proto3"
 
 var (

@@ -1453,10 +1453,11 @@ func (x *GetOptionsRequest) GetTaskId() string {
 }
 
 type GetOptionsResponse struct {
-	state              protoimpl.MessageState           `protogen:"open.v1"`
-	TaskId             string                           `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
-	BaseModelUri       string                           `protobuf:"bytes,2,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
-	TrainDatasets      []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	TaskId        string                           `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	BaseModelUri  string                           `protobuf:"bytes,2,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
+	TrainDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 	ValidationDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,4,rep,name=validation_datasets,json=validationDatasets,proto3" json:"validation_datasets,omitempty"`
 	// Types that are valid to be assigned to TuningParams:
 	//
@@ -1521,6 +1522,7 @@ func (x *GetOptionsResponse) GetTrainDatasets() []*TuningRequest_WeightedDataset
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 func (x *GetOptionsResponse) GetValidationDatasets() []*TuningRequest_WeightedDataset {
 	if x != nil {
 		return x.ValidationDatasets
@@ -1703,9 +1705,10 @@ func (x *ListErrorsResponse) GetTuningError() []*TuningError {
 }
 
 type CreateTuningDraftRequest struct {
-	state              protoimpl.MessageState           `protogen:"open.v1"`
-	BaseModelUri       string                           `protobuf:"bytes,1,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
-	TrainDatasets      []*TuningRequest_WeightedDataset `protobuf:"bytes,2,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	BaseModelUri  string                           `protobuf:"bytes,1,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
+	TrainDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,2,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 	ValidationDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=validation_datasets,json=validationDatasets,proto3" json:"validation_datasets,omitempty"`
 	// Types that are valid to be assigned to TuningParams:
 	//
@@ -1766,6 +1769,7 @@ func (x *CreateTuningDraftRequest) GetTrainDatasets() []*TuningRequest_WeightedD
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 func (x *CreateTuningDraftRequest) GetValidationDatasets() []*TuningRequest_WeightedDataset {
 	if x != nil {
 		return x.ValidationDatasets
@@ -1928,10 +1932,11 @@ func (x *CreateTuningDraftResponse) GetTuningTaskId() string {
 }
 
 type UpdateTuningDraftRequest struct {
-	state              protoimpl.MessageState           `protogen:"open.v1"`
-	TuningTaskId       string                           `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
-	BaseModelUri       string                           `protobuf:"bytes,2,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
-	TrainDatasets      []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	state         protoimpl.MessageState           `protogen:"open.v1"`
+	TuningTaskId  string                           `protobuf:"bytes,1,opt,name=tuning_task_id,json=tuningTaskId,proto3" json:"tuning_task_id,omitempty"`
+	BaseModelUri  string                           `protobuf:"bytes,2,opt,name=base_model_uri,json=baseModelUri,proto3" json:"base_model_uri,omitempty"`
+	TrainDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,3,rep,name=train_datasets,json=trainDatasets,proto3" json:"train_datasets,omitempty"`
+	// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 	ValidationDatasets []*TuningRequest_WeightedDataset `protobuf:"bytes,4,rep,name=validation_datasets,json=validationDatasets,proto3" json:"validation_datasets,omitempty"`
 	// Types that are valid to be assigned to TuningParams:
 	//
@@ -1999,6 +2004,7 @@ func (x *UpdateTuningDraftRequest) GetTrainDatasets() []*TuningRequest_WeightedD
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/ai/tuning/v1/tuning_service.proto.
 func (x *UpdateTuningDraftRequest) GetValidationDatasets() []*TuningRequest_WeightedDataset {
 	if x != nil {
 		return x.ValidationDatasets
@@ -3514,7 +3520,7 @@ var File_yandex_cloud_ai_tuning_v1_tuning_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/ai/tuning/v1/tuning_service.proto\x12\x19yandex.cloud.ai.tuning.v1\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a+yandex/cloud/ai/tuning/v1/tuning_task.proto\x1a,yandex/cloud/ai/tuning/v1/tuning_types.proto\x1a1yandex/cloud/ai/tuning/v1/tuning_optimizers.proto\x1a1yandex/cloud/ai/tuning/v1/tuning_schedulers.proto\x1a,yandex/cloud/ai/tuning/v1/tuning_error.proto\"\xb9\x01\n" +
+	".yandex/cloud/ai/tuning/v1/tuning_service.proto\x12\x19yandex.cloud.ai.tuning.v1\x1a,yandex/cloud/ai/tuning/v1/tuning_error.proto\x1a1yandex/cloud/ai/tuning/v1/tuning_optimizers.proto\x1a1yandex/cloud/ai/tuning/v1/tuning_schedulers.proto\x1a+yandex/cloud/ai/tuning/v1/tuning_task.proto\x1a,yandex/cloud/ai/tuning/v1/tuning_types.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xb9\x01\n" +
 	"\x12ListTuningsRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
@@ -3532,11 +3538,11 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\x13CancelTuningRequest\x12*\n" +
 	"\x0etuning_task_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ftuningTaskId\"<\n" +
 	"\x14CancelTuningResponse\x12$\n" +
-	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\"\xb2\x01\n" +
+	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\"\xac\x01\n" +
 	"\x0eTuningResponse\x12$\n" +
 	"\x0etuning_task_id\x18\x03 \x01(\tR\ftuningTaskId\x12D\n" +
 	"\x06status\x18\x04 \x01(\x0e2,.yandex.cloud.ai.tuning.v1.TuningTask.StatusR\x06status\x12(\n" +
-	"\x10target_model_uri\x18\x05 \x01(\tR\x0etargetModelUriJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03\"\xc0\x01\n" +
+	"\x10target_model_uri\x18\x05 \x01(\tR\x0etargetModelUriJ\x04\b\x01\x10\x03\"\xc0\x01\n" +
 	"\x0eTuningMetadata\x12$\n" +
 	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\x12D\n" +
 	"\x06status\x18\x02 \x01(\x0e2,.yandex.cloud.ai.tuning.v1.TuningTask.StatusR\x06status\x12\x1f\n" +
@@ -3674,12 +3680,12 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\x15GetMetricsUrlResponse\x12\x19\n" +
 	"\bload_url\x18\x01 \x01(\tR\aloadUrl\"2\n" +
 	"\x11GetOptionsRequest\x12\x1d\n" +
-	"\atask_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06taskId\"\xab\a\n" +
+	"\atask_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06taskId\"\xaf\a\n" +
 	"\x12GetOptionsResponse\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12$\n" +
 	"\x0ebase_model_uri\x18\x02 \x01(\tR\fbaseModelUri\x12_\n" +
-	"\x0etrain_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\rtrainDatasets\x12i\n" +
-	"\x13validation_datasets\x18\x04 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\x12validationDatasets\x12t\n" +
+	"\x0etrain_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\rtrainDatasets\x12m\n" +
+	"\x13validation_datasets\x18\x04 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetB\x02\x18\x01R\x12validationDatasets\x12t\n" +
 	"\x17text_to_text_completion\x18d \x01(\v2;.yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParamsH\x00R\x14textToTextCompletion\x12\x85\x01\n" +
 	"\x1etext_classification_multilabel\x18e \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParamsH\x00R\x1ctextClassificationMultilabel\x12\x85\x01\n" +
 	"\x1etext_classification_multiclass\x18f \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParamsH\x00R\x1ctextClassificationMulticlass\x12q\n" +
@@ -3689,11 +3695,11 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\x11ListErrorsRequest\x12$\n" +
 	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\"_\n" +
 	"\x12ListErrorsResponse\x12I\n" +
-	"\ftuning_error\x18\x01 \x03(\v2&.yandex.cloud.ai.tuning.v1.TuningErrorR\vtuningError\"\x97\t\n" +
+	"\ftuning_error\x18\x01 \x03(\v2&.yandex.cloud.ai.tuning.v1.TuningErrorR\vtuningError\"\x9b\t\n" +
 	"\x18CreateTuningDraftRequest\x12*\n" +
 	"\x0ebase_model_uri\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fbaseModelUri\x12g\n" +
-	"\x0etrain_datasets\x18\x02 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetB\x06\x82\xc81\x02>0R\rtrainDatasets\x12i\n" +
-	"\x13validation_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\x12validationDatasets\x12t\n" +
+	"\x0etrain_datasets\x18\x02 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetB\x06\x82\xc81\x02>0R\rtrainDatasets\x12m\n" +
+	"\x13validation_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetB\x02\x18\x01R\x12validationDatasets\x12t\n" +
 	"\x17text_to_text_completion\x18d \x01(\v2;.yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParamsH\x00R\x14textToTextCompletion\x12\x85\x01\n" +
 	"\x1etext_classification_multilabel\x18e \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParamsH\x00R\x1ctextClassificationMultilabel\x12\x85\x01\n" +
 	"\x1etext_classification_multiclass\x18f \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParamsH\x00R\x1ctextClassificationMulticlass\x12q\n" +
@@ -3707,12 +3713,12 @@ const file_yandex_cloud_ai_tuning_v1_tuning_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
 	"\rtuning_paramsJ\x04\b\x04\x10dJ\x05\bi\x10\xc8\x01\"A\n" +
 	"\x19CreateTuningDraftResponse\x12$\n" +
-	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\"\x98\t\n" +
+	"\x0etuning_task_id\x18\x01 \x01(\tR\ftuningTaskId\"\x9c\t\n" +
 	"\x18UpdateTuningDraftRequest\x12*\n" +
 	"\x0etuning_task_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\ftuningTaskId\x12$\n" +
 	"\x0ebase_model_uri\x18\x02 \x01(\tR\fbaseModelUri\x12_\n" +
-	"\x0etrain_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\rtrainDatasets\x12i\n" +
-	"\x13validation_datasets\x18\x04 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\x12validationDatasets\x12t\n" +
+	"\x0etrain_datasets\x18\x03 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetR\rtrainDatasets\x12m\n" +
+	"\x13validation_datasets\x18\x04 \x03(\v28.yandex.cloud.ai.tuning.v1.TuningRequest.WeightedDatasetB\x02\x18\x01R\x12validationDatasets\x12t\n" +
 	"\x17text_to_text_completion\x18d \x01(\v2;.yandex.cloud.ai.tuning.v1.TextToTextCompletionTuningParamsH\x00R\x14textToTextCompletion\x12\x85\x01\n" +
 	"\x1etext_classification_multilabel\x18e \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMultilabelParamsH\x00R\x1ctextClassificationMultilabel\x12\x85\x01\n" +
 	"\x1etext_classification_multiclass\x18f \x01(\v2=.yandex.cloud.ai.tuning.v1.TextClassificationMulticlassParamsH\x00R\x1ctextClassificationMulticlass\x12q\n" +
@@ -3955,11 +3961,11 @@ func file_yandex_cloud_ai_tuning_v1_tuning_service_proto_init() {
 	if File_yandex_cloud_ai_tuning_v1_tuning_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_ai_tuning_v1_tuning_task_proto_init()
-	file_yandex_cloud_ai_tuning_v1_tuning_types_proto_init()
+	file_yandex_cloud_ai_tuning_v1_tuning_error_proto_init()
 	file_yandex_cloud_ai_tuning_v1_tuning_optimizers_proto_init()
 	file_yandex_cloud_ai_tuning_v1_tuning_schedulers_proto_init()
-	file_yandex_cloud_ai_tuning_v1_tuning_error_proto_init()
+	file_yandex_cloud_ai_tuning_v1_tuning_task_proto_init()
+	file_yandex_cloud_ai_tuning_v1_tuning_types_proto_init()
 	file_yandex_cloud_ai_tuning_v1_tuning_service_proto_msgTypes[8].OneofWrappers = []any{
 		(*TuningRequest_TextToTextCompletion)(nil),
 		(*TuningRequest_TextClassificationMultilabel)(nil),

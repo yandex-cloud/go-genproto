@@ -59,7 +59,6 @@ const (
 // A set of methods for managing Redis clusters.
 type ClusterServiceClient interface {
 	// Returns the specified Redis cluster.
-	//
 	// To get the list of available Redis clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of Redis clusters that belong
@@ -88,6 +87,7 @@ type ClusterServiceClient interface {
 	// Retrieves logs for the specified Redis cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -100,12 +100,14 @@ type ClusterServiceClient interface {
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the specified shard.
 	GetShard(ctx context.Context, in *GetClusterShardRequest, opts ...grpc.CallOption) (*Shard, error)
 	// Retrieves a list of shards.
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
+	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -435,7 +437,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing Redis clusters.
 type ClusterServiceServer interface {
 	// Returns the specified Redis cluster.
-	//
 	// To get the list of available Redis clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of Redis clusters that belong
@@ -464,6 +465,7 @@ type ClusterServiceServer interface {
 	// Retrieves logs for the specified Redis cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
@@ -476,12 +478,14 @@ type ClusterServiceServer interface {
 	// Deletes the specified hosts for a cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Returns the specified shard.
 	GetShard(context.Context, *GetClusterShardRequest) (*Shard, error)
 	// Retrieves a list of shards.
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
+	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)

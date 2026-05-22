@@ -113,7 +113,10 @@ type PrivateEndpoint struct {
 	// Types that are valid to be assigned to Service:
 	//
 	//	*PrivateEndpoint_ObjectStorage_
-	Service       isPrivateEndpoint_Service `protobuf_oneof:"service"`
+	//	*PrivateEndpoint_ServiceName
+	Service isPrivateEndpoint_Service `protobuf_oneof:"service"`
+	// List of private endpoint dns records.
+	DnsRecords    []*PrivateEndpoint_DnsRecord `protobuf:"bytes,12,rep,name=dns_records,json=dnsRecords,proto3" json:"dns_records,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -234,6 +237,22 @@ func (x *PrivateEndpoint) GetObjectStorage() *PrivateEndpoint_ObjectStorage {
 	return nil
 }
 
+func (x *PrivateEndpoint) GetServiceName() string {
+	if x != nil {
+		if x, ok := x.Service.(*PrivateEndpoint_ServiceName); ok {
+			return x.ServiceName
+		}
+	}
+	return ""
+}
+
+func (x *PrivateEndpoint) GetDnsRecords() []*PrivateEndpoint_DnsRecord {
+	if x != nil {
+		return x.DnsRecords
+	}
+	return nil
+}
+
 type isPrivateEndpoint_Service interface {
 	isPrivateEndpoint_Service()
 }
@@ -243,7 +262,14 @@ type PrivateEndpoint_ObjectStorage_ struct {
 	ObjectStorage *PrivateEndpoint_ObjectStorage `protobuf:"bytes,11,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
+type PrivateEndpoint_ServiceName struct {
+	// Yandex Cloud service name.
+	ServiceName string `protobuf:"bytes,13,opt,name=service_name,json=serviceName,proto3,oneof"`
+}
+
 func (*PrivateEndpoint_ObjectStorage_) isPrivateEndpoint_Service() {}
+
+func (*PrivateEndpoint_ServiceName) isPrivateEndpoint_Service() {}
 
 // Yandex Cloud Object Storage.
 type PrivateEndpoint_ObjectStorage struct {
@@ -391,11 +417,56 @@ func (x *PrivateEndpoint_EndpointAddress) GetAddressId() string {
 	return ""
 }
 
+type PrivateEndpoint_DnsRecord struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the dns record.
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PrivateEndpoint_DnsRecord) Reset() {
+	*x = PrivateEndpoint_DnsRecord{}
+	mi := &file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PrivateEndpoint_DnsRecord) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PrivateEndpoint_DnsRecord) ProtoMessage() {}
+
+func (x *PrivateEndpoint_DnsRecord) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PrivateEndpoint_DnsRecord.ProtoReflect.Descriptor instead.
+func (*PrivateEndpoint_DnsRecord) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDescGZIP(), []int{0, 4}
+}
+
+func (x *PrivateEndpoint_DnsRecord) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 var File_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/vpc/v1/privatelink/private_endpoint.proto\x12\x1fyandex.cloud.vpc.v1.privatelink\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf1\a\n" +
+	"6yandex/cloud/vpc/v1/privatelink/private_endpoint.proto\x12\x1fyandex.cloud.vpc.v1.privatelink\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\t\n" +
 	"\x0fPrivateEndpoint\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -411,7 +482,10 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDesc = "" +
 	"\vdns_options\x18\n" +
 	" \x01(\v2;.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptionsR\n" +
 	"dnsOptions\x12g\n" +
-	"\x0eobject_storage\x18\v \x01(\v2>.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorageH\x00R\robjectStorage\x1a9\n" +
+	"\x0eobject_storage\x18\v \x01(\v2>.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorageH\x00R\robjectStorage\x12#\n" +
+	"\fservice_name\x18\r \x01(\tH\x00R\vserviceName\x12[\n" +
+	"\vdns_records\x18\f \x03(\v2:.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsRecordR\n" +
+	"dnsRecords\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a\x0f\n" +
@@ -423,7 +497,9 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDesc = "" +
 	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x03 \x01(\tR\taddressId\"J\n" +
+	"address_id\x18\x03 \x01(\tR\taddressId\x1a\x1f\n" +
+	"\tDnsRecord\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"J\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aPENDING\x10\x01\x12\r\n" +
@@ -445,7 +521,7 @@ func file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_goTypes = []any{
 	(PrivateEndpoint_Status)(0),             // 0: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.Status
 	(*PrivateEndpoint)(nil),                 // 1: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint
@@ -453,20 +529,22 @@ var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_goTypes = []any{
 	(*PrivateEndpoint_ObjectStorage)(nil),   // 3: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorage
 	(*PrivateEndpoint_DnsOptions)(nil),      // 4: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptions
 	(*PrivateEndpoint_EndpointAddress)(nil), // 5: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.EndpointAddress
-	(*timestamppb.Timestamp)(nil),           // 6: google.protobuf.Timestamp
+	(*PrivateEndpoint_DnsRecord)(nil),       // 6: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsRecord
+	(*timestamppb.Timestamp)(nil),           // 7: google.protobuf.Timestamp
 }
 var file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_depIdxs = []int32{
-	6, // 0: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.created_at:type_name -> google.protobuf.Timestamp
+	7, // 0: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.created_at:type_name -> google.protobuf.Timestamp
 	2, // 1: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.labels:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.LabelsEntry
 	0, // 2: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.status:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.Status
 	5, // 3: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.address:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.EndpointAddress
 	4, // 4: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.dns_options:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptions
 	3, // 5: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.object_storage:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.ObjectStorage
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	6, // 6: yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.dns_records:type_name -> yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsRecord
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_init() }
@@ -476,6 +554,7 @@ func file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_init() {
 	}
 	file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_msgTypes[0].OneofWrappers = []any{
 		(*PrivateEndpoint_ObjectStorage_)(nil),
+		(*PrivateEndpoint_ServiceName)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -483,7 +562,7 @@ func file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDesc), len(file_yandex_cloud_vpc_v1_privatelink_private_endpoint_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

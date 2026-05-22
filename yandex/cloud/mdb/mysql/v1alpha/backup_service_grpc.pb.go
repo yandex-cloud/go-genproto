@@ -30,7 +30,6 @@ const (
 // A set of methods for managing MySQL backups.
 type BackupServiceClient interface {
 	// Returns the specified MySQL backup.
-	//
 	// To get the list of available MySQL backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of MySQL backups available for the specified folder.
@@ -72,7 +71,6 @@ func (c *backupServiceClient) List(ctx context.Context, in *ListBackupsRequest, 
 // A set of methods for managing MySQL backups.
 type BackupServiceServer interface {
 	// Returns the specified MySQL backup.
-	//
 	// To get the list of available MySQL backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of MySQL backups available for the specified folder.

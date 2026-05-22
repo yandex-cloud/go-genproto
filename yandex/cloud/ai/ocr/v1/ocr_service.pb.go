@@ -227,7 +227,7 @@ var File_yandex_cloud_ai_ocr_v1_ocr_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_ocr_v1_ocr_service_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/ai/ocr/v1/ocr_service.proto\x12\x16yandex.cloud.ai.ocr.v1\x1a yandex/cloud/ai/ocr/v1/ocr.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\"\xa0\x01\n" +
+	"(yandex/cloud/ai/ocr/v1/ocr_service.proto\x12\x16yandex.cloud.ai.ocr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/ai/ocr/v1/ocr.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xa0\x01\n" +
 	"\x14RecognizeTextRequest\x12\x1a\n" +
 	"\acontent\x18\x01 \x01(\fH\x00R\acontent\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12%\n" +

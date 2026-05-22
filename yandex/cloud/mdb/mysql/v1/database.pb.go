@@ -23,7 +23,6 @@ const (
 )
 
 // An object that represents MySQL database.
-//
 // See [the documentation](/docs/managed-mysql/operations/databases) for details.
 type Database struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -32,7 +31,6 @@ type Database struct {
 	// ID of the cluster that the database belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Deletion Protection inhibits deletion of the database
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,3,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -95,7 +93,6 @@ type DatabaseSpec struct {
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Deletion Protection inhibits deletion of the database
-	//
 	// Default value: `DELETION_PROTECTION_MODE_DISABLED` (protection is disabled)
 	DeletionProtectionMode DeletionProtectionMode `protobuf:"varint,2,opt,name=deletion_protection_mode,json=deletionProtectionMode,proto3,enum=yandex.cloud.mdb.mysql.v1.DeletionProtectionMode" json:"deletion_protection_mode,omitempty"`
 	unknownFields          protoimpl.UnknownFields
@@ -150,7 +147,7 @@ var File_yandex_cloud_mdb_mysql_v1_database_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_database_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/mysql/v1/database.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1dyandex/cloud/validation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\"\xaa\x01\n" +
+	"(yandex/cloud/mdb/mysql/v1/database.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a\x1dyandex/cloud/validation.proto\"\xaa\x01\n" +
 	"\bDatabase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +

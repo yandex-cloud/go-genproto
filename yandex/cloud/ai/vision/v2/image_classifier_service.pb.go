@@ -24,9 +24,9 @@ var File_yandex_cloud_ai_vision_v2_image_classifier_service_proto protoreflect.F
 
 const file_yandex_cloud_ai_vision_v2_image_classifier_service_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/ai/vision/v2/image_classifier_service.proto\x12\x19yandex.cloud.ai.vision.v2\x1a0yandex/cloud/ai/vision/v2/image_classifier.proto2\x83\x01\n" +
-	"\x16ImageClassifierService\x12i\n" +
-	"\bAnnotate\x12,.yandex.cloud.ai.vision.v2.AnnotationRequest\x1a-.yandex.cloud.ai.vision.v2.AnnotationResponse\"\x00Be\n" +
+	"8yandex/cloud/ai/vision/v2/image_classifier_service.proto\x12\x19yandex.cloud.ai.vision.v2\x1a0yandex/cloud/ai/vision/v2/image_classifier.proto2\x81\x01\n" +
+	"\x16ImageClassifierService\x12g\n" +
+	"\bAnnotate\x12,.yandex.cloud.ai.vision.v2.AnnotationRequest\x1a-.yandex.cloud.ai.vision.v2.AnnotationResponseBe\n" +
 	"\x1dyandex.cloud.api.ai.vision.v2ZDgithub.com/yandex-cloud/go-genproto/yandex/cloud/ai/vision/v2;visionb\x06proto3"
 
 var file_yandex_cloud_ai_vision_v2_image_classifier_service_proto_goTypes = []any{

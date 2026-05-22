@@ -442,15 +442,12 @@ func (*CombinationStrategy_MeanCombination) isCombinationStrategy_Strategy() {}
 func (*CombinationStrategy_RrfCombination) isCombinationStrategy_Strategy() {}
 
 // Configuration for the NgramTokenizer, which splits text into overlapping character sequences (n-grams) of specified lengths.
-//
 // Example:
 // Input text: `hello`
 // min_gram = 2, max_gram = 3
-//
 // Generated tokens:
 // * For n = 2 (2-character n-grams): `he`, `el`, `ll`, `lo`
 // * For n = 3 (3-character n-grams): `hel`, `ell`, `llo`
-//
 // Final tokens: `[he, el, ll, lo, hel, ell, llo]`
 type NgramTokenizer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -508,7 +505,6 @@ func (x *NgramTokenizer) GetMaxGram() *wrapperspb.Int64Value {
 
 // A standard tokenizer that splits text on word boundaries and removes punctuation.
 // It follows the Unicode Text Segmentation rules as specified in Unicode Standard Annex #29.
-//
 // Example:
 // Input text: `Hello, world! How are you?`
 // Output tokens: `[Hello, world, How, are, you]`

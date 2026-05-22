@@ -244,6 +244,76 @@ func (x *MessageContent) GetContent() []*ContentPart {
 	return nil
 }
 
+// ContentPart represents an individual part of the message content, which can be of various types.
+type ContentPart struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Specifies the type of content that the part contains.
+	//
+	// Types that are valid to be assigned to PartType:
+	//
+	//	*ContentPart_Text
+	PartType      isContentPart_PartType `protobuf_oneof:"PartType"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ContentPart) Reset() {
+	*x = ContentPart{}
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ContentPart) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ContentPart) ProtoMessage() {}
+
+func (x *ContentPart) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ContentPart.ProtoReflect.Descriptor instead.
+func (*ContentPart) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ContentPart) GetPartType() isContentPart_PartType {
+	if x != nil {
+		return x.PartType
+	}
+	return nil
+}
+
+func (x *ContentPart) GetText() *Text {
+	if x != nil {
+		if x, ok := x.PartType.(*ContentPart_Text); ok {
+			return x.Text
+		}
+	}
+	return nil
+}
+
+type isContentPart_PartType interface {
+	isContentPart_PartType()
+}
+
+type ContentPart_Text struct {
+	// Text content of the message part.
+	Text *Text `protobuf:"bytes,1,opt,name=text,proto3,oneof"`
+}
+
+func (*ContentPart_Text) isContentPart_PartType() {}
+
 // Represents the data required to create or initialize a message in a thread.
 // This message is used, for example, to initialize a thread with some messages upon its creation.
 type MessageData struct {
@@ -260,7 +330,7 @@ type MessageData struct {
 
 func (x *MessageData) Reset() {
 	*x = MessageData{}
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -272,7 +342,7 @@ func (x *MessageData) String() string {
 func (*MessageData) ProtoMessage() {}
 
 func (x *MessageData) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[2]
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -285,7 +355,7 @@ func (x *MessageData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessageData.ProtoReflect.Descriptor instead.
 func (*MessageData) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MessageData) GetAuthor() *Author {
@@ -320,7 +390,7 @@ type Text struct {
 
 func (x *Text) Reset() {
 	*x = Text{}
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[3]
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -332,7 +402,7 @@ func (x *Text) String() string {
 func (*Text) ProtoMessage() {}
 
 func (x *Text) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[3]
+	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -345,7 +415,7 @@ func (x *Text) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Text.ProtoReflect.Descriptor instead.
 func (*Text) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Text) GetContent() string {
@@ -354,76 +424,6 @@ func (x *Text) GetContent() string {
 	}
 	return ""
 }
-
-// ContentPart represents an individual part of the message content, which can be of various types.
-type ContentPart struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specifies the type of content that the part contains.
-	//
-	// Types that are valid to be assigned to PartType:
-	//
-	//	*ContentPart_Text
-	PartType      isContentPart_PartType `protobuf_oneof:"PartType"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ContentPart) Reset() {
-	*x = ContentPart{}
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ContentPart) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ContentPart) ProtoMessage() {}
-
-func (x *ContentPart) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ContentPart.ProtoReflect.Descriptor instead.
-func (*ContentPart) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ContentPart) GetPartType() isContentPart_PartType {
-	if x != nil {
-		return x.PartType
-	}
-	return nil
-}
-
-func (x *ContentPart) GetText() *Text {
-	if x != nil {
-		if x, ok := x.PartType.(*ContentPart_Text); ok {
-			return x.Text
-		}
-	}
-	return nil
-}
-
-type isContentPart_PartType interface {
-	isContentPart_PartType()
-}
-
-type ContentPart_Text struct {
-	// Text content of the message part.
-	Text *Text `protobuf:"bytes,1,opt,name=text,proto3,oneof"`
-}
-
-func (*ContentPart_Text) isContentPart_PartType() {}
 
 // Author of the message, containing details about the message's creator.
 type Author struct {
@@ -732,7 +732,11 @@ const file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDesc = "" +
 	"\tTRUNCATED\x10\x02\x12\x14\n" +
 	"\x10FILTERED_CONTENT\x10\x03\"^\n" +
 	"\x0eMessageContent\x12L\n" +
-	"\acontent\x18\x01 \x03(\v22.yandex.cloud.ai.assistants.v1.threads.ContentPartR\acontent\"\xb8\x02\n" +
+	"\acontent\x18\x01 \x03(\v22.yandex.cloud.ai.assistants.v1.threads.ContentPartR\acontent\"\\\n" +
+	"\vContentPart\x12A\n" +
+	"\x04text\x18\x01 \x01(\v2+.yandex.cloud.ai.assistants.v1.threads.TextH\x00R\x04textB\n" +
+	"\n" +
+	"\bPartType\"\xb8\x02\n" +
 	"\vMessageData\x12E\n" +
 	"\x06author\x18\x01 \x01(\v2-.yandex.cloud.ai.assistants.v1.threads.AuthorR\x06author\x12V\n" +
 	"\x06labels\x18\x02 \x03(\v2>.yandex.cloud.ai.assistants.v1.threads.MessageData.LabelsEntryR\x06labels\x12O\n" +
@@ -741,16 +745,12 @@ const file_yandex_cloud_ai_assistants_v1_threads_message_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\" \n" +
 	"\x04Text\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\tR\acontent\"\\\n" +
-	"\vContentPart\x12A\n" +
-	"\x04text\x18\x01 \x01(\v2+.yandex.cloud.ai.assistants.v1.threads.TextH\x00R\x04textB\n" +
-	"\n" +
-	"\bPartType\",\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\",\n" +
 	"\x06Author\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04role\x18\x02 \x01(\tR\x04role\"S\n" +
+	"\x04role\x18\x02 \x01(\tR\x04role\"Y\n" +
 	"\bCitation\x12G\n" +
-	"\asources\x18\x04 \x03(\v2-.yandex.cloud.ai.assistants.v1.threads.SourceR\asources\"`\n" +
+	"\asources\x18\x04 \x03(\v2-.yandex.cloud.ai.assistants.v1.threads.SourceR\asourcesJ\x04\b\x01\x10\x04\"`\n" +
 	"\x06Source\x12H\n" +
 	"\x05chunk\x18\x01 \x01(\v20.yandex.cloud.ai.assistants.v1.threads.FileChunkH\x00R\x05chunkB\f\n" +
 	"\n" +
@@ -782,9 +782,9 @@ var file_yandex_cloud_ai_assistants_v1_threads_message_proto_goTypes = []any{
 	(Message_MessageStatus)(0),      // 0: yandex.cloud.ai.assistants.v1.threads.Message.MessageStatus
 	(*Message)(nil),                 // 1: yandex.cloud.ai.assistants.v1.threads.Message
 	(*MessageContent)(nil),          // 2: yandex.cloud.ai.assistants.v1.threads.MessageContent
-	(*MessageData)(nil),             // 3: yandex.cloud.ai.assistants.v1.threads.MessageData
-	(*Text)(nil),                    // 4: yandex.cloud.ai.assistants.v1.threads.Text
-	(*ContentPart)(nil),             // 5: yandex.cloud.ai.assistants.v1.threads.ContentPart
+	(*ContentPart)(nil),             // 3: yandex.cloud.ai.assistants.v1.threads.ContentPart
+	(*MessageData)(nil),             // 4: yandex.cloud.ai.assistants.v1.threads.MessageData
+	(*Text)(nil),                    // 5: yandex.cloud.ai.assistants.v1.threads.Text
 	(*Author)(nil),                  // 6: yandex.cloud.ai.assistants.v1.threads.Author
 	(*Citation)(nil),                // 7: yandex.cloud.ai.assistants.v1.threads.Citation
 	(*Source)(nil),                  // 8: yandex.cloud.ai.assistants.v1.threads.Source
@@ -803,17 +803,17 @@ var file_yandex_cloud_ai_assistants_v1_threads_message_proto_depIdxs = []int32{
 	2,  // 3: yandex.cloud.ai.assistants.v1.threads.Message.content:type_name -> yandex.cloud.ai.assistants.v1.threads.MessageContent
 	0,  // 4: yandex.cloud.ai.assistants.v1.threads.Message.status:type_name -> yandex.cloud.ai.assistants.v1.threads.Message.MessageStatus
 	7,  // 5: yandex.cloud.ai.assistants.v1.threads.Message.citations:type_name -> yandex.cloud.ai.assistants.v1.threads.Citation
-	5,  // 6: yandex.cloud.ai.assistants.v1.threads.MessageContent.content:type_name -> yandex.cloud.ai.assistants.v1.threads.ContentPart
-	6,  // 7: yandex.cloud.ai.assistants.v1.threads.MessageData.author:type_name -> yandex.cloud.ai.assistants.v1.threads.Author
-	12, // 8: yandex.cloud.ai.assistants.v1.threads.MessageData.labels:type_name -> yandex.cloud.ai.assistants.v1.threads.MessageData.LabelsEntry
-	2,  // 9: yandex.cloud.ai.assistants.v1.threads.MessageData.content:type_name -> yandex.cloud.ai.assistants.v1.threads.MessageContent
-	4,  // 10: yandex.cloud.ai.assistants.v1.threads.ContentPart.text:type_name -> yandex.cloud.ai.assistants.v1.threads.Text
+	3,  // 6: yandex.cloud.ai.assistants.v1.threads.MessageContent.content:type_name -> yandex.cloud.ai.assistants.v1.threads.ContentPart
+	5,  // 7: yandex.cloud.ai.assistants.v1.threads.ContentPart.text:type_name -> yandex.cloud.ai.assistants.v1.threads.Text
+	6,  // 8: yandex.cloud.ai.assistants.v1.threads.MessageData.author:type_name -> yandex.cloud.ai.assistants.v1.threads.Author
+	12, // 9: yandex.cloud.ai.assistants.v1.threads.MessageData.labels:type_name -> yandex.cloud.ai.assistants.v1.threads.MessageData.LabelsEntry
+	2,  // 10: yandex.cloud.ai.assistants.v1.threads.MessageData.content:type_name -> yandex.cloud.ai.assistants.v1.threads.MessageContent
 	8,  // 11: yandex.cloud.ai.assistants.v1.threads.Citation.sources:type_name -> yandex.cloud.ai.assistants.v1.threads.Source
 	9,  // 12: yandex.cloud.ai.assistants.v1.threads.Source.chunk:type_name -> yandex.cloud.ai.assistants.v1.threads.FileChunk
 	14, // 13: yandex.cloud.ai.assistants.v1.threads.FileChunk.search_index:type_name -> yandex.cloud.ai.assistants.v1.searchindex.SearchIndex
 	15, // 14: yandex.cloud.ai.assistants.v1.threads.FileChunk.source_file:type_name -> yandex.cloud.ai.files.v1.File
 	10, // 15: yandex.cloud.ai.assistants.v1.threads.FileChunk.content:type_name -> yandex.cloud.ai.assistants.v1.threads.ChunkContent
-	5,  // 16: yandex.cloud.ai.assistants.v1.threads.ChunkContent.content:type_name -> yandex.cloud.ai.assistants.v1.threads.ContentPart
+	3,  // 16: yandex.cloud.ai.assistants.v1.threads.ChunkContent.content:type_name -> yandex.cloud.ai.assistants.v1.threads.ContentPart
 	17, // [17:17] is the sub-list for method output_type
 	17, // [17:17] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name
@@ -826,7 +826,7 @@ func file_yandex_cloud_ai_assistants_v1_threads_message_proto_init() {
 	if File_yandex_cloud_ai_assistants_v1_threads_message_proto != nil {
 		return
 	}
-	file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[4].OneofWrappers = []any{
+	file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[2].OneofWrappers = []any{
 		(*ContentPart_Text)(nil),
 	}
 	file_yandex_cloud_ai_assistants_v1_threads_message_proto_msgTypes[7].OneofWrappers = []any{

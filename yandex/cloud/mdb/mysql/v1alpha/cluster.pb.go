@@ -732,7 +732,6 @@ type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the MySQL host. The host name is assigned by Managed Service for MySQL
 	// at creation time, and cannot be changed. 1-63 characters long.
-	//
 	// The name is unique across all database hosts that exist on the platform,
 	// as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`

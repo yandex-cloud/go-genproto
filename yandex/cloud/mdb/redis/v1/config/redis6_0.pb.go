@@ -107,7 +107,6 @@ type RedisConfig6_0 struct {
 	// Redis key eviction policy for a dataset that reaches maximum memory,
 	// available to the host. Redis maxmemory setting depends on Managed
 	// Service for Redis [host class](/docs/managed-redis/concepts/instance-types).
-	//
 	// All policies are described in detail in [Redis documentation](https://redis.io/topics/lru-cache).
 	MaxmemoryPolicy RedisConfig6_0_MaxmemoryPolicy `protobuf:"varint,1,opt,name=maxmemory_policy,json=maxmemoryPolicy,proto3,enum=yandex.cloud.mdb.redis.v1.config.RedisConfig6_0_MaxmemoryPolicy" json:"maxmemory_policy,omitempty"`
 	// Time that Redis keeps the connection open while the client is idle.
@@ -355,12 +354,12 @@ var File_yandex_cloud_mdb_redis_v1_config_redis6_0_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_redis_v1_config_redis6_0_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa3\n" +
+	"/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb4\n" +
 	"\n" +
 	"\x0eRedisConfig6_0\x12k\n" +
-	"\x10maxmemory_policy\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.redis.v1.config.RedisConfig6_0.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x125\n" +
-	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\atimeout\x12B\n" +
-	"\bpassword\x18\x03 \x01(\tB&\xf2\xc71\"[a-zA-Z0-9@=+?*.,!&#$^<>_-]{8,128}R\bpassword\x12A\n" +
+	"\x10maxmemory_policy\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.redis.v1.config.RedisConfig6_0.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x12=\n" +
+	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\atimeout\x12K\n" +
+	"\bpassword\x18\x03 \x01(\tB/\xf2\xc71\"[a-zA-Z0-9@=+?*.,!&#$^<>_-]{8,128}\x8a\xc81\x058-128R\bpassword\x12A\n" +
 	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\tdatabases\x12[\n" +
 	"\x17slowlog_log_slower_than\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14slowlogLogSlowerThan\x12L\n" +
 	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x12O\n" +
@@ -372,7 +371,7 @@ const file_yandex_cloud_mdb_redis_v1_config_redis6_0_proto_rawDesc = "" +
 	"hard_limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\thardLimit\x12C\n" +
 	"\n" +
 	"soft_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\tsoftLimit\x12G\n" +
-	"\fsoft_seconds\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\vsoftSecondsJ\x04\b\x04\x10\x05J\x04\b\x02\x10\x03\"\xc4\x01\n" +
+	"\fsoft_seconds\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\vsoftSecondsJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x05\"\xc4\x01\n" +
 	"\x0fMaxmemoryPolicy\x12 \n" +
 	"\x1cMAXMEMORY_POLICY_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fVOLATILE_LRU\x10\x01\x12\x0f\n" +

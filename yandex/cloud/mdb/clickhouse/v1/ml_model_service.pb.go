@@ -31,7 +31,6 @@ type GetMlModelRequest struct {
 	// ID of the cluster that the model belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the model to return.
-	//
 	// To get a model name make a [MlModelService.List] request.
 	MlModelName   string `protobuf:"bytes,2,opt,name=ml_model_name,json=mlModelName,proto3" json:"ml_model_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -89,6 +88,7 @@ type ListMlModelsRequest struct {
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListMlModelsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
@@ -156,7 +156,6 @@ type ListMlModelsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListMlModelsRequest.page_size], use `next_page_token` as the value
 	// for the [ListMlModelsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -210,7 +209,6 @@ func (x *ListMlModelsResponse) GetNextPageToken() string {
 type CreateMlModelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to create a model in.
-	//
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Model name. The model name is one of the arguments of the modelEvaluate() function, which is used to call the model in ClickHouse.
@@ -338,7 +336,6 @@ func (x *CreateMlModelMetadata) GetMlModelName() string {
 type UpdateMlModelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to update the model in.
-	//
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the the model to update.
@@ -465,7 +462,6 @@ func (x *UpdateMlModelMetadata) GetMlModelName() string {
 type DeleteMlModelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cluster to delete the model in.
-	//
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the the model to delete.
@@ -576,7 +572,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_ml_model_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_clickhouse_v1_ml_model_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/clickhouse/v1/ml_model_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/ml_model.proto\"\x84\x01\n" +
+	"5yandex/cloud/mdb/clickhouse/v1/ml_model_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/ml_model.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x84\x01\n" +
 	"\x11GetMlModelRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12B\n" +

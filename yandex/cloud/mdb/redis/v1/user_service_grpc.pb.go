@@ -34,7 +34,6 @@ const (
 // A set of methods for managing Redis User resources.
 type UserServiceClient interface {
 	// Returns the specified Redis User resource.
-	//
 	// To get the list of available Redis User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of Redis User resources in the specified cluster.
@@ -112,7 +111,6 @@ func (c *userServiceClient) Delete(ctx context.Context, in *DeleteUserRequest, o
 // A set of methods for managing Redis User resources.
 type UserServiceServer interface {
 	// Returns the specified Redis User resource.
-	//
 	// To get the list of available Redis User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of Redis User resources in the specified cluster.

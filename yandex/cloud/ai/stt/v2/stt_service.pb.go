@@ -814,9 +814,9 @@ const file_yandex_cloud_ai_stt_v2_stt_service_proto_rawDesc = "" +
 	"\x1bStreamingRecognitionRequest\x12C\n" +
 	"\x06config\x18\x01 \x01(\v2).yandex.cloud.ai.stt.v2.RecognitionConfigH\x00R\x06config\x12%\n" +
 	"\raudio_content\x18\x02 \x01(\fH\x00R\faudioContentB\x13\n" +
-	"\x11streaming_request\"\x85\x01\n" +
+	"\x11streaming_request\"\x7f\n" +
 	"\x1cStreamingRecognitionResponse\x12F\n" +
-	"\x06chunks\x18\x01 \x03(\v2..yandex.cloud.ai.stt.v2.SpeechRecognitionChunkR\x06chunksJ\x04\b\x02\x10\x03R\x17end_of_single_utterance\"R\n" +
+	"\x06chunks\x18\x01 \x03(\v2..yandex.cloud.ai.stt.v2.SpeechRecognitionChunkR\x06chunksR\x17end_of_single_utterance\"R\n" +
 	"\x10RecognitionAudio\x12\x1a\n" +
 	"\acontent\x18\x01 \x01(\fH\x00R\acontent\x12\x12\n" +
 	"\x03uri\x18\x02 \x01(\tH\x00R\x03uriB\x0e\n" +
@@ -863,11 +863,11 @@ const file_yandex_cloud_ai_stt_v2_stt_service_proto_rawDesc = "" +
 	"\x04word\x18\x03 \x01(\tR\x04word\x12\x1e\n" +
 	"\n" +
 	"confidence\x18\x04 \x01(\x02R\n" +
-	"confidence2\xdb\x02\n" +
+	"confidence2\xd9\x02\n" +
 	"\n" +
 	"SttService\x12\xc4\x01\n" +
-	"\x14LongRunningRecognize\x125.yandex.cloud.ai.stt.v2.LongRunningRecognitionRequest\x1a!.yandex.cloud.operation.Operation\"R\xb2\xd2* \x12\x1eLongRunningRecognitionResponse\x82\xd3\xe4\x93\x02(:\x01*\"#/speech/stt/v2/longRunningRecognize\x12\x85\x01\n" +
-	"\x12StreamingRecognize\x123.yandex.cloud.ai.stt.v2.StreamingRecognitionRequest\x1a4.yandex.cloud.ai.stt.v2.StreamingRecognitionResponse\"\x00(\x010\x01B\\\n" +
+	"\x14LongRunningRecognize\x125.yandex.cloud.ai.stt.v2.LongRunningRecognitionRequest\x1a!.yandex.cloud.operation.Operation\"R\xb2\xd2* \x12\x1eLongRunningRecognitionResponse\x82\xd3\xe4\x93\x02(:\x01*\"#/speech/stt/v2/longRunningRecognize\x12\x83\x01\n" +
+	"\x12StreamingRecognize\x123.yandex.cloud.ai.stt.v2.StreamingRecognitionRequest\x1a4.yandex.cloud.ai.stt.v2.StreamingRecognitionResponse(\x010\x01B\\\n" +
 	"\x1ayandex.cloud.api.ai.stt.v2Z>github.com/yandex-cloud/go-genproto/yandex/cloud/ai/stt/v2;sttb\x06proto3"
 
 var (

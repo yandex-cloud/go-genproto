@@ -428,7 +428,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_database_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_clickhouse_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/clickhouse/v1/database_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/database.proto\"\x86\x01\n" +
+	"5yandex/cloud/mdb/clickhouse/v1/database_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
@@ -446,19 +446,19 @@ const file_yandex_cloud_mdb_clickhouse_v1_database_service_proto_rawDesc = "" +
 	"\x15CreateDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12W\n" +
-	"\rdatabase_spec\x18\x02 \x01(\v2,.yandex.cloud.mdb.clickhouse.v1.DatabaseSpecB\x04\xe8\xc71\x01R\fdatabaseSpec\"\\\n" +
-	"\x16CreateDatabaseMetadata\x12\x1d\n" +
+	"\rdatabase_spec\x18\x02 \x01(\v2,.yandex.cloud.mdb.clickhouse.v1.DatabaseSpecB\x04\xe8\xc71\x01R\fdatabaseSpec\"p\n" +
+	"\x16CreateDatabaseMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"\x89\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x121\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"\x89\x01\n" +
 	"\x15DeleteDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
-	"\rdatabase_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"\\\n" +
-	"\x16DeleteDatabaseMetadata\x12\x1d\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"h\n" +
+	"\x16DeleteDatabaseMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName2\xb4\x06\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12)\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\fdatabaseName2\xb4\x06\n" +
 	"\x0fDatabaseService\x12\xb3\x01\n" +
 	"\x03Get\x122.yandex.cloud.mdb.clickhouse.v1.GetDatabaseRequest\x1a(.yandex.cloud.mdb.clickhouse.v1.Database\"N\x82\xd3\xe4\x93\x02H\x12F/managed-clickhouse/v1/clusters/{cluster_id}/databases/{database_name}\x12\xb3\x01\n" +
 	"\x04List\x124.yandex.cloud.mdb.clickhouse.v1.ListDatabasesRequest\x1a5.yandex.cloud.mdb.clickhouse.v1.ListDatabasesResponse\">\x82\xd3\xe4\x93\x028\x126/managed-clickhouse/v1/clusters/{cluster_id}/databases\x12\xcb\x01\n" +

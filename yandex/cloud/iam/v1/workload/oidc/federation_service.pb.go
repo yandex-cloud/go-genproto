@@ -617,7 +617,7 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\x04name\x18\x03 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1a\n" +
 	"\bdisabled\x18\x05 \x01(\bR\bdisabled\x120\n" +
-	"\taudiences\x18\x06 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<=255R\taudiences\x12&\n" +
+	"\taudiences\x18\x06 \x03(\tB\x12\x82\xc81\x051-100\x8a\xc81\x051-255R\taudiences\x12&\n" +
 	"\x06issuer\x18\a \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x06issuer\x12)\n" +
 	"\bjwks_url\x18\b \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\ajwksUrl\x12^\n" +
 	"\x06labels\x18\t \x03(\v2F.yandex.cloud.iam.v1.workload.oidc.CreateFederationRequest.LabelsEntryR\x06labels\x1a9\n" +
@@ -633,7 +633,7 @@ const file_yandex_cloud_iam_v1_workload_oidc_federation_service_proto_rawDesc = 
 	"\x04name\x18\x03 \x01(\tB#\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x1a\n" +
 	"\bdisabled\x18\x05 \x01(\bR\bdisabled\x120\n" +
-	"\taudiences\x18\x06 \x03(\tB\x12\x82\xc81\x05<=100\x8a\xc81\x05<=255R\taudiences\x12%\n" +
+	"\taudiences\x18\x06 \x03(\tB\x12\x82\xc81\x051-100\x8a\xc81\x051-255R\taudiences\x12%\n" +
 	"\bjwks_url\x18\a \x01(\tB\n" +
 	"\x8a\xc81\x06<=8000R\ajwksUrl\x12^\n" +
 	"\x06labels\x18\b \x03(\v2F.yandex.cloud.iam.v1.workload.oidc.UpdateFederationRequest.LabelsEntryR\x06labels\x1a9\n" +

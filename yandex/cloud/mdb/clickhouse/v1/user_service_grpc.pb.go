@@ -37,7 +37,6 @@ const (
 // NOTE: these methods are available only if user management through SQL is disabled.
 type UserServiceClient interface {
 	// Returns the specified ClickHouse User resource.
-	//
 	// To get the list of available ClickHouse User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of ClickHouse User resources in the specified cluster.
@@ -140,7 +139,6 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // NOTE: these methods are available only if user management through SQL is disabled.
 type UserServiceServer interface {
 	// Returns the specified ClickHouse User resource.
-	//
 	// To get the list of available ClickHouse User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of ClickHouse User resources in the specified cluster.

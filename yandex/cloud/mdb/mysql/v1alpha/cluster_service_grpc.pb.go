@@ -44,7 +44,6 @@ const (
 // A set of methods for managing MySQL clusters.
 type ClusterServiceClient interface {
 	// Returns the specified MySQL cluster.
-	//
 	// To get the list of available MySQL clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of MySQL clusters that belong to the specified folder.
@@ -242,7 +241,6 @@ func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteCluste
 // A set of methods for managing MySQL clusters.
 type ClusterServiceServer interface {
 	// Returns the specified MySQL cluster.
-	//
 	// To get the list of available MySQL clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of MySQL clusters that belong to the specified folder.

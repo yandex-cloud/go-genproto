@@ -126,7 +126,6 @@ func (Backup_BackupStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 // An object that represents MySQL backup.
-//
 // See [the documentation](/docs/managed-mysql/concepts/backup) for details.
 type Backup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -249,7 +248,7 @@ var File_yandex_cloud_mdb_mysql_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/mdb/mysql/v1/backup.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc4\x04\n" +
+	"&yandex/cloud/mdb/mysql/v1/backup.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc4\x04\n" +
 	"\x06Backup\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
