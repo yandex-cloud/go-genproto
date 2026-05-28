@@ -156,7 +156,7 @@ var File_yandex_cloud_mdb_spqr_v1_shard_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_shard_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/mdb/spqr/v1/shard.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\":\n" +
+	"$yandex/cloud/mdb/spqr/v1/shard.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
 	"\x05Shard\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +

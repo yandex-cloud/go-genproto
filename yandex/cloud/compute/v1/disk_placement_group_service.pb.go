@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -31,6 +30,8 @@ type GetDiskPlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to return.
 	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskPlacementGroupId string `protobuf:"bytes,1,opt,name=disk_placement_group_id,json=diskPlacementGroupId,proto3" json:"disk_placement_group_id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -77,19 +78,22 @@ type ListDiskPlacementGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list placement groups in.
 	// To get the folder ID, use [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListDiskPlacementGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListDiskPlacementGroupsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
@@ -232,17 +236,29 @@ type CreateDiskPlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a placement group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the placement group.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the placement group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the availability zone where the placement group resides.
 	// To get a list of available zones use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,5,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Placement strategy.
+	// Only one field must by specified.
 	//
 	// Types that are valid to be assigned to PlacementStrategy:
 	//
@@ -412,16 +428,24 @@ type UpdateDiskPlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to update.
 	// To get the placement group ID, use an [DiskPlacementGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskPlacementGroupId string `protobuf:"bytes,1,opt,name=disk_placement_group_id,json=diskPlacementGroupId,proto3" json:"disk_placement_group_id,omitempty"`
 	// Field mask that specifies which fields of the DiskPlacementGroup resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the placement group.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the placement group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// The existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -541,6 +565,8 @@ type DeleteDiskPlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to delete.
 	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskPlacementGroupId string `protobuf:"bytes,1,opt,name=disk_placement_group_id,json=diskPlacementGroupId,proto3" json:"disk_placement_group_id,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -632,15 +658,19 @@ type ListDiskPlacementGroupDisksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to list disks for.
 	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskPlacementGroupId string `protobuf:"bytes,1,opt,name=disk_placement_group_id,json=diskPlacementGroupId,proto3" json:"disk_placement_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListDiskPlacementGroupDisksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListDiskPlacementGroupDisksResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -760,13 +790,17 @@ type ListDiskPlacementGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to list operations for.
 	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskPlacementGroupId string `protobuf:"bytes,1,opt,name=disk_placement_group_id,json=diskPlacementGroupId,proto3" json:"disk_placement_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListDiskPlacementGroupOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListDiskPlacementGroupOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -884,66 +918,62 @@ var File_yandex_cloud_compute_v1_disk_placement_group_service_proto protoreflect
 
 const file_yandex_cloud_compute_v1_disk_placement_group_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/compute/v1/disk_placement_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a2yandex/cloud/compute/v1/disk_placement_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"c\n" +
-	"\x1cGetDiskPlacementGroupRequest\x12C\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14diskPlacementGroupId\"\xe8\x01\n" +
-	"\x1eListDiskPlacementGroupsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	":yandex/cloud/compute/v1/disk_placement_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a2yandex/cloud/compute/v1/disk_placement_group.proto\x1a&yandex/cloud/operation/operation.proto\"U\n" +
+	"\x1cGetDiskPlacementGroupRequest\x125\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"\xac\x01\n" +
+	"\x1eListDiskPlacementGroupsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\xaa\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\xaa\x01\n" +
 	"\x1fListDiskPlacementGroupsResponse\x12_\n" +
 	"\x15disk_placement_groups\x18\x01 \x03(\v2+.yandex.cloud.compute.v1.DiskPlacementGroupR\x13diskPlacementGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc7\x05\n" +
-	"\x1fCreateDiskPlacementGroupRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa1\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2D.yandex.cloud.compute.v1.CreateDiskPlacementGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\azone_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12r\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xad\x04\n" +
+	"\x1fCreateDiskPlacementGroupRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\\\n" +
+	"\x06labels\x18\x04 \x03(\v2D.yandex.cloud.compute.v1.CreateDiskPlacementGroupRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\azone_id\x18\x05 \x01(\tR\x06zoneId\x12r\n" +
 	"\x19spread_placement_strategy\x18\x06 \x01(\v24.yandex.cloud.compute.v1.DiskSpreadPlacementStrategyH\x00R\x17spreadPlacementStrategy\x12{\n" +
 	"\x1cpartition_placement_strategy\x18\a \x01(\v27.yandex.cloud.compute.v1.DiskPartitionPlacementStrategyH\x00R\x1apartitionPlacementStrategy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x1a\n" +
-	"\x12placement_strategy\x12\x04\xc0\xc11\x01\"Y\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x14\n" +
+	"\x12placement_strategy\"Y\n" +
 	" CreateDiskPlacementGroupMetadata\x125\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"\xea\x03\n" +
-	"\x1fUpdateDiskPlacementGroupRequest\x12C\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14diskPlacementGroupId\x12;\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"\xe4\x02\n" +
+	"\x1fUpdateDiskPlacementGroupRequest\x125\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa1\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2D.yandex.cloud.compute.v1.UpdateDiskPlacementGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\\\n" +
+	"\x06labels\x18\x05 \x03(\v2D.yandex.cloud.compute.v1.UpdateDiskPlacementGroupRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"Y\n" +
 	" UpdateDiskPlacementGroupMetadata\x125\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"f\n" +
-	"\x1fDeleteDiskPlacementGroupRequest\x12C\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14diskPlacementGroupId\"Y\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"X\n" +
+	"\x1fDeleteDiskPlacementGroupRequest\x125\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"Y\n" +
 	" DeleteDiskPlacementGroupMetadata\x125\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"\xbc\x01\n" +
-	"\"ListDiskPlacementGroupDisksRequest\x12C\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14diskPlacementGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\"\x97\x01\n" +
+	"\"ListDiskPlacementGroupDisksRequest\x125\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x82\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x82\x01\n" +
 	"#ListDiskPlacementGroupDisksResponse\x123\n" +
 	"\x05disks\x18\x01 \x03(\v2\x1d.yandex.cloud.compute.v1.DiskR\x05disks\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc1\x01\n" +
-	"'ListDiskPlacementGroupOperationsRequest\x12C\n" +
-	"\x17disk_placement_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14diskPlacementGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x01\n" +
+	"'ListDiskPlacementGroupOperationsRequest\x125\n" +
+	"\x17disk_placement_group_id\x18\x01 \x01(\tR\x14diskPlacementGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x95\x01\n" +
 	"(ListDiskPlacementGroupOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

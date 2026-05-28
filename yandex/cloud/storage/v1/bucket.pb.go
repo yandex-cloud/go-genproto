@@ -597,6 +597,8 @@ const (
 	InventoryConfiguration_OBJECT_ACCESS_CONTROL_LIST InventoryConfiguration_OptionalField = 11
 	// The owner of the object.
 	InventoryConfiguration_OBJECT_OWNER InventoryConfiguration_OptionalField = 12
+	// The S3 Intelligent-Tiering access tier of the object.
+	InventoryConfiguration_INTELLIGENT_TIERING_ACCESS_TIER InventoryConfiguration_OptionalField = 13
 )
 
 // Enum value maps for InventoryConfiguration_OptionalField.
@@ -615,21 +617,23 @@ var (
 		10: "CHECKSUM_ALGORITHM",
 		11: "OBJECT_ACCESS_CONTROL_LIST",
 		12: "OBJECT_OWNER",
+		13: "INTELLIGENT_TIERING_ACCESS_TIER",
 	}
 	InventoryConfiguration_OptionalField_value = map[string]int32{
-		"OPTIONAL_FIELD_UNSPECIFIED":    0,
-		"SIZE":                          1,
-		"LAST_MODIFIED_DATE":            2,
-		"STORAGE_CLASS":                 3,
-		"ETAG":                          4,
-		"IS_MULTIPART_UPLOADED":         5,
-		"ENCRYPTION_STATUS":             6,
-		"OBJECT_LOCK_RETAIN_UNTIL_DATE": 7,
-		"OBJECT_LOCK_MODE":              8,
-		"OBJECT_LOCK_LEGAL_HOLD_STATUS": 9,
-		"CHECKSUM_ALGORITHM":            10,
-		"OBJECT_ACCESS_CONTROL_LIST":    11,
-		"OBJECT_OWNER":                  12,
+		"OPTIONAL_FIELD_UNSPECIFIED":      0,
+		"SIZE":                            1,
+		"LAST_MODIFIED_DATE":              2,
+		"STORAGE_CLASS":                   3,
+		"ETAG":                            4,
+		"IS_MULTIPART_UPLOADED":           5,
+		"ENCRYPTION_STATUS":               6,
+		"OBJECT_LOCK_RETAIN_UNTIL_DATE":   7,
+		"OBJECT_LOCK_MODE":                8,
+		"OBJECT_LOCK_LEGAL_HOLD_STATUS":   9,
+		"CHECKSUM_ALGORITHM":              10,
+		"OBJECT_ACCESS_CONTROL_LIST":      11,
+		"OBJECT_OWNER":                    12,
+		"INTELLIGENT_TIERING_ACCESS_TIER": 13,
 	}
 )
 
@@ -3624,7 +3628,7 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x1dBucketAllowedPrivateEndpoints\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12+\n" +
 	"\x11private_endpoints\x18\x02 \x03(\tR\x10privateEndpoints\x12;\n" +
-	"\x1aforce_cloud_console_access\x18\x03 \x01(\bR\x17forceCloudConsoleAccess\"\xad\r\n" +
+	"\x1aforce_cloud_console_access\x18\x03 \x01(\bR\x17forceCloudConsoleAccess\"\xd2\r\n" +
 	"\x16InventoryConfiguration\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12l\n" +
 	"\vdestination\x18\x02 \x01(\v2D.yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestinationB\x04\xe8\xc71\x01R\vdestination\x12\x86\x01\n" +
@@ -3655,7 +3659,7 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x16IncludedObjectVersions\x12(\n" +
 	"$INCLUDED_OBJECT_VERSIONS_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ALL\x10\x01\x12\v\n" +
-	"\aCURRENT\x10\x02\"\xc6\x02\n" +
+	"\aCURRENT\x10\x02\"\xeb\x02\n" +
 	"\rOptionalField\x12\x1e\n" +
 	"\x1aOPTIONAL_FIELD_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04SIZE\x10\x01\x12\x16\n" +
@@ -3670,7 +3674,8 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x12CHECKSUM_ALGORITHM\x10\n" +
 	"\x12\x1e\n" +
 	"\x1aOBJECT_ACCESS_CONTROL_LIST\x10\v\x12\x10\n" +
-	"\fOBJECT_OWNER\x10\f*s\n" +
+	"\fOBJECT_OWNER\x10\f\x12#\n" +
+	"\x1fINTELLIGENT_TIERING_ACCESS_TIER\x10\r*s\n" +
 	"\n" +
 	"Versioning\x12\x1a\n" +
 	"\x16VERSIONING_UNSPECIFIED\x10\x00\x12\x17\n" +

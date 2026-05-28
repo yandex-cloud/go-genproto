@@ -95,14 +95,6 @@ func (m *InstanceGroup) SetDisableZoneStatuses(v []*DisableZoneStatus) {
 	m.DisableZoneStatuses = v
 }
 
-func (m *ApplicationLoadBalancerState) SetTargetGroupId(v string) {
-	m.TargetGroupId = v
-}
-
-func (m *ApplicationLoadBalancerState) SetStatusMessage(v string) {
-	m.StatusMessage = v
-}
-
 func (m *Variable) SetKey(v string) {
 	m.Key = v
 }
@@ -116,6 +108,14 @@ func (m *LoadBalancerState) SetTargetGroupId(v string) {
 }
 
 func (m *LoadBalancerState) SetStatusMessage(v string) {
+	m.StatusMessage = v
+}
+
+func (m *ApplicationLoadBalancerState) SetTargetGroupId(v string) {
+	m.TargetGroupId = v
+}
+
+func (m *ApplicationLoadBalancerState) SetStatusMessage(v string) {
 	m.StatusMessage = v
 }
 
@@ -197,6 +197,10 @@ func (m *ScalePolicy) SetTestAutoScale(v *ScalePolicy_AutoScale) {
 	m.TestAutoScale = v
 }
 
+func (m *ScalePolicy_FixedScale) SetSize(v int64) {
+	m.Size = v
+}
+
 func (m *ScalePolicy_AutoScale) SetMinZoneSize(v int64) {
 	m.MinZoneSize = v
 }
@@ -263,10 +267,6 @@ func (m *ScalePolicy_CustomRule) SetFolderId(v string) {
 
 func (m *ScalePolicy_CustomRule) SetService(v string) {
 	m.Service = v
-}
-
-func (m *ScalePolicy_FixedScale) SetSize(v int64) {
-	m.Size = v
 }
 
 func (m *DeployPolicy) SetMaxUnavailable(v int64) {
@@ -349,16 +349,16 @@ func (m *InstanceTemplate) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
-func (m *InstanceTemplate) SetNetworkSettings(v *NetworkSettings) {
-	m.NetworkSettings = v
-}
-
 func (m *InstanceTemplate) SetName(v string) {
 	m.Name = v
 }
 
 func (m *InstanceTemplate) SetHostname(v string) {
 	m.Hostname = v
+}
+
+func (m *InstanceTemplate) SetNetworkSettings(v *NetworkSettings) {
+	m.NetworkSettings = v
 }
 
 func (m *InstanceTemplate) SetPlacementPolicy(v *PlacementPolicy) {
@@ -369,24 +369,12 @@ func (m *InstanceTemplate) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
 	m.FilesystemSpecs = v
 }
 
-func (m *InstanceTemplate) SetMetadataOptions(v *MetadataOptions) {
-	m.MetadataOptions = v
-}
-
 func (m *InstanceTemplate) SetReservedInstancePoolId(v string) {
 	m.ReservedInstancePoolId = v
 }
 
-func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
-	m.Mode = v
-}
-
-func (m *AttachedFilesystemSpec) SetDeviceName(v string) {
-	m.DeviceName = v
-}
-
-func (m *AttachedFilesystemSpec) SetFilesystemId(v string) {
-	m.FilesystemId = v
+func (m *InstanceTemplate) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
 }
 
 func (m *PlacementPolicy) SetPlacementGroupId(v string) {
@@ -479,6 +467,18 @@ func (m *AttachedDiskSpec_DiskSpec) SetPreserveAfterInstanceDelete(v bool) {
 	m.PreserveAfterInstanceDelete = v
 }
 
+func (m *AttachedFilesystemSpec) SetMode(v AttachedFilesystemSpec_Mode) {
+	m.Mode = v
+}
+
+func (m *AttachedFilesystemSpec) SetDeviceName(v string) {
+	m.DeviceName = v
+}
+
+func (m *AttachedFilesystemSpec) SetFilesystemId(v string) {
+	m.FilesystemId = v
+}
+
 func (m *NetworkInterfaceSpec) SetNetworkId(v string) {
 	m.NetworkId = v
 }
@@ -503,12 +503,12 @@ func (m *PrimaryAddressSpec) SetOneToOneNatSpec(v *OneToOneNatSpec) {
 	m.OneToOneNatSpec = v
 }
 
-func (m *PrimaryAddressSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
-	m.DnsRecordSpecs = v
-}
-
 func (m *PrimaryAddressSpec) SetAddress(v string) {
 	m.Address = v
+}
+
+func (m *PrimaryAddressSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
+	m.DnsRecordSpecs = v
 }
 
 func (m *OneToOneNatSpec) SetIpVersion(v IpVersion) {
@@ -521,22 +521,6 @@ func (m *OneToOneNatSpec) SetAddress(v string) {
 
 func (m *OneToOneNatSpec) SetDnsRecordSpecs(v []*DnsRecordSpec) {
 	m.DnsRecordSpecs = v
-}
-
-func (m *DnsRecordSpec) SetFqdn(v string) {
-	m.Fqdn = v
-}
-
-func (m *DnsRecordSpec) SetDnsZoneId(v string) {
-	m.DnsZoneId = v
-}
-
-func (m *DnsRecordSpec) SetTtl(v int64) {
-	m.Ttl = v
-}
-
-func (m *DnsRecordSpec) SetPtr(v bool) {
-	m.Ptr = v
 }
 
 func (m *SchedulingPolicy) SetPreemptible(v bool) {
@@ -661,6 +645,10 @@ func (m *ManagedInstance) SetInstanceId(v string) {
 	m.InstanceId = v
 }
 
+func (m *ManagedInstance) SetInstanceTag(v string) {
+	m.InstanceTag = v
+}
+
 func (m *ManagedInstance) SetFqdn(v string) {
 	m.Fqdn = v
 }
@@ -683,10 +671,6 @@ func (m *ManagedInstance) SetNetworkInterfaces(v []*NetworkInterface) {
 
 func (m *ManagedInstance) SetStatusChangedAt(v *timestamppb.Timestamp) {
 	m.StatusChangedAt = v
-}
-
-func (m *ManagedInstance) SetInstanceTag(v string) {
-	m.InstanceTag = v
 }
 
 func (m *NetworkInterface) SetIndex(v string) {
@@ -755,6 +739,22 @@ func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 
 func (m *LogRecord) SetMessage(v string) {
 	m.Message = v
+}
+
+func (m *DnsRecordSpec) SetFqdn(v string) {
+	m.Fqdn = v
+}
+
+func (m *DnsRecordSpec) SetDnsZoneId(v string) {
+	m.DnsZoneId = v
+}
+
+func (m *DnsRecordSpec) SetTtl(v int64) {
+	m.Ttl = v
+}
+
+func (m *DnsRecordSpec) SetPtr(v bool) {
+	m.Ptr = v
 }
 
 func (m *AutoHealingPolicy) SetAutoHealingAction(v AutoHealingPolicy_AutoHealingAction) {

@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -30,7 +29,6 @@ const (
 type GetGpuClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the GPU cluster to return.
-	//
 	// To get a GPU cluster ID, make a [GpuClusterService.List] request.
 	GpuClusterId  string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -77,30 +75,32 @@ func (x *GetGpuClusterRequest) GetGpuClusterId() string {
 type ListGpuClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list GPU clusters in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListGpuClustersResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListGpuClustersResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters GPU clusters listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [GpuCluster.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
 	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-schedule`.
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// A sorting expression that sorts GPU clusters listed in the response.
-	//
 	// The expression must specify the field name from [GpuCluster] and `asc`ending or `desc`ending order,
 	// e.g. `createdAt desc`.
-	//
 	// Default value: `id asc`.
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -178,7 +178,6 @@ type ListGpuClustersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListGpuClustersRequest.page_size], use `next_page_token` as the value
 	// for the [ListGpuClustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -232,11 +231,9 @@ func (x *ListGpuClustersResponse) GetNextPageToken() string {
 type CreateGpuClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a GPU cluster in.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the GPU cluster.
-	//
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the GPU cluster.
@@ -372,19 +369,16 @@ func (x *CreateGpuClusterMetadata) GetGpuClusterId() string {
 type UpdateGpuClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the GPU cluster to update.
-	//
 	// To get the GPU cluster ID, make a [GpuClusterService.List] request.
 	GpuClusterId string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
 	// Field mask that specifies which attributes of the GPU cluster should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the GPU cluster.
-	//
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the GPU cluster.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// New GPU cluster labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [GpuClusterService.Get] request.
@@ -508,7 +502,6 @@ func (x *UpdateGpuClusterMetadata) GetGpuClusterId() string {
 type DeleteGpuClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the GPU cluster to delete.
-	//
 	// To get a GPU cluster ID, make a [GpuClusterService.List] request.
 	GpuClusterId  string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -600,13 +593,11 @@ func (x *DeleteGpuClusterMetadata) GetGpuClusterId() string {
 type ListGpuClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the GPU cluster to list operations for.
-	//
 	// To get a GPU cluster ID, make a [GpuClusterService.List] request.
 	GpuClusterId string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListGpuClusterOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
@@ -674,7 +665,6 @@ type ListGpuClusterOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListGpuClusterOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListGpuClusterOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -728,13 +718,11 @@ func (x *ListGpuClusterOperationsResponse) GetNextPageToken() string {
 type ListGpuClusterInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the GPU cluster to list instances in.
-	//
 	// To get a GPU cluster ID, make a [GpuClusterService.List] request.
 	GpuClusterId string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListGpuClusterInstancesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
@@ -812,7 +800,6 @@ type ListGpuClusterInstancesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListGpuClusterInstancesRequest.page_size], use `next_page_token` as the value
 	// for the [ListGpuClusterInstancesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -867,18 +854,16 @@ var File_yandex_cloud_compute_v1_gpu_cluster_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_compute_v1_gpu_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/compute/v1/gpu_cluster_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/gpu_cluster.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"<\n" +
+	"1yandex/cloud/compute/v1/gpu_cluster_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/compute/v1/gpu_cluster.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a&yandex/cloud/operation/operation.proto\"<\n" +
 	"\x14GetGpuClusterRequest\x12$\n" +
-	"\x0egpu_cluster_id\x18\x01 \x01(\tR\fgpuClusterId\"\xe0\x01\n" +
-	"\x16ListGpuClustersRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0egpu_cluster_id\x18\x01 \x01(\tR\fgpuClusterId\"\xa4\x01\n" +
+	"\x16ListGpuClustersRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x89\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x89\x01\n" +
 	"\x17ListGpuClustersResponse\x12F\n" +
 	"\fgpu_clusters\x18\x01 \x03(\v2#.yandex.cloud.compute.v1.GpuClusterR\vgpuClusters\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf1\x02\n" +
@@ -1028,8 +1013,8 @@ func file_yandex_cloud_compute_v1_gpu_cluster_service_proto_init() {
 	if File_yandex_cloud_compute_v1_gpu_cluster_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_gpu_cluster_proto_init()
+	file_yandex_cloud_compute_v1_instance_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

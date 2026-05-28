@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -25,10 +24,15 @@ const (
 type Secret struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the secret.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the key.
+	// The length must be less than or equal to 256.
+	// This field is required.
 	Key string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
 	// Version of the secret.
+	// The length must be less than or equal to 50.
 	VersionId     string `protobuf:"bytes,3,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -88,10 +92,17 @@ func (x *Secret) GetVersionId() string {
 type ContainerSolutionSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the product.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ProductId string `protobuf:"bytes,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	// A list of the secrets.
+	// The length of each map key must be less than or equal to 100.
+	// The number of elements must be less than or equal to 100.
 	Secrets map[string]*Secret `protobuf:"bytes,2,rep,name=secrets,proto3" json:"secrets,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// A list of the environmets.
+	// The length of each map key must be less than or equal to 100.
+	// The length of each map value must be less than or equal to 10000.
+	// The number of elements must be less than or equal to 100.
 	Environment   map[string]string `protobuf:"bytes,3,rep,name=environment,proto3" json:"environment,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -153,12 +164,16 @@ type BackupSpec struct {
 	// If true, backup is enabled.
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// A list of policy IDs to apply after resource registration.
+	// The length of each element must be between 1 and 50.
+	// The number of elements must be less than or equal to 50.
 	InitialPolicyIds []string `protobuf:"bytes,2,rep,name=initial_policy_ids,json=initialPolicyIds,proto3" json:"initial_policy_ids,omitempty"`
 	// If true, recovery from backup starts on instance.
 	RecoveryFromBackup bool `protobuf:"varint,3,opt,name=recovery_from_backup,json=recoveryFromBackup,proto3" json:"recovery_from_backup,omitempty"`
 	// ID of the backup to recover from.
+	// The length must be less than or equal to 100.
 	BackupId string `protobuf:"bytes,4,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// ID of the instance registration for cloud backup agent installation.
+	// The length must be less than or equal to 100.
 	InstanceRegistrationId string `protobuf:"bytes,5,opt,name=instance_registration_id,json=instanceRegistrationId,proto3" json:"instance_registration_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -309,30 +324,30 @@ var File_yandex_cloud_compute_v1_application_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_application_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/compute/v1/application.proto\x12\x17yandex.cloud.compute.v1\x1a\x1dyandex/cloud/validation.proto\"p\n" +
-	"\x06Secret\x12\x1c\n" +
-	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12\x1f\n" +
-	"\x03key\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=256R\x03key\x12'\n" +
+	")yandex/cloud/compute/v1/application.proto\x12\x17yandex.cloud.compute.v1\"I\n" +
+	"\x06Secret\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\x12\x1d\n" +
 	"\n" +
-	"version_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\tversionId\"\xd3\x03\n" +
-	"\x15ContainerSolutionSpec\x12+\n" +
+	"version_id\x18\x03 \x01(\tR\tversionId\"\x8d\x03\n" +
+	"\x15ContainerSolutionSpec\x12\x1d\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tproductId\x12k\n" +
-	"\asecrets\x18\x02 \x03(\v2;.yandex.cloud.compute.v1.ContainerSolutionSpec.SecretsEntryB\x14\x82\xc81\x05<=100\xb2\xc81\a\x1a\x05<=100R\asecrets\x12\x82\x01\n" +
-	"\venvironment\x18\x03 \x03(\v2?.yandex.cloud.compute.v1.ContainerSolutionSpec.EnvironmentEntryB\x1f\x82\xc81\x05<=100\x8a\xc81\a<=10000\xb2\xc81\a\x1a\x05<=100R\venvironment\x1a[\n" +
+	"product_id\x18\x01 \x01(\tR\tproductId\x12U\n" +
+	"\asecrets\x18\x02 \x03(\v2;.yandex.cloud.compute.v1.ContainerSolutionSpec.SecretsEntryR\asecrets\x12a\n" +
+	"\venvironment\x18\x03 \x03(\v2?.yandex.cloud.compute.v1.ContainerSolutionSpec.EnvironmentEntryR\venvironment\x1a[\n" +
 	"\fSecretsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
 	"\x05value\x18\x02 \x01(\v2\x1f.yandex.cloud.compute.v1.SecretR\x05value:\x028\x01\x1a>\n" +
 	"\x10EnvironmentEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x85\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdd\x01\n" +
 	"\n" +
 	"BackupSpec\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\x12>\n" +
-	"\x12initial_policy_ids\x18\x02 \x03(\tB\x10\x82\xc81\x04<=50\x8a\xc81\x041-50R\x10initialPolicyIds\x120\n" +
-	"\x14recovery_from_backup\x18\x03 \x01(\bR\x12recoveryFromBackup\x12&\n" +
-	"\tbackup_id\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\bbackupId\x12C\n" +
-	"\x18instance_registration_id\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\x16instanceRegistrationId\"\xc2\x01\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12,\n" +
+	"\x12initial_policy_ids\x18\x02 \x03(\tR\x10initialPolicyIds\x120\n" +
+	"\x14recovery_from_backup\x18\x03 \x01(\bR\x12recoveryFromBackup\x12\x1b\n" +
+	"\tbackup_id\x18\x04 \x01(\tR\bbackupId\x128\n" +
+	"\x18instance_registration_id\x18\x05 \x01(\tR\x16instanceRegistrationId\"\xc2\x01\n" +
 	"\vApplication\x12_\n" +
 	"\x12container_solution\x18\x01 \x01(\v2..yandex.cloud.compute.v1.ContainerSolutionSpecH\x00R\x11containerSolution\x12E\n" +
 	"\vcloudbackup\x18\x02 \x01(\v2#.yandex.cloud.compute.v1.BackupSpecR\vcloudbackupB\v\n" +

@@ -296,10 +296,10 @@ type SPQRConfig struct {
 	Postgresql *PostgreSQLConfig `protobuf:"bytes,3,opt,name=postgresql,proto3" json:"postgresql,omitempty"`
 	// SPQR Infra (router+coordinator) settings.
 	Infra *InfraConfig `protobuf:"bytes,5,opt,name=infra,proto3" json:"infra,omitempty"`
-	// SPQR default log level
-	LogLevel LogLevel `protobuf:"varint,6,opt,name=log_level,json=logLevel,proto3,enum=yandex.cloud.mdb.spqr.v1.LogLevel" json:"log_level,omitempty"`
 	// SPQR Balancer settings.
-	Balancer      *BalancerSettings `protobuf:"bytes,7,opt,name=balancer,proto3" json:"balancer,omitempty"`
+	Balancer *BalancerSettings `protobuf:"bytes,7,opt,name=balancer,proto3" json:"balancer,omitempty"`
+	// SPQR default log level
+	LogLevel      LogLevel `protobuf:"varint,6,opt,name=log_level,json=logLevel,proto3,enum=yandex.cloud.mdb.spqr.v1.LogLevel" json:"log_level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -362,18 +362,18 @@ func (x *SPQRConfig) GetInfra() *InfraConfig {
 	return nil
 }
 
-func (x *SPQRConfig) GetLogLevel() LogLevel {
-	if x != nil {
-		return x.LogLevel
-	}
-	return LogLevel_LOG_LEVEL_UNSPECIFIED
-}
-
 func (x *SPQRConfig) GetBalancer() *BalancerSettings {
 	if x != nil {
 		return x.Balancer
 	}
 	return nil
+}
+
+func (x *SPQRConfig) GetLogLevel() LogLevel {
+	if x != nil {
+		return x.LogLevel
+	}
+	return LogLevel_LOG_LEVEL_UNSPECIFIED
 }
 
 type RouterConfig struct {
@@ -915,7 +915,7 @@ var File_yandex_cloud_mdb_spqr_v1_config_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/mdb/spqr/v1/config.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"4\n" +
+	"%yandex/cloud/mdb/spqr/v1/config.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"4\n" +
 	"\rMDBPostgreSQL\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xb3\x03\n" +
@@ -926,9 +926,9 @@ const file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc = "" +
 	"\n" +
 	"postgresql\x18\x03 \x01(\v2*.yandex.cloud.mdb.spqr.v1.PostgreSQLConfigR\n" +
 	"postgresql\x12;\n" +
-	"\x05infra\x18\x05 \x01(\v2%.yandex.cloud.mdb.spqr.v1.InfraConfigR\x05infra\x12?\n" +
-	"\tlog_level\x18\x06 \x01(\x0e2\".yandex.cloud.mdb.spqr.v1.LogLevelR\blogLevel\x12F\n" +
-	"\bbalancer\x18\a \x01(\v2*.yandex.cloud.mdb.spqr.v1.BalancerSettingsR\bbalancerJ\x04\b\x04\x10\x05\"\x93\x01\n" +
+	"\x05infra\x18\x05 \x01(\v2%.yandex.cloud.mdb.spqr.v1.InfraConfigR\x05infra\x12F\n" +
+	"\bbalancer\x18\a \x01(\v2*.yandex.cloud.mdb.spqr.v1.BalancerSettingsR\bbalancer\x12?\n" +
+	"\tlog_level\x18\x06 \x01(\x0e2\".yandex.cloud.mdb.spqr.v1.LogLevelR\blogLevelJ\x04\b\x04\x10\x05\"\x93\x01\n" +
 	"\fRouterConfig\x12@\n" +
 	"\x06config\x18\x01 \x01(\v2(.yandex.cloud.mdb.spqr.v1.RouterSettingsR\x06config\x12A\n" +
 	"\tresources\x18\x02 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesR\tresources\"\x9d\x01\n" +
@@ -937,11 +937,11 @@ const file_yandex_cloud_mdb_spqr_v1_config_proto_rawDesc = "" +
 	"\tresources\x18\x02 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesR\tresources\"\x9b\x01\n" +
 	"\x10PostgreSQLConfig\x12D\n" +
 	"\x06config\x18\x01 \x01(\v2,.yandex.cloud.mdb.spqr.v1.PostgreSQLSettingsR\x06config\x12A\n" +
-	"\tresources\x18\x02 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesR\tresources\"\xe3\x01\n" +
+	"\tresources\x18\x02 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesR\tresources\"\xe9\x01\n" +
 	"\vInfraConfig\x12A\n" +
 	"\tresources\x18\x02 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ResourcesR\tresources\x12@\n" +
 	"\x06router\x18\x03 \x01(\v2(.yandex.cloud.mdb.spqr.v1.RouterSettingsR\x06router\x12O\n" +
-	"\vcoordinator\x18\x04 \x01(\v2-.yandex.cloud.mdb.spqr.v1.CoordinatorSettingsR\vcoordinator\"\xa0\x03\n" +
+	"\vcoordinator\x18\x04 \x01(\v2-.yandex.cloud.mdb.spqr.v1.CoordinatorSettingsR\vcoordinatorJ\x04\b\x01\x10\x02\"\xa0\x03\n" +
 	"\x10BalancerSettings\x12A\n" +
 	"\rcpu_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\fcpuThreshold\x12E\n" +
 	"\x0fspace_threshold\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x0espaceThreshold\x12G\n" +
@@ -1031,8 +1031,8 @@ var file_yandex_cloud_mdb_spqr_v1_config_proto_depIdxs = []int32{
 	7,  // 1: yandex.cloud.mdb.spqr.v1.SPQRConfig.coordinator:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorConfig
 	8,  // 2: yandex.cloud.mdb.spqr.v1.SPQRConfig.postgresql:type_name -> yandex.cloud.mdb.spqr.v1.PostgreSQLConfig
 	9,  // 3: yandex.cloud.mdb.spqr.v1.SPQRConfig.infra:type_name -> yandex.cloud.mdb.spqr.v1.InfraConfig
-	0,  // 4: yandex.cloud.mdb.spqr.v1.SPQRConfig.log_level:type_name -> yandex.cloud.mdb.spqr.v1.LogLevel
-	10, // 5: yandex.cloud.mdb.spqr.v1.SPQRConfig.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
+	10, // 4: yandex.cloud.mdb.spqr.v1.SPQRConfig.balancer:type_name -> yandex.cloud.mdb.spqr.v1.BalancerSettings
+	0,  // 5: yandex.cloud.mdb.spqr.v1.SPQRConfig.log_level:type_name -> yandex.cloud.mdb.spqr.v1.LogLevel
 	11, // 6: yandex.cloud.mdb.spqr.v1.RouterConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.RouterSettings
 	14, // 7: yandex.cloud.mdb.spqr.v1.RouterConfig.resources:type_name -> yandex.cloud.mdb.spqr.v1.Resources
 	12, // 8: yandex.cloud.mdb.spqr.v1.CoordinatorConfig.config:type_name -> yandex.cloud.mdb.spqr.v1.CoordinatorSettings

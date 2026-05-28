@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -30,8 +29,9 @@ const (
 type GetFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the filesystem to return.
-	//
 	// To get the filesystem ID, make a [FilesystemService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FilesystemId  string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -77,29 +77,33 @@ func (x *GetFilesystemRequest) GetFilesystemId() string {
 type ListFilesystemsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list filesystems in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`,
 	// the service returns a [ListFilesystemsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListFilesystemsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -177,7 +181,6 @@ type ListFilesystemsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFilesystemsRequest.page_size], use `next_page_token` as the value
 	// for the [ListFilesystemsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -231,37 +234,42 @@ func (x *ListFilesystemsResponse) GetNextPageToken() string {
 type CreateFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a filesystem in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the filesystem. The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the filesystem.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Filesystem labels as `key:value` pairs.
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the filesystem type.
-	//
 	// To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
-	//
 	// The filesystem type cannot be updated after the filesystem creation.
+	// The length must be less than or equal to 50.
 	TypeId string `protobuf:"bytes,5,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// ID of the availability zone where the filesystem resides.
-	//
 	// To get a list of available zones, make a [yandex.cloud.compute.v1.ZoneService.List] request.
-	//
 	// A filesystem can be attached only to virtual machines residing in the same availability zone.
 	// The filesystem availability zone cannot be updated after the filesystem creation.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,6,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the filesystem, specified in bytes.
-	//
 	// The size of the filesystem cannot be updated after the filesystem creation.
+	// This field is required.
 	Size int64 `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`
 	// Block size used for the filesystem, specified in bytes.
-	//
 	// The block size cannot be updated after the filesystem creation.
-	//
 	// Default value: 4096.
 	BlockSize     int64 `protobuf:"varint,8,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -402,23 +410,30 @@ func (x *CreateFilesystemMetadata) GetFilesystemId() string {
 type UpdateFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the filesystem to update.
-	//
 	// To get the filesystem ID, make a [FilesystemService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	// Field mask that specifies which attributes of the filesystem should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name of the filesystem. The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the filesystem.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// New filesystem labels as `key:value` pairs.
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [FilesystemService.Get] request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Size of the filesystem, specified in bytes.
 	Size          int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
@@ -546,8 +561,9 @@ func (x *UpdateFilesystemMetadata) GetFilesystemId() string {
 type DeleteFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the filesystem to delete.
-	//
 	// To get the filesystem ID, make a [FilesystemService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FilesystemId  string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -638,15 +654,18 @@ func (x *DeleteFilesystemMetadata) GetFilesystemId() string {
 type ListFilesystemOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the filesystem to list operations for.
-	//
 	// To get the filesystem ID, make a [FilesystemService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FilesystemId string `protobuf:"bytes,1,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListFilesystemOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListFilesystemOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -710,7 +729,6 @@ type ListFilesystemOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListFilesystemOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListFilesystemOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -765,59 +783,56 @@ var File_yandex_cloud_compute_v1_filesystem_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_compute_v1_filesystem_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/compute/v1/filesystem_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/compute/v1/filesystem.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"I\n" +
-	"\x14GetFilesystemRequest\x121\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffilesystemId\"\xe0\x01\n" +
-	"\x16ListFilesystemsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"0yandex/cloud/compute/v1/filesystem_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/compute/v1/filesystem.proto\x1a&yandex/cloud/operation/operation.proto\";\n" +
+	"\x14GetFilesystemRequest\x12#\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"\xa4\x01\n" +
+	"\x16ListFilesystemsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x88\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x88\x01\n" +
 	"\x17ListFilesystemsResponse\x12E\n" +
 	"\vfilesystems\x18\x01 \x03(\v2#.yandex.cloud.compute.v1.FilesystemR\vfilesystems\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x86\x04\n" +
-	"\x17CreateFilesystemRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.compute.v1.CreateFilesystemRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\atype_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\x06typeId\x12%\n" +
-	"\azone_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12\x18\n" +
-	"\x04size\x18\a \x01(\x03B\x04\xe8\xc71\x01R\x04size\x12\x1d\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe2\x02\n" +
+	"\x17CreateFilesystemRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12T\n" +
+	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.compute.v1.CreateFilesystemRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\atype_id\x18\x05 \x01(\tR\x06typeId\x12\x17\n" +
+	"\azone_id\x18\x06 \x01(\tR\x06zoneId\x12\x12\n" +
+	"\x04size\x18\a \x01(\x03R\x04size\x12\x1d\n" +
 	"\n" +
 	"block_size\x18\b \x01(\x03R\tblockSize\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x18CreateFilesystemMetadata\x12#\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"\xdc\x03\n" +
-	"\x17UpdateFilesystemRequest\x121\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffilesystemId\x12;\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"\xd6\x02\n" +
+	"\x17UpdateFilesystemRequest\x12#\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2<.yandex.cloud.compute.v1.UpdateFilesystemRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x12\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12T\n" +
+	"\x06labels\x18\x05 \x03(\v2<.yandex.cloud.compute.v1.UpdateFilesystemRequest.LabelsEntryR\x06labels\x12\x12\n" +
 	"\x04size\x18\x06 \x01(\x03R\x04size\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"?\n" +
 	"\x18UpdateFilesystemMetadata\x12#\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"L\n" +
-	"\x17DeleteFilesystemRequest\x121\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffilesystemId\"?\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\">\n" +
+	"\x17DeleteFilesystemRequest\x12#\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"?\n" +
 	"\x18DeleteFilesystemMetadata\x12#\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"\xa7\x01\n" +
-	"\x1fListFilesystemOperationsRequest\x121\n" +
-	"\rfilesystem_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\ffilesystemId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\"\x82\x01\n" +
+	"\x1fListFilesystemOperationsRequest\x12#\n" +
+	"\rfilesystem_id\x18\x01 \x01(\tR\ffilesystemId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8d\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8d\x01\n" +
 	" ListFilesystemOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

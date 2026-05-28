@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -31,6 +30,8 @@ type GetDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Disk resource to return.
 	// To get the disk ID use a [DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId        string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -77,27 +78,32 @@ type ListDisksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list disks in.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListDisksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListDisksResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -231,30 +237,44 @@ type CreateDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a disk in.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the disk.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the disk.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the disk type.
 	// To get a list of available disk types use the [yandex.cloud.compute.v1.DiskTypeService.List] request.
+	// The length must be less than or equal to 50.
 	TypeId string `protobuf:"bytes,5,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// ID of the availability zone where the disk resides.
 	// To get a list of available zones use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,6,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the disk, specified in bytes.
 	// If the disk was created from a image, this value should be more than the
 	// [yandex.cloud.compute.v1.Image.min_disk_size] value.
+	// The value must be between 4194304 and 28587302322176.
+	// This field is required.
 	Size int64 `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`
+	// Block size used for disk, specified in bytes. The default is 4096.
+	BlockSize int64 `protobuf:"varint,10,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// Types that are valid to be assigned to Source:
 	//
 	//	*CreateDiskRequest_ImageId
 	//	*CreateDiskRequest_SnapshotId
 	Source isCreateDiskRequest_Source `protobuf_oneof:"source"`
-	// Block size used for disk, specified in bytes. The default is 4096.
-	BlockSize int64 `protobuf:"varint,10,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// Placement policy configuration.
 	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,11,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
 	// List of IDs of the snapshot schedules to attach the disk to.
@@ -263,6 +283,7 @@ type CreateDiskRequest struct {
 	// or to the default values if the source does not define it.
 	HardwareGeneration *HardwareGeneration `protobuf:"bytes,13,opt,name=hardware_generation,json=hardwareGeneration,proto3" json:"hardware_generation,omitempty"`
 	// ID of KMS key for disk encryption.
+	// The length must be less than or equal to 50.
 	KmsKeyId      string `protobuf:"bytes,14,opt,name=kms_key_id,json=kmsKeyId,proto3" json:"kms_key_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -347,6 +368,13 @@ func (x *CreateDiskRequest) GetSize() int64 {
 	return 0
 }
 
+func (x *CreateDiskRequest) GetBlockSize() int64 {
+	if x != nil {
+		return x.BlockSize
+	}
+	return 0
+}
+
 func (x *CreateDiskRequest) GetSource() isCreateDiskRequest_Source {
 	if x != nil {
 		return x.Source
@@ -370,13 +398,6 @@ func (x *CreateDiskRequest) GetSnapshotId() string {
 		}
 	}
 	return ""
-}
-
-func (x *CreateDiskRequest) GetBlockSize() int64 {
-	if x != nil {
-		return x.BlockSize
-	}
-	return 0
 }
 
 func (x *CreateDiskRequest) GetDiskPlacementPolicy() *DiskPlacementPolicy {
@@ -413,11 +434,13 @@ type isCreateDiskRequest_Source interface {
 
 type CreateDiskRequest_ImageId struct {
 	// ID of the image to create the disk from.
+	// The length must be less than or equal to 50.
 	ImageId string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3,oneof"`
 }
 
 type CreateDiskRequest_SnapshotId struct {
 	// ID of the snapshot to restore the disk from.
+	// The length must be less than or equal to 50.
 	SnapshotId string `protobuf:"bytes,9,opt,name=snapshot_id,json=snapshotId,proto3,oneof"`
 }
 
@@ -474,18 +497,27 @@ type UpdateDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Disk resource to update.
 	// To get the disk ID use a [DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// Field mask that specifies which fields of the Disk resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the disk.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the disk.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Size of the disk, specified in bytes.
+	// The value must be between 4194304 and 4398046511104.
 	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
 	// Placement policy configuration.
 	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,7,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
@@ -621,6 +653,8 @@ type DeleteDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the disk to delete.
 	// To get the disk ID use a [DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId        string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -711,13 +745,17 @@ func (x *DeleteDiskMetadata) GetDiskId() string {
 type ListDiskOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Disk resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListDiskOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListDiskOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -834,12 +872,14 @@ func (x *ListDiskOperationsResponse) GetNextPageToken() string {
 type MoveDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the disk to move.
-	//
 	// To get the disk ID, make a [DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// ID of the folder to move the disk to.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -955,12 +995,14 @@ func (x *MoveDiskMetadata) GetDestinationFolderId() string {
 type RelocateDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the disk to move.
-	//
 	// To get the disk ID, make a [DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// ID of the availability zone to move the disk to.
-	//
 	// To get the zone ID, make a [ZoneService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationZoneId string `protobuf:"bytes,2,opt,name=destination_zone_id,json=destinationZoneId,proto3" json:"destination_zone_id,omitempty"`
 	// Placement policy configuration in target zone. Must be specified if disk has placement policy.
 	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,3,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
@@ -1089,7 +1131,6 @@ type ListDiskSnapshotSchedulesRequest struct {
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListDiskSnapshotSchedulesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
@@ -1157,7 +1198,6 @@ type ListDiskSnapshotSchedulesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListDiskSnapshotSchedulesRequest.page_size], use `next_page_token` as the value
 	// for the [ListDiskSnapshotSchedulesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1212,85 +1252,82 @@ var File_yandex_cloud_compute_v1_disk_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_disk_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/compute/v1/disk_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a/yandex/cloud/compute/v1/snapshot_schedule.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"7\n" +
-	"\x0eGetDiskRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\"\xda\x01\n" +
-	"\x10ListDisksRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"*yandex/cloud/compute/v1/disk_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a/yandex/cloud/compute/v1/snapshot_schedule.proto\x1a&yandex/cloud/operation/operation.proto\")\n" +
+	"\x0eGetDiskRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"\x9e\x01\n" +
+	"\x10ListDisksRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"p\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"p\n" +
 	"\x11ListDisksResponse\x123\n" +
 	"\x05disks\x18\x01 \x03(\v2\x1d.yandex.cloud.compute.v1.DiskR\x05disks\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8e\a\n" +
-	"\x11CreateDiskRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x93\x01\n" +
-	"\x06labels\x18\x04 \x03(\v26.yandex.cloud.compute.v1.CreateDiskRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\atype_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\x06typeId\x12%\n" +
-	"\azone_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x122\n" +
-	"\x04size\x18\a \x01(\x03B\x1e\xe8\xc71\x01\xfa\xc71\x164194304-28587302322176R\x04size\x12%\n" +
-	"\bimage_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50H\x00R\aimageId\x12+\n" +
-	"\vsnapshot_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50H\x00R\n" +
-	"snapshotId\x12\x1d\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb2\x05\n" +
+	"\x11CreateDiskRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12N\n" +
+	"\x06labels\x18\x04 \x03(\v26.yandex.cloud.compute.v1.CreateDiskRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\atype_id\x18\x05 \x01(\tR\x06typeId\x12\x17\n" +
+	"\azone_id\x18\x06 \x01(\tR\x06zoneId\x12\x12\n" +
+	"\x04size\x18\a \x01(\x03R\x04size\x12\x1d\n" +
 	"\n" +
 	"block_size\x18\n" +
-	" \x01(\x03R\tblockSize\x12`\n" +
+	" \x01(\x03R\tblockSize\x12\x1b\n" +
+	"\bimage_id\x18\b \x01(\tH\x00R\aimageId\x12!\n" +
+	"\vsnapshot_id\x18\t \x01(\tH\x00R\n" +
+	"snapshotId\x12`\n" +
 	"\x15disk_placement_policy\x18\v \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x13diskPlacementPolicy\x122\n" +
 	"\x15snapshot_schedule_ids\x18\f \x03(\tR\x13snapshotScheduleIds\x12\\\n" +
-	"\x13hardware_generation\x18\r \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x12&\n" +
+	"\x13hardware_generation\x18\r \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x12\x1c\n" +
 	"\n" +
-	"kms_key_id\x18\x0e \x01(\tB\b\x8a\xc81\x04<=50R\bkmsKeyId\x1a9\n" +
+	"kms_key_id\x18\x0e \x01(\tR\bkmsKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
 	"\x06source\"-\n" +
 	"\x12CreateDiskMetadata\x12\x17\n" +
-	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"\xc1\x04\n" +
-	"\x11UpdateDiskRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\x12;\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"\xa0\x03\n" +
+	"\x11UpdateDiskRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x93\x01\n" +
-	"\x06labels\x18\x05 \x03(\v26.yandex.cloud.compute.v1.UpdateDiskRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12-\n" +
-	"\x04size\x18\x06 \x01(\x03B\x19\xfa\xc71\x154194304-4398046511104R\x04size\x12`\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12N\n" +
+	"\x06labels\x18\x05 \x03(\v26.yandex.cloud.compute.v1.UpdateDiskRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\x04size\x18\x06 \x01(\x03R\x04size\x12`\n" +
 	"\x15disk_placement_policy\x18\a \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x13diskPlacementPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"-\n" +
 	"\x12UpdateDiskMetadata\x12\x17\n" +
-	"\adisk_id\x18\x01 \x01(\tR\x06diskId\":\n" +
-	"\x11DeleteDiskRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\"-\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\",\n" +
+	"\x11DeleteDiskRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"-\n" +
 	"\x12DeleteDiskMetadata\x12\x17\n" +
-	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"\x95\x01\n" +
-	"\x19ListDiskOperationsRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\"p\n" +
+	"\x19ListDiskOperationsRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x87\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x87\x01\n" +
 	"\x1aListDiskOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"z\n" +
-	"\x0fMoveDiskRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"\x89\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"^\n" +
+	"\x0fMoveDiskRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"\x89\x01\n" +
 	"\x10MoveDiskMetadata\x12\x17\n" +
 	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x12(\n" +
 	"\x10source_folder_id\x18\x02 \x01(\tR\x0esourceFolderId\x122\n" +
-	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\xdc\x01\n" +
-	"\x13RelocateDiskRequest\x12%\n" +
-	"\adisk_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\x12<\n" +
-	"\x13destination_zone_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11destinationZoneId\x12`\n" +
+	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\xc0\x01\n" +
+	"\x13RelocateDiskRequest\x12\x17\n" +
+	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x12.\n" +
+	"\x13destination_zone_id\x18\x02 \x01(\tR\x11destinationZoneId\x12`\n" +
 	"\x15disk_placement_policy\x18\x03 \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x13diskPlacementPolicy\"\x85\x01\n" +
 	"\x14RelocateDiskMetadata\x12\x17\n" +
 	"\adisk_id\x18\x01 \x01(\tR\x06diskId\x12$\n" +

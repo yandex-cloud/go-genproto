@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -29,7 +28,7 @@ type PlacementGroup struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the placement group belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Creation timestamp.
+	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the placement group.
 	// The name is unique within the folder.
@@ -40,6 +39,7 @@ type PlacementGroup struct {
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Placement strategy. To specify a placement strategy, send the corresponding
 	// field containing approriate structure.
+	// Only one field must by specified.
 	//
 	// Types that are valid to be assigned to PlacementStrategy:
 	//
@@ -204,8 +204,9 @@ func (*SpreadPlacementStrategy) Descriptor() ([]byte, []int) {
 }
 
 type PartitionPlacementStrategy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Partitions    int64                  `protobuf:"varint,1,opt,name=partitions,proto3" json:"partitions,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The value must be between 2 and 5.
+	Partitions    int64 `protobuf:"varint,1,opt,name=partitions,proto3" json:"partitions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -251,7 +252,7 @@ var File_yandex_cloud_compute_v1_placement_group_proto protoreflect.FileDescript
 
 const file_yandex_cloud_compute_v1_placement_group_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/compute/v1/placement_group.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xbb\x04\n" +
+	"-yandex/cloud/compute/v1/placement_group.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb5\x04\n" +
 	"\x0ePlacementGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -264,12 +265,12 @@ const file_yandex_cloud_compute_v1_placement_group_proto_rawDesc = "" +
 	"\x1cpartition_placement_strategy\x18\b \x01(\v23.yandex.cloud.compute.v1.PartitionPlacementStrategyH\x00R\x1apartitionPlacementStrategy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x1a\n" +
-	"\x12placement_strategy\x12\x04\xc0\xc11\x01\"\x19\n" +
-	"\x17SpreadPlacementStrategy\"E\n" +
-	"\x1aPartitionPlacementStrategy\x12'\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x14\n" +
+	"\x12placement_strategy\"\x19\n" +
+	"\x17SpreadPlacementStrategy\"<\n" +
+	"\x1aPartitionPlacementStrategy\x12\x1e\n" +
 	"\n" +
-	"partitions\x18\x01 \x01(\x03B\a\xfa\xc71\x032-5R\n" +
+	"partitions\x18\x01 \x01(\x03R\n" +
 	"partitionsBb\n" +
 	"\x1byandex.cloud.api.compute.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
 

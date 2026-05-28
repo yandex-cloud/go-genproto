@@ -42,23 +42,19 @@ const (
 // A set of methods for managing Disk resources.
 type DiskServiceClient interface {
 	// Returns the specified Disk resource.
-	//
 	// To get the list of available Disk resources, make a [List] request.
 	Get(ctx context.Context, in *GetDiskRequest, opts ...grpc.CallOption) (*Disk, error)
 	// Retrieves the list of Disk resources in the specified folder.
 	List(ctx context.Context, in *ListDisksRequest, opts ...grpc.CallOption) (*ListDisksResponse, error)
 	// Creates a disk in the specified folder.
-	//
 	// You can create an empty disk or restore it from a snapshot or an image.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(ctx context.Context, in *CreateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified disk.
 	Update(ctx context.Context, in *UpdateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified disk.
-	//
 	// Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete
 	// any snapshots or images previously made from the disk. You must delete snapshots and images separately.
-	//
 	// It is not possible to delete a disk that is attached to an instance.
 	Delete(ctx context.Context, in *DeleteDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified disk.
@@ -66,7 +62,6 @@ type DiskServiceClient interface {
 	// Moves the specified disk to another folder of the same cloud.
 	Move(ctx context.Context, in *MoveDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified disk to another availability zone
-	//
 	// Disk must be detached from instances. To move attached
 	// disk use [InstanceService.Relocate] request.
 	Relocate(ctx context.Context, in *RelocateDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -215,23 +210,19 @@ func (c *diskServiceClient) UpdateAccessBindings(ctx context.Context, in *access
 // A set of methods for managing Disk resources.
 type DiskServiceServer interface {
 	// Returns the specified Disk resource.
-	//
 	// To get the list of available Disk resources, make a [List] request.
 	Get(context.Context, *GetDiskRequest) (*Disk, error)
 	// Retrieves the list of Disk resources in the specified folder.
 	List(context.Context, *ListDisksRequest) (*ListDisksResponse, error)
 	// Creates a disk in the specified folder.
-	//
 	// You can create an empty disk or restore it from a snapshot or an image.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(context.Context, *CreateDiskRequest) (*operation.Operation, error)
 	// Updates the specified disk.
 	Update(context.Context, *UpdateDiskRequest) (*operation.Operation, error)
 	// Deletes the specified disk.
-	//
 	// Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete
 	// any snapshots or images previously made from the disk. You must delete snapshots and images separately.
-	//
 	// It is not possible to delete a disk that is attached to an instance.
 	Delete(context.Context, *DeleteDiskRequest) (*operation.Operation, error)
 	// Lists operations for the specified disk.
@@ -239,7 +230,6 @@ type DiskServiceServer interface {
 	// Moves the specified disk to another folder of the same cloud.
 	Move(context.Context, *MoveDiskRequest) (*operation.Operation, error)
 	// Moves the specified disk to another availability zone
-	//
 	// Disk must be detached from instances. To move attached
 	// disk use [InstanceService.Relocate] request.
 	Relocate(context.Context, *RelocateDiskRequest) (*operation.Operation, error)

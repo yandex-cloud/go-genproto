@@ -34,7 +34,6 @@ const (
 // A set of methods for managing SPQR User resources.
 type UserServiceClient interface {
 	// Returns the specified SPQR User resource.
-	//
 	// To get the list of available SPQR User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
 	// Retrieves the list of SPQR User resources in the specified cluster.
@@ -112,7 +111,6 @@ func (c *userServiceClient) Delete(ctx context.Context, in *DeleteUserRequest, o
 // A set of methods for managing SPQR User resources.
 type UserServiceServer interface {
 	// Returns the specified SPQR User resource.
-	//
 	// To get the list of available SPQR User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
 	// Retrieves the list of SPQR User resources in the specified cluster.

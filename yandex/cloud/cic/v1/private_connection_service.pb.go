@@ -1235,7 +1235,7 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"!BatchGetPrivateConnectionsRequest\x124\n" +
 	"\x16private_connection_ids\x18\x01 \x03(\tR\x14privateConnectionIds\"}\n" +
 	"\"BatchGetPrivateConnectionsResponse\x12W\n" +
-	"\x13private_connections\x18\x01 \x03(\v2&.yandex.cloud.cic.v1.PrivateConnectionR\x12privateConnections2\xd5\x0e\n" +
+	"\x13private_connections\x18\x01 \x03(\v2&.yandex.cloud.cic.v1.PrivateConnectionR\x12privateConnections2\xd2\x0f\n" +
 	"\x18PrivateConnectionService\x12\x9b\x01\n" +
 	"\x03Get\x120.yandex.cloud.cic.v1.GetPrivateConnectionRequest\x1a&.yandex.cloud.cic.v1.PrivateConnection\":\x82\xd3\xe4\x93\x024\x122/cic/v1/privateConnections/{private_connection_id}\x12\x93\x01\n" +
 	"\x04List\x122.yandex.cloud.cic.v1.ListPrivateConnectionsRequest\x1a3.yandex.cloud.cic.v1.ListPrivateConnectionsResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/cic/v1/privateConnections\x12\xbf\x01\n" +
@@ -1251,7 +1251,8 @@ const file_yandex_cloud_cic_v1_private_connection_service_proto_rawDesc = "" +
 	"\x11UpsertStaticRoute\x12-.yandex.cloud.cic.v1.UpsertStaticRouteRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*2\n" +
 	"\x19UpsertStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:upsertStaticRoutes\x12\xee\x01\n" +
 	"\x11RemoveStaticRoute\x12-.yandex.cloud.cic.v1.RemoveStaticRouteRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2*2\n" +
-	"\x19RemoveStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:removeStaticRoutesBV\n" +
+	"\x19RemoveStaticRouteMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02J:\x01*\"E/cic/v1/privateConnections/{private_connection_id}:removeStaticRoutes\x12{\n" +
+	"\bBatchGet\x126.yandex.cloud.cic.v1.BatchGetPrivateConnectionsRequest\x1a7.yandex.cloud.cic.v1.BatchGetPrivateConnectionsResponseBV\n" +
 	"\x17yandex.cloud.api.cic.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cic/v1;cicb\x06proto3"
 
 var (
@@ -1320,17 +1321,19 @@ var file_yandex_cloud_cic_v1_private_connection_service_proto_depIdxs = []int32{
 	13, // 20: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:input_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsRequest
 	15, // 21: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:input_type -> yandex.cloud.cic.v1.UpsertStaticRouteRequest
 	16, // 22: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:input_type -> yandex.cloud.cic.v1.RemoveStaticRouteRequest
-	21, // 23: yandex.cloud.cic.v1.PrivateConnectionService.Get:output_type -> yandex.cloud.cic.v1.PrivateConnection
-	2,  // 24: yandex.cloud.cic.v1.PrivateConnectionService.List:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionsResponse
-	26, // 25: yandex.cloud.cic.v1.PrivateConnectionService.Create:output_type -> yandex.cloud.operation.Operation
-	26, // 26: yandex.cloud.cic.v1.PrivateConnectionService.Update:output_type -> yandex.cloud.operation.Operation
-	26, // 27: yandex.cloud.cic.v1.PrivateConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
-	26, // 28: yandex.cloud.cic.v1.PrivateConnectionService.Move:output_type -> yandex.cloud.operation.Operation
-	14, // 29: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
-	26, // 30: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:output_type -> yandex.cloud.operation.Operation
-	26, // 31: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:output_type -> yandex.cloud.operation.Operation
-	23, // [23:32] is the sub-list for method output_type
-	14, // [14:23] is the sub-list for method input_type
+	17, // 23: yandex.cloud.cic.v1.PrivateConnectionService.BatchGet:input_type -> yandex.cloud.cic.v1.BatchGetPrivateConnectionsRequest
+	21, // 24: yandex.cloud.cic.v1.PrivateConnectionService.Get:output_type -> yandex.cloud.cic.v1.PrivateConnection
+	2,  // 25: yandex.cloud.cic.v1.PrivateConnectionService.List:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionsResponse
+	26, // 26: yandex.cloud.cic.v1.PrivateConnectionService.Create:output_type -> yandex.cloud.operation.Operation
+	26, // 27: yandex.cloud.cic.v1.PrivateConnectionService.Update:output_type -> yandex.cloud.operation.Operation
+	26, // 28: yandex.cloud.cic.v1.PrivateConnectionService.Delete:output_type -> yandex.cloud.operation.Operation
+	26, // 29: yandex.cloud.cic.v1.PrivateConnectionService.Move:output_type -> yandex.cloud.operation.Operation
+	14, // 30: yandex.cloud.cic.v1.PrivateConnectionService.ListOperations:output_type -> yandex.cloud.cic.v1.ListPrivateConnectionOperationsResponse
+	26, // 31: yandex.cloud.cic.v1.PrivateConnectionService.UpsertStaticRoute:output_type -> yandex.cloud.operation.Operation
+	26, // 32: yandex.cloud.cic.v1.PrivateConnectionService.RemoveStaticRoute:output_type -> yandex.cloud.operation.Operation
+	18, // 33: yandex.cloud.cic.v1.PrivateConnectionService.BatchGet:output_type -> yandex.cloud.cic.v1.BatchGetPrivateConnectionsResponse
+	24, // [24:34] is the sub-list for method output_type
+	14, // [14:24] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name

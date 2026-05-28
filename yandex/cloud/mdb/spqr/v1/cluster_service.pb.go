@@ -602,7 +602,6 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the SPQR cluster as “ key:value “ pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
-	//
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1276,7 +1275,6 @@ type RestoreClusterRequest struct {
 	Time *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=time,proto3" json:"time,omitempty"`
 	// Flag that indicates whether a database should be restored to the first backup point
 	// available just after the timestamp specified in the [time] field instead of just before.
-	//
 	// Possible values:
 	// * false (default) - the restore point refers to the first backup moment before [time].
 	// * true - the restore point refers to the first backup point after [time].
@@ -3795,7 +3793,7 @@ var File_yandex_cloud_mdb_spqr_v1_cluster_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/mdb/spqr/v1/cluster_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/mdb/spqr/v1/backup.proto\x1a&yandex/cloud/mdb/spqr/v1/cluster.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a'yandex/cloud/mdb/spqr/v1/database.proto\x1a#yandex/cloud/mdb/spqr/v1/host.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\x1a*yandex/cloud/mdb/spqr/v1/maintenance.proto\x1a$yandex/cloud/mdb/spqr/v1/shard.proto\"@\n" +
+	".yandex/cloud/mdb/spqr/v1/cluster_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/mdb/spqr/v1/backup.proto\x1a&yandex/cloud/mdb/spqr/v1/cluster.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a'yandex/cloud/mdb/spqr/v1/database.proto\x1a#yandex/cloud/mdb/spqr/v1/host.proto\x1a*yandex/cloud/mdb/spqr/v1/maintenance.proto\x1a$yandex/cloud/mdb/spqr/v1/shard.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -4111,12 +4109,12 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"|\n" +
 	"\x19ListClusterShardsResponse\x127\n" +
 	"\x06shards\x18\x01 \x03(\v2\x1f.yandex.cloud.mdb.spqr.v1.ShardR\x06shards\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9b\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x95\x01\n" +
 	"\x16AddClusterShardRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12H\n" +
 	"\n" +
-	"shard_spec\x18\x04 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ShardSpecB\x04\xe8\xc71\x01R\tshardSpecJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04\"W\n" +
+	"shard_spec\x18\x04 \x01(\v2#.yandex.cloud.mdb.spqr.v1.ShardSpecB\x04\xe8\xc71\x01R\tshardSpecJ\x04\b\x02\x10\x04\"W\n" +
 	"\x17AddClusterShardMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
@@ -4432,9 +4430,9 @@ func file_yandex_cloud_mdb_spqr_v1_cluster_service_proto_init() {
 	file_yandex_cloud_mdb_spqr_v1_config_proto_init()
 	file_yandex_cloud_mdb_spqr_v1_database_proto_init()
 	file_yandex_cloud_mdb_spqr_v1_host_proto_init()
-	file_yandex_cloud_mdb_spqr_v1_user_proto_init()
 	file_yandex_cloud_mdb_spqr_v1_maintenance_proto_init()
 	file_yandex_cloud_mdb_spqr_v1_shard_proto_init()
+	file_yandex_cloud_mdb_spqr_v1_user_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -328,7 +328,6 @@ type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the SPQR host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
-	//
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The ID of the SPQR cluster that the host belongs to.
@@ -553,10 +552,8 @@ type HostSpec struct {
 	// The network ID is set in the [Cluster.network_id] field.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Whether the host should get a public IP address on creation.
-	//
 	// After a host has been created, this setting cannot be changed. To remove an assigned public IP, or to assign
 	// a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
-	//
 	// Possible values:
 	// * false - don't assign a public IP to the host.
 	// * true - the host should have a public IP address.

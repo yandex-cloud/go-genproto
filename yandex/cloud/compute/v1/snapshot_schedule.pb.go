@@ -97,7 +97,6 @@ type SnapshotSchedule struct {
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the snapshot schedule.
-	//
 	// The name is unique within the folder.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the snapshot schedule.
@@ -266,7 +265,6 @@ type SchedulePolicy struct {
 	// Timestamp for creating the first snapshot.
 	StartAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
 	// Cron expression for the snapshot schedule (UTC+0).
-	//
 	// The expression must consist of five fields (`Minutes Hours Day-of-month Month Day-of-week`) or be one of
 	// nonstandard predefined expressions (e.g. `@hourly`). For details about the format,
 	// see [documentation](/docs/compute/concepts/snapshot-schedule#cron)

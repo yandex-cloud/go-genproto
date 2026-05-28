@@ -152,16 +152,16 @@ func (m *UpdateInstanceGroupRequest) SetLoadBalancerSpec(v *LoadBalancerSpec) {
 	m.LoadBalancerSpec = v
 }
 
+func (m *UpdateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
+	m.ApplicationLoadBalancerSpec = v
+}
+
 func (m *UpdateInstanceGroupRequest) SetVariables(v []*Variable) {
 	m.Variables = v
 }
 
 func (m *UpdateInstanceGroupRequest) SetDeletionProtection(v bool) {
 	m.DeletionProtection = v
-}
-
-func (m *UpdateInstanceGroupRequest) SetApplicationLoadBalancerSpec(v *ApplicationLoadBalancerSpec) {
-	m.ApplicationLoadBalancerSpec = v
 }
 
 func (m *UpdateInstanceGroupRequest) SetAutoHealingPolicy(v *AutoHealingPolicy) {
@@ -228,11 +228,31 @@ func (m *DeleteInstanceGroupMetadata) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }
 
-func (m *DeleteInstancesMetadata) SetInstanceGroupId(v string) {
+func (m *DisableZonesRequest) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }
 
-func (m *StopInstancesMetadata) SetInstanceGroupId(v string) {
+func (m *DisableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *DisableZonesRequest) SetDuration(v *durationpb.Duration) {
+	m.Duration = v
+}
+
+func (m *DisableZonesMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *EnableZonesRequest) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *EnableZonesRequest) SetZoneIds(v []string) {
+	m.ZoneIds = v
+}
+
+func (m *EnableZonesMetadata) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }
 
@@ -308,6 +328,14 @@ func (m *StopInstancesRequest) SetManagedInstanceIds(v []string) {
 	m.ManagedInstanceIds = v
 }
 
+func (m *DeleteInstancesMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
+func (m *StopInstancesMetadata) SetInstanceGroupId(v string) {
+	m.InstanceGroupId = v
+}
+
 func (m *ListInstanceGroupOperationsRequest) SetInstanceGroupId(v string) {
 	m.InstanceGroupId = v
 }
@@ -354,32 +382,4 @@ func (m *ListInstanceGroupLogRecordsResponse) SetLogRecords(v []*LogRecord) {
 
 func (m *ListInstanceGroupLogRecordsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
-}
-
-func (m *DisableZonesRequest) SetInstanceGroupId(v string) {
-	m.InstanceGroupId = v
-}
-
-func (m *DisableZonesRequest) SetZoneIds(v []string) {
-	m.ZoneIds = v
-}
-
-func (m *DisableZonesRequest) SetDuration(v *durationpb.Duration) {
-	m.Duration = v
-}
-
-func (m *DisableZonesMetadata) SetInstanceGroupId(v string) {
-	m.InstanceGroupId = v
-}
-
-func (m *EnableZonesRequest) SetInstanceGroupId(v string) {
-	m.InstanceGroupId = v
-}
-
-func (m *EnableZonesRequest) SetZoneIds(v []string) {
-	m.ZoneIds = v
-}
-
-func (m *EnableZonesMetadata) SetInstanceGroupId(v string) {
-	m.InstanceGroupId = v
 }

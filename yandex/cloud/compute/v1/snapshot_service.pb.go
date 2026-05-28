@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -31,6 +30,8 @@ type GetSnapshotRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Snapshot resource to return.
 	// To get the snapshot ID, use a [SnapshotService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SnapshotId    string `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -77,27 +78,32 @@ type ListSnapshotsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list snapshots in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListSnapshotsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSnapshotsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -231,15 +237,26 @@ type CreateSnapshotRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a snapshot in.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the disk to create the snapshot from.
 	// To get the disk ID use a [yandex.cloud.compute.v1.DiskService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DiskId string `protobuf:"bytes,2,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
 	// Name of the snapshot.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the snapshot.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Specify the overrides to hardware_generation of a source disk, image or snapshot,
 	// or to the default values if the source does not define it.
@@ -378,16 +395,24 @@ type UpdateSnapshotRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Snapshot resource to update.
 	// To get the snapshot ID use a [SnapshotService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SnapshotId string `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
 	// Field mask that specifies which fields of the Snapshot resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the snapshot.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the snapshot.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -507,6 +532,8 @@ type DeleteSnapshotRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot to delete.
 	// To get the snapshot ID, use a [SnapshotService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SnapshotId    string `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -597,13 +624,17 @@ func (x *DeleteSnapshotMetadata) GetSnapshotId() string {
 type ListSnapshotOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Snapshot resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SnapshotId string `protobuf:"bytes,1,opt,name=snapshot_id,json=snapshotId,proto3" json:"snapshot_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSnapshotOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -721,28 +752,26 @@ var File_yandex_cloud_compute_v1_snapshot_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_compute_v1_snapshot_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/compute/v1/snapshot_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a&yandex/cloud/compute/v1/snapshot.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
-	"\x12GetSnapshotRequest\x12-\n" +
-	"\vsnapshot_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"snapshotId\"\xde\x01\n" +
-	"\x14ListSnapshotsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	".yandex/cloud/compute/v1/snapshot_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a&yandex/cloud/compute/v1/snapshot.proto\x1a&yandex/cloud/operation/operation.proto\"5\n" +
+	"\x12GetSnapshotRequest\x12\x1f\n" +
+	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
+	"snapshotId\"\xa2\x01\n" +
+	"\x14ListSnapshotsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x80\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x80\x01\n" +
 	"\x15ListSnapshotsResponse\x12?\n" +
 	"\tsnapshots\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.SnapshotR\tsnapshots\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\x04\n" +
-	"\x15CreateSnapshotRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12%\n" +
-	"\adisk_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06diskId\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x06 \x03(\v2:.yandex.cloud.compute.v1.CreateSnapshotRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\\\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf6\x02\n" +
+	"\x15CreateSnapshotRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x17\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12R\n" +
+	"\x06labels\x18\x06 \x03(\v2:.yandex.cloud.compute.v1.CreateSnapshotRequest.LabelsEntryR\x06labels\x12\\\n" +
 	"\x13hardware_generation\x18\a \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -750,34 +779,33 @@ const file_yandex_cloud_compute_v1_snapshot_service_proto_rawDesc = "" +
 	"\x16CreateSnapshotMetadata\x12\x1f\n" +
 	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
 	"snapshotId\x12\x17\n" +
-	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\xc0\x03\n" +
-	"\x15UpdateSnapshotRequest\x12-\n" +
-	"\vsnapshot_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\xba\x02\n" +
+	"\x15UpdateSnapshotRequest\x12\x1f\n" +
+	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
 	"snapshotId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.compute.v1.UpdateSnapshotRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12R\n" +
+	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.compute.v1.UpdateSnapshotRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x16UpdateSnapshotMetadata\x12\x1f\n" +
 	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
-	"snapshotId\"F\n" +
-	"\x15DeleteSnapshotRequest\x12-\n" +
-	"\vsnapshot_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"snapshotId\"8\n" +
+	"\x15DeleteSnapshotRequest\x12\x1f\n" +
+	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
 	"snapshotId\"9\n" +
 	"\x16DeleteSnapshotMetadata\x12\x1f\n" +
 	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
-	"snapshotId\"\xa1\x01\n" +
-	"\x1dListSnapshotOperationsRequest\x12-\n" +
-	"\vsnapshot_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"snapshotId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"snapshotId\"|\n" +
+	"\x1dListSnapshotOperationsRequest\x12\x1f\n" +
+	"\vsnapshot_id\x18\x01 \x01(\tR\n" +
+	"snapshotId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8b\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8b\x01\n" +
 	"\x1eListSnapshotOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

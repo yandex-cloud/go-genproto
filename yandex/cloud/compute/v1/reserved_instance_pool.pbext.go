@@ -6,40 +6,6 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (m *ProductIDs) SetProductIds(v []string) {
-	m.ProductIds = v
-}
-
-type BootDiskSpec_BootSource = isBootDiskSpec_BootSource
-
-func (m *BootDiskSpec) SetBootSource(v BootDiskSpec_BootSource) {
-	m.BootSource = v
-}
-
-func (m *BootDiskSpec) SetDiskId(v string) {
-	m.BootSource = &BootDiskSpec_DiskId{
-		DiskId: v,
-	}
-}
-
-func (m *BootDiskSpec) SetImageId(v string) {
-	m.BootSource = &BootDiskSpec_ImageId{
-		ImageId: v,
-	}
-}
-
-func (m *BootDiskSpec) SetSnapshotId(v string) {
-	m.BootSource = &BootDiskSpec_SnapshotId{
-		SnapshotId: v,
-	}
-}
-
-func (m *BootDiskSpec) SetProductIds(v *ProductIDs) {
-	m.BootSource = &BootDiskSpec_ProductIds{
-		ProductIds: v,
-	}
-}
-
 func (m *ReservedInstancePool) SetId(v string) {
 	m.Id = v
 }
@@ -134,4 +100,38 @@ func (m *ReservedInstancePool_SlotStats) SetPending(v int64) {
 
 func (m *ReservedInstancePool_InstanceStats) SetTotal(v int64) {
 	m.Total = v
+}
+
+func (m *ProductIDs) SetProductIds(v []string) {
+	m.ProductIds = v
+}
+
+type BootDiskSpec_BootSource = isBootDiskSpec_BootSource
+
+func (m *BootDiskSpec) SetBootSource(v BootDiskSpec_BootSource) {
+	m.BootSource = v
+}
+
+func (m *BootDiskSpec) SetDiskId(v string) {
+	m.BootSource = &BootDiskSpec_DiskId{
+		DiskId: v,
+	}
+}
+
+func (m *BootDiskSpec) SetImageId(v string) {
+	m.BootSource = &BootDiskSpec_ImageId{
+		ImageId: v,
+	}
+}
+
+func (m *BootDiskSpec) SetSnapshotId(v string) {
+	m.BootSource = &BootDiskSpec_SnapshotId{
+		SnapshotId: v,
+	}
+}
+
+func (m *BootDiskSpec) SetProductIds(v *ProductIDs) {
+	m.BootSource = &BootDiskSpec_ProductIds{
+		ProductIds: v,
+	}
 }

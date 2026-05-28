@@ -58,7 +58,6 @@ const (
 // A set of methods for managing SPQR Cluster resources.
 type ClusterServiceClient interface {
 	// Returns the specified SPQR Cluster resource.
-	//
 	// To get the list of available SPQR Cluster resources, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of SPQR Cluster resources that belong
@@ -422,7 +421,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing SPQR Cluster resources.
 type ClusterServiceServer interface {
 	// Returns the specified SPQR Cluster resource.
-	//
 	// To get the list of available SPQR Cluster resources, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of SPQR Cluster resources that belong

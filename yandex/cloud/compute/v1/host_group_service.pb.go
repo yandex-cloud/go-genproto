@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -32,6 +31,8 @@ type GetHostGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to return.
 	// To get the host group ID, use [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId   string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -78,28 +79,33 @@ type ListHostGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list host groups in.
 	// To get the folder ID, use [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListHostGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListHostGroupsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -233,16 +239,29 @@ type CreateHostGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a host group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the group.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Availability zone where all dedicated hosts will be allocated.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,5,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of host type. Resources provided by each host of the group.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TypeId string `protobuf:"bytes,6,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// Behaviour on maintenance events.
 	MaintenancePolicy MaintenancePolicy `protobuf:"varint,7,opt,name=maintenance_policy,json=maintenancePolicy,proto3,enum=yandex.cloud.compute.v1.MaintenancePolicy" json:"maintenance_policy,omitempty"`
@@ -387,16 +406,24 @@ type UpdateHostGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to update.
 	// To get the host group ID, use an [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// Field mask that specifies which fields of the HostGroup resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the group.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// The existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Behaviour on maintenance events
 	MaintenancePolicy MaintenancePolicy `protobuf:"varint,6,opt,name=maintenance_policy,json=maintenancePolicy,proto3,enum=yandex.cloud.compute.v1.MaintenancePolicy" json:"maintenance_policy,omitempty"`
@@ -534,6 +561,8 @@ type DeleteHostGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to delete.
 	// To get the host group ID, use [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId   string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -625,19 +654,22 @@ type ListHostGroupInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to list instances for.
 	// To get the host group ID, use [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListHostGroupInstancesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListHostGroupInstancesResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
@@ -645,6 +677,7 @@ type ListHostGroupInstancesRequest struct {
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
 	// Currently you can use filtering only on the [Host.id] field.
 	// To get the host ID, use [HostGroupService.ListHosts] request.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -771,15 +804,19 @@ type ListHostGroupHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to list hosts for.
 	// To get the host group ID, use [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListHostGroupHostsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListHostGroupHostsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -898,8 +935,12 @@ func (x *ListHostGroupHostsResponse) GetNextPageToken() string {
 type UpdateHostGroupHostRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to update.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// ID of the host to update.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostId string `protobuf:"bytes,2,opt,name=host_id,json=hostId,proto3" json:"host_id,omitempty"`
 	// Field mask that specifies which fields of the Host are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
@@ -1026,13 +1067,17 @@ type ListHostGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host group to list operations for.
 	// To get the host group ID, use [HostGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostGroupId string `protobuf:"bytes,1,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListHostGroupOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListHostGroupOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1150,90 +1195,84 @@ var File_yandex_cloud_compute_v1_host_group_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_compute_v1_host_group_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/compute/v1/host_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a(yandex/cloud/compute/v1/host_group.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"G\n" +
-	"\x13GetHostGroupRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\"\xdf\x01\n" +
-	"\x15ListHostGroupsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"0yandex/cloud/compute/v1/host_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/compute/v1/host_group.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\"9\n" +
+	"\x13GetHostGroupRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"\xa3\x01\n" +
+	"\x15ListHostGroupsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x85\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x85\x01\n" +
 	"\x16ListHostGroupsResponse\x12C\n" +
 	"\vhost_groups\x18\x01 \x03(\v2\".yandex.cloud.compute.v1.HostGroupR\n" +
 	"hostGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf3\x04\n" +
-	"\x16CreateHostGroupRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.compute.v1.CreateHostGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\azone_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
-	"\atype_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06typeId\x12Y\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x03\n" +
+	"\x16CreateHostGroupRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12S\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.compute.v1.CreateHostGroupRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\azone_id\x18\x05 \x01(\tR\x06zoneId\x12\x17\n" +
+	"\atype_id\x18\x06 \x01(\tR\x06typeId\x12Y\n" +
 	"\x12maintenance_policy\x18\a \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12G\n" +
 	"\fscale_policy\x18\b \x01(\v2$.yandex.cloud.compute.v1.ScalePolicyR\vscalePolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
 	"\x17CreateHostGroupMetadata\x12\"\n" +
-	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"\xe9\x04\n" +
-	"\x16UpdateHostGroupRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\x12;\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"\xe3\x03\n" +
+	"\x16UpdateHostGroupRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.compute.v1.UpdateHostGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12Y\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12S\n" +
+	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.compute.v1.UpdateHostGroupRequest.LabelsEntryR\x06labels\x12Y\n" +
 	"\x12maintenance_policy\x18\x06 \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12G\n" +
 	"\fscale_policy\x18\a \x01(\v2$.yandex.cloud.compute.v1.ScalePolicyR\vscalePolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"=\n" +
 	"\x17UpdateHostGroupMetadata\x12\"\n" +
-	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"J\n" +
-	"\x16DeleteHostGroupRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\"=\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"<\n" +
+	"\x16DeleteHostGroupRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"=\n" +
 	"\x17DeleteHostGroupMetadata\x12\"\n" +
-	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"\xc8\x01\n" +
-	"\x1dListHostGroupInstancesRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\"\x97\x01\n" +
+	"\x1dListHostGroupInstancesRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x89\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x89\x01\n" +
 	"\x1eListHostGroupInstancesResponse\x12?\n" +
 	"\tinstances\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.InstanceR\tinstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa0\x01\n" +
-	"\x19ListHostGroupHostsRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"{\n" +
+	"\x19ListHostGroupHostsRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"y\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"y\n" +
 	"\x1aListHostGroupHostsResponse\x123\n" +
 	"\x05hosts\x18\x01 \x03(\v2\x1d.yandex.cloud.compute.v1.HostR\x05hosts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xef\x01\n" +
-	"\x1aUpdateHostGroupHostRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\x12%\n" +
-	"\ahost_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06hostId\x12;\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd3\x01\n" +
+	"\x1aUpdateHostGroupHostRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12\x17\n" +
+	"\ahost_id\x18\x02 \x01(\tR\x06hostId\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12;\n" +
 	"\vdeadline_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"deadlineAt\"Z\n" +
 	"\x1bUpdateHostGroupHostMetadata\x12\"\n" +
 	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12\x17\n" +
-	"\ahost_id\x18\x02 \x01(\tR\x06hostId\"\xa5\x01\n" +
-	"\x1eListHostGroupOperationsRequest\x120\n" +
-	"\rhost_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vhostGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\ahost_id\x18\x02 \x01(\tR\x06hostId\"\x80\x01\n" +
+	"\x1eListHostGroupOperationsRequest\x12\"\n" +
+	"\rhost_group_id\x18\x01 \x01(\tR\vhostGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8c\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8c\x01\n" +
 	"\x1fListHostGroupOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
@@ -1357,8 +1396,8 @@ func file_yandex_cloud_compute_v1_host_group_service_proto_init() {
 	if File_yandex_cloud_compute_v1_host_group_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_host_group_proto_init()
+	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

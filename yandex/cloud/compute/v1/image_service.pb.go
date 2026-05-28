@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -31,6 +30,8 @@ type GetImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image resource to return.
 	// To get the image ID, use a [ImageService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -77,8 +78,11 @@ type GetImageLatestByFamilyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to get the image from.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the image family to search for.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Family        string `protobuf:"bytes,2,opt,name=family,proto3" json:"family,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -132,27 +136,32 @@ type ListImagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list images in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListImagesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListImagesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -286,29 +295,40 @@ type CreateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an image in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the image.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the image.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// The name of the image family to which this image belongs. For more information, see [Image family](/docs/compute/concepts/image#family).
-	//
 	// To get an information about the most recent image from a family, use a [ImageService.GetLatestByFamily] request.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Family string `protobuf:"bytes,5,opt,name=family,proto3" json:"family,omitempty"`
 	// Minimum size of the disk that will be created from this image.
 	// Specified in bytes. Should be more than the volume of source data.
+	// The value must be between 4194304 and 4398046511104.
 	MinDiskSize int64 `protobuf:"varint,6,opt,name=min_disk_size,json=minDiskSize,proto3" json:"min_disk_size,omitempty"` // optional, should be > source data
 	// License IDs that indicate which licenses are attached to this resource.
 	// License IDs are used to calculate additional charges for the use of the virtual machine.
-	//
 	// The correct license ID is generated by the platform. IDs are inherited by new resources created from this resource.
-	//
 	// If you know the license IDs, specify them when you create the image.
 	// For example, if you create a disk image using a third-party utility and load it into Object Storage, the license IDs will be lost.
 	// You can specify them in this request.
+	// The length of each element must be less than or equal to 50.
 	ProductIds []string `protobuf:"bytes,7,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
+	// Only one field must by specified.
+	//
 	// Types that are valid to be assigned to Source:
 	//
 	//	*CreateImageRequest_ImageId
@@ -317,7 +337,6 @@ type CreateImageRequest struct {
 	//	*CreateImageRequest_Uri
 	Source isCreateImageRequest_Source `protobuf_oneof:"source"`
 	// Operating system that is contained in the image.
-	//
 	// If not specified and you used the `image_id` or `disk_id` field to set the source, then the value can be inherited from the source resource.
 	Os *Os `protobuf:"bytes,12,opt,name=os,proto3" json:"os,omitempty"`
 	// When true, an image pool will be created for fast creation disks from the image.
@@ -478,16 +497,19 @@ type isCreateImageRequest_Source interface {
 
 type CreateImageRequest_ImageId struct {
 	// ID of the source image to create the new image from.
+	// The length must be less than or equal to 50.
 	ImageId string `protobuf:"bytes,8,opt,name=image_id,json=imageId,proto3,oneof"`
 }
 
 type CreateImageRequest_DiskId struct {
 	// ID of the disk to create the image from.
+	// The length must be less than or equal to 50.
 	DiskId string `protobuf:"bytes,9,opt,name=disk_id,json=diskId,proto3,oneof"`
 }
 
 type CreateImageRequest_SnapshotId struct {
 	// ID of the snapshot to create the image from.
+	// The length must be less than or equal to 50.
 	SnapshotId string `protobuf:"bytes,10,opt,name=snapshot_id,json=snapshotId,proto3,oneof"`
 }
 
@@ -556,19 +578,28 @@ type UpdateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image resource to update.
 	// To get the image ID, use a [ImageService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// Field mask that specifies which fields of the Image resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the image.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the image.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Minimum size of the disk that can be created from this image.
 	// Specified in bytes. Should be more than the volume of source data and more than the virtual disk size.
+	// The value must be between 4194304 and 4398046511104.
 	MinDiskSize int64 `protobuf:"varint,5,opt,name=min_disk_size,json=minDiskSize,proto3" json:"min_disk_size,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels        map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -695,6 +726,8 @@ type DeleteImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the image to delete.
 	// To get the image ID, use a [ImageService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -785,13 +818,17 @@ func (x *DeleteImageMetadata) GetImageId() string {
 type ListImageOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Image resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListImageOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListImageOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -909,37 +946,35 @@ var File_yandex_cloud_compute_v1_image_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_image_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/compute/v1/image_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a#yandex/cloud/compute/v1/image.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\":\n" +
-	"\x0fGetImageRequest\x12'\n" +
-	"\bimage_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\"\x85\x01\n" +
-	"\x1dGetImageLatestByFamilyRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x06family\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x06family\"\xdb\x01\n" +
-	"\x11ListImagesRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"+yandex/cloud/compute/v1/image_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a#yandex/cloud/compute/v1/image.proto\x1a&yandex/cloud/operation/operation.proto\",\n" +
+	"\x0fGetImageRequest\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"T\n" +
+	"\x1dGetImageLatestByFamilyRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x16\n" +
+	"\x06family\x18\x02 \x01(\tR\x06family\"\x9f\x01\n" +
+	"\x11ListImagesRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"t\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"t\n" +
 	"\x12ListImagesResponse\x126\n" +
 	"\x06images\x18\x01 \x03(\v2\x1e.yandex.cloud.compute.v1.ImageR\x06images\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe4\x06\n" +
-	"\x12CreateImageRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x94\x01\n" +
-	"\x06labels\x18\x04 \x03(\v27.yandex.cloud.compute.v1.CreateImageRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x129\n" +
-	"\x06family\x18\x05 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x06family\x12=\n" +
-	"\rmin_disk_size\x18\x06 \x01(\x03B\x19\xfa\xc71\x154194304-4398046511104R\vminDiskSize\x12)\n" +
-	"\vproduct_ids\x18\a \x03(\tB\b\x8a\xc81\x04<=50R\n" +
-	"productIds\x12%\n" +
-	"\bimage_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50H\x00R\aimageId\x12#\n" +
-	"\adisk_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06diskId\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf2\x04\n" +
+	"\x12CreateImageRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12O\n" +
+	"\x06labels\x18\x04 \x03(\v27.yandex.cloud.compute.v1.CreateImageRequest.LabelsEntryR\x06labels\x12\x16\n" +
+	"\x06family\x18\x05 \x01(\tR\x06family\x12\"\n" +
+	"\rmin_disk_size\x18\x06 \x01(\x03R\vminDiskSize\x12\x1f\n" +
+	"\vproduct_ids\x18\a \x03(\tR\n" +
+	"productIds\x12\x1b\n" +
+	"\bimage_id\x18\b \x01(\tH\x00R\aimageId\x12\x19\n" +
+	"\adisk_id\x18\t \x01(\tH\x00R\x06diskId\x12!\n" +
 	"\vsnapshot_id\x18\n" +
-	" \x01(\tB\b\x8a\xc81\x04<=50H\x00R\n" +
+	" \x01(\tH\x00R\n" +
 	"snapshotId\x12\x12\n" +
 	"\x03uri\x18\v \x01(\tH\x00R\x03uri\x12+\n" +
 	"\x02os\x18\f \x01(\v2\x1b.yandex.cloud.compute.v1.OsR\x02os\x12\x16\n" +
@@ -947,33 +982,32 @@ const file_yandex_cloud_compute_v1_image_service_proto_rawDesc = "" +
 	"\x13hardware_generation\x18\x12 \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\x06source\x12\x04\xc0\xc11\x01J\x04\b\r\x10\x11\"0\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\b\n" +
+	"\x06sourceJ\x04\b\r\x10\x11\"0\n" +
 	"\x13CreateImageMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\xf3\x03\n" +
-	"\x12UpdateImageRequest\x12'\n" +
-	"\bimage_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\x12;\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\xd2\x02\n" +
+	"\x12UpdateImageRequest\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12=\n" +
-	"\rmin_disk_size\x18\x05 \x01(\x03B\x19\xfa\xc71\x154194304-4398046511104R\vminDiskSize\x12\x94\x01\n" +
-	"\x06labels\x18\x06 \x03(\v27.yandex.cloud.compute.v1.UpdateImageRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\"\n" +
+	"\rmin_disk_size\x18\x05 \x01(\x03R\vminDiskSize\x12O\n" +
+	"\x06labels\x18\x06 \x03(\v27.yandex.cloud.compute.v1.UpdateImageRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"0\n" +
 	"\x13UpdateImageMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"=\n" +
-	"\x12DeleteImageRequest\x12'\n" +
-	"\bimage_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\"0\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"/\n" +
+	"\x12DeleteImageRequest\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"0\n" +
 	"\x13DeleteImageMetadata\x12\x19\n" +
-	"\bimage_id\x18\x01 \x01(\tR\aimageId\"\x98\x01\n" +
-	"\x1aListImageOperationsRequest\x12'\n" +
-	"\bimage_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\aimageId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\"s\n" +
+	"\x1aListImageOperationsRequest\x12\x19\n" +
+	"\bimage_id\x18\x01 \x01(\tR\aimageId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x88\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x88\x01\n" +
 	"\x1bListImageOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

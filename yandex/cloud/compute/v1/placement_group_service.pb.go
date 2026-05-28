@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -30,7 +29,6 @@ const (
 type GetPlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to return.
-	//
 	// To get a placement group ID make a [PlacementGroupService.List] request.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -77,30 +75,34 @@ func (x *GetPlacementGroupRequest) GetPlacementGroupId() string {
 type ListPlacementGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list placement groups in.
-	//
 	// To get the folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListPlacementGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListPlacementGroupsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -178,7 +180,6 @@ type ListPlacementGroupsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListPlacementGroupsRequest.page_size], use `next_page_token` as the value
 	// for the [ListPlacementGroupsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -232,7 +233,6 @@ func (x *ListPlacementGroupsResponse) GetNextPageToken() string {
 type CreatePlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a placement group in.
-	//
 	// To get a folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the placement group.
@@ -242,6 +242,7 @@ type CreatePlacementGroupRequest struct {
 	// Resource labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Placement strategy.
+	// Only one field must by specified.
 	//
 	// Types that are valid to be assigned to PlacementStrategy:
 	//
@@ -402,7 +403,6 @@ func (x *CreatePlacementGroupMetadata) GetPlacementGroupId() string {
 type UpdatePlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to update.
-	//
 	// To get the placement group ID, use an [PlacementGroupService.List] request.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	// Field mask that specifies which fields of the PlacementGroup resource should be updated.
@@ -412,7 +412,6 @@ type UpdatePlacementGroupRequest struct {
 	// Description of the placement group.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// The existing set of `labels` is completely replaced by the provided set.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -532,7 +531,6 @@ func (x *UpdatePlacementGroupMetadata) GetPlacementGroupId() string {
 type DeletePlacementGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to delete.
-	//
 	// To get the placement group ID, use [PlacementGroupService.List] request.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -624,7 +622,6 @@ func (x *DeletePlacementGroupMetadata) GetPlacementGroupId() string {
 type ListPlacementGroupInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to list instances for.
-	//
 	// To get the placement group ID, use [PlacementGroupService.List] request.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -753,7 +750,6 @@ func (x *ListPlacementGroupInstancesResponse) GetNextPageToken() string {
 type ListPlacementGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the placement group to list operations for.
-	//
 	// To get the placement group ID, use [PlacementGroupService.List] request.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -879,21 +875,19 @@ var File_yandex_cloud_compute_v1_placement_group_service_proto protoreflect.File
 
 const file_yandex_cloud_compute_v1_placement_group_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/compute/v1/placement_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a-yandex/cloud/compute/v1/placement_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
+	"5yandex/cloud/compute/v1/placement_group_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a-yandex/cloud/compute/v1/placement_group.proto\x1a&yandex/cloud/operation/operation.proto\"H\n" +
 	"\x18GetPlacementGroupRequest\x12,\n" +
-	"\x12placement_group_id\x18\x01 \x01(\tR\x10placementGroupId\"\xe4\x01\n" +
-	"\x1aListPlacementGroupsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x12placement_group_id\x18\x01 \x01(\tR\x10placementGroupId\"\xa8\x01\n" +
+	"\x1aListPlacementGroupsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x99\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x99\x01\n" +
 	"\x1bListPlacementGroupsResponse\x12R\n" +
 	"\x10placement_groups\x18\x01 \x03(\v2'.yandex.cloud.compute.v1.PlacementGroupR\x0fplacementGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x84\x04\n" +
 	"\x1bCreatePlacementGroupRequest\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -903,8 +897,8 @@ const file_yandex_cloud_compute_v1_placement_group_service_proto_rawDesc = "" +
 	"\x1cpartition_placement_strategy\x18\x06 \x01(\v23.yandex.cloud.compute.v1.PartitionPlacementStrategyH\x00R\x1apartitionPlacementStrategy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x1a\n" +
-	"\x12placement_strategy\x12\x04\xc0\xc11\x01\"L\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x14\n" +
+	"\x12placement_strategy\"L\n" +
 	"\x1cCreatePlacementGroupMetadata\x12,\n" +
 	"\x12placement_group_id\x18\x01 \x01(\tR\x10placementGroupId\"\xd3\x02\n" +
 	"\x1bUpdatePlacementGroupRequest\x12,\n" +

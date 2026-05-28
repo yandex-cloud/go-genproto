@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -22,172 +21,6 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
-
-type ProductIDs struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// License IDs that indicate which licenses are attached to resource.
-	// License IDs are used to calculate additional charges for the use of the virtual machine.
-	ProductIds    []string `protobuf:"bytes,1,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ProductIDs) Reset() {
-	*x = ProductIDs{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProductIDs) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProductIDs) ProtoMessage() {}
-
-func (x *ProductIDs) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ProductIDs.ProtoReflect.Descriptor instead.
-func (*ProductIDs) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ProductIDs) GetProductIds() []string {
-	if x != nil {
-		return x.ProductIds
-	}
-	return nil
-}
-
-// Specification used to determine required product_ids
-// You can specify product ids explicitly or use disk_id|image_id|snapshot_id to infer products ids from them.
-type BootDiskSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to BootSource:
-	//
-	//	*BootDiskSpec_DiskId
-	//	*BootDiskSpec_ImageId
-	//	*BootDiskSpec_SnapshotId
-	//	*BootDiskSpec_ProductIds
-	BootSource    isBootDiskSpec_BootSource `protobuf_oneof:"boot_source"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BootDiskSpec) Reset() {
-	*x = BootDiskSpec{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BootDiskSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BootDiskSpec) ProtoMessage() {}
-
-func (x *BootDiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BootDiskSpec.ProtoReflect.Descriptor instead.
-func (*BootDiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *BootDiskSpec) GetBootSource() isBootDiskSpec_BootSource {
-	if x != nil {
-		return x.BootSource
-	}
-	return nil
-}
-
-func (x *BootDiskSpec) GetDiskId() string {
-	if x != nil {
-		if x, ok := x.BootSource.(*BootDiskSpec_DiskId); ok {
-			return x.DiskId
-		}
-	}
-	return ""
-}
-
-func (x *BootDiskSpec) GetImageId() string {
-	if x != nil {
-		if x, ok := x.BootSource.(*BootDiskSpec_ImageId); ok {
-			return x.ImageId
-		}
-	}
-	return ""
-}
-
-func (x *BootDiskSpec) GetSnapshotId() string {
-	if x != nil {
-		if x, ok := x.BootSource.(*BootDiskSpec_SnapshotId); ok {
-			return x.SnapshotId
-		}
-	}
-	return ""
-}
-
-func (x *BootDiskSpec) GetProductIds() *ProductIDs {
-	if x != nil {
-		if x, ok := x.BootSource.(*BootDiskSpec_ProductIds); ok {
-			return x.ProductIds
-		}
-	}
-	return nil
-}
-
-type isBootDiskSpec_BootSource interface {
-	isBootDiskSpec_BootSource()
-}
-
-type BootDiskSpec_DiskId struct {
-	// Disk ID.
-	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3,oneof"`
-}
-
-type BootDiskSpec_ImageId struct {
-	// Image ID.
-	ImageId string `protobuf:"bytes,2,opt,name=image_id,json=imageId,proto3,oneof"`
-}
-
-type BootDiskSpec_SnapshotId struct {
-	// Snapshot ID.
-	SnapshotId string `protobuf:"bytes,3,opt,name=snapshot_id,json=snapshotId,proto3,oneof"`
-}
-
-type BootDiskSpec_ProductIds struct {
-	// Product IDs.
-	ProductIds *ProductIDs `protobuf:"bytes,4,opt,name=product_ids,json=productIds,proto3,oneof"`
-}
-
-func (*BootDiskSpec_DiskId) isBootDiskSpec_BootSource() {}
-
-func (*BootDiskSpec_ImageId) isBootDiskSpec_BootSource() {}
-
-func (*BootDiskSpec_SnapshotId) isBootDiskSpec_BootSource() {}
-
-func (*BootDiskSpec_ProductIds) isBootDiskSpec_BootSource() {}
 
 // A Reserved Instance Pool resource.
 type ReservedInstancePool struct {
@@ -236,7 +69,7 @@ type ReservedInstancePool struct {
 
 func (x *ReservedInstancePool) Reset() {
 	*x = ReservedInstancePool{}
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[2]
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -248,7 +81,7 @@ func (x *ReservedInstancePool) String() string {
 func (*ReservedInstancePool) ProtoMessage() {}
 
 func (x *ReservedInstancePool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[2]
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,7 +94,7 @@ func (x *ReservedInstancePool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReservedInstancePool.ProtoReflect.Descriptor instead.
 func (*ReservedInstancePool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ReservedInstancePool) GetId() string {
@@ -390,6 +223,174 @@ func (x *ReservedInstancePool) GetInstanceStats() *ReservedInstancePool_Instance
 	return nil
 }
 
+type ProductIDs struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// License IDs that indicate which licenses are attached to resource.
+	// License IDs are used to calculate additional charges for the use of the virtual machine.
+	ProductIds    []string `protobuf:"bytes,1,rep,name=product_ids,json=productIds,proto3" json:"product_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProductIDs) Reset() {
+	*x = ProductIDs{}
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProductIDs) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductIDs) ProtoMessage() {}
+
+func (x *ProductIDs) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductIDs.ProtoReflect.Descriptor instead.
+func (*ProductIDs) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ProductIDs) GetProductIds() []string {
+	if x != nil {
+		return x.ProductIds
+	}
+	return nil
+}
+
+// Specification used to determine required product_ids
+// You can specify product ids explicitly or use disk_id|image_id|snapshot_id to infer products ids from them.
+type BootDiskSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Only one field must by specified.
+	//
+	// Types that are valid to be assigned to BootSource:
+	//
+	//	*BootDiskSpec_DiskId
+	//	*BootDiskSpec_ImageId
+	//	*BootDiskSpec_SnapshotId
+	//	*BootDiskSpec_ProductIds
+	BootSource    isBootDiskSpec_BootSource `protobuf_oneof:"boot_source"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BootDiskSpec) Reset() {
+	*x = BootDiskSpec{}
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BootDiskSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BootDiskSpec) ProtoMessage() {}
+
+func (x *BootDiskSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BootDiskSpec.ProtoReflect.Descriptor instead.
+func (*BootDiskSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BootDiskSpec) GetBootSource() isBootDiskSpec_BootSource {
+	if x != nil {
+		return x.BootSource
+	}
+	return nil
+}
+
+func (x *BootDiskSpec) GetDiskId() string {
+	if x != nil {
+		if x, ok := x.BootSource.(*BootDiskSpec_DiskId); ok {
+			return x.DiskId
+		}
+	}
+	return ""
+}
+
+func (x *BootDiskSpec) GetImageId() string {
+	if x != nil {
+		if x, ok := x.BootSource.(*BootDiskSpec_ImageId); ok {
+			return x.ImageId
+		}
+	}
+	return ""
+}
+
+func (x *BootDiskSpec) GetSnapshotId() string {
+	if x != nil {
+		if x, ok := x.BootSource.(*BootDiskSpec_SnapshotId); ok {
+			return x.SnapshotId
+		}
+	}
+	return ""
+}
+
+func (x *BootDiskSpec) GetProductIds() *ProductIDs {
+	if x != nil {
+		if x, ok := x.BootSource.(*BootDiskSpec_ProductIds); ok {
+			return x.ProductIds
+		}
+	}
+	return nil
+}
+
+type isBootDiskSpec_BootSource interface {
+	isBootDiskSpec_BootSource()
+}
+
+type BootDiskSpec_DiskId struct {
+	// Disk ID.
+	DiskId string `protobuf:"bytes,1,opt,name=disk_id,json=diskId,proto3,oneof"`
+}
+
+type BootDiskSpec_ImageId struct {
+	// Image ID.
+	ImageId string `protobuf:"bytes,2,opt,name=image_id,json=imageId,proto3,oneof"`
+}
+
+type BootDiskSpec_SnapshotId struct {
+	// Snapshot ID.
+	SnapshotId string `protobuf:"bytes,3,opt,name=snapshot_id,json=snapshotId,proto3,oneof"`
+}
+
+type BootDiskSpec_ProductIds struct {
+	// Product IDs.
+	ProductIds *ProductIDs `protobuf:"bytes,4,opt,name=product_ids,json=productIds,proto3,oneof"`
+}
+
+func (*BootDiskSpec_DiskId) isBootDiskSpec_BootSource() {}
+
+func (*BootDiskSpec_ImageId) isBootDiskSpec_BootSource() {}
+
+func (*BootDiskSpec_SnapshotId) isBootDiskSpec_BootSource() {}
+
+func (*BootDiskSpec_ProductIds) isBootDiskSpec_BootSource() {}
+
 type ReservedInstancePool_SlotStats struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Equals to pool size (and equals to the sum of the following fields)
@@ -433,7 +434,7 @@ func (x *ReservedInstancePool_SlotStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReservedInstancePool_SlotStats.ProtoReflect.Descriptor instead.
 func (*ReservedInstancePool_SlotStats) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2, 0}
+	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *ReservedInstancePool_SlotStats) GetTotal() int64 {
@@ -506,7 +507,7 @@ func (x *ReservedInstancePool_InstanceStats) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ReservedInstancePool_InstanceStats.ProtoReflect.Descriptor instead.
 func (*ReservedInstancePool_InstanceStats) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{2, 1}
+	return file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP(), []int{0, 1}
 }
 
 func (x *ReservedInstancePool_InstanceStats) GetTotal() int64 {
@@ -520,19 +521,7 @@ var File_yandex_cloud_compute_v1_reserved_instance_pool_proto protoreflect.FileD
 
 const file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/compute/v1/reserved_instance_pool.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a.yandex/cloud/compute/v1/instance_service.proto\x1a\x1dyandex/cloud/validation.proto\"7\n" +
-	"\n" +
-	"ProductIDs\x12)\n" +
-	"\vproduct_ids\x18\x01 \x03(\tB\b\x8a\xc81\x04<=50R\n" +
-	"productIds\"\xe4\x01\n" +
-	"\fBootDiskSpec\x12#\n" +
-	"\adisk_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06diskId\x12%\n" +
-	"\bimage_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\aimageId\x12+\n" +
-	"\vsnapshot_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\n" +
-	"snapshotId\x12F\n" +
-	"\vproduct_ids\x18\x04 \x01(\v2#.yandex.cloud.compute.v1.ProductIDsH\x00R\n" +
-	"productIdsB\x13\n" +
-	"\vboot_source\x12\x04\xc0\xc11\x01\"\x8c\t\n" +
+	"4yandex/cloud/compute/v1/reserved_instance_pool.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a.yandex/cloud/compute/v1/instance_service.proto\"\x8c\t\n" +
 	"\x14ReservedInstancePool\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\azone_id\x18\x02 \x01(\tR\x06zoneId\x12\x19\n" +
@@ -567,7 +556,19 @@ const file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDesc = "" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01Bb\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"-\n" +
+	"\n" +
+	"ProductIDs\x12\x1f\n" +
+	"\vproduct_ids\x18\x01 \x03(\tR\n" +
+	"productIds\"\xc0\x01\n" +
+	"\fBootDiskSpec\x12\x19\n" +
+	"\adisk_id\x18\x01 \x01(\tH\x00R\x06diskId\x12\x1b\n" +
+	"\bimage_id\x18\x02 \x01(\tH\x00R\aimageId\x12!\n" +
+	"\vsnapshot_id\x18\x03 \x01(\tH\x00R\n" +
+	"snapshotId\x12F\n" +
+	"\vproduct_ids\x18\x04 \x01(\v2#.yandex.cloud.compute.v1.ProductIDsH\x00R\n" +
+	"productIdsB\r\n" +
+	"\vboot_sourceBb\n" +
 	"\x1byandex.cloud.api.compute.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
 
 var (
@@ -584,9 +585,9 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_proto_rawDescGZIP() []b
 
 var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_goTypes = []any{
-	(*ProductIDs)(nil),                         // 0: yandex.cloud.compute.v1.ProductIDs
-	(*BootDiskSpec)(nil),                       // 1: yandex.cloud.compute.v1.BootDiskSpec
-	(*ReservedInstancePool)(nil),               // 2: yandex.cloud.compute.v1.ReservedInstancePool
+	(*ReservedInstancePool)(nil),               // 0: yandex.cloud.compute.v1.ReservedInstancePool
+	(*ProductIDs)(nil),                         // 1: yandex.cloud.compute.v1.ProductIDs
+	(*BootDiskSpec)(nil),                       // 2: yandex.cloud.compute.v1.BootDiskSpec
 	(*ReservedInstancePool_SlotStats)(nil),     // 3: yandex.cloud.compute.v1.ReservedInstancePool.SlotStats
 	(*ReservedInstancePool_InstanceStats)(nil), // 4: yandex.cloud.compute.v1.ReservedInstancePool.InstanceStats
 	nil,                           // 5: yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
@@ -596,14 +597,14 @@ var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_goTypes = []any{
 	(*NetworkSettings)(nil),       // 9: yandex.cloud.compute.v1.NetworkSettings
 }
 var file_yandex_cloud_compute_v1_reserved_instance_pool_proto_depIdxs = []int32{
-	0, // 0: yandex.cloud.compute.v1.BootDiskSpec.product_ids:type_name -> yandex.cloud.compute.v1.ProductIDs
-	5, // 1: yandex.cloud.compute.v1.ReservedInstancePool.labels:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
-	6, // 2: yandex.cloud.compute.v1.ReservedInstancePool.created_at:type_name -> google.protobuf.Timestamp
-	7, // 3: yandex.cloud.compute.v1.ReservedInstancePool.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
-	8, // 4: yandex.cloud.compute.v1.ReservedInstancePool.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	9, // 5: yandex.cloud.compute.v1.ReservedInstancePool.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	3, // 6: yandex.cloud.compute.v1.ReservedInstancePool.slot_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.SlotStats
-	4, // 7: yandex.cloud.compute.v1.ReservedInstancePool.instance_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.InstanceStats
+	5, // 0: yandex.cloud.compute.v1.ReservedInstancePool.labels:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.LabelsEntry
+	6, // 1: yandex.cloud.compute.v1.ReservedInstancePool.created_at:type_name -> google.protobuf.Timestamp
+	7, // 2: yandex.cloud.compute.v1.ReservedInstancePool.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	8, // 3: yandex.cloud.compute.v1.ReservedInstancePool.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	9, // 4: yandex.cloud.compute.v1.ReservedInstancePool.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	3, // 5: yandex.cloud.compute.v1.ReservedInstancePool.slot_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.SlotStats
+	4, // 6: yandex.cloud.compute.v1.ReservedInstancePool.instance_stats:type_name -> yandex.cloud.compute.v1.ReservedInstancePool.InstanceStats
+	1, // 7: yandex.cloud.compute.v1.BootDiskSpec.product_ids:type_name -> yandex.cloud.compute.v1.ProductIDs
 	8, // [8:8] is the sub-list for method output_type
 	8, // [8:8] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name
@@ -618,7 +619,7 @@ func file_yandex_cloud_compute_v1_reserved_instance_pool_proto_init() {
 	}
 	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_instance_service_proto_init()
-	file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[1].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_reserved_instance_pool_proto_msgTypes[2].OneofWrappers = []any{
 		(*BootDiskSpec_DiskId)(nil),
 		(*BootDiskSpec_ImageId)(nil),
 		(*BootDiskSpec_SnapshotId)(nil),

@@ -428,7 +428,7 @@ var File_yandex_cloud_mdb_spqr_v1_database_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_spqr_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/spqr/v1/database_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a'yandex/cloud/mdb/spqr/v1/database.proto\"\x86\x01\n" +
+	"/yandex/cloud/mdb/spqr/v1/database_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/mdb/spqr/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +

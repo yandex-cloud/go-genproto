@@ -188,14 +188,14 @@ var File_yandex_cloud_mdb_spqr_v1_resource_preset_service_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_spqr_v1_resource_preset_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/spqr/v1/resource_preset_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a.yandex/cloud/mdb/spqr/v1/resource_preset.proto\"N\n" +
+	"6yandex/cloud/mdb/spqr/v1/resource_preset_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/mdb/spqr/v1/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"N\n" +
 	"\x18GetResourcePresetRequest\x122\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"o\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"u\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x9a\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageTokenJ\x04\b\x01\x10\x02\"\x9a\x01\n" +
 	"\x1bListResourcePresetsResponse\x12S\n" +
 	"\x10resource_presets\x18\x01 \x03(\v2(.yandex.cloud.mdb.spqr.v1.ResourcePresetR\x0fresourcePresets\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xdc\x02\n" +

@@ -36,7 +36,6 @@ const (
 // A set of methods for managing reserved instance pool resources.
 type ReservedInstancePoolServiceClient interface {
 	// Returns the specified reserved instance pool resource.
-	//
 	// To get the list of available reserved instance pool resources, make a [List] request.
 	Get(ctx context.Context, in *GetReservedInstancePoolRequest, opts ...grpc.CallOption) (*ReservedInstancePool, error)
 	// Retrieves the list of reserved instance pool resources in the specified folder.
@@ -139,7 +138,6 @@ func (c *reservedInstancePoolServiceClient) ListInstances(ctx context.Context, i
 // A set of methods for managing reserved instance pool resources.
 type ReservedInstancePoolServiceServer interface {
 	// Returns the specified reserved instance pool resource.
-	//
 	// To get the list of available reserved instance pool resources, make a [List] request.
 	Get(context.Context, *GetReservedInstancePoolRequest) (*ReservedInstancePool, error)
 	// Retrieves the list of reserved instance pool resources in the specified folder.

@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -29,9 +28,11 @@ type ListZonesRequest struct {
 	// results is larger than [page_size],
 	// the service returns a [ListZonesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListZonesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -143,6 +144,8 @@ func (x *ListZonesResponse) GetNextPageToken() string {
 type GetZoneRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the availability zone to return information about.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId        string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -189,17 +192,16 @@ var File_yandex_cloud_compute_v1_zone_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_zone_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/compute/v1/zone_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"yandex/cloud/compute/v1/zone.proto\x1a\x1dyandex/cloud/validation.proto\"e\n" +
-	"\x10ListZonesRequest\x12'\n" +
-	"\tpage_size\x18\x01 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"*yandex/cloud/compute/v1/zone_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"yandex/cloud/compute/v1/zone.proto\"N\n" +
+	"\x10ListZonesRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"p\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"p\n" +
 	"\x11ListZonesResponse\x123\n" +
 	"\x05zones\x18\x01 \x03(\v2\x1d.yandex.cloud.compute.v1.ZoneR\x05zones\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"7\n" +
-	"\x0eGetZoneRequest\x12%\n" +
-	"\azone_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId2\xfb\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\")\n" +
+	"\x0eGetZoneRequest\x12\x17\n" +
+	"\azone_id\x18\x01 \x01(\tR\x06zoneId2\xfb\x01\n" +
 	"\vZoneService\x12r\n" +
 	"\x03Get\x12'.yandex.cloud.compute.v1.GetZoneRequest\x1a\x1d.yandex.cloud.compute.v1.Zone\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/compute/v1/zones/{zone_id}\x12x\n" +
 	"\x04List\x12).yandex.cloud.compute.v1.ListZonesRequest\x1a*.yandex.cloud.compute.v1.ListZonesResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/compute/v1/zonesBb\n" +

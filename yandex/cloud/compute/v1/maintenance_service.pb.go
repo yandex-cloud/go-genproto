@@ -33,8 +33,8 @@ const file_yandex_cloud_compute_v1_maintenance_service_proto_rawDesc = "" +
 	"\x04List\x124.yandex.cloud.maintenance.v2.ListMaintenancesRequest\x1a5.yandex.cloud.maintenance.v2.ListMaintenancesResponse\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/compute/v1/maintenances\x12\x96\x01\n" +
 	"\x03Get\x122.yandex.cloud.maintenance.v2.GetMaintenanceRequest\x1a(.yandex.cloud.maintenance.v2.Maintenance\"1\x82\xd3\xe4\x93\x02+\x12)/compute/v1/maintenances/{maintenance_id}\x12\xd8\x01\n" +
 	"\n" +
-	"Reschedule\x129.yandex.cloud.maintenance.v2.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"l\xb2\xd2*)\x12'yandex.cloud.maintenance.v2.Maintenance\x82\xd3\xe4\x93\x029:\x01*\"4/compute/v1/maintenances/{maintenance_id}:rescheduleB{\n" +
-	"\x1byandex.cloud.api.compute.v1B\x17MaintenanceServiceProtoZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
+	"Reschedule\x129.yandex.cloud.maintenance.v2.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"l\xb2\xd2*)\x12'yandex.cloud.maintenance.v2.Maintenance\x82\xd3\xe4\x93\x029:\x01*\"4/compute/v1/maintenances/{maintenance_id}:rescheduleBb\n" +
+	"\x1byandex.cloud.api.compute.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1;computeb\x06proto3"
 
 var file_yandex_cloud_compute_v1_maintenance_service_proto_goTypes = []any{
 	(*v2.ListMaintenancesRequest)(nil),      // 0: yandex.cloud.maintenance.v2.ListMaintenancesRequest

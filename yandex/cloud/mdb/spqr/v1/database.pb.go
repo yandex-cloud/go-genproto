@@ -146,7 +146,7 @@ var File_yandex_cloud_mdb_spqr_v1_database_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_database_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/spqr/v1/database.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x8a\x01\n" +
+	"'yandex/cloud/mdb/spqr/v1/database.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8a\x01\n" +
 	"\bDatabase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +

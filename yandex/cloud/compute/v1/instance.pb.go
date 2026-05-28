@@ -413,7 +413,7 @@ func (x PlacementPolicy_HostAffinityRule_Operator) Number() protoreflect.EnumNum
 
 // Deprecated: Use PlacementPolicy_HostAffinityRule_Operator.Descriptor instead.
 func (PlacementPolicy_HostAffinityRule_Operator) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13, 0, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12, 0, 0}
 }
 
 type SerialPortSettings_SSHAuthorization int32
@@ -491,28 +491,16 @@ type Instance struct {
 	// Status of the instance.
 	Status Instance_Status `protobuf:"varint,10,opt,name=status,proto3,enum=yandex.cloud.compute.v1.Instance_Status" json:"status,omitempty"`
 	// The metadata `key:value` pairs assigned to this instance. This includes custom metadata and predefined keys.
-	//
 	// For example, you may use the metadata in order to provide your public SSH key to the instance.
 	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
-	//
 	// **The `metadata` field is currently omitted from response for the [yandex.cloud.compute.v1.InstanceService.List] request.**
 	Metadata map[string]string `protobuf:"bytes,11,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Options allow user to configure access to instance's metadata
-	MetadataOptions *MetadataOptions `protobuf:"bytes,23,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
 	// Boot disk that is attached to the instance.
 	BootDisk *AttachedDisk `protobuf:"bytes,12,opt,name=boot_disk,json=bootDisk,proto3" json:"boot_disk,omitempty"`
 	// Array of secondary disks that are attached to the instance.
 	SecondaryDisks []*AttachedDisk `protobuf:"bytes,13,rep,name=secondary_disks,json=secondaryDisks,proto3" json:"secondary_disks,omitempty"`
-	// Array of local disks that are attached to the instance.
-	LocalDisks []*AttachedLocalDisk `protobuf:"bytes,22,rep,name=local_disks,json=localDisks,proto3" json:"local_disks,omitempty"`
-	// Array of filesystems that are attached to the instance.
-	Filesystems []*AttachedFilesystem `protobuf:"bytes,21,rep,name=filesystems,proto3" json:"filesystems,omitempty"`
 	// Array of network interfaces that are attached to the instance.
 	NetworkInterfaces []*NetworkInterface `protobuf:"bytes,14,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	// Serial port settings
-	SerialPortSettings *SerialPortSettings `protobuf:"bytes,24,opt,name=serial_port_settings,json=serialPortSettings,proto3" json:"serial_port_settings,omitempty"`
-	// GPU settings
-	GpuSettings *GpuSettings `protobuf:"bytes,26,opt,name=gpu_settings,json=gpuSettings,proto3" json:"gpu_settings,omitempty"`
 	// A domain name of the instance. FQDN is defined by the server
 	// in the format `<hostname>.<region_id>.internal` when the instance is created.
 	// If the hostname were not specified when the instance was created, FQDN would be `<id>.auto.internal`.
@@ -530,18 +518,28 @@ type Instance struct {
 	HostGroupId string `protobuf:"bytes,27,opt,name=host_group_id,json=hostGroupId,proto3" json:"host_group_id,omitempty"`
 	// ID of the dedicated host that the instance belongs to.
 	HostId string `protobuf:"bytes,28,opt,name=host_id,json=hostId,proto3" json:"host_id,omitempty"`
+	// Array of filesystems that are attached to the instance.
+	Filesystems []*AttachedFilesystem `protobuf:"bytes,21,rep,name=filesystems,proto3" json:"filesystems,omitempty"`
+	// Array of local disks that are attached to the instance.
+	LocalDisks []*AttachedLocalDisk `protobuf:"bytes,22,rep,name=local_disks,json=localDisks,proto3" json:"local_disks,omitempty"`
+	// GPU settings
+	GpuSettings *GpuSettings `protobuf:"bytes,26,opt,name=gpu_settings,json=gpuSettings,proto3" json:"gpu_settings,omitempty"`
 	// Behaviour on maintenance events
 	MaintenancePolicy MaintenancePolicy `protobuf:"varint,29,opt,name=maintenance_policy,json=maintenancePolicy,proto3,enum=yandex.cloud.compute.v1.MaintenancePolicy" json:"maintenance_policy,omitempty"`
 	// Time between notification via metadata service and maintenance
 	MaintenanceGracePeriod *durationpb.Duration `protobuf:"bytes,30,opt,name=maintenance_grace_period,json=maintenanceGracePeriod,proto3" json:"maintenance_grace_period,omitempty"`
+	// Options allow user to configure access to instance's metadata
+	MetadataOptions *MetadataOptions `protobuf:"bytes,23,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
+	// Serial port settings
+	SerialPortSettings *SerialPortSettings `protobuf:"bytes,24,opt,name=serial_port_settings,json=serialPortSettings,proto3" json:"serial_port_settings,omitempty"`
 	// This feature set is inherited from the image/disk used as a boot one at the creation of the instance.
 	HardwareGeneration *HardwareGeneration `protobuf:"bytes,31,opt,name=hardware_generation,json=hardwareGeneration,proto3" json:"hardware_generation,omitempty"`
+	// Instance application settings.
+	Application *Application `protobuf:"bytes,33,opt,name=application,proto3" json:"application,omitempty"`
 	// ID of the reserved instance pool that the instance belongs to.
 	ReservedInstancePoolId string `protobuf:"bytes,32,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	// Instance application settings.
-	Application   *Application `protobuf:"bytes,33,opt,name=application,proto3" json:"application,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Instance) Reset() {
@@ -651,13 +649,6 @@ func (x *Instance) GetMetadata() map[string]string {
 	return nil
 }
 
-func (x *Instance) GetMetadataOptions() *MetadataOptions {
-	if x != nil {
-		return x.MetadataOptions
-	}
-	return nil
-}
-
 func (x *Instance) GetBootDisk() *AttachedDisk {
 	if x != nil {
 		return x.BootDisk
@@ -672,37 +663,9 @@ func (x *Instance) GetSecondaryDisks() []*AttachedDisk {
 	return nil
 }
 
-func (x *Instance) GetLocalDisks() []*AttachedLocalDisk {
-	if x != nil {
-		return x.LocalDisks
-	}
-	return nil
-}
-
-func (x *Instance) GetFilesystems() []*AttachedFilesystem {
-	if x != nil {
-		return x.Filesystems
-	}
-	return nil
-}
-
 func (x *Instance) GetNetworkInterfaces() []*NetworkInterface {
 	if x != nil {
 		return x.NetworkInterfaces
-	}
-	return nil
-}
-
-func (x *Instance) GetSerialPortSettings() *SerialPortSettings {
-	if x != nil {
-		return x.SerialPortSettings
-	}
-	return nil
-}
-
-func (x *Instance) GetGpuSettings() *GpuSettings {
-	if x != nil {
-		return x.GpuSettings
 	}
 	return nil
 }
@@ -756,6 +719,27 @@ func (x *Instance) GetHostId() string {
 	return ""
 }
 
+func (x *Instance) GetFilesystems() []*AttachedFilesystem {
+	if x != nil {
+		return x.Filesystems
+	}
+	return nil
+}
+
+func (x *Instance) GetLocalDisks() []*AttachedLocalDisk {
+	if x != nil {
+		return x.LocalDisks
+	}
+	return nil
+}
+
+func (x *Instance) GetGpuSettings() *GpuSettings {
+	if x != nil {
+		return x.GpuSettings
+	}
+	return nil
+}
+
 func (x *Instance) GetMaintenancePolicy() MaintenancePolicy {
 	if x != nil {
 		return x.MaintenancePolicy
@@ -770,9 +754,30 @@ func (x *Instance) GetMaintenanceGracePeriod() *durationpb.Duration {
 	return nil
 }
 
+func (x *Instance) GetMetadataOptions() *MetadataOptions {
+	if x != nil {
+		return x.MetadataOptions
+	}
+	return nil
+}
+
+func (x *Instance) GetSerialPortSettings() *SerialPortSettings {
+	if x != nil {
+		return x.SerialPortSettings
+	}
+	return nil
+}
+
 func (x *Instance) GetHardwareGeneration() *HardwareGeneration {
 	if x != nil {
 		return x.HardwareGeneration
+	}
+	return nil
+}
+
+func (x *Instance) GetApplication() *Application {
+	if x != nil {
+		return x.Application
 	}
 	return nil
 }
@@ -782,13 +787,6 @@ func (x *Instance) GetReservedInstancePoolId() string {
 		return x.ReservedInstancePoolId
 	}
 	return ""
-}
-
-func (x *Instance) GetApplication() *Application {
-	if x != nil {
-		return x.Application
-	}
-	return nil
 }
 
 type Resources struct {
@@ -870,7 +868,6 @@ type AttachedDisk struct {
 	Mode AttachedDisk_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedDisk_Mode" json:"mode,omitempty"`
 	// Serial number that is reflected into the /dev/disk/by-id/ tree
 	// of a Linux operating system running within the instance.
-	//
 	// This value can be used to reference the device for mounting, resizing, and so on, from within the instance.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// Specifies whether the disk will be auto-deleted when the instance is deleted.
@@ -945,7 +942,6 @@ type AttachedLocalDisk struct {
 	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
 	// Serial number that is reflected into the /dev/disk/by-id/ tree
 	// of a Linux operating system running within the instance.
-	//
 	// This value can be used to reference the device for mounting, resizing, and so on, from within the instance.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// Types that are valid to be assigned to Type:
@@ -1077,7 +1073,6 @@ type AttachedFilesystem struct {
 	// Access mode to the filesystem.
 	Mode AttachedFilesystem_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedFilesystem_Mode" json:"mode,omitempty"`
 	// Name of the device representing the filesystem on the instance.
-	//
 	// The name should be used for referencing the filesystem from within the instance
 	// when it's being mounted, resized etc.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
@@ -1517,66 +1512,21 @@ func (x *NetworkSettings) GetType() NetworkSettings_Type {
 	return NetworkSettings_TYPE_UNSPECIFIED
 }
 
-type GpuSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Attach instance to specified GPU cluster.
-	GpuClusterId  string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GpuSettings) Reset() {
-	*x = GpuSettings{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GpuSettings) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GpuSettings) ProtoMessage() {}
-
-func (x *GpuSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GpuSettings.ProtoReflect.Descriptor instead.
-func (*GpuSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *GpuSettings) GetGpuClusterId() string {
-	if x != nil {
-		return x.GpuClusterId
-	}
-	return ""
-}
-
 type PlacementPolicy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Placement group ID.
 	PlacementGroupId string `protobuf:"bytes,1,opt,name=placement_group_id,json=placementGroupId,proto3" json:"placement_group_id,omitempty"`
-	// List of affinity rules. Scheduler will attempt to allocate instances according to order of rules.
-	HostAffinityRules []*PlacementPolicy_HostAffinityRule `protobuf:"bytes,2,rep,name=host_affinity_rules,json=hostAffinityRules,proto3" json:"host_affinity_rules,omitempty"`
 	// Placement group partition
 	PlacementGroupPartition int64 `protobuf:"varint,3,opt,name=placement_group_partition,json=placementGroupPartition,proto3" json:"placement_group_partition,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// List of affinity rules. Scheduler will attempt to allocate instances according to order of rules.
+	HostAffinityRules []*PlacementPolicy_HostAffinityRule `protobuf:"bytes,2,rep,name=host_affinity_rules,json=hostAffinityRules,proto3" json:"host_affinity_rules,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *PlacementPolicy) Reset() {
 	*x = PlacementPolicy{}
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1588,7 +1538,7 @@ func (x *PlacementPolicy) String() string {
 func (*PlacementPolicy) ProtoMessage() {}
 
 func (x *PlacementPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1601,7 +1551,7 @@ func (x *PlacementPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementPolicy.ProtoReflect.Descriptor instead.
 func (*PlacementPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *PlacementPolicy) GetPlacementGroupId() string {
@@ -1611,6 +1561,13 @@ func (x *PlacementPolicy) GetPlacementGroupId() string {
 	return ""
 }
 
+func (x *PlacementPolicy) GetPlacementGroupPartition() int64 {
+	if x != nil {
+		return x.PlacementGroupPartition
+	}
+	return 0
+}
+
 func (x *PlacementPolicy) GetHostAffinityRules() []*PlacementPolicy_HostAffinityRule {
 	if x != nil {
 		return x.HostAffinityRules
@@ -1618,11 +1575,49 @@ func (x *PlacementPolicy) GetHostAffinityRules() []*PlacementPolicy_HostAffinity
 	return nil
 }
 
-func (x *PlacementPolicy) GetPlacementGroupPartition() int64 {
+type GpuSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Attach instance to specified GPU cluster.
+	GpuClusterId  string `protobuf:"bytes,1,opt,name=gpu_cluster_id,json=gpuClusterId,proto3" json:"gpu_cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GpuSettings) Reset() {
+	*x = GpuSettings{}
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GpuSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GpuSettings) ProtoMessage() {}
+
+func (x *GpuSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_proto_msgTypes[13]
 	if x != nil {
-		return x.PlacementGroupPartition
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return 0
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GpuSettings.ProtoReflect.Descriptor instead.
+func (*GpuSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GpuSettings) GetGpuClusterId() string {
+	if x != nil {
+		return x.GpuClusterId
+	}
+	return ""
 }
 
 type MetadataOptions struct {
@@ -1800,7 +1795,7 @@ func (x *PlacementPolicy_HostAffinityRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlacementPolicy_HostAffinityRule.ProtoReflect.Descriptor instead.
 func (*PlacementPolicy_HostAffinityRule) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{13, 0}
+	return file_yandex_cloud_compute_v1_instance_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *PlacementPolicy_HostAffinityRule) GetKey() string {
@@ -1828,7 +1823,7 @@ var File_yandex_cloud_compute_v1_instance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!yandex/cloud/compute/v1/kek.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xc6\x11\n" +
+	"&yandex/cloud/compute/v1/instance.proto\x12\x17yandex.cloud.compute.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a!yandex/cloud/compute/v1/kek.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\"\xc6\x11\n" +
 	"\bInstance\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -1843,28 +1838,28 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\tresources\x18\t \x01(\v2\".yandex.cloud.compute.v1.ResourcesR\tresources\x12@\n" +
 	"\x06status\x18\n" +
 	" \x01(\x0e2(.yandex.cloud.compute.v1.Instance.StatusR\x06status\x12K\n" +
-	"\bmetadata\x18\v \x03(\v2/.yandex.cloud.compute.v1.Instance.MetadataEntryR\bmetadata\x12S\n" +
-	"\x10metadata_options\x18\x17 \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12B\n" +
+	"\bmetadata\x18\v \x03(\v2/.yandex.cloud.compute.v1.Instance.MetadataEntryR\bmetadata\x12B\n" +
 	"\tboot_disk\x18\f \x01(\v2%.yandex.cloud.compute.v1.AttachedDiskR\bbootDisk\x12N\n" +
-	"\x0fsecondary_disks\x18\r \x03(\v2%.yandex.cloud.compute.v1.AttachedDiskR\x0esecondaryDisks\x12K\n" +
-	"\vlocal_disks\x18\x16 \x03(\v2*.yandex.cloud.compute.v1.AttachedLocalDiskR\n" +
-	"localDisks\x12M\n" +
-	"\vfilesystems\x18\x15 \x03(\v2+.yandex.cloud.compute.v1.AttachedFilesystemR\vfilesystems\x12X\n" +
-	"\x12network_interfaces\x18\x0e \x03(\v2).yandex.cloud.compute.v1.NetworkInterfaceR\x11networkInterfaces\x12]\n" +
-	"\x14serial_port_settings\x18\x18 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12G\n" +
-	"\fgpu_settings\x18\x1a \x01(\v2$.yandex.cloud.compute.v1.GpuSettingsR\vgpuSettings\x12\x12\n" +
+	"\x0fsecondary_disks\x18\r \x03(\v2%.yandex.cloud.compute.v1.AttachedDiskR\x0esecondaryDisks\x12X\n" +
+	"\x12network_interfaces\x18\x0e \x03(\v2).yandex.cloud.compute.v1.NetworkInterfaceR\x11networkInterfaces\x12\x12\n" +
 	"\x04fqdn\x18\x10 \x01(\tR\x04fqdn\x12V\n" +
 	"\x11scheduling_policy\x18\x11 \x01(\v2).yandex.cloud.compute.v1.SchedulingPolicyR\x10schedulingPolicy\x12,\n" +
 	"\x12service_account_id\x18\x12 \x01(\tR\x10serviceAccountId\x12S\n" +
 	"\x10network_settings\x18\x13 \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12S\n" +
 	"\x10placement_policy\x18\x14 \x01(\v2(.yandex.cloud.compute.v1.PlacementPolicyR\x0fplacementPolicy\x12\"\n" +
 	"\rhost_group_id\x18\x1b \x01(\tR\vhostGroupId\x12\x17\n" +
-	"\ahost_id\x18\x1c \x01(\tR\x06hostId\x12Y\n" +
+	"\ahost_id\x18\x1c \x01(\tR\x06hostId\x12M\n" +
+	"\vfilesystems\x18\x15 \x03(\v2+.yandex.cloud.compute.v1.AttachedFilesystemR\vfilesystems\x12K\n" +
+	"\vlocal_disks\x18\x16 \x03(\v2*.yandex.cloud.compute.v1.AttachedLocalDiskR\n" +
+	"localDisks\x12G\n" +
+	"\fgpu_settings\x18\x1a \x01(\v2$.yandex.cloud.compute.v1.GpuSettingsR\vgpuSettings\x12Y\n" +
 	"\x12maintenance_policy\x18\x1d \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12S\n" +
-	"\x18maintenance_grace_period\x18\x1e \x01(\v2\x19.google.protobuf.DurationR\x16maintenanceGracePeriod\x12\\\n" +
-	"\x13hardware_generation\x18\x1f \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x129\n" +
-	"\x19reserved_instance_pool_id\x18  \x01(\tR\x16reservedInstancePoolId\x12F\n" +
-	"\vapplication\x18! \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
+	"\x18maintenance_grace_period\x18\x1e \x01(\v2\x19.google.protobuf.DurationR\x16maintenanceGracePeriod\x12S\n" +
+	"\x10metadata_options\x18\x17 \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12]\n" +
+	"\x14serial_port_settings\x18\x18 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12\\\n" +
+	"\x13hardware_generation\x18\x1f \x01(\v2+.yandex.cloud.compute.v1.HardwareGenerationR\x12hardwareGeneration\x12F\n" +
+	"\vapplication\x18! \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x129\n" +
+	"\x19reserved_instance_pool_id\x18  \x01(\tR\x16reservedInstancePoolId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
@@ -1952,13 +1947,11 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bSTANDARD\x10\x01\x12\x18\n" +
 	"\x14SOFTWARE_ACCELERATED\x10\x02\x12\x18\n" +
-	"\x14HARDWARE_ACCELERATED\x10\x03\"3\n" +
-	"\vGpuSettings\x12$\n" +
-	"\x0egpu_cluster_id\x18\x01 \x01(\tR\fgpuClusterId\"\xb3\x03\n" +
+	"\x14HARDWARE_ACCELERATED\x10\x03\"\xb3\x03\n" +
 	"\x0fPlacementPolicy\x12,\n" +
-	"\x12placement_group_id\x18\x01 \x01(\tR\x10placementGroupId\x12i\n" +
-	"\x13host_affinity_rules\x18\x02 \x03(\v29.yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRuleR\x11hostAffinityRules\x12:\n" +
-	"\x19placement_group_partition\x18\x03 \x01(\x03R\x17placementGroupPartition\x1a\xca\x01\n" +
+	"\x12placement_group_id\x18\x01 \x01(\tR\x10placementGroupId\x12:\n" +
+	"\x19placement_group_partition\x18\x03 \x01(\x03R\x17placementGroupPartition\x12i\n" +
+	"\x13host_affinity_rules\x18\x02 \x03(\v29.yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRuleR\x11hostAffinityRules\x1a\xca\x01\n" +
 	"\x10HostAffinityRule\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12R\n" +
 	"\x02op\x18\x02 \x01(\x0e2B.yandex.cloud.compute.v1.PlacementPolicy.HostAffinityRule.OperatorR\x02op\x12\x16\n" +
@@ -1967,7 +1960,9 @@ const file_yandex_cloud_compute_v1_instance_proto_rawDesc = "" +
 	"\x14OPERATOR_UNSPECIFIED\x10\x00\x12\x06\n" +
 	"\x02IN\x10\x01\x12\n" +
 	"\n" +
-	"\x06NOT_IN\x10\x02\"\x91\x04\n" +
+	"\x06NOT_IN\x10\x02\"3\n" +
+	"\vGpuSettings\x12$\n" +
+	"\x0egpu_cluster_id\x18\x01 \x01(\tR\fgpuClusterId\"\x91\x04\n" +
 	"\x0fMetadataOptions\x12S\n" +
 	"\x11gce_http_endpoint\x18\x01 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x0fgceHttpEndpoint\x12X\n" +
 	"\x14aws_v1_http_endpoint\x18\x02 \x01(\x0e2'.yandex.cloud.compute.v1.MetadataOptionR\x11awsV1HttpEndpoint\x12M\n" +
@@ -2026,8 +2021,8 @@ var file_yandex_cloud_compute_v1_instance_proto_goTypes = []any{
 	(*DnsRecord)(nil),                              // 17: yandex.cloud.compute.v1.DnsRecord
 	(*SchedulingPolicy)(nil),                       // 18: yandex.cloud.compute.v1.SchedulingPolicy
 	(*NetworkSettings)(nil),                        // 19: yandex.cloud.compute.v1.NetworkSettings
-	(*GpuSettings)(nil),                            // 20: yandex.cloud.compute.v1.GpuSettings
-	(*PlacementPolicy)(nil),                        // 21: yandex.cloud.compute.v1.PlacementPolicy
+	(*PlacementPolicy)(nil),                        // 20: yandex.cloud.compute.v1.PlacementPolicy
+	(*GpuSettings)(nil),                            // 21: yandex.cloud.compute.v1.GpuSettings
 	(*MetadataOptions)(nil),                        // 22: yandex.cloud.compute.v1.MetadataOptions
 	(*SerialPortSettings)(nil),                     // 23: yandex.cloud.compute.v1.SerialPortSettings
 	nil,                                            // 24: yandex.cloud.compute.v1.Instance.LabelsEntry
@@ -2046,19 +2041,19 @@ var file_yandex_cloud_compute_v1_instance_proto_depIdxs = []int32{
 	9,  // 2: yandex.cloud.compute.v1.Instance.resources:type_name -> yandex.cloud.compute.v1.Resources
 	2,  // 3: yandex.cloud.compute.v1.Instance.status:type_name -> yandex.cloud.compute.v1.Instance.Status
 	25, // 4: yandex.cloud.compute.v1.Instance.metadata:type_name -> yandex.cloud.compute.v1.Instance.MetadataEntry
-	22, // 5: yandex.cloud.compute.v1.Instance.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
-	10, // 6: yandex.cloud.compute.v1.Instance.boot_disk:type_name -> yandex.cloud.compute.v1.AttachedDisk
-	10, // 7: yandex.cloud.compute.v1.Instance.secondary_disks:type_name -> yandex.cloud.compute.v1.AttachedDisk
-	11, // 8: yandex.cloud.compute.v1.Instance.local_disks:type_name -> yandex.cloud.compute.v1.AttachedLocalDisk
-	13, // 9: yandex.cloud.compute.v1.Instance.filesystems:type_name -> yandex.cloud.compute.v1.AttachedFilesystem
-	14, // 10: yandex.cloud.compute.v1.Instance.network_interfaces:type_name -> yandex.cloud.compute.v1.NetworkInterface
-	23, // 11: yandex.cloud.compute.v1.Instance.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
-	20, // 12: yandex.cloud.compute.v1.Instance.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	18, // 13: yandex.cloud.compute.v1.Instance.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
-	19, // 14: yandex.cloud.compute.v1.Instance.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	21, // 15: yandex.cloud.compute.v1.Instance.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
-	28, // 16: yandex.cloud.compute.v1.Instance.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
-	29, // 17: yandex.cloud.compute.v1.Instance.maintenance_grace_period:type_name -> google.protobuf.Duration
+	10, // 5: yandex.cloud.compute.v1.Instance.boot_disk:type_name -> yandex.cloud.compute.v1.AttachedDisk
+	10, // 6: yandex.cloud.compute.v1.Instance.secondary_disks:type_name -> yandex.cloud.compute.v1.AttachedDisk
+	14, // 7: yandex.cloud.compute.v1.Instance.network_interfaces:type_name -> yandex.cloud.compute.v1.NetworkInterface
+	18, // 8: yandex.cloud.compute.v1.Instance.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
+	19, // 9: yandex.cloud.compute.v1.Instance.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	20, // 10: yandex.cloud.compute.v1.Instance.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
+	13, // 11: yandex.cloud.compute.v1.Instance.filesystems:type_name -> yandex.cloud.compute.v1.AttachedFilesystem
+	11, // 12: yandex.cloud.compute.v1.Instance.local_disks:type_name -> yandex.cloud.compute.v1.AttachedLocalDisk
+	21, // 13: yandex.cloud.compute.v1.Instance.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	28, // 14: yandex.cloud.compute.v1.Instance.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
+	29, // 15: yandex.cloud.compute.v1.Instance.maintenance_grace_period:type_name -> google.protobuf.Duration
+	22, // 16: yandex.cloud.compute.v1.Instance.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
+	23, // 17: yandex.cloud.compute.v1.Instance.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
 	30, // 18: yandex.cloud.compute.v1.Instance.hardware_generation:type_name -> yandex.cloud.compute.v1.HardwareGeneration
 	31, // 19: yandex.cloud.compute.v1.Instance.application:type_name -> yandex.cloud.compute.v1.Application
 	3,  // 20: yandex.cloud.compute.v1.AttachedDisk.mode:type_name -> yandex.cloud.compute.v1.AttachedDisk.Mode
@@ -2093,9 +2088,9 @@ func file_yandex_cloud_compute_v1_instance_proto_init() {
 	if File_yandex_cloud_compute_v1_instance_proto != nil {
 		return
 	}
-	file_yandex_cloud_compute_v1_kek_proto_init()
 	file_yandex_cloud_compute_v1_application_proto_init()
 	file_yandex_cloud_compute_v1_hardware_generation_proto_init()
+	file_yandex_cloud_compute_v1_kek_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()
 	file_yandex_cloud_compute_v1_instance_proto_msgTypes[3].OneofWrappers = []any{
 		(*AttachedLocalDisk_PhysicalLocalDisk)(nil),

@@ -79,10 +79,9 @@ func (InstanceGroupView) EnumDescriptor() ([]byte, []int) {
 type ResumeInstanceGroupProcessesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to resume processes in.
-	//
 	// The instance group must have a `PAUSED` status ([InstanceGroup.status]).
-	//
 	// To get the instance group ID, make a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -173,10 +172,9 @@ func (x *ResumeInstanceGroupProcessMetadata) GetInstanceGroupId() string {
 type PauseInstanceGroupProcessesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to pause processes in.
-	//
 	// The instance group must have an `ACTIVE` status ([InstanceGroup.status]).
-	//
 	// To get the instance group ID, make a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -268,6 +266,8 @@ type GetInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the InstanceGroup resource to return.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// Defines which information about the Instance template should be returned in the server response.
 	View          InstanceGroupView `protobuf:"varint,2,opt,name=view,proto3,enum=yandex.cloud.compute.v1.instancegroup.InstanceGroupView" json:"view,omitempty"`
@@ -323,24 +323,35 @@ type CreateInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an instance group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the instance group.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the instance group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Instance template that the instance group belongs to.
+	// This field is required.
 	InstanceTemplate *InstanceTemplate `protobuf:"bytes,6,opt,name=instance_template,json=instanceTemplate,proto3" json:"instance_template,omitempty"`
 	// [Scaling policy](/docs/compute/concepts/instance-groups/scale) of the instance group.
+	// This field is required.
 	ScalePolicy *ScalePolicy `protobuf:"bytes,7,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Deployment policy of the instance group.
+	// This field is required.
 	DeployPolicy *DeployPolicy `protobuf:"bytes,8,opt,name=deploy_policy,json=deployPolicy,proto3" json:"deploy_policy,omitempty"`
 	// Allocation policy of the instance group by zones and regions.
+	// This field is required.
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,9,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
 	// Settings for balancing load between instances via [Network Load Balancer](/docs/network-load-balancer/concepts)
 	// (OSI model layer 3).
-	//
 	// If specified, a Network Load Balancer target group containing all instances from the instance group will be created
 	// and attributed to the instance group.
 	LoadBalancerSpec *LoadBalancerSpec `protobuf:"bytes,10,opt,name=load_balancer_spec,json=loadBalancerSpec,proto3" json:"load_balancer_spec,omitempty"`
@@ -352,14 +363,11 @@ type CreateInstanceGroupRequest struct {
 	ServiceAccountId string      `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	Variables        []*Variable `protobuf:"bytes,13,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Flag prohibiting deletion of the instance group.
-	//
 	// Allowed values:</br>- `false`: The instance group can be deleted.</br>- `true`: The instance group cannot be deleted.
-	//
 	// The default is `false`.
 	DeletionProtection bool `protobuf:"varint,14,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Settings for balancing load between instances via [Application Load Balancer](/docs/application-load-balancer/concepts)
 	// (OSI model layer 7).
-	//
 	// If specified, an Application Load Balancer target group containing all instances from the instance group will be created
 	// and attributed to the instance group.
 	ApplicationLoadBalancerSpec *ApplicationLoadBalancerSpec `protobuf:"bytes,15,opt,name=application_load_balancer_spec,json=applicationLoadBalancerSpec,proto3" json:"application_load_balancer_spec,omitempty"`
@@ -508,8 +516,11 @@ type CreateInstanceGroupFromYamlRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an instance group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// [InstanceGroupService.Create] request in YAML format.
+	// The length must be less than or equal to 1048576.
+	// This field is required.
 	InstanceGroupYaml string `protobuf:"bytes,2,opt,name=instance_group_yaml,json=instanceGroupYaml,proto3" json:"instance_group_yaml,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -562,6 +573,7 @@ func (x *CreateInstanceGroupFromYamlRequest) GetInstanceGroupYaml() string {
 type CreateInstanceGroupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group that is being created.
+	// The length must be less than or equal to 50.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -608,24 +620,36 @@ type UpdateInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to update.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// Field mask that specifies which fields of the InstanceGroup resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the instance group.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the instance group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// The existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Instance template that the instance group belongs to.
+	// This field is required.
 	InstanceTemplate *InstanceTemplate `protobuf:"bytes,6,opt,name=instance_template,json=instanceTemplate,proto3" json:"instance_template,omitempty"`
 	// [Scaling policy](/docs/compute/concepts/instance-groups/scale) of the instance group.
+	// This field is required.
 	ScalePolicy *ScalePolicy `protobuf:"bytes,7,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Deployment policy of the instance group.
+	// This field is required.
 	DeployPolicy *DeployPolicy `protobuf:"bytes,8,opt,name=deploy_policy,json=deployPolicy,proto3" json:"deploy_policy,omitempty"`
 	// Allocation policy of the instance group by zones and regions.
+	// This field is required.
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,9,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
 	// Health checking specification. For more information, see [Health check](/docs/network-load-balancer/concepts/health-check).
 	HealthChecksSpec *HealthChecksSpec `protobuf:"bytes,11,opt,name=health_checks_spec,json=healthChecksSpec,proto3" json:"health_checks_spec,omitempty"`
@@ -636,12 +660,12 @@ type UpdateInstanceGroupRequest struct {
 	// Settings for balancing load between instances via [Network Load Balancer](/docs/network-load-balancer/concepts)
 	// (OSI model layer 3).
 	LoadBalancerSpec *LoadBalancerSpec `protobuf:"bytes,14,opt,name=load_balancer_spec,json=loadBalancerSpec,proto3" json:"load_balancer_spec,omitempty"`
-	Variables        []*Variable       `protobuf:"bytes,15,rep,name=variables,proto3" json:"variables,omitempty"`
-	// Flag that inhibits deletion of the instance group
-	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// Settings for balancing load between instances via [Application Load Balancer](/docs/application-load-balancer/concepts)
 	// (OSI model layer 7).
 	ApplicationLoadBalancerSpec *ApplicationLoadBalancerSpec `protobuf:"bytes,17,opt,name=application_load_balancer_spec,json=applicationLoadBalancerSpec,proto3" json:"application_load_balancer_spec,omitempty"`
+	Variables                   []*Variable                  `protobuf:"bytes,15,rep,name=variables,proto3" json:"variables,omitempty"`
+	// Flag that inhibits deletion of the instance group
+	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// AutoHealingPolicy policy of the instance group.
 	AutoHealingPolicy *AutoHealingPolicy `protobuf:"bytes,18,opt,name=auto_healing_policy,json=autoHealingPolicy,proto3" json:"auto_healing_policy,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -762,6 +786,13 @@ func (x *UpdateInstanceGroupRequest) GetLoadBalancerSpec() *LoadBalancerSpec {
 	return nil
 }
 
+func (x *UpdateInstanceGroupRequest) GetApplicationLoadBalancerSpec() *ApplicationLoadBalancerSpec {
+	if x != nil {
+		return x.ApplicationLoadBalancerSpec
+	}
+	return nil
+}
+
 func (x *UpdateInstanceGroupRequest) GetVariables() []*Variable {
 	if x != nil {
 		return x.Variables
@@ -776,13 +807,6 @@ func (x *UpdateInstanceGroupRequest) GetDeletionProtection() bool {
 	return false
 }
 
-func (x *UpdateInstanceGroupRequest) GetApplicationLoadBalancerSpec() *ApplicationLoadBalancerSpec {
-	if x != nil {
-		return x.ApplicationLoadBalancerSpec
-	}
-	return nil
-}
-
 func (x *UpdateInstanceGroupRequest) GetAutoHealingPolicy() *AutoHealingPolicy {
 	if x != nil {
 		return x.AutoHealingPolicy
@@ -794,8 +818,12 @@ type UpdateInstanceGroupFromYamlRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to update.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// [InstanceGroupService.Update] request in YAML format.
+	// The length must be less than or equal to 1048576.
+	// This field is required.
 	InstanceGroupYaml string `protobuf:"bytes,2,opt,name=instance_group_yaml,json=instanceGroupYaml,proto3" json:"instance_group_yaml,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -895,6 +923,8 @@ type StartInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to start.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -986,6 +1016,8 @@ type StopInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to stop.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1077,6 +1109,8 @@ type RollingRestartRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to restart instances in.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// IDs of managed instances in the group to restart
 	// To get instance IDs, use a [InstanceGroupService.ListInstances] request.
@@ -1178,6 +1212,8 @@ type RollingRecreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to recreate instances in.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// IDs of managed instances in the group to recreate
 	// To get instance IDs, use a [InstanceGroupService.ListInstances] request.
@@ -1279,6 +1315,8 @@ type DeleteInstanceGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group to delete.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1367,28 +1405,37 @@ func (x *DeleteInstanceGroupMetadata) GetInstanceGroupId() string {
 	return ""
 }
 
-type DeleteInstancesMetadata struct {
+type DisableZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group that the instances are being deleted from.
+	// ID of the instance group to disable zones.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Zone IDs to disable.
+	// The number of elements must be greater than 0.
+	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	// The interval during which the zones will be disabled. Format 1m-72h.
+	// If not set then zone will be disabled until it is removed through a separate call.
+	// The value must satisfy: 1m-72h.
+	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteInstancesMetadata) Reset() {
-	*x = DeleteInstancesMetadata{}
+func (x *DisableZonesRequest) Reset() {
+	*x = DisableZonesRequest{}
 	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteInstancesMetadata) String() string {
+func (x *DisableZonesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteInstancesMetadata) ProtoMessage() {}
+func (*DisableZonesRequest) ProtoMessage() {}
 
-func (x *DeleteInstancesMetadata) ProtoReflect() protoreflect.Message {
+func (x *DisableZonesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1400,40 +1447,54 @@ func (x *DeleteInstancesMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteInstancesMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteInstancesMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use DisableZonesRequest.ProtoReflect.Descriptor instead.
+func (*DisableZonesRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *DeleteInstancesMetadata) GetInstanceGroupId() string {
+func (x *DisableZonesRequest) GetInstanceGroupId() string {
 	if x != nil {
 		return x.InstanceGroupId
 	}
 	return ""
 }
 
-type StopInstancesMetadata struct {
+func (x *DisableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+func (x *DisableZonesRequest) GetDuration() *durationpb.Duration {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
+type DisableZonesMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group that the instances are being stopped from.
+	// ID of the instance group on which the zones were disabled.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *StopInstancesMetadata) Reset() {
-	*x = StopInstancesMetadata{}
+func (x *DisableZonesMetadata) Reset() {
+	*x = DisableZonesMetadata{}
 	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopInstancesMetadata) String() string {
+func (x *DisableZonesMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopInstancesMetadata) ProtoMessage() {}
+func (*DisableZonesMetadata) ProtoMessage() {}
 
-func (x *StopInstancesMetadata) ProtoReflect() protoreflect.Message {
+func (x *DisableZonesMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1445,12 +1506,114 @@ func (x *StopInstancesMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopInstancesMetadata.ProtoReflect.Descriptor instead.
-func (*StopInstancesMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use DisableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*DisableZonesMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *StopInstancesMetadata) GetInstanceGroupId() string {
+func (x *DisableZonesMetadata) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+type EnableZonesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group to enable zones.
+	// The length must be less than or equal to 50.
+	// This field is required.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	// Zone IDs to enable.
+	// The number of elements must be greater than 0.
+	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableZonesRequest) Reset() {
+	*x = EnableZonesRequest{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesRequest) ProtoMessage() {}
+
+func (x *EnableZonesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesRequest.ProtoReflect.Descriptor instead.
+func (*EnableZonesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *EnableZonesRequest) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+func (x *EnableZonesRequest) GetZoneIds() []string {
+	if x != nil {
+		return x.ZoneIds
+	}
+	return nil
+}
+
+type EnableZonesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group on which the zones were enabled.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *EnableZonesMetadata) Reset() {
+	*x = EnableZonesMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableZonesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableZonesMetadata) ProtoMessage() {}
+
+func (x *EnableZonesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableZonesMetadata.ProtoReflect.Descriptor instead.
+func (*EnableZonesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *EnableZonesMetadata) GetInstanceGroupId() string {
 	if x != nil {
 		return x.InstanceGroupId
 	}
@@ -1461,18 +1624,22 @@ type ListInstanceGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list instance groups in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListInstanceGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListInstanceGroupsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 1000.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// Currently you can use filtering only on the [InstanceGroup.name] field.
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Defines which information about the Instance template should be returned in the server response.
 	View          InstanceGroupView `protobuf:"varint,5,opt,name=view,proto3,enum=yandex.cloud.compute.v1.instancegroup.InstanceGroupView" json:"view,omitempty"`
@@ -1482,7 +1649,7 @@ type ListInstanceGroupsRequest struct {
 
 func (x *ListInstanceGroupsRequest) Reset() {
 	*x = ListInstanceGroupsRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1494,7 +1661,7 @@ func (x *ListInstanceGroupsRequest) String() string {
 func (*ListInstanceGroupsRequest) ProtoMessage() {}
 
 func (x *ListInstanceGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1507,7 +1674,7 @@ func (x *ListInstanceGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInstanceGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListInstanceGroupsRequest) GetFolderId() string {
@@ -1562,7 +1729,7 @@ type ListInstanceGroupsResponse struct {
 
 func (x *ListInstanceGroupsResponse) Reset() {
 	*x = ListInstanceGroupsResponse{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1574,7 +1741,7 @@ func (x *ListInstanceGroupsResponse) String() string {
 func (*ListInstanceGroupsResponse) ProtoMessage() {}
 
 func (x *ListInstanceGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1587,7 +1754,7 @@ func (x *ListInstanceGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInstanceGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListInstanceGroupsResponse) GetInstanceGroups() []*InstanceGroup {
@@ -1608,18 +1775,23 @@ type ListInstanceGroupInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the InstanceGroup resource to list instances for.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListInstanceGroupInstancesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListInstanceGroupInstancesResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 1000.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// Currently you can use filtering only on the [ManagedInstance.name] field.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1627,7 +1799,7 @@ type ListInstanceGroupInstancesRequest struct {
 
 func (x *ListInstanceGroupInstancesRequest) Reset() {
 	*x = ListInstanceGroupInstancesRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1811,7 @@ func (x *ListInstanceGroupInstancesRequest) String() string {
 func (*ListInstanceGroupInstancesRequest) ProtoMessage() {}
 
 func (x *ListInstanceGroupInstancesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1824,7 @@ func (x *ListInstanceGroupInstancesRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ListInstanceGroupInstancesRequest.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupInstancesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ListInstanceGroupInstancesRequest) GetInstanceGroupId() string {
@@ -1700,7 +1872,7 @@ type ListInstanceGroupInstancesResponse struct {
 
 func (x *ListInstanceGroupInstancesResponse) Reset() {
 	*x = ListInstanceGroupInstancesResponse{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1712,7 +1884,7 @@ func (x *ListInstanceGroupInstancesResponse) String() string {
 func (*ListInstanceGroupInstancesResponse) ProtoMessage() {}
 
 func (x *ListInstanceGroupInstancesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1725,7 +1897,7 @@ func (x *ListInstanceGroupInstancesResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListInstanceGroupInstancesResponse.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupInstancesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListInstanceGroupInstancesResponse) GetInstances() []*ManagedInstance {
@@ -1746,9 +1918,13 @@ type DeleteInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group that the instances are being deleted from.
 	// To get the ID of the instance group, use the [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// IDs of the instances to delete. Instances will be deleted along with all dependent resources.
 	// Only IDs from the ManagedInstance.id field are allowed, not ManagedInstance.instance_id.
+	// The length of each element must be less than or equal to 50.
+	// The number of elements must be greater than or equal to 1.
 	ManagedInstanceIds []string `protobuf:"bytes,2,rep,name=managed_instance_ids,json=managedInstanceIds,proto3" json:"managed_instance_ids,omitempty"`
 	// If set to true, the target size of instance group will not be reduced and
 	// a new instance will be created instead of the deleted one. By default, the target size of instance group
@@ -1760,7 +1936,7 @@ type DeleteInstancesRequest struct {
 
 func (x *DeleteInstancesRequest) Reset() {
 	*x = DeleteInstancesRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1772,7 +1948,7 @@ func (x *DeleteInstancesRequest) String() string {
 func (*DeleteInstancesRequest) ProtoMessage() {}
 
 func (x *DeleteInstancesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1785,7 +1961,7 @@ func (x *DeleteInstancesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteInstancesRequest.ProtoReflect.Descriptor instead.
 func (*DeleteInstancesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DeleteInstancesRequest) GetInstanceGroupId() string {
@@ -1813,10 +1989,14 @@ type StopInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance group that the instances are being stopped from.
 	// To get the ID of the instance group, use the [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// IDs of the instances to stop. After stopping, the instance can be updated, started, or deleted
 	// according to scale and deploy policies.
 	// Only IDs from the ManagedInstance.id field are allowed, not ManagedInstance.instance_id.
+	// The length of each element must be less than or equal to 50.
+	// The number of elements must be greater than or equal to 1.
 	ManagedInstanceIds []string `protobuf:"bytes,2,rep,name=managed_instance_ids,json=managedInstanceIds,proto3" json:"managed_instance_ids,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -1824,7 +2004,7 @@ type StopInstancesRequest struct {
 
 func (x *StopInstancesRequest) Reset() {
 	*x = StopInstancesRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1836,7 +2016,7 @@ func (x *StopInstancesRequest) String() string {
 func (*StopInstancesRequest) ProtoMessage() {}
 
 func (x *StopInstancesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1849,7 +2029,7 @@ func (x *StopInstancesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopInstancesRequest.ProtoReflect.Descriptor instead.
 func (*StopInstancesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *StopInstancesRequest) GetInstanceGroupId() string {
@@ -1866,20 +2046,115 @@ func (x *StopInstancesRequest) GetManagedInstanceIds() []string {
 	return nil
 }
 
+type DeleteInstancesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group that the instances are being deleted from.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DeleteInstancesMetadata) Reset() {
+	*x = DeleteInstancesMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteInstancesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteInstancesMetadata) ProtoMessage() {}
+
+func (x *DeleteInstancesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteInstancesMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteInstancesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DeleteInstancesMetadata) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
+type StopInstancesMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance group that the instances are being stopped from.
+	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *StopInstancesMetadata) Reset() {
+	*x = StopInstancesMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StopInstancesMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StopInstancesMetadata) ProtoMessage() {}
+
+func (x *StopInstancesMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StopInstancesMetadata.ProtoReflect.Descriptor instead.
+func (*StopInstancesMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *StopInstancesMetadata) GetInstanceGroupId() string {
+	if x != nil {
+		return x.InstanceGroupId
+	}
+	return ""
+}
+
 type ListInstanceGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the InstanceGroup resource to list operations for.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is more than [page_size], the service returns a [ListInstanceGroupOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be between 0 and 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListInstanceGroupOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 1000.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// Currently you can use filtering only on the [InstanceGroup.name] field.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1887,7 +2162,7 @@ type ListInstanceGroupOperationsRequest struct {
 
 func (x *ListInstanceGroupOperationsRequest) Reset() {
 	*x = ListInstanceGroupOperationsRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1899,7 +2174,7 @@ func (x *ListInstanceGroupOperationsRequest) String() string {
 func (*ListInstanceGroupOperationsRequest) ProtoMessage() {}
 
 func (x *ListInstanceGroupOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1912,7 +2187,7 @@ func (x *ListInstanceGroupOperationsRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListInstanceGroupOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListInstanceGroupOperationsRequest) GetInstanceGroupId() string {
@@ -1958,7 +2233,7 @@ type ListInstanceGroupOperationsResponse struct {
 
 func (x *ListInstanceGroupOperationsResponse) Reset() {
 	*x = ListInstanceGroupOperationsResponse{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1970,7 +2245,7 @@ func (x *ListInstanceGroupOperationsResponse) String() string {
 func (*ListInstanceGroupOperationsResponse) ProtoMessage() {}
 
 func (x *ListInstanceGroupOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1983,7 +2258,7 @@ func (x *ListInstanceGroupOperationsResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListInstanceGroupOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListInstanceGroupOperationsResponse) GetOperations() []*operation.Operation {
@@ -2004,18 +2279,22 @@ type ListInstanceGroupLogRecordsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the InstanceGroup resource to list logs for.
 	// To get the instance group ID, use a [InstanceGroupService.List] request.
+	// This field is required.
 	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListInstanceGroupLogRecordsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be between 0 and 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListInstanceGroupLogRecordsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 1000.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// Currently you can use filtering only on the [InstanceGroup.name] field.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2023,7 +2302,7 @@ type ListInstanceGroupLogRecordsRequest struct {
 
 func (x *ListInstanceGroupLogRecordsRequest) Reset() {
 	*x = ListInstanceGroupLogRecordsRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2035,7 +2314,7 @@ func (x *ListInstanceGroupLogRecordsRequest) String() string {
 func (*ListInstanceGroupLogRecordsRequest) ProtoMessage() {}
 
 func (x *ListInstanceGroupLogRecordsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2048,7 +2327,7 @@ func (x *ListInstanceGroupLogRecordsRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ListInstanceGroupLogRecordsRequest.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupLogRecordsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListInstanceGroupLogRecordsRequest) GetInstanceGroupId() string {
@@ -2096,7 +2375,7 @@ type ListInstanceGroupLogRecordsResponse struct {
 
 func (x *ListInstanceGroupLogRecordsResponse) Reset() {
 	*x = ListInstanceGroupLogRecordsResponse{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2108,7 +2387,7 @@ func (x *ListInstanceGroupLogRecordsResponse) String() string {
 func (*ListInstanceGroupLogRecordsResponse) ProtoMessage() {}
 
 func (x *ListInstanceGroupLogRecordsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2121,7 +2400,7 @@ func (x *ListInstanceGroupLogRecordsResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListInstanceGroupLogRecordsResponse.ProtoReflect.Descriptor instead.
 func (*ListInstanceGroupLogRecordsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListInstanceGroupLogRecordsResponse) GetLogRecords() []*LogRecord {
@@ -2138,379 +2417,159 @@ func (x *ListInstanceGroupLogRecordsResponse) GetNextPageToken() string {
 	return ""
 }
 
-type DisableZonesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group to disable zones.
-	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	// Zone IDs to disable.
-	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
-	// The interval during which the zones will be disabled. Format 1m-72h.
-	// If not set then zone will be disabled until it is removed through a separate call.
-	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DisableZonesRequest) Reset() {
-	*x = DisableZonesRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DisableZonesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DisableZonesRequest) ProtoMessage() {}
-
-func (x *DisableZonesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[33]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DisableZonesRequest.ProtoReflect.Descriptor instead.
-func (*DisableZonesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *DisableZonesRequest) GetInstanceGroupId() string {
-	if x != nil {
-		return x.InstanceGroupId
-	}
-	return ""
-}
-
-func (x *DisableZonesRequest) GetZoneIds() []string {
-	if x != nil {
-		return x.ZoneIds
-	}
-	return nil
-}
-
-func (x *DisableZonesRequest) GetDuration() *durationpb.Duration {
-	if x != nil {
-		return x.Duration
-	}
-	return nil
-}
-
-type DisableZonesMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group on which the zones were disabled.
-	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *DisableZonesMetadata) Reset() {
-	*x = DisableZonesMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DisableZonesMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DisableZonesMetadata) ProtoMessage() {}
-
-func (x *DisableZonesMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[34]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DisableZonesMetadata.ProtoReflect.Descriptor instead.
-func (*DisableZonesMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{34}
-}
-
-func (x *DisableZonesMetadata) GetInstanceGroupId() string {
-	if x != nil {
-		return x.InstanceGroupId
-	}
-	return ""
-}
-
-type EnableZonesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group to enable zones.
-	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	// Zone IDs to enable.
-	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *EnableZonesRequest) Reset() {
-	*x = EnableZonesRequest{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EnableZonesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EnableZonesRequest) ProtoMessage() {}
-
-func (x *EnableZonesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[35]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EnableZonesRequest.ProtoReflect.Descriptor instead.
-func (*EnableZonesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{35}
-}
-
-func (x *EnableZonesRequest) GetInstanceGroupId() string {
-	if x != nil {
-		return x.InstanceGroupId
-	}
-	return ""
-}
-
-func (x *EnableZonesRequest) GetZoneIds() []string {
-	if x != nil {
-		return x.ZoneIds
-	}
-	return nil
-}
-
-type EnableZonesMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance group on which the zones were enabled.
-	InstanceGroupId string `protobuf:"bytes,1,opt,name=instance_group_id,json=instanceGroupId,proto3" json:"instance_group_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *EnableZonesMetadata) Reset() {
-	*x = EnableZonesMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *EnableZonesMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EnableZonesMetadata) ProtoMessage() {}
-
-func (x *EnableZonesMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_msgTypes[36]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EnableZonesMetadata.ProtoReflect.Descriptor instead.
-func (*EnableZonesMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDescGZIP(), []int{36}
-}
-
-func (x *EnableZonesMetadata) GetInstanceGroupId() string {
-	if x != nil {
-		return x.InstanceGroupId
-	}
-	return ""
-}
-
 var File_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_rawDesc = "" +
 	"\n" +
-	"Byandex/cloud/compute/v1/instancegroup/instance_group_service.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a:yandex/cloud/compute/v1/instancegroup/instance_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"[\n" +
-	"#ResumeInstanceGroupProcessesRequest\x124\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x0finstanceGroupId\"P\n" +
+	"Byandex/cloud/compute/v1/instancegroup/instance_group_service.proto\x12%yandex.cloud.compute.v1.instancegroup\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a:yandex/cloud/compute/v1/instancegroup/instance_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"Q\n" +
+	"#ResumeInstanceGroupProcessesRequest\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"P\n" +
 	"\"ResumeInstanceGroupProcessMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"Z\n" +
-	"\"PauseInstanceGroupProcessesRequest\x124\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x0finstanceGroupId\"O\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"P\n" +
+	"\"PauseInstanceGroupProcessesRequest\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"O\n" +
 	"!PauseInstanceGroupProcessMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\xa1\x01\n" +
-	"\x17GetInstanceGroupRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12L\n" +
-	"\x04view\x18\x02 \x01(\x0e28.yandex.cloud.compute.v1.instancegroup.InstanceGroupViewR\x04view\"\x99\v\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\x99\x01\n" +
+	"\x17GetInstanceGroupRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12L\n" +
+	"\x04view\x18\x02 \x01(\x0e28.yandex.cloud.compute.v1.instancegroup.InstanceGroupViewR\x04view\"\xe3\n" +
+	"\n" +
 	"\x1aCreateInstanceGroupRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xaa\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2M.yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12j\n" +
+	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12z\n" +
+	"\x06labels\x18\x05 \x03(\v2M.yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntryB\x13\xf2\xc71\x0f[-_./\\@0-9a-z]*R\x06labels\x12j\n" +
 	"\x11instance_template\x18\x06 \x01(\v27.yandex.cloud.compute.v1.instancegroup.InstanceTemplateB\x04\xe8\xc71\x01R\x10instanceTemplate\x12[\n" +
 	"\fscale_policy\x18\a \x01(\v22.yandex.cloud.compute.v1.instancegroup.ScalePolicyB\x04\xe8\xc71\x01R\vscalePolicy\x12^\n" +
 	"\rdeploy_policy\x18\b \x01(\v23.yandex.cloud.compute.v1.instancegroup.DeployPolicyB\x04\xe8\xc71\x01R\fdeployPolicy\x12j\n" +
 	"\x11allocation_policy\x18\t \x01(\v27.yandex.cloud.compute.v1.instancegroup.AllocationPolicyB\x04\xe8\xc71\x01R\x10allocationPolicy\x12e\n" +
 	"\x12load_balancer_spec\x18\n" +
 	" \x01(\v27.yandex.cloud.compute.v1.instancegroup.LoadBalancerSpecR\x10loadBalancerSpec\x12e\n" +
-	"\x12health_checks_spec\x18\v \x01(\v27.yandex.cloud.compute.v1.instancegroup.HealthChecksSpecR\x10healthChecksSpec\x12,\n" +
-	"\x12service_account_id\x18\f \x01(\tR\x10serviceAccountId\x12M\n" +
+	"\x12health_checks_spec\x18\v \x01(\v27.yandex.cloud.compute.v1.instancegroup.HealthChecksSpecR\x10healthChecksSpec\x122\n" +
+	"\x12service_account_id\x18\f \x01(\tB\x04\xe8\xc71\x01R\x10serviceAccountId\x12M\n" +
 	"\tvariables\x18\r \x03(\v2/.yandex.cloud.compute.v1.instancegroup.VariableR\tvariables\x12/\n" +
 	"\x13deletion_protection\x18\x0e \x01(\bR\x12deletionProtection\x12\x87\x01\n" +
 	"\x1eapplication_load_balancer_spec\x18\x0f \x01(\v2B.yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpecR\x1bapplicationLoadBalancerSpec\x12h\n" +
 	"\x13auto_healing_policy\x18\x10 \x01(\v28.yandex.cloud.compute.v1.instancegroup.AutoHealingPolicyR\x11autoHealingPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03\"\x8a\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x02\x10\x03\"}\n" +
 	"\"CreateInstanceGroupFromYamlRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12A\n" +
-	"\x13instance_group_yaml\x18\x02 \x01(\tB\x11\xe8\xc71\x01\x8a\xc81\t<=1048576R\x11instanceGroupYaml\"S\n" +
-	"\x1bCreateInstanceGroupMetadata\x124\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x0finstanceGroupId\"\xf3\v\n" +
-	"\x1aUpdateInstanceGroupRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12;\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x124\n" +
+	"\x13instance_group_yaml\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x11instanceGroupYaml\"I\n" +
+	"\x1bCreateInstanceGroupMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\xb5\v\n" +
+	"\x1aUpdateInstanceGroupRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xaa\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2M.yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12j\n" +
+	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12z\n" +
+	"\x06labels\x18\x05 \x03(\v2M.yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntryB\x13\xf2\xc71\x0f[-_./\\@0-9a-z]*R\x06labels\x12j\n" +
 	"\x11instance_template\x18\x06 \x01(\v27.yandex.cloud.compute.v1.instancegroup.InstanceTemplateB\x04\xe8\xc71\x01R\x10instanceTemplate\x12[\n" +
 	"\fscale_policy\x18\a \x01(\v22.yandex.cloud.compute.v1.instancegroup.ScalePolicyB\x04\xe8\xc71\x01R\vscalePolicy\x12^\n" +
 	"\rdeploy_policy\x18\b \x01(\v23.yandex.cloud.compute.v1.instancegroup.DeployPolicyB\x04\xe8\xc71\x01R\fdeployPolicy\x12j\n" +
 	"\x11allocation_policy\x18\t \x01(\v27.yandex.cloud.compute.v1.instancegroup.AllocationPolicyB\x04\xe8\xc71\x01R\x10allocationPolicy\x12e\n" +
-	"\x12health_checks_spec\x18\v \x01(\v27.yandex.cloud.compute.v1.instancegroup.HealthChecksSpecR\x10healthChecksSpec\x12,\n" +
-	"\x12service_account_id\x18\f \x01(\tR\x10serviceAccountId\x12e\n" +
-	"\x12load_balancer_spec\x18\x0e \x01(\v27.yandex.cloud.compute.v1.instancegroup.LoadBalancerSpecR\x10loadBalancerSpec\x12M\n" +
+	"\x12health_checks_spec\x18\v \x01(\v27.yandex.cloud.compute.v1.instancegroup.HealthChecksSpecR\x10healthChecksSpec\x122\n" +
+	"\x12service_account_id\x18\f \x01(\tB\x04\xe8\xc71\x01R\x10serviceAccountId\x12e\n" +
+	"\x12load_balancer_spec\x18\x0e \x01(\v27.yandex.cloud.compute.v1.instancegroup.LoadBalancerSpecR\x10loadBalancerSpec\x12\x87\x01\n" +
+	"\x1eapplication_load_balancer_spec\x18\x11 \x01(\v2B.yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpecR\x1bapplicationLoadBalancerSpec\x12M\n" +
 	"\tvariables\x18\x0f \x03(\v2/.yandex.cloud.compute.v1.instancegroup.VariableR\tvariables\x12/\n" +
-	"\x13deletion_protection\x18\x10 \x01(\bR\x12deletionProtection\x12\x87\x01\n" +
-	"\x1eapplication_load_balancer_spec\x18\x11 \x01(\v2B.yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpecR\x1bapplicationLoadBalancerSpec\x12h\n" +
+	"\x13deletion_protection\x18\x10 \x01(\bR\x12deletionProtection\x12h\n" +
 	"\x13auto_healing_policy\x18\x12 \x01(\v28.yandex.cloud.compute.v1.instancegroup.AutoHealingPolicyR\x11autoHealingPolicy\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\r\x10\x0eJ\x04\b\n" +
-	"\x10\v\"\xa1\x01\n" +
-	"\"UpdateInstanceGroupFromYamlRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12A\n" +
-	"\x13instance_group_yaml\x18\x02 \x01(\tB\x11\xe8\xc71\x01\x8a\xc81\t<=1048576R\x11instanceGroupYaml\"I\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\n" +
+	"\x10\vJ\x04\b\r\x10\x0e\"\x8c\x01\n" +
+	"\"UpdateInstanceGroupFromYamlRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x124\n" +
+	"\x13instance_group_yaml\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x11instanceGroupYaml\"I\n" +
 	"\x1bUpdateInstanceGroupMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"U\n" +
-	"\x19StartInstanceGroupRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\"H\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"M\n" +
+	"\x19StartInstanceGroupRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\"H\n" +
 	"\x1aStartInstanceGroupMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"T\n" +
-	"\x18StopInstanceGroupRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\"G\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"L\n" +
+	"\x18StopInstanceGroupRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\"G\n" +
 	"\x19StopInstanceGroupMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\x83\x01\n" +
-	"\x15RollingRestartRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"{\n" +
+	"\x15RollingRestartRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x120\n" +
 	"\x14managed_instance_ids\x18\x02 \x03(\tR\x12managedInstanceIds\"D\n" +
 	"\x16RollingRestartMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\x84\x01\n" +
-	"\x16RollingRecreateRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"|\n" +
+	"\x16RollingRecreateRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x120\n" +
 	"\x14managed_instance_ids\x18\x02 \x03(\tR\x12managedInstanceIds\"E\n" +
 	"\x17RollingRecreateMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"V\n" +
-	"\x1aDeleteInstanceGroupRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\"I\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"N\n" +
+	"\x1aDeleteInstanceGroupRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\"I\n" +
 	"\x1bDeleteInstanceGroupMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"E\n" +
-	"\x17DeleteInstancesMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"C\n" +
-	"\x15StopInstancesMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\x84\x02\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\x99\x01\n" +
+	"\x13DisableZonesRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\x125\n" +
+	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\bduration\"B\n" +
+	"\x14DisableZonesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"a\n" +
+	"\x12EnableZonesRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"A\n" +
+	"\x13EnableZonesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\xe0\x01\n" +
 	"\x19ListInstanceGroupsRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12L\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12L\n" +
 	"\x04view\x18\x05 \x01(\x0e28.yandex.cloud.compute.v1.instancegroup.InstanceGroupViewR\x04view\"\xa3\x01\n" +
 	"\x1aListInstanceGroupsResponse\x12]\n" +
 	"\x0finstance_groups\x18\x01 \x03(\v24.yandex.cloud.compute.v1.instancegroup.InstanceGroupR\x0einstanceGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd5\x01\n" +
-	"!ListInstanceGroupInstancesRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa9\x01\n" +
+	"!ListInstanceGroupInstancesRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\xa2\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\xa2\x01\n" +
 	"\"ListInstanceGroupInstancesResponse\x12T\n" +
 	"\tinstances\x18\x01 \x03(\v26.yandex.cloud.compute.v1.instancegroup.ManagedInstanceR\tinstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xbc\x01\n" +
-	"\x16DeleteInstancesRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12A\n" +
-	"\x14managed_instance_ids\x18\x02 \x03(\tB\x0f\x82\xc81\x03>=1\x8a\xc81\x04<=50R\x12managedInstanceIds\x12%\n" +
-	"\x0ecreate_another\x18\x03 \x01(\bR\rcreateAnother\"\x93\x01\n" +
-	"\x14StopInstancesRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12A\n" +
-	"\x14managed_instance_ids\x18\x02 \x03(\tB\x0f\x82\xc81\x03>=1\x8a\xc81\x04<=50R\x12managedInstanceIds\"\xd6\x01\n" +
-	"\"ListInstanceGroupOperationsRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa3\x01\n" +
+	"\x16DeleteInstancesRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x120\n" +
+	"\x14managed_instance_ids\x18\x02 \x03(\tR\x12managedInstanceIds\x12%\n" +
+	"\x0ecreate_another\x18\x03 \x01(\bR\rcreateAnother\"z\n" +
+	"\x14StopInstancesRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x120\n" +
+	"\x14managed_instance_ids\x18\x02 \x03(\tR\x12managedInstanceIds\"E\n" +
+	"\x17DeleteInstancesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"C\n" +
+	"\x15StopInstancesMetadata\x12*\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"\xaa\x01\n" +
+	"\"ListInstanceGroupOperationsRequest\x120\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x90\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x90\x01\n" +
 	"#ListInstanceGroupOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xce\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xaa\x01\n" +
 	"\"ListInstanceGroupLogRecordsRequest\x120\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\x11instance_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0finstanceGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\xa0\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\xa0\x01\n" +
 	"#ListInstanceGroupLogRecordsResponse\x12Q\n" +
 	"\vlog_records\x18\x01 \x03(\v20.yandex.cloud.compute.v1.instancegroup.LogRecordR\n" +
 	"logRecords\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb5\x01\n" +
-	"\x13DisableZonesRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
-	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x061m-72hR\bduration\"B\n" +
-	"\x14DisableZonesMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId\"q\n" +
-	"\x12EnableZonesRequest\x128\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0finstanceGroupId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"A\n" +
-	"\x13EnableZonesMetadata\x12*\n" +
-	"\x11instance_group_id\x18\x01 \x01(\tR\x0finstanceGroupId*(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*(\n" +
 	"\x11InstanceGroupView\x12\t\n" +
 	"\x05BASIC\x10\x00\x12\b\n" +
 	"\x04FULL\x10\x012\xc7'\n" +
@@ -2524,29 +2583,22 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_ra
 	"\x06Update\x12A.yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*,\n" +
 	"\x1bUpdateInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x023:\x01*2./compute/v1/instanceGroups/{instance_group_id}\x12\xee\x01\n" +
 	"\x0eUpdateFromYaml\x12I.yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupFromYamlRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*,\n" +
-	"\x1bUpdateInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x028:\x01*23/compute/v1/instanceGroups/{instance_group_id}:yaml\x12\xd5\x01\n" +
+	"\x1bUpdateInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x028:\x01*23/compute/v1/instanceGroups/{instance_group_id}:yaml\x12\xde\x01\n" +
+	"\x06Delete\x12A.yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*4\n" +
+	"\x1bDeleteInstanceGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x020*./compute/v1/instanceGroups/{instance_group_id}\x12\xd9\x01\n" +
+	"\x05Start\x12@.yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2*+\n" +
+	"\x1aStartInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x026\"4/compute/v1/instanceGroups/{instance_group_id}:start\x12\xd5\x01\n" +
 	"\x04Stop\x12?.yandex.cloud.compute.v1.instancegroup.StopInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2**\n" +
 	"\x19StopInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x025\"3/compute/v1/instanceGroups/{instance_group_id}:stop\x12\xe6\x01\n" +
 	"\x0eRollingRestart\x12<.yandex.cloud.compute.v1.instancegroup.RollingRestartRequest\x1a!.yandex.cloud.operation.Operation\"s\xb2\xd2*'\n" +
 	"\x16RollingRestartMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02B:\x01*\"=/compute/v1/instanceGroups/{instance_group_id}:rollingRestart\x12\xea\x01\n" +
 	"\x0fRollingRecreate\x12=.yandex.cloud.compute.v1.instancegroup.RollingRecreateRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*(\n" +
-	"\x17RollingRecreateMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02C:\x01*\">/compute/v1/instanceGroups/{instance_group_id}:rollingRecreate\x12\xd9\x01\n" +
-	"\x05Start\x12@.yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2*+\n" +
-	"\x1aStartInstanceGroupMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x026\"4/compute/v1/instanceGroups/{instance_group_id}:start\x12\xde\x01\n" +
-	"\x06Delete\x12A.yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest\x1a!.yandex.cloud.operation.Operation\"n\xb2\xd2*4\n" +
-	"\x1bDeleteInstanceGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x020*./compute/v1/instanceGroups/{instance_group_id}\x12\xe6\x01\n" +
+	"\x17RollingRecreateMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02C:\x01*\">/compute/v1/instanceGroups/{instance_group_id}:rollingRecreate\x12\xe6\x01\n" +
 	"\rListInstances\x12H.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest\x1aI.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse\"@\x82\xd3\xe4\x93\x02:\x128/compute/v1/instanceGroups/{instance_group_id}/instances\x12\xea\x01\n" +
 	"\x0fDeleteInstances\x12=.yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*(\n" +
 	"\x17DeleteInstancesMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02C:\x01*\">/compute/v1/instanceGroups/{instance_group_id}:deleteInstances\x12\xe2\x01\n" +
 	"\rStopInstances\x12;.yandex.cloud.compute.v1.instancegroup.StopInstancesRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*&\n" +
-	"\x15StopInstancesMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02A:\x01*\"</compute/v1/instanceGroups/{instance_group_id}:stopInstances\x12\xea\x01\n" +
-	"\x0eListOperations\x12I.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest\x1aJ.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse\"A\x82\xd3\xe4\x93\x02;\x129/compute/v1/instanceGroups/{instance_group_id}/operations\x12\xe4\x01\n" +
-	"\x0eListLogRecords\x12I.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest\x1aJ.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse\";\x82\xd3\xe4\x93\x025\x123/compute/v1/instanceGroups/{instance_group_id}:logs\x12\xba\x01\n" +
-	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/compute/v1/instanceGroups/{resource_id}:listAccessBindings\x12\xea\x01\n" +
-	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*9\n" +
-	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instanceGroups/{resource_id}:setAccessBindings\x12\xf6\x01\n" +
-	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*<\n" +
-	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B:\x01*\"=/compute/v1/instanceGroups/{resource_id}:updateAccessBindings\x12\x83\x02\n" +
+	"\x15StopInstancesMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02A:\x01*\"</compute/v1/instanceGroups/{instance_group_id}:stopInstances\x12\x83\x02\n" +
 	"\x0fResumeProcesses\x12J.yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest\x1a!.yandex.cloud.operation.Operation\"\x80\x01\xb2\xd2*3\n" +
 	"\"ResumeInstanceGroupProcessMetadata\x12\rInstanceGroup\x82\xd3\xe4\x93\x02C:\x01*\">/compute/v1/instanceGroups/{instance_group_id}:resumeProcesses\x12\xfe\x01\n" +
 	"\x0ePauseProcesses\x12I.yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*2\n" +
@@ -2554,7 +2606,14 @@ const file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_ra
 	"\fDisableZones\x12:.yandex.cloud.compute.v1.instancegroup.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\")\xb2\xd2*%\n" +
 	"\x14DisableZonesMetadata\x12\rInstanceGroup\x12\x95\x01\n" +
 	"\vEnableZones\x129.yandex.cloud.compute.v1.instancegroup.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"(\xb2\xd2*$\n" +
-	"\x13EnableZonesMetadata\x12\rInstanceGroupB\x84\x01\n" +
+	"\x13EnableZonesMetadata\x12\rInstanceGroup\x12\xea\x01\n" +
+	"\x0eListOperations\x12I.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest\x1aJ.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse\"A\x82\xd3\xe4\x93\x02;\x129/compute/v1/instanceGroups/{instance_group_id}/operations\x12\xe4\x01\n" +
+	"\x0eListLogRecords\x12I.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest\x1aJ.yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse\";\x82\xd3\xe4\x93\x025\x123/compute/v1/instanceGroups/{instance_group_id}:logs\x12\xba\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/compute/v1/instanceGroups/{resource_id}:listAccessBindings\x12\xea\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x82\x01\xb2\xd2*9\n" +
+	" access.SetAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instanceGroups/{resource_id}:setAccessBindings\x12\xf6\x01\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*<\n" +
+	"#access.UpdateAccessBindingsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02B:\x01*\"=/compute/v1/instanceGroups/{resource_id}:updateAccessBindingsB\x84\x01\n" +
 	")yandex.cloud.api.compute.v1.instancegroupZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/compute/v1/instancegroup;instancegroupb\x06proto3"
 
 var (
@@ -2594,43 +2653,43 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_goTy
 	(*RollingRecreateMetadata)(nil),             // 19: yandex.cloud.compute.v1.instancegroup.RollingRecreateMetadata
 	(*DeleteInstanceGroupRequest)(nil),          // 20: yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest
 	(*DeleteInstanceGroupMetadata)(nil),         // 21: yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupMetadata
-	(*DeleteInstancesMetadata)(nil),             // 22: yandex.cloud.compute.v1.instancegroup.DeleteInstancesMetadata
-	(*StopInstancesMetadata)(nil),               // 23: yandex.cloud.compute.v1.instancegroup.StopInstancesMetadata
-	(*ListInstanceGroupsRequest)(nil),           // 24: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
-	(*ListInstanceGroupsResponse)(nil),          // 25: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
-	(*ListInstanceGroupInstancesRequest)(nil),   // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
-	(*ListInstanceGroupInstancesResponse)(nil),  // 27: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
-	(*DeleteInstancesRequest)(nil),              // 28: yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
-	(*StopInstancesRequest)(nil),                // 29: yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
-	(*ListInstanceGroupOperationsRequest)(nil),  // 30: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
-	(*ListInstanceGroupOperationsResponse)(nil), // 31: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
-	(*ListInstanceGroupLogRecordsRequest)(nil),  // 32: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
-	(*ListInstanceGroupLogRecordsResponse)(nil), // 33: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
-	(*DisableZonesRequest)(nil),                 // 34: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
-	(*DisableZonesMetadata)(nil),                // 35: yandex.cloud.compute.v1.instancegroup.DisableZonesMetadata
-	(*EnableZonesRequest)(nil),                  // 36: yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
-	(*EnableZonesMetadata)(nil),                 // 37: yandex.cloud.compute.v1.instancegroup.EnableZonesMetadata
-	nil,                                         // 38: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
-	nil,                                         // 39: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
-	(*InstanceTemplate)(nil),                    // 40: yandex.cloud.compute.v1.instancegroup.InstanceTemplate
-	(*ScalePolicy)(nil),                         // 41: yandex.cloud.compute.v1.instancegroup.ScalePolicy
-	(*DeployPolicy)(nil),                        // 42: yandex.cloud.compute.v1.instancegroup.DeployPolicy
-	(*AllocationPolicy)(nil),                    // 43: yandex.cloud.compute.v1.instancegroup.AllocationPolicy
-	(*LoadBalancerSpec)(nil),                    // 44: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
-	(*HealthChecksSpec)(nil),                    // 45: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
-	(*Variable)(nil),                            // 46: yandex.cloud.compute.v1.instancegroup.Variable
-	(*ApplicationLoadBalancerSpec)(nil),         // 47: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
-	(*AutoHealingPolicy)(nil),                   // 48: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
-	(*fieldmaskpb.FieldMask)(nil),               // 49: google.protobuf.FieldMask
-	(*InstanceGroup)(nil),                       // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	(*ManagedInstance)(nil),                     // 51: yandex.cloud.compute.v1.instancegroup.ManagedInstance
-	(*operation.Operation)(nil),                 // 52: yandex.cloud.operation.Operation
-	(*LogRecord)(nil),                           // 53: yandex.cloud.compute.v1.instancegroup.LogRecord
-	(*durationpb.Duration)(nil),                 // 54: google.protobuf.Duration
-	(*access.ListAccessBindingsRequest)(nil),    // 55: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),     // 56: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),  // 57: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),   // 58: yandex.cloud.access.ListAccessBindingsResponse
+	(*DisableZonesRequest)(nil),                 // 22: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
+	(*DisableZonesMetadata)(nil),                // 23: yandex.cloud.compute.v1.instancegroup.DisableZonesMetadata
+	(*EnableZonesRequest)(nil),                  // 24: yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
+	(*EnableZonesMetadata)(nil),                 // 25: yandex.cloud.compute.v1.instancegroup.EnableZonesMetadata
+	(*ListInstanceGroupsRequest)(nil),           // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
+	(*ListInstanceGroupsResponse)(nil),          // 27: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
+	(*ListInstanceGroupInstancesRequest)(nil),   // 28: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
+	(*ListInstanceGroupInstancesResponse)(nil),  // 29: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
+	(*DeleteInstancesRequest)(nil),              // 30: yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
+	(*StopInstancesRequest)(nil),                // 31: yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
+	(*DeleteInstancesMetadata)(nil),             // 32: yandex.cloud.compute.v1.instancegroup.DeleteInstancesMetadata
+	(*StopInstancesMetadata)(nil),               // 33: yandex.cloud.compute.v1.instancegroup.StopInstancesMetadata
+	(*ListInstanceGroupOperationsRequest)(nil),  // 34: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
+	(*ListInstanceGroupOperationsResponse)(nil), // 35: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
+	(*ListInstanceGroupLogRecordsRequest)(nil),  // 36: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
+	(*ListInstanceGroupLogRecordsResponse)(nil), // 37: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
+	nil,                                        // 38: yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest.LabelsEntry
+	nil,                                        // 39: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.LabelsEntry
+	(*InstanceTemplate)(nil),                   // 40: yandex.cloud.compute.v1.instancegroup.InstanceTemplate
+	(*ScalePolicy)(nil),                        // 41: yandex.cloud.compute.v1.instancegroup.ScalePolicy
+	(*DeployPolicy)(nil),                       // 42: yandex.cloud.compute.v1.instancegroup.DeployPolicy
+	(*AllocationPolicy)(nil),                   // 43: yandex.cloud.compute.v1.instancegroup.AllocationPolicy
+	(*LoadBalancerSpec)(nil),                   // 44: yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
+	(*HealthChecksSpec)(nil),                   // 45: yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
+	(*Variable)(nil),                           // 46: yandex.cloud.compute.v1.instancegroup.Variable
+	(*ApplicationLoadBalancerSpec)(nil),        // 47: yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	(*AutoHealingPolicy)(nil),                  // 48: yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
+	(*fieldmaskpb.FieldMask)(nil),              // 49: google.protobuf.FieldMask
+	(*durationpb.Duration)(nil),                // 50: google.protobuf.Duration
+	(*InstanceGroup)(nil),                      // 51: yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	(*ManagedInstance)(nil),                    // 52: yandex.cloud.compute.v1.instancegroup.ManagedInstance
+	(*operation.Operation)(nil),                // 53: yandex.cloud.operation.Operation
+	(*LogRecord)(nil),                          // 54: yandex.cloud.compute.v1.instancegroup.LogRecord
+	(*access.ListAccessBindingsRequest)(nil),   // 55: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 56: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 57: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 58: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest.view:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroupView
@@ -2652,61 +2711,61 @@ var file_yandex_cloud_compute_v1_instancegroup_instance_group_service_proto_depI
 	43, // 16: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.allocation_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AllocationPolicy
 	45, // 17: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.health_checks_spec:type_name -> yandex.cloud.compute.v1.instancegroup.HealthChecksSpec
 	44, // 18: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.LoadBalancerSpec
-	46, // 19: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
-	47, // 20: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	47, // 19: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.application_load_balancer_spec:type_name -> yandex.cloud.compute.v1.instancegroup.ApplicationLoadBalancerSpec
+	46, // 20: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.variables:type_name -> yandex.cloud.compute.v1.instancegroup.Variable
 	48, // 21: yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest.auto_healing_policy:type_name -> yandex.cloud.compute.v1.instancegroup.AutoHealingPolicy
-	0,  // 22: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest.view:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroupView
-	50, // 23: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse.instance_groups:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	51, // 24: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance
-	52, // 25: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	53, // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse.log_records:type_name -> yandex.cloud.compute.v1.instancegroup.LogRecord
-	54, // 27: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
+	50, // 22: yandex.cloud.compute.v1.instancegroup.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
+	0,  // 23: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest.view:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroupView
+	51, // 24: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse.instance_groups:type_name -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	52, // 25: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.instancegroup.ManagedInstance
+	53, // 26: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	54, // 27: yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse.log_records:type_name -> yandex.cloud.compute.v1.instancegroup.LogRecord
 	5,  // 28: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:input_type -> yandex.cloud.compute.v1.instancegroup.GetInstanceGroupRequest
-	24, // 29: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
+	26, // 29: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsRequest
 	6,  // 30: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupRequest
 	7,  // 31: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.CreateInstanceGroupFromYamlRequest
 	9,  // 32: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupRequest
 	10, // 33: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:input_type -> yandex.cloud.compute.v1.instancegroup.UpdateInstanceGroupFromYamlRequest
-	14, // 34: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstanceGroupRequest
-	16, // 35: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRestartRequest
-	18, // 36: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRecreateRequest
-	12, // 37: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:input_type -> yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest
-	20, // 38: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest
-	26, // 39: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
-	28, // 40: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
-	29, // 41: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
-	30, // 42: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
-	32, // 43: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
-	55, // 44: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	56, // 45: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	57, // 46: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	1,  // 47: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest
-	3,  // 48: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest
-	34, // 49: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:input_type -> yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
-	36, // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:input_type -> yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
-	50, // 51: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:output_type -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
-	25, // 52: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
-	52, // 53: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:output_type -> yandex.cloud.operation.Operation
-	52, // 54: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:output_type -> yandex.cloud.operation.Operation
-	52, // 55: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:output_type -> yandex.cloud.operation.Operation
-	52, // 56: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:output_type -> yandex.cloud.operation.Operation
-	52, // 57: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:output_type -> yandex.cloud.operation.Operation
-	52, // 58: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:output_type -> yandex.cloud.operation.Operation
-	52, // 59: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:output_type -> yandex.cloud.operation.Operation
-	52, // 60: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:output_type -> yandex.cloud.operation.Operation
-	52, // 61: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:output_type -> yandex.cloud.operation.Operation
-	27, // 62: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
-	52, // 63: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:output_type -> yandex.cloud.operation.Operation
-	52, // 64: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:output_type -> yandex.cloud.operation.Operation
-	31, // 65: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
-	33, // 66: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
-	58, // 67: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	52, // 68: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	52, // 69: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	52, // 70: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:output_type -> yandex.cloud.operation.Operation
-	52, // 71: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:output_type -> yandex.cloud.operation.Operation
-	52, // 72: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:output_type -> yandex.cloud.operation.Operation
-	52, // 73: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:output_type -> yandex.cloud.operation.Operation
+	20, // 34: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstanceGroupRequest
+	12, // 35: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:input_type -> yandex.cloud.compute.v1.instancegroup.StartInstanceGroupRequest
+	14, // 36: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstanceGroupRequest
+	16, // 37: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRestartRequest
+	18, // 38: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:input_type -> yandex.cloud.compute.v1.instancegroup.RollingRecreateRequest
+	28, // 39: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesRequest
+	30, // 40: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:input_type -> yandex.cloud.compute.v1.instancegroup.DeleteInstancesRequest
+	31, // 41: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:input_type -> yandex.cloud.compute.v1.instancegroup.StopInstancesRequest
+	1,  // 42: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.ResumeInstanceGroupProcessesRequest
+	3,  // 43: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:input_type -> yandex.cloud.compute.v1.instancegroup.PauseInstanceGroupProcessesRequest
+	22, // 44: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:input_type -> yandex.cloud.compute.v1.instancegroup.DisableZonesRequest
+	24, // 45: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:input_type -> yandex.cloud.compute.v1.instancegroup.EnableZonesRequest
+	34, // 46: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsRequest
+	36, // 47: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:input_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsRequest
+	55, // 48: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	56, // 49: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	57, // 50: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	51, // 51: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Get:output_type -> yandex.cloud.compute.v1.instancegroup.InstanceGroup
+	27, // 52: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.List:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupsResponse
+	53, // 53: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Create:output_type -> yandex.cloud.operation.Operation
+	53, // 54: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.CreateFromYaml:output_type -> yandex.cloud.operation.Operation
+	53, // 55: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Update:output_type -> yandex.cloud.operation.Operation
+	53, // 56: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateFromYaml:output_type -> yandex.cloud.operation.Operation
+	53, // 57: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Delete:output_type -> yandex.cloud.operation.Operation
+	53, // 58: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Start:output_type -> yandex.cloud.operation.Operation
+	53, // 59: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.Stop:output_type -> yandex.cloud.operation.Operation
+	53, // 60: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRestart:output_type -> yandex.cloud.operation.Operation
+	53, // 61: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.RollingRecreate:output_type -> yandex.cloud.operation.Operation
+	29, // 62: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListInstances:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupInstancesResponse
+	53, // 63: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DeleteInstances:output_type -> yandex.cloud.operation.Operation
+	53, // 64: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.StopInstances:output_type -> yandex.cloud.operation.Operation
+	53, // 65: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ResumeProcesses:output_type -> yandex.cloud.operation.Operation
+	53, // 66: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.PauseProcesses:output_type -> yandex.cloud.operation.Operation
+	53, // 67: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.DisableZones:output_type -> yandex.cloud.operation.Operation
+	53, // 68: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.EnableZones:output_type -> yandex.cloud.operation.Operation
+	35, // 69: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListOperations:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupOperationsResponse
+	37, // 70: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListLogRecords:output_type -> yandex.cloud.compute.v1.instancegroup.ListInstanceGroupLogRecordsResponse
+	58, // 71: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	53, // 72: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	53, // 73: yandex.cloud.compute.v1.instancegroup.InstanceGroupService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
 	51, // [51:74] is the sub-list for method output_type
 	28, // [28:51] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name

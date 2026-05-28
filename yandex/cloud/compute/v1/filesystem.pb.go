@@ -99,11 +99,9 @@ type Filesystem struct {
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the filesystem type.
-	//
 	// To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
 	TypeId string `protobuf:"bytes,7,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// ID of the availability zone where the filesystem resides.
-	//
 	// A filesystem can be attached only to instances residing in the same availability zone.
 	ZoneId string `protobuf:"bytes,8,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Size of the filesystem, specified in bytes.

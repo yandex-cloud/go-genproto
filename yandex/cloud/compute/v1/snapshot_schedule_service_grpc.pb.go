@@ -22,13 +22,13 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	SnapshotScheduleService_Get_FullMethodName                  = "/yandex.cloud.compute.v1.SnapshotScheduleService/Get"
-	SnapshotScheduleService_List_FullMethodName                 = "/yandex.cloud.compute.v1.SnapshotScheduleService/List"
 	SnapshotScheduleService_Create_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Create"
 	SnapshotScheduleService_Update_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Update"
 	SnapshotScheduleService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Delete"
 	SnapshotScheduleService_UpdateDisks_FullMethodName          = "/yandex.cloud.compute.v1.SnapshotScheduleService/UpdateDisks"
 	SnapshotScheduleService_Disable_FullMethodName              = "/yandex.cloud.compute.v1.SnapshotScheduleService/Disable"
 	SnapshotScheduleService_Enable_FullMethodName               = "/yandex.cloud.compute.v1.SnapshotScheduleService/Enable"
+	SnapshotScheduleService_List_FullMethodName                 = "/yandex.cloud.compute.v1.SnapshotScheduleService/List"
 	SnapshotScheduleService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListOperations"
 	SnapshotScheduleService_ListSnapshots_FullMethodName        = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListSnapshots"
 	SnapshotScheduleService_ListDisks_FullMethodName            = "/yandex.cloud.compute.v1.SnapshotScheduleService/ListDisks"
@@ -44,40 +44,32 @@ const (
 // A set of methods for managing snapshot schedules.
 type SnapshotScheduleServiceClient interface {
 	// Returns the specified snapshot schedule.
-	//
 	// To get the list of available snapshot schedules, make a [List] request.
 	Get(ctx context.Context, in *GetSnapshotScheduleRequest, opts ...grpc.CallOption) (*SnapshotSchedule, error)
-	// Retrieves the list of snapshot schedules in the specified folder.
-	List(ctx context.Context, in *ListSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListSnapshotSchedulesResponse, error)
 	// Creates a snapshot schedule in the specified folder.
 	Create(ctx context.Context, in *CreateSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified snapshot schedule.
-	//
 	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	Update(ctx context.Context, in *UpdateSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified snapshot schedule.
-	//
 	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule
 	// does not delete any snapshots created by the schedule. You must delete snapshots separately.
-	//
 	// The schedule is deleted only after all snapshot creations and deletions triggered by the schedule are completed.
 	Delete(ctx context.Context, in *DeleteSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the list of disks attached to the specified schedule.
-	//
 	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	UpdateDisks(ctx context.Context, in *UpdateSnapshotScheduleDisksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Disables the specified snapshot schedule.
-	//
 	// The [SnapshotSchedule.status] is changed to `INACTIVE`: the schedule is interrupted, snapshots won't be created
 	// or deleted.
-	//
 	// The schedule is disabled only after all snapshot creations and deletions triggered by the schedule are completed.
 	Disable(ctx context.Context, in *DisableSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables the specified snapshot schedule.
-	//
 	// The [SnapshotSchedule.status] is changed to `ACTIVE`: new disk snapshots will be created, old ones deleted
 	// (if [SnapshotSchedule.retention_policy] is specified).
 	Enable(ctx context.Context, in *EnableSnapshotScheduleRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves the list of snapshot schedules in the specified folder.
+	List(ctx context.Context, in *ListSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListSnapshotSchedulesResponse, error)
 	// Lists operations for the specified snapshot schedule.
 	ListOperations(ctx context.Context, in *ListSnapshotScheduleOperationsRequest, opts ...grpc.CallOption) (*ListSnapshotScheduleOperationsResponse, error)
 	// Retrieves the list of snapshots created by the specified snapshot schedule.
@@ -104,16 +96,6 @@ func (c *snapshotScheduleServiceClient) Get(ctx context.Context, in *GetSnapshot
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SnapshotSchedule)
 	err := c.cc.Invoke(ctx, SnapshotScheduleService_Get_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *snapshotScheduleServiceClient) List(ctx context.Context, in *ListSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListSnapshotSchedulesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSnapshotSchedulesResponse)
-	err := c.cc.Invoke(ctx, SnapshotScheduleService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -174,6 +156,16 @@ func (c *snapshotScheduleServiceClient) Enable(ctx context.Context, in *EnableSn
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, SnapshotScheduleService_Enable_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *snapshotScheduleServiceClient) List(ctx context.Context, in *ListSnapshotSchedulesRequest, opts ...grpc.CallOption) (*ListSnapshotSchedulesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSnapshotSchedulesResponse)
+	err := c.cc.Invoke(ctx, SnapshotScheduleService_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -247,40 +239,32 @@ func (c *snapshotScheduleServiceClient) UpdateAccessBindings(ctx context.Context
 // A set of methods for managing snapshot schedules.
 type SnapshotScheduleServiceServer interface {
 	// Returns the specified snapshot schedule.
-	//
 	// To get the list of available snapshot schedules, make a [List] request.
 	Get(context.Context, *GetSnapshotScheduleRequest) (*SnapshotSchedule, error)
-	// Retrieves the list of snapshot schedules in the specified folder.
-	List(context.Context, *ListSnapshotSchedulesRequest) (*ListSnapshotSchedulesResponse, error)
 	// Creates a snapshot schedule in the specified folder.
 	Create(context.Context, *CreateSnapshotScheduleRequest) (*operation.Operation, error)
 	// Updates the specified snapshot schedule.
-	//
 	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	Update(context.Context, *UpdateSnapshotScheduleRequest) (*operation.Operation, error)
 	// Deletes the specified snapshot schedule.
-	//
 	// Deleting a snapshot schedule removes its data permanently and is irreversible. However, deleting a schedule
 	// does not delete any snapshots created by the schedule. You must delete snapshots separately.
-	//
 	// The schedule is deleted only after all snapshot creations and deletions triggered by the schedule are completed.
 	Delete(context.Context, *DeleteSnapshotScheduleRequest) (*operation.Operation, error)
 	// Updates the list of disks attached to the specified schedule.
-	//
 	// The schedule is updated only after all snapshot creations and deletions triggered by the schedule are completed.
 	UpdateDisks(context.Context, *UpdateSnapshotScheduleDisksRequest) (*operation.Operation, error)
 	// Disables the specified snapshot schedule.
-	//
 	// The [SnapshotSchedule.status] is changed to `INACTIVE`: the schedule is interrupted, snapshots won't be created
 	// or deleted.
-	//
 	// The schedule is disabled only after all snapshot creations and deletions triggered by the schedule are completed.
 	Disable(context.Context, *DisableSnapshotScheduleRequest) (*operation.Operation, error)
 	// Enables the specified snapshot schedule.
-	//
 	// The [SnapshotSchedule.status] is changed to `ACTIVE`: new disk snapshots will be created, old ones deleted
 	// (if [SnapshotSchedule.retention_policy] is specified).
 	Enable(context.Context, *EnableSnapshotScheduleRequest) (*operation.Operation, error)
+	// Retrieves the list of snapshot schedules in the specified folder.
+	List(context.Context, *ListSnapshotSchedulesRequest) (*ListSnapshotSchedulesResponse, error)
 	// Lists operations for the specified snapshot schedule.
 	ListOperations(context.Context, *ListSnapshotScheduleOperationsRequest) (*ListSnapshotScheduleOperationsResponse, error)
 	// Retrieves the list of snapshots created by the specified snapshot schedule.
@@ -305,9 +289,6 @@ type UnimplementedSnapshotScheduleServiceServer struct{}
 func (UnimplementedSnapshotScheduleServiceServer) Get(context.Context, *GetSnapshotScheduleRequest) (*SnapshotSchedule, error) {
 	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedSnapshotScheduleServiceServer) List(context.Context, *ListSnapshotSchedulesRequest) (*ListSnapshotSchedulesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method List not implemented")
-}
 func (UnimplementedSnapshotScheduleServiceServer) Create(context.Context, *CreateSnapshotScheduleRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
@@ -325,6 +306,9 @@ func (UnimplementedSnapshotScheduleServiceServer) Disable(context.Context, *Disa
 }
 func (UnimplementedSnapshotScheduleServiceServer) Enable(context.Context, *EnableSnapshotScheduleRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Enable not implemented")
+}
+func (UnimplementedSnapshotScheduleServiceServer) List(context.Context, *ListSnapshotSchedulesRequest) (*ListSnapshotSchedulesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedSnapshotScheduleServiceServer) ListOperations(context.Context, *ListSnapshotScheduleOperationsRequest) (*ListSnapshotScheduleOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
@@ -378,24 +362,6 @@ func _SnapshotScheduleService_Get_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SnapshotScheduleServiceServer).Get(ctx, req.(*GetSnapshotScheduleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SnapshotScheduleService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSnapshotSchedulesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SnapshotScheduleServiceServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SnapshotScheduleService_List_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SnapshotScheduleServiceServer).List(ctx, req.(*ListSnapshotSchedulesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -504,6 +470,24 @@ func _SnapshotScheduleService_Enable_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SnapshotScheduleServiceServer).Enable(ctx, req.(*EnableSnapshotScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SnapshotScheduleService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSnapshotSchedulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SnapshotScheduleServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SnapshotScheduleService_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SnapshotScheduleServiceServer).List(ctx, req.(*ListSnapshotSchedulesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -628,10 +612,6 @@ var SnapshotScheduleService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SnapshotScheduleService_Get_Handler,
 		},
 		{
-			MethodName: "List",
-			Handler:    _SnapshotScheduleService_List_Handler,
-		},
-		{
 			MethodName: "Create",
 			Handler:    _SnapshotScheduleService_Create_Handler,
 		},
@@ -654,6 +634,10 @@ var SnapshotScheduleService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Enable",
 			Handler:    _SnapshotScheduleService_Enable_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _SnapshotScheduleService_List_Handler,
 		},
 		{
 			MethodName: "ListOperations",

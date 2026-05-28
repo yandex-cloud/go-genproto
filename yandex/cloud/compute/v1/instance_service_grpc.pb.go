@@ -35,15 +35,15 @@ const (
 	InstanceService_DetachDisk_FullMethodName               = "/yandex.cloud.compute.v1.InstanceService/DetachDisk"
 	InstanceService_AttachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/AttachFilesystem"
 	InstanceService_DetachFilesystem_FullMethodName         = "/yandex.cloud.compute.v1.InstanceService/DetachFilesystem"
-	InstanceService_AttachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/AttachNetworkInterface"
-	InstanceService_DetachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/DetachNetworkInterface"
 	InstanceService_AddOneToOneNat_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/AddOneToOneNat"
 	InstanceService_RemoveOneToOneNat_FullMethodName        = "/yandex.cloud.compute.v1.InstanceService/RemoveOneToOneNat"
 	InstanceService_UpdateNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/UpdateNetworkInterface"
+	InstanceService_AttachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/AttachNetworkInterface"
+	InstanceService_DetachNetworkInterface_FullMethodName   = "/yandex.cloud.compute.v1.InstanceService/DetachNetworkInterface"
 	InstanceService_ListOperations_FullMethodName           = "/yandex.cloud.compute.v1.InstanceService/ListOperations"
+	InstanceService_SimulateMaintenanceEvent_FullMethodName = "/yandex.cloud.compute.v1.InstanceService/SimulateMaintenanceEvent"
 	InstanceService_Move_FullMethodName                     = "/yandex.cloud.compute.v1.InstanceService/Move"
 	InstanceService_Relocate_FullMethodName                 = "/yandex.cloud.compute.v1.InstanceService/Relocate"
-	InstanceService_SimulateMaintenanceEvent_FullMethodName = "/yandex.cloud.compute.v1.InstanceService/SimulateMaintenanceEvent"
 	InstanceService_ListAccessBindings_FullMethodName       = "/yandex.cloud.compute.v1.InstanceService/ListAccessBindings"
 	InstanceService_SetAccessBindings_FullMethodName        = "/yandex.cloud.compute.v1.InstanceService/SetAccessBindings"
 	InstanceService_UpdateAccessBindings_FullMethodName     = "/yandex.cloud.compute.v1.InstanceService/UpdateAccessBindings"
@@ -56,7 +56,6 @@ const (
 // A set of methods for managing Instance resources.
 type InstanceServiceClient interface {
 	// Returns the specified Instance resource.
-	//
 	// To get the list of available Instance resources, make a [List] request.
 	Get(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*Instance, error)
 	// Retrieves the list of Instance resources in the specified folder.
@@ -73,7 +72,6 @@ type InstanceServiceClient interface {
 	// Returns the serial port output of the specified Instance resource.
 	GetSerialPortOutput(ctx context.Context, in *GetInstanceSerialPortOutputRequest, opts ...grpc.CallOption) (*GetInstanceSerialPortOutputResponse, error)
 	// Stops the running instance.
-	//
 	// You can start the instance later using the [InstanceService.Start] method.
 	Stop(ctx context.Context, in *StopInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the stopped instance.
@@ -85,46 +83,39 @@ type InstanceServiceClient interface {
 	// Detaches the disk from the instance.
 	DetachDisk(ctx context.Context, in *DetachInstanceDiskRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Attaches the filesystem to the instance.
-	//
 	// The instance and the filesystem must reside in the same availability zone.
-	//
 	// To use the instance with an attached filesystem, the latter must be mounted.
 	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(ctx context.Context, in *AttachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Detaches the filesystem from the instance.
 	DetachFilesystem(ctx context.Context, in *DetachInstanceFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Attaches the network-interface to the instance.
-	//
-	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Detaches the network-interface to the instance.
-	//
-	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes One-to-one NAT from the network interface.
 	RemoveOneToOneNat(ctx context.Context, in *RemoveInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified instance network interface.
 	UpdateNetworkInterface(ctx context.Context, in *UpdateInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Attaches the network-interface to the instance.
+	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Detaches the network-interface to the instance.
+	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(ctx context.Context, in *ListInstanceOperationsRequest, opts ...grpc.CallOption) (*ListInstanceOperationsResponse, error)
+	SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified instance to another folder of the same cloud.
-	//
 	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
-	//
 	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(ctx context.Context, in *MoveInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Moves the specified instance to another availability zone
-	//
 	// Running instance will be restarted during this operation.
 	Relocate(ctx context.Context, in *RelocateInstanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists access bindings for the instance.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the instance.
@@ -281,26 +272,6 @@ func (c *instanceServiceClient) DetachFilesystem(ctx context.Context, in *Detach
 	return out, nil
 }
 
-func (c *instanceServiceClient) AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceService_AttachNetworkInterface_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceServiceClient) DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceService_DetachNetworkInterface_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *instanceServiceClient) AddOneToOneNat(ctx context.Context, in *AddInstanceOneToOneNatRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -331,10 +302,40 @@ func (c *instanceServiceClient) UpdateNetworkInterface(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *instanceServiceClient) AttachNetworkInterface(ctx context.Context, in *AttachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_AttachNetworkInterface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceServiceClient) DetachNetworkInterface(ctx context.Context, in *DetachInstanceNetworkInterfaceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_DetachNetworkInterface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instanceServiceClient) ListOperations(ctx context.Context, in *ListInstanceOperationsRequest, opts ...grpc.CallOption) (*ListInstanceOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListInstanceOperationsResponse)
 	err := c.cc.Invoke(ctx, InstanceService_ListOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceServiceClient) SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceService_SimulateMaintenanceEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -355,16 +356,6 @@ func (c *instanceServiceClient) Relocate(ctx context.Context, in *RelocateInstan
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, InstanceService_Relocate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceServiceClient) SimulateMaintenanceEvent(ctx context.Context, in *SimulateInstanceMaintenanceEventRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceService_SimulateMaintenanceEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -408,7 +399,6 @@ func (c *instanceServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 // A set of methods for managing Instance resources.
 type InstanceServiceServer interface {
 	// Returns the specified Instance resource.
-	//
 	// To get the list of available Instance resources, make a [List] request.
 	Get(context.Context, *GetInstanceRequest) (*Instance, error)
 	// Retrieves the list of Instance resources in the specified folder.
@@ -425,7 +415,6 @@ type InstanceServiceServer interface {
 	// Returns the serial port output of the specified Instance resource.
 	GetSerialPortOutput(context.Context, *GetInstanceSerialPortOutputRequest) (*GetInstanceSerialPortOutputResponse, error)
 	// Stops the running instance.
-	//
 	// You can start the instance later using the [InstanceService.Start] method.
 	Stop(context.Context, *StopInstanceRequest) (*operation.Operation, error)
 	// Starts the stopped instance.
@@ -437,46 +426,39 @@ type InstanceServiceServer interface {
 	// Detaches the disk from the instance.
 	DetachDisk(context.Context, *DetachInstanceDiskRequest) (*operation.Operation, error)
 	// Attaches the filesystem to the instance.
-	//
 	// The instance and the filesystem must reside in the same availability zone.
-	//
 	// To use the instance with an attached filesystem, the latter must be mounted.
 	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	AttachFilesystem(context.Context, *AttachInstanceFilesystemRequest) (*operation.Operation, error)
 	// Detaches the filesystem from the instance.
 	DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error)
-	// Attaches the network-interface to the instance.
-	//
-	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
-	// Detaches the network-interface to the instance.
-	//
-	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
-	// To check the instance status, make a [InstanceService.Get] request.
-	// To stop the running instance, make a [InstanceService.Stop] request.
-	DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Enables One-to-one NAT on the network interface.
 	AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error)
 	// Removes One-to-one NAT from the network interface.
 	RemoveOneToOneNat(context.Context, *RemoveInstanceOneToOneNatRequest) (*operation.Operation, error)
 	// Updates the specified instance network interface.
 	UpdateNetworkInterface(context.Context, *UpdateInstanceNetworkInterfaceRequest) (*operation.Operation, error)
+	// Attaches the network-interface to the instance.
+	// To attach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
+	// Detaches the network-interface to the instance.
+	// To Detach a network-interface, the instance must have a `STOPPED` status ([Instance.status]).
+	// To check the instance status, make a [InstanceService.Get] request.
+	// To stop the running instance, make a [InstanceService.Stop] request.
+	DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error)
 	// Lists operations for the specified instance.
 	ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error)
+	SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error)
 	// Moves the specified instance to another folder of the same cloud.
-	//
 	// The instance must be stopped before moving. To stop the instance, make a [Stop] request.
-	//
 	// After moving, the instance will start recording its Monitoring default metrics to its new folder. Metrics
 	// that have been recorded to the source folder prior to moving will be retained.
 	Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error)
 	// Moves the specified instance to another availability zone
-	//
 	// Running instance will be restarted during this operation.
 	Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error)
-	SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error)
 	// Lists access bindings for the instance.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets access bindings for the instance.
@@ -534,12 +516,6 @@ func (UnimplementedInstanceServiceServer) AttachFilesystem(context.Context, *Att
 func (UnimplementedInstanceServiceServer) DetachFilesystem(context.Context, *DetachInstanceFilesystemRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DetachFilesystem not implemented")
 }
-func (UnimplementedInstanceServiceServer) AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method AttachNetworkInterface not implemented")
-}
-func (UnimplementedInstanceServiceServer) DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method DetachNetworkInterface not implemented")
-}
 func (UnimplementedInstanceServiceServer) AddOneToOneNat(context.Context, *AddInstanceOneToOneNatRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddOneToOneNat not implemented")
 }
@@ -549,17 +525,23 @@ func (UnimplementedInstanceServiceServer) RemoveOneToOneNat(context.Context, *Re
 func (UnimplementedInstanceServiceServer) UpdateNetworkInterface(context.Context, *UpdateInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateNetworkInterface not implemented")
 }
+func (UnimplementedInstanceServiceServer) AttachNetworkInterface(context.Context, *AttachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method AttachNetworkInterface not implemented")
+}
+func (UnimplementedInstanceServiceServer) DetachNetworkInterface(context.Context, *DetachInstanceNetworkInterfaceRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method DetachNetworkInterface not implemented")
+}
 func (UnimplementedInstanceServiceServer) ListOperations(context.Context, *ListInstanceOperationsRequest) (*ListInstanceOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedInstanceServiceServer) SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method SimulateMaintenanceEvent not implemented")
 }
 func (UnimplementedInstanceServiceServer) Move(context.Context, *MoveInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedInstanceServiceServer) Relocate(context.Context, *RelocateInstanceRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Relocate not implemented")
-}
-func (UnimplementedInstanceServiceServer) SimulateMaintenanceEvent(context.Context, *SimulateInstanceMaintenanceEventRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method SimulateMaintenanceEvent not implemented")
 }
 func (UnimplementedInstanceServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -842,42 +824,6 @@ func _InstanceService_DetachFilesystem_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InstanceService_AttachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AttachInstanceNetworkInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceService_AttachNetworkInterface_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, req.(*AttachInstanceNetworkInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceService_DetachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DetachInstanceNetworkInterfaceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceService_DetachNetworkInterface_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, req.(*DetachInstanceNetworkInterfaceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _InstanceService_AddOneToOneNat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AddInstanceOneToOneNatRequest)
 	if err := dec(in); err != nil {
@@ -932,6 +878,42 @@ func _InstanceService_UpdateNetworkInterface_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceService_AttachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachInstanceNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_AttachNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).AttachNetworkInterface(ctx, req.(*AttachInstanceNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceService_DetachNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetachInstanceNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_DetachNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).DetachNetworkInterface(ctx, req.(*DetachInstanceNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstanceService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListInstanceOperationsRequest)
 	if err := dec(in); err != nil {
@@ -946,6 +928,24 @@ func _InstanceService_ListOperations_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InstanceServiceServer).ListOperations(ctx, req.(*ListInstanceOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceService_SimulateMaintenanceEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SimulateInstanceMaintenanceEventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceService_SimulateMaintenanceEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, req.(*SimulateInstanceMaintenanceEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -982,24 +982,6 @@ func _InstanceService_Relocate_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InstanceServiceServer).Relocate(ctx, req.(*RelocateInstanceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceService_SimulateMaintenanceEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SimulateInstanceMaintenanceEventRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceService_SimulateMaintenanceEvent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceServiceServer).SimulateMaintenanceEvent(ctx, req.(*SimulateInstanceMaintenanceEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1122,14 +1104,6 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InstanceService_DetachFilesystem_Handler,
 		},
 		{
-			MethodName: "AttachNetworkInterface",
-			Handler:    _InstanceService_AttachNetworkInterface_Handler,
-		},
-		{
-			MethodName: "DetachNetworkInterface",
-			Handler:    _InstanceService_DetachNetworkInterface_Handler,
-		},
-		{
 			MethodName: "AddOneToOneNat",
 			Handler:    _InstanceService_AddOneToOneNat_Handler,
 		},
@@ -1142,8 +1116,20 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InstanceService_UpdateNetworkInterface_Handler,
 		},
 		{
+			MethodName: "AttachNetworkInterface",
+			Handler:    _InstanceService_AttachNetworkInterface_Handler,
+		},
+		{
+			MethodName: "DetachNetworkInterface",
+			Handler:    _InstanceService_DetachNetworkInterface_Handler,
+		},
+		{
 			MethodName: "ListOperations",
 			Handler:    _InstanceService_ListOperations_Handler,
+		},
+		{
+			MethodName: "SimulateMaintenanceEvent",
+			Handler:    _InstanceService_SimulateMaintenanceEvent_Handler,
 		},
 		{
 			MethodName: "Move",
@@ -1152,10 +1138,6 @@ var InstanceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Relocate",
 			Handler:    _InstanceService_Relocate_Handler,
-		},
-		{
-			MethodName: "SimulateMaintenanceEvent",
-			Handler:    _InstanceService_SimulateMaintenanceEvent_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

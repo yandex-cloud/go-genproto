@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -26,8 +25,9 @@ const (
 type GetHostTypeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the host type to return.
-	//
 	// To get a host type ID make a [HostTypeService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	HostTypeId    string `protobuf:"bytes,1,opt,name=host_type_id,json=hostTypeId,proto3" json:"host_type_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,10 +76,12 @@ type ListHostTypesRequest struct {
 	// results is larger than [page_size],
 	// the service returns a [ListHostTypesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListHostTypesResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -136,7 +138,6 @@ type ListHostTypesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListHostTypesRequest.page_size], use `next_page_token` as the value
 	// for the [ListHostTypesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -191,15 +192,14 @@ var File_yandex_cloud_compute_v1_host_type_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_compute_v1_host_type_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/compute/v1/host_type_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a'yandex/cloud/compute/v1/host_type.proto\x1a\x1dyandex/cloud/validation.proto\"D\n" +
-	"\x12GetHostTypeRequest\x12.\n" +
-	"\fhost_type_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"hostTypeId\"i\n" +
-	"\x14ListHostTypesRequest\x12'\n" +
-	"\tpage_size\x18\x01 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"/yandex/cloud/compute/v1/host_type_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a'yandex/cloud/compute/v1/host_type.proto\"6\n" +
+	"\x12GetHostTypeRequest\x12 \n" +
+	"\fhost_type_id\x18\x01 \x01(\tR\n" +
+	"hostTypeId\"R\n" +
+	"\x14ListHostTypesRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x81\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x81\x01\n" +
 	"\x15ListHostTypesResponse\x12@\n" +
 	"\n" +
 	"host_types\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.HostTypeR\thostTypes\x12&\n" +

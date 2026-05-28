@@ -27,23 +27,23 @@ const (
 	InstanceGroupService_CreateFromYaml_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/CreateFromYaml"
 	InstanceGroupService_Update_FullMethodName               = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Update"
 	InstanceGroupService_UpdateFromYaml_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/UpdateFromYaml"
+	InstanceGroupService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Delete"
+	InstanceGroupService_Start_FullMethodName                = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Start"
 	InstanceGroupService_Stop_FullMethodName                 = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Stop"
 	InstanceGroupService_RollingRestart_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/RollingRestart"
 	InstanceGroupService_RollingRecreate_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/RollingRecreate"
-	InstanceGroupService_Start_FullMethodName                = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Start"
-	InstanceGroupService_Delete_FullMethodName               = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/Delete"
 	InstanceGroupService_ListInstances_FullMethodName        = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ListInstances"
 	InstanceGroupService_DeleteInstances_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/DeleteInstances"
 	InstanceGroupService_StopInstances_FullMethodName        = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/StopInstances"
+	InstanceGroupService_ResumeProcesses_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ResumeProcesses"
+	InstanceGroupService_PauseProcesses_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/PauseProcesses"
+	InstanceGroupService_DisableZones_FullMethodName         = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/DisableZones"
+	InstanceGroupService_EnableZones_FullMethodName          = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/EnableZones"
 	InstanceGroupService_ListOperations_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ListOperations"
 	InstanceGroupService_ListLogRecords_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ListLogRecords"
 	InstanceGroupService_ListAccessBindings_FullMethodName   = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ListAccessBindings"
 	InstanceGroupService_SetAccessBindings_FullMethodName    = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/SetAccessBindings"
 	InstanceGroupService_UpdateAccessBindings_FullMethodName = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/UpdateAccessBindings"
-	InstanceGroupService_ResumeProcesses_FullMethodName      = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/ResumeProcesses"
-	InstanceGroupService_PauseProcesses_FullMethodName       = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/PauseProcesses"
-	InstanceGroupService_DisableZones_FullMethodName         = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/DisableZones"
-	InstanceGroupService_EnableZones_FullMethodName          = "/yandex.cloud.compute.v1.instancegroup.InstanceGroupService/EnableZones"
 )
 
 // InstanceGroupServiceClient is the client API for InstanceGroupService service.
@@ -53,7 +53,6 @@ const (
 // A set of methods for managing InstanceGroup resources.
 type InstanceGroupServiceClient interface {
 	// Returns the specified InstanceGroup resource.
-	//
 	// To get the list of available InstanceGroup resources, make a [List] request.
 	Get(ctx context.Context, in *GetInstanceGroupRequest, opts ...grpc.CallOption) (*InstanceGroup, error)
 	// Retrieves the list of InstanceGroup resources in the specified folder.
@@ -70,6 +69,10 @@ type InstanceGroupServiceClient interface {
 	// Updates the specified instance group from a YAML file.
 	// This method starts an operation that can be cancelled by another operation.
 	UpdateFromYaml(ctx context.Context, in *UpdateInstanceGroupFromYamlRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Deletes the specified instance group.
+	Delete(ctx context.Context, in *DeleteInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts the specified instance group.
+	Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified instance group.
 	Stop(ctx context.Context, in *StopInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Performs rolling restart of specified instances for the specified instance group.
@@ -78,26 +81,12 @@ type InstanceGroupServiceClient interface {
 	// Performs rolling recreate of specified instances for the specified instance group.
 	// Rolling recreate does recreate of instance VMs respecting all group policies.
 	RollingRecreate(ctx context.Context, in *RollingRecreateRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Starts the specified instance group.
-	Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified instance group.
-	Delete(ctx context.Context, in *DeleteInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists instances for the specified instance group.
 	ListInstances(ctx context.Context, in *ListInstanceGroupInstancesRequest, opts ...grpc.CallOption) (*ListInstanceGroupInstancesResponse, error)
 	// Delete instances from the instance group.
 	DeleteInstances(ctx context.Context, in *DeleteInstancesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stop instances from the instance group.
 	StopInstances(ctx context.Context, in *StopInstancesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Lists operations for the specified instance group.
-	ListOperations(ctx context.Context, in *ListInstanceGroupOperationsRequest, opts ...grpc.CallOption) (*ListInstanceGroupOperationsResponse, error)
-	// Lists logs for the specified instance group.
-	ListLogRecords(ctx context.Context, in *ListInstanceGroupLogRecordsRequest, opts ...grpc.CallOption) (*ListInstanceGroupLogRecordsResponse, error)
-	// Lists existing access bindings for the specified instance group.
-	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified instance group.
-	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates access bindings for the specified instance group.
-	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resumes all processes regarding management of the specified instance group,
 	// i.e. scaling, checking instances' health, auto-healing and updating them.
 	ResumeProcesses(ctx context.Context, in *ResumeInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -108,6 +97,16 @@ type InstanceGroupServiceClient interface {
 	DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enable zones for the specified instance group.
 	EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified instance group.
+	ListOperations(ctx context.Context, in *ListInstanceGroupOperationsRequest, opts ...grpc.CallOption) (*ListInstanceGroupOperationsResponse, error)
+	// Lists logs for the specified instance group.
+	ListLogRecords(ctx context.Context, in *ListInstanceGroupLogRecordsRequest, opts ...grpc.CallOption) (*ListInstanceGroupLogRecordsResponse, error)
+	// Lists existing access bindings for the specified instance group.
+	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified instance group.
+	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Updates access bindings for the specified instance group.
+	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type instanceGroupServiceClient struct {
@@ -178,6 +177,26 @@ func (c *instanceGroupServiceClient) UpdateFromYaml(ctx context.Context, in *Upd
 	return out, nil
 }
 
+func (c *instanceGroupServiceClient) Delete(ctx context.Context, in *DeleteInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_Start_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *instanceGroupServiceClient) Stop(ctx context.Context, in *StopInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -208,26 +227,6 @@ func (c *instanceGroupServiceClient) RollingRecreate(ctx context.Context, in *Ro
 	return out, nil
 }
 
-func (c *instanceGroupServiceClient) Start(ctx context.Context, in *StartInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_Start_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceGroupServiceClient) Delete(ctx context.Context, in *DeleteInstanceGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_Delete_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *instanceGroupServiceClient) ListInstances(ctx context.Context, in *ListInstanceGroupInstancesRequest, opts ...grpc.CallOption) (*ListInstanceGroupInstancesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListInstanceGroupInstancesResponse)
@@ -252,6 +251,46 @@ func (c *instanceGroupServiceClient) StopInstances(ctx context.Context, in *Stop
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, InstanceGroupService_StopInstances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) ResumeProcesses(ctx context.Context, in *ResumeInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_ResumeProcesses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) PauseProcesses(ctx context.Context, in *PauseInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_PauseProcesses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_DisableZones_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *instanceGroupServiceClient) EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, InstanceGroupService_EnableZones_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -308,46 +347,6 @@ func (c *instanceGroupServiceClient) UpdateAccessBindings(ctx context.Context, i
 	return out, nil
 }
 
-func (c *instanceGroupServiceClient) ResumeProcesses(ctx context.Context, in *ResumeInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_ResumeProcesses_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceGroupServiceClient) PauseProcesses(ctx context.Context, in *PauseInstanceGroupProcessesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_PauseProcesses_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceGroupServiceClient) DisableZones(ctx context.Context, in *DisableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_DisableZones_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *instanceGroupServiceClient) EnableZones(ctx context.Context, in *EnableZonesRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, InstanceGroupService_EnableZones_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // InstanceGroupServiceServer is the server API for InstanceGroupService service.
 // All implementations should embed UnimplementedInstanceGroupServiceServer
 // for forward compatibility.
@@ -355,7 +354,6 @@ func (c *instanceGroupServiceClient) EnableZones(ctx context.Context, in *Enable
 // A set of methods for managing InstanceGroup resources.
 type InstanceGroupServiceServer interface {
 	// Returns the specified InstanceGroup resource.
-	//
 	// To get the list of available InstanceGroup resources, make a [List] request.
 	Get(context.Context, *GetInstanceGroupRequest) (*InstanceGroup, error)
 	// Retrieves the list of InstanceGroup resources in the specified folder.
@@ -372,6 +370,10 @@ type InstanceGroupServiceServer interface {
 	// Updates the specified instance group from a YAML file.
 	// This method starts an operation that can be cancelled by another operation.
 	UpdateFromYaml(context.Context, *UpdateInstanceGroupFromYamlRequest) (*operation.Operation, error)
+	// Deletes the specified instance group.
+	Delete(context.Context, *DeleteInstanceGroupRequest) (*operation.Operation, error)
+	// Starts the specified instance group.
+	Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error)
 	// Stops the specified instance group.
 	Stop(context.Context, *StopInstanceGroupRequest) (*operation.Operation, error)
 	// Performs rolling restart of specified instances for the specified instance group.
@@ -380,26 +382,12 @@ type InstanceGroupServiceServer interface {
 	// Performs rolling recreate of specified instances for the specified instance group.
 	// Rolling recreate does recreate of instance VMs respecting all group policies.
 	RollingRecreate(context.Context, *RollingRecreateRequest) (*operation.Operation, error)
-	// Starts the specified instance group.
-	Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error)
-	// Deletes the specified instance group.
-	Delete(context.Context, *DeleteInstanceGroupRequest) (*operation.Operation, error)
 	// Lists instances for the specified instance group.
 	ListInstances(context.Context, *ListInstanceGroupInstancesRequest) (*ListInstanceGroupInstancesResponse, error)
 	// Delete instances from the instance group.
 	DeleteInstances(context.Context, *DeleteInstancesRequest) (*operation.Operation, error)
 	// Stop instances from the instance group.
 	StopInstances(context.Context, *StopInstancesRequest) (*operation.Operation, error)
-	// Lists operations for the specified instance group.
-	ListOperations(context.Context, *ListInstanceGroupOperationsRequest) (*ListInstanceGroupOperationsResponse, error)
-	// Lists logs for the specified instance group.
-	ListLogRecords(context.Context, *ListInstanceGroupLogRecordsRequest) (*ListInstanceGroupLogRecordsResponse, error)
-	// Lists existing access bindings for the specified instance group.
-	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified instance group.
-	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	// Updates access bindings for the specified instance group.
-	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 	// Resumes all processes regarding management of the specified instance group,
 	// i.e. scaling, checking instances' health, auto-healing and updating them.
 	ResumeProcesses(context.Context, *ResumeInstanceGroupProcessesRequest) (*operation.Operation, error)
@@ -410,6 +398,16 @@ type InstanceGroupServiceServer interface {
 	DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error)
 	// Enable zones for the specified instance group.
 	EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error)
+	// Lists operations for the specified instance group.
+	ListOperations(context.Context, *ListInstanceGroupOperationsRequest) (*ListInstanceGroupOperationsResponse, error)
+	// Lists logs for the specified instance group.
+	ListLogRecords(context.Context, *ListInstanceGroupLogRecordsRequest) (*ListInstanceGroupLogRecordsResponse, error)
+	// Lists existing access bindings for the specified instance group.
+	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
+	// Sets access bindings for the specified instance group.
+	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
+	// Updates access bindings for the specified instance group.
+	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
 // UnimplementedInstanceGroupServiceServer should be embedded to have
@@ -437,6 +435,12 @@ func (UnimplementedInstanceGroupServiceServer) Update(context.Context, *UpdateIn
 func (UnimplementedInstanceGroupServiceServer) UpdateFromYaml(context.Context, *UpdateInstanceGroupFromYamlRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateFromYaml not implemented")
 }
+func (UnimplementedInstanceGroupServiceServer) Delete(context.Context, *DeleteInstanceGroupRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
+}
 func (UnimplementedInstanceGroupServiceServer) Stop(context.Context, *StopInstanceGroupRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
 }
@@ -446,12 +450,6 @@ func (UnimplementedInstanceGroupServiceServer) RollingRestart(context.Context, *
 func (UnimplementedInstanceGroupServiceServer) RollingRecreate(context.Context, *RollingRecreateRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RollingRecreate not implemented")
 }
-func (UnimplementedInstanceGroupServiceServer) Start(context.Context, *StartInstanceGroupRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Start not implemented")
-}
-func (UnimplementedInstanceGroupServiceServer) Delete(context.Context, *DeleteInstanceGroupRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
-}
 func (UnimplementedInstanceGroupServiceServer) ListInstances(context.Context, *ListInstanceGroupInstancesRequest) (*ListInstanceGroupInstancesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListInstances not implemented")
 }
@@ -460,6 +458,18 @@ func (UnimplementedInstanceGroupServiceServer) DeleteInstances(context.Context, 
 }
 func (UnimplementedInstanceGroupServiceServer) StopInstances(context.Context, *StopInstancesRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StopInstances not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) ResumeProcesses(context.Context, *ResumeInstanceGroupProcessesRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResumeProcesses not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) PauseProcesses(context.Context, *PauseInstanceGroupProcessesRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method PauseProcesses not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method DisableZones not implemented")
+}
+func (UnimplementedInstanceGroupServiceServer) EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method EnableZones not implemented")
 }
 func (UnimplementedInstanceGroupServiceServer) ListOperations(context.Context, *ListInstanceGroupOperationsRequest) (*ListInstanceGroupOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
@@ -475,18 +485,6 @@ func (UnimplementedInstanceGroupServiceServer) SetAccessBindings(context.Context
 }
 func (UnimplementedInstanceGroupServiceServer) UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAccessBindings not implemented")
-}
-func (UnimplementedInstanceGroupServiceServer) ResumeProcesses(context.Context, *ResumeInstanceGroupProcessesRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method ResumeProcesses not implemented")
-}
-func (UnimplementedInstanceGroupServiceServer) PauseProcesses(context.Context, *PauseInstanceGroupProcessesRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method PauseProcesses not implemented")
-}
-func (UnimplementedInstanceGroupServiceServer) DisableZones(context.Context, *DisableZonesRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method DisableZones not implemented")
-}
-func (UnimplementedInstanceGroupServiceServer) EnableZones(context.Context, *EnableZonesRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method EnableZones not implemented")
 }
 func (UnimplementedInstanceGroupServiceServer) testEmbeddedByValue() {}
 
@@ -616,6 +614,42 @@ func _InstanceGroupService_UpdateFromYaml_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _InstanceGroupService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteInstanceGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).Delete(ctx, req.(*DeleteInstanceGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartInstanceGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).Start(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_Start_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).Start(ctx, req.(*StartInstanceGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _InstanceGroupService_Stop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StopInstanceGroupRequest)
 	if err := dec(in); err != nil {
@@ -670,42 +704,6 @@ func _InstanceGroupService_RollingRecreate_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InstanceGroupService_Start_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StartInstanceGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).Start(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_Start_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).Start(ctx, req.(*StartInstanceGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceGroupService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteInstanceGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_Delete_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).Delete(ctx, req.(*DeleteInstanceGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _InstanceGroupService_ListInstances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListInstanceGroupInstancesRequest)
 	if err := dec(in); err != nil {
@@ -756,6 +754,78 @@ func _InstanceGroupService_StopInstances_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InstanceGroupServiceServer).StopInstances(ctx, req.(*StopInstancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_ResumeProcesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResumeInstanceGroupProcessesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).ResumeProcesses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_ResumeProcesses_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).ResumeProcesses(ctx, req.(*ResumeInstanceGroupProcessesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_PauseProcesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PauseInstanceGroupProcessesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).PauseProcesses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_PauseProcesses_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).PauseProcesses(ctx, req.(*PauseInstanceGroupProcessesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_DisableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).DisableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_DisableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).DisableZones(ctx, req.(*DisableZonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InstanceGroupService_EnableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnableZonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InstanceGroupServiceServer).EnableZones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InstanceGroupService_EnableZones_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InstanceGroupServiceServer).EnableZones(ctx, req.(*EnableZonesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -850,78 +920,6 @@ func _InstanceGroupService_UpdateAccessBindings_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InstanceGroupService_ResumeProcesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ResumeInstanceGroupProcessesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).ResumeProcesses(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_ResumeProcesses_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).ResumeProcesses(ctx, req.(*ResumeInstanceGroupProcessesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceGroupService_PauseProcesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PauseInstanceGroupProcessesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).PauseProcesses(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_PauseProcesses_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).PauseProcesses(ctx, req.(*PauseInstanceGroupProcessesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceGroupService_DisableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DisableZonesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).DisableZones(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_DisableZones_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).DisableZones(ctx, req.(*DisableZonesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _InstanceGroupService_EnableZones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EnableZonesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(InstanceGroupServiceServer).EnableZones(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: InstanceGroupService_EnableZones_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InstanceGroupServiceServer).EnableZones(ctx, req.(*EnableZonesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // InstanceGroupService_ServiceDesc is the grpc.ServiceDesc for InstanceGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -954,6 +952,14 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InstanceGroupService_UpdateFromYaml_Handler,
 		},
 		{
+			MethodName: "Delete",
+			Handler:    _InstanceGroupService_Delete_Handler,
+		},
+		{
+			MethodName: "Start",
+			Handler:    _InstanceGroupService_Start_Handler,
+		},
+		{
 			MethodName: "Stop",
 			Handler:    _InstanceGroupService_Stop_Handler,
 		},
@@ -966,14 +972,6 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InstanceGroupService_RollingRecreate_Handler,
 		},
 		{
-			MethodName: "Start",
-			Handler:    _InstanceGroupService_Start_Handler,
-		},
-		{
-			MethodName: "Delete",
-			Handler:    _InstanceGroupService_Delete_Handler,
-		},
-		{
 			MethodName: "ListInstances",
 			Handler:    _InstanceGroupService_ListInstances_Handler,
 		},
@@ -984,6 +982,22 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopInstances",
 			Handler:    _InstanceGroupService_StopInstances_Handler,
+		},
+		{
+			MethodName: "ResumeProcesses",
+			Handler:    _InstanceGroupService_ResumeProcesses_Handler,
+		},
+		{
+			MethodName: "PauseProcesses",
+			Handler:    _InstanceGroupService_PauseProcesses_Handler,
+		},
+		{
+			MethodName: "DisableZones",
+			Handler:    _InstanceGroupService_DisableZones_Handler,
+		},
+		{
+			MethodName: "EnableZones",
+			Handler:    _InstanceGroupService_EnableZones_Handler,
 		},
 		{
 			MethodName: "ListOperations",
@@ -1004,22 +1018,6 @@ var InstanceGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccessBindings",
 			Handler:    _InstanceGroupService_UpdateAccessBindings_Handler,
-		},
-		{
-			MethodName: "ResumeProcesses",
-			Handler:    _InstanceGroupService_ResumeProcesses_Handler,
-		},
-		{
-			MethodName: "PauseProcesses",
-			Handler:    _InstanceGroupService_PauseProcesses_Handler,
-		},
-		{
-			MethodName: "DisableZones",
-			Handler:    _InstanceGroupService_DisableZones_Handler,
-		},
-		{
-			MethodName: "EnableZones",
-			Handler:    _InstanceGroupService_EnableZones_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

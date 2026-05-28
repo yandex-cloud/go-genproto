@@ -729,10 +729,10 @@ const file_yandex_cloud_mdb_mysql_v1_user_proto_rawDesc = "" +
 	"\x18max_connections_per_hour\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15maxConnectionsPerHour\x12V\n" +
 	"\x14max_user_connections\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12maxUserConnections\"8\n" +
 	"\x11ConnectionManager\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\xfa\x04\n" +
-	"\bUserSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=32R\x04name\x12)\n" +
-	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12G\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\xf8\x04\n" +
+	"\bUserSpec\x124\n" +
+	"\x04name\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=32R\x04name\x12%\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x050-128R\bpassword\x12G\n" +
 	"\vpermissions\x18\x03 \x03(\v2%.yandex.cloud.mdb.mysql.v1.PermissionR\vpermissions\x12Z\n" +
 	"\x12global_permissions\x18\x04 \x03(\x0e2+.yandex.cloud.mdb.mysql.v1.GlobalPermissionR\x11globalPermissions\x12X\n" +
 	"\x11connection_limits\x18\x05 \x01(\v2+.yandex.cloud.mdb.mysql.v1.ConnectionLimitsR\x10connectionLimits\x12Z\n" +

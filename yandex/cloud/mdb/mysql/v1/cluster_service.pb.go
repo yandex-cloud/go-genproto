@@ -3178,12 +3178,12 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.mysql.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc6\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xce\b\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.mysql.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.mysql.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.mysql.v1.Cluster.EnvironmentR\venvironment\x12F\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.mysql.v1.ConfigSpecR\n" +
 	"configSpec\x12N\n" +
@@ -3205,14 +3205,14 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x0f\x10\x10\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xde\x05\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xe6\x05\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12F\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12F\n" +
 	"\vconfig_spec\x18\x05 \x01(\v2%.yandex.cloud.mdb.mysql.v1.ConfigSpecR\n" +
 	"configSpec\x12.\n" +
 	"\x04name\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12[\n" +
@@ -3240,13 +3240,13 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x81\b\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x89\b\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
 	"\x04time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12*\n" +
 	"\x04name\x18\x04 \x01(\tB\x16\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*R\x04name\x12+\n" +
-	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
-	"\x06labels\x18\x06 \x03(\v2<.yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +
+	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
+	"\x06labels\x18\x06 \x03(\v2<.yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +
 	"\venvironment\x18\a \x01(\x0e2..yandex.cloud.mdb.mysql.v1.Cluster.EnvironmentR\venvironment\x12F\n" +
 	"\vconfig_spec\x18\b \x01(\v2%.yandex.cloud.mdb.mysql.v1.ConfigSpecR\n" +
 	"configSpec\x12B\n" +
@@ -3366,22 +3366,22 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"y\n" +
 	"\x18ListClusterHostsResponse\x125\n" +
 	"\x05hosts\x18\x01 \x03(\v2\x1f.yandex.cloud.mdb.mysql.v1.HostR\x05hosts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x91\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x90\x01\n" +
 	"\x16AddClusterHostsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12J\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12I\n" +
 	"\n" +
-	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.mysql.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"W\n" +
+	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.mysql.v1.HostSpecB\x05\x82\xc81\x011R\thostSpecs\"W\n" +
 	"\x17AddClusterHostsMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"x\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"w\n" +
 	"\x19DeleteClusterHostsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12.\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12-\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tB\x0f\x82\xc81\x02>0\x8a\xc81\x05<=253R\thostNames\"Z\n" +
+	"host_names\x18\x02 \x03(\tB\x0e\x82\xc81\x011\x8a\xc81\x05<=253R\thostNames\"Z\n" +
 	"\x1aDeleteClusterHostsMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
@@ -3407,11 +3407,11 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12(\n" +
 	"\x10source_folder_id\x18\x02 \x01(\tR\x0esourceFolderId\x122\n" +
-	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\xa7\x01\n" +
+	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\xa6\x01\n" +
 	"\x19UpdateClusterHostsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12]\n" +
-	"\x11update_host_specs\x18\x02 \x03(\v2).yandex.cloud.mdb.mysql.v1.UpdateHostSpecB\x06\x82\xc81\x02>0R\x0fupdateHostSpecs\"Z\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\\\n" +
+	"\x11update_host_specs\x18\x02 \x03(\v2).yandex.cloud.mdb.mysql.v1.UpdateHostSpecB\x05\x82\xc81\x011R\x0fupdateHostSpecs\"Z\n" +
 	"\x1aUpdateClusterHostsMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +

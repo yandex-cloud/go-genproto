@@ -51,10 +51,6 @@ func (m *Instance) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }
 
-func (m *Instance) SetMetadataOptions(v *MetadataOptions) {
-	m.MetadataOptions = v
-}
-
 func (m *Instance) SetBootDisk(v *AttachedDisk) {
 	m.BootDisk = v
 }
@@ -63,24 +59,8 @@ func (m *Instance) SetSecondaryDisks(v []*AttachedDisk) {
 	m.SecondaryDisks = v
 }
 
-func (m *Instance) SetLocalDisks(v []*AttachedLocalDisk) {
-	m.LocalDisks = v
-}
-
-func (m *Instance) SetFilesystems(v []*AttachedFilesystem) {
-	m.Filesystems = v
-}
-
 func (m *Instance) SetNetworkInterfaces(v []*NetworkInterface) {
 	m.NetworkInterfaces = v
-}
-
-func (m *Instance) SetSerialPortSettings(v *SerialPortSettings) {
-	m.SerialPortSettings = v
-}
-
-func (m *Instance) SetGpuSettings(v *GpuSettings) {
-	m.GpuSettings = v
 }
 
 func (m *Instance) SetFqdn(v string) {
@@ -111,6 +91,18 @@ func (m *Instance) SetHostId(v string) {
 	m.HostId = v
 }
 
+func (m *Instance) SetFilesystems(v []*AttachedFilesystem) {
+	m.Filesystems = v
+}
+
+func (m *Instance) SetLocalDisks(v []*AttachedLocalDisk) {
+	m.LocalDisks = v
+}
+
+func (m *Instance) SetGpuSettings(v *GpuSettings) {
+	m.GpuSettings = v
+}
+
 func (m *Instance) SetMaintenancePolicy(v MaintenancePolicy) {
 	m.MaintenancePolicy = v
 }
@@ -119,16 +111,24 @@ func (m *Instance) SetMaintenanceGracePeriod(v *durationpb.Duration) {
 	m.MaintenanceGracePeriod = v
 }
 
+func (m *Instance) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
+func (m *Instance) SetSerialPortSettings(v *SerialPortSettings) {
+	m.SerialPortSettings = v
+}
+
 func (m *Instance) SetHardwareGeneration(v *HardwareGeneration) {
 	m.HardwareGeneration = v
 }
 
-func (m *Instance) SetReservedInstancePoolId(v string) {
-	m.ReservedInstancePoolId = v
-}
-
 func (m *Instance) SetApplication(v *Application) {
 	m.Application = v
+}
+
+func (m *Instance) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
 }
 
 func (m *Resources) SetMemory(v int64) {
@@ -271,20 +271,16 @@ func (m *NetworkSettings) SetType(v NetworkSettings_Type) {
 	m.Type = v
 }
 
-func (m *GpuSettings) SetGpuClusterId(v string) {
-	m.GpuClusterId = v
-}
-
 func (m *PlacementPolicy) SetPlacementGroupId(v string) {
 	m.PlacementGroupId = v
 }
 
-func (m *PlacementPolicy) SetHostAffinityRules(v []*PlacementPolicy_HostAffinityRule) {
-	m.HostAffinityRules = v
-}
-
 func (m *PlacementPolicy) SetPlacementGroupPartition(v int64) {
 	m.PlacementGroupPartition = v
+}
+
+func (m *PlacementPolicy) SetHostAffinityRules(v []*PlacementPolicy_HostAffinityRule) {
+	m.HostAffinityRules = v
 }
 
 func (m *PlacementPolicy_HostAffinityRule) SetKey(v string) {
@@ -297,6 +293,10 @@ func (m *PlacementPolicy_HostAffinityRule) SetOp(v PlacementPolicy_HostAffinityR
 
 func (m *PlacementPolicy_HostAffinityRule) SetValues(v []string) {
 	m.Values = v
+}
+
+func (m *GpuSettings) SetGpuClusterId(v string) {
+	m.GpuClusterId = v
 }
 
 func (m *MetadataOptions) SetGceHttpEndpoint(v MetadataOption) {

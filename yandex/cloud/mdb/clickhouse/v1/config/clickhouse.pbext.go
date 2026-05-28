@@ -354,6 +354,10 @@ func (m *ClickhouseConfig) SetCustomMacros(v []*ClickhouseConfig_Macro) {
 	m.CustomMacros = v
 }
 
+func (m *ClickhouseConfig) SetTls(v *ClickhouseConfig_Tls) {
+	m.Tls = v
+}
+
 func (m *ClickhouseConfig) SetBuiltinDictionariesReloadInterval(v *wrapperspb.Int64Value) {
 	m.BuiltinDictionariesReloadInterval = v
 }
@@ -1018,6 +1022,10 @@ func (m *ClickhouseConfig_Macro) SetName(v string) {
 
 func (m *ClickhouseConfig_Macro) SetValue(v string) {
 	m.Value = v
+}
+
+func (m *ClickhouseConfig_Tls) SetTrustedCertificates(v []string) {
+	m.TrustedCertificates = v
 }
 
 func (m *ClickhouseConfigSet) SetEffectiveConfig(v *ClickhouseConfig) {

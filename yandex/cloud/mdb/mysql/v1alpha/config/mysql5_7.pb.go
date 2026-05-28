@@ -158,10 +158,10 @@ var File_yandex_cloud_mdb_mysql_v1alpha_config_mysql5_7_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_mysql_v1alpha_config_mysql5_7_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/mysql/v1alpha/config/mysql5_7.proto\x12%yandex.cloud.mdb.mysql.v1alpha.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8d\x02\n" +
+	"4yandex/cloud/mdb/mysql/v1alpha/config/mysql5_7.proto\x12%yandex.cloud.mdb.mysql.v1alpha.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x02\n" +
 	"\x0eMysqlConfig5_7\x12a\n" +
-	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12R\n" +
-	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-10000R\x0emaxConnections\x12D\n" +
+	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=5242880R\x14innodbBufferPoolSize\x12S\n" +
+	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t10-100000R\x0emaxConnections\x12D\n" +
 	"\x0flong_query_time\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueR\rlongQueryTime\"\xab\x02\n" +
 	"\x11MysqlConfigSet5_7\x12`\n" +
 	"\x10effective_config\x18\x01 \x01(\v25.yandex.cloud.mdb.mysql.v1alpha.config.MysqlConfig5_7R\x0feffectiveConfig\x12V\n" +

@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -27,6 +26,7 @@ type GetDiskTypeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the disk type to return information about.
 	// To get the disk type ID use a [DiskTypeService.List] request.
+	// This field is required.
 	DiskTypeId    string `protobuf:"bytes,1,opt,name=disk_type_id,json=diskTypeId,proto3" json:"disk_type_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,9 +75,11 @@ type ListDiskTypesRequest struct {
 	// results is larger than [page_size],
 	// the service returns a [ListDiskTypesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListDiskTypesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -190,15 +192,14 @@ var File_yandex_cloud_compute_v1_disk_type_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_compute_v1_disk_type_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/compute/v1/disk_type_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a'yandex/cloud/compute/v1/disk_type.proto\x1a\x1dyandex/cloud/validation.proto\"<\n" +
-	"\x12GetDiskTypeRequest\x12&\n" +
-	"\fdisk_type_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"diskTypeId\"i\n" +
-	"\x14ListDiskTypesRequest\x12'\n" +
-	"\tpage_size\x18\x01 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"/yandex/cloud/compute/v1/disk_type_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a'yandex/cloud/compute/v1/disk_type.proto\"6\n" +
+	"\x12GetDiskTypeRequest\x12 \n" +
+	"\fdisk_type_id\x18\x01 \x01(\tR\n" +
+	"diskTypeId\"R\n" +
+	"\x14ListDiskTypesRequest\x12\x1b\n" +
+	"\tpage_size\x18\x01 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x81\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x81\x01\n" +
 	"\x15ListDiskTypesResponse\x12@\n" +
 	"\n" +
 	"disk_types\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.DiskTypeR\tdiskTypes\x12&\n" +

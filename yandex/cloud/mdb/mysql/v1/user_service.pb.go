@@ -849,11 +849,11 @@ var File_yandex_cloud_mdb_mysql_v1_user_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"z\n" +
+	",yandex/cloud/mdb/mysql/v1/user_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/mdb/mysql/v1/deletion_protection.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"|\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\"\x92\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\tuser_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\buserName\"\x92\x01\n" +
 	"\x10ListUsersRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -871,14 +871,14 @@ const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xf2\x05\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xf4\x05\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\tuser_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\buserName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12%\n" +
-	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x058-128R\bpassword\x12G\n" +
+	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x050-128R\bpassword\x12G\n" +
 	"\vpermissions\x18\x05 \x03(\v2%.yandex.cloud.mdb.mysql.v1.PermissionR\vpermissions\x12Z\n" +
 	"\x12global_permissions\x18\x06 \x03(\x0e2+.yandex.cloud.mdb.mysql.v1.GlobalPermissionR\x11globalPermissions\x12X\n" +
 	"\x11connection_limits\x18\a \x01(\v2+.yandex.cloud.mdb.mysql.v1.ConnectionLimitsR\x10connectionLimits\x12Z\n" +
@@ -889,30 +889,30 @@ const file_yandex_cloud_mdb_mysql_v1_user_service_proto_rawDesc = "" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"}\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\x7f\n" +
 	"\x11DeleteUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\"P\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\tuser_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\buserName\"P\n" +
 	"\x12DeleteUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd3\x01\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd5\x01\n" +
 	"\x1aGrantUserPermissionRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12K\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\tuser_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\buserName\x12K\n" +
 	"\n" +
 	"permission\x18\x03 \x01(\v2%.yandex.cloud.mdb.mysql.v1.PermissionB\x04\xe8\xc71\x01R\n" +
 	"permission\"Y\n" +
 	"\x1bGrantUserPermissionMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd4\x01\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd6\x01\n" +
 	"\x1bRevokeUserPermissionRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\x12K\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"\tuser_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\buserName\x12K\n" +
 	"\n" +
 	"permission\x18\x03 \x01(\v2%.yandex.cloud.mdb.mysql.v1.PermissionB\x04\xe8\xc71\x01R\n" +
 	"permission\"Z\n" +

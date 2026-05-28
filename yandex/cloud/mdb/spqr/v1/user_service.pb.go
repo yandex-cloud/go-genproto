@@ -594,7 +594,7 @@ var File_yandex_cloud_mdb_spqr_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/mdb/spqr/v1/user_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a google/protobuf/field_mask.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\"y\n" +
+	"+yandex/cloud/mdb/spqr/v1/user_service.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a#yandex/cloud/mdb/spqr/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +

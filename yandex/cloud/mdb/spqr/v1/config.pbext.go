@@ -26,12 +26,12 @@ func (m *SPQRConfig) SetInfra(v *InfraConfig) {
 	m.Infra = v
 }
 
-func (m *SPQRConfig) SetLogLevel(v LogLevel) {
-	m.LogLevel = v
-}
-
 func (m *SPQRConfig) SetBalancer(v *BalancerSettings) {
 	m.Balancer = v
+}
+
+func (m *SPQRConfig) SetLogLevel(v LogLevel) {
+	m.LogLevel = v
 }
 
 func (m *RouterConfig) SetConfig(v *RouterSettings) {

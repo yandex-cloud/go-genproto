@@ -40,7 +40,6 @@ const (
 // A set of methods for managing placement groups.
 type PlacementGroupServiceClient interface {
 	// Returns the specified placement group.
-	//
 	// To get the list of all available placement groups, make a [List] request.
 	Get(ctx context.Context, in *GetPlacementGroupRequest, opts ...grpc.CallOption) (*PlacementGroup, error)
 	// Retrieves the list of placement groups in the specified folder.
@@ -178,7 +177,6 @@ func (c *placementGroupServiceClient) UpdateAccessBindings(ctx context.Context, 
 // A set of methods for managing placement groups.
 type PlacementGroupServiceServer interface {
 	// Returns the specified placement group.
-	//
 	// To get the list of all available placement groups, make a [List] request.
 	Get(context.Context, *GetPlacementGroupRequest) (*PlacementGroup, error)
 	// Retrieves the list of placement groups in the specified folder.

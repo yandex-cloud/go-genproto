@@ -278,6 +278,10 @@ func (m *SetPasswordHashRequest) SetHash(v *PasswordHash) {
 	m.Hash = v
 }
 
+func (m *SetPasswordHashRequest) SetNeedChange(v bool) {
+	m.NeedChange = v
+}
+
 func (m *SetPasswordHashMetadata) SetUserId(v string) {
 	m.UserId = v
 }

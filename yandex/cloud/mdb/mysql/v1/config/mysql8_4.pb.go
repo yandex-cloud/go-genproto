@@ -1640,7 +1640,7 @@ var File_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc8N\n" +
+	"/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x12 yandex.cloud.mdb.mysql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xd1N\n" +
 	"\x0eMysqlConfig8_4\x12c\n" +
 	"\x17innodb_buffer_pool_size\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x0f\xfa\xc71\v>=134217728R\x14innodbBufferPoolSize\x12S\n" +
 	"\x0fmax_connections\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t10-100000R\x0emaxConnections\x12P\n" +
@@ -1698,7 +1698,7 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\x1ebinlog_group_commit_sync_delay\x18+ \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-50000R\x1abinlogGroupCommitSyncDelay\x12i\n" +
 	"\x10binlog_row_image\x18, \x01(\x0e2?.yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4.BinlogRowImageR\x0ebinlogRowImage\x12Z\n" +
 	"\x1cbinlog_rows_query_log_events\x18- \x01(\v2\x1a.google.protobuf.BoolValueR\x18binlogRowsQueryLogEvents\x12{\n" +
-	")rpl_semi_sync_master_wait_for_slave_count\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x031-2R\"rplSemiSyncMasterWaitForSlaveCount\x12r\n" +
+	")rpl_semi_sync_master_wait_for_slave_count\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\"rplSemiSyncMasterWaitForSlaveCount\x12r\n" +
 	"\x13slave_parallel_type\x18/ \x01(\x0e2B.yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4.SlaveParallelTypeR\x11slaveParallelType\x12[\n" +
 	"\x16slave_parallel_workers\x180 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x040-64R\x14slaveParallelWorkers\x12V\n" +
 	"\x11regexp_time_limit\x181 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-1048576R\x0fregexpTimeLimit\x12t\n" +
@@ -1707,8 +1707,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\fwait_timeout\x184 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t600-86400R\vwaitTimeout\x12g\n" +
 	"\x1bmdb_offline_mode_enable_lag\x185 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b30-86400R\x17mdbOfflineModeEnableLag\x12i\n" +
 	"\x1cmdb_offline_mode_disable_lag\x186 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-86400R\x18mdbOfflineModeDisableLag\x12m\n" +
-	"\x1crange_optimizer_max_mem_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f60-268435456R\x18rangeOptimizerMaxMemSize\x12w\n" +
-	" innodb_online_alter_log_max_size\x188 \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f60-107374182400R\x1binnodbOnlineAlterLogMaxSize\x12]\n" +
+	"\x1crange_optimizer_max_mem_size\x187 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f60-268435456R\x18rangeOptimizerMaxMemSize\x12z\n" +
+	" innodb_online_alter_log_max_size\x188 \x01(\v2\x1b.google.protobuf.Int64ValueB\x16\xfa\xc71\x1265536-107374182400R\x1binnodbOnlineAlterLogMaxSize\x12]\n" +
 	"\x18innodb_ft_min_token_size\x189 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x040-16R\x14innodbFtMinTokenSize\x12^\n" +
 	"\x18innodb_ft_max_token_size\x18: \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x0510-84R\x14innodbFtMaxTokenSize\x12Y\n" +
 	"\x16lower_case_table_names\x18; \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x13lowerCaseTableNames\x12@\n" +
@@ -1720,8 +1720,9 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\xfa\xc71\x061-1000R\x10logSlowRateLimit\x12O\n" +
 	"\x16log_slow_sp_statements\x18@ \x01(\v2\x1a.google.protobuf.BoolValueR\x13logSlowSpStatements\x12j\n" +
 	"\x0flog_slow_filter\x18A \x03(\x0e2B.yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4.LogSlowFilterTypeR\rlogSlowFilter\x12f\n" +
-	"\x1bmdb_priority_choice_max_lag\x18B \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-86400R\x17mdbPriorityChoiceMaxLag\x12R\n" +
-	"\x10innodb_page_size\x18C \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a1-65536R\x0einnodbPageSize\x12[\n" +
+	"\x1bmdb_priority_choice_max_lag\x18B \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-86400R\x17mdbPriorityChoiceMaxLag\x12U\n" +
+	"\x10innodb_page_size\x18C \x01(\v2\x1b.google.protobuf.Int64ValueB\x0e\xfa\xc71\n" +
+	"4096-65536R\x0einnodbPageSize\x12[\n" +
 	"\x16max_sp_recursion_depth\x18D \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-255R\x13maxSpRecursionDepth\x12^\n" +
 	"\x18innodb_compression_level\x18E \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-9R\x16innodbCompressionLevel\x12:\n" +
 	"\n" +
@@ -1730,8 +1731,8 @@ const file_yandex_cloud_mdb_mysql_v1_config_mysql8_4_proto_rawDesc = "" +
 	"\x14innodb_status_output\x18G \x01(\v2\x1a.google.protobuf.BoolValueR\x12innodbStatusOutput\x12H\n" +
 	"\x12innodb_strict_mode\x18H \x01(\v2\x1a.google.protobuf.BoolValueR\x10innodbStrictMode\x12g\n" +
 	"#innodb_print_lock_wait_timeout_info\x18I \x01(\v2\x1a.google.protobuf.BoolValueR\x1einnodbPrintLockWaitTimeoutInfo\x12T\n" +
-	"\x13log_error_verbosity\x18J \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x032-3R\x11logErrorVerbosity\x12V\n" +
-	"\x11max_digest_length\x18K \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t1024-8192R\x0fmaxDigestLength\x12W\n" +
+	"\x13log_error_verbosity\x18J \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x032-3R\x11logErrorVerbosity\x12Y\n" +
+	"\x11max_digest_length\x18K \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1024-1048576R\x0fmaxDigestLength\x12W\n" +
 	"\x11lock_wait_timeout\x18L \x01(\v2\x1b.google.protobuf.Int64ValueB\x0e\xfa\xc71\n" +
 	"1-31536000R\x0flockWaitTimeout\x12a\n" +
 	"\x17max_prepared_stmt_count\x18M \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-4194304R\x14maxPreparedStmtCount\x12)\n" +

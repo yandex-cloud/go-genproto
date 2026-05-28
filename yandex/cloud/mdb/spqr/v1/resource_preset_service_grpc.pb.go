@@ -30,7 +30,6 @@ const (
 // A set of methods for managing ResourcePreset resources.
 type ResourcePresetServiceClient interface {
 	// Returns the specified ResourcePreset resource.
-	//
 	// To get the list of available ResourcePreset resources, make a [List] request.
 	Get(ctx context.Context, in *GetResourcePresetRequest, opts ...grpc.CallOption) (*ResourcePreset, error)
 	// Retrieves the list of available ResourcePreset resources.
@@ -72,7 +71,6 @@ func (c *resourcePresetServiceClient) List(ctx context.Context, in *ListResource
 // A set of methods for managing ResourcePreset resources.
 type ResourcePresetServiceServer interface {
 	// Returns the specified ResourcePreset resource.
-	//
 	// To get the list of available ResourcePreset resources, make a [List] request.
 	Get(context.Context, *GetResourcePresetRequest) (*ResourcePreset, error)
 	// Retrieves the list of available ResourcePreset resources.

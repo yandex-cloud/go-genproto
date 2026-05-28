@@ -1704,7 +1704,9 @@ type SetPasswordHashRequest struct {
 	// ID of the user to set the password hash for.
 	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	// Password hash to set.
-	Hash          *PasswordHash `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	Hash *PasswordHash `protobuf:"bytes,2,opt,name=hash,proto3" json:"hash,omitempty"`
+	// Whether the user must change their password on next login.
+	NeedChange    bool `protobuf:"varint,3,opt,name=need_change,json=needChange,proto3" json:"need_change,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1751,6 +1753,13 @@ func (x *SetPasswordHashRequest) GetHash() *PasswordHash {
 		return x.Hash
 	}
 	return nil
+}
+
+func (x *SetPasswordHashRequest) GetNeedChange() bool {
+	if x != nil {
+		return x.NeedChange
+	}
+	return false
 }
 
 // Metadata for the [UserService.SetPasswordHash] operation.
@@ -2599,10 +2608,12 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\x1dConvertToExternalUserMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1f\n" +
 	"\vexternal_id\x18\x02 \x01(\tR\n" +
-	"externalId\"\x8a\x01\n" +
+	"externalId\"\xab\x01\n" +
 	"\x16SetPasswordHashRequest\x12%\n" +
 	"\auser_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06userId\x12I\n" +
-	"\x04hash\x18\x02 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.PasswordHashR\x04hash\"2\n" +
+	"\x04hash\x18\x02 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.PasswordHashR\x04hash\x12\x1f\n" +
+	"\vneed_change\x18\x03 \x01(\bR\n" +
+	"needChange\"2\n" +
 	"\x17SetPasswordHashMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x82\x02\n" +
 	"\fPasswordHash\x122\n" +

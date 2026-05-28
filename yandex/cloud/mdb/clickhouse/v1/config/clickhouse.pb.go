@@ -89,7 +89,6 @@ func (ClickhouseConfig_LogLevel) EnumDescriptor() ([]byte, []int) {
 }
 
 // Determines the behavior of background merges for MergeTree tables with projections.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/merge-tree-settings#deduplicate_merge_projection_mode).
 type ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode int32
 
@@ -265,7 +264,6 @@ func (ClickhouseConfig_Compression_Method) EnumDescriptor() ([]byte, []int) {
 }
 
 // Layout type.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/sql-reference/dictionaries#ways-to-store-dictionaries-in-memory).
 type ClickhouseConfig_ExternalDictionary_Layout_Type int32
 
@@ -373,7 +371,6 @@ func (ClickhouseConfig_ExternalDictionary_Layout_Type) EnumDescriptor() ([]byte,
 }
 
 // Mode of SSL TCP/IP connection to a PostgreSQL host.
-//
 // For details, see [PostgreSQL documentation](https://www.postgresql.org/docs/current/libpq-ssl.html).
 type ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode int32
 
@@ -770,15 +767,18 @@ type ClickhouseConfig struct {
 	// Sets the number of threads performing background merges and mutations for MergeTree-engine tables.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_pool_size).
 	BackgroundPoolSize *wrapperspb.Int64Value `protobuf:"bytes,33,opt,name=background_pool_size,json=backgroundPoolSize,proto3" json:"background_pool_size,omitempty"`
 	// Sets a ratio between the number of threads and the number of background merges and mutations that can be executed concurrently.
+	//
 	// For example, if the ratio equals to **2** and **background_pool_size** is set to **16** then ClickHouse can execute **32** background merges concurrently.
 	// This is possible, because background operations could be suspended and postponed. This is needed to give small merges more execution priority.
 	//
 	// Default value: **2**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_merges_mutations_concurrency_ratio).
@@ -787,6 +787,7 @@ type ClickhouseConfig struct {
 	// for replicated tables, Kafka streaming, and DNS cache updates.
 	//
 	// Default value: **512**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_schedule_pool_size).
@@ -794,6 +795,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for fetching data parts from another replica for MergeTree-engine tables in a background.
 	//
 	// Default value: **32** for versions 25.1 and higher, **16** for versions 24.12 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_fetches_pool_size).
@@ -801,6 +803,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for moving data parts to another disk or volume for MergeTree-engine tables in a background.
 	//
 	// Default value: **8**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_move_pool_size).
@@ -808,6 +811,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for executing distributed sends.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_distributed_schedule_pool_size).
@@ -815,6 +819,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for performing flush operations for Buffer-engine tables in the background.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_buffer_flush_schedule_pool_size).
@@ -822,6 +827,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for executing background operations for message streaming.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_message_broker_schedule_pool_size).
@@ -829,6 +835,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads that will be used for performing a variety of operations (mostly garbage collection) for MergeTree-engine tables in a background.
 	//
 	// Default value: **8**.
+	//
 	// Change of the setting is applied with restart on value decrease and without restart on value increase.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#background_common_pool_size).
@@ -836,6 +843,7 @@ type ClickhouseConfig struct {
 	// Lazy loading of dictionaries. If enabled, then each dictionary is loaded on the first use. Otherwise, the server loads all dictionaries at startup.
 	//
 	// Default value: **true** for versions 25.1 and higher, **false** for versions 24.12 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#dictionaries_lazy_load).
@@ -854,6 +862,7 @@ type ClickhouseConfig struct {
 	// Enables or disables query_thread_log system table.
 	//
 	// Default value: **true**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_thread_log).
@@ -881,6 +890,7 @@ type ClickhouseConfig struct {
 	// Enables or disables metric_log system table.
 	//
 	// Default value: **false** for versions 25.1 and higher, **true** for versions 24.12 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/metric_log).
@@ -898,6 +908,7 @@ type ClickhouseConfig struct {
 	// Enables or disables trace_log system table.
 	//
 	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/trace_log).
@@ -915,6 +926,7 @@ type ClickhouseConfig struct {
 	// Enables or disables text_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/text_log).
@@ -932,11 +944,13 @@ type ClickhouseConfig struct {
 	// Logging level for text_log system table.
 	//
 	// Default value: **TRACE**.
+	//
 	// Change of the setting is applied with restart.
 	TextLogLevel ClickhouseConfig_LogLevel `protobuf:"varint,32,opt,name=text_log_level,json=textLogLevel,proto3,enum=yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig_LogLevel" json:"text_log_level,omitempty"`
 	// Enables or disables opentelemetry_span_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/opentelemetry_span_log).
@@ -954,6 +968,7 @@ type ClickhouseConfig struct {
 	// Enables or disables query_views_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_views_log).
@@ -971,6 +986,7 @@ type ClickhouseConfig struct {
 	// Enables or disables asynchronous_metric_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_metric_log).
@@ -988,6 +1004,7 @@ type ClickhouseConfig struct {
 	// Enables or disables session_log system table.
 	//
 	// Default value: **true** for versions 25.3 and higher, **false** for versions 25.2 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/session_log).
@@ -1005,6 +1022,7 @@ type ClickhouseConfig struct {
 	// Enables or disables zookeeper_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/zookeeper_log).
@@ -1022,6 +1040,7 @@ type ClickhouseConfig struct {
 	// Enables or disables asynchronous_insert_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/asynchronous_insert_log).
@@ -1039,6 +1058,7 @@ type ClickhouseConfig struct {
 	// Enables or disables processors_profile_log system table.
 	//
 	// Default value: **true** for versions 25.2 and higher, **false** for versions 25.1 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/processors_profile_log).
@@ -1056,6 +1076,7 @@ type ClickhouseConfig struct {
 	// Enables or disables error_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/error_log).
@@ -1073,6 +1094,7 @@ type ClickhouseConfig struct {
 	// Enables or disables query_metric_log system table.
 	//
 	// Default value: **false**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/system-tables/query_metric_log).
@@ -1092,6 +1114,7 @@ type ClickhouseConfig struct {
 	// Maximum number of inbound connections.
 	//
 	// Default value: **4096**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_connections).
@@ -1117,6 +1140,7 @@ type ClickhouseConfig struct {
 	// The number of seconds that ClickHouse waits for incoming requests for HTTP protocol before closing the connection.
 	//
 	// Default value: **3** for versions 25.10 and higher, **30** for versions 25.9 and lower.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#keep_alive_timeout).
@@ -1132,6 +1156,7 @@ type ClickhouseConfig struct {
 	// The server's time zone to be used in DateTime fields conversions. Specified as an IANA identifier.
 	//
 	// Default value: **Europe/Moscow**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#timezone).
@@ -1139,14 +1164,17 @@ type ClickhouseConfig struct {
 	// Enables or disables geobase.
 	//
 	// Default value: **false** for versions 25.8 and higher, **true** for versions 25.7 and lower.
+	//
 	// Change of the setting is applied with restart.
 	GeobaseEnabled *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=geobase_enabled,json=geobaseEnabled,proto3" json:"geobase_enabled,omitempty"`
 	// Address of the archive with the user geobase in Object Storage.
+	//
 	// Change of the setting is applied with restart.
 	GeobaseUri string `protobuf:"bytes,15,opt,name=geobase_uri,json=geobaseUri,proto3" json:"geobase_uri,omitempty"`
 	// The default database.
 	//
 	// Default value: **default**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#default_database).
@@ -1155,6 +1183,7 @@ type ClickhouseConfig struct {
 	// the allocating stack trace. **0** means disabled memory profiler.
 	//
 	// Default value: **0**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_profiler_step).
@@ -1163,6 +1192,7 @@ type ClickhouseConfig struct {
 	// with trace_type equal to a MemorySample with the specified probability.
 	//
 	// Default value: **0**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#total_memory_tracker_sample_probability).
@@ -1170,6 +1200,7 @@ type ClickhouseConfig struct {
 	// Maximum number of threads to parse and insert data in background. If set to **0**, asynchronous mode is disabled.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#async_insert_threads).
@@ -1177,6 +1208,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to execute **BACKUP** requests.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#backup_threads).
@@ -1184,6 +1216,7 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to execute **RESTORE** requests.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#restore_threads).
@@ -1191,6 +1224,7 @@ type ClickhouseConfig struct {
 	// Size of cache for vector similarity indexes, in bytes. **0** means disabled.
 	//
 	// Default value: **5368709120** (5 GiB).
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#vector_similarity_index_cache_size).
@@ -1198,6 +1232,7 @@ type ClickhouseConfig struct {
 	// Size of cache for vector similarity indexes, in entries. **0** means disabled.
 	//
 	// Default value: **10000000**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#vector_similarity_index_cache_max_entries).
@@ -1205,50 +1240,61 @@ type ClickhouseConfig struct {
 	// The maximum number of threads to use for building vector indexes. **0** means unlimited.
 	//
 	// Default value: **16**.
+	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#max_build_vector_similarity_index_thread_pool_size).
 	MaxBuildVectorSimilarityIndexThreadPoolSize *wrapperspb.Int64Value `protobuf:"bytes,88,opt,name=max_build_vector_similarity_index_thread_pool_size,json=maxBuildVectorSimilarityIndexThreadPoolSize,proto3" json:"max_build_vector_similarity_index_thread_pool_size,omitempty"`
 	// Settings for the MergeTree table engine family.
+	//
 	// Change of the settings of **merge_tree** is applied with restart.
 	MergeTree *ClickhouseConfig_MergeTree `protobuf:"bytes,2,opt,name=merge_tree,json=mergeTree,proto3" json:"merge_tree,omitempty"`
 	// Data compression settings for MergeTree engine tables.
+	//
 	// Change of the settings of **compression** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
 	Compression []*ClickhouseConfig_Compression `protobuf:"bytes,3,rep,name=compression,proto3" json:"compression,omitempty"`
 	// Configuration of external dictionaries.
+	//
 	// Change of the settings of **dictionaries** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries).
 	Dictionaries []*ClickhouseConfig_ExternalDictionary `protobuf:"bytes,4,rep,name=dictionaries,proto3" json:"dictionaries,omitempty"`
 	// Rollup settings for the GraphiteMergeTree engine tables.
+	//
 	// Change of the settings of **graphite_rollup** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite_rollup).
 	GraphiteRollup []*ClickhouseConfig_GraphiteRollup `protobuf:"bytes,5,rep,name=graphite_rollup,json=graphiteRollup,proto3" json:"graphite_rollup,omitempty"`
 	// Kafka integration settings.
+	//
 	// Change of the settings of **kafka** is applied with restart.
 	Kafka *ClickhouseConfig_Kafka `protobuf:"bytes,35,opt,name=kafka,proto3" json:"kafka,omitempty"`
 	// Per-topic Kafka integration settings.
+	//
 	// Change of the settings of **kafka_topics** is applied with restart.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
 	KafkaTopics []*ClickhouseConfig_KafkaTopic `protobuf:"bytes,36,rep,name=kafka_topics,json=kafkaTopics,proto3" json:"kafka_topics,omitempty"`
 	// RabbitMQ integration settings.
+	//
 	// Change of the settings of **rabbitmq** is applied with restart.
 	Rabbitmq *ClickhouseConfig_Rabbitmq `protobuf:"bytes,37,opt,name=rabbitmq,proto3" json:"rabbitmq,omitempty"`
 	// Regexp-based rules, which will be applied to queries as well as all log messages before storing them in server logs,
 	// system.query_log, system.text_log, system.processes tables, and in logs sent to the client. That allows preventing
 	// sensitive data leakage from SQL queries (like names, emails, personal identifiers or credit card numbers) to logs.
+	//
 	// Change of the settings of **query_masking_rules** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#query_masking_rules).
 	QueryMaskingRules []*ClickhouseConfig_QueryMaskingRule `protobuf:"bytes,67,rep,name=query_masking_rules,json=queryMaskingRules,proto3" json:"query_masking_rules,omitempty"`
 	// [Query cache](https://clickhouse.com/docs/operations/query-cache) configuration.
+	//
 	// Change of the settings of **query_cache** is applied with restart.
 	QueryCache *ClickhouseConfig_QueryCache `protobuf:"bytes,69,opt,name=query_cache,json=queryCache,proto3" json:"query_cache,omitempty"`
 	// JDBC bridge configuration for queries to external databases.
+	//
 	// Change of the settings of **jdbc_bridge** is applied with restart.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/integrations/jdbc/jdbc-with-clickhouse).
@@ -1261,6 +1307,10 @@ type ClickhouseConfig struct {
 	MysqlProtocol *wrapperspb.BoolValue `protobuf:"bytes,78,opt,name=mysql_protocol,json=mysqlProtocol,proto3" json:"mysql_protocol,omitempty"`
 	// Custom ClickHouse macros.
 	CustomMacros []*ClickhouseConfig_Macro `protobuf:"bytes,82,rep,name=custom_macros,json=customMacros,proto3" json:"custom_macros,omitempty"`
+	// TLS configuration for outgoing connections from ClickHouse.
+	//
+	// Change of the settings of **tls** is applied with restart.
+	Tls *ClickhouseConfig_Tls `protobuf:"bytes,89,opt,name=tls,proto3" json:"tls,omitempty"`
 	// The interval in seconds before reloading built-in dictionaries.
 	//
 	// Default value: **3600**.
@@ -1913,6 +1963,13 @@ func (x *ClickhouseConfig) GetCustomMacros() []*ClickhouseConfig_Macro {
 	return nil
 }
 
+func (x *ClickhouseConfig) GetTls() *ClickhouseConfig_Tls {
+	if x != nil {
+		return x.Tls
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto.
 func (x *ClickhouseConfig) GetBuiltinDictionariesReloadInterval() *wrapperspb.Int64Value {
 	if x != nil {
@@ -1985,7 +2042,6 @@ func (x *ClickhouseConfigSet) GetDefaultConfig() *ClickhouseConfig {
 }
 
 // Access control settings.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#access_control_improvements).
 type ClickhouseConfig_AccessControlImprovements struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2584,7 +2640,6 @@ func (x *ClickhouseConfig_MergeTree) GetAllowRemoteFsZeroCopyReplication() *wrap
 }
 
 // Compression settings.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#compression).
 type ClickhouseConfig_Compression struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2879,7 +2934,6 @@ func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource_) isClickhouseConfig
 }
 
 // Rollup settings for the GraphiteMergeTree table engine.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/server-configuration-parameters/settings#graphite-rollup).
 type ClickhouseConfig_GraphiteRollup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2980,7 +3034,6 @@ func (x *ClickhouseConfig_GraphiteRollup) GetVersionColumnName() string {
 }
 
 // Kafka configuration settings.
-//
 // For details, see [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md).
 type ClickhouseConfig_Kafka struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3192,7 +3245,6 @@ func (x *ClickhouseConfig_KafkaTopic) GetSettings() *ClickhouseConfig_Kafka {
 }
 
 // RabbitMQ integration settings.
-//
 // For details, see [ClickHouse documentation](https://clickhouse.com/docs/engines/table-engines/integrations/rabbitmq).
 type ClickhouseConfig_Rabbitmq struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3515,6 +3567,55 @@ func (x *ClickhouseConfig_Macro) GetValue() string {
 	return ""
 }
 
+// TLS configuration for outgoing connections from ClickHouse (e.g. remote tables, dictionaries).
+type ClickhouseConfig_Tls struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// CA certificates in PEM format. Each element must contain a single self-signed CA certificate
+	// or a certificate chain ordered as leaf -> intermediates -> self-signed root.
+	//
+	// Change of the setting is applied with restart.
+	TrustedCertificates []string `protobuf:"bytes,1,rep,name=trusted_certificates,json=trustedCertificates,proto3" json:"trusted_certificates,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ClickhouseConfig_Tls) Reset() {
+	*x = ClickhouseConfig_Tls{}
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClickhouseConfig_Tls) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClickhouseConfig_Tls) ProtoMessage() {}
+
+func (x *ClickhouseConfig_Tls) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClickhouseConfig_Tls.ProtoReflect.Descriptor instead.
+func (*ClickhouseConfig_Tls) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP(), []int{0, 12}
+}
+
+func (x *ClickhouseConfig_Tls) GetTrustedCertificates() []string {
+	if x != nil {
+		return x.TrustedCertificates
+	}
+	return nil
+}
+
 // Configuration of external dictionary structure.
 type ClickhouseConfig_ExternalDictionary_Structure struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -3542,7 +3643,7 @@ type ClickhouseConfig_ExternalDictionary_Structure struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Structure{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3554,7 +3655,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Structure) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3679,7 +3780,7 @@ type ClickhouseConfig_ExternalDictionary_Layout struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Layout{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3691,7 +3792,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Layout) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Layout) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3789,7 +3890,7 @@ type ClickhouseConfig_ExternalDictionary_Range struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Range) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Range{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3801,7 +3902,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Range) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Range) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Range) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3845,7 +3946,7 @@ type ClickhouseConfig_ExternalDictionary_HttpSource struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_HttpSource) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_HttpSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3857,7 +3958,7 @@ func (x *ClickhouseConfig_ExternalDictionary_HttpSource) String() string {
 func (*ClickhouseConfig_ExternalDictionary_HttpSource) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_HttpSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3922,7 +4023,7 @@ type ClickhouseConfig_ExternalDictionary_MysqlSource struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_MysqlSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3934,7 +4035,7 @@ func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) String() string {
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_MysqlSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4044,7 +4145,7 @@ type ClickhouseConfig_ExternalDictionary_ClickhouseSource struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_ClickhouseSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4056,7 +4157,7 @@ func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) String() string {
 func (*ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_ClickhouseSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4150,7 +4251,7 @@ type ClickhouseConfig_ExternalDictionary_MongodbSource struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_MongodbSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4162,7 +4263,7 @@ func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) String() string {
 func (*ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_MongodbSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4251,7 +4352,7 @@ type ClickhouseConfig_ExternalDictionary_PostgresqlSource struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_PostgresqlSource{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4263,7 +4364,7 @@ func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) String() string {
 func (*ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_PostgresqlSource) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4346,7 +4447,7 @@ type ClickhouseConfig_ExternalDictionary_Structure_Id struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Structure_Id{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4358,7 +4459,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Id) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4392,7 +4493,7 @@ type ClickhouseConfig_ExternalDictionary_Structure_Key struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Structure_Key{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4404,7 +4505,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) String() string {
 func (*ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Key) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4451,7 +4552,7 @@ type ClickhouseConfig_ExternalDictionary_Structure_Attribute struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_Structure_Attribute{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4463,7 +4564,7 @@ func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) String() strin
 func (*ClickhouseConfig_ExternalDictionary_Structure_Attribute) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_Structure_Attribute) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4533,7 +4634,7 @@ type ClickhouseConfig_ExternalDictionary_HttpSource_Header struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_HttpSource_Header{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4545,7 +4646,7 @@ func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) String() string 
 func (*ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_HttpSource_Header) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4597,7 +4698,7 @@ type ClickhouseConfig_ExternalDictionary_MysqlSource_Replica struct {
 
 func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) Reset() {
 	*x = ClickhouseConfig_ExternalDictionary_MysqlSource_Replica{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4609,7 +4710,7 @@ func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) String() strin
 func (*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoMessage() {}
 
 func (x *ClickhouseConfig_ExternalDictionary_MysqlSource_Replica) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4675,7 +4776,7 @@ type ClickhouseConfig_GraphiteRollup_Pattern struct {
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern) Reset() {
 	*x = ClickhouseConfig_GraphiteRollup_Pattern{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4687,7 +4788,7 @@ func (x *ClickhouseConfig_GraphiteRollup_Pattern) String() string {
 func (*ClickhouseConfig_GraphiteRollup_Pattern) ProtoMessage() {}
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4736,7 +4837,7 @@ type ClickhouseConfig_GraphiteRollup_Pattern_Retention struct {
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern_Retention) Reset() {
 	*x = ClickhouseConfig_GraphiteRollup_Pattern_Retention{}
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4748,7 +4849,7 @@ func (x *ClickhouseConfig_GraphiteRollup_Pattern_Retention) String() string {
 func (*ClickhouseConfig_GraphiteRollup_Pattern_Retention) ProtoMessage() {}
 
 func (x *ClickhouseConfig_GraphiteRollup_Pattern_Retention) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4782,17 +4883,17 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xff\xa9\x01\n" +
-	"\x10ClickhouseConfig\x12V\n" +
-	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x12backgroundPoolSize\x12}\n" +
-	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12g\n" +
-	"\x1dbackground_schedule_pool_size\x18\" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x1abackgroundSchedulePoolSize\x12e\n" +
-	"\x1cbackground_fetches_pool_size\x18& \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x19backgroundFetchesPoolSize\x12_\n" +
-	"\x19background_move_pool_size\x18' \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x16backgroundMovePoolSize\x12~\n" +
-	")background_distributed_schedule_pool_size\x18( \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R%backgroundDistributedSchedulePoolSize\x12\x7f\n" +
-	"*background_buffer_flush_schedule_pool_size\x18) \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R%backgroundBufferFlushSchedulePoolSize\x12\x83\x01\n" +
-	",background_message_broker_schedule_pool_size\x18. \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R'backgroundMessageBrokerSchedulePoolSize\x12c\n" +
-	"\x1bbackground_common_pool_size\x18/ \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=1R\x18backgroundCommonPoolSize\x12P\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf4\xa8\x01\n" +
+	"\x10ClickhouseConfig\x12M\n" +
+	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueR\x12backgroundPoolSize\x12}\n" +
+	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12^\n" +
+	"\x1dbackground_schedule_pool_size\x18\" \x01(\v2\x1b.google.protobuf.Int64ValueR\x1abackgroundSchedulePoolSize\x12\\\n" +
+	"\x1cbackground_fetches_pool_size\x18& \x01(\v2\x1b.google.protobuf.Int64ValueR\x19backgroundFetchesPoolSize\x12V\n" +
+	"\x19background_move_pool_size\x18' \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backgroundMovePoolSize\x12u\n" +
+	")background_distributed_schedule_pool_size\x18( \x01(\v2\x1b.google.protobuf.Int64ValueR%backgroundDistributedSchedulePoolSize\x12v\n" +
+	"*background_buffer_flush_schedule_pool_size\x18) \x01(\v2\x1b.google.protobuf.Int64ValueR%backgroundBufferFlushSchedulePoolSize\x12z\n" +
+	",background_message_broker_schedule_pool_size\x18. \x01(\v2\x1b.google.protobuf.Int64ValueR'backgroundMessageBrokerSchedulePoolSize\x12Z\n" +
+	"\x1bbackground_common_pool_size\x18/ \x01(\v2\x1b.google.protobuf.Int64ValueR\x18backgroundCommonPoolSize\x12P\n" +
 	"\x16dictionaries_lazy_load\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x14dictionariesLazyLoad\x12]\n" +
 	"\tlog_level\x18\x01 \x01(\x0e2@.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevelR\blogLevel\x12T\n" +
 	"\x18query_log_retention_size\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15queryLogRetentionSize\x12T\n" +
@@ -4839,9 +4940,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x18query_metric_log_enabled\x18S \x01(\v2\x1a.google.protobuf.BoolValueR\x15queryMetricLogEnabled\x12a\n" +
 	"\x1fquery_metric_log_retention_size\x18T \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryMetricLogRetentionSize\x12a\n" +
 	"\x1fquery_metric_log_retention_time\x18U \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bqueryMetricLogRetentionTime\x12\x91\x01\n" +
-	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12R\n" +
-	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b128-8192R\x0emaxConnections\x12\\\n" +
-	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x05>=100R\x14maxConcurrentQueries\x12O\n" +
+	"\x1baccess_control_improvements\x18J \x01(\v2Q.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovementsR\x19accessControlImprovements\x12D\n" +
+	"\x0fmax_connections\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxConnections\x12Q\n" +
+	"\x16max_concurrent_queries\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x14maxConcurrentQueries\x12O\n" +
 	"\x16max_table_size_to_drop\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxTableSizeToDrop\x12W\n" +
 	"\x1amax_partition_size_to_drop\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16maxPartitionSizeToDrop\x12I\n" +
 	"\x12keep_alive_timeout\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x10keepAliveTimeout\x12S\n" +
@@ -4875,7 +4976,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\vjdbc_bridge\x18F \x01(\v2B.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridgeR\n" +
 	"jdbcBridge\x12A\n" +
 	"\x0emysql_protocol\x18N \x01(\v2\x1a.google.protobuf.BoolValueR\rmysqlProtocol\x12b\n" +
-	"\rcustom_macros\x18R \x03(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MacroR\fcustomMacros\x12p\n" +
+	"\rcustom_macros\x18R \x03(\v2=.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MacroR\fcustomMacros\x12M\n" +
+	"\x03tls\x18Y \x01(\v2;.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.TlsR\x03tls\x12p\n" +
 	"$builtin_dictionaries_reload_interval\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R!builtinDictionariesReloadInterval\x1a\x83\x02\n" +
 	"\x19AccessControlImprovements\x12i\n" +
 	"$select_from_system_db_requires_grant\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1fselectFromSystemDbRequiresGrant\x12{\n" +
@@ -4939,7 +5041,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x12METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03LZ4\x10\x01\x12\b\n" +
 	"\x04ZSTD\x10\x02\x12\t\n" +
-	"\x05LZ4HC\x10\x03\x1a\xd6&\n" +
+	"\x05LZ4HC\x10\x03\x1a\x95&\n" +
 	"\x12ExternalDictionary\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12x\n" +
 	"\tstructure\x18\x02 \x01(\v2T.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.StructureB\x04\xe8\xc71\x01R\tstructure\x12o\n" +
@@ -5016,11 +5118,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\aheaders\x18\x03 \x03(\v2\\.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.HeaderR\aheaders\x1a>\n" +
 	"\x06Header\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
-	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\xfd\x04\n" +
+	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\x1a\xe3\x04\n" +
 	"\vMysqlSource\x12\x14\n" +
 	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
-	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1f\n" +
-	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x12\n" +
+	"\x04port\x18\x03 \x01(\x03R\x04port\x12\x18\n" +
 	"\x04user\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x12z\n" +
 	"\breplicas\x18\x06 \x03(\v2^.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.ReplicaR\breplicas\x12\x14\n" +
@@ -5028,37 +5130,37 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x10invalidate_query\x18\b \x01(\tR\x0finvalidateQuery\x12E\n" +
 	"\x10close_connection\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x0fcloseConnection\x12E\n" +
 	"\x10share_connection\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\x99\x01\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0fshareConnection\x1a\x8c\x01\n" +
 	"\aReplica\x12!\n" +
 	"\x04host\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12\x1a\n" +
-	"\bpriority\x18\x02 \x01(\x03R\bpriority\x12\x1f\n" +
-	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x12\n" +
+	"\bpriority\x18\x02 \x01(\x03R\bpriority\x12\x12\n" +
+	"\x04port\x18\x03 \x01(\x03R\x04port\x12\x12\n" +
 	"\x04user\x18\x04 \x01(\tR\x04user\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\x1a\x84\x02\n" +
+	"\bpassword\x18\x05 \x01(\tR\bpassword\x1a\xf7\x01\n" +
 	"\x10ClickhouseSource\x12\x14\n" +
 	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
 	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x1d\n" +
-	"\x04host\x18\x03 \x01(\tB\t\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04host\x18\x03 \x01(\tB\t\x8a\xc81\x05<=253R\x04host\x12\x12\n" +
+	"\x04port\x18\x04 \x01(\x03R\x04port\x12\x18\n" +
 	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x14\n" +
 	"\x05where\x18\a \x01(\tR\x05where\x122\n" +
-	"\x06secure\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x06secure\x1a\xdf\x01\n" +
+	"\x06secure\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x06secure\x1a\xd2\x01\n" +
 	"\rMongodbSource\x12\x14\n" +
 	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12$\n" +
 	"\n" +
 	"collection\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"collection\x12!\n" +
-	"\x04host\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x04host\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\x04host\x12\x12\n" +
+	"\x04port\x18\x04 \x01(\x03R\x04port\x12\x18\n" +
 	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x18\n" +
-	"\aoptions\x18\a \x01(\tR\aoptions\x1a\xc5\x03\n" +
+	"\aoptions\x18\a \x01(\tR\aoptions\x1a\xb8\x03\n" +
 	"\x10PostgresqlSource\x12\x14\n" +
 	"\x02db\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02db\x12\x1a\n" +
 	"\x05table\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05table\x12\x14\n" +
-	"\x05hosts\x18\x03 \x03(\tR\x05hosts\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12\x18\n" +
+	"\x05hosts\x18\x03 \x03(\tR\x05hosts\x12\x12\n" +
+	"\x04port\x18\x04 \x01(\x03R\x04port\x12\x18\n" +
 	"\x04user\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\x04user\x12\x1a\n" +
 	"\bpassword\x18\x06 \x01(\tR\bpassword\x12)\n" +
 	"\x10invalidate_query\x18\a \x01(\tR\x0finvalidateQuery\x12~\n" +
@@ -5086,7 +5188,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\tretention\x18\x03 \x03(\v2X.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.RetentionR\tretention\x1a;\n" +
 	"\tRetention\x12\x10\n" +
 	"\x03age\x18\x01 \x01(\x03R\x03age\x12\x1c\n" +
-	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xd6\x0f\n" +
+	"\tprecision\x18\x02 \x01(\x03R\tprecision\x1a\xaf\x0f\n" +
 	"\x05Kafka\x12{\n" +
 	"\x11security_protocol\x18\x01 \x01(\x0e2N.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocolR\x10securityProtocol\x12r\n" +
 	"\x0esasl_mechanism\x18\x02 \x01(\x0e2K.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanismR\rsaslMechanism\x12#\n" +
@@ -5096,11 +5198,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x14max_poll_interval_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11maxPollIntervalMs\x12I\n" +
 	"\x12session_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x10sessionTimeoutMs\x12Y\n" +
 	"\x05debug\x18\b \x01(\x0e2C.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.DebugR\x05debug\x12y\n" +
-	"\x11auto_offset_reset\x18\t \x01(\x0e2M.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetResetR\x0fautoOffsetReset\x12\\\n" +
+	"\x11auto_offset_reset\x18\t \x01(\x0e2M.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetResetR\x0fautoOffsetReset\x12G\n" +
 	"\x11message_max_bytes\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f1000-1000000000R\x0fmessageMaxBytes\x12L\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmessageMaxBytes\x12:\n" +
 	"\n" +
-	"batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\tbatchSize\"\xb7\x01\n" +
+	"batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\tbatchSize\"\xb7\x01\n" +
 	"\x10SecurityProtocol\x12!\n" +
 	"\x1dSECURITY_PROTOCOL_UNSPECIFIED\x10\x00\x12\x1f\n" +
 	"\x1bSECURITY_PROTOCOL_PLAINTEXT\x10\x01\x12\x19\n" +
@@ -5167,14 +5269,16 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\vmax_entries\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\n" +
 	"maxEntries\x12Q\n" +
 	"\x17max_entry_size_in_bytes\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x13maxEntrySizeInBytes\x12O\n" +
-	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxEntrySizeInRows\x1a^\n" +
+	"\x16max_entry_size_in_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x12maxEntrySizeInRows\x1aQ\n" +
 	"\n" +
 	"JdbcBridge\x12\x12\n" +
-	"\x04host\x18\x01 \x01(\tR\x04host\x12<\n" +
-	"\x04port\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a0-65535R\x04port\x1a\x89\x01\n" +
-	"\x05Macro\x12>\n" +
-	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12@\n" +
-	"\x05value\x18\x02 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x05value\"d\n" +
+	"\x04host\x18\x01 \x01(\tR\x04host\x12/\n" +
+	"\x04port\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x04port\x1aM\n" +
+	"\x05Macro\x12 \n" +
+	"\x04name\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x04name\x12\"\n" +
+	"\x05value\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x05value\x1a8\n" +
+	"\x03Tls\x121\n" +
+	"\x14trusted_certificates\x18\x01 \x03(\tR\x13trustedCertificates\"d\n" +
 	"\bLogLevel\x12\x19\n" +
 	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05TRACE\x10\x01\x12\t\n" +
@@ -5202,7 +5306,7 @@ func file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDescGZIP() [
 }
 
 var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
-var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_goTypes = []any{
 	(ClickhouseConfig_LogLevel)(0),                                    // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
 	(ClickhouseConfig_MergeTree_DeduplicateMergeProjectionMode)(0),    // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
@@ -5228,100 +5332,101 @@ var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_goTypes = []any{
 	(*ClickhouseConfig_QueryCache)(nil),                               // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
 	(*ClickhouseConfig_JdbcBridge)(nil),                               // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
 	(*ClickhouseConfig_Macro)(nil),                                    // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Macro
-	(*ClickhouseConfig_ExternalDictionary_Structure)(nil),             // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
-	(*ClickhouseConfig_ExternalDictionary_Layout)(nil),                // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
-	(*ClickhouseConfig_ExternalDictionary_Range)(nil),                 // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
-	(*ClickhouseConfig_ExternalDictionary_HttpSource)(nil),            // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
-	(*ClickhouseConfig_ExternalDictionary_MysqlSource)(nil),           // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
-	(*ClickhouseConfig_ExternalDictionary_ClickhouseSource)(nil),      // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
-	(*ClickhouseConfig_ExternalDictionary_MongodbSource)(nil),         // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
-	(*ClickhouseConfig_ExternalDictionary_PostgresqlSource)(nil),      // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
-	(*ClickhouseConfig_ExternalDictionary_Structure_Id)(nil),          // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
-	(*ClickhouseConfig_ExternalDictionary_Structure_Key)(nil),         // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
-	(*ClickhouseConfig_ExternalDictionary_Structure_Attribute)(nil),   // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	(*ClickhouseConfig_ExternalDictionary_HttpSource_Header)(nil),     // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
-	(*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica)(nil),   // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
-	(*ClickhouseConfig_GraphiteRollup_Pattern)(nil),                   // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
-	(*ClickhouseConfig_GraphiteRollup_Pattern_Retention)(nil),         // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
-	(*wrapperspb.Int64Value)(nil),                                     // 39: google.protobuf.Int64Value
-	(*wrapperspb.BoolValue)(nil),                                      // 40: google.protobuf.BoolValue
-	(*wrapperspb.StringValue)(nil),                                    // 41: google.protobuf.StringValue
-	(*wrapperspb.DoubleValue)(nil),                                    // 42: google.protobuf.DoubleValue
+	(*ClickhouseConfig_Tls)(nil),                                      // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Tls
+	(*ClickhouseConfig_ExternalDictionary_Structure)(nil),             // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
+	(*ClickhouseConfig_ExternalDictionary_Layout)(nil),                // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
+	(*ClickhouseConfig_ExternalDictionary_Range)(nil),                 // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
+	(*ClickhouseConfig_ExternalDictionary_HttpSource)(nil),            // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
+	(*ClickhouseConfig_ExternalDictionary_MysqlSource)(nil),           // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
+	(*ClickhouseConfig_ExternalDictionary_ClickhouseSource)(nil),      // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
+	(*ClickhouseConfig_ExternalDictionary_MongodbSource)(nil),         // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
+	(*ClickhouseConfig_ExternalDictionary_PostgresqlSource)(nil),      // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
+	(*ClickhouseConfig_ExternalDictionary_Structure_Id)(nil),          // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
+	(*ClickhouseConfig_ExternalDictionary_Structure_Key)(nil),         // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
+	(*ClickhouseConfig_ExternalDictionary_Structure_Attribute)(nil),   // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	(*ClickhouseConfig_ExternalDictionary_HttpSource_Header)(nil),     // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
+	(*ClickhouseConfig_ExternalDictionary_MysqlSource_Replica)(nil),   // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
+	(*ClickhouseConfig_GraphiteRollup_Pattern)(nil),                   // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
+	(*ClickhouseConfig_GraphiteRollup_Pattern_Retention)(nil),         // 39: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
+	(*wrapperspb.Int64Value)(nil),                                     // 40: google.protobuf.Int64Value
+	(*wrapperspb.BoolValue)(nil),                                      // 41: google.protobuf.BoolValue
+	(*wrapperspb.StringValue)(nil),                                    // 42: google.protobuf.StringValue
+	(*wrapperspb.DoubleValue)(nil),                                    // 43: google.protobuf.DoubleValue
 }
 var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_depIdxs = []int32{
-	39,  // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_merges_mutations_concurrency_ratio:type_name -> google.protobuf.Int64Value
-	39,  // 2: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_fetches_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_move_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_distributed_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_buffer_flush_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_message_broker_schedule_pool_size:type_name -> google.protobuf.Int64Value
-	39,  // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_common_pool_size:type_name -> google.protobuf.Int64Value
-	40,  // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries_lazy_load:type_name -> google.protobuf.BoolValue
+	40,  // 0: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 1: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_merges_mutations_concurrency_ratio:type_name -> google.protobuf.Int64Value
+	40,  // 2: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 3: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_fetches_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 4: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_move_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 5: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_distributed_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 6: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_buffer_flush_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 7: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_message_broker_schedule_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 8: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.background_common_pool_size:type_name -> google.protobuf.Int64Value
+	41,  // 9: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries_lazy_load:type_name -> google.protobuf.BoolValue
 	0,   // 10: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
-	39,  // 11: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_time:type_name -> google.protobuf.Int64Value
-	39,  // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_time:type_name -> google.protobuf.Int64Value
+	40,  // 11: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 12: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 13: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 14: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 15: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_thread_log_retention_time:type_name -> google.protobuf.Int64Value
+	40,  // 16: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 17: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.part_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 18: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 19: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 20: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.metric_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 21: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 22: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 23: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.trace_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 24: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 25: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 26: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_retention_time:type_name -> google.protobuf.Int64Value
 	0,   // 27: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.text_log_level:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.LogLevel
-	40,  // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 39: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 40: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 41: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 42: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 43: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 44: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 45: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 46: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 47: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 48: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 49: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 50: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 51: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_time:type_name -> google.protobuf.Int64Value
-	40,  // 52: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_enabled:type_name -> google.protobuf.BoolValue
-	39,  // 53: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_retention_size:type_name -> google.protobuf.Int64Value
-	39,  // 54: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 28: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 29: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 30: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.opentelemetry_span_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 31: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 32: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 33: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_views_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 34: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 35: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 36: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_metric_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 37: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 38: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 39: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.session_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 40: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 41: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 42: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.zookeeper_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 43: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 44: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 45: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.asynchronous_insert_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 46: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 47: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 48: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.processors_profile_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 49: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 50: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 51: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.error_log_retention_time:type_name -> google.protobuf.Int64Value
+	41,  // 52: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_enabled:type_name -> google.protobuf.BoolValue
+	40,  // 53: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_retention_size:type_name -> google.protobuf.Int64Value
+	40,  // 54: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_metric_log_retention_time:type_name -> google.protobuf.Int64Value
 	12,  // 55: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.access_control_improvements:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements
-	39,  // 56: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_connections:type_name -> google.protobuf.Int64Value
-	39,  // 57: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_concurrent_queries:type_name -> google.protobuf.Int64Value
-	39,  // 58: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_table_size_to_drop:type_name -> google.protobuf.Int64Value
-	39,  // 59: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_partition_size_to_drop:type_name -> google.protobuf.Int64Value
-	39,  // 60: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.keep_alive_timeout:type_name -> google.protobuf.Int64Value
-	39,  // 61: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.uncompressed_cache_size:type_name -> google.protobuf.Int64Value
-	39,  // 62: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mark_cache_size:type_name -> google.protobuf.Int64Value
-	40,  // 63: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.geobase_enabled:type_name -> google.protobuf.BoolValue
-	41,  // 64: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.default_database:type_name -> google.protobuf.StringValue
-	39,  // 65: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_profiler_step:type_name -> google.protobuf.Int64Value
-	42,  // 66: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_tracker_sample_probability:type_name -> google.protobuf.DoubleValue
-	39,  // 67: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.async_insert_threads:type_name -> google.protobuf.Int64Value
-	39,  // 68: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.backup_threads:type_name -> google.protobuf.Int64Value
-	39,  // 69: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.restore_threads:type_name -> google.protobuf.Int64Value
-	39,  // 70: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.vector_similarity_index_cache_size:type_name -> google.protobuf.Int64Value
-	39,  // 71: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.vector_similarity_index_cache_max_entries:type_name -> google.protobuf.Int64Value
-	39,  // 72: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_build_vector_similarity_index_thread_pool_size:type_name -> google.protobuf.Int64Value
+	40,  // 56: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_connections:type_name -> google.protobuf.Int64Value
+	40,  // 57: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_concurrent_queries:type_name -> google.protobuf.Int64Value
+	40,  // 58: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_table_size_to_drop:type_name -> google.protobuf.Int64Value
+	40,  // 59: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_partition_size_to_drop:type_name -> google.protobuf.Int64Value
+	40,  // 60: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.keep_alive_timeout:type_name -> google.protobuf.Int64Value
+	40,  // 61: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.uncompressed_cache_size:type_name -> google.protobuf.Int64Value
+	40,  // 62: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mark_cache_size:type_name -> google.protobuf.Int64Value
+	41,  // 63: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.geobase_enabled:type_name -> google.protobuf.BoolValue
+	42,  // 64: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.default_database:type_name -> google.protobuf.StringValue
+	40,  // 65: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_profiler_step:type_name -> google.protobuf.Int64Value
+	43,  // 66: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.total_memory_tracker_sample_probability:type_name -> google.protobuf.DoubleValue
+	40,  // 67: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.async_insert_threads:type_name -> google.protobuf.Int64Value
+	40,  // 68: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.backup_threads:type_name -> google.protobuf.Int64Value
+	40,  // 69: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.restore_threads:type_name -> google.protobuf.Int64Value
+	40,  // 70: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.vector_similarity_index_cache_size:type_name -> google.protobuf.Int64Value
+	40,  // 71: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.vector_similarity_index_cache_max_entries:type_name -> google.protobuf.Int64Value
+	40,  // 72: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.max_build_vector_similarity_index_thread_pool_size:type_name -> google.protobuf.Int64Value
 	13,  // 73: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.merge_tree:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree
 	14,  // 74: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.compression:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression
 	15,  // 75: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.dictionaries:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary
@@ -5332,98 +5437,99 @@ var file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_depIdxs = []int3
 	20,  // 80: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_masking_rules:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryMaskingRule
 	21,  // 81: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.query_cache:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache
 	22,  // 82: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.jdbc_bridge:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge
-	40,  // 83: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mysql_protocol:type_name -> google.protobuf.BoolValue
+	41,  // 83: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.mysql_protocol:type_name -> google.protobuf.BoolValue
 	23,  // 84: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.custom_macros:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Macro
-	39,  // 85: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.builtin_dictionaries_reload_interval:type_name -> google.protobuf.Int64Value
-	10,  // 86: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.effective_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	10,  // 87: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.user_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	10,  // 88: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.default_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
-	40,  // 89: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_system_db_requires_grant:type_name -> google.protobuf.BoolValue
-	40,  // 90: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_information_schema_requires_grant:type_name -> google.protobuf.BoolValue
-	39,  // 91: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_delay_insert:type_name -> google.protobuf.Int64Value
-	39,  // 92: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_throw_insert:type_name -> google.protobuf.Int64Value
-	39,  // 93: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_delay_insert:type_name -> google.protobuf.Int64Value
-	39,  // 94: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_throw_insert:type_name -> google.protobuf.Int64Value
-	39,  // 95: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_avg_part_size_for_too_many_parts:type_name -> google.protobuf.Int64Value
-	39,  // 96: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_parts_in_total:type_name -> google.protobuf.Int64Value
-	39,  // 97: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_replicated_merges_in_queue:type_name -> google.protobuf.Int64Value
-	39,  // 98: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_lower_max_size_of_merge:type_name -> google.protobuf.Int64Value
-	39,  // 99: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_mutation:type_name -> google.protobuf.Int64Value
-	39,  // 100: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_optimize_entire_partition:type_name -> google.protobuf.Int64Value
-	39,  // 101: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_min_space_in_pool:type_name -> google.protobuf.Int64Value
-	39,  // 102: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_max_space_in_pool:type_name -> google.protobuf.Int64Value
-	39,  // 103: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_bytes_for_wide_part:type_name -> google.protobuf.Int64Value
-	39,  // 104: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_for_wide_part:type_name -> google.protobuf.Int64Value
-	39,  // 105: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.cleanup_delay_period:type_name -> google.protobuf.Int64Value
-	39,  // 106: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_cleanup_delay_period:type_name -> google.protobuf.Int64Value
-	39,  // 107: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
-	39,  // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
-	39,  // 109: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_seconds:type_name -> google.protobuf.Int64Value
-	40,  // 110: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_on_partition_only:type_name -> google.protobuf.BoolValue
-	39,  // 111: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_max_block_size:type_name -> google.protobuf.Int64Value
-	1,   // 112: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.deduplicate_merge_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
-	2,   // 113: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.lightweight_mutation_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionMode
-	39,  // 114: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window:type_name -> google.protobuf.Int64Value
-	39,  // 115: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window_seconds:type_name -> google.protobuf.Int64Value
-	40,  // 116: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_after_insert:type_name -> google.protobuf.BoolValue
-	40,  // 117: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_part_directory:type_name -> google.protobuf.BoolValue
-	39,  // 118: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_fetch:type_name -> google.protobuf.Int64Value
-	39,  // 119: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
-	39,  // 120: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
-	40,  // 121: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.ttl_only_drop_parts:type_name -> google.protobuf.BoolValue
-	39,  // 122: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_ttl_timeout:type_name -> google.protobuf.Int64Value
-	39,  // 123: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_recompression_ttl_timeout:type_name -> google.protobuf.Int64Value
-	39,  // 124: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_number_of_merges_with_ttl_in_pool:type_name -> google.protobuf.Int64Value
-	40,  // 125: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.materialize_ttl_recalculate_only:type_name -> google.protobuf.BoolValue
-	40,  // 126: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.check_sample_column_is_correct:type_name -> google.protobuf.BoolValue
-	40,  // 127: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.allow_remote_fs_zero_copy_replication:type_name -> google.protobuf.BoolValue
-	3,   // 128: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.method:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
-	39,  // 129: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.level:type_name -> google.protobuf.Int64Value
-	24,  // 130: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.structure:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
-	25,  // 131: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.layout:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
-	26,  // 132: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.lifetime_range:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
-	27,  // 133: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.http_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
-	28,  // 134: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mysql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
-	29,  // 135: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.clickhouse_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
-	30,  // 136: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mongodb_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
-	31,  // 137: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.postgresql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
-	37,  // 138: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.patterns:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
-	6,   // 139: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.security_protocol:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
-	7,   // 140: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.sasl_mechanism:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
-	40,  // 141: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.enable_ssl_certificate_verification:type_name -> google.protobuf.BoolValue
-	39,  // 142: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.max_poll_interval_ms:type_name -> google.protobuf.Int64Value
-	39,  // 143: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.session_timeout_ms:type_name -> google.protobuf.Int64Value
-	8,   // 144: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.debug:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
-	9,   // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.auto_offset_reset:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
-	39,  // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.message_max_bytes:type_name -> google.protobuf.Int64Value
-	39,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.batch_size:type_name -> google.protobuf.Int64Value
-	17,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
-	39,  // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
-	39,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
-	39,  // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
-	39,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
-	39,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
-	32,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
-	33,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
-	34,  // 156: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	34,  // 157: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	34,  // 158: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	4,   // 159: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
-	40,  // 160: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
-	40,  // 161: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
-	35,  // 162: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
-	36,  // 163: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
-	40,  // 164: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
-	40,  // 165: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
-	40,  // 166: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
-	5,   // 167: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
-	34,  // 168: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
-	38,  // 169: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
-	170, // [170:170] is the sub-list for method output_type
-	170, // [170:170] is the sub-list for method input_type
-	170, // [170:170] is the sub-list for extension type_name
-	170, // [170:170] is the sub-list for extension extendee
-	0,   // [0:170] is the sub-list for field type_name
+	24,  // 85: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.tls:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Tls
+	40,  // 86: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.builtin_dictionaries_reload_interval:type_name -> google.protobuf.Int64Value
+	10,  // 87: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.effective_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	10,  // 88: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.user_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	10,  // 89: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigSet.default_config:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig
+	41,  // 90: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_system_db_requires_grant:type_name -> google.protobuf.BoolValue
+	41,  // 91: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.AccessControlImprovements.select_from_information_schema_requires_grant:type_name -> google.protobuf.BoolValue
+	40,  // 92: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_delay_insert:type_name -> google.protobuf.Int64Value
+	40,  // 93: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.parts_to_throw_insert:type_name -> google.protobuf.Int64Value
+	40,  // 94: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_delay_insert:type_name -> google.protobuf.Int64Value
+	40,  // 95: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.inactive_parts_to_throw_insert:type_name -> google.protobuf.Int64Value
+	40,  // 96: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_avg_part_size_for_too_many_parts:type_name -> google.protobuf.Int64Value
+	40,  // 97: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_parts_in_total:type_name -> google.protobuf.Int64Value
+	40,  // 98: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_replicated_merges_in_queue:type_name -> google.protobuf.Int64Value
+	40,  // 99: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_lower_max_size_of_merge:type_name -> google.protobuf.Int64Value
+	40,  // 100: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_mutation:type_name -> google.protobuf.Int64Value
+	40,  // 101: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.number_of_free_entries_in_pool_to_execute_optimize_entire_partition:type_name -> google.protobuf.Int64Value
+	40,  // 102: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_min_space_in_pool:type_name -> google.protobuf.Int64Value
+	40,  // 103: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_bytes_to_merge_at_max_space_in_pool:type_name -> google.protobuf.Int64Value
+	40,  // 104: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_bytes_for_wide_part:type_name -> google.protobuf.Int64Value
+	40,  // 105: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_for_wide_part:type_name -> google.protobuf.Int64Value
+	40,  // 106: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.cleanup_delay_period:type_name -> google.protobuf.Int64Value
+	40,  // 107: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_cleanup_delay_period:type_name -> google.protobuf.Int64Value
+	40,  // 108: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
+	40,  // 109: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_merge_selecting_sleep_ms:type_name -> google.protobuf.Int64Value
+	40,  // 110: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_seconds:type_name -> google.protobuf.Int64Value
+	41,  // 111: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_age_to_force_merge_on_partition_only:type_name -> google.protobuf.BoolValue
+	40,  // 112: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_max_block_size:type_name -> google.protobuf.Int64Value
+	1,   // 113: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.deduplicate_merge_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.DeduplicateMergeProjectionMode
+	2,   // 114: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.lightweight_mutation_projection_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.LightweightMutationProjectionMode
+	40,  // 115: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window:type_name -> google.protobuf.Int64Value
+	40,  // 116: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.replicated_deduplication_window_seconds:type_name -> google.protobuf.Int64Value
+	41,  // 117: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_after_insert:type_name -> google.protobuf.BoolValue
+	41,  // 118: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.fsync_part_directory:type_name -> google.protobuf.BoolValue
+	40,  // 119: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_fetch:type_name -> google.protobuf.Int64Value
+	40,  // 120: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_compressed_bytes_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
+	40,  // 121: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.min_rows_to_fsync_after_merge:type_name -> google.protobuf.Int64Value
+	41,  // 122: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.ttl_only_drop_parts:type_name -> google.protobuf.BoolValue
+	40,  // 123: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_ttl_timeout:type_name -> google.protobuf.Int64Value
+	40,  // 124: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.merge_with_recompression_ttl_timeout:type_name -> google.protobuf.Int64Value
+	40,  // 125: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.max_number_of_merges_with_ttl_in_pool:type_name -> google.protobuf.Int64Value
+	41,  // 126: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.materialize_ttl_recalculate_only:type_name -> google.protobuf.BoolValue
+	41,  // 127: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.check_sample_column_is_correct:type_name -> google.protobuf.BoolValue
+	41,  // 128: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.MergeTree.allow_remote_fs_zero_copy_replication:type_name -> google.protobuf.BoolValue
+	3,   // 129: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.method:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.Method
+	40,  // 130: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Compression.level:type_name -> google.protobuf.Int64Value
+	25,  // 131: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.structure:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure
+	26,  // 132: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.layout:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout
+	27,  // 133: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.lifetime_range:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Range
+	28,  // 134: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.http_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource
+	29,  // 135: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mysql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource
+	30,  // 136: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.clickhouse_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource
+	31,  // 137: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.mongodb_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MongodbSource
+	32,  // 138: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.postgresql_source:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource
+	38,  // 139: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.patterns:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern
+	6,   // 140: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.security_protocol:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SecurityProtocol
+	7,   // 141: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.sasl_mechanism:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.SaslMechanism
+	41,  // 142: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.enable_ssl_certificate_verification:type_name -> google.protobuf.BoolValue
+	40,  // 143: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.max_poll_interval_ms:type_name -> google.protobuf.Int64Value
+	40,  // 144: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.session_timeout_ms:type_name -> google.protobuf.Int64Value
+	8,   // 145: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.debug:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.Debug
+	9,   // 146: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.auto_offset_reset:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.AutoOffsetReset
+	40,  // 147: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.message_max_bytes:type_name -> google.protobuf.Int64Value
+	40,  // 148: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka.batch_size:type_name -> google.protobuf.Int64Value
+	17,  // 149: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.KafkaTopic.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.Kafka
+	40,  // 150: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_size_in_bytes:type_name -> google.protobuf.Int64Value
+	40,  // 151: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entries:type_name -> google.protobuf.Int64Value
+	40,  // 152: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_bytes:type_name -> google.protobuf.Int64Value
+	40,  // 153: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.QueryCache.max_entry_size_in_rows:type_name -> google.protobuf.Int64Value
+	40,  // 154: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.JdbcBridge.port:type_name -> google.protobuf.Int64Value
+	33,  // 155: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.id:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Id
+	34,  // 156: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.key:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key
+	35,  // 157: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_min:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	35,  // 158: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.range_max:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	35,  // 159: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	4,   // 160: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.type:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.Type
+	41,  // 161: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.allow_read_expired_keys:type_name -> google.protobuf.BoolValue
+	41,  // 162: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.access_to_key_from_attributes:type_name -> google.protobuf.BoolValue
+	36,  // 163: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.headers:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.HttpSource.Header
+	37,  // 164: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.replicas:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.Replica
+	41,  // 165: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.close_connection:type_name -> google.protobuf.BoolValue
+	41,  // 166: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.MysqlSource.share_connection:type_name -> google.protobuf.BoolValue
+	41,  // 167: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.ClickhouseSource.secure:type_name -> google.protobuf.BoolValue
+	5,   // 168: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.ssl_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.PostgresqlSource.SslMode
+	35,  // 169: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Key.attributes:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Structure.Attribute
+	39,  // 170: yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.retention:type_name -> yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.GraphiteRollup.Pattern.Retention
+	171, // [171:171] is the sub-list for method output_type
+	171, // [171:171] is the sub-list for method input_type
+	171, // [171:171] is the sub-list for extension type_name
+	171, // [171:171] is the sub-list for extension extendee
+	0,   // [0:171] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_init() }
@@ -5446,7 +5552,7 @@ func file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc), len(file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc)),
 			NumEnums:      10,
-			NumMessages:   29,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

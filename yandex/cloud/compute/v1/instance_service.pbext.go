@@ -76,10 +76,6 @@ func (m *CreateInstanceRequest) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }
 
-func (m *CreateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
-	m.MetadataOptions = v
-}
-
 func (m *CreateInstanceRequest) SetBootDiskSpec(v *AttachedDiskSpec) {
 	m.BootDiskSpec = v
 }
@@ -88,12 +84,12 @@ func (m *CreateInstanceRequest) SetSecondaryDiskSpecs(v []*AttachedDiskSpec) {
 	m.SecondaryDiskSpecs = v
 }
 
-func (m *CreateInstanceRequest) SetLocalDiskSpecs(v []*AttachedLocalDiskSpec) {
-	m.LocalDiskSpecs = v
-}
-
 func (m *CreateInstanceRequest) SetFilesystemSpecs(v []*AttachedFilesystemSpec) {
 	m.FilesystemSpecs = v
+}
+
+func (m *CreateInstanceRequest) SetLocalDiskSpecs(v []*AttachedLocalDiskSpec) {
+	m.LocalDiskSpecs = v
 }
 
 func (m *CreateInstanceRequest) SetNetworkInterfaceSpecs(v []*NetworkInterfaceSpec) {
@@ -132,16 +128,20 @@ func (m *CreateInstanceRequest) SetMaintenanceGracePeriod(v *durationpb.Duration
 	m.MaintenanceGracePeriod = v
 }
 
+func (m *CreateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *CreateInstanceRequest) SetSerialPortSettings(v *SerialPortSettings) {
 	m.SerialPortSettings = v
 }
 
-func (m *CreateInstanceRequest) SetReservedInstancePoolId(v string) {
-	m.ReservedInstancePoolId = v
-}
-
 func (m *CreateInstanceRequest) SetApplication(v *Application) {
 	m.Application = v
+}
+
+func (m *CreateInstanceRequest) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
 }
 
 func (m *CreateInstanceMetadata) SetInstanceId(v string) {
@@ -180,8 +180,8 @@ func (m *UpdateInstanceRequest) SetMetadata(v map[string]string) {
 	m.Metadata = v
 }
 
-func (m *UpdateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
-	m.MetadataOptions = v
+func (m *UpdateInstanceRequest) SetSchedulingPolicy(v *SchedulingPolicy) {
+	m.SchedulingPolicy = v
 }
 
 func (m *UpdateInstanceRequest) SetServiceAccountId(v string) {
@@ -196,10 +196,6 @@ func (m *UpdateInstanceRequest) SetPlacementPolicy(v *PlacementPolicy) {
 	m.PlacementPolicy = v
 }
 
-func (m *UpdateInstanceRequest) SetSchedulingPolicy(v *SchedulingPolicy) {
-	m.SchedulingPolicy = v
-}
-
 func (m *UpdateInstanceRequest) SetMaintenancePolicy(v MaintenancePolicy) {
 	m.MaintenancePolicy = v
 }
@@ -208,16 +204,20 @@ func (m *UpdateInstanceRequest) SetMaintenanceGracePeriod(v *durationpb.Duration
 	m.MaintenanceGracePeriod = v
 }
 
+func (m *UpdateInstanceRequest) SetMetadataOptions(v *MetadataOptions) {
+	m.MetadataOptions = v
+}
+
 func (m *UpdateInstanceRequest) SetSerialPortSettings(v *SerialPortSettings) {
 	m.SerialPortSettings = v
 }
 
-func (m *UpdateInstanceRequest) SetReservedInstancePoolId(v string) {
-	m.ReservedInstancePoolId = v
-}
-
 func (m *UpdateInstanceRequest) SetApplication(v *Application) {
 	m.Application = v
+}
+
+func (m *UpdateInstanceRequest) SetReservedInstancePoolId(v string) {
+	m.ReservedInstancePoolId = v
 }
 
 func (m *UpdateInstanceMetadata) SetInstanceId(v string) {
@@ -230,6 +230,18 @@ func (m *DeleteInstanceRequest) SetInstanceId(v string) {
 
 func (m *DeleteInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
+}
+
+func (m *GetInstanceSerialPortOutputRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *GetInstanceSerialPortOutputRequest) SetPort(v int64) {
+	m.Port = v
+}
+
+func (m *GetInstanceSerialPortOutputResponse) SetContents(v string) {
+	m.Contents = v
 }
 
 func (m *UpdateInstanceMetadataRequest) SetInstanceId(v string) {
@@ -246,18 +258,6 @@ func (m *UpdateInstanceMetadataRequest) SetUpsert(v map[string]string) {
 
 func (m *UpdateInstanceMetadataMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
-}
-
-func (m *GetInstanceSerialPortOutputRequest) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *GetInstanceSerialPortOutputRequest) SetPort(v int64) {
-	m.Port = v
-}
-
-func (m *GetInstanceSerialPortOutputResponse) SetContents(v string) {
-	m.Contents = v
 }
 
 func (m *StopInstanceRequest) SetInstanceId(v string) {
@@ -281,6 +281,18 @@ func (m *RestartInstanceRequest) SetInstanceId(v string) {
 }
 
 func (m *RestartInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *GuestStopInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *PreemptInstanceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *CrashInstanceMetadata) SetInstanceId(v string) {
 	m.InstanceId = v
 }
 
@@ -376,50 +388,6 @@ func (m *DetachInstanceFilesystemMetadata) SetFilesystemId(v string) {
 	m.FilesystemId = v
 }
 
-func (m *AttachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *AttachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
-	m.NetworkInterfaceIndex = v
-}
-
-func (m *AttachInstanceNetworkInterfaceRequest) SetSubnetId(v string) {
-	m.SubnetId = v
-}
-
-func (m *AttachInstanceNetworkInterfaceRequest) SetPrimaryV4AddressSpec(v *PrimaryAddressSpec) {
-	m.PrimaryV4AddressSpec = v
-}
-
-func (m *AttachInstanceNetworkInterfaceRequest) SetSecurityGroupIds(v []string) {
-	m.SecurityGroupIds = v
-}
-
-func (m *AttachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *AttachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
-	m.NetworkInterfaceIndex = v
-}
-
-func (m *DetachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *DetachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
-	m.NetworkInterfaceIndex = v
-}
-
-func (m *DetachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *DetachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
-	m.NetworkInterfaceIndex = v
-}
-
 func (m *AddInstanceOneToOneNatRequest) SetInstanceId(v string) {
 	m.InstanceId = v
 }
@@ -489,6 +457,50 @@ func (m *UpdateInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
 }
 
 func (m *UpdateInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetPrimaryV4AddressSpec(v *PrimaryAddressSpec) {
+	m.PrimaryV4AddressSpec = v
+}
+
+func (m *AttachInstanceNetworkInterfaceRequest) SetSecurityGroupIds(v []string) {
+	m.SecurityGroupIds = v
+}
+
+func (m *AttachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *AttachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *DetachInstanceNetworkInterfaceRequest) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceNetworkInterfaceRequest) SetNetworkInterfaceIndex(v string) {
+	m.NetworkInterfaceIndex = v
+}
+
+func (m *DetachInstanceNetworkInterfaceMetadata) SetInstanceId(v string) {
+	m.InstanceId = v
+}
+
+func (m *DetachInstanceNetworkInterfaceMetadata) SetNetworkInterfaceIndex(v string) {
 	m.NetworkInterfaceIndex = v
 }
 
@@ -588,6 +600,14 @@ func (m *AttachedDiskSpec_DiskSpec) SetSize(v int64) {
 	m.Size = v
 }
 
+func (m *AttachedDiskSpec_DiskSpec) SetBlockSize(v int64) {
+	m.BlockSize = v
+}
+
+func (m *AttachedDiskSpec_DiskSpec) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
+	m.DiskPlacementPolicy = v
+}
+
 func (m *AttachedDiskSpec_DiskSpec) SetImageId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_ImageId{
 		ImageId: v,
@@ -598,14 +618,6 @@ func (m *AttachedDiskSpec_DiskSpec) SetSnapshotId(v string) {
 	m.Source = &AttachedDiskSpec_DiskSpec_SnapshotId{
 		SnapshotId: v,
 	}
-}
-
-func (m *AttachedDiskSpec_DiskSpec) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {
-	m.DiskPlacementPolicy = v
-}
-
-func (m *AttachedDiskSpec_DiskSpec) SetBlockSize(v int64) {
-	m.BlockSize = v
 }
 
 func (m *AttachedDiskSpec_DiskSpec) SetKmsKeyId(v string) {
@@ -644,6 +656,10 @@ func (m *AttachedFilesystemSpec) SetFilesystemId(v string) {
 	m.FilesystemId = v
 }
 
+func (m *NetworkInterfaceSpec) SetIndex(v string) {
+	m.Index = v
+}
+
 func (m *NetworkInterfaceSpec) SetSubnetId(v string) {
 	m.SubnetId = v
 }
@@ -658,10 +674,6 @@ func (m *NetworkInterfaceSpec) SetPrimaryV6AddressSpec(v *PrimaryAddressSpec) {
 
 func (m *NetworkInterfaceSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
-}
-
-func (m *NetworkInterfaceSpec) SetIndex(v string) {
-	m.Index = v
 }
 
 func (m *PrimaryAddressSpec) SetAddress(v string) {
@@ -754,16 +766,4 @@ func (m *RelocateInstanceMetadata) SetSourceZoneId(v string) {
 
 func (m *RelocateInstanceMetadata) SetDestinationZoneId(v string) {
 	m.DestinationZoneId = v
-}
-
-func (m *GuestStopInstanceMetadata) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *PreemptInstanceMetadata) SetInstanceId(v string) {
-	m.InstanceId = v
-}
-
-func (m *CrashInstanceMetadata) SetInstanceId(v string) {
-	m.InstanceId = v
 }

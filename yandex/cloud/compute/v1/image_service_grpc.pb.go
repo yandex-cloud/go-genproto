@@ -40,7 +40,6 @@ const (
 // A set of methods for managing Image resources.
 type ImageServiceClient interface {
 	// Returns the specified Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
 	// Returns the latest image that is part of an image family.
@@ -48,14 +47,12 @@ type ImageServiceClient interface {
 	// Retrieves the list of Image resources in the specified folder.
 	List(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
 	// Creates an image in the specified folder.
-	//
 	// You can create an image from a disk, snapshot, other image or URI.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(ctx context.Context, in *CreateImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified image.
 	Update(ctx context.Context, in *UpdateImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified image.
-	//
 	// Deleting an image removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeleteImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified image.
@@ -183,7 +180,6 @@ func (c *imageServiceClient) UpdateAccessBindings(ctx context.Context, in *acces
 // A set of methods for managing Image resources.
 type ImageServiceServer interface {
 	// Returns the specified Image resource.
-	//
 	// To get the list of available Image resources, make a [List] request.
 	Get(context.Context, *GetImageRequest) (*Image, error)
 	// Returns the latest image that is part of an image family.
@@ -191,14 +187,12 @@ type ImageServiceServer interface {
 	// Retrieves the list of Image resources in the specified folder.
 	List(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
 	// Creates an image in the specified folder.
-	//
 	// You can create an image from a disk, snapshot, other image or URI.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	Create(context.Context, *CreateImageRequest) (*operation.Operation, error)
 	// Updates the specified image.
 	Update(context.Context, *UpdateImageRequest) (*operation.Operation, error)
 	// Deletes the specified image.
-	//
 	// Deleting an image removes its data permanently and is irreversible.
 	Delete(context.Context, *DeleteImageRequest) (*operation.Operation, error)
 	// Lists operations for the specified image.

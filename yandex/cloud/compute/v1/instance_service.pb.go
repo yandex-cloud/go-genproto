@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -124,7 +123,7 @@ func (x AttachedDiskSpec_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AttachedDiskSpec_Mode.Descriptor instead.
 func (AttachedDiskSpec_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{42, 0}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{45, 0}
 }
 
 type AttachedFilesystemSpec_Mode int32
@@ -175,13 +174,15 @@ func (x AttachedFilesystemSpec_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AttachedFilesystemSpec_Mode.Descriptor instead.
 func (AttachedFilesystemSpec_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{45, 0}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{48, 0}
 }
 
 type GetInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Instance resource to return.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// Defines which information about the Instance resource should be returned in the server response.
 	View          InstanceView `protobuf:"varint,2,opt,name=view,proto3,enum=yandex.cloud.compute.v1.InstanceView" json:"view,omitempty"`
@@ -237,36 +238,40 @@ type ListInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Folder to list instances in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListInstancesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListInstancesResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering on these fields only:
-	//   - `id`: ID of the instance.
-	//   - `name`: name of the instance.
-	//   - `created_at`: timestamp representing the moment in time the instance was created at.
-	//   - `status`: [status](/docs/compute/concepts/vm-statuses) of the instance.
-	//   - `zone_id`: ID of the [availability zone](/docs/overview/concepts/geo-scope) where the instance resides.
-	//   - `platform_id`: ID of the hardware [platform configuration](/docs/compute/concepts/vm-platforms) the instance is created on.
-	//   - `host_id`: ID of the [dedicated host](/docs/compute/concepts/dedicated-host) that the instance belongs to.
-	//
+	// - `id`: ID of the instance.
+	// - `name`: name of the instance.
+	// - `created_at`: timestamp representing the moment in time the instance was created at.
+	// - `status`: [status](/docs/compute/concepts/vm-statuses) of the instance.
+	// - `zone_id`: ID of the [availability zone](/docs/overview/concepts/geo-scope) where the instance resides.
+	// - `platform_id`: ID of the hardware [platform configuration](/docs/compute/concepts/vm-platforms) the instance is created on.
+	// - `host_id`: ID of the [dedicated host](/docs/compute/concepts/dedicated-host) that the instance belongs to.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
 	// The default sorting order is ascending
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -400,58 +405,68 @@ type CreateInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an instance in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the instance.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the instance.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the availability zone where the instance resides.
 	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,5,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the hardware platform configuration for the instance.
 	// This field affects the available values in [resources_spec] field.
-	//
 	// Platforms allows you to create various types of instances: with a large amount of memory,
 	// with a large number of cores, with a burstable performance.
 	// For more information, see [Platforms](/docs/compute/concepts/vm-platforms).
+	// This field is required.
 	PlatformId string `protobuf:"bytes,6,opt,name=platform_id,json=platformId,proto3" json:"platform_id,omitempty"`
 	// Computing resources of the instance, such as the amount of memory and number of cores.
 	// To get a list of available values, see [Levels of core performance](/docs/compute/concepts/performance-levels).
+	// This field is required.
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,7,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
 	// The metadata `key:value` pairs that will be assigned to this instance. This includes custom metadata and predefined keys.
 	// The total size of all keys and values must be less than 512 KB.
-	//
 	// Values are free-form strings, and only have meaning as interpreted by the programs which configure the instance.
 	// The values must be 256 KB or less.
-	//
 	// For example, you may use the metadata in order to provide your public SSH key to the instance.
 	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
 	Metadata map[string]string `protobuf:"bytes,8,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Options allow user to configure access to instance's metadata
-	MetadataOptions *MetadataOptions `protobuf:"bytes,19,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
 	// Boot disk to attach to the instance.
+	// This field is required.
 	BootDiskSpec *AttachedDiskSpec `protobuf:"bytes,9,opt,name=boot_disk_spec,json=bootDiskSpec,proto3" json:"boot_disk_spec,omitempty"`
 	// Array of secondary disks to attach to the instance.
+	// The number of elements must be less than or equal to 3.
 	SecondaryDiskSpecs []*AttachedDiskSpec `protobuf:"bytes,10,rep,name=secondary_disk_specs,json=secondaryDiskSpecs,proto3" json:"secondary_disk_specs,omitempty"`
-	// Array of local disks to attach to the instance.
-	LocalDiskSpecs []*AttachedLocalDiskSpec `protobuf:"bytes,18,rep,name=local_disk_specs,json=localDiskSpecs,proto3" json:"local_disk_specs,omitempty"`
 	// Array of filesystems to attach to the instance.
-	//
 	// The filesystems must reside in the same availability zone as the instance.
-	//
 	// To use the instance with an attached filesystem, the latter must be mounted.
 	// For details, see [documentation](/docs/compute/operations/filesystem/attach-to-vm).
 	FilesystemSpecs []*AttachedFilesystemSpec `protobuf:"bytes,17,rep,name=filesystem_specs,json=filesystemSpecs,proto3" json:"filesystem_specs,omitempty"`
+	// Array of local disks to attach to the instance.
+	LocalDiskSpecs []*AttachedLocalDiskSpec `protobuf:"bytes,18,rep,name=local_disk_specs,json=localDiskSpecs,proto3" json:"local_disk_specs,omitempty"`
 	// Network configuration for the instance. Specifies how the network interface is configured
 	// to interact with other services on the internal network and on the internet.
+	// This field is required.
 	NetworkInterfaceSpecs []*NetworkInterfaceSpec `protobuf:"bytes,11,rep,name=network_interface_specs,json=networkInterfaceSpecs,proto3" json:"network_interface_specs,omitempty"`
 	// Host name for the instance.
 	// This field is used to generate the [yandex.cloud.compute.v1.Instance.fqdn] value.
 	// The host name must be unique within the network and region.
 	// If not specified, the host name will be equal to [yandex.cloud.compute.v1.Instance.id] of the instance
 	// and FQDN will be `<id>.auto.internal`. Otherwise FQDN will be `<hostname>.<region_id>.internal`.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Hostname string `protobuf:"bytes,12,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	// Scheduling policy configuration.
 	SchedulingPolicy *SchedulingPolicy `protobuf:"bytes,13,opt,name=scheduling_policy,json=schedulingPolicy,proto3" json:"scheduling_policy,omitempty"`
@@ -467,17 +482,21 @@ type CreateInstanceRequest struct {
 	// Behaviour on maintenance events
 	MaintenancePolicy MaintenancePolicy `protobuf:"varint,21,opt,name=maintenance_policy,json=maintenancePolicy,proto3,enum=yandex.cloud.compute.v1.MaintenancePolicy" json:"maintenance_policy,omitempty"`
 	// Time between notification via metadata service and maintenance
+	// The value must satisfy: 1s-24h.
 	MaintenanceGracePeriod *durationpb.Duration `protobuf:"bytes,22,opt,name=maintenance_grace_period,json=maintenanceGracePeriod,proto3" json:"maintenance_grace_period,omitempty"`
+	// Options allow user to configure access to instance's metadata
+	MetadataOptions *MetadataOptions `protobuf:"bytes,19,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
 	// Serial port settings
 	SerialPortSettings *SerialPortSettings `protobuf:"bytes,23,opt,name=serial_port_settings,json=serialPortSettings,proto3" json:"serial_port_settings,omitempty"`
+	// Instance application settings.
+	Application *Application `protobuf:"bytes,25,opt,name=application,proto3" json:"application,omitempty"`
 	// ID of the reserved instance pool that the instance should belong to.
 	// Instance will be created using resources from the reserved instance pool.
 	// Reserved instance pool resource configuration must match the resource configuration of the instance.
+	// The length must be less than or equal to 50.
 	ReservedInstancePoolId string `protobuf:"bytes,24,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	// Instance application settings.
-	Application   *Application `protobuf:"bytes,25,opt,name=application,proto3" json:"application,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *CreateInstanceRequest) Reset() {
@@ -566,13 +585,6 @@ func (x *CreateInstanceRequest) GetMetadata() map[string]string {
 	return nil
 }
 
-func (x *CreateInstanceRequest) GetMetadataOptions() *MetadataOptions {
-	if x != nil {
-		return x.MetadataOptions
-	}
-	return nil
-}
-
 func (x *CreateInstanceRequest) GetBootDiskSpec() *AttachedDiskSpec {
 	if x != nil {
 		return x.BootDiskSpec
@@ -587,16 +599,16 @@ func (x *CreateInstanceRequest) GetSecondaryDiskSpecs() []*AttachedDiskSpec {
 	return nil
 }
 
-func (x *CreateInstanceRequest) GetLocalDiskSpecs() []*AttachedLocalDiskSpec {
+func (x *CreateInstanceRequest) GetFilesystemSpecs() []*AttachedFilesystemSpec {
 	if x != nil {
-		return x.LocalDiskSpecs
+		return x.FilesystemSpecs
 	}
 	return nil
 }
 
-func (x *CreateInstanceRequest) GetFilesystemSpecs() []*AttachedFilesystemSpec {
+func (x *CreateInstanceRequest) GetLocalDiskSpecs() []*AttachedLocalDiskSpec {
 	if x != nil {
-		return x.FilesystemSpecs
+		return x.LocalDiskSpecs
 	}
 	return nil
 }
@@ -664,9 +676,23 @@ func (x *CreateInstanceRequest) GetMaintenanceGracePeriod() *durationpb.Duration
 	return nil
 }
 
+func (x *CreateInstanceRequest) GetMetadataOptions() *MetadataOptions {
+	if x != nil {
+		return x.MetadataOptions
+	}
+	return nil
+}
+
 func (x *CreateInstanceRequest) GetSerialPortSettings() *SerialPortSettings {
 	if x != nil {
 		return x.SerialPortSettings
+	}
+	return nil
+}
+
+func (x *CreateInstanceRequest) GetApplication() *Application {
+	if x != nil {
+		return x.Application
 	}
 	return nil
 }
@@ -678,16 +704,10 @@ func (x *CreateInstanceRequest) GetReservedInstancePoolId() string {
 	return ""
 }
 
-func (x *CreateInstanceRequest) GetApplication() *Application {
-	if x != nil {
-		return x.Application
-	}
-	return nil
-}
-
 type CreateInstanceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance that is being created.
+	// The length must be less than or equal to 50.
 	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -734,20 +754,27 @@ type UpdateInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Instance resource to update.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// Field mask that specifies which fields of the Instance resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the instance.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the instance.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the hardware platform configuration for the instance.
 	// This field affects the available values in [resources_spec] field.
-	//
 	// Platforms allows you to create various types of instances: with a large amount of memory,
 	// with a large number of cores, with a burstable performance.
 	// For more information, see [Platforms](/docs/compute/concepts/vm-platforms).
@@ -757,17 +784,14 @@ type UpdateInstanceRequest struct {
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,7,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
 	// The metadata `key:value` pairs that will be assigned to this instance. This includes custom metadata and predefined keys.
 	// The total size of all keys and values must be less than 512 KB.
-	//
 	// Existing set of `metadata` is completely replaced by the provided set.
-	//
 	// Values are free-form strings, and only have meaning as interpreted by the programs which configure the instance.
 	// The values must be 256 KB or less.
-	//
 	// For example, you may use the metadata in order to provide your public SSH key to the instance.
 	// For more information, see [Metadata](/docs/compute/concepts/vm-metadata).
 	Metadata map[string]string `protobuf:"bytes,8,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Options allow user to configure access to instance's metadata
-	MetadataOptions *MetadataOptions `protobuf:"bytes,13,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
+	// Scheduling policy configuration.
+	SchedulingPolicy *SchedulingPolicy `protobuf:"bytes,12,opt,name=scheduling_policy,json=schedulingPolicy,proto3" json:"scheduling_policy,omitempty"`
 	// ID of the service account to use for [authentication inside the instance](/docs/compute/operations/vm-connect/auth-inside-vm).
 	// To get the service account ID, use a [yandex.cloud.iam.v1.ServiceAccountService.List] request.
 	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
@@ -775,23 +799,25 @@ type UpdateInstanceRequest struct {
 	NetworkSettings *NetworkSettings `protobuf:"bytes,10,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
 	// Placement policy configuration.
 	PlacementPolicy *PlacementPolicy `protobuf:"bytes,11,opt,name=placement_policy,json=placementPolicy,proto3" json:"placement_policy,omitempty"`
-	// Scheduling policy configuration.
-	SchedulingPolicy *SchedulingPolicy `protobuf:"bytes,12,opt,name=scheduling_policy,json=schedulingPolicy,proto3" json:"scheduling_policy,omitempty"`
 	// Behaviour on maintenance events
 	MaintenancePolicy MaintenancePolicy `protobuf:"varint,14,opt,name=maintenance_policy,json=maintenancePolicy,proto3,enum=yandex.cloud.compute.v1.MaintenancePolicy" json:"maintenance_policy,omitempty"`
 	// Time between notification via metadata service and maintenance
+	// The value must satisfy: 1s-24h.
 	MaintenanceGracePeriod *durationpb.Duration `protobuf:"bytes,15,opt,name=maintenance_grace_period,json=maintenanceGracePeriod,proto3" json:"maintenance_grace_period,omitempty"`
+	// Options allow user to configure access to instance's metadata
+	MetadataOptions *MetadataOptions `protobuf:"bytes,13,opt,name=metadata_options,json=metadataOptions,proto3" json:"metadata_options,omitempty"`
 	// Serial port settings
 	SerialPortSettings *SerialPortSettings `protobuf:"bytes,16,opt,name=serial_port_settings,json=serialPortSettings,proto3" json:"serial_port_settings,omitempty"`
+	// Instance application settings.
+	Application *Application `protobuf:"bytes,18,opt,name=application,proto3" json:"application,omitempty"`
 	// ID of the reserved instance pool that the instance should belong to.
 	// Attaching/detaching running instance will increase/decrease the size of the reserved instance pool.
 	// Attaching/detaching stopped instance will leave the size of the reserved instance pool unchanged. Starting such attached instance will use resources from the reserved instance pool.
 	// Reserved instance pool resource configuration must match the resource configuration of the instance.
+	// The length must be less than or equal to 50.
 	ReservedInstancePoolId string `protobuf:"bytes,17,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
-	// Instance application settings.
-	Application   *Application `protobuf:"bytes,18,opt,name=application,proto3" json:"application,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *UpdateInstanceRequest) Reset() {
@@ -880,9 +906,9 @@ func (x *UpdateInstanceRequest) GetMetadata() map[string]string {
 	return nil
 }
 
-func (x *UpdateInstanceRequest) GetMetadataOptions() *MetadataOptions {
+func (x *UpdateInstanceRequest) GetSchedulingPolicy() *SchedulingPolicy {
 	if x != nil {
-		return x.MetadataOptions
+		return x.SchedulingPolicy
 	}
 	return nil
 }
@@ -908,13 +934,6 @@ func (x *UpdateInstanceRequest) GetPlacementPolicy() *PlacementPolicy {
 	return nil
 }
 
-func (x *UpdateInstanceRequest) GetSchedulingPolicy() *SchedulingPolicy {
-	if x != nil {
-		return x.SchedulingPolicy
-	}
-	return nil
-}
-
 func (x *UpdateInstanceRequest) GetMaintenancePolicy() MaintenancePolicy {
 	if x != nil {
 		return x.MaintenancePolicy
@@ -929,9 +948,23 @@ func (x *UpdateInstanceRequest) GetMaintenanceGracePeriod() *durationpb.Duration
 	return nil
 }
 
+func (x *UpdateInstanceRequest) GetMetadataOptions() *MetadataOptions {
+	if x != nil {
+		return x.MetadataOptions
+	}
+	return nil
+}
+
 func (x *UpdateInstanceRequest) GetSerialPortSettings() *SerialPortSettings {
 	if x != nil {
 		return x.SerialPortSettings
+	}
+	return nil
+}
+
+func (x *UpdateInstanceRequest) GetApplication() *Application {
+	if x != nil {
+		return x.Application
 	}
 	return nil
 }
@@ -941,13 +974,6 @@ func (x *UpdateInstanceRequest) GetReservedInstancePoolId() string {
 		return x.ReservedInstancePoolId
 	}
 	return ""
-}
-
-func (x *UpdateInstanceRequest) GetApplication() *Application {
-	if x != nil {
-		return x.Application
-	}
-	return nil
 }
 
 type UpdateInstanceMetadata struct {
@@ -999,6 +1025,8 @@ type DeleteInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to delete.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1086,6 +1114,109 @@ func (x *DeleteInstanceMetadata) GetInstanceId() string {
 	return ""
 }
 
+type GetInstanceSerialPortOutputRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance to return the serial port output for.
+	// The length must be less than or equal to 50.
+	// This field is required.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// Serial port to retrieve data from. The default is 1.
+	// The value must satisfy: 1,2,3,4.
+	Port          int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInstanceSerialPortOutputRequest) Reset() {
+	*x = GetInstanceSerialPortOutputRequest{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInstanceSerialPortOutputRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInstanceSerialPortOutputRequest) ProtoMessage() {}
+
+func (x *GetInstanceSerialPortOutputRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInstanceSerialPortOutputRequest.ProtoReflect.Descriptor instead.
+func (*GetInstanceSerialPortOutputRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetInstanceSerialPortOutputRequest) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *GetInstanceSerialPortOutputRequest) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+type GetInstanceSerialPortOutputResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The contents of the serial port output, starting from the time when the instance
+	// started to boot.
+	Contents      string `protobuf:"bytes,1,opt,name=contents,proto3" json:"contents,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetInstanceSerialPortOutputResponse) Reset() {
+	*x = GetInstanceSerialPortOutputResponse{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetInstanceSerialPortOutputResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetInstanceSerialPortOutputResponse) ProtoMessage() {}
+
+func (x *GetInstanceSerialPortOutputResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetInstanceSerialPortOutputResponse.ProtoReflect.Descriptor instead.
+func (*GetInstanceSerialPortOutputResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetInstanceSerialPortOutputResponse) GetContents() string {
+	if x != nil {
+		return x.Contents
+	}
+	return ""
+}
+
 type UpdateInstanceMetadataRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance that is being updated.
@@ -1100,7 +1231,7 @@ type UpdateInstanceMetadataRequest struct {
 
 func (x *UpdateInstanceMetadataRequest) Reset() {
 	*x = UpdateInstanceMetadataRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1112,7 +1243,7 @@ func (x *UpdateInstanceMetadataRequest) String() string {
 func (*UpdateInstanceMetadataRequest) ProtoMessage() {}
 
 func (x *UpdateInstanceMetadataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1256,7 @@ func (x *UpdateInstanceMetadataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateInstanceMetadataRequest.ProtoReflect.Descriptor instead.
 func (*UpdateInstanceMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateInstanceMetadataRequest) GetInstanceId() string {
@@ -1159,7 +1290,7 @@ type UpdateInstanceMetadataMetadata struct {
 
 func (x *UpdateInstanceMetadataMetadata) Reset() {
 	*x = UpdateInstanceMetadataMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1171,7 +1302,7 @@ func (x *UpdateInstanceMetadataMetadata) String() string {
 func (*UpdateInstanceMetadataMetadata) ProtoMessage() {}
 
 func (x *UpdateInstanceMetadataMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1184,7 +1315,7 @@ func (x *UpdateInstanceMetadataMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateInstanceMetadataMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateInstanceMetadataMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateInstanceMetadataMetadata) GetInstanceId() string {
@@ -1194,110 +1325,12 @@ func (x *UpdateInstanceMetadataMetadata) GetInstanceId() string {
 	return ""
 }
 
-type GetInstanceSerialPortOutputRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance to return the serial port output for.
-	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// Serial port to retrieve data from. The default is 1.
-	Port          int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetInstanceSerialPortOutputRequest) Reset() {
-	*x = GetInstanceSerialPortOutputRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetInstanceSerialPortOutputRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetInstanceSerialPortOutputRequest) ProtoMessage() {}
-
-func (x *GetInstanceSerialPortOutputRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetInstanceSerialPortOutputRequest.ProtoReflect.Descriptor instead.
-func (*GetInstanceSerialPortOutputRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *GetInstanceSerialPortOutputRequest) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *GetInstanceSerialPortOutputRequest) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-type GetInstanceSerialPortOutputResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The contents of the serial port output, starting from the time when the instance
-	// started to boot.
-	Contents      string `protobuf:"bytes,1,opt,name=contents,proto3" json:"contents,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetInstanceSerialPortOutputResponse) Reset() {
-	*x = GetInstanceSerialPortOutputResponse{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetInstanceSerialPortOutputResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetInstanceSerialPortOutputResponse) ProtoMessage() {}
-
-func (x *GetInstanceSerialPortOutputResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetInstanceSerialPortOutputResponse.ProtoReflect.Descriptor instead.
-func (*GetInstanceSerialPortOutputResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *GetInstanceSerialPortOutputResponse) GetContents() string {
-	if x != nil {
-		return x.Contents
-	}
-	return ""
-}
-
 type StopInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to stop.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1389,6 +1422,8 @@ type StartInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to start.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1480,6 +1515,8 @@ type RestartInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to restart.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1567,12 +1604,150 @@ func (x *RestartInstanceMetadata) GetInstanceId() string {
 	return ""
 }
 
+type GuestStopInstanceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance that was stopped from guest OS.
+	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GuestStopInstanceMetadata) Reset() {
+	*x = GuestStopInstanceMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GuestStopInstanceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GuestStopInstanceMetadata) ProtoMessage() {}
+
+func (x *GuestStopInstanceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GuestStopInstanceMetadata.ProtoReflect.Descriptor instead.
+func (*GuestStopInstanceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GuestStopInstanceMetadata) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+type PreemptInstanceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance that is being preempted.
+	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PreemptInstanceMetadata) Reset() {
+	*x = PreemptInstanceMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PreemptInstanceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PreemptInstanceMetadata) ProtoMessage() {}
+
+func (x *PreemptInstanceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PreemptInstanceMetadata.ProtoReflect.Descriptor instead.
+func (*PreemptInstanceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *PreemptInstanceMetadata) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+type CrashInstanceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance that was crashed.
+	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CrashInstanceMetadata) Reset() {
+	*x = CrashInstanceMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CrashInstanceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CrashInstanceMetadata) ProtoMessage() {}
+
+func (x *CrashInstanceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CrashInstanceMetadata.ProtoReflect.Descriptor instead.
+func (*CrashInstanceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *CrashInstanceMetadata) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
 type AttachInstanceDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to attach the disk to.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// Disk that should be attached.
+	// This field is required.
 	AttachedDiskSpec *AttachedDiskSpec `protobuf:"bytes,2,opt,name=attached_disk_spec,json=attachedDiskSpec,proto3" json:"attached_disk_spec,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -1580,7 +1755,7 @@ type AttachInstanceDiskRequest struct {
 
 func (x *AttachInstanceDiskRequest) Reset() {
 	*x = AttachInstanceDiskRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1592,7 +1767,7 @@ func (x *AttachInstanceDiskRequest) String() string {
 func (*AttachInstanceDiskRequest) ProtoMessage() {}
 
 func (x *AttachInstanceDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1605,7 +1780,7 @@ func (x *AttachInstanceDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachInstanceDiskRequest.ProtoReflect.Descriptor instead.
 func (*AttachInstanceDiskRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AttachInstanceDiskRequest) GetInstanceId() string {
@@ -1634,7 +1809,7 @@ type AttachInstanceDiskMetadata struct {
 
 func (x *AttachInstanceDiskMetadata) Reset() {
 	*x = AttachInstanceDiskMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1646,7 +1821,7 @@ func (x *AttachInstanceDiskMetadata) String() string {
 func (*AttachInstanceDiskMetadata) ProtoMessage() {}
 
 func (x *AttachInstanceDiskMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1659,7 +1834,7 @@ func (x *AttachInstanceDiskMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachInstanceDiskMetadata.ProtoReflect.Descriptor instead.
 func (*AttachInstanceDiskMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *AttachInstanceDiskMetadata) GetInstanceId() string {
@@ -1680,7 +1855,11 @@ type DetachInstanceDiskRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to detach the disk from.
 	// To get the instance ID, use a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// Only one field must by specified.
+	//
 	// Types that are valid to be assigned to Disk:
 	//
 	//	*DetachInstanceDiskRequest_DiskId
@@ -1692,7 +1871,7 @@ type DetachInstanceDiskRequest struct {
 
 func (x *DetachInstanceDiskRequest) Reset() {
 	*x = DetachInstanceDiskRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +1883,7 @@ func (x *DetachInstanceDiskRequest) String() string {
 func (*DetachInstanceDiskRequest) ProtoMessage() {}
 
 func (x *DetachInstanceDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1896,7 @@ func (x *DetachInstanceDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachInstanceDiskRequest.ProtoReflect.Descriptor instead.
 func (*DetachInstanceDiskRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DetachInstanceDiskRequest) GetInstanceId() string {
@@ -1758,12 +1937,14 @@ type isDetachInstanceDiskRequest_Disk interface {
 
 type DetachInstanceDiskRequest_DiskId struct {
 	// ID of the disk that should be detached.
+	// The length must be less than or equal to 50.
 	DiskId string `protobuf:"bytes,2,opt,name=disk_id,json=diskId,proto3,oneof"`
 }
 
 type DetachInstanceDiskRequest_DeviceName struct {
 	// Serial number of the disk that should be detached. This value is reflected into the /dev/disk/by-id/ tree
 	// of a Linux operating system running within the instance.
+	// The value must match the regular expression: `[a-z][a-z0-9-_]{,19}`.
 	DeviceName string `protobuf:"bytes,3,opt,name=device_name,json=deviceName,proto3,oneof"`
 }
 
@@ -1783,7 +1964,7 @@ type DetachInstanceDiskMetadata struct {
 
 func (x *DetachInstanceDiskMetadata) Reset() {
 	*x = DetachInstanceDiskMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1795,7 +1976,7 @@ func (x *DetachInstanceDiskMetadata) String() string {
 func (*DetachInstanceDiskMetadata) ProtoMessage() {}
 
 func (x *DetachInstanceDiskMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1808,7 +1989,7 @@ func (x *DetachInstanceDiskMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachInstanceDiskMetadata.ProtoReflect.Descriptor instead.
 func (*DetachInstanceDiskMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *DetachInstanceDiskMetadata) GetInstanceId() string {
@@ -1828,10 +2009,12 @@ func (x *DetachInstanceDiskMetadata) GetDiskId() string {
 type AttachInstanceFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to attach the filesystem to.
-	//
 	// To get the instance ID, make a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// Filesystem to attach to the instance.
+	// This field is required.
 	AttachedFilesystemSpec *AttachedFilesystemSpec `protobuf:"bytes,2,opt,name=attached_filesystem_spec,json=attachedFilesystemSpec,proto3" json:"attached_filesystem_spec,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -1839,7 +2022,7 @@ type AttachInstanceFilesystemRequest struct {
 
 func (x *AttachInstanceFilesystemRequest) Reset() {
 	*x = AttachInstanceFilesystemRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1851,7 +2034,7 @@ func (x *AttachInstanceFilesystemRequest) String() string {
 func (*AttachInstanceFilesystemRequest) ProtoMessage() {}
 
 func (x *AttachInstanceFilesystemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1864,7 +2047,7 @@ func (x *AttachInstanceFilesystemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachInstanceFilesystemRequest.ProtoReflect.Descriptor instead.
 func (*AttachInstanceFilesystemRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AttachInstanceFilesystemRequest) GetInstanceId() string {
@@ -1893,7 +2076,7 @@ type AttachInstanceFilesystemMetadata struct {
 
 func (x *AttachInstanceFilesystemMetadata) Reset() {
 	*x = AttachInstanceFilesystemMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1905,7 +2088,7 @@ func (x *AttachInstanceFilesystemMetadata) String() string {
 func (*AttachInstanceFilesystemMetadata) ProtoMessage() {}
 
 func (x *AttachInstanceFilesystemMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1918,7 +2101,7 @@ func (x *AttachInstanceFilesystemMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachInstanceFilesystemMetadata.ProtoReflect.Descriptor instead.
 func (*AttachInstanceFilesystemMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AttachInstanceFilesystemMetadata) GetInstanceId() string {
@@ -1938,9 +2121,12 @@ func (x *AttachInstanceFilesystemMetadata) GetFilesystemId() string {
 type DetachInstanceFilesystemRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to detach the filesystem from.
-	//
 	// To get the instance ID, make a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// Only one field must by specified.
+	//
 	// Types that are valid to be assigned to Filesystem:
 	//
 	//	*DetachInstanceFilesystemRequest_FilesystemId
@@ -1952,7 +2138,7 @@ type DetachInstanceFilesystemRequest struct {
 
 func (x *DetachInstanceFilesystemRequest) Reset() {
 	*x = DetachInstanceFilesystemRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1964,7 +2150,7 @@ func (x *DetachInstanceFilesystemRequest) String() string {
 func (*DetachInstanceFilesystemRequest) ProtoMessage() {}
 
 func (x *DetachInstanceFilesystemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1977,7 +2163,7 @@ func (x *DetachInstanceFilesystemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachInstanceFilesystemRequest.ProtoReflect.Descriptor instead.
 func (*DetachInstanceFilesystemRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DetachInstanceFilesystemRequest) GetInstanceId() string {
@@ -2018,11 +2204,13 @@ type isDetachInstanceFilesystemRequest_Filesystem interface {
 
 type DetachInstanceFilesystemRequest_FilesystemId struct {
 	// ID of the filesystem that should be detached.
+	// The length must be less than or equal to 50.
 	FilesystemId string `protobuf:"bytes,2,opt,name=filesystem_id,json=filesystemId,proto3,oneof"`
 }
 
 type DetachInstanceFilesystemRequest_DeviceName struct {
 	// Name of the device used for mounting the filesystem that should be detached.
+	// The value must match the regular expression: `[a-z][a-z0-9-_]{,19}`.
 	DeviceName string `protobuf:"bytes,3,opt,name=device_name,json=deviceName,proto3,oneof"`
 }
 
@@ -2042,7 +2230,7 @@ type DetachInstanceFilesystemMetadata struct {
 
 func (x *DetachInstanceFilesystemMetadata) Reset() {
 	*x = DetachInstanceFilesystemMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2054,7 +2242,7 @@ func (x *DetachInstanceFilesystemMetadata) String() string {
 func (*DetachInstanceFilesystemMetadata) ProtoMessage() {}
 
 func (x *DetachInstanceFilesystemMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2067,7 +2255,7 @@ func (x *DetachInstanceFilesystemMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachInstanceFilesystemMetadata.ProtoReflect.Descriptor instead.
 func (*DetachInstanceFilesystemMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DetachInstanceFilesystemMetadata) GetInstanceId() string {
@@ -2080,248 +2268,6 @@ func (x *DetachInstanceFilesystemMetadata) GetInstanceId() string {
 func (x *DetachInstanceFilesystemMetadata) GetFilesystemId() string {
 	if x != nil {
 		return x.FilesystemId
-	}
-	return ""
-}
-
-type AttachInstanceNetworkInterfaceRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance that in which network interface is being attached to.
-	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// The index of the network interface
-	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	// ID of the subnet.
-	SubnetId string `protobuf:"bytes,3,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Primary IPv4 address that will be assigned to the instance for this network interface.
-	PrimaryV4AddressSpec *PrimaryAddressSpec `protobuf:"bytes,4,opt,name=primary_v4_address_spec,json=primaryV4AddressSpec,proto3" json:"primary_v4_address_spec,omitempty"`
-	// ID's of security groups attached to the interface.
-	SecurityGroupIds []string `protobuf:"bytes,6,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) Reset() {
-	*x = AttachInstanceNetworkInterfaceRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[27]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AttachInstanceNetworkInterfaceRequest) ProtoMessage() {}
-
-func (x *AttachInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[27]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AttachInstanceNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
-func (*AttachInstanceNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{27}
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) GetNetworkInterfaceIndex() string {
-	if x != nil {
-		return x.NetworkInterfaceIndex
-	}
-	return ""
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) GetSubnetId() string {
-	if x != nil {
-		return x.SubnetId
-	}
-	return ""
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) GetPrimaryV4AddressSpec() *PrimaryAddressSpec {
-	if x != nil {
-		return x.PrimaryV4AddressSpec
-	}
-	return nil
-}
-
-func (x *AttachInstanceNetworkInterfaceRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
-}
-
-type AttachInstanceNetworkInterfaceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instant network interface that is being updated.
-	InstanceId            string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *AttachInstanceNetworkInterfaceMetadata) Reset() {
-	*x = AttachInstanceNetworkInterfaceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[28]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AttachInstanceNetworkInterfaceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AttachInstanceNetworkInterfaceMetadata) ProtoMessage() {}
-
-func (x *AttachInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[28]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AttachInstanceNetworkInterfaceMetadata.ProtoReflect.Descriptor instead.
-func (*AttachInstanceNetworkInterfaceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{28}
-}
-
-func (x *AttachInstanceNetworkInterfaceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *AttachInstanceNetworkInterfaceMetadata) GetNetworkInterfaceIndex() string {
-	if x != nil {
-		return x.NetworkInterfaceIndex
-	}
-	return ""
-}
-
-type DetachInstanceNetworkInterfaceRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance that in which network interface is being attached to.
-	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// The index of the network interface.
-	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *DetachInstanceNetworkInterfaceRequest) Reset() {
-	*x = DetachInstanceNetworkInterfaceRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DetachInstanceNetworkInterfaceRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DetachInstanceNetworkInterfaceRequest) ProtoMessage() {}
-
-func (x *DetachInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[29]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DetachInstanceNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
-func (*DetachInstanceNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{29}
-}
-
-func (x *DetachInstanceNetworkInterfaceRequest) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *DetachInstanceNetworkInterfaceRequest) GetNetworkInterfaceIndex() string {
-	if x != nil {
-		return x.NetworkInterfaceIndex
-	}
-	return ""
-}
-
-type DetachInstanceNetworkInterfaceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instant network interface that is being updated.
-	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// The index of the network interface.
-	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *DetachInstanceNetworkInterfaceMetadata) Reset() {
-	*x = DetachInstanceNetworkInterfaceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[30]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DetachInstanceNetworkInterfaceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DetachInstanceNetworkInterfaceMetadata) ProtoMessage() {}
-
-func (x *DetachInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[30]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DetachInstanceNetworkInterfaceMetadata.ProtoReflect.Descriptor instead.
-func (*DetachInstanceNetworkInterfaceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{30}
-}
-
-func (x *DetachInstanceNetworkInterfaceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-func (x *DetachInstanceNetworkInterfaceMetadata) GetNetworkInterfaceIndex() string {
-	if x != nil {
-		return x.NetworkInterfaceIndex
 	}
 	return ""
 }
@@ -2344,7 +2290,7 @@ type AddInstanceOneToOneNatRequest struct {
 
 func (x *AddInstanceOneToOneNatRequest) Reset() {
 	*x = AddInstanceOneToOneNatRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2356,7 +2302,7 @@ func (x *AddInstanceOneToOneNatRequest) String() string {
 func (*AddInstanceOneToOneNatRequest) ProtoMessage() {}
 
 func (x *AddInstanceOneToOneNatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2369,7 +2315,7 @@ func (x *AddInstanceOneToOneNatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddInstanceOneToOneNatRequest.ProtoReflect.Descriptor instead.
 func (*AddInstanceOneToOneNatRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *AddInstanceOneToOneNatRequest) GetInstanceId() string {
@@ -2410,7 +2356,7 @@ type AddInstanceOneToOneNatMetadata struct {
 
 func (x *AddInstanceOneToOneNatMetadata) Reset() {
 	*x = AddInstanceOneToOneNatMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2422,7 +2368,7 @@ func (x *AddInstanceOneToOneNatMetadata) String() string {
 func (*AddInstanceOneToOneNatMetadata) ProtoMessage() {}
 
 func (x *AddInstanceOneToOneNatMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2435,7 +2381,7 @@ func (x *AddInstanceOneToOneNatMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddInstanceOneToOneNatMetadata.ProtoReflect.Descriptor instead.
 func (*AddInstanceOneToOneNatMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *AddInstanceOneToOneNatMetadata) GetInstanceId() string {
@@ -2459,7 +2405,7 @@ type RemoveInstanceOneToOneNatRequest struct {
 
 func (x *RemoveInstanceOneToOneNatRequest) Reset() {
 	*x = RemoveInstanceOneToOneNatRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2471,7 +2417,7 @@ func (x *RemoveInstanceOneToOneNatRequest) String() string {
 func (*RemoveInstanceOneToOneNatRequest) ProtoMessage() {}
 
 func (x *RemoveInstanceOneToOneNatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2484,7 +2430,7 @@ func (x *RemoveInstanceOneToOneNatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveInstanceOneToOneNatRequest.ProtoReflect.Descriptor instead.
 func (*RemoveInstanceOneToOneNatRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{33}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *RemoveInstanceOneToOneNatRequest) GetInstanceId() string {
@@ -2518,7 +2464,7 @@ type RemoveInstanceOneToOneNatMetadata struct {
 
 func (x *RemoveInstanceOneToOneNatMetadata) Reset() {
 	*x = RemoveInstanceOneToOneNatMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2530,7 +2476,7 @@ func (x *RemoveInstanceOneToOneNatMetadata) String() string {
 func (*RemoveInstanceOneToOneNatMetadata) ProtoMessage() {}
 
 func (x *RemoveInstanceOneToOneNatMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2543,7 +2489,7 @@ func (x *RemoveInstanceOneToOneNatMetadata) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use RemoveInstanceOneToOneNatMetadata.ProtoReflect.Descriptor instead.
 func (*RemoveInstanceOneToOneNatMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{34}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *RemoveInstanceOneToOneNatMetadata) GetInstanceId() string {
@@ -2556,8 +2502,10 @@ func (x *RemoveInstanceOneToOneNatMetadata) GetInstanceId() string {
 type UpdateInstanceNetworkInterfaceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance that is being updated.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// The index of the network interface to be updated.
+	// This field is required.
 	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
 	// Field mask that specifies which attributes of the instance should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
@@ -2575,7 +2523,7 @@ type UpdateInstanceNetworkInterfaceRequest struct {
 
 func (x *UpdateInstanceNetworkInterfaceRequest) Reset() {
 	*x = UpdateInstanceNetworkInterfaceRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2587,7 +2535,7 @@ func (x *UpdateInstanceNetworkInterfaceRequest) String() string {
 func (*UpdateInstanceNetworkInterfaceRequest) ProtoMessage() {}
 
 func (x *UpdateInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2600,7 +2548,7 @@ func (x *UpdateInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use UpdateInstanceNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateInstanceNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{35}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *UpdateInstanceNetworkInterfaceRequest) GetInstanceId() string {
@@ -2664,7 +2612,7 @@ type UpdateInstanceNetworkInterfaceMetadata struct {
 
 func (x *UpdateInstanceNetworkInterfaceMetadata) Reset() {
 	*x = UpdateInstanceNetworkInterfaceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2676,7 +2624,7 @@ func (x *UpdateInstanceNetworkInterfaceMetadata) String() string {
 func (*UpdateInstanceNetworkInterfaceMetadata) ProtoMessage() {}
 
 func (x *UpdateInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2689,7 +2637,7 @@ func (x *UpdateInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use UpdateInstanceNetworkInterfaceMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateInstanceNetworkInterfaceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{36}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UpdateInstanceNetworkInterfaceMetadata) GetInstanceId() string {
@@ -2706,16 +2654,266 @@ func (x *UpdateInstanceNetworkInterfaceMetadata) GetNetworkInterfaceIndex() stri
 	return ""
 }
 
+type AttachInstanceNetworkInterfaceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance that in which network interface is being attached to.
+	// This field is required.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface
+	// This field is required.
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	// ID of the subnet.
+	// This field is required.
+	SubnetId string `protobuf:"bytes,3,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// Primary IPv4 address that will be assigned to the instance for this network interface.
+	PrimaryV4AddressSpec *PrimaryAddressSpec `protobuf:"bytes,4,opt,name=primary_v4_address_spec,json=primaryV4AddressSpec,proto3" json:"primary_v4_address_spec,omitempty"`
+	// ID's of security groups attached to the interface.
+	// This field is required.
+	SecurityGroupIds []string `protobuf:"bytes,6,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) Reset() {
+	*x = AttachInstanceNetworkInterfaceRequest{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttachInstanceNetworkInterfaceRequest) ProtoMessage() {}
+
+func (x *AttachInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttachInstanceNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
+func (*AttachInstanceNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) GetNetworkInterfaceIndex() string {
+	if x != nil {
+		return x.NetworkInterfaceIndex
+	}
+	return ""
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
+	}
+	return ""
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) GetPrimaryV4AddressSpec() *PrimaryAddressSpec {
+	if x != nil {
+		return x.PrimaryV4AddressSpec
+	}
+	return nil
+}
+
+func (x *AttachInstanceNetworkInterfaceRequest) GetSecurityGroupIds() []string {
+	if x != nil {
+		return x.SecurityGroupIds
+	}
+	return nil
+}
+
+type AttachInstanceNetworkInterfaceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instant network interface that is being updated.
+	InstanceId            string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *AttachInstanceNetworkInterfaceMetadata) Reset() {
+	*x = AttachInstanceNetworkInterfaceMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttachInstanceNetworkInterfaceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttachInstanceNetworkInterfaceMetadata) ProtoMessage() {}
+
+func (x *AttachInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttachInstanceNetworkInterfaceMetadata.ProtoReflect.Descriptor instead.
+func (*AttachInstanceNetworkInterfaceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *AttachInstanceNetworkInterfaceMetadata) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *AttachInstanceNetworkInterfaceMetadata) GetNetworkInterfaceIndex() string {
+	if x != nil {
+		return x.NetworkInterfaceIndex
+	}
+	return ""
+}
+
+type DetachInstanceNetworkInterfaceRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instance that in which network interface is being attached to.
+	// This field is required.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface.
+	// This field is required.
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DetachInstanceNetworkInterfaceRequest) Reset() {
+	*x = DetachInstanceNetworkInterfaceRequest{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachInstanceNetworkInterfaceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachInstanceNetworkInterfaceRequest) ProtoMessage() {}
+
+func (x *DetachInstanceNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachInstanceNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
+func (*DetachInstanceNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *DetachInstanceNetworkInterfaceRequest) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *DetachInstanceNetworkInterfaceRequest) GetNetworkInterfaceIndex() string {
+	if x != nil {
+		return x.NetworkInterfaceIndex
+	}
+	return ""
+}
+
+type DetachInstanceNetworkInterfaceMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the instant network interface that is being updated.
+	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	// The index of the network interface.
+	NetworkInterfaceIndex string `protobuf:"bytes,2,opt,name=network_interface_index,json=networkInterfaceIndex,proto3" json:"network_interface_index,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DetachInstanceNetworkInterfaceMetadata) Reset() {
+	*x = DetachInstanceNetworkInterfaceMetadata{}
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachInstanceNetworkInterfaceMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachInstanceNetworkInterfaceMetadata) ProtoMessage() {}
+
+func (x *DetachInstanceNetworkInterfaceMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachInstanceNetworkInterfaceMetadata.ProtoReflect.Descriptor instead.
+func (*DetachInstanceNetworkInterfaceMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *DetachInstanceNetworkInterfaceMetadata) GetInstanceId() string {
+	if x != nil {
+		return x.InstanceId
+	}
+	return ""
+}
+
+func (x *DetachInstanceNetworkInterfaceMetadata) GetNetworkInterfaceIndex() string {
+	if x != nil {
+		return x.NetworkInterfaceIndex
+	}
+	return ""
+}
+
 type SimulateInstanceMaintenanceEventRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	InstanceId    string                 `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The length must be less than or equal to 50.
+	// This field is required.
+	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SimulateInstanceMaintenanceEventRequest) Reset() {
 	*x = SimulateInstanceMaintenanceEventRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2727,7 +2925,7 @@ func (x *SimulateInstanceMaintenanceEventRequest) String() string {
 func (*SimulateInstanceMaintenanceEventRequest) ProtoMessage() {}
 
 func (x *SimulateInstanceMaintenanceEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2740,7 +2938,7 @@ func (x *SimulateInstanceMaintenanceEventRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use SimulateInstanceMaintenanceEventRequest.ProtoReflect.Descriptor instead.
 func (*SimulateInstanceMaintenanceEventRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{37}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *SimulateInstanceMaintenanceEventRequest) GetInstanceId() string {
@@ -2759,7 +2957,7 @@ type SimulateInstanceMaintenanceEventMetadata struct {
 
 func (x *SimulateInstanceMaintenanceEventMetadata) Reset() {
 	*x = SimulateInstanceMaintenanceEventMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2771,7 +2969,7 @@ func (x *SimulateInstanceMaintenanceEventMetadata) String() string {
 func (*SimulateInstanceMaintenanceEventMetadata) ProtoMessage() {}
 
 func (x *SimulateInstanceMaintenanceEventMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2784,7 +2982,7 @@ func (x *SimulateInstanceMaintenanceEventMetadata) ProtoReflect() protoreflect.M
 
 // Deprecated: Use SimulateInstanceMaintenanceEventMetadata.ProtoReflect.Descriptor instead.
 func (*SimulateInstanceMaintenanceEventMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{38}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *SimulateInstanceMaintenanceEventMetadata) GetInstanceId() string {
@@ -2797,13 +2995,17 @@ func (x *SimulateInstanceMaintenanceEventMetadata) GetInstanceId() string {
 type ListInstanceOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Instance resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListInstanceOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListInstanceOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2811,7 +3013,7 @@ type ListInstanceOperationsRequest struct {
 
 func (x *ListInstanceOperationsRequest) Reset() {
 	*x = ListInstanceOperationsRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2823,7 +3025,7 @@ func (x *ListInstanceOperationsRequest) String() string {
 func (*ListInstanceOperationsRequest) ProtoMessage() {}
 
 func (x *ListInstanceOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2836,7 +3038,7 @@ func (x *ListInstanceOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInstanceOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListInstanceOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{39}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ListInstanceOperationsRequest) GetInstanceId() string {
@@ -2875,7 +3077,7 @@ type ListInstanceOperationsResponse struct {
 
 func (x *ListInstanceOperationsResponse) Reset() {
 	*x = ListInstanceOperationsResponse{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2887,7 +3089,7 @@ func (x *ListInstanceOperationsResponse) String() string {
 func (*ListInstanceOperationsResponse) ProtoMessage() {}
 
 func (x *ListInstanceOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2900,7 +3102,7 @@ func (x *ListInstanceOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListInstanceOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListInstanceOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{40}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ListInstanceOperationsResponse) GetOperations() []*operation.Operation {
@@ -2920,16 +3122,21 @@ func (x *ListInstanceOperationsResponse) GetNextPageToken() string {
 type ResourcesSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The amount of memory available to the instance, specified in bytes.
+	// The value must be less than or equal to 274877906944.
+	// This field is required.
 	Memory int64 `protobuf:"varint,1,opt,name=memory,proto3" json:"memory,omitempty"`
 	// The number of cores available to the instance.
+	// The value must satisfy: 2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,40,44,48,52,56,60,64,68,72,76,80.
+	// This field is required.
 	Cores int64 `protobuf:"varint,2,opt,name=cores,proto3" json:"cores,omitempty"`
 	// Baseline level of CPU performance with the ability to burst performance above that baseline level.
 	// This field sets baseline performance for each core.
-	//
 	// For example, if you need only 5% of the CPU performance, you can set core_fraction=5.
 	// For more information, see [Levels of core performance](/docs/compute/concepts/performance-levels).
+	// The value must satisfy: 0,5,20,50,100.
 	CoreFraction int64 `protobuf:"varint,3,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
 	// The number of GPUs available to the instance.
+	// The value must satisfy: 0,1,2,4.
 	Gpus          int64 `protobuf:"varint,4,opt,name=gpus,proto3" json:"gpus,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2937,7 +3144,7 @@ type ResourcesSpec struct {
 
 func (x *ResourcesSpec) Reset() {
 	*x = ResourcesSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2949,7 +3156,7 @@ func (x *ResourcesSpec) String() string {
 func (*ResourcesSpec) ProtoMessage() {}
 
 func (x *ResourcesSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2962,7 +3169,7 @@ func (x *ResourcesSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourcesSpec.ProtoReflect.Descriptor instead.
 func (*ResourcesSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{41}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *ResourcesSpec) GetMemory() int64 {
@@ -2999,12 +3206,14 @@ type AttachedDiskSpec struct {
 	Mode AttachedDiskSpec_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedDiskSpec_Mode" json:"mode,omitempty"`
 	// Specifies a unique serial number of your choice that is reflected into the /dev/disk/by-id/ tree
 	// of a Linux operating system running within the instance.
-	//
 	// This value can be used to reference the device for mounting, resizing, and so on, from within the instance.
 	// If not specified, a random value will be generated.
+	// The value must match the regular expression: `[a-z][a-z0-9-_]{,19}`.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// Specifies whether the disk will be auto-deleted when the instance is deleted.
 	AutoDelete bool `protobuf:"varint,3,opt,name=auto_delete,json=autoDelete,proto3" json:"auto_delete,omitempty"`
+	// Only one field must by specified.
+	//
 	// Types that are valid to be assigned to Disk:
 	//
 	//	*AttachedDiskSpec_DiskSpec_
@@ -3016,7 +3225,7 @@ type AttachedDiskSpec struct {
 
 func (x *AttachedDiskSpec) Reset() {
 	*x = AttachedDiskSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3028,7 +3237,7 @@ func (x *AttachedDiskSpec) String() string {
 func (*AttachedDiskSpec) ProtoMessage() {}
 
 func (x *AttachedDiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3041,7 +3250,7 @@ func (x *AttachedDiskSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachedDiskSpec.ProtoReflect.Descriptor instead.
 func (*AttachedDiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{42}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *AttachedDiskSpec) GetMode() AttachedDiskSpec_Mode {
@@ -3101,6 +3310,7 @@ type AttachedDiskSpec_DiskSpec_ struct {
 
 type AttachedDiskSpec_DiskId struct {
 	// ID of the disk that should be attached.
+	// The length must be less than or equal to 50.
 	DiskId string `protobuf:"bytes,5,opt,name=disk_id,json=diskId,proto3,oneof"`
 }
 
@@ -3111,6 +3321,7 @@ func (*AttachedDiskSpec_DiskId) isAttachedDiskSpec_Disk() {}
 type AttachedLocalDiskSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Size of the disk, specified in bytes.
+	// This field is required.
 	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
 	// Types that are valid to be assigned to Type:
 	//
@@ -3122,7 +3333,7 @@ type AttachedLocalDiskSpec struct {
 
 func (x *AttachedLocalDiskSpec) Reset() {
 	*x = AttachedLocalDiskSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3134,7 +3345,7 @@ func (x *AttachedLocalDiskSpec) String() string {
 func (*AttachedLocalDiskSpec) ProtoMessage() {}
 
 func (x *AttachedLocalDiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3147,7 +3358,7 @@ func (x *AttachedLocalDiskSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachedLocalDiskSpec.ProtoReflect.Descriptor instead.
 func (*AttachedLocalDiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{43}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *AttachedLocalDiskSpec) GetSize() int64 {
@@ -3194,7 +3405,7 @@ type PhysicalLocalDiskSpec struct {
 
 func (x *PhysicalLocalDiskSpec) Reset() {
 	*x = PhysicalLocalDiskSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3206,7 +3417,7 @@ func (x *PhysicalLocalDiskSpec) String() string {
 func (*PhysicalLocalDiskSpec) ProtoMessage() {}
 
 func (x *PhysicalLocalDiskSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3219,7 +3430,7 @@ func (x *PhysicalLocalDiskSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PhysicalLocalDiskSpec.ProtoReflect.Descriptor instead.
 func (*PhysicalLocalDiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{44}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *PhysicalLocalDiskSpec) GetKmsKeyId() string {
@@ -3234,13 +3445,13 @@ type AttachedFilesystemSpec struct {
 	// Mode of access to the filesystem that should be attached.
 	Mode AttachedFilesystemSpec_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.compute.v1.AttachedFilesystemSpec_Mode" json:"mode,omitempty"`
 	// Name of the device representing the filesystem on the instance.
-	//
 	// The name should be used for referencing the filesystem from within the instance
 	// when it's being mounted, resized etc.
-	//
 	// If not specified, a random value will be generated.
+	// The value must match the regular expression: `[a-z][a-z0-9-_]{,19}`.
 	DeviceName string `protobuf:"bytes,2,opt,name=device_name,json=deviceName,proto3" json:"device_name,omitempty"`
 	// ID of the filesystem that should be attached.
+	// The length must be less than or equal to 50.
 	FilesystemId  string `protobuf:"bytes,3,opt,name=filesystem_id,json=filesystemId,proto3" json:"filesystem_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3248,7 +3459,7 @@ type AttachedFilesystemSpec struct {
 
 func (x *AttachedFilesystemSpec) Reset() {
 	*x = AttachedFilesystemSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3260,7 +3471,7 @@ func (x *AttachedFilesystemSpec) String() string {
 func (*AttachedFilesystemSpec) ProtoMessage() {}
 
 func (x *AttachedFilesystemSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[45]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3273,7 +3484,7 @@ func (x *AttachedFilesystemSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachedFilesystemSpec.ProtoReflect.Descriptor instead.
 func (*AttachedFilesystemSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{45}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *AttachedFilesystemSpec) GetMode() AttachedFilesystemSpec_Mode {
@@ -3299,7 +3510,11 @@ func (x *AttachedFilesystemSpec) GetFilesystemId() string {
 
 type NetworkInterfaceSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The index of the network interface, will be generated by the server, 0,1,2... etc if not specified.
+	Index string `protobuf:"bytes,7,opt,name=index,proto3" json:"index,omitempty"`
 	// ID of the subnet.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Primary IPv4 address that will be assigned to the instance for this network interface.
 	PrimaryV4AddressSpec *PrimaryAddressSpec `protobuf:"bytes,2,opt,name=primary_v4_address_spec,json=primaryV4AddressSpec,proto3" json:"primary_v4_address_spec,omitempty"`
@@ -3307,15 +3522,13 @@ type NetworkInterfaceSpec struct {
 	PrimaryV6AddressSpec *PrimaryAddressSpec `protobuf:"bytes,3,opt,name=primary_v6_address_spec,json=primaryV6AddressSpec,proto3" json:"primary_v6_address_spec,omitempty"`
 	// ID's of security groups attached to the interface
 	SecurityGroupIds []string `protobuf:"bytes,6,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// The index of the network interface, will be generated by the server, 0,1,2... etc if not specified.
-	Index         string `protobuf:"bytes,7,opt,name=index,proto3" json:"index,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *NetworkInterfaceSpec) Reset() {
 	*x = NetworkInterfaceSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3327,7 +3540,7 @@ func (x *NetworkInterfaceSpec) String() string {
 func (*NetworkInterfaceSpec) ProtoMessage() {}
 
 func (x *NetworkInterfaceSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[46]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3340,7 +3553,14 @@ func (x *NetworkInterfaceSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkInterfaceSpec.ProtoReflect.Descriptor instead.
 func (*NetworkInterfaceSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{46}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *NetworkInterfaceSpec) GetIndex() string {
+	if x != nil {
+		return x.Index
+	}
+	return ""
 }
 
 func (x *NetworkInterfaceSpec) GetSubnetId() string {
@@ -3371,13 +3591,6 @@ func (x *NetworkInterfaceSpec) GetSecurityGroupIds() []string {
 	return nil
 }
 
-func (x *NetworkInterfaceSpec) GetIndex() string {
-	if x != nil {
-		return x.Index
-	}
-	return ""
-}
-
 type PrimaryAddressSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// An IPv4 internal network address that is assigned to the instance for this network interface.
@@ -3394,7 +3607,7 @@ type PrimaryAddressSpec struct {
 
 func (x *PrimaryAddressSpec) Reset() {
 	*x = PrimaryAddressSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3406,7 +3619,7 @@ func (x *PrimaryAddressSpec) String() string {
 func (*PrimaryAddressSpec) ProtoMessage() {}
 
 func (x *PrimaryAddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[47]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3419,7 +3632,7 @@ func (x *PrimaryAddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrimaryAddressSpec.ProtoReflect.Descriptor instead.
 func (*PrimaryAddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{47}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *PrimaryAddressSpec) GetAddress() string {
@@ -3446,8 +3659,8 @@ func (x *PrimaryAddressSpec) GetDnsRecordSpecs() []*DnsRecordSpec {
 type OneToOneNatSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// External IP address version.
-	IpVersion IpVersion `protobuf:"varint,1,opt,name=ip_version,json=ipVersion,proto3,enum=yandex.cloud.compute.v1.IpVersion" json:"ip_version,omitempty"` //only if address unspecified
-	Address   string    `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`                                                              //set static IP by value
+	IpVersion IpVersion `protobuf:"varint,1,opt,name=ip_version,json=ipVersion,proto3,enum=yandex.cloud.compute.v1.IpVersion" json:"ip_version,omitempty"` // only if address unspecified.
+	Address   string    `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`                                                              // set static IP by value
 	// External DNS configuration
 	DnsRecordSpecs []*DnsRecordSpec `protobuf:"bytes,3,rep,name=dns_record_specs,json=dnsRecordSpecs,proto3" json:"dns_record_specs,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -3456,7 +3669,7 @@ type OneToOneNatSpec struct {
 
 func (x *OneToOneNatSpec) Reset() {
 	*x = OneToOneNatSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[48]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3468,7 +3681,7 @@ func (x *OneToOneNatSpec) String() string {
 func (*OneToOneNatSpec) ProtoMessage() {}
 
 func (x *OneToOneNatSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[48]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3481,7 +3694,7 @@ func (x *OneToOneNatSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OneToOneNatSpec.ProtoReflect.Descriptor instead.
 func (*OneToOneNatSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{48}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *OneToOneNatSpec) GetIpVersion() IpVersion {
@@ -3508,10 +3721,12 @@ func (x *OneToOneNatSpec) GetDnsRecordSpecs() []*DnsRecordSpec {
 type DnsRecordSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// FQDN (required)
+	// This field is required.
 	Fqdn string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
 	// DNS zone id (optional, if not set, private zone used)
 	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// DNS record ttl, values in 0-86400 (optional)
+	// The value must be between 0 and 86400.
 	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
 	// When set to true, also create PTR DNS record (optional)
 	Ptr           bool `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`
@@ -3521,7 +3736,7 @@ type DnsRecordSpec struct {
 
 func (x *DnsRecordSpec) Reset() {
 	*x = DnsRecordSpec{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3533,7 +3748,7 @@ func (x *DnsRecordSpec) String() string {
 func (*DnsRecordSpec) ProtoMessage() {}
 
 func (x *DnsRecordSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[49]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3546,7 +3761,7 @@ func (x *DnsRecordSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DnsRecordSpec.ProtoReflect.Descriptor instead.
 func (*DnsRecordSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{49}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *DnsRecordSpec) GetFqdn() string {
@@ -3580,12 +3795,14 @@ func (x *DnsRecordSpec) GetPtr() bool {
 type MoveInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to move.
-	//
 	// To get the instance ID, make a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// ID of the folder to move the instance to.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -3593,7 +3810,7 @@ type MoveInstanceRequest struct {
 
 func (x *MoveInstanceRequest) Reset() {
 	*x = MoveInstanceRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3605,7 +3822,7 @@ func (x *MoveInstanceRequest) String() string {
 func (*MoveInstanceRequest) ProtoMessage() {}
 
 func (x *MoveInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[50]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3618,7 +3835,7 @@ func (x *MoveInstanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveInstanceRequest.ProtoReflect.Descriptor instead.
 func (*MoveInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{50}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *MoveInstanceRequest) GetInstanceId() string {
@@ -3649,7 +3866,7 @@ type MoveInstanceMetadata struct {
 
 func (x *MoveInstanceMetadata) Reset() {
 	*x = MoveInstanceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3661,7 +3878,7 @@ func (x *MoveInstanceMetadata) String() string {
 func (*MoveInstanceMetadata) ProtoMessage() {}
 
 func (x *MoveInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[51]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3674,7 +3891,7 @@ func (x *MoveInstanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveInstanceMetadata.ProtoReflect.Descriptor instead.
 func (*MoveInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{51}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *MoveInstanceMetadata) GetInstanceId() string {
@@ -3701,16 +3918,20 @@ func (x *MoveInstanceMetadata) GetDestinationFolderId() string {
 type RelocateInstanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the instance to move.
-	//
 	// To get the instance ID, make a [InstanceService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	InstanceId string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
 	// ID of the availability zone to move the instance to.
-	//
 	// To get the zone ID, make a [ZoneService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationZoneId string `protobuf:"bytes,2,opt,name=destination_zone_id,json=destinationZoneId,proto3" json:"destination_zone_id,omitempty"`
 	// Network configuration for the instance. Specifies how the network interface is configured
 	// to interact with other services on the internal network and on the internet.
 	// Currently only one network interface is supported per instance.
+	// The number of elements must be exactly 1.
+	// This field is required.
 	NetworkInterfaceSpecs []*NetworkInterfaceSpec `protobuf:"bytes,3,rep,name=network_interface_specs,json=networkInterfaceSpecs,proto3" json:"network_interface_specs,omitempty"`
 	// Boot disk placement policy configuration in target zone. Must be specified if disk has placement policy.
 	BootDiskPlacement *DiskPlacementPolicy `protobuf:"bytes,4,opt,name=boot_disk_placement,json=bootDiskPlacement,proto3" json:"boot_disk_placement,omitempty"`
@@ -3722,7 +3943,7 @@ type RelocateInstanceRequest struct {
 
 func (x *RelocateInstanceRequest) Reset() {
 	*x = RelocateInstanceRequest{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3734,7 +3955,7 @@ func (x *RelocateInstanceRequest) String() string {
 func (*RelocateInstanceRequest) ProtoMessage() {}
 
 func (x *RelocateInstanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[52]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3747,7 +3968,7 @@ func (x *RelocateInstanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RelocateInstanceRequest.ProtoReflect.Descriptor instead.
 func (*RelocateInstanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{52}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *RelocateInstanceRequest) GetInstanceId() string {
@@ -3799,7 +4020,7 @@ type RelocateInstanceMetadata struct {
 
 func (x *RelocateInstanceMetadata) Reset() {
 	*x = RelocateInstanceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3811,7 +4032,7 @@ func (x *RelocateInstanceMetadata) String() string {
 func (*RelocateInstanceMetadata) ProtoMessage() {}
 
 func (x *RelocateInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[53]
+	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3824,7 +4045,7 @@ func (x *RelocateInstanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RelocateInstanceMetadata.ProtoReflect.Descriptor instead.
 func (*RelocateInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{53}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *RelocateInstanceMetadata) GetInstanceId() string {
@@ -3848,162 +4069,33 @@ func (x *RelocateInstanceMetadata) GetDestinationZoneId() string {
 	return ""
 }
 
-type GuestStopInstanceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance that was stopped from guest OS.
-	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GuestStopInstanceMetadata) Reset() {
-	*x = GuestStopInstanceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[54]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GuestStopInstanceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GuestStopInstanceMetadata) ProtoMessage() {}
-
-func (x *GuestStopInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[54]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GuestStopInstanceMetadata.ProtoReflect.Descriptor instead.
-func (*GuestStopInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{54}
-}
-
-func (x *GuestStopInstanceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-type PreemptInstanceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance that is being preempted.
-	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PreemptInstanceMetadata) Reset() {
-	*x = PreemptInstanceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[55]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PreemptInstanceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PreemptInstanceMetadata) ProtoMessage() {}
-
-func (x *PreemptInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[55]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PreemptInstanceMetadata.ProtoReflect.Descriptor instead.
-func (*PreemptInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{55}
-}
-
-func (x *PreemptInstanceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
-type CrashInstanceMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the instance that was crashed.
-	InstanceId    string `protobuf:"bytes,1,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CrashInstanceMetadata) Reset() {
-	*x = CrashInstanceMetadata{}
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[56]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CrashInstanceMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CrashInstanceMetadata) ProtoMessage() {}
-
-func (x *CrashInstanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[56]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CrashInstanceMetadata.ProtoReflect.Descriptor instead.
-func (*CrashInstanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{56}
-}
-
-func (x *CrashInstanceMetadata) GetInstanceId() string {
-	if x != nil {
-		return x.InstanceId
-	}
-	return ""
-}
-
 type AttachedDiskSpec_DiskSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the disk.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the disk.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// ID of the disk type.
 	// To get a list of available disk types, use the [yandex.cloud.compute.v1.DiskTypeService.List] request.
+	// The length must be less than or equal to 50.
 	TypeId string `protobuf:"bytes,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
 	// Size of the disk, specified in bytes.
+	// The value must be between 4194304 and 4398046511104.
+	// This field is required.
 	Size int64 `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
+	// Block size of the disk, specified in bytes. The default is 4096.
+	BlockSize int64 `protobuf:"varint,8,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
+	// Placement policy configuration.
+	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,7,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
 	// Types that are valid to be assigned to Source:
 	//
 	//	*AttachedDiskSpec_DiskSpec_ImageId
 	//	*AttachedDiskSpec_DiskSpec_SnapshotId
 	Source isAttachedDiskSpec_DiskSpec_Source `protobuf_oneof:"source"`
-	// Placement policy configuration.
-	DiskPlacementPolicy *DiskPlacementPolicy `protobuf:"bytes,7,opt,name=disk_placement_policy,json=diskPlacementPolicy,proto3" json:"disk_placement_policy,omitempty"`
-	// Block size of the disk, specified in bytes. The default is 4096.
-	BlockSize int64 `protobuf:"varint,8,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
 	// ID of KMS key for disk encryption
+	// The length must be less than or equal to 50.
 	KmsKeyId      string `protobuf:"bytes,9,opt,name=kms_key_id,json=kmsKeyId,proto3" json:"kms_key_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4036,7 +4128,7 @@ func (x *AttachedDiskSpec_DiskSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachedDiskSpec_DiskSpec.ProtoReflect.Descriptor instead.
 func (*AttachedDiskSpec_DiskSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{42, 0}
+	return file_yandex_cloud_compute_v1_instance_service_proto_rawDescGZIP(), []int{45, 0}
 }
 
 func (x *AttachedDiskSpec_DiskSpec) GetName() string {
@@ -4067,6 +4159,20 @@ func (x *AttachedDiskSpec_DiskSpec) GetSize() int64 {
 	return 0
 }
 
+func (x *AttachedDiskSpec_DiskSpec) GetBlockSize() int64 {
+	if x != nil {
+		return x.BlockSize
+	}
+	return 0
+}
+
+func (x *AttachedDiskSpec_DiskSpec) GetDiskPlacementPolicy() *DiskPlacementPolicy {
+	if x != nil {
+		return x.DiskPlacementPolicy
+	}
+	return nil
+}
+
 func (x *AttachedDiskSpec_DiskSpec) GetSource() isAttachedDiskSpec_DiskSpec_Source {
 	if x != nil {
 		return x.Source
@@ -4092,20 +4198,6 @@ func (x *AttachedDiskSpec_DiskSpec) GetSnapshotId() string {
 	return ""
 }
 
-func (x *AttachedDiskSpec_DiskSpec) GetDiskPlacementPolicy() *DiskPlacementPolicy {
-	if x != nil {
-		return x.DiskPlacementPolicy
-	}
-	return nil
-}
-
-func (x *AttachedDiskSpec_DiskSpec) GetBlockSize() int64 {
-	if x != nil {
-		return x.BlockSize
-	}
-	return 0
-}
-
 func (x *AttachedDiskSpec_DiskSpec) GetKmsKeyId() string {
 	if x != nil {
 		return x.KmsKeyId
@@ -4119,11 +4211,13 @@ type isAttachedDiskSpec_DiskSpec_Source interface {
 
 type AttachedDiskSpec_DiskSpec_ImageId struct {
 	// ID of the image to create the disk from.
+	// The length must be less than or equal to 50.
 	ImageId string `protobuf:"bytes,5,opt,name=image_id,json=imageId,proto3,oneof"`
 }
 
 type AttachedDiskSpec_DiskSpec_SnapshotId struct {
 	// ID of the snapshot to restore the disk from.
+	// The length must be less than or equal to 50.
 	SnapshotId string `protobuf:"bytes,6,opt,name=snapshot_id,json=snapshotId,proto3,oneof"`
 }
 
@@ -4135,85 +4229,82 @@ var File_yandex_cloud_compute_v1_instance_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/compute/v1/instance_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"~\n" +
-	"\x12GetInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	".yandex/cloud/compute/v1/instance_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/compute/v1/application.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a)yandex/cloud/compute/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\"p\n" +
+	"\x12GetInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x129\n" +
-	"\x04view\x18\x02 \x01(\x0e2%.yandex.cloud.compute.v1.InstanceViewR\x04view\"\xde\x01\n" +
-	"\x14ListInstancesRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x04view\x18\x02 \x01(\x0e2%.yandex.cloud.compute.v1.InstanceViewR\x04view\"\xa2\x01\n" +
+	"\x14ListInstancesRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x80\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x80\x01\n" +
 	"\x15ListInstancesResponse\x12?\n" +
 	"\tinstances\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.InstanceR\tinstances\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd2\x10\n" +
-	"\x15CreateInstanceRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
-	"\x04name\x18\x02 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2:.yandex.cloud.compute.v1.CreateInstanceRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\azone_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
-	"\vplatform_id\x18\x06 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"platformId\x12S\n" +
-	"\x0eresources_spec\x18\a \x01(\v2&.yandex.cloud.compute.v1.ResourcesSpecB\x04\xe8\xc71\x01R\rresourcesSpec\x12X\n" +
-	"\bmetadata\x18\b \x03(\v2<.yandex.cloud.compute.v1.CreateInstanceRequest.MetadataEntryR\bmetadata\x12S\n" +
-	"\x10metadata_options\x18\x13 \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12U\n" +
-	"\x0eboot_disk_spec\x18\t \x01(\v2).yandex.cloud.compute.v1.AttachedDiskSpecB\x04\xe8\xc71\x01R\fbootDiskSpec\x12d\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe0\x0e\n" +
+	"\x15CreateInstanceRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12R\n" +
+	"\x06labels\x18\x04 \x03(\v2:.yandex.cloud.compute.v1.CreateInstanceRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\azone_id\x18\x05 \x01(\tR\x06zoneId\x12\x1f\n" +
+	"\vplatform_id\x18\x06 \x01(\tR\n" +
+	"platformId\x12M\n" +
+	"\x0eresources_spec\x18\a \x01(\v2&.yandex.cloud.compute.v1.ResourcesSpecR\rresourcesSpec\x12X\n" +
+	"\bmetadata\x18\b \x03(\v2<.yandex.cloud.compute.v1.CreateInstanceRequest.MetadataEntryR\bmetadata\x12O\n" +
+	"\x0eboot_disk_spec\x18\t \x01(\v2).yandex.cloud.compute.v1.AttachedDiskSpecR\fbootDiskSpec\x12[\n" +
 	"\x14secondary_disk_specs\x18\n" +
-	" \x03(\v2).yandex.cloud.compute.v1.AttachedDiskSpecB\a\x82\xc81\x03<=3R\x12secondaryDiskSpecs\x12X\n" +
-	"\x10local_disk_specs\x18\x12 \x03(\v2..yandex.cloud.compute.v1.AttachedLocalDiskSpecR\x0elocalDiskSpecs\x12Z\n" +
-	"\x10filesystem_specs\x18\x11 \x03(\v2/.yandex.cloud.compute.v1.AttachedFilesystemSpecR\x0ffilesystemSpecs\x12k\n" +
-	"\x17network_interface_specs\x18\v \x03(\v2-.yandex.cloud.compute.v1.NetworkInterfaceSpecB\x04\xe8\xc71\x01R\x15networkInterfaceSpecs\x12A\n" +
-	"\bhostname\x18\f \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\bhostname\x12V\n" +
+	" \x03(\v2).yandex.cloud.compute.v1.AttachedDiskSpecR\x12secondaryDiskSpecs\x12Z\n" +
+	"\x10filesystem_specs\x18\x11 \x03(\v2/.yandex.cloud.compute.v1.AttachedFilesystemSpecR\x0ffilesystemSpecs\x12X\n" +
+	"\x10local_disk_specs\x18\x12 \x03(\v2..yandex.cloud.compute.v1.AttachedLocalDiskSpecR\x0elocalDiskSpecs\x12e\n" +
+	"\x17network_interface_specs\x18\v \x03(\v2-.yandex.cloud.compute.v1.NetworkInterfaceSpecR\x15networkInterfaceSpecs\x12\x1a\n" +
+	"\bhostname\x18\f \x01(\tR\bhostname\x12V\n" +
 	"\x11scheduling_policy\x18\r \x01(\v2).yandex.cloud.compute.v1.SchedulingPolicyR\x10schedulingPolicy\x12,\n" +
 	"\x12service_account_id\x18\x0e \x01(\tR\x10serviceAccountId\x12S\n" +
 	"\x10network_settings\x18\x0f \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12S\n" +
 	"\x10placement_policy\x18\x10 \x01(\v2(.yandex.cloud.compute.v1.PlacementPolicyR\x0fplacementPolicy\x12G\n" +
 	"\fgpu_settings\x18\x14 \x01(\v2$.yandex.cloud.compute.v1.GpuSettingsR\vgpuSettings\x12Y\n" +
-	"\x12maintenance_policy\x18\x15 \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12_\n" +
-	"\x18maintenance_grace_period\x18\x16 \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x061s-24hR\x16maintenanceGracePeriod\x12]\n" +
-	"\x14serial_port_settings\x18\x17 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12C\n" +
-	"\x19reserved_instance_pool_id\x18\x18 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12F\n" +
-	"\vapplication\x18\x19 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
+	"\x12maintenance_policy\x18\x15 \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12S\n" +
+	"\x18maintenance_grace_period\x18\x16 \x01(\v2\x19.google.protobuf.DurationR\x16maintenanceGracePeriod\x12S\n" +
+	"\x10metadata_options\x18\x13 \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12]\n" +
+	"\x14serial_port_settings\x18\x17 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12F\n" +
+	"\vapplication\x18\x19 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x18 \x01(\tR\x16reservedInstancePoolId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
-	"\x16CreateInstanceMetadata\x12)\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
-	"instanceId\"\xf4\v\n" +
-	"\x15UpdateInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
+	"\x16CreateInstanceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\"\xd8\n" +
+	"\n" +
+	"\x15UpdateInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12\x1f\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12R\n" +
+	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntryR\x06labels\x12\x1f\n" +
 	"\vplatform_id\x18\x06 \x01(\tR\n" +
 	"platformId\x12M\n" +
 	"\x0eresources_spec\x18\a \x01(\v2&.yandex.cloud.compute.v1.ResourcesSpecR\rresourcesSpec\x12X\n" +
-	"\bmetadata\x18\b \x03(\v2<.yandex.cloud.compute.v1.UpdateInstanceRequest.MetadataEntryR\bmetadata\x12S\n" +
-	"\x10metadata_options\x18\r \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12,\n" +
+	"\bmetadata\x18\b \x03(\v2<.yandex.cloud.compute.v1.UpdateInstanceRequest.MetadataEntryR\bmetadata\x12V\n" +
+	"\x11scheduling_policy\x18\f \x01(\v2).yandex.cloud.compute.v1.SchedulingPolicyR\x10schedulingPolicy\x12,\n" +
 	"\x12service_account_id\x18\t \x01(\tR\x10serviceAccountId\x12S\n" +
 	"\x10network_settings\x18\n" +
 	" \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12S\n" +
-	"\x10placement_policy\x18\v \x01(\v2(.yandex.cloud.compute.v1.PlacementPolicyR\x0fplacementPolicy\x12V\n" +
-	"\x11scheduling_policy\x18\f \x01(\v2).yandex.cloud.compute.v1.SchedulingPolicyR\x10schedulingPolicy\x12Y\n" +
-	"\x12maintenance_policy\x18\x0e \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12_\n" +
-	"\x18maintenance_grace_period\x18\x0f \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x061s-24hR\x16maintenanceGracePeriod\x12]\n" +
-	"\x14serial_port_settings\x18\x10 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12C\n" +
-	"\x19reserved_instance_pool_id\x18\x11 \x01(\tB\b\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12F\n" +
-	"\vapplication\x18\x12 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x1a9\n" +
+	"\x10placement_policy\x18\v \x01(\v2(.yandex.cloud.compute.v1.PlacementPolicyR\x0fplacementPolicy\x12Y\n" +
+	"\x12maintenance_policy\x18\x0e \x01(\x0e2*.yandex.cloud.compute.v1.MaintenancePolicyR\x11maintenancePolicy\x12S\n" +
+	"\x18maintenance_grace_period\x18\x0f \x01(\v2\x19.google.protobuf.DurationR\x16maintenanceGracePeriod\x12S\n" +
+	"\x10metadata_options\x18\r \x01(\v2(.yandex.cloud.compute.v1.MetadataOptionsR\x0fmetadataOptions\x12]\n" +
+	"\x14serial_port_settings\x18\x10 \x01(\v2+.yandex.cloud.compute.v1.SerialPortSettingsR\x12serialPortSettings\x12F\n" +
+	"\vapplication\x18\x12 \x01(\v2$.yandex.cloud.compute.v1.ApplicationR\vapplication\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x11 \x01(\tR\x16reservedInstancePoolId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
@@ -4222,13 +4313,19 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"9\n" +
 	"\x16UpdateInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"F\n" +
-	"\x15DeleteInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"instanceId\"8\n" +
+	"\x15DeleteInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\"9\n" +
 	"\x16DeleteInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xef\x01\n" +
+	"instanceId\"Y\n" +
+	"\"GetInstanceSerialPortOutputRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12\x12\n" +
+	"\x04port\x18\x02 \x01(\x03R\x04port\"A\n" +
+	"#GetInstanceSerialPortOutputResponse\x12\x1a\n" +
+	"\bcontents\x18\x01 \x01(\tR\bcontents\"\xef\x01\n" +
 	"\x1dUpdateInstanceMetadataRequest\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12\x16\n" +
@@ -4239,89 +4336,73 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"A\n" +
 	"\x1eUpdateInstanceMetadataMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"t\n" +
-	"\"GetInstanceSerialPortOutputRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12\x1f\n" +
-	"\x04port\x18\x02 \x01(\x03B\v\xfa\xc71\a1,2,3,4R\x04port\"A\n" +
-	"#GetInstanceSerialPortOutputResponse\x12\x1a\n" +
-	"\bcontents\x18\x01 \x01(\tR\bcontents\"D\n" +
-	"\x13StopInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"instanceId\"6\n" +
+	"\x13StopInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\"7\n" +
 	"\x14StopInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"E\n" +
-	"\x14StartInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"instanceId\"7\n" +
+	"\x14StartInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\"8\n" +
 	"\x15StartInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"G\n" +
-	"\x16RestartInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"instanceId\"9\n" +
+	"\x16RestartInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\":\n" +
 	"\x17RestartInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xa9\x01\n" +
-	"\x19AttachInstanceDiskRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12]\n" +
-	"\x12attached_disk_spec\x18\x02 \x01(\v2).yandex.cloud.compute.v1.AttachedDiskSpecB\x04\xe8\xc71\x01R\x10attachedDiskSpec\"V\n" +
+	"instanceId\"<\n" +
+	"\x19GuestStopInstanceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\":\n" +
+	"\x17PreemptInstanceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\"8\n" +
+	"\x15CrashInstanceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\"\x95\x01\n" +
+	"\x19AttachInstanceDiskRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12W\n" +
+	"\x12attached_disk_spec\x18\x02 \x01(\v2).yandex.cloud.compute.v1.AttachedDiskSpecR\x10attachedDiskSpec\"V\n" +
 	"\x1aAttachInstanceDiskMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12\x17\n" +
-	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\xba\x01\n" +
-	"\x19DetachInstanceDiskRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12#\n" +
-	"\adisk_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06diskId\x12;\n" +
-	"\vdevice_name\x18\x03 \x01(\tB\x18\xf2\xc71\x14[a-z][a-z0-9-_]{,19}H\x00R\n" +
-	"deviceNameB\f\n" +
-	"\x04disk\x12\x04\xc0\xc11\x01\"V\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\x82\x01\n" +
+	"\x19DetachInstanceDiskRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12\x19\n" +
+	"\adisk_id\x18\x02 \x01(\tH\x00R\x06diskId\x12!\n" +
+	"\vdevice_name\x18\x03 \x01(\tH\x00R\n" +
+	"deviceNameB\x06\n" +
+	"\x04disk\"V\n" +
 	"\x1aDetachInstanceDiskMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12\x17\n" +
-	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\xc1\x01\n" +
-	"\x1fAttachInstanceFilesystemRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12o\n" +
-	"\x18attached_filesystem_spec\x18\x02 \x01(\v2/.yandex.cloud.compute.v1.AttachedFilesystemSpecB\x04\xe8\xc71\x01R\x16attachedFilesystemSpec\"h\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"\xad\x01\n" +
+	"\x1fAttachInstanceFilesystemRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12i\n" +
+	"\x18attached_filesystem_spec\x18\x02 \x01(\v2/.yandex.cloud.compute.v1.AttachedFilesystemSpecR\x16attachedFilesystemSpec\"h\n" +
 	" AttachInstanceFilesystemMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12#\n" +
-	"\rfilesystem_id\x18\x02 \x01(\tR\ffilesystemId\"\xd2\x01\n" +
-	"\x1fDetachInstanceFilesystemRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12/\n" +
-	"\rfilesystem_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\ffilesystemId\x12;\n" +
-	"\vdevice_name\x18\x03 \x01(\tB\x18\xf2\xc71\x14[a-z][a-z0-9-_]{,19}H\x00R\n" +
-	"deviceNameB\x12\n" +
+	"\rfilesystem_id\x18\x02 \x01(\tR\ffilesystemId\"\x9a\x01\n" +
+	"\x1fDetachInstanceFilesystemRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12%\n" +
+	"\rfilesystem_id\x18\x02 \x01(\tH\x00R\ffilesystemId\x12!\n" +
+	"\vdevice_name\x18\x03 \x01(\tH\x00R\n" +
+	"deviceNameB\f\n" +
 	"\n" +
-	"filesystem\x12\x04\xc0\xc11\x01\"h\n" +
+	"filesystem\"h\n" +
 	" DetachInstanceFilesystemMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12#\n" +
-	"\rfilesystem_id\x18\x02 \x01(\tR\ffilesystemId\"\xcd\x02\n" +
-	"%AttachInstanceNetworkInterfaceRequest\x12%\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"instanceId\x12<\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x15networkInterfaceIndex\x12!\n" +
-	"\tsubnet_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\bsubnetId\x12b\n" +
-	"\x17primary_v4_address_spec\x18\x04 \x01(\v2+.yandex.cloud.compute.v1.PrimaryAddressSpecR\x14primaryV4AddressSpec\x122\n" +
-	"\x12security_group_ids\x18\x06 \x03(\tB\x04\xe8\xc71\x01R\x10securityGroupIdsJ\x04\b\x05\x10\x06\"\x81\x01\n" +
-	"&AttachInstanceNetworkInterfaceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\x126\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"\x8c\x01\n" +
-	"%DetachInstanceNetworkInterfaceRequest\x12%\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"instanceId\x12<\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x15networkInterfaceIndex\"\x81\x01\n" +
-	"&DetachInstanceNetworkInterfaceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\x126\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"\xfb\x01\n" +
+	"\rfilesystem_id\x18\x02 \x01(\tR\ffilesystemId\"\xfb\x01\n" +
 	"\x1dAddInstanceOneToOneNatRequest\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x126\n" +
@@ -4338,11 +4419,11 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x10internal_address\x18\x03 \x01(\tR\x0finternalAddress\"D\n" +
 	"!RemoveInstanceOneToOneNatMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xdc\x03\n" +
-	"%UpdateInstanceNetworkInterfaceRequest\x12%\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"instanceId\x12<\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x15networkInterfaceIndex\x12;\n" +
+	"instanceId\"\xd0\x03\n" +
+	"%UpdateInstanceNetworkInterfaceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x126\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x1b\n" +
 	"\tsubnet_id\x18\x04 \x01(\tR\bsubnetId\x12b\n" +
@@ -4352,81 +4433,99 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"&UpdateInstanceNetworkInterfaceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x126\n" +
-	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"X\n" +
-	"'SimulateInstanceMaintenanceEventRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"\xb5\x02\n" +
+	"%AttachInstanceNetworkInterfaceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x126\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\x12\x1b\n" +
+	"\tsubnet_id\x18\x03 \x01(\tR\bsubnetId\x12b\n" +
+	"\x17primary_v4_address_spec\x18\x04 \x01(\v2+.yandex.cloud.compute.v1.PrimaryAddressSpecR\x14primaryV4AddressSpec\x12,\n" +
+	"\x12security_group_ids\x18\x06 \x03(\tR\x10securityGroupIdsJ\x04\b\x05\x10\x06\"\x81\x01\n" +
+	"&AttachInstanceNetworkInterfaceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x126\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"\x80\x01\n" +
+	"%DetachInstanceNetworkInterfaceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x126\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"\x81\x01\n" +
+	"&DetachInstanceNetworkInterfaceMetadata\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x126\n" +
+	"\x17network_interface_index\x18\x02 \x01(\tR\x15networkInterfaceIndex\"J\n" +
+	"'SimulateInstanceMaintenanceEventRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\"K\n" +
 	"(SimulateInstanceMaintenanceEventMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"\xa1\x01\n" +
-	"\x1dListInstanceOperationsRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"instanceId\"|\n" +
+	"\x1dListInstanceOperationsRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8b\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8b\x01\n" +
 	"\x1eListInstanceOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\x02\n" +
-	"\rResourcesSpec\x12.\n" +
-	"\x06memory\x18\x01 \x01(\x03B\x16\xe8\xc71\x01\xfa\xc71\x0e<=274877906944R\x06memory\x12p\n" +
-	"\x05cores\x18\x02 \x01(\x03BZ\xe8\xc71\x01\xfa\xc71R2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,40,44,48,52,56,60,64,68,72,76,80R\x05cores\x126\n" +
-	"\rcore_fraction\x18\x03 \x01(\x03B\x11\xfa\xc71\r0,5,20,50,100R\fcoreFraction\x12\x1f\n" +
-	"\x04gpus\x18\x04 \x01(\x03B\v\xfa\xc71\a0,1,2,4R\x04gpus\"\xc7\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"v\n" +
+	"\rResourcesSpec\x12\x16\n" +
+	"\x06memory\x18\x01 \x01(\x03R\x06memory\x12\x14\n" +
+	"\x05cores\x18\x02 \x01(\x03R\x05cores\x12#\n" +
+	"\rcore_fraction\x18\x03 \x01(\x03R\fcoreFraction\x12\x12\n" +
+	"\x04gpus\x18\x04 \x01(\x03R\x04gpus\"\xa4\x05\n" +
 	"\x10AttachedDiskSpec\x12B\n" +
-	"\x04mode\x18\x01 \x01(\x0e2..yandex.cloud.compute.v1.AttachedDiskSpec.ModeR\x04mode\x129\n" +
-	"\vdevice_name\x18\x02 \x01(\tB\x18\xf2\xc71\x14[a-z][a-z0-9-_]{,19}R\n" +
+	"\x04mode\x18\x01 \x01(\x0e2..yandex.cloud.compute.v1.AttachedDiskSpec.ModeR\x04mode\x12\x1f\n" +
+	"\vdevice_name\x18\x02 \x01(\tR\n" +
 	"deviceName\x12\x1f\n" +
 	"\vauto_delete\x18\x03 \x01(\bR\n" +
 	"autoDelete\x12Q\n" +
-	"\tdisk_spec\x18\x04 \x01(\v22.yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpecH\x00R\bdiskSpec\x12#\n" +
-	"\adisk_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\x06diskId\x1a\xcf\x03\n" +
-	"\bDiskSpec\x129\n" +
-	"\x04name\x18\x01 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12!\n" +
-	"\atype_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x06typeId\x121\n" +
-	"\x04size\x18\x04 \x01(\x03B\x1d\xe8\xc71\x01\xfa\xc71\x154194304-4398046511104R\x04size\x12%\n" +
-	"\bimage_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\aimageId\x12+\n" +
-	"\vsnapshot_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\n" +
-	"snapshotId\x12`\n" +
-	"\x15disk_placement_policy\x18\a \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x13diskPlacementPolicy\x12\x1d\n" +
+	"\tdisk_spec\x18\x04 \x01(\v22.yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpecH\x00R\bdiskSpec\x12\x19\n" +
+	"\adisk_id\x18\x05 \x01(\tH\x00R\x06diskId\x1a\xd6\x02\n" +
+	"\bDiskSpec\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x17\n" +
+	"\atype_id\x18\x03 \x01(\tR\x06typeId\x12\x12\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\x12\x1d\n" +
 	"\n" +
-	"block_size\x18\b \x01(\x03R\tblockSize\x12&\n" +
+	"block_size\x18\b \x01(\x03R\tblockSize\x12`\n" +
+	"\x15disk_placement_policy\x18\a \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x13diskPlacementPolicy\x12\x1b\n" +
+	"\bimage_id\x18\x05 \x01(\tH\x00R\aimageId\x12!\n" +
+	"\vsnapshot_id\x18\x06 \x01(\tH\x00R\n" +
+	"snapshotId\x12\x1c\n" +
 	"\n" +
-	"kms_key_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bkmsKeyIdB\b\n" +
+	"kms_key_id\x18\t \x01(\tR\bkmsKeyIdB\b\n" +
 	"\x06source\";\n" +
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tREAD_ONLY\x10\x01\x12\x0e\n" +
 	"\n" +
-	"READ_WRITE\x10\x02B\f\n" +
-	"\x04disk\x12\x04\xc0\xc11\x01\"\x9b\x01\n" +
-	"\x15AttachedLocalDiskSpec\x12\x18\n" +
-	"\x04size\x18\x01 \x01(\x03B\x04\xe8\xc71\x01R\x04size\x12`\n" +
+	"READ_WRITE\x10\x02B\x06\n" +
+	"\x04disk\"\x95\x01\n" +
+	"\x15AttachedLocalDiskSpec\x12\x12\n" +
+	"\x04size\x18\x01 \x01(\x03R\x04size\x12`\n" +
 	"\x13physical_local_disk\x18\x02 \x01(\v2..yandex.cloud.compute.v1.PhysicalLocalDiskSpecH\x00R\x11physicalLocalDiskB\x06\n" +
 	"\x04type\"5\n" +
 	"\x15PhysicalLocalDiskSpec\x12\x1c\n" +
 	"\n" +
-	"kms_key_id\x18\x01 \x01(\tR\bkmsKeyId\"\x89\x02\n" +
+	"kms_key_id\x18\x01 \x01(\tR\bkmsKeyId\"\xe5\x01\n" +
 	"\x16AttachedFilesystemSpec\x12H\n" +
-	"\x04mode\x18\x01 \x01(\x0e24.yandex.cloud.compute.v1.AttachedFilesystemSpec.ModeR\x04mode\x129\n" +
-	"\vdevice_name\x18\x02 \x01(\tB\x18\xf2\xc71\x14[a-z][a-z0-9-_]{,19}R\n" +
-	"deviceName\x12-\n" +
-	"\rfilesystem_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\ffilesystemId\";\n" +
+	"\x04mode\x18\x01 \x01(\x0e24.yandex.cloud.compute.v1.AttachedFilesystemSpec.ModeR\x04mode\x12\x1f\n" +
+	"\vdevice_name\x18\x02 \x01(\tR\n" +
+	"deviceName\x12#\n" +
+	"\rfilesystem_id\x18\x03 \x01(\tR\ffilesystemId\";\n" +
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tREAD_ONLY\x10\x01\x12\x0e\n" +
 	"\n" +
-	"READ_WRITE\x10\x02\"\xd3\x02\n" +
-	"\x14NetworkInterfaceSpec\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12b\n" +
+	"READ_WRITE\x10\x02\"\xc5\x02\n" +
+	"\x14NetworkInterfaceSpec\x12\x14\n" +
+	"\x05index\x18\a \x01(\tR\x05index\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12b\n" +
 	"\x17primary_v4_address_spec\x18\x02 \x01(\v2+.yandex.cloud.compute.v1.PrimaryAddressSpecR\x14primaryV4AddressSpec\x12b\n" +
 	"\x17primary_v6_address_spec\x18\x03 \x01(\v2+.yandex.cloud.compute.v1.PrimaryAddressSpecR\x14primaryV6AddressSpec\x12,\n" +
-	"\x12security_group_ids\x18\x06 \x03(\tR\x10securityGroupIds\x12\x14\n" +
-	"\x05index\x18\a \x01(\tR\x05indexJ\x04\b\x04\x10\x06\"\xd8\x01\n" +
+	"\x12security_group_ids\x18\x06 \x03(\tR\x10securityGroupIdsJ\x04\b\x04\x10\x06\"\xd8\x01\n" +
 	"\x12PrimaryAddressSpec\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12V\n" +
 	"\x13one_to_one_nat_spec\x18\x02 \x01(\v2(.yandex.cloud.compute.v1.OneToOneNatSpecR\x0foneToOneNatSpec\x12P\n" +
@@ -4435,45 +4534,36 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\n" +
 	"ip_version\x18\x01 \x01(\x0e2\".yandex.cloud.compute.v1.IpVersionR\tipVersion\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12P\n" +
-	"\x10dns_record_specs\x18\x03 \x03(\v2&.yandex.cloud.compute.v1.DnsRecordSpecR\x0ednsRecordSpecs\"z\n" +
-	"\rDnsRecordSpec\x12\x18\n" +
-	"\x04fqdn\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04fqdn\x12\x1e\n" +
-	"\vdns_zone_id\x18\x02 \x01(\tR\tdnsZoneId\x12\x1d\n" +
-	"\x03ttl\x18\x03 \x01(\x03B\v\xfa\xc71\a0-86400R\x03ttl\x12\x10\n" +
-	"\x03ptr\x18\x04 \x01(\bR\x03ptr\"\x86\x01\n" +
-	"\x13MoveInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"\x95\x01\n" +
+	"\x10dns_record_specs\x18\x03 \x03(\v2&.yandex.cloud.compute.v1.DnsRecordSpecR\x0ednsRecordSpecs\"g\n" +
+	"\rDnsRecordSpec\x12\x12\n" +
+	"\x04fqdn\x18\x01 \x01(\tR\x04fqdn\x12\x1e\n" +
+	"\vdns_zone_id\x18\x02 \x01(\tR\tdnsZoneId\x12\x10\n" +
+	"\x03ttl\x18\x03 \x01(\x03R\x03ttl\x12\x10\n" +
+	"\x03ptr\x18\x04 \x01(\bR\x03ptr\"j\n" +
+	"\x13MoveInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"\x95\x01\n" +
 	"\x14MoveInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12(\n" +
 	"\x10source_folder_id\x18\x02 \x01(\tR\x0esourceFolderId\x122\n" +
-	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\xc6\x03\n" +
-	"\x17RelocateInstanceRequest\x12-\n" +
-	"\vinstance_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"instanceId\x12<\n" +
-	"\x13destination_zone_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11destinationZoneId\x12p\n" +
-	"\x17network_interface_specs\x18\x03 \x03(\v2-.yandex.cloud.compute.v1.NetworkInterfaceSpecB\t\xe8\xc71\x01\x82\xc81\x011R\x15networkInterfaceSpecs\x12\\\n" +
+	"\x15destination_folder_id\x18\x03 \x01(\tR\x13destinationFolderId\"\x9f\x03\n" +
+	"\x17RelocateInstanceRequest\x12\x1f\n" +
+	"\vinstance_id\x18\x01 \x01(\tR\n" +
+	"instanceId\x12.\n" +
+	"\x13destination_zone_id\x18\x02 \x01(\tR\x11destinationZoneId\x12e\n" +
+	"\x17network_interface_specs\x18\x03 \x03(\v2-.yandex.cloud.compute.v1.NetworkInterfaceSpecR\x15networkInterfaceSpecs\x12\\\n" +
 	"\x13boot_disk_placement\x18\x04 \x01(\v2,.yandex.cloud.compute.v1.DiskPlacementPolicyR\x11bootDiskPlacement\x12n\n" +
 	"\x19secondary_disk_placements\x18\x05 \x03(\v22.yandex.cloud.compute.v1.DiskPlacementPolicyChangeR\x17secondaryDiskPlacements\"\x91\x01\n" +
 	"\x18RelocateInstanceMetadata\x12\x1f\n" +
 	"\vinstance_id\x18\x01 \x01(\tR\n" +
 	"instanceId\x12$\n" +
 	"\x0esource_zone_id\x18\x02 \x01(\tR\fsourceZoneId\x12.\n" +
-	"\x13destination_zone_id\x18\x03 \x01(\tR\x11destinationZoneId\"<\n" +
-	"\x19GuestStopInstanceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\":\n" +
-	"\x17PreemptInstanceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId\"8\n" +
-	"\x15CrashInstanceMetadata\x12\x1f\n" +
-	"\vinstance_id\x18\x01 \x01(\tR\n" +
-	"instanceId*#\n" +
+	"\x13destination_zone_id\x18\x03 \x01(\tR\x11destinationZoneId*#\n" +
 	"\fInstanceView\x12\t\n" +
 	"\x05BASIC\x10\x00\x12\b\n" +
-	"\x04FULL\x10\x012\x9f*\n" +
+	"\x04FULL\x10\x012\xa5*\n" +
 	"\x0fInstanceService\x12\x82\x01\n" +
 	"\x03Get\x12+.yandex.cloud.compute.v1.GetInstanceRequest\x1a!.yandex.cloud.compute.v1.Instance\"+\x82\xd3\xe4\x93\x02%\x12#/compute/v1/instances/{instance_id}\x12\x84\x01\n" +
 	"\x04List\x12-.yandex.cloud.compute.v1.ListInstancesRequest\x1a..yandex.cloud.compute.v1.ListInstancesResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/compute/v1/instances\x12\xa3\x01\n" +
@@ -4485,11 +4575,11 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x16DeleteInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02%*#/compute/v1/instances/{instance_id}\x12\xd8\x01\n" +
 	"\x0eUpdateMetadata\x126.yandex.cloud.compute.v1.UpdateInstanceMetadataRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2**\n" +
 	"\x1eUpdateInstanceMetadataMetadata\x12\bInstance\x82\xd3\xe4\x93\x027:\x01*\"2/compute/v1/instances/{instance_id}/updateMetadata\x12\xce\x01\n" +
-	"\x13GetSerialPortOutput\x12;.yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest\x1a<.yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse\"<\x82\xd3\xe4\x93\x026\x124/compute/v1/instances/{instance_id}:serialPortOutput\x12\xba\x01\n" +
-	"\x04Stop\x12,.yandex.cloud.compute.v1.StopInstanceRequest\x1a!.yandex.cloud.operation.Operation\"a\xb2\xd2*-\n" +
-	"\x14StopInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02*\"(/compute/v1/instances/{instance_id}:stop\x12\xb1\x01\n" +
-	"\x05Start\x12-.yandex.cloud.compute.v1.StartInstanceRequest\x1a!.yandex.cloud.operation.Operation\"V\xb2\xd2*!\n" +
-	"\x15StartInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02+\")/compute/v1/instances/{instance_id}:start\x12\xc6\x01\n" +
+	"\x13GetSerialPortOutput\x12;.yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest\x1a<.yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse\"<\x82\xd3\xe4\x93\x026\x124/compute/v1/instances/{instance_id}:serialPortOutput\x12\xbd\x01\n" +
+	"\x04Stop\x12,.yandex.cloud.compute.v1.StopInstanceRequest\x1a!.yandex.cloud.operation.Operation\"d\xb2\xd2*-\n" +
+	"\x14StopInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-:\x01*\"(/compute/v1/instances/{instance_id}:stop\x12\xb4\x01\n" +
+	"\x05Start\x12-.yandex.cloud.compute.v1.StartInstanceRequest\x1a!.yandex.cloud.operation.Operation\"Y\xb2\xd2*!\n" +
+	"\x15StartInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02.:\x01*\")/compute/v1/instances/{instance_id}:start\x12\xc6\x01\n" +
 	"\aRestart\x12/.yandex.cloud.compute.v1.RestartInstanceRequest\x1a!.yandex.cloud.operation.Operation\"g\xb2\xd2*0\n" +
 	"\x17RestartInstanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02-\"+/compute/v1/instances/{instance_id}:restart\x12\xc8\x01\n" +
 	"\n" +
@@ -4501,24 +4591,24 @@ const file_yandex_cloud_compute_v1_instance_service_proto_rawDesc = "" +
 	"\x10AttachFilesystem\x128.yandex.cloud.compute.v1.AttachInstanceFilesystemRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*,\n" +
 	" AttachInstanceFilesystemMetadata\x12\bInstance\x82\xd3\xe4\x93\x029:\x01*\"4/compute/v1/instances/{instance_id}:attachFilesystem\x12\xe0\x01\n" +
 	"\x10DetachFilesystem\x128.yandex.cloud.compute.v1.DetachInstanceFilesystemRequest\x1a!.yandex.cloud.operation.Operation\"o\xb2\xd2*,\n" +
-	" DetachInstanceFilesystemMetadata\x12\bInstance\x82\xd3\xe4\x93\x029:\x01*\"4/compute/v1/instances/{instance_id}:detachFilesystem\x12\xf8\x01\n" +
-	"\x16AttachNetworkInterface\x12>.yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*2\n" +
-	"&AttachInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instances/{instance_id}:attachNetworkInterface\x12\xf8\x01\n" +
-	"\x16DetachNetworkInterface\x12>.yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*2\n" +
-	"&DetachInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instances/{instance_id}:detachNetworkInterface\x12\xd8\x01\n" +
+	" DetachInstanceFilesystemMetadata\x12\bInstance\x82\xd3\xe4\x93\x029:\x01*\"4/compute/v1/instances/{instance_id}:detachFilesystem\x12\xd8\x01\n" +
 	"\x0eAddOneToOneNat\x126.yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2**\n" +
 	"\x1eAddInstanceOneToOneNatMetadata\x12\bInstance\x82\xd3\xe4\x93\x027:\x01*\"2/compute/v1/instances/{instance_id}/addOneToOneNat\x12\xe4\x01\n" +
 	"\x11RemoveOneToOneNat\x129.yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*-\n" +
 	"!RemoveInstanceOneToOneNatMetadata\x12\bInstance\x82\xd3\xe4\x93\x02::\x01*\"5/compute/v1/instances/{instance_id}/removeOneToOneNat\x12\xf8\x01\n" +
 	"\x16UpdateNetworkInterface\x12>.yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*2\n" +
-	"&UpdateInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*2:/compute/v1/instances/{instance_id}/updateNetworkInterface\x12\xb9\x01\n" +
-	"\x0eListOperations\x126.yandex.cloud.compute.v1.ListInstanceOperationsRequest\x1a7.yandex.cloud.compute.v1.ListInstanceOperationsResponse\"6\x82\xd3\xe4\x93\x020\x12./compute/v1/instances/{instance_id}/operations\x12\xb0\x01\n" +
+	"&UpdateInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*2:/compute/v1/instances/{instance_id}/updateNetworkInterface\x12\xf8\x01\n" +
+	"\x16AttachNetworkInterface\x12>.yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*2\n" +
+	"&AttachInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instances/{instance_id}:attachNetworkInterface\x12\xf8\x01\n" +
+	"\x16DetachNetworkInterface\x12>.yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest\x1a!.yandex.cloud.operation.Operation\"{\xb2\xd2*2\n" +
+	"&DetachInstanceNetworkInterfaceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02?:\x01*\":/compute/v1/instances/{instance_id}:detachNetworkInterface\x12\xb9\x01\n" +
+	"\x0eListOperations\x126.yandex.cloud.compute.v1.ListInstanceOperationsRequest\x1a7.yandex.cloud.compute.v1.ListInstanceOperationsResponse\"6\x82\xd3\xe4\x93\x020\x12./compute/v1/instances/{instance_id}/operations\x12\x8e\x02\n" +
+	"\x18SimulateMaintenanceEvent\x12@.yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*A\n" +
+	"(SimulateInstanceMaintenanceEventMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02A:\x01*\"</compute/v1/instances/{instance_id}:simulateMaintenanceEvent\x12\xb0\x01\n" +
 	"\x04Move\x12,.yandex.cloud.compute.v1.MoveInstanceRequest\x1a!.yandex.cloud.operation.Operation\"W\xb2\xd2* \n" +
 	"\x14MoveInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x02-:\x01*\"(/compute/v1/instances/{instance_id}:move\x12\xc0\x01\n" +
 	"\bRelocate\x120.yandex.cloud.compute.v1.RelocateInstanceRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*$\n" +
-	"\x18RelocateInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x021:\x01*\",/compute/v1/instances/{instance_id}:relocate\x12\x8e\x02\n" +
-	"\x18SimulateMaintenanceEvent\x12@.yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*A\n" +
-	"(SimulateInstanceMaintenanceEventMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02A:\x01*\"</compute/v1/instances/{instance_id}:simulateMaintenanceEvent\x12\xb5\x01\n" +
+	"\x18RelocateInstanceMetadata\x12\bInstance\x82\xd3\xe4\x93\x021:\x01*\",/compute/v1/instances/{instance_id}:relocate\x12\xb5\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\">\x82\xd3\xe4\x93\x028\x126/compute/v1/instances/{resource_id}:listAccessBindings\x12\xf4\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02::\x01*\"5/compute/v1/instances/{resource_id}:setAccessBindings\x12\x80\x02\n" +
@@ -4553,54 +4643,54 @@ var file_yandex_cloud_compute_v1_instance_service_proto_goTypes = []any{
 	(*UpdateInstanceMetadata)(nil),                   // 9: yandex.cloud.compute.v1.UpdateInstanceMetadata
 	(*DeleteInstanceRequest)(nil),                    // 10: yandex.cloud.compute.v1.DeleteInstanceRequest
 	(*DeleteInstanceMetadata)(nil),                   // 11: yandex.cloud.compute.v1.DeleteInstanceMetadata
-	(*UpdateInstanceMetadataRequest)(nil),            // 12: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
-	(*UpdateInstanceMetadataMetadata)(nil),           // 13: yandex.cloud.compute.v1.UpdateInstanceMetadataMetadata
-	(*GetInstanceSerialPortOutputRequest)(nil),       // 14: yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
-	(*GetInstanceSerialPortOutputResponse)(nil),      // 15: yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
+	(*GetInstanceSerialPortOutputRequest)(nil),       // 12: yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
+	(*GetInstanceSerialPortOutputResponse)(nil),      // 13: yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
+	(*UpdateInstanceMetadataRequest)(nil),            // 14: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
+	(*UpdateInstanceMetadataMetadata)(nil),           // 15: yandex.cloud.compute.v1.UpdateInstanceMetadataMetadata
 	(*StopInstanceRequest)(nil),                      // 16: yandex.cloud.compute.v1.StopInstanceRequest
 	(*StopInstanceMetadata)(nil),                     // 17: yandex.cloud.compute.v1.StopInstanceMetadata
 	(*StartInstanceRequest)(nil),                     // 18: yandex.cloud.compute.v1.StartInstanceRequest
 	(*StartInstanceMetadata)(nil),                    // 19: yandex.cloud.compute.v1.StartInstanceMetadata
 	(*RestartInstanceRequest)(nil),                   // 20: yandex.cloud.compute.v1.RestartInstanceRequest
 	(*RestartInstanceMetadata)(nil),                  // 21: yandex.cloud.compute.v1.RestartInstanceMetadata
-	(*AttachInstanceDiskRequest)(nil),                // 22: yandex.cloud.compute.v1.AttachInstanceDiskRequest
-	(*AttachInstanceDiskMetadata)(nil),               // 23: yandex.cloud.compute.v1.AttachInstanceDiskMetadata
-	(*DetachInstanceDiskRequest)(nil),                // 24: yandex.cloud.compute.v1.DetachInstanceDiskRequest
-	(*DetachInstanceDiskMetadata)(nil),               // 25: yandex.cloud.compute.v1.DetachInstanceDiskMetadata
-	(*AttachInstanceFilesystemRequest)(nil),          // 26: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
-	(*AttachInstanceFilesystemMetadata)(nil),         // 27: yandex.cloud.compute.v1.AttachInstanceFilesystemMetadata
-	(*DetachInstanceFilesystemRequest)(nil),          // 28: yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
-	(*DetachInstanceFilesystemMetadata)(nil),         // 29: yandex.cloud.compute.v1.DetachInstanceFilesystemMetadata
-	(*AttachInstanceNetworkInterfaceRequest)(nil),    // 30: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
-	(*AttachInstanceNetworkInterfaceMetadata)(nil),   // 31: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceMetadata
-	(*DetachInstanceNetworkInterfaceRequest)(nil),    // 32: yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
-	(*DetachInstanceNetworkInterfaceMetadata)(nil),   // 33: yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceMetadata
-	(*AddInstanceOneToOneNatRequest)(nil),            // 34: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
-	(*AddInstanceOneToOneNatMetadata)(nil),           // 35: yandex.cloud.compute.v1.AddInstanceOneToOneNatMetadata
-	(*RemoveInstanceOneToOneNatRequest)(nil),         // 36: yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
-	(*RemoveInstanceOneToOneNatMetadata)(nil),        // 37: yandex.cloud.compute.v1.RemoveInstanceOneToOneNatMetadata
-	(*UpdateInstanceNetworkInterfaceRequest)(nil),    // 38: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
-	(*UpdateInstanceNetworkInterfaceMetadata)(nil),   // 39: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceMetadata
-	(*SimulateInstanceMaintenanceEventRequest)(nil),  // 40: yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
-	(*SimulateInstanceMaintenanceEventMetadata)(nil), // 41: yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventMetadata
-	(*ListInstanceOperationsRequest)(nil),            // 42: yandex.cloud.compute.v1.ListInstanceOperationsRequest
-	(*ListInstanceOperationsResponse)(nil),           // 43: yandex.cloud.compute.v1.ListInstanceOperationsResponse
-	(*ResourcesSpec)(nil),                            // 44: yandex.cloud.compute.v1.ResourcesSpec
-	(*AttachedDiskSpec)(nil),                         // 45: yandex.cloud.compute.v1.AttachedDiskSpec
-	(*AttachedLocalDiskSpec)(nil),                    // 46: yandex.cloud.compute.v1.AttachedLocalDiskSpec
-	(*PhysicalLocalDiskSpec)(nil),                    // 47: yandex.cloud.compute.v1.PhysicalLocalDiskSpec
-	(*AttachedFilesystemSpec)(nil),                   // 48: yandex.cloud.compute.v1.AttachedFilesystemSpec
-	(*NetworkInterfaceSpec)(nil),                     // 49: yandex.cloud.compute.v1.NetworkInterfaceSpec
-	(*PrimaryAddressSpec)(nil),                       // 50: yandex.cloud.compute.v1.PrimaryAddressSpec
-	(*OneToOneNatSpec)(nil),                          // 51: yandex.cloud.compute.v1.OneToOneNatSpec
-	(*DnsRecordSpec)(nil),                            // 52: yandex.cloud.compute.v1.DnsRecordSpec
-	(*MoveInstanceRequest)(nil),                      // 53: yandex.cloud.compute.v1.MoveInstanceRequest
-	(*MoveInstanceMetadata)(nil),                     // 54: yandex.cloud.compute.v1.MoveInstanceMetadata
-	(*RelocateInstanceRequest)(nil),                  // 55: yandex.cloud.compute.v1.RelocateInstanceRequest
-	(*RelocateInstanceMetadata)(nil),                 // 56: yandex.cloud.compute.v1.RelocateInstanceMetadata
-	(*GuestStopInstanceMetadata)(nil),                // 57: yandex.cloud.compute.v1.GuestStopInstanceMetadata
-	(*PreemptInstanceMetadata)(nil),                  // 58: yandex.cloud.compute.v1.PreemptInstanceMetadata
-	(*CrashInstanceMetadata)(nil),                    // 59: yandex.cloud.compute.v1.CrashInstanceMetadata
+	(*GuestStopInstanceMetadata)(nil),                // 22: yandex.cloud.compute.v1.GuestStopInstanceMetadata
+	(*PreemptInstanceMetadata)(nil),                  // 23: yandex.cloud.compute.v1.PreemptInstanceMetadata
+	(*CrashInstanceMetadata)(nil),                    // 24: yandex.cloud.compute.v1.CrashInstanceMetadata
+	(*AttachInstanceDiskRequest)(nil),                // 25: yandex.cloud.compute.v1.AttachInstanceDiskRequest
+	(*AttachInstanceDiskMetadata)(nil),               // 26: yandex.cloud.compute.v1.AttachInstanceDiskMetadata
+	(*DetachInstanceDiskRequest)(nil),                // 27: yandex.cloud.compute.v1.DetachInstanceDiskRequest
+	(*DetachInstanceDiskMetadata)(nil),               // 28: yandex.cloud.compute.v1.DetachInstanceDiskMetadata
+	(*AttachInstanceFilesystemRequest)(nil),          // 29: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
+	(*AttachInstanceFilesystemMetadata)(nil),         // 30: yandex.cloud.compute.v1.AttachInstanceFilesystemMetadata
+	(*DetachInstanceFilesystemRequest)(nil),          // 31: yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
+	(*DetachInstanceFilesystemMetadata)(nil),         // 32: yandex.cloud.compute.v1.DetachInstanceFilesystemMetadata
+	(*AddInstanceOneToOneNatRequest)(nil),            // 33: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
+	(*AddInstanceOneToOneNatMetadata)(nil),           // 34: yandex.cloud.compute.v1.AddInstanceOneToOneNatMetadata
+	(*RemoveInstanceOneToOneNatRequest)(nil),         // 35: yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
+	(*RemoveInstanceOneToOneNatMetadata)(nil),        // 36: yandex.cloud.compute.v1.RemoveInstanceOneToOneNatMetadata
+	(*UpdateInstanceNetworkInterfaceRequest)(nil),    // 37: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
+	(*UpdateInstanceNetworkInterfaceMetadata)(nil),   // 38: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceMetadata
+	(*AttachInstanceNetworkInterfaceRequest)(nil),    // 39: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
+	(*AttachInstanceNetworkInterfaceMetadata)(nil),   // 40: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceMetadata
+	(*DetachInstanceNetworkInterfaceRequest)(nil),    // 41: yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
+	(*DetachInstanceNetworkInterfaceMetadata)(nil),   // 42: yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceMetadata
+	(*SimulateInstanceMaintenanceEventRequest)(nil),  // 43: yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
+	(*SimulateInstanceMaintenanceEventMetadata)(nil), // 44: yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventMetadata
+	(*ListInstanceOperationsRequest)(nil),            // 45: yandex.cloud.compute.v1.ListInstanceOperationsRequest
+	(*ListInstanceOperationsResponse)(nil),           // 46: yandex.cloud.compute.v1.ListInstanceOperationsResponse
+	(*ResourcesSpec)(nil),                            // 47: yandex.cloud.compute.v1.ResourcesSpec
+	(*AttachedDiskSpec)(nil),                         // 48: yandex.cloud.compute.v1.AttachedDiskSpec
+	(*AttachedLocalDiskSpec)(nil),                    // 49: yandex.cloud.compute.v1.AttachedLocalDiskSpec
+	(*PhysicalLocalDiskSpec)(nil),                    // 50: yandex.cloud.compute.v1.PhysicalLocalDiskSpec
+	(*AttachedFilesystemSpec)(nil),                   // 51: yandex.cloud.compute.v1.AttachedFilesystemSpec
+	(*NetworkInterfaceSpec)(nil),                     // 52: yandex.cloud.compute.v1.NetworkInterfaceSpec
+	(*PrimaryAddressSpec)(nil),                       // 53: yandex.cloud.compute.v1.PrimaryAddressSpec
+	(*OneToOneNatSpec)(nil),                          // 54: yandex.cloud.compute.v1.OneToOneNatSpec
+	(*DnsRecordSpec)(nil),                            // 55: yandex.cloud.compute.v1.DnsRecordSpec
+	(*MoveInstanceRequest)(nil),                      // 56: yandex.cloud.compute.v1.MoveInstanceRequest
+	(*MoveInstanceMetadata)(nil),                     // 57: yandex.cloud.compute.v1.MoveInstanceMetadata
+	(*RelocateInstanceRequest)(nil),                  // 58: yandex.cloud.compute.v1.RelocateInstanceRequest
+	(*RelocateInstanceMetadata)(nil),                 // 59: yandex.cloud.compute.v1.RelocateInstanceMetadata
 	nil,                                              // 60: yandex.cloud.compute.v1.CreateInstanceRequest.LabelsEntry
 	nil,                                              // 61: yandex.cloud.compute.v1.CreateInstanceRequest.MetadataEntry
 	nil,                                              // 62: yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntry
@@ -4608,13 +4698,13 @@ var file_yandex_cloud_compute_v1_instance_service_proto_goTypes = []any{
 	nil,                                              // 64: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.UpsertEntry
 	(*AttachedDiskSpec_DiskSpec)(nil),                // 65: yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec
 	(*Instance)(nil),                                 // 66: yandex.cloud.compute.v1.Instance
-	(*MetadataOptions)(nil),                          // 67: yandex.cloud.compute.v1.MetadataOptions
-	(*SchedulingPolicy)(nil),                         // 68: yandex.cloud.compute.v1.SchedulingPolicy
-	(*NetworkSettings)(nil),                          // 69: yandex.cloud.compute.v1.NetworkSettings
-	(*PlacementPolicy)(nil),                          // 70: yandex.cloud.compute.v1.PlacementPolicy
-	(*GpuSettings)(nil),                              // 71: yandex.cloud.compute.v1.GpuSettings
-	(MaintenancePolicy)(0),                           // 72: yandex.cloud.compute.v1.MaintenancePolicy
-	(*durationpb.Duration)(nil),                      // 73: google.protobuf.Duration
+	(*SchedulingPolicy)(nil),                         // 67: yandex.cloud.compute.v1.SchedulingPolicy
+	(*NetworkSettings)(nil),                          // 68: yandex.cloud.compute.v1.NetworkSettings
+	(*PlacementPolicy)(nil),                          // 69: yandex.cloud.compute.v1.PlacementPolicy
+	(*GpuSettings)(nil),                              // 70: yandex.cloud.compute.v1.GpuSettings
+	(MaintenancePolicy)(0),                           // 71: yandex.cloud.compute.v1.MaintenancePolicy
+	(*durationpb.Duration)(nil),                      // 72: google.protobuf.Duration
+	(*MetadataOptions)(nil),                          // 73: yandex.cloud.compute.v1.MetadataOptions
 	(*SerialPortSettings)(nil),                       // 74: yandex.cloud.compute.v1.SerialPortSettings
 	(*Application)(nil),                              // 75: yandex.cloud.compute.v1.Application
 	(*fieldmaskpb.FieldMask)(nil),                    // 76: google.protobuf.FieldMask
@@ -4631,54 +4721,54 @@ var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.compute.v1.GetInstanceRequest.view:type_name -> yandex.cloud.compute.v1.InstanceView
 	66, // 1: yandex.cloud.compute.v1.ListInstancesResponse.instances:type_name -> yandex.cloud.compute.v1.Instance
 	60, // 2: yandex.cloud.compute.v1.CreateInstanceRequest.labels:type_name -> yandex.cloud.compute.v1.CreateInstanceRequest.LabelsEntry
-	44, // 3: yandex.cloud.compute.v1.CreateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	47, // 3: yandex.cloud.compute.v1.CreateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
 	61, // 4: yandex.cloud.compute.v1.CreateInstanceRequest.metadata:type_name -> yandex.cloud.compute.v1.CreateInstanceRequest.MetadataEntry
-	67, // 5: yandex.cloud.compute.v1.CreateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
-	45, // 6: yandex.cloud.compute.v1.CreateInstanceRequest.boot_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
-	45, // 7: yandex.cloud.compute.v1.CreateInstanceRequest.secondary_disk_specs:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
-	46, // 8: yandex.cloud.compute.v1.CreateInstanceRequest.local_disk_specs:type_name -> yandex.cloud.compute.v1.AttachedLocalDiskSpec
-	48, // 9: yandex.cloud.compute.v1.CreateInstanceRequest.filesystem_specs:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
-	49, // 10: yandex.cloud.compute.v1.CreateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
-	68, // 11: yandex.cloud.compute.v1.CreateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
-	69, // 12: yandex.cloud.compute.v1.CreateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	70, // 13: yandex.cloud.compute.v1.CreateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
-	71, // 14: yandex.cloud.compute.v1.CreateInstanceRequest.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
-	72, // 15: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
-	73, // 16: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
+	48, // 5: yandex.cloud.compute.v1.CreateInstanceRequest.boot_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
+	48, // 6: yandex.cloud.compute.v1.CreateInstanceRequest.secondary_disk_specs:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
+	51, // 7: yandex.cloud.compute.v1.CreateInstanceRequest.filesystem_specs:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
+	49, // 8: yandex.cloud.compute.v1.CreateInstanceRequest.local_disk_specs:type_name -> yandex.cloud.compute.v1.AttachedLocalDiskSpec
+	52, // 9: yandex.cloud.compute.v1.CreateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
+	67, // 10: yandex.cloud.compute.v1.CreateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
+	68, // 11: yandex.cloud.compute.v1.CreateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	69, // 12: yandex.cloud.compute.v1.CreateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
+	70, // 13: yandex.cloud.compute.v1.CreateInstanceRequest.gpu_settings:type_name -> yandex.cloud.compute.v1.GpuSettings
+	71, // 14: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
+	72, // 15: yandex.cloud.compute.v1.CreateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
+	73, // 16: yandex.cloud.compute.v1.CreateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
 	74, // 17: yandex.cloud.compute.v1.CreateInstanceRequest.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
 	75, // 18: yandex.cloud.compute.v1.CreateInstanceRequest.application:type_name -> yandex.cloud.compute.v1.Application
 	76, // 19: yandex.cloud.compute.v1.UpdateInstanceRequest.update_mask:type_name -> google.protobuf.FieldMask
 	62, // 20: yandex.cloud.compute.v1.UpdateInstanceRequest.labels:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.LabelsEntry
-	44, // 21: yandex.cloud.compute.v1.UpdateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
+	47, // 21: yandex.cloud.compute.v1.UpdateInstanceRequest.resources_spec:type_name -> yandex.cloud.compute.v1.ResourcesSpec
 	63, // 22: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata:type_name -> yandex.cloud.compute.v1.UpdateInstanceRequest.MetadataEntry
-	67, // 23: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
-	69, // 24: yandex.cloud.compute.v1.UpdateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
-	70, // 25: yandex.cloud.compute.v1.UpdateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
-	68, // 26: yandex.cloud.compute.v1.UpdateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
-	72, // 27: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
-	73, // 28: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
+	67, // 23: yandex.cloud.compute.v1.UpdateInstanceRequest.scheduling_policy:type_name -> yandex.cloud.compute.v1.SchedulingPolicy
+	68, // 24: yandex.cloud.compute.v1.UpdateInstanceRequest.network_settings:type_name -> yandex.cloud.compute.v1.NetworkSettings
+	69, // 25: yandex.cloud.compute.v1.UpdateInstanceRequest.placement_policy:type_name -> yandex.cloud.compute.v1.PlacementPolicy
+	71, // 26: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_policy:type_name -> yandex.cloud.compute.v1.MaintenancePolicy
+	72, // 27: yandex.cloud.compute.v1.UpdateInstanceRequest.maintenance_grace_period:type_name -> google.protobuf.Duration
+	73, // 28: yandex.cloud.compute.v1.UpdateInstanceRequest.metadata_options:type_name -> yandex.cloud.compute.v1.MetadataOptions
 	74, // 29: yandex.cloud.compute.v1.UpdateInstanceRequest.serial_port_settings:type_name -> yandex.cloud.compute.v1.SerialPortSettings
 	75, // 30: yandex.cloud.compute.v1.UpdateInstanceRequest.application:type_name -> yandex.cloud.compute.v1.Application
 	64, // 31: yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.upsert:type_name -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest.UpsertEntry
-	45, // 32: yandex.cloud.compute.v1.AttachInstanceDiskRequest.attached_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
-	48, // 33: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest.attached_filesystem_spec:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
-	50, // 34: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	51, // 35: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
-	76, // 36: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.update_mask:type_name -> google.protobuf.FieldMask
-	50, // 37: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	50, // 38: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	48, // 32: yandex.cloud.compute.v1.AttachInstanceDiskRequest.attached_disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec
+	51, // 33: yandex.cloud.compute.v1.AttachInstanceFilesystemRequest.attached_filesystem_spec:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec
+	54, // 34: yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
+	76, // 35: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.update_mask:type_name -> google.protobuf.FieldMask
+	53, // 36: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	53, // 37: yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	53, // 38: yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
 	77, // 39: yandex.cloud.compute.v1.ListInstanceOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	1,  // 40: yandex.cloud.compute.v1.AttachedDiskSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.Mode
 	65, // 41: yandex.cloud.compute.v1.AttachedDiskSpec.disk_spec:type_name -> yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec
-	47, // 42: yandex.cloud.compute.v1.AttachedLocalDiskSpec.physical_local_disk:type_name -> yandex.cloud.compute.v1.PhysicalLocalDiskSpec
+	50, // 42: yandex.cloud.compute.v1.AttachedLocalDiskSpec.physical_local_disk:type_name -> yandex.cloud.compute.v1.PhysicalLocalDiskSpec
 	2,  // 43: yandex.cloud.compute.v1.AttachedFilesystemSpec.mode:type_name -> yandex.cloud.compute.v1.AttachedFilesystemSpec.Mode
-	50, // 44: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	50, // 45: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
-	51, // 46: yandex.cloud.compute.v1.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
-	52, // 47: yandex.cloud.compute.v1.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
+	53, // 44: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v4_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	53, // 45: yandex.cloud.compute.v1.NetworkInterfaceSpec.primary_v6_address_spec:type_name -> yandex.cloud.compute.v1.PrimaryAddressSpec
+	54, // 46: yandex.cloud.compute.v1.PrimaryAddressSpec.one_to_one_nat_spec:type_name -> yandex.cloud.compute.v1.OneToOneNatSpec
+	55, // 47: yandex.cloud.compute.v1.PrimaryAddressSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
 	78, // 48: yandex.cloud.compute.v1.OneToOneNatSpec.ip_version:type_name -> yandex.cloud.compute.v1.IpVersion
-	52, // 49: yandex.cloud.compute.v1.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
-	49, // 50: yandex.cloud.compute.v1.RelocateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
+	55, // 49: yandex.cloud.compute.v1.OneToOneNatSpec.dns_record_specs:type_name -> yandex.cloud.compute.v1.DnsRecordSpec
+	52, // 50: yandex.cloud.compute.v1.RelocateInstanceRequest.network_interface_specs:type_name -> yandex.cloud.compute.v1.NetworkInterfaceSpec
 	79, // 51: yandex.cloud.compute.v1.RelocateInstanceRequest.boot_disk_placement:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
 	80, // 52: yandex.cloud.compute.v1.RelocateInstanceRequest.secondary_disk_placements:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicyChange
 	79, // 53: yandex.cloud.compute.v1.AttachedDiskSpec.DiskSpec.disk_placement_policy:type_name -> yandex.cloud.compute.v1.DiskPlacementPolicy
@@ -4687,24 +4777,24 @@ var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	6,  // 56: yandex.cloud.compute.v1.InstanceService.Create:input_type -> yandex.cloud.compute.v1.CreateInstanceRequest
 	8,  // 57: yandex.cloud.compute.v1.InstanceService.Update:input_type -> yandex.cloud.compute.v1.UpdateInstanceRequest
 	10, // 58: yandex.cloud.compute.v1.InstanceService.Delete:input_type -> yandex.cloud.compute.v1.DeleteInstanceRequest
-	12, // 59: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:input_type -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
-	14, // 60: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:input_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
+	14, // 59: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:input_type -> yandex.cloud.compute.v1.UpdateInstanceMetadataRequest
+	12, // 60: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:input_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputRequest
 	16, // 61: yandex.cloud.compute.v1.InstanceService.Stop:input_type -> yandex.cloud.compute.v1.StopInstanceRequest
 	18, // 62: yandex.cloud.compute.v1.InstanceService.Start:input_type -> yandex.cloud.compute.v1.StartInstanceRequest
 	20, // 63: yandex.cloud.compute.v1.InstanceService.Restart:input_type -> yandex.cloud.compute.v1.RestartInstanceRequest
-	22, // 64: yandex.cloud.compute.v1.InstanceService.AttachDisk:input_type -> yandex.cloud.compute.v1.AttachInstanceDiskRequest
-	24, // 65: yandex.cloud.compute.v1.InstanceService.DetachDisk:input_type -> yandex.cloud.compute.v1.DetachInstanceDiskRequest
-	26, // 66: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:input_type -> yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
-	28, // 67: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:input_type -> yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
-	30, // 68: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:input_type -> yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
-	32, // 69: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:input_type -> yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
-	34, // 70: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:input_type -> yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
-	36, // 71: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:input_type -> yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
-	38, // 72: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:input_type -> yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
-	42, // 73: yandex.cloud.compute.v1.InstanceService.ListOperations:input_type -> yandex.cloud.compute.v1.ListInstanceOperationsRequest
-	53, // 74: yandex.cloud.compute.v1.InstanceService.Move:input_type -> yandex.cloud.compute.v1.MoveInstanceRequest
-	55, // 75: yandex.cloud.compute.v1.InstanceService.Relocate:input_type -> yandex.cloud.compute.v1.RelocateInstanceRequest
-	40, // 76: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:input_type -> yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
+	25, // 64: yandex.cloud.compute.v1.InstanceService.AttachDisk:input_type -> yandex.cloud.compute.v1.AttachInstanceDiskRequest
+	27, // 65: yandex.cloud.compute.v1.InstanceService.DetachDisk:input_type -> yandex.cloud.compute.v1.DetachInstanceDiskRequest
+	29, // 66: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:input_type -> yandex.cloud.compute.v1.AttachInstanceFilesystemRequest
+	31, // 67: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:input_type -> yandex.cloud.compute.v1.DetachInstanceFilesystemRequest
+	33, // 68: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:input_type -> yandex.cloud.compute.v1.AddInstanceOneToOneNatRequest
+	35, // 69: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:input_type -> yandex.cloud.compute.v1.RemoveInstanceOneToOneNatRequest
+	37, // 70: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:input_type -> yandex.cloud.compute.v1.UpdateInstanceNetworkInterfaceRequest
+	39, // 71: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:input_type -> yandex.cloud.compute.v1.AttachInstanceNetworkInterfaceRequest
+	41, // 72: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:input_type -> yandex.cloud.compute.v1.DetachInstanceNetworkInterfaceRequest
+	45, // 73: yandex.cloud.compute.v1.InstanceService.ListOperations:input_type -> yandex.cloud.compute.v1.ListInstanceOperationsRequest
+	43, // 74: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:input_type -> yandex.cloud.compute.v1.SimulateInstanceMaintenanceEventRequest
+	56, // 75: yandex.cloud.compute.v1.InstanceService.Move:input_type -> yandex.cloud.compute.v1.MoveInstanceRequest
+	58, // 76: yandex.cloud.compute.v1.InstanceService.Relocate:input_type -> yandex.cloud.compute.v1.RelocateInstanceRequest
 	81, // 77: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	82, // 78: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	83, // 79: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
@@ -4714,7 +4804,7 @@ var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	77, // 83: yandex.cloud.compute.v1.InstanceService.Update:output_type -> yandex.cloud.operation.Operation
 	77, // 84: yandex.cloud.compute.v1.InstanceService.Delete:output_type -> yandex.cloud.operation.Operation
 	77, // 85: yandex.cloud.compute.v1.InstanceService.UpdateMetadata:output_type -> yandex.cloud.operation.Operation
-	15, // 86: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:output_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
+	13, // 86: yandex.cloud.compute.v1.InstanceService.GetSerialPortOutput:output_type -> yandex.cloud.compute.v1.GetInstanceSerialPortOutputResponse
 	77, // 87: yandex.cloud.compute.v1.InstanceService.Stop:output_type -> yandex.cloud.operation.Operation
 	77, // 88: yandex.cloud.compute.v1.InstanceService.Start:output_type -> yandex.cloud.operation.Operation
 	77, // 89: yandex.cloud.compute.v1.InstanceService.Restart:output_type -> yandex.cloud.operation.Operation
@@ -4722,15 +4812,15 @@ var file_yandex_cloud_compute_v1_instance_service_proto_depIdxs = []int32{
 	77, // 91: yandex.cloud.compute.v1.InstanceService.DetachDisk:output_type -> yandex.cloud.operation.Operation
 	77, // 92: yandex.cloud.compute.v1.InstanceService.AttachFilesystem:output_type -> yandex.cloud.operation.Operation
 	77, // 93: yandex.cloud.compute.v1.InstanceService.DetachFilesystem:output_type -> yandex.cloud.operation.Operation
-	77, // 94: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	77, // 95: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	77, // 96: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:output_type -> yandex.cloud.operation.Operation
-	77, // 97: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:output_type -> yandex.cloud.operation.Operation
-	77, // 98: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:output_type -> yandex.cloud.operation.Operation
-	43, // 99: yandex.cloud.compute.v1.InstanceService.ListOperations:output_type -> yandex.cloud.compute.v1.ListInstanceOperationsResponse
-	77, // 100: yandex.cloud.compute.v1.InstanceService.Move:output_type -> yandex.cloud.operation.Operation
-	77, // 101: yandex.cloud.compute.v1.InstanceService.Relocate:output_type -> yandex.cloud.operation.Operation
-	77, // 102: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:output_type -> yandex.cloud.operation.Operation
+	77, // 94: yandex.cloud.compute.v1.InstanceService.AddOneToOneNat:output_type -> yandex.cloud.operation.Operation
+	77, // 95: yandex.cloud.compute.v1.InstanceService.RemoveOneToOneNat:output_type -> yandex.cloud.operation.Operation
+	77, // 96: yandex.cloud.compute.v1.InstanceService.UpdateNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	77, // 97: yandex.cloud.compute.v1.InstanceService.AttachNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	77, // 98: yandex.cloud.compute.v1.InstanceService.DetachNetworkInterface:output_type -> yandex.cloud.operation.Operation
+	46, // 99: yandex.cloud.compute.v1.InstanceService.ListOperations:output_type -> yandex.cloud.compute.v1.ListInstanceOperationsResponse
+	77, // 100: yandex.cloud.compute.v1.InstanceService.SimulateMaintenanceEvent:output_type -> yandex.cloud.operation.Operation
+	77, // 101: yandex.cloud.compute.v1.InstanceService.Move:output_type -> yandex.cloud.operation.Operation
+	77, // 102: yandex.cloud.compute.v1.InstanceService.Relocate:output_type -> yandex.cloud.operation.Operation
 	84, // 103: yandex.cloud.compute.v1.InstanceService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
 	77, // 104: yandex.cloud.compute.v1.InstanceService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
 	77, // 105: yandex.cloud.compute.v1.InstanceService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
@@ -4750,19 +4840,19 @@ func file_yandex_cloud_compute_v1_instance_service_proto_init() {
 	file_yandex_cloud_compute_v1_disk_proto_init()
 	file_yandex_cloud_compute_v1_instance_proto_init()
 	file_yandex_cloud_compute_v1_maintenance_proto_init()
-	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[21].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[24].OneofWrappers = []any{
 		(*DetachInstanceDiskRequest_DiskId)(nil),
 		(*DetachInstanceDiskRequest_DeviceName)(nil),
 	}
-	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[25].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[28].OneofWrappers = []any{
 		(*DetachInstanceFilesystemRequest_FilesystemId)(nil),
 		(*DetachInstanceFilesystemRequest_DeviceName)(nil),
 	}
-	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[42].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[45].OneofWrappers = []any{
 		(*AttachedDiskSpec_DiskSpec_)(nil),
 		(*AttachedDiskSpec_DiskId)(nil),
 	}
-	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[43].OneofWrappers = []any{
+	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[46].OneofWrappers = []any{
 		(*AttachedLocalDiskSpec_PhysicalLocalDisk)(nil),
 	}
 	file_yandex_cloud_compute_v1_instance_service_proto_msgTypes[62].OneofWrappers = []any{

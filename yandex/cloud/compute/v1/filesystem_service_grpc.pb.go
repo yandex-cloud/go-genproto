@@ -39,7 +39,6 @@ const (
 // A set of methods for managing filesystems.
 type FilesystemServiceClient interface {
 	// Returns the specified filesystem.
-	//
 	// To get the list of available filesystems, make a [List] request.
 	Get(ctx context.Context, in *GetFilesystemRequest, opts ...grpc.CallOption) (*Filesystem, error)
 	// Lists filesystems in the specified folder.
@@ -49,9 +48,7 @@ type FilesystemServiceClient interface {
 	// Updates the specified filesystem.
 	Update(ctx context.Context, in *UpdateFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified filesystem.
-	//
 	// Deleting a filesystem removes its data permanently and is irreversible.
-	//
 	// It is not possible to delete a filesystem that is attached to an instance.
 	Delete(ctx context.Context, in *DeleteFilesystemRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified filesystem.
@@ -169,7 +166,6 @@ func (c *filesystemServiceClient) UpdateAccessBindings(ctx context.Context, in *
 // A set of methods for managing filesystems.
 type FilesystemServiceServer interface {
 	// Returns the specified filesystem.
-	//
 	// To get the list of available filesystems, make a [List] request.
 	Get(context.Context, *GetFilesystemRequest) (*Filesystem, error)
 	// Lists filesystems in the specified folder.
@@ -179,9 +175,7 @@ type FilesystemServiceServer interface {
 	// Updates the specified filesystem.
 	Update(context.Context, *UpdateFilesystemRequest) (*operation.Operation, error)
 	// Deletes the specified filesystem.
-	//
 	// Deleting a filesystem removes its data permanently and is irreversible.
-	//
 	// It is not possible to delete a filesystem that is attached to an instance.
 	Delete(context.Context, *DeleteFilesystemRequest) (*operation.Operation, error)
 	// Lists operations for the specified filesystem.

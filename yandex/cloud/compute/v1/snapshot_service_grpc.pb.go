@@ -39,7 +39,6 @@ const (
 // A set of methods for managing Snapshot resources.
 type SnapshotServiceClient interface {
 	// Returns the specified Snapshot resource.
-	//
 	// To get the list of available Snapshot resources, make a [List] request.
 	Get(ctx context.Context, in *GetSnapshotRequest, opts ...grpc.CallOption) (*Snapshot, error)
 	// Retrieves the list of Snapshot resources in the specified folder.
@@ -47,11 +46,9 @@ type SnapshotServiceClient interface {
 	// Creates a snapshot of the specified disk.
 	Create(ctx context.Context, in *CreateSnapshotRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified snapshot.
-	//
 	// Values of omitted parameters are not changed.
 	Update(ctx context.Context, in *UpdateSnapshotRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified snapshot.
-	//
 	// Deleting a snapshot removes its data permanently and is irreversible.
 	Delete(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified snapshot.
@@ -169,7 +166,6 @@ func (c *snapshotServiceClient) UpdateAccessBindings(ctx context.Context, in *ac
 // A set of methods for managing Snapshot resources.
 type SnapshotServiceServer interface {
 	// Returns the specified Snapshot resource.
-	//
 	// To get the list of available Snapshot resources, make a [List] request.
 	Get(context.Context, *GetSnapshotRequest) (*Snapshot, error)
 	// Retrieves the list of Snapshot resources in the specified folder.
@@ -177,11 +173,9 @@ type SnapshotServiceServer interface {
 	// Creates a snapshot of the specified disk.
 	Create(context.Context, *CreateSnapshotRequest) (*operation.Operation, error)
 	// Updates the specified snapshot.
-	//
 	// Values of omitted parameters are not changed.
 	Update(context.Context, *UpdateSnapshotRequest) (*operation.Operation, error)
 	// Deletes the specified snapshot.
-	//
 	// Deleting a snapshot removes its data permanently and is irreversible.
 	Delete(context.Context, *DeleteSnapshotRequest) (*operation.Operation, error)
 	// Lists operations for the specified snapshot.

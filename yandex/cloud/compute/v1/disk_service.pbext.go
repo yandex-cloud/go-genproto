@@ -73,6 +73,10 @@ func (m *CreateDiskRequest) SetSize(v int64) {
 	m.Size = v
 }
 
+func (m *CreateDiskRequest) SetBlockSize(v int64) {
+	m.BlockSize = v
+}
+
 func (m *CreateDiskRequest) SetImageId(v string) {
 	m.Source = &CreateDiskRequest_ImageId{
 		ImageId: v,
@@ -83,10 +87,6 @@ func (m *CreateDiskRequest) SetSnapshotId(v string) {
 	m.Source = &CreateDiskRequest_SnapshotId{
 		SnapshotId: v,
 	}
-}
-
-func (m *CreateDiskRequest) SetBlockSize(v int64) {
-	m.BlockSize = v
 }
 
 func (m *CreateDiskRequest) SetDiskPlacementPolicy(v *DiskPlacementPolicy) {

@@ -29,6 +29,7 @@ const (
 	PrivateConnectionService_ListOperations_FullMethodName    = "/yandex.cloud.cic.v1.PrivateConnectionService/ListOperations"
 	PrivateConnectionService_UpsertStaticRoute_FullMethodName = "/yandex.cloud.cic.v1.PrivateConnectionService/UpsertStaticRoute"
 	PrivateConnectionService_RemoveStaticRoute_FullMethodName = "/yandex.cloud.cic.v1.PrivateConnectionService/RemoveStaticRoute"
+	PrivateConnectionService_BatchGet_FullMethodName          = "/yandex.cloud.cic.v1.PrivateConnectionService/BatchGet"
 )
 
 // PrivateConnectionServiceClient is the client API for PrivateConnectionService service.
@@ -61,6 +62,8 @@ type PrivateConnectionServiceClient interface {
 	// Removes specified static routes to a PrivateConnection resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemoveStaticRoute(ctx context.Context, in *RemoveStaticRouteRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Get list of PrivateConnections by their IDs
+	BatchGet(ctx context.Context, in *BatchGetPrivateConnectionsRequest, opts ...grpc.CallOption) (*BatchGetPrivateConnectionsResponse, error)
 }
 
 type privateConnectionServiceClient struct {
@@ -161,6 +164,16 @@ func (c *privateConnectionServiceClient) RemoveStaticRoute(ctx context.Context, 
 	return out, nil
 }
 
+func (c *privateConnectionServiceClient) BatchGet(ctx context.Context, in *BatchGetPrivateConnectionsRequest, opts ...grpc.CallOption) (*BatchGetPrivateConnectionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BatchGetPrivateConnectionsResponse)
+	err := c.cc.Invoke(ctx, PrivateConnectionService_BatchGet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrivateConnectionServiceServer is the server API for PrivateConnectionService service.
 // All implementations should embed UnimplementedPrivateConnectionServiceServer
 // for forward compatibility.
@@ -191,6 +204,8 @@ type PrivateConnectionServiceServer interface {
 	// Removes specified static routes to a PrivateConnection resource.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemoveStaticRoute(context.Context, *RemoveStaticRouteRequest) (*operation.Operation, error)
+	// Get list of PrivateConnections by their IDs
+	BatchGet(context.Context, *BatchGetPrivateConnectionsRequest) (*BatchGetPrivateConnectionsResponse, error)
 }
 
 // UnimplementedPrivateConnectionServiceServer should be embedded to have
@@ -226,6 +241,9 @@ func (UnimplementedPrivateConnectionServiceServer) UpsertStaticRoute(context.Con
 }
 func (UnimplementedPrivateConnectionServiceServer) RemoveStaticRoute(context.Context, *RemoveStaticRouteRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveStaticRoute not implemented")
+}
+func (UnimplementedPrivateConnectionServiceServer) BatchGet(context.Context, *BatchGetPrivateConnectionsRequest) (*BatchGetPrivateConnectionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BatchGet not implemented")
 }
 func (UnimplementedPrivateConnectionServiceServer) testEmbeddedByValue() {}
 
@@ -409,6 +427,24 @@ func _PrivateConnectionService_RemoveStaticRoute_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PrivateConnectionService_BatchGet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchGetPrivateConnectionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateConnectionServiceServer).BatchGet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateConnectionService_BatchGet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateConnectionServiceServer).BatchGet(ctx, req.(*BatchGetPrivateConnectionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PrivateConnectionService_ServiceDesc is the grpc.ServiceDesc for PrivateConnectionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -451,6 +487,10 @@ var PrivateConnectionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveStaticRoute",
 			Handler:    _PrivateConnectionService_RemoveStaticRoute_Handler,
+		},
+		{
+			MethodName: "BatchGet",
+			Handler:    _PrivateConnectionService_BatchGet_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -30,7 +30,6 @@ const (
 // A set of methods to retrieve information about disk types.
 type DiskTypeServiceClient interface {
 	// Returns the information about specified disk type.
-	//
 	// To get the list of available disk types, make a [List] request.
 	Get(ctx context.Context, in *GetDiskTypeRequest, opts ...grpc.CallOption) (*DiskType, error)
 	// Retrieves the list of disk types for the specified folder.
@@ -72,7 +71,6 @@ func (c *diskTypeServiceClient) List(ctx context.Context, in *ListDiskTypesReque
 // A set of methods to retrieve information about disk types.
 type DiskTypeServiceServer interface {
 	// Returns the information about specified disk type.
-	//
 	// To get the list of available disk types, make a [List] request.
 	Get(context.Context, *GetDiskTypeRequest) (*DiskType, error)
 	// Retrieves the list of disk types for the specified folder.

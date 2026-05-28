@@ -32,7 +32,6 @@ const (
 // A set of methods for managing SPQR Backup resources.
 type BackupServiceClient interface {
 	// Returns the specified SPQR backup.
-	//
 	// To get the list of available SPQR backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Returns the list of available backups for the specified SPQR cluster.
@@ -86,7 +85,6 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // A set of methods for managing SPQR Backup resources.
 type BackupServiceServer interface {
 	// Returns the specified SPQR backup.
-	//
 	// To get the list of available SPQR backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Returns the list of available backups for the specified SPQR cluster.

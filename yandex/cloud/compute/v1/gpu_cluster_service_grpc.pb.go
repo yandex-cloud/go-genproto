@@ -40,7 +40,6 @@ const (
 // A set of methods for managing GPU clusters.
 type GpuClusterServiceClient interface {
 	// Returns the specified GPU cluster.
-	//
 	// To get the list of available GPU clusters, make a [List] request.
 	Get(ctx context.Context, in *GetGpuClusterRequest, opts ...grpc.CallOption) (*GpuCluster, error)
 	// Retrieves the list of GPU clusters in the specified folder.
@@ -48,11 +47,9 @@ type GpuClusterServiceClient interface {
 	// Creates a GPU cluster in the specified folder.
 	Create(ctx context.Context, in *CreateGpuClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified GPU cluster.
-	//
 	// Currently only name, description and labels can be updated.
 	Update(ctx context.Context, in *UpdateGpuClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified GPU cluster.
-	//
 	// GPU cluster can be deleted only if it doesn't have any instances associated with it.
 	Delete(ctx context.Context, in *DeleteGpuClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified GPU cluster.
@@ -182,7 +179,6 @@ func (c *gpuClusterServiceClient) UpdateAccessBindings(ctx context.Context, in *
 // A set of methods for managing GPU clusters.
 type GpuClusterServiceServer interface {
 	// Returns the specified GPU cluster.
-	//
 	// To get the list of available GPU clusters, make a [List] request.
 	Get(context.Context, *GetGpuClusterRequest) (*GpuCluster, error)
 	// Retrieves the list of GPU clusters in the specified folder.
@@ -190,11 +186,9 @@ type GpuClusterServiceServer interface {
 	// Creates a GPU cluster in the specified folder.
 	Create(context.Context, *CreateGpuClusterRequest) (*operation.Operation, error)
 	// Updates the specified GPU cluster.
-	//
 	// Currently only name, description and labels can be updated.
 	Update(context.Context, *UpdateGpuClusterRequest) (*operation.Operation, error)
 	// Deletes the specified GPU cluster.
-	//
 	// GPU cluster can be deleted only if it doesn't have any instances associated with it.
 	Delete(context.Context, *DeleteGpuClusterRequest) (*operation.Operation, error)
 	// Lists operations for the specified GPU cluster.

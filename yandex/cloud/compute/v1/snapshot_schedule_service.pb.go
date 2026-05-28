@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
@@ -31,7 +30,6 @@ const (
 type GetSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to return.
-	//
 	// To get a schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -78,30 +76,32 @@ func (x *GetSnapshotScheduleRequest) GetSnapshotScheduleId() string {
 type ListSnapshotSchedulesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list snapshot schedules in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListSnapshotSchedulesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListSnapshotSchedulesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters snapshot schedules listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [SnapshotSchedule.name] field.
 	// 2. An operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
 	// 3. The value. Must be 3-63 characters long and match the regular expression `^[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-schedule`.
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// A sorting expression that sorts snapshot schedules listed in the response.
-	//
 	// The expression must specify the field name from [SnapshotSchedule] and `asc`ending or `desc`ending order,
 	// e.g. `createdAt desc`.
-	//
 	// Default value: `id asc`.
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -179,7 +179,6 @@ type ListSnapshotSchedulesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSnapshotSchedulesRequest.page_size], use `next_page_token` as the value
 	// for the [ListSnapshotSchedulesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -233,14 +232,11 @@ func (x *ListSnapshotSchedulesResponse) GetNextPageToken() string {
 type CreateSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a snapshot schedule in.
-	//
 	// Snapshots are created in the same folder as the schedule, even if disks from other folders are attached
 	// to the schedule.
-	//
 	// To get a folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the snapshot schedule.
-	//
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the snapshot schedule.
@@ -259,7 +255,6 @@ type CreateSnapshotScheduleRequest struct {
 	// Attributes of snapshots created by the snapshot schedule.
 	SnapshotSpec *SnapshotSpec `protobuf:"bytes,8,opt,name=snapshot_spec,json=snapshotSpec,proto3" json:"snapshot_spec,omitempty"`
 	// List of IDs of the disks attached to the snapshot schedule.
-	//
 	// To get a disk ID, make a [yandex.cloud.compute.v1.DiskService.List] request.
 	DiskIds       []string `protobuf:"bytes,9,rep,name=disk_ids,json=diskIds,proto3" json:"disk_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -441,19 +436,16 @@ func (x *CreateSnapshotScheduleMetadata) GetSnapshotScheduleId() string {
 type UpdateSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to update.
-	//
 	// To get the snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// Field mask that specifies which attributes of the snapshot schedule should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the snapshot schedule.
-	//
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the snapshot schedule.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Snapshot schedule labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [SnapshotScheduleService.Get] request.
@@ -650,7 +642,6 @@ func (x *UpdateSnapshotScheduleMetadata) GetSnapshotScheduleId() string {
 type DeleteSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to delete.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -742,7 +733,6 @@ func (x *DeleteSnapshotScheduleMetadata) GetSnapshotScheduleId() string {
 type DisableSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to disable.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -834,7 +824,6 @@ func (x *DisableSnapshotScheduleMetadata) GetSnapshotScheduleId() string {
 type EnableSnapshotScheduleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to enable.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -926,13 +915,11 @@ func (x *EnableSnapshotScheduleMetadata) GetSnapshotScheduleId() string {
 type ListSnapshotScheduleOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to list operations for.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotScheduleOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
@@ -1000,7 +987,6 @@ type ListSnapshotScheduleOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSnapshotScheduleOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListSnapshotScheduleOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1054,13 +1040,11 @@ func (x *ListSnapshotScheduleOperationsResponse) GetNextPageToken() string {
 type ListSnapshotScheduleSnapshotsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to list created snapshots for.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotScheduleOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
@@ -1128,7 +1112,6 @@ type ListSnapshotScheduleSnapshotsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSnapshotScheduleSnapshotsRequest.page_size], use `next_page_token` as the value
 	// for the [ListSnapshotScheduleSnapshotsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1182,13 +1165,11 @@ func (x *ListSnapshotScheduleSnapshotsResponse) GetNextPageToken() string {
 type ListSnapshotScheduleDisksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to list attached disks for.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSnapshotScheduleDisksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	//
 	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
@@ -1256,7 +1237,6 @@ type ListSnapshotScheduleDisksResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSnapshotScheduleDisksRequest.page_size], use `next_page_token` as the value
 	// for the [ListSnapshotScheduleDisksRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1310,15 +1290,12 @@ func (x *ListSnapshotScheduleDisksResponse) GetNextPageToken() string {
 type UpdateSnapshotScheduleDisksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the snapshot schedule to update.
-	//
 	// To get a snapshot schedule ID, make a [SnapshotScheduleService.List] request.
 	SnapshotScheduleId string `protobuf:"bytes,1,opt,name=snapshot_schedule_id,json=snapshotScheduleId,proto3" json:"snapshot_schedule_id,omitempty"`
 	// List of IDs of the disks to detach from the specified schedule.
-	//
 	// To get an ID of a disk attached to the schedule, make a [SnapshotScheduleService.ListDisks] request.
 	Remove []string `protobuf:"bytes,2,rep,name=remove,proto3" json:"remove,omitempty"`
 	// List of IDs of the disks to attach to the specified schedule.
-	//
 	// To get a disk ID, make a [yandex.cloud.compute.v1.DiskService.List] request.
 	Add           []string `protobuf:"bytes,3,rep,name=add,proto3" json:"add,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1425,18 +1402,16 @@ var File_yandex_cloud_compute_v1_snapshot_schedule_service_proto protoreflect.Fi
 
 const file_yandex_cloud_compute_v1_snapshot_schedule_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/compute/v1/snapshot_schedule_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/duration.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/snapshot.proto\x1a/yandex/cloud/compute/v1/snapshot_schedule.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"N\n" +
+	"7yandex/cloud/compute/v1/snapshot_schedule_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a\"yandex/cloud/compute/v1/disk.proto\x1a&yandex/cloud/compute/v1/snapshot.proto\x1a/yandex/cloud/compute/v1/snapshot_schedule.proto\x1a&yandex/cloud/operation/operation.proto\"N\n" +
 	"\x1aGetSnapshotScheduleRequest\x120\n" +
-	"\x14snapshot_schedule_id\x18\x01 \x01(\tR\x12snapshotScheduleId\"\xe6\x01\n" +
-	"\x1cListSnapshotSchedulesRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x14snapshot_schedule_id\x18\x01 \x01(\tR\x12snapshotScheduleId\"\xaa\x01\n" +
+	"\x1cListSnapshotSchedulesRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\xa1\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\xa1\x01\n" +
 	"\x1dListSnapshotSchedulesResponse\x12X\n" +
 	"\x12snapshot_schedules\x18\x01 \x03(\v2).yandex.cloud.compute.v1.SnapshotScheduleR\x11snapshotSchedules\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc7\x04\n" +
@@ -1518,8 +1493,7 @@ const file_yandex_cloud_compute_v1_snapshot_schedule_service_proto_rawDesc = "" 
 	"#UpdateSnapshotScheduleDisksMetadata\x120\n" +
 	"\x14snapshot_schedule_id\x18\x01 \x01(\tR\x12snapshotScheduleId2\xee\x17\n" +
 	"\x17SnapshotScheduleService\x12\xa3\x01\n" +
-	"\x03Get\x123.yandex.cloud.compute.v1.GetSnapshotScheduleRequest\x1a).yandex.cloud.compute.v1.SnapshotSchedule\"<\x82\xd3\xe4\x93\x026\x124/compute/v1/snapshotSchedules/{snapshot_schedule_id}\x12\x9c\x01\n" +
-	"\x04List\x125.yandex.cloud.compute.v1.ListSnapshotSchedulesRequest\x1a6.yandex.cloud.compute.v1.ListSnapshotSchedulesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/compute/v1/snapshotSchedules\x12\xc3\x01\n" +
+	"\x03Get\x123.yandex.cloud.compute.v1.GetSnapshotScheduleRequest\x1a).yandex.cloud.compute.v1.SnapshotSchedule\"<\x82\xd3\xe4\x93\x026\x124/compute/v1/snapshotSchedules/{snapshot_schedule_id}\x12\xc3\x01\n" +
 	"\x06Create\x126.yandex.cloud.compute.v1.CreateSnapshotScheduleRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*2\n" +
 	"\x1eCreateSnapshotScheduleMetadata\x12\x10SnapshotSchedule\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/compute/v1/snapshotSchedules\x12\xda\x01\n" +
 	"\x06Update\x126.yandex.cloud.compute.v1.UpdateSnapshotScheduleRequest\x1a!.yandex.cloud.operation.Operation\"u\xb2\xd2*2\n" +
@@ -1531,7 +1505,8 @@ const file_yandex_cloud_compute_v1_snapshot_schedule_service_proto_rawDesc = "" 
 	"\aDisable\x127.yandex.cloud.compute.v1.DisableSnapshotScheduleRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*3\n" +
 	"\x1fDisableSnapshotScheduleMetadata\x12\x10SnapshotSchedule\x82\xd3\xe4\x93\x02A:\x01*\"</compute/v1/snapshotSchedules/{snapshot_schedule_id}:disable\x12\xe1\x01\n" +
 	"\x06Enable\x126.yandex.cloud.compute.v1.EnableSnapshotScheduleRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*2\n" +
-	"\x1eEnableSnapshotScheduleMetadata\x12\x10SnapshotSchedule\x82\xd3\xe4\x93\x02@:\x01*\";/compute/v1/snapshotSchedules/{snapshot_schedule_id}:enable\x12\xda\x01\n" +
+	"\x1eEnableSnapshotScheduleMetadata\x12\x10SnapshotSchedule\x82\xd3\xe4\x93\x02@:\x01*\";/compute/v1/snapshotSchedules/{snapshot_schedule_id}:enable\x12\x9c\x01\n" +
+	"\x04List\x125.yandex.cloud.compute.v1.ListSnapshotSchedulesRequest\x1a6.yandex.cloud.compute.v1.ListSnapshotSchedulesResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/compute/v1/snapshotSchedules\x12\xda\x01\n" +
 	"\x0eListOperations\x12>.yandex.cloud.compute.v1.ListSnapshotScheduleOperationsRequest\x1a?.yandex.cloud.compute.v1.ListSnapshotScheduleOperationsResponse\"G\x82\xd3\xe4\x93\x02A\x12?/compute/v1/snapshotSchedules/{snapshot_schedule_id}/operations\x12\xd6\x01\n" +
 	"\rListSnapshots\x12=.yandex.cloud.compute.v1.ListSnapshotScheduleSnapshotsRequest\x1a>.yandex.cloud.compute.v1.ListSnapshotScheduleSnapshotsResponse\"F\x82\xd3\xe4\x93\x02@\x12>/compute/v1/snapshotSchedules/{snapshot_schedule_id}/snapshots\x12\xc6\x01\n" +
 	"\tListDisks\x129.yandex.cloud.compute.v1.ListSnapshotScheduleDisksRequest\x1a:.yandex.cloud.compute.v1.ListSnapshotScheduleDisksResponse\"B\x82\xd3\xe4\x93\x02<\x12:/compute/v1/snapshotSchedules/{snapshot_schedule_id}/disks\x12\xbd\x01\n" +
@@ -1607,13 +1582,13 @@ var file_yandex_cloud_compute_v1_snapshot_schedule_service_proto_depIdxs = []int
 	29, // 11: yandex.cloud.compute.v1.ListSnapshotScheduleSnapshotsResponse.snapshots:type_name -> yandex.cloud.compute.v1.Snapshot
 	30, // 12: yandex.cloud.compute.v1.ListSnapshotScheduleDisksResponse.disks:type_name -> yandex.cloud.compute.v1.Disk
 	0,  // 13: yandex.cloud.compute.v1.SnapshotScheduleService.Get:input_type -> yandex.cloud.compute.v1.GetSnapshotScheduleRequest
-	1,  // 14: yandex.cloud.compute.v1.SnapshotScheduleService.List:input_type -> yandex.cloud.compute.v1.ListSnapshotSchedulesRequest
-	3,  // 15: yandex.cloud.compute.v1.SnapshotScheduleService.Create:input_type -> yandex.cloud.compute.v1.CreateSnapshotScheduleRequest
-	5,  // 16: yandex.cloud.compute.v1.SnapshotScheduleService.Update:input_type -> yandex.cloud.compute.v1.UpdateSnapshotScheduleRequest
-	7,  // 17: yandex.cloud.compute.v1.SnapshotScheduleService.Delete:input_type -> yandex.cloud.compute.v1.DeleteSnapshotScheduleRequest
-	19, // 18: yandex.cloud.compute.v1.SnapshotScheduleService.UpdateDisks:input_type -> yandex.cloud.compute.v1.UpdateSnapshotScheduleDisksRequest
-	9,  // 19: yandex.cloud.compute.v1.SnapshotScheduleService.Disable:input_type -> yandex.cloud.compute.v1.DisableSnapshotScheduleRequest
-	11, // 20: yandex.cloud.compute.v1.SnapshotScheduleService.Enable:input_type -> yandex.cloud.compute.v1.EnableSnapshotScheduleRequest
+	3,  // 14: yandex.cloud.compute.v1.SnapshotScheduleService.Create:input_type -> yandex.cloud.compute.v1.CreateSnapshotScheduleRequest
+	5,  // 15: yandex.cloud.compute.v1.SnapshotScheduleService.Update:input_type -> yandex.cloud.compute.v1.UpdateSnapshotScheduleRequest
+	7,  // 16: yandex.cloud.compute.v1.SnapshotScheduleService.Delete:input_type -> yandex.cloud.compute.v1.DeleteSnapshotScheduleRequest
+	19, // 17: yandex.cloud.compute.v1.SnapshotScheduleService.UpdateDisks:input_type -> yandex.cloud.compute.v1.UpdateSnapshotScheduleDisksRequest
+	9,  // 18: yandex.cloud.compute.v1.SnapshotScheduleService.Disable:input_type -> yandex.cloud.compute.v1.DisableSnapshotScheduleRequest
+	11, // 19: yandex.cloud.compute.v1.SnapshotScheduleService.Enable:input_type -> yandex.cloud.compute.v1.EnableSnapshotScheduleRequest
+	1,  // 20: yandex.cloud.compute.v1.SnapshotScheduleService.List:input_type -> yandex.cloud.compute.v1.ListSnapshotSchedulesRequest
 	13, // 21: yandex.cloud.compute.v1.SnapshotScheduleService.ListOperations:input_type -> yandex.cloud.compute.v1.ListSnapshotScheduleOperationsRequest
 	15, // 22: yandex.cloud.compute.v1.SnapshotScheduleService.ListSnapshots:input_type -> yandex.cloud.compute.v1.ListSnapshotScheduleSnapshotsRequest
 	17, // 23: yandex.cloud.compute.v1.SnapshotScheduleService.ListDisks:input_type -> yandex.cloud.compute.v1.ListSnapshotScheduleDisksRequest
@@ -1621,13 +1596,13 @@ var file_yandex_cloud_compute_v1_snapshot_schedule_service_proto_depIdxs = []int
 	32, // 25: yandex.cloud.compute.v1.SnapshotScheduleService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	33, // 26: yandex.cloud.compute.v1.SnapshotScheduleService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
 	23, // 27: yandex.cloud.compute.v1.SnapshotScheduleService.Get:output_type -> yandex.cloud.compute.v1.SnapshotSchedule
-	2,  // 28: yandex.cloud.compute.v1.SnapshotScheduleService.List:output_type -> yandex.cloud.compute.v1.ListSnapshotSchedulesResponse
-	28, // 29: yandex.cloud.compute.v1.SnapshotScheduleService.Create:output_type -> yandex.cloud.operation.Operation
-	28, // 30: yandex.cloud.compute.v1.SnapshotScheduleService.Update:output_type -> yandex.cloud.operation.Operation
-	28, // 31: yandex.cloud.compute.v1.SnapshotScheduleService.Delete:output_type -> yandex.cloud.operation.Operation
-	28, // 32: yandex.cloud.compute.v1.SnapshotScheduleService.UpdateDisks:output_type -> yandex.cloud.operation.Operation
-	28, // 33: yandex.cloud.compute.v1.SnapshotScheduleService.Disable:output_type -> yandex.cloud.operation.Operation
-	28, // 34: yandex.cloud.compute.v1.SnapshotScheduleService.Enable:output_type -> yandex.cloud.operation.Operation
+	28, // 28: yandex.cloud.compute.v1.SnapshotScheduleService.Create:output_type -> yandex.cloud.operation.Operation
+	28, // 29: yandex.cloud.compute.v1.SnapshotScheduleService.Update:output_type -> yandex.cloud.operation.Operation
+	28, // 30: yandex.cloud.compute.v1.SnapshotScheduleService.Delete:output_type -> yandex.cloud.operation.Operation
+	28, // 31: yandex.cloud.compute.v1.SnapshotScheduleService.UpdateDisks:output_type -> yandex.cloud.operation.Operation
+	28, // 32: yandex.cloud.compute.v1.SnapshotScheduleService.Disable:output_type -> yandex.cloud.operation.Operation
+	28, // 33: yandex.cloud.compute.v1.SnapshotScheduleService.Enable:output_type -> yandex.cloud.operation.Operation
+	2,  // 34: yandex.cloud.compute.v1.SnapshotScheduleService.List:output_type -> yandex.cloud.compute.v1.ListSnapshotSchedulesResponse
 	14, // 35: yandex.cloud.compute.v1.SnapshotScheduleService.ListOperations:output_type -> yandex.cloud.compute.v1.ListSnapshotScheduleOperationsResponse
 	16, // 36: yandex.cloud.compute.v1.SnapshotScheduleService.ListSnapshots:output_type -> yandex.cloud.compute.v1.ListSnapshotScheduleSnapshotsResponse
 	18, // 37: yandex.cloud.compute.v1.SnapshotScheduleService.ListDisks:output_type -> yandex.cloud.compute.v1.ListSnapshotScheduleDisksResponse

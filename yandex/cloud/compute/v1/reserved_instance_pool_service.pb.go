@@ -7,7 +7,6 @@
 package compute
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -30,6 +29,8 @@ type GetReservedInstancePoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool resource to return.
 	// To get the reserved instance pool ID, use a [ReservedInstancePoolService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -76,27 +77,32 @@ type ListReservedInstancePoolsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Folder to list reserved instance pools in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListReservedInstancePoolsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListReservedInstancePoolsResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression consists of one or more conditions united by `AND` operator: `<condition1> [AND <condition2> [<...> AND <conditionN>]]`.
-	//
 	// Each condition has the form `<field> <operator> <value>`, where:
 	// 1. `<field>` is the field name. Currently you can use filtering only on the limited number of fields.
 	// 2. `<operator>` is a logical operator, one of `=`, `!=`, `IN`, `NOT IN`.
 	// 3. `<value>` represents a value.
 	// String values should be written in double (`"`) or single (`'`) quotes. C-style escape sequences are supported (`\"` turns to `"`, `\'` to `'`, `\\` to backslash).
+	// The length must be less than or equal to 1000.
 	Filter string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	// By which column the listing should be ordered and in which direction,
 	// format is "createdAt desc". "id asc" if omitted.
+	// The length must be less than or equal to 100.
 	OrderBy       string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -229,24 +235,36 @@ func (x *ListReservedInstancePoolsResponse) GetNextPageToken() string {
 type CreateReservedInstancePoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the reserved instance pool.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the reserved instance pool.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,3,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the availability zone where the reserved instance pool resides.
 	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,4,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the folder to create the reserved instance pool in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// ID of the hardware platform configuration for the reserved instance pool.
 	// This field affects the available values in [resources_spec] field.
-	//
 	// For more information, see [Platforms](/docs/compute/concepts/vm-platforms).
+	// This field is required.
 	PlatformId string `protobuf:"bytes,6,opt,name=platform_id,json=platformId,proto3" json:"platform_id,omitempty"`
 	// Computing resources of the reserved instance pool instances, such as the amount of memory and number of cores.
 	// To get a list of available values, see [Levels of core performance](/docs/compute/concepts/performance-levels).
+	// This field is required.
 	ResourcesSpec *ResourcesSpec `protobuf:"bytes,7,opt,name=resources_spec,json=resourcesSpec,proto3" json:"resources_spec,omitempty"`
 	// GPU settings.
 	GpuSettings *GpuSettings `protobuf:"bytes,8,opt,name=gpu_settings,json=gpuSettings,proto3" json:"gpu_settings,omitempty"`
@@ -255,6 +273,7 @@ type CreateReservedInstancePoolRequest struct {
 	// Network settings.
 	NetworkSettings *NetworkSettings `protobuf:"bytes,10,opt,name=network_settings,json=networkSettings,proto3" json:"network_settings,omitempty"`
 	// Desired size of the pool (number of slots for instances in this pool).
+	// The value must be between 0 and 1048576.
 	Size int64 `protobuf:"varint,11,opt,name=size,proto3" json:"size,omitempty"`
 	// Allows the pool to contain more linked instances than the number of available slots (size without pending or unavailable slots).
 	// While running instances are still limited by available slots, stopped instances can exceed this limit.
@@ -427,18 +446,27 @@ type UpdateReservedInstancePoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool to update.
 	// To get the reserved instance pool ID, use a [ReservedInstancePoolService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	// Field mask that specifies which fields of the reserved instance pool should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the reserved instance pool.
+	// The value must match the regular expression: `|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the reserved instance pool.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
-	//
 	// Existing set of `labels` is completely replaced by the provided set.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Desired size of the pool.
+	// The value must be between 0 and 1048576.
 	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
 	// Allows the pool to contain more linked instances than the number of available slots (size without pending or unavailable slots).
 	// While running instances are still limited by available slots, stopped instances can exceed this limit.
@@ -587,6 +615,8 @@ type DeleteReservedInstancePoolRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool to delete.
 	// To get the reserved instance pool ID, use a [ReservedInstancePoolService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -713,13 +743,17 @@ func (*DeleteReservedInstancePoolResponse) Descriptor() ([]byte, []int) {
 type ListReservedInstancePoolOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListReservedInstancePoolOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListReservedInstancePoolOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -836,15 +870,19 @@ func (x *ListReservedInstancePoolOperationsResponse) GetNextPageToken() string {
 type ListReservedInstancePoolInstancesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the reserved instance pool to list instances for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ReservedInstancePoolId string `protobuf:"bytes,1,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListReservedInstancePoolInstancesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results,
 	// set [page_token] to the [ListReservedInstancePoolInstancesResponse.next_page_token]
 	// returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -964,78 +1002,74 @@ var File_yandex_cloud_compute_v1_reserved_instance_pool_service_proto protorefle
 
 const file_yandex_cloud_compute_v1_reserved_instance_pool_service_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/compute/v1/reserved_instance_pool_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a.yandex/cloud/compute/v1/instance_service.proto\x1a4yandex/cloud/compute/v1/reserved_instance_pool.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\"i\n" +
-	"\x1eGetReservedInstancePoolRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\"\xea\x01\n" +
-	" ListReservedInstancePoolsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"<yandex/cloud/compute/v1/reserved_instance_pool_service.proto\x12\x17yandex.cloud.compute.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/compute/v1/instance.proto\x1a.yandex/cloud/compute/v1/instance_service.proto\x1a4yandex/cloud/compute/v1/reserved_instance_pool.proto\x1a&yandex/cloud/operation/operation.proto\"[\n" +
+	"\x1eGetReservedInstancePoolRequest\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"\xae\x01\n" +
+	" ListReservedInstancePoolsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\x12$\n" +
-	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\xb2\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\x12\x19\n" +
+	"\border_by\x18\x05 \x01(\tR\aorderBy\"\xb2\x01\n" +
 	"!ListReservedInstancePoolsResponse\x12e\n" +
 	"\x17reserved_instance_pools\x18\x01 \x03(\v2-.yandex.cloud.compute.v1.ReservedInstancePoolR\x15reservedInstancePools\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xff\x06\n" +
-	"!CreateReservedInstancePoolRequest\x129\n" +
-	"\x04name\x18\x01 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x03 \x03(\v2F.yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\azone_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12)\n" +
-	"\tfolder_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12%\n" +
-	"\vplatform_id\x18\x06 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"platformId\x12S\n" +
-	"\x0eresources_spec\x18\a \x01(\v2&.yandex.cloud.compute.v1.ResourcesSpecB\x04\xe8\xc71\x01R\rresourcesSpec\x12G\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd0\x05\n" +
+	"!CreateReservedInstancePoolRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12^\n" +
+	"\x06labels\x18\x03 \x03(\v2F.yandex.cloud.compute.v1.CreateReservedInstancePoolRequest.LabelsEntryR\x06labels\x12\x17\n" +
+	"\azone_id\x18\x04 \x01(\tR\x06zoneId\x12\x1b\n" +
+	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x12\x1f\n" +
+	"\vplatform_id\x18\x06 \x01(\tR\n" +
+	"platformId\x12M\n" +
+	"\x0eresources_spec\x18\a \x01(\v2&.yandex.cloud.compute.v1.ResourcesSpecR\rresourcesSpec\x12G\n" +
 	"\fgpu_settings\x18\b \x01(\v2$.yandex.cloud.compute.v1.GpuSettingsR\vgpuSettings\x12K\n" +
 	"\x0eboot_disk_spec\x18\t \x01(\v2%.yandex.cloud.compute.v1.BootDiskSpecR\fbootDiskSpec\x12S\n" +
 	"\x10network_settings\x18\n" +
-	" \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12!\n" +
-	"\x04size\x18\v \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x125\n" +
+	" \x01(\v2(.yandex.cloud.compute.v1.NetworkSettingsR\x0fnetworkSettings\x12\x12\n" +
+	"\x04size\x18\v \x01(\x03R\x04size\x125\n" +
 	"\x16allow_oversubscription\x18\f \x01(\bR\x15allowOversubscription\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
 	"\"CreateReservedInstancePoolMetadata\x129\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"\xfc\x04\n" +
-	"!UpdateReservedInstancePoolRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12;\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"\xe7\x03\n" +
+	"!UpdateReservedInstancePoolRequest\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x129\n" +
-	"\x04name\x18\x03 \x01(\tB%\xf2\xc71!|[a-z]([-_a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\x04size\x18\x06 \x01(\x03B\r\xfa\xc71\t0-1048576R\x04size\x125\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12^\n" +
+	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.compute.v1.UpdateReservedInstancePoolRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\x04size\x18\x06 \x01(\x03R\x04size\x125\n" +
 	"\x16allow_oversubscription\x18\a \x01(\bR\x15allowOversubscription\x12.\n" +
 	"\x13allow_pending_slots\x18\b \x01(\bR\x11allowPendingSlots\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
 	"\"UpdateReservedInstancePoolMetadata\x129\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"l\n" +
-	"!DeleteReservedInstancePoolRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\"_\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"^\n" +
+	"!DeleteReservedInstancePoolRequest\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"_\n" +
 	"\"DeleteReservedInstancePoolMetadata\x129\n" +
 	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\"$\n" +
-	"\"DeleteReservedInstancePoolResponse\"\xc7\x01\n" +
-	")ListReservedInstancePoolOperationsRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\"DeleteReservedInstancePoolResponse\"\xa2\x01\n" +
+	")ListReservedInstancePoolOperationsRequest\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x97\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x97\x01\n" +
 	"*ListReservedInstancePoolOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc6\x01\n" +
-	"(ListReservedInstancePoolInstancesRequest\x12G\n" +
-	"\x19reserved_instance_pool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x16reservedInstancePoolId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa1\x01\n" +
+	"(ListReservedInstancePoolInstancesRequest\x129\n" +
+	"\x19reserved_instance_pool_id\x18\x01 \x01(\tR\x16reservedInstancePoolId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x94\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x94\x01\n" +
 	")ListReservedInstancePoolInstancesResponse\x12?\n" +
 	"\tinstances\x18\x01 \x03(\v2!.yandex.cloud.compute.v1.InstanceR\tinstances\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x9e\f\n" +
