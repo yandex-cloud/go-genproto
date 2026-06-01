@@ -155,7 +155,9 @@ type RedisConfig struct {
 	// AOF maximum size as a percentage of disk available
 	AofMaxSizePercent *wrapperspb.Int64Value `protobuf:"bytes,23,opt,name=aof_max_size_percent,json=aofMaxSizePercent,proto3" json:"aof_max_size_percent,omitempty"`
 	// Enable active (online) memory defragmentation
-	Activedefrag  *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=activedefrag,proto3" json:"activedefrag,omitempty"`
+	Activedefrag *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=activedefrag,proto3" json:"activedefrag,omitempty"`
+	// Enable/disable audit logs for Valkey
+	AuditLog      *wrapperspb.BoolValue `protobuf:"bytes,25,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -358,6 +360,13 @@ func (x *RedisConfig) GetActivedefrag() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *RedisConfig) GetAuditLog() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.AuditLog
+	}
+	return nil
+}
+
 type RedisConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a Redis cluster (a combination of settings
@@ -489,26 +498,29 @@ var File_yandex_cloud_mdb_redis_v1_config_redis_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf7\x13\n" +
+	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xff\x13\n" +
 	"\vRedisConfig\x12h\n" +
 	"\x10maxmemory_policy\x18\x01 \x01(\x0e2=.yandex.cloud.mdb.redis.v1.config.RedisConfig.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x12>\n" +
-	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\atimeout\x12B\n" +
-	"\bpassword\x18\x03 \x01(\tB&\xf2\xc71\"[a-zA-Z0-9@=+?*.,!&#$^<>_-]{8,128}R\bpassword\x12A\n" +
-	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\tdatabases\x12[\n" +
-	"\x17slowlog_log_slower_than\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x14slowlogLogSlowerThan\x12L\n" +
-	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x12O\n" +
-	"\x16notify_keyspace_events\x18\a \x01(\tB\x19\xf2\xc71\x15[KEg$lshzxeAtm]{0,13}R\x14notifyKeyspaceEvents\x12\x8f\x01\n" +
+	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\atimeout\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12E\n" +
+	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x061-1024R\tdatabases\x12\\\n" +
+	"\x17slowlog_log_slower_than\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x14slowlogLogSlowerThan\x12L\n" +
+	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x124\n" +
+	"\x16notify_keyspace_events\x18\a \x01(\tR\x14notifyKeyspaceEvents\x12\x8f\x01\n" +
 	"!client_output_buffer_limit_pubsub\x18\b \x01(\v2E.yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimitR\x1dclientOutputBufferLimitPubsub\x12\x8f\x01\n" +
 	"!client_output_buffer_limit_normal\x18\t \x01(\v2E.yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimitR\x1dclientOutputBufferLimitNormal\x12R\n" +
 	"\x11maxmemory_percent\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-75R\x10maxmemoryPercent\x12J\n" +
-	"\x0elua_time_limit\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\fluaTimeLimit\x12^\n" +
-	"\x19repl_backlog_size_percent\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x16replBacklogSizePercent\x12]\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-75R\x10maxmemoryPercent\x12M\n" +
+	"\x0elua_time_limit\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x060-5000R\fluaTimeLimit\x12`\n" +
+	"\x19repl_backlog_size_percent\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-75R\x16replBacklogSizePercent\x12]\n" +
 	"\x1dcluster_require_full_coverage\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x1aclusterRequireFullCoverage\x12\\\n" +
 	"\x1dcluster_allow_reads_when_down\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR\x19clusterAllowReadsWhenDown\x12h\n" +
-	"#cluster_allow_pubsubshard_when_down\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueR\x1fclusterAllowPubsubshardWhenDown\x12J\n" +
-	"\x0elfu_decay_time\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\flfuDecayTime\x12J\n" +
-	"\x0elfu_log_factor\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\flfuLogFactor\x12P\n" +
+	"#cluster_allow_pubsubshard_when_down\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueR\x1fclusterAllowPubsubshardWhenDown\x12O\n" +
+	"\x0elfu_decay_time\x18\x10 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b0-100000R\flfuDecayTime\x12M\n" +
+	"\x0elfu_log_factor\x18\x11 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x060-1000R\flfuLogFactor\x12P\n" +
 	"\x16turn_before_switchover\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueR\x14turnBeforeSwitchover\x12B\n" +
 	"\x0fallow_data_loss\x18\x13 \x01(\v2\x1a.google.protobuf.BoolValueR\rallowDataLoss\x129\n" +
 	"\n" +
@@ -516,7 +528,8 @@ const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\x12io_threads_allowed\x18\x15 \x01(\v2\x1a.google.protobuf.BoolValueR\x10ioThreadsAllowed\x12c\n" +
 	"\x19zset_max_listpack_entries\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a32-2048R\x16zsetMaxListpackEntries\x12V\n" +
 	"\x14aof_max_size_percent\x18\x17 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-99R\x11aofMaxSizePercent\x12>\n" +
-	"\factivedefrag\x18\x18 \x01(\v2\x1a.google.protobuf.BoolValueR\factivedefrag\x1a\xf8\x01\n" +
+	"\factivedefrag\x18\x18 \x01(\v2\x1a.google.protobuf.BoolValueR\factivedefrag\x127\n" +
+	"\taudit_log\x18\x19 \x01(\v2\x1a.google.protobuf.BoolValueR\bauditLog\x1a\xf8\x01\n" +
 	"\x17ClientOutputBufferLimit\x12C\n" +
 	"\n" +
 	"hard_limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\thardLimit\x12C\n" +
@@ -586,17 +599,18 @@ var file_yandex_cloud_mdb_redis_v1_config_redis_proto_depIdxs = []int32{
 	4,  // 19: yandex.cloud.mdb.redis.v1.config.RedisConfig.zset_max_listpack_entries:type_name -> google.protobuf.Int64Value
 	4,  // 20: yandex.cloud.mdb.redis.v1.config.RedisConfig.aof_max_size_percent:type_name -> google.protobuf.Int64Value
 	5,  // 21: yandex.cloud.mdb.redis.v1.config.RedisConfig.activedefrag:type_name -> google.protobuf.BoolValue
-	1,  // 22: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.effective_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	1,  // 23: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.user_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	1,  // 24: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.default_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	4,  // 25: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.hard_limit:type_name -> google.protobuf.Int64Value
-	4,  // 26: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_limit:type_name -> google.protobuf.Int64Value
-	4,  // 27: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_seconds:type_name -> google.protobuf.Int64Value
-	28, // [28:28] is the sub-list for method output_type
-	28, // [28:28] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	5,  // 22: yandex.cloud.mdb.redis.v1.config.RedisConfig.audit_log:type_name -> google.protobuf.BoolValue
+	1,  // 23: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.effective_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	1,  // 24: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.user_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	1,  // 25: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.default_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	4,  // 26: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.hard_limit:type_name -> google.protobuf.Int64Value
+	4,  // 27: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_limit:type_name -> google.protobuf.Int64Value
+	4,  // 28: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_seconds:type_name -> google.protobuf.Int64Value
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_config_redis_proto_init() }

@@ -217,10 +217,10 @@ const file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"Permission\x12#\n" +
 	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\x12\x14\n" +
-	"\x05roles\x18\x02 \x03(\tR\x05roles\"\xc4\x01\n" +
+	"\x05roles\x18\x02 \x03(\tR\x05roles\"\xc0\x01\n" +
 	"\bUserSpec\x12B\n" +
-	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=63R\x04name\x12)\n" +
-	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12I\n" +
+	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=63R\x04name\x12%\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12I\n" +
 	"\vpermissions\x18\x03 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissionsBj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
 

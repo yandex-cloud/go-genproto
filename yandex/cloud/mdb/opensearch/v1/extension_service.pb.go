@@ -539,7 +539,7 @@ var File_yandex_cloud_mdb_opensearch_v1_extension_service_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_extension_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/extension_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a.yandex/cloud/mdb/opensearch/v1/extension.proto\x1a&yandex/cloud/operation/operation.proto\"k\n" +
+	"6yandex/cloud/mdb/opensearch/v1/extension_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a.yandex/cloud/mdb/opensearch/v1/extension.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"k\n" +
 	"\x13GetExtensionRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +

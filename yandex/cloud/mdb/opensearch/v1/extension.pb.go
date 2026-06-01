@@ -189,7 +189,7 @@ var File_yandex_cloud_mdb_opensearch_v1_extension_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_mdb_opensearch_v1_extension_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/mdb/opensearch/v1/extension.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1dyandex/cloud/validation.proto\x1a=yandex/cloud/mdb/opensearch/v1/extension/extension_type.proto\"\xcd\x01\n" +
+	".yandex/cloud/mdb/opensearch/v1/extension.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a=yandex/cloud/mdb/opensearch/v1/extension/extension_type.proto\x1a\x1dyandex/cloud/validation.proto\"\xcd\x01\n" +
 	"\tExtension\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x1d\n" +

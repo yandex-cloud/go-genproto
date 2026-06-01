@@ -5461,10 +5461,10 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\aweb_sql\x18\x02 \x01(\bR\x06webSql\x12#\n" +
 	"\rdata_transfer\x18\x03 \x01(\bR\fdataTransfer\"K\n" +
 	"\x1cPerformanceDiagnosticsConfig\x12+\n" +
-	"\x11profiling_enabled\x18\x01 \x01(\bR\x10profilingEnabled\"\xa6\x02\n" +
-	"\x13DiskSizeAutoscaling\x12b\n" +
-	"\x17planned_usage_threshold\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xe8\xc71\x00\xfa\xc71\x050-100R\x15plannedUsageThreshold\x12f\n" +
-	"\x19emergency_usage_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xe8\xc71\x00\xfa\xc71\x050-100R\x17emergencyUsageThreshold\x12C\n" +
+	"\x11profiling_enabled\x18\x01 \x01(\bR\x10profilingEnabled\"\x94\x02\n" +
+	"\x13DiskSizeAutoscaling\x12Y\n" +
+	"\x17planned_usage_threshold\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x04\xe8\xc71\x00R\x15plannedUsageThreshold\x12]\n" +
+	"\x19emergency_usage_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x04\xe8\xc71\x00R\x17emergencyUsageThreshold\x12C\n" +
 	"\x0fdisk_size_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\rdiskSizeLimit\"\x9c\x03\n" +
 	"\x11AutoCompactConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12G\n" +

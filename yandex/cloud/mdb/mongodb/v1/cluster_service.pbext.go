@@ -5,6 +5,7 @@ package mongodb
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config"
 	v11 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -94,6 +95,10 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
 	m.DiskEncryptionKeyId = v
+}
+
+func (m *CreateClusterRequest) SetRetentionPolicies(v []*v1.BackupRetentionPolicySpec) {
+	m.RetentionPolicies = v
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {

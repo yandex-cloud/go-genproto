@@ -242,7 +242,11 @@ type VirtualHost struct {
 	ModifyResponseHeaders []*HeaderModification `protobuf:"bytes,5,rep,name=modify_response_headers,json=modifyResponseHeaders,proto3" json:"modify_response_headers,omitempty"`
 	RouteOptions          *RouteOptions         `protobuf:"bytes,6,opt,name=route_options,json=routeOptions,proto3" json:"route_options,omitempty"`
 	// RateLimit is a rate limit configuration applied for a whole virtual host.
-	RateLimit     *RateLimit `protobuf:"bytes,7,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
+	RateLimit *RateLimit `protobuf:"bytes,7,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
+	// VirtualHost's labels as `key:value` pairs.
+	Labels map[string]string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Description of the virtual host.
+	Description   string `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -324,6 +328,20 @@ func (x *VirtualHost) GetRateLimit() *RateLimit {
 		return x.RateLimit
 	}
 	return nil
+}
+
+func (x *VirtualHost) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *VirtualHost) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
 }
 
 type RouteOptions struct {
@@ -2123,7 +2141,7 @@ type Principal_HeaderMatcher struct {
 
 func (x *Principal_HeaderMatcher) Reset() {
 	*x = Principal_HeaderMatcher{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[21]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2153,7 @@ func (x *Principal_HeaderMatcher) String() string {
 func (*Principal_HeaderMatcher) ProtoMessage() {}
 
 func (x *Principal_HeaderMatcher) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[21]
+	mi := &file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2169,7 +2187,7 @@ var File_yandex_cloud_apploadbalancer_v1_virtual_host_proto protoreflect.FileDes
 
 const file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\x1a-yandex/cloud/apploadbalancer/v1/payload.proto\x1a0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x1a\x1dyandex/cloud/validation.proto\"\xfc\x03\n" +
+	"2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\x1a-yandex/cloud/apploadbalancer/v1/payload.proto\x1a0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x1a\x1dyandex/cloud/validation.proto\"\xf4\x05\n" +
 	"\vVirtualHost\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1c\n" +
 	"\tauthority\x18\x02 \x03(\tR\tauthority\x12>\n" +
@@ -2178,7 +2196,12 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc = "" +
 	"\x17modify_response_headers\x18\x05 \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x15modifyResponseHeaders\x12R\n" +
 	"\rroute_options\x18\x06 \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x12I\n" +
 	"\n" +
-	"rate_limit\x18\a \x01(\v2*.yandex.cloud.apploadbalancer.v1.RateLimitR\trateLimit\"\xd1\x02\n" +
+	"rate_limit\x18\a \x01(\v2*.yandex.cloud.apploadbalancer.v1.RateLimitR\trateLimit\x12\x8d\x01\n" +
+	"\x06labels\x18\b \x03(\v28.yandex.cloud.apploadbalancer.v1.VirtualHost.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=16\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12+\n" +
+	"\vdescription\x18\t \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x1a9\n" +
+	"\vLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd1\x02\n" +
 	"\fRouteOptions\x12i\n" +
 	"\x16modify_request_headers\x18\x01 \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x14modifyRequestHeaders\x12k\n" +
 	"\x17modify_response_headers\x18\x02 \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x15modifyResponseHeaders\x129\n" +
@@ -2328,7 +2351,7 @@ func file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDescGZIP() []byt
 }
 
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_goTypes = []any{
 	(RBAC_Action)(0),                         // 0: yandex.cloud.apploadbalancer.v1.RBAC.Action
 	(RedirectAction_RedirectResponseCode)(0), // 1: yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
@@ -2354,57 +2377,59 @@ var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_goTypes = []any{
 	(*HttpRouteAction)(nil),                  // 21: yandex.cloud.apploadbalancer.v1.HttpRouteAction
 	(*RegexMatchAndSubstitute)(nil),          // 22: yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
 	(*GrpcRouteAction)(nil),                  // 23: yandex.cloud.apploadbalancer.v1.GrpcRouteAction
-	(*Principal_HeaderMatcher)(nil),          // 24: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
-	(*RateLimit)(nil),                        // 25: yandex.cloud.apploadbalancer.v1.RateLimit
-	(*Payload)(nil),                          // 26: yandex.cloud.apploadbalancer.v1.Payload
-	(*durationpb.Duration)(nil),              // 27: google.protobuf.Duration
+	nil,                                      // 24: yandex.cloud.apploadbalancer.v1.VirtualHost.LabelsEntry
+	(*Principal_HeaderMatcher)(nil),          // 25: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
+	(*RateLimit)(nil),                        // 26: yandex.cloud.apploadbalancer.v1.RateLimit
+	(*Payload)(nil),                          // 27: yandex.cloud.apploadbalancer.v1.Payload
+	(*durationpb.Duration)(nil),              // 28: google.protobuf.Duration
 }
 var file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.apploadbalancer.v1.VirtualHost.routes:type_name -> yandex.cloud.apploadbalancer.v1.Route
 	8,  // 1: yandex.cloud.apploadbalancer.v1.VirtualHost.modify_request_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	8,  // 2: yandex.cloud.apploadbalancer.v1.VirtualHost.modify_response_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
 	4,  // 3: yandex.cloud.apploadbalancer.v1.VirtualHost.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
-	25, // 4: yandex.cloud.apploadbalancer.v1.VirtualHost.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
-	8,  // 5: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_request_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
-	8,  // 6: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_response_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
-	5,  // 7: yandex.cloud.apploadbalancer.v1.RouteOptions.rbac:type_name -> yandex.cloud.apploadbalancer.v1.RBAC
-	0,  // 8: yandex.cloud.apploadbalancer.v1.RBAC.action:type_name -> yandex.cloud.apploadbalancer.v1.RBAC.Action
-	6,  // 9: yandex.cloud.apploadbalancer.v1.RBAC.principals:type_name -> yandex.cloud.apploadbalancer.v1.Principals
-	7,  // 10: yandex.cloud.apploadbalancer.v1.Principals.and_principals:type_name -> yandex.cloud.apploadbalancer.v1.Principal
-	24, // 11: yandex.cloud.apploadbalancer.v1.Principal.header:type_name -> yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
-	11, // 12: yandex.cloud.apploadbalancer.v1.Route.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpRoute
-	12, // 13: yandex.cloud.apploadbalancer.v1.Route.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRoute
-	4,  // 14: yandex.cloud.apploadbalancer.v1.Route.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
-	10, // 15: yandex.cloud.apploadbalancer.v1.Route.client_certificate_forward:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateForward
-	15, // 16: yandex.cloud.apploadbalancer.v1.HttpRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteMatch
-	21, // 17: yandex.cloud.apploadbalancer.v1.HttpRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteAction
-	18, // 18: yandex.cloud.apploadbalancer.v1.HttpRoute.redirect:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction
-	19, // 19: yandex.cloud.apploadbalancer.v1.HttpRoute.direct_response:type_name -> yandex.cloud.apploadbalancer.v1.DirectResponseAction
-	16, // 20: yandex.cloud.apploadbalancer.v1.GrpcRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
-	23, // 21: yandex.cloud.apploadbalancer.v1.GrpcRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteAction
-	20, // 22: yandex.cloud.apploadbalancer.v1.GrpcRoute.status_response:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
-	17, // 23: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	17, // 24: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	17, // 25: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.path:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	13, // 26: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.headers:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
-	14, // 27: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.query_parameters:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
-	17, // 28: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch.fqmn:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	1,  // 29: yandex.cloud.apploadbalancer.v1.RedirectAction.response_code:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
-	26, // 30: yandex.cloud.apploadbalancer.v1.DirectResponseAction.body:type_name -> yandex.cloud.apploadbalancer.v1.Payload
-	2,  // 31: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.status:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.Status
-	27, // 32: yandex.cloud.apploadbalancer.v1.HttpRouteAction.timeout:type_name -> google.protobuf.Duration
-	27, // 33: yandex.cloud.apploadbalancer.v1.HttpRouteAction.idle_timeout:type_name -> google.protobuf.Duration
-	25, // 34: yandex.cloud.apploadbalancer.v1.HttpRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
-	22, // 35: yandex.cloud.apploadbalancer.v1.HttpRouteAction.regex_rewrite:type_name -> yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
-	27, // 36: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.max_timeout:type_name -> google.protobuf.Duration
-	27, // 37: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.idle_timeout:type_name -> google.protobuf.Duration
-	25, // 38: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
-	17, // 39: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
-	40, // [40:40] is the sub-list for method output_type
-	40, // [40:40] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	26, // 4: yandex.cloud.apploadbalancer.v1.VirtualHost.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	24, // 5: yandex.cloud.apploadbalancer.v1.VirtualHost.labels:type_name -> yandex.cloud.apploadbalancer.v1.VirtualHost.LabelsEntry
+	8,  // 6: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_request_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
+	8,  // 7: yandex.cloud.apploadbalancer.v1.RouteOptions.modify_response_headers:type_name -> yandex.cloud.apploadbalancer.v1.HeaderModification
+	5,  // 8: yandex.cloud.apploadbalancer.v1.RouteOptions.rbac:type_name -> yandex.cloud.apploadbalancer.v1.RBAC
+	0,  // 9: yandex.cloud.apploadbalancer.v1.RBAC.action:type_name -> yandex.cloud.apploadbalancer.v1.RBAC.Action
+	6,  // 10: yandex.cloud.apploadbalancer.v1.RBAC.principals:type_name -> yandex.cloud.apploadbalancer.v1.Principals
+	7,  // 11: yandex.cloud.apploadbalancer.v1.Principals.and_principals:type_name -> yandex.cloud.apploadbalancer.v1.Principal
+	25, // 12: yandex.cloud.apploadbalancer.v1.Principal.header:type_name -> yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher
+	11, // 13: yandex.cloud.apploadbalancer.v1.Route.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpRoute
+	12, // 14: yandex.cloud.apploadbalancer.v1.Route.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRoute
+	4,  // 15: yandex.cloud.apploadbalancer.v1.Route.route_options:type_name -> yandex.cloud.apploadbalancer.v1.RouteOptions
+	10, // 16: yandex.cloud.apploadbalancer.v1.Route.client_certificate_forward:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateForward
+	15, // 17: yandex.cloud.apploadbalancer.v1.HttpRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteMatch
+	21, // 18: yandex.cloud.apploadbalancer.v1.HttpRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteAction
+	18, // 19: yandex.cloud.apploadbalancer.v1.HttpRoute.redirect:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction
+	19, // 20: yandex.cloud.apploadbalancer.v1.HttpRoute.direct_response:type_name -> yandex.cloud.apploadbalancer.v1.DirectResponseAction
+	16, // 21: yandex.cloud.apploadbalancer.v1.GrpcRoute.match:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteMatch
+	23, // 22: yandex.cloud.apploadbalancer.v1.GrpcRoute.route:type_name -> yandex.cloud.apploadbalancer.v1.GrpcRouteAction
+	20, // 23: yandex.cloud.apploadbalancer.v1.GrpcRoute.status_response:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction
+	17, // 24: yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	17, // 25: yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	17, // 26: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.path:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	13, // 27: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.headers:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteHeaderMatch
+	14, // 28: yandex.cloud.apploadbalancer.v1.HttpRouteMatch.query_parameters:type_name -> yandex.cloud.apploadbalancer.v1.HttpRouteQueryParamMatch
+	17, // 29: yandex.cloud.apploadbalancer.v1.GrpcRouteMatch.fqmn:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	1,  // 30: yandex.cloud.apploadbalancer.v1.RedirectAction.response_code:type_name -> yandex.cloud.apploadbalancer.v1.RedirectAction.RedirectResponseCode
+	27, // 31: yandex.cloud.apploadbalancer.v1.DirectResponseAction.body:type_name -> yandex.cloud.apploadbalancer.v1.Payload
+	2,  // 32: yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.status:type_name -> yandex.cloud.apploadbalancer.v1.GrpcStatusResponseAction.Status
+	28, // 33: yandex.cloud.apploadbalancer.v1.HttpRouteAction.timeout:type_name -> google.protobuf.Duration
+	28, // 34: yandex.cloud.apploadbalancer.v1.HttpRouteAction.idle_timeout:type_name -> google.protobuf.Duration
+	26, // 35: yandex.cloud.apploadbalancer.v1.HttpRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	22, // 36: yandex.cloud.apploadbalancer.v1.HttpRouteAction.regex_rewrite:type_name -> yandex.cloud.apploadbalancer.v1.RegexMatchAndSubstitute
+	28, // 37: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.max_timeout:type_name -> google.protobuf.Duration
+	28, // 38: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.idle_timeout:type_name -> google.protobuf.Duration
+	26, // 39: yandex.cloud.apploadbalancer.v1.GrpcRouteAction.rate_limit:type_name -> yandex.cloud.apploadbalancer.v1.RateLimit
+	17, // 40: yandex.cloud.apploadbalancer.v1.Principal.HeaderMatcher.value:type_name -> yandex.cloud.apploadbalancer.v1.StringMatch
+	41, // [41:41] is the sub-list for method output_type
+	41, // [41:41] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_init() }
@@ -2461,7 +2486,7 @@ func file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc), len(file_yandex_cloud_apploadbalancer_v1_virtual_host_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

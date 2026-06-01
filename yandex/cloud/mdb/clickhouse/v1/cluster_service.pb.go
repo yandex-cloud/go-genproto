@@ -4205,8 +4205,9 @@ type UpdateClusterShardGroupRequest struct {
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard group that should be updated.
 	// To get the name, make a [ClusterService.ListShardGroups] request.
-	ShardGroupName string                 `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
-	UpdateMask     *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	ShardGroupName string `protobuf:"bytes,2,opt,name=shard_group_name,json=shardGroupName,proto3" json:"shard_group_name,omitempty"`
+	// Field mask that specifies which attributes of the ClickHouse shard group should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Updated description of the shard group. 0-256 characters long.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Updated list of shard names that belongs to the shard group.
@@ -4986,7 +4987,8 @@ type ConfigSpec struct {
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy for external services.
 	// If you want a specific service to access the ClickHouse cluster, then set the necessary values in this policy.
-	Access       *Access       `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
+	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
+	// Cloud storage configuration.
 	CloudStorage *CloudStorage `protobuf:"bytes,6,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	// Whether database management through SQL commands is enabled.
 	SqlDatabaseManagement *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=sql_database_management,json=sqlDatabaseManagement,proto3" json:"sql_database_management,omitempty"`
@@ -5436,24 +5438,24 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x83\x01\n" +
 	"\x14ListClustersResponse\x12C\n" +
 	"\bclusters\x18\x01 \x03(\v2'.yandex.cloud.mdb.clickhouse.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa0\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8f\n" +
 	"\n" +
 	"\x14CreateClusterRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
-	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
+	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x17[a-zA-Z_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x95\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2@.yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12[\n" +
-	"\venvironment\x18\x05 \x01(\x0e23.yandex.cloud.mdb.clickhouse.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12Q\n" +
-	"\vconfig_spec\x18\x06 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
-	"configSpec\x12[\n" +
-	"\x0edatabase_specs\x18\a \x03(\v2,.yandex.cloud.mdb.clickhouse.v1.DatabaseSpecB\x06\x82\xc81\x02>0R\rdatabaseSpecs\x12O\n" +
+	"\x06labels\x18\x04 \x03(\v2@.yandex.cloud.mdb.clickhouse.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[0-9a-z_-]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][0-9a-z_-]*\x1a\x04<=63R\x06labels\x12[\n" +
+	"\venvironment\x18\x05 \x01(\x0e23.yandex.cloud.mdb.clickhouse.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12K\n" +
+	"\vconfig_spec\x18\x06 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecR\n" +
+	"configSpec\x12S\n" +
+	"\x0edatabase_specs\x18\a \x03(\v2,.yandex.cloud.mdb.clickhouse.v1.DatabaseSpecR\rdatabaseSpecs\x12G\n" +
 	"\n" +
-	"user_specs\x18\b \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.UserSpecB\x06\x82\xc81\x02>0R\tuserSpecs\x12O\n" +
+	"user_specs\x18\b \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.UserSpecR\tuserSpecs\x12O\n" +
 	"\n" +
-	"host_specs\x18\t \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12+\n" +
+	"host_specs\x18\t \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12'\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x129\n" +
+	" \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x129\n" +
 	"\n" +
 	"shard_name\x18\v \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12,\n" +
 	"\x12service_account_id\x18\f \x01(\tR\x10serviceAccountId\x12,\n" +
@@ -5475,7 +5477,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x95\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2@.yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12K\n" +
+	"\x06labels\x18\x04 \x03(\v2@.yandex.cloud.mdb.clickhouse.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[0-9a-z_-]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][0-9a-z_-]*\x1a\x04<=63R\x06labels\x12K\n" +
 	"\vconfig_spec\x18\x05 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecR\n" +
 	"configSpec\x12.\n" +
 	"\x04name\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12,\n" +
@@ -5535,20 +5537,20 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"<\n" +
 	"\x15BackupClusterMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xef\t\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xd3\t\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
-	"\x15additional_backup_ids\x18\r \x03(\tR\x13additionalBackupIds\x122\n" +
-	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
+	"\x15additional_backup_ids\x18\r \x03(\tR\x13additionalBackupIds\x12.\n" +
+	"\x04name\x18\x02 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x96\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2A.yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12[\n" +
-	"\venvironment\x18\x05 \x01(\x0e23.yandex.cloud.mdb.clickhouse.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12Q\n" +
-	"\vconfig_spec\x18\x06 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
-	"configSpec\x12O\n" +
+	"\x06labels\x18\x04 \x03(\v2A.yandex.cloud.mdb.clickhouse.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[0-9a-z_-]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][0-9a-z_-]*\x1a\x04<=63R\x06labels\x12U\n" +
+	"\venvironment\x18\x05 \x01(\x0e23.yandex.cloud.mdb.clickhouse.v1.Cluster.EnvironmentR\venvironment\x12K\n" +
+	"\vconfig_spec\x18\x06 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecR\n" +
+	"configSpec\x12G\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12+\n" +
+	"host_specs\x18\a \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecR\thostSpecs\x12'\n" +
 	"\n" +
-	"network_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
+	"network_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
 	"\x12service_account_id\x18\n" +
 	" \x01(\tR\x10serviceAccountId\x12,\n" +
@@ -5703,12 +5705,12 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\x84\x01\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"r\n" +
 	"\x16GetClusterShardRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12+\n" +
 	"\n" +
-	"shard_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\"\x9a\x01\n" +
+	"shard_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\tshardName\"\x9a\x01\n" +
 	"\x18ListClusterShardsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -5718,16 +5720,16 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x82\x01\n" +
 	"\x19ListClusterShardsResponse\x12=\n" +
 	"\x06shards\x18\x01 \x03(\v2%.yandex.cloud.mdb.clickhouse.v1.ShardR\x06shards\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe4\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe8\x02\n" +
 	"\x16AddClusterShardRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12I\n" +
 	"\n" +
-	"shard_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12P\n" +
+	"shard_name\x18\x02 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12P\n" +
 	"\vconfig_spec\x18\x03 \x01(\v2/.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpecR\n" +
-	"configSpec\x12O\n" +
+	"configSpec\x12G\n" +
 	"\n" +
-	"host_specs\x18\x04 \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12;\n" +
+	"host_specs\x18\x04 \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecR\thostSpecs\x12;\n" +
 	"\vcopy_schema\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
 	"copySchema\"\xa0\x02\n" +
 	"\x17AddClusterShardsRequest\x12+\n" +
@@ -5748,12 +5750,12 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1f\n" +
 	"\vshard_names\x18\x02 \x03(\tR\n" +
-	"shardNames\"\xe6\x02\n" +
+	"shardNames\"\xd4\x02\n" +
 	"\x19UpdateClusterShardRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12+\n" +
 	"\n" +
-	"shard_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12;\n" +
+	"shard_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\tshardName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12P\n" +
 	"\vconfig_spec\x18\x04 \x01(\v2/.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpecR\n" +
@@ -5763,16 +5765,16 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"shard_name\x18\x02 \x01(\tR\tshardName\"\x87\x01\n" +
+	"shard_name\x18\x02 \x01(\tR\tshardName\"u\n" +
 	"\x19DeleteClusterShardRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12+\n" +
 	"\n" +
-	"shard_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\"\x8c\x01\n" +
+	"shard_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\tshardName\"z\n" +
 	"\x1aDeleteClusterShardsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12A\n" +
-	"\vshard_names\x18\x02 \x03(\tB \xf2\xc71\x0e[a-zA-Z0-9_-]*\x82\xc81\x02>0\x8a\xc81\x04<=63R\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12/\n" +
+	"\vshard_names\x18\x02 \x03(\tB\x0e\x82\xc81\x02>0\x8a\xc81\x04<=63R\n" +
 	"shardNames\"Z\n" +
 	"\x1aDeleteClusterShardMetadata\x12\x1d\n" +
 	"\n" +
@@ -5783,11 +5785,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1f\n" +
 	"\vshard_names\x18\x02 \x03(\tR\n" +
-	"shardNames\"\x94\x01\n" +
+	"shardNames\"\x82\x01\n" +
 	"\x1bGetClusterShardGroupRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12H\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x0eshardGroupName\"\x9f\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x126\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x0eshardGroupName\"\x9f\x01\n" +
 	"\x1dListClusterShardGroupsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -5797,22 +5799,22 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x97\x01\n" +
 	"\x1eListClusterShardGroupsResponse\x12M\n" +
 	"\fshard_groups\x18\x01 \x03(\v2*.yandex.cloud.mdb.clickhouse.v1.ShardGroupR\vshardGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xda\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe3\x01\n" +
 	"\x1eCreateClusterShardGroupRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12H\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x0eshardGroupName\x12 \n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12Q\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x17[a-zA-Z_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x0eshardGroupName\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1f\n" +
 	"\vshard_names\x18\x04 \x03(\tR\n" +
 	"shardNames\"j\n" +
 	"\x1fCreateClusterShardGroupMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12(\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tR\x0eshardGroupName\"\x97\x02\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tR\x0eshardGroupName\"\x85\x02\n" +
 	"\x1eUpdateClusterShardGroupRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12H\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x0eshardGroupName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x126\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x0eshardGroupName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x1f\n" +
@@ -5821,11 +5823,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x1fUpdateClusterShardGroupMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12(\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tR\x0eshardGroupName\"\x97\x01\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tR\x0eshardGroupName\"\x85\x01\n" +
 	"\x1eDeleteClusterShardGroupRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12H\n" +
-	"\x10shard_group_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x0eshardGroupName\"j\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x126\n" +
+	"\x10shard_group_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x0eshardGroupName\"j\n" +
 	"\x1fDeleteClusterShardGroupMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12(\n" +
@@ -5906,9 +5908,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x06config\x18\x01 \x01(\v27.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfigR\x06config\x12G\n" +
 	"\tresources\x18\x02 \x01(\v2).yandex.cloud.mdb.clickhouse.v1.ResourcesR\tresources\x123\n" +
 	"\x06weight\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x06weight\x12g\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xbd\x01\n" +
-	"\tShardSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12P\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v23.yandex.cloud.mdb.clickhouse.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc9\x01\n" +
+	"\tShardSpec\x12>\n" +
+	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12P\n" +
 	"\vconfig_spec\x18\x02 \x01(\v2/.yandex.cloud.mdb.clickhouse.v1.ShardConfigSpecR\n" +
 	"configSpec\x12*\n" +
 	"\x11shard_group_names\x18\x03 \x03(\tR\x0fshardGroupNames2\xafD\n" +

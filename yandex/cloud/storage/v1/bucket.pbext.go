@@ -252,12 +252,20 @@ func (m *LifecycleRule_NoncurrentExpiration) SetNoncurrentDays(v *wrapperspb.Int
 	m.NoncurrentDays = v
 }
 
+func (m *LifecycleRule_NoncurrentExpiration) SetNewerNoncurrentVersions(v *wrapperspb.Int64Value) {
+	m.NewerNoncurrentVersions = v
+}
+
 func (m *LifecycleRule_NoncurrentTransition) SetNoncurrentDays(v *wrapperspb.Int64Value) {
 	m.NoncurrentDays = v
 }
 
 func (m *LifecycleRule_NoncurrentTransition) SetStorageClass(v string) {
 	m.StorageClass = v
+}
+
+func (m *LifecycleRule_NoncurrentTransition) SetNewerNoncurrentVersions(v *wrapperspb.Int64Value) {
+	m.NewerNoncurrentVersions = v
 }
 
 func (m *LifecycleRule_Transition) SetDate(v *timestamppb.Timestamp) {

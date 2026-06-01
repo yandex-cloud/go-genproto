@@ -194,7 +194,6 @@ func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []i
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to return.
-	//
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -241,11 +240,9 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list OpenSearch clusters in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns
 	// a [ListClustersResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -253,13 +250,9 @@ type ListClustersRequest struct {
 	// returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
-	//
 	// 2. An `=` operator.
-	//
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-zA-Z0-9_-]+`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -329,10 +322,8 @@ type ListClustersResponse struct {
 	// List of OpenSearch clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
 	// for the [ListClustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -593,7 +584,6 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the OpenSearch cluster as `key:value` pairs.
 	// For example, `"project": "mvp"` or `"source": "dictionary"`.
-	//
 	// The new set of labels completely replaces the old one. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -870,7 +860,6 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to request logs for.
-	//
 	// To get the OpenSearch cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from log table to request.
@@ -881,7 +870,6 @@ type ListClusterLogsRequest struct {
 	// End timestamp for the logs request.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -891,15 +879,10 @@ type ListClusterLogsRequest struct {
 	// The service always returns a [ListClusterLogsResponse.next_page_token], even if the current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,7,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. A field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname] field.
-	//
 	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	//
 	// 3. A value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
-	//
 	// Examples of a filter:
 	// * `message.hostname='node1.db.cloud.yandex.net'`;
 	// * `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`.
@@ -1062,12 +1045,9 @@ type ListClusterLogsResponse struct {
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value
 	// for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
-	//
 	// This value is interchangeable with the [StreamLogRecord.next_record_token] from [StreamLogs] method.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1123,9 +1103,7 @@ type StreamLogRecord struct {
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// This token allows you to continue streaming logs starting from the exact same record.
-	//
 	// To do that, specify value of [next_record_token] as the value for [StreamLogs.record_token] parameter in the next [StreamLogs] request.
-	//
 	// This value is interchangeable with [ListLogs.next_page_token] from [ListLogs] method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1186,24 +1164,17 @@ type StreamClusterLogsRequest struct {
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
-	//
 	// If this field is not set, all existing logs are sent as well as the new ones as they appear.
-	//
 	// In essence it has `tail -f` semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// Record token. Set `record_token` to the `next_record_token` returned by the previous [StreamLogs]
 	// request to start streaming from the next log record.
 	RecordToken string `protobuf:"bytes,5,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. A field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname] field.
-	//
 	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	//
 	// 3. A value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
-	//
 	// Examples of a filter:
 	// * `message.hostname='node1.db.cloud.yandex.net'`;
 	// * `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`.
@@ -1298,7 +1269,6 @@ type ListClusterOperationsRequest struct {
 	// ID of the OpenSearch cluster resource to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns
 	// a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -1364,9 +1334,7 @@ type ListClusterOperationsResponse struct {
 	// List of Operation resources for the specified OpenSearch cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1423,7 +1391,6 @@ type ListClusterHostsRequest struct {
 	// To get the OpenSearch cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns
 	// a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -1490,10 +1457,8 @@ type ListClusterHostsResponse struct {
 	// Requested list of hosts for the cluster.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token]
 	// as the value for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1855,9 +1820,9 @@ type ConfigCreateSpec struct {
 	DashboardsSpec *DashboardsCreateSpec `protobuf:"bytes,4,opt,name=dashboards_spec,json=dashboardsSpec,proto3" json:"dashboards_spec,omitempty"`
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Snapshot management configuration.
+	// Snapshot management configuration
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	// Audit log settings.
+	// Audit log settings
 	AuditLog      *AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2086,7 +2051,6 @@ type isOpenSearchCreateSpec_Config interface {
 }
 
 type OpenSearchCreateSpec_OpensearchConfig_2 struct {
-	// OpenSearch server configuration settings.
 	OpensearchConfig_2 *config.OpenSearchConfig2 `protobuf:"bytes,3,opt,name=opensearch_config_2,json=opensearchConfig_2,proto3,oneof"`
 }
 
@@ -2150,9 +2114,9 @@ type ConfigUpdateSpec struct {
 	DashboardsSpec *DashboardsClusterUpdateSpec `protobuf:"bytes,4,opt,name=dashboards_spec,json=dashboardsSpec,proto3" json:"dashboards_spec,omitempty"`
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Snapshot management configuration.
+	// Snapshot management configuration
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	// Audit log settings.
+	// Audit log settings
 	AuditLog      *AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2325,7 +2289,6 @@ type isOpenSearchClusterUpdateSpec_Config interface {
 }
 
 type OpenSearchClusterUpdateSpec_OpensearchConfig_2 struct {
-	// OpenSearch server configuration settings.
 	OpensearchConfig_2 *config.OpenSearchConfig2 `protobuf:"bytes,2,opt,name=opensearch_config_2,json=opensearchConfig_2,proto3,oneof"`
 }
 
@@ -2371,7 +2334,6 @@ func (*DashboardsClusterUpdateSpec) Descriptor() ([]byte, []int) {
 type BackupClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to back up.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2571,7 +2533,6 @@ func (x *DeleteBackupMetadata) GetBackupId() string {
 type RestoreClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backup to create a new cluster from.
-	//
 	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Name of the new OpenSearch cluster to be created from the backup. The name must be unique within the folder.
@@ -2594,7 +2555,6 @@ type RestoreClusterRequest struct {
 	// Determines whether the cluster is protected from being deleted.
 	DeletionProtection bool `protobuf:"varint,10,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	// ID of the folder to create the OpenSearch cluster in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,11,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Cluster maintenance window. Should be defined by either one of the two options.
@@ -2783,7 +2743,6 @@ func (x *RestoreClusterMetadata) GetBackupId() string {
 type RescheduleMaintenanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to reschedule the maintenance operation for.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The type of the reschedule request.
@@ -2904,7 +2863,6 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 type ListClusterBackupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -2974,10 +2932,8 @@ type ListClusterBackupsResponse struct {
 	// List of the OpenSearch cluster backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
 	// for the [ListClustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3031,7 +2987,6 @@ func (x *ListClusterBackupsResponse) GetNextPageToken() string {
 type DeleteOpenSearchNodeGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to delete the OpenSearch type host group in.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the OpenSearch type host group to delete.
@@ -3087,7 +3042,6 @@ func (x *DeleteOpenSearchNodeGroupRequest) GetName() string {
 type UpdateOpenSearchNodeGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to update the OpenSearch type host group in.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the OpenSearch type host group to be updated.
@@ -3260,7 +3214,6 @@ func (x *OpenSearchNodeGroupUpdateSpec) GetDiskSizeAutoscaling() *DiskSizeAutosc
 type AddOpenSearchNodeGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to create the OpenSearch type host group in.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the new host group.
@@ -3316,7 +3269,6 @@ func (x *AddOpenSearchNodeGroupRequest) GetNodeGroupSpec() *OpenSearchCreateSpec
 type DeleteDashboardsNodeGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to delete the Dashboards type host group in.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Dashboards type host group to delete.
@@ -3534,7 +3486,6 @@ func (x *DashboardsNodeGroupUpdateSpec) GetDiskSizeAutoscaling() *DiskSizeAutosc
 type AddDashboardsNodeGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OpenSearch cluster to create the Dashboards type host group in.
-	//
 	// To get the ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the new host group.
@@ -4322,7 +4273,7 @@ var File_yandex_cloud_mdb_opensearch_v1_cluster_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/opensearch/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a)yandex/cloud/mdb/opensearch/v1/auth.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a,yandex/cloud/mdb/opensearch/v1/cluster.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"4yandex/cloud/mdb/opensearch/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/opensearch/v1/auth.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a,yandex/cloud/mdb/opensearch/v1/cluster.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -4480,18 +4431,18 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
 	"\x13StopClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x83\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8c\x04\n" +
 	"\x10ConfigCreateSpec\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12+\n" +
-	"\x0eadmin_password\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\radminPassword\x12]\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
+	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12]\n" +
 	"\x0fopensearch_spec\x18\x03 \x01(\v24.yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpecR\x0eopensearchSpec\x12]\n" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v24.yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
 	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12E\n" +
-	"\taudit_log\x18\a \x01(\v2(.yandex.cloud.mdb.opensearch.v1.AuditLogR\bauditLog\";\n" +
-	"\x0fKeystoreSetting\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value\"\xd8\x06\n" +
+	"\taudit_log\x18\a \x01(\v2(.yandex.cloud.mdb.opensearch.v1.AuditLogR\bauditLog\"G\n" +
+	"\x0fKeystoreSetting\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
+	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\"\xd8\x06\n" +
 	"\x14OpenSearchCreateSpec\x12\x18\n" +
 	"\aplugins\x18\x01 \x03(\tR\aplugins\x12_\n" +
 	"\vnode_groups\x18\x02 \x03(\v2>.yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroupR\n" +
@@ -4509,7 +4460,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12J\n" +
 	"\x05roles\x18\a \x03(\x0e24.yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRoleR\x05roles\x12g\n" +
 	"\x15disk_size_autoscaling\x18\b \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingB\b\n" +
-	"\x06config\"\x8b\x04\n" +
+	"\x06config\"\x91\x04\n" +
 	"\x14DashboardsCreateSpec\x12_\n" +
 	"\vnode_groups\x18\x02 \x03(\v2>.yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroupR\n" +
 	"nodeGroups\x1a\x91\x03\n" +
@@ -4522,10 +4473,10 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"subnet_ids\x18\x05 \x03(\tB\x10\x82\xc81\x04<=10\x8a\xc81\x04<=50R\tsubnetIds\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12g\n" +
-	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\x91\x04\n" +
+	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\x01\x10\x02\"\x9a\x04\n" +
 	"\x10ConfigUpdateSpec\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12+\n" +
-	"\x0eadmin_password\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\radminPassword\x12d\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
+	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12d\n" +
 	"\x0fopensearch_spec\x18\x03 \x01(\v2;.yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpecR\x0eopensearchSpec\x12d\n" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v2;.yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +

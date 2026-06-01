@@ -23,6 +23,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ResourceGroup defines a resource group configuration shared between Greenplum and Apache Cloudberry,
+// but the two engines use different sets of fields.
+//
+// Greenplum fields:
+// * concurrency
+// * cpu_rate_limit
+// * memory_limit
+// * memory_shared_quota
+// * memory_spill_ratio
+//
+// Apache Cloudberry fields:
+// * concurrency
+// * cpu_max_percent
+// * cpu_weight
+// * memory_quota
+// * min_cost
+// * io_limit
+//
+// The sets partially overlap (concurrency is common to both). Passing Greenplum-specific
+// fields to a CloudBerry cluster or vice versa is not rejected at the proto level -
+// field validation is performed at runtime by the service.
 type ResourceGroup struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -37,8 +58,29 @@ type ResourceGroup struct {
 	MemorySharedQuota *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=memory_shared_quota,json=memorySharedQuota,proto3" json:"memory_shared_quota,omitempty"`
 	// References to MEMORY_SPILL_RATIO from gp resource group parameter
 	MemorySpillRatio *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=memory_spill_ratio,json=memorySpillRatio,proto3" json:"memory_spill_ratio,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// References to CPU_MAX_PERCENT from Apache Cloudberry resource group parameter:
+	//
+	//	The maximum percentage of CPU resources the group can use.
+	CpuMaxPercent *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=cpu_max_percent,json=cpuMaxPercent,proto3" json:"cpu_max_percent,omitempty"`
+	// References to CPU_WEIGHT from Apache Cloudberry resource group parameter:
+	//
+	//	The scheduling priority of the resource group.
+	CpuWeight *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=cpu_weight,json=cpuWeight,proto3" json:"cpu_weight,omitempty"`
+	// References to MEMORY_QUOTA from Apache Cloudberry resource group parameter:
+	//
+	//	The memory limit (Mb) specified for the resource group.
+	MemoryQuota *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=memory_quota,json=memoryQuota,proto3" json:"memory_quota,omitempty"`
+	// References to MIN_COST from Apache Cloudberry resource group parameter:
+	//
+	//	The minimum cost of a query plan to be included in the resource group.
+	MinCost *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_cost,json=minCost,proto3" json:"min_cost,omitempty"`
+	// References to IO_LIMIT from Apache Cloudberry resource group parameter:
+	//
+	//	The limit for the maximum read/write disk I/O throughput, and maximum read/write I/O operations per second.
+	//	Set the value on a per-tablespace basis.
+	IoLimit       *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=io_limit,json=ioLimit,proto3" json:"io_limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ResourceGroup) Reset() {
@@ -120,11 +162,46 @@ func (x *ResourceGroup) GetMemorySpillRatio() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *ResourceGroup) GetCpuMaxPercent() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.CpuMaxPercent
+	}
+	return nil
+}
+
+func (x *ResourceGroup) GetCpuWeight() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.CpuWeight
+	}
+	return nil
+}
+
+func (x *ResourceGroup) GetMemoryQuota() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MemoryQuota
+	}
+	return nil
+}
+
+func (x *ResourceGroup) GetMinCost() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MinCost
+	}
+	return nil
+}
+
+func (x *ResourceGroup) GetIoLimit() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.IoLimit
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_greenplum_v1_resource_groups_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\x04\n" +
+	"3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf7\x06\n" +
 	"\rResourceGroup\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe8\xc71\x01\xf2\xc71\x12^[^\\|/*?.,;\"'<>]+$\x8a\xc81\x053-200R\x04name\x12B\n" +
 	"\x0fis_user_defined\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\risUserDefined\x12F\n" +
@@ -132,7 +209,15 @@ const file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_rawDesc = "" +
 	"\x0ecpu_rate_limit\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-100R\fcpuRateLimit\x12I\n" +
 	"\fmemory_limit\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\vmemoryLimit\x12V\n" +
 	"\x13memory_shared_quota\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x11memorySharedQuota\x12T\n" +
-	"\x12memory_spill_ratio\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x10memorySpillRatioBp\n" +
+	"\x12memory_spill_ratio\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x10memorySpillRatio\x12O\n" +
+	"\x0fcpu_max_percent\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x06-1-100R\rcpuMaxPercent\x12E\n" +
+	"\n" +
+	"cpu_weight\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\tcpuWeight\x12H\n" +
+	"\fmemory_quota\x18\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=-1R\vmemoryQuota\x126\n" +
+	"\bmin_cost\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\aminCost\x12@\n" +
+	"\bio_limit\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=-1R\aioLimitBp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (
@@ -154,17 +239,22 @@ var file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_goTypes = []any{
 	(*wrapperspb.Int64Value)(nil), // 2: google.protobuf.Int64Value
 }
 var file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.mdb.greenplum.v1.ResourceGroup.is_user_defined:type_name -> google.protobuf.BoolValue
-	2, // 1: yandex.cloud.mdb.greenplum.v1.ResourceGroup.concurrency:type_name -> google.protobuf.Int64Value
-	2, // 2: yandex.cloud.mdb.greenplum.v1.ResourceGroup.cpu_rate_limit:type_name -> google.protobuf.Int64Value
-	2, // 3: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_limit:type_name -> google.protobuf.Int64Value
-	2, // 4: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_shared_quota:type_name -> google.protobuf.Int64Value
-	2, // 5: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_spill_ratio:type_name -> google.protobuf.Int64Value
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	1,  // 0: yandex.cloud.mdb.greenplum.v1.ResourceGroup.is_user_defined:type_name -> google.protobuf.BoolValue
+	2,  // 1: yandex.cloud.mdb.greenplum.v1.ResourceGroup.concurrency:type_name -> google.protobuf.Int64Value
+	2,  // 2: yandex.cloud.mdb.greenplum.v1.ResourceGroup.cpu_rate_limit:type_name -> google.protobuf.Int64Value
+	2,  // 3: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_limit:type_name -> google.protobuf.Int64Value
+	2,  // 4: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_shared_quota:type_name -> google.protobuf.Int64Value
+	2,  // 5: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_spill_ratio:type_name -> google.protobuf.Int64Value
+	2,  // 6: yandex.cloud.mdb.greenplum.v1.ResourceGroup.cpu_max_percent:type_name -> google.protobuf.Int64Value
+	2,  // 7: yandex.cloud.mdb.greenplum.v1.ResourceGroup.cpu_weight:type_name -> google.protobuf.Int64Value
+	2,  // 8: yandex.cloud.mdb.greenplum.v1.ResourceGroup.memory_quota:type_name -> google.protobuf.Int64Value
+	2,  // 9: yandex.cloud.mdb.greenplum.v1.ResourceGroup.min_cost:type_name -> google.protobuf.Int64Value
+	2,  // 10: yandex.cloud.mdb.greenplum.v1.ResourceGroup.io_limit:type_name -> google.protobuf.Int64Value
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_init() }

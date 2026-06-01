@@ -4,7 +4,7 @@
 // 	protoc        v3.21.12
 // source: yandex/cloud/mdb/opensearch/v1/extension/extension_type.proto
 
-package opensearch
+package extension
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -78,8 +78,8 @@ const file_yandex_cloud_mdb_opensearch_v1_extension_extension_type_proto_rawDesc
 	"\rExtensionType\x12\x1e\n" +
 	"\x1aEXTENSION_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17EXTENSION_TYPE_SYNONYMS\x10\x01\x12\x1c\n" +
-	"\x18EXTENSION_TYPE_STOPWORDS\x10\x02B\x87\x01\n" +
-	",yandex.cloud.api.mdb.opensearch.v1.extensionZWgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/extension;opensearchb\x06proto3"
+	"\x18EXTENSION_TYPE_STOPWORDS\x10\x02B\x86\x01\n" +
+	",yandex.cloud.api.mdb.opensearch.v1.extensionZVgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/extension;extensionb\x06proto3"
 
 var (
 	file_yandex_cloud_mdb_opensearch_v1_extension_extension_type_proto_rawDescOnce sync.Once

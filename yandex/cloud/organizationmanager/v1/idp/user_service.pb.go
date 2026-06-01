@@ -1098,6 +1098,7 @@ type SetOwnPasswordRequest struct {
 	// New password specification.
 	PasswordSpec *PasswordSpec `protobuf:"bytes,1,opt,name=password_spec,json=passwordSpec,proto3" json:"password_spec,omitempty"`
 	// Current password for verification.
+	// Optional for one time passwords
 	OldPassword   string `protobuf:"bytes,2,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2565,10 +2566,10 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\x15ReactivateUserRequest\x12%\n" +
 	"\auser_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06userId\"1\n" +
 	"\x16ReactivateUserMetadata\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xab\x01\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xa7\x01\n" +
 	"\x15SetOwnPasswordRequest\x12`\n" +
-	"\rpassword_spec\x18\x01 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.PasswordSpecB\x04\xe8\xc71\x01R\fpasswordSpec\x120\n" +
-	"\fold_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=128R\voldPassword\"1\n" +
+	"\rpassword_spec\x18\x01 \x01(\v25.yandex.cloud.organizationmanager.v1.idp.PasswordSpecB\x04\xe8\xc71\x01R\fpasswordSpec\x12,\n" +
+	"\fold_password\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\voldPassword\"1\n" +
 	"\x16SetOwnPasswordMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x18\n" +
 	"\x16SetOwnPasswordResponse\"\xa3\x01\n" +

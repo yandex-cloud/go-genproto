@@ -2660,8 +2660,11 @@ type LifecycleRule_NoncurrentExpiration struct {
 	// Time period, in number of days since the version of an object was classified as non-current, after which the
 	// version expires.
 	NoncurrentDays *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=noncurrent_days,json=noncurrentDays,proto3" json:"noncurrent_days,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// Specifies how many noncurrent versions S3 will retain.
+	// S3 will permanently delete any additional noncurrent versions beyond this specified number.
+	NewerNoncurrentVersions *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=newer_noncurrent_versions,json=newerNoncurrentVersions,proto3" json:"newer_noncurrent_versions,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *LifecycleRule_NoncurrentExpiration) Reset() {
@@ -2701,6 +2704,13 @@ func (x *LifecycleRule_NoncurrentExpiration) GetNoncurrentDays() *wrapperspb.Int
 	return nil
 }
 
+func (x *LifecycleRule_NoncurrentExpiration) GetNewerNoncurrentVersions() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.NewerNoncurrentVersions
+	}
+	return nil
+}
+
 // List of transition rules for non-current versions of objects in a bucket with versioning enabled
 // ([Bucket.versioning] is `VERSIONING_ENABLED`) or suspended (`VERSIONING_SUSPENDED`).
 // At transition, the non-current version of the object is transitioned to the specified storage class.
@@ -2712,9 +2722,12 @@ type LifecycleRule_NoncurrentTransition struct {
 	// Storage class to which a non-current version of an object is transitioned from standard storage.
 	// The only supported class is cold storage (`COLD`, `STANDARD_IA`, `NEARLINE` all synonyms). Transitions from cold
 	// to standard storage and transitions to or from ice storage are not allowed.
-	StorageClass  string `protobuf:"bytes,2,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	StorageClass string `protobuf:"bytes,2,opt,name=storage_class,json=storageClass,proto3" json:"storage_class,omitempty"`
+	// Specifies how many noncurrent versions S3 will retain.
+	// S3 will permanently delete any additional noncurrent versions beyond this specified number.
+	NewerNoncurrentVersions *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=newer_noncurrent_versions,json=newerNoncurrentVersions,proto3" json:"newer_noncurrent_versions,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *LifecycleRule_NoncurrentTransition) Reset() {
@@ -2759,6 +2772,13 @@ func (x *LifecycleRule_NoncurrentTransition) GetStorageClass() string {
 		return x.StorageClass
 	}
 	return ""
+}
+
+func (x *LifecycleRule_NoncurrentTransition) GetNewerNoncurrentVersions() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.NewerNoncurrentVersions
+	}
+	return nil
 }
 
 // List of transition rules.
@@ -3509,7 +3529,7 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\bProtocol\x12\x18\n" +
 	"\x14PROTOCOL_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rPROTOCOL_HTTP\x10\x01\x12\x12\n" +
-	"\x0ePROTOCOL_HTTPS\x10\x02\"\x8b\x11\n" +
+	"\x0ePROTOCOL_HTTPS\x10\x02\"\xbe\x12\n" +
 	"\rLifecycleRule\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12\x18\n" +
 	"\aenabled\x18\x02 \x01(\bR\aenabled\x12I\n" +
@@ -3525,12 +3545,14 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\tAfterDays\x12O\n" +
 	"\x15days_after_expiration\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x13daysAfterExpiration\x1a_\n" +
 	"\x17NoncurrentDeleteMarkers\x12D\n" +
-	"\x0fnoncurrent_days\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0enoncurrentDays\x1a\\\n" +
+	"\x0fnoncurrent_days\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0enoncurrentDays\x1a\xb5\x01\n" +
 	"\x14NoncurrentExpiration\x12D\n" +
-	"\x0fnoncurrent_days\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0enoncurrentDays\x1a\x87\x01\n" +
+	"\x0fnoncurrent_days\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0enoncurrentDays\x12W\n" +
+	"\x19newer_noncurrent_versions\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17newerNoncurrentVersions\x1a\xe0\x01\n" +
 	"\x14NoncurrentTransition\x12D\n" +
 	"\x0fnoncurrent_days\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0enoncurrentDays\x12)\n" +
-	"\rstorage_class\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\fstorageClass\x1a\x9e\x01\n" +
+	"\rstorage_class\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\fstorageClass\x12W\n" +
+	"\x19newer_noncurrent_versions\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17newerNoncurrentVersions\x1a\x9e\x01\n" +
 	"\n" +
 	"Transition\x12.\n" +
 	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12/\n" +
@@ -3814,29 +3836,31 @@ var file_yandex_cloud_storage_v1_bucket_proto_depIdxs = []int32{
 	51, // 57: yandex.cloud.storage.v1.LifecycleRule.AfterDays.days_after_expiration:type_name -> google.protobuf.Int64Value
 	51, // 58: yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers.noncurrent_days:type_name -> google.protobuf.Int64Value
 	51, // 59: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.noncurrent_days:type_name -> google.protobuf.Int64Value
-	51, // 60: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
-	49, // 61: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
-	51, // 62: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
-	49, // 63: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
-	51, // 64: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
-	50, // 65: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
-	51, // 66: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
-	51, // 67: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
-	13, // 68: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.tag:type_name -> yandex.cloud.storage.v1.Tag
-	41, // 69: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.and_operator:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
-	51, // 70: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_greater_than:type_name -> google.protobuf.Int64Value
-	51, // 71: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_less_than:type_name -> google.protobuf.Int64Value
-	13, // 72: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.tag:type_name -> yandex.cloud.storage.v1.Tag
-	7,  // 73: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
-	10, // 74: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.format:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.Format
-	52, // 75: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.prefix:type_name -> google.protobuf.StringValue
-	44, // 76: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination.bucket_destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
-	11, // 77: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.frequency:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.Frequency
-	78, // [78:78] is the sub-list for method output_type
-	78, // [78:78] is the sub-list for method input_type
-	78, // [78:78] is the sub-list for extension type_name
-	78, // [78:78] is the sub-list for extension extendee
-	0,  // [0:78] is the sub-list for field type_name
+	51, // 60: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
+	51, // 61: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
+	51, // 62: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
+	49, // 63: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
+	51, // 64: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
+	49, // 65: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
+	51, // 66: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
+	50, // 67: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
+	51, // 68: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	51, // 69: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
+	13, // 70: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.tag:type_name -> yandex.cloud.storage.v1.Tag
+	41, // 71: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.and_operator:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
+	51, // 72: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	51, // 73: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_less_than:type_name -> google.protobuf.Int64Value
+	13, // 74: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.tag:type_name -> yandex.cloud.storage.v1.Tag
+	7,  // 75: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
+	10, // 76: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.format:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.Format
+	52, // 77: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.prefix:type_name -> google.protobuf.StringValue
+	44, // 78: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination.bucket_destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
+	11, // 79: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.frequency:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.Frequency
+	80, // [80:80] is the sub-list for method output_type
+	80, // [80:80] is the sub-list for method input_type
+	80, // [80:80] is the sub-list for extension type_name
+	80, // [80:80] is the sub-list for extension extendee
+	0,  // [0:80] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_storage_v1_bucket_proto_init() }

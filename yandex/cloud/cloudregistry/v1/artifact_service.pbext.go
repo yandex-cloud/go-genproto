@@ -10,6 +10,10 @@ func (m *DeleteArtifactRequest) SetArtifactId(v string) {
 	m.ArtifactId = v
 }
 
+func (m *DeleteArtifactRequest) SetWithHistory(v bool) {
+	m.WithHistory = v
+}
+
 func (m *DeleteArtifactMetadata) SetArtifactId(v string) {
 	m.ArtifactId = v
 }

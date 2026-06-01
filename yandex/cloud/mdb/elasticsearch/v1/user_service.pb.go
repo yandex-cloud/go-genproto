@@ -29,11 +29,9 @@ const (
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster the user belongs to.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Elasticsearch user to return.
-	//
 	// To get the name of the user, make a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,15 +85,12 @@ func (x *GetUserRequest) GetUserName() string {
 type ListUsersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to list Elasticsearch users in.
-	//
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than `page_size`, the service returns a [ListUsersResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set `page_token` to the [ListUsersResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -158,7 +153,6 @@ type ListUsersResponse struct {
 	// List of Elasticsearch users.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListUsersRequest.page_size], use the `next_page_token` as the value for the [ListUsersRequest.page_token] parameter in the next list request.
 	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -213,7 +207,6 @@ func (x *ListUsersResponse) GetNextPageToken() string {
 type CreateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to create a user in.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the user to create.
@@ -323,11 +316,9 @@ func (x *CreateUserMetadata) GetUserName() string {
 type UpdateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster the user belongs to.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to be updated.
-	//
 	// To get the name of the user, make a [UserService.List] request.
 	UserName   string                 `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
@@ -452,11 +443,9 @@ func (x *UpdateUserMetadata) GetUserName() string {
 type DeleteUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster the user belongs to.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to delete.
-	//
 	// To get the name of the user, make a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -565,7 +554,7 @@ var File_yandex_cloud_mdb_elasticsearch_v1_user_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_elasticsearch_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/elasticsearch/v1/user_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/mdb/elasticsearch/v1/user.proto\x1a yandex/cloud/api/operation.proto\"y\n" +
+	"4yandex/cloud/mdb/elasticsearch/v1/user_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/mdb/elasticsearch/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +

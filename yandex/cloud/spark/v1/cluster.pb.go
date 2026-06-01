@@ -80,6 +80,170 @@ func (Health) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0}
 }
 
+type DetailedHealthCheck_Status int32
+
+const (
+	// Check status is unknown.
+	DetailedHealthCheck_STATUS_UNSPECIFIED DetailedHealthCheck_Status = 0
+	// Check succeeded.
+	DetailedHealthCheck_SUCCESS DetailedHealthCheck_Status = 1
+	// Check failed.
+	DetailedHealthCheck_FAIL DetailedHealthCheck_Status = 2
+)
+
+// Enum value maps for DetailedHealthCheck_Status.
+var (
+	DetailedHealthCheck_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "SUCCESS",
+		2: "FAIL",
+	}
+	DetailedHealthCheck_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"SUCCESS":            1,
+		"FAIL":               2,
+	}
+)
+
+func (x DetailedHealthCheck_Status) Enum() *DetailedHealthCheck_Status {
+	p := new(DetailedHealthCheck_Status)
+	*p = x
+	return p
+}
+
+func (x DetailedHealthCheck_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DetailedHealthCheck_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_spark_v1_cluster_proto_enumTypes[1].Descriptor()
+}
+
+func (DetailedHealthCheck_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_spark_v1_cluster_proto_enumTypes[1]
+}
+
+func (x DetailedHealthCheck_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DetailedHealthCheck_Status.Descriptor instead.
+func (DetailedHealthCheck_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0, 0}
+}
+
+type HealthDetail_Status int32
+
+const (
+	// Health status is unknown.
+	HealthDetail_STATUS_UNSPECIFIED HealthDetail_Status = 0
+	// Cluster is alive and operates properly.
+	HealthDetail_ALIVE HealthDetail_Status = 1
+	// Cluster is partially alive.
+	HealthDetail_DEGRADED HealthDetail_Status = 2
+	// Cluster is inoperable.
+	HealthDetail_DEAD HealthDetail_Status = 3
+)
+
+// Enum value maps for HealthDetail_Status.
+var (
+	HealthDetail_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "ALIVE",
+		2: "DEGRADED",
+		3: "DEAD",
+	}
+	HealthDetail_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"ALIVE":              1,
+		"DEGRADED":           2,
+		"DEAD":               3,
+	}
+)
+
+func (x HealthDetail_Status) Enum() *HealthDetail_Status {
+	p := new(HealthDetail_Status)
+	*p = x
+	return p
+}
+
+func (x HealthDetail_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HealthDetail_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_spark_v1_cluster_proto_enumTypes[2].Descriptor()
+}
+
+func (HealthDetail_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_spark_v1_cluster_proto_enumTypes[2]
+}
+
+func (x HealthDetail_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HealthDetail_Status.Descriptor instead.
+func (HealthDetail_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{1, 0}
+}
+
+type HealthDetail_CauseType int32
+
+const (
+	// Cause type is unknown.
+	HealthDetail_CAUSE_TYPE_UNSPECIFIED HealthDetail_CauseType = 0
+	// Health issue is caused by user actions.
+	HealthDetail_USER HealthDetail_CauseType = 1
+	// Health issue is caused by the service.
+	HealthDetail_SERVICE HealthDetail_CauseType = 2
+	// Health issue is caused by infrastructure.
+	HealthDetail_INFRA HealthDetail_CauseType = 3
+)
+
+// Enum value maps for HealthDetail_CauseType.
+var (
+	HealthDetail_CauseType_name = map[int32]string{
+		0: "CAUSE_TYPE_UNSPECIFIED",
+		1: "USER",
+		2: "SERVICE",
+		3: "INFRA",
+	}
+	HealthDetail_CauseType_value = map[string]int32{
+		"CAUSE_TYPE_UNSPECIFIED": 0,
+		"USER":                   1,
+		"SERVICE":                2,
+		"INFRA":                  3,
+	}
+)
+
+func (x HealthDetail_CauseType) Enum() *HealthDetail_CauseType {
+	p := new(HealthDetail_CauseType)
+	*p = x
+	return p
+}
+
+func (x HealthDetail_CauseType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HealthDetail_CauseType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_spark_v1_cluster_proto_enumTypes[3].Descriptor()
+}
+
+func (HealthDetail_CauseType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_spark_v1_cluster_proto_enumTypes[3]
+}
+
+func (x HealthDetail_CauseType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HealthDetail_CauseType.Descriptor instead.
+func (HealthDetail_CauseType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{1, 1}
+}
+
 // Cluster Status Enumeration.
 type Cluster_Status int32
 
@@ -137,11 +301,11 @@ func (x Cluster_Status) String() string {
 }
 
 func (Cluster_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_spark_v1_cluster_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_spark_v1_cluster_proto_enumTypes[4].Descriptor()
 }
 
 func (Cluster_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_spark_v1_cluster_proto_enumTypes[1]
+	return &file_yandex_cloud_spark_v1_cluster_proto_enumTypes[4]
 }
 
 func (x Cluster_Status) Number() protoreflect.EnumNumber {
@@ -150,7 +314,142 @@ func (x Cluster_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Cluster_Status.Descriptor instead.
 func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0, 0}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{2, 0}
+}
+
+type DetailedHealthCheck struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Check slug.
+	Slug string `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	// Check status.
+	Status DetailedHealthCheck_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.spark.v1.DetailedHealthCheck_Status" json:"status,omitempty"`
+	// Additional check details.
+	Details       map[string]string `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetailedHealthCheck) Reset() {
+	*x = DetailedHealthCheck{}
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetailedHealthCheck) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetailedHealthCheck) ProtoMessage() {}
+
+func (x *DetailedHealthCheck) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetailedHealthCheck.ProtoReflect.Descriptor instead.
+func (*DetailedHealthCheck) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DetailedHealthCheck) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *DetailedHealthCheck) GetStatus() DetailedHealthCheck_Status {
+	if x != nil {
+		return x.Status
+	}
+	return DetailedHealthCheck_STATUS_UNSPECIFIED
+}
+
+func (x *DetailedHealthCheck) GetDetails() map[string]string {
+	if x != nil {
+		return x.Details
+	}
+	return nil
+}
+
+type HealthDetail struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Health detail slug.
+	Slug string `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	// Health detail status.
+	Status HealthDetail_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.spark.v1.HealthDetail_Status" json:"status,omitempty"`
+	// Health detail cause type.
+	CauseType HealthDetail_CauseType `protobuf:"varint,3,opt,name=cause_type,json=causeType,proto3,enum=yandex.cloud.spark.v1.HealthDetail_CauseType" json:"cause_type,omitempty"`
+	// Health detail checks.
+	Checks        []*DetailedHealthCheck `protobuf:"bytes,4,rep,name=checks,proto3" json:"checks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthDetail) Reset() {
+	*x = HealthDetail{}
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthDetail) ProtoMessage() {}
+
+func (x *HealthDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthDetail.ProtoReflect.Descriptor instead.
+func (*HealthDetail) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *HealthDetail) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *HealthDetail) GetStatus() HealthDetail_Status {
+	if x != nil {
+		return x.Status
+	}
+	return HealthDetail_STATUS_UNSPECIFIED
+}
+
+func (x *HealthDetail) GetCauseType() HealthDetail_CauseType {
+	if x != nil {
+		return x.CauseType
+	}
+	return HealthDetail_CAUSE_TYPE_UNSPECIFIED
+}
+
+func (x *HealthDetail) GetChecks() []*DetailedHealthCheck {
+	if x != nil {
+		return x.Checks
+	}
+	return nil
 }
 
 // Spark cluster.
@@ -196,7 +495,7 @@ type Cluster struct {
 
 func (x *Cluster) Reset() {
 	*x = Cluster{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[0]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -208,7 +507,7 @@ func (x *Cluster) String() string {
 func (*Cluster) ProtoMessage() {}
 
 func (x *Cluster) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[0]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -221,7 +520,7 @@ func (x *Cluster) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cluster.ProtoReflect.Descriptor instead.
 func (*Cluster) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Cluster) GetId() string {
@@ -355,7 +654,7 @@ type ClusterConfig struct {
 
 func (x *ClusterConfig) Reset() {
 	*x = ClusterConfig{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[1]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -367,7 +666,7 @@ func (x *ClusterConfig) String() string {
 func (*ClusterConfig) ProtoMessage() {}
 
 func (x *ClusterConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[1]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -380,7 +679,7 @@ func (x *ClusterConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterConfig.ProtoReflect.Descriptor instead.
 func (*ClusterConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ClusterConfig) GetResourcePools() *ResourcePools {
@@ -437,7 +736,7 @@ type UpdateClusterConfigSpec struct {
 
 func (x *UpdateClusterConfigSpec) Reset() {
 	*x = UpdateClusterConfigSpec{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -449,7 +748,7 @@ func (x *UpdateClusterConfigSpec) String() string {
 func (*UpdateClusterConfigSpec) ProtoMessage() {}
 
 func (x *UpdateClusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -462,7 +761,7 @@ func (x *UpdateClusterConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterConfigSpec.ProtoReflect.Descriptor instead.
 func (*UpdateClusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateClusterConfigSpec) GetResourcePools() *ResourcePools {
@@ -511,7 +810,7 @@ type HistoryServerConfig struct {
 
 func (x *HistoryServerConfig) Reset() {
 	*x = HistoryServerConfig{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -523,7 +822,7 @@ func (x *HistoryServerConfig) String() string {
 func (*HistoryServerConfig) ProtoMessage() {}
 
 func (x *HistoryServerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -536,7 +835,7 @@ func (x *HistoryServerConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HistoryServerConfig.ProtoReflect.Descriptor instead.
 func (*HistoryServerConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *HistoryServerConfig) GetEnabled() bool {
@@ -559,7 +858,7 @@ type NetworkConfig struct {
 
 func (x *NetworkConfig) Reset() {
 	*x = NetworkConfig{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +870,7 @@ func (x *NetworkConfig) String() string {
 func (*NetworkConfig) ProtoMessage() {}
 
 func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +883,7 @@ func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkConfig.ProtoReflect.Descriptor instead.
 func (*NetworkConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *NetworkConfig) GetSubnetIds() []string {
@@ -612,7 +911,7 @@ type UpdateNetworkConfigSpec struct {
 
 func (x *UpdateNetworkConfigSpec) Reset() {
 	*x = UpdateNetworkConfigSpec{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -624,7 +923,7 @@ func (x *UpdateNetworkConfigSpec) String() string {
 func (*UpdateNetworkConfigSpec) ProtoMessage() {}
 
 func (x *UpdateNetworkConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -637,7 +936,7 @@ func (x *UpdateNetworkConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNetworkConfigSpec.ProtoReflect.Descriptor instead.
 func (*UpdateNetworkConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateNetworkConfigSpec) GetSecurityGroupIds() []string {
@@ -660,7 +959,7 @@ type ResourcePools struct {
 
 func (x *ResourcePools) Reset() {
 	*x = ResourcePools{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -672,7 +971,7 @@ func (x *ResourcePools) String() string {
 func (*ResourcePools) ProtoMessage() {}
 
 func (x *ResourcePools) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -685,7 +984,7 @@ func (x *ResourcePools) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourcePools.ProtoReflect.Descriptor instead.
 func (*ResourcePools) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ResourcePools) GetDriver() *ResourcePool {
@@ -715,7 +1014,7 @@ type ResourcePool struct {
 
 func (x *ResourcePool) Reset() {
 	*x = ResourcePool{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +1026,7 @@ func (x *ResourcePool) String() string {
 func (*ResourcePool) ProtoMessage() {}
 
 func (x *ResourcePool) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[7]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +1039,7 @@ func (x *ResourcePool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourcePool.ProtoReflect.Descriptor instead.
 func (*ResourcePool) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ResourcePool) GetResourcePresetId() string {
@@ -773,7 +1072,7 @@ type ScalePolicy struct {
 
 func (x *ScalePolicy) Reset() {
 	*x = ScalePolicy{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -785,7 +1084,7 @@ func (x *ScalePolicy) String() string {
 func (*ScalePolicy) ProtoMessage() {}
 
 func (x *ScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -798,7 +1097,7 @@ func (x *ScalePolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScalePolicy.ProtoReflect.Descriptor instead.
 func (*ScalePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ScalePolicy) GetScaleType() isScalePolicy_ScaleType {
@@ -857,7 +1156,7 @@ type Dependencies struct {
 
 func (x *Dependencies) Reset() {
 	*x = Dependencies{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -869,7 +1168,7 @@ func (x *Dependencies) String() string {
 func (*Dependencies) ProtoMessage() {}
 
 func (x *Dependencies) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -882,7 +1181,7 @@ func (x *Dependencies) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dependencies.ProtoReflect.Descriptor instead.
 func (*Dependencies) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Dependencies) GetPipPackages() []string {
@@ -910,7 +1209,7 @@ type Metastore struct {
 
 func (x *Metastore) Reset() {
 	*x = Metastore{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +1221,7 @@ func (x *Metastore) String() string {
 func (*Metastore) ProtoMessage() {}
 
 func (x *Metastore) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +1234,7 @@ func (x *Metastore) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Metastore.ProtoReflect.Descriptor instead.
 func (*Metastore) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Metastore) GetClusterId() string {
@@ -963,7 +1262,7 @@ type LoggingConfig struct {
 
 func (x *LoggingConfig) Reset() {
 	*x = LoggingConfig{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -975,7 +1274,7 @@ func (x *LoggingConfig) String() string {
 func (*LoggingConfig) ProtoMessage() {}
 
 func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -988,7 +1287,7 @@ func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggingConfig.ProtoReflect.Descriptor instead.
 func (*LoggingConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *LoggingConfig) GetEnabled() bool {
@@ -1054,7 +1353,7 @@ type UILink struct {
 
 func (x *UILink) Reset() {
 	*x = UILink{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1066,7 +1365,7 @@ func (x *UILink) String() string {
 func (*UILink) ProtoMessage() {}
 
 func (x *UILink) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1079,7 +1378,7 @@ func (x *UILink) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UILink.ProtoReflect.Descriptor instead.
 func (*UILink) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UILink) GetName() string {
@@ -1107,7 +1406,7 @@ type ScalePolicy_FixedScale struct {
 
 func (x *ScalePolicy_FixedScale) Reset() {
 	*x = ScalePolicy_FixedScale{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1119,7 +1418,7 @@ func (x *ScalePolicy_FixedScale) String() string {
 func (*ScalePolicy_FixedScale) ProtoMessage() {}
 
 func (x *ScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1132,7 +1431,7 @@ func (x *ScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScalePolicy_FixedScale.ProtoReflect.Descriptor instead.
 func (*ScalePolicy_FixedScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{8, 0}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{10, 0}
 }
 
 func (x *ScalePolicy_FixedScale) GetSize() int64 {
@@ -1155,7 +1454,7 @@ type ScalePolicy_AutoScale struct {
 
 func (x *ScalePolicy_AutoScale) Reset() {
 	*x = ScalePolicy_AutoScale{}
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1167,7 +1466,7 @@ func (x *ScalePolicy_AutoScale) String() string {
 func (*ScalePolicy_AutoScale) ProtoMessage() {}
 
 func (x *ScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_spark_v1_cluster_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1180,7 +1479,7 @@ func (x *ScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScalePolicy_AutoScale.ProtoReflect.Descriptor instead.
 func (*ScalePolicy_AutoScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{8, 1}
+	return file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP(), []int{10, 1}
 }
 
 func (x *ScalePolicy_AutoScale) GetMinSize() int64 {
@@ -1201,7 +1500,34 @@ var File_yandex_cloud_spark_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/spark/v1/cluster.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xb4\b\n" +
+	"#yandex/cloud/spark/v1/cluster.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/spark/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xbc\x02\n" +
+	"\x13DetailedHealthCheck\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\x12I\n" +
+	"\x06status\x18\x02 \x01(\x0e21.yandex.cloud.spark.v1.DetailedHealthCheck.StatusR\x06status\x12Q\n" +
+	"\adetails\x18\x03 \x03(\v27.yandex.cloud.spark.v1.DetailedHealthCheck.DetailsEntryR\adetails\x1a:\n" +
+	"\fDetailsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aSUCCESS\x10\x01\x12\b\n" +
+	"\x04FAIL\x10\x02\"\x88\x03\n" +
+	"\fHealthDetail\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\x12B\n" +
+	"\x06status\x18\x02 \x01(\x0e2*.yandex.cloud.spark.v1.HealthDetail.StatusR\x06status\x12L\n" +
+	"\n" +
+	"cause_type\x18\x03 \x01(\x0e2-.yandex.cloud.spark.v1.HealthDetail.CauseTypeR\tcauseType\x12B\n" +
+	"\x06checks\x18\x04 \x03(\v2*.yandex.cloud.spark.v1.DetailedHealthCheckR\x06checks\"C\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05ALIVE\x10\x01\x12\f\n" +
+	"\bDEGRADED\x10\x02\x12\b\n" +
+	"\x04DEAD\x10\x03\"I\n" +
+	"\tCauseType\x12\x1a\n" +
+	"\x16CAUSE_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04USER\x10\x01\x12\v\n" +
+	"\aSERVICE\x10\x02\x12\t\n" +
+	"\x05INFRA\x10\x03\"\xb4\b\n" +
 	"\aCluster\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -1306,60 +1632,71 @@ func file_yandex_cloud_spark_v1_cluster_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_spark_v1_cluster_proto_rawDescData
 }
 
-var file_yandex_cloud_spark_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_spark_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_spark_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_spark_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_spark_v1_cluster_proto_goTypes = []any{
 	(Health)(0),                     // 0: yandex.cloud.spark.v1.Health
-	(Cluster_Status)(0),             // 1: yandex.cloud.spark.v1.Cluster.Status
-	(*Cluster)(nil),                 // 2: yandex.cloud.spark.v1.Cluster
-	(*ClusterConfig)(nil),           // 3: yandex.cloud.spark.v1.ClusterConfig
-	(*UpdateClusterConfigSpec)(nil), // 4: yandex.cloud.spark.v1.UpdateClusterConfigSpec
-	(*HistoryServerConfig)(nil),     // 5: yandex.cloud.spark.v1.HistoryServerConfig
-	(*NetworkConfig)(nil),           // 6: yandex.cloud.spark.v1.NetworkConfig
-	(*UpdateNetworkConfigSpec)(nil), // 7: yandex.cloud.spark.v1.UpdateNetworkConfigSpec
-	(*ResourcePools)(nil),           // 8: yandex.cloud.spark.v1.ResourcePools
-	(*ResourcePool)(nil),            // 9: yandex.cloud.spark.v1.ResourcePool
-	(*ScalePolicy)(nil),             // 10: yandex.cloud.spark.v1.ScalePolicy
-	(*Dependencies)(nil),            // 11: yandex.cloud.spark.v1.Dependencies
-	(*Metastore)(nil),               // 12: yandex.cloud.spark.v1.Metastore
-	(*LoggingConfig)(nil),           // 13: yandex.cloud.spark.v1.LoggingConfig
-	(*UILink)(nil),                  // 14: yandex.cloud.spark.v1.UILink
-	nil,                             // 15: yandex.cloud.spark.v1.Cluster.LabelsEntry
-	(*ScalePolicy_FixedScale)(nil),  // 16: yandex.cloud.spark.v1.ScalePolicy.FixedScale
-	(*ScalePolicy_AutoScale)(nil),   // 17: yandex.cloud.spark.v1.ScalePolicy.AutoScale
-	(*timestamppb.Timestamp)(nil),   // 18: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),       // 19: yandex.cloud.spark.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),    // 20: yandex.cloud.spark.v1.MaintenanceOperation
+	(DetailedHealthCheck_Status)(0), // 1: yandex.cloud.spark.v1.DetailedHealthCheck.Status
+	(HealthDetail_Status)(0),        // 2: yandex.cloud.spark.v1.HealthDetail.Status
+	(HealthDetail_CauseType)(0),     // 3: yandex.cloud.spark.v1.HealthDetail.CauseType
+	(Cluster_Status)(0),             // 4: yandex.cloud.spark.v1.Cluster.Status
+	(*DetailedHealthCheck)(nil),     // 5: yandex.cloud.spark.v1.DetailedHealthCheck
+	(*HealthDetail)(nil),            // 6: yandex.cloud.spark.v1.HealthDetail
+	(*Cluster)(nil),                 // 7: yandex.cloud.spark.v1.Cluster
+	(*ClusterConfig)(nil),           // 8: yandex.cloud.spark.v1.ClusterConfig
+	(*UpdateClusterConfigSpec)(nil), // 9: yandex.cloud.spark.v1.UpdateClusterConfigSpec
+	(*HistoryServerConfig)(nil),     // 10: yandex.cloud.spark.v1.HistoryServerConfig
+	(*NetworkConfig)(nil),           // 11: yandex.cloud.spark.v1.NetworkConfig
+	(*UpdateNetworkConfigSpec)(nil), // 12: yandex.cloud.spark.v1.UpdateNetworkConfigSpec
+	(*ResourcePools)(nil),           // 13: yandex.cloud.spark.v1.ResourcePools
+	(*ResourcePool)(nil),            // 14: yandex.cloud.spark.v1.ResourcePool
+	(*ScalePolicy)(nil),             // 15: yandex.cloud.spark.v1.ScalePolicy
+	(*Dependencies)(nil),            // 16: yandex.cloud.spark.v1.Dependencies
+	(*Metastore)(nil),               // 17: yandex.cloud.spark.v1.Metastore
+	(*LoggingConfig)(nil),           // 18: yandex.cloud.spark.v1.LoggingConfig
+	(*UILink)(nil),                  // 19: yandex.cloud.spark.v1.UILink
+	nil,                             // 20: yandex.cloud.spark.v1.DetailedHealthCheck.DetailsEntry
+	nil,                             // 21: yandex.cloud.spark.v1.Cluster.LabelsEntry
+	(*ScalePolicy_FixedScale)(nil),  // 22: yandex.cloud.spark.v1.ScalePolicy.FixedScale
+	(*ScalePolicy_AutoScale)(nil),   // 23: yandex.cloud.spark.v1.ScalePolicy.AutoScale
+	(*timestamppb.Timestamp)(nil),   // 24: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),       // 25: yandex.cloud.spark.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),    // 26: yandex.cloud.spark.v1.MaintenanceOperation
 }
 var file_yandex_cloud_spark_v1_cluster_proto_depIdxs = []int32{
-	18, // 0: yandex.cloud.spark.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	15, // 1: yandex.cloud.spark.v1.Cluster.labels:type_name -> yandex.cloud.spark.v1.Cluster.LabelsEntry
-	3,  // 2: yandex.cloud.spark.v1.Cluster.config:type_name -> yandex.cloud.spark.v1.ClusterConfig
-	1,  // 3: yandex.cloud.spark.v1.Cluster.status:type_name -> yandex.cloud.spark.v1.Cluster.Status
-	6,  // 4: yandex.cloud.spark.v1.Cluster.network:type_name -> yandex.cloud.spark.v1.NetworkConfig
-	13, // 5: yandex.cloud.spark.v1.Cluster.logging:type_name -> yandex.cloud.spark.v1.LoggingConfig
-	0,  // 6: yandex.cloud.spark.v1.Cluster.health:type_name -> yandex.cloud.spark.v1.Health
-	14, // 7: yandex.cloud.spark.v1.Cluster.links:type_name -> yandex.cloud.spark.v1.UILink
-	19, // 8: yandex.cloud.spark.v1.Cluster.maintenance_window:type_name -> yandex.cloud.spark.v1.MaintenanceWindow
-	20, // 9: yandex.cloud.spark.v1.Cluster.planned_operation:type_name -> yandex.cloud.spark.v1.MaintenanceOperation
-	8,  // 10: yandex.cloud.spark.v1.ClusterConfig.resource_pools:type_name -> yandex.cloud.spark.v1.ResourcePools
-	5,  // 11: yandex.cloud.spark.v1.ClusterConfig.history_server:type_name -> yandex.cloud.spark.v1.HistoryServerConfig
-	11, // 12: yandex.cloud.spark.v1.ClusterConfig.dependencies:type_name -> yandex.cloud.spark.v1.Dependencies
-	12, // 13: yandex.cloud.spark.v1.ClusterConfig.metastore:type_name -> yandex.cloud.spark.v1.Metastore
-	8,  // 14: yandex.cloud.spark.v1.UpdateClusterConfigSpec.resource_pools:type_name -> yandex.cloud.spark.v1.ResourcePools
-	5,  // 15: yandex.cloud.spark.v1.UpdateClusterConfigSpec.history_server:type_name -> yandex.cloud.spark.v1.HistoryServerConfig
-	11, // 16: yandex.cloud.spark.v1.UpdateClusterConfigSpec.dependencies:type_name -> yandex.cloud.spark.v1.Dependencies
-	12, // 17: yandex.cloud.spark.v1.UpdateClusterConfigSpec.metastore:type_name -> yandex.cloud.spark.v1.Metastore
-	9,  // 18: yandex.cloud.spark.v1.ResourcePools.driver:type_name -> yandex.cloud.spark.v1.ResourcePool
-	9,  // 19: yandex.cloud.spark.v1.ResourcePools.executor:type_name -> yandex.cloud.spark.v1.ResourcePool
-	10, // 20: yandex.cloud.spark.v1.ResourcePool.scale_policy:type_name -> yandex.cloud.spark.v1.ScalePolicy
-	16, // 21: yandex.cloud.spark.v1.ScalePolicy.fixed_scale:type_name -> yandex.cloud.spark.v1.ScalePolicy.FixedScale
-	17, // 22: yandex.cloud.spark.v1.ScalePolicy.auto_scale:type_name -> yandex.cloud.spark.v1.ScalePolicy.AutoScale
-	23, // [23:23] is the sub-list for method output_type
-	23, // [23:23] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	1,  // 0: yandex.cloud.spark.v1.DetailedHealthCheck.status:type_name -> yandex.cloud.spark.v1.DetailedHealthCheck.Status
+	20, // 1: yandex.cloud.spark.v1.DetailedHealthCheck.details:type_name -> yandex.cloud.spark.v1.DetailedHealthCheck.DetailsEntry
+	2,  // 2: yandex.cloud.spark.v1.HealthDetail.status:type_name -> yandex.cloud.spark.v1.HealthDetail.Status
+	3,  // 3: yandex.cloud.spark.v1.HealthDetail.cause_type:type_name -> yandex.cloud.spark.v1.HealthDetail.CauseType
+	5,  // 4: yandex.cloud.spark.v1.HealthDetail.checks:type_name -> yandex.cloud.spark.v1.DetailedHealthCheck
+	24, // 5: yandex.cloud.spark.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	21, // 6: yandex.cloud.spark.v1.Cluster.labels:type_name -> yandex.cloud.spark.v1.Cluster.LabelsEntry
+	8,  // 7: yandex.cloud.spark.v1.Cluster.config:type_name -> yandex.cloud.spark.v1.ClusterConfig
+	4,  // 8: yandex.cloud.spark.v1.Cluster.status:type_name -> yandex.cloud.spark.v1.Cluster.Status
+	11, // 9: yandex.cloud.spark.v1.Cluster.network:type_name -> yandex.cloud.spark.v1.NetworkConfig
+	18, // 10: yandex.cloud.spark.v1.Cluster.logging:type_name -> yandex.cloud.spark.v1.LoggingConfig
+	0,  // 11: yandex.cloud.spark.v1.Cluster.health:type_name -> yandex.cloud.spark.v1.Health
+	19, // 12: yandex.cloud.spark.v1.Cluster.links:type_name -> yandex.cloud.spark.v1.UILink
+	25, // 13: yandex.cloud.spark.v1.Cluster.maintenance_window:type_name -> yandex.cloud.spark.v1.MaintenanceWindow
+	26, // 14: yandex.cloud.spark.v1.Cluster.planned_operation:type_name -> yandex.cloud.spark.v1.MaintenanceOperation
+	13, // 15: yandex.cloud.spark.v1.ClusterConfig.resource_pools:type_name -> yandex.cloud.spark.v1.ResourcePools
+	10, // 16: yandex.cloud.spark.v1.ClusterConfig.history_server:type_name -> yandex.cloud.spark.v1.HistoryServerConfig
+	16, // 17: yandex.cloud.spark.v1.ClusterConfig.dependencies:type_name -> yandex.cloud.spark.v1.Dependencies
+	17, // 18: yandex.cloud.spark.v1.ClusterConfig.metastore:type_name -> yandex.cloud.spark.v1.Metastore
+	13, // 19: yandex.cloud.spark.v1.UpdateClusterConfigSpec.resource_pools:type_name -> yandex.cloud.spark.v1.ResourcePools
+	10, // 20: yandex.cloud.spark.v1.UpdateClusterConfigSpec.history_server:type_name -> yandex.cloud.spark.v1.HistoryServerConfig
+	16, // 21: yandex.cloud.spark.v1.UpdateClusterConfigSpec.dependencies:type_name -> yandex.cloud.spark.v1.Dependencies
+	17, // 22: yandex.cloud.spark.v1.UpdateClusterConfigSpec.metastore:type_name -> yandex.cloud.spark.v1.Metastore
+	14, // 23: yandex.cloud.spark.v1.ResourcePools.driver:type_name -> yandex.cloud.spark.v1.ResourcePool
+	14, // 24: yandex.cloud.spark.v1.ResourcePools.executor:type_name -> yandex.cloud.spark.v1.ResourcePool
+	15, // 25: yandex.cloud.spark.v1.ResourcePool.scale_policy:type_name -> yandex.cloud.spark.v1.ScalePolicy
+	22, // 26: yandex.cloud.spark.v1.ScalePolicy.fixed_scale:type_name -> yandex.cloud.spark.v1.ScalePolicy.FixedScale
+	23, // 27: yandex.cloud.spark.v1.ScalePolicy.auto_scale:type_name -> yandex.cloud.spark.v1.ScalePolicy.AutoScale
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_spark_v1_cluster_proto_init() }
@@ -1368,11 +1705,11 @@ func file_yandex_cloud_spark_v1_cluster_proto_init() {
 		return
 	}
 	file_yandex_cloud_spark_v1_maintenance_proto_init()
-	file_yandex_cloud_spark_v1_cluster_proto_msgTypes[8].OneofWrappers = []any{
+	file_yandex_cloud_spark_v1_cluster_proto_msgTypes[10].OneofWrappers = []any{
 		(*ScalePolicy_FixedScale_)(nil),
 		(*ScalePolicy_AutoScale_)(nil),
 	}
-	file_yandex_cloud_spark_v1_cluster_proto_msgTypes[11].OneofWrappers = []any{
+	file_yandex_cloud_spark_v1_cluster_proto_msgTypes[13].OneofWrappers = []any{
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
@@ -1381,8 +1718,8 @@ func file_yandex_cloud_spark_v1_cluster_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_spark_v1_cluster_proto_rawDesc), len(file_yandex_cloud_spark_v1_cluster_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   16,
+			NumEnums:      5,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

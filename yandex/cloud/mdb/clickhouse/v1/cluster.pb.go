@@ -395,7 +395,7 @@ const (
 	Service_DEAD Service_Health = 2
 	// The service is read-only.
 	Service_READONLY Service_Health = 3
-	// The service is restoring from backup or syncronzing from other replica.
+	// The service is restoring from backup or synchronizing from other replica.
 	Service_RESTORING Service_Health = 4
 )
 
@@ -721,7 +721,8 @@ type ClusterConfig struct {
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy for external services.
-	Access       *Access       `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
+	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
+	// Cloud storage configuration.
 	CloudStorage *CloudStorage `protobuf:"bytes,6,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	// Whether database management through SQL commands is enabled.
 	SqlDatabaseManagement *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=sql_database_management,json=sqlDatabaseManagement,proto3" json:"sql_database_management,omitempty"`
@@ -917,8 +918,9 @@ func (x *Shard) GetConfig() *ShardConfig {
 }
 
 type Shards struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Shards        []*Shard               `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of shards.
+	Shards        []*Shard `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1098,10 +1100,11 @@ type Host struct {
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Flag showing public IP assignment status to this host.
-	AssignPublicIp bool   `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	ShardName      string `protobuf:"bytes,10,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
+	// Name of the shard that the host belongs to.
+	ShardName     string `protobuf:"bytes,10,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Host) Reset() {
@@ -1421,11 +1424,20 @@ func (x *Access) GetYandexQuery() bool {
 type CloudStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether to use Object Storage for storing ClickHouse data.
-	Enabled          bool                    `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	MoveFactor       *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=move_factor,json=moveFactor,proto3" json:"move_factor,omitempty"`
-	DataCacheEnabled *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=data_cache_enabled,json=dataCacheEnabled,proto3" json:"data_cache_enabled,omitempty"`
-	DataCacheMaxSize *wrapperspb.Int64Value  `protobuf:"bytes,4,opt,name=data_cache_max_size,json=dataCacheMaxSize,proto3" json:"data_cache_max_size,omitempty"`
-	PreferNotToMerge *wrapperspb.BoolValue   `protobuf:"bytes,5,opt,name=prefer_not_to_merge,json=preferNotToMerge,proto3" json:"prefer_not_to_merge,omitempty"`
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// The share of available free space on local storage. If the space becomes less, the data will start transferring
+	// to Object Storage. For transfer, chunks are sorted by size from larger to smaller (descending) and chunks whose
+	// total size is sufficient to meet the move_factor condition are selected, if the total size of all chunks is
+	// insufficient, all chunks will be moved.
+	//
+	// Default value: **0.01**.
+	MoveFactor *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=move_factor,json=moveFactor,proto3" json:"move_factor,omitempty"`
+	// Enables or disables caching Object Storage data on file system.
+	DataCacheEnabled *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=data_cache_enabled,json=dataCacheEnabled,proto3" json:"data_cache_enabled,omitempty"`
+	// Limits the maximum size of Object Storage data cache.
+	DataCacheMaxSize *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=data_cache_max_size,json=dataCacheMaxSize,proto3" json:"data_cache_max_size,omitempty"`
+	// Disables or enables merging date parts storing in Object Storage.
+	PreferNotToMerge *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=prefer_not_to_merge,json=preferNotToMerge,proto3" json:"prefer_not_to_merge,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }

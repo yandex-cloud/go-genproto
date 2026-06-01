@@ -131,9 +131,9 @@ const file_yandex_cloud_mdb_mongodb_v1_database_proto_rawDesc = "" +
 	"\bDatabase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\"G\n" +
-	"\fDatabaseSpec\x127\n" +
-	"\x04name\x18\x01 \x01(\tB#\xe8\xc71\x01\xf2\xc71\x13[a-zA-Z0-9_-]{1,63}\x8a\xc81\x04<=63R\x04nameBj\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\"B\n" +
+	"\fDatabaseSpec\x122\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04nameBj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
 
 var (

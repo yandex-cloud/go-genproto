@@ -74,7 +74,10 @@ func (x *GetArtifactRequest) GetArtifactId() string {
 type DeleteArtifactRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the artifact to delete.
-	ArtifactId    string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	ArtifactId string `protobuf:"bytes,1,opt,name=artifact_id,json=artifactId,proto3" json:"artifact_id,omitempty"`
+	// Also removes artifact history.
+	// This allows rewriting artifacts in registries with enabled immutable artifact policy.
+	WithHistory   bool `protobuf:"varint,2,opt,name=with_history,json=withHistory,proto3" json:"with_history,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -114,6 +117,13 @@ func (x *DeleteArtifactRequest) GetArtifactId() string {
 		return x.ArtifactId
 	}
 	return ""
+}
+
+func (x *DeleteArtifactRequest) GetWithHistory() bool {
+	if x != nil {
+		return x.WithHistory
+	}
+	return false
 }
 
 type DeleteArtifactMetadata struct {
@@ -330,10 +340,11 @@ const file_yandex_cloud_cloudregistry_v1_artifact_service_proto_rawDesc = "" +
 	"4yandex/cloud/cloudregistry/v1/artifact_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetArtifactRequest\x12-\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"artifactId\"F\n" +
+	"artifactId\"o\n" +
 	"\x15DeleteArtifactRequest\x12-\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"artifactId\"9\n" +
+	"artifactId\x12'\n" +
+	"\fwith_history\x18\x02 \x01(\bB\x04\xe8\xc71\x00R\vwithHistory\"9\n" +
 	"\x16DeleteArtifactMetadata\x12\x1f\n" +
 	"\vartifact_id\x18\x01 \x01(\tR\n" +
 	"artifactId\"c\n" +

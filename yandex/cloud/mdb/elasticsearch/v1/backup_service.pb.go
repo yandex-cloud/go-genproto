@@ -197,7 +197,7 @@ var File_yandex_cloud_mdb_elasticsearch_v1_backup_service_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_elasticsearch_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/elasticsearch/v1/backup_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a.yandex/cloud/mdb/elasticsearch/v1/backup.proto\"5\n" +
+	"6yandex/cloud/mdb/elasticsearch/v1/backup_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a.yandex/cloud/mdb/elasticsearch/v1/backup.proto\x1a\x1dyandex/cloud/validation.proto\"5\n" +
 	"\x10GetBackupRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\x92\x01\n" +
 	"\x12ListBackupsRequest\x12)\n" +

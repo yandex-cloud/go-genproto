@@ -614,7 +614,7 @@ var File_yandex_cloud_mdb_elasticsearch_v1_auth_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_elasticsearch_v1_auth_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/elasticsearch/v1/auth_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/mdb/elasticsearch/v1/auth.proto\"G\n" +
+	"4yandex/cloud/mdb/elasticsearch/v1/auth_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/mdb/elasticsearch/v1/auth.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"G\n" +
 	"\x18ListAuthProvidersRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"j\n" +

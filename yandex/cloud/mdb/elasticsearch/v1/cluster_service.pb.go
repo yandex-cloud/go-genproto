@@ -181,7 +181,6 @@ func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []i
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to return.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -228,7 +227,6 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list Elasticsearch clusters in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
@@ -238,12 +236,10 @@ type ListClustersRequest struct {
 	// To get the next page of results, set `page_token` to the [ListClustersResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently you can only use filtering with the [Cluster.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-zA-Z0-9_-]+`.
-	//
 	// Example of a filter: `name NOT IN 'test,beta'`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -313,7 +309,6 @@ type ListClustersResponse struct {
 	// List of Elasticsearch clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use `next_page_token` as the value
 	// for the [ListClustersRequest.page_token] parameter in the next list request.
 	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
@@ -375,7 +370,6 @@ type CreateClusterRequest struct {
 	// Description of the Elasticsearch cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Elasticsearch cluster as `key:value` pairs.
-	//
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Deployment environment of the Elasticsearch cluster.
@@ -577,21 +571,17 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to update.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId  string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New description of the Elasticsearch cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Elasticsearch cluster as `key:value` pairs.
-	//
 	// For example, "project": "mvp" or "source": "dictionary".
-	//
 	// The new set of labels will completely replace the old ones.
 	// To add a label, request the current set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New configuration and resources for hosts in the Elasticsearch cluster.
-	//
 	// Use [update_mask] to prevent reverting all cluster settings that are not listed in `config_spec` to their default values.
 	ConfigSpec *ConfigSpecUpdate `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// New name for the Elasticsearch cluster.
@@ -765,7 +755,6 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to delete.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -857,11 +846,9 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to request logs for.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
-	//
 	// If no columns are specified, full log records are returned.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
 	// Start timestamp for the logs request.
@@ -869,24 +856,19 @@ type ListClusterLogsRequest struct {
 	// End timestamp for the logs request.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than `page_size`, the service returns a [ListClusterLogsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set `page_token` to the [ListClusterLogsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,6,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// The flag that defines behavior of providing the next page token.
-	//
 	// If this flag is set to `true`, this API method will always return [ListClusterLogsResponse.next_page_token], even if current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,7,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-z0-9.-]{1,61}`.
-	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Type of the service to request logs about.
@@ -1048,10 +1030,8 @@ type ListClusterLogsResponse struct {
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterLogsRequest.page_size], use `next_page_token` as the value for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
-	//
 	// This value is interchangeable with [StreamLogRecord.next_record_token] from StreamLogs method.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1107,9 +1087,7 @@ type StreamLogRecord struct {
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// This token allows you to continue streaming logs starting from the exact same record.
-	//
 	// To continue streaming, specify value of `next_record_token` as value for [StreamClusterLogsRequest.record_token] parameter in the next StreamLogs request.
-	//
 	// This value is interchangeable with [ListClusterLogsResponse.next_page_token] from ListLogs method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1163,31 +1141,25 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
-	//
 	// If no columns are specified, full log records are returned.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
-	//
 	// If this field is not set, all existing logs will be sent and then the new ones asthey appear.
 	// In essence it has `tail -f` semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// Record token.
-	//
 	// Set `record_token` to the [StreamLogRecord.next_record_token] returned by a previous [ClusterService.StreamLogs] request to start streaming from next log record.
 	RecordToken string `protobuf:"bytes,5,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter string `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Type of the service to request logs about.
@@ -1278,15 +1250,12 @@ func (x *StreamClusterLogsRequest) GetServiceType() StreamClusterLogsRequest_Ser
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to list operations for.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than `page_size`, the service returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set `page_token` to the [ListClusterOperationsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1349,7 +1318,6 @@ type ListClusterOperationsResponse struct {
 	// List of operations for the specified Elasticsearch cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the `next_page_token` as the value for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -1404,15 +1372,12 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than `page_size`, the service returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set `page_token` to the [ListClusterHostsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1475,7 +1440,6 @@ type ListClusterHostsResponse struct {
 	// List of hosts.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the `next_page_token` as the value for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -1530,7 +1494,6 @@ func (x *ListClusterHostsResponse) GetNextPageToken() string {
 type MoveClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to move.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
@@ -1649,7 +1612,6 @@ func (x *MoveClusterMetadata) GetDestinationFolderId() string {
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to start.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1741,7 +1703,6 @@ func (x *StartClusterMetadata) GetClusterId() string {
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Elasticsearch cluster to stop.
-	//
 	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1837,7 +1798,6 @@ type HostSpec struct {
 	// ID of the subnet the host resides in.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// The flag that defines whether a public IP address is assigned to the host.
-	//
 	// If the value is `true`, then this host is available on the Internet via it's public IP address.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Host type.
@@ -2120,32 +2080,28 @@ func (x *ConfigSpecUpdate) GetAdminPassword() string {
 	return ""
 }
 
-type AddClusterHostsRequest struct {
+type BackupClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Elasticsearch cluster.
-	//
-	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// One or more configurations of hosts to be added to the Elasticsearch cluster.
-	HostSpecs     []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
+	// Required. ID of the ElasticSearch cluster to back up.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddClusterHostsRequest) Reset() {
-	*x = AddClusterHostsRequest{}
+func (x *BackupClusterRequest) Reset() {
+	*x = BackupClusterRequest{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddClusterHostsRequest) String() string {
+func (x *BackupClusterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddClusterHostsRequest) ProtoMessage() {}
+func (*BackupClusterRequest) ProtoMessage() {}
 
-func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
+func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2157,159 +2113,240 @@ func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddClusterHostsRequest.ProtoReflect.Descriptor instead.
-func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use BackupClusterRequest.ProtoReflect.Descriptor instead.
+func (*BackupClusterRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
-func (x *AddClusterHostsRequest) GetClusterId() string {
+func (x *BackupClusterRequest) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
 
-func (x *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
+type BackupClusterMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ElasticSearch cluster.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BackupClusterMetadata) Reset() {
+	*x = BackupClusterMetadata{}
+	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BackupClusterMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BackupClusterMetadata) ProtoMessage() {}
+
+func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BackupClusterMetadata.ProtoReflect.Descriptor instead.
+func (*BackupClusterMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *BackupClusterMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+type RestoreClusterRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. ID of the backup to restore from.
+	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	// Name of the ElasticSearch cluster. The name must be unique within the folder.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the ElasticSearch cluster.
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// Custom labels for the ElasticSearch cluster as “ key:value “ pairs. Maximum 64 per resource.
+	// For example, "project": "mvp" or "source": "dictionary".
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Deployment environment of the ElasticSearch cluster.
+	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.elasticsearch.v1.Cluster_Environment" json:"environment,omitempty"`
+	// Configuration and resources for hosts that should be created for the ElasticSearch cluster.
+	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
+	// Required. Configuration of ElasticSearch hosts.
+	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
+	// ID of the network to create the cluster in.
+	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
+	// User security groups
+	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
+	// ID of the service account used for access to Object Storage.
+	ServiceAccountId string `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Deletion Protection inhibits deletion of the cluster
+	DeletionProtection bool `protobuf:"varint,13,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	// ID of the folder to create the ElasticSearch cluster in.
+	FolderId       string           `protobuf:"bytes,14,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	ExtensionSpecs []*ExtensionSpec `protobuf:"bytes,15,rep,name=extension_specs,json=extensionSpecs,proto3" json:"extension_specs,omitempty"` // optional
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *RestoreClusterRequest) Reset() {
+	*x = RestoreClusterRequest{}
+	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RestoreClusterRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RestoreClusterRequest) ProtoMessage() {}
+
+func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RestoreClusterRequest.ProtoReflect.Descriptor instead.
+func (*RestoreClusterRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *RestoreClusterRequest) GetBackupId() string {
+	if x != nil {
+		return x.BackupId
+	}
+	return ""
+}
+
+func (x *RestoreClusterRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *RestoreClusterRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *RestoreClusterRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *RestoreClusterRequest) GetEnvironment() Cluster_Environment {
+	if x != nil {
+		return x.Environment
+	}
+	return Cluster_ENVIRONMENT_UNSPECIFIED
+}
+
+func (x *RestoreClusterRequest) GetConfigSpec() *ConfigSpec {
+	if x != nil {
+		return x.ConfigSpec
+	}
+	return nil
+}
+
+func (x *RestoreClusterRequest) GetHostSpecs() []*HostSpec {
 	if x != nil {
 		return x.HostSpecs
 	}
 	return nil
 }
 
-type AddClusterHostsMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Elasticsearch cluster.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Names of the host that are being added.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AddClusterHostsMetadata) Reset() {
-	*x = AddClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddClusterHostsMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddClusterHostsMetadata) ProtoMessage() {}
-
-func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[29]
+func (x *RestoreClusterRequest) GetNetworkId() string {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
-func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{29}
-}
-
-func (x *AddClusterHostsMetadata) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
+		return x.NetworkId
 	}
 	return ""
 }
 
-func (x *AddClusterHostsMetadata) GetHostNames() []string {
+func (x *RestoreClusterRequest) GetSecurityGroupIds() []string {
 	if x != nil {
-		return x.HostNames
+		return x.SecurityGroupIds
 	}
 	return nil
 }
 
-type DeleteClusterHostsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Elasticsearch cluster.
-	//
-	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Names of the hosts to delete.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteClusterHostsRequest) Reset() {
-	*x = DeleteClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[30]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteClusterHostsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteClusterHostsRequest) ProtoMessage() {}
-
-func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[30]
+func (x *RestoreClusterRequest) GetServiceAccountId() string {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteClusterHostsRequest.ProtoReflect.Descriptor instead.
-func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{30}
-}
-
-func (x *DeleteClusterHostsRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
+		return x.ServiceAccountId
 	}
 	return ""
 }
 
-func (x *DeleteClusterHostsRequest) GetHostNames() []string {
+func (x *RestoreClusterRequest) GetDeletionProtection() bool {
 	if x != nil {
-		return x.HostNames
+		return x.DeletionProtection
+	}
+	return false
+}
+
+func (x *RestoreClusterRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *RestoreClusterRequest) GetExtensionSpecs() []*ExtensionSpec {
+	if x != nil {
+		return x.ExtensionSpecs
 	}
 	return nil
 }
 
-type DeleteClusterHostsMetadata struct {
+type RestoreClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Elasticsearch cluster.
+	// Required. ID of the new ElasticSearch cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Names of the hosts that are being deleted.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	// Required. ID of the backup used for recovery.
+	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DeleteClusterHostsMetadata) Reset() {
-	*x = DeleteClusterHostsMetadata{}
+func (x *RestoreClusterMetadata) Reset() {
+	*x = RestoreClusterMetadata{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteClusterHostsMetadata) String() string {
+func (x *RestoreClusterMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteClusterHostsMetadata) ProtoMessage() {}
+func (*RestoreClusterMetadata) ProtoMessage() {}
 
-func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
+func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2321,23 +2358,23 @@ func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteClusterHostsMetadata.ProtoReflect.Descriptor instead.
-func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use RestoreClusterMetadata.ProtoReflect.Descriptor instead.
+func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *DeleteClusterHostsMetadata) GetClusterId() string {
+func (x *RestoreClusterMetadata) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
 
-func (x *DeleteClusterHostsMetadata) GetHostNames() []string {
+func (x *RestoreClusterMetadata) GetBackupId() string {
 	if x != nil {
-		return x.HostNames
+		return x.BackupId
 	}
-	return nil
+	return ""
 }
 
 type RescheduleMaintenanceRequest struct {
@@ -2457,52 +2494,31 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 	return nil
 }
 
-type RestoreClusterRequest struct {
+type AddClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the backup to restore from.
-	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	// Name of the ElasticSearch cluster. The name must be unique within the folder.
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the ElasticSearch cluster.
-	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the ElasticSearch cluster as “ key:value “ pairs. Maximum 64 per resource.
-	// For example, "project": "mvp" or "source": "dictionary".
-	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the ElasticSearch cluster.
-	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.elasticsearch.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration and resources for hosts that should be created for the ElasticSearch cluster.
-	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Required. Configuration of ElasticSearch hosts.
-	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	// ID of the network to create the cluster in.
-	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// User security groups
-	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
-	// ID of the service account used for access to Object Storage.
-	ServiceAccountId string `protobuf:"bytes,12,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Deletion Protection inhibits deletion of the cluster
-	DeletionProtection bool `protobuf:"varint,13,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	// ID of the folder to create the ElasticSearch cluster in.
-	FolderId       string           `protobuf:"bytes,14,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	ExtensionSpecs []*ExtensionSpec `protobuf:"bytes,15,rep,name=extension_specs,json=extensionSpecs,proto3" json:"extension_specs,omitempty"` // optional
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// ID of the Elasticsearch cluster.
+	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// One or more configurations of hosts to be added to the Elasticsearch cluster.
+	HostSpecs     []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RestoreClusterRequest) Reset() {
-	*x = RestoreClusterRequest{}
+func (x *AddClusterHostsRequest) Reset() {
+	*x = AddClusterHostsRequest{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RestoreClusterRequest) String() string {
+func (x *AddClusterHostsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RestoreClusterRequest) ProtoMessage() {}
+func (*AddClusterHostsRequest) ProtoMessage() {}
 
-func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
+func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2514,126 +2530,49 @@ func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RestoreClusterRequest.ProtoReflect.Descriptor instead.
-func (*RestoreClusterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddClusterHostsRequest.ProtoReflect.Descriptor instead.
+func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *RestoreClusterRequest) GetBackupId() string {
+func (x *AddClusterHostsRequest) GetClusterId() string {
 	if x != nil {
-		return x.BackupId
+		return x.ClusterId
 	}
 	return ""
 }
 
-func (x *RestoreClusterRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *RestoreClusterRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *RestoreClusterRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *RestoreClusterRequest) GetEnvironment() Cluster_Environment {
-	if x != nil {
-		return x.Environment
-	}
-	return Cluster_ENVIRONMENT_UNSPECIFIED
-}
-
-func (x *RestoreClusterRequest) GetConfigSpec() *ConfigSpec {
-	if x != nil {
-		return x.ConfigSpec
-	}
-	return nil
-}
-
-func (x *RestoreClusterRequest) GetHostSpecs() []*HostSpec {
+func (x *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
 	if x != nil {
 		return x.HostSpecs
 	}
 	return nil
 }
 
-func (x *RestoreClusterRequest) GetNetworkId() string {
-	if x != nil {
-		return x.NetworkId
-	}
-	return ""
-}
-
-func (x *RestoreClusterRequest) GetSecurityGroupIds() []string {
-	if x != nil {
-		return x.SecurityGroupIds
-	}
-	return nil
-}
-
-func (x *RestoreClusterRequest) GetServiceAccountId() string {
-	if x != nil {
-		return x.ServiceAccountId
-	}
-	return ""
-}
-
-func (x *RestoreClusterRequest) GetDeletionProtection() bool {
-	if x != nil {
-		return x.DeletionProtection
-	}
-	return false
-}
-
-func (x *RestoreClusterRequest) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *RestoreClusterRequest) GetExtensionSpecs() []*ExtensionSpec {
-	if x != nil {
-		return x.ExtensionSpecs
-	}
-	return nil
-}
-
-type RestoreClusterMetadata struct {
+type AddClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the new ElasticSearch cluster.
+	// ID of the Elasticsearch cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. ID of the backup used for recovery.
-	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
+	// Names of the host that are being added.
+	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RestoreClusterMetadata) Reset() {
-	*x = RestoreClusterMetadata{}
+func (x *AddClusterHostsMetadata) Reset() {
+	*x = AddClusterHostsMetadata{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RestoreClusterMetadata) String() string {
+func (x *AddClusterHostsMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RestoreClusterMetadata) ProtoMessage() {}
+func (*AddClusterHostsMetadata) ProtoMessage() {}
 
-func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
+func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2645,47 +2584,50 @@ func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RestoreClusterMetadata.ProtoReflect.Descriptor instead.
-func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
+func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{35}
 }
 
-func (x *RestoreClusterMetadata) GetClusterId() string {
+func (x *AddClusterHostsMetadata) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
 
-func (x *RestoreClusterMetadata) GetBackupId() string {
+func (x *AddClusterHostsMetadata) GetHostNames() []string {
 	if x != nil {
-		return x.BackupId
+		return x.HostNames
 	}
-	return ""
+	return nil
 }
 
-type BackupClusterRequest struct {
+type DeleteClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the ElasticSearch cluster to back up.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the Elasticsearch cluster.
+	// To get the Elasticsearch cluster ID, make a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Names of the hosts to delete.
+	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BackupClusterRequest) Reset() {
-	*x = BackupClusterRequest{}
+func (x *DeleteClusterHostsRequest) Reset() {
+	*x = DeleteClusterHostsRequest{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BackupClusterRequest) String() string {
+func (x *DeleteClusterHostsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BackupClusterRequest) ProtoMessage() {}
+func (*DeleteClusterHostsRequest) ProtoMessage() {}
 
-func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2697,40 +2639,49 @@ func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BackupClusterRequest.ProtoReflect.Descriptor instead.
-func (*BackupClusterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteClusterHostsRequest.ProtoReflect.Descriptor instead.
+func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{36}
 }
 
-func (x *BackupClusterRequest) GetClusterId() string {
+func (x *DeleteClusterHostsRequest) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
 
-type BackupClusterMetadata struct {
+func (x *DeleteClusterHostsRequest) GetHostNames() []string {
+	if x != nil {
+		return x.HostNames
+	}
+	return nil
+}
+
+type DeleteClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the ElasticSearch cluster.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the Elasticsearch cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Names of the hosts that are being deleted.
+	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BackupClusterMetadata) Reset() {
-	*x = BackupClusterMetadata{}
+func (x *DeleteClusterHostsMetadata) Reset() {
+	*x = DeleteClusterHostsMetadata{}
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BackupClusterMetadata) String() string {
+func (x *DeleteClusterHostsMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BackupClusterMetadata) ProtoMessage() {}
+func (*DeleteClusterHostsMetadata) ProtoMessage() {}
 
-func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
+func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2742,16 +2693,23 @@ func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BackupClusterMetadata.ProtoReflect.Descriptor instead.
-func (*BackupClusterMetadata) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteClusterHostsMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *BackupClusterMetadata) GetClusterId() string {
+func (x *DeleteClusterHostsMetadata) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
+}
+
+func (x *DeleteClusterHostsMetadata) GetHostNames() []string {
+	if x != nil {
+		return x.HostNames
+	}
+	return nil
 }
 
 type ListClusterBackupsRequest struct {
@@ -3193,41 +3151,13 @@ const file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDesc = "" 
 	"\aversion\x18\x01 \x01(\tR\aversion\x12c\n" +
 	"\x12elasticsearch_spec\x18\x02 \x01(\v24.yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpecR\x11elasticsearchSpec\x12\x18\n" +
 	"\aedition\x18\x03 \x01(\tR\aedition\x12%\n" +
-	"\x0eadmin_password\x18\x04 \x01(\tR\radminPassword\"\x99\x01\n" +
-	"\x16AddClusterHostsRequest\x12+\n" +
+	"\x0eadmin_password\x18\x04 \x01(\tR\radminPassword\"C\n" +
+	"\x14BackupClusterRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12R\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
+	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"host_specs\x18\x02 \x03(\v2+.yandex.cloud.mdb.elasticsearch.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"W\n" +
-	"\x17AddClusterHostsMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
-	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"x\n" +
-	"\x19DeleteClusterHostsRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12.\n" +
-	"\n" +
-	"host_names\x18\x02 \x03(\tB\x0f\x82\xc81\x02>0\x8a\xc81\x05<=253R\thostNames\"Z\n" +
-	"\x1aDeleteClusterHostsMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
-	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\xfb\x02\n" +
-	"\x1cRescheduleMaintenanceRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12}\n" +
-	"\x0freschedule_type\x18\x02 \x01(\x0e2N.yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.RescheduleTypeB\x04\xe8\xc71\x01R\x0erescheduleType\x12?\n" +
-	"\rdelayed_until\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntil\"n\n" +
-	"\x0eRescheduleType\x12\x1f\n" +
-	"\x1bRESCHEDULE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
-	"\tIMMEDIATE\x10\x01\x12\x19\n" +
-	"\x15NEXT_AVAILABLE_WINDOW\x10\x02\x12\x11\n" +
-	"\rSPECIFIC_TIME\x10\x03\"\x85\x01\n" +
-	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12?\n" +
-	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xbc\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xbc\a\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3252,13 +3182,41 @@ const file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDesc = "" 
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"C\n" +
-	"\x14BackupClusterRequest\x12+\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xfb\x02\n" +
+	"\x1cRescheduleMaintenanceRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
-	"\x15BackupClusterMetadata\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12}\n" +
+	"\x0freschedule_type\x18\x02 \x01(\x0e2N.yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.RescheduleTypeB\x04\xe8\xc71\x01R\x0erescheduleType\x12?\n" +
+	"\rdelayed_until\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntil\"n\n" +
+	"\x0eRescheduleType\x12\x1f\n" +
+	"\x1bRESCHEDULE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tIMMEDIATE\x10\x01\x12\x19\n" +
+	"\x15NEXT_AVAILABLE_WINDOW\x10\x02\x12\x11\n" +
+	"\rSPECIFIC_TIME\x10\x03\"\x85\x01\n" +
+	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x9b\x01\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12?\n" +
+	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\x99\x01\n" +
+	"\x16AddClusterHostsRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12R\n" +
+	"\n" +
+	"host_specs\x18\x02 \x03(\v2+.yandex.cloud.mdb.elasticsearch.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"W\n" +
+	"\x17AddClusterHostsMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
+	"\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"x\n" +
+	"\x19DeleteClusterHostsRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12.\n" +
+	"\n" +
+	"host_names\x18\x02 \x03(\tB\x0f\x82\xc81\x02>0\x8a\xc81\x05<=253R\thostNames\"Z\n" +
+	"\x1aDeleteClusterHostsMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
+	"\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"\x9b\x01\n" +
 	"\x19ListClusterBackupsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -3277,18 +3235,20 @@ const file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDesc = "" 
 	"\x06Update\x127.yandex.cloud.mdb.elasticsearch.v1.UpdateClusterRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2* \n" +
 	"\x15UpdateClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x024:\x01*2//managed-elasticsearch/v1/clusters/{cluster_id}\x12\xcf\x01\n" +
 	"\x06Delete\x127.yandex.cloud.mdb.elasticsearch.v1.DeleteClusterRequest\x1a!.yandex.cloud.operation.Operation\"i\xb2\xd2*.\n" +
-	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x021*//managed-elasticsearch/v1/clusters/{cluster_id}\x12\xc3\x01\n" +
+	"\x15DeleteClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x021*//managed-elasticsearch/v1/clusters/{cluster_id}\x12\xc8\x01\n" +
+	"\x06Backup\x127.yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2* \n" +
+	"\x15BackupClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x028\"6/managed-elasticsearch/v1/clusters/{cluster_id}:backup\x12\xc2\x01\n" +
+	"\aRestore\x128.yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*!\n" +
+	"\x16RestoreClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02/:\x01*\"*/managed-elasticsearch/v1/clusters:restore\x12\xf9\x01\n" +
+	"\x15RescheduleMaintenance\x12?.yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*(\n" +
+	"\x1dRescheduleMaintenanceMetadata\x12\aCluster\x82\xd3\xe4\x93\x02J:\x01*\"E/managed-elasticsearch/v1/clusters/{cluster_id}:rescheduleMaintenance\x12\xcb\x01\n" +
+	"\vListBackups\x12<.yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsRequest\x1a=.yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-elasticsearch/v1/clusters/{cluster_id}/backups\x12\xc3\x01\n" +
 	"\x04Move\x125.yandex.cloud.mdb.elasticsearch.v1.MoveClusterRequest\x1a!.yandex.cloud.operation.Operation\"a\xb2\xd2*\x1e\n" +
 	"\x13MoveClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x029:\x01*\"4/managed-elasticsearch/v1/clusters/{cluster_id}:move\x12\xc4\x01\n" +
 	"\x05Start\x126.yandex.cloud.mdb.elasticsearch.v1.StartClusterRequest\x1a!.yandex.cloud.operation.Operation\"`\xb2\xd2*\x1f\n" +
 	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x027\"5/managed-elasticsearch/v1/clusters/{cluster_id}:start\x12\xc0\x01\n" +
 	"\x04Stop\x125.yandex.cloud.mdb.elasticsearch.v1.StopClusterRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2*\x1e\n" +
-	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x026\"4/managed-elasticsearch/v1/clusters/{cluster_id}:stop\x12\xc8\x01\n" +
-	"\x06Backup\x127.yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest\x1a!.yandex.cloud.operation.Operation\"b\xb2\xd2* \n" +
-	"\x15BackupClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x028\"6/managed-elasticsearch/v1/clusters/{cluster_id}:backup\x12\xcb\x01\n" +
-	"\vListBackups\x12<.yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsRequest\x1a=.yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-elasticsearch/v1/clusters/{cluster_id}/backups\x12\xc2\x01\n" +
-	"\aRestore\x128.yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest\x1a!.yandex.cloud.operation.Operation\"Z\xb2\xd2*!\n" +
-	"\x16RestoreClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x02/:\x01*\"*/managed-elasticsearch/v1/clusters:restore\x12\xbf\x01\n" +
+	"\x13StopClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x026\"4/managed-elasticsearch/v1/clusters/{cluster_id}:stop\x12\xbf\x01\n" +
 	"\bListLogs\x129.yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsRequest\x1a:.yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsResponse\"<\x82\xd3\xe4\x93\x026\x124/managed-elasticsearch/v1/clusters/{cluster_id}:logs\x12\xc4\x01\n" +
 	"\n" +
 	"StreamLogs\x12;.yandex.cloud.mdb.elasticsearch.v1.StreamClusterLogsRequest\x1a2.yandex.cloud.mdb.elasticsearch.v1.StreamLogRecord\"C\x82\xd3\xe4\x93\x02=\x12;/managed-elasticsearch/v1/clusters/{cluster_id}:stream_logs0\x01\x12\xd7\x01\n" +
@@ -3297,9 +3257,7 @@ const file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_rawDesc = "" 
 	"\bAddHosts\x129.yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"\x80\x01\xb2\xd2*0\n" +
 	"\x17AddClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02F:\x01*\"A/managed-elasticsearch/v1/clusters/{cluster_id}/hosts:batchCreate\x12\xf4\x01\n" +
 	"\vDeleteHosts\x12<.yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsRequest\x1a!.yandex.cloud.operation.Operation\"\x83\x01\xb2\xd2*3\n" +
-	"\x1aDeleteClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02F:\x01*\"A/managed-elasticsearch/v1/clusters/{cluster_id}/hosts:batchDelete\x12\xf9\x01\n" +
-	"\x15RescheduleMaintenance\x12?.yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"|\xb2\xd2*(\n" +
-	"\x1dRescheduleMaintenanceMetadata\x12\aCluster\x82\xd3\xe4\x93\x02J:\x01*\"E/managed-elasticsearch/v1/clusters/{cluster_id}:rescheduleMaintenanceB|\n" +
+	"\x1aDeleteClusterHostsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02F:\x01*\"A/managed-elasticsearch/v1/clusters/{cluster_id}/hosts:batchDeleteB|\n" +
 	"%yandex.cloud.api.mdb.elasticsearch.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/elasticsearch/v1;elasticsearchb\x06proto3"
 
 var (
@@ -3348,16 +3306,16 @@ var file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_goTypes = []any
 	(*ElasticsearchSpec)(nil),                        // 28: yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec
 	(*ConfigSpec)(nil),                               // 29: yandex.cloud.mdb.elasticsearch.v1.ConfigSpec
 	(*ConfigSpecUpdate)(nil),                         // 30: yandex.cloud.mdb.elasticsearch.v1.ConfigSpecUpdate
-	(*AddClusterHostsRequest)(nil),                   // 31: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest
-	(*AddClusterHostsMetadata)(nil),                  // 32: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsMetadata
-	(*DeleteClusterHostsRequest)(nil),                // 33: yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsRequest
-	(*DeleteClusterHostsMetadata)(nil),               // 34: yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsMetadata
+	(*BackupClusterRequest)(nil),                     // 31: yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest
+	(*BackupClusterMetadata)(nil),                    // 32: yandex.cloud.mdb.elasticsearch.v1.BackupClusterMetadata
+	(*RestoreClusterRequest)(nil),                    // 33: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest
+	(*RestoreClusterMetadata)(nil),                   // 34: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterMetadata
 	(*RescheduleMaintenanceRequest)(nil),             // 35: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest
 	(*RescheduleMaintenanceMetadata)(nil),            // 36: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceMetadata
-	(*RestoreClusterRequest)(nil),                    // 37: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest
-	(*RestoreClusterMetadata)(nil),                   // 38: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterMetadata
-	(*BackupClusterRequest)(nil),                     // 39: yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest
-	(*BackupClusterMetadata)(nil),                    // 40: yandex.cloud.mdb.elasticsearch.v1.BackupClusterMetadata
+	(*AddClusterHostsRequest)(nil),                   // 37: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest
+	(*AddClusterHostsMetadata)(nil),                  // 38: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsMetadata
+	(*DeleteClusterHostsRequest)(nil),                // 39: yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsRequest
+	(*DeleteClusterHostsMetadata)(nil),               // 40: yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsMetadata
 	(*ListClusterBackupsRequest)(nil),                // 41: yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsRequest
 	(*ListClusterBackupsResponse)(nil),               // 42: yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse
 	nil,                                              // 43: yandex.cloud.mdb.elasticsearch.v1.CreateClusterRequest.LabelsEntry
@@ -3410,15 +3368,15 @@ var file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_depIdxs = []int
 	47, // 26: yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec.master_node:type_name -> yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec.MasterNode
 	28, // 27: yandex.cloud.mdb.elasticsearch.v1.ConfigSpec.elasticsearch_spec:type_name -> yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec
 	28, // 28: yandex.cloud.mdb.elasticsearch.v1.ConfigSpecUpdate.elasticsearch_spec:type_name -> yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec
-	27, // 29: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.HostSpec
-	2,  // 30: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.RescheduleType
-	55, // 31: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	55, // 32: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	48, // 33: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.LabelsEntry
-	50, // 34: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.elasticsearch.v1.Cluster.Environment
-	29, // 35: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.elasticsearch.v1.ConfigSpec
-	27, // 36: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.HostSpec
-	53, // 37: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.extension_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.ExtensionSpec
+	48, // 29: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.LabelsEntry
+	50, // 30: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.elasticsearch.v1.Cluster.Environment
+	29, // 31: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.elasticsearch.v1.ConfigSpec
+	27, // 32: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.HostSpec
+	53, // 33: yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest.extension_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.ExtensionSpec
+	2,  // 34: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.RescheduleType
+	55, // 35: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	55, // 36: yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	27, // 37: yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.elasticsearch.v1.HostSpec
 	59, // 38: yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.elasticsearch.v1.Backup
 	60, // 39: yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec.DataNode.elasticsearch_config_7:type_name -> yandex.cloud.mdb.elasticsearch.v1.config.ElasticsearchConfig7
 	61, // 40: yandex.cloud.mdb.elasticsearch.v1.ElasticsearchSpec.DataNode.resources:type_name -> yandex.cloud.mdb.elasticsearch.v1.Resources
@@ -3428,37 +3386,37 @@ var file_yandex_cloud_mdb_elasticsearch_v1_cluster_service_proto_depIdxs = []int
 	6,  // 44: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.elasticsearch.v1.CreateClusterRequest
 	8,  // 45: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.elasticsearch.v1.UpdateClusterRequest
 	10, // 46: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.elasticsearch.v1.DeleteClusterRequest
-	21, // 47: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.elasticsearch.v1.MoveClusterRequest
-	23, // 48: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.elasticsearch.v1.StartClusterRequest
-	25, // 49: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.elasticsearch.v1.StopClusterRequest
-	39, // 50: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest
-	41, // 51: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsRequest
-	37, // 52: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest
-	12, // 53: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsRequest
-	16, // 54: yandex.cloud.mdb.elasticsearch.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.elasticsearch.v1.StreamClusterLogsRequest
-	17, // 55: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterOperationsRequest
-	19, // 56: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterHostsRequest
-	31, // 57: yandex.cloud.mdb.elasticsearch.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest
-	33, // 58: yandex.cloud.mdb.elasticsearch.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsRequest
-	35, // 59: yandex.cloud.mdb.elasticsearch.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest
+	31, // 47: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.elasticsearch.v1.BackupClusterRequest
+	33, // 48: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.elasticsearch.v1.RestoreClusterRequest
+	35, // 49: yandex.cloud.mdb.elasticsearch.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.elasticsearch.v1.RescheduleMaintenanceRequest
+	41, // 50: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsRequest
+	21, // 51: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.elasticsearch.v1.MoveClusterRequest
+	23, // 52: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.elasticsearch.v1.StartClusterRequest
+	25, // 53: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.elasticsearch.v1.StopClusterRequest
+	12, // 54: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsRequest
+	16, // 55: yandex.cloud.mdb.elasticsearch.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.elasticsearch.v1.StreamClusterLogsRequest
+	17, // 56: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterOperationsRequest
+	19, // 57: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterHostsRequest
+	37, // 58: yandex.cloud.mdb.elasticsearch.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.AddClusterHostsRequest
+	39, // 59: yandex.cloud.mdb.elasticsearch.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.elasticsearch.v1.DeleteClusterHostsRequest
 	49, // 60: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.elasticsearch.v1.Cluster
 	5,  // 61: yandex.cloud.mdb.elasticsearch.v1.ClusterService.List:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClustersResponse
 	56, // 62: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
 	56, // 63: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
 	56, // 64: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	56, // 65: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	56, // 66: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	56, // 67: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	56, // 68: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	42, // 69: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse
-	56, // 70: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	14, // 71: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsResponse
-	15, // 72: yandex.cloud.mdb.elasticsearch.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.elasticsearch.v1.StreamLogRecord
-	18, // 73: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterOperationsResponse
-	20, // 74: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterHostsResponse
-	56, // 75: yandex.cloud.mdb.elasticsearch.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	56, // 76: yandex.cloud.mdb.elasticsearch.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	56, // 77: yandex.cloud.mdb.elasticsearch.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	56, // 65: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	56, // 66: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	56, // 67: yandex.cloud.mdb.elasticsearch.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	42, // 68: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterBackupsResponse
+	56, // 69: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	56, // 70: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	56, // 71: yandex.cloud.mdb.elasticsearch.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	14, // 72: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterLogsResponse
+	15, // 73: yandex.cloud.mdb.elasticsearch.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.elasticsearch.v1.StreamLogRecord
+	18, // 74: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterOperationsResponse
+	20, // 75: yandex.cloud.mdb.elasticsearch.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.elasticsearch.v1.ListClusterHostsResponse
+	56, // 76: yandex.cloud.mdb.elasticsearch.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	56, // 77: yandex.cloud.mdb.elasticsearch.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
 	60, // [60:78] is the sub-list for method output_type
 	42, // [42:60] is the sub-list for method input_type
 	42, // [42:42] is the sub-list for extension type_name

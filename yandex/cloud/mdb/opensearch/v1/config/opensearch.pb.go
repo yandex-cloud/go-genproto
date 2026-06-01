@@ -33,7 +33,7 @@ type OpenSearchConfig2 struct {
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-cluster-level-index-settings).
-	MaxClauseCount *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_clause_count,proto3" json:"max_clause_count,omitempty"`
+	MaxClauseCount *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_clause_count,json=maxClauseCount,proto3" json:"max_clause_count,omitempty"`
 	// The maximum size of the field data cache.
 	// May be specified as an absolute value (for example, 8GB) or a percentage of the node heap (for example, 50%).
 	// This setting is dynamic. If you don't specify this setting, the maximum size is 35%.
@@ -42,7 +42,7 @@ type OpenSearchConfig2 struct {
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-cluster-level-index-settings).
-	FielddataCacheSize string `protobuf:"bytes,4,opt,name=fielddata_cache_size,proto3" json:"fielddata_cache_size,omitempty"`
+	FielddataCacheSize string `protobuf:"bytes,4,opt,name=fielddata_cache_size,json=fielddataCacheSize,proto3" json:"fielddata_cache_size,omitempty"`
 	// The maximum number of aggregation buckets allowed in a single response. Default is 65535
 	//
 	// Default value: **65535**.
@@ -50,13 +50,13 @@ type OpenSearchConfig2 struct {
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/search-settings).
-	SearchMaxBuckets *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=search_max_buckets,proto3" json:"search_max_buckets,omitempty"`
+	SearchMaxBuckets *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=search_max_buckets,json=searchMaxBuckets,proto3" json:"search_max_buckets,omitempty"`
 	// Allowed remote hosts
 	//
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/api-reference/document-apis/reindex/#remote-cluster-allow-list).
-	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
+	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,json=reindexRemoteWhitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
 	// Sets the maximum length allowed for HTTP URLs in the initial request line. URLs exceeding this limit will be rejected. Default is **4kb**.
 	//
 	// Default value: **4kb**.
@@ -64,7 +64,7 @@ type OpenSearchConfig2 struct {
 	// Change of the setting is applied with restart.
 	//
 	// For details, see [OpenSearch documentation](https://docs.opensearch.org/latest/install-and-configure/configuring-opensearch/network-settings/#advanced-http-settings).
-	HttpMaxInitialLineLength *wrapperspb.StringValue `protobuf:"bytes,8,opt,name=http_max_initial_line_length,proto3" json:"http_max_initial_line_length,omitempty"`
+	HttpMaxInitialLineLength *wrapperspb.StringValue `protobuf:"bytes,8,opt,name=http_max_initial_line_length,json=httpMaxInitialLineLength,proto3" json:"http_max_initial_line_length,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -201,19 +201,19 @@ var File_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa1\x03\n" +
-	"\x11OpenSearchConfig2\x12U\n" +
-	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b32-32768R\x10max_clause_count\x122\n" +
-	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x14fielddata_cache_size\x12]\n" +
-	"\x12search_max_buckets\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12search_max_buckets\x12:\n" +
-	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x18reindex_remote_whitelist\x12`\n" +
-	"\x1chttp_max_initial_line_length\x18\b \x01(\v2\x1c.google.protobuf.StringValueR\x1chttp_max_initial_line_lengthJ\x04\b\a\x10\b\"\xbd\x02\n" +
+	"6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\x02\n" +
+	"\x11OpenSearchConfig2\x12E\n" +
+	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxClauseCount\x120\n" +
+	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x12fielddataCacheSize\x12I\n" +
+	"\x12search_max_buckets\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x10searchMaxBuckets\x128\n" +
+	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x16reindexRemoteWhitelist\x12\\\n" +
+	"\x1chttp_max_initial_line_length\x18\b \x01(\v2\x1c.google.protobuf.StringValueR\x18httpMaxInitialLineLengthJ\x04\b\x01\x10\x03J\x04\b\a\x10\b\"\xbd\x02\n" +
 	"\x14OpenSearchConfigSet2\x12i\n" +
 	"\x10effective_config\x18\x01 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12Y\n" +
 	"\vuser_config\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\n" +
 	"userConfig\x12_\n" +
-	"\x0edefault_config\x18\x03 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\rdefaultConfigBz\n" +
-	"\"yandex.cloud.api.mdb.opensearch.v1ZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config;opensearchb\x06proto3"
+	"\x0edefault_config\x18\x03 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2R\rdefaultConfigB~\n" +
+	"&yandex.cloud.api.api.mdb.opensearch.v1ZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config;opensearchb\x06proto3"
 
 var (
 	file_yandex_cloud_mdb_opensearch_v1_config_opensearch_proto_rawDescOnce sync.Once

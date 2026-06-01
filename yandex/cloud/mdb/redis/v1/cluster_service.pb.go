@@ -3891,20 +3891,21 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.redis.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfb\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x80\n" +
+	"\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12L\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12J\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12+\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12(\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12\x18\n" +
+	" \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12\x18\n" +
 	"\asharded\x18\v \x01(\bR\asharded\x12,\n" +
 	"\x12security_group_ids\x18\f \x03(\tR\x10securityGroupIds\x12;\n" +
 	"\vtls_enabled\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
@@ -3923,14 +3924,14 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8b\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x94\a\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12F\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12F\n" +
 	"\vconfig_spec\x18\x05 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecR\n" +
 	"configSpec\x12.\n" +
 	"\x04name\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12[\n" +
@@ -3938,9 +3939,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\b \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x12]\n" +
 	"\x10persistence_mode\x18\n" +
-	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12'\n" +
+	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12(\n" +
 	"\n" +
-	"network_id\x18\v \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12-\n" +
+	"network_id\x18\v \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12-\n" +
 	"\x12announce_hostnames\x18\f \x01(\bR\x11announceHostnames\x12#\n" +
 	"\rauth_sentinel\x18\r \x01(\bR\fauthSentinel\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -3990,20 +3991,20 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8e\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x93\n" +
 	"\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.mdb.redis.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.mdb.redis.v1.RestoreClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12L\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12B\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12+\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12(\n" +
 	"\n" +
-	"network_id\x18\b \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
+	"network_id\x18\b \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
 	"\x12security_group_ids\x18\n" +
 	" \x03(\tR\x10securityGroupIds\x12;\n" +

@@ -75,6 +75,34 @@ func (m *Cluster) SetPlannedOperation(v *MaintenanceOperation) {
 	m.PlannedOperation = v
 }
 
+func (m *DetailedHealthCheck) SetSlug(v string) {
+	m.Slug = v
+}
+
+func (m *DetailedHealthCheck) SetStatus(v DetailedHealthCheck_Status) {
+	m.Status = v
+}
+
+func (m *DetailedHealthCheck) SetDetails(v map[string]string) {
+	m.Details = v
+}
+
+func (m *HealthDetail) SetSlug(v string) {
+	m.Slug = v
+}
+
+func (m *HealthDetail) SetStatus(v HealthDetail_Status) {
+	m.Status = v
+}
+
+func (m *HealthDetail) SetCauseType(v HealthDetail_CauseType) {
+	m.CauseType = v
+}
+
+func (m *HealthDetail) SetChecks(v []*DetailedHealthCheck) {
+	m.Checks = v
+}
+
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
@@ -213,6 +241,16 @@ func (m *ExchangeManagerStorage) SetServiceS3(v *ExchangeManagerStorage_ServiceS
 	m.Type = &ExchangeManagerStorage_ServiceS3_{
 		ServiceS3: v,
 	}
+}
+
+func (m *ExchangeManagerStorage) SetS3(v *ExchangeManagerStorage_S3) {
+	m.Type = &ExchangeManagerStorage_S3_{
+		S3: v,
+	}
+}
+
+func (m *ExchangeManagerStorage_S3) SetBucket(v string) {
+	m.Bucket = v
 }
 
 func (m *ExchangeManagerConfig) SetAdditionalProperties(v map[string]string) {

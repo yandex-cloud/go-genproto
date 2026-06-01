@@ -25,19 +25,19 @@ const (
 	ClusterService_Create_FullMethodName                = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Create"
 	ClusterService_Update_FullMethodName                = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Update"
 	ClusterService_Delete_FullMethodName                = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Delete"
+	ClusterService_Backup_FullMethodName                = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Backup"
+	ClusterService_Restore_FullMethodName               = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Restore"
+	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/RescheduleMaintenance"
+	ClusterService_ListBackups_FullMethodName           = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListBackups"
 	ClusterService_Move_FullMethodName                  = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Move"
 	ClusterService_Start_FullMethodName                 = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Start"
 	ClusterService_Stop_FullMethodName                  = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Stop"
-	ClusterService_Backup_FullMethodName                = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Backup"
-	ClusterService_ListBackups_FullMethodName           = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListBackups"
-	ClusterService_Restore_FullMethodName               = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/Restore"
 	ClusterService_ListLogs_FullMethodName              = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListLogs"
 	ClusterService_StreamLogs_FullMethodName            = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/StreamLogs"
 	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListOperations"
 	ClusterService_ListHosts_FullMethodName             = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/ListHosts"
 	ClusterService_AddHosts_FullMethodName              = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/AddHosts"
 	ClusterService_DeleteHosts_FullMethodName           = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/DeleteHosts"
-	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.mdb.elasticsearch.v1.ClusterService/RescheduleMaintenance"
 )
 
 // ClusterServiceClient is the client API for ClusterService service.
@@ -47,7 +47,6 @@ const (
 // A set of methods for managing Elasticsearch clusters.
 type ClusterServiceClient interface {
 	// Returns the specified Elasticsearch cluster.
-	//
 	// To get the list of available Elasticsearch clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of Elasticsearch clusters that belong to the specified folder.
@@ -58,20 +57,21 @@ type ClusterServiceClient interface {
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Elasticsearch cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Create a backup for the specified ElasticSearch cluster.
+	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Creates a new ElasticSearch cluster from the specified backup.
+	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the list of available backups for the specified Elasticsearch cluster.
+	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Moves the specified Elasticsearch cluster to the specified folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Starts the specified Elasticsearch cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops the specified Elasticsearch cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Create a backup for the specified ElasticSearch cluster.
-	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Returns the list of available backups for the specified Elasticsearch cluster.
-	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
-	// Creates a new ElasticSearch cluster from the specified backup.
-	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified Elasticsearch cluster.
-	//
 	// For more information about logs, see the [Logs](/docs/managed-elasticsearch/operations/cluster-logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also supports `tail -f` semantics.
@@ -84,8 +84,6 @@ type ClusterServiceClient interface {
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes specified hosts from the specified Elasticsearch cluster.
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
-	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type clusterServiceClient struct {
@@ -146,6 +144,46 @@ func (c *clusterServiceClient) Delete(ctx context.Context, in *DeleteClusterRequ
 	return out, nil
 }
 
+func (c *clusterServiceClient) Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_Backup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_Restore_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ClusterService_RescheduleMaintenance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListClusterBackupsResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListBackups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *clusterServiceClient) Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -170,36 +208,6 @@ func (c *clusterServiceClient) Stop(ctx context.Context, in *StopClusterRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, ClusterService_Stop_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_Backup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterBackupsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListBackups_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_Restore_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -275,16 +283,6 @@ func (c *clusterServiceClient) DeleteHosts(ctx context.Context, in *DeleteCluste
 	return out, nil
 }
 
-func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, ClusterService_RescheduleMaintenance_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ClusterServiceServer is the server API for ClusterService service.
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
@@ -292,7 +290,6 @@ func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *Re
 // A set of methods for managing Elasticsearch clusters.
 type ClusterServiceServer interface {
 	// Returns the specified Elasticsearch cluster.
-	//
 	// To get the list of available Elasticsearch clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of Elasticsearch clusters that belong to the specified folder.
@@ -303,20 +300,21 @@ type ClusterServiceServer interface {
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Elasticsearch cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
+	// Create a backup for the specified ElasticSearch cluster.
+	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
+	// Creates a new ElasticSearch cluster from the specified backup.
+	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
+	// Reschedule planned maintenance operation.
+	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
+	// Returns the list of available backups for the specified Elasticsearch cluster.
+	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Moves the specified Elasticsearch cluster to the specified folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
 	// Starts the specified Elasticsearch cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
 	// Stops the specified Elasticsearch cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Create a backup for the specified ElasticSearch cluster.
-	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
-	// Returns the list of available backups for the specified Elasticsearch cluster.
-	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
-	// Creates a new ElasticSearch cluster from the specified backup.
-	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified Elasticsearch cluster.
-	//
 	// For more information about logs, see the [Logs](/docs/managed-elasticsearch/operations/cluster-logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also supports `tail -f` semantics.
@@ -329,8 +327,6 @@ type ClusterServiceServer interface {
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Deletes specified hosts from the specified Elasticsearch cluster.
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
-	// Reschedule planned maintenance operation.
-	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 }
 
 // UnimplementedClusterServiceServer should be embedded to have
@@ -355,6 +351,18 @@ func (UnimplementedClusterServiceServer) Update(context.Context, *UpdateClusterR
 func (UnimplementedClusterServiceServer) Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
+func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Backup not implemented")
+}
+func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Restore not implemented")
+}
+func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method RescheduleMaintenance not implemented")
+}
+func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListBackups not implemented")
+}
 func (UnimplementedClusterServiceServer) Move(context.Context, *MoveClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
 }
@@ -363,15 +371,6 @@ func (UnimplementedClusterServiceServer) Start(context.Context, *StartClusterReq
 }
 func (UnimplementedClusterServiceServer) Stop(context.Context, *StopClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Stop not implemented")
-}
-func (UnimplementedClusterServiceServer) Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Backup not implemented")
-}
-func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListBackups not implemented")
-}
-func (UnimplementedClusterServiceServer) Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Restore not implemented")
 }
 func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListLogs not implemented")
@@ -390,9 +389,6 @@ func (UnimplementedClusterServiceServer) AddHosts(context.Context, *AddClusterHo
 }
 func (UnimplementedClusterServiceServer) DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteHosts not implemented")
-}
-func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method RescheduleMaintenance not implemented")
 }
 func (UnimplementedClusterServiceServer) testEmbeddedByValue() {}
 
@@ -504,6 +500,78 @@ func _ClusterService_Delete_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Backup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Backup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Backup(ctx, req.(*BackupClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreClusterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).Restore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_Restore_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).Restore(ctx, req.(*RestoreClusterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RescheduleMaintenanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_RescheduleMaintenance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, req.(*RescheduleMaintenanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterBackupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListBackups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_ListBackups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListBackups(ctx, req.(*ListClusterBackupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ClusterService_Move_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MoveClusterRequest)
 	if err := dec(in); err != nil {
@@ -554,60 +622,6 @@ func _ClusterService_Stop_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).Stop(ctx, req.(*StopClusterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_Backup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BackupClusterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).Backup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_Backup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).Backup(ctx, req.(*BackupClusterRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterBackupsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListBackups(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListBackups_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListBackups(ctx, req.(*ListClusterBackupsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_Restore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RestoreClusterRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).Restore(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_Restore_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).Restore(ctx, req.(*RestoreClusterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -713,24 +727,6 @@ func _ClusterService_DeleteHosts_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RescheduleMaintenanceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_RescheduleMaintenance_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).RescheduleMaintenance(ctx, req.(*RescheduleMaintenanceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ClusterService_ServiceDesc is the grpc.ServiceDesc for ClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -759,6 +755,22 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_Delete_Handler,
 		},
 		{
+			MethodName: "Backup",
+			Handler:    _ClusterService_Backup_Handler,
+		},
+		{
+			MethodName: "Restore",
+			Handler:    _ClusterService_Restore_Handler,
+		},
+		{
+			MethodName: "RescheduleMaintenance",
+			Handler:    _ClusterService_RescheduleMaintenance_Handler,
+		},
+		{
+			MethodName: "ListBackups",
+			Handler:    _ClusterService_ListBackups_Handler,
+		},
+		{
 			MethodName: "Move",
 			Handler:    _ClusterService_Move_Handler,
 		},
@@ -769,18 +781,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Stop",
 			Handler:    _ClusterService_Stop_Handler,
-		},
-		{
-			MethodName: "Backup",
-			Handler:    _ClusterService_Backup_Handler,
-		},
-		{
-			MethodName: "ListBackups",
-			Handler:    _ClusterService_ListBackups_Handler,
-		},
-		{
-			MethodName: "Restore",
-			Handler:    _ClusterService_Restore_Handler,
 		},
 		{
 			MethodName: "ListLogs",
@@ -801,10 +801,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteHosts",
 			Handler:    _ClusterService_DeleteHosts_Handler,
-		},
-		{
-			MethodName: "RescheduleMaintenance",
-			Handler:    _ClusterService_RescheduleMaintenance_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

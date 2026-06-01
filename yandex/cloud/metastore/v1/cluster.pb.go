@@ -24,6 +24,170 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DetailedHealthCheck_Status int32
+
+const (
+	// Check status is unknown.
+	DetailedHealthCheck_STATUS_UNSPECIFIED DetailedHealthCheck_Status = 0
+	// Check succeeded.
+	DetailedHealthCheck_SUCCESS DetailedHealthCheck_Status = 1
+	// Check failed.
+	DetailedHealthCheck_FAIL DetailedHealthCheck_Status = 2
+)
+
+// Enum value maps for DetailedHealthCheck_Status.
+var (
+	DetailedHealthCheck_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "SUCCESS",
+		2: "FAIL",
+	}
+	DetailedHealthCheck_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"SUCCESS":            1,
+		"FAIL":               2,
+	}
+)
+
+func (x DetailedHealthCheck_Status) Enum() *DetailedHealthCheck_Status {
+	p := new(DetailedHealthCheck_Status)
+	*p = x
+	return p
+}
+
+func (x DetailedHealthCheck_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DetailedHealthCheck_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[0].Descriptor()
+}
+
+func (DetailedHealthCheck_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[0]
+}
+
+func (x DetailedHealthCheck_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DetailedHealthCheck_Status.Descriptor instead.
+func (DetailedHealthCheck_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0, 0}
+}
+
+type HealthDetail_Status int32
+
+const (
+	// Health status is unknown.
+	HealthDetail_STATUS_UNSPECIFIED HealthDetail_Status = 0
+	// Cluster is alive and operates properly.
+	HealthDetail_ALIVE HealthDetail_Status = 1
+	// Cluster is partially alive.
+	HealthDetail_DEGRADED HealthDetail_Status = 2
+	// Cluster is inoperable.
+	HealthDetail_DEAD HealthDetail_Status = 3
+)
+
+// Enum value maps for HealthDetail_Status.
+var (
+	HealthDetail_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "ALIVE",
+		2: "DEGRADED",
+		3: "DEAD",
+	}
+	HealthDetail_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"ALIVE":              1,
+		"DEGRADED":           2,
+		"DEAD":               3,
+	}
+)
+
+func (x HealthDetail_Status) Enum() *HealthDetail_Status {
+	p := new(HealthDetail_Status)
+	*p = x
+	return p
+}
+
+func (x HealthDetail_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HealthDetail_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[1].Descriptor()
+}
+
+func (HealthDetail_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[1]
+}
+
+func (x HealthDetail_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HealthDetail_Status.Descriptor instead.
+func (HealthDetail_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{1, 0}
+}
+
+type HealthDetail_CauseType int32
+
+const (
+	// Cause type is unknown.
+	HealthDetail_CAUSE_TYPE_UNSPECIFIED HealthDetail_CauseType = 0
+	// Health issue is caused by user actions.
+	HealthDetail_USER HealthDetail_CauseType = 1
+	// Health issue is caused by the service.
+	HealthDetail_SERVICE HealthDetail_CauseType = 2
+	// Health issue is caused by infrastructure.
+	HealthDetail_INFRA HealthDetail_CauseType = 3
+)
+
+// Enum value maps for HealthDetail_CauseType.
+var (
+	HealthDetail_CauseType_name = map[int32]string{
+		0: "CAUSE_TYPE_UNSPECIFIED",
+		1: "USER",
+		2: "SERVICE",
+		3: "INFRA",
+	}
+	HealthDetail_CauseType_value = map[string]int32{
+		"CAUSE_TYPE_UNSPECIFIED": 0,
+		"USER":                   1,
+		"SERVICE":                2,
+		"INFRA":                  3,
+	}
+)
+
+func (x HealthDetail_CauseType) Enum() *HealthDetail_CauseType {
+	p := new(HealthDetail_CauseType)
+	*p = x
+	return p
+}
+
+func (x HealthDetail_CauseType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HealthDetail_CauseType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[2].Descriptor()
+}
+
+func (HealthDetail_CauseType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[2]
+}
+
+func (x HealthDetail_CauseType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HealthDetail_CauseType.Descriptor instead.
+func (HealthDetail_CauseType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{1, 1}
+}
+
 type Cluster_Health int32
 
 const (
@@ -64,11 +228,11 @@ func (x Cluster_Health) String() string {
 }
 
 func (Cluster_Health) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[3].Descriptor()
 }
 
 func (Cluster_Health) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[0]
+	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[3]
 }
 
 func (x Cluster_Health) Number() protoreflect.EnumNumber {
@@ -77,7 +241,7 @@ func (x Cluster_Health) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Cluster_Health.Descriptor instead.
 func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0, 0}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{2, 0}
 }
 
 type Cluster_Status int32
@@ -136,11 +300,11 @@ func (x Cluster_Status) String() string {
 }
 
 func (Cluster_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[4].Descriptor()
 }
 
 func (Cluster_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[1]
+	return &file_yandex_cloud_metastore_v1_cluster_proto_enumTypes[4]
 }
 
 func (x Cluster_Status) Number() protoreflect.EnumNumber {
@@ -149,7 +313,142 @@ func (x Cluster_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Cluster_Status.Descriptor instead.
 func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0, 1}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{2, 1}
+}
+
+type DetailedHealthCheck struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Check slug.
+	Slug string `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	// Check status.
+	Status DetailedHealthCheck_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.metastore.v1.DetailedHealthCheck_Status" json:"status,omitempty"`
+	// Additional check details.
+	Details       map[string]string `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetailedHealthCheck) Reset() {
+	*x = DetailedHealthCheck{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetailedHealthCheck) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetailedHealthCheck) ProtoMessage() {}
+
+func (x *DetailedHealthCheck) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetailedHealthCheck.ProtoReflect.Descriptor instead.
+func (*DetailedHealthCheck) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *DetailedHealthCheck) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *DetailedHealthCheck) GetStatus() DetailedHealthCheck_Status {
+	if x != nil {
+		return x.Status
+	}
+	return DetailedHealthCheck_STATUS_UNSPECIFIED
+}
+
+func (x *DetailedHealthCheck) GetDetails() map[string]string {
+	if x != nil {
+		return x.Details
+	}
+	return nil
+}
+
+type HealthDetail struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Health detail slug.
+	Slug string `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	// Health detail status.
+	Status HealthDetail_Status `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.metastore.v1.HealthDetail_Status" json:"status,omitempty"`
+	// Health detail cause type.
+	CauseType HealthDetail_CauseType `protobuf:"varint,3,opt,name=cause_type,json=causeType,proto3,enum=yandex.cloud.metastore.v1.HealthDetail_CauseType" json:"cause_type,omitempty"`
+	// Health detail checks.
+	Checks        []*DetailedHealthCheck `protobuf:"bytes,4,rep,name=checks,proto3" json:"checks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HealthDetail) Reset() {
+	*x = HealthDetail{}
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HealthDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HealthDetail) ProtoMessage() {}
+
+func (x *HealthDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HealthDetail.ProtoReflect.Descriptor instead.
+func (*HealthDetail) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *HealthDetail) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+func (x *HealthDetail) GetStatus() HealthDetail_Status {
+	if x != nil {
+		return x.Status
+	}
+	return HealthDetail_STATUS_UNSPECIFIED
+}
+
+func (x *HealthDetail) GetCauseType() HealthDetail_CauseType {
+	if x != nil {
+		return x.CauseType
+	}
+	return HealthDetail_CAUSE_TYPE_UNSPECIFIED
+}
+
+func (x *HealthDetail) GetChecks() []*DetailedHealthCheck {
+	if x != nil {
+		return x.Checks
+	}
+	return nil
 }
 
 // Metastore Cluster.
@@ -203,7 +502,7 @@ type Cluster struct {
 
 func (x *Cluster) Reset() {
 	*x = Cluster{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[0]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -215,7 +514,7 @@ func (x *Cluster) String() string {
 func (*Cluster) ProtoMessage() {}
 
 func (x *Cluster) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[0]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -228,7 +527,7 @@ func (x *Cluster) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cluster.ProtoReflect.Descriptor instead.
 func (*Cluster) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Cluster) GetId() string {
@@ -385,7 +684,7 @@ type Monitoring struct {
 
 func (x *Monitoring) Reset() {
 	*x = Monitoring{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[1]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -397,7 +696,7 @@ func (x *Monitoring) String() string {
 func (*Monitoring) ProtoMessage() {}
 
 func (x *Monitoring) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[1]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -410,7 +709,7 @@ func (x *Monitoring) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Monitoring.ProtoReflect.Descriptor instead.
 func (*Monitoring) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Monitoring) GetName() string {
@@ -446,7 +745,7 @@ type ClusterConfig struct {
 
 func (x *ClusterConfig) Reset() {
 	*x = ClusterConfig{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -458,7 +757,7 @@ func (x *ClusterConfig) String() string {
 func (*ClusterConfig) ProtoMessage() {}
 
 func (x *ClusterConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +770,7 @@ func (x *ClusterConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterConfig.ProtoReflect.Descriptor instead.
 func (*ClusterConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ClusterConfig) GetResources() *Resources {
@@ -500,7 +799,7 @@ type NetworkConfig struct {
 
 func (x *NetworkConfig) Reset() {
 	*x = NetworkConfig{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -512,7 +811,7 @@ func (x *NetworkConfig) String() string {
 func (*NetworkConfig) ProtoMessage() {}
 
 func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -525,7 +824,7 @@ func (x *NetworkConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkConfig.ProtoReflect.Descriptor instead.
 func (*NetworkConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *NetworkConfig) GetSubnetIds() []string {
@@ -552,7 +851,7 @@ type Resources struct {
 
 func (x *Resources) Reset() {
 	*x = Resources{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +863,7 @@ func (x *Resources) String() string {
 func (*Resources) ProtoMessage() {}
 
 func (x *Resources) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[4]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +876,7 @@ func (x *Resources) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Resources.ProtoReflect.Descriptor instead.
 func (*Resources) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Resources) GetResourcePresetId() string {
@@ -607,7 +906,7 @@ type LoggingConfig struct {
 
 func (x *LoggingConfig) Reset() {
 	*x = LoggingConfig{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -619,7 +918,7 @@ func (x *LoggingConfig) String() string {
 func (*LoggingConfig) ProtoMessage() {}
 
 func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -632,7 +931,7 @@ func (x *LoggingConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoggingConfig.ProtoReflect.Descriptor instead.
 func (*LoggingConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *LoggingConfig) GetDestination() isLoggingConfig_Destination {
@@ -704,7 +1003,7 @@ type WarehouseConfig struct {
 
 func (x *WarehouseConfig) Reset() {
 	*x = WarehouseConfig{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -716,7 +1015,7 @@ func (x *WarehouseConfig) String() string {
 func (*WarehouseConfig) ProtoMessage() {}
 
 func (x *WarehouseConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -729,7 +1028,7 @@ func (x *WarehouseConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseConfig.ProtoReflect.Descriptor instead.
 func (*WarehouseConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *WarehouseConfig) GetWarehouse() isWarehouseConfig_Warehouse {
@@ -771,7 +1070,7 @@ type WarehouseConfig_S3Warehouse struct {
 
 func (x *WarehouseConfig_S3Warehouse) Reset() {
 	*x = WarehouseConfig_S3Warehouse{}
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -783,7 +1082,7 @@ func (x *WarehouseConfig_S3Warehouse) String() string {
 func (*WarehouseConfig_S3Warehouse) ProtoMessage() {}
 
 func (x *WarehouseConfig_S3Warehouse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8]
+	mi := &file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -796,7 +1095,7 @@ func (x *WarehouseConfig_S3Warehouse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarehouseConfig_S3Warehouse.ProtoReflect.Descriptor instead.
 func (*WarehouseConfig_S3Warehouse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{6, 0}
+	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP(), []int{8, 0}
 }
 
 func (x *WarehouseConfig_S3Warehouse) GetBucket() string {
@@ -817,7 +1116,34 @@ var File_yandex_cloud_metastore_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_metastore_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\n" +
+	"'yandex/cloud/metastore/v1/cluster.proto\x12\x19yandex.cloud.metastore.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a+yandex/cloud/metastore/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xc4\x02\n" +
+	"\x13DetailedHealthCheck\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\x12M\n" +
+	"\x06status\x18\x02 \x01(\x0e25.yandex.cloud.metastore.v1.DetailedHealthCheck.StatusR\x06status\x12U\n" +
+	"\adetails\x18\x03 \x03(\v2;.yandex.cloud.metastore.v1.DetailedHealthCheck.DetailsEntryR\adetails\x1a:\n" +
+	"\fDetailsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"7\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aSUCCESS\x10\x01\x12\b\n" +
+	"\x04FAIL\x10\x02\"\x94\x03\n" +
+	"\fHealthDetail\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\x12F\n" +
+	"\x06status\x18\x02 \x01(\x0e2..yandex.cloud.metastore.v1.HealthDetail.StatusR\x06status\x12P\n" +
+	"\n" +
+	"cause_type\x18\x03 \x01(\x0e21.yandex.cloud.metastore.v1.HealthDetail.CauseTypeR\tcauseType\x12F\n" +
+	"\x06checks\x18\x04 \x03(\v2..yandex.cloud.metastore.v1.DetailedHealthCheckR\x06checks\"C\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05ALIVE\x10\x01\x12\f\n" +
+	"\bDEGRADED\x10\x02\x12\b\n" +
+	"\x04DEAD\x10\x03\"I\n" +
+	"\tCauseType\x12\x1a\n" +
+	"\x16CAUSE_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04USER\x10\x01\x12\v\n" +
+	"\aSERVICE\x10\x02\x12\t\n" +
+	"\x05INFRA\x10\x03\"\x9b\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -904,45 +1230,56 @@ func file_yandex_cloud_metastore_v1_cluster_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_metastore_v1_cluster_proto_rawDescData
 }
 
-var file_yandex_cloud_metastore_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_metastore_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_metastore_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_metastore_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_metastore_v1_cluster_proto_goTypes = []any{
-	(Cluster_Health)(0),                 // 0: yandex.cloud.metastore.v1.Cluster.Health
-	(Cluster_Status)(0),                 // 1: yandex.cloud.metastore.v1.Cluster.Status
-	(*Cluster)(nil),                     // 2: yandex.cloud.metastore.v1.Cluster
-	(*Monitoring)(nil),                  // 3: yandex.cloud.metastore.v1.Monitoring
-	(*ClusterConfig)(nil),               // 4: yandex.cloud.metastore.v1.ClusterConfig
-	(*NetworkConfig)(nil),               // 5: yandex.cloud.metastore.v1.NetworkConfig
-	(*Resources)(nil),                   // 6: yandex.cloud.metastore.v1.Resources
-	(*LoggingConfig)(nil),               // 7: yandex.cloud.metastore.v1.LoggingConfig
-	(*WarehouseConfig)(nil),             // 8: yandex.cloud.metastore.v1.WarehouseConfig
-	nil,                                 // 9: yandex.cloud.metastore.v1.Cluster.LabelsEntry
-	(*WarehouseConfig_S3Warehouse)(nil), // 10: yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
-	(*timestamppb.Timestamp)(nil),       // 11: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),           // 12: yandex.cloud.metastore.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),        // 13: yandex.cloud.metastore.v1.MaintenanceOperation
-	(v1.LogLevel_Level)(0),              // 14: yandex.cloud.logging.v1.LogLevel.Level
+	(DetailedHealthCheck_Status)(0),     // 0: yandex.cloud.metastore.v1.DetailedHealthCheck.Status
+	(HealthDetail_Status)(0),            // 1: yandex.cloud.metastore.v1.HealthDetail.Status
+	(HealthDetail_CauseType)(0),         // 2: yandex.cloud.metastore.v1.HealthDetail.CauseType
+	(Cluster_Health)(0),                 // 3: yandex.cloud.metastore.v1.Cluster.Health
+	(Cluster_Status)(0),                 // 4: yandex.cloud.metastore.v1.Cluster.Status
+	(*DetailedHealthCheck)(nil),         // 5: yandex.cloud.metastore.v1.DetailedHealthCheck
+	(*HealthDetail)(nil),                // 6: yandex.cloud.metastore.v1.HealthDetail
+	(*Cluster)(nil),                     // 7: yandex.cloud.metastore.v1.Cluster
+	(*Monitoring)(nil),                  // 8: yandex.cloud.metastore.v1.Monitoring
+	(*ClusterConfig)(nil),               // 9: yandex.cloud.metastore.v1.ClusterConfig
+	(*NetworkConfig)(nil),               // 10: yandex.cloud.metastore.v1.NetworkConfig
+	(*Resources)(nil),                   // 11: yandex.cloud.metastore.v1.Resources
+	(*LoggingConfig)(nil),               // 12: yandex.cloud.metastore.v1.LoggingConfig
+	(*WarehouseConfig)(nil),             // 13: yandex.cloud.metastore.v1.WarehouseConfig
+	nil,                                 // 14: yandex.cloud.metastore.v1.DetailedHealthCheck.DetailsEntry
+	nil,                                 // 15: yandex.cloud.metastore.v1.Cluster.LabelsEntry
+	(*WarehouseConfig_S3Warehouse)(nil), // 16: yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
+	(*timestamppb.Timestamp)(nil),       // 17: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),           // 18: yandex.cloud.metastore.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),        // 19: yandex.cloud.metastore.v1.MaintenanceOperation
+	(v1.LogLevel_Level)(0),              // 20: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_metastore_v1_cluster_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.metastore.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 1: yandex.cloud.metastore.v1.Cluster.labels:type_name -> yandex.cloud.metastore.v1.Cluster.LabelsEntry
-	3,  // 2: yandex.cloud.metastore.v1.Cluster.monitoring:type_name -> yandex.cloud.metastore.v1.Monitoring
-	0,  // 3: yandex.cloud.metastore.v1.Cluster.health:type_name -> yandex.cloud.metastore.v1.Cluster.Health
-	1,  // 4: yandex.cloud.metastore.v1.Cluster.status:type_name -> yandex.cloud.metastore.v1.Cluster.Status
-	4,  // 5: yandex.cloud.metastore.v1.Cluster.cluster_config:type_name -> yandex.cloud.metastore.v1.ClusterConfig
-	7,  // 6: yandex.cloud.metastore.v1.Cluster.logging:type_name -> yandex.cloud.metastore.v1.LoggingConfig
-	5,  // 7: yandex.cloud.metastore.v1.Cluster.network:type_name -> yandex.cloud.metastore.v1.NetworkConfig
-	12, // 8: yandex.cloud.metastore.v1.Cluster.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
-	13, // 9: yandex.cloud.metastore.v1.Cluster.planned_operation:type_name -> yandex.cloud.metastore.v1.MaintenanceOperation
-	6,  // 10: yandex.cloud.metastore.v1.ClusterConfig.resources:type_name -> yandex.cloud.metastore.v1.Resources
-	8,  // 11: yandex.cloud.metastore.v1.ClusterConfig.warehouse:type_name -> yandex.cloud.metastore.v1.WarehouseConfig
-	14, // 12: yandex.cloud.metastore.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	10, // 13: yandex.cloud.metastore.v1.WarehouseConfig.s3:type_name -> yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	0,  // 0: yandex.cloud.metastore.v1.DetailedHealthCheck.status:type_name -> yandex.cloud.metastore.v1.DetailedHealthCheck.Status
+	14, // 1: yandex.cloud.metastore.v1.DetailedHealthCheck.details:type_name -> yandex.cloud.metastore.v1.DetailedHealthCheck.DetailsEntry
+	1,  // 2: yandex.cloud.metastore.v1.HealthDetail.status:type_name -> yandex.cloud.metastore.v1.HealthDetail.Status
+	2,  // 3: yandex.cloud.metastore.v1.HealthDetail.cause_type:type_name -> yandex.cloud.metastore.v1.HealthDetail.CauseType
+	5,  // 4: yandex.cloud.metastore.v1.HealthDetail.checks:type_name -> yandex.cloud.metastore.v1.DetailedHealthCheck
+	17, // 5: yandex.cloud.metastore.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	15, // 6: yandex.cloud.metastore.v1.Cluster.labels:type_name -> yandex.cloud.metastore.v1.Cluster.LabelsEntry
+	8,  // 7: yandex.cloud.metastore.v1.Cluster.monitoring:type_name -> yandex.cloud.metastore.v1.Monitoring
+	3,  // 8: yandex.cloud.metastore.v1.Cluster.health:type_name -> yandex.cloud.metastore.v1.Cluster.Health
+	4,  // 9: yandex.cloud.metastore.v1.Cluster.status:type_name -> yandex.cloud.metastore.v1.Cluster.Status
+	9,  // 10: yandex.cloud.metastore.v1.Cluster.cluster_config:type_name -> yandex.cloud.metastore.v1.ClusterConfig
+	12, // 11: yandex.cloud.metastore.v1.Cluster.logging:type_name -> yandex.cloud.metastore.v1.LoggingConfig
+	10, // 12: yandex.cloud.metastore.v1.Cluster.network:type_name -> yandex.cloud.metastore.v1.NetworkConfig
+	18, // 13: yandex.cloud.metastore.v1.Cluster.maintenance_window:type_name -> yandex.cloud.metastore.v1.MaintenanceWindow
+	19, // 14: yandex.cloud.metastore.v1.Cluster.planned_operation:type_name -> yandex.cloud.metastore.v1.MaintenanceOperation
+	11, // 15: yandex.cloud.metastore.v1.ClusterConfig.resources:type_name -> yandex.cloud.metastore.v1.Resources
+	13, // 16: yandex.cloud.metastore.v1.ClusterConfig.warehouse:type_name -> yandex.cloud.metastore.v1.WarehouseConfig
+	20, // 17: yandex.cloud.metastore.v1.LoggingConfig.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	16, // 18: yandex.cloud.metastore.v1.WarehouseConfig.s3:type_name -> yandex.cloud.metastore.v1.WarehouseConfig.S3Warehouse
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_metastore_v1_cluster_proto_init() }
@@ -951,11 +1288,11 @@ func file_yandex_cloud_metastore_v1_cluster_proto_init() {
 		return
 	}
 	file_yandex_cloud_metastore_v1_maintenance_proto_init()
-	file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[5].OneofWrappers = []any{
+	file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[7].OneofWrappers = []any{
 		(*LoggingConfig_FolderId)(nil),
 		(*LoggingConfig_LogGroupId)(nil),
 	}
-	file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[6].OneofWrappers = []any{
+	file_yandex_cloud_metastore_v1_cluster_proto_msgTypes[8].OneofWrappers = []any{
 		(*WarehouseConfig_S3)(nil),
 	}
 	type x struct{}
@@ -963,8 +1300,8 @@ func file_yandex_cloud_metastore_v1_cluster_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_metastore_v1_cluster_proto_rawDesc), len(file_yandex_cloud_metastore_v1_cluster_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   9,
+			NumEnums:      5,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

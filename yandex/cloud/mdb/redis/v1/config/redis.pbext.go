@@ -102,6 +102,10 @@ func (m *RedisConfig) SetActivedefrag(v *wrapperspb.BoolValue) {
 	m.Activedefrag = v
 }
 
+func (m *RedisConfig) SetAuditLog(v *wrapperspb.BoolValue) {
+	m.AuditLog = v
+}
+
 func (m *RedisConfig_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }

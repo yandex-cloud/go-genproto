@@ -73,11 +73,9 @@ type ListBackupsRequest struct {
 	// ID of the folder to list backups in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page that should be returned.
-	//
 	// If the number of available results is larger than [page_size], the service returns
 	// a [ListBackupsResponse.next_page_token] that can be used to get the next page of results
 	// in subsequent list requests.
-	//
 	// Default value is 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// The page token. To get the next page of results, set [page_token] to the [ListBackupsResponse.next_page_token]
@@ -143,10 +141,8 @@ type ListBackupsResponse struct {
 	// Requested list of backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for a list request.
-	//
 	// If the number of results is larger than [ListBackupsRequest.page_size] specified in the request,
 	// use the [next_page_token] as the value for the [ListBackupsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent ListBackups request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -201,7 +197,7 @@ var File_yandex_cloud_mdb_opensearch_v1_backup_service_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_opensearch_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/opensearch/v1/backup_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\"5\n" +
+	"3yandex/cloud/mdb/opensearch/v1/backup_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a\x1dyandex/cloud/validation.proto\"5\n" +
 	"\x10GetBackupRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\x92\x01\n" +
 	"\x12ListBackupsRequest\x12)\n" +

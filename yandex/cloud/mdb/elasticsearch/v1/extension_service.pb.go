@@ -84,11 +84,9 @@ type ListExtensionsRequest struct {
 	// ID of the cluster to list extensions in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListExtensionsResponse.next_page_token] that can be used to get the next page of results in subsequent [ExtensionService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListExtensionsResponse.next_page_token] returned by the previous [ExtensionService.List] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -151,9 +149,7 @@ type ListExtensionsResponse struct {
 	// Requested list of extensions.
 	Extensions []*Extension `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListExtensionsRequest.page_size], use the [next_page_token] as the value for the [ListExtensionsRequest.page_token] in the subsequent [ExtensionService.List] request to iterate through multiple pages of results.
-	//
 	// Each of the subsequent [ExtensionService.List] requests should use the [next_page_token] value returned in the previous request to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -559,7 +555,7 @@ var File_yandex_cloud_mdb_elasticsearch_v1_extension_service_proto protoreflect.
 
 const file_yandex_cloud_mdb_elasticsearch_v1_extension_service_proto_rawDesc = "" +
 	"\n" +
-	"9yandex/cloud/mdb/elasticsearch/v1/extension_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a1yandex/cloud/mdb/elasticsearch/v1/extension.proto\x1a&yandex/cloud/operation/operation.proto\"k\n" +
+	"9yandex/cloud/mdb/elasticsearch/v1/extension_service.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/mdb/elasticsearch/v1/extension.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"k\n" +
 	"\x13GetExtensionRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +

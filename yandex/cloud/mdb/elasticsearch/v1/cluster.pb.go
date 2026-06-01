@@ -7,6 +7,7 @@
 package elasticsearch
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/elasticsearch/v1/config"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -878,7 +879,6 @@ type Host struct {
 	// ID of the subnet the host resides in.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// The flag that defines whether a public IP address is assigned to the host.
-	//
 	// If the value is `true`, then this host is available on the Internet via it's public IP address.
 	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -1158,7 +1158,7 @@ var File_yandex_cloud_mdb_elasticsearch_v1_cluster_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_elasticsearch_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/elasticsearch/v1/cluster.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a<yandex/cloud/mdb/elasticsearch/v1/config/elasticsearch.proto\x1a3yandex/cloud/mdb/elasticsearch/v1/maintenance.proto\"\xb9\n" +
+	"/yandex/cloud/mdb/elasticsearch/v1/cluster.proto\x12!yandex.cloud.mdb.elasticsearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a<yandex/cloud/mdb/elasticsearch/v1/config/elasticsearch.proto\x1a3yandex/cloud/mdb/elasticsearch/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xb9\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -1225,11 +1225,11 @@ const file_yandex_cloud_mdb_elasticsearch_v1_cluster_proto_rawDesc = "" +
 	"\x06config\x1aX\n" +
 	"\n" +
 	"MasterNode\x12J\n" +
-	"\tresources\x18\x01 \x01(\v2,.yandex.cloud.mdb.elasticsearch.v1.ResourcesR\tresources\"x\n" +
-	"\tResources\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
-	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
-	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
+	"\tresources\x18\x01 \x01(\v2,.yandex.cloud.mdb.elasticsearch.v1.ResourcesR\tresources\"\x8c\x01\n" +
+	"\tResources\x122\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\x12#\n" +
+	"\tdisk_size\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\bdiskSize\x12&\n" +
+	"\fdisk_type_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"diskTypeId\"\xaf\x04\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +

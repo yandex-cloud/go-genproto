@@ -66,6 +66,10 @@ func (m *CreateClusterRequest) SetSpec(v *ClusterSpec) {
 	m.Spec = v
 }
 
+func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *CreateClusterRequest) SetCidrBlocksWhitelist(v *CidrBlocks) {
 	m.CidrBlocksWhitelist = v
 }
@@ -104,6 +108,10 @@ func (m *UpdateClusterRequest) SetSecurityGroupIds(v []string) {
 
 func (m *UpdateClusterRequest) SetSpec(v *ClusterSpec) {
 	m.Spec = v
+}
+
+func (m *UpdateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
 }
 
 func (m *UpdateClusterRequest) SetCidrBlocksWhitelist(v *CidrBlocks) {

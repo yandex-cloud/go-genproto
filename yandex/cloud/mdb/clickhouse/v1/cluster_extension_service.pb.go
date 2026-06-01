@@ -717,11 +717,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_extension_service_proto_rawDes
 	"\x1eUpdateClusterExtensionMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12%\n" +
-	"\x0eextension_name\x18\x02 \x01(\tR\rextensionName\"\xaa\x01\n" +
+	"\x0eextension_name\x18\x02 \x01(\tR\rextensionName\"\xa2\x01\n" +
 	"\x1bSetClusterExtensionsRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12^\n" +
-	"\x0fextension_specs\x18\x02 \x03(\v2-.yandex.cloud.mdb.clickhouse.v1.ExtensionSpecB\x06\x82\xc81\x02>0R\x0eextensionSpecs\"\xe1\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12V\n" +
+	"\x0fextension_specs\x18\x02 \x03(\v2-.yandex.cloud.mdb.clickhouse.v1.ExtensionSpecR\x0eextensionSpecs\"\xe1\x01\n" +
 	"\x1cSetClusterExtensionsMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x122\n" +

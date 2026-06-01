@@ -34,6 +34,14 @@ func (m *VirtualHost) SetRateLimit(v *RateLimit) {
 	m.RateLimit = v
 }
 
+func (m *VirtualHost) SetLabels(v map[string]string) {
+	m.Labels = v
+}
+
+func (m *VirtualHost) SetDescription(v string) {
+	m.Description = v
+}
+
 func (m *RouteOptions) SetModifyRequestHeaders(v []*HeaderModification) {
 	m.ModifyRequestHeaders = v
 }

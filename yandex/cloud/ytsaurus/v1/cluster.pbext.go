@@ -75,6 +75,10 @@ func (m *Cluster) SetEndpoints(v *Cluster_Endpoints) {
 	m.Endpoints = v
 }
 
+func (m *Cluster) SetMaintenanceWindow(v *MaintenanceWindow) {
+	m.MaintenanceWindow = v
+}
+
 func (m *Cluster_Endpoints) SetUi(v string) {
 	m.Ui = v
 }
@@ -159,6 +163,10 @@ func (m *ComputeSpec_DiskSpec) SetLocations(v []string) {
 	m.Locations = v
 }
 
+func (m *ComputeSpec_DiskSpec) SetLocationQuotasGb(v []int64) {
+	m.LocationQuotasGb = v
+}
+
 type ComputeSpec_ScalePolicy_Policy = isComputeSpec_ScalePolicy_Policy
 
 func (m *ComputeSpec_ScalePolicy) SetPolicy(v ComputeSpec_ScalePolicy_Policy) {
@@ -181,12 +189,44 @@ func (m *ComputeSpec_ScalePolicy_FixedScale) SetSize(v int64) {
 	m.Size = v
 }
 
+type ComputeSpec_ScalePolicy_AutoScale_Strategy = isComputeSpec_ScalePolicy_AutoScale_Strategy
+
+func (m *ComputeSpec_ScalePolicy_AutoScale) SetStrategy(v ComputeSpec_ScalePolicy_AutoScale_Strategy) {
+	m.Strategy = v
+}
+
 func (m *ComputeSpec_ScalePolicy_AutoScale) SetMinSize(v int64) {
 	m.MinSize = v
 }
 
 func (m *ComputeSpec_ScalePolicy_AutoScale) SetMaxSize(v int64) {
 	m.MaxSize = v
+}
+
+func (m *ComputeSpec_ScalePolicy_AutoScale) SetInitialSize(v int64) {
+	m.InitialSize = v
+}
+
+func (m *ComputeSpec_ScalePolicy_AutoScale) SetLinear(v *LinearScalingStrategy) {
+	m.Strategy = &ComputeSpec_ScalePolicy_AutoScale_Linear{
+		Linear: v,
+	}
+}
+
+func (m *LinearScalingStrategy) SetCooldownInterval(v *durationpb.Duration) {
+	m.CooldownInterval = v
+}
+
+func (m *LinearScalingStrategy) SetStatisticsInterval(v *durationpb.Duration) {
+	m.StatisticsInterval = v
+}
+
+func (m *LinearScalingStrategy) SetOverloadCoefficient(v float64) {
+	m.OverloadCoefficient = v
+}
+
+func (m *LinearScalingStrategy) SetUnderloadCoefficient(v float64) {
+	m.UnderloadCoefficient = v
 }
 
 func (m *HttpProxySpec) SetCount(v int64) {

@@ -33,3 +33,23 @@ func (m *ResourceGroup) SetMemorySharedQuota(v *wrapperspb.Int64Value) {
 func (m *ResourceGroup) SetMemorySpillRatio(v *wrapperspb.Int64Value) {
 	m.MemorySpillRatio = v
 }
+
+func (m *ResourceGroup) SetCpuMaxPercent(v *wrapperspb.Int64Value) {
+	m.CpuMaxPercent = v
+}
+
+func (m *ResourceGroup) SetCpuWeight(v *wrapperspb.Int64Value) {
+	m.CpuWeight = v
+}
+
+func (m *ResourceGroup) SetMemoryQuota(v *wrapperspb.Int64Value) {
+	m.MemoryQuota = v
+}
+
+func (m *ResourceGroup) SetMinCost(v *wrapperspb.Int64Value) {
+	m.MinCost = v
+}
+
+func (m *ResourceGroup) SetIoLimit(v *wrapperspb.Int64Value) {
+	m.IoLimit = v
+}

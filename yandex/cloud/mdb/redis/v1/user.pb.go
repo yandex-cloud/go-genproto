@@ -118,8 +118,10 @@ type Permissions struct {
 	Commands *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=commands,proto3" json:"commands,omitempty"`
 	// SanitizePayload parameter.
 	SanitizePayload *wrapperspb.StringValue `protobuf:"bytes,5,opt,name=sanitize_payload,json=sanitizePayload,proto3" json:"sanitize_payload,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Databases parameter.
+	Databases     *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=databases,proto3" json:"databases,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Permissions) Reset() {
@@ -183,6 +185,13 @@ func (x *Permissions) GetCommands() *wrapperspb.StringValue {
 func (x *Permissions) GetSanitizePayload() *wrapperspb.StringValue {
 	if x != nil {
 		return x.SanitizePayload
+	}
+	return nil
+}
+
+func (x *Permissions) GetDatabases() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Databases
 	}
 	return nil
 }
@@ -271,7 +280,7 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vacl_options\x18\x05 \x01(\tR\n" +
-	"aclOptions\"\xd0\x02\n" +
+	"aclOptions\"\x8c\x03\n" +
 	"\vPermissions\x128\n" +
 	"\bpatterns\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bpatterns\x12F\n" +
 	"\x10pub_sub_channels\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0epubSubChannels\x12<\n" +
@@ -279,10 +288,11 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"categories\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
 	"categories\x128\n" +
 	"\bcommands\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bcommands\x12G\n" +
-	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\x0fsanitizePayload\"\x99\x02\n" +
+	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\x0fsanitizePayload\x12:\n" +
+	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\xf9\x01\n" +
 	"\bUserSpec\x12B\n" +
-	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12I\n" +
-	"\tpasswords\x18\x02 \x03(\tB+\xf2\xc71\x1e^[a-zA-Z0-9@=+?*.,!&#$^<>_-]*$\x82\xc81\x011\x90\xc81\x01R\tpasswords\x12H\n" +
+	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12)\n" +
+	"\tpasswords\x18\x02 \x03(\tB\v\x82\xc81\x03<=1\x90\xc81\x01R\tpasswords\x12H\n" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x124\n" +
 	"\aenabled\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabledBd\n" +
 	"\x1dyandex.cloud.api.mdb.redis.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1;redisb\x06proto3"
@@ -314,13 +324,14 @@ var file_yandex_cloud_mdb_redis_v1_user_proto_depIdxs = []int32{
 	3, // 3: yandex.cloud.mdb.redis.v1.Permissions.categories:type_name -> google.protobuf.StringValue
 	3, // 4: yandex.cloud.mdb.redis.v1.Permissions.commands:type_name -> google.protobuf.StringValue
 	3, // 5: yandex.cloud.mdb.redis.v1.Permissions.sanitize_payload:type_name -> google.protobuf.StringValue
-	1, // 6: yandex.cloud.mdb.redis.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
-	4, // 7: yandex.cloud.mdb.redis.v1.UserSpec.enabled:type_name -> google.protobuf.BoolValue
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	3, // 6: yandex.cloud.mdb.redis.v1.Permissions.databases:type_name -> google.protobuf.StringValue
+	1, // 7: yandex.cloud.mdb.redis.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
+	4, // 8: yandex.cloud.mdb.redis.v1.UserSpec.enabled:type_name -> google.protobuf.BoolValue
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_user_proto_init() }

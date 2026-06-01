@@ -456,6 +456,8 @@ type PostgresSource struct {
 	// will be created (__consumer_keeper, __data_transfer_mole_finder).
 	// Empty `service_schema` implies schema `public`
 	ServiceSchema string `protobuf:"bytes,9,opt,name=service_schema,json=serviceSchema,proto3" json:"service_schema,omitempty"`
+	// Will collapse pg_inherit table into one big table in replication process
+	CollapseInheritTable bool `protobuf:"varint,10,opt,name=collapse_inherit_table,json=collapseInheritTable,proto3" json:"collapse_inherit_table,omitempty"`
 	// Defines which database schema objects should be transferred, e.g. views,
 	// functions, etc.
 	// All of the attributes in this block are optional and should be either
@@ -552,6 +554,13 @@ func (x *PostgresSource) GetServiceSchema() string {
 		return x.ServiceSchema
 	}
 	return ""
+}
+
+func (x *PostgresSource) GetCollapseInheritTable() bool {
+	if x != nil {
+		return x.CollapseInheritTable
+	}
+	return false
 }
 
 func (x *PostgresSource) GetObjectTransferSettings() *PostgresObjectTransferSettings {
@@ -709,7 +718,7 @@ const file_yandex_cloud_datatransfer_v1_endpoint_postgres_proto_rawDesc = "" +
 	"on_premise\x18\x02 \x01(\v28.yandex.cloud.datatransfer.v1.endpoint.OnPremisePostgresH\x00R\tonPremise\x12\x88\x01\n" +
 	"\x1dconnection_manager_connection\x18\x03 \x01(\v2B.yandex.cloud.datatransfer.v1.endpoint.ConnectionManagerConnectionH\x00R\x1bconnectionManagerConnectionB\f\n" +
 	"\n" +
-	"connection\"\xc0\x04\n" +
+	"connection\"\xf6\x04\n" +
 	"\x0ePostgresSource\x12Y\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v29.yandex.cloud.datatransfer.v1.endpoint.PostgresConnectionR\n" +
@@ -720,10 +729,11 @@ const file_yandex_cloud_datatransfer_v1_endpoint_postgres_proto_rawDesc = "" +
 	"\x0einclude_tables\x18\x05 \x03(\tR\rincludeTables\x12%\n" +
 	"\x0eexclude_tables\x18\x06 \x03(\tR\rexcludeTables\x12-\n" +
 	"\x13slot_byte_lag_limit\x18\b \x01(\x03R\x10slotByteLagLimit\x12%\n" +
-	"\x0eservice_schema\x18\t \x01(\tR\rserviceSchema\x12\x7f\n" +
+	"\x0eservice_schema\x18\t \x01(\tR\rserviceSchema\x124\n" +
+	"\x16collapse_inherit_table\x18\n" +
+	" \x01(\bR\x14collapseInheritTable\x12\x7f\n" +
 	"\x18object_transfer_settings\x18\r \x01(\v2E.yandex.cloud.datatransfer.v1.endpoint.PostgresObjectTransferSettingsR\x16objectTransferSettings\x12'\n" +
-	"\x0fsecurity_groups\x18\x0e \x03(\tR\x0esecurityGroupsJ\x04\b\a\x10\bJ\x04\b\n" +
-	"\x10\r\"\xb3\x03\n" +
+	"\x0fsecurity_groups\x18\x0e \x03(\tR\x0esecurityGroupsJ\x04\b\a\x10\bJ\x04\b\v\x10\r\"\xb3\x03\n" +
 	"\x0ePostgresTarget\x12Y\n" +
 	"\n" +
 	"connection\x18\x01 \x01(\v29.yandex.cloud.datatransfer.v1.endpoint.PostgresConnectionR\n" +

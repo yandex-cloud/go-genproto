@@ -24,28 +24,20 @@ const (
 )
 
 // Elasticsearch 7.x supported configuration options are listed here.
-//
 // Detailed description for each set of options is available in [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html).
-//
 // Any options that are not listed here are not supported.
 type ElasticsearchConfig7 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of clauses a boolean query can contain.
-	//
 	// The limit is in place to prevent searches from becoming too large and taking up too much CPU and memory.
 	// It affects not only Elasticsearch's `bool` query, but many other queries that are implicitly converted to `bool` query by Elastcsearch.
-	//
 	// Default value: `1024`.
-	//
 	// See in-depth description in [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-settings.html).
 	MaxClauseCount *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_clause_count,json=maxClauseCount,proto3" json:"max_clause_count,omitempty"`
 	// The maximum percentage or absolute value (10%, 512mb) of heap space that is allocated to field data cache.
-	//
 	// All the field values that are placed in this cache, get loaded to memory in order to provide fast document based access to those values.
 	// Building the field data cache for a field can be an expensive operations, so its recommended to have enough memory for this cache, and to keep it loaded.
-	//
 	// Default value: unbounded.
-	//
 	// See in-depth description in [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-fielddata.html).
 	FielddataCacheSize string `protobuf:"bytes,4,opt,name=fielddata_cache_size,json=fielddataCacheSize,proto3" json:"fielddata_cache_size,omitempty"`
 	// Remote hosts for reindex have to be explicitly allowed in elasticsearch.yml using the reindex.remote.whitelist property.
@@ -53,7 +45,6 @@ type ElasticsearchConfig7 struct {
 	// Scheme is ignored, only the host and port are used.
 	ReindexRemoteWhitelist string `protobuf:"bytes,6,opt,name=reindex_remote_whitelist,json=reindexRemoteWhitelist,proto3" json:"reindex_remote_whitelist,omitempty"`
 	// List of paths to PEM encoded certificate files that should be trusted.
-	//
 	// See in-depth description in [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html#reindex-ssl)
 	ReindexSslCaPath string `protobuf:"bytes,7,opt,name=reindex_ssl_ca_path,json=reindexSslCaPath,proto3" json:"reindex_ssl_ca_path,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -186,12 +177,12 @@ var File_yandex_cloud_mdb_elasticsearch_v1_config_elasticsearch_proto protorefle
 
 const file_yandex_cloud_mdb_elasticsearch_v1_config_elasticsearch_proto_rawDesc = "" +
 	"\n" +
-	"<yandex/cloud/mdb/elasticsearch/v1/config/elasticsearch.proto\x12(yandex.cloud.mdb.elasticsearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xfe\x01\n" +
+	"<yandex/cloud/mdb/elasticsearch/v1/config/elasticsearch.proto\x12(yandex.cloud.mdb.elasticsearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x84\x02\n" +
 	"\x14ElasticsearchConfig7\x12E\n" +
 	"\x10max_clause_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxClauseCount\x120\n" +
 	"\x14fielddata_cache_size\x18\x04 \x01(\tR\x12fielddataCacheSize\x128\n" +
 	"\x18reindex_remote_whitelist\x18\x06 \x01(\tR\x16reindexRemoteWhitelist\x12-\n" +
-	"\x13reindex_ssl_ca_path\x18\a \x01(\tR\x10reindexSslCaPathJ\x04\b\x05\x10\x06\"\xd2\x02\n" +
+	"\x13reindex_ssl_ca_path\x18\a \x01(\tR\x10reindexSslCaPathJ\x04\b\x01\x10\x03J\x04\b\x05\x10\x06\"\xd2\x02\n" +
 	"\x17ElasticsearchConfigSet7\x12o\n" +
 	"\x10effective_config\x18\x01 \x01(\v2>.yandex.cloud.mdb.elasticsearch.v1.config.ElasticsearchConfig7B\x04\xe8\xc71\x01R\x0feffectiveConfig\x12_\n" +
 	"\vuser_config\x18\x02 \x01(\v2>.yandex.cloud.mdb.elasticsearch.v1.config.ElasticsearchConfig7R\n" +

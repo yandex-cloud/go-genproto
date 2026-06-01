@@ -814,7 +814,7 @@ const file_yandex_cloud_mdb_mongodb_v1_user_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"t\n" +
 	"\x11ListUsersResponse\x127\n" +
@@ -827,14 +827,14 @@ const file_yandex_cloud_mdb_mongodb_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xab\x02\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xbc\x02\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
+	"\tuser_name\x18\x02 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=63R\buserName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12%\n" +
-	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x058-128R\bpassword\x12I\n" +
+	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12I\n" +
 	"\vpermissions\x18\x05 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\"P\n" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +

@@ -401,56 +401,12 @@ func (m *ConfigSpecUpdate) SetAdminPassword(v string) {
 	m.AdminPassword = v
 }
 
-func (m *AddClusterHostsRequest) SetClusterId(v string) {
+func (m *BackupClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *AddClusterHostsRequest) SetHostSpecs(v []*HostSpec) {
-	m.HostSpecs = v
-}
-
-func (m *AddClusterHostsMetadata) SetClusterId(v string) {
+func (m *BackupClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
-}
-
-func (m *AddClusterHostsMetadata) SetHostNames(v []string) {
-	m.HostNames = v
-}
-
-func (m *DeleteClusterHostsRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *DeleteClusterHostsRequest) SetHostNames(v []string) {
-	m.HostNames = v
-}
-
-func (m *DeleteClusterHostsMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *DeleteClusterHostsMetadata) SetHostNames(v []string) {
-	m.HostNames = v
-}
-
-func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenanceRequest_RescheduleType) {
-	m.RescheduleType = v
-}
-
-func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
-	m.DelayedUntil = v
-}
-
-func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
-	m.DelayedUntil = v
 }
 
 func (m *RestoreClusterRequest) SetBackupId(v string) {
@@ -513,12 +469,56 @@ func (m *RestoreClusterMetadata) SetBackupId(v string) {
 	m.BackupId = v
 }
 
-func (m *BackupClusterRequest) SetClusterId(v string) {
+func (m *RescheduleMaintenanceRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *BackupClusterMetadata) SetClusterId(v string) {
+func (m *RescheduleMaintenanceRequest) SetRescheduleType(v RescheduleMaintenanceRequest_RescheduleType) {
+	m.RescheduleType = v
+}
+
+func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp) {
+	m.DelayedUntil = v
+}
+
+func (m *AddClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterHostsRequest) SetHostSpecs(v []*HostSpec) {
+	m.HostSpecs = v
+}
+
+func (m *AddClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *AddClusterHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *DeleteClusterHostsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterHostsRequest) SetHostNames(v []string) {
+	m.HostNames = v
+}
+
+func (m *DeleteClusterHostsMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteClusterHostsMetadata) SetHostNames(v []string) {
+	m.HostNames = v
 }
 
 func (m *ListClusterBackupsRequest) SetClusterId(v string) {

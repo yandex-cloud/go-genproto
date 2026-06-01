@@ -46,6 +46,10 @@ func (m *Permissions) SetSanitizePayload(v *wrapperspb.StringValue) {
 	m.SanitizePayload = v
 }
 
+func (m *Permissions) SetDatabases(v *wrapperspb.StringValue) {
+	m.Databases = v
+}
+
 func (m *UserSpec) SetName(v string) {
 	m.Name = v
 }

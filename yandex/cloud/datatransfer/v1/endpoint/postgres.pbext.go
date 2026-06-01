@@ -146,6 +146,10 @@ func (m *PostgresSource) SetServiceSchema(v string) {
 	m.ServiceSchema = v
 }
 
+func (m *PostgresSource) SetCollapseInheritTable(v bool) {
+	m.CollapseInheritTable = v
+}
+
 func (m *PostgresSource) SetObjectTransferSettings(v *PostgresObjectTransferSettings) {
 	m.ObjectTransferSettings = v
 }

@@ -87,9 +87,12 @@ type ListFormatSchemasRequest struct {
 	// ClickHouse cluster ID.
 	// To get a ClickHouse cluster ID, use the [ClusterService.List] method.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return. If the number of the results is larger than [page_size], the service returns [ListFormatSchemasResponse.next_page_token]. You can use it to get the next page of the results in subsequent requests of a format schema list.
+	// The maximum number of results per page to return. If the number of the results is larger than [page_size],
+	// the service returns [ListFormatSchemasResponse.next_page_token]. You can use it to get the next page of
+	// the results in subsequent requests of a format schema list.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListFormatSchemasResponse.next_page_token] returned by the previous format schema list request.
+	// Page token. To get the next page of results, set [page_token] to the [ListFormatSchemasResponse.next_page_token]
+	// returned by the previous format schema list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -150,7 +153,10 @@ type ListFormatSchemasResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of format schemas.
 	FormatSchemas []*FormatSchema `protobuf:"bytes,1,rep,name=format_schemas,json=formatSchemas,proto3" json:"format_schemas,omitempty"`
-	// This token allows you to get the next page of results when requesting the format schema list. If the number of the results is larger than [ListFormatSchemasRequest.page_size], use the [next_page_token] as the value for the [ListFormatSchemasRequest.page_token] parameter in the next request. Each subsequent request will have its own [next_page_token] to continue paging through the results.
+	// This token allows you to get the next page of results when requesting the format schema list. If the number of
+	// the results is larger than [ListFormatSchemasRequest.page_size], use the [next_page_token] as the value for
+	// the [ListFormatSchemasRequest.page_token] parameter in the next request.
+	// Each subsequent request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -222,6 +222,8 @@ type CreateClusterRequest struct {
 	SecurityGroupIds []string `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Cluster specification.
 	Spec *ClusterSpec `protobuf:"bytes,8,opt,name=spec,proto3" json:"spec,omitempty"`
+	// Cluster maintenance window
+	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,10,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// CIDRs whitelist.
 	CidrBlocksWhitelist *CidrBlocks `protobuf:"bytes,9,opt,name=cidr_blocks_whitelist,json=cidrBlocksWhitelist,proto3" json:"cidr_blocks_whitelist,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -314,6 +316,13 @@ func (x *CreateClusterRequest) GetSpec() *ClusterSpec {
 	return nil
 }
 
+func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
+	if x != nil {
+		return x.MaintenanceWindow
+	}
+	return nil
+}
+
 func (x *CreateClusterRequest) GetCidrBlocksWhitelist() *CidrBlocks {
 	if x != nil {
 		return x.CidrBlocksWhitelist
@@ -390,6 +399,8 @@ type UpdateClusterRequest struct {
 	SecurityGroupIds []string `protobuf:"bytes,7,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// New cluster specification.
 	Spec *ClusterSpec `protobuf:"bytes,8,opt,name=spec,proto3" json:"spec,omitempty"`
+	// New cluster maintenance window
+	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,10,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// CIDRs whitelist.
 	CidrBlocksWhitelist *CidrBlocks `protobuf:"bytes,9,opt,name=cidr_blocks_whitelist,json=cidrBlocksWhitelist,proto3" json:"cidr_blocks_whitelist,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -478,6 +489,13 @@ func (x *UpdateClusterRequest) GetSecurityGroupIds() []string {
 func (x *UpdateClusterRequest) GetSpec() *ClusterSpec {
 	if x != nil {
 		return x.Spec
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
+	if x != nil {
+		return x.MaintenanceWindow
 	}
 	return nil
 }
@@ -808,7 +826,7 @@ var File_yandex_cloud_ytsaurus_v1_cluster_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_ytsaurus_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/ytsaurus/v1/cluster_service.proto\x12\x18yandex.cloud.ytsaurus.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/ytsaurus/v1/cluster.proto\"@\n" +
+	".yandex/cloud/ytsaurus/v1/cluster_service.proto\x12\x18yandex.cloud.ytsaurus.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/ytsaurus/v1/cluster.proto\x1a*yandex/cloud/ytsaurus/v1/maintenance.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\x8c\x01\n" +
@@ -820,7 +838,7 @@ const file_yandex_cloud_ytsaurus_v1_cluster_service_proto_rawDesc = "" +
 	"\x06filter\x18\x04 \x03(\tR\x06filter\"}\n" +
 	"\x14ListClustersResponse\x12=\n" +
 	"\bclusters\x18\x01 \x03(\v2!.yandex.cloud.ytsaurus.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc1\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9d\x05\n" +
 	"\x14CreateClusterRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x1d\n" +
 	"\azone_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12P\n" +
@@ -829,14 +847,16 @@ const file_yandex_cloud_ytsaurus_v1_cluster_service_proto_rawDesc = "" +
 	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.ytsaurus.v1.CreateClusterRequest.LabelsEntryR\x06labels\x12!\n" +
 	"\tsubnet_id\x18\x06 \x01(\tB\x04\xe8\xc71\x01R\bsubnetId\x12,\n" +
 	"\x12security_group_ids\x18\a \x03(\tR\x10securityGroupIds\x129\n" +
-	"\x04spec\x18\b \x01(\v2%.yandex.cloud.ytsaurus.v1.ClusterSpecR\x04spec\x12X\n" +
+	"\x04spec\x18\b \x01(\v2%.yandex.cloud.ytsaurus.v1.ClusterSpecR\x04spec\x12Z\n" +
+	"\x12maintenance_window\x18\n" +
+	" \x01(\v2+.yandex.cloud.ytsaurus.v1.MaintenanceWindowR\x11maintenanceWindow\x12X\n" +
 	"\x15cidr_blocks_whitelist\x18\t \x01(\v2$.yandex.cloud.ytsaurus.v1.CidrBlocksR\x13cidrBlocksWhitelist\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xa5\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x81\x05\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -847,7 +867,9 @@ const file_yandex_cloud_ytsaurus_v1_cluster_service_proto_rawDesc = "" +
 	"\x06labels\x18\x05 \x03(\v2:.yandex.cloud.ytsaurus.v1.UpdateClusterRequest.LabelsEntryR\x06labels\x12\x1b\n" +
 	"\tsubnet_id\x18\x06 \x01(\tR\bsubnetId\x12,\n" +
 	"\x12security_group_ids\x18\a \x03(\tR\x10securityGroupIds\x129\n" +
-	"\x04spec\x18\b \x01(\v2%.yandex.cloud.ytsaurus.v1.ClusterSpecR\x04spec\x12X\n" +
+	"\x04spec\x18\b \x01(\v2%.yandex.cloud.ytsaurus.v1.ClusterSpecR\x04spec\x12Z\n" +
+	"\x12maintenance_window\x18\n" +
+	" \x01(\v2+.yandex.cloud.ytsaurus.v1.MaintenanceWindowR\x11maintenanceWindow\x12X\n" +
 	"\x15cidr_blocks_whitelist\x18\t \x01(\v2$.yandex.cloud.ytsaurus.v1.CidrBlocksR\x13cidrBlocksWhitelist\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -919,38 +941,41 @@ var file_yandex_cloud_ytsaurus_v1_cluster_service_proto_goTypes = []any{
 	nil,                           // 14: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.LabelsEntry
 	(*Cluster)(nil),               // 15: yandex.cloud.ytsaurus.v1.Cluster
 	(*ClusterSpec)(nil),           // 16: yandex.cloud.ytsaurus.v1.ClusterSpec
-	(*CidrBlocks)(nil),            // 17: yandex.cloud.ytsaurus.v1.CidrBlocks
-	(*fieldmaskpb.FieldMask)(nil), // 18: google.protobuf.FieldMask
-	(*operation.Operation)(nil),   // 19: yandex.cloud.operation.Operation
+	(*MaintenanceWindow)(nil),     // 17: yandex.cloud.ytsaurus.v1.MaintenanceWindow
+	(*CidrBlocks)(nil),            // 18: yandex.cloud.ytsaurus.v1.CidrBlocks
+	(*fieldmaskpb.FieldMask)(nil), // 19: google.protobuf.FieldMask
+	(*operation.Operation)(nil),   // 20: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_ytsaurus_v1_cluster_service_proto_depIdxs = []int32{
 	15, // 0: yandex.cloud.ytsaurus.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.ytsaurus.v1.Cluster
 	13, // 1: yandex.cloud.ytsaurus.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.ytsaurus.v1.CreateClusterRequest.LabelsEntry
 	16, // 2: yandex.cloud.ytsaurus.v1.CreateClusterRequest.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
-	17, // 3: yandex.cloud.ytsaurus.v1.CreateClusterRequest.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
-	18, // 4: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	14, // 5: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.ytsaurus.v1.UpdateClusterRequest.LabelsEntry
-	16, // 6: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
-	17, // 7: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
-	0,  // 8: yandex.cloud.ytsaurus.v1.ClusterService.Get:input_type -> yandex.cloud.ytsaurus.v1.GetClusterRequest
-	1,  // 9: yandex.cloud.ytsaurus.v1.ClusterService.List:input_type -> yandex.cloud.ytsaurus.v1.ListClustersRequest
-	3,  // 10: yandex.cloud.ytsaurus.v1.ClusterService.Create:input_type -> yandex.cloud.ytsaurus.v1.CreateClusterRequest
-	5,  // 11: yandex.cloud.ytsaurus.v1.ClusterService.Update:input_type -> yandex.cloud.ytsaurus.v1.UpdateClusterRequest
-	7,  // 12: yandex.cloud.ytsaurus.v1.ClusterService.Delete:input_type -> yandex.cloud.ytsaurus.v1.DeleteClusterRequest
-	9,  // 13: yandex.cloud.ytsaurus.v1.ClusterService.Start:input_type -> yandex.cloud.ytsaurus.v1.StartClusterRequest
-	11, // 14: yandex.cloud.ytsaurus.v1.ClusterService.Stop:input_type -> yandex.cloud.ytsaurus.v1.StopClusterRequest
-	15, // 15: yandex.cloud.ytsaurus.v1.ClusterService.Get:output_type -> yandex.cloud.ytsaurus.v1.Cluster
-	2,  // 16: yandex.cloud.ytsaurus.v1.ClusterService.List:output_type -> yandex.cloud.ytsaurus.v1.ListClustersResponse
-	19, // 17: yandex.cloud.ytsaurus.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	19, // 18: yandex.cloud.ytsaurus.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	19, // 19: yandex.cloud.ytsaurus.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	19, // 20: yandex.cloud.ytsaurus.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	19, // 21: yandex.cloud.ytsaurus.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	15, // [15:22] is the sub-list for method output_type
-	8,  // [8:15] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	17, // 3: yandex.cloud.ytsaurus.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.ytsaurus.v1.MaintenanceWindow
+	18, // 4: yandex.cloud.ytsaurus.v1.CreateClusterRequest.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
+	19, // 5: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	14, // 6: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.ytsaurus.v1.UpdateClusterRequest.LabelsEntry
+	16, // 7: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.spec:type_name -> yandex.cloud.ytsaurus.v1.ClusterSpec
+	17, // 8: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.ytsaurus.v1.MaintenanceWindow
+	18, // 9: yandex.cloud.ytsaurus.v1.UpdateClusterRequest.cidr_blocks_whitelist:type_name -> yandex.cloud.ytsaurus.v1.CidrBlocks
+	0,  // 10: yandex.cloud.ytsaurus.v1.ClusterService.Get:input_type -> yandex.cloud.ytsaurus.v1.GetClusterRequest
+	1,  // 11: yandex.cloud.ytsaurus.v1.ClusterService.List:input_type -> yandex.cloud.ytsaurus.v1.ListClustersRequest
+	3,  // 12: yandex.cloud.ytsaurus.v1.ClusterService.Create:input_type -> yandex.cloud.ytsaurus.v1.CreateClusterRequest
+	5,  // 13: yandex.cloud.ytsaurus.v1.ClusterService.Update:input_type -> yandex.cloud.ytsaurus.v1.UpdateClusterRequest
+	7,  // 14: yandex.cloud.ytsaurus.v1.ClusterService.Delete:input_type -> yandex.cloud.ytsaurus.v1.DeleteClusterRequest
+	9,  // 15: yandex.cloud.ytsaurus.v1.ClusterService.Start:input_type -> yandex.cloud.ytsaurus.v1.StartClusterRequest
+	11, // 16: yandex.cloud.ytsaurus.v1.ClusterService.Stop:input_type -> yandex.cloud.ytsaurus.v1.StopClusterRequest
+	15, // 17: yandex.cloud.ytsaurus.v1.ClusterService.Get:output_type -> yandex.cloud.ytsaurus.v1.Cluster
+	2,  // 18: yandex.cloud.ytsaurus.v1.ClusterService.List:output_type -> yandex.cloud.ytsaurus.v1.ListClustersResponse
+	20, // 19: yandex.cloud.ytsaurus.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 20: yandex.cloud.ytsaurus.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	20, // 21: yandex.cloud.ytsaurus.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	20, // 22: yandex.cloud.ytsaurus.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	20, // 23: yandex.cloud.ytsaurus.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	17, // [17:24] is the sub-list for method output_type
+	10, // [10:17] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ytsaurus_v1_cluster_service_proto_init() }
@@ -959,6 +984,7 @@ func file_yandex_cloud_ytsaurus_v1_cluster_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_ytsaurus_v1_cluster_proto_init()
+	file_yandex_cloud_ytsaurus_v1_maintenance_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

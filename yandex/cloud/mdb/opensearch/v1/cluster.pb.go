@@ -652,9 +652,9 @@ type ClusterConfig struct {
 	Dashboards *Dashboards `protobuf:"bytes,3,opt,name=dashboards,proto3" json:"dashboards,omitempty"`
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,4,opt,name=access,proto3" json:"access,omitempty"`
-	// Snapshot management configuration.
+	// Snapshot management configuration
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,5,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	// Full version.
+	// Full version
 	FullVersion string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	// Audit log settings.
 	AuditLog      *AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
@@ -830,7 +830,6 @@ type isOpenSearch_Config interface {
 }
 
 type OpenSearch_OpensearchConfigSet_2 struct {
-	// OpenSearch server configuration settings.
 	OpensearchConfigSet_2 *config.OpenSearchConfigSet2 `protobuf:"bytes,3,opt,name=opensearch_config_set_2,json=opensearchConfigSet_2,proto3,oneof"`
 }
 
@@ -963,17 +962,17 @@ type Host struct {
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Type of the host. If the field has default value, it is not returned in the response.
 	Type Host_Type `protobuf:"varint,5,opt,name=type,proto3,enum=yandex.cloud.mdb.opensearch.v1.Host_Type" json:"type,omitempty"`
-	// Aggregated health of the host. If the field has default value, it is not returned in the response.
+	// Aggregated host health.
 	Health Host_Health `protobuf:"varint,6,opt,name=health,proto3,enum=yandex.cloud.mdb.opensearch.v1.Host_Health" json:"health,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Determines whether a public IP is assigned to the host.
 	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	// Resources used by the host.
+	// System metrics.
 	System *Host_SystemMetrics `protobuf:"bytes,10,opt,name=system,proto3" json:"system,omitempty"`
-	// Name of the host group that the host belongs to.
+	// Which node group the host belongs to.
 	NodeGroup string `protobuf:"bytes,11,opt,name=node_group,json=nodeGroup,proto3" json:"node_group,omitempty"`
-	// Roles of the host.
+	// Roles of the nodes in the group.
 	Roles         []OpenSearch_GroupRole `protobuf:"varint,12,rep,packed,name=roles,proto3,enum=yandex.cloud.mdb.opensearch.v1.OpenSearch_GroupRole" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1250,6 +1249,7 @@ func (x *AuditLog) GetLogBackupOperations() *wrapperspb.BoolValue {
 	return nil
 }
 
+// Disk size autoscaling settings.
 type DiskSizeAutoscaling struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Amount of used storage for automatic disk scaling in the maintenance window, 0 means disabled, in percent.
@@ -1772,7 +1772,7 @@ var File_yandex_cloud_mdb_opensearch_v1_cluster_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/opensearch/v1/cluster.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\"\xfa\n" +
+	",yandex/cloud/mdb/opensearch/v1/cluster.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xfa\n" +
 	"\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -1862,7 +1862,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\x04WARM\x10\x03\x12\n" +
 	"\n" +
 	"\x06INGEST\x10\x04B\b\n" +
-	"\x06config\"\xc2\x03\n" +
+	"\x06config\"\xc8\x03\n" +
 	"\n" +
 	"Dashboards\x12U\n" +
 	"\vnode_groups\x18\x02 \x03(\v24.yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroupR\n" +
@@ -1876,11 +1876,11 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"subnet_ids\x18\x05 \x03(\tR\tsubnetIds\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12g\n" +
-	"\x15disk_size_autoscaling\x18\t \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\a\x10\t\"x\n" +
-	"\tResources\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
-	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
-	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
+	"\x15disk_size_autoscaling\x18\t \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\a\x10\tJ\x04\b\x01\x10\x02\"\x8c\x01\n" +
+	"\tResources\x122\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\x12#\n" +
+	"\tdisk_size\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\bdiskSize\x12&\n" +
+	"\fdisk_type_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"diskTypeId\"\xec\b\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
