@@ -866,7 +866,7 @@ func (x *UpdateIpPermissionsMetadata) GetRegistryId() string {
 type ListArtifactsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the registry artifact to list repositories in.
-	// To get the registry ID use a [ArtifactService.List] request.
+	// To get the registry ID use a [RegistryService.List] request.
 	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	// The path to a specific node where the registry artifact is located.
 	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`

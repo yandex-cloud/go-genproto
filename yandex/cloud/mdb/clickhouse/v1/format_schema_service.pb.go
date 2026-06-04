@@ -342,8 +342,9 @@ type UpdateFormatSchemaRequest struct {
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Format schema name.
 	// To get a format schema name, use the [FormatSchemaService.List] method.
-	FormatSchemaName string                 `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
-	UpdateMask       *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	FormatSchemaName string `protobuf:"bytes,2,opt,name=format_schema_name,json=formatSchemaName,proto3" json:"format_schema_name,omitempty"`
+	// Field mask that specifies which attributes of the format schema should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// [Link to the file](/docs/managed-clickhouse/operations/s3-access#get-link-to-object) of a format schema in Yandex Object Storage. Managed Service for ClickHouse works only with format schemas imported to Object Storage.
 	Uri           string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -576,11 +577,11 @@ var File_yandex_cloud_mdb_clickhouse_v1_format_schema_service_proto protoreflect
 
 const file_yandex_cloud_mdb_clickhouse_v1_format_schema_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/mdb/clickhouse/v1/format_schema_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/mdb/clickhouse/v1/format_schema.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x93\x01\n" +
+	":yandex/cloud/mdb/clickhouse/v1/format_schema_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a2yandex/cloud/mdb/clickhouse/v1/format_schema.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x81\x01\n" +
 	"\x16GetFormatSchemaRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12L\n" +
-	"\x12format_schema_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x10formatSchemaName\"\x9a\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
+	"\x12format_schema_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x10formatSchemaName\"\x9a\x01\n" +
 	"\x18ListFormatSchemasRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -600,22 +601,22 @@ const file_yandex_cloud_mdb_clickhouse_v1_format_schema_service_proto_rawDesc = 
 	"\x1aCreateFormatSchemaMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12,\n" +
-	"\x12format_schema_name\x18\x02 \x01(\tR\x10formatSchemaName\"\xe5\x01\n" +
+	"\x12format_schema_name\x18\x02 \x01(\tR\x10formatSchemaName\"\xd3\x01\n" +
 	"\x19UpdateFormatSchemaRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12L\n" +
-	"\x12format_schema_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x10formatSchemaName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
+	"\x12format_schema_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x10formatSchemaName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x10\n" +
 	"\x03uri\x18\x04 \x01(\tR\x03uri\"i\n" +
 	"\x1aUpdateFormatSchemaMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12,\n" +
-	"\x12format_schema_name\x18\x02 \x01(\tR\x10formatSchemaName\"\x96\x01\n" +
+	"\x12format_schema_name\x18\x02 \x01(\tR\x10formatSchemaName\"\x84\x01\n" +
 	"\x19DeleteFormatSchemaRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12L\n" +
-	"\x12format_schema_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x10formatSchemaName\"i\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
+	"\x12format_schema_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\x10formatSchemaName\"i\n" +
 	"\x1aDeleteFormatSchemaMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12,\n" +

@@ -29,11 +29,9 @@ const (
 type GetConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster the connector belongs to.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Apache Kafka® connector to return information about.
-	//
 	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,15 +85,12 @@ func (x *GetConnectorRequest) GetConnectorName() string {
 type ListConnectorsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to list connectors in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the API returns a [ListConnectorsResponse.next_page_token] that can be used to get the next page of results in the subsequent [ConnectorService.List] requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token that can be used to iterate through multiple pages of results.
-	//
 	// To get the next page of results, set [page_token] to the [ListConnectorsResponse.next_page_token] returned by the previous [ConnectorService.List] request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -158,7 +153,6 @@ type ListConnectorsResponse struct {
 	// List of Apache Kafka® Connectors.
 	Connectors []*Connector `protobuf:"bytes,1,rep,name=connectors,proto3" json:"connectors,omitempty"`
 	// The token that can be used to get the next page of results.
-	//
 	// If the number of results is larger than [ListConnectorsRequest.page_size], use the [next_page_token] as the value for the [ListConnectorsRequest.page_token] in the subsequent [ConnectorService.List] request to iterate through multiple pages of results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -212,7 +206,6 @@ func (x *ListConnectorsResponse) GetNextPageToken() string {
 type CreateConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to create the connector in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the connector to create.
@@ -322,11 +315,9 @@ func (x *CreateConnectorMetadata) GetConnectorName() string {
 type UpdateConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to update the connector in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the connector to update.
-	//
 	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 	// Field mask that specifies which settings of the connector should be updated.
@@ -452,11 +443,9 @@ func (x *UpdateConnectorMetadata) GetConnectorName() string {
 type DeleteConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to delete the connector from.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the connector to delete.
-	//
 	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -564,11 +553,9 @@ func (x *DeleteConnectorMetadata) GetConnectorName() string {
 type ResumeConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to resume the connector in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Apache Kafka® connector to resume.
-	//
 	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -676,11 +663,9 @@ func (x *ResumeConnectorMetadata) GetConnectorName() string {
 type PauseConnectorRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to pause the connector in.
-	//
 	// To get this ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Apache Kafka® connector to pause.
-	//
 	// To get this name, make a [ConnectorService.List] request.
 	ConnectorName string `protobuf:"bytes,2,opt,name=connector_name,json=connectorName,proto3" json:"connector_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -789,7 +774,7 @@ var File_yandex_cloud_mdb_kafka_v1_connector_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_kafka_v1_connector_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/kafka/v1/connector_service.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a)yandex/cloud/mdb/kafka/v1/connector.proto\"\x8b\x01\n" +
+	"1yandex/cloud/mdb/kafka/v1/connector_service.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/kafka/v1/connector.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8b\x01\n" +
 	"\x13GetConnectorRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12G\n" +
@@ -844,11 +829,11 @@ const file_yandex_cloud_mdb_kafka_v1_connector_service_proto_rawDesc = "" +
 	"\x15PauseConnectorRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12G\n" +
-	"\x0econnector_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x0f[-_.a-zA-Z0-9]*\x8a\xc81\x05<=256R\rconnectorName\"\x80\x01\n" +
+	"\x0econnector_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x0f[-_.a-zA-Z0-9]*\x8a\xc81\x05<=256R\rconnectorName\"\x7f\n" +
 	"\x16PauseConnectorMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12G\n" +
-	"\x0econnector_name\x18\x02 \x01(\tB \xe8\xc71\x01\xf2\xc71\x0f[-_.a-zA-Z0-9]*\x8a\xc81\x05<=256R\rconnectorName2\xa6\v\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12F\n" +
+	"\x0econnector_name\x18\x02 \x01(\tB\x1f\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x05<=256R\rconnectorName2\xa6\v\n" +
 	"\x10ConnectorService\x12\xa8\x01\n" +
 	"\x03Get\x12..yandex.cloud.mdb.kafka.v1.GetConnectorRequest\x1a$.yandex.cloud.mdb.kafka.v1.Connector\"K\x82\xd3\xe4\x93\x02E\x12C/managed-kafka/v1/clusters/{cluster_id}/connectors/{connector_name}\x12\xa7\x01\n" +
 	"\x04List\x120.yandex.cloud.mdb.kafka.v1.ListConnectorsRequest\x1a1.yandex.cloud.mdb.kafka.v1.ListConnectorsResponse\":\x82\xd3\xe4\x93\x024\x122/managed-kafka/v1/clusters/{cluster_id}/connectors\x12\xc5\x01\n" +

@@ -29,11 +29,9 @@ const (
 type GetTopicRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster that the topic belongs to.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the Kafka topic resource to return.
-	//
 	// To get the name of the topic, make a [TopicService.List] request.
 	TopicName     string `protobuf:"bytes,2,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,15 +85,12 @@ func (x *GetTopicRequest) GetTopicName() string {
 type ListTopicsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to list topics in.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListTopicsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set [page_token] to the [ListTopicsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -158,7 +153,6 @@ type ListTopicsResponse struct {
 	// List of Kafka topics.
 	Topics []*Topic `protobuf:"bytes,1,rep,name=topics,proto3" json:"topics,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListTopicsRequest.page_size], use the [next_page_token] as the value for the [ListTopicsRequest.page_token] parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -213,7 +207,6 @@ func (x *ListTopicsResponse) GetNextPageToken() string {
 type CreateTopicRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to create a topic in.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the topic to create.
@@ -323,16 +316,13 @@ func (x *CreateTopicMetadata) GetTopicName() string {
 type UpdateTopicRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to update a topic in.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the topic to update.
-	//
 	// To get the name of the topic, make a [TopicService.List] request.
 	TopicName  string                 `protobuf:"bytes,2,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New configuration of the topic.
-	//
 	// Use [update_mask] to prevent reverting all topic settings that are not listed in [topic_spec] to their default values.
 	TopicSpec     *TopicSpec `protobuf:"bytes,4,opt,name=topic_spec,json=topicSpec,proto3" json:"topic_spec,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -454,11 +444,9 @@ func (x *UpdateTopicMetadata) GetTopicName() string {
 type DeleteTopicRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to delete a topic in.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the topic to delete.
-	//
 	// To get the name of the topic, make a [TopicService.List] request.
 	TopicName     string `protobuf:"bytes,2,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -567,7 +555,7 @@ var File_yandex_cloud_mdb_kafka_v1_topic_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_mdb_kafka_v1_topic_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/mdb/kafka/v1/topic_service.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a%yandex/cloud/mdb/kafka/v1/topic.proto\"~\n" +
+	"-yandex/cloud/mdb/kafka/v1/topic_service.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/mdb/kafka/v1/topic.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"~\n" +
 	"\x0fGetTopicRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12>\n" +

@@ -10,7 +10,6 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/descriptorpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
@@ -621,10 +620,10 @@ type ConfigSpec struct {
 	Access *Access `protobuf:"bytes,9,opt,name=access,proto3" json:"access,omitempty"`
 	// Configuration of REST API.
 	RestApiConfig *ConfigSpec_RestAPIConfig `protobuf:"bytes,10,opt,name=rest_api_config,json=restApiConfig,proto3" json:"rest_api_config,omitempty"`
-	// DiskSizeAutoscaling settings
-	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,11,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
 	// Configuration and resource allocation for KRaft-controller hosts.
 	Kraft *ConfigSpec_KRaft `protobuf:"bytes,12,opt,name=kraft,proto3" json:"kraft,omitempty"`
+	// DiskSizeAutoscaling settings
+	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,11,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
 	// Configuration of Kafka UI.
 	KafkaUiConfig *ConfigSpec_KafkaUIConfig `protobuf:"bytes,13,opt,name=kafka_ui_config,json=kafkaUiConfig,proto3" json:"kafka_ui_config,omitempty"`
 	// Patch or release version ex. 3.9.1, 4.0.1 etc
@@ -734,16 +733,16 @@ func (x *ConfigSpec) GetRestApiConfig() *ConfigSpec_RestAPIConfig {
 	return nil
 }
 
-func (x *ConfigSpec) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
+func (x *ConfigSpec) GetKraft() *ConfigSpec_KRaft {
 	if x != nil {
-		return x.DiskSizeAutoscaling
+		return x.Kraft
 	}
 	return nil
 }
 
-func (x *ConfigSpec) GetKraft() *ConfigSpec_KRaft {
+func (x *ConfigSpec) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
 	if x != nil {
-		return x.Kraft
+		return x.DiskSizeAutoscaling
 	}
 	return nil
 }
@@ -832,12 +831,10 @@ type KafkaConfig2_8 struct {
 	// Cluster topics compression type.
 	CompressionType CompressionType `protobuf:"varint,1,opt,name=compression_type,json=compressionType,proto3,enum=yandex.cloud.mdb.kafka.v1.CompressionType" json:"compression_type,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.flush_messages] setting.
 	LogFlushIntervalMessages *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=log_flush_interval_messages,json=logFlushIntervalMessages,proto3" json:"log_flush_interval_messages,omitempty"`
 	// The maximum time (in milliseconds) that a message in any topic is kept in memory before flushed to disk.
 	// If not set, the value of [log_flush_scheduler_interval_ms] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.flush_ms] setting.
 	LogFlushIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=log_flush_interval_ms,json=logFlushIntervalMs,proto3" json:"log_flush_interval_ms,omitempty"`
 	// The frequency of checks (in milliseconds) for any logs that need to be flushed to disk.
@@ -845,27 +842,21 @@ type KafkaConfig2_8 struct {
 	LogFlushSchedulerIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=log_flush_scheduler_interval_ms,json=logFlushSchedulerIntervalMs,proto3" json:"log_flush_scheduler_interval_ms,omitempty"`
 	// Partition size limit; Kafka will discard old log segments to free up space if `delete` [TopicConfig2_8.cleanup_policy] is in effect.
 	// This setting is helpful if you need to control the size of a log due to limited disk space.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.retention_bytes] setting.
 	LogRetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=log_retention_bytes,json=logRetentionBytes,proto3" json:"log_retention_bytes,omitempty"`
 	// The number of hours to keep a log segment file before deleting it.
 	LogRetentionHours *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=log_retention_hours,json=logRetentionHours,proto3" json:"log_retention_hours,omitempty"`
 	// The number of minutes to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_hours] is used.
 	LogRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=log_retention_minutes,json=logRetentionMinutes,proto3" json:"log_retention_minutes,omitempty"`
 	// The number of milliseconds to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_minutes] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.retention_ms] setting.
 	LogRetentionMs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=log_retention_ms,json=logRetentionMs,proto3" json:"log_retention_ms,omitempty"`
 	// The maximum size of a single log file.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.segment_bytes] setting.
 	LogSegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=log_segment_bytes,json=logSegmentBytes,proto3" json:"log_segment_bytes,omitempty"`
 	// Should pre allocate file when create new segment?
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig2_8.preallocate] setting.
 	// Deprecated. Feature useless for Yandex Cloud.
 	//
@@ -1081,12 +1072,10 @@ type KafkaConfig3 struct {
 	// Cluster topics compression type.
 	CompressionType CompressionType `protobuf:"varint,1,opt,name=compression_type,json=compressionType,proto3,enum=yandex.cloud.mdb.kafka.v1.CompressionType" json:"compression_type,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.flush_messages] setting.
 	LogFlushIntervalMessages *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=log_flush_interval_messages,json=logFlushIntervalMessages,proto3" json:"log_flush_interval_messages,omitempty"`
 	// The maximum time (in milliseconds) that a message in any topic is kept in memory before flushed to disk.
 	// If not set, the value of [log_flush_scheduler_interval_ms] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.flush_ms] setting.
 	LogFlushIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=log_flush_interval_ms,json=logFlushIntervalMs,proto3" json:"log_flush_interval_ms,omitempty"`
 	// The frequency of checks (in milliseconds) for any logs that need to be flushed to disk.
@@ -1094,27 +1083,21 @@ type KafkaConfig3 struct {
 	LogFlushSchedulerIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=log_flush_scheduler_interval_ms,json=logFlushSchedulerIntervalMs,proto3" json:"log_flush_scheduler_interval_ms,omitempty"`
 	// Partition size limit; Kafka will discard old log segments to free up space if `delete` [TopicConfig3.cleanup_policy] is in effect.
 	// This setting is helpful if you need to control the size of a log due to limited disk space.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.retention_bytes] setting.
 	LogRetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=log_retention_bytes,json=logRetentionBytes,proto3" json:"log_retention_bytes,omitempty"`
 	// The number of hours to keep a log segment file before deleting it.
 	LogRetentionHours *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=log_retention_hours,json=logRetentionHours,proto3" json:"log_retention_hours,omitempty"`
 	// The number of minutes to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_hours] is used.
 	LogRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=log_retention_minutes,json=logRetentionMinutes,proto3" json:"log_retention_minutes,omitempty"`
 	// The number of milliseconds to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_minutes] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.retention_ms] setting.
 	LogRetentionMs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=log_retention_ms,json=logRetentionMs,proto3" json:"log_retention_ms,omitempty"`
 	// The maximum size of a single log file.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.segment_bytes] setting.
 	LogSegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=log_segment_bytes,json=logSegmentBytes,proto3" json:"log_segment_bytes,omitempty"`
 	// Should pre allocate file when create new segment?
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.preallocate] setting.
 	// Deprecated. Feature useless for Yandex Cloud.
 	//
@@ -1330,12 +1313,10 @@ type KafkaConfig4 struct {
 	// Cluster topics compression type.
 	CompressionType CompressionType `protobuf:"varint,1,opt,name=compression_type,json=compressionType,proto3,enum=yandex.cloud.mdb.kafka.v1.CompressionType" json:"compression_type,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.flush_messages] setting.
 	LogFlushIntervalMessages *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=log_flush_interval_messages,json=logFlushIntervalMessages,proto3" json:"log_flush_interval_messages,omitempty"`
 	// The maximum time (in milliseconds) that a message in any topic is kept in memory before flushed to disk.
 	// If not set, the value of [log_flush_scheduler_interval_ms] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig4.flush_ms] setting.
 	LogFlushIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=log_flush_interval_ms,json=logFlushIntervalMs,proto3" json:"log_flush_interval_ms,omitempty"`
 	// The frequency of checks (in milliseconds) for any logs that need to be flushed to disk.
@@ -1343,23 +1324,18 @@ type KafkaConfig4 struct {
 	LogFlushSchedulerIntervalMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=log_flush_scheduler_interval_ms,json=logFlushSchedulerIntervalMs,proto3" json:"log_flush_scheduler_interval_ms,omitempty"`
 	// Partition size limit; Kafka will discard old log segments to free up space if `delete` [TopicConfig4.cleanup_policy] is in effect.
 	// This setting is helpful if you need to control the size of a log due to limited disk space.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig3.retention_bytes] setting.
 	LogRetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=log_retention_bytes,json=logRetentionBytes,proto3" json:"log_retention_bytes,omitempty"`
 	// The number of hours to keep a log segment file before deleting it.
 	LogRetentionHours *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=log_retention_hours,json=logRetentionHours,proto3" json:"log_retention_hours,omitempty"`
 	// The number of minutes to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_hours] is used.
 	LogRetentionMinutes *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=log_retention_minutes,json=logRetentionMinutes,proto3" json:"log_retention_minutes,omitempty"`
 	// The number of milliseconds to keep a log segment file before deleting it.
-	//
 	// If not set, the value of [log_retention_minutes] is used.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig4.retention_ms] setting.
 	LogRetentionMs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=log_retention_ms,json=logRetentionMs,proto3" json:"log_retention_ms,omitempty"`
 	// The maximum size of a single log file.
-	//
 	// This is the global cluster-level setting that can be overridden on a topic level by using the [TopicConfig4.segment_bytes] setting.
 	LogSegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=log_segment_bytes,json=logSegmentBytes,proto3" json:"log_segment_bytes,omitempty"`
 	// The SO_SNDBUF buffer of the socket server sockets. If the value is -1, the OS default will be used.
@@ -1576,7 +1552,6 @@ type Host struct {
 	// ID of the subnet the host resides in.
 	SubnetId string `protobuf:"bytes,8,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// The flag that defines whether a public IP address is assigned to the node.
-	//
 	// If the value is `true`, then this node is available on the Internet via it's public IP address.
 	AssignPublicIp bool `protobuf:"varint,9,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -2118,7 +2093,7 @@ var File_yandex_cloud_mdb_kafka_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/kafka/v1/cluster.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a&yandex/cloud/mdb/kafka/v1/common.proto\x1a+yandex/cloud/mdb/kafka/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xa5\v\n" +
+	"'yandex/cloud/mdb/kafka/v1/cluster.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a&yandex/cloud/mdb/kafka/v1/common.proto\x1a+yandex/cloud/mdb/kafka/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xa5\v\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -2185,9 +2160,9 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x0fschema_registry\x18\b \x01(\bR\x0eschemaRegistry\x129\n" +
 	"\x06access\x18\t \x01(\v2!.yandex.cloud.mdb.kafka.v1.AccessR\x06access\x12[\n" +
 	"\x0frest_api_config\x18\n" +
-	" \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.RestAPIConfigR\rrestApiConfig\x12b\n" +
-	"\x15disk_size_autoscaling\x18\v \x01(\v2..yandex.cloud.mdb.kafka.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12A\n" +
-	"\x05kraft\x18\f \x01(\v2+.yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaftR\x05kraft\x12[\n" +
+	" \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.RestAPIConfigR\rrestApiConfig\x12A\n" +
+	"\x05kraft\x18\f \x01(\v2+.yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaftR\x05kraft\x12b\n" +
+	"\x15disk_size_autoscaling\x18\v \x01(\v2..yandex.cloud.mdb.kafka.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12[\n" +
 	"\x0fkafka_ui_config\x18\r \x01(\v23.yandex.cloud.mdb.kafka.v1.ConfigSpec.KafkaUIConfigR\rkafkaUiConfig\x12#\n" +
 	"\rpatch_version\x18\x0e \x01(\tR\fpatchVersion\x1a\xdd\x02\n" +
 	"\x05Kafka\x12B\n" +
@@ -2368,8 +2343,8 @@ var file_yandex_cloud_mdb_kafka_v1_cluster_proto_depIdxs = []int32{
 	26, // 13: yandex.cloud.mdb.kafka.v1.ConfigSpec.brokers_count:type_name -> google.protobuf.Int64Value
 	13, // 14: yandex.cloud.mdb.kafka.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.kafka.v1.Access
 	20, // 15: yandex.cloud.mdb.kafka.v1.ConfigSpec.rest_api_config:type_name -> yandex.cloud.mdb.kafka.v1.ConfigSpec.RestAPIConfig
-	14, // 16: yandex.cloud.mdb.kafka.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.kafka.v1.DiskSizeAutoscaling
-	19, // 17: yandex.cloud.mdb.kafka.v1.ConfigSpec.kraft:type_name -> yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaft
+	19, // 16: yandex.cloud.mdb.kafka.v1.ConfigSpec.kraft:type_name -> yandex.cloud.mdb.kafka.v1.ConfigSpec.KRaft
+	14, // 17: yandex.cloud.mdb.kafka.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.kafka.v1.DiskSizeAutoscaling
 	21, // 18: yandex.cloud.mdb.kafka.v1.ConfigSpec.kafka_ui_config:type_name -> yandex.cloud.mdb.kafka.v1.ConfigSpec.KafkaUIConfig
 	27, // 19: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.compression_type:type_name -> yandex.cloud.mdb.kafka.v1.CompressionType
 	26, // 20: yandex.cloud.mdb.kafka.v1.KafkaConfig2_8.log_flush_interval_messages:type_name -> google.protobuf.Int64Value

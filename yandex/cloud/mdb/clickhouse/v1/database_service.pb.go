@@ -428,11 +428,11 @@ var File_yandex_cloud_mdb_clickhouse_v1_database_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_clickhouse_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/clickhouse/v1/database_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
+	"5yandex/cloud/mdb/clickhouse/v1/database_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"t\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
-	"\rdatabase_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"\x96\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"\x96\x01\n" +
 	"\x14ListDatabasesRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -450,11 +450,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_database_service_proto_rawDesc = "" +
 	"\x16CreateDatabaseMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x121\n" +
-	"\rdatabase_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"\x89\x01\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"w\n" +
 	"\x15DeleteDatabaseRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
-	"\rdatabase_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"h\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x121\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"h\n" +
 	"\x16DeleteDatabaseMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12)\n" +

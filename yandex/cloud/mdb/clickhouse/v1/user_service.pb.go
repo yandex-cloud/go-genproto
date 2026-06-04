@@ -832,11 +832,11 @@ var File_yandex_cloud_mdb_clickhouse_v1_user_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/clickhouse/v1/user_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/clickhouse/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"y\n" +
+	"1yandex/cloud/mdb/clickhouse/v1/user_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/clickhouse/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"h\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\"\x92\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12)\n" +
+	"\tuser_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\buserName\"\x92\x01\n" +
 	"\x10ListUsersRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -854,11 +854,11 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\x84\x04\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xf3\x03\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12)\n" +
+	"\tuser_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\buserName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12%\n" +
 	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x058-128R\bpassword\x12L\n" +
@@ -869,31 +869,31 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_service_proto_rawDesc = "" +
 	"\x12UpdateUserMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"|\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"k\n" +
 	"\x11DeleteUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\"\\\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12)\n" +
+	"\tuser_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\buserName\"\\\n" +
 	"\x12DeleteUserMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xd7\x01\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xc6\x01\n" +
 	"\x1aGrantUserPermissionRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12P\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12)\n" +
+	"\tuser_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\buserName\x12P\n" +
 	"\n" +
 	"permission\x18\x03 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.PermissionB\x04\xe8\xc71\x01R\n" +
 	"permission\"e\n" +
 	"\x1bGrantUserPermissionMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xcb\x01\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\buserName\"\xa8\x01\n" +
 	"\x1bRevokeUserPermissionRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12C\n" +
-	"\rdatabase_name\x18\x03 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\"f\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12)\n" +
+	"\tuser_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\buserName\x121\n" +
+	"\rdatabase_name\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\fdatabaseName\"f\n" +
 	"\x1cRevokeUserPermissionMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12!\n" +

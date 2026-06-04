@@ -470,6 +470,14 @@ func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSeconds(v *
 	m.ReplicatedDeduplicationWindowSeconds = v
 }
 
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowForAsyncInserts(v *wrapperspb.Int64Value) {
+	m.ReplicatedDeduplicationWindowForAsyncInserts = v
+}
+
+func (m *ClickhouseConfig_MergeTree) SetReplicatedDeduplicationWindowSecondsForAsyncInserts(v *wrapperspb.Int64Value) {
+	m.ReplicatedDeduplicationWindowSecondsForAsyncInserts = v
+}
+
 func (m *ClickhouseConfig_MergeTree) SetFsyncAfterInsert(v *wrapperspb.BoolValue) {
 	m.FsyncAfterInsert = v
 }

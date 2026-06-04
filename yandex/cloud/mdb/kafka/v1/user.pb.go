@@ -100,7 +100,6 @@ type User struct {
 	// Name of the Kafka user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Apache Kafka® cluster the user belongs to.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Set of permissions granted to this user.
@@ -227,7 +226,6 @@ type Permission struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name or prefix-pattern with wildcard for the topic that the permission grants access to.
 	// With roles SCHEMA_READER and SCHEMA_WRITER: string that contains set of schema registry subjects, separated by ';'.
-	//
 	// To get the topic name, make a [TopicService.List] request.
 	TopicName string `protobuf:"bytes,1,opt,name=topic_name,json=topicName,proto3" json:"topic_name,omitempty"`
 	// Access role type to grant to the user.
@@ -235,7 +233,6 @@ type Permission struct {
 	// Lists hosts allowed for this permission.
 	// Only ip-addresses allowed as value of single host.
 	// When not defined, access from any host is allowed.
-	//
 	// Bare in mind that the same host might appear in multiple permissions at the same time,
 	// hence removing individual permission doesn't automatically restricts access from the [allow_hosts] of the permission.
 	// If the same host(s) is listed for another permission of the same principal/topic, the host(s) remains allowed.
@@ -304,11 +301,11 @@ const file_yandex_cloud_mdb_kafka_v1_user_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.yandex.cloud.mdb.kafka.v1.PermissionR\vpermissions\"\xb2\x01\n" +
-	"\bUserSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x051-256R\x04name\x12)\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.yandex.cloud.mdb.kafka.v1.PermissionR\vpermissions\"\xbf\x01\n" +
+	"\bUserSpec\x12?\n" +
+	"\x04name\x18\x01 \x01(\tB+\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x051-256R\x04name\x12)\n" +
 	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12G\n" +
-	"\vpermissions\x18\x03 \x03(\v2%.yandex.cloud.mdb.kafka.v1.PermissionR\vpermissions\"\xaa\x03\n" +
+	"\vpermissions\x18\x03 \x03(\v2%.yandex.cloud.mdb.kafka.v1.PermissionR\vpermissions\"\xb0\x03\n" +
 	"\n" +
 	"Permission\x12\x1d\n" +
 	"\n" +
@@ -326,7 +323,7 @@ const file_yandex_cloud_mdb_kafka_v1_user_proto_rawDesc = "" +
 	"\x1aACCESS_ROLE_TOPIC_PRODUCER\x10\x05\x12\x1e\n" +
 	"\x1aACCESS_ROLE_TOPIC_CONSUMER\x10\x06\x12\x1d\n" +
 	"\x19ACCESS_ROLE_SCHEMA_READER\x10\a\x12\x1d\n" +
-	"\x19ACCESS_ROLE_SCHEMA_WRITER\x10\bJ\x04\b\x03\x10\x04Bd\n" +
+	"\x19ACCESS_ROLE_SCHEMA_WRITER\x10\bJ\x04\b\x03\x10\x04R\x04hostBd\n" +
 	"\x1dyandex.cloud.api.mdb.kafka.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/kafka/v1;kafkab\x06proto3"
 
 var (

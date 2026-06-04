@@ -89,18 +89,24 @@ type ClusterServiceClient interface {
 	// Retrieves logs for the specified OpenSearch cluster.
 	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// Backend implementation uses GET already. --)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Creates an OpenSearch type host group.
 	AddOpenSearchNodeGroup(ctx context.Context, in *AddOpenSearchNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes an OpenSearch type host group.
 	DeleteOpenSearchNodeGroup(ctx context.Context, in *DeleteOpenSearchNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates an OpenSearch type host group.
 	UpdateOpenSearchNodeGroup(ctx context.Context, in *UpdateOpenSearchNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Creates a Dashboards type host group.
 	AddDashboardsNodeGroup(ctx context.Context, in *AddDashboardsNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes a Dashboards type host group.
@@ -111,8 +117,11 @@ type ClusterServiceClient interface {
 	GetAuthSettings(ctx context.Context, in *GetAuthSettingsRequest, opts ...grpc.CallOption) (*AuthSettings, error)
 	// Updates auth settings for specified cluster.
 	UpdateAuthSettings(ctx context.Context, in *UpdateAuthSettingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Restarts OpenSearch on specified host.
 	RestartOpenSearch(ctx context.Context, in *RestartOpenSearchRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Switches current master or ensures that master not on specified hosts.
 	SwitchMaster(ctx context.Context, in *SwitchMasterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified OpenSearch cluster.
@@ -476,18 +485,24 @@ type ClusterServiceServer interface {
 	// Retrieves logs for the specified OpenSearch cluster.
 	// For detailed description, see the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developer's guide.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// Backend implementation uses GET already. --)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Creates an OpenSearch type host group.
 	AddOpenSearchNodeGroup(context.Context, *AddOpenSearchNodeGroupRequest) (*operation.Operation, error)
 	// Deletes an OpenSearch type host group.
 	DeleteOpenSearchNodeGroup(context.Context, *DeleteOpenSearchNodeGroupRequest) (*operation.Operation, error)
 	// Updates an OpenSearch type host group.
 	UpdateOpenSearchNodeGroup(context.Context, *UpdateOpenSearchNodeGroupRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Creates a Dashboards type host group.
 	AddDashboardsNodeGroup(context.Context, *AddDashboardsNodeGroupRequest) (*operation.Operation, error)
 	// Deletes a Dashboards type host group.
@@ -498,8 +513,11 @@ type ClusterServiceServer interface {
 	GetAuthSettings(context.Context, *GetAuthSettingsRequest) (*AuthSettings, error)
 	// Updates auth settings for specified cluster.
 	UpdateAuthSettings(context.Context, *UpdateAuthSettingsRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled
+	// Required for backward compatibility with old clients. --)
 	// Restarts OpenSearch on specified host.
 	RestartOpenSearch(context.Context, *RestartOpenSearchRequest) (*operation.Operation, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Switches current master or ensures that master not on specified hosts.
 	SwitchMaster(context.Context, *SwitchMasterRequest) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified OpenSearch cluster.

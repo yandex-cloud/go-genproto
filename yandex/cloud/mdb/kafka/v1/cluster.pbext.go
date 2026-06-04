@@ -139,12 +139,12 @@ func (m *ConfigSpec) SetRestApiConfig(v *ConfigSpec_RestAPIConfig) {
 	m.RestApiConfig = v
 }
 
-func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
-	m.DiskSizeAutoscaling = v
-}
-
 func (m *ConfigSpec) SetKraft(v *ConfigSpec_KRaft) {
 	m.Kraft = v
+}
+
+func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
+	m.DiskSizeAutoscaling = v
 }
 
 func (m *ConfigSpec) SetKafkaUiConfig(v *ConfigSpec_KafkaUIConfig) {

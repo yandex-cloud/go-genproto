@@ -54,6 +54,14 @@ func (m *UserSettings) SetConnectTimeoutWithFailover(v *wrapperspb.Int64Value) {
 	m.ConnectTimeoutWithFailover = v
 }
 
+func (m *UserSettings) SetConnectTimeoutWithFailoverSecure(v *wrapperspb.Int64Value) {
+	m.ConnectTimeoutWithFailoverSecure = v
+}
+
+func (m *UserSettings) SetConnectionsWithFailoverMaxTries(v *wrapperspb.Int64Value) {
+	m.ConnectionsWithFailoverMaxTries = v
+}
+
 func (m *UserSettings) SetReceiveTimeout(v *wrapperspb.Int64Value) {
 	m.ReceiveTimeout = v
 }
@@ -260,6 +268,10 @@ func (m *UserSettings) SetMaxNetworkBandwidth(v *wrapperspb.Int64Value) {
 
 func (m *UserSettings) SetMaxNetworkBandwidthForUser(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBandwidthForUser = v
+}
+
+func (m *UserSettings) SetMaxNetworkBytes(v *wrapperspb.Int64Value) {
+	m.MaxNetworkBytes = v
 }
 
 func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForQuery(v *wrapperspb.Int64Value) {

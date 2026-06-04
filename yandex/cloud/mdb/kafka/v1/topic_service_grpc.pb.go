@@ -34,7 +34,6 @@ const (
 // A set of methods for managing Kafka topics.
 type TopicServiceClient interface {
 	// Returns the specified Kafka topic.
-	//
 	// To get the list of available Kafka topics, make a [List] request.
 	Get(ctx context.Context, in *GetTopicRequest, opts ...grpc.CallOption) (*Topic, error)
 	// Retrieves the list of Kafka topics in the specified cluster.
@@ -112,7 +111,6 @@ func (c *topicServiceClient) Delete(ctx context.Context, in *DeleteTopicRequest,
 // A set of methods for managing Kafka topics.
 type TopicServiceServer interface {
 	// Returns the specified Kafka topic.
-	//
 	// To get the list of available Kafka topics, make a [List] request.
 	Get(context.Context, *GetTopicRequest) (*Topic, error)
 	// Retrieves the list of Kafka topics in the specified cluster.

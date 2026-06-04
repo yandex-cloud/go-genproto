@@ -343,7 +343,7 @@ func (m *ConfigCreateSpec) SetSnapshotManagement(v *SnapshotManagement) {
 	m.SnapshotManagement = v
 }
 
-func (m *ConfigCreateSpec) SetAuditLog(v *AuditLog) {
+func (m *ConfigCreateSpec) SetAuditLog(v *config.AuditLog) {
 	m.AuditLog = v
 }
 
@@ -467,7 +467,7 @@ func (m *ConfigUpdateSpec) SetSnapshotManagement(v *SnapshotManagement) {
 	m.SnapshotManagement = v
 }
 
-func (m *ConfigUpdateSpec) SetAuditLog(v *AuditLog) {
+func (m *ConfigUpdateSpec) SetAuditLog(v *config.AuditLog) {
 	m.AuditLog = v
 }
 

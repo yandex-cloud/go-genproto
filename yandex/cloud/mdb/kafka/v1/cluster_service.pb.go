@@ -88,7 +88,6 @@ func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []i
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® Cluster resource to return.
-	//
 	// To get the cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -135,15 +134,12 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list Apache Kafka® clusters in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Filter support is not currently implemented. Any filters are ignored.
@@ -215,7 +211,6 @@ type ListClustersResponse struct {
 	// List of Apache Kafka® clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use [next_page_token] as the value for the [ListClustersRequest.page_token] parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -270,7 +265,6 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create the Apache Kafka® cluster in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the Apache Kafka® cluster. The name must be unique within the folder.
@@ -278,7 +272,6 @@ type CreateClusterRequest struct {
 	// Description of the Apache Kafka® cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Apache Kafka® cluster as `key:value` pairs.
-	//
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Deployment environment of the Apache Kafka® cluster.
@@ -490,7 +483,6 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to update.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Field mask that specifies which fields of the Kafka cluster resource should be updated.
@@ -498,14 +490,11 @@ type UpdateClusterRequest struct {
 	// New description of the Apache Kafka® cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Apache Kafka® cluster as `key:value` pairs.
-	//
 	// For example, "project": "mvp" or "source": "dictionary".
-	//
 	// The new set of labels will completely replace the old ones.
 	// To add a label, request the current set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New configuration and resources for hosts in the Apache Kafka® cluster.
-	//
 	// Use [update_mask] to prevent reverting all cluster settings that are not listed in [config_spec] to their default values.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,5,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// New name for the Apache Kafka® cluster.
@@ -679,7 +668,6 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to delete.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -771,11 +759,9 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to request logs for.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
-	//
 	// If no columns are specified, full log records are returned.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
 	// Start timestamp for the logs request.
@@ -783,24 +769,19 @@ type ListClusterLogsRequest struct {
 	// End timestamp for the logs request.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterLogsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,6,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// The flag that defines behavior of providing the next page token.
-	//
 	// If this flag is set to `true`, this API method will always return [ListClusterLogsResponse.next_page_token], even if current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,7,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-z0-9.-]{1,61}`.
-	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter        string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -953,7 +934,6 @@ type ListClusterLogsResponse struct {
 	// Requested log records.
 	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterLogsRequest.page_size], use [next_page_token] as the value for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	// This value is interchangeable with [StreamLogRecord.next_record_token] from StreamLogs method.
@@ -1011,9 +991,7 @@ type StreamLogRecord struct {
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// This token allows you to continue streaming logs starting from the exact same record.
-	//
 	// To continue streaming, specify value of [next_record_token] as value for [StreamClusterLogsRequest.record_token] parameter in the next StreamLogs request.
-	//
 	// This value is interchangeable with [ListClusterLogsResponse.next_page_token] from ListLogs method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -1067,31 +1045,25 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
-	//
 	// If no columns are specified, full log records are returned.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
-	//
 	// If this field is not set, all existing logs will be sent and then the new ones as they appear.
 	// In essence it has `tail -f` semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// Record token.
-	//
 	// Set [record_token] to the [StreamLogRecord.next_record_token] returned by a previous [ClusterService.StreamLogs] request to start streaming from next log record.
 	RecordToken string `protobuf:"bytes,5,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name to filter by. Currently filtering can be applied to the `hostname` field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	//
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
 	Filter        string `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1175,11 +1147,9 @@ type ListClusterOperationsRequest struct {
 	// ID of the Apache Kafka® cluster to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1242,7 +1212,6 @@ type ListClusterOperationsResponse struct {
 	// List of operations for the specified Apache Kafka® cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -1297,15 +1266,12 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token.
-	//
 	// To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1368,7 +1334,6 @@ type ListClusterHostsResponse struct {
 	// List of hosts.
 	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
 	// Token that allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
 	// Each subsequent list request will have its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -1423,7 +1388,6 @@ func (x *ListClusterHostsResponse) GetNextPageToken() string {
 type MoveClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to move.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
@@ -1542,7 +1506,6 @@ func (x *MoveClusterMetadata) GetDestinationFolderId() string {
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to start.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1634,7 +1597,6 @@ func (x *StartClusterMetadata) GetClusterId() string {
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Apache Kafka® cluster to stop.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1858,10 +1820,10 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.kafka.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xaf\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9e\b\n" +
 	"\x14CreateClusterRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12C\n" +
-	"\x04name\x18\x02 \x01(\tB/\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x041-63R\x04name\x12+\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
+	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
 	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.kafka.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12P\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.kafka.v1.Cluster.EnvironmentR\venvironment\x12F\n" +
@@ -1886,14 +1848,14 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_service_proto_rawDesc = "" +
 	"\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xf7\x05\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xff\x05\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x90\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.kafka.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12F\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.kafka.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12F\n" +
 	"\vconfig_spec\x18\x05 \x01(\v2%.yandex.cloud.mdb.kafka.v1.ConfigSpecR\n" +
 	"configSpec\x12.\n" +
 	"\x04name\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12,\n" +

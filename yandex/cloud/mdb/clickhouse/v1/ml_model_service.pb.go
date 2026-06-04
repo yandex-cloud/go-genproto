@@ -339,8 +339,9 @@ type UpdateMlModelRequest struct {
 	// To get a cluster ID make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the the model to update.
-	MlModelName string                 `protobuf:"bytes,2,opt,name=ml_model_name,json=mlModelName,proto3" json:"ml_model_name,omitempty"`
-	UpdateMask  *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	MlModelName string `protobuf:"bytes,2,opt,name=ml_model_name,json=mlModelName,proto3" json:"ml_model_name,omitempty"`
+	// Field mask that specifies which attributes of the model should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// The new model file URL. You can only use models stored in Object Storage.
 	Uri           string `protobuf:"bytes,4,opt,name=uri,proto3" json:"uri,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -572,11 +573,11 @@ var File_yandex_cloud_mdb_clickhouse_v1_ml_model_service_proto protoreflect.File
 
 const file_yandex_cloud_mdb_clickhouse_v1_ml_model_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/clickhouse/v1/ml_model_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/ml_model.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x84\x01\n" +
+	"5yandex/cloud/mdb/clickhouse/v1/ml_model_service.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/mdb/clickhouse/v1/ml_model.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"r\n" +
 	"\x11GetMlModelRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12B\n" +
-	"\rml_model_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\vmlModelName\"\x95\x01\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x120\n" +
+	"\rml_model_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\vmlModelName\"\x95\x01\n" +
 	"\x13ListMlModelsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -596,22 +597,22 @@ const file_yandex_cloud_mdb_clickhouse_v1_ml_model_service_proto_rawDesc = "" +
 	"\x15CreateMlModelMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\"\n" +
-	"\rml_model_name\x18\x02 \x01(\tR\vmlModelName\"\xd6\x01\n" +
+	"\rml_model_name\x18\x02 \x01(\tR\vmlModelName\"\xc4\x01\n" +
 	"\x14UpdateMlModelRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12B\n" +
-	"\rml_model_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\vmlModelName\x12;\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x120\n" +
+	"\rml_model_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\vmlModelName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x10\n" +
 	"\x03uri\x18\x04 \x01(\tR\x03uri\"Z\n" +
 	"\x15UpdateMlModelMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\"\n" +
-	"\rml_model_name\x18\x02 \x01(\tR\vmlModelName\"\x87\x01\n" +
+	"\rml_model_name\x18\x02 \x01(\tR\vmlModelName\"u\n" +
 	"\x14DeleteMlModelRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12B\n" +
-	"\rml_model_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\vmlModelName\"Z\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x120\n" +
+	"\rml_model_name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=63R\vmlModelName\"Z\n" +
 	"\x15DeleteMlModelMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\"\n" +

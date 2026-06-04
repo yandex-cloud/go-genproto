@@ -1820,10 +1820,10 @@ type ConfigCreateSpec struct {
 	DashboardsSpec *DashboardsCreateSpec `protobuf:"bytes,4,opt,name=dashboards_spec,json=dashboardsSpec,proto3" json:"dashboards_spec,omitempty"`
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Snapshot management configuration
+	// Snapshot management configuration.
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	// Audit log settings
-	AuditLog      *AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// Audit log settings.
+	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1900,7 +1900,7 @@ func (x *ConfigCreateSpec) GetSnapshotManagement() *SnapshotManagement {
 	return nil
 }
 
-func (x *ConfigCreateSpec) GetAuditLog() *AuditLog {
+func (x *ConfigCreateSpec) GetAuditLog() *config.AuditLog {
 	if x != nil {
 		return x.AuditLog
 	}
@@ -2051,6 +2051,7 @@ type isOpenSearchCreateSpec_Config interface {
 }
 
 type OpenSearchCreateSpec_OpensearchConfig_2 struct {
+	// OpenSearch server configuration settings.
 	OpensearchConfig_2 *config.OpenSearchConfig2 `protobuf:"bytes,3,opt,name=opensearch_config_2,json=opensearchConfig_2,proto3,oneof"`
 }
 
@@ -2117,7 +2118,7 @@ type ConfigUpdateSpec struct {
 	// Snapshot management configuration
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
 	// Audit log settings
-	AuditLog      *AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2194,7 +2195,7 @@ func (x *ConfigUpdateSpec) GetSnapshotManagement() *SnapshotManagement {
 	return nil
 }
 
-func (x *ConfigUpdateSpec) GetAuditLog() *AuditLog {
+func (x *ConfigUpdateSpec) GetAuditLog() *config.AuditLog {
 	if x != nil {
 		return x.AuditLog
 	}
@@ -2289,6 +2290,7 @@ type isOpenSearchClusterUpdateSpec_Config interface {
 }
 
 type OpenSearchClusterUpdateSpec_OpensearchConfig_2 struct {
+	// OpenSearch server configuration settings.
 	OpensearchConfig_2 *config.OpenSearchConfig2 `protobuf:"bytes,2,opt,name=opensearch_config_2,json=opensearchConfig_2,proto3,oneof"`
 }
 
@@ -4273,7 +4275,7 @@ var File_yandex_cloud_mdb_opensearch_v1_cluster_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/opensearch/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/opensearch/v1/auth.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a,yandex/cloud/mdb/opensearch/v1/cluster.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"4yandex/cloud/mdb/opensearch/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.opensearch.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/mdb/opensearch/v1/auth.proto\x1a+yandex/cloud/mdb/opensearch/v1/backup.proto\x1a,yandex/cloud/mdb/opensearch/v1/cluster.proto\x1a5yandex/cloud/mdb/opensearch/v1/config/audit_log.proto\x1a6yandex/cloud/mdb/opensearch/v1/config/opensearch.proto\x1a0yandex/cloud/mdb/opensearch/v1/maintenance.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -4431,15 +4433,15 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
 	"\x13StopClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8c\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x93\x04\n" +
 	"\x10ConfigCreateSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
 	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12]\n" +
 	"\x0fopensearch_spec\x18\x03 \x01(\v24.yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpecR\x0eopensearchSpec\x12]\n" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v24.yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
-	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12E\n" +
-	"\taudit_log\x18\a \x01(\v2(.yandex.cloud.mdb.opensearch.v1.AuditLogR\bauditLog\"G\n" +
+	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12L\n" +
+	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\"G\n" +
 	"\x0fKeystoreSetting\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
 	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\"\xd8\x06\n" +
@@ -4473,15 +4475,15 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"subnet_ids\x18\x05 \x03(\tB\x10\x82\xc81\x04<=10\x8a\xc81\x04<=50R\tsubnetIds\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12g\n" +
-	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\x01\x10\x02\"\x9a\x04\n" +
+	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\x01\x10\x02\"\xa1\x04\n" +
 	"\x10ConfigUpdateSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
 	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12d\n" +
 	"\x0fopensearch_spec\x18\x03 \x01(\v2;.yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpecR\x0eopensearchSpec\x12d\n" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v2;.yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
-	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12E\n" +
-	"\taudit_log\x18\a \x01(\v2(.yandex.cloud.mdb.opensearch.v1.AuditLogR\bauditLog\"\xcd\x02\n" +
+	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12L\n" +
+	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\"\xcd\x02\n" +
 	"\x1bOpenSearchClusterUpdateSpec\x12\x18\n" +
 	"\aplugins\x18\x01 \x03(\tR\aplugins\x12k\n" +
 	"\x13opensearch_config_2\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2H\x00R\x12opensearchConfig_2\x12c\n" +
@@ -4789,7 +4791,7 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_goTypes = []any{
 	(*Host)(nil),                                     // 76: yandex.cloud.mdb.opensearch.v1.Host
 	(*Access)(nil),                                   // 77: yandex.cloud.mdb.opensearch.v1.Access
 	(*SnapshotManagement)(nil),                       // 78: yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	(*AuditLog)(nil),                                 // 79: yandex.cloud.mdb.opensearch.v1.AuditLog
+	(*config.AuditLog)(nil),                          // 79: yandex.cloud.mdb.opensearch.v1.config.AuditLog
 	(*config.OpenSearchConfig2)(nil),                 // 80: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
 	(*Backup)(nil),                                   // 81: yandex.cloud.mdb.opensearch.v1.Backup
 	(*Resources)(nil),                                // 82: yandex.cloud.mdb.opensearch.v1.Resources
@@ -4830,7 +4832,7 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_depIdxs = []int32{
 	30, // 25: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.dashboards_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec
 	77, // 26: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
 	78, // 27: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	79, // 28: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.AuditLog
+	79, // 28: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
 	65, // 29: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup
 	80, // 30: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
 	28, // 31: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
@@ -4839,7 +4841,7 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_depIdxs = []int32{
 	33, // 34: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.dashboards_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpec
 	77, // 35: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
 	78, // 36: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	79, // 37: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.AuditLog
+	79, // 37: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
 	80, // 38: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
 	28, // 39: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.set_keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
 	67, // 40: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.LabelsEntry

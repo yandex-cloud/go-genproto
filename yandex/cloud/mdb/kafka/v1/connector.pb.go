@@ -7,6 +7,7 @@
 package kafka
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -131,7 +132,6 @@ func (Connector_Status) EnumDescriptor() ([]byte, []int) {
 }
 
 // An object that represents an Apache Kafka® connector.
-//
 // See [the documentation](/docs/managed-kafka/concepts/connectors) for details.
 type ConnectorSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1586,11 +1586,11 @@ type IcebergTablesConfigSpec struct {
 	// Comma-separated list of columns or transform expressions for table partitioning.
 	// Defines physical data layout for query optimization.
 	// Examples:
-	//   - "date"
-	//   - "year,month"
-	//   - "year(timestamp),month(timestamp)"
-	//   - "days(timestamp)"
-	//   - "bucket(16,user_id)"
+	// - "date"
+	// - "year,month"
+	// - "year(timestamp),month(timestamp)"
+	// - "days(timestamp)"
+	// - "bucket(16,user_id)"
 	DefaultPartitionBy string `protobuf:"bytes,3,opt,name=default_partition_by,json=defaultPartitionBy,proto3" json:"default_partition_by,omitempty"`
 	// Enable automatic schema evolution.
 	// Default: false
@@ -2888,11 +2888,11 @@ type IcebergTablesConfig struct {
 	// Comma-separated list of columns or transform expressions for table partitioning.
 	// Defines physical data layout for query optimization.
 	// Examples:
-	//   - "date"
-	//   - "year,month"
-	//   - "year(timestamp),month(timestamp)"
-	//   - "days(timestamp)"
-	//   - "bucket(16,user_id)"
+	// - "date"
+	// - "year,month"
+	// - "year(timestamp),month(timestamp)"
+	// - "days(timestamp)"
+	// - "bucket(16,user_id)"
 	DefaultPartitionBy string `protobuf:"bytes,3,opt,name=default_partition_by,json=defaultPartitionBy,proto3" json:"default_partition_by,omitempty"`
 	// Enable automatic schema evolution.
 	// Default: false
@@ -3069,7 +3069,7 @@ var File_yandex_cloud_mdb_kafka_v1_connector_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/mdb/kafka/v1/connector.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\x80\x05\n" +
+	")yandex/cloud/mdb/kafka/v1/connector.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x80\x05\n" +
 	"\rConnectorSpec\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x128\n" +
 	"\ttasks_max\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\btasksMax\x12X\n" +
@@ -3116,12 +3116,12 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\rsasl_password\x18\x03 \x01(\tR\fsaslPassword\x12%\n" +
 	"\x0esasl_mechanism\x18\x04 \x01(\tR\rsaslMechanism\x12+\n" +
 	"\x11security_protocol\x18\x05 \x01(\tR\x10securityProtocol\x12>\n" +
-	"\x1bssl_truststore_certificates\x18\x06 \x01(\tR\x19sslTruststoreCertificates\"\x80\x02\n" +
-	"\x19ConnectorConfigS3SinkSpec\x12\x16\n" +
-	"\x06topics\x18\x01 \x01(\tR\x06topics\x122\n" +
+	"\x1bssl_truststore_certificates\x18\x06 \x01(\tR\x19sslTruststoreCertificates\"\x8c\x02\n" +
+	"\x19ConnectorConfigS3SinkSpec\x12\x1c\n" +
+	"\x06topics\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06topics\x122\n" +
 	"\x15file_compression_type\x18\x02 \x01(\tR\x13fileCompressionType\x12E\n" +
-	"\x10file_max_records\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0efileMaxRecords\x12P\n" +
-	"\rs3_connection\x18\x04 \x01(\v2+.yandex.cloud.mdb.kafka.v1.S3ConnectionSpecR\fs3Connection\"\xd2\x01\n" +
+	"\x10file_max_records\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0efileMaxRecords\x12V\n" +
+	"\rs3_connection\x18\x04 \x01(\v2+.yandex.cloud.mdb.kafka.v1.S3ConnectionSpecB\x04\xe8\xc71\x01R\fs3Connection\"\xd2\x01\n" +
 	"\x1fUpdateConnectorConfigS3SinkSpec\x12\x16\n" +
 	"\x06topics\x18\x01 \x01(\tR\x06topics\x12E\n" +
 	"\x10file_max_records\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0efileMaxRecords\x12P\n" +
@@ -3136,13 +3136,13 @@ const file_yandex_cloud_mdb_kafka_v1_connector_proto_rawDesc = "" +
 	"\raccess_key_id\x18\x01 \x01(\tR\vaccessKeyId\x12*\n" +
 	"\x11secret_access_key\x18\x02 \x01(\tR\x0fsecretAccessKey\x12\x1a\n" +
 	"\bendpoint\x18\x03 \x01(\tR\bendpoint\x12\x16\n" +
-	"\x06region\x18\x04 \x01(\tR\x06region\"\xc6\x05\n" +
+	"\x06region\x18\x04 \x01(\tR\x06region\"\xd8\x05\n" +
 	"\x1eConnectorConfigIcebergSinkSpec\x12\x18\n" +
 	"\x06topics\x18\x01 \x01(\tH\x00R\x06topics\x12#\n" +
-	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12#\n" +
-	"\rcontrol_topic\x18\v \x01(\tR\fcontrolTopic\x12e\n" +
-	"\x14metastore_connection\x18\x03 \x01(\v22.yandex.cloud.mdb.kafka.v1.MetastoreConnectionSpecR\x13metastoreConnection\x12W\n" +
-	"\rs3_connection\x18\x04 \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergS3ConnectionSpecR\fs3Connection\x12R\n" +
+	"\ftopics_regex\x18\x02 \x01(\tH\x00R\vtopicsRegex\x12)\n" +
+	"\rcontrol_topic\x18\v \x01(\tB\x04\xe8\xc71\x01R\fcontrolTopic\x12k\n" +
+	"\x14metastore_connection\x18\x03 \x01(\v22.yandex.cloud.mdb.kafka.v1.MetastoreConnectionSpecB\x04\xe8\xc71\x01R\x13metastoreConnection\x12]\n" +
+	"\rs3_connection\x18\x04 \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergS3ConnectionSpecB\x04\xe8\xc71\x01R\fs3Connection\x12R\n" +
 	"\rstatic_tables\x18\a \x01(\v2+.yandex.cloud.mdb.kafka.v1.StaticTablesSpecH\x01R\fstaticTables\x12U\n" +
 	"\x0edynamic_tables\x18\b \x01(\v2,.yandex.cloud.mdb.kafka.v1.DynamicTablesSpecH\x01R\rdynamicTables\x12W\n" +
 	"\rtables_config\x18\t \x01(\v22.yandex.cloud.mdb.kafka.v1.IcebergTablesConfigSpecR\ftablesConfig\x12T\n" +

@@ -46,7 +46,6 @@ const (
 // A set of methods for managing Apache Kafka® clusters.
 type ClusterServiceClient interface {
 	// Returns the specified Apache Kafka® cluster.
-	//
 	// To get the list of available Apache Kafka® clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of Apache Kafka® clusters that belong to the specified folder.
@@ -66,7 +65,6 @@ type ClusterServiceClient interface {
 	// Reschedule planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves logs for the specified Apache Kafka® cluster.
-	//
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
@@ -267,7 +265,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing Apache Kafka® clusters.
 type ClusterServiceServer interface {
 	// Returns the specified Apache Kafka® cluster.
-	//
 	// To get the list of available Apache Kafka® clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of Apache Kafka® clusters that belong to the specified folder.
@@ -287,7 +284,6 @@ type ClusterServiceServer interface {
 	// Reschedule planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Retrieves logs for the specified Apache Kafka® cluster.
-	//
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.

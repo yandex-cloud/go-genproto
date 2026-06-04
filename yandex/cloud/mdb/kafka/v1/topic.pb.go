@@ -7,9 +7,9 @@
 package kafka
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/descriptorpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
@@ -198,7 +198,6 @@ type Topic struct {
 	// Name of the topic.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of an Apache Kafka® cluster that the topic belongs to.
-	//
 	// To get the Apache Kafka® cluster ID, make a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The number of the topic's partitions.
@@ -476,22 +475,18 @@ type TopicConfig2_8 struct {
 	// The time to wait before deleting a file from the filesystem.
 	FileDeleteDelayMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=file_delete_delay_ms,json=fileDeleteDelayMs,proto3" json:"file_delete_delay_ms,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_flush_interval_messages] setting on the topic level.
 	FlushMessages *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=flush_messages,json=flushMessages,proto3" json:"flush_messages,omitempty"`
 	// The maximum time in milliseconds that a message in the topic is kept in memory before flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_flush_interval_ms] setting on the topic level.
 	FlushMs *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=flush_ms,json=flushMs,proto3" json:"flush_ms,omitempty"`
 	// The minimum time in milliseconds a message will remain uncompacted in the log.
 	MinCompactionLagMs *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=min_compaction_lag_ms,json=minCompactionLagMs,proto3" json:"min_compaction_lag_ms,omitempty"`
 	// The maximum size a partition can grow to before Kafka will discard old log segments to free up space if the `delete` [cleanup_policy] is in effect.
 	// It is helpful if you need to control the size of log due to limited disk space.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_retention_bytes] setting on the topic level.
 	RetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=retention_bytes,json=retentionBytes,proto3" json:"retention_bytes,omitempty"`
 	// The number of milliseconds to keep a log segment's file before deleting it.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_retention_ms] setting on the topic level.
 	RetentionMs *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=retention_ms,json=retentionMs,proto3" json:"retention_ms,omitempty"`
 	// The largest record batch size allowed in topic.
@@ -501,12 +496,12 @@ type TopicConfig2_8 struct {
 	MinInsyncReplicas *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_insync_replicas,json=minInsyncReplicas,proto3" json:"min_insync_replicas,omitempty"`
 	// This configuration controls the segment file size for the log. Retention and cleaning is always done a file
 	// at a time so a larger segment size means fewer files but less granular control over retention.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_segment_bytes] setting on the topic level.
 	SegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=segment_bytes,json=segmentBytes,proto3" json:"segment_bytes,omitempty"`
 	// True if we should preallocate the file on disk when creating a new log segment.
-	//
 	// This setting overrides the cluster-level [KafkaConfig2_8.log_preallocate] setting on the topic level.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
 	// Define whether the timestamp in the message is message create time or log append time.
 	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
@@ -628,6 +623,7 @@ func (x *TopicConfig2_8) GetSegmentBytes() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 func (x *TopicConfig2_8) GetPreallocate() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.Preallocate
@@ -654,22 +650,18 @@ type TopicConfig3 struct {
 	// The time to wait before deleting a file from the filesystem.
 	FileDeleteDelayMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=file_delete_delay_ms,json=fileDeleteDelayMs,proto3" json:"file_delete_delay_ms,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_flush_interval_messages] setting on the topic level.
 	FlushMessages *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=flush_messages,json=flushMessages,proto3" json:"flush_messages,omitempty"`
 	// The maximum time in milliseconds that a message in the topic is kept in memory before flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_flush_interval_ms] setting on the topic level.
 	FlushMs *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=flush_ms,json=flushMs,proto3" json:"flush_ms,omitempty"`
 	// The minimum time in milliseconds a message will remain uncompacted in the log.
 	MinCompactionLagMs *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=min_compaction_lag_ms,json=minCompactionLagMs,proto3" json:"min_compaction_lag_ms,omitempty"`
 	// The maximum size a partition can grow to before Kafka will discard old log segments to free up space if the `delete` [cleanup_policy] is in effect.
 	// It is helpful if you need to control the size of log due to limited disk space.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_retention_bytes] setting on the topic level.
 	RetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=retention_bytes,json=retentionBytes,proto3" json:"retention_bytes,omitempty"`
 	// The number of milliseconds to keep a log segment's file before deleting it.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_retention_ms] setting on the topic level.
 	RetentionMs *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=retention_ms,json=retentionMs,proto3" json:"retention_ms,omitempty"`
 	// The largest record batch size allowed in topic.
@@ -679,12 +671,12 @@ type TopicConfig3 struct {
 	MinInsyncReplicas *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_insync_replicas,json=minInsyncReplicas,proto3" json:"min_insync_replicas,omitempty"`
 	// This configuration controls the segment file size for the log. Retention and cleaning is always done a file
 	// at a time so a larger segment size means fewer files but less granular control over retention.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_segment_bytes] setting on the topic level.
 	SegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=segment_bytes,json=segmentBytes,proto3" json:"segment_bytes,omitempty"`
 	// True if we should preallocate the file on disk when creating a new log segment.
-	//
 	// This setting overrides the cluster-level [KafkaConfig3.log_preallocate] setting on the topic level.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
 	// Define whether the timestamp in the message is message create time or log append time.
 	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
@@ -806,6 +798,7 @@ func (x *TopicConfig3) GetSegmentBytes() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 func (x *TopicConfig3) GetPreallocate() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.Preallocate
@@ -832,22 +825,18 @@ type TopicConfig4 struct {
 	// The time to wait before deleting a file from the filesystem.
 	FileDeleteDelayMs *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=file_delete_delay_ms,json=fileDeleteDelayMs,proto3" json:"file_delete_delay_ms,omitempty"`
 	// The number of messages accumulated on a log partition before messages are flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_flush_interval_messages] setting on the topic level.
 	FlushMessages *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=flush_messages,json=flushMessages,proto3" json:"flush_messages,omitempty"`
 	// The maximum time in milliseconds that a message in the topic is kept in memory before flushed to disk.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_flush_interval_ms] setting on the topic level.
 	FlushMs *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=flush_ms,json=flushMs,proto3" json:"flush_ms,omitempty"`
 	// The minimum time in milliseconds a message will remain uncompacted in the log.
 	MinCompactionLagMs *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=min_compaction_lag_ms,json=minCompactionLagMs,proto3" json:"min_compaction_lag_ms,omitempty"`
 	// The maximum size a partition can grow to before Kafka will discard old log segments to free up space if the `delete` [cleanup_policy] is in effect.
 	// It is helpful if you need to control the size of log due to limited disk space.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_retention_bytes] setting on the topic level.
 	RetentionBytes *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=retention_bytes,json=retentionBytes,proto3" json:"retention_bytes,omitempty"`
 	// The number of milliseconds to keep a log segment's file before deleting it.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_retention_ms] setting on the topic level.
 	RetentionMs *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=retention_ms,json=retentionMs,proto3" json:"retention_ms,omitempty"`
 	// The largest record batch size allowed in topic.
@@ -857,12 +846,12 @@ type TopicConfig4 struct {
 	MinInsyncReplicas *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_insync_replicas,json=minInsyncReplicas,proto3" json:"min_insync_replicas,omitempty"`
 	// This configuration controls the segment file size for the log. Retention and cleaning is always done a file
 	// at a time so a larger segment size means fewer files but less granular control over retention.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_segment_bytes] setting on the topic level.
 	SegmentBytes *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=segment_bytes,json=segmentBytes,proto3" json:"segment_bytes,omitempty"`
 	// True if we should preallocate the file on disk when creating a new log segment.
-	//
 	// This setting overrides the cluster-level [KafkaConfig4.log_preallocate] setting on the topic level.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 	Preallocate *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=preallocate,proto3" json:"preallocate,omitempty"`
 	// Define whether the timestamp in the message is message create time or log append time.
 	MessageTimestampType MessageTimestampType `protobuf:"varint,14,opt,name=message_timestamp_type,json=messageTimestampType,proto3,enum=yandex.cloud.mdb.kafka.v1.MessageTimestampType" json:"message_timestamp_type,omitempty"`
@@ -984,6 +973,7 @@ func (x *TopicConfig4) GetSegmentBytes() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/kafka/v1/topic.proto.
 func (x *TopicConfig4) GetPreallocate() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.Preallocate
@@ -1002,7 +992,7 @@ var File_yandex_cloud_mdb_kafka_v1_topic_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/mdb/kafka/v1/topic.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a&yandex/cloud/mdb/kafka/v1/common.proto\"\xd5\x03\n" +
+	"%yandex/cloud/mdb/kafka/v1/topic.proto\x12\x19yandex.cloud.mdb.kafka.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a&yandex/cloud/mdb/kafka/v1/common.proto\x1a\x1dyandex/cloud/validation.proto\"\xdd\x03\n" +
 	"\x05Topic\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -1014,17 +1004,17 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x10topic_config_2_8\x18\a \x01(\v2).yandex.cloud.mdb.kafka.v1.TopicConfig2_8H\x00R\x0ftopicConfig_2_8\x12P\n" +
 	"\x0etopic_config_3\x18\b \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig3H\x00R\rtopicConfig_3\x12P\n" +
 	"\x0etopic_config_4\x18\t \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig4H\x00R\rtopicConfig_4B\x0e\n" +
-	"\ftopic_configJ\x04\b\x05\x10\a\"\xba\x03\n" +
+	"\ftopic_configJ\x04\b\x05\x10\aR\x06is_sla\"\xca\x03\n" +
 	"\tTopicSpec\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12;\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12C\n" +
 	"\n" +
-	"partitions\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\n" +
-	"partitions\x12J\n" +
-	"\x12replication_factor\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11replicationFactor\x12V\n" +
+	"partitions\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\n" +
+	"partitions\x12R\n" +
+	"\x12replication_factor\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x11replicationFactor\x12V\n" +
 	"\x10topic_config_2_8\x18\x06 \x01(\v2).yandex.cloud.mdb.kafka.v1.TopicConfig2_8H\x00R\x0ftopicConfig_2_8\x12P\n" +
 	"\x0etopic_config_3\x18\a \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig3H\x00R\rtopicConfig_3\x12P\n" +
 	"\x0etopic_config_4\x18\b \x01(\v2'.yandex.cloud.mdb.kafka.v1.TopicConfig4H\x00R\rtopicConfig_4B\x0e\n" +
-	"\ftopic_configJ\x04\b\x04\x10\x06\"\xc1\t\n" +
+	"\ftopic_configJ\x04\b\x04\x10\x06\"\xc5\t\n" +
 	"\x0eTopicConfig2_8\x12^\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e27.yandex.cloud.mdb.kafka.v1.TopicConfig2_8.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1038,14 +1028,14 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x11max_message_bytes\x18\n" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
-	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12@\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\vpreallocate\x12e\n" +
 	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
 	"\x16CLEANUP_POLICY_COMPACT\x10\x02\x12%\n" +
-	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xbd\t\n" +
+	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xc1\t\n" +
 	"\fTopicConfig3\x12\\\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e25.yandex.cloud.mdb.kafka.v1.TopicConfig3.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1059,14 +1049,14 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x11max_message_bytes\x18\n" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
-	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12@\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\vpreallocate\x12e\n" +
 	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
 	"\x16CLEANUP_POLICY_COMPACT\x10\x02\x12%\n" +
-	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xbd\t\n" +
+	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xc1\t\n" +
 	"\fTopicConfig4\x12\\\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e25.yandex.cloud.mdb.kafka.v1.TopicConfig4.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1080,8 +1070,8 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x11max_message_bytes\x18\n" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
 	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
-	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12<\n" +
-	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\vpreallocate\x12e\n" +
+	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12@\n" +
+	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\vpreallocate\x12e\n" +
 	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +

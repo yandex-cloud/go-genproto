@@ -1173,6 +1173,20 @@ type UserSettings struct {
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#connect_timeout_with_failover_ms).
 	ConnectTimeoutWithFailover *wrapperspb.Int64Value `protobuf:"bytes,97,opt,name=connect_timeout_with_failover,json=connectTimeoutWithFailover,proto3" json:"connect_timeout_with_failover,omitempty"`
+	// The timeout in milliseconds for connecting to a remote server for a Distributed table engine, for secure connections.
+	//
+	// Applies only if the cluster uses sharding and replication. If unsuccessful, several attempts are made to connect to various replicas.
+	//
+	// Default value: **1000** (1 second).
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#connect_timeout_with_failover_secure_ms).
+	ConnectTimeoutWithFailoverSecure *wrapperspb.Int64Value `protobuf:"bytes,177,opt,name=connect_timeout_with_failover_secure,json=connectTimeoutWithFailoverSecure,proto3" json:"connect_timeout_with_failover_secure,omitempty"`
+	// The maximum number of connection attempts with each replica for the Distributed table engine.
+	//
+	// Default value: **3**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#connections_with_failover_max_tries).
+	ConnectionsWithFailoverMaxTries *wrapperspb.Int64Value `protobuf:"bytes,178,opt,name=connections_with_failover_max_tries,json=connectionsWithFailoverMaxTries,proto3" json:"connections_with_failover_max_tries,omitempty"`
 	// Receive timeout in milliseconds.
 	//
 	// Default value: **300000** (5 minutes).
@@ -1577,14 +1591,21 @@ type UserSettings struct {
 	//
 	// Default value: **0**.
 	//
-	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#max-network-bandwidth).
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#max_network_bandwidth).
 	MaxNetworkBandwidth *wrapperspb.Int64Value `protobuf:"bytes,57,opt,name=max_network_bandwidth,json=maxNetworkBandwidth,proto3" json:"max_network_bandwidth,omitempty"`
 	// The maximum speed of data exchange over the network in bytes per second for all concurrently running user queries. **0** means unlimited.
 	//
 	// Default value: **0**.
 	//
-	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#max-network-bandwidth-for-user).
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#max_network_bandwidth_for_user).
 	MaxNetworkBandwidthForUser *wrapperspb.Int64Value `protobuf:"bytes,58,opt,name=max_network_bandwidth_for_user,json=maxNetworkBandwidthForUser,proto3" json:"max_network_bandwidth_for_user,omitempty"`
+	// Limits the data volume (in bytes) that is received or transmitted over the network when executing a query.
+	// This setting applies to every individual query.
+	//
+	// Default value: **0**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#max_network_bytes).
+	MaxNetworkBytes *wrapperspb.Int64Value `protobuf:"bytes,176,opt,name=max_network_bytes,json=maxNetworkBytes,proto3" json:"max_network_bytes,omitempty"`
 	// The maximum amount of data consumed by temporary files on disk in bytes for all concurrently running queries. **0** means unlimited.
 	//
 	// Default value: **0**.
@@ -2407,6 +2428,20 @@ func (x *UserSettings) GetConnectTimeoutWithFailover() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *UserSettings) GetConnectTimeoutWithFailoverSecure() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ConnectTimeoutWithFailoverSecure
+	}
+	return nil
+}
+
+func (x *UserSettings) GetConnectionsWithFailoverMaxTries() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.ConnectionsWithFailoverMaxTries
+	}
+	return nil
+}
+
 func (x *UserSettings) GetReceiveTimeout() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.ReceiveTimeout
@@ -2767,6 +2802,13 @@ func (x *UserSettings) GetMaxNetworkBandwidth() *wrapperspb.Int64Value {
 func (x *UserSettings) GetMaxNetworkBandwidthForUser() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.MaxNetworkBandwidthForUser
+	}
+	return nil
+}
+
+func (x *UserSettings) GetMaxNetworkBytes() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxNetworkBytes
 	}
 	return nil
 }
@@ -3832,13 +3874,15 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"\x12connection_manager\x18\x06 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.ConnectionManagerR\x11connectionManager\"1\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"\xa4\x97\x01\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"ș\x01\n" +
 	"\fUserSettings\x127\n" +
 	"\breadonly\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\breadonly\x127\n" +
 	"\tallow_ddl\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\ballowDdl\x12^\n" +
 	"\x1dallow_introspection_functions\x18` \x01(\v2\x1a.google.protobuf.BoolValueR\x1ballowIntrospectionFunctions\x12D\n" +
 	"\x0fconnect_timeout\x18' \x01(\v2\x1b.google.protobuf.Int64ValueR\x0econnectTimeout\x12^\n" +
-	"\x1dconnect_timeout_with_failover\x18a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1aconnectTimeoutWithFailover\x12D\n" +
+	"\x1dconnect_timeout_with_failover\x18a \x01(\v2\x1b.google.protobuf.Int64ValueR\x1aconnectTimeoutWithFailover\x12l\n" +
+	"$connect_timeout_with_failover_secure\x18\xb1\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR connectTimeoutWithFailoverSecure\x12j\n" +
+	"#connections_with_failover_max_tries\x18\xb2\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fconnectionsWithFailoverMaxTries\x12D\n" +
 	"\x0freceive_timeout\x18( \x01(\v2\x1b.google.protobuf.Int64ValueR\x0ereceiveTimeout\x12>\n" +
 	"\fsend_timeout\x18) \x01(\v2\x1b.google.protobuf.Int64ValueR\vsendTimeout\x12T\n" +
 	"\x17idle_connection_timeout\x18\x8e\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15idleConnectionTimeout\x12q\n" +
@@ -3892,7 +3936,8 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	",memory_overcommit_ratio_denominator_for_user\x18\x89\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR'memoryOvercommitRatioDenominatorForUser\x12}\n" +
 	"-memory_usage_overcommit_max_wait_microseconds\x18\x8a\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR(memoryUsageOvercommitMaxWaitMicroseconds\x12O\n" +
 	"\x15max_network_bandwidth\x189 \x01(\v2\x1b.google.protobuf.Int64ValueR\x13maxNetworkBandwidth\x12_\n" +
-	"\x1emax_network_bandwidth_for_user\x18: \x01(\v2\x1b.google.protobuf.Int64ValueR\x1amaxNetworkBandwidthForUser\x12s\n" +
+	"\x1emax_network_bandwidth_for_user\x18: \x01(\v2\x1b.google.protobuf.Int64ValueR\x1amaxNetworkBandwidthForUser\x12H\n" +
+	"\x11max_network_bytes\x18\xb0\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxNetworkBytes\x12s\n" +
 	")max_temporary_data_on_disk_size_for_query\x18\x85\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\"maxTemporaryDataOnDiskSizeForQuery\x12q\n" +
 	"(max_temporary_data_on_disk_size_for_user\x18\x84\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR!maxTemporaryDataOnDiskSizeForUser\x12a\n" +
 	"\x1fmax_concurrent_queries_for_user\x18g \x01(\v2\x1b.google.protobuf.Int64ValueR\x1bmaxConcurrentQueriesForUser\x12I\n" +
@@ -4176,186 +4221,189 @@ var file_yandex_cloud_mdb_clickhouse_v1_user_proto_depIdxs = []int32{
 	23,  // 6: yandex.cloud.mdb.clickhouse.v1.UserSettings.allow_introspection_functions:type_name -> google.protobuf.BoolValue
 	22,  // 7: yandex.cloud.mdb.clickhouse.v1.UserSettings.connect_timeout:type_name -> google.protobuf.Int64Value
 	22,  // 8: yandex.cloud.mdb.clickhouse.v1.UserSettings.connect_timeout_with_failover:type_name -> google.protobuf.Int64Value
-	22,  // 9: yandex.cloud.mdb.clickhouse.v1.UserSettings.receive_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 10: yandex.cloud.mdb.clickhouse.v1.UserSettings.send_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 11: yandex.cloud.mdb.clickhouse.v1.UserSettings.idle_connection_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 12: yandex.cloud.mdb.clickhouse.v1.UserSettings.timeout_before_checking_execution_speed:type_name -> google.protobuf.Int64Value
-	22,  // 13: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum:type_name -> google.protobuf.Int64Value
-	22,  // 14: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum_timeout:type_name -> google.protobuf.Int64Value
-	23,  // 15: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum_parallel:type_name -> google.protobuf.BoolValue
-	23,  // 16: yandex.cloud.mdb.clickhouse.v1.UserSettings.select_sequential_consistency:type_name -> google.protobuf.BoolValue
-	22,  // 17: yandex.cloud.mdb.clickhouse.v1.UserSettings.replication_alter_partitions_sync:type_name -> google.protobuf.Int64Value
-	22,  // 18: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_replica_delay_for_distributed_queries:type_name -> google.protobuf.Int64Value
-	23,  // 19: yandex.cloud.mdb.clickhouse.v1.UserSettings.fallback_to_stale_replicas_for_distributed_queries:type_name -> google.protobuf.BoolValue
-	1,   // 20: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_product_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DistributedProductMode
-	23,  // 21: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_aggregation_memory_efficient:type_name -> google.protobuf.BoolValue
-	22,  // 22: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_ddl_task_timeout:type_name -> google.protobuf.Int64Value
-	2,   // 23: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_ddl_output_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DistributedDdlOutputMode
-	23,  // 24: yandex.cloud.mdb.clickhouse.v1.UserSettings.skip_unavailable_shards:type_name -> google.protobuf.BoolValue
-	23,  // 25: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_hedged_requests:type_name -> google.protobuf.BoolValue
-	22,  // 26: yandex.cloud.mdb.clickhouse.v1.UserSettings.hedged_connection_timeout_ms:type_name -> google.protobuf.Int64Value
-	3,   // 27: yandex.cloud.mdb.clickhouse.v1.UserSettings.load_balancing:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.LoadBalancing
-	23,  // 28: yandex.cloud.mdb.clickhouse.v1.UserSettings.prefer_localhost_replica:type_name -> google.protobuf.BoolValue
-	23,  // 29: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile_expressions:type_name -> google.protobuf.BoolValue
-	22,  // 30: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile_expression:type_name -> google.protobuf.Int64Value
-	22,  // 31: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_block_size:type_name -> google.protobuf.Int64Value
-	22,  // 32: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_insert_block_size_rows:type_name -> google.protobuf.Int64Value
-	22,  // 33: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_insert_block_size_bytes:type_name -> google.protobuf.Int64Value
-	22,  // 34: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_insert_block_size:type_name -> google.protobuf.Int64Value
-	22,  // 35: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_partitions_per_insert_block:type_name -> google.protobuf.Int64Value
-	22,  // 36: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_bytes_to_use_direct_io:type_name -> google.protobuf.Int64Value
-	23,  // 37: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_uncompressed_cache:type_name -> google.protobuf.BoolValue
-	22,  // 38: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_max_rows_to_use_cache:type_name -> google.protobuf.Int64Value
-	22,  // 39: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_max_bytes_to_use_cache:type_name -> google.protobuf.Int64Value
-	22,  // 40: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_min_rows_for_concurrent_read:type_name -> google.protobuf.Int64Value
-	22,  // 41: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_min_bytes_for_concurrent_read:type_name -> google.protobuf.Int64Value
-	22,  // 42: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_before_external_group_by:type_name -> google.protobuf.Int64Value
-	24,  // 43: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_ratio_before_external_group_by:type_name -> google.protobuf.DoubleValue
-	24,  // 44: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_ratio_before_external_sort:type_name -> google.protobuf.DoubleValue
-	22,  // 45: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_before_external_sort:type_name -> google.protobuf.Int64Value
-	22,  // 46: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_two_level_threshold:type_name -> google.protobuf.Int64Value
-	22,  // 47: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_two_level_threshold_bytes:type_name -> google.protobuf.Int64Value
-	23,  // 48: yandex.cloud.mdb.clickhouse.v1.UserSettings.deduplicate_blocks_in_dependent_materialized_views:type_name -> google.protobuf.BoolValue
-	4,   // 49: yandex.cloud.mdb.clickhouse.v1.UserSettings.local_filesystem_read_method:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.LocalFilesystemReadMethod
-	5,   // 50: yandex.cloud.mdb.clickhouse.v1.UserSettings.remote_filesystem_read_method:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.RemoteFilesystemReadMethod
-	22,  // 51: yandex.cloud.mdb.clickhouse.v1.UserSettings.priority:type_name -> google.protobuf.Int64Value
-	22,  // 52: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_threads:type_name -> google.protobuf.Int64Value
-	22,  // 53: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_insert_threads:type_name -> google.protobuf.Int64Value
-	22,  // 54: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_memory_usage:type_name -> google.protobuf.Int64Value
-	22,  // 55: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_memory_usage_for_user:type_name -> google.protobuf.Int64Value
-	22,  // 56: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_overcommit_ratio_denominator:type_name -> google.protobuf.Int64Value
-	22,  // 57: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_overcommit_ratio_denominator_for_user:type_name -> google.protobuf.Int64Value
-	22,  // 58: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_usage_overcommit_max_wait_microseconds:type_name -> google.protobuf.Int64Value
-	22,  // 59: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_network_bandwidth:type_name -> google.protobuf.Int64Value
-	22,  // 60: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_network_bandwidth_for_user:type_name -> google.protobuf.Int64Value
-	22,  // 61: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_data_on_disk_size_for_query:type_name -> google.protobuf.Int64Value
-	22,  // 62: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_data_on_disk_size_for_user:type_name -> google.protobuf.Int64Value
-	22,  // 63: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_concurrent_queries_for_user:type_name -> google.protobuf.Int64Value
-	23,  // 64: yandex.cloud.mdb.clickhouse.v1.UserSettings.force_index_by_date:type_name -> google.protobuf.BoolValue
-	23,  // 65: yandex.cloud.mdb.clickhouse.v1.UserSettings.force_primary_key:type_name -> google.protobuf.BoolValue
-	22,  // 66: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_read:type_name -> google.protobuf.Int64Value
-	22,  // 67: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_read:type_name -> google.protobuf.Int64Value
-	6,   // 68: yandex.cloud.mdb.clickhouse.v1.UserSettings.read_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 69: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_group_by:type_name -> google.protobuf.Int64Value
-	7,   // 70: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.GroupByOverflowMode
-	22,  // 71: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_sort:type_name -> google.protobuf.Int64Value
-	22,  // 72: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_sort:type_name -> google.protobuf.Int64Value
-	6,   // 73: yandex.cloud.mdb.clickhouse.v1.UserSettings.sort_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 74: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_result_rows:type_name -> google.protobuf.Int64Value
-	22,  // 75: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_result_bytes:type_name -> google.protobuf.Int64Value
-	6,   // 76: yandex.cloud.mdb.clickhouse.v1.UserSettings.result_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 77: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_distinct:type_name -> google.protobuf.Int64Value
-	22,  // 78: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_distinct:type_name -> google.protobuf.Int64Value
-	6,   // 79: yandex.cloud.mdb.clickhouse.v1.UserSettings.distinct_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 80: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_transfer:type_name -> google.protobuf.Int64Value
-	22,  // 81: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_transfer:type_name -> google.protobuf.Int64Value
-	6,   // 82: yandex.cloud.mdb.clickhouse.v1.UserSettings.transfer_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 83: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_execution_time:type_name -> google.protobuf.Int64Value
-	6,   // 84: yandex.cloud.mdb.clickhouse.v1.UserSettings.timeout_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 85: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_set:type_name -> google.protobuf.Int64Value
-	22,  // 86: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_set:type_name -> google.protobuf.Int64Value
-	6,   // 87: yandex.cloud.mdb.clickhouse.v1.UserSettings.set_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 88: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_join:type_name -> google.protobuf.Int64Value
-	22,  // 89: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_join:type_name -> google.protobuf.Int64Value
-	6,   // 90: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
-	22,  // 91: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_columns_to_read:type_name -> google.protobuf.Int64Value
-	22,  // 92: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_columns:type_name -> google.protobuf.Int64Value
-	22,  // 93: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_non_const_columns:type_name -> google.protobuf.Int64Value
-	22,  // 94: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_query_size:type_name -> google.protobuf.Int64Value
-	22,  // 95: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_ast_depth:type_name -> google.protobuf.Int64Value
-	22,  // 96: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_ast_elements:type_name -> google.protobuf.Int64Value
-	22,  // 97: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_expanded_ast_elements:type_name -> google.protobuf.Int64Value
-	22,  // 98: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_parser_depth:type_name -> google.protobuf.Int64Value
-	22,  // 99: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_execution_speed:type_name -> google.protobuf.Int64Value
-	22,  // 100: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_execution_speed_bytes:type_name -> google.protobuf.Int64Value
-	23,  // 101: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_values_interpret_expressions:type_name -> google.protobuf.BoolValue
-	23,  // 102: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_defaults_for_omitted_fields:type_name -> google.protobuf.BoolValue
-	23,  // 103: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_null_as_default:type_name -> google.protobuf.BoolValue
-	23,  // 104: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_with_names_use_header:type_name -> google.protobuf.BoolValue
-	23,  // 105: yandex.cloud.mdb.clickhouse.v1.UserSettings.output_format_json_quote_64bit_integers:type_name -> google.protobuf.BoolValue
-	23,  // 106: yandex.cloud.mdb.clickhouse.v1.UserSettings.output_format_json_quote_denormals:type_name -> google.protobuf.BoolValue
-	8,   // 107: yandex.cloud.mdb.clickhouse.v1.UserSettings.date_time_input_format:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DateTimeInputFormat
-	9,   // 108: yandex.cloud.mdb.clickhouse.v1.UserSettings.date_time_output_format:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DateTimeOutputFormat
-	23,  // 109: yandex.cloud.mdb.clickhouse.v1.UserSettings.low_cardinality_allow_in_native_format:type_name -> google.protobuf.BoolValue
-	23,  // 110: yandex.cloud.mdb.clickhouse.v1.UserSettings.empty_result_for_aggregation_by_empty_set:type_name -> google.protobuf.BoolValue
-	10,  // 111: yandex.cloud.mdb.clickhouse.v1.UserSettings.format_regexp_escaping_rule:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.FormatRegexpEscapingRule
-	23,  // 112: yandex.cloud.mdb.clickhouse.v1.UserSettings.format_regexp_skip_unmatched:type_name -> google.protobuf.BoolValue
-	23,  // 113: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_parallel_parsing:type_name -> google.protobuf.BoolValue
-	23,  // 114: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_import_nested_json:type_name -> google.protobuf.BoolValue
-	23,  // 115: yandex.cloud.mdb.clickhouse.v1.UserSettings.data_type_default_nullable:type_name -> google.protobuf.BoolValue
-	22,  // 116: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_connection_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 117: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_receive_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 118: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_send_timeout:type_name -> google.protobuf.Int64Value
-	23,  // 119: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_http_compression:type_name -> google.protobuf.BoolValue
-	23,  // 120: yandex.cloud.mdb.clickhouse.v1.UserSettings.send_progress_in_http_headers:type_name -> google.protobuf.BoolValue
-	22,  // 121: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_headers_progress_interval:type_name -> google.protobuf.Int64Value
-	23,  // 122: yandex.cloud.mdb.clickhouse.v1.UserSettings.add_http_cors_header:type_name -> google.protobuf.BoolValue
-	23,  // 123: yandex.cloud.mdb.clickhouse.v1.UserSettings.cancel_http_readonly_queries_on_client_close:type_name -> google.protobuf.BoolValue
-	22,  // 124: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_http_get_redirects:type_name -> google.protobuf.Int64Value
-	22,  // 125: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_max_field_name_size:type_name -> google.protobuf.Int64Value
-	22,  // 126: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_max_field_value_size:type_name -> google.protobuf.Int64Value
-	11,  // 127: yandex.cloud.mdb.clickhouse.v1.UserSettings.quota_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QuotaMode
-	23,  // 128: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert:type_name -> google.protobuf.BoolValue
-	23,  // 129: yandex.cloud.mdb.clickhouse.v1.UserSettings.wait_for_async_insert:type_name -> google.protobuf.BoolValue
-	22,  // 130: yandex.cloud.mdb.clickhouse.v1.UserSettings.wait_for_async_insert_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 131: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_max_data_size:type_name -> google.protobuf.Int64Value
-	22,  // 132: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_busy_timeout:type_name -> google.protobuf.Int64Value
-	23,  // 133: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_use_adaptive_busy_timeout:type_name -> google.protobuf.BoolValue
-	23,  // 134: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_query_threads:type_name -> google.protobuf.BoolValue
-	23,  // 135: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_query_views:type_name -> google.protobuf.BoolValue
-	24,  // 136: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_queries_probability:type_name -> google.protobuf.DoubleValue
-	23,  // 137: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_processors_profiles:type_name -> google.protobuf.BoolValue
-	23,  // 138: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_query_cache:type_name -> google.protobuf.BoolValue
-	23,  // 139: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_reads_from_query_cache:type_name -> google.protobuf.BoolValue
-	23,  // 140: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_writes_to_query_cache:type_name -> google.protobuf.BoolValue
-	22,  // 141: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_min_query_runs:type_name -> google.protobuf.Int64Value
-	22,  // 142: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_min_query_duration:type_name -> google.protobuf.Int64Value
-	22,  // 143: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_ttl:type_name -> google.protobuf.Int64Value
-	22,  // 144: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_max_entries:type_name -> google.protobuf.Int64Value
-	22,  // 145: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_max_size_in_bytes:type_name -> google.protobuf.Int64Value
-	23,  // 146: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_share_between_users:type_name -> google.protobuf.BoolValue
-	12,  // 147: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_nondeterministic_function_handling:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QueryCacheNondeterministicFunctionHandling
-	13,  // 148: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_system_table_handling:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QueryCacheSystemTableHandling
-	14,  // 149: yandex.cloud.mdb.clickhouse.v1.UserSettings.count_distinct_implementation:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.CountDistinctImplementation
-	23,  // 150: yandex.cloud.mdb.clickhouse.v1.UserSettings.joined_subquery_requires_alias:type_name -> google.protobuf.BoolValue
-	23,  // 151: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_use_nulls:type_name -> google.protobuf.BoolValue
-	23,  // 152: yandex.cloud.mdb.clickhouse.v1.UserSettings.transform_null_in:type_name -> google.protobuf.BoolValue
-	23,  // 153: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_null_as_default:type_name -> google.protobuf.BoolValue
-	15,  // 154: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_algorithm:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.JoinAlgorithm
-	23,  // 155: yandex.cloud.mdb.clickhouse.v1.UserSettings.any_join_distinct_right_table_keys:type_name -> google.protobuf.BoolValue
-	23,  // 156: yandex.cloud.mdb.clickhouse.v1.UserSettings.allow_suspicious_low_cardinality_types:type_name -> google.protobuf.BoolValue
-	23,  // 157: yandex.cloud.mdb.clickhouse.v1.UserSettings.flatten_nested:type_name -> google.protobuf.BoolValue
-	22,  // 158: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_profiler_step:type_name -> google.protobuf.Int64Value
-	24,  // 159: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_profiler_sample_probability:type_name -> google.protobuf.DoubleValue
-	22,  // 160: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_final_threads:type_name -> google.protobuf.Int64Value
-	22,  // 161: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_read_buffer_size:type_name -> google.protobuf.Int64Value
-	22,  // 162: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_keeper_max_retries:type_name -> google.protobuf.Int64Value
-	23,  // 163: yandex.cloud.mdb.clickhouse.v1.UserSettings.do_not_merge_across_partitions_select_final:type_name -> google.protobuf.BoolValue
-	23,  // 164: yandex.cloud.mdb.clickhouse.v1.UserSettings.ignore_materialized_views_with_dropped_target_table:type_name -> google.protobuf.BoolValue
-	23,  // 165: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_analyzer:type_name -> google.protobuf.BoolValue
-	23,  // 166: yandex.cloud.mdb.clickhouse.v1.UserSettings.s3_use_adaptive_timeouts:type_name -> google.protobuf.BoolValue
-	23,  // 167: yandex.cloud.mdb.clickhouse.v1.UserSettings.final:type_name -> google.protobuf.BoolValue
-	23,  // 168: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_hive_partitioning:type_name -> google.protobuf.BoolValue
-	23,  // 169: yandex.cloud.mdb.clickhouse.v1.UserSettings.show_data_lake_catalogs_in_system_tables:type_name -> google.protobuf.BoolValue
-	23,  // 170: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
-	22,  // 171: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
-	22,  // 172: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
-	22,  // 173: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 174: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
-	22,  // 175: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
-	22,  // 176: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
-	22,  // 177: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
-	22,  // 178: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
-	22,  // 179: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
-	23,  // 180: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
-	17,  // 181: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
-	18,  // 182: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
-	19,  // 183: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
-	184, // [184:184] is the sub-list for method output_type
-	184, // [184:184] is the sub-list for method input_type
-	184, // [184:184] is the sub-list for extension type_name
-	184, // [184:184] is the sub-list for extension extendee
-	0,   // [0:184] is the sub-list for field type_name
+	22,  // 9: yandex.cloud.mdb.clickhouse.v1.UserSettings.connect_timeout_with_failover_secure:type_name -> google.protobuf.Int64Value
+	22,  // 10: yandex.cloud.mdb.clickhouse.v1.UserSettings.connections_with_failover_max_tries:type_name -> google.protobuf.Int64Value
+	22,  // 11: yandex.cloud.mdb.clickhouse.v1.UserSettings.receive_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 12: yandex.cloud.mdb.clickhouse.v1.UserSettings.send_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 13: yandex.cloud.mdb.clickhouse.v1.UserSettings.idle_connection_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 14: yandex.cloud.mdb.clickhouse.v1.UserSettings.timeout_before_checking_execution_speed:type_name -> google.protobuf.Int64Value
+	22,  // 15: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum:type_name -> google.protobuf.Int64Value
+	22,  // 16: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum_timeout:type_name -> google.protobuf.Int64Value
+	23,  // 17: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_quorum_parallel:type_name -> google.protobuf.BoolValue
+	23,  // 18: yandex.cloud.mdb.clickhouse.v1.UserSettings.select_sequential_consistency:type_name -> google.protobuf.BoolValue
+	22,  // 19: yandex.cloud.mdb.clickhouse.v1.UserSettings.replication_alter_partitions_sync:type_name -> google.protobuf.Int64Value
+	22,  // 20: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_replica_delay_for_distributed_queries:type_name -> google.protobuf.Int64Value
+	23,  // 21: yandex.cloud.mdb.clickhouse.v1.UserSettings.fallback_to_stale_replicas_for_distributed_queries:type_name -> google.protobuf.BoolValue
+	1,   // 22: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_product_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DistributedProductMode
+	23,  // 23: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_aggregation_memory_efficient:type_name -> google.protobuf.BoolValue
+	22,  // 24: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_ddl_task_timeout:type_name -> google.protobuf.Int64Value
+	2,   // 25: yandex.cloud.mdb.clickhouse.v1.UserSettings.distributed_ddl_output_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DistributedDdlOutputMode
+	23,  // 26: yandex.cloud.mdb.clickhouse.v1.UserSettings.skip_unavailable_shards:type_name -> google.protobuf.BoolValue
+	23,  // 27: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_hedged_requests:type_name -> google.protobuf.BoolValue
+	22,  // 28: yandex.cloud.mdb.clickhouse.v1.UserSettings.hedged_connection_timeout_ms:type_name -> google.protobuf.Int64Value
+	3,   // 29: yandex.cloud.mdb.clickhouse.v1.UserSettings.load_balancing:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.LoadBalancing
+	23,  // 30: yandex.cloud.mdb.clickhouse.v1.UserSettings.prefer_localhost_replica:type_name -> google.protobuf.BoolValue
+	23,  // 31: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile_expressions:type_name -> google.protobuf.BoolValue
+	22,  // 32: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile_expression:type_name -> google.protobuf.Int64Value
+	22,  // 33: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_block_size:type_name -> google.protobuf.Int64Value
+	22,  // 34: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_insert_block_size_rows:type_name -> google.protobuf.Int64Value
+	22,  // 35: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_insert_block_size_bytes:type_name -> google.protobuf.Int64Value
+	22,  // 36: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_insert_block_size:type_name -> google.protobuf.Int64Value
+	22,  // 37: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_partitions_per_insert_block:type_name -> google.protobuf.Int64Value
+	22,  // 38: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_bytes_to_use_direct_io:type_name -> google.protobuf.Int64Value
+	23,  // 39: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_uncompressed_cache:type_name -> google.protobuf.BoolValue
+	22,  // 40: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_max_rows_to_use_cache:type_name -> google.protobuf.Int64Value
+	22,  // 41: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_max_bytes_to_use_cache:type_name -> google.protobuf.Int64Value
+	22,  // 42: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_min_rows_for_concurrent_read:type_name -> google.protobuf.Int64Value
+	22,  // 43: yandex.cloud.mdb.clickhouse.v1.UserSettings.merge_tree_min_bytes_for_concurrent_read:type_name -> google.protobuf.Int64Value
+	22,  // 44: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_before_external_group_by:type_name -> google.protobuf.Int64Value
+	24,  // 45: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_ratio_before_external_group_by:type_name -> google.protobuf.DoubleValue
+	24,  // 46: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_ratio_before_external_sort:type_name -> google.protobuf.DoubleValue
+	22,  // 47: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_before_external_sort:type_name -> google.protobuf.Int64Value
+	22,  // 48: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_two_level_threshold:type_name -> google.protobuf.Int64Value
+	22,  // 49: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_two_level_threshold_bytes:type_name -> google.protobuf.Int64Value
+	23,  // 50: yandex.cloud.mdb.clickhouse.v1.UserSettings.deduplicate_blocks_in_dependent_materialized_views:type_name -> google.protobuf.BoolValue
+	4,   // 51: yandex.cloud.mdb.clickhouse.v1.UserSettings.local_filesystem_read_method:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.LocalFilesystemReadMethod
+	5,   // 52: yandex.cloud.mdb.clickhouse.v1.UserSettings.remote_filesystem_read_method:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.RemoteFilesystemReadMethod
+	22,  // 53: yandex.cloud.mdb.clickhouse.v1.UserSettings.priority:type_name -> google.protobuf.Int64Value
+	22,  // 54: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_threads:type_name -> google.protobuf.Int64Value
+	22,  // 55: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_insert_threads:type_name -> google.protobuf.Int64Value
+	22,  // 56: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_memory_usage:type_name -> google.protobuf.Int64Value
+	22,  // 57: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_memory_usage_for_user:type_name -> google.protobuf.Int64Value
+	22,  // 58: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_overcommit_ratio_denominator:type_name -> google.protobuf.Int64Value
+	22,  // 59: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_overcommit_ratio_denominator_for_user:type_name -> google.protobuf.Int64Value
+	22,  // 60: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_usage_overcommit_max_wait_microseconds:type_name -> google.protobuf.Int64Value
+	22,  // 61: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_network_bandwidth:type_name -> google.protobuf.Int64Value
+	22,  // 62: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_network_bandwidth_for_user:type_name -> google.protobuf.Int64Value
+	22,  // 63: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_network_bytes:type_name -> google.protobuf.Int64Value
+	22,  // 64: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_data_on_disk_size_for_query:type_name -> google.protobuf.Int64Value
+	22,  // 65: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_data_on_disk_size_for_user:type_name -> google.protobuf.Int64Value
+	22,  // 66: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_concurrent_queries_for_user:type_name -> google.protobuf.Int64Value
+	23,  // 67: yandex.cloud.mdb.clickhouse.v1.UserSettings.force_index_by_date:type_name -> google.protobuf.BoolValue
+	23,  // 68: yandex.cloud.mdb.clickhouse.v1.UserSettings.force_primary_key:type_name -> google.protobuf.BoolValue
+	22,  // 69: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_read:type_name -> google.protobuf.Int64Value
+	22,  // 70: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_read:type_name -> google.protobuf.Int64Value
+	6,   // 71: yandex.cloud.mdb.clickhouse.v1.UserSettings.read_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 72: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_group_by:type_name -> google.protobuf.Int64Value
+	7,   // 73: yandex.cloud.mdb.clickhouse.v1.UserSettings.group_by_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.GroupByOverflowMode
+	22,  // 74: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_sort:type_name -> google.protobuf.Int64Value
+	22,  // 75: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_sort:type_name -> google.protobuf.Int64Value
+	6,   // 76: yandex.cloud.mdb.clickhouse.v1.UserSettings.sort_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 77: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_result_rows:type_name -> google.protobuf.Int64Value
+	22,  // 78: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_result_bytes:type_name -> google.protobuf.Int64Value
+	6,   // 79: yandex.cloud.mdb.clickhouse.v1.UserSettings.result_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 80: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_distinct:type_name -> google.protobuf.Int64Value
+	22,  // 81: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_distinct:type_name -> google.protobuf.Int64Value
+	6,   // 82: yandex.cloud.mdb.clickhouse.v1.UserSettings.distinct_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 83: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_to_transfer:type_name -> google.protobuf.Int64Value
+	22,  // 84: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_to_transfer:type_name -> google.protobuf.Int64Value
+	6,   // 85: yandex.cloud.mdb.clickhouse.v1.UserSettings.transfer_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 86: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_execution_time:type_name -> google.protobuf.Int64Value
+	6,   // 87: yandex.cloud.mdb.clickhouse.v1.UserSettings.timeout_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 88: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_set:type_name -> google.protobuf.Int64Value
+	22,  // 89: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_set:type_name -> google.protobuf.Int64Value
+	6,   // 90: yandex.cloud.mdb.clickhouse.v1.UserSettings.set_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 91: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_rows_in_join:type_name -> google.protobuf.Int64Value
+	22,  // 92: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_bytes_in_join:type_name -> google.protobuf.Int64Value
+	6,   // 93: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_overflow_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.OverflowMode
+	22,  // 94: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_columns_to_read:type_name -> google.protobuf.Int64Value
+	22,  // 95: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_columns:type_name -> google.protobuf.Int64Value
+	22,  // 96: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_temporary_non_const_columns:type_name -> google.protobuf.Int64Value
+	22,  // 97: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_query_size:type_name -> google.protobuf.Int64Value
+	22,  // 98: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_ast_depth:type_name -> google.protobuf.Int64Value
+	22,  // 99: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_ast_elements:type_name -> google.protobuf.Int64Value
+	22,  // 100: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_expanded_ast_elements:type_name -> google.protobuf.Int64Value
+	22,  // 101: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_parser_depth:type_name -> google.protobuf.Int64Value
+	22,  // 102: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_execution_speed:type_name -> google.protobuf.Int64Value
+	22,  // 103: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_execution_speed_bytes:type_name -> google.protobuf.Int64Value
+	23,  // 104: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_values_interpret_expressions:type_name -> google.protobuf.BoolValue
+	23,  // 105: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_defaults_for_omitted_fields:type_name -> google.protobuf.BoolValue
+	23,  // 106: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_null_as_default:type_name -> google.protobuf.BoolValue
+	23,  // 107: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_with_names_use_header:type_name -> google.protobuf.BoolValue
+	23,  // 108: yandex.cloud.mdb.clickhouse.v1.UserSettings.output_format_json_quote_64bit_integers:type_name -> google.protobuf.BoolValue
+	23,  // 109: yandex.cloud.mdb.clickhouse.v1.UserSettings.output_format_json_quote_denormals:type_name -> google.protobuf.BoolValue
+	8,   // 110: yandex.cloud.mdb.clickhouse.v1.UserSettings.date_time_input_format:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DateTimeInputFormat
+	9,   // 111: yandex.cloud.mdb.clickhouse.v1.UserSettings.date_time_output_format:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.DateTimeOutputFormat
+	23,  // 112: yandex.cloud.mdb.clickhouse.v1.UserSettings.low_cardinality_allow_in_native_format:type_name -> google.protobuf.BoolValue
+	23,  // 113: yandex.cloud.mdb.clickhouse.v1.UserSettings.empty_result_for_aggregation_by_empty_set:type_name -> google.protobuf.BoolValue
+	10,  // 114: yandex.cloud.mdb.clickhouse.v1.UserSettings.format_regexp_escaping_rule:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.FormatRegexpEscapingRule
+	23,  // 115: yandex.cloud.mdb.clickhouse.v1.UserSettings.format_regexp_skip_unmatched:type_name -> google.protobuf.BoolValue
+	23,  // 116: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_parallel_parsing:type_name -> google.protobuf.BoolValue
+	23,  // 117: yandex.cloud.mdb.clickhouse.v1.UserSettings.input_format_import_nested_json:type_name -> google.protobuf.BoolValue
+	23,  // 118: yandex.cloud.mdb.clickhouse.v1.UserSettings.data_type_default_nullable:type_name -> google.protobuf.BoolValue
+	22,  // 119: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_connection_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 120: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_receive_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 121: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_send_timeout:type_name -> google.protobuf.Int64Value
+	23,  // 122: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_http_compression:type_name -> google.protobuf.BoolValue
+	23,  // 123: yandex.cloud.mdb.clickhouse.v1.UserSettings.send_progress_in_http_headers:type_name -> google.protobuf.BoolValue
+	22,  // 124: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_headers_progress_interval:type_name -> google.protobuf.Int64Value
+	23,  // 125: yandex.cloud.mdb.clickhouse.v1.UserSettings.add_http_cors_header:type_name -> google.protobuf.BoolValue
+	23,  // 126: yandex.cloud.mdb.clickhouse.v1.UserSettings.cancel_http_readonly_queries_on_client_close:type_name -> google.protobuf.BoolValue
+	22,  // 127: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_http_get_redirects:type_name -> google.protobuf.Int64Value
+	22,  // 128: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_max_field_name_size:type_name -> google.protobuf.Int64Value
+	22,  // 129: yandex.cloud.mdb.clickhouse.v1.UserSettings.http_max_field_value_size:type_name -> google.protobuf.Int64Value
+	11,  // 130: yandex.cloud.mdb.clickhouse.v1.UserSettings.quota_mode:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QuotaMode
+	23,  // 131: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert:type_name -> google.protobuf.BoolValue
+	23,  // 132: yandex.cloud.mdb.clickhouse.v1.UserSettings.wait_for_async_insert:type_name -> google.protobuf.BoolValue
+	22,  // 133: yandex.cloud.mdb.clickhouse.v1.UserSettings.wait_for_async_insert_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 134: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_max_data_size:type_name -> google.protobuf.Int64Value
+	22,  // 135: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_busy_timeout:type_name -> google.protobuf.Int64Value
+	23,  // 136: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_use_adaptive_busy_timeout:type_name -> google.protobuf.BoolValue
+	23,  // 137: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_query_threads:type_name -> google.protobuf.BoolValue
+	23,  // 138: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_query_views:type_name -> google.protobuf.BoolValue
+	24,  // 139: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_queries_probability:type_name -> google.protobuf.DoubleValue
+	23,  // 140: yandex.cloud.mdb.clickhouse.v1.UserSettings.log_processors_profiles:type_name -> google.protobuf.BoolValue
+	23,  // 141: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_query_cache:type_name -> google.protobuf.BoolValue
+	23,  // 142: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_reads_from_query_cache:type_name -> google.protobuf.BoolValue
+	23,  // 143: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_writes_to_query_cache:type_name -> google.protobuf.BoolValue
+	22,  // 144: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_min_query_runs:type_name -> google.protobuf.Int64Value
+	22,  // 145: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_min_query_duration:type_name -> google.protobuf.Int64Value
+	22,  // 146: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_ttl:type_name -> google.protobuf.Int64Value
+	22,  // 147: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_max_entries:type_name -> google.protobuf.Int64Value
+	22,  // 148: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_max_size_in_bytes:type_name -> google.protobuf.Int64Value
+	23,  // 149: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_share_between_users:type_name -> google.protobuf.BoolValue
+	12,  // 150: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_nondeterministic_function_handling:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QueryCacheNondeterministicFunctionHandling
+	13,  // 151: yandex.cloud.mdb.clickhouse.v1.UserSettings.query_cache_system_table_handling:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.QueryCacheSystemTableHandling
+	14,  // 152: yandex.cloud.mdb.clickhouse.v1.UserSettings.count_distinct_implementation:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.CountDistinctImplementation
+	23,  // 153: yandex.cloud.mdb.clickhouse.v1.UserSettings.joined_subquery_requires_alias:type_name -> google.protobuf.BoolValue
+	23,  // 154: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_use_nulls:type_name -> google.protobuf.BoolValue
+	23,  // 155: yandex.cloud.mdb.clickhouse.v1.UserSettings.transform_null_in:type_name -> google.protobuf.BoolValue
+	23,  // 156: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_null_as_default:type_name -> google.protobuf.BoolValue
+	15,  // 157: yandex.cloud.mdb.clickhouse.v1.UserSettings.join_algorithm:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings.JoinAlgorithm
+	23,  // 158: yandex.cloud.mdb.clickhouse.v1.UserSettings.any_join_distinct_right_table_keys:type_name -> google.protobuf.BoolValue
+	23,  // 159: yandex.cloud.mdb.clickhouse.v1.UserSettings.allow_suspicious_low_cardinality_types:type_name -> google.protobuf.BoolValue
+	23,  // 160: yandex.cloud.mdb.clickhouse.v1.UserSettings.flatten_nested:type_name -> google.protobuf.BoolValue
+	22,  // 161: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_profiler_step:type_name -> google.protobuf.Int64Value
+	24,  // 162: yandex.cloud.mdb.clickhouse.v1.UserSettings.memory_profiler_sample_probability:type_name -> google.protobuf.DoubleValue
+	22,  // 163: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_final_threads:type_name -> google.protobuf.Int64Value
+	22,  // 164: yandex.cloud.mdb.clickhouse.v1.UserSettings.max_read_buffer_size:type_name -> google.protobuf.Int64Value
+	22,  // 165: yandex.cloud.mdb.clickhouse.v1.UserSettings.insert_keeper_max_retries:type_name -> google.protobuf.Int64Value
+	23,  // 166: yandex.cloud.mdb.clickhouse.v1.UserSettings.do_not_merge_across_partitions_select_final:type_name -> google.protobuf.BoolValue
+	23,  // 167: yandex.cloud.mdb.clickhouse.v1.UserSettings.ignore_materialized_views_with_dropped_target_table:type_name -> google.protobuf.BoolValue
+	23,  // 168: yandex.cloud.mdb.clickhouse.v1.UserSettings.enable_analyzer:type_name -> google.protobuf.BoolValue
+	23,  // 169: yandex.cloud.mdb.clickhouse.v1.UserSettings.s3_use_adaptive_timeouts:type_name -> google.protobuf.BoolValue
+	23,  // 170: yandex.cloud.mdb.clickhouse.v1.UserSettings.final:type_name -> google.protobuf.BoolValue
+	23,  // 171: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_hive_partitioning:type_name -> google.protobuf.BoolValue
+	23,  // 172: yandex.cloud.mdb.clickhouse.v1.UserSettings.show_data_lake_catalogs_in_system_tables:type_name -> google.protobuf.BoolValue
+	23,  // 173: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
+	22,  // 174: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
+	22,  // 175: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
+	22,  // 176: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 177: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
+	22,  // 178: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
+	22,  // 179: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
+	22,  // 180: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
+	22,  // 181: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
+	22,  // 182: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
+	23,  // 183: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	17,  // 184: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
+	18,  // 185: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
+	19,  // 186: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
+	187, // [187:187] is the sub-list for method output_type
+	187, // [187:187] is the sub-list for method input_type
+	187, // [187:187] is the sub-list for extension type_name
+	187, // [187:187] is the sub-list for extension extendee
+	0,   // [0:187] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_user_proto_init() }
