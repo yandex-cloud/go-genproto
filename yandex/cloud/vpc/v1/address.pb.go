@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -147,6 +146,8 @@ type Address struct {
 	// The string length in characters for each key must be 1-63.
 	// Each key must match the regular expression `[a-z][-_0-9a-z]*`.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Address:
 	//
 	//	*Address_ExternalIpv4Address
@@ -392,6 +393,8 @@ type InternalIpv4Address struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Value of address.
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Scope:
 	//
 	//	*InternalIpv4Address_SubnetId
@@ -594,7 +597,7 @@ var File_yandex_cloud_vpc_v1_address_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_address_proto_rawDesc = "" +
 	"\n" +
-	"!yandex/cloud/vpc/v1/address.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x92\a\n" +
+	"!yandex/cloud/vpc/v1/address.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8c\a\n" +
 	"\aAddress\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -623,16 +626,16 @@ const file_yandex_cloud_vpc_v1_address_proto_rawDesc = "" +
 	"\tIpVersion\x12\x1a\n" +
 	"\x16IP_VERSION_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04IPV4\x10\x01\x12\b\n" +
-	"\x04IPV6\x10\x02B\x0f\n" +
-	"\aaddress\x12\x04\xc0\xc11\x01J\x04\b\t\x10\x0f\"\x96\x01\n" +
+	"\x04IPV6\x10\x02B\t\n" +
+	"\aaddressJ\x04\b\t\x10\x0f\"\x96\x01\n" +
 	"\x13ExternalIpv4Address\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x17\n" +
 	"\azone_id\x18\x02 \x01(\tR\x06zoneId\x12L\n" +
-	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"]\n" +
+	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"W\n" +
 	"\x13InternalIpv4Address\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1d\n" +
-	"\tsubnet_id\x18\x02 \x01(\tH\x00R\bsubnetIdB\r\n" +
-	"\x05scope\x12\x04\xc0\xc11\x01\"\x89\x01\n" +
+	"\tsubnet_id\x18\x02 \x01(\tH\x00R\bsubnetIdB\a\n" +
+	"\x05scope\"\x89\x01\n" +
 	"\x13AddressRequirements\x128\n" +
 	"\x18ddos_protection_provider\x18\x01 \x01(\tR\x16ddosProtectionProvider\x128\n" +
 	"\x18outgoing_smtp_capability\x18\x02 \x01(\tR\x16outgoingSmtpCapability\"c\n" +

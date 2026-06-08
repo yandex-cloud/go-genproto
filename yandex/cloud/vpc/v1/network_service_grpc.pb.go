@@ -39,7 +39,6 @@ const (
 // A set of methods for managing Network resources.
 type NetworkServiceClient interface {
 	// Returns the specified Network resource.
-	//
 	// Get the list of available Network resources by making a [List] request.
 	Get(ctx context.Context, in *GetNetworkRequest, opts ...grpc.CallOption) (*Network, error)
 	// Retrieves the list of Network resources in the specified folder.
@@ -179,7 +178,6 @@ func (c *networkServiceClient) Move(ctx context.Context, in *MoveNetworkRequest,
 // A set of methods for managing Network resources.
 type NetworkServiceServer interface {
 	// Returns the specified Network resource.
-	//
 	// Get the list of available Network resources by making a [List] request.
 	Get(context.Context, *GetNetworkRequest) (*Network, error)
 	// Retrieves the list of Network resources in the specified folder.

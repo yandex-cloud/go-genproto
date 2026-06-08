@@ -7,7 +7,6 @@
 package loadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -30,6 +29,8 @@ type GetTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the TargetGroup resource to return.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,21 +77,26 @@ type ListTargetGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list target groups in.
 	// To get the folder ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListTargetGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListTargetGroupsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can only filter by the [TargetGroup.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -217,15 +223,25 @@ type CreateTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list target groups in.
 	// To get the folder ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the target group.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the target group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the availability zone where the target group resides.
+	// The length must be less than or equal to 50.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// List of targets within the target group.
 	Targets       []*Target `protobuf:"bytes,7,rep,name=targets,proto3" json:"targets,omitempty"`
@@ -354,17 +370,25 @@ type UpdateTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the TargetGroup resource to update.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	// Field mask that specifies which fields of the TargetGroup resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the target group.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the target group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
-	//
 	// The existing set of “ labels “ is completely replaced with the provided set.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// A new list of targets for this target group.
 	Targets       []*Target `protobuf:"bytes,6,rep,name=targets,proto3" json:"targets,omitempty"`
@@ -493,6 +517,8 @@ type DeleteTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the target group to delete.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -584,8 +610,11 @@ type AddTargetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the TargetGroup resource to add targets to.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	// List of targets to add to the target group.
+	// The number of elements must be greater than or equal to 1.
 	Targets       []*Target `protobuf:"bytes,2,rep,name=targets,proto3" json:"targets,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -684,8 +713,11 @@ type RemoveTargetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the target group to remove targets from.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	// List of targets to remove from the target group.
+	// The number of elements must be greater than or equal to 1.
 	Targets       []*Target `protobuf:"bytes,2,rep,name=targets,proto3" json:"targets,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -784,14 +816,18 @@ type ListTargetGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the TargetGroup resource to update.
 	// To get the target group ID, use a [TargetGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListTargetGroupOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListTargetGroupOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -909,65 +945,62 @@ var File_yandex_cloud_loadbalancer_v1_target_group_service_proto protoreflect.Fi
 
 const file_yandex_cloud_loadbalancer_v1_target_group_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/loadbalancer/v1/target_group_service.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/loadbalancer/v1/target_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"M\n" +
-	"\x15GetTargetGroupRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\"\xbb\x01\n" +
-	"\x17ListTargetGroupsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"7yandex/cloud/loadbalancer/v1/target_group_service.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/loadbalancer/v1/target_group.proto\x1a&yandex/cloud/operation/operation.proto\"?\n" +
+	"\x15GetTargetGroupRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x8a\x01\n" +
+	"\x17ListTargetGroupsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x92\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x92\x01\n" +
 	"\x18ListTargetGroupsResponse\x12N\n" +
 	"\rtarget_groups\x18\x01 \x03(\v2).yandex.cloud.loadbalancer.v1.TargetGroupR\ftargetGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xeb\x03\n" +
-	"\x18CreateTargetGroupRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2B.yandex.cloud.loadbalancer.v1.CreateTargetGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\tregion_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bregionId\x12>\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe7\x02\n" +
+	"\x18CreateTargetGroupRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12Z\n" +
+	"\x06labels\x18\x04 \x03(\v2B.yandex.cloud.loadbalancer.v1.CreateTargetGroupRequest.LabelsEntryR\x06labels\x12\x1b\n" +
+	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12>\n" +
 	"\atargets\x18\a \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetR\atargets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\a\"C\n" +
 	"\x19CreateTargetGroupMetadata\x12&\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x86\x04\n" +
-	"\x18UpdateTargetGroupRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12;\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x8c\x03\n" +
+	"\x18UpdateTargetGroupRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x125\n" +
-	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x97\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2B.yandex.cloud.loadbalancer.v1.UpdateTargetGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12>\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12Z\n" +
+	"\x06labels\x18\x05 \x03(\v2B.yandex.cloud.loadbalancer.v1.UpdateTargetGroupRequest.LabelsEntryR\x06labels\x12>\n" +
 	"\atargets\x18\x06 \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetR\atargets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
 	"\x19UpdateTargetGroupMetadata\x12&\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"P\n" +
-	"\x18DeleteTargetGroupRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\"C\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"B\n" +
+	"\x18DeleteTargetGroupRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"C\n" +
 	"\x19DeleteTargetGroupMetadata\x12&\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x92\x01\n" +
-	"\x11AddTargetsRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12G\n" +
-	"\atargets\x18\x02 \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetB\a\x82\xc81\x03>=1R\atargets\"<\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"{\n" +
+	"\x11AddTargetsRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\x12>\n" +
+	"\atargets\x18\x02 \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetR\atargets\"<\n" +
 	"\x12AddTargetsMetadata\x12&\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x95\x01\n" +
-	"\x14RemoveTargetsRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12G\n" +
-	"\atargets\x18\x02 \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetB\a\x82\xc81\x03>=1R\atargets\"?\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"~\n" +
+	"\x14RemoveTargetsRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\x12>\n" +
+	"\atargets\x18\x02 \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetR\atargets\"?\n" +
 	"\x15RemoveTargetsMetadata\x12&\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\xab\x01\n" +
-	" ListTargetGroupOperationsRequest\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\"\x86\x01\n" +
+	" ListTargetGroupOperationsRequest\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8e\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8e\x01\n" +
 	"!ListTargetGroupOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
@@ -984,9 +1017,9 @@ const file_yandex_cloud_loadbalancer_v1_target_group_service_proto_rawDesc = "" 
 	"\x19DeleteTargetGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x022*0/load-balancer/v1/targetGroups/{target_group_id}\x12\xcd\x01\n" +
 	"\n" +
 	"AddTargets\x12/.yandex.cloud.loadbalancer.v1.AddTargetsRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2*!\n" +
-	"\x12AddTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02@:\x01*\";/load-balancer/v1/targetGroups/{target_group_id}:addTargets\x12\xd9\x01\n" +
+	"\x12AddTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02@:\x01*\";/load-balancer/v1/targetGroups/{target_group_id}/addTargets\x12\xd9\x01\n" +
 	"\rRemoveTargets\x122.yandex.cloud.loadbalancer.v1.RemoveTargetsRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*$\n" +
-	"\x15RemoveTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02C:\x01*\">/load-balancer/v1/targetGroups/{target_group_id}:removeTargets\x12\xd6\x01\n" +
+	"\x15RemoveTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02C:\x01*\">/load-balancer/v1/targetGroups/{target_group_id}/removeTargets\x12\xd6\x01\n" +
 	"\x0eListOperations\x12>.yandex.cloud.loadbalancer.v1.ListTargetGroupOperationsRequest\x1a?.yandex.cloud.loadbalancer.v1.ListTargetGroupOperationsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/load-balancer/v1/targetGroups/{target_group_id}/operationsBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 

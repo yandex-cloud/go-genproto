@@ -38,11 +38,9 @@ const (
 // A set of methods for managing Address resources.
 type AddressServiceClient interface {
 	// Returns the specified Address resource.
-	//
 	// To get the list of all available Address resources, make a [List] request.
 	Get(ctx context.Context, in *GetAddressRequest, opts ...grpc.CallOption) (*Address, error)
 	// Returns the specified Address resource by a given value.
-	//
 	// To get the list of all available Address resources, make a [List] request.
 	GetByValue(ctx context.Context, in *GetAddressByValueRequest, opts ...grpc.CallOption) (*Address, error)
 	// Retrieves the list of Address resources in the specified folder.
@@ -166,11 +164,9 @@ func (c *addressServiceClient) Move(ctx context.Context, in *MoveAddressRequest,
 // A set of methods for managing Address resources.
 type AddressServiceServer interface {
 	// Returns the specified Address resource.
-	//
 	// To get the list of all available Address resources, make a [List] request.
 	Get(context.Context, *GetAddressRequest) (*Address, error)
 	// Returns the specified Address resource by a given value.
-	//
 	// To get the list of all available Address resources, make a [List] request.
 	GetByValue(context.Context, *GetAddressByValueRequest) (*Address, error)
 	// Retrieves the list of Address resources in the specified folder.

@@ -26,10 +26,10 @@ const (
 	SubnetService_Update_FullMethodName            = "/yandex.cloud.vpc.v1.SubnetService/Update"
 	SubnetService_AddCidrBlocks_FullMethodName     = "/yandex.cloud.vpc.v1.SubnetService/AddCidrBlocks"
 	SubnetService_RemoveCidrBlocks_FullMethodName  = "/yandex.cloud.vpc.v1.SubnetService/RemoveCidrBlocks"
+	SubnetService_Relocate_FullMethodName          = "/yandex.cloud.vpc.v1.SubnetService/Relocate"
 	SubnetService_Delete_FullMethodName            = "/yandex.cloud.vpc.v1.SubnetService/Delete"
 	SubnetService_ListOperations_FullMethodName    = "/yandex.cloud.vpc.v1.SubnetService/ListOperations"
 	SubnetService_Move_FullMethodName              = "/yandex.cloud.vpc.v1.SubnetService/Move"
-	SubnetService_Relocate_FullMethodName          = "/yandex.cloud.vpc.v1.SubnetService/Relocate"
 	SubnetService_ListUsedAddresses_FullMethodName = "/yandex.cloud.vpc.v1.SubnetService/ListUsedAddresses"
 )
 
@@ -40,7 +40,6 @@ const (
 // A set of methods for managing Subnet resources.
 type SubnetServiceClient interface {
 	// Returns the specified Subnet resource.
-	//
 	// To get the list of available Subnet resources, make a [List] request.
 	Get(ctx context.Context, in *GetSubnetRequest, opts ...grpc.CallOption) (*Subnet, error)
 	// Retrieves the list of Subnet resources in the specified folder.
@@ -57,13 +56,13 @@ type SubnetServiceClient interface {
 	// Removes CIDR blocks from the specified subnet.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemoveCidrBlocks(ctx context.Context, in *RemoveSubnetCidrBlocksRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified subnet.
 	Delete(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// List operations for the specified subnet.
 	ListOperations(ctx context.Context, in *ListSubnetOperationsRequest, opts ...grpc.CallOption) (*ListSubnetOperationsResponse, error)
 	// Move subnet to another folder.
 	Move(ctx context.Context, in *MoveSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// List used addresses in specified subnet.
 	ListUsedAddresses(ctx context.Context, in *ListUsedAddressesRequest, opts ...grpc.CallOption) (*ListUsedAddressesResponse, error)
 }
@@ -136,6 +135,16 @@ func (c *subnetServiceClient) RemoveCidrBlocks(ctx context.Context, in *RemoveSu
 	return out, nil
 }
 
+func (c *subnetServiceClient) Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SubnetService_Relocate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *subnetServiceClient) Delete(ctx context.Context, in *DeleteSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -166,16 +175,6 @@ func (c *subnetServiceClient) Move(ctx context.Context, in *MoveSubnetRequest, o
 	return out, nil
 }
 
-func (c *subnetServiceClient) Relocate(ctx context.Context, in *RelocateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, SubnetService_Relocate_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *subnetServiceClient) ListUsedAddresses(ctx context.Context, in *ListUsedAddressesRequest, opts ...grpc.CallOption) (*ListUsedAddressesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListUsedAddressesResponse)
@@ -193,7 +192,6 @@ func (c *subnetServiceClient) ListUsedAddresses(ctx context.Context, in *ListUse
 // A set of methods for managing Subnet resources.
 type SubnetServiceServer interface {
 	// Returns the specified Subnet resource.
-	//
 	// To get the list of available Subnet resources, make a [List] request.
 	Get(context.Context, *GetSubnetRequest) (*Subnet, error)
 	// Retrieves the list of Subnet resources in the specified folder.
@@ -210,13 +208,13 @@ type SubnetServiceServer interface {
 	// Removes CIDR blocks from the specified subnet.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	RemoveCidrBlocks(context.Context, *RemoveSubnetCidrBlocksRequest) (*operation.Operation, error)
+	Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified subnet.
 	Delete(context.Context, *DeleteSubnetRequest) (*operation.Operation, error)
 	// List operations for the specified subnet.
 	ListOperations(context.Context, *ListSubnetOperationsRequest) (*ListSubnetOperationsResponse, error)
 	// Move subnet to another folder.
 	Move(context.Context, *MoveSubnetRequest) (*operation.Operation, error)
-	Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error)
 	// List used addresses in specified subnet.
 	ListUsedAddresses(context.Context, *ListUsedAddressesRequest) (*ListUsedAddressesResponse, error)
 }
@@ -246,6 +244,9 @@ func (UnimplementedSubnetServiceServer) AddCidrBlocks(context.Context, *AddSubne
 func (UnimplementedSubnetServiceServer) RemoveCidrBlocks(context.Context, *RemoveSubnetCidrBlocksRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveCidrBlocks not implemented")
 }
+func (UnimplementedSubnetServiceServer) Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Relocate not implemented")
+}
 func (UnimplementedSubnetServiceServer) Delete(context.Context, *DeleteSubnetRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
@@ -254,9 +255,6 @@ func (UnimplementedSubnetServiceServer) ListOperations(context.Context, *ListSub
 }
 func (UnimplementedSubnetServiceServer) Move(context.Context, *MoveSubnetRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Move not implemented")
-}
-func (UnimplementedSubnetServiceServer) Relocate(context.Context, *RelocateSubnetRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Relocate not implemented")
 }
 func (UnimplementedSubnetServiceServer) ListUsedAddresses(context.Context, *ListUsedAddressesRequest) (*ListUsedAddressesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListUsedAddresses not implemented")
@@ -389,6 +387,24 @@ func _SubnetService_RemoveCidrBlocks_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubnetService_Relocate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RelocateSubnetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubnetServiceServer).Relocate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubnetService_Relocate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubnetServiceServer).Relocate(ctx, req.(*RelocateSubnetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SubnetService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteSubnetRequest)
 	if err := dec(in); err != nil {
@@ -443,24 +459,6 @@ func _SubnetService_Move_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SubnetService_Relocate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RelocateSubnetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SubnetServiceServer).Relocate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SubnetService_Relocate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SubnetServiceServer).Relocate(ctx, req.(*RelocateSubnetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SubnetService_ListUsedAddresses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUsedAddressesRequest)
 	if err := dec(in); err != nil {
@@ -511,6 +509,10 @@ var SubnetService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SubnetService_RemoveCidrBlocks_Handler,
 		},
 		{
+			MethodName: "Relocate",
+			Handler:    _SubnetService_Relocate_Handler,
+		},
+		{
 			MethodName: "Delete",
 			Handler:    _SubnetService_Delete_Handler,
 		},
@@ -521,10 +523,6 @@ var SubnetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Move",
 			Handler:    _SubnetService_Move_Handler,
-		},
-		{
-			MethodName: "Relocate",
-			Handler:    _SubnetService_Relocate_Handler,
 		},
 		{
 			MethodName: "ListUsedAddresses",

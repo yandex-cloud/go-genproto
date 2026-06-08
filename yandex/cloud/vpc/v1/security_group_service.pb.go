@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -30,6 +29,7 @@ type GetSecurityGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Security Group resource to return.
 	// To get the security group ID, use a [SecurityGroup.List] request.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -76,6 +76,7 @@ type ListSecurityGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list security groups in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
@@ -90,7 +91,7 @@ type ListSecurityGroupsRequest struct {
 	// 1. The field name. Currently you can use filtering only on the [SecurityGroup.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
-	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"` //filter by network_id is here
+	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"` // filter by network_id is here
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -216,15 +217,25 @@ type CreateSecurityGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder for this request to create a security group in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the security group.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the security group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the Network to create security group for.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Security rules specifications.
 	RuleSpecs     []*SecurityGroupRuleSpec `protobuf:"bytes,6,rep,name=rule_specs,json=ruleSpecs,proto3" json:"rule_specs,omitempty"`
@@ -307,13 +318,20 @@ func (x *CreateSecurityGroupRequest) GetRuleSpecs() []*SecurityGroupRuleSpec {
 type SecurityGroupRuleSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Description of the security rule.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	// Rule labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// The direction of network traffic allowed by this rule.
+	// This field is required.
 	Direction SecurityGroupRule_Direction `protobuf:"varint,3,opt,name=direction,proto3,enum=yandex.cloud.vpc.v1.SecurityGroupRule_Direction" json:"direction,omitempty"`
 	// The range of ports that allow traffic to pass through. Null value means any port.
-	Ports *PortRange `protobuf:"bytes,4,opt,name=ports,proto3" json:"ports,omitempty"` // null value means any port
+	Ports *PortRange `protobuf:"bytes,4,opt,name=ports,proto3" json:"ports,omitempty"`
 	// Values from [IANA protocol numbers](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
 	// Null value means any protocol.
 	//
@@ -322,6 +340,8 @@ type SecurityGroupRuleSpec struct {
 	//	*SecurityGroupRuleSpec_ProtocolName
 	//	*SecurityGroupRuleSpec_ProtocolNumber
 	Protocol isSecurityGroupRuleSpec_Protocol `protobuf_oneof:"protocol"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Target:
 	//
 	//	*SecurityGroupRuleSpec_CidrBlocks
@@ -483,7 +503,7 @@ type SecurityGroupRuleSpec_SecurityGroupId struct {
 
 type SecurityGroupRuleSpec_PredefinedTarget struct {
 	// Predefined target. See [security groups rules](/docs/vpc/concepts/security-groups#security-groups-rules) for more information.
-	PredefinedTarget string `protobuf:"bytes,9,opt,name=predefined_target,json=predefinedTarget,proto3,oneof"` // string subnet_id = .. ;
+	PredefinedTarget string `protobuf:"bytes,9,opt,name=predefined_target,json=predefinedTarget,proto3,oneof"`
 }
 
 func (*SecurityGroupRuleSpec_CidrBlocks) isSecurityGroupRuleSpec_Target() {}
@@ -540,23 +560,30 @@ func (x *CreateSecurityGroupMetadata) GetSecurityGroupId() string {
 type UpdateSecurityGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the security group to update.
-	//
 	// To get the security group ID make a [SecurityGroupService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	// Field mask that specifies which attributes of the Address should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the security group.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the security group.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Security group labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [SecurityGroupService.Get] request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Updated rule list. All existing rules will be replaced with given list.
 	RuleSpecs     []*SecurityGroupRuleSpec `protobuf:"bytes,6,rep,name=rule_specs,json=ruleSpecs,proto3" json:"rule_specs,omitempty"`
@@ -693,6 +720,7 @@ func (x *UpdateSecurityGroupMetadata) GetAddedRuleIds() []string {
 type UpdateSecurityGroupRulesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the SecurityGroup that is being updated with new rules.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	// List of rules IDs to delete.
 	DeletionRuleIds []string `protobuf:"bytes,2,rep,name=deletion_rule_ids,json=deletionRuleIds,proto3" json:"deletion_rule_ids,omitempty"`
@@ -756,15 +784,16 @@ func (x *UpdateSecurityGroupRulesRequest) GetAdditionRuleSpecs() []*SecurityGrou
 type UpdateSecurityGroupRuleRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the SecurityGroup to update rule in.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	// ID of the rule to update.
+	// This field is required.
 	RuleId string `protobuf:"bytes,2,opt,name=rule_id,json=ruleId,proto3" json:"rule_id,omitempty"`
 	// Field mask that specifies which attributes of the Address should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New description of the rule.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Rule labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [AddressService.Get] request.
@@ -897,8 +926,8 @@ func (x *UpdateSecurityGroupRuleMetadata) GetRuleId() string {
 type DeleteSecurityGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the security group to delete.
-	//
 	// To get a address ID make a [SecurityGroup.List] request.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -989,8 +1018,8 @@ func (x *DeleteSecurityGroupMetadata) GetSecurityGroupId() string {
 type ListSecurityGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the address to list operations for.
-	//
 	// To get a address ID make a [SecurityGroup.List] request.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListSecurityGroupOperationsResponse.next_page_token]
@@ -1062,7 +1091,6 @@ type ListSecurityGroupOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListSecurityGroupOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListSecurityGroupOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1116,8 +1144,10 @@ func (x *ListSecurityGroupOperationsResponse) GetNextPageToken() string {
 type MoveSecurityGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the security group to move.
+	// This field is required.
 	SecurityGroupId string `protobuf:"bytes,1,opt,name=security_group_id,json=securityGroupId,proto3" json:"security_group_id,omitempty"`
 	// ID of the folder to move security group to.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1216,34 +1246,34 @@ var File_yandex_cloud_vpc_v1_security_group_service_proto protoreflect.FileDescr
 
 const file_yandex_cloud_vpc_v1_security_group_service_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/vpc/v1/security_group_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a(yandex/cloud/vpc/v1/security_group.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"K\n" +
-	"\x17GetSecurityGroupRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\"\x92\x01\n" +
-	"\x19ListSecurityGroupsRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\x1b\n" +
+	"0yandex/cloud/vpc/v1/security_group_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a(yandex/cloud/vpc/v1/security_group.proto\"E\n" +
+	"\x17GetSecurityGroupRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"\x8c\x01\n" +
+	"\x19ListSecurityGroupsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x91\x01\n" +
 	"\x1aListSecurityGroupsResponse\x12K\n" +
 	"\x0fsecurity_groups\x18\x01 \x03(\v2\".yandex.cloud.vpc.v1.SecurityGroupR\x0esecurityGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfe\x03\n" +
-	"\x1aCreateSecurityGroupRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
-	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.vpc.v1.CreateSecurityGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12#\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe9\x02\n" +
+	"\x1aCreateSecurityGroupRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12S\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.vpc.v1.CreateSecurityGroupRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\tnetworkId\x12I\n" +
+	"network_id\x18\x05 \x01(\tR\tnetworkId\x12I\n" +
 	"\n" +
 	"rule_specs\x18\x06 \x03(\v2*.yandex.cloud.vpc.v1.SecurityGroupRuleSpecR\truleSpecs\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb0\x05\n" +
-	"\x15SecurityGroupRuleSpec\x12+\n" +
-	"\vdescription\x18\x01 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x93\x01\n" +
-	"\x06labels\x18\x02 \x03(\v26.yandex.cloud.vpc.v1.SecurityGroupRuleSpec.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12T\n" +
-	"\tdirection\x18\x03 \x01(\x0e20.yandex.cloud.vpc.v1.SecurityGroupRule.DirectionB\x04\xe8\xc71\x01R\tdirection\x124\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x04\n" +
+	"\x15SecurityGroupRuleSpec\x12 \n" +
+	"\vdescription\x18\x01 \x01(\tR\vdescription\x12N\n" +
+	"\x06labels\x18\x02 \x03(\v26.yandex.cloud.vpc.v1.SecurityGroupRuleSpec.LabelsEntryR\x06labels\x12N\n" +
+	"\tdirection\x18\x03 \x01(\x0e20.yandex.cloud.vpc.v1.SecurityGroupRule.DirectionR\tdirection\x124\n" +
 	"\x05ports\x18\x04 \x01(\v2\x1e.yandex.cloud.vpc.v1.PortRangeR\x05ports\x12%\n" +
 	"\rprotocol_name\x18\x05 \x01(\tH\x00R\fprotocolName\x12)\n" +
 	"\x0fprotocol_number\x18\x06 \x01(\x03H\x00R\x0eprotocolNumber\x12B\n" +
@@ -1255,17 +1285,17 @@ const file_yandex_cloud_vpc_v1_security_group_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
 	"\n" +
-	"\bprotocolB\x0e\n" +
-	"\x06target\x12\x04\xc0\xc11\x01\"I\n" +
+	"\bprotocolB\b\n" +
+	"\x06target\"I\n" +
 	"\x1bCreateSecurityGroupMetadata\x12*\n" +
-	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"\xa5\x04\n" +
-	"\x1aUpdateSecurityGroupRequest\x128\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0fsecurityGroupId\x12;\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"\x96\x03\n" +
+	"\x1aUpdateSecurityGroupRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
-	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.vpc.v1.UpdateSecurityGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12I\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12S\n" +
+	"\x06labels\x18\x05 \x03(\v2;.yandex.cloud.vpc.v1.UpdateSecurityGroupRequest.LabelsEntryR\x06labels\x12I\n" +
 	"\n" +
 	"rule_specs\x18\x06 \x03(\v2*.yandex.cloud.vpc.v1.SecurityGroupRuleSpecR\truleSpecs\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -1273,14 +1303,14 @@ const file_yandex_cloud_vpc_v1_security_group_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"o\n" +
 	"\x1bUpdateSecurityGroupMetadata\x12*\n" +
 	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12$\n" +
-	"\x0eadded_rule_ids\x18\x02 \x03(\tR\faddedRuleIds\"\xdb\x01\n" +
-	"\x1fUpdateSecurityGroupRulesRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\x12*\n" +
+	"\x0eadded_rule_ids\x18\x02 \x03(\tR\faddedRuleIds\"\xd5\x01\n" +
+	"\x1fUpdateSecurityGroupRulesRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12*\n" +
 	"\x11deletion_rule_ids\x18\x02 \x03(\tR\x0fdeletionRuleIds\x12Z\n" +
-	"\x13addition_rule_specs\x18\x03 \x03(\v2*.yandex.cloud.vpc.v1.SecurityGroupRuleSpecR\x11additionRuleSpecs\"\xe4\x02\n" +
-	"\x1eUpdateSecurityGroupRuleRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\x12\x1d\n" +
-	"\arule_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x06ruleId\x12;\n" +
+	"\x13addition_rule_specs\x18\x03 \x03(\v2*.yandex.cloud.vpc.v1.SecurityGroupRuleSpecR\x11additionRuleSpecs\"\xd8\x02\n" +
+	"\x1eUpdateSecurityGroupRuleRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12\x17\n" +
+	"\arule_id\x18\x02 \x01(\tR\x06ruleId\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12W\n" +
@@ -1290,13 +1320,13 @@ const file_yandex_cloud_vpc_v1_security_group_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"f\n" +
 	"\x1fUpdateSecurityGroupRuleMetadata\x12*\n" +
 	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"N\n" +
-	"\x1aDeleteSecurityGroupRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\"I\n" +
+	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"H\n" +
+	"\x1aDeleteSecurityGroupRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"I\n" +
 	"\x1bDeleteSecurityGroupMetadata\x12*\n" +
-	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"\x92\x01\n" +
-	"\"ListSecurityGroupOperationsRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\x12\x1b\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\"\x8c\x01\n" +
+	"\"ListSecurityGroupOperationsRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tR\tpageToken\"\x90\x01\n" +
@@ -1304,10 +1334,10 @@ const file_yandex_cloud_vpc_v1_security_group_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x86\x01\n" +
-	"\x18MoveSecurityGroupRequest\x120\n" +
-	"\x11security_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0fsecurityGroupId\x128\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x13destinationFolderId\"G\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"z\n" +
+	"\x18MoveSecurityGroupRequest\x12*\n" +
+	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"G\n" +
 	"\x19MoveSecurityGroupMetadata\x12*\n" +
 	"\x11security_group_id\x18\x01 \x01(\tR\x0fsecurityGroupId2\xb7\r\n" +
 	"\x14SecurityGroupService\x12\x8b\x01\n" +

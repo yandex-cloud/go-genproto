@@ -7,7 +7,6 @@
 package privatelink
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -29,9 +28,10 @@ const (
 type GetPrivateEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the PrivateEndpoint resource to return.
-	//
 	// To get PrivateEndpoint resource ID make a [PrivateEndpointService.List]
 	// request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	PrivateEndpointId string `protobuf:"bytes,1,opt,name=private_endpoint_id,json=privateEndpointId,proto3" json:"private_endpoint_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -77,6 +77,8 @@ func (x *GetPrivateEndpointRequest) GetPrivateEndpointId() string {
 type InternalIpv4AddressSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subnet that address belongs to.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Value of address.
 	Address       string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
@@ -215,24 +217,35 @@ func (*AddressSpec_InternalIpv4AddressSpec) isAddressSpec_Address() {}
 type CreatePrivateEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a private endpoint in.
-	//
 	// To get a folder ID make a
 	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the private endpoint.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the private endpoint.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Private endpoint labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the network to create a private endpoint in.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Private endpoint address specification.
 	AddressSpec *AddressSpec `protobuf:"bytes,6,opt,name=address_spec,json=addressSpec,proto3" json:"address_spec,omitempty"`
 	// Private endpoint dns options.
 	DnsOptions *PrivateEndpoint_DnsOptions `protobuf:"bytes,8,opt,name=dns_options,json=dnsOptions,proto3" json:"dns_options,omitempty"`
 	// Service to connect with via private endpoint.
+	// Only one field must be specified.
 	//
 	// Types that are valid to be assigned to Service:
 	//
@@ -413,26 +426,33 @@ func (x *CreatePrivateEndpointMetadata) GetPrivateEndpointId() string {
 type UpdatePrivateEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private endpoint to update.
-	//
 	// To get the private endpoint ID make a [PrivateEndpointService.List]
 	// request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	PrivateEndpointId string `protobuf:"bytes,1,opt,name=private_endpoint_id,json=privateEndpointId,proto3" json:"private_endpoint_id,omitempty"`
 	// Field mask that specifies which attributes of the PrivateEndpoint should be
 	// updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the private endpoint.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the private endpoint.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Private endpoint labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if
 	// you just want to add or remove a label:
 	// 1. Get the current set of labels with a [PrivateEndpointService.Get]
 	// request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Private endpoint address specification.
 	AddressSpec *AddressSpec `protobuf:"bytes,6,opt,name=address_spec,json=addressSpec,proto3" json:"address_spec,omitempty"`
@@ -569,8 +589,9 @@ func (x *UpdatePrivateEndpointMetadata) GetPrivateEndpointId() string {
 type DeletePrivateEndpointRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private endpoint to delete.
-	//
 	// To get a private endpoint ID make a [PrivateEndpointService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	PrivateEndpointId string `protobuf:"bytes,1,opt,name=private_endpoint_id,json=privateEndpointId,proto3" json:"private_endpoint_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -660,6 +681,8 @@ func (x *DeletePrivateEndpointMetadata) GetPrivateEndpointId() string {
 
 type ListPrivateEndpointsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Container:
 	//
 	//	*ListPrivateEndpointsRequest_FolderId
@@ -668,13 +691,14 @@ type ListPrivateEndpointsRequest struct {
 	// available results is larger than `page_size`, the service returns a
 	// [ListPrivateEndpointsResponse.next_page_token] that can be used to get the
 	// next page of results in subsequent list requests. Default value: 100.
+	// The value must be between 0 and 1000.
 	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListPrivateEndpointsResponse.next_page_token] returned by a previous list
 	// request.
+	// The length must be less than or equal to 1000.
 	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters PrivateEndpoint listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on
 	// [PrivateEndpoint.name] field.
@@ -682,6 +706,7 @@ type ListPrivateEndpointsRequest struct {
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match
 	// the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`. Example of a filter:
 	// `name=my-private-endpoint`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,5,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -760,9 +785,9 @@ type isListPrivateEndpointsRequest_Container interface {
 
 type ListPrivateEndpointsRequest_FolderId struct {
 	// ID of the folder to list private endpoints in.
-	//
 	// To get the folder ID use a
 	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
@@ -777,7 +802,6 @@ type ListPrivateEndpointsResponse struct {
 	// `next_page_token` as the value for the
 	// [ListPrivateEndpointsRequest.page_token] parameter in the next list
 	// request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging
 	// through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -832,18 +856,21 @@ func (x *ListPrivateEndpointsResponse) GetNextPageToken() string {
 type ListPrivateEndpointOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the private endpoint to list operations for.
-	//
 	// To get a private endpoint ID make a [PrivateEndpointService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	PrivateEndpointId string `protobuf:"bytes,1,opt,name=private_endpoint_id,json=privateEndpointId,proto3" json:"private_endpoint_id,omitempty"`
 	// The maximum number of results per page to return. If the number of
 	// available results is larger than [page_size], the service returns a
 	// [ListPrivateEndpointOperationsResponse.next_page_token] that can be used to
 	// get the next page of results in subsequent list requests. Default value:
 	// 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListPrivateEndpointOperationsResponse.next_page_token] returned by a
 	// previous list request.
+	// The length must be less than or equal to 1000.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -909,7 +936,6 @@ type ListPrivateEndpointOperationsResponse struct {
 	// [ListPrivateEndpointOperationsRequest.page_size], use `next_page_token` as
 	// the value for the [ListPrivateEndpointOperationsRequest.page_token]
 	// parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging
 	// through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -965,24 +991,24 @@ var File_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto protoref
 
 const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/vpc/v1/privatelink/private_endpoint_service.proto\x12\x1fyandex.cloud.vpc.v1.privatelink\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a6yandex/cloud/vpc/v1/privatelink/private_endpoint.proto\"Y\n" +
-	"\x19GetPrivateEndpointRequest\x12<\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11privateEndpointId\"^\n" +
-	"\x17InternalIpv4AddressSpec\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12\x18\n" +
+	">yandex/cloud/vpc/v1/privatelink/private_endpoint_service.proto\x12\x1fyandex.cloud.vpc.v1.privatelink\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a6yandex/cloud/vpc/v1/privatelink/private_endpoint.proto\"K\n" +
+	"\x19GetPrivateEndpointRequest\x12.\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"P\n" +
+	"\x17InternalIpv4AddressSpec\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\"\xb2\x01\n" +
 	"\vAddressSpec\x12\x1f\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tH\x00R\taddressId\x12w\n" +
 	"\x1ainternal_ipv4_address_spec\x18\x02 \x01(\v28.yandex.cloud.vpc.v1.privatelink.InternalIpv4AddressSpecH\x00R\x17internalIpv4AddressSpecB\t\n" +
-	"\aaddress\"\x95\x06\n" +
-	"\x1cCreatePrivateEndpointRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa6\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2I.yandex.cloud.vpc.v1.privatelink.CreatePrivateEndpointRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12+\n" +
+	"\aaddress\"\xfc\x04\n" +
+	"\x1cCreatePrivateEndpointRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12a\n" +
+	"\x06labels\x18\x04 \x03(\v2I.yandex.cloud.vpc.v1.privatelink.CreatePrivateEndpointRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12O\n" +
+	"network_id\x18\x05 \x01(\tR\tnetworkId\x12O\n" +
 	"\faddress_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.privatelink.AddressSpecR\vaddressSpec\x12\\\n" +
 	"\vdns_options\x18\b \x01(\v2;.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptionsR\n" +
 	"dnsOptions\x12g\n" +
@@ -991,17 +1017,17 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_rawDes
 	" \x01(\tH\x00R\vserviceName\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
-	"\aservice\x12\x04\xc0\xc11\x01J\x04\b\a\x10\b\"O\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\t\n" +
+	"\aserviceJ\x04\b\a\x10\b\"O\n" +
 	"\x1dCreatePrivateEndpointMetadata\x12.\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"\x99\x05\n" +
-	"\x1cUpdatePrivateEndpointRequest\x12<\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11privateEndpointId\x12;\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"\x94\x04\n" +
+	"\x1cUpdatePrivateEndpointRequest\x12.\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa6\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2I.yandex.cloud.vpc.v1.privatelink.UpdatePrivateEndpointRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12O\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12a\n" +
+	"\x06labels\x18\x05 \x03(\v2I.yandex.cloud.vpc.v1.privatelink.UpdatePrivateEndpointRequest.LabelsEntryR\x06labels\x12O\n" +
 	"\faddress_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.privatelink.AddressSpecR\vaddressSpec\x12\\\n" +
 	"\vdns_options\x18\b \x01(\v2;.yandex.cloud.vpc.v1.privatelink.PrivateEndpoint.DnsOptionsR\n" +
 	"dnsOptions\x1a9\n" +
@@ -1009,31 +1035,26 @@ const file_yandex_cloud_vpc_v1_privatelink_private_endpoint_service_proto_rawDes
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\b\"O\n" +
 	"\x1dUpdatePrivateEndpointMetadata\x12.\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"\\\n" +
-	"\x1cDeletePrivateEndpointRequest\x12<\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11privateEndpointId\"O\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"N\n" +
+	"\x1cDeletePrivateEndpointRequest\x12.\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"O\n" +
 	"\x1dDeletePrivateEndpointMetadata\x12.\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"\xd7\x01\n" +
-	"\x1bListPrivateEndpointsRequest\x12'\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x03 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\"\xa3\x01\n" +
+	"\x1bListPrivateEndpointsRequest\x12\x1d\n" +
+	"\tfolder_id\x18\x01 \x01(\tH\x00R\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x05 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filterB\x11\n" +
-	"\tcontainer\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03\"\xa5\x01\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x05 \x01(\tR\x06filterB\v\n" +
+	"\tcontainerJ\x04\b\x02\x10\x03\"\xa5\x01\n" +
 	"\x1cListPrivateEndpointsResponse\x12]\n" +
 	"\x11private_endpoints\x18\x01 \x03(\v20.yandex.cloud.vpc.v1.privatelink.PrivateEndpointR\x10privateEndpoints\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb8\x01\n" +
-	"$ListPrivateEndpointOperationsRequest\x12<\n" +
-	"\x13private_endpoint_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x11privateEndpointId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12)\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x92\x01\n" +
+	"$ListPrivateEndpointOperationsRequest\x12.\n" +
+	"\x13private_endpoint_id\x18\x01 \x01(\tR\x11privateEndpointId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\tpageToken\"\x92\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x92\x01\n" +
 	"%ListPrivateEndpointOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +

@@ -44,7 +44,6 @@ const (
 // A set of methods for managing NetworkLoadBalancer resources.
 type NetworkLoadBalancerServiceClient interface {
 	// Returns the specified NetworkLoadBalancer resource.
-	//
 	// Get the list of available NetworkLoadBalancer resources by making a [List] request.
 	Get(ctx context.Context, in *GetNetworkLoadBalancerRequest, opts ...grpc.CallOption) (*NetworkLoadBalancer, error)
 	// Retrieves the list of NetworkLoadBalancer resources in the specified folder.
@@ -244,7 +243,6 @@ func (c *networkLoadBalancerServiceClient) EnableZones(ctx context.Context, in *
 // A set of methods for managing NetworkLoadBalancer resources.
 type NetworkLoadBalancerServiceServer interface {
 	// Returns the specified NetworkLoadBalancer resource.
-	//
 	// Get the list of available NetworkLoadBalancer resources by making a [List] request.
 	Get(context.Context, *GetNetworkLoadBalancerRequest) (*NetworkLoadBalancer, error)
 	// Retrieves the list of NetworkLoadBalancer resources in the specified folder.

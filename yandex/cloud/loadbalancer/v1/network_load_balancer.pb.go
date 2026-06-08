@@ -7,7 +7,6 @@
 package loadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -539,9 +538,12 @@ func (x *NetworkLoadBalancer) GetDisableZoneStatuses() []*DisableZoneStatus {
 type AttachedTargetGroup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the target group.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,1,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	// A health check to perform on the target group.
 	// For now we accept only one health check per AttachedTargetGroup.
+	// The number of elements must be exactly 1.
 	HealthChecks  []*HealthCheck `protobuf:"bytes,2,rep,name=health_checks,json=healthChecks,proto3" json:"health_checks,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -602,12 +604,12 @@ type Listener struct {
 	Port int64 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
 	// Network protocol for incoming traffic.
 	Protocol Listener_Protocol `protobuf:"varint,4,opt,name=protocol,proto3,enum=yandex.cloud.loadbalancer.v1.Listener_Protocol" json:"protocol,omitempty"`
+	// IP version of the external address.
+	IpVersion IpVersion `protobuf:"varint,7,opt,name=ip_version,json=ipVersion,proto3,enum=yandex.cloud.loadbalancer.v1.IpVersion" json:"ip_version,omitempty"`
 	// Port of a target.
 	TargetPort int64 `protobuf:"varint,5,opt,name=target_port,json=targetPort,proto3" json:"target_port,omitempty"`
 	// ID of the subnet.
-	SubnetId string `protobuf:"bytes,6,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// IP version of the external address.
-	IpVersion     IpVersion `protobuf:"varint,7,opt,name=ip_version,json=ipVersion,proto3,enum=yandex.cloud.loadbalancer.v1.IpVersion" json:"ip_version,omitempty"`
+	SubnetId      string `protobuf:"bytes,6,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -670,6 +672,13 @@ func (x *Listener) GetProtocol() Listener_Protocol {
 	return Listener_PROTOCOL_UNSPECIFIED
 }
 
+func (x *Listener) GetIpVersion() IpVersion {
+	if x != nil {
+		return x.IpVersion
+	}
+	return IpVersion_IP_VERSION_UNSPECIFIED
+}
+
 func (x *Listener) GetTargetPort() int64 {
 	if x != nil {
 		return x.TargetPort
@@ -682,13 +691,6 @@ func (x *Listener) GetSubnetId() string {
 		return x.SubnetId
 	}
 	return ""
-}
-
-func (x *Listener) GetIpVersion() IpVersion {
-	if x != nil {
-		return x.IpVersion
-	}
-	return IpVersion_IP_VERSION_UNSPECIFIED
 }
 
 // State of the target that was returned after the last health check.
@@ -768,6 +770,7 @@ func (x *TargetState) GetZoneShifted() bool {
 type DisableZoneStatus struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of zone.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Timestamp until which the zone will be disabled.
 	// If not present then zone will be disabled until it is removed through a separate call.
@@ -824,7 +827,7 @@ var File_yandex_cloud_loadbalancer_v1_network_load_balancer_proto protoreflect.F
 
 const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/yandex/cloud/loadbalancer/v1/health_check.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\t\n" +
+	"8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/yandex/cloud/loadbalancer/v1/health_check.proto\"\xf5\t\n" +
 	"\x13NetworkLoadBalancer\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -862,20 +865,20 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\bINTERNAL\x10\x02\"M\n" +
 	"\x0fSessionAffinity\x12 \n" +
 	"\x1cSESSION_AFFINITY_UNSPECIFIED\x10\x00\x12\x18\n" +
-	"\x14CLIENT_IP_PORT_PROTO\x10\x01J\x04\b\b\x10\tJ\x04\b\x10\x10\x11J\x04\b\x11\x10\x12\"\xa2\x01\n" +
-	"\x13AttachedTargetGroup\x124\n" +
-	"\x0ftarget_group_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\x12U\n" +
-	"\rhealth_checks\x18\x02 \x03(\v2).yandex.cloud.loadbalancer.v1.HealthCheckB\x05\x82\xc81\x011R\fhealthChecks\"\xd7\x02\n" +
+	"\x14CLIENT_IP_PORT_PROTO\x10\x01J\x04\b\b\x10\tJ\x04\b\x10\x10\x12\"\x8d\x01\n" +
+	"\x13AttachedTargetGroup\x12&\n" +
+	"\x0ftarget_group_id\x18\x01 \x01(\tR\rtargetGroupId\x12N\n" +
+	"\rhealth_checks\x18\x02 \x03(\v2).yandex.cloud.loadbalancer.v1.HealthCheckR\fhealthChecks\"\xd7\x02\n" +
 	"\bListener\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x12\n" +
 	"\x04port\x18\x03 \x01(\x03R\x04port\x12K\n" +
-	"\bprotocol\x18\x04 \x01(\x0e2/.yandex.cloud.loadbalancer.v1.Listener.ProtocolR\bprotocol\x12\x1f\n" +
+	"\bprotocol\x18\x04 \x01(\x0e2/.yandex.cloud.loadbalancer.v1.Listener.ProtocolR\bprotocol\x12F\n" +
+	"\n" +
+	"ip_version\x18\a \x01(\x0e2'.yandex.cloud.loadbalancer.v1.IpVersionR\tipVersion\x12\x1f\n" +
 	"\vtarget_port\x18\x05 \x01(\x03R\n" +
 	"targetPort\x12\x1b\n" +
-	"\tsubnet_id\x18\x06 \x01(\tR\bsubnetId\x12F\n" +
-	"\n" +
-	"ip_version\x18\a \x01(\x0e2'.yandex.cloud.loadbalancer.v1.IpVersionR\tipVersion\"6\n" +
+	"\tsubnet_id\x18\x06 \x01(\tR\bsubnetId\"6\n" +
 	"\bProtocol\x12\x18\n" +
 	"\x14PROTOCOL_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03TCP\x10\x01\x12\a\n" +
@@ -891,9 +894,9 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_proto_rawDesc = ""
 	"\aHEALTHY\x10\x02\x12\r\n" +
 	"\tUNHEALTHY\x10\x03\x12\f\n" +
 	"\bDRAINING\x10\x04\x12\f\n" +
-	"\bINACTIVE\x10\x05\"u\n" +
-	"\x11DisableZoneStatus\x12\x1d\n" +
-	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12A\n" +
+	"\bINACTIVE\x10\x05\"o\n" +
+	"\x11DisableZoneStatus\x12\x17\n" +
+	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12A\n" +
 	"\x0edisabled_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rdisabledUntil*;\n" +
 	"\tIpVersion\x12\x1a\n" +
 	"\x16IP_VERSION_UNSPECIFIED\x10\x00\x12\b\n" +

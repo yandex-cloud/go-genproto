@@ -7,7 +7,6 @@
 package loadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -27,16 +26,21 @@ const (
 type HealthCheck struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the health check. The name must be unique for each target group that attached to a single load balancer. 3-63 characters long.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// This field is required.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The interval between health checks. The default is 2 seconds.
 	Interval *durationpb.Duration `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
 	// Timeout for a target to return a response for the health check. The default is 1 second.
 	Timeout *durationpb.Duration `protobuf:"bytes,3,opt,name=timeout,proto3" json:"timeout,omitempty"`
 	// Number of failed health checks before changing the status to “ UNHEALTHY “. The default is 2.
+	// The value must be between 2 and 10.
 	UnhealthyThreshold int64 `protobuf:"varint,4,opt,name=unhealthy_threshold,json=unhealthyThreshold,proto3" json:"unhealthy_threshold,omitempty"`
 	// Number of successful health checks required in order to set the “ HEALTHY “ status for the target. The default is 2.
+	// The value must be between 2 and 10.
 	HealthyThreshold int64 `protobuf:"varint,5,opt,name=healthy_threshold,json=healthyThreshold,proto3" json:"healthy_threshold,omitempty"`
 	// Protocol to use for the health check. Either TCP or HTTP.
+	// Only one field must be specified.
 	//
 	// Types that are valid to be assigned to Options:
 	//
@@ -159,6 +163,7 @@ func (*HealthCheck_HttpOptions_) isHealthCheck_Options() {}
 type HealthCheck_TcpOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Port to use for TCP health checks.
+	// The value must be between 1 and 65535.
 	Port          int64 `protobuf:"varint,1,opt,name=port,proto3" json:"port,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -205,6 +210,7 @@ func (x *HealthCheck_TcpOptions) GetPort() int64 {
 type HealthCheck_HttpOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Port to use for HTTP health checks.
+	// The value must be between 1 and 65535.
 	Port int64 `protobuf:"varint,1,opt,name=port,proto3" json:"port,omitempty"`
 	// URL path to set for health checking requests for every target in the target group.
 	// For example “ /ping “. The default path is “ / “.
@@ -261,23 +267,23 @@ var File_yandex_cloud_loadbalancer_v1_health_check_proto protoreflect.FileDescri
 
 const file_yandex_cloud_loadbalancer_v1_health_check_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/loadbalancer/v1/health_check.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1dyandex/cloud/validation.proto\"\xdf\x04\n" +
-	"\vHealthCheck\x129\n" +
-	"\x04name\x18\x01 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x125\n" +
+	"/yandex/cloud/loadbalancer/v1/health_check.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1egoogle/protobuf/duration.proto\"\x84\x04\n" +
+	"\vHealthCheck\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x125\n" +
 	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\binterval\x123\n" +
-	"\atimeout\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\atimeout\x129\n" +
-	"\x13unhealthy_threshold\x18\x04 \x01(\x03B\b\xfa\xc71\x042-10R\x12unhealthyThreshold\x125\n" +
-	"\x11healthy_threshold\x18\x05 \x01(\x03B\b\xfa\xc71\x042-10R\x10healthyThreshold\x12W\n" +
+	"\atimeout\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\atimeout\x12/\n" +
+	"\x13unhealthy_threshold\x18\x04 \x01(\x03R\x12unhealthyThreshold\x12+\n" +
+	"\x11healthy_threshold\x18\x05 \x01(\x03R\x10healthyThreshold\x12W\n" +
 	"\vtcp_options\x18\x06 \x01(\v24.yandex.cloud.loadbalancer.v1.HealthCheck.TcpOptionsH\x00R\n" +
 	"tcpOptions\x12Z\n" +
-	"\fhttp_options\x18\a \x01(\v25.yandex.cloud.loadbalancer.v1.HealthCheck.HttpOptionsH\x00R\vhttpOptions\x1a-\n" +
+	"\fhttp_options\x18\a \x01(\v25.yandex.cloud.loadbalancer.v1.HealthCheck.HttpOptionsH\x00R\vhttpOptions\x1a \n" +
 	"\n" +
-	"TcpOptions\x12\x1f\n" +
-	"\x04port\x18\x01 \x01(\x03B\v\xfa\xc71\a1-65535R\x04port\x1aB\n" +
-	"\vHttpOptions\x12\x1f\n" +
-	"\x04port\x18\x01 \x01(\x03B\v\xfa\xc71\a1-65535R\x04port\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04pathB\x0f\n" +
-	"\aoptions\x12\x04\xc0\xc11\x01Bq\n" +
+	"TcpOptions\x12\x12\n" +
+	"\x04port\x18\x01 \x01(\x03R\x04port\x1a5\n" +
+	"\vHttpOptions\x12\x12\n" +
+	"\x04port\x18\x01 \x01(\x03R\x04port\x12\x12\n" +
+	"\x04path\x18\x02 \x01(\tR\x04pathB\t\n" +
+	"\aoptionsBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 
 var (

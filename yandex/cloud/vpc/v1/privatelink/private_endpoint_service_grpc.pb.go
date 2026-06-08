@@ -35,7 +35,6 @@ const (
 // A set of methods for managing PrivateEndpoint resources.
 type PrivateEndpointServiceClient interface {
 	// Returns the specified Private Endpoint resource.
-	//
 	// To get the list of all available PrivateEndpoint resources, make a [List]
 	// request.
 	Get(ctx context.Context, in *GetPrivateEndpointRequest, opts ...grpc.CallOption) (*PrivateEndpoint, error)
@@ -126,7 +125,6 @@ func (c *privateEndpointServiceClient) ListOperations(ctx context.Context, in *L
 // A set of methods for managing PrivateEndpoint resources.
 type PrivateEndpointServiceServer interface {
 	// Returns the specified Private Endpoint resource.
-	//
 	// To get the list of all available PrivateEndpoint resources, make a [List]
 	// request.
 	Get(context.Context, *GetPrivateEndpointRequest) (*PrivateEndpoint, error)

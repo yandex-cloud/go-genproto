@@ -7,7 +7,6 @@
 package loadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -31,6 +30,7 @@ type GetNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the NetworkLoadBalancer resource to return.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -77,21 +77,26 @@ type ListNetworkLoadBalancersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder that the network load balancer belongs to.
 	// To get the folder ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [<ResponseMessage>.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListNetworkLoadBalancersResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can only filter by the [NetworkLoadBalancer.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -218,21 +223,34 @@ type CreateNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a network load balancer in.
 	// To get the folder ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the network load balancer.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the network load balancer.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the region where the network load balancer resides.
+	// The length must be less than or equal to 50.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// Type of the network load balancer.
+	// This field is required.
 	Type NetworkLoadBalancer_Type `protobuf:"varint,6,opt,name=type,proto3,enum=yandex.cloud.loadbalancer.v1.NetworkLoadBalancer_Type" json:"type,omitempty"`
 	// List of listeners and their specs for the network load balancer.
+	// The number of elements must be less than or equal to 1000.
 	ListenerSpecs []*ListenerSpec `protobuf:"bytes,7,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`
 	// List of attached target groups for the network load balancer.
+	// The number of elements must be less than or equal to 1000.
 	AttachedTargetGroups []*AttachedTargetGroup `protobuf:"bytes,8,rep,name=attached_target_groups,json=attachedTargetGroups,proto3" json:"attached_target_groups,omitempty"`
 	// Specifies if network load balancer protected from deletion.
 	DeletionProtection bool `protobuf:"varint,9,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
@@ -391,21 +409,31 @@ type UpdateNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to update.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// Field mask that specifies which fields of the NetworkLoadBalancer resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the network load balancer.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the network load balancer.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
-	//
 	// The existing set of “ labels “ is completely replaced with the provided set.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// A list of listeners and their specs for the network load balancer.
+	// The number of elements must be less than or equal to 1000.
 	ListenerSpecs []*ListenerSpec `protobuf:"bytes,6,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`
 	// A list of attached target groups for the network load balancer.
+	// The number of elements must be less than or equal to 1000.
 	AttachedTargetGroups []*AttachedTargetGroup `protobuf:"bytes,7,rep,name=attached_target_groups,json=attachedTargetGroups,proto3" json:"attached_target_groups,omitempty"`
 	// Specifies if network load balancer protected from deletion.
 	DeletionProtection bool `protobuf:"varint,8,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
@@ -557,6 +585,8 @@ type DeleteNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to delete.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -648,6 +678,8 @@ type StartNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to start.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -739,6 +771,8 @@ type StopNetworkLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to stop.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -830,9 +864,12 @@ type AttachNetworkLoadBalancerTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to attach the target group to.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// ID of the attached target group to attach to the network load balancer.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// This field is required.
 	AttachedTargetGroup *AttachedTargetGroup `protobuf:"bytes,2,opt,name=attached_target_group,json=attachedTargetGroup,proto3" json:"attached_target_group,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -940,8 +977,12 @@ type DetachNetworkLoadBalancerTargetGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to detach the target group from.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// ID of the target group.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	TargetGroupId string `protobuf:"bytes,2,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1049,8 +1090,11 @@ type AddNetworkLoadBalancerListenerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to add a listener to.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// Listener spec.
+	// This field is required.
 	ListenerSpec  *ListenerSpec `protobuf:"bytes,2,opt,name=listener_spec,json=listenerSpec,proto3" json:"listener_spec,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1149,8 +1193,12 @@ type RemoveNetworkLoadBalancerListenerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to remove the listener from.
 	// To get the network load balancer ID, use a [NetworkLoadBalancerService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// Name of the listener to delete.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// This field is required.
 	ListenerName  string `protobuf:"bytes,2,opt,name=listener_name,json=listenerName,proto3" json:"listener_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1248,14 +1296,18 @@ func (x *RemoveNetworkLoadBalancerListenerMetadata) GetNetworkLoadBalancerId() s
 type ListNetworkLoadBalancerOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the NetworkLoadBalancer resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListNetworkLoadBalancerOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListNetworkLoadBalancerOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1372,8 +1424,10 @@ func (x *ListNetworkLoadBalancerOperationsResponse) GetNextPageToken() string {
 type GetTargetStatesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the NetworkLoadBalancer resource with an attached target group.
+	// The length must be less than or equal to 50.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// ID of the target group to get states of resources from.
+	// The length must be less than or equal to 50.
 	TargetGroupId string `protobuf:"bytes,2,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1593,10 +1647,14 @@ func (x *InternalAddressSpec) GetIpVersion() IpVersion {
 type ListenerSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the listener. The name must be unique for each listener on a single load balancer. 3-63 characters long.
+	// The value must match the regular expression: `|[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// This field is required.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Port for incoming traffic.
+	// The value must be between 1 and 65535.
 	Port int64 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
 	// Protocol for incoming traffic.
+	// This field is required.
 	Protocol Listener_Protocol `protobuf:"varint,3,opt,name=protocol,proto3,enum=yandex.cloud.loadbalancer.v1.Listener_Protocol" json:"protocol,omitempty"`
 	// IP address for incoming traffic. Either the ID of the previously created address or the address specification.
 	//
@@ -1716,11 +1774,15 @@ func (*ListenerSpec_InternalAddressSpec) isListenerSpec_Address() {}
 type DisableZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to disable zones.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// Zone IDs to disable.
+	// The number of elements must be greater than 0.
 	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
 	// The interval during which the zones will be disabled. Format 1m-72h.
 	// If not set then zone will be disabled until it is removed through a separate call.
+	// The value must satisfy: 1m-72h.
 	Duration      *durationpb.Duration `protobuf:"bytes,3,opt,name=duration,proto3" json:"duration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1825,8 +1887,11 @@ func (x *DisableZonesMetadata) GetNetworkLoadBalancerId() string {
 type EnableZonesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the network load balancer to enable zones.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkLoadBalancerId string `protobuf:"bytes,1,opt,name=network_load_balancer_id,json=networkLoadBalancerId,proto3" json:"network_load_balancer_id,omitempty"`
 	// Zone IDs to enable.
+	// The number of elements must be greater than 0.
 	ZoneIds       []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1925,31 +1990,27 @@ var File_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto protor
 
 const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawDesc = "" +
 	"\n" +
-	"@yandex/cloud/loadbalancer/v1/network_load_balancer_service.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\"b\n" +
-	"\x1dGetNetworkLoadBalancerRequest\x12A\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x15networkLoadBalancerId\"\xc3\x01\n" +
-	"\x1fListNetworkLoadBalancersRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"@yandex/cloud/loadbalancer/v1/network_load_balancer_service.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a8yandex/cloud/loadbalancer/v1/network_load_balancer.proto\x1a&yandex/cloud/operation/operation.proto\"X\n" +
+	"\x1dGetNetworkLoadBalancerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x92\x01\n" +
+	"\x1fListNetworkLoadBalancersRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\xb3\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\xb3\x01\n" +
 	" ListNetworkLoadBalancersResponse\x12g\n" +
 	"\x16network_load_balancers\x18\x01 \x03(\v21.yandex.cloud.loadbalancer.v1.NetworkLoadBalancerR\x14networkLoadBalancers\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb8\x06\n" +
-	" CreateNetworkLoadBalancerRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x125\n" +
-	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9f\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2J.yandex.cloud.loadbalancer.v1.CreateNetworkLoadBalancerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12%\n" +
-	"\tregion_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bregionId\x12P\n" +
-	"\x04type\x18\x06 \x01(\x0e26.yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.TypeB\x04\xe8\xc71\x01R\x04type\x12]\n" +
-	"\x0elistener_specs\x18\a \x03(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecB\n" +
-	"\x82\xc81\x06<=1000R\rlistenerSpecs\x12s\n" +
-	"\x16attached_target_groups\x18\b \x03(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupB\n" +
-	"\x82\xc81\x06<=1000R\x14attachedTargetGroups\x12/\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x96\x05\n" +
+	" CreateNetworkLoadBalancerRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12b\n" +
+	"\x06labels\x18\x04 \x03(\v2J.yandex.cloud.loadbalancer.v1.CreateNetworkLoadBalancerRequest.LabelsEntryR\x06labels\x12\x1b\n" +
+	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12J\n" +
+	"\x04type\x18\x06 \x01(\x0e26.yandex.cloud.loadbalancer.v1.NetworkLoadBalancer.TypeR\x04type\x12Q\n" +
+	"\x0elistener_specs\x18\a \x03(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecR\rlistenerSpecs\x12g\n" +
+	"\x16attached_target_groups\x18\b \x03(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupR\x14attachedTargetGroups\x12/\n" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x12*\n" +
 	"\x11allow_zonal_shift\x18\n" +
 	" \x01(\bR\x0fallowZonalShift\x1a9\n" +
@@ -1957,73 +2018,70 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\\\n" +
 	"!CreateNetworkLoadBalancerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x98\x06\n" +
-	" UpdateNetworkLoadBalancerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12;\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x86\x05\n" +
+	" UpdateNetworkLoadBalancerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x125\n" +
-	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9f\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2J.yandex.cloud.loadbalancer.v1.UpdateNetworkLoadBalancerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12]\n" +
-	"\x0elistener_specs\x18\x06 \x03(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecB\n" +
-	"\x82\xc81\x06<=1000R\rlistenerSpecs\x12s\n" +
-	"\x16attached_target_groups\x18\a \x03(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupB\n" +
-	"\x82\xc81\x06<=1000R\x14attachedTargetGroups\x12/\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12b\n" +
+	"\x06labels\x18\x05 \x03(\v2J.yandex.cloud.loadbalancer.v1.UpdateNetworkLoadBalancerRequest.LabelsEntryR\x06labels\x12Q\n" +
+	"\x0elistener_specs\x18\x06 \x03(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecR\rlistenerSpecs\x12g\n" +
+	"\x16attached_target_groups\x18\a \x03(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupR\x14attachedTargetGroups\x12/\n" +
 	"\x13deletion_protection\x18\b \x01(\bR\x12deletionProtection\x12*\n" +
 	"\x11allow_zonal_shift\x18\t \x01(\bR\x0fallowZonalShift\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\\\n" +
 	"!UpdateNetworkLoadBalancerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"i\n" +
-	" DeleteNetworkLoadBalancerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\"\\\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"[\n" +
+	" DeleteNetworkLoadBalancerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\\\n" +
 	"!DeleteNetworkLoadBalancerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"h\n" +
-	"\x1fStartNetworkLoadBalancerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\"[\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"Z\n" +
+	"\x1fStartNetworkLoadBalancerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"[\n" +
 	" StartNetworkLoadBalancerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"g\n" +
-	"\x1eStopNetworkLoadBalancerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\"Z\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"Y\n" +
+	"\x1eStopNetworkLoadBalancerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"Z\n" +
 	"\x1fStopNetworkLoadBalancerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\xe1\x01\n" +
-	"+AttachNetworkLoadBalancerTargetGroupRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12k\n" +
-	"\x15attached_target_group\x18\x02 \x01(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupB\x04\xe8\xc71\x01R\x13attachedTargetGroup\"\x8f\x01\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\xcd\x01\n" +
+	"+AttachNetworkLoadBalancerTargetGroupRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12e\n" +
+	"\x15attached_target_group\x18\x02 \x01(\v21.yandex.cloud.loadbalancer.v1.AttachedTargetGroupR\x13attachedTargetGroup\"\x8f\x01\n" +
 	",AttachNetworkLoadBalancerTargetGroupMetadata\x127\n" +
 	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12&\n" +
-	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"\xaa\x01\n" +
-	"+DetachNetworkLoadBalancerTargetGroupRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x124\n" +
-	"\x0ftarget_group_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\rtargetGroupId\"\x8f\x01\n" +
+	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"\x8e\x01\n" +
+	"+DetachNetworkLoadBalancerTargetGroupRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12&\n" +
+	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"\x8f\x01\n" +
 	",DetachNetworkLoadBalancerTargetGroupMetadata\x127\n" +
 	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12&\n" +
-	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"\xc5\x01\n" +
-	"%AddNetworkLoadBalancerListenerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12U\n" +
-	"\rlistener_spec\x18\x02 \x01(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecB\x04\xe8\xc71\x01R\flistenerSpec\"a\n" +
+	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"\xb1\x01\n" +
+	"%AddNetworkLoadBalancerListenerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12O\n" +
+	"\rlistener_spec\x18\x02 \x01(\v2*.yandex.cloud.loadbalancer.v1.ListenerSpecR\flistenerSpec\"a\n" +
 	"&AddNetworkLoadBalancerListenerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\xbd\x01\n" +
-	"(RemoveNetworkLoadBalancerListenerRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12J\n" +
-	"\rlistener_name\x18\x02 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\flistenerName\"d\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x88\x01\n" +
+	"(RemoveNetworkLoadBalancerListenerRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12#\n" +
+	"\rlistener_name\x18\x02 \x01(\tR\flistenerName\"d\n" +
 	")RemoveNetworkLoadBalancerListenerMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\xc4\x01\n" +
-	"(ListNetworkLoadBalancerOperationsRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"\x9f\x01\n" +
+	"(ListNetworkLoadBalancerOperationsRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x96\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x96\x01\n" +
 	")ListNetworkLoadBalancerOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8d\x01\n" +
-	"\x16GetTargetStatesRequest\x12A\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x120\n" +
-	"\x0ftarget_group_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\rtargetGroupId\"i\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"y\n" +
+	"\x16GetTargetStatesRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12&\n" +
+	"\x0ftarget_group_id\x18\x02 \x01(\tR\rtargetGroupId\"i\n" +
 	"\x17GetTargetStatesResponse\x12N\n" +
 	"\rtarget_states\x18\x01 \x03(\v2).yandex.cloud.loadbalancer.v1.TargetStateR\ftargetStates\"w\n" +
 	"\x13ExternalAddressSpec\x12\x18\n" +
@@ -2034,26 +2092,25 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1b\n" +
 	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\x12F\n" +
 	"\n" +
-	"ip_version\x18\x03 \x01(\x0e2'.yandex.cloud.loadbalancer.v1.IpVersionR\tipVersion\"\xbb\x03\n" +
-	"\fListenerSpec\x129\n" +
-	"\x04name\x18\x01 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12\x1f\n" +
-	"\x04port\x18\x02 \x01(\x03B\v\xfa\xc71\a1-65535R\x04port\x12Q\n" +
-	"\bprotocol\x18\x03 \x01(\x0e2/.yandex.cloud.loadbalancer.v1.Listener.ProtocolB\x04\xe8\xc71\x01R\bprotocol\x12g\n" +
+	"ip_version\x18\x03 \x01(\x0e2'.yandex.cloud.loadbalancer.v1.IpVersionR\tipVersion\"\x81\x03\n" +
+	"\fListenerSpec\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04port\x18\x02 \x01(\x03R\x04port\x12K\n" +
+	"\bprotocol\x18\x03 \x01(\x0e2/.yandex.cloud.loadbalancer.v1.Listener.ProtocolR\bprotocol\x12g\n" +
 	"\x15external_address_spec\x18\x04 \x01(\v21.yandex.cloud.loadbalancer.v1.ExternalAddressSpecH\x00R\x13externalAddressSpec\x12g\n" +
 	"\x15internal_address_spec\x18\x06 \x01(\v21.yandex.cloud.loadbalancer.v1.InternalAddressSpecH\x00R\x13internalAddressSpec\x12\x1f\n" +
 	"\vtarget_port\x18\x05 \x01(\x03R\n" +
 	"targetPortB\t\n" +
-	"\aaddress\"\xc2\x01\n" +
-	"\x13DisableZonesRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
-	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationB\n" +
-	"\xfa\xc71\x061m-72hR\bduration\"O\n" +
+	"\aaddress\"\xa0\x01\n" +
+	"\x13DisableZonesRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\x125\n" +
+	"\bduration\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\bduration\"O\n" +
 	"\x14DisableZonesMetadata\x127\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"~\n" +
-	"\x12EnableZonesRequest\x12E\n" +
-	"\x18network_load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x15networkLoadBalancerId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"N\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\"h\n" +
+	"\x12EnableZonesRequest\x127\n" +
+	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId\x12\x19\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"N\n" +
 	"\x13EnableZonesMetadata\x127\n" +
 	"\x18network_load_balancer_id\x18\x01 \x01(\tR\x15networkLoadBalancerId2\x99\x1d\n" +
 	"\x1aNetworkLoadBalancerService\x12\xc0\x01\n" +
@@ -2066,23 +2123,23 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"\x06Delete\x12>.yandex.cloud.loadbalancer.v1.DeleteNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x87\x01\xb2\xd2*:\n" +
 	"!DeleteNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}\x12\xf8\x01\n" +
 	"\x05Start\x12=.yandex.cloud.loadbalancer.v1.StartNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*9\n" +
-	" StartNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02I\"G/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:start\x12\xf4\x01\n" +
+	" StartNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02I\"G/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/start\x12\xf4\x01\n" +
 	"\x04Stop\x12<.yandex.cloud.loadbalancer.v1.StopNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x8a\x01\xb2\xd2*8\n" +
-	"\x1fStopNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H\"F/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:stop\x12\xa9\x02\n" +
+	"\x1fStopNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H\"F/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/stop\x12\xa9\x02\n" +
 	"\x11AttachTargetGroup\x12I.yandex.cloud.loadbalancer.v1.AttachNetworkLoadBalancerTargetGroupRequest\x1a!.yandex.cloud.operation.Operation\"\xa5\x01\xb2\xd2*C\n" +
-	",AttachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:attachTargetGroup\x12\xa9\x02\n" +
+	",AttachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/attachTargetGroup\x12\xa9\x02\n" +
 	"\x11DetachTargetGroup\x12I.yandex.cloud.loadbalancer.v1.DetachNetworkLoadBalancerTargetGroupRequest\x1a!.yandex.cloud.operation.Operation\"\xa5\x01\xb2\xd2*C\n" +
-	",DetachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:detachTargetGroup\x12\xd9\x01\n" +
-	"\x0fGetTargetStates\x124.yandex.cloud.loadbalancer.v1.GetTargetStatesRequest\x1a5.yandex.cloud.loadbalancer.v1.GetTargetStatesResponse\"Y\x82\xd3\xe4\x93\x02S\x12Q/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:getTargetStates\x12\x91\x02\n" +
+	",DetachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/detachTargetGroup\x12\xd9\x01\n" +
+	"\x0fGetTargetStates\x124.yandex.cloud.loadbalancer.v1.GetTargetStatesRequest\x1a5.yandex.cloud.loadbalancer.v1.GetTargetStatesResponse\"Y\x82\xd3\xe4\x93\x02S\x12Q/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/getTargetStates\x12\x91\x02\n" +
 	"\vAddListener\x12C.yandex.cloud.loadbalancer.v1.AddNetworkLoadBalancerListenerRequest\x1a!.yandex.cloud.operation.Operation\"\x99\x01\xb2\xd2*=\n" +
-	"&AddNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:addListener\x12\x9d\x02\n" +
+	"&AddNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/addListener\x12\x9d\x02\n" +
 	"\x0eRemoveListener\x12F.yandex.cloud.loadbalancer.v1.RemoveNetworkLoadBalancerListenerRequest\x1a!.yandex.cloud.operation.Operation\"\x9f\x01\xb2\xd2*@\n" +
-	")RemoveNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02U:\x01*\"P/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:removeListener\x12\xf7\x01\n" +
+	")RemoveNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02U:\x01*\"P/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/removeListener\x12\xf7\x01\n" +
 	"\x0eListOperations\x12F.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsRequest\x1aG.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsResponse\"T\x82\xd3\xe4\x93\x02N\x12L/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/operations\x12\xef\x01\n" +
 	"\fDisableZones\x121.yandex.cloud.loadbalancer.v1.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*+\n" +
-	"\x14DisableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02S:\x01*\"N/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:disableZones\x12\xeb\x01\n" +
+	"\x14DisableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02S:\x01*\"N/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/disableZones\x12\xeb\x01\n" +
 	"\vEnableZones\x120.yandex.cloud.loadbalancer.v1.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2**\n" +
-	"\x13EnableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:enableZonesBq\n" +
+	"\x13EnableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/enableZonesBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 
 var (

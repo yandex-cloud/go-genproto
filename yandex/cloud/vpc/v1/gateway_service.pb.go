@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -29,8 +28,9 @@ const (
 type GetGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Gateway resource to return.
-	//
 	// To get Gateway resource ID make a [GatewayService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	GatewayId     string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,24 +76,27 @@ func (x *GetGatewayRequest) GetGatewayId() string {
 type ListGatewaysRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list gateways in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListGatewaysResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListGatewaysResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters Gateway listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Gateway.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
 	// Example of a filter: `name=my-gateway`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -164,7 +167,6 @@ type ListGatewaysResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListGatewaysRequest.page_size], use `next_page_token` as the value
 	// for the [ListGatewaysRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -218,16 +220,19 @@ func (x *ListGatewaysResponse) GetNextPageToken() string {
 type ListGatewayOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the gateway to list operations for.
-	//
 	// To get a gateway ID make a [GatewayService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	GatewayId string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListGatewayOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be between 0 and 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListGatewayOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -291,7 +296,6 @@ type ListGatewayOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListGatewayOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListGatewayOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -381,15 +385,23 @@ func (*SharedEgressGatewaySpec) Descriptor() ([]byte, []int) {
 type CreateGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a gateway in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the gateway.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the gateway.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Gateway labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Gateway configuration specification
 	//
@@ -533,23 +545,30 @@ func (x *CreateGatewayMetadata) GetGatewayId() string {
 type UpdateGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the gateway to update.
-	//
 	// To get the gateway ID make a [GatewayService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	GatewayId string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
 	// Field mask that specifies which attributes of the Gateway should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the gateway.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-z]([-a-z0-9]{0,61}[a-z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the gateway.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Gateway labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [GatewayService.Get] request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
+	// Each map key must match the regular expression: `[a-z][-_./\\@0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_./\\@0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New Gateway configuration specification
 	//
@@ -700,8 +719,9 @@ func (x *UpdateGatewayMetadata) GetGatewayId() string {
 type DeleteGatewayRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the gateway to delete.
-	//
 	// To get a gateway ID make a [GatewayService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	GatewayId     string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -790,9 +810,13 @@ func (x *DeleteGatewayMetadata) GetGatewayId() string {
 }
 
 type MoveGatewayRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	GatewayId           string                 `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
-	DestinationFolderId string                 `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The length must be less than or equal to 50.
+	// This field is required.
+	GatewayId string `protobuf:"bytes,1,opt,name=gateway_id,json=gatewayId,proto3" json:"gateway_id,omitempty"`
+	// The length must be less than or equal to 50.
+	// This field is required.
+	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -889,39 +913,36 @@ var File_yandex_cloud_vpc_v1_gateway_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_gateway_service_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/vpc/v1/gateway_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a!yandex/cloud/vpc/v1/gateway.proto\"@\n" +
-	"\x11GetGatewayRequest\x12+\n" +
+	")yandex/cloud/vpc/v1/gateway_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a!yandex/cloud/vpc/v1/gateway.proto\"2\n" +
+	"\x11GetGatewayRequest\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\"\xb7\x01\n" +
-	"\x13ListGatewaysRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"\x86\x01\n" +
+	"\x13ListGatewaysRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"x\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"x\n" +
 	"\x14ListGatewaysResponse\x128\n" +
 	"\bgateways\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.GatewayR\bgateways\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9e\x01\n" +
-	"\x1cListGatewayOperationsRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"y\n" +
+	"\x1cListGatewayOperationsRequest\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8a\x01\n" +
 	"\x1dListGatewayOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x19\n" +
-	"\x17SharedEgressGatewaySpec\"\xf0\x03\n" +
-	"\x14CreateGatewayRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x128\n" +
-	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x92\x01\n" +
-	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateGatewayRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12k\n" +
+	"\x17SharedEgressGatewaySpec\"\xeb\x02\n" +
+	"\x14CreateGatewayRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateGatewayRequest.LabelsEntryR\x06labels\x12k\n" +
 	"\x1ashared_egress_gateway_spec\x18\x05 \x01(\v2,.yandex.cloud.vpc.v1.SharedEgressGatewaySpecH\x00R\x17sharedEgressGatewaySpec\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -929,15 +950,15 @@ const file_yandex_cloud_vpc_v1_gateway_service_proto_rawDesc = "" +
 	"\agateway\"6\n" +
 	"\x15CreateGatewayMetadata\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"\xaf\x04\n" +
-	"\x14UpdateGatewayRequest\x12+\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"\xaa\x03\n" +
+	"\x14UpdateGatewayRequest\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12;\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x128\n" +
-	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x92\x01\n" +
-	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateGatewayRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12k\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateGatewayRequest.LabelsEntryR\x06labels\x12k\n" +
 	"\x1ashared_egress_gateway_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.SharedEgressGatewaySpecH\x00R\x17sharedEgressGatewaySpec\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -945,17 +966,17 @@ const file_yandex_cloud_vpc_v1_gateway_service_proto_rawDesc = "" +
 	"\agateway\"6\n" +
 	"\x15UpdateGatewayMetadata\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"C\n" +
-	"\x14DeleteGatewayRequest\x12+\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"5\n" +
+	"\x14DeleteGatewayRequest\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\"6\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"6\n" +
 	"\x15DeleteGatewayMetadata\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"\x83\x01\n" +
-	"\x12MoveGatewayRequest\x12+\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\"g\n" +
+	"\x12MoveGatewayRequest\x12\x1d\n" +
 	"\n" +
-	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"4\n" +
+	"gateway_id\x18\x01 \x01(\tR\tgatewayId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"4\n" +
 	"\x13MoveGatewayMetadata\x12\x1d\n" +
 	"\n" +
 	"gateway_id\x18\x01 \x01(\tR\tgatewayId2\xc0\b\n" +

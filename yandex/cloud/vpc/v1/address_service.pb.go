@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -29,8 +28,9 @@ const (
 type GetAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Address resource to return.
-	//
 	// To get Address resource ID make a [AddressService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	AddressId     string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -75,6 +75,8 @@ func (x *GetAddressRequest) GetAddressId() string {
 
 type GetAddressByValueRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Address:
 	//
 	//	*GetAddressByValueRequest_ExternalIpv4Address
@@ -183,6 +185,7 @@ type isGetAddressByValueRequest_Scope interface {
 
 type GetAddressByValueRequest_SubnetId struct {
 	// subnet where address was allocated
+	// The length must be less than or equal to 50.
 	SubnetId string `protobuf:"bytes,5,opt,name=subnet_id,json=subnetId,proto3,oneof"`
 }
 
@@ -191,19 +194,21 @@ func (*GetAddressByValueRequest_SubnetId) isGetAddressByValueRequest_Scope() {}
 type ListAddressesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list addresses in.
-	//
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListAddressesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListAddressesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters Address listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Address.name] field.
 	// 2. An `=` operator.
@@ -279,7 +284,6 @@ type ListAddressesResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListAddressesRequest.page_size], use `next_page_token` as the value
 	// for the [ListAddressesRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -333,14 +337,18 @@ func (x *ListAddressesResponse) GetNextPageToken() string {
 type ListAddressesBySubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subnet to list addresses in.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than `page_size`, the service returns a [ListAddressesBySubnetResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set `page_token` to the
 	// [ListAddressesBySubnetResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -404,7 +412,6 @@ type ListAddressesBySubnetResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListAddressesBySubnetRequest.page_size], use `next_page_token` as the value
 	// for the [ListAddressesBySubnetRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -458,16 +465,26 @@ func (x *ListAddressesBySubnetResponse) GetNextPageToken() string {
 type CreateAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a address in.
-	//
 	// To get a folder ID make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the address.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the address.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Address labels as `key:value` pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to AddressSpec:
 	//
 	//	*CreateAddressRequest_ExternalIpv4AddressSpec
@@ -662,7 +679,10 @@ func (x *ExternalIpv4AddressSpec) GetRequirements() *AddressRequirements {
 type InternalIpv4AddressSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Value of address.
+	// The length must be less than or equal to 16.
 	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"` // if unspecified, one will be automatically allocated from the subnet
+	// Only one field must be specified.
+	//
 	// Types that are valid to be assigned to Scope:
 	//
 	//	*InternalIpv4AddressSpec_SubnetId
@@ -730,6 +750,7 @@ type isInternalIpv4AddressSpec_Scope interface {
 
 type InternalIpv4AddressSpec_SubnetId struct {
 	// Subnet from which the address will be allocated.
+	// The length must be less than or equal to 50.
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3,oneof"`
 }
 
@@ -738,10 +759,14 @@ func (*InternalIpv4AddressSpec_SubnetId) isInternalIpv4AddressSpec_Scope() {}
 type DnsRecordSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. DNS record name (absolute or relative to the DNS zone in use).
+	// This field is required.
 	Fqdn string `protobuf:"bytes,1,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
 	// Required. ID of the public DNS zone. The maximum string length in characters is 20.
+	// The length must be exactly 20.
+	// This field is required.
 	DnsZoneId string `protobuf:"bytes,2,opt,name=dns_zone_id,json=dnsZoneId,proto3" json:"dns_zone_id,omitempty"`
 	// TTL of record. Acceptable values are 0 to 86400, inclusive.
+	// The value must be between 0 and 86400.
 	Ttl int64 `protobuf:"varint,3,opt,name=ttl,proto3" json:"ttl,omitempty"`
 	// Optional. If the PTR record is required, this parameter must be set to "true".
 	Ptr           bool `protobuf:"varint,4,opt,name=ptr,proto3" json:"ptr,omitempty"`
@@ -855,23 +880,30 @@ func (x *CreateAddressMetadata) GetAddressId() string {
 type UpdateAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the address to update.
-	//
 	// To get the address ID make a [AddressService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	AddressId string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	// Field mask that specifies which attributes of the Address should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New name for the address.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// New description of the address.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Address labels as `key:value` pairs.
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [AddressService.Get] request.
 	// 2. Add or remove a label in this set.
 	// 3. Send the new set in this field.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Specifies if address is reserved or not.
 	Reserved bool `protobuf:"varint,6,opt,name=reserved,proto3" json:"reserved,omitempty"`
@@ -1017,8 +1049,9 @@ func (x *UpdateAddressMetadata) GetAddressId() string {
 type DeleteAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the address to delete.
-	//
 	// To get a address ID make a [AddressService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	AddressId     string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1109,16 +1142,19 @@ func (x *DeleteAddressMetadata) GetAddressId() string {
 type ListAddressOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the address to list operations for.
-	//
 	// To get a address ID make a [AddressService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	AddressId string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListAddressOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
 	// Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListAddressOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1182,7 +1218,6 @@ type ListAddressOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListAddressOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListAddressOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1236,8 +1271,12 @@ func (x *ListAddressOperationsResponse) GetNextPageToken() string {
 type MoveAddressRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the address that is being moved.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	AddressId string `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	// ID of the folder to move address to.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1336,40 +1375,38 @@ var File_yandex_cloud_vpc_v1_address_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/vpc/v1/address_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a!yandex/cloud/vpc/v1/address.proto\"@\n" +
-	"\x11GetAddressRequest\x12+\n" +
+	")yandex/cloud/vpc/v1/address_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a!yandex/cloud/vpc/v1/address.proto\"2\n" +
+	"\x11GetAddressRequest\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\"\xc9\x01\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"\xbf\x01\n" +
 	"\x18GetAddressByValueRequest\x124\n" +
 	"\x15external_ipv4_address\x18\x01 \x01(\tH\x00R\x13externalIpv4Address\x124\n" +
-	"\x15internal_ipv4_address\x18\x02 \x01(\tH\x00R\x13internalIpv4Address\x12'\n" +
-	"\tsubnet_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50H\x01R\bsubnetIdB\t\n" +
+	"\x15internal_ipv4_address\x18\x02 \x01(\tH\x00R\x13internalIpv4Address\x12\x1d\n" +
+	"\tsubnet_id\x18\x05 \x01(\tH\x01R\bsubnetIdB\t\n" +
 	"\aaddressB\a\n" +
-	"\x05scopeJ\x04\b\x03\x10\x05\"\xac\x01\n" +
-	"\x14ListAddressesRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x05scopeJ\x04\b\x03\x10\x05\"\x87\x01\n" +
+	"\x14ListAddressesRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\x16\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"{\n" +
 	"\x15ListAddressesResponse\x12:\n" +
 	"\taddresses\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.AddressR\taddresses\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x01\n" +
-	"\x1cListAddressesBySubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"w\n" +
+	"\x1cListAddressesBySubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x83\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x83\x01\n" +
 	"\x1dListAddressesBySubnetResponse\x12:\n" +
 	"\taddresses\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.AddressR\taddresses\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe9\x05\n" +
-	"\x14CreateAddressRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
-	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
-	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12k\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe2\x04\n" +
+	"\x14CreateAddressRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateAddressRequest.LabelsEntryR\x06labels\x12k\n" +
 	"\x1aexternal_ipv4_address_spec\x18\x05 \x01(\v2,.yandex.cloud.vpc.v1.ExternalIpv4AddressSpecH\x00R\x17externalIpv4AddressSpec\x12k\n" +
 	"\x1ainternal_ipv4_address_spec\x18\x06 \x01(\v2,.yandex.cloud.vpc.v1.InternalIpv4AddressSpecH\x00R\x17internalIpv4AddressSpec\x12/\n" +
 	"\x13deletion_protection\x18\n" +
@@ -1383,28 +1420,27 @@ const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	"\x17ExternalIpv4AddressSpec\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x17\n" +
 	"\azone_id\x18\x02 \x01(\tR\x06zoneId\x12L\n" +
-	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"u\n" +
-	"\x17InternalIpv4AddressSpec\x12\"\n" +
-	"\aaddress\x18\x01 \x01(\tB\b\x8a\xc81\x04<=16R\aaddress\x12'\n" +
-	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50H\x00R\bsubnetIdB\r\n" +
-	"\x05scope\x12\x04\xc0\xc11\x01\"\x86\x01\n" +
-	"\rDnsRecordSpec\x12\x18\n" +
-	"\x04fqdn\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04fqdn\x12*\n" +
-	"\vdns_zone_id\x18\x02 \x01(\tB\n" +
-	"\xe8\xc71\x01\x8a\xc81\x0220R\tdnsZoneId\x12\x1d\n" +
-	"\x03ttl\x18\x03 \x01(\x03B\v\xfa\xc71\a0-86400R\x03ttl\x12\x10\n" +
+	"\frequirements\x18\x03 \x01(\v2(.yandex.cloud.vpc.v1.AddressRequirementsR\frequirements\"[\n" +
+	"\x17InternalIpv4AddressSpec\x12\x18\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1d\n" +
+	"\tsubnet_id\x18\x02 \x01(\tH\x00R\bsubnetIdB\a\n" +
+	"\x05scope\"g\n" +
+	"\rDnsRecordSpec\x12\x12\n" +
+	"\x04fqdn\x18\x01 \x01(\tR\x04fqdn\x12\x1e\n" +
+	"\vdns_zone_id\x18\x02 \x01(\tR\tdnsZoneId\x12\x10\n" +
+	"\x03ttl\x18\x03 \x01(\x03R\x03ttl\x12\x10\n" +
 	"\x03ptr\x18\x04 \x01(\bR\x03ptr\"6\n" +
 	"\x15CreateAddressMetadata\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"\xd4\x04\n" +
-	"\x14UpdateAddressRequest\x12+\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"\xcd\x03\n" +
+	"\x14UpdateAddressRequest\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\x12;\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
-	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
-	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12\x1a\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateAddressRequest.LabelsEntryR\x06labels\x12\x1a\n" +
 	"\breserved\x18\x06 \x01(\bR\breserved\x12/\n" +
 	"\x13deletion_protection\x18\a \x01(\bR\x12deletionProtection\x12L\n" +
 	"\x10dns_record_specs\x18\b \x03(\v2\".yandex.cloud.vpc.v1.DnsRecordSpecR\x0ednsRecordSpecs\x1a9\n" +
@@ -1413,29 +1449,28 @@ const file_yandex_cloud_vpc_v1_address_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
 	"\x15UpdateAddressMetadata\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"C\n" +
-	"\x14DeleteAddressRequest\x12+\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"5\n" +
+	"\x14DeleteAddressRequest\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\"6\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"6\n" +
 	"\x15DeleteAddressMetadata\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"\x9e\x01\n" +
-	"\x1cListAddressOperationsRequest\x12+\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"y\n" +
+	"\x1cListAddressOperationsRequest\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8a\x01\n" +
 	"\x1dListAddressOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x83\x01\n" +
-	"\x12MoveAddressRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"g\n" +
+	"\x12MoveAddressRequest\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\taddressId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"4\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"4\n" +
 	"\x13MoveAddressMetadata\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId2\xe3\n" +

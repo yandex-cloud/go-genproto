@@ -36,7 +36,6 @@ const (
 // A set of methods for managing RouteTable resources.
 type RouteTableServiceClient interface {
 	// Returns the specified RouteTable resource.
-	//
 	// To get the list of available RouteTable resources, make a [List] request.
 	Get(ctx context.Context, in *GetRouteTableRequest, opts ...grpc.CallOption) (*RouteTable, error)
 	// Retrieves the list of RouteTable resources in the specified folder.
@@ -140,7 +139,6 @@ func (c *routeTableServiceClient) Move(ctx context.Context, in *MoveRouteTableRe
 // A set of methods for managing RouteTable resources.
 type RouteTableServiceServer interface {
 	// Returns the specified RouteTable resource.
-	//
 	// To get the list of available RouteTable resources, make a [List] request.
 	Get(context.Context, *GetRouteTableRequest) (*RouteTable, error)
 	// Retrieves the list of RouteTable resources in the specified folder.

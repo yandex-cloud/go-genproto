@@ -7,7 +7,6 @@
 package loadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -138,6 +137,7 @@ type Target struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subnet that targets are connected to.
 	// All targets in the target group must be connected to the same subnet within a single availability zone.
+	// The length must be less than or equal to 50.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// IP address of the target.
 	Address       string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
@@ -193,7 +193,7 @@ var File_yandex_cloud_loadbalancer_v1_target_group_proto protoreflect.FileDescri
 
 const file_yandex_cloud_loadbalancer_v1_target_group_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/loadbalancer/v1/target_group.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x03\n" +
+	"/yandex/cloud/loadbalancer/v1/target_group.proto\x12\x1cyandex.cloud.loadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x98\x03\n" +
 	"\vTargetGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -206,9 +206,9 @@ const file_yandex_cloud_loadbalancer_v1_target_group_proto_rawDesc = "" +
 	"\atargets\x18\t \x03(\v2$.yandex.cloud.loadbalancer.v1.TargetR\atargets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"I\n" +
-	"\x06Target\x12%\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12\x18\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"?\n" +
+	"\x06Target\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddressBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 

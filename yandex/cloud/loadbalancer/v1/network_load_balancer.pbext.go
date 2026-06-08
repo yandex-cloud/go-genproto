@@ -90,16 +90,16 @@ func (m *Listener) SetProtocol(v Listener_Protocol) {
 	m.Protocol = v
 }
 
+func (m *Listener) SetIpVersion(v IpVersion) {
+	m.IpVersion = v
+}
+
 func (m *Listener) SetTargetPort(v int64) {
 	m.TargetPort = v
 }
 
 func (m *Listener) SetSubnetId(v string) {
 	m.SubnetId = v
-}
-
-func (m *Listener) SetIpVersion(v IpVersion) {
-	m.IpVersion = v
 }
 
 func (m *TargetState) SetSubnetId(v string) {

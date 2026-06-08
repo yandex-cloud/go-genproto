@@ -38,7 +38,6 @@ const (
 // A set of methods for managing SecurityGroup resources.
 type SecurityGroupServiceClient interface {
 	// Returns the specified SecurityGroup resource.
-	//
 	// To get the list of all available SecurityGroup resources, make a [List] request.
 	Get(ctx context.Context, in *GetSecurityGroupRequest, opts ...grpc.CallOption) (*SecurityGroup, error)
 	// Retrieves the list of SecurityGroup resources in the specified folder.
@@ -165,7 +164,6 @@ func (c *securityGroupServiceClient) ListOperations(ctx context.Context, in *Lis
 // A set of methods for managing SecurityGroup resources.
 type SecurityGroupServiceServer interface {
 	// Returns the specified SecurityGroup resource.
-	//
 	// To get the list of all available SecurityGroup resources, make a [List] request.
 	Get(context.Context, *GetSecurityGroupRequest) (*SecurityGroup, error)
 	// Retrieves the list of SecurityGroup resources in the specified folder.

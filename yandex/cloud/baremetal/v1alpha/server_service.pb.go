@@ -27,6 +27,61 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type RebootMode int32
+
+const (
+	RebootMode_REBOOT_MODE_UNSPECIFIED RebootMode = 0
+	// Reboot server via network (PXE).
+	RebootMode_NETWORK RebootMode = 1
+	// Reboot server via CD-ROM.
+	RebootMode_CDROM RebootMode = 2
+	// Reboot server via BIOS.
+	RebootMode_BIOS RebootMode = 3
+)
+
+// Enum value maps for RebootMode.
+var (
+	RebootMode_name = map[int32]string{
+		0: "REBOOT_MODE_UNSPECIFIED",
+		1: "NETWORK",
+		2: "CDROM",
+		3: "BIOS",
+	}
+	RebootMode_value = map[string]int32{
+		"REBOOT_MODE_UNSPECIFIED": 0,
+		"NETWORK":                 1,
+		"CDROM":                   2,
+		"BIOS":                    3,
+	}
+)
+
+func (x RebootMode) Enum() *RebootMode {
+	p := new(RebootMode)
+	*p = x
+	return p
+}
+
+func (x RebootMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RebootMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_enumTypes[0].Descriptor()
+}
+
+func (RebootMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v1alpha_server_service_proto_enumTypes[0]
+}
+
+func (x RebootMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RebootMode.Descriptor instead.
+func (RebootMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP(), []int{0}
+}
+
 type GetServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Server resource to return.
@@ -1144,7 +1199,9 @@ type RebootServerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the server to reboot.
 	// To get the server ID, use a [ServerService.List] request.
-	ServerId      string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	// Optional parameter to specify in what mode to boot after successfull reboot.
+	RebootMode    RebootMode `protobuf:"varint,2,opt,name=reboot_mode,json=rebootMode,proto3,enum=yandex.cloud.baremetal.v1alpha.RebootMode" json:"reboot_mode,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1184,6 +1241,13 @@ func (x *RebootServerRequest) GetServerId() string {
 		return x.ServerId
 	}
 	return ""
+}
+
+func (x *RebootServerRequest) GetRebootMode() RebootMode {
+	if x != nil {
+		return x.RebootMode
+	}
+	return RebootMode_REBOOT_MODE_UNSPECIFIED
 }
 
 type RebootServerMetadata struct {
@@ -2009,9 +2073,11 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x14PowerOnServerRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"4\n" +
 	"\x15PowerOnServerMetadata\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"L\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\x99\x01\n" +
 	"\x13RebootServerRequest\x125\n" +
-	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"3\n" +
+	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\x12K\n" +
+	"\vreboot_mode\x18\x02 \x01(\x0e2*.yandex.cloud.baremetal.v1alpha.RebootModeR\n" +
+	"rebootMode\"3\n" +
 	"\x14RebootServerMetadata\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xaf\x01\n" +
 	"\x16ReinstallServerRequest\x125\n" +
@@ -2061,7 +2127,13 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x17StopProlongationRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\"<\n" +
 	"\x1dServerSetProlongationMetadata\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId2\xd2\x12\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId*K\n" +
+	"\n" +
+	"RebootMode\x12\x1b\n" +
+	"\x17REBOOT_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aNETWORK\x10\x01\x12\t\n" +
+	"\x05CDROM\x10\x02\x12\b\n" +
+	"\x04BIOS\x10\x032\xd2\x12\n" +
 	"\rServerService\x12\x8f\x01\n" +
 	"\x03Get\x120.yandex.cloud.baremetal.v1alpha.GetServerRequest\x1a&.yandex.cloud.baremetal.v1alpha.Server\".\x82\xd3\xe4\x93\x02(\x12&/baremetal/v1alpha/servers/{server_id}\x12\x91\x01\n" +
 	"\x04List\x121.yandex.cloud.baremetal.v1alpha.ListServerRequest\x1a2.yandex.cloud.baremetal.v1alpha.ListServerResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/baremetal/v1alpha/servers\x12\xa9\x01\n" +
@@ -2098,100 +2170,103 @@ func file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescGZIP() []by
 	return file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDescData
 }
 
+var file_yandex_cloud_baremetal_v1alpha_server_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_yandex_cloud_baremetal_v1alpha_server_service_proto_goTypes = []any{
-	(*GetServerRequest)(nil),              // 0: yandex.cloud.baremetal.v1alpha.GetServerRequest
-	(*ListServerRequest)(nil),             // 1: yandex.cloud.baremetal.v1alpha.ListServerRequest
-	(*ListServerResponse)(nil),            // 2: yandex.cloud.baremetal.v1alpha.ListServerResponse
-	(*CreateServerRequest)(nil),           // 3: yandex.cloud.baremetal.v1alpha.CreateServerRequest
-	(*CreateServerMetadata)(nil),          // 4: yandex.cloud.baremetal.v1alpha.CreateServerMetadata
-	(*UpdateServerRequest)(nil),           // 5: yandex.cloud.baremetal.v1alpha.UpdateServerRequest
-	(*NetworkInterfaceSpec)(nil),          // 6: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	(*OsSettingsSpec)(nil),                // 7: yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	(*UpdateServerMetadata)(nil),          // 8: yandex.cloud.baremetal.v1alpha.UpdateServerMetadata
-	(*DeleteServerRequest)(nil),           // 9: yandex.cloud.baremetal.v1alpha.DeleteServerRequest
-	(*DeleteServerMetadata)(nil),          // 10: yandex.cloud.baremetal.v1alpha.DeleteServerMetadata
-	(*PowerOffServerRequest)(nil),         // 11: yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
-	(*PowerOffServerMetadata)(nil),        // 12: yandex.cloud.baremetal.v1alpha.PowerOffServerMetadata
-	(*PowerOnServerRequest)(nil),          // 13: yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
-	(*PowerOnServerMetadata)(nil),         // 14: yandex.cloud.baremetal.v1alpha.PowerOnServerMetadata
-	(*RebootServerRequest)(nil),           // 15: yandex.cloud.baremetal.v1alpha.RebootServerRequest
-	(*RebootServerMetadata)(nil),          // 16: yandex.cloud.baremetal.v1alpha.RebootServerMetadata
-	(*ReinstallServerRequest)(nil),        // 17: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
-	(*ReinstallServerMetadata)(nil),       // 18: yandex.cloud.baremetal.v1alpha.ReinstallServerMetadata
-	(*ListServerOperationsRequest)(nil),   // 19: yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
-	(*ListServerOperationsResponse)(nil),  // 20: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
-	(*LockboxSecret)(nil),                 // 21: yandex.cloud.baremetal.v1alpha.LockboxSecret
-	(*BatchCreateServersRequest)(nil),     // 22: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
-	(*BatchCreateServersResponse)(nil),    // 23: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse
-	(*BatchCreateServersMetadata)(nil),    // 24: yandex.cloud.baremetal.v1alpha.BatchCreateServersMetadata
-	(*QuarantineServerMetadata)(nil),      // 25: yandex.cloud.baremetal.v1alpha.QuarantineServerMetadata
-	(*StartProlongationRequest)(nil),      // 26: yandex.cloud.baremetal.v1alpha.StartProlongationRequest
-	(*StopProlongationRequest)(nil),       // 27: yandex.cloud.baremetal.v1alpha.StopProlongationRequest
-	(*ServerSetProlongationMetadata)(nil), // 28: yandex.cloud.baremetal.v1alpha.ServerSetProlongationMetadata
-	nil,                                   // 29: yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
-	nil,                                   // 30: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntry
-	nil,                                   // 31: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
-	(*Server)(nil),                        // 32: yandex.cloud.baremetal.v1alpha.Server
-	(*fieldmaskpb.FieldMask)(nil),         // 33: google.protobuf.FieldMask
-	(*PrivateSubnetNetworkInterface)(nil), // 34: yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
-	(*PublicSubnetNetworkInterface)(nil),  // 35: yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
-	(*PrivateNetworkInterface)(nil),       // 36: yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
-	(*PublicNetworkInterface)(nil),        // 37: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
-	(*wrapperspb.StringValue)(nil),        // 38: google.protobuf.StringValue
-	(*Storage)(nil),                       // 39: yandex.cloud.baremetal.v1alpha.Storage
-	(*operation.Operation)(nil),           // 40: yandex.cloud.operation.Operation
+	(RebootMode)(0),                       // 0: yandex.cloud.baremetal.v1alpha.RebootMode
+	(*GetServerRequest)(nil),              // 1: yandex.cloud.baremetal.v1alpha.GetServerRequest
+	(*ListServerRequest)(nil),             // 2: yandex.cloud.baremetal.v1alpha.ListServerRequest
+	(*ListServerResponse)(nil),            // 3: yandex.cloud.baremetal.v1alpha.ListServerResponse
+	(*CreateServerRequest)(nil),           // 4: yandex.cloud.baremetal.v1alpha.CreateServerRequest
+	(*CreateServerMetadata)(nil),          // 5: yandex.cloud.baremetal.v1alpha.CreateServerMetadata
+	(*UpdateServerRequest)(nil),           // 6: yandex.cloud.baremetal.v1alpha.UpdateServerRequest
+	(*NetworkInterfaceSpec)(nil),          // 7: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
+	(*OsSettingsSpec)(nil),                // 8: yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	(*UpdateServerMetadata)(nil),          // 9: yandex.cloud.baremetal.v1alpha.UpdateServerMetadata
+	(*DeleteServerRequest)(nil),           // 10: yandex.cloud.baremetal.v1alpha.DeleteServerRequest
+	(*DeleteServerMetadata)(nil),          // 11: yandex.cloud.baremetal.v1alpha.DeleteServerMetadata
+	(*PowerOffServerRequest)(nil),         // 12: yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
+	(*PowerOffServerMetadata)(nil),        // 13: yandex.cloud.baremetal.v1alpha.PowerOffServerMetadata
+	(*PowerOnServerRequest)(nil),          // 14: yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
+	(*PowerOnServerMetadata)(nil),         // 15: yandex.cloud.baremetal.v1alpha.PowerOnServerMetadata
+	(*RebootServerRequest)(nil),           // 16: yandex.cloud.baremetal.v1alpha.RebootServerRequest
+	(*RebootServerMetadata)(nil),          // 17: yandex.cloud.baremetal.v1alpha.RebootServerMetadata
+	(*ReinstallServerRequest)(nil),        // 18: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
+	(*ReinstallServerMetadata)(nil),       // 19: yandex.cloud.baremetal.v1alpha.ReinstallServerMetadata
+	(*ListServerOperationsRequest)(nil),   // 20: yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
+	(*ListServerOperationsResponse)(nil),  // 21: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
+	(*LockboxSecret)(nil),                 // 22: yandex.cloud.baremetal.v1alpha.LockboxSecret
+	(*BatchCreateServersRequest)(nil),     // 23: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
+	(*BatchCreateServersResponse)(nil),    // 24: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse
+	(*BatchCreateServersMetadata)(nil),    // 25: yandex.cloud.baremetal.v1alpha.BatchCreateServersMetadata
+	(*QuarantineServerMetadata)(nil),      // 26: yandex.cloud.baremetal.v1alpha.QuarantineServerMetadata
+	(*StartProlongationRequest)(nil),      // 27: yandex.cloud.baremetal.v1alpha.StartProlongationRequest
+	(*StopProlongationRequest)(nil),       // 28: yandex.cloud.baremetal.v1alpha.StopProlongationRequest
+	(*ServerSetProlongationMetadata)(nil), // 29: yandex.cloud.baremetal.v1alpha.ServerSetProlongationMetadata
+	nil,                                   // 30: yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
+	nil,                                   // 31: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntry
+	nil,                                   // 32: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
+	(*Server)(nil),                        // 33: yandex.cloud.baremetal.v1alpha.Server
+	(*fieldmaskpb.FieldMask)(nil),         // 34: google.protobuf.FieldMask
+	(*PrivateSubnetNetworkInterface)(nil), // 35: yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
+	(*PublicSubnetNetworkInterface)(nil),  // 36: yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
+	(*PrivateNetworkInterface)(nil),       // 37: yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
+	(*PublicNetworkInterface)(nil),        // 38: yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
+	(*wrapperspb.StringValue)(nil),        // 39: google.protobuf.StringValue
+	(*Storage)(nil),                       // 40: yandex.cloud.baremetal.v1alpha.Storage
+	(*operation.Operation)(nil),           // 41: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_server_service_proto_depIdxs = []int32{
-	32, // 0: yandex.cloud.baremetal.v1alpha.ListServerResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
-	6,  // 1: yandex.cloud.baremetal.v1alpha.CreateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	7,  // 2: yandex.cloud.baremetal.v1alpha.CreateServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	29, // 3: yandex.cloud.baremetal.v1alpha.CreateServerRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
-	33, // 4: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	6,  // 5: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	30, // 6: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntry
-	34, // 7: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.private_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
-	35, // 8: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
-	36, // 9: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.private_interface:type_name -> yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
-	37, // 10: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_interface:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
-	38, // 11: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.configuration_network_interface_id:type_name -> google.protobuf.StringValue
-	21, // 12: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v1alpha.LockboxSecret
-	39, // 13: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
-	7,  // 14: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	40, // 15: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	6,  // 16: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
-	7,  // 17: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
-	31, // 18: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
-	32, // 19: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
-	0,  // 20: yandex.cloud.baremetal.v1alpha.ServerService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetServerRequest
-	1,  // 21: yandex.cloud.baremetal.v1alpha.ServerService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListServerRequest
-	3,  // 22: yandex.cloud.baremetal.v1alpha.ServerService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateServerRequest
-	22, // 23: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:input_type -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
-	5,  // 24: yandex.cloud.baremetal.v1alpha.ServerService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateServerRequest
-	11, // 25: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:input_type -> yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
-	13, // 26: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:input_type -> yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
-	15, // 27: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:input_type -> yandex.cloud.baremetal.v1alpha.RebootServerRequest
-	17, // 28: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:input_type -> yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
-	19, // 29: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
-	26, // 30: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StartProlongationRequest
-	27, // 31: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StopProlongationRequest
-	32, // 32: yandex.cloud.baremetal.v1alpha.ServerService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Server
-	2,  // 33: yandex.cloud.baremetal.v1alpha.ServerService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListServerResponse
-	40, // 34: yandex.cloud.baremetal.v1alpha.ServerService.Create:output_type -> yandex.cloud.operation.Operation
-	40, // 35: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:output_type -> yandex.cloud.operation.Operation
-	40, // 36: yandex.cloud.baremetal.v1alpha.ServerService.Update:output_type -> yandex.cloud.operation.Operation
-	40, // 37: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:output_type -> yandex.cloud.operation.Operation
-	40, // 38: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:output_type -> yandex.cloud.operation.Operation
-	40, // 39: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:output_type -> yandex.cloud.operation.Operation
-	40, // 40: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:output_type -> yandex.cloud.operation.Operation
-	20, // 41: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
-	40, // 42: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:output_type -> yandex.cloud.operation.Operation
-	40, // 43: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:output_type -> yandex.cloud.operation.Operation
-	32, // [32:44] is the sub-list for method output_type
-	20, // [20:32] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	33, // 0: yandex.cloud.baremetal.v1alpha.ListServerResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
+	7,  // 1: yandex.cloud.baremetal.v1alpha.CreateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
+	8,  // 2: yandex.cloud.baremetal.v1alpha.CreateServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	30, // 3: yandex.cloud.baremetal.v1alpha.CreateServerRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntry
+	34, // 4: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	7,  // 5: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
+	31, // 6: yandex.cloud.baremetal.v1alpha.UpdateServerRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntry
+	35, // 7: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.private_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterface
+	36, // 8: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_subnet:type_name -> yandex.cloud.baremetal.v1alpha.PublicSubnetNetworkInterface
+	37, // 9: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.private_interface:type_name -> yandex.cloud.baremetal.v1alpha.PrivateNetworkInterface
+	38, // 10: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.public_interface:type_name -> yandex.cloud.baremetal.v1alpha.PublicNetworkInterface
+	39, // 11: yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec.configuration_network_interface_id:type_name -> google.protobuf.StringValue
+	22, // 12: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v1alpha.LockboxSecret
+	40, // 13: yandex.cloud.baremetal.v1alpha.OsSettingsSpec.storages:type_name -> yandex.cloud.baremetal.v1alpha.Storage
+	0,  // 14: yandex.cloud.baremetal.v1alpha.RebootServerRequest.reboot_mode:type_name -> yandex.cloud.baremetal.v1alpha.RebootMode
+	8,  // 15: yandex.cloud.baremetal.v1alpha.ReinstallServerRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	41, // 16: yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	7,  // 17: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.network_interfaces:type_name -> yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpec
+	8,  // 18: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.os_settings_spec:type_name -> yandex.cloud.baremetal.v1alpha.OsSettingsSpec
+	32, // 19: yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntry
+	33, // 20: yandex.cloud.baremetal.v1alpha.BatchCreateServersResponse.servers:type_name -> yandex.cloud.baremetal.v1alpha.Server
+	1,  // 21: yandex.cloud.baremetal.v1alpha.ServerService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetServerRequest
+	2,  // 22: yandex.cloud.baremetal.v1alpha.ServerService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListServerRequest
+	4,  // 23: yandex.cloud.baremetal.v1alpha.ServerService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateServerRequest
+	23, // 24: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:input_type -> yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest
+	6,  // 25: yandex.cloud.baremetal.v1alpha.ServerService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateServerRequest
+	12, // 26: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:input_type -> yandex.cloud.baremetal.v1alpha.PowerOffServerRequest
+	14, // 27: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:input_type -> yandex.cloud.baremetal.v1alpha.PowerOnServerRequest
+	16, // 28: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:input_type -> yandex.cloud.baremetal.v1alpha.RebootServerRequest
+	18, // 29: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:input_type -> yandex.cloud.baremetal.v1alpha.ReinstallServerRequest
+	20, // 30: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsRequest
+	27, // 31: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StartProlongationRequest
+	28, // 32: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:input_type -> yandex.cloud.baremetal.v1alpha.StopProlongationRequest
+	33, // 33: yandex.cloud.baremetal.v1alpha.ServerService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Server
+	3,  // 34: yandex.cloud.baremetal.v1alpha.ServerService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListServerResponse
+	41, // 35: yandex.cloud.baremetal.v1alpha.ServerService.Create:output_type -> yandex.cloud.operation.Operation
+	41, // 36: yandex.cloud.baremetal.v1alpha.ServerService.BatchCreate:output_type -> yandex.cloud.operation.Operation
+	41, // 37: yandex.cloud.baremetal.v1alpha.ServerService.Update:output_type -> yandex.cloud.operation.Operation
+	41, // 38: yandex.cloud.baremetal.v1alpha.ServerService.PowerOff:output_type -> yandex.cloud.operation.Operation
+	41, // 39: yandex.cloud.baremetal.v1alpha.ServerService.PowerOn:output_type -> yandex.cloud.operation.Operation
+	41, // 40: yandex.cloud.baremetal.v1alpha.ServerService.Reboot:output_type -> yandex.cloud.operation.Operation
+	41, // 41: yandex.cloud.baremetal.v1alpha.ServerService.Reinstall:output_type -> yandex.cloud.operation.Operation
+	21, // 42: yandex.cloud.baremetal.v1alpha.ServerService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListServerOperationsResponse
+	41, // 43: yandex.cloud.baremetal.v1alpha.ServerService.StartProlongation:output_type -> yandex.cloud.operation.Operation
+	41, // 44: yandex.cloud.baremetal.v1alpha.ServerService.StopProlongation:output_type -> yandex.cloud.operation.Operation
+	33, // [33:45] is the sub-list for method output_type
+	21, // [21:33] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_server_service_proto_init() }
@@ -2218,13 +2293,14 @@ func file_yandex_cloud_baremetal_v1alpha_server_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v1alpha_server_service_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v1alpha_server_service_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_baremetal_v1alpha_server_service_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_baremetal_v1alpha_server_service_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_baremetal_v1alpha_server_service_proto = out.File

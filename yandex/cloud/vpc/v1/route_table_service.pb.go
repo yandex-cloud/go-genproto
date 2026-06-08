@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -30,6 +29,8 @@ type GetRouteTableRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RouteTable resource to return.
 	// To get the route table ID use a [RouteTableService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	RouteTableId  string `protobuf:"bytes,1,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,20 +77,25 @@ type ListRouteTablesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder that the route table belongs to.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListRouteTablesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListRouteTablesResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [RouteTable.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -216,15 +222,26 @@ type CreateRouteTableRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder that the route table belongs to.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the route table.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the route table.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels, “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the network the route table belongs to.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// List of static routes.
 	StaticRoutes  []*StaticRoute `protobuf:"bytes,6,rep,name=static_routes,json=staticRoutes,proto3" json:"static_routes,omitempty"`
@@ -352,15 +369,24 @@ func (x *CreateRouteTableMetadata) GetRouteTableId() string {
 type UpdateRouteTableRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RouteTable resource to update.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	RouteTableId string `protobuf:"bytes,1,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	// Field mask that specifies which fields of the RouteTable resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the route table.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the route table.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// List of static routes.
 	StaticRoutes  []*StaticRoute `protobuf:"bytes,6,rep,name=static_routes,json=staticRoutes,proto3" json:"static_routes,omitempty"`
@@ -489,6 +515,8 @@ type DeleteRouteTableRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the route table to delete.
 	// To get the route table ID use a [RouteTableService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	RouteTableId  string `protobuf:"bytes,1,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -579,13 +607,17 @@ func (x *DeleteRouteTableMetadata) GetRouteTableId() string {
 type ListRouteTableOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RouteTable resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	RouteTableId string `protobuf:"bytes,1,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListRouteTableOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListRouteTableOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -702,8 +734,12 @@ func (x *ListRouteTableOperationsResponse) GetNextPageToken() string {
 type MoveRouteTableRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the RouteTable resource to move.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	RouteTableId string `protobuf:"bytes,1,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	// ID of the destination folder.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -802,64 +838,61 @@ var File_yandex_cloud_vpc_v1_route_table_service_proto protoreflect.FileDescript
 
 const file_yandex_cloud_vpc_v1_route_table_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/vpc/v1/route_table_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a%yandex/cloud/vpc/v1/route_table.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"J\n" +
-	"\x14GetRouteTableRequest\x122\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frouteTableId\"\xba\x01\n" +
-	"\x16ListRouteTablesRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"-yandex/cloud/vpc/v1/route_table_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a%yandex/cloud/vpc/v1/route_table.proto\"<\n" +
+	"\x14GetRouteTableRequest\x12$\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"\x89\x01\n" +
+	"\x16ListRouteTablesRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\x85\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x85\x01\n" +
 	"\x17ListRouteTablesResponse\x12B\n" +
 	"\froute_tables\x18\x01 \x03(\v2\x1f.yandex.cloud.vpc.v1.RouteTableR\vrouteTables\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf4\x03\n" +
-	"\x17CreateRouteTableRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
-	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8d\x01\n" +
-	"\x06labels\x18\x04 \x03(\v28.yandex.cloud.vpc.v1.CreateRouteTableRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xdf\x02\n" +
+	"\x17CreateRouteTableRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12P\n" +
+	"\x06labels\x18\x04 \x03(\v28.yandex.cloud.vpc.v1.CreateRouteTableRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12E\n" +
+	"network_id\x18\x05 \x01(\tR\tnetworkId\x12E\n" +
 	"\rstatic_routes\x18\x06 \x03(\v2 .yandex.cloud.vpc.v1.StaticRouteR\fstaticRoutes\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"@\n" +
 	"\x18CreateRouteTableMetadata\x12$\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"\x8d\x04\n" +
-	"\x17UpdateRouteTableRequest\x122\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frouteTableId\x12;\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"\x86\x03\n" +
+	"\x17UpdateRouteTableRequest\x12$\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
-	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8d\x01\n" +
-	"\x06labels\x18\x05 \x03(\v28.yandex.cloud.vpc.v1.UpdateRouteTableRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12E\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12P\n" +
+	"\x06labels\x18\x05 \x03(\v28.yandex.cloud.vpc.v1.UpdateRouteTableRequest.LabelsEntryR\x06labels\x12E\n" +
 	"\rstatic_routes\x18\x06 \x03(\v2 .yandex.cloud.vpc.v1.StaticRouteR\fstaticRoutes\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"@\n" +
 	"\x18UpdateRouteTableMetadata\x12$\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"M\n" +
-	"\x17DeleteRouteTableRequest\x122\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frouteTableId\"@\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"?\n" +
+	"\x17DeleteRouteTableRequest\x12$\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"@\n" +
 	"\x18DeleteRouteTableMetadata\x12$\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"\xa8\x01\n" +
-	"\x1fListRouteTableOperationsRequest\x122\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frouteTableId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\"\x83\x01\n" +
+	"\x1fListRouteTableOperationsRequest\x12$\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8d\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8d\x01\n" +
 	" ListRouteTableOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8d\x01\n" +
-	"\x15MoveRouteTableRequest\x122\n" +
-	"\x0eroute_table_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\frouteTableId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\">\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"q\n" +
+	"\x15MoveRouteTableRequest\x12$\n" +
+	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\">\n" +
 	"\x16MoveRouteTableMetadata\x12$\n" +
 	"\x0eroute_table_id\x18\x01 \x01(\tR\frouteTableId2\x9f\t\n" +
 	"\x11RouteTableService\x12\x7f\n" +
@@ -876,7 +909,7 @@ const file_yandex_cloud_vpc_v1_route_table_service_proto_rawDesc = "" +
 	"\x0eListOperations\x124.yandex.cloud.vpc.v1.ListRouteTableOperationsRequest\x1a5.yandex.cloud.vpc.v1.ListRouteTableOperationsResponse\"7\x82\xd3\xe4\x93\x021\x12//vpc/v1/routeTables/{route_table_id}/operations\x12\xb3\x01\n" +
 	"\x04Move\x12*.yandex.cloud.vpc.v1.MoveRouteTableRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*$\n" +
 	"\x16MoveRouteTableMetadata\x12\n" +
-	"RouteTable\x82\xd3\xe4\x93\x02.:\x01*\")/vpc/v1/routeTables/{route_table_id}:moveBV\n" +
+	"RouteTable\x82\xd3\xe4\x93\x02.:\x01*\")/vpc/v1/routeTables/{route_table_id}/moveBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 
 var (

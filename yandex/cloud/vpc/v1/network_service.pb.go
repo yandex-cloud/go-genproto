@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -30,6 +29,8 @@ type GetNetworkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to return.
 	// To get the network ID, use a [NetworkService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId     string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -76,20 +77,25 @@ type ListNetworksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list networks in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListNetworksResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListNetworksResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on the [Network.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -216,13 +222,22 @@ type CreateNetworkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder for this request to create a network in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the network.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the network.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels        map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -335,15 +350,24 @@ type UpdateNetworkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to update.
 	// To get the network ID use a [NetworkService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Field mask that specifies which fields of the Network resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the network.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the network.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -463,6 +487,8 @@ type DeleteNetworkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to update.
 	// To get the network ID, use a [NetworkService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId     string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -553,15 +579,19 @@ func (x *DeleteNetworkMetadata) GetNetworkId() string {
 type ListNetworkSubnetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to list subnets for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListNetworkSubnetsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set [page_token]
 	// to the [ListNetworkSubnetsResponse.next_page_token]
 	// returned by a previous list request to get the next page of results.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -680,15 +710,19 @@ func (x *ListNetworkSubnetsResponse) GetNextPageToken() string {
 type ListNetworkSecurityGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to list security groups for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListNetworkSecurityGroupsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set [page_token]
 	// to the [ListNetworkSecurityGroupsResponse.next_page_token]
 	// returned by a previous list request to get the next page of results.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -807,15 +841,19 @@ func (x *ListNetworkSecurityGroupsResponse) GetNextPageToken() string {
 type ListNetworkRouteTablesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to list route tables for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListNetworkRouteTablesResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set [page_token]
 	// to the [ListNetworkRouteTablesResponse.next_page_token]
 	// returned by a previous list request to get the next page of results.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -934,13 +972,17 @@ func (x *ListNetworkRouteTablesResponse) GetNextPageToken() string {
 type ListNetworkOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListNetworkOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListNetworkOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1057,8 +1099,12 @@ func (x *ListNetworkOperationsResponse) GetNextPageToken() string {
 type MoveNetworkRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Network resource to move.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,1,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// ID of the destination folder.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1157,98 +1203,92 @@ var File_yandex_cloud_vpc_v1_network_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_network_service_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/vpc/v1/network_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a!yandex/cloud/vpc/v1/network.proto\x1a yandex/cloud/vpc/v1/subnet.proto\x1a(yandex/cloud/vpc/v1/security_group.proto\x1a%yandex/cloud/vpc/v1/route_table.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
-	"\x11GetNetworkRequest\x12+\n" +
+	")yandex/cloud/vpc/v1/network_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a!yandex/cloud/vpc/v1/network.proto\x1a%yandex/cloud/vpc/v1/route_table.proto\x1a(yandex/cloud/vpc/v1/security_group.proto\x1a yandex/cloud/vpc/v1/subnet.proto\"2\n" +
+	"\x11GetNetworkRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\"\xb7\x01\n" +
-	"\x13ListNetworksRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\"\x86\x01\n" +
+	"\x13ListNetworksRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"x\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"x\n" +
 	"\x14ListNetworksResponse\x128\n" +
 	"\bnetworks\x18\x01 \x03(\v2\x1c.yandex.cloud.vpc.v1.NetworkR\bnetworks\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfa\x02\n" +
-	"\x14CreateNetworkRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
-	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
-	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateNetworkRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf3\x01\n" +
+	"\x14CreateNetworkRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.vpc.v1.CreateNetworkRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
 	"\x15CreateNetworkMetadata\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\"\xb9\x03\n" +
-	"\x14UpdateNetworkRequest\x12+\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\"\xb2\x02\n" +
+	"\x14UpdateNetworkRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12;\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
-	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
-	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateNetworkRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12M\n" +
+	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.vpc.v1.UpdateNetworkRequest.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"6\n" +
 	"\x15UpdateNetworkMetadata\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\"C\n" +
-	"\x14DeleteNetworkRequest\x12+\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\"5\n" +
+	"\x14DeleteNetworkRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\"6\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\"6\n" +
 	"\x15DeleteNetworkMetadata\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tR\tnetworkId\"\x9b\x01\n" +
-	"\x19ListNetworkSubnetsRequest\x12+\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\"v\n" +
+	"\x19ListNetworkSubnetsRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"{\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"{\n" +
 	"\x1aListNetworkSubnetsResponse\x125\n" +
 	"\asubnets\x18\x01 \x03(\v2\x1b.yandex.cloud.vpc.v1.SubnetR\asubnets\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa2\x01\n" +
-	" ListNetworkSecurityGroupsRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"}\n" +
+	" ListNetworkSecurityGroupsRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x98\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x98\x01\n" +
 	"!ListNetworkSecurityGroupsResponse\x12K\n" +
 	"\x0fsecurity_groups\x18\x01 \x03(\v2\".yandex.cloud.vpc.v1.SecurityGroupR\x0esecurityGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9f\x01\n" +
-	"\x1dListNetworkRouteTablesRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"z\n" +
+	"\x1dListNetworkRouteTablesRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8c\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8c\x01\n" +
 	"\x1eListNetworkRouteTablesResponse\x12B\n" +
 	"\froute_tables\x18\x01 \x03(\v2\x1f.yandex.cloud.vpc.v1.RouteTableR\vrouteTables\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9e\x01\n" +
-	"\x1cListNetworkOperationsRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"y\n" +
+	"\x1cListNetworkOperationsRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8a\x01\n" +
 	"\x1dListNetworkOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x83\x01\n" +
-	"\x12MoveNetworkRequest\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"g\n" +
+	"\x12MoveNetworkRequest\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"4\n" +
+	"network_id\x18\x01 \x01(\tR\tnetworkId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"4\n" +
 	"\x13MoveNetworkMetadata\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tR\tnetworkId2\xce\f\n" +
@@ -1266,7 +1306,7 @@ const file_yandex_cloud_vpc_v1_network_service_proto_rawDesc = "" +
 	"\x0fListRouteTables\x122.yandex.cloud.vpc.v1.ListNetworkRouteTablesRequest\x1a3.yandex.cloud.vpc.v1.ListNetworkRouteTablesResponse\"2\x82\xd3\xe4\x93\x02,\x12*/vpc/v1/networks/{network_id}/route_tables\x12\xa9\x01\n" +
 	"\x0eListOperations\x121.yandex.cloud.vpc.v1.ListNetworkOperationsRequest\x1a2.yandex.cloud.vpc.v1.ListNetworkOperationsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/vpc/v1/networks/{network_id}/operations\x12\xa3\x01\n" +
 	"\x04Move\x12'.yandex.cloud.vpc.v1.MoveNetworkRequest\x1a!.yandex.cloud.operation.Operation\"O\xb2\xd2*\x1e\n" +
-	"\x13MoveNetworkMetadata\x12\aNetwork\x82\xd3\xe4\x93\x02':\x01*\"\"/vpc/v1/networks/{network_id}:moveBV\n" +
+	"\x13MoveNetworkMetadata\x12\aNetwork\x82\xd3\xe4\x93\x02':\x01*\"\"/vpc/v1/networks/{network_id}/moveBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 
 var (
@@ -1353,9 +1393,9 @@ func file_yandex_cloud_vpc_v1_network_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_vpc_v1_network_proto_init()
-	file_yandex_cloud_vpc_v1_subnet_proto_init()
-	file_yandex_cloud_vpc_v1_security_group_proto_init()
 	file_yandex_cloud_vpc_v1_route_table_proto_init()
+	file_yandex_cloud_vpc_v1_security_group_proto_init()
+	file_yandex_cloud_vpc_v1_subnet_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

@@ -31,7 +31,7 @@ type FederatedCredential struct {
 	ServiceAccountId string `protobuf:"bytes,2,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// ID of the workload identity federation which is used for authentication.
 	FederationId string `protobuf:"bytes,3,opt,name=federation_id,json=federationId,proto3" json:"federation_id,omitempty"`
-	// Id of the external subject.
+	// Id of the external subject (exact match).
 	ExternalSubjectId string `protobuf:"bytes,4,opt,name=external_subject_id,json=externalSubjectId,proto3" json:"external_subject_id,omitempty"`
 	// Creation timestamp.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`

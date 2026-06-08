@@ -144,6 +144,10 @@ func (m *ConfigSpec) SetGreenplumConfig_6(v *GreenplumConfig6) {
 	}
 }
 
+func (m *ConfigSpec) SetDbmsConfig(v *DBMSConfig) {
+	m.DbmsConfig = v
+}
+
 func (m *ConfigSpec) SetPool(v *ConnectionPoolerConfig) {
 	m.Pool = v
 }

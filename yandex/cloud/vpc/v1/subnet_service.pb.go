@@ -7,7 +7,6 @@
 package vpc
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	reference "github.com/yandex-cloud/go-genproto/yandex/cloud/reference"
@@ -31,6 +30,8 @@ type GetSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource to return.
 	// To get the subnet ID use a [SubnetService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId      string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -77,20 +78,25 @@ type ListSubnetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list subnets in.
 	// To get the folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size],
 	// the service returns a [ListSubnetsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSubnetsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [Subnet.name] field.
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 3-63 characters long and match the regular expression `[a-z][-a-z0-9]{1,61}[a-z0-9]`.
+	// The length must be less than or equal to 1000.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -217,18 +223,31 @@ type CreateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a subnet in.
 	// To get folder ID use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the subnet.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the subnet.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels, “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the network to create subnet in.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// ID of the availability zone where the subnet resides.
 	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	ZoneId string `protobuf:"bytes,6,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// CIDR block.
 	// The range of internal addresses that are defined for this subnet.
@@ -236,6 +255,7 @@ type CreateSubnetRequest struct {
 	// Minimum subnet size is /28, maximum subnet size is /16.
 	V4CidrBlocks []string `protobuf:"bytes,7,rep,name=v4_cidr_blocks,json=v4CidrBlocks,proto3" json:"v4_cidr_blocks,omitempty"`
 	// ID of route table the subnet is linked to.
+	// The length must be less than or equal to 50.
 	RouteTableId  string       `protobuf:"bytes,9,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	DhcpOptions   *DhcpOptions `protobuf:"bytes,10,opt,name=dhcp_options,json=dhcpOptions,proto3" json:"dhcp_options,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -383,17 +403,27 @@ func (x *CreateSubnetMetadata) GetSubnetId() string {
 type UpdateSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource to update.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Field mask that specifies which fields of the Subnet resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Name of the subnet.
 	// The name must be unique within the folder.
+	// The value must match the regular expression: `|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the subnet.
+	// The length must be less than or equal to 256.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
+	// Each map key must match the regular expression: `[a-z][-_0-9a-z]*`.
+	// Each map value must match the regular expression: `[-_0-9a-z]*`.
+	// The length of each map key must be between 1 and 63.
+	// The length of each map value must be less than or equal to 63.
+	// The number of elements must be less than or equal to 64.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of route table the subnet is linked to.
+	// The length must be less than or equal to 50.
 	RouteTableId string       `protobuf:"bytes,6,opt,name=route_table_id,json=routeTableId,proto3" json:"route_table_id,omitempty"`
 	DhcpOptions  *DhcpOptions `protobuf:"bytes,7,opt,name=dhcp_options,json=dhcpOptions,proto3" json:"dhcp_options,omitempty"`
 	// New CIDR blocks which will overwrite the existing ones.
@@ -536,6 +566,8 @@ func (x *UpdateSubnetMetadata) GetSubnetId() string {
 type AddSubnetCidrBlocksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource that is being updated.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// CIDR block.
 	// The range of internal addresses that should be added to this subnet.
@@ -638,6 +670,8 @@ func (x *AddSubnetCidrBlocksMetadata) GetSubnetId() string {
 type RemoveSubnetCidrBlocksRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource that is being updated.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// CIDR block.
 	// The range of internal addresses that are removed from this subnet.
@@ -739,6 +773,8 @@ type DeleteSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subnet to delete.
 	// To get the subnet ID use a [SubnetService.List] request.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId      string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -829,13 +865,17 @@ func (x *DeleteSubnetMetadata) GetSubnetId() string {
 type ListSubnetOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource to list operations for.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than [page_size], the service returns a [ListSubnetOperationsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests. Default value: 100.
+	// The value must be less than or equal to 1000.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListSubnetOperationsResponse.next_page_token] returned by a previous list request.
+	// The length must be less than or equal to 100.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -952,8 +992,12 @@ func (x *ListSubnetOperationsResponse) GetNextPageToken() string {
 type MoveSubnetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Subnet resource to move.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// ID of the destination folder.
+	// The length must be less than or equal to 50.
+	// This field is required.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
@@ -1049,11 +1093,12 @@ func (x *MoveSubnetMetadata) GetSubnetId() string {
 }
 
 type ListUsedAddressesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubnetId      string                 `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	PageSize      int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Filter        string                 `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// This field is required.
+	SubnetId      string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	PageSize      int64  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1229,9 +1274,12 @@ func (x *UsedAddress) GetReferences() []*reference.Reference {
 }
 
 type RelocateSubnetRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	SubnetId          string                 `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	DestinationZoneId string                 `protobuf:"bytes,2,opt,name=destination_zone_id,json=destinationZoneId,proto3" json:"destination_zone_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The length must be less than or equal to 50.
+	// This field is required.
+	SubnetId string `protobuf:"bytes,1,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	// This field is required.
+	DestinationZoneId string `protobuf:"bytes,2,opt,name=destination_zone_id,json=destinationZoneId,proto3" json:"destination_zone_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1328,84 +1376,81 @@ var File_yandex_cloud_vpc_v1_subnet_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_vpc_v1_subnet_service_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/vpc/v1/subnet_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a&yandex/cloud/reference/reference.proto\x1a\x1dyandex/cloud/validation.proto\x1a yandex/cloud/vpc/v1/subnet.proto\"=\n" +
-	"\x10GetSubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\"\xb6\x01\n" +
-	"\x12ListSubnetsRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"(yandex/cloud/vpc/v1/subnet_service.proto\x12\x13yandex.cloud.vpc.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a&yandex/cloud/reference/reference.proto\x1a yandex/cloud/vpc/v1/subnet.proto\"/\n" +
+	"\x10GetSubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\x85\x01\n" +
+	"\x12ListSubnetsRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
-	"\x06filter\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"t\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
+	"\x06filter\x18\x04 \x01(\tR\x06filter\"t\n" +
 	"\x13ListSubnetsResponse\x125\n" +
 	"\asubnets\x18\x01 \x03(\v2\x1b.yandex.cloud.vpc.v1.SubnetR\asubnets\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf3\x04\n" +
-	"\x13CreateSubnetRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12B\n" +
-	"\x04name\x18\x02 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x89\x01\n" +
-	"\x06labels\x18\x04 \x03(\v24.yandex.cloud.vpc.v1.CreateSubnetRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12+\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc0\x03\n" +
+	"\x13CreateSubnetRequest\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12L\n" +
+	"\x06labels\x18\x04 \x03(\v24.yandex.cloud.vpc.v1.CreateSubnetRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x05 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
-	"\azone_id\x18\x06 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x06zoneId\x12*\n" +
-	"\x0ev4_cidr_blocks\x18\a \x03(\tB\x04\xe8\xc71\x01R\fv4CidrBlocks\x12.\n" +
-	"\x0eroute_table_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\frouteTableId\x12C\n" +
+	"network_id\x18\x05 \x01(\tR\tnetworkId\x12\x17\n" +
+	"\azone_id\x18\x06 \x01(\tR\x06zoneId\x12$\n" +
+	"\x0ev4_cidr_blocks\x18\a \x03(\tR\fv4CidrBlocks\x12$\n" +
+	"\x0eroute_table_id\x18\t \x01(\tR\frouteTableId\x12C\n" +
 	"\fdhcp_options\x18\n" +
 	" \x01(\v2 .yandex.cloud.vpc.v1.DhcpOptionsR\vdhcpOptions\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"3\n" +
 	"\x14CreateSubnetMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\xd0\x04\n" +
-	"\x13UpdateSubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12;\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\xbf\x03\n" +
+	"\x13UpdateSubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
-	"\x04name\x18\x03 \x01(\tB.\xf2\xc71*|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x89\x01\n" +
-	"\x06labels\x18\x05 \x03(\v24.yandex.cloud.vpc.v1.UpdateSubnetRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12.\n" +
-	"\x0eroute_table_id\x18\x06 \x01(\tB\b\x8a\xc81\x04<=50R\frouteTableId\x12C\n" +
+	"updateMask\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12L\n" +
+	"\x06labels\x18\x05 \x03(\v24.yandex.cloud.vpc.v1.UpdateSubnetRequest.LabelsEntryR\x06labels\x12$\n" +
+	"\x0eroute_table_id\x18\x06 \x01(\tR\frouteTableId\x12C\n" +
 	"\fdhcp_options\x18\a \x01(\v2 .yandex.cloud.vpc.v1.DhcpOptionsR\vdhcpOptions\x12$\n" +
 	"\x0ev4_cidr_blocks\x18\b \x03(\tR\fv4CidrBlocks\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"3\n" +
 	"\x14UpdateSubnetMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"m\n" +
-	"\x1aAddSubnetCidrBlocksRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12$\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"_\n" +
+	"\x1aAddSubnetCidrBlocksRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12$\n" +
 	"\x0ev4_cidr_blocks\x18\x02 \x03(\tR\fv4CidrBlocks\":\n" +
 	"\x1bAddSubnetCidrBlocksMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"p\n" +
-	"\x1dRemoveSubnetCidrBlocksRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12$\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"b\n" +
+	"\x1dRemoveSubnetCidrBlocksRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12$\n" +
 	"\x0ev4_cidr_blocks\x18\x02 \x03(\tR\fv4CidrBlocks\"=\n" +
 	"\x1eRemoveSubnetCidrBlocksMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"@\n" +
-	"\x13DeleteSubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\"3\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"2\n" +
+	"\x13DeleteSubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"3\n" +
 	"\x14DeleteSubnetMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\x9b\x01\n" +
-	"\x1bListSubnetOperationsRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12'\n" +
-	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"v\n" +
+	"\x1bListSubnetOperationsRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x89\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x89\x01\n" +
 	"\x1cListSubnetOperationsResponse\x12A\n" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x80\x01\n" +
-	"\x11MoveSubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x12@\n" +
-	"\x15destination_folder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x13destinationFolderId\"1\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"d\n" +
+	"\x11MoveSubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x122\n" +
+	"\x15destination_folder_id\x18\x02 \x01(\tR\x13destinationFolderId\"1\n" +
 	"\x12MoveSubnetMetadata\x12\x1b\n" +
-	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\x91\x01\n" +
-	"\x18ListUsedAddressesRequest\x12!\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bsubnetId\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\"\x8b\x01\n" +
+	"\x18ListUsedAddressesRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tR\tpageToken\x12\x16\n" +
@@ -1419,10 +1464,10 @@ const file_yandex_cloud_vpc_v1_subnet_service_proto_rawDesc = "" +
 	"ip_version\x18\x02 \x01(\x0e2\x1e.yandex.cloud.vpc.v1.IpVersionR\tipVersion\x12A\n" +
 	"\n" +
 	"references\x18\x03 \x03(\v2!.yandex.cloud.reference.ReferenceR\n" +
-	"references\"x\n" +
-	"\x15RelocateSubnetRequest\x12)\n" +
-	"\tsubnet_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsubnetId\x124\n" +
-	"\x13destination_zone_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x11destinationZoneId\"5\n" +
+	"references\"d\n" +
+	"\x15RelocateSubnetRequest\x12\x1b\n" +
+	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId\x12.\n" +
+	"\x13destination_zone_id\x18\x02 \x01(\tR\x11destinationZoneId\"5\n" +
 	"\x16RelocateSubnetMetadata\x12\x1b\n" +
 	"\tsubnet_id\x18\x01 \x01(\tR\bsubnetId2\x80\x0e\n" +
 	"\rSubnetService\x12n\n" +
@@ -1433,16 +1478,16 @@ const file_yandex_cloud_vpc_v1_subnet_service_proto_rawDesc = "" +
 	"\x06Update\x12(.yandex.cloud.vpc.v1.UpdateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"H\xb2\xd2*\x1e\n" +
 	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02 :\x01*2\x1b/vpc/v1/subnets/{subnet_id}\x12\xbd\x01\n" +
 	"\rAddCidrBlocks\x12/.yandex.cloud.vpc.v1.AddSubnetCidrBlocksRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2*\x1e\n" +
-	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x020:\x01*\"+/vpc/v1/subnets/{subnet_id}:add-cidr-blocks\x12\xc6\x01\n" +
+	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x020:\x01*\"+/vpc/v1/subnets/{subnet_id}/add-cidr-blocks\x12\xc6\x01\n" +
 	"\x10RemoveCidrBlocks\x122.yandex.cloud.vpc.v1.RemoveSubnetCidrBlocksRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*\x1e\n" +
-	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x023:\x01*\"./vpc/v1/subnets/{subnet_id}:remove-cidr-blocks\x12\xab\x01\n" +
+	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x023:\x01*\"./vpc/v1/subnets/{subnet_id}/delete-cidr-blocks\x12\xae\x01\n" +
+	"\bRelocate\x12*.yandex.cloud.vpc.v1.RelocateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2* \n" +
+	"\x16RelocateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02):\x01*\"$/vpc/v1/subnets/{subnet_id}:relocate\x12\xab\x01\n" +
 	"\x06Delete\x12(.yandex.cloud.vpc.v1.DeleteSubnetRequest\x1a!.yandex.cloud.operation.Operation\"T\xb2\xd2*-\n" +
 	"\x14DeleteSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1d*\x1b/vpc/v1/subnets/{subnet_id}\x12\xa5\x01\n" +
 	"\x0eListOperations\x120.yandex.cloud.vpc.v1.ListSubnetOperationsRequest\x1a1.yandex.cloud.vpc.v1.ListSubnetOperationsResponse\".\x82\xd3\xe4\x93\x02(\x12&/vpc/v1/subnets/{subnet_id}/operations\x12\x9e\x01\n" +
 	"\x04Move\x12&.yandex.cloud.vpc.v1.MoveSubnetRequest\x1a!.yandex.cloud.operation.Operation\"K\xb2\xd2*\x1c\n" +
-	"\x12MoveSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02%:\x01*\" /vpc/v1/subnets/{subnet_id}:move\x12\xae\x01\n" +
-	"\bRelocate\x12*.yandex.cloud.vpc.v1.RelocateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2* \n" +
-	"\x16RelocateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02):\x01*\"$/vpc/v1/subnets/{subnet_id}:relocate\x12\xa1\x01\n" +
+	"\x12MoveSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02%:\x01*\" /vpc/v1/subnets/{subnet_id}/move\x12\xa1\x01\n" +
 	"\x11ListUsedAddresses\x12-.yandex.cloud.vpc.v1.ListUsedAddressesRequest\x1a..yandex.cloud.vpc.v1.ListUsedAddressesResponse\"-\x82\xd3\xe4\x93\x02'\x12%/vpc/v1/subnets/{subnet_id}/addressesBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 
@@ -1508,10 +1553,10 @@ var file_yandex_cloud_vpc_v1_subnet_service_proto_depIdxs = []int32{
 	5,  // 13: yandex.cloud.vpc.v1.SubnetService.Update:input_type -> yandex.cloud.vpc.v1.UpdateSubnetRequest
 	7,  // 14: yandex.cloud.vpc.v1.SubnetService.AddCidrBlocks:input_type -> yandex.cloud.vpc.v1.AddSubnetCidrBlocksRequest
 	9,  // 15: yandex.cloud.vpc.v1.SubnetService.RemoveCidrBlocks:input_type -> yandex.cloud.vpc.v1.RemoveSubnetCidrBlocksRequest
-	11, // 16: yandex.cloud.vpc.v1.SubnetService.Delete:input_type -> yandex.cloud.vpc.v1.DeleteSubnetRequest
-	13, // 17: yandex.cloud.vpc.v1.SubnetService.ListOperations:input_type -> yandex.cloud.vpc.v1.ListSubnetOperationsRequest
-	15, // 18: yandex.cloud.vpc.v1.SubnetService.Move:input_type -> yandex.cloud.vpc.v1.MoveSubnetRequest
-	20, // 19: yandex.cloud.vpc.v1.SubnetService.Relocate:input_type -> yandex.cloud.vpc.v1.RelocateSubnetRequest
+	20, // 16: yandex.cloud.vpc.v1.SubnetService.Relocate:input_type -> yandex.cloud.vpc.v1.RelocateSubnetRequest
+	11, // 17: yandex.cloud.vpc.v1.SubnetService.Delete:input_type -> yandex.cloud.vpc.v1.DeleteSubnetRequest
+	13, // 18: yandex.cloud.vpc.v1.SubnetService.ListOperations:input_type -> yandex.cloud.vpc.v1.ListSubnetOperationsRequest
+	15, // 19: yandex.cloud.vpc.v1.SubnetService.Move:input_type -> yandex.cloud.vpc.v1.MoveSubnetRequest
 	17, // 20: yandex.cloud.vpc.v1.SubnetService.ListUsedAddresses:input_type -> yandex.cloud.vpc.v1.ListUsedAddressesRequest
 	24, // 21: yandex.cloud.vpc.v1.SubnetService.Get:output_type -> yandex.cloud.vpc.v1.Subnet
 	2,  // 22: yandex.cloud.vpc.v1.SubnetService.List:output_type -> yandex.cloud.vpc.v1.ListSubnetsResponse
@@ -1519,10 +1564,10 @@ var file_yandex_cloud_vpc_v1_subnet_service_proto_depIdxs = []int32{
 	27, // 24: yandex.cloud.vpc.v1.SubnetService.Update:output_type -> yandex.cloud.operation.Operation
 	27, // 25: yandex.cloud.vpc.v1.SubnetService.AddCidrBlocks:output_type -> yandex.cloud.operation.Operation
 	27, // 26: yandex.cloud.vpc.v1.SubnetService.RemoveCidrBlocks:output_type -> yandex.cloud.operation.Operation
-	27, // 27: yandex.cloud.vpc.v1.SubnetService.Delete:output_type -> yandex.cloud.operation.Operation
-	14, // 28: yandex.cloud.vpc.v1.SubnetService.ListOperations:output_type -> yandex.cloud.vpc.v1.ListSubnetOperationsResponse
-	27, // 29: yandex.cloud.vpc.v1.SubnetService.Move:output_type -> yandex.cloud.operation.Operation
-	27, // 30: yandex.cloud.vpc.v1.SubnetService.Relocate:output_type -> yandex.cloud.operation.Operation
+	27, // 27: yandex.cloud.vpc.v1.SubnetService.Relocate:output_type -> yandex.cloud.operation.Operation
+	27, // 28: yandex.cloud.vpc.v1.SubnetService.Delete:output_type -> yandex.cloud.operation.Operation
+	14, // 29: yandex.cloud.vpc.v1.SubnetService.ListOperations:output_type -> yandex.cloud.vpc.v1.ListSubnetOperationsResponse
+	27, // 30: yandex.cloud.vpc.v1.SubnetService.Move:output_type -> yandex.cloud.operation.Operation
 	18, // 31: yandex.cloud.vpc.v1.SubnetService.ListUsedAddresses:output_type -> yandex.cloud.vpc.v1.ListUsedAddressesResponse
 	21, // [21:32] is the sub-list for method output_type
 	10, // [10:21] is the sub-list for method input_type

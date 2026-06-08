@@ -1859,7 +1859,7 @@ type isMetastore_HiveMetastore_Connection interface {
 }
 
 type Metastore_HiveMetastore_Uri struct {
-	// URI or cluster ID of the Hive Metastore.
+	// URI of the Hive Metastore.
 	Uri string `protobuf:"bytes,1,opt,name=uri,proto3,oneof"`
 }
 

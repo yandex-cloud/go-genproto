@@ -224,6 +224,10 @@ func (m *RebootServerRequest) SetServerId(v string) {
 	m.ServerId = v
 }
 
+func (m *RebootServerRequest) SetRebootMode(v RebootMode) {
+	m.RebootMode = v
+}
+
 func (m *RebootServerMetadata) SetServerId(v string) {
 	m.ServerId = v
 }

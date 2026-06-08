@@ -154,7 +154,7 @@ type Image struct {
 	// the [yandex.cloud.compute.v1.ImageService.GetLatestByFamily] request
 	// and create the disk from this image.
 	Family string `protobuf:"bytes,7,opt,name=family,proto3" json:"family,omitempty"`
-	// The size of the image, specified in bytes.
+	// The storage size of the image, specified in bytes.
 	StorageSize int64 `protobuf:"varint,8,opt,name=storage_size,json=storageSize,proto3" json:"storage_size,omitempty"`
 	// Minimum size of the disk which will be created from this image.
 	MinDiskSize int64 `protobuf:"varint,9,opt,name=min_disk_size,json=minDiskSize,proto3" json:"min_disk_size,omitempty"`

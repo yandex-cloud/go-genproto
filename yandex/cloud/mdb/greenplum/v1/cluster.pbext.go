@@ -136,6 +136,10 @@ func (m *ClusterConfigSet) SetGreenplumConfigSet_6(v *GreenplumConfigSet6) {
 	}
 }
 
+func (m *ClusterConfigSet) SetDbmsConfigSet(v *DBMSConfigSet) {
+	m.DbmsConfigSet = v
+}
+
 func (m *ClusterConfigSet) SetPool(v *ConnectionPoolerConfigSet) {
 	m.Pool = v
 }

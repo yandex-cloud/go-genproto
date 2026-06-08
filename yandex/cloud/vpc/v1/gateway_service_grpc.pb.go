@@ -34,7 +34,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GatewayServiceClient interface {
 	// Returns the specified Gateway resource.
-	//
 	// To get the list of all available Gateway resources, make a [List] request.
 	Get(ctx context.Context, in *GetGatewayRequest, opts ...grpc.CallOption) (*Gateway, error)
 	// Retrieves the list of Gateway resources in the specified folder.
@@ -134,7 +133,6 @@ func (c *gatewayServiceClient) Move(ctx context.Context, in *MoveGatewayRequest,
 // for forward compatibility.
 type GatewayServiceServer interface {
 	// Returns the specified Gateway resource.
-	//
 	// To get the list of all available Gateway resources, make a [List] request.
 	Get(context.Context, *GetGatewayRequest) (*Gateway, error)
 	// Retrieves the list of Gateway resources in the specified folder.
