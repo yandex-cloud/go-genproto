@@ -2123,23 +2123,23 @@ const file_yandex_cloud_loadbalancer_v1_network_load_balancer_service_proto_rawD
 	"\x06Delete\x12>.yandex.cloud.loadbalancer.v1.DeleteNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x87\x01\xb2\xd2*:\n" +
 	"!DeleteNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}\x12\xf8\x01\n" +
 	"\x05Start\x12=.yandex.cloud.loadbalancer.v1.StartNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*9\n" +
-	" StartNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02I\"G/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/start\x12\xf4\x01\n" +
+	" StartNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02I\"G/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:start\x12\xf4\x01\n" +
 	"\x04Stop\x12<.yandex.cloud.loadbalancer.v1.StopNetworkLoadBalancerRequest\x1a!.yandex.cloud.operation.Operation\"\x8a\x01\xb2\xd2*8\n" +
-	"\x1fStopNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H\"F/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/stop\x12\xa9\x02\n" +
+	"\x1fStopNetworkLoadBalancerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H\"F/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:stop\x12\xa9\x02\n" +
 	"\x11AttachTargetGroup\x12I.yandex.cloud.loadbalancer.v1.AttachNetworkLoadBalancerTargetGroupRequest\x1a!.yandex.cloud.operation.Operation\"\xa5\x01\xb2\xd2*C\n" +
-	",AttachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/attachTargetGroup\x12\xa9\x02\n" +
+	",AttachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:attachTargetGroup\x12\xa9\x02\n" +
 	"\x11DetachTargetGroup\x12I.yandex.cloud.loadbalancer.v1.DetachNetworkLoadBalancerTargetGroupRequest\x1a!.yandex.cloud.operation.Operation\"\xa5\x01\xb2\xd2*C\n" +
-	",DetachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/detachTargetGroup\x12\xd9\x01\n" +
-	"\x0fGetTargetStates\x124.yandex.cloud.loadbalancer.v1.GetTargetStatesRequest\x1a5.yandex.cloud.loadbalancer.v1.GetTargetStatesResponse\"Y\x82\xd3\xe4\x93\x02S\x12Q/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/getTargetStates\x12\x91\x02\n" +
+	",DetachNetworkLoadBalancerTargetGroupMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02X:\x01*\"S/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:detachTargetGroup\x12\xd9\x01\n" +
+	"\x0fGetTargetStates\x124.yandex.cloud.loadbalancer.v1.GetTargetStatesRequest\x1a5.yandex.cloud.loadbalancer.v1.GetTargetStatesResponse\"Y\x82\xd3\xe4\x93\x02S\x12Q/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:getTargetStates\x12\x91\x02\n" +
 	"\vAddListener\x12C.yandex.cloud.loadbalancer.v1.AddNetworkLoadBalancerListenerRequest\x1a!.yandex.cloud.operation.Operation\"\x99\x01\xb2\xd2*=\n" +
-	"&AddNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/addListener\x12\x9d\x02\n" +
+	"&AddNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:addListener\x12\x9d\x02\n" +
 	"\x0eRemoveListener\x12F.yandex.cloud.loadbalancer.v1.RemoveNetworkLoadBalancerListenerRequest\x1a!.yandex.cloud.operation.Operation\"\x9f\x01\xb2\xd2*@\n" +
-	")RemoveNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02U:\x01*\"P/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/removeListener\x12\xf7\x01\n" +
+	")RemoveNetworkLoadBalancerListenerMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02U:\x01*\"P/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:removeListener\x12\xf7\x01\n" +
 	"\x0eListOperations\x12F.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsRequest\x1aG.yandex.cloud.loadbalancer.v1.ListNetworkLoadBalancerOperationsResponse\"T\x82\xd3\xe4\x93\x02N\x12L/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/operations\x12\xef\x01\n" +
 	"\fDisableZones\x121.yandex.cloud.loadbalancer.v1.DisableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*+\n" +
-	"\x14DisableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02S:\x01*\"N/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/disableZones\x12\xeb\x01\n" +
+	"\x14DisableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02S:\x01*\"N/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:disableZones\x12\xeb\x01\n" +
 	"\vEnableZones\x120.yandex.cloud.loadbalancer.v1.EnableZonesRequest\x1a!.yandex.cloud.operation.Operation\"\x86\x01\xb2\xd2**\n" +
-	"\x13EnableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}/enableZonesBq\n" +
+	"\x13EnableZonesMetadata\x12\x13NetworkLoadBalancer\x82\xd3\xe4\x93\x02R:\x01*\"M/load-balancer/v1/networkLoadBalancers/{network_load_balancer_id}:enableZonesBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 
 var (

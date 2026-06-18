@@ -614,27 +614,27 @@ const file_yandex_cloud_cloudregistry_v1_scanner_service_proto_rawDesc = "" +
 	"\x0escan_result_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fscanResultId\"E\n" +
 	"\x18GetLastScanResultRequest\x12)\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
-	"artifactId\"\x8a\x02\n" +
+	"artifactId\"\xff\x01\n" +
 	"\x16ListScanResultsRequest\x12)\n" +
 	"\vartifact_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
 	"artifactId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12L\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12L\n" +
 	"\x06filter\x18\x04 \x01(\v24.yandex.cloud.cloudregistry.v1.ListScanResultsFilterR\x06filter\x12$\n" +
 	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"a\n" +
 	"\x15ListScanResultsFilter\x12H\n" +
 	"\x06status\x18\x01 \x01(\x0e20.yandex.cloud.cloudregistry.v1.ScanResult.StatusR\x06status\"\x8f\x01\n" +
 	"\x17ListScanResultsResponse\x12L\n" +
 	"\fscan_results\x18\x01 \x03(\v2).yandex.cloud.cloudregistry.v1.ScanResultR\vscanResults\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9b\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x90\x02\n" +
 	"\x1aListVulnerabilitiesRequest\x122\n" +
 	"\x0escan_result_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fscanResultId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12P\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x12P\n" +
 	"\x06filter\x18\x04 \x01(\v28.yandex.cloud.cloudregistry.v1.ListVulnerabilitiesFilterR\x06filter\x12$\n" +
 	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x8d\x01\n" +
 	"\x19ListVulnerabilitiesFilter\x12Q\n" +

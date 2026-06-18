@@ -87,8 +87,10 @@ type DesktopGroupConfiguration_DesktopType int32
 
 const (
 	DesktopGroupConfiguration_DESKTOP_TYPE_UNSPECIFIED DesktopGroupConfiguration_DesktopType = 0
-	DesktopGroupConfiguration_PERSISTENT               DesktopGroupConfiguration_DesktopType = 1
-	DesktopGroupConfiguration_NON_PERSISTENT           DesktopGroupConfiguration_DesktopType = 2
+	// Persistent desktop.
+	DesktopGroupConfiguration_PERSISTENT DesktopGroupConfiguration_DesktopType = 1
+	// Non persistent desktop.
+	DesktopGroupConfiguration_NON_PERSISTENT DesktopGroupConfiguration_DesktopType = 2
 )
 
 // Enum value maps for DesktopGroupConfiguration_DesktopType.
@@ -314,10 +316,12 @@ type isDesktopGroup_UpdatePolicy interface {
 }
 
 type DesktopGroup_AutoUpdatePolicy struct {
+	// Update group automatically.
 	AutoUpdatePolicy *AutoUpdatePolicy `protobuf:"bytes,27,opt,name=auto_update_policy,json=autoUpdatePolicy,proto3,oneof"`
 }
 
 type DesktopGroup_ManualUpdatePolicy struct {
+	// Update group manually.
 	ManualUpdatePolicy *ManualUpdatePolicy `protobuf:"bytes,28,opt,name=manual_update_policy,json=manualUpdatePolicy,proto3,oneof"`
 }
 
@@ -620,7 +624,7 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\bUPDATING\x10\x04B\x15\n" +
 	"\rupdate_policy\x12\x04\xc0\xc11\x01J\x04\b\x05\x10\vJ\x04\b\r\x10\x15\"\x8e\x03\n" +
 	"\x19DesktopGroupConfiguration\x127\n" +
-	"\x12min_ready_desktops\x18\x01 \x01(\x03B\t\xfa\xc71\x051-512R\x10minReadyDesktops\x129\n" +
+	"\x12min_ready_desktops\x18\x01 \x01(\x03B\t\xfa\xc71\x050-512R\x10minReadyDesktops\x129\n" +
 	"\x13max_desktops_amount\x18\x02 \x01(\x03B\t\xfa\xc71\x050-512R\x11maxDesktopsAmount\x12j\n" +
 	"\fdesktop_type\x18\x03 \x01(\x0e2G.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopTypeR\vdesktopType\x12@\n" +
 	"\amembers\x18\x04 \x03(\v2\x1c.yandex.cloud.access.SubjectB\b\x82\xc81\x040-10R\amembers\"O\n" +

@@ -1478,16 +1478,16 @@ const file_yandex_cloud_vpc_v1_subnet_service_proto_rawDesc = "" +
 	"\x06Update\x12(.yandex.cloud.vpc.v1.UpdateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"H\xb2\xd2*\x1e\n" +
 	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02 :\x01*2\x1b/vpc/v1/subnets/{subnet_id}\x12\xbd\x01\n" +
 	"\rAddCidrBlocks\x12/.yandex.cloud.vpc.v1.AddSubnetCidrBlocksRequest\x1a!.yandex.cloud.operation.Operation\"X\xb2\xd2*\x1e\n" +
-	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x020:\x01*\"+/vpc/v1/subnets/{subnet_id}/add-cidr-blocks\x12\xc6\x01\n" +
+	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x020:\x01*\"+/vpc/v1/subnets/{subnet_id}:add-cidr-blocks\x12\xc6\x01\n" +
 	"\x10RemoveCidrBlocks\x122.yandex.cloud.vpc.v1.RemoveSubnetCidrBlocksRequest\x1a!.yandex.cloud.operation.Operation\"[\xb2\xd2*\x1e\n" +
-	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x023:\x01*\"./vpc/v1/subnets/{subnet_id}/delete-cidr-blocks\x12\xae\x01\n" +
+	"\x14UpdateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x023:\x01*\"./vpc/v1/subnets/{subnet_id}:remove-cidr-blocks\x12\xae\x01\n" +
 	"\bRelocate\x12*.yandex.cloud.vpc.v1.RelocateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"S\xb2\xd2* \n" +
 	"\x16RelocateSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02):\x01*\"$/vpc/v1/subnets/{subnet_id}:relocate\x12\xab\x01\n" +
 	"\x06Delete\x12(.yandex.cloud.vpc.v1.DeleteSubnetRequest\x1a!.yandex.cloud.operation.Operation\"T\xb2\xd2*-\n" +
 	"\x14DeleteSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\x1d*\x1b/vpc/v1/subnets/{subnet_id}\x12\xa5\x01\n" +
 	"\x0eListOperations\x120.yandex.cloud.vpc.v1.ListSubnetOperationsRequest\x1a1.yandex.cloud.vpc.v1.ListSubnetOperationsResponse\".\x82\xd3\xe4\x93\x02(\x12&/vpc/v1/subnets/{subnet_id}/operations\x12\x9e\x01\n" +
 	"\x04Move\x12&.yandex.cloud.vpc.v1.MoveSubnetRequest\x1a!.yandex.cloud.operation.Operation\"K\xb2\xd2*\x1c\n" +
-	"\x12MoveSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02%:\x01*\" /vpc/v1/subnets/{subnet_id}/move\x12\xa1\x01\n" +
+	"\x12MoveSubnetMetadata\x12\x06Subnet\x82\xd3\xe4\x93\x02%:\x01*\" /vpc/v1/subnets/{subnet_id}:move\x12\xa1\x01\n" +
 	"\x11ListUsedAddresses\x12-.yandex.cloud.vpc.v1.ListUsedAddressesRequest\x1a..yandex.cloud.vpc.v1.ListUsedAddressesResponse\"-\x82\xd3\xe4\x93\x02'\x12%/vpc/v1/subnets/{subnet_id}/addressesBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 

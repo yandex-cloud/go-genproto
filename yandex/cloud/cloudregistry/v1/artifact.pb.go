@@ -160,7 +160,9 @@ type Artifact struct {
 	// Key-value properties associated with the artifact.
 	Properties map[string]string `protobuf:"bytes,10,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Content of the artifact.
-	Content       *Content `protobuf:"bytes,11,opt,name=content,proto3" json:"content,omitempty"`
+	Content *Content `protobuf:"bytes,11,opt,name=content,proto3" json:"content,omitempty"`
+	// Output only. ID of the registry that contains this artifact.
+	RegistryId    string `protobuf:"bytes,15,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -272,6 +274,13 @@ func (x *Artifact) GetContent() *Content {
 	return nil
 }
 
+func (x *Artifact) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
 // Content of the artifact, specific to its type.
 type Content struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -344,7 +353,7 @@ var File_yandex_cloud_cloudregistry_v1_artifact_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/docker_content.proto\"\xfa\x05\n" +
+	",yandex/cloud/cloudregistry/v1/artifact.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/docker_content.proto\"\xa1\x06\n" +
 	"\bArtifact\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12\x12\n" +
@@ -363,7 +372,9 @@ const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"properties\x18\n" +
 	" \x03(\v27.yandex.cloud.cloudregistry.v1.Artifact.PropertiesEntryR\n" +
 	"properties\x12@\n" +
-	"\acontent\x18\v \x01(\v2&.yandex.cloud.cloudregistry.v1.ContentR\acontent\x1a=\n" +
+	"\acontent\x18\v \x01(\v2&.yandex.cloud.cloudregistry.v1.ContentR\acontent\x12\x1f\n" +
+	"\vregistry_id\x18\x0f \x01(\tR\n" +
+	"registryId\x1a=\n" +
 	"\x0fPropertiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"C\n" +
@@ -379,7 +390,7 @@ const file_yandex_cloud_cloudregistry_v1_artifact_proto_rawDesc = "" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\v\n" +
-	"\aDELETED\x10\x04\"Y\n" +
+	"\aDELETED\x10\x04J\x04\b\f\x10\x0f\"Y\n" +
 	"\aContent\x12F\n" +
 	"\x06docker\x18\x01 \x01(\v2,.yandex.cloud.cloudregistry.v1.DockerContentH\x00R\x06dockerB\x06\n" +
 	"\x04specBt\n" +

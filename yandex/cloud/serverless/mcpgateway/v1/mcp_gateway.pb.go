@@ -24,6 +24,57 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type McpTransport int32
+
+const (
+	McpTransport_MCP_TRANSPORT_UNSPECIFIED McpTransport = 0
+	// SSE MCP Transport.
+	McpTransport_SSE McpTransport = 1
+	// Streamable HTTP MCP transport.
+	McpTransport_STREAMABLE McpTransport = 2
+)
+
+// Enum value maps for McpTransport.
+var (
+	McpTransport_name = map[int32]string{
+		0: "MCP_TRANSPORT_UNSPECIFIED",
+		1: "SSE",
+		2: "STREAMABLE",
+	}
+	McpTransport_value = map[string]int32{
+		"MCP_TRANSPORT_UNSPECIFIED": 0,
+		"SSE":                       1,
+		"STREAMABLE":                2,
+	}
+)
+
+func (x McpTransport) Enum() *McpTransport {
+	p := new(McpTransport)
+	*p = x
+	return p
+}
+
+func (x McpTransport) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (McpTransport) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[0].Descriptor()
+}
+
+func (McpTransport) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[0]
+}
+
+func (x McpTransport) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use McpTransport.Descriptor instead.
+func (McpTransport) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDescGZIP(), []int{0}
+}
+
 type HttpMethod int32
 
 const (
@@ -87,11 +138,11 @@ func (x HttpMethod) String() string {
 }
 
 func (HttpMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[1].Descriptor()
 }
 
 func (HttpMethod) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[0]
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[1]
 }
 
 func (x HttpMethod) Number() protoreflect.EnumNumber {
@@ -100,7 +151,7 @@ func (x HttpMethod) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use HttpMethod.Descriptor instead.
 func (HttpMethod) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDescGZIP(), []int{1}
 }
 
 type McpGateway_Status int32
@@ -150,11 +201,11 @@ func (x McpGateway_Status) String() string {
 }
 
 func (McpGateway_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[2].Descriptor()
 }
 
 func (McpGateway_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[1]
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[2]
 }
 
 func (x McpGateway_Status) Number() protoreflect.EnumNumber {
@@ -204,11 +255,11 @@ func (x ForwardHeadersPolicy_ForwardMode) String() string {
 }
 
 func (ForwardHeadersPolicy_ForwardMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[3].Descriptor()
 }
 
 func (ForwardHeadersPolicy_ForwardMode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[2]
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[3]
 }
 
 func (x ForwardHeadersPolicy_ForwardMode) Number() protoreflect.EnumNumber {
@@ -256,11 +307,11 @@ func (x McpCall_Transport) String() string {
 }
 
 func (McpCall_Transport) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[4].Descriptor()
 }
 
 func (McpCall_Transport) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[3]
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[4]
 }
 
 func (x McpCall_Transport) Number() protoreflect.EnumNumber {
@@ -309,11 +360,11 @@ func (x StartWorkflow_Mode) String() string {
 }
 
 func (StartWorkflow_Mode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[5].Descriptor()
 }
 
 func (StartWorkflow_Mode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[4]
+	return &file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes[5]
 }
 
 func (x StartWorkflow_Mode) Number() protoreflect.EnumNumber {
@@ -354,7 +405,9 @@ type McpGateway struct {
 	// ID of the cloud that the MCP Gateway belongs to.
 	CloudId string `protobuf:"bytes,13,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
 	// Publicity of the MCP Gateway. Public MCP Gateway can be accessed by anybody.
-	Public        bool `protobuf:"varint,14,opt,name=public,proto3" json:"public,omitempty"`
+	Public bool `protobuf:"varint,14,opt,name=public,proto3" json:"public,omitempty"`
+	// Transport of the MCP Gateway.
+	Transport     McpTransport `protobuf:"varint,15,opt,name=transport,proto3,enum=yandex.cloud.serverless.mcpgateway.v1.McpTransport" json:"transport,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -485,6 +538,13 @@ func (x *McpGateway) GetPublic() bool {
 		return x.Public
 	}
 	return false
+}
+
+func (x *McpGateway) GetTransport() McpTransport {
+	if x != nil {
+		return x.Transport
+	}
+	return McpTransport_MCP_TRANSPORT_UNSPECIFIED
 }
 
 type McpGatewayPreview struct {
@@ -1778,7 +1838,7 @@ var File_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto protoreflect.Fi
 
 const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/serverless/mcpgateway/v1/mcp_gateway.proto\x12%yandex.cloud.serverless.mcpgateway.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xd0\x06\n" +
+	"7yandex/cloud/serverless/mcpgateway/v1/mcp_gateway.proto\x12%yandex.cloud.serverless.mcpgateway.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xa3\a\n" +
 	"\n" +
 	"McpGateway\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
@@ -1799,7 +1859,8 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"\n" +
 	"network_id\x18\f \x01(\tR\tnetworkId\x12\x1f\n" +
 	"\bcloud_id\x18\r \x01(\tB\x04\xe8\xc71\x01R\acloudId\x12\x16\n" +
-	"\x06public\x18\x0e \x01(\bR\x06public\x1a9\n" +
+	"\x06public\x18\x0e \x01(\bR\x06public\x12Q\n" +
+	"\ttransport\x18\x0f \x01(\x0e23.yandex.cloud.serverless.mcpgateway.v1.McpTransportR\ttransport\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"a\n" +
@@ -1943,7 +2004,12 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"\x04Mode\x12\x14\n" +
 	"\x10MODE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04SYNC\x10\x01\x12\t\n" +
-	"\x05ASYNC\x10\x02*\x8b\x01\n" +
+	"\x05ASYNC\x10\x02*F\n" +
+	"\fMcpTransport\x12\x1d\n" +
+	"\x19MCP_TRANSPORT_UNSPECIFIED\x10\x00\x12\a\n" +
+	"\x03SSE\x10\x01\x12\x0e\n" +
+	"\n" +
+	"STREAMABLE\x10\x02*\x8b\x01\n" +
 	"\n" +
 	"HttpMethod\x12\x1b\n" +
 	"\x17HTTP_METHOD_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -1971,83 +2037,85 @@ func file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDescGZIP() 
 	return file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDescData
 }
 
-var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_goTypes = []any{
-	(HttpMethod)(0),                       // 0: yandex.cloud.serverless.mcpgateway.v1.HttpMethod
-	(McpGateway_Status)(0),                // 1: yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
-	(ForwardHeadersPolicy_ForwardMode)(0), // 2: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.ForwardMode
-	(McpCall_Transport)(0),                // 3: yandex.cloud.serverless.mcpgateway.v1.McpCall.Transport
-	(StartWorkflow_Mode)(0),               // 4: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.Mode
-	(*McpGateway)(nil),                    // 5: yandex.cloud.serverless.mcpgateway.v1.McpGateway
-	(*McpGatewayPreview)(nil),             // 6: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview
-	(*LogOptions)(nil),                    // 7: yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	(*McpTool)(nil),                       // 8: yandex.cloud.serverless.mcpgateway.v1.McpTool
-	(*McpToolAction)(nil),                 // 9: yandex.cloud.serverless.mcpgateway.v1.McpToolAction
-	(*FunctionCall)(nil),                  // 10: yandex.cloud.serverless.mcpgateway.v1.FunctionCall
-	(*ContainerCall)(nil),                 // 11: yandex.cloud.serverless.mcpgateway.v1.ContainerCall
-	(*HttpCall)(nil),                      // 12: yandex.cloud.serverless.mcpgateway.v1.HttpCall
-	(*ForwardHeadersPolicy)(nil),          // 13: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
-	(*McpCall)(nil),                       // 14: yandex.cloud.serverless.mcpgateway.v1.McpCall
-	(*GrpcCall)(nil),                      // 15: yandex.cloud.serverless.mcpgateway.v1.GrpcCall
-	(*StartWorkflow)(nil),                 // 16: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow
-	nil,                                   // 17: yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntry
-	nil,                                   // 18: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.LabelsEntry
-	nil,                                   // 19: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.HeadersEntry
-	nil,                                   // 20: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.QueryEntry
-	nil,                                   // 21: yandex.cloud.serverless.mcpgateway.v1.HttpCall.HeadersEntry
-	nil,                                   // 22: yandex.cloud.serverless.mcpgateway.v1.HttpCall.QueryEntry
-	nil,                                   // 23: yandex.cloud.serverless.mcpgateway.v1.McpCall.ForwardHeadersEntry
-	(*McpCall_NoAuthorization)(nil),       // 24: yandex.cloud.serverless.mcpgateway.v1.McpCall.NoAuthorization
-	(*McpCall_SaAuthorization)(nil),       // 25: yandex.cloud.serverless.mcpgateway.v1.McpCall.SaAuthorization
-	(*McpCall_HeaderAuthorization)(nil),   // 26: yandex.cloud.serverless.mcpgateway.v1.McpCall.HeaderAuthorization
-	(*McpCall_ToolCall)(nil),              // 27: yandex.cloud.serverless.mcpgateway.v1.McpCall.ToolCall
-	nil,                                   // 28: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.HeadersEntry
-	(*timestamppb.Timestamp)(nil),         // 29: google.protobuf.Timestamp
-	(v1.LogLevel_Level)(0),                // 30: yandex.cloud.logging.v1.LogLevel.Level
+	(McpTransport)(0),                     // 0: yandex.cloud.serverless.mcpgateway.v1.McpTransport
+	(HttpMethod)(0),                       // 1: yandex.cloud.serverless.mcpgateway.v1.HttpMethod
+	(McpGateway_Status)(0),                // 2: yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
+	(ForwardHeadersPolicy_ForwardMode)(0), // 3: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.ForwardMode
+	(McpCall_Transport)(0),                // 4: yandex.cloud.serverless.mcpgateway.v1.McpCall.Transport
+	(StartWorkflow_Mode)(0),               // 5: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.Mode
+	(*McpGateway)(nil),                    // 6: yandex.cloud.serverless.mcpgateway.v1.McpGateway
+	(*McpGatewayPreview)(nil),             // 7: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview
+	(*LogOptions)(nil),                    // 8: yandex.cloud.serverless.mcpgateway.v1.LogOptions
+	(*McpTool)(nil),                       // 9: yandex.cloud.serverless.mcpgateway.v1.McpTool
+	(*McpToolAction)(nil),                 // 10: yandex.cloud.serverless.mcpgateway.v1.McpToolAction
+	(*FunctionCall)(nil),                  // 11: yandex.cloud.serverless.mcpgateway.v1.FunctionCall
+	(*ContainerCall)(nil),                 // 12: yandex.cloud.serverless.mcpgateway.v1.ContainerCall
+	(*HttpCall)(nil),                      // 13: yandex.cloud.serverless.mcpgateway.v1.HttpCall
+	(*ForwardHeadersPolicy)(nil),          // 14: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
+	(*McpCall)(nil),                       // 15: yandex.cloud.serverless.mcpgateway.v1.McpCall
+	(*GrpcCall)(nil),                      // 16: yandex.cloud.serverless.mcpgateway.v1.GrpcCall
+	(*StartWorkflow)(nil),                 // 17: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow
+	nil,                                   // 18: yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntry
+	nil,                                   // 19: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.LabelsEntry
+	nil,                                   // 20: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.HeadersEntry
+	nil,                                   // 21: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.QueryEntry
+	nil,                                   // 22: yandex.cloud.serverless.mcpgateway.v1.HttpCall.HeadersEntry
+	nil,                                   // 23: yandex.cloud.serverless.mcpgateway.v1.HttpCall.QueryEntry
+	nil,                                   // 24: yandex.cloud.serverless.mcpgateway.v1.McpCall.ForwardHeadersEntry
+	(*McpCall_NoAuthorization)(nil),       // 25: yandex.cloud.serverless.mcpgateway.v1.McpCall.NoAuthorization
+	(*McpCall_SaAuthorization)(nil),       // 26: yandex.cloud.serverless.mcpgateway.v1.McpCall.SaAuthorization
+	(*McpCall_HeaderAuthorization)(nil),   // 27: yandex.cloud.serverless.mcpgateway.v1.McpCall.HeaderAuthorization
+	(*McpCall_ToolCall)(nil),              // 28: yandex.cloud.serverless.mcpgateway.v1.McpCall.ToolCall
+	nil,                                   // 29: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.HeadersEntry
+	(*timestamppb.Timestamp)(nil),         // 30: google.protobuf.Timestamp
+	(v1.LogLevel_Level)(0),                // 31: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_depIdxs = []int32{
-	8,  // 0: yandex.cloud.serverless.mcpgateway.v1.McpGateway.tools:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTool
-	29, // 1: yandex.cloud.serverless.mcpgateway.v1.McpGateway.created_at:type_name -> google.protobuf.Timestamp
-	17, // 2: yandex.cloud.serverless.mcpgateway.v1.McpGateway.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntry
-	1,  // 3: yandex.cloud.serverless.mcpgateway.v1.McpGateway.status:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
-	7,  // 4: yandex.cloud.serverless.mcpgateway.v1.McpGateway.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	29, // 5: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.created_at:type_name -> google.protobuf.Timestamp
-	18, // 6: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.LabelsEntry
-	1,  // 7: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.status:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
-	7,  // 8: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	30, // 9: yandex.cloud.serverless.mcpgateway.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
-	9,  // 10: yandex.cloud.serverless.mcpgateway.v1.McpTool.action:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpToolAction
-	10, // 11: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.function_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.FunctionCall
-	11, // 12: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.container_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall
-	12, // 13: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.http_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall
-	14, // 14: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.mcp_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall
-	15, // 15: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.grpc_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.GrpcCall
-	16, // 16: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.start_workflow:type_name -> yandex.cloud.serverless.mcpgateway.v1.StartWorkflow
-	0,  // 17: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.method:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpMethod
-	19, // 18: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall.HeadersEntry
-	20, // 19: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.query:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall.QueryEntry
-	13, // 20: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
-	0,  // 21: yandex.cloud.serverless.mcpgateway.v1.HttpCall.method:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpMethod
-	21, // 22: yandex.cloud.serverless.mcpgateway.v1.HttpCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall.HeadersEntry
-	22, // 23: yandex.cloud.serverless.mcpgateway.v1.HttpCall.query:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall.QueryEntry
-	13, // 24: yandex.cloud.serverless.mcpgateway.v1.HttpCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
-	2,  // 25: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.mode:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.ForwardMode
-	27, // 26: yandex.cloud.serverless.mcpgateway.v1.McpCall.tool_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.ToolCall
-	3,  // 27: yandex.cloud.serverless.mcpgateway.v1.McpCall.transport:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.Transport
-	24, // 28: yandex.cloud.serverless.mcpgateway.v1.McpCall.unauthorized:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.NoAuthorization
-	26, // 29: yandex.cloud.serverless.mcpgateway.v1.McpCall.header:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.HeaderAuthorization
-	25, // 30: yandex.cloud.serverless.mcpgateway.v1.McpCall.service_account:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.SaAuthorization
-	23, // 31: yandex.cloud.serverless.mcpgateway.v1.McpCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.ForwardHeadersEntry
-	13, // 32: yandex.cloud.serverless.mcpgateway.v1.McpCall.transfer_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
-	28, // 33: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.GrpcCall.HeadersEntry
-	13, // 34: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
-	4,  // 35: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.mode:type_name -> yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.Mode
-	36, // [36:36] is the sub-list for method output_type
-	36, // [36:36] is the sub-list for method input_type
-	36, // [36:36] is the sub-list for extension type_name
-	36, // [36:36] is the sub-list for extension extendee
-	0,  // [0:36] is the sub-list for field type_name
+	9,  // 0: yandex.cloud.serverless.mcpgateway.v1.McpGateway.tools:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTool
+	30, // 1: yandex.cloud.serverless.mcpgateway.v1.McpGateway.created_at:type_name -> google.protobuf.Timestamp
+	18, // 2: yandex.cloud.serverless.mcpgateway.v1.McpGateway.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.LabelsEntry
+	2,  // 3: yandex.cloud.serverless.mcpgateway.v1.McpGateway.status:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
+	8,  // 4: yandex.cloud.serverless.mcpgateway.v1.McpGateway.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
+	0,  // 5: yandex.cloud.serverless.mcpgateway.v1.McpGateway.transport:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTransport
+	30, // 6: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.created_at:type_name -> google.protobuf.Timestamp
+	19, // 7: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.LabelsEntry
+	2,  // 8: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.status:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGateway.Status
+	8,  // 9: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
+	31, // 10: yandex.cloud.serverless.mcpgateway.v1.LogOptions.min_level:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	10, // 11: yandex.cloud.serverless.mcpgateway.v1.McpTool.action:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpToolAction
+	11, // 12: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.function_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.FunctionCall
+	12, // 13: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.container_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall
+	13, // 14: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.http_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall
+	15, // 15: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.mcp_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall
+	16, // 16: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.grpc_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.GrpcCall
+	17, // 17: yandex.cloud.serverless.mcpgateway.v1.McpToolAction.start_workflow:type_name -> yandex.cloud.serverless.mcpgateway.v1.StartWorkflow
+	1,  // 18: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.method:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpMethod
+	20, // 19: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall.HeadersEntry
+	21, // 20: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.query:type_name -> yandex.cloud.serverless.mcpgateway.v1.ContainerCall.QueryEntry
+	14, // 21: yandex.cloud.serverless.mcpgateway.v1.ContainerCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
+	1,  // 22: yandex.cloud.serverless.mcpgateway.v1.HttpCall.method:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpMethod
+	22, // 23: yandex.cloud.serverless.mcpgateway.v1.HttpCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall.HeadersEntry
+	23, // 24: yandex.cloud.serverless.mcpgateway.v1.HttpCall.query:type_name -> yandex.cloud.serverless.mcpgateway.v1.HttpCall.QueryEntry
+	14, // 25: yandex.cloud.serverless.mcpgateway.v1.HttpCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
+	3,  // 26: yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.mode:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy.ForwardMode
+	28, // 27: yandex.cloud.serverless.mcpgateway.v1.McpCall.tool_call:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.ToolCall
+	4,  // 28: yandex.cloud.serverless.mcpgateway.v1.McpCall.transport:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.Transport
+	25, // 29: yandex.cloud.serverless.mcpgateway.v1.McpCall.unauthorized:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.NoAuthorization
+	27, // 30: yandex.cloud.serverless.mcpgateway.v1.McpCall.header:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.HeaderAuthorization
+	26, // 31: yandex.cloud.serverless.mcpgateway.v1.McpCall.service_account:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.SaAuthorization
+	24, // 32: yandex.cloud.serverless.mcpgateway.v1.McpCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpCall.ForwardHeadersEntry
+	14, // 33: yandex.cloud.serverless.mcpgateway.v1.McpCall.transfer_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
+	29, // 34: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.GrpcCall.HeadersEntry
+	14, // 35: yandex.cloud.serverless.mcpgateway.v1.GrpcCall.forward_headers:type_name -> yandex.cloud.serverless.mcpgateway.v1.ForwardHeadersPolicy
+	5,  // 36: yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.mode:type_name -> yandex.cloud.serverless.mcpgateway.v1.StartWorkflow.Mode
+	37, // [37:37] is the sub-list for method output_type
+	37, // [37:37] is the sub-list for method input_type
+	37, // [37:37] is the sub-list for extension type_name
+	37, // [37:37] is the sub-list for extension extendee
+	0,  // [0:37] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_init() }
@@ -2078,7 +2146,7 @@ func file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc), len(file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,

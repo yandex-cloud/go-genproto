@@ -1017,9 +1017,9 @@ const file_yandex_cloud_loadbalancer_v1_target_group_service_proto_rawDesc = "" 
 	"\x19DeleteTargetGroupMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x022*0/load-balancer/v1/targetGroups/{target_group_id}\x12\xcd\x01\n" +
 	"\n" +
 	"AddTargets\x12/.yandex.cloud.loadbalancer.v1.AddTargetsRequest\x1a!.yandex.cloud.operation.Operation\"k\xb2\xd2*!\n" +
-	"\x12AddTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02@:\x01*\";/load-balancer/v1/targetGroups/{target_group_id}/addTargets\x12\xd9\x01\n" +
+	"\x12AddTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02@:\x01*\";/load-balancer/v1/targetGroups/{target_group_id}:addTargets\x12\xd9\x01\n" +
 	"\rRemoveTargets\x122.yandex.cloud.loadbalancer.v1.RemoveTargetsRequest\x1a!.yandex.cloud.operation.Operation\"q\xb2\xd2*$\n" +
-	"\x15RemoveTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02C:\x01*\">/load-balancer/v1/targetGroups/{target_group_id}/removeTargets\x12\xd6\x01\n" +
+	"\x15RemoveTargetsMetadata\x12\vTargetGroup\x82\xd3\xe4\x93\x02C:\x01*\">/load-balancer/v1/targetGroups/{target_group_id}:removeTargets\x12\xd6\x01\n" +
 	"\x0eListOperations\x12>.yandex.cloud.loadbalancer.v1.ListTargetGroupOperationsRequest\x1a?.yandex.cloud.loadbalancer.v1.ListTargetGroupOperationsResponse\"C\x82\xd3\xe4\x93\x02=\x12;/load-balancer/v1/targetGroups/{target_group_id}/operationsBq\n" +
 	" yandex.cloud.api.loadbalancer.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/loadbalancer/v1;loadbalancerb\x06proto3"
 

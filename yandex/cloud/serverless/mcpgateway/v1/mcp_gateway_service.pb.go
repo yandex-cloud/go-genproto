@@ -229,7 +229,9 @@ type CreateMcpGatewayRequest struct {
 	// Network ID for the MCP Gateway.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Flag indicating if the MCP Gateway is publicly accessible.
-	Public        bool `protobuf:"varint,9,opt,name=public,proto3" json:"public,omitempty"`
+	Public bool `protobuf:"varint,9,opt,name=public,proto3" json:"public,omitempty"`
+	// MCP transport of the MCP Gateway.
+	Transport     McpTransport `protobuf:"varint,10,opt,name=transport,proto3,enum=yandex.cloud.serverless.mcpgateway.v1.McpTransport" json:"transport,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -327,6 +329,13 @@ func (x *CreateMcpGatewayRequest) GetPublic() bool {
 	return false
 }
 
+func (x *CreateMcpGatewayRequest) GetTransport() McpTransport {
+	if x != nil {
+		return x.Transport
+	}
+	return McpTransport_MCP_TRANSPORT_UNSPECIFIED
+}
+
 type CreateMcpGatewayMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the MCP Gateway being created.
@@ -402,7 +411,9 @@ type UpdateMcpGatewayRequest struct {
 	// Field mask specifying which fields to update.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,9,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Updated flag indicating if the MCP Gateway is publicly accessible.
-	Public        bool `protobuf:"varint,10,opt,name=public,proto3" json:"public,omitempty"`
+	Public bool `protobuf:"varint,10,opt,name=public,proto3" json:"public,omitempty"`
+	// MCP transport of the MCP Gateway.
+	Transport     McpTransport `protobuf:"varint,11,opt,name=transport,proto3,enum=yandex.cloud.serverless.mcpgateway.v1.McpTransport" json:"transport,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -505,6 +516,13 @@ func (x *UpdateMcpGatewayRequest) GetPublic() bool {
 		return x.Public
 	}
 	return false
+}
+
+func (x *UpdateMcpGatewayRequest) GetTransport() McpTransport {
+	if x != nil {
+		return x.Transport
+	}
+	return McpTransport_MCP_TRANSPORT_UNSPECIFIED
 }
 
 type UpdateMcpGatewayMetadata struct {
@@ -804,7 +822,7 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_rawDe
 	"\x06filter\x18\x04 \x01(\tR\x06filter\"\x96\x01\n" +
 	"\x16ListMcpGatewayResponse\x12T\n" +
 	"\bgateways\x18\x01 \x03(\v28.yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreviewR\bgateways\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x96\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe9\x05\n" +
 	"\x17CreateMcpGatewayRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12E\n" +
 	"\x04name\x18\x02 \x01(\tB1\xe8\xc71\x01\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12-\n" +
@@ -816,13 +834,15 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_rawDe
 	"\x12service_account_id\x18\a \x01(\tR\x10serviceAccountId\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\b \x01(\tR\tnetworkId\x12\x16\n" +
-	"\x06public\x18\t \x01(\bR\x06public\x1a9\n" +
+	"\x06public\x18\t \x01(\bR\x06public\x12Q\n" +
+	"\ttransport\x18\n" +
+	" \x01(\x0e23.yandex.cloud.serverless.mcpgateway.v1.McpTransportR\ttransport\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"i\n" +
 	"\x18CreateMcpGatewayMetadata\x12*\n" +
 	"\x0emcp_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fmcpGatewayId\x12!\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"\xd8\x05\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"\xab\x06\n" +
 	"\x17UpdateMcpGatewayRequest\x12*\n" +
 	"\x0emcp_gateway_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fmcpGatewayId\x12A\n" +
 	"\x04name\x18\x02 \x01(\tB-\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?\x8a\xc81\x05<=128R\x04name\x12-\n" +
@@ -837,7 +857,8 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_rawDe
 	"\vupdate_mask\x18\t \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12\x16\n" +
 	"\x06public\x18\n" +
-	" \x01(\bR\x06public\x1a9\n" +
+	" \x01(\bR\x06public\x12Q\n" +
+	"\ttransport\x18\v \x01(\x0e23.yandex.cloud.serverless.mcpgateway.v1.McpTransportR\ttransport\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"i\n" +
@@ -910,47 +931,50 @@ var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_goTypes
 	(*McpGatewayPreview)(nil),                  // 13: yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview
 	(*McpTool)(nil),                            // 14: yandex.cloud.serverless.mcpgateway.v1.McpTool
 	(*LogOptions)(nil),                         // 15: yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	(*fieldmaskpb.FieldMask)(nil),              // 16: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                // 17: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 18: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 19: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 20: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*McpGateway)(nil),                         // 21: yandex.cloud.serverless.mcpgateway.v1.McpGateway
-	(*access.ListAccessBindingsResponse)(nil),  // 22: yandex.cloud.access.ListAccessBindingsResponse
+	(McpTransport)(0),                          // 16: yandex.cloud.serverless.mcpgateway.v1.McpTransport
+	(*fieldmaskpb.FieldMask)(nil),              // 17: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 18: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 19: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 20: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 21: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*McpGateway)(nil),                         // 22: yandex.cloud.serverless.mcpgateway.v1.McpGateway
+	(*access.ListAccessBindingsResponse)(nil),  // 23: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.serverless.mcpgateway.v1.ListMcpGatewayResponse.gateways:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpGatewayPreview
 	11, // 1: yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.LabelsEntry
 	14, // 2: yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.tools:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTool
 	15, // 3: yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	12, // 4: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.LabelsEntry
-	14, // 5: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.tools:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTool
-	15, // 6: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
-	16, // 7: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.update_mask:type_name -> google.protobuf.FieldMask
-	17, // 8: yandex.cloud.serverless.mcpgateway.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 9: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Get:input_type -> yandex.cloud.serverless.mcpgateway.v1.GetMcpGatewayRequest
-	1,  // 10: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.List:input_type -> yandex.cloud.serverless.mcpgateway.v1.ListMcpGatewayRequest
-	3,  // 11: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Create:input_type -> yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest
-	5,  // 12: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Update:input_type -> yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest
-	7,  // 13: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Delete:input_type -> yandex.cloud.serverless.mcpgateway.v1.DeleteMcpGatewayRequest
-	9,  // 14: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListOperations:input_type -> yandex.cloud.serverless.mcpgateway.v1.ListOperationsRequest
-	18, // 15: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	19, // 16: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	20, // 17: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	21, // 18: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Get:output_type -> yandex.cloud.serverless.mcpgateway.v1.McpGateway
-	2,  // 19: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.List:output_type -> yandex.cloud.serverless.mcpgateway.v1.ListMcpGatewayResponse
-	17, // 20: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Create:output_type -> yandex.cloud.operation.Operation
-	17, // 21: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Update:output_type -> yandex.cloud.operation.Operation
-	17, // 22: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Delete:output_type -> yandex.cloud.operation.Operation
-	10, // 23: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListOperations:output_type -> yandex.cloud.serverless.mcpgateway.v1.ListOperationsResponse
-	22, // 24: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	17, // 25: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	17, // 26: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	18, // [18:27] is the sub-list for method output_type
-	9,  // [9:18] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	16, // 4: yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest.transport:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTransport
+	12, // 5: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.labels:type_name -> yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.LabelsEntry
+	14, // 6: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.tools:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTool
+	15, // 7: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.log_options:type_name -> yandex.cloud.serverless.mcpgateway.v1.LogOptions
+	17, // 8: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.update_mask:type_name -> google.protobuf.FieldMask
+	16, // 9: yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest.transport:type_name -> yandex.cloud.serverless.mcpgateway.v1.McpTransport
+	18, // 10: yandex.cloud.serverless.mcpgateway.v1.ListOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 11: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Get:input_type -> yandex.cloud.serverless.mcpgateway.v1.GetMcpGatewayRequest
+	1,  // 12: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.List:input_type -> yandex.cloud.serverless.mcpgateway.v1.ListMcpGatewayRequest
+	3,  // 13: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Create:input_type -> yandex.cloud.serverless.mcpgateway.v1.CreateMcpGatewayRequest
+	5,  // 14: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Update:input_type -> yandex.cloud.serverless.mcpgateway.v1.UpdateMcpGatewayRequest
+	7,  // 15: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Delete:input_type -> yandex.cloud.serverless.mcpgateway.v1.DeleteMcpGatewayRequest
+	9,  // 16: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListOperations:input_type -> yandex.cloud.serverless.mcpgateway.v1.ListOperationsRequest
+	19, // 17: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	20, // 18: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	21, // 19: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	22, // 20: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Get:output_type -> yandex.cloud.serverless.mcpgateway.v1.McpGateway
+	2,  // 21: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.List:output_type -> yandex.cloud.serverless.mcpgateway.v1.ListMcpGatewayResponse
+	18, // 22: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 23: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 24: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // 25: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListOperations:output_type -> yandex.cloud.serverless.mcpgateway.v1.ListOperationsResponse
+	23, // 26: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	18, // 27: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	18, // 28: yandex.cloud.serverless.mcpgateway.v1.McpGatewayService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	20, // [20:29] is the sub-list for method output_type
+	11, // [11:20] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_service_proto_init() }

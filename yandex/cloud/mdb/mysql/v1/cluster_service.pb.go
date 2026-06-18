@@ -11,6 +11,7 @@ import (
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
@@ -418,8 +419,10 @@ type CreateClusterRequest struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,16,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Backup long-term retention policies setting.
+	RetentionPolicies []*v1.BackupRetentionPolicySpec `protobuf:"bytes,17,rep,name=retention_policies,json=retentionPolicies,proto3" json:"retention_policies,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CreateClusterRequest) Reset() {
@@ -553,6 +556,13 @@ func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 func (x *CreateClusterRequest) GetDiskEncryptionKeyId() *wrapperspb.StringValue {
 	if x != nil {
 		return x.DiskEncryptionKeyId
+	}
+	return nil
+}
+
+func (x *CreateClusterRequest) GetRetentionPolicies() []*v1.BackupRetentionPolicySpec {
+	if x != nil {
+		return x.RetentionPolicies
 	}
 	return nil
 }
@@ -3164,7 +3174,7 @@ var File_yandex_cloud_mdb_mysql_v1_cluster_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/mysql/v1/cluster_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/mdb/mysql/v1/backup.proto\x1a'yandex/cloud/mdb/mysql/v1/cluster.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x1a(yandex/cloud/mdb/mysql/v1/database.proto\x1a+yandex/cloud/mdb/mysql/v1/maintenance.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"/yandex/cloud/mdb/mysql/v1/cluster_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/mdb/mysql/v1/backup.proto\x1a'yandex/cloud/mdb/mysql/v1/cluster.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql5_7.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_0.proto\x1a/yandex/cloud/mdb/mysql/v1/config/mysql8_4.proto\x1a(yandex/cloud/mdb/mysql/v1/database.proto\x1a+yandex/cloud/mdb/mysql/v1/maintenance.proto\x1a$yandex/cloud/mdb/mysql/v1/user.proto\x1a1yandex/cloud/mdb/v1/backup_retention_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -3178,7 +3188,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.mysql.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xce\b\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xad\t\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3199,7 +3209,8 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12$\n" +
 	"\x0ehost_group_ids\x18\r \x03(\tR\fhostGroupIds\x12[\n" +
 	"\x12maintenance_window\x18\x0e \x01(\v2,.yandex.cloud.mdb.mysql.v1.MaintenanceWindowR\x11maintenanceWindow\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
+	"\x16disk_encryption_key_id\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12]\n" +
+	"\x12retention_policies\x18\x11 \x03(\v2..yandex.cloud.mdb.v1.BackupRetentionPolicySpecR\x11retentionPolicies\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x0f\x10\x10\"6\n" +
@@ -3559,24 +3570,25 @@ var file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_goTypes = []any{
 	(*UserSpec)(nil),                                 // 53: yandex.cloud.mdb.mysql.v1.UserSpec
 	(*MaintenanceWindow)(nil),                        // 54: yandex.cloud.mdb.mysql.v1.MaintenanceWindow
 	(*wrapperspb.StringValue)(nil),                   // 55: google.protobuf.StringValue
-	(*fieldmaskpb.FieldMask)(nil),                    // 56: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                    // 57: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                      // 58: yandex.cloud.operation.Operation
-	(*Backup)(nil),                                   // 59: yandex.cloud.mdb.mysql.v1.Backup
-	(*Host)(nil),                                     // 60: yandex.cloud.mdb.mysql.v1.Host
-	(*config.MysqlConfig5_7)(nil),                    // 61: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	(*config.MysqlConfig8_0)(nil),                    // 62: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
-	(*config.MysqlConfig8_4)(nil),                    // 63: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4
-	(*Resources)(nil),                                // 64: yandex.cloud.mdb.mysql.v1.Resources
-	(*timeofday.TimeOfDay)(nil),                      // 65: google.type.TimeOfDay
-	(*Access)(nil),                                   // 66: yandex.cloud.mdb.mysql.v1.Access
-	(*PerformanceDiagnostics)(nil),                   // 67: yandex.cloud.mdb.mysql.v1.PerformanceDiagnostics
-	(*wrapperspb.Int64Value)(nil),                    // 68: google.protobuf.Int64Value
-	(*DiskSizeAutoscaling)(nil),                      // 69: yandex.cloud.mdb.mysql.v1.DiskSizeAutoscaling
-	(*access.ListAccessBindingsRequest)(nil),         // 70: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),          // 71: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),       // 72: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),        // 73: yandex.cloud.access.ListAccessBindingsResponse
+	(*v1.BackupRetentionPolicySpec)(nil),             // 56: yandex.cloud.mdb.v1.BackupRetentionPolicySpec
+	(*fieldmaskpb.FieldMask)(nil),                    // 57: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                    // 58: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                      // 59: yandex.cloud.operation.Operation
+	(*Backup)(nil),                                   // 60: yandex.cloud.mdb.mysql.v1.Backup
+	(*Host)(nil),                                     // 61: yandex.cloud.mdb.mysql.v1.Host
+	(*config.MysqlConfig5_7)(nil),                    // 62: yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	(*config.MysqlConfig8_0)(nil),                    // 63: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
+	(*config.MysqlConfig8_4)(nil),                    // 64: yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4
+	(*Resources)(nil),                                // 65: yandex.cloud.mdb.mysql.v1.Resources
+	(*timeofday.TimeOfDay)(nil),                      // 66: google.type.TimeOfDay
+	(*Access)(nil),                                   // 67: yandex.cloud.mdb.mysql.v1.Access
+	(*PerformanceDiagnostics)(nil),                   // 68: yandex.cloud.mdb.mysql.v1.PerformanceDiagnostics
+	(*wrapperspb.Int64Value)(nil),                    // 69: google.protobuf.Int64Value
+	(*DiskSizeAutoscaling)(nil),                      // 70: yandex.cloud.mdb.mysql.v1.DiskSizeAutoscaling
+	(*access.ListAccessBindingsRequest)(nil),         // 71: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),          // 72: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),       // 73: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),        // 74: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_depIdxs = []int32{
 	50, // 0: yandex.cloud.mdb.mysql.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.mysql.v1.Cluster
@@ -3588,96 +3600,97 @@ var file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_depIdxs = []int32{
 	44, // 6: yandex.cloud.mdb.mysql.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.mysql.v1.HostSpec
 	54, // 7: yandex.cloud.mdb.mysql.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.mysql.v1.MaintenanceWindow
 	55, // 8: yandex.cloud.mdb.mysql.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	56, // 9: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	47, // 10: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.LabelsEntry
-	45, // 11: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.mysql.v1.ConfigSpec
-	54, // 12: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.mysql.v1.MaintenanceWindow
-	57, // 13: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
-	48, // 14: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.LabelsEntry
-	51, // 15: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.mysql.v1.Cluster.Environment
-	45, // 16: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.mysql.v1.ConfigSpec
-	44, // 17: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.mysql.v1.HostSpec
-	54, // 18: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.mysql.v1.MaintenanceWindow
-	55, // 19: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	0,  // 20: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.RescheduleType
-	57, // 21: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	57, // 22: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	57, // 23: yandex.cloud.mdb.mysql.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	49, // 24: yandex.cloud.mdb.mysql.v1.LogRecord.message:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord.MessageEntry
-	1,  // 25: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.ServiceType
-	57, // 26: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	57, // 27: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	20, // 28: yandex.cloud.mdb.mysql.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord
-	20, // 29: yandex.cloud.mdb.mysql.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord
-	2,  // 30: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.ServiceType
-	57, // 31: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	57, // 32: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	58, // 33: yandex.cloud.mdb.mysql.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	59, // 34: yandex.cloud.mdb.mysql.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.mysql.v1.Backup
-	60, // 35: yandex.cloud.mdb.mysql.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.mysql.v1.Host
-	44, // 36: yandex.cloud.mdb.mysql.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.mysql.v1.HostSpec
-	43, // 37: yandex.cloud.mdb.mysql.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.mysql.v1.UpdateHostSpec
-	56, // 38: yandex.cloud.mdb.mysql.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
-	61, // 39: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_5_7:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
-	62, // 40: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_8_0:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
-	63, // 41: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_8_4:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4
-	64, // 42: yandex.cloud.mdb.mysql.v1.ConfigSpec.resources:type_name -> yandex.cloud.mdb.mysql.v1.Resources
-	65, // 43: yandex.cloud.mdb.mysql.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
-	66, // 44: yandex.cloud.mdb.mysql.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.mysql.v1.Access
-	67, // 45: yandex.cloud.mdb.mysql.v1.ConfigSpec.performance_diagnostics:type_name -> yandex.cloud.mdb.mysql.v1.PerformanceDiagnostics
-	68, // 46: yandex.cloud.mdb.mysql.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	69, // 47: yandex.cloud.mdb.mysql.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.mysql.v1.DiskSizeAutoscaling
-	3,  // 48: yandex.cloud.mdb.mysql.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetClusterRequest
-	4,  // 49: yandex.cloud.mdb.mysql.v1.ClusterService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListClustersRequest
-	6,  // 50: yandex.cloud.mdb.mysql.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateClusterRequest
-	8,  // 51: yandex.cloud.mdb.mysql.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.mysql.v1.UpdateClusterRequest
-	10, // 52: yandex.cloud.mdb.mysql.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteClusterRequest
-	35, // 53: yandex.cloud.mdb.mysql.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterRequest
-	37, // 54: yandex.cloud.mdb.mysql.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.mysql.v1.StopClusterRequest
-	39, // 55: yandex.cloud.mdb.mysql.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.mysql.v1.MoveClusterRequest
-	12, // 56: yandex.cloud.mdb.mysql.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.mysql.v1.BackupClusterRequest
-	14, // 57: yandex.cloud.mdb.mysql.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.mysql.v1.RestoreClusterRequest
-	16, // 58: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
-	18, // 59: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
-	21, // 60: yandex.cloud.mdb.mysql.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest
-	24, // 61: yandex.cloud.mdb.mysql.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest
-	25, // 62: yandex.cloud.mdb.mysql.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterOperationsRequest
-	27, // 63: yandex.cloud.mdb.mysql.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterBackupsRequest
-	29, // 64: yandex.cloud.mdb.mysql.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterHostsRequest
-	31, // 65: yandex.cloud.mdb.mysql.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.mysql.v1.AddClusterHostsRequest
-	41, // 66: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.mysql.v1.UpdateClusterHostsRequest
-	33, // 67: yandex.cloud.mdb.mysql.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.mysql.v1.DeleteClusterHostsRequest
-	70, // 68: yandex.cloud.mdb.mysql.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	71, // 69: yandex.cloud.mdb.mysql.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	72, // 70: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	50, // 71: yandex.cloud.mdb.mysql.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.mysql.v1.Cluster
-	5,  // 72: yandex.cloud.mdb.mysql.v1.ClusterService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListClustersResponse
-	58, // 73: yandex.cloud.mdb.mysql.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	58, // 74: yandex.cloud.mdb.mysql.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	58, // 75: yandex.cloud.mdb.mysql.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	58, // 76: yandex.cloud.mdb.mysql.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	58, // 77: yandex.cloud.mdb.mysql.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	58, // 78: yandex.cloud.mdb.mysql.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	58, // 79: yandex.cloud.mdb.mysql.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	58, // 80: yandex.cloud.mdb.mysql.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	58, // 81: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	58, // 82: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:output_type -> yandex.cloud.operation.Operation
-	22, // 83: yandex.cloud.mdb.mysql.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterLogsResponse
-	23, // 84: yandex.cloud.mdb.mysql.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.mysql.v1.StreamLogRecord
-	26, // 85: yandex.cloud.mdb.mysql.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterOperationsResponse
-	28, // 86: yandex.cloud.mdb.mysql.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterBackupsResponse
-	30, // 87: yandex.cloud.mdb.mysql.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterHostsResponse
-	58, // 88: yandex.cloud.mdb.mysql.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	58, // 89: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	58, // 90: yandex.cloud.mdb.mysql.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	73, // 91: yandex.cloud.mdb.mysql.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	58, // 92: yandex.cloud.mdb.mysql.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	58, // 93: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	71, // [71:94] is the sub-list for method output_type
-	48, // [48:71] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	56, // 9: yandex.cloud.mdb.mysql.v1.CreateClusterRequest.retention_policies:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicySpec
+	57, // 10: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	47, // 11: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.LabelsEntry
+	45, // 12: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.mysql.v1.ConfigSpec
+	54, // 13: yandex.cloud.mdb.mysql.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.mysql.v1.MaintenanceWindow
+	58, // 14: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
+	48, // 15: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.LabelsEntry
+	51, // 16: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.mysql.v1.Cluster.Environment
+	45, // 17: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.mysql.v1.ConfigSpec
+	44, // 18: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.mysql.v1.HostSpec
+	54, // 19: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.mysql.v1.MaintenanceWindow
+	55, // 20: yandex.cloud.mdb.mysql.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	0,  // 21: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.RescheduleType
+	58, // 22: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	58, // 23: yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	58, // 24: yandex.cloud.mdb.mysql.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	49, // 25: yandex.cloud.mdb.mysql.v1.LogRecord.message:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord.MessageEntry
+	1,  // 26: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.ServiceType
+	58, // 27: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	58, // 28: yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	20, // 29: yandex.cloud.mdb.mysql.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord
+	20, // 30: yandex.cloud.mdb.mysql.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.mysql.v1.LogRecord
+	2,  // 31: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.ServiceType
+	58, // 32: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	58, // 33: yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	59, // 34: yandex.cloud.mdb.mysql.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	60, // 35: yandex.cloud.mdb.mysql.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.mysql.v1.Backup
+	61, // 36: yandex.cloud.mdb.mysql.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.mysql.v1.Host
+	44, // 37: yandex.cloud.mdb.mysql.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.mysql.v1.HostSpec
+	43, // 38: yandex.cloud.mdb.mysql.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.mysql.v1.UpdateHostSpec
+	57, // 39: yandex.cloud.mdb.mysql.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
+	62, // 40: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_5_7:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig5_7
+	63, // 41: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_8_0:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_0
+	64, // 42: yandex.cloud.mdb.mysql.v1.ConfigSpec.mysql_config_8_4:type_name -> yandex.cloud.mdb.mysql.v1.config.MysqlConfig8_4
+	65, // 43: yandex.cloud.mdb.mysql.v1.ConfigSpec.resources:type_name -> yandex.cloud.mdb.mysql.v1.Resources
+	66, // 44: yandex.cloud.mdb.mysql.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
+	67, // 45: yandex.cloud.mdb.mysql.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.mysql.v1.Access
+	68, // 46: yandex.cloud.mdb.mysql.v1.ConfigSpec.performance_diagnostics:type_name -> yandex.cloud.mdb.mysql.v1.PerformanceDiagnostics
+	69, // 47: yandex.cloud.mdb.mysql.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	70, // 48: yandex.cloud.mdb.mysql.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.mysql.v1.DiskSizeAutoscaling
+	3,  // 49: yandex.cloud.mdb.mysql.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetClusterRequest
+	4,  // 50: yandex.cloud.mdb.mysql.v1.ClusterService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListClustersRequest
+	6,  // 51: yandex.cloud.mdb.mysql.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateClusterRequest
+	8,  // 52: yandex.cloud.mdb.mysql.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.mysql.v1.UpdateClusterRequest
+	10, // 53: yandex.cloud.mdb.mysql.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteClusterRequest
+	35, // 54: yandex.cloud.mdb.mysql.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterRequest
+	37, // 55: yandex.cloud.mdb.mysql.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.mysql.v1.StopClusterRequest
+	39, // 56: yandex.cloud.mdb.mysql.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.mysql.v1.MoveClusterRequest
+	12, // 57: yandex.cloud.mdb.mysql.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.mysql.v1.BackupClusterRequest
+	14, // 58: yandex.cloud.mdb.mysql.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.mysql.v1.RestoreClusterRequest
+	16, // 59: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.mysql.v1.RescheduleMaintenanceRequest
+	18, // 60: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.mysql.v1.StartClusterFailoverRequest
+	21, // 61: yandex.cloud.mdb.mysql.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterLogsRequest
+	24, // 62: yandex.cloud.mdb.mysql.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.mysql.v1.StreamClusterLogsRequest
+	25, // 63: yandex.cloud.mdb.mysql.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterOperationsRequest
+	27, // 64: yandex.cloud.mdb.mysql.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterBackupsRequest
+	29, // 65: yandex.cloud.mdb.mysql.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.mysql.v1.ListClusterHostsRequest
+	31, // 66: yandex.cloud.mdb.mysql.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.mysql.v1.AddClusterHostsRequest
+	41, // 67: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.mysql.v1.UpdateClusterHostsRequest
+	33, // 68: yandex.cloud.mdb.mysql.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.mysql.v1.DeleteClusterHostsRequest
+	71, // 69: yandex.cloud.mdb.mysql.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	72, // 70: yandex.cloud.mdb.mysql.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	73, // 71: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	50, // 72: yandex.cloud.mdb.mysql.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.mysql.v1.Cluster
+	5,  // 73: yandex.cloud.mdb.mysql.v1.ClusterService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListClustersResponse
+	59, // 74: yandex.cloud.mdb.mysql.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	59, // 75: yandex.cloud.mdb.mysql.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	59, // 76: yandex.cloud.mdb.mysql.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	59, // 77: yandex.cloud.mdb.mysql.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	59, // 78: yandex.cloud.mdb.mysql.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	59, // 79: yandex.cloud.mdb.mysql.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	59, // 80: yandex.cloud.mdb.mysql.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	59, // 81: yandex.cloud.mdb.mysql.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	59, // 82: yandex.cloud.mdb.mysql.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	59, // 83: yandex.cloud.mdb.mysql.v1.ClusterService.StartFailover:output_type -> yandex.cloud.operation.Operation
+	22, // 84: yandex.cloud.mdb.mysql.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterLogsResponse
+	23, // 85: yandex.cloud.mdb.mysql.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.mysql.v1.StreamLogRecord
+	26, // 86: yandex.cloud.mdb.mysql.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterOperationsResponse
+	28, // 87: yandex.cloud.mdb.mysql.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterBackupsResponse
+	30, // 88: yandex.cloud.mdb.mysql.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.mysql.v1.ListClusterHostsResponse
+	59, // 89: yandex.cloud.mdb.mysql.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	59, // 90: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	59, // 91: yandex.cloud.mdb.mysql.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	74, // 92: yandex.cloud.mdb.mysql.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	59, // 93: yandex.cloud.mdb.mysql.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	59, // 94: yandex.cloud.mdb.mysql.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	72, // [72:95] is the sub-list for method output_type
+	49, // [49:72] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_init() }

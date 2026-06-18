@@ -1306,7 +1306,7 @@ const file_yandex_cloud_vpc_v1_network_service_proto_rawDesc = "" +
 	"\x0fListRouteTables\x122.yandex.cloud.vpc.v1.ListNetworkRouteTablesRequest\x1a3.yandex.cloud.vpc.v1.ListNetworkRouteTablesResponse\"2\x82\xd3\xe4\x93\x02,\x12*/vpc/v1/networks/{network_id}/route_tables\x12\xa9\x01\n" +
 	"\x0eListOperations\x121.yandex.cloud.vpc.v1.ListNetworkOperationsRequest\x1a2.yandex.cloud.vpc.v1.ListNetworkOperationsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/vpc/v1/networks/{network_id}/operations\x12\xa3\x01\n" +
 	"\x04Move\x12'.yandex.cloud.vpc.v1.MoveNetworkRequest\x1a!.yandex.cloud.operation.Operation\"O\xb2\xd2*\x1e\n" +
-	"\x13MoveNetworkMetadata\x12\aNetwork\x82\xd3\xe4\x93\x02':\x01*\"\"/vpc/v1/networks/{network_id}/moveBV\n" +
+	"\x13MoveNetworkMetadata\x12\aNetwork\x82\xd3\xe4\x93\x02':\x01*\"\"/vpc/v1/networks/{network_id}:moveBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 
 var (

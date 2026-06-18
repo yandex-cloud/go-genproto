@@ -130,7 +130,9 @@ type User struct {
 	// User's job title.
 	JobTitle string `protobuf:"bytes,16,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
 	// User's employee ID
-	EmployeeId    string `protobuf:"bytes,17,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
+	EmployeeId string `protobuf:"bytes,17,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
+	// Timestamp when the user account expires.
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -277,11 +279,18 @@ func (x *User) GetEmployeeId() string {
 	return ""
 }
 
+func (x *User) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 var File_yandex_cloud_organizationmanager_v1_idp_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xae\x05\n" +
+	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe9\x05\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vuserpool_id\x18\x02 \x01(\tR\n" +
@@ -308,7 +317,9 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"department\x12\x1b\n" +
 	"\tjob_title\x18\x10 \x01(\tR\bjobTitle\x12\x1f\n" +
 	"\vemployee_id\x18\x11 \x01(\tR\n" +
-	"employeeId\"W\n" +
+	"employeeId\x129\n" +
+	"\n" +
+	"expires_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"W\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -341,11 +352,12 @@ var file_yandex_cloud_organizationmanager_v1_idp_user_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.organizationmanager.v1.idp.User.status:type_name -> yandex.cloud.organizationmanager.v1.idp.User.Status
 	2, // 1: yandex.cloud.organizationmanager.v1.idp.User.created_at:type_name -> google.protobuf.Timestamp
 	2, // 2: yandex.cloud.organizationmanager.v1.idp.User.updated_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	2, // 3: yandex.cloud.organizationmanager.v1.idp.User.expires_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_user_proto_init() }

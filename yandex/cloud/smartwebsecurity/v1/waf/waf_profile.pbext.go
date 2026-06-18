@@ -255,6 +255,10 @@ func (m *WafProfileExclusionRule_RequestCondition_BodyMatcher) SetBodyValues(v [
 	m.BodyValues = v
 }
 
+func (m *WafProfileExclusionRule_RequestCondition_BodyMatcher) SetIsExcluded(v bool) {
+	m.IsExcluded = v
+}
+
 func (m *RuleSet) SetName(v string) {
 	m.Name = v
 }

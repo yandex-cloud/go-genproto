@@ -74,6 +74,14 @@ func (m *CreateSubtitleMetadata) SetSubtitleId(v string) {
 	m.SubtitleId = v
 }
 
+func (m *GenerateSubtitleDownloadURLRequest) SetSubtitleId(v string) {
+	m.SubtitleId = v
+}
+
+func (m *GenerateSubtitleDownloadURLResponse) SetDownloadUrl(v string) {
+	m.DownloadUrl = v
+}
+
 func (m *GenerateSubtitleUploadURLRequest) SetSubtitleId(v string) {
 	m.SubtitleId = v
 }

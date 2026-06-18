@@ -9,6 +9,7 @@ package clickhouse
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -21,6 +22,78 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Version_Status int32
+
+const (
+	// Version status is not specified.
+	Version_STATUS_UNSPECIFIED Version_Status = 0
+	// Newly released version. New clusters can be created.
+	// Support may not yet be available in full scope.
+	Version_NEW Version_Status = 1
+	// Newly released version. New clusters can be created.
+	Version_ACTUAL Version_Status = 2
+	// Fully supported version.
+	Version_SUPPORTED Version_Status = 3
+	// Version approaching end of support. New cluster creation is not allowed.
+	// Existing clusters continue to operate. Restore from backups is available.
+	Version_DEPRECATED Version_Status = 4
+	// Deprecated version billed at an increased rate.
+	// New cluster creation and restore from backups are not allowed.
+	// Existing clusters continue to operate; automatic upgrade may be scheduled.
+	Version_LEGACY Version_Status = 5
+	// End-of-life version. Clusters are forcibly upgraded to a supported version or shut down.
+	Version_EOL Version_Status = 6
+)
+
+// Enum value maps for Version_Status.
+var (
+	Version_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "NEW",
+		2: "ACTUAL",
+		3: "SUPPORTED",
+		4: "DEPRECATED",
+		5: "LEGACY",
+		6: "EOL",
+	}
+	Version_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"NEW":                1,
+		"ACTUAL":             2,
+		"SUPPORTED":          3,
+		"DEPRECATED":         4,
+		"LEGACY":             5,
+		"EOL":                6,
+	}
+)
+
+func (x Version_Status) Enum() *Version_Status {
+	p := new(Version_Status)
+	*p = x
+	return p
+}
+
+func (x Version_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Version_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_clickhouse_v1_version_proto_enumTypes[0].Descriptor()
+}
+
+func (Version_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_clickhouse_v1_version_proto_enumTypes[0]
+}
+
+func (x Version_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Version_Status.Descriptor instead.
+func (Version_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDescGZIP(), []int{0, 0}
+}
+
 type Version struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the version.
@@ -28,13 +101,21 @@ type Version struct {
 	// Name of the version.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Whether version is deprecated.
+	// (-- api-linter: yc::1703::deprecated-annotation=disabled --)
 	Deprecated bool `protobuf:"varint,3,opt,name=deprecated,proto3" json:"deprecated,omitempty"`
 	// List of versions that can be updated from current.
 	UpdatableTo []string `protobuf:"bytes,4,rep,name=updatable_to,json=updatableTo,proto3" json:"updatable_to,omitempty"`
 	// Whether version is LTS.
 	Lts bool `protobuf:"varint,5,opt,name=lts,proto3" json:"lts,omitempty"`
 	// Full version.
-	FullVersion   string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	FullVersion string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
+	// Version status
+	Status Version_Status `protobuf:"varint,7,opt,name=status,proto3,enum=yandex.cloud.mdb.clickhouse.v1.Version_Status" json:"status,omitempty"`
+	// Optional. Date when the version reaches DEPRECATED status (day precision)
+	// (-- api-linter: yc::1703::deprecated-annotation=disabled --)
+	DeprecatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=deprecated_at,json=deprecatedAt,proto3" json:"deprecated_at,omitempty"`
+	// Optional. Date when the version reaches EOL status (day precision)
+	EolAt         *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=eol_at,json=eolAt,proto3" json:"eol_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -111,11 +192,32 @@ func (x *Version) GetFullVersion() string {
 	return ""
 }
 
+func (x *Version) GetStatus() Version_Status {
+	if x != nil {
+		return x.Status
+	}
+	return Version_STATUS_UNSPECIFIED
+}
+
+func (x *Version) GetDeprecatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeprecatedAt
+	}
+	return nil
+}
+
+func (x *Version) GetEolAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.EolAt
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_clickhouse_v1_version_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/clickhouse/v1/version.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\"\xa5\x01\n" +
+	",yandex/cloud/mdb/clickhouse/v1/version.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcc\x03\n" +
 	"\aVersion\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1e\n" +
@@ -124,7 +226,21 @@ const file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc = "" +
 	"deprecated\x12!\n" +
 	"\fupdatable_to\x18\x04 \x03(\tR\vupdatableTo\x12\x10\n" +
 	"\x03lts\x18\x05 \x01(\bR\x03lts\x12!\n" +
-	"\ffull_version\x18\x06 \x01(\tR\vfullVersionBs\n" +
+	"\ffull_version\x18\x06 \x01(\tR\vfullVersion\x12F\n" +
+	"\x06status\x18\a \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.Version.StatusR\x06status\x12?\n" +
+	"\rdeprecated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\fdeprecatedAt\x121\n" +
+	"\x06eol_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x05eolAt\"i\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\a\n" +
+	"\x03NEW\x10\x01\x12\n" +
+	"\n" +
+	"\x06ACTUAL\x10\x02\x12\r\n" +
+	"\tSUPPORTED\x10\x03\x12\x0e\n" +
+	"\n" +
+	"DEPRECATED\x10\x04\x12\n" +
+	"\n" +
+	"\x06LEGACY\x10\x05\x12\a\n" +
+	"\x03EOL\x10\x06Bs\n" +
 	"\"yandex.cloud.api.mdb.clickhouse.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1;clickhouseb\x06proto3"
 
 var (
@@ -139,16 +255,22 @@ func file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDescData
 }
 
+var file_yandex_cloud_mdb_clickhouse_v1_version_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_mdb_clickhouse_v1_version_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_yandex_cloud_mdb_clickhouse_v1_version_proto_goTypes = []any{
-	(*Version)(nil), // 0: yandex.cloud.mdb.clickhouse.v1.Version
+	(Version_Status)(0),           // 0: yandex.cloud.mdb.clickhouse.v1.Version.Status
+	(*Version)(nil),               // 1: yandex.cloud.mdb.clickhouse.v1.Version
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_yandex_cloud_mdb_clickhouse_v1_version_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: yandex.cloud.mdb.clickhouse.v1.Version.status:type_name -> yandex.cloud.mdb.clickhouse.v1.Version.Status
+	2, // 1: yandex.cloud.mdb.clickhouse.v1.Version.deprecated_at:type_name -> google.protobuf.Timestamp
+	2, // 2: yandex.cloud.mdb.clickhouse.v1.Version.eol_at:type_name -> google.protobuf.Timestamp
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_version_proto_init() }
@@ -161,13 +283,14 @@ func file_yandex_cloud_mdb_clickhouse_v1_version_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc), len(file_yandex_cloud_mdb_clickhouse_v1_version_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_mdb_clickhouse_v1_version_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_mdb_clickhouse_v1_version_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_mdb_clickhouse_v1_version_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_mdb_clickhouse_v1_version_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_mdb_clickhouse_v1_version_proto = out.File

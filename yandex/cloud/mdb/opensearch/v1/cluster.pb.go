@@ -652,9 +652,9 @@ type ClusterConfig struct {
 	Dashboards *Dashboards `protobuf:"bytes,3,opt,name=dashboards,proto3" json:"dashboards,omitempty"`
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,4,opt,name=access,proto3" json:"access,omitempty"`
-	// Snapshot management configuration
+	// Snapshot management configuration.
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,5,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
-	// Full version
+	// Full version.
 	FullVersion string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	// Audit log settings.
 	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`

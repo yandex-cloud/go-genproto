@@ -69,3 +69,7 @@ func (m *User) SetJobTitle(v string) {
 func (m *User) SetEmployeeId(v string) {
 	m.EmployeeId = v
 }
+
+func (m *User) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}

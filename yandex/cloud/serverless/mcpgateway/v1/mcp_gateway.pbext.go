@@ -63,6 +63,10 @@ func (m *McpGateway) SetPublic(v bool) {
 	m.Public = v
 }
 
+func (m *McpGateway) SetTransport(v McpTransport) {
+	m.Transport = v
+}
+
 func (m *McpGatewayPreview) SetId(v string) {
 	m.Id = v
 }

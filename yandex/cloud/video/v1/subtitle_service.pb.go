@@ -424,6 +424,98 @@ func (x *CreateSubtitleMetadata) GetSubtitleId() string {
 	return ""
 }
 
+type GenerateSubtitleDownloadURLRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the subtitle for which to generate a download URL.
+	SubtitleId    string `protobuf:"bytes,1,opt,name=subtitle_id,json=subtitleId,proto3" json:"subtitle_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateSubtitleDownloadURLRequest) Reset() {
+	*x = GenerateSubtitleDownloadURLRequest{}
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateSubtitleDownloadURLRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateSubtitleDownloadURLRequest) ProtoMessage() {}
+
+func (x *GenerateSubtitleDownloadURLRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateSubtitleDownloadURLRequest.ProtoReflect.Descriptor instead.
+func (*GenerateSubtitleDownloadURLRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GenerateSubtitleDownloadURLRequest) GetSubtitleId() string {
+	if x != nil {
+		return x.SubtitleId
+	}
+	return ""
+}
+
+type GenerateSubtitleDownloadURLResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Pre-signed URL for downloading the subtitle file.
+	// This URL can be used with an HTTP GET request to download the subtitle file.
+	// The URL has a limited validity period and will expire after a certain time.
+	DownloadUrl   string `protobuf:"bytes,1,opt,name=download_url,json=downloadUrl,proto3" json:"download_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GenerateSubtitleDownloadURLResponse) Reset() {
+	*x = GenerateSubtitleDownloadURLResponse{}
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GenerateSubtitleDownloadURLResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GenerateSubtitleDownloadURLResponse) ProtoMessage() {}
+
+func (x *GenerateSubtitleDownloadURLResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GenerateSubtitleDownloadURLResponse.ProtoReflect.Descriptor instead.
+func (*GenerateSubtitleDownloadURLResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GenerateSubtitleDownloadURLResponse) GetDownloadUrl() string {
+	if x != nil {
+		return x.DownloadUrl
+	}
+	return ""
+}
+
 type GenerateSubtitleUploadURLRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the subtitle for which to generate an upload URL.
@@ -434,7 +526,7 @@ type GenerateSubtitleUploadURLRequest struct {
 
 func (x *GenerateSubtitleUploadURLRequest) Reset() {
 	*x = GenerateSubtitleUploadURLRequest{}
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -446,7 +538,7 @@ func (x *GenerateSubtitleUploadURLRequest) String() string {
 func (*GenerateSubtitleUploadURLRequest) ProtoMessage() {}
 
 func (x *GenerateSubtitleUploadURLRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -459,7 +551,7 @@ func (x *GenerateSubtitleUploadURLRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateSubtitleUploadURLRequest.ProtoReflect.Descriptor instead.
 func (*GenerateSubtitleUploadURLRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GenerateSubtitleUploadURLRequest) GetSubtitleId() string {
@@ -481,7 +573,7 @@ type GenerateSubtitleUploadURLResponse struct {
 
 func (x *GenerateSubtitleUploadURLResponse) Reset() {
 	*x = GenerateSubtitleUploadURLResponse{}
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -493,7 +585,7 @@ func (x *GenerateSubtitleUploadURLResponse) String() string {
 func (*GenerateSubtitleUploadURLResponse) ProtoMessage() {}
 
 func (x *GenerateSubtitleUploadURLResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +598,7 @@ func (x *GenerateSubtitleUploadURLResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GenerateSubtitleUploadURLResponse.ProtoReflect.Descriptor instead.
 func (*GenerateSubtitleUploadURLResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GenerateSubtitleUploadURLResponse) GetUploadUrl() string {
@@ -526,7 +618,7 @@ type DeleteSubtitleRequest struct {
 
 func (x *DeleteSubtitleRequest) Reset() {
 	*x = DeleteSubtitleRequest{}
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -538,7 +630,7 @@ func (x *DeleteSubtitleRequest) String() string {
 func (*DeleteSubtitleRequest) ProtoMessage() {}
 
 func (x *DeleteSubtitleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,7 +643,7 @@ func (x *DeleteSubtitleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubtitleRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSubtitleRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteSubtitleRequest) GetSubtitleId() string {
@@ -572,7 +664,7 @@ type DeleteSubtitleMetadata struct {
 
 func (x *DeleteSubtitleMetadata) Reset() {
 	*x = DeleteSubtitleMetadata{}
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -584,7 +676,7 @@ func (x *DeleteSubtitleMetadata) String() string {
 func (*DeleteSubtitleMetadata) ProtoMessage() {}
 
 func (x *DeleteSubtitleMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -597,7 +689,7 @@ func (x *DeleteSubtitleMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSubtitleMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteSubtitleMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteSubtitleMetadata) GetSubtitleId() string {
@@ -635,7 +727,12 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"\bfilename\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfilename\"9\n" +
 	"\x16CreateSubtitleMetadata\x12\x1f\n" +
 	"\vsubtitle_id\x18\x01 \x01(\tR\n" +
-	"subtitleId\"Q\n" +
+	"subtitleId\"S\n" +
+	"\"GenerateSubtitleDownloadURLRequest\x12-\n" +
+	"\vsubtitle_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"subtitleId\"H\n" +
+	"#GenerateSubtitleDownloadURLResponse\x12!\n" +
+	"\fdownload_url\x18\x01 \x01(\tR\vdownloadUrl\"Q\n" +
 	" GenerateSubtitleUploadURLRequest\x12-\n" +
 	"\vsubtitle_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"subtitleId\"B\n" +
@@ -647,12 +744,13 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"subtitleId\"9\n" +
 	"\x16DeleteSubtitleMetadata\x12\x1f\n" +
 	"\vsubtitle_id\x18\x01 \x01(\tR\n" +
-	"subtitleId2\xb1\x06\n" +
+	"subtitleId2\x82\b\n" +
 	"\x0fSubtitleService\x12|\n" +
 	"\x03Get\x12).yandex.cloud.video.v1.GetSubtitleRequest\x1a\x1f.yandex.cloud.video.v1.Subtitle\")\x82\xd3\xe4\x93\x02#\x12!/video/v1/subtitles/{subtitle_id}\x12~\n" +
 	"\x04List\x12+.yandex.cloud.video.v1.ListSubtitlesRequest\x1a,.yandex.cloud.video.v1.ListSubtitlesResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/video/v1/subtitles\x12\x9f\x01\n" +
 	"\x06Create\x12,.yandex.cloud.video.v1.CreateSubtitleRequest\x1a!.yandex.cloud.operation.Operation\"D\xb2\xd2*\"\n" +
-	"\x16CreateSubtitleMetadata\x12\bSubtitle\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/video/v1/subtitles\x12\xc3\x01\n" +
+	"\x16CreateSubtitleMetadata\x12\bSubtitle\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/video/v1/subtitles\x12\xce\x01\n" +
+	"\x13GenerateDownloadURL\x129.yandex.cloud.video.v1.GenerateSubtitleDownloadURLRequest\x1a:.yandex.cloud.video.v1.GenerateSubtitleDownloadURLResponse\"@\x82\xd3\xe4\x93\x02::\x01*\"5/video/v1/subtitles/{subtitle_id}:generateDownloadURL\x12\xc3\x01\n" +
 	"\x11GenerateUploadURL\x127.yandex.cloud.video.v1.GenerateSubtitleUploadURLRequest\x1a8.yandex.cloud.video.v1.GenerateSubtitleUploadURLResponse\";\x82\xd3\xe4\x93\x025\x123/video/v1/subtitles/{subtitle_id}:generateUploadURL\x12\xb7\x01\n" +
 	"\x06Delete\x12,.yandex.cloud.video.v1.DeleteSubtitleRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*/\n" +
 	"\x16DeleteSubtitleMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02#*!/video/v1/subtitles/{subtitle_id}B\\\n" +
@@ -670,36 +768,40 @@ func file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_video_v1_subtitle_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_video_v1_subtitle_service_proto_goTypes = []any{
-	(*GetSubtitleRequest)(nil),                // 0: yandex.cloud.video.v1.GetSubtitleRequest
-	(*ListSubtitlesRequest)(nil),              // 1: yandex.cloud.video.v1.ListSubtitlesRequest
-	(*ListSubtitlesResponse)(nil),             // 2: yandex.cloud.video.v1.ListSubtitlesResponse
-	(*CreateSubtitleRequest)(nil),             // 3: yandex.cloud.video.v1.CreateSubtitleRequest
-	(*SubtitleUploadParams)(nil),              // 4: yandex.cloud.video.v1.SubtitleUploadParams
-	(*CreateSubtitleMetadata)(nil),            // 5: yandex.cloud.video.v1.CreateSubtitleMetadata
-	(*GenerateSubtitleUploadURLRequest)(nil),  // 6: yandex.cloud.video.v1.GenerateSubtitleUploadURLRequest
-	(*GenerateSubtitleUploadURLResponse)(nil), // 7: yandex.cloud.video.v1.GenerateSubtitleUploadURLResponse
-	(*DeleteSubtitleRequest)(nil),             // 8: yandex.cloud.video.v1.DeleteSubtitleRequest
-	(*DeleteSubtitleMetadata)(nil),            // 9: yandex.cloud.video.v1.DeleteSubtitleMetadata
-	(*Subtitle)(nil),                          // 10: yandex.cloud.video.v1.Subtitle
-	(*operation.Operation)(nil),               // 11: yandex.cloud.operation.Operation
+	(*GetSubtitleRequest)(nil),                  // 0: yandex.cloud.video.v1.GetSubtitleRequest
+	(*ListSubtitlesRequest)(nil),                // 1: yandex.cloud.video.v1.ListSubtitlesRequest
+	(*ListSubtitlesResponse)(nil),               // 2: yandex.cloud.video.v1.ListSubtitlesResponse
+	(*CreateSubtitleRequest)(nil),               // 3: yandex.cloud.video.v1.CreateSubtitleRequest
+	(*SubtitleUploadParams)(nil),                // 4: yandex.cloud.video.v1.SubtitleUploadParams
+	(*CreateSubtitleMetadata)(nil),              // 5: yandex.cloud.video.v1.CreateSubtitleMetadata
+	(*GenerateSubtitleDownloadURLRequest)(nil),  // 6: yandex.cloud.video.v1.GenerateSubtitleDownloadURLRequest
+	(*GenerateSubtitleDownloadURLResponse)(nil), // 7: yandex.cloud.video.v1.GenerateSubtitleDownloadURLResponse
+	(*GenerateSubtitleUploadURLRequest)(nil),    // 8: yandex.cloud.video.v1.GenerateSubtitleUploadURLRequest
+	(*GenerateSubtitleUploadURLResponse)(nil),   // 9: yandex.cloud.video.v1.GenerateSubtitleUploadURLResponse
+	(*DeleteSubtitleRequest)(nil),               // 10: yandex.cloud.video.v1.DeleteSubtitleRequest
+	(*DeleteSubtitleMetadata)(nil),              // 11: yandex.cloud.video.v1.DeleteSubtitleMetadata
+	(*Subtitle)(nil),                            // 12: yandex.cloud.video.v1.Subtitle
+	(*operation.Operation)(nil),                 // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_video_v1_subtitle_service_proto_depIdxs = []int32{
-	10, // 0: yandex.cloud.video.v1.ListSubtitlesResponse.subtitles:type_name -> yandex.cloud.video.v1.Subtitle
+	12, // 0: yandex.cloud.video.v1.ListSubtitlesResponse.subtitles:type_name -> yandex.cloud.video.v1.Subtitle
 	4,  // 1: yandex.cloud.video.v1.CreateSubtitleRequest.upload:type_name -> yandex.cloud.video.v1.SubtitleUploadParams
 	0,  // 2: yandex.cloud.video.v1.SubtitleService.Get:input_type -> yandex.cloud.video.v1.GetSubtitleRequest
 	1,  // 3: yandex.cloud.video.v1.SubtitleService.List:input_type -> yandex.cloud.video.v1.ListSubtitlesRequest
 	3,  // 4: yandex.cloud.video.v1.SubtitleService.Create:input_type -> yandex.cloud.video.v1.CreateSubtitleRequest
-	6,  // 5: yandex.cloud.video.v1.SubtitleService.GenerateUploadURL:input_type -> yandex.cloud.video.v1.GenerateSubtitleUploadURLRequest
-	8,  // 6: yandex.cloud.video.v1.SubtitleService.Delete:input_type -> yandex.cloud.video.v1.DeleteSubtitleRequest
-	10, // 7: yandex.cloud.video.v1.SubtitleService.Get:output_type -> yandex.cloud.video.v1.Subtitle
-	2,  // 8: yandex.cloud.video.v1.SubtitleService.List:output_type -> yandex.cloud.video.v1.ListSubtitlesResponse
-	11, // 9: yandex.cloud.video.v1.SubtitleService.Create:output_type -> yandex.cloud.operation.Operation
-	7,  // 10: yandex.cloud.video.v1.SubtitleService.GenerateUploadURL:output_type -> yandex.cloud.video.v1.GenerateSubtitleUploadURLResponse
-	11, // 11: yandex.cloud.video.v1.SubtitleService.Delete:output_type -> yandex.cloud.operation.Operation
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
+	6,  // 5: yandex.cloud.video.v1.SubtitleService.GenerateDownloadURL:input_type -> yandex.cloud.video.v1.GenerateSubtitleDownloadURLRequest
+	8,  // 6: yandex.cloud.video.v1.SubtitleService.GenerateUploadURL:input_type -> yandex.cloud.video.v1.GenerateSubtitleUploadURLRequest
+	10, // 7: yandex.cloud.video.v1.SubtitleService.Delete:input_type -> yandex.cloud.video.v1.DeleteSubtitleRequest
+	12, // 8: yandex.cloud.video.v1.SubtitleService.Get:output_type -> yandex.cloud.video.v1.Subtitle
+	2,  // 9: yandex.cloud.video.v1.SubtitleService.List:output_type -> yandex.cloud.video.v1.ListSubtitlesResponse
+	13, // 10: yandex.cloud.video.v1.SubtitleService.Create:output_type -> yandex.cloud.operation.Operation
+	7,  // 11: yandex.cloud.video.v1.SubtitleService.GenerateDownloadURL:output_type -> yandex.cloud.video.v1.GenerateSubtitleDownloadURLResponse
+	9,  // 12: yandex.cloud.video.v1.SubtitleService.GenerateUploadURL:output_type -> yandex.cloud.video.v1.GenerateSubtitleUploadURLResponse
+	13, // 13: yandex.cloud.video.v1.SubtitleService.Delete:output_type -> yandex.cloud.operation.Operation
+	8,  // [8:14] is the sub-list for method output_type
+	2,  // [2:8] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name
 	2,  // [2:2] is the sub-list for extension extendee
 	0,  // [0:2] is the sub-list for field type_name
@@ -724,7 +826,7 @@ func file_yandex_cloud_video_v1_subtitle_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc), len(file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

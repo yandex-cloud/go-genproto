@@ -22,6 +22,70 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Represents the current status of a service account.
+type ServiceAccount_Status int32
+
+const (
+	// The status is not specified.
+	ServiceAccount_STATUS_UNSPECIFIED ServiceAccount_Status = 0
+	// The service account is in the process of being created.
+	ServiceAccount_CREATING ServiceAccount_Status = 1
+	// The service account is active and can authenticate.
+	// Active service accounts have full access to the system according to their permissions.
+	ServiceAccount_ACTIVE ServiceAccount_Status = 2
+	// The service account is suspended and cannot authenticate.
+	// Suspended service accounts retain their data but cannot access the system.
+	ServiceAccount_SUSPENDED ServiceAccount_Status = 3
+	// The service account is in the process of being deleted.
+	// This is a transitional state before the service account is completely removed from the system.
+	ServiceAccount_DELETING ServiceAccount_Status = 4
+)
+
+// Enum value maps for ServiceAccount_Status.
+var (
+	ServiceAccount_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "CREATING",
+		2: "ACTIVE",
+		3: "SUSPENDED",
+		4: "DELETING",
+	}
+	ServiceAccount_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"CREATING":           1,
+		"ACTIVE":             2,
+		"SUSPENDED":          3,
+		"DELETING":           4,
+	}
+)
+
+func (x ServiceAccount_Status) Enum() *ServiceAccount_Status {
+	p := new(ServiceAccount_Status)
+	*p = x
+	return p
+}
+
+func (x ServiceAccount_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ServiceAccount_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_iam_v1_service_account_proto_enumTypes[0].Descriptor()
+}
+
+func (ServiceAccount_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_iam_v1_service_account_proto_enumTypes[0]
+}
+
+func (x ServiceAccount_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ServiceAccount_Status.Descriptor instead.
+func (ServiceAccount_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_proto_rawDescGZIP(), []int{0, 0}
+}
+
 // A ServiceAccount resource. For more information, see [Service accounts](/docs/iam/concepts/users/service-accounts).
 type ServiceAccount struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -40,8 +104,13 @@ type ServiceAccount struct {
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Timestamp for the last authentication of this service account.
 	LastAuthenticatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=last_authenticated_at,json=lastAuthenticatedAt,proto3" json:"last_authenticated_at,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Current status of the service account.
+	// Determines whether the service account can authenticate and access the system.
+	Status ServiceAccount_Status `protobuf:"varint,8,opt,name=status,proto3,enum=yandex.cloud.iam.v1.ServiceAccount_Status" json:"status,omitempty"`
+	// Timestamp when the service account expires.
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ServiceAccount) Reset() {
@@ -123,11 +192,25 @@ func (x *ServiceAccount) GetLastAuthenticatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ServiceAccount) GetStatus() ServiceAccount_Status {
+	if x != nil {
+		return x.Status
+	}
+	return ServiceAccount_STATUS_UNSPECIFIED
+}
+
+func (x *ServiceAccount) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 var File_yandex_cloud_iam_v1_service_account_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_service_account_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/iam/v1/service_account.proto\x12\x13yandex.cloud.iam.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x82\x03\n" +
+	")yandex/cloud/iam/v1/service_account.proto\x12\x13yandex.cloud.iam.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xda\x04\n" +
 	"\x0eServiceAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -136,10 +219,20 @@ const file_yandex_cloud_iam_v1_service_account_proto_rawDesc = "" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12G\n" +
 	"\x06labels\x18\x06 \x03(\v2/.yandex.cloud.iam.v1.ServiceAccount.LabelsEntryR\x06labels\x12N\n" +
-	"\x15last_authenticated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x1a9\n" +
+	"\x15last_authenticated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\x13lastAuthenticatedAt\x12B\n" +
+	"\x06status\x18\b \x01(\x0e2*.yandex.cloud.iam.v1.ServiceAccount.StatusR\x06status\x129\n" +
+	"\n" +
+	"expires_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01BV\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"W\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
+	"\bCREATING\x10\x01\x12\n" +
+	"\n" +
+	"\x06ACTIVE\x10\x02\x12\r\n" +
+	"\tSUSPENDED\x10\x03\x12\f\n" +
+	"\bDELETING\x10\x04BV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (
@@ -154,21 +247,25 @@ func file_yandex_cloud_iam_v1_service_account_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_iam_v1_service_account_proto_rawDescData
 }
 
+var file_yandex_cloud_iam_v1_service_account_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_iam_v1_service_account_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_iam_v1_service_account_proto_goTypes = []any{
-	(*ServiceAccount)(nil),        // 0: yandex.cloud.iam.v1.ServiceAccount
-	nil,                           // 1: yandex.cloud.iam.v1.ServiceAccount.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(ServiceAccount_Status)(0),    // 0: yandex.cloud.iam.v1.ServiceAccount.Status
+	(*ServiceAccount)(nil),        // 1: yandex.cloud.iam.v1.ServiceAccount
+	nil,                           // 2: yandex.cloud.iam.v1.ServiceAccount.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_yandex_cloud_iam_v1_service_account_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.iam.v1.ServiceAccount.created_at:type_name -> google.protobuf.Timestamp
-	1, // 1: yandex.cloud.iam.v1.ServiceAccount.labels:type_name -> yandex.cloud.iam.v1.ServiceAccount.LabelsEntry
-	2, // 2: yandex.cloud.iam.v1.ServiceAccount.last_authenticated_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 0: yandex.cloud.iam.v1.ServiceAccount.created_at:type_name -> google.protobuf.Timestamp
+	2, // 1: yandex.cloud.iam.v1.ServiceAccount.labels:type_name -> yandex.cloud.iam.v1.ServiceAccount.LabelsEntry
+	3, // 2: yandex.cloud.iam.v1.ServiceAccount.last_authenticated_at:type_name -> google.protobuf.Timestamp
+	0, // 3: yandex.cloud.iam.v1.ServiceAccount.status:type_name -> yandex.cloud.iam.v1.ServiceAccount.Status
+	3, // 4: yandex.cloud.iam.v1.ServiceAccount.expires_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_iam_v1_service_account_proto_init() }
@@ -181,13 +278,14 @@ func file_yandex_cloud_iam_v1_service_account_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_iam_v1_service_account_proto_rawDesc), len(file_yandex_cloud_iam_v1_service_account_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_iam_v1_service_account_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_iam_v1_service_account_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_iam_v1_service_account_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_iam_v1_service_account_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_iam_v1_service_account_proto = out.File

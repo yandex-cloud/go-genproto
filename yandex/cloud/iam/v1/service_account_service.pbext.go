@@ -5,6 +5,7 @@ package iam
 import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (m *GetServiceAccountRequest) SetServiceAccountId(v string) {
@@ -51,6 +52,10 @@ func (m *CreateServiceAccountRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateServiceAccountRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
 func (m *CreateServiceAccountMetadata) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
@@ -73,6 +78,10 @@ func (m *UpdateServiceAccountRequest) SetDescription(v string) {
 
 func (m *UpdateServiceAccountRequest) SetLabels(v map[string]string) {
 	m.Labels = v
+}
+
+func (m *UpdateServiceAccountRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
 }
 
 func (m *UpdateServiceAccountMetadata) SetServiceAccountId(v string) {
@@ -105,4 +114,28 @@ func (m *ListServiceAccountOperationsResponse) SetOperations(v []*operation.Oper
 
 func (m *ListServiceAccountOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *SuspendServiceAccountRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *SuspendServiceAccountRequest) SetReason(v string) {
+	m.Reason = v
+}
+
+func (m *SuspendServiceAccountRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
+func (m *SuspendServiceAccountMetadata) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *ReactivateServiceAccountRequest) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *ReactivateServiceAccountMetadata) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
 }

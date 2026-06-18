@@ -33,3 +33,11 @@ func (m *ServiceAccount) SetLabels(v map[string]string) {
 func (m *ServiceAccount) SetLastAuthenticatedAt(v *timestamppb.Timestamp) {
 	m.LastAuthenticatedAt = v
 }
+
+func (m *ServiceAccount) SetStatus(v ServiceAccount_Status) {
+	m.Status = v
+}
+
+func (m *ServiceAccount) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}

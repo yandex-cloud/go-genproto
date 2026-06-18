@@ -880,19 +880,19 @@ const file_yandex_cloud_k8s_v1_node_group_proto_rawDesc = "" +
 	"\bSTOPPING\x10\x04\x12\v\n" +
 	"\aSTOPPED\x10\x05\x12\f\n" +
 	"\bDELETING\x10\x06\x12\f\n" +
-	"\bSTARTING\x10\a\"\xf3\x02\n" +
+	"\bSTARTING\x10\a\"\xea\x02\n" +
 	"\vScalePolicy\x12N\n" +
 	"\vfixed_scale\x18\x01 \x01(\v2+.yandex.cloud.k8s.v1.ScalePolicy.FixedScaleH\x00R\n" +
 	"fixedScale\x12K\n" +
 	"\n" +
-	"auto_scale\x18\x02 \x01(\v2*.yandex.cloud.k8s.v1.ScalePolicy.AutoScaleH\x00R\tautoScale\x1a+\n" +
+	"auto_scale\x18\x02 \x01(\v2*.yandex.cloud.k8s.v1.ScalePolicy.AutoScaleH\x00R\tautoScale\x1a)\n" +
 	"\n" +
-	"FixedScale\x12\x1d\n" +
-	"\x04size\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\x04size\x1a\x85\x01\n" +
-	"\tAutoScale\x12$\n" +
-	"\bmin_size\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\aminSize\x12$\n" +
-	"\bmax_size\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\amaxSize\x12,\n" +
-	"\finitial_size\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\vinitialSizeB\x12\n" +
+	"FixedScale\x12\x1b\n" +
+	"\x04size\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\x04size\x1a\x7f\n" +
+	"\tAutoScale\x12\"\n" +
+	"\bmin_size\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\aminSize\x12\"\n" +
+	"\bmax_size\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\amaxSize\x12*\n" +
+	"\finitial_size\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\vinitialSizeB\x12\n" +
 	"\n" +
 	"scale_type\x12\x04\xc0\xc11\x01\"a\n" +
 	"\x19NodeGroupAllocationPolicy\x12D\n" +

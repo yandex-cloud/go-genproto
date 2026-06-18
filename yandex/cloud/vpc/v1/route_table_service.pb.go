@@ -909,7 +909,7 @@ const file_yandex_cloud_vpc_v1_route_table_service_proto_rawDesc = "" +
 	"\x0eListOperations\x124.yandex.cloud.vpc.v1.ListRouteTableOperationsRequest\x1a5.yandex.cloud.vpc.v1.ListRouteTableOperationsResponse\"7\x82\xd3\xe4\x93\x021\x12//vpc/v1/routeTables/{route_table_id}/operations\x12\xb3\x01\n" +
 	"\x04Move\x12*.yandex.cloud.vpc.v1.MoveRouteTableRequest\x1a!.yandex.cloud.operation.Operation\"\\\xb2\xd2*$\n" +
 	"\x16MoveRouteTableMetadata\x12\n" +
-	"RouteTable\x82\xd3\xe4\x93\x02.:\x01*\")/vpc/v1/routeTables/{route_table_id}/moveBV\n" +
+	"RouteTable\x82\xd3\xe4\x93\x02.:\x01*\")/vpc/v1/routeTables/{route_table_id}:moveBV\n" +
 	"\x17yandex.cloud.api.vpc.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/vpc/v1;vpcb\x06proto3"
 
 var (

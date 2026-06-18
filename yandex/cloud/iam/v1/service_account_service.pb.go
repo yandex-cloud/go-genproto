@@ -15,6 +15,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -226,7 +227,9 @@ type CreateServiceAccountRequest struct {
 	// Description of the service account.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
-	Labels        map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Timestamp when the service account expires.
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -289,6 +292,13 @@ func (x *CreateServiceAccountRequest) GetLabels() map[string]string {
 	return nil
 }
 
+func (x *CreateServiceAccountRequest) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 type CreateServiceAccountMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the service account that is being created.
@@ -347,7 +357,9 @@ type UpdateServiceAccountRequest struct {
 	// Description of the service account.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as “ key:value “ pairs.
-	Labels        map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Timestamp when the service account expires.
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -413,6 +425,13 @@ func (x *UpdateServiceAccountRequest) GetDescription() string {
 func (x *UpdateServiceAccountRequest) GetLabels() map[string]string {
 	if x != nil {
 		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateServiceAccountRequest) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
 	}
 	return nil
 }
@@ -678,11 +697,287 @@ func (x *ListServiceAccountOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Request to suspend a service account.
+type SuspendServiceAccountRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the service account to suspend.
+	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Reason for suspending the service account.
+	Reason string `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	// Timestamp when the service account expires.
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuspendServiceAccountRequest) Reset() {
+	*x = SuspendServiceAccountRequest{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendServiceAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendServiceAccountRequest) ProtoMessage() {}
+
+func (x *SuspendServiceAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendServiceAccountRequest.ProtoReflect.Descriptor instead.
+func (*SuspendServiceAccountRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SuspendServiceAccountRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *SuspendServiceAccountRequest) GetReason() string {
+	if x != nil {
+		return x.Reason
+	}
+	return ""
+}
+
+func (x *SuspendServiceAccountRequest) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
+// Metadata for the [ServiceAccount.Suspend] operation.
+type SuspendServiceAccountMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the service account that is being suspended.
+	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *SuspendServiceAccountMetadata) Reset() {
+	*x = SuspendServiceAccountMetadata{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendServiceAccountMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendServiceAccountMetadata) ProtoMessage() {}
+
+func (x *SuspendServiceAccountMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendServiceAccountMetadata.ProtoReflect.Descriptor instead.
+func (*SuspendServiceAccountMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *SuspendServiceAccountMetadata) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+// Response of the [ServiceAccount.Suspend] operation.
+type SuspendServiceAccountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuspendServiceAccountResponse) Reset() {
+	*x = SuspendServiceAccountResponse{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuspendServiceAccountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuspendServiceAccountResponse) ProtoMessage() {}
+
+func (x *SuspendServiceAccountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuspendServiceAccountResponse.ProtoReflect.Descriptor instead.
+func (*SuspendServiceAccountResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{13}
+}
+
+// Request to reactivate a service account.
+type ReactivateServiceAccountRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the service account that is being reactivated.
+	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ReactivateServiceAccountRequest) Reset() {
+	*x = ReactivateServiceAccountRequest{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateServiceAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateServiceAccountRequest) ProtoMessage() {}
+
+func (x *ReactivateServiceAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateServiceAccountRequest.ProtoReflect.Descriptor instead.
+func (*ReactivateServiceAccountRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *ReactivateServiceAccountRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+// Metadata for the [ServiceAccount.Reactivate] operation.
+type ReactivateServiceAccountMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the service account that is being reactivated.
+	ServiceAccountId string `protobuf:"bytes,1,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ReactivateServiceAccountMetadata) Reset() {
+	*x = ReactivateServiceAccountMetadata{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateServiceAccountMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateServiceAccountMetadata) ProtoMessage() {}
+
+func (x *ReactivateServiceAccountMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateServiceAccountMetadata.ProtoReflect.Descriptor instead.
+func (*ReactivateServiceAccountMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ReactivateServiceAccountMetadata) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+// Response of the [ServiceAccount.Reactivate] operation.
+type ReactivateServiceAccountResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReactivateServiceAccountResponse) Reset() {
+	*x = ReactivateServiceAccountResponse{}
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReactivateServiceAccountResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReactivateServiceAccountResponse) ProtoMessage() {}
+
+func (x *ReactivateServiceAccountResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReactivateServiceAccountResponse.ProtoReflect.Descriptor instead.
+func (*ReactivateServiceAccountResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP(), []int{16}
+}
+
 var File_yandex_cloud_iam_v1_service_account_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/iam/v1/service_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/iam/v1/service_account.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
+	"1yandex/cloud/iam/v1/service_account_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/iam/v1/service_account.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"V\n" +
 	"\x18GetServiceAccountRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xbf\x01\n" +
 	"\x1aListServiceAccountsRequest\x12)\n" +
@@ -696,24 +991,28 @@ const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x95\x01\n" +
 	"\x1bListServiceAccountsResponse\x12N\n" +
 	"\x10service_accounts\x18\x01 \x03(\v2#.yandex.cloud.iam.v1.ServiceAccountR\x0fserviceAccounts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x81\x03\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfb\x03\n" +
 	"\x1bCreateServiceAccountRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
 	"\x04name\x18\x02 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12r\n" +
+	"\n" +
+	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"L\n" +
 	"\x1cCreateServiceAccountMetadata\x12,\n" +
-	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\xcf\x03\n" +
+	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\xc3\x04\n" +
 	"\x1bUpdateServiceAccountRequest\x12:\n" +
 	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12;\n" +
 	"\x04name\x18\x03 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x91\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2<.yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
+	"\x06labels\x18\x05 \x03(\v2<.yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12r\n" +
+	"\n" +
+	"expires_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
@@ -734,7 +1033,20 @@ const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x87\x0e\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf5\x01\n" +
+	"\x1cSuspendServiceAccountRequest\x12:\n" +
+	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\x12%\n" +
+	"\x06reason\x18\x02 \x01(\tB\r\xe8\xc71\x00\x8a\xc81\x05<=256R\x06reason\x12r\n" +
+	"\n" +
+	"expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\"M\n" +
+	"\x1dSuspendServiceAccountMetadata\x12,\n" +
+	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\x1f\n" +
+	"\x1dSuspendServiceAccountResponse\"]\n" +
+	"\x1fReactivateServiceAccountRequest\x12:\n" +
+	"\x12service_account_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"P\n" +
+	" ReactivateServiceAccountMetadata\x12,\n" +
+	"\x12service_account_id\x18\x01 \x01(\tR\x10serviceAccountId\"\"\n" +
+	" ReactivateServiceAccountResponse2\xe2\x11\n" +
 	"\x15ServiceAccountService\x12\x8f\x01\n" +
 	"\x03Get\x12-.yandex.cloud.iam.v1.GetServiceAccountRequest\x1a#.yandex.cloud.iam.v1.ServiceAccount\"4\x82\xd3\xe4\x93\x02.\x12,/iam/v1/serviceAccounts/{service_account_id}\x12\x8a\x01\n" +
 	"\x04List\x12/.yandex.cloud.iam.v1.ListServiceAccountsRequest\x1a0.yandex.cloud.iam.v1.ListServiceAccountsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/iam/v1/serviceAccounts\x12\xb3\x01\n" +
@@ -749,7 +1061,12 @@ const file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc = "" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02<:\x01*\"7/iam/v1/serviceAccounts/{resource_id}:setAccessBindings\x12\x82\x02\n" +
 	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x94\x01\xb2\xd2*K\n" +
 	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02?:\x01*\":/iam/v1/serviceAccounts/{resource_id}:updateAccessBindings\x12\xc6\x01\n" +
-	"\x0eListOperations\x128.yandex.cloud.iam.v1.ListServiceAccountOperationsRequest\x1a9.yandex.cloud.iam.v1.ListServiceAccountOperationsResponse\"?\x82\xd3\xe4\x93\x029\x127/iam/v1/serviceAccounts/{service_account_id}/operationsBV\n" +
+	"\x0eListOperations\x128.yandex.cloud.iam.v1.ListServiceAccountOperationsRequest\x1a9.yandex.cloud.iam.v1.ListServiceAccountOperationsResponse\"?\x82\xd3\xe4\x93\x029\x127/iam/v1/serviceAccounts/{service_account_id}/operations\x12\xe3\x01\n" +
+	"\aSuspend\x121.yandex.cloud.iam.v1.SuspendServiceAccountRequest\x1a!.yandex.cloud.operation.Operation\"\x81\x01\xb2\xd2*>\n" +
+	"\x1dSuspendServiceAccountMetadata\x12\x1dSuspendServiceAccountResponse\x82\xd3\xe4\x93\x029:\x01*\"4/iam/v1/serviceAccounts/{service_account_id}:suspend\x12\xf2\x01\n" +
+	"\n" +
+	"Reactivate\x124.yandex.cloud.iam.v1.ReactivateServiceAccountRequest\x1a!.yandex.cloud.operation.Operation\"\x8a\x01\xb2\xd2*D\n" +
+	" ReactivateServiceAccountMetadata\x12 ReactivateServiceAccountResponse\x82\xd3\xe4\x93\x02<:\x01*\"7/iam/v1/serviceAccounts/{service_account_id}:reactivateBV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (
@@ -764,7 +1081,7 @@ func file_yandex_cloud_iam_v1_service_account_service_proto_rawDescGZIP() []byte
 	return file_yandex_cloud_iam_v1_service_account_service_proto_rawDescData
 }
 
-var file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_yandex_cloud_iam_v1_service_account_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_yandex_cloud_iam_v1_service_account_service_proto_goTypes = []any{
 	(*GetServiceAccountRequest)(nil),             // 0: yandex.cloud.iam.v1.GetServiceAccountRequest
 	(*ListServiceAccountsRequest)(nil),           // 1: yandex.cloud.iam.v1.ListServiceAccountsRequest
@@ -777,45 +1094,59 @@ var file_yandex_cloud_iam_v1_service_account_service_proto_goTypes = []any{
 	(*DeleteServiceAccountMetadata)(nil),         // 8: yandex.cloud.iam.v1.DeleteServiceAccountMetadata
 	(*ListServiceAccountOperationsRequest)(nil),  // 9: yandex.cloud.iam.v1.ListServiceAccountOperationsRequest
 	(*ListServiceAccountOperationsResponse)(nil), // 10: yandex.cloud.iam.v1.ListServiceAccountOperationsResponse
-	nil,                                      // 11: yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntry
-	nil,                                      // 12: yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntry
-	(*ServiceAccount)(nil),                   // 13: yandex.cloud.iam.v1.ServiceAccount
-	(*fieldmaskpb.FieldMask)(nil),            // 14: google.protobuf.FieldMask
-	(*operation.Operation)(nil),              // 15: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil), // 16: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),  // 17: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 18: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 19: yandex.cloud.access.ListAccessBindingsResponse
+	(*SuspendServiceAccountRequest)(nil),         // 11: yandex.cloud.iam.v1.SuspendServiceAccountRequest
+	(*SuspendServiceAccountMetadata)(nil),        // 12: yandex.cloud.iam.v1.SuspendServiceAccountMetadata
+	(*SuspendServiceAccountResponse)(nil),        // 13: yandex.cloud.iam.v1.SuspendServiceAccountResponse
+	(*ReactivateServiceAccountRequest)(nil),      // 14: yandex.cloud.iam.v1.ReactivateServiceAccountRequest
+	(*ReactivateServiceAccountMetadata)(nil),     // 15: yandex.cloud.iam.v1.ReactivateServiceAccountMetadata
+	(*ReactivateServiceAccountResponse)(nil),     // 16: yandex.cloud.iam.v1.ReactivateServiceAccountResponse
+	nil,                                          // 17: yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntry
+	nil,                                          // 18: yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntry
+	(*ServiceAccount)(nil),                       // 19: yandex.cloud.iam.v1.ServiceAccount
+	(*timestamppb.Timestamp)(nil),                // 20: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),                // 21: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                  // 22: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),     // 23: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),      // 24: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),   // 25: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),    // 26: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_iam_v1_service_account_service_proto_depIdxs = []int32{
-	13, // 0: yandex.cloud.iam.v1.ListServiceAccountsResponse.service_accounts:type_name -> yandex.cloud.iam.v1.ServiceAccount
-	11, // 1: yandex.cloud.iam.v1.CreateServiceAccountRequest.labels:type_name -> yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntry
-	14, // 2: yandex.cloud.iam.v1.UpdateServiceAccountRequest.update_mask:type_name -> google.protobuf.FieldMask
-	12, // 3: yandex.cloud.iam.v1.UpdateServiceAccountRequest.labels:type_name -> yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntry
-	15, // 4: yandex.cloud.iam.v1.ListServiceAccountOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 5: yandex.cloud.iam.v1.ServiceAccountService.Get:input_type -> yandex.cloud.iam.v1.GetServiceAccountRequest
-	1,  // 6: yandex.cloud.iam.v1.ServiceAccountService.List:input_type -> yandex.cloud.iam.v1.ListServiceAccountsRequest
-	3,  // 7: yandex.cloud.iam.v1.ServiceAccountService.Create:input_type -> yandex.cloud.iam.v1.CreateServiceAccountRequest
-	5,  // 8: yandex.cloud.iam.v1.ServiceAccountService.Update:input_type -> yandex.cloud.iam.v1.UpdateServiceAccountRequest
-	7,  // 9: yandex.cloud.iam.v1.ServiceAccountService.Delete:input_type -> yandex.cloud.iam.v1.DeleteServiceAccountRequest
-	16, // 10: yandex.cloud.iam.v1.ServiceAccountService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	17, // 11: yandex.cloud.iam.v1.ServiceAccountService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	18, // 12: yandex.cloud.iam.v1.ServiceAccountService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	9,  // 13: yandex.cloud.iam.v1.ServiceAccountService.ListOperations:input_type -> yandex.cloud.iam.v1.ListServiceAccountOperationsRequest
-	13, // 14: yandex.cloud.iam.v1.ServiceAccountService.Get:output_type -> yandex.cloud.iam.v1.ServiceAccount
-	2,  // 15: yandex.cloud.iam.v1.ServiceAccountService.List:output_type -> yandex.cloud.iam.v1.ListServiceAccountsResponse
-	15, // 16: yandex.cloud.iam.v1.ServiceAccountService.Create:output_type -> yandex.cloud.operation.Operation
-	15, // 17: yandex.cloud.iam.v1.ServiceAccountService.Update:output_type -> yandex.cloud.operation.Operation
-	15, // 18: yandex.cloud.iam.v1.ServiceAccountService.Delete:output_type -> yandex.cloud.operation.Operation
-	19, // 19: yandex.cloud.iam.v1.ServiceAccountService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	15, // 20: yandex.cloud.iam.v1.ServiceAccountService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	15, // 21: yandex.cloud.iam.v1.ServiceAccountService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	10, // 22: yandex.cloud.iam.v1.ServiceAccountService.ListOperations:output_type -> yandex.cloud.iam.v1.ListServiceAccountOperationsResponse
-	14, // [14:23] is the sub-list for method output_type
-	5,  // [5:14] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	19, // 0: yandex.cloud.iam.v1.ListServiceAccountsResponse.service_accounts:type_name -> yandex.cloud.iam.v1.ServiceAccount
+	17, // 1: yandex.cloud.iam.v1.CreateServiceAccountRequest.labels:type_name -> yandex.cloud.iam.v1.CreateServiceAccountRequest.LabelsEntry
+	20, // 2: yandex.cloud.iam.v1.CreateServiceAccountRequest.expires_at:type_name -> google.protobuf.Timestamp
+	21, // 3: yandex.cloud.iam.v1.UpdateServiceAccountRequest.update_mask:type_name -> google.protobuf.FieldMask
+	18, // 4: yandex.cloud.iam.v1.UpdateServiceAccountRequest.labels:type_name -> yandex.cloud.iam.v1.UpdateServiceAccountRequest.LabelsEntry
+	20, // 5: yandex.cloud.iam.v1.UpdateServiceAccountRequest.expires_at:type_name -> google.protobuf.Timestamp
+	22, // 6: yandex.cloud.iam.v1.ListServiceAccountOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	20, // 7: yandex.cloud.iam.v1.SuspendServiceAccountRequest.expires_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: yandex.cloud.iam.v1.ServiceAccountService.Get:input_type -> yandex.cloud.iam.v1.GetServiceAccountRequest
+	1,  // 9: yandex.cloud.iam.v1.ServiceAccountService.List:input_type -> yandex.cloud.iam.v1.ListServiceAccountsRequest
+	3,  // 10: yandex.cloud.iam.v1.ServiceAccountService.Create:input_type -> yandex.cloud.iam.v1.CreateServiceAccountRequest
+	5,  // 11: yandex.cloud.iam.v1.ServiceAccountService.Update:input_type -> yandex.cloud.iam.v1.UpdateServiceAccountRequest
+	7,  // 12: yandex.cloud.iam.v1.ServiceAccountService.Delete:input_type -> yandex.cloud.iam.v1.DeleteServiceAccountRequest
+	23, // 13: yandex.cloud.iam.v1.ServiceAccountService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	24, // 14: yandex.cloud.iam.v1.ServiceAccountService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	25, // 15: yandex.cloud.iam.v1.ServiceAccountService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	9,  // 16: yandex.cloud.iam.v1.ServiceAccountService.ListOperations:input_type -> yandex.cloud.iam.v1.ListServiceAccountOperationsRequest
+	11, // 17: yandex.cloud.iam.v1.ServiceAccountService.Suspend:input_type -> yandex.cloud.iam.v1.SuspendServiceAccountRequest
+	14, // 18: yandex.cloud.iam.v1.ServiceAccountService.Reactivate:input_type -> yandex.cloud.iam.v1.ReactivateServiceAccountRequest
+	19, // 19: yandex.cloud.iam.v1.ServiceAccountService.Get:output_type -> yandex.cloud.iam.v1.ServiceAccount
+	2,  // 20: yandex.cloud.iam.v1.ServiceAccountService.List:output_type -> yandex.cloud.iam.v1.ListServiceAccountsResponse
+	22, // 21: yandex.cloud.iam.v1.ServiceAccountService.Create:output_type -> yandex.cloud.operation.Operation
+	22, // 22: yandex.cloud.iam.v1.ServiceAccountService.Update:output_type -> yandex.cloud.operation.Operation
+	22, // 23: yandex.cloud.iam.v1.ServiceAccountService.Delete:output_type -> yandex.cloud.operation.Operation
+	26, // 24: yandex.cloud.iam.v1.ServiceAccountService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	22, // 25: yandex.cloud.iam.v1.ServiceAccountService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	22, // 26: yandex.cloud.iam.v1.ServiceAccountService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	10, // 27: yandex.cloud.iam.v1.ServiceAccountService.ListOperations:output_type -> yandex.cloud.iam.v1.ListServiceAccountOperationsResponse
+	22, // 28: yandex.cloud.iam.v1.ServiceAccountService.Suspend:output_type -> yandex.cloud.operation.Operation
+	22, // 29: yandex.cloud.iam.v1.ServiceAccountService.Reactivate:output_type -> yandex.cloud.operation.Operation
+	19, // [19:30] is the sub-list for method output_type
+	8,  // [8:19] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_iam_v1_service_account_service_proto_init() }
@@ -830,7 +1161,7 @@ func file_yandex_cloud_iam_v1_service_account_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc), len(file_yandex_cloud_iam_v1_service_account_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

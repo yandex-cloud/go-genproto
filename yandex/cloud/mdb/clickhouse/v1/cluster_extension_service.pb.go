@@ -26,9 +26,11 @@ const (
 )
 
 type GetClusterExtensionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionName string                 `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the extension.
+	ExtensionName string `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -78,10 +80,13 @@ func (x *GetClusterExtensionRequest) GetExtensionName() string {
 }
 
 type ListClusterExtensionsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	PageSize      int64                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Maximum number of extensions to return per response.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token for fetching the next page of results.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -138,9 +143,11 @@ func (x *ListClusterExtensionsRequest) GetPageToken() string {
 }
 
 type ListClusterExtensionsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Extensions    []*ClusterExtension    `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Requested extensions.
+	Extensions []*ClusterExtension `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -190,9 +197,11 @@ func (x *ListClusterExtensionsResponse) GetNextPageToken() string {
 }
 
 type CreateClusterExtensionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionSpec *ExtensionSpec         `protobuf:"bytes,2,opt,name=extension_spec,json=extensionSpec,proto3" json:"extension_spec,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Specification of the extension to create.
+	ExtensionSpec *ExtensionSpec `protobuf:"bytes,2,opt,name=extension_spec,json=extensionSpec,proto3" json:"extension_spec,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,9 +251,11 @@ func (x *CreateClusterExtensionRequest) GetExtensionSpec() *ExtensionSpec {
 }
 
 type CreateClusterExtensionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionName string                 `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the extension being created.
+	ExtensionName string `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -294,9 +305,11 @@ func (x *CreateClusterExtensionMetadata) GetExtensionName() string {
 }
 
 type DeleteClusterExtensionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionName string                 `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the extension to delete.
+	ExtensionName string `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -346,9 +359,11 @@ func (x *DeleteClusterExtensionRequest) GetExtensionName() string {
 }
 
 type DeleteClusterExtensionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionName string                 `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the extension being deleted.
+	ExtensionName string `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -398,9 +413,11 @@ func (x *DeleteClusterExtensionMetadata) GetExtensionName() string {
 }
 
 type UpdateClusterExtensionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionSpec *ExtensionSpec         `protobuf:"bytes,2,opt,name=extension_spec,json=extensionSpec,proto3" json:"extension_spec,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// New specification of the extension.
+	ExtensionSpec *ExtensionSpec `protobuf:"bytes,2,opt,name=extension_spec,json=extensionSpec,proto3" json:"extension_spec,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -450,9 +467,11 @@ func (x *UpdateClusterExtensionRequest) GetExtensionSpec() *ExtensionSpec {
 }
 
 type UpdateClusterExtensionMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionName string                 `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the extension being updated.
+	ExtensionName string `protobuf:"bytes,2,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -502,9 +521,11 @@ func (x *UpdateClusterExtensionMetadata) GetExtensionName() string {
 }
 
 type SetClusterExtensionsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId      string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ExtensionSpecs []*ExtensionSpec       `protobuf:"bytes,2,rep,name=extension_specs,json=extensionSpecs,proto3" json:"extension_specs,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Specifications of the cluster extensions to set.
+	ExtensionSpecs []*ExtensionSpec `protobuf:"bytes,2,rep,name=extension_specs,json=extensionSpecs,proto3" json:"extension_specs,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -554,11 +575,15 @@ func (x *SetClusterExtensionsRequest) GetExtensionSpecs() []*ExtensionSpec {
 }
 
 type SetClusterExtensionsMetadata struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId             string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	AddedExtensionNames   []string               `protobuf:"bytes,2,rep,name=added_extension_names,json=addedExtensionNames,proto3" json:"added_extension_names,omitempty"`
-	UpdatedExtensionNames []string               `protobuf:"bytes,3,rep,name=updated_extension_names,json=updatedExtensionNames,proto3" json:"updated_extension_names,omitempty"`
-	DeletedExtensionNames []string               `protobuf:"bytes,4,rep,name=deleted_extension_names,json=deletedExtensionNames,proto3" json:"deleted_extension_names,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the ClickHouse cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Names of the added extensions.
+	AddedExtensionNames []string `protobuf:"bytes,2,rep,name=added_extension_names,json=addedExtensionNames,proto3" json:"added_extension_names,omitempty"`
+	// Names of the updated extensions.
+	UpdatedExtensionNames []string `protobuf:"bytes,3,rep,name=updated_extension_names,json=updatedExtensionNames,proto3" json:"updated_extension_names,omitempty"`
+	// Names of the deleted extensions.
+	DeletedExtensionNames []string `protobuf:"bytes,4,rep,name=deleted_extension_names,json=deletedExtensionNames,proto3" json:"deleted_extension_names,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -622,9 +647,11 @@ func (x *SetClusterExtensionsMetadata) GetDeletedExtensionNames() []string {
 }
 
 type ExtensionSpec struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the extension.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Version of the extension.
+	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

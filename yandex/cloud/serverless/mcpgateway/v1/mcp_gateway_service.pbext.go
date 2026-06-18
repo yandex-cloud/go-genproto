@@ -71,6 +71,10 @@ func (m *CreateMcpGatewayRequest) SetPublic(v bool) {
 	m.Public = v
 }
 
+func (m *CreateMcpGatewayRequest) SetTransport(v McpTransport) {
+	m.Transport = v
+}
+
 func (m *CreateMcpGatewayMetadata) SetMcpGatewayId(v string) {
 	m.McpGatewayId = v
 }
@@ -117,6 +121,10 @@ func (m *UpdateMcpGatewayRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateMcpGatewayRequest) SetPublic(v bool) {
 	m.Public = v
+}
+
+func (m *UpdateMcpGatewayRequest) SetTransport(v McpTransport) {
+	m.Transport = v
 }
 
 func (m *UpdateMcpGatewayMetadata) SetMcpGatewayId(v string) {

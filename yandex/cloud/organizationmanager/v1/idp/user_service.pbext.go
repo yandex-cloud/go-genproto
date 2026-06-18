@@ -106,6 +106,10 @@ func (m *CreateUserRequest) SetEmployeeId(v string) {
 	m.EmployeeId = v
 }
 
+func (m *CreateUserRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
 func (m *CreateUserMetadata) SetUserId(v string) {
 	m.UserId = v
 }
@@ -158,6 +162,10 @@ func (m *UpdateUserRequest) SetEmployeeId(v string) {
 	m.EmployeeId = v
 }
 
+func (m *UpdateUserRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}
+
 func (m *UpdateUserMetadata) SetUserId(v string) {
 	m.UserId = v
 }
@@ -176,6 +184,10 @@ func (m *SuspendUserRequest) SetUserId(v string) {
 
 func (m *SuspendUserRequest) SetReason(v string) {
 	m.Reason = v
+}
+
+func (m *SuspendUserRequest) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
 }
 
 func (m *SuspendUserMetadata) SetUserId(v string) {
@@ -368,6 +380,10 @@ func (m *GetPasswordChangesResponse) SetOperationExpiresAt(v *timestamppb.Timest
 
 func (m *GetPasswordChangesResponse) SetGenerated(v bool) {
 	m.Generated = v
+}
+
+func (m *GetPasswordChangesResponse) SetOldPassword(v string) {
+	m.OldPassword = v
 }
 
 func (m *CommitPasswordRequest) SetExternalUserId(v string) {

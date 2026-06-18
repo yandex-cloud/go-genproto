@@ -146,6 +146,10 @@ func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {
 	m.Config = v
 }
 
+func (m *ClusterConfig_Clickhouse) SetDefaultUserSettings(v *UserSettings) {
+	m.DefaultUserSettings = v
+}
+
 func (m *ClusterConfig_Clickhouse) SetResources(v *Resources) {
 	m.Resources = v
 }
@@ -194,6 +198,10 @@ func (m *ShardGroup) SetShardNames(v []string) {
 	m.ShardNames = v
 }
 
+func (m *ShardGroup) SetExternalShards(v []*ExternalShard) {
+	m.ExternalShards = v
+}
+
 func (m *ShardConfig) SetClickhouse(v *ShardConfig_Clickhouse) {
 	m.Clickhouse = v
 }
@@ -212,6 +220,42 @@ func (m *ShardConfig_Clickhouse) SetWeight(v *wrapperspb.Int64Value) {
 
 func (m *ShardConfig_Clickhouse) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
+}
+
+func (m *ExternalShard) SetName(v string) {
+	m.Name = v
+}
+
+func (m *ExternalShard) SetWeight(v *wrapperspb.Int64Value) {
+	m.Weight = v
+}
+
+func (m *ExternalShard) SetReplicas(v []*ExternalShard_Replica) {
+	m.Replicas = v
+}
+
+func (m *ExternalShard_Replica) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *ExternalShard_Replica) SetPort(v *wrapperspb.Int64Value) {
+	m.Port = v
+}
+
+func (m *ExternalShard_Replica) SetSecure(v *wrapperspb.BoolValue) {
+	m.Secure = v
+}
+
+func (m *ExternalShard_Replica) SetUser(v string) {
+	m.User = v
+}
+
+func (m *ExternalShard_Replica) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *ExternalShard_Replica) SetPriority(v *wrapperspb.Int64Value) {
+	m.Priority = v
 }
 
 func (m *Host) SetName(v string) {

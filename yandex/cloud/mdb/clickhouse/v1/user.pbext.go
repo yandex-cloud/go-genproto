@@ -30,6 +30,10 @@ func (m *User) SetConnectionManager(v *ConnectionManager) {
 	m.ConnectionManager = v
 }
 
+func (m *User) SetAuthMethod(v AuthMethod) {
+	m.AuthMethod = v
+}
+
 func (m *Permission) SetDatabaseName(v string) {
 	m.DatabaseName = v
 }
@@ -788,4 +792,8 @@ func (m *UserSpec) SetSettings(v *UserSettings) {
 
 func (m *UserSpec) SetQuotas(v []*UserQuota) {
 	m.Quotas = v
+}
+
+func (m *UserSpec) SetAuthMethod(v AuthMethod) {
+	m.AuthMethod = v
 }

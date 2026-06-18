@@ -267,12 +267,12 @@ var File_yandex_cloud_mdb_v1_backup_retention_policy_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/v1/backup_retention_policy.proto\x12\x13yandex.cloud.mdb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"{\n" +
+	"1yandex/cloud/mdb/v1/backup_retention_policy.proto\x12\x13yandex.cloud.mdb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"u\n" +
 	"\aCronTab\x12 \n" +
 	"\fday_of_month\x18\x03 \x01(\tR\n" +
 	"dayOfMonth\x12\x14\n" +
 	"\x05month\x18\x04 \x01(\tR\x05month\x12\x1e\n" +
-	"\vday_of_week\x18\x05 \x01(\tR\tdayOfWeekJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x06minuteR\x04hour\"\xc5\x02\n" +
+	"\vday_of_week\x18\x05 \x01(\tR\tdayOfWeekJ\x04\b\x01\x10\x03R\x06minuteR\x04hour\"\xc5\x02\n" +
 	"\x15BackupRetentionPolicy\x12!\n" +
 	"\tpolicy_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bpolicyId\x12+\n" +
 	"\n" +

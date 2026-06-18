@@ -26,8 +26,10 @@ type DatabaseEngine int32
 
 const (
 	DatabaseEngine_DATABASE_ENGINE_UNSPECIFIED DatabaseEngine = 0
-	DatabaseEngine_DATABASE_ENGINE_ATOMIC      DatabaseEngine = 1
-	DatabaseEngine_DATABASE_ENGINE_REPLICATED  DatabaseEngine = 2
+	// Atomic database engine.
+	DatabaseEngine_DATABASE_ENGINE_ATOMIC DatabaseEngine = 1
+	// Replicated database engine.
+	DatabaseEngine_DATABASE_ENGINE_REPLICATED DatabaseEngine = 2
 )
 
 // Enum value maps for DatabaseEngine.

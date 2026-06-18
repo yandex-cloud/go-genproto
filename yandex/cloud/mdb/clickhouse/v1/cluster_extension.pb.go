@@ -86,8 +86,9 @@ func (x *ClusterExtension) GetVersion() string {
 }
 
 type ClusterExtensions struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Extensions    []*ClusterExtension    `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of cluster extensions.
+	Extensions    []*ClusterExtension `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

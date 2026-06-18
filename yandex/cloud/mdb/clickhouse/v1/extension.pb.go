@@ -83,6 +83,7 @@ type ExtensionVersion struct {
 	// Is default version.
 	Default bool `protobuf:"varint,2,opt,name=default,proto3" json:"default,omitempty"`
 	// Is version deprecated.
+	// (-- api-linter: yc::1703::deprecated-annotation=disabled --)
 	Deprecated    bool `protobuf:"varint,3,opt,name=deprecated,proto3" json:"deprecated,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

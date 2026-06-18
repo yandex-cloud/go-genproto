@@ -50,6 +50,10 @@ func (m *Artifact) SetContent(v *Content) {
 	m.Content = v
 }
 
+func (m *Artifact) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
 type Content_Spec = isContent_Spec
 
 func (m *Content) SetSpec(v Content_Spec) {

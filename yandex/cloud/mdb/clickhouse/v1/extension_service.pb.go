@@ -24,9 +24,11 @@ const (
 )
 
 type GetExtensionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ExtensionName string                 `protobuf:"bytes,1,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
-	FolderId      string                 `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the extension.
+	ExtensionName string `protobuf:"bytes,1,opt,name=extension_name,json=extensionName,proto3" json:"extension_name,omitempty"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,10 +78,13 @@ func (x *GetExtensionRequest) GetFolderId() string {
 }
 
 type ListExtensionsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PageSize      int64                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	FolderId      string                 `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Maximum number of extensions to return per response.
+	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token for fetching the next page of results.
+	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,3,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -136,9 +141,11 @@ func (x *ListExtensionsRequest) GetFolderId() string {
 }
 
 type ListExtensionsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Extensions    []*Extension           `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Requested extensions.
+	Extensions []*Extension `protobuf:"bytes,1,rep,name=extensions,proto3" json:"extensions,omitempty"`
+	// Token to retrieve the next page of results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

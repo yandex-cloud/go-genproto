@@ -1007,13 +1007,13 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"4yandex/cloud/cloudregistry/v1/registry_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/cloudregistry/v1/artifact.proto\x1a1yandex/cloud/cloudregistry/v1/ip_permission.proto\x1a,yandex/cloud/cloudregistry/v1/registry.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"C\n" +
 	"\x12GetRegistryRequest\x12-\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
-	"registryId\"\x95\x01\n" +
+	"registryId\"\x8a\x01\n" +
 	"\x15ListRegistriesRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x89\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x89\x01\n" +
 	"\x16ListRegistriesResponse\x12G\n" +
 	"\n" +
 	"registries\x18\x01 \x03(\v2'.yandex.cloud.cloudregistry.v1.RegistryR\n" +
@@ -1084,15 +1084,15 @@ const file_yandex_cloud_cloudregistry_v1_registry_service_proto_rawDesc = "" +
 	"registryId\">\n" +
 	"\x1bUpdateIpPermissionsMetadata\x12\x1f\n" +
 	"\vregistry_id\x18\x01 \x01(\tR\n" +
-	"registryId\"\xa8\x01\n" +
+	"registryId\"\x9d\x01\n" +
 	"\x14ListArtifactsRequest\x12)\n" +
 	"\vregistry_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\n" +
 	"registryId\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12'\n" +
 	"\tpage_size\x18\x03 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x86\x01\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"\x86\x01\n" +
 	"\x15ListArtifactsResponse\x12E\n" +
 	"\tartifacts\x18\x01 \x03(\v2'.yandex.cloud.cloudregistry.v1.ArtifactR\tartifacts\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x8b\x15\n" +

@@ -25,8 +25,10 @@ type FormatSchemaType int32
 
 const (
 	FormatSchemaType_FORMAT_SCHEMA_TYPE_UNSPECIFIED FormatSchemaType = 0
-	FormatSchemaType_FORMAT_SCHEMA_TYPE_PROTOBUF    FormatSchemaType = 1
-	FormatSchemaType_FORMAT_SCHEMA_TYPE_CAPNPROTO   FormatSchemaType = 2
+	// [Protobuf](https://protobuf.dev/) data format (including [ProtobufSingle](https://clickhouse.com/docs/en/interfaces/formats#protobufsingle)).
+	FormatSchemaType_FORMAT_SCHEMA_TYPE_PROTOBUF FormatSchemaType = 1
+	// [Cap'n Proto](https://capnproto.org/) data format.
+	FormatSchemaType_FORMAT_SCHEMA_TYPE_CAPNPROTO FormatSchemaType = 2
 )
 
 // Enum value maps for FormatSchemaType.

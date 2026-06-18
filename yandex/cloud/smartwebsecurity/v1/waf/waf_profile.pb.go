@@ -1227,7 +1227,7 @@ type WafProfileExclusionRule_RequestCondition struct {
 	HeaderMatcher *WafProfileExclusionRule_RequestCondition_HeaderMatcher `protobuf:"bytes,2,opt,name=header_matcher,json=headerMatcher,proto3" json:"header_matcher,omitempty"`
 	// Matcher for request cookies.
 	CookieMatcher *WafProfileExclusionRule_RequestCondition_CookieMatcher `protobuf:"bytes,3,opt,name=cookie_matcher,json=cookieMatcher,proto3" json:"cookie_matcher,omitempty"`
-	// Matcher for request body.
+	// Matcher for request body exclusion flag.
 	BodyMatcher   *WafProfileExclusionRule_RequestCondition_BodyMatcher `protobuf:"bytes,4,opt,name=body_matcher,json=bodyMatcher,proto3" json:"body_matcher,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1482,8 +1482,12 @@ func (x *WafProfileExclusionRule_RequestCondition_CookieMatcher) GetCookieNames(
 
 type WafProfileExclusionRule_RequestCondition_BodyMatcher struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of request body values to match. Up to 20 entries.
-	BodyValues    []*WafProfileExclusionRule_RequestCondition_StringMatcher `protobuf:"bytes,1,rep,name=body_values,json=bodyValues,proto3" json:"body_values,omitempty"`
+	// Deprecated. Previously matched body content. Use is_excluded instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto.
+	BodyValues []*WafProfileExclusionRule_RequestCondition_StringMatcher `protobuf:"bytes,1,rep,name=body_values,json=bodyValues,proto3" json:"body_values,omitempty"`
+	// When true, request body is excluded from WAF inspection for this exclusion rule.
+	IsExcluded    bool `protobuf:"varint,2,opt,name=is_excluded,json=isExcluded,proto3" json:"is_excluded,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1518,11 +1522,19 @@ func (*WafProfileExclusionRule_RequestCondition_BodyMatcher) Descriptor() ([]byt
 	return file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDescGZIP(), []int{2, 1, 4}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto.
 func (x *WafProfileExclusionRule_RequestCondition_BodyMatcher) GetBodyValues() []*WafProfileExclusionRule_RequestCondition_StringMatcher {
 	if x != nil {
 		return x.BodyValues
 	}
 	return nil
+}
+
+func (x *WafProfileExclusionRule_RequestCondition_BodyMatcher) GetIsExcluded() bool {
+	if x != nil {
+		return x.IsExcluded
+	}
+	return false
 }
 
 var File_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto protoreflect.FileDescriptor
@@ -1608,7 +1620,7 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\n" +
 	"is_enabled\x18\x02 \x01(\bR\tisEnabled\x12\x1f\n" +
 	"\vis_blocking\x18\x03 \x01(\bR\n" +
-	"isBlocking\"\xfe\r\n" +
+	"isBlocking\"\xa1\x0e\n" +
 	"\x17WafProfileExclusionRule\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12+\n" +
 	"\vdescription\x18\x02 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12I\n" +
@@ -1619,7 +1631,8 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\fExcludeRules\x12\x1f\n" +
 	"\vexclude_all\x18\x01 \x01(\bR\n" +
 	"excludeAll\x12\x19\n" +
-	"\brule_ids\x18\x02 \x03(\tR\aruleIds\x1a\xed\t\n" +
+	"\brule_ids\x18\x02 \x03(\tR\aruleIds\x1a\x90\n" +
+	"\n" +
 	"\x10RequestCondition\x12\x87\x01\n" +
 	"\rparam_matcher\x18\x01 \x01(\v2b.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.RequestParamMatcherR\fparamMatcher\x12\x83\x01\n" +
 	"\x0eheader_matcher\x18\x02 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.HeaderMatcherR\rheaderMatcher\x12\x83\x01\n" +
@@ -1634,10 +1647,13 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\rHeaderMatcher\x12\x89\x01\n" +
 	"\fheader_names\x18\x01 \x03(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcherB\b\x82\xc81\x04<=20R\vheaderNames\x1a\x9b\x01\n" +
 	"\rCookieMatcher\x12\x89\x01\n" +
-	"\fcookie_names\x18\x01 \x03(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcherB\b\x82\xc81\x04<=20R\vcookieNames\x1a\x97\x01\n" +
-	"\vBodyMatcher\x12\x87\x01\n" +
-	"\vbody_values\x18\x01 \x03(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcherB\b\x82\xc81\x04<=20R\n" +
-	"bodyValues\"\xea\x01\n" +
+	"\fcookie_names\x18\x01 \x03(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcherB\b\x82\xc81\x04<=20R\vcookieNames\x1a\xba\x01\n" +
+	"\vBodyMatcher\x12\x89\x01\n" +
+	"\vbody_values\x18\x01 \x03(\v2\\.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcherB\n" +
+	"\x82\xc81\x04<=20\x18\x01R\n" +
+	"bodyValues\x12\x1f\n" +
+	"\vis_excluded\x18\x02 \x01(\bR\n" +
+	"isExcluded\"\xea\x01\n" +
 	"\aRuleSet\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1e\n" +
 	"\aversion\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\aversion\x12M\n" +

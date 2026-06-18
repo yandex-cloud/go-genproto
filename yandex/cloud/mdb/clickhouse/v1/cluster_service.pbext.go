@@ -743,6 +743,10 @@ func (m *CreateClusterShardGroupRequest) SetShardNames(v []string) {
 	m.ShardNames = v
 }
 
+func (m *CreateClusterShardGroupRequest) SetExternalShards(v []*ExternalShard) {
+	m.ExternalShards = v
+}
+
 func (m *CreateClusterShardGroupMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -769,6 +773,10 @@ func (m *UpdateClusterShardGroupRequest) SetDescription(v string) {
 
 func (m *UpdateClusterShardGroupRequest) SetShardNames(v []string) {
 	m.ShardNames = v
+}
+
+func (m *UpdateClusterShardGroupRequest) SetExternalShards(v []*ExternalShard) {
+	m.ExternalShards = v
 }
 
 func (m *UpdateClusterShardGroupMetadata) SetClusterId(v string) {
@@ -929,6 +937,10 @@ func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {
 	m.Config = v
+}
+
+func (m *ConfigSpec_Clickhouse) SetDefaultUserSettings(v *UserSettings) {
+	m.DefaultUserSettings = v
 }
 
 func (m *ConfigSpec_Clickhouse) SetResources(v *Resources) {

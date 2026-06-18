@@ -2,6 +2,10 @@
 
 package clickhouse
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *Version) SetId(v string) {
 	m.Id = v
 }
@@ -24,4 +28,16 @@ func (m *Version) SetLts(v bool) {
 
 func (m *Version) SetFullVersion(v string) {
 	m.FullVersion = v
+}
+
+func (m *Version) SetStatus(v Version_Status) {
+	m.Status = v
+}
+
+func (m *Version) SetDeprecatedAt(v *timestamppb.Timestamp) {
+	m.DeprecatedAt = v
+}
+
+func (m *Version) SetEolAt(v *timestamppb.Timestamp) {
+	m.EolAt = v
 }
