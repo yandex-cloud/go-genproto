@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,6 +23,57 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type AuthType int32
+
+const (
+	AuthType_AUTH_TYPE_UNSPECIFIED AuthType = 0
+	// Password-based authentication (SCRAM).
+	AuthType_AUTH_TYPE_PASSWORD AuthType = 1
+	// IAM-based authentication via iam-auth-proxy (SASL/PLAIN, $external).
+	AuthType_AUTH_TYPE_IAM AuthType = 2
+)
+
+// Enum value maps for AuthType.
+var (
+	AuthType_name = map[int32]string{
+		0: "AUTH_TYPE_UNSPECIFIED",
+		1: "AUTH_TYPE_PASSWORD",
+		2: "AUTH_TYPE_IAM",
+	}
+	AuthType_value = map[string]int32{
+		"AUTH_TYPE_UNSPECIFIED": 0,
+		"AUTH_TYPE_PASSWORD":    1,
+		"AUTH_TYPE_IAM":         2,
+	}
+)
+
+func (x AuthType) Enum() *AuthType {
+	p := new(AuthType)
+	*p = x
+	return p
+}
+
+func (x AuthType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AuthType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_mongodb_v1_user_proto_enumTypes[0].Descriptor()
+}
+
+func (AuthType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_mongodb_v1_user_proto_enumTypes[0]
+}
+
+func (x AuthType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AuthType.Descriptor instead.
+func (AuthType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDescGZIP(), []int{0}
+}
+
 // A MongoDB User resource. For more information, see the
 // [Developer's Guide](/docs/managed-mongodb/concepts).
 type User struct {
@@ -31,9 +83,13 @@ type User struct {
 	// ID of the MongoDB cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Set of permissions granted to the user.
-	Permissions   []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// Authentication type for the user.
+	AuthType AuthType `protobuf:"varint,5,opt,name=auth_type,json=authType,proto3,enum=yandex.cloud.mdb.mongodb.v1.AuthType" json:"auth_type,omitempty"`
+	// Deletion Protection inhibits deletion of the user
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -83,6 +139,20 @@ func (x *User) GetClusterId() string {
 func (x *User) GetPermissions() []*Permission {
 	if x != nil {
 		return x.Permissions
+	}
+	return nil
+}
+
+func (x *User) GetAuthType() AuthType {
+	if x != nil {
+		return x.AuthType
+	}
+	return AuthType_AUTH_TYPE_UNSPECIFIED
+}
+
+func (x *User) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
 	}
 	return nil
 }
@@ -148,9 +218,13 @@ type UserSpec struct {
 	// Password of the MongoDB user.
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Set of permissions to grant to the user.
-	Permissions   []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// Authentication type for the user. Defaults to AUTH_TYPE_PASSWORD.
+	AuthType AuthType `protobuf:"varint,5,opt,name=auth_type,json=authType,proto3,enum=yandex.cloud.mdb.mongodb.v1.AuthType" json:"auth_type,omitempty"`
+	// Deletion Protection inhibits deletion of the user
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *UserSpec) Reset() {
@@ -204,24 +278,46 @@ func (x *UserSpec) GetPermissions() []*Permission {
 	return nil
 }
 
+func (x *UserSpec) GetAuthType() AuthType {
+	if x != nil {
+		return x.AuthType
+	}
+	return AuthType_AUTH_TYPE_UNSPECIFIED
+}
+
+func (x *UserSpec) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_mongodb_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/mdb/mongodb/v1/user.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1dyandex/cloud/validation.proto\"\x84\x01\n" +
+	"&yandex/cloud/mdb/mongodb/v1/user.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\x02\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12I\n" +
-	"\vpermissions\x18\x03 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\"G\n" +
+	"\vpermissions\x18\x03 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\x12B\n" +
+	"\tauth_type\x18\x05 \x01(\x0e2%.yandex.cloud.mdb.mongodb.v1.AuthTypeR\bauthType\x12K\n" +
+	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtectionJ\x04\b\x04\x10\x05\"G\n" +
 	"\n" +
 	"Permission\x12#\n" +
 	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\x12\x14\n" +
-	"\x05roles\x18\x02 \x03(\tR\x05roles\"\xc0\x01\n" +
+	"\x05roles\x18\x02 \x03(\tR\x05roles\"\xd7\x02\n" +
 	"\bUserSpec\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=63R\x04name\x12%\n" +
 	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12I\n" +
-	"\vpermissions\x18\x03 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissionsBj\n" +
+	"\vpermissions\x18\x03 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\x12B\n" +
+	"\tauth_type\x18\x05 \x01(\x0e2%.yandex.cloud.mdb.mongodb.v1.AuthTypeR\bauthType\x12K\n" +
+	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtectionJ\x04\b\x04\x10\x05*P\n" +
+	"\bAuthType\x12\x19\n" +
+	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
+	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x11\n" +
+	"\rAUTH_TYPE_IAM\x10\x02Bj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
 
 var (
@@ -236,20 +332,27 @@ func file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDescData
 }
 
+var file_yandex_cloud_mdb_mongodb_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_mdb_mongodb_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_mdb_mongodb_v1_user_proto_goTypes = []any{
-	(*User)(nil),       // 0: yandex.cloud.mdb.mongodb.v1.User
-	(*Permission)(nil), // 1: yandex.cloud.mdb.mongodb.v1.Permission
-	(*UserSpec)(nil),   // 2: yandex.cloud.mdb.mongodb.v1.UserSpec
+	(AuthType)(0),                // 0: yandex.cloud.mdb.mongodb.v1.AuthType
+	(*User)(nil),                 // 1: yandex.cloud.mdb.mongodb.v1.User
+	(*Permission)(nil),           // 2: yandex.cloud.mdb.mongodb.v1.Permission
+	(*UserSpec)(nil),             // 3: yandex.cloud.mdb.mongodb.v1.UserSpec
+	(*wrapperspb.BoolValue)(nil), // 4: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_mongodb_v1_user_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.mdb.mongodb.v1.User.permissions:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
-	1, // 1: yandex.cloud.mdb.mongodb.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2, // 0: yandex.cloud.mdb.mongodb.v1.User.permissions:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
+	0, // 1: yandex.cloud.mdb.mongodb.v1.User.auth_type:type_name -> yandex.cloud.mdb.mongodb.v1.AuthType
+	4, // 2: yandex.cloud.mdb.mongodb.v1.User.deletion_protection:type_name -> google.protobuf.BoolValue
+	2, // 3: yandex.cloud.mdb.mongodb.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
+	0, // 4: yandex.cloud.mdb.mongodb.v1.UserSpec.auth_type:type_name -> yandex.cloud.mdb.mongodb.v1.AuthType
+	4, // 5: yandex.cloud.mdb.mongodb.v1.UserSpec.deletion_protection:type_name -> google.protobuf.BoolValue
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_user_proto_init() }
@@ -262,13 +365,14 @@ func file_yandex_cloud_mdb_mongodb_v1_user_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDesc), len(file_yandex_cloud_mdb_mongodb_v1_user_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_mdb_mongodb_v1_user_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_mdb_mongodb_v1_user_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_mdb_mongodb_v1_user_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_mdb_mongodb_v1_user_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_mdb_mongodb_v1_user_proto = out.File

@@ -232,6 +232,10 @@ func (m *AutoUpgradeMasterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *ScaleMasterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
 func (m *ListClusterOperationsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

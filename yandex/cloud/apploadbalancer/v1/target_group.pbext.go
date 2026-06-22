@@ -57,3 +57,7 @@ func (m *Target) SetPrivateIpv4Address(v bool) {
 func (m *Target) SetExternalAddress(v bool) {
 	m.ExternalAddress = v
 }
+
+func (m *Target) SetLocality(v *Locality) {
+	m.Locality = v
+}

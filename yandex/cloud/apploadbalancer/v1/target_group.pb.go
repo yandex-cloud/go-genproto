@@ -145,8 +145,10 @@ type Target struct {
 	// If set, will not require `subnet_id` to validate the target.
 	// Only one of `subnet_id` or `external_address` should be set.
 	ExternalAddress bool `protobuf:"varint,5,opt,name=external_address,json=externalAddress,proto3" json:"external_address,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Locality where the target resides.
+	Locality      *Locality `protobuf:"bytes,6,opt,name=locality,proto3" json:"locality,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Target) Reset() {
@@ -216,6 +218,13 @@ func (x *Target) GetExternalAddress() bool {
 	return false
 }
 
+func (x *Target) GetLocality() *Locality {
+	if x != nil {
+		return x.Locality
+	}
+	return nil
+}
+
 type isTarget_AddressType interface {
 	isTarget_AddressType()
 }
@@ -231,7 +240,7 @@ var File_yandex_cloud_apploadbalancer_v1_target_group_proto protoreflect.FileDes
 
 const file_yandex_cloud_apploadbalancer_v1_target_group_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/apploadbalancer/v1/target_group.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\x02\n" +
+	"2yandex/cloud/apploadbalancer/v1/target_group.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.yandex/cloud/apploadbalancer/v1/locality.proto\x1a\x1dyandex/cloud/validation.proto\"\xfb\x02\n" +
 	"\vTargetGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -243,13 +252,14 @@ const file_yandex_cloud_apploadbalancer_v1_target_group_proto_rawDesc = "" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbf\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x86\x02\n" +
 	"\x06Target\x12\x1f\n" +
 	"\n" +
 	"ip_address\x18\x01 \x01(\tH\x00R\tipAddress\x12\x1b\n" +
 	"\tsubnet_id\x18\x03 \x01(\tR\bsubnetId\x120\n" +
 	"\x14private_ipv4_address\x18\x04 \x01(\bR\x12privateIpv4Address\x12)\n" +
-	"\x10external_address\x18\x05 \x01(\bR\x0fexternalAddressB\x14\n" +
+	"\x10external_address\x18\x05 \x01(\bR\x0fexternalAddress\x12E\n" +
+	"\blocality\x18\x06 \x01(\v2).yandex.cloud.apploadbalancer.v1.LocalityR\blocalityB\x14\n" +
 	"\faddress_type\x12\x04\xc0\xc11\x01J\x04\b\x02\x10\x03Bz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 
@@ -271,16 +281,18 @@ var file_yandex_cloud_apploadbalancer_v1_target_group_proto_goTypes = []any{
 	(*Target)(nil),                // 1: yandex.cloud.apploadbalancer.v1.Target
 	nil,                           // 2: yandex.cloud.apploadbalancer.v1.TargetGroup.LabelsEntry
 	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*Locality)(nil),              // 4: yandex.cloud.apploadbalancer.v1.Locality
 }
 var file_yandex_cloud_apploadbalancer_v1_target_group_proto_depIdxs = []int32{
 	2, // 0: yandex.cloud.apploadbalancer.v1.TargetGroup.labels:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroup.LabelsEntry
 	1, // 1: yandex.cloud.apploadbalancer.v1.TargetGroup.targets:type_name -> yandex.cloud.apploadbalancer.v1.Target
 	3, // 2: yandex.cloud.apploadbalancer.v1.TargetGroup.created_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 3: yandex.cloud.apploadbalancer.v1.Target.locality:type_name -> yandex.cloud.apploadbalancer.v1.Locality
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_target_group_proto_init() }
@@ -288,6 +300,7 @@ func file_yandex_cloud_apploadbalancer_v1_target_group_proto_init() {
 	if File_yandex_cloud_apploadbalancer_v1_target_group_proto != nil {
 		return
 	}
+	file_yandex_cloud_apploadbalancer_v1_locality_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_target_group_proto_msgTypes[1].OneofWrappers = []any{
 		(*Target_IpAddress)(nil),
 	}

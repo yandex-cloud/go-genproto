@@ -20,18 +20,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServerService_Get_FullMethodName               = "/yandex.cloud.baremetal.v1alpha.ServerService/Get"
-	ServerService_List_FullMethodName              = "/yandex.cloud.baremetal.v1alpha.ServerService/List"
-	ServerService_Create_FullMethodName            = "/yandex.cloud.baremetal.v1alpha.ServerService/Create"
-	ServerService_BatchCreate_FullMethodName       = "/yandex.cloud.baremetal.v1alpha.ServerService/BatchCreate"
-	ServerService_Update_FullMethodName            = "/yandex.cloud.baremetal.v1alpha.ServerService/Update"
-	ServerService_PowerOff_FullMethodName          = "/yandex.cloud.baremetal.v1alpha.ServerService/PowerOff"
-	ServerService_PowerOn_FullMethodName           = "/yandex.cloud.baremetal.v1alpha.ServerService/PowerOn"
-	ServerService_Reboot_FullMethodName            = "/yandex.cloud.baremetal.v1alpha.ServerService/Reboot"
-	ServerService_Reinstall_FullMethodName         = "/yandex.cloud.baremetal.v1alpha.ServerService/Reinstall"
-	ServerService_ListOperations_FullMethodName    = "/yandex.cloud.baremetal.v1alpha.ServerService/ListOperations"
-	ServerService_StartProlongation_FullMethodName = "/yandex.cloud.baremetal.v1alpha.ServerService/StartProlongation"
-	ServerService_StopProlongation_FullMethodName  = "/yandex.cloud.baremetal.v1alpha.ServerService/StopProlongation"
+	ServerService_Get_FullMethodName                 = "/yandex.cloud.baremetal.v1alpha.ServerService/Get"
+	ServerService_List_FullMethodName                = "/yandex.cloud.baremetal.v1alpha.ServerService/List"
+	ServerService_Create_FullMethodName              = "/yandex.cloud.baremetal.v1alpha.ServerService/Create"
+	ServerService_BatchCreate_FullMethodName         = "/yandex.cloud.baremetal.v1alpha.ServerService/BatchCreate"
+	ServerService_Update_FullMethodName              = "/yandex.cloud.baremetal.v1alpha.ServerService/Update"
+	ServerService_PowerOff_FullMethodName            = "/yandex.cloud.baremetal.v1alpha.ServerService/PowerOff"
+	ServerService_PowerOn_FullMethodName             = "/yandex.cloud.baremetal.v1alpha.ServerService/PowerOn"
+	ServerService_Reboot_FullMethodName              = "/yandex.cloud.baremetal.v1alpha.ServerService/Reboot"
+	ServerService_Reinstall_FullMethodName           = "/yandex.cloud.baremetal.v1alpha.ServerService/Reinstall"
+	ServerService_ListOperations_FullMethodName      = "/yandex.cloud.baremetal.v1alpha.ServerService/ListOperations"
+	ServerService_StartProlongation_FullMethodName   = "/yandex.cloud.baremetal.v1alpha.ServerService/StartProlongation"
+	ServerService_StopProlongation_FullMethodName    = "/yandex.cloud.baremetal.v1alpha.ServerService/StopProlongation"
+	ServerService_ProlongateEndedRent_FullMethodName = "/yandex.cloud.baremetal.v1alpha.ServerService/ProlongateEndedRent"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -73,6 +74,10 @@ type ServerServiceClient interface {
 	StartProlongation(ctx context.Context, in *StartProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stops prolongation of the specified server.
 	StopProlongation(ctx context.Context, in *StopProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Enable prolongation after rental period end
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// Required for backward compatibility with old clients. --)
+	ProlongateEndedRent(ctx context.Context, in *ProlongateEndedRentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type serverServiceClient struct {
@@ -203,6 +208,16 @@ func (c *serverServiceClient) StopProlongation(ctx context.Context, in *StopProl
 	return out, nil
 }
 
+func (c *serverServiceClient) ProlongateEndedRent(ctx context.Context, in *ProlongateEndedRentRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ServerService_ProlongateEndedRent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -242,6 +257,10 @@ type ServerServiceServer interface {
 	StartProlongation(context.Context, *StartProlongationRequest) (*operation.Operation, error)
 	// Stops prolongation of the specified server.
 	StopProlongation(context.Context, *StopProlongationRequest) (*operation.Operation, error)
+	// Enable prolongation after rental period end
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// Required for backward compatibility with old clients. --)
+	ProlongateEndedRent(context.Context, *ProlongateEndedRentRequest) (*operation.Operation, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -286,6 +305,9 @@ func (UnimplementedServerServiceServer) StartProlongation(context.Context, *Star
 }
 func (UnimplementedServerServiceServer) StopProlongation(context.Context, *StopProlongationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StopProlongation not implemented")
+}
+func (UnimplementedServerServiceServer) ProlongateEndedRent(context.Context, *ProlongateEndedRentRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method ProlongateEndedRent not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -523,6 +545,24 @@ func _ServerService_StopProlongation_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_ProlongateEndedRent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProlongateEndedRentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).ProlongateEndedRent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_ProlongateEndedRent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).ProlongateEndedRent(ctx, req.(*ProlongateEndedRentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServerService_ServiceDesc is the grpc.ServiceDesc for ServerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -577,6 +617,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StopProlongation",
 			Handler:    _ServerService_StopProlongation_Handler,
+		},
+		{
+			MethodName: "ProlongateEndedRent",
+			Handler:    _ServerService_ProlongateEndedRent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

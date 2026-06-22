@@ -120,6 +120,10 @@ func (m *ClusterConfig) SetAuditLog(v *config.AuditLog) {
 	m.AuditLog = v
 }
 
+func (m *ClusterConfig) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 type OpenSearch_Config = isOpenSearch_Config
 
 func (m *OpenSearch) SetConfig(v OpenSearch_Config) {
@@ -326,4 +330,8 @@ func (m *DiskSizeAutoscaling) SetEmergencyUsageThreshold(v int64) {
 
 func (m *DiskSizeAutoscaling) SetDiskSizeLimit(v int64) {
 	m.DiskSizeLimit = v
+}
+
+func (m *CloudStorage) SetEnabled(v *wrapperspb.BoolValue) {
+	m.Enabled = v
 }

@@ -339,3 +339,15 @@ func (m *StopProlongationRequest) SetServerId(v string) {
 func (m *ServerSetProlongationMetadata) SetServerId(v string) {
 	m.ServerId = v
 }
+
+func (m *ProlongateEndedRentRequest) SetServerId(v string) {
+	m.ServerId = v
+}
+
+func (m *ProlongateEndedRentRequest) SetNextRentalPeriodId(v string) {
+	m.NextRentalPeriodId = v
+}
+
+func (m *ProlongateEndedRentMetadata) SetServerId(v string) {
+	m.ServerId = v
+}

@@ -1823,7 +1823,9 @@ type ConfigCreateSpec struct {
 	// Snapshot management configuration.
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
 	// Audit log settings.
-	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	AuditLog *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// Cloud storage configuration.
+	CloudStorage  *CloudStorage `protobuf:"bytes,8,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1903,6 +1905,13 @@ func (x *ConfigCreateSpec) GetSnapshotManagement() *SnapshotManagement {
 func (x *ConfigCreateSpec) GetAuditLog() *config.AuditLog {
 	if x != nil {
 		return x.AuditLog
+	}
+	return nil
+}
+
+func (x *ConfigCreateSpec) GetCloudStorage() *CloudStorage {
+	if x != nil {
+		return x.CloudStorage
 	}
 	return nil
 }
@@ -2118,7 +2127,9 @@ type ConfigUpdateSpec struct {
 	// Snapshot management configuration.
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,6,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
 	// Audit log settings.
-	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	AuditLog *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// Cloud storage configuration.
+	CloudStorage  *CloudStorage `protobuf:"bytes,8,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2198,6 +2209,13 @@ func (x *ConfigUpdateSpec) GetSnapshotManagement() *SnapshotManagement {
 func (x *ConfigUpdateSpec) GetAuditLog() *config.AuditLog {
 	if x != nil {
 		return x.AuditLog
+	}
+	return nil
+}
+
+func (x *ConfigUpdateSpec) GetCloudStorage() *CloudStorage {
+	if x != nil {
+		return x.CloudStorage
 	}
 	return nil
 }
@@ -4433,7 +4451,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"4\n" +
 	"\x13StopClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x93\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xe6\x04\n" +
 	"\x10ConfigCreateSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
 	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12]\n" +
@@ -4441,7 +4459,8 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v24.yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
 	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12L\n" +
-	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\"G\n" +
+	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\x12Q\n" +
+	"\rcloud_storage\x18\b \x01(\v2,.yandex.cloud.mdb.opensearch.v1.CloudStorageR\fcloudStorage\"G\n" +
 	"\x0fKeystoreSetting\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12\x1a\n" +
 	"\x05value\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x05value\"\xd8\x06\n" +
@@ -4475,7 +4494,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"subnet_ids\x18\x05 \x03(\tB\x10\x82\xc81\x04<=10\x8a\xc81\x04<=50R\tsubnetIds\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12g\n" +
-	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\x01\x10\x02\"\xa1\x04\n" +
+	"\x15disk_size_autoscaling\x18\a \x01(\v23.yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscalingR\x13diskSizeAutoscalingJ\x04\b\x01\x10\x02\"\xf4\x04\n" +
 	"\x10ConfigUpdateSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x124\n" +
 	"\x0eadmin_password\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x0510-72R\radminPassword\x12d\n" +
@@ -4483,7 +4502,8 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\x0fdashboards_spec\x18\x04 \x01(\v2;.yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpecR\x0edashboardsSpec\x12>\n" +
 	"\x06access\x18\x05 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
 	"\x13snapshot_management\x18\x06 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12L\n" +
-	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\"\xcd\x02\n" +
+	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\x12Q\n" +
+	"\rcloud_storage\x18\b \x01(\v2,.yandex.cloud.mdb.opensearch.v1.CloudStorageR\fcloudStorage\"\xcd\x02\n" +
 	"\x1bOpenSearchClusterUpdateSpec\x12\x18\n" +
 	"\aplugins\x18\x01 \x03(\tR\aplugins\x12k\n" +
 	"\x13opensearch_config_2\x18\x02 \x01(\v28.yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2H\x00R\x12opensearchConfig_2\x12c\n" +
@@ -4792,16 +4812,17 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_goTypes = []any{
 	(*Access)(nil),                                   // 77: yandex.cloud.mdb.opensearch.v1.Access
 	(*SnapshotManagement)(nil),                       // 78: yandex.cloud.mdb.opensearch.v1.SnapshotManagement
 	(*config.AuditLog)(nil),                          // 79: yandex.cloud.mdb.opensearch.v1.config.AuditLog
-	(*config.OpenSearchConfig2)(nil),                 // 80: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	(*Backup)(nil),                                   // 81: yandex.cloud.mdb.opensearch.v1.Backup
-	(*Resources)(nil),                                // 82: yandex.cloud.mdb.opensearch.v1.Resources
-	(OpenSearch_GroupRole)(0),                        // 83: yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
-	(*DiskSizeAutoscaling)(nil),                      // 84: yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	(*AuthSettings)(nil),                             // 85: yandex.cloud.mdb.opensearch.v1.AuthSettings
-	(*access.ListAccessBindingsRequest)(nil),         // 86: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),          // 87: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),       // 88: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),        // 89: yandex.cloud.access.ListAccessBindingsResponse
+	(*CloudStorage)(nil),                             // 80: yandex.cloud.mdb.opensearch.v1.CloudStorage
+	(*config.OpenSearchConfig2)(nil),                 // 81: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	(*Backup)(nil),                                   // 82: yandex.cloud.mdb.opensearch.v1.Backup
+	(*Resources)(nil),                                // 83: yandex.cloud.mdb.opensearch.v1.Resources
+	(OpenSearch_GroupRole)(0),                        // 84: yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
+	(*DiskSizeAutoscaling)(nil),                      // 85: yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	(*AuthSettings)(nil),                             // 86: yandex.cloud.mdb.opensearch.v1.AuthSettings
+	(*access.ListAccessBindingsRequest)(nil),         // 87: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),          // 88: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),       // 89: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),        // 90: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_depIdxs = []int32{
 	68, // 0: yandex.cloud.mdb.opensearch.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster
@@ -4833,108 +4854,110 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_depIdxs = []int32{
 	77, // 26: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
 	78, // 27: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
 	79, // 28: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
-	65, // 29: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup
-	80, // 30: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	28, // 31: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
-	66, // 32: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup
-	32, // 33: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.opensearch_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec
-	33, // 34: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.dashboards_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpec
-	77, // 35: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
-	78, // 36: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	79, // 37: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
-	80, // 38: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
-	28, // 39: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.set_keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
-	67, // 40: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.LabelsEntry
-	69, // 41: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.Environment
-	27, // 42: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec
-	70, // 43: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
-	71, // 44: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	2,  // 45: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.RescheduleType
-	74, // 46: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	74, // 47: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	81, // 48: yandex.cloud.mdb.opensearch.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.opensearch.v1.Backup
-	73, // 49: yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	46, // 50: yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec
-	82, // 51: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	83, // 52: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
-	84, // 53: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	65, // 54: yandex.cloud.mdb.opensearch.v1.AddOpenSearchNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup
-	73, // 55: yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
-	50, // 56: yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec
-	82, // 57: yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	84, // 58: yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	66, // 59: yandex.cloud.mdb.opensearch.v1.AddDashboardsNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup
-	85, // 60: yandex.cloud.mdb.opensearch.v1.UpdateAuthSettingsRequest.settings:type_name -> yandex.cloud.mdb.opensearch.v1.AuthSettings
-	82, // 61: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	83, // 62: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
-	84, // 63: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	82, // 64: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	84, // 65: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	3,  // 66: yandex.cloud.mdb.opensearch.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.opensearch.v1.GetClusterRequest
-	4,  // 67: yandex.cloud.mdb.opensearch.v1.ClusterService.List:input_type -> yandex.cloud.mdb.opensearch.v1.ListClustersRequest
-	6,  // 68: yandex.cloud.mdb.opensearch.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.opensearch.v1.CreateClusterRequest
-	8,  // 69: yandex.cloud.mdb.opensearch.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateClusterRequest
-	10, // 70: yandex.cloud.mdb.opensearch.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteClusterRequest
-	34, // 71: yandex.cloud.mdb.opensearch.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.opensearch.v1.BackupClusterRequest
-	36, // 72: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteBackup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteBackupRequest
-	38, // 73: yandex.cloud.mdb.opensearch.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest
-	40, // 74: yandex.cloud.mdb.opensearch.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest
-	42, // 75: yandex.cloud.mdb.opensearch.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterBackupsRequest
-	21, // 76: yandex.cloud.mdb.opensearch.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.opensearch.v1.MoveClusterRequest
-	23, // 77: yandex.cloud.mdb.opensearch.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.opensearch.v1.StartClusterRequest
-	25, // 78: yandex.cloud.mdb.opensearch.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.opensearch.v1.StopClusterRequest
-	12, // 79: yandex.cloud.mdb.opensearch.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest
-	16, // 80: yandex.cloud.mdb.opensearch.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.opensearch.v1.StreamClusterLogsRequest
-	17, // 81: yandex.cloud.mdb.opensearch.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterOperationsRequest
-	19, // 82: yandex.cloud.mdb.opensearch.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterHostsRequest
-	47, // 83: yandex.cloud.mdb.opensearch.v1.ClusterService.AddOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.AddOpenSearchNodeGroupRequest
-	44, // 84: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteOpenSearchNodeGroupRequest
-	45, // 85: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest
-	51, // 86: yandex.cloud.mdb.opensearch.v1.ClusterService.AddDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.AddDashboardsNodeGroupRequest
-	48, // 87: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteDashboardsNodeGroupRequest
-	49, // 88: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest
-	55, // 89: yandex.cloud.mdb.opensearch.v1.ClusterService.GetAuthSettings:input_type -> yandex.cloud.mdb.opensearch.v1.GetAuthSettingsRequest
-	56, // 90: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAuthSettings:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateAuthSettingsRequest
-	58, // 91: yandex.cloud.mdb.opensearch.v1.ClusterService.RestartOpenSearch:input_type -> yandex.cloud.mdb.opensearch.v1.RestartOpenSearchRequest
-	60, // 92: yandex.cloud.mdb.opensearch.v1.ClusterService.SwitchMaster:input_type -> yandex.cloud.mdb.opensearch.v1.SwitchMasterRequest
-	86, // 93: yandex.cloud.mdb.opensearch.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	87, // 94: yandex.cloud.mdb.opensearch.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	88, // 95: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	68, // 96: yandex.cloud.mdb.opensearch.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.opensearch.v1.Cluster
-	5,  // 97: yandex.cloud.mdb.opensearch.v1.ClusterService.List:output_type -> yandex.cloud.mdb.opensearch.v1.ListClustersResponse
-	75, // 98: yandex.cloud.mdb.opensearch.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	75, // 99: yandex.cloud.mdb.opensearch.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	75, // 100: yandex.cloud.mdb.opensearch.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	75, // 101: yandex.cloud.mdb.opensearch.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	75, // 102: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteBackup:output_type -> yandex.cloud.operation.Operation
-	75, // 103: yandex.cloud.mdb.opensearch.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	75, // 104: yandex.cloud.mdb.opensearch.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	43, // 105: yandex.cloud.mdb.opensearch.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterBackupsResponse
-	75, // 106: yandex.cloud.mdb.opensearch.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	75, // 107: yandex.cloud.mdb.opensearch.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	75, // 108: yandex.cloud.mdb.opensearch.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	14, // 109: yandex.cloud.mdb.opensearch.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterLogsResponse
-	15, // 110: yandex.cloud.mdb.opensearch.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.opensearch.v1.StreamLogRecord
-	18, // 111: yandex.cloud.mdb.opensearch.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterOperationsResponse
-	20, // 112: yandex.cloud.mdb.opensearch.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterHostsResponse
-	75, // 113: yandex.cloud.mdb.opensearch.v1.ClusterService.AddOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
-	75, // 114: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
-	75, // 115: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
-	75, // 116: yandex.cloud.mdb.opensearch.v1.ClusterService.AddDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
-	75, // 117: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
-	75, // 118: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
-	85, // 119: yandex.cloud.mdb.opensearch.v1.ClusterService.GetAuthSettings:output_type -> yandex.cloud.mdb.opensearch.v1.AuthSettings
-	75, // 120: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAuthSettings:output_type -> yandex.cloud.operation.Operation
-	75, // 121: yandex.cloud.mdb.opensearch.v1.ClusterService.RestartOpenSearch:output_type -> yandex.cloud.operation.Operation
-	75, // 122: yandex.cloud.mdb.opensearch.v1.ClusterService.SwitchMaster:output_type -> yandex.cloud.operation.Operation
-	89, // 123: yandex.cloud.mdb.opensearch.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	75, // 124: yandex.cloud.mdb.opensearch.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	75, // 125: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	96, // [96:126] is the sub-list for method output_type
-	66, // [66:96] is the sub-list for method input_type
-	66, // [66:66] is the sub-list for extension type_name
-	66, // [66:66] is the sub-list for extension extendee
-	0,  // [0:66] is the sub-list for field type_name
+	80, // 29: yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec.cloud_storage:type_name -> yandex.cloud.mdb.opensearch.v1.CloudStorage
+	65, // 30: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup
+	81, // 31: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	28, // 32: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
+	66, // 33: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup
+	32, // 34: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.opensearch_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec
+	33, // 35: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.dashboards_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsClusterUpdateSpec
+	77, // 36: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
+	78, // 37: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
+	79, // 38: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
+	80, // 39: yandex.cloud.mdb.opensearch.v1.ConfigUpdateSpec.cloud_storage:type_name -> yandex.cloud.mdb.opensearch.v1.CloudStorage
+	81, // 40: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.opensearch_config_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfig2
+	28, // 41: yandex.cloud.mdb.opensearch.v1.OpenSearchClusterUpdateSpec.set_keystore_settings:type_name -> yandex.cloud.mdb.opensearch.v1.KeystoreSetting
+	67, // 42: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.LabelsEntry
+	69, // 43: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.Environment
+	27, // 44: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.opensearch.v1.ConfigCreateSpec
+	70, // 45: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
+	71, // 46: yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	2,  // 47: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.RescheduleType
+	74, // 48: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	74, // 49: yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	82, // 50: yandex.cloud.mdb.opensearch.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.opensearch.v1.Backup
+	73, // 51: yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	46, // 52: yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec
+	83, // 53: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	84, // 54: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
+	85, // 55: yandex.cloud.mdb.opensearch.v1.OpenSearchNodeGroupUpdateSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	65, // 56: yandex.cloud.mdb.opensearch.v1.AddOpenSearchNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup
+	73, // 57: yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
+	50, // 58: yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec
+	83, // 59: yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	85, // 60: yandex.cloud.mdb.opensearch.v1.DashboardsNodeGroupUpdateSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	66, // 61: yandex.cloud.mdb.opensearch.v1.AddDashboardsNodeGroupRequest.node_group_spec:type_name -> yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup
+	86, // 62: yandex.cloud.mdb.opensearch.v1.UpdateAuthSettingsRequest.settings:type_name -> yandex.cloud.mdb.opensearch.v1.AuthSettings
+	83, // 63: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	84, // 64: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
+	85, // 65: yandex.cloud.mdb.opensearch.v1.OpenSearchCreateSpec.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	83, // 66: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	85, // 67: yandex.cloud.mdb.opensearch.v1.DashboardsCreateSpec.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	3,  // 68: yandex.cloud.mdb.opensearch.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.opensearch.v1.GetClusterRequest
+	4,  // 69: yandex.cloud.mdb.opensearch.v1.ClusterService.List:input_type -> yandex.cloud.mdb.opensearch.v1.ListClustersRequest
+	6,  // 70: yandex.cloud.mdb.opensearch.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.opensearch.v1.CreateClusterRequest
+	8,  // 71: yandex.cloud.mdb.opensearch.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateClusterRequest
+	10, // 72: yandex.cloud.mdb.opensearch.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteClusterRequest
+	34, // 73: yandex.cloud.mdb.opensearch.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.opensearch.v1.BackupClusterRequest
+	36, // 74: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteBackup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteBackupRequest
+	38, // 75: yandex.cloud.mdb.opensearch.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.opensearch.v1.RestoreClusterRequest
+	40, // 76: yandex.cloud.mdb.opensearch.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.opensearch.v1.RescheduleMaintenanceRequest
+	42, // 77: yandex.cloud.mdb.opensearch.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterBackupsRequest
+	21, // 78: yandex.cloud.mdb.opensearch.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.opensearch.v1.MoveClusterRequest
+	23, // 79: yandex.cloud.mdb.opensearch.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.opensearch.v1.StartClusterRequest
+	25, // 80: yandex.cloud.mdb.opensearch.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.opensearch.v1.StopClusterRequest
+	12, // 81: yandex.cloud.mdb.opensearch.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest
+	16, // 82: yandex.cloud.mdb.opensearch.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.opensearch.v1.StreamClusterLogsRequest
+	17, // 83: yandex.cloud.mdb.opensearch.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterOperationsRequest
+	19, // 84: yandex.cloud.mdb.opensearch.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.opensearch.v1.ListClusterHostsRequest
+	47, // 85: yandex.cloud.mdb.opensearch.v1.ClusterService.AddOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.AddOpenSearchNodeGroupRequest
+	44, // 86: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteOpenSearchNodeGroupRequest
+	45, // 87: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateOpenSearchNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateOpenSearchNodeGroupRequest
+	51, // 88: yandex.cloud.mdb.opensearch.v1.ClusterService.AddDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.AddDashboardsNodeGroupRequest
+	48, // 89: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.DeleteDashboardsNodeGroupRequest
+	49, // 90: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateDashboardsNodeGroup:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateDashboardsNodeGroupRequest
+	55, // 91: yandex.cloud.mdb.opensearch.v1.ClusterService.GetAuthSettings:input_type -> yandex.cloud.mdb.opensearch.v1.GetAuthSettingsRequest
+	56, // 92: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAuthSettings:input_type -> yandex.cloud.mdb.opensearch.v1.UpdateAuthSettingsRequest
+	58, // 93: yandex.cloud.mdb.opensearch.v1.ClusterService.RestartOpenSearch:input_type -> yandex.cloud.mdb.opensearch.v1.RestartOpenSearchRequest
+	60, // 94: yandex.cloud.mdb.opensearch.v1.ClusterService.SwitchMaster:input_type -> yandex.cloud.mdb.opensearch.v1.SwitchMasterRequest
+	87, // 95: yandex.cloud.mdb.opensearch.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	88, // 96: yandex.cloud.mdb.opensearch.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	89, // 97: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	68, // 98: yandex.cloud.mdb.opensearch.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.opensearch.v1.Cluster
+	5,  // 99: yandex.cloud.mdb.opensearch.v1.ClusterService.List:output_type -> yandex.cloud.mdb.opensearch.v1.ListClustersResponse
+	75, // 100: yandex.cloud.mdb.opensearch.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	75, // 101: yandex.cloud.mdb.opensearch.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	75, // 102: yandex.cloud.mdb.opensearch.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	75, // 103: yandex.cloud.mdb.opensearch.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	75, // 104: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteBackup:output_type -> yandex.cloud.operation.Operation
+	75, // 105: yandex.cloud.mdb.opensearch.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	75, // 106: yandex.cloud.mdb.opensearch.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	43, // 107: yandex.cloud.mdb.opensearch.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterBackupsResponse
+	75, // 108: yandex.cloud.mdb.opensearch.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	75, // 109: yandex.cloud.mdb.opensearch.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	75, // 110: yandex.cloud.mdb.opensearch.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	14, // 111: yandex.cloud.mdb.opensearch.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterLogsResponse
+	15, // 112: yandex.cloud.mdb.opensearch.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.opensearch.v1.StreamLogRecord
+	18, // 113: yandex.cloud.mdb.opensearch.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterOperationsResponse
+	20, // 114: yandex.cloud.mdb.opensearch.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.opensearch.v1.ListClusterHostsResponse
+	75, // 115: yandex.cloud.mdb.opensearch.v1.ClusterService.AddOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
+	75, // 116: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
+	75, // 117: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateOpenSearchNodeGroup:output_type -> yandex.cloud.operation.Operation
+	75, // 118: yandex.cloud.mdb.opensearch.v1.ClusterService.AddDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
+	75, // 119: yandex.cloud.mdb.opensearch.v1.ClusterService.DeleteDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
+	75, // 120: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateDashboardsNodeGroup:output_type -> yandex.cloud.operation.Operation
+	86, // 121: yandex.cloud.mdb.opensearch.v1.ClusterService.GetAuthSettings:output_type -> yandex.cloud.mdb.opensearch.v1.AuthSettings
+	75, // 122: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAuthSettings:output_type -> yandex.cloud.operation.Operation
+	75, // 123: yandex.cloud.mdb.opensearch.v1.ClusterService.RestartOpenSearch:output_type -> yandex.cloud.operation.Operation
+	75, // 124: yandex.cloud.mdb.opensearch.v1.ClusterService.SwitchMaster:output_type -> yandex.cloud.operation.Operation
+	90, // 125: yandex.cloud.mdb.opensearch.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	75, // 126: yandex.cloud.mdb.opensearch.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	75, // 127: yandex.cloud.mdb.opensearch.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	98, // [98:128] is the sub-list for method output_type
+	68, // [68:98] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_init() }

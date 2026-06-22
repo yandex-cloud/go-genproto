@@ -347,6 +347,10 @@ func (m *ConfigCreateSpec) SetAuditLog(v *config.AuditLog) {
 	m.AuditLog = v
 }
 
+func (m *ConfigCreateSpec) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
+}
+
 func (m *KeystoreSetting) SetName(v string) {
 	m.Name = v
 }
@@ -469,6 +473,10 @@ func (m *ConfigUpdateSpec) SetSnapshotManagement(v *SnapshotManagement) {
 
 func (m *ConfigUpdateSpec) SetAuditLog(v *config.AuditLog) {
 	m.AuditLog = v
+}
+
+func (m *ConfigUpdateSpec) SetCloudStorage(v *CloudStorage) {
+	m.CloudStorage = v
 }
 
 type OpenSearchClusterUpdateSpec_Config = isOpenSearchClusterUpdateSpec_Config

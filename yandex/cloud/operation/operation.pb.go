@@ -189,7 +189,7 @@ var File_yandex_cloud_operation_operation_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_operation_operation_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/operation/operation.proto\x12\x16yandex.cloud.operation\x1a\x19google/protobuf/any.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x84\x03\n" +
+	"&yandex/cloud/operation/operation.proto\x12\x16yandex.cloud.operation\x1a\x19google/protobuf/any.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17google/rpc/status.proto\"\x84\x03\n" +
 	"\tOperation\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x129\n" +

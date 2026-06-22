@@ -2,6 +2,10 @@
 
 package cloudregistry
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *GetArtifactRequest) SetArtifactId(v string) {
 	m.ArtifactId = v
 }
@@ -40,4 +44,68 @@ func (m *UpsertFolderMetadata) SetRegistryId(v string) {
 
 func (m *UpsertFolderMetadata) SetPath(v string) {
 	m.Path = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetRegistryKind(v []Registry_Kind) {
+	m.RegistryKind = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetRegistryType(v []Registry_Type) {
+	m.RegistryType = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetNameFilter(v string) {
+	m.NameFilter = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetPathFilter(v string) {
+	m.PathFilter = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetStatus(v []Artifact_Status) {
+	m.Status = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetKind(v []Artifact_Kind) {
+	m.Kind = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetLabels(v []string) {
+	m.Labels = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetCreatedAfter(v *timestamppb.Timestamp) {
+	m.CreatedAfter = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetCreatedBefore(v *timestamppb.Timestamp) {
+	m.CreatedBefore = v
+}
+
+func (m *ListArtifactsWithFiltersRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListArtifactsWithFiltersResponse) SetArtifacts(v []*Artifact) {
+	m.Artifacts = v
+}
+
+func (m *ListArtifactsWithFiltersResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

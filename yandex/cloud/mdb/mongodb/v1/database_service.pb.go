@@ -13,6 +13,8 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -314,6 +316,134 @@ func (x *CreateDatabaseMetadata) GetDatabaseName() string {
 	return ""
 }
 
+type UpdateDatabaseRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the MongoDB cluster to update a database in.
+	// To get the cluster ID, use a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the database to update.
+	// To get the name of the database, use a [DatabaseService.List] request.
+	DatabaseName string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	// Field mask that specifies which fields of the Database resource should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Deletion Protection inhibits deletion of the database
+	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UpdateDatabaseRequest) Reset() {
+	*x = UpdateDatabaseRequest{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateDatabaseRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateDatabaseRequest) ProtoMessage() {}
+
+func (x *UpdateDatabaseRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateDatabaseRequest.ProtoReflect.Descriptor instead.
+func (*UpdateDatabaseRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdateDatabaseRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *UpdateDatabaseRequest) GetDatabaseName() string {
+	if x != nil {
+		return x.DatabaseName
+	}
+	return ""
+}
+
+func (x *UpdateDatabaseRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+func (x *UpdateDatabaseRequest) GetDeletionProtection() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DeletionProtection
+	}
+	return nil
+}
+
+type UpdateDatabaseMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the MongoDB cluster where a database is being updated.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the MongoDB database that is being updated.
+	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateDatabaseMetadata) Reset() {
+	*x = UpdateDatabaseMetadata{}
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateDatabaseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateDatabaseMetadata) ProtoMessage() {}
+
+func (x *UpdateDatabaseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateDatabaseMetadata.ProtoReflect.Descriptor instead.
+func (*UpdateDatabaseMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UpdateDatabaseMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *UpdateDatabaseMetadata) GetDatabaseName() string {
+	if x != nil {
+		return x.DatabaseName
+	}
+	return ""
+}
+
 type DeleteDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the MongoDB cluster to delete a database in.
@@ -328,7 +458,7 @@ type DeleteDatabaseRequest struct {
 
 func (x *DeleteDatabaseRequest) Reset() {
 	*x = DeleteDatabaseRequest{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -340,7 +470,7 @@ func (x *DeleteDatabaseRequest) String() string {
 func (*DeleteDatabaseRequest) ProtoMessage() {}
 
 func (x *DeleteDatabaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -353,7 +483,7 @@ func (x *DeleteDatabaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDatabaseRequest.ProtoReflect.Descriptor instead.
 func (*DeleteDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteDatabaseRequest) GetClusterId() string {
@@ -382,7 +512,7 @@ type DeleteDatabaseMetadata struct {
 
 func (x *DeleteDatabaseMetadata) Reset() {
 	*x = DeleteDatabaseMetadata{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -394,7 +524,7 @@ func (x *DeleteDatabaseMetadata) String() string {
 func (*DeleteDatabaseMetadata) ProtoMessage() {}
 
 func (x *DeleteDatabaseMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -407,7 +537,7 @@ func (x *DeleteDatabaseMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDatabaseMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteDatabaseMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteDatabaseMetadata) GetClusterId() string {
@@ -428,7 +558,7 @@ var File_yandex_cloud_mdb_mongodb_v1_database_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/mdb/mongodb/v1/database_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/mdb/mongodb/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
+	"2yandex/cloud/mdb/mongodb/v1/database_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/mdb/mongodb/v1/database.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x86\x01\n" +
 	"\x12GetDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
@@ -450,6 +580,17 @@ const file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc = "" +
 	"\x16CreateDatabaseMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"\x93\x02\n" +
+	"\x15UpdateDatabaseRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\fdatabaseName\x12;\n" +
+	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
+	"updateMask\x12K\n" +
+	"\x13deletion_protection\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"\\\n" +
+	"\x16UpdateDatabaseMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
 	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"\x89\x01\n" +
 	"\x15DeleteDatabaseRequest\x12+\n" +
 	"\n" +
@@ -458,12 +599,14 @@ const file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc = "" +
 	"\x16DeleteDatabaseMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName2\x95\x06\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName2\xed\a\n" +
 	"\x0fDatabaseService\x12\xaa\x01\n" +
 	"\x03Get\x12/.yandex.cloud.mdb.mongodb.v1.GetDatabaseRequest\x1a%.yandex.cloud.mdb.mongodb.v1.Database\"K\x82\xd3\xe4\x93\x02E\x12C/managed-mongodb/v1/clusters/{cluster_id}/databases/{database_name}\x12\xaa\x01\n" +
 	"\x04List\x121.yandex.cloud.mdb.mongodb.v1.ListDatabasesRequest\x1a2.yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse\";\x82\xd3\xe4\x93\x025\x123/managed-mongodb/v1/clusters/{cluster_id}/databases\x12\xc5\x01\n" +
 	"\x06Create\x122.yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"d\xb2\xd2*\"\n" +
-	"\x16CreateDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x028:\x01*\"3/managed-mongodb/v1/clusters/{cluster_id}/databases\x12\xdf\x01\n" +
+	"\x16CreateDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x028:\x01*\"3/managed-mongodb/v1/clusters/{cluster_id}/databases\x12\xd5\x01\n" +
+	"\x06Update\x122.yandex.cloud.mdb.mongodb.v1.UpdateDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"t\xb2\xd2*\"\n" +
+	"\x16UpdateDatabaseMetadata\x12\bDatabase\x82\xd3\xe4\x93\x02H:\x01*2C/managed-mongodb/v1/clusters/{cluster_id}/databases/{database_name}\x12\xdf\x01\n" +
 	"\x06Delete\x122.yandex.cloud.mdb.mongodb.v1.DeleteDatabaseRequest\x1a!.yandex.cloud.operation.Operation\"~\xb2\xd2*/\n" +
 	"\x16DeleteDatabaseMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02E*C/managed-mongodb/v1/clusters/{cluster_id}/databases/{database_name}Bj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
@@ -480,35 +623,43 @@ func file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_mdb_mongodb_v1_database_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_mdb_mongodb_v1_database_service_proto_goTypes = []any{
 	(*GetDatabaseRequest)(nil),     // 0: yandex.cloud.mdb.mongodb.v1.GetDatabaseRequest
 	(*ListDatabasesRequest)(nil),   // 1: yandex.cloud.mdb.mongodb.v1.ListDatabasesRequest
 	(*ListDatabasesResponse)(nil),  // 2: yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse
 	(*CreateDatabaseRequest)(nil),  // 3: yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest
 	(*CreateDatabaseMetadata)(nil), // 4: yandex.cloud.mdb.mongodb.v1.CreateDatabaseMetadata
-	(*DeleteDatabaseRequest)(nil),  // 5: yandex.cloud.mdb.mongodb.v1.DeleteDatabaseRequest
-	(*DeleteDatabaseMetadata)(nil), // 6: yandex.cloud.mdb.mongodb.v1.DeleteDatabaseMetadata
-	(*Database)(nil),               // 7: yandex.cloud.mdb.mongodb.v1.Database
-	(*DatabaseSpec)(nil),           // 8: yandex.cloud.mdb.mongodb.v1.DatabaseSpec
-	(*operation.Operation)(nil),    // 9: yandex.cloud.operation.Operation
+	(*UpdateDatabaseRequest)(nil),  // 5: yandex.cloud.mdb.mongodb.v1.UpdateDatabaseRequest
+	(*UpdateDatabaseMetadata)(nil), // 6: yandex.cloud.mdb.mongodb.v1.UpdateDatabaseMetadata
+	(*DeleteDatabaseRequest)(nil),  // 7: yandex.cloud.mdb.mongodb.v1.DeleteDatabaseRequest
+	(*DeleteDatabaseMetadata)(nil), // 8: yandex.cloud.mdb.mongodb.v1.DeleteDatabaseMetadata
+	(*Database)(nil),               // 9: yandex.cloud.mdb.mongodb.v1.Database
+	(*DatabaseSpec)(nil),           // 10: yandex.cloud.mdb.mongodb.v1.DatabaseSpec
+	(*fieldmaskpb.FieldMask)(nil),  // 11: google.protobuf.FieldMask
+	(*wrapperspb.BoolValue)(nil),   // 12: google.protobuf.BoolValue
+	(*operation.Operation)(nil),    // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_mongodb_v1_database_service_proto_depIdxs = []int32{
-	7, // 0: yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse.databases:type_name -> yandex.cloud.mdb.mongodb.v1.Database
-	8, // 1: yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest.database_spec:type_name -> yandex.cloud.mdb.mongodb.v1.DatabaseSpec
-	0, // 2: yandex.cloud.mdb.mongodb.v1.DatabaseService.Get:input_type -> yandex.cloud.mdb.mongodb.v1.GetDatabaseRequest
-	1, // 3: yandex.cloud.mdb.mongodb.v1.DatabaseService.List:input_type -> yandex.cloud.mdb.mongodb.v1.ListDatabasesRequest
-	3, // 4: yandex.cloud.mdb.mongodb.v1.DatabaseService.Create:input_type -> yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest
-	5, // 5: yandex.cloud.mdb.mongodb.v1.DatabaseService.Delete:input_type -> yandex.cloud.mdb.mongodb.v1.DeleteDatabaseRequest
-	7, // 6: yandex.cloud.mdb.mongodb.v1.DatabaseService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.Database
-	2, // 7: yandex.cloud.mdb.mongodb.v1.DatabaseService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse
-	9, // 8: yandex.cloud.mdb.mongodb.v1.DatabaseService.Create:output_type -> yandex.cloud.operation.Operation
-	9, // 9: yandex.cloud.mdb.mongodb.v1.DatabaseService.Delete:output_type -> yandex.cloud.operation.Operation
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	9,  // 0: yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse.databases:type_name -> yandex.cloud.mdb.mongodb.v1.Database
+	10, // 1: yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest.database_spec:type_name -> yandex.cloud.mdb.mongodb.v1.DatabaseSpec
+	11, // 2: yandex.cloud.mdb.mongodb.v1.UpdateDatabaseRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 3: yandex.cloud.mdb.mongodb.v1.UpdateDatabaseRequest.deletion_protection:type_name -> google.protobuf.BoolValue
+	0,  // 4: yandex.cloud.mdb.mongodb.v1.DatabaseService.Get:input_type -> yandex.cloud.mdb.mongodb.v1.GetDatabaseRequest
+	1,  // 5: yandex.cloud.mdb.mongodb.v1.DatabaseService.List:input_type -> yandex.cloud.mdb.mongodb.v1.ListDatabasesRequest
+	3,  // 6: yandex.cloud.mdb.mongodb.v1.DatabaseService.Create:input_type -> yandex.cloud.mdb.mongodb.v1.CreateDatabaseRequest
+	5,  // 7: yandex.cloud.mdb.mongodb.v1.DatabaseService.Update:input_type -> yandex.cloud.mdb.mongodb.v1.UpdateDatabaseRequest
+	7,  // 8: yandex.cloud.mdb.mongodb.v1.DatabaseService.Delete:input_type -> yandex.cloud.mdb.mongodb.v1.DeleteDatabaseRequest
+	9,  // 9: yandex.cloud.mdb.mongodb.v1.DatabaseService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.Database
+	2,  // 10: yandex.cloud.mdb.mongodb.v1.DatabaseService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListDatabasesResponse
+	13, // 11: yandex.cloud.mdb.mongodb.v1.DatabaseService.Create:output_type -> yandex.cloud.operation.Operation
+	13, // 12: yandex.cloud.mdb.mongodb.v1.DatabaseService.Update:output_type -> yandex.cloud.operation.Operation
+	13, // 13: yandex.cloud.mdb.mongodb.v1.DatabaseService.Delete:output_type -> yandex.cloud.operation.Operation
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_database_service_proto_init() }
@@ -523,7 +674,7 @@ func file_yandex_cloud_mdb_mongodb_v1_database_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc), len(file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

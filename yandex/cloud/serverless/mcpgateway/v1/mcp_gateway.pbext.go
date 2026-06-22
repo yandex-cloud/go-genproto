@@ -157,6 +157,10 @@ func (m *McpTool) SetAction(v *McpToolAction) {
 	m.Action = v
 }
 
+func (m *McpTool) SetOutputJsonSchema(v string) {
+	m.OutputJsonSchema = v
+}
+
 type McpToolAction_Action = isMcpToolAction_Action
 
 func (m *McpToolAction) SetAction(v McpToolAction_Action) {

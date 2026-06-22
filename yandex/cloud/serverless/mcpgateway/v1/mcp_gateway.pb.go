@@ -803,9 +803,11 @@ type McpTool struct {
 	// JSON Schema describing tool input.
 	InputJsonSchema string `protobuf:"bytes,3,opt,name=input_json_schema,json=inputJsonSchema,proto3" json:"input_json_schema,omitempty"`
 	// Action to perform when this tool is invoked.
-	Action        *McpToolAction `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Action *McpToolAction `protobuf:"bytes,4,opt,name=action,proto3" json:"action,omitempty"`
+	// JSON Schema describing tool output.
+	OutputJsonSchema string `protobuf:"bytes,6,opt,name=output_json_schema,json=outputJsonSchema,proto3" json:"output_json_schema,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *McpTool) Reset() {
@@ -864,6 +866,13 @@ func (x *McpTool) GetAction() *McpToolAction {
 		return x.Action
 	}
 	return nil
+}
+
+func (x *McpTool) GetOutputJsonSchema() string {
+	if x != nil {
+		return x.OutputJsonSchema
+	}
+	return ""
 }
 
 type McpToolAction struct {
@@ -1900,12 +1909,13 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"logGroupId\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestination\"\xfd\x01\n" +
+	"\vdestination\"\xb1\x02\n" +
 	"\aMcpTool\x12C\n" +
 	"\x04name\x18\x01 \x01(\tB/\xe8\xc71\x01\xf2\xc71\x1e([a-zA-Z][-a-zA-Z0-9_]{0,63})?\x8a\xc81\x05<=128R\x04name\x12-\n" +
 	"\vdescription\x18\x02 \x01(\tB\v\x8a\xc81\a<=65536R\vdescription\x12*\n" +
 	"\x11input_json_schema\x18\x03 \x01(\tR\x0finputJsonSchema\x12R\n" +
-	"\x06action\x18\x04 \x01(\v24.yandex.cloud.serverless.mcpgateway.v1.McpToolActionB\x04\xe8\xc71\x01R\x06action\"\xa6\x04\n" +
+	"\x06action\x18\x04 \x01(\v24.yandex.cloud.serverless.mcpgateway.v1.McpToolActionB\x04\xe8\xc71\x01R\x06action\x12,\n" +
+	"\x12output_json_schema\x18\x06 \x01(\tR\x10outputJsonSchemaJ\x04\b\x05\x10\x06\"\xa6\x04\n" +
 	"\rMcpToolAction\x12Z\n" +
 	"\rfunction_call\x18\x01 \x01(\v23.yandex.cloud.serverless.mcpgateway.v1.FunctionCallH\x00R\ffunctionCall\x12]\n" +
 	"\x0econtainer_call\x18\x02 \x01(\v24.yandex.cloud.serverless.mcpgateway.v1.ContainerCallH\x00R\rcontainerCall\x12N\n" +

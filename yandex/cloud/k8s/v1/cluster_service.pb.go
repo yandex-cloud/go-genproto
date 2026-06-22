@@ -1106,6 +1106,51 @@ func (x *AutoUpgradeMasterMetadata) GetClusterId() string {
 	return ""
 }
 
+type ScaleMasterMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Kubernetes cluster that is being scales.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ScaleMasterMetadata) Reset() {
+	*x = ScaleMasterMetadata{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScaleMasterMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScaleMasterMetadata) ProtoMessage() {}
+
+func (x *ScaleMasterMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScaleMasterMetadata.ProtoReflect.Descriptor instead.
+func (*ScaleMasterMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ScaleMasterMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Kubernetes cluster to list operations for.
@@ -1127,7 +1172,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1139,7 +1184,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1152,7 +1197,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -1198,7 +1243,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1210,7 +1255,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1223,7 +1268,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -1263,7 +1308,7 @@ type ListClusterNodeGroupsRequest struct {
 
 func (x *ListClusterNodeGroupsRequest) Reset() {
 	*x = ListClusterNodeGroupsRequest{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1320,7 @@ func (x *ListClusterNodeGroupsRequest) String() string {
 func (*ListClusterNodeGroupsRequest) ProtoMessage() {}
 
 func (x *ListClusterNodeGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1333,7 @@ func (x *ListClusterNodeGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterNodeGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterNodeGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListClusterNodeGroupsRequest) GetClusterId() string {
@@ -1336,7 +1381,7 @@ type ListClusterNodeGroupsResponse struct {
 
 func (x *ListClusterNodeGroupsResponse) Reset() {
 	*x = ListClusterNodeGroupsResponse{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1348,7 +1393,7 @@ func (x *ListClusterNodeGroupsResponse) String() string {
 func (*ListClusterNodeGroupsResponse) ProtoMessage() {}
 
 func (x *ListClusterNodeGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1406,7 @@ func (x *ListClusterNodeGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterNodeGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterNodeGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListClusterNodeGroupsResponse) GetNodeGroups() []*NodeGroup {
@@ -1398,7 +1443,7 @@ type ListClusterNodesRequest struct {
 
 func (x *ListClusterNodesRequest) Reset() {
 	*x = ListClusterNodesRequest{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1410,7 +1455,7 @@ func (x *ListClusterNodesRequest) String() string {
 func (*ListClusterNodesRequest) ProtoMessage() {}
 
 func (x *ListClusterNodesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1423,7 +1468,7 @@ func (x *ListClusterNodesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterNodesRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterNodesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListClusterNodesRequest) GetClusterId() string {
@@ -1464,7 +1509,7 @@ type ListClusterNodesResponse struct {
 
 func (x *ListClusterNodesResponse) Reset() {
 	*x = ListClusterNodesResponse{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1476,7 +1521,7 @@ func (x *ListClusterNodesResponse) String() string {
 func (*ListClusterNodesResponse) ProtoMessage() {}
 
 func (x *ListClusterNodesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1489,7 +1534,7 @@ func (x *ListClusterNodesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterNodesResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterNodesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListClusterNodesResponse) GetNodes() []*Node {
@@ -1544,7 +1589,7 @@ type MasterSpec struct {
 
 func (x *MasterSpec) Reset() {
 	*x = MasterSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1556,7 +1601,7 @@ func (x *MasterSpec) String() string {
 func (*MasterSpec) ProtoMessage() {}
 
 func (x *MasterSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1569,7 +1614,7 @@ func (x *MasterSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterSpec.ProtoReflect.Descriptor instead.
 func (*MasterSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *MasterSpec) GetMasterType() isMasterSpec_MasterType {
@@ -1692,7 +1737,7 @@ type ZonalMasterSpec struct {
 
 func (x *ZonalMasterSpec) Reset() {
 	*x = ZonalMasterSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1704,7 +1749,7 @@ func (x *ZonalMasterSpec) String() string {
 func (*ZonalMasterSpec) ProtoMessage() {}
 
 func (x *ZonalMasterSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1717,7 +1762,7 @@ func (x *ZonalMasterSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZonalMasterSpec.ProtoReflect.Descriptor instead.
 func (*ZonalMasterSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ZonalMasterSpec) GetZoneId() string {
@@ -1757,7 +1802,7 @@ type RegionalMasterSpec struct {
 
 func (x *RegionalMasterSpec) Reset() {
 	*x = RegionalMasterSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1769,7 +1814,7 @@ func (x *RegionalMasterSpec) String() string {
 func (*RegionalMasterSpec) ProtoMessage() {}
 
 func (x *RegionalMasterSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1782,7 +1827,7 @@ func (x *RegionalMasterSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegionalMasterSpec.ProtoReflect.Descriptor instead.
 func (*RegionalMasterSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *RegionalMasterSpec) GetRegionId() string {
@@ -1823,7 +1868,7 @@ type InternalAddressSpec struct {
 
 func (x *InternalAddressSpec) Reset() {
 	*x = InternalAddressSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1835,7 +1880,7 @@ func (x *InternalAddressSpec) String() string {
 func (*InternalAddressSpec) ProtoMessage() {}
 
 func (x *InternalAddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1848,7 +1893,7 @@ func (x *InternalAddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InternalAddressSpec.ProtoReflect.Descriptor instead.
 func (*InternalAddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *InternalAddressSpec) GetSubnetId() string {
@@ -1868,7 +1913,7 @@ type ExternalAddressSpec struct {
 
 func (x *ExternalAddressSpec) Reset() {
 	*x = ExternalAddressSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +1925,7 @@ func (x *ExternalAddressSpec) String() string {
 func (*ExternalAddressSpec) ProtoMessage() {}
 
 func (x *ExternalAddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1893,7 +1938,7 @@ func (x *ExternalAddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExternalAddressSpec.ProtoReflect.Descriptor instead.
 func (*ExternalAddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ExternalAddressSpec) GetAddress() string {
@@ -1916,7 +1961,7 @@ type MasterLocation struct {
 
 func (x *MasterLocation) Reset() {
 	*x = MasterLocation{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1928,7 +1973,7 @@ func (x *MasterLocation) String() string {
 func (*MasterLocation) ProtoMessage() {}
 
 func (x *MasterLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1941,7 +1986,7 @@ func (x *MasterLocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterLocation.ProtoReflect.Descriptor instead.
 func (*MasterLocation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *MasterLocation) GetZoneId() string {
@@ -1971,7 +2016,7 @@ type LocationSpec struct {
 
 func (x *LocationSpec) Reset() {
 	*x = LocationSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1983,7 +2028,7 @@ func (x *LocationSpec) String() string {
 func (*LocationSpec) ProtoMessage() {}
 
 func (x *LocationSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1996,7 +2041,7 @@ func (x *LocationSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocationSpec.ProtoReflect.Descriptor instead.
 func (*LocationSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *LocationSpec) GetZoneId() string {
@@ -2025,7 +2070,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2037,7 +2082,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2050,7 +2095,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -2076,7 +2121,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2088,7 +2133,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2101,7 +2146,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -2123,7 +2168,7 @@ type MasterScalePolicySpec struct {
 
 func (x *MasterScalePolicySpec) Reset() {
 	*x = MasterScalePolicySpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2135,7 +2180,7 @@ func (x *MasterScalePolicySpec) String() string {
 func (*MasterScalePolicySpec) ProtoMessage() {}
 
 func (x *MasterScalePolicySpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2148,7 +2193,7 @@ func (x *MasterScalePolicySpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterScalePolicySpec.ProtoReflect.Descriptor instead.
 func (*MasterScalePolicySpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *MasterScalePolicySpec) GetScaleType() isMasterScalePolicySpec_ScaleType {
@@ -2187,7 +2232,7 @@ type WorkloadIdentityFederationSpec struct {
 
 func (x *WorkloadIdentityFederationSpec) Reset() {
 	*x = WorkloadIdentityFederationSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2199,7 +2244,7 @@ func (x *WorkloadIdentityFederationSpec) String() string {
 func (*WorkloadIdentityFederationSpec) ProtoMessage() {}
 
 func (x *WorkloadIdentityFederationSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2212,7 +2257,7 @@ func (x *WorkloadIdentityFederationSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkloadIdentityFederationSpec.ProtoReflect.Descriptor instead.
 func (*WorkloadIdentityFederationSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *WorkloadIdentityFederationSpec) GetEnabled() bool {
@@ -2233,7 +2278,7 @@ type MasterScalePolicySpec_AutoScale struct {
 
 func (x *MasterScalePolicySpec_AutoScale) Reset() {
 	*x = MasterScalePolicySpec_AutoScale{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2245,7 +2290,7 @@ func (x *MasterScalePolicySpec_AutoScale) String() string {
 func (*MasterScalePolicySpec_AutoScale) ProtoMessage() {}
 
 func (x *MasterScalePolicySpec_AutoScale) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2258,7 +2303,7 @@ func (x *MasterScalePolicySpec_AutoScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterScalePolicySpec_AutoScale.ProtoReflect.Descriptor instead.
 func (*MasterScalePolicySpec_AutoScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{30, 0}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31, 0}
 }
 
 func (x *MasterScalePolicySpec_AutoScale) GetMinResourcePresetId() string {
@@ -2365,6 +2410,9 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\":\n" +
 	"\x19AutoUpgradeMasterMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"4\n" +
+	"\x13ScaleMasterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xba\x01\n" +
 	"\x1cListClusterOperationsRequest\x12#\n" +
@@ -2491,7 +2539,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescData
 }
 
-var file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*GetClusterRequest)(nil),                  // 0: yandex.cloud.k8s.v1.GetClusterRequest
 	(*ListClustersRequest)(nil),                // 1: yandex.cloud.k8s.v1.ListClustersRequest
@@ -2508,86 +2556,87 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*CreateClusterRequest)(nil),               // 12: yandex.cloud.k8s.v1.CreateClusterRequest
 	(*CreateClusterMetadata)(nil),              // 13: yandex.cloud.k8s.v1.CreateClusterMetadata
 	(*AutoUpgradeMasterMetadata)(nil),          // 14: yandex.cloud.k8s.v1.AutoUpgradeMasterMetadata
-	(*ListClusterOperationsRequest)(nil),       // 15: yandex.cloud.k8s.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil),      // 16: yandex.cloud.k8s.v1.ListClusterOperationsResponse
-	(*ListClusterNodeGroupsRequest)(nil),       // 17: yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
-	(*ListClusterNodeGroupsResponse)(nil),      // 18: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
-	(*ListClusterNodesRequest)(nil),            // 19: yandex.cloud.k8s.v1.ListClusterNodesRequest
-	(*ListClusterNodesResponse)(nil),           // 20: yandex.cloud.k8s.v1.ListClusterNodesResponse
-	(*MasterSpec)(nil),                         // 21: yandex.cloud.k8s.v1.MasterSpec
-	(*ZonalMasterSpec)(nil),                    // 22: yandex.cloud.k8s.v1.ZonalMasterSpec
-	(*RegionalMasterSpec)(nil),                 // 23: yandex.cloud.k8s.v1.RegionalMasterSpec
-	(*InternalAddressSpec)(nil),                // 24: yandex.cloud.k8s.v1.InternalAddressSpec
-	(*ExternalAddressSpec)(nil),                // 25: yandex.cloud.k8s.v1.ExternalAddressSpec
-	(*MasterLocation)(nil),                     // 26: yandex.cloud.k8s.v1.MasterLocation
-	(*LocationSpec)(nil),                       // 27: yandex.cloud.k8s.v1.LocationSpec
-	(*RescheduleMaintenanceRequest)(nil),       // 28: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),      // 29: yandex.cloud.k8s.v1.RescheduleMaintenanceMetadata
-	(*MasterScalePolicySpec)(nil),              // 30: yandex.cloud.k8s.v1.MasterScalePolicySpec
-	(*WorkloadIdentityFederationSpec)(nil),     // 31: yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
-	nil,                                        // 32: yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
-	nil,                                        // 33: yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
-	(*MasterScalePolicySpec_AutoScale)(nil),    // 34: yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
-	(*Cluster)(nil),                            // 35: yandex.cloud.k8s.v1.Cluster
-	(*fieldmaskpb.FieldMask)(nil),              // 36: google.protobuf.FieldMask
-	(*NetworkPolicy)(nil),                      // 37: yandex.cloud.k8s.v1.NetworkPolicy
-	(*IPAllocationPolicy)(nil),                 // 38: yandex.cloud.k8s.v1.IPAllocationPolicy
-	(*UpdateVersionSpec)(nil),                  // 39: yandex.cloud.k8s.v1.UpdateVersionSpec
-	(*MasterMaintenancePolicy)(nil),            // 40: yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	(*MasterLogging)(nil),                      // 41: yandex.cloud.k8s.v1.MasterLogging
-	(ReleaseChannel)(0),                        // 42: yandex.cloud.k8s.v1.ReleaseChannel
-	(*KMSProvider)(nil),                        // 43: yandex.cloud.k8s.v1.KMSProvider
-	(*Cilium)(nil),                             // 44: yandex.cloud.k8s.v1.Cilium
-	(*operation.Operation)(nil),                // 45: yandex.cloud.operation.Operation
-	(*NodeGroup)(nil),                          // 46: yandex.cloud.k8s.v1.NodeGroup
-	(*Node)(nil),                               // 47: yandex.cloud.k8s.v1.Node
-	(*timestamppb.Timestamp)(nil),              // 48: google.protobuf.Timestamp
-	(*access.ListAccessBindingsRequest)(nil),   // 49: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 50: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 51: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 52: yandex.cloud.access.ListAccessBindingsResponse
+	(*ScaleMasterMetadata)(nil),                // 15: yandex.cloud.k8s.v1.ScaleMasterMetadata
+	(*ListClusterOperationsRequest)(nil),       // 16: yandex.cloud.k8s.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),      // 17: yandex.cloud.k8s.v1.ListClusterOperationsResponse
+	(*ListClusterNodeGroupsRequest)(nil),       // 18: yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
+	(*ListClusterNodeGroupsResponse)(nil),      // 19: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
+	(*ListClusterNodesRequest)(nil),            // 20: yandex.cloud.k8s.v1.ListClusterNodesRequest
+	(*ListClusterNodesResponse)(nil),           // 21: yandex.cloud.k8s.v1.ListClusterNodesResponse
+	(*MasterSpec)(nil),                         // 22: yandex.cloud.k8s.v1.MasterSpec
+	(*ZonalMasterSpec)(nil),                    // 23: yandex.cloud.k8s.v1.ZonalMasterSpec
+	(*RegionalMasterSpec)(nil),                 // 24: yandex.cloud.k8s.v1.RegionalMasterSpec
+	(*InternalAddressSpec)(nil),                // 25: yandex.cloud.k8s.v1.InternalAddressSpec
+	(*ExternalAddressSpec)(nil),                // 26: yandex.cloud.k8s.v1.ExternalAddressSpec
+	(*MasterLocation)(nil),                     // 27: yandex.cloud.k8s.v1.MasterLocation
+	(*LocationSpec)(nil),                       // 28: yandex.cloud.k8s.v1.LocationSpec
+	(*RescheduleMaintenanceRequest)(nil),       // 29: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),      // 30: yandex.cloud.k8s.v1.RescheduleMaintenanceMetadata
+	(*MasterScalePolicySpec)(nil),              // 31: yandex.cloud.k8s.v1.MasterScalePolicySpec
+	(*WorkloadIdentityFederationSpec)(nil),     // 32: yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	nil,                                        // 33: yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
+	nil,                                        // 34: yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
+	(*MasterScalePolicySpec_AutoScale)(nil),    // 35: yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	(*Cluster)(nil),                            // 36: yandex.cloud.k8s.v1.Cluster
+	(*fieldmaskpb.FieldMask)(nil),              // 37: google.protobuf.FieldMask
+	(*NetworkPolicy)(nil),                      // 38: yandex.cloud.k8s.v1.NetworkPolicy
+	(*IPAllocationPolicy)(nil),                 // 39: yandex.cloud.k8s.v1.IPAllocationPolicy
+	(*UpdateVersionSpec)(nil),                  // 40: yandex.cloud.k8s.v1.UpdateVersionSpec
+	(*MasterMaintenancePolicy)(nil),            // 41: yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	(*MasterLogging)(nil),                      // 42: yandex.cloud.k8s.v1.MasterLogging
+	(ReleaseChannel)(0),                        // 43: yandex.cloud.k8s.v1.ReleaseChannel
+	(*KMSProvider)(nil),                        // 44: yandex.cloud.k8s.v1.KMSProvider
+	(*Cilium)(nil),                             // 45: yandex.cloud.k8s.v1.Cilium
+	(*operation.Operation)(nil),                // 46: yandex.cloud.operation.Operation
+	(*NodeGroup)(nil),                          // 47: yandex.cloud.k8s.v1.NodeGroup
+	(*Node)(nil),                               // 48: yandex.cloud.k8s.v1.Node
+	(*timestamppb.Timestamp)(nil),              // 49: google.protobuf.Timestamp
+	(*access.ListAccessBindingsRequest)(nil),   // 50: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 51: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 52: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 53: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
-	35, // 0: yandex.cloud.k8s.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.k8s.v1.Cluster
-	36, // 1: yandex.cloud.k8s.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	32, // 2: yandex.cloud.k8s.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
+	36, // 0: yandex.cloud.k8s.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.k8s.v1.Cluster
+	37, // 1: yandex.cloud.k8s.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	33, // 2: yandex.cloud.k8s.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
 	10, // 3: yandex.cloud.k8s.v1.UpdateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterUpdateSpec
-	37, // 4: yandex.cloud.k8s.v1.UpdateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
-	38, // 5: yandex.cloud.k8s.v1.UpdateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
-	31, // 6: yandex.cloud.k8s.v1.UpdateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
-	39, // 7: yandex.cloud.k8s.v1.MasterUpdateSpec.version:type_name -> yandex.cloud.k8s.v1.UpdateVersionSpec
-	40, // 8: yandex.cloud.k8s.v1.MasterUpdateSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	41, // 9: yandex.cloud.k8s.v1.MasterUpdateSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	27, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
-	25, // 11: yandex.cloud.k8s.v1.MasterUpdateSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	30, // 12: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
-	33, // 13: yandex.cloud.k8s.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
-	21, // 14: yandex.cloud.k8s.v1.CreateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterSpec
-	38, // 15: yandex.cloud.k8s.v1.CreateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
-	42, // 16: yandex.cloud.k8s.v1.CreateClusterRequest.release_channel:type_name -> yandex.cloud.k8s.v1.ReleaseChannel
-	37, // 17: yandex.cloud.k8s.v1.CreateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
-	43, // 18: yandex.cloud.k8s.v1.CreateClusterRequest.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
-	44, // 19: yandex.cloud.k8s.v1.CreateClusterRequest.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
-	31, // 20: yandex.cloud.k8s.v1.CreateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
-	45, // 21: yandex.cloud.k8s.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	46, // 22: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
-	47, // 23: yandex.cloud.k8s.v1.ListClusterNodesResponse.nodes:type_name -> yandex.cloud.k8s.v1.Node
-	22, // 24: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
-	23, // 25: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
-	27, // 26: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
-	25, // 27: yandex.cloud.k8s.v1.MasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	25, // 28: yandex.cloud.k8s.v1.MasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	40, // 29: yandex.cloud.k8s.v1.MasterSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	41, // 30: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	30, // 31: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
-	24, // 32: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	25, // 33: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	26, // 34: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
-	25, // 35: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	25, // 36: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	24, // 37: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	48, // 38: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	34, // 39: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	38, // 4: yandex.cloud.k8s.v1.UpdateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
+	39, // 5: yandex.cloud.k8s.v1.UpdateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
+	32, // 6: yandex.cloud.k8s.v1.UpdateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	40, // 7: yandex.cloud.k8s.v1.MasterUpdateSpec.version:type_name -> yandex.cloud.k8s.v1.UpdateVersionSpec
+	41, // 8: yandex.cloud.k8s.v1.MasterUpdateSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	42, // 9: yandex.cloud.k8s.v1.MasterUpdateSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	28, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	26, // 11: yandex.cloud.k8s.v1.MasterUpdateSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	31, // 12: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	34, // 13: yandex.cloud.k8s.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
+	22, // 14: yandex.cloud.k8s.v1.CreateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterSpec
+	39, // 15: yandex.cloud.k8s.v1.CreateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
+	43, // 16: yandex.cloud.k8s.v1.CreateClusterRequest.release_channel:type_name -> yandex.cloud.k8s.v1.ReleaseChannel
+	38, // 17: yandex.cloud.k8s.v1.CreateClusterRequest.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
+	44, // 18: yandex.cloud.k8s.v1.CreateClusterRequest.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
+	45, // 19: yandex.cloud.k8s.v1.CreateClusterRequest.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
+	32, // 20: yandex.cloud.k8s.v1.CreateClusterRequest.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
+	46, // 21: yandex.cloud.k8s.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	47, // 22: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
+	48, // 23: yandex.cloud.k8s.v1.ListClusterNodesResponse.nodes:type_name -> yandex.cloud.k8s.v1.Node
+	23, // 24: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
+	24, // 25: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
+	28, // 26: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	26, // 27: yandex.cloud.k8s.v1.MasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	26, // 28: yandex.cloud.k8s.v1.MasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	41, // 29: yandex.cloud.k8s.v1.MasterSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	42, // 30: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	31, // 31: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	25, // 32: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	26, // 33: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	27, // 34: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
+	26, // 35: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	26, // 36: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	25, // 37: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	49, // 38: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	35, // 39: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
 	0,  // 40: yandex.cloud.k8s.v1.ClusterService.Get:input_type -> yandex.cloud.k8s.v1.GetClusterRequest
 	1,  // 41: yandex.cloud.k8s.v1.ClusterService.List:input_type -> yandex.cloud.k8s.v1.ListClustersRequest
 	12, // 42: yandex.cloud.k8s.v1.ClusterService.Create:input_type -> yandex.cloud.k8s.v1.CreateClusterRequest
@@ -2595,27 +2644,27 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
 	3,  // 44: yandex.cloud.k8s.v1.ClusterService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteClusterRequest
 	5,  // 45: yandex.cloud.k8s.v1.ClusterService.Stop:input_type -> yandex.cloud.k8s.v1.StopClusterRequest
 	7,  // 46: yandex.cloud.k8s.v1.ClusterService.Start:input_type -> yandex.cloud.k8s.v1.StartClusterRequest
-	28, // 47: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
-	17, // 48: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:input_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
-	15, // 49: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
-	19, // 50: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
-	49, // 51: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	50, // 52: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	51, // 53: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	35, // 54: yandex.cloud.k8s.v1.ClusterService.Get:output_type -> yandex.cloud.k8s.v1.Cluster
+	29, // 47: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
+	18, // 48: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:input_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
+	16, // 49: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
+	20, // 50: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
+	50, // 51: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	51, // 52: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	52, // 53: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	36, // 54: yandex.cloud.k8s.v1.ClusterService.Get:output_type -> yandex.cloud.k8s.v1.Cluster
 	2,  // 55: yandex.cloud.k8s.v1.ClusterService.List:output_type -> yandex.cloud.k8s.v1.ListClustersResponse
-	45, // 56: yandex.cloud.k8s.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	45, // 57: yandex.cloud.k8s.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	45, // 58: yandex.cloud.k8s.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	45, // 59: yandex.cloud.k8s.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	45, // 60: yandex.cloud.k8s.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	45, // 61: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	18, // 62: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:output_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
-	16, // 63: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
-	20, // 64: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
-	52, // 65: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	45, // 66: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	45, // 67: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	46, // 56: yandex.cloud.k8s.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	46, // 57: yandex.cloud.k8s.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	46, // 58: yandex.cloud.k8s.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	46, // 59: yandex.cloud.k8s.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	46, // 60: yandex.cloud.k8s.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	46, // 61: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	19, // 62: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:output_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
+	17, // 63: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
+	21, // 64: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
+	53, // 65: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	46, // 66: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	46, // 67: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
 	54, // [54:68] is the sub-list for method output_type
 	40, // [40:54] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
@@ -2639,11 +2688,11 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_init() {
 		(*CreateClusterRequest_GatewayIpv4Address)(nil),
 		(*CreateClusterRequest_Cilium)(nil),
 	}
-	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[21].OneofWrappers = []any{
+	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[22].OneofWrappers = []any{
 		(*MasterSpec_ZonalMasterSpec)(nil),
 		(*MasterSpec_RegionalMasterSpec)(nil),
 	}
-	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30].OneofWrappers = []any{
+	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31].OneofWrappers = []any{
 		(*MasterScalePolicySpec_AutoScale_)(nil),
 	}
 	type x struct{}
@@ -2652,7 +2701,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   35,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -4,6 +4,7 @@ package mongodb
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -68,6 +69,10 @@ func (m *UpdateUserRequest) SetPassword(v string) {
 
 func (m *UpdateUserRequest) SetPermissions(v []*Permission) {
 	m.Permissions = v
+}
+
+func (m *UpdateUserRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
+	m.DeletionProtection = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {

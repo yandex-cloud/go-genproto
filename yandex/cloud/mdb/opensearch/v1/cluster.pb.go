@@ -657,7 +657,9 @@ type ClusterConfig struct {
 	// Full version.
 	FullVersion string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
 	// Audit log settings.
-	AuditLog      *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	AuditLog *config.AuditLog `protobuf:"bytes,7,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// Cloud storage configuration.
+	CloudStorage  *CloudStorage `protobuf:"bytes,8,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -737,6 +739,13 @@ func (x *ClusterConfig) GetFullVersion() string {
 func (x *ClusterConfig) GetAuditLog() *config.AuditLog {
 	if x != nil {
 		return x.AuditLog
+	}
+	return nil
+}
+
+func (x *ClusterConfig) GetCloudStorage() *CloudStorage {
+	if x != nil {
+		return x.CloudStorage
 	}
 	return nil
 }
@@ -1205,6 +1214,52 @@ func (x *DiskSizeAutoscaling) GetDiskSizeLimit() int64 {
 	return 0
 }
 
+// Cloud storage configuration.
+type CloudStorage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether to use Object Storage for storing OpenSearch data.
+	Enabled       *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloudStorage) Reset() {
+	*x = CloudStorage{}
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloudStorage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloudStorage) ProtoMessage() {}
+
+func (x *CloudStorage) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloudStorage.ProtoReflect.Descriptor instead.
+func (*CloudStorage) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *CloudStorage) GetEnabled() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.Enabled
+	}
+	return nil
+}
+
 // Configuration of the host group.
 type OpenSearch_NodeGroup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1230,7 +1285,7 @@ type OpenSearch_NodeGroup struct {
 
 func (x *OpenSearch_NodeGroup) Reset() {
 	*x = OpenSearch_NodeGroup{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1242,7 +1297,7 @@ func (x *OpenSearch_NodeGroup) String() string {
 func (*OpenSearch_NodeGroup) ProtoMessage() {}
 
 func (x *OpenSearch_NodeGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1336,7 +1391,7 @@ type Dashboards_NodeGroup struct {
 
 func (x *Dashboards_NodeGroup) Reset() {
 	*x = Dashboards_NodeGroup{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1348,7 +1403,7 @@ func (x *Dashboards_NodeGroup) String() string {
 func (*Dashboards_NodeGroup) ProtoMessage() {}
 
 func (x *Dashboards_NodeGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1426,7 +1481,7 @@ type Host_CPUMetric struct {
 
 func (x *Host_CPUMetric) Reset() {
 	*x = Host_CPUMetric{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1438,7 +1493,7 @@ func (x *Host_CPUMetric) String() string {
 func (*Host_CPUMetric) ProtoMessage() {}
 
 func (x *Host_CPUMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1483,7 +1538,7 @@ type Host_MemoryMetric struct {
 
 func (x *Host_MemoryMetric) Reset() {
 	*x = Host_MemoryMetric{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1495,7 +1550,7 @@ func (x *Host_MemoryMetric) String() string {
 func (*Host_MemoryMetric) ProtoMessage() {}
 
 func (x *Host_MemoryMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1547,7 +1602,7 @@ type Host_DiskMetric struct {
 
 func (x *Host_DiskMetric) Reset() {
 	*x = Host_DiskMetric{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1559,7 +1614,7 @@ func (x *Host_DiskMetric) String() string {
 func (*Host_DiskMetric) ProtoMessage() {}
 
 func (x *Host_DiskMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1611,7 +1666,7 @@ type Host_SystemMetrics struct {
 
 func (x *Host_SystemMetrics) Reset() {
 	*x = Host_SystemMetrics{}
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1623,7 +1678,7 @@ func (x *Host_SystemMetrics) String() string {
 func (*Host_SystemMetrics) ProtoMessage() {}
 
 func (x *Host_SystemMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1716,7 +1771,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xd7\x03\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xaa\x04\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12J\n" +
 	"\n" +
@@ -1728,7 +1783,8 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\x06access\x18\x04 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
 	"\x13snapshot_management\x18\x05 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12!\n" +
 	"\ffull_version\x18\x06 \x01(\tR\vfullVersion\x12L\n" +
-	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\"\xac\x06\n" +
+	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\x12Q\n" +
+	"\rcloud_storage\x18\b \x01(\v2,.yandex.cloud.mdb.opensearch.v1.CloudStorageR\fcloudStorage\"\xac\x06\n" +
 	"\n" +
 	"OpenSearch\x12\x18\n" +
 	"\aplugins\x18\x01 \x03(\tR\aplugins\x12U\n" +
@@ -1824,7 +1880,9 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\x13DiskSizeAutoscaling\x12E\n" +
 	"\x17planned_usage_threshold\x18\x01 \x01(\x03B\r\xe8\xc71\x00\xfa\xc71\x050-100R\x15plannedUsageThreshold\x12I\n" +
 	"\x19emergency_usage_threshold\x18\x02 \x01(\x03B\r\xe8\xc71\x00\xfa\xc71\x050-100R\x17emergencyUsageThreshold\x12&\n" +
-	"\x0fdisk_size_limit\x18\x03 \x01(\x03R\rdiskSizeLimitBs\n" +
+	"\x0fdisk_size_limit\x18\x03 \x01(\x03R\rdiskSizeLimit\"D\n" +
+	"\fCloudStorage\x124\n" +
+	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabledBs\n" +
 	"\"yandex.cloud.api.mdb.opensearch.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1;opensearchb\x06proto3"
 
 var (
@@ -1840,7 +1898,7 @@ func file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_goTypes = []any{
 	(Cluster_Environment)(0),            // 0: yandex.cloud.mdb.opensearch.v1.Cluster.Environment
 	(Cluster_Health)(0),                 // 1: yandex.cloud.mdb.opensearch.v1.Cluster.Health
@@ -1857,58 +1915,62 @@ var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_goTypes = []any{
 	(*Host)(nil),                        // 12: yandex.cloud.mdb.opensearch.v1.Host
 	(*Access)(nil),                      // 13: yandex.cloud.mdb.opensearch.v1.Access
 	(*DiskSizeAutoscaling)(nil),         // 14: yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	nil,                                 // 15: yandex.cloud.mdb.opensearch.v1.Cluster.LabelsEntry
-	(*OpenSearch_NodeGroup)(nil),        // 16: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup
-	(*Dashboards_NodeGroup)(nil),        // 17: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup
-	(*Host_CPUMetric)(nil),              // 18: yandex.cloud.mdb.opensearch.v1.Host.CPUMetric
-	(*Host_MemoryMetric)(nil),           // 19: yandex.cloud.mdb.opensearch.v1.Host.MemoryMetric
-	(*Host_DiskMetric)(nil),             // 20: yandex.cloud.mdb.opensearch.v1.Host.DiskMetric
-	(*Host_SystemMetrics)(nil),          // 21: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics
-	(*timestamppb.Timestamp)(nil),       // 22: google.protobuf.Timestamp
-	(*MaintenanceWindow)(nil),           // 23: yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
-	(*MaintenanceOperation)(nil),        // 24: yandex.cloud.mdb.opensearch.v1.MaintenanceOperation
-	(*wrapperspb.StringValue)(nil),      // 25: google.protobuf.StringValue
-	(*SnapshotManagement)(nil),          // 26: yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	(*config.AuditLog)(nil),             // 27: yandex.cloud.mdb.opensearch.v1.config.AuditLog
-	(*config.OpenSearchConfigSet2)(nil), // 28: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
+	(*CloudStorage)(nil),                // 15: yandex.cloud.mdb.opensearch.v1.CloudStorage
+	nil,                                 // 16: yandex.cloud.mdb.opensearch.v1.Cluster.LabelsEntry
+	(*OpenSearch_NodeGroup)(nil),        // 17: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup
+	(*Dashboards_NodeGroup)(nil),        // 18: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup
+	(*Host_CPUMetric)(nil),              // 19: yandex.cloud.mdb.opensearch.v1.Host.CPUMetric
+	(*Host_MemoryMetric)(nil),           // 20: yandex.cloud.mdb.opensearch.v1.Host.MemoryMetric
+	(*Host_DiskMetric)(nil),             // 21: yandex.cloud.mdb.opensearch.v1.Host.DiskMetric
+	(*Host_SystemMetrics)(nil),          // 22: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics
+	(*timestamppb.Timestamp)(nil),       // 23: google.protobuf.Timestamp
+	(*MaintenanceWindow)(nil),           // 24: yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
+	(*MaintenanceOperation)(nil),        // 25: yandex.cloud.mdb.opensearch.v1.MaintenanceOperation
+	(*wrapperspb.StringValue)(nil),      // 26: google.protobuf.StringValue
+	(*SnapshotManagement)(nil),          // 27: yandex.cloud.mdb.opensearch.v1.SnapshotManagement
+	(*config.AuditLog)(nil),             // 28: yandex.cloud.mdb.opensearch.v1.config.AuditLog
+	(*config.OpenSearchConfigSet2)(nil), // 29: yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
+	(*wrapperspb.BoolValue)(nil),        // 30: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_opensearch_v1_cluster_proto_depIdxs = []int32{
-	22, // 0: yandex.cloud.mdb.opensearch.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	15, // 1: yandex.cloud.mdb.opensearch.v1.Cluster.labels:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.LabelsEntry
+	23, // 0: yandex.cloud.mdb.opensearch.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
+	16, // 1: yandex.cloud.mdb.opensearch.v1.Cluster.labels:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.LabelsEntry
 	0,  // 2: yandex.cloud.mdb.opensearch.v1.Cluster.environment:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.Environment
 	7,  // 3: yandex.cloud.mdb.opensearch.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.opensearch.v1.Monitoring
 	8,  // 4: yandex.cloud.mdb.opensearch.v1.Cluster.config:type_name -> yandex.cloud.mdb.opensearch.v1.ClusterConfig
 	1,  // 5: yandex.cloud.mdb.opensearch.v1.Cluster.health:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.Health
 	2,  // 6: yandex.cloud.mdb.opensearch.v1.Cluster.status:type_name -> yandex.cloud.mdb.opensearch.v1.Cluster.Status
-	23, // 7: yandex.cloud.mdb.opensearch.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
-	24, // 8: yandex.cloud.mdb.opensearch.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceOperation
-	25, // 9: yandex.cloud.mdb.opensearch.v1.Cluster.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	24, // 7: yandex.cloud.mdb.opensearch.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceWindow
+	25, // 8: yandex.cloud.mdb.opensearch.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.opensearch.v1.MaintenanceOperation
+	26, // 9: yandex.cloud.mdb.opensearch.v1.Cluster.disk_encryption_key_id:type_name -> google.protobuf.StringValue
 	9,  // 10: yandex.cloud.mdb.opensearch.v1.ClusterConfig.opensearch:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch
 	10, // 11: yandex.cloud.mdb.opensearch.v1.ClusterConfig.dashboards:type_name -> yandex.cloud.mdb.opensearch.v1.Dashboards
 	13, // 12: yandex.cloud.mdb.opensearch.v1.ClusterConfig.access:type_name -> yandex.cloud.mdb.opensearch.v1.Access
-	26, // 13: yandex.cloud.mdb.opensearch.v1.ClusterConfig.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
-	27, // 14: yandex.cloud.mdb.opensearch.v1.ClusterConfig.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
-	16, // 15: yandex.cloud.mdb.opensearch.v1.OpenSearch.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup
-	28, // 16: yandex.cloud.mdb.opensearch.v1.OpenSearch.opensearch_config_set_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
-	17, // 17: yandex.cloud.mdb.opensearch.v1.Dashboards.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup
-	11, // 18: yandex.cloud.mdb.opensearch.v1.Host.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	5,  // 19: yandex.cloud.mdb.opensearch.v1.Host.type:type_name -> yandex.cloud.mdb.opensearch.v1.Host.Type
-	4,  // 20: yandex.cloud.mdb.opensearch.v1.Host.health:type_name -> yandex.cloud.mdb.opensearch.v1.Host.Health
-	21, // 21: yandex.cloud.mdb.opensearch.v1.Host.system:type_name -> yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics
-	3,  // 22: yandex.cloud.mdb.opensearch.v1.Host.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
-	11, // 23: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	3,  // 24: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
-	14, // 25: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	11, // 26: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
-	14, // 27: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
-	18, // 28: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.cpu:type_name -> yandex.cloud.mdb.opensearch.v1.Host.CPUMetric
-	19, // 29: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.memory:type_name -> yandex.cloud.mdb.opensearch.v1.Host.MemoryMetric
-	20, // 30: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.disk:type_name -> yandex.cloud.mdb.opensearch.v1.Host.DiskMetric
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	27, // 13: yandex.cloud.mdb.opensearch.v1.ClusterConfig.snapshot_management:type_name -> yandex.cloud.mdb.opensearch.v1.SnapshotManagement
+	28, // 14: yandex.cloud.mdb.opensearch.v1.ClusterConfig.audit_log:type_name -> yandex.cloud.mdb.opensearch.v1.config.AuditLog
+	15, // 15: yandex.cloud.mdb.opensearch.v1.ClusterConfig.cloud_storage:type_name -> yandex.cloud.mdb.opensearch.v1.CloudStorage
+	17, // 16: yandex.cloud.mdb.opensearch.v1.OpenSearch.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup
+	29, // 17: yandex.cloud.mdb.opensearch.v1.OpenSearch.opensearch_config_set_2:type_name -> yandex.cloud.mdb.opensearch.v1.config.OpenSearchConfigSet2
+	18, // 18: yandex.cloud.mdb.opensearch.v1.Dashboards.node_groups:type_name -> yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup
+	11, // 19: yandex.cloud.mdb.opensearch.v1.Host.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	5,  // 20: yandex.cloud.mdb.opensearch.v1.Host.type:type_name -> yandex.cloud.mdb.opensearch.v1.Host.Type
+	4,  // 21: yandex.cloud.mdb.opensearch.v1.Host.health:type_name -> yandex.cloud.mdb.opensearch.v1.Host.Health
+	22, // 22: yandex.cloud.mdb.opensearch.v1.Host.system:type_name -> yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics
+	3,  // 23: yandex.cloud.mdb.opensearch.v1.Host.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
+	30, // 24: yandex.cloud.mdb.opensearch.v1.CloudStorage.enabled:type_name -> google.protobuf.BoolValue
+	11, // 25: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	3,  // 26: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.roles:type_name -> yandex.cloud.mdb.opensearch.v1.OpenSearch.GroupRole
+	14, // 27: yandex.cloud.mdb.opensearch.v1.OpenSearch.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	11, // 28: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup.resources:type_name -> yandex.cloud.mdb.opensearch.v1.Resources
+	14, // 29: yandex.cloud.mdb.opensearch.v1.Dashboards.NodeGroup.disk_size_autoscaling:type_name -> yandex.cloud.mdb.opensearch.v1.DiskSizeAutoscaling
+	19, // 30: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.cpu:type_name -> yandex.cloud.mdb.opensearch.v1.Host.CPUMetric
+	20, // 31: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.memory:type_name -> yandex.cloud.mdb.opensearch.v1.Host.MemoryMetric
+	21, // 32: yandex.cloud.mdb.opensearch.v1.Host.SystemMetrics.disk:type_name -> yandex.cloud.mdb.opensearch.v1.Host.DiskMetric
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_opensearch_v1_cluster_proto_init() }
@@ -1927,7 +1989,7 @@ func file_yandex_cloud_mdb_opensearch_v1_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc), len(file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc)),
 			NumEnums:      6,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
