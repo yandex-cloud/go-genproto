@@ -650,6 +650,10 @@ func (m *PostgresqlConfig14) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
 	m.IdleSessionTimeout = v
 }
 
+func (m *PostgresqlConfig14) SetCheckpointWarning(v *wrapperspb.Int64Value) {
+	m.CheckpointWarning = v
+}
+
 func (m *PostgresqlConfigSet14) SetEffectiveConfig(v *PostgresqlConfig14) {
 	m.EffectiveConfig = v
 }

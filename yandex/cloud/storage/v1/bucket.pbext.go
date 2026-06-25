@@ -84,6 +84,10 @@ func (m *Bucket) SetDisabledStatickeyAuth(v bool) {
 	m.DisabledStatickeyAuth = v
 }
 
+func (m *Bucket) SetLogging(v *BucketLoggingSetup) {
+	m.Logging = v
+}
+
 func (m *Tag) SetKey(v string) {
 	m.Key = v
 }
@@ -556,4 +560,12 @@ func (m *InventoryConfiguration_InventorySchedule) SetFrequency(v InventoryConfi
 
 func (m *InventoryConfiguration_InventoryFilter) SetPrefix(v string) {
 	m.Prefix = v
+}
+
+func (m *BucketLoggingSetup) SetTargetBucket(v string) {
+	m.TargetBucket = v
+}
+
+func (m *BucketLoggingSetup) SetTargetPrefix(v string) {
+	m.TargetPrefix = v
 }

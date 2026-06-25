@@ -22,6 +22,10 @@ func (m *CPU) SetFrequencyMhz(v int64) {
 	m.FrequencyMhz = v
 }
 
+func (m *CPU) SetThreads(v int64) {
+	m.Threads = v
+}
+
 func (m *DiskDriveConfiguration) SetType(v DiskDriveType) {
 	m.Type = v
 }

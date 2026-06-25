@@ -26,6 +26,10 @@ func (m *ListOAuthClientsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
+func (m *ListProfilesResponse) SetProfiles(v []*Profile) {
+	m.Profiles = v
+}
+
 func (m *GetOAuthClientRequest) SetOauthClientId(v string) {
 	m.OauthClientId = v
 }
@@ -66,6 +70,18 @@ func (m *CreateOAuthClientRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *CreateOAuthClientRequest) SetAuthenticationMethods(v []string) {
+	m.AuthenticationMethods = v
+}
+
+func (m *CreateOAuthClientRequest) SetProfileId(v string) {
+	m.ProfileId = v
+}
+
+func (m *CreateOAuthClientRequest) SetPkceRequired(v bool) {
+	m.PkceRequired = v
+}
+
 func (m *UpdateOAuthClientRequest) SetOauthClientId(v string) {
 	m.OauthClientId = v
 }
@@ -84,6 +100,14 @@ func (m *UpdateOAuthClientRequest) SetRedirectUris(v []string) {
 
 func (m *UpdateOAuthClientRequest) SetScopes(v []string) {
 	m.Scopes = v
+}
+
+func (m *UpdateOAuthClientRequest) SetAuthenticationMethods(v []string) {
+	m.AuthenticationMethods = v
+}
+
+func (m *UpdateOAuthClientRequest) SetPkceRequired(v bool) {
+	m.PkceRequired = v
 }
 
 func (m *DeleteOAuthClientRequest) SetOauthClientId(v string) {

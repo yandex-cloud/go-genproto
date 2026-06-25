@@ -181,10 +181,16 @@ type CreateSecurityProfileRequest struct {
 	CaptchaId string `protobuf:"bytes,7,opt,name=captcha_id,json=captchaId,proto3" json:"captcha_id,omitempty"`
 	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
 	AdvancedRateLimiterProfileId string `protobuf:"bytes,8,opt,name=advanced_rate_limiter_profile_id,json=advancedRateLimiterProfileId,proto3" json:"advanced_rate_limiter_profile_id,omitempty"`
+	// Disables the use of HTTP request data for training and improving the service's ML models.
+	DisallowDataProcessing bool `protobuf:"varint,10,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
 	// Parameters for request body analyzer.
 	AnalyzeRequestBody *SecurityProfile_AnalyzeRequestBody `protobuf:"bytes,9,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Configures logging of requests processed by SWS to Audit Trails and Cloud Logging.
+	LogOptions *SecurityProfile_LogOptions `protobuf:"bytes,11,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
+	// ID of the default custom page shown to the user when a request is denied.
+	CustomPageId  string `protobuf:"bytes,14,opt,name=custom_page_id,json=customPageId,proto3" json:"custom_page_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateSecurityProfileRequest) Reset() {
@@ -273,11 +279,32 @@ func (x *CreateSecurityProfileRequest) GetAdvancedRateLimiterProfileId() string 
 	return ""
 }
 
+func (x *CreateSecurityProfileRequest) GetDisallowDataProcessing() bool {
+	if x != nil {
+		return x.DisallowDataProcessing
+	}
+	return false
+}
+
 func (x *CreateSecurityProfileRequest) GetAnalyzeRequestBody() *SecurityProfile_AnalyzeRequestBody {
 	if x != nil {
 		return x.AnalyzeRequestBody
 	}
 	return nil
+}
+
+func (x *CreateSecurityProfileRequest) GetLogOptions() *SecurityProfile_LogOptions {
+	if x != nil {
+		return x.LogOptions
+	}
+	return nil
+}
+
+func (x *CreateSecurityProfileRequest) GetCustomPageId() string {
+	if x != nil {
+		return x.CustomPageId
+	}
+	return ""
 }
 
 type CreateSecurityProfileMetadata struct {
@@ -345,10 +372,16 @@ type UpdateSecurityProfileRequest struct {
 	CaptchaId string `protobuf:"bytes,8,opt,name=captcha_id,json=captchaId,proto3" json:"captcha_id,omitempty"`
 	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
 	AdvancedRateLimiterProfileId string `protobuf:"bytes,9,opt,name=advanced_rate_limiter_profile_id,json=advancedRateLimiterProfileId,proto3" json:"advanced_rate_limiter_profile_id,omitempty"`
+	// Disables the use of HTTP request data for training and improving the service's ML models.
+	DisallowDataProcessing bool `protobuf:"varint,11,opt,name=disallow_data_processing,json=disallowDataProcessing,proto3" json:"disallow_data_processing,omitempty"`
 	// Parameters for request body analyzer.
 	AnalyzeRequestBody *SecurityProfile_AnalyzeRequestBody `protobuf:"bytes,10,opt,name=analyze_request_body,json=analyzeRequestBody,proto3" json:"analyze_request_body,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Configures logging of requests processed by SWS to Audit Trails and Cloud Logging.
+	LogOptions *SecurityProfile_LogOptions `protobuf:"bytes,12,opt,name=log_options,json=logOptions,proto3" json:"log_options,omitempty"`
+	// ID of the default custom page shown to the user when a request is denied.
+	CustomPageId  string `protobuf:"bytes,15,opt,name=custom_page_id,json=customPageId,proto3" json:"custom_page_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateSecurityProfileRequest) Reset() {
@@ -444,11 +477,32 @@ func (x *UpdateSecurityProfileRequest) GetAdvancedRateLimiterProfileId() string 
 	return ""
 }
 
+func (x *UpdateSecurityProfileRequest) GetDisallowDataProcessing() bool {
+	if x != nil {
+		return x.DisallowDataProcessing
+	}
+	return false
+}
+
 func (x *UpdateSecurityProfileRequest) GetAnalyzeRequestBody() *SecurityProfile_AnalyzeRequestBody {
 	if x != nil {
 		return x.AnalyzeRequestBody
 	}
 	return nil
+}
+
+func (x *UpdateSecurityProfileRequest) GetLogOptions() *SecurityProfile_LogOptions {
+	if x != nil {
+		return x.LogOptions
+	}
+	return nil
+}
+
+func (x *UpdateSecurityProfileRequest) GetCustomPageId() string {
+	if x != nil {
+		return x.CustomPageId
+	}
+	return ""
 }
 
 type UpdateSecurityProfileMetadata struct {
@@ -596,7 +650,7 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x1bListSecurityProfilesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"~\n" +
 	"\x1cListSecurityProfilesResponse\x12^\n" +
-	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xe0\x05\n" +
+	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xa5\a\n" +
 	"\x1cCreateSecurityProfileRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12b\n" +
 	"\x06labels\x18\x02 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.LabelsEntryR\x06labels\x12>\n" +
@@ -606,13 +660,18 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x0esecurity_rules\x18\x06 \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x12\x1d\n" +
 	"\n" +
 	"captcha_id\x18\a \x01(\tR\tcaptchaId\x12F\n" +
-	" advanced_rate_limiter_profile_id\x18\b \x01(\tR\x1cadvancedRateLimiterProfileId\x12v\n" +
-	"\x14analyze_request_body\x18\t \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x1a9\n" +
+	" advanced_rate_limiter_profile_id\x18\b \x01(\tR\x1cadvancedRateLimiterProfileId\x128\n" +
+	"\x18disallow_data_processing\x18\n" +
+	" \x01(\bR\x16disallowDataProcessing\x12v\n" +
+	"\x14analyze_request_body\x18\t \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x12]\n" +
+	"\vlog_options\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptionsR\n" +
+	"logOptions\x12$\n" +
+	"\x0ecustom_page_id\x18\x0e \x01(\tR\fcustomPageId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"O\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\f\x10\x0e\"O\n" +
 	"\x1dCreateSecurityProfileMetadata\x12.\n" +
-	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\"\xb0\x06\n" +
+	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\"\xf5\a\n" +
 	"\x1cUpdateSecurityProfileRequest\x124\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x11securityProfileId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -624,12 +683,16 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x0esecurity_rules\x18\a \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x12\x1d\n" +
 	"\n" +
 	"captcha_id\x18\b \x01(\tR\tcaptchaId\x12F\n" +
-	" advanced_rate_limiter_profile_id\x18\t \x01(\tR\x1cadvancedRateLimiterProfileId\x12v\n" +
+	" advanced_rate_limiter_profile_id\x18\t \x01(\tR\x1cadvancedRateLimiterProfileId\x128\n" +
+	"\x18disallow_data_processing\x18\v \x01(\bR\x16disallowDataProcessing\x12v\n" +
 	"\x14analyze_request_body\x18\n" +
-	" \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x1a9\n" +
+	" \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x12]\n" +
+	"\vlog_options\x18\f \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptionsR\n" +
+	"logOptions\x12$\n" +
+	"\x0ecustom_page_id\x18\x0f \x01(\tR\fcustomPageId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"O\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\r\x10\x0f\"O\n" +
 	"\x1dUpdateSecurityProfileMetadata\x12.\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\"T\n" +
 	"\x1cDeleteSecurityProfileRequest\x124\n" +
@@ -676,8 +739,9 @@ var file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_goTypes
 	(SecurityProfile_DefaultAction)(0),         // 12: yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
 	(*SecurityRule)(nil),                       // 13: yandex.cloud.smartwebsecurity.v1.SecurityRule
 	(*SecurityProfile_AnalyzeRequestBody)(nil), // 14: yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
-	(*fieldmaskpb.FieldMask)(nil),              // 15: google.protobuf.FieldMask
-	(*operation.Operation)(nil),                // 16: yandex.cloud.operation.Operation
+	(*SecurityProfile_LogOptions)(nil),         // 15: yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions
+	(*fieldmaskpb.FieldMask)(nil),              // 16: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 17: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_depIdxs = []int32{
 	11, // 0: yandex.cloud.smartwebsecurity.v1.ListSecurityProfilesResponse.security_profiles:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile
@@ -685,26 +749,28 @@ var file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_depIdxs
 	12, // 2: yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.default_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
 	13, // 3: yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.security_rules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule
 	14, // 4: yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
-	15, // 5: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.update_mask:type_name -> google.protobuf.FieldMask
-	10, // 6: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.labels:type_name -> yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.LabelsEntry
-	12, // 7: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.default_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
-	13, // 8: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.security_rules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule
-	14, // 9: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
-	0,  // 10: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Get:input_type -> yandex.cloud.smartwebsecurity.v1.GetSecurityProfileRequest
-	1,  // 11: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.List:input_type -> yandex.cloud.smartwebsecurity.v1.ListSecurityProfilesRequest
-	3,  // 12: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Create:input_type -> yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest
-	5,  // 13: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Update:input_type -> yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest
-	7,  // 14: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Delete:input_type -> yandex.cloud.smartwebsecurity.v1.DeleteSecurityProfileRequest
-	11, // 15: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Get:output_type -> yandex.cloud.smartwebsecurity.v1.SecurityProfile
-	2,  // 16: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.List:output_type -> yandex.cloud.smartwebsecurity.v1.ListSecurityProfilesResponse
-	16, // 17: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 18: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 19: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Delete:output_type -> yandex.cloud.operation.Operation
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	15, // 5: yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.log_options:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions
+	16, // 6: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.update_mask:type_name -> google.protobuf.FieldMask
+	10, // 7: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.labels:type_name -> yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.LabelsEntry
+	12, // 8: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.default_action:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.DefaultAction
+	13, // 9: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.security_rules:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityRule
+	14, // 10: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBody
+	15, // 11: yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest.log_options:type_name -> yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptions
+	0,  // 12: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Get:input_type -> yandex.cloud.smartwebsecurity.v1.GetSecurityProfileRequest
+	1,  // 13: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.List:input_type -> yandex.cloud.smartwebsecurity.v1.ListSecurityProfilesRequest
+	3,  // 14: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Create:input_type -> yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest
+	5,  // 15: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Update:input_type -> yandex.cloud.smartwebsecurity.v1.UpdateSecurityProfileRequest
+	7,  // 16: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Delete:input_type -> yandex.cloud.smartwebsecurity.v1.DeleteSecurityProfileRequest
+	11, // 17: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Get:output_type -> yandex.cloud.smartwebsecurity.v1.SecurityProfile
+	2,  // 18: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.List:output_type -> yandex.cloud.smartwebsecurity.v1.ListSecurityProfilesResponse
+	17, // 19: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Create:output_type -> yandex.cloud.operation.Operation
+	17, // 20: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Update:output_type -> yandex.cloud.operation.Operation
+	17, // 21: yandex.cloud.smartwebsecurity.v1.SecurityProfileService.Delete:output_type -> yandex.cloud.operation.Operation
+	17, // [17:22] is the sub-list for method output_type
+	12, // [12:17] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_init() }

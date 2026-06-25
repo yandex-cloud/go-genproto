@@ -89,8 +89,14 @@ type OAuthClient struct {
 	Scopes []string `protobuf:"bytes,4,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	// ID of the folder oauth client belongs to.
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// List of authentication methods allowed for the oauth client.
+	AuthenticationMethods []string `protobuf:"bytes,9,rep,name=authentication_methods,json=authenticationMethods,proto3" json:"authentication_methods,omitempty"`
 	// Current status of the oauth client.
-	Status        OAuthClient_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.iam.v1.OAuthClient_Status" json:"status,omitempty"`
+	Status OAuthClient_Status `protobuf:"varint,6,opt,name=status,proto3,enum=yandex.cloud.iam.v1.OAuthClient_Status" json:"status,omitempty"`
+	// ID of the profile that defines the set of allowed settings for the oauth client.
+	ProfileId string `protobuf:"bytes,7,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
+	// Whether PKCE (Proof Key for Code Exchange) is required for the oauth client during the authorization code flow.
+	PkceRequired  bool `protobuf:"varint,8,opt,name=pkce_required,json=pkceRequired,proto3" json:"pkce_required,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -160,6 +166,13 @@ func (x *OAuthClient) GetFolderId() string {
 	return ""
 }
 
+func (x *OAuthClient) GetAuthenticationMethods() []string {
+	if x != nil {
+		return x.AuthenticationMethods
+	}
+	return nil
+}
+
 func (x *OAuthClient) GetStatus() OAuthClient_Status {
 	if x != nil {
 		return x.Status
@@ -167,24 +180,132 @@ func (x *OAuthClient) GetStatus() OAuthClient_Status {
 	return OAuthClient_STATUS_UNSPECIFIED
 }
 
+func (x *OAuthClient) GetProfileId() string {
+	if x != nil {
+		return x.ProfileId
+	}
+	return ""
+}
+
+func (x *OAuthClient) GetPkceRequired() bool {
+	if x != nil {
+		return x.PkceRequired
+	}
+	return false
+}
+
+// Profile defines a set of allowed settings that can be applied to an OAuthClient
+// (see [CreateOAuthClientRequest.profile_id]).
+type Profile struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the profile.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Authentication methods that are allowed to be set on the oauth client.
+	AuthenticationMethodsAllowedValues []string `protobuf:"bytes,2,rep,name=authentication_methods_allowed_values,json=authenticationMethodsAllowedValues,proto3" json:"authentication_methods_allowed_values,omitempty"`
+	// Suggested default authentication methods for oauth clients bound to this profile.
+	AuthenticationMethodsDefaultValues []string `protobuf:"bytes,3,rep,name=authentication_methods_default_values,json=authenticationMethodsDefaultValues,proto3" json:"authentication_methods_default_values,omitempty"`
+	// If true, the [OAuthClient.pkce_required] flag cannot be changed and is fixed
+	// to [pkce_required_default_value].
+	PkceRequiredReadonly bool `protobuf:"varint,4,opt,name=pkce_required_readonly,json=pkceRequiredReadonly,proto3" json:"pkce_required_readonly,omitempty"`
+	// Default value of the [OAuthClient.pkce_required] flag for oauth clients bound to this profile.
+	PkceRequiredDefaultValue bool `protobuf:"varint,5,opt,name=pkce_required_default_value,json=pkceRequiredDefaultValue,proto3" json:"pkce_required_default_value,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *Profile) Reset() {
+	*x = Profile{}
+	mi := &file_yandex_cloud_iam_v1_oauth_client_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Profile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Profile) ProtoMessage() {}
+
+func (x *Profile) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_oauth_client_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Profile.ProtoReflect.Descriptor instead.
+func (*Profile) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_oauth_client_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Profile) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Profile) GetAuthenticationMethodsAllowedValues() []string {
+	if x != nil {
+		return x.AuthenticationMethodsAllowedValues
+	}
+	return nil
+}
+
+func (x *Profile) GetAuthenticationMethodsDefaultValues() []string {
+	if x != nil {
+		return x.AuthenticationMethodsDefaultValues
+	}
+	return nil
+}
+
+func (x *Profile) GetPkceRequiredReadonly() bool {
+	if x != nil {
+		return x.PkceRequiredReadonly
+	}
+	return false
+}
+
+func (x *Profile) GetPkceRequiredDefaultValue() bool {
+	if x != nil {
+		return x.PkceRequiredDefaultValue
+	}
+	return false
+}
+
 var File_yandex_cloud_iam_v1_oauth_client_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_iam_v1_oauth_client_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/iam/v1/oauth_client.proto\x12\x13yandex.cloud.iam.v1\"\x96\x02\n" +
+	"&yandex/cloud/iam/v1/oauth_client.proto\x12\x13yandex.cloud.iam.v1\"\x91\x03\n" +
 	"\vOAuthClient\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12#\n" +
 	"\rredirect_uris\x18\x03 \x03(\tR\fredirectUris\x12\x16\n" +
 	"\x06scopes\x18\x04 \x03(\tR\x06scopes\x12\x1b\n" +
-	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x12?\n" +
-	"\x06status\x18\x06 \x01(\x0e2'.yandex.cloud.iam.v1.OAuthClient.StatusR\x06status\"H\n" +
+	"\tfolder_id\x18\x05 \x01(\tR\bfolderId\x125\n" +
+	"\x16authentication_methods\x18\t \x03(\tR\x15authenticationMethods\x12?\n" +
+	"\x06status\x18\x06 \x01(\x0e2'.yandex.cloud.iam.v1.OAuthClient.StatusR\x06status\x12\x1d\n" +
+	"\n" +
+	"profile_id\x18\a \x01(\tR\tprofileId\x12#\n" +
+	"\rpkce_required\x18\b \x01(\bR\fpkceRequired\"H\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bCREATING\x10\x01\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
-	"\bDELETING\x10\x03BV\n" +
+	"\bDELETING\x10\x03\"\xb4\x02\n" +
+	"\aProfile\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12Q\n" +
+	"%authentication_methods_allowed_values\x18\x02 \x03(\tR\"authenticationMethodsAllowedValues\x12Q\n" +
+	"%authentication_methods_default_values\x18\x03 \x03(\tR\"authenticationMethodsDefaultValues\x124\n" +
+	"\x16pkce_required_readonly\x18\x04 \x01(\bR\x14pkceRequiredReadonly\x12=\n" +
+	"\x1bpkce_required_default_value\x18\x05 \x01(\bR\x18pkceRequiredDefaultValueBV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (
@@ -200,10 +321,11 @@ func file_yandex_cloud_iam_v1_oauth_client_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_iam_v1_oauth_client_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_iam_v1_oauth_client_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_iam_v1_oauth_client_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_iam_v1_oauth_client_proto_goTypes = []any{
 	(OAuthClient_Status)(0), // 0: yandex.cloud.iam.v1.OAuthClient.Status
 	(*OAuthClient)(nil),     // 1: yandex.cloud.iam.v1.OAuthClient
+	(*Profile)(nil),         // 2: yandex.cloud.iam.v1.Profile
 }
 var file_yandex_cloud_iam_v1_oauth_client_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.iam.v1.OAuthClient.status:type_name -> yandex.cloud.iam.v1.OAuthClient.Status
@@ -225,7 +347,7 @@ func file_yandex_cloud_iam_v1_oauth_client_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_iam_v1_oauth_client_proto_rawDesc), len(file_yandex_cloud_iam_v1_oauth_client_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

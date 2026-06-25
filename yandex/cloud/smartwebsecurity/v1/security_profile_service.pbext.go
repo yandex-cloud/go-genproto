@@ -50,8 +50,20 @@ func (m *CreateSecurityProfileRequest) SetAdvancedRateLimiterProfileId(v string)
 	m.AdvancedRateLimiterProfileId = v
 }
 
+func (m *CreateSecurityProfileRequest) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
 func (m *CreateSecurityProfileRequest) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeRequestBody) {
 	m.AnalyzeRequestBody = v
+}
+
+func (m *CreateSecurityProfileRequest) SetLogOptions(v *SecurityProfile_LogOptions) {
+	m.LogOptions = v
+}
+
+func (m *CreateSecurityProfileRequest) SetCustomPageId(v string) {
+	m.CustomPageId = v
 }
 
 func (m *CreateSecurityProfileMetadata) SetSecurityProfileId(v string) {
@@ -94,8 +106,20 @@ func (m *UpdateSecurityProfileRequest) SetAdvancedRateLimiterProfileId(v string)
 	m.AdvancedRateLimiterProfileId = v
 }
 
+func (m *UpdateSecurityProfileRequest) SetDisallowDataProcessing(v bool) {
+	m.DisallowDataProcessing = v
+}
+
 func (m *UpdateSecurityProfileRequest) SetAnalyzeRequestBody(v *SecurityProfile_AnalyzeRequestBody) {
 	m.AnalyzeRequestBody = v
+}
+
+func (m *UpdateSecurityProfileRequest) SetLogOptions(v *SecurityProfile_LogOptions) {
+	m.LogOptions = v
+}
+
+func (m *UpdateSecurityProfileRequest) SetCustomPageId(v string) {
+	m.CustomPageId = v
 }
 
 func (m *UpdateSecurityProfileMetadata) SetSecurityProfileId(v string) {

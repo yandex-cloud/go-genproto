@@ -307,6 +307,12 @@ const (
 	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_DIRECT ClickhouseConfig_ExternalDictionary_Layout_Type = 11
 	// The specialized layout type for mapping network prefixes (IP addresses) to metadata such as ASN.
 	ClickhouseConfig_ExternalDictionary_Layout_IP_TRIE ClickhouseConfig_ExternalDictionary_Layout_Type = 12
+	// Similar to cache, but stores data on SSD and index in RAM.
+	// Applicable only for dictionaries with numeric keys of the UInt64 type.
+	ClickhouseConfig_ExternalDictionary_Layout_SSD_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 13
+	// Similar to complex_key_cache, but stores data on SSD and index in RAM.
+	// Applicable for dictionaries with composite keys of arbitrary type.
+	ClickhouseConfig_ExternalDictionary_Layout_COMPLEX_KEY_SSD_CACHE ClickhouseConfig_ExternalDictionary_Layout_Type = 14
 )
 
 // Enum value maps for ClickhouseConfig_ExternalDictionary_Layout_Type.
@@ -325,6 +331,8 @@ var (
 		10: "DIRECT",
 		11: "COMPLEX_KEY_DIRECT",
 		12: "IP_TRIE",
+		13: "SSD_CACHE",
+		14: "COMPLEX_KEY_SSD_CACHE",
 	}
 	ClickhouseConfig_ExternalDictionary_Layout_Type_value = map[string]int32{
 		"TYPE_UNSPECIFIED":          0,
@@ -340,6 +348,8 @@ var (
 		"DIRECT":                    10,
 		"COMPLEX_KEY_DIRECT":        11,
 		"IP_TRIE":                   12,
+		"SSD_CACHE":                 13,
+		"COMPLEX_KEY_SSD_CACHE":     14,
 	}
 )
 
@@ -3800,8 +3810,36 @@ type ClickhouseConfig_ExternalDictionary_Layout struct {
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/dictionaries#ip_trie).
 	AccessToKeyFromAttributes *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=access_to_key_from_attributes,json=accessToKeyFromAttributes,proto3" json:"access_to_key_from_attributes,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	// Elementary read block size in bytes. Recommended to match SSD page size.
+	// Applicable only for **SSD_CACHE** and **COMPLEX_KEY_SSD_CACHE** layout types.
+	//
+	// Default value: **4096**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/statements/create/dictionary/layouts/ssd-cache#ssd_cache).
+	BlockSize int64 `protobuf:"varint,11,opt,name=block_size,json=blockSize,proto3" json:"block_size,omitempty"`
+	// Maximum cache file size in bytes.
+	// Applicable only for **SSD_CACHE** and **COMPLEX_KEY_SSD_CACHE** layout types.
+	//
+	// Default value: **4294967296**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/statements/create/dictionary/layouts/ssd-cache#ssd_cache).
+	FileSize int64 `protobuf:"varint,12,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	// RAM buffer size for reading from SSD in bytes.
+	// Applicable only for **SSD_CACHE** and **COMPLEX_KEY_SSD_CACHE** layout types.
+	//
+	// Default value: **65536**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/statements/create/dictionary/layouts/ssd-cache#ssd_cache).
+	ReadBufferSize int64 `protobuf:"varint,13,opt,name=read_buffer_size,json=readBufferSize,proto3" json:"read_buffer_size,omitempty"`
+	// RAM buffer size for writing to SSD in bytes.
+	// Applicable only for **SSD_CACHE** and **COMPLEX_KEY_SSD_CACHE** layout types.
+	//
+	// Default value: **4096**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/sql-reference/statements/create/dictionary/layouts/ssd-cache#ssd_cache).
+	WriteBufferSize int64 `protobuf:"varint,14,opt,name=write_buffer_size,json=writeBufferSize,proto3" json:"write_buffer_size,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ClickhouseConfig_ExternalDictionary_Layout) Reset() {
@@ -3902,6 +3940,34 @@ func (x *ClickhouseConfig_ExternalDictionary_Layout) GetAccessToKeyFromAttribute
 		return x.AccessToKeyFromAttributes
 	}
 	return nil
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Layout) GetBlockSize() int64 {
+	if x != nil {
+		return x.BlockSize
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Layout) GetFileSize() int64 {
+	if x != nil {
+		return x.FileSize
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Layout) GetReadBufferSize() int64 {
+	if x != nil {
+		return x.ReadBufferSize
+	}
+	return 0
+}
+
+func (x *ClickhouseConfig_ExternalDictionary_Layout) GetWriteBufferSize() int64 {
+	if x != nil {
+		return x.WriteBufferSize
+	}
+	return 0
 }
 
 type ClickhouseConfig_ExternalDictionary_Range struct {
@@ -4909,7 +4975,7 @@ var File_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto protoreflect.Fil
 
 const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\xab\x01\n" +
+	"6yandex/cloud/mdb/clickhouse/v1/config/clickhouse.proto\x12%yandex.cloud.mdb.clickhouse.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"ͬ\x01\n" +
 	"\x10ClickhouseConfig\x12M\n" +
 	"\x14background_pool_size\x18! \x01(\v2\x1b.google.protobuf.Int64ValueR\x12backgroundPoolSize\x12}\n" +
 	"-background_merges_mutations_concurrency_ratio\x180 \x01(\v2\x1b.google.protobuf.Int64ValueR)backgroundMergesMutationsConcurrencyRatio\x12^\n" +
@@ -5069,7 +5135,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x12METHOD_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03LZ4\x10\x01\x12\b\n" +
 	"\x04ZSTD\x10\x02\x12\t\n" +
-	"\x05LZ4HC\x10\x03\x1a\x95&\n" +
+	"\x05LZ4HC\x10\x03\x1a\xd1'\n" +
 	"\x12ExternalDictionary\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12x\n" +
 	"\tstructure\x18\x02 \x01(\v2T.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.StructureB\x04\xe8\xc71\x01R\tstructure\x12o\n" +
@@ -5106,7 +5172,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"expression\x18\x04 \x01(\tR\n" +
 	"expression\x12\"\n" +
 	"\fhierarchical\x18\x05 \x01(\bR\fhierarchical\x12\x1c\n" +
-	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\xaa\a\n" +
+	"\tinjective\x18\x06 \x01(\bR\tinjective\x1a\xe6\b\n" +
 	"\x06Layout\x12p\n" +
 	"\x04type\x18\x01 \x01(\x0e2V.yandex.cloud.mdb.clickhouse.v1.config.ClickhouseConfig.ExternalDictionary.Layout.TypeB\x04\xe8\xc71\x01R\x04type\x12\"\n" +
 	"\rsize_in_cells\x18\x02 \x01(\x03R\vsizeInCells\x12Q\n" +
@@ -5118,7 +5184,12 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x12initial_array_size\x18\n" +
 	" \x01(\x03R\x10initialArraySize\x12$\n" +
 	"\x0emax_array_size\x18\x03 \x01(\x03R\fmaxArraySize\x12\\\n" +
-	"\x1daccess_to_key_from_attributes\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x19accessToKeyFromAttributes\"\xff\x01\n" +
+	"\x1daccess_to_key_from_attributes\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x19accessToKeyFromAttributes\x12\x1d\n" +
+	"\n" +
+	"block_size\x18\v \x01(\x03R\tblockSize\x12\x1b\n" +
+	"\tfile_size\x18\f \x01(\x03R\bfileSize\x12(\n" +
+	"\x10read_buffer_size\x18\r \x01(\x03R\x0ereadBufferSize\x12*\n" +
+	"\x11write_buffer_size\x18\x0e \x01(\x03R\x0fwriteBufferSize\"\xa9\x02\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04FLAT\x10\x01\x12\n" +
@@ -5135,7 +5206,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_config_clickhouse_proto_rawDesc = "" +
 	"\x06DIRECT\x10\n" +
 	"\x12\x16\n" +
 	"\x12COMPLEX_KEY_DIRECT\x10\v\x12\v\n" +
-	"\aIP_TRIE\x10\f\x1a+\n" +
+	"\aIP_TRIE\x10\f\x12\r\n" +
+	"\tSSD_CACHE\x10\r\x12\x19\n" +
+	"\x15COMPLEX_KEY_SSD_CACHE\x10\x0e\x1a+\n" +
 	"\x05Range\x12\x10\n" +
 	"\x03min\x18\x01 \x01(\x03R\x03min\x12\x10\n" +
 	"\x03max\x18\x02 \x01(\x03R\x03max\x1a\xfa\x01\n" +

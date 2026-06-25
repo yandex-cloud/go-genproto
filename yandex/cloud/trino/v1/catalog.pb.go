@@ -514,6 +514,7 @@ type Metastore struct {
 	// Types that are valid to be assigned to Type:
 	//
 	//	*Metastore_Hive
+	//	*Metastore_Rest
 	Type          isMetastore_Type `protobuf_oneof:"type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -565,6 +566,15 @@ func (x *Metastore) GetHive() *Metastore_HiveMetastore {
 	return nil
 }
 
+func (x *Metastore) GetRest() *Metastore_RestMetastore {
+	if x != nil {
+		if x, ok := x.Type.(*Metastore_Rest); ok {
+			return x.Rest
+		}
+	}
+	return nil
+}
+
 type isMetastore_Type interface {
 	isMetastore_Type()
 }
@@ -574,7 +584,14 @@ type Metastore_Hive struct {
 	Hive *Metastore_HiveMetastore `protobuf:"bytes,1,opt,name=hive,proto3,oneof"`
 }
 
+type Metastore_Rest struct {
+	// Iceberg REST Catalog compatible Metastore.
+	Rest *Metastore_RestMetastore `protobuf:"bytes,2,opt,name=rest,proto3,oneof"`
+}
+
 func (*Metastore_Hive) isMetastore_Type() {}
+
+func (*Metastore_Rest) isMetastore_Type() {}
 
 // Configuration of file system used by a connector.
 type FileSystem struct {
@@ -1803,6 +1820,7 @@ type Metastore_HiveMetastore struct {
 	// Types that are valid to be assigned to Connection:
 	//
 	//	*Metastore_HiveMetastore_Uri
+	//	*Metastore_HiveMetastore_ManagedClusterId
 	Connection    isMetastore_HiveMetastore_Connection `protobuf_oneof:"connection"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1854,6 +1872,15 @@ func (x *Metastore_HiveMetastore) GetUri() string {
 	return ""
 }
 
+func (x *Metastore_HiveMetastore) GetManagedClusterId() string {
+	if x != nil {
+		if x, ok := x.Connection.(*Metastore_HiveMetastore_ManagedClusterId); ok {
+			return x.ManagedClusterId
+		}
+	}
+	return ""
+}
+
 type isMetastore_HiveMetastore_Connection interface {
 	isMetastore_HiveMetastore_Connection()
 }
@@ -1863,7 +1890,173 @@ type Metastore_HiveMetastore_Uri struct {
 	Uri string `protobuf:"bytes,1,opt,name=uri,proto3,oneof"`
 }
 
+type Metastore_HiveMetastore_ManagedClusterId struct {
+	// ID of the Managed Hive Metastore cluster.
+	ManagedClusterId string `protobuf:"bytes,2,opt,name=managed_cluster_id,json=managedClusterId,proto3,oneof"`
+}
+
 func (*Metastore_HiveMetastore_Uri) isMetastore_HiveMetastore_Connection() {}
+
+func (*Metastore_HiveMetastore_ManagedClusterId) isMetastore_HiveMetastore_Connection() {}
+
+// Configuration of Iceberg REST Catalog compatible metastore type.
+type Metastore_RestMetastore struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// URI of the REST Catalog metastore.
+	Uri string `protobuf:"bytes,1,opt,name=uri,proto3" json:"uri,omitempty"`
+	// Authorization properties.
+	Authorization *Metastore_RestMetastore_Authorization `protobuf:"bytes,2,opt,name=authorization,proto3" json:"authorization,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Metastore_RestMetastore) Reset() {
+	*x = Metastore_RestMetastore{}
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Metastore_RestMetastore) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Metastore_RestMetastore) ProtoMessage() {}
+
+func (x *Metastore_RestMetastore) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Metastore_RestMetastore.ProtoReflect.Descriptor instead.
+func (*Metastore_RestMetastore) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_trino_v1_catalog_proto_rawDescGZIP(), []int{4, 1}
+}
+
+func (x *Metastore_RestMetastore) GetUri() string {
+	if x != nil {
+		return x.Uri
+	}
+	return ""
+}
+
+func (x *Metastore_RestMetastore) GetAuthorization() *Metastore_RestMetastore_Authorization {
+	if x != nil {
+		return x.Authorization
+	}
+	return nil
+}
+
+type Metastore_RestMetastore_Authorization struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Type:
+	//
+	//	*Metastore_RestMetastore_Authorization_None
+	Type          isMetastore_RestMetastore_Authorization_Type `protobuf_oneof:"type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Metastore_RestMetastore_Authorization) Reset() {
+	*x = Metastore_RestMetastore_Authorization{}
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Metastore_RestMetastore_Authorization) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Metastore_RestMetastore_Authorization) ProtoMessage() {}
+
+func (x *Metastore_RestMetastore_Authorization) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Metastore_RestMetastore_Authorization.ProtoReflect.Descriptor instead.
+func (*Metastore_RestMetastore_Authorization) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_trino_v1_catalog_proto_rawDescGZIP(), []int{4, 1, 0}
+}
+
+func (x *Metastore_RestMetastore_Authorization) GetType() isMetastore_RestMetastore_Authorization_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
+func (x *Metastore_RestMetastore_Authorization) GetNone() *Metastore_RestMetastore_Authorization_NoneAuth {
+	if x != nil {
+		if x, ok := x.Type.(*Metastore_RestMetastore_Authorization_None); ok {
+			return x.None
+		}
+	}
+	return nil
+}
+
+type isMetastore_RestMetastore_Authorization_Type interface {
+	isMetastore_RestMetastore_Authorization_Type()
+}
+
+type Metastore_RestMetastore_Authorization_None struct {
+	// Disabled authorization
+	None *Metastore_RestMetastore_Authorization_NoneAuth `protobuf:"bytes,1,opt,name=none,proto3,oneof"`
+}
+
+func (*Metastore_RestMetastore_Authorization_None) isMetastore_RestMetastore_Authorization_Type() {}
+
+// None authorization.
+type Metastore_RestMetastore_Authorization_NoneAuth struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Metastore_RestMetastore_Authorization_NoneAuth) Reset() {
+	*x = Metastore_RestMetastore_Authorization_NoneAuth{}
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Metastore_RestMetastore_Authorization_NoneAuth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Metastore_RestMetastore_Authorization_NoneAuth) ProtoMessage() {}
+
+func (x *Metastore_RestMetastore_Authorization_NoneAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Metastore_RestMetastore_Authorization_NoneAuth.ProtoReflect.Descriptor instead.
+func (*Metastore_RestMetastore_Authorization_NoneAuth) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_trino_v1_catalog_proto_rawDescGZIP(), []int{4, 1, 0, 0}
+}
 
 // Describes YandexCloud native S3 file system.
 // Currently does not require configuration.
@@ -1875,7 +2068,7 @@ type FileSystem_S3FileSystem struct {
 
 func (x *FileSystem_S3FileSystem) Reset() {
 	*x = FileSystem_S3FileSystem{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[28]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1887,7 +2080,7 @@ func (x *FileSystem_S3FileSystem) String() string {
 func (*FileSystem_S3FileSystem) ProtoMessage() {}
 
 func (x *FileSystem_S3FileSystem) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[28]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1920,7 +2113,7 @@ type FileSystem_ExternalS3FileSystem struct {
 
 func (x *FileSystem_ExternalS3FileSystem) Reset() {
 	*x = FileSystem_ExternalS3FileSystem{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[29]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1932,7 +2125,7 @@ func (x *FileSystem_ExternalS3FileSystem) String() string {
 func (*FileSystem_ExternalS3FileSystem) ProtoMessage() {}
 
 func (x *FileSystem_ExternalS3FileSystem) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[29]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1990,7 +2183,7 @@ type PostgresqlConnection_OnPremise struct {
 
 func (x *PostgresqlConnection_OnPremise) Reset() {
 	*x = PostgresqlConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[34]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2002,7 +2195,7 @@ func (x *PostgresqlConnection_OnPremise) String() string {
 func (*PostgresqlConnection_OnPremise) ProtoMessage() {}
 
 func (x *PostgresqlConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[34]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2053,7 +2246,7 @@ type PostgresqlConnection_ConnectionManager struct {
 
 func (x *PostgresqlConnection_ConnectionManager) Reset() {
 	*x = PostgresqlConnection_ConnectionManager{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[35]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2065,7 +2258,7 @@ func (x *PostgresqlConnection_ConnectionManager) String() string {
 func (*PostgresqlConnection_ConnectionManager) ProtoMessage() {}
 
 func (x *PostgresqlConnection_ConnectionManager) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[35]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2116,7 +2309,7 @@ type ClickhouseConnection_OnPremise struct {
 
 func (x *ClickhouseConnection_OnPremise) Reset() {
 	*x = ClickhouseConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[38]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2128,7 +2321,7 @@ func (x *ClickhouseConnection_OnPremise) String() string {
 func (*ClickhouseConnection_OnPremise) ProtoMessage() {}
 
 func (x *ClickhouseConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[38]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2179,7 +2372,7 @@ type ClickhouseConnection_ConnectionManager struct {
 
 func (x *ClickhouseConnection_ConnectionManager) Reset() {
 	*x = ClickhouseConnection_ConnectionManager{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[39]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2191,7 +2384,7 @@ func (x *ClickhouseConnection_ConnectionManager) String() string {
 func (*ClickhouseConnection_ConnectionManager) ProtoMessage() {}
 
 func (x *ClickhouseConnection_ConnectionManager) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[39]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2242,7 +2435,7 @@ type OracleConnection_OnPremise struct {
 
 func (x *OracleConnection_OnPremise) Reset() {
 	*x = OracleConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[44]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2254,7 +2447,7 @@ func (x *OracleConnection_OnPremise) String() string {
 func (*OracleConnection_OnPremise) ProtoMessage() {}
 
 func (x *OracleConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[44]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2305,7 +2498,7 @@ type SQLServerConnection_OnPremise struct {
 
 func (x *SQLServerConnection_OnPremise) Reset() {
 	*x = SQLServerConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[46]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2317,7 +2510,7 @@ func (x *SQLServerConnection_OnPremise) String() string {
 func (*SQLServerConnection_OnPremise) ProtoMessage() {}
 
 func (x *SQLServerConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[46]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2368,7 +2561,7 @@ type MysqlConnection_OnPremise struct {
 
 func (x *MysqlConnection_OnPremise) Reset() {
 	*x = MysqlConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[48]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2380,7 +2573,7 @@ func (x *MysqlConnection_OnPremise) String() string {
 func (*MysqlConnection_OnPremise) ProtoMessage() {}
 
 func (x *MysqlConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[48]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2429,7 +2622,7 @@ type MysqlConnection_ConnectionManager struct {
 
 func (x *MysqlConnection_ConnectionManager) Reset() {
 	*x = MysqlConnection_ConnectionManager{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[49]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2441,7 +2634,7 @@ func (x *MysqlConnection_ConnectionManager) String() string {
 func (*MysqlConnection_ConnectionManager) ProtoMessage() {}
 
 func (x *MysqlConnection_ConnectionManager) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[49]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2485,7 +2678,7 @@ type GreenplumConnection_OnPremise struct {
 
 func (x *GreenplumConnection_OnPremise) Reset() {
 	*x = GreenplumConnection_OnPremise{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[52]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2497,7 +2690,7 @@ func (x *GreenplumConnection_OnPremise) String() string {
 func (*GreenplumConnection_OnPremise) ProtoMessage() {}
 
 func (x *GreenplumConnection_OnPremise) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[52]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2548,7 +2741,7 @@ type GreenplumConnection_ConnectionManager struct {
 
 func (x *GreenplumConnection_ConnectionManager) Reset() {
 	*x = GreenplumConnection_ConnectionManager{}
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[53]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2560,7 +2753,7 @@ func (x *GreenplumConnection_ConnectionManager) String() string {
 func (*GreenplumConnection_ConnectionManager) ProtoMessage() {}
 
 func (x *GreenplumConnection_ConnectionManager) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[53]
+	mi := &file_yandex_cloud_trino_v1_catalog_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2646,13 +2839,23 @@ const file_yandex_cloud_trino_v1_catalog_proto_rawDesc = "" +
 	"\x06labels\x18\x04 \x03(\v24.yandex.cloud.trino.v1.CatalogUpdateSpec.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9f\x04\n" +
 	"\tMetastore\x12D\n" +
-	"\x04hive\x18\x01 \x01(\v2..yandex.cloud.trino.v1.Metastore.HiveMetastoreH\x00R\x04hive\x1a7\n" +
+	"\x04hive\x18\x01 \x01(\v2..yandex.cloud.trino.v1.Metastore.HiveMetastoreH\x00R\x04hive\x12D\n" +
+	"\x04rest\x18\x02 \x01(\v2..yandex.cloud.trino.v1.Metastore.RestMetastoreH\x00R\x04rest\x1ag\n" +
 	"\rHiveMetastore\x12\x12\n" +
-	"\x03uri\x18\x01 \x01(\tH\x00R\x03uriB\x12\n" +
+	"\x03uri\x18\x01 \x01(\tH\x00R\x03uri\x12.\n" +
+	"\x12managed_cluster_id\x18\x02 \x01(\tH\x00R\x10managedClusterIdB\x12\n" +
 	"\n" +
-	"connection\x12\x04\xc0\xc11\x01B\f\n" +
+	"connection\x12\x04\xc0\xc11\x01\x1a\x8e\x02\n" +
+	"\rRestMetastore\x12\x10\n" +
+	"\x03uri\x18\x01 \x01(\tR\x03uri\x12b\n" +
+	"\rauthorization\x18\x02 \x01(\v2<.yandex.cloud.trino.v1.Metastore.RestMetastore.AuthorizationR\rauthorization\x1a\x86\x01\n" +
+	"\rAuthorization\x12[\n" +
+	"\x04none\x18\x01 \x01(\v2E.yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization.NoneAuthH\x00R\x04none\x1a\n" +
+	"\n" +
+	"\bNoneAuthB\f\n" +
+	"\x04type\x12\x04\xc0\xc11\x01B\f\n" +
 	"\x04type\x12\x04\xc0\xc11\x01\"\x97\x03\n" +
 	"\n" +
 	"FileSystem\x12@\n" +
@@ -2856,64 +3059,67 @@ func file_yandex_cloud_trino_v1_catalog_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_trino_v1_catalog_proto_rawDescData
 }
 
-var file_yandex_cloud_trino_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
+var file_yandex_cloud_trino_v1_catalog_proto_msgTypes = make([]protoimpl.MessageInfo, 59)
 var file_yandex_cloud_trino_v1_catalog_proto_goTypes = []any{
-	(*Connector)(nil),                       // 0: yandex.cloud.trino.v1.Connector
-	(*Catalog)(nil),                         // 1: yandex.cloud.trino.v1.Catalog
-	(*CatalogSpec)(nil),                     // 2: yandex.cloud.trino.v1.CatalogSpec
-	(*CatalogUpdateSpec)(nil),               // 3: yandex.cloud.trino.v1.CatalogUpdateSpec
-	(*Metastore)(nil),                       // 4: yandex.cloud.trino.v1.Metastore
-	(*FileSystem)(nil),                      // 5: yandex.cloud.trino.v1.FileSystem
-	(*HiveConnector)(nil),                   // 6: yandex.cloud.trino.v1.HiveConnector
-	(*IcebergConnector)(nil),                // 7: yandex.cloud.trino.v1.IcebergConnector
-	(*DeltaLakeConnector)(nil),              // 8: yandex.cloud.trino.v1.DeltaLakeConnector
-	(*HudiConnector)(nil),                   // 9: yandex.cloud.trino.v1.HudiConnector
-	(*PostgresqlConnection)(nil),            // 10: yandex.cloud.trino.v1.PostgresqlConnection
-	(*PostgresqlConnector)(nil),             // 11: yandex.cloud.trino.v1.PostgresqlConnector
-	(*ClickhouseConnection)(nil),            // 12: yandex.cloud.trino.v1.ClickhouseConnection
-	(*ClickhouseConnector)(nil),             // 13: yandex.cloud.trino.v1.ClickhouseConnector
-	(*TPCHConnector)(nil),                   // 14: yandex.cloud.trino.v1.TPCHConnector
-	(*TPCDSConnector)(nil),                  // 15: yandex.cloud.trino.v1.TPCDSConnector
-	(*OracleConnection)(nil),                // 16: yandex.cloud.trino.v1.OracleConnection
-	(*OracleConnector)(nil),                 // 17: yandex.cloud.trino.v1.OracleConnector
-	(*SQLServerConnection)(nil),             // 18: yandex.cloud.trino.v1.SQLServerConnection
-	(*SQLServerConnector)(nil),              // 19: yandex.cloud.trino.v1.SQLServerConnector
-	(*MysqlConnection)(nil),                 // 20: yandex.cloud.trino.v1.MysqlConnection
-	(*MysqlConnector)(nil),                  // 21: yandex.cloud.trino.v1.MysqlConnector
-	(*GreenplumConnection)(nil),             // 22: yandex.cloud.trino.v1.GreenplumConnection
-	(*GreenplumConnector)(nil),              // 23: yandex.cloud.trino.v1.GreenplumConnector
-	nil,                                     // 24: yandex.cloud.trino.v1.Catalog.LabelsEntry
-	nil,                                     // 25: yandex.cloud.trino.v1.CatalogSpec.LabelsEntry
-	nil,                                     // 26: yandex.cloud.trino.v1.CatalogUpdateSpec.LabelsEntry
-	(*Metastore_HiveMetastore)(nil),         // 27: yandex.cloud.trino.v1.Metastore.HiveMetastore
-	(*FileSystem_S3FileSystem)(nil),         // 28: yandex.cloud.trino.v1.FileSystem.S3FileSystem
-	(*FileSystem_ExternalS3FileSystem)(nil), // 29: yandex.cloud.trino.v1.FileSystem.ExternalS3FileSystem
-	nil,                                     // 30: yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntry
-	nil,                                     // 31: yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntry
-	nil,                                     // 32: yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntry
-	nil,                                     // 33: yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntry
-	(*PostgresqlConnection_OnPremise)(nil),  // 34: yandex.cloud.trino.v1.PostgresqlConnection.OnPremise
-	(*PostgresqlConnection_ConnectionManager)(nil), // 35: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager
-	nil,                                    // 36: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.ConnectionPropertiesEntry
-	nil,                                    // 37: yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntry
-	(*ClickhouseConnection_OnPremise)(nil), // 38: yandex.cloud.trino.v1.ClickhouseConnection.OnPremise
-	(*ClickhouseConnection_ConnectionManager)(nil), // 39: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager
-	nil,                                   // 40: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.ConnectionPropertiesEntry
-	nil,                                   // 41: yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntry
-	nil,                                   // 42: yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntry
-	nil,                                   // 43: yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntry
-	(*OracleConnection_OnPremise)(nil),    // 44: yandex.cloud.trino.v1.OracleConnection.OnPremise
-	nil,                                   // 45: yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntry
-	(*SQLServerConnection_OnPremise)(nil), // 46: yandex.cloud.trino.v1.SQLServerConnection.OnPremise
-	nil,                                   // 47: yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntry
-	(*MysqlConnection_OnPremise)(nil),     // 48: yandex.cloud.trino.v1.MysqlConnection.OnPremise
-	(*MysqlConnection_ConnectionManager)(nil), // 49: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager
-	nil,                                   // 50: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.ConnectionPropertiesEntry
-	nil,                                   // 51: yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntry
-	(*GreenplumConnection_OnPremise)(nil), // 52: yandex.cloud.trino.v1.GreenplumConnection.OnPremise
-	(*GreenplumConnection_ConnectionManager)(nil), // 53: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager
-	nil, // 54: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.ConnectionPropertiesEntry
-	nil, // 55: yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntry
+	(*Connector)(nil),                             // 0: yandex.cloud.trino.v1.Connector
+	(*Catalog)(nil),                               // 1: yandex.cloud.trino.v1.Catalog
+	(*CatalogSpec)(nil),                           // 2: yandex.cloud.trino.v1.CatalogSpec
+	(*CatalogUpdateSpec)(nil),                     // 3: yandex.cloud.trino.v1.CatalogUpdateSpec
+	(*Metastore)(nil),                             // 4: yandex.cloud.trino.v1.Metastore
+	(*FileSystem)(nil),                            // 5: yandex.cloud.trino.v1.FileSystem
+	(*HiveConnector)(nil),                         // 6: yandex.cloud.trino.v1.HiveConnector
+	(*IcebergConnector)(nil),                      // 7: yandex.cloud.trino.v1.IcebergConnector
+	(*DeltaLakeConnector)(nil),                    // 8: yandex.cloud.trino.v1.DeltaLakeConnector
+	(*HudiConnector)(nil),                         // 9: yandex.cloud.trino.v1.HudiConnector
+	(*PostgresqlConnection)(nil),                  // 10: yandex.cloud.trino.v1.PostgresqlConnection
+	(*PostgresqlConnector)(nil),                   // 11: yandex.cloud.trino.v1.PostgresqlConnector
+	(*ClickhouseConnection)(nil),                  // 12: yandex.cloud.trino.v1.ClickhouseConnection
+	(*ClickhouseConnector)(nil),                   // 13: yandex.cloud.trino.v1.ClickhouseConnector
+	(*TPCHConnector)(nil),                         // 14: yandex.cloud.trino.v1.TPCHConnector
+	(*TPCDSConnector)(nil),                        // 15: yandex.cloud.trino.v1.TPCDSConnector
+	(*OracleConnection)(nil),                      // 16: yandex.cloud.trino.v1.OracleConnection
+	(*OracleConnector)(nil),                       // 17: yandex.cloud.trino.v1.OracleConnector
+	(*SQLServerConnection)(nil),                   // 18: yandex.cloud.trino.v1.SQLServerConnection
+	(*SQLServerConnector)(nil),                    // 19: yandex.cloud.trino.v1.SQLServerConnector
+	(*MysqlConnection)(nil),                       // 20: yandex.cloud.trino.v1.MysqlConnection
+	(*MysqlConnector)(nil),                        // 21: yandex.cloud.trino.v1.MysqlConnector
+	(*GreenplumConnection)(nil),                   // 22: yandex.cloud.trino.v1.GreenplumConnection
+	(*GreenplumConnector)(nil),                    // 23: yandex.cloud.trino.v1.GreenplumConnector
+	nil,                                           // 24: yandex.cloud.trino.v1.Catalog.LabelsEntry
+	nil,                                           // 25: yandex.cloud.trino.v1.CatalogSpec.LabelsEntry
+	nil,                                           // 26: yandex.cloud.trino.v1.CatalogUpdateSpec.LabelsEntry
+	(*Metastore_HiveMetastore)(nil),               // 27: yandex.cloud.trino.v1.Metastore.HiveMetastore
+	(*Metastore_RestMetastore)(nil),               // 28: yandex.cloud.trino.v1.Metastore.RestMetastore
+	(*Metastore_RestMetastore_Authorization)(nil), // 29: yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization
+	(*Metastore_RestMetastore_Authorization_NoneAuth)(nil), // 30: yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization.NoneAuth
+	(*FileSystem_S3FileSystem)(nil),                        // 31: yandex.cloud.trino.v1.FileSystem.S3FileSystem
+	(*FileSystem_ExternalS3FileSystem)(nil),                // 32: yandex.cloud.trino.v1.FileSystem.ExternalS3FileSystem
+	nil,                                                    // 33: yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntry
+	nil,                                                    // 34: yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntry
+	nil,                                                    // 35: yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntry
+	nil,                                                    // 36: yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntry
+	(*PostgresqlConnection_OnPremise)(nil),                 // 37: yandex.cloud.trino.v1.PostgresqlConnection.OnPremise
+	(*PostgresqlConnection_ConnectionManager)(nil), // 38: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager
+	nil,                                    // 39: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.ConnectionPropertiesEntry
+	nil,                                    // 40: yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntry
+	(*ClickhouseConnection_OnPremise)(nil), // 41: yandex.cloud.trino.v1.ClickhouseConnection.OnPremise
+	(*ClickhouseConnection_ConnectionManager)(nil), // 42: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager
+	nil,                                   // 43: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.ConnectionPropertiesEntry
+	nil,                                   // 44: yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntry
+	nil,                                   // 45: yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntry
+	nil,                                   // 46: yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntry
+	(*OracleConnection_OnPremise)(nil),    // 47: yandex.cloud.trino.v1.OracleConnection.OnPremise
+	nil,                                   // 48: yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntry
+	(*SQLServerConnection_OnPremise)(nil), // 49: yandex.cloud.trino.v1.SQLServerConnection.OnPremise
+	nil,                                   // 50: yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntry
+	(*MysqlConnection_OnPremise)(nil),     // 51: yandex.cloud.trino.v1.MysqlConnection.OnPremise
+	(*MysqlConnection_ConnectionManager)(nil), // 52: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager
+	nil,                                   // 53: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.ConnectionPropertiesEntry
+	nil,                                   // 54: yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntry
+	(*GreenplumConnection_OnPremise)(nil), // 55: yandex.cloud.trino.v1.GreenplumConnection.OnPremise
+	(*GreenplumConnection_ConnectionManager)(nil), // 56: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager
+	nil, // 57: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.ConnectionPropertiesEntry
+	nil, // 58: yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntry
 }
 var file_yandex_cloud_trino_v1_catalog_proto_depIdxs = []int32{
 	6,  // 0: yandex.cloud.trino.v1.Connector.hive:type_name -> yandex.cloud.trino.v1.HiveConnector
@@ -2935,53 +3141,56 @@ var file_yandex_cloud_trino_v1_catalog_proto_depIdxs = []int32{
 	0,  // 16: yandex.cloud.trino.v1.CatalogUpdateSpec.connector:type_name -> yandex.cloud.trino.v1.Connector
 	26, // 17: yandex.cloud.trino.v1.CatalogUpdateSpec.labels:type_name -> yandex.cloud.trino.v1.CatalogUpdateSpec.LabelsEntry
 	27, // 18: yandex.cloud.trino.v1.Metastore.hive:type_name -> yandex.cloud.trino.v1.Metastore.HiveMetastore
-	28, // 19: yandex.cloud.trino.v1.FileSystem.s3:type_name -> yandex.cloud.trino.v1.FileSystem.S3FileSystem
-	29, // 20: yandex.cloud.trino.v1.FileSystem.external_s3:type_name -> yandex.cloud.trino.v1.FileSystem.ExternalS3FileSystem
-	4,  // 21: yandex.cloud.trino.v1.HiveConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
-	5,  // 22: yandex.cloud.trino.v1.HiveConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
-	30, // 23: yandex.cloud.trino.v1.HiveConnector.additional_properties:type_name -> yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntry
-	4,  // 24: yandex.cloud.trino.v1.IcebergConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
-	5,  // 25: yandex.cloud.trino.v1.IcebergConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
-	31, // 26: yandex.cloud.trino.v1.IcebergConnector.additional_properties:type_name -> yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntry
-	4,  // 27: yandex.cloud.trino.v1.DeltaLakeConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
-	5,  // 28: yandex.cloud.trino.v1.DeltaLakeConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
-	32, // 29: yandex.cloud.trino.v1.DeltaLakeConnector.additional_properties:type_name -> yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntry
-	4,  // 30: yandex.cloud.trino.v1.HudiConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
-	5,  // 31: yandex.cloud.trino.v1.HudiConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
-	33, // 32: yandex.cloud.trino.v1.HudiConnector.additional_properties:type_name -> yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntry
-	34, // 33: yandex.cloud.trino.v1.PostgresqlConnection.on_premise:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.OnPremise
-	35, // 34: yandex.cloud.trino.v1.PostgresqlConnection.connection_manager:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager
-	10, // 35: yandex.cloud.trino.v1.PostgresqlConnector.connection:type_name -> yandex.cloud.trino.v1.PostgresqlConnection
-	37, // 36: yandex.cloud.trino.v1.PostgresqlConnector.additional_properties:type_name -> yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntry
-	38, // 37: yandex.cloud.trino.v1.ClickhouseConnection.on_premise:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.OnPremise
-	39, // 38: yandex.cloud.trino.v1.ClickhouseConnection.connection_manager:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager
-	12, // 39: yandex.cloud.trino.v1.ClickhouseConnector.connection:type_name -> yandex.cloud.trino.v1.ClickhouseConnection
-	41, // 40: yandex.cloud.trino.v1.ClickhouseConnector.additional_properties:type_name -> yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntry
-	42, // 41: yandex.cloud.trino.v1.TPCHConnector.additional_properties:type_name -> yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntry
-	43, // 42: yandex.cloud.trino.v1.TPCDSConnector.additional_properties:type_name -> yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntry
-	44, // 43: yandex.cloud.trino.v1.OracleConnection.on_premise:type_name -> yandex.cloud.trino.v1.OracleConnection.OnPremise
-	16, // 44: yandex.cloud.trino.v1.OracleConnector.connection:type_name -> yandex.cloud.trino.v1.OracleConnection
-	45, // 45: yandex.cloud.trino.v1.OracleConnector.additional_properties:type_name -> yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntry
-	46, // 46: yandex.cloud.trino.v1.SQLServerConnection.on_premise:type_name -> yandex.cloud.trino.v1.SQLServerConnection.OnPremise
-	18, // 47: yandex.cloud.trino.v1.SQLServerConnector.connection:type_name -> yandex.cloud.trino.v1.SQLServerConnection
-	47, // 48: yandex.cloud.trino.v1.SQLServerConnector.additional_properties:type_name -> yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntry
-	48, // 49: yandex.cloud.trino.v1.MysqlConnection.on_premise:type_name -> yandex.cloud.trino.v1.MysqlConnection.OnPremise
-	49, // 50: yandex.cloud.trino.v1.MysqlConnection.connection_manager:type_name -> yandex.cloud.trino.v1.MysqlConnection.ConnectionManager
-	20, // 51: yandex.cloud.trino.v1.MysqlConnector.connection:type_name -> yandex.cloud.trino.v1.MysqlConnection
-	51, // 52: yandex.cloud.trino.v1.MysqlConnector.additional_properties:type_name -> yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntry
-	52, // 53: yandex.cloud.trino.v1.GreenplumConnection.on_premise:type_name -> yandex.cloud.trino.v1.GreenplumConnection.OnPremise
-	53, // 54: yandex.cloud.trino.v1.GreenplumConnection.connection_manager:type_name -> yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager
-	22, // 55: yandex.cloud.trino.v1.GreenplumConnector.connection:type_name -> yandex.cloud.trino.v1.GreenplumConnection
-	55, // 56: yandex.cloud.trino.v1.GreenplumConnector.additional_properties:type_name -> yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntry
-	36, // 57: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.ConnectionPropertiesEntry
-	40, // 58: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.ConnectionPropertiesEntry
-	50, // 59: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.ConnectionPropertiesEntry
-	54, // 60: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.ConnectionPropertiesEntry
-	61, // [61:61] is the sub-list for method output_type
-	61, // [61:61] is the sub-list for method input_type
-	61, // [61:61] is the sub-list for extension type_name
-	61, // [61:61] is the sub-list for extension extendee
-	0,  // [0:61] is the sub-list for field type_name
+	28, // 19: yandex.cloud.trino.v1.Metastore.rest:type_name -> yandex.cloud.trino.v1.Metastore.RestMetastore
+	31, // 20: yandex.cloud.trino.v1.FileSystem.s3:type_name -> yandex.cloud.trino.v1.FileSystem.S3FileSystem
+	32, // 21: yandex.cloud.trino.v1.FileSystem.external_s3:type_name -> yandex.cloud.trino.v1.FileSystem.ExternalS3FileSystem
+	4,  // 22: yandex.cloud.trino.v1.HiveConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
+	5,  // 23: yandex.cloud.trino.v1.HiveConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
+	33, // 24: yandex.cloud.trino.v1.HiveConnector.additional_properties:type_name -> yandex.cloud.trino.v1.HiveConnector.AdditionalPropertiesEntry
+	4,  // 25: yandex.cloud.trino.v1.IcebergConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
+	5,  // 26: yandex.cloud.trino.v1.IcebergConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
+	34, // 27: yandex.cloud.trino.v1.IcebergConnector.additional_properties:type_name -> yandex.cloud.trino.v1.IcebergConnector.AdditionalPropertiesEntry
+	4,  // 28: yandex.cloud.trino.v1.DeltaLakeConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
+	5,  // 29: yandex.cloud.trino.v1.DeltaLakeConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
+	35, // 30: yandex.cloud.trino.v1.DeltaLakeConnector.additional_properties:type_name -> yandex.cloud.trino.v1.DeltaLakeConnector.AdditionalPropertiesEntry
+	4,  // 31: yandex.cloud.trino.v1.HudiConnector.metastore:type_name -> yandex.cloud.trino.v1.Metastore
+	5,  // 32: yandex.cloud.trino.v1.HudiConnector.filesystem:type_name -> yandex.cloud.trino.v1.FileSystem
+	36, // 33: yandex.cloud.trino.v1.HudiConnector.additional_properties:type_name -> yandex.cloud.trino.v1.HudiConnector.AdditionalPropertiesEntry
+	37, // 34: yandex.cloud.trino.v1.PostgresqlConnection.on_premise:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.OnPremise
+	38, // 35: yandex.cloud.trino.v1.PostgresqlConnection.connection_manager:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager
+	10, // 36: yandex.cloud.trino.v1.PostgresqlConnector.connection:type_name -> yandex.cloud.trino.v1.PostgresqlConnection
+	40, // 37: yandex.cloud.trino.v1.PostgresqlConnector.additional_properties:type_name -> yandex.cloud.trino.v1.PostgresqlConnector.AdditionalPropertiesEntry
+	41, // 38: yandex.cloud.trino.v1.ClickhouseConnection.on_premise:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.OnPremise
+	42, // 39: yandex.cloud.trino.v1.ClickhouseConnection.connection_manager:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager
+	12, // 40: yandex.cloud.trino.v1.ClickhouseConnector.connection:type_name -> yandex.cloud.trino.v1.ClickhouseConnection
+	44, // 41: yandex.cloud.trino.v1.ClickhouseConnector.additional_properties:type_name -> yandex.cloud.trino.v1.ClickhouseConnector.AdditionalPropertiesEntry
+	45, // 42: yandex.cloud.trino.v1.TPCHConnector.additional_properties:type_name -> yandex.cloud.trino.v1.TPCHConnector.AdditionalPropertiesEntry
+	46, // 43: yandex.cloud.trino.v1.TPCDSConnector.additional_properties:type_name -> yandex.cloud.trino.v1.TPCDSConnector.AdditionalPropertiesEntry
+	47, // 44: yandex.cloud.trino.v1.OracleConnection.on_premise:type_name -> yandex.cloud.trino.v1.OracleConnection.OnPremise
+	16, // 45: yandex.cloud.trino.v1.OracleConnector.connection:type_name -> yandex.cloud.trino.v1.OracleConnection
+	48, // 46: yandex.cloud.trino.v1.OracleConnector.additional_properties:type_name -> yandex.cloud.trino.v1.OracleConnector.AdditionalPropertiesEntry
+	49, // 47: yandex.cloud.trino.v1.SQLServerConnection.on_premise:type_name -> yandex.cloud.trino.v1.SQLServerConnection.OnPremise
+	18, // 48: yandex.cloud.trino.v1.SQLServerConnector.connection:type_name -> yandex.cloud.trino.v1.SQLServerConnection
+	50, // 49: yandex.cloud.trino.v1.SQLServerConnector.additional_properties:type_name -> yandex.cloud.trino.v1.SQLServerConnector.AdditionalPropertiesEntry
+	51, // 50: yandex.cloud.trino.v1.MysqlConnection.on_premise:type_name -> yandex.cloud.trino.v1.MysqlConnection.OnPremise
+	52, // 51: yandex.cloud.trino.v1.MysqlConnection.connection_manager:type_name -> yandex.cloud.trino.v1.MysqlConnection.ConnectionManager
+	20, // 52: yandex.cloud.trino.v1.MysqlConnector.connection:type_name -> yandex.cloud.trino.v1.MysqlConnection
+	54, // 53: yandex.cloud.trino.v1.MysqlConnector.additional_properties:type_name -> yandex.cloud.trino.v1.MysqlConnector.AdditionalPropertiesEntry
+	55, // 54: yandex.cloud.trino.v1.GreenplumConnection.on_premise:type_name -> yandex.cloud.trino.v1.GreenplumConnection.OnPremise
+	56, // 55: yandex.cloud.trino.v1.GreenplumConnection.connection_manager:type_name -> yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager
+	22, // 56: yandex.cloud.trino.v1.GreenplumConnector.connection:type_name -> yandex.cloud.trino.v1.GreenplumConnection
+	58, // 57: yandex.cloud.trino.v1.GreenplumConnector.additional_properties:type_name -> yandex.cloud.trino.v1.GreenplumConnector.AdditionalPropertiesEntry
+	29, // 58: yandex.cloud.trino.v1.Metastore.RestMetastore.authorization:type_name -> yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization
+	30, // 59: yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization.none:type_name -> yandex.cloud.trino.v1.Metastore.RestMetastore.Authorization.NoneAuth
+	39, // 60: yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.PostgresqlConnection.ConnectionManager.ConnectionPropertiesEntry
+	43, // 61: yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.ClickhouseConnection.ConnectionManager.ConnectionPropertiesEntry
+	53, // 62: yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.MysqlConnection.ConnectionManager.ConnectionPropertiesEntry
+	57, // 63: yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.connection_properties:type_name -> yandex.cloud.trino.v1.GreenplumConnection.ConnectionManager.ConnectionPropertiesEntry
+	64, // [64:64] is the sub-list for method output_type
+	64, // [64:64] is the sub-list for method input_type
+	64, // [64:64] is the sub-list for extension type_name
+	64, // [64:64] is the sub-list for extension extendee
+	0,  // [0:64] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_trino_v1_catalog_proto_init() }
@@ -3005,6 +3214,7 @@ func file_yandex_cloud_trino_v1_catalog_proto_init() {
 	}
 	file_yandex_cloud_trino_v1_catalog_proto_msgTypes[4].OneofWrappers = []any{
 		(*Metastore_Hive)(nil),
+		(*Metastore_Rest)(nil),
 	}
 	file_yandex_cloud_trino_v1_catalog_proto_msgTypes[5].OneofWrappers = []any{
 		(*FileSystem_S3)(nil),
@@ -3034,6 +3244,10 @@ func file_yandex_cloud_trino_v1_catalog_proto_init() {
 	}
 	file_yandex_cloud_trino_v1_catalog_proto_msgTypes[27].OneofWrappers = []any{
 		(*Metastore_HiveMetastore_Uri)(nil),
+		(*Metastore_HiveMetastore_ManagedClusterId)(nil),
+	}
+	file_yandex_cloud_trino_v1_catalog_proto_msgTypes[29].OneofWrappers = []any{
+		(*Metastore_RestMetastore_Authorization_None)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3041,7 +3255,7 @@ func file_yandex_cloud_trino_v1_catalog_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_trino_v1_catalog_proto_rawDesc), len(file_yandex_cloud_trino_v1_catalog_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   56,
+			NumMessages:   59,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

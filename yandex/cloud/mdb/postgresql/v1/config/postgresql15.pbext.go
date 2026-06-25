@@ -654,6 +654,14 @@ func (m *PostgresqlConfig15) SetIdleSessionTimeout(v *wrapperspb.Int64Value) {
 	m.IdleSessionTimeout = v
 }
 
+func (m *PostgresqlConfig15) SetCheckpointWarning(v *wrapperspb.Int64Value) {
+	m.CheckpointWarning = v
+}
+
+func (m *PostgresqlConfig15) SetPgHintPlanHintsAnywhere(v *wrapperspb.BoolValue) {
+	m.PgHintPlanHintsAnywhere = v
+}
+
 func (m *PostgresqlConfigSet15) SetEffectiveConfig(v *PostgresqlConfig15) {
 	m.EffectiveConfig = v
 }

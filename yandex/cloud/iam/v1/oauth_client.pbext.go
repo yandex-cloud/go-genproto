@@ -22,6 +22,38 @@ func (m *OAuthClient) SetFolderId(v string) {
 	m.FolderId = v
 }
 
+func (m *OAuthClient) SetAuthenticationMethods(v []string) {
+	m.AuthenticationMethods = v
+}
+
 func (m *OAuthClient) SetStatus(v OAuthClient_Status) {
 	m.Status = v
+}
+
+func (m *OAuthClient) SetProfileId(v string) {
+	m.ProfileId = v
+}
+
+func (m *OAuthClient) SetPkceRequired(v bool) {
+	m.PkceRequired = v
+}
+
+func (m *Profile) SetId(v string) {
+	m.Id = v
+}
+
+func (m *Profile) SetAuthenticationMethodsAllowedValues(v []string) {
+	m.AuthenticationMethodsAllowedValues = v
+}
+
+func (m *Profile) SetAuthenticationMethodsDefaultValues(v []string) {
+	m.AuthenticationMethodsDefaultValues = v
+}
+
+func (m *Profile) SetPkceRequiredReadonly(v bool) {
+	m.PkceRequiredReadonly = v
+}
+
+func (m *Profile) SetPkceRequiredDefaultValue(v bool) {
+	m.PkceRequiredDefaultValue = v
 }

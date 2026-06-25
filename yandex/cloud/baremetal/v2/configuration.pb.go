@@ -153,7 +153,9 @@ type CPU struct {
 	// Number of physical cores per CPU (socket).
 	PhysicalCores int64 `protobuf:"varint,3,opt,name=physical_cores,json=physicalCores,proto3" json:"physical_cores,omitempty"`
 	// Frequency of the CPU in megahertz (MHz).
-	FrequencyMhz  int64 `protobuf:"varint,4,opt,name=frequency_mhz,json=frequencyMhz,proto3" json:"frequency_mhz,omitempty"`
+	FrequencyMhz int64 `protobuf:"varint,4,opt,name=frequency_mhz,json=frequencyMhz,proto3" json:"frequency_mhz,omitempty"`
+	// Number of threads (logical cores) per CPU (socket).
+	Threads       int64 `protobuf:"varint,5,opt,name=threads,proto3" json:"threads,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -212,6 +214,13 @@ func (x *CPU) GetPhysicalCores() int64 {
 func (x *CPU) GetFrequencyMhz() int64 {
 	if x != nil {
 		return x.FrequencyMhz
+	}
+	return 0
+}
+
+func (x *CPU) GetThreads() int64 {
+	if x != nil {
+		return x.Threads
 	}
 	return 0
 }
@@ -472,12 +481,13 @@ var File_yandex_cloud_baremetal_v2_configuration_proto protoreflect.FileDescript
 
 const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/baremetal/v2/configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\"\x91\x01\n" +
+	"-yandex/cloud/baremetal/v2/configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\"\xb0\x01\n" +
 	"\x03CPU\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x02R\x04name\x12\x1b\n" +
 	"\x06vendor\x18\x02 \x01(\tB\x03\xe0A\x02R\x06vendor\x12*\n" +
 	"\x0ephysical_cores\x18\x03 \x01(\x03B\x03\xe0A\x02R\rphysicalCores\x12(\n" +
-	"\rfrequency_mhz\x18\x04 \x01(\x03B\x03\xe0A\x02R\ffrequencyMhz\"\x9a\x01\n" +
+	"\rfrequency_mhz\x18\x04 \x01(\x03B\x03\xe0A\x02R\ffrequencyMhz\x12\x1d\n" +
+	"\athreads\x18\x05 \x01(\x03B\x03\xe0A\x02R\athreads\"\x9a\x01\n" +
 	"\x16DiskDriveConfiguration\x12A\n" +
 	"\x04type\x18\x01 \x01(\x0e2(.yandex.cloud.baremetal.v2.DiskDriveTypeB\x03\xe0A\x02R\x04type\x12\x19\n" +
 	"\x05count\x18\x02 \x01(\x03B\x03\xe0A\x02R\x05count\x12\"\n" +

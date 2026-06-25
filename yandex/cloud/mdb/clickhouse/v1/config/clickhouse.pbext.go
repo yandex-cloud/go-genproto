@@ -700,6 +700,22 @@ func (m *ClickhouseConfig_ExternalDictionary_Layout) SetAccessToKeyFromAttribute
 	m.AccessToKeyFromAttributes = v
 }
 
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetBlockSize(v int64) {
+	m.BlockSize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetFileSize(v int64) {
+	m.FileSize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetReadBufferSize(v int64) {
+	m.ReadBufferSize = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_Layout) SetWriteBufferSize(v int64) {
+	m.WriteBufferSize = v
+}
+
 func (m *ClickhouseConfig_ExternalDictionary_Range) SetMin(v int64) {
 	m.Min = v
 }

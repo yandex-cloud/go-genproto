@@ -228,6 +228,10 @@ func (m *ClusterConfig) SetConnectionManager(v *v1.ClusterConnectionManager) {
 	m.ConnectionManager = v
 }
 
+func (m *ClusterConfig) SetManagedRepack(v *ManagedRepack) {
+	m.ManagedRepack = v
+}
+
 func (m *ConnectionPoolerConfig) SetPoolingMode(v ConnectionPoolerConfig_PoolingMode) {
 	m.PoolingMode = v
 }
@@ -428,6 +432,10 @@ func (m *PerformanceDiagnostics) SetSessionsSamplingInterval(v int64) {
 
 func (m *PerformanceDiagnostics) SetStatementsSamplingInterval(v int64) {
 	m.StatementsSamplingInterval = v
+}
+
+func (m *ManagedRepack) SetEnabled(v *wrapperspb.BoolValue) {
+	m.Enabled = v
 }
 
 func (m *DiskSizeAutoscaling) SetPlannedUsageThreshold(v int64) {

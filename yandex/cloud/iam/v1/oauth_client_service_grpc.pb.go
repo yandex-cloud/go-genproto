@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OAuthClientService_Get_FullMethodName    = "/yandex.cloud.iam.v1.OAuthClientService/Get"
-	OAuthClientService_List_FullMethodName   = "/yandex.cloud.iam.v1.OAuthClientService/List"
-	OAuthClientService_Create_FullMethodName = "/yandex.cloud.iam.v1.OAuthClientService/Create"
-	OAuthClientService_Update_FullMethodName = "/yandex.cloud.iam.v1.OAuthClientService/Update"
-	OAuthClientService_Delete_FullMethodName = "/yandex.cloud.iam.v1.OAuthClientService/Delete"
+	OAuthClientService_Get_FullMethodName          = "/yandex.cloud.iam.v1.OAuthClientService/Get"
+	OAuthClientService_List_FullMethodName         = "/yandex.cloud.iam.v1.OAuthClientService/List"
+	OAuthClientService_ListProfiles_FullMethodName = "/yandex.cloud.iam.v1.OAuthClientService/ListProfiles"
+	OAuthClientService_Create_FullMethodName       = "/yandex.cloud.iam.v1.OAuthClientService/Create"
+	OAuthClientService_Update_FullMethodName       = "/yandex.cloud.iam.v1.OAuthClientService/Update"
+	OAuthClientService_Delete_FullMethodName       = "/yandex.cloud.iam.v1.OAuthClientService/Delete"
 )
 
 // OAuthClientServiceClient is the client API for OAuthClientService service.
@@ -38,6 +39,8 @@ type OAuthClientServiceClient interface {
 	Get(ctx context.Context, in *GetOAuthClientRequest, opts ...grpc.CallOption) (*OAuthClient, error)
 	// Retrieves the list of OAuthClient resources views in the specified folder
 	List(ctx context.Context, in *ListOAuthClientsRequest, opts ...grpc.CallOption) (*ListOAuthClientsResponse, error)
+	// Retrieves the list of profiles that define sets of allowed settings for oauth clients.
+	ListProfiles(ctx context.Context, in *ListProfilesRequest, opts ...grpc.CallOption) (*ListProfilesResponse, error)
 	// Creates an oauth client in the specified folder.
 	Create(ctx context.Context, in *CreateOAuthClientRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified oauth client.
@@ -68,6 +71,16 @@ func (c *oAuthClientServiceClient) List(ctx context.Context, in *ListOAuthClient
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOAuthClientsResponse)
 	err := c.cc.Invoke(ctx, OAuthClientService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oAuthClientServiceClient) ListProfiles(ctx context.Context, in *ListProfilesRequest, opts ...grpc.CallOption) (*ListProfilesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListProfilesResponse)
+	err := c.cc.Invoke(ctx, OAuthClientService_ListProfiles_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,6 +128,8 @@ type OAuthClientServiceServer interface {
 	Get(context.Context, *GetOAuthClientRequest) (*OAuthClient, error)
 	// Retrieves the list of OAuthClient resources views in the specified folder
 	List(context.Context, *ListOAuthClientsRequest) (*ListOAuthClientsResponse, error)
+	// Retrieves the list of profiles that define sets of allowed settings for oauth clients.
+	ListProfiles(context.Context, *ListProfilesRequest) (*ListProfilesResponse, error)
 	// Creates an oauth client in the specified folder.
 	Create(context.Context, *CreateOAuthClientRequest) (*operation.Operation, error)
 	// Updates the specified oauth client.
@@ -135,6 +150,9 @@ func (UnimplementedOAuthClientServiceServer) Get(context.Context, *GetOAuthClien
 }
 func (UnimplementedOAuthClientServiceServer) List(context.Context, *ListOAuthClientsRequest) (*ListOAuthClientsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedOAuthClientServiceServer) ListProfiles(context.Context, *ListProfilesRequest) (*ListProfilesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListProfiles not implemented")
 }
 func (UnimplementedOAuthClientServiceServer) Create(context.Context, *CreateOAuthClientRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
@@ -197,6 +215,24 @@ func _OAuthClientService_List_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OAuthClientServiceServer).List(ctx, req.(*ListOAuthClientsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OAuthClientService_ListProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListProfilesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OAuthClientServiceServer).ListProfiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OAuthClientService_ListProfiles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OAuthClientServiceServer).ListProfiles(ctx, req.(*ListProfilesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -269,6 +305,10 @@ var OAuthClientService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _OAuthClientService_List_Handler,
+		},
+		{
+			MethodName: "ListProfiles",
+			Handler:    _OAuthClientService_ListProfiles_Handler,
 		},
 		{
 			MethodName: "Create",

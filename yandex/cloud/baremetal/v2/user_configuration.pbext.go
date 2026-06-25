@@ -26,6 +26,10 @@ func (m *UserCPU) SetCount(v int64) {
 	m.Count = v
 }
 
+func (m *UserCPU) SetThreads(v int64) {
+	m.Threads = v
+}
+
 func (m *UserRAM) SetId(v string) {
 	m.Id = v
 }

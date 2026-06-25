@@ -674,6 +674,14 @@ func (m *PostgresqlConfig18_1C) SetIdleSessionTimeout(v *wrapperspb.Int64Value) 
 	m.IdleSessionTimeout = v
 }
 
+func (m *PostgresqlConfig18_1C) SetCheckpointWarning(v *wrapperspb.Int64Value) {
+	m.CheckpointWarning = v
+}
+
+func (m *PostgresqlConfig18_1C) SetVacuumTruncate(v *wrapperspb.BoolValue) {
+	m.VacuumTruncate = v
+}
+
 func (m *PostgresqlConfigSet18_1C) SetEffectiveConfig(v *PostgresqlConfig18_1C) {
 	m.EffectiveConfig = v
 }

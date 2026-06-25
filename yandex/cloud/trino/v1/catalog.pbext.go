@@ -144,6 +144,12 @@ func (m *Metastore) SetHive(v *Metastore_HiveMetastore) {
 	}
 }
 
+func (m *Metastore) SetRest(v *Metastore_RestMetastore) {
+	m.Type = &Metastore_Rest{
+		Rest: v,
+	}
+}
+
 type Metastore_HiveMetastore_Connection = isMetastore_HiveMetastore_Connection
 
 func (m *Metastore_HiveMetastore) SetConnection(v Metastore_HiveMetastore_Connection) {
@@ -153,6 +159,32 @@ func (m *Metastore_HiveMetastore) SetConnection(v Metastore_HiveMetastore_Connec
 func (m *Metastore_HiveMetastore) SetUri(v string) {
 	m.Connection = &Metastore_HiveMetastore_Uri{
 		Uri: v,
+	}
+}
+
+func (m *Metastore_HiveMetastore) SetManagedClusterId(v string) {
+	m.Connection = &Metastore_HiveMetastore_ManagedClusterId{
+		ManagedClusterId: v,
+	}
+}
+
+func (m *Metastore_RestMetastore) SetUri(v string) {
+	m.Uri = v
+}
+
+func (m *Metastore_RestMetastore) SetAuthorization(v *Metastore_RestMetastore_Authorization) {
+	m.Authorization = v
+}
+
+type Metastore_RestMetastore_Authorization_Type = isMetastore_RestMetastore_Authorization_Type
+
+func (m *Metastore_RestMetastore_Authorization) SetType(v Metastore_RestMetastore_Authorization_Type) {
+	m.Type = v
+}
+
+func (m *Metastore_RestMetastore_Authorization) SetNone(v *Metastore_RestMetastore_Authorization_NoneAuth) {
+	m.Type = &Metastore_RestMetastore_Authorization_None{
+		None: v,
 	}
 }
 

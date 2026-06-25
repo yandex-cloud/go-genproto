@@ -153,6 +153,89 @@ func (x *ListOAuthClientsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Request message for [OAuthClientService.ListProfiles].
+type ListProfilesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListProfilesRequest) Reset() {
+	*x = ListProfilesRequest{}
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListProfilesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListProfilesRequest) ProtoMessage() {}
+
+func (x *ListProfilesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListProfilesRequest.ProtoReflect.Descriptor instead.
+func (*ListProfilesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{2}
+}
+
+// Response message for [OAuthClientService.ListProfiles].
+type ListProfilesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of profiles that define sets of allowed settings for oauth clients.
+	Profiles      []*Profile `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListProfilesResponse) Reset() {
+	*x = ListProfilesResponse{}
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListProfilesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListProfilesResponse) ProtoMessage() {}
+
+func (x *ListProfilesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListProfilesResponse.ProtoReflect.Descriptor instead.
+func (*ListProfilesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListProfilesResponse) GetProfiles() []*Profile {
+	if x != nil {
+		return x.Profiles
+	}
+	return nil
+}
+
 type GetOAuthClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OAuthClient resource to return.
@@ -164,7 +247,7 @@ type GetOAuthClientRequest struct {
 
 func (x *GetOAuthClientRequest) Reset() {
 	*x = GetOAuthClientRequest{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +259,7 @@ func (x *GetOAuthClientRequest) String() string {
 func (*GetOAuthClientRequest) ProtoMessage() {}
 
 func (x *GetOAuthClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +272,7 @@ func (x *GetOAuthClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOAuthClientRequest.ProtoReflect.Descriptor instead.
 func (*GetOAuthClientRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetOAuthClientRequest) GetOauthClientId() string {
@@ -211,7 +294,7 @@ type OAuthClientListView struct {
 
 func (x *OAuthClientListView) Reset() {
 	*x = OAuthClientListView{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -223,7 +306,7 @@ func (x *OAuthClientListView) String() string {
 func (*OAuthClientListView) ProtoMessage() {}
 
 func (x *OAuthClientListView) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -236,7 +319,7 @@ func (x *OAuthClientListView) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OAuthClientListView.ProtoReflect.Descriptor instead.
 func (*OAuthClientListView) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OAuthClientListView) GetId() string {
@@ -263,7 +346,7 @@ type CreateOAuthClientMetadata struct {
 
 func (x *CreateOAuthClientMetadata) Reset() {
 	*x = CreateOAuthClientMetadata{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +358,7 @@ func (x *CreateOAuthClientMetadata) String() string {
 func (*CreateOAuthClientMetadata) ProtoMessage() {}
 
 func (x *CreateOAuthClientMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -288,7 +371,7 @@ func (x *CreateOAuthClientMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOAuthClientMetadata.ProtoReflect.Descriptor instead.
 func (*CreateOAuthClientMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateOAuthClientMetadata) GetOauthClientId() string {
@@ -308,7 +391,7 @@ type UpdateOAuthClientMetadata struct {
 
 func (x *UpdateOAuthClientMetadata) Reset() {
 	*x = UpdateOAuthClientMetadata{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -320,7 +403,7 @@ func (x *UpdateOAuthClientMetadata) String() string {
 func (*UpdateOAuthClientMetadata) ProtoMessage() {}
 
 func (x *UpdateOAuthClientMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -333,7 +416,7 @@ func (x *UpdateOAuthClientMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOAuthClientMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateOAuthClientMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateOAuthClientMetadata) GetOauthClientId() string {
@@ -353,7 +436,7 @@ type DeleteOAuthClientMetadata struct {
 
 func (x *DeleteOAuthClientMetadata) Reset() {
 	*x = DeleteOAuthClientMetadata{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -365,7 +448,7 @@ func (x *DeleteOAuthClientMetadata) String() string {
 func (*DeleteOAuthClientMetadata) ProtoMessage() {}
 
 func (x *DeleteOAuthClientMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -378,7 +461,7 @@ func (x *DeleteOAuthClientMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOAuthClientMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthClientMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteOAuthClientMetadata) GetOauthClientId() string {
@@ -399,14 +482,20 @@ type CreateOAuthClientRequest struct {
 	Scopes []string `protobuf:"bytes,3,rep,name=scopes,proto3" json:"scopes,omitempty"`
 	// ID of the folder to create an oauth client in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
-	FolderId      string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// List of authentication methods allowed for the oauth client.
+	AuthenticationMethods []string `protobuf:"bytes,7,rep,name=authentication_methods,json=authenticationMethods,proto3" json:"authentication_methods,omitempty"`
+	// ID of the profile that defines the set of allowed settings for the oauth client.
+	ProfileId string `protobuf:"bytes,5,opt,name=profile_id,json=profileId,proto3" json:"profile_id,omitempty"`
+	// Whether PKCE (Proof Key for Code Exchange) is required for the oauth client during the authorization code flow.
+	PkceRequired  bool `protobuf:"varint,6,opt,name=pkce_required,json=pkceRequired,proto3" json:"pkce_required,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateOAuthClientRequest) Reset() {
 	*x = CreateOAuthClientRequest{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -418,7 +507,7 @@ func (x *CreateOAuthClientRequest) String() string {
 func (*CreateOAuthClientRequest) ProtoMessage() {}
 
 func (x *CreateOAuthClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -431,7 +520,7 @@ func (x *CreateOAuthClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOAuthClientRequest.ProtoReflect.Descriptor instead.
 func (*CreateOAuthClientRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateOAuthClientRequest) GetName() string {
@@ -462,6 +551,27 @@ func (x *CreateOAuthClientRequest) GetFolderId() string {
 	return ""
 }
 
+func (x *CreateOAuthClientRequest) GetAuthenticationMethods() []string {
+	if x != nil {
+		return x.AuthenticationMethods
+	}
+	return nil
+}
+
+func (x *CreateOAuthClientRequest) GetProfileId() string {
+	if x != nil {
+		return x.ProfileId
+	}
+	return ""
+}
+
+func (x *CreateOAuthClientRequest) GetPkceRequired() bool {
+	if x != nil {
+		return x.PkceRequired
+	}
+	return false
+}
+
 type UpdateOAuthClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the OAuthClient resource to update.
@@ -475,14 +585,18 @@ type UpdateOAuthClientRequest struct {
 	// List of redirect uries allowed for the oauth client.
 	RedirectUris []string `protobuf:"bytes,4,rep,name=redirect_uris,json=redirectUris,proto3" json:"redirect_uris,omitempty"`
 	// List of oauth scopes requested by the oauth client.
-	Scopes        []string `protobuf:"bytes,5,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	Scopes []string `protobuf:"bytes,5,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	// List of authentication methods allowed for the oauth client.
+	AuthenticationMethods []string `protobuf:"bytes,7,rep,name=authentication_methods,json=authenticationMethods,proto3" json:"authentication_methods,omitempty"`
+	// Whether PKCE (Proof Key for Code Exchange) is required for the oauth client during the authorization code flow.
+	PkceRequired  bool `protobuf:"varint,6,opt,name=pkce_required,json=pkceRequired,proto3" json:"pkce_required,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateOAuthClientRequest) Reset() {
 	*x = UpdateOAuthClientRequest{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -494,7 +608,7 @@ func (x *UpdateOAuthClientRequest) String() string {
 func (*UpdateOAuthClientRequest) ProtoMessage() {}
 
 func (x *UpdateOAuthClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -507,7 +621,7 @@ func (x *UpdateOAuthClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOAuthClientRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOAuthClientRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateOAuthClientRequest) GetOauthClientId() string {
@@ -545,6 +659,20 @@ func (x *UpdateOAuthClientRequest) GetScopes() []string {
 	return nil
 }
 
+func (x *UpdateOAuthClientRequest) GetAuthenticationMethods() []string {
+	if x != nil {
+		return x.AuthenticationMethods
+	}
+	return nil
+}
+
+func (x *UpdateOAuthClientRequest) GetPkceRequired() bool {
+	if x != nil {
+		return x.PkceRequired
+	}
+	return false
+}
+
 type DeleteOAuthClientRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the oauth client to delete.
@@ -556,7 +684,7 @@ type DeleteOAuthClientRequest struct {
 
 func (x *DeleteOAuthClientRequest) Reset() {
 	*x = DeleteOAuthClientRequest{}
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +696,7 @@ func (x *DeleteOAuthClientRequest) String() string {
 func (*DeleteOAuthClientRequest) ProtoMessage() {}
 
 func (x *DeleteOAuthClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +709,7 @@ func (x *DeleteOAuthClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOAuthClientRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOAuthClientRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteOAuthClientRequest) GetOauthClientId() string {
@@ -605,7 +733,10 @@ const file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\"\x91\x01\n" +
 	"\x18ListOAuthClientsResponse\x12M\n" +
 	"\roauth_clients\x18\x01 \x03(\v2(.yandex.cloud.iam.v1.OAuthClientListViewR\foauthClients\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"M\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x15\n" +
+	"\x13ListProfilesRequest\"P\n" +
+	"\x14ListProfilesResponse\x128\n" +
+	"\bprofiles\x18\x01 \x03(\v2\x1c.yandex.cloud.iam.v1.ProfileR\bprofiles\"M\n" +
 	"\x15GetOAuthClientRequest\x124\n" +
 	"\x0foauth_client_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\roauthClientId\"9\n" +
 	"\x13OAuthClientListView\x12\x0e\n" +
@@ -616,24 +747,31 @@ const file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDesc = "" +
 	"\x19UpdateOAuthClientMetadata\x12&\n" +
 	"\x0foauth_client_id\x18\x01 \x01(\tR\roauthClientId\"C\n" +
 	"\x19DeleteOAuthClientMetadata\x12&\n" +
-	"\x0foauth_client_id\x18\x01 \x01(\tR\roauthClientId\"\xfb\x01\n" +
+	"\x0foauth_client_id\x18\x01 \x01(\tR\roauthClientId\"\x95\x03\n" +
 	"\x18CreateOAuthClientRequest\x12;\n" +
 	"\x04name\x18\x01 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x129\n" +
 	"\rredirect_uris\x18\x02 \x03(\tB\x14\x82\xc81\x06<=1000\x8a\xc81\x06<=1000R\fredirectUris\x12;\n" +
 	"\x06scopes\x18\x03 \x03(\tB#\xf2\xc71\f[!#-\\[\\]-~]+\x82\xc81\x06<=1000\x8a\xc81\x05<=255R\x06scopes\x12*\n" +
-	"\tfolder_id\x18\x04 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\bfolderId\"\xc2\x02\n" +
+	"\tfolder_id\x18\x04 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=255R\bfolderId\x12J\n" +
+	"\x16authentication_methods\x18\a \x03(\tB\x13\x82\xc81\x06<=1000\x8a\xc81\x05<=255R\x15authenticationMethods\x12'\n" +
+	"\n" +
+	"profile_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=32R\tprofileId\x12#\n" +
+	"\rpkce_required\x18\x06 \x01(\bR\fpkceRequired\"\xb3\x03\n" +
 	"\x18UpdateOAuthClientRequest\x124\n" +
 	"\x0foauth_client_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\roauthClientId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12;\n" +
 	"\x04name\x18\x03 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x129\n" +
 	"\rredirect_uris\x18\x04 \x03(\tB\x14\x82\xc81\x06<=1000\x8a\xc81\x06<=1000R\fredirectUris\x12;\n" +
-	"\x06scopes\x18\x05 \x03(\tB#\xf2\xc71\f[!#-\\[\\]-~]+\x82\xc81\x06<=1000\x8a\xc81\x05<=255R\x06scopes\"P\n" +
+	"\x06scopes\x18\x05 \x03(\tB#\xf2\xc71\f[!#-\\[\\]-~]+\x82\xc81\x06<=1000\x8a\xc81\x05<=255R\x06scopes\x12J\n" +
+	"\x16authentication_methods\x18\a \x03(\tB\x13\x82\xc81\x06<=1000\x8a\xc81\x05<=255R\x15authenticationMethods\x12#\n" +
+	"\rpkce_required\x18\x06 \x01(\bR\fpkceRequired\"P\n" +
 	"\x18DeleteOAuthClientRequest\x124\n" +
-	"\x0foauth_client_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\roauthClientId2\xc7\x06\n" +
+	"\x0foauth_client_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\roauthClientId2\xac\a\n" +
 	"\x12OAuthClientService\x12\x83\x01\n" +
 	"\x03Get\x12*.yandex.cloud.iam.v1.GetOAuthClientRequest\x1a .yandex.cloud.iam.v1.OAuthClient\".\x82\xd3\xe4\x93\x02(\x12&/iam/v1/oauthClients/{oauth_client_id}\x12\x81\x01\n" +
-	"\x04List\x12,.yandex.cloud.iam.v1.ListOAuthClientsRequest\x1a-.yandex.cloud.iam.v1.ListOAuthClientsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/iam/v1/oauthClients\x12\xa7\x01\n" +
+	"\x04List\x12,.yandex.cloud.iam.v1.ListOAuthClientsRequest\x1a-.yandex.cloud.iam.v1.ListOAuthClientsResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/iam/v1/oauthClients\x12c\n" +
+	"\fListProfiles\x12(.yandex.cloud.iam.v1.ListProfilesRequest\x1a).yandex.cloud.iam.v1.ListProfilesResponse\x12\xa7\x01\n" +
 	"\x06Create\x12-.yandex.cloud.iam.v1.CreateOAuthClientRequest\x1a!.yandex.cloud.operation.Operation\"K\xb2\xd2*(\n" +
 	"\x19CreateOAuthClientMetadata\x12\vOAuthClient\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/iam/v1/oauthClients\x12\xb9\x01\n" +
 	"\x06Update\x12-.yandex.cloud.iam.v1.UpdateOAuthClientRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2*(\n" +
@@ -654,40 +792,46 @@ func file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDescData
 }
 
-var file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_yandex_cloud_iam_v1_oauth_client_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_yandex_cloud_iam_v1_oauth_client_service_proto_goTypes = []any{
 	(*ListOAuthClientsRequest)(nil),   // 0: yandex.cloud.iam.v1.ListOAuthClientsRequest
 	(*ListOAuthClientsResponse)(nil),  // 1: yandex.cloud.iam.v1.ListOAuthClientsResponse
-	(*GetOAuthClientRequest)(nil),     // 2: yandex.cloud.iam.v1.GetOAuthClientRequest
-	(*OAuthClientListView)(nil),       // 3: yandex.cloud.iam.v1.OAuthClientListView
-	(*CreateOAuthClientMetadata)(nil), // 4: yandex.cloud.iam.v1.CreateOAuthClientMetadata
-	(*UpdateOAuthClientMetadata)(nil), // 5: yandex.cloud.iam.v1.UpdateOAuthClientMetadata
-	(*DeleteOAuthClientMetadata)(nil), // 6: yandex.cloud.iam.v1.DeleteOAuthClientMetadata
-	(*CreateOAuthClientRequest)(nil),  // 7: yandex.cloud.iam.v1.CreateOAuthClientRequest
-	(*UpdateOAuthClientRequest)(nil),  // 8: yandex.cloud.iam.v1.UpdateOAuthClientRequest
-	(*DeleteOAuthClientRequest)(nil),  // 9: yandex.cloud.iam.v1.DeleteOAuthClientRequest
-	(*fieldmaskpb.FieldMask)(nil),     // 10: google.protobuf.FieldMask
-	(*OAuthClient)(nil),               // 11: yandex.cloud.iam.v1.OAuthClient
-	(*operation.Operation)(nil),       // 12: yandex.cloud.operation.Operation
+	(*ListProfilesRequest)(nil),       // 2: yandex.cloud.iam.v1.ListProfilesRequest
+	(*ListProfilesResponse)(nil),      // 3: yandex.cloud.iam.v1.ListProfilesResponse
+	(*GetOAuthClientRequest)(nil),     // 4: yandex.cloud.iam.v1.GetOAuthClientRequest
+	(*OAuthClientListView)(nil),       // 5: yandex.cloud.iam.v1.OAuthClientListView
+	(*CreateOAuthClientMetadata)(nil), // 6: yandex.cloud.iam.v1.CreateOAuthClientMetadata
+	(*UpdateOAuthClientMetadata)(nil), // 7: yandex.cloud.iam.v1.UpdateOAuthClientMetadata
+	(*DeleteOAuthClientMetadata)(nil), // 8: yandex.cloud.iam.v1.DeleteOAuthClientMetadata
+	(*CreateOAuthClientRequest)(nil),  // 9: yandex.cloud.iam.v1.CreateOAuthClientRequest
+	(*UpdateOAuthClientRequest)(nil),  // 10: yandex.cloud.iam.v1.UpdateOAuthClientRequest
+	(*DeleteOAuthClientRequest)(nil),  // 11: yandex.cloud.iam.v1.DeleteOAuthClientRequest
+	(*Profile)(nil),                   // 12: yandex.cloud.iam.v1.Profile
+	(*fieldmaskpb.FieldMask)(nil),     // 13: google.protobuf.FieldMask
+	(*OAuthClient)(nil),               // 14: yandex.cloud.iam.v1.OAuthClient
+	(*operation.Operation)(nil),       // 15: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_iam_v1_oauth_client_service_proto_depIdxs = []int32{
-	3,  // 0: yandex.cloud.iam.v1.ListOAuthClientsResponse.oauth_clients:type_name -> yandex.cloud.iam.v1.OAuthClientListView
-	10, // 1: yandex.cloud.iam.v1.UpdateOAuthClientRequest.update_mask:type_name -> google.protobuf.FieldMask
-	2,  // 2: yandex.cloud.iam.v1.OAuthClientService.Get:input_type -> yandex.cloud.iam.v1.GetOAuthClientRequest
-	0,  // 3: yandex.cloud.iam.v1.OAuthClientService.List:input_type -> yandex.cloud.iam.v1.ListOAuthClientsRequest
-	7,  // 4: yandex.cloud.iam.v1.OAuthClientService.Create:input_type -> yandex.cloud.iam.v1.CreateOAuthClientRequest
-	8,  // 5: yandex.cloud.iam.v1.OAuthClientService.Update:input_type -> yandex.cloud.iam.v1.UpdateOAuthClientRequest
-	9,  // 6: yandex.cloud.iam.v1.OAuthClientService.Delete:input_type -> yandex.cloud.iam.v1.DeleteOAuthClientRequest
-	11, // 7: yandex.cloud.iam.v1.OAuthClientService.Get:output_type -> yandex.cloud.iam.v1.OAuthClient
-	1,  // 8: yandex.cloud.iam.v1.OAuthClientService.List:output_type -> yandex.cloud.iam.v1.ListOAuthClientsResponse
-	12, // 9: yandex.cloud.iam.v1.OAuthClientService.Create:output_type -> yandex.cloud.operation.Operation
-	12, // 10: yandex.cloud.iam.v1.OAuthClientService.Update:output_type -> yandex.cloud.operation.Operation
-	12, // 11: yandex.cloud.iam.v1.OAuthClientService.Delete:output_type -> yandex.cloud.operation.Operation
-	7,  // [7:12] is the sub-list for method output_type
-	2,  // [2:7] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	5,  // 0: yandex.cloud.iam.v1.ListOAuthClientsResponse.oauth_clients:type_name -> yandex.cloud.iam.v1.OAuthClientListView
+	12, // 1: yandex.cloud.iam.v1.ListProfilesResponse.profiles:type_name -> yandex.cloud.iam.v1.Profile
+	13, // 2: yandex.cloud.iam.v1.UpdateOAuthClientRequest.update_mask:type_name -> google.protobuf.FieldMask
+	4,  // 3: yandex.cloud.iam.v1.OAuthClientService.Get:input_type -> yandex.cloud.iam.v1.GetOAuthClientRequest
+	0,  // 4: yandex.cloud.iam.v1.OAuthClientService.List:input_type -> yandex.cloud.iam.v1.ListOAuthClientsRequest
+	2,  // 5: yandex.cloud.iam.v1.OAuthClientService.ListProfiles:input_type -> yandex.cloud.iam.v1.ListProfilesRequest
+	9,  // 6: yandex.cloud.iam.v1.OAuthClientService.Create:input_type -> yandex.cloud.iam.v1.CreateOAuthClientRequest
+	10, // 7: yandex.cloud.iam.v1.OAuthClientService.Update:input_type -> yandex.cloud.iam.v1.UpdateOAuthClientRequest
+	11, // 8: yandex.cloud.iam.v1.OAuthClientService.Delete:input_type -> yandex.cloud.iam.v1.DeleteOAuthClientRequest
+	14, // 9: yandex.cloud.iam.v1.OAuthClientService.Get:output_type -> yandex.cloud.iam.v1.OAuthClient
+	1,  // 10: yandex.cloud.iam.v1.OAuthClientService.List:output_type -> yandex.cloud.iam.v1.ListOAuthClientsResponse
+	3,  // 11: yandex.cloud.iam.v1.OAuthClientService.ListProfiles:output_type -> yandex.cloud.iam.v1.ListProfilesResponse
+	15, // 12: yandex.cloud.iam.v1.OAuthClientService.Create:output_type -> yandex.cloud.operation.Operation
+	15, // 13: yandex.cloud.iam.v1.OAuthClientService.Update:output_type -> yandex.cloud.operation.Operation
+	15, // 14: yandex.cloud.iam.v1.OAuthClientService.Delete:output_type -> yandex.cloud.operation.Operation
+	9,  // [9:15] is the sub-list for method output_type
+	3,  // [3:9] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_iam_v1_oauth_client_service_proto_init() }
@@ -702,7 +846,7 @@ func file_yandex_cloud_iam_v1_oauth_client_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDesc), len(file_yandex_cloud_iam_v1_oauth_client_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

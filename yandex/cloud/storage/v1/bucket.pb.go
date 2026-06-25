@@ -822,8 +822,10 @@ type Bucket struct {
 	ResourceId string `protobuf:"bytes,18,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
 	// An option to disable static key auth for a bucket.
 	DisabledStatickeyAuth bool `protobuf:"varint,19,opt,name=disabled_statickey_auth,json=disabledStatickeyAuth,proto3" json:"disabled_statickey_auth,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Bucket logging setup.
+	Logging       *BucketLoggingSetup `protobuf:"bytes,20,opt,name=logging,proto3" json:"logging,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Bucket) Reset() {
@@ -987,6 +989,13 @@ func (x *Bucket) GetDisabledStatickeyAuth() bool {
 		return x.DisabledStatickeyAuth
 	}
 	return false
+}
+
+func (x *Bucket) GetLogging() *BucketLoggingSetup {
+	if x != nil {
+		return x.Logging
+	}
+	return nil
 }
 
 type Tag struct {
@@ -2251,6 +2260,60 @@ func (x *InventoryConfiguration) GetOptionalFields() []InventoryConfiguration_Op
 	return nil
 }
 
+type BucketLoggingSetup struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target bucket for logs
+	TargetBucket string `protobuf:"bytes,1,opt,name=target_bucket,json=targetBucket,proto3" json:"target_bucket,omitempty"`
+	// Target prefix for log object keys
+	TargetPrefix  string `protobuf:"bytes,2,opt,name=target_prefix,json=targetPrefix,proto3" json:"target_prefix,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BucketLoggingSetup) Reset() {
+	*x = BucketLoggingSetup{}
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BucketLoggingSetup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BucketLoggingSetup) ProtoMessage() {}
+
+func (x *BucketLoggingSetup) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BucketLoggingSetup.ProtoReflect.Descriptor instead.
+func (*BucketLoggingSetup) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_storage_v1_bucket_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *BucketLoggingSetup) GetTargetBucket() string {
+	if x != nil {
+		return x.TargetBucket
+	}
+	return ""
+}
+
+func (x *BucketLoggingSetup) GetTargetPrefix() string {
+	if x != nil {
+		return x.TargetPrefix
+	}
+	return ""
+}
+
 // A grant resource, used to specify the permission granted and the grantee.
 type ACL_Grant struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2266,7 +2329,7 @@ type ACL_Grant struct {
 
 func (x *ACL_Grant) Reset() {
 	*x = ACL_Grant{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[17]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2278,7 +2341,7 @@ func (x *ACL_Grant) String() string {
 func (*ACL_Grant) ProtoMessage() {}
 
 func (x *ACL_Grant) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[17]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2328,7 +2391,7 @@ type WebsiteSettings_Scheme struct {
 
 func (x *WebsiteSettings_Scheme) Reset() {
 	*x = WebsiteSettings_Scheme{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[18]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2340,7 +2403,7 @@ func (x *WebsiteSettings_Scheme) String() string {
 func (*WebsiteSettings_Scheme) ProtoMessage() {}
 
 func (x *WebsiteSettings_Scheme) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[18]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2382,7 +2445,7 @@ type WebsiteSettings_Condition struct {
 
 func (x *WebsiteSettings_Condition) Reset() {
 	*x = WebsiteSettings_Condition{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[19]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2394,7 +2457,7 @@ func (x *WebsiteSettings_Condition) String() string {
 func (*WebsiteSettings_Condition) ProtoMessage() {}
 
 func (x *WebsiteSettings_Condition) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[19]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2445,7 +2508,7 @@ type WebsiteSettings_Redirect struct {
 
 func (x *WebsiteSettings_Redirect) Reset() {
 	*x = WebsiteSettings_Redirect{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[20]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2457,7 +2520,7 @@ func (x *WebsiteSettings_Redirect) String() string {
 func (*WebsiteSettings_Redirect) ProtoMessage() {}
 
 func (x *WebsiteSettings_Redirect) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[20]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2521,7 +2584,7 @@ type WebsiteSettings_RoutingRule struct {
 
 func (x *WebsiteSettings_RoutingRule) Reset() {
 	*x = WebsiteSettings_RoutingRule{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[21]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2533,7 +2596,7 @@ func (x *WebsiteSettings_RoutingRule) String() string {
 func (*WebsiteSettings_RoutingRule) ProtoMessage() {}
 
 func (x *WebsiteSettings_RoutingRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[21]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2574,7 +2637,7 @@ type LifecycleRule_AfterDays struct {
 
 func (x *LifecycleRule_AfterDays) Reset() {
 	*x = LifecycleRule_AfterDays{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[22]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2586,7 +2649,7 @@ func (x *LifecycleRule_AfterDays) String() string {
 func (*LifecycleRule_AfterDays) ProtoMessage() {}
 
 func (x *LifecycleRule_AfterDays) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[22]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2620,7 +2683,7 @@ type LifecycleRule_NoncurrentDeleteMarkers struct {
 
 func (x *LifecycleRule_NoncurrentDeleteMarkers) Reset() {
 	*x = LifecycleRule_NoncurrentDeleteMarkers{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[23]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2632,7 +2695,7 @@ func (x *LifecycleRule_NoncurrentDeleteMarkers) String() string {
 func (*LifecycleRule_NoncurrentDeleteMarkers) ProtoMessage() {}
 
 func (x *LifecycleRule_NoncurrentDeleteMarkers) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[23]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2669,7 +2732,7 @@ type LifecycleRule_NoncurrentExpiration struct {
 
 func (x *LifecycleRule_NoncurrentExpiration) Reset() {
 	*x = LifecycleRule_NoncurrentExpiration{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[24]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2681,7 +2744,7 @@ func (x *LifecycleRule_NoncurrentExpiration) String() string {
 func (*LifecycleRule_NoncurrentExpiration) ProtoMessage() {}
 
 func (x *LifecycleRule_NoncurrentExpiration) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[24]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +2795,7 @@ type LifecycleRule_NoncurrentTransition struct {
 
 func (x *LifecycleRule_NoncurrentTransition) Reset() {
 	*x = LifecycleRule_NoncurrentTransition{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[25]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2744,7 +2807,7 @@ func (x *LifecycleRule_NoncurrentTransition) String() string {
 func (*LifecycleRule_NoncurrentTransition) ProtoMessage() {}
 
 func (x *LifecycleRule_NoncurrentTransition) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[25]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2808,7 +2871,7 @@ type LifecycleRule_Transition struct {
 
 func (x *LifecycleRule_Transition) Reset() {
 	*x = LifecycleRule_Transition{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2820,7 +2883,7 @@ func (x *LifecycleRule_Transition) String() string {
 func (*LifecycleRule_Transition) ProtoMessage() {}
 
 func (x *LifecycleRule_Transition) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[26]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2877,7 +2940,7 @@ type LifecycleRule_Expiration struct {
 
 func (x *LifecycleRule_Expiration) Reset() {
 	*x = LifecycleRule_Expiration{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2889,7 +2952,7 @@ func (x *LifecycleRule_Expiration) String() string {
 func (*LifecycleRule_Expiration) ProtoMessage() {}
 
 func (x *LifecycleRule_Expiration) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[27]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2944,7 +3007,7 @@ type LifecycleRule_RuleFilter struct {
 
 func (x *LifecycleRule_RuleFilter) Reset() {
 	*x = LifecycleRule_RuleFilter{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2956,7 +3019,7 @@ func (x *LifecycleRule_RuleFilter) String() string {
 func (*LifecycleRule_RuleFilter) ProtoMessage() {}
 
 func (x *LifecycleRule_RuleFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[28]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3023,7 +3086,7 @@ type LifecycleRule_RuleFilter_And struct {
 
 func (x *LifecycleRule_RuleFilter_And) Reset() {
 	*x = LifecycleRule_RuleFilter_And{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[29]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3035,7 +3098,7 @@ func (x *LifecycleRule_RuleFilter_And) String() string {
 func (*LifecycleRule_RuleFilter_And) ProtoMessage() {}
 
 func (x *LifecycleRule_RuleFilter_And) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[29]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3095,7 +3158,7 @@ type ObjectLock_DefaultRetention struct {
 
 func (x *ObjectLock_DefaultRetention) Reset() {
 	*x = ObjectLock_DefaultRetention{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[30]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3107,7 +3170,7 @@ func (x *ObjectLock_DefaultRetention) String() string {
 func (*ObjectLock_DefaultRetention) ProtoMessage() {}
 
 func (x *ObjectLock_DefaultRetention) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[30]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3185,7 +3248,7 @@ type Encryption_EncryptionRule struct {
 
 func (x *Encryption_EncryptionRule) Reset() {
 	*x = Encryption_EncryptionRule{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[31]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3197,7 +3260,7 @@ func (x *Encryption_EncryptionRule) String() string {
 func (*Encryption_EncryptionRule) ProtoMessage() {}
 
 func (x *Encryption_EncryptionRule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[31]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3241,7 +3304,7 @@ type InventoryConfiguration_InventoryBucketDestination struct {
 
 func (x *InventoryConfiguration_InventoryBucketDestination) Reset() {
 	*x = InventoryConfiguration_InventoryBucketDestination{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[32]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3253,7 +3316,7 @@ func (x *InventoryConfiguration_InventoryBucketDestination) String() string {
 func (*InventoryConfiguration_InventoryBucketDestination) ProtoMessage() {}
 
 func (x *InventoryConfiguration_InventoryBucketDestination) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[32]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3300,7 +3363,7 @@ type InventoryConfiguration_InventoryDestination struct {
 
 func (x *InventoryConfiguration_InventoryDestination) Reset() {
 	*x = InventoryConfiguration_InventoryDestination{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[33]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3312,7 +3375,7 @@ func (x *InventoryConfiguration_InventoryDestination) String() string {
 func (*InventoryConfiguration_InventoryDestination) ProtoMessage() {}
 
 func (x *InventoryConfiguration_InventoryDestination) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[33]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3345,7 +3408,7 @@ type InventoryConfiguration_InventorySchedule struct {
 
 func (x *InventoryConfiguration_InventorySchedule) Reset() {
 	*x = InventoryConfiguration_InventorySchedule{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[34]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3357,7 +3420,7 @@ func (x *InventoryConfiguration_InventorySchedule) String() string {
 func (*InventoryConfiguration_InventorySchedule) ProtoMessage() {}
 
 func (x *InventoryConfiguration_InventorySchedule) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[34]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3390,7 +3453,7 @@ type InventoryConfiguration_InventoryFilter struct {
 
 func (x *InventoryConfiguration_InventoryFilter) Reset() {
 	*x = InventoryConfiguration_InventoryFilter{}
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[35]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3402,7 +3465,7 @@ func (x *InventoryConfiguration_InventoryFilter) String() string {
 func (*InventoryConfiguration_InventoryFilter) ProtoMessage() {}
 
 func (x *InventoryConfiguration_InventoryFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[35]
+	mi := &file_yandex_cloud_storage_v1_bucket_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3429,7 +3492,7 @@ var File_yandex_cloud_storage_v1_bucket_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc5\b\n" +
+	"$yandex/cloud/storage/v1/bucket.proto\x12\x17yandex.cloud.storage.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8c\t\n" +
 	"\x06Bucket\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -3457,7 +3520,8 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x19allowed_private_endpoints\x18\x11 \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x12\x1f\n" +
 	"\vresource_id\x18\x12 \x01(\tR\n" +
 	"resourceId\x126\n" +
-	"\x17disabled_statickey_auth\x18\x13 \x01(\bR\x15disabledStatickeyAuth\"-\n" +
+	"\x17disabled_statickey_auth\x18\x13 \x01(\bR\x15disabledStatickeyAuth\x12E\n" +
+	"\alogging\x18\x14 \x01(\v2+.yandex.cloud.storage.v1.BucketLoggingSetupR\alogging\"-\n" +
 	"\x03Tag\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value\"\xc7\x04\n" +
@@ -3697,7 +3761,10 @@ const file_yandex_cloud_storage_v1_bucket_proto_rawDesc = "" +
 	"\x12\x1e\n" +
 	"\x1aOBJECT_ACCESS_CONTROL_LIST\x10\v\x12\x10\n" +
 	"\fOBJECT_OWNER\x10\f\x12#\n" +
-	"\x1fINTELLIGENT_TIERING_ACCESS_TIER\x10\r*s\n" +
+	"\x1fINTELLIGENT_TIERING_ACCESS_TIER\x10\r\"^\n" +
+	"\x12BucketLoggingSetup\x12#\n" +
+	"\rtarget_bucket\x18\x01 \x01(\tR\ftargetBucket\x12#\n" +
+	"\rtarget_prefix\x18\x02 \x01(\tR\ftargetPrefix*s\n" +
 	"\n" +
 	"Versioning\x12\x1a\n" +
 	"\x16VERSIONING_UNSPECIFIED\x10\x00\x12\x17\n" +
@@ -3719,7 +3786,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_storage_v1_bucket_proto_enumTypes = make([]protoimpl.EnumInfo, 12)
-var file_yandex_cloud_storage_v1_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
+var file_yandex_cloud_storage_v1_bucket_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_yandex_cloud_storage_v1_bucket_proto_goTypes = []any{
 	(Versioning)(0),                                               // 0: yandex.cloud.storage.v1.Versioning
 	(ACL_Grant_Permission)(0),                                     // 1: yandex.cloud.storage.v1.ACL.Grant.Permission
@@ -3750,37 +3817,38 @@ var file_yandex_cloud_storage_v1_bucket_proto_goTypes = []any{
 	(*Encryption)(nil),                                            // 26: yandex.cloud.storage.v1.Encryption
 	(*BucketAllowedPrivateEndpoints)(nil),                         // 27: yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
 	(*InventoryConfiguration)(nil),                                // 28: yandex.cloud.storage.v1.InventoryConfiguration
-	(*ACL_Grant)(nil),                                             // 29: yandex.cloud.storage.v1.ACL.Grant
-	(*WebsiteSettings_Scheme)(nil),                                // 30: yandex.cloud.storage.v1.WebsiteSettings.Scheme
-	(*WebsiteSettings_Condition)(nil),                             // 31: yandex.cloud.storage.v1.WebsiteSettings.Condition
-	(*WebsiteSettings_Redirect)(nil),                              // 32: yandex.cloud.storage.v1.WebsiteSettings.Redirect
-	(*WebsiteSettings_RoutingRule)(nil),                           // 33: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule
-	(*LifecycleRule_AfterDays)(nil),                               // 34: yandex.cloud.storage.v1.LifecycleRule.AfterDays
-	(*LifecycleRule_NoncurrentDeleteMarkers)(nil),                 // 35: yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers
-	(*LifecycleRule_NoncurrentExpiration)(nil),                    // 36: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration
-	(*LifecycleRule_NoncurrentTransition)(nil),                    // 37: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition
-	(*LifecycleRule_Transition)(nil),                              // 38: yandex.cloud.storage.v1.LifecycleRule.Transition
-	(*LifecycleRule_Expiration)(nil),                              // 39: yandex.cloud.storage.v1.LifecycleRule.Expiration
-	(*LifecycleRule_RuleFilter)(nil),                              // 40: yandex.cloud.storage.v1.LifecycleRule.RuleFilter
-	(*LifecycleRule_RuleFilter_And)(nil),                          // 41: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
-	(*ObjectLock_DefaultRetention)(nil),                           // 42: yandex.cloud.storage.v1.ObjectLock.DefaultRetention
-	(*Encryption_EncryptionRule)(nil),                             // 43: yandex.cloud.storage.v1.Encryption.EncryptionRule
-	(*InventoryConfiguration_InventoryBucketDestination)(nil),     // 44: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
-	(*InventoryConfiguration_InventoryDestination)(nil),           // 45: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination
-	(*InventoryConfiguration_InventorySchedule)(nil),              // 46: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule
-	(*InventoryConfiguration_InventoryFilter)(nil),                // 47: yandex.cloud.storage.v1.InventoryConfiguration.InventoryFilter
-	(*structpb.Struct)(nil),                                       // 48: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),                                 // 49: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),                                  // 50: google.protobuf.BoolValue
-	(*wrapperspb.Int64Value)(nil),                                 // 51: google.protobuf.Int64Value
-	(*wrapperspb.StringValue)(nil),                                // 52: google.protobuf.StringValue
+	(*BucketLoggingSetup)(nil),                                    // 29: yandex.cloud.storage.v1.BucketLoggingSetup
+	(*ACL_Grant)(nil),                                             // 30: yandex.cloud.storage.v1.ACL.Grant
+	(*WebsiteSettings_Scheme)(nil),                                // 31: yandex.cloud.storage.v1.WebsiteSettings.Scheme
+	(*WebsiteSettings_Condition)(nil),                             // 32: yandex.cloud.storage.v1.WebsiteSettings.Condition
+	(*WebsiteSettings_Redirect)(nil),                              // 33: yandex.cloud.storage.v1.WebsiteSettings.Redirect
+	(*WebsiteSettings_RoutingRule)(nil),                           // 34: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule
+	(*LifecycleRule_AfterDays)(nil),                               // 35: yandex.cloud.storage.v1.LifecycleRule.AfterDays
+	(*LifecycleRule_NoncurrentDeleteMarkers)(nil),                 // 36: yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers
+	(*LifecycleRule_NoncurrentExpiration)(nil),                    // 37: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration
+	(*LifecycleRule_NoncurrentTransition)(nil),                    // 38: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition
+	(*LifecycleRule_Transition)(nil),                              // 39: yandex.cloud.storage.v1.LifecycleRule.Transition
+	(*LifecycleRule_Expiration)(nil),                              // 40: yandex.cloud.storage.v1.LifecycleRule.Expiration
+	(*LifecycleRule_RuleFilter)(nil),                              // 41: yandex.cloud.storage.v1.LifecycleRule.RuleFilter
+	(*LifecycleRule_RuleFilter_And)(nil),                          // 42: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
+	(*ObjectLock_DefaultRetention)(nil),                           // 43: yandex.cloud.storage.v1.ObjectLock.DefaultRetention
+	(*Encryption_EncryptionRule)(nil),                             // 44: yandex.cloud.storage.v1.Encryption.EncryptionRule
+	(*InventoryConfiguration_InventoryBucketDestination)(nil),     // 45: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
+	(*InventoryConfiguration_InventoryDestination)(nil),           // 46: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination
+	(*InventoryConfiguration_InventorySchedule)(nil),              // 47: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule
+	(*InventoryConfiguration_InventoryFilter)(nil),                // 48: yandex.cloud.storage.v1.InventoryConfiguration.InventoryFilter
+	(*structpb.Struct)(nil),                                       // 49: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),                                 // 50: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),                                  // 51: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil),                                 // 52: google.protobuf.Int64Value
+	(*wrapperspb.StringValue)(nil),                                // 53: google.protobuf.StringValue
 }
 var file_yandex_cloud_storage_v1_bucket_proto_depIdxs = []int32{
 	15, // 0: yandex.cloud.storage.v1.Bucket.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
 	0,  // 1: yandex.cloud.storage.v1.Bucket.versioning:type_name -> yandex.cloud.storage.v1.Versioning
-	48, // 2: yandex.cloud.storage.v1.Bucket.policy:type_name -> google.protobuf.Struct
+	49, // 2: yandex.cloud.storage.v1.Bucket.policy:type_name -> google.protobuf.Struct
 	14, // 3: yandex.cloud.storage.v1.Bucket.acl:type_name -> yandex.cloud.storage.v1.ACL
-	49, // 4: yandex.cloud.storage.v1.Bucket.created_at:type_name -> google.protobuf.Timestamp
+	50, // 4: yandex.cloud.storage.v1.Bucket.created_at:type_name -> google.protobuf.Timestamp
 	16, // 5: yandex.cloud.storage.v1.Bucket.cors:type_name -> yandex.cloud.storage.v1.CorsRule
 	17, // 6: yandex.cloud.storage.v1.Bucket.website_settings:type_name -> yandex.cloud.storage.v1.WebsiteSettings
 	18, // 7: yandex.cloud.storage.v1.Bucket.lifecycle_rules:type_name -> yandex.cloud.storage.v1.LifecycleRule
@@ -3788,79 +3856,80 @@ var file_yandex_cloud_storage_v1_bucket_proto_depIdxs = []int32{
 	25, // 9: yandex.cloud.storage.v1.Bucket.object_lock:type_name -> yandex.cloud.storage.v1.ObjectLock
 	26, // 10: yandex.cloud.storage.v1.Bucket.encryption:type_name -> yandex.cloud.storage.v1.Encryption
 	27, // 11: yandex.cloud.storage.v1.Bucket.allowed_private_endpoints:type_name -> yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
-	29, // 12: yandex.cloud.storage.v1.ACL.grants:type_name -> yandex.cloud.storage.v1.ACL.Grant
-	50, // 13: yandex.cloud.storage.v1.AnonymousAccessFlags.read:type_name -> google.protobuf.BoolValue
-	50, // 14: yandex.cloud.storage.v1.AnonymousAccessFlags.list:type_name -> google.protobuf.BoolValue
-	50, // 15: yandex.cloud.storage.v1.AnonymousAccessFlags.config_read:type_name -> google.protobuf.BoolValue
-	3,  // 16: yandex.cloud.storage.v1.CorsRule.allowed_methods:type_name -> yandex.cloud.storage.v1.CorsRule.Method
-	51, // 17: yandex.cloud.storage.v1.CorsRule.max_age_seconds:type_name -> google.protobuf.Int64Value
-	30, // 18: yandex.cloud.storage.v1.WebsiteSettings.redirect_all_requests:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Scheme
-	33, // 19: yandex.cloud.storage.v1.WebsiteSettings.routing_rules:type_name -> yandex.cloud.storage.v1.WebsiteSettings.RoutingRule
-	52, // 20: yandex.cloud.storage.v1.LifecycleRule.id:type_name -> google.protobuf.StringValue
-	40, // 21: yandex.cloud.storage.v1.LifecycleRule.filter:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter
-	39, // 22: yandex.cloud.storage.v1.LifecycleRule.expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.Expiration
-	38, // 23: yandex.cloud.storage.v1.LifecycleRule.transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.Transition
-	34, // 24: yandex.cloud.storage.v1.LifecycleRule.abort_incomplete_multipart_upload:type_name -> yandex.cloud.storage.v1.LifecycleRule.AfterDays
-	36, // 25: yandex.cloud.storage.v1.LifecycleRule.noncurrent_expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration
-	37, // 26: yandex.cloud.storage.v1.LifecycleRule.noncurrent_transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition
-	35, // 27: yandex.cloud.storage.v1.LifecycleRule.noncurrent_delete_markers:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers
-	51, // 28: yandex.cloud.storage.v1.OptionalSizeByClass.class_size:type_name -> google.protobuf.Int64Value
-	19, // 29: yandex.cloud.storage.v1.CountersByClass.counters:type_name -> yandex.cloud.storage.v1.Counters
-	51, // 30: yandex.cloud.storage.v1.BucketStats.max_size:type_name -> google.protobuf.Int64Value
-	20, // 31: yandex.cloud.storage.v1.BucketStats.storage_class_max_sizes:type_name -> yandex.cloud.storage.v1.OptionalSizeByClass
-	21, // 32: yandex.cloud.storage.v1.BucketStats.storage_class_used_sizes:type_name -> yandex.cloud.storage.v1.SizeByClass
-	22, // 33: yandex.cloud.storage.v1.BucketStats.storage_class_counters:type_name -> yandex.cloud.storage.v1.CountersByClass
-	52, // 34: yandex.cloud.storage.v1.BucketStats.default_storage_class:type_name -> google.protobuf.StringValue
-	15, // 35: yandex.cloud.storage.v1.BucketStats.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
-	49, // 36: yandex.cloud.storage.v1.BucketStats.created_at:type_name -> google.protobuf.Timestamp
-	49, // 37: yandex.cloud.storage.v1.BucketStats.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 38: yandex.cloud.storage.v1.HTTPSConfig.source_type:type_name -> yandex.cloud.storage.v1.HTTPSConfig.SourceType
-	52, // 39: yandex.cloud.storage.v1.HTTPSConfig.issuer:type_name -> google.protobuf.StringValue
-	52, // 40: yandex.cloud.storage.v1.HTTPSConfig.subject:type_name -> google.protobuf.StringValue
-	49, // 41: yandex.cloud.storage.v1.HTTPSConfig.not_before:type_name -> google.protobuf.Timestamp
-	49, // 42: yandex.cloud.storage.v1.HTTPSConfig.not_after:type_name -> google.protobuf.Timestamp
-	6,  // 43: yandex.cloud.storage.v1.ObjectLock.status:type_name -> yandex.cloud.storage.v1.ObjectLock.ObjectLockStatus
-	42, // 44: yandex.cloud.storage.v1.ObjectLock.default_retention:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention
-	43, // 45: yandex.cloud.storage.v1.Encryption.rules:type_name -> yandex.cloud.storage.v1.Encryption.EncryptionRule
-	45, // 46: yandex.cloud.storage.v1.InventoryConfiguration.destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination
-	8,  // 47: yandex.cloud.storage.v1.InventoryConfiguration.included_object_versions:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.IncludedObjectVersions
-	46, // 48: yandex.cloud.storage.v1.InventoryConfiguration.schedule:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule
-	47, // 49: yandex.cloud.storage.v1.InventoryConfiguration.filter:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryFilter
-	9,  // 50: yandex.cloud.storage.v1.InventoryConfiguration.optional_fields:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.OptionalField
-	1,  // 51: yandex.cloud.storage.v1.ACL.Grant.permission:type_name -> yandex.cloud.storage.v1.ACL.Grant.Permission
-	2,  // 52: yandex.cloud.storage.v1.ACL.Grant.grant_type:type_name -> yandex.cloud.storage.v1.ACL.Grant.GrantType
-	4,  // 53: yandex.cloud.storage.v1.WebsiteSettings.Scheme.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
-	4,  // 54: yandex.cloud.storage.v1.WebsiteSettings.Redirect.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
-	31, // 55: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.condition:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Condition
-	32, // 56: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.redirect:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Redirect
-	51, // 57: yandex.cloud.storage.v1.LifecycleRule.AfterDays.days_after_expiration:type_name -> google.protobuf.Int64Value
-	51, // 58: yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers.noncurrent_days:type_name -> google.protobuf.Int64Value
-	51, // 59: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.noncurrent_days:type_name -> google.protobuf.Int64Value
-	51, // 60: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
-	51, // 61: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
-	51, // 62: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
-	49, // 63: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
-	51, // 64: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
-	49, // 65: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
-	51, // 66: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
-	50, // 67: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
-	51, // 68: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
-	51, // 69: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
-	13, // 70: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.tag:type_name -> yandex.cloud.storage.v1.Tag
-	41, // 71: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.and_operator:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
-	51, // 72: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_greater_than:type_name -> google.protobuf.Int64Value
-	51, // 73: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_less_than:type_name -> google.protobuf.Int64Value
-	13, // 74: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.tag:type_name -> yandex.cloud.storage.v1.Tag
-	7,  // 75: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
-	10, // 76: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.format:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.Format
-	52, // 77: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.prefix:type_name -> google.protobuf.StringValue
-	44, // 78: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination.bucket_destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
-	11, // 79: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.frequency:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.Frequency
-	80, // [80:80] is the sub-list for method output_type
-	80, // [80:80] is the sub-list for method input_type
-	80, // [80:80] is the sub-list for extension type_name
-	80, // [80:80] is the sub-list for extension extendee
-	0,  // [0:80] is the sub-list for field type_name
+	29, // 12: yandex.cloud.storage.v1.Bucket.logging:type_name -> yandex.cloud.storage.v1.BucketLoggingSetup
+	30, // 13: yandex.cloud.storage.v1.ACL.grants:type_name -> yandex.cloud.storage.v1.ACL.Grant
+	51, // 14: yandex.cloud.storage.v1.AnonymousAccessFlags.read:type_name -> google.protobuf.BoolValue
+	51, // 15: yandex.cloud.storage.v1.AnonymousAccessFlags.list:type_name -> google.protobuf.BoolValue
+	51, // 16: yandex.cloud.storage.v1.AnonymousAccessFlags.config_read:type_name -> google.protobuf.BoolValue
+	3,  // 17: yandex.cloud.storage.v1.CorsRule.allowed_methods:type_name -> yandex.cloud.storage.v1.CorsRule.Method
+	52, // 18: yandex.cloud.storage.v1.CorsRule.max_age_seconds:type_name -> google.protobuf.Int64Value
+	31, // 19: yandex.cloud.storage.v1.WebsiteSettings.redirect_all_requests:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Scheme
+	34, // 20: yandex.cloud.storage.v1.WebsiteSettings.routing_rules:type_name -> yandex.cloud.storage.v1.WebsiteSettings.RoutingRule
+	53, // 21: yandex.cloud.storage.v1.LifecycleRule.id:type_name -> google.protobuf.StringValue
+	41, // 22: yandex.cloud.storage.v1.LifecycleRule.filter:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter
+	40, // 23: yandex.cloud.storage.v1.LifecycleRule.expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.Expiration
+	39, // 24: yandex.cloud.storage.v1.LifecycleRule.transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.Transition
+	35, // 25: yandex.cloud.storage.v1.LifecycleRule.abort_incomplete_multipart_upload:type_name -> yandex.cloud.storage.v1.LifecycleRule.AfterDays
+	37, // 26: yandex.cloud.storage.v1.LifecycleRule.noncurrent_expiration:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration
+	38, // 27: yandex.cloud.storage.v1.LifecycleRule.noncurrent_transitions:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition
+	36, // 28: yandex.cloud.storage.v1.LifecycleRule.noncurrent_delete_markers:type_name -> yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers
+	52, // 29: yandex.cloud.storage.v1.OptionalSizeByClass.class_size:type_name -> google.protobuf.Int64Value
+	19, // 30: yandex.cloud.storage.v1.CountersByClass.counters:type_name -> yandex.cloud.storage.v1.Counters
+	52, // 31: yandex.cloud.storage.v1.BucketStats.max_size:type_name -> google.protobuf.Int64Value
+	20, // 32: yandex.cloud.storage.v1.BucketStats.storage_class_max_sizes:type_name -> yandex.cloud.storage.v1.OptionalSizeByClass
+	21, // 33: yandex.cloud.storage.v1.BucketStats.storage_class_used_sizes:type_name -> yandex.cloud.storage.v1.SizeByClass
+	22, // 34: yandex.cloud.storage.v1.BucketStats.storage_class_counters:type_name -> yandex.cloud.storage.v1.CountersByClass
+	53, // 35: yandex.cloud.storage.v1.BucketStats.default_storage_class:type_name -> google.protobuf.StringValue
+	15, // 36: yandex.cloud.storage.v1.BucketStats.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
+	50, // 37: yandex.cloud.storage.v1.BucketStats.created_at:type_name -> google.protobuf.Timestamp
+	50, // 38: yandex.cloud.storage.v1.BucketStats.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 39: yandex.cloud.storage.v1.HTTPSConfig.source_type:type_name -> yandex.cloud.storage.v1.HTTPSConfig.SourceType
+	53, // 40: yandex.cloud.storage.v1.HTTPSConfig.issuer:type_name -> google.protobuf.StringValue
+	53, // 41: yandex.cloud.storage.v1.HTTPSConfig.subject:type_name -> google.protobuf.StringValue
+	50, // 42: yandex.cloud.storage.v1.HTTPSConfig.not_before:type_name -> google.protobuf.Timestamp
+	50, // 43: yandex.cloud.storage.v1.HTTPSConfig.not_after:type_name -> google.protobuf.Timestamp
+	6,  // 44: yandex.cloud.storage.v1.ObjectLock.status:type_name -> yandex.cloud.storage.v1.ObjectLock.ObjectLockStatus
+	43, // 45: yandex.cloud.storage.v1.ObjectLock.default_retention:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention
+	44, // 46: yandex.cloud.storage.v1.Encryption.rules:type_name -> yandex.cloud.storage.v1.Encryption.EncryptionRule
+	46, // 47: yandex.cloud.storage.v1.InventoryConfiguration.destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination
+	8,  // 48: yandex.cloud.storage.v1.InventoryConfiguration.included_object_versions:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.IncludedObjectVersions
+	47, // 49: yandex.cloud.storage.v1.InventoryConfiguration.schedule:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule
+	48, // 50: yandex.cloud.storage.v1.InventoryConfiguration.filter:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryFilter
+	9,  // 51: yandex.cloud.storage.v1.InventoryConfiguration.optional_fields:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.OptionalField
+	1,  // 52: yandex.cloud.storage.v1.ACL.Grant.permission:type_name -> yandex.cloud.storage.v1.ACL.Grant.Permission
+	2,  // 53: yandex.cloud.storage.v1.ACL.Grant.grant_type:type_name -> yandex.cloud.storage.v1.ACL.Grant.GrantType
+	4,  // 54: yandex.cloud.storage.v1.WebsiteSettings.Scheme.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
+	4,  // 55: yandex.cloud.storage.v1.WebsiteSettings.Redirect.protocol:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Protocol
+	32, // 56: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.condition:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Condition
+	33, // 57: yandex.cloud.storage.v1.WebsiteSettings.RoutingRule.redirect:type_name -> yandex.cloud.storage.v1.WebsiteSettings.Redirect
+	52, // 58: yandex.cloud.storage.v1.LifecycleRule.AfterDays.days_after_expiration:type_name -> google.protobuf.Int64Value
+	52, // 59: yandex.cloud.storage.v1.LifecycleRule.NoncurrentDeleteMarkers.noncurrent_days:type_name -> google.protobuf.Int64Value
+	52, // 60: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.noncurrent_days:type_name -> google.protobuf.Int64Value
+	52, // 61: yandex.cloud.storage.v1.LifecycleRule.NoncurrentExpiration.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
+	52, // 62: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.noncurrent_days:type_name -> google.protobuf.Int64Value
+	52, // 63: yandex.cloud.storage.v1.LifecycleRule.NoncurrentTransition.newer_noncurrent_versions:type_name -> google.protobuf.Int64Value
+	50, // 64: yandex.cloud.storage.v1.LifecycleRule.Transition.date:type_name -> google.protobuf.Timestamp
+	52, // 65: yandex.cloud.storage.v1.LifecycleRule.Transition.days:type_name -> google.protobuf.Int64Value
+	50, // 66: yandex.cloud.storage.v1.LifecycleRule.Expiration.date:type_name -> google.protobuf.Timestamp
+	52, // 67: yandex.cloud.storage.v1.LifecycleRule.Expiration.days:type_name -> google.protobuf.Int64Value
+	51, // 68: yandex.cloud.storage.v1.LifecycleRule.Expiration.expired_object_delete_marker:type_name -> google.protobuf.BoolValue
+	52, // 69: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	52, // 70: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.object_size_less_than:type_name -> google.protobuf.Int64Value
+	13, // 71: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.tag:type_name -> yandex.cloud.storage.v1.Tag
+	42, // 72: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.and_operator:type_name -> yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And
+	52, // 73: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_greater_than:type_name -> google.protobuf.Int64Value
+	52, // 74: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.object_size_less_than:type_name -> google.protobuf.Int64Value
+	13, // 75: yandex.cloud.storage.v1.LifecycleRule.RuleFilter.And.tag:type_name -> yandex.cloud.storage.v1.Tag
+	7,  // 76: yandex.cloud.storage.v1.ObjectLock.DefaultRetention.mode:type_name -> yandex.cloud.storage.v1.ObjectLock.DefaultRetention.Mode
+	10, // 77: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.format:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.Format
+	53, // 78: yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination.prefix:type_name -> google.protobuf.StringValue
+	45, // 79: yandex.cloud.storage.v1.InventoryConfiguration.InventoryDestination.bucket_destination:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventoryBucketDestination
+	11, // 80: yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.frequency:type_name -> yandex.cloud.storage.v1.InventoryConfiguration.InventorySchedule.Frequency
+	81, // [81:81] is the sub-list for method output_type
+	81, // [81:81] is the sub-list for method input_type
+	81, // [81:81] is the sub-list for extension type_name
+	81, // [81:81] is the sub-list for extension extendee
+	0,  // [0:81] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_storage_v1_bucket_proto_init() }
@@ -3868,7 +3937,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 	if File_yandex_cloud_storage_v1_bucket_proto != nil {
 		return
 	}
-	file_yandex_cloud_storage_v1_bucket_proto_msgTypes[30].OneofWrappers = []any{
+	file_yandex_cloud_storage_v1_bucket_proto_msgTypes[31].OneofWrappers = []any{
 		(*ObjectLock_DefaultRetention_Days)(nil),
 		(*ObjectLock_DefaultRetention_Years)(nil),
 	}
@@ -3878,7 +3947,7 @@ func file_yandex_cloud_storage_v1_bucket_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_storage_v1_bucket_proto_rawDesc), len(file_yandex_cloud_storage_v1_bucket_proto_rawDesc)),
 			NumEnums:      12,
-			NumMessages:   36,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

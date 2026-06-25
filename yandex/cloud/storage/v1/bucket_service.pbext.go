@@ -99,6 +99,10 @@ func (m *CreateBucketRequest) SetDisabledStatickeyAuth(v bool) {
 	m.DisabledStatickeyAuth = v
 }
 
+func (m *CreateBucketRequest) SetLifecycleRules(v []*LifecycleRule) {
+	m.LifecycleRules = v
+}
+
 func (m *UpdateBucketRequest) SetName(v string) {
 	m.Name = v
 }

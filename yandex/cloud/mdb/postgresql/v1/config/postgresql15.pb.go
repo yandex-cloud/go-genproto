@@ -1200,6 +1200,8 @@ type PostgresqlConfig15 struct {
 	PasswordEncryption                  PostgresqlConfig15_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
 	AutoExplainLogFormat                PostgresqlConfig15_AutoExplainLogFormat     `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
 	IdleSessionTimeout                  *wrapperspb.Int64Value                      `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`                                                                                             // in milliseconds.
+	CheckpointWarning                   *wrapperspb.Int64Value                      `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                                                                                                  // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
+	PgHintPlanHintsAnywhere             *wrapperspb.BoolValue                       `protobuf:"bytes,175,opt,name=pg_hint_plan_hints_anywhere,json=pgHintPlanHintsAnywhere,proto3" json:"pg_hint_plan_hints_anywhere,omitempty"`                                                                          // If it is true, pg_hint_plan reads hints ignoring SQL syntax. This allows placing hints anywhere in the query but may cause false reads. Default is false.
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2368,6 +2370,20 @@ func (x *PostgresqlConfig15) GetIdleSessionTimeout() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *PostgresqlConfig15) GetCheckpointWarning() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.CheckpointWarning
+	}
+	return nil
+}
+
+func (x *PostgresqlConfig15) GetPgHintPlanHintsAnywhere() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.PgHintPlanHintsAnywhere
+	}
+	return nil
+}
+
 type PostgresqlConfigSet15 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a PostgreSQL 15 cluster (a combination of settings defined
@@ -2436,7 +2452,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql15.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb1\x8a\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql15.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xee\x8b\x01\n" +
 	"\x12PostgresqlConfig15\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2614,7 +2630,9 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_rawDesc = ""
 	"\x1blog_autovacuum_min_duration\x18\xa5\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x11\xfa\xc71\r-1-2147483647R\x18logAutovacuumMinDuration\x12~\n" +
 	"\x13password_encryption\x18\xa7\x01 \x01(\x0e2L.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PasswordEncryptionR\x12passwordEncryption\x12\x86\x01\n" +
 	"\x17auto_explain_log_format\x18\xa8\x01 \x01(\x0e2N.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.AutoExplainLogFormatR\x14autoExplainLogFormat\x12`\n" +
-	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\xc6\x01\n" +
+	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\x12`\n" +
+	"\x12checkpoint_warning\x18\xae\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f0-2147483647000R\x11checkpointWarning\x12Y\n" +
+	"\x1bpg_hint_plan_hints_anywhere\x18\xaf\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x17pgHintPlanHintsAnywhere\"\xc6\x01\n" +
 	"\x14AutoExplainLogFormat\x12'\n" +
 	"#AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
@@ -2925,14 +2943,16 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_depIdxs = []in
 	8,   // 157: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.password_encryption:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.PasswordEncryption
 	0,   // 158: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.auto_explain_log_format:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.AutoExplainLogFormat
 	19,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.idle_session_timeout:type_name -> google.protobuf.Int64Value
-	17,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	17,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	17,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	163, // [163:163] is the sub-list for method output_type
-	163, // [163:163] is the sub-list for method input_type
-	163, // [163:163] is the sub-list for extension type_name
-	163, // [163:163] is the sub-list for extension extendee
-	0,   // [0:163] is the sub-list for field type_name
+	19,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.checkpoint_warning:type_name -> google.protobuf.Int64Value
+	21,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15.pg_hint_plan_hints_anywhere:type_name -> google.protobuf.BoolValue
+	17,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	17,  // 163: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	17,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet15.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	165, // [165:165] is the sub-list for method output_type
+	165, // [165:165] is the sub-list for method input_type
+	165, // [165:165] is the sub-list for extension type_name
+	165, // [165:165] is the sub-list for extension extendee
+	0,   // [0:165] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql15_proto_init() }

@@ -36,7 +36,9 @@ type UserCPU struct {
 	// Frequency of the CPU in megahertz (MHz).
 	FrequencyMhz int64 `protobuf:"varint,5,opt,name=frequency_mhz,json=frequencyMhz,proto3" json:"frequency_mhz,omitempty"`
 	// Number of cpu.
-	Count         int64 `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`
+	Count int64 `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`
+	// Number of threads (logical cores) per CPU (socket).
+	Threads       int64 `protobuf:"varint,7,opt,name=threads,proto3" json:"threads,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,6 +111,13 @@ func (x *UserCPU) GetFrequencyMhz() int64 {
 func (x *UserCPU) GetCount() int64 {
 	if x != nil {
 		return x.Count
+	}
+	return 0
+}
+
+func (x *UserCPU) GetThreads() int64 {
+	if x != nil {
+		return x.Threads
 	}
 	return 0
 }
@@ -324,14 +333,15 @@ var File_yandex_cloud_baremetal_v2_user_configuration_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v2/user_configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/configuration.proto\"\xc5\x01\n" +
+	"2yandex/cloud/baremetal/v2/user_configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/configuration.proto\"\xe4\x01\n" +
 	"\aUserCPU\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x04R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tB\x03\xe0A\x03R\x04name\x12\x1b\n" +
 	"\x06vendor\x18\x03 \x01(\tB\x03\xe0A\x03R\x06vendor\x12*\n" +
 	"\x0ephysical_cores\x18\x04 \x01(\x03B\x03\xe0A\x03R\rphysicalCores\x12(\n" +
 	"\rfrequency_mhz\x18\x05 \x01(\x03B\x03\xe0A\x03R\ffrequencyMhz\x12\x19\n" +
-	"\x05count\x18\x06 \x01(\x03B\x03\xe0A\x02R\x05count\"K\n" +
+	"\x05count\x18\x06 \x01(\x03B\x03\xe0A\x02R\x05count\x12\x1d\n" +
+	"\athreads\x18\a \x01(\x03B\x03\xe0A\x03R\athreads\"K\n" +
 	"\aUserRAM\x12\x16\n" +
 	"\x02id\x18\x01 \x01(\tB\x06\xe0A\x04\xe0A\x02R\x02id\x12\"\n" +
 	"\n" +

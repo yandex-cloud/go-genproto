@@ -707,6 +707,10 @@ func (m *ConfigSpec) SetConnectionManager(v *v1.ClusterConnectionManager) {
 	m.ConnectionManager = v
 }
 
+func (m *ConfigSpec) SetManagedRepack(v *ManagedRepack) {
+	m.ManagedRepack = v
+}
+
 type ConfigHostSpec_PostgresqlConfig = isConfigHostSpec_PostgresqlConfig
 
 func (m *ConfigHostSpec) SetPostgresqlConfig(v ConfigHostSpec_PostgresqlConfig) {

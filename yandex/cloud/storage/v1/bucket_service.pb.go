@@ -525,8 +525,11 @@ type CreateBucketRequest struct {
 	// An option to disable static key auth for a bucket.
 	// requires permission s3:UpdateBucketStaticKeyAuthSettings
 	DisabledStatickeyAuth bool `protobuf:"varint,12,opt,name=disabled_statickey_auth,json=disabledStatickeyAuth,proto3" json:"disabled_statickey_auth,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Configuration for bucket's lifecycle rules.
+	// requires permission s3:PutLifecycleConfiguration
+	LifecycleRules []*LifecycleRule `protobuf:"bytes,13,rep,name=lifecycle_rules,json=lifecycleRules,proto3" json:"lifecycle_rules,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreateBucketRequest) Reset() {
@@ -634,6 +637,13 @@ func (x *CreateBucketRequest) GetDisabledStatickeyAuth() bool {
 		return x.DisabledStatickeyAuth
 	}
 	return false
+}
+
+func (x *CreateBucketRequest) GetLifecycleRules() []*LifecycleRule {
+	if x != nil {
+		return x.LifecycleRules
+	}
+	return nil
 }
 
 type UpdateBucketRequest struct {
@@ -1615,7 +1625,7 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	"\x1cSetBucketHTTPSConfigMetadata\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
 	"\x1fDeleteBucketHTTPSConfigMetadata\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xac\x05\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xfd\x05\n" +
 	"\x13CreateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
@@ -1632,7 +1642,8 @@ const file_yandex_cloud_storage_v1_bucket_service_proto_rawDesc = "" +
 	" \x01(\x0e2#.yandex.cloud.storage.v1.VersioningR\n" +
 	"versioning\x12r\n" +
 	"\x19allowed_private_endpoints\x18\v \x01(\v26.yandex.cloud.storage.v1.BucketAllowedPrivateEndpointsR\x17allowedPrivateEndpoints\x126\n" +
-	"\x17disabled_statickey_auth\x18\f \x01(\bR\x15disabledStatickeyAuthJ\x04\b\x03\x10\x04\"\x92\b\n" +
+	"\x17disabled_statickey_auth\x18\f \x01(\bR\x15disabledStatickeyAuth\x12O\n" +
+	"\x0flifecycle_rules\x18\r \x03(\v2&.yandex.cloud.storage.v1.LifecycleRuleR\x0elifecycleRulesJ\x04\b\x03\x10\x04\"\x92\b\n" +
 	"\x13UpdateBucketRequest\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12A\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\n" +
@@ -1771,10 +1782,10 @@ var file_yandex_cloud_storage_v1_bucket_service_proto_goTypes = []any{
 	(*Encryption)(nil),                                 // 29: yandex.cloud.storage.v1.Encryption
 	(Versioning)(0),                                    // 30: yandex.cloud.storage.v1.Versioning
 	(*BucketAllowedPrivateEndpoints)(nil),              // 31: yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
-	(*fieldmaskpb.FieldMask)(nil),                      // 32: google.protobuf.FieldMask
-	(*CorsRule)(nil),                                   // 33: yandex.cloud.storage.v1.CorsRule
-	(*WebsiteSettings)(nil),                            // 34: yandex.cloud.storage.v1.WebsiteSettings
-	(*LifecycleRule)(nil),                              // 35: yandex.cloud.storage.v1.LifecycleRule
+	(*LifecycleRule)(nil),                              // 32: yandex.cloud.storage.v1.LifecycleRule
+	(*fieldmaskpb.FieldMask)(nil),                      // 33: google.protobuf.FieldMask
+	(*CorsRule)(nil),                                   // 34: yandex.cloud.storage.v1.CorsRule
+	(*WebsiteSettings)(nil),                            // 35: yandex.cloud.storage.v1.WebsiteSettings
 	(*structpb.Struct)(nil),                            // 36: google.protobuf.Struct
 	(*ObjectLock)(nil),                                 // 37: yandex.cloud.storage.v1.ObjectLock
 	(*InventoryConfiguration)(nil),                     // 38: yandex.cloud.storage.v1.InventoryConfiguration
@@ -1795,59 +1806,60 @@ var file_yandex_cloud_storage_v1_bucket_service_proto_depIdxs = []int32{
 	29, // 5: yandex.cloud.storage.v1.CreateBucketRequest.encryption:type_name -> yandex.cloud.storage.v1.Encryption
 	30, // 6: yandex.cloud.storage.v1.CreateBucketRequest.versioning:type_name -> yandex.cloud.storage.v1.Versioning
 	31, // 7: yandex.cloud.storage.v1.CreateBucketRequest.allowed_private_endpoints:type_name -> yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
-	32, // 8: yandex.cloud.storage.v1.UpdateBucketRequest.update_mask:type_name -> google.protobuf.FieldMask
-	26, // 9: yandex.cloud.storage.v1.UpdateBucketRequest.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
-	33, // 10: yandex.cloud.storage.v1.UpdateBucketRequest.cors:type_name -> yandex.cloud.storage.v1.CorsRule
-	34, // 11: yandex.cloud.storage.v1.UpdateBucketRequest.website_settings:type_name -> yandex.cloud.storage.v1.WebsiteSettings
-	30, // 12: yandex.cloud.storage.v1.UpdateBucketRequest.versioning:type_name -> yandex.cloud.storage.v1.Versioning
-	35, // 13: yandex.cloud.storage.v1.UpdateBucketRequest.lifecycle_rules:type_name -> yandex.cloud.storage.v1.LifecycleRule
-	36, // 14: yandex.cloud.storage.v1.UpdateBucketRequest.policy:type_name -> google.protobuf.Struct
-	27, // 15: yandex.cloud.storage.v1.UpdateBucketRequest.acl:type_name -> yandex.cloud.storage.v1.ACL
-	28, // 16: yandex.cloud.storage.v1.UpdateBucketRequest.tags:type_name -> yandex.cloud.storage.v1.Tag
-	37, // 17: yandex.cloud.storage.v1.UpdateBucketRequest.object_lock:type_name -> yandex.cloud.storage.v1.ObjectLock
-	29, // 18: yandex.cloud.storage.v1.UpdateBucketRequest.encryption:type_name -> yandex.cloud.storage.v1.Encryption
-	31, // 19: yandex.cloud.storage.v1.UpdateBucketRequest.allowed_private_endpoints:type_name -> yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
-	14, // 20: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.self_managed:type_name -> yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
-	15, // 21: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.certificate_manager:type_name -> yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
-	38, // 22: yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest.configuration:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
-	38, // 23: yandex.cloud.storage.v1.ListBucketInventoryConfigurationsResponse.configurations:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
-	2,  // 24: yandex.cloud.storage.v1.BucketService.List:input_type -> yandex.cloud.storage.v1.ListBucketsRequest
-	1,  // 25: yandex.cloud.storage.v1.BucketService.Get:input_type -> yandex.cloud.storage.v1.GetBucketRequest
-	9,  // 26: yandex.cloud.storage.v1.BucketService.Create:input_type -> yandex.cloud.storage.v1.CreateBucketRequest
-	10, // 27: yandex.cloud.storage.v1.BucketService.Update:input_type -> yandex.cloud.storage.v1.UpdateBucketRequest
-	11, // 28: yandex.cloud.storage.v1.BucketService.Delete:input_type -> yandex.cloud.storage.v1.DeleteBucketRequest
-	12, // 29: yandex.cloud.storage.v1.BucketService.GetStats:input_type -> yandex.cloud.storage.v1.GetBucketStatsRequest
-	13, // 30: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:input_type -> yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
-	16, // 31: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:input_type -> yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
-	17, // 32: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:input_type -> yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
-	39, // 33: yandex.cloud.storage.v1.BucketService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	40, // 34: yandex.cloud.storage.v1.BucketService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	41, // 35: yandex.cloud.storage.v1.BucketService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	18, // 36: yandex.cloud.storage.v1.BucketService.CreateInventoryConfiguration:input_type -> yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest
-	20, // 37: yandex.cloud.storage.v1.BucketService.GetInventoryConfiguration:input_type -> yandex.cloud.storage.v1.GetBucketInventoryConfigurationRequest
-	21, // 38: yandex.cloud.storage.v1.BucketService.DeleteInventoryConfiguration:input_type -> yandex.cloud.storage.v1.DeleteBucketInventoryConfigurationRequest
-	23, // 39: yandex.cloud.storage.v1.BucketService.ListInventoryConfigurations:input_type -> yandex.cloud.storage.v1.ListBucketInventoryConfigurationsRequest
-	3,  // 40: yandex.cloud.storage.v1.BucketService.List:output_type -> yandex.cloud.storage.v1.ListBucketsResponse
-	25, // 41: yandex.cloud.storage.v1.BucketService.Get:output_type -> yandex.cloud.storage.v1.Bucket
-	42, // 42: yandex.cloud.storage.v1.BucketService.Create:output_type -> yandex.cloud.operation.Operation
-	42, // 43: yandex.cloud.storage.v1.BucketService.Update:output_type -> yandex.cloud.operation.Operation
-	42, // 44: yandex.cloud.storage.v1.BucketService.Delete:output_type -> yandex.cloud.operation.Operation
-	43, // 45: yandex.cloud.storage.v1.BucketService.GetStats:output_type -> yandex.cloud.storage.v1.BucketStats
-	44, // 46: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:output_type -> yandex.cloud.storage.v1.HTTPSConfig
-	42, // 47: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:output_type -> yandex.cloud.operation.Operation
-	42, // 48: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:output_type -> yandex.cloud.operation.Operation
-	42, // 49: yandex.cloud.storage.v1.BucketService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	42, // 50: yandex.cloud.storage.v1.BucketService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	45, // 51: yandex.cloud.storage.v1.BucketService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	42, // 52: yandex.cloud.storage.v1.BucketService.CreateInventoryConfiguration:output_type -> yandex.cloud.operation.Operation
-	38, // 53: yandex.cloud.storage.v1.BucketService.GetInventoryConfiguration:output_type -> yandex.cloud.storage.v1.InventoryConfiguration
-	42, // 54: yandex.cloud.storage.v1.BucketService.DeleteInventoryConfiguration:output_type -> yandex.cloud.operation.Operation
-	24, // 55: yandex.cloud.storage.v1.BucketService.ListInventoryConfigurations:output_type -> yandex.cloud.storage.v1.ListBucketInventoryConfigurationsResponse
-	40, // [40:56] is the sub-list for method output_type
-	24, // [24:40] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	32, // 8: yandex.cloud.storage.v1.CreateBucketRequest.lifecycle_rules:type_name -> yandex.cloud.storage.v1.LifecycleRule
+	33, // 9: yandex.cloud.storage.v1.UpdateBucketRequest.update_mask:type_name -> google.protobuf.FieldMask
+	26, // 10: yandex.cloud.storage.v1.UpdateBucketRequest.anonymous_access_flags:type_name -> yandex.cloud.storage.v1.AnonymousAccessFlags
+	34, // 11: yandex.cloud.storage.v1.UpdateBucketRequest.cors:type_name -> yandex.cloud.storage.v1.CorsRule
+	35, // 12: yandex.cloud.storage.v1.UpdateBucketRequest.website_settings:type_name -> yandex.cloud.storage.v1.WebsiteSettings
+	30, // 13: yandex.cloud.storage.v1.UpdateBucketRequest.versioning:type_name -> yandex.cloud.storage.v1.Versioning
+	32, // 14: yandex.cloud.storage.v1.UpdateBucketRequest.lifecycle_rules:type_name -> yandex.cloud.storage.v1.LifecycleRule
+	36, // 15: yandex.cloud.storage.v1.UpdateBucketRequest.policy:type_name -> google.protobuf.Struct
+	27, // 16: yandex.cloud.storage.v1.UpdateBucketRequest.acl:type_name -> yandex.cloud.storage.v1.ACL
+	28, // 17: yandex.cloud.storage.v1.UpdateBucketRequest.tags:type_name -> yandex.cloud.storage.v1.Tag
+	37, // 18: yandex.cloud.storage.v1.UpdateBucketRequest.object_lock:type_name -> yandex.cloud.storage.v1.ObjectLock
+	29, // 19: yandex.cloud.storage.v1.UpdateBucketRequest.encryption:type_name -> yandex.cloud.storage.v1.Encryption
+	31, // 20: yandex.cloud.storage.v1.UpdateBucketRequest.allowed_private_endpoints:type_name -> yandex.cloud.storage.v1.BucketAllowedPrivateEndpoints
+	14, // 21: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.self_managed:type_name -> yandex.cloud.storage.v1.SelfManagedHTTPSConfigParams
+	15, // 22: yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest.certificate_manager:type_name -> yandex.cloud.storage.v1.CertificateManagerHTTPSConfigParams
+	38, // 23: yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest.configuration:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
+	38, // 24: yandex.cloud.storage.v1.ListBucketInventoryConfigurationsResponse.configurations:type_name -> yandex.cloud.storage.v1.InventoryConfiguration
+	2,  // 25: yandex.cloud.storage.v1.BucketService.List:input_type -> yandex.cloud.storage.v1.ListBucketsRequest
+	1,  // 26: yandex.cloud.storage.v1.BucketService.Get:input_type -> yandex.cloud.storage.v1.GetBucketRequest
+	9,  // 27: yandex.cloud.storage.v1.BucketService.Create:input_type -> yandex.cloud.storage.v1.CreateBucketRequest
+	10, // 28: yandex.cloud.storage.v1.BucketService.Update:input_type -> yandex.cloud.storage.v1.UpdateBucketRequest
+	11, // 29: yandex.cloud.storage.v1.BucketService.Delete:input_type -> yandex.cloud.storage.v1.DeleteBucketRequest
+	12, // 30: yandex.cloud.storage.v1.BucketService.GetStats:input_type -> yandex.cloud.storage.v1.GetBucketStatsRequest
+	13, // 31: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:input_type -> yandex.cloud.storage.v1.GetBucketHTTPSConfigRequest
+	16, // 32: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:input_type -> yandex.cloud.storage.v1.SetBucketHTTPSConfigRequest
+	17, // 33: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:input_type -> yandex.cloud.storage.v1.DeleteBucketHTTPSConfigRequest
+	39, // 34: yandex.cloud.storage.v1.BucketService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	40, // 35: yandex.cloud.storage.v1.BucketService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	41, // 36: yandex.cloud.storage.v1.BucketService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	18, // 37: yandex.cloud.storage.v1.BucketService.CreateInventoryConfiguration:input_type -> yandex.cloud.storage.v1.CreateBucketInventoryConfigurationRequest
+	20, // 38: yandex.cloud.storage.v1.BucketService.GetInventoryConfiguration:input_type -> yandex.cloud.storage.v1.GetBucketInventoryConfigurationRequest
+	21, // 39: yandex.cloud.storage.v1.BucketService.DeleteInventoryConfiguration:input_type -> yandex.cloud.storage.v1.DeleteBucketInventoryConfigurationRequest
+	23, // 40: yandex.cloud.storage.v1.BucketService.ListInventoryConfigurations:input_type -> yandex.cloud.storage.v1.ListBucketInventoryConfigurationsRequest
+	3,  // 41: yandex.cloud.storage.v1.BucketService.List:output_type -> yandex.cloud.storage.v1.ListBucketsResponse
+	25, // 42: yandex.cloud.storage.v1.BucketService.Get:output_type -> yandex.cloud.storage.v1.Bucket
+	42, // 43: yandex.cloud.storage.v1.BucketService.Create:output_type -> yandex.cloud.operation.Operation
+	42, // 44: yandex.cloud.storage.v1.BucketService.Update:output_type -> yandex.cloud.operation.Operation
+	42, // 45: yandex.cloud.storage.v1.BucketService.Delete:output_type -> yandex.cloud.operation.Operation
+	43, // 46: yandex.cloud.storage.v1.BucketService.GetStats:output_type -> yandex.cloud.storage.v1.BucketStats
+	44, // 47: yandex.cloud.storage.v1.BucketService.GetHTTPSConfig:output_type -> yandex.cloud.storage.v1.HTTPSConfig
+	42, // 48: yandex.cloud.storage.v1.BucketService.SetHTTPSConfig:output_type -> yandex.cloud.operation.Operation
+	42, // 49: yandex.cloud.storage.v1.BucketService.DeleteHTTPSConfig:output_type -> yandex.cloud.operation.Operation
+	42, // 50: yandex.cloud.storage.v1.BucketService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	42, // 51: yandex.cloud.storage.v1.BucketService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	45, // 52: yandex.cloud.storage.v1.BucketService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	42, // 53: yandex.cloud.storage.v1.BucketService.CreateInventoryConfiguration:output_type -> yandex.cloud.operation.Operation
+	38, // 54: yandex.cloud.storage.v1.BucketService.GetInventoryConfiguration:output_type -> yandex.cloud.storage.v1.InventoryConfiguration
+	42, // 55: yandex.cloud.storage.v1.BucketService.DeleteInventoryConfiguration:output_type -> yandex.cloud.operation.Operation
+	24, // 56: yandex.cloud.storage.v1.BucketService.ListInventoryConfigurations:output_type -> yandex.cloud.storage.v1.ListBucketInventoryConfigurationsResponse
+	41, // [41:57] is the sub-list for method output_type
+	25, // [25:41] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_storage_v1_bucket_service_proto_init() }
