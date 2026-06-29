@@ -9,6 +9,7 @@ package iam
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	iam "github.com/yandex-cloud/go-genproto/yandex/cloud/iam"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -388,7 +389,7 @@ var File_yandex_cloud_iam_v1_subject_details_service_proto protoreflect.FileDesc
 
 const file_yandex_cloud_iam_v1_subject_details_service_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/iam/v1/subject_details_service.proto\x12\x13yandex.cloud.iam.v1\x1a google/protobuf/field_mask.proto\x1a\x1eyandex/cloud/iam/subject.proto\x1a\"yandex/cloud/iam/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xcc\x01\n" +
+	"1yandex/cloud/iam/v1/subject_details_service.proto\x12\x13yandex.cloud.iam.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1eyandex/cloud/iam/subject.proto\x1a\"yandex/cloud/iam/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xcc\x01\n" +
 	"\x11GetSubjectRequest\x12,\n" +
 	"\n" +
 	"subject_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\tsubjectId\x129\n" +
@@ -419,11 +420,11 @@ const file_yandex_cloud_iam_v1_subject_details_service_proto_rawDesc = "" +
 	"field_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\tfieldMask\x12H\n" +
 	"\x10resource_context\x18\x05 \x01(\v2\x1d.yandex.cloud.iam.v1.ResourceR\x0fresourceContextJ\x04\b\x02\x10\x03\"Q\n" +
 	"\x18BatchGetSubjectsResponse\x125\n" +
-	"\bsubjects\x18\x01 \x03(\v2\x19.yandex.cloud.iam.SubjectR\bsubjects2\xb5\x02\n" +
-	"\x15SubjectDetailsService\x12V\n" +
-	"\x03Get\x12&.yandex.cloud.iam.v1.GetSubjectRequest\x1a'.yandex.cloud.iam.v1.GetSubjectResponse\x12[\n" +
-	"\x04List\x12(.yandex.cloud.iam.v1.ListSubjectsRequest\x1a).yandex.cloud.iam.v1.ListSubjectsResponse\x12g\n" +
-	"\bBatchGet\x12,.yandex.cloud.iam.v1.BatchGetSubjectsRequest\x1a-.yandex.cloud.iam.v1.BatchGetSubjectsResponseBV\n" +
+	"\bsubjects\x18\x01 \x03(\v2\x19.yandex.cloud.iam.SubjectR\bsubjects2\x9d\x03\n" +
+	"\x15SubjectDetailsService\x12}\n" +
+	"\x03Get\x12&.yandex.cloud.iam.v1.GetSubjectRequest\x1a'.yandex.cloud.iam.v1.GetSubjectResponse\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/iam/v1/subjects/{subject_id}\x12u\n" +
+	"\x04List\x12(.yandex.cloud.iam.v1.ListSubjectsRequest\x1a).yandex.cloud.iam.v1.ListSubjectsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/iam/v1/subjects\x12\x8d\x01\n" +
+	"\bBatchGet\x12,.yandex.cloud.iam.v1.BatchGetSubjectsRequest\x1a-.yandex.cloud.iam.v1.BatchGetSubjectsResponse\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/iam/v1/subjects:batchGetBV\n" +
 	"\x17yandex.cloud.api.iam.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/iam/v1;iamb\x06proto3"
 
 var (

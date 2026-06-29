@@ -26,10 +26,22 @@ func (m *PresetItem) SetInfraValues(v []*InfraPresetValue) {
 	m.InfraValues = v
 }
 
+func (m *PresetItem) SetInfraValuesExist(v bool) {
+	m.InfraValuesExist = v
+}
+
 func (m *PresetItem) SetParameterValues(v []*ParameterPresetValue) {
 	m.ParameterValues = v
 }
 
+func (m *PresetItem) SetParameterValuesExist(v bool) {
+	m.ParameterValuesExist = v
+}
+
 func (m *PresetItem) SetLogsOverlayValues(v []*LogsOverlayPresetValue) {
 	m.LogsOverlayValues = v
+}
+
+func (m *PresetItem) SetLogsOverlayValuesExist(v bool) {
+	m.LogsOverlayValuesExist = v
 }

@@ -135,6 +135,10 @@ func (m *ClusterConfig) SetPythonVersion(v string) {
 	m.PythonVersion = v
 }
 
+func (m *ClusterConfig) SetDatacatalog(v *DatacatalogConfig) {
+	m.Datacatalog = v
+}
+
 func (m *AirflowConfig) SetConfig(v map[string]string) {
 	m.Config = v
 }
@@ -264,5 +268,9 @@ func (m *LoggingConfig) SetMinLevel(v v1.LogLevel_Level) {
 }
 
 func (m *LockboxConfig) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *DatacatalogConfig) SetEnabled(v bool) {
 	m.Enabled = v
 }

@@ -49,7 +49,3 @@ func (m *ResourceGroup) SetMemoryQuota(v *wrapperspb.Int64Value) {
 func (m *ResourceGroup) SetMinCost(v *wrapperspb.Int64Value) {
 	m.MinCost = v
 }
-
-func (m *ResourceGroup) SetIoLimit(v *wrapperspb.Int64Value) {
-	m.IoLimit = v
-}

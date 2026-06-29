@@ -47,6 +47,10 @@ func (m *WafProfile) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *WafProfile) SetUpdatedAt(v *timestamppb.Timestamp) {
+	m.UpdatedAt = v
+}
+
 func (m *WafProfile) SetRules(v []*WafProfileRule) {
 	m.Rules = v
 }

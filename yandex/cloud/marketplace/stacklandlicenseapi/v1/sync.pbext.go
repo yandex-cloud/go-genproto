@@ -94,14 +94,6 @@ func (m *License) SetSignature(v string) {
 	m.Signature = v
 }
 
-func (m *SyncRequest) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
-func (m *SyncRequest) SetBillingAccountId(v string) {
-	m.BillingAccountId = v
-}
-
 func (m *SyncRequest) SetLicenseServerId(v string) {
 	m.LicenseServerId = v
 }

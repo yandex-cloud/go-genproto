@@ -38,6 +38,10 @@ func (m *SecurityProfile) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *SecurityProfile) SetUpdatedAt(v *timestamppb.Timestamp) {
+	m.UpdatedAt = v
+}
+
 func (m *SecurityProfile) SetCloudId(v string) {
 	m.CloudId = v
 }

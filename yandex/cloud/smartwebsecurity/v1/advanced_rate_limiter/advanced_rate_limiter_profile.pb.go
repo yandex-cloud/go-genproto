@@ -209,6 +209,8 @@ type AdvancedRateLimiterProfile struct {
 	AdvancedRateLimiterRules []*AdvancedRateLimiterRule `protobuf:"bytes,6,rep,name=advanced_rate_limiter_rules,json=advancedRateLimiterRules,proto3" json:"advanced_rate_limiter_rules,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// ID of the cloud that the ARL profile belongs to.
 	CloudId       string `protobuf:"bytes,9,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -290,6 +292,13 @@ func (x *AdvancedRateLimiterProfile) GetAdvancedRateLimiterRules() []*AdvancedRa
 func (x *AdvancedRateLimiterProfile) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AdvancedRateLimiterProfile) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return nil
 }
@@ -783,7 +792,7 @@ var File_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_li
 
 const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_limiter_profile_proto_rawDesc = "" +
 	"\n" +
-	"Zyandex/cloud/smartwebsecurity/v1/advanced_rate_limiter/advanced_rate_limiter_profile.proto\x126yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\x94\x05\n" +
+	"Zyandex/cloud/smartwebsecurity/v1/advanced_rate_limiter/advanced_rate_limiter_profile.proto\x126yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\xc9\x05\n" +
 	"\x1aAdvancedRateLimiterProfile\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\xb3\x01\n" +
@@ -792,11 +801,13 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x8e\x01\n" +
 	"\x1badvanced_rate_limiter_rules\x18\x06 \x03(\v2O.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRuleR\x18advancedRateLimiterRules\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x19\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x19\n" +
 	"\bcloud_id\x18\t \x01(\tR\acloudId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\t\"\xd3\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x12\n" +
 	"\x17AdvancedRateLimiterRule\x12\x80\x01\n" +
 	"\fstatic_quota\x18\x05 \x01(\v2[.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuotaH\x00R\vstaticQuota\x12\x83\x01\n" +
 	"\rdynamic_quota\x18\x06 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuotaH\x00R\fdynamicQuota\x12>\n" +
@@ -880,22 +891,23 @@ var file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_li
 	5,  // 0: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfile.LabelsEntry
 	4,  // 1: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfile.advanced_rate_limiter_rules:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule
 	11, // 2: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfile.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 3: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.static_quota:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota
-	7,  // 4: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.dynamic_quota:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota
-	0,  // 5: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota.action:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.Action
-	12, // 6: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	0,  // 7: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.action:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.Action
-	12, // 8: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	8,  // 9: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.characteristics:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic
-	9,  // 10: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.simple_characteristic:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic
-	10, // 11: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.key_characteristic:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic
-	1,  // 12: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic.type:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic.Type
-	2,  // 13: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic.type:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic.Type
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	11, // 3: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterProfile.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 4: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.static_quota:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota
+	7,  // 5: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.dynamic_quota:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota
+	0,  // 6: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota.action:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.Action
+	12, // 7: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuota.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	0,  // 8: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.action:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.Action
+	12, // 9: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	8,  // 10: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.characteristics:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic
+	9,  // 11: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.simple_characteristic:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic
+	10, // 12: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.key_characteristic:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic
+	1,  // 13: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic.type:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristic.Type
+	2,  // 14: yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic.type:type_name -> yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristic.Type
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() {

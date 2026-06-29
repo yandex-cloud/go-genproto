@@ -168,6 +168,28 @@ func (m *Metastore_HiveMetastore) SetManagedClusterId(v string) {
 	}
 }
 
+func (m *Metastore_HiveMetastore) SetProtocol(v *Metastore_HiveMetastore_Protocol) {
+	m.Protocol = v
+}
+
+type Metastore_HiveMetastore_Protocol_Type = isMetastore_HiveMetastore_Protocol_Type
+
+func (m *Metastore_HiveMetastore_Protocol) SetType(v Metastore_HiveMetastore_Protocol_Type) {
+	m.Type = v
+}
+
+func (m *Metastore_HiveMetastore_Protocol) SetThrift(v *Metastore_HiveMetastore_Protocol_Thrift) {
+	m.Type = &Metastore_HiveMetastore_Protocol_Thrift_{
+		Thrift: v,
+	}
+}
+
+func (m *Metastore_HiveMetastore_Protocol) SetRest(v *Metastore_HiveMetastore_Protocol_IcebergRest) {
+	m.Type = &Metastore_HiveMetastore_Protocol_Rest{
+		Rest: v,
+	}
+}
+
 func (m *Metastore_RestMetastore) SetUri(v string) {
 	m.Uri = v
 }

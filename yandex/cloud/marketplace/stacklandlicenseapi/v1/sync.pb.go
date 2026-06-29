@@ -461,10 +461,6 @@ func (x *License) GetSignature() string {
 // Request to synchronize licenses and submit usage data
 type SyncRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Organization ID
-	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Billing account ID
-	BillingAccountId string `protobuf:"bytes,2,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// License server ID
 	LicenseServerId string `protobuf:"bytes,3,opt,name=license_server_id,json=licenseServerId,proto3" json:"license_server_id,omitempty"`
 	// Usage data for audit
@@ -501,20 +497,6 @@ func (x *SyncRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use SyncRequest.ProtoReflect.Descriptor instead.
 func (*SyncRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *SyncRequest) GetOrganizationId() string {
-	if x != nil {
-		return x.OrganizationId
-	}
-	return ""
-}
-
-func (x *SyncRequest) GetBillingAccountId() string {
-	if x != nil {
-		return x.BillingAccountId
-	}
-	return ""
 }
 
 func (x *SyncRequest) GetLicenseServerId() string {
@@ -696,13 +678,11 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\vvalid_until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"validUntil\x12U\n" +
 	"\x06limits\x18\a \x03(\v2=.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimitR\x06limits\x12\x1c\n" +
-	"\tsignature\x18\b \x01(\tR\tsignature\"\x9a\x02\n" +
-	"\vSyncRequest\x125\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12:\n" +
-	"\x12billing_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x129\n" +
+	"\tsignature\x18\b \x01(\tR\tsignature\"\xd2\x01\n" +
+	"\vSyncRequest\x129\n" +
 	"\x11license_server_id\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0flicenseServerId\x12]\n" +
 	"\x05usage\x18\x04 \x03(\v2;.yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntryB\n" +
-	"\x82\xc81\x06<=1000R\x05usage\"\xdf\x01\n" +
+	"\x82\xc81\x06<=1000R\x05usageJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\xdf\x01\n" +
 	"\x0fSyncUsageResult\x12T\n" +
 	"\blicenses\x18\x01 \x03(\v28.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseR\blicenses\x12\\\n" +
 	"\vsync_status\x18\x02 \x01(\x0e2;.yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatusR\n" +

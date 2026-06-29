@@ -175,12 +175,18 @@ type PresetItem struct {
 	Title string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	// Selected infra event values
 	InfraValues []*InfraPresetValue `protobuf:"bytes,2,rep,name=infra_values,json=infraValues,proto3" json:"infra_values,omitempty"`
+	// Is infra event values exist. Set the flag to true if you want to show that the value is []
+	InfraValuesExist bool `protobuf:"varint,5,opt,name=infra_values_exist,json=infraValuesExist,proto3" json:"infra_values_exist,omitempty"`
 	// Selected dashboard parameter values
 	ParameterValues []*ParameterPresetValue `protobuf:"bytes,3,rep,name=parameter_values,json=parameterValues,proto3" json:"parameter_values,omitempty"`
+	// Is parameter values exist. Set the flag to true if you want to show that the value is []
+	ParameterValuesExist bool `protobuf:"varint,6,opt,name=parameter_values_exist,json=parameterValuesExist,proto3" json:"parameter_values_exist,omitempty"`
 	// Selected logs overlay values
 	LogsOverlayValues []*LogsOverlayPresetValue `protobuf:"bytes,4,rep,name=logs_overlay_values,json=logsOverlayValues,proto3" json:"logs_overlay_values,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Is logs overlay values exist. Set the flag to true if you want to show that the value is []
+	LogsOverlayValuesExist bool `protobuf:"varint,7,opt,name=logs_overlay_values_exist,json=logsOverlayValuesExist,proto3" json:"logs_overlay_values_exist,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PresetItem) Reset() {
@@ -227,6 +233,13 @@ func (x *PresetItem) GetInfraValues() []*InfraPresetValue {
 	return nil
 }
 
+func (x *PresetItem) GetInfraValuesExist() bool {
+	if x != nil {
+		return x.InfraValuesExist
+	}
+	return false
+}
+
 func (x *PresetItem) GetParameterValues() []*ParameterPresetValue {
 	if x != nil {
 		return x.ParameterValues
@@ -234,11 +247,25 @@ func (x *PresetItem) GetParameterValues() []*ParameterPresetValue {
 	return nil
 }
 
+func (x *PresetItem) GetParameterValuesExist() bool {
+	if x != nil {
+		return x.ParameterValuesExist
+	}
+	return false
+}
+
 func (x *PresetItem) GetLogsOverlayValues() []*LogsOverlayPresetValue {
 	if x != nil {
 		return x.LogsOverlayValues
 	}
 	return nil
+}
+
+func (x *PresetItem) GetLogsOverlayValuesExist() bool {
+	if x != nil {
+		return x.LogsOverlayValuesExist
+	}
+	return false
 }
 
 var File_yandex_cloud_monitoring_v3_preset_item_proto protoreflect.FileDescriptor
@@ -253,13 +280,16 @@ const file_yandex_cloud_monitoring_v3_preset_item_proto_rawDesc = "" +
 	"\x0eparameter_name\x18\x01 \x01(\tR\rparameterName\x12\x14\n" +
 	"\x05value\x18\x02 \x03(\tR\x05value\",\n" +
 	"\x16LogsOverlayPresetValue\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xb4\x02\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xd3\x03\n" +
 	"\n" +
 	"PresetItem\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12O\n" +
-	"\finfra_values\x18\x02 \x03(\v2,.yandex.cloud.monitoring.v3.InfraPresetValueR\vinfraValues\x12[\n" +
-	"\x10parameter_values\x18\x03 \x03(\v20.yandex.cloud.monitoring.v3.ParameterPresetValueR\x0fparameterValues\x12b\n" +
-	"\x13logs_overlay_values\x18\x04 \x03(\v22.yandex.cloud.monitoring.v3.LogsOverlayPresetValueR\x11logsOverlayValuesBk\n" +
+	"\finfra_values\x18\x02 \x03(\v2,.yandex.cloud.monitoring.v3.InfraPresetValueR\vinfraValues\x12,\n" +
+	"\x12infra_values_exist\x18\x05 \x01(\bR\x10infraValuesExist\x12[\n" +
+	"\x10parameter_values\x18\x03 \x03(\v20.yandex.cloud.monitoring.v3.ParameterPresetValueR\x0fparameterValues\x124\n" +
+	"\x16parameter_values_exist\x18\x06 \x01(\bR\x14parameterValuesExist\x12b\n" +
+	"\x13logs_overlay_values\x18\x04 \x03(\v22.yandex.cloud.monitoring.v3.LogsOverlayPresetValueR\x11logsOverlayValues\x129\n" +
+	"\x19logs_overlay_values_exist\x18\a \x01(\bR\x16logsOverlayValuesExistBk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
 var (

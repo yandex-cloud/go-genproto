@@ -35,6 +35,10 @@ func (m *AdvancedRateLimiterProfile) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
 
+func (m *AdvancedRateLimiterProfile) SetUpdatedAt(v *timestamppb.Timestamp) {
+	m.UpdatedAt = v
+}
+
 func (m *AdvancedRateLimiterProfile) SetCloudId(v string) {
 	m.CloudId = v
 }

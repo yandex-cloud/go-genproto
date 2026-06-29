@@ -10,14 +10,6 @@ func (m *LicenseServerMetadata) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
-func (m *RegisterRequest) SetOrganizationId(v string) {
-	m.OrganizationId = v
-}
-
-func (m *RegisterRequest) SetBillingAccountId(v string) {
-	m.BillingAccountId = v
-}
-
 func (m *RegisterRequest) SetMetadata(v *LicenseServerMetadata) {
 	m.Metadata = v
 }

@@ -260,6 +260,8 @@ type WafProfile struct {
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Update timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	// Settings for each rule in rule set.
 	Rules []*WafProfileRule `protobuf:"bytes,9,rep,name=rules,proto3" json:"rules,omitempty"`
 	// List of exclusion rules. See [Rules](/docs/smartwebsecurity/concepts/waf#exclusion-rules).
@@ -368,6 +370,13 @@ func (x *WafProfile) GetLabels() map[string]string {
 func (x *WafProfile) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *WafProfile) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return nil
 }
@@ -1541,7 +1550,7 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto protoreflect.Fil
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\xe5\x18\n" +
+	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\x9a\x19\n" +
 	"\n" +
 	"WafProfile\x12f\n" +
 	"\rcore_rule_set\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetB\x02\x18\x01H\x00R\vcoreRuleSet\x12\x14\n" +
@@ -1552,7 +1561,9 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x91\x01\n" +
 	"\x06labels\x18\x06 \x03(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x129\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12J\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12J\n" +
 	"\x05rules\x18\t \x03(\v24.yandex.cloud.smartwebsecurity.v1.waf.WafProfileRuleR\x05rules\x12f\n" +
 	"\x0fexclusion_rules\x18\n" +
 	" \x03(\v2=.yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRuleR\x0eexclusionRules\x12y\n" +
@@ -1614,7 +1625,7 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x10\n" +
-	"\brule_set\x12\x04\xc0\xc11\x01J\x04\b\b\x10\t\"o\n" +
+	"\brule_set\x12\x04\xc0\xc11\x01\"o\n" +
 	"\x0eWafProfileRule\x12\x1d\n" +
 	"\arule_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06ruleId\x12\x1d\n" +
 	"\n" +
@@ -1711,39 +1722,40 @@ var file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_depIdxs = []int3
 	8,  // 0: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet
 	11, // 1: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.labels:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.LabelsEntry
 	23, // 2: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.created_at:type_name -> google.protobuf.Timestamp
-	5,  // 3: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
-	6,  // 4: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.exclusion_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
-	9,  // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
-	10, // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rule_sets:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet
-	24, // 7: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
-	16, // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.exclude_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
-	17, // 9: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.request_condition:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition
-	3,  // 10: yandex.cloud.smartwebsecurity.v1.waf.RuleSet.type:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet.RuleSetType
-	7,  // 11: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	0,  // 12: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
-	13, // 13: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet
-	14, // 14: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ya_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet
-	15, // 15: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ml_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet
-	1,  // 16: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleSetAction
-	2,  // 17: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.Action
-	7,  // 18: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	7,  // 19: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	12, // 20: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
-	7,  // 21: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
-	12, // 22: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
-	19, // 23: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.param_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.RequestParamMatcher
-	20, // 24: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.header_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.HeaderMatcher
-	21, // 25: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.cookie_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.CookieMatcher
-	22, // 26: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.body_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.BodyMatcher
-	18, // 27: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.RequestParamMatcher.param_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
-	18, // 28: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.HeaderMatcher.header_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
-	18, // 29: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.CookieMatcher.cookie_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
-	18, // 30: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.BodyMatcher.body_values:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	23, // 3: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 4: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileRule
+	6,  // 5: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.exclusion_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule
+	9,  // 6: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.analyze_request_body:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody
+	10, // 7: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.rule_sets:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet
+	24, // 8: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.condition:type_name -> yandex.cloud.smartwebsecurity.v1.Condition
+	16, // 9: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.exclude_rules:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.ExcludeRules
+	17, // 10: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.request_condition:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition
+	3,  // 11: yandex.cloud.smartwebsecurity.v1.waf.RuleSet.type:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet.RuleSetType
+	7,  // 12: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	0,  // 13: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.size_limit_action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.AnalyzeRequestBody.Action
+	13, // 14: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.core_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet
+	14, // 15: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ya_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet
+	15, // 16: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.ml_rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet
+	1,  // 17: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleSetAction
+	2,  // 18: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.action:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup.Action
+	7,  // 19: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileCoreRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	7,  // 20: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	12, // 21: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileYaRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
+	7,  // 22: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_set:type_name -> yandex.cloud.smartwebsecurity.v1.waf.RuleSet
+	12, // 23: yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.WafProfileMlRuleSet.rule_groups:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfile.WafProfileRuleSet.RuleGroup
+	19, // 24: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.param_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.RequestParamMatcher
+	20, // 25: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.header_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.HeaderMatcher
+	21, // 26: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.cookie_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.CookieMatcher
+	22, // 27: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.body_matcher:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.BodyMatcher
+	18, // 28: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.RequestParamMatcher.param_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
+	18, // 29: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.HeaderMatcher.header_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
+	18, // 30: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.CookieMatcher.cookie_names:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
+	18, // 31: yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.BodyMatcher.body_values:type_name -> yandex.cloud.smartwebsecurity.v1.waf.WafProfileExclusionRule.RequestCondition.StringMatcher
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_init() }

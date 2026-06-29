@@ -74,6 +74,14 @@ func (m *Job) SetConnectUrl(v string) {
 	m.ConnectUrl = v
 }
 
+func (m *Job) SetEnvironmentId(v string) {
+	m.EnvironmentId = v
+}
+
+func (m *Job) SetEnvironmentBuildRevision(v int64) {
+	m.EnvironmentBuildRevision = v
+}
+
 func (m *SparkJob) SetArgs(v []string) {
 	m.Args = v
 }

@@ -127,6 +127,10 @@ func (m *UpdateClusterConfigSpec) SetDagProcessor(v *DagProcessorConfig) {
 	m.DagProcessor = v
 }
 
+func (m *UpdateClusterConfigSpec) SetDatacatalog(v *DatacatalogConfig) {
+	m.Datacatalog = v
+}
+
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }

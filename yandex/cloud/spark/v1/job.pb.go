@@ -129,9 +129,13 @@ type Job struct {
 	// Service account used to access Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,13,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Spark Connect Url.
-	ConnectUrl    string `protobuf:"bytes,14,opt,name=connect_url,json=connectUrl,proto3" json:"connect_url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ConnectUrl string `protobuf:"bytes,14,opt,name=connect_url,json=connectUrl,proto3" json:"connect_url,omitempty"`
+	// Job Environment ID.
+	EnvironmentId string `protobuf:"bytes,21,opt,name=environment_id,json=environmentId,proto3" json:"environment_id,omitempty"`
+	// Environment build revision.
+	EnvironmentBuildRevision int64 `protobuf:"varint,22,opt,name=environment_build_revision,json=environmentBuildRevision,proto3" json:"environment_build_revision,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Job) Reset() {
@@ -273,6 +277,20 @@ func (x *Job) GetConnectUrl() string {
 		return x.ConnectUrl
 	}
 	return ""
+}
+
+func (x *Job) GetEnvironmentId() string {
+	if x != nil {
+		return x.EnvironmentId
+	}
+	return ""
+}
+
+func (x *Job) GetEnvironmentBuildRevision() int64 {
+	if x != nil {
+		return x.EnvironmentBuildRevision
+	}
+	return 0
 }
 
 type isJob_JobSpec interface {
@@ -658,7 +676,7 @@ var File_yandex_cloud_spark_v1_job_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\n" +
-	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd8\x06\n" +
+	"\x1fyandex/cloud/spark/v1/job.proto\x12\x15yandex.cloud.spark.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc7\a\n" +
 	"\x03Job\x12\x1c\n" +
 	"\x02id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x02id\x12+\n" +
 	"\n" +
@@ -681,7 +699,9 @@ const file_yandex_cloud_spark_v1_job_proto_rawDesc = "" +
 	"\x06ui_url\x18\f \x01(\tR\x05uiUrl\x126\n" +
 	"\x12service_account_id\x18\r \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12\x1f\n" +
 	"\vconnect_url\x18\x0e \x01(\tR\n" +
-	"connectUrl\"\x80\x01\n" +
+	"connectUrl\x12/\n" +
+	"\x0eenvironment_id\x18\x15 \x01(\tB\b\x8a\xc81\x04<=50R\renvironmentId\x12<\n" +
+	"\x1aenvironment_build_revision\x18\x16 \x01(\x03R\x18environmentBuildRevision\"\x80\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVISIONING\x10\x01\x12\v\n" +

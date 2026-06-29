@@ -7,7 +7,6 @@
 package stacklandlicenseapi
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -72,10 +71,6 @@ func (x *LicenseServerMetadata) GetLabels() map[string]string {
 // Request to register a license server
 type RegisterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Organization ID
-	OrganizationId string `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	// Billing account ID
-	BillingAccountId string `protobuf:"bytes,2,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// Optional metadata for the license server
 	Metadata      *LicenseServerMetadata `protobuf:"bytes,3,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -110,20 +105,6 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *RegisterRequest) GetOrganizationId() string {
-	if x != nil {
-		return x.OrganizationId
-	}
-	return ""
-}
-
-func (x *RegisterRequest) GetBillingAccountId() string {
-	if x != nil {
-		return x.BillingAccountId
-	}
-	return ""
 }
 
 func (x *RegisterRequest) GetMetadata() *LicenseServerMetadata {
@@ -274,16 +255,14 @@ var File_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto pr
 
 const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_rawDesc = "" +
 	"\n" +
-	"Dyandex/cloud/marketplace/stacklandlicenseapi/v1/license_server.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xbe\x01\n" +
+	"Dyandex/cloud/marketplace/stacklandlicenseapi/v1/license_server.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbe\x01\n" +
 	"\x15LicenseServerMetadata\x12j\n" +
 	"\x06labels\x18\x01 \x03(\v2R.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadata.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe8\x01\n" +
-	"\x0fRegisterRequest\x125\n" +
-	"\x0forganization_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eorganizationId\x12:\n" +
-	"\x12billing_account_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10billingAccountId\x12b\n" +
-	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadata\"\xee\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa0\x01\n" +
+	"\x0fRegisterRequest\x12b\n" +
+	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadataJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\xee\x01\n" +
 	"\rLicenseServer\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12*\n" +
 	"\x11ls_ca_certificate\x18\x02 \x01(\tR\x0flsCaCertificate\x12$\n" +

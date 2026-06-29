@@ -118,6 +118,10 @@ func (m *ClusterConfig) SetSparkVersion(v string) {
 	m.SparkVersion = v
 }
 
+func (m *ClusterConfig) SetEnvironmentId(v string) {
+	m.EnvironmentId = v
+}
+
 func (m *UpdateClusterConfigSpec) SetResourcePools(v *ResourcePools) {
 	m.ResourcePools = v
 }
@@ -136,6 +140,10 @@ func (m *UpdateClusterConfigSpec) SetMetastore(v *Metastore) {
 
 func (m *UpdateClusterConfigSpec) SetSparkVersion(v string) {
 	m.SparkVersion = v
+}
+
+func (m *UpdateClusterConfigSpec) SetEnvironmentId(v string) {
+	m.EnvironmentId = v
 }
 
 func (m *HistoryServerConfig) SetEnabled(v bool) {
