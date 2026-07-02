@@ -3,6 +3,7 @@
 package cdn
 
 import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -58,10 +59,6 @@ func (m *GetResourceRuleRequest) SetRuleId(v int64) {
 	m.RuleId = v
 }
 
-func (m *UpdateResourceRuleRequest) SetWeight(v *int64) {
-	m.Weight = v
-}
-
 func (m *UpdateResourceRuleRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
@@ -82,12 +79,20 @@ func (m *UpdateResourceRuleRequest) SetOptions(v *ResourceOptions) {
 	m.Options = v
 }
 
+func (m *UpdateResourceRuleRequest) SetWeight(v *int64) {
+	m.Weight = v
+}
+
 func (m *UpdateResourceRuleRequest) SetOriginsGroupId(v *wrapperspb.Int64Value) {
 	m.OriginsGroupId = v
 }
 
 func (m *UpdateResourceRuleRequest) SetOriginProtocol(v OriginProtocol) {
 	m.OriginProtocol = v
+}
+
+func (m *UpdateResourceRuleRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
 }
 
 func (m *UpdateResourceRuleMetadata) SetResourceId(v string) {

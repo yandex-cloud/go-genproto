@@ -8,6 +8,7 @@ package mongodb
 
 import (
 	context "context"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,6 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	BackupRetentionPolicyService_Get_FullMethodName          = "/yandex.cloud.mdb.mongodb.v1.BackupRetentionPolicyService/Get"
 	BackupRetentionPolicyService_List_FullMethodName         = "/yandex.cloud.mdb.mongodb.v1.BackupRetentionPolicyService/List"
 	BackupRetentionPolicyService_ListByFolder_FullMethodName = "/yandex.cloud.mdb.mongodb.v1.BackupRetentionPolicyService/ListByFolder"
 	BackupRetentionPolicyService_Create_FullMethodName       = "/yandex.cloud.mdb.mongodb.v1.BackupRetentionPolicyService/Create"
@@ -31,6 +33,8 @@ const (
 //
 // A set of methods for managing MongoDB Cluster backup retention policies.
 type BackupRetentionPolicyServiceClient interface {
+	// Get a retention policy by ID.
+	Get(ctx context.Context, in *GetBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*v1.BackupRetentionPolicy, error)
 	// List all retention policies.
 	List(ctx context.Context, in *ListBackupRetentionPoliciesRequest, opts ...grpc.CallOption) (*ListBackupRetentionPoliciesResponse, error)
 	// List all retention policies for all clusters in a folder.
@@ -47,6 +51,16 @@ type backupRetentionPolicyServiceClient struct {
 
 func NewBackupRetentionPolicyServiceClient(cc grpc.ClientConnInterface) BackupRetentionPolicyServiceClient {
 	return &backupRetentionPolicyServiceClient{cc}
+}
+
+func (c *backupRetentionPolicyServiceClient) Get(ctx context.Context, in *GetBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*v1.BackupRetentionPolicy, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.BackupRetentionPolicy)
+	err := c.cc.Invoke(ctx, BackupRetentionPolicyService_Get_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *backupRetentionPolicyServiceClient) List(ctx context.Context, in *ListBackupRetentionPoliciesRequest, opts ...grpc.CallOption) (*ListBackupRetentionPoliciesResponse, error) {
@@ -95,6 +109,8 @@ func (c *backupRetentionPolicyServiceClient) Delete(ctx context.Context, in *Del
 //
 // A set of methods for managing MongoDB Cluster backup retention policies.
 type BackupRetentionPolicyServiceServer interface {
+	// Get a retention policy by ID.
+	Get(context.Context, *GetBackupRetentionPolicyRequest) (*v1.BackupRetentionPolicy, error)
 	// List all retention policies.
 	List(context.Context, *ListBackupRetentionPoliciesRequest) (*ListBackupRetentionPoliciesResponse, error)
 	// List all retention policies for all clusters in a folder.
@@ -112,6 +128,9 @@ type BackupRetentionPolicyServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedBackupRetentionPolicyServiceServer struct{}
 
+func (UnimplementedBackupRetentionPolicyServiceServer) Get(context.Context, *GetBackupRetentionPolicyRequest) (*v1.BackupRetentionPolicy, error) {
+	return nil, status.Error(codes.Unimplemented, "method Get not implemented")
+}
 func (UnimplementedBackupRetentionPolicyServiceServer) List(context.Context, *ListBackupRetentionPoliciesRequest) (*ListBackupRetentionPoliciesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
@@ -142,6 +161,24 @@ func RegisterBackupRetentionPolicyServiceServer(s grpc.ServiceRegistrar, srv Bac
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&BackupRetentionPolicyService_ServiceDesc, srv)
+}
+
+func _BackupRetentionPolicyService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackupRetentionPolicyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BackupRetentionPolicyServiceServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BackupRetentionPolicyService_Get_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BackupRetentionPolicyServiceServer).Get(ctx, req.(*GetBackupRetentionPolicyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _BackupRetentionPolicyService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -223,6 +260,10 @@ var BackupRetentionPolicyService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "yandex.cloud.mdb.mongodb.v1.BackupRetentionPolicyService",
 	HandlerType: (*BackupRetentionPolicyServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Get",
+			Handler:    _BackupRetentionPolicyService_Get_Handler,
+		},
 		{
 			MethodName: "List",
 			Handler:    _BackupRetentionPolicyService_List_Handler,

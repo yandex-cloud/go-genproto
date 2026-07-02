@@ -49,3 +49,7 @@ func (m *Registry) SetCreatedAt(v *timestamppb.Timestamp) {
 func (m *Registry) SetModifiedAt(v *timestamppb.Timestamp) {
 	m.ModifiedAt = v
 }
+
+func (m *Registry) SetPatternFilter(v *PatternFilter) {
+	m.PatternFilter = v
+}

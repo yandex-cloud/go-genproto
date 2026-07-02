@@ -6,6 +6,14 @@ import (
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 )
 
+func (m *GetBackupRetentionPolicyRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *GetBackupRetentionPolicyRequest) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
 func (m *ListBackupRetentionPoliciesRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

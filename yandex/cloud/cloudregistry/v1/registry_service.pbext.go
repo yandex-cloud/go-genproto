@@ -58,6 +58,10 @@ func (m *CreateRegistryRequest) SetProperties(v map[string]string) {
 	m.Properties = v
 }
 
+func (m *CreateRegistryRequest) SetPatternFilter(v *PatternFilter) {
+	m.PatternFilter = v
+}
+
 func (m *CreateRegistryMetadata) SetRegistryId(v string) {
 	m.RegistryId = v
 }
@@ -84,6 +88,10 @@ func (m *UpdateRegistryRequest) SetDescription(v string) {
 
 func (m *UpdateRegistryRequest) SetProperties(v map[string]string) {
 	m.Properties = v
+}
+
+func (m *UpdateRegistryRequest) SetPatternFilter(v *PatternFilter) {
+	m.PatternFilter = v
 }
 
 func (m *UpdateRegistryMetadata) SetRegistryId(v string) {

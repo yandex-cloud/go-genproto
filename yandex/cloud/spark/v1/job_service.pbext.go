@@ -70,6 +70,10 @@ func (m *CreateJobRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }
 
+func (m *CreateJobRequest) SetEnvironmentId(v string) {
+	m.EnvironmentId = v
+}
+
 func (m *CreateJobMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

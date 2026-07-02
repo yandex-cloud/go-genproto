@@ -226,8 +226,10 @@ type CreateJobRequest struct {
 	JobSpec isCreateJobRequest_JobSpec `protobuf_oneof:"job_spec"`
 	// Service account used to access Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,8,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Job Environment ID.
+	EnvironmentId string `protobuf:"bytes,9,opt,name=environment_id,json=environmentId,proto3" json:"environment_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateJobRequest) Reset() {
@@ -315,19 +317,29 @@ func (x *CreateJobRequest) GetServiceAccountId() string {
 	return ""
 }
 
+func (x *CreateJobRequest) GetEnvironmentId() string {
+	if x != nil {
+		return x.EnvironmentId
+	}
+	return ""
+}
+
 type isCreateJobRequest_JobSpec interface {
 	isCreateJobRequest_JobSpec()
 }
 
 type CreateJobRequest_SparkJob struct {
+	// Spark job specification.
 	SparkJob *SparkJob `protobuf:"bytes,3,opt,name=spark_job,json=sparkJob,proto3,oneof"`
 }
 
 type CreateJobRequest_PysparkJob struct {
+	// PySpark job specification.
 	PysparkJob *PysparkJob `protobuf:"bytes,4,opt,name=pyspark_job,json=pysparkJob,proto3,oneof"`
 }
 
 type CreateJobRequest_SparkConnectJob struct {
+	// Spark Connect job specification.
 	SparkConnectJob *SparkConnectJob `protobuf:"bytes,5,opt,name=spark_connect_job,json=sparkConnectJob,proto3,oneof"`
 }
 
@@ -599,7 +611,7 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"u\n" +
 	"\x10ListJobsResponse\x12.\n" +
 	"\x04jobs\x18\x01 \x03(\v2\x1a.yandex.cloud.spark.v1.JobR\x04jobs\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xa4\x03\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken\"\xd5\x03\n" +
 	"\x10CreateJobRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12=\n" +
@@ -608,7 +620,8 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\vpyspark_job\x18\x04 \x01(\v2!.yandex.cloud.spark.v1.PysparkJobH\x00R\n" +
 	"pysparkJob\x12T\n" +
 	"\x11spark_connect_job\x18\x05 \x01(\v2&.yandex.cloud.spark.v1.SparkConnectJobH\x00R\x0fsparkConnectJob\x126\n" +
-	"\x12service_account_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountIdB\n" +
+	"\x12service_account_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\x10serviceAccountId\x12/\n" +
+	"\x0eenvironment_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\renvironmentIdB\n" +
 	"\n" +
 	"\bjob_specJ\x04\b\x06\x10\b\"a\n" +
 	"\x11CreateJobMetadata\x12+\n" +

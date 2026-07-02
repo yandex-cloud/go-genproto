@@ -235,7 +235,9 @@ type Registry struct {
 	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Output only. Modification timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
-	ModifiedAt    *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
+	ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
+	// Pattern filters for artifacts in the registry.
+	PatternFilter *PatternFilter `protobuf:"bytes,12,opt,name=pattern_filter,json=patternFilter,proto3" json:"pattern_filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -347,11 +349,18 @@ func (x *Registry) GetModifiedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Registry) GetPatternFilter() *PatternFilter {
+	if x != nil {
+		return x.PatternFilter
+	}
+	return nil
+}
+
 var File_yandex_cloud_cloudregistry_v1_registry_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe2\a\n" +
+	",yandex/cloud/cloudregistry/v1/registry.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/cloudregistry/v1/pattern_filter.proto\"\xb7\b\n" +
 	"\bRegistry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x12\n" +
@@ -368,7 +377,8 @@ const file_yandex_cloud_cloudregistry_v1_registry_proto_rawDesc = "" +
 	"created_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12;\n" +
 	"\vmodified_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"modifiedAt\x1a9\n" +
+	"modifiedAt\x12S\n" +
+	"\x0epattern_filter\x18\f \x01(\v2,.yandex.cloud.cloudregistry.v1.PatternFilterR\rpatternFilter\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a=\n" +
@@ -425,6 +435,7 @@ var file_yandex_cloud_cloudregistry_v1_registry_proto_goTypes = []any{
 	nil,                           // 4: yandex.cloud.cloudregistry.v1.Registry.LabelsEntry
 	nil,                           // 5: yandex.cloud.cloudregistry.v1.Registry.PropertiesEntry
 	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*PatternFilter)(nil),         // 7: yandex.cloud.cloudregistry.v1.PatternFilter
 }
 var file_yandex_cloud_cloudregistry_v1_registry_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.cloudregistry.v1.Registry.kind:type_name -> yandex.cloud.cloudregistry.v1.Registry.Kind
@@ -434,11 +445,12 @@ var file_yandex_cloud_cloudregistry_v1_registry_proto_depIdxs = []int32{
 	5, // 4: yandex.cloud.cloudregistry.v1.Registry.properties:type_name -> yandex.cloud.cloudregistry.v1.Registry.PropertiesEntry
 	6, // 5: yandex.cloud.cloudregistry.v1.Registry.created_at:type_name -> google.protobuf.Timestamp
 	6, // 6: yandex.cloud.cloudregistry.v1.Registry.modified_at:type_name -> google.protobuf.Timestamp
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7, // 7: yandex.cloud.cloudregistry.v1.Registry.pattern_filter:type_name -> yandex.cloud.cloudregistry.v1.PatternFilter
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cloudregistry_v1_registry_proto_init() }
@@ -446,6 +458,7 @@ func file_yandex_cloud_cloudregistry_v1_registry_proto_init() {
 	if File_yandex_cloud_cloudregistry_v1_registry_proto != nil {
 		return
 	}
+	file_yandex_cloud_cloudregistry_v1_pattern_filter_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

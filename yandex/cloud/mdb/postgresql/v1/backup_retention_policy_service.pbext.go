@@ -2,6 +2,14 @@
 
 package postgresql
 
+func (m *GetBackupRetentionPolicyRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *GetBackupRetentionPolicyRequest) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
 func (m *ListBackupRetentionPoliciesRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
