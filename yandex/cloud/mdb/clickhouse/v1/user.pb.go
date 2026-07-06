@@ -229,6 +229,11 @@ const (
 	UserSettings_LOAD_BALANCING_FIRST_OR_RANDOM UserSettings_LoadBalancing = 4
 	// Cycle through replicas sequentially in a round-robin fashion.
 	UserSettings_LOAD_BALANCING_ROUND_ROBIN UserSettings_LoadBalancing = 5
+	// Like **LOAD_BALANCING_NEAREST_HOSTNAME**, but the replica whose hostname shares the longest common prefix with the local hostname
+	// is preferred (the longer the common prefix, the higher the priority).
+	UserSettings_LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX UserSettings_LoadBalancing = 6
+	// Like **LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX**, but the longest common suffix is compared instead of the prefix.
+	UserSettings_LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_SUFFIX UserSettings_LoadBalancing = 7
 )
 
 // Enum value maps for UserSettings_LoadBalancing.
@@ -240,14 +245,18 @@ var (
 		3: "LOAD_BALANCING_IN_ORDER",
 		4: "LOAD_BALANCING_FIRST_OR_RANDOM",
 		5: "LOAD_BALANCING_ROUND_ROBIN",
+		6: "LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX",
+		7: "LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_SUFFIX",
 	}
 	UserSettings_LoadBalancing_value = map[string]int32{
-		"LOAD_BALANCING_UNSPECIFIED":      0,
-		"LOAD_BALANCING_RANDOM":           1,
-		"LOAD_BALANCING_NEAREST_HOSTNAME": 2,
-		"LOAD_BALANCING_IN_ORDER":         3,
-		"LOAD_BALANCING_FIRST_OR_RANDOM":  4,
-		"LOAD_BALANCING_ROUND_ROBIN":      5,
+		"LOAD_BALANCING_UNSPECIFIED":                    0,
+		"LOAD_BALANCING_RANDOM":                         1,
+		"LOAD_BALANCING_NEAREST_HOSTNAME":               2,
+		"LOAD_BALANCING_IN_ORDER":                       3,
+		"LOAD_BALANCING_FIRST_OR_RANDOM":                4,
+		"LOAD_BALANCING_ROUND_ROBIN":                    5,
+		"LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX": 6,
+		"LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_SUFFIX": 7,
 	}
 )
 
@@ -1333,7 +1342,7 @@ type UserSettings struct {
 	HedgedConnectionTimeoutMs *wrapperspb.Int64Value `protobuf:"bytes,143,opt,name=hedged_connection_timeout_ms,json=hedgedConnectionTimeoutMs,proto3" json:"hedged_connection_timeout_ms,omitempty"`
 	// Algorithm of replicas selection that is used for distributed query processing.
 	//
-	// Default value: **LOAD_BALANCING_RANDOM**.
+	// Default value: **LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX** for versions 26.6 and higher, **LOAD_BALANCING_RANDOM** for versions 26.5 and lower.
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#load_balancing).
 	LoadBalancing UserSettings_LoadBalancing `protobuf:"varint,144,opt,name=load_balancing,json=loadBalancing,proto3,enum=yandex.cloud.mdb.clickhouse.v1.UserSettings_LoadBalancing" json:"load_balancing,omitempty"`
@@ -3896,7 +3905,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"authMethod\"1\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"ș\x01\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"\xae\x9a\x01\n" +
 	"\fUserSettings\x127\n" +
 	"\breadonly\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\breadonly\x127\n" +
 	"\tallow_ddl\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\ballowDdl\x12^\n" +
@@ -4091,14 +4100,16 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"'DISTRIBUTED_DDL_OUTPUT_MODE_NEVER_THROW\x10\x04\x120\n" +
 	",DISTRIBUTED_DDL_OUTPUT_MODE_NONE_ONLY_ACTIVE\x10\x05\x12B\n" +
 	">DISTRIBUTED_DDL_OUTPUT_MODE_NULL_STATUS_ON_TIMEOUT_ONLY_ACTIVE\x10\x06\x121\n" +
-	"-DISTRIBUTED_DDL_OUTPUT_MODE_THROW_ONLY_ACTIVE\x10\a\"\xd0\x01\n" +
+	"-DISTRIBUTED_DDL_OUTPUT_MODE_THROW_ONLY_ACTIVE\x10\a\"\xb6\x02\n" +
 	"\rLoadBalancing\x12\x1e\n" +
 	"\x1aLOAD_BALANCING_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15LOAD_BALANCING_RANDOM\x10\x01\x12#\n" +
 	"\x1fLOAD_BALANCING_NEAREST_HOSTNAME\x10\x02\x12\x1b\n" +
 	"\x17LOAD_BALANCING_IN_ORDER\x10\x03\x12\"\n" +
 	"\x1eLOAD_BALANCING_FIRST_OR_RANDOM\x10\x04\x12\x1e\n" +
-	"\x1aLOAD_BALANCING_ROUND_ROBIN\x10\x05\"\x9d\x02\n" +
+	"\x1aLOAD_BALANCING_ROUND_ROBIN\x10\x05\x121\n" +
+	"-LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_PREFIX\x10\x06\x121\n" +
+	"-LOAD_BALANCING_HOSTNAME_LONGEST_COMMON_SUFFIX\x10\a\"\x9d\x02\n" +
 	"\x19LocalFilesystemReadMethod\x12,\n" +
 	"(LOCAL_FILESYSTEM_READ_METHOD_UNSPECIFIED\x10\x00\x12%\n" +
 	"!LOCAL_FILESYSTEM_READ_METHOD_READ\x10\x01\x121\n" +

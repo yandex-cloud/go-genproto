@@ -7,8 +7,13 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -20,6 +25,428 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type GetPrivateCloudConnectionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the Private cloud connection resource to return.
+	// To get the server ID, use a [PrivateCloudConnectionService.List] request.
+	PrivateCloudConnectionId string `protobuf:"bytes,3,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *GetPrivateCloudConnectionRequest) Reset() {
+	*x = GetPrivateCloudConnectionRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPrivateCloudConnectionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPrivateCloudConnectionRequest) ProtoMessage() {}
+
+func (x *GetPrivateCloudConnectionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPrivateCloudConnectionRequest.ProtoReflect.Descriptor instead.
+func (*GetPrivateCloudConnectionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetPrivateCloudConnectionRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *GetPrivateCloudConnectionRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *GetPrivateCloudConnectionRequest) GetPrivateCloudConnectionId() string {
+	if x != nil {
+		return x.PrivateCloudConnectionId
+	}
+	return ""
+}
+
+type ListPrivateCloudConnectionsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the folder to list private cloud connections in.
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListPrivateCloudConnectionResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListPrivateCloudConnectionResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Sorting order for the listing. Follows the [AIP-132](https://google.aip.dev/132) `order_by` format:
+	// `"field [asc|desc]"`, e.g. `"createTime desc"`.
+	//
+	// Supported fields: `privateCloudConnectionId`, `createTime`, `updateTime`.
+	// Default order: `privateCloudConnectionId asc`.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// Filter expression following [AIP-160](https://google.aip.dev/160).
+	//
+	// Supported fields and operators:
+	// - `privateCloudConnectionId`, `name`, `vrfId`, `routingInstanceId` - `=`, `!=`, `:` (contains)
+	// - `state` - `=`, `!=`
+	//
+	// Example: `state = "ACTIVE" AND vrfId = "enp1234abcd"`.
+	Filter        string `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPrivateCloudConnectionsRequest) Reset() {
+	*x = ListPrivateCloudConnectionsRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPrivateCloudConnectionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPrivateCloudConnectionsRequest) ProtoMessage() {}
+
+func (x *ListPrivateCloudConnectionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPrivateCloudConnectionsRequest.ProtoReflect.Descriptor instead.
+func (*ListPrivateCloudConnectionsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListPrivateCloudConnectionsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type ListPrivateCloudConnectionsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of Private cloud connection resources.
+	PrivateCloudConnections []*PrivateCloudConnection `protobuf:"bytes,1,rep,name=private_cloud_connections,json=privateCloudConnections,proto3" json:"private_cloud_connections,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListPrivateCloudConnectionRequest.page_size], use `next_page_token` as the value
+	// for the [ListPrivateCloudConnectionRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPrivateCloudConnectionsResponse) Reset() {
+	*x = ListPrivateCloudConnectionsResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPrivateCloudConnectionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPrivateCloudConnectionsResponse) ProtoMessage() {}
+
+func (x *ListPrivateCloudConnectionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPrivateCloudConnectionsResponse.ProtoReflect.Descriptor instead.
+func (*ListPrivateCloudConnectionsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListPrivateCloudConnectionsResponse) GetPrivateCloudConnections() []*PrivateCloudConnection {
+	if x != nil {
+		return x.PrivateCloudConnections
+	}
+	return nil
+}
+
+func (x *ListPrivateCloudConnectionsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreatePrivateCloudConnectionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The private cloud connection to create.
+	PrivateCloudConnection *PrivateCloudConnection `protobuf:"bytes,3,opt,name=private_cloud_connection,json=privateCloudConnection,proto3" json:"private_cloud_connection,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *CreatePrivateCloudConnectionRequest) Reset() {
+	*x = CreatePrivateCloudConnectionRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreatePrivateCloudConnectionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreatePrivateCloudConnectionRequest) ProtoMessage() {}
+
+func (x *CreatePrivateCloudConnectionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreatePrivateCloudConnectionRequest.ProtoReflect.Descriptor instead.
+func (*CreatePrivateCloudConnectionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreatePrivateCloudConnectionRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *CreatePrivateCloudConnectionRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *CreatePrivateCloudConnectionRequest) GetPrivateCloudConnection() *PrivateCloudConnection {
+	if x != nil {
+		return x.PrivateCloudConnection
+	}
+	return nil
+}
+
+type UpdatePrivateCloudConnectionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The private cloud connection object to be updated.
+	PrivateCloudConnection *PrivateCloudConnection `protobuf:"bytes,1,opt,name=private_cloud_connection,json=privateCloudConnection,proto3" json:"private_cloud_connection,omitempty"`
+	// Field mask that specifies which fields of the PrivateCloudConnection resource are going to be updated.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePrivateCloudConnectionRequest) Reset() {
+	*x = UpdatePrivateCloudConnectionRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePrivateCloudConnectionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePrivateCloudConnectionRequest) ProtoMessage() {}
+
+func (x *UpdatePrivateCloudConnectionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePrivateCloudConnectionRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePrivateCloudConnectionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdatePrivateCloudConnectionRequest) GetPrivateCloudConnection() *PrivateCloudConnection {
+	if x != nil {
+		return x.PrivateCloudConnection
+	}
+	return nil
+}
+
+func (x *UpdatePrivateCloudConnectionRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+type DeletePrivateCloudConnectionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the private cloud connection to delete.
+	// To get the private cloud connection ID, use a [PrivateCloudConnectionService.List] request.
+	PrivateCloudConnectionId string `protobuf:"bytes,3,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *DeletePrivateCloudConnectionRequest) Reset() {
+	*x = DeletePrivateCloudConnectionRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePrivateCloudConnectionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePrivateCloudConnectionRequest) ProtoMessage() {}
+
+func (x *DeletePrivateCloudConnectionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePrivateCloudConnectionRequest.ProtoReflect.Descriptor instead.
+func (*DeletePrivateCloudConnectionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeletePrivateCloudConnectionRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *DeletePrivateCloudConnectionRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *DeletePrivateCloudConnectionRequest) GetPrivateCloudConnectionId() string {
+	if x != nil {
+		return x.PrivateCloudConnectionId
+	}
+	return ""
+}
 
 type RestorePrivateCloudConnectionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -33,7 +460,7 @@ type RestorePrivateCloudConnectionMetadata struct {
 
 func (x *RestorePrivateCloudConnectionMetadata) Reset() {
 	*x = RestorePrivateCloudConnectionMetadata{}
-	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +472,7 @@ func (x *RestorePrivateCloudConnectionMetadata) String() string {
 func (*RestorePrivateCloudConnectionMetadata) ProtoMessage() {}
 
 func (x *RestorePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +485,7 @@ func (x *RestorePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use RestorePrivateCloudConnectionMetadata.ProtoReflect.Descriptor instead.
 func (*RestorePrivateCloudConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RestorePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() string {
@@ -87,7 +514,7 @@ type CreatePrivateCloudConnectionMetadata struct {
 
 func (x *CreatePrivateCloudConnectionMetadata) Reset() {
 	*x = CreatePrivateCloudConnectionMetadata{}
-	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -99,7 +526,7 @@ func (x *CreatePrivateCloudConnectionMetadata) String() string {
 func (*CreatePrivateCloudConnectionMetadata) ProtoMessage() {}
 
 func (x *CreatePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +539,7 @@ func (x *CreatePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use CreatePrivateCloudConnectionMetadata.ProtoReflect.Descriptor instead.
 func (*CreatePrivateCloudConnectionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *CreatePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() string {
@@ -129,17 +556,167 @@ func (x *CreatePrivateCloudConnectionMetadata) GetOperationMetadata() *Operation
 	return nil
 }
 
+type UpdatePrivateCloudConnectionMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Private cloud connection resource that is being update.
+	PrivateCloudConnectionId string `protobuf:"bytes,1,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
+	// Common operation metadata
+	OperationMetadata *OperationMetadata `protobuf:"bytes,2,opt,name=operation_metadata,json=operationMetadata,proto3" json:"operation_metadata,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *UpdatePrivateCloudConnectionMetadata) Reset() {
+	*x = UpdatePrivateCloudConnectionMetadata{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePrivateCloudConnectionMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePrivateCloudConnectionMetadata) ProtoMessage() {}
+
+func (x *UpdatePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePrivateCloudConnectionMetadata.ProtoReflect.Descriptor instead.
+func (*UpdatePrivateCloudConnectionMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdatePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() string {
+	if x != nil {
+		return x.PrivateCloudConnectionId
+	}
+	return ""
+}
+
+func (x *UpdatePrivateCloudConnectionMetadata) GetOperationMetadata() *OperationMetadata {
+	if x != nil {
+		return x.OperationMetadata
+	}
+	return nil
+}
+
+type DeletePrivateCloudConnectionMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Private cloud connection resource that is being deleted.
+	PrivateCloudConnectionId string `protobuf:"bytes,1,opt,name=private_cloud_connection_id,json=privateCloudConnectionId,proto3" json:"private_cloud_connection_id,omitempty"`
+	// Common operation metadata
+	OperationMetadata *OperationMetadata `protobuf:"bytes,2,opt,name=operation_metadata,json=operationMetadata,proto3" json:"operation_metadata,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *DeletePrivateCloudConnectionMetadata) Reset() {
+	*x = DeletePrivateCloudConnectionMetadata{}
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePrivateCloudConnectionMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePrivateCloudConnectionMetadata) ProtoMessage() {}
+
+func (x *DeletePrivateCloudConnectionMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePrivateCloudConnectionMetadata.ProtoReflect.Descriptor instead.
+func (*DeletePrivateCloudConnectionMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DeletePrivateCloudConnectionMetadata) GetPrivateCloudConnectionId() string {
+	if x != nil {
+		return x.PrivateCloudConnectionId
+	}
+	return ""
+}
+
+func (x *DeletePrivateCloudConnectionMetadata) GetOperationMetadata() *OperationMetadata {
+	if x != nil {
+		return x.OperationMetadata
+	}
+	return nil
+}
+
 var File_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDesc = "" +
 	"\n" +
-	"@yandex/cloud/baremetal/v2/private_cloud_connection_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a)yandex/cloud/baremetal/v2/operation.proto\"\xc3\x01\n" +
+	"@yandex/cloud/baremetal/v2/private_cloud_connection_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/baremetal/v2/operation.proto\x1a8yandex/cloud/baremetal/v2/private_cloud_connection.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xc4\x01\n" +
+	" GetPrivateCloudConnectionRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12^\n" +
+	"\x1bprivate_cloud_connection_id\x18\x03 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\x8e\x02\n" +
+	"\"ListPrivateCloudConnectionsRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12<\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12)\n" +
+	"\tpage_size\x18\x03 \x01(\x03B\f\xe0A\x01\xfa\xc71\x05<=100R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x04 \x01(\tB\x03\xe0A\x01R\tpageToken\x12\x1e\n" +
+	"\border_by\x18\x05 \x01(\tB\x03\xe0A\x01R\aorderBy\x12\x1b\n" +
+	"\x06filter\x18\x06 \x01(\tB\x03\xe0A\x01R\x06filter\"\xbc\x01\n" +
+	"#ListPrivateCloudConnectionsResponse\x12m\n" +
+	"\x19private_cloud_connections\x18\x01 \x03(\v21.yandex.cloud.baremetal.v2.PrivateCloudConnectionR\x17privateCloudConnections\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd9\x01\n" +
+	"#CreatePrivateCloudConnectionRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12p\n" +
+	"\x18private_cloud_connection\x18\x03 \x01(\v21.yandex.cloud.baremetal.v2.PrivateCloudConnectionB\x03\xe0A\x02R\x16privateCloudConnection\"\xd9\x01\n" +
+	"#UpdatePrivateCloudConnectionRequest\x12p\n" +
+	"\x18private_cloud_connection\x18\x01 \x01(\v21.yandex.cloud.baremetal.v2.PrivateCloudConnectionB\x03\xe0A\x02R\x16privateCloudConnection\x12@\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x03\xe0A\x01R\n" +
+	"updateMask\"\xc7\x01\n" +
+	"#DeletePrivateCloudConnectionRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12^\n" +
+	"\x1bprivate_cloud_connection_id\x18\x03 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\xc3\x01\n" +
 	"%RestorePrivateCloudConnectionMetadata\x12=\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\x12[\n" +
 	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\xc2\x01\n" +
 	"$CreatePrivateCloudConnectionMetadata\x12=\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\x12[\n" +
-	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadataBl\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\xc2\x01\n" +
+	"$UpdatePrivateCloudConnectionMetadata\x12=\n" +
+	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\x12[\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\xc2\x01\n" +
+	"$DeletePrivateCloudConnectionMetadata\x12=\n" +
+	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\x12[\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xcf\r\n" +
+	"\x1dPrivateCloudConnectionService\x12\xb0\x02\n" +
+	"\x19GetPrivateCloudConnection\x12;.yandex.cloud.baremetal.v2.GetPrivateCloudConnectionRequest\x1a1.yandex.cloud.baremetal.v2.PrivateCloudConnection\"\xa2\x01\xdaA.cloud_id,folder_id,private_cloud_connection_id\x82\xd3\xe4\x93\x02k\x12i/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections/{private_cloud_connection_id}\x12\x86\x02\n" +
+	"\x1bListPrivateCloudConnections\x12=.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse\"h\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02M\x12K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections\x12\xcb\x02\n" +
+	"\x06Create\x12>.yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xdd\x01\xdaA+cloud_id,folder_id,private_cloud_connection\xb2\xd2*>\n" +
+	"$CreatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02g:\x18private_cloud_connection\"K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections\x12\xb9\x03\n" +
+	"\x1cUpdatePrivateCloudConnection\x12>.yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xb5\x02\xdaA\x18private_cloud_connection\xb2\xd2*>\n" +
+	"$UpdatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02\xd1\x01:\x18private_cloud_connection2\xb4\x01/baremetal/v2/clouds/{private_cloud_connection.cloud_id}/folders/{private_cloud_connection.folder_id}/privateCloudConnections/{private_cloud_connection.private_cloud_connection_id}\x12\xe7\x02\n" +
+	"\x1cDeletePrivateCloudConnection\x12>.yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xe3\x01\xdaA.cloud_id,folder_id,private_cloud_connection_id\xb2\xd2*=\n" +
+	"$DeletePrivateCloudConnectionMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02k*i/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections/{private_cloud_connection_id}Bl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -154,20 +731,47 @@ func file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDe
 	return file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_goTypes = []any{
-	(*RestorePrivateCloudConnectionMetadata)(nil), // 0: yandex.cloud.baremetal.v2.RestorePrivateCloudConnectionMetadata
-	(*CreatePrivateCloudConnectionMetadata)(nil),  // 1: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionMetadata
-	(*OperationMetadata)(nil),                     // 2: yandex.cloud.baremetal.v2.OperationMetadata
+	(*GetPrivateCloudConnectionRequest)(nil),      // 0: yandex.cloud.baremetal.v2.GetPrivateCloudConnectionRequest
+	(*ListPrivateCloudConnectionsRequest)(nil),    // 1: yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest
+	(*ListPrivateCloudConnectionsResponse)(nil),   // 2: yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse
+	(*CreatePrivateCloudConnectionRequest)(nil),   // 3: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest
+	(*UpdatePrivateCloudConnectionRequest)(nil),   // 4: yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest
+	(*DeletePrivateCloudConnectionRequest)(nil),   // 5: yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionRequest
+	(*RestorePrivateCloudConnectionMetadata)(nil), // 6: yandex.cloud.baremetal.v2.RestorePrivateCloudConnectionMetadata
+	(*CreatePrivateCloudConnectionMetadata)(nil),  // 7: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionMetadata
+	(*UpdatePrivateCloudConnectionMetadata)(nil),  // 8: yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionMetadata
+	(*DeletePrivateCloudConnectionMetadata)(nil),  // 9: yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionMetadata
+	(*PrivateCloudConnection)(nil),                // 10: yandex.cloud.baremetal.v2.PrivateCloudConnection
+	(*fieldmaskpb.FieldMask)(nil),                 // 11: google.protobuf.FieldMask
+	(*OperationMetadata)(nil),                     // 12: yandex.cloud.baremetal.v2.OperationMetadata
+	(*operation.Operation)(nil),                   // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.baremetal.v2.RestorePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	2, // 1: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	10, // 0: yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse.private_cloud_connections:type_name -> yandex.cloud.baremetal.v2.PrivateCloudConnection
+	10, // 1: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest.private_cloud_connection:type_name -> yandex.cloud.baremetal.v2.PrivateCloudConnection
+	10, // 2: yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest.private_cloud_connection:type_name -> yandex.cloud.baremetal.v2.PrivateCloudConnection
+	11, // 3: yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 4: yandex.cloud.baremetal.v2.RestorePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	12, // 5: yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	12, // 6: yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	12, // 7: yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	0,  // 8: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.GetPrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.GetPrivateCloudConnectionRequest
+	1,  // 9: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.ListPrivateCloudConnections:input_type -> yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest
+	3,  // 10: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.Create:input_type -> yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest
+	4,  // 11: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.UpdatePrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest
+	5,  // 12: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.DeletePrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionRequest
+	10, // 13: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.GetPrivateCloudConnection:output_type -> yandex.cloud.baremetal.v2.PrivateCloudConnection
+	2,  // 14: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.ListPrivateCloudConnections:output_type -> yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse
+	13, // 15: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.Create:output_type -> yandex.cloud.operation.Operation
+	13, // 16: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.UpdatePrivateCloudConnection:output_type -> yandex.cloud.operation.Operation
+	13, // 17: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.DeletePrivateCloudConnection:output_type -> yandex.cloud.operation.Operation
+	13, // [13:18] is the sub-list for method output_type
+	8,  // [8:13] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_init() }
@@ -176,15 +780,16 @@ func file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_init(
 		return
 	}
 	file_yandex_cloud_baremetal_v2_operation_proto_init()
+	file_yandex_cloud_baremetal_v2_private_cloud_connection_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   10,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_depIdxs,

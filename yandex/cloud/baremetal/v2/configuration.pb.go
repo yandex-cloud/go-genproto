@@ -477,11 +477,66 @@ func (x *Configuration) GetRamType() RAMType {
 	return RAMType_RAM_TYPE_UNSPECIFIED
 }
 
+type DefaultStorage struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the configuration.
+	// To get the configuration ID, use a [ConfigurationService.List] request.
+	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
+	// List of default storages.
+	Storages      []*Storage `protobuf:"bytes,2,rep,name=storages,proto3" json:"storages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DefaultStorage) Reset() {
+	*x = DefaultStorage{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DefaultStorage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DefaultStorage) ProtoMessage() {}
+
+func (x *DefaultStorage) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DefaultStorage.ProtoReflect.Descriptor instead.
+func (*DefaultStorage) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DefaultStorage) GetConfigurationId() string {
+	if x != nil {
+		return x.ConfigurationId
+	}
+	return ""
+}
+
+func (x *DefaultStorage) GetStorages() []*Storage {
+	if x != nil {
+		return x.Storages
+	}
+	return nil
+}
+
 var File_yandex_cloud_baremetal_v2_configuration_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/baremetal/v2/configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\"\xb0\x01\n" +
+	"-yandex/cloud/baremetal/v2/configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\x1a'yandex/cloud/baremetal/v2/storage.proto\"\xb0\x01\n" +
 	"\x03CPU\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\x02R\x04name\x12\x1b\n" +
 	"\x06vendor\x18\x02 \x01(\tB\x03\xe0A\x02R\x06vendor\x12*\n" +
@@ -508,7 +563,10 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\bpsu_type\x18\a \x01(\x0e2\".yandex.cloud.baremetal.v2.PSUTypeB\x03\xe0A\x02R\apsuType\x12;\n" +
 	"\x04gpus\x18\v \x03(\v2\".yandex.cloud.baremetal.v2.GPUCardB\x03\xe0A\x01R\x04gpus\x12D\n" +
 	"\tjbog_gpus\x18\f \x03(\v2\".yandex.cloud.baremetal.v2.GPUCardB\x03\xe0A\x01R\bjbogGpus\x12B\n" +
-	"\bram_type\x18\r \x01(\x0e2\".yandex.cloud.baremetal.v2.RAMTypeB\x03\xe0A\x02R\aramTypeJ\x04\b\b\x10\v*\x84\x01\n" +
+	"\bram_type\x18\r \x01(\x0e2\".yandex.cloud.baremetal.v2.RAMTypeB\x03\xe0A\x02R\aramTypeJ\x04\b\b\x10\v\"\x85\x01\n" +
+	"\x0eDefaultStorage\x12.\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\bR\x0fconfigurationId\x12C\n" +
+	"\bstorages\x18\x02 \x03(\v2\".yandex.cloud.baremetal.v2.StorageB\x03\xe0A\x02R\bstorages*\x84\x01\n" +
 	"\aPSUType\x12\x18\n" +
 	"\x14PSU_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fPSU_TYPE_SINGLE\x10\x01\x12\x11\n" +
@@ -536,7 +594,7 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_baremetal_v2_configuration_proto_goTypes = []any{
 	(PSUType)(0),                   // 0: yandex.cloud.baremetal.v2.PSUType
 	(RAMType)(0),                   // 1: yandex.cloud.baremetal.v2.RAMType
@@ -544,21 +602,24 @@ var file_yandex_cloud_baremetal_v2_configuration_proto_goTypes = []any{
 	(*DiskDriveConfiguration)(nil), // 3: yandex.cloud.baremetal.v2.DiskDriveConfiguration
 	(*GPUCard)(nil),                // 4: yandex.cloud.baremetal.v2.GPUCard
 	(*Configuration)(nil),          // 5: yandex.cloud.baremetal.v2.Configuration
-	(DiskDriveType)(0),             // 6: yandex.cloud.baremetal.v2.DiskDriveType
+	(*DefaultStorage)(nil),         // 6: yandex.cloud.baremetal.v2.DefaultStorage
+	(DiskDriveType)(0),             // 7: yandex.cloud.baremetal.v2.DiskDriveType
+	(*Storage)(nil),                // 8: yandex.cloud.baremetal.v2.Storage
 }
 var file_yandex_cloud_baremetal_v2_configuration_proto_depIdxs = []int32{
-	6, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
+	7, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
 	2, // 1: yandex.cloud.baremetal.v2.Configuration.cpu:type_name -> yandex.cloud.baremetal.v2.CPU
 	3, // 2: yandex.cloud.baremetal.v2.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
 	0, // 3: yandex.cloud.baremetal.v2.Configuration.psu_type:type_name -> yandex.cloud.baremetal.v2.PSUType
 	4, // 4: yandex.cloud.baremetal.v2.Configuration.gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
 	4, // 5: yandex.cloud.baremetal.v2.Configuration.jbog_gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
 	1, // 6: yandex.cloud.baremetal.v2.Configuration.ram_type:type_name -> yandex.cloud.baremetal.v2.RAMType
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	8, // 7: yandex.cloud.baremetal.v2.DefaultStorage.storages:type_name -> yandex.cloud.baremetal.v2.Storage
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_configuration_proto_init() }
@@ -567,13 +628,14 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_init() {
 		return
 	}
 	file_yandex_cloud_baremetal_v2_disk_proto_init()
+	file_yandex_cloud_baremetal_v2_storage_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

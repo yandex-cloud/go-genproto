@@ -588,6 +588,155 @@ func (x *DeletePrivateSubnetMetadata) GetPrivateSubnetId() string {
 	return ""
 }
 
+type ListPrivateSubnetOperationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the private subnet to list operations for.
+	//
+	// To get the private subnet ID, use a [PrivateSubnetService.List] request.
+	PrivateSubnetId string `protobuf:"bytes,3,opt,name=private_subnet_id,json=privateSubnetId,proto3" json:"private_subnet_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListPrivateSubnetOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListPrivateSubnetOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPrivateSubnetOperationsRequest) Reset() {
+	*x = ListPrivateSubnetOperationsRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPrivateSubnetOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPrivateSubnetOperationsRequest) ProtoMessage() {}
+
+func (x *ListPrivateSubnetOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPrivateSubnetOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListPrivateSubnetOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListPrivateSubnetOperationsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ListPrivateSubnetOperationsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListPrivateSubnetOperationsRequest) GetPrivateSubnetId() string {
+	if x != nil {
+		return x.PrivateSubnetId
+	}
+	return ""
+}
+
+func (x *ListPrivateSubnetOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListPrivateSubnetOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListPrivateSubnetOperationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations for the specified Image resource.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListPrivateSubnetOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListPrivateSubnetOperationsRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListPrivateSubnetOperationsResponse) Reset() {
+	*x = ListPrivateSubnetOperationsResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListPrivateSubnetOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPrivateSubnetOperationsResponse) ProtoMessage() {}
+
+func (x *ListPrivateSubnetOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPrivateSubnetOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListPrivateSubnetOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListPrivateSubnetOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListPrivateSubnetOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_private_subnet_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc = "" +
@@ -625,7 +774,19 @@ const file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12/\n" +
 	"\x11private_subnet_id\x18\x03 \x01(\tB\x03\xe0A\x02R\x0fprivateSubnetId\"I\n" +
 	"\x1bDeletePrivateSubnetMetadata\x12*\n" +
-	"\x11private_subnet_id\x18\x01 \x01(\tR\x0fprivateSubnetId2\x9d\v\n" +
+	"\x11private_subnet_id\x18\x01 \x01(\tR\x0fprivateSubnetId\"\xe7\x01\n" +
+	"\"ListPrivateSubnetOperationsRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12/\n" +
+	"\x11private_subnet_id\x18\x03 \x01(\tB\x03\xe0A\x02R\x0fprivateSubnetId\x12*\n" +
+	"\tpage_size\x18\x04 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x05 \x01(\tB\x03\xe0A\x01R\tpageToken\"\x90\x01\n" +
+	"#ListPrivateSubnetOperationsResponse\x12A\n" +
+	"\n" +
+	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
+	"operations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd3\r\n" +
 	"\x14PrivateSubnetService\x12\xf8\x01\n" +
 	"\x10GetPrivateSubnet\x122.yandex.cloud.baremetal.v2.GetPrivateSubnetRequest\x1a(.yandex.cloud.baremetal.v2.PrivateSubnet\"\x85\x01\xdaA$cloud_id,folder_id,private_subnet_id\x82\xd3\xe4\x93\x02X\x12V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}\x12\xe2\x01\n" +
 	"\x12ListPrivateSubnets\x124.yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest\x1a5.yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse\"_\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02D\x12B/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets\x12\x93\x02\n" +
@@ -634,7 +795,8 @@ const file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc = "" +
 	"\x13UpdatePrivateSubnet\x125.yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"\xea\x01\xdaA\x1aprivate_subnet,update_mask\xb2\xd2*,\n" +
 	"\x1bUpdatePrivateSubnetMetadata\x12\rPrivateSubnet\x82\xd3\xe4\x93\x02\x96\x01:\x0eprivate_subnet2\x83\x01/baremetal/v2/clouds/{private_subnet.cloud_id}/folders/{private_subnet.folder_id}/privateSubnets/{private_subnet.private_subnet_id}\x12\xaf\x02\n" +
 	"\x13DeletePrivateSubnet\x125.yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"\xbd\x01\xdaA$cloud_id,folder_id,private_subnet_id\xb2\xd2*4\n" +
-	"\x1bDeletePrivateSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02X*V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}Bl\n" +
+	"\x1bDeletePrivateSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02X*V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}\x12\xb3\x02\n" +
+	"\x1bListPrivateSubnetOperations\x12=.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse\"\x94\x01\xdaA$cloud_id,folder_id,private_subnet_id\x82\xd3\xe4\x93\x02g\x12e/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}:listOperationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -649,41 +811,46 @@ func file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDescGZIP() [
 	return file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_baremetal_v2_private_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_baremetal_v2_private_subnet_service_proto_goTypes = []any{
-	(*GetPrivateSubnetRequest)(nil),     // 0: yandex.cloud.baremetal.v2.GetPrivateSubnetRequest
-	(*ListPrivateSubnetsRequest)(nil),   // 1: yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest
-	(*ListPrivateSubnetsResponse)(nil),  // 2: yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse
-	(*CreatePrivateSubnetRequest)(nil),  // 3: yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest
-	(*CreatePrivateSubnetMetadata)(nil), // 4: yandex.cloud.baremetal.v2.CreatePrivateSubnetMetadata
-	(*UpdatePrivateSubnetRequest)(nil),  // 5: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest
-	(*UpdatePrivateSubnetMetadata)(nil), // 6: yandex.cloud.baremetal.v2.UpdatePrivateSubnetMetadata
-	(*DeletePrivateSubnetRequest)(nil),  // 7: yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest
-	(*DeletePrivateSubnetMetadata)(nil), // 8: yandex.cloud.baremetal.v2.DeletePrivateSubnetMetadata
-	(*PrivateSubnet)(nil),               // 9: yandex.cloud.baremetal.v2.PrivateSubnet
-	(*fieldmaskpb.FieldMask)(nil),       // 10: google.protobuf.FieldMask
-	(*operation.Operation)(nil),         // 11: yandex.cloud.operation.Operation
+	(*GetPrivateSubnetRequest)(nil),             // 0: yandex.cloud.baremetal.v2.GetPrivateSubnetRequest
+	(*ListPrivateSubnetsRequest)(nil),           // 1: yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest
+	(*ListPrivateSubnetsResponse)(nil),          // 2: yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse
+	(*CreatePrivateSubnetRequest)(nil),          // 3: yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest
+	(*CreatePrivateSubnetMetadata)(nil),         // 4: yandex.cloud.baremetal.v2.CreatePrivateSubnetMetadata
+	(*UpdatePrivateSubnetRequest)(nil),          // 5: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest
+	(*UpdatePrivateSubnetMetadata)(nil),         // 6: yandex.cloud.baremetal.v2.UpdatePrivateSubnetMetadata
+	(*DeletePrivateSubnetRequest)(nil),          // 7: yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest
+	(*DeletePrivateSubnetMetadata)(nil),         // 8: yandex.cloud.baremetal.v2.DeletePrivateSubnetMetadata
+	(*ListPrivateSubnetOperationsRequest)(nil),  // 9: yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsRequest
+	(*ListPrivateSubnetOperationsResponse)(nil), // 10: yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse
+	(*PrivateSubnet)(nil),                       // 11: yandex.cloud.baremetal.v2.PrivateSubnet
+	(*fieldmaskpb.FieldMask)(nil),               // 12: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                 // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v2_private_subnet_service_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse.private_subnets:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
-	9,  // 1: yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest.private_subnet:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
-	9,  // 2: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest.private_subnet:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
-	10, // 3: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,  // 4: yandex.cloud.baremetal.v2.PrivateSubnetService.GetPrivateSubnet:input_type -> yandex.cloud.baremetal.v2.GetPrivateSubnetRequest
-	1,  // 5: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnets:input_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest
-	3,  // 6: yandex.cloud.baremetal.v2.PrivateSubnetService.CreatePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest
-	5,  // 7: yandex.cloud.baremetal.v2.PrivateSubnetService.UpdatePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest
-	7,  // 8: yandex.cloud.baremetal.v2.PrivateSubnetService.DeletePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest
-	9,  // 9: yandex.cloud.baremetal.v2.PrivateSubnetService.GetPrivateSubnet:output_type -> yandex.cloud.baremetal.v2.PrivateSubnet
-	2,  // 10: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnets:output_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse
-	11, // 11: yandex.cloud.baremetal.v2.PrivateSubnetService.CreatePrivateSubnet:output_type -> yandex.cloud.operation.Operation
-	11, // 12: yandex.cloud.baremetal.v2.PrivateSubnetService.UpdatePrivateSubnet:output_type -> yandex.cloud.operation.Operation
-	11, // 13: yandex.cloud.baremetal.v2.PrivateSubnetService.DeletePrivateSubnet:output_type -> yandex.cloud.operation.Operation
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	11, // 0: yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse.private_subnets:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
+	11, // 1: yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest.private_subnet:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
+	11, // 2: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest.private_subnet:type_name -> yandex.cloud.baremetal.v2.PrivateSubnet
+	12, // 3: yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
+	13, // 4: yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 5: yandex.cloud.baremetal.v2.PrivateSubnetService.GetPrivateSubnet:input_type -> yandex.cloud.baremetal.v2.GetPrivateSubnetRequest
+	1,  // 6: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnets:input_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest
+	3,  // 7: yandex.cloud.baremetal.v2.PrivateSubnetService.CreatePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.CreatePrivateSubnetRequest
+	5,  // 8: yandex.cloud.baremetal.v2.PrivateSubnetService.UpdatePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest
+	7,  // 9: yandex.cloud.baremetal.v2.PrivateSubnetService.DeletePrivateSubnet:input_type -> yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest
+	9,  // 10: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnetOperations:input_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsRequest
+	11, // 11: yandex.cloud.baremetal.v2.PrivateSubnetService.GetPrivateSubnet:output_type -> yandex.cloud.baremetal.v2.PrivateSubnet
+	2,  // 12: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnets:output_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse
+	13, // 13: yandex.cloud.baremetal.v2.PrivateSubnetService.CreatePrivateSubnet:output_type -> yandex.cloud.operation.Operation
+	13, // 14: yandex.cloud.baremetal.v2.PrivateSubnetService.UpdatePrivateSubnet:output_type -> yandex.cloud.operation.Operation
+	13, // 15: yandex.cloud.baremetal.v2.PrivateSubnetService.DeletePrivateSubnet:output_type -> yandex.cloud.operation.Operation
+	10, // 16: yandex.cloud.baremetal.v2.PrivateSubnetService.ListPrivateSubnetOperations:output_type -> yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_private_subnet_service_proto_init() }
@@ -698,7 +865,7 @@ func file_yandex_cloud_baremetal_v2_private_subnet_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

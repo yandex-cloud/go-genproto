@@ -7,8 +7,13 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -20,6 +25,577 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type GetBootImageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the BootImage resource to return.
+	// To get the boot image ID, use a [ImageService.List] request.
+	BootImageId   string `protobuf:"bytes,3,opt,name=boot_image_id,json=bootImageId,proto3" json:"boot_image_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBootImageRequest) Reset() {
+	*x = GetBootImageRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBootImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBootImageRequest) ProtoMessage() {}
+
+func (x *GetBootImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBootImageRequest.ProtoReflect.Descriptor instead.
+func (*GetBootImageRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetBootImageRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *GetBootImageRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *GetBootImageRequest) GetBootImageId() string {
+	if x != nil {
+		return x.BootImageId
+	}
+	return ""
+}
+
+type ListBootImagesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListBootImagesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListBootImagesResponse.next_page_token] returned by a previous list request.
+	PageToken string `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Sorting order for the listing. Follows the [AIP-132](https://google.aip.dev/132) `order_by` format:
+	// `"field [asc|desc]"`, e.g. `"createTime desc"`.
+	//
+	// Supported fields: `bootImageId`, `createTime`, `updateTime`.
+	// Default order: `bootImageId asc`.
+	OrderBy string `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	// Filter expression following [AIP-160](https://google.aip.dev/160).
+	//
+	// Supported fields and operators:
+	// - `bootImageId`, `name` - `=`, `!=`, `:` (contains)
+	// - `state` - `=`, `!=`
+	//
+	// Example: `state = "READY" AND name : "ubuntu"`.
+	Filter        string `protobuf:"bytes,6,opt,name=filter,proto3" json:"filter,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBootImagesRequest) Reset() {
+	*x = ListBootImagesRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBootImagesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBootImagesRequest) ProtoMessage() {}
+
+func (x *ListBootImagesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBootImagesRequest.ProtoReflect.Descriptor instead.
+func (*ListBootImagesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ListBootImagesRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ListBootImagesRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListBootImagesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListBootImagesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListBootImagesRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+func (x *ListBootImagesRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+type ListBootImagesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of BootImage resources.
+	BootImages []*BootImage `protobuf:"bytes,1,rep,name=boot_images,json=bootImages,proto3" json:"boot_images,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListBootImagesRequest.page_size], use `next_page_token` as the value
+	// for the [ListBootImagesRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBootImagesResponse) Reset() {
+	*x = ListBootImagesResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBootImagesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBootImagesResponse) ProtoMessage() {}
+
+func (x *ListBootImagesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBootImagesResponse.ProtoReflect.Descriptor instead.
+func (*ListBootImagesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListBootImagesResponse) GetBootImages() []*BootImage {
+	if x != nil {
+		return x.BootImages
+	}
+	return nil
+}
+
+func (x *ListBootImagesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type CreateBootImageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Boot image to create.
+	BootImage     *BootImage `protobuf:"bytes,3,opt,name=boot_image,json=bootImage,proto3" json:"boot_image,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateBootImageRequest) Reset() {
+	*x = CreateBootImageRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateBootImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateBootImageRequest) ProtoMessage() {}
+
+func (x *CreateBootImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateBootImageRequest.ProtoReflect.Descriptor instead.
+func (*CreateBootImageRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateBootImageRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *CreateBootImageRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *CreateBootImageRequest) GetBootImage() *BootImage {
+	if x != nil {
+		return x.BootImage
+	}
+	return nil
+}
+
+type UpdateBootImageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The boot image object to be updated.
+	BootImage *BootImage `protobuf:"bytes,1,opt,name=boot_image,json=bootImage,proto3" json:"boot_image,omitempty"`
+	// Field mask that specifies which fields of the Image resource are going to be updated.
+	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateBootImageRequest) Reset() {
+	*x = UpdateBootImageRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateBootImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateBootImageRequest) ProtoMessage() {}
+
+func (x *UpdateBootImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateBootImageRequest.ProtoReflect.Descriptor instead.
+func (*UpdateBootImageRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdateBootImageRequest) GetBootImage() *BootImage {
+	if x != nil {
+		return x.BootImage
+	}
+	return nil
+}
+
+func (x *UpdateBootImageRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+type DeleteBootImageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the boot image to delete.
+	// To get the boot image ID, use a [BootImageService.List] request.
+	BootImageId   string `protobuf:"bytes,3,opt,name=boot_image_id,json=bootImageId,proto3" json:"boot_image_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBootImageRequest) Reset() {
+	*x = DeleteBootImageRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBootImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBootImageRequest) ProtoMessage() {}
+
+func (x *DeleteBootImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBootImageRequest.ProtoReflect.Descriptor instead.
+func (*DeleteBootImageRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteBootImageRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *DeleteBootImageRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *DeleteBootImageRequest) GetBootImageId() string {
+	if x != nil {
+		return x.BootImageId
+	}
+	return ""
+}
+
+type ListBootImageOperationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the boot image to list operations for.
+	// To get the boot image ID, use a [BootImageService.List] request.
+	BootImageId string `protobuf:"bytes,3,opt,name=boot_image_id,json=bootImageId,proto3" json:"boot_image_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListBootImageOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListBootImageOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBootImageOperationsRequest) Reset() {
+	*x = ListBootImageOperationsRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBootImageOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBootImageOperationsRequest) ProtoMessage() {}
+
+func (x *ListBootImageOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBootImageOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListBootImageOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListBootImageOperationsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ListBootImageOperationsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListBootImageOperationsRequest) GetBootImageId() string {
+	if x != nil {
+		return x.BootImageId
+	}
+	return ""
+}
+
+func (x *ListBootImageOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListBootImageOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListBootImageOperationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations for the specified Image resource.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListImageOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListImageOperationsRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListBootImageOperationsResponse) Reset() {
+	*x = ListBootImageOperationsResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListBootImageOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListBootImageOperationsResponse) ProtoMessage() {}
+
+func (x *ListBootImageOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListBootImageOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListBootImageOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListBootImageOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListBootImageOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
 
 type CreateBootImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -33,7 +609,7 @@ type CreateBootImageMetadata struct {
 
 func (x *CreateBootImageMetadata) Reset() {
 	*x = CreateBootImageMetadata{}
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +621,7 @@ func (x *CreateBootImageMetadata) String() string {
 func (*CreateBootImageMetadata) ProtoMessage() {}
 
 func (x *CreateBootImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +634,7 @@ func (x *CreateBootImageMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBootImageMetadata.ProtoReflect.Descriptor instead.
 func (*CreateBootImageMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateBootImageMetadata) GetBootImageId() string {
@@ -87,7 +663,7 @@ type UpdateBootImageMetadata struct {
 
 func (x *UpdateBootImageMetadata) Reset() {
 	*x = UpdateBootImageMetadata{}
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -99,7 +675,7 @@ func (x *UpdateBootImageMetadata) String() string {
 func (*UpdateBootImageMetadata) ProtoMessage() {}
 
 func (x *UpdateBootImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +688,7 @@ func (x *UpdateBootImageMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateBootImageMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateBootImageMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateBootImageMetadata) GetBootImageId() string {
@@ -141,7 +717,7 @@ type DeleteBootImageMetadata struct {
 
 func (x *DeleteBootImageMetadata) Reset() {
 	*x = DeleteBootImageMetadata{}
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -153,7 +729,7 @@ func (x *DeleteBootImageMetadata) String() string {
 func (*DeleteBootImageMetadata) ProtoMessage() {}
 
 func (x *DeleteBootImageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -166,7 +742,7 @@ func (x *DeleteBootImageMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBootImageMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteBootImageMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteBootImageMetadata) GetBootImageId() string {
@@ -187,7 +763,49 @@ var File_yandex_cloud_baremetal_v2_boot_image_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v2/boot_image_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a)yandex/cloud/baremetal/v2/operation.proto\"\x9a\x01\n" +
+	"2yandex/cloud/baremetal/v2/boot_image_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/baremetal/v2/boot_image.proto\x1a)yandex/cloud/baremetal/v2/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x01\n" +
+	"\x13GetBootImageRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12?\n" +
+	"\rboot_image_id\x18\x03 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\vbootImageId\"\xe6\x01\n" +
+	"\x15ListBootImagesRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12*\n" +
+	"\tpage_size\x18\x03 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x04 \x01(\tB\x03\xe0A\x01R\tpageToken\x12\x1e\n" +
+	"\border_by\x18\x05 \x01(\tB\x03\xe0A\x01R\aorderBy\x12\x1b\n" +
+	"\x06filter\x18\x06 \x01(\tB\x03\xe0A\x01R\x06filter\"\x87\x01\n" +
+	"\x16ListBootImagesResponse\x12E\n" +
+	"\vboot_images\x18\x01 \x03(\v2$.yandex.cloud.baremetal.v2.BootImageR\n" +
+	"bootImages\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa4\x01\n" +
+	"\x16CreateBootImageRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12H\n" +
+	"\n" +
+	"boot_image\x18\x03 \x01(\v2$.yandex.cloud.baremetal.v2.BootImageB\x03\xe0A\x02R\tbootImage\"\xa4\x01\n" +
+	"\x16UpdateBootImageRequest\x12H\n" +
+	"\n" +
+	"boot_image\x18\x01 \x01(\v2$.yandex.cloud.baremetal.v2.BootImageB\x03\xe0A\x02R\tbootImage\x12@\n" +
+	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x03\xe0A\x01R\n" +
+	"updateMask\"\x9b\x01\n" +
+	"\x16DeleteBootImageRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12?\n" +
+	"\rboot_image_id\x18\x03 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\vbootImageId\"\xf3\x01\n" +
+	"\x1eListBootImageOperationsRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12?\n" +
+	"\rboot_image_id\x18\x03 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\vbootImageId\x12*\n" +
+	"\tpage_size\x18\x04 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x05 \x01(\tB\x03\xe0A\x01R\tpageToken\"\x8c\x01\n" +
+	"\x1fListBootImageOperationsResponse\x12A\n" +
+	"\n" +
+	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
+	"operations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9a\x01\n" +
 	"\x17CreateBootImageMetadata\x12\"\n" +
 	"\rboot_image_id\x18\x01 \x01(\tR\vbootImageId\x12[\n" +
 	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\x9a\x01\n" +
@@ -196,7 +814,19 @@ const file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc = "" +
 	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\x9a\x01\n" +
 	"\x17DeleteBootImageMetadata\x12\"\n" +
 	"\rboot_image_id\x18\x01 \x01(\tR\vbootImageId\x12[\n" +
-	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadataBl\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xb9\f\n" +
+	"\x10BootImageService\x12\xdf\x01\n" +
+	"\fGetBootImage\x12..yandex.cloud.baremetal.v2.GetBootImageRequest\x1a$.yandex.cloud.baremetal.v2.BootImage\"y\xdaA cloud_id,folder_id,boot_image_id\x82\xd3\xe4\x93\x02P\x12N/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}\x12\xd2\x01\n" +
+	"\x0eListBootImages\x120.yandex.cloud.baremetal.v2.ListBootImagesRequest\x1a1.yandex.cloud.baremetal.v2.ListBootImagesResponse\"[\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02@\x12>/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages\x12\x84\x02\n" +
+	"\x0fCreateBootImage\x121.yandex.cloud.baremetal.v2.CreateBootImageRequest\x1a!.yandex.cloud.operation.Operation\"\x9a\x01\xdaA\x1dcloud_id,folder_id,boot_image\xb2\xd2*$\n" +
+	"\x17CreateBootImageMetadata\x12\tBootImage\x82\xd3\xe4\x93\x02L:\n" +
+	"boot_image\">/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages\x12\xae\x02\n" +
+	"\x0fUpdateBootImage\x121.yandex.cloud.baremetal.v2.UpdateBootImageRequest\x1a!.yandex.cloud.operation.Operation\"\xc4\x01\xdaA\x16boot_image,update_mask\xb2\xd2*$\n" +
+	"\x17UpdateBootImageMetadata\x12\tBootImage\x82\xd3\xe4\x93\x02}:\n" +
+	"boot_image2o/baremetal/v2/clouds/{boot_image.cloud_id}/folders/{boot_image.folder_id}/bootImages/{boot_image.boot_image_id}\x12\x97\x02\n" +
+	"\x0fDeleteBootImage\x121.yandex.cloud.baremetal.v2.DeleteBootImageRequest\x1a!.yandex.cloud.operation.Operation\"\xad\x01\xdaA cloud_id,folder_id,boot_image_id\xb2\xd2*0\n" +
+	"\x17DeleteBootImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02P*N/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}\x12\x9b\x02\n" +
+	"\x17ListBootImageOperations\x129.yandex.cloud.baremetal.v2.ListBootImageOperationsRequest\x1a:.yandex.cloud.baremetal.v2.ListBootImageOperationsResponse\"\x88\x01\xdaA cloud_id,folder_id,boot_image_id\x82\xd3\xe4\x93\x02_\x12]/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}:listOperationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -211,22 +841,50 @@ func file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_baremetal_v2_boot_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_baremetal_v2_boot_image_service_proto_goTypes = []any{
-	(*CreateBootImageMetadata)(nil), // 0: yandex.cloud.baremetal.v2.CreateBootImageMetadata
-	(*UpdateBootImageMetadata)(nil), // 1: yandex.cloud.baremetal.v2.UpdateBootImageMetadata
-	(*DeleteBootImageMetadata)(nil), // 2: yandex.cloud.baremetal.v2.DeleteBootImageMetadata
-	(*OperationMetadata)(nil),       // 3: yandex.cloud.baremetal.v2.OperationMetadata
+	(*GetBootImageRequest)(nil),             // 0: yandex.cloud.baremetal.v2.GetBootImageRequest
+	(*ListBootImagesRequest)(nil),           // 1: yandex.cloud.baremetal.v2.ListBootImagesRequest
+	(*ListBootImagesResponse)(nil),          // 2: yandex.cloud.baremetal.v2.ListBootImagesResponse
+	(*CreateBootImageRequest)(nil),          // 3: yandex.cloud.baremetal.v2.CreateBootImageRequest
+	(*UpdateBootImageRequest)(nil),          // 4: yandex.cloud.baremetal.v2.UpdateBootImageRequest
+	(*DeleteBootImageRequest)(nil),          // 5: yandex.cloud.baremetal.v2.DeleteBootImageRequest
+	(*ListBootImageOperationsRequest)(nil),  // 6: yandex.cloud.baremetal.v2.ListBootImageOperationsRequest
+	(*ListBootImageOperationsResponse)(nil), // 7: yandex.cloud.baremetal.v2.ListBootImageOperationsResponse
+	(*CreateBootImageMetadata)(nil),         // 8: yandex.cloud.baremetal.v2.CreateBootImageMetadata
+	(*UpdateBootImageMetadata)(nil),         // 9: yandex.cloud.baremetal.v2.UpdateBootImageMetadata
+	(*DeleteBootImageMetadata)(nil),         // 10: yandex.cloud.baremetal.v2.DeleteBootImageMetadata
+	(*BootImage)(nil),                       // 11: yandex.cloud.baremetal.v2.BootImage
+	(*fieldmaskpb.FieldMask)(nil),           // 12: google.protobuf.FieldMask
+	(*operation.Operation)(nil),             // 13: yandex.cloud.operation.Operation
+	(*OperationMetadata)(nil),               // 14: yandex.cloud.baremetal.v2.OperationMetadata
 }
 var file_yandex_cloud_baremetal_v2_boot_image_service_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.baremetal.v2.CreateBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	3, // 1: yandex.cloud.baremetal.v2.UpdateBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	3, // 2: yandex.cloud.baremetal.v2.DeleteBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	11, // 0: yandex.cloud.baremetal.v2.ListBootImagesResponse.boot_images:type_name -> yandex.cloud.baremetal.v2.BootImage
+	11, // 1: yandex.cloud.baremetal.v2.CreateBootImageRequest.boot_image:type_name -> yandex.cloud.baremetal.v2.BootImage
+	11, // 2: yandex.cloud.baremetal.v2.UpdateBootImageRequest.boot_image:type_name -> yandex.cloud.baremetal.v2.BootImage
+	12, // 3: yandex.cloud.baremetal.v2.UpdateBootImageRequest.update_mask:type_name -> google.protobuf.FieldMask
+	13, // 4: yandex.cloud.baremetal.v2.ListBootImageOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	14, // 5: yandex.cloud.baremetal.v2.CreateBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	14, // 6: yandex.cloud.baremetal.v2.UpdateBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	14, // 7: yandex.cloud.baremetal.v2.DeleteBootImageMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	0,  // 8: yandex.cloud.baremetal.v2.BootImageService.GetBootImage:input_type -> yandex.cloud.baremetal.v2.GetBootImageRequest
+	1,  // 9: yandex.cloud.baremetal.v2.BootImageService.ListBootImages:input_type -> yandex.cloud.baremetal.v2.ListBootImagesRequest
+	3,  // 10: yandex.cloud.baremetal.v2.BootImageService.CreateBootImage:input_type -> yandex.cloud.baremetal.v2.CreateBootImageRequest
+	4,  // 11: yandex.cloud.baremetal.v2.BootImageService.UpdateBootImage:input_type -> yandex.cloud.baremetal.v2.UpdateBootImageRequest
+	5,  // 12: yandex.cloud.baremetal.v2.BootImageService.DeleteBootImage:input_type -> yandex.cloud.baremetal.v2.DeleteBootImageRequest
+	6,  // 13: yandex.cloud.baremetal.v2.BootImageService.ListBootImageOperations:input_type -> yandex.cloud.baremetal.v2.ListBootImageOperationsRequest
+	11, // 14: yandex.cloud.baremetal.v2.BootImageService.GetBootImage:output_type -> yandex.cloud.baremetal.v2.BootImage
+	2,  // 15: yandex.cloud.baremetal.v2.BootImageService.ListBootImages:output_type -> yandex.cloud.baremetal.v2.ListBootImagesResponse
+	13, // 16: yandex.cloud.baremetal.v2.BootImageService.CreateBootImage:output_type -> yandex.cloud.operation.Operation
+	13, // 17: yandex.cloud.baremetal.v2.BootImageService.UpdateBootImage:output_type -> yandex.cloud.operation.Operation
+	13, // 18: yandex.cloud.baremetal.v2.BootImageService.DeleteBootImage:output_type -> yandex.cloud.operation.Operation
+	7,  // 19: yandex.cloud.baremetal.v2.BootImageService.ListBootImageOperations:output_type -> yandex.cloud.baremetal.v2.ListBootImageOperationsResponse
+	14, // [14:20] is the sub-list for method output_type
+	8,  // [8:14] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_boot_image_service_proto_init() }
@@ -234,6 +892,7 @@ func file_yandex_cloud_baremetal_v2_boot_image_service_proto_init() {
 	if File_yandex_cloud_baremetal_v2_boot_image_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_baremetal_v2_boot_image_proto_init()
 	file_yandex_cloud_baremetal_v2_operation_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -241,9 +900,9 @@ func file_yandex_cloud_baremetal_v2_boot_image_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   11,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v2_boot_image_service_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v2_boot_image_service_proto_depIdxs,

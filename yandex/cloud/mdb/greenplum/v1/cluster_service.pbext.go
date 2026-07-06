@@ -580,6 +580,14 @@ func (m *RestoreClusterRequest) SetSegmentHostGroupIds(v []string) {
 	m.SegmentHostGroupIds = v
 }
 
+func (m *RestoreClusterRequest) SetRestorePxf(v bool) {
+	m.RestorePxf = v
+}
+
+func (m *RestoreClusterRequest) SetRestoreHba(v bool) {
+	m.RestoreHba = v
+}
+
 func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
 }

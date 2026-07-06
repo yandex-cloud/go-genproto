@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PublicSubnetService_GetPublicSubnet_FullMethodName    = "/yandex.cloud.baremetal.v2.PublicSubnetService/GetPublicSubnet"
-	PublicSubnetService_ListPublicSubnets_FullMethodName  = "/yandex.cloud.baremetal.v2.PublicSubnetService/ListPublicSubnets"
-	PublicSubnetService_CreatePublicSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PublicSubnetService/CreatePublicSubnet"
-	PublicSubnetService_UpdatePublicSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PublicSubnetService/UpdatePublicSubnet"
-	PublicSubnetService_DeletePublicSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PublicSubnetService/DeletePublicSubnet"
+	PublicSubnetService_GetPublicSubnet_FullMethodName            = "/yandex.cloud.baremetal.v2.PublicSubnetService/GetPublicSubnet"
+	PublicSubnetService_ListPublicSubnets_FullMethodName          = "/yandex.cloud.baremetal.v2.PublicSubnetService/ListPublicSubnets"
+	PublicSubnetService_CreatePublicSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PublicSubnetService/CreatePublicSubnet"
+	PublicSubnetService_UpdatePublicSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PublicSubnetService/UpdatePublicSubnet"
+	PublicSubnetService_DeletePublicSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PublicSubnetService/DeletePublicSubnet"
+	PublicSubnetService_ListPublicSubnetOperations_FullMethodName = "/yandex.cloud.baremetal.v2.PublicSubnetService/ListPublicSubnetOperations"
 )
 
 // PublicSubnetServiceClient is the client API for PublicSubnetService service.
@@ -57,6 +58,10 @@ type PublicSubnetServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeletePublicSubnet(ctx context.Context, in *DeletePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified public subnet.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListPublicSubnetOperations(ctx context.Context, in *ListPublicSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPublicSubnetOperationsResponse, error)
 }
 
 type publicSubnetServiceClient struct {
@@ -117,6 +122,16 @@ func (c *publicSubnetServiceClient) DeletePublicSubnet(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *publicSubnetServiceClient) ListPublicSubnetOperations(ctx context.Context, in *ListPublicSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPublicSubnetOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPublicSubnetOperationsResponse)
+	err := c.cc.Invoke(ctx, PublicSubnetService_ListPublicSubnetOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PublicSubnetServiceServer is the server API for PublicSubnetService service.
 // All implementations should embed UnimplementedPublicSubnetServiceServer
 // for forward compatibility.
@@ -147,6 +162,10 @@ type PublicSubnetServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeletePublicSubnet(context.Context, *DeletePublicSubnetRequest) (*operation.Operation, error)
+	// Lists operations for the specified public subnet.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListPublicSubnetOperations(context.Context, *ListPublicSubnetOperationsRequest) (*ListPublicSubnetOperationsResponse, error)
 }
 
 // UnimplementedPublicSubnetServiceServer should be embedded to have
@@ -170,6 +189,9 @@ func (UnimplementedPublicSubnetServiceServer) UpdatePublicSubnet(context.Context
 }
 func (UnimplementedPublicSubnetServiceServer) DeletePublicSubnet(context.Context, *DeletePublicSubnetRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeletePublicSubnet not implemented")
+}
+func (UnimplementedPublicSubnetServiceServer) ListPublicSubnetOperations(context.Context, *ListPublicSubnetOperationsRequest) (*ListPublicSubnetOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPublicSubnetOperations not implemented")
 }
 func (UnimplementedPublicSubnetServiceServer) testEmbeddedByValue() {}
 
@@ -281,6 +303,24 @@ func _PublicSubnetService_DeletePublicSubnet_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PublicSubnetService_ListPublicSubnetOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPublicSubnetOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublicSubnetServiceServer).ListPublicSubnetOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PublicSubnetService_ListPublicSubnetOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublicSubnetServiceServer).ListPublicSubnetOperations(ctx, req.(*ListPublicSubnetOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PublicSubnetService_ServiceDesc is the grpc.ServiceDesc for PublicSubnetService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -307,6 +347,10 @@ var PublicSubnetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeletePublicSubnet",
 			Handler:    _PublicSubnetService_DeletePublicSubnet_Handler,
+		},
+		{
+			MethodName: "ListPublicSubnetOperations",
+			Handler:    _PublicSubnetService_ListPublicSubnetOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2,6 +2,115 @@
 
 package baremetal
 
+import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
+func (m *GetBootImageRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *GetBootImageRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetBootImageRequest) SetBootImageId(v string) {
+	m.BootImageId = v
+}
+
+func (m *ListBootImagesRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListBootImagesRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListBootImagesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListBootImagesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListBootImagesRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListBootImagesRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListBootImagesResponse) SetBootImages(v []*BootImage) {
+	m.BootImages = v
+}
+
+func (m *ListBootImagesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *CreateBootImageRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *CreateBootImageRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CreateBootImageRequest) SetBootImage(v *BootImage) {
+	m.BootImage = v
+}
+
+func (m *UpdateBootImageRequest) SetBootImage(v *BootImage) {
+	m.BootImage = v
+}
+
+func (m *UpdateBootImageRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *DeleteBootImageRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *DeleteBootImageRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *DeleteBootImageRequest) SetBootImageId(v string) {
+	m.BootImageId = v
+}
+
+func (m *ListBootImageOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListBootImageOperationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListBootImageOperationsRequest) SetBootImageId(v string) {
+	m.BootImageId = v
+}
+
+func (m *ListBootImageOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListBootImageOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListBootImageOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListBootImageOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
 func (m *CreateBootImageMetadata) SetBootImageId(v string) {
 	m.BootImageId = v
 }

@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VrfService_GetVrf_FullMethodName    = "/yandex.cloud.baremetal.v2.VrfService/GetVrf"
-	VrfService_ListVrfs_FullMethodName  = "/yandex.cloud.baremetal.v2.VrfService/ListVrfs"
-	VrfService_CreateVrf_FullMethodName = "/yandex.cloud.baremetal.v2.VrfService/CreateVrf"
-	VrfService_UpdateVrf_FullMethodName = "/yandex.cloud.baremetal.v2.VrfService/UpdateVrf"
-	VrfService_DeleteVrf_FullMethodName = "/yandex.cloud.baremetal.v2.VrfService/DeleteVrf"
+	VrfService_GetVrf_FullMethodName            = "/yandex.cloud.baremetal.v2.VrfService/GetVrf"
+	VrfService_ListVrfs_FullMethodName          = "/yandex.cloud.baremetal.v2.VrfService/ListVrfs"
+	VrfService_CreateVrf_FullMethodName         = "/yandex.cloud.baremetal.v2.VrfService/CreateVrf"
+	VrfService_UpdateVrf_FullMethodName         = "/yandex.cloud.baremetal.v2.VrfService/UpdateVrf"
+	VrfService_DeleteVrf_FullMethodName         = "/yandex.cloud.baremetal.v2.VrfService/DeleteVrf"
+	VrfService_ListVrfOperations_FullMethodName = "/yandex.cloud.baremetal.v2.VrfService/ListVrfOperations"
 )
 
 // VrfServiceClient is the client API for VrfService service.
@@ -60,6 +61,10 @@ type VrfServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteVrf(ctx context.Context, in *DeleteVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified vrf.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListVrfOperations(ctx context.Context, in *ListVrfOperationsRequest, opts ...grpc.CallOption) (*ListVrfOperationsResponse, error)
 }
 
 type vrfServiceClient struct {
@@ -120,6 +125,16 @@ func (c *vrfServiceClient) DeleteVrf(ctx context.Context, in *DeleteVrfRequest, 
 	return out, nil
 }
 
+func (c *vrfServiceClient) ListVrfOperations(ctx context.Context, in *ListVrfOperationsRequest, opts ...grpc.CallOption) (*ListVrfOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListVrfOperationsResponse)
+	err := c.cc.Invoke(ctx, VrfService_ListVrfOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VrfServiceServer is the server API for VrfService service.
 // All implementations should embed UnimplementedVrfServiceServer
 // for forward compatibility.
@@ -153,6 +168,10 @@ type VrfServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteVrf(context.Context, *DeleteVrfRequest) (*operation.Operation, error)
+	// Lists operations for the specified vrf.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListVrfOperations(context.Context, *ListVrfOperationsRequest) (*ListVrfOperationsResponse, error)
 }
 
 // UnimplementedVrfServiceServer should be embedded to have
@@ -176,6 +195,9 @@ func (UnimplementedVrfServiceServer) UpdateVrf(context.Context, *UpdateVrfReques
 }
 func (UnimplementedVrfServiceServer) DeleteVrf(context.Context, *DeleteVrfRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteVrf not implemented")
+}
+func (UnimplementedVrfServiceServer) ListVrfOperations(context.Context, *ListVrfOperationsRequest) (*ListVrfOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListVrfOperations not implemented")
 }
 func (UnimplementedVrfServiceServer) testEmbeddedByValue() {}
 
@@ -287,6 +309,24 @@ func _VrfService_DeleteVrf_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _VrfService_ListVrfOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVrfOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VrfServiceServer).ListVrfOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VrfService_ListVrfOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VrfServiceServer).ListVrfOperations(ctx, req.(*ListVrfOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // VrfService_ServiceDesc is the grpc.ServiceDesc for VrfService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -313,6 +353,10 @@ var VrfService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteVrf",
 			Handler:    _VrfService_DeleteVrf_Handler,
+		},
+		{
+			MethodName: "ListVrfOperations",
+			Handler:    _VrfService_ListVrfOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

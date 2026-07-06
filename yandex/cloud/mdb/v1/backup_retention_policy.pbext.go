@@ -61,3 +61,19 @@ func (m *BackupRetentionPolicySpec) SetRetainForDays(v int64) {
 func (m *BackupRetentionPolicySpec) SetDescription(v string) {
 	m.Description = v
 }
+
+func (m *CreateBackupRetentionPolicyMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *CreateBackupRetentionPolicyMetadata) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *DeleteBackupRetentionPolicyMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *DeleteBackupRetentionPolicyMetadata) SetPolicyId(v string) {
+	m.PolicyId = v
+}

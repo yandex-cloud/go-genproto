@@ -3,6 +3,7 @@
 package baremetal
 
 import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -164,6 +165,34 @@ func (m *RenewServerRentalRequest) SetServerId(v string) {
 
 func (m *RenewServerRentalRequest) SetNextRentalPeriodId(v string) {
 	m.NextRentalPeriodId = v
+}
+
+func (m *ListServerOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListServerOperationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListServerOperationsRequest) SetServerId(v string) {
+	m.ServerId = v
+}
+
+func (m *ListServerOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListServerOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListServerOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListServerOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }
 
 func (m *CreateServerMetadata) SetServerId(v string) {

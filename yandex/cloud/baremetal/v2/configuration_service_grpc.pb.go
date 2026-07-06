@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ConfigurationService_ListConfigurationRentalPeriods_FullMethodName = "/yandex.cloud.baremetal.v2.ConfigurationService/ListConfigurationRentalPeriods"
+	ConfigurationService_ListConfigurationRentalPeriods_FullMethodName       = "/yandex.cloud.baremetal.v2.ConfigurationService/ListConfigurationRentalPeriods"
+	ConfigurationService_ResolveConfigurationDefaultStorage_FullMethodName   = "/yandex.cloud.baremetal.v2.ConfigurationService/ResolveConfigurationDefaultStorage"
+	ConfigurationService_ResolveConfigurationsDefaultStorages_FullMethodName = "/yandex.cloud.baremetal.v2.ConfigurationService/ResolveConfigurationsDefaultStorages"
 )
 
 // ConfigurationServiceClient is the client API for ConfigurationService service.
@@ -32,6 +34,22 @@ type ConfigurationServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	ListConfigurationRentalPeriods(ctx context.Context, in *ListConfigurationRentalPeriodsRequest, opts ...grpc.CallOption) (*ListConfigurationRentalPeriodsResponse, error)
+	// Returns the default storage for the specified configuration.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveConfigurationDefaultStorage(ctx context.Context, in *ResolveConfigurationDefaultStorageRequest, opts ...grpc.CallOption) (*DefaultStorage, error)
+	// Returns the default storages for the specified configurations.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveConfigurationsDefaultStorages(ctx context.Context, in *ResolveConfigurationsDefaultStoragesRequest, opts ...grpc.CallOption) (*ResolveConfigurationsDefaultStoragesResponse, error)
 }
 
 type configurationServiceClient struct {
@@ -52,6 +70,26 @@ func (c *configurationServiceClient) ListConfigurationRentalPeriods(ctx context.
 	return out, nil
 }
 
+func (c *configurationServiceClient) ResolveConfigurationDefaultStorage(ctx context.Context, in *ResolveConfigurationDefaultStorageRequest, opts ...grpc.CallOption) (*DefaultStorage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DefaultStorage)
+	err := c.cc.Invoke(ctx, ConfigurationService_ResolveConfigurationDefaultStorage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *configurationServiceClient) ResolveConfigurationsDefaultStorages(ctx context.Context, in *ResolveConfigurationsDefaultStoragesRequest, opts ...grpc.CallOption) (*ResolveConfigurationsDefaultStoragesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveConfigurationsDefaultStoragesResponse)
+	err := c.cc.Invoke(ctx, ConfigurationService_ResolveConfigurationsDefaultStorages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConfigurationServiceServer is the server API for ConfigurationService service.
 // All implementations should embed UnimplementedConfigurationServiceServer
 // for forward compatibility.
@@ -62,6 +100,22 @@ type ConfigurationServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	ListConfigurationRentalPeriods(context.Context, *ListConfigurationRentalPeriodsRequest) (*ListConfigurationRentalPeriodsResponse, error)
+	// Returns the default storage for the specified configuration.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveConfigurationDefaultStorage(context.Context, *ResolveConfigurationDefaultStorageRequest) (*DefaultStorage, error)
+	// Returns the default storages for the specified configurations.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveConfigurationsDefaultStorages(context.Context, *ResolveConfigurationsDefaultStoragesRequest) (*ResolveConfigurationsDefaultStoragesResponse, error)
 }
 
 // UnimplementedConfigurationServiceServer should be embedded to have
@@ -73,6 +127,12 @@ type UnimplementedConfigurationServiceServer struct{}
 
 func (UnimplementedConfigurationServiceServer) ListConfigurationRentalPeriods(context.Context, *ListConfigurationRentalPeriodsRequest) (*ListConfigurationRentalPeriodsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListConfigurationRentalPeriods not implemented")
+}
+func (UnimplementedConfigurationServiceServer) ResolveConfigurationDefaultStorage(context.Context, *ResolveConfigurationDefaultStorageRequest) (*DefaultStorage, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveConfigurationDefaultStorage not implemented")
+}
+func (UnimplementedConfigurationServiceServer) ResolveConfigurationsDefaultStorages(context.Context, *ResolveConfigurationsDefaultStoragesRequest) (*ResolveConfigurationsDefaultStoragesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveConfigurationsDefaultStorages not implemented")
 }
 func (UnimplementedConfigurationServiceServer) testEmbeddedByValue() {}
 
@@ -112,6 +172,42 @@ func _ConfigurationService_ListConfigurationRentalPeriods_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConfigurationService_ResolveConfigurationDefaultStorage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveConfigurationDefaultStorageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigurationServiceServer).ResolveConfigurationDefaultStorage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigurationService_ResolveConfigurationDefaultStorage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigurationServiceServer).ResolveConfigurationDefaultStorage(ctx, req.(*ResolveConfigurationDefaultStorageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConfigurationService_ResolveConfigurationsDefaultStorages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveConfigurationsDefaultStoragesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConfigurationServiceServer).ResolveConfigurationsDefaultStorages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConfigurationService_ResolveConfigurationsDefaultStorages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConfigurationServiceServer).ResolveConfigurationsDefaultStorages(ctx, req.(*ResolveConfigurationsDefaultStoragesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConfigurationService_ServiceDesc is the grpc.ServiceDesc for ConfigurationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -122,6 +218,14 @@ var ConfigurationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListConfigurationRentalPeriods",
 			Handler:    _ConfigurationService_ListConfigurationRentalPeriods_Handler,
+		},
+		{
+			MethodName: "ResolveConfigurationDefaultStorage",
+			Handler:    _ConfigurationService_ResolveConfigurationDefaultStorage_Handler,
+		},
+		{
+			MethodName: "ResolveConfigurationsDefaultStorages",
+			Handler:    _ConfigurationService_ResolveConfigurationsDefaultStorages_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

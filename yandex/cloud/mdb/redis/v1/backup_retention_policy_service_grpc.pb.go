@@ -9,6 +9,7 @@ package redis
 import (
 	context "context"
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -40,9 +41,9 @@ type BackupRetentionPolicyServiceClient interface {
 	// List all retention policies for all clusters in a folder.
 	ListByFolder(ctx context.Context, in *ListBackupRetentionPoliciesByFolderRequest, opts ...grpc.CallOption) (*ListBackupRetentionPoliciesResponse, error)
 	// Add a new retention policy.
-	Create(ctx context.Context, in *CreateBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*CreateBackupRetentionPolicyResponse, error)
+	Create(ctx context.Context, in *CreateBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Delete retention policy.
-	Delete(ctx context.Context, in *DeleteBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*DeleteBackupRetentionPolicyResponse, error)
+	Delete(ctx context.Context, in *DeleteBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type backupRetentionPolicyServiceClient struct {
@@ -83,9 +84,9 @@ func (c *backupRetentionPolicyServiceClient) ListByFolder(ctx context.Context, i
 	return out, nil
 }
 
-func (c *backupRetentionPolicyServiceClient) Create(ctx context.Context, in *CreateBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*CreateBackupRetentionPolicyResponse, error) {
+func (c *backupRetentionPolicyServiceClient) Create(ctx context.Context, in *CreateBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateBackupRetentionPolicyResponse)
+	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, BackupRetentionPolicyService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -93,9 +94,9 @@ func (c *backupRetentionPolicyServiceClient) Create(ctx context.Context, in *Cre
 	return out, nil
 }
 
-func (c *backupRetentionPolicyServiceClient) Delete(ctx context.Context, in *DeleteBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*DeleteBackupRetentionPolicyResponse, error) {
+func (c *backupRetentionPolicyServiceClient) Delete(ctx context.Context, in *DeleteBackupRetentionPolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteBackupRetentionPolicyResponse)
+	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, BackupRetentionPolicyService_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -116,9 +117,9 @@ type BackupRetentionPolicyServiceServer interface {
 	// List all retention policies for all clusters in a folder.
 	ListByFolder(context.Context, *ListBackupRetentionPoliciesByFolderRequest) (*ListBackupRetentionPoliciesResponse, error)
 	// Add a new retention policy.
-	Create(context.Context, *CreateBackupRetentionPolicyRequest) (*CreateBackupRetentionPolicyResponse, error)
+	Create(context.Context, *CreateBackupRetentionPolicyRequest) (*operation.Operation, error)
 	// Delete retention policy.
-	Delete(context.Context, *DeleteBackupRetentionPolicyRequest) (*DeleteBackupRetentionPolicyResponse, error)
+	Delete(context.Context, *DeleteBackupRetentionPolicyRequest) (*operation.Operation, error)
 }
 
 // UnimplementedBackupRetentionPolicyServiceServer should be embedded to have
@@ -137,10 +138,10 @@ func (UnimplementedBackupRetentionPolicyServiceServer) List(context.Context, *Li
 func (UnimplementedBackupRetentionPolicyServiceServer) ListByFolder(context.Context, *ListBackupRetentionPoliciesByFolderRequest) (*ListBackupRetentionPoliciesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListByFolder not implemented")
 }
-func (UnimplementedBackupRetentionPolicyServiceServer) Create(context.Context, *CreateBackupRetentionPolicyRequest) (*CreateBackupRetentionPolicyResponse, error) {
+func (UnimplementedBackupRetentionPolicyServiceServer) Create(context.Context, *CreateBackupRetentionPolicyRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedBackupRetentionPolicyServiceServer) Delete(context.Context, *DeleteBackupRetentionPolicyRequest) (*DeleteBackupRetentionPolicyResponse, error) {
+func (UnimplementedBackupRetentionPolicyServiceServer) Delete(context.Context, *DeleteBackupRetentionPolicyRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedBackupRetentionPolicyServiceServer) testEmbeddedByValue() {}

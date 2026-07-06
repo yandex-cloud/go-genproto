@@ -8,6 +8,9 @@ package postgresql
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -148,7 +151,7 @@ func (x *ListBackupRetentionPoliciesRequest) GetPageToken() string {
 type ListBackupRetentionPoliciesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of [BackupRetentionPolicy] associated with the cluster.
-	Policies []*BackupRetentionPolicy `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
+	Policies []*v1.BackupRetentionPolicy `protobuf:"bytes,1,rep,name=policies,proto3" json:"policies,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListBackupRetentionPoliciesRequest.page_size], use the [next_page_token] as the value
 	// for the [ListBackupRetentionPoliciesRequest.page_token] query parameter in the next list request.
@@ -188,7 +191,7 @@ func (*ListBackupRetentionPoliciesResponse) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListBackupRetentionPoliciesResponse) GetPolicies() []*BackupRetentionPolicy {
+func (x *ListBackupRetentionPoliciesResponse) GetPolicies() []*v1.BackupRetentionPolicy {
 	if x != nil {
 		return x.Policies
 	}
@@ -208,7 +211,7 @@ type CreateBackupRetentionPolicyRequest struct {
 	// To get the PostgreSQL cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// CronTab schedule.
-	Cron *CronTab `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
+	Cron *v1.CronTab `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
 	// Retention duration.
 	RetainForDays int64 `protobuf:"varint,3,opt,name=retain_for_days,json=retainForDays,proto3" json:"retain_for_days,omitempty"`
 	// Policy description.
@@ -256,7 +259,7 @@ func (x *CreateBackupRetentionPolicyRequest) GetClusterId() string {
 	return ""
 }
 
-func (x *CreateBackupRetentionPolicyRequest) GetCron() *CronTab {
+func (x *CreateBackupRetentionPolicyRequest) GetCron() *v1.CronTab {
 	if x != nil {
 		return x.Cron
 	}
@@ -284,51 +287,6 @@ func (x *CreateBackupRetentionPolicyRequest) GetPolicyName() string {
 	return ""
 }
 
-type CreateBackupRetentionPolicyResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Newly created [BackupRetentionPolicy].
-	Policy        *BackupRetentionPolicy `protobuf:"bytes,1,opt,name=policy,proto3" json:"policy,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateBackupRetentionPolicyResponse) Reset() {
-	*x = CreateBackupRetentionPolicyResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateBackupRetentionPolicyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateBackupRetentionPolicyResponse) ProtoMessage() {}
-
-func (x *CreateBackupRetentionPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateBackupRetentionPolicyResponse.ProtoReflect.Descriptor instead.
-func (*CreateBackupRetentionPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *CreateBackupRetentionPolicyResponse) GetPolicy() *BackupRetentionPolicy {
-	if x != nil {
-		return x.Policy
-	}
-	return nil
-}
-
 type DeleteBackupRetentionPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the [BackupRetentionPolicy].
@@ -342,7 +300,7 @@ type DeleteBackupRetentionPolicyRequest struct {
 
 func (x *DeleteBackupRetentionPolicyRequest) Reset() {
 	*x = DeleteBackupRetentionPolicyRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -354,7 +312,7 @@ func (x *DeleteBackupRetentionPolicyRequest) String() string {
 func (*DeleteBackupRetentionPolicyRequest) ProtoMessage() {}
 
 func (x *DeleteBackupRetentionPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -367,7 +325,7 @@ func (x *DeleteBackupRetentionPolicyRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use DeleteBackupRetentionPolicyRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBackupRetentionPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteBackupRetentionPolicyRequest) GetPolicyId() string {
@@ -384,47 +342,11 @@ func (x *DeleteBackupRetentionPolicyRequest) GetClusterId() string {
 	return ""
 }
 
-type DeleteBackupRetentionPolicyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBackupRetentionPolicyResponse) Reset() {
-	*x = DeleteBackupRetentionPolicyResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBackupRetentionPolicyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBackupRetentionPolicyResponse) ProtoMessage() {}
-
-func (x *DeleteBackupRetentionPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBackupRetentionPolicyResponse.ProtoReflect.Descriptor instead.
-func (*DeleteBackupRetentionPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{6}
-}
-
 var File_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"Dyandex/cloud/mdb/postgresql/v1/backup_retention_policy_service.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1cgoogle/api/annotations.proto\x1a<yandex/cloud/mdb/postgresql/v1/backup_retention_policy.proto\x1a\x1dyandex/cloud/validation.proto\"q\n" +
+	"Dyandex/cloud/mdb/postgresql/v1/backup_retention_policy_service.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/mdb/v1/backup_retention_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"q\n" +
 	"\x1fGetBackupRetentionPolicyRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12!\n" +
@@ -435,30 +357,29 @@ const file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xa0\x01\n" +
-	"#ListBackupRetentionPoliciesResponse\x12Q\n" +
-	"\bpolicies\x18\x01 \x03(\v25.yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyR\bpolicies\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xff\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
+	"#ListBackupRetentionPoliciesResponse\x12F\n" +
+	"\bpolicies\x18\x01 \x03(\v2*.yandex.cloud.mdb.v1.BackupRetentionPolicyR\bpolicies\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf4\x01\n" +
 	"\"CreateBackupRetentionPolicyRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
-	"\x04cron\x18\x02 \x01(\v2'.yandex.cloud.mdb.postgresql.v1.CronTabR\x04cron\x12&\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x120\n" +
+	"\x04cron\x18\x02 \x01(\v2\x1c.yandex.cloud.mdb.v1.CronTabR\x04cron\x12&\n" +
 	"\x0fretain_for_days\x18\x03 \x01(\x03R\rretainForDays\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12%\n" +
 	"\vpolicy_name\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"policyName\"t\n" +
-	"#CreateBackupRetentionPolicyResponse\x12M\n" +
-	"\x06policy\x18\x01 \x01(\v25.yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyR\x06policy\"n\n" +
+	"policyName\"n\n" +
 	"\"DeleteBackupRetentionPolicyRequest\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"%\n" +
-	"#DeleteBackupRetentionPolicyResponse2\x97\a\n" +
-	"\x1cBackupRetentionPolicyService\x12\xd2\x01\n" +
-	"\x03Get\x12?.yandex.cloud.mdb.postgresql.v1.GetBackupRetentionPolicyRequest\x1a5.yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicy\"S\x82\xd3\xe4\x93\x02M\x12K/managed-postgresql/v1/clusters/{cluster_id}/retention_policies/{policy_id}\x12\xd8\x01\n" +
-	"\x04List\x12B.yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesRequest\x1aC.yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse\"G\x82\xd3\xe4\x93\x02A\x12?/managed-postgresql/v1/clusters/{cluster_id}/retention_policies\x12\xdd\x01\n" +
-	"\x06Create\x12B.yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest\x1aC.yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyResponse\"J\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-postgresql/v1/clusters/{cluster_id}/retention_policies\x12\xe6\x01\n" +
-	"\x06Delete\x12B.yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest\x1aC.yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyResponse\"S\x82\xd3\xe4\x93\x02M*K/managed-postgresql/v1/clusters/{cluster_id}/retention_policies/{policy_id}Bs\n" +
+	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId2\x86\b\n" +
+	"\x1cBackupRetentionPolicyService\x12\xc7\x01\n" +
+	"\x03Get\x12?.yandex.cloud.mdb.postgresql.v1.GetBackupRetentionPolicyRequest\x1a*.yandex.cloud.mdb.v1.BackupRetentionPolicy\"S\x82\xd3\xe4\x93\x02M\x12K/managed-postgresql/v1/clusters/{cluster_id}/retention_policies/{policy_id}\x12\xd8\x01\n" +
+	"\x04List\x12B.yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesRequest\x1aC.yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse\"G\x82\xd3\xe4\x93\x02A\x12?/managed-postgresql/v1/clusters/{cluster_id}/retention_policies\x12\xa4\x02\n" +
+	"\x06Create\x12B.yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\xb2\x01\xb2\xd2*d\n" +
+	"7yandex.cloud.mdb.v1.CreateBackupRetentionPolicyMetadata\x12)yandex.cloud.mdb.v1.BackupRetentionPolicy\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-postgresql/v1/clusters/{cluster_id}/retention_policies\x12\x99\x02\n" +
+	"\x06Delete\x12B.yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\xa7\x01\xb2\xd2*P\n" +
+	"7yandex.cloud.mdb.v1.DeleteBackupRetentionPolicyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02M*K/managed-postgresql/v1/clusters/{cluster_id}/retention_policies/{policy_id}Bs\n" +
 	"\"yandex.cloud.api.mdb.postgresql.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1;postgresqlb\x06proto3"
 
 var (
@@ -473,35 +394,33 @@ func file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_r
 	return file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_goTypes = []any{
 	(*GetBackupRetentionPolicyRequest)(nil),     // 0: yandex.cloud.mdb.postgresql.v1.GetBackupRetentionPolicyRequest
 	(*ListBackupRetentionPoliciesRequest)(nil),  // 1: yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesRequest
 	(*ListBackupRetentionPoliciesResponse)(nil), // 2: yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse
 	(*CreateBackupRetentionPolicyRequest)(nil),  // 3: yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest
-	(*CreateBackupRetentionPolicyResponse)(nil), // 4: yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyResponse
-	(*DeleteBackupRetentionPolicyRequest)(nil),  // 5: yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest
-	(*DeleteBackupRetentionPolicyResponse)(nil), // 6: yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyResponse
-	(*BackupRetentionPolicy)(nil),               // 7: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicy
-	(*CronTab)(nil),                             // 8: yandex.cloud.mdb.postgresql.v1.CronTab
+	(*DeleteBackupRetentionPolicyRequest)(nil),  // 4: yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest
+	(*v1.BackupRetentionPolicy)(nil),            // 5: yandex.cloud.mdb.v1.BackupRetentionPolicy
+	(*v1.CronTab)(nil),                          // 6: yandex.cloud.mdb.v1.CronTab
+	(*operation.Operation)(nil),                 // 7: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_depIdxs = []int32{
-	7, // 0: yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse.policies:type_name -> yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicy
-	8, // 1: yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest.cron:type_name -> yandex.cloud.mdb.postgresql.v1.CronTab
-	7, // 2: yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyResponse.policy:type_name -> yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicy
-	0, // 3: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Get:input_type -> yandex.cloud.mdb.postgresql.v1.GetBackupRetentionPolicyRequest
-	1, // 4: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.List:input_type -> yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesRequest
-	3, // 5: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Create:input_type -> yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest
-	5, // 6: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Delete:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest
-	7, // 7: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Get:output_type -> yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicy
-	2, // 8: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.List:output_type -> yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse
-	4, // 9: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Create:output_type -> yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyResponse
-	6, // 10: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Delete:output_type -> yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyResponse
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	5, // 0: yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse.policies:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicy
+	6, // 1: yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest.cron:type_name -> yandex.cloud.mdb.v1.CronTab
+	0, // 2: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Get:input_type -> yandex.cloud.mdb.postgresql.v1.GetBackupRetentionPolicyRequest
+	1, // 3: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.List:input_type -> yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesRequest
+	3, // 4: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Create:input_type -> yandex.cloud.mdb.postgresql.v1.CreateBackupRetentionPolicyRequest
+	4, // 5: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Delete:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteBackupRetentionPolicyRequest
+	5, // 6: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Get:output_type -> yandex.cloud.mdb.v1.BackupRetentionPolicy
+	2, // 7: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.List:output_type -> yandex.cloud.mdb.postgresql.v1.ListBackupRetentionPoliciesResponse
+	7, // 8: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Create:output_type -> yandex.cloud.operation.Operation
+	7, // 9: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Delete:output_type -> yandex.cloud.operation.Operation
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_init() }
@@ -509,14 +428,13 @@ func file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_i
 	if File_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto != nil {
 		return
 	}
-	file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDesc), len(file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

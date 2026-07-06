@@ -2,6 +2,86 @@
 
 package baremetal
 
+import (
+	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+)
+
+func (m *GetPrivateCloudConnectionRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *GetPrivateCloudConnectionRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetPrivateCloudConnectionRequest) SetPrivateCloudConnectionId(v string) {
+	m.PrivateCloudConnectionId = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListPrivateCloudConnectionsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListPrivateCloudConnectionsResponse) SetPrivateCloudConnections(v []*PrivateCloudConnection) {
+	m.PrivateCloudConnections = v
+}
+
+func (m *ListPrivateCloudConnectionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *CreatePrivateCloudConnectionRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *CreatePrivateCloudConnectionRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *CreatePrivateCloudConnectionRequest) SetPrivateCloudConnection(v *PrivateCloudConnection) {
+	m.PrivateCloudConnection = v
+}
+
+func (m *UpdatePrivateCloudConnectionRequest) SetPrivateCloudConnection(v *PrivateCloudConnection) {
+	m.PrivateCloudConnection = v
+}
+
+func (m *UpdatePrivateCloudConnectionRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
+	m.UpdateMask = v
+}
+
+func (m *DeletePrivateCloudConnectionRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *DeletePrivateCloudConnectionRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *DeletePrivateCloudConnectionRequest) SetPrivateCloudConnectionId(v string) {
+	m.PrivateCloudConnectionId = v
+}
+
 func (m *RestorePrivateCloudConnectionMetadata) SetPrivateCloudConnectionId(v string) {
 	m.PrivateCloudConnectionId = v
 }
@@ -15,5 +95,21 @@ func (m *CreatePrivateCloudConnectionMetadata) SetPrivateCloudConnectionId(v str
 }
 
 func (m *CreatePrivateCloudConnectionMetadata) SetOperationMetadata(v *OperationMetadata) {
+	m.OperationMetadata = v
+}
+
+func (m *UpdatePrivateCloudConnectionMetadata) SetPrivateCloudConnectionId(v string) {
+	m.PrivateCloudConnectionId = v
+}
+
+func (m *UpdatePrivateCloudConnectionMetadata) SetOperationMetadata(v *OperationMetadata) {
+	m.OperationMetadata = v
+}
+
+func (m *DeletePrivateCloudConnectionMetadata) SetPrivateCloudConnectionId(v string) {
+	m.PrivateCloudConnectionId = v
+}
+
+func (m *DeletePrivateCloudConnectionMetadata) SetOperationMetadata(v *OperationMetadata) {
 	m.OperationMetadata = v
 }

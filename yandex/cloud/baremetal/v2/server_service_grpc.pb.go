@@ -20,17 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServerService_GetServer_FullMethodName          = "/yandex.cloud.baremetal.v2.ServerService/GetServer"
-	ServerService_ListServers_FullMethodName        = "/yandex.cloud.baremetal.v2.ServerService/ListServers"
-	ServerService_CreateServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/CreateServer"
-	ServerService_BatchCreateServers_FullMethodName = "/yandex.cloud.baremetal.v2.ServerService/BatchCreateServers"
-	ServerService_UpdateServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/UpdateServer"
-	ServerService_DeleteServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/DeleteServer"
-	ServerService_PowerOffServer_FullMethodName     = "/yandex.cloud.baremetal.v2.ServerService/PowerOffServer"
-	ServerService_PowerOnServer_FullMethodName      = "/yandex.cloud.baremetal.v2.ServerService/PowerOnServer"
-	ServerService_RebootServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/RebootServer"
-	ServerService_ReinstallServer_FullMethodName    = "/yandex.cloud.baremetal.v2.ServerService/ReinstallServer"
-	ServerService_RenewServerRental_FullMethodName  = "/yandex.cloud.baremetal.v2.ServerService/RenewServerRental"
+	ServerService_GetServer_FullMethodName            = "/yandex.cloud.baremetal.v2.ServerService/GetServer"
+	ServerService_ListServers_FullMethodName          = "/yandex.cloud.baremetal.v2.ServerService/ListServers"
+	ServerService_CreateServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/CreateServer"
+	ServerService_BatchCreateServers_FullMethodName   = "/yandex.cloud.baremetal.v2.ServerService/BatchCreateServers"
+	ServerService_UpdateServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/UpdateServer"
+	ServerService_DeleteServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/DeleteServer"
+	ServerService_PowerOffServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/PowerOffServer"
+	ServerService_PowerOnServer_FullMethodName        = "/yandex.cloud.baremetal.v2.ServerService/PowerOnServer"
+	ServerService_RebootServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/RebootServer"
+	ServerService_ReinstallServer_FullMethodName      = "/yandex.cloud.baremetal.v2.ServerService/ReinstallServer"
+	ServerService_RenewServerRental_FullMethodName    = "/yandex.cloud.baremetal.v2.ServerService/RenewServerRental"
+	ServerService_ListServerOperations_FullMethodName = "/yandex.cloud.baremetal.v2.ServerService/ListServerOperations"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -95,6 +96,10 @@ type ServerServiceClient interface {
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
 	// Required for backward compatibility with old clients. --)
 	RenewServerRental(ctx context.Context, in *RenewServerRentalRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified server.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListServerOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error)
 }
 
 type serverServiceClient struct {
@@ -215,6 +220,16 @@ func (c *serverServiceClient) RenewServerRental(ctx context.Context, in *RenewSe
 	return out, nil
 }
 
+func (c *serverServiceClient) ListServerOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListServerOperationsResponse)
+	err := c.cc.Invoke(ctx, ServerService_ListServerOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -277,6 +292,10 @@ type ServerServiceServer interface {
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled
 	// Required for backward compatibility with old clients. --)
 	RenewServerRental(context.Context, *RenewServerRentalRequest) (*operation.Operation, error)
+	// Lists operations for the specified server.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListServerOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -318,6 +337,9 @@ func (UnimplementedServerServiceServer) ReinstallServer(context.Context, *Reinst
 }
 func (UnimplementedServerServiceServer) RenewServerRental(context.Context, *RenewServerRentalRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RenewServerRental not implemented")
+}
+func (UnimplementedServerServiceServer) ListServerOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListServerOperations not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -537,6 +559,24 @@ func _ServerService_RenewServerRental_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_ListServerOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListServerOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).ListServerOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_ListServerOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).ListServerOperations(ctx, req.(*ListServerOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServerService_ServiceDesc is the grpc.ServiceDesc for ServerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -587,6 +627,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RenewServerRental",
 			Handler:    _ServerService_RenewServerRental_Handler,
+		},
+		{
+			MethodName: "ListServerOperations",
+			Handler:    _ServerService_ListServerOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

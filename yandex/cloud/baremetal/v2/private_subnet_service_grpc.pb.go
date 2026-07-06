@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PrivateSubnetService_GetPrivateSubnet_FullMethodName    = "/yandex.cloud.baremetal.v2.PrivateSubnetService/GetPrivateSubnet"
-	PrivateSubnetService_ListPrivateSubnets_FullMethodName  = "/yandex.cloud.baremetal.v2.PrivateSubnetService/ListPrivateSubnets"
-	PrivateSubnetService_CreatePrivateSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateSubnetService/CreatePrivateSubnet"
-	PrivateSubnetService_UpdatePrivateSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateSubnetService/UpdatePrivateSubnet"
-	PrivateSubnetService_DeletePrivateSubnet_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateSubnetService/DeletePrivateSubnet"
+	PrivateSubnetService_GetPrivateSubnet_FullMethodName            = "/yandex.cloud.baremetal.v2.PrivateSubnetService/GetPrivateSubnet"
+	PrivateSubnetService_ListPrivateSubnets_FullMethodName          = "/yandex.cloud.baremetal.v2.PrivateSubnetService/ListPrivateSubnets"
+	PrivateSubnetService_CreatePrivateSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PrivateSubnetService/CreatePrivateSubnet"
+	PrivateSubnetService_UpdatePrivateSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PrivateSubnetService/UpdatePrivateSubnet"
+	PrivateSubnetService_DeletePrivateSubnet_FullMethodName         = "/yandex.cloud.baremetal.v2.PrivateSubnetService/DeletePrivateSubnet"
+	PrivateSubnetService_ListPrivateSubnetOperations_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateSubnetService/ListPrivateSubnetOperations"
 )
 
 // PrivateSubnetServiceClient is the client API for PrivateSubnetService service.
@@ -57,6 +58,10 @@ type PrivateSubnetServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeletePrivateSubnet(ctx context.Context, in *DeletePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Lists operations for the specified private subnet.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListPrivateSubnetOperations(ctx context.Context, in *ListPrivateSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPrivateSubnetOperationsResponse, error)
 }
 
 type privateSubnetServiceClient struct {
@@ -117,6 +122,16 @@ func (c *privateSubnetServiceClient) DeletePrivateSubnet(ctx context.Context, in
 	return out, nil
 }
 
+func (c *privateSubnetServiceClient) ListPrivateSubnetOperations(ctx context.Context, in *ListPrivateSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPrivateSubnetOperationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPrivateSubnetOperationsResponse)
+	err := c.cc.Invoke(ctx, PrivateSubnetService_ListPrivateSubnetOperations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrivateSubnetServiceServer is the server API for PrivateSubnetService service.
 // All implementations should embed UnimplementedPrivateSubnetServiceServer
 // for forward compatibility.
@@ -147,6 +162,10 @@ type PrivateSubnetServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeletePrivateSubnet(context.Context, *DeletePrivateSubnetRequest) (*operation.Operation, error)
+	// Lists operations for the specified private subnet.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	ListPrivateSubnetOperations(context.Context, *ListPrivateSubnetOperationsRequest) (*ListPrivateSubnetOperationsResponse, error)
 }
 
 // UnimplementedPrivateSubnetServiceServer should be embedded to have
@@ -170,6 +189,9 @@ func (UnimplementedPrivateSubnetServiceServer) UpdatePrivateSubnet(context.Conte
 }
 func (UnimplementedPrivateSubnetServiceServer) DeletePrivateSubnet(context.Context, *DeletePrivateSubnetRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeletePrivateSubnet not implemented")
+}
+func (UnimplementedPrivateSubnetServiceServer) ListPrivateSubnetOperations(context.Context, *ListPrivateSubnetOperationsRequest) (*ListPrivateSubnetOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListPrivateSubnetOperations not implemented")
 }
 func (UnimplementedPrivateSubnetServiceServer) testEmbeddedByValue() {}
 
@@ -281,6 +303,24 @@ func _PrivateSubnetService_DeletePrivateSubnet_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PrivateSubnetService_ListPrivateSubnetOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPrivateSubnetOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrivateSubnetServiceServer).ListPrivateSubnetOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PrivateSubnetService_ListPrivateSubnetOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrivateSubnetServiceServer).ListPrivateSubnetOperations(ctx, req.(*ListPrivateSubnetOperationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PrivateSubnetService_ServiceDesc is the grpc.ServiceDesc for PrivateSubnetService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -307,6 +347,10 @@ var PrivateSubnetService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeletePrivateSubnet",
 			Handler:    _PrivateSubnetService_DeletePrivateSubnet_Handler,
+		},
+		{
+			MethodName: "ListPrivateSubnetOperations",
+			Handler:    _PrivateSubnetService_ListPrivateSubnetOperations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

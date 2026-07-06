@@ -674,6 +674,18 @@ func (m *PostgresqlConfig18) SetVacuumTruncate(v *wrapperspb.BoolValue) {
 	m.VacuumTruncate = v
 }
 
+func (m *PostgresqlConfig18) SetAutovacuumVacuumThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumVacuumThreshold = v
+}
+
+func (m *PostgresqlConfig18) SetAutovacuumAnalyzeThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumAnalyzeThreshold = v
+}
+
+func (m *PostgresqlConfig18) SetMaxActiveReplicationOrigins(v *wrapperspb.Int64Value) {
+	m.MaxActiveReplicationOrigins = v
+}
+
 func (m *PostgresqlConfigSet18) SetEffectiveConfig(v *PostgresqlConfig18) {
 	m.EffectiveConfig = v
 }

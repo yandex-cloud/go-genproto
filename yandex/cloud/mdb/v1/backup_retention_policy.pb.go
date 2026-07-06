@@ -263,6 +263,114 @@ func (x *BackupRetentionPolicySpec) GetDescription() string {
 	return ""
 }
 
+type CreateBackupRetentionPolicyMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the newly created [BackupRetentionPolicy].
+	PolicyId      string `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateBackupRetentionPolicyMetadata) Reset() {
+	*x = CreateBackupRetentionPolicyMetadata{}
+	mi := &file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateBackupRetentionPolicyMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateBackupRetentionPolicyMetadata) ProtoMessage() {}
+
+func (x *CreateBackupRetentionPolicyMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateBackupRetentionPolicyMetadata.ProtoReflect.Descriptor instead.
+func (*CreateBackupRetentionPolicyMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateBackupRetentionPolicyMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *CreateBackupRetentionPolicyMetadata) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
+type DeleteBackupRetentionPolicyMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the [BackupRetentionPolicy] being deleted.
+	PolicyId      string `protobuf:"bytes,2,opt,name=policy_id,json=policyId,proto3" json:"policy_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteBackupRetentionPolicyMetadata) Reset() {
+	*x = DeleteBackupRetentionPolicyMetadata{}
+	mi := &file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteBackupRetentionPolicyMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteBackupRetentionPolicyMetadata) ProtoMessage() {}
+
+func (x *DeleteBackupRetentionPolicyMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteBackupRetentionPolicyMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteBackupRetentionPolicyMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeleteBackupRetentionPolicyMetadata) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *DeleteBackupRetentionPolicyMetadata) GetPolicyId() string {
+	if x != nil {
+		return x.PolicyId
+	}
+	return ""
+}
+
 var File_yandex_cloud_mdb_v1_backup_retention_policy_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc = "" +
@@ -289,7 +397,15 @@ const file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc = "" +
 	"policyName\x120\n" +
 	"\x04cron\x18\x02 \x01(\v2\x1c.yandex.cloud.mdb.v1.CronTabR\x04cron\x12&\n" +
 	"\x0fretain_for_days\x18\x03 \x01(\x03R\rretainForDays\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescriptionBV\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\"a\n" +
+	"#CreateBackupRetentionPolicyMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
+	"\tpolicy_id\x18\x02 \x01(\tR\bpolicyId\"a\n" +
+	"#DeleteBackupRetentionPolicyMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
+	"\tpolicy_id\x18\x02 \x01(\tR\bpolicyIdBV\n" +
 	"\x17yandex.cloud.api.mdb.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1;mdbb\x06proto3"
 
 var (
@@ -304,15 +420,17 @@ func file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDescGZIP() []byte
 	return file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_mdb_v1_backup_retention_policy_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_mdb_v1_backup_retention_policy_proto_goTypes = []any{
-	(*CronTab)(nil),                   // 0: yandex.cloud.mdb.v1.CronTab
-	(*BackupRetentionPolicy)(nil),     // 1: yandex.cloud.mdb.v1.BackupRetentionPolicy
-	(*BackupRetentionPolicySpec)(nil), // 2: yandex.cloud.mdb.v1.BackupRetentionPolicySpec
-	(*timestamppb.Timestamp)(nil),     // 3: google.protobuf.Timestamp
+	(*CronTab)(nil),                             // 0: yandex.cloud.mdb.v1.CronTab
+	(*BackupRetentionPolicy)(nil),               // 1: yandex.cloud.mdb.v1.BackupRetentionPolicy
+	(*BackupRetentionPolicySpec)(nil),           // 2: yandex.cloud.mdb.v1.BackupRetentionPolicySpec
+	(*CreateBackupRetentionPolicyMetadata)(nil), // 3: yandex.cloud.mdb.v1.CreateBackupRetentionPolicyMetadata
+	(*DeleteBackupRetentionPolicyMetadata)(nil), // 4: yandex.cloud.mdb.v1.DeleteBackupRetentionPolicyMetadata
+	(*timestamppb.Timestamp)(nil),               // 5: google.protobuf.Timestamp
 }
 var file_yandex_cloud_mdb_v1_backup_retention_policy_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.mdb.v1.BackupRetentionPolicy.created_at:type_name -> google.protobuf.Timestamp
+	5, // 0: yandex.cloud.mdb.v1.BackupRetentionPolicy.created_at:type_name -> google.protobuf.Timestamp
 	0, // 1: yandex.cloud.mdb.v1.BackupRetentionPolicy.cron:type_name -> yandex.cloud.mdb.v1.CronTab
 	0, // 2: yandex.cloud.mdb.v1.BackupRetentionPolicySpec.cron:type_name -> yandex.cloud.mdb.v1.CronTab
 	3, // [3:3] is the sub-list for method output_type
@@ -333,7 +451,7 @@ func file_yandex_cloud_mdb_v1_backup_retention_policy_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc), len(file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -66,10 +66,6 @@ func (m *CreateBackupRetentionPolicyRequest) SetPolicyName(v string) {
 	m.PolicyName = v
 }
 
-func (m *CreateBackupRetentionPolicyResponse) SetPolicy(v *v1.BackupRetentionPolicy) {
-	m.Policy = v
-}
-
 func (m *DeleteBackupRetentionPolicyRequest) SetPolicyId(v string) {
 	m.PolicyId = v
 }

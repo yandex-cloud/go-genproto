@@ -1212,9 +1212,12 @@ type PostgresqlConfig18_1C struct {
 	MaxLogicalReplicationWorkers        *wrapperspb.Int64Value                         `protobuf:"bytes,170,opt,name=max_logical_replication_workers,json=maxLogicalReplicationWorkers,proto3" json:"max_logical_replication_workers,omitempty"`
 	MaxWalSenders                       *wrapperspb.Int64Value                         `protobuf:"bytes,171,opt,name=max_wal_senders,json=maxWalSenders,proto3" json:"max_wal_senders,omitempty"`
 	MaxReplicationSlots                 *wrapperspb.Int64Value                         `protobuf:"bytes,172,opt,name=max_replication_slots,json=maxReplicationSlots,proto3" json:"max_replication_slots,omitempty"`
-	IdleSessionTimeout                  *wrapperspb.Int64Value                         `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"` // in milliseconds.
-	CheckpointWarning                   *wrapperspb.Int64Value                         `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`      // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
-	VacuumTruncate                      *wrapperspb.BoolValue                          `protobuf:"bytes,175,opt,name=vacuum_truncate,json=vacuumTruncate,proto3" json:"vacuum_truncate,omitempty"`               // Enables or disables vacuum to try to truncate off any empty pages at the end of the table. Default is true.
+	IdleSessionTimeout                  *wrapperspb.Int64Value                         `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`                              // in milliseconds.
+	CheckpointWarning                   *wrapperspb.Int64Value                         `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                                   // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
+	VacuumTruncate                      *wrapperspb.BoolValue                          `protobuf:"bytes,175,opt,name=vacuum_truncate,json=vacuumTruncate,proto3" json:"vacuum_truncate,omitempty"`                                            // Enables or disables vacuum to try to truncate off any empty pages at the end of the table. Default is true.
+	AutovacuumVacuumThreshold           *wrapperspb.Int64Value                         `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`         // Specifies the minimum number of updated or deleted tuples needed to trigger a VACUUM in any one table. The default is 50 tuples.
+	AutovacuumAnalyzeThreshold          *wrapperspb.Int64Value                         `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"`      // Specifies the minimum number of inserted, updated or deleted tuples needed to trigger an ANALYZE in any one table. The default is 50 tuples.
+	MaxActiveReplicationOrigins         *wrapperspb.Int64Value                         `protobuf:"bytes,179,opt,name=max_active_replication_origins,json=maxActiveReplicationOrigins,proto3" json:"max_active_replication_origins,omitempty"` // Maximum number of replication origins that can be tracked simultaneously, effectively limiting the number of logical replication subscriptions that can be created on the server. Changing this parameter requires a server restart.
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2432,6 +2435,27 @@ func (x *PostgresqlConfig18_1C) GetVacuumTruncate() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *PostgresqlConfig18_1C) GetAutovacuumVacuumThreshold() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.AutovacuumVacuumThreshold
+	}
+	return nil
+}
+
+func (x *PostgresqlConfig18_1C) GetAutovacuumAnalyzeThreshold() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.AutovacuumAnalyzeThreshold
+	}
+	return nil
+}
+
+func (x *PostgresqlConfig18_1C) GetMaxActiveReplicationOrigins() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MaxActiveReplicationOrigins
+	}
+	return nil
+}
+
 type PostgresqlConfigSet18_1C struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a PostgreSQL 18 1C cluster (a combination of settings defined
@@ -2500,7 +2524,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto protoreflec
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x80\x90\x01\n" +
+	";yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"ْ\x01\n" +
 	"\x15PostgresqlConfig18_1C\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2687,7 +2711,11 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_rawDesc =
 	"\xfa\xc71\x0620-100R\x13maxReplicationSlots\x12`\n" +
 	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\x12`\n" +
 	"\x12checkpoint_warning\x18\xae\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f0-2147483647000R\x11checkpointWarning\x12D\n" +
-	"\x0fvacuum_truncate\x18\xaf\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x0evacuumTruncate\"\xc6\x01\n" +
+	"\x0fvacuum_truncate\x18\xaf\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x0evacuumTruncate\x12n\n" +
+	"\x1bautovacuum_vacuum_threshold\x18\xb1\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x19autovacuumVacuumThreshold\x12p\n" +
+	"\x1cautovacuum_analyze_threshold\x18\xb2\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1aautovacuumAnalyzeThreshold\x12m\n" +
+	"\x1emax_active_replication_origins\x18\xb3\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x0620-100R\x1bmaxActiveReplicationOrigins\"\xc6\x01\n" +
 	"\x14AutoExplainLogFormat\x12'\n" +
 	"#AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
@@ -2793,7 +2821,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_rawDesc =
 	"\tXmlOption\x12\x1a\n" +
 	"\x16XML_OPTION_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13XML_OPTION_DOCUMENT\x10\x01\x12\x16\n" +
-	"\x12XML_OPTION_CONTENT\x10\x02J\x04\b\x13\x10\x14J\x04\b@\x10AJ\x04\bN\x10OJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\xa6\x01\x10\xa7\x01\"\xc7\x02\n" +
+	"\x12XML_OPTION_CONTENT\x10\x02J\x04\b\x13\x10\x14J\x04\b@\x10AJ\x04\bN\x10OJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\xa6\x01\x10\xa7\x01J\x06\b\xb0\x01\x10\xb1\x01\"\xc7\x02\n" +
 	"\x18PostgresqlConfigSet18_1C\x12g\n" +
 	"\x10effective_config\x18\x01 \x01(\v2<.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1CR\x0feffectiveConfig\x12]\n" +
 	"\vuser_config\x18\x02 \x01(\v2<.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1CR\n" +
@@ -3007,14 +3035,17 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_depIdxs = [
 	19,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.idle_session_timeout:type_name -> google.protobuf.Int64Value
 	19,  // 165: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.checkpoint_warning:type_name -> google.protobuf.Int64Value
 	21,  // 166: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.vacuum_truncate:type_name -> google.protobuf.BoolValue
-	17,  // 167: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	17,  // 168: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	17,  // 169: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	170, // [170:170] is the sub-list for method output_type
-	170, // [170:170] is the sub-list for method input_type
-	170, // [170:170] is the sub-list for extension type_name
-	170, // [170:170] is the sub-list for extension extendee
-	0,   // [0:170] is the sub-list for field type_name
+	19,  // 167: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.autovacuum_vacuum_threshold:type_name -> google.protobuf.Int64Value
+	19,  // 168: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.autovacuum_analyze_threshold:type_name -> google.protobuf.Int64Value
+	19,  // 169: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C.max_active_replication_origins:type_name -> google.protobuf.Int64Value
+	17,  // 170: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	17,  // 171: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	17,  // 172: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet18_1C.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	173, // [173:173] is the sub-list for method output_type
+	173, // [173:173] is the sub-list for method input_type
+	173, // [173:173] is the sub-list for extension type_name
+	173, // [173:173] is the sub-list for extension extendee
+	0,   // [0:173] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql18_1c_proto_init() }

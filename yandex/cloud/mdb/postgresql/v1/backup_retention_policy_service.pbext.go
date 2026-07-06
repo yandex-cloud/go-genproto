@@ -2,6 +2,10 @@
 
 package postgresql
 
+import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
+)
+
 func (m *GetBackupRetentionPolicyRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -22,7 +26,7 @@ func (m *ListBackupRetentionPoliciesRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
-func (m *ListBackupRetentionPoliciesResponse) SetPolicies(v []*BackupRetentionPolicy) {
+func (m *ListBackupRetentionPoliciesResponse) SetPolicies(v []*v1.BackupRetentionPolicy) {
 	m.Policies = v
 }
 
@@ -34,7 +38,7 @@ func (m *CreateBackupRetentionPolicyRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *CreateBackupRetentionPolicyRequest) SetCron(v *CronTab) {
+func (m *CreateBackupRetentionPolicyRequest) SetCron(v *v1.CronTab) {
 	m.Cron = v
 }
 
@@ -48,10 +52,6 @@ func (m *CreateBackupRetentionPolicyRequest) SetDescription(v string) {
 
 func (m *CreateBackupRetentionPolicyRequest) SetPolicyName(v string) {
 	m.PolicyName = v
-}
-
-func (m *CreateBackupRetentionPolicyResponse) SetPolicy(v *BackupRetentionPolicy) {
-	m.Policy = v
 }
 
 func (m *DeleteBackupRetentionPolicyRequest) SetPolicyId(v string) {

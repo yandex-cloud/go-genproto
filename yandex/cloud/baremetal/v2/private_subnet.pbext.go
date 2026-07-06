@@ -50,6 +50,10 @@ func (m *PrivateSubnet) SetAnnotations(v map[string]string) {
 	m.Annotations = v
 }
 
+func (m *PrivateSubnet) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
 func (m *PrivateSubnet_VrfOptions) SetVrfId(v string) {
 	m.VrfId = v
 }

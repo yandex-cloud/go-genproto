@@ -244,7 +244,7 @@ func (x NetworkPolicy_Provider) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use NetworkPolicy_Provider.Descriptor instead.
 func (NetworkPolicy_Provider) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{10, 0}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{12, 0}
 }
 
 type Cilium_RoutingMode int32
@@ -290,7 +290,7 @@ func (x Cilium_RoutingMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Cilium_RoutingMode.Descriptor instead.
 func (Cilium_RoutingMode) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{12, 0}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{14, 0}
 }
 
 // A Kubernetes cluster.
@@ -746,6 +746,152 @@ func (*Master_ZonalMaster) isMaster_MasterType() {}
 
 func (*Master_RegionalMaster) isMaster_MasterType() {}
 
+type MasterResources struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The number of cores available to each master instance.
+	Cores int64 `protobuf:"varint,1,opt,name=cores,proto3" json:"cores,omitempty"`
+	// Baseline level of CPU performance with the ability to burst performance above that baseline level.
+	// This field sets baseline performance for each core.
+	CoreFraction int64 `protobuf:"varint,2,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
+	// The amount of memory available to each master instance, specified in bytes.
+	Memory        int64 `protobuf:"varint,3,opt,name=memory,proto3" json:"memory,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MasterResources) Reset() {
+	*x = MasterResources{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterResources) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterResources) ProtoMessage() {}
+
+func (x *MasterResources) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterResources.ProtoReflect.Descriptor instead.
+func (*MasterResources) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *MasterResources) GetCores() int64 {
+	if x != nil {
+		return x.Cores
+	}
+	return 0
+}
+
+func (x *MasterResources) GetCoreFraction() int64 {
+	if x != nil {
+		return x.CoreFraction
+	}
+	return 0
+}
+
+func (x *MasterResources) GetMemory() int64 {
+	if x != nil {
+		return x.Memory
+	}
+	return 0
+}
+
+type MasterScalePolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ScaleType:
+	//
+	//	*MasterScalePolicy_FixedScale_
+	//	*MasterScalePolicy_AutoScale_
+	ScaleType     isMasterScalePolicy_ScaleType `protobuf_oneof:"scale_type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MasterScalePolicy) Reset() {
+	*x = MasterScalePolicy{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterScalePolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterScalePolicy) ProtoMessage() {}
+
+func (x *MasterScalePolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterScalePolicy.ProtoReflect.Descriptor instead.
+func (*MasterScalePolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MasterScalePolicy) GetScaleType() isMasterScalePolicy_ScaleType {
+	if x != nil {
+		return x.ScaleType
+	}
+	return nil
+}
+
+func (x *MasterScalePolicy) GetFixedScale() *MasterScalePolicy_FixedScale {
+	if x != nil {
+		if x, ok := x.ScaleType.(*MasterScalePolicy_FixedScale_); ok {
+			return x.FixedScale
+		}
+	}
+	return nil
+}
+
+func (x *MasterScalePolicy) GetAutoScale() *MasterScalePolicy_AutoScale {
+	if x != nil {
+		if x, ok := x.ScaleType.(*MasterScalePolicy_AutoScale_); ok {
+			return x.AutoScale
+		}
+	}
+	return nil
+}
+
+type isMasterScalePolicy_ScaleType interface {
+	isMasterScalePolicy_ScaleType()
+}
+
+type MasterScalePolicy_FixedScale_ struct {
+	FixedScale *MasterScalePolicy_FixedScale `protobuf:"bytes,1,opt,name=fixed_scale,json=fixedScale,proto3,oneof"`
+}
+
+type MasterScalePolicy_AutoScale_ struct {
+	AutoScale *MasterScalePolicy_AutoScale `protobuf:"bytes,2,opt,name=auto_scale,json=autoScale,proto3,oneof"`
+}
+
+func (*MasterScalePolicy_FixedScale_) isMasterScalePolicy_ScaleType() {}
+
+func (*MasterScalePolicy_AutoScale_) isMasterScalePolicy_ScaleType() {}
+
 type MasterAuth struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// PEM-encoded public certificate that is the root of trust for the Kubernetes cluster.
@@ -756,7 +902,7 @@ type MasterAuth struct {
 
 func (x *MasterAuth) Reset() {
 	*x = MasterAuth{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -768,7 +914,7 @@ func (x *MasterAuth) String() string {
 func (*MasterAuth) ProtoMessage() {}
 
 func (x *MasterAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +927,7 @@ func (x *MasterAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterAuth.ProtoReflect.Descriptor instead.
 func (*MasterAuth) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MasterAuth) GetClusterCaCertificate() string {
@@ -789,402 +935,6 @@ func (x *MasterAuth) GetClusterCaCertificate() string {
 		return x.ClusterCaCertificate
 	}
 	return ""
-}
-
-type ZonalMaster struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the availability zone where the master resides.
-	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// IPv4 internal network address that is assigned to the master.
-	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
-	// IPv4 external network address that is assigned to the master.
-	ExternalV4Address string `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *ZonalMaster) Reset() {
-	*x = ZonalMaster{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ZonalMaster) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ZonalMaster) ProtoMessage() {}
-
-func (x *ZonalMaster) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ZonalMaster.ProtoReflect.Descriptor instead.
-func (*ZonalMaster) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ZonalMaster) GetZoneId() string {
-	if x != nil {
-		return x.ZoneId
-	}
-	return ""
-}
-
-func (x *ZonalMaster) GetInternalV4Address() string {
-	if x != nil {
-		return x.InternalV4Address
-	}
-	return ""
-}
-
-func (x *ZonalMaster) GetExternalV4Address() string {
-	if x != nil {
-		return x.ExternalV4Address
-	}
-	return ""
-}
-
-type RegionalMaster struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the region where the master resides.
-	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// IPv4 internal network address that is assigned to the master.
-	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
-	// IPv4 external network address that is assigned to the master.
-	ExternalV4Address string `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
-	// IPv6 external network address that is assigned to the master.
-	ExternalV6Address string `protobuf:"bytes,4,opt,name=external_v6_address,json=externalV6Address,proto3" json:"external_v6_address,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *RegionalMaster) Reset() {
-	*x = RegionalMaster{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegionalMaster) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegionalMaster) ProtoMessage() {}
-
-func (x *RegionalMaster) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegionalMaster.ProtoReflect.Descriptor instead.
-func (*RegionalMaster) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *RegionalMaster) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-func (x *RegionalMaster) GetInternalV4Address() string {
-	if x != nil {
-		return x.InternalV4Address
-	}
-	return ""
-}
-
-func (x *RegionalMaster) GetExternalV4Address() string {
-	if x != nil {
-		return x.ExternalV4Address
-	}
-	return ""
-}
-
-func (x *RegionalMaster) GetExternalV6Address() string {
-	if x != nil {
-		return x.ExternalV6Address
-	}
-	return ""
-}
-
-type Location struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the availability zone where the master resides.
-	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the VPC network's subnet where the master resides.
-	SubnetId      string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Location) Reset() {
-	*x = Location{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Location) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Location) ProtoMessage() {}
-
-func (x *Location) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Location.ProtoReflect.Descriptor instead.
-func (*Location) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *Location) GetZoneId() string {
-	if x != nil {
-		return x.ZoneId
-	}
-	return ""
-}
-
-func (x *Location) GetSubnetId() string {
-	if x != nil {
-		return x.SubnetId
-	}
-	return ""
-}
-
-type MasterEndpoints struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Internal endpoint that can be used to connect to the master from cloud networks.
-	InternalV4Endpoint string `protobuf:"bytes,1,opt,name=internal_v4_endpoint,json=internalV4Endpoint,proto3" json:"internal_v4_endpoint,omitempty"`
-	// External endpoint that can be used to access Kubernetes cluster API from the internet (outside of the cloud).
-	ExternalV4Endpoint string `protobuf:"bytes,2,opt,name=external_v4_endpoint,json=externalV4Endpoint,proto3" json:"external_v4_endpoint,omitempty"`
-	// External IPv6 endpoint that can be used to access Kubernetes cluster API from the internet (outside of the cloud).
-	ExternalV6Endpoint string `protobuf:"bytes,3,opt,name=external_v6_endpoint,json=externalV6Endpoint,proto3" json:"external_v6_endpoint,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *MasterEndpoints) Reset() {
-	*x = MasterEndpoints{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterEndpoints) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterEndpoints) ProtoMessage() {}
-
-func (x *MasterEndpoints) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterEndpoints.ProtoReflect.Descriptor instead.
-func (*MasterEndpoints) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *MasterEndpoints) GetInternalV4Endpoint() string {
-	if x != nil {
-		return x.InternalV4Endpoint
-	}
-	return ""
-}
-
-func (x *MasterEndpoints) GetExternalV4Endpoint() string {
-	if x != nil {
-		return x.ExternalV4Endpoint
-	}
-	return ""
-}
-
-func (x *MasterEndpoints) GetExternalV6Endpoint() string {
-	if x != nil {
-		return x.ExternalV6Endpoint
-	}
-	return ""
-}
-
-type IPAllocationPolicy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// CIDR block. IP range for allocating pod addresses.
-	//
-	// It should not overlap with any subnet in the network the Kubernetes cluster located in. Static routes will be
-	// set up for this CIDR blocks in node subnets.
-	ClusterIpv4CidrBlock string `protobuf:"bytes,1,opt,name=cluster_ipv4_cidr_block,json=clusterIpv4CidrBlock,proto3" json:"cluster_ipv4_cidr_block,omitempty"`
-	// Size of the masks that are assigned for each node in the cluster.
-	//
-	// If not specified, 24 is used.
-	NodeIpv4CidrMaskSize int64 `protobuf:"varint,5,opt,name=node_ipv4_cidr_mask_size,json=nodeIpv4CidrMaskSize,proto3" json:"node_ipv4_cidr_mask_size,omitempty"`
-	// CIDR block. IP range Kubernetes service Kubernetes cluster IP addresses will be allocated from.
-	//
-	// It should not overlap with any subnet in the network the Kubernetes cluster located in.
-	ServiceIpv4CidrBlock string `protobuf:"bytes,2,opt,name=service_ipv4_cidr_block,json=serviceIpv4CidrBlock,proto3" json:"service_ipv4_cidr_block,omitempty"`
-	// IPv6 range for allocating pod IP addresses.
-	ClusterIpv6CidrBlock string `protobuf:"bytes,6,opt,name=cluster_ipv6_cidr_block,json=clusterIpv6CidrBlock,proto3" json:"cluster_ipv6_cidr_block,omitempty"`
-	// IPv6 range for allocating Kubernetes service IP addresses
-	ServiceIpv6CidrBlock string `protobuf:"bytes,7,opt,name=service_ipv6_cidr_block,json=serviceIpv6CidrBlock,proto3" json:"service_ipv6_cidr_block,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *IPAllocationPolicy) Reset() {
-	*x = IPAllocationPolicy{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *IPAllocationPolicy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*IPAllocationPolicy) ProtoMessage() {}
-
-func (x *IPAllocationPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use IPAllocationPolicy.ProtoReflect.Descriptor instead.
-func (*IPAllocationPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *IPAllocationPolicy) GetClusterIpv4CidrBlock() string {
-	if x != nil {
-		return x.ClusterIpv4CidrBlock
-	}
-	return ""
-}
-
-func (x *IPAllocationPolicy) GetNodeIpv4CidrMaskSize() int64 {
-	if x != nil {
-		return x.NodeIpv4CidrMaskSize
-	}
-	return 0
-}
-
-func (x *IPAllocationPolicy) GetServiceIpv4CidrBlock() string {
-	if x != nil {
-		return x.ServiceIpv4CidrBlock
-	}
-	return ""
-}
-
-func (x *IPAllocationPolicy) GetClusterIpv6CidrBlock() string {
-	if x != nil {
-		return x.ClusterIpv6CidrBlock
-	}
-	return ""
-}
-
-func (x *IPAllocationPolicy) GetServiceIpv6CidrBlock() string {
-	if x != nil {
-		return x.ServiceIpv6CidrBlock
-	}
-	return ""
-}
-
-type MasterMaintenancePolicy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// If set to true, automatic updates are installed in the specified period of time with no interaction from the user.
-	// If set to false, automatic upgrades are disabled.
-	AutoUpgrade bool `protobuf:"varint,1,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade,omitempty"`
-	// Maintenance window settings. Update will start at the specified time and last no more than the specified duration.
-	// The time is set in UTC.
-	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,2,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *MasterMaintenancePolicy) Reset() {
-	*x = MasterMaintenancePolicy{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterMaintenancePolicy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterMaintenancePolicy) ProtoMessage() {}
-
-func (x *MasterMaintenancePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterMaintenancePolicy.ProtoReflect.Descriptor instead.
-func (*MasterMaintenancePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *MasterMaintenancePolicy) GetAutoUpgrade() bool {
-	if x != nil {
-		return x.AutoUpgrade
-	}
-	return false
-}
-
-func (x *MasterMaintenancePolicy) GetMaintenanceWindow() *MaintenanceWindow {
-	if x != nil {
-		return x.MaintenanceWindow
-	}
-	return nil
 }
 
 type MasterLogging struct {
@@ -1212,7 +962,7 @@ type MasterLogging struct {
 
 func (x *MasterLogging) Reset() {
 	*x = MasterLogging{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1224,7 +974,7 @@ func (x *MasterLogging) String() string {
 func (*MasterLogging) ProtoMessage() {}
 
 func (x *MasterLogging) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[9]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1237,7 +987,7 @@ func (x *MasterLogging) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterLogging.ProtoReflect.Descriptor instead.
 func (*MasterLogging) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MasterLogging) GetEnabled() bool {
@@ -1318,6 +1068,399 @@ func (*MasterLogging_LogGroupId) isMasterLogging_Destination() {}
 
 func (*MasterLogging_FolderId) isMasterLogging_Destination() {}
 
+type ZonalMaster struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the availability zone where the master resides.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// IPv4 internal network address that is assigned to the master.
+	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
+	// IPv4 external network address that is assigned to the master.
+	ExternalV4Address string `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ZonalMaster) Reset() {
+	*x = ZonalMaster{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ZonalMaster) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZonalMaster) ProtoMessage() {}
+
+func (x *ZonalMaster) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZonalMaster.ProtoReflect.Descriptor instead.
+func (*ZonalMaster) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ZonalMaster) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
+func (x *ZonalMaster) GetInternalV4Address() string {
+	if x != nil {
+		return x.InternalV4Address
+	}
+	return ""
+}
+
+func (x *ZonalMaster) GetExternalV4Address() string {
+	if x != nil {
+		return x.ExternalV4Address
+	}
+	return ""
+}
+
+type RegionalMaster struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the region where the master resides.
+	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// IPv4 internal network address that is assigned to the master.
+	InternalV4Address string `protobuf:"bytes,2,opt,name=internal_v4_address,json=internalV4Address,proto3" json:"internal_v4_address,omitempty"`
+	// IPv4 external network address that is assigned to the master.
+	ExternalV4Address string `protobuf:"bytes,3,opt,name=external_v4_address,json=externalV4Address,proto3" json:"external_v4_address,omitempty"`
+	// IPv6 external network address that is assigned to the master.
+	ExternalV6Address string `protobuf:"bytes,4,opt,name=external_v6_address,json=externalV6Address,proto3" json:"external_v6_address,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *RegionalMaster) Reset() {
+	*x = RegionalMaster{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegionalMaster) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegionalMaster) ProtoMessage() {}
+
+func (x *RegionalMaster) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegionalMaster.ProtoReflect.Descriptor instead.
+func (*RegionalMaster) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *RegionalMaster) GetRegionId() string {
+	if x != nil {
+		return x.RegionId
+	}
+	return ""
+}
+
+func (x *RegionalMaster) GetInternalV4Address() string {
+	if x != nil {
+		return x.InternalV4Address
+	}
+	return ""
+}
+
+func (x *RegionalMaster) GetExternalV4Address() string {
+	if x != nil {
+		return x.ExternalV4Address
+	}
+	return ""
+}
+
+func (x *RegionalMaster) GetExternalV6Address() string {
+	if x != nil {
+		return x.ExternalV6Address
+	}
+	return ""
+}
+
+type Location struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the availability zone where the master resides.
+	ZoneId string `protobuf:"bytes,1,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
+	// ID of the VPC network's subnet where the master resides.
+	SubnetId      string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Location) Reset() {
+	*x = Location{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Location) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Location) ProtoMessage() {}
+
+func (x *Location) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Location.ProtoReflect.Descriptor instead.
+func (*Location) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Location) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
+func (x *Location) GetSubnetId() string {
+	if x != nil {
+		return x.SubnetId
+	}
+	return ""
+}
+
+type MasterEndpoints struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Internal endpoint that can be used to connect to the master from cloud networks.
+	InternalV4Endpoint string `protobuf:"bytes,1,opt,name=internal_v4_endpoint,json=internalV4Endpoint,proto3" json:"internal_v4_endpoint,omitempty"`
+	// External endpoint that can be used to access Kubernetes cluster API from the internet (outside of the cloud).
+	ExternalV4Endpoint string `protobuf:"bytes,2,opt,name=external_v4_endpoint,json=externalV4Endpoint,proto3" json:"external_v4_endpoint,omitempty"`
+	// External IPv6 endpoint that can be used to access Kubernetes cluster API from the internet (outside of the cloud).
+	ExternalV6Endpoint string `protobuf:"bytes,3,opt,name=external_v6_endpoint,json=externalV6Endpoint,proto3" json:"external_v6_endpoint,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *MasterEndpoints) Reset() {
+	*x = MasterEndpoints{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterEndpoints) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterEndpoints) ProtoMessage() {}
+
+func (x *MasterEndpoints) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterEndpoints.ProtoReflect.Descriptor instead.
+func (*MasterEndpoints) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *MasterEndpoints) GetInternalV4Endpoint() string {
+	if x != nil {
+		return x.InternalV4Endpoint
+	}
+	return ""
+}
+
+func (x *MasterEndpoints) GetExternalV4Endpoint() string {
+	if x != nil {
+		return x.ExternalV4Endpoint
+	}
+	return ""
+}
+
+func (x *MasterEndpoints) GetExternalV6Endpoint() string {
+	if x != nil {
+		return x.ExternalV6Endpoint
+	}
+	return ""
+}
+
+type IPAllocationPolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// CIDR block. IP range for allocating pod addresses.
+	// It should not overlap with any subnet in the network the Kubernetes cluster located in. Static routes will be
+	// set up for this CIDR blocks in node subnets.
+	ClusterIpv4CidrBlock string `protobuf:"bytes,1,opt,name=cluster_ipv4_cidr_block,json=clusterIpv4CidrBlock,proto3" json:"cluster_ipv4_cidr_block,omitempty"`
+	// Size of the masks that are assigned for each node in the cluster.
+	// If not specified, 24 is used.
+	NodeIpv4CidrMaskSize int64 `protobuf:"varint,5,opt,name=node_ipv4_cidr_mask_size,json=nodeIpv4CidrMaskSize,proto3" json:"node_ipv4_cidr_mask_size,omitempty"`
+	// CIDR block. IP range Kubernetes service Kubernetes cluster IP addresses will be allocated from.
+	// It should not overlap with any subnet in the network the Kubernetes cluster located in.
+	ServiceIpv4CidrBlock string `protobuf:"bytes,2,opt,name=service_ipv4_cidr_block,json=serviceIpv4CidrBlock,proto3" json:"service_ipv4_cidr_block,omitempty"`
+	// IPv6 range for allocating pod IP addresses.
+	ClusterIpv6CidrBlock string `protobuf:"bytes,6,opt,name=cluster_ipv6_cidr_block,json=clusterIpv6CidrBlock,proto3" json:"cluster_ipv6_cidr_block,omitempty"`
+	// IPv6 range for allocating Kubernetes service IP addresses
+	ServiceIpv6CidrBlock string `protobuf:"bytes,7,opt,name=service_ipv6_cidr_block,json=serviceIpv6CidrBlock,proto3" json:"service_ipv6_cidr_block,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *IPAllocationPolicy) Reset() {
+	*x = IPAllocationPolicy{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IPAllocationPolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IPAllocationPolicy) ProtoMessage() {}
+
+func (x *IPAllocationPolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IPAllocationPolicy.ProtoReflect.Descriptor instead.
+func (*IPAllocationPolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *IPAllocationPolicy) GetClusterIpv4CidrBlock() string {
+	if x != nil {
+		return x.ClusterIpv4CidrBlock
+	}
+	return ""
+}
+
+func (x *IPAllocationPolicy) GetNodeIpv4CidrMaskSize() int64 {
+	if x != nil {
+		return x.NodeIpv4CidrMaskSize
+	}
+	return 0
+}
+
+func (x *IPAllocationPolicy) GetServiceIpv4CidrBlock() string {
+	if x != nil {
+		return x.ServiceIpv4CidrBlock
+	}
+	return ""
+}
+
+func (x *IPAllocationPolicy) GetClusterIpv6CidrBlock() string {
+	if x != nil {
+		return x.ClusterIpv6CidrBlock
+	}
+	return ""
+}
+
+func (x *IPAllocationPolicy) GetServiceIpv6CidrBlock() string {
+	if x != nil {
+		return x.ServiceIpv6CidrBlock
+	}
+	return ""
+}
+
+type MasterMaintenancePolicy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// If set to true, automatic updates are installed in the specified period of time with no interaction from the user.
+	// If set to false, automatic upgrades are disabled.
+	AutoUpgrade bool `protobuf:"varint,1,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade,omitempty"`
+	// Maintenance window settings. Update will start at the specified time and last no more than the specified duration.
+	// The time is set in UTC.
+	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,2,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *MasterMaintenancePolicy) Reset() {
+	*x = MasterMaintenancePolicy{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterMaintenancePolicy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterMaintenancePolicy) ProtoMessage() {}
+
+func (x *MasterMaintenancePolicy) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterMaintenancePolicy.ProtoReflect.Descriptor instead.
+func (*MasterMaintenancePolicy) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *MasterMaintenancePolicy) GetAutoUpgrade() bool {
+	if x != nil {
+		return x.AutoUpgrade
+	}
+	return false
+}
+
+func (x *MasterMaintenancePolicy) GetMaintenanceWindow() *MaintenanceWindow {
+	if x != nil {
+		return x.MaintenanceWindow
+	}
+	return nil
+}
+
 type NetworkPolicy struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Provider      NetworkPolicy_Provider `protobuf:"varint,1,opt,name=provider,proto3,enum=yandex.cloud.k8s.v1.NetworkPolicy_Provider" json:"provider,omitempty"`
@@ -1327,7 +1470,7 @@ type NetworkPolicy struct {
 
 func (x *NetworkPolicy) Reset() {
 	*x = NetworkPolicy{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1339,7 +1482,7 @@ func (x *NetworkPolicy) String() string {
 func (*NetworkPolicy) ProtoMessage() {}
 
 func (x *NetworkPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[10]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1352,7 +1495,7 @@ func (x *NetworkPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkPolicy.ProtoReflect.Descriptor instead.
 func (*NetworkPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *NetworkPolicy) GetProvider() NetworkPolicy_Provider {
@@ -1373,7 +1516,7 @@ type KMSProvider struct {
 
 func (x *KMSProvider) Reset() {
 	*x = KMSProvider{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1385,7 +1528,7 @@ func (x *KMSProvider) String() string {
 func (*KMSProvider) ProtoMessage() {}
 
 func (x *KMSProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[11]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1398,7 +1541,7 @@ func (x *KMSProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KMSProvider.ProtoReflect.Descriptor instead.
 func (*KMSProvider) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *KMSProvider) GetKeyId() string {
@@ -1417,7 +1560,7 @@ type Cilium struct {
 
 func (x *Cilium) Reset() {
 	*x = Cilium{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1429,7 +1572,7 @@ func (x *Cilium) String() string {
 func (*Cilium) ProtoMessage() {}
 
 func (x *Cilium) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[12]
+	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1442,7 +1585,7 @@ func (x *Cilium) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cilium.ProtoReflect.Descriptor instead.
 func (*Cilium) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Cilium) GetRoutingMode() Cilium_RoutingMode {
@@ -1451,152 +1594,6 @@ func (x *Cilium) GetRoutingMode() Cilium_RoutingMode {
 	}
 	return Cilium_ROUTING_MODE_UNSPECIFIED
 }
-
-type MasterResources struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The number of cores available to each master instance.
-	Cores int64 `protobuf:"varint,1,opt,name=cores,proto3" json:"cores,omitempty"`
-	// Baseline level of CPU performance with the ability to burst performance above that baseline level.
-	// This field sets baseline performance for each core.
-	CoreFraction int64 `protobuf:"varint,2,opt,name=core_fraction,json=coreFraction,proto3" json:"core_fraction,omitempty"`
-	// The amount of memory available to each master instance, specified in bytes.
-	Memory        int64 `protobuf:"varint,3,opt,name=memory,proto3" json:"memory,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MasterResources) Reset() {
-	*x = MasterResources{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterResources) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterResources) ProtoMessage() {}
-
-func (x *MasterResources) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterResources.ProtoReflect.Descriptor instead.
-func (*MasterResources) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *MasterResources) GetCores() int64 {
-	if x != nil {
-		return x.Cores
-	}
-	return 0
-}
-
-func (x *MasterResources) GetCoreFraction() int64 {
-	if x != nil {
-		return x.CoreFraction
-	}
-	return 0
-}
-
-func (x *MasterResources) GetMemory() int64 {
-	if x != nil {
-		return x.Memory
-	}
-	return 0
-}
-
-type MasterScalePolicy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ScaleType:
-	//
-	//	*MasterScalePolicy_FixedScale_
-	//	*MasterScalePolicy_AutoScale_
-	ScaleType     isMasterScalePolicy_ScaleType `protobuf_oneof:"scale_type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MasterScalePolicy) Reset() {
-	*x = MasterScalePolicy{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterScalePolicy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterScalePolicy) ProtoMessage() {}
-
-func (x *MasterScalePolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterScalePolicy.ProtoReflect.Descriptor instead.
-func (*MasterScalePolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{14}
-}
-
-func (x *MasterScalePolicy) GetScaleType() isMasterScalePolicy_ScaleType {
-	if x != nil {
-		return x.ScaleType
-	}
-	return nil
-}
-
-func (x *MasterScalePolicy) GetFixedScale() *MasterScalePolicy_FixedScale {
-	if x != nil {
-		if x, ok := x.ScaleType.(*MasterScalePolicy_FixedScale_); ok {
-			return x.FixedScale
-		}
-	}
-	return nil
-}
-
-func (x *MasterScalePolicy) GetAutoScale() *MasterScalePolicy_AutoScale {
-	if x != nil {
-		if x, ok := x.ScaleType.(*MasterScalePolicy_AutoScale_); ok {
-			return x.AutoScale
-		}
-	}
-	return nil
-}
-
-type isMasterScalePolicy_ScaleType interface {
-	isMasterScalePolicy_ScaleType()
-}
-
-type MasterScalePolicy_FixedScale_ struct {
-	FixedScale *MasterScalePolicy_FixedScale `protobuf:"bytes,1,opt,name=fixed_scale,json=fixedScale,proto3,oneof"`
-}
-
-type MasterScalePolicy_AutoScale_ struct {
-	AutoScale *MasterScalePolicy_AutoScale `protobuf:"bytes,2,opt,name=auto_scale,json=autoScale,proto3,oneof"`
-}
-
-func (*MasterScalePolicy_FixedScale_) isMasterScalePolicy_ScaleType() {}
-
-func (*MasterScalePolicy_AutoScale_) isMasterScalePolicy_ScaleType() {}
 
 // WorkloadIdentityFederation contains configuration for workload identity federation.
 type WorkloadIdentityFederation struct {
@@ -1698,7 +1695,7 @@ func (x *MasterScalePolicy_FixedScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterScalePolicy_FixedScale.ProtoReflect.Descriptor instead.
 func (*MasterScalePolicy_FixedScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{14, 0}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{3, 0}
 }
 
 func (x *MasterScalePolicy_FixedScale) GetResourcePresetId() string {
@@ -1744,7 +1741,7 @@ func (x *MasterScalePolicy_AutoScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterScalePolicy_AutoScale.ProtoReflect.Descriptor instead.
 func (*MasterScalePolicy_AutoScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{14, 1}
+	return file_yandex_cloud_k8s_v1_cluster_proto_rawDescGZIP(), []int{3, 1}
 }
 
 func (x *MasterScalePolicy_AutoScale) GetMinResourcePresetId() string {
@@ -1819,10 +1816,36 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\x0emaster_logging\x18\t \x01(\v2\".yandex.cloud.k8s.v1.MasterLoggingR\rmasterLogging\x12B\n" +
 	"\tresources\x18\f \x01(\v2$.yandex.cloud.k8s.v1.MasterResourcesR\tresources\x12I\n" +
 	"\fscale_policy\x18\r \x01(\v2&.yandex.cloud.k8s.v1.MasterScalePolicyR\vscalePolicyB\r\n" +
-	"\vmaster_type\"B\n" +
+	"\vmaster_type\"d\n" +
+	"\x0fMasterResources\x12\x14\n" +
+	"\x05cores\x18\x01 \x01(\x03R\x05cores\x12#\n" +
+	"\rcore_fraction\x18\x02 \x01(\x03R\fcoreFraction\x12\x16\n" +
+	"\x06memory\x18\x03 \x01(\x03R\x06memory\"\xce\x02\n" +
+	"\x11MasterScalePolicy\x12T\n" +
+	"\vfixed_scale\x18\x01 \x01(\v21.yandex.cloud.k8s.v1.MasterScalePolicy.FixedScaleH\x00R\n" +
+	"fixedScale\x12Q\n" +
+	"\n" +
+	"auto_scale\x18\x02 \x01(\v20.yandex.cloud.k8s.v1.MasterScalePolicy.AutoScaleH\x00R\tautoScale\x1a:\n" +
+	"\n" +
+	"FixedScale\x12,\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x1a@\n" +
+	"\tAutoScale\x123\n" +
+	"\x16min_resource_preset_id\x18\x01 \x01(\tR\x13minResourcePresetIdB\x12\n" +
+	"\n" +
+	"scale_type\x12\x04\xc0\xc11\x01\"B\n" +
 	"\n" +
 	"MasterAuth\x124\n" +
-	"\x16cluster_ca_certificate\x18\x01 \x01(\tR\x14clusterCaCertificate\"\x86\x01\n" +
+	"\x16cluster_ca_certificate\x18\x01 \x01(\tR\x14clusterCaCertificate\"\x85\x03\n" +
+	"\rMasterLogging\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12G\n" +
+	"\flog_group_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
+	"logGroupId\x12B\n" +
+	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12#\n" +
+	"\raudit_enabled\x18\x04 \x01(\bR\fauditEnabled\x12<\n" +
+	"\x1acluster_autoscaler_enabled\x18\x05 \x01(\bR\x18clusterAutoscalerEnabled\x124\n" +
+	"\x16kube_apiserver_enabled\x18\x06 \x01(\bR\x14kubeApiserverEnabled\x12%\n" +
+	"\x0eevents_enabled\x18\a \x01(\bR\reventsEnabledB\r\n" +
+	"\vdestination\"\x86\x01\n" +
 	"\vZonalMaster\x12\x17\n" +
 	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12.\n" +
 	"\x13internal_v4_address\x18\x02 \x01(\tR\x11internalV4Address\x12.\n" +
@@ -1847,17 +1870,7 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\x17service_ipv6_cidr_block\x18\a \x01(\tR\x14serviceIpv6CidrBlockJ\x04\b\x03\x10\x05\"\x93\x01\n" +
 	"\x17MasterMaintenancePolicy\x12!\n" +
 	"\fauto_upgrade\x18\x01 \x01(\bR\vautoUpgrade\x12U\n" +
-	"\x12maintenance_window\x18\x02 \x01(\v2&.yandex.cloud.k8s.v1.MaintenanceWindowR\x11maintenanceWindow\"\x85\x03\n" +
-	"\rMasterLogging\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\x12G\n" +
-	"\flog_group_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
-	"logGroupId\x12B\n" +
-	"\tfolder_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12#\n" +
-	"\raudit_enabled\x18\x04 \x01(\bR\fauditEnabled\x12<\n" +
-	"\x1acluster_autoscaler_enabled\x18\x05 \x01(\bR\x18clusterAutoscalerEnabled\x124\n" +
-	"\x16kube_apiserver_enabled\x18\x06 \x01(\bR\x14kubeApiserverEnabled\x12%\n" +
-	"\x0eevents_enabled\x18\a \x01(\bR\reventsEnabledB\r\n" +
-	"\vdestination\"\x8a\x01\n" +
+	"\x12maintenance_window\x18\x02 \x01(\v2&.yandex.cloud.k8s.v1.MaintenanceWindowR\x11maintenanceWindow\"\x8a\x01\n" +
 	"\rNetworkPolicy\x12G\n" +
 	"\bprovider\x18\x01 \x01(\x0e2+.yandex.cloud.k8s.v1.NetworkPolicy.ProviderR\bprovider\"0\n" +
 	"\bProvider\x12\x18\n" +
@@ -1871,23 +1884,7 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\vRoutingMode\x12\x1c\n" +
 	"\x18ROUTING_MODE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
-	"\x06TUNNEL\x10\x01\"d\n" +
-	"\x0fMasterResources\x12\x14\n" +
-	"\x05cores\x18\x01 \x01(\x03R\x05cores\x12#\n" +
-	"\rcore_fraction\x18\x02 \x01(\x03R\fcoreFraction\x12\x16\n" +
-	"\x06memory\x18\x03 \x01(\x03R\x06memory\"\xce\x02\n" +
-	"\x11MasterScalePolicy\x12T\n" +
-	"\vfixed_scale\x18\x01 \x01(\v21.yandex.cloud.k8s.v1.MasterScalePolicy.FixedScaleH\x00R\n" +
-	"fixedScale\x12Q\n" +
-	"\n" +
-	"auto_scale\x18\x02 \x01(\v20.yandex.cloud.k8s.v1.MasterScalePolicy.AutoScaleH\x00R\tautoScale\x1a:\n" +
-	"\n" +
-	"FixedScale\x12,\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x1a@\n" +
-	"\tAutoScale\x123\n" +
-	"\x16min_resource_preset_id\x18\x01 \x01(\tR\x13minResourcePresetIdB\x12\n" +
-	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01\"i\n" +
+	"\x06TUNNEL\x10\x01\"i\n" +
 	"\x1aWorkloadIdentityFederation\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x16\n" +
 	"\x06issuer\x18\x02 \x01(\tR\x06issuer\x12\x19\n" +
@@ -1922,19 +1919,19 @@ var file_yandex_cloud_k8s_v1_cluster_proto_goTypes = []any{
 	(Cilium_RoutingMode)(0),              // 4: yandex.cloud.k8s.v1.Cilium.RoutingMode
 	(*Cluster)(nil),                      // 5: yandex.cloud.k8s.v1.Cluster
 	(*Master)(nil),                       // 6: yandex.cloud.k8s.v1.Master
-	(*MasterAuth)(nil),                   // 7: yandex.cloud.k8s.v1.MasterAuth
-	(*ZonalMaster)(nil),                  // 8: yandex.cloud.k8s.v1.ZonalMaster
-	(*RegionalMaster)(nil),               // 9: yandex.cloud.k8s.v1.RegionalMaster
-	(*Location)(nil),                     // 10: yandex.cloud.k8s.v1.Location
-	(*MasterEndpoints)(nil),              // 11: yandex.cloud.k8s.v1.MasterEndpoints
-	(*IPAllocationPolicy)(nil),           // 12: yandex.cloud.k8s.v1.IPAllocationPolicy
-	(*MasterMaintenancePolicy)(nil),      // 13: yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	(*MasterLogging)(nil),                // 14: yandex.cloud.k8s.v1.MasterLogging
-	(*NetworkPolicy)(nil),                // 15: yandex.cloud.k8s.v1.NetworkPolicy
-	(*KMSProvider)(nil),                  // 16: yandex.cloud.k8s.v1.KMSProvider
-	(*Cilium)(nil),                       // 17: yandex.cloud.k8s.v1.Cilium
-	(*MasterResources)(nil),              // 18: yandex.cloud.k8s.v1.MasterResources
-	(*MasterScalePolicy)(nil),            // 19: yandex.cloud.k8s.v1.MasterScalePolicy
+	(*MasterResources)(nil),              // 7: yandex.cloud.k8s.v1.MasterResources
+	(*MasterScalePolicy)(nil),            // 8: yandex.cloud.k8s.v1.MasterScalePolicy
+	(*MasterAuth)(nil),                   // 9: yandex.cloud.k8s.v1.MasterAuth
+	(*MasterLogging)(nil),                // 10: yandex.cloud.k8s.v1.MasterLogging
+	(*ZonalMaster)(nil),                  // 11: yandex.cloud.k8s.v1.ZonalMaster
+	(*RegionalMaster)(nil),               // 12: yandex.cloud.k8s.v1.RegionalMaster
+	(*Location)(nil),                     // 13: yandex.cloud.k8s.v1.Location
+	(*MasterEndpoints)(nil),              // 14: yandex.cloud.k8s.v1.MasterEndpoints
+	(*IPAllocationPolicy)(nil),           // 15: yandex.cloud.k8s.v1.IPAllocationPolicy
+	(*MasterMaintenancePolicy)(nil),      // 16: yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	(*NetworkPolicy)(nil),                // 17: yandex.cloud.k8s.v1.NetworkPolicy
+	(*KMSProvider)(nil),                  // 18: yandex.cloud.k8s.v1.KMSProvider
+	(*Cilium)(nil),                       // 19: yandex.cloud.k8s.v1.Cilium
 	(*WorkloadIdentityFederation)(nil),   // 20: yandex.cloud.k8s.v1.WorkloadIdentityFederation
 	nil,                                  // 21: yandex.cloud.k8s.v1.Cluster.LabelsEntry
 	(*MasterScalePolicy_FixedScale)(nil), // 22: yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
@@ -1950,28 +1947,28 @@ var file_yandex_cloud_k8s_v1_cluster_proto_depIdxs = []int32{
 	1,  // 2: yandex.cloud.k8s.v1.Cluster.status:type_name -> yandex.cloud.k8s.v1.Cluster.Status
 	2,  // 3: yandex.cloud.k8s.v1.Cluster.health:type_name -> yandex.cloud.k8s.v1.Cluster.Health
 	6,  // 4: yandex.cloud.k8s.v1.Cluster.master:type_name -> yandex.cloud.k8s.v1.Master
-	12, // 5: yandex.cloud.k8s.v1.Cluster.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
+	15, // 5: yandex.cloud.k8s.v1.Cluster.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
 	0,  // 6: yandex.cloud.k8s.v1.Cluster.release_channel:type_name -> yandex.cloud.k8s.v1.ReleaseChannel
-	15, // 7: yandex.cloud.k8s.v1.Cluster.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
-	16, // 8: yandex.cloud.k8s.v1.Cluster.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
-	17, // 9: yandex.cloud.k8s.v1.Cluster.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
+	17, // 7: yandex.cloud.k8s.v1.Cluster.network_policy:type_name -> yandex.cloud.k8s.v1.NetworkPolicy
+	18, // 8: yandex.cloud.k8s.v1.Cluster.kms_provider:type_name -> yandex.cloud.k8s.v1.KMSProvider
+	19, // 9: yandex.cloud.k8s.v1.Cluster.cilium:type_name -> yandex.cloud.k8s.v1.Cilium
 	25, // 10: yandex.cloud.k8s.v1.Cluster.scheduled_maintenance:type_name -> yandex.cloud.k8s.v1.ScheduledMaintenance
 	20, // 11: yandex.cloud.k8s.v1.Cluster.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.WorkloadIdentityFederation
-	8,  // 12: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
-	9,  // 13: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
-	10, // 14: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
-	11, // 15: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
-	7,  // 16: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
+	11, // 12: yandex.cloud.k8s.v1.Master.zonal_master:type_name -> yandex.cloud.k8s.v1.ZonalMaster
+	12, // 13: yandex.cloud.k8s.v1.Master.regional_master:type_name -> yandex.cloud.k8s.v1.RegionalMaster
+	13, // 14: yandex.cloud.k8s.v1.Master.locations:type_name -> yandex.cloud.k8s.v1.Location
+	14, // 15: yandex.cloud.k8s.v1.Master.endpoints:type_name -> yandex.cloud.k8s.v1.MasterEndpoints
+	9,  // 16: yandex.cloud.k8s.v1.Master.master_auth:type_name -> yandex.cloud.k8s.v1.MasterAuth
 	26, // 17: yandex.cloud.k8s.v1.Master.version_info:type_name -> yandex.cloud.k8s.v1.VersionInfo
-	13, // 18: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	14, // 19: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	18, // 20: yandex.cloud.k8s.v1.Master.resources:type_name -> yandex.cloud.k8s.v1.MasterResources
-	19, // 21: yandex.cloud.k8s.v1.Master.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy
-	27, // 22: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
-	3,  // 23: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
-	4,  // 24: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
-	22, // 25: yandex.cloud.k8s.v1.MasterScalePolicy.fixed_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
-	23, // 26: yandex.cloud.k8s.v1.MasterScalePolicy.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
+	16, // 18: yandex.cloud.k8s.v1.Master.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
+	10, // 19: yandex.cloud.k8s.v1.Master.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	7,  // 20: yandex.cloud.k8s.v1.Master.resources:type_name -> yandex.cloud.k8s.v1.MasterResources
+	8,  // 21: yandex.cloud.k8s.v1.Master.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy
+	22, // 22: yandex.cloud.k8s.v1.MasterScalePolicy.fixed_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.FixedScale
+	23, // 23: yandex.cloud.k8s.v1.MasterScalePolicy.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicy.AutoScale
+	27, // 24: yandex.cloud.k8s.v1.MasterMaintenancePolicy.maintenance_window:type_name -> yandex.cloud.k8s.v1.MaintenanceWindow
+	3,  // 25: yandex.cloud.k8s.v1.NetworkPolicy.provider:type_name -> yandex.cloud.k8s.v1.NetworkPolicy.Provider
+	4,  // 26: yandex.cloud.k8s.v1.Cilium.routing_mode:type_name -> yandex.cloud.k8s.v1.Cilium.RoutingMode
 	27, // [27:27] is the sub-list for method output_type
 	27, // [27:27] is the sub-list for method input_type
 	27, // [27:27] is the sub-list for extension type_name
@@ -1994,13 +1991,13 @@ func file_yandex_cloud_k8s_v1_cluster_proto_init() {
 		(*Master_ZonalMaster)(nil),
 		(*Master_RegionalMaster)(nil),
 	}
-	file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[9].OneofWrappers = []any{
-		(*MasterLogging_LogGroupId)(nil),
-		(*MasterLogging_FolderId)(nil),
-	}
-	file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[14].OneofWrappers = []any{
+	file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[3].OneofWrappers = []any{
 		(*MasterScalePolicy_FixedScale_)(nil),
 		(*MasterScalePolicy_AutoScale_)(nil),
+	}
+	file_yandex_cloud_k8s_v1_cluster_proto_msgTypes[5].OneofWrappers = []any{
+		(*MasterLogging_LogGroupId)(nil),
+		(*MasterLogging_FolderId)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

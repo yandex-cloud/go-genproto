@@ -3,6 +3,7 @@
 package baremetal
 
 import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -92,4 +93,32 @@ func (m *DeleteVrfRequest) SetVrfId(v string) {
 
 func (m *DeleteVrfMetadata) SetVrfId(v string) {
 	m.VrfId = v
+}
+
+func (m *ListVrfOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListVrfOperationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListVrfOperationsRequest) SetVrfId(v string) {
+	m.VrfId = v
+}
+
+func (m *ListVrfOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListVrfOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListVrfOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListVrfOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

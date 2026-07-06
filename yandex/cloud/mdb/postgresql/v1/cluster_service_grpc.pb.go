@@ -82,6 +82,7 @@ type ClusterServiceClient interface {
 	// Retrieves logs for the specified PostgreSQL cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -92,8 +93,10 @@ type ClusterServiceClient interface {
 	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified PostgreSQL cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -386,6 +389,7 @@ type ClusterServiceServer interface {
 	// Retrieves logs for the specified PostgreSQL cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
@@ -396,8 +400,10 @@ type ClusterServiceServer interface {
 	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified PostgreSQL cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

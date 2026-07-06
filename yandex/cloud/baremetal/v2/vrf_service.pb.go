@@ -593,6 +593,155 @@ func (x *DeleteVrfMetadata) GetVrfId() string {
 	return ""
 }
 
+type ListVrfOperationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	//
+	// To get the cloud ID, use a [yandex.cloud.resourcemanager.v1.CloudService.List] request.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the VRF to list operations for.
+	//
+	// To get the VRF ID, use a [VrfService.List] request.
+	VrfId string `protobuf:"bytes,3,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ListVrfOperationsResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent list requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ListVrfOperationsResponse.next_page_token] returned by a previous list request.
+	PageToken     string `protobuf:"bytes,5,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListVrfOperationsRequest) Reset() {
+	*x = ListVrfOperationsRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListVrfOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListVrfOperationsRequest) ProtoMessage() {}
+
+func (x *ListVrfOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListVrfOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListVrfOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListVrfOperationsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ListVrfOperationsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListVrfOperationsRequest) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
+func (x *ListVrfOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListVrfOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListVrfOperationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of operations for the specified Image resource.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ListVrfOperationsRequest.page_size], use `next_page_token` as the value
+	// for the [ListVrfOperationsRequest.page_token] parameter in the next list request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListVrfOperationsResponse) Reset() {
+	*x = ListVrfOperationsResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListVrfOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListVrfOperationsResponse) ProtoMessage() {}
+
+func (x *ListVrfOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListVrfOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListVrfOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ListVrfOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListVrfOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_vrf_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
@@ -630,7 +779,20 @@ const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
 	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x122\n" +
 	"\x06vrf_id\x18\x03 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x05vrfId\"*\n" +
 	"\x11DeleteVrfMetadata\x12\x15\n" +
-	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId2\xbc\b\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"\xdd\x01\n" +
+	"\x18ListVrfOperationsRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12/\n" +
+	"\x06vrf_id\x18\x03 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x05vrfId\x12*\n" +
+	"\tpage_size\x18\x04 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x05 \x01(\tB\x03\xe0A\x01R\tpageToken\"\x86\x01\n" +
+	"\x19ListVrfOperationsResponse\x12A\n" +
+	"\n" +
+	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
+	"operations\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xb2\n" +
+	"\n" +
 	"\n" +
 	"VrfService\x12\xb9\x01\n" +
 	"\x06GetVrf\x12(.yandex.cloud.baremetal.v2.GetVrfRequest\x1a\x1e.yandex.cloud.baremetal.v2.Vrf\"e\xdaA\x19cloud_id,folder_id,vrf_id\x82\xd3\xe4\x93\x02C\x12A/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrfs/{vrf_id}\x12\xba\x01\n" +
@@ -640,7 +802,8 @@ const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
 	"\tUpdateVrf\x12+.yandex.cloud.baremetal.v2.UpdateVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xdaA\x0fvrf,update_mask\xb2\xd2*\x18\n" +
 	"\x11UpdateVrfMetadata\x12\x03Vrf\x82\xd3\xe4\x93\x02T:\x03vrf2M/baremetal/v2/clouds/{vrf.cloud_id}/folders/{vrf.folder_id}/vrfs/{vrf.vrf_id}\x12\xf1\x01\n" +
 	"\tDeleteVrf\x12+.yandex.cloud.baremetal.v2.DeleteVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x93\x01\xdaA\x19cloud_id,folder_id,vrf_id\xb2\xd2**\n" +
-	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrfs/{vrf_id}Bl\n" +
+	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrfs/{vrf_id}\x12\xf3\x01\n" +
+	"\x11ListVrfOperations\x123.yandex.cloud.baremetal.v2.ListVrfOperationsRequest\x1a4.yandex.cloud.baremetal.v2.ListVrfOperationsResponse\"s\xdaA\x19cloud_id,folder_id,vrf_id\x82\xd3\xe4\x93\x02Q\x12O/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrf/{vrf_id}:listOperationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -655,41 +818,46 @@ func file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_baremetal_v2_vrf_service_proto_goTypes = []any{
-	(*GetVrfRequest)(nil),         // 0: yandex.cloud.baremetal.v2.GetVrfRequest
-	(*ListVrfsRequest)(nil),       // 1: yandex.cloud.baremetal.v2.ListVrfsRequest
-	(*ListVrfsResponse)(nil),      // 2: yandex.cloud.baremetal.v2.ListVrfsResponse
-	(*CreateVrfRequest)(nil),      // 3: yandex.cloud.baremetal.v2.CreateVrfRequest
-	(*CreateVrfMetadata)(nil),     // 4: yandex.cloud.baremetal.v2.CreateVrfMetadata
-	(*UpdateVrfRequest)(nil),      // 5: yandex.cloud.baremetal.v2.UpdateVrfRequest
-	(*UpdateVrfMetadata)(nil),     // 6: yandex.cloud.baremetal.v2.UpdateVrfMetadata
-	(*DeleteVrfRequest)(nil),      // 7: yandex.cloud.baremetal.v2.DeleteVrfRequest
-	(*DeleteVrfMetadata)(nil),     // 8: yandex.cloud.baremetal.v2.DeleteVrfMetadata
-	(*Vrf)(nil),                   // 9: yandex.cloud.baremetal.v2.Vrf
-	(*fieldmaskpb.FieldMask)(nil), // 10: google.protobuf.FieldMask
-	(*operation.Operation)(nil),   // 11: yandex.cloud.operation.Operation
+	(*GetVrfRequest)(nil),             // 0: yandex.cloud.baremetal.v2.GetVrfRequest
+	(*ListVrfsRequest)(nil),           // 1: yandex.cloud.baremetal.v2.ListVrfsRequest
+	(*ListVrfsResponse)(nil),          // 2: yandex.cloud.baremetal.v2.ListVrfsResponse
+	(*CreateVrfRequest)(nil),          // 3: yandex.cloud.baremetal.v2.CreateVrfRequest
+	(*CreateVrfMetadata)(nil),         // 4: yandex.cloud.baremetal.v2.CreateVrfMetadata
+	(*UpdateVrfRequest)(nil),          // 5: yandex.cloud.baremetal.v2.UpdateVrfRequest
+	(*UpdateVrfMetadata)(nil),         // 6: yandex.cloud.baremetal.v2.UpdateVrfMetadata
+	(*DeleteVrfRequest)(nil),          // 7: yandex.cloud.baremetal.v2.DeleteVrfRequest
+	(*DeleteVrfMetadata)(nil),         // 8: yandex.cloud.baremetal.v2.DeleteVrfMetadata
+	(*ListVrfOperationsRequest)(nil),  // 9: yandex.cloud.baremetal.v2.ListVrfOperationsRequest
+	(*ListVrfOperationsResponse)(nil), // 10: yandex.cloud.baremetal.v2.ListVrfOperationsResponse
+	(*Vrf)(nil),                       // 11: yandex.cloud.baremetal.v2.Vrf
+	(*fieldmaskpb.FieldMask)(nil),     // 12: google.protobuf.FieldMask
+	(*operation.Operation)(nil),       // 13: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v2_vrf_service_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.baremetal.v2.ListVrfsResponse.vrfs:type_name -> yandex.cloud.baremetal.v2.Vrf
-	9,  // 1: yandex.cloud.baremetal.v2.CreateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
-	9,  // 2: yandex.cloud.baremetal.v2.UpdateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
-	10, // 3: yandex.cloud.baremetal.v2.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
-	0,  // 4: yandex.cloud.baremetal.v2.VrfService.GetVrf:input_type -> yandex.cloud.baremetal.v2.GetVrfRequest
-	1,  // 5: yandex.cloud.baremetal.v2.VrfService.ListVrfs:input_type -> yandex.cloud.baremetal.v2.ListVrfsRequest
-	3,  // 6: yandex.cloud.baremetal.v2.VrfService.CreateVrf:input_type -> yandex.cloud.baremetal.v2.CreateVrfRequest
-	5,  // 7: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:input_type -> yandex.cloud.baremetal.v2.UpdateVrfRequest
-	7,  // 8: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:input_type -> yandex.cloud.baremetal.v2.DeleteVrfRequest
-	9,  // 9: yandex.cloud.baremetal.v2.VrfService.GetVrf:output_type -> yandex.cloud.baremetal.v2.Vrf
-	2,  // 10: yandex.cloud.baremetal.v2.VrfService.ListVrfs:output_type -> yandex.cloud.baremetal.v2.ListVrfsResponse
-	11, // 11: yandex.cloud.baremetal.v2.VrfService.CreateVrf:output_type -> yandex.cloud.operation.Operation
-	11, // 12: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:output_type -> yandex.cloud.operation.Operation
-	11, // 13: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:output_type -> yandex.cloud.operation.Operation
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	11, // 0: yandex.cloud.baremetal.v2.ListVrfsResponse.vrfs:type_name -> yandex.cloud.baremetal.v2.Vrf
+	11, // 1: yandex.cloud.baremetal.v2.CreateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
+	11, // 2: yandex.cloud.baremetal.v2.UpdateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
+	12, // 3: yandex.cloud.baremetal.v2.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
+	13, // 4: yandex.cloud.baremetal.v2.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 5: yandex.cloud.baremetal.v2.VrfService.GetVrf:input_type -> yandex.cloud.baremetal.v2.GetVrfRequest
+	1,  // 6: yandex.cloud.baremetal.v2.VrfService.ListVrfs:input_type -> yandex.cloud.baremetal.v2.ListVrfsRequest
+	3,  // 7: yandex.cloud.baremetal.v2.VrfService.CreateVrf:input_type -> yandex.cloud.baremetal.v2.CreateVrfRequest
+	5,  // 8: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:input_type -> yandex.cloud.baremetal.v2.UpdateVrfRequest
+	7,  // 9: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:input_type -> yandex.cloud.baremetal.v2.DeleteVrfRequest
+	9,  // 10: yandex.cloud.baremetal.v2.VrfService.ListVrfOperations:input_type -> yandex.cloud.baremetal.v2.ListVrfOperationsRequest
+	11, // 11: yandex.cloud.baremetal.v2.VrfService.GetVrf:output_type -> yandex.cloud.baremetal.v2.Vrf
+	2,  // 12: yandex.cloud.baremetal.v2.VrfService.ListVrfs:output_type -> yandex.cloud.baremetal.v2.ListVrfsResponse
+	13, // 13: yandex.cloud.baremetal.v2.VrfService.CreateVrf:output_type -> yandex.cloud.operation.Operation
+	13, // 14: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:output_type -> yandex.cloud.operation.Operation
+	13, // 15: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:output_type -> yandex.cloud.operation.Operation
+	10, // 16: yandex.cloud.baremetal.v2.VrfService.ListVrfOperations:output_type -> yandex.cloud.baremetal.v2.ListVrfOperationsResponse
+	11, // [11:17] is the sub-list for method output_type
+	5,  // [5:11] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_vrf_service_proto_init() }
@@ -704,7 +872,7 @@ func file_yandex_cloud_baremetal_v2_vrf_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

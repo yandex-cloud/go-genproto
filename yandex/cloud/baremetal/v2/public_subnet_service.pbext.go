@@ -3,6 +3,7 @@
 package baremetal
 
 import (
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -92,4 +93,32 @@ func (m *DeletePublicSubnetRequest) SetPublicSubnetId(v string) {
 
 func (m *DeletePublicSubnetMetadata) SetPublicSubnetId(v string) {
 	m.PublicSubnetId = v
+}
+
+func (m *ListPublicSubnetOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListPublicSubnetOperationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListPublicSubnetOperationsRequest) SetPublicSubnetId(v string) {
+	m.PublicSubnetId = v
+}
+
+func (m *ListPublicSubnetOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListPublicSubnetOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListPublicSubnetOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListPublicSubnetOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
 }

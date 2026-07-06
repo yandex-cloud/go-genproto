@@ -8,7 +8,9 @@ package mysql
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -352,51 +354,6 @@ func (x *CreateBackupRetentionPolicyRequest) GetPolicyName() string {
 	return ""
 }
 
-type CreateBackupRetentionPolicyResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Newly created [BackupRetentionPolicy].
-	Policy        *v1.BackupRetentionPolicy `protobuf:"bytes,1,opt,name=policy,proto3" json:"policy,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateBackupRetentionPolicyResponse) Reset() {
-	*x = CreateBackupRetentionPolicyResponse{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateBackupRetentionPolicyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateBackupRetentionPolicyResponse) ProtoMessage() {}
-
-func (x *CreateBackupRetentionPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateBackupRetentionPolicyResponse.ProtoReflect.Descriptor instead.
-func (*CreateBackupRetentionPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *CreateBackupRetentionPolicyResponse) GetPolicy() *v1.BackupRetentionPolicy {
-	if x != nil {
-		return x.Policy
-	}
-	return nil
-}
-
 type DeleteBackupRetentionPolicyRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier for the [BackupRetentionPolicy].
@@ -410,7 +367,7 @@ type DeleteBackupRetentionPolicyRequest struct {
 
 func (x *DeleteBackupRetentionPolicyRequest) Reset() {
 	*x = DeleteBackupRetentionPolicyRequest{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -422,7 +379,7 @@ func (x *DeleteBackupRetentionPolicyRequest) String() string {
 func (*DeleteBackupRetentionPolicyRequest) ProtoMessage() {}
 
 func (x *DeleteBackupRetentionPolicyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -435,7 +392,7 @@ func (x *DeleteBackupRetentionPolicyRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use DeleteBackupRetentionPolicyRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBackupRetentionPolicyRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteBackupRetentionPolicyRequest) GetPolicyId() string {
@@ -452,47 +409,11 @@ func (x *DeleteBackupRetentionPolicyRequest) GetClusterId() string {
 	return ""
 }
 
-type DeleteBackupRetentionPolicyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteBackupRetentionPolicyResponse) Reset() {
-	*x = DeleteBackupRetentionPolicyResponse{}
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteBackupRetentionPolicyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteBackupRetentionPolicyResponse) ProtoMessage() {}
-
-func (x *DeleteBackupRetentionPolicyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteBackupRetentionPolicyResponse.ProtoReflect.Descriptor instead.
-func (*DeleteBackupRetentionPolicyResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDescGZIP(), []int{7}
-}
-
 var File_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDesc = "" +
 	"\n" +
-	"?yandex/cloud/mdb/mysql/v1/backup_retention_policy_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a1yandex/cloud/mdb/v1/backup_retention_policy.proto\x1a\x1dyandex/cloud/validation.proto\"q\n" +
+	"?yandex/cloud/mdb/mysql/v1/backup_retention_policy_service.proto\x12\x19yandex.cloud.mdb.mysql.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/mdb/v1/backup_retention_policy.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"q\n" +
 	"\x1fGetBackupRetentionPolicyRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12!\n" +
@@ -520,20 +441,19 @@ const file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDe
 	"\x0fretain_for_days\x18\x03 \x01(\x03R\rretainForDays\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12%\n" +
 	"\vpolicy_name\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"policyName\"i\n" +
-	"#CreateBackupRetentionPolicyResponse\x12B\n" +
-	"\x06policy\x18\x01 \x01(\v2*.yandex.cloud.mdb.v1.BackupRetentionPolicyR\x06policy\"n\n" +
+	"policyName\"n\n" +
 	"\"DeleteBackupRetentionPolicyRequest\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"%\n" +
-	"#DeleteBackupRetentionPolicyResponse2\xaf\b\n" +
+	"cluster_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId2\xb3\t\n" +
 	"\x1cBackupRetentionPolicyService\x12\xbd\x01\n" +
 	"\x03Get\x12:.yandex.cloud.mdb.mysql.v1.GetBackupRetentionPolicyRequest\x1a*.yandex.cloud.mdb.v1.BackupRetentionPolicy\"N\x82\xd3\xe4\x93\x02H\x12F/managed-mysql/v1/clusters/{cluster_id}/retention_policies/{policy_id}\x12\xc9\x01\n" +
 	"\x04List\x12=.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesRequest\x1a>.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse\"B\x82\xd3\xe4\x93\x02<\x12:/managed-mysql/v1/clusters/{cluster_id}/retention_policies\x12\xd7\x01\n" +
-	"\fListByFolder\x12E.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesByFolderRequest\x1a>.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse\"@\x82\xd3\xe4\x93\x02:\x128/managed-mysql/v1/folders/{folder_id}/retention_policies\x12\xce\x01\n" +
-	"\x06Create\x12=.yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest\x1a>.yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyResponse\"E\x82\xd3\xe4\x93\x02?:\x01*\":/managed-mysql/v1/clusters/{cluster_id}/retention_policies\x12\xd7\x01\n" +
-	"\x06Delete\x12=.yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest\x1a>.yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyResponse\"N\x82\xd3\xe4\x93\x02H*F/managed-mysql/v1/clusters/{cluster_id}/retention_policies/{policy_id}Bd\n" +
+	"\fListByFolder\x12E.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesByFolderRequest\x1a>.yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse\"@\x82\xd3\xe4\x93\x02:\x128/managed-mysql/v1/folders/{folder_id}/retention_policies\x12\x9a\x02\n" +
+	"\x06Create\x12=.yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\xad\x01\xb2\xd2*d\n" +
+	"7yandex.cloud.mdb.v1.CreateBackupRetentionPolicyMetadata\x12)yandex.cloud.mdb.v1.BackupRetentionPolicy\x82\xd3\xe4\x93\x02?:\x01*\":/managed-mysql/v1/clusters/{cluster_id}/retention_policies\x12\x8f\x02\n" +
+	"\x06Delete\x12=.yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest\x1a!.yandex.cloud.operation.Operation\"\xa2\x01\xb2\xd2*P\n" +
+	"7yandex.cloud.mdb.v1.DeleteBackupRetentionPolicyMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H*F/managed-mysql/v1/clusters/{cluster_id}/retention_policies/{policy_id}Bd\n" +
 	"\x1dyandex.cloud.api.mdb.mysql.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1;mysqlb\x06proto3"
 
 var (
@@ -548,38 +468,36 @@ func file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDes
 	return file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_goTypes = []any{
 	(*GetBackupRetentionPolicyRequest)(nil),            // 0: yandex.cloud.mdb.mysql.v1.GetBackupRetentionPolicyRequest
 	(*ListBackupRetentionPoliciesRequest)(nil),         // 1: yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesRequest
 	(*ListBackupRetentionPoliciesByFolderRequest)(nil), // 2: yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesByFolderRequest
 	(*ListBackupRetentionPoliciesResponse)(nil),        // 3: yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse
 	(*CreateBackupRetentionPolicyRequest)(nil),         // 4: yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest
-	(*CreateBackupRetentionPolicyResponse)(nil),        // 5: yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyResponse
-	(*DeleteBackupRetentionPolicyRequest)(nil),         // 6: yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest
-	(*DeleteBackupRetentionPolicyResponse)(nil),        // 7: yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyResponse
-	(*v1.BackupRetentionPolicy)(nil),                   // 8: yandex.cloud.mdb.v1.BackupRetentionPolicy
-	(*v1.CronTab)(nil),                                 // 9: yandex.cloud.mdb.v1.CronTab
+	(*DeleteBackupRetentionPolicyRequest)(nil),         // 5: yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest
+	(*v1.BackupRetentionPolicy)(nil),                   // 6: yandex.cloud.mdb.v1.BackupRetentionPolicy
+	(*v1.CronTab)(nil),                                 // 7: yandex.cloud.mdb.v1.CronTab
+	(*operation.Operation)(nil),                        // 8: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_depIdxs = []int32{
-	8, // 0: yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse.policies:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicy
-	9, // 1: yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest.cron:type_name -> yandex.cloud.mdb.v1.CronTab
-	8, // 2: yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyResponse.policy:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicy
-	0, // 3: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetBackupRetentionPolicyRequest
-	1, // 4: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesRequest
-	2, // 5: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.ListByFolder:input_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesByFolderRequest
-	4, // 6: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest
-	6, // 7: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest
-	8, // 8: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Get:output_type -> yandex.cloud.mdb.v1.BackupRetentionPolicy
-	3, // 9: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse
-	3, // 10: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.ListByFolder:output_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse
-	5, // 11: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Create:output_type -> yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyResponse
-	7, // 12: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Delete:output_type -> yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyResponse
-	8, // [8:13] is the sub-list for method output_type
-	3, // [3:8] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse.policies:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicy
+	7, // 1: yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest.cron:type_name -> yandex.cloud.mdb.v1.CronTab
+	0, // 2: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Get:input_type -> yandex.cloud.mdb.mysql.v1.GetBackupRetentionPolicyRequest
+	1, // 3: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.List:input_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesRequest
+	2, // 4: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.ListByFolder:input_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesByFolderRequest
+	4, // 5: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Create:input_type -> yandex.cloud.mdb.mysql.v1.CreateBackupRetentionPolicyRequest
+	5, // 6: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Delete:input_type -> yandex.cloud.mdb.mysql.v1.DeleteBackupRetentionPolicyRequest
+	6, // 7: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Get:output_type -> yandex.cloud.mdb.v1.BackupRetentionPolicy
+	3, // 8: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.List:output_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse
+	3, // 9: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.ListByFolder:output_type -> yandex.cloud.mdb.mysql.v1.ListBackupRetentionPoliciesResponse
+	8, // 10: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Create:output_type -> yandex.cloud.operation.Operation
+	8, // 11: yandex.cloud.mdb.mysql.v1.BackupRetentionPolicyService.Delete:output_type -> yandex.cloud.operation.Operation
+	7, // [7:12] is the sub-list for method output_type
+	2, // [2:7] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_init() }
@@ -593,7 +511,7 @@ func file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_init()
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDesc), len(file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

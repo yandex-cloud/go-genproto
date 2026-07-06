@@ -116,7 +116,9 @@ type PrivateSubnet struct {
 	// Update timestamp.
 	UpdateTime *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 	// Resource annotations as `key:value` pairs.
-	Annotations   map[string]string `protobuf:"bytes,11,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Annotations map[string]string `protobuf:"bytes,11,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// ID of the availability zone where the server resides.
+	ZoneId        string `protobuf:"bytes,14,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -228,6 +230,13 @@ func (x *PrivateSubnet) GetAnnotations() map[string]string {
 	return nil
 }
 
+func (x *PrivateSubnet) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
 // VRF options for the private subnet.
 type PrivateSubnet_VrfOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -305,7 +314,7 @@ var File_yandex_cloud_baremetal_v2_private_subnet_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_baremetal_v2_private_subnet_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/baremetal/v2/private_subnet.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/dhcp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd2\b\n" +
+	".yandex/cloud/baremetal/v2/private_subnet.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/dhcp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\b\n" +
 	"\rPrivateSubnet\x122\n" +
 	"\x11private_subnet_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\x0fprivateSubnetId\x12!\n" +
 	"\bcloud_id\x18\x02 \x01(\tB\x06\xe0A\x02\xe0A\x05R\acloudId\x12#\n" +
@@ -321,7 +330,8 @@ const file_yandex_cloud_baremetal_v2_private_subnet_proto_rawDesc = "" +
 	"\vupdate_time\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\n" +
 	"updateTime\x12\x9b\x01\n" +
-	"\vannotations\x18\v \x03(\v29.yandex.cloud.baremetal.v2.PrivateSubnet.AnnotationsEntryB>\xe0A\x01\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\vannotations\x1a\xb5\x01\n" +
+	"\vannotations\x18\v \x03(\v29.yandex.cloud.baremetal.v2.PrivateSubnet.AnnotationsEntryB>\xe0A\x01\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\vannotations\x12\x1c\n" +
+	"\azone_id\x18\x0e \x01(\tB\x03\xe0A\x03R\x06zoneId\x1a\xb5\x01\n" +
 	"\n" +
 	"VrfOptions\x12\x1a\n" +
 	"\x06vrf_id\x18\x01 \x01(\tB\x03\xe0A\x02R\x05vrfId\x12\x17\n" +
@@ -338,7 +348,7 @@ const file_yandex_cloud_baremetal_v2_private_subnet_proto_rawDesc = "" +
 	"\x05READY\x10\x02\x12\f\n" +
 	"\bUPDATING\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\t\n" +
-	"\x05ERROR\x10\x05Bl\n" +
+	"\x05ERROR\x10\x05J\x04\b\f\x10\x0eBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

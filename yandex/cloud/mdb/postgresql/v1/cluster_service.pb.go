@@ -10,9 +10,9 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
-	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
+	v11 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/postgresql/v1/config"
-	v11 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
@@ -85,7 +85,7 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{22, 0}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{21, 0}
 }
 
 type ListClusterLogsRequest_ServiceType int32
@@ -140,7 +140,7 @@ func (x ListClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ListClusterLogsRequest_ServiceType.Descriptor instead.
 func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{25, 0}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{24, 0}
 }
 
 type StreamClusterLogsRequest_ServiceType int32
@@ -195,7 +195,7 @@ func (x StreamClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StreamClusterLogsRequest_ServiceType.Descriptor instead.
 func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{28, 0}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{27, 0}
 }
 
 type GetClusterRequest struct {
@@ -381,79 +381,6 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 	return ""
 }
 
-// Message to describe a new retention policy for cluster backups.
-type BackupRetentionPolicySpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Policy name.
-	PolicyName string `protobuf:"bytes,1,opt,name=policy_name,json=policyName,proto3" json:"policy_name,omitempty"`
-	// CronTab schedule.
-	Cron *CronTab `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
-	// Retention duration.
-	RetainForDays int64 `protobuf:"varint,3,opt,name=retain_for_days,json=retainForDays,proto3" json:"retain_for_days,omitempty"`
-	// Human-readable description.
-	Description   string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BackupRetentionPolicySpec) Reset() {
-	*x = BackupRetentionPolicySpec{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BackupRetentionPolicySpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BackupRetentionPolicySpec) ProtoMessage() {}
-
-func (x *BackupRetentionPolicySpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BackupRetentionPolicySpec.ProtoReflect.Descriptor instead.
-func (*BackupRetentionPolicySpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *BackupRetentionPolicySpec) GetPolicyName() string {
-	if x != nil {
-		return x.PolicyName
-	}
-	return ""
-}
-
-func (x *BackupRetentionPolicySpec) GetCron() *CronTab {
-	if x != nil {
-		return x.Cron
-	}
-	return nil
-}
-
-func (x *BackupRetentionPolicySpec) GetRetainForDays() int64 {
-	if x != nil {
-		return x.RetainForDays
-	}
-	return 0
-}
-
-func (x *BackupRetentionPolicySpec) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create the PostgreSQL cluster in.
@@ -486,7 +413,7 @@ type CreateClusterRequest struct {
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Backup long-term retention policies setting.
-	RetentionPolicies []*BackupRetentionPolicySpec `protobuf:"bytes,15,rep,name=retention_policies,json=retentionPolicies,proto3" json:"retention_policies,omitempty"`
+	RetentionPolicies []*v1.BackupRetentionPolicySpec `protobuf:"bytes,15,rep,name=retention_policies,json=retentionPolicies,proto3" json:"retention_policies,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,16,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
 	unknownFields       protoimpl.UnknownFields
@@ -495,7 +422,7 @@ type CreateClusterRequest struct {
 
 func (x *CreateClusterRequest) Reset() {
 	*x = CreateClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +434,7 @@ func (x *CreateClusterRequest) String() string {
 func (*CreateClusterRequest) ProtoMessage() {}
 
 func (x *CreateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +447,7 @@ func (x *CreateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterRequest.ProtoReflect.Descriptor instead.
 func (*CreateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateClusterRequest) GetFolderId() string {
@@ -621,7 +548,7 @@ func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
-func (x *CreateClusterRequest) GetRetentionPolicies() []*BackupRetentionPolicySpec {
+func (x *CreateClusterRequest) GetRetentionPolicies() []*v1.BackupRetentionPolicySpec {
 	if x != nil {
 		return x.RetentionPolicies
 	}
@@ -640,14 +567,14 @@ type CreateClusterMetadata struct {
 	// ID of the PostgreSQL cluster that is being created.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Log of actions during operation
-	OperationLog  *v1.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
+	OperationLog  *v11.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateClusterMetadata) Reset() {
 	*x = CreateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -659,7 +586,7 @@ func (x *CreateClusterMetadata) String() string {
 func (*CreateClusterMetadata) ProtoMessage() {}
 
 func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -672,7 +599,7 @@ func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*CreateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateClusterMetadata) GetClusterId() string {
@@ -682,7 +609,7 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-func (x *CreateClusterMetadata) GetOperationLog() *v1.OperationLog {
+func (x *CreateClusterMetadata) GetOperationLog() *v11.OperationLog {
 	if x != nil {
 		return x.OperationLog
 	}
@@ -722,7 +649,7 @@ type UpdateClusterRequest struct {
 
 func (x *UpdateClusterRequest) Reset() {
 	*x = UpdateClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -734,7 +661,7 @@ func (x *UpdateClusterRequest) String() string {
 func (*UpdateClusterRequest) ProtoMessage() {}
 
 func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,7 +674,7 @@ func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateClusterRequest) GetClusterId() string {
@@ -825,14 +752,14 @@ type UpdateClusterMetadata struct {
 	// ID of the PostgreSQL Cluster resource that is being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Log of actions during operation
-	OperationLog  *v1.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
+	OperationLog  *v11.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateClusterMetadata) Reset() {
 	*x = UpdateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -844,7 +771,7 @@ func (x *UpdateClusterMetadata) String() string {
 func (*UpdateClusterMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -857,7 +784,7 @@ func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateClusterMetadata) GetClusterId() string {
@@ -867,7 +794,7 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-func (x *UpdateClusterMetadata) GetOperationLog() *v1.OperationLog {
+func (x *UpdateClusterMetadata) GetOperationLog() *v11.OperationLog {
 	if x != nil {
 		return x.OperationLog
 	}
@@ -885,7 +812,7 @@ type DeleteClusterRequest struct {
 
 func (x *DeleteClusterRequest) Reset() {
 	*x = DeleteClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -897,7 +824,7 @@ func (x *DeleteClusterRequest) String() string {
 func (*DeleteClusterRequest) ProtoMessage() {}
 
 func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -910,7 +837,7 @@ func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteClusterRequest) GetClusterId() string {
@@ -930,7 +857,7 @@ type DeleteClusterMetadata struct {
 
 func (x *DeleteClusterMetadata) Reset() {
 	*x = DeleteClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -942,7 +869,7 @@ func (x *DeleteClusterMetadata) String() string {
 func (*DeleteClusterMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -955,7 +882,7 @@ func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteClusterMetadata) GetClusterId() string {
@@ -975,7 +902,7 @@ type StartClusterRequest struct {
 
 func (x *StartClusterRequest) Reset() {
 	*x = StartClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -987,7 +914,7 @@ func (x *StartClusterRequest) String() string {
 func (*StartClusterRequest) ProtoMessage() {}
 
 func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1000,7 +927,7 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StartClusterRequest) GetClusterId() string {
@@ -1020,7 +947,7 @@ type StartClusterMetadata struct {
 
 func (x *StartClusterMetadata) Reset() {
 	*x = StartClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1032,7 +959,7 @@ func (x *StartClusterMetadata) String() string {
 func (*StartClusterMetadata) ProtoMessage() {}
 
 func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1045,7 +972,7 @@ func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StartClusterMetadata) GetClusterId() string {
@@ -1065,7 +992,7 @@ type StopClusterRequest struct {
 
 func (x *StopClusterRequest) Reset() {
 	*x = StopClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1077,7 +1004,7 @@ func (x *StopClusterRequest) String() string {
 func (*StopClusterRequest) ProtoMessage() {}
 
 func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +1017,7 @@ func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
 func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StopClusterRequest) GetClusterId() string {
@@ -1110,7 +1037,7 @@ type StopClusterMetadata struct {
 
 func (x *StopClusterMetadata) Reset() {
 	*x = StopClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1122,7 +1049,7 @@ func (x *StopClusterMetadata) String() string {
 func (*StopClusterMetadata) ProtoMessage() {}
 
 func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,7 +1062,7 @@ func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StopClusterMetadata) GetClusterId() string {
@@ -1157,7 +1084,7 @@ type MoveClusterRequest struct {
 
 func (x *MoveClusterRequest) Reset() {
 	*x = MoveClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1169,7 +1096,7 @@ func (x *MoveClusterRequest) String() string {
 func (*MoveClusterRequest) ProtoMessage() {}
 
 func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1182,7 +1109,7 @@ func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterRequest.ProtoReflect.Descriptor instead.
 func (*MoveClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *MoveClusterRequest) GetClusterId() string {
@@ -1213,7 +1140,7 @@ type MoveClusterMetadata struct {
 
 func (x *MoveClusterMetadata) Reset() {
 	*x = MoveClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1225,7 +1152,7 @@ func (x *MoveClusterMetadata) String() string {
 func (*MoveClusterMetadata) ProtoMessage() {}
 
 func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1238,7 +1165,7 @@ func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterMetadata.ProtoReflect.Descriptor instead.
 func (*MoveClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *MoveClusterMetadata) GetClusterId() string {
@@ -1273,7 +1200,7 @@ type BackupClusterRequest struct {
 
 func (x *BackupClusterRequest) Reset() {
 	*x = BackupClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1285,7 +1212,7 @@ func (x *BackupClusterRequest) String() string {
 func (*BackupClusterRequest) ProtoMessage() {}
 
 func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1298,7 +1225,7 @@ func (x *BackupClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupClusterRequest.ProtoReflect.Descriptor instead.
 func (*BackupClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BackupClusterRequest) GetClusterId() string {
@@ -1320,7 +1247,7 @@ type BackupClusterMetadata struct {
 
 func (x *BackupClusterMetadata) Reset() {
 	*x = BackupClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1332,7 +1259,7 @@ func (x *BackupClusterMetadata) String() string {
 func (*BackupClusterMetadata) ProtoMessage() {}
 
 func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1345,7 +1272,7 @@ func (x *BackupClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupClusterMetadata.ProtoReflect.Descriptor instead.
 func (*BackupClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *BackupClusterMetadata) GetClusterId() string {
@@ -1410,7 +1337,7 @@ type RestoreClusterRequest struct {
 
 func (x *RestoreClusterRequest) Reset() {
 	*x = RestoreClusterRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1422,7 +1349,7 @@ func (x *RestoreClusterRequest) String() string {
 func (*RestoreClusterRequest) ProtoMessage() {}
 
 func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1362,7 @@ func (x *RestoreClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreClusterRequest.ProtoReflect.Descriptor instead.
 func (*RestoreClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RestoreClusterRequest) GetBackupId() string {
@@ -1562,7 +1489,7 @@ type RestoreClusterMetadata struct {
 
 func (x *RestoreClusterMetadata) Reset() {
 	*x = RestoreClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1574,7 +1501,7 @@ func (x *RestoreClusterMetadata) String() string {
 func (*RestoreClusterMetadata) ProtoMessage() {}
 
 func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1587,7 +1514,7 @@ func (x *RestoreClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreClusterMetadata.ProtoReflect.Descriptor instead.
 func (*RestoreClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RestoreClusterMetadata) GetClusterId() string {
@@ -1616,7 +1543,7 @@ type StartClusterFailoverRequest struct {
 
 func (x *StartClusterFailoverRequest) Reset() {
 	*x = StartClusterFailoverRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1628,7 +1555,7 @@ func (x *StartClusterFailoverRequest) String() string {
 func (*StartClusterFailoverRequest) ProtoMessage() {}
 
 func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1641,7 +1568,7 @@ func (x *StartClusterFailoverRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterFailoverRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterFailoverRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *StartClusterFailoverRequest) GetClusterId() string {
@@ -1668,7 +1595,7 @@ type StartClusterFailoverMetadata struct {
 
 func (x *StartClusterFailoverMetadata) Reset() {
 	*x = StartClusterFailoverMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1680,7 +1607,7 @@ func (x *StartClusterFailoverMetadata) String() string {
 func (*StartClusterFailoverMetadata) ProtoMessage() {}
 
 func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1693,7 +1620,7 @@ func (x *StartClusterFailoverMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterFailoverMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterFailoverMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *StartClusterFailoverMetadata) GetClusterId() string {
@@ -1717,7 +1644,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1729,7 +1656,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1742,7 +1669,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1779,7 +1706,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1791,7 +1718,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1804,7 +1731,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -1833,7 +1760,7 @@ type LogRecord struct {
 
 func (x *LogRecord) Reset() {
 	*x = LogRecord{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1845,7 +1772,7 @@ func (x *LogRecord) String() string {
 func (*LogRecord) ProtoMessage() {}
 
 func (x *LogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1858,7 +1785,7 @@ func (x *LogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRecord.ProtoReflect.Descriptor instead.
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *LogRecord) GetTimestamp() *timestamppb.Timestamp {
@@ -1904,7 +1831,7 @@ type ListClusterLogsRequest struct {
 
 func (x *ListClusterLogsRequest) Reset() {
 	*x = ListClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1916,7 +1843,7 @@ func (x *ListClusterLogsRequest) String() string {
 func (*ListClusterLogsRequest) ProtoMessage() {}
 
 func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[25]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1929,7 +1856,7 @@ func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListClusterLogsRequest) GetClusterId() string {
@@ -2004,7 +1931,7 @@ type ListClusterLogsResponse struct {
 
 func (x *ListClusterLogsResponse) Reset() {
 	*x = ListClusterLogsResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2016,7 +1943,7 @@ func (x *ListClusterLogsResponse) String() string {
 func (*ListClusterLogsResponse) ProtoMessage() {}
 
 func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[26]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2029,7 +1956,7 @@ func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListClusterLogsResponse) GetLogs() []*LogRecord {
@@ -2061,7 +1988,7 @@ type StreamLogRecord struct {
 
 func (x *StreamLogRecord) Reset() {
 	*x = StreamLogRecord{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2073,7 +2000,7 @@ func (x *StreamLogRecord) String() string {
 func (*StreamLogRecord) ProtoMessage() {}
 
 func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2086,7 +2013,7 @@ func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogRecord.ProtoReflect.Descriptor instead.
 func (*StreamLogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *StreamLogRecord) GetRecord() *LogRecord {
@@ -2103,13 +2030,15 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 	return ""
 }
 
+// Same as [ListLogs] but using server-side streaming. Also supports `tail -f` semantics.
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. ID of the PostgreSQL cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
-	ColumnFilter []string                             `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
-	ServiceType  StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
+	// Type of the service to request logs about.
+	ServiceType StreamClusterLogsRequest_ServiceType `protobuf:"varint,3,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
@@ -2135,7 +2064,7 @@ type StreamClusterLogsRequest struct {
 
 func (x *StreamClusterLogsRequest) Reset() {
 	*x = StreamClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2147,7 +2076,7 @@ func (x *StreamClusterLogsRequest) String() string {
 func (*StreamClusterLogsRequest) ProtoMessage() {}
 
 func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2160,7 +2089,7 @@ func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*StreamClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *StreamClusterLogsRequest) GetClusterId() string {
@@ -2229,7 +2158,7 @@ type ListClusterOperationsRequest struct {
 
 func (x *ListClusterOperationsRequest) Reset() {
 	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2241,7 +2170,7 @@ func (x *ListClusterOperationsRequest) String() string {
 func (*ListClusterOperationsRequest) ProtoMessage() {}
 
 func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2254,7 +2183,7 @@ func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *ListClusterOperationsRequest) GetClusterId() string {
@@ -2293,7 +2222,7 @@ type ListClusterOperationsResponse struct {
 
 func (x *ListClusterOperationsResponse) Reset() {
 	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2305,7 +2234,7 @@ func (x *ListClusterOperationsResponse) String() string {
 func (*ListClusterOperationsResponse) ProtoMessage() {}
 
 func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2318,7 +2247,7 @@ func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
@@ -2353,7 +2282,7 @@ type ListClusterBackupsRequest struct {
 
 func (x *ListClusterBackupsRequest) Reset() {
 	*x = ListClusterBackupsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2365,7 +2294,7 @@ func (x *ListClusterBackupsRequest) String() string {
 func (*ListClusterBackupsRequest) ProtoMessage() {}
 
 func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2378,7 +2307,7 @@ func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ListClusterBackupsRequest) GetClusterId() string {
@@ -2417,7 +2346,7 @@ type ListClusterBackupsResponse struct {
 
 func (x *ListClusterBackupsResponse) Reset() {
 	*x = ListClusterBackupsResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2429,7 +2358,7 @@ func (x *ListClusterBackupsResponse) String() string {
 func (*ListClusterBackupsResponse) ProtoMessage() {}
 
 func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[32]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2442,7 +2371,7 @@ func (x *ListClusterBackupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterBackupsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterBackupsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{32}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ListClusterBackupsResponse) GetBackups() []*Backup {
@@ -2477,7 +2406,7 @@ type ListClusterHostsRequest struct {
 
 func (x *ListClusterHostsRequest) Reset() {
 	*x = ListClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2489,7 +2418,7 @@ func (x *ListClusterHostsRequest) String() string {
 func (*ListClusterHostsRequest) ProtoMessage() {}
 
 func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[33]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2502,7 +2431,7 @@ func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{33}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ListClusterHostsRequest) GetClusterId() string {
@@ -2541,7 +2470,7 @@ type ListClusterHostsResponse struct {
 
 func (x *ListClusterHostsResponse) Reset() {
 	*x = ListClusterHostsResponse{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2553,7 +2482,7 @@ func (x *ListClusterHostsResponse) String() string {
 func (*ListClusterHostsResponse) ProtoMessage() {}
 
 func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[34]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2566,7 +2495,7 @@ func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterHostsResponse.ProtoReflect.Descriptor instead.
 func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{34}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListClusterHostsResponse) GetHosts() []*Host {
@@ -2596,7 +2525,7 @@ type AddClusterHostsRequest struct {
 
 func (x *AddClusterHostsRequest) Reset() {
 	*x = AddClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2608,7 +2537,7 @@ func (x *AddClusterHostsRequest) String() string {
 func (*AddClusterHostsRequest) ProtoMessage() {}
 
 func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[35]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2621,7 +2550,7 @@ func (x *AddClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{35}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *AddClusterHostsRequest) GetClusterId() string {
@@ -2650,7 +2579,7 @@ type AddClusterHostsMetadata struct {
 
 func (x *AddClusterHostsMetadata) Reset() {
 	*x = AddClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2662,7 +2591,7 @@ func (x *AddClusterHostsMetadata) String() string {
 func (*AddClusterHostsMetadata) ProtoMessage() {}
 
 func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[36]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +2604,7 @@ func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{36}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AddClusterHostsMetadata) GetClusterId() string {
@@ -2705,7 +2634,7 @@ type DeleteClusterHostsRequest struct {
 
 func (x *DeleteClusterHostsRequest) Reset() {
 	*x = DeleteClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2717,7 +2646,7 @@ func (x *DeleteClusterHostsRequest) String() string {
 func (*DeleteClusterHostsRequest) ProtoMessage() {}
 
 func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[37]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2730,7 +2659,7 @@ func (x *DeleteClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{37}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *DeleteClusterHostsRequest) GetClusterId() string {
@@ -2759,7 +2688,7 @@ type DeleteClusterHostsMetadata struct {
 
 func (x *DeleteClusterHostsMetadata) Reset() {
 	*x = DeleteClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2771,7 +2700,7 @@ func (x *DeleteClusterHostsMetadata) String() string {
 func (*DeleteClusterHostsMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[38]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2784,7 +2713,7 @@ func (x *DeleteClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{38}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *DeleteClusterHostsMetadata) GetClusterId() string {
@@ -2814,7 +2743,7 @@ type UpdateClusterHostsRequest struct {
 
 func (x *UpdateClusterHostsRequest) Reset() {
 	*x = UpdateClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2826,7 +2755,7 @@ func (x *UpdateClusterHostsRequest) String() string {
 func (*UpdateClusterHostsRequest) ProtoMessage() {}
 
 func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[39]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2839,7 +2768,7 @@ func (x *UpdateClusterHostsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{39}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *UpdateClusterHostsRequest) GetClusterId() string {
@@ -2868,7 +2797,7 @@ type UpdateClusterHostsMetadata struct {
 
 func (x *UpdateClusterHostsMetadata) Reset() {
 	*x = UpdateClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2880,7 +2809,7 @@ func (x *UpdateClusterHostsMetadata) String() string {
 func (*UpdateClusterHostsMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[40]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2893,7 +2822,7 @@ func (x *UpdateClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{40}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UpdateClusterHostsMetadata) GetClusterId() string {
@@ -2935,7 +2864,7 @@ type UpdateHostSpec struct {
 
 func (x *UpdateHostSpec) Reset() {
 	*x = UpdateHostSpec{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2947,7 +2876,7 @@ func (x *UpdateHostSpec) String() string {
 func (*UpdateHostSpec) ProtoMessage() {}
 
 func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[41]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2960,7 +2889,7 @@ func (x *UpdateHostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateHostSpec.ProtoReflect.Descriptor instead.
 func (*UpdateHostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{41}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *UpdateHostSpec) GetHostName() string {
@@ -3040,7 +2969,7 @@ type HostSpec struct {
 
 func (x *HostSpec) Reset() {
 	*x = HostSpec{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3052,7 +2981,7 @@ func (x *HostSpec) String() string {
 func (*HostSpec) ProtoMessage() {}
 
 func (x *HostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[42]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3065,7 +2994,7 @@ func (x *HostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HostSpec.ProtoReflect.Descriptor instead.
 func (*HostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{42}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *HostSpec) GetZoneId() string {
@@ -3153,7 +3082,7 @@ type ConfigSpec struct {
 	// Disk size autoscaling
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,23,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
 	// Cluster-wide Connection Manager integration configuration
-	ConnectionManager *v11.ClusterConnectionManager `protobuf:"bytes,32,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
+	ConnectionManager *v1.ClusterConnectionManager `protobuf:"bytes,32,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
 	// Configuration of managed pg_repack.
 	ManagedRepack *ManagedRepack `protobuf:"bytes,34,opt,name=managed_repack,json=managedRepack,proto3" json:"managed_repack,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3162,7 +3091,7 @@ type ConfigSpec struct {
 
 func (x *ConfigSpec) Reset() {
 	*x = ConfigSpec{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3174,7 +3103,7 @@ func (x *ConfigSpec) String() string {
 func (*ConfigSpec) ProtoMessage() {}
 
 func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3187,7 +3116,7 @@ func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
 func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{43}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *ConfigSpec) GetVersion() string {
@@ -3387,7 +3316,7 @@ func (x *ConfigSpec) GetDiskSizeAutoscaling() *DiskSizeAutoscaling {
 	return nil
 }
 
-func (x *ConfigSpec) GetConnectionManager() *v11.ClusterConnectionManager {
+func (x *ConfigSpec) GetConnectionManager() *v1.ClusterConnectionManager {
 	if x != nil {
 		return x.ConnectionManager
 	}
@@ -3528,7 +3457,7 @@ type ConfigHostSpec struct {
 
 func (x *ConfigHostSpec) Reset() {
 	*x = ConfigHostSpec{}
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3540,7 +3469,7 @@ func (x *ConfigHostSpec) String() string {
 func (*ConfigHostSpec) ProtoMessage() {}
 
 func (x *ConfigHostSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[44]
+	mi := &file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3553,7 +3482,7 @@ func (x *ConfigHostSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigHostSpec.ProtoReflect.Descriptor instead.
 func (*ConfigHostSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{44}
+	return file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ConfigHostSpec) GetPostgresqlConfig() isConfigHostSpec_PostgresqlConfig {
@@ -3795,7 +3724,7 @@ var File_yandex_cloud_mdb_postgresql_v1_cluster_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/postgresql/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a+yandex/cloud/mdb/postgresql/v1/backup.proto\x1a,yandex/cloud/mdb/postgresql/v1/cluster.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host11.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host12.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host13.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host13_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host14.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host14_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host15.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host15_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host16.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host16_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host17.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host17_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host18.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host18_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql11.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql12.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql13.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql13_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql15.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql15_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql16.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql16_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql17.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql17_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x1a-yandex/cloud/mdb/postgresql/v1/database.proto\x1a<yandex/cloud/mdb/postgresql/v1/backup_retention_policy.proto\x1a0yandex/cloud/mdb/postgresql/v1/maintenance.proto\x1a)yandex/cloud/mdb/postgresql/v1/user.proto\x1a+yandex/cloud/mdb/v1/connectionmanager.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
+	"4yandex/cloud/mdb/postgresql/v1/cluster_service.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a4yandex/cloud/mdb/operationlog/v1/operation_log.proto\x1a+yandex/cloud/mdb/postgresql/v1/backup.proto\x1a,yandex/cloud/mdb/postgresql/v1/cluster.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host11.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host12.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host13.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host13_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host14.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host14_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host15.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host15_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host16.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host16_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host17.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host17_1c.proto\x1a2yandex/cloud/mdb/postgresql/v1/config/host18.proto\x1a5yandex/cloud/mdb/postgresql/v1/config/host18_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql11.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql12.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql13.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql13_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql14_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql15.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql15_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql16.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql16_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql17.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql17_1c.proto\x1a8yandex/cloud/mdb/postgresql/v1/config/postgresql18.proto\x1a;yandex/cloud/mdb/postgresql/v1/config/postgresql18_1c.proto\x1a-yandex/cloud/mdb/postgresql/v1/database.proto\x1a0yandex/cloud/mdb/postgresql/v1/maintenance.proto\x1a)yandex/cloud/mdb/postgresql/v1/user.proto\x1a1yandex/cloud/mdb/v1/backup_retention_policy.proto\x1a+yandex/cloud/mdb/v1/connectionmanager.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"@\n" +
 	"\x11GetClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"\xb7\x01\n" +
@@ -3809,13 +3738,7 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x83\x01\n" +
 	"\x14ListClustersResponse\x12C\n" +
 	"\bclusters\x18\x01 \x03(\v2'.yandex.cloud.mdb.postgresql.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc9\x01\n" +
-	"\x19BackupRetentionPolicySpec\x12%\n" +
-	"\vpolicy_name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\n" +
-	"policyName\x12;\n" +
-	"\x04cron\x18\x02 \x01(\v2'.yandex.cloud.mdb.postgresql.v1.CronTabR\x04cron\x12&\n" +
-	"\x0fretain_for_days\x18\x03 \x01(\x03R\rretainForDays\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\"\xef\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe4\t\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3835,8 +3758,8 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12$\n" +
 	"\x0ehost_group_ids\x18\r \x03(\tR\fhostGroupIds\x12`\n" +
-	"\x12maintenance_window\x18\x0e \x01(\v21.yandex.cloud.mdb.postgresql.v1.MaintenanceWindowR\x11maintenanceWindow\x12h\n" +
-	"\x12retention_policies\x18\x0f \x03(\v29.yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicySpecR\x11retentionPolicies\x12Q\n" +
+	"\x12maintenance_window\x18\x0e \x01(\v21.yandex.cloud.mdb.postgresql.v1.MaintenanceWindowR\x11maintenanceWindow\x12]\n" +
+	"\x12retention_policies\x18\x0f \x03(\v2..yandex.cloud.mdb.v1.BackupRetentionPolicySpecR\x11retentionPolicies\x12Q\n" +
 	"\x16disk_encryption_key_id\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -4180,7 +4103,7 @@ func file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDescGZIP() []b
 }
 
 var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
+var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
 var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_goTypes = []any{
 	(RescheduleMaintenanceRequest_RescheduleType)(0), // 0: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.RescheduleType
 	(ListClusterLogsRequest_ServiceType)(0),          // 1: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.ServiceType
@@ -4188,245 +4111,243 @@ var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_goTypes = []any{
 	(*GetClusterRequest)(nil),                        // 3: yandex.cloud.mdb.postgresql.v1.GetClusterRequest
 	(*ListClustersRequest)(nil),                      // 4: yandex.cloud.mdb.postgresql.v1.ListClustersRequest
 	(*ListClustersResponse)(nil),                     // 5: yandex.cloud.mdb.postgresql.v1.ListClustersResponse
-	(*BackupRetentionPolicySpec)(nil),                // 6: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicySpec
-	(*CreateClusterRequest)(nil),                     // 7: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest
-	(*CreateClusterMetadata)(nil),                    // 8: yandex.cloud.mdb.postgresql.v1.CreateClusterMetadata
-	(*UpdateClusterRequest)(nil),                     // 9: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),                    // 10: yandex.cloud.mdb.postgresql.v1.UpdateClusterMetadata
-	(*DeleteClusterRequest)(nil),                     // 11: yandex.cloud.mdb.postgresql.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),                    // 12: yandex.cloud.mdb.postgresql.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),                      // 13: yandex.cloud.mdb.postgresql.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),                     // 14: yandex.cloud.mdb.postgresql.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),                       // 15: yandex.cloud.mdb.postgresql.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),                      // 16: yandex.cloud.mdb.postgresql.v1.StopClusterMetadata
-	(*MoveClusterRequest)(nil),                       // 17: yandex.cloud.mdb.postgresql.v1.MoveClusterRequest
-	(*MoveClusterMetadata)(nil),                      // 18: yandex.cloud.mdb.postgresql.v1.MoveClusterMetadata
-	(*BackupClusterRequest)(nil),                     // 19: yandex.cloud.mdb.postgresql.v1.BackupClusterRequest
-	(*BackupClusterMetadata)(nil),                    // 20: yandex.cloud.mdb.postgresql.v1.BackupClusterMetadata
-	(*RestoreClusterRequest)(nil),                    // 21: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest
-	(*RestoreClusterMetadata)(nil),                   // 22: yandex.cloud.mdb.postgresql.v1.RestoreClusterMetadata
-	(*StartClusterFailoverRequest)(nil),              // 23: yandex.cloud.mdb.postgresql.v1.StartClusterFailoverRequest
-	(*StartClusterFailoverMetadata)(nil),             // 24: yandex.cloud.mdb.postgresql.v1.StartClusterFailoverMetadata
-	(*RescheduleMaintenanceRequest)(nil),             // 25: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),            // 26: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceMetadata
-	(*LogRecord)(nil),                                // 27: yandex.cloud.mdb.postgresql.v1.LogRecord
-	(*ListClusterLogsRequest)(nil),                   // 28: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest
-	(*ListClusterLogsResponse)(nil),                  // 29: yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse
-	(*StreamLogRecord)(nil),                          // 30: yandex.cloud.mdb.postgresql.v1.StreamLogRecord
-	(*StreamClusterLogsRequest)(nil),                 // 31: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest
-	(*ListClusterOperationsRequest)(nil),             // 32: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil),            // 33: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse
-	(*ListClusterBackupsRequest)(nil),                // 34: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsRequest
-	(*ListClusterBackupsResponse)(nil),               // 35: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse
-	(*ListClusterHostsRequest)(nil),                  // 36: yandex.cloud.mdb.postgresql.v1.ListClusterHostsRequest
-	(*ListClusterHostsResponse)(nil),                 // 37: yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse
-	(*AddClusterHostsRequest)(nil),                   // 38: yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest
-	(*AddClusterHostsMetadata)(nil),                  // 39: yandex.cloud.mdb.postgresql.v1.AddClusterHostsMetadata
-	(*DeleteClusterHostsRequest)(nil),                // 40: yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsRequest
-	(*DeleteClusterHostsMetadata)(nil),               // 41: yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsMetadata
-	(*UpdateClusterHostsRequest)(nil),                // 42: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest
-	(*UpdateClusterHostsMetadata)(nil),               // 43: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsMetadata
-	(*UpdateHostSpec)(nil),                           // 44: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec
-	(*HostSpec)(nil),                                 // 45: yandex.cloud.mdb.postgresql.v1.HostSpec
-	(*ConfigSpec)(nil),                               // 46: yandex.cloud.mdb.postgresql.v1.ConfigSpec
-	(*ConfigHostSpec)(nil),                           // 47: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
-	nil,                                              // 48: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.LabelsEntry
-	nil,                                              // 49: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.LabelsEntry
-	nil,                                              // 50: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.LabelsEntry
-	nil,                                              // 51: yandex.cloud.mdb.postgresql.v1.LogRecord.MessageEntry
-	(*Cluster)(nil),                                  // 52: yandex.cloud.mdb.postgresql.v1.Cluster
-	(*CronTab)(nil),                                  // 53: yandex.cloud.mdb.postgresql.v1.CronTab
-	(Cluster_Environment)(0),                         // 54: yandex.cloud.mdb.postgresql.v1.Cluster.Environment
-	(*DatabaseSpec)(nil),                             // 55: yandex.cloud.mdb.postgresql.v1.DatabaseSpec
-	(*UserSpec)(nil),                                 // 56: yandex.cloud.mdb.postgresql.v1.UserSpec
-	(*MaintenanceWindow)(nil),                        // 57: yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
-	(*wrapperspb.StringValue)(nil),                   // 58: google.protobuf.StringValue
-	(*v1.OperationLog)(nil),                          // 59: yandex.cloud.mdb.operationlog.v1.OperationLog
-	(*fieldmaskpb.FieldMask)(nil),                    // 60: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                    // 61: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                      // 62: yandex.cloud.operation.Operation
-	(*Backup)(nil),                                   // 63: yandex.cloud.mdb.postgresql.v1.Backup
-	(*Host)(nil),                                     // 64: yandex.cloud.mdb.postgresql.v1.Host
-	(*wrapperspb.Int64Value)(nil),                    // 65: google.protobuf.Int64Value
-	(*config.PostgresqlConfig11)(nil),                // 66: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig11
-	(*config.PostgresqlConfig12)(nil),                // 67: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig12
-	(*config.PostgresqlConfig13)(nil),                // 68: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13
-	(*config.PostgresqlConfig13_1C)(nil),             // 69: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13_1C
-	(*config.PostgresqlConfig14)(nil),                // 70: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14
-	(*config.PostgresqlConfig14_1C)(nil),             // 71: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
-	(*config.PostgresqlConfig15)(nil),                // 72: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	(*config.PostgresqlConfig15_1C)(nil),             // 73: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_1C
-	(*config.PostgresqlConfig16)(nil),                // 74: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
-	(*config.PostgresqlConfig16_1C)(nil),             // 75: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16_1C
-	(*config.PostgresqlConfig17)(nil),                // 76: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17
-	(*config.PostgresqlConfig17_1C)(nil),             // 77: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17_1C
-	(*config.PostgresqlConfig18)(nil),                // 78: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18
-	(*config.PostgresqlConfig18_1C)(nil),             // 79: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	(*ConnectionPoolerConfig)(nil),                   // 80: yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfig
-	(*Resources)(nil),                                // 81: yandex.cloud.mdb.postgresql.v1.Resources
-	(*wrapperspb.BoolValue)(nil),                     // 82: google.protobuf.BoolValue
-	(*timeofday.TimeOfDay)(nil),                      // 83: google.type.TimeOfDay
-	(*Access)(nil),                                   // 84: yandex.cloud.mdb.postgresql.v1.Access
-	(*PerformanceDiagnostics)(nil),                   // 85: yandex.cloud.mdb.postgresql.v1.PerformanceDiagnostics
-	(*DiskSizeAutoscaling)(nil),                      // 86: yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscaling
-	(*v11.ClusterConnectionManager)(nil),             // 87: yandex.cloud.mdb.v1.ClusterConnectionManager
-	(*ManagedRepack)(nil),                            // 88: yandex.cloud.mdb.postgresql.v1.ManagedRepack
-	(*config.PostgresqlHostConfig11)(nil),            // 89: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11
-	(*config.PostgresqlHostConfig12)(nil),            // 90: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig12
-	(*config.PostgresqlHostConfig13)(nil),            // 91: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13
-	(*config.PostgresqlHostConfig13_1C)(nil),         // 92: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C
-	(*config.PostgresqlHostConfig14)(nil),            // 93: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14
-	(*config.PostgresqlHostConfig14_1C)(nil),         // 94: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C
-	(*config.PostgresqlHostConfig15)(nil),            // 95: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15
-	(*config.PostgresqlHostConfig15_1C)(nil),         // 96: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15_1C
-	(*config.PostgresqlHostConfig16)(nil),            // 97: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16
-	(*config.PostgresqlHostConfig16_1C)(nil),         // 98: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16_1C
-	(*config.PostgresqlHostConfig17)(nil),            // 99: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17
-	(*config.PostgresqlHostConfig17_1C)(nil),         // 100: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17_1C
-	(*config.PostgresqlHostConfig18)(nil),            // 101: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18
-	(*config.PostgresqlHostConfig18_1C)(nil),         // 102: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18_1C
-	(*access.ListAccessBindingsRequest)(nil),         // 103: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),          // 104: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil),       // 105: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),        // 106: yandex.cloud.access.ListAccessBindingsResponse
+	(*CreateClusterRequest)(nil),                     // 6: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest
+	(*CreateClusterMetadata)(nil),                    // 7: yandex.cloud.mdb.postgresql.v1.CreateClusterMetadata
+	(*UpdateClusterRequest)(nil),                     // 8: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),                    // 9: yandex.cloud.mdb.postgresql.v1.UpdateClusterMetadata
+	(*DeleteClusterRequest)(nil),                     // 10: yandex.cloud.mdb.postgresql.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),                    // 11: yandex.cloud.mdb.postgresql.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                      // 12: yandex.cloud.mdb.postgresql.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),                     // 13: yandex.cloud.mdb.postgresql.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                       // 14: yandex.cloud.mdb.postgresql.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                      // 15: yandex.cloud.mdb.postgresql.v1.StopClusterMetadata
+	(*MoveClusterRequest)(nil),                       // 16: yandex.cloud.mdb.postgresql.v1.MoveClusterRequest
+	(*MoveClusterMetadata)(nil),                      // 17: yandex.cloud.mdb.postgresql.v1.MoveClusterMetadata
+	(*BackupClusterRequest)(nil),                     // 18: yandex.cloud.mdb.postgresql.v1.BackupClusterRequest
+	(*BackupClusterMetadata)(nil),                    // 19: yandex.cloud.mdb.postgresql.v1.BackupClusterMetadata
+	(*RestoreClusterRequest)(nil),                    // 20: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest
+	(*RestoreClusterMetadata)(nil),                   // 21: yandex.cloud.mdb.postgresql.v1.RestoreClusterMetadata
+	(*StartClusterFailoverRequest)(nil),              // 22: yandex.cloud.mdb.postgresql.v1.StartClusterFailoverRequest
+	(*StartClusterFailoverMetadata)(nil),             // 23: yandex.cloud.mdb.postgresql.v1.StartClusterFailoverMetadata
+	(*RescheduleMaintenanceRequest)(nil),             // 24: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),            // 25: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceMetadata
+	(*LogRecord)(nil),                                // 26: yandex.cloud.mdb.postgresql.v1.LogRecord
+	(*ListClusterLogsRequest)(nil),                   // 27: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest
+	(*ListClusterLogsResponse)(nil),                  // 28: yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse
+	(*StreamLogRecord)(nil),                          // 29: yandex.cloud.mdb.postgresql.v1.StreamLogRecord
+	(*StreamClusterLogsRequest)(nil),                 // 30: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest
+	(*ListClusterOperationsRequest)(nil),             // 31: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),            // 32: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse
+	(*ListClusterBackupsRequest)(nil),                // 33: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsRequest
+	(*ListClusterBackupsResponse)(nil),               // 34: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse
+	(*ListClusterHostsRequest)(nil),                  // 35: yandex.cloud.mdb.postgresql.v1.ListClusterHostsRequest
+	(*ListClusterHostsResponse)(nil),                 // 36: yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse
+	(*AddClusterHostsRequest)(nil),                   // 37: yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest
+	(*AddClusterHostsMetadata)(nil),                  // 38: yandex.cloud.mdb.postgresql.v1.AddClusterHostsMetadata
+	(*DeleteClusterHostsRequest)(nil),                // 39: yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsRequest
+	(*DeleteClusterHostsMetadata)(nil),               // 40: yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsMetadata
+	(*UpdateClusterHostsRequest)(nil),                // 41: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest
+	(*UpdateClusterHostsMetadata)(nil),               // 42: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsMetadata
+	(*UpdateHostSpec)(nil),                           // 43: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec
+	(*HostSpec)(nil),                                 // 44: yandex.cloud.mdb.postgresql.v1.HostSpec
+	(*ConfigSpec)(nil),                               // 45: yandex.cloud.mdb.postgresql.v1.ConfigSpec
+	(*ConfigHostSpec)(nil),                           // 46: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
+	nil,                                              // 47: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.LabelsEntry
+	nil,                                              // 48: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.LabelsEntry
+	nil,                                              // 49: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.LabelsEntry
+	nil,                                              // 50: yandex.cloud.mdb.postgresql.v1.LogRecord.MessageEntry
+	(*Cluster)(nil),                                  // 51: yandex.cloud.mdb.postgresql.v1.Cluster
+	(Cluster_Environment)(0),                         // 52: yandex.cloud.mdb.postgresql.v1.Cluster.Environment
+	(*DatabaseSpec)(nil),                             // 53: yandex.cloud.mdb.postgresql.v1.DatabaseSpec
+	(*UserSpec)(nil),                                 // 54: yandex.cloud.mdb.postgresql.v1.UserSpec
+	(*MaintenanceWindow)(nil),                        // 55: yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
+	(*v1.BackupRetentionPolicySpec)(nil),             // 56: yandex.cloud.mdb.v1.BackupRetentionPolicySpec
+	(*wrapperspb.StringValue)(nil),                   // 57: google.protobuf.StringValue
+	(*v11.OperationLog)(nil),                         // 58: yandex.cloud.mdb.operationlog.v1.OperationLog
+	(*fieldmaskpb.FieldMask)(nil),                    // 59: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                    // 60: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                      // 61: yandex.cloud.operation.Operation
+	(*Backup)(nil),                                   // 62: yandex.cloud.mdb.postgresql.v1.Backup
+	(*Host)(nil),                                     // 63: yandex.cloud.mdb.postgresql.v1.Host
+	(*wrapperspb.Int64Value)(nil),                    // 64: google.protobuf.Int64Value
+	(*config.PostgresqlConfig11)(nil),                // 65: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig11
+	(*config.PostgresqlConfig12)(nil),                // 66: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig12
+	(*config.PostgresqlConfig13)(nil),                // 67: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13
+	(*config.PostgresqlConfig13_1C)(nil),             // 68: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13_1C
+	(*config.PostgresqlConfig14)(nil),                // 69: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14
+	(*config.PostgresqlConfig14_1C)(nil),             // 70: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
+	(*config.PostgresqlConfig15)(nil),                // 71: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	(*config.PostgresqlConfig15_1C)(nil),             // 72: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_1C
+	(*config.PostgresqlConfig16)(nil),                // 73: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
+	(*config.PostgresqlConfig16_1C)(nil),             // 74: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16_1C
+	(*config.PostgresqlConfig17)(nil),                // 75: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17
+	(*config.PostgresqlConfig17_1C)(nil),             // 76: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17_1C
+	(*config.PostgresqlConfig18)(nil),                // 77: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18
+	(*config.PostgresqlConfig18_1C)(nil),             // 78: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	(*ConnectionPoolerConfig)(nil),                   // 79: yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfig
+	(*Resources)(nil),                                // 80: yandex.cloud.mdb.postgresql.v1.Resources
+	(*wrapperspb.BoolValue)(nil),                     // 81: google.protobuf.BoolValue
+	(*timeofday.TimeOfDay)(nil),                      // 82: google.type.TimeOfDay
+	(*Access)(nil),                                   // 83: yandex.cloud.mdb.postgresql.v1.Access
+	(*PerformanceDiagnostics)(nil),                   // 84: yandex.cloud.mdb.postgresql.v1.PerformanceDiagnostics
+	(*DiskSizeAutoscaling)(nil),                      // 85: yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscaling
+	(*v1.ClusterConnectionManager)(nil),              // 86: yandex.cloud.mdb.v1.ClusterConnectionManager
+	(*ManagedRepack)(nil),                            // 87: yandex.cloud.mdb.postgresql.v1.ManagedRepack
+	(*config.PostgresqlHostConfig11)(nil),            // 88: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11
+	(*config.PostgresqlHostConfig12)(nil),            // 89: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig12
+	(*config.PostgresqlHostConfig13)(nil),            // 90: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13
+	(*config.PostgresqlHostConfig13_1C)(nil),         // 91: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C
+	(*config.PostgresqlHostConfig14)(nil),            // 92: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14
+	(*config.PostgresqlHostConfig14_1C)(nil),         // 93: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C
+	(*config.PostgresqlHostConfig15)(nil),            // 94: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15
+	(*config.PostgresqlHostConfig15_1C)(nil),         // 95: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15_1C
+	(*config.PostgresqlHostConfig16)(nil),            // 96: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16
+	(*config.PostgresqlHostConfig16_1C)(nil),         // 97: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16_1C
+	(*config.PostgresqlHostConfig17)(nil),            // 98: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17
+	(*config.PostgresqlHostConfig17_1C)(nil),         // 99: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17_1C
+	(*config.PostgresqlHostConfig18)(nil),            // 100: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18
+	(*config.PostgresqlHostConfig18_1C)(nil),         // 101: yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18_1C
+	(*access.ListAccessBindingsRequest)(nil),         // 102: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),          // 103: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil),       // 104: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),        // 105: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_depIdxs = []int32{
-	52,  // 0: yandex.cloud.mdb.postgresql.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster
-	53,  // 1: yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicySpec.cron:type_name -> yandex.cloud.mdb.postgresql.v1.CronTab
-	48,  // 2: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.LabelsEntry
-	54,  // 3: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster.Environment
-	46,  // 4: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
-	55,  // 5: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.postgresql.v1.DatabaseSpec
-	56,  // 6: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.postgresql.v1.UserSpec
-	45,  // 7: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
-	57,  // 8: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
-	6,   // 9: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.retention_policies:type_name -> yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicySpec
-	58,  // 10: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	59,  // 11: yandex.cloud.mdb.postgresql.v1.CreateClusterMetadata.operation_log:type_name -> yandex.cloud.mdb.operationlog.v1.OperationLog
-	60,  // 12: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	49,  // 13: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.LabelsEntry
-	46,  // 14: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
-	57,  // 15: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
-	59,  // 16: yandex.cloud.mdb.postgresql.v1.UpdateClusterMetadata.operation_log:type_name -> yandex.cloud.mdb.operationlog.v1.OperationLog
-	61,  // 17: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
-	50,  // 18: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.LabelsEntry
-	54,  // 19: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster.Environment
-	46,  // 20: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
-	45,  // 21: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
-	57,  // 22: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
-	58,  // 23: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	0,   // 24: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.RescheduleType
-	61,  // 25: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	61,  // 26: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	61,  // 27: yandex.cloud.mdb.postgresql.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	51,  // 28: yandex.cloud.mdb.postgresql.v1.LogRecord.message:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord.MessageEntry
-	1,   // 29: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.ServiceType
-	61,  // 30: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	61,  // 31: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	27,  // 32: yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord
-	27,  // 33: yandex.cloud.mdb.postgresql.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord
-	2,   // 34: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.ServiceType
-	61,  // 35: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	61,  // 36: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	62,  // 37: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	63,  // 38: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.postgresql.v1.Backup
-	64,  // 39: yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.postgresql.v1.Host
-	45,  // 40: yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
-	44,  // 41: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.UpdateHostSpec
-	65,  // 42: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.priority:type_name -> google.protobuf.Int64Value
-	47,  // 43: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
-	60,  // 44: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
-	65,  // 45: yandex.cloud.mdb.postgresql.v1.HostSpec.priority:type_name -> google.protobuf.Int64Value
-	47,  // 46: yandex.cloud.mdb.postgresql.v1.HostSpec.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
-	66,  // 47: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_11:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig11
-	67,  // 48: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_12:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig12
-	68,  // 49: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_13:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13
-	69,  // 50: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_13_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13_1C
-	70,  // 51: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_14:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14
-	71,  // 52: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_14_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
-	72,  // 53: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_15:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
-	73,  // 54: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_15_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_1C
-	74,  // 55: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_16:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
-	75,  // 56: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_16_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16_1C
-	76,  // 57: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_17:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17
-	77,  // 58: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_17_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17_1C
-	78,  // 59: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_18:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18
-	79,  // 60: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_18_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
-	80,  // 61: yandex.cloud.mdb.postgresql.v1.ConfigSpec.pooler_config:type_name -> yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfig
-	81,  // 62: yandex.cloud.mdb.postgresql.v1.ConfigSpec.resources:type_name -> yandex.cloud.mdb.postgresql.v1.Resources
-	82,  // 63: yandex.cloud.mdb.postgresql.v1.ConfigSpec.autofailover:type_name -> google.protobuf.BoolValue
-	83,  // 64: yandex.cloud.mdb.postgresql.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
-	65,  // 65: yandex.cloud.mdb.postgresql.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	84,  // 66: yandex.cloud.mdb.postgresql.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.postgresql.v1.Access
-	85,  // 67: yandex.cloud.mdb.postgresql.v1.ConfigSpec.performance_diagnostics:type_name -> yandex.cloud.mdb.postgresql.v1.PerformanceDiagnostics
-	86,  // 68: yandex.cloud.mdb.postgresql.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscaling
-	87,  // 69: yandex.cloud.mdb.postgresql.v1.ConfigSpec.connection_manager:type_name -> yandex.cloud.mdb.v1.ClusterConnectionManager
-	88,  // 70: yandex.cloud.mdb.postgresql.v1.ConfigSpec.managed_repack:type_name -> yandex.cloud.mdb.postgresql.v1.ManagedRepack
-	89,  // 71: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_11:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11
-	90,  // 72: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_12:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig12
-	91,  // 73: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_13:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13
-	92,  // 74: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_13_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C
-	93,  // 75: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_14:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14
-	94,  // 76: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_14_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C
-	95,  // 77: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_15:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15
-	96,  // 78: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_15_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15_1C
-	97,  // 79: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_16:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16
-	98,  // 80: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_16_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16_1C
-	99,  // 81: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_17:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17
-	100, // 82: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_17_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17_1C
-	101, // 83: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_18:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18
-	102, // 84: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_18_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18_1C
-	3,   // 85: yandex.cloud.mdb.postgresql.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.postgresql.v1.GetClusterRequest
-	4,   // 86: yandex.cloud.mdb.postgresql.v1.ClusterService.List:input_type -> yandex.cloud.mdb.postgresql.v1.ListClustersRequest
-	7,   // 87: yandex.cloud.mdb.postgresql.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.postgresql.v1.CreateClusterRequest
-	9,   // 88: yandex.cloud.mdb.postgresql.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest
-	11,  // 89: yandex.cloud.mdb.postgresql.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteClusterRequest
-	13,  // 90: yandex.cloud.mdb.postgresql.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.postgresql.v1.StartClusterRequest
-	15,  // 91: yandex.cloud.mdb.postgresql.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.postgresql.v1.StopClusterRequest
-	17,  // 92: yandex.cloud.mdb.postgresql.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.postgresql.v1.MoveClusterRequest
-	19,  // 93: yandex.cloud.mdb.postgresql.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.postgresql.v1.BackupClusterRequest
-	21,  // 94: yandex.cloud.mdb.postgresql.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest
-	25,  // 95: yandex.cloud.mdb.postgresql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest
-	23,  // 96: yandex.cloud.mdb.postgresql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.postgresql.v1.StartClusterFailoverRequest
-	28,  // 97: yandex.cloud.mdb.postgresql.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest
-	31,  // 98: yandex.cloud.mdb.postgresql.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest
-	32,  // 99: yandex.cloud.mdb.postgresql.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterOperationsRequest
-	34,  // 100: yandex.cloud.mdb.postgresql.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterBackupsRequest
-	36,  // 101: yandex.cloud.mdb.postgresql.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterHostsRequest
-	38,  // 102: yandex.cloud.mdb.postgresql.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest
-	40,  // 103: yandex.cloud.mdb.postgresql.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsRequest
-	42,  // 104: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest
-	103, // 105: yandex.cloud.mdb.postgresql.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	104, // 106: yandex.cloud.mdb.postgresql.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	105, // 107: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	52,  // 108: yandex.cloud.mdb.postgresql.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.postgresql.v1.Cluster
-	5,   // 109: yandex.cloud.mdb.postgresql.v1.ClusterService.List:output_type -> yandex.cloud.mdb.postgresql.v1.ListClustersResponse
-	62,  // 110: yandex.cloud.mdb.postgresql.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	62,  // 111: yandex.cloud.mdb.postgresql.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	62,  // 112: yandex.cloud.mdb.postgresql.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	62,  // 113: yandex.cloud.mdb.postgresql.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	62,  // 114: yandex.cloud.mdb.postgresql.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	62,  // 115: yandex.cloud.mdb.postgresql.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	62,  // 116: yandex.cloud.mdb.postgresql.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	62,  // 117: yandex.cloud.mdb.postgresql.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	62,  // 118: yandex.cloud.mdb.postgresql.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	62,  // 119: yandex.cloud.mdb.postgresql.v1.ClusterService.StartFailover:output_type -> yandex.cloud.operation.Operation
-	29,  // 120: yandex.cloud.mdb.postgresql.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse
-	30,  // 121: yandex.cloud.mdb.postgresql.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.postgresql.v1.StreamLogRecord
-	33,  // 122: yandex.cloud.mdb.postgresql.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse
-	35,  // 123: yandex.cloud.mdb.postgresql.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse
-	37,  // 124: yandex.cloud.mdb.postgresql.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse
-	62,  // 125: yandex.cloud.mdb.postgresql.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
-	62,  // 126: yandex.cloud.mdb.postgresql.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
-	62,  // 127: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
-	106, // 128: yandex.cloud.mdb.postgresql.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	62,  // 129: yandex.cloud.mdb.postgresql.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	62,  // 130: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	108, // [108:131] is the sub-list for method output_type
-	85,  // [85:108] is the sub-list for method input_type
-	85,  // [85:85] is the sub-list for extension type_name
-	85,  // [85:85] is the sub-list for extension extendee
-	0,   // [0:85] is the sub-list for field type_name
+	51,  // 0: yandex.cloud.mdb.postgresql.v1.ListClustersResponse.clusters:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster
+	47,  // 1: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.LabelsEntry
+	52,  // 2: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster.Environment
+	45,  // 3: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
+	53,  // 4: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.database_specs:type_name -> yandex.cloud.mdb.postgresql.v1.DatabaseSpec
+	54,  // 5: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.user_specs:type_name -> yandex.cloud.mdb.postgresql.v1.UserSpec
+	44,  // 6: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
+	55,  // 7: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
+	56,  // 8: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.retention_policies:type_name -> yandex.cloud.mdb.v1.BackupRetentionPolicySpec
+	57,  // 9: yandex.cloud.mdb.postgresql.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	58,  // 10: yandex.cloud.mdb.postgresql.v1.CreateClusterMetadata.operation_log:type_name -> yandex.cloud.mdb.operationlog.v1.OperationLog
+	59,  // 11: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	48,  // 12: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.LabelsEntry
+	45,  // 13: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
+	55,  // 14: yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
+	58,  // 15: yandex.cloud.mdb.postgresql.v1.UpdateClusterMetadata.operation_log:type_name -> yandex.cloud.mdb.operationlog.v1.OperationLog
+	60,  // 16: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
+	49,  // 17: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.LabelsEntry
+	52,  // 18: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.postgresql.v1.Cluster.Environment
+	45,  // 19: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigSpec
+	44,  // 20: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
+	55,  // 21: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.postgresql.v1.MaintenanceWindow
+	57,  // 22: yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	0,   // 23: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.RescheduleType
+	60,  // 24: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	60,  // 25: yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	60,  // 26: yandex.cloud.mdb.postgresql.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	50,  // 27: yandex.cloud.mdb.postgresql.v1.LogRecord.message:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord.MessageEntry
+	1,   // 28: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.ServiceType
+	60,  // 29: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	60,  // 30: yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	26,  // 31: yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord
+	26,  // 32: yandex.cloud.mdb.postgresql.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.postgresql.v1.LogRecord
+	2,   // 33: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.ServiceType
+	60,  // 34: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	60,  // 35: yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	61,  // 36: yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	62,  // 37: yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.postgresql.v1.Backup
+	63,  // 38: yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.postgresql.v1.Host
+	44,  // 39: yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest.host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.HostSpec
+	43,  // 40: yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest.update_host_specs:type_name -> yandex.cloud.mdb.postgresql.v1.UpdateHostSpec
+	64,  // 41: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.priority:type_name -> google.protobuf.Int64Value
+	46,  // 42: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
+	59,  // 43: yandex.cloud.mdb.postgresql.v1.UpdateHostSpec.update_mask:type_name -> google.protobuf.FieldMask
+	64,  // 44: yandex.cloud.mdb.postgresql.v1.HostSpec.priority:type_name -> google.protobuf.Int64Value
+	46,  // 45: yandex.cloud.mdb.postgresql.v1.HostSpec.config_spec:type_name -> yandex.cloud.mdb.postgresql.v1.ConfigHostSpec
+	65,  // 46: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_11:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig11
+	66,  // 47: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_12:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig12
+	67,  // 48: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_13:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13
+	68,  // 49: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_13_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig13_1C
+	69,  // 50: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_14:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14
+	70,  // 51: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_14_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_1C
+	71,  // 52: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_15:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15
+	72,  // 53: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_15_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig15_1C
+	73,  // 54: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_16:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
+	74,  // 55: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_16_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16_1C
+	75,  // 56: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_17:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17
+	76,  // 57: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_17_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig17_1C
+	77,  // 58: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_18:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18
+	78,  // 59: yandex.cloud.mdb.postgresql.v1.ConfigSpec.postgresql_config_18_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig18_1C
+	79,  // 60: yandex.cloud.mdb.postgresql.v1.ConfigSpec.pooler_config:type_name -> yandex.cloud.mdb.postgresql.v1.ConnectionPoolerConfig
+	80,  // 61: yandex.cloud.mdb.postgresql.v1.ConfigSpec.resources:type_name -> yandex.cloud.mdb.postgresql.v1.Resources
+	81,  // 62: yandex.cloud.mdb.postgresql.v1.ConfigSpec.autofailover:type_name -> google.protobuf.BoolValue
+	82,  // 63: yandex.cloud.mdb.postgresql.v1.ConfigSpec.backup_window_start:type_name -> google.type.TimeOfDay
+	64,  // 64: yandex.cloud.mdb.postgresql.v1.ConfigSpec.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	83,  // 65: yandex.cloud.mdb.postgresql.v1.ConfigSpec.access:type_name -> yandex.cloud.mdb.postgresql.v1.Access
+	84,  // 66: yandex.cloud.mdb.postgresql.v1.ConfigSpec.performance_diagnostics:type_name -> yandex.cloud.mdb.postgresql.v1.PerformanceDiagnostics
+	85,  // 67: yandex.cloud.mdb.postgresql.v1.ConfigSpec.disk_size_autoscaling:type_name -> yandex.cloud.mdb.postgresql.v1.DiskSizeAutoscaling
+	86,  // 68: yandex.cloud.mdb.postgresql.v1.ConfigSpec.connection_manager:type_name -> yandex.cloud.mdb.v1.ClusterConnectionManager
+	87,  // 69: yandex.cloud.mdb.postgresql.v1.ConfigSpec.managed_repack:type_name -> yandex.cloud.mdb.postgresql.v1.ManagedRepack
+	88,  // 70: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_11:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig11
+	89,  // 71: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_12:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig12
+	90,  // 72: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_13:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13
+	91,  // 73: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_13_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C
+	92,  // 74: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_14:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14
+	93,  // 75: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_14_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C
+	94,  // 76: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_15:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15
+	95,  // 77: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_15_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15_1C
+	96,  // 78: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_16:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16
+	97,  // 79: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_16_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig16_1C
+	98,  // 80: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_17:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17
+	99,  // 81: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_17_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig17_1C
+	100, // 82: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_18:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18
+	101, // 83: yandex.cloud.mdb.postgresql.v1.ConfigHostSpec.postgresql_config_18_1c:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig18_1C
+	3,   // 84: yandex.cloud.mdb.postgresql.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.postgresql.v1.GetClusterRequest
+	4,   // 85: yandex.cloud.mdb.postgresql.v1.ClusterService.List:input_type -> yandex.cloud.mdb.postgresql.v1.ListClustersRequest
+	6,   // 86: yandex.cloud.mdb.postgresql.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.postgresql.v1.CreateClusterRequest
+	8,   // 87: yandex.cloud.mdb.postgresql.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.postgresql.v1.UpdateClusterRequest
+	10,  // 88: yandex.cloud.mdb.postgresql.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteClusterRequest
+	12,  // 89: yandex.cloud.mdb.postgresql.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.postgresql.v1.StartClusterRequest
+	14,  // 90: yandex.cloud.mdb.postgresql.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.postgresql.v1.StopClusterRequest
+	16,  // 91: yandex.cloud.mdb.postgresql.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.postgresql.v1.MoveClusterRequest
+	18,  // 92: yandex.cloud.mdb.postgresql.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.postgresql.v1.BackupClusterRequest
+	20,  // 93: yandex.cloud.mdb.postgresql.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.postgresql.v1.RestoreClusterRequest
+	24,  // 94: yandex.cloud.mdb.postgresql.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.postgresql.v1.RescheduleMaintenanceRequest
+	22,  // 95: yandex.cloud.mdb.postgresql.v1.ClusterService.StartFailover:input_type -> yandex.cloud.mdb.postgresql.v1.StartClusterFailoverRequest
+	27,  // 96: yandex.cloud.mdb.postgresql.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsRequest
+	30,  // 97: yandex.cloud.mdb.postgresql.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.postgresql.v1.StreamClusterLogsRequest
+	31,  // 98: yandex.cloud.mdb.postgresql.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterOperationsRequest
+	33,  // 99: yandex.cloud.mdb.postgresql.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterBackupsRequest
+	35,  // 100: yandex.cloud.mdb.postgresql.v1.ClusterService.ListHosts:input_type -> yandex.cloud.mdb.postgresql.v1.ListClusterHostsRequest
+	37,  // 101: yandex.cloud.mdb.postgresql.v1.ClusterService.AddHosts:input_type -> yandex.cloud.mdb.postgresql.v1.AddClusterHostsRequest
+	39,  // 102: yandex.cloud.mdb.postgresql.v1.ClusterService.DeleteHosts:input_type -> yandex.cloud.mdb.postgresql.v1.DeleteClusterHostsRequest
+	41,  // 103: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateHosts:input_type -> yandex.cloud.mdb.postgresql.v1.UpdateClusterHostsRequest
+	102, // 104: yandex.cloud.mdb.postgresql.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	103, // 105: yandex.cloud.mdb.postgresql.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	104, // 106: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	51,  // 107: yandex.cloud.mdb.postgresql.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.postgresql.v1.Cluster
+	5,   // 108: yandex.cloud.mdb.postgresql.v1.ClusterService.List:output_type -> yandex.cloud.mdb.postgresql.v1.ListClustersResponse
+	61,  // 109: yandex.cloud.mdb.postgresql.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	61,  // 110: yandex.cloud.mdb.postgresql.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	61,  // 111: yandex.cloud.mdb.postgresql.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	61,  // 112: yandex.cloud.mdb.postgresql.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	61,  // 113: yandex.cloud.mdb.postgresql.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	61,  // 114: yandex.cloud.mdb.postgresql.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	61,  // 115: yandex.cloud.mdb.postgresql.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	61,  // 116: yandex.cloud.mdb.postgresql.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	61,  // 117: yandex.cloud.mdb.postgresql.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	61,  // 118: yandex.cloud.mdb.postgresql.v1.ClusterService.StartFailover:output_type -> yandex.cloud.operation.Operation
+	28,  // 119: yandex.cloud.mdb.postgresql.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterLogsResponse
+	29,  // 120: yandex.cloud.mdb.postgresql.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.postgresql.v1.StreamLogRecord
+	32,  // 121: yandex.cloud.mdb.postgresql.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterOperationsResponse
+	34,  // 122: yandex.cloud.mdb.postgresql.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterBackupsResponse
+	36,  // 123: yandex.cloud.mdb.postgresql.v1.ClusterService.ListHosts:output_type -> yandex.cloud.mdb.postgresql.v1.ListClusterHostsResponse
+	61,  // 124: yandex.cloud.mdb.postgresql.v1.ClusterService.AddHosts:output_type -> yandex.cloud.operation.Operation
+	61,  // 125: yandex.cloud.mdb.postgresql.v1.ClusterService.DeleteHosts:output_type -> yandex.cloud.operation.Operation
+	61,  // 126: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateHosts:output_type -> yandex.cloud.operation.Operation
+	105, // 127: yandex.cloud.mdb.postgresql.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	61,  // 128: yandex.cloud.mdb.postgresql.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	61,  // 129: yandex.cloud.mdb.postgresql.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	107, // [107:130] is the sub-list for method output_type
+	84,  // [84:107] is the sub-list for method input_type
+	84,  // [84:84] is the sub-list for extension type_name
+	84,  // [84:84] is the sub-list for extension extendee
+	0,   // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_init() }
@@ -4437,10 +4358,9 @@ func file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_init() {
 	file_yandex_cloud_mdb_postgresql_v1_backup_proto_init()
 	file_yandex_cloud_mdb_postgresql_v1_cluster_proto_init()
 	file_yandex_cloud_mdb_postgresql_v1_database_proto_init()
-	file_yandex_cloud_mdb_postgresql_v1_backup_retention_policy_proto_init()
 	file_yandex_cloud_mdb_postgresql_v1_maintenance_proto_init()
 	file_yandex_cloud_mdb_postgresql_v1_user_proto_init()
-	file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43].OneofWrappers = []any{
+	file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[42].OneofWrappers = []any{
 		(*ConfigSpec_PostgresqlConfig_11)(nil),
 		(*ConfigSpec_PostgresqlConfig_12)(nil),
 		(*ConfigSpec_PostgresqlConfig_13)(nil),
@@ -4456,7 +4376,7 @@ func file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_init() {
 		(*ConfigSpec_PostgresqlConfig_18)(nil),
 		(*ConfigSpec_PostgresqlConfig_18_1C)(nil),
 	}
-	file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[44].OneofWrappers = []any{
+	file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_msgTypes[43].OneofWrappers = []any{
 		(*ConfigHostSpec_PostgresqlConfig_11)(nil),
 		(*ConfigHostSpec_PostgresqlConfig_12)(nil),
 		(*ConfigHostSpec_PostgresqlConfig_13)(nil),
@@ -4478,7 +4398,7 @@ func file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc), len(file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   49,
+			NumMessages:   48,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1210,6 +1210,8 @@ type PostgresqlConfig16 struct {
 	IdleSessionTimeout                  *wrapperspb.Int64Value                      `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`                                                                                             // in milliseconds.
 	CheckpointWarning                   *wrapperspb.Int64Value                      `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                                                                                                  // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
 	PgHintPlanHintsAnywhere             *wrapperspb.BoolValue                       `protobuf:"bytes,175,opt,name=pg_hint_plan_hints_anywhere,json=pgHintPlanHintsAnywhere,proto3" json:"pg_hint_plan_hints_anywhere,omitempty"`                                                                          // If it is true, pg_hint_plan reads hints ignoring SQL syntax. This allows placing hints anywhere in the query but may cause false reads. Default is false.
+	AutovacuumVacuumThreshold           *wrapperspb.Int64Value                      `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`                                                                        // Specifies the minimum number of updated or deleted tuples needed to trigger a VACUUM in any one table. The default is 50 tuples.
+	AutovacuumAnalyzeThreshold          *wrapperspb.Int64Value                      `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"`                                                                     // Specifies the minimum number of inserted, updated or deleted tuples needed to trigger an ANALYZE in any one table. The default is 50 tuples.
 	unknownFields                       protoimpl.UnknownFields
 	sizeCache                           protoimpl.SizeCache
 }
@@ -2392,6 +2394,20 @@ func (x *PostgresqlConfig16) GetPgHintPlanHintsAnywhere() *wrapperspb.BoolValue 
 	return nil
 }
 
+func (x *PostgresqlConfig16) GetAutovacuumVacuumThreshold() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.AutovacuumVacuumThreshold
+	}
+	return nil
+}
+
+func (x *PostgresqlConfig16) GetAutovacuumAnalyzeThreshold() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.AutovacuumAnalyzeThreshold
+	}
+	return nil
+}
+
 type PostgresqlConfigSet16 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a PostgreSQL 16 cluster (a combination of settings defined
@@ -2460,7 +2476,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql16.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xac\x8c\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql16.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x96\x8e\x01\n" +
 	"\x12PostgresqlConfig16\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2640,7 +2656,9 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto_rawDesc = ""
 	"\x17auto_explain_log_format\x18\xa8\x01 \x01(\x0e2N.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.AutoExplainLogFormatR\x14autoExplainLogFormat\x12`\n" +
 	"\x14idle_session_timeout\x18\xad\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\x12`\n" +
 	"\x12checkpoint_warning\x18\xae\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x13\xfa\xc71\x0f0-2147483647000R\x11checkpointWarning\x12Y\n" +
-	"\x1bpg_hint_plan_hints_anywhere\x18\xaf\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x17pgHintPlanHintsAnywhere\"\xc6\x01\n" +
+	"\x1bpg_hint_plan_hints_anywhere\x18\xaf\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x17pgHintPlanHintsAnywhere\x12n\n" +
+	"\x1bautovacuum_vacuum_threshold\x18\xb1\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x19autovacuumVacuumThreshold\x12p\n" +
+	"\x1cautovacuum_analyze_threshold\x18\xb2\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1aautovacuumAnalyzeThreshold\"\xc6\x01\n" +
 	"\x14AutoExplainLogFormat\x12'\n" +
 	"#AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
@@ -2746,7 +2764,7 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto_rawDesc = ""
 	"\tXmlOption\x12\x1a\n" +
 	"\x16XML_OPTION_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13XML_OPTION_DOCUMENT\x10\x01\x12\x16\n" +
-	"\x12XML_OPTION_CONTENT\x10\x02J\x04\bN\x10PJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\x95\x01\x10\x96\x01J\x06\b\xa6\x01\x10\xa7\x01J\x04\b@\x10AJ\x06\b\xa9\x01\x10\xad\x01\"\xbb\x02\n" +
+	"\x12XML_OPTION_CONTENT\x10\x02J\x04\bN\x10PJ\x04\bj\x10kJ\x04\b}\x10~J\x06\b\x95\x01\x10\x96\x01J\x06\b\xa6\x01\x10\xa7\x01J\x04\b@\x10AJ\x06\b\xa9\x01\x10\xad\x01J\x06\b\xb0\x01\x10\xb1\x01\"\xbb\x02\n" +
 	"\x15PostgresqlConfigSet16\x12d\n" +
 	"\x10effective_config\x18\x01 \x01(\v29.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16R\x0feffectiveConfig\x12Z\n" +
 	"\vuser_config\x18\x02 \x01(\v29.yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16R\n" +
@@ -2955,14 +2973,16 @@ var file_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto_depIdxs = []in
 	19,  // 159: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.idle_session_timeout:type_name -> google.protobuf.Int64Value
 	19,  // 160: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.checkpoint_warning:type_name -> google.protobuf.Int64Value
 	21,  // 161: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.pg_hint_plan_hints_anywhere:type_name -> google.protobuf.BoolValue
-	17,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
-	17,  // 163: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
-	17,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
-	165, // [165:165] is the sub-list for method output_type
-	165, // [165:165] is the sub-list for method input_type
-	165, // [165:165] is the sub-list for extension type_name
-	165, // [165:165] is the sub-list for extension extendee
-	0,   // [0:165] is the sub-list for field type_name
+	19,  // 162: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.autovacuum_vacuum_threshold:type_name -> google.protobuf.Int64Value
+	19,  // 163: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16.autovacuum_analyze_threshold:type_name -> google.protobuf.Int64Value
+	17,  // 164: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.effective_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
+	17,  // 165: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.user_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
+	17,  // 166: yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfigSet16.default_config:type_name -> yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig16
+	167, // [167:167] is the sub-list for method output_type
+	167, // [167:167] is the sub-list for method input_type
+	167, // [167:167] is the sub-list for extension type_name
+	167, // [167:167] is the sub-list for extension extendee
+	0,   // [0:167] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_postgresql_v1_config_postgresql16_proto_init() }

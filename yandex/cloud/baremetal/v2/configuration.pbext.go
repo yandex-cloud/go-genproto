@@ -85,3 +85,11 @@ func (m *Configuration) SetJbogGpus(v []*GPUCard) {
 func (m *Configuration) SetRamType(v RAMType) {
 	m.RamType = v
 }
+
+func (m *DefaultStorage) SetConfigurationId(v string) {
+	m.ConfigurationId = v
+}
+
+func (m *DefaultStorage) SetStorages(v []*Storage) {
+	m.Storages = v
+}

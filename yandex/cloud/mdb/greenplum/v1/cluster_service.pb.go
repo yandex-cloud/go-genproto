@@ -2705,6 +2705,10 @@ type RestoreClusterRequest struct {
 	MasterHostGroupIds []string `protobuf:"bytes,20,rep,name=master_host_group_ids,json=masterHostGroupIds,proto3" json:"master_host_group_ids,omitempty"`
 	// Host groups hosting VMs of the segment subcluster.
 	SegmentHostGroupIds []string `protobuf:"bytes,21,rep,name=segment_host_group_ids,json=segmentHostGroupIds,proto3" json:"segment_host_group_ids,omitempty"`
+	// Restore PXF settings from original cluster
+	RestorePxf bool `protobuf:"varint,22,opt,name=restore_pxf,json=restorePxf,proto3" json:"restore_pxf,omitempty"`
+	// Restore HBA settings from original cluster
+	RestoreHba bool `protobuf:"varint,23,opt,name=restore_hba,json=restoreHba,proto3" json:"restore_hba,omitempty"`
 	// Service account that will be used to access a Yandex Cloud resources
 	ServiceAccountId string `protobuf:"bytes,24,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -2879,6 +2883,20 @@ func (x *RestoreClusterRequest) GetSegmentHostGroupIds() []string {
 		return x.SegmentHostGroupIds
 	}
 	return nil
+}
+
+func (x *RestoreClusterRequest) GetRestorePxf() bool {
+	if x != nil {
+		return x.RestorePxf
+	}
+	return false
+}
+
+func (x *RestoreClusterRequest) GetRestoreHba() bool {
+	if x != nil {
+		return x.RestoreHba
+	}
+	return false
 }
 
 func (x *RestoreClusterRequest) GetServiceAccountId() string {
@@ -3175,7 +3193,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x92\v\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xc8\v\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
 	"\x04time\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12)\n" +
@@ -3198,11 +3216,15 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x0fsegment_in_host\x18\x12 \x01(\x03R\rsegmentInHost\x12_\n" +
 	"\frestore_only\x18\x13 \x03(\tB<\xf2\xc71'[a-zA-Z0-9\\*_]*(\\/[a-zA-Z0-9\\*_]*){0,2}\x82\xc81\x04<=50\x8a\xc81\x05<=256R\vrestoreOnly\x121\n" +
 	"\x15master_host_group_ids\x18\x14 \x03(\tR\x12masterHostGroupIds\x123\n" +
-	"\x16segment_host_group_ids\x18\x15 \x03(\tR\x13segmentHostGroupIds\x12,\n" +
+	"\x16segment_host_group_ids\x18\x15 \x03(\tR\x13segmentHostGroupIds\x12\x1f\n" +
+	"\vrestore_pxf\x18\x16 \x01(\bR\n" +
+	"restorePxf\x12\x1f\n" +
+	"\vrestore_hba\x18\x17 \x01(\bR\n" +
+	"restoreHba\x12,\n" +
 	"\x12service_account_id\x18\x18 \x01(\tR\x10serviceAccountId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x0e\x10\x0fJ\x04\b\x16\x10\x17J\x04\b\x17\x10\x18\"T\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x0e\x10\x0f\"T\n" +
 	"\x16RestoreClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +

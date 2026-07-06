@@ -662,6 +662,14 @@ func (m *PostgresqlConfig16) SetPgHintPlanHintsAnywhere(v *wrapperspb.BoolValue)
 	m.PgHintPlanHintsAnywhere = v
 }
 
+func (m *PostgresqlConfig16) SetAutovacuumVacuumThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumVacuumThreshold = v
+}
+
+func (m *PostgresqlConfig16) SetAutovacuumAnalyzeThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumAnalyzeThreshold = v
+}
+
 func (m *PostgresqlConfigSet16) SetEffectiveConfig(v *PostgresqlConfig16) {
 	m.EffectiveConfig = v
 }

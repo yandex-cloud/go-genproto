@@ -670,6 +670,14 @@ func (m *PostgresqlConfig17) SetCheckpointWarning(v *wrapperspb.Int64Value) {
 	m.CheckpointWarning = v
 }
 
+func (m *PostgresqlConfig17) SetAutovacuumVacuumThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumVacuumThreshold = v
+}
+
+func (m *PostgresqlConfig17) SetAutovacuumAnalyzeThreshold(v *wrapperspb.Int64Value) {
+	m.AutovacuumAnalyzeThreshold = v
+}
+
 func (m *PostgresqlConfigSet17) SetEffectiveConfig(v *PostgresqlConfig17) {
 	m.EffectiveConfig = v
 }

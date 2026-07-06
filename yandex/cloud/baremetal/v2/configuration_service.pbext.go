@@ -21,3 +21,15 @@ func (m *ListConfigurationRentalPeriodsResponse) SetRentalPeriods(v []*RentalPer
 func (m *ListConfigurationRentalPeriodsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *ResolveConfigurationDefaultStorageRequest) SetConfigurationId(v string) {
+	m.ConfigurationId = v
+}
+
+func (m *ResolveConfigurationsDefaultStoragesRequest) SetConfigurationIds(v []string) {
+	m.ConfigurationIds = v
+}
+
+func (m *ResolveConfigurationsDefaultStoragesResponse) SetDefaultStorages(v []*DefaultStorage) {
+	m.DefaultStorages = v
+}

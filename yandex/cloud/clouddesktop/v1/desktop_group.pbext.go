@@ -89,6 +89,22 @@ func (m *DesktopGroupConfiguration) SetMembers(v []*access.Subject) {
 	m.Members = v
 }
 
+func (m *DesktopGroupConfiguration) SetLifetime(v *DesktopGroupConfiguration_Lifetime) {
+	m.Lifetime = v
+}
+
+func (m *DesktopGroupConfiguration_Lifetime) SetTimeZone(v string) {
+	m.TimeZone = v
+}
+
+func (m *DesktopGroupConfiguration_Lifetime) SetCronStart(v string) {
+	m.CronStart = v
+}
+
+func (m *DesktopGroupConfiguration_Lifetime) SetCronStop(v string) {
+	m.CronStop = v
+}
+
 func (m *NetworkInterfaceSpec) SetNetworkId(v string) {
 	m.NetworkId = v
 }

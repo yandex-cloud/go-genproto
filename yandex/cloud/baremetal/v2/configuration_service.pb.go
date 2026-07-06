@@ -150,11 +150,146 @@ func (x *ListConfigurationRentalPeriodsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ResolveConfigurationDefaultStorageRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the configuration.
+	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ResolveConfigurationDefaultStorageRequest) Reset() {
+	*x = ResolveConfigurationDefaultStorageRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveConfigurationDefaultStorageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveConfigurationDefaultStorageRequest) ProtoMessage() {}
+
+func (x *ResolveConfigurationDefaultStorageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveConfigurationDefaultStorageRequest.ProtoReflect.Descriptor instead.
+func (*ResolveConfigurationDefaultStorageRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ResolveConfigurationDefaultStorageRequest) GetConfigurationId() string {
+	if x != nil {
+		return x.ConfigurationId
+	}
+	return ""
+}
+
+type ResolveConfigurationsDefaultStoragesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of configuration IDs.
+	ConfigurationIds []string `protobuf:"bytes,1,rep,name=configuration_ids,json=configurationIds,proto3" json:"configuration_ids,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ResolveConfigurationsDefaultStoragesRequest) Reset() {
+	*x = ResolveConfigurationsDefaultStoragesRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveConfigurationsDefaultStoragesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveConfigurationsDefaultStoragesRequest) ProtoMessage() {}
+
+func (x *ResolveConfigurationsDefaultStoragesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveConfigurationsDefaultStoragesRequest.ProtoReflect.Descriptor instead.
+func (*ResolveConfigurationsDefaultStoragesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ResolveConfigurationsDefaultStoragesRequest) GetConfigurationIds() []string {
+	if x != nil {
+		return x.ConfigurationIds
+	}
+	return nil
+}
+
+type ResolveConfigurationsDefaultStoragesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of default storages.
+	DefaultStorages []*DefaultStorage `protobuf:"bytes,1,rep,name=default_storages,json=defaultStorages,proto3" json:"default_storages,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ResolveConfigurationsDefaultStoragesResponse) Reset() {
+	*x = ResolveConfigurationsDefaultStoragesResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveConfigurationsDefaultStoragesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveConfigurationsDefaultStoragesResponse) ProtoMessage() {}
+
+func (x *ResolveConfigurationsDefaultStoragesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveConfigurationsDefaultStoragesResponse.ProtoReflect.Descriptor instead.
+func (*ResolveConfigurationsDefaultStoragesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ResolveConfigurationsDefaultStoragesResponse) GetDefaultStorages() []*DefaultStorage {
+	if x != nil {
+		return x.DefaultStorages
+	}
+	return nil
+}
+
 var File_yandex_cloud_baremetal_v2_configuration_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/baremetal/v2/configuration_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/rental_period.proto\x1a\x1dyandex/cloud/validation.proto\"\xbf\x01\n" +
+	"5yandex/cloud/baremetal/v2/configuration_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/configuration.proto\x1a-yandex/cloud/baremetal/v2/rental_period.proto\x1a\x1dyandex/cloud/validation.proto\"\xbf\x01\n" +
 	"%ListConfigurationRentalPeriodsRequest\x12F\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\x12*\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
@@ -162,9 +297,17 @@ const file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDesc = "" +
 	"page_token\x18\x03 \x01(\tB\x03\xe0A\x01R\tpageToken\"\xa0\x01\n" +
 	"&ListConfigurationRentalPeriodsResponse\x12N\n" +
 	"\x0erental_periods\x18\x01 \x03(\v2'.yandex.cloud.baremetal.v2.RentalPeriodR\rrentalPeriods\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x98\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"s\n" +
+	")ResolveConfigurationDefaultStorageRequest\x12F\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fconfigurationId\"\x84\x01\n" +
+	"+ResolveConfigurationsDefaultStoragesRequest\x12U\n" +
+	"\x11configuration_ids\x18\x01 \x03(\tB(\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x82\xc81\x051-100\x8a\xc81\x0220\x90\xc81\x01R\x10configurationIds\"\x84\x01\n" +
+	",ResolveConfigurationsDefaultStoragesResponse\x12T\n" +
+	"\x10default_storages\x18\x01 \x03(\v2).yandex.cloud.baremetal.v2.DefaultStorageR\x0fdefaultStorages2\x89\x06\n" +
 	"\x14ConfigurationService\x12\xff\x01\n" +
-	"\x1eListConfigurationRentalPeriods\x12@.yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest\x1aA.yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse\"X\xdaA\x10configuration_id\x82\xd3\xe4\x93\x02?\x12=/baremetal/v2/configurations/{configuration_id}/rentalPeriodsBl\n" +
+	"\x1eListConfigurationRentalPeriods\x12@.yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest\x1aA.yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse\"X\xdaA\x10configuration_id\x82\xd3\xe4\x93\x02?\x12=/baremetal/v2/configurations/{configuration_id}/rentalPeriods\x12\xf7\x01\n" +
+	"\"ResolveConfigurationDefaultStorage\x12D.yandex.cloud.baremetal.v2.ResolveConfigurationDefaultStorageRequest\x1a).yandex.cloud.baremetal.v2.DefaultStorage\"`\xdaA\x10configuration_id\x82\xd3\xe4\x93\x02G\x12E/baremetal/v2/configurations/{configuration_id}:resolveDefaultStorage\x12\xf4\x01\n" +
+	"$ResolveConfigurationsDefaultStorages\x12F.yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesRequest\x1aG.yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesResponse\";\x82\xd3\xe4\x93\x025\x123/baremetal/v2/configurations:resolveDefaultStoragesBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -179,21 +322,30 @@ func file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDescGZIP() []
 	return file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_baremetal_v2_configuration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_baremetal_v2_configuration_service_proto_goTypes = []any{
-	(*ListConfigurationRentalPeriodsRequest)(nil),  // 0: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest
-	(*ListConfigurationRentalPeriodsResponse)(nil), // 1: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse
-	(*RentalPeriod)(nil),                           // 2: yandex.cloud.baremetal.v2.RentalPeriod
+	(*ListConfigurationRentalPeriodsRequest)(nil),        // 0: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest
+	(*ListConfigurationRentalPeriodsResponse)(nil),       // 1: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse
+	(*ResolveConfigurationDefaultStorageRequest)(nil),    // 2: yandex.cloud.baremetal.v2.ResolveConfigurationDefaultStorageRequest
+	(*ResolveConfigurationsDefaultStoragesRequest)(nil),  // 3: yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesRequest
+	(*ResolveConfigurationsDefaultStoragesResponse)(nil), // 4: yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesResponse
+	(*RentalPeriod)(nil),                                 // 5: yandex.cloud.baremetal.v2.RentalPeriod
+	(*DefaultStorage)(nil),                               // 6: yandex.cloud.baremetal.v2.DefaultStorage
 }
 var file_yandex_cloud_baremetal_v2_configuration_service_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse.rental_periods:type_name -> yandex.cloud.baremetal.v2.RentalPeriod
-	0, // 1: yandex.cloud.baremetal.v2.ConfigurationService.ListConfigurationRentalPeriods:input_type -> yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest
-	1, // 2: yandex.cloud.baremetal.v2.ConfigurationService.ListConfigurationRentalPeriods:output_type -> yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse.rental_periods:type_name -> yandex.cloud.baremetal.v2.RentalPeriod
+	6, // 1: yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesResponse.default_storages:type_name -> yandex.cloud.baremetal.v2.DefaultStorage
+	0, // 2: yandex.cloud.baremetal.v2.ConfigurationService.ListConfigurationRentalPeriods:input_type -> yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsRequest
+	2, // 3: yandex.cloud.baremetal.v2.ConfigurationService.ResolveConfigurationDefaultStorage:input_type -> yandex.cloud.baremetal.v2.ResolveConfigurationDefaultStorageRequest
+	3, // 4: yandex.cloud.baremetal.v2.ConfigurationService.ResolveConfigurationsDefaultStorages:input_type -> yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesRequest
+	1, // 5: yandex.cloud.baremetal.v2.ConfigurationService.ListConfigurationRentalPeriods:output_type -> yandex.cloud.baremetal.v2.ListConfigurationRentalPeriodsResponse
+	6, // 6: yandex.cloud.baremetal.v2.ConfigurationService.ResolveConfigurationDefaultStorage:output_type -> yandex.cloud.baremetal.v2.DefaultStorage
+	4, // 7: yandex.cloud.baremetal.v2.ConfigurationService.ResolveConfigurationsDefaultStorages:output_type -> yandex.cloud.baremetal.v2.ResolveConfigurationsDefaultStoragesResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_configuration_service_proto_init() }
@@ -201,6 +353,7 @@ func file_yandex_cloud_baremetal_v2_configuration_service_proto_init() {
 	if File_yandex_cloud_baremetal_v2_configuration_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_baremetal_v2_configuration_proto_init()
 	file_yandex_cloud_baremetal_v2_rental_period_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -208,7 +361,7 @@ func file_yandex_cloud_baremetal_v2_configuration_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_configuration_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

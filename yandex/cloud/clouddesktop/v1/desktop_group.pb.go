@@ -338,7 +338,9 @@ type DesktopGroupConfiguration struct {
 	// Type of the desktop.
 	DesktopType DesktopGroupConfiguration_DesktopType `protobuf:"varint,3,opt,name=desktop_type,json=desktopType,proto3,enum=yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration_DesktopType" json:"desktop_type,omitempty"`
 	// List of members of the desktop group.
-	Members       []*access.Subject `protobuf:"bytes,4,rep,name=members,proto3" json:"members,omitempty"`
+	Members []*access.Subject `protobuf:"bytes,4,rep,name=members,proto3" json:"members,omitempty"`
+	// Lifetime of the desktop in group.
+	Lifetime      *DesktopGroupConfiguration_Lifetime `protobuf:"bytes,5,opt,name=lifetime,proto3" json:"lifetime,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -397,6 +399,13 @@ func (x *DesktopGroupConfiguration) GetDesktopType() DesktopGroupConfiguration_D
 func (x *DesktopGroupConfiguration) GetMembers() []*access.Subject {
 	if x != nil {
 		return x.Members
+	}
+	return nil
+}
+
+func (x *DesktopGroupConfiguration) GetLifetime() *DesktopGroupConfiguration_Lifetime {
+	if x != nil {
+		return x.Lifetime
 	}
 	return nil
 }
@@ -591,6 +600,69 @@ func (x *ResourcesSpec) GetCoreFraction() int64 {
 	return 0
 }
 
+type DesktopGroupConfiguration_Lifetime struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Time zone for lifetime control. For example "Europe/Moscow".
+	TimeZone string `protobuf:"bytes,1,opt,name=time_zone,json=timeZone,proto3" json:"time_zone,omitempty"`
+	// Cron expression for automatic start desktops in group. For example "0 0 * * *".
+	CronStart string `protobuf:"bytes,2,opt,name=cron_start,json=cronStart,proto3" json:"cron_start,omitempty"`
+	// Cron expression for automatic stop desktops in group. For example "0 0 * * *".
+	CronStop      string `protobuf:"bytes,3,opt,name=cron_stop,json=cronStop,proto3" json:"cron_stop,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DesktopGroupConfiguration_Lifetime) Reset() {
+	*x = DesktopGroupConfiguration_Lifetime{}
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DesktopGroupConfiguration_Lifetime) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DesktopGroupConfiguration_Lifetime) ProtoMessage() {}
+
+func (x *DesktopGroupConfiguration_Lifetime) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DesktopGroupConfiguration_Lifetime.ProtoReflect.Descriptor instead.
+func (*DesktopGroupConfiguration_Lifetime) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDescGZIP(), []int{1, 0}
+}
+
+func (x *DesktopGroupConfiguration_Lifetime) GetTimeZone() string {
+	if x != nil {
+		return x.TimeZone
+	}
+	return ""
+}
+
+func (x *DesktopGroupConfiguration_Lifetime) GetCronStart() string {
+	if x != nil {
+		return x.CronStart
+	}
+	return ""
+}
+
+func (x *DesktopGroupConfiguration_Lifetime) GetCronStop() string {
+	if x != nil {
+		return x.CronStop
+	}
+	return ""
+}
+
 var File_yandex_cloud_clouddesktop_v1_desktop_group_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
@@ -622,12 +694,18 @@ const file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc = "" +
 	"\x06ACTIVE\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\f\n" +
 	"\bUPDATING\x10\x04B\x15\n" +
-	"\rupdate_policy\x12\x04\xc0\xc11\x01J\x04\b\x05\x10\vJ\x04\b\r\x10\x15\"\x8e\x03\n" +
+	"\rupdate_policy\x12\x04\xc0\xc11\x01J\x04\b\x05\x10\vJ\x04\b\r\x10\x15\"\xf7\x04\n" +
 	"\x19DesktopGroupConfiguration\x127\n" +
 	"\x12min_ready_desktops\x18\x01 \x01(\x03B\t\xfa\xc71\x050-512R\x10minReadyDesktops\x129\n" +
 	"\x13max_desktops_amount\x18\x02 \x01(\x03B\t\xfa\xc71\x050-512R\x11maxDesktopsAmount\x12j\n" +
 	"\fdesktop_type\x18\x03 \x01(\x0e2G.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopTypeR\vdesktopType\x12@\n" +
-	"\amembers\x18\x04 \x03(\v2\x1c.yandex.cloud.access.SubjectB\b\x82\xc81\x040-10R\amembers\"O\n" +
+	"\amembers\x18\x04 \x03(\v2\x1c.yandex.cloud.access.SubjectB\b\x82\xc81\x040-10R\amembers\x12`\n" +
+	"\blifetime\x18\x05 \x01(\v2D.yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.LifetimeR\blifetime\x1a\x84\x01\n" +
+	"\bLifetime\x12&\n" +
+	"\ttime_zone\x18\x01 \x01(\tB\t\x8a\xc81\x05<=100R\btimeZone\x12(\n" +
+	"\n" +
+	"cron_start\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\tcronStart\x12&\n" +
+	"\tcron_stop\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\bcronStop\"O\n" +
 	"\vDesktopType\x12\x1c\n" +
 	"\x18DESKTOP_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
@@ -659,7 +737,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDescGZIP() []byte 
 }
 
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_goTypes = []any{
 	(DesktopGroup_Status)(0),                   // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.Status
 	(DesktopGroupConfiguration_DesktopType)(0), // 1: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopType
@@ -670,28 +748,30 @@ var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_goTypes = []any{
 	(*NetworkInterfaceSpec)(nil),               // 6: yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
 	(*ResourcesSpec)(nil),                      // 7: yandex.cloud.clouddesktop.v1.api.ResourcesSpec
 	nil,                                        // 8: yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
-	(*timestamppb.Timestamp)(nil),              // 9: google.protobuf.Timestamp
-	(*DiskSpec)(nil),                           // 10: yandex.cloud.clouddesktop.v1.api.DiskSpec
-	(*access.Subject)(nil),                     // 11: yandex.cloud.access.Subject
+	(*DesktopGroupConfiguration_Lifetime)(nil), // 9: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.Lifetime
+	(*timestamppb.Timestamp)(nil),              // 10: google.protobuf.Timestamp
+	(*DiskSpec)(nil),                           // 11: yandex.cloud.clouddesktop.v1.api.DiskSpec
+	(*access.Subject)(nil),                     // 12: yandex.cloud.access.Subject
 }
 var file_yandex_cloud_clouddesktop_v1_desktop_group_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.created_at:type_name -> google.protobuf.Timestamp
+	10, // 0: yandex.cloud.clouddesktop.v1.api.DesktopGroup.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 1: yandex.cloud.clouddesktop.v1.api.DesktopGroup.status:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup.Status
 	8,  // 2: yandex.cloud.clouddesktop.v1.api.DesktopGroup.labels:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroup.LabelsEntry
 	7,  // 3: yandex.cloud.clouddesktop.v1.api.DesktopGroup.resources_spec:type_name -> yandex.cloud.clouddesktop.v1.api.ResourcesSpec
 	6,  // 4: yandex.cloud.clouddesktop.v1.api.DesktopGroup.network_interface_spec:type_name -> yandex.cloud.clouddesktop.v1.api.NetworkInterfaceSpec
-	10, // 5: yandex.cloud.clouddesktop.v1.api.DesktopGroup.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
-	10, // 6: yandex.cloud.clouddesktop.v1.api.DesktopGroup.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	11, // 5: yandex.cloud.clouddesktop.v1.api.DesktopGroup.boot_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
+	11, // 6: yandex.cloud.clouddesktop.v1.api.DesktopGroup.data_disk_spec:type_name -> yandex.cloud.clouddesktop.v1.api.DiskSpec
 	3,  // 7: yandex.cloud.clouddesktop.v1.api.DesktopGroup.group_config:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration
 	5,  // 8: yandex.cloud.clouddesktop.v1.api.DesktopGroup.auto_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.AutoUpdatePolicy
 	4,  // 9: yandex.cloud.clouddesktop.v1.api.DesktopGroup.manual_update_policy:type_name -> yandex.cloud.clouddesktop.v1.api.ManualUpdatePolicy
 	1,  // 10: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.desktop_type:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.DesktopType
-	11, // 11: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.members:type_name -> yandex.cloud.access.Subject
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	12, // 11: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.members:type_name -> yandex.cloud.access.Subject
+	9,  // 12: yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.lifetime:type_name -> yandex.cloud.clouddesktop.v1.api.DesktopGroupConfiguration.Lifetime
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init() }
@@ -710,7 +790,7 @@ func file_yandex_cloud_clouddesktop_v1_desktop_group_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc), len(file_yandex_cloud_clouddesktop_v1_desktop_group_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

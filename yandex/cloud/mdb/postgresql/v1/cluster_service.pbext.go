@@ -41,22 +41,6 @@ func (m *ListClustersResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
 
-func (m *BackupRetentionPolicySpec) SetPolicyName(v string) {
-	m.PolicyName = v
-}
-
-func (m *BackupRetentionPolicySpec) SetCron(v *CronTab) {
-	m.Cron = v
-}
-
-func (m *BackupRetentionPolicySpec) SetRetainForDays(v int64) {
-	m.RetainForDays = v
-}
-
-func (m *BackupRetentionPolicySpec) SetDescription(v string) {
-	m.Description = v
-}
-
 func (m *CreateClusterRequest) SetFolderId(v string) {
 	m.FolderId = v
 }
@@ -113,7 +97,7 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
-func (m *CreateClusterRequest) SetRetentionPolicies(v []*BackupRetentionPolicySpec) {
+func (m *CreateClusterRequest) SetRetentionPolicies(v []*v1.BackupRetentionPolicySpec) {
 	m.RetentionPolicies = v
 }
 

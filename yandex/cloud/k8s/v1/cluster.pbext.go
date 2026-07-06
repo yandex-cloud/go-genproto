@@ -168,8 +168,84 @@ func (m *Master) SetScalePolicy(v *MasterScalePolicy) {
 	m.ScalePolicy = v
 }
 
+func (m *MasterResources) SetCores(v int64) {
+	m.Cores = v
+}
+
+func (m *MasterResources) SetCoreFraction(v int64) {
+	m.CoreFraction = v
+}
+
+func (m *MasterResources) SetMemory(v int64) {
+	m.Memory = v
+}
+
+type MasterScalePolicy_ScaleType = isMasterScalePolicy_ScaleType
+
+func (m *MasterScalePolicy) SetScaleType(v MasterScalePolicy_ScaleType) {
+	m.ScaleType = v
+}
+
+func (m *MasterScalePolicy) SetFixedScale(v *MasterScalePolicy_FixedScale) {
+	m.ScaleType = &MasterScalePolicy_FixedScale_{
+		FixedScale: v,
+	}
+}
+
+func (m *MasterScalePolicy) SetAutoScale(v *MasterScalePolicy_AutoScale) {
+	m.ScaleType = &MasterScalePolicy_AutoScale_{
+		AutoScale: v,
+	}
+}
+
+func (m *MasterScalePolicy_FixedScale) SetResourcePresetId(v string) {
+	m.ResourcePresetId = v
+}
+
+func (m *MasterScalePolicy_AutoScale) SetMinResourcePresetId(v string) {
+	m.MinResourcePresetId = v
+}
+
 func (m *MasterAuth) SetClusterCaCertificate(v string) {
 	m.ClusterCaCertificate = v
+}
+
+type MasterLogging_Destination = isMasterLogging_Destination
+
+func (m *MasterLogging) SetDestination(v MasterLogging_Destination) {
+	m.Destination = v
+}
+
+func (m *MasterLogging) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *MasterLogging) SetLogGroupId(v string) {
+	m.Destination = &MasterLogging_LogGroupId{
+		LogGroupId: v,
+	}
+}
+
+func (m *MasterLogging) SetFolderId(v string) {
+	m.Destination = &MasterLogging_FolderId{
+		FolderId: v,
+	}
+}
+
+func (m *MasterLogging) SetAuditEnabled(v bool) {
+	m.AuditEnabled = v
+}
+
+func (m *MasterLogging) SetClusterAutoscalerEnabled(v bool) {
+	m.ClusterAutoscalerEnabled = v
+}
+
+func (m *MasterLogging) SetKubeApiserverEnabled(v bool) {
+	m.KubeApiserverEnabled = v
+}
+
+func (m *MasterLogging) SetEventsEnabled(v bool) {
+	m.EventsEnabled = v
 }
 
 func (m *ZonalMaster) SetZoneId(v string) {
@@ -248,44 +324,6 @@ func (m *MasterMaintenancePolicy) SetMaintenanceWindow(v *MaintenanceWindow) {
 	m.MaintenanceWindow = v
 }
 
-type MasterLogging_Destination = isMasterLogging_Destination
-
-func (m *MasterLogging) SetDestination(v MasterLogging_Destination) {
-	m.Destination = v
-}
-
-func (m *MasterLogging) SetEnabled(v bool) {
-	m.Enabled = v
-}
-
-func (m *MasterLogging) SetLogGroupId(v string) {
-	m.Destination = &MasterLogging_LogGroupId{
-		LogGroupId: v,
-	}
-}
-
-func (m *MasterLogging) SetFolderId(v string) {
-	m.Destination = &MasterLogging_FolderId{
-		FolderId: v,
-	}
-}
-
-func (m *MasterLogging) SetAuditEnabled(v bool) {
-	m.AuditEnabled = v
-}
-
-func (m *MasterLogging) SetClusterAutoscalerEnabled(v bool) {
-	m.ClusterAutoscalerEnabled = v
-}
-
-func (m *MasterLogging) SetKubeApiserverEnabled(v bool) {
-	m.KubeApiserverEnabled = v
-}
-
-func (m *MasterLogging) SetEventsEnabled(v bool) {
-	m.EventsEnabled = v
-}
-
 func (m *NetworkPolicy) SetProvider(v NetworkPolicy_Provider) {
 	m.Provider = v
 }
@@ -296,44 +334,6 @@ func (m *KMSProvider) SetKeyId(v string) {
 
 func (m *Cilium) SetRoutingMode(v Cilium_RoutingMode) {
 	m.RoutingMode = v
-}
-
-func (m *MasterResources) SetCores(v int64) {
-	m.Cores = v
-}
-
-func (m *MasterResources) SetCoreFraction(v int64) {
-	m.CoreFraction = v
-}
-
-func (m *MasterResources) SetMemory(v int64) {
-	m.Memory = v
-}
-
-type MasterScalePolicy_ScaleType = isMasterScalePolicy_ScaleType
-
-func (m *MasterScalePolicy) SetScaleType(v MasterScalePolicy_ScaleType) {
-	m.ScaleType = v
-}
-
-func (m *MasterScalePolicy) SetFixedScale(v *MasterScalePolicy_FixedScale) {
-	m.ScaleType = &MasterScalePolicy_FixedScale_{
-		FixedScale: v,
-	}
-}
-
-func (m *MasterScalePolicy) SetAutoScale(v *MasterScalePolicy_AutoScale) {
-	m.ScaleType = &MasterScalePolicy_AutoScale_{
-		AutoScale: v,
-	}
-}
-
-func (m *MasterScalePolicy_FixedScale) SetResourcePresetId(v string) {
-	m.ResourcePresetId = v
-}
-
-func (m *MasterScalePolicy_AutoScale) SetMinResourcePresetId(v string) {
-	m.MinResourcePresetId = v
 }
 
 func (m *WorkloadIdentityFederation) SetEnabled(v bool) {
