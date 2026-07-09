@@ -50,10 +50,10 @@ func (m *Target) SetSubnetId(v string) {
 	m.SubnetId = v
 }
 
-func (m *Target) SetPrivateIpv4Address(v bool) {
-	m.PrivateIpv4Address = v
-}
-
 func (m *Target) SetExternalAddress(v bool) {
 	m.ExternalAddress = v
+}
+
+func (m *Target) SetPrivateIpv4Address(v bool) {
+	m.PrivateIpv4Address = v
 }

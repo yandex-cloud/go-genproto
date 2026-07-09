@@ -32,9 +32,12 @@ type RescheduleMaintenanceRequest_RescheduleType int32
 
 const (
 	RescheduleMaintenanceRequest_RESCHEDULE_TYPE_UNSPECIFIED RescheduleMaintenanceRequest_RescheduleType = 0
-	RescheduleMaintenanceRequest_IMMEDIATE                   RescheduleMaintenanceRequest_RescheduleType = 1
-	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW       RescheduleMaintenanceRequest_RescheduleType = 2
-	RescheduleMaintenanceRequest_SPECIFIC_TIME               RescheduleMaintenanceRequest_RescheduleType = 3
+	// Start the maintenance operation immediately.
+	RescheduleMaintenanceRequest_IMMEDIATE RescheduleMaintenanceRequest_RescheduleType = 1
+	// Start the maintenance operation within the next available maintenance window.
+	RescheduleMaintenanceRequest_NEXT_AVAILABLE_WINDOW RescheduleMaintenanceRequest_RescheduleType = 2
+	// Start the maintenance operation at the specific time.
+	RescheduleMaintenanceRequest_SPECIFIC_TIME RescheduleMaintenanceRequest_RescheduleType = 3
 )
 
 // Enum value maps for RescheduleMaintenanceRequest_RescheduleType.
@@ -77,7 +80,7 @@ func (x RescheduleMaintenanceRequest_RescheduleType) Number() protoreflect.EnumN
 
 // Deprecated: Use RescheduleMaintenanceRequest_RescheduleType.Descriptor instead.
 func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{18, 0}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type ListClusterLogsRequest_ServiceType int32
@@ -133,7 +136,7 @@ func (x ListClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ListClusterLogsRequest_ServiceType.Descriptor instead.
 func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{28, 0}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{20, 0}
 }
 
 type StreamClusterLogsRequest_ServiceType int32
@@ -189,13 +192,12 @@ func (x StreamClusterLogsRequest_ServiceType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StreamClusterLogsRequest_ServiceType.Descriptor instead.
 func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{31, 0}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{23, 0}
 }
 
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Greenplum® cluster resource to return.
-	//
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -242,23 +244,17 @@ func (x *GetClusterRequest) GetClusterId() string {
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list Greenplum® clusters in.
-	//
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClustersResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the [ListClustersResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. The field name. Currently you can only use filtering with the [Cluster.name] field.
-	//
 	// 2. An `=` operator.
-	//
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-zA-Z0-9_-]+`.
 	Filter        string `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -328,9 +324,7 @@ type ListClustersResponse struct {
 	// List of Greenplum® cluster resources.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value for the [ListClustersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -634,111 +628,6 @@ func (x *CreateClusterRequest) GetLogging() *LoggingConfig {
 	return nil
 }
 
-type ConfigSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: use dbms_config instead
-	//
-	// Types that are valid to be assigned to GreenplumConfig:
-	//
-	//	*ConfigSpec_GreenplumConfig_6
-	GreenplumConfig isConfigSpec_GreenplumConfig `protobuf_oneof:"greenplum_config"`
-	// Configuration set for the Greenplum & Cloudberry.
-	DbmsConfig *DBMSConfig `protobuf:"bytes,10,opt,name=dbms_config,json=dbmsConfig,proto3" json:"dbms_config,omitempty"`
-	// Odyssey® pool settings.
-	Pool *ConnectionPoolerConfig `protobuf:"bytes,3,opt,name=pool,proto3" json:"pool,omitempty"`
-	// Managed Greenplum® background tasks configuration.
-	BackgroundActivities *BackgroundActivitiesConfig `protobuf:"bytes,6,opt,name=background_activities,json=backgroundActivities,proto3" json:"background_activities,omitempty"`
-	PxfConfig            *PXFConfig                  `protobuf:"bytes,8,opt,name=pxf_config,json=pxfConfig,proto3" json:"pxf_config,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *ConfigSpec) Reset() {
-	*x = ConfigSpec{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ConfigSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ConfigSpec) ProtoMessage() {}
-
-func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
-func (*ConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ConfigSpec) GetGreenplumConfig() isConfigSpec_GreenplumConfig {
-	if x != nil {
-		return x.GreenplumConfig
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
-func (x *ConfigSpec) GetGreenplumConfig_6() *GreenplumConfig6 {
-	if x != nil {
-		if x, ok := x.GreenplumConfig.(*ConfigSpec_GreenplumConfig_6); ok {
-			return x.GreenplumConfig_6
-		}
-	}
-	return nil
-}
-
-func (x *ConfigSpec) GetDbmsConfig() *DBMSConfig {
-	if x != nil {
-		return x.DbmsConfig
-	}
-	return nil
-}
-
-func (x *ConfigSpec) GetPool() *ConnectionPoolerConfig {
-	if x != nil {
-		return x.Pool
-	}
-	return nil
-}
-
-func (x *ConfigSpec) GetBackgroundActivities() *BackgroundActivitiesConfig {
-	if x != nil {
-		return x.BackgroundActivities
-	}
-	return nil
-}
-
-func (x *ConfigSpec) GetPxfConfig() *PXFConfig {
-	if x != nil {
-		return x.PxfConfig
-	}
-	return nil
-}
-
-type isConfigSpec_GreenplumConfig interface {
-	isConfigSpec_GreenplumConfig()
-}
-
-type ConfigSpec_GreenplumConfig_6 struct {
-	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
-	GreenplumConfig_6 *GreenplumConfig6 `protobuf:"bytes,9,opt,name=greenplum_config_6,json=greenplumConfig_6,proto3,oneof"`
-}
-
-func (*ConfigSpec_GreenplumConfig_6) isConfigSpec_GreenplumConfig() {}
-
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Greenplum® cluster that is being created.
@@ -749,7 +638,7 @@ type CreateClusterMetadata struct {
 
 func (x *CreateClusterMetadata) Reset() {
 	*x = CreateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -761,7 +650,7 @@ func (x *CreateClusterMetadata) String() string {
 func (*CreateClusterMetadata) ProtoMessage() {}
 
 func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -774,7 +663,7 @@ func (x *CreateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*CreateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateClusterMetadata) GetClusterId() string {
@@ -795,7 +684,6 @@ type UpdateClusterRequest struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Custom labels for the Greenplum® cluster as `key:value` pairs.
 	// For example, `"project":"mvp"` or `"source":"dictionary"`.
-	//
 	// The new set of labels completely replaces the old one.
 	// To add a label, request the current set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -831,7 +719,7 @@ type UpdateClusterRequest struct {
 
 func (x *UpdateClusterRequest) Reset() {
 	*x = UpdateClusterRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -843,7 +731,7 @@ func (x *UpdateClusterRequest) String() string {
 func (*UpdateClusterRequest) ProtoMessage() {}
 
 func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +744,7 @@ func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
 func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateClusterRequest) GetClusterId() string {
@@ -988,7 +876,7 @@ type UpdateClusterMetadata struct {
 
 func (x *UpdateClusterMetadata) Reset() {
 	*x = UpdateClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1000,7 +888,7 @@ func (x *UpdateClusterMetadata) String() string {
 func (*UpdateClusterMetadata) ProtoMessage() {}
 
 func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1013,7 +901,7 @@ func (x *UpdateClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateClusterMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateClusterMetadata) GetClusterId() string {
@@ -1033,7 +921,7 @@ type AddClusterHostsMetadata struct {
 
 func (x *AddClusterHostsMetadata) Reset() {
 	*x = AddClusterHostsMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1045,7 +933,7 @@ func (x *AddClusterHostsMetadata) String() string {
 func (*AddClusterHostsMetadata) ProtoMessage() {}
 
 func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1058,7 +946,7 @@ func (x *AddClusterHostsMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddClusterHostsMetadata.ProtoReflect.Descriptor instead.
 func (*AddClusterHostsMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AddClusterHostsMetadata) GetClusterId() string {
@@ -1091,7 +979,7 @@ type ExpandRequest struct {
 
 func (x *ExpandRequest) Reset() {
 	*x = ExpandRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1103,7 +991,7 @@ func (x *ExpandRequest) String() string {
 func (*ExpandRequest) ProtoMessage() {}
 
 func (x *ExpandRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1116,7 +1004,7 @@ func (x *ExpandRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExpandRequest.ProtoReflect.Descriptor instead.
 func (*ExpandRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ExpandRequest) GetClusterId() string {
@@ -1179,7 +1067,7 @@ type DeleteClusterRequest struct {
 
 func (x *DeleteClusterRequest) Reset() {
 	*x = DeleteClusterRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1191,7 +1079,7 @@ func (x *DeleteClusterRequest) String() string {
 func (*DeleteClusterRequest) ProtoMessage() {}
 
 func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1204,7 +1092,7 @@ func (x *DeleteClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteClusterRequest) GetClusterId() string {
@@ -1224,7 +1112,7 @@ type DeleteClusterMetadata struct {
 
 func (x *DeleteClusterMetadata) Reset() {
 	*x = DeleteClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1124,7 @@ func (x *DeleteClusterMetadata) String() string {
 func (*DeleteClusterMetadata) ProtoMessage() {}
 
 func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1249,7 +1137,7 @@ func (x *DeleteClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClusterMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteClusterMetadata) GetClusterId() string {
@@ -1270,7 +1158,7 @@ type StartClusterRequest struct {
 
 func (x *StartClusterRequest) Reset() {
 	*x = StartClusterRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1282,7 +1170,7 @@ func (x *StartClusterRequest) String() string {
 func (*StartClusterRequest) ProtoMessage() {}
 
 func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1295,7 +1183,7 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
 func (*StartClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StartClusterRequest) GetClusterId() string {
@@ -1315,7 +1203,7 @@ type StartClusterMetadata struct {
 
 func (x *StartClusterMetadata) Reset() {
 	*x = StartClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1327,7 +1215,7 @@ func (x *StartClusterMetadata) String() string {
 func (*StartClusterMetadata) ProtoMessage() {}
 
 func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1340,7 +1228,7 @@ func (x *StartClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StartClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StartClusterMetadata) GetClusterId() string {
@@ -1361,7 +1249,7 @@ type StopClusterRequest struct {
 
 func (x *StopClusterRequest) Reset() {
 	*x = StopClusterRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1373,7 +1261,7 @@ func (x *StopClusterRequest) String() string {
 func (*StopClusterRequest) ProtoMessage() {}
 
 func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1386,7 +1274,7 @@ func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
 func (*StopClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StopClusterRequest) GetClusterId() string {
@@ -1406,7 +1294,7 @@ type StopClusterMetadata struct {
 
 func (x *StopClusterMetadata) Reset() {
 	*x = StopClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1418,7 +1306,7 @@ func (x *StopClusterMetadata) String() string {
 func (*StopClusterMetadata) ProtoMessage() {}
 
 func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1431,7 +1319,7 @@ func (x *StopClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopClusterMetadata.ProtoReflect.Descriptor instead.
 func (*StopClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StopClusterMetadata) GetClusterId() string {
@@ -1453,7 +1341,7 @@ type MoveClusterRequest struct {
 
 func (x *MoveClusterRequest) Reset() {
 	*x = MoveClusterRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1465,7 +1353,7 @@ func (x *MoveClusterRequest) String() string {
 func (*MoveClusterRequest) ProtoMessage() {}
 
 func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1478,7 +1366,7 @@ func (x *MoveClusterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterRequest.ProtoReflect.Descriptor instead.
 func (*MoveClusterRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *MoveClusterRequest) GetClusterId() string {
@@ -1509,7 +1397,7 @@ type MoveClusterMetadata struct {
 
 func (x *MoveClusterMetadata) Reset() {
 	*x = MoveClusterMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1521,7 +1409,7 @@ func (x *MoveClusterMetadata) String() string {
 func (*MoveClusterMetadata) ProtoMessage() {}
 
 func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1534,7 +1422,7 @@ func (x *MoveClusterMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MoveClusterMetadata.ProtoReflect.Descriptor instead.
 func (*MoveClusterMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *MoveClusterMetadata) GetClusterId() string {
@@ -1572,7 +1460,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1584,7 +1472,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1597,7 +1485,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -1633,7 +1521,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1645,7 +1533,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1658,7 +1546,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -1675,404 +1563,6 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 	return nil
 }
 
-type ListClusterOperationsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Greenplum® cluster resource to list operations for.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return.
-	//
-	// If the number of available results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token] returned by the previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterOperationsRequest) Reset() {
-	*x = ListClusterOperationsRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterOperationsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterOperationsRequest) ProtoMessage() {}
-
-func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *ListClusterOperationsRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *ListClusterOperationsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListClusterOperationsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListClusterOperationsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Operation resources for the specified Greenplum® cluster.
-	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
-	// This token allows you to get the next page of results for list requests.
-	//
-	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
-	//
-	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterOperationsResponse) Reset() {
-	*x = ListClusterOperationsResponse{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[21]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterOperationsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterOperationsResponse) ProtoMessage() {}
-
-func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[21]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
-func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{21}
-}
-
-func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
-	if x != nil {
-		return x.Operations
-	}
-	return nil
-}
-
-func (x *ListClusterOperationsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type ListClusterHostsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Greenplum® cluster.
-	//
-	// To get the Greenplum® cluster ID use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return.
-	//
-	// If the number of available results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token] returned by the previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterHostsRequest) Reset() {
-	*x = ListClusterHostsRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[22]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterHostsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterHostsRequest) ProtoMessage() {}
-
-func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[22]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterHostsRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *ListClusterHostsRequest) GetClusterId() string {
-	if x != nil {
-		return x.ClusterId
-	}
-	return ""
-}
-
-func (x *ListClusterHostsRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListClusterHostsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
-	}
-	return ""
-}
-
-type ListClusterHostsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Requested list of hosts for the cluster.
-	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
-	// This token allows you to get the next page of results for list requests.
-	//
-	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
-	//
-	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterHostsResponse) Reset() {
-	*x = ListClusterHostsResponse{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterHostsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterHostsResponse) ProtoMessage() {}
-
-func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterHostsResponse.ProtoReflect.Descriptor instead.
-func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{23}
-}
-
-func (x *ListClusterHostsResponse) GetHosts() []*Host {
-	if x != nil {
-		return x.Hosts
-	}
-	return nil
-}
-
-func (x *ListClusterHostsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
-type MasterSubclusterConfigSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Resources allocated to Greenplum® master subcluster hosts.
-	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MasterSubclusterConfigSpec) Reset() {
-	*x = MasterSubclusterConfigSpec{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterSubclusterConfigSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterSubclusterConfigSpec) ProtoMessage() {}
-
-func (x *MasterSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterSubclusterConfigSpec.ProtoReflect.Descriptor instead.
-func (*MasterSubclusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *MasterSubclusterConfigSpec) GetResources() *Resources {
-	if x != nil {
-		return x.Resources
-	}
-	return nil
-}
-
-type SegmentSubclusterConfigSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Resources allocated to Greenplum® segment subcluster hosts.
-	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SegmentSubclusterConfigSpec) Reset() {
-	*x = SegmentSubclusterConfigSpec{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[25]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SegmentSubclusterConfigSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SegmentSubclusterConfigSpec) ProtoMessage() {}
-
-func (x *SegmentSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[25]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SegmentSubclusterConfigSpec.ProtoReflect.Descriptor instead.
-func (*SegmentSubclusterConfigSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{25}
-}
-
-func (x *SegmentSubclusterConfigSpec) GetResources() *Resources {
-	if x != nil {
-		return x.Resources
-	}
-	return nil
-}
-
-type ListClusterLogsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Requested log records.
-	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
-	// This token allows you to get the next page of results for list requests.
-	//
-	// If the number of results is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
-	//
-	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
-	//
-	// This value is interchangeable with the [StreamLogRecord.next_record_token] from [StreamLogs] method.
-	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListClusterLogsResponse) Reset() {
-	*x = ListClusterLogsResponse{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[26]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListClusterLogsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListClusterLogsResponse) ProtoMessage() {}
-
-func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[26]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListClusterLogsResponse.ProtoReflect.Descriptor instead.
-func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{26}
-}
-
-func (x *ListClusterLogsResponse) GetLogs() []*LogRecord {
-	if x != nil {
-		return x.Logs
-	}
-	return nil
-}
-
-func (x *ListClusterLogsResponse) GetNextPageToken() string {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return ""
-}
-
 type LogRecord struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Time when the log was recorded.
@@ -2085,7 +1575,7 @@ type LogRecord struct {
 
 func (x *LogRecord) Reset() {
 	*x = LogRecord{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2097,7 +1587,7 @@ func (x *LogRecord) String() string {
 func (*LogRecord) ProtoMessage() {}
 
 func (x *LogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2110,7 +1600,7 @@ func (x *LogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogRecord.ProtoReflect.Descriptor instead.
 func (*LogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *LogRecord) GetTimestamp() *timestamppb.Timestamp {
@@ -2130,7 +1620,6 @@ func (x *LogRecord) GetMessage() map[string]string {
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Greenplum® cluster to request logs for.
-	//
 	// To get the Greenplum® cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from log table to request.
@@ -2143,7 +1632,6 @@ type ListClusterLogsRequest struct {
 	// End timestamp for the logs request.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListClusterLogsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the [ListClusterLogsResponse.next_page_token] returned by the previous list request.
@@ -2151,15 +1639,10 @@ type ListClusterLogsRequest struct {
 	// The service always returns a [ListClusterLogsResponse.next_page_token], even if the current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. A field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname], [LogRecord.logs.message.error_severity] (for `GREENPLUM` service) and [LogRecord.logs.message.level] (for `GREENPLUM_POOLER` service) fields.
-	//
 	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
-	//
 	// 3. A value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
-	//
 	// Examples of a filter:
 	// * `message.hostname='node1.db.cloud.yandex.net'`;
 	// * `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`.
@@ -2170,7 +1653,7 @@ type ListClusterLogsRequest struct {
 
 func (x *ListClusterLogsRequest) Reset() {
 	*x = ListClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2182,7 +1665,7 @@ func (x *ListClusterLogsRequest) String() string {
 func (*ListClusterLogsRequest) ProtoMessage() {}
 
 func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2195,7 +1678,7 @@ func (x *ListClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*ListClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListClusterLogsRequest) GetClusterId() string {
@@ -2261,37 +1744,34 @@ func (x *ListClusterLogsRequest) GetFilter() string {
 	return ""
 }
 
-type ListClusterBackupsRequest struct {
+type ListClusterLogsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Greenplum® cluster.
-	//
-	// To get the Greenplum® cluster ID use a [ClusterService.List] request.
-	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// The maximum number of results per page to return.
-	//
-	// If the number of available results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
-	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token. To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token] returned by the previous list request.
-	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Requested log records.
+	Logs []*LogRecord `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+	// This token allows you to get the next page of results for list requests.
+	// If the number of results is larger than [ListClusterLogsRequest.page_size], use the [next_page_token] as the value for the [ListClusterLogsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
+	// This value is interchangeable with the [StreamLogRecord.next_record_token] from [StreamLogs] method.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListClusterBackupsRequest) Reset() {
-	*x = ListClusterBackupsRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[29]
+func (x *ListClusterLogsResponse) Reset() {
+	*x = ListClusterLogsResponse{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListClusterBackupsRequest) String() string {
+func (x *ListClusterLogsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListClusterBackupsRequest) ProtoMessage() {}
+func (*ListClusterLogsResponse) ProtoMessage() {}
 
-func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[29]
+func (x *ListClusterLogsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2302,28 +1782,21 @@ func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListClusterBackupsRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+// Deprecated: Use ListClusterLogsResponse.ProtoReflect.Descriptor instead.
+func (*ListClusterLogsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *ListClusterBackupsRequest) GetClusterId() string {
+func (x *ListClusterLogsResponse) GetLogs() []*LogRecord {
 	if x != nil {
-		return x.ClusterId
+		return x.Logs
 	}
-	return ""
+	return nil
 }
 
-func (x *ListClusterBackupsRequest) GetPageSize() int64 {
+func (x *ListClusterLogsResponse) GetNextPageToken() string {
 	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListClusterBackupsRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -2333,9 +1806,7 @@ type StreamLogRecord struct {
 	// One of the requested log records.
 	Record *LogRecord `protobuf:"bytes,1,opt,name=record,proto3" json:"record,omitempty"`
 	// This token allows you to continue streaming logs starting from the exact same record.
-	//
 	// To do that, specify value of [next_record_token] as the value for [StreamLogs.record_token] parameter in the next [StreamLogs] request.
-	//
 	// This value is interchangeable with [ListLogs.next_page_token] from [ListLogs] method.
 	NextRecordToken string `protobuf:"bytes,2,opt,name=next_record_token,json=nextRecordToken,proto3" json:"next_record_token,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -2344,7 +1815,7 @@ type StreamLogRecord struct {
 
 func (x *StreamLogRecord) Reset() {
 	*x = StreamLogRecord{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2356,7 +1827,7 @@ func (x *StreamLogRecord) String() string {
 func (*StreamLogRecord) ProtoMessage() {}
 
 func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2369,7 +1840,7 @@ func (x *StreamLogRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamLogRecord.ProtoReflect.Descriptor instead.
 func (*StreamLogRecord) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *StreamLogRecord) GetRecord() *LogRecord {
@@ -2398,25 +1869,17 @@ type StreamClusterLogsRequest struct {
 	// Start timestamp for the logs request.
 	FromTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=from_time,json=fromTime,proto3" json:"from_time,omitempty"`
 	// End timestamp for the logs request.
-	//
 	// If this field is not set, all existing logs are sent as well as the new ones as they appear.
-	//
 	// In essence it has `tail -f` semantics.
 	ToTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=to_time,json=toTime,proto3" json:"to_time,omitempty"`
 	// Record token. Set [record_token] to the [StreamLogs.next_record_token] returned by the previous [StreamLogs] request to start streaming from the next log record.
 	RecordToken string `protobuf:"bytes,6,opt,name=record_token,json=recordToken,proto3" json:"record_token,omitempty"`
 	// A filter expression that filters resources listed in the response.
-	//
 	// The expression must specify:
-	//
 	// 1. A field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname], [LogRecord.logs.message.error_severity] (for GREENPLUM service), [LogRecord.logs.message.level] (for POOLER service) fields.
-	//
 	// 2. An `=` operator.
-	//
 	// 3. A value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-z0-9.-]{1,61}`.
-	//
 	// Examples of a filter:
-	//
 	// * `message.hostname='node1.db.cloud.yandex.net'`;
 	// * `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`.
 	Filter        string `protobuf:"bytes,7,opt,name=filter,proto3" json:"filter,omitempty"`
@@ -2426,7 +1889,7 @@ type StreamClusterLogsRequest struct {
 
 func (x *StreamClusterLogsRequest) Reset() {
 	*x = StreamClusterLogsRequest{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2438,7 +1901,7 @@ func (x *StreamClusterLogsRequest) String() string {
 func (*StreamClusterLogsRequest) ProtoMessage() {}
 
 func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[31]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2451,7 +1914,7 @@ func (x *StreamClusterLogsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamClusterLogsRequest.ProtoReflect.Descriptor instead.
 func (*StreamClusterLogsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *StreamClusterLogsRequest) GetClusterId() string {
@@ -2503,14 +1966,517 @@ func (x *StreamClusterLogsRequest) GetFilter() string {
 	return ""
 }
 
+type ListClusterOperationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster resource to list operations for.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// The maximum number of results per page to return.
+	// If the number of available results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the [ListClusterOperationsResponse.next_page_token] returned by the previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListClusterOperationsRequest) Reset() {
+	*x = ListClusterOperationsRequest{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListClusterOperationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListClusterOperationsRequest) ProtoMessage() {}
+
+func (x *ListClusterOperationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListClusterOperationsRequest.ProtoReflect.Descriptor instead.
+func (*ListClusterOperationsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ListClusterOperationsRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *ListClusterOperationsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListClusterOperationsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListClusterOperationsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of Operation resources for the specified Greenplum® cluster.
+	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
+	// This token allows you to get the next page of results for list requests.
+	// If the number of results is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value for the [ListClusterOperationsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListClusterOperationsResponse) Reset() {
+	*x = ListClusterOperationsResponse{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListClusterOperationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListClusterOperationsResponse) ProtoMessage() {}
+
+func (x *ListClusterOperationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListClusterOperationsResponse.ProtoReflect.Descriptor instead.
+func (*ListClusterOperationsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ListClusterOperationsResponse) GetOperations() []*operation.Operation {
+	if x != nil {
+		return x.Operations
+	}
+	return nil
+}
+
+func (x *ListClusterOperationsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+type ListClusterHostsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	// To get the Greenplum® cluster ID use a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// The maximum number of results per page to return.
+	// If the number of available results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the [ListClusterHostsResponse.next_page_token] returned by the previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListClusterHostsRequest) Reset() {
+	*x = ListClusterHostsRequest{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListClusterHostsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListClusterHostsRequest) ProtoMessage() {}
+
+func (x *ListClusterHostsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListClusterHostsRequest.ProtoReflect.Descriptor instead.
+func (*ListClusterHostsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ListClusterHostsRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *ListClusterHostsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListClusterHostsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type ListClusterHostsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Requested list of hosts for the cluster.
+	Hosts []*Host `protobuf:"bytes,1,rep,name=hosts,proto3" json:"hosts,omitempty"`
+	// This token allows you to get the next page of results for list requests.
+	// If the number of results is larger than [ListClusterHostsRequest.page_size], use the [next_page_token] as the value for the [ListClusterHostsRequest.page_token] query parameter in the next list request.
+	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListClusterHostsResponse) Reset() {
+	*x = ListClusterHostsResponse{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListClusterHostsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListClusterHostsResponse) ProtoMessage() {}
+
+func (x *ListClusterHostsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListClusterHostsResponse.ProtoReflect.Descriptor instead.
+func (*ListClusterHostsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *ListClusterHostsResponse) GetHosts() []*Host {
+	if x != nil {
+		return x.Hosts
+	}
+	return nil
+}
+
+func (x *ListClusterHostsResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
+// Configuration of master subcluster
+type MasterSubclusterConfigSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resources allocated to Greenplum® master subcluster hosts.
+	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MasterSubclusterConfigSpec) Reset() {
+	*x = MasterSubclusterConfigSpec{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterSubclusterConfigSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterSubclusterConfigSpec) ProtoMessage() {}
+
+func (x *MasterSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterSubclusterConfigSpec.ProtoReflect.Descriptor instead.
+func (*MasterSubclusterConfigSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *MasterSubclusterConfigSpec) GetResources() *Resources {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+// Configuration of segmet subcluster
+type SegmentSubclusterConfigSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Resources allocated to Greenplum® segment subcluster hosts.
+	Resources     *Resources `protobuf:"bytes,1,opt,name=resources,proto3" json:"resources,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SegmentSubclusterConfigSpec) Reset() {
+	*x = SegmentSubclusterConfigSpec{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SegmentSubclusterConfigSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SegmentSubclusterConfigSpec) ProtoMessage() {}
+
+func (x *SegmentSubclusterConfigSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SegmentSubclusterConfigSpec.ProtoReflect.Descriptor instead.
+func (*SegmentSubclusterConfigSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *SegmentSubclusterConfigSpec) GetResources() *Resources {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+// Configuration of greenplum and odyssey
+type ConfigSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: use dbms_config instead
+	//
+	// Types that are valid to be assigned to GreenplumConfig:
+	//
+	//	*ConfigSpec_GreenplumConfig_6
+	GreenplumConfig isConfigSpec_GreenplumConfig `protobuf_oneof:"greenplum_config"`
+	// Configuration set for the Greenplum & Cloudberry.
+	DbmsConfig *DBMSConfig `protobuf:"bytes,10,opt,name=dbms_config,json=dbmsConfig,proto3" json:"dbms_config,omitempty"`
+	// Odyssey® pool settings.
+	Pool *ConnectionPoolerConfig `protobuf:"bytes,3,opt,name=pool,proto3" json:"pool,omitempty"`
+	// Managed Greenplum® background tasks configuration.
+	BackgroundActivities *BackgroundActivitiesConfig `protobuf:"bytes,6,opt,name=background_activities,json=backgroundActivities,proto3" json:"background_activities,omitempty"`
+	// PXF configuration.
+	PxfConfig     *PXFConfig `protobuf:"bytes,8,opt,name=pxf_config,json=pxfConfig,proto3" json:"pxf_config,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigSpec) Reset() {
+	*x = ConfigSpec{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigSpec) ProtoMessage() {}
+
+func (x *ConfigSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigSpec.ProtoReflect.Descriptor instead.
+func (*ConfigSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ConfigSpec) GetGreenplumConfig() isConfigSpec_GreenplumConfig {
+	if x != nil {
+		return x.GreenplumConfig
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
+func (x *ConfigSpec) GetGreenplumConfig_6() *GreenplumConfig6 {
+	if x != nil {
+		if x, ok := x.GreenplumConfig.(*ConfigSpec_GreenplumConfig_6); ok {
+			return x.GreenplumConfig_6
+		}
+	}
+	return nil
+}
+
+func (x *ConfigSpec) GetDbmsConfig() *DBMSConfig {
+	if x != nil {
+		return x.DbmsConfig
+	}
+	return nil
+}
+
+func (x *ConfigSpec) GetPool() *ConnectionPoolerConfig {
+	if x != nil {
+		return x.Pool
+	}
+	return nil
+}
+
+func (x *ConfigSpec) GetBackgroundActivities() *BackgroundActivitiesConfig {
+	if x != nil {
+		return x.BackgroundActivities
+	}
+	return nil
+}
+
+func (x *ConfigSpec) GetPxfConfig() *PXFConfig {
+	if x != nil {
+		return x.PxfConfig
+	}
+	return nil
+}
+
+type isConfigSpec_GreenplumConfig interface {
+	isConfigSpec_GreenplumConfig()
+}
+
+type ConfigSpec_GreenplumConfig_6 struct {
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster_service.proto.
+	GreenplumConfig_6 *GreenplumConfig6 `protobuf:"bytes,9,opt,name=greenplum_config_6,json=greenplumConfig_6,proto3,oneof"`
+}
+
+func (*ConfigSpec_GreenplumConfig_6) isConfigSpec_GreenplumConfig() {}
+
+type ListClusterBackupsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	// To get the Greenplum® cluster ID use a [ClusterService.List] request.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// The maximum number of results per page to return.
+	// If the number of available results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set [page_token] to the [ListClusterBackupsResponse.next_page_token] returned by the previous list request.
+	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListClusterBackupsRequest) Reset() {
+	*x = ListClusterBackupsRequest{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListClusterBackupsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListClusterBackupsRequest) ProtoMessage() {}
+
+func (x *ListClusterBackupsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListClusterBackupsRequest.ProtoReflect.Descriptor instead.
+func (*ListClusterBackupsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *ListClusterBackupsRequest) GetClusterId() string {
+	if x != nil {
+		return x.ClusterId
+	}
+	return ""
+}
+
+func (x *ListClusterBackupsRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListClusterBackupsRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
 type ListClusterBackupsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of Greenplum® backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value for the [ListClusterBackupsRequest.page_token] query parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2610,7 +2576,8 @@ func (x *BackupClusterRequest) GetClusterId() string {
 type BackupClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Greenplum cluster to back up.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// ID of the backup.
 	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2663,7 +2630,6 @@ func (x *BackupClusterMetadata) GetBackupId() string {
 type RestoreClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backup to create a cluster from.
-	//
 	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	// Timestamp of the moment to which the Greenplum cluster should be restored.
@@ -2978,12 +2944,12 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x82\x01\n" +
 	"\x14ListClustersResponse\x12B\n" +
 	"\bclusters\x18\x01 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc9\f\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd9\f\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x94\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2?.yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12Z\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9c\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2?.yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12Z\n" +
 	"\venvironment\x18\x05 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12F\n" +
 	"\x06config\x18\x06 \x01(\v2..yandex.cloud.mdb.greenplum.v1.GreenplumConfigR\x06config\x12^\n" +
 	"\rmaster_config\x18\a \x01(\v29.yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpecR\fmasterConfig\x12a\n" +
@@ -2991,8 +2957,8 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x11master_host_count\x18\t \x01(\x03R\x0fmasterHostCount\x12&\n" +
 	"\x0fsegment_in_host\x18\n" +
 	" \x01(\x03R\rsegmentInHost\x12,\n" +
-	"\x12segment_host_count\x18\v \x01(\x03R\x10segmentHostCount\x12!\n" +
-	"\tuser_name\x18\f \x01(\tB\x04\xe8\xc71\x01R\buserName\x122\n" +
+	"\x12segment_host_count\x18\v \x01(\x03R\x10segmentHostCount\x12)\n" +
+	"\tuser_name\x18\f \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x041-32R\buserName\x122\n" +
 	"\ruser_password\x18\r \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\fuserPassword\x12+\n" +
 	"\n" +
 	"network_id\x18\x0e \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tnetworkId\x12,\n" +
@@ -3009,33 +2975,22 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\alogging\x18\x19 \x01(\v2,.yandex.cloud.mdb.greenplum.v1.LoggingConfigR\alogging\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x12\x10\x13\"\xf4\x03\n" +
-	"\n" +
-	"ConfigSpec\x12d\n" +
-	"\x12greenplum_config_6\x18\t \x01(\v2/.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6B\x02\x18\x01H\x00R\x11greenplumConfig_6\x12J\n" +
-	"\vdbms_config\x18\n" +
-	" \x01(\v2).yandex.cloud.mdb.greenplum.v1.DBMSConfigR\n" +
-	"dbmsConfig\x12I\n" +
-	"\x04pool\x18\x03 \x01(\v25.yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigR\x04pool\x12n\n" +
-	"\x15background_activities\x18\x06 \x01(\v29.yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfigR\x14backgroundActivities\x12G\n" +
-	"\n" +
-	"pxf_config\x18\b \x01(\v2(.yandex.cloud.mdb.greenplum.v1.PXFConfigR\tpxfConfigB\x12\n" +
-	"\x10greenplum_configJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\a\x10\b\"6\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x12\x10\x13\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xf7\t\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xfb\t\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x94\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2?.yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12.\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9c\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2?.yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12.\n" +
 	"\x04name\x18\x05 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12F\n" +
 	"\x06config\x18\x06 \x01(\v2..yandex.cloud.mdb.greenplum.v1.GreenplumConfigR\x06config\x12^\n" +
 	"\rmaster_config\x18\a \x01(\v29.yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpecR\fmasterConfig\x12a\n" +
-	"\x0esegment_config\x18\b \x01(\v2:.yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpecR\rsegmentConfig\x122\n" +
-	"\ruser_password\x18\r \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\fuserPassword\x12'\n" +
+	"\x0esegment_config\x18\b \x01(\v2:.yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpecR\rsegmentConfig\x12.\n" +
+	"\ruser_password\x18\r \x01(\tB\t\x8a\xc81\x050-128R\fuserPassword\x12'\n" +
 	"\n" +
 	"network_id\x18\x0e \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12_\n" +
 	"\x12maintenance_window\x18\x0f \x01(\v20.yandex.cloud.mdb.greenplum.v1.MaintenanceWindowR\x11maintenanceWindow\x12,\n" +
@@ -3048,7 +3003,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\alogging\x18\x16 \x01(\v2,.yandex.cloud.mdb.greenplum.v1.LoggingConfigR\alogging\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x10\x10\x11J\x04\b\t\x10\r\"6\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\rJ\x04\b\x10\x10\x11\"6\n" +
 	"\x15UpdateClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\"8\n" +
@@ -3104,7 +3059,53 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x1dRescheduleMaintenanceMetadata\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12E\n" +
-	"\rdelayed_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\fdelayedUntil\"\x9e\x01\n" +
+	"\rdelayed_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\fdelayedUntil\"\xd2\x01\n" +
+	"\tLogRecord\x128\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12O\n" +
+	"\amessage\x18\x02 \x03(\v25.yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
+	"\fMessageEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcf\x04\n" +
+	"\x16ListClusterLogsRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
+	"\rcolumn_filter\x18\x02 \x03(\tR\fcolumnFilter\x12d\n" +
+	"\fservice_type\x18\x03 \x01(\x0e2A.yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceTypeR\vserviceType\x127\n" +
+	"\tfrom_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
+	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12'\n" +
+	"\tpage_size\x18\x06 \x01(\x03B\n" +
+	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\n" +
+	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
+	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
+	"\x06filter\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"c\n" +
+	"\vServiceType\x12\x1c\n" +
+	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tGREENPLUM\x10\x01\x12\x14\n" +
+	"\x10GREENPLUM_POOLER\x10\x02\x12\x11\n" +
+	"\rGREENPLUM_PXF\x10\x03\"\x7f\n" +
+	"\x17ListClusterLogsResponse\x12<\n" +
+	"\x04logs\x18\x01 \x03(\v2(.yandex.cloud.mdb.greenplum.v1.LogRecordR\x04logs\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x7f\n" +
+	"\x0fStreamLogRecord\x12@\n" +
+	"\x06record\x18\x01 \x01(\v2(.yandex.cloud.mdb.greenplum.v1.LogRecordR\x06record\x12*\n" +
+	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xf9\x03\n" +
+	"\x18StreamClusterLogsRequest\x12+\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
+	"\rcolumn_filter\x18\x02 \x03(\tR\fcolumnFilter\x12f\n" +
+	"\fservice_type\x18\x03 \x01(\x0e2C.yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceTypeR\vserviceType\x127\n" +
+	"\tfrom_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
+	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12,\n" +
+	"\frecord_token\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\vrecordToken\x12\"\n" +
+	"\x06filter\x18\a \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"c\n" +
+	"\vServiceType\x12\x1c\n" +
+	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tGREENPLUM\x10\x01\x12\x14\n" +
+	"\x10GREENPLUM_POOLER\x10\x02\x12\x11\n" +
+	"\rGREENPLUM_PXF\x10\x03\"\x9e\x01\n" +
 	"\x1cListClusterOperationsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -3130,60 +3131,25 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x1aMasterSubclusterConfigSpec\x12F\n" +
 	"\tresources\x18\x01 \x01(\v2(.yandex.cloud.mdb.greenplum.v1.ResourcesR\tresources\"e\n" +
 	"\x1bSegmentSubclusterConfigSpec\x12F\n" +
-	"\tresources\x18\x01 \x01(\v2(.yandex.cloud.mdb.greenplum.v1.ResourcesR\tresources\"\x7f\n" +
-	"\x17ListClusterLogsResponse\x12<\n" +
-	"\x04logs\x18\x01 \x03(\v2(.yandex.cloud.mdb.greenplum.v1.LogRecordR\x04logs\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd2\x01\n" +
-	"\tLogRecord\x128\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12O\n" +
-	"\amessage\x18\x02 \x03(\v25.yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
-	"\fMessageEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcf\x04\n" +
-	"\x16ListClusterLogsRequest\x12+\n" +
+	"\tresources\x18\x01 \x01(\v2(.yandex.cloud.mdb.greenplum.v1.ResourcesR\tresources\"\xe8\x03\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
-	"\rcolumn_filter\x18\x02 \x03(\tR\fcolumnFilter\x12d\n" +
-	"\fservice_type\x18\x03 \x01(\x0e2A.yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceTypeR\vserviceType\x127\n" +
-	"\tfrom_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
-	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12'\n" +
-	"\tpage_size\x18\x06 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"ConfigSpec\x12d\n" +
+	"\x12greenplum_config_6\x18\t \x01(\v2/.yandex.cloud.mdb.greenplum.v1.GreenplumConfig6B\x02\x18\x01H\x00R\x11greenplumConfig_6\x12J\n" +
+	"\vdbms_config\x18\n" +
+	" \x01(\v2).yandex.cloud.mdb.greenplum.v1.DBMSConfigR\n" +
+	"dbmsConfig\x12I\n" +
+	"\x04pool\x18\x03 \x01(\v25.yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigR\x04pool\x12n\n" +
+	"\x15background_activities\x18\x06 \x01(\v29.yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfigR\x14backgroundActivities\x12G\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
-	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
-	"\x06filter\x18\t \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"c\n" +
-	"\vServiceType\x12\x1c\n" +
-	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
-	"\tGREENPLUM\x10\x01\x12\x14\n" +
-	"\x10GREENPLUM_POOLER\x10\x02\x12\x11\n" +
-	"\rGREENPLUM_PXF\x10\x03\"\x9b\x01\n" +
+	"pxf_config\x18\b \x01(\v2(.yandex.cloud.mdb.greenplum.v1.PXFConfigR\tpxfConfigB\x12\n" +
+	"\x10greenplum_configJ\x04\b\x01\x10\x03J\x04\b\x04\x10\x06J\x04\b\a\x10\b\"\x9b\x01\n" +
 	"\x19ListClusterBackupsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x7f\n" +
-	"\x0fStreamLogRecord\x12@\n" +
-	"\x06record\x18\x01 \x01(\v2(.yandex.cloud.mdb.greenplum.v1.LogRecordR\x06record\x12*\n" +
-	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xf9\x03\n" +
-	"\x18StreamClusterLogsRequest\x12+\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
-	"\rcolumn_filter\x18\x02 \x03(\tR\fcolumnFilter\x12f\n" +
-	"\fservice_type\x18\x03 \x01(\x0e2C.yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceTypeR\vserviceType\x127\n" +
-	"\tfrom_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
-	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12,\n" +
-	"\frecord_token\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\vrecordToken\x12\"\n" +
-	"\x06filter\x18\a \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"c\n" +
-	"\vServiceType\x12\x1c\n" +
-	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
-	"\tGREENPLUM\x10\x01\x12\x14\n" +
-	"\x10GREENPLUM_POOLER\x10\x02\x12\x11\n" +
-	"\rGREENPLUM_PXF\x10\x03\"\x85\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x85\x01\n" +
 	"\x1aListClusterBackupsResponse\x12?\n" +
 	"\abackups\x18\x01 \x03(\v2%.yandex.cloud.mdb.greenplum.v1.BackupR\abackups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"C\n" +
@@ -3193,14 +3159,14 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xc8\v\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xd0\v\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
 	"\x04time\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x03 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x95\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2@.yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x04<=63R\x06labels\x12Z\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9d\x01\n" +
+	"\x06labels\x18\x05 \x03(\v2@.yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12Z\n" +
 	"\venvironment\x18\x06 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12M\n" +
 	"\x06config\x18\a \x01(\v25.yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfigR\x06config\x12S\n" +
 	"\x10master_resources\x18\b \x01(\v2(.yandex.cloud.mdb.greenplum.v1.ResourcesR\x0fmasterResources\x12U\n" +
@@ -3247,13 +3213,13 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x04Move\x121.yandex.cloud.mdb.greenplum.v1.MoveClusterRequest\x1a!.yandex.cloud.operation.Operation\"]\xb2\xd2*\x1e\n" +
 	"\x13MoveClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x025:\x01*\"0/managed-greenplum/v1/clusters/{cluster_id}:move\x12\xf1\x01\n" +
 	"\x15RescheduleMaintenance\x12;.yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"x\xb2\xd2*(\n" +
-	"\x1dRescheduleMaintenanceMetadata\x12\aCluster\x82\xd3\xe4\x93\x02F:\x01*\"A/managed-greenplum/v1/clusters/{cluster_id}:rescheduleMaintenance\x12\xcb\x01\n" +
-	"\x0eListOperations\x12;.yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest\x1a<.yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse\">\x82\xd3\xe4\x93\x028\x126/managed-greenplum/v1/clusters/{cluster_id}/operations\x12\xc4\x01\n" +
-	"\x0fListMasterHosts\x126.yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest\x1a7.yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse\"@\x82\xd3\xe4\x93\x02:\x128/managed-greenplum/v1/clusters/{cluster_id}/master-hosts\x12\xc6\x01\n" +
-	"\x10ListSegmentHosts\x126.yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest\x1a7.yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse\"A\x82\xd3\xe4\x93\x02;\x129/managed-greenplum/v1/clusters/{cluster_id}/segment-hosts\x12\xb3\x01\n" +
+	"\x1dRescheduleMaintenanceMetadata\x12\aCluster\x82\xd3\xe4\x93\x02F:\x01*\"A/managed-greenplum/v1/clusters/{cluster_id}:rescheduleMaintenance\x12\xb3\x01\n" +
 	"\bListLogs\x125.yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest\x1a6.yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse\"8\x82\xd3\xe4\x93\x022\x120/managed-greenplum/v1/clusters/{cluster_id}:logs\x12\xb8\x01\n" +
 	"\n" +
-	"StreamLogs\x127.yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest\x1a..yandex.cloud.mdb.greenplum.v1.StreamLogRecord\"?\x82\xd3\xe4\x93\x029\x127/managed-greenplum/v1/clusters/{cluster_id}:stream_logs0\x01\x12\xbf\x01\n" +
+	"StreamLogs\x127.yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest\x1a..yandex.cloud.mdb.greenplum.v1.StreamLogRecord\"?\x82\xd3\xe4\x93\x029\x127/managed-greenplum/v1/clusters/{cluster_id}:stream_logs0\x01\x12\xcb\x01\n" +
+	"\x0eListOperations\x12;.yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest\x1a<.yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse\">\x82\xd3\xe4\x93\x028\x126/managed-greenplum/v1/clusters/{cluster_id}/operations\x12\xc4\x01\n" +
+	"\x0fListMasterHosts\x126.yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest\x1a7.yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse\"@\x82\xd3\xe4\x93\x02:\x128/managed-greenplum/v1/clusters/{cluster_id}/master-hosts\x12\xc6\x01\n" +
+	"\x10ListSegmentHosts\x126.yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest\x1a7.yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse\"A\x82\xd3\xe4\x93\x02;\x129/managed-greenplum/v1/clusters/{cluster_id}/segment-hosts\x12\xbf\x01\n" +
 	"\vListBackups\x128.yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest\x1a9.yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse\";\x82\xd3\xe4\x93\x025\x123/managed-greenplum/v1/clusters/{cluster_id}/backups\x12\xc0\x01\n" +
 	"\x06Backup\x123.yandex.cloud.mdb.greenplum.v1.BackupClusterRequest\x1a!.yandex.cloud.operation.Operation\"^\xb2\xd2* \n" +
 	"\x15BackupClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x024\"2/managed-greenplum/v1/clusters/{cluster_id}:backup\x12\xba\x01\n" +
@@ -3288,34 +3254,34 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_goTypes = []any{
 	(*ListClustersRequest)(nil),                      // 4: yandex.cloud.mdb.greenplum.v1.ListClustersRequest
 	(*ListClustersResponse)(nil),                     // 5: yandex.cloud.mdb.greenplum.v1.ListClustersResponse
 	(*CreateClusterRequest)(nil),                     // 6: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest
-	(*ConfigSpec)(nil),                               // 7: yandex.cloud.mdb.greenplum.v1.ConfigSpec
-	(*CreateClusterMetadata)(nil),                    // 8: yandex.cloud.mdb.greenplum.v1.CreateClusterMetadata
-	(*UpdateClusterRequest)(nil),                     // 9: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
-	(*UpdateClusterMetadata)(nil),                    // 10: yandex.cloud.mdb.greenplum.v1.UpdateClusterMetadata
-	(*AddClusterHostsMetadata)(nil),                  // 11: yandex.cloud.mdb.greenplum.v1.AddClusterHostsMetadata
-	(*ExpandRequest)(nil),                            // 12: yandex.cloud.mdb.greenplum.v1.ExpandRequest
-	(*DeleteClusterRequest)(nil),                     // 13: yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
-	(*DeleteClusterMetadata)(nil),                    // 14: yandex.cloud.mdb.greenplum.v1.DeleteClusterMetadata
-	(*StartClusterRequest)(nil),                      // 15: yandex.cloud.mdb.greenplum.v1.StartClusterRequest
-	(*StartClusterMetadata)(nil),                     // 16: yandex.cloud.mdb.greenplum.v1.StartClusterMetadata
-	(*StopClusterRequest)(nil),                       // 17: yandex.cloud.mdb.greenplum.v1.StopClusterRequest
-	(*StopClusterMetadata)(nil),                      // 18: yandex.cloud.mdb.greenplum.v1.StopClusterMetadata
-	(*MoveClusterRequest)(nil),                       // 19: yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
-	(*MoveClusterMetadata)(nil),                      // 20: yandex.cloud.mdb.greenplum.v1.MoveClusterMetadata
-	(*RescheduleMaintenanceRequest)(nil),             // 21: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),            // 22: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata
-	(*ListClusterOperationsRequest)(nil),             // 23: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
-	(*ListClusterOperationsResponse)(nil),            // 24: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
-	(*ListClusterHostsRequest)(nil),                  // 25: yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
-	(*ListClusterHostsResponse)(nil),                 // 26: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
-	(*MasterSubclusterConfigSpec)(nil),               // 27: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
-	(*SegmentSubclusterConfigSpec)(nil),              // 28: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
-	(*ListClusterLogsResponse)(nil),                  // 29: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
-	(*LogRecord)(nil),                                // 30: yandex.cloud.mdb.greenplum.v1.LogRecord
-	(*ListClusterLogsRequest)(nil),                   // 31: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
-	(*ListClusterBackupsRequest)(nil),                // 32: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
-	(*StreamLogRecord)(nil),                          // 33: yandex.cloud.mdb.greenplum.v1.StreamLogRecord
-	(*StreamClusterLogsRequest)(nil),                 // 34: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
+	(*CreateClusterMetadata)(nil),                    // 7: yandex.cloud.mdb.greenplum.v1.CreateClusterMetadata
+	(*UpdateClusterRequest)(nil),                     // 8: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
+	(*UpdateClusterMetadata)(nil),                    // 9: yandex.cloud.mdb.greenplum.v1.UpdateClusterMetadata
+	(*AddClusterHostsMetadata)(nil),                  // 10: yandex.cloud.mdb.greenplum.v1.AddClusterHostsMetadata
+	(*ExpandRequest)(nil),                            // 11: yandex.cloud.mdb.greenplum.v1.ExpandRequest
+	(*DeleteClusterRequest)(nil),                     // 12: yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
+	(*DeleteClusterMetadata)(nil),                    // 13: yandex.cloud.mdb.greenplum.v1.DeleteClusterMetadata
+	(*StartClusterRequest)(nil),                      // 14: yandex.cloud.mdb.greenplum.v1.StartClusterRequest
+	(*StartClusterMetadata)(nil),                     // 15: yandex.cloud.mdb.greenplum.v1.StartClusterMetadata
+	(*StopClusterRequest)(nil),                       // 16: yandex.cloud.mdb.greenplum.v1.StopClusterRequest
+	(*StopClusterMetadata)(nil),                      // 17: yandex.cloud.mdb.greenplum.v1.StopClusterMetadata
+	(*MoveClusterRequest)(nil),                       // 18: yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
+	(*MoveClusterMetadata)(nil),                      // 19: yandex.cloud.mdb.greenplum.v1.MoveClusterMetadata
+	(*RescheduleMaintenanceRequest)(nil),             // 20: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),            // 21: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata
+	(*LogRecord)(nil),                                // 22: yandex.cloud.mdb.greenplum.v1.LogRecord
+	(*ListClusterLogsRequest)(nil),                   // 23: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
+	(*ListClusterLogsResponse)(nil),                  // 24: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
+	(*StreamLogRecord)(nil),                          // 25: yandex.cloud.mdb.greenplum.v1.StreamLogRecord
+	(*StreamClusterLogsRequest)(nil),                 // 26: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
+	(*ListClusterOperationsRequest)(nil),             // 27: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
+	(*ListClusterOperationsResponse)(nil),            // 28: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
+	(*ListClusterHostsRequest)(nil),                  // 29: yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
+	(*ListClusterHostsResponse)(nil),                 // 30: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
+	(*MasterSubclusterConfigSpec)(nil),               // 31: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
+	(*SegmentSubclusterConfigSpec)(nil),              // 32: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
+	(*ConfigSpec)(nil),                               // 33: yandex.cloud.mdb.greenplum.v1.ConfigSpec
+	(*ListClusterBackupsRequest)(nil),                // 34: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
 	(*ListClusterBackupsResponse)(nil),               // 35: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse
 	(*BackupClusterRequest)(nil),                     // 36: yandex.cloud.mdb.greenplum.v1.BackupClusterRequest
 	(*BackupClusterMetadata)(nil),                    // 37: yandex.cloud.mdb.greenplum.v1.BackupClusterMetadata
@@ -3331,16 +3297,16 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_goTypes = []any{
 	(*MaintenanceWindow)(nil),                        // 47: yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
 	(*CloudStorage)(nil),                             // 48: yandex.cloud.mdb.greenplum.v1.CloudStorage
 	(*LoggingConfig)(nil),                            // 49: yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	(*GreenplumConfig6)(nil),                         // 50: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	(*DBMSConfig)(nil),                               // 51: yandex.cloud.mdb.greenplum.v1.DBMSConfig
-	(*ConnectionPoolerConfig)(nil),                   // 52: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	(*BackgroundActivitiesConfig)(nil),               // 53: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	(*PXFConfig)(nil),                                // 54: yandex.cloud.mdb.greenplum.v1.PXFConfig
-	(*fieldmaskpb.FieldMask)(nil),                    // 55: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                    // 56: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                      // 57: yandex.cloud.operation.Operation
-	(*Host)(nil),                                     // 58: yandex.cloud.mdb.greenplum.v1.Host
-	(*Resources)(nil),                                // 59: yandex.cloud.mdb.greenplum.v1.Resources
+	(*fieldmaskpb.FieldMask)(nil),                    // 50: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                    // 51: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                      // 52: yandex.cloud.operation.Operation
+	(*Host)(nil),                                     // 53: yandex.cloud.mdb.greenplum.v1.Host
+	(*Resources)(nil),                                // 54: yandex.cloud.mdb.greenplum.v1.Resources
+	(*GreenplumConfig6)(nil),                         // 55: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	(*DBMSConfig)(nil),                               // 56: yandex.cloud.mdb.greenplum.v1.DBMSConfig
+	(*ConnectionPoolerConfig)(nil),                   // 57: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	(*BackgroundActivitiesConfig)(nil),               // 58: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	(*PXFConfig)(nil),                                // 59: yandex.cloud.mdb.greenplum.v1.PXFConfig
 	(*Backup)(nil),                                   // 60: yandex.cloud.mdb.greenplum.v1.Backup
 	(*GreenplumRestoreConfig)(nil),                   // 61: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
 	(*access.ListAccessBindingsRequest)(nil),         // 62: yandex.cloud.access.ListAccessBindingsRequest
@@ -3353,67 +3319,67 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_depIdxs = []int32{
 	40, // 1: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.LabelsEntry
 	45, // 2: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
 	46, // 3: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
-	27, // 4: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
-	28, // 5: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
+	31, // 4: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
+	32, // 5: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
 	47, // 6: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	7,  // 7: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
+	33, // 7: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
 	48, // 8: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
 	49, // 9: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	50, // 10: yandex.cloud.mdb.greenplum.v1.ConfigSpec.greenplum_config_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	51, // 11: yandex.cloud.mdb.greenplum.v1.ConfigSpec.dbms_config:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfig
-	52, // 12: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	53, // 13: yandex.cloud.mdb.greenplum.v1.ConfigSpec.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	54, // 14: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfig
-	55, // 15: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	41, // 16: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntry
-	46, // 17: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
-	27, // 18: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
-	28, // 19: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
-	47, // 20: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	7,  // 21: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
-	48, // 22: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
-	49, // 23: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	0,  // 24: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.RescheduleType
-	56, // 25: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	56, // 26: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	57, // 27: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	58, // 28: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.greenplum.v1.Host
-	59, // 29: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	59, // 30: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	30, // 31: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
-	56, // 32: yandex.cloud.mdb.greenplum.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	42, // 33: yandex.cloud.mdb.greenplum.v1.LogRecord.message:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntry
-	1,  // 34: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceType
-	56, // 35: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	56, // 36: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	30, // 37: yandex.cloud.mdb.greenplum.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
-	2,  // 38: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceType
-	56, // 39: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	56, // 40: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	50, // 10: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	41, // 11: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntry
+	46, // 12: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
+	31, // 13: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
+	32, // 14: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
+	47, // 15: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
+	33, // 16: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
+	48, // 17: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
+	49, // 18: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
+	0,  // 19: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.RescheduleType
+	51, // 20: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	51, // 21: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	51, // 22: yandex.cloud.mdb.greenplum.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	42, // 23: yandex.cloud.mdb.greenplum.v1.LogRecord.message:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntry
+	1,  // 24: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceType
+	51, // 25: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	51, // 26: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	22, // 27: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
+	22, // 28: yandex.cloud.mdb.greenplum.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
+	2,  // 29: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceType
+	51, // 30: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	51, // 31: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	52, // 32: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	53, // 33: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.greenplum.v1.Host
+	54, // 34: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	54, // 35: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	55, // 36: yandex.cloud.mdb.greenplum.v1.ConfigSpec.greenplum_config_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	56, // 37: yandex.cloud.mdb.greenplum.v1.ConfigSpec.dbms_config:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfig
+	57, // 38: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	58, // 39: yandex.cloud.mdb.greenplum.v1.ConfigSpec.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	59, // 40: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfig
 	60, // 41: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.greenplum.v1.Backup
-	56, // 42: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
+	51, // 42: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
 	43, // 43: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.LabelsEntry
 	45, // 44: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
 	61, // 45: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
-	59, // 46: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.master_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	59, // 47: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.segment_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	54, // 46: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.master_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	54, // 47: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.segment_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
 	47, // 48: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
 	3,  // 49: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.greenplum.v1.GetClusterRequest
 	4,  // 50: yandex.cloud.mdb.greenplum.v1.ClusterService.List:input_type -> yandex.cloud.mdb.greenplum.v1.ListClustersRequest
 	6,  // 51: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.greenplum.v1.CreateClusterRequest
-	9,  // 52: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
-	12, // 53: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:input_type -> yandex.cloud.mdb.greenplum.v1.ExpandRequest
-	13, // 54: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
-	15, // 55: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.greenplum.v1.StartClusterRequest
-	17, // 56: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.greenplum.v1.StopClusterRequest
-	19, // 57: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
-	21, // 58: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
-	23, // 59: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
-	25, // 60: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
-	25, // 61: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
-	31, // 62: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
-	34, // 63: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
-	32, // 64: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
+	8,  // 52: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
+	11, // 53: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:input_type -> yandex.cloud.mdb.greenplum.v1.ExpandRequest
+	12, // 54: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
+	14, // 55: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.greenplum.v1.StartClusterRequest
+	16, // 56: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.greenplum.v1.StopClusterRequest
+	18, // 57: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
+	20, // 58: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
+	23, // 59: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
+	26, // 60: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
+	27, // 61: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
+	29, // 62: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
+	29, // 63: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
+	34, // 64: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
 	36, // 65: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.greenplum.v1.BackupClusterRequest
 	38, // 66: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest
 	62, // 67: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
@@ -3421,25 +3387,25 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_depIdxs = []int32{
 	64, // 69: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
 	44, // 70: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.greenplum.v1.Cluster
 	5,  // 71: yandex.cloud.mdb.greenplum.v1.ClusterService.List:output_type -> yandex.cloud.mdb.greenplum.v1.ListClustersResponse
-	57, // 72: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	57, // 73: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	57, // 74: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:output_type -> yandex.cloud.operation.Operation
-	57, // 75: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	57, // 76: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	57, // 77: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	57, // 78: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	57, // 79: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	24, // 80: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
-	26, // 81: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
-	26, // 82: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
-	29, // 83: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
-	33, // 84: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.greenplum.v1.StreamLogRecord
+	52, // 72: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	52, // 73: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	52, // 74: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:output_type -> yandex.cloud.operation.Operation
+	52, // 75: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	52, // 76: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	52, // 77: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	52, // 78: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	52, // 79: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	24, // 80: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
+	25, // 81: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.greenplum.v1.StreamLogRecord
+	28, // 82: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
+	30, // 83: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
+	30, // 84: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
 	35, // 85: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse
-	57, // 86: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	57, // 87: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	52, // 86: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	52, // 87: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
 	65, // 88: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	57, // 89: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	57, // 90: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	52, // 89: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	52, // 90: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
 	70, // [70:91] is the sub-list for method output_type
 	49, // [49:70] is the sub-list for method input_type
 	49, // [49:49] is the sub-list for extension type_name
@@ -3458,7 +3424,7 @@ func file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_init() {
 	file_yandex_cloud_mdb_greenplum_v1_host_proto_init()
 	file_yandex_cloud_mdb_greenplum_v1_maintenance_proto_init()
 	file_yandex_cloud_mdb_greenplum_v1_pxf_proto_init()
-	file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[4].OneofWrappers = []any{
+	file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_msgTypes[30].OneofWrappers = []any{
 		(*ConfigSpec_GreenplumConfig_6)(nil),
 	}
 	type x struct{}

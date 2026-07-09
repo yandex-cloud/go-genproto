@@ -31,14 +31,6 @@ func (m *LoadBalancer) SetStatus(v LoadBalancer_Status) {
 	m.Status = v
 }
 
-func (m *LoadBalancer) SetRegionId(v string) {
-	m.RegionId = v
-}
-
-func (m *LoadBalancer) SetNetworkId(v string) {
-	m.NetworkId = v
-}
-
 func (m *LoadBalancer) SetListeners(v []*Listener) {
 	m.Listeners = v
 }
@@ -47,8 +39,16 @@ func (m *LoadBalancer) SetAllocationPolicy(v *AllocationPolicy) {
 	m.AllocationPolicy = v
 }
 
+func (m *LoadBalancer) SetNetworkId(v string) {
+	m.NetworkId = v
+}
+
 func (m *LoadBalancer) SetLogGroupId(v string) {
 	m.LogGroupId = v
+}
+
+func (m *LoadBalancer) SetRegionId(v string) {
+	m.RegionId = v
 }
 
 func (m *LoadBalancer) SetSecurityGroupIds(v []string) {
@@ -69,6 +69,30 @@ func (m *LoadBalancer) SetLogOptions(v *LogOptions) {
 
 func (m *LoadBalancer) SetAllowZonalShift(v bool) {
 	m.AllowZonalShift = v
+}
+
+func (m *Location) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
+func (m *Location) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *Location) SetDisableTraffic(v bool) {
+	m.DisableTraffic = v
+}
+
+func (m *Location) SetZonalShiftActive(v bool) {
+	m.ZonalShiftActive = v
+}
+
+func (m *Location) SetZonalTrafficDisabled(v bool) {
+	m.ZonalTrafficDisabled = v
+}
+
+func (m *AllocationPolicy) SetLocations(v []*Location) {
+	m.Locations = v
 }
 
 type Address_Address = isAddress_Address
@@ -111,30 +135,6 @@ func (m *ExternalIpv6Address) SetAddress(v string) {
 	m.Address = v
 }
 
-func (m *Location) SetZoneId(v string) {
-	m.ZoneId = v
-}
-
-func (m *Location) SetSubnetId(v string) {
-	m.SubnetId = v
-}
-
-func (m *Location) SetDisableTraffic(v bool) {
-	m.DisableTraffic = v
-}
-
-func (m *Location) SetZonalShiftActive(v bool) {
-	m.ZonalShiftActive = v
-}
-
-func (m *Location) SetZonalTrafficDisabled(v bool) {
-	m.ZonalTrafficDisabled = v
-}
-
-func (m *AllocationPolicy) SetLocations(v []*Location) {
-	m.Locations = v
-}
-
 type Listener_Listener = isListener_Listener
 
 func (m *Listener) SetListener(v Listener_Listener) {
@@ -149,6 +149,12 @@ func (m *Listener) SetEndpoints(v []*Endpoint) {
 	m.Endpoints = v
 }
 
+func (m *Listener) SetStream(v *StreamListener) {
+	m.Listener = &Listener_Stream{
+		Stream: v,
+	}
+}
+
 func (m *Listener) SetHttp(v *HttpListener) {
 	m.Listener = &Listener_Http{
 		Http: v,
@@ -158,12 +164,6 @@ func (m *Listener) SetHttp(v *HttpListener) {
 func (m *Listener) SetTls(v *TlsListener) {
 	m.Listener = &Listener_Tls{
 		Tls: v,
-	}
-}
-
-func (m *Listener) SetStream(v *StreamListener) {
-	m.Listener = &Listener_Stream{
-		Stream: v,
 	}
 }
 
@@ -183,28 +183,16 @@ func (m *HttpListener) SetRedirects(v *Redirects) {
 	m.Redirects = v
 }
 
+func (m *StreamListener) SetHandler(v *StreamHandler) {
+	m.Handler = v
+}
+
 func (m *TlsListener) SetDefaultHandler(v *TlsHandler) {
 	m.DefaultHandler = v
 }
 
 func (m *TlsListener) SetSniHandlers(v []*SniMatch) {
 	m.SniHandlers = v
-}
-
-func (m *StreamListener) SetHandler(v *StreamHandler) {
-	m.Handler = v
-}
-
-func (m *Http2Options) SetMaxConcurrentStreams(v int64) {
-	m.MaxConcurrentStreams = v
-}
-
-func (m *StreamHandler) SetBackendGroupId(v string) {
-	m.BackendGroupId = v
-}
-
-func (m *StreamHandler) SetIdleTimeout(v *durationpb.Duration) {
-	m.IdleTimeout = v
 }
 
 type HttpHandler_ProtocolSettings = isHttpHandler_ProtocolSettings
@@ -215,6 +203,10 @@ func (m *HttpHandler) SetProtocolSettings(v HttpHandler_ProtocolSettings) {
 
 func (m *HttpHandler) SetHttpRouterId(v string) {
 	m.HttpRouterId = v
+}
+
+func (m *HttpHandler) SetRewriteRequestId(v bool) {
+	m.RewriteRequestId = v
 }
 
 func (m *HttpHandler) SetHttp2Options(v *Http2Options) {
@@ -229,16 +221,20 @@ func (m *HttpHandler) SetAllowHttp10(v bool) {
 	}
 }
 
-func (m *HttpHandler) SetRewriteRequestId(v bool) {
-	m.RewriteRequestId = v
-}
-
 func (m *HttpHandler) SetPreserveHttp1HeaderCasing(v bool) {
 	m.PreserveHttp1HeaderCasing = v
 }
 
 func (m *Redirects) SetHttpToHttps(v bool) {
 	m.HttpToHttps = v
+}
+
+func (m *StreamHandler) SetBackendGroupId(v string) {
+	m.BackendGroupId = v
+}
+
+func (m *StreamHandler) SetIdleTimeout(v *durationpb.Duration) {
+	m.IdleTimeout = v
 }
 
 func (m *SniMatch) SetName(v string) {
@@ -259,15 +255,15 @@ func (m *TlsHandler) SetHandler(v TlsHandler_Handler) {
 	m.Handler = v
 }
 
-func (m *TlsHandler) SetHttpHandler(v *HttpHandler) {
-	m.Handler = &TlsHandler_HttpHandler{
-		HttpHandler: v,
-	}
-}
-
 func (m *TlsHandler) SetStreamHandler(v *StreamHandler) {
 	m.Handler = &TlsHandler_StreamHandler{
 		StreamHandler: v,
+	}
+}
+
+func (m *TlsHandler) SetHttpHandler(v *HttpHandler) {
+	m.Handler = &TlsHandler_HttpHandler{
+		HttpHandler: v,
 	}
 }
 
@@ -309,4 +305,8 @@ func (m *AutoScalePolicy) SetMinZoneSize(v int64) {
 
 func (m *AutoScalePolicy) SetMaxSize(v int64) {
 	m.MaxSize = v
+}
+
+func (m *Http2Options) SetMaxConcurrentStreams(v int64) {
+	m.MaxConcurrentStreams = v
 }

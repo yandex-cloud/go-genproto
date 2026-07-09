@@ -36,7 +36,6 @@ const (
 // A set of methods for managing virtual hosts of HTTP routers.
 type VirtualHostServiceClient interface {
 	// Returns the specified virtual host.
-	//
 	// To get the list of all virtual hosts of an HTTP router, make a [List] request.
 	Get(ctx context.Context, in *GetVirtualHostRequest, opts ...grpc.CallOption) (*VirtualHost, error)
 	// Lists virtual hosts of the specified HTTP router.
@@ -138,7 +137,6 @@ func (c *virtualHostServiceClient) UpdateRoute(ctx context.Context, in *UpdateRo
 // A set of methods for managing virtual hosts of HTTP routers.
 type VirtualHostServiceServer interface {
 	// Returns the specified virtual host.
-	//
 	// To get the list of all virtual hosts of an HTTP router, make a [List] request.
 	Get(context.Context, *GetVirtualHostRequest) (*VirtualHost, error)
 	// Lists virtual hosts of the specified HTTP router.

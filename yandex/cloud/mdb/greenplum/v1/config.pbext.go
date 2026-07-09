@@ -142,6 +142,46 @@ func (m *GreenplumConfig6) SetGpAddColumnInheritsTableSetting(v *wrapperspb.Bool
 	m.GpAddColumnInheritsTableSetting = v
 }
 
+func (m *GreenplumConfig6) SetLogConnections(v *wrapperspb.BoolValue) {
+	m.LogConnections = v
+}
+
+func (m *GreenplumConfig6) SetLogDisconnections(v *wrapperspb.BoolValue) {
+	m.LogDisconnections = v
+}
+
+func (m *GreenplumConfig6) SetLogHostname(v *wrapperspb.BoolValue) {
+	m.LogHostname = v
+}
+
+func (m *GreenplumConfig6) SetLogErrorVerbosity(v LogErrorVerbosity) {
+	m.LogErrorVerbosity = v
+}
+
+func (m *GreenplumConfig6) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
+	m.LogMinDurationStatement = v
+}
+
+func (m *GreenplumConfig6) SetLogMinMessages(v LogLevelMessage) {
+	m.LogMinMessages = v
+}
+
+func (m *GreenplumConfig6) SetLogStatementStats(v *wrapperspb.BoolValue) {
+	m.LogStatementStats = v
+}
+
+func (m *GreenplumConfig6) SetMasterSharedBuffers(v *wrapperspb.Int64Value) {
+	m.MasterSharedBuffers = v
+}
+
+func (m *GreenplumConfig6) SetSegmentSharedBuffers(v *wrapperspb.Int64Value) {
+	m.SegmentSharedBuffers = v
+}
+
+func (m *GreenplumConfig6) SetMaxLocksPerTransaction(v *wrapperspb.Int64Value) {
+	m.MaxLocksPerTransaction = v
+}
+
 func (m *GreenplumConfig6) SetGpEnableGlobalDeadlockDetector(v *wrapperspb.BoolValue) {
 	m.GpEnableGlobalDeadlockDetector = v
 }
@@ -192,46 +232,6 @@ func (m *GreenplumConfig6) SetGpAutostatsOnChangeThreshold(v *wrapperspb.Int64Va
 
 func (m *GreenplumConfig6) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleValue) {
 	m.GpResourceGroupMemoryLimit = v
-}
-
-func (m *GreenplumConfig6) SetLogConnections(v *wrapperspb.BoolValue) {
-	m.LogConnections = v
-}
-
-func (m *GreenplumConfig6) SetLogDisconnections(v *wrapperspb.BoolValue) {
-	m.LogDisconnections = v
-}
-
-func (m *GreenplumConfig6) SetLogHostname(v *wrapperspb.BoolValue) {
-	m.LogHostname = v
-}
-
-func (m *GreenplumConfig6) SetLogStatementStats(v *wrapperspb.BoolValue) {
-	m.LogStatementStats = v
-}
-
-func (m *GreenplumConfig6) SetLogMinDurationStatement(v *wrapperspb.Int64Value) {
-	m.LogMinDurationStatement = v
-}
-
-func (m *GreenplumConfig6) SetMasterSharedBuffers(v *wrapperspb.Int64Value) {
-	m.MasterSharedBuffers = v
-}
-
-func (m *GreenplumConfig6) SetMaxLocksPerTransaction(v *wrapperspb.Int64Value) {
-	m.MaxLocksPerTransaction = v
-}
-
-func (m *GreenplumConfig6) SetSegmentSharedBuffers(v *wrapperspb.Int64Value) {
-	m.SegmentSharedBuffers = v
-}
-
-func (m *GreenplumConfig6) SetLogErrorVerbosity(v LogErrorVerbosity) {
-	m.LogErrorVerbosity = v
-}
-
-func (m *GreenplumConfig6) SetLogMinMessages(v LogLevelMessage) {
-	m.LogMinMessages = v
 }
 
 func (m *DBMSConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
@@ -378,18 +378,6 @@ func (m *GreenplumConfigSet6) SetDefaultConfig(v *GreenplumConfig6) {
 	m.DefaultConfig = v
 }
 
-func (m *ConnectionPoolerConfigSet) SetEffectiveConfig(v *ConnectionPoolerConfig) {
-	m.EffectiveConfig = v
-}
-
-func (m *ConnectionPoolerConfigSet) SetUserConfig(v *ConnectionPoolerConfig) {
-	m.UserConfig = v
-}
-
-func (m *ConnectionPoolerConfigSet) SetDefaultConfig(v *ConnectionPoolerConfig) {
-	m.DefaultConfig = v
-}
-
 func (m *DBMSConfigSet) SetEffectiveConfig(v *DBMSConfig) {
 	m.EffectiveConfig = v
 }
@@ -399,5 +387,17 @@ func (m *DBMSConfigSet) SetUserConfig(v *DBMSConfig) {
 }
 
 func (m *DBMSConfigSet) SetDefaultConfig(v *DBMSConfig) {
+	m.DefaultConfig = v
+}
+
+func (m *ConnectionPoolerConfigSet) SetEffectiveConfig(v *ConnectionPoolerConfig) {
+	m.EffectiveConfig = v
+}
+
+func (m *ConnectionPoolerConfigSet) SetUserConfig(v *ConnectionPoolerConfig) {
+	m.UserConfig = v
+}
+
+func (m *ConnectionPoolerConfigSet) SetDefaultConfig(v *ConnectionPoolerConfig) {
 	m.DefaultConfig = v
 }

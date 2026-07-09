@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StacklandClusterService_GetStacklandCluster_FullMethodName    = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/GetStacklandCluster"
-	StacklandClusterService_ListStacklandClusters_FullMethodName  = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/ListStacklandClusters"
-	StacklandClusterService_CreateStacklandCluster_FullMethodName = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/CreateStacklandCluster"
-	StacklandClusterService_UpdateStacklandCluster_FullMethodName = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/UpdateStacklandCluster"
-	StacklandClusterService_DeleteStacklandCluster_FullMethodName = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/DeleteStacklandCluster"
+	StacklandClusterService_GetStacklandCluster_FullMethodName        = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/GetStacklandCluster"
+	StacklandClusterService_ListStacklandClusters_FullMethodName      = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/ListStacklandClusters"
+	StacklandClusterService_CreateStacklandCluster_FullMethodName     = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/CreateStacklandCluster"
+	StacklandClusterService_UpdateStacklandCluster_FullMethodName     = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/UpdateStacklandCluster"
+	StacklandClusterService_DeleteStacklandCluster_FullMethodName     = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/DeleteStacklandCluster"
+	StacklandClusterService_GetStacklandClusterConfigs_FullMethodName = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/GetStacklandClusterConfigs"
 )
 
 // StacklandClusterServiceClient is the client API for StacklandClusterService service.
@@ -53,6 +54,10 @@ type StacklandClusterServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteStacklandCluster(ctx context.Context, in *DeleteStacklandClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns a zip archive with the cluster config.yaml and secrets.yaml.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	GetStacklandClusterConfigs(ctx context.Context, in *GetStacklandClusterConfigsRequest, opts ...grpc.CallOption) (*GetStacklandClusterConfigsResponse, error)
 }
 
 type stacklandClusterServiceClient struct {
@@ -113,6 +118,16 @@ func (c *stacklandClusterServiceClient) DeleteStacklandCluster(ctx context.Conte
 	return out, nil
 }
 
+func (c *stacklandClusterServiceClient) GetStacklandClusterConfigs(ctx context.Context, in *GetStacklandClusterConfigsRequest, opts ...grpc.CallOption) (*GetStacklandClusterConfigsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStacklandClusterConfigsResponse)
+	err := c.cc.Invoke(ctx, StacklandClusterService_GetStacklandClusterConfigs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StacklandClusterServiceServer is the server API for StacklandClusterService service.
 // All implementations should embed UnimplementedStacklandClusterServiceServer
 // for forward compatibility.
@@ -139,6 +154,10 @@ type StacklandClusterServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteStacklandCluster(context.Context, *DeleteStacklandClusterRequest) (*operation.Operation, error)
+	// Returns a zip archive with the cluster config.yaml and secrets.yaml.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	GetStacklandClusterConfigs(context.Context, *GetStacklandClusterConfigsRequest) (*GetStacklandClusterConfigsResponse, error)
 }
 
 // UnimplementedStacklandClusterServiceServer should be embedded to have
@@ -162,6 +181,9 @@ func (UnimplementedStacklandClusterServiceServer) UpdateStacklandCluster(context
 }
 func (UnimplementedStacklandClusterServiceServer) DeleteStacklandCluster(context.Context, *DeleteStacklandClusterRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteStacklandCluster not implemented")
+}
+func (UnimplementedStacklandClusterServiceServer) GetStacklandClusterConfigs(context.Context, *GetStacklandClusterConfigsRequest) (*GetStacklandClusterConfigsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStacklandClusterConfigs not implemented")
 }
 func (UnimplementedStacklandClusterServiceServer) testEmbeddedByValue() {}
 
@@ -273,6 +295,24 @@ func _StacklandClusterService_DeleteStacklandCluster_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StacklandClusterService_GetStacklandClusterConfigs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStacklandClusterConfigsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StacklandClusterServiceServer).GetStacklandClusterConfigs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StacklandClusterService_GetStacklandClusterConfigs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StacklandClusterServiceServer).GetStacklandClusterConfigs(ctx, req.(*GetStacklandClusterConfigsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StacklandClusterService_ServiceDesc is the grpc.ServiceDesc for StacklandClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -299,6 +339,10 @@ var StacklandClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteStacklandCluster",
 			Handler:    _StacklandClusterService_DeleteStacklandCluster_Handler,
+		},
+		{
+			MethodName: "GetStacklandClusterConfigs",
+			Handler:    _StacklandClusterService_GetStacklandClusterConfigs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

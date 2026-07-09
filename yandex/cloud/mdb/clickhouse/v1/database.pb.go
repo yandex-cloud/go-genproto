@@ -201,9 +201,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_database_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12F\n" +
-	"\x06engine\x18\x03 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.DatabaseEngineR\x06engine\"\x93\x01\n" +
-	"\fDatabaseSpec\x12;\n" +
-	"\x04name\x18\x01 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x17[a-zA-Z_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12F\n" +
+	"\x06engine\x18\x03 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.DatabaseEngineR\x06engine\"\x96\x01\n" +
+	"\fDatabaseSpec\x12>\n" +
+	"\x04name\x18\x01 \x01(\tB*\xe8\xc71\x01\xf2\xc71\x1a[a-zA-Z0-9_][a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12F\n" +
 	"\x06engine\x18\x02 \x01(\x0e2..yandex.cloud.mdb.clickhouse.v1.DatabaseEngineR\x06engine*m\n" +
 	"\x0eDatabaseEngine\x12\x1f\n" +
 	"\x1bDATABASE_ENGINE_UNSPECIFIED\x10\x00\x12\x1a\n" +

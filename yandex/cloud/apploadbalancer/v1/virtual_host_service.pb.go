@@ -29,11 +29,9 @@ const (
 type GetVirtualHostRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router that the virtual host belongs to.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host to return.
-	//
 	// To get the virtual host name, make a [VirtualHostService.List] request.
 	VirtualHostName string `protobuf:"bytes,2,opt,name=virtual_host_name,json=virtualHostName,proto3" json:"virtual_host_name,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -87,7 +85,6 @@ func (x *GetVirtualHostRequest) GetVirtualHostName() string {
 type ListVirtualHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to list virtual hosts in.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -160,7 +157,6 @@ type ListVirtualHostsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListVirtualHostsRequest.page_size], use `next_page_token` as the value
 	// for the [ListVirtualHostsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -214,28 +210,22 @@ func (x *ListVirtualHostsResponse) GetNextPageToken() string {
 type CreateVirtualHostRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to create a virtual host in.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host. The name must be unique within the HTTP router and cannot be changed after creation.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// List of domains that are attributed to the virtual host.
-	//
 	// The host is selected to process the request received by the load balancer
 	// if the domain specified in the HTTP/1.1 `Host` header or the HTTP/2 `:authority` pseudo-header matches a domain
 	// specified in the host.
-	//
 	// A wildcard asterisk character (`*`) matches 0 or more characters.
-	//
 	// If not specified, all domains are attributed to the host, which is the same as specifying a `*` value.
 	// An HTTP router must not contain more than one virtual host to which all domains are attributed.
 	Authority []string `protobuf:"bytes,3,rep,name=authority,proto3" json:"authority,omitempty"`
 	// Routes of the virtual host.
-	//
 	// A route contains a set of conditions (predicates) that are used by the load balancer to select the route
 	// for the request and an action on the request.
 	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#routes).
-	//
 	// The order of routes matters: the first route whose predicate matches the request is selected.
 	// The most specific routes should be at the top of the list, so that they are not overridden.
 	// For example, if the first HTTP route is configured, via [HttpRoute.match], to match paths prefixed with just `/`,
@@ -415,52 +405,40 @@ func (x *CreateVirtualHostMetadata) GetVirtualHostName() string {
 type UpdateVirtualHostRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to update a virtual host in.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host.
-	//
 	// Used only to refer to the virtual host. The name of a host cannot be changed.
-	//
 	// To get the virtual host name, make a [VirtualHostService.List] request.
 	VirtualHostName string `protobuf:"bytes,2,opt,name=virtual_host_name,json=virtualHostName,proto3" json:"virtual_host_name,omitempty"`
 	// Field mask that specifies which attributes of the virtual host should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New list of domains to attribute to the virtual host.
-	//
 	// The host is selected to process the request received by the load balancer
 	// if the domain specified in the HTTP/1.1 `Host` header or the HTTP/2 `:authority` pseudo-header matches a domain
 	// specified in the host.
-	//
 	// A wildcard asterisk character (`*`) matches 0 or more characters.
-	//
 	// Existing list of domains is completely replaced by the specified list.
-	//
 	// If not specified, all domains are attributed to the host, which is the same as specifying a `*` value.
 	// An HTTP router must not contain more than one virtual host to which all domains are attributed.
 	Authority []string `protobuf:"bytes,4,rep,name=authority,proto3" json:"authority,omitempty"`
 	// New list of routes of the virtual host.
-	//
 	// A route contains a set of conditions (predicates) that are used by the load balancer to select the route
 	// for the request and an action on the request.
 	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#routes).
-	//
 	// The order of routes matters: the first route whose predicate matches the request is selected.
 	// The most specific routes should be at the top of the list, so that they are not overridden.
 	// For example, if the first HTTP route is configured, via [HttpRoute.match], to match paths prefixed with just `/`,
 	// other routes are never matched.
-	//
 	// Existing list of routes is completely replaced by the specified list, so if you just want to remove a route,
 	// make a [VirtualHostService.RemoveRoute] request.
 	Routes []*Route `protobuf:"bytes,6,rep,name=routes,proto3" json:"routes,omitempty"`
 	// New list of modifications that are made to the headers of incoming HTTP requests
 	// before they are forwarded to backends.
-	//
 	// Existing list of modifications is completely replaced by the specified list.
 	ModifyRequestHeaders []*HeaderModification `protobuf:"bytes,7,rep,name=modify_request_headers,json=modifyRequestHeaders,proto3" json:"modify_request_headers,omitempty"`
 	// New list of modifications that are made to the headers of HTTP responses received from backends
 	// before responses are forwarded to clients.
-	//
 	// Existing list of modifications is completely replaced by the specified list.
 	ModifyResponseHeaders []*HeaderModification `protobuf:"bytes,8,rep,name=modify_response_headers,json=modifyResponseHeaders,proto3" json:"modify_response_headers,omitempty"`
 	// New route options for the virtual host.
@@ -639,11 +617,9 @@ func (x *UpdateVirtualHostMetadata) GetVirtualHostName() string {
 type DeleteVirtualHostRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to delete a virtual host from.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host to delete.
-	//
 	// To get the virtual host name, make a [VirtualHostService.List] request.
 	VirtualHostName string `protobuf:"bytes,2,opt,name=virtual_host_name,json=virtualHostName,proto3" json:"virtual_host_name,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -751,15 +727,12 @@ func (x *DeleteVirtualHostMetadata) GetVirtualHostName() string {
 type RemoveRouteRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to delete a route from.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host to delete a route from.
-	//
 	// To get the virtual host name, make a [VirtualHostService.List] request.
 	VirtualHostName string `protobuf:"bytes,2,opt,name=virtual_host_name,json=virtualHostName,proto3" json:"virtual_host_name,omitempty"`
 	// Name of the route to delete.
-	//
 	// To get the route name, make a [VirtualHostService.Get] request.
 	RouteName     string `protobuf:"bytes,3,opt,name=route_name,json=routeName,proto3" json:"route_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -883,15 +856,12 @@ func (x *RemoveRouteMetadata) GetRouteName() string {
 type UpdateRouteRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to update a route in.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Name of the virtual host to update a route in.
-	//
 	// To get the virtual host name, make a [VirtualHostService.List] request.
 	VirtualHostName string `protobuf:"bytes,2,opt,name=virtual_host_name,json=virtualHostName,proto3" json:"virtual_host_name,omitempty"`
 	// Name of the route to update.
-	//
 	// To get the route name, make a [VirtualHostService.Get] request.
 	RouteName string `protobuf:"bytes,3,opt,name=route_name,json=routeName,proto3" json:"route_name,omitempty"`
 	// Field mask that specifies which attributes of the route should be updated.
@@ -1102,10 +1072,10 @@ var File_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto protoreflect
 
 const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/apploadbalancer/v1/virtual_host_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x1a2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x9b\x01\n" +
+	":yandex/cloud/apploadbalancer/v1/virtual_host_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x1a2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x96\x01\n" +
 	"\x15GetVirtualHostRequest\x12*\n" +
-	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12V\n" +
-	"\x11virtual_host_name\x18\x02 \x01(\tB*\xe8\xc71\x01\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x0fvirtualHostName\"\x98\x01\n" +
+	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12Q\n" +
+	"\x11virtual_host_name\x18\x02 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x0fvirtualHostName\"\x98\x01\n" +
 	"\x17ListVirtualHostsRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
@@ -1114,11 +1084,11 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
 	"\x18ListVirtualHostsResponse\x12Q\n" +
 	"\rvirtual_hosts\x18\x01 \x03(\v2,.yandex.cloud.apploadbalancer.v1.VirtualHostR\fvirtualHosts\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe2\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8a\a\n" +
 	"\x18CreateVirtualHostRequest\x12*\n" +
-	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12:\n" +
-	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12\x1c\n" +
-	"\tauthority\x18\x03 \x03(\tR\tauthority\x12>\n" +
+	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x124\n" +
+	"\x04name\x18\x02 \x01(\tB \xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12J\n" +
+	"\tauthority\x18\x03 \x03(\tB,\xf2\xc71\x13[*]?[-.a-z0-9]*[*]?\x82\xc81\x04<=32\x8a\xc81\x051-255\x90\xc81\x01R\tauthority\x12>\n" +
 	"\x06routes\x18\x05 \x03(\v2&.yandex.cloud.apploadbalancer.v1.RouteR\x06routes\x12i\n" +
 	"\x16modify_request_headers\x18\x06 \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x14modifyRequestHeaders\x12k\n" +
 	"\x17modify_response_headers\x18\a \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x15modifyResponseHeaders\x12R\n" +
@@ -1133,13 +1103,13 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x04\x10\x05\"s\n" +
 	"\x19CreateVirtualHostMetadata\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12*\n" +
-	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\"\x95\a\n" +
+	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\"\xc3\a\n" +
 	"\x18UpdateVirtualHostRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x120\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0fvirtualHostName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12\x1c\n" +
-	"\tauthority\x18\x04 \x03(\tR\tauthority\x12>\n" +
+	"updateMask\x12J\n" +
+	"\tauthority\x18\x04 \x03(\tB,\xf2\xc71\x13[*]?[-.a-z0-9]*[*]?\x82\xc81\x04<=32\x8a\xc81\x051-255\x90\xc81\x01R\tauthority\x12>\n" +
 	"\x06routes\x18\x06 \x03(\v2&.yandex.cloud.apploadbalancer.v1.RouteR\x06routes\x12i\n" +
 	"\x16modify_request_headers\x18\a \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x14modifyRequestHeaders\x12k\n" +
 	"\x17modify_response_headers\x18\b \x03(\v23.yandex.cloud.apploadbalancer.v1.HeaderModificationR\x15modifyResponseHeaders\x12R\n" +
@@ -1154,10 +1124,10 @@ const file_yandex_cloud_apploadbalancer_v1_virtual_host_service_proto_rawDesc = 
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\x06\"m\n" +
 	"\x19UpdateVirtualHostMetadata\x12$\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +
-	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\"\x9e\x01\n" +
+	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\"\x99\x01\n" +
 	"\x18DeleteVirtualHostRequest\x12*\n" +
-	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12V\n" +
-	"\x11virtual_host_name\x18\x02 \x01(\tB*\xe8\xc71\x01\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x0fvirtualHostName\"m\n" +
+	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12Q\n" +
+	"\x11virtual_host_name\x18\x02 \x01(\tB%\xe8\xc71\x01\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x0fvirtualHostName\"m\n" +
 	"\x19DeleteVirtualHostMetadata\x12$\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\x12*\n" +
 	"\x11virtual_host_name\x18\x02 \x01(\tR\x0fvirtualHostName\"\x97\x01\n" +

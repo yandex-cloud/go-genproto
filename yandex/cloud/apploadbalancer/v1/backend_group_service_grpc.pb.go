@@ -38,7 +38,6 @@ const (
 // A set of methods for managing backend groups.
 type BackendGroupServiceClient interface {
 	// Returns the specified backend group.
-	//
 	// To get the list of all available backend groups, make a [List] request.
 	Get(ctx context.Context, in *GetBackendGroupRequest, opts ...grpc.CallOption) (*BackendGroup, error)
 	// Lists backend groups in the specified folder.
@@ -164,7 +163,6 @@ func (c *backendGroupServiceClient) ListOperations(ctx context.Context, in *List
 // A set of methods for managing backend groups.
 type BackendGroupServiceServer interface {
 	// Returns the specified backend group.
-	//
 	// To get the list of all available backend groups, make a [List] request.
 	Get(context.Context, *GetBackendGroupRequest) (*BackendGroup, error)
 	// Lists backend groups in the specified folder.

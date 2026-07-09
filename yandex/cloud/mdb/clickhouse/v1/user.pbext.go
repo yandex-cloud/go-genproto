@@ -726,6 +726,14 @@ func (m *UserSettings) SetShowDataLakeCatalogsInSystemTables(v *wrapperspb.BoolV
 	m.ShowDataLakeCatalogsInSystemTables = v
 }
 
+func (m *UserSettings) SetCompatibility(v *wrapperspb.StringValue) {
+	m.Compatibility = v
+}
+
+func (m *UserSettings) SetMaterializeTtlAfterModify(v *wrapperspb.BoolValue) {
+	m.MaterializeTtlAfterModify = v
+}
+
 func (m *UserSettings) SetCompile(v *wrapperspb.BoolValue) {
 	m.Compile = v
 }

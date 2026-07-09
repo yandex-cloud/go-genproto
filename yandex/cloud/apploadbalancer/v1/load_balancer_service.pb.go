@@ -27,10 +27,117 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetTargetStatesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the application load balancer that the backend group is attributed to.
+	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
+	// ID of the backend group that the target group is attributed to.
+	BackendGroupId string `protobuf:"bytes,2,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
+	// ID of the target group to get target states of.
+	TargetGroupId string `protobuf:"bytes,3,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTargetStatesRequest) Reset() {
+	*x = GetTargetStatesRequest{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTargetStatesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTargetStatesRequest) ProtoMessage() {}
+
+func (x *GetTargetStatesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTargetStatesRequest.ProtoReflect.Descriptor instead.
+func (*GetTargetStatesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetTargetStatesRequest) GetLoadBalancerId() string {
+	if x != nil {
+		return x.LoadBalancerId
+	}
+	return ""
+}
+
+func (x *GetTargetStatesRequest) GetBackendGroupId() string {
+	if x != nil {
+		return x.BackendGroupId
+	}
+	return ""
+}
+
+func (x *GetTargetStatesRequest) GetTargetGroupId() string {
+	if x != nil {
+		return x.TargetGroupId
+	}
+	return ""
+}
+
+type GetTargetStatesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target states of the specified target group.
+	TargetStates  []*TargetState `protobuf:"bytes,1,rep,name=target_states,json=targetStates,proto3" json:"target_states,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTargetStatesResponse) Reset() {
+	*x = GetTargetStatesResponse{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTargetStatesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTargetStatesResponse) ProtoMessage() {}
+
+func (x *GetTargetStatesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTargetStatesResponse.ProtoReflect.Descriptor instead.
+func (*GetTargetStatesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetTargetStatesResponse) GetTargetStates() []*TargetState {
+	if x != nil {
+		return x.TargetStates
+	}
+	return nil
+}
+
 type GetLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to return.
-	//
 	// To get the application load balancer ID, make a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -39,7 +146,7 @@ type GetLoadBalancerRequest struct {
 
 func (x *GetLoadBalancerRequest) Reset() {
 	*x = GetLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -51,7 +158,7 @@ func (x *GetLoadBalancerRequest) String() string {
 func (*GetLoadBalancerRequest) ProtoMessage() {}
 
 func (x *GetLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[0]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +171,7 @@ func (x *GetLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*GetLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetLoadBalancerRequest) GetLoadBalancerId() string {
@@ -77,7 +184,6 @@ func (x *GetLoadBalancerRequest) GetLoadBalancerId() string {
 type ListLoadBalancersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list application load balancers in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -89,7 +195,6 @@ type ListLoadBalancersRequest struct {
 	// [ListLoadBalancersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters application load balancers listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [LoadBalancer.name] field.
 	// 2. An `=` operator.
@@ -102,7 +207,7 @@ type ListLoadBalancersRequest struct {
 
 func (x *ListLoadBalancersRequest) Reset() {
 	*x = ListLoadBalancersRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +219,7 @@ func (x *ListLoadBalancersRequest) String() string {
 func (*ListLoadBalancersRequest) ProtoMessage() {}
 
 func (x *ListLoadBalancersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[1]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +232,7 @@ func (x *ListLoadBalancersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListLoadBalancersRequest.ProtoReflect.Descriptor instead.
 func (*ListLoadBalancersRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ListLoadBalancersRequest) GetFolderId() string {
@@ -165,7 +270,6 @@ type ListLoadBalancersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListLoadBalancersRequest.page_size], use `next_page_token` as the value
 	// for the [ListLoadBalancersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -174,7 +278,7 @@ type ListLoadBalancersResponse struct {
 
 func (x *ListLoadBalancersResponse) Reset() {
 	*x = ListLoadBalancersResponse{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -186,7 +290,7 @@ func (x *ListLoadBalancersResponse) String() string {
 func (*ListLoadBalancersResponse) ProtoMessage() {}
 
 func (x *ListLoadBalancersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[2]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -199,7 +303,7 @@ func (x *ListLoadBalancersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListLoadBalancersResponse.ProtoReflect.Descriptor instead.
 func (*ListLoadBalancersResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListLoadBalancersResponse) GetLoadBalancers() []*LoadBalancer {
@@ -219,7 +323,6 @@ func (x *ListLoadBalancersResponse) GetNextPageToken() string {
 type DeleteLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to delete.
-	//
 	// To get the application load balancer ID, make a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -228,7 +331,7 @@ type DeleteLoadBalancerRequest struct {
 
 func (x *DeleteLoadBalancerRequest) Reset() {
 	*x = DeleteLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -240,7 +343,7 @@ func (x *DeleteLoadBalancerRequest) String() string {
 func (*DeleteLoadBalancerRequest) ProtoMessage() {}
 
 func (x *DeleteLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[3]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -253,7 +356,7 @@ func (x *DeleteLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*DeleteLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DeleteLoadBalancerRequest) GetLoadBalancerId() string {
@@ -273,7 +376,7 @@ type DeleteLoadBalancerMetadata struct {
 
 func (x *DeleteLoadBalancerMetadata) Reset() {
 	*x = DeleteLoadBalancerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -285,7 +388,7 @@ func (x *DeleteLoadBalancerMetadata) String() string {
 func (*DeleteLoadBalancerMetadata) ProtoMessage() {}
 
 func (x *DeleteLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[4]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -298,7 +401,7 @@ func (x *DeleteLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLoadBalancerMetadata.ProtoReflect.Descriptor instead.
 func (*DeleteLoadBalancerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteLoadBalancerMetadata) GetLoadBalancerId() string {
@@ -311,7 +414,6 @@ func (x *DeleteLoadBalancerMetadata) GetLoadBalancerId() string {
 type UpdateLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to update.
-	//
 	// To get the application load balancer ID, make a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	// Field mask that specifies which attributes of the application load balancer should be updated.
@@ -323,7 +425,6 @@ type UpdateLoadBalancerRequest struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// New application load balancer labels as `key:value` pairs.
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [LoadBalancerService.Get] request.
@@ -331,19 +432,15 @@ type UpdateLoadBalancerRequest struct {
 	// 3. Send the new set in this field.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New listeners for the application load balancer.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#listener).
-	//
 	// Existing list of listeners is completely replaced by the specified list, so if you just want to add, update,
 	// or remove a listener, make a [LoadBalancerService.AddListener] request,
 	// a [LoadBalancerService.UpdateListener] request, or a [LoadBalancerService.RemoveListener] request.
 	ListenerSpecs []*ListenerSpec `protobuf:"bytes,6,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`
 	// New locality settings of the application load balancer.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lb-location).
-	//
 	// Existing locality settings are completely replaced by the specified settings,
 	// so if you just want to add or remove an allocation policy:
 	// 1. Get the current settings with a [LoadBalancerService.Get] request.
@@ -351,10 +448,8 @@ type UpdateLoadBalancerRequest struct {
 	// 3. Send the new set in this field.
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,7,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
 	// ID's of new security groups attributed to the application load balancer.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#security-groups).
-	//
 	// Existing list of security groups is completely replaced by the specified list,
 	// so if you just want to add or remove an allocation policy:
 	// 1. Get the current set of security groups with a [LoadBalancerService.Get] request.
@@ -362,11 +457,9 @@ type UpdateLoadBalancerRequest struct {
 	// 3. Send the new set in this field.
 	SecurityGroupIds []string `protobuf:"bytes,8,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// New scaling settings of the application load balancer.
-	//
 	// The scaling settings relate to a special internal instance group which facilitates the balancer's work.
 	// Instances in this group are called _resource units_. The group is scaled automatically based on incoming load
 	// and within limitations specified in these settings.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lcu-scaling).
 	AutoScalePolicy *AutoScalePolicy `protobuf:"bytes,9,opt,name=auto_scale_policy,json=autoScalePolicy,proto3" json:"auto_scale_policy,omitempty"`
@@ -380,7 +473,7 @@ type UpdateLoadBalancerRequest struct {
 
 func (x *UpdateLoadBalancerRequest) Reset() {
 	*x = UpdateLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -392,7 +485,7 @@ func (x *UpdateLoadBalancerRequest) String() string {
 func (*UpdateLoadBalancerRequest) ProtoMessage() {}
 
 func (x *UpdateLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[5]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -405,7 +498,7 @@ func (x *UpdateLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*UpdateLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateLoadBalancerRequest) GetLoadBalancerId() string {
@@ -495,7 +588,7 @@ type UpdateLoadBalancerMetadata struct {
 
 func (x *UpdateLoadBalancerMetadata) Reset() {
 	*x = UpdateLoadBalancerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +600,7 @@ func (x *UpdateLoadBalancerMetadata) String() string {
 func (*UpdateLoadBalancerMetadata) ProtoMessage() {}
 
 func (x *UpdateLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[6]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +613,7 @@ func (x *UpdateLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateLoadBalancerMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateLoadBalancerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateLoadBalancerMetadata) GetLoadBalancerId() string {
@@ -533,7 +626,6 @@ func (x *UpdateLoadBalancerMetadata) GetLoadBalancerId() string {
 type CreateLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an application load balancer in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the application load balancer.
@@ -545,32 +637,26 @@ type CreateLoadBalancerRequest struct {
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the region that the application load balancer is located at.
-	//
 	// The only supported value is `ru-central1`.
 	RegionId string `protobuf:"bytes,5,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
 	// ID of the network that the application load balancer belongs to.
 	NetworkId string `protobuf:"bytes,6,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// Listeners that belong to the application load balancer.
-	//
-	// For details about the concept,
-	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#listener).
-	ListenerSpecs []*ListenerSpec `protobuf:"bytes,7,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`
 	// Locality settings of the application load balancer.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lb-location).
 	AllocationPolicy *AllocationPolicy `protobuf:"bytes,8,opt,name=allocation_policy,json=allocationPolicy,proto3" json:"allocation_policy,omitempty"`
+	// Listeners that belong to the application load balancer.
+	// For details about the concept,
+	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#listener).
+	ListenerSpecs []*ListenerSpec `protobuf:"bytes,7,rep,name=listener_specs,json=listenerSpecs,proto3" json:"listener_specs,omitempty"`
 	// ID's of the security groups attributed to the application load balancer.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#security-groups).
 	SecurityGroupIds []string `protobuf:"bytes,9,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Scaling settings of the application load balancer.
-	//
 	// The scaling settings relate to a special internal instance group which facilitates the balancer's work.
 	// Instances in this group are called _resource units_. The group is scaled automatically based on incoming load
 	// and within limitations specified in these settings.
-	//
 	// For details about the concept,
 	// see [documentation](/docs/application-load-balancer/concepts/application-load-balancer#lcu-scaling).
 	AutoScalePolicy *AutoScalePolicy `protobuf:"bytes,10,opt,name=auto_scale_policy,json=autoScalePolicy,proto3" json:"auto_scale_policy,omitempty"`
@@ -584,7 +670,7 @@ type CreateLoadBalancerRequest struct {
 
 func (x *CreateLoadBalancerRequest) Reset() {
 	*x = CreateLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -596,7 +682,7 @@ func (x *CreateLoadBalancerRequest) String() string {
 func (*CreateLoadBalancerRequest) ProtoMessage() {}
 
 func (x *CreateLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[7]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -609,7 +695,7 @@ func (x *CreateLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*CreateLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{7}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateLoadBalancerRequest) GetFolderId() string {
@@ -654,16 +740,16 @@ func (x *CreateLoadBalancerRequest) GetNetworkId() string {
 	return ""
 }
 
-func (x *CreateLoadBalancerRequest) GetListenerSpecs() []*ListenerSpec {
+func (x *CreateLoadBalancerRequest) GetAllocationPolicy() *AllocationPolicy {
 	if x != nil {
-		return x.ListenerSpecs
+		return x.AllocationPolicy
 	}
 	return nil
 }
 
-func (x *CreateLoadBalancerRequest) GetAllocationPolicy() *AllocationPolicy {
+func (x *CreateLoadBalancerRequest) GetListenerSpecs() []*ListenerSpec {
 	if x != nil {
-		return x.AllocationPolicy
+		return x.ListenerSpecs
 	}
 	return nil
 }
@@ -706,7 +792,7 @@ type CreateLoadBalancerMetadata struct {
 
 func (x *CreateLoadBalancerMetadata) Reset() {
 	*x = CreateLoadBalancerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -718,7 +804,7 @@ func (x *CreateLoadBalancerMetadata) String() string {
 func (*CreateLoadBalancerMetadata) ProtoMessage() {}
 
 func (x *CreateLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -731,7 +817,7 @@ func (x *CreateLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLoadBalancerMetadata.ProtoReflect.Descriptor instead.
 func (*CreateLoadBalancerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateLoadBalancerMetadata) GetLoadBalancerId() string {
@@ -744,9 +830,7 @@ func (x *CreateLoadBalancerMetadata) GetLoadBalancerId() string {
 type StartLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to start.
-	//
 	// The application load balancer must have a `STOPPED` status ([LoadBalancer.status]).
-	//
 	// To get the application load balancer ID, make a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -755,7 +839,7 @@ type StartLoadBalancerRequest struct {
 
 func (x *StartLoadBalancerRequest) Reset() {
 	*x = StartLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -767,7 +851,7 @@ func (x *StartLoadBalancerRequest) String() string {
 func (*StartLoadBalancerRequest) ProtoMessage() {}
 
 func (x *StartLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[9]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -780,7 +864,7 @@ func (x *StartLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*StartLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{9}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *StartLoadBalancerRequest) GetLoadBalancerId() string {
@@ -800,7 +884,7 @@ type StartLoadBalancerMetadata struct {
 
 func (x *StartLoadBalancerMetadata) Reset() {
 	*x = StartLoadBalancerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +896,7 @@ func (x *StartLoadBalancerMetadata) String() string {
 func (*StartLoadBalancerMetadata) ProtoMessage() {}
 
 func (x *StartLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[10]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +909,7 @@ func (x *StartLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartLoadBalancerMetadata.ProtoReflect.Descriptor instead.
 func (*StartLoadBalancerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{10}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *StartLoadBalancerMetadata) GetLoadBalancerId() string {
@@ -838,9 +922,7 @@ func (x *StartLoadBalancerMetadata) GetLoadBalancerId() string {
 type StopLoadBalancerRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to stop.
-	//
 	// The application load balancer must have an `ACTIVE` status ([LoadBalancer.status]).
-	//
 	// To get the application load balancer ID, make a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -849,7 +931,7 @@ type StopLoadBalancerRequest struct {
 
 func (x *StopLoadBalancerRequest) Reset() {
 	*x = StopLoadBalancerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -861,7 +943,7 @@ func (x *StopLoadBalancerRequest) String() string {
 func (*StopLoadBalancerRequest) ProtoMessage() {}
 
 func (x *StopLoadBalancerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -874,7 +956,7 @@ func (x *StopLoadBalancerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopLoadBalancerRequest.ProtoReflect.Descriptor instead.
 func (*StopLoadBalancerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *StopLoadBalancerRequest) GetLoadBalancerId() string {
@@ -894,7 +976,7 @@ type StopLoadBalancerMetadata struct {
 
 func (x *StopLoadBalancerMetadata) Reset() {
 	*x = StopLoadBalancerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -906,7 +988,7 @@ func (x *StopLoadBalancerMetadata) String() string {
 func (*StopLoadBalancerMetadata) ProtoMessage() {}
 
 func (x *StopLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -919,7 +1001,7 @@ func (x *StopLoadBalancerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StopLoadBalancerMetadata.ProtoReflect.Descriptor instead.
 func (*StopLoadBalancerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *StopLoadBalancerMetadata) GetLoadBalancerId() string {
@@ -941,7 +1023,7 @@ type AddListenerRequest struct {
 
 func (x *AddListenerRequest) Reset() {
 	*x = AddListenerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -953,7 +1035,7 @@ func (x *AddListenerRequest) String() string {
 func (*AddListenerRequest) ProtoMessage() {}
 
 func (x *AddListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -966,7 +1048,7 @@ func (x *AddListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddListenerRequest.ProtoReflect.Descriptor instead.
 func (*AddListenerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AddListenerRequest) GetLoadBalancerId() string {
@@ -995,7 +1077,7 @@ type AddListenerMetadata struct {
 
 func (x *AddListenerMetadata) Reset() {
 	*x = AddListenerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1007,7 +1089,7 @@ func (x *AddListenerMetadata) String() string {
 func (*AddListenerMetadata) ProtoMessage() {}
 
 func (x *AddListenerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1020,7 +1102,7 @@ func (x *AddListenerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddListenerMetadata.ProtoReflect.Descriptor instead.
 func (*AddListenerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *AddListenerMetadata) GetLoadBalancerId() string {
@@ -1049,7 +1131,7 @@ type RemoveListenerRequest struct {
 
 func (x *RemoveListenerRequest) Reset() {
 	*x = RemoveListenerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1061,7 +1143,7 @@ func (x *RemoveListenerRequest) String() string {
 func (*RemoveListenerRequest) ProtoMessage() {}
 
 func (x *RemoveListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[15]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1074,7 +1156,7 @@ func (x *RemoveListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveListenerRequest.ProtoReflect.Descriptor instead.
 func (*RemoveListenerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{15}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *RemoveListenerRequest) GetLoadBalancerId() string {
@@ -1103,7 +1185,7 @@ type RemoveListenerMetadata struct {
 
 func (x *RemoveListenerMetadata) Reset() {
 	*x = RemoveListenerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1115,7 +1197,7 @@ func (x *RemoveListenerMetadata) String() string {
 func (*RemoveListenerMetadata) ProtoMessage() {}
 
 func (x *RemoveListenerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1128,7 +1210,7 @@ func (x *RemoveListenerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveListenerMetadata.ProtoReflect.Descriptor instead.
 func (*RemoveListenerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *RemoveListenerMetadata) GetLoadBalancerId() string {
@@ -1159,7 +1241,7 @@ type UpdateListenerRequest struct {
 
 func (x *UpdateListenerRequest) Reset() {
 	*x = UpdateListenerRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1171,7 +1253,7 @@ func (x *UpdateListenerRequest) String() string {
 func (*UpdateListenerRequest) ProtoMessage() {}
 
 func (x *UpdateListenerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1184,7 +1266,7 @@ func (x *UpdateListenerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateListenerRequest.ProtoReflect.Descriptor instead.
 func (*UpdateListenerRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UpdateListenerRequest) GetLoadBalancerId() string {
@@ -1220,7 +1302,7 @@ type UpdateListenerMetadata struct {
 
 func (x *UpdateListenerMetadata) Reset() {
 	*x = UpdateListenerMetadata{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1232,7 +1314,7 @@ func (x *UpdateListenerMetadata) String() string {
 func (*UpdateListenerMetadata) ProtoMessage() {}
 
 func (x *UpdateListenerMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1245,7 +1327,7 @@ func (x *UpdateListenerMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateListenerMetadata.ProtoReflect.Descriptor instead.
 func (*UpdateListenerMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateListenerMetadata) GetLoadBalancerId() string {
@@ -1278,7 +1360,7 @@ type AddressSpec struct {
 
 func (x *AddressSpec) Reset() {
 	*x = AddressSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1290,7 +1372,7 @@ func (x *AddressSpec) String() string {
 func (*AddressSpec) ProtoMessage() {}
 
 func (x *AddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1303,7 +1385,7 @@ func (x *AddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddressSpec.ProtoReflect.Descriptor instead.
 func (*AddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *AddressSpec) GetAddressSpec() isAddressSpec_AddressSpec {
@@ -1351,7 +1433,6 @@ type AddressSpec_ExternalIpv4AddressSpec struct {
 
 type AddressSpec_InternalIpv4AddressSpec struct {
 	// Internal IPv4 endpoint address.
-	//
 	// To enable the use of listeners with internal addresses, [contact support](/docs/support/overview#response-time).
 	InternalIpv4AddressSpec *InternalIpv4AddressSpec `protobuf:"bytes,2,opt,name=internal_ipv4_address_spec,json=internalIpv4AddressSpec,proto3,oneof"`
 }
@@ -1377,7 +1458,7 @@ type ExternalIpv4AddressSpec struct {
 
 func (x *ExternalIpv4AddressSpec) Reset() {
 	*x = ExternalIpv4AddressSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1389,7 +1470,7 @@ func (x *ExternalIpv4AddressSpec) String() string {
 func (*ExternalIpv4AddressSpec) ProtoMessage() {}
 
 func (x *ExternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1402,7 +1483,7 @@ func (x *ExternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExternalIpv4AddressSpec.ProtoReflect.Descriptor instead.
 func (*ExternalIpv4AddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ExternalIpv4AddressSpec) GetAddress() string {
@@ -1424,7 +1505,7 @@ type InternalIpv4AddressSpec struct {
 
 func (x *InternalIpv4AddressSpec) Reset() {
 	*x = InternalIpv4AddressSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1436,7 +1517,7 @@ func (x *InternalIpv4AddressSpec) String() string {
 func (*InternalIpv4AddressSpec) ProtoMessage() {}
 
 func (x *InternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1449,7 +1530,7 @@ func (x *InternalIpv4AddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InternalIpv4AddressSpec.ProtoReflect.Descriptor instead.
 func (*InternalIpv4AddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InternalIpv4AddressSpec) GetAddress() string {
@@ -1476,7 +1557,7 @@ type ExternalIpv6AddressSpec struct {
 
 func (x *ExternalIpv6AddressSpec) Reset() {
 	*x = ExternalIpv6AddressSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1488,7 +1569,7 @@ func (x *ExternalIpv6AddressSpec) String() string {
 func (*ExternalIpv6AddressSpec) ProtoMessage() {}
 
 func (x *ExternalIpv6AddressSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1501,7 +1582,7 @@ func (x *ExternalIpv6AddressSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExternalIpv6AddressSpec.ProtoReflect.Descriptor instead.
 func (*ExternalIpv6AddressSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ExternalIpv6AddressSpec) GetAddress() string {
@@ -1523,7 +1604,7 @@ type EndpointSpec struct {
 
 func (x *EndpointSpec) Reset() {
 	*x = EndpointSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1535,7 +1616,7 @@ func (x *EndpointSpec) String() string {
 func (*EndpointSpec) ProtoMessage() {}
 
 func (x *EndpointSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1548,7 +1629,7 @@ func (x *EndpointSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EndpointSpec.ProtoReflect.Descriptor instead.
 func (*EndpointSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *EndpointSpec) GetAddressSpecs() []*AddressSpec {
@@ -1570,16 +1651,15 @@ type ListenerSpec struct {
 	// Name of the listener. The name is unique within the application load balancer.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Endpoints of the listener.
-	//
 	// Endpoints are defined by their IP addresses and ports.
 	EndpointSpecs []*EndpointSpec `protobuf:"bytes,2,rep,name=endpoint_specs,json=endpointSpecs,proto3" json:"endpoint_specs,omitempty"`
 	// Listener type and settings.
 	//
 	// Types that are valid to be assigned to Listener:
 	//
+	//	*ListenerSpec_Stream
 	//	*ListenerSpec_Http
 	//	*ListenerSpec_Tls
-	//	*ListenerSpec_Stream
 	Listener      isListenerSpec_Listener `protobuf_oneof:"listener"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1587,7 +1667,7 @@ type ListenerSpec struct {
 
 func (x *ListenerSpec) Reset() {
 	*x = ListenerSpec{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1599,7 +1679,7 @@ func (x *ListenerSpec) String() string {
 func (*ListenerSpec) ProtoMessage() {}
 
 func (x *ListenerSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[24]
+	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1612,7 +1692,7 @@ func (x *ListenerSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListenerSpec.ProtoReflect.Descriptor instead.
 func (*ListenerSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{24}
+	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ListenerSpec) GetName() string {
@@ -1636,6 +1716,15 @@ func (x *ListenerSpec) GetListener() isListenerSpec_Listener {
 	return nil
 }
 
+func (x *ListenerSpec) GetStream() *StreamListener {
+	if x != nil {
+		if x, ok := x.Listener.(*ListenerSpec_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *ListenerSpec) GetHttp() *HttpListener {
 	if x != nil {
 		if x, ok := x.Listener.(*ListenerSpec_Http); ok {
@@ -1654,17 +1743,13 @@ func (x *ListenerSpec) GetTls() *TlsListener {
 	return nil
 }
 
-func (x *ListenerSpec) GetStream() *StreamListener {
-	if x != nil {
-		if x, ok := x.Listener.(*ListenerSpec_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 type isListenerSpec_Listener interface {
 	isListenerSpec_Listener()
+}
+
+type ListenerSpec_Stream struct {
+	// Unencrypted stream (TCP) listener settings.
+	Stream *StreamListener `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 
 type ListenerSpec_Http struct {
@@ -1674,131 +1759,17 @@ type ListenerSpec_Http struct {
 
 type ListenerSpec_Tls struct {
 	// TLS-encrypted HTTP or TCP stream listener settings.
-	//
 	// All handlers within a listener ([TlsListener.default_handler] and [TlsListener.sni_handlers]) must be of one
 	// type, [HttpHandler] or [StreamHandler]. Mixing HTTP and TCP stream traffic in a TLS-encrypted listener is not
 	// supported.
 	Tls *TlsListener `protobuf:"bytes,4,opt,name=tls,proto3,oneof"`
 }
 
-type ListenerSpec_Stream struct {
-	// Unencrypted stream (TCP) listener settings.
-	Stream *StreamListener `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
-}
+func (*ListenerSpec_Stream) isListenerSpec_Listener() {}
 
 func (*ListenerSpec_Http) isListenerSpec_Listener() {}
 
 func (*ListenerSpec_Tls) isListenerSpec_Listener() {}
-
-func (*ListenerSpec_Stream) isListenerSpec_Listener() {}
-
-type GetTargetStatesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the application load balancer that the backend group is attributed to.
-	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
-	// ID of the backend group that the target group is attributed to.
-	BackendGroupId string `protobuf:"bytes,2,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
-	// ID of the target group to get target states of.
-	TargetGroupId string `protobuf:"bytes,3,opt,name=target_group_id,json=targetGroupId,proto3" json:"target_group_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTargetStatesRequest) Reset() {
-	*x = GetTargetStatesRequest{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[25]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTargetStatesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTargetStatesRequest) ProtoMessage() {}
-
-func (x *GetTargetStatesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[25]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTargetStatesRequest.ProtoReflect.Descriptor instead.
-func (*GetTargetStatesRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{25}
-}
-
-func (x *GetTargetStatesRequest) GetLoadBalancerId() string {
-	if x != nil {
-		return x.LoadBalancerId
-	}
-	return ""
-}
-
-func (x *GetTargetStatesRequest) GetBackendGroupId() string {
-	if x != nil {
-		return x.BackendGroupId
-	}
-	return ""
-}
-
-func (x *GetTargetStatesRequest) GetTargetGroupId() string {
-	if x != nil {
-		return x.TargetGroupId
-	}
-	return ""
-}
-
-type GetTargetStatesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Target states of the specified target group.
-	TargetStates  []*TargetState `protobuf:"bytes,1,rep,name=target_states,json=targetStates,proto3" json:"target_states,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetTargetStatesResponse) Reset() {
-	*x = GetTargetStatesResponse{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[26]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetTargetStatesResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetTargetStatesResponse) ProtoMessage() {}
-
-func (x *GetTargetStatesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[26]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetTargetStatesResponse.ProtoReflect.Descriptor instead.
-func (*GetTargetStatesResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZIP(), []int{26}
-}
-
-func (x *GetTargetStatesResponse) GetTargetStates() []*TargetState {
-	if x != nil {
-		return x.TargetStates
-	}
-	return nil
-}
 
 type AddSniMatchRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2081,7 +2052,6 @@ type UpdateSniMatchRequest struct {
 	// Field mask that specifies which attributes of the SNI handler should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,4,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New server names that are matched by the SNI handler.
-	//
 	// Existing set of server names is completely replaced by the provided set, so if you just want
 	// to add or remove a server name:
 	// 1. Get the current set of server names with a [LoadBalancerService.Get] request.
@@ -2232,7 +2202,6 @@ func (x *UpdateSniMatchMetadata) GetSniMatchName() string {
 type ListLoadBalancerOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to get operations for.
-	//
 	// To get the application load balancer ID, use a [LoadBalancerService.List] request.
 	LoadBalancerId string `protobuf:"bytes,1,opt,name=load_balancer_id,json=loadBalancerId,proto3" json:"load_balancer_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -2305,7 +2274,6 @@ type ListLoadBalancerOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListLoadBalancerOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListLoadBalancerOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -2356,6 +2324,7 @@ func (x *ListLoadBalancerOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer_service.proto.
 type StartZonalShiftRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to start zonal shift.
@@ -2410,6 +2379,7 @@ func (x *StartZonalShiftRequest) GetZoneIds() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer_service.proto.
 type StartZonalShiftMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer that the zonal shift is being started to.
@@ -2464,6 +2434,7 @@ func (x *StartZonalShiftMetadata) GetZoneIds() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer_service.proto.
 type CancelZonalShiftRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer to cancel zonal shift.
@@ -2518,6 +2489,7 @@ func (x *CancelZonalShiftRequest) GetZoneIds() []string {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/apploadbalancer/v1/load_balancer_service.proto.
 type CancelZonalShiftMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the application load balancer that the zonal shift is being canceled to.
@@ -2801,7 +2773,13 @@ var File_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto protoreflec
 
 const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/apploadbalancer/v1/load_balancer_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a\x1dyandex/cloud/validation.proto\"H\n" +
+	";yandex/cloud/apploadbalancer/v1/load_balancer_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/apploadbalancer/v1/load_balancer.proto\x1a-yandex/cloud/apploadbalancer/v1/logging.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\xa6\x01\n" +
+	"\x16GetTargetStatesRequest\x12.\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12.\n" +
+	"\x10backend_group_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12,\n" +
+	"\x0ftarget_group_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\rtargetGroupId\"l\n" +
+	"\x17GetTargetStatesResponse\x12Q\n" +
+	"\rtarget_states\x18\x01 \x03(\v2,.yandex.cloud.apploadbalancer.v1.TargetStateR\ftargetStates\"H\n" +
 	"\x16GetLoadBalancerRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\"\xb4\x01\n" +
 	"\x18ListLoadBalancersRequest\x12!\n" +
@@ -2818,14 +2796,14 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\x19DeleteLoadBalancerRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\"F\n" +
 	"\x1aDeleteLoadBalancerMetadata\x12(\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\"\x8e\a\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\"\x81\a\n" +
 	"\x19UpdateLoadBalancerRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12:\n" +
-	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12T\n" +
+	"updateMask\x125\n" +
+	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
+	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12T\n" +
 	"\x0elistener_specs\x18\x06 \x03(\v2-.yandex.cloud.apploadbalancer.v1.ListenerSpecR\rlistenerSpecs\x12^\n" +
 	"\x11allocation_policy\x18\a \x01(\v21.yandex.cloud.apploadbalancer.v1.AllocationPolicyR\x10allocationPolicy\x12,\n" +
 	"\x12security_group_ids\x18\b \x03(\tR\x10securityGroupIds\x12\\\n" +
@@ -2838,17 +2816,17 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"F\n" +
 	"\x1aUpdateLoadBalancerMetadata\x12(\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\"\x8c\a\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\"\xf3\x06\n" +
 	"\x19CreateLoadBalancerRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12:\n" +
-	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12!\n" +
-	"\tregion_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\bregionId\x12#\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x125\n" +
+	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12\x1b\n" +
+	"\tregion_id\x18\x05 \x01(\tR\bregionId\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x06 \x01(\tB\x04\xe8\xc71\x01R\tnetworkId\x12T\n" +
-	"\x0elistener_specs\x18\a \x03(\v2-.yandex.cloud.apploadbalancer.v1.ListenerSpecR\rlistenerSpecs\x12^\n" +
-	"\x11allocation_policy\x18\b \x01(\v21.yandex.cloud.apploadbalancer.v1.AllocationPolicyR\x10allocationPolicy\x12,\n" +
+	"network_id\x18\x06 \x01(\tR\tnetworkId\x12^\n" +
+	"\x11allocation_policy\x18\b \x01(\v21.yandex.cloud.apploadbalancer.v1.AllocationPolicyR\x10allocationPolicy\x12T\n" +
+	"\x0elistener_specs\x18\a \x03(\v2-.yandex.cloud.apploadbalancer.v1.ListenerSpecR\rlistenerSpecs\x12,\n" +
 	"\x12security_group_ids\x18\t \x03(\tR\x10securityGroupIds\x12\\\n" +
 	"\x11auto_scale_policy\x18\n" +
 	" \x01(\v20.yandex.cloud.apploadbalancer.v1.AutoScalePolicyR\x0fautoScalePolicy\x12L\n" +
@@ -2894,53 +2872,47 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\x1aexternal_ipv6_address_spec\x18\x03 \x01(\v28.yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpecH\x00R\x17externalIpv6AddressSpecB\x14\n" +
 	"\faddress_spec\x12\x04\xc0\xc11\x01\"3\n" +
 	"\x17ExternalIpv4AddressSpec\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\tR\aaddress\"P\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\"V\n" +
 	"\x17InternalIpv4AddressSpec\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\tR\aaddress\x12\x1b\n" +
-	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\"3\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\x12!\n" +
+	"\tsubnet_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bsubnetId\"3\n" +
 	"\x17ExternalIpv6AddressSpec\x12\x18\n" +
 	"\aaddress\x18\x01 \x01(\tR\aaddress\"\x92\x01\n" +
 	"\fEndpointSpec\x12Y\n" +
 	"\raddress_specs\x18\x01 \x03(\v2,.yandex.cloud.apploadbalancer.v1.AddressSpecB\x06\x82\xc81\x02>0R\faddressSpecs\x12'\n" +
-	"\x05ports\x18\x02 \x03(\x03B\x11\xfa\xc71\a1-65535\x82\xc81\x02>0R\x05ports\"\x8d\x03\n" +
-	"\fListenerSpec\x12;\n" +
-	"\x04name\x18\x01 \x01(\tB'\xe8\xc71\x01\xf2\xc71\x1f[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12\\\n" +
-	"\x0eendpoint_specs\x18\x02 \x03(\v2-.yandex.cloud.apploadbalancer.v1.EndpointSpecB\x06\x82\xc81\x02>0R\rendpointSpecs\x12C\n" +
+	"\x05ports\x18\x02 \x03(\x03B\x11\xfa\xc71\a1-65535\x82\xc81\x02>0R\x05ports\"\x82\x03\n" +
+	"\fListenerSpec\x128\n" +
+	"\x04name\x18\x01 \x01(\tB$\xe8\xc71\x01\xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12T\n" +
+	"\x0eendpoint_specs\x18\x02 \x03(\v2-.yandex.cloud.apploadbalancer.v1.EndpointSpecR\rendpointSpecs\x12I\n" +
+	"\x06stream\x18\x05 \x01(\v2/.yandex.cloud.apploadbalancer.v1.StreamListenerH\x00R\x06stream\x12C\n" +
 	"\x04http\x18\x03 \x01(\v2-.yandex.cloud.apploadbalancer.v1.HttpListenerH\x00R\x04http\x12@\n" +
-	"\x03tls\x18\x04 \x01(\v2,.yandex.cloud.apploadbalancer.v1.TlsListenerH\x00R\x03tls\x12I\n" +
-	"\x06stream\x18\x05 \x01(\v2/.yandex.cloud.apploadbalancer.v1.StreamListenerH\x00R\x06streamB\x10\n" +
-	"\blistener\x12\x04\xc0\xc11\x01\"\xa6\x01\n" +
-	"\x16GetTargetStatesRequest\x12.\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12.\n" +
-	"\x10backend_group_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12,\n" +
-	"\x0ftarget_group_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\rtargetGroupId\"l\n" +
-	"\x17GetTargetStatesResponse\x12Q\n" +
-	"\rtarget_states\x18\x01 \x03(\v2,.yandex.cloud.apploadbalancer.v1.TargetStateR\ftargetStates\"\x81\x02\n" +
-	"\x12AddSniMatchRequest\x12.\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12)\n" +
+	"\x03tls\x18\x04 \x01(\v2,.yandex.cloud.apploadbalancer.v1.TlsListenerH\x00R\x03tlsB\x10\n" +
+	"\blistener\x12\x04\xc0\xc11\x01\"\xac\x02\n" +
+	"\x12AddSniMatchRequest\x126\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eloadBalancerId\x12)\n" +
 	"\rlistener_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\flistenerName\x12\x18\n" +
-	"\x04name\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12)\n" +
-	"\fserver_names\x18\x04 \x03(\tB\x06\x82\xc81\x02>0R\vserverNames\x12K\n" +
+	"\x04name\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12L\n" +
+	"\fserver_names\x18\x04 \x03(\tB)\xf2\xc71\x12([*].)?[-.a-z0-9]+\x82\xc81\x02>0\x8a\xc81\x051-255\x90\xc81\x01R\vserverNames\x12K\n" +
 	"\ahandler\x18\x05 \x01(\v2+.yandex.cloud.apploadbalancer.v1.TlsHandlerB\x04\xe8\xc71\x01R\ahandler\"\x8a\x01\n" +
 	"\x13AddSniMatchMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12#\n" +
 	"\rlistener_name\x18\x02 \x01(\tR\flistenerName\x12$\n" +
-	"\x0esni_match_name\x18\x03 \x01(\tR\fsniMatchName\"\x9e\x01\n" +
-	"\x15RemoveSniMatchRequest\x12.\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12)\n" +
+	"\x0esni_match_name\x18\x03 \x01(\tR\fsniMatchName\"\xa6\x01\n" +
+	"\x15RemoveSniMatchRequest\x126\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eloadBalancerId\x12)\n" +
 	"\rlistener_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\flistenerName\x12*\n" +
 	"\x0esni_match_name\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\fsniMatchName\"\x8d\x01\n" +
 	"\x16RemoveSniMatchMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12#\n" +
 	"\rlistener_name\x18\x02 \x01(\tR\flistenerName\x12$\n" +
-	"\x0esni_match_name\x18\x03 \x01(\tR\fsniMatchName\"\xc1\x02\n" +
-	"\x15UpdateSniMatchRequest\x12.\n" +
-	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12)\n" +
+	"\x0esni_match_name\x18\x03 \x01(\tR\fsniMatchName\"\xec\x02\n" +
+	"\x15UpdateSniMatchRequest\x126\n" +
+	"\x10load_balancer_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eloadBalancerId\x12)\n" +
 	"\rlistener_name\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\flistenerName\x12\x18\n" +
 	"\x04name\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12;\n" +
 	"\vupdate_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12)\n" +
-	"\fserver_names\x18\x05 \x03(\tB\x06\x82\xc81\x02>0R\vserverNames\x12K\n" +
+	"updateMask\x12L\n" +
+	"\fserver_names\x18\x05 \x03(\tB)\xf2\xc71\x12([*].)?[-.a-z0-9]+\x82\xc81\x02>0\x8a\xc81\x051-255\x90\xc81\x01R\vserverNames\x12K\n" +
 	"\ahandler\x18\x06 \x01(\v2+.yandex.cloud.apploadbalancer.v1.TlsHandlerB\x04\xe8\xc71\x01R\ahandler\"\x8d\x01\n" +
 	"\x16UpdateSniMatchMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12#\n" +
@@ -2956,19 +2928,19 @@ const file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDesc =
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"k\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"o\n" +
 	"\x16StartZonalShiftRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"^\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds:\x02\x18\x01\"b\n" +
 	"\x17StartZonalShiftMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12\x19\n" +
-	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"l\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds:\x02\x18\x01\"p\n" +
 	"\x17CancelZonalShiftRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12!\n" +
-	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\"_\n" +
+	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds:\x02\x18\x01\"c\n" +
 	"\x18CancelZonalShiftMetadata\x12(\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tR\x0eloadBalancerId\x12\x19\n" +
-	"\bzone_ids\x18\x02 \x03(\tR\azoneIds\"\xab\x01\n" +
+	"\bzone_ids\x18\x02 \x03(\tR\azoneIds:\x02\x18\x01\"\xab\x01\n" +
 	"\x13DisableZonesRequest\x12.\n" +
 	"\x10load_balancer_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0eloadBalancerId\x12!\n" +
 	"\bzone_ids\x18\x02 \x03(\tB\x06\x82\xc81\x02>0R\azoneIds\x12A\n" +
@@ -3034,33 +3006,33 @@ func file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_rawDescGZI
 
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_goTypes = []any{
-	(*GetLoadBalancerRequest)(nil),             // 0: yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
-	(*ListLoadBalancersRequest)(nil),           // 1: yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
-	(*ListLoadBalancersResponse)(nil),          // 2: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
-	(*DeleteLoadBalancerRequest)(nil),          // 3: yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
-	(*DeleteLoadBalancerMetadata)(nil),         // 4: yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerMetadata
-	(*UpdateLoadBalancerRequest)(nil),          // 5: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
-	(*UpdateLoadBalancerMetadata)(nil),         // 6: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerMetadata
-	(*CreateLoadBalancerRequest)(nil),          // 7: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
-	(*CreateLoadBalancerMetadata)(nil),         // 8: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerMetadata
-	(*StartLoadBalancerRequest)(nil),           // 9: yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
-	(*StartLoadBalancerMetadata)(nil),          // 10: yandex.cloud.apploadbalancer.v1.StartLoadBalancerMetadata
-	(*StopLoadBalancerRequest)(nil),            // 11: yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
-	(*StopLoadBalancerMetadata)(nil),           // 12: yandex.cloud.apploadbalancer.v1.StopLoadBalancerMetadata
-	(*AddListenerRequest)(nil),                 // 13: yandex.cloud.apploadbalancer.v1.AddListenerRequest
-	(*AddListenerMetadata)(nil),                // 14: yandex.cloud.apploadbalancer.v1.AddListenerMetadata
-	(*RemoveListenerRequest)(nil),              // 15: yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
-	(*RemoveListenerMetadata)(nil),             // 16: yandex.cloud.apploadbalancer.v1.RemoveListenerMetadata
-	(*UpdateListenerRequest)(nil),              // 17: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
-	(*UpdateListenerMetadata)(nil),             // 18: yandex.cloud.apploadbalancer.v1.UpdateListenerMetadata
-	(*AddressSpec)(nil),                        // 19: yandex.cloud.apploadbalancer.v1.AddressSpec
-	(*ExternalIpv4AddressSpec)(nil),            // 20: yandex.cloud.apploadbalancer.v1.ExternalIpv4AddressSpec
-	(*InternalIpv4AddressSpec)(nil),            // 21: yandex.cloud.apploadbalancer.v1.InternalIpv4AddressSpec
-	(*ExternalIpv6AddressSpec)(nil),            // 22: yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpec
-	(*EndpointSpec)(nil),                       // 23: yandex.cloud.apploadbalancer.v1.EndpointSpec
-	(*ListenerSpec)(nil),                       // 24: yandex.cloud.apploadbalancer.v1.ListenerSpec
-	(*GetTargetStatesRequest)(nil),             // 25: yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
-	(*GetTargetStatesResponse)(nil),            // 26: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
+	(*GetTargetStatesRequest)(nil),             // 0: yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
+	(*GetTargetStatesResponse)(nil),            // 1: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
+	(*GetLoadBalancerRequest)(nil),             // 2: yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
+	(*ListLoadBalancersRequest)(nil),           // 3: yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
+	(*ListLoadBalancersResponse)(nil),          // 4: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
+	(*DeleteLoadBalancerRequest)(nil),          // 5: yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
+	(*DeleteLoadBalancerMetadata)(nil),         // 6: yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerMetadata
+	(*UpdateLoadBalancerRequest)(nil),          // 7: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
+	(*UpdateLoadBalancerMetadata)(nil),         // 8: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerMetadata
+	(*CreateLoadBalancerRequest)(nil),          // 9: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
+	(*CreateLoadBalancerMetadata)(nil),         // 10: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerMetadata
+	(*StartLoadBalancerRequest)(nil),           // 11: yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
+	(*StartLoadBalancerMetadata)(nil),          // 12: yandex.cloud.apploadbalancer.v1.StartLoadBalancerMetadata
+	(*StopLoadBalancerRequest)(nil),            // 13: yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
+	(*StopLoadBalancerMetadata)(nil),           // 14: yandex.cloud.apploadbalancer.v1.StopLoadBalancerMetadata
+	(*AddListenerRequest)(nil),                 // 15: yandex.cloud.apploadbalancer.v1.AddListenerRequest
+	(*AddListenerMetadata)(nil),                // 16: yandex.cloud.apploadbalancer.v1.AddListenerMetadata
+	(*RemoveListenerRequest)(nil),              // 17: yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
+	(*RemoveListenerMetadata)(nil),             // 18: yandex.cloud.apploadbalancer.v1.RemoveListenerMetadata
+	(*UpdateListenerRequest)(nil),              // 19: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
+	(*UpdateListenerMetadata)(nil),             // 20: yandex.cloud.apploadbalancer.v1.UpdateListenerMetadata
+	(*AddressSpec)(nil),                        // 21: yandex.cloud.apploadbalancer.v1.AddressSpec
+	(*ExternalIpv4AddressSpec)(nil),            // 22: yandex.cloud.apploadbalancer.v1.ExternalIpv4AddressSpec
+	(*InternalIpv4AddressSpec)(nil),            // 23: yandex.cloud.apploadbalancer.v1.InternalIpv4AddressSpec
+	(*ExternalIpv6AddressSpec)(nil),            // 24: yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpec
+	(*EndpointSpec)(nil),                       // 25: yandex.cloud.apploadbalancer.v1.EndpointSpec
+	(*ListenerSpec)(nil),                       // 26: yandex.cloud.apploadbalancer.v1.ListenerSpec
 	(*AddSniMatchRequest)(nil),                 // 27: yandex.cloud.apploadbalancer.v1.AddSniMatchRequest
 	(*AddSniMatchMetadata)(nil),                // 28: yandex.cloud.apploadbalancer.v1.AddSniMatchMetadata
 	(*RemoveSniMatchRequest)(nil),              // 29: yandex.cloud.apploadbalancer.v1.RemoveSniMatchRequest
@@ -3079,70 +3051,70 @@ var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_goTypes = [
 	(*EnableZonesMetadata)(nil),                // 42: yandex.cloud.apploadbalancer.v1.EnableZonesMetadata
 	nil,                                        // 43: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
 	nil,                                        // 44: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
-	(*LoadBalancer)(nil),                       // 45: yandex.cloud.apploadbalancer.v1.LoadBalancer
-	(*fieldmaskpb.FieldMask)(nil),              // 46: google.protobuf.FieldMask
-	(*AllocationPolicy)(nil),                   // 47: yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	(*AutoScalePolicy)(nil),                    // 48: yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	(*LogOptions)(nil),                         // 49: yandex.cloud.apploadbalancer.v1.LogOptions
-	(*HttpListener)(nil),                       // 50: yandex.cloud.apploadbalancer.v1.HttpListener
-	(*TlsListener)(nil),                        // 51: yandex.cloud.apploadbalancer.v1.TlsListener
-	(*StreamListener)(nil),                     // 52: yandex.cloud.apploadbalancer.v1.StreamListener
-	(*TargetState)(nil),                        // 53: yandex.cloud.apploadbalancer.v1.TargetState
+	(*TargetState)(nil),                        // 45: yandex.cloud.apploadbalancer.v1.TargetState
+	(*LoadBalancer)(nil),                       // 46: yandex.cloud.apploadbalancer.v1.LoadBalancer
+	(*fieldmaskpb.FieldMask)(nil),              // 47: google.protobuf.FieldMask
+	(*AllocationPolicy)(nil),                   // 48: yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	(*AutoScalePolicy)(nil),                    // 49: yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	(*LogOptions)(nil),                         // 50: yandex.cloud.apploadbalancer.v1.LogOptions
+	(*StreamListener)(nil),                     // 51: yandex.cloud.apploadbalancer.v1.StreamListener
+	(*HttpListener)(nil),                       // 52: yandex.cloud.apploadbalancer.v1.HttpListener
+	(*TlsListener)(nil),                        // 53: yandex.cloud.apploadbalancer.v1.TlsListener
 	(*TlsHandler)(nil),                         // 54: yandex.cloud.apploadbalancer.v1.TlsHandler
 	(*operation.Operation)(nil),                // 55: yandex.cloud.operation.Operation
 	(*durationpb.Duration)(nil),                // 56: google.protobuf.Duration
 }
 var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_depIdxs = []int32{
-	45, // 0: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse.load_balancers:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancer
-	46, // 1: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	43, // 2: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
-	24, // 3: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	47, // 4: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	48, // 5: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	49, // 6: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
-	44, // 7: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
-	24, // 8: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	47, // 9: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
-	48, // 10: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
-	49, // 11: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
-	24, // 12: yandex.cloud.apploadbalancer.v1.AddListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	46, // 13: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.update_mask:type_name -> google.protobuf.FieldMask
-	24, // 14: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
-	20, // 15: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv4AddressSpec
-	21, // 16: yandex.cloud.apploadbalancer.v1.AddressSpec.internal_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.InternalIpv4AddressSpec
-	22, // 17: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv6_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpec
-	19, // 18: yandex.cloud.apploadbalancer.v1.EndpointSpec.address_specs:type_name -> yandex.cloud.apploadbalancer.v1.AddressSpec
-	23, // 19: yandex.cloud.apploadbalancer.v1.ListenerSpec.endpoint_specs:type_name -> yandex.cloud.apploadbalancer.v1.EndpointSpec
-	50, // 20: yandex.cloud.apploadbalancer.v1.ListenerSpec.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpListener
-	51, // 21: yandex.cloud.apploadbalancer.v1.ListenerSpec.tls:type_name -> yandex.cloud.apploadbalancer.v1.TlsListener
-	52, // 22: yandex.cloud.apploadbalancer.v1.ListenerSpec.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamListener
-	53, // 23: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse.target_states:type_name -> yandex.cloud.apploadbalancer.v1.TargetState
+	45, // 0: yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse.target_states:type_name -> yandex.cloud.apploadbalancer.v1.TargetState
+	46, // 1: yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse.load_balancers:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancer
+	47, // 2: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	43, // 3: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.LabelsEntry
+	26, // 4: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
+	48, // 5: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	49, // 6: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	50, // 7: yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
+	44, // 8: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.LabelsEntry
+	48, // 9: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.allocation_policy:type_name -> yandex.cloud.apploadbalancer.v1.AllocationPolicy
+	26, // 10: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.listener_specs:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
+	49, // 11: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.auto_scale_policy:type_name -> yandex.cloud.apploadbalancer.v1.AutoScalePolicy
+	50, // 12: yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest.log_options:type_name -> yandex.cloud.apploadbalancer.v1.LogOptions
+	26, // 13: yandex.cloud.apploadbalancer.v1.AddListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
+	47, // 14: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.update_mask:type_name -> google.protobuf.FieldMask
+	26, // 15: yandex.cloud.apploadbalancer.v1.UpdateListenerRequest.listener_spec:type_name -> yandex.cloud.apploadbalancer.v1.ListenerSpec
+	22, // 16: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv4AddressSpec
+	23, // 17: yandex.cloud.apploadbalancer.v1.AddressSpec.internal_ipv4_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.InternalIpv4AddressSpec
+	24, // 18: yandex.cloud.apploadbalancer.v1.AddressSpec.external_ipv6_address_spec:type_name -> yandex.cloud.apploadbalancer.v1.ExternalIpv6AddressSpec
+	21, // 19: yandex.cloud.apploadbalancer.v1.EndpointSpec.address_specs:type_name -> yandex.cloud.apploadbalancer.v1.AddressSpec
+	25, // 20: yandex.cloud.apploadbalancer.v1.ListenerSpec.endpoint_specs:type_name -> yandex.cloud.apploadbalancer.v1.EndpointSpec
+	51, // 21: yandex.cloud.apploadbalancer.v1.ListenerSpec.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamListener
+	52, // 22: yandex.cloud.apploadbalancer.v1.ListenerSpec.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpListener
+	53, // 23: yandex.cloud.apploadbalancer.v1.ListenerSpec.tls:type_name -> yandex.cloud.apploadbalancer.v1.TlsListener
 	54, // 24: yandex.cloud.apploadbalancer.v1.AddSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
-	46, // 25: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.update_mask:type_name -> google.protobuf.FieldMask
+	47, // 25: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.update_mask:type_name -> google.protobuf.FieldMask
 	54, // 26: yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest.handler:type_name -> yandex.cloud.apploadbalancer.v1.TlsHandler
 	55, // 27: yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	56, // 28: yandex.cloud.apploadbalancer.v1.DisableZonesRequest.duration:type_name -> google.protobuf.Duration
-	0,  // 29: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
-	1,  // 30: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
-	7,  // 31: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
-	5,  // 32: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
-	3,  // 33: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
-	9,  // 34: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:input_type -> yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
-	11, // 35: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:input_type -> yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
-	13, // 36: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:input_type -> yandex.cloud.apploadbalancer.v1.AddListenerRequest
-	15, // 37: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:input_type -> yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
-	17, // 38: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:input_type -> yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
+	2,  // 29: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetLoadBalancerRequest
+	3,  // 30: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersRequest
+	9,  // 31: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:input_type -> yandex.cloud.apploadbalancer.v1.CreateLoadBalancerRequest
+	7,  // 32: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:input_type -> yandex.cloud.apploadbalancer.v1.UpdateLoadBalancerRequest
+	5,  // 33: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:input_type -> yandex.cloud.apploadbalancer.v1.DeleteLoadBalancerRequest
+	11, // 34: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Start:input_type -> yandex.cloud.apploadbalancer.v1.StartLoadBalancerRequest
+	13, // 35: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Stop:input_type -> yandex.cloud.apploadbalancer.v1.StopLoadBalancerRequest
+	15, // 36: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddListener:input_type -> yandex.cloud.apploadbalancer.v1.AddListenerRequest
+	17, // 37: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveListener:input_type -> yandex.cloud.apploadbalancer.v1.RemoveListenerRequest
+	19, // 38: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateListener:input_type -> yandex.cloud.apploadbalancer.v1.UpdateListenerRequest
 	27, // 39: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.AddSniMatchRequest
 	31, // 40: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.UpdateSniMatchRequest
 	29, // 41: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:input_type -> yandex.cloud.apploadbalancer.v1.RemoveSniMatchRequest
-	25, // 42: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:input_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
+	0,  // 42: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:input_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesRequest
 	33, // 43: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:input_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsRequest
 	35, // 44: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.StartZonalShiftRequest
 	37, // 45: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:input_type -> yandex.cloud.apploadbalancer.v1.CancelZonalShiftRequest
 	39, // 46: yandex.cloud.apploadbalancer.v1.LoadBalancerService.DisableZones:input_type -> yandex.cloud.apploadbalancer.v1.DisableZonesRequest
 	41, // 47: yandex.cloud.apploadbalancer.v1.LoadBalancerService.EnableZones:input_type -> yandex.cloud.apploadbalancer.v1.EnableZonesRequest
-	45, // 48: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:output_type -> yandex.cloud.apploadbalancer.v1.LoadBalancer
-	2,  // 49: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
+	46, // 48: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Get:output_type -> yandex.cloud.apploadbalancer.v1.LoadBalancer
+	4,  // 49: yandex.cloud.apploadbalancer.v1.LoadBalancerService.List:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancersResponse
 	55, // 50: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Create:output_type -> yandex.cloud.operation.Operation
 	55, // 51: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Update:output_type -> yandex.cloud.operation.Operation
 	55, // 52: yandex.cloud.apploadbalancer.v1.LoadBalancerService.Delete:output_type -> yandex.cloud.operation.Operation
@@ -3154,7 +3126,7 @@ var file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_depIdxs = [
 	55, // 58: yandex.cloud.apploadbalancer.v1.LoadBalancerService.AddSniMatch:output_type -> yandex.cloud.operation.Operation
 	55, // 59: yandex.cloud.apploadbalancer.v1.LoadBalancerService.UpdateSniMatch:output_type -> yandex.cloud.operation.Operation
 	55, // 60: yandex.cloud.apploadbalancer.v1.LoadBalancerService.RemoveSniMatch:output_type -> yandex.cloud.operation.Operation
-	26, // 61: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:output_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
+	1,  // 61: yandex.cloud.apploadbalancer.v1.LoadBalancerService.GetTargetStates:output_type -> yandex.cloud.apploadbalancer.v1.GetTargetStatesResponse
 	34, // 62: yandex.cloud.apploadbalancer.v1.LoadBalancerService.ListOperations:output_type -> yandex.cloud.apploadbalancer.v1.ListLoadBalancerOperationsResponse
 	55, // 63: yandex.cloud.apploadbalancer.v1.LoadBalancerService.StartZonalShift:output_type -> yandex.cloud.operation.Operation
 	55, // 64: yandex.cloud.apploadbalancer.v1.LoadBalancerService.CancelZonalShift:output_type -> yandex.cloud.operation.Operation
@@ -3174,15 +3146,15 @@ func file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_init() {
 	}
 	file_yandex_cloud_apploadbalancer_v1_load_balancer_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_logging_proto_init()
-	file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[19].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[21].OneofWrappers = []any{
 		(*AddressSpec_ExternalIpv4AddressSpec)(nil),
 		(*AddressSpec_InternalIpv4AddressSpec)(nil),
 		(*AddressSpec_ExternalIpv6AddressSpec)(nil),
 	}
-	file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[24].OneofWrappers = []any{
+	file_yandex_cloud_apploadbalancer_v1_load_balancer_service_proto_msgTypes[26].OneofWrappers = []any{
+		(*ListenerSpec_Stream)(nil),
 		(*ListenerSpec_Http)(nil),
 		(*ListenerSpec_Tls)(nil),
-		(*ListenerSpec_Stream)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

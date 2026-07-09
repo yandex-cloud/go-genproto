@@ -7,7 +7,6 @@
 package apploadbalancer
 
 import (
-	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -189,12 +188,12 @@ var File_yandex_cloud_apploadbalancer_v1_tls_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/apploadbalancer/v1/tls.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"y\n" +
+	")yandex/cloud/apploadbalancer/v1/tls.proto\x12\x1fyandex.cloud.apploadbalancer.v1\"s\n" +
 	"\x11ValidationContext\x12$\n" +
 	"\rtrusted_ca_id\x18\x01 \x01(\tH\x00R\vtrustedCaId\x12*\n" +
-	"\x10trusted_ca_bytes\x18\x02 \x01(\tH\x00R\x0etrustedCaBytesB\x12\n" +
+	"\x10trusted_ca_bytes\x18\x02 \x01(\tH\x00R\x0etrustedCaBytesB\f\n" +
 	"\n" +
-	"trusted_ca\x12\x04\xc0\xc11\x01\"\x84\x01\n" +
+	"trusted_ca\"\x84\x01\n" +
 	"\x1eClientCertificatesVerification\x12<\n" +
 	"\x1arequire_client_certificate\x18\x01 \x01(\bR\x18requireClientCertificate\x12\x16\n" +
 	"\x05bytes\x18\x02 \x01(\tH\x00R\x05bytesB\f\n" +

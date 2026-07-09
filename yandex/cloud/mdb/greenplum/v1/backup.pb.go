@@ -7,6 +7,7 @@
 package greenplum
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -138,11 +139,11 @@ type Backup struct {
 	StartedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	// Size of the backup in bytes.
 	Size int64 `protobuf:"varint,6,opt,name=size,proto3" json:"size,omitempty"`
-	// How this backup was created (manual/automatic/etc...)
+	// How this backup was created (manual/automatic/etc...).
 	Type Backup_BackupCreationType `protobuf:"varint,7,opt,name=type,proto3,enum=yandex.cloud.mdb.greenplum.v1.Backup_BackupCreationType" json:"type,omitempty"`
-	// Method of backup creation
+	// Method of backup creation.
 	Method Backup_BackupMethod `protobuf:"varint,8,opt,name=method,proto3,enum=yandex.cloud.mdb.greenplum.v1.Backup_BackupMethod" json:"method,omitempty"`
-	// Size of the journal associated with backup, in bytes
+	// Size of the journal associated with backup, in bytes.
 	JournalSize   int64 `protobuf:"varint,9,opt,name=journal_size,json=journalSize,proto3" json:"journal_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -245,9 +246,9 @@ var File_yandex_cloud_mdb_greenplum_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/mdb/greenplum/v1/backup.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc9\x04\n" +
-	"\x06Backup\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"*yandex/cloud/mdb/greenplum/v1/backup.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x04\n" +
+	"\x06Backup\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12*\n" +

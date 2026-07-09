@@ -22,6 +22,63 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Specifies which input source will be used for stream processing.
+type LineInputSource int32
+
+const (
+	// Line input source unspecified.
+	LineInputSource_LINE_INPUT_SOURCE_UNSPECIFIED LineInputSource = 0
+	// Use any available input source (main or backup).
+	LineInputSource_ANY LineInputSource = 1
+	// Use main input source.
+	LineInputSource_MAIN LineInputSource = 2
+	// Use backup input source (works only if backup input source is provided).
+	LineInputSource_BACKUP LineInputSource = 3
+)
+
+// Enum value maps for LineInputSource.
+var (
+	LineInputSource_name = map[int32]string{
+		0: "LINE_INPUT_SOURCE_UNSPECIFIED",
+		1: "ANY",
+		2: "MAIN",
+		3: "BACKUP",
+	}
+	LineInputSource_value = map[string]int32{
+		"LINE_INPUT_SOURCE_UNSPECIFIED": 0,
+		"ANY":                           1,
+		"MAIN":                          2,
+		"BACKUP":                        3,
+	}
+)
+
+func (x LineInputSource) Enum() *LineInputSource {
+	p := new(LineInputSource)
+	*p = x
+	return p
+}
+
+func (x LineInputSource) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LineInputSource) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_video_v1_stream_line_proto_enumTypes[0].Descriptor()
+}
+
+func (LineInputSource) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_video_v1_stream_line_proto_enumTypes[0]
+}
+
+func (x LineInputSource) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LineInputSource.Descriptor instead.
+func (LineInputSource) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{0}
+}
+
 // Status of an automatic stream line.
 // Indicates whether the automatic line is active or deactivated.
 type AutoLine_AutoLineStatus int32
@@ -60,11 +117,11 @@ func (x AutoLine_AutoLineStatus) String() string {
 }
 
 func (AutoLine_AutoLineStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_video_v1_stream_line_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_video_v1_stream_line_proto_enumTypes[1].Descriptor()
 }
 
 func (AutoLine_AutoLineStatus) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_video_v1_stream_line_proto_enumTypes[0]
+	return &file_yandex_cloud_video_v1_stream_line_proto_enumTypes[1]
 }
 
 func (x AutoLine_AutoLineStatus) Number() protoreflect.EnumNumber {
@@ -85,6 +142,8 @@ type StreamLine struct {
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Title of the stream line.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	// Specifies which input source (main or backup) is selected for processing.
+	InputSource LineInputSource `protobuf:"varint,18,opt,name=input_source,json=inputSource,proto3,enum=yandex.cloud.video.v1.LineInputSource" json:"input_source,omitempty"`
 	// Specifies the input type and settings for the video signal source.
 	//
 	// Types that are valid to be assigned to InputType:
@@ -161,6 +220,13 @@ func (x *StreamLine) GetTitle() string {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *StreamLine) GetInputSource() LineInputSource {
+	if x != nil {
+		return x.InputSource
+	}
+	return LineInputSource_LINE_INPUT_SOURCE_UNSPECIFIED
 }
 
 func (x *StreamLine) GetInputType() isStreamLine_InputType {
@@ -290,7 +356,9 @@ func (*StreamLine_AutoLine) isStreamLine_LineType() {}
 type PushStreamKey struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The unique stream key.
-	Key           string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// The unique backup stream key.
+	BackupKey     string `protobuf:"bytes,2,opt,name=backup_key,json=backupKey,proto3" json:"backup_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -328,6 +396,13 @@ func (*PushStreamKey) Descriptor() ([]byte, []int) {
 func (x *PushStreamKey) GetKey() string {
 	if x != nil {
 		return x.Key
+	}
+	return ""
+}
+
+func (x *PushStreamKey) GetBackupKey() string {
+	if x != nil {
+		return x.BackupKey
 	}
 	return ""
 }
@@ -386,7 +461,9 @@ func (x *RTMPPushInput) GetUrl() string {
 type RTMPPullInput struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// RTMP url for receiving video signal.
-	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// Backup RTMP url (optional).
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -428,13 +505,22 @@ func (x *RTMPPullInput) GetUrl() string {
 	return ""
 }
 
+func (x *RTMPPullInput) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
+	}
+	return ""
+}
+
 // Settings for an SRT pull input.
 // Used when the service pulls the video stream from an SRT source.
 // @see https://en.wikipedia.org/wiki/Secure_Reliable_Transport
 type SRTPullInput struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// SRT url for receiving video signal.
-	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// Backup SRT url (optional).
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -472,6 +558,13 @@ func (*SRTPullInput) Descriptor() ([]byte, []int) {
 func (x *SRTPullInput) GetUrl() string {
 	if x != nil {
 		return x.Url
+	}
+	return ""
+}
+
+func (x *SRTPullInput) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
 	}
 	return ""
 }
@@ -564,13 +657,14 @@ var File_yandex_cloud_video_v1_stream_line_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe1\x05\n" +
+	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x06\n" +
 	"\n" +
 	"StreamLine\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12D\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12I\n" +
+	"\finput_source\x18\x12 \x01(\x0e2&.yandex.cloud.video.v1.LineInputSourceR\vinputSource\x12D\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.RTMPPushInputH\x00R\brtmpPush\x12D\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2$.yandex.cloud.video.v1.RTMPPullInputH\x00R\brtmpPull\x12A\n" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2#.yandex.cloud.video.v1.SRTPullInputH\x00R\asrtPull\x12E\n" +
@@ -587,15 +681,21 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
 	"input_typeB\v\n" +
-	"\tline_typeJ\x04\b\x04\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xec\a\x10\xd0\x0f\"!\n" +
+	"\tline_typeJ\x04\b\x04\x10\x12J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
 	"\rPushStreamKey\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\"!\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1d\n" +
+	"\n" +
+	"backup_key\x18\x02 \x01(\tR\tbackupKey\"!\n" +
 	"\rRTMPPushInput\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"!\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\"@\n" +
 	"\rRTMPPullInput\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\" \n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tR\tbackupUrl\"?\n" +
 	"\fSRTPullInput\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"\f\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tR\tbackupUrl\"\f\n" +
 	"\n" +
 	"ManualLine\"\xa3\x01\n" +
 	"\bAutoLine\x12F\n" +
@@ -604,7 +704,13 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x1cAUTO_LINE_STATUS_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vDEACTIVATED\x10\x01\x12\n" +
 	"\n" +
-	"\x06ACTIVE\x10\x02B\\\n" +
+	"\x06ACTIVE\x10\x02*S\n" +
+	"\x0fLineInputSource\x12!\n" +
+	"\x1dLINE_INPUT_SOURCE_UNSPECIFIED\x10\x00\x12\a\n" +
+	"\x03ANY\x10\x01\x12\b\n" +
+	"\x04MAIN\x10\x02\x12\n" +
+	"\n" +
+	"\x06BACKUP\x10\x03B\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (
@@ -619,35 +725,37 @@ func file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_stream_line_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_stream_line_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_yandex_cloud_video_v1_stream_line_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_yandex_cloud_video_v1_stream_line_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_video_v1_stream_line_proto_goTypes = []any{
-	(AutoLine_AutoLineStatus)(0),  // 0: yandex.cloud.video.v1.AutoLine.AutoLineStatus
-	(*StreamLine)(nil),            // 1: yandex.cloud.video.v1.StreamLine
-	(*PushStreamKey)(nil),         // 2: yandex.cloud.video.v1.PushStreamKey
-	(*RTMPPushInput)(nil),         // 3: yandex.cloud.video.v1.RTMPPushInput
-	(*RTMPPullInput)(nil),         // 4: yandex.cloud.video.v1.RTMPPullInput
-	(*SRTPullInput)(nil),          // 5: yandex.cloud.video.v1.SRTPullInput
-	(*ManualLine)(nil),            // 6: yandex.cloud.video.v1.ManualLine
-	(*AutoLine)(nil),              // 7: yandex.cloud.video.v1.AutoLine
-	nil,                           // 8: yandex.cloud.video.v1.StreamLine.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(LineInputSource)(0),          // 0: yandex.cloud.video.v1.LineInputSource
+	(AutoLine_AutoLineStatus)(0),  // 1: yandex.cloud.video.v1.AutoLine.AutoLineStatus
+	(*StreamLine)(nil),            // 2: yandex.cloud.video.v1.StreamLine
+	(*PushStreamKey)(nil),         // 3: yandex.cloud.video.v1.PushStreamKey
+	(*RTMPPushInput)(nil),         // 4: yandex.cloud.video.v1.RTMPPushInput
+	(*RTMPPullInput)(nil),         // 5: yandex.cloud.video.v1.RTMPPullInput
+	(*SRTPullInput)(nil),          // 6: yandex.cloud.video.v1.SRTPullInput
+	(*ManualLine)(nil),            // 7: yandex.cloud.video.v1.ManualLine
+	(*AutoLine)(nil),              // 8: yandex.cloud.video.v1.AutoLine
+	nil,                           // 9: yandex.cloud.video.v1.StreamLine.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_stream_line_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.video.v1.StreamLine.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushInput
-	4, // 1: yandex.cloud.video.v1.StreamLine.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullInput
-	5, // 2: yandex.cloud.video.v1.StreamLine.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullInput
-	6, // 3: yandex.cloud.video.v1.StreamLine.manual_line:type_name -> yandex.cloud.video.v1.ManualLine
-	7, // 4: yandex.cloud.video.v1.StreamLine.auto_line:type_name -> yandex.cloud.video.v1.AutoLine
-	9, // 5: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
-	9, // 6: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
-	8, // 7: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
-	0, // 8: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	0,  // 0: yandex.cloud.video.v1.StreamLine.input_source:type_name -> yandex.cloud.video.v1.LineInputSource
+	4,  // 1: yandex.cloud.video.v1.StreamLine.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushInput
+	5,  // 2: yandex.cloud.video.v1.StreamLine.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullInput
+	6,  // 3: yandex.cloud.video.v1.StreamLine.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullInput
+	7,  // 4: yandex.cloud.video.v1.StreamLine.manual_line:type_name -> yandex.cloud.video.v1.ManualLine
+	8,  // 5: yandex.cloud.video.v1.StreamLine.auto_line:type_name -> yandex.cloud.video.v1.AutoLine
+	10, // 6: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
+	10, // 7: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
+	9,  // 8: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
+	1,  // 9: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_stream_line_proto_init() }
@@ -667,7 +775,7 @@ func file_yandex_cloud_video_v1_stream_line_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_stream_line_proto_rawDesc), len(file_yandex_cloud_video_v1_stream_line_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,

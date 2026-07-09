@@ -132,34 +132,6 @@ func (m *CreateClusterRequest) SetLogging(v *LoggingConfig) {
 	m.Logging = v
 }
 
-type ConfigSpec_GreenplumConfig = isConfigSpec_GreenplumConfig
-
-func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
-	m.GreenplumConfig = v
-}
-
-func (m *ConfigSpec) SetGreenplumConfig_6(v *GreenplumConfig6) {
-	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6{
-		GreenplumConfig_6: v,
-	}
-}
-
-func (m *ConfigSpec) SetDbmsConfig(v *DBMSConfig) {
-	m.DbmsConfig = v
-}
-
-func (m *ConfigSpec) SetPool(v *ConnectionPoolerConfig) {
-	m.Pool = v
-}
-
-func (m *ConfigSpec) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
-	m.BackgroundActivities = v
-}
-
-func (m *ConfigSpec) SetPxfConfig(v *PXFConfig) {
-	m.PxfConfig = v
-}
-
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -332,6 +304,94 @@ func (m *RescheduleMaintenanceMetadata) SetDelayedUntil(v *timestamppb.Timestamp
 	m.DelayedUntil = v
 }
 
+func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
+	m.Timestamp = v
+}
+
+func (m *LogRecord) SetMessage(v map[string]string) {
+	m.Message = v
+}
+
+func (m *ListClusterLogsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *ListClusterLogsRequest) SetColumnFilter(v []string) {
+	m.ColumnFilter = v
+}
+
+func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_ServiceType) {
+	m.ServiceType = v
+}
+
+func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
+	m.FromTime = v
+}
+
+func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
+	m.ToTime = v
+}
+
+func (m *ListClusterLogsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListClusterLogsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetAlwaysNextPageToken(v bool) {
+	m.AlwaysNextPageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {
+	m.Logs = v
+}
+
+func (m *ListClusterLogsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *StreamLogRecord) SetRecord(v *LogRecord) {
+	m.Record = v
+}
+
+func (m *StreamLogRecord) SetNextRecordToken(v string) {
+	m.NextRecordToken = v
+}
+
+func (m *StreamClusterLogsRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StreamClusterLogsRequest) SetColumnFilter(v []string) {
+	m.ColumnFilter = v
+}
+
+func (m *StreamClusterLogsRequest) SetServiceType(v StreamClusterLogsRequest_ServiceType) {
+	m.ServiceType = v
+}
+
+func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
+	m.FromTime = v
+}
+
+func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
+	m.ToTime = v
+}
+
+func (m *StreamClusterLogsRequest) SetRecordToken(v string) {
+	m.RecordToken = v
+}
+
+func (m *StreamClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
 func (m *ListClusterOperationsRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -380,56 +440,32 @@ func (m *SegmentSubclusterConfigSpec) SetResources(v *Resources) {
 	m.Resources = v
 }
 
-func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {
-	m.Logs = v
+type ConfigSpec_GreenplumConfig = isConfigSpec_GreenplumConfig
+
+func (m *ConfigSpec) SetGreenplumConfig(v ConfigSpec_GreenplumConfig) {
+	m.GreenplumConfig = v
 }
 
-func (m *ListClusterLogsResponse) SetNextPageToken(v string) {
-	m.NextPageToken = v
+func (m *ConfigSpec) SetGreenplumConfig_6(v *GreenplumConfig6) {
+	m.GreenplumConfig = &ConfigSpec_GreenplumConfig_6{
+		GreenplumConfig_6: v,
+	}
 }
 
-func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
-	m.Timestamp = v
+func (m *ConfigSpec) SetDbmsConfig(v *DBMSConfig) {
+	m.DbmsConfig = v
 }
 
-func (m *LogRecord) SetMessage(v map[string]string) {
-	m.Message = v
+func (m *ConfigSpec) SetPool(v *ConnectionPoolerConfig) {
+	m.Pool = v
 }
 
-func (m *ListClusterLogsRequest) SetClusterId(v string) {
-	m.ClusterId = v
+func (m *ConfigSpec) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
+	m.BackgroundActivities = v
 }
 
-func (m *ListClusterLogsRequest) SetColumnFilter(v []string) {
-	m.ColumnFilter = v
-}
-
-func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_ServiceType) {
-	m.ServiceType = v
-}
-
-func (m *ListClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
-	m.FromTime = v
-}
-
-func (m *ListClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
-	m.ToTime = v
-}
-
-func (m *ListClusterLogsRequest) SetPageSize(v int64) {
-	m.PageSize = v
-}
-
-func (m *ListClusterLogsRequest) SetPageToken(v string) {
-	m.PageToken = v
-}
-
-func (m *ListClusterLogsRequest) SetAlwaysNextPageToken(v bool) {
-	m.AlwaysNextPageToken = v
-}
-
-func (m *ListClusterLogsRequest) SetFilter(v string) {
-	m.Filter = v
+func (m *ConfigSpec) SetPxfConfig(v *PXFConfig) {
+	m.PxfConfig = v
 }
 
 func (m *ListClusterBackupsRequest) SetClusterId(v string) {
@@ -442,42 +478,6 @@ func (m *ListClusterBackupsRequest) SetPageSize(v int64) {
 
 func (m *ListClusterBackupsRequest) SetPageToken(v string) {
 	m.PageToken = v
-}
-
-func (m *StreamLogRecord) SetRecord(v *LogRecord) {
-	m.Record = v
-}
-
-func (m *StreamLogRecord) SetNextRecordToken(v string) {
-	m.NextRecordToken = v
-}
-
-func (m *StreamClusterLogsRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StreamClusterLogsRequest) SetColumnFilter(v []string) {
-	m.ColumnFilter = v
-}
-
-func (m *StreamClusterLogsRequest) SetServiceType(v StreamClusterLogsRequest_ServiceType) {
-	m.ServiceType = v
-}
-
-func (m *StreamClusterLogsRequest) SetFromTime(v *timestamppb.Timestamp) {
-	m.FromTime = v
-}
-
-func (m *StreamClusterLogsRequest) SetToTime(v *timestamppb.Timestamp) {
-	m.ToTime = v
-}
-
-func (m *StreamClusterLogsRequest) SetRecordToken(v string) {
-	m.RecordToken = v
-}
-
-func (m *StreamClusterLogsRequest) SetFilter(v string) {
-	m.Filter = v
 }
 
 func (m *ListClusterBackupsResponse) SetBackups(v []*Backup) {

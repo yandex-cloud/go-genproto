@@ -29,7 +29,6 @@ const (
 type GetHttpRouterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to return.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId  string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetHttpRouterRequest) GetHttpRouterId() string {
 type ListHttpRoutersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list HTTP routers in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -88,7 +86,6 @@ type ListHttpRoutersRequest struct {
 	// [ListHttpRoutersResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters HTTP routers listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [HttpRouter.name] field.
 	// 2. An `=` operator.
@@ -164,7 +161,6 @@ type ListHttpRoutersResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListHttpRoutersRequest.page_size], use `next_page_token` as the value
 	// for the [ListHttpRoutersRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -218,7 +214,6 @@ func (x *ListHttpRoutersResponse) GetNextPageToken() string {
 type DeleteHttpRouterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to delete.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId  string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -310,7 +305,6 @@ func (x *DeleteHttpRouterMetadata) GetHttpRouterId() string {
 type UpdateHttpRouterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to update.
-	//
 	// To get the HTTP router ID, make a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// Field mask that specifies which attributes of the HTTP router should be updated.
@@ -322,7 +316,6 @@ type UpdateHttpRouterRequest struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// HTTP router labels as `key:value` pairs.
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [HttpRouterService.Get] request.
@@ -331,9 +324,7 @@ type UpdateHttpRouterRequest struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New virtual hosts that combine routes inside the router.
 	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#virtual-host).
-	//
 	// Only one virtual host with no authority (default match) can be specified.
-	//
 	// Existing list of virtual hosts is completely replaced by the specified list, so if you just want to add or remove
 	// a virtual host, make a [VirtualHostService.Create] request or a [VirtualHostService.Delete] request.
 	VirtualHosts []*VirtualHost `protobuf:"bytes,6,rep,name=virtual_hosts,json=virtualHosts,proto3" json:"virtual_hosts,omitempty"`
@@ -470,7 +461,6 @@ func (x *UpdateHttpRouterMetadata) GetHttpRouterId() string {
 type CreateHttpRouterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create an HTTP router in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the HTTP router.
@@ -483,7 +473,6 @@ type CreateHttpRouterRequest struct {
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Virtual hosts that combine routes inside the router.
 	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#virtual-host).
-	//
 	// Only one virtual host with no authority (default match) can be specified.
 	VirtualHosts []*VirtualHost `protobuf:"bytes,5,rep,name=virtual_hosts,json=virtualHosts,proto3" json:"virtual_hosts,omitempty"`
 	// Route options for the HTTP router.
@@ -612,7 +601,6 @@ func (x *CreateHttpRouterMetadata) GetHttpRouterId() string {
 type ListHttpRouterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the HTTP router to get operations for.
-	//
 	// To get the HTTP router ID, use a [HttpRouterService.List] request.
 	HttpRouterId string `protobuf:"bytes,1,opt,name=http_router_id,json=httpRouterId,proto3" json:"http_router_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -685,7 +673,6 @@ type ListHttpRouterOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListHttpRouterOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListHttpRouterOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -740,7 +727,7 @@ var File_yandex_cloud_apploadbalancer_v1_http_router_service_proto protoreflect.
 
 const file_yandex_cloud_apploadbalancer_v1_http_router_service_proto_rawDesc = "" +
 	"\n" +
-	"9yandex/cloud/apploadbalancer/v1/http_router_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a1yandex/cloud/apploadbalancer/v1/http_router.proto\x1a2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x1a\x1dyandex/cloud/validation.proto\"B\n" +
+	"9yandex/cloud/apploadbalancer/v1/http_router_service.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a1yandex/cloud/apploadbalancer/v1/http_router.proto\x1a2yandex/cloud/apploadbalancer/v1/virtual_host.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"B\n" +
 	"\x14GetHttpRouterRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\"\xb2\x01\n" +
 	"\x16ListHttpRoutersRequest\x12!\n" +
@@ -757,26 +744,26 @@ const file_yandex_cloud_apploadbalancer_v1_http_router_service_proto_rawDesc = "
 	"\x17DeleteHttpRouterRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\"@\n" +
 	"\x18DeleteHttpRouterMetadata\x12$\n" +
-	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\"\xf7\x04\n" +
+	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\"\xea\x04\n" +
 	"\x17UpdateHttpRouterRequest\x12*\n" +
 	"\x0ehttp_router_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fhttpRouterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12:\n" +
-	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa1\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2D.yandex.cloud.apploadbalancer.v1.UpdateHttpRouterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12Q\n" +
+	"updateMask\x125\n" +
+	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
+	"\x06labels\x18\x05 \x03(\v2D.yandex.cloud.apploadbalancer.v1.UpdateHttpRouterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12Q\n" +
 	"\rvirtual_hosts\x18\x06 \x03(\v2,.yandex.cloud.apploadbalancer.v1.VirtualHostR\fvirtualHosts\x12R\n" +
 	"\rroute_options\x18\b \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\a\x10\b\"@\n" +
 	"\x18UpdateHttpRouterMetadata\x12$\n" +
-	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\"\xb1\x04\n" +
+	"\x0ehttp_router_id\x18\x01 \x01(\tR\fhttpRouterId\"\xa4\x04\n" +
 	"\x17CreateHttpRouterRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12:\n" +
-	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa1\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2D.yandex.cloud.apploadbalancer.v1.CreateHttpRouterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12Q\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x125\n" +
+	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2D.yandex.cloud.apploadbalancer.v1.CreateHttpRouterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12Q\n" +
 	"\rvirtual_hosts\x18\x05 \x03(\v2,.yandex.cloud.apploadbalancer.v1.VirtualHostR\fvirtualHosts\x12R\n" +
 	"\rroute_options\x18\a \x01(\v2-.yandex.cloud.apploadbalancer.v1.RouteOptionsR\frouteOptions\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +

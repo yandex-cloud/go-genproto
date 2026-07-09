@@ -93,8 +93,10 @@ type Node struct {
 	ConfigurationId string `protobuf:"bytes,2,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// IP address of the node in the management network.
 	ManagementIpAddress string `protobuf:"bytes,3,opt,name=management_ip_address,json=managementIpAddress,proto3" json:"management_ip_address,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Hostname of the node inside the cluster.
+	Hostname      string `protobuf:"bytes,4,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Node) Reset() {
@@ -148,6 +150,13 @@ func (x *Node) GetManagementIpAddress() string {
 	return ""
 }
 
+func (x *Node) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_extend_nodes_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_extend_nodes_proto_rawDesc = "" +
@@ -156,11 +165,12 @@ const file_yandex_cloud_baremetal_v2_extend_nodes_proto_rawDesc = "" +
 	"\tNodeGroup\x12.\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\x02R\x0fconfigurationId\x12\x19\n" +
 	"\x05count\x18\x02 \x01(\x03B\x03\xe0A\x02R\x05count\x12A\n" +
-	"\x05nodes\x18\x03 \x03(\v2&.yandex.cloud.baremetal.v2.extend.NodeB\x03\xe0A\x03R\x05nodes\"\x91\x01\n" +
+	"\x05nodes\x18\x03 \x03(\v2&.yandex.cloud.baremetal.v2.extend.NodeB\x03\xe0A\x03R\x05nodes\"\xb2\x01\n" +
 	"\x04Node\x12 \n" +
 	"\tserver_id\x18\x01 \x01(\tB\x03\xe0A\x03R\bserverId\x12.\n" +
 	"\x10configuration_id\x18\x02 \x01(\tB\x03\xe0A\x02R\x0fconfigurationId\x127\n" +
-	"\x15management_ip_address\x18\x03 \x01(\tB\x03\xe0A\x01R\x13managementIpAddressBz\n" +
+	"\x15management_ip_address\x18\x03 \x01(\tB\x03\xe0A\x01R\x13managementIpAddress\x12\x1f\n" +
+	"\bhostname\x18\x04 \x01(\tB\x03\xe0A\x01R\bhostnameBz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"
 
 var (

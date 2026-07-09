@@ -154,6 +154,8 @@ type Image struct {
 	// the [yandex.cloud.compute.v1.ImageService.GetLatestByFamily] request
 	// and create the disk from this image.
 	Family string `protobuf:"bytes,7,opt,name=family,proto3" json:"family,omitempty"`
+	// The total size of the image, specified in bytes.
+	Size int64 `protobuf:"varint,16,opt,name=size,proto3" json:"size,omitempty"`
 	// The storage size of the image, specified in bytes.
 	StorageSize int64 `protobuf:"varint,8,opt,name=storage_size,json=storageSize,proto3" json:"storage_size,omitempty"`
 	// Minimum size of the disk which will be created from this image.
@@ -257,6 +259,13 @@ func (x *Image) GetFamily() string {
 		return x.Family
 	}
 	return ""
+}
+
+func (x *Image) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
 }
 
 func (x *Image) GetStorageSize() int64 {
@@ -421,7 +430,7 @@ var File_yandex_cloud_compute_v1_image_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_image_proto_rawDesc = "" +
 	"\n" +
-	"#yandex/cloud/compute/v1/image.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a!yandex/cloud/compute/v1/kek.proto\"\x94\x06\n" +
+	"#yandex/cloud/compute/v1/image.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a1yandex/cloud/compute/v1/hardware_generation.proto\x1a!yandex/cloud/compute/v1/kek.proto\"\xa8\x06\n" +
 	"\x05Image\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -430,7 +439,8 @@ const file_yandex_cloud_compute_v1_image_proto_rawDesc = "" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12B\n" +
 	"\x06labels\x18\x06 \x03(\v2*.yandex.cloud.compute.v1.Image.LabelsEntryR\x06labels\x12\x16\n" +
-	"\x06family\x18\a \x01(\tR\x06family\x12!\n" +
+	"\x06family\x18\a \x01(\tR\x06family\x12\x12\n" +
+	"\x04size\x18\x10 \x01(\x03R\x04size\x12!\n" +
 	"\fstorage_size\x18\b \x01(\x03R\vstorageSize\x12\"\n" +
 	"\rmin_disk_size\x18\t \x01(\x03R\vminDiskSize\x12\x1f\n" +
 	"\vproduct_ids\x18\n" +

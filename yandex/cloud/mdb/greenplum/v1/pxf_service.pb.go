@@ -27,9 +27,11 @@ const (
 )
 
 type CreatePXFDatasourceMetadata struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId      string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	DatasourceName string                 `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the PXF datasource. Must be unique within Greenplum® cluster.
+	DatasourceName string `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -79,9 +81,11 @@ func (x *CreatePXFDatasourceMetadata) GetDatasourceName() string {
 }
 
 type UpdatePXFDatasourceMetadata struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId      string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	DatasourceName string                 `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the PXF datasource. Must be unique within Greenplum® cluster.
+	DatasourceName string `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -131,9 +135,11 @@ func (x *UpdatePXFDatasourceMetadata) GetDatasourceName() string {
 }
 
 type DeletePXFDatasourceMetadata struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId      string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	DatasourceName string                 `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the PXF datasource.
+	DatasourceName string `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -183,8 +189,9 @@ func (x *DeletePXFDatasourceMetadata) GetDatasourceName() string {
 }
 
 type ListPXFDatasourcesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -227,8 +234,9 @@ func (x *ListPXFDatasourcesRequest) GetClusterId() string {
 }
 
 type ListPXFDatasourcesResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Datasources   []*PXFDatasource       `protobuf:"bytes,1,rep,name=datasources,proto3" json:"datasources,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of PXF datasources for the specified Greenplum® cluster.
+	Datasources   []*PXFDatasource `protobuf:"bytes,1,rep,name=datasources,proto3" json:"datasources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -271,9 +279,11 @@ func (x *ListPXFDatasourcesResponse) GetDatasources() []*PXFDatasource {
 }
 
 type CreatePXFDatasourceRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	Datasource    *PXFDatasource         `protobuf:"bytes,2,opt,name=datasource,proto3" json:"datasource,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Definition of the datasource.
+	Datasource    *PXFDatasource `protobuf:"bytes,2,opt,name=datasource,proto3" json:"datasource,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -323,10 +333,13 @@ func (x *CreatePXFDatasourceRequest) GetDatasource() *PXFDatasource {
 }
 
 type UpdatePXFDatasourceRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	Datasource    *PXFDatasource         `protobuf:"bytes,3,opt,name=datasource,proto3" json:"datasource,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Field mask that specifies which fields of the datasource should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Definition of the datasource (updated fields only).
+	Datasource    *PXFDatasource `protobuf:"bytes,3,opt,name=datasource,proto3" json:"datasource,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -383,9 +396,11 @@ func (x *UpdatePXFDatasourceRequest) GetDatasource() *PXFDatasource {
 }
 
 type DeletePXFDatasourceRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId      string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	DatasourceName string                 `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the PXF datasource to delete.
+	DatasourceName string `protobuf:"bytes,2,opt,name=datasource_name,json=datasourceName,proto3" json:"datasource_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -438,7 +453,7 @@ var File_yandex_cloud_mdb_greenplum_v1_pxf_service_proto protoreflect.FileDescri
 
 const file_yandex_cloud_mdb_greenplum_v1_pxf_service_proto_rawDesc = "" +
 	"\n" +
-	"/yandex/cloud/mdb/greenplum/v1/pxf_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a'yandex/cloud/mdb/greenplum/v1/pxf.proto\"\x98\x01\n" +
+	"/yandex/cloud/mdb/greenplum/v1/pxf_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a'yandex/cloud/mdb/greenplum/v1/pxf.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x01\n" +
 	"\x1bCreatePXFDatasourceMetadata\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12L\n" +

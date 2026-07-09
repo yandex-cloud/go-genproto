@@ -34,6 +34,10 @@ func (m *Image) SetFamily(v string) {
 	m.Family = v
 }
 
+func (m *Image) SetSize(v int64) {
+	m.Size = v
+}
+
 func (m *Image) SetStorageSize(v int64) {
 	m.StorageSize = v
 }

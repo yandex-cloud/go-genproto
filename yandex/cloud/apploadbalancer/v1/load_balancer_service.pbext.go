@@ -8,6 +8,22 @@ import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
+func (m *GetTargetStatesRequest) SetLoadBalancerId(v string) {
+	m.LoadBalancerId = v
+}
+
+func (m *GetTargetStatesRequest) SetBackendGroupId(v string) {
+	m.BackendGroupId = v
+}
+
+func (m *GetTargetStatesRequest) SetTargetGroupId(v string) {
+	m.TargetGroupId = v
+}
+
+func (m *GetTargetStatesResponse) SetTargetStates(v []*TargetState) {
+	m.TargetStates = v
+}
+
 func (m *GetLoadBalancerRequest) SetLoadBalancerId(v string) {
 	m.LoadBalancerId = v
 }
@@ -116,12 +132,12 @@ func (m *CreateLoadBalancerRequest) SetNetworkId(v string) {
 	m.NetworkId = v
 }
 
-func (m *CreateLoadBalancerRequest) SetListenerSpecs(v []*ListenerSpec) {
-	m.ListenerSpecs = v
-}
-
 func (m *CreateLoadBalancerRequest) SetAllocationPolicy(v *AllocationPolicy) {
 	m.AllocationPolicy = v
+}
+
+func (m *CreateLoadBalancerRequest) SetListenerSpecs(v []*ListenerSpec) {
+	m.ListenerSpecs = v
 }
 
 func (m *CreateLoadBalancerRequest) SetSecurityGroupIds(v []string) {
@@ -274,6 +290,12 @@ func (m *ListenerSpec) SetEndpointSpecs(v []*EndpointSpec) {
 	m.EndpointSpecs = v
 }
 
+func (m *ListenerSpec) SetStream(v *StreamListener) {
+	m.Listener = &ListenerSpec_Stream{
+		Stream: v,
+	}
+}
+
 func (m *ListenerSpec) SetHttp(v *HttpListener) {
 	m.Listener = &ListenerSpec_Http{
 		Http: v,
@@ -284,28 +306,6 @@ func (m *ListenerSpec) SetTls(v *TlsListener) {
 	m.Listener = &ListenerSpec_Tls{
 		Tls: v,
 	}
-}
-
-func (m *ListenerSpec) SetStream(v *StreamListener) {
-	m.Listener = &ListenerSpec_Stream{
-		Stream: v,
-	}
-}
-
-func (m *GetTargetStatesRequest) SetLoadBalancerId(v string) {
-	m.LoadBalancerId = v
-}
-
-func (m *GetTargetStatesRequest) SetBackendGroupId(v string) {
-	m.BackendGroupId = v
-}
-
-func (m *GetTargetStatesRequest) SetTargetGroupId(v string) {
-	m.TargetGroupId = v
-}
-
-func (m *GetTargetStatesResponse) SetTargetStates(v []*TargetState) {
-	m.TargetStates = v
 }
 
 func (m *AddSniMatchRequest) SetLoadBalancerId(v string) {

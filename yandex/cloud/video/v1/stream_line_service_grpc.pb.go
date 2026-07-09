@@ -68,6 +68,7 @@ type StreamLineServiceClient interface {
 	GetStreamKey(ctx context.Context, in *GetStreamKeyRequest, opts ...grpc.CallOption) (*PushStreamKey, error)
 	// Regenerates and updates the stream key for a push-type stream line.
 	// This is useful for security purposes when the existing key may be compromised.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateStreamKey(ctx context.Context, in *UpdateStreamKeyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -215,6 +216,7 @@ type StreamLineServiceServer interface {
 	GetStreamKey(context.Context, *GetStreamKeyRequest) (*PushStreamKey, error)
 	// Regenerates and updates the stream key for a push-type stream line.
 	// This is useful for security purposes when the existing key may be compromised.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateStreamKey(context.Context, *UpdateStreamKeyRequest) (*operation.Operation, error)
 }
 

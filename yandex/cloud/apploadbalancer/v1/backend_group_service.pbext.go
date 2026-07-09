@@ -69,6 +69,12 @@ func (m *UpdateBackendGroupRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
+	m.Backend = &UpdateBackendGroupRequest_Stream{
+		Stream: v,
+	}
+}
+
 func (m *UpdateBackendGroupRequest) SetHttp(v *HttpBackendGroup) {
 	m.Backend = &UpdateBackendGroupRequest_Http{
 		Http: v,
@@ -78,12 +84,6 @@ func (m *UpdateBackendGroupRequest) SetHttp(v *HttpBackendGroup) {
 func (m *UpdateBackendGroupRequest) SetGrpc(v *GrpcBackendGroup) {
 	m.Backend = &UpdateBackendGroupRequest_Grpc{
 		Grpc: v,
-	}
-}
-
-func (m *UpdateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
-	m.Backend = &UpdateBackendGroupRequest_Stream{
-		Stream: v,
 	}
 }
 
@@ -113,6 +113,12 @@ func (m *CreateBackendGroupRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *CreateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
+	m.Backend = &CreateBackendGroupRequest_Stream{
+		Stream: v,
+	}
+}
+
 func (m *CreateBackendGroupRequest) SetHttp(v *HttpBackendGroup) {
 	m.Backend = &CreateBackendGroupRequest_Http{
 		Http: v,
@@ -122,12 +128,6 @@ func (m *CreateBackendGroupRequest) SetHttp(v *HttpBackendGroup) {
 func (m *CreateBackendGroupRequest) SetGrpc(v *GrpcBackendGroup) {
 	m.Backend = &CreateBackendGroupRequest_Grpc{
 		Grpc: v,
-	}
-}
-
-func (m *CreateBackendGroupRequest) SetStream(v *StreamBackendGroup) {
-	m.Backend = &CreateBackendGroupRequest_Stream{
-		Stream: v,
 	}
 }
 
@@ -145,6 +145,12 @@ func (m *AddBackendRequest) SetBackendGroupId(v string) {
 	m.BackendGroupId = v
 }
 
+func (m *AddBackendRequest) SetStream(v *StreamBackend) {
+	m.Backend = &AddBackendRequest_Stream{
+		Stream: v,
+	}
+}
+
 func (m *AddBackendRequest) SetHttp(v *HttpBackend) {
 	m.Backend = &AddBackendRequest_Http{
 		Http: v,
@@ -154,12 +160,6 @@ func (m *AddBackendRequest) SetHttp(v *HttpBackend) {
 func (m *AddBackendRequest) SetGrpc(v *GrpcBackend) {
 	m.Backend = &AddBackendRequest_Grpc{
 		Grpc: v,
-	}
-}
-
-func (m *AddBackendRequest) SetStream(v *StreamBackend) {
-	m.Backend = &AddBackendRequest_Stream{
-		Stream: v,
 	}
 }
 
@@ -185,6 +185,12 @@ func (m *UpdateBackendRequest) SetUpdateMask(v *fieldmaskpb.FieldMask) {
 	m.UpdateMask = v
 }
 
+func (m *UpdateBackendRequest) SetStream(v *StreamBackend) {
+	m.Backend = &UpdateBackendRequest_Stream{
+		Stream: v,
+	}
+}
+
 func (m *UpdateBackendRequest) SetHttp(v *HttpBackend) {
 	m.Backend = &UpdateBackendRequest_Http{
 		Http: v,
@@ -194,12 +200,6 @@ func (m *UpdateBackendRequest) SetHttp(v *HttpBackend) {
 func (m *UpdateBackendRequest) SetGrpc(v *GrpcBackend) {
 	m.Backend = &UpdateBackendRequest_Grpc{
 		Grpc: v,
-	}
-}
-
-func (m *UpdateBackendRequest) SetStream(v *StreamBackend) {
-	m.Backend = &UpdateBackendRequest_Stream{
-		Stream: v,
 	}
 }
 

@@ -31,11 +31,11 @@ const (
 	ClusterService_Stop_FullMethodName                  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Stop"
 	ClusterService_Move_FullMethodName                  = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Move"
 	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.mdb.greenplum.v1.ClusterService/RescheduleMaintenance"
+	ClusterService_ListLogs_FullMethodName              = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs"
+	ClusterService_StreamLogs_FullMethodName            = "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs"
 	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListOperations"
 	ClusterService_ListMasterHosts_FullMethodName       = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListMasterHosts"
 	ClusterService_ListSegmentHosts_FullMethodName      = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListSegmentHosts"
-	ClusterService_ListLogs_FullMethodName              = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListLogs"
-	ClusterService_StreamLogs_FullMethodName            = "/yandex.cloud.mdb.greenplum.v1.ClusterService/StreamLogs"
 	ClusterService_ListBackups_FullMethodName           = "/yandex.cloud.mdb.greenplum.v1.ClusterService/ListBackups"
 	ClusterService_Backup_FullMethodName                = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Backup"
 	ClusterService_Restore_FullMethodName               = "/yandex.cloud.mdb.greenplum.v1.ClusterService/Restore"
@@ -51,7 +51,6 @@ const (
 // A set of methods for managing Greenplum® clusters.
 type ClusterServiceClient interface {
 	// Returns the specified Greenplum® cluster.
-	//
 	// To get the list of all available Greenplum® clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
@@ -61,6 +60,8 @@ type ClusterServiceClient interface {
 	// Updates the specified Greenplum® cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Expands the specified Greenplum® cluster.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	Expand(ctx context.Context, in *ExpandRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Greenplum® cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -72,16 +73,17 @@ type ClusterServiceClient interface {
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedule planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Retrieves logs for the specified Greenplum® cluster.
+	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
+	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
 	ListMasterHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
-	// Retrieves logs for the specified Greenplum® cluster.
-	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
-	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
-	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Creates a backup for the specified Greenplum cluster.
@@ -204,6 +206,35 @@ func (c *clusterServiceClient) RescheduleMaintenance(ctx context.Context, in *Re
 	return out, nil
 }
 
+func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListClusterLogsResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clusterServiceClient) StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &ClusterService_ServiceDesc.Streams[0], ClusterService_StreamLogs_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamClusterLogsRequest, StreamLogRecord]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ClusterService_StreamLogsClient = grpc.ServerStreamingClient[StreamLogRecord]
+
 func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListClusterOperationsResponse)
@@ -233,35 +264,6 @@ func (c *clusterServiceClient) ListSegmentHosts(ctx context.Context, in *ListClu
 	}
 	return out, nil
 }
-
-func (c *clusterServiceClient) ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterLogsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListLogs_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *clusterServiceClient) StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &ClusterService_ServiceDesc.Streams[0], ClusterService_StreamLogs_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[StreamClusterLogsRequest, StreamLogRecord]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ClusterService_StreamLogsClient = grpc.ServerStreamingClient[StreamLogRecord]
 
 func (c *clusterServiceClient) ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -330,7 +332,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing Greenplum® clusters.
 type ClusterServiceServer interface {
 	// Returns the specified Greenplum® cluster.
-	//
 	// To get the list of all available Greenplum® clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves a list of Greenplum® clusters that belong to the specified folder.
@@ -340,6 +341,8 @@ type ClusterServiceServer interface {
 	// Updates the specified Greenplum® cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
 	// Expands the specified Greenplum® cluster.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	Expand(context.Context, *ExpandRequest) (*operation.Operation, error)
 	// Deletes the specified Greenplum® cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
@@ -351,16 +354,17 @@ type ClusterServiceServer interface {
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
 	// Reschedule planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
+	// Retrieves logs for the specified Greenplum® cluster.
+	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
+	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Retrieves a list of master hosts for the specified cluster.
 	ListMasterHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
 	// Retrieves a list of segment hosts for the specified cluster.
 	ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
-	// Retrieves logs for the specified Greenplum® cluster.
-	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
-	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
-	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves a list of available backups for the specified Greenplum® cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Creates a backup for the specified Greenplum cluster.
@@ -412,6 +416,12 @@ func (UnimplementedClusterServiceServer) Move(context.Context, *MoveClusterReque
 func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method RescheduleMaintenance not implemented")
 }
+func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListLogs not implemented")
+}
+func (UnimplementedClusterServiceServer) StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error {
+	return status.Error(codes.Unimplemented, "method StreamLogs not implemented")
+}
 func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
 }
@@ -420,12 +430,6 @@ func (UnimplementedClusterServiceServer) ListMasterHosts(context.Context, *ListC
 }
 func (UnimplementedClusterServiceServer) ListSegmentHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListSegmentHosts not implemented")
-}
-func (UnimplementedClusterServiceServer) ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListLogs not implemented")
-}
-func (UnimplementedClusterServiceServer) StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error {
-	return status.Error(codes.Unimplemented, "method StreamLogs not implemented")
 }
 func (UnimplementedClusterServiceServer) ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListBackups not implemented")
@@ -645,6 +649,35 @@ func _ClusterService_RescheduleMaintenance_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_ListLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListLogs(ctx, req.(*ListClusterLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_StreamLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamClusterLogsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ClusterServiceServer).StreamLogs(m, &grpc.GenericServerStream[StreamClusterLogsRequest, StreamLogRecord]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type ClusterService_StreamLogsServer = grpc.ServerStreamingServer[StreamLogRecord]
+
 func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterOperationsRequest)
 	if err := dec(in); err != nil {
@@ -698,35 +731,6 @@ func _ClusterService_ListSegmentHosts_Handler(srv interface{}, ctx context.Conte
 	}
 	return interceptor(ctx, in, info, handler)
 }
-
-func _ClusterService_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterLogsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListLogs(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListLogs_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListLogs(ctx, req.(*ListClusterLogsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ClusterService_StreamLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamClusterLogsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ClusterServiceServer).StreamLogs(m, &grpc.GenericServerStream[StreamClusterLogsRequest, StreamLogRecord]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ClusterService_StreamLogsServer = grpc.ServerStreamingServer[StreamLogRecord]
 
 func _ClusterService_ListBackups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterBackupsRequest)
@@ -884,6 +888,10 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_RescheduleMaintenance_Handler,
 		},
 		{
+			MethodName: "ListLogs",
+			Handler:    _ClusterService_ListLogs_Handler,
+		},
+		{
 			MethodName: "ListOperations",
 			Handler:    _ClusterService_ListOperations_Handler,
 		},
@@ -894,10 +902,6 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSegmentHosts",
 			Handler:    _ClusterService_ListSegmentHosts_Handler,
-		},
-		{
-			MethodName: "ListLogs",
-			Handler:    _ClusterService_ListLogs_Handler,
 		},
 		{
 			MethodName: "ListBackups",

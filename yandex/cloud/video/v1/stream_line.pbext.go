@@ -30,6 +30,10 @@ func (m *StreamLine) SetTitle(v string) {
 	m.Title = v
 }
 
+func (m *StreamLine) SetInputSource(v LineInputSource) {
+	m.InputSource = v
+}
+
 func (m *StreamLine) SetRtmpPush(v *RTMPPushInput) {
 	m.InputType = &StreamLine_RtmpPush{
 		RtmpPush: v,
@@ -76,6 +80,10 @@ func (m *PushStreamKey) SetKey(v string) {
 	m.Key = v
 }
 
+func (m *PushStreamKey) SetBackupKey(v string) {
+	m.BackupKey = v
+}
+
 func (m *RTMPPushInput) SetUrl(v string) {
 	m.Url = v
 }
@@ -84,8 +92,16 @@ func (m *RTMPPullInput) SetUrl(v string) {
 	m.Url = v
 }
 
+func (m *RTMPPullInput) SetBackupUrl(v string) {
+	m.BackupUrl = v
+}
+
 func (m *SRTPullInput) SetUrl(v string) {
 	m.Url = v
+}
+
+func (m *SRTPullInput) SetBackupUrl(v string) {
+	m.BackupUrl = v
 }
 
 func (m *AutoLine) SetStatus(v AutoLine_AutoLineStatus) {

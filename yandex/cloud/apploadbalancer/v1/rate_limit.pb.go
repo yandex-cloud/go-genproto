@@ -167,7 +167,7 @@ var File_yandex_cloud_apploadbalancer_v1_rate_limit_proto protoreflect.FileDescr
 
 const file_yandex_cloud_apploadbalancer_v1_rate_limit_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"\xa3\x02\n" +
+	"0yandex/cloud/apploadbalancer/v1/rate_limit.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"\xa9\x02\n" +
 	"\tRateLimit\x12S\n" +
 	"\fall_requests\x18\x03 \x01(\v20.yandex.cloud.apploadbalancer.v1.RateLimit.LimitR\vallRequests\x12X\n" +
 	"\x0frequests_per_ip\x18\x04 \x01(\v20.yandex.cloud.apploadbalancer.v1.RateLimit.LimitR\rrequestsPerIp\x1ag\n" +
@@ -176,7 +176,7 @@ const file_yandex_cloud_apploadbalancer_v1_rate_limit_proto_rawDesc = "" +
 	"per_second\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0H\x00R\tperSecond\x12'\n" +
 	"\n" +
 	"per_minute\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0H\x00R\tperMinuteB\f\n" +
-	"\x04rate\x12\x04\xc0\xc11\x01Bz\n" +
+	"\x04rate\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x03Bz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 
 var (

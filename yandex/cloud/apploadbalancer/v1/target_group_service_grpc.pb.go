@@ -37,7 +37,6 @@ const (
 // A set of methods for managing target groups.
 type TargetGroupServiceClient interface {
 	// Returns the specified target group.
-	//
 	// To get the list of all available target groups, make a [List] request.
 	Get(ctx context.Context, in *GetTargetGroupRequest, opts ...grpc.CallOption) (*TargetGroup, error)
 	// Lists target groups in the specified folder.
@@ -151,7 +150,6 @@ func (c *targetGroupServiceClient) ListOperations(ctx context.Context, in *ListT
 // A set of methods for managing target groups.
 type TargetGroupServiceServer interface {
 	// Returns the specified target group.
-	//
 	// To get the list of all available target groups, make a [List] request.
 	Get(context.Context, *GetTargetGroupRequest) (*TargetGroup, error)
 	// Lists target groups in the specified folder.

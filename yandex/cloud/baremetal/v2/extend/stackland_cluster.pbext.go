@@ -54,8 +54,8 @@ func (m *StacklandCluster) SetHostRoles(v *StacklandHostRoles) {
 	m.HostRoles = v
 }
 
-func (m *StacklandCluster) SetBastion(v *Node) {
-	m.Bastion = v
+func (m *StacklandCluster) SetBastionNode(v *Node) {
+	m.BastionNode = v
 }
 
 func (m *StacklandCluster) SetSubnetId(v string) {
@@ -70,8 +70,8 @@ func (m *StacklandCluster) SetVersion(v string) {
 	m.Version = v
 }
 
-func (m *StacklandCluster) SetLicence(v string) {
-	m.Licence = v
+func (m *StacklandCluster) SetLicense(v string) {
+	m.License = v
 }
 
 func (m *StacklandCluster) SetCredentialsLockboxSecretId(v string) {
@@ -80,6 +80,22 @@ func (m *StacklandCluster) SetCredentialsLockboxSecretId(v string) {
 
 func (m *StacklandCluster) SetConfigurationUrl(v string) {
 	m.ConfigurationUrl = v
+}
+
+func (m *StacklandCluster) SetVirtualIp(v string) {
+	m.VirtualIp = v
+}
+
+func (m *StacklandCluster) SetClusterDomain(v string) {
+	m.ClusterDomain = v
+}
+
+func (m *StacklandCluster) SetSubdomains(v *StacklandSubdomains) {
+	m.Subdomains = v
+}
+
+func (m *StacklandCluster) SetBastionSpec(v *BastionSpec) {
+	m.BastionSpec = v
 }
 
 func (m *StacklandHostRoles) SetControlplane(v []*NodeGroup) {
@@ -92,4 +108,24 @@ func (m *StacklandHostRoles) SetCombined(v []*NodeGroup) {
 
 func (m *StacklandHostRoles) SetWorker(v []*NodeGroup) {
 	m.Worker = v
+}
+
+func (m *StacklandSubdomains) SetConsole(v string) {
+	m.Console = v
+}
+
+func (m *StacklandSubdomains) SetDashboard(v string) {
+	m.Dashboard = v
+}
+
+func (m *StacklandSubdomains) SetGrafana(v string) {
+	m.Grafana = v
+}
+
+func (m *StacklandSubdomains) SetPrometheus(v string) {
+	m.Prometheus = v
+}
+
+func (m *StacklandSubdomains) SetAlertmanager(v string) {
+	m.Alertmanager = v
 }

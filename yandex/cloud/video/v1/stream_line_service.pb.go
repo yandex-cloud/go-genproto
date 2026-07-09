@@ -330,6 +330,9 @@ type CreateStreamLineRequest struct {
 	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Line title.
 	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	// Specifies which input source (main or backup) should be used.
+	// Default is LINE_INPUT_SOURCE_MAIN if not specified.
+	InputSource LineInputSource `protobuf:"varint,18,opt,name=input_source,json=inputSource,proto3,enum=yandex.cloud.video.v1.LineInputSource" json:"input_source,omitempty"`
 	// Video signal settings.
 	//
 	// Types that are valid to be assigned to InputParams:
@@ -399,6 +402,13 @@ func (x *CreateStreamLineRequest) GetTitle() string {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *CreateStreamLineRequest) GetInputSource() LineInputSource {
+	if x != nil {
+		return x.InputSource
+	}
+	return LineInputSource_LINE_INPUT_SOURCE_UNSPECIFIED
 }
 
 func (x *CreateStreamLineRequest) GetInputParams() isCreateStreamLineRequest_InputParams {
@@ -566,6 +576,8 @@ type UpdateStreamLineRequest struct {
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	// Line title.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	// Specifies which input source (main or backup) should be used.
+	InputSource LineInputSource `protobuf:"varint,18,opt,name=input_source,json=inputSource,proto3,enum=yandex.cloud.video.v1.LineInputSource" json:"input_source,omitempty"`
 	// Video signal settings.
 	//
 	// Types that are valid to be assigned to InputParams:
@@ -631,6 +643,13 @@ func (x *UpdateStreamLineRequest) GetTitle() string {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *UpdateStreamLineRequest) GetInputSource() LineInputSource {
+	if x != nil {
+		return x.InputSource
+	}
+	return LineInputSource_LINE_INPUT_SOURCE_UNSPECIFIED
 }
 
 func (x *UpdateStreamLineRequest) GetInputParams() isUpdateStreamLineRequest_InputParams {
@@ -1123,7 +1142,9 @@ type RTMPPullParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The RTMP URL from which to pull the video stream.
 	// Must be a valid RTMP URL starting with "rtmp://".
-	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// The backup RTMP URL from which to pull the video stream.
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1165,12 +1186,21 @@ func (x *RTMPPullParams) GetUrl() string {
 	return ""
 }
 
+func (x *RTMPPullParams) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
+	}
+	return ""
+}
+
 // Parameters for creating an SRT pull input type stream line.
 type SRTPullParams struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The SRT URL from which to pull the video stream.
 	// Must be a valid SRT URL starting with "srt://".
-	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// The backup SRT URL from which to pull the video stream.
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1208,6 +1238,13 @@ func (*SRTPullParams) Descriptor() ([]byte, []int) {
 func (x *SRTPullParams) GetUrl() string {
 	if x != nil {
 		return x.Url
+	}
+	return ""
+}
+
+func (x *SRTPullParams) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
 	}
 	return ""
 }
@@ -1521,11 +1558,12 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x129\n" +
 	"\x0fstream_line_ids\x18\x02 \x03(\tB\x11\x82\xc81\x051-100\x8a\xc81\x04<=50R\rstreamLineIds\"c\n" +
 	"\x1bBatchGetStreamLinesResponse\x12D\n" +
-	"\fstream_lines\x18\x01 \x03(\v2!.yandex.cloud.video.v1.StreamLineR\vstreamLines\"\xf5\x05\n" +
+	"\fstream_lines\x18\x01 \x03(\v2!.yandex.cloud.video.v1.StreamLineR\vstreamLines\"\xc6\x06\n" +
 	"\x17CreateStreamLineRequest\x12+\n" +
 	"\n" +
 	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x12#\n" +
-	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12E\n" +
+	"\x05title\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=300R\x05title\x12I\n" +
+	"\finput_source\x18\x12 \x01(\x0e2&.yandex.cloud.video.v1.LineInputSourceR\vinputSource\x12E\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.RTMPPushParamsH\x00R\brtmpPush\x12E\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2%.yandex.cloud.video.v1.RTMPPullParamsH\x00R\brtmpPull\x12B\n" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2$.yandex.cloud.video.v1.SRTPullParamsH\x00R\asrtPull\x12K\n" +
@@ -1537,14 +1575,15 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x14\n" +
 	"\finput_params\x12\x04\xc0\xc11\x01B\x18\n" +
-	"\x10line_type_params\x12\x04\xc0\xc11\x01J\x05\b\x03\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
+	"\x10line_type_params\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x12J\x05\b\x13\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
 	"\x18CreateStreamLineMetadata\x12$\n" +
-	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"\xfd\x04\n" +
+	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"\xce\x05\n" +
 	"\x17UpdateStreamLineRequest\x122\n" +
 	"\x0estream_line_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\fstreamLineId\x12?\n" +
 	"\n" +
 	"field_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskB\x04\xe8\xc71\x01R\tfieldMask\x12\x1f\n" +
-	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12E\n" +
+	"\x05title\x18\x03 \x01(\tB\t\x8a\xc81\x05<=300R\x05title\x12I\n" +
+	"\finput_source\x18\x12 \x01(\x0e2&.yandex.cloud.video.v1.LineInputSourceR\vinputSource\x12E\n" +
 	"\trtmp_push\x18\xe8\a \x01(\v2%.yandex.cloud.video.v1.RTMPPushParamsH\x00R\brtmpPush\x12E\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2%.yandex.cloud.video.v1.RTMPPullParamsH\x00R\brtmpPull\x12B\n" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2$.yandex.cloud.video.v1.SRTPullParamsH\x00R\asrtPull\x12\x97\x01\n" +
@@ -1552,7 +1591,7 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\finput_paramsJ\x05\b\x04\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\a\"@\n" +
+	"\finput_paramsJ\x04\b\x04\x10\x12J\x05\b\x13\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\a\"@\n" +
 	"\x18UpdateStreamLineMetadata\x12$\n" +
 	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"M\n" +
 	"\x17DeleteStreamLineRequest\x122\n" +
@@ -1574,11 +1613,15 @@ const file_yandex_cloud_video_v1_stream_line_service_proto_rawDesc = "" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x05\b\x02\x10\xe8\a\"A\n" +
 	"\x19PerformLineActionMetadata\x12$\n" +
 	"\x0estream_line_id\x18\x01 \x01(\tR\fstreamLineId\"\x10\n" +
-	"\x0eRTMPPushParams\"5\n" +
+	"\x0eRTMPPushParams\"f\n" +
 	"\x0eRTMPPullParams\x12#\n" +
-	"\x03url\x18\x01 \x01(\tB\x11\xe8\xc71\x01\xf2\xc71\trtmp://.*R\x03url\"3\n" +
+	"\x03url\x18\x01 \x01(\tB\x11\xe8\xc71\x01\xf2\xc71\trtmp://.*R\x03url\x12/\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tB\x10\xf2\xc71\f(|rtmp://.*)R\tbackupUrl\"c\n" +
 	"\rSRTPullParams\x12\"\n" +
-	"\x03url\x18\x01 \x01(\tB\x10\xe8\xc71\x01\xf2\xc71\bsrt://.*R\x03url\"\x12\n" +
+	"\x03url\x18\x01 \x01(\tB\x10\xe8\xc71\x01\xf2\xc71\bsrt://.*R\x03url\x12.\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tB\x0f\xf2\xc71\v(|srt://.*)R\tbackupUrl\"\x12\n" +
 	"\x10ManualLineParams\"\x10\n" +
 	"\x0eAutoLineParams\"\x10\n" +
 	"\x0eActivateAction\"\x12\n" +
@@ -1653,51 +1696,54 @@ var file_yandex_cloud_video_v1_stream_line_service_proto_goTypes = []any{
 	nil,                                    // 25: yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntry
 	nil,                                    // 26: yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntry
 	(*StreamLine)(nil),                     // 27: yandex.cloud.video.v1.StreamLine
-	(*fieldmaskpb.FieldMask)(nil),          // 28: google.protobuf.FieldMask
-	(*operation.Operation)(nil),            // 29: yandex.cloud.operation.Operation
-	(*PushStreamKey)(nil),                  // 30: yandex.cloud.video.v1.PushStreamKey
+	(LineInputSource)(0),                   // 28: yandex.cloud.video.v1.LineInputSource
+	(*fieldmaskpb.FieldMask)(nil),          // 29: google.protobuf.FieldMask
+	(*operation.Operation)(nil),            // 30: yandex.cloud.operation.Operation
+	(*PushStreamKey)(nil),                  // 31: yandex.cloud.video.v1.PushStreamKey
 }
 var file_yandex_cloud_video_v1_stream_line_service_proto_depIdxs = []int32{
 	27, // 0: yandex.cloud.video.v1.ListStreamLinesResponse.stream_lines:type_name -> yandex.cloud.video.v1.StreamLine
 	27, // 1: yandex.cloud.video.v1.BatchGetStreamLinesResponse.stream_lines:type_name -> yandex.cloud.video.v1.StreamLine
-	15, // 2: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
-	16, // 3: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
-	17, // 4: yandex.cloud.video.v1.CreateStreamLineRequest.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullParams
-	18, // 5: yandex.cloud.video.v1.CreateStreamLineRequest.manual_line:type_name -> yandex.cloud.video.v1.ManualLineParams
-	19, // 6: yandex.cloud.video.v1.CreateStreamLineRequest.auto_line:type_name -> yandex.cloud.video.v1.AutoLineParams
-	25, // 7: yandex.cloud.video.v1.CreateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntry
-	28, // 8: yandex.cloud.video.v1.UpdateStreamLineRequest.field_mask:type_name -> google.protobuf.FieldMask
-	15, // 9: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
-	16, // 10: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
-	17, // 11: yandex.cloud.video.v1.UpdateStreamLineRequest.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullParams
-	26, // 12: yandex.cloud.video.v1.UpdateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntry
-	20, // 13: yandex.cloud.video.v1.PerformLineActionRequest.activate:type_name -> yandex.cloud.video.v1.ActivateAction
-	21, // 14: yandex.cloud.video.v1.PerformLineActionRequest.deactivate:type_name -> yandex.cloud.video.v1.DeactivateAction
-	0,  // 15: yandex.cloud.video.v1.StreamLineService.Get:input_type -> yandex.cloud.video.v1.GetStreamLineRequest
-	1,  // 16: yandex.cloud.video.v1.StreamLineService.List:input_type -> yandex.cloud.video.v1.ListStreamLinesRequest
-	3,  // 17: yandex.cloud.video.v1.StreamLineService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetStreamLinesRequest
-	5,  // 18: yandex.cloud.video.v1.StreamLineService.Create:input_type -> yandex.cloud.video.v1.CreateStreamLineRequest
-	7,  // 19: yandex.cloud.video.v1.StreamLineService.Update:input_type -> yandex.cloud.video.v1.UpdateStreamLineRequest
-	9,  // 20: yandex.cloud.video.v1.StreamLineService.Delete:input_type -> yandex.cloud.video.v1.DeleteStreamLineRequest
-	11, // 21: yandex.cloud.video.v1.StreamLineService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteStreamLinesRequest
-	13, // 22: yandex.cloud.video.v1.StreamLineService.PerformAction:input_type -> yandex.cloud.video.v1.PerformLineActionRequest
-	22, // 23: yandex.cloud.video.v1.StreamLineService.GetStreamKey:input_type -> yandex.cloud.video.v1.GetStreamKeyRequest
-	23, // 24: yandex.cloud.video.v1.StreamLineService.UpdateStreamKey:input_type -> yandex.cloud.video.v1.UpdateStreamKeyRequest
-	27, // 25: yandex.cloud.video.v1.StreamLineService.Get:output_type -> yandex.cloud.video.v1.StreamLine
-	2,  // 26: yandex.cloud.video.v1.StreamLineService.List:output_type -> yandex.cloud.video.v1.ListStreamLinesResponse
-	4,  // 27: yandex.cloud.video.v1.StreamLineService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetStreamLinesResponse
-	29, // 28: yandex.cloud.video.v1.StreamLineService.Create:output_type -> yandex.cloud.operation.Operation
-	29, // 29: yandex.cloud.video.v1.StreamLineService.Update:output_type -> yandex.cloud.operation.Operation
-	29, // 30: yandex.cloud.video.v1.StreamLineService.Delete:output_type -> yandex.cloud.operation.Operation
-	29, // 31: yandex.cloud.video.v1.StreamLineService.BatchDelete:output_type -> yandex.cloud.operation.Operation
-	29, // 32: yandex.cloud.video.v1.StreamLineService.PerformAction:output_type -> yandex.cloud.operation.Operation
-	30, // 33: yandex.cloud.video.v1.StreamLineService.GetStreamKey:output_type -> yandex.cloud.video.v1.PushStreamKey
-	29, // 34: yandex.cloud.video.v1.StreamLineService.UpdateStreamKey:output_type -> yandex.cloud.operation.Operation
-	25, // [25:35] is the sub-list for method output_type
-	15, // [15:25] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	28, // 2: yandex.cloud.video.v1.CreateStreamLineRequest.input_source:type_name -> yandex.cloud.video.v1.LineInputSource
+	15, // 3: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
+	16, // 4: yandex.cloud.video.v1.CreateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
+	17, // 5: yandex.cloud.video.v1.CreateStreamLineRequest.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullParams
+	18, // 6: yandex.cloud.video.v1.CreateStreamLineRequest.manual_line:type_name -> yandex.cloud.video.v1.ManualLineParams
+	19, // 7: yandex.cloud.video.v1.CreateStreamLineRequest.auto_line:type_name -> yandex.cloud.video.v1.AutoLineParams
+	25, // 8: yandex.cloud.video.v1.CreateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamLineRequest.LabelsEntry
+	29, // 9: yandex.cloud.video.v1.UpdateStreamLineRequest.field_mask:type_name -> google.protobuf.FieldMask
+	28, // 10: yandex.cloud.video.v1.UpdateStreamLineRequest.input_source:type_name -> yandex.cloud.video.v1.LineInputSource
+	15, // 11: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushParams
+	16, // 12: yandex.cloud.video.v1.UpdateStreamLineRequest.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullParams
+	17, // 13: yandex.cloud.video.v1.UpdateStreamLineRequest.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullParams
+	26, // 14: yandex.cloud.video.v1.UpdateStreamLineRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamLineRequest.LabelsEntry
+	20, // 15: yandex.cloud.video.v1.PerformLineActionRequest.activate:type_name -> yandex.cloud.video.v1.ActivateAction
+	21, // 16: yandex.cloud.video.v1.PerformLineActionRequest.deactivate:type_name -> yandex.cloud.video.v1.DeactivateAction
+	0,  // 17: yandex.cloud.video.v1.StreamLineService.Get:input_type -> yandex.cloud.video.v1.GetStreamLineRequest
+	1,  // 18: yandex.cloud.video.v1.StreamLineService.List:input_type -> yandex.cloud.video.v1.ListStreamLinesRequest
+	3,  // 19: yandex.cloud.video.v1.StreamLineService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetStreamLinesRequest
+	5,  // 20: yandex.cloud.video.v1.StreamLineService.Create:input_type -> yandex.cloud.video.v1.CreateStreamLineRequest
+	7,  // 21: yandex.cloud.video.v1.StreamLineService.Update:input_type -> yandex.cloud.video.v1.UpdateStreamLineRequest
+	9,  // 22: yandex.cloud.video.v1.StreamLineService.Delete:input_type -> yandex.cloud.video.v1.DeleteStreamLineRequest
+	11, // 23: yandex.cloud.video.v1.StreamLineService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteStreamLinesRequest
+	13, // 24: yandex.cloud.video.v1.StreamLineService.PerformAction:input_type -> yandex.cloud.video.v1.PerformLineActionRequest
+	22, // 25: yandex.cloud.video.v1.StreamLineService.GetStreamKey:input_type -> yandex.cloud.video.v1.GetStreamKeyRequest
+	23, // 26: yandex.cloud.video.v1.StreamLineService.UpdateStreamKey:input_type -> yandex.cloud.video.v1.UpdateStreamKeyRequest
+	27, // 27: yandex.cloud.video.v1.StreamLineService.Get:output_type -> yandex.cloud.video.v1.StreamLine
+	2,  // 28: yandex.cloud.video.v1.StreamLineService.List:output_type -> yandex.cloud.video.v1.ListStreamLinesResponse
+	4,  // 29: yandex.cloud.video.v1.StreamLineService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetStreamLinesResponse
+	30, // 30: yandex.cloud.video.v1.StreamLineService.Create:output_type -> yandex.cloud.operation.Operation
+	30, // 31: yandex.cloud.video.v1.StreamLineService.Update:output_type -> yandex.cloud.operation.Operation
+	30, // 32: yandex.cloud.video.v1.StreamLineService.Delete:output_type -> yandex.cloud.operation.Operation
+	30, // 33: yandex.cloud.video.v1.StreamLineService.BatchDelete:output_type -> yandex.cloud.operation.Operation
+	30, // 34: yandex.cloud.video.v1.StreamLineService.PerformAction:output_type -> yandex.cloud.operation.Operation
+	31, // 35: yandex.cloud.video.v1.StreamLineService.GetStreamKey:output_type -> yandex.cloud.video.v1.PushStreamKey
+	30, // 36: yandex.cloud.video.v1.StreamLineService.UpdateStreamKey:output_type -> yandex.cloud.operation.Operation
+	27, // [27:37] is the sub-list for method output_type
+	17, // [17:27] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_stream_line_service_proto_init() }

@@ -2362,6 +2362,17 @@ type UserSettings struct {
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#show_data_lake_catalogs_in_system_tables).
 	ShowDataLakeCatalogsInSystemTables *wrapperspb.BoolValue `protobuf:"bytes,173,opt,name=show_data_lake_catalogs_in_system_tables,json=showDataLakeCatalogsInSystemTables,proto3" json:"show_data_lake_catalogs_in_system_tables,omitempty"`
+	// The compatibility setting causes ClickHouse to use the default settings of a previous version of ClickHouse,
+	// where the previous version is provided as the setting. An empty value means that this setting is disabled.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#compatibility).
+	Compatibility *wrapperspb.StringValue `protobuf:"bytes,179,opt,name=compatibility,proto3" json:"compatibility,omitempty"`
+	// Apply TTL for old data, after ALTER MODIFY TTL query.
+	//
+	// Default value: **true**.
+	//
+	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/operations/settings/settings#materialize_ttl_after_modify).
+	MaterializeTtlAfterModify *wrapperspb.BoolValue `protobuf:"bytes,180,opt,name=materialize_ttl_after_modify,json=materializeTtlAfterModify,proto3" json:"materialize_ttl_after_modify,omitempty"`
 	// The setting is deprecated and has no effect.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
@@ -3616,6 +3627,20 @@ func (x *UserSettings) GetShowDataLakeCatalogsInSystemTables() *wrapperspb.BoolV
 	return nil
 }
 
+func (x *UserSettings) GetCompatibility() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Compatibility
+	}
+	return nil
+}
+
+func (x *UserSettings) GetMaterializeTtlAfterModify() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.MaterializeTtlAfterModify
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
 func (x *UserSettings) GetCompile() *wrapperspb.BoolValue {
 	if x != nil {
@@ -3905,7 +3930,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"authMethod\"1\n" +
 	"\n" +
 	"Permission\x12#\n" +
-	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"\xae\x9a\x01\n" +
+	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"ћ\x01\n" +
 	"\fUserSettings\x127\n" +
 	"\breadonly\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\breadonly\x127\n" +
 	"\tallow_ddl\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\ballowDdl\x12^\n" +
@@ -4081,7 +4106,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"\x18s3_use_adaptive_timeouts\x18\xaa\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x15s3UseAdaptiveTimeouts\x121\n" +
 	"\x05final\x18\xab\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x05final\x12O\n" +
 	"\x15use_hive_partitioning\x18\xac\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x13useHivePartitioning\x12q\n" +
-	"(show_data_lake_catalogs_in_system_tables\x18\xad\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\"showDataLakeCatalogsInSystemTables\x128\n" +
+	"(show_data_lake_catalogs_in_system_tables\x18\xad\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\"showDataLakeCatalogsInSystemTables\x12C\n" +
+	"\rcompatibility\x18\xb3\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rcompatibility\x12\\\n" +
+	"\x1cmaterialize_ttl_after_modify\x18\xb4\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x19materializeTtlAfterModify\x128\n" +
 	"\acompile\x18, \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\acompile\x12P\n" +
 	"\x14min_count_to_compile\x18- \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R\x11minCountToCompile\x12Q\n" +
 	"\x14async_insert_threads\x18v \x01(\v2\x1b.google.protobuf.Int64ValueB\x02\x18\x01R\x12asyncInsertThreads\x12\\\n" +
@@ -4245,6 +4272,7 @@ var file_yandex_cloud_mdb_clickhouse_v1_user_proto_goTypes = []any{
 	(*wrapperspb.Int64Value)(nil),                                // 22: google.protobuf.Int64Value
 	(*wrapperspb.BoolValue)(nil),                                 // 23: google.protobuf.BoolValue
 	(*wrapperspb.DoubleValue)(nil),                               // 24: google.protobuf.DoubleValue
+	(*wrapperspb.StringValue)(nil),                               // 25: google.protobuf.StringValue
 }
 var file_yandex_cloud_mdb_clickhouse_v1_user_proto_depIdxs = []int32{
 	17,  // 0: yandex.cloud.mdb.clickhouse.v1.User.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
@@ -4421,26 +4449,28 @@ var file_yandex_cloud_mdb_clickhouse_v1_user_proto_depIdxs = []int32{
 	23,  // 171: yandex.cloud.mdb.clickhouse.v1.UserSettings.final:type_name -> google.protobuf.BoolValue
 	23,  // 172: yandex.cloud.mdb.clickhouse.v1.UserSettings.use_hive_partitioning:type_name -> google.protobuf.BoolValue
 	23,  // 173: yandex.cloud.mdb.clickhouse.v1.UserSettings.show_data_lake_catalogs_in_system_tables:type_name -> google.protobuf.BoolValue
-	23,  // 174: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
-	22,  // 175: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
-	22,  // 176: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
-	22,  // 177: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
-	22,  // 178: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
-	22,  // 179: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
-	22,  // 180: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
-	22,  // 181: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
-	22,  // 182: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
-	22,  // 183: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
-	23,  // 184: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
-	17,  // 185: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
-	18,  // 186: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
-	19,  // 187: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
-	0,   // 188: yandex.cloud.mdb.clickhouse.v1.UserSpec.auth_method:type_name -> yandex.cloud.mdb.clickhouse.v1.AuthMethod
-	189, // [189:189] is the sub-list for method output_type
-	189, // [189:189] is the sub-list for method input_type
-	189, // [189:189] is the sub-list for extension type_name
-	189, // [189:189] is the sub-list for extension extendee
-	0,   // [0:189] is the sub-list for field type_name
+	25,  // 174: yandex.cloud.mdb.clickhouse.v1.UserSettings.compatibility:type_name -> google.protobuf.StringValue
+	23,  // 175: yandex.cloud.mdb.clickhouse.v1.UserSettings.materialize_ttl_after_modify:type_name -> google.protobuf.BoolValue
+	23,  // 176: yandex.cloud.mdb.clickhouse.v1.UserSettings.compile:type_name -> google.protobuf.BoolValue
+	22,  // 177: yandex.cloud.mdb.clickhouse.v1.UserSettings.min_count_to_compile:type_name -> google.protobuf.Int64Value
+	22,  // 178: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_threads:type_name -> google.protobuf.Int64Value
+	22,  // 179: yandex.cloud.mdb.clickhouse.v1.UserSettings.async_insert_stale_timeout:type_name -> google.protobuf.Int64Value
+	22,  // 180: yandex.cloud.mdb.clickhouse.v1.UserQuota.interval_duration:type_name -> google.protobuf.Int64Value
+	22,  // 181: yandex.cloud.mdb.clickhouse.v1.UserQuota.queries:type_name -> google.protobuf.Int64Value
+	22,  // 182: yandex.cloud.mdb.clickhouse.v1.UserQuota.errors:type_name -> google.protobuf.Int64Value
+	22,  // 183: yandex.cloud.mdb.clickhouse.v1.UserQuota.result_rows:type_name -> google.protobuf.Int64Value
+	22,  // 184: yandex.cloud.mdb.clickhouse.v1.UserQuota.read_rows:type_name -> google.protobuf.Int64Value
+	22,  // 185: yandex.cloud.mdb.clickhouse.v1.UserQuota.execution_time:type_name -> google.protobuf.Int64Value
+	23,  // 186: yandex.cloud.mdb.clickhouse.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	17,  // 187: yandex.cloud.mdb.clickhouse.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.clickhouse.v1.Permission
+	18,  // 188: yandex.cloud.mdb.clickhouse.v1.UserSpec.settings:type_name -> yandex.cloud.mdb.clickhouse.v1.UserSettings
+	19,  // 189: yandex.cloud.mdb.clickhouse.v1.UserSpec.quotas:type_name -> yandex.cloud.mdb.clickhouse.v1.UserQuota
+	0,   // 190: yandex.cloud.mdb.clickhouse.v1.UserSpec.auth_method:type_name -> yandex.cloud.mdb.clickhouse.v1.AuthMethod
+	191, // [191:191] is the sub-list for method output_type
+	191, // [191:191] is the sub-list for method input_type
+	191, // [191:191] is the sub-list for extension type_name
+	191, // [191:191] is the sub-list for extension extendee
+	0,   // [0:191] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_clickhouse_v1_user_proto_init() }

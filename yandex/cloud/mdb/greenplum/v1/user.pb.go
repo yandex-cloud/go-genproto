@@ -89,11 +89,11 @@ var File_yandex_cloud_mdb_greenplum_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xaf\x01\n" +
+	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xb2\x01\n" +
 	"\x04User\x12A\n" +
 	"\x04name\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71\x1d^[a-zA-Z_][a-zA-Z0-9_]{0,62}$\x8a\xc81\x041-63R\x04name\x12%\n" +
-	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x056-200R\bpassword\x12=\n" +
-	"\x0eresource_group\x18\x03 \x01(\tB\x16\xf2\xc71\x12^[^\\|/*?.,;\"'<>]+$R\rresourceGroupBp\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12@\n" +
+	"\x0eresource_group\x18\x03 \x01(\tB\x19\xf2\xc71\x15^([^\\|/*?.,;\"'<>]+|)$R\rresourceGroupBp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (

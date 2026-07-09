@@ -25,28 +25,29 @@ const (
 
 // ResourceGroup defines a resource group configuration shared between Greenplum and Apache Cloudberry,
 // but the two engines use different sets of fields.
-//
 // Greenplum fields:
 // * concurrency
 // * cpu_rate_limit
 // * memory_limit
 // * memory_shared_quota
 // * memory_spill_ratio
-//
 // Apache Cloudberry fields:
 // * concurrency
 // * cpu_max_percent
 // * cpu_weight
 // * memory_quota
 // * min_cost
-//
 // The sets partially overlap (concurrency is common to both). Passing Greenplum-specific
 // fields to a CloudBerry cluster or vice versa is not rejected at the proto level -
 // field validation is performed at runtime by the service.
 type ResourceGroup struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	IsUserDefined *wrapperspb.BoolValue  `protobuf:"bytes,2,opt,name=is_user_defined,json=isUserDefined,proto3" json:"is_user_defined,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the resource group.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Determines whether the resource group is user-defined or system-defined:
+	// * true - resource group is user-defined;
+	// * false - resource group is system-defined.
+	IsUserDefined *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=is_user_defined,json=isUserDefined,proto3" json:"is_user_defined,omitempty"`
 	// References to CONCURRENCY from gp resource group parameter
 	Concurrency *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=concurrency,proto3" json:"concurrency,omitempty"`
 	// References to CPU_RATE_LIMIT from gp resource group parameter
@@ -58,20 +59,16 @@ type ResourceGroup struct {
 	// References to MEMORY_SPILL_RATIO from gp resource group parameter
 	MemorySpillRatio *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=memory_spill_ratio,json=memorySpillRatio,proto3" json:"memory_spill_ratio,omitempty"`
 	// References to CPU_MAX_PERCENT from Apache Cloudberry resource group parameter:
-	//
-	//	The maximum percentage of CPU resources the group can use.
+	// The maximum percentage of CPU resources the group can use.
 	CpuMaxPercent *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=cpu_max_percent,json=cpuMaxPercent,proto3" json:"cpu_max_percent,omitempty"`
 	// References to CPU_WEIGHT from Apache Cloudberry resource group parameter:
-	//
-	//	The scheduling priority of the resource group.
+	// The scheduling priority of the resource group.
 	CpuWeight *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=cpu_weight,json=cpuWeight,proto3" json:"cpu_weight,omitempty"`
 	// References to MEMORY_QUOTA from Apache Cloudberry resource group parameter:
-	//
-	//	The memory limit (Mb) specified for the resource group.
+	// The memory limit (Mb) specified for the resource group.
 	MemoryQuota *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=memory_quota,json=memoryQuota,proto3" json:"memory_quota,omitempty"`
 	// References to MIN_COST from Apache Cloudberry resource group parameter:
-	//
-	//	The minimum cost of a query plan to be included in the resource group.
+	// The minimum cost of a query plan to be included in the resource group.
 	MinCost       *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=min_cost,json=minCost,proto3" json:"min_cost,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -188,7 +185,7 @@ var File_yandex_cloud_mdb_greenplum_v1_resource_groups_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbb\x06\n" +
+	"3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb5\x06\n" +
 	"\rResourceGroup\x127\n" +
 	"\x04name\x18\x01 \x01(\tB#\xe8\xc71\x01\xf2\xc71\x12^[^\\|/*?.,;\"'<>]+$\x8a\xc81\x053-200R\x04name\x12B\n" +
 	"\x0fis_user_defined\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\risUserDefined\x12F\n" +
@@ -203,7 +200,7 @@ const file_yandex_cloud_mdb_greenplum_v1_resource_groups_proto_rawDesc = "" +
 	"cpu_weight\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-500R\tcpuWeight\x12H\n" +
 	"\fmemory_quota\x18\n" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=-1R\vmemoryQuota\x126\n" +
-	"\bmin_cost\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\aminCostJ\x04\b\f\x10\rBp\n" +
+	"\bmin_cost\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\aminCostBp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (

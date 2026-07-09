@@ -295,6 +295,10 @@ func (m *KafkaConfig2_8) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value
 	m.TransactionalIdExpirationMs = v
 }
 
+func (m *KafkaConfig2_8) SetLogMessageTimestampType(v MessageTimestampType) {
+	m.LogMessageTimestampType = v
+}
+
 func (m *KafkaConfig3) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -379,6 +383,10 @@ func (m *KafkaConfig3) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value) 
 	m.TransactionalIdExpirationMs = v
 }
 
+func (m *KafkaConfig3) SetLogMessageTimestampType(v MessageTimestampType) {
+	m.LogMessageTimestampType = v
+}
+
 func (m *KafkaConfig4) SetCompressionType(v CompressionType) {
 	m.CompressionType = v
 }
@@ -457,6 +465,10 @@ func (m *KafkaConfig4) SetSaslEnabledMechanisms(v []SaslMechanism) {
 
 func (m *KafkaConfig4) SetTransactionalIdExpirationMs(v *wrapperspb.Int64Value) {
 	m.TransactionalIdExpirationMs = v
+}
+
+func (m *KafkaConfig4) SetLogMessageTimestampType(v MessageTimestampType) {
+	m.LogMessageTimestampType = v
 }
 
 func (m *Host) SetName(v string) {

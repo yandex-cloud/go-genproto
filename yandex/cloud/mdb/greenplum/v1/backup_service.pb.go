@@ -75,10 +75,8 @@ type ListBackupsRequest struct {
 	// ID of the folder to list backups in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return.
-	//
 	// If the number of available results is larger than [page_size], the service returns a [ListBackupsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
-	//
-	// Default value is 100.
+	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// The page token. To get the next page of results, set [page_token] to the [ListBackupsResponse.next_page_token] returned by the previous list request.
 	PageToken     string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -142,9 +140,8 @@ type ListBackupsResponse struct {
 	// Requested list of backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for a list request.
-	//
-	// If the number of results is larger than [ListBackupsRequest.page_size] specified in the request, use the [next_page_token] as the value for the [ListBackupsRequest.page_token] parameter in the next list request.
-	//
+	// If the number of results is larger than [ListBackupsRequest.page_size] specified in the request,
+	// use the [next_page_token] as the value for the [ListBackupsRequest.page_token] parameter in the next list request.
 	// Each subsequent ListBackups request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -298,7 +295,7 @@ var File_yandex_cloud_mdb_greenplum_v1_backup_service_proto protoreflect.FileDes
 
 const file_yandex_cloud_mdb_greenplum_v1_backup_service_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/mdb/greenplum/v1/backup_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a*yandex/cloud/mdb/greenplum/v1/backup.proto\"5\n" +
+	"2yandex/cloud/mdb/greenplum/v1/backup_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a*yandex/cloud/mdb/greenplum/v1/backup.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"5\n" +
 	"\x10GetBackupRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\x92\x01\n" +
 	"\x12ListBackupsRequest\x12)\n" +
@@ -311,9 +308,9 @@ const file_yandex_cloud_mdb_greenplum_v1_backup_service_proto_rawDesc = "" +
 	"\abackups\x18\x01 \x03(\v2%.yandex.cloud.mdb.greenplum.v1.BackupR\abackups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"8\n" +
 	"\x13DeleteBackupRequest\x12!\n" +
-	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"\\\n" +
-	"\x14DeleteBackupMetadata\x12\x1b\n" +
-	"\tbackup_id\x18\x01 \x01(\tR\bbackupId\x12'\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"b\n" +
+	"\x14DeleteBackupMetadata\x12!\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12'\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\tclusterId2\xff\x03\n" +
 	"\rBackupService\x12\x90\x01\n" +

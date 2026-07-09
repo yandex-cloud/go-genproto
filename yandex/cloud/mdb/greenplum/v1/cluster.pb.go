@@ -25,6 +25,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Deployment environment.
 type Cluster_Environment int32
 
 const (
@@ -261,15 +262,15 @@ type Cluster struct {
 	HostGroupIds []string `protobuf:"bytes,23,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
 	// Greenplum® and Odyssey® configuration.
 	ClusterConfig *ClusterConfigSet `protobuf:"bytes,24,opt,name=cluster_config,json=clusterConfig,proto3" json:"cluster_config,omitempty"`
-	// Cloud storage settings
+	// Cloud storage settings.
 	CloudStorage *CloudStorage `protobuf:"bytes,26,opt,name=cloud_storage,json=cloudStorage,proto3" json:"cloud_storage,omitempty"`
 	// Host groups hosting VMs of the master subcluster.
 	MasterHostGroupIds []string `protobuf:"bytes,27,rep,name=master_host_group_ids,json=masterHostGroupIds,proto3" json:"master_host_group_ids,omitempty"`
 	// Host groups hosting VMs of the segment subcluster.
 	SegmentHostGroupIds []string `protobuf:"bytes,28,rep,name=segment_host_group_ids,json=segmentHostGroupIds,proto3" json:"segment_host_group_ids,omitempty"`
-	// Service account that will be used to access a Yandex Cloud resources
+	// Service account that will be used to access a Yandex Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,29,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Cloud logging configuration
+	// Cloud logging configuration.
 	Logging       *LoggingConfig `protobuf:"bytes,30,opt,name=logging,proto3" json:"logging,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -508,113 +509,6 @@ func (x *Cluster) GetLogging() *LoggingConfig {
 	return nil
 }
 
-type ClusterConfigSet struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: use dbms_config_set instead
-	//
-	// Configuration set for the Greenplum Database.
-	//
-	// Types that are valid to be assigned to GreenplumConfig:
-	//
-	//	*ClusterConfigSet_GreenplumConfigSet_6
-	GreenplumConfig isClusterConfigSet_GreenplumConfig `protobuf_oneof:"greenplum_config"`
-	// Configuration set for the Greenplum & Cloudberry.
-	DbmsConfigSet *DBMSConfigSet `protobuf:"bytes,10,opt,name=dbms_config_set,json=dbmsConfigSet,proto3" json:"dbms_config_set,omitempty"`
-	// Odyssey® pool settings.
-	Pool *ConnectionPoolerConfigSet `protobuf:"bytes,3,opt,name=pool,proto3" json:"pool,omitempty"`
-	// Managed Greenplum® background tasks configuration.
-	BackgroundActivities *BackgroundActivitiesConfig `protobuf:"bytes,6,opt,name=background_activities,json=backgroundActivities,proto3" json:"background_activities,omitempty"`
-	PxfConfig            *PXFConfigSet               `protobuf:"bytes,8,opt,name=pxf_config,json=pxfConfig,proto3" json:"pxf_config,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *ClusterConfigSet) Reset() {
-	*x = ClusterConfigSet{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClusterConfigSet) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClusterConfigSet) ProtoMessage() {}
-
-func (x *ClusterConfigSet) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClusterConfigSet.ProtoReflect.Descriptor instead.
-func (*ClusterConfigSet) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ClusterConfigSet) GetGreenplumConfig() isClusterConfigSet_GreenplumConfig {
-	if x != nil {
-		return x.GreenplumConfig
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
-func (x *ClusterConfigSet) GetGreenplumConfigSet_6() *GreenplumConfigSet6 {
-	if x != nil {
-		if x, ok := x.GreenplumConfig.(*ClusterConfigSet_GreenplumConfigSet_6); ok {
-			return x.GreenplumConfigSet_6
-		}
-	}
-	return nil
-}
-
-func (x *ClusterConfigSet) GetDbmsConfigSet() *DBMSConfigSet {
-	if x != nil {
-		return x.DbmsConfigSet
-	}
-	return nil
-}
-
-func (x *ClusterConfigSet) GetPool() *ConnectionPoolerConfigSet {
-	if x != nil {
-		return x.Pool
-	}
-	return nil
-}
-
-func (x *ClusterConfigSet) GetBackgroundActivities() *BackgroundActivitiesConfig {
-	if x != nil {
-		return x.BackgroundActivities
-	}
-	return nil
-}
-
-func (x *ClusterConfigSet) GetPxfConfig() *PXFConfigSet {
-	if x != nil {
-		return x.PxfConfig
-	}
-	return nil
-}
-
-type isClusterConfigSet_GreenplumConfig interface {
-	isClusterConfigSet_GreenplumConfig()
-}
-
-type ClusterConfigSet_GreenplumConfigSet_6 struct {
-	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
-	GreenplumConfigSet_6 *GreenplumConfigSet6 `protobuf:"bytes,9,opt,name=greenplum_config_set_6,json=greenplumConfigSet_6,proto3,oneof"`
-}
-
-func (*ClusterConfigSet_GreenplumConfigSet_6) isClusterConfigSet_GreenplumConfig() {}
-
 // Monitoring system metadata.
 type Monitoring struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -630,7 +524,7 @@ type Monitoring struct {
 
 func (x *Monitoring) Reset() {
 	*x = Monitoring{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -642,7 +536,7 @@ func (x *Monitoring) String() string {
 func (*Monitoring) ProtoMessage() {}
 
 func (x *Monitoring) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -655,7 +549,7 @@ func (x *Monitoring) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Monitoring.ProtoReflect.Descriptor instead.
 func (*Monitoring) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Monitoring) GetName() string {
@@ -692,11 +586,14 @@ type GreenplumConfig struct {
 	// ID of the availability zone the cluster belongs to.
 	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,4,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+	// ID of the subnet the cluster belongs to.
+	// This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
 	SubnetId string `protobuf:"bytes,5,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Determines whether the cluster has a public IP address.
-	//
 	// After the cluster has been created, this setting cannot be changed.
+	// Possible values:
+	// * false - don't assign a public IP to the master hosts.
+	// * true - the master hosts should have a public IP address.
 	AssignPublicIp bool `protobuf:"varint,6,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
 	// Full version
 	FullVersion   string `protobuf:"bytes,10,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
@@ -706,7 +603,7 @@ type GreenplumConfig struct {
 
 func (x *GreenplumConfig) Reset() {
 	*x = GreenplumConfig{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -718,7 +615,7 @@ func (x *GreenplumConfig) String() string {
 func (*GreenplumConfig) ProtoMessage() {}
 
 func (x *GreenplumConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[3]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -731,7 +628,7 @@ func (x *GreenplumConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreenplumConfig.ProtoReflect.Descriptor instead.
 func (*GreenplumConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GreenplumConfig) GetVersion() string {
@@ -790,35 +687,42 @@ func (x *GreenplumConfig) GetFullVersion() string {
 	return ""
 }
 
-type Access struct {
+type ClusterConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Allows data export from the cluster to DataLens.
-	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
-	// Allows SQL queries to the cluster databases from the management console.
-	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
-	// Allows access for DataTransfer.
-	DataTransfer bool `protobuf:"varint,3,opt,name=data_transfer,json=dataTransfer,proto3" json:"data_transfer,omitempty"`
-	// Allow access for YandexQuery.
-	YandexQuery   bool `protobuf:"varint,5,opt,name=yandex_query,json=yandexQuery,proto3" json:"yandex_query,omitempty"`
+	// Deprecated: use dbms_config_set instead
+	// Configuration set for the Greenplum Database.
+	//
+	// Types that are valid to be assigned to GreenplumConfig:
+	//
+	//	*ClusterConfigSet_GreenplumConfigSet_6
+	GreenplumConfig isClusterConfigSet_GreenplumConfig `protobuf_oneof:"greenplum_config"`
+	// Configuration set for the Greenplum & Cloudberry.
+	DbmsConfigSet *DBMSConfigSet `protobuf:"bytes,10,opt,name=dbms_config_set,json=dbmsConfigSet,proto3" json:"dbms_config_set,omitempty"`
+	// Odyssey® pool settings.
+	Pool *ConnectionPoolerConfigSet `protobuf:"bytes,3,opt,name=pool,proto3" json:"pool,omitempty"`
+	// Managed Greenplum® background tasks configuration.
+	BackgroundActivities *BackgroundActivitiesConfig `protobuf:"bytes,6,opt,name=background_activities,json=backgroundActivities,proto3" json:"background_activities,omitempty"`
+	// PXF settings.
+	PxfConfig     *PXFConfigSet `protobuf:"bytes,8,opt,name=pxf_config,json=pxfConfig,proto3" json:"pxf_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Access) Reset() {
-	*x = Access{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[4]
+func (x *ClusterConfigSet) Reset() {
+	*x = ClusterConfigSet{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Access) String() string {
+func (x *ClusterConfigSet) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Access) ProtoMessage() {}
+func (*ClusterConfigSet) ProtoMessage() {}
 
-func (x *Access) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[4]
+func (x *ClusterConfigSet) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -829,38 +733,66 @@ func (x *Access) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Access.ProtoReflect.Descriptor instead.
-func (*Access) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use ClusterConfigSet.ProtoReflect.Descriptor instead.
+func (*ClusterConfigSet) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *Access) GetDataLens() bool {
+func (x *ClusterConfigSet) GetGreenplumConfig() isClusterConfigSet_GreenplumConfig {
 	if x != nil {
-		return x.DataLens
+		return x.GreenplumConfig
 	}
-	return false
+	return nil
 }
 
-func (x *Access) GetWebSql() bool {
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
+func (x *ClusterConfigSet) GetGreenplumConfigSet_6() *GreenplumConfigSet6 {
 	if x != nil {
-		return x.WebSql
+		if x, ok := x.GreenplumConfig.(*ClusterConfigSet_GreenplumConfigSet_6); ok {
+			return x.GreenplumConfigSet_6
+		}
 	}
-	return false
+	return nil
 }
 
-func (x *Access) GetDataTransfer() bool {
+func (x *ClusterConfigSet) GetDbmsConfigSet() *DBMSConfigSet {
 	if x != nil {
-		return x.DataTransfer
+		return x.DbmsConfigSet
 	}
-	return false
+	return nil
 }
 
-func (x *Access) GetYandexQuery() bool {
+func (x *ClusterConfigSet) GetPool() *ConnectionPoolerConfigSet {
 	if x != nil {
-		return x.YandexQuery
+		return x.Pool
 	}
-	return false
+	return nil
 }
+
+func (x *ClusterConfigSet) GetBackgroundActivities() *BackgroundActivitiesConfig {
+	if x != nil {
+		return x.BackgroundActivities
+	}
+	return nil
+}
+
+func (x *ClusterConfigSet) GetPxfConfig() *PXFConfigSet {
+	if x != nil {
+		return x.PxfConfig
+	}
+	return nil
+}
+
+type isClusterConfigSet_GreenplumConfig interface {
+	isClusterConfigSet_GreenplumConfig()
+}
+
+type ClusterConfigSet_GreenplumConfigSet_6 struct {
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
+	GreenplumConfigSet_6 *GreenplumConfigSet6 `protobuf:"bytes,9,opt,name=greenplum_config_set_6,json=greenplumConfigSet_6,proto3,oneof"`
+}
+
+func (*ClusterConfigSet_GreenplumConfigSet_6) isClusterConfigSet_GreenplumConfig() {}
 
 type GreenplumRestoreConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -869,18 +801,14 @@ type GreenplumRestoreConfig struct {
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,2,opt,name=access,proto3" json:"access,omitempty"`
 	// ID of the availability zone where the host resides.
-	//
 	// To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the subnet that the host should belong to. This subnet should be a part of the network that the cluster belongs to.
 	// The ID of the network is set in the field [Cluster.network_id].
 	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
 	// Determines whether the host should get a public IP address on creation.
-	//
 	// After a host has been created, this setting cannot be changed.
-	//
 	// To remove an assigned public IP, or to assign a public IP to a host without one, recreate the host with [assign_public_ip] set as needed.
-	//
 	// Possible values:
 	// * `false` - do not assign a public IP to the master host.
 	// * `true` - assign a public IP to the master host.
@@ -891,7 +819,7 @@ type GreenplumRestoreConfig struct {
 
 func (x *GreenplumRestoreConfig) Reset() {
 	*x = GreenplumRestoreConfig{}
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -903,7 +831,7 @@ func (x *GreenplumRestoreConfig) String() string {
 func (*GreenplumRestoreConfig) ProtoMessage() {}
 
 func (x *GreenplumRestoreConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -916,7 +844,7 @@ func (x *GreenplumRestoreConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreenplumRestoreConfig.ProtoReflect.Descriptor instead.
 func (*GreenplumRestoreConfig) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GreenplumRestoreConfig) GetBackupWindowStart() *timeofday.TimeOfDay {
@@ -950,6 +878,78 @@ func (x *GreenplumRestoreConfig) GetSubnetId() string {
 func (x *GreenplumRestoreConfig) GetAssignPublicIp() bool {
 	if x != nil {
 		return x.AssignPublicIp
+	}
+	return false
+}
+
+type Access struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Allows data export from the cluster to DataLens.
+	DataLens bool `protobuf:"varint,1,opt,name=data_lens,json=dataLens,proto3" json:"data_lens,omitempty"`
+	// Allows SQL queries to the cluster databases from the management console.
+	WebSql bool `protobuf:"varint,2,opt,name=web_sql,json=webSql,proto3" json:"web_sql,omitempty"`
+	// Allows access for DataTransfer.
+	DataTransfer bool `protobuf:"varint,3,opt,name=data_transfer,json=dataTransfer,proto3" json:"data_transfer,omitempty"`
+	// Allow access for YandexQuery.
+	YandexQuery   bool `protobuf:"varint,5,opt,name=yandex_query,json=yandexQuery,proto3" json:"yandex_query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Access) Reset() {
+	*x = Access{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Access) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Access) ProtoMessage() {}
+
+func (x *Access) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Access.ProtoReflect.Descriptor instead.
+func (*Access) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Access) GetDataLens() bool {
+	if x != nil {
+		return x.DataLens
+	}
+	return false
+}
+
+func (x *Access) GetWebSql() bool {
+	if x != nil {
+		return x.WebSql
+	}
+	return false
+}
+
+func (x *Access) GetDataTransfer() bool {
+	if x != nil {
+		return x.DataTransfer
+	}
+	return false
+}
+
+func (x *Access) GetYandexQuery() bool {
+	if x != nil {
+		return x.YandexQuery
 	}
 	return false
 }
@@ -1055,18 +1055,19 @@ func (x *CloudStorage) GetEnable() bool {
 }
 
 type LoggingConfig struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Enabled bool                   `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Determines whether the Cloud Logging enabled.
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Types that are valid to be assigned to Destination:
 	//
 	//	*LoggingConfig_FolderId
 	//	*LoggingConfig_LogGroupId
 	Destination isLoggingConfig_Destination `protobuf_oneof:"destination"`
-	// send Yandex Command Center logs
+	// Determines whether Yandex Command Center logs should be sent to Cloud Logging.
 	CommandCenterEnabled bool `protobuf:"varint,5,opt,name=command_center_enabled,json=commandCenterEnabled,proto3" json:"command_center_enabled,omitempty"`
-	// send Greenplum logs
+	// Determines whether Greenplum® logs should be sent to Cloud Logging.
 	GreenplumEnabled bool `protobuf:"varint,6,opt,name=greenplum_enabled,json=greenplumEnabled,proto3" json:"greenplum_enabled,omitempty"`
-	// send Pooler logs
+	// Determines whether Pooler logs should be sent to Cloud Logging.
 	PoolerEnabled bool `protobuf:"varint,7,opt,name=pooler_enabled,json=poolerEnabled,proto3" json:"pooler_enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1160,10 +1161,12 @@ type isLoggingConfig_Destination interface {
 }
 
 type LoggingConfig_FolderId struct {
+	// ID of the folder that the Cloud Logging belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3,oneof"`
 }
 
 type LoggingConfig_LogGroupId struct {
+	// ID of the log group used for the Cloud Logging.
 	LogGroupId string `protobuf:"bytes,3,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
 }
 
@@ -1234,16 +1237,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"\bUPDATING\x10\x04\x12\f\n" +
 	"\bSTOPPING\x10\x05\x12\v\n" +
 	"\aSTOPPED\x10\x06\x12\f\n" +
-	"\bSTARTING\x10\aJ\x04\b\x19\x10\x1a\"\x94\x04\n" +
-	"\x10ClusterConfigSet\x12n\n" +
-	"\x16greenplum_config_set_6\x18\t \x01(\v22.yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6B\x02\x18\x01H\x00R\x14greenplumConfigSet_6\x12T\n" +
-	"\x0fdbms_config_set\x18\n" +
-	" \x01(\v2,.yandex.cloud.mdb.greenplum.v1.DBMSConfigSetR\rdbmsConfigSet\x12L\n" +
-	"\x04pool\x18\x03 \x01(\v28.yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSetR\x04pool\x12n\n" +
-	"\x15background_activities\x18\x06 \x01(\v29.yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfigR\x14backgroundActivities\x12J\n" +
-	"\n" +
-	"pxf_config\x18\b \x01(\v2+.yandex.cloud.mdb.greenplum.v1.PXFConfigSetR\tpxfConfigB\x12\n" +
-	"\x10greenplum_configJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x04\x10\x05J\x04\b\x05\x10\x06J\x04\b\a\x10\b\"V\n" +
+	"\bSTARTING\x10\aJ\x04\b\x19\x10\x1a\"V\n" +
 	"\n" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
@@ -1258,18 +1252,27 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"\tsubnet_id\x18\x05 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
 	"\x10assign_public_ip\x18\x06 \x01(\bR\x0eassignPublicIp\x12!\n" +
 	"\ffull_version\x18\n" +
-	" \x01(\tR\vfullVersionJ\x04\b\a\x10\t\"\x8c\x01\n" +
-	"\x06Access\x12\x1b\n" +
-	"\tdata_lens\x18\x01 \x01(\bR\bdataLens\x12\x17\n" +
-	"\aweb_sql\x18\x02 \x01(\bR\x06webSql\x12#\n" +
-	"\rdata_transfer\x18\x03 \x01(\bR\fdataTransfer\x12!\n" +
-	"\fyandex_query\x18\x05 \x01(\bR\vyandexQueryJ\x04\b\x04\x10\x05\"\x93\x02\n" +
+	" \x01(\tR\vfullVersionJ\x04\b\a\x10\t\"\x88\x04\n" +
+	"\x10ClusterConfigSet\x12n\n" +
+	"\x16greenplum_config_set_6\x18\t \x01(\v22.yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6B\x02\x18\x01H\x00R\x14greenplumConfigSet_6\x12T\n" +
+	"\x0fdbms_config_set\x18\n" +
+	" \x01(\v2,.yandex.cloud.mdb.greenplum.v1.DBMSConfigSetR\rdbmsConfigSet\x12L\n" +
+	"\x04pool\x18\x03 \x01(\v28.yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSetR\x04pool\x12n\n" +
+	"\x15background_activities\x18\x06 \x01(\v29.yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfigR\x14backgroundActivities\x12J\n" +
+	"\n" +
+	"pxf_config\x18\b \x01(\v2+.yandex.cloud.mdb.greenplum.v1.PXFConfigSetR\tpxfConfigB\x12\n" +
+	"\x10greenplum_configJ\x04\b\x01\x10\x03J\x04\b\x04\x10\x06J\x04\b\a\x10\b\"\x93\x02\n" +
 	"\x16GreenplumRestoreConfig\x12F\n" +
 	"\x13backup_window_start\x18\x01 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x12=\n" +
 	"\x06access\x18\x02 \x01(\v2%.yandex.cloud.mdb.greenplum.v1.AccessR\x06access\x12!\n" +
 	"\azone_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
 	"\tsubnet_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
-	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"]\n" +
+	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\x8c\x01\n" +
+	"\x06Access\x12\x1b\n" +
+	"\tdata_lens\x18\x01 \x01(\bR\bdataLens\x12\x17\n" +
+	"\aweb_sql\x18\x02 \x01(\bR\x06webSql\x12#\n" +
+	"\rdata_transfer\x18\x03 \x01(\bR\fdataTransfer\x12!\n" +
+	"\fyandex_query\x18\x05 \x01(\bR\vyandexQueryJ\x04\b\x04\x10\x05\"]\n" +
 	"\x10RestoreResources\x12,\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\"&\n" +
@@ -1305,11 +1308,11 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_goTypes = []any{
 	(Cluster_Health)(0),                // 1: yandex.cloud.mdb.greenplum.v1.Cluster.Health
 	(Cluster_Status)(0),                // 2: yandex.cloud.mdb.greenplum.v1.Cluster.Status
 	(*Cluster)(nil),                    // 3: yandex.cloud.mdb.greenplum.v1.Cluster
-	(*ClusterConfigSet)(nil),           // 4: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet
-	(*Monitoring)(nil),                 // 5: yandex.cloud.mdb.greenplum.v1.Monitoring
-	(*GreenplumConfig)(nil),            // 6: yandex.cloud.mdb.greenplum.v1.GreenplumConfig
-	(*Access)(nil),                     // 7: yandex.cloud.mdb.greenplum.v1.Access
-	(*GreenplumRestoreConfig)(nil),     // 8: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
+	(*Monitoring)(nil),                 // 4: yandex.cloud.mdb.greenplum.v1.Monitoring
+	(*GreenplumConfig)(nil),            // 5: yandex.cloud.mdb.greenplum.v1.GreenplumConfig
+	(*ClusterConfigSet)(nil),           // 6: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet
+	(*GreenplumRestoreConfig)(nil),     // 7: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
+	(*Access)(nil),                     // 8: yandex.cloud.mdb.greenplum.v1.Access
 	(*RestoreResources)(nil),           // 9: yandex.cloud.mdb.greenplum.v1.RestoreResources
 	(*CloudStorage)(nil),               // 10: yandex.cloud.mdb.greenplum.v1.CloudStorage
 	(*LoggingConfig)(nil),              // 11: yandex.cloud.mdb.greenplum.v1.LoggingConfig
@@ -1319,39 +1322,39 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_goTypes = []any{
 	(*SegmentSubclusterConfig)(nil),    // 15: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
 	(*MaintenanceWindow)(nil),          // 16: yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
 	(*MaintenanceOperation)(nil),       // 17: yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
-	(*GreenplumConfigSet6)(nil),        // 18: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
-	(*DBMSConfigSet)(nil),              // 19: yandex.cloud.mdb.greenplum.v1.DBMSConfigSet
-	(*ConnectionPoolerConfigSet)(nil),  // 20: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
-	(*BackgroundActivitiesConfig)(nil), // 21: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	(*PXFConfigSet)(nil),               // 22: yandex.cloud.mdb.greenplum.v1.PXFConfigSet
-	(*timeofday.TimeOfDay)(nil),        // 23: google.type.TimeOfDay
-	(*wrapperspb.Int64Value)(nil),      // 24: google.protobuf.Int64Value
+	(*timeofday.TimeOfDay)(nil),        // 18: google.type.TimeOfDay
+	(*wrapperspb.Int64Value)(nil),      // 19: google.protobuf.Int64Value
+	(*GreenplumConfigSet6)(nil),        // 20: yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
+	(*DBMSConfigSet)(nil),              // 21: yandex.cloud.mdb.greenplum.v1.DBMSConfigSet
+	(*ConnectionPoolerConfigSet)(nil),  // 22: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
+	(*BackgroundActivitiesConfig)(nil), // 23: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	(*PXFConfigSet)(nil),               // 24: yandex.cloud.mdb.greenplum.v1.PXFConfigSet
 }
 var file_yandex_cloud_mdb_greenplum_v1_cluster_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.mdb.greenplum.v1.Cluster.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 1: yandex.cloud.mdb.greenplum.v1.Cluster.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
+	5,  // 1: yandex.cloud.mdb.greenplum.v1.Cluster.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
 	12, // 2: yandex.cloud.mdb.greenplum.v1.Cluster.labels:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.LabelsEntry
 	0,  // 3: yandex.cloud.mdb.greenplum.v1.Cluster.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
-	5,  // 4: yandex.cloud.mdb.greenplum.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.greenplum.v1.Monitoring
+	4,  // 4: yandex.cloud.mdb.greenplum.v1.Cluster.monitoring:type_name -> yandex.cloud.mdb.greenplum.v1.Monitoring
 	14, // 5: yandex.cloud.mdb.greenplum.v1.Cluster.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfig
 	15, // 6: yandex.cloud.mdb.greenplum.v1.Cluster.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfig
 	1,  // 7: yandex.cloud.mdb.greenplum.v1.Cluster.health:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Health
 	2,  // 8: yandex.cloud.mdb.greenplum.v1.Cluster.status:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Status
 	16, // 9: yandex.cloud.mdb.greenplum.v1.Cluster.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
 	17, // 10: yandex.cloud.mdb.greenplum.v1.Cluster.planned_operation:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceOperation
-	4,  // 11: yandex.cloud.mdb.greenplum.v1.Cluster.cluster_config:type_name -> yandex.cloud.mdb.greenplum.v1.ClusterConfigSet
+	6,  // 11: yandex.cloud.mdb.greenplum.v1.Cluster.cluster_config:type_name -> yandex.cloud.mdb.greenplum.v1.ClusterConfigSet
 	10, // 12: yandex.cloud.mdb.greenplum.v1.Cluster.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
 	11, // 13: yandex.cloud.mdb.greenplum.v1.Cluster.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	18, // 14: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
-	19, // 15: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.dbms_config_set:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfigSet
-	20, // 16: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
-	21, // 17: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	22, // 18: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfigSet
-	23, // 19: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_window_start:type_name -> google.type.TimeOfDay
-	24, // 20: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
-	7,  // 21: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
-	23, // 22: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.backup_window_start:type_name -> google.type.TimeOfDay
-	7,  // 23: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
+	18, // 14: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	19, // 15: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.backup_retain_period_days:type_name -> google.protobuf.Int64Value
+	8,  // 16: yandex.cloud.mdb.greenplum.v1.GreenplumConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
+	20, // 17: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.greenplum_config_set_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfigSet6
+	21, // 18: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.dbms_config_set:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfigSet
+	22, // 19: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfigSet
+	23, // 20: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	24, // 21: yandex.cloud.mdb.greenplum.v1.ClusterConfigSet.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfigSet
+	18, // 22: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.backup_window_start:type_name -> google.type.TimeOfDay
+	8,  // 23: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig.access:type_name -> yandex.cloud.mdb.greenplum.v1.Access
 	24, // [24:24] is the sub-list for method output_type
 	24, // [24:24] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
@@ -1367,7 +1370,7 @@ func file_yandex_cloud_mdb_greenplum_v1_cluster_proto_init() {
 	file_yandex_cloud_mdb_greenplum_v1_config_proto_init()
 	file_yandex_cloud_mdb_greenplum_v1_maintenance_proto_init()
 	file_yandex_cloud_mdb_greenplum_v1_pxf_proto_init()
-	file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[1].OneofWrappers = []any{
+	file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[3].OneofWrappers = []any{
 		(*ClusterConfigSet_GreenplumConfigSet_6)(nil),
 	}
 	file_yandex_cloud_mdb_greenplum_v1_cluster_proto_msgTypes[8].OneofWrappers = []any{

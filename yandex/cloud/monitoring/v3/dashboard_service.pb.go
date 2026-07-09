@@ -492,6 +492,8 @@ type UpdateDashboardRequest struct {
 	Timeline *Timeline `protobuf:"bytes,28,opt,name=timeline,proto3" json:"timeline,omitempty"`
 	// Dashboard links
 	Links []*LinkItem `protobuf:"bytes,29,rep,name=links,proto3" json:"links,omitempty"`
+	// Comment, for update operation
+	Comment string `protobuf:"bytes,31,opt,name=comment,proto3" json:"comment,omitempty"`
 	// Parameters / Infra events / Logs overlays presets list
 	PresetItems   []*PresetItem `protobuf:"bytes,32,rep,name=preset_items,json=presetItems,proto3" json:"preset_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -610,6 +612,13 @@ func (x *UpdateDashboardRequest) GetLinks() []*LinkItem {
 		return x.Links
 	}
 	return nil
+}
+
+func (x *UpdateDashboardRequest) GetComment() string {
+	if x != nil {
+		return x.Comment
+	}
+	return ""
 }
 
 func (x *UpdateDashboardRequest) GetPresetItems() []*PresetItem {
@@ -1190,7 +1199,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\tcontainerJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x13J\x04\b\x19\x10\x1aJ\x04\b\x1e\x10\"\"<\n" +
 	"\x17CreateDashboardMetadata\x12!\n" +
-	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\x9b\x06\n" +
+	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"\xb5\x06\n" +
 	"\x16UpdateDashboardRequest\x12/\n" +
 	"\fdashboard_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\vdashboardId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1204,11 +1213,12 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"managed_by\x18\x1a \x01(\tR\tmanagedBy\x12!\n" +
 	"\fmanaged_link\x18\x1b \x01(\tR\vmanagedLink\x12@\n" +
 	"\btimeline\x18\x1c \x01(\v2$.yandex.cloud.monitoring.v3.TimelineR\btimeline\x12:\n" +
-	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x12I\n" +
+	"\x05links\x18\x1d \x03(\v2$.yandex.cloud.monitoring.v3.LinkItemR\x05links\x12\x18\n" +
+	"\acomment\x18\x1f \x01(\tR\acomment\x12I\n" +
 	"\fpreset_items\x18  \x03(\v2&.yandex.cloud.monitoring.v3.PresetItemR\vpresetItems\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\x1aJ\x04\b\x1e\x10 \"<\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\t\x10\x1aJ\x04\b\x1e\x10\x1f\"<\n" +
 	"\x17UpdateDashboardMetadata\x12!\n" +
 	"\fdashboard_id\x18\x01 \x01(\tR\vdashboardId\"]\n" +
 	"\x16DeleteDashboardRequest\x12/\n" +

@@ -32,27 +32,22 @@ type LoadBalancingMode int32
 
 const (
 	// Round robin load balancing mode.
-	//
 	// All endpoints of the backend take their turns to receive requests attributed to the backend.
 	LoadBalancingMode_ROUND_ROBIN LoadBalancingMode = 0
 	// Random load balancing mode. Default value.
-	//
 	// For a request attributed to the backend, an endpoint that receives it is picked at random.
 	LoadBalancingMode_RANDOM LoadBalancingMode = 1
 	// Least request load balancing mode.
-	//
 	// To pick an endpoint that receives a request attributed to the backend, the power of two choices algorithm is used;
 	// that is, two endpoints are picked at random, and the request is sent to the one which has the fewest active
 	// requests.
 	LoadBalancingMode_LEAST_REQUEST LoadBalancingMode = 2
 	// Maglev hashing load balancing mode.
-	//
 	// Each endpoint is hashed, and a hash table with 65537 rows is filled accordingly, so that every endpoint occupies
 	// the same amount of rows. An attribute of each request is also hashed by the same function (if session affinity is
 	// enabled for the backend group, the attribute to hash is specified in session affinity configuration). The row
 	// with the same number as the resulting value is looked up in the table to determine the endpoint that receives
 	// the request.
-	//
 	// If the backend group with session affinity enabled contains more than one backend with positive weight, endpoints
 	// for backends with `MAGLEV_HASH` load balancing mode are picked at `RANDOM` instead.
 	LoadBalancingMode_MAGLEV_HASH LoadBalancingMode = 3
@@ -121,9 +116,9 @@ type BackendGroup struct {
 	//
 	// Types that are valid to be assigned to Backend:
 	//
+	//	*BackendGroup_Stream
 	//	*BackendGroup_Http
 	//	*BackendGroup_Grpc
-	//	*BackendGroup_Stream
 	Backend isBackendGroup_Backend `protobuf_oneof:"backend"`
 	// Creation timestamp.
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -203,6 +198,15 @@ func (x *BackendGroup) GetBackend() isBackendGroup_Backend {
 	return nil
 }
 
+func (x *BackendGroup) GetStream() *StreamBackendGroup {
+	if x != nil {
+		if x, ok := x.Backend.(*BackendGroup_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *BackendGroup) GetHttp() *HttpBackendGroup {
 	if x != nil {
 		if x, ok := x.Backend.(*BackendGroup_Http); ok {
@@ -221,15 +225,6 @@ func (x *BackendGroup) GetGrpc() *GrpcBackendGroup {
 	return nil
 }
 
-func (x *BackendGroup) GetStream() *StreamBackendGroup {
-	if x != nil {
-		if x, ok := x.Backend.(*BackendGroup_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 func (x *BackendGroup) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -239,6 +234,11 @@ func (x *BackendGroup) GetCreatedAt() *timestamppb.Timestamp {
 
 type isBackendGroup_Backend interface {
 	isBackendGroup_Backend()
+}
+
+type BackendGroup_Stream struct {
+	// List of stream (TCP) backends that the backend group consists of.
+	Stream *StreamBackendGroup `protobuf:"bytes,10,opt,name=stream,proto3,oneof"`
 }
 
 type BackendGroup_Http struct {
@@ -251,16 +251,11 @@ type BackendGroup_Grpc struct {
 	Grpc *GrpcBackendGroup `protobuf:"bytes,7,opt,name=grpc,proto3,oneof"`
 }
 
-type BackendGroup_Stream struct {
-	// List of stream (TCP) backends that the backend group consists of.
-	Stream *StreamBackendGroup `protobuf:"bytes,10,opt,name=stream,proto3,oneof"`
-}
+func (*BackendGroup_Stream) isBackendGroup_Backend() {}
 
 func (*BackendGroup_Http) isBackendGroup_Backend() {}
 
 func (*BackendGroup_Grpc) isBackendGroup_Backend() {}
-
-func (*BackendGroup_Stream) isBackendGroup_Backend() {}
 
 // A stream (TCP) backend group resource.
 type StreamBackendGroup struct {
@@ -268,10 +263,8 @@ type StreamBackendGroup struct {
 	// List of stream (TCP) backends.
 	Backends []*StreamBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
 	// Session affinity configuration for the backend group.
-	//
 	// For details about the concept, see
 	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
-	//
 	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
 	// [HttpBackend.backend_weight]), its [HttpBackend.backend_type] should be [TargetGroupsBackend], and its
 	// [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of these conditions are not met, session
@@ -344,7 +337,6 @@ type isStreamBackendGroup_SessionAffinity interface {
 
 type StreamBackendGroup_Connection struct {
 	// Connection-based session affinity configuration.
-	//
 	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
@@ -357,10 +349,8 @@ type HttpBackendGroup struct {
 	// List of HTTP backends.
 	Backends []*HttpBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
 	// Session affinity configuration for the backend group.
-	//
 	// For details about the concept, see
 	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
-	//
 	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
 	// [HttpBackend.backend_weight]), its [HttpBackend.backend_type] should be [TargetGroupsBackend], and its
 	// [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of these conditions are not met, session
@@ -453,7 +443,6 @@ type isHttpBackendGroup_SessionAffinity interface {
 
 type HttpBackendGroup_Connection struct {
 	// Connection-based session affinity configuration.
-	//
 	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
@@ -480,10 +469,8 @@ type GrpcBackendGroup struct {
 	// List of gRPC backends.
 	Backends []*GrpcBackend `protobuf:"bytes,1,rep,name=backends,proto3" json:"backends,omitempty"`
 	// Session affinity configuration for the backend group.
-	//
 	// For details about the concept, see
 	// [documentation](/docs/application-load-balancer/concepts/backend-group#session-affinity).
-	//
 	// If session affinity is configured, the backend group should contain exactly one active backend (i.e. with positive
 	// [GrpcBackend.backend_weight]), and its [LoadBalancingConfig.load_balancing_mode] should be `MAGLEV_HASH`. If any of
 	// these conditions are not met, session affinity will not work.
@@ -575,7 +562,6 @@ type isGrpcBackendGroup_SessionAffinity interface {
 
 type GrpcBackendGroup_Connection struct {
 	// Connection-based session affinity configuration.
-	//
 	// For now, a connection is defined only by an IP address of the client.
 	Connection *ConnectionSessionAffinity `protobuf:"bytes,2,opt,name=connection,proto3,oneof"`
 }
@@ -648,15 +634,12 @@ type CookieSessionAffinity struct {
 	// Name of the cookie that is used for session affinity.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Maximum age of cookies that are generated for sessions.
-	//
 	// If set to `0`, session cookies are used, which are stored by clients in temporary memory and are deleted
 	// on client restarts.
-	//
 	// If not set, the balancer does not generate cookies and only uses incoming ones for establishing session affinity.
 	Ttl *durationpb.Duration `protobuf:"bytes,2,opt,name=ttl,proto3" json:"ttl,omitempty"`
 	// Path of cookie.
 	// This will be used to set the path of a new cookie when it is generated.
-	//
 	// If path is unspecified or empty, no path will be set for the cookie.
 	Path          string `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -763,46 +746,36 @@ func (x *ConnectionSessionAffinity) GetSourceIp() bool {
 // A load balancing configuration resource.
 type LoadBalancingConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Load balancing mode for the backend.
+	// For details about load balancing modes, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#balancing-mode).
+	Mode LoadBalancingMode `protobuf:"varint,4,opt,name=mode,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancingMode" json:"mode,omitempty"`
 	// Threshold for panic mode.
-	//
 	// If percentage of healthy backends in the group drops below threshold,
 	// panic mode will be activated and traffic will be routed to all backends, regardless of their health check status.
 	// This helps to avoid overloading healthy backends.
 	// For details about panic mode, see [documentation](/docs/application-load-balancer/concepts/backend-group#panic-mode).
-	//
 	// If the value is `0`, panic mode will never be activated and traffic is routed only to healthy backends at all times.
-	//
 	// Default value: `0`.
 	PanicThreshold int64 `protobuf:"varint,1,opt,name=panic_threshold,json=panicThreshold,proto3" json:"panic_threshold,omitempty"`
 	// Percentage of traffic that a load balancer node sends to healthy backends in its availability zone.
 	// The rest is divided equally between other zones. For details about zone-aware routing, see
 	// [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
-	//
 	// If there are no healthy backends in an availability zone, all the traffic is divided between other zones.
-	//
 	// If [strict_locality] is `true`, the specified value is ignored.
 	// A load balancer node sends all the traffic within its availability zone, regardless of backends' health.
-	//
 	// Default value: `0`.
 	LocalityAwareRoutingPercent int64 `protobuf:"varint,2,opt,name=locality_aware_routing_percent,json=localityAwareRoutingPercent,proto3" json:"locality_aware_routing_percent,omitempty"`
 	// Specifies whether a load balancer node should only send traffic to backends in its availability zone,
 	// regardless of their health, and ignore backends in other zones.
-	//
 	// If set to `true` and there are no healthy backends in the zone, the node in this zone will respond
 	// to incoming traffic with errors.
 	// For details about strict locality, see [documentation](/docs/application-load-balancer/concepts/backend-group#locality).
-	//
 	// If `strict_locality` is `true`, the value specified in [locality_aware_routing_percent] is ignored.
-	//
 	// Default value: `false`.
 	StrictLocality bool `protobuf:"varint,3,opt,name=strict_locality,json=strictLocality,proto3" json:"strict_locality,omitempty"`
-	// Load balancing mode for the backend.
-	//
-	// For details about load balancing modes, see
-	// [documentation](/docs/application-load-balancer/concepts/backend-group#balancing-mode).
-	Mode          LoadBalancingMode `protobuf:"varint,4,opt,name=mode,proto3,enum=yandex.cloud.apploadbalancer.v1.LoadBalancingMode" json:"mode,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *LoadBalancingConfig) Reset() {
@@ -835,6 +808,13 @@ func (*LoadBalancingConfig) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{7}
 }
 
+func (x *LoadBalancingConfig) GetMode() LoadBalancingMode {
+	if x != nil {
+		return x.Mode
+	}
+	return LoadBalancingMode_ROUND_ROBIN
+}
+
 func (x *LoadBalancingConfig) GetPanicThreshold() int64 {
 	if x != nil {
 		return x.PanicThreshold
@@ -856,12 +836,302 @@ func (x *LoadBalancingConfig) GetStrictLocality() bool {
 	return false
 }
 
-func (x *LoadBalancingConfig) GetMode() LoadBalancingMode {
-	if x != nil {
-		return x.Mode
-	}
-	return LoadBalancingMode_ROUND_ROBIN
+// An HTTP backend resource.
+type HttpBackend struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the backend.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
+	// Weights must be set either for all backends in a group or for none of them.
+	// Setting no weights is the same as setting equal non-zero weights for all backends.
+	// If the weight is non-positive, traffic is not sent to the backend.
+	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Load balancing configuration for the backend.
+	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
+	// Port used by all targets to receive traffic.
+	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Reference to targets that belong to the backend.
+	// A backend may be a set of target groups or an Object Storage bucket. For details about backend types, see
+	// [documentation](/docs/application-load-balancer/concepts/backend-group#types).
+	//
+	// Types that are valid to be assigned to BackendType:
+	//
+	//	*HttpBackend_StorageBucket
+	//	*HttpBackend_TargetGroups
+	BackendType isHttpBackend_BackendType `protobuf_oneof:"backend_type"`
+	// Health checks to perform on targets from target groups.
+	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
+	// If no health checks are specified, active health checking is not performed.
+	Healthchecks []*HealthCheck `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
+	// Settings for TLS connections between load balancer nodes and backend targets.
+	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
+	// and compares received certificates with the one specified in [BackendTls.validation_context].
+	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
+	Tls *BackendTls `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`
+	// Enables HTTP/2 usage in connections between load balancer nodes and backend targets.
+	// Default value: `false`, HTTP/1.1 is used.
+	UseHttp2      bool `protobuf:"varint,8,opt,name=use_http2,json=useHttp2,proto3" json:"use_http2,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
+
+func (x *HttpBackend) Reset() {
+	*x = HttpBackend{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HttpBackend) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HttpBackend) ProtoMessage() {}
+
+func (x *HttpBackend) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HttpBackend.ProtoReflect.Descriptor instead.
+func (*HttpBackend) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *HttpBackend) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *HttpBackend) GetBackendWeight() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackendWeight
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetLoadBalancingConfig() *LoadBalancingConfig {
+	if x != nil {
+		return x.LoadBalancingConfig
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *HttpBackend) GetBackendType() isHttpBackend_BackendType {
+	if x != nil {
+		return x.BackendType
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetStorageBucket() *StorageBucketBackend {
+	if x != nil {
+		if x, ok := x.BackendType.(*HttpBackend_StorageBucket); ok {
+			return x.StorageBucket
+		}
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetTargetGroups() *TargetGroupsBackend {
+	if x != nil {
+		if x, ok := x.BackendType.(*HttpBackend_TargetGroups); ok {
+			return x.TargetGroups
+		}
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetHealthchecks() []*HealthCheck {
+	if x != nil {
+		return x.Healthchecks
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetTls() *BackendTls {
+	if x != nil {
+		return x.Tls
+	}
+	return nil
+}
+
+func (x *HttpBackend) GetUseHttp2() bool {
+	if x != nil {
+		return x.UseHttp2
+	}
+	return false
+}
+
+type isHttpBackend_BackendType interface {
+	isHttpBackend_BackendType()
+}
+
+type HttpBackend_StorageBucket struct {
+	// Object Storage bucket to use as the backend. For details about buckets, see
+	// [documentation](/docs/storage/concepts/bucket).
+	// If a bucket is used as a backend, the list of bucket objects and the objects themselves must be publicly
+	// accessible. For instructions, see [documentation](/docs/storage/operations/buckets/bucket-availability).
+	StorageBucket *StorageBucketBackend `protobuf:"bytes,9,opt,name=storage_bucket,json=storageBucket,proto3,oneof"`
+}
+
+type HttpBackend_TargetGroups struct {
+	// Target groups that belong to the backend. For details about target groups, see
+	// [documentation](/docs/application-load-balancer/concepts/target-group).
+	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
+}
+
+func (*HttpBackend_StorageBucket) isHttpBackend_BackendType() {}
+
+func (*HttpBackend_TargetGroups) isHttpBackend_BackendType() {}
+
+// A gRPC backend resource.
+type GrpcBackend struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the backend.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
+	// Weights must be set either for all backends of a group or for none of them.
+	// Setting no weights is the same as setting equal non-zero weights for all backends.
+	// If the weight is non-positive, traffic is not sent to the backend.
+	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
+	// Load balancing configuration for the backend.
+	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
+	// Port used by all targets to receive traffic.
+	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
+	// Reference to targets that belong to the backend. For now, targets are referenced via target groups.
+	//
+	// Types that are valid to be assigned to BackendType:
+	//
+	//	*GrpcBackend_TargetGroups
+	BackendType isGrpcBackend_BackendType `protobuf_oneof:"backend_type"`
+	// Health checks to perform on targets from target groups.
+	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
+	// If no health checks are specified, active health checking is not performed.
+	Healthchecks []*HealthCheck `protobuf:"bytes,7,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
+	// Settings for TLS connections between load balancer nodes and backend targets.
+	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
+	// and compares received certificates with the one specified in [BackendTls.validation_context].
+	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
+	Tls           *BackendTls `protobuf:"bytes,8,opt,name=tls,proto3" json:"tls,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GrpcBackend) Reset() {
+	*x = GrpcBackend{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GrpcBackend) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GrpcBackend) ProtoMessage() {}
+
+func (x *GrpcBackend) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GrpcBackend.ProtoReflect.Descriptor instead.
+func (*GrpcBackend) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GrpcBackend) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GrpcBackend) GetBackendWeight() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.BackendWeight
+	}
+	return nil
+}
+
+func (x *GrpcBackend) GetLoadBalancingConfig() *LoadBalancingConfig {
+	if x != nil {
+		return x.LoadBalancingConfig
+	}
+	return nil
+}
+
+func (x *GrpcBackend) GetPort() int64 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *GrpcBackend) GetBackendType() isGrpcBackend_BackendType {
+	if x != nil {
+		return x.BackendType
+	}
+	return nil
+}
+
+func (x *GrpcBackend) GetTargetGroups() *TargetGroupsBackend {
+	if x != nil {
+		if x, ok := x.BackendType.(*GrpcBackend_TargetGroups); ok {
+			return x.TargetGroups
+		}
+	}
+	return nil
+}
+
+func (x *GrpcBackend) GetHealthchecks() []*HealthCheck {
+	if x != nil {
+		return x.Healthchecks
+	}
+	return nil
+}
+
+func (x *GrpcBackend) GetTls() *BackendTls {
+	if x != nil {
+		return x.Tls
+	}
+	return nil
+}
+
+type isGrpcBackend_BackendType interface {
+	isGrpcBackend_BackendType()
+}
+
+type GrpcBackend_TargetGroups struct {
+	// Target groups that belong to the backend.
+	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
+}
+
+func (*GrpcBackend_TargetGroups) isGrpcBackend_BackendType() {}
 
 // A stream (TCP) backend resource.
 type StreamBackend struct {
@@ -869,10 +1139,8 @@ type StreamBackend struct {
 	// Name of the backend.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
-	//
 	// Weights must be set either for all backends in a group or for none of them.
 	// Setting no weights is the same as setting equal non-zero weights for all backends.
-	//
 	// If the weight is non-positive, traffic is not sent to the backend.
 	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
 	// Load balancing configuration for the backend.
@@ -887,11 +1155,9 @@ type StreamBackend struct {
 	BackendType isStreamBackend_BackendType `protobuf_oneof:"backend_type"`
 	// Health checks to perform on targets from target groups.
 	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
-	//
 	// If no health checks are specified, active health checking is not performed.
 	Healthchecks []*HealthCheck `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
 	// Settings for TLS connections between load balancer nodes and backend targets.
-	//
 	// If specified, the load balancer establishes TLS-encrypted TCP connections with targets and compares received
 	// certificates with the one specified in [BackendTls.validation_context].
 	// If not specified, the load balancer establishes unencrypted TCP connections with targets.
@@ -907,7 +1173,7 @@ type StreamBackend struct {
 
 func (x *StreamBackend) Reset() {
 	*x = StreamBackend{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -919,7 +1185,7 @@ func (x *StreamBackend) String() string {
 func (*StreamBackend) ProtoMessage() {}
 
 func (x *StreamBackend) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[8]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -932,7 +1198,7 @@ func (x *StreamBackend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamBackend.ProtoReflect.Descriptor instead.
 func (*StreamBackend) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StreamBackend) GetName() string {
@@ -1019,66 +1285,31 @@ type StreamBackend_TargetGroups struct {
 
 func (*StreamBackend_TargetGroups) isStreamBackend_BackendType() {}
 
-// An HTTP backend resource.
-type HttpBackend struct {
+// A resource for Object Storage bucket used as a backend. For details about the concept,
+// see [documentation](/docs/storage/concepts/bucket).
+type StorageBucketBackend struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the backend.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
-	//
-	// Weights must be set either for all backends in a group or for none of them.
-	// Setting no weights is the same as setting equal non-zero weights for all backends.
-	//
-	// If the weight is non-positive, traffic is not sent to the backend.
-	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
-	// Load balancing configuration for the backend.
-	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
-	// Port used by all targets to receive traffic.
-	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Reference to targets that belong to the backend.
-	//
-	// A backend may be a set of target groups or an Object Storage bucket. For details about backend types, see
-	// [documentation](/docs/application-load-balancer/concepts/backend-group#types).
-	//
-	// Types that are valid to be assigned to BackendType:
-	//
-	//	*HttpBackend_TargetGroups
-	//	*HttpBackend_StorageBucket
-	BackendType isHttpBackend_BackendType `protobuf_oneof:"backend_type"`
-	// Health checks to perform on targets from target groups.
-	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
-	//
-	// If no health checks are specified, active health checking is not performed.
-	Healthchecks []*HealthCheck `protobuf:"bytes,6,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
-	// Settings for TLS connections between load balancer nodes and backend targets.
-	//
-	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
-	// and compares received certificates with the one specified in [BackendTls.validation_context].
-	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
-	Tls *BackendTls `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`
-	// Enables HTTP/2 usage in connections between load balancer nodes and backend targets.
-	//
-	// Default value: `false`, HTTP/1.1 is used.
-	UseHttp2      bool `protobuf:"varint,8,opt,name=use_http2,json=useHttp2,proto3" json:"use_http2,omitempty"`
+	// Name of the bucket.
+	Bucket        string `protobuf:"bytes,1,opt,name=bucket,proto3" json:"bucket,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *HttpBackend) Reset() {
-	*x = HttpBackend{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[9]
+func (x *StorageBucketBackend) Reset() {
+	*x = StorageBucketBackend{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *HttpBackend) String() string {
+func (x *StorageBucketBackend) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*HttpBackend) ProtoMessage() {}
+func (*StorageBucketBackend) ProtoMessage() {}
 
-func (x *HttpBackend) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[9]
+func (x *StorageBucketBackend) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1089,249 +1320,22 @@ func (x *HttpBackend) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HttpBackend.ProtoReflect.Descriptor instead.
-func (*HttpBackend) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use StorageBucketBackend.ProtoReflect.Descriptor instead.
+func (*StorageBucketBackend) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *HttpBackend) GetName() string {
+func (x *StorageBucketBackend) GetBucket() string {
 	if x != nil {
-		return x.Name
+		return x.Bucket
 	}
 	return ""
 }
-
-func (x *HttpBackend) GetBackendWeight() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.BackendWeight
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetLoadBalancingConfig() *LoadBalancingConfig {
-	if x != nil {
-		return x.LoadBalancingConfig
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *HttpBackend) GetBackendType() isHttpBackend_BackendType {
-	if x != nil {
-		return x.BackendType
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetTargetGroups() *TargetGroupsBackend {
-	if x != nil {
-		if x, ok := x.BackendType.(*HttpBackend_TargetGroups); ok {
-			return x.TargetGroups
-		}
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetStorageBucket() *StorageBucketBackend {
-	if x != nil {
-		if x, ok := x.BackendType.(*HttpBackend_StorageBucket); ok {
-			return x.StorageBucket
-		}
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetHealthchecks() []*HealthCheck {
-	if x != nil {
-		return x.Healthchecks
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetTls() *BackendTls {
-	if x != nil {
-		return x.Tls
-	}
-	return nil
-}
-
-func (x *HttpBackend) GetUseHttp2() bool {
-	if x != nil {
-		return x.UseHttp2
-	}
-	return false
-}
-
-type isHttpBackend_BackendType interface {
-	isHttpBackend_BackendType()
-}
-
-type HttpBackend_TargetGroups struct {
-	// Target groups that belong to the backend. For details about target groups, see
-	// [documentation](/docs/application-load-balancer/concepts/target-group).
-	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
-}
-
-type HttpBackend_StorageBucket struct {
-	// Object Storage bucket to use as the backend. For details about buckets, see
-	// [documentation](/docs/storage/concepts/bucket).
-	//
-	// If a bucket is used as a backend, the list of bucket objects and the objects themselves must be publicly
-	// accessible. For instructions, see [documentation](/docs/storage/operations/buckets/bucket-availability).
-	StorageBucket *StorageBucketBackend `protobuf:"bytes,9,opt,name=storage_bucket,json=storageBucket,proto3,oneof"`
-}
-
-func (*HttpBackend_TargetGroups) isHttpBackend_BackendType() {}
-
-func (*HttpBackend_StorageBucket) isHttpBackend_BackendType() {}
-
-// A gRPC backend resource.
-type GrpcBackend struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the backend.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Backend weight. Traffic is distributed between backends of a backend group according to their weights.
-	//
-	// Weights must be set either for all backends of a group or for none of them.
-	// Setting no weights is the same as setting equal non-zero weights for all backends.
-	//
-	// If the weight is non-positive, traffic is not sent to the backend.
-	BackendWeight *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=backend_weight,json=backendWeight,proto3" json:"backend_weight,omitempty"`
-	// Load balancing configuration for the backend.
-	LoadBalancingConfig *LoadBalancingConfig `protobuf:"bytes,3,opt,name=load_balancing_config,json=loadBalancingConfig,proto3" json:"load_balancing_config,omitempty"`
-	// Port used by all targets to receive traffic.
-	Port int64 `protobuf:"varint,4,opt,name=port,proto3" json:"port,omitempty"`
-	// Reference to targets that belong to the backend. For now, targets are referenced via target groups.
-	//
-	// Types that are valid to be assigned to BackendType:
-	//
-	//	*GrpcBackend_TargetGroups
-	BackendType isGrpcBackend_BackendType `protobuf_oneof:"backend_type"`
-	// Health checks to perform on targets from target groups.
-	// For details about health checking, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
-	//
-	// If no health checks are specified, active health checking is not performed.
-	Healthchecks []*HealthCheck `protobuf:"bytes,7,rep,name=healthchecks,proto3" json:"healthchecks,omitempty"`
-	// Settings for TLS connections between load balancer nodes and backend targets.
-	//
-	// If specified, the load balancer establishes HTTPS (HTTP over TLS) connections with targets
-	// and compares received certificates with the one specified in [BackendTls.validation_context].
-	// If not specified, the load balancer establishes unencrypted HTTP connections with targets.
-	Tls           *BackendTls `protobuf:"bytes,8,opt,name=tls,proto3" json:"tls,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GrpcBackend) Reset() {
-	*x = GrpcBackend{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[10]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GrpcBackend) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GrpcBackend) ProtoMessage() {}
-
-func (x *GrpcBackend) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[10]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GrpcBackend.ProtoReflect.Descriptor instead.
-func (*GrpcBackend) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *GrpcBackend) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *GrpcBackend) GetBackendWeight() *wrapperspb.Int64Value {
-	if x != nil {
-		return x.BackendWeight
-	}
-	return nil
-}
-
-func (x *GrpcBackend) GetLoadBalancingConfig() *LoadBalancingConfig {
-	if x != nil {
-		return x.LoadBalancingConfig
-	}
-	return nil
-}
-
-func (x *GrpcBackend) GetPort() int64 {
-	if x != nil {
-		return x.Port
-	}
-	return 0
-}
-
-func (x *GrpcBackend) GetBackendType() isGrpcBackend_BackendType {
-	if x != nil {
-		return x.BackendType
-	}
-	return nil
-}
-
-func (x *GrpcBackend) GetTargetGroups() *TargetGroupsBackend {
-	if x != nil {
-		if x, ok := x.BackendType.(*GrpcBackend_TargetGroups); ok {
-			return x.TargetGroups
-		}
-	}
-	return nil
-}
-
-func (x *GrpcBackend) GetHealthchecks() []*HealthCheck {
-	if x != nil {
-		return x.Healthchecks
-	}
-	return nil
-}
-
-func (x *GrpcBackend) GetTls() *BackendTls {
-	if x != nil {
-		return x.Tls
-	}
-	return nil
-}
-
-type isGrpcBackend_BackendType interface {
-	isGrpcBackend_BackendType()
-}
-
-type GrpcBackend_TargetGroups struct {
-	// Target groups that belong to the backend.
-	TargetGroups *TargetGroupsBackend `protobuf:"bytes,5,opt,name=target_groups,json=targetGroups,proto3,oneof"`
-}
-
-func (*GrpcBackend_TargetGroups) isGrpcBackend_BackendType() {}
 
 // A resource for target groups that belong to the backend.
 type TargetGroupsBackend struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of ID's of target groups that belong to the backend.
-	//
 	// To get the ID's of all available target groups, make a [TargetGroupService.List] request.
 	TargetGroupIds []string `protobuf:"bytes,1,rep,name=target_group_ids,json=targetGroupIds,proto3" json:"target_group_ids,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -1340,7 +1344,7 @@ type TargetGroupsBackend struct {
 
 func (x *TargetGroupsBackend) Reset() {
 	*x = TargetGroupsBackend{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1352,7 +1356,7 @@ func (x *TargetGroupsBackend) String() string {
 func (*TargetGroupsBackend) ProtoMessage() {}
 
 func (x *TargetGroupsBackend) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[11]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1365,7 +1369,7 @@ func (x *TargetGroupsBackend) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TargetGroupsBackend.ProtoReflect.Descriptor instead.
 func (*TargetGroupsBackend) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *TargetGroupsBackend) GetTargetGroupIds() []string {
@@ -1384,7 +1388,7 @@ type PlaintextTransportSettings struct {
 
 func (x *PlaintextTransportSettings) Reset() {
 	*x = PlaintextTransportSettings{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1396,7 +1400,7 @@ func (x *PlaintextTransportSettings) String() string {
 func (*PlaintextTransportSettings) ProtoMessage() {}
 
 func (x *PlaintextTransportSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[12]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1409,7 +1413,7 @@ func (x *PlaintextTransportSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlaintextTransportSettings.ProtoReflect.Descriptor instead.
 func (*PlaintextTransportSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{13}
 }
 
 // Transport settings to be used instead of the settings configured per-cluster
@@ -1425,7 +1429,7 @@ type SecureTransportSettings struct {
 
 func (x *SecureTransportSettings) Reset() {
 	*x = SecureTransportSettings{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1437,7 +1441,7 @@ func (x *SecureTransportSettings) String() string {
 func (*SecureTransportSettings) ProtoMessage() {}
 
 func (x *SecureTransportSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[13]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1450,7 +1454,7 @@ func (x *SecureTransportSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SecureTransportSettings.ProtoReflect.Descriptor instead.
 func (*SecureTransportSettings) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SecureTransportSettings) GetSni() string {
@@ -1480,7 +1484,7 @@ type BackendTls struct {
 
 func (x *BackendTls) Reset() {
 	*x = BackendTls{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1492,7 +1496,7 @@ func (x *BackendTls) String() string {
 func (*BackendTls) ProtoMessage() {}
 
 func (x *BackendTls) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[14]
+	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1505,7 +1509,7 @@ func (x *BackendTls) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackendTls.ProtoReflect.Descriptor instead.
 func (*BackendTls) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{14}
+	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BackendTls) GetSni() string {
@@ -1522,59 +1526,11 @@ func (x *BackendTls) GetValidationContext() *ValidationContext {
 	return nil
 }
 
-// A resource for Object Storage bucket used as a backend. For details about the concept,
-// see [documentation](/docs/storage/concepts/bucket).
-type StorageBucketBackend struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the bucket.
-	Bucket        string `protobuf:"bytes,1,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StorageBucketBackend) Reset() {
-	*x = StorageBucketBackend{}
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StorageBucketBackend) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StorageBucketBackend) ProtoMessage() {}
-
-func (x *StorageBucketBackend) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StorageBucketBackend.ProtoReflect.Descriptor instead.
-func (*StorageBucketBackend) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDescGZIP(), []int{15}
-}
-
-func (x *StorageBucketBackend) GetBucket() string {
-	if x != nil {
-		return x.Bucket
-	}
-	return ""
-}
-
 // A health check resource.
 // For details about the concept, see [documentation](/docs/application-load-balancer/concepts/backend-group#health-checks).
 type HealthCheck struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Health check timeout.
-	//
 	// The timeout is the time allowed for the target to respond to a check.
 	// If the target doesn't respond in time, the check is considered failed.
 	Timeout *durationpb.Duration `protobuf:"bytes,1,opt,name=timeout,proto3" json:"timeout,omitempty"`
@@ -1582,28 +1538,20 @@ type HealthCheck struct {
 	Interval              *durationpb.Duration `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
 	IntervalJitterPercent float64              `protobuf:"fixed64,3,opt,name=interval_jitter_percent,json=intervalJitterPercent,proto3" json:"interval_jitter_percent,omitempty"`
 	// Number of consecutive successful health checks required to mark an unhealthy target as healthy.
-	//
 	// Both `0` and `1` values amount to one successful check required.
-	//
 	// The value is ignored when a load balancer is initialized; a target is marked healthy after one successful check.
-	//
 	// Default value: `0`.
 	HealthyThreshold int64 `protobuf:"varint,4,opt,name=healthy_threshold,json=healthyThreshold,proto3" json:"healthy_threshold,omitempty"`
 	// Number of consecutive failed health checks required to mark a healthy target as unhealthy.
-	//
 	// Both `0` and `1` values amount to one unsuccessful check required.
-	//
 	// The value is ignored if a health check is failed due to an HTTP `503 Service Unavailable` response from the target
 	// (not applicable to TCP stream health checks). The target is immediately marked unhealthy.
-	//
 	// Default value: `0`.
 	UnhealthyThreshold int64 `protobuf:"varint,5,opt,name=unhealthy_threshold,json=unhealthyThreshold,proto3" json:"unhealthy_threshold,omitempty"`
 	// Port used for health checks.
-	//
 	// If not specified, the backend port ([HttpBackend.port] or [GrpcBackend.port]) is used for health checks.
 	HealthcheckPort int64 `protobuf:"varint,6,opt,name=healthcheck_port,json=healthcheckPort,proto3" json:"healthcheck_port,omitempty"`
 	// Protocol-specific health check settings.
-	//
 	// The protocols of the backend and of its health check may differ,
 	// e.g. a gRPC health check may be specified for an HTTP backend.
 	//
@@ -1802,11 +1750,9 @@ func (*HealthCheck_Tls) isHealthCheck_TransportSettings() {}
 type HealthCheck_StreamHealthCheck struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Message sent to targets during TCP data transfer.
-	//
 	// If not specified, no data is sent to the target.
 	Send *Payload `protobuf:"bytes,1,opt,name=send,proto3" json:"send,omitempty"`
 	// Data that must be contained in the messages received from targets for a successful health check.
-	//
 	// If not specified, no messages are expected from targets, and those that are received are not checked.
 	Receive       *Payload `protobuf:"bytes,2,opt,name=receive,proto3" json:"receive,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1866,7 +1812,6 @@ type HealthCheck_HttpHealthCheck struct {
 	// or value for the HTTP/2 `:path` pseudo-header.
 	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
 	// Enables HTTP/2 usage in health checks.
-	//
 	// Default value: `false`, HTTP/1.1 is used.
 	UseHttp2 bool `protobuf:"varint,3,opt,name=use_http2,json=useHttp2,proto3" json:"use_http2,omitempty"`
 	// A list of HTTP response statuses considered healthy.
@@ -1938,9 +1883,7 @@ func (x *HealthCheck_HttpHealthCheck) GetExpectedStatuses() []int64 {
 type HealthCheck_GrpcHealthCheck struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the gRPC service to be checked.
-	//
 	// If not specified, overall health is checked.
-	//
 	// For details about the concept, see [GRPC Health Checking Protocol](https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
 	ServiceName   string `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3" json:"service_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1994,11 +1937,11 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
 	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\x12Q\n" +
-	"\x06labels\x18\x05 \x03(\v29.yandex.cloud.apploadbalancer.v1.BackendGroup.LabelsEntryR\x06labels\x12G\n" +
-	"\x04http\x18\x06 \x01(\v21.yandex.cloud.apploadbalancer.v1.HttpBackendGroupH\x00R\x04http\x12G\n" +
-	"\x04grpc\x18\a \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x12M\n" +
+	"\x06labels\x18\x05 \x03(\v29.yandex.cloud.apploadbalancer.v1.BackendGroup.LabelsEntryR\x06labels\x12M\n" +
 	"\x06stream\x18\n" +
-	" \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x129\n" +
+	" \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x12G\n" +
+	"\x04http\x18\x06 \x01(\v21.yandex.cloud.apploadbalancer.v1.HttpBackendGroupH\x00R\x04http\x12G\n" +
+	"\x04grpc\x18\a \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x129\n" +
 	"\n" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -2036,11 +1979,31 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x04path\x18\x03 \x01(\tB\t\x8a\xc81\x050-256R\x04path\"8\n" +
 	"\x19ConnectionSessionAffinity\x12\x1b\n" +
 	"\tsource_ip\x18\x01 \x01(\bR\bsourceIp\"\x8a\x02\n" +
-	"\x13LoadBalancingConfig\x122\n" +
+	"\x13LoadBalancingConfig\x12F\n" +
+	"\x04mode\x18\x04 \x01(\x0e22.yandex.cloud.apploadbalancer.v1.LoadBalancingModeR\x04mode\x122\n" +
 	"\x0fpanic_threshold\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\x0epanicThreshold\x12N\n" +
 	"\x1elocality_aware_routing_percent\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\x1blocalityAwareRoutingPercent\x12'\n" +
-	"\x0fstrict_locality\x18\x03 \x01(\bR\x0estrictLocality\x12F\n" +
-	"\x04mode\x18\x04 \x01(\x0e22.yandex.cloud.apploadbalancer.v1.LoadBalancingModeR\x04mode\"\xa1\x05\n" +
+	"\x0fstrict_locality\x18\x03 \x01(\bR\x0estrictLocality\"\x93\x05\n" +
+	"\vHttpBackend\x124\n" +
+	"\x04name\x18\x01 \x01(\tB \xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12B\n" +
+	"\x0ebackend_weight\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackendWeight\x12h\n" +
+	"\x15load_balancing_config\x18\x03 \x01(\v24.yandex.cloud.apploadbalancer.v1.LoadBalancingConfigR\x13loadBalancingConfig\x12\x1f\n" +
+	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12^\n" +
+	"\x0estorage_bucket\x18\t \x01(\v25.yandex.cloud.apploadbalancer.v1.StorageBucketBackendH\x00R\rstorageBucket\x12[\n" +
+	"\rtarget_groups\x18\x05 \x01(\v24.yandex.cloud.apploadbalancer.v1.TargetGroupsBackendH\x00R\ftargetGroups\x12P\n" +
+	"\fhealthchecks\x18\x06 \x03(\v2,.yandex.cloud.apploadbalancer.v1.HealthCheckR\fhealthchecks\x12=\n" +
+	"\x03tls\x18\a \x01(\v2+.yandex.cloud.apploadbalancer.v1.BackendTlsR\x03tls\x12\x1b\n" +
+	"\tuse_http2\x18\b \x01(\bR\buseHttp2B\x14\n" +
+	"\fbackend_type\x12\x04\xc0\xc11\x01\"\x9c\x04\n" +
+	"\vGrpcBackend\x124\n" +
+	"\x04name\x18\x01 \x01(\tB \xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12B\n" +
+	"\x0ebackend_weight\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackendWeight\x12h\n" +
+	"\x15load_balancing_config\x18\x03 \x01(\v24.yandex.cloud.apploadbalancer.v1.LoadBalancingConfigR\x13loadBalancingConfig\x12\x1f\n" +
+	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12[\n" +
+	"\rtarget_groups\x18\x05 \x01(\v24.yandex.cloud.apploadbalancer.v1.TargetGroupsBackendH\x00R\ftargetGroups\x12P\n" +
+	"\fhealthchecks\x18\a \x03(\v2,.yandex.cloud.apploadbalancer.v1.HealthCheckR\fhealthchecks\x12=\n" +
+	"\x03tls\x18\b \x01(\v2+.yandex.cloud.apploadbalancer.v1.BackendTlsR\x03tlsB\x14\n" +
+	"\fbackend_type\x12\x04\xc0\xc11\x01J\x04\b\x06\x10\a\"\xa1\x05\n" +
 	"\rStreamBackend\x124\n" +
 	"\x04name\x18\x01 \x01(\tB \xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12B\n" +
 	"\x0ebackend_weight\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackendWeight\x12h\n" +
@@ -2051,39 +2014,19 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x03tls\x18\a \x01(\v2+.yandex.cloud.apploadbalancer.v1.BackendTlsR\x03tls\x122\n" +
 	"\x15enable_proxy_protocol\x18\b \x01(\bR\x13enableProxyProtocol\x12S\n" +
 	"'keep_connections_on_host_health_failure\x18\t \x01(\bR\"keepConnectionsOnHostHealthFailureB\x14\n" +
-	"\fbackend_type\x12\x04\xc0\xc11\x01\"\x97\x05\n" +
-	"\vHttpBackend\x128\n" +
-	"\x04name\x18\x01 \x01(\tB$\xe8\xc71\x01\xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12B\n" +
-	"\x0ebackend_weight\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackendWeight\x12h\n" +
-	"\x15load_balancing_config\x18\x03 \x01(\v24.yandex.cloud.apploadbalancer.v1.LoadBalancingConfigR\x13loadBalancingConfig\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12[\n" +
-	"\rtarget_groups\x18\x05 \x01(\v24.yandex.cloud.apploadbalancer.v1.TargetGroupsBackendH\x00R\ftargetGroups\x12^\n" +
-	"\x0estorage_bucket\x18\t \x01(\v25.yandex.cloud.apploadbalancer.v1.StorageBucketBackendH\x00R\rstorageBucket\x12P\n" +
-	"\fhealthchecks\x18\x06 \x03(\v2,.yandex.cloud.apploadbalancer.v1.HealthCheckR\fhealthchecks\x12=\n" +
-	"\x03tls\x18\a \x01(\v2+.yandex.cloud.apploadbalancer.v1.BackendTlsR\x03tls\x12\x1b\n" +
-	"\tuse_http2\x18\b \x01(\bR\buseHttp2B\x14\n" +
-	"\fbackend_type\x12\x04\xc0\xc11\x01\"\xa0\x04\n" +
-	"\vGrpcBackend\x128\n" +
-	"\x04name\x18\x01 \x01(\tB$\xe8\xc71\x01\xf2\xc71\x1c[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12B\n" +
-	"\x0ebackend_weight\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rbackendWeight\x12h\n" +
-	"\x15load_balancing_config\x18\x03 \x01(\v24.yandex.cloud.apploadbalancer.v1.LoadBalancingConfigR\x13loadBalancingConfig\x12\x1f\n" +
-	"\x04port\x18\x04 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12[\n" +
-	"\rtarget_groups\x18\x05 \x01(\v24.yandex.cloud.apploadbalancer.v1.TargetGroupsBackendH\x00R\ftargetGroups\x12P\n" +
-	"\fhealthchecks\x18\a \x03(\v2,.yandex.cloud.apploadbalancer.v1.HealthCheckR\fhealthchecks\x12=\n" +
-	"\x03tls\x18\b \x01(\v2+.yandex.cloud.apploadbalancer.v1.BackendTlsR\x03tlsB\x14\n" +
-	"\fbackend_type\x12\x04\xc0\xc11\x01J\x04\b\x06\x10\a\"G\n" +
+	"\fbackend_type\x12\x04\xc0\xc11\x01\"4\n" +
+	"\x14StorageBucketBackend\x12\x1c\n" +
+	"\x06bucket\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06bucket\"G\n" +
 	"\x13TargetGroupsBackend\x120\n" +
 	"\x10target_group_ids\x18\x01 \x03(\tB\x06\x82\xc81\x02>0R\x0etargetGroupIds\"\x1c\n" +
-	"\x1aPlaintextTransportSettings\"\x94\x01\n" +
-	"\x17SecureTransportSettings\x12\x10\n" +
-	"\x03sni\x18\x01 \x01(\tR\x03sni\x12a\n" +
-	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"\x87\x01\n" +
+	"\x1aPlaintextTransportSettings\"\xae\x01\n" +
+	"\x17SecureTransportSettings\x12*\n" +
+	"\x03sni\x18\x01 \x01(\tB\x18\xf2\xc71\v[-.a-z0-9]*\x8a\xc81\x05<=255R\x03sni\x12a\n" +
+	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"\xa1\x01\n" +
 	"\n" +
-	"BackendTls\x12\x10\n" +
-	"\x03sni\x18\x01 \x01(\tR\x03sni\x12a\n" +
-	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"4\n" +
-	"\x14StorageBucketBackend\x12\x1c\n" +
-	"\x06bucket\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06bucket\"\x96\t\n" +
+	"BackendTls\x12*\n" +
+	"\x03sni\x18\x01 \x01(\tB\x18\xf2\xc71\v[-.a-z0-9]*\x8a\xc81\x05<=255R\x03sni\x12a\n" +
+	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"\xc7\t\n" +
 	"\vHealthCheck\x129\n" +
 	"\atimeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\atimeout\x12;\n" +
 	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\binterval\x126\n" +
@@ -2099,10 +2042,10 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x03tls\x18\v \x01(\v28.yandex.cloud.apploadbalancer.v1.SecureTransportSettingsH\x01R\x03tls\x1a\x95\x01\n" +
 	"\x11StreamHealthCheck\x12<\n" +
 	"\x04send\x18\x01 \x01(\v2(.yandex.cloud.apploadbalancer.v1.PayloadR\x04send\x12B\n" +
-	"\areceive\x18\x02 \x01(\v2(.yandex.cloud.apploadbalancer.v1.PayloadR\areceive\x1a\x9a\x01\n" +
-	"\x0fHttpHealthCheck\x12\x12\n" +
-	"\x04host\x18\x01 \x01(\tR\x04host\x12\x18\n" +
-	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path\x12\x1b\n" +
+	"\areceive\x18\x02 \x01(\v2(.yandex.cloud.apploadbalancer.v1.PayloadR\areceive\x1a\xcb\x01\n" +
+	"\x0fHttpHealthCheck\x127\n" +
+	"\x04host\x18\x01 \x01(\tB#\xf2\xc71\x16|[-.a-z0-9]+(:[0-9]+)?\x8a\xc81\x050-255R\x04host\x12$\n" +
+	"\x04path\x18\x02 \x01(\tB\x10\xf2\xc71\x03/.*\x8a\xc81\x051-255R\x04path\x12\x1b\n" +
 	"\tuse_http2\x18\x03 \x01(\bR\buseHttp2\x12<\n" +
 	"\x11expected_statuses\x18\x04 \x03(\x03B\x0f\xfa\xc71\a100-599\x90\xc81\x01R\x10expectedStatuses\x1a4\n" +
 	"\x0fGrpcHealthCheck\x12!\n" +
@@ -2141,14 +2084,14 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_goTypes = []any{
 	(*CookieSessionAffinity)(nil),         // 6: yandex.cloud.apploadbalancer.v1.CookieSessionAffinity
 	(*ConnectionSessionAffinity)(nil),     // 7: yandex.cloud.apploadbalancer.v1.ConnectionSessionAffinity
 	(*LoadBalancingConfig)(nil),           // 8: yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
-	(*StreamBackend)(nil),                 // 9: yandex.cloud.apploadbalancer.v1.StreamBackend
-	(*HttpBackend)(nil),                   // 10: yandex.cloud.apploadbalancer.v1.HttpBackend
-	(*GrpcBackend)(nil),                   // 11: yandex.cloud.apploadbalancer.v1.GrpcBackend
-	(*TargetGroupsBackend)(nil),           // 12: yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
-	(*PlaintextTransportSettings)(nil),    // 13: yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
-	(*SecureTransportSettings)(nil),       // 14: yandex.cloud.apploadbalancer.v1.SecureTransportSettings
-	(*BackendTls)(nil),                    // 15: yandex.cloud.apploadbalancer.v1.BackendTls
-	(*StorageBucketBackend)(nil),          // 16: yandex.cloud.apploadbalancer.v1.StorageBucketBackend
+	(*HttpBackend)(nil),                   // 9: yandex.cloud.apploadbalancer.v1.HttpBackend
+	(*GrpcBackend)(nil),                   // 10: yandex.cloud.apploadbalancer.v1.GrpcBackend
+	(*StreamBackend)(nil),                 // 11: yandex.cloud.apploadbalancer.v1.StreamBackend
+	(*StorageBucketBackend)(nil),          // 12: yandex.cloud.apploadbalancer.v1.StorageBucketBackend
+	(*TargetGroupsBackend)(nil),           // 13: yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
+	(*PlaintextTransportSettings)(nil),    // 14: yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
+	(*SecureTransportSettings)(nil),       // 15: yandex.cloud.apploadbalancer.v1.SecureTransportSettings
+	(*BackendTls)(nil),                    // 16: yandex.cloud.apploadbalancer.v1.BackendTls
 	(*HealthCheck)(nil),                   // 17: yandex.cloud.apploadbalancer.v1.HealthCheck
 	nil,                                   // 18: yandex.cloud.apploadbalancer.v1.BackendGroup.LabelsEntry
 	(*HealthCheck_StreamHealthCheck)(nil), // 19: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck
@@ -2162,38 +2105,38 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_goTypes = []any{
 }
 var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_depIdxs = []int32{
 	18, // 0: yandex.cloud.apploadbalancer.v1.BackendGroup.labels:type_name -> yandex.cloud.apploadbalancer.v1.BackendGroup.LabelsEntry
-	3,  // 1: yandex.cloud.apploadbalancer.v1.BackendGroup.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
-	4,  // 2: yandex.cloud.apploadbalancer.v1.BackendGroup.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
-	2,  // 3: yandex.cloud.apploadbalancer.v1.BackendGroup.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	2,  // 1: yandex.cloud.apploadbalancer.v1.BackendGroup.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	3,  // 2: yandex.cloud.apploadbalancer.v1.BackendGroup.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
+	4,  // 3: yandex.cloud.apploadbalancer.v1.BackendGroup.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
 	22, // 4: yandex.cloud.apploadbalancer.v1.BackendGroup.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 5: yandex.cloud.apploadbalancer.v1.StreamBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
+	11, // 5: yandex.cloud.apploadbalancer.v1.StreamBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
 	7,  // 6: yandex.cloud.apploadbalancer.v1.StreamBackendGroup.connection:type_name -> yandex.cloud.apploadbalancer.v1.ConnectionSessionAffinity
-	10, // 7: yandex.cloud.apploadbalancer.v1.HttpBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
+	9,  // 7: yandex.cloud.apploadbalancer.v1.HttpBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
 	7,  // 8: yandex.cloud.apploadbalancer.v1.HttpBackendGroup.connection:type_name -> yandex.cloud.apploadbalancer.v1.ConnectionSessionAffinity
 	5,  // 9: yandex.cloud.apploadbalancer.v1.HttpBackendGroup.header:type_name -> yandex.cloud.apploadbalancer.v1.HeaderSessionAffinity
 	6,  // 10: yandex.cloud.apploadbalancer.v1.HttpBackendGroup.cookie:type_name -> yandex.cloud.apploadbalancer.v1.CookieSessionAffinity
-	11, // 11: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
+	10, // 11: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup.backends:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
 	7,  // 12: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup.connection:type_name -> yandex.cloud.apploadbalancer.v1.ConnectionSessionAffinity
 	5,  // 13: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup.header:type_name -> yandex.cloud.apploadbalancer.v1.HeaderSessionAffinity
 	6,  // 14: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup.cookie:type_name -> yandex.cloud.apploadbalancer.v1.CookieSessionAffinity
 	23, // 15: yandex.cloud.apploadbalancer.v1.CookieSessionAffinity.ttl:type_name -> google.protobuf.Duration
 	0,  // 16: yandex.cloud.apploadbalancer.v1.LoadBalancingConfig.mode:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingMode
-	24, // 17: yandex.cloud.apploadbalancer.v1.StreamBackend.backend_weight:type_name -> google.protobuf.Int64Value
-	8,  // 18: yandex.cloud.apploadbalancer.v1.StreamBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
-	12, // 19: yandex.cloud.apploadbalancer.v1.StreamBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
-	17, // 20: yandex.cloud.apploadbalancer.v1.StreamBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
-	15, // 21: yandex.cloud.apploadbalancer.v1.StreamBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
-	24, // 22: yandex.cloud.apploadbalancer.v1.HttpBackend.backend_weight:type_name -> google.protobuf.Int64Value
-	8,  // 23: yandex.cloud.apploadbalancer.v1.HttpBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
-	12, // 24: yandex.cloud.apploadbalancer.v1.HttpBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
-	16, // 25: yandex.cloud.apploadbalancer.v1.HttpBackend.storage_bucket:type_name -> yandex.cloud.apploadbalancer.v1.StorageBucketBackend
-	17, // 26: yandex.cloud.apploadbalancer.v1.HttpBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
-	15, // 27: yandex.cloud.apploadbalancer.v1.HttpBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
-	24, // 28: yandex.cloud.apploadbalancer.v1.GrpcBackend.backend_weight:type_name -> google.protobuf.Int64Value
-	8,  // 29: yandex.cloud.apploadbalancer.v1.GrpcBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
-	12, // 30: yandex.cloud.apploadbalancer.v1.GrpcBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
-	17, // 31: yandex.cloud.apploadbalancer.v1.GrpcBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
-	15, // 32: yandex.cloud.apploadbalancer.v1.GrpcBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
+	24, // 17: yandex.cloud.apploadbalancer.v1.HttpBackend.backend_weight:type_name -> google.protobuf.Int64Value
+	8,  // 18: yandex.cloud.apploadbalancer.v1.HttpBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
+	12, // 19: yandex.cloud.apploadbalancer.v1.HttpBackend.storage_bucket:type_name -> yandex.cloud.apploadbalancer.v1.StorageBucketBackend
+	13, // 20: yandex.cloud.apploadbalancer.v1.HttpBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
+	17, // 21: yandex.cloud.apploadbalancer.v1.HttpBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
+	16, // 22: yandex.cloud.apploadbalancer.v1.HttpBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
+	24, // 23: yandex.cloud.apploadbalancer.v1.GrpcBackend.backend_weight:type_name -> google.protobuf.Int64Value
+	8,  // 24: yandex.cloud.apploadbalancer.v1.GrpcBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
+	13, // 25: yandex.cloud.apploadbalancer.v1.GrpcBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
+	17, // 26: yandex.cloud.apploadbalancer.v1.GrpcBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
+	16, // 27: yandex.cloud.apploadbalancer.v1.GrpcBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
+	24, // 28: yandex.cloud.apploadbalancer.v1.StreamBackend.backend_weight:type_name -> google.protobuf.Int64Value
+	8,  // 29: yandex.cloud.apploadbalancer.v1.StreamBackend.load_balancing_config:type_name -> yandex.cloud.apploadbalancer.v1.LoadBalancingConfig
+	13, // 30: yandex.cloud.apploadbalancer.v1.StreamBackend.target_groups:type_name -> yandex.cloud.apploadbalancer.v1.TargetGroupsBackend
+	17, // 31: yandex.cloud.apploadbalancer.v1.StreamBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
+	16, // 32: yandex.cloud.apploadbalancer.v1.StreamBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
 	25, // 33: yandex.cloud.apploadbalancer.v1.SecureTransportSettings.validation_context:type_name -> yandex.cloud.apploadbalancer.v1.ValidationContext
 	25, // 34: yandex.cloud.apploadbalancer.v1.BackendTls.validation_context:type_name -> yandex.cloud.apploadbalancer.v1.ValidationContext
 	23, // 35: yandex.cloud.apploadbalancer.v1.HealthCheck.timeout:type_name -> google.protobuf.Duration
@@ -2201,8 +2144,8 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_depIdxs = []int32{
 	19, // 37: yandex.cloud.apploadbalancer.v1.HealthCheck.stream:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck
 	20, // 38: yandex.cloud.apploadbalancer.v1.HealthCheck.http:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.HttpHealthCheck
 	21, // 39: yandex.cloud.apploadbalancer.v1.HealthCheck.grpc:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.GrpcHealthCheck
-	13, // 40: yandex.cloud.apploadbalancer.v1.HealthCheck.plaintext:type_name -> yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
-	14, // 41: yandex.cloud.apploadbalancer.v1.HealthCheck.tls:type_name -> yandex.cloud.apploadbalancer.v1.SecureTransportSettings
+	14, // 40: yandex.cloud.apploadbalancer.v1.HealthCheck.plaintext:type_name -> yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
+	15, // 41: yandex.cloud.apploadbalancer.v1.HealthCheck.tls:type_name -> yandex.cloud.apploadbalancer.v1.SecureTransportSettings
 	26, // 42: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.send:type_name -> yandex.cloud.apploadbalancer.v1.Payload
 	26, // 43: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.receive:type_name -> yandex.cloud.apploadbalancer.v1.Payload
 	44, // [44:44] is the sub-list for method output_type
@@ -2220,9 +2163,9 @@ func file_yandex_cloud_apploadbalancer_v1_backend_group_proto_init() {
 	file_yandex_cloud_apploadbalancer_v1_payload_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_tls_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[0].OneofWrappers = []any{
+		(*BackendGroup_Stream)(nil),
 		(*BackendGroup_Http)(nil),
 		(*BackendGroup_Grpc)(nil),
-		(*BackendGroup_Stream)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[1].OneofWrappers = []any{
 		(*StreamBackendGroup_Connection)(nil),
@@ -2238,14 +2181,14 @@ func file_yandex_cloud_apploadbalancer_v1_backend_group_proto_init() {
 		(*GrpcBackendGroup_Cookie)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[8].OneofWrappers = []any{
-		(*StreamBackend_TargetGroups)(nil),
+		(*HttpBackend_StorageBucket)(nil),
+		(*HttpBackend_TargetGroups)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[9].OneofWrappers = []any{
-		(*HttpBackend_TargetGroups)(nil),
-		(*HttpBackend_StorageBucket)(nil),
+		(*GrpcBackend_TargetGroups)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[10].OneofWrappers = []any{
-		(*GrpcBackend_TargetGroups)(nil),
+		(*StreamBackend_TargetGroups)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_msgTypes[16].OneofWrappers = []any{
 		(*HealthCheck_Stream)(nil),

@@ -27,9 +27,11 @@ const (
 )
 
 type CreateResourceGroupMetadata struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId         string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ResourceGroupName string                 `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the resource group. Must be unique within cluster.
+	ResourceGroupName string `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -79,9 +81,11 @@ func (x *CreateResourceGroupMetadata) GetResourceGroupName() string {
 }
 
 type UpdateResourceGroupMetadata struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId         string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ResourceGroupName string                 `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the resource group to update.
+	ResourceGroupName string `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -131,9 +135,11 @@ func (x *UpdateResourceGroupMetadata) GetResourceGroupName() string {
 }
 
 type DeleteResourceGroupMetadata struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId         string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ResourceGroupName string                 `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the resource group to delete.
+	ResourceGroupName string `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -183,8 +189,9 @@ func (x *DeleteResourceGroupMetadata) GetResourceGroupName() string {
 }
 
 type ListResourceGroupsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -227,8 +234,9 @@ func (x *ListResourceGroupsRequest) GetClusterId() string {
 }
 
 type ListResourceGroupsResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ResourceGroups []*ResourceGroup       `protobuf:"bytes,1,rep,name=resource_groups,json=resourceGroups,proto3" json:"resource_groups,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of cluster resource groups.
+	ResourceGroups []*ResourceGroup `protobuf:"bytes,1,rep,name=resource_groups,json=resourceGroups,proto3" json:"resource_groups,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -272,10 +280,11 @@ func (x *ListResourceGroupsResponse) GetResourceGroups() []*ResourceGroup {
 
 type GetResourceGroupAtRevisionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Greenplum cluster.
+	// ID of the Greenplum® cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Cluster revision
-	Revision          int64  `protobuf:"varint,2,opt,name=revision,proto3" json:"revision,omitempty"`
+	// Cluster revision.
+	Revision int64 `protobuf:"varint,2,opt,name=revision,proto3" json:"revision,omitempty"`
+	// Name of the resource group to get.
 	ResourceGroupName string `protobuf:"bytes,3,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
@@ -333,9 +342,11 @@ func (x *GetResourceGroupAtRevisionRequest) GetResourceGroupName() string {
 }
 
 type CreateResourceGroupRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ResourceGroup *ResourceGroup         `protobuf:"bytes,2,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Definition of the resource group.
+	ResourceGroup *ResourceGroup `protobuf:"bytes,2,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -385,10 +396,13 @@ func (x *CreateResourceGroupRequest) GetResourceGroup() *ResourceGroup {
 }
 
 type UpdateResourceGroupRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId     string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	ResourceGroup *ResourceGroup         `protobuf:"bytes,3,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Field mask that specifies which fields of the resource group should be updated.
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Definition of the resource group (updated fields only).
+	ResourceGroup *ResourceGroup `protobuf:"bytes,3,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -445,9 +459,11 @@ func (x *UpdateResourceGroupRequest) GetResourceGroup() *ResourceGroup {
 }
 
 type DeleteResourceGroupRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ClusterId         string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	ResourceGroupName string                 `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Greenplum® cluster.
+	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// Name of the resource group to delete.
+	ResourceGroupName string `protobuf:"bytes,2,opt,name=resource_group_name,json=resourceGroupName,proto3" json:"resource_group_name,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -500,7 +516,7 @@ var File_yandex_cloud_mdb_greenplum_v1_resource_groups_service_proto protoreflec
 
 const file_yandex_cloud_mdb_greenplum_v1_resource_groups_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/greenplum/v1/resource_groups_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a&yandex/cloud/operation/operation.proto\x1a3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\"\x9f\x01\n" +
+	";yandex/cloud/mdb/greenplum/v1/resource_groups_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/mdb/greenplum/v1/resource_groups.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x9f\x01\n" +
 	"\x1bCreateResourceGroupMetadata\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12S\n" +

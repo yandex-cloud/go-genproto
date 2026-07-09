@@ -228,17 +228,17 @@ var File_yandex_cloud_apploadbalancer_v1_logging_proto protoreflect.FileDescript
 
 const file_yandex_cloud_apploadbalancer_v1_logging_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/apploadbalancer/v1/logging.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\x1a\x15google/rpc/code.proto\"\xa1\x02\n" +
+	"-yandex/cloud/apploadbalancer/v1/logging.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x15google/rpc/code.proto\x1a\x1dyandex/cloud/validation.proto\"\xa1\x02\n" +
 	"\x0eLogDiscardRule\x12*\n" +
 	"\n" +
 	"http_codes\x18\x01 \x03(\x03B\v\xfa\xc71\a100-599R\thttpCodes\x12a\n" +
 	"\x13http_code_intervals\x18\x02 \x03(\x0e21.yandex.cloud.apploadbalancer.v1.HttpCodeIntervalR\x11httpCodeIntervals\x12/\n" +
 	"\n" +
 	"grpc_codes\x18\x03 \x03(\x0e2\x10.google.rpc.CodeR\tgrpcCodes\x12O\n" +
-	"\x0fdiscard_percent\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x0ediscardPercent\"\x9e\x01\n" +
+	"\x0fdiscard_percent\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x0ediscardPercent\"\xc3\x01\n" +
 	"\n" +
-	"LogOptions\x12 \n" +
-	"\flog_group_id\x18\x01 \x01(\tR\n" +
+	"LogOptions\x12E\n" +
+	"\flog_group_id\x18\x01 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?R\n" +
 	"logGroupId\x12T\n" +
 	"\rdiscard_rules\x18\x02 \x03(\v2/.yandex.cloud.apploadbalancer.v1.LogDiscardRuleR\fdiscardRules\x12\x18\n" +
 	"\adisable\x18\x03 \x01(\bR\adisable*\x8a\x01\n" +

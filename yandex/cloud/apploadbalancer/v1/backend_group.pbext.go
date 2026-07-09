@@ -34,6 +34,12 @@ func (m *BackendGroup) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *BackendGroup) SetStream(v *StreamBackendGroup) {
+	m.Backend = &BackendGroup_Stream{
+		Stream: v,
+	}
+}
+
 func (m *BackendGroup) SetHttp(v *HttpBackendGroup) {
 	m.Backend = &BackendGroup_Http{
 		Http: v,
@@ -43,12 +49,6 @@ func (m *BackendGroup) SetHttp(v *HttpBackendGroup) {
 func (m *BackendGroup) SetGrpc(v *GrpcBackendGroup) {
 	m.Backend = &BackendGroup_Grpc{
 		Grpc: v,
-	}
-}
-
-func (m *BackendGroup) SetStream(v *StreamBackendGroup) {
-	m.Backend = &BackendGroup_Stream{
-		Stream: v,
 	}
 }
 
@@ -148,6 +148,10 @@ func (m *ConnectionSessionAffinity) SetSourceIp(v bool) {
 	m.SourceIp = v
 }
 
+func (m *LoadBalancingConfig) SetMode(v LoadBalancingMode) {
+	m.Mode = v
+}
+
 func (m *LoadBalancingConfig) SetPanicThreshold(v int64) {
 	m.PanicThreshold = v
 }
@@ -158,54 +162,6 @@ func (m *LoadBalancingConfig) SetLocalityAwareRoutingPercent(v int64) {
 
 func (m *LoadBalancingConfig) SetStrictLocality(v bool) {
 	m.StrictLocality = v
-}
-
-func (m *LoadBalancingConfig) SetMode(v LoadBalancingMode) {
-	m.Mode = v
-}
-
-type StreamBackend_BackendType = isStreamBackend_BackendType
-
-func (m *StreamBackend) SetBackendType(v StreamBackend_BackendType) {
-	m.BackendType = v
-}
-
-func (m *StreamBackend) SetName(v string) {
-	m.Name = v
-}
-
-func (m *StreamBackend) SetBackendWeight(v *wrapperspb.Int64Value) {
-	m.BackendWeight = v
-}
-
-func (m *StreamBackend) SetLoadBalancingConfig(v *LoadBalancingConfig) {
-	m.LoadBalancingConfig = v
-}
-
-func (m *StreamBackend) SetPort(v int64) {
-	m.Port = v
-}
-
-func (m *StreamBackend) SetTargetGroups(v *TargetGroupsBackend) {
-	m.BackendType = &StreamBackend_TargetGroups{
-		TargetGroups: v,
-	}
-}
-
-func (m *StreamBackend) SetHealthchecks(v []*HealthCheck) {
-	m.Healthchecks = v
-}
-
-func (m *StreamBackend) SetTls(v *BackendTls) {
-	m.Tls = v
-}
-
-func (m *StreamBackend) SetEnableProxyProtocol(v bool) {
-	m.EnableProxyProtocol = v
-}
-
-func (m *StreamBackend) SetKeepConnectionsOnHostHealthFailure(v bool) {
-	m.KeepConnectionsOnHostHealthFailure = v
 }
 
 type HttpBackend_BackendType = isHttpBackend_BackendType
@@ -230,15 +186,15 @@ func (m *HttpBackend) SetPort(v int64) {
 	m.Port = v
 }
 
-func (m *HttpBackend) SetTargetGroups(v *TargetGroupsBackend) {
-	m.BackendType = &HttpBackend_TargetGroups{
-		TargetGroups: v,
-	}
-}
-
 func (m *HttpBackend) SetStorageBucket(v *StorageBucketBackend) {
 	m.BackendType = &HttpBackend_StorageBucket{
 		StorageBucket: v,
+	}
+}
+
+func (m *HttpBackend) SetTargetGroups(v *TargetGroupsBackend) {
+	m.BackendType = &HttpBackend_TargetGroups{
+		TargetGroups: v,
 	}
 }
 
@@ -290,6 +246,54 @@ func (m *GrpcBackend) SetTls(v *BackendTls) {
 	m.Tls = v
 }
 
+type StreamBackend_BackendType = isStreamBackend_BackendType
+
+func (m *StreamBackend) SetBackendType(v StreamBackend_BackendType) {
+	m.BackendType = v
+}
+
+func (m *StreamBackend) SetName(v string) {
+	m.Name = v
+}
+
+func (m *StreamBackend) SetBackendWeight(v *wrapperspb.Int64Value) {
+	m.BackendWeight = v
+}
+
+func (m *StreamBackend) SetLoadBalancingConfig(v *LoadBalancingConfig) {
+	m.LoadBalancingConfig = v
+}
+
+func (m *StreamBackend) SetPort(v int64) {
+	m.Port = v
+}
+
+func (m *StreamBackend) SetTargetGroups(v *TargetGroupsBackend) {
+	m.BackendType = &StreamBackend_TargetGroups{
+		TargetGroups: v,
+	}
+}
+
+func (m *StreamBackend) SetHealthchecks(v []*HealthCheck) {
+	m.Healthchecks = v
+}
+
+func (m *StreamBackend) SetTls(v *BackendTls) {
+	m.Tls = v
+}
+
+func (m *StreamBackend) SetEnableProxyProtocol(v bool) {
+	m.EnableProxyProtocol = v
+}
+
+func (m *StreamBackend) SetKeepConnectionsOnHostHealthFailure(v bool) {
+	m.KeepConnectionsOnHostHealthFailure = v
+}
+
+func (m *StorageBucketBackend) SetBucket(v string) {
+	m.Bucket = v
+}
+
 func (m *TargetGroupsBackend) SetTargetGroupIds(v []string) {
 	m.TargetGroupIds = v
 }
@@ -308,10 +312,6 @@ func (m *BackendTls) SetSni(v string) {
 
 func (m *BackendTls) SetValidationContext(v *ValidationContext) {
 	m.ValidationContext = v
-}
-
-func (m *StorageBucketBackend) SetBucket(v string) {
-	m.Bucket = v
 }
 
 type HealthCheck_Healthcheck = isHealthCheck_Healthcheck

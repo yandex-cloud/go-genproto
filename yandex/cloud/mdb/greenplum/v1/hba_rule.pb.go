@@ -142,8 +142,9 @@ func (HBARule_AuthMethod) EnumDescriptor() ([]byte, []int) {
 
 type HBARule struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Priority of the Greenplum cluster rule.
-	Priority       int64                  `protobuf:"varint,1,opt,name=priority,proto3" json:"priority,omitempty"`
+	// Priority of the Greenplum® cluster rule.
+	Priority int64 `protobuf:"varint,1,opt,name=priority,proto3" json:"priority,omitempty"`
+	// Connection type of the Greenplum® cluster rule.
 	ConnectionType HBARule_ConnectionType `protobuf:"varint,2,opt,name=connection_type,json=connectionType,proto3,enum=yandex.cloud.mdb.greenplum.v1.HBARule_ConnectionType" json:"connection_type,omitempty"`
 	// Specifies which database names this record matches.
 	Database string `protobuf:"bytes,3,opt,name=database,proto3" json:"database,omitempty"`

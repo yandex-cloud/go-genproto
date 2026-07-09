@@ -599,6 +599,123 @@ func (x *DeleteStacklandClusterMetadata) GetOperationMetadata() *v2.OperationMet
 	return nil
 }
 
+type GetStacklandClusterConfigsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent cloud.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the parent folder.
+	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// ID of the cluster to retrieve configs.
+	StacklandClusterId string `protobuf:"bytes,3,opt,name=stackland_cluster_id,json=stacklandClusterId,proto3" json:"stackland_cluster_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetStacklandClusterConfigsRequest) Reset() {
+	*x = GetStacklandClusterConfigsRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStacklandClusterConfigsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStacklandClusterConfigsRequest) ProtoMessage() {}
+
+func (x *GetStacklandClusterConfigsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStacklandClusterConfigsRequest.ProtoReflect.Descriptor instead.
+func (*GetStacklandClusterConfigsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetStacklandClusterConfigsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *GetStacklandClusterConfigsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *GetStacklandClusterConfigsRequest) GetStacklandClusterId() string {
+	if x != nil {
+		return x.StacklandClusterId
+	}
+	return ""
+}
+
+type GetStacklandClusterConfigsResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the returned archive.
+	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
+	// Zip archive with config.yaml and secrets.yaml.
+	Content       []byte `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetStacklandClusterConfigsResponse) Reset() {
+	*x = GetStacklandClusterConfigsResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetStacklandClusterConfigsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStacklandClusterConfigsResponse) ProtoMessage() {}
+
+func (x *GetStacklandClusterConfigsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStacklandClusterConfigsResponse.ProtoReflect.Descriptor instead.
+func (*GetStacklandClusterConfigsResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetStacklandClusterConfigsResponse) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *GetStacklandClusterConfigsResponse) GetContent() []byte {
+	if x != nil {
+		return x.Content
+	}
+	return nil
+}
+
 var File_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDesc = "" +
@@ -639,7 +756,14 @@ const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawD
 	"\x14stackland_cluster_id\x18\x03 \x01(\tB\x1b\xe0A\x02\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x12stacklandClusterId\"\xaf\x01\n" +
 	"\x1eDeleteStacklandClusterMetadata\x120\n" +
 	"\x14stackland_cluster_id\x18\x01 \x01(\tR\x12stacklandClusterId\x12[\n" +
-	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xed\v\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\x9c\x01\n" +
+	"!GetStacklandClusterConfigsRequest\x12\x1e\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x125\n" +
+	"\x14stackland_cluster_id\x18\x03 \x01(\tB\x03\xe0A\x02R\x12stacklandClusterId\"d\n" +
+	"\"GetStacklandClusterConfigsResponse\x12\x1f\n" +
+	"\bfilename\x18\x01 \x01(\tB\x03\xe0A\x03R\bfilename\x12\x1d\n" +
+	"\acontent\x18\x02 \x01(\fB\x03\xe0A\x03R\acontent2\xad\x0e\n" +
 	"\x17StacklandClusterService\x12\x95\x02\n" +
 	"\x13GetStacklandCluster\x12<.yandex.cloud.baremetal.v2.extend.GetStacklandClusterRequest\x1a2.yandex.cloud.baremetal.v2.extend.StacklandCluster\"\x8b\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02[\x12Y/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}\x12\xf9\x01\n" +
 	"\x15ListStacklandClusters\x12>.yandex.cloud.baremetal.v2.extend.ListStacklandClustersRequest\x1a?.yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse\"_\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02D\x12B/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters\x12\xa5\x02\n" +
@@ -648,7 +772,8 @@ const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawD
 	"\x16UpdateStacklandCluster\x12?.yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest\x1a!.yandex.cloud.operation.Operation\"\xce\x01\xdaA\x13cluster,update_mask\xb2\xd2*2\n" +
 	"\x1eUpdateStacklandClusterMetadata\x12\x10StacklandCluster\x82\xd3\xe4\x93\x02|:\acluster2q/v2/clouds/{cluster.cloud_id}/folders/{cluster.folder_id}/extend/stacklandClusters/{cluster.stackland_cluster_id}\x12\xc5\x02\n" +
 	"\x16DeleteStacklandCluster\x12?.yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterRequest\x1a!.yandex.cloud.operation.Operation\"\xc6\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\xb2\xd2*7\n" +
-	"\x1eDeleteStacklandClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02[*Y/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}Bz\n" +
+	"\x1eDeleteStacklandClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02[*Y/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}\x12\xbd\x02\n" +
+	"\x1aGetStacklandClusterConfigs\x12C.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsRequest\x1aD.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsResponse\"\x93\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02c\x12a/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}:configsBz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"
 
 var (
@@ -663,42 +788,46 @@ func file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDe
 	return file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_goTypes = []any{
-	(*GetStacklandClusterRequest)(nil),     // 0: yandex.cloud.baremetal.v2.extend.GetStacklandClusterRequest
-	(*ListStacklandClustersRequest)(nil),   // 1: yandex.cloud.baremetal.v2.extend.ListStacklandClustersRequest
-	(*ListStacklandClustersResponse)(nil),  // 2: yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse
-	(*CreateStacklandClusterMetadata)(nil), // 3: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterMetadata
-	(*CreateStacklandClusterRequest)(nil),  // 4: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterRequest
-	(*UpdateStacklandClusterRequest)(nil),  // 5: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest
-	(*UpdateStacklandClusterMetadata)(nil), // 6: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterMetadata
-	(*DeleteStacklandClusterRequest)(nil),  // 7: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterRequest
-	(*DeleteStacklandClusterMetadata)(nil), // 8: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterMetadata
-	(*StacklandCluster)(nil),               // 9: yandex.cloud.baremetal.v2.extend.StacklandCluster
-	(*v2.OperationMetadata)(nil),           // 10: yandex.cloud.baremetal.v2.OperationMetadata
-	(*fieldmaskpb.FieldMask)(nil),          // 11: google.protobuf.FieldMask
-	(*operation.Operation)(nil),            // 12: yandex.cloud.operation.Operation
+	(*GetStacklandClusterRequest)(nil),         // 0: yandex.cloud.baremetal.v2.extend.GetStacklandClusterRequest
+	(*ListStacklandClustersRequest)(nil),       // 1: yandex.cloud.baremetal.v2.extend.ListStacklandClustersRequest
+	(*ListStacklandClustersResponse)(nil),      // 2: yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse
+	(*CreateStacklandClusterMetadata)(nil),     // 3: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterMetadata
+	(*CreateStacklandClusterRequest)(nil),      // 4: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterRequest
+	(*UpdateStacklandClusterRequest)(nil),      // 5: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest
+	(*UpdateStacklandClusterMetadata)(nil),     // 6: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterMetadata
+	(*DeleteStacklandClusterRequest)(nil),      // 7: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterRequest
+	(*DeleteStacklandClusterMetadata)(nil),     // 8: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterMetadata
+	(*GetStacklandClusterConfigsRequest)(nil),  // 9: yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsRequest
+	(*GetStacklandClusterConfigsResponse)(nil), // 10: yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsResponse
+	(*StacklandCluster)(nil),                   // 11: yandex.cloud.baremetal.v2.extend.StacklandCluster
+	(*v2.OperationMetadata)(nil),               // 12: yandex.cloud.baremetal.v2.OperationMetadata
+	(*fieldmaskpb.FieldMask)(nil),              // 13: google.protobuf.FieldMask
+	(*operation.Operation)(nil),                // 14: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_depIdxs = []int32{
-	9,  // 0: yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse.clusters:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
-	10, // 1: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	9,  // 2: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterRequest.cluster:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
-	9,  // 3: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest.cluster:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
-	11, // 4: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	10, // 5: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
-	10, // 6: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	11, // 0: yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse.clusters:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
+	12, // 1: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	11, // 2: yandex.cloud.baremetal.v2.extend.CreateStacklandClusterRequest.cluster:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
+	11, // 3: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest.cluster:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster
+	13, // 4: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	12, // 5: yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
+	12, // 6: yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
 	0,  // 7: yandex.cloud.baremetal.v2.extend.StacklandClusterService.GetStacklandCluster:input_type -> yandex.cloud.baremetal.v2.extend.GetStacklandClusterRequest
 	1,  // 8: yandex.cloud.baremetal.v2.extend.StacklandClusterService.ListStacklandClusters:input_type -> yandex.cloud.baremetal.v2.extend.ListStacklandClustersRequest
 	4,  // 9: yandex.cloud.baremetal.v2.extend.StacklandClusterService.CreateStacklandCluster:input_type -> yandex.cloud.baremetal.v2.extend.CreateStacklandClusterRequest
 	5,  // 10: yandex.cloud.baremetal.v2.extend.StacklandClusterService.UpdateStacklandCluster:input_type -> yandex.cloud.baremetal.v2.extend.UpdateStacklandClusterRequest
 	7,  // 11: yandex.cloud.baremetal.v2.extend.StacklandClusterService.DeleteStacklandCluster:input_type -> yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterRequest
-	9,  // 12: yandex.cloud.baremetal.v2.extend.StacklandClusterService.GetStacklandCluster:output_type -> yandex.cloud.baremetal.v2.extend.StacklandCluster
-	2,  // 13: yandex.cloud.baremetal.v2.extend.StacklandClusterService.ListStacklandClusters:output_type -> yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse
-	12, // 14: yandex.cloud.baremetal.v2.extend.StacklandClusterService.CreateStacklandCluster:output_type -> yandex.cloud.operation.Operation
-	12, // 15: yandex.cloud.baremetal.v2.extend.StacklandClusterService.UpdateStacklandCluster:output_type -> yandex.cloud.operation.Operation
-	12, // 16: yandex.cloud.baremetal.v2.extend.StacklandClusterService.DeleteStacklandCluster:output_type -> yandex.cloud.operation.Operation
-	12, // [12:17] is the sub-list for method output_type
-	7,  // [7:12] is the sub-list for method input_type
+	9,  // 12: yandex.cloud.baremetal.v2.extend.StacklandClusterService.GetStacklandClusterConfigs:input_type -> yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsRequest
+	11, // 13: yandex.cloud.baremetal.v2.extend.StacklandClusterService.GetStacklandCluster:output_type -> yandex.cloud.baremetal.v2.extend.StacklandCluster
+	2,  // 14: yandex.cloud.baremetal.v2.extend.StacklandClusterService.ListStacklandClusters:output_type -> yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse
+	14, // 15: yandex.cloud.baremetal.v2.extend.StacklandClusterService.CreateStacklandCluster:output_type -> yandex.cloud.operation.Operation
+	14, // 16: yandex.cloud.baremetal.v2.extend.StacklandClusterService.UpdateStacklandCluster:output_type -> yandex.cloud.operation.Operation
+	14, // 17: yandex.cloud.baremetal.v2.extend.StacklandClusterService.DeleteStacklandCluster:output_type -> yandex.cloud.operation.Operation
+	10, // 18: yandex.cloud.baremetal.v2.extend.StacklandClusterService.GetStacklandClusterConfigs:output_type -> yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsResponse
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -716,7 +845,7 @@ func file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_init(
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

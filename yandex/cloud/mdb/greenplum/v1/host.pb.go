@@ -142,9 +142,7 @@ func (Host_Health) EnumDescriptor() ([]byte, []int) {
 type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the Greenplum® host.
-	//
-	// The host name is assigned by the platform at creation time and cannot be changed.
-	//
+	// The host name is assigned by the platform at creation time and cannot be changed, 1-63 characters long.
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// ID of the Greenplum® cluster. The ID is assigned by the platform at creation time.

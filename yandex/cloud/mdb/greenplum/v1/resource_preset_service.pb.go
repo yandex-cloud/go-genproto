@@ -26,7 +26,6 @@ const (
 type GetResourcePresetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the resource preset to return.
-	//
 	// To get the resource preset ID, use a [ResourcePresetService.List] request.
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Required. ResourcePreset type - master or segment.
@@ -82,8 +81,8 @@ func (x *GetResourcePresetRequest) GetType() ResourcePreset_Type {
 type ListResourcePresetsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The maximum number of results per page to return.
-	//
-	// If the number of available results is larger than [page_size], the service returns a [ListResourcePresetsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
+	// If the number of available results is larger than [page_size],
+	// the service returns a [ListResourcePresetsResponse.next_page_token] that can be used to get the next page of results in subsequent list requests.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the [ListResourcePresetsResponse.next_page_token] returned by the previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -149,9 +148,7 @@ type ListResourcePresetsResponse struct {
 	// List of resource presets.
 	ResourcePresets []*ResourcePreset `protobuf:"bytes,1,rep,name=resource_presets,json=resourcePresets,proto3" json:"resource_presets,omitempty"`
 	// This token allows you to get the next page of results for list requests.
-	//
 	// If the number of results is larger than [ListResourcePresetsRequest.page_size], use the [next_page_token] as the value for the [ListResourcePresetsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent list request has its own [next_page_token] to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -206,16 +203,16 @@ var File_yandex_cloud_mdb_greenplum_v1_resource_preset_service_proto protoreflec
 
 const file_yandex_cloud_mdb_greenplum_v1_resource_preset_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/mdb/greenplum/v1/resource_preset_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\x1a3yandex/cloud/mdb/greenplum/v1/resource_preset.proto\"\x9c\x01\n" +
+	";yandex/cloud/mdb/greenplum/v1/resource_preset_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a3yandex/cloud/mdb/greenplum/v1/resource_preset.proto\x1a\x1dyandex/cloud/validation.proto\"\x9c\x01\n" +
 	"\x18GetResourcePresetRequest\x122\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\x12L\n" +
-	"\x04type\x18\x02 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.ResourcePreset.TypeB\x04\xe8\xc71\x01R\x04type\"\xbd\x01\n" +
+	"\x04type\x18\x02 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.ResourcePreset.TypeB\x04\xe8\xc71\x01R\x04type\"\xc3\x01\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12L\n" +
-	"\x04type\x18\x04 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.ResourcePreset.TypeB\x04\xe8\xc71\x01R\x04type\"\xaa\x01\n" +
+	"\x04type\x18\x04 \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.ResourcePreset.TypeB\x04\xe8\xc71\x01R\x04typeJ\x04\b\x01\x10\x02\"\xaa\x01\n" +
 	"\x1bListResourcePresetsResponse\x12X\n" +
 	"\x10resource_presets\x18\x01 \x03(\v2-.yandex.cloud.mdb.greenplum.v1.ResourcePresetR\x0fresourcePresets\x121\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=100R\rnextPageToken2\xfa\x02\n" +

@@ -35,7 +35,6 @@ const (
 // A set of methods for managing HTTP routers.
 type HttpRouterServiceClient interface {
 	// Returns the specified HTTP router.
-	//
 	// To get the list of all available HTTP routers, make a [List] request.
 	Get(ctx context.Context, in *GetHttpRouterRequest, opts ...grpc.CallOption) (*HttpRouter, error)
 	// Lists HTTP routers in the specified folder.
@@ -125,7 +124,6 @@ func (c *httpRouterServiceClient) ListOperations(ctx context.Context, in *ListHt
 // A set of methods for managing HTTP routers.
 type HttpRouterServiceServer interface {
 	// Returns the specified HTTP router.
-	//
 	// To get the list of all available HTTP routers, make a [List] request.
 	Get(context.Context, *GetHttpRouterRequest) (*HttpRouter, error)
 	// Lists HTTP routers in the specified folder.

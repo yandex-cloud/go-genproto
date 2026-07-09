@@ -26,15 +26,12 @@ const (
 type PXFConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Timeout for connection to the Apache Tomcat® server when making read requests.
-	//
 	// Specify values in seconds.
 	ConnectionTimeout *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=connection_timeout,json=connectionTimeout,proto3" json:"connection_timeout,omitempty"`
 	// Timeout for connection to the Apache Tomcat® server when making write requests.
-	//
 	// Specify the values in seconds.
 	UploadTimeout *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=upload_timeout,json=uploadTimeout,proto3" json:"upload_timeout,omitempty"`
 	// Maximum number of the Apache Tomcat® threads.
-	//
 	// To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum-platform-extension-framework/6-9/gp-pxf/cfg_mem.html) documentation.
 	MaxThreads *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=max_threads,json=maxThreads,proto3" json:"max_threads,omitempty"`
 	// Determines whether the timeout for core streaming threads is permitted.
@@ -42,7 +39,6 @@ type PXFConfig struct {
 	// Number of core streaming threads per pool.
 	PoolCoreSize *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=pool_core_size,json=poolCoreSize,proto3" json:"pool_core_size,omitempty"`
 	// Maximum number of requests you can add to a pool queue for core streaming threads.
-	//
 	// If `0`, no pool queue is generated.
 	PoolQueueCapacity *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=pool_queue_capacity,json=poolQueueCapacity,proto3" json:"pool_queue_capacity,omitempty"`
 	// Maximum allowed number of core streaming threads.
@@ -149,9 +145,11 @@ func (x *PXFConfig) GetXms() *wrapperspb.Int64Value {
 }
 
 type PXFConfigSet struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	EffectiveConfig *PXFConfig             `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings.
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The effective configuration is a combination of the user-defined configuration and the default configuration.
+	// It is the effective configuration that is applied.
+	EffectiveConfig *PXFConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
+	// User-defined configuration.
 	UserConfig *PXFConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
 	// Default configuration.
 	DefaultConfig *PXFConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
@@ -217,7 +215,6 @@ type PXFDatasourceS3 struct {
 	// Secret key to access S3 storage.
 	SecretKey string `protobuf:"bytes,2,opt,name=secret_key,json=secretKey,proto3" json:"secret_key,omitempty"`
 	// Manages a fast upload of big files to S3 storage. In case of the `false` value, the PXF generates files on disk before sending them to the S3 storage. In case of the `true` value, the PXF generates files in RAM (the PXF writes to disc only if there is not enough RAM).
-	//
 	// The fast upload is enabled by default.
 	FastUpload *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=fast_upload,json=fastUpload,proto3" json:"fast_upload,omitempty"`
 	// S3 storage address. The default value is `storage.yandexcloud.net` used for Yandex Object Storage.
@@ -287,7 +284,6 @@ func (x *PXFDatasourceS3) GetEndpoint() string {
 type PXFDatasourceJDBC struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// JDBC driver class in Java. The possible values are the following:
-	//
 	// * `com.clickhouse.jdbc.ClickHouseDriver`
 	// * `com.ibm.as400.access.AS400JDBCDriver`
 	// * `com.microsoft.sqlserver.jdbc.SQLServerDriver`
@@ -298,7 +294,6 @@ type PXFDatasourceJDBC struct {
 	// * `io.trino.jdbc.TrinoDriver`
 	Driver string `protobuf:"bytes,1,opt,name=driver,proto3" json:"driver,omitempty"`
 	// URL that the JDBC driver uses to connect to the database. Examples:
-	//
 	// * `jdbc:mysql://mysqlhost:3306/testdb`: Local MySQL DB.
 	// * `jdbc:postgresql://c-<cluster_id>.rw.mdb.yandexcloud.net:6432/db1`: Managed Service for PostgreSQL cluster. The address contains the special FQDN of the cluster's master.
 	// * `jdbc:oracle:thin:@host.example:1521:orcl`: Oracle DB.
@@ -308,33 +303,26 @@ type PXFDatasourceJDBC struct {
 	// Password of the DB owner.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// Number of rows to read in an external table, in a batch.
-	//
 	// The default value is `100`.
 	StatementBatchSize *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=statement_batch_size,json=statementBatchSize,proto3" json:"statement_batch_size,omitempty"`
 	// Number of rows to fetch (buffer) when reading from an external table.
-	//
 	// The default value is `1000`.
 	StatementFetchSize *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=statement_fetch_size,json=statementFetchSize,proto3" json:"statement_fetch_size,omitempty"`
 	// Amount of time (in seconds) the JDBC driver waits for a statement to run. This timeout applies to statements created for both read and write operations.
-	//
 	// The default value is `60`.
 	StatementQueryTimeout *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=statement_query_timeout,json=statementQueryTimeout,proto3" json:"statement_query_timeout,omitempty"`
 	// Determines whether JDBC connection pooling is used in a server configuration. By default, it is used.
 	PoolEnabled *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=pool_enabled,json=poolEnabled,proto3" json:"pool_enabled,omitempty"`
 	// Maximum number of connections to the DB backend.
-	//
 	// The default value is `5`.
 	PoolMaximumSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=pool_maximum_size,json=poolMaximumSize,proto3" json:"pool_maximum_size,omitempty"`
 	// Maximum time, in milliseconds, to wait for a connection from the pool.
-	//
 	// The default value is `30000`.
 	PoolConnectionTimeout *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=pool_connection_timeout,json=poolConnectionTimeout,proto3" json:"pool_connection_timeout,omitempty"`
 	// Maximum amount of time, in milliseconds, after which an inactive connection is considered idle.
-	//
 	// The default value is `30000`.
 	PoolIdleTimeout *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=pool_idle_timeout,json=poolIdleTimeout,proto3" json:"pool_idle_timeout,omitempty"`
 	// Minimum number of idle connections maintained in the connection pool.
-	//
 	// The default value is `0`.
 	PoolMinimumIdle *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=pool_minimum_idle,json=poolMinimumIdle,proto3" json:"pool_minimum_idle,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -609,13 +597,19 @@ func (x *PXFDatasourceKerberos) GetKeytabBase64() string {
 }
 
 type PXFDatasourceHDFSDfsNamenode struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	RpcAddress        string                 `protobuf:"bytes,1,opt,name=rpc_address,json=rpcAddress,proto3" json:"rpc_address,omitempty"`
-	ServiceRpcAddress string                 `protobuf:"bytes,2,opt,name=service_rpc_address,json=serviceRpcAddress,proto3" json:"service_rpc_address,omitempty"`
-	HttpAddress       string                 `protobuf:"bytes,3,opt,name=http_address,json=httpAddress,proto3" json:"http_address,omitempty"`
-	HttpsAddress      string                 `protobuf:"bytes,4,opt,name=https_address,json=httpsAddress,proto3" json:"https_address,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The hostname and port number for the primary NameNode's RPC (Remote Procedure Call) server.
+	RpcAddress string `protobuf:"bytes,1,opt,name=rpc_address,json=rpcAddress,proto3" json:"rpc_address,omitempty"`
+	// The dedicated network address (hostname and port) for internal cluster communications,
+	// such as heartbeat and block report requests from DataNodes.Configuring
+	// this separates cluster traffic from client traffic, preventing performance bottlenecks.
+	ServiceRpcAddress string `protobuf:"bytes,2,opt,name=service_rpc_address,json=serviceRpcAddress,proto3" json:"service_rpc_address,omitempty"`
+	// The HTTP server address and port number for the HDFS NameNode Web UI.
+	HttpAddress string `protobuf:"bytes,3,opt,name=http_address,json=httpAddress,proto3" json:"http_address,omitempty"`
+	// The secure HTTPS server address and port number for the HDFS NameNode Web UI.
+	HttpsAddress  string `protobuf:"bytes,4,opt,name=https_address,json=httpsAddress,proto3" json:"https_address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PXFDatasourceHDFSDfsNamenode) Reset() {
@@ -679,17 +673,14 @@ func (x *PXFDatasourceHDFSDfsNamenode) GetHttpsAddress() string {
 type PXFDatasourceHDFSDfs struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Determines whether automatic failover is enabled for the high availability of the file system.
-	//
 	// The automatic failover is enabled by default.
 	HaAutomaticFailoverEnabled *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=ha_automatic_failover_enabled,json=haAutomaticFailoverEnabled,proto3" json:"ha_automatic_failover_enabled,omitempty"`
 	// If `true`, access tokens are used as capabilities for accessing datanodes. If `false`, no access tokens are checked on accessing datanodes.
-	//
 	// The check of access tokens is enabled by default.
 	BlockAccessTokenEnabled *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=block_access_token_enabled,json=blockAccessTokenEnabled,proto3" json:"block_access_token_enabled,omitempty"`
 	// Determines whether the datanode hostname is used when connecting to datanodes.
 	UseDatanodeHostname *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=use_datanode_hostname,json=useDatanodeHostname,proto3" json:"use_datanode_hostname,omitempty"`
 	// List of HDFS service logical names.
-	//
 	// Specify them separated by commas. The names can be arbitrary.
 	Namenodes map[string]*PXFDatasourceHDFSDfsNamenode `protobuf:"bytes,4,rep,name=namenodes,proto3" json:"namenodes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Corresponds well-known HDFS client setting "dfs.nameservices" for this datasource
@@ -764,15 +755,21 @@ func (x *PXFDatasourceHDFSDfs) GetNameservices() string {
 }
 
 type PXFDatasourceHDFSYarnHaRm struct {
-	state                                 protoimpl.MessageState `protogen:"open.v1"`
-	ResourcemanagerAddress                string                 `protobuf:"bytes,1,opt,name=resourcemanager_address,json=resourcemanagerAddress,proto3" json:"resourcemanager_address,omitempty"`
-	ResourcemanagerSchedulerAddress       string                 `protobuf:"bytes,2,opt,name=resourcemanager_scheduler_address,json=resourcemanagerSchedulerAddress,proto3" json:"resourcemanager_scheduler_address,omitempty"`
-	ResourcemanagerResourceTrackerAddress string                 `protobuf:"bytes,3,opt,name=resourcemanager_resource_tracker_address,json=resourcemanagerResourceTrackerAddress,proto3" json:"resourcemanager_resource_tracker_address,omitempty"`
-	ResourcemanagerAdminAddress           string                 `protobuf:"bytes,4,opt,name=resourcemanager_admin_address,json=resourcemanagerAdminAddress,proto3" json:"resourcemanager_admin_address,omitempty"`
-	ResourcemanagerWebappAddress          string                 `protobuf:"bytes,5,opt,name=resourcemanager_webapp_address,json=resourcemanagerWebappAddress,proto3" json:"resourcemanager_webapp_address,omitempty"`
-	ResourcemanagerWebappHttpsAddress     string                 `protobuf:"bytes,6,opt,name=resourcemanager_webapp_https_address,json=resourcemanagerWebappHttpsAddress,proto3" json:"resourcemanager_webapp_https_address,omitempty"`
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The host and port that the YARN ResourceManager uses to communicate with clients submitting and managing jobs.
+	ResourcemanagerAddress string `protobuf:"bytes,1,opt,name=resourcemanager_address,json=resourcemanagerAddress,proto3" json:"resourcemanager_address,omitempty"`
+	// The host and port of the YARN Scheduler interface.
+	ResourcemanagerSchedulerAddress string `protobuf:"bytes,2,opt,name=resourcemanager_scheduler_address,json=resourcemanagerSchedulerAddress,proto3" json:"resourcemanager_scheduler_address,omitempty"`
+	// The host and port of the ResourceManager's tracker interface.
+	ResourcemanagerResourceTrackerAddress string `protobuf:"bytes,3,opt,name=resourcemanager_resource_tracker_address,json=resourcemanagerResourceTrackerAddress,proto3" json:"resourcemanager_resource_tracker_address,omitempty"`
+	// The host and port for the Resource Manager's administrative interface.
+	ResourcemanagerAdminAddress string `protobuf:"bytes,4,opt,name=resourcemanager_admin_address,json=resourcemanagerAdminAddress,proto3" json:"resourcemanager_admin_address,omitempty"`
+	// The HTTP host and port for the ResourceManager web user interface (Web UI).
+	ResourcemanagerWebappAddress string `protobuf:"bytes,5,opt,name=resourcemanager_webapp_address,json=resourcemanagerWebappAddress,proto3" json:"resourcemanager_webapp_address,omitempty"`
+	// The secure HTTPS host and port for the ResourceManager web user interface (Web UI).
+	ResourcemanagerWebappHttpsAddress string `protobuf:"bytes,6,opt,name=resourcemanager_webapp_https_address,json=resourcemanagerWebappHttpsAddress,proto3" json:"resourcemanager_webapp_https_address,omitempty"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *PXFDatasourceHDFSYarnHaRm) Reset() {
@@ -850,11 +847,9 @@ func (x *PXFDatasourceHDFSYarnHaRm) GetResourcemanagerWebappHttpsAddress() strin
 type PXFDatasourceHDFSYarn struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Determines whether high availability is enabled for YARN's ResourceManager services.
-	//
 	// The high availability is enabled by default.
 	ResourcemanagerHaEnabled *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=resourcemanager_ha_enabled,json=resourcemanagerHaEnabled,proto3" json:"resourcemanager_ha_enabled,omitempty"`
 	// Determines whether another ResourceManager should automatically become active when the active ResourceManager has failed and does not respond.
-	//
 	// The switch of ResourceManagers is enabled by default if the high availability is enabled.
 	ResourcemanagerHaAutoFailoverEnabled *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=resourcemanager_ha_auto_failover_enabled,json=resourcemanagerHaAutoFailoverEnabled,proto3" json:"resourcemanager_ha_auto_failover_enabled,omitempty"`
 	// Determines whether the embedded ActiveStandbyElector method should be used for the election of the active ResourceManager. If the current active ResourceManager has failed and does not respond, the ActiveStandbyElector method makes another ResourceManager active which then takes over.
@@ -939,17 +934,14 @@ type PXFDatasourceHDFS struct {
 	// Settings of the Kerberos network authentication protocol.
 	Kerberos *PXFDatasourceKerberos `protobuf:"bytes,2,opt,name=kerberos,proto3" json:"kerberos,omitempty"`
 	// Enables authentication on behalf of the Greenplum® user when connecting to the remote file storage or DBMS.
-	//
 	// The authentication is disabled by default.
 	UserImpersonation *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=user_impersonation,json=userImpersonation,proto3" json:"user_impersonation,omitempty"`
 	// Login username for the remote file storage or DBMS if authentication on behalf of the Greenplum® user is enabled.
 	Username string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
 	// Maximum number of times that PXF retries a SASL connection request after a refused connection returns a `GSS initiate failed` error.
-	//
 	// The default value is `5`.
 	SaslConnectionRetries *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=sasl_connection_retries,json=saslConnectionRetries,proto3" json:"sasl_connection_retries,omitempty"`
 	// ZooKeeper server hosts.
-	//
 	// Specify values in the `<address>:<port>` format.
 	ZkHosts []string `protobuf:"bytes,6,rep,name=zk_hosts,json=zkHosts,proto3" json:"zk_hosts,omitempty"`
 	// Settings of the distributed file system.
@@ -1053,21 +1045,17 @@ type PXFDatasourceHive struct {
 	// Settings of the Kerberos network authentication protocol.
 	Kerberos *PXFDatasourceKerberos `protobuf:"bytes,2,opt,name=kerberos,proto3" json:"kerberos,omitempty"`
 	// Enables authentication on behalf of the Greenplum® user when connecting to the remote file storage or DBMS.
-	//
 	// The authentication is disabled by default.
 	UserImpersonation *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=user_impersonation,json=userImpersonation,proto3" json:"user_impersonation,omitempty"`
 	// Login username for the remote file storage or DBMS if authentication on behalf of the Greenplum® user is enabled.
 	Username string `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
 	// Maximum number of times that PXF retries a SASL connection request after a refused connection returns a `GSS initiate failed` error.
-	//
 	// The default value is `5`.
 	SaslConnectionRetries *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=sasl_connection_retries,json=saslConnectionRetries,proto3" json:"sasl_connection_retries,omitempty"`
 	// ZooKeeper server hosts.
-	//
 	// Specify values in the `<address>:<port>` format.
 	ZkHosts []string `protobuf:"bytes,6,rep,name=zk_hosts,json=zkHosts,proto3" json:"zk_hosts,omitempty"`
 	// Specifies if predicate pushdown is enabled for queries on external tables.
-	//
 	// The predicate pushdown is enabled by default.
 	Ppd *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=ppd,proto3" json:"ppd,omitempty"`
 	// List of URIs separated by commas. To request metadata, the remote DBMS connects to Metastore by one of these URIs.
@@ -1338,15 +1326,15 @@ const file_yandex_cloud_mdb_greenplum_v1_pxf_proto_rawDesc = "" +
 	"secret_key\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\tsecretKey\x12;\n" +
 	"\vfast_upload\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
 	"fastUpload\x12i\n" +
-	"\bendpoint\x18\x04 \x01(\tBM\xf2\xc71@(((s3|https?)://)?([a-z0-9]([a-z0-9-]*[a-z0-9])?[.])+[a-z]{2,})?\x8a\xc81\x05<=200R\bendpoint\"\xdb\x06\n" +
+	"\bendpoint\x18\x04 \x01(\tBM\xf2\xc71@(((s3|https?)://)?([a-z0-9]([a-z0-9-]*[a-z0-9])?[.])+[a-z]{2,})?\x8a\xc81\x05<=200R\bendpoint\"\xde\x06\n" +
 	"\x11PXFDatasourceJDBC\x12 \n" +
 	"\x06driver\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x06driver\x12\x1c\n" +
 	"\x03url\x18\x02 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x03url\x12\x1d\n" +
 	"\x04user\x18\x03 \x01(\tB\t\x8a\xc81\x05<=200R\x04user\x12%\n" +
-	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x05<=200R\bpassword\x12Z\n" +
-	"\x14statement_batch_size\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a50-1000R\x12statementBatchSize\x12[\n" +
-	"\x14statement_fetch_size\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b50-10000R\x12statementFetchSize\x12`\n" +
+	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x05<=200R\bpassword\x12\\\n" +
+	"\x14statement_batch_size\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t50-200000R\x12statementBatchSize\x12\\\n" +
+	"\x14statement_fetch_size\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t50-200000R\x12statementFetchSize\x12`\n" +
 	"\x17statement_query_timeout\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a5-43200R\x15statementQueryTimeout\x12=\n" +
 	"\fpool_enabled\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\vpoolEnabled\x12R\n" +
 	"\x11pool_maximum_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x051-200R\x0fpoolMaximumSize\x12d\n" +
@@ -1358,16 +1346,15 @@ const file_yandex_cloud_mdb_greenplum_v1_pxf_proto_rawDesc = "" +
 	"\n" +
 	"default_fs\x18\x01 \x01(\tB\t\x8a\xc81\x05<=200R\tdefaultFs\x12?\n" +
 	"\x16security_auth_to_local\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x13securityAuthToLocal\"\x9d\x03\n" +
+	"\x8a\xc81\x06<=1000R\x13securityAuthToLocal\"\x90\x04\n" +
 	"\x15PXFDatasourceKerberos\x122\n" +
-	"\x06enable\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x06enable\x12#\n" +
-	"\aprimary\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\aprimary\x12 \n" +
-	"\x05realm\x18\x03 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x05realm\x123\n" +
-	"\vkdc_servers\x18\x04 \x03(\tB\x12\x82\xc81\x05<=200\x8a\xc81\x051-200R\n" +
-	"kdcServers\x12,\n" +
-	"\fadmin_server\x18\x05 \x01(\tB\t\x8a\xc81\x05<=128R\vadminServer\x120\n" +
-	"\x0edefault_domain\x18\x06 \x01(\tB\t\x8a\xc81\x05<=128R\rdefaultDomain\x12t\n" +
+	"\x06enable\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x06enable\x12:\n" +
+	"\aprimary\x18\x02 \x01(\tB \xf2\xc71\x13^[a-zA-Z0-9. _:-]*$\x8a\xc81\x05<=128R\aprimary\x127\n" +
+	"\x05realm\x18\x03 \x01(\tB!\xf2\xc71\x13^[a-zA-Z0-9. _:-]*$\x8a\xc81\x06<=1000R\x05realm\x12J\n" +
+	"\vkdc_servers\x18\x04 \x03(\tB)\xf2\xc71\x13^[a-zA-Z0-9. _:-]*$\x82\xc81\x05<=200\x8a\xc81\x051-200R\n" +
+	"kdcServers\x12C\n" +
+	"\fadmin_server\x18\x05 \x01(\tB \xf2\xc71\x13^[a-zA-Z0-9. _:-]*$\x8a\xc81\x05<=128R\vadminServer\x12G\n" +
+	"\x0edefault_domain\x18\x06 \x01(\tB \xf2\xc71\x13^[a-zA-Z0-9. _:-]*$\x8a\xc81\x05<=128R\rdefaultDomain\x12t\n" +
 	"\rkeytab_base64\x18\a \x01(\tBO\xf2\xc71@^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$\x8a\xc81\a<=65536R\fkeytabBase64\"\xe7\x01\n" +
 	"\x1cPXFDatasourceHDFSDfsNamenode\x12+\n" +
 	"\vrpc_address\x18\x01 \x01(\tB\n" +
@@ -1427,9 +1414,9 @@ const file_yandex_cloud_mdb_greenplum_v1_pxf_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x1ametastoreKerberosPrincipal\x12B\n" +
 	"\x17auth_kerberos_principal\x18\n" +
 	" \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x15authKerberosPrincipal\"\xee\x02\n" +
-	"\rPXFDatasource\x127\n" +
-	"\x04name\x18\x01 \x01(\tB#\xe8\xc71\x01\xf2\xc71\x12^[^\\|/*?.,;\"'<>]+$\x8a\xc81\x053-200R\x04name\x12@\n" +
+	"\x8a\xc81\x06<=1000R\x15authKerberosPrincipal\"\xed\x02\n" +
+	"\rPXFDatasource\x126\n" +
+	"\x04name\x18\x01 \x01(\tB\"\xe8\xc71\x01\xf2\xc71\x11^[-_A-Za-z0-9:]+$\x8a\xc81\x053-200R\x04name\x12@\n" +
 	"\x02s3\x18\x02 \x01(\v2..yandex.cloud.mdb.greenplum.v1.PXFDatasourceS3H\x00R\x02s3\x12F\n" +
 	"\x04jdbc\x18\x03 \x01(\v20.yandex.cloud.mdb.greenplum.v1.PXFDatasourceJDBCH\x00R\x04jdbc\x12F\n" +
 	"\x04hdfs\x18\x04 \x01(\v20.yandex.cloud.mdb.greenplum.v1.PXFDatasourceHDFSH\x00R\x04hdfs\x12F\n" +

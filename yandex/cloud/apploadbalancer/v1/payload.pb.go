@@ -96,9 +96,9 @@ var File_yandex_cloud_apploadbalancer_v1_payload_proto protoreflect.FileDescript
 
 const file_yandex_cloud_apploadbalancer_v1_payload_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/apploadbalancer/v1/payload.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"8\n" +
-	"\aPayload\x12\x1c\n" +
-	"\x04text\x18\x01 \x01(\tB\x06\x8a\xc81\x02>0H\x00R\x04textB\x0f\n" +
+	"-yandex/cloud/apploadbalancer/v1/payload.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"=\n" +
+	"\aPayload\x12!\n" +
+	"\x04text\x18\x01 \x01(\tB\v\x8a\xc81\a1-16384H\x00R\x04textB\x0f\n" +
 	"\apayload\x12\x04\xc0\xc11\x01Bz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 

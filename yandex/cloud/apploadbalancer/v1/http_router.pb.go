@@ -39,7 +39,6 @@ type HttpRouter struct {
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Virtual hosts that combine routes inside the router.
 	// For details about the concept, see [documentation](/docs/application-load-balancer/concepts/http-router#virtual-host).
-	//
 	// Only one virtual host with no authority (default match) can be specified.
 	VirtualHosts []*VirtualHost `protobuf:"bytes,6,rep,name=virtual_hosts,json=virtualHosts,proto3" json:"virtual_hosts,omitempty"`
 	// Creation timestamp.

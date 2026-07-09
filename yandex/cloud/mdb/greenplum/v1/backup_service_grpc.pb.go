@@ -35,6 +35,7 @@ type BackupServiceClient interface {
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Returns the list of available backups for the specified Greenplum® cluster.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
+	// Deletes the specified backup of Greenplum® cluster.
 	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -86,6 +87,7 @@ type BackupServiceServer interface {
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Returns the list of available backups for the specified Greenplum® cluster.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
+	// Deletes the specified backup of Greenplum® cluster.
 	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 }
 

@@ -106,3 +106,23 @@ func (m *DeleteStacklandClusterMetadata) SetStacklandClusterId(v string) {
 func (m *DeleteStacklandClusterMetadata) SetOperationMetadata(v *v2.OperationMetadata) {
 	m.OperationMetadata = v
 }
+
+func (m *GetStacklandClusterConfigsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *GetStacklandClusterConfigsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *GetStacklandClusterConfigsRequest) SetStacklandClusterId(v string) {
+	m.StacklandClusterId = v
+}
+
+func (m *GetStacklandClusterConfigsResponse) SetFilename(v string) {
+	m.Filename = v
+}
+
+func (m *GetStacklandClusterConfigsResponse) SetContent(v []byte) {
+	m.Content = v
+}

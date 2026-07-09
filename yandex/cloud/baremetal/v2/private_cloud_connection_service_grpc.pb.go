@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	PrivateCloudConnectionService_GetPrivateCloudConnection_FullMethodName    = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/GetPrivateCloudConnection"
 	PrivateCloudConnectionService_ListPrivateCloudConnections_FullMethodName  = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/ListPrivateCloudConnections"
-	PrivateCloudConnectionService_Create_FullMethodName                       = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/Create"
+	PrivateCloudConnectionService_CreatePrivateCloudConnection_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/CreatePrivateCloudConnection"
 	PrivateCloudConnectionService_UpdatePrivateCloudConnection_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/UpdatePrivateCloudConnection"
 	PrivateCloudConnectionService_DeletePrivateCloudConnection_FullMethodName = "/yandex.cloud.baremetal.v2.PrivateCloudConnectionService/DeletePrivateCloudConnection"
 )
@@ -45,7 +45,7 @@ type PrivateCloudConnectionServiceClient interface {
 	// Creates a private cloud connection in the specified folder.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
-	Create(ctx context.Context, in *CreatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	CreatePrivateCloudConnection(ctx context.Context, in *CreatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the routing_instance_id in a private cloud connection.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
@@ -84,10 +84,10 @@ func (c *privateCloudConnectionServiceClient) ListPrivateCloudConnections(ctx co
 	return out, nil
 }
 
-func (c *privateCloudConnectionServiceClient) Create(ctx context.Context, in *CreatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+func (c *privateCloudConnectionServiceClient) CreatePrivateCloudConnection(ctx context.Context, in *CreatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
-	err := c.cc.Invoke(ctx, PrivateCloudConnectionService_Create_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, PrivateCloudConnectionService_CreatePrivateCloudConnection_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ type PrivateCloudConnectionServiceServer interface {
 	// Creates a private cloud connection in the specified folder.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
-	Create(context.Context, *CreatePrivateCloudConnectionRequest) (*operation.Operation, error)
+	CreatePrivateCloudConnection(context.Context, *CreatePrivateCloudConnectionRequest) (*operation.Operation, error)
 	// Updates the routing_instance_id in a private cloud connection.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
@@ -156,8 +156,8 @@ func (UnimplementedPrivateCloudConnectionServiceServer) GetPrivateCloudConnectio
 func (UnimplementedPrivateCloudConnectionServiceServer) ListPrivateCloudConnections(context.Context, *ListPrivateCloudConnectionsRequest) (*ListPrivateCloudConnectionsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListPrivateCloudConnections not implemented")
 }
-func (UnimplementedPrivateCloudConnectionServiceServer) Create(context.Context, *CreatePrivateCloudConnectionRequest) (*operation.Operation, error) {
-	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedPrivateCloudConnectionServiceServer) CreatePrivateCloudConnection(context.Context, *CreatePrivateCloudConnectionRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreatePrivateCloudConnection not implemented")
 }
 func (UnimplementedPrivateCloudConnectionServiceServer) UpdatePrivateCloudConnection(context.Context, *UpdatePrivateCloudConnectionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdatePrivateCloudConnection not implemented")
@@ -221,20 +221,20 @@ func _PrivateCloudConnectionService_ListPrivateCloudConnections_Handler(srv inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PrivateCloudConnectionService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PrivateCloudConnectionService_CreatePrivateCloudConnection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreatePrivateCloudConnectionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrivateCloudConnectionServiceServer).Create(ctx, in)
+		return srv.(PrivateCloudConnectionServiceServer).CreatePrivateCloudConnection(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PrivateCloudConnectionService_Create_FullMethodName,
+		FullMethod: PrivateCloudConnectionService_CreatePrivateCloudConnection_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrivateCloudConnectionServiceServer).Create(ctx, req.(*CreatePrivateCloudConnectionRequest))
+		return srv.(PrivateCloudConnectionServiceServer).CreatePrivateCloudConnection(ctx, req.(*CreatePrivateCloudConnectionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -291,8 +291,8 @@ var PrivateCloudConnectionService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PrivateCloudConnectionService_ListPrivateCloudConnections_Handler,
 		},
 		{
-			MethodName: "Create",
-			Handler:    _PrivateCloudConnectionService_Create_Handler,
+			MethodName: "CreatePrivateCloudConnection",
+			Handler:    _PrivateCloudConnectionService_CreatePrivateCloudConnection_Handler,
 		},
 		{
 			MethodName: "UpdatePrivateCloudConnection",

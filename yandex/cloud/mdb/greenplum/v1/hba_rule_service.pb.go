@@ -341,7 +341,7 @@ type BatchUpdateHBARulesRequest struct {
 	// ID of the Greenplum cluster.
 	// To get the Greenplum cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// List of new hba rules for the cluster.
+	// List of new hba rules for the cluster. Or empty list to remove all rules.
 	HbaRules      []*HBARule `protobuf:"bytes,2,rep,name=hba_rules,json=hbaRules,proto3" json:"hba_rules,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -440,7 +440,7 @@ var File_yandex_cloud_mdb_greenplum_v1_hba_rule_service_proto protoreflect.FileD
 
 const file_yandex_cloud_mdb_greenplum_v1_hba_rule_service_proto_rawDesc = "" +
 	"\n" +
-	"4yandex/cloud/mdb/greenplum/v1/hba_rule_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a,yandex/cloud/mdb/greenplum/v1/hba_rule.proto\"\x8c\x01\n" +
+	"4yandex/cloud/mdb/greenplum/v1/hba_rule_service.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a,yandex/cloud/mdb/greenplum/v1/hba_rule.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8c\x01\n" +
 	"\x14CreateHBARuleRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12G\n" +
@@ -462,11 +462,11 @@ const file_yandex_cloud_mdb_greenplum_v1_hba_rule_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\"\n" +
 	"\brevision\x18\x02 \x01(\x03B\x06\xfa\xc71\x02>0R\brevision\"[\n" +
 	"\x14ListHBARulesResponse\x12C\n" +
-	"\thba_rules\x18\x01 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.HBARuleR\bhbaRules\"\x96\x01\n" +
+	"\thba_rules\x18\x01 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.HBARuleR\bhbaRules\"\x97\x01\n" +
 	"\x1aBatchUpdateHBARulesRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
-	"\thba_rules\x18\x02 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.HBARuleB\x06\x82\xc81\x02>0R\bhbaRules\"1\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12L\n" +
+	"\thba_rules\x18\x02 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.HBARuleB\a\x82\xc81\x03>=0R\bhbaRules\"1\n" +
 	"\x10HBARulesMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId2\xf1\t\n" +

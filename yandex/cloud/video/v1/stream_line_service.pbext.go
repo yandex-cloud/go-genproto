@@ -70,6 +70,10 @@ func (m *CreateStreamLineRequest) SetTitle(v string) {
 	m.Title = v
 }
 
+func (m *CreateStreamLineRequest) SetInputSource(v LineInputSource) {
+	m.InputSource = v
+}
+
 func (m *CreateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
 	m.InputParams = &CreateStreamLineRequest_RtmpPush{
 		RtmpPush: v,
@@ -124,6 +128,10 @@ func (m *UpdateStreamLineRequest) SetFieldMask(v *fieldmaskpb.FieldMask) {
 
 func (m *UpdateStreamLineRequest) SetTitle(v string) {
 	m.Title = v
+}
+
+func (m *UpdateStreamLineRequest) SetInputSource(v LineInputSource) {
+	m.InputSource = v
 }
 
 func (m *UpdateStreamLineRequest) SetRtmpPush(v *RTMPPushParams) {
@@ -202,8 +210,16 @@ func (m *RTMPPullParams) SetUrl(v string) {
 	m.Url = v
 }
 
+func (m *RTMPPullParams) SetBackupUrl(v string) {
+	m.BackupUrl = v
+}
+
 func (m *SRTPullParams) SetUrl(v string) {
 	m.Url = v
+}
+
+func (m *SRTPullParams) SetBackupUrl(v string) {
+	m.BackupUrl = v
 }
 
 func (m *GetStreamKeyRequest) SetStreamLineId(v string) {

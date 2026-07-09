@@ -672,11 +672,11 @@ const file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawD
 	" GetPrivateCloudConnectionRequest\x12\x1e\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
 	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12^\n" +
-	"\x1bprivate_cloud_connection_id\x18\x03 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\x8e\x02\n" +
+	"\x1bprivate_cloud_connection_id\x18\x03 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x18privateCloudConnectionId\"\x8f\x02\n" +
 	"\"ListPrivateCloudConnectionsRequest\x12\x1e\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12<\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12)\n" +
-	"\tpage_size\x18\x03 \x01(\x03B\f\xe0A\x01\xfa\xc71\x05<=100R\bpageSize\x12\"\n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x1f\xe0A\x02\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12*\n" +
+	"\tpage_size\x18\x03 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
 	"\n" +
 	"page_token\x18\x04 \x01(\tB\x03\xe0A\x01R\tpageToken\x12\x1e\n" +
 	"\border_by\x18\x05 \x01(\tB\x03\xe0A\x01R\aorderBy\x12\x1b\n" +
@@ -707,11 +707,11 @@ const file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_rawD
 	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\xc2\x01\n" +
 	"$DeletePrivateCloudConnectionMetadata\x12=\n" +
 	"\x1bprivate_cloud_connection_id\x18\x01 \x01(\tR\x18privateCloudConnectionId\x12[\n" +
-	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xcf\r\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xe5\r\n" +
 	"\x1dPrivateCloudConnectionService\x12\xb0\x02\n" +
 	"\x19GetPrivateCloudConnection\x12;.yandex.cloud.baremetal.v2.GetPrivateCloudConnectionRequest\x1a1.yandex.cloud.baremetal.v2.PrivateCloudConnection\"\xa2\x01\xdaA.cloud_id,folder_id,private_cloud_connection_id\x82\xd3\xe4\x93\x02k\x12i/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections/{private_cloud_connection_id}\x12\x86\x02\n" +
-	"\x1bListPrivateCloudConnections\x12=.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse\"h\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02M\x12K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections\x12\xcb\x02\n" +
-	"\x06Create\x12>.yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xdd\x01\xdaA+cloud_id,folder_id,private_cloud_connection\xb2\xd2*>\n" +
+	"\x1bListPrivateCloudConnections\x12=.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse\"h\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02M\x12K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections\x12\xe1\x02\n" +
+	"\x1cCreatePrivateCloudConnection\x12>.yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xdd\x01\xdaA+cloud_id,folder_id,private_cloud_connection\xb2\xd2*>\n" +
 	"$CreatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02g:\x18private_cloud_connection\"K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateCloudConnections\x12\xb9\x03\n" +
 	"\x1cUpdatePrivateCloudConnection\x12>.yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest\x1a!.yandex.cloud.operation.Operation\"\xb5\x02\xdaA\x18private_cloud_connection\xb2\xd2*>\n" +
 	"$UpdatePrivateCloudConnectionMetadata\x12\x16PrivateCloudConnection\x82\xd3\xe4\x93\x02\xd1\x01:\x18private_cloud_connection2\xb4\x01/baremetal/v2/clouds/{private_cloud_connection.cloud_id}/folders/{private_cloud_connection.folder_id}/privateCloudConnections/{private_cloud_connection.private_cloud_connection_id}\x12\xe7\x02\n" +
@@ -759,12 +759,12 @@ var file_yandex_cloud_baremetal_v2_private_cloud_connection_service_proto_depIdx
 	12, // 7: yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionMetadata.operation_metadata:type_name -> yandex.cloud.baremetal.v2.OperationMetadata
 	0,  // 8: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.GetPrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.GetPrivateCloudConnectionRequest
 	1,  // 9: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.ListPrivateCloudConnections:input_type -> yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsRequest
-	3,  // 10: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.Create:input_type -> yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest
+	3,  // 10: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.CreatePrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.CreatePrivateCloudConnectionRequest
 	4,  // 11: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.UpdatePrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.UpdatePrivateCloudConnectionRequest
 	5,  // 12: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.DeletePrivateCloudConnection:input_type -> yandex.cloud.baremetal.v2.DeletePrivateCloudConnectionRequest
 	10, // 13: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.GetPrivateCloudConnection:output_type -> yandex.cloud.baremetal.v2.PrivateCloudConnection
 	2,  // 14: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.ListPrivateCloudConnections:output_type -> yandex.cloud.baremetal.v2.ListPrivateCloudConnectionsResponse
-	13, // 15: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.Create:output_type -> yandex.cloud.operation.Operation
+	13, // 15: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.CreatePrivateCloudConnection:output_type -> yandex.cloud.operation.Operation
 	13, // 16: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.UpdatePrivateCloudConnection:output_type -> yandex.cloud.operation.Operation
 	13, // 17: yandex.cloud.baremetal.v2.PrivateCloudConnectionService.DeletePrivateCloudConnection:output_type -> yandex.cloud.operation.Operation
 	13, // [13:18] is the sub-list for method output_type

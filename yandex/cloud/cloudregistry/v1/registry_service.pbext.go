@@ -22,6 +22,22 @@ func (m *ListRegistriesRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListRegistriesRequest) SetNameFilter(v string) {
+	m.NameFilter = v
+}
+
+func (m *ListRegistriesRequest) SetKind(v []Registry_Kind) {
+	m.Kind = v
+}
+
+func (m *ListRegistriesRequest) SetType(v []Registry_Type) {
+	m.Type = v
+}
+
+func (m *ListRegistriesRequest) SetStatus(v []Registry_Status) {
+	m.Status = v
+}
+
 func (m *ListRegistriesResponse) SetRegistries(v []*Registry) {
 	m.Registries = v
 }

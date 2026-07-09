@@ -124,34 +124,6 @@ func (m *Cluster) SetLogging(v *LoggingConfig) {
 	m.Logging = v
 }
 
-type ClusterConfigSet_GreenplumConfig = isClusterConfigSet_GreenplumConfig
-
-func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig) {
-	m.GreenplumConfig = v
-}
-
-func (m *ClusterConfigSet) SetGreenplumConfigSet_6(v *GreenplumConfigSet6) {
-	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6{
-		GreenplumConfigSet_6: v,
-	}
-}
-
-func (m *ClusterConfigSet) SetDbmsConfigSet(v *DBMSConfigSet) {
-	m.DbmsConfigSet = v
-}
-
-func (m *ClusterConfigSet) SetPool(v *ConnectionPoolerConfigSet) {
-	m.Pool = v
-}
-
-func (m *ClusterConfigSet) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
-	m.BackgroundActivities = v
-}
-
-func (m *ClusterConfigSet) SetPxfConfig(v *PXFConfigSet) {
-	m.PxfConfig = v
-}
-
 func (m *Monitoring) SetName(v string) {
 	m.Name = v
 }
@@ -196,20 +168,32 @@ func (m *GreenplumConfig) SetFullVersion(v string) {
 	m.FullVersion = v
 }
 
-func (m *Access) SetDataLens(v bool) {
-	m.DataLens = v
+type ClusterConfigSet_GreenplumConfig = isClusterConfigSet_GreenplumConfig
+
+func (m *ClusterConfigSet) SetGreenplumConfig(v ClusterConfigSet_GreenplumConfig) {
+	m.GreenplumConfig = v
 }
 
-func (m *Access) SetWebSql(v bool) {
-	m.WebSql = v
+func (m *ClusterConfigSet) SetGreenplumConfigSet_6(v *GreenplumConfigSet6) {
+	m.GreenplumConfig = &ClusterConfigSet_GreenplumConfigSet_6{
+		GreenplumConfigSet_6: v,
+	}
 }
 
-func (m *Access) SetDataTransfer(v bool) {
-	m.DataTransfer = v
+func (m *ClusterConfigSet) SetDbmsConfigSet(v *DBMSConfigSet) {
+	m.DbmsConfigSet = v
 }
 
-func (m *Access) SetYandexQuery(v bool) {
-	m.YandexQuery = v
+func (m *ClusterConfigSet) SetPool(v *ConnectionPoolerConfigSet) {
+	m.Pool = v
+}
+
+func (m *ClusterConfigSet) SetBackgroundActivities(v *BackgroundActivitiesConfig) {
+	m.BackgroundActivities = v
+}
+
+func (m *ClusterConfigSet) SetPxfConfig(v *PXFConfigSet) {
+	m.PxfConfig = v
 }
 
 func (m *GreenplumRestoreConfig) SetBackupWindowStart(v *timeofday.TimeOfDay) {
@@ -230,6 +214,22 @@ func (m *GreenplumRestoreConfig) SetSubnetId(v string) {
 
 func (m *GreenplumRestoreConfig) SetAssignPublicIp(v bool) {
 	m.AssignPublicIp = v
+}
+
+func (m *Access) SetDataLens(v bool) {
+	m.DataLens = v
+}
+
+func (m *Access) SetWebSql(v bool) {
+	m.WebSql = v
+}
+
+func (m *Access) SetDataTransfer(v bool) {
+	m.DataTransfer = v
+}
+
+func (m *Access) SetYandexQuery(v bool) {
+	m.YandexQuery = v
 }
 
 func (m *RestoreResources) SetResourcePresetId(v string) {

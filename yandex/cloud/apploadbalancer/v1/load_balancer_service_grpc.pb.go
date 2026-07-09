@@ -48,7 +48,6 @@ const (
 // A set of methods for managing application load balancers.
 type LoadBalancerServiceClient interface {
 	// Returns the specified application load balancer.
-	//
 	// To get the list of all available application load balancers, make a [List] request.
 	Get(ctx context.Context, in *GetLoadBalancerRequest, opts ...grpc.CallOption) (*LoadBalancer, error)
 	// Lists application load balancers in the specified folder.
@@ -70,15 +69,12 @@ type LoadBalancerServiceClient interface {
 	// Updates the specified listener of the specified application load balancer.
 	UpdateListener(ctx context.Context, in *UpdateListenerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Adds a SNI handler to the specified listener.
-	//
 	// This request does not allow to add [TlsListener.default_handler]. Make an [UpdateListener] request instead.
 	AddSniMatch(ctx context.Context, in *AddSniMatchRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified SNI handler of the specified listener.
-	//
 	// This request does not allow to update [TlsListener.default_handler]. Make an [UpdateListener] request instead.
 	UpdateSniMatch(ctx context.Context, in *UpdateSniMatchRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified SNI handler.
-	//
 	// This request does not allow to delete [TlsListener.default_handler].
 	RemoveSniMatch(ctx context.Context, in *RemoveSniMatchRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns the statuses of all targets of the specified backend group in all their availability zones.
@@ -304,7 +300,6 @@ func (c *loadBalancerServiceClient) EnableZones(ctx context.Context, in *EnableZ
 // A set of methods for managing application load balancers.
 type LoadBalancerServiceServer interface {
 	// Returns the specified application load balancer.
-	//
 	// To get the list of all available application load balancers, make a [List] request.
 	Get(context.Context, *GetLoadBalancerRequest) (*LoadBalancer, error)
 	// Lists application load balancers in the specified folder.
@@ -326,15 +321,12 @@ type LoadBalancerServiceServer interface {
 	// Updates the specified listener of the specified application load balancer.
 	UpdateListener(context.Context, *UpdateListenerRequest) (*operation.Operation, error)
 	// Adds a SNI handler to the specified listener.
-	//
 	// This request does not allow to add [TlsListener.default_handler]. Make an [UpdateListener] request instead.
 	AddSniMatch(context.Context, *AddSniMatchRequest) (*operation.Operation, error)
 	// Updates the specified SNI handler of the specified listener.
-	//
 	// This request does not allow to update [TlsListener.default_handler]. Make an [UpdateListener] request instead.
 	UpdateSniMatch(context.Context, *UpdateSniMatchRequest) (*operation.Operation, error)
 	// Deletes the specified SNI handler.
-	//
 	// This request does not allow to delete [TlsListener.default_handler].
 	RemoveSniMatch(context.Context, *RemoveSniMatchRequest) (*operation.Operation, error)
 	// Returns the statuses of all targets of the specified backend group in all their availability zones.

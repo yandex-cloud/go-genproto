@@ -29,7 +29,6 @@ const (
 type GetBackendGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to return.
-	//
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -76,7 +75,6 @@ func (x *GetBackendGroupRequest) GetBackendGroupId() string {
 type ListBackendGroupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to list backend groups in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -88,7 +86,6 @@ type ListBackendGroupsRequest struct {
 	// [ListBackendGroupsResponse.next_page_token] returned by a previous list request.
 	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// A filter expression that filters backend groups listed in the response.
-	//
 	// The expression must specify:
 	// 1. The field name. Currently you can use filtering only on [BackendGroup.name] field.
 	// 2. An `=` operator.
@@ -164,7 +161,6 @@ type ListBackendGroupsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListBackendGroupsRequest.page_size], use `next_page_token` as the value
 	// for the [ListBackendGroupsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -218,7 +214,6 @@ func (x *ListBackendGroupsResponse) GetNextPageToken() string {
 type DeleteBackendGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to delete.
-	//
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -310,7 +305,6 @@ func (x *DeleteBackendGroupMetadata) GetBackendGroupId() string {
 type UpdateBackendGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to update.
-	//
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// Field mask that specifies which attributes of the backend group should be updated.
@@ -322,7 +316,6 @@ type UpdateBackendGroupRequest struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Backend group labels as `key:value` pairs.
 	// For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
-	//
 	// Existing set of labels is completely replaced by the provided set, so if you just want
 	// to add or remove a label:
 	// 1. Get the current set of labels with a [BackendGroupService.Get] request.
@@ -330,15 +323,14 @@ type UpdateBackendGroupRequest struct {
 	// 3. Send the new set in this field.
 	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// New list of backends in the backend group.
-	//
 	// Existing list of backends is completely replaced by the specified list, so if you just want to add or remove
 	// a target, make a [BackendGroupService.AddBackend] request or a [BackendGroupService.RemoveBackend] request.
 	//
 	// Types that are valid to be assigned to Backend:
 	//
+	//	*UpdateBackendGroupRequest_Stream
 	//	*UpdateBackendGroupRequest_Http
 	//	*UpdateBackendGroupRequest_Grpc
-	//	*UpdateBackendGroupRequest_Stream
 	Backend       isUpdateBackendGroupRequest_Backend `protobuf_oneof:"backend"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -416,6 +408,15 @@ func (x *UpdateBackendGroupRequest) GetBackend() isUpdateBackendGroupRequest_Bac
 	return nil
 }
 
+func (x *UpdateBackendGroupRequest) GetStream() *StreamBackendGroup {
+	if x != nil {
+		if x, ok := x.Backend.(*UpdateBackendGroupRequest_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *UpdateBackendGroupRequest) GetHttp() *HttpBackendGroup {
 	if x != nil {
 		if x, ok := x.Backend.(*UpdateBackendGroupRequest_Http); ok {
@@ -434,17 +435,13 @@ func (x *UpdateBackendGroupRequest) GetGrpc() *GrpcBackendGroup {
 	return nil
 }
 
-func (x *UpdateBackendGroupRequest) GetStream() *StreamBackendGroup {
-	if x != nil {
-		if x, ok := x.Backend.(*UpdateBackendGroupRequest_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 type isUpdateBackendGroupRequest_Backend interface {
 	isUpdateBackendGroupRequest_Backend()
+}
+
+type UpdateBackendGroupRequest_Stream struct {
+	// New list of stream (TCP) backends that the backend group will consist of.
+	Stream *StreamBackendGroup `protobuf:"bytes,8,opt,name=stream,proto3,oneof"`
 }
 
 type UpdateBackendGroupRequest_Http struct {
@@ -457,16 +454,11 @@ type UpdateBackendGroupRequest_Grpc struct {
 	Grpc *GrpcBackendGroup `protobuf:"bytes,7,opt,name=grpc,proto3,oneof"`
 }
 
-type UpdateBackendGroupRequest_Stream struct {
-	// New list of stream (TCP) backends that the backend group will consist of.
-	Stream *StreamBackendGroup `protobuf:"bytes,8,opt,name=stream,proto3,oneof"`
-}
+func (*UpdateBackendGroupRequest_Stream) isUpdateBackendGroupRequest_Backend() {}
 
 func (*UpdateBackendGroupRequest_Http) isUpdateBackendGroupRequest_Backend() {}
 
 func (*UpdateBackendGroupRequest_Grpc) isUpdateBackendGroupRequest_Backend() {}
-
-func (*UpdateBackendGroupRequest_Stream) isUpdateBackendGroupRequest_Backend() {}
 
 type UpdateBackendGroupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -516,7 +508,6 @@ func (x *UpdateBackendGroupMetadata) GetBackendGroupId() string {
 type CreateBackendGroupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to create a backend group in.
-	//
 	// To get the folder ID, make a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Name of the backend group.
@@ -531,9 +522,9 @@ type CreateBackendGroupRequest struct {
 	//
 	// Types that are valid to be assigned to Backend:
 	//
+	//	*CreateBackendGroupRequest_Stream
 	//	*CreateBackendGroupRequest_Http
 	//	*CreateBackendGroupRequest_Grpc
-	//	*CreateBackendGroupRequest_Stream
 	Backend       isCreateBackendGroupRequest_Backend `protobuf_oneof:"backend"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -604,6 +595,15 @@ func (x *CreateBackendGroupRequest) GetBackend() isCreateBackendGroupRequest_Bac
 	return nil
 }
 
+func (x *CreateBackendGroupRequest) GetStream() *StreamBackendGroup {
+	if x != nil {
+		if x, ok := x.Backend.(*CreateBackendGroupRequest_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *CreateBackendGroupRequest) GetHttp() *HttpBackendGroup {
 	if x != nil {
 		if x, ok := x.Backend.(*CreateBackendGroupRequest_Http); ok {
@@ -622,17 +622,13 @@ func (x *CreateBackendGroupRequest) GetGrpc() *GrpcBackendGroup {
 	return nil
 }
 
-func (x *CreateBackendGroupRequest) GetStream() *StreamBackendGroup {
-	if x != nil {
-		if x, ok := x.Backend.(*CreateBackendGroupRequest_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 type isCreateBackendGroupRequest_Backend interface {
 	isCreateBackendGroupRequest_Backend()
+}
+
+type CreateBackendGroupRequest_Stream struct {
+	// List of stream (TCP) backends that the backend group consists of.
+	Stream *StreamBackendGroup `protobuf:"bytes,7,opt,name=stream,proto3,oneof"`
 }
 
 type CreateBackendGroupRequest_Http struct {
@@ -645,16 +641,11 @@ type CreateBackendGroupRequest_Grpc struct {
 	Grpc *GrpcBackendGroup `protobuf:"bytes,6,opt,name=grpc,proto3,oneof"`
 }
 
-type CreateBackendGroupRequest_Stream struct {
-	// List of stream (TCP) backends that the backend group consists of.
-	Stream *StreamBackendGroup `protobuf:"bytes,7,opt,name=stream,proto3,oneof"`
-}
+func (*CreateBackendGroupRequest_Stream) isCreateBackendGroupRequest_Backend() {}
 
 func (*CreateBackendGroupRequest_Http) isCreateBackendGroupRequest_Backend() {}
 
 func (*CreateBackendGroupRequest_Grpc) isCreateBackendGroupRequest_Backend() {}
-
-func (*CreateBackendGroupRequest_Stream) isCreateBackendGroupRequest_Backend() {}
 
 type CreateBackendGroupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -704,16 +695,15 @@ func (x *CreateBackendGroupMetadata) GetBackendGroupId() string {
 type AddBackendRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to add a backend to.
-	//
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// Backend to add to the backend group.
 	//
 	// Types that are valid to be assigned to Backend:
 	//
+	//	*AddBackendRequest_Stream
 	//	*AddBackendRequest_Http
 	//	*AddBackendRequest_Grpc
-	//	*AddBackendRequest_Stream
 	Backend       isAddBackendRequest_Backend `protobuf_oneof:"backend"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -763,6 +753,15 @@ func (x *AddBackendRequest) GetBackend() isAddBackendRequest_Backend {
 	return nil
 }
 
+func (x *AddBackendRequest) GetStream() *StreamBackend {
+	if x != nil {
+		if x, ok := x.Backend.(*AddBackendRequest_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *AddBackendRequest) GetHttp() *HttpBackend {
 	if x != nil {
 		if x, ok := x.Backend.(*AddBackendRequest_Http); ok {
@@ -781,17 +780,13 @@ func (x *AddBackendRequest) GetGrpc() *GrpcBackend {
 	return nil
 }
 
-func (x *AddBackendRequest) GetStream() *StreamBackend {
-	if x != nil {
-		if x, ok := x.Backend.(*AddBackendRequest_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 type isAddBackendRequest_Backend interface {
 	isAddBackendRequest_Backend()
+}
+
+type AddBackendRequest_Stream struct {
+	// New settings for the Stream backend.
+	Stream *StreamBackend `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 
 type AddBackendRequest_Http struct {
@@ -804,16 +799,11 @@ type AddBackendRequest_Grpc struct {
 	Grpc *GrpcBackend `protobuf:"bytes,3,opt,name=grpc,proto3,oneof"`
 }
 
-type AddBackendRequest_Stream struct {
-	// New settings for the Stream backend.
-	Stream *StreamBackend `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
-}
+func (*AddBackendRequest_Stream) isAddBackendRequest_Backend() {}
 
 func (*AddBackendRequest_Http) isAddBackendRequest_Backend() {}
 
 func (*AddBackendRequest_Grpc) isAddBackendRequest_Backend() {}
-
-func (*AddBackendRequest_Stream) isAddBackendRequest_Backend() {}
 
 type AddBackendMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -879,9 +869,9 @@ type UpdateBackendRequest struct {
 	//
 	// Types that are valid to be assigned to Backend:
 	//
+	//	*UpdateBackendRequest_Stream
 	//	*UpdateBackendRequest_Http
 	//	*UpdateBackendRequest_Grpc
-	//	*UpdateBackendRequest_Stream
 	Backend       isUpdateBackendRequest_Backend `protobuf_oneof:"backend"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -938,6 +928,15 @@ func (x *UpdateBackendRequest) GetBackend() isUpdateBackendRequest_Backend {
 	return nil
 }
 
+func (x *UpdateBackendRequest) GetStream() *StreamBackend {
+	if x != nil {
+		if x, ok := x.Backend.(*UpdateBackendRequest_Stream); ok {
+			return x.Stream
+		}
+	}
+	return nil
+}
+
 func (x *UpdateBackendRequest) GetHttp() *HttpBackend {
 	if x != nil {
 		if x, ok := x.Backend.(*UpdateBackendRequest_Http); ok {
@@ -956,17 +955,13 @@ func (x *UpdateBackendRequest) GetGrpc() *GrpcBackend {
 	return nil
 }
 
-func (x *UpdateBackendRequest) GetStream() *StreamBackend {
-	if x != nil {
-		if x, ok := x.Backend.(*UpdateBackendRequest_Stream); ok {
-			return x.Stream
-		}
-	}
-	return nil
-}
-
 type isUpdateBackendRequest_Backend interface {
 	isUpdateBackendRequest_Backend()
+}
+
+type UpdateBackendRequest_Stream struct {
+	// New settings for the stream (TCP) backend.
+	Stream *StreamBackend `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
 }
 
 type UpdateBackendRequest_Http struct {
@@ -979,16 +974,11 @@ type UpdateBackendRequest_Grpc struct {
 	Grpc *GrpcBackend `protobuf:"bytes,4,opt,name=grpc,proto3,oneof"`
 }
 
-type UpdateBackendRequest_Stream struct {
-	// New settings for the stream (TCP) backend.
-	Stream *StreamBackend `protobuf:"bytes,5,opt,name=stream,proto3,oneof"`
-}
+func (*UpdateBackendRequest_Stream) isUpdateBackendRequest_Backend() {}
 
 func (*UpdateBackendRequest_Http) isUpdateBackendRequest_Backend() {}
 
 func (*UpdateBackendRequest_Grpc) isUpdateBackendRequest_Backend() {}
-
-func (*UpdateBackendRequest_Stream) isUpdateBackendRequest_Backend() {}
 
 type UpdateBackendMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1047,11 +1037,9 @@ func (x *UpdateBackendMetadata) GetBackendName() string {
 type RemoveBackendRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to remove a backend from.
-	//
 	// To get the backend group ID, make a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// Name of the backend to remove.
-	//
 	// To get the backend name, make a [BackendGroupService.Get] request.
 	BackendName   string `protobuf:"bytes,2,opt,name=backend_name,json=backendName,proto3" json:"backend_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1159,7 +1147,6 @@ func (x *RemoveBackendMetadata) GetBackendName() string {
 type ListBackendGroupOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backend group to get operations for.
-	//
 	// To get the backend group ID, use a [BackendGroupService.List] request.
 	BackendGroupId string `protobuf:"bytes,1,opt,name=backend_group_id,json=backendGroupId,proto3" json:"backend_group_id,omitempty"`
 	// The maximum number of results per page that should be returned. If the number of available
@@ -1232,7 +1219,6 @@ type ListBackendGroupOperationsResponse struct {
 	// Token for getting the next page of the list. If the number of results is greater than
 	// the specified [ListBackendGroupOperationsRequest.page_size], use `next_page_token` as the value
 	// for the [ListBackendGroupOperationsRequest.page_token] parameter in the next list request.
-	//
 	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1304,31 +1290,31 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_rawDesc =
 	"\x19DeleteBackendGroupRequest\x12.\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\"F\n" +
 	"\x1aDeleteBackendGroupMetadata\x12(\n" +
-	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\"\xc4\x05\n" +
+	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\"\xb7\x05\n" +
 	"\x19UpdateBackendGroupRequest\x12.\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12:\n" +
-	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12G\n" +
+	"updateMask\x125\n" +
+	"\x04name\x18\x03 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
+	"\x06labels\x18\x05 \x03(\v2F.yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12M\n" +
+	"\x06stream\x18\b \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x12G\n" +
 	"\x04http\x18\x06 \x01(\v21.yandex.cloud.apploadbalancer.v1.HttpBackendGroupH\x00R\x04http\x12G\n" +
-	"\x04grpc\x18\a \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x12M\n" +
-	"\x06stream\x18\b \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x1a9\n" +
+	"\x04grpc\x18\a \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0f\n" +
 	"\abackend\x12\x04\xc0\xc11\x01\"F\n" +
 	"\x1aUpdateBackendGroupMetadata\x12(\n" +
-	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\"\xf4\x04\n" +
+	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\"\xe7\x04\n" +
 	"\x19CreateBackendGroupRequest\x12!\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12:\n" +
-	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\"([a-z]([-a-z0-9]{0,61}[a-z0-9])?)?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\xa3\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12G\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x125\n" +
+	"\x04name\x18\x02 \x01(\tB!\xf2\xc71\x1d|[a-z][-a-z0-9]{1,61}[a-z0-9]R\x04name\x12+\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x9b\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2F.yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12M\n" +
+	"\x06stream\x18\a \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x12G\n" +
 	"\x04http\x18\x05 \x01(\v21.yandex.cloud.apploadbalancer.v1.HttpBackendGroupH\x00R\x04http\x12G\n" +
-	"\x04grpc\x18\x06 \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x12M\n" +
-	"\x06stream\x18\a \x01(\v23.yandex.cloud.apploadbalancer.v1.StreamBackendGroupH\x00R\x06stream\x1a9\n" +
+	"\x04grpc\x18\x06 \x01(\v21.yandex.cloud.apploadbalancer.v1.GrpcBackendGroupH\x00R\x04grpc\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\t\n" +
@@ -1336,10 +1322,10 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_rawDesc =
 	"\x1aCreateBackendGroupMetadata\x12(\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\"\xac\x02\n" +
 	"\x11AddBackendRequest\x12.\n" +
-	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12B\n" +
+	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12H\n" +
+	"\x06stream\x18\x05 \x01(\v2..yandex.cloud.apploadbalancer.v1.StreamBackendH\x00R\x06stream\x12B\n" +
 	"\x04http\x18\x02 \x01(\v2,.yandex.cloud.apploadbalancer.v1.HttpBackendH\x00R\x04http\x12B\n" +
-	"\x04grpc\x18\x03 \x01(\v2,.yandex.cloud.apploadbalancer.v1.GrpcBackendH\x00R\x04grpc\x12H\n" +
-	"\x06stream\x18\x05 \x01(\v2..yandex.cloud.apploadbalancer.v1.StreamBackendH\x00R\x06streamB\x0f\n" +
+	"\x04grpc\x18\x03 \x01(\v2,.yandex.cloud.apploadbalancer.v1.GrpcBackendH\x00R\x04grpcB\x0f\n" +
 	"\abackend\x12\x04\xc0\xc11\x01J\x04\b\x04\x10\x05\"a\n" +
 	"\x12AddBackendMetadata\x12(\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\x12!\n" +
@@ -1347,10 +1333,10 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_rawDesc =
 	"\x14UpdateBackendRequest\x12.\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x0ebackendGroupId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\x12B\n" +
+	"updateMask\x12H\n" +
+	"\x06stream\x18\x05 \x01(\v2..yandex.cloud.apploadbalancer.v1.StreamBackendH\x00R\x06stream\x12B\n" +
 	"\x04http\x18\x03 \x01(\v2,.yandex.cloud.apploadbalancer.v1.HttpBackendH\x00R\x04http\x12B\n" +
-	"\x04grpc\x18\x04 \x01(\v2,.yandex.cloud.apploadbalancer.v1.GrpcBackendH\x00R\x04grpc\x12H\n" +
-	"\x06stream\x18\x05 \x01(\v2..yandex.cloud.apploadbalancer.v1.StreamBackendH\x00R\x06streamB\x0f\n" +
+	"\x04grpc\x18\x04 \x01(\v2,.yandex.cloud.apploadbalancer.v1.GrpcBackendH\x00R\x04grpcB\x0f\n" +
 	"\abackend\x12\x04\xc0\xc11\x01\"d\n" +
 	"\x15UpdateBackendMetadata\x12(\n" +
 	"\x10backend_group_id\x18\x01 \x01(\tR\x0ebackendGroupId\x12!\n" +
@@ -1426,32 +1412,32 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_goTypes = [
 	nil,                           // 18: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.LabelsEntry
 	(*BackendGroup)(nil),          // 19: yandex.cloud.apploadbalancer.v1.BackendGroup
 	(*fieldmaskpb.FieldMask)(nil), // 20: google.protobuf.FieldMask
-	(*HttpBackendGroup)(nil),      // 21: yandex.cloud.apploadbalancer.v1.HttpBackendGroup
-	(*GrpcBackendGroup)(nil),      // 22: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
-	(*StreamBackendGroup)(nil),    // 23: yandex.cloud.apploadbalancer.v1.StreamBackendGroup
-	(*HttpBackend)(nil),           // 24: yandex.cloud.apploadbalancer.v1.HttpBackend
-	(*GrpcBackend)(nil),           // 25: yandex.cloud.apploadbalancer.v1.GrpcBackend
-	(*StreamBackend)(nil),         // 26: yandex.cloud.apploadbalancer.v1.StreamBackend
+	(*StreamBackendGroup)(nil),    // 21: yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	(*HttpBackendGroup)(nil),      // 22: yandex.cloud.apploadbalancer.v1.HttpBackendGroup
+	(*GrpcBackendGroup)(nil),      // 23: yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
+	(*StreamBackend)(nil),         // 24: yandex.cloud.apploadbalancer.v1.StreamBackend
+	(*HttpBackend)(nil),           // 25: yandex.cloud.apploadbalancer.v1.HttpBackend
+	(*GrpcBackend)(nil),           // 26: yandex.cloud.apploadbalancer.v1.GrpcBackend
 	(*operation.Operation)(nil),   // 27: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_depIdxs = []int32{
 	19, // 0: yandex.cloud.apploadbalancer.v1.ListBackendGroupsResponse.backend_groups:type_name -> yandex.cloud.apploadbalancer.v1.BackendGroup
 	20, // 1: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.update_mask:type_name -> google.protobuf.FieldMask
 	17, // 2: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.LabelsEntry
-	21, // 3: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
-	22, // 4: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
-	23, // 5: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	21, // 3: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	22, // 4: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
+	23, // 5: yandex.cloud.apploadbalancer.v1.UpdateBackendGroupRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
 	18, // 6: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.labels:type_name -> yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.LabelsEntry
-	21, // 7: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
-	22, // 8: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
-	23, // 9: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
-	24, // 10: yandex.cloud.apploadbalancer.v1.AddBackendRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
-	25, // 11: yandex.cloud.apploadbalancer.v1.AddBackendRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
-	26, // 12: yandex.cloud.apploadbalancer.v1.AddBackendRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
+	21, // 7: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackendGroup
+	22, // 8: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackendGroup
+	23, // 9: yandex.cloud.apploadbalancer.v1.CreateBackendGroupRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackendGroup
+	24, // 10: yandex.cloud.apploadbalancer.v1.AddBackendRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
+	25, // 11: yandex.cloud.apploadbalancer.v1.AddBackendRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
+	26, // 12: yandex.cloud.apploadbalancer.v1.AddBackendRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
 	20, // 13: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.update_mask:type_name -> google.protobuf.FieldMask
-	24, // 14: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
-	25, // 15: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
-	26, // 16: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
+	24, // 14: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.stream:type_name -> yandex.cloud.apploadbalancer.v1.StreamBackend
+	25, // 15: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.http:type_name -> yandex.cloud.apploadbalancer.v1.HttpBackend
+	26, // 16: yandex.cloud.apploadbalancer.v1.UpdateBackendRequest.grpc:type_name -> yandex.cloud.apploadbalancer.v1.GrpcBackend
 	27, // 17: yandex.cloud.apploadbalancer.v1.ListBackendGroupOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 18: yandex.cloud.apploadbalancer.v1.BackendGroupService.Get:input_type -> yandex.cloud.apploadbalancer.v1.GetBackendGroupRequest
 	1,  // 19: yandex.cloud.apploadbalancer.v1.BackendGroupService.List:input_type -> yandex.cloud.apploadbalancer.v1.ListBackendGroupsRequest
@@ -1485,24 +1471,24 @@ func file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_init() {
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_proto_init()
 	file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_msgTypes[5].OneofWrappers = []any{
+		(*UpdateBackendGroupRequest_Stream)(nil),
 		(*UpdateBackendGroupRequest_Http)(nil),
 		(*UpdateBackendGroupRequest_Grpc)(nil),
-		(*UpdateBackendGroupRequest_Stream)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_msgTypes[7].OneofWrappers = []any{
+		(*CreateBackendGroupRequest_Stream)(nil),
 		(*CreateBackendGroupRequest_Http)(nil),
 		(*CreateBackendGroupRequest_Grpc)(nil),
-		(*CreateBackendGroupRequest_Stream)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_msgTypes[9].OneofWrappers = []any{
+		(*AddBackendRequest_Stream)(nil),
 		(*AddBackendRequest_Http)(nil),
 		(*AddBackendRequest_Grpc)(nil),
-		(*AddBackendRequest_Stream)(nil),
 	}
 	file_yandex_cloud_apploadbalancer_v1_backend_group_service_proto_msgTypes[11].OneofWrappers = []any{
+		(*UpdateBackendRequest_Stream)(nil),
 		(*UpdateBackendRequest_Http)(nil),
 		(*UpdateBackendRequest_Grpc)(nil),
-		(*UpdateBackendRequest_Stream)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

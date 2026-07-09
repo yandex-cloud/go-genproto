@@ -159,6 +159,10 @@ func (m *UpdateDashboardRequest) SetLinks(v []*LinkItem) {
 	m.Links = v
 }
 
+func (m *UpdateDashboardRequest) SetComment(v string) {
+	m.Comment = v
+}
+
 func (m *UpdateDashboardRequest) SetPresetItems(v []*PresetItem) {
 	m.PresetItems = v
 }

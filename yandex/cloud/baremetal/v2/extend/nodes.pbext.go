@@ -25,3 +25,7 @@ func (m *Node) SetConfigurationId(v string) {
 func (m *Node) SetManagementIpAddress(v string) {
 	m.ManagementIpAddress = v
 }
+
+func (m *Node) SetHostname(v string) {
+	m.Hostname = v
+}
