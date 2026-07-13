@@ -3253,7 +3253,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
 	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x89\b\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
-	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x12.\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x00R\bbackupId\x12.\n" +
 	"\x04time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12*\n" +
 	"\x04name\x18\x04 \x01(\tB\x16\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*R\x04name\x12+\n" +
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +

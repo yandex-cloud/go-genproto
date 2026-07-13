@@ -525,6 +525,10 @@ func (m *UpdateHostSpec) SetTags(v map[string]string) {
 	m.Tags = v
 }
 
+func (m *UpdateHostSpec) SetVotes(v *wrapperspb.Int64Value) {
+	m.Votes = v
+}
+
 func (m *EnableClusterShardingRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -707,6 +711,10 @@ func (m *HostSpec) SetPriority(v *wrapperspb.DoubleValue) {
 
 func (m *HostSpec) SetTags(v map[string]string) {
 	m.Tags = v
+}
+
+func (m *HostSpec) SetVotes(v *wrapperspb.Int64Value) {
+	m.Votes = v
 }
 
 func (m *MongodbSpec3_6) SetMongod(v *MongodbSpec3_6_Mongod) {

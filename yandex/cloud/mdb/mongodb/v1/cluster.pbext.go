@@ -941,6 +941,10 @@ func (m *Host_HostParameters) SetTags(v map[string]string) {
 	m.Tags = v
 }
 
+func (m *Host_HostParameters) SetVotes(v int64) {
+	m.Votes = v
+}
+
 func (m *Service) SetType(v Service_Type) {
 	m.Type = v
 }

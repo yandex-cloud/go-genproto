@@ -2681,7 +2681,7 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\x17SetPasswordHashMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xe6\x02\n" +
 	"\fPasswordHash\x122\n" +
-	"\rpassword_hash\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=256R\fpasswordHash\x12z\n" +
+	"\rpassword_hash\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=512R\fpasswordHash\x12z\n" +
 	"\x12password_hash_type\x18\x02 \x01(\x0e2F.yandex.cloud.organizationmanager.v1.idp.PasswordHash.PasswordHashTypeB\x04\xe8\xc71\x01R\x10passwordHashType\"\xa5\x01\n" +
 	"\x10PasswordHashType\x12\"\n" +
 	"\x1ePASSWORD_HASH_TYPE_UNSPECIFIED\x10\x00\x12\n" +

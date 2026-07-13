@@ -30,6 +30,7 @@ const (
 	SecretService_Deactivate_FullMethodName                 = "/yandex.cloud.lockbox.v1.SecretService/Deactivate"
 	SecretService_ListVersions_FullMethodName               = "/yandex.cloud.lockbox.v1.SecretService/ListVersions"
 	SecretService_AddVersion_FullMethodName                 = "/yandex.cloud.lockbox.v1.SecretService/AddVersion"
+	SecretService_SetCurrentVersion_FullMethodName          = "/yandex.cloud.lockbox.v1.SecretService/SetCurrentVersion"
 	SecretService_ScheduleVersionDestruction_FullMethodName = "/yandex.cloud.lockbox.v1.SecretService/ScheduleVersionDestruction"
 	SecretService_CancelVersionDestruction_FullMethodName   = "/yandex.cloud.lockbox.v1.SecretService/CancelVersionDestruction"
 	SecretService_ListOperations_FullMethodName             = "/yandex.cloud.lockbox.v1.SecretService/ListOperations"
@@ -64,6 +65,8 @@ type SecretServiceClient interface {
 	ListVersions(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error)
 	// Adds new version based on a previous one.
 	AddVersion(ctx context.Context, in *AddVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Sets new current version for the specified secret.
+	SetCurrentVersion(ctx context.Context, in *SetCurrentVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Schedules the specified version for destruction.
 	// Scheduled destruction can be cancelled with the [SecretService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(ctx context.Context, in *ScheduleVersionDestructionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -177,6 +180,16 @@ func (c *secretServiceClient) AddVersion(ctx context.Context, in *AddVersionRequ
 	return out, nil
 }
 
+func (c *secretServiceClient) SetCurrentVersion(ctx context.Context, in *SetCurrentVersionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, SecretService_SetCurrentVersion_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *secretServiceClient) ScheduleVersionDestruction(ctx context.Context, in *ScheduleVersionDestructionRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -263,6 +276,8 @@ type SecretServiceServer interface {
 	ListVersions(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
 	// Adds new version based on a previous one.
 	AddVersion(context.Context, *AddVersionRequest) (*operation.Operation, error)
+	// Sets new current version for the specified secret.
+	SetCurrentVersion(context.Context, *SetCurrentVersionRequest) (*operation.Operation, error)
 	// Schedules the specified version for destruction.
 	// Scheduled destruction can be cancelled with the [SecretService.CancelVersionDestruction] method.
 	ScheduleVersionDestruction(context.Context, *ScheduleVersionDestructionRequest) (*operation.Operation, error)
@@ -311,6 +326,9 @@ func (UnimplementedSecretServiceServer) ListVersions(context.Context, *ListVersi
 }
 func (UnimplementedSecretServiceServer) AddVersion(context.Context, *AddVersionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddVersion not implemented")
+}
+func (UnimplementedSecretServiceServer) SetCurrentVersion(context.Context, *SetCurrentVersionRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetCurrentVersion not implemented")
 }
 func (UnimplementedSecretServiceServer) ScheduleVersionDestruction(context.Context, *ScheduleVersionDestructionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method ScheduleVersionDestruction not implemented")
@@ -512,6 +530,24 @@ func _SecretService_AddVersion_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SecretService_SetCurrentVersion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCurrentVersionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SecretServiceServer).SetCurrentVersion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SecretService_SetCurrentVersion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SecretServiceServer).SetCurrentVersion(ctx, req.(*SetCurrentVersionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _SecretService_ScheduleVersionDestruction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ScheduleVersionDestructionRequest)
 	if err := dec(in); err != nil {
@@ -662,6 +698,10 @@ var SecretService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddVersion",
 			Handler:    _SecretService_AddVersion_Handler,
+		},
+		{
+			MethodName: "SetCurrentVersion",
+			Handler:    _SecretService_SetCurrentVersion_Handler,
 		},
 		{
 			MethodName: "ScheduleVersionDestruction",

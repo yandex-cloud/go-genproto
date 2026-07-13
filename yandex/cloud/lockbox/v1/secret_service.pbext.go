@@ -200,6 +200,22 @@ func (m *AddVersionMetadata) SetVersionId(v string) {
 	m.VersionId = v
 }
 
+func (m *SetCurrentVersionRequest) SetSecretId(v string) {
+	m.SecretId = v
+}
+
+func (m *SetCurrentVersionRequest) SetVersionId(v string) {
+	m.VersionId = v
+}
+
+func (m *SetCurrentVersionMetadata) SetSecretId(v string) {
+	m.SecretId = v
+}
+
+func (m *SetCurrentVersionMetadata) SetVersionId(v string) {
+	m.VersionId = v
+}
+
 func (m *ListVersionsRequest) SetSecretId(v string) {
 	m.SecretId = v
 }

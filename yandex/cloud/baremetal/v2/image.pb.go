@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,15 +23,76 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Image status.
+type Image_Status int32
+
+const (
+	// Unspecified image status.
+	Image_STATUS_UNSPECIFIED Image_Status = 0
+	// Image is published and available to users.
+	Image_PUBLISHED Image_Status = 3
+	// Image is disabled for new installations but preserved for existing servers.
+	Image_DISABLED Image_Status = 4
+)
+
+// Enum value maps for Image_Status.
+var (
+	Image_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		3: "PUBLISHED",
+		4: "DISABLED",
+	}
+	Image_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"PUBLISHED":          3,
+		"DISABLED":           4,
+	}
+)
+
+func (x Image_Status) Enum() *Image_Status {
+	p := new(Image_Status)
+	*p = x
+	return p
+}
+
+func (x Image_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Image_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v2_image_proto_enumTypes[0].Descriptor()
+}
+
+func (Image_Status) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v2_image_proto_enumTypes[0]
+}
+
+func (x Image_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Image_Status.Descriptor instead.
+func (Image_Status) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_image_proto_rawDescGZIP(), []int{0, 0}
+}
+
 // An Image resource.
 type Image struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the image.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	// Folder of image.
+	// ID of the folder that the image belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the image.
-	Name          string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Name of the image
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Family of the image
+	Family string `protobuf:"bytes,5,opt,name=family,proto3" json:"family,omitempty"`
+	// State of the image.
+	State Image_Status `protobuf:"varint,6,opt,name=state,proto3,enum=yandex.cloud.baremetal.v2.Image_Status" json:"state,omitempty"`
+	// Timestamp when the image was published.
+	PublishTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=publish_time,json=publishTime,proto3" json:"publish_time,omitempty"`
+	// ID of the cloud that the image belongs to.
+	CloudId       string `protobuf:"bytes,10,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -86,15 +148,53 @@ func (x *Image) GetName() string {
 	return ""
 }
 
+func (x *Image) GetFamily() string {
+	if x != nil {
+		return x.Family
+	}
+	return ""
+}
+
+func (x *Image) GetState() Image_Status {
+	if x != nil {
+		return x.State
+	}
+	return Image_STATUS_UNSPECIFIED
+}
+
+func (x *Image) GetPublishTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.PublishTime
+	}
+	return nil
+}
+
+func (x *Image) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_image_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_image_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/baremetal/v2/image.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\"h\n" +
+	"%yandex/cloud/baremetal/v2/image.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf5\x02\n" +
 	"\x05Image\x12!\n" +
-	"\bimage_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\aimageId\x12#\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x06\xe0A\x02\xe0A\x05R\bfolderId\x12\x17\n" +
-	"\x04name\x18\x03 \x01(\tB\x03\xe0A\x02R\x04nameBl\n" +
+	"\bimage_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\aimageId\x12 \n" +
+	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tB\x03\xe0A\x02R\x04name\x12\x1b\n" +
+	"\x06family\x18\x05 \x01(\tB\x03\xe0A\x02R\x06family\x12B\n" +
+	"\x05state\x18\x06 \x01(\x0e2'.yandex.cloud.baremetal.v2.Image.StatusB\x03\xe0A\x03R\x05state\x12B\n" +
+	"\fpublish_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\vpublishTime\x12\x1e\n" +
+	"\bcloud_id\x18\n" +
+	" \x01(\tB\x03\xe0A\x02R\acloudId\"=\n" +
+	"\x06Status\x12\x16\n" +
+	"\x12STATUS_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tPUBLISHED\x10\x03\x12\f\n" +
+	"\bDISABLED\x10\x04J\x04\b\x04\x10\x05J\x04\b\b\x10\n" +
+	"Bl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -109,16 +209,21 @@ func file_yandex_cloud_baremetal_v2_image_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_image_proto_rawDescData
 }
 
+var file_yandex_cloud_baremetal_v2_image_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v2_image_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_yandex_cloud_baremetal_v2_image_proto_goTypes = []any{
-	(*Image)(nil), // 0: yandex.cloud.baremetal.v2.Image
+	(Image_Status)(0),             // 0: yandex.cloud.baremetal.v2.Image.Status
+	(*Image)(nil),                 // 1: yandex.cloud.baremetal.v2.Image
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_yandex_cloud_baremetal_v2_image_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: yandex.cloud.baremetal.v2.Image.state:type_name -> yandex.cloud.baremetal.v2.Image.Status
+	2, // 1: yandex.cloud.baremetal.v2.Image.publish_time:type_name -> google.protobuf.Timestamp
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_image_proto_init() }
@@ -131,13 +236,14 @@ func file_yandex_cloud_baremetal_v2_image_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_image_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_image_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v2_image_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v2_image_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_baremetal_v2_image_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_baremetal_v2_image_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_baremetal_v2_image_proto = out.File

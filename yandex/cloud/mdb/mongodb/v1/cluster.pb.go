@@ -4994,7 +4994,9 @@ type Host_HostParameters struct {
 	// Replica priority used by the replica set when electing a new primary.
 	Priority float64 `protobuf:"fixed64,3,opt,name=priority,proto3" json:"priority,omitempty"`
 	// Replica tags used to control read preference and write concern.
-	Tags          map[string]string `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Tags map[string]string `protobuf:"bytes,4,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Host votes. Controls host participation in elections.
+	Votes         int64 `protobuf:"varint,5,opt,name=votes,proto3" json:"votes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5055,6 +5057,13 @@ func (x *Host_HostParameters) GetTags() map[string]string {
 		return x.Tags
 	}
 	return nil
+}
+
+func (x *Host_HostParameters) GetVotes() int64 {
+	if x != nil {
+		return x.Votes
+	}
+	return 0
 }
 
 var File_yandex_cloud_mdb_mongodb_v1_cluster_proto protoreflect.FileDescriptor
@@ -5394,7 +5403,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\x05Shard\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tR\tclusterId\"\xa2\b\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\"\xb8\b\n" +
 	"\x04Host\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -5410,12 +5419,13 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"shard_name\x18\n" +
 	" \x01(\tR\tshardName\x12:\n" +
 	"\x04type\x18\v \x01(\x0e2&.yandex.cloud.mdb.mongodb.v1.Host.TypeR\x04type\x12Y\n" +
-	"\x0fhost_parameters\x18\f \x01(\v20.yandex.cloud.mdb.mongodb.v1.Host.HostParametersR\x0ehostParameters\x1a\xff\x01\n" +
+	"\x0fhost_parameters\x18\f \x01(\v20.yandex.cloud.mdb.mongodb.v1.Host.HostParametersR\x0ehostParameters\x1a\x95\x02\n" +
 	"\x0eHostParameters\x12\x16\n" +
 	"\x06hidden\x18\x01 \x01(\bR\x06hidden\x120\n" +
 	"\x14secondary_delay_secs\x18\x02 \x01(\x03R\x12secondaryDelaySecs\x12\x1a\n" +
 	"\bpriority\x18\x03 \x01(\x01R\bpriority\x12N\n" +
-	"\x04tags\x18\x04 \x03(\v2:.yandex.cloud.mdb.mongodb.v1.Host.HostParameters.TagsEntryR\x04tags\x1a7\n" +
+	"\x04tags\x18\x04 \x03(\v2:.yandex.cloud.mdb.mongodb.v1.Host.HostParameters.TagsEntryR\x04tags\x12\x14\n" +
+	"\x05votes\x18\x05 \x01(\x03R\x05votes\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"R\n" +

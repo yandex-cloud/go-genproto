@@ -1064,6 +1064,114 @@ func (x *AddVersionMetadata) GetVersionId() string {
 	return ""
 }
 
+type SetCurrentVersionRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the secret.
+	SecretId string `protobuf:"bytes,1,opt,name=secret_id,json=secretId,proto3" json:"secret_id,omitempty"`
+	// ID of the version to set as current.
+	VersionId     string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCurrentVersionRequest) Reset() {
+	*x = SetCurrentVersionRequest{}
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCurrentVersionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCurrentVersionRequest) ProtoMessage() {}
+
+func (x *SetCurrentVersionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCurrentVersionRequest.ProtoReflect.Descriptor instead.
+func (*SetCurrentVersionRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SetCurrentVersionRequest) GetSecretId() string {
+	if x != nil {
+		return x.SecretId
+	}
+	return ""
+}
+
+func (x *SetCurrentVersionRequest) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
+type SetCurrentVersionMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the secret.
+	SecretId string `protobuf:"bytes,1,opt,name=secret_id,json=secretId,proto3" json:"secret_id,omitempty"`
+	// ID of the version to set as current.
+	VersionId     string `protobuf:"bytes,2,opt,name=version_id,json=versionId,proto3" json:"version_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetCurrentVersionMetadata) Reset() {
+	*x = SetCurrentVersionMetadata{}
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetCurrentVersionMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetCurrentVersionMetadata) ProtoMessage() {}
+
+func (x *SetCurrentVersionMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetCurrentVersionMetadata.ProtoReflect.Descriptor instead.
+func (*SetCurrentVersionMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SetCurrentVersionMetadata) GetSecretId() string {
+	if x != nil {
+		return x.SecretId
+	}
+	return ""
+}
+
+func (x *SetCurrentVersionMetadata) GetVersionId() string {
+	if x != nil {
+		return x.VersionId
+	}
+	return ""
+}
+
 type ListVersionsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the secret to list versions for.
@@ -1082,7 +1190,7 @@ type ListVersionsRequest struct {
 
 func (x *ListVersionsRequest) Reset() {
 	*x = ListVersionsRequest{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1094,7 +1202,7 @@ func (x *ListVersionsRequest) String() string {
 func (*ListVersionsRequest) ProtoMessage() {}
 
 func (x *ListVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[16]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1107,7 +1215,7 @@ func (x *ListVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{16}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ListVersionsRequest) GetSecretId() string {
@@ -1147,7 +1255,7 @@ type ListVersionsResponse struct {
 
 func (x *ListVersionsResponse) Reset() {
 	*x = ListVersionsResponse{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1159,7 +1267,7 @@ func (x *ListVersionsResponse) String() string {
 func (*ListVersionsResponse) ProtoMessage() {}
 
 func (x *ListVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[17]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1172,7 +1280,7 @@ func (x *ListVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{17}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListVersionsResponse) GetVersions() []*Version {
@@ -1204,7 +1312,7 @@ type ScheduleVersionDestructionRequest struct {
 
 func (x *ScheduleVersionDestructionRequest) Reset() {
 	*x = ScheduleVersionDestructionRequest{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1216,7 +1324,7 @@ func (x *ScheduleVersionDestructionRequest) String() string {
 func (*ScheduleVersionDestructionRequest) ProtoMessage() {}
 
 func (x *ScheduleVersionDestructionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[18]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +1337,7 @@ func (x *ScheduleVersionDestructionRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ScheduleVersionDestructionRequest.ProtoReflect.Descriptor instead.
 func (*ScheduleVersionDestructionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{18}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ScheduleVersionDestructionRequest) GetSecretId() string {
@@ -1267,7 +1375,7 @@ type ScheduleVersionDestructionMetadata struct {
 
 func (x *ScheduleVersionDestructionMetadata) Reset() {
 	*x = ScheduleVersionDestructionMetadata{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1279,7 +1387,7 @@ func (x *ScheduleVersionDestructionMetadata) String() string {
 func (*ScheduleVersionDestructionMetadata) ProtoMessage() {}
 
 func (x *ScheduleVersionDestructionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[19]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1292,7 +1400,7 @@ func (x *ScheduleVersionDestructionMetadata) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ScheduleVersionDestructionMetadata.ProtoReflect.Descriptor instead.
 func (*ScheduleVersionDestructionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{19}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ScheduleVersionDestructionMetadata) GetSecretId() string {
@@ -1328,7 +1436,7 @@ type CancelVersionDestructionRequest struct {
 
 func (x *CancelVersionDestructionRequest) Reset() {
 	*x = CancelVersionDestructionRequest{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1340,7 +1448,7 @@ func (x *CancelVersionDestructionRequest) String() string {
 func (*CancelVersionDestructionRequest) ProtoMessage() {}
 
 func (x *CancelVersionDestructionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[20]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1353,7 +1461,7 @@ func (x *CancelVersionDestructionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelVersionDestructionRequest.ProtoReflect.Descriptor instead.
 func (*CancelVersionDestructionRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{20}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CancelVersionDestructionRequest) GetSecretId() string {
@@ -1382,7 +1490,7 @@ type CancelVersionDestructionMetadata struct {
 
 func (x *CancelVersionDestructionMetadata) Reset() {
 	*x = CancelVersionDestructionMetadata{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1394,7 +1502,7 @@ func (x *CancelVersionDestructionMetadata) String() string {
 func (*CancelVersionDestructionMetadata) ProtoMessage() {}
 
 func (x *CancelVersionDestructionMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[21]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1407,7 +1515,7 @@ func (x *CancelVersionDestructionMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelVersionDestructionMetadata.ProtoReflect.Descriptor instead.
 func (*CancelVersionDestructionMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{21}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CancelVersionDestructionMetadata) GetSecretId() string {
@@ -1442,7 +1550,7 @@ type ListSecretOperationsRequest struct {
 
 func (x *ListSecretOperationsRequest) Reset() {
 	*x = ListSecretOperationsRequest{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1454,7 +1562,7 @@ func (x *ListSecretOperationsRequest) String() string {
 func (*ListSecretOperationsRequest) ProtoMessage() {}
 
 func (x *ListSecretOperationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[22]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1467,7 +1575,7 @@ func (x *ListSecretOperationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSecretOperationsRequest.ProtoReflect.Descriptor instead.
 func (*ListSecretOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{22}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ListSecretOperationsRequest) GetSecretId() string {
@@ -1506,7 +1614,7 @@ type ListSecretOperationsResponse struct {
 
 func (x *ListSecretOperationsResponse) Reset() {
 	*x = ListSecretOperationsResponse{}
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1518,7 +1626,7 @@ func (x *ListSecretOperationsResponse) String() string {
 func (*ListSecretOperationsResponse) ProtoMessage() {}
 
 func (x *ListSecretOperationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1531,7 +1639,7 @@ func (x *ListSecretOperationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSecretOperationsResponse.ProtoReflect.Descriptor instead.
 func (*ListSecretOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *ListSecretOperationsResponse) GetOperations() []*operation.Operation {
@@ -1629,6 +1737,14 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\x12AddVersionMetadata\x12\x1b\n" +
 	"\tsecret_id\x18\x01 \x01(\tR\bsecretId\x12\x1d\n" +
 	"\n" +
+	"version_id\x18\x02 \x01(\tR\tversionId\"r\n" +
+	"\x18SetCurrentVersionRequest\x12)\n" +
+	"\tsecret_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsecretId\x12+\n" +
+	"\n" +
+	"version_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tversionId\"W\n" +
+	"\x19SetCurrentVersionMetadata\x12\x1b\n" +
+	"\tsecret_id\x18\x01 \x01(\tR\bsecretId\x12\x1d\n" +
+	"\n" +
 	"version_id\x18\x02 \x01(\tR\tversionId\"\x93\x01\n" +
 	"\x13ListVersionsRequest\x12)\n" +
 	"\tsecret_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bsecretId\x12'\n" +
@@ -1668,7 +1784,7 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xe9\x15\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xbb\x17\n" +
 	"\rSecretService\x12z\n" +
 	"\x03Get\x12).yandex.cloud.lockbox.v1.GetSecretRequest\x1a\x1f.yandex.cloud.lockbox.v1.Secret\"'\x82\xd3\xe4\x93\x02!\x12\x1f/lockbox/v1/secrets/{secret_id}\x12~\n" +
 	"\x04List\x12+.yandex.cloud.lockbox.v1.ListSecretsRequest\x1a,.yandex.cloud.lockbox.v1.ListSecretsResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/lockbox/v1/secrets\x12\x9b\x01\n" +
@@ -1686,7 +1802,9 @@ const file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc = "" +
 	"\fListVersions\x12,.yandex.cloud.lockbox.v1.ListVersionsRequest\x1a-.yandex.cloud.lockbox.v1.ListVersionsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/lockbox/v1/secrets/{secret_id}/versions\x12\xb3\x01\n" +
 	"\n" +
 	"AddVersion\x12*.yandex.cloud.lockbox.v1.AddVersionRequest\x1a!.yandex.cloud.operation.Operation\"V\xb2\xd2*\x1d\n" +
-	"\x12AddVersionMetadata\x12\aVersion\x82\xd3\xe4\x93\x02/:\x01*\"*/lockbox/v1/secrets/{secret_id}:addVersion\x12\xf3\x01\n" +
+	"\x12AddVersionMetadata\x12\aVersion\x82\xd3\xe4\x93\x02/:\x01*\"*/lockbox/v1/secrets/{secret_id}:addVersion\x12\xcf\x01\n" +
+	"\x11SetCurrentVersion\x121.yandex.cloud.lockbox.v1.SetCurrentVersionRequest\x1a!.yandex.cloud.operation.Operation\"d\xb2\xd2*$\n" +
+	"\x19SetCurrentVersionMetadata\x12\aVersion\x82\xd3\xe4\x93\x026:\x01*\"1/lockbox/v1/secrets/{secret_id}:setCurrentVersion\x12\xf3\x01\n" +
 	"\x1aScheduleVersionDestruction\x12:.yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest\x1a!.yandex.cloud.operation.Operation\"v\xb2\xd2*-\n" +
 	"\"ScheduleVersionDestructionMetadata\x12\aVersion\x82\xd3\xe4\x93\x02?:\x01*\":/lockbox/v1/secrets/{secret_id}:scheduleVersionDestruction\x12\xeb\x01\n" +
 	"\x18CancelVersionDestruction\x128.yandex.cloud.lockbox.v1.CancelVersionDestructionRequest\x1a!.yandex.cloud.operation.Operation\"r\xb2\xd2*+\n" +
@@ -1711,7 +1829,7 @@ func file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_lockbox_v1_secret_service_proto_rawDescData
 }
 
-var file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_yandex_cloud_lockbox_v1_secret_service_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_yandex_cloud_lockbox_v1_secret_service_proto_goTypes = []any{
 	(*PayloadEntryChange)(nil),                 // 0: yandex.cloud.lockbox.v1.PayloadEntryChange
 	(*GetSecretRequest)(nil),                   // 1: yandex.cloud.lockbox.v1.GetSecretRequest
@@ -1729,43 +1847,45 @@ var file_yandex_cloud_lockbox_v1_secret_service_proto_goTypes = []any{
 	(*DeactivateSecretMetadata)(nil),           // 13: yandex.cloud.lockbox.v1.DeactivateSecretMetadata
 	(*AddVersionRequest)(nil),                  // 14: yandex.cloud.lockbox.v1.AddVersionRequest
 	(*AddVersionMetadata)(nil),                 // 15: yandex.cloud.lockbox.v1.AddVersionMetadata
-	(*ListVersionsRequest)(nil),                // 16: yandex.cloud.lockbox.v1.ListVersionsRequest
-	(*ListVersionsResponse)(nil),               // 17: yandex.cloud.lockbox.v1.ListVersionsResponse
-	(*ScheduleVersionDestructionRequest)(nil),  // 18: yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest
-	(*ScheduleVersionDestructionMetadata)(nil), // 19: yandex.cloud.lockbox.v1.ScheduleVersionDestructionMetadata
-	(*CancelVersionDestructionRequest)(nil),    // 20: yandex.cloud.lockbox.v1.CancelVersionDestructionRequest
-	(*CancelVersionDestructionMetadata)(nil),   // 21: yandex.cloud.lockbox.v1.CancelVersionDestructionMetadata
-	(*ListSecretOperationsRequest)(nil),        // 22: yandex.cloud.lockbox.v1.ListSecretOperationsRequest
-	(*ListSecretOperationsResponse)(nil),       // 23: yandex.cloud.lockbox.v1.ListSecretOperationsResponse
-	nil,                                        // 24: yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
-	nil,                                        // 25: yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
-	(*Secret)(nil),                             // 26: yandex.cloud.lockbox.v1.Secret
-	(*PasswordPayloadSpecification)(nil),       // 27: yandex.cloud.lockbox.v1.PasswordPayloadSpecification
-	(*wrapperspb.BoolValue)(nil),               // 28: google.protobuf.BoolValue
-	(*fieldmaskpb.FieldMask)(nil),              // 29: google.protobuf.FieldMask
-	(*Version)(nil),                            // 30: yandex.cloud.lockbox.v1.Version
-	(*durationpb.Duration)(nil),                // 31: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),              // 32: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                // 33: yandex.cloud.operation.Operation
-	(*access.ListAccessBindingsRequest)(nil),   // 34: yandex.cloud.access.ListAccessBindingsRequest
-	(*access.SetAccessBindingsRequest)(nil),    // 35: yandex.cloud.access.SetAccessBindingsRequest
-	(*access.UpdateAccessBindingsRequest)(nil), // 36: yandex.cloud.access.UpdateAccessBindingsRequest
-	(*access.ListAccessBindingsResponse)(nil),  // 37: yandex.cloud.access.ListAccessBindingsResponse
+	(*SetCurrentVersionRequest)(nil),           // 16: yandex.cloud.lockbox.v1.SetCurrentVersionRequest
+	(*SetCurrentVersionMetadata)(nil),          // 17: yandex.cloud.lockbox.v1.SetCurrentVersionMetadata
+	(*ListVersionsRequest)(nil),                // 18: yandex.cloud.lockbox.v1.ListVersionsRequest
+	(*ListVersionsResponse)(nil),               // 19: yandex.cloud.lockbox.v1.ListVersionsResponse
+	(*ScheduleVersionDestructionRequest)(nil),  // 20: yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest
+	(*ScheduleVersionDestructionMetadata)(nil), // 21: yandex.cloud.lockbox.v1.ScheduleVersionDestructionMetadata
+	(*CancelVersionDestructionRequest)(nil),    // 22: yandex.cloud.lockbox.v1.CancelVersionDestructionRequest
+	(*CancelVersionDestructionMetadata)(nil),   // 23: yandex.cloud.lockbox.v1.CancelVersionDestructionMetadata
+	(*ListSecretOperationsRequest)(nil),        // 24: yandex.cloud.lockbox.v1.ListSecretOperationsRequest
+	(*ListSecretOperationsResponse)(nil),       // 25: yandex.cloud.lockbox.v1.ListSecretOperationsResponse
+	nil,                                        // 26: yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
+	nil,                                        // 27: yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
+	(*Secret)(nil),                             // 28: yandex.cloud.lockbox.v1.Secret
+	(*PasswordPayloadSpecification)(nil),       // 29: yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	(*wrapperspb.BoolValue)(nil),               // 30: google.protobuf.BoolValue
+	(*fieldmaskpb.FieldMask)(nil),              // 31: google.protobuf.FieldMask
+	(*Version)(nil),                            // 32: yandex.cloud.lockbox.v1.Version
+	(*durationpb.Duration)(nil),                // 33: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),              // 34: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                // 35: yandex.cloud.operation.Operation
+	(*access.ListAccessBindingsRequest)(nil),   // 36: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 37: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 38: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 39: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_lockbox_v1_secret_service_proto_depIdxs = []int32{
-	26, // 0: yandex.cloud.lockbox.v1.ListSecretsResponse.secrets:type_name -> yandex.cloud.lockbox.v1.Secret
-	27, // 1: yandex.cloud.lockbox.v1.CreateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
-	24, // 2: yandex.cloud.lockbox.v1.CreateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
+	28, // 0: yandex.cloud.lockbox.v1.ListSecretsResponse.secrets:type_name -> yandex.cloud.lockbox.v1.Secret
+	29, // 1: yandex.cloud.lockbox.v1.CreateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	26, // 2: yandex.cloud.lockbox.v1.CreateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.CreateSecretRequest.LabelsEntry
 	0,  // 3: yandex.cloud.lockbox.v1.CreateSecretRequest.version_payload_entries:type_name -> yandex.cloud.lockbox.v1.PayloadEntryChange
-	28, // 4: yandex.cloud.lockbox.v1.CreateSecretRequest.create_version:type_name -> google.protobuf.BoolValue
-	27, // 5: yandex.cloud.lockbox.v1.UpdateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
-	29, // 6: yandex.cloud.lockbox.v1.UpdateSecretRequest.update_mask:type_name -> google.protobuf.FieldMask
-	25, // 7: yandex.cloud.lockbox.v1.UpdateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
+	30, // 4: yandex.cloud.lockbox.v1.CreateSecretRequest.create_version:type_name -> google.protobuf.BoolValue
+	29, // 5: yandex.cloud.lockbox.v1.UpdateSecretRequest.password_payload_specification:type_name -> yandex.cloud.lockbox.v1.PasswordPayloadSpecification
+	31, // 6: yandex.cloud.lockbox.v1.UpdateSecretRequest.update_mask:type_name -> google.protobuf.FieldMask
+	27, // 7: yandex.cloud.lockbox.v1.UpdateSecretRequest.labels:type_name -> yandex.cloud.lockbox.v1.UpdateSecretRequest.LabelsEntry
 	0,  // 8: yandex.cloud.lockbox.v1.AddVersionRequest.payload_entries:type_name -> yandex.cloud.lockbox.v1.PayloadEntryChange
-	30, // 9: yandex.cloud.lockbox.v1.ListVersionsResponse.versions:type_name -> yandex.cloud.lockbox.v1.Version
-	31, // 10: yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest.pending_period:type_name -> google.protobuf.Duration
-	32, // 11: yandex.cloud.lockbox.v1.ScheduleVersionDestructionMetadata.destroy_at:type_name -> google.protobuf.Timestamp
-	33, // 12: yandex.cloud.lockbox.v1.ListSecretOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	32, // 9: yandex.cloud.lockbox.v1.ListVersionsResponse.versions:type_name -> yandex.cloud.lockbox.v1.Version
+	33, // 10: yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest.pending_period:type_name -> google.protobuf.Duration
+	34, // 11: yandex.cloud.lockbox.v1.ScheduleVersionDestructionMetadata.destroy_at:type_name -> google.protobuf.Timestamp
+	35, // 12: yandex.cloud.lockbox.v1.ListSecretOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	1,  // 13: yandex.cloud.lockbox.v1.SecretService.Get:input_type -> yandex.cloud.lockbox.v1.GetSecretRequest
 	2,  // 14: yandex.cloud.lockbox.v1.SecretService.List:input_type -> yandex.cloud.lockbox.v1.ListSecretsRequest
 	4,  // 15: yandex.cloud.lockbox.v1.SecretService.Create:input_type -> yandex.cloud.lockbox.v1.CreateSecretRequest
@@ -1773,31 +1893,33 @@ var file_yandex_cloud_lockbox_v1_secret_service_proto_depIdxs = []int32{
 	8,  // 17: yandex.cloud.lockbox.v1.SecretService.Delete:input_type -> yandex.cloud.lockbox.v1.DeleteSecretRequest
 	10, // 18: yandex.cloud.lockbox.v1.SecretService.Activate:input_type -> yandex.cloud.lockbox.v1.ActivateSecretRequest
 	12, // 19: yandex.cloud.lockbox.v1.SecretService.Deactivate:input_type -> yandex.cloud.lockbox.v1.DeactivateSecretRequest
-	16, // 20: yandex.cloud.lockbox.v1.SecretService.ListVersions:input_type -> yandex.cloud.lockbox.v1.ListVersionsRequest
+	18, // 20: yandex.cloud.lockbox.v1.SecretService.ListVersions:input_type -> yandex.cloud.lockbox.v1.ListVersionsRequest
 	14, // 21: yandex.cloud.lockbox.v1.SecretService.AddVersion:input_type -> yandex.cloud.lockbox.v1.AddVersionRequest
-	18, // 22: yandex.cloud.lockbox.v1.SecretService.ScheduleVersionDestruction:input_type -> yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest
-	20, // 23: yandex.cloud.lockbox.v1.SecretService.CancelVersionDestruction:input_type -> yandex.cloud.lockbox.v1.CancelVersionDestructionRequest
-	22, // 24: yandex.cloud.lockbox.v1.SecretService.ListOperations:input_type -> yandex.cloud.lockbox.v1.ListSecretOperationsRequest
-	34, // 25: yandex.cloud.lockbox.v1.SecretService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	35, // 26: yandex.cloud.lockbox.v1.SecretService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	36, // 27: yandex.cloud.lockbox.v1.SecretService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	26, // 28: yandex.cloud.lockbox.v1.SecretService.Get:output_type -> yandex.cloud.lockbox.v1.Secret
-	3,  // 29: yandex.cloud.lockbox.v1.SecretService.List:output_type -> yandex.cloud.lockbox.v1.ListSecretsResponse
-	33, // 30: yandex.cloud.lockbox.v1.SecretService.Create:output_type -> yandex.cloud.operation.Operation
-	33, // 31: yandex.cloud.lockbox.v1.SecretService.Update:output_type -> yandex.cloud.operation.Operation
-	33, // 32: yandex.cloud.lockbox.v1.SecretService.Delete:output_type -> yandex.cloud.operation.Operation
-	33, // 33: yandex.cloud.lockbox.v1.SecretService.Activate:output_type -> yandex.cloud.operation.Operation
-	33, // 34: yandex.cloud.lockbox.v1.SecretService.Deactivate:output_type -> yandex.cloud.operation.Operation
-	17, // 35: yandex.cloud.lockbox.v1.SecretService.ListVersions:output_type -> yandex.cloud.lockbox.v1.ListVersionsResponse
-	33, // 36: yandex.cloud.lockbox.v1.SecretService.AddVersion:output_type -> yandex.cloud.operation.Operation
-	33, // 37: yandex.cloud.lockbox.v1.SecretService.ScheduleVersionDestruction:output_type -> yandex.cloud.operation.Operation
-	33, // 38: yandex.cloud.lockbox.v1.SecretService.CancelVersionDestruction:output_type -> yandex.cloud.operation.Operation
-	23, // 39: yandex.cloud.lockbox.v1.SecretService.ListOperations:output_type -> yandex.cloud.lockbox.v1.ListSecretOperationsResponse
-	37, // 40: yandex.cloud.lockbox.v1.SecretService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	33, // 41: yandex.cloud.lockbox.v1.SecretService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	33, // 42: yandex.cloud.lockbox.v1.SecretService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	28, // [28:43] is the sub-list for method output_type
-	13, // [13:28] is the sub-list for method input_type
+	16, // 22: yandex.cloud.lockbox.v1.SecretService.SetCurrentVersion:input_type -> yandex.cloud.lockbox.v1.SetCurrentVersionRequest
+	20, // 23: yandex.cloud.lockbox.v1.SecretService.ScheduleVersionDestruction:input_type -> yandex.cloud.lockbox.v1.ScheduleVersionDestructionRequest
+	22, // 24: yandex.cloud.lockbox.v1.SecretService.CancelVersionDestruction:input_type -> yandex.cloud.lockbox.v1.CancelVersionDestructionRequest
+	24, // 25: yandex.cloud.lockbox.v1.SecretService.ListOperations:input_type -> yandex.cloud.lockbox.v1.ListSecretOperationsRequest
+	36, // 26: yandex.cloud.lockbox.v1.SecretService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	37, // 27: yandex.cloud.lockbox.v1.SecretService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	38, // 28: yandex.cloud.lockbox.v1.SecretService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	28, // 29: yandex.cloud.lockbox.v1.SecretService.Get:output_type -> yandex.cloud.lockbox.v1.Secret
+	3,  // 30: yandex.cloud.lockbox.v1.SecretService.List:output_type -> yandex.cloud.lockbox.v1.ListSecretsResponse
+	35, // 31: yandex.cloud.lockbox.v1.SecretService.Create:output_type -> yandex.cloud.operation.Operation
+	35, // 32: yandex.cloud.lockbox.v1.SecretService.Update:output_type -> yandex.cloud.operation.Operation
+	35, // 33: yandex.cloud.lockbox.v1.SecretService.Delete:output_type -> yandex.cloud.operation.Operation
+	35, // 34: yandex.cloud.lockbox.v1.SecretService.Activate:output_type -> yandex.cloud.operation.Operation
+	35, // 35: yandex.cloud.lockbox.v1.SecretService.Deactivate:output_type -> yandex.cloud.operation.Operation
+	19, // 36: yandex.cloud.lockbox.v1.SecretService.ListVersions:output_type -> yandex.cloud.lockbox.v1.ListVersionsResponse
+	35, // 37: yandex.cloud.lockbox.v1.SecretService.AddVersion:output_type -> yandex.cloud.operation.Operation
+	35, // 38: yandex.cloud.lockbox.v1.SecretService.SetCurrentVersion:output_type -> yandex.cloud.operation.Operation
+	35, // 39: yandex.cloud.lockbox.v1.SecretService.ScheduleVersionDestruction:output_type -> yandex.cloud.operation.Operation
+	35, // 40: yandex.cloud.lockbox.v1.SecretService.CancelVersionDestruction:output_type -> yandex.cloud.operation.Operation
+	25, // 41: yandex.cloud.lockbox.v1.SecretService.ListOperations:output_type -> yandex.cloud.lockbox.v1.ListSecretOperationsResponse
+	39, // 42: yandex.cloud.lockbox.v1.SecretService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	35, // 43: yandex.cloud.lockbox.v1.SecretService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	35, // 44: yandex.cloud.lockbox.v1.SecretService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	29, // [29:45] is the sub-list for method output_type
+	13, // [13:29] is the sub-list for method input_type
 	13, // [13:13] is the sub-list for extension type_name
 	13, // [13:13] is the sub-list for extension extendee
 	0,  // [0:13] is the sub-list for field type_name
@@ -1825,7 +1947,7 @@ func file_yandex_cloud_lockbox_v1_secret_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc), len(file_yandex_cloud_lockbox_v1_secret_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

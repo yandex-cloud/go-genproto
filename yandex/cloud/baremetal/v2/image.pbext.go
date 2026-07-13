@@ -2,6 +2,10 @@
 
 package baremetal
 
+import (
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+)
+
 func (m *Image) SetImageId(v string) {
 	m.ImageId = v
 }
@@ -12,4 +16,20 @@ func (m *Image) SetFolderId(v string) {
 
 func (m *Image) SetName(v string) {
 	m.Name = v
+}
+
+func (m *Image) SetFamily(v string) {
+	m.Family = v
+}
+
+func (m *Image) SetState(v Image_Status) {
+	m.State = v
+}
+
+func (m *Image) SetPublishTime(v *timestamppb.Timestamp) {
+	m.PublishTime = v
+}
+
+func (m *Image) SetCloudId(v string) {
+	m.CloudId = v
 }
