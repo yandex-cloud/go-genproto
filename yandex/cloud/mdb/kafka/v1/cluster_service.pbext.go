@@ -189,6 +189,10 @@ func (m *ListClusterLogsRequest) SetFilter(v string) {
 	m.Filter = v
 }
 
+func (m *ListClusterLogsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }

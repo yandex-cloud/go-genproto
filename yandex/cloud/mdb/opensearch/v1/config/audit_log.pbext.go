@@ -37,3 +37,15 @@ func (m *AuditLog) SetLogIndexMaintenance(v *wrapperspb.BoolValue) {
 func (m *AuditLog) SetLogBackupOperations(v *wrapperspb.BoolValue) {
 	m.LogBackupOperations = v
 }
+
+func (m *AuditLog) SetLogAuthenticatedRequests(v *wrapperspb.BoolValue) {
+	m.LogAuthenticatedRequests = v
+}
+
+func (m *AuditLog) SetLogIndexEvents(v *wrapperspb.BoolValue) {
+	m.LogIndexEvents = v
+}
+
+func (m *AuditLog) SetLogBadHeaders(v *wrapperspb.BoolValue) {
+	m.LogBadHeaders = v
+}

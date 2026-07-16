@@ -1701,7 +1701,20 @@ type ListClusterLogsRequest struct {
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterLogsResponse.next_page_token] returned by the previous list request.
-	PageToken     string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Always return `next_page_token`, even if current page is empty.
+	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname], [LogRecord.logs.message.severity] fields.
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
+	// Examples of a filter: `message.hostname='node1.db.cloud.yandex.net'`, `message.severity IN ('E', 'F')`
+	Filter string `protobuf:"bytes,9,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,10,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1781,6 +1794,27 @@ func (x *ListClusterLogsRequest) GetPageSize() int64 {
 func (x *ListClusterLogsRequest) GetPageToken() string {
 	if x != nil {
 		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
+	if x != nil {
+		return x.AlwaysNextPageToken
+	}
+	return false
+}
+
+func (x *ListClusterLogsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
 	}
 	return ""
 }
@@ -7811,7 +7845,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v23.yandex.cloud.mdb.mongodb.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xed\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe1\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -7822,7 +7856,12 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x06 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\\\n" +
+	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
+	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
+	"\x06filter\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
+	"\border_by\x18\n" +
+	" \x01(\tR\aorderBy\"\\\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -7915,7 +7954,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\x97\x04\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"\xa0\x04\n" +
 	"\x0eUpdateHostSpec\x12*\n" +
 	"\thost_name\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=253R\bhostName\x122\n" +
 	"\x06hidden\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x06hidden\x12M\n" +
@@ -7924,8 +7963,8 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\x12;\n" +
 	"\vupdate_mask\x18\x06 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12I\n" +
-	"\x04tags\x18\a \x03(\v25.yandex.cloud.mdb.mongodb.v1.UpdateHostSpec.TagsEntryR\x04tags\x121\n" +
-	"\x05votes\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x05votes\x1a7\n" +
+	"\x04tags\x18\a \x03(\v25.yandex.cloud.mdb.mongodb.v1.UpdateHostSpec.TagsEntryR\x04tags\x12:\n" +
+	"\x05votes\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x05votes\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc1\x05\n" +
@@ -8015,7 +8054,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\xe3\x04\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"\xec\x04\n" +
 	"\bHostSpec\x12!\n" +
 	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
 	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
@@ -8026,9 +8065,9 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\x06hidden\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x06hidden\x12M\n" +
 	"\x14secondary_delay_secs\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x12secondaryDelaySecs\x128\n" +
 	"\bpriority\x18\b \x01(\v2\x1c.google.protobuf.DoubleValueR\bpriority\x12C\n" +
-	"\x04tags\x18\t \x03(\v2/.yandex.cloud.mdb.mongodb.v1.HostSpec.TagsEntryR\x04tags\x121\n" +
+	"\x04tags\x18\t \x03(\v2/.yandex.cloud.mdb.mongodb.v1.HostSpec.TagsEntryR\x04tags\x12:\n" +
 	"\x05votes\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x05votes\x1a7\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x05votes\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd7\v\n" +

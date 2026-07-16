@@ -26,9 +26,11 @@ const (
 type GetAgentInstallCommandRequest_AgentInstallCommandType int32
 
 const (
-	GetAgentInstallCommandRequest_AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED GetAgentInstallCommandRequest_AgentInstallCommandType = 0
-	GetAgentInstallCommandRequest_AGENT_INSTALL_BASH_EXTERNAL_VM         GetAgentInstallCommandRequest_AgentInstallCommandType = 1
-	GetAgentInstallCommandRequest_AGENT_INSTALL_BASH_EXTERNAL_SERVER     GetAgentInstallCommandRequest_AgentInstallCommandType = 2
+	GetAgentInstallCommandRequest_AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED   GetAgentInstallCommandRequest_AgentInstallCommandType = 0
+	GetAgentInstallCommandRequest_AGENT_INSTALL_BASH_EXTERNAL_VM           GetAgentInstallCommandRequest_AgentInstallCommandType = 1
+	GetAgentInstallCommandRequest_AGENT_INSTALL_BASH_EXTERNAL_SERVER       GetAgentInstallCommandRequest_AgentInstallCommandType = 2
+	GetAgentInstallCommandRequest_AGENT_INSTALL_POWERSHELL_EXTERNAL_VM     GetAgentInstallCommandRequest_AgentInstallCommandType = 3
+	GetAgentInstallCommandRequest_AGENT_INSTALL_POWERSHELL_EXTERNAL_SERVER GetAgentInstallCommandRequest_AgentInstallCommandType = 4
 )
 
 // Enum value maps for GetAgentInstallCommandRequest_AgentInstallCommandType.
@@ -37,11 +39,15 @@ var (
 		0: "AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED",
 		1: "AGENT_INSTALL_BASH_EXTERNAL_VM",
 		2: "AGENT_INSTALL_BASH_EXTERNAL_SERVER",
+		3: "AGENT_INSTALL_POWERSHELL_EXTERNAL_VM",
+		4: "AGENT_INSTALL_POWERSHELL_EXTERNAL_SERVER",
 	}
 	GetAgentInstallCommandRequest_AgentInstallCommandType_value = map[string]int32{
-		"AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED": 0,
-		"AGENT_INSTALL_BASH_EXTERNAL_VM":         1,
-		"AGENT_INSTALL_BASH_EXTERNAL_SERVER":     2,
+		"AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED":   0,
+		"AGENT_INSTALL_BASH_EXTERNAL_VM":           1,
+		"AGENT_INSTALL_BASH_EXTERNAL_SERVER":       2,
+		"AGENT_INSTALL_POWERSHELL_EXTERNAL_VM":     3,
+		"AGENT_INSTALL_POWERSHELL_EXTERNAL_SERVER": 4,
 	}
 )
 
@@ -180,16 +186,18 @@ var File_yandex_cloud_backup_v1_setup_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_backup_v1_setup_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/backup/v1/setup_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\"\xde\x02\n" +
+	"*yandex/cloud/backup/v1/setup_service.proto\x12\x16yandex.cloud.backup.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1dyandex/cloud/validation.proto\"\xb6\x03\n" +
 	"\x1dGetAgentInstallCommandRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12g\n" +
 	"\x04type\x18\x02 \x01(\x0e2M.yandex.cloud.backup.v1.GetAgentInstallCommandRequest.AgentInstallCommandTypeB\x04\xe8\xc71\x01R\x04type\x12\x1d\n" +
 	"\n" +
-	"policy_ids\x18\x03 \x03(\tR\tpolicyIds\"\x91\x01\n" +
+	"policy_ids\x18\x03 \x03(\tR\tpolicyIds\"\xe9\x01\n" +
 	"\x17AgentInstallCommandType\x12*\n" +
 	"&AGENT_INSTALL_COMMAND_TYPE_UNSPECIFIED\x10\x00\x12\"\n" +
 	"\x1eAGENT_INSTALL_BASH_EXTERNAL_VM\x10\x01\x12&\n" +
-	"\"AGENT_INSTALL_BASH_EXTERNAL_SERVER\x10\x02\":\n" +
+	"\"AGENT_INSTALL_BASH_EXTERNAL_SERVER\x10\x02\x12(\n" +
+	"$AGENT_INSTALL_POWERSHELL_EXTERNAL_VM\x10\x03\x12,\n" +
+	"(AGENT_INSTALL_POWERSHELL_EXTERNAL_SERVER\x10\x04\":\n" +
 	"\x1eGetAgentInstallCommandResponse\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand2\xcc\x01\n" +
 	"\fSetupService\x12\xbb\x01\n" +

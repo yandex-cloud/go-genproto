@@ -305,29 +305,54 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-type StopClusterRequest struct {
+type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Kubernetes cluster to stop.
-	// To get Kubernetes cluster ID use a [ClusterService.List] request.
-	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// ID of the Kubernetes cluster to update.
+	// To get the Kubernetes cluster ID use a [ClusterService.List] request.
+	ClusterId  string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	// Name of the Kubernetes cluster.
+	// The name must be unique within the folder.
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the Kubernetes cluster.
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	// Resource labels as `key:value` pairs.
+	// Existing set of `labels` is completely replaced by the provided set.
+	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Specification of the master update.
+	MasterSpec *MasterUpdateSpec `protobuf:"bytes,7,opt,name=master_spec,json=masterSpec,proto3" json:"master_spec,omitempty"`
+	// Types that are valid to be assigned to InternetGateway:
+	//
+	//	*UpdateClusterRequest_GatewayIpv4Address
+	InternetGateway isUpdateClusterRequest_InternetGateway `protobuf_oneof:"internet_gateway"`
+	// Service account to be used for provisioning Compute Cloud and VPC resources for Kubernetes cluster.
+	// Selected service account should have `edit` role on the folder where the Kubernetes cluster will be
+	// located and on the folder where selected network resides.
+	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
+	// Service account to be used by the worker nodes of the Kubernetes cluster to access Container Registry
+	// or to push node logs and metrics.
+	NodeServiceAccountId       string                          `protobuf:"bytes,8,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
+	NetworkPolicy              *NetworkPolicy                  `protobuf:"bytes,10,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
+	IpAllocationPolicy         *IPAllocationPolicy             `protobuf:"bytes,11,opt,name=ip_allocation_policy,json=ipAllocationPolicy,proto3" json:"ip_allocation_policy,omitempty"`
+	WorkloadIdentityFederation *WorkloadIdentityFederationSpec `protobuf:"bytes,12,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
-func (x *StopClusterRequest) Reset() {
-	*x = StopClusterRequest{}
+func (x *UpdateClusterRequest) Reset() {
+	*x = UpdateClusterRequest{}
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StopClusterRequest) String() string {
+func (x *UpdateClusterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StopClusterRequest) ProtoMessage() {}
+func (*UpdateClusterRequest) ProtoMessage() {}
 
-func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -339,17 +364,114 @@ func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
-func (*StopClusterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
+func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *StopClusterRequest) GetClusterId() string {
+func (x *UpdateClusterRequest) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
+
+func (x *UpdateClusterRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
+	if x != nil {
+		return x.UpdateMask
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetLabels() map[string]string {
+	if x != nil {
+		return x.Labels
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetMasterSpec() *MasterUpdateSpec {
+	if x != nil {
+		return x.MasterSpec
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetInternetGateway() isUpdateClusterRequest_InternetGateway {
+	if x != nil {
+		return x.InternetGateway
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetGatewayIpv4Address() string {
+	if x != nil {
+		if x, ok := x.InternetGateway.(*UpdateClusterRequest_GatewayIpv4Address); ok {
+			return x.GatewayIpv4Address
+		}
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetServiceAccountId() string {
+	if x != nil {
+		return x.ServiceAccountId
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetNodeServiceAccountId() string {
+	if x != nil {
+		return x.NodeServiceAccountId
+	}
+	return ""
+}
+
+func (x *UpdateClusterRequest) GetNetworkPolicy() *NetworkPolicy {
+	if x != nil {
+		return x.NetworkPolicy
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetIpAllocationPolicy() *IPAllocationPolicy {
+	if x != nil {
+		return x.IpAllocationPolicy
+	}
+	return nil
+}
+
+func (x *UpdateClusterRequest) GetWorkloadIdentityFederation() *WorkloadIdentityFederationSpec {
+	if x != nil {
+		return x.WorkloadIdentityFederation
+	}
+	return nil
+}
+
+type isUpdateClusterRequest_InternetGateway interface {
+	isUpdateClusterRequest_InternetGateway()
+}
+
+type UpdateClusterRequest_GatewayIpv4Address struct {
+	// Gateway IPv4 address.
+	GatewayIpv4Address string `protobuf:"bytes,6,opt,name=gateway_ipv4_address,json=gatewayIpv4Address,proto3,oneof"`
+}
+
+func (*UpdateClusterRequest_GatewayIpv4Address) isUpdateClusterRequest_InternetGateway() {}
 
 type StopClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -396,29 +518,29 @@ func (x *StopClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-type StartClusterRequest struct {
+type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Kubernetes cluster to start.
+	// ID of the Kubernetes cluster to stop.
 	// To get Kubernetes cluster ID use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *StartClusterRequest) Reset() {
-	*x = StartClusterRequest{}
+func (x *StopClusterRequest) Reset() {
+	*x = StopClusterRequest{}
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartClusterRequest) String() string {
+func (x *StopClusterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartClusterRequest) ProtoMessage() {}
+func (*StopClusterRequest) ProtoMessage() {}
 
-func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
+func (x *StopClusterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -430,12 +552,12 @@ func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
-func (*StartClusterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use StopClusterRequest.ProtoReflect.Descriptor instead.
+func (*StopClusterRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *StartClusterRequest) GetClusterId() string {
+func (x *StopClusterRequest) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
@@ -487,55 +609,29 @@ func (x *StartClusterMetadata) GetClusterId() string {
 	return ""
 }
 
-type UpdateClusterRequest struct {
+type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Kubernetes cluster to update.
-	// To get the Kubernetes cluster ID use a [ClusterService.List] request.
-	ClusterId  string                 `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Name of the Kubernetes cluster.
-	// The name must be unique within the folder.
-	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Kubernetes cluster.
-	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	// Resource labels as `key:value` pairs.
-	//
-	// Existing set of `labels` is completely replaced by the provided set.
-	Labels map[string]string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Types that are valid to be assigned to InternetGateway:
-	//
-	//	*UpdateClusterRequest_GatewayIpv4Address
-	InternetGateway isUpdateClusterRequest_InternetGateway `protobuf_oneof:"internet_gateway"`
-	// Specification of the master update.
-	MasterSpec *MasterUpdateSpec `protobuf:"bytes,7,opt,name=master_spec,json=masterSpec,proto3" json:"master_spec,omitempty"`
-	// Service account to be used for provisioning Compute Cloud and VPC resources for Kubernetes cluster.
-	// Selected service account should have `edit` role on the folder where the Kubernetes cluster will be
-	// located and on the folder where selected network resides.
-	ServiceAccountId string `protobuf:"bytes,9,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
-	// Service account to be used by the worker nodes of the Kubernetes cluster to access Container Registry
-	// or to push node logs and metrics.
-	NodeServiceAccountId       string                          `protobuf:"bytes,8,opt,name=node_service_account_id,json=nodeServiceAccountId,proto3" json:"node_service_account_id,omitempty"`
-	NetworkPolicy              *NetworkPolicy                  `protobuf:"bytes,10,opt,name=network_policy,json=networkPolicy,proto3" json:"network_policy,omitempty"`
-	IpAllocationPolicy         *IPAllocationPolicy             `protobuf:"bytes,11,opt,name=ip_allocation_policy,json=ipAllocationPolicy,proto3" json:"ip_allocation_policy,omitempty"`
-	WorkloadIdentityFederation *WorkloadIdentityFederationSpec `protobuf:"bytes,12,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// ID of the Kubernetes cluster to start.
+	// To get Kubernetes cluster ID use a [ClusterService.List] request.
+	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateClusterRequest) Reset() {
-	*x = UpdateClusterRequest{}
+func (x *StartClusterRequest) Reset() {
+	*x = StartClusterRequest{}
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateClusterRequest) String() string {
+func (x *StartClusterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateClusterRequest) ProtoMessage() {}
+func (*StartClusterRequest) ProtoMessage() {}
 
-func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
+func (x *StartClusterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -547,114 +643,17 @@ func (x *UpdateClusterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateClusterRequest.ProtoReflect.Descriptor instead.
-func (*UpdateClusterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use StartClusterRequest.ProtoReflect.Descriptor instead.
+func (*StartClusterRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *UpdateClusterRequest) GetClusterId() string {
+func (x *StartClusterRequest) GetClusterId() string {
 	if x != nil {
 		return x.ClusterId
 	}
 	return ""
 }
-
-func (x *UpdateClusterRequest) GetUpdateMask() *fieldmaskpb.FieldMask {
-	if x != nil {
-		return x.UpdateMask
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *UpdateClusterRequest) GetDescription() string {
-	if x != nil {
-		return x.Description
-	}
-	return ""
-}
-
-func (x *UpdateClusterRequest) GetLabels() map[string]string {
-	if x != nil {
-		return x.Labels
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetInternetGateway() isUpdateClusterRequest_InternetGateway {
-	if x != nil {
-		return x.InternetGateway
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetGatewayIpv4Address() string {
-	if x != nil {
-		if x, ok := x.InternetGateway.(*UpdateClusterRequest_GatewayIpv4Address); ok {
-			return x.GatewayIpv4Address
-		}
-	}
-	return ""
-}
-
-func (x *UpdateClusterRequest) GetMasterSpec() *MasterUpdateSpec {
-	if x != nil {
-		return x.MasterSpec
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetServiceAccountId() string {
-	if x != nil {
-		return x.ServiceAccountId
-	}
-	return ""
-}
-
-func (x *UpdateClusterRequest) GetNodeServiceAccountId() string {
-	if x != nil {
-		return x.NodeServiceAccountId
-	}
-	return ""
-}
-
-func (x *UpdateClusterRequest) GetNetworkPolicy() *NetworkPolicy {
-	if x != nil {
-		return x.NetworkPolicy
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetIpAllocationPolicy() *IPAllocationPolicy {
-	if x != nil {
-		return x.IpAllocationPolicy
-	}
-	return nil
-}
-
-func (x *UpdateClusterRequest) GetWorkloadIdentityFederation() *WorkloadIdentityFederationSpec {
-	if x != nil {
-		return x.WorkloadIdentityFederation
-	}
-	return nil
-}
-
-type isUpdateClusterRequest_InternetGateway interface {
-	isUpdateClusterRequest_InternetGateway()
-}
-
-type UpdateClusterRequest_GatewayIpv4Address struct {
-	// Gateway IPv4 address.
-	GatewayIpv4Address string `protobuf:"bytes,6,opt,name=gateway_ipv4_address,json=gatewayIpv4Address,proto3,oneof"`
-}
-
-func (*UpdateClusterRequest_GatewayIpv4Address) isUpdateClusterRequest_InternetGateway() {}
 
 type MasterUpdateSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -813,6 +812,7 @@ type CreateClusterRequest struct {
 	// Resource labels as `key:value` pairs.
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ID of the network.
+	// This field is required.
 	NetworkId string `protobuf:"bytes,5,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
 	// Master specification of the Kubernetes cluster.
 	MasterSpec *MasterSpec `protobuf:"bytes,6,opt,name=master_spec,json=masterSpec,proto3" json:"master_spec,omitempty"`
@@ -1577,12 +1577,12 @@ type MasterSpec struct {
 	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
 	// Maintenance policy of the master.
 	MaintenancePolicy *MasterMaintenancePolicy `protobuf:"bytes,4,opt,name=maintenance_policy,json=maintenancePolicy,proto3" json:"maintenance_policy,omitempty"`
+	// Scale policy of the master.
+	ScalePolicy *MasterScalePolicySpec `protobuf:"bytes,12,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	// Master security groups.
 	SecurityGroupIds []string `protobuf:"bytes,6,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Cloud Logging for master components.
 	MasterLogging *MasterLogging `protobuf:"bytes,7,opt,name=master_logging,json=masterLogging,proto3" json:"master_logging,omitempty"`
-	// Scale policy of the master.
-	ScalePolicy   *MasterScalePolicySpec `protobuf:"bytes,12,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1684,6 +1684,13 @@ func (x *MasterSpec) GetMaintenancePolicy() *MasterMaintenancePolicy {
 	return nil
 }
 
+func (x *MasterSpec) GetScalePolicy() *MasterScalePolicySpec {
+	if x != nil {
+		return x.ScalePolicy
+	}
+	return nil
+}
+
 func (x *MasterSpec) GetSecurityGroupIds() []string {
 	if x != nil {
 		return x.SecurityGroupIds
@@ -1694,13 +1701,6 @@ func (x *MasterSpec) GetSecurityGroupIds() []string {
 func (x *MasterSpec) GetMasterLogging() *MasterLogging {
 	if x != nil {
 		return x.MasterLogging
-	}
-	return nil
-}
-
-func (x *MasterSpec) GetScalePolicy() *MasterScalePolicySpec {
-	if x != nil {
-		return x.ScalePolicy
 	}
 	return nil
 }
@@ -1723,6 +1723,72 @@ func (*MasterSpec_ZonalMasterSpec) isMasterSpec_MasterType() {}
 
 func (*MasterSpec_RegionalMasterSpec) isMasterSpec_MasterType() {}
 
+type MasterScalePolicySpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ScaleType:
+	//
+	//	*MasterScalePolicySpec_AutoScale_
+	ScaleType     isMasterScalePolicySpec_ScaleType `protobuf_oneof:"scale_type"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MasterScalePolicySpec) Reset() {
+	*x = MasterScalePolicySpec{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MasterScalePolicySpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MasterScalePolicySpec) ProtoMessage() {}
+
+func (x *MasterScalePolicySpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MasterScalePolicySpec.ProtoReflect.Descriptor instead.
+func (*MasterScalePolicySpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *MasterScalePolicySpec) GetScaleType() isMasterScalePolicySpec_ScaleType {
+	if x != nil {
+		return x.ScaleType
+	}
+	return nil
+}
+
+func (x *MasterScalePolicySpec) GetAutoScale() *MasterScalePolicySpec_AutoScale {
+	if x != nil {
+		if x, ok := x.ScaleType.(*MasterScalePolicySpec_AutoScale_); ok {
+			return x.AutoScale
+		}
+	}
+	return nil
+}
+
+type isMasterScalePolicySpec_ScaleType interface {
+	isMasterScalePolicySpec_ScaleType()
+}
+
+type MasterScalePolicySpec_AutoScale_ struct {
+	AutoScale *MasterScalePolicySpec_AutoScale `protobuf:"bytes,2,opt,name=auto_scale,json=autoScale,proto3,oneof"`
+}
+
+func (*MasterScalePolicySpec_AutoScale_) isMasterScalePolicySpec_ScaleType() {}
+
 type ZonalMasterSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the availability zone.
@@ -1737,7 +1803,7 @@ type ZonalMasterSpec struct {
 
 func (x *ZonalMasterSpec) Reset() {
 	*x = ZonalMasterSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1749,7 +1815,7 @@ func (x *ZonalMasterSpec) String() string {
 func (*ZonalMasterSpec) ProtoMessage() {}
 
 func (x *ZonalMasterSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1762,7 +1828,7 @@ func (x *ZonalMasterSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ZonalMasterSpec.ProtoReflect.Descriptor instead.
 func (*ZonalMasterSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{23}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ZonalMasterSpec) GetZoneId() string {
@@ -1782,78 +1848,6 @@ func (x *ZonalMasterSpec) GetInternalV4AddressSpec() *InternalAddressSpec {
 func (x *ZonalMasterSpec) GetExternalV4AddressSpec() *ExternalAddressSpec {
 	if x != nil {
 		return x.ExternalV4AddressSpec
-	}
-	return nil
-}
-
-type RegionalMasterSpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the availability zone where the master resides.
-	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
-	// List of locations where the master will be allocated.
-	Locations []*MasterLocation `protobuf:"bytes,2,rep,name=locations,proto3" json:"locations,omitempty"`
-	// Specify to allocate a static public IP for the master.
-	ExternalV4AddressSpec *ExternalAddressSpec `protobuf:"bytes,3,opt,name=external_v4_address_spec,json=externalV4AddressSpec,proto3" json:"external_v4_address_spec,omitempty"`
-	// Specification of parameters for external IPv6 networking.
-	ExternalV6AddressSpec *ExternalAddressSpec `protobuf:"bytes,4,opt,name=external_v6_address_spec,json=externalV6AddressSpec,proto3" json:"external_v6_address_spec,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *RegionalMasterSpec) Reset() {
-	*x = RegionalMasterSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RegionalMasterSpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RegionalMasterSpec) ProtoMessage() {}
-
-func (x *RegionalMasterSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RegionalMasterSpec.ProtoReflect.Descriptor instead.
-func (*RegionalMasterSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *RegionalMasterSpec) GetRegionId() string {
-	if x != nil {
-		return x.RegionId
-	}
-	return ""
-}
-
-func (x *RegionalMasterSpec) GetLocations() []*MasterLocation {
-	if x != nil {
-		return x.Locations
-	}
-	return nil
-}
-
-func (x *RegionalMasterSpec) GetExternalV4AddressSpec() *ExternalAddressSpec {
-	if x != nil {
-		return x.ExternalV4AddressSpec
-	}
-	return nil
-}
-
-func (x *RegionalMasterSpec) GetExternalV6AddressSpec() *ExternalAddressSpec {
-	if x != nil {
-		return x.ExternalV6AddressSpec
 	}
 	return nil
 }
@@ -1948,6 +1942,78 @@ func (x *ExternalAddressSpec) GetAddress() string {
 	return ""
 }
 
+type RegionalMasterSpec struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the availability zone where the master resides.
+	RegionId string `protobuf:"bytes,1,opt,name=region_id,json=regionId,proto3" json:"region_id,omitempty"`
+	// List of locations where the master will be allocated.
+	Locations []*MasterLocation `protobuf:"bytes,2,rep,name=locations,proto3" json:"locations,omitempty"`
+	// Specify to allocate a static public IP for the master.
+	ExternalV4AddressSpec *ExternalAddressSpec `protobuf:"bytes,3,opt,name=external_v4_address_spec,json=externalV4AddressSpec,proto3" json:"external_v4_address_spec,omitempty"`
+	// Specification of parameters for external IPv6 networking.
+	ExternalV6AddressSpec *ExternalAddressSpec `protobuf:"bytes,4,opt,name=external_v6_address_spec,json=externalV6AddressSpec,proto3" json:"external_v6_address_spec,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *RegionalMasterSpec) Reset() {
+	*x = RegionalMasterSpec{}
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RegionalMasterSpec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RegionalMasterSpec) ProtoMessage() {}
+
+func (x *RegionalMasterSpec) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RegionalMasterSpec.ProtoReflect.Descriptor instead.
+func (*RegionalMasterSpec) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *RegionalMasterSpec) GetRegionId() string {
+	if x != nil {
+		return x.RegionId
+	}
+	return ""
+}
+
+func (x *RegionalMasterSpec) GetLocations() []*MasterLocation {
+	if x != nil {
+		return x.Locations
+	}
+	return nil
+}
+
+func (x *RegionalMasterSpec) GetExternalV4AddressSpec() *ExternalAddressSpec {
+	if x != nil {
+		return x.ExternalV4AddressSpec
+	}
+	return nil
+}
+
+func (x *RegionalMasterSpec) GetExternalV6AddressSpec() *ExternalAddressSpec {
+	if x != nil {
+		return x.ExternalV6AddressSpec
+	}
+	return nil
+}
+
 type MasterLocation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the availability zone.
@@ -1961,7 +2027,7 @@ type MasterLocation struct {
 
 func (x *MasterLocation) Reset() {
 	*x = MasterLocation{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1973,7 +2039,7 @@ func (x *MasterLocation) String() string {
 func (*MasterLocation) ProtoMessage() {}
 
 func (x *MasterLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[27]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1986,7 +2052,7 @@ func (x *MasterLocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterLocation.ProtoReflect.Descriptor instead.
 func (*MasterLocation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{27}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *MasterLocation) GetZoneId() string {
@@ -2016,7 +2082,7 @@ type LocationSpec struct {
 
 func (x *LocationSpec) Reset() {
 	*x = LocationSpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2028,7 +2094,7 @@ func (x *LocationSpec) String() string {
 func (*LocationSpec) ProtoMessage() {}
 
 func (x *LocationSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[28]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,7 +2107,7 @@ func (x *LocationSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocationSpec.ProtoReflect.Descriptor instead.
 func (*LocationSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{28}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *LocationSpec) GetZoneId() string {
@@ -2070,7 +2136,7 @@ type RescheduleMaintenanceRequest struct {
 
 func (x *RescheduleMaintenanceRequest) Reset() {
 	*x = RescheduleMaintenanceRequest{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2082,7 +2148,7 @@ func (x *RescheduleMaintenanceRequest) String() string {
 func (*RescheduleMaintenanceRequest) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[29]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2095,7 +2161,7 @@ func (x *RescheduleMaintenanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceRequest.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceRequest) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{29}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RescheduleMaintenanceRequest) GetClusterId() string {
@@ -2121,7 +2187,7 @@ type RescheduleMaintenanceMetadata struct {
 
 func (x *RescheduleMaintenanceMetadata) Reset() {
 	*x = RescheduleMaintenanceMetadata{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2133,7 +2199,7 @@ func (x *RescheduleMaintenanceMetadata) String() string {
 func (*RescheduleMaintenanceMetadata) ProtoMessage() {}
 
 func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[30]
+	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2146,7 +2212,7 @@ func (x *RescheduleMaintenanceMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RescheduleMaintenanceMetadata.ProtoReflect.Descriptor instead.
 func (*RescheduleMaintenanceMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{30}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
@@ -2155,72 +2221,6 @@ func (x *RescheduleMaintenanceMetadata) GetClusterId() string {
 	}
 	return ""
 }
-
-type MasterScalePolicySpec struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ScaleType:
-	//
-	//	*MasterScalePolicySpec_AutoScale_
-	ScaleType     isMasterScalePolicySpec_ScaleType `protobuf_oneof:"scale_type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *MasterScalePolicySpec) Reset() {
-	*x = MasterScalePolicySpec{}
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *MasterScalePolicySpec) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MasterScalePolicySpec) ProtoMessage() {}
-
-func (x *MasterScalePolicySpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MasterScalePolicySpec.ProtoReflect.Descriptor instead.
-func (*MasterScalePolicySpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31}
-}
-
-func (x *MasterScalePolicySpec) GetScaleType() isMasterScalePolicySpec_ScaleType {
-	if x != nil {
-		return x.ScaleType
-	}
-	return nil
-}
-
-func (x *MasterScalePolicySpec) GetAutoScale() *MasterScalePolicySpec_AutoScale {
-	if x != nil {
-		if x, ok := x.ScaleType.(*MasterScalePolicySpec_AutoScale_); ok {
-			return x.AutoScale
-		}
-	}
-	return nil
-}
-
-type isMasterScalePolicySpec_ScaleType interface {
-	isMasterScalePolicySpec_ScaleType()
-}
-
-type MasterScalePolicySpec_AutoScale_ struct {
-	AutoScale *MasterScalePolicySpec_AutoScale `protobuf:"bytes,2,opt,name=auto_scale,json=autoScale,proto3,oneof"`
-}
-
-func (*MasterScalePolicySpec_AutoScale_) isMasterScalePolicySpec_ScaleType() {}
 
 type WorkloadIdentityFederationSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -2303,7 +2303,7 @@ func (x *MasterScalePolicySpec_AutoScale) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MasterScalePolicySpec_AutoScale.ProtoReflect.Descriptor instead.
 func (*MasterScalePolicySpec_AutoScale) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{31, 0}
+	return file_yandex_cloud_k8s_v1_cluster_service_proto_rawDescGZIP(), []int{23, 0}
 }
 
 func (x *MasterScalePolicySpec_AutoScale) GetMinResourcePresetId() string {
@@ -2317,7 +2317,7 @@ var File_yandex_cloud_k8s_v1_cluster_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/k8s/v1/cluster_service.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a!yandex/cloud/k8s/v1/cluster.proto\x1a\x1eyandex/cloud/k8s/v1/node.proto\x1a$yandex/cloud/k8s/v1/node_group.proto\x1a!yandex/cloud/k8s/v1/version.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
+	")yandex/cloud/k8s/v1/cluster_service.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a!yandex/cloud/k8s/v1/cluster.proto\x1a\x1eyandex/cloud/k8s/v1/node.proto\x1a$yandex/cloud/k8s/v1/node_group.proto\x1a!yandex/cloud/k8s/v1/version.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"8\n" +
 	"\x11GetClusterRequest\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xaf\x01\n" +
@@ -2337,30 +2337,18 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"6\n" +
 	"\x15DeleteClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"9\n" +
-	"\x12StopClusterRequest\x12#\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"4\n" +
-	"\x13StopClusterMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\":\n" +
-	"\x13StartClusterRequest\x12#\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"5\n" +
-	"\x14StartClusterMetadata\x12\x1d\n" +
-	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xcb\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xc3\a\n" +
 	"\x14UpdateClusterRequest\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x128\n" +
 	"\x04name\x18\x03 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x92\x01\n" +
-	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12<\n" +
-	"\x14gateway_ipv4_address\x18\x06 \x01(\tB\b\x8a\xc81\x04<=15H\x00R\x12gatewayIpv4Address\x12F\n" +
+	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
+	"\x06labels\x18\x05 \x03(\v25.yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12F\n" +
 	"\vmaster_spec\x18\a \x01(\v2%.yandex.cloud.k8s.v1.MasterUpdateSpecR\n" +
-	"masterSpec\x12,\n" +
+	"masterSpec\x12<\n" +
+	"\x14gateway_ipv4_address\x18\x06 \x01(\tB\b\x8a\xc81\x04<=15H\x00R\x12gatewayIpv4Address\x12,\n" +
 	"\x12service_account_id\x18\t \x01(\tR\x10serviceAccountId\x125\n" +
 	"\x17node_service_account_id\x18\b \x01(\tR\x14nodeServiceAccountId\x12I\n" +
 	"\x0enetwork_policy\x18\n" +
@@ -2370,7 +2358,19 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x12\n" +
-	"\x10internet_gateway\"\x9d\x04\n" +
+	"\x10internet_gateway\"4\n" +
+	"\x13StopClusterMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"9\n" +
+	"\x12StopClusterRequest\x12#\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"5\n" +
+	"\x14StartClusterMetadata\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\":\n" +
+	"\x13StartClusterRequest\x12#\n" +
+	"\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\x9d\x04\n" +
 	"\x10MasterUpdateSpec\x12@\n" +
 	"\aversion\x18\x01 \x01(\v2&.yandex.cloud.k8s.v1.UpdateVersionSpecR\aversion\x12[\n" +
 	"\x12maintenance_policy\x18\x02 \x01(\v2,.yandex.cloud.k8s.v1.MasterMaintenancePolicyR\x11maintenancePolicy\x12,\n" +
@@ -2381,18 +2381,18 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\fscale_policy\x18\a \x01(\v2*.yandex.cloud.k8s.v1.MasterScalePolicySpecR\vscalePolicy\"6\n" +
 	"\x15UpdateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x97\t\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x93\t\n" +
 	"\x14CreateClusterRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x128\n" +
 	"\x04name\x18\x02 \x01(\tB$\xf2\xc71 |[a-z]([-a-z0-9]{0,61}[a-z0-9])?R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x92\x01\n" +
-	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x041-63R\x06labels\x12#\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x8a\x01\n" +
+	"\x06labels\x18\x04 \x03(\v25.yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\tnetworkId\x12F\n" +
+	"network_id\x18\x05 \x01(\tR\tnetworkId\x12F\n" +
 	"\vmaster_spec\x18\x06 \x01(\v2\x1f.yandex.cloud.k8s.v1.MasterSpecB\x04\xe8\xc71\x01R\n" +
 	"masterSpec\x12Y\n" +
-	"\x14ip_allocation_policy\x18\a \x01(\v2'.yandex.cloud.k8s.v1.IPAllocationPolicyR\x12ipAllocationPolicy\x122\n" +
-	"\x14gateway_ipv4_address\x18\b \x01(\tH\x00R\x12gatewayIpv4Address\x122\n" +
+	"\x14ip_allocation_policy\x18\a \x01(\v2'.yandex.cloud.k8s.v1.IPAllocationPolicyR\x12ipAllocationPolicy\x12<\n" +
+	"\x14gateway_ipv4_address\x18\b \x01(\tB\b\x8a\xc81\x04<=15H\x00R\x12gatewayIpv4Address\x122\n" +
 	"\x12service_account_id\x18\t \x01(\tB\x04\xe8\xc71\x01R\x10serviceAccountId\x12;\n" +
 	"\x17node_service_account_id\x18\n" +
 	" \x01(\tB\x04\xe8\xc71\x01R\x14nodeServiceAccountId\x12L\n" +
@@ -2462,24 +2462,31 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV4AddressSpec\x12a\n" +
 	"\x18external_v6_address_spec\x18\v \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV6AddressSpec\x12\x18\n" +
 	"\aversion\x18\x03 \x01(\tR\aversion\x12[\n" +
-	"\x12maintenance_policy\x18\x04 \x01(\v2,.yandex.cloud.k8s.v1.MasterMaintenancePolicyR\x11maintenancePolicy\x12,\n" +
+	"\x12maintenance_policy\x18\x04 \x01(\v2,.yandex.cloud.k8s.v1.MasterMaintenancePolicyR\x11maintenancePolicy\x12M\n" +
+	"\fscale_policy\x18\f \x01(\v2*.yandex.cloud.k8s.v1.MasterScalePolicySpecR\vscalePolicy\x12,\n" +
 	"\x12security_group_ids\x18\x06 \x03(\tR\x10securityGroupIds\x12I\n" +
-	"\x0emaster_logging\x18\a \x01(\v2\".yandex.cloud.k8s.v1.MasterLoggingR\rmasterLogging\x12M\n" +
-	"\fscale_policy\x18\f \x01(\v2*.yandex.cloud.k8s.v1.MasterScalePolicySpecR\vscalePolicyB\r\n" +
-	"\vmaster_typeJ\x04\b\x05\x10\x06\"\xf6\x01\n" +
+	"\x0emaster_logging\x18\a \x01(\v2\".yandex.cloud.k8s.v1.MasterLoggingR\rmasterLoggingB\r\n" +
+	"\vmaster_typeJ\x04\b\x05\x10\x06\"\xd0\x01\n" +
+	"\x15MasterScalePolicySpec\x12U\n" +
+	"\n" +
+	"auto_scale\x18\x02 \x01(\v24.yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScaleH\x00R\tautoScale\x1aF\n" +
+	"\tAutoScale\x129\n" +
+	"\x16min_resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x13minResourcePresetIdB\x12\n" +
+	"\n" +
+	"scale_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02\"\xf6\x01\n" +
 	"\x0fZonalMasterSpec\x12\x1d\n" +
 	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12a\n" +
 	"\x18internal_v4_address_spec\x18\x02 \x01(\v2(.yandex.cloud.k8s.v1.InternalAddressSpecR\x15internalV4AddressSpec\x12a\n" +
-	"\x18external_v4_address_spec\x18\x03 \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV4AddressSpec\"\xc0\x02\n" +
+	"\x18external_v4_address_spec\x18\x03 \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV4AddressSpec\"8\n" +
+	"\x13InternalAddressSpec\x12\x1b\n" +
+	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetIdJ\x04\b\x01\x10\x02\"/\n" +
+	"\x13ExternalAddressSpec\x12\x18\n" +
+	"\aaddress\x18\x01 \x01(\tR\aaddress\"\xc0\x02\n" +
 	"\x12RegionalMasterSpec\x12!\n" +
 	"\tregion_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bregionId\x12A\n" +
 	"\tlocations\x18\x02 \x03(\v2#.yandex.cloud.k8s.v1.MasterLocationR\tlocations\x12a\n" +
 	"\x18external_v4_address_spec\x18\x03 \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV4AddressSpec\x12a\n" +
-	"\x18external_v6_address_spec\x18\x04 \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV6AddressSpec\"2\n" +
-	"\x13InternalAddressSpec\x12\x1b\n" +
-	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\"/\n" +
-	"\x13ExternalAddressSpec\x12\x18\n" +
-	"\aaddress\x18\x01 \x01(\tR\aaddress\"\x92\x01\n" +
+	"\x18external_v6_address_spec\x18\x04 \x01(\v2(.yandex.cloud.k8s.v1.ExternalAddressSpecR\x15externalV6AddressSpec\"\x92\x01\n" +
 	"\x0eMasterLocation\x12\x1d\n" +
 	"\azone_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12a\n" +
 	"\x18internal_v4_address_spec\x18\x02 \x01(\v2(.yandex.cloud.k8s.v1.InternalAddressSpecR\x15internalV4AddressSpec\"J\n" +
@@ -2492,14 +2499,7 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\rdelayed_until\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\fdelayedUntil\">\n" +
 	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xd0\x01\n" +
-	"\x15MasterScalePolicySpec\x12U\n" +
-	"\n" +
-	"auto_scale\x18\x02 \x01(\v24.yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScaleH\x00R\tautoScale\x1aF\n" +
-	"\tAutoScale\x129\n" +
-	"\x16min_resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x13minResourcePresetIdB\x12\n" +
-	"\n" +
-	"scale_type\x12\x04\xc0\xc11\x01J\x04\b\x01\x10\x02\":\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\":\n" +
 	"\x1eWorkloadIdentityFederationSpec\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled2\x91\x15\n" +
 	"\x0eClusterService\x12\x81\x01\n" +
@@ -2517,9 +2517,9 @@ const file_yandex_cloud_k8s_v1_cluster_service_proto_rawDesc = "" +
 	"\x14StartClusterMetadata\x12\aCluster\x82\xd3\xe4\x93\x027:\x01*\"2/managed-kubernetes/v1/clusters/{cluster_id}:start\x12\xf8\x01\n" +
 	"\x15RescheduleMaintenance\x121.yandex.cloud.k8s.v1.RescheduleMaintenanceRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xb2\xd2*6\n" +
 	"\x1dRescheduleMaintenanceMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02H:\x01*\"C/managed-kubernetes/v1/clusters/{cluster_id}:reschedule-maintenance\x12\xb8\x01\n" +
-	"\x0eListNodeGroups\x121.yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest\x1a2.yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-kubernetes/v1/clusters/{cluster_id}/nodeGroups\x12\xb8\x01\n" +
-	"\x0eListOperations\x121.yandex.cloud.k8s.v1.ListClusterOperationsRequest\x1a2.yandex.cloud.k8s.v1.ListClusterOperationsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-kubernetes/v1/clusters/{cluster_id}/operations\x12\xa4\x01\n" +
-	"\tListNodes\x12,.yandex.cloud.k8s.v1.ListClusterNodesRequest\x1a-.yandex.cloud.k8s.v1.ListClusterNodesResponse\":\x82\xd3\xe4\x93\x024\x122/managed-kubernetes/v1/clusters/{cluster_id}/nodes\x12\xbf\x01\n" +
+	"\x0eListNodeGroups\x121.yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest\x1a2.yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-kubernetes/v1/clusters/{cluster_id}/nodeGroups\x12\xa4\x01\n" +
+	"\tListNodes\x12,.yandex.cloud.k8s.v1.ListClusterNodesRequest\x1a-.yandex.cloud.k8s.v1.ListClusterNodesResponse\":\x82\xd3\xe4\x93\x024\x122/managed-kubernetes/v1/clusters/{cluster_id}/nodes\x12\xb8\x01\n" +
+	"\x0eListOperations\x121.yandex.cloud.k8s.v1.ListClusterOperationsRequest\x1a2.yandex.cloud.k8s.v1.ListClusterOperationsResponse\"?\x82\xd3\xe4\x93\x029\x127/managed-kubernetes/v1/clusters/{cluster_id}/operations\x12\xbf\x01\n" +
 	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\"H\x82\xd3\xe4\x93\x02B\x12@/managed-kubernetes/v1/clusters/{resource_id}:listAccessBindings\x12\xfe\x01\n" +
 	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x96\x01\xb2\xd2*H\n" +
 	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02D:\x01*\"?/managed-kubernetes/v1/clusters/{resource_id}:setAccessBindings\x12\x8a\x02\n" +
@@ -2546,11 +2546,11 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*ListClustersResponse)(nil),               // 2: yandex.cloud.k8s.v1.ListClustersResponse
 	(*DeleteClusterRequest)(nil),               // 3: yandex.cloud.k8s.v1.DeleteClusterRequest
 	(*DeleteClusterMetadata)(nil),              // 4: yandex.cloud.k8s.v1.DeleteClusterMetadata
-	(*StopClusterRequest)(nil),                 // 5: yandex.cloud.k8s.v1.StopClusterRequest
+	(*UpdateClusterRequest)(nil),               // 5: yandex.cloud.k8s.v1.UpdateClusterRequest
 	(*StopClusterMetadata)(nil),                // 6: yandex.cloud.k8s.v1.StopClusterMetadata
-	(*StartClusterRequest)(nil),                // 7: yandex.cloud.k8s.v1.StartClusterRequest
+	(*StopClusterRequest)(nil),                 // 7: yandex.cloud.k8s.v1.StopClusterRequest
 	(*StartClusterMetadata)(nil),               // 8: yandex.cloud.k8s.v1.StartClusterMetadata
-	(*UpdateClusterRequest)(nil),               // 9: yandex.cloud.k8s.v1.UpdateClusterRequest
+	(*StartClusterRequest)(nil),                // 9: yandex.cloud.k8s.v1.StartClusterRequest
 	(*MasterUpdateSpec)(nil),                   // 10: yandex.cloud.k8s.v1.MasterUpdateSpec
 	(*UpdateClusterMetadata)(nil),              // 11: yandex.cloud.k8s.v1.UpdateClusterMetadata
 	(*CreateClusterRequest)(nil),               // 12: yandex.cloud.k8s.v1.CreateClusterRequest
@@ -2564,15 +2564,15 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_goTypes = []any{
 	(*ListClusterNodesRequest)(nil),            // 20: yandex.cloud.k8s.v1.ListClusterNodesRequest
 	(*ListClusterNodesResponse)(nil),           // 21: yandex.cloud.k8s.v1.ListClusterNodesResponse
 	(*MasterSpec)(nil),                         // 22: yandex.cloud.k8s.v1.MasterSpec
-	(*ZonalMasterSpec)(nil),                    // 23: yandex.cloud.k8s.v1.ZonalMasterSpec
-	(*RegionalMasterSpec)(nil),                 // 24: yandex.cloud.k8s.v1.RegionalMasterSpec
+	(*MasterScalePolicySpec)(nil),              // 23: yandex.cloud.k8s.v1.MasterScalePolicySpec
+	(*ZonalMasterSpec)(nil),                    // 24: yandex.cloud.k8s.v1.ZonalMasterSpec
 	(*InternalAddressSpec)(nil),                // 25: yandex.cloud.k8s.v1.InternalAddressSpec
 	(*ExternalAddressSpec)(nil),                // 26: yandex.cloud.k8s.v1.ExternalAddressSpec
-	(*MasterLocation)(nil),                     // 27: yandex.cloud.k8s.v1.MasterLocation
-	(*LocationSpec)(nil),                       // 28: yandex.cloud.k8s.v1.LocationSpec
-	(*RescheduleMaintenanceRequest)(nil),       // 29: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
-	(*RescheduleMaintenanceMetadata)(nil),      // 30: yandex.cloud.k8s.v1.RescheduleMaintenanceMetadata
-	(*MasterScalePolicySpec)(nil),              // 31: yandex.cloud.k8s.v1.MasterScalePolicySpec
+	(*RegionalMasterSpec)(nil),                 // 27: yandex.cloud.k8s.v1.RegionalMasterSpec
+	(*MasterLocation)(nil),                     // 28: yandex.cloud.k8s.v1.MasterLocation
+	(*LocationSpec)(nil),                       // 29: yandex.cloud.k8s.v1.LocationSpec
+	(*RescheduleMaintenanceRequest)(nil),       // 30: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
+	(*RescheduleMaintenanceMetadata)(nil),      // 31: yandex.cloud.k8s.v1.RescheduleMaintenanceMetadata
 	(*WorkloadIdentityFederationSpec)(nil),     // 32: yandex.cloud.k8s.v1.WorkloadIdentityFederationSpec
 	nil,                                        // 33: yandex.cloud.k8s.v1.UpdateClusterRequest.LabelsEntry
 	nil,                                        // 34: yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
@@ -2607,9 +2607,9 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
 	40, // 7: yandex.cloud.k8s.v1.MasterUpdateSpec.version:type_name -> yandex.cloud.k8s.v1.UpdateVersionSpec
 	41, // 8: yandex.cloud.k8s.v1.MasterUpdateSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
 	42, // 9: yandex.cloud.k8s.v1.MasterUpdateSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	28, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	29, // 10: yandex.cloud.k8s.v1.MasterUpdateSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
 	26, // 11: yandex.cloud.k8s.v1.MasterUpdateSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	31, // 12: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	23, // 12: yandex.cloud.k8s.v1.MasterUpdateSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
 	34, // 13: yandex.cloud.k8s.v1.CreateClusterRequest.labels:type_name -> yandex.cloud.k8s.v1.CreateClusterRequest.LabelsEntry
 	22, // 14: yandex.cloud.k8s.v1.CreateClusterRequest.master_spec:type_name -> yandex.cloud.k8s.v1.MasterSpec
 	39, // 15: yandex.cloud.k8s.v1.CreateClusterRequest.ip_allocation_policy:type_name -> yandex.cloud.k8s.v1.IPAllocationPolicy
@@ -2621,33 +2621,33 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
 	46, // 21: yandex.cloud.k8s.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	47, // 22: yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse.node_groups:type_name -> yandex.cloud.k8s.v1.NodeGroup
 	48, // 23: yandex.cloud.k8s.v1.ListClusterNodesResponse.nodes:type_name -> yandex.cloud.k8s.v1.Node
-	23, // 24: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
-	24, // 25: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
-	28, // 26: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
+	24, // 24: yandex.cloud.k8s.v1.MasterSpec.zonal_master_spec:type_name -> yandex.cloud.k8s.v1.ZonalMasterSpec
+	27, // 25: yandex.cloud.k8s.v1.MasterSpec.regional_master_spec:type_name -> yandex.cloud.k8s.v1.RegionalMasterSpec
+	29, // 26: yandex.cloud.k8s.v1.MasterSpec.locations:type_name -> yandex.cloud.k8s.v1.LocationSpec
 	26, // 27: yandex.cloud.k8s.v1.MasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
 	26, // 28: yandex.cloud.k8s.v1.MasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
 	41, // 29: yandex.cloud.k8s.v1.MasterSpec.maintenance_policy:type_name -> yandex.cloud.k8s.v1.MasterMaintenancePolicy
-	42, // 30: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
-	31, // 31: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
-	25, // 32: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	26, // 33: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	27, // 34: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
-	26, // 35: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	26, // 36: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
-	25, // 37: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
-	49, // 38: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	35, // 39: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	23, // 30: yandex.cloud.k8s.v1.MasterSpec.scale_policy:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec
+	42, // 31: yandex.cloud.k8s.v1.MasterSpec.master_logging:type_name -> yandex.cloud.k8s.v1.MasterLogging
+	35, // 32: yandex.cloud.k8s.v1.MasterScalePolicySpec.auto_scale:type_name -> yandex.cloud.k8s.v1.MasterScalePolicySpec.AutoScale
+	25, // 33: yandex.cloud.k8s.v1.ZonalMasterSpec.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	26, // 34: yandex.cloud.k8s.v1.ZonalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	28, // 35: yandex.cloud.k8s.v1.RegionalMasterSpec.locations:type_name -> yandex.cloud.k8s.v1.MasterLocation
+	26, // 36: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v4_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	26, // 37: yandex.cloud.k8s.v1.RegionalMasterSpec.external_v6_address_spec:type_name -> yandex.cloud.k8s.v1.ExternalAddressSpec
+	25, // 38: yandex.cloud.k8s.v1.MasterLocation.internal_v4_address_spec:type_name -> yandex.cloud.k8s.v1.InternalAddressSpec
+	49, // 39: yandex.cloud.k8s.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
 	0,  // 40: yandex.cloud.k8s.v1.ClusterService.Get:input_type -> yandex.cloud.k8s.v1.GetClusterRequest
 	1,  // 41: yandex.cloud.k8s.v1.ClusterService.List:input_type -> yandex.cloud.k8s.v1.ListClustersRequest
 	12, // 42: yandex.cloud.k8s.v1.ClusterService.Create:input_type -> yandex.cloud.k8s.v1.CreateClusterRequest
-	9,  // 43: yandex.cloud.k8s.v1.ClusterService.Update:input_type -> yandex.cloud.k8s.v1.UpdateClusterRequest
+	5,  // 43: yandex.cloud.k8s.v1.ClusterService.Update:input_type -> yandex.cloud.k8s.v1.UpdateClusterRequest
 	3,  // 44: yandex.cloud.k8s.v1.ClusterService.Delete:input_type -> yandex.cloud.k8s.v1.DeleteClusterRequest
-	5,  // 45: yandex.cloud.k8s.v1.ClusterService.Stop:input_type -> yandex.cloud.k8s.v1.StopClusterRequest
-	7,  // 46: yandex.cloud.k8s.v1.ClusterService.Start:input_type -> yandex.cloud.k8s.v1.StartClusterRequest
-	29, // 47: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
+	7,  // 45: yandex.cloud.k8s.v1.ClusterService.Stop:input_type -> yandex.cloud.k8s.v1.StopClusterRequest
+	9,  // 46: yandex.cloud.k8s.v1.ClusterService.Start:input_type -> yandex.cloud.k8s.v1.StartClusterRequest
+	30, // 47: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.k8s.v1.RescheduleMaintenanceRequest
 	18, // 48: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:input_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsRequest
-	16, // 49: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
-	20, // 50: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
+	20, // 49: yandex.cloud.k8s.v1.ClusterService.ListNodes:input_type -> yandex.cloud.k8s.v1.ListClusterNodesRequest
+	16, // 50: yandex.cloud.k8s.v1.ClusterService.ListOperations:input_type -> yandex.cloud.k8s.v1.ListClusterOperationsRequest
 	50, // 51: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
 	51, // 52: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
 	52, // 53: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
@@ -2660,8 +2660,8 @@ var file_yandex_cloud_k8s_v1_cluster_service_proto_depIdxs = []int32{
 	46, // 60: yandex.cloud.k8s.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
 	46, // 61: yandex.cloud.k8s.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
 	19, // 62: yandex.cloud.k8s.v1.ClusterService.ListNodeGroups:output_type -> yandex.cloud.k8s.v1.ListClusterNodeGroupsResponse
-	17, // 63: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
-	21, // 64: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
+	21, // 63: yandex.cloud.k8s.v1.ClusterService.ListNodes:output_type -> yandex.cloud.k8s.v1.ListClusterNodesResponse
+	17, // 64: yandex.cloud.k8s.v1.ClusterService.ListOperations:output_type -> yandex.cloud.k8s.v1.ListClusterOperationsResponse
 	53, // 65: yandex.cloud.k8s.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
 	46, // 66: yandex.cloud.k8s.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
 	46, // 67: yandex.cloud.k8s.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
@@ -2681,7 +2681,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_init() {
 	file_yandex_cloud_k8s_v1_node_proto_init()
 	file_yandex_cloud_k8s_v1_node_group_proto_init()
 	file_yandex_cloud_k8s_v1_version_proto_init()
-	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[9].OneofWrappers = []any{
+	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[5].OneofWrappers = []any{
 		(*UpdateClusterRequest_GatewayIpv4Address)(nil),
 	}
 	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[12].OneofWrappers = []any{
@@ -2692,7 +2692,7 @@ func file_yandex_cloud_k8s_v1_cluster_service_proto_init() {
 		(*MasterSpec_ZonalMasterSpec)(nil),
 		(*MasterSpec_RegionalMasterSpec)(nil),
 	}
-	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[31].OneofWrappers = []any{
+	file_yandex_cloud_k8s_v1_cluster_service_proto_msgTypes[23].OneofWrappers = []any{
 		(*MasterScalePolicySpec_AutoScale_)(nil),
 	}
 	type x struct{}

@@ -618,7 +618,7 @@ type PostgresqlHostConfig14_1C struct {
 	WorkMem                         *wrapperspb.Int64Value                         `protobuf:"bytes,4,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`                                               // in bytes.
 	TempFileLimit                   *wrapperspb.Int64Value                         `protobuf:"bytes,5,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`                           // in bytes.
 	BackendFlushAfter               *wrapperspb.Int64Value                         `protobuf:"bytes,6,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
-	OldSnapshotThreshold            *wrapperspb.Int64Value                         `protobuf:"bytes,7,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`
+	OldSnapshotThreshold            *wrapperspb.Int64Value                         `protobuf:"bytes,7,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`               // in milliseconds.
 	MaxStandbyStreamingDelay        *wrapperspb.Int64Value                         `protobuf:"bytes,8,opt,name=max_standby_streaming_delay,json=maxStandbyStreamingDelay,proto3" json:"max_standby_streaming_delay,omitempty"` // in milliseconds.
 	ConstraintExclusion             PostgresqlHostConfig14_1C_ConstraintExclusion  `protobuf:"varint,9,opt,name=constraint_exclusion,json=constraintExclusion,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C_ConstraintExclusion" json:"constraint_exclusion,omitempty"`
 	CursorTupleFraction             *wrapperspb.DoubleValue                        `protobuf:"bytes,10,opt,name=cursor_tuple_fraction,json=cursorTupleFraction,proto3" json:"cursor_tuple_fraction,omitempty"`
@@ -1186,7 +1186,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_host14_1c_proto protoreflect.File
 
 const file_yandex_cloud_mdb_postgresql_v1_config_host14_1c_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/postgresql/v1/config/host14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x869\n" +
+	"5yandex/cloud/mdb/postgresql/v1/config/host14_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x899\n" +
 	"\x19PostgresqlHostConfig14_1C\x12T\n" +
 	"\x18recovery_min_apply_delay\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15recoveryMinApplyDelay\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -1194,8 +1194,8 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host14_1c_proto_rawDesc = "" +
 	"\bwork_mem\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\aworkMem\x12C\n" +
 	"\x0ftemp_file_limit\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\rtempFileLimit\x12W\n" +
 	"\x13backend_flush_after\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
-	"\xfa\xc71\x060-2048R\x11backendFlushAfter\x12_\n" +
-	"\x16old_snapshot_threshold\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b-1-86400R\x14oldSnapshotThreshold\x12Z\n" +
+	"\xfa\xc71\x060-2048R\x11backendFlushAfter\x12b\n" +
+	"\x16old_snapshot_threshold\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\x0f\xfa\xc71\v-1-86400000R\x14oldSnapshotThreshold\x12Z\n" +
 	"\x1bmax_standby_streaming_delay\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x18maxStandbyStreamingDelay\x12\x87\x01\n" +
 	"\x14constraint_exclusion\x18\t \x01(\x0e2T.yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig14_1C.ConstraintExclusionR\x13constraintExclusion\x12P\n" +
 	"\x15cursor_tuple_fraction\x18\n" +

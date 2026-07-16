@@ -191,6 +191,10 @@ func (m *ListClusterLogsRequest) SetServiceType(v ListClusterLogsRequest_Service
 	m.ServiceType = v
 }
 
+func (m *ListClusterLogsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {
 	m.Timestamp = v
 }

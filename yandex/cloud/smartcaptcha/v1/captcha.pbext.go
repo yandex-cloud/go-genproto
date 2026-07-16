@@ -239,3 +239,11 @@ func (m *Condition_GeoIpMatcher) SetLocations(v []string) {
 func (m *CaptchaSecretKey) SetServerKey(v string) {
 	m.ServerKey = v
 }
+
+func (m *CaptchaKeys) SetClientKey(v string) {
+	m.ClientKey = v
+}
+
+func (m *CaptchaKeys) SetServerKey(v string) {
+	m.ServerKey = v
+}

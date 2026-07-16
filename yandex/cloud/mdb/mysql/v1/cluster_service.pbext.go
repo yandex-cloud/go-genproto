@@ -232,6 +232,10 @@ func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue
 	m.DiskEncryptionKeyId = v
 }
 
+func (m *RestoreClusterRequest) SetSourceClusterId(v string) {
+	m.SourceClusterId = v
+}
+
 func (m *RestoreClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -310,6 +314,14 @@ func (m *ListClusterLogsRequest) SetPageToken(v string) {
 
 func (m *ListClusterLogsRequest) SetAlwaysNextPageToken(v bool) {
 	m.AlwaysNextPageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListClusterLogsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
 }
 
 func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {

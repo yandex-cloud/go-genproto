@@ -1010,8 +1010,12 @@ type RestoreClusterRequest struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,15,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,17,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// ID of the source cluster to restore from.
+	// The latest backup suitable for [time] will be used for restore.
+	// [time] is required. Cannot be used together with [backup_id].
+	SourceClusterId string `protobuf:"bytes,18,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *RestoreClusterRequest) Reset() {
@@ -1147,6 +1151,13 @@ func (x *RestoreClusterRequest) GetDiskEncryptionKeyId() *wrapperspb.StringValue
 		return x.DiskEncryptionKeyId
 	}
 	return nil
+}
+
+func (x *RestoreClusterRequest) GetSourceClusterId() string {
+	if x != nil {
+		return x.SourceClusterId
+	}
+	return ""
 }
 
 type RestoreClusterMetadata struct {
@@ -1505,8 +1516,19 @@ type ListClusterLogsRequest struct {
 	// Option that controls the behavior of result pagination.
 	// If it is set to `true`, then [ListClusterLogsResponse.next_page_token] will always be returned, even if the current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname] field.
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
+	// Examples of a filter: `message.hostname='node1.db.cloud.yandex.net'`
+	Filter string `protobuf:"bytes,9,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,10,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListClusterLogsRequest) Reset() {
@@ -1593,6 +1615,20 @@ func (x *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
 		return x.AlwaysNextPageToken
 	}
 	return false
+}
+
+func (x *ListClusterLogsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
 }
 
 type ListClusterLogsResponse struct {
@@ -3251,7 +3287,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\x89\b\n" +
+	"\tbackup_id\x18\x02 \x01(\tR\bbackupId\"\xbf\b\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x00R\bbackupId\x12.\n" +
 	"\x04time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12*\n" +
@@ -3271,7 +3307,8 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\x13deletion_protection\x18\r \x01(\bR\x12deletionProtection\x12$\n" +
 	"\x0ehost_group_ids\x18\x0e \x03(\tR\fhostGroupIds\x12[\n" +
 	"\x12maintenance_window\x18\x0f \x01(\v2,.yandex.cloud.mdb.mysql.v1.MaintenanceWindowR\x11maintenanceWindow\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x11 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
+	"\x16disk_encryption_key_id\x18\x11 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x124\n" +
+	"\x11source_cluster_id\x18\x12 \x01(\tB\b\x8a\xc81\x04<=50R\x0fsourceClusterId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x03\x10\x04J\x04\b\x10\x10\x11\"T\n" +
@@ -3305,7 +3342,7 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.mysql.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xba\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf9\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -3317,7 +3354,11 @@ const file_yandex_cloud_mdb_mysql_v1_cluster_service_proto_rawDesc = "" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
-	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\"v\n" +
+	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
+	"\x06filter\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
+	"\border_by\x18\n" +
+	" \x01(\tR\aorderBy\"v\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vMYSQL_ERROR\x10\x01\x12\x11\n" +

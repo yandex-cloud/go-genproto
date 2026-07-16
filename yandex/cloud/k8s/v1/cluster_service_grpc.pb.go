@@ -30,8 +30,8 @@ const (
 	ClusterService_Start_FullMethodName                 = "/yandex.cloud.k8s.v1.ClusterService/Start"
 	ClusterService_RescheduleMaintenance_FullMethodName = "/yandex.cloud.k8s.v1.ClusterService/RescheduleMaintenance"
 	ClusterService_ListNodeGroups_FullMethodName        = "/yandex.cloud.k8s.v1.ClusterService/ListNodeGroups"
-	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.k8s.v1.ClusterService/ListOperations"
 	ClusterService_ListNodes_FullMethodName             = "/yandex.cloud.k8s.v1.ClusterService/ListNodes"
+	ClusterService_ListOperations_FullMethodName        = "/yandex.cloud.k8s.v1.ClusterService/ListOperations"
 	ClusterService_ListAccessBindings_FullMethodName    = "/yandex.cloud.k8s.v1.ClusterService/ListAccessBindings"
 	ClusterService_SetAccessBindings_FullMethodName     = "/yandex.cloud.k8s.v1.ClusterService/SetAccessBindings"
 	ClusterService_UpdateAccessBindings_FullMethodName  = "/yandex.cloud.k8s.v1.ClusterService/UpdateAccessBindings"
@@ -44,7 +44,6 @@ const (
 // A set of methods for managing Kubernetes cluster.
 type ClusterServiceClient interface {
 	// Returns the specified Kubernetes cluster.
-	//
 	// To get the list of available Kubernetes cluster, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
 	// Retrieves the list of Kubernetes cluster in the specified folder.
@@ -63,10 +62,10 @@ type ClusterServiceClient interface {
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(ctx context.Context, in *ListClusterNodeGroupsRequest, opts ...grpc.CallOption) (*ListClusterNodeGroupsResponse, error)
-	// Lists operations for the specified Kubernetes cluster.
-	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Lists cluster's nodes.
 	ListNodes(ctx context.Context, in *ListClusterNodesRequest, opts ...grpc.CallOption) (*ListClusterNodesResponse, error)
+	// Lists operations for the specified Kubernetes cluster.
+	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
 	// Lists cluster's access bindings
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
 	// Sets cluster's access bindings
@@ -173,20 +172,20 @@ func (c *clusterServiceClient) ListNodeGroups(ctx context.Context, in *ListClust
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error) {
+func (c *clusterServiceClient) ListNodes(ctx context.Context, in *ListClusterNodesRequest, opts ...grpc.CallOption) (*ListClusterNodesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterOperationsResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListOperations_FullMethodName, in, out, cOpts...)
+	out := new(ListClusterNodesResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListNodes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *clusterServiceClient) ListNodes(ctx context.Context, in *ListClusterNodesRequest, opts ...grpc.CallOption) (*ListClusterNodesResponse, error) {
+func (c *clusterServiceClient) ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListClusterNodesResponse)
-	err := c.cc.Invoke(ctx, ClusterService_ListNodes_FullMethodName, in, out, cOpts...)
+	out := new(ListClusterOperationsResponse)
+	err := c.cc.Invoke(ctx, ClusterService_ListOperations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -230,7 +229,6 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // A set of methods for managing Kubernetes cluster.
 type ClusterServiceServer interface {
 	// Returns the specified Kubernetes cluster.
-	//
 	// To get the list of available Kubernetes cluster, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
 	// Retrieves the list of Kubernetes cluster in the specified folder.
@@ -249,10 +247,10 @@ type ClusterServiceServer interface {
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
 	// Lists nodegroup for the specified Kubernetes cluster.
 	ListNodeGroups(context.Context, *ListClusterNodeGroupsRequest) (*ListClusterNodeGroupsResponse, error)
-	// Lists operations for the specified Kubernetes cluster.
-	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Lists cluster's nodes.
 	ListNodes(context.Context, *ListClusterNodesRequest) (*ListClusterNodesResponse, error)
+	// Lists operations for the specified Kubernetes cluster.
+	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
 	// Lists cluster's access bindings
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
 	// Sets cluster's access bindings
@@ -295,11 +293,11 @@ func (UnimplementedClusterServiceServer) RescheduleMaintenance(context.Context, 
 func (UnimplementedClusterServiceServer) ListNodeGroups(context.Context, *ListClusterNodeGroupsRequest) (*ListClusterNodeGroupsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListNodeGroups not implemented")
 }
-func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
-}
 func (UnimplementedClusterServiceServer) ListNodes(context.Context, *ListClusterNodesRequest) (*ListClusterNodesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListNodes not implemented")
+}
+func (UnimplementedClusterServiceServer) ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
 }
 func (UnimplementedClusterServiceServer) ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAccessBindings not implemented")
@@ -492,24 +490,6 @@ func _ClusterService_ListNodeGroups_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListClusterOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ClusterServiceServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ClusterService_ListOperations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterServiceServer).ListOperations(ctx, req.(*ListClusterOperationsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ClusterService_ListNodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListClusterNodesRequest)
 	if err := dec(in); err != nil {
@@ -524,6 +504,24 @@ func _ClusterService_ListNodes_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ClusterServiceServer).ListNodes(ctx, req.(*ListClusterNodesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClusterService_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListClusterOperationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClusterServiceServer).ListOperations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ClusterService_ListOperations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClusterServiceServer).ListOperations(ctx, req.(*ListClusterOperationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -626,12 +624,12 @@ var ClusterService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ClusterService_ListNodeGroups_Handler,
 		},
 		{
-			MethodName: "ListOperations",
-			Handler:    _ClusterService_ListOperations_Handler,
-		},
-		{
 			MethodName: "ListNodes",
 			Handler:    _ClusterService_ListNodes_Handler,
+		},
+		{
+			MethodName: "ListOperations",
+			Handler:    _ClusterService_ListOperations_Handler,
 		},
 		{
 			MethodName: "ListAccessBindings",

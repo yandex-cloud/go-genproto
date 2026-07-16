@@ -98,6 +98,8 @@ type ClusterServiceClient interface {
 	// Creates new hosts for a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
@@ -108,6 +110,7 @@ type ClusterServiceClient interface {
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
@@ -476,6 +479,8 @@ type ClusterServiceServer interface {
 	// Creates new hosts for a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
@@ -486,6 +491,7 @@ type ClusterServiceServer interface {
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)

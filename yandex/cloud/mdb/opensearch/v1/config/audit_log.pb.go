@@ -45,8 +45,14 @@ type AuditLog struct {
 	LogIndexMaintenance *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=log_index_maintenance,json=logIndexMaintenance,proto3" json:"log_index_maintenance,omitempty"`
 	// Enables snapshots and repositories requests logging.
 	LogBackupOperations *wrapperspb.BoolValue `protobuf:"bytes,8,opt,name=log_backup_operations,json=logBackupOperations,proto3" json:"log_backup_operations,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Enables logging of successfully authenticated REST requests.
+	LogAuthenticatedRequests *wrapperspb.BoolValue `protobuf:"bytes,9,opt,name=log_authenticated_requests,json=logAuthenticatedRequests,proto3" json:"log_authenticated_requests,omitempty"`
+	// Enables logging of index-level events, such as creating or deleting an index.
+	LogIndexEvents *wrapperspb.BoolValue `protobuf:"bytes,10,opt,name=log_index_events,json=logIndexEvents,proto3" json:"log_index_events,omitempty"`
+	// Enables logging of REST requests containing bad or spoofed security headers.
+	LogBadHeaders *wrapperspb.BoolValue `protobuf:"bytes,11,opt,name=log_bad_headers,json=logBadHeaders,proto3" json:"log_bad_headers,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AuditLog) Reset() {
@@ -135,11 +141,32 @@ func (x *AuditLog) GetLogBackupOperations() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *AuditLog) GetLogAuthenticatedRequests() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.LogAuthenticatedRequests
+	}
+	return nil
+}
+
+func (x *AuditLog) GetLogIndexEvents() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.LogIndexEvents
+	}
+	return nil
+}
+
+func (x *AuditLog) GetLogBadHeaders() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.LogBadHeaders
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/opensearch/v1/config/audit_log.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\"\xfe\x04\n" +
+	"5yandex/cloud/mdb/opensearch/v1/config/audit_log.proto\x12%yandex.cloud.mdb.opensearch.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\"\xe2\x06\n" +
 	"\bAuditLog\x12I\n" +
 	"\x12compliance_enabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11complianceEnabled\x12D\n" +
 	"\x10log_request_body\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x0elogRequestBody\x12H\n" +
@@ -148,7 +175,11 @@ const file_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto_rawDesc = "" +
 	"\x19log_index_metadata_access\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x16logIndexMetadataAccess\x12N\n" +
 	"\x15log_monitoring_checks\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x13logMonitoringChecks\x12N\n" +
 	"\x15log_index_maintenance\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x13logIndexMaintenance\x12N\n" +
-	"\x15log_backup_operations\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x13logBackupOperationsB~\n" +
+	"\x15log_backup_operations\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x13logBackupOperations\x12X\n" +
+	"\x1alog_authenticated_requests\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x18logAuthenticatedRequests\x12D\n" +
+	"\x10log_index_events\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR\x0elogIndexEvents\x12B\n" +
+	"\x0flog_bad_headers\x18\v \x01(\v2\x1a.google.protobuf.BoolValueR\rlogBadHeadersB~\n" +
 	"&yandex.cloud.api.api.mdb.opensearch.v1ZTgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config;opensearchb\x06proto3"
 
 var (
@@ -169,19 +200,22 @@ var file_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto_goTypes = []any{
 	(*wrapperspb.BoolValue)(nil), // 1: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.mdb.opensearch.v1.config.AuditLog.compliance_enabled:type_name -> google.protobuf.BoolValue
-	1, // 1: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_request_body:type_name -> google.protobuf.BoolValue
-	1, // 2: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_search_queries:type_name -> google.protobuf.BoolValue
-	1, // 3: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_data_modifications:type_name -> google.protobuf.BoolValue
-	1, // 4: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_index_metadata_access:type_name -> google.protobuf.BoolValue
-	1, // 5: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_monitoring_checks:type_name -> google.protobuf.BoolValue
-	1, // 6: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_index_maintenance:type_name -> google.protobuf.BoolValue
-	1, // 7: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_backup_operations:type_name -> google.protobuf.BoolValue
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	1,  // 0: yandex.cloud.mdb.opensearch.v1.config.AuditLog.compliance_enabled:type_name -> google.protobuf.BoolValue
+	1,  // 1: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_request_body:type_name -> google.protobuf.BoolValue
+	1,  // 2: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_search_queries:type_name -> google.protobuf.BoolValue
+	1,  // 3: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_data_modifications:type_name -> google.protobuf.BoolValue
+	1,  // 4: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_index_metadata_access:type_name -> google.protobuf.BoolValue
+	1,  // 5: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_monitoring_checks:type_name -> google.protobuf.BoolValue
+	1,  // 6: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_index_maintenance:type_name -> google.protobuf.BoolValue
+	1,  // 7: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_backup_operations:type_name -> google.protobuf.BoolValue
+	1,  // 8: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_authenticated_requests:type_name -> google.protobuf.BoolValue
+	1,  // 9: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_index_events:type_name -> google.protobuf.BoolValue
+	1,  // 10: yandex.cloud.mdb.opensearch.v1.config.AuditLog.log_bad_headers:type_name -> google.protobuf.BoolValue
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_opensearch_v1_config_audit_log_proto_init() }

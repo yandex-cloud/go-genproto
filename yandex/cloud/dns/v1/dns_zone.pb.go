@@ -346,7 +346,7 @@ const file_yandex_cloud_dns_v1_dns_zone_proto_rawDesc = "" +
 	"\x04data\x18\x04 \x03(\tB\x17\x82\xc81\x051-100\x8a\xc81\x061-1024\x90\xc81\x01R\x04data\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\"I\n" +
 	"\x11PrivateVisibility\x124\n" +
-	"\vnetwork_ids\x18\x01 \x03(\tB\x13\x82\xc81\x050-100\x8a\xc81\x0220\x90\xc81\x01R\n" +
+	"\vnetwork_ids\x18\x01 \x03(\tB\x13\x82\xc81\x050-128\x8a\xc81\x0220\x90\xc81\x01R\n" +
 	"networkIds\"\x12\n" +
 	"\x10PublicVisibilityBV\n" +
 	"\x17yandex.cloud.api.dns.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/dns/v1;dnsb\x06proto3"

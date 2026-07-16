@@ -113,14 +113,17 @@ type ClusterServiceClient interface {
 	ListShards(ctx context.Context, in *ListClusterShardsRequest, opts ...grpc.CallOption) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	AddShard(ctx context.Context, in *AddClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resetups hosts.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ResetupHosts(ctx context.Context, in *ResetupHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Restarts hosts.
 	RestartHosts(ctx context.Context, in *RestartHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Stepdown hosts.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	StepdownHosts(ctx context.Context, in *StepdownHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified MongoDB cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -507,14 +510,17 @@ type ClusterServiceServer interface {
 	ListShards(context.Context, *ListClusterShardsRequest) (*ListClusterShardsResponse, error)
 	// Creates a new shard.
 	// (-- api-linter: core::0136::http-uri-suffix=disabled --)
+	// (-- api-linter: yc::1705::custom-method-colon=disabled --)
 	AddShard(context.Context, *AddClusterShardRequest) (*operation.Operation, error)
 	// Deletes the specified shard.
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
 	// Resetups hosts.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ResetupHosts(context.Context, *ResetupHostsRequest) (*operation.Operation, error)
 	// Restarts hosts.
 	RestartHosts(context.Context, *RestartHostsRequest) (*operation.Operation, error)
 	// Stepdown hosts.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	StepdownHosts(context.Context, *StepdownHostsRequest) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified MongoDB cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

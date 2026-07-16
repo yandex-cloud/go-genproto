@@ -28,14 +28,22 @@ const (
 type WeeklySnapshotSchedule_WeekDay int32
 
 const (
+	// Not specified.
 	WeeklySnapshotSchedule_WEEK_DAY_UNSPECIFIED WeeklySnapshotSchedule_WeekDay = 0
-	WeeklySnapshotSchedule_MON                  WeeklySnapshotSchedule_WeekDay = 1
-	WeeklySnapshotSchedule_TUE                  WeeklySnapshotSchedule_WeekDay = 2
-	WeeklySnapshotSchedule_WED                  WeeklySnapshotSchedule_WeekDay = 3
-	WeeklySnapshotSchedule_THU                  WeeklySnapshotSchedule_WeekDay = 4
-	WeeklySnapshotSchedule_FRI                  WeeklySnapshotSchedule_WeekDay = 5
-	WeeklySnapshotSchedule_SAT                  WeeklySnapshotSchedule_WeekDay = 6
-	WeeklySnapshotSchedule_SUN                  WeeklySnapshotSchedule_WeekDay = 7
+	// Monday.
+	WeeklySnapshotSchedule_MON WeeklySnapshotSchedule_WeekDay = 1
+	// Tuesday.
+	WeeklySnapshotSchedule_TUE WeeklySnapshotSchedule_WeekDay = 2
+	// Wednesday.
+	WeeklySnapshotSchedule_WED WeeklySnapshotSchedule_WeekDay = 3
+	// Thursday.
+	WeeklySnapshotSchedule_THU WeeklySnapshotSchedule_WeekDay = 4
+	// Friday.
+	WeeklySnapshotSchedule_FRI WeeklySnapshotSchedule_WeekDay = 5
+	// Saturday.
+	WeeklySnapshotSchedule_SAT WeeklySnapshotSchedule_WeekDay = 6
+	// Sunday.
+	WeeklySnapshotSchedule_SUN WeeklySnapshotSchedule_WeekDay = 7
 )
 
 // Enum value maps for WeeklySnapshotSchedule_WeekDay.
@@ -579,12 +587,13 @@ const file_yandex_cloud_mdb_opensearch_v1_backup_proto_rawDesc = "" +
 	"\x19free_space_required_bytes\x18\f \x01(\x03R\x16freeSpaceRequiredBytes\"\xcc\x01\n" +
 	"\x12SnapshotManagement\x12]\n" +
 	"\x11snapshot_schedule\x18\x01 \x01(\v20.yandex.cloud.mdb.opensearch.v1.SnapshotScheduleR\x10snapshotSchedule\x12W\n" +
-	"\x15snapshot_max_age_days\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=7R\x12snapshotMaxAgeDays\"\xfd\x02\n" +
+	"\x15snapshot_max_age_days\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=7R\x12snapshotMaxAgeDays\"\xf7\x02\n" +
 	"\x10SnapshotSchedule\x12r\n" +
 	"\x18hourly_snapshot_schedule\x18\x01 \x01(\v26.yandex.cloud.mdb.opensearch.v1.HourlySnapshotScheduleH\x00R\x16hourlySnapshotSchedule\x12o\n" +
 	"\x17daily_snapshot_schedule\x18\x02 \x01(\v25.yandex.cloud.mdb.opensearch.v1.DailySnapshotScheduleH\x00R\x15dailySnapshotSchedule\x12r\n" +
-	"\x18weekly_snapshot_schedule\x18\x03 \x01(\v26.yandex.cloud.mdb.opensearch.v1.WeeklySnapshotScheduleH\x00R\x16weeklySnapshotScheduleB\x10\n" +
-	"\bschedule\x12\x04\xc0\xc11\x01\":\n" +
+	"\x18weekly_snapshot_schedule\x18\x03 \x01(\v26.yandex.cloud.mdb.opensearch.v1.WeeklySnapshotScheduleH\x00R\x16weeklySnapshotScheduleB\n" +
+	"\n" +
+	"\bschedule\":\n" +
 	"\x16HourlySnapshotSchedule\x12 \n" +
 	"\x06minute\x18\x01 \x01(\x03B\b\xfa\xc71\x040-59R\x06minute\"W\n" +
 	"\x15DailySnapshotSchedule\x12\x1c\n" +

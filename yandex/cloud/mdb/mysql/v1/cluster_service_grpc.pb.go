@@ -83,6 +83,8 @@ type ClusterServiceClient interface {
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Retrieves a log stream for a cluster.
 	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves a list of operations for a cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -94,8 +96,10 @@ type ClusterServiceClient interface {
 	// Adds new hosts in a cluster.
 	AddHosts(ctx context.Context, in *AddClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(ctx context.Context, in *UpdateClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(ctx context.Context, in *DeleteClusterHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified MySQL cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
@@ -389,6 +393,8 @@ type ClusterServiceServer interface {
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Retrieves a log stream for a cluster.
 	// This method is similar to [ListLogs], but uses server-side streaming, which allows for the `tail -f` command semantics.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves a list of operations for a cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
@@ -400,8 +406,10 @@ type ClusterServiceServer interface {
 	// Adds new hosts in a cluster.
 	AddHosts(context.Context, *AddClusterHostsRequest) (*operation.Operation, error)
 	// Updates the specified hosts.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	UpdateHosts(context.Context, *UpdateClusterHostsRequest) (*operation.Operation, error)
 	// Deletes the specified hosts for a cluster.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	DeleteHosts(context.Context, *DeleteClusterHostsRequest) (*operation.Operation, error)
 	// Retrieves a list of access bindings for the specified MySQL cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)

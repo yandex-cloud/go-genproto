@@ -41,3 +41,7 @@ func (m *GpuCluster) SetZoneId(v string) {
 func (m *GpuCluster) SetInterconnectType(v GpuInterconnectType) {
 	m.InterconnectType = v
 }
+
+func (m *GpuCluster) SetSubnets(v int64) {
+	m.Subnets = v
+}

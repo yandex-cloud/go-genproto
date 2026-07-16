@@ -5468,7 +5468,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x83\x01\n" +
 	"\x14ListClustersResponse\x12C\n" +
 	"\bclusters\x18\x01 \x03(\v2'.yandex.cloud.mdb.clickhouse.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8f\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x90\n" +
 	"\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12;\n" +
@@ -5482,10 +5482,10 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"user_specs\x18\b \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.UserSpecR\tuserSpecs\x12O\n" +
 	"\n" +
-	"host_specs\x18\t \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12'\n" +
+	"host_specs\x18\t \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12(\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x129\n" +
+	" \x01(\tB\t\x8a\xc81\x05<=100R\tnetworkId\x129\n" +
 	"\n" +
 	"shard_name\x18\v \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12,\n" +
 	"\x12service_account_id\x18\f \x01(\tR\x10serviceAccountId\x12,\n" +
@@ -5500,7 +5500,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x11\x10\x12\"<\n" +
 	"\x15CreateClusterMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xe5\x06\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xe6\x06\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -5515,9 +5515,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\b \x01(\v21.yandex.cloud.mdb.clickhouse.v1.MaintenanceWindowR\x11maintenanceWindow\x12,\n" +
 	"\x12security_group_ids\x18\t \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\n" +
-	" \x01(\bR\x12deletionProtection\x12'\n" +
+	" \x01(\bR\x12deletionProtection\x12(\n" +
 	"\n" +
-	"network_id\x18\v \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12N\n" +
+	"network_id\x18\v \x01(\tB\t\x8a\xc81\x05<=100R\tnetworkId\x12N\n" +
 	"\x15allow_host_recreation\x18\f \x01(\v2\x1a.google.protobuf.BoolValueR\x13allowHostRecreation\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -5567,7 +5567,7 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"<\n" +
 	"\x15BackupClusterMetadata\x12#\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xd3\t\n" +
+	"cluster_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\xd4\t\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x15additional_backup_ids\x18\r \x03(\tR\x13additionalBackupIds\x12.\n" +
@@ -5578,9 +5578,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_cluster_service_proto_rawDesc = "" +
 	"\vconfig_spec\x18\x06 \x01(\v2*.yandex.cloud.mdb.clickhouse.v1.ConfigSpecR\n" +
 	"configSpec\x12G\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecR\thostSpecs\x12'\n" +
+	"host_specs\x18\a \x03(\v2(.yandex.cloud.mdb.clickhouse.v1.HostSpecR\thostSpecs\x12(\n" +
 	"\n" +
-	"network_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
+	"network_id\x18\b \x01(\tB\t\x8a\xc81\x05<=100R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
 	"\x12service_account_id\x18\n" +
 	" \x01(\tR\x10serviceAccountId\x12,\n" +

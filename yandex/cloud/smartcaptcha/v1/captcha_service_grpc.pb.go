@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	CaptchaService_Get_FullMethodName          = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Get"
 	CaptchaService_GetSecretKey_FullMethodName = "/yandex.cloud.smartcaptcha.v1.CaptchaService/GetSecretKey"
+	CaptchaService_GetKeys_FullMethodName      = "/yandex.cloud.smartcaptcha.v1.CaptchaService/GetKeys"
 	CaptchaService_Create_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Create"
 	CaptchaService_Delete_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Delete"
 	CaptchaService_Update_FullMethodName       = "/yandex.cloud.smartcaptcha.v1.CaptchaService/Update"
@@ -38,6 +39,8 @@ type CaptchaServiceClient interface {
 	Get(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*Captcha, error)
 	// Returns the secret data of specified Captcha resource.
 	GetSecretKey(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*CaptchaSecretKey, error)
+	// Returns the keys of specified Captcha resource.
+	GetKeys(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*CaptchaKeys, error)
 	// Creates a captcha in the specified folder using the data specified in the request.
 	Create(ctx context.Context, in *CreateCaptchaRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified captcha.
@@ -70,6 +73,16 @@ func (c *captchaServiceClient) GetSecretKey(ctx context.Context, in *GetCaptchaR
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CaptchaSecretKey)
 	err := c.cc.Invoke(ctx, CaptchaService_GetSecretKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *captchaServiceClient) GetKeys(ctx context.Context, in *GetCaptchaRequest, opts ...grpc.CallOption) (*CaptchaKeys, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CaptchaKeys)
+	err := c.cc.Invoke(ctx, CaptchaService_GetKeys_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +139,8 @@ type CaptchaServiceServer interface {
 	Get(context.Context, *GetCaptchaRequest) (*Captcha, error)
 	// Returns the secret data of specified Captcha resource.
 	GetSecretKey(context.Context, *GetCaptchaRequest) (*CaptchaSecretKey, error)
+	// Returns the keys of specified Captcha resource.
+	GetKeys(context.Context, *GetCaptchaRequest) (*CaptchaKeys, error)
 	// Creates a captcha in the specified folder using the data specified in the request.
 	Create(context.Context, *CreateCaptchaRequest) (*operation.Operation, error)
 	// Deletes the specified captcha.
@@ -148,6 +163,9 @@ func (UnimplementedCaptchaServiceServer) Get(context.Context, *GetCaptchaRequest
 }
 func (UnimplementedCaptchaServiceServer) GetSecretKey(context.Context, *GetCaptchaRequest) (*CaptchaSecretKey, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSecretKey not implemented")
+}
+func (UnimplementedCaptchaServiceServer) GetKeys(context.Context, *GetCaptchaRequest) (*CaptchaKeys, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetKeys not implemented")
 }
 func (UnimplementedCaptchaServiceServer) Create(context.Context, *CreateCaptchaRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
@@ -213,6 +231,24 @@ func _CaptchaService_GetSecretKey_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CaptchaServiceServer).GetSecretKey(ctx, req.(*GetCaptchaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CaptchaService_GetKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCaptchaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CaptchaServiceServer).GetKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CaptchaService_GetKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CaptchaServiceServer).GetKeys(ctx, req.(*GetCaptchaRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -303,6 +339,10 @@ var CaptchaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSecretKey",
 			Handler:    _CaptchaService_GetSecretKey_Handler,
+		},
+		{
+			MethodName: "GetKeys",
+			Handler:    _CaptchaService_GetKeys_Handler,
 		},
 		{
 			MethodName: "Create",

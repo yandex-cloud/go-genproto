@@ -888,7 +888,11 @@ type ListClusterLogsRequest struct {
 	// * `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`.
 	Filter string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Type of the service to request logs about.
-	ServiceType   ListClusterLogsRequest_ServiceType `protobuf:"varint,9,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	ServiceType ListClusterLogsRequest_ServiceType `protobuf:"varint,9,opt,name=service_type,json=serviceType,proto3,enum=yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest_ServiceType" json:"service_type,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,10,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -984,6 +988,13 @@ func (x *ListClusterLogsRequest) GetServiceType() ListClusterLogsRequest_Service
 		return x.ServiceType
 	}
 	return ListClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
 }
 
 type LogRecord struct {
@@ -4360,7 +4371,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15DeleteClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xb8\x04\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xd3\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4374,7 +4385,9 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_service_proto_rawDesc = "" +
 	"\x16always_next_page_token\x18\a \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
 	"\x06filter\x18\b \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x12e\n" +
-	"\fservice_type\x18\t \x01(\x0e2B.yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest.ServiceTypeR\vserviceType\"K\n" +
+	"\fservice_type\x18\t \x01(\x0e2B.yandex.cloud.mdb.opensearch.v1.ListClusterLogsRequest.ServiceTypeR\vserviceType\x12\x19\n" +
+	"\border_by\x18\n" +
+	" \x01(\tR\aorderBy\"K\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +

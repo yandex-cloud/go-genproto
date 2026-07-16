@@ -403,7 +403,7 @@ var File_yandex_cloud_k8s_v1_maintenance_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_k8s_v1_maintenance_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/k8s/v1/maintenance.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\x02\n" +
+	"%yandex/cloud/k8s/v1/maintenance.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/type/dayofweek.proto\x1a\x1bgoogle/type/timeofday.proto\x1a\x1dyandex/cloud/validation.proto\"\xc3\x02\n" +
 	"\x11MaintenanceWindow\x12I\n" +
 	"\aanytime\x18\x01 \x01(\v2-.yandex.cloud.k8s.v1.AnytimeMaintenanceWindowH\x00R\aanytime\x12g\n" +
 	"\x18daily_maintenance_window\x18\x02 \x01(\v2+.yandex.cloud.k8s.v1.DailyMaintenanceWindowH\x00R\x16dailyMaintenanceWindow\x12j\n" +

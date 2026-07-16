@@ -783,7 +783,11 @@ type ListClusterLogsRequest struct {
 	// 2. An `=` operator.
 	// 3. The value in double quotes (`"`). Must be 1-63 characters long and match the regular expression `[a-z0-9.-]{1,61}`.
 	// Example of a filter: `message.hostname='node1.db.cloud.yandex.net'`
-	Filter        string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
+	Filter string `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,9,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -870,6 +874,13 @@ func (x *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
 func (x *ListClusterLogsRequest) GetFilter() string {
 	if x != nil {
 		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
 	}
 	return ""
 }
@@ -1878,7 +1889,7 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15DeleteClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x84\x03\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x9f\x03\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -1891,7 +1902,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_service_proto_rawDesc = "" +
 	"page_token\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
 	"\x16always_next_page_token\x18\a \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
 	"\x06filter\x18\b \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"\xce\x01\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
+	"\border_by\x18\t \x01(\tR\aorderBy\"\xce\x01\n" +
 	"\tLogRecord\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12K\n" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.kafka.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +

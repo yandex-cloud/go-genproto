@@ -68,6 +68,8 @@ type ClusterServiceClient interface {
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of operations for the specified Apache Kafka® cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
@@ -287,6 +289,8 @@ type ClusterServiceServer interface {
 	// For more information about logs, see the [Logs](/docs/managed-kafka/operations/cluster-logs) section in the documentation.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as [ListLogs] but using server-side streaming. Also allows for `tail -f` semantics.
+	//
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of operations for the specified Apache Kafka® cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)

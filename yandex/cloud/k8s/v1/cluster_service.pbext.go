@@ -44,22 +44,6 @@ func (m *DeleteClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
-func (m *StopClusterRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StopClusterMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StartClusterRequest) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
-func (m *StartClusterMetadata) SetClusterId(v string) {
-	m.ClusterId = v
-}
-
 type UpdateClusterRequest_InternetGateway = isUpdateClusterRequest_InternetGateway
 
 func (m *UpdateClusterRequest) SetInternetGateway(v UpdateClusterRequest_InternetGateway) {
@@ -86,14 +70,14 @@ func (m *UpdateClusterRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
 
+func (m *UpdateClusterRequest) SetMasterSpec(v *MasterUpdateSpec) {
+	m.MasterSpec = v
+}
+
 func (m *UpdateClusterRequest) SetGatewayIpv4Address(v string) {
 	m.InternetGateway = &UpdateClusterRequest_GatewayIpv4Address{
 		GatewayIpv4Address: v,
 	}
-}
-
-func (m *UpdateClusterRequest) SetMasterSpec(v *MasterUpdateSpec) {
-	m.MasterSpec = v
 }
 
 func (m *UpdateClusterRequest) SetServiceAccountId(v string) {
@@ -114,6 +98,22 @@ func (m *UpdateClusterRequest) SetIpAllocationPolicy(v *IPAllocationPolicy) {
 
 func (m *UpdateClusterRequest) SetWorkloadIdentityFederation(v *WorkloadIdentityFederationSpec) {
 	m.WorkloadIdentityFederation = v
+}
+
+func (m *StopClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StopClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StartClusterMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *StartClusterRequest) SetClusterId(v string) {
+	m.ClusterId = v
 }
 
 func (m *MasterUpdateSpec) SetVersion(v *UpdateVersionSpec) {
@@ -346,6 +346,10 @@ func (m *MasterSpec) SetMaintenancePolicy(v *MasterMaintenancePolicy) {
 	m.MaintenancePolicy = v
 }
 
+func (m *MasterSpec) SetScalePolicy(v *MasterScalePolicySpec) {
+	m.ScalePolicy = v
+}
+
 func (m *MasterSpec) SetSecurityGroupIds(v []string) {
 	m.SecurityGroupIds = v
 }
@@ -354,8 +358,20 @@ func (m *MasterSpec) SetMasterLogging(v *MasterLogging) {
 	m.MasterLogging = v
 }
 
-func (m *MasterSpec) SetScalePolicy(v *MasterScalePolicySpec) {
-	m.ScalePolicy = v
+type MasterScalePolicySpec_ScaleType = isMasterScalePolicySpec_ScaleType
+
+func (m *MasterScalePolicySpec) SetScaleType(v MasterScalePolicySpec_ScaleType) {
+	m.ScaleType = v
+}
+
+func (m *MasterScalePolicySpec) SetAutoScale(v *MasterScalePolicySpec_AutoScale) {
+	m.ScaleType = &MasterScalePolicySpec_AutoScale_{
+		AutoScale: v,
+	}
+}
+
+func (m *MasterScalePolicySpec_AutoScale) SetMinResourcePresetId(v string) {
+	m.MinResourcePresetId = v
 }
 
 func (m *ZonalMasterSpec) SetZoneId(v string) {
@@ -368,6 +384,14 @@ func (m *ZonalMasterSpec) SetInternalV4AddressSpec(v *InternalAddressSpec) {
 
 func (m *ZonalMasterSpec) SetExternalV4AddressSpec(v *ExternalAddressSpec) {
 	m.ExternalV4AddressSpec = v
+}
+
+func (m *InternalAddressSpec) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *ExternalAddressSpec) SetAddress(v string) {
+	m.Address = v
 }
 
 func (m *RegionalMasterSpec) SetRegionId(v string) {
@@ -384,14 +408,6 @@ func (m *RegionalMasterSpec) SetExternalV4AddressSpec(v *ExternalAddressSpec) {
 
 func (m *RegionalMasterSpec) SetExternalV6AddressSpec(v *ExternalAddressSpec) {
 	m.ExternalV6AddressSpec = v
-}
-
-func (m *InternalAddressSpec) SetSubnetId(v string) {
-	m.SubnetId = v
-}
-
-func (m *ExternalAddressSpec) SetAddress(v string) {
-	m.Address = v
 }
 
 func (m *MasterLocation) SetZoneId(v string) {
@@ -420,22 +436,6 @@ func (m *RescheduleMaintenanceRequest) SetDelayedUntil(v *timestamppb.Timestamp)
 
 func (m *RescheduleMaintenanceMetadata) SetClusterId(v string) {
 	m.ClusterId = v
-}
-
-type MasterScalePolicySpec_ScaleType = isMasterScalePolicySpec_ScaleType
-
-func (m *MasterScalePolicySpec) SetScaleType(v MasterScalePolicySpec_ScaleType) {
-	m.ScaleType = v
-}
-
-func (m *MasterScalePolicySpec) SetAutoScale(v *MasterScalePolicySpec_AutoScale) {
-	m.ScaleType = &MasterScalePolicySpec_AutoScale_{
-		AutoScale: v,
-	}
-}
-
-func (m *MasterScalePolicySpec_AutoScale) SetMinResourcePresetId(v string) {
-	m.MinResourcePresetId = v
 }
 
 func (m *WorkloadIdentityFederationSpec) SetEnabled(v bool) {

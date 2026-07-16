@@ -1825,8 +1825,22 @@ type ListClusterLogsRequest struct {
 	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Always return `next_page_token`, even if current page is empty.
 	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname],
+	// [LogRecord.logs.message.error_severity] (for POSTGRESQL service), [LogRecord.logs.message.level] (for POOLER service) fields.
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
+	// Examples of a filter:
+	// `message.hostname='node1.db.cloud.yandex.net'`
+	// `message.error_severity IN ("ERROR", "FATAL", "PANIC") AND message.hostname = "node1.db.cloud.yandex.net"`
+	Filter string `protobuf:"bytes,9,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,10,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListClusterLogsRequest) Reset() {
@@ -1913,6 +1927,20 @@ func (x *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
 		return x.AlwaysNextPageToken
 	}
 	return false
+}
+
+func (x *ListClusterLogsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
 }
 
 type ListClusterLogsResponse struct {
@@ -3879,7 +3907,7 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v26.yandex.cloud.mdb.postgresql.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdb\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -3891,7 +3919,11 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
-	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\"S\n" +
+	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
+	"\x06filter\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
+	"\border_by\x18\n" +
+	" \x01(\tR\aorderBy\"S\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +

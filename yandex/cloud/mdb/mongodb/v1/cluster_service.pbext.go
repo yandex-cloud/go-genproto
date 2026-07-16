@@ -345,6 +345,18 @@ func (m *ListClusterLogsRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListClusterLogsRequest) SetAlwaysNextPageToken(v bool) {
+	m.AlwaysNextPageToken = v
+}
+
+func (m *ListClusterLogsRequest) SetFilter(v string) {
+	m.Filter = v
+}
+
+func (m *ListClusterLogsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
 func (m *ListClusterLogsResponse) SetLogs(v []*LogRecord) {
 	m.Logs = v
 }

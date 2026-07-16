@@ -150,8 +150,10 @@ type GpuCluster struct {
 	ZoneId string `protobuf:"bytes,8,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Type of interconnect used for this GPU cluster.
 	InterconnectType GpuInterconnectType `protobuf:"varint,9,opt,name=interconnect_type,json=interconnectType,proto3,enum=yandex.cloud.compute.v1.GpuInterconnectType" json:"interconnect_type,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Number of subnets in the GPU cluster.
+	Subnets       int64 `protobuf:"varint,10,opt,name=subnets,proto3" json:"subnets,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GpuCluster) Reset() {
@@ -247,11 +249,18 @@ func (x *GpuCluster) GetInterconnectType() GpuInterconnectType {
 	return GpuInterconnectType_GPU_INTERCONNECT_TYPE_UNSPECIFIED
 }
 
+func (x *GpuCluster) GetSubnets() int64 {
+	if x != nil {
+		return x.Subnets
+	}
+	return 0
+}
+
 var File_yandex_cloud_compute_v1_gpu_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_gpu_cluster_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/compute/v1/gpu_cluster.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xba\x04\n" +
+	")yandex/cloud/compute/v1/gpu_cluster.proto\x12\x17yandex.cloud.compute.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd4\x04\n" +
 	"\n" +
 	"GpuCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -263,7 +272,9 @@ const file_yandex_cloud_compute_v1_gpu_cluster_proto_rawDesc = "" +
 	"\x06labels\x18\x06 \x03(\v2/.yandex.cloud.compute.v1.GpuCluster.LabelsEntryR\x06labels\x12B\n" +
 	"\x06status\x18\a \x01(\x0e2*.yandex.cloud.compute.v1.GpuCluster.StatusR\x06status\x12\x17\n" +
 	"\azone_id\x18\b \x01(\tR\x06zoneId\x12Y\n" +
-	"\x11interconnect_type\x18\t \x01(\x0e2,.yandex.cloud.compute.v1.GpuInterconnectTypeR\x10interconnectType\x1a9\n" +
+	"\x11interconnect_type\x18\t \x01(\x0e2,.yandex.cloud.compute.v1.GpuInterconnectTypeR\x10interconnectType\x12\x18\n" +
+	"\asubnets\x18\n" +
+	" \x01(\x03R\asubnets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"R\n" +

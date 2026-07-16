@@ -2110,7 +2110,20 @@ type ListClusterLogsRequest struct {
 	PageSize int64 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterLogsResponse.next_page_token] returned by the previous list request.
-	PageToken     string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	PageToken string `protobuf:"bytes,7,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Always return `next_page_token`, even if current page is empty.
+	AlwaysNextPageToken bool `protobuf:"varint,8,opt,name=always_next_page_token,json=alwaysNextPageToken,proto3" json:"always_next_page_token,omitempty"`
+	// A filter expression that filters resources listed in the response.
+	// The expression must specify:
+	// 1. The field name. Currently filtering can be applied to the [LogRecord.logs.message.hostname] field.
+	// 2. A conditional operator. Can be either `=` or `!=` for single values, `IN` or `NOT IN` for lists of values.
+	// 3. The value. Must be 1-63 characters long and match the regular expression `^[a-z0-9.-]{1,61}$`.
+	// Examples of a filter `message.hostname='node1.db.cloud.yandex.net'`.
+	Filter string `protobuf:"bytes,9,opt,name=filter,proto3" json:"filter,omitempty"`
+	// Order by specification as a JSON array of {field, order} objects.
+	// Supported fields: TIMESTAMP. Supported orders: ASC, DESC.
+	// Example: [{"field": "TIMESTAMP", "order": "DESC"}]
+	OrderBy       string `protobuf:"bytes,10,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2190,6 +2203,27 @@ func (x *ListClusterLogsRequest) GetPageSize() int64 {
 func (x *ListClusterLogsRequest) GetPageToken() string {
 	if x != nil {
 		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetAlwaysNextPageToken() bool {
+	if x != nil {
+		return x.AlwaysNextPageToken
+	}
+	return false
+}
+
+func (x *ListClusterLogsRequest) GetFilter() string {
+	if x != nil {
+		return x.Filter
+	}
+	return ""
+}
+
+func (x *ListClusterLogsRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
 	}
 	return ""
 }
@@ -4060,7 +4094,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.redis.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc5\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb9\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4071,7 +4105,12 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x06 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"6\n" +
+	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
+	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
+	"\x06filter\x18\t \x01(\tB\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
+	"\border_by\x18\n" +
+	" \x01(\tR\aorderBy\"6\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05REDIS\x10\x01\"{\n" +

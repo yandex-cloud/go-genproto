@@ -748,10 +748,11 @@ const file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_rawDesc = "" +
 	"\x13ListCaptchasRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"a\n" +
 	"\x14ListCaptchasResponse\x12C\n" +
-	"\tresources\x18\x03 \x03(\v2%.yandex.cloud.smartcaptcha.v1.CaptchaR\tresourcesJ\x04\b\x01\x10\x032\xfd\a\n" +
+	"\tresources\x18\x03 \x03(\v2%.yandex.cloud.smartcaptcha.v1.CaptchaR\tresourcesJ\x04\b\x01\x10\x032\x9d\t\n" +
 	"\x0eCaptchaService\x12\x8d\x01\n" +
 	"\x03Get\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a%.yandex.cloud.smartcaptcha.v1.Captcha\".\x82\xd3\xe4\x93\x02(\x12&/smartcaptcha/v1/captchas/{captcha_id}\x12\xac\x01\n" +
-	"\fGetSecretKey\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a..yandex.cloud.smartcaptcha.v1.CaptchaSecretKey\";\x82\xd3\xe4\x93\x025\x123/smartcaptcha/v1/captchas/{captcha_id}:getSecretKey\x12\xa9\x01\n" +
+	"\fGetSecretKey\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a..yandex.cloud.smartcaptcha.v1.CaptchaSecretKey\";\x82\xd3\xe4\x93\x025\x123/smartcaptcha/v1/captchas/{captcha_id}:getSecretKey\x12\x9d\x01\n" +
+	"\aGetKeys\x12/.yandex.cloud.smartcaptcha.v1.GetCaptchaRequest\x1a).yandex.cloud.smartcaptcha.v1.CaptchaKeys\"6\x82\xd3\xe4\x93\x020\x12./smartcaptcha/v1/captchas/{captcha_id}:getKeys\x12\xa9\x01\n" +
 	"\x06Create\x122.yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"H\xb2\xd2* \n" +
 	"\x15CreateCaptchaMetadata\x12\aCaptcha\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/smartcaptcha/v1/captchas\x12\xb3\x01\n" +
 	"\x06Delete\x122.yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest\x1a!.yandex.cloud.operation.Operation\"R\xb2\xd2* \n" +
@@ -794,7 +795,8 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_goTypes = []any{
 	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
 	(*Captcha)(nil),               // 17: yandex.cloud.smartcaptcha.v1.Captcha
 	(*CaptchaSecretKey)(nil),      // 18: yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
-	(*operation.Operation)(nil),   // 19: yandex.cloud.operation.Operation
+	(*CaptchaKeys)(nil),           // 19: yandex.cloud.smartcaptcha.v1.CaptchaKeys
+	(*operation.Operation)(nil),   // 20: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_depIdxs = []int32{
 	11, // 0: yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest.complexity:type_name -> yandex.cloud.smartcaptcha.v1.CaptchaComplexity
@@ -813,18 +815,20 @@ var file_yandex_cloud_smartcaptcha_v1_captcha_service_proto_depIdxs = []int32{
 	17, // 13: yandex.cloud.smartcaptcha.v1.ListCaptchasResponse.resources:type_name -> yandex.cloud.smartcaptcha.v1.Captcha
 	0,  // 14: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:input_type -> yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
 	0,  // 15: yandex.cloud.smartcaptcha.v1.CaptchaService.GetSecretKey:input_type -> yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
-	1,  // 16: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:input_type -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
-	3,  // 17: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:input_type -> yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
-	5,  // 18: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:input_type -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
-	7,  // 19: yandex.cloud.smartcaptcha.v1.CaptchaService.List:input_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
-	17, // 20: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:output_type -> yandex.cloud.smartcaptcha.v1.Captcha
-	18, // 21: yandex.cloud.smartcaptcha.v1.CaptchaService.GetSecretKey:output_type -> yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
-	19, // 22: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:output_type -> yandex.cloud.operation.Operation
-	19, // 23: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:output_type -> yandex.cloud.operation.Operation
-	19, // 24: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:output_type -> yandex.cloud.operation.Operation
-	8,  // 25: yandex.cloud.smartcaptcha.v1.CaptchaService.List:output_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
-	20, // [20:26] is the sub-list for method output_type
-	14, // [14:20] is the sub-list for method input_type
+	0,  // 16: yandex.cloud.smartcaptcha.v1.CaptchaService.GetKeys:input_type -> yandex.cloud.smartcaptcha.v1.GetCaptchaRequest
+	1,  // 17: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:input_type -> yandex.cloud.smartcaptcha.v1.CreateCaptchaRequest
+	3,  // 18: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:input_type -> yandex.cloud.smartcaptcha.v1.DeleteCaptchaRequest
+	5,  // 19: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:input_type -> yandex.cloud.smartcaptcha.v1.UpdateCaptchaRequest
+	7,  // 20: yandex.cloud.smartcaptcha.v1.CaptchaService.List:input_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasRequest
+	17, // 21: yandex.cloud.smartcaptcha.v1.CaptchaService.Get:output_type -> yandex.cloud.smartcaptcha.v1.Captcha
+	18, // 22: yandex.cloud.smartcaptcha.v1.CaptchaService.GetSecretKey:output_type -> yandex.cloud.smartcaptcha.v1.CaptchaSecretKey
+	19, // 23: yandex.cloud.smartcaptcha.v1.CaptchaService.GetKeys:output_type -> yandex.cloud.smartcaptcha.v1.CaptchaKeys
+	20, // 24: yandex.cloud.smartcaptcha.v1.CaptchaService.Create:output_type -> yandex.cloud.operation.Operation
+	20, // 25: yandex.cloud.smartcaptcha.v1.CaptchaService.Delete:output_type -> yandex.cloud.operation.Operation
+	20, // 26: yandex.cloud.smartcaptcha.v1.CaptchaService.Update:output_type -> yandex.cloud.operation.Operation
+	8,  // 27: yandex.cloud.smartcaptcha.v1.CaptchaService.List:output_type -> yandex.cloud.smartcaptcha.v1.ListCaptchasResponse
+	21, // [21:28] is the sub-list for method output_type
+	14, // [14:21] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
 	14, // [14:14] is the sub-list for extension extendee
 	0,  // [0:14] is the sub-list for field type_name
