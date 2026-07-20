@@ -1037,6 +1037,107 @@ func (x *ResetReplicationTokenMetadata) GetSubjectContainerId() string {
 	return ""
 }
 
+// Request to get the replication token.
+type GetReplicationTokenRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the subject container.
+	SubjectContainerId string `protobuf:"bytes,1,opt,name=subject_container_id,json=subjectContainerId,proto3" json:"subject_container_id,omitempty"`
+	// Type of synchronization session.
+	SessionType   SessionType `protobuf:"varint,2,opt,name=session_type,json=sessionType,proto3,enum=yandex.cloud.organizationmanager.v1.idp.SessionType" json:"session_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetReplicationTokenRequest) Reset() {
+	*x = GetReplicationTokenRequest{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetReplicationTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetReplicationTokenRequest) ProtoMessage() {}
+
+func (x *GetReplicationTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetReplicationTokenRequest.ProtoReflect.Descriptor instead.
+func (*GetReplicationTokenRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetReplicationTokenRequest) GetSubjectContainerId() string {
+	if x != nil {
+		return x.SubjectContainerId
+	}
+	return ""
+}
+
+func (x *GetReplicationTokenRequest) GetSessionType() SessionType {
+	if x != nil {
+		return x.SessionType
+	}
+	return SessionType_SESSION_TYPE_UNSPECIFIED
+}
+
+// Response message for [SynchronizationService.GetReplicationToken].
+type GetReplicationTokenResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Replication token value.
+	ReplicationToken string `protobuf:"bytes,1,opt,name=replication_token,json=replicationToken,proto3" json:"replication_token,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetReplicationTokenResponse) Reset() {
+	*x = GetReplicationTokenResponse{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetReplicationTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetReplicationTokenResponse) ProtoMessage() {}
+
+func (x *GetReplicationTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetReplicationTokenResponse.ProtoReflect.Descriptor instead.
+func (*GetReplicationTokenResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetReplicationTokenResponse) GetReplicationToken() string {
+	if x != nil {
+		return x.ReplicationToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDesc = "" +
@@ -1105,15 +1206,21 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto
 	"\x1cResetReplicationTokenRequest\x12>\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\"Q\n" +
 	"\x1dResetReplicationTokenMetadata\x120\n" +
-	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId*K\n" +
+	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\"\xbb\x01\n" +
+	"\x1aGetReplicationTokenRequest\x12>\n" +
+	"\x14subject_container_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x12subjectContainerId\x12]\n" +
+	"\fsession_type\x18\x02 \x01(\x0e24.yandex.cloud.organizationmanager.v1.idp.SessionTypeB\x04\xe8\xc71\x01R\vsessionType\"J\n" +
+	"\x1bGetReplicationTokenResponse\x12+\n" +
+	"\x11replication_token\x18\x01 \x01(\tR\x10replicationToken*K\n" +
 	"\x10AttributesFlavor\x12!\n" +
 	"\x1dATTRIBUTES_FLAVOR_UNSPECIFIED\x10\x00\x12\x14\n" +
-	"\x10ACTIVE_DIRECTORY\x10\x012\xb5\x0f\n" +
+	"\x10ACTIVE_DIRECTORY\x10\x012\x90\x11\n" +
 	"\x16SynchronizationService\x12\x8c\x02\n" +
 	"\x13SetReplicationToken\x12C.yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*4\n" +
 	"\x1bSetReplicationTokenMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02N:\x01*\"I/organization-manager/v1/idp/synchronization-settings:setReplicationToken\x12\x94\x02\n" +
 	"\x15ResetReplicationToken\x12E.yandex.cloud.organizationmanager.v1.idp.ResetReplicationTokenRequest\x1a!.yandex.cloud.operation.Operation\"\x90\x01\xb2\xd2*6\n" +
-	"\x1dResetReplicationTokenMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02P:\x01*\"K/organization-manager/v1/idp/synchronization-settings:resetReplicationToken\x12\x98\x02\n" +
+	"\x1dResetReplicationTokenMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02P:\x01*\"K/organization-manager/v1/idp/synchronization-settings:resetReplicationToken\x12\xd8\x01\n" +
+	"\x13GetReplicationToken\x12C.yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenRequest\x1aD.yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenResponse\"6\x82\xd3\xe4\x93\x020\x12./organization-manager/v1/idp/replication-token\x12\x98\x02\n" +
 	"\x1dCreateSynchronizationSettings\x12M.yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest\x1a!.yandex.cloud.operation.Operation\"\x84\x01\xb2\xd2*@\n" +
 	"%CreateSynchronizationSettingsMetadata\x12\x17SynchronizationSettings\x82\xd3\xe4\x93\x02::\x01*\"5/organization-manager/v1/idp/synchronization-settings\x12\xaf\x02\n" +
 	"\x1dUpdateSynchronizationSettings\x12M.yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest\x1a!.yandex.cloud.operation.Operation\"\x9b\x01\xb2\xd2*@\n" +
@@ -1137,7 +1244,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_
 }
 
 var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_goTypes = []any{
 	(AttributesFlavor)(0),                         // 0: yandex.cloud.organizationmanager.v1.idp.AttributesFlavor
 	(*CreateSynchronizationSettingsRequest)(nil),  // 1: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest
@@ -1156,59 +1263,64 @@ var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_g
 	(*SetReplicationTokenMetadata)(nil),           // 14: yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenMetadata
 	(*ResetReplicationTokenRequest)(nil),          // 15: yandex.cloud.organizationmanager.v1.idp.ResetReplicationTokenRequest
 	(*ResetReplicationTokenMetadata)(nil),         // 16: yandex.cloud.organizationmanager.v1.idp.ResetReplicationTokenMetadata
-	(*SynchronizationFilter)(nil),                 // 17: yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
-	(RemoveUserBehavior)(0),                       // 18: yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
-	(*durationpb.Duration)(nil),                   // 19: google.protobuf.Duration
-	(*UserAttributeMapping)(nil),                  // 20: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
-	(*GroupAttributeMapping)(nil),                 // 21: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
-	(*fieldmaskpb.FieldMask)(nil),                 // 22: google.protobuf.FieldMask
-	(UserTargetAttribute)(0),                      // 23: yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
-	(GroupTargetAttribute)(0),                     // 24: yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
-	(MappingType)(0),                              // 25: yandex.cloud.organizationmanager.v1.idp.MappingType
-	(SessionType)(0),                              // 26: yandex.cloud.organizationmanager.v1.idp.SessionType
-	(*operation.Operation)(nil),                   // 27: yandex.cloud.operation.Operation
-	(*SynchronizationSettings)(nil),               // 28: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
+	(*GetReplicationTokenRequest)(nil),            // 17: yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenRequest
+	(*GetReplicationTokenResponse)(nil),           // 18: yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenResponse
+	(*SynchronizationFilter)(nil),                 // 19: yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
+	(RemoveUserBehavior)(0),                       // 20: yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
+	(*durationpb.Duration)(nil),                   // 21: google.protobuf.Duration
+	(*UserAttributeMapping)(nil),                  // 22: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
+	(*GroupAttributeMapping)(nil),                 // 23: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
+	(*fieldmaskpb.FieldMask)(nil),                 // 24: google.protobuf.FieldMask
+	(UserTargetAttribute)(0),                      // 25: yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
+	(GroupTargetAttribute)(0),                     // 26: yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
+	(MappingType)(0),                              // 27: yandex.cloud.organizationmanager.v1.idp.MappingType
+	(SessionType)(0),                              // 28: yandex.cloud.organizationmanager.v1.idp.SessionType
+	(*operation.Operation)(nil),                   // 29: yandex.cloud.operation.Operation
+	(*SynchronizationSettings)(nil),               // 30: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
 }
 var file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_depIdxs = []int32{
-	17, // 0: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
-	18, // 1: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
-	19, // 2: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.synchronization_interval:type_name -> google.protobuf.Duration
-	20, // 3: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
-	21, // 4: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
-	17, // 5: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
-	18, // 6: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
-	19, // 7: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.synchronization_interval:type_name -> google.protobuf.Duration
-	20, // 8: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
-	21, // 9: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
-	22, // 10: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.update_mask:type_name -> google.protobuf.FieldMask
+	19, // 0: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
+	20, // 1: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
+	21, // 2: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.synchronization_interval:type_name -> google.protobuf.Duration
+	22, // 3: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
+	23, // 4: yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
+	19, // 5: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
+	20, // 6: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
+	21, // 7: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.synchronization_interval:type_name -> google.protobuf.Duration
+	22, // 8: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
+	23, // 9: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
+	24, // 10: yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest.update_mask:type_name -> google.protobuf.FieldMask
 	0,  // 11: yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesRequest.flavor:type_name -> yandex.cloud.organizationmanager.v1.idp.AttributesFlavor
 	10, // 12: yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesResponse.user_supported_attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.UserSupportedAttribute
 	11, // 13: yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesResponse.group_supported_attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupSupportedAttribute
-	23, // 14: yandex.cloud.organizationmanager.v1.idp.UserSupportedAttribute.target_attribute:type_name -> yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
+	25, // 14: yandex.cloud.organizationmanager.v1.idp.UserSupportedAttribute.target_attribute:type_name -> yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
 	12, // 15: yandex.cloud.organizationmanager.v1.idp.UserSupportedAttribute.source_attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.SourceAttributes
-	24, // 16: yandex.cloud.organizationmanager.v1.idp.GroupSupportedAttribute.target_attribute:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
+	26, // 16: yandex.cloud.organizationmanager.v1.idp.GroupSupportedAttribute.target_attribute:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
 	12, // 17: yandex.cloud.organizationmanager.v1.idp.GroupSupportedAttribute.source_attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.SourceAttributes
-	25, // 18: yandex.cloud.organizationmanager.v1.idp.SourceAttributes.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
-	26, // 19: yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenRequest.session_type:type_name -> yandex.cloud.organizationmanager.v1.idp.SessionType
-	13, // 20: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.SetReplicationToken:input_type -> yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenRequest
-	15, // 21: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ResetReplicationToken:input_type -> yandex.cloud.organizationmanager.v1.idp.ResetReplicationTokenRequest
-	1,  // 22: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.CreateSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest
-	3,  // 23: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.UpdateSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest
-	5,  // 24: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.DeleteSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteSynchronizationSettingsRequest
-	7,  // 25: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.GetSynchronizationSettingsRequest
-	8,  // 26: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ListSupportedAttributes:input_type -> yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesRequest
-	27, // 27: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.SetReplicationToken:output_type -> yandex.cloud.operation.Operation
-	27, // 28: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ResetReplicationToken:output_type -> yandex.cloud.operation.Operation
-	27, // 29: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.CreateSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
-	27, // 30: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.UpdateSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
-	27, // 31: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.DeleteSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
-	28, // 32: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetSynchronizationSettings:output_type -> yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
-	9,  // 33: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ListSupportedAttributes:output_type -> yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesResponse
-	27, // [27:34] is the sub-list for method output_type
-	20, // [20:27] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	27, // 18: yandex.cloud.organizationmanager.v1.idp.SourceAttributes.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
+	28, // 19: yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenRequest.session_type:type_name -> yandex.cloud.organizationmanager.v1.idp.SessionType
+	28, // 20: yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenRequest.session_type:type_name -> yandex.cloud.organizationmanager.v1.idp.SessionType
+	13, // 21: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.SetReplicationToken:input_type -> yandex.cloud.organizationmanager.v1.idp.SetReplicationTokenRequest
+	15, // 22: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ResetReplicationToken:input_type -> yandex.cloud.organizationmanager.v1.idp.ResetReplicationTokenRequest
+	17, // 23: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetReplicationToken:input_type -> yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenRequest
+	1,  // 24: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.CreateSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateSynchronizationSettingsRequest
+	3,  // 25: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.UpdateSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateSynchronizationSettingsRequest
+	5,  // 26: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.DeleteSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteSynchronizationSettingsRequest
+	7,  // 27: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetSynchronizationSettings:input_type -> yandex.cloud.organizationmanager.v1.idp.GetSynchronizationSettingsRequest
+	8,  // 28: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ListSupportedAttributes:input_type -> yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesRequest
+	29, // 29: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.SetReplicationToken:output_type -> yandex.cloud.operation.Operation
+	29, // 30: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ResetReplicationToken:output_type -> yandex.cloud.operation.Operation
+	18, // 31: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetReplicationToken:output_type -> yandex.cloud.organizationmanager.v1.idp.GetReplicationTokenResponse
+	29, // 32: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.CreateSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
+	29, // 33: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.UpdateSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
+	29, // 34: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.DeleteSynchronizationSettings:output_type -> yandex.cloud.operation.Operation
+	30, // 35: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.GetSynchronizationSettings:output_type -> yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
+	9,  // 36: yandex.cloud.organizationmanager.v1.idp.SynchronizationService.ListSupportedAttributes:output_type -> yandex.cloud.organizationmanager.v1.idp.ListSupportedAttributesResponse
+	29, // [29:37] is the sub-list for method output_type
+	21, // [21:29] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_init() }
@@ -1223,7 +1335,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_synchronization_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

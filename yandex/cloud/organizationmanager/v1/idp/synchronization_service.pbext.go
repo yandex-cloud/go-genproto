@@ -170,3 +170,15 @@ func (m *ResetReplicationTokenRequest) SetSubjectContainerId(v string) {
 func (m *ResetReplicationTokenMetadata) SetSubjectContainerId(v string) {
 	m.SubjectContainerId = v
 }
+
+func (m *GetReplicationTokenRequest) SetSubjectContainerId(v string) {
+	m.SubjectContainerId = v
+}
+
+func (m *GetReplicationTokenRequest) SetSessionType(v SessionType) {
+	m.SessionType = v
+}
+
+func (m *GetReplicationTokenResponse) SetReplicationToken(v string) {
+	m.ReplicationToken = v
+}

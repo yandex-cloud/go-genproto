@@ -412,7 +412,9 @@ type CreateClusterRequest struct {
 	HostGroupIds []string `protobuf:"bytes,13,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Backup long-term retention policies setting.
+	// Deprecated. Use yandex.cloud.mdb.postgresql.v1.BackupRetentionPolicyService.Create to create retention policies instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/cluster_service.proto.
 	RetentionPolicies []*v1.BackupRetentionPolicySpec `protobuf:"bytes,15,rep,name=retention_policies,json=retentionPolicies,proto3" json:"retention_policies,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,16,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
@@ -548,6 +550,7 @@ func (x *CreateClusterRequest) GetMaintenanceWindow() *MaintenanceWindow {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/cluster_service.proto.
 func (x *CreateClusterRequest) GetRetentionPolicies() []*v1.BackupRetentionPolicySpec {
 	if x != nil {
 		return x.RetentionPolicies
@@ -3766,7 +3769,7 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x83\x01\n" +
 	"\x14ListClustersResponse\x12C\n" +
 	"\bclusters\x18\x01 \x03(\v2'.yandex.cloud.mdb.postgresql.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe4\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe8\t\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3786,8 +3789,8 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12$\n" +
 	"\x0ehost_group_ids\x18\r \x03(\tR\fhostGroupIds\x12`\n" +
-	"\x12maintenance_window\x18\x0e \x01(\v21.yandex.cloud.mdb.postgresql.v1.MaintenanceWindowR\x11maintenanceWindow\x12]\n" +
-	"\x12retention_policies\x18\x0f \x03(\v2..yandex.cloud.mdb.v1.BackupRetentionPolicySpecR\x11retentionPolicies\x12Q\n" +
+	"\x12maintenance_window\x18\x0e \x01(\v21.yandex.cloud.mdb.postgresql.v1.MaintenanceWindowR\x11maintenanceWindow\x12a\n" +
+	"\x12retention_policies\x18\x0f \x03(\v2..yandex.cloud.mdb.v1.BackupRetentionPolicySpecB\x02\x18\x01R\x11retentionPolicies\x12Q\n" +
 	"\x16disk_encryption_key_id\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +

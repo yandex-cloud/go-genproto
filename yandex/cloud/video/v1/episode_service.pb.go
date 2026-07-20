@@ -388,6 +388,7 @@ type CreateEpisodeRequest struct {
 	FinishTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=finish_time,json=finishTime,proto3" json:"finish_time,omitempty"`
 	// Enables episode DVR mode.
 	// Determines how many last seconds of the stream are available.
+	//
 	// Possible values:
 	// * `0`: infinite dvr size, the full length of the stream allowed to display
 	// * `>0`: size of dvr window in seconds, the minimum value is 30s
@@ -1145,15 +1146,15 @@ func (x *BatchDeleteEpisodesMetadata) GetEpisodeIds() []string {
 
 type PerformEpisodeActionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the episode on which to perform the action.
+	EpisodeId string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
 	// Specifies which action to perform on the episode (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to Action:
 	//
 	//	*PerformEpisodeActionRequest_Publish
 	//	*PerformEpisodeActionRequest_Unpublish
-	Action isPerformEpisodeActionRequest_Action `protobuf_oneof:"action"`
-	// ID of the episode on which to perform the action.
-	EpisodeId     string `protobuf:"bytes,1,opt,name=episode_id,json=episodeId,proto3" json:"episode_id,omitempty"`
+	Action        isPerformEpisodeActionRequest_Action `protobuf_oneof:"action"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1188,6 +1189,13 @@ func (*PerformEpisodeActionRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_episode_service_proto_rawDescGZIP(), []int{15}
 }
 
+func (x *PerformEpisodeActionRequest) GetEpisodeId() string {
+	if x != nil {
+		return x.EpisodeId
+	}
+	return ""
+}
+
 func (x *PerformEpisodeActionRequest) GetAction() isPerformEpisodeActionRequest_Action {
 	if x != nil {
 		return x.Action
@@ -1211,13 +1219,6 @@ func (x *PerformEpisodeActionRequest) GetUnpublish() *UnpublishEpisodeAction {
 		}
 	}
 	return nil
-}
-
-func (x *PerformEpisodeActionRequest) GetEpisodeId() string {
-	if x != nil {
-		return x.EpisodeId
-	}
-	return ""
 }
 
 type isPerformEpisodeActionRequest_Action interface {
@@ -1730,11 +1731,11 @@ const file_yandex_cloud_video_v1_episode_service_proto_rawDesc = "" +
 	"\x1bBatchDeleteEpisodesMetadata\x12\x1f\n" +
 	"\vepisode_ids\x18\x01 \x03(\tR\n" +
 	"episodeIds\"\xfb\x01\n" +
-	"\x1bPerformEpisodeActionRequest\x12H\n" +
-	"\apublish\x18\xea\a \x01(\v2+.yandex.cloud.video.v1.PublishEpisodeActionH\x00R\apublish\x12N\n" +
-	"\tunpublish\x18\xeb\a \x01(\v2-.yandex.cloud.video.v1.UnpublishEpisodeActionH\x00R\tunpublish\x12+\n" +
+	"\x1bPerformEpisodeActionRequest\x12+\n" +
 	"\n" +
-	"episode_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tepisodeIdB\x0e\n" +
+	"episode_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tepisodeId\x12H\n" +
+	"\apublish\x18\xea\a \x01(\v2+.yandex.cloud.video.v1.PublishEpisodeActionH\x00R\apublish\x12N\n" +
+	"\tunpublish\x18\xeb\a \x01(\v2-.yandex.cloud.video.v1.UnpublishEpisodeActionH\x00R\tunpublishB\x0e\n" +
 	"\x06action\x12\x04\xc0\xc11\x01J\x05\b\x02\x10\xea\a\"\x16\n" +
 	"\x14PublishEpisodeAction\"\x18\n" +
 	"\x16UnpublishEpisodeAction\"=\n" +

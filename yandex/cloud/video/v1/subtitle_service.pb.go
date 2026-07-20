@@ -72,17 +72,17 @@ func (x *GetSubtitleRequest) GetSubtitleId() string {
 
 type ListSubtitlesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// The maximum number of subtitles to return per page.
+	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token for retrieving the next page of results.
+	// This token is obtained from the next_page_token field in the previous ListSubtitlesResponse.
+	PageToken string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 	// Specifies the parent resource to list subtitles from (exactly one must be chosen).
 	//
 	// Types that are valid to be assigned to ParentId:
 	//
 	//	*ListSubtitlesRequest_VideoId
-	ParentId isListSubtitlesRequest_ParentId `protobuf_oneof:"parent_id"`
-	// The maximum number of subtitles to return per page.
-	PageSize int64 `protobuf:"varint,100,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	// Page token for retrieving the next page of results.
-	// This token is obtained from the next_page_token field in the previous ListSubtitlesResponse.
-	PageToken     string `protobuf:"bytes,101,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	ParentId      isListSubtitlesRequest_ParentId `protobuf_oneof:"parent_id"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -117,6 +117,20 @@ func (*ListSubtitlesRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_video_v1_subtitle_service_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *ListSubtitlesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListSubtitlesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
 func (x *ListSubtitlesRequest) GetParentId() isListSubtitlesRequest_ParentId {
 	if x != nil {
 		return x.ParentId
@@ -129,20 +143,6 @@ func (x *ListSubtitlesRequest) GetVideoId() string {
 		if x, ok := x.ParentId.(*ListSubtitlesRequest_VideoId); ok {
 			return x.VideoId
 		}
-	}
-	return ""
-}
-
-func (x *ListSubtitlesRequest) GetPageSize() int64 {
-	if x != nil {
-		return x.PageSize
-	}
-	return 0
-}
-
-func (x *ListSubtitlesRequest) GetPageToken() string {
-	if x != nil {
-		return x.PageToken
 	}
 	return ""
 }
@@ -708,16 +708,16 @@ const file_yandex_cloud_video_v1_subtitle_service_proto_rawDesc = "" +
 	"\vsubtitle_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"subtitleId\"\xb2\x01\n" +
 	"\x14ListSubtitlesRequest\x12&\n" +
-	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12&\n" +
 	"\tpage_size\x18d \x01(\x03B\t\xfa\xc71\x05<=100R\bpageSize\x12*\n" +
 	"\n" +
-	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageTokenB\x11\n" +
+	"page_token\x18e \x01(\tB\v\x8a\xc81\a<=15000R\tpageToken\x12&\n" +
+	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoIdB\x11\n" +
 	"\tparent_id\x12\x04\xc0\xc11\x01J\x04\b\x01\x10dJ\x05\bf\x10\xe8\a\"\x84\x01\n" +
 	"\x15ListSubtitlesResponse\x12=\n" +
 	"\tsubtitles\x18\x01 \x03(\v2\x1f.yandex.cloud.video.v1.SubtitleR\tsubtitles\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xb3\x02\n" +
-	"\x15CreateSubtitleRequest\x12X\n" +
-	"\blanguage\x18\x01 \x01(\tB<\xf2\xc713ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|zho\x8a\xc81\x013R\blanguage\x12\x1e\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\xfe\x04\n" +
+	"\x15CreateSubtitleRequest\x12\xa2\x03\n" +
+	"\blanguage\x18\x01 \x01(\tB\x85\x03\xf2\xc71\xfb\x02afr|amh|ara|aze|bak|ben|bos|bul|cat|ceb|ces|chv|cym|dan|deu|ell|eng|epo|est|eus|fas|fin|fra|gla|gle|glg|guj|hat|heb|hin|hrv|hun|hye|ind|isl|ita|jav|jpn|kan|kat|kaz|khm|kir|kor|lao|lat|lav|lit|ltz|mal|mar|mhr|mkd|mlg|mlt|mon|mri|mrj|msa|mya|nep|nld|nor|pan|pap|pol|por|ron|rus|sah|sin|slk|slv|spa|sqi|srp|sun|swa|swe|tam|tat|tel|tgk|tgl|tha|tur|udm|ukr|urd|uzb|vie|xho|yid|zho|zul\x8a\xc81\x013R\blanguage\x12\x1e\n" +
 	"\x05label\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\x05label\x12&\n" +
 	"\bvideo_id\x18\xe8\a \x01(\tB\b\x8a\xc81\x04<=50H\x00R\avideoId\x12F\n" +
 	"\x06upload\x18\xcc\b \x01(\v2+.yandex.cloud.video.v1.SubtitleUploadParamsH\x01R\x06uploadB\x11\n" +

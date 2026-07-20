@@ -1662,7 +1662,7 @@ type GetVideoPlayerURLRequest struct {
 	// Optional player parameters to customize the playback experience.
 	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
 	Params *VideoPlayerParams `protobuf:"bytes,2,opt,name=params,proto3" json:"params,omitempty"`
-	// For episodes with signed URL access, specifies how long the generated URL will be valid.
+	// For videos with signed URL access, specifies how long the generated URL will be valid.
 	// If not provided, a default expiration duration will be used.
 	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,3,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`
 	unknownFields               protoimpl.UnknownFields
@@ -1853,7 +1853,7 @@ type BatchGetVideoPlayerURLsRequest struct {
 	// These parameters control initial player state such as mute, autoplay, and visibility of interface controls.
 	// These parameters will be applied to all generated player URLs.
 	Params *VideoPlayerParams `protobuf:"bytes,3,opt,name=params,proto3" json:"params,omitempty"`
-	// For episodes with signed URL access, specifies how long the generated URL will be valid.
+	// For videos with signed URL access, specifies how long the generated URL will be valid.
 	// If not provided, a default expiration duration will be used.
 	// This setting applies to all videos in the batch that use sign_url_access.
 	SignedUrlExpirationDuration *durationpb.Duration `protobuf:"bytes,4,opt,name=signed_url_expiration_duration,json=signedUrlExpirationDuration,proto3" json:"signed_url_expiration_duration,omitempty"`

@@ -142,7 +142,7 @@ type StreamLine struct {
 	ChannelId string `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	// Title of the stream line.
 	Title string `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
-	// Specifies which input source (main or backup) is selected for processing.
+	// Specifies which input source (main or backup) is currently active.
 	InputSource LineInputSource `protobuf:"varint,18,opt,name=input_source,json=inputSource,proto3,enum=yandex.cloud.video.v1.LineInputSource" json:"input_source,omitempty"`
 	// Specifies the input type and settings for the video signal source.
 	//

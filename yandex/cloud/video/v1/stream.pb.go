@@ -129,7 +129,6 @@ type Stream struct {
 	// Custom user-defined labels as `key:value` pairs.
 	// Maximum 64 labels per stream.
 	// Used for organization, filtering, and metadata purposes.
-	// Labels can be used for organization, filtering, and metadata purposes.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

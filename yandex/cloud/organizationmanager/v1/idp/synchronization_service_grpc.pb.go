@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	SynchronizationService_SetReplicationToken_FullMethodName           = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/SetReplicationToken"
 	SynchronizationService_ResetReplicationToken_FullMethodName         = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/ResetReplicationToken"
+	SynchronizationService_GetReplicationToken_FullMethodName           = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/GetReplicationToken"
 	SynchronizationService_CreateSynchronizationSettings_FullMethodName = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/CreateSynchronizationSettings"
 	SynchronizationService_UpdateSynchronizationSettings_FullMethodName = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/UpdateSynchronizationSettings"
 	SynchronizationService_DeleteSynchronizationSettings_FullMethodName = "/yandex.cloud.organizationmanager.v1.idp.SynchronizationService/DeleteSynchronizationSettings"
@@ -39,6 +40,8 @@ type SynchronizationServiceClient interface {
 	SetReplicationToken(ctx context.Context, in *SetReplicationTokenRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Resets the replication token for synchronization.
 	ResetReplicationToken(ctx context.Context, in *ResetReplicationTokenRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns the replication token for synchronization.
+	GetReplicationToken(ctx context.Context, in *GetReplicationTokenRequest, opts ...grpc.CallOption) (*GetReplicationTokenResponse, error)
 	// Creates synchronization settings for a subject container.
 	CreateSynchronizationSettings(ctx context.Context, in *CreateSynchronizationSettingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates synchronization settings for a subject container.
@@ -73,6 +76,16 @@ func (c *synchronizationServiceClient) ResetReplicationToken(ctx context.Context
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, SynchronizationService_ResetReplicationToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *synchronizationServiceClient) GetReplicationToken(ctx context.Context, in *GetReplicationTokenRequest, opts ...grpc.CallOption) (*GetReplicationTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetReplicationTokenResponse)
+	err := c.cc.Invoke(ctx, SynchronizationService_GetReplicationToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,6 +152,8 @@ type SynchronizationServiceServer interface {
 	SetReplicationToken(context.Context, *SetReplicationTokenRequest) (*operation.Operation, error)
 	// Resets the replication token for synchronization.
 	ResetReplicationToken(context.Context, *ResetReplicationTokenRequest) (*operation.Operation, error)
+	// Returns the replication token for synchronization.
+	GetReplicationToken(context.Context, *GetReplicationTokenRequest) (*GetReplicationTokenResponse, error)
 	// Creates synchronization settings for a subject container.
 	CreateSynchronizationSettings(context.Context, *CreateSynchronizationSettingsRequest) (*operation.Operation, error)
 	// Updates synchronization settings for a subject container.
@@ -163,6 +178,9 @@ func (UnimplementedSynchronizationServiceServer) SetReplicationToken(context.Con
 }
 func (UnimplementedSynchronizationServiceServer) ResetReplicationToken(context.Context, *ResetReplicationTokenRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResetReplicationToken not implemented")
+}
+func (UnimplementedSynchronizationServiceServer) GetReplicationToken(context.Context, *GetReplicationTokenRequest) (*GetReplicationTokenResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetReplicationToken not implemented")
 }
 func (UnimplementedSynchronizationServiceServer) CreateSynchronizationSettings(context.Context, *CreateSynchronizationSettingsRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSynchronizationSettings not implemented")
@@ -231,6 +249,24 @@ func _SynchronizationService_ResetReplicationToken_Handler(srv interface{}, ctx 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SynchronizationServiceServer).ResetReplicationToken(ctx, req.(*ResetReplicationTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SynchronizationService_GetReplicationToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReplicationTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SynchronizationServiceServer).GetReplicationToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SynchronizationService_GetReplicationToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SynchronizationServiceServer).GetReplicationToken(ctx, req.(*GetReplicationTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -339,6 +375,10 @@ var SynchronizationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetReplicationToken",
 			Handler:    _SynchronizationService_ResetReplicationToken_Handler,
+		},
+		{
+			MethodName: "GetReplicationToken",
+			Handler:    _SynchronizationService_GetReplicationToken_Handler,
 		},
 		{
 			MethodName: "CreateSynchronizationSettings",

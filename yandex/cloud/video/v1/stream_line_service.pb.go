@@ -342,6 +342,7 @@ type CreateStreamLineRequest struct {
 	//	*CreateStreamLineRequest_SrtPull
 	InputParams isCreateStreamLineRequest_InputParams `protobuf_oneof:"input_params"`
 	// Line type.
+	//
 	// The line type selection is permanent and cannot be switched between `manual_line`
 	// and `auto_line` after creation. However, the parameters inside
 	// the existing type structure can be modified.

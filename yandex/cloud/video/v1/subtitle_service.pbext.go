@@ -12,18 +12,18 @@ func (m *ListSubtitlesRequest) SetParentId(v ListSubtitlesRequest_ParentId) {
 	m.ParentId = v
 }
 
-func (m *ListSubtitlesRequest) SetVideoId(v string) {
-	m.ParentId = &ListSubtitlesRequest_VideoId{
-		VideoId: v,
-	}
-}
-
 func (m *ListSubtitlesRequest) SetPageSize(v int64) {
 	m.PageSize = v
 }
 
 func (m *ListSubtitlesRequest) SetPageToken(v string) {
 	m.PageToken = v
+}
+
+func (m *ListSubtitlesRequest) SetVideoId(v string) {
+	m.ParentId = &ListSubtitlesRequest_VideoId{
+		VideoId: v,
+	}
 }
 
 func (m *ListSubtitlesResponse) SetSubtitles(v []*Subtitle) {

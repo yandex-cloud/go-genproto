@@ -232,6 +232,10 @@ func (m *PerformEpisodeActionRequest) SetAction(v PerformEpisodeActionRequest_Ac
 	m.Action = v
 }
 
+func (m *PerformEpisodeActionRequest) SetEpisodeId(v string) {
+	m.EpisodeId = v
+}
+
 func (m *PerformEpisodeActionRequest) SetPublish(v *PublishEpisodeAction) {
 	m.Action = &PerformEpisodeActionRequest_Publish{
 		Publish: v,
@@ -242,10 +246,6 @@ func (m *PerformEpisodeActionRequest) SetUnpublish(v *UnpublishEpisodeAction) {
 	m.Action = &PerformEpisodeActionRequest_Unpublish{
 		Unpublish: v,
 	}
-}
-
-func (m *PerformEpisodeActionRequest) SetEpisodeId(v string) {
-	m.EpisodeId = v
 }
 
 func (m *PerformEpisodeActionMetadata) SetEpisodeId(v string) {
