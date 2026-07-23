@@ -1076,7 +1076,7 @@ const file_yandex_cloud_certificatemanager_v1_certificate_service_proto_rawDesc 
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12G\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\tpageToken\x12G\n" +
 	"\x04view\x18\x06 \x01(\x0e23.yandex.cloud.certificatemanager.v1.CertificateViewR\x04viewJ\x04\b\x04\x10\x06\"\x97\x01\n" +
 	"\x18ListCertificatesResponse\x12S\n" +
 	"\fcertificates\x18\x01 \x03(\v2/.yandex.cloud.certificatemanager.v1.CertificateR\fcertificates\x12&\n" +

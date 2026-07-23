@@ -133,17 +133,16 @@ type NodeGroup struct {
 	// Support for unsafe sysctl parameters. For more details see [documentation](https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/).
 	AllowedUnsafeSysctls []string `protobuf:"bytes,15,rep,name=allowed_unsafe_sysctls,json=allowedUnsafeSysctls,proto3" json:"allowed_unsafe_sysctls,omitempty"`
 	// Taints that are applied to the nodes of the node group at creation time.
-	//
 	// **The `nodeTaints` field is not supported for the [yandex.cloud.k8s.v1.NodeGroupService.Update] request.**
 	NodeTaints []*Taint `protobuf:"bytes,16,rep,name=node_taints,json=nodeTaints,proto3" json:"node_taints,omitempty"`
 	// Labels that are assigned to the nodes of the node group at creation time.
 	NodeLabels map[string]string `protobuf:"bytes,17,rep,name=node_labels,json=nodeLabels,proto3" json:"node_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// User-defined variables for templating.
-	Variables []*Variable `protobuf:"bytes,20,rep,name=variables,proto3" json:"variables,omitempty"`
 	// Workload Identity Federation parameters of the node group.
 	WorkloadIdentityFederation *NodeGroupWorkloadIdentityFederation `protobuf:"bytes,19,opt,name=workload_identity_federation,json=workloadIdentityFederation,proto3" json:"workload_identity_federation,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// User-defined variables for templating.
+	Variables     []*Variable `protobuf:"bytes,20,rep,name=variables,proto3" json:"variables,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NodeGroup) Reset() {
@@ -303,16 +302,16 @@ func (x *NodeGroup) GetNodeLabels() map[string]string {
 	return nil
 }
 
-func (x *NodeGroup) GetVariables() []*Variable {
+func (x *NodeGroup) GetWorkloadIdentityFederation() *NodeGroupWorkloadIdentityFederation {
 	if x != nil {
-		return x.Variables
+		return x.WorkloadIdentityFederation
 	}
 	return nil
 }
 
-func (x *NodeGroup) GetWorkloadIdentityFederation() *NodeGroupWorkloadIdentityFederation {
+func (x *NodeGroup) GetVariables() []*Variable {
 	if x != nil {
-		return x.WorkloadIdentityFederation
+		return x.Variables
 	}
 	return nil
 }
@@ -625,6 +624,52 @@ func (x *DeployPolicy) GetMaxExpansion() int64 {
 	return 0
 }
 
+// NodeGroupWorkloadIdentityFederation contains configuration for Workload Identity Federation.
+type NodeGroupWorkloadIdentityFederation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Identifies whether Workload Identity Federation is enabled.
+	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NodeGroupWorkloadIdentityFederation) Reset() {
+	*x = NodeGroupWorkloadIdentityFederation{}
+	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NodeGroupWorkloadIdentityFederation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NodeGroupWorkloadIdentityFederation) ProtoMessage() {}
+
+func (x *NodeGroupWorkloadIdentityFederation) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NodeGroupWorkloadIdentityFederation.ProtoReflect.Descriptor instead.
+func (*NodeGroupWorkloadIdentityFederation) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_k8s_v1_node_group_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *NodeGroupWorkloadIdentityFederation) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 // Variable is a user-defined key-value pair used for templating.
 type Variable struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -639,7 +684,7 @@ type Variable struct {
 
 func (x *Variable) Reset() {
 	*x = Variable{}
-	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[6]
+	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -651,7 +696,7 @@ func (x *Variable) String() string {
 func (*Variable) ProtoMessage() {}
 
 func (x *Variable) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[6]
+	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -664,7 +709,7 @@ func (x *Variable) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Variable.ProtoReflect.Descriptor instead.
 func (*Variable) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_node_group_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_k8s_v1_node_group_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Variable) GetKey() string {
@@ -679,52 +724,6 @@ func (x *Variable) GetValue() string {
 		return x.Value
 	}
 	return ""
-}
-
-// NodeGroupWorkloadIdentityFederation contains configuration for Workload Identity Federation.
-type NodeGroupWorkloadIdentityFederation struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifies whether Workload Identity Federation is enabled.
-	Enabled       bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *NodeGroupWorkloadIdentityFederation) Reset() {
-	*x = NodeGroupWorkloadIdentityFederation{}
-	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *NodeGroupWorkloadIdentityFederation) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*NodeGroupWorkloadIdentityFederation) ProtoMessage() {}
-
-func (x *NodeGroupWorkloadIdentityFederation) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_k8s_v1_node_group_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use NodeGroupWorkloadIdentityFederation.ProtoReflect.Descriptor instead.
-func (*NodeGroupWorkloadIdentityFederation) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_k8s_v1_node_group_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *NodeGroupWorkloadIdentityFederation) GetEnabled() bool {
-	if x != nil {
-		return x.Enabled
-	}
-	return false
 }
 
 type ScalePolicy_FixedScale struct {
@@ -863,9 +862,9 @@ const file_yandex_cloud_k8s_v1_node_group_proto_rawDesc = "" +
 	"\vnode_taints\x18\x10 \x03(\v2\x1a.yandex.cloud.k8s.v1.TaintR\n" +
 	"nodeTaints\x12O\n" +
 	"\vnode_labels\x18\x11 \x03(\v2..yandex.cloud.k8s.v1.NodeGroup.NodeLabelsEntryR\n" +
-	"nodeLabels\x12;\n" +
-	"\tvariables\x18\x14 \x03(\v2\x1d.yandex.cloud.k8s.v1.VariableR\tvariables\x12z\n" +
-	"\x1cworkload_identity_federation\x18\x13 \x01(\v28.yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederationR\x1aworkloadIdentityFederation\x1a9\n" +
+	"nodeLabels\x12z\n" +
+	"\x1cworkload_identity_federation\x18\x13 \x01(\v28.yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederationR\x1aworkloadIdentityFederation\x12;\n" +
+	"\tvariables\x18\x14 \x03(\v2\x1d.yandex.cloud.k8s.v1.VariableR\tvariables\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a=\n" +
@@ -907,12 +906,12 @@ const file_yandex_cloud_k8s_v1_node_group_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\x03 \x01(\v2&.yandex.cloud.k8s.v1.MaintenanceWindowR\x11maintenanceWindow\"r\n" +
 	"\fDeployPolicy\x122\n" +
 	"\x0fmax_unavailable\x18\x01 \x01(\x03B\t\xfa\xc71\x050-100R\x0emaxUnavailable\x12.\n" +
-	"\rmax_expansion\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\fmaxExpansion\"^\n" +
+	"\rmax_expansion\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\fmaxExpansion\"?\n" +
+	"#NodeGroupWorkloadIdentityFederation\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"^\n" +
 	"\bVariable\x12.\n" +
 	"\x03key\x18\x01 \x01(\tB\x1c\xf2\xc71\x0f[a-zA-Z0-9._-]*\x8a\xc81\x051-128R\x03key\x12\"\n" +
-	"\x05value\x18\x02 \x01(\tB\f\x8a\xc81\b<=262144R\x05value\"?\n" +
-	"#NodeGroupWorkloadIdentityFederation\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabledBV\n" +
+	"\x05value\x18\x02 \x01(\tB\f\x8a\xc81\b<=262144R\x05valueBV\n" +
 	"\x17yandex.cloud.api.k8s.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/k8s/v1;k8sb\x06proto3"
 
 var (
@@ -937,17 +936,17 @@ var file_yandex_cloud_k8s_v1_node_group_proto_goTypes = []any{
 	(*NodeGroupLocation)(nil),                   // 4: yandex.cloud.k8s.v1.NodeGroupLocation
 	(*NodeGroupMaintenancePolicy)(nil),          // 5: yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
 	(*DeployPolicy)(nil),                        // 6: yandex.cloud.k8s.v1.DeployPolicy
-	(*Variable)(nil),                            // 7: yandex.cloud.k8s.v1.Variable
-	(*NodeGroupWorkloadIdentityFederation)(nil), // 8: yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
-	nil,                            // 9: yandex.cloud.k8s.v1.NodeGroup.LabelsEntry
-	nil,                            // 10: yandex.cloud.k8s.v1.NodeGroup.NodeLabelsEntry
-	(*ScalePolicy_FixedScale)(nil), // 11: yandex.cloud.k8s.v1.ScalePolicy.FixedScale
-	(*ScalePolicy_AutoScale)(nil),  // 12: yandex.cloud.k8s.v1.ScalePolicy.AutoScale
-	(*timestamppb.Timestamp)(nil),  // 13: google.protobuf.Timestamp
-	(*NodeTemplate)(nil),           // 14: yandex.cloud.k8s.v1.NodeTemplate
-	(*VersionInfo)(nil),            // 15: yandex.cloud.k8s.v1.VersionInfo
-	(*Taint)(nil),                  // 16: yandex.cloud.k8s.v1.Taint
-	(*MaintenanceWindow)(nil),      // 17: yandex.cloud.k8s.v1.MaintenanceWindow
+	(*NodeGroupWorkloadIdentityFederation)(nil), // 7: yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	(*Variable)(nil),                            // 8: yandex.cloud.k8s.v1.Variable
+	nil,                                         // 9: yandex.cloud.k8s.v1.NodeGroup.LabelsEntry
+	nil,                                         // 10: yandex.cloud.k8s.v1.NodeGroup.NodeLabelsEntry
+	(*ScalePolicy_FixedScale)(nil),              // 11: yandex.cloud.k8s.v1.ScalePolicy.FixedScale
+	(*ScalePolicy_AutoScale)(nil),               // 12: yandex.cloud.k8s.v1.ScalePolicy.AutoScale
+	(*timestamppb.Timestamp)(nil),               // 13: google.protobuf.Timestamp
+	(*NodeTemplate)(nil),                        // 14: yandex.cloud.k8s.v1.NodeTemplate
+	(*VersionInfo)(nil),                         // 15: yandex.cloud.k8s.v1.VersionInfo
+	(*Taint)(nil),                               // 16: yandex.cloud.k8s.v1.Taint
+	(*MaintenanceWindow)(nil),                   // 17: yandex.cloud.k8s.v1.MaintenanceWindow
 }
 var file_yandex_cloud_k8s_v1_node_group_proto_depIdxs = []int32{
 	13, // 0: yandex.cloud.k8s.v1.NodeGroup.created_at:type_name -> google.protobuf.Timestamp
@@ -961,8 +960,8 @@ var file_yandex_cloud_k8s_v1_node_group_proto_depIdxs = []int32{
 	5,  // 8: yandex.cloud.k8s.v1.NodeGroup.maintenance_policy:type_name -> yandex.cloud.k8s.v1.NodeGroupMaintenancePolicy
 	16, // 9: yandex.cloud.k8s.v1.NodeGroup.node_taints:type_name -> yandex.cloud.k8s.v1.Taint
 	10, // 10: yandex.cloud.k8s.v1.NodeGroup.node_labels:type_name -> yandex.cloud.k8s.v1.NodeGroup.NodeLabelsEntry
-	7,  // 11: yandex.cloud.k8s.v1.NodeGroup.variables:type_name -> yandex.cloud.k8s.v1.Variable
-	8,  // 12: yandex.cloud.k8s.v1.NodeGroup.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	7,  // 11: yandex.cloud.k8s.v1.NodeGroup.workload_identity_federation:type_name -> yandex.cloud.k8s.v1.NodeGroupWorkloadIdentityFederation
+	8,  // 12: yandex.cloud.k8s.v1.NodeGroup.variables:type_name -> yandex.cloud.k8s.v1.Variable
 	11, // 13: yandex.cloud.k8s.v1.ScalePolicy.fixed_scale:type_name -> yandex.cloud.k8s.v1.ScalePolicy.FixedScale
 	12, // 14: yandex.cloud.k8s.v1.ScalePolicy.auto_scale:type_name -> yandex.cloud.k8s.v1.ScalePolicy.AutoScale
 	4,  // 15: yandex.cloud.k8s.v1.NodeGroupAllocationPolicy.locations:type_name -> yandex.cloud.k8s.v1.NodeGroupLocation

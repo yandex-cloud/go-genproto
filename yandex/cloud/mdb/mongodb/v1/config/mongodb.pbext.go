@@ -302,6 +302,10 @@ func (m *MongosConfig) SetChunkSize(v *wrapperspb.Int64Value) {
 	m.ChunkSize = v
 }
 
+func (m *MongosConfig) SetOperationProfiling(v *MongosConfig_OperationProfiling) {
+	m.OperationProfiling = v
+}
+
 func (m *MongosConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
 }
@@ -372,6 +376,14 @@ func (m *MongosConfig_SetParameter) SetRedactClientLogData(v *wrapperspb.BoolVal
 
 func (m *MongosConfig_AuditLog) SetFilter(v string) {
 	m.Filter = v
+}
+
+func (m *MongosConfig_OperationProfiling) SetSlowOpThreshold(v *wrapperspb.Int64Value) {
+	m.SlowOpThreshold = v
+}
+
+func (m *MongosConfig_OperationProfiling) SetSlowOpSampleRate(v *wrapperspb.DoubleValue) {
+	m.SlowOpSampleRate = v
 }
 
 func (m *MongodConfigSet) SetEffectiveConfig(v *MongodConfig) {

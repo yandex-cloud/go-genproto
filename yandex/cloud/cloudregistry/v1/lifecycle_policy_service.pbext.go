@@ -122,3 +122,103 @@ func (m *DryRunLifecyclePolicyResponse) SetArtifactsToHardDeleteCount(v int64) {
 func (m *DryRunLifecyclePolicyResponse) SetArtifactsToSoftDeleteCount(v int64) {
 	m.ArtifactsToSoftDeleteCount = v
 }
+
+func (m *DryRunLifecyclePolicyResponse) SetDryRunId(v string) {
+	m.DryRunId = v
+}
+
+func (m *DryRunLifecyclePolicyResponse) SetPolicySnapshot(v []*LifecycleRule) {
+	m.PolicySnapshot = v
+}
+
+func (m *GetDryRunLifecyclePolicyResultRequest) SetDryRunId(v string) {
+	m.DryRunId = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetPolicyId(v string) {
+	m.PolicyId = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetRunAfter(v *timestamppb.Timestamp) {
+	m.RunAfter = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetRunBefore(v *timestamppb.Timestamp) {
+	m.RunBefore = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsResponse) SetResults(v []*DryRunLifecyclePolicyResponse) {
+	m.Results = v
+}
+
+func (m *ListDryRunLifecyclePolicyResultsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetDryRunId(v string) {
+	m.DryRunId = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetPathFilter(v string) {
+	m.PathFilter = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetVersionFilter(v string) {
+	m.VersionFilter = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsResponse) SetArtifacts(v []*AffectedArtifact) {
+	m.Artifacts = v
+}
+
+func (m *ListDryRunLifecyclePolicyArtifactsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
+
+func (m *AffectedArtifact) SetPath(v string) {
+	m.Path = v
+}
+
+func (m *AffectedArtifact) SetVersion(v string) {
+	m.Version = v
+}
+
+func (m *AffectedArtifact) SetArtifactId(v string) {
+	m.ArtifactId = v
+}
+
+func (m *AffectedArtifact) SetAffectedBy(v *AffectedArtifact_TriggeredRule) {
+	m.AffectedBy = v
+}
+
+func (m *AffectedArtifact_TriggeredRule) SetRuleType(v LifecycleRuleType) {
+	m.RuleType = v
+}
+
+func (m *AffectedArtifact_TriggeredRule) SetRuleIndex(v int64) {
+	m.RuleIndex = v
+}

@@ -720,7 +720,7 @@ const file_yandex_cloud_kms_v1_asymmetricsignature_asymmetric_signature_key_serv
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xa2\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\tpageToken\"\xa2\x01\n" +
 	"#ListAsymmetricSignatureKeysResponse\x12S\n" +
 	"\x04keys\x18\x01 \x03(\v2?.yandex.cloud.kms.v1.asymmetricsignature.AsymmetricSignatureKeyR\x04keys\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd6\x04\n" +

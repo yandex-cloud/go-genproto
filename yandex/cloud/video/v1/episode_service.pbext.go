@@ -291,3 +291,19 @@ func (m *GetEpisodeManifestsRequest) SetEpisodeId(v string) {
 func (m *GetEpisodeManifestsResponse) SetManifests(v []*Manifest) {
 	m.Manifests = v
 }
+
+func (m *DownloadEpisodeRequest) SetEpisodeId(v string) {
+	m.EpisodeId = v
+}
+
+func (m *DownloadEpisodeMetadata) SetEpisodeId(v string) {
+	m.EpisodeId = v
+}
+
+func (m *DownloadableEpisodePayload) SetDownloadUrl(v string) {
+	m.DownloadUrl = v
+}
+
+func (m *DownloadableEpisodePayload) SetExpiresAt(v *timestamppb.Timestamp) {
+	m.ExpiresAt = v
+}

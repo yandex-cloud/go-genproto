@@ -646,11 +646,9 @@ type NodeTemplate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the instance.
 	// In order to be unique it must contain at least on of instance unique placeholders:
-	//
-	//	{instance.short_id}
-	//	{instance.index}
-	//	combination of {instance.zone_id} and {instance.index_in_zone}
-	//
+	// {instance.short_id}
+	// {instance.index}
+	// combination of {instance.zone_id} and {instance.index_in_zone}
 	// Example: my-instance-{instance.index}
 	// If not set, default is used: {instance_group.id}-{instance.short_id}
 	// It may also contain another placeholders, see metadata doc for full list.
@@ -666,7 +664,6 @@ type NodeTemplate struct {
 	// ID of the reserved instance pool.
 	ReservedInstancePoolId string `protobuf:"bytes,19,opt,name=reserved_instance_pool_id,json=reservedInstancePoolId,proto3" json:"reserved_instance_pool_id,omitempty"`
 	// The metadata as `key:value` pairs assigned to this instance template. Only SSH keys are supported as metadata.
-	//
 	// For more information, see [Connecting to a node over SSH](/docs/managed-kubernetes/operations/node-connect-ssh).
 	Metadata map[string]string `protobuf:"bytes,4,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Specification for the create network interfaces for the node group compute instances.
@@ -1766,21 +1763,21 @@ const file_yandex_cloud_k8s_v1_node_proto_rawDesc = "" +
 	"\n" +
 	"CONTAINERD\x10\x02\x1a3\n" +
 	"\x18ContainerNetworkSettings\x12\x17\n" +
-	"\apod_mtu\x18\x01 \x01(\x03R\x06podMtuJ\x04\b\x0e\x10\x0fJ\x04\b\x11\x10\x12J\x04\b\b\x10\n" +
-	"\"\xe1\x01\n" +
+	"\apod_mtu\x18\x01 \x01(\x03R\x06podMtuJ\x04\b\b\x10\n" +
+	"J\x04\b\x0e\x10\x0fJ\x04\b\x11\x10\x12\"\xe1\x01\n" +
 	"\vGpuSettings\x12$\n" +
 	"\x0egpu_cluster_id\x18\x01 \x01(\tR\fgpuClusterId\x12X\n" +
 	"\x0fgpu_environment\x18\x02 \x01(\x0e2/.yandex.cloud.k8s.v1.GpuSettings.GpuEnvironmentR\x0egpuEnvironment\"R\n" +
 	"\x0eGpuEnvironment\x12\x1f\n" +
 	"\x1bGPU_ENVIRONMENT_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11RUNC_DRIVERS_CUDA\x10\x01\x12\b\n" +
-	"\x04RUNC\x10\x02\"\x9d\x02\n" +
+	"\x04RUNC\x10\x02\"\xa3\x02\n" +
 	"\x14NetworkInterfaceSpec\x12\x1d\n" +
 	"\n" +
 	"subnet_ids\x18\x02 \x03(\tR\tsubnetIds\x12[\n" +
 	"\x17primary_v4_address_spec\x18\x03 \x01(\v2$.yandex.cloud.k8s.v1.NodeAddressSpecR\x14primaryV4AddressSpec\x12[\n" +
 	"\x17primary_v6_address_spec\x18\x04 \x01(\v2$.yandex.cloud.k8s.v1.NodeAddressSpecR\x14primaryV6AddressSpec\x12,\n" +
-	"\x12security_group_ids\x18\x05 \x03(\tR\x10securityGroupIds\"\xb3\x01\n" +
+	"\x12security_group_ids\x18\x05 \x03(\tR\x10securityGroupIdsJ\x04\b\x01\x10\x02\"\xb3\x01\n" +
 	"\x0fNodeAddressSpec\x12R\n" +
 	"\x13one_to_one_nat_spec\x18\x01 \x01(\v2$.yandex.cloud.k8s.v1.OneToOneNatSpecR\x0foneToOneNatSpec\x12L\n" +
 	"\x10dns_record_specs\x18\x02 \x03(\v2\".yandex.cloud.k8s.v1.DnsRecordSpecR\x0ednsRecordSpecs\"z\n" +
@@ -1796,9 +1793,9 @@ const file_yandex_cloud_k8s_v1_node_proto_rawDesc = "" +
 	"\x06memory\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=0R\x06memory\x12\x1d\n" +
 	"\x05cores\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\x05cores\x12.\n" +
 	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\fcoreFraction\x12\x1b\n" +
-	"\x04gpus\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\x04gpus\"\xa8\x01\n" +
-	"\bDiskSpec\x12j\n" +
-	"\fdisk_type_id\x18\x01 \x01(\tBH\xf2\xc71D|network-ssd|network-hdd|network-ssd-nonreplicated|network-ssd-io-m3R\n" +
+	"\x04gpus\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=0R\x04gpus\"\xb5\x01\n" +
+	"\bDiskSpec\x12w\n" +
+	"\fdisk_type_id\x18\x01 \x01(\tBU\xf2\xc71Q|network-ssd|network-nvme|network-hdd|network-ssd-nonreplicated|network-ssd-io-m3R\n" +
 	"diskTypeId\x120\n" +
 	"\tdisk_size\x18\x02 \x01(\x03B\x13\xfa\xc71\x0f0-4398046511104R\bdiskSize\"4\n" +
 	"\x10SchedulingPolicy\x12 \n" +

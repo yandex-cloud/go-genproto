@@ -413,7 +413,9 @@ func (x *PushStreamKey) GetBackupKey() string {
 type RTMPPushInput struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// RTMP server url.
-	Url           string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// RTMP server URL for the signal identified by the backup stream key.
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -451,6 +453,13 @@ func (*RTMPPushInput) Descriptor() ([]byte, []int) {
 func (x *RTMPPushInput) GetUrl() string {
 	if x != nil {
 		return x.Url
+	}
+	return ""
+}
+
+func (x *RTMPPushInput) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
 	}
 	return ""
 }
@@ -685,9 +694,11 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\rPushStreamKey\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1d\n" +
 	"\n" +
-	"backup_key\x18\x02 \x01(\tR\tbackupKey\"!\n" +
+	"backup_key\x18\x02 \x01(\tR\tbackupKey\"@\n" +
 	"\rRTMPPushInput\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\"@\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tR\tbackupUrl\"@\n" +
 	"\rRTMPPullInput\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +

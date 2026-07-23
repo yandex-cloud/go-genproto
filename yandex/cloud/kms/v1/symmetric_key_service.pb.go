@@ -1328,7 +1328,7 @@ const file_yandex_cloud_kms_v1_symmetric_key_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"z\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\tpageToken\"z\n" +
 	"\x19ListSymmetricKeysResponse\x125\n" +
 	"\x04keys\x18\x01 \x03(\v2!.yandex.cloud.kms.v1.SymmetricKeyR\x04keys\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x99\x01\n" +

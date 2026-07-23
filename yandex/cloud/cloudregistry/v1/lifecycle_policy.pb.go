@@ -74,6 +74,62 @@ func (DeleteLifecycleRuleKind) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{0}
 }
 
+// What a lifecycle rule does with an artifact.
+type LifecycleRuleType int32
+
+const (
+	LifecycleRuleType_LIFECYCLE_RULE_TYPE_UNSPECIFIED LifecycleRuleType = 0
+	// Hard delete. The artifact is removed for good and can not be restored.
+	LifecycleRuleType_LIFECYCLE_RULE_TYPE_HARD_DELETE LifecycleRuleType = 1
+	// Soft delete. The artifact is marked for deletion but can be restored.
+	LifecycleRuleType_LIFECYCLE_RULE_TYPE_SOFT_DELETE LifecycleRuleType = 2
+	// Retain. The artifact is kept.
+	LifecycleRuleType_LIFECYCLE_RULE_TYPE_RETAIN LifecycleRuleType = 3
+)
+
+// Enum value maps for LifecycleRuleType.
+var (
+	LifecycleRuleType_name = map[int32]string{
+		0: "LIFECYCLE_RULE_TYPE_UNSPECIFIED",
+		1: "LIFECYCLE_RULE_TYPE_HARD_DELETE",
+		2: "LIFECYCLE_RULE_TYPE_SOFT_DELETE",
+		3: "LIFECYCLE_RULE_TYPE_RETAIN",
+	}
+	LifecycleRuleType_value = map[string]int32{
+		"LIFECYCLE_RULE_TYPE_UNSPECIFIED": 0,
+		"LIFECYCLE_RULE_TYPE_HARD_DELETE": 1,
+		"LIFECYCLE_RULE_TYPE_SOFT_DELETE": 2,
+		"LIFECYCLE_RULE_TYPE_RETAIN":      3,
+	}
+)
+
+func (x LifecycleRuleType) Enum() *LifecycleRuleType {
+	p := new(LifecycleRuleType)
+	*p = x
+	return p
+}
+
+func (x LifecycleRuleType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LifecycleRuleType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[1].Descriptor()
+}
+
+func (LifecycleRuleType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[1]
+}
+
+func (x LifecycleRuleType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LifecycleRuleType.Descriptor instead.
+func (LifecycleRuleType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{1}
+}
+
 // State of the lifecycle policy.
 type LifecyclePolicyState int32
 
@@ -110,11 +166,11 @@ func (x LifecyclePolicyState) String() string {
 }
 
 func (LifecyclePolicyState) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[2].Descriptor()
 }
 
 func (LifecyclePolicyState) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[1]
+	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[2]
 }
 
 func (x LifecyclePolicyState) Number() protoreflect.EnumNumber {
@@ -123,7 +179,7 @@ func (x LifecyclePolicyState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use LifecyclePolicyState.Descriptor instead.
 func (LifecyclePolicyState) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP(), []int{2}
 }
 
 type DockerFilters_TagStatus int32
@@ -165,11 +221,11 @@ func (x DockerFilters_TagStatus) String() string {
 }
 
 func (DockerFilters_TagStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[3].Descriptor()
 }
 
 func (DockerFilters_TagStatus) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[2]
+	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[3]
 }
 
 func (x DockerFilters_TagStatus) Number() protoreflect.EnumNumber {
@@ -220,11 +276,11 @@ func (x MavenFilters_VersionType) String() string {
 }
 
 func (MavenFilters_VersionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[4].Descriptor()
 }
 
 func (MavenFilters_VersionType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[3]
+	return &file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes[4]
 }
 
 func (x MavenFilters_VersionType) Number() protoreflect.EnumNumber {
@@ -962,7 +1018,12 @@ const file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc = "" +
 	"\x17DeleteLifecycleRuleKind\x12*\n" +
 	"&DELETE_LIFECYCLE_RULE_KIND_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vHARD_DELETE\x10\x01\x12\x0f\n" +
-	"\vSOFT_DELETE\x10\x02*Y\n" +
+	"\vSOFT_DELETE\x10\x02*\xa2\x01\n" +
+	"\x11LifecycleRuleType\x12#\n" +
+	"\x1fLIFECYCLE_RULE_TYPE_UNSPECIFIED\x10\x00\x12#\n" +
+	"\x1fLIFECYCLE_RULE_TYPE_HARD_DELETE\x10\x01\x12#\n" +
+	"\x1fLIFECYCLE_RULE_TYPE_SOFT_DELETE\x10\x02\x12\x1e\n" +
+	"\x1aLIFECYCLE_RULE_TYPE_RETAIN\x10\x03*Y\n" +
 	"\x14LifecyclePolicyState\x12&\n" +
 	"\"LIFECYCLE_POLICY_STATE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bDISABLED\x10\x01\x12\v\n" +
@@ -981,36 +1042,37 @@ func file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescGZIP() []b
 	return file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_goTypes = []any{
 	(DeleteLifecycleRuleKind)(0),       // 0: yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind
-	(LifecyclePolicyState)(0),          // 1: yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	(DockerFilters_TagStatus)(0),       // 2: yandex.cloud.cloudregistry.v1.DockerFilters.TagStatus
-	(MavenFilters_VersionType)(0),      // 3: yandex.cloud.cloudregistry.v1.MavenFilters.VersionType
-	(*LifecyclePolicy)(nil),            // 4: yandex.cloud.cloudregistry.v1.LifecyclePolicy
-	(*LifecycleRule)(nil),              // 5: yandex.cloud.cloudregistry.v1.LifecycleRule
-	(*DockerFilters)(nil),              // 6: yandex.cloud.cloudregistry.v1.DockerFilters
-	(*MavenFilters)(nil),               // 7: yandex.cloud.cloudregistry.v1.MavenFilters
-	(*KeepByVersionLifecycleRule)(nil), // 8: yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRule
-	(*KeepByAgeLifecycleRule)(nil),     // 9: yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRule
-	(*DeleteLifecycleRule)(nil),        // 10: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule
-	(*DeleteByVersionCondition)(nil),   // 11: yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
-	(*timestamppb.Timestamp)(nil),      // 12: google.protobuf.Timestamp
+	(LifecycleRuleType)(0),             // 1: yandex.cloud.cloudregistry.v1.LifecycleRuleType
+	(LifecyclePolicyState)(0),          // 2: yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	(DockerFilters_TagStatus)(0),       // 3: yandex.cloud.cloudregistry.v1.DockerFilters.TagStatus
+	(MavenFilters_VersionType)(0),      // 4: yandex.cloud.cloudregistry.v1.MavenFilters.VersionType
+	(*LifecyclePolicy)(nil),            // 5: yandex.cloud.cloudregistry.v1.LifecyclePolicy
+	(*LifecycleRule)(nil),              // 6: yandex.cloud.cloudregistry.v1.LifecycleRule
+	(*DockerFilters)(nil),              // 7: yandex.cloud.cloudregistry.v1.DockerFilters
+	(*MavenFilters)(nil),               // 8: yandex.cloud.cloudregistry.v1.MavenFilters
+	(*KeepByVersionLifecycleRule)(nil), // 9: yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRule
+	(*KeepByAgeLifecycleRule)(nil),     // 10: yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRule
+	(*DeleteLifecycleRule)(nil),        // 11: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule
+	(*DeleteByVersionCondition)(nil),   // 12: yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
+	(*timestamppb.Timestamp)(nil),      // 13: google.protobuf.Timestamp
 }
 var file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_depIdxs = []int32{
-	5,  // 0: yandex.cloud.cloudregistry.v1.LifecyclePolicy.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
-	1,  // 1: yandex.cloud.cloudregistry.v1.LifecyclePolicy.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
-	12, // 2: yandex.cloud.cloudregistry.v1.LifecyclePolicy.created_at:type_name -> google.protobuf.Timestamp
-	12, // 3: yandex.cloud.cloudregistry.v1.LifecyclePolicy.modified_at:type_name -> google.protobuf.Timestamp
-	9,  // 4: yandex.cloud.cloudregistry.v1.LifecycleRule.keep_by_age:type_name -> yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRule
-	8,  // 5: yandex.cloud.cloudregistry.v1.LifecycleRule.keep_by_version:type_name -> yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRule
-	10, // 6: yandex.cloud.cloudregistry.v1.LifecycleRule.delete:type_name -> yandex.cloud.cloudregistry.v1.DeleteLifecycleRule
-	6,  // 7: yandex.cloud.cloudregistry.v1.LifecycleRule.docker_filters:type_name -> yandex.cloud.cloudregistry.v1.DockerFilters
-	7,  // 8: yandex.cloud.cloudregistry.v1.LifecycleRule.maven_filters:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters
-	2,  // 9: yandex.cloud.cloudregistry.v1.DockerFilters.tag_status:type_name -> yandex.cloud.cloudregistry.v1.DockerFilters.TagStatus
-	3,  // 10: yandex.cloud.cloudregistry.v1.MavenFilters.version_type:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters.VersionType
-	11, // 11: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.version_condition:type_name -> yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
+	6,  // 0: yandex.cloud.cloudregistry.v1.LifecyclePolicy.rules:type_name -> yandex.cloud.cloudregistry.v1.LifecycleRule
+	2,  // 1: yandex.cloud.cloudregistry.v1.LifecyclePolicy.state:type_name -> yandex.cloud.cloudregistry.v1.LifecyclePolicyState
+	13, // 2: yandex.cloud.cloudregistry.v1.LifecyclePolicy.created_at:type_name -> google.protobuf.Timestamp
+	13, // 3: yandex.cloud.cloudregistry.v1.LifecyclePolicy.modified_at:type_name -> google.protobuf.Timestamp
+	10, // 4: yandex.cloud.cloudregistry.v1.LifecycleRule.keep_by_age:type_name -> yandex.cloud.cloudregistry.v1.KeepByAgeLifecycleRule
+	9,  // 5: yandex.cloud.cloudregistry.v1.LifecycleRule.keep_by_version:type_name -> yandex.cloud.cloudregistry.v1.KeepByVersionLifecycleRule
+	11, // 6: yandex.cloud.cloudregistry.v1.LifecycleRule.delete:type_name -> yandex.cloud.cloudregistry.v1.DeleteLifecycleRule
+	7,  // 7: yandex.cloud.cloudregistry.v1.LifecycleRule.docker_filters:type_name -> yandex.cloud.cloudregistry.v1.DockerFilters
+	8,  // 8: yandex.cloud.cloudregistry.v1.LifecycleRule.maven_filters:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters
+	3,  // 9: yandex.cloud.cloudregistry.v1.DockerFilters.tag_status:type_name -> yandex.cloud.cloudregistry.v1.DockerFilters.TagStatus
+	4,  // 10: yandex.cloud.cloudregistry.v1.MavenFilters.version_type:type_name -> yandex.cloud.cloudregistry.v1.MavenFilters.VersionType
+	12, // 11: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.version_condition:type_name -> yandex.cloud.cloudregistry.v1.DeleteByVersionCondition
 	0,  // 12: yandex.cloud.cloudregistry.v1.DeleteLifecycleRule.type:type_name -> yandex.cloud.cloudregistry.v1.DeleteLifecycleRuleKind
 	13, // [13:13] is the sub-list for method output_type
 	13, // [13:13] is the sub-list for method input_type
@@ -1041,7 +1103,7 @@ func file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_lifecycle_policy_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,

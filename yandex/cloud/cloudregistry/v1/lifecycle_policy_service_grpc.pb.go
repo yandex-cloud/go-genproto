@@ -21,13 +21,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LifecyclePolicyService_Create_FullMethodName      = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Create"
-	LifecyclePolicyService_Update_FullMethodName      = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Update"
-	LifecyclePolicyService_Delete_FullMethodName      = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Delete"
-	LifecyclePolicyService_Get_FullMethodName         = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Get"
-	LifecyclePolicyService_List_FullMethodName        = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/List"
-	LifecyclePolicyService_ChangeState_FullMethodName = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/ChangeState"
-	LifecyclePolicyService_DryRun_FullMethodName      = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/DryRun"
+	LifecyclePolicyService_Create_FullMethodName              = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Create"
+	LifecyclePolicyService_Update_FullMethodName              = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Update"
+	LifecyclePolicyService_Delete_FullMethodName              = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Delete"
+	LifecyclePolicyService_Get_FullMethodName                 = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/Get"
+	LifecyclePolicyService_List_FullMethodName                = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/List"
+	LifecyclePolicyService_ChangeState_FullMethodName         = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/ChangeState"
+	LifecyclePolicyService_DryRun_FullMethodName              = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/DryRun"
+	LifecyclePolicyService_GetDryRunResult_FullMethodName     = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/GetDryRunResult"
+	LifecyclePolicyService_ListDryRunResults_FullMethodName   = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/ListDryRunResults"
+	LifecyclePolicyService_ListDryRunArtifacts_FullMethodName = "/yandex.cloud.cloudregistry.v1.LifecyclePolicyService/ListDryRunArtifacts"
 )
 
 // LifecyclePolicyServiceClient is the client API for LifecyclePolicyService service.
@@ -50,6 +53,12 @@ type LifecyclePolicyServiceClient interface {
 	ChangeState(ctx context.Context, in *ChangeLifecyclePolicyStateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Creates a request of a dry run of the lifecycle policy.
 	DryRun(ctx context.Context, in *DryRunLifecyclePolicyRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns one dry run result by its ID.
+	GetDryRunResult(ctx context.Context, in *GetDryRunLifecyclePolicyResultRequest, opts ...grpc.CallOption) (*DryRunLifecyclePolicyResponse, error)
+	// Returns the list of dry run results of one lifecycle policy.
+	ListDryRunResults(ctx context.Context, in *ListDryRunLifecyclePolicyResultsRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyResultsResponse, error)
+	// Returns the list of artifacts that the dry run would delete.
+	ListDryRunArtifacts(ctx context.Context, in *ListDryRunLifecyclePolicyArtifactsRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyArtifactsResponse, error)
 }
 
 type lifecyclePolicyServiceClient struct {
@@ -130,6 +139,36 @@ func (c *lifecyclePolicyServiceClient) DryRun(ctx context.Context, in *DryRunLif
 	return out, nil
 }
 
+func (c *lifecyclePolicyServiceClient) GetDryRunResult(ctx context.Context, in *GetDryRunLifecyclePolicyResultRequest, opts ...grpc.CallOption) (*DryRunLifecyclePolicyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DryRunLifecyclePolicyResponse)
+	err := c.cc.Invoke(ctx, LifecyclePolicyService_GetDryRunResult_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lifecyclePolicyServiceClient) ListDryRunResults(ctx context.Context, in *ListDryRunLifecyclePolicyResultsRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyResultsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDryRunLifecyclePolicyResultsResponse)
+	err := c.cc.Invoke(ctx, LifecyclePolicyService_ListDryRunResults_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lifecyclePolicyServiceClient) ListDryRunArtifacts(ctx context.Context, in *ListDryRunLifecyclePolicyArtifactsRequest, opts ...grpc.CallOption) (*ListDryRunLifecyclePolicyArtifactsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDryRunLifecyclePolicyArtifactsResponse)
+	err := c.cc.Invoke(ctx, LifecyclePolicyService_ListDryRunArtifacts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LifecyclePolicyServiceServer is the server API for LifecyclePolicyService service.
 // All implementations should embed UnimplementedLifecyclePolicyServiceServer
 // for forward compatibility.
@@ -150,6 +189,12 @@ type LifecyclePolicyServiceServer interface {
 	ChangeState(context.Context, *ChangeLifecyclePolicyStateRequest) (*emptypb.Empty, error)
 	// Creates a request of a dry run of the lifecycle policy.
 	DryRun(context.Context, *DryRunLifecyclePolicyRequest) (*operation.Operation, error)
+	// Returns one dry run result by its ID.
+	GetDryRunResult(context.Context, *GetDryRunLifecyclePolicyResultRequest) (*DryRunLifecyclePolicyResponse, error)
+	// Returns the list of dry run results of one lifecycle policy.
+	ListDryRunResults(context.Context, *ListDryRunLifecyclePolicyResultsRequest) (*ListDryRunLifecyclePolicyResultsResponse, error)
+	// Returns the list of artifacts that the dry run would delete.
+	ListDryRunArtifacts(context.Context, *ListDryRunLifecyclePolicyArtifactsRequest) (*ListDryRunLifecyclePolicyArtifactsResponse, error)
 }
 
 // UnimplementedLifecyclePolicyServiceServer should be embedded to have
@@ -179,6 +224,15 @@ func (UnimplementedLifecyclePolicyServiceServer) ChangeState(context.Context, *C
 }
 func (UnimplementedLifecyclePolicyServiceServer) DryRun(context.Context, *DryRunLifecyclePolicyRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DryRun not implemented")
+}
+func (UnimplementedLifecyclePolicyServiceServer) GetDryRunResult(context.Context, *GetDryRunLifecyclePolicyResultRequest) (*DryRunLifecyclePolicyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDryRunResult not implemented")
+}
+func (UnimplementedLifecyclePolicyServiceServer) ListDryRunResults(context.Context, *ListDryRunLifecyclePolicyResultsRequest) (*ListDryRunLifecyclePolicyResultsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDryRunResults not implemented")
+}
+func (UnimplementedLifecyclePolicyServiceServer) ListDryRunArtifacts(context.Context, *ListDryRunLifecyclePolicyArtifactsRequest) (*ListDryRunLifecyclePolicyArtifactsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDryRunArtifacts not implemented")
 }
 func (UnimplementedLifecyclePolicyServiceServer) testEmbeddedByValue() {}
 
@@ -326,6 +380,60 @@ func _LifecyclePolicyService_DryRun_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LifecyclePolicyService_GetDryRunResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDryRunLifecyclePolicyResultRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LifecyclePolicyServiceServer).GetDryRunResult(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LifecyclePolicyService_GetDryRunResult_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LifecyclePolicyServiceServer).GetDryRunResult(ctx, req.(*GetDryRunLifecyclePolicyResultRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LifecyclePolicyService_ListDryRunResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDryRunLifecyclePolicyResultsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LifecyclePolicyServiceServer).ListDryRunResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LifecyclePolicyService_ListDryRunResults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LifecyclePolicyServiceServer).ListDryRunResults(ctx, req.(*ListDryRunLifecyclePolicyResultsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LifecyclePolicyService_ListDryRunArtifacts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDryRunLifecyclePolicyArtifactsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LifecyclePolicyServiceServer).ListDryRunArtifacts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LifecyclePolicyService_ListDryRunArtifacts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LifecyclePolicyServiceServer).ListDryRunArtifacts(ctx, req.(*ListDryRunLifecyclePolicyArtifactsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LifecyclePolicyService_ServiceDesc is the grpc.ServiceDesc for LifecyclePolicyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -360,6 +468,18 @@ var LifecyclePolicyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DryRun",
 			Handler:    _LifecyclePolicyService_DryRun_Handler,
+		},
+		{
+			MethodName: "GetDryRunResult",
+			Handler:    _LifecyclePolicyService_GetDryRunResult_Handler,
+		},
+		{
+			MethodName: "ListDryRunResults",
+			Handler:    _LifecyclePolicyService_ListDryRunResults_Handler,
+		},
+		{
+			MethodName: "ListDryRunArtifacts",
+			Handler:    _LifecyclePolicyService_ListDryRunArtifacts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

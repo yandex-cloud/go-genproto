@@ -30,6 +30,7 @@ const (
 	EpisodeService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.EpisodeService/PerformAction"
 	EpisodeService_GetPlayerURL_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetPlayerURL"
 	EpisodeService_GetManifests_FullMethodName  = "/yandex.cloud.video.v1.EpisodeService/GetManifests"
+	EpisodeService_Download_FullMethodName      = "/yandex.cloud.video.v1.EpisodeService/Download"
 )
 
 // EpisodeServiceClient is the client API for EpisodeService service.
@@ -75,6 +76,11 @@ type EpisodeServiceClient interface {
 	// Manifests and their urls MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(ctx context.Context, in *GetEpisodeManifestsRequest, opts ...grpc.CallOption) (*GetEpisodeManifestsResponse, error)
+	// Starts preparing the episode for download.
+	// This allows downloading the episode as a single file.
+	// The URL to the video file expires at the time specified in DownloadableEpisodePayload.expires_at.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	Download(ctx context.Context, in *DownloadEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
 type episodeServiceClient struct {
@@ -185,6 +191,16 @@ func (c *episodeServiceClient) GetManifests(ctx context.Context, in *GetEpisodeM
 	return out, nil
 }
 
+func (c *episodeServiceClient) Download(ctx context.Context, in *DownloadEpisodeRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, EpisodeService_Download_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EpisodeServiceServer is the server API for EpisodeService service.
 // All implementations should embed UnimplementedEpisodeServiceServer
 // for forward compatibility.
@@ -228,6 +244,11 @@ type EpisodeServiceServer interface {
 	// Manifests and their urls MUST not be cached.
 	// The player MUST request a fresh manifest every time playback starts.
 	GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error)
+	// Starts preparing the episode for download.
+	// This allows downloading the episode as a single file.
+	// The URL to the video file expires at the time specified in DownloadableEpisodePayload.expires_at.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	Download(context.Context, *DownloadEpisodeRequest) (*operation.Operation, error)
 }
 
 // UnimplementedEpisodeServiceServer should be embedded to have
@@ -266,6 +287,9 @@ func (UnimplementedEpisodeServiceServer) GetPlayerURL(context.Context, *GetEpiso
 }
 func (UnimplementedEpisodeServiceServer) GetManifests(context.Context, *GetEpisodeManifestsRequest) (*GetEpisodeManifestsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetManifests not implemented")
+}
+func (UnimplementedEpisodeServiceServer) Download(context.Context, *DownloadEpisodeRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method Download not implemented")
 }
 func (UnimplementedEpisodeServiceServer) testEmbeddedByValue() {}
 
@@ -467,6 +491,24 @@ func _EpisodeService_GetManifests_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EpisodeService_Download_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DownloadEpisodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EpisodeServiceServer).Download(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EpisodeService_Download_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EpisodeServiceServer).Download(ctx, req.(*DownloadEpisodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EpisodeService_ServiceDesc is the grpc.ServiceDesc for EpisodeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -513,6 +555,10 @@ var EpisodeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetManifests",
 			Handler:    _EpisodeService_GetManifests_Handler,
+		},
+		{
+			MethodName: "Download",
+			Handler:    _EpisodeService_Download_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

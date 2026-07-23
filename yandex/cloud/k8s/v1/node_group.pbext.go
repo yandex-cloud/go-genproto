@@ -78,12 +78,12 @@ func (m *NodeGroup) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
 }
 
-func (m *NodeGroup) SetVariables(v []*Variable) {
-	m.Variables = v
-}
-
 func (m *NodeGroup) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
 	m.WorkloadIdentityFederation = v
+}
+
+func (m *NodeGroup) SetVariables(v []*Variable) {
+	m.Variables = v
 }
 
 type ScalePolicy_ScaleType = isScalePolicy_ScaleType
@@ -152,14 +152,14 @@ func (m *DeployPolicy) SetMaxExpansion(v int64) {
 	m.MaxExpansion = v
 }
 
+func (m *NodeGroupWorkloadIdentityFederation) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
 func (m *Variable) SetKey(v string) {
 	m.Key = v
 }
 
 func (m *Variable) SetValue(v string) {
 	m.Value = v
-}
-
-func (m *NodeGroupWorkloadIdentityFederation) SetEnabled(v bool) {
-	m.Enabled = v
 }

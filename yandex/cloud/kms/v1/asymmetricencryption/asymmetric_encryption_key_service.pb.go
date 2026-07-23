@@ -720,7 +720,7 @@ const file_yandex_cloud_kms_v1_asymmetricencryption_asymmetric_encryption_key_se
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\xa5\x01\n" +
+	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\tpageToken\"\xa5\x01\n" +
 	"$ListAsymmetricEncryptionKeysResponse\x12U\n" +
 	"\x04keys\x18\x01 \x03(\v2A.yandex.cloud.kms.v1.asymmetricencryption.AsymmetricEncryptionKeyR\x04keys\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xdb\x04\n" +

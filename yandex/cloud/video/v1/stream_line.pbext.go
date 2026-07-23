@@ -88,6 +88,10 @@ func (m *RTMPPushInput) SetUrl(v string) {
 	m.Url = v
 }
 
+func (m *RTMPPushInput) SetBackupUrl(v string) {
+	m.BackupUrl = v
+}
+
 func (m *RTMPPullInput) SetUrl(v string) {
 	m.Url = v
 }
