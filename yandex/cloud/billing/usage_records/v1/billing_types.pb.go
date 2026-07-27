@@ -490,8 +490,11 @@ type Resource struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Type of the service instance this resource is bound to (e.g. "cloud", "tracker", "datalens").
 	ServiceInstanceType string `protobuf:"bytes,3,opt,name=service_instance_type,json=serviceInstanceType,proto3" json:"service_instance_type,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Additional resource metadata.
+	// Absent if the metadata could not be resolved for this resource.
+	Meta          *ResourceMeta `protobuf:"bytes,4,opt,name=meta,proto3" json:"meta,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Resource) Reset() {
@@ -545,6 +548,86 @@ func (x *Resource) GetServiceInstanceType() string {
 	return ""
 }
 
+func (x *Resource) GetMeta() *ResourceMeta {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
+// Additional metadata about a resource.
+type ResourceMeta struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the Yandex.Cloud service that owns the resource (e.g. "compute", "managed-mysql").
+	Service string `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
+	// Type of the resource in terms of its owning service (e.g. "compute.disk", "mdb.cluster").
+	ResourceType string `protobuf:"bytes,2,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	// ID of the cloud the resource belongs to.
+	CloudId string `protobuf:"bytes,3,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// ID of the folder the resource belongs to.
+	FolderId      string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResourceMeta) Reset() {
+	*x = ResourceMeta{}
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourceMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourceMeta) ProtoMessage() {}
+
+func (x *ResourceMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourceMeta.ProtoReflect.Descriptor instead.
+func (*ResourceMeta) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ResourceMeta) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *ResourceMeta) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
+func (x *ResourceMeta) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ResourceMeta) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
 // Represents a key-value label pair attached to resources for custom metadata tagging.
 // Labels allow grouping and filtering resources by user-defined dimensions.
 type Label struct {
@@ -559,7 +642,7 @@ type Label struct {
 
 func (x *Label) Reset() {
 	*x = Label{}
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +654,7 @@ func (x *Label) String() string {
 func (*Label) ProtoMessage() {}
 
 func (x *Label) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[8]
+	mi := &file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +667,7 @@ func (x *Label) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Label.ProtoReflect.Descriptor instead.
 func (*Label) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{8}
+	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Label) GetKey() string {
@@ -635,11 +718,17 @@ const file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc = "
 	"\vtranslation\x18\a \x01(\tR\vtranslation\x12!\n" +
 	"\fpricing_unit\x18\x05 \x01(\tR\vpricingUnit\x12\x1d\n" +
 	"\n" +
-	"service_id\x18\x06 \x01(\tR\tserviceId\"b\n" +
+	"service_id\x18\x06 \x01(\tR\tserviceId\"\xab\x01\n" +
 	"\bResource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x122\n" +
-	"\x15service_instance_type\x18\x03 \x01(\tR\x13serviceInstanceType\"/\n" +
+	"\x15service_instance_type\x18\x03 \x01(\tR\x13serviceInstanceType\x12G\n" +
+	"\x04meta\x18\x04 \x01(\v23.yandex.cloud.billing.usage_records.v1.ResourceMetaR\x04meta\"\x85\x01\n" +
+	"\fResourceMeta\x12\x18\n" +
+	"\aservice\x18\x01 \x01(\tR\aservice\x12#\n" +
+	"\rresource_type\x18\x02 \x01(\tR\fresourceType\x12\x19\n" +
+	"\bcloud_id\x18\x03 \x01(\tR\acloudId\x12\x1b\n" +
+	"\tfolder_id\x18\x04 \x01(\tR\bfolderId\"/\n" +
 	"\x05Label\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05valueB\x83\x01\n" +
@@ -657,7 +746,7 @@ func file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescGZIP(
 	return file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDescData
 }
 
-var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_goTypes = []any{
 	(*LabelList)(nil),       // 0: yandex.cloud.billing.usage_records.v1.LabelList
 	(*BillingAccount)(nil),  // 1: yandex.cloud.billing.usage_records.v1.BillingAccount
@@ -667,14 +756,16 @@ var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_goTypes = []a
 	(*Service)(nil),         // 5: yandex.cloud.billing.usage_records.v1.Service
 	(*SKU)(nil),             // 6: yandex.cloud.billing.usage_records.v1.SKU
 	(*Resource)(nil),        // 7: yandex.cloud.billing.usage_records.v1.Resource
-	(*Label)(nil),           // 8: yandex.cloud.billing.usage_records.v1.Label
+	(*ResourceMeta)(nil),    // 8: yandex.cloud.billing.usage_records.v1.ResourceMeta
+	(*Label)(nil),           // 9: yandex.cloud.billing.usage_records.v1.Label
 }
 var file_yandex_cloud_billing_usage_records_v1_billing_types_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	8, // 0: yandex.cloud.billing.usage_records.v1.Resource.meta:type_name -> yandex.cloud.billing.usage_records.v1.ResourceMeta
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_billing_usage_records_v1_billing_types_proto_init() }
@@ -688,7 +779,7 @@ func file_yandex_cloud_billing_usage_records_v1_billing_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc), len(file_yandex_cloud_billing_usage_records_v1_billing_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

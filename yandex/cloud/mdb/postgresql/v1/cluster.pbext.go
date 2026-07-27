@@ -434,6 +434,10 @@ func (m *PerformanceDiagnostics) SetStatementsSamplingInterval(v int64) {
 	m.StatementsSamplingInterval = v
 }
 
+func (m *PerformanceDiagnostics) SetAdvancedMode(v bool) {
+	m.AdvancedMode = v
+}
+
 func (m *ManagedRepack) SetEnabled(v *wrapperspb.BoolValue) {
 	m.Enabled = v
 }

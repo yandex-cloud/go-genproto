@@ -1550,7 +1550,7 @@ var File_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto protoreflect.Fil
 
 const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\n" +
-	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\x9a\x19\n" +
+	"6yandex/cloud/smartwebsecurity/v1/waf/waf_profile.proto\x12$yandex.cloud.smartwebsecurity.v1.waf\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"\x94\x19\n" +
 	"\n" +
 	"WafProfile\x12f\n" +
 	"\rcore_rule_set\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.waf.WafProfile.CoreRuleSetB\x02\x18\x01H\x00R\vcoreRuleSet\x12\x14\n" +
@@ -1624,8 +1624,9 @@ const file_yandex_cloud_smartwebsecurity_v1_waf_waf_profile_proto_rawDesc = "" +
 	"\brule_set\x12\x04\xc0\xc11\x01\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x10\n" +
-	"\brule_set\x12\x04\xc0\xc11\x01\"o\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
+	"\n" +
+	"\brule_set\"o\n" +
 	"\x0eWafProfileRule\x12\x1d\n" +
 	"\arule_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06ruleId\x12\x1d\n" +
 	"\n" +

@@ -360,28 +360,29 @@ func (PostgresqlConfig14_LogErrorVerbosity) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_LogLevel int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_LOG_LEVEL_UNSPECIFIED PostgresqlConfig14_LogLevel = 0
-	// Provides successively-more-detailed information for use by developers.
+	// Provides the most detailed diagnostic information for developers.
 	PostgresqlConfig14_LOG_LEVEL_DEBUG5 PostgresqlConfig14_LogLevel = 1
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG3.
 	PostgresqlConfig14_LOG_LEVEL_DEBUG4 PostgresqlConfig14_LogLevel = 2
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG2.
 	PostgresqlConfig14_LOG_LEVEL_DEBUG3 PostgresqlConfig14_LogLevel = 3
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG1.
 	PostgresqlConfig14_LOG_LEVEL_DEBUG2 PostgresqlConfig14_LogLevel = 4
-	// Provides successively-more-detailed information for use by developers.
+	// Provides diagnostic information for developers.
 	PostgresqlConfig14_LOG_LEVEL_DEBUG1 PostgresqlConfig14_LogLevel = 5
-	// Reports information of interest to administrators, e.g., checkpoint activity.
+	// Reports information of interest to database administrators.
 	PostgresqlConfig14_LOG_LEVEL_LOG PostgresqlConfig14_LogLevel = 6
-	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	// Reports information that may be helpful to users.
 	PostgresqlConfig14_LOG_LEVEL_NOTICE PostgresqlConfig14_LogLevel = 7
-	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	// Reports a warning about a likely problem.
 	PostgresqlConfig14_LOG_LEVEL_WARNING PostgresqlConfig14_LogLevel = 8
-	// Reports an error that caused the current command to abort.
+	// Reports an error that aborts the current command.
 	PostgresqlConfig14_LOG_LEVEL_ERROR PostgresqlConfig14_LogLevel = 9
-	// Reports an error that caused the current session to abort.
+	// Reports an error that aborts the current session.
 	PostgresqlConfig14_LOG_LEVEL_FATAL PostgresqlConfig14_LogLevel = 10
-	// Reports an error that caused all database sessions to abort.
+	// Reports an error that aborts all database sessions.
 	PostgresqlConfig14_LOG_LEVEL_PANIC PostgresqlConfig14_LogLevel = 11
 )
 
@@ -558,14 +559,15 @@ func (PostgresqlConfig14_PasswordEncryption) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_PgHintPlanDebugPrint int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_PG_HINT_PLAN_DEBUG_PRINT_UNSPECIFIED PostgresqlConfig14_PgHintPlanDebugPrint = 0
-	// Disable debug output
+	// Disables diagnostic logging.
 	PostgresqlConfig14_PG_HINT_PLAN_DEBUG_PRINT_OFF PostgresqlConfig14_PgHintPlanDebugPrint = 1
-	// Print debug messages about hint parsing
+	// Logs hint-processing results grouped by used, unused, duplicate, and erroneous hints.
 	PostgresqlConfig14_PG_HINT_PLAN_DEBUG_PRINT_ON PostgresqlConfig14_PgHintPlanDebugPrint = 2
-	// Print detailed debug information including query planning process
+	// Logs hint-processing results together with detailed planner diagnostics.
 	PostgresqlConfig14_PG_HINT_PLAN_DEBUG_PRINT_DETAILED PostgresqlConfig14_PgHintPlanDebugPrint = 3
-	// Print verbose debug output with all internal operations
+	// Logs the most detailed diagnostics, including query strings used to extract hints.
 	PostgresqlConfig14_PG_HINT_PLAN_DEBUG_PRINT_VERBOSE PostgresqlConfig14_PgHintPlanDebugPrint = 4
 )
 
@@ -1033,173 +1035,343 @@ func (PostgresqlConfig14_XmlOption) EnumDescriptor() ([]byte, []int) {
 // parameters which detailed description is available in
 // [PostgreSQL documentation](https://www.postgresql.org/docs/11/runtime-config.html).
 type PostgresqlConfig14 struct {
-	state                               protoimpl.MessageState                      `protogen:"open.v1"`
-	MaxConnections                      *wrapperspb.Int64Value                      `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
-	SharedBuffers                       *wrapperspb.Int64Value                      `protobuf:"bytes,2,opt,name=shared_buffers,json=sharedBuffers,proto3" json:"shared_buffers,omitempty"` // in bytes.
-	TempBuffers                         *wrapperspb.Int64Value                      `protobuf:"bytes,3,opt,name=temp_buffers,json=tempBuffers,proto3" json:"temp_buffers,omitempty"`       // in bytes.
-	MaxPreparedTransactions             *wrapperspb.Int64Value                      `protobuf:"bytes,4,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
-	WorkMem                             *wrapperspb.Int64Value                      `protobuf:"bytes,5,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`                                    // in bytes.
-	MaintenanceWorkMem                  *wrapperspb.Int64Value                      `protobuf:"bytes,6,opt,name=maintenance_work_mem,json=maintenanceWorkMem,proto3" json:"maintenance_work_mem,omitempty"` // in bytes.
-	AutovacuumWorkMem                   *wrapperspb.Int64Value                      `protobuf:"bytes,7,opt,name=autovacuum_work_mem,json=autovacuumWorkMem,proto3" json:"autovacuum_work_mem,omitempty"`    // in bytes.
-	TempFileLimit                       *wrapperspb.Int64Value                      `protobuf:"bytes,8,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`                // in bytes.
-	VacuumCostDelay                     *wrapperspb.Int64Value                      `protobuf:"bytes,9,opt,name=vacuum_cost_delay,json=vacuumCostDelay,proto3" json:"vacuum_cost_delay,omitempty"`          // in milliseconds.
-	VacuumCostPageHit                   *wrapperspb.Int64Value                      `protobuf:"bytes,10,opt,name=vacuum_cost_page_hit,json=vacuumCostPageHit,proto3" json:"vacuum_cost_page_hit,omitempty"`
-	VacuumCostPageMiss                  *wrapperspb.Int64Value                      `protobuf:"bytes,11,opt,name=vacuum_cost_page_miss,json=vacuumCostPageMiss,proto3" json:"vacuum_cost_page_miss,omitempty"`
-	VacuumCostPageDirty                 *wrapperspb.Int64Value                      `protobuf:"bytes,12,opt,name=vacuum_cost_page_dirty,json=vacuumCostPageDirty,proto3" json:"vacuum_cost_page_dirty,omitempty"`
-	VacuumCostLimit                     *wrapperspb.Int64Value                      `protobuf:"bytes,13,opt,name=vacuum_cost_limit,json=vacuumCostLimit,proto3" json:"vacuum_cost_limit,omitempty"`
-	BgwriterDelay                       *wrapperspb.Int64Value                      `protobuf:"bytes,14,opt,name=bgwriter_delay,json=bgwriterDelay,proto3" json:"bgwriter_delay,omitempty"` // in milliseconds.
-	BgwriterLruMaxpages                 *wrapperspb.Int64Value                      `protobuf:"bytes,15,opt,name=bgwriter_lru_maxpages,json=bgwriterLruMaxpages,proto3" json:"bgwriter_lru_maxpages,omitempty"`
-	BgwriterLruMultiplier               *wrapperspb.DoubleValue                     `protobuf:"bytes,16,opt,name=bgwriter_lru_multiplier,json=bgwriterLruMultiplier,proto3" json:"bgwriter_lru_multiplier,omitempty"`
-	BgwriterFlushAfter                  *wrapperspb.Int64Value                      `protobuf:"bytes,17,opt,name=bgwriter_flush_after,json=bgwriterFlushAfter,proto3" json:"bgwriter_flush_after,omitempty"` // in bytes
-	BackendFlushAfter                   *wrapperspb.Int64Value                      `protobuf:"bytes,18,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`    // in bytes
-	OldSnapshotThreshold                *wrapperspb.Int64Value                      `protobuf:"bytes,19,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`
-	WalLevel                            PostgresqlConfig14_WalLevel                 `protobuf:"varint,20,opt,name=wal_level,json=walLevel,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_WalLevel" json:"wal_level,omitempty"`
-	SynchronousCommit                   PostgresqlConfig14_SynchronousCommit        `protobuf:"varint,21,opt,name=synchronous_commit,json=synchronousCommit,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_SynchronousCommit" json:"synchronous_commit,omitempty"`
-	CheckpointTimeout                   *wrapperspb.Int64Value                      `protobuf:"bytes,22,opt,name=checkpoint_timeout,json=checkpointTimeout,proto3" json:"checkpoint_timeout,omitempty"` // in milliseconds.
-	CheckpointCompletionTarget          *wrapperspb.DoubleValue                     `protobuf:"bytes,23,opt,name=checkpoint_completion_target,json=checkpointCompletionTarget,proto3" json:"checkpoint_completion_target,omitempty"`
-	CheckpointFlushAfter                *wrapperspb.Int64Value                      `protobuf:"bytes,24,opt,name=checkpoint_flush_after,json=checkpointFlushAfter,proto3" json:"checkpoint_flush_after,omitempty"`               // in bytes
-	MaxWalSize                          *wrapperspb.Int64Value                      `protobuf:"bytes,25,opt,name=max_wal_size,json=maxWalSize,proto3" json:"max_wal_size,omitempty"`                                             // in bytes.
-	MinWalSize                          *wrapperspb.Int64Value                      `protobuf:"bytes,26,opt,name=min_wal_size,json=minWalSize,proto3" json:"min_wal_size,omitempty"`                                             // in bytes.
-	MaxStandbyStreamingDelay            *wrapperspb.Int64Value                      `protobuf:"bytes,27,opt,name=max_standby_streaming_delay,json=maxStandbyStreamingDelay,proto3" json:"max_standby_streaming_delay,omitempty"` // in milliseconds.
-	DefaultStatisticsTarget             *wrapperspb.Int64Value                      `protobuf:"bytes,28,opt,name=default_statistics_target,json=defaultStatisticsTarget,proto3" json:"default_statistics_target,omitempty"`
-	ConstraintExclusion                 PostgresqlConfig14_ConstraintExclusion      `protobuf:"varint,29,opt,name=constraint_exclusion,json=constraintExclusion,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ConstraintExclusion" json:"constraint_exclusion,omitempty"`
-	CursorTupleFraction                 *wrapperspb.DoubleValue                     `protobuf:"bytes,30,opt,name=cursor_tuple_fraction,json=cursorTupleFraction,proto3" json:"cursor_tuple_fraction,omitempty"`
-	FromCollapseLimit                   *wrapperspb.Int64Value                      `protobuf:"bytes,31,opt,name=from_collapse_limit,json=fromCollapseLimit,proto3" json:"from_collapse_limit,omitempty"`
-	JoinCollapseLimit                   *wrapperspb.Int64Value                      `protobuf:"bytes,32,opt,name=join_collapse_limit,json=joinCollapseLimit,proto3" json:"join_collapse_limit,omitempty"`
-	ForceParallelMode                   PostgresqlConfig14_ForceParallelMode        `protobuf:"varint,33,opt,name=force_parallel_mode,json=forceParallelMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ForceParallelMode" json:"force_parallel_mode,omitempty"`
-	ClientMinMessages                   PostgresqlConfig14_LogLevel                 `protobuf:"varint,34,opt,name=client_min_messages,json=clientMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"client_min_messages,omitempty"`
-	LogMinMessages                      PostgresqlConfig14_LogLevel                 `protobuf:"varint,35,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"log_min_messages,omitempty"`
-	LogMinErrorStatement                PostgresqlConfig14_LogLevel                 `protobuf:"varint,36,opt,name=log_min_error_statement,json=logMinErrorStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"log_min_error_statement,omitempty"`
-	LogMinDurationStatement             *wrapperspb.Int64Value                      `protobuf:"bytes,37,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"` // in milliseconds.
-	LogCheckpoints                      *wrapperspb.BoolValue                       `protobuf:"bytes,38,opt,name=log_checkpoints,json=logCheckpoints,proto3" json:"log_checkpoints,omitempty"`
-	LogConnections                      *wrapperspb.BoolValue                       `protobuf:"bytes,39,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
-	LogDisconnections                   *wrapperspb.BoolValue                       `protobuf:"bytes,40,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
-	LogDuration                         *wrapperspb.BoolValue                       `protobuf:"bytes,41,opt,name=log_duration,json=logDuration,proto3" json:"log_duration,omitempty"`
-	LogErrorVerbosity                   PostgresqlConfig14_LogErrorVerbosity        `protobuf:"varint,42,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
-	LogLockWaits                        *wrapperspb.BoolValue                       `protobuf:"bytes,43,opt,name=log_lock_waits,json=logLockWaits,proto3" json:"log_lock_waits,omitempty"`
-	LogStatement                        PostgresqlConfig14_LogStatement             `protobuf:"varint,44,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogStatement" json:"log_statement,omitempty"`
-	LogTempFiles                        *wrapperspb.Int64Value                      `protobuf:"bytes,45,opt,name=log_temp_files,json=logTempFiles,proto3" json:"log_temp_files,omitempty"`
-	SearchPath                          string                                      `protobuf:"bytes,46,opt,name=search_path,json=searchPath,proto3" json:"search_path,omitempty"`
-	RowSecurity                         *wrapperspb.BoolValue                       `protobuf:"bytes,47,opt,name=row_security,json=rowSecurity,proto3" json:"row_security,omitempty"`
-	DefaultTransactionIsolation         PostgresqlConfig14_TransactionIsolation     `protobuf:"varint,48,opt,name=default_transaction_isolation,json=defaultTransactionIsolation,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_TransactionIsolation" json:"default_transaction_isolation,omitempty"`
-	StatementTimeout                    *wrapperspb.Int64Value                      `protobuf:"bytes,49,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`                                                    // in milliseconds.
-	LockTimeout                         *wrapperspb.Int64Value                      `protobuf:"bytes,50,opt,name=lock_timeout,json=lockTimeout,proto3" json:"lock_timeout,omitempty"`                                                                   // in milliseconds.
-	IdleInTransactionSessionTimeout     *wrapperspb.Int64Value                      `protobuf:"bytes,51,opt,name=idle_in_transaction_session_timeout,json=idleInTransactionSessionTimeout,proto3" json:"idle_in_transaction_session_timeout,omitempty"` // in milliseconds.
-	ByteaOutput                         PostgresqlConfig14_ByteaOutput              `protobuf:"varint,52,opt,name=bytea_output,json=byteaOutput,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ByteaOutput" json:"bytea_output,omitempty"`
-	Xmlbinary                           PostgresqlConfig14_XmlBinary                `protobuf:"varint,53,opt,name=xmlbinary,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_XmlBinary" json:"xmlbinary,omitempty"`
-	Xmloption                           PostgresqlConfig14_XmlOption                `protobuf:"varint,54,opt,name=xmloption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_XmlOption" json:"xmloption,omitempty"`
-	GinPendingListLimit                 *wrapperspb.Int64Value                      `protobuf:"bytes,55,opt,name=gin_pending_list_limit,json=ginPendingListLimit,proto3" json:"gin_pending_list_limit,omitempty"` // in bytes.
-	DeadlockTimeout                     *wrapperspb.Int64Value                      `protobuf:"bytes,56,opt,name=deadlock_timeout,json=deadlockTimeout,proto3" json:"deadlock_timeout,omitempty"`                 // in milliseconds.
-	MaxLocksPerTransaction              *wrapperspb.Int64Value                      `protobuf:"bytes,57,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
-	MaxPredLocksPerTransaction          *wrapperspb.Int64Value                      `protobuf:"bytes,58,opt,name=max_pred_locks_per_transaction,json=maxPredLocksPerTransaction,proto3" json:"max_pred_locks_per_transaction,omitempty"`
-	ArrayNulls                          *wrapperspb.BoolValue                       `protobuf:"bytes,59,opt,name=array_nulls,json=arrayNulls,proto3" json:"array_nulls,omitempty"`
-	BackslashQuote                      PostgresqlConfig14_BackslashQuote           `protobuf:"varint,60,opt,name=backslash_quote,json=backslashQuote,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_BackslashQuote" json:"backslash_quote,omitempty"`
-	DefaultWithOids                     *wrapperspb.BoolValue                       `protobuf:"bytes,61,opt,name=default_with_oids,json=defaultWithOids,proto3" json:"default_with_oids,omitempty"`
-	EscapeStringWarning                 *wrapperspb.BoolValue                       `protobuf:"bytes,62,opt,name=escape_string_warning,json=escapeStringWarning,proto3" json:"escape_string_warning,omitempty"`
-	LoCompatPrivileges                  *wrapperspb.BoolValue                       `protobuf:"bytes,63,opt,name=lo_compat_privileges,json=loCompatPrivileges,proto3" json:"lo_compat_privileges,omitempty"`
-	QuoteAllIdentifiers                 *wrapperspb.BoolValue                       `protobuf:"bytes,65,opt,name=quote_all_identifiers,json=quoteAllIdentifiers,proto3" json:"quote_all_identifiers,omitempty"`
-	StandardConformingStrings           *wrapperspb.BoolValue                       `protobuf:"bytes,66,opt,name=standard_conforming_strings,json=standardConformingStrings,proto3" json:"standard_conforming_strings,omitempty"`
-	SynchronizeSeqscans                 *wrapperspb.BoolValue                       `protobuf:"bytes,67,opt,name=synchronize_seqscans,json=synchronizeSeqscans,proto3" json:"synchronize_seqscans,omitempty"`
-	TransformNullEquals                 *wrapperspb.BoolValue                       `protobuf:"bytes,68,opt,name=transform_null_equals,json=transformNullEquals,proto3" json:"transform_null_equals,omitempty"`
-	ExitOnError                         *wrapperspb.BoolValue                       `protobuf:"bytes,69,opt,name=exit_on_error,json=exitOnError,proto3" json:"exit_on_error,omitempty"`
-	SeqPageCost                         *wrapperspb.DoubleValue                     `protobuf:"bytes,70,opt,name=seq_page_cost,json=seqPageCost,proto3" json:"seq_page_cost,omitempty"`
-	RandomPageCost                      *wrapperspb.DoubleValue                     `protobuf:"bytes,71,opt,name=random_page_cost,json=randomPageCost,proto3" json:"random_page_cost,omitempty"`
-	AutovacuumMaxWorkers                *wrapperspb.Int64Value                      `protobuf:"bytes,72,opt,name=autovacuum_max_workers,json=autovacuumMaxWorkers,proto3" json:"autovacuum_max_workers,omitempty"`
-	AutovacuumVacuumCostDelay           *wrapperspb.Int64Value                      `protobuf:"bytes,73,opt,name=autovacuum_vacuum_cost_delay,json=autovacuumVacuumCostDelay,proto3" json:"autovacuum_vacuum_cost_delay,omitempty"`
-	AutovacuumVacuumCostLimit           *wrapperspb.Int64Value                      `protobuf:"bytes,74,opt,name=autovacuum_vacuum_cost_limit,json=autovacuumVacuumCostLimit,proto3" json:"autovacuum_vacuum_cost_limit,omitempty"`
-	AutovacuumNaptime                   *wrapperspb.Int64Value                      `protobuf:"bytes,75,opt,name=autovacuum_naptime,json=autovacuumNaptime,proto3" json:"autovacuum_naptime,omitempty"` // in milliseconds.
-	ArchiveTimeout                      *wrapperspb.Int64Value                      `protobuf:"bytes,76,opt,name=archive_timeout,json=archiveTimeout,proto3" json:"archive_timeout,omitempty"`          // in milliseconds.
-	TrackActivityQuerySize              *wrapperspb.Int64Value                      `protobuf:"bytes,77,opt,name=track_activity_query_size,json=trackActivityQuerySize,proto3" json:"track_activity_query_size,omitempty"`
-	EnableBitmapscan                    *wrapperspb.BoolValue                       `protobuf:"bytes,80,opt,name=enable_bitmapscan,json=enableBitmapscan,proto3" json:"enable_bitmapscan,omitempty"`
-	EnableHashagg                       *wrapperspb.BoolValue                       `protobuf:"bytes,81,opt,name=enable_hashagg,json=enableHashagg,proto3" json:"enable_hashagg,omitempty"`
-	EnableHashjoin                      *wrapperspb.BoolValue                       `protobuf:"bytes,82,opt,name=enable_hashjoin,json=enableHashjoin,proto3" json:"enable_hashjoin,omitempty"`
-	EnableIndexscan                     *wrapperspb.BoolValue                       `protobuf:"bytes,83,opt,name=enable_indexscan,json=enableIndexscan,proto3" json:"enable_indexscan,omitempty"`
-	EnableIndexonlyscan                 *wrapperspb.BoolValue                       `protobuf:"bytes,84,opt,name=enable_indexonlyscan,json=enableIndexonlyscan,proto3" json:"enable_indexonlyscan,omitempty"`
-	EnableMaterial                      *wrapperspb.BoolValue                       `protobuf:"bytes,85,opt,name=enable_material,json=enableMaterial,proto3" json:"enable_material,omitempty"`
-	EnableMergejoin                     *wrapperspb.BoolValue                       `protobuf:"bytes,86,opt,name=enable_mergejoin,json=enableMergejoin,proto3" json:"enable_mergejoin,omitempty"`
-	EnableNestloop                      *wrapperspb.BoolValue                       `protobuf:"bytes,87,opt,name=enable_nestloop,json=enableNestloop,proto3" json:"enable_nestloop,omitempty"`
-	EnableSeqscan                       *wrapperspb.BoolValue                       `protobuf:"bytes,88,opt,name=enable_seqscan,json=enableSeqscan,proto3" json:"enable_seqscan,omitempty"`
-	EnableSort                          *wrapperspb.BoolValue                       `protobuf:"bytes,89,opt,name=enable_sort,json=enableSort,proto3" json:"enable_sort,omitempty"`
-	EnableTidscan                       *wrapperspb.BoolValue                       `protobuf:"bytes,90,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
-	MaxWorkerProcesses                  *wrapperspb.Int64Value                      `protobuf:"bytes,91,opt,name=max_worker_processes,json=maxWorkerProcesses,proto3" json:"max_worker_processes,omitempty"`
-	MaxParallelWorkers                  *wrapperspb.Int64Value                      `protobuf:"bytes,92,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
-	MaxParallelWorkersPerGather         *wrapperspb.Int64Value                      `protobuf:"bytes,93,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
-	AutovacuumVacuumScaleFactor         *wrapperspb.DoubleValue                     `protobuf:"bytes,94,opt,name=autovacuum_vacuum_scale_factor,json=autovacuumVacuumScaleFactor,proto3" json:"autovacuum_vacuum_scale_factor,omitempty"`
-	AutovacuumAnalyzeScaleFactor        *wrapperspb.DoubleValue                     `protobuf:"bytes,95,opt,name=autovacuum_analyze_scale_factor,json=autovacuumAnalyzeScaleFactor,proto3" json:"autovacuum_analyze_scale_factor,omitempty"`
-	DefaultTransactionReadOnly          *wrapperspb.BoolValue                       `protobuf:"bytes,96,opt,name=default_transaction_read_only,json=defaultTransactionReadOnly,proto3" json:"default_transaction_read_only,omitempty"`
-	Timezone                            string                                      `protobuf:"bytes,97,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	EnableParallelAppend                *wrapperspb.BoolValue                       `protobuf:"bytes,98,opt,name=enable_parallel_append,json=enableParallelAppend,proto3" json:"enable_parallel_append,omitempty"`
-	EnableParallelHash                  *wrapperspb.BoolValue                       `protobuf:"bytes,99,opt,name=enable_parallel_hash,json=enableParallelHash,proto3" json:"enable_parallel_hash,omitempty"`
-	EnablePartitionPruning              *wrapperspb.BoolValue                       `protobuf:"bytes,100,opt,name=enable_partition_pruning,json=enablePartitionPruning,proto3" json:"enable_partition_pruning,omitempty"`
-	EnablePartitionwiseAggregate        *wrapperspb.BoolValue                       `protobuf:"bytes,101,opt,name=enable_partitionwise_aggregate,json=enablePartitionwiseAggregate,proto3" json:"enable_partitionwise_aggregate,omitempty"`
-	EnablePartitionwiseJoin             *wrapperspb.BoolValue                       `protobuf:"bytes,102,opt,name=enable_partitionwise_join,json=enablePartitionwiseJoin,proto3" json:"enable_partitionwise_join,omitempty"`
-	Jit                                 *wrapperspb.BoolValue                       `protobuf:"bytes,103,opt,name=jit,proto3" json:"jit,omitempty"`
-	MaxParallelMaintenanceWorkers       *wrapperspb.Int64Value                      `protobuf:"bytes,104,opt,name=max_parallel_maintenance_workers,json=maxParallelMaintenanceWorkers,proto3" json:"max_parallel_maintenance_workers,omitempty"`
-	ParallelLeaderParticipation         *wrapperspb.BoolValue                       `protobuf:"bytes,105,opt,name=parallel_leader_participation,json=parallelLeaderParticipation,proto3" json:"parallel_leader_participation,omitempty"`
-	LogTransactionSampleRate            *wrapperspb.DoubleValue                     `protobuf:"bytes,107,opt,name=log_transaction_sample_rate,json=logTransactionSampleRate,proto3" json:"log_transaction_sample_rate,omitempty"`
-	PlanCacheMode                       PostgresqlConfig14_PlanCacheMode            `protobuf:"varint,108,opt,name=plan_cache_mode,json=planCacheMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PlanCacheMode" json:"plan_cache_mode,omitempty"`
-	EffectiveIoConcurrency              *wrapperspb.Int64Value                      `protobuf:"bytes,109,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
-	EffectiveCacheSize                  *wrapperspb.Int64Value                      `protobuf:"bytes,110,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
-	SharedPreloadLibraries              []PostgresqlConfig14_SharedPreloadLibraries `protobuf:"varint,111,rep,packed,name=shared_preload_libraries,json=sharedPreloadLibraries,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_SharedPreloadLibraries" json:"shared_preload_libraries,omitempty"`
-	AutoExplainLogMinDuration           *wrapperspb.Int64Value                      `protobuf:"bytes,112,opt,name=auto_explain_log_min_duration,json=autoExplainLogMinDuration,proto3" json:"auto_explain_log_min_duration,omitempty"` // in milliseconds.
-	AutoExplainLogAnalyze               *wrapperspb.BoolValue                       `protobuf:"bytes,113,opt,name=auto_explain_log_analyze,json=autoExplainLogAnalyze,proto3" json:"auto_explain_log_analyze,omitempty"`
-	AutoExplainLogBuffers               *wrapperspb.BoolValue                       `protobuf:"bytes,114,opt,name=auto_explain_log_buffers,json=autoExplainLogBuffers,proto3" json:"auto_explain_log_buffers,omitempty"`
-	AutoExplainLogTiming                *wrapperspb.BoolValue                       `protobuf:"bytes,115,opt,name=auto_explain_log_timing,json=autoExplainLogTiming,proto3" json:"auto_explain_log_timing,omitempty"`
-	AutoExplainLogTriggers              *wrapperspb.BoolValue                       `protobuf:"bytes,116,opt,name=auto_explain_log_triggers,json=autoExplainLogTriggers,proto3" json:"auto_explain_log_triggers,omitempty"`
-	AutoExplainLogVerbose               *wrapperspb.BoolValue                       `protobuf:"bytes,117,opt,name=auto_explain_log_verbose,json=autoExplainLogVerbose,proto3" json:"auto_explain_log_verbose,omitempty"`
-	AutoExplainLogNestedStatements      *wrapperspb.BoolValue                       `protobuf:"bytes,118,opt,name=auto_explain_log_nested_statements,json=autoExplainLogNestedStatements,proto3" json:"auto_explain_log_nested_statements,omitempty"`
-	AutoExplainSampleRate               *wrapperspb.DoubleValue                     `protobuf:"bytes,119,opt,name=auto_explain_sample_rate,json=autoExplainSampleRate,proto3" json:"auto_explain_sample_rate,omitempty"`
-	PgHintPlanEnableHint                *wrapperspb.BoolValue                       `protobuf:"bytes,120,opt,name=pg_hint_plan_enable_hint,json=pgHintPlanEnableHint,proto3" json:"pg_hint_plan_enable_hint,omitempty"`
-	PgHintPlanEnableHintTable           *wrapperspb.BoolValue                       `protobuf:"bytes,121,opt,name=pg_hint_plan_enable_hint_table,json=pgHintPlanEnableHintTable,proto3" json:"pg_hint_plan_enable_hint_table,omitempty"`
-	PgHintPlanDebugPrint                PostgresqlConfig14_PgHintPlanDebugPrint     `protobuf:"varint,122,opt,name=pg_hint_plan_debug_print,json=pgHintPlanDebugPrint,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PgHintPlanDebugPrint" json:"pg_hint_plan_debug_print,omitempty"`
-	PgHintPlanMessageLevel              PostgresqlConfig14_LogLevel                 `protobuf:"varint,123,opt,name=pg_hint_plan_message_level,json=pgHintPlanMessageLevel,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"pg_hint_plan_message_level,omitempty"`
-	HashMemMultiplier                   *wrapperspb.DoubleValue                     `protobuf:"bytes,124,opt,name=hash_mem_multiplier,json=hashMemMultiplier,proto3" json:"hash_mem_multiplier,omitempty"`
-	LogicalDecodingWorkMem              *wrapperspb.Int64Value                      `protobuf:"bytes,126,opt,name=logical_decoding_work_mem,json=logicalDecodingWorkMem,proto3" json:"logical_decoding_work_mem,omitempty"` // in bytes.
-	MaintenanceIoConcurrency            *wrapperspb.Int64Value                      `protobuf:"bytes,127,opt,name=maintenance_io_concurrency,json=maintenanceIoConcurrency,proto3" json:"maintenance_io_concurrency,omitempty"`
-	MaxSlotWalKeepSize                  *wrapperspb.Int64Value                      `protobuf:"bytes,128,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"` // in bytes.
-	WalKeepSize                         *wrapperspb.Int64Value                      `protobuf:"bytes,129,opt,name=wal_keep_size,json=walKeepSize,proto3" json:"wal_keep_size,omitempty"`                          // in bytes.
-	EnableIncrementalSort               *wrapperspb.BoolValue                       `protobuf:"bytes,130,opt,name=enable_incremental_sort,json=enableIncrementalSort,proto3" json:"enable_incremental_sort,omitempty"`
-	AutovacuumVacuumInsertThreshold     *wrapperspb.Int64Value                      `protobuf:"bytes,131,opt,name=autovacuum_vacuum_insert_threshold,json=autovacuumVacuumInsertThreshold,proto3" json:"autovacuum_vacuum_insert_threshold,omitempty"`
-	AutovacuumVacuumInsertScaleFactor   *wrapperspb.DoubleValue                     `protobuf:"bytes,132,opt,name=autovacuum_vacuum_insert_scale_factor,json=autovacuumVacuumInsertScaleFactor,proto3" json:"autovacuum_vacuum_insert_scale_factor,omitempty"`
-	LogMinDurationSample                *wrapperspb.Int64Value                      `protobuf:"bytes,133,opt,name=log_min_duration_sample,json=logMinDurationSample,proto3" json:"log_min_duration_sample,omitempty"` // in milliseconds.
-	LogStatementSampleRate              *wrapperspb.DoubleValue                     `protobuf:"bytes,134,opt,name=log_statement_sample_rate,json=logStatementSampleRate,proto3" json:"log_statement_sample_rate,omitempty"`
-	LogParameterMaxLength               *wrapperspb.Int64Value                      `protobuf:"bytes,135,opt,name=log_parameter_max_length,json=logParameterMaxLength,proto3" json:"log_parameter_max_length,omitempty"`                          // in bytes.
-	LogParameterMaxLengthOnError        *wrapperspb.Int64Value                      `protobuf:"bytes,136,opt,name=log_parameter_max_length_on_error,json=logParameterMaxLengthOnError,proto3" json:"log_parameter_max_length_on_error,omitempty"` // in bytes.
-	ClientConnectionCheckInterval       *wrapperspb.Int64Value                      `protobuf:"bytes,137,opt,name=client_connection_check_interval,json=clientConnectionCheckInterval,proto3" json:"client_connection_check_interval,omitempty"`  // in milliseconds.
-	EnableAsyncAppend                   *wrapperspb.BoolValue                       `protobuf:"bytes,138,opt,name=enable_async_append,json=enableAsyncAppend,proto3" json:"enable_async_append,omitempty"`
-	EnableGathermerge                   *wrapperspb.BoolValue                       `protobuf:"bytes,139,opt,name=enable_gathermerge,json=enableGathermerge,proto3" json:"enable_gathermerge,omitempty"`
-	EnableMemoize                       *wrapperspb.BoolValue                       `protobuf:"bytes,140,opt,name=enable_memoize,json=enableMemoize,proto3" json:"enable_memoize,omitempty"`
-	LogRecoveryConflictWaits            *wrapperspb.BoolValue                       `protobuf:"bytes,141,opt,name=log_recovery_conflict_waits,json=logRecoveryConflictWaits,proto3" json:"log_recovery_conflict_waits,omitempty"`       // in milliseconds.
-	VacuumFailsafeAge                   *wrapperspb.Int64Value                      `protobuf:"bytes,142,opt,name=vacuum_failsafe_age,json=vacuumFailsafeAge,proto3" json:"vacuum_failsafe_age,omitempty"`                              // in milliseconds.
-	VacuumMultixactFailsafeAge          *wrapperspb.Int64Value                      `protobuf:"bytes,143,opt,name=vacuum_multixact_failsafe_age,json=vacuumMultixactFailsafeAge,proto3" json:"vacuum_multixact_failsafe_age,omitempty"` // in milliseconds.
-	PgQualstatsEnabled                  *wrapperspb.BoolValue                       `protobuf:"bytes,144,opt,name=pg_qualstats_enabled,json=pgQualstatsEnabled,proto3" json:"pg_qualstats_enabled,omitempty"`
-	PgQualstatsTrackConstants           *wrapperspb.BoolValue                       `protobuf:"bytes,145,opt,name=pg_qualstats_track_constants,json=pgQualstatsTrackConstants,proto3" json:"pg_qualstats_track_constants,omitempty"`
-	PgQualstatsMax                      *wrapperspb.Int64Value                      `protobuf:"bytes,146,opt,name=pg_qualstats_max,json=pgQualstatsMax,proto3" json:"pg_qualstats_max,omitempty"`
-	PgQualstatsResolveOids              *wrapperspb.BoolValue                       `protobuf:"bytes,147,opt,name=pg_qualstats_resolve_oids,json=pgQualstatsResolveOids,proto3" json:"pg_qualstats_resolve_oids,omitempty"`
-	PgQualstatsSampleRate               *wrapperspb.DoubleValue                     `protobuf:"bytes,148,opt,name=pg_qualstats_sample_rate,json=pgQualstatsSampleRate,proto3" json:"pg_qualstats_sample_rate,omitempty"`
-	MaxStackDepth                       *wrapperspb.Int64Value                      `protobuf:"bytes,150,opt,name=max_stack_depth,json=maxStackDepth,proto3" json:"max_stack_depth,omitempty"`             // in bytes.
-	Geqo                                *wrapperspb.BoolValue                       `protobuf:"bytes,152,opt,name=geqo,proto3" json:"geqo,omitempty"`                                                      // enable Genetic Query Optimizer, by default is on
-	GeqoThreshold                       *wrapperspb.Int64Value                      `protobuf:"bytes,153,opt,name=geqo_threshold,json=geqoThreshold,proto3" json:"geqo_threshold,omitempty"`               // The number of tables to use geqo, default is 12
-	GeqoEffort                          *wrapperspb.Int64Value                      `protobuf:"bytes,154,opt,name=geqo_effort,json=geqoEffort,proto3" json:"geqo_effort,omitempty"`                        // tradeoff between planning time and query plan quality, default is 5
-	GeqoPoolSize                        *wrapperspb.Int64Value                      `protobuf:"bytes,155,opt,name=geqo_pool_size,json=geqoPoolSize,proto3" json:"geqo_pool_size,omitempty"`                // number of individuals in the genetic population, useful values are typically 100 to 1000; default - 0 - choose based on based on geqo_effort
-	GeqoGenerations                     *wrapperspb.Int64Value                      `protobuf:"bytes,156,opt,name=geqo_generations,json=geqoGenerations,proto3" json:"geqo_generations,omitempty"`         // the number of generations used by GEQO, useful values are in the same range as the pool size
-	GeqoSelectionBias                   *wrapperspb.DoubleValue                     `protobuf:"bytes,157,opt,name=geqo_selection_bias,json=geqoSelectionBias,proto3" json:"geqo_selection_bias,omitempty"` // selective pressure within the population
-	GeqoSeed                            *wrapperspb.DoubleValue                     `protobuf:"bytes,158,opt,name=geqo_seed,json=geqoSeed,proto3" json:"geqo_seed,omitempty"`                              // initial value of the random number generator used by GEQO
-	PgTrgmSimilarityThreshold           *wrapperspb.DoubleValue                     `protobuf:"bytes,159,opt,name=pg_trgm_similarity_threshold,json=pgTrgmSimilarityThreshold,proto3" json:"pg_trgm_similarity_threshold,omitempty"`
-	PgTrgmWordSimilarityThreshold       *wrapperspb.DoubleValue                     `protobuf:"bytes,160,opt,name=pg_trgm_word_similarity_threshold,json=pgTrgmWordSimilarityThreshold,proto3" json:"pg_trgm_word_similarity_threshold,omitempty"`
-	PgTrgmStrictWordSimilarityThreshold *wrapperspb.DoubleValue                     `protobuf:"bytes,161,opt,name=pg_trgm_strict_word_similarity_threshold,json=pgTrgmStrictWordSimilarityThreshold,proto3" json:"pg_trgm_strict_word_similarity_threshold,omitempty"`
-	MaxStandbyArchiveDelay              *wrapperspb.Int64Value                      `protobuf:"bytes,162,opt,name=max_standby_archive_delay,json=maxStandbyArchiveDelay,proto3" json:"max_standby_archive_delay,omitempty"` // in milliseconds.
-	SessionDurationTimeout              *wrapperspb.Int64Value                      `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`   // Terminate any session that exceeds the designated timeout, specified in milliseconds. If a timeout is not specified, the default session timeout is set to 12 hours. To disable it, specify a value of 0.
-	LogReplicationCommands              *wrapperspb.BoolValue                       `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
-	LogAutovacuumMinDuration            *wrapperspb.Int64Value                      `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                                         // in milliseconds. The default is 1000 (1 sec).
-	PasswordEncryption                  PostgresqlConfig14_PasswordEncryption       `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
-	AutoExplainLogFormat                PostgresqlConfig14_AutoExplainLogFormat     `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
-	IdleSessionTimeout                  *wrapperspb.Int64Value                      `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`                                                                                             // in milliseconds.
-	CheckpointWarning                   *wrapperspb.Int64Value                      `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                                                                                                  // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
-	AutovacuumVacuumThreshold           *wrapperspb.Int64Value                      `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`                                                                        // Specifies the minimum number of updated or deleted tuples needed to trigger a VACUUM in any one table. The default is 50 tuples.
-	AutovacuumAnalyzeThreshold          *wrapperspb.Int64Value                      `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"`                                                                     // Specifies the minimum number of inserted, updated or deleted tuples needed to trigger an ANALYZE in any one table. The default is 50 tuples.
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Sets the maximum number of concurrent connections.
+	MaxConnections *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=max_connections,json=maxConnections,proto3" json:"max_connections,omitempty"`
+	// Sets the number of shared memory buffers used by the server. In bytes.
+	SharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=shared_buffers,json=sharedBuffers,proto3" json:"shared_buffers,omitempty"`
+	// Sets the maximum number of temporary buffers used by each session. In bytes.
+	TempBuffers *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=temp_buffers,json=tempBuffers,proto3" json:"temp_buffers,omitempty"`
+	// Sets the maximum number of simultaneously prepared transactions.
+	MaxPreparedTransactions *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=max_prepared_transactions,json=maxPreparedTransactions,proto3" json:"max_prepared_transactions,omitempty"`
+	// Sets the maximum memory to be used for query workspaces. This much memory can be used by each
+	// internal sort operation and hash table before switching to temporary disk files. In bytes.
+	WorkMem *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`
+	// Sets the maximum memory to be used for maintenance operations.
+	// This includes operations such as VACUUM and CREATE INDEX. In bytes.
+	MaintenanceWorkMem *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=maintenance_work_mem,json=maintenanceWorkMem,proto3" json:"maintenance_work_mem,omitempty"`
+	// Sets the maximum memory to be used by each autovacuum worker process. In bytes.
+	AutovacuumWorkMem *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=autovacuum_work_mem,json=autovacuumWorkMem,proto3" json:"autovacuum_work_mem,omitempty"`
+	// Limits the total size of all temporary files used by each process. -1 means no limit. In bytes.
+	TempFileLimit *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`
+	// Vacuum cost delay. In milliseconds.
+	VacuumCostDelay *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=vacuum_cost_delay,json=vacuumCostDelay,proto3" json:"vacuum_cost_delay,omitempty"`
+	// Vacuum cost for a page found in the buffer cache.
+	VacuumCostPageHit *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=vacuum_cost_page_hit,json=vacuumCostPageHit,proto3" json:"vacuum_cost_page_hit,omitempty"`
+	// Vacuum cost for a page not found in the buffer cache.
+	VacuumCostPageMiss *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=vacuum_cost_page_miss,json=vacuumCostPageMiss,proto3" json:"vacuum_cost_page_miss,omitempty"`
+	// Vacuum cost for a page dirtied by vacuum.
+	VacuumCostPageDirty *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=vacuum_cost_page_dirty,json=vacuumCostPageDirty,proto3" json:"vacuum_cost_page_dirty,omitempty"`
+	// Vacuum cost amount available before napping.
+	VacuumCostLimit *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=vacuum_cost_limit,json=vacuumCostLimit,proto3" json:"vacuum_cost_limit,omitempty"`
+	// Background writer sleep time between rounds. In milliseconds.
+	BgwriterDelay *wrapperspb.Int64Value `protobuf:"bytes,14,opt,name=bgwriter_delay,json=bgwriterDelay,proto3" json:"bgwriter_delay,omitempty"`
+	// Background writer maximum number of LRU pages to flush per round.
+	BgwriterLruMaxpages *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=bgwriter_lru_maxpages,json=bgwriterLruMaxpages,proto3" json:"bgwriter_lru_maxpages,omitempty"`
+	// Multiple of the average buffer usage to free per round.
+	BgwriterLruMultiplier *wrapperspb.DoubleValue `protobuf:"bytes,16,opt,name=bgwriter_lru_multiplier,json=bgwriterLruMultiplier,proto3" json:"bgwriter_lru_multiplier,omitempty"`
+	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	BgwriterFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=bgwriter_flush_after,json=bgwriterFlushAfter,proto3" json:"bgwriter_flush_after,omitempty"`
+	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	BackendFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,18,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
+	// Time before a snapshot is too old to read pages changed after the snapshot was taken.
+	// A value of -1 disables this feature. In milliseconds.
+	OldSnapshotThreshold *wrapperspb.Int64Value `protobuf:"bytes,19,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`
+	// Sets the level of information written to the WAL.
+	WalLevel PostgresqlConfig14_WalLevel `protobuf:"varint,20,opt,name=wal_level,json=walLevel,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_WalLevel" json:"wal_level,omitempty"`
+	// Sets the current transaction's synchronization level.
+	SynchronousCommit PostgresqlConfig14_SynchronousCommit `protobuf:"varint,21,opt,name=synchronous_commit,json=synchronousCommit,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_SynchronousCommit" json:"synchronous_commit,omitempty"`
+	// Sets the maximum time between automatic WAL checkpoints. In milliseconds.
+	CheckpointTimeout *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=checkpoint_timeout,json=checkpointTimeout,proto3" json:"checkpoint_timeout,omitempty"`
+	// Time spent flushing dirty buffers during checkpoint, as fraction of checkpoint interval.
+	CheckpointCompletionTarget *wrapperspb.DoubleValue `protobuf:"bytes,23,opt,name=checkpoint_completion_target,json=checkpointCompletionTarget,proto3" json:"checkpoint_completion_target,omitempty"`
+	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	CheckpointFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=checkpoint_flush_after,json=checkpointFlushAfter,proto3" json:"checkpoint_flush_after,omitempty"`
+	// Sets the WAL size that triggers a checkpoint. In bytes.
+	MaxWalSize *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=max_wal_size,json=maxWalSize,proto3" json:"max_wal_size,omitempty"`
+	// Sets the minimum size to shrink the WAL to. In bytes.
+	MinWalSize *wrapperspb.Int64Value `protobuf:"bytes,26,opt,name=min_wal_size,json=minWalSize,proto3" json:"min_wal_size,omitempty"`
+	// Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data. In milliseconds.
+	MaxStandbyStreamingDelay *wrapperspb.Int64Value `protobuf:"bytes,27,opt,name=max_standby_streaming_delay,json=maxStandbyStreamingDelay,proto3" json:"max_standby_streaming_delay,omitempty"`
+	// Sets the default statistics target. This applies to table columns that have not had a
+	// column-specific target set via ALTER TABLE SET STATISTICS.
+	DefaultStatisticsTarget *wrapperspb.Int64Value `protobuf:"bytes,28,opt,name=default_statistics_target,json=defaultStatisticsTarget,proto3" json:"default_statistics_target,omitempty"`
+	// Enables the planner to use constraints to optimize queries.
+	ConstraintExclusion PostgresqlConfig14_ConstraintExclusion `protobuf:"varint,29,opt,name=constraint_exclusion,json=constraintExclusion,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ConstraintExclusion" json:"constraint_exclusion,omitempty"`
+	// Sets the planner's estimate of the fraction of a cursor's rows that will be retrieved.
+	CursorTupleFraction *wrapperspb.DoubleValue `protobuf:"bytes,30,opt,name=cursor_tuple_fraction,json=cursorTupleFraction,proto3" json:"cursor_tuple_fraction,omitempty"`
+	// Sets the FROM-list size beyond which subqueries are not collapsed.
+	FromCollapseLimit *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=from_collapse_limit,json=fromCollapseLimit,proto3" json:"from_collapse_limit,omitempty"`
+	// Sets the FROM-list size beyond which JOIN constructs are not flattened.
+	JoinCollapseLimit *wrapperspb.Int64Value `protobuf:"bytes,32,opt,name=join_collapse_limit,json=joinCollapseLimit,proto3" json:"join_collapse_limit,omitempty"`
+	// Forces use of parallel query facilities. If possible, run query using a parallel worker and with parallel restrictions.
+	ForceParallelMode PostgresqlConfig14_ForceParallelMode `protobuf:"varint,33,opt,name=force_parallel_mode,json=forceParallelMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ForceParallelMode" json:"force_parallel_mode,omitempty"`
+	// Sets the message levels that are sent to the client.
+	ClientMinMessages PostgresqlConfig14_LogLevel `protobuf:"varint,34,opt,name=client_min_messages,json=clientMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"client_min_messages,omitempty"`
+	// Sets the message levels that are logged.
+	LogMinMessages PostgresqlConfig14_LogLevel `protobuf:"varint,35,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"log_min_messages,omitempty"`
+	// Causes all statements generating error at or above this level to be logged.
+	LogMinErrorStatement PostgresqlConfig14_LogLevel `protobuf:"varint,36,opt,name=log_min_error_statement,json=logMinErrorStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"log_min_error_statement,omitempty"`
+	// Sets the minimum execution time above which all statements will be logged. In milliseconds.
+	LogMinDurationStatement *wrapperspb.Int64Value `protobuf:"bytes,37,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"`
+	// Logs each checkpoint.
+	LogCheckpoints *wrapperspb.BoolValue `protobuf:"bytes,38,opt,name=log_checkpoints,json=logCheckpoints,proto3" json:"log_checkpoints,omitempty"`
+	// Logs each successful connection.
+	LogConnections *wrapperspb.BoolValue `protobuf:"bytes,39,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
+	// Logs end of a session, including duration.
+	LogDisconnections *wrapperspb.BoolValue `protobuf:"bytes,40,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
+	// Logs the duration of each completed SQL statement.
+	// (-- api-linter: yc::1701::duration-required=disabled --)
+	LogDuration *wrapperspb.BoolValue `protobuf:"bytes,41,opt,name=log_duration,json=logDuration,proto3" json:"log_duration,omitempty"`
+	// Sets the verbosity of logged messages.
+	LogErrorVerbosity PostgresqlConfig14_LogErrorVerbosity `protobuf:"varint,42,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
+	// Logs long lock waits.
+	LogLockWaits *wrapperspb.BoolValue `protobuf:"bytes,43,opt,name=log_lock_waits,json=logLockWaits,proto3" json:"log_lock_waits,omitempty"`
+	// Sets the type of statements logged.
+	LogStatement PostgresqlConfig14_LogStatement `protobuf:"varint,44,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogStatement" json:"log_statement,omitempty"`
+	// Log the use of temporary files larger than this number of kilobytes.
+	LogTempFiles *wrapperspb.Int64Value `protobuf:"bytes,45,opt,name=log_temp_files,json=logTempFiles,proto3" json:"log_temp_files,omitempty"`
+	// Sets the schema search order for names that are not schema-qualified.
+	SearchPath string `protobuf:"bytes,46,opt,name=search_path,json=searchPath,proto3" json:"search_path,omitempty"`
+	// Enable row security.
+	RowSecurity *wrapperspb.BoolValue `protobuf:"bytes,47,opt,name=row_security,json=rowSecurity,proto3" json:"row_security,omitempty"`
+	// Sets the transaction isolation level of each new transaction.
+	DefaultTransactionIsolation PostgresqlConfig14_TransactionIsolation `protobuf:"varint,48,opt,name=default_transaction_isolation,json=defaultTransactionIsolation,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_TransactionIsolation" json:"default_transaction_isolation,omitempty"`
+	// Sets the maximum allowed duration of any statement. In milliseconds.
+	StatementTimeout *wrapperspb.Int64Value `protobuf:"bytes,49,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`
+	// Sets the maximum allowed duration of any wait for a lock. In milliseconds.
+	LockTimeout *wrapperspb.Int64Value `protobuf:"bytes,50,opt,name=lock_timeout,json=lockTimeout,proto3" json:"lock_timeout,omitempty"`
+	// Sets the maximum allowed idle time between queries, when in a transaction. In milliseconds.
+	IdleInTransactionSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,51,opt,name=idle_in_transaction_session_timeout,json=idleInTransactionSessionTimeout,proto3" json:"idle_in_transaction_session_timeout,omitempty"`
+	// Sets the output format for bytea.
+	ByteaOutput PostgresqlConfig14_ByteaOutput `protobuf:"varint,52,opt,name=bytea_output,json=byteaOutput,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_ByteaOutput" json:"bytea_output,omitempty"`
+	// Sets how binary values are to be encoded in XML.
+	Xmlbinary PostgresqlConfig14_XmlBinary `protobuf:"varint,53,opt,name=xmlbinary,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_XmlBinary" json:"xmlbinary,omitempty"`
+	// Sets whether XML data in implicit parsing and serialization operations is to be considered as documents or content fragments.
+	Xmloption PostgresqlConfig14_XmlOption `protobuf:"varint,54,opt,name=xmloption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_XmlOption" json:"xmloption,omitempty"`
+	// Sets the maximum size of the pending list for GIN index. In bytes.
+	GinPendingListLimit *wrapperspb.Int64Value `protobuf:"bytes,55,opt,name=gin_pending_list_limit,json=ginPendingListLimit,proto3" json:"gin_pending_list_limit,omitempty"`
+	// Sets the time to wait on a lock before checking for deadlock. In milliseconds.
+	DeadlockTimeout *wrapperspb.Int64Value `protobuf:"bytes,56,opt,name=deadlock_timeout,json=deadlockTimeout,proto3" json:"deadlock_timeout,omitempty"`
+	// Sets the maximum number of locks per transaction. The shared lock table is sized on the assumption that
+	// at most max_locks_per_transaction * max_connections distinct objects will need to be locked at any one time.
+	MaxLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,57,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
+	// Sets the maximum number of predicate locks per transaction.The shared predicate lock table is sized on the assumption that
+	// at most max_pred_locks_per_transaction * max_connections distinct objects will need to be locked at any one time.
+	MaxPredLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,58,opt,name=max_pred_locks_per_transaction,json=maxPredLocksPerTransaction,proto3" json:"max_pred_locks_per_transaction,omitempty"`
+	// Enable input of NULL elements in arrays. When turned on, unquoted NULL in an array input
+	// value means a null value; otherwise it is taken literally.
+	ArrayNulls *wrapperspb.BoolValue `protobuf:"bytes,59,opt,name=array_nulls,json=arrayNulls,proto3" json:"array_nulls,omitempty"`
+	// Sets whether \"\\'\" is allowed in string literals.
+	BackslashQuote PostgresqlConfig14_BackslashQuote `protobuf:"varint,60,opt,name=backslash_quote,json=backslashQuote,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_BackslashQuote" json:"backslash_quote,omitempty"`
+	// WITH OIDS is no longer supported; this can only be false.
+	DefaultWithOids *wrapperspb.BoolValue `protobuf:"bytes,61,opt,name=default_with_oids,json=defaultWithOids,proto3" json:"default_with_oids,omitempty"`
+	// Warn about backslash escapes in ordinary string literals.
+	EscapeStringWarning *wrapperspb.BoolValue `protobuf:"bytes,62,opt,name=escape_string_warning,json=escapeStringWarning,proto3" json:"escape_string_warning,omitempty"`
+	// Enables backward compatibility mode for privilege checks on large objects. Skips privilege checks
+	// when reading or modifying large objects, for compatibility with PostgreSQL releases prior to 9.0.
+	LoCompatPrivileges *wrapperspb.BoolValue `protobuf:"bytes,63,opt,name=lo_compat_privileges,json=loCompatPrivileges,proto3" json:"lo_compat_privileges,omitempty"`
+	// When generating SQL fragments, quote all identifiers.
+	QuoteAllIdentifiers *wrapperspb.BoolValue `protobuf:"bytes,65,opt,name=quote_all_identifiers,json=quoteAllIdentifiers,proto3" json:"quote_all_identifiers,omitempty"`
+	// Causes '...' strings to treat backslashes literally.
+	StandardConformingStrings *wrapperspb.BoolValue `protobuf:"bytes,66,opt,name=standard_conforming_strings,json=standardConformingStrings,proto3" json:"standard_conforming_strings,omitempty"`
+	// Enable synchronized sequential scans.
+	SynchronizeSeqscans *wrapperspb.BoolValue `protobuf:"bytes,67,opt,name=synchronize_seqscans,json=synchronizeSeqscans,proto3" json:"synchronize_seqscans,omitempty"`
+	// Treats \"expr=NULL\" as \"expr IS NULL\". When turned on, expressions of the form expr = NULL
+	// (or NULL = expr) are treated as expr IS NULL, that is, they return true if expr evaluates to the
+	// null value, and false otherwise. The correct behavior of expr = NULL is to always return null (unknown).
+	TransformNullEquals *wrapperspb.BoolValue `protobuf:"bytes,68,opt,name=transform_null_equals,json=transformNullEquals,proto3" json:"transform_null_equals,omitempty"`
+	// Terminate session on any error.
+	ExitOnError *wrapperspb.BoolValue `protobuf:"bytes,69,opt,name=exit_on_error,json=exitOnError,proto3" json:"exit_on_error,omitempty"`
+	// Sets the planner's estimate of the cost of a sequentially fetched disk page.
+	SeqPageCost *wrapperspb.DoubleValue `protobuf:"bytes,70,opt,name=seq_page_cost,json=seqPageCost,proto3" json:"seq_page_cost,omitempty"`
+	// Sets the planner's estimate of the cost of a nonsequentially fetched disk page.
+	RandomPageCost *wrapperspb.DoubleValue `protobuf:"bytes,71,opt,name=random_page_cost,json=randomPageCost,proto3" json:"random_page_cost,omitempty"`
+	// Sets the maximum number of simultaneously running autovacuum worker processes.
+	AutovacuumMaxWorkers *wrapperspb.Int64Value `protobuf:"bytes,72,opt,name=autovacuum_max_workers,json=autovacuumMaxWorkers,proto3" json:"autovacuum_max_workers,omitempty"`
+	// Vacuum cost delay in milliseconds, for autovacuum.
+	AutovacuumVacuumCostDelay *wrapperspb.Int64Value `protobuf:"bytes,73,opt,name=autovacuum_vacuum_cost_delay,json=autovacuumVacuumCostDelay,proto3" json:"autovacuum_vacuum_cost_delay,omitempty"`
+	// Vacuum cost amount available before napping, for autovacuum.
+	AutovacuumVacuumCostLimit *wrapperspb.Int64Value `protobuf:"bytes,74,opt,name=autovacuum_vacuum_cost_limit,json=autovacuumVacuumCostLimit,proto3" json:"autovacuum_vacuum_cost_limit,omitempty"`
+	// Time to sleep between autovacuum runs. In milliseconds.
+	AutovacuumNaptime *wrapperspb.Int64Value `protobuf:"bytes,75,opt,name=autovacuum_naptime,json=autovacuumNaptime,proto3" json:"autovacuum_naptime,omitempty"`
+	// Forces a switch to the next WAL file if a new file has not been started within N seconds. In milliseconds.
+	ArchiveTimeout *wrapperspb.Int64Value `protobuf:"bytes,76,opt,name=archive_timeout,json=archiveTimeout,proto3" json:"archive_timeout,omitempty"`
+	// Sets the size reserved for pg_stat_activity.query, in bytes.
+	TrackActivityQuerySize *wrapperspb.Int64Value `protobuf:"bytes,77,opt,name=track_activity_query_size,json=trackActivityQuerySize,proto3" json:"track_activity_query_size,omitempty"`
+	// Enables the planner's use of bitmap-scan plans.
+	EnableBitmapscan *wrapperspb.BoolValue `protobuf:"bytes,80,opt,name=enable_bitmapscan,json=enableBitmapscan,proto3" json:"enable_bitmapscan,omitempty"`
+	// Enables the planner's use of hashed aggregation plans.
+	EnableHashagg *wrapperspb.BoolValue `protobuf:"bytes,81,opt,name=enable_hashagg,json=enableHashagg,proto3" json:"enable_hashagg,omitempty"`
+	// Enables the planner's use of hash join plans.
+	EnableHashjoin *wrapperspb.BoolValue `protobuf:"bytes,82,opt,name=enable_hashjoin,json=enableHashjoin,proto3" json:"enable_hashjoin,omitempty"`
+	// Enables the planner's use of index-scan plans.
+	EnableIndexscan *wrapperspb.BoolValue `protobuf:"bytes,83,opt,name=enable_indexscan,json=enableIndexscan,proto3" json:"enable_indexscan,omitempty"`
+	// Enables the planner's use of index-only-scan plans.
+	EnableIndexonlyscan *wrapperspb.BoolValue `protobuf:"bytes,84,opt,name=enable_indexonlyscan,json=enableIndexonlyscan,proto3" json:"enable_indexonlyscan,omitempty"`
+	// Enables the planner's use of materialization.
+	EnableMaterial *wrapperspb.BoolValue `protobuf:"bytes,85,opt,name=enable_material,json=enableMaterial,proto3" json:"enable_material,omitempty"`
+	// Enables the planner's use of merge join plans.
+	EnableMergejoin *wrapperspb.BoolValue `protobuf:"bytes,86,opt,name=enable_mergejoin,json=enableMergejoin,proto3" json:"enable_mergejoin,omitempty"`
+	// Enables the planner's use of nested-loop join plans.
+	EnableNestloop *wrapperspb.BoolValue `protobuf:"bytes,87,opt,name=enable_nestloop,json=enableNestloop,proto3" json:"enable_nestloop,omitempty"`
+	// Enables the planner's use of sequential-scan plans.
+	EnableSeqscan *wrapperspb.BoolValue `protobuf:"bytes,88,opt,name=enable_seqscan,json=enableSeqscan,proto3" json:"enable_seqscan,omitempty"`
+	// Enables the planner's use of explicit sort steps.
+	EnableSort *wrapperspb.BoolValue `protobuf:"bytes,89,opt,name=enable_sort,json=enableSort,proto3" json:"enable_sort,omitempty"`
+	// Enables the planner's use of TID scan plans.
+	EnableTidscan *wrapperspb.BoolValue `protobuf:"bytes,90,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
+	// Maximum number of concurrent worker processes.
+	MaxWorkerProcesses *wrapperspb.Int64Value `protobuf:"bytes,91,opt,name=max_worker_processes,json=maxWorkerProcesses,proto3" json:"max_worker_processes,omitempty"`
+	// Sets the maximum number of parallel processes per executor node.
+	MaxParallelWorkers *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
+	// Sets the maximum number of parallel processes per executor node.
+	MaxParallelWorkersPerGather *wrapperspb.Int64Value `protobuf:"bytes,93,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
+	// Number of tuple updates or deletes prior to vacuum as a fraction of reltuples.
+	AutovacuumVacuumScaleFactor *wrapperspb.DoubleValue `protobuf:"bytes,94,opt,name=autovacuum_vacuum_scale_factor,json=autovacuumVacuumScaleFactor,proto3" json:"autovacuum_vacuum_scale_factor,omitempty"`
+	// Number of tuple inserts, updates, or deletes prior to analyze as a fraction of reltuples.
+	AutovacuumAnalyzeScaleFactor *wrapperspb.DoubleValue `protobuf:"bytes,95,opt,name=autovacuum_analyze_scale_factor,json=autovacuumAnalyzeScaleFactor,proto3" json:"autovacuum_analyze_scale_factor,omitempty"`
+	// Sets the default read-only status of new transactions.
+	DefaultTransactionReadOnly *wrapperspb.BoolValue `protobuf:"bytes,96,opt,name=default_transaction_read_only,json=defaultTransactionReadOnly,proto3" json:"default_transaction_read_only,omitempty"`
+	// Sets the time zone for displaying and interpreting time stamps.
+	Timezone string `protobuf:"bytes,97,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	// Enables the planner's use of parallel append plans.
+	EnableParallelAppend *wrapperspb.BoolValue `protobuf:"bytes,98,opt,name=enable_parallel_append,json=enableParallelAppend,proto3" json:"enable_parallel_append,omitempty"`
+	// Enables the planner's use of parallel hash plans.
+	EnableParallelHash *wrapperspb.BoolValue `protobuf:"bytes,99,opt,name=enable_parallel_hash,json=enableParallelHash,proto3" json:"enable_parallel_hash,omitempty"`
+	// Enables plan-time and execution-time partition pruning. Allows the query planner and executor to
+	// compare partition bounds to conditions in the query to determine which partitions must be scanned.
+	EnablePartitionPruning *wrapperspb.BoolValue `protobuf:"bytes,100,opt,name=enable_partition_pruning,json=enablePartitionPruning,proto3" json:"enable_partition_pruning,omitempty"`
+	// Enables partitionwise aggregation and grouping.
+	EnablePartitionwiseAggregate *wrapperspb.BoolValue `protobuf:"bytes,101,opt,name=enable_partitionwise_aggregate,json=enablePartitionwiseAggregate,proto3" json:"enable_partitionwise_aggregate,omitempty"`
+	// Enables partitionwise join.
+	EnablePartitionwiseJoin *wrapperspb.BoolValue `protobuf:"bytes,102,opt,name=enable_partitionwise_join,json=enablePartitionwiseJoin,proto3" json:"enable_partitionwise_join,omitempty"`
+	// Allow JIT compilation.
+	Jit *wrapperspb.BoolValue `protobuf:"bytes,103,opt,name=jit,proto3" json:"jit,omitempty"`
+	// Sets the maximum number of parallel processes per maintenance operation.
+	MaxParallelMaintenanceWorkers *wrapperspb.Int64Value `protobuf:"bytes,104,opt,name=max_parallel_maintenance_workers,json=maxParallelMaintenanceWorkers,proto3" json:"max_parallel_maintenance_workers,omitempty"`
+	// Controls whether Gather and Gather Merge also run subplans.
+	ParallelLeaderParticipation *wrapperspb.BoolValue `protobuf:"bytes,105,opt,name=parallel_leader_participation,json=parallelLeaderParticipation,proto3" json:"parallel_leader_participation,omitempty"`
+	// Sets the fraction of transactions from which to log all statements. Use a
+	// value between 0.0 (never log) and 1.0 (log all statements for all transactions).
+	LogTransactionSampleRate *wrapperspb.DoubleValue `protobuf:"bytes,107,opt,name=log_transaction_sample_rate,json=logTransactionSampleRate,proto3" json:"log_transaction_sample_rate,omitempty"`
+	// Controls the planner's selection of custom or generic plan. Prepared statements can have custom and generic plans,
+	// and the planner will attempt to choose which is better. This can be set to override the default behavior.
+	PlanCacheMode PostgresqlConfig14_PlanCacheMode `protobuf:"varint,108,opt,name=plan_cache_mode,json=planCacheMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PlanCacheMode" json:"plan_cache_mode,omitempty"`
+	// Number of simultaneous requests that can be handled efficiently by the disk subsystem.
+	EffectiveIoConcurrency *wrapperspb.Int64Value `protobuf:"bytes,109,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
+	// Sets the planner's assumption about the total size of the data caches. That is, the total
+	// size of the caches (kernel cache and shared buffers) used for PostgreSQL data files.
+	// This is measured in disk pages, which are normally 8 kB each.
+	EffectiveCacheSize *wrapperspb.Int64Value `protobuf:"bytes,110,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
+	// Lists shared libraries to preload into server.
+	SharedPreloadLibraries []PostgresqlConfig14_SharedPreloadLibraries `protobuf:"varint,111,rep,packed,name=shared_preload_libraries,json=sharedPreloadLibraries,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_SharedPreloadLibraries" json:"shared_preload_libraries,omitempty"`
+	// Sets the minimum statement execution time, that will cause the statement's plan to be logged.
+	// Setting this to 0 logs all plans. -1 (the default) disables logging of plans. For example, if
+	// you set it to 250ms then all statements that run 250ms or longer will be logged. In milliseconds.
+	AutoExplainLogMinDuration *wrapperspb.Int64Value `protobuf:"bytes,112,opt,name=auto_explain_log_min_duration,json=autoExplainLogMinDuration,proto3" json:"auto_explain_log_min_duration,omitempty"`
+	// Causes EXPLAIN ANALYZE output, rather than just EXPLAIN output,to be printed
+	// when an executionplan is logged. This parameter is off by default.
+	AutoExplainLogAnalyze *wrapperspb.BoolValue `protobuf:"bytes,113,opt,name=auto_explain_log_analyze,json=autoExplainLogAnalyze,proto3" json:"auto_explain_log_analyze,omitempty"`
+	// Controls whether buffer usage statistics are printed when an execution plan is logged;
+	// it's equivalent to the BUFFERS option of EXPLAIN. This parameter has no effect unless
+	// auto_explain.log_analyze is enabled. This parameter is off by default.
+	AutoExplainLogBuffers *wrapperspb.BoolValue `protobuf:"bytes,114,opt,name=auto_explain_log_buffers,json=autoExplainLogBuffers,proto3" json:"auto_explain_log_buffers,omitempty"`
+	// Controls whether per-node timing information is printed when an execution plan is logged;
+	// it's equivalent to the TIMING option of EXPLAIN. The overhead of repeatedly reading the system
+	// clock can slow down queries significantly on some systems, so it may be useful to set this
+	// parameter to off when only actual row counts, and not exact times, are needed. This parameter
+	// has no effect unless auto_explain.log_analyze is enabled. This parameter is on by default.
+	AutoExplainLogTiming *wrapperspb.BoolValue `protobuf:"bytes,115,opt,name=auto_explain_log_timing,json=autoExplainLogTiming,proto3" json:"auto_explain_log_timing,omitempty"`
+	// Causes trigger execution statistics to be included when an execution plan is logged. This parameter
+	// has no effect unless auto_explain.log_analyze is enabled. This parameter is off by default.
+	AutoExplainLogTriggers *wrapperspb.BoolValue `protobuf:"bytes,116,opt,name=auto_explain_log_triggers,json=autoExplainLogTriggers,proto3" json:"auto_explain_log_triggers,omitempty"`
+	// Controls whether verbose details are printed when an execution plan is logged; it's
+	// equivalent to the VERBOSE option of EXPLAIN. This parameter is off by default.
+	AutoExplainLogVerbose *wrapperspb.BoolValue `protobuf:"bytes,117,opt,name=auto_explain_log_verbose,json=autoExplainLogVerbose,proto3" json:"auto_explain_log_verbose,omitempty"`
+	// Causes nested statements (statements executed inside a function) to be considered for logging.
+	// When it is off, only top-level query plans are logged. This parameter is off by default.
+	AutoExplainLogNestedStatements *wrapperspb.BoolValue `protobuf:"bytes,118,opt,name=auto_explain_log_nested_statements,json=autoExplainLogNestedStatements,proto3" json:"auto_explain_log_nested_statements,omitempty"`
+	// Causes auto_explain to only explain a fraction of the statements in each session. The default is 1,
+	// meaning explain all the queries. In case of nested statements, either all will be explained or none.
+	AutoExplainSampleRate *wrapperspb.DoubleValue `protobuf:"bytes,119,opt,name=auto_explain_sample_rate,json=autoExplainSampleRate,proto3" json:"auto_explain_sample_rate,omitempty"`
+	// Enables processing of query hints by pg_hint_plan.
+	PgHintPlanEnableHint *wrapperspb.BoolValue `protobuf:"bytes,120,opt,name=pg_hint_plan_enable_hint,json=pgHintPlanEnableHint,proto3" json:"pg_hint_plan_enable_hint,omitempty"`
+	// Enables lookup of hints in the hint table.
+	PgHintPlanEnableHintTable *wrapperspb.BoolValue `protobuf:"bytes,121,opt,name=pg_hint_plan_enable_hint_table,json=pgHintPlanEnableHintTable,proto3" json:"pg_hint_plan_enable_hint_table,omitempty"`
+	// Controls whether and how verbosely hint parsing results are logged.
+	PgHintPlanDebugPrint PostgresqlConfig14_PgHintPlanDebugPrint `protobuf:"varint,122,opt,name=pg_hint_plan_debug_print,json=pgHintPlanDebugPrint,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PgHintPlanDebugPrint" json:"pg_hint_plan_debug_print,omitempty"`
+	// Sets the log level for pg_hint_plan debug messages.
+	PgHintPlanMessageLevel PostgresqlConfig14_LogLevel `protobuf:"varint,123,opt,name=pg_hint_plan_message_level,json=pgHintPlanMessageLevel,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_LogLevel" json:"pg_hint_plan_message_level,omitempty"`
+	// Multiple of work_mem to use for hash tables.
+	HashMemMultiplier *wrapperspb.DoubleValue `protobuf:"bytes,124,opt,name=hash_mem_multiplier,json=hashMemMultiplier,proto3" json:"hash_mem_multiplier,omitempty"`
+	// Sets the maximum memory to be used for logical decoding. This much memory can be
+	// used by each internal reorder buffer before spilling to disk. In bytes.
+	LogicalDecodingWorkMem *wrapperspb.Int64Value `protobuf:"bytes,126,opt,name=logical_decoding_work_mem,json=logicalDecodingWorkMem,proto3" json:"logical_decoding_work_mem,omitempty"`
+	// A variant of effective_io_concurrency that is used for maintenance work.
+	MaintenanceIoConcurrency *wrapperspb.Int64Value `protobuf:"bytes,127,opt,name=maintenance_io_concurrency,json=maintenanceIoConcurrency,proto3" json:"maintenance_io_concurrency,omitempty"`
+	// Sets the maximum WAL size that can be reserved by replication slots. Replication slots will be marked as failed,
+	// and segments released for deletion or recycling, if this much space is occupied by WAL on disk. In bytes.
+	MaxSlotWalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,128,opt,name=max_slot_wal_keep_size,json=maxSlotWalKeepSize,proto3" json:"max_slot_wal_keep_size,omitempty"`
+	// Sets the size of WAL files held for standby servers. In bytes.
+	WalKeepSize *wrapperspb.Int64Value `protobuf:"bytes,129,opt,name=wal_keep_size,json=walKeepSize,proto3" json:"wal_keep_size,omitempty"`
+	// Enables the planner's use of incremental sort steps.
+	EnableIncrementalSort *wrapperspb.BoolValue `protobuf:"bytes,130,opt,name=enable_incremental_sort,json=enableIncrementalSort,proto3" json:"enable_incremental_sort,omitempty"`
+	// Minimum number of tuple inserts prior to vacuum, or -1 to disable insert vacuums.
+	AutovacuumVacuumInsertThreshold *wrapperspb.Int64Value `protobuf:"bytes,131,opt,name=autovacuum_vacuum_insert_threshold,json=autovacuumVacuumInsertThreshold,proto3" json:"autovacuum_vacuum_insert_threshold,omitempty"`
+	// Number of tuple inserts prior to vacuum as a fraction of reltuples.
+	AutovacuumVacuumInsertScaleFactor *wrapperspb.DoubleValue `protobuf:"bytes,132,opt,name=autovacuum_vacuum_insert_scale_factor,json=autovacuumVacuumInsertScaleFactor,proto3" json:"autovacuum_vacuum_insert_scale_factor,omitempty"`
+	// Sets the minimum execution time above which a sample of statements will be logged. Sampling is determined
+	// by log_statement_sample_rate. Zero logs a sample of all queries. -1 turns this feature off. In milliseconds.
+	LogMinDurationSample *wrapperspb.Int64Value `protobuf:"bytes,133,opt,name=log_min_duration_sample,json=logMinDurationSample,proto3" json:"log_min_duration_sample,omitempty"`
+	// Fraction of statements exceeding log_min_duration_sample to be logged. Use a value between 0.0 (never log) and 1.0 (always log).
+	LogStatementSampleRate *wrapperspb.DoubleValue `protobuf:"bytes,134,opt,name=log_statement_sample_rate,json=logStatementSampleRate,proto3" json:"log_statement_sample_rate,omitempty"`
+	// When logging statements, limit logged parameter values to first N bytes. -1 to print values in full.
+	LogParameterMaxLength *wrapperspb.Int64Value `protobuf:"bytes,135,opt,name=log_parameter_max_length,json=logParameterMaxLength,proto3" json:"log_parameter_max_length,omitempty"`
+	// When reporting an error, limit logged parameter values to first N bytes. -1 to print values in full.
+	LogParameterMaxLengthOnError *wrapperspb.Int64Value `protobuf:"bytes,136,opt,name=log_parameter_max_length_on_error,json=logParameterMaxLengthOnError,proto3" json:"log_parameter_max_length_on_error,omitempty"`
+	// Sets the time interval between checks for disconnection while running queries. In milliseconds.
+	ClientConnectionCheckInterval *wrapperspb.Int64Value `protobuf:"bytes,137,opt,name=client_connection_check_interval,json=clientConnectionCheckInterval,proto3" json:"client_connection_check_interval,omitempty"`
+	// Enables the planner's use of async append plans.
+	EnableAsyncAppend *wrapperspb.BoolValue `protobuf:"bytes,138,opt,name=enable_async_append,json=enableAsyncAppend,proto3" json:"enable_async_append,omitempty"`
+	// Enables the planner's use of gather merge plans.
+	EnableGathermerge *wrapperspb.BoolValue `protobuf:"bytes,139,opt,name=enable_gathermerge,json=enableGathermerge,proto3" json:"enable_gathermerge,omitempty"`
+	// Enables the planner's use of memoization.
+	EnableMemoize                       *wrapperspb.BoolValue   `protobuf:"bytes,140,opt,name=enable_memoize,json=enableMemoize,proto3" json:"enable_memoize,omitempty"`
+	LogRecoveryConflictWaits            *wrapperspb.BoolValue   `protobuf:"bytes,141,opt,name=log_recovery_conflict_waits,json=logRecoveryConflictWaits,proto3" json:"log_recovery_conflict_waits,omitempty"`       // in milliseconds.
+	VacuumFailsafeAge                   *wrapperspb.Int64Value  `protobuf:"bytes,142,opt,name=vacuum_failsafe_age,json=vacuumFailsafeAge,proto3" json:"vacuum_failsafe_age,omitempty"`                              // in milliseconds.
+	VacuumMultixactFailsafeAge          *wrapperspb.Int64Value  `protobuf:"bytes,143,opt,name=vacuum_multixact_failsafe_age,json=vacuumMultixactFailsafeAge,proto3" json:"vacuum_multixact_failsafe_age,omitempty"` // in milliseconds.
+	PgQualstatsEnabled                  *wrapperspb.BoolValue   `protobuf:"bytes,144,opt,name=pg_qualstats_enabled,json=pgQualstatsEnabled,proto3" json:"pg_qualstats_enabled,omitempty"`
+	PgQualstatsTrackConstants           *wrapperspb.BoolValue   `protobuf:"bytes,145,opt,name=pg_qualstats_track_constants,json=pgQualstatsTrackConstants,proto3" json:"pg_qualstats_track_constants,omitempty"`
+	PgQualstatsMax                      *wrapperspb.Int64Value  `protobuf:"bytes,146,opt,name=pg_qualstats_max,json=pgQualstatsMax,proto3" json:"pg_qualstats_max,omitempty"`
+	PgQualstatsResolveOids              *wrapperspb.BoolValue   `protobuf:"bytes,147,opt,name=pg_qualstats_resolve_oids,json=pgQualstatsResolveOids,proto3" json:"pg_qualstats_resolve_oids,omitempty"`
+	PgQualstatsSampleRate               *wrapperspb.DoubleValue `protobuf:"bytes,148,opt,name=pg_qualstats_sample_rate,json=pgQualstatsSampleRate,proto3" json:"pg_qualstats_sample_rate,omitempty"`
+	MaxStackDepth                       *wrapperspb.Int64Value  `protobuf:"bytes,150,opt,name=max_stack_depth,json=maxStackDepth,proto3" json:"max_stack_depth,omitempty"`             // in bytes.
+	Geqo                                *wrapperspb.BoolValue   `protobuf:"bytes,152,opt,name=geqo,proto3" json:"geqo,omitempty"`                                                      // enable Genetic Query Optimizer, by default is on
+	GeqoThreshold                       *wrapperspb.Int64Value  `protobuf:"bytes,153,opt,name=geqo_threshold,json=geqoThreshold,proto3" json:"geqo_threshold,omitempty"`               // The number of tables to use geqo, default is 12
+	GeqoEffort                          *wrapperspb.Int64Value  `protobuf:"bytes,154,opt,name=geqo_effort,json=geqoEffort,proto3" json:"geqo_effort,omitempty"`                        // tradeoff between planning time and query plan quality, default is 5
+	GeqoPoolSize                        *wrapperspb.Int64Value  `protobuf:"bytes,155,opt,name=geqo_pool_size,json=geqoPoolSize,proto3" json:"geqo_pool_size,omitempty"`                // number of individuals in the genetic population, useful values are typically 100 to 1000; default - 0 - choose based on based on geqo_effort
+	GeqoGenerations                     *wrapperspb.Int64Value  `protobuf:"bytes,156,opt,name=geqo_generations,json=geqoGenerations,proto3" json:"geqo_generations,omitempty"`         // the number of generations used by GEQO, useful values are in the same range as the pool size
+	GeqoSelectionBias                   *wrapperspb.DoubleValue `protobuf:"bytes,157,opt,name=geqo_selection_bias,json=geqoSelectionBias,proto3" json:"geqo_selection_bias,omitempty"` // selective pressure within the population
+	GeqoSeed                            *wrapperspb.DoubleValue `protobuf:"bytes,158,opt,name=geqo_seed,json=geqoSeed,proto3" json:"geqo_seed,omitempty"`                              // initial value of the random number generator used by GEQO
+	PgTrgmSimilarityThreshold           *wrapperspb.DoubleValue `protobuf:"bytes,159,opt,name=pg_trgm_similarity_threshold,json=pgTrgmSimilarityThreshold,proto3" json:"pg_trgm_similarity_threshold,omitempty"`
+	PgTrgmWordSimilarityThreshold       *wrapperspb.DoubleValue `protobuf:"bytes,160,opt,name=pg_trgm_word_similarity_threshold,json=pgTrgmWordSimilarityThreshold,proto3" json:"pg_trgm_word_similarity_threshold,omitempty"`
+	PgTrgmStrictWordSimilarityThreshold *wrapperspb.DoubleValue `protobuf:"bytes,161,opt,name=pg_trgm_strict_word_similarity_threshold,json=pgTrgmStrictWordSimilarityThreshold,proto3" json:"pg_trgm_strict_word_similarity_threshold,omitempty"`
+	MaxStandbyArchiveDelay              *wrapperspb.Int64Value  `protobuf:"bytes,162,opt,name=max_standby_archive_delay,json=maxStandbyArchiveDelay,proto3" json:"max_standby_archive_delay,omitempty"` // in milliseconds.
+	// Terminate any session that exceeds the designated timeout, specified in milliseconds. If a timeout is
+	// not specified, the default session timeout is set to 12 hours. To disable it, specify a value of 0.
+	SessionDurationTimeout   *wrapperspb.Int64Value                  `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`
+	LogReplicationCommands   *wrapperspb.BoolValue                   `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
+	LogAutovacuumMinDuration *wrapperspb.Int64Value                  `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                                         // in milliseconds. The default is 1000 (1 sec).
+	PasswordEncryption       PostgresqlConfig14_PasswordEncryption   `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
+	AutoExplainLogFormat     PostgresqlConfig14_AutoExplainLogFormat `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
+	// Sets the maximum allowed idle time between queries, when not in a transaction. In milliseconds.
+	IdleSessionTimeout         *wrapperspb.Int64Value `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`
+	CheckpointWarning          *wrapperspb.Int64Value `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                              // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
+	AutovacuumVacuumThreshold  *wrapperspb.Int64Value `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`    // Specifies the minimum number of updated or deleted tuples needed to trigger a VACUUM in any one table. The default is 50 tuples.
+	AutovacuumAnalyzeThreshold *wrapperspb.Int64Value `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"` // Specifies the minimum number of inserted, updated or deleted tuples needed to trigger an ANALYZE in any one table. The default is 50 tuples.
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *PostgresqlConfig14) Reset() {

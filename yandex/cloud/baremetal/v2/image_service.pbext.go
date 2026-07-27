@@ -37,3 +37,27 @@ func (m *ListImagesResponse) SetImages(v []*Image) {
 func (m *ListImagesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *ResolveImagesRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ResolveImagesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ResolveImagesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ResolveImagesRequest) SetOrderBy(v string) {
+	m.OrderBy = v
+}
+
+func (m *ResolveImagesResponse) SetImages(v []*Image) {
+	m.Images = v
+}
+
+func (m *ResolveImagesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

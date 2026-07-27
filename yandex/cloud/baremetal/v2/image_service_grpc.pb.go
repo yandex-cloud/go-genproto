@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ImageService_GetImage_FullMethodName   = "/yandex.cloud.baremetal.v2.ImageService/GetImage"
-	ImageService_ListImages_FullMethodName = "/yandex.cloud.baremetal.v2.ImageService/ListImages"
+	ImageService_GetImage_FullMethodName      = "/yandex.cloud.baremetal.v2.ImageService/GetImage"
+	ImageService_ListImages_FullMethodName    = "/yandex.cloud.baremetal.v2.ImageService/ListImages"
+	ImageService_ResolveImages_FullMethodName = "/yandex.cloud.baremetal.v2.ImageService/ResolveImages"
 )
 
 // ImageServiceClient is the client API for ImageService service.
@@ -38,6 +39,15 @@ type ImageServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
+	// Resolves the latest published Image for each available family within the specified folder.
+	// Returns one Image per family - the most recently published one.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveImages(ctx context.Context, in *ResolveImagesRequest, opts ...grpc.CallOption) (*ResolveImagesResponse, error)
 }
 
 type imageServiceClient struct {
@@ -68,6 +78,16 @@ func (c *imageServiceClient) ListImages(ctx context.Context, in *ListImagesReque
 	return out, nil
 }
 
+func (c *imageServiceClient) ResolveImages(ctx context.Context, in *ResolveImagesRequest, opts ...grpc.CallOption) (*ResolveImagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveImagesResponse)
+	err := c.cc.Invoke(ctx, ImageService_ResolveImages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ImageServiceServer is the server API for ImageService service.
 // All implementations should embed UnimplementedImageServiceServer
 // for forward compatibility.
@@ -83,6 +103,15 @@ type ImageServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
+	// Resolves the latest published Image for each available family within the specified folder.
+	// Returns one Image per family - the most recently published one.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled
+	// https://google.aip.dev/130 --)
+	ResolveImages(context.Context, *ResolveImagesRequest) (*ResolveImagesResponse, error)
 }
 
 // UnimplementedImageServiceServer should be embedded to have
@@ -97,6 +126,9 @@ func (UnimplementedImageServiceServer) GetImage(context.Context, *GetImageReques
 }
 func (UnimplementedImageServiceServer) ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListImages not implemented")
+}
+func (UnimplementedImageServiceServer) ResolveImages(context.Context, *ResolveImagesRequest) (*ResolveImagesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResolveImages not implemented")
 }
 func (UnimplementedImageServiceServer) testEmbeddedByValue() {}
 
@@ -154,6 +186,24 @@ func _ImageService_ListImages_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ImageService_ResolveImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveImagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServiceServer).ResolveImages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageService_ResolveImages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServiceServer).ResolveImages(ctx, req.(*ResolveImagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ImageService_ServiceDesc is the grpc.ServiceDesc for ImageService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -168,6 +218,10 @@ var ImageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListImages",
 			Handler:    _ImageService_ListImages_Handler,
+		},
+		{
+			MethodName: "ResolveImages",
+			Handler:    _ImageService_ResolveImages_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

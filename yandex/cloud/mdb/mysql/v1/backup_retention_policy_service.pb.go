@@ -433,12 +433,13 @@ const file_yandex_cloud_mdb_mysql_v1_backup_retention_policy_service_proto_rawDe
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x95\x01\n" +
 	"#ListBackupRetentionPoliciesResponse\x12F\n" +
 	"\bpolicies\x18\x01 \x03(\v2*.yandex.cloud.mdb.v1.BackupRetentionPolicyR\bpolicies\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf4\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x80\x02\n" +
 	"\"CreateBackupRetentionPolicyRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x120\n" +
-	"\x04cron\x18\x02 \x01(\v2\x1c.yandex.cloud.mdb.v1.CronTabR\x04cron\x12&\n" +
-	"\x0fretain_for_days\x18\x03 \x01(\x03R\rretainForDays\x12 \n" +
+	"\x04cron\x18\x02 \x01(\v2\x1c.yandex.cloud.mdb.v1.CronTabR\x04cron\x122\n" +
+	"\x0fretain_for_days\x18\x03 \x01(\x03B\n" +
+	"\xfa\xc71\x067-1095R\rretainForDays\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12%\n" +
 	"\vpolicy_name\x18\x05 \x01(\tB\x04\xe8\xc71\x01R\n" +
 	"policyName\"n\n" +

@@ -24,6 +24,54 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Delta synchronization mode for generic LDAP source.
+type LdapDeltaSyncMode int32
+
+const (
+	LdapDeltaSyncMode_LDAP_DELTA_SYNC_MODE_UNSPECIFIED LdapDeltaSyncMode = 0
+	// Every run is a full sync; no replication token is used.
+	LdapDeltaSyncMode_LDAP_DELTA_SYNC_MODE_FULL_SYNC LdapDeltaSyncMode = 1
+)
+
+// Enum value maps for LdapDeltaSyncMode.
+var (
+	LdapDeltaSyncMode_name = map[int32]string{
+		0: "LDAP_DELTA_SYNC_MODE_UNSPECIFIED",
+		1: "LDAP_DELTA_SYNC_MODE_FULL_SYNC",
+	}
+	LdapDeltaSyncMode_value = map[string]int32{
+		"LDAP_DELTA_SYNC_MODE_UNSPECIFIED": 0,
+		"LDAP_DELTA_SYNC_MODE_FULL_SYNC":   1,
+	}
+)
+
+func (x LdapDeltaSyncMode) Enum() *LdapDeltaSyncMode {
+	p := new(LdapDeltaSyncMode)
+	*p = x
+	return p
+}
+
+func (x LdapDeltaSyncMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LdapDeltaSyncMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[0].Descriptor()
+}
+
+func (LdapDeltaSyncMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[0]
+}
+
+func (x LdapDeltaSyncMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LdapDeltaSyncMode.Descriptor instead.
+func (LdapDeltaSyncMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{0}
+}
+
 // Type of attribute mapping.
 type MappingType int32
 
@@ -34,6 +82,8 @@ const (
 	MappingType_DIRECT MappingType = 1
 	// Empty mapping (no source attribute).
 	MappingType_EMPTY MappingType = 2
+	// Direct mapping from an arbitrary `source` attribute
+	MappingType_DIRECT_ARBITRARY_ATTRIBUTE MappingType = 3
 )
 
 // Enum value maps for MappingType.
@@ -42,11 +92,13 @@ var (
 		0: "MAPPING_TYPE_UNSPECIFIED",
 		1: "DIRECT",
 		2: "EMPTY",
+		3: "DIRECT_ARBITRARY_ATTRIBUTE",
 	}
 	MappingType_value = map[string]int32{
-		"MAPPING_TYPE_UNSPECIFIED": 0,
-		"DIRECT":                   1,
-		"EMPTY":                    2,
+		"MAPPING_TYPE_UNSPECIFIED":   0,
+		"DIRECT":                     1,
+		"EMPTY":                      2,
+		"DIRECT_ARBITRARY_ATTRIBUTE": 3,
 	}
 )
 
@@ -61,11 +113,11 @@ func (x MappingType) String() string {
 }
 
 func (MappingType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[1].Descriptor()
 }
 
 func (MappingType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[0]
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[1]
 }
 
 func (x MappingType) Number() protoreflect.EnumNumber {
@@ -74,7 +126,7 @@ func (x MappingType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use MappingType.Descriptor instead.
 func (MappingType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{0}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{1}
 }
 
 // Target attributes for user mapping.
@@ -146,11 +198,11 @@ func (x UserTargetAttribute) String() string {
 }
 
 func (UserTargetAttribute) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[2].Descriptor()
 }
 
 func (UserTargetAttribute) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[1]
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[2]
 }
 
 func (x UserTargetAttribute) Number() protoreflect.EnumNumber {
@@ -159,7 +211,7 @@ func (x UserTargetAttribute) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use UserTargetAttribute.Descriptor instead.
 func (UserTargetAttribute) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{2}
 }
 
 // Target attributes for group mapping.
@@ -199,11 +251,11 @@ func (x GroupTargetAttribute) String() string {
 }
 
 func (GroupTargetAttribute) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[3].Descriptor()
 }
 
 func (GroupTargetAttribute) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[2]
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[3]
 }
 
 func (x GroupTargetAttribute) Number() protoreflect.EnumNumber {
@@ -212,7 +264,7 @@ func (x GroupTargetAttribute) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use GroupTargetAttribute.Descriptor instead.
 func (GroupTargetAttribute) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{3}
 }
 
 // Behavior when removing users during synchronization.
@@ -252,11 +304,11 @@ func (x RemoveUserBehavior) String() string {
 }
 
 func (RemoveUserBehavior) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[4].Descriptor()
 }
 
 func (RemoveUserBehavior) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[3]
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[4]
 }
 
 func (x RemoveUserBehavior) Number() protoreflect.EnumNumber {
@@ -265,7 +317,7 @@ func (x RemoveUserBehavior) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use RemoveUserBehavior.Descriptor instead.
 func (RemoveUserBehavior) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{4}
 }
 
 // Type of synchronization session.
@@ -280,6 +332,8 @@ const (
 	SessionType_AD_PASSWORD_HASH SessionType = 2
 	// Active Directory user control session.
 	SessionType_AD_USER_CONTROL SessionType = 3
+	// Generic LDAP synchronization session.
+	SessionType_LDAP_SYNC SessionType = 4
 )
 
 // Enum value maps for SessionType.
@@ -289,12 +343,14 @@ var (
 		1: "AD_SYNC",
 		2: "AD_PASSWORD_HASH",
 		3: "AD_USER_CONTROL",
+		4: "LDAP_SYNC",
 	}
 	SessionType_value = map[string]int32{
 		"SESSION_TYPE_UNSPECIFIED": 0,
 		"AD_SYNC":                  1,
 		"AD_PASSWORD_HASH":         2,
 		"AD_USER_CONTROL":          3,
+		"LDAP_SYNC":                4,
 	}
 )
 
@@ -309,11 +365,11 @@ func (x SessionType) String() string {
 }
 
 func (SessionType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[5].Descriptor()
 }
 
 func (SessionType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[4]
+	return &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes[5]
 }
 
 func (x SessionType) Number() protoreflect.EnumNumber {
@@ -322,7 +378,7 @@ func (x SessionType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SessionType.Descriptor instead.
 func (SessionType) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{5}
 }
 
 // Synchronization settings for a subject container.
@@ -350,8 +406,13 @@ type SynchronizationSettings struct {
 	ReplacementDomain string `protobuf:"bytes,10,opt,name=replacement_domain,json=replacementDomain,proto3" json:"replacement_domain,omitempty"`
 	// Enables password writeback feature.
 	EnablePasswordWriteback bool `protobuf:"varint,11,opt,name=enable_password_writeback,json=enablePasswordWriteback,proto3" json:"enable_password_writeback,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	// Settings for generic LDAP synchronization source.
+	//
+	// Empty for Active Directory source. Required and fully populated for
+	// generic LDAP source.
+	LdapSettings  *LdapSettings `protobuf:"bytes,12,opt,name=ldap_settings,json=ldapSettings,proto3" json:"ldap_settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SynchronizationSettings) Reset() {
@@ -461,6 +522,142 @@ func (x *SynchronizationSettings) GetEnablePasswordWriteback() bool {
 	return false
 }
 
+func (x *SynchronizationSettings) GetLdapSettings() *LdapSettings {
+	if x != nil {
+		return x.LdapSettings
+	}
+	return nil
+}
+
+// Settings for generic LDAP synchronization source.
+type LdapSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Name of the LDAP attribute that holds the unique entry identifier.
+	ExternalIdAttribute string `protobuf:"bytes,1,opt,name=external_id_attribute,json=externalIdAttribute,proto3" json:"external_id_attribute,omitempty"`
+	// Name of the LDAP attribute that holds the DN of the entry.
+	DnAttribute string `protobuf:"bytes,2,opt,name=dn_attribute,json=dnAttribute,proto3" json:"dn_attribute,omitempty"`
+	// ObjectClass of users.
+	UserObjectClass string `protobuf:"bytes,3,opt,name=user_object_class,json=userObjectClass,proto3" json:"user_object_class,omitempty"`
+	// ObjectClass of groups.
+	GroupObjectClass string `protobuf:"bytes,4,opt,name=group_object_class,json=groupObjectClass,proto3" json:"group_object_class,omitempty"`
+	// Name of the LDAP attribute that stores the account status.
+	AccountDisabledAttribute string `protobuf:"bytes,5,opt,name=account_disabled_attribute,json=accountDisabledAttribute,proto3" json:"account_disabled_attribute,omitempty"`
+	// Value of `account_disabled_attribute` meaning the account is disabled.
+	AccountDisabledValue string `protobuf:"bytes,6,opt,name=account_disabled_value,json=accountDisabledValue,proto3" json:"account_disabled_value,omitempty"`
+	// Value of `account_disabled_attribute` meaning the account is enabled.
+	AccountEnabledValue string `protobuf:"bytes,7,opt,name=account_enabled_value,json=accountEnabledValue,proto3" json:"account_enabled_value,omitempty"`
+	// Name of the LDAP attribute the agent writes the new password to during
+	// password writeback.
+	PasswordAttribute string `protobuf:"bytes,8,opt,name=password_attribute,json=passwordAttribute,proto3" json:"password_attribute,omitempty"`
+	// Delta synchronization mode.
+	DeltaSyncMode LdapDeltaSyncMode `protobuf:"varint,9,opt,name=delta_sync_mode,json=deltaSyncMode,proto3,enum=yandex.cloud.organizationmanager.v1.idp.LdapDeltaSyncMode" json:"delta_sync_mode,omitempty"`
+	// Enables the AD-extension matching rule
+	// 1.2.840.113556.1.4.1941 for the group-DN membership filter.
+	UseRecursiveMembershipFilter bool `protobuf:"varint,10,opt,name=use_recursive_membership_filter,json=useRecursiveMembershipFilter,proto3" json:"use_recursive_membership_filter,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *LdapSettings) Reset() {
+	*x = LdapSettings{}
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LdapSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LdapSettings) ProtoMessage() {}
+
+func (x *LdapSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LdapSettings.ProtoReflect.Descriptor instead.
+func (*LdapSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *LdapSettings) GetExternalIdAttribute() string {
+	if x != nil {
+		return x.ExternalIdAttribute
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetDnAttribute() string {
+	if x != nil {
+		return x.DnAttribute
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetUserObjectClass() string {
+	if x != nil {
+		return x.UserObjectClass
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetGroupObjectClass() string {
+	if x != nil {
+		return x.GroupObjectClass
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetAccountDisabledAttribute() string {
+	if x != nil {
+		return x.AccountDisabledAttribute
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetAccountDisabledValue() string {
+	if x != nil {
+		return x.AccountDisabledValue
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetAccountEnabledValue() string {
+	if x != nil {
+		return x.AccountEnabledValue
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetPasswordAttribute() string {
+	if x != nil {
+		return x.PasswordAttribute
+	}
+	return ""
+}
+
+func (x *LdapSettings) GetDeltaSyncMode() LdapDeltaSyncMode {
+	if x != nil {
+		return x.DeltaSyncMode
+	}
+	return LdapDeltaSyncMode_LDAP_DELTA_SYNC_MODE_UNSPECIFIED
+}
+
+func (x *LdapSettings) GetUseRecursiveMembershipFilter() bool {
+	if x != nil {
+		return x.UseRecursiveMembershipFilter
+	}
+	return false
+}
+
 // Filter configuration for synchronization.
 type SynchronizationFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -476,7 +673,7 @@ type SynchronizationFilter struct {
 
 func (x *SynchronizationFilter) Reset() {
 	*x = SynchronizationFilter{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[1]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -488,7 +685,7 @@ func (x *SynchronizationFilter) String() string {
 func (*SynchronizationFilter) ProtoMessage() {}
 
 func (x *SynchronizationFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[1]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -501,7 +698,7 @@ func (x *SynchronizationFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SynchronizationFilter.ProtoReflect.Descriptor instead.
 func (*SynchronizationFilter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SynchronizationFilter) GetDomain() string {
@@ -540,7 +737,7 @@ type UserAttributeMapping struct {
 
 func (x *UserAttributeMapping) Reset() {
 	*x = UserAttributeMapping{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[2]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -552,7 +749,7 @@ func (x *UserAttributeMapping) String() string {
 func (*UserAttributeMapping) ProtoMessage() {}
 
 func (x *UserAttributeMapping) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[2]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -565,7 +762,7 @@ func (x *UserAttributeMapping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserAttributeMapping.ProtoReflect.Descriptor instead.
 func (*UserAttributeMapping) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UserAttributeMapping) GetSource() string {
@@ -604,7 +801,7 @@ type GroupAttributeMapping struct {
 
 func (x *GroupAttributeMapping) Reset() {
 	*x = GroupAttributeMapping{}
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[3]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -616,7 +813,7 @@ func (x *GroupAttributeMapping) String() string {
 func (*GroupAttributeMapping) ProtoMessage() {}
 
 func (x *GroupAttributeMapping) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[3]
+	mi := &file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -629,7 +826,7 @@ func (x *GroupAttributeMapping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupAttributeMapping.ProtoReflect.Descriptor instead.
 func (*GroupAttributeMapping) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GroupAttributeMapping) GetSource() string {
@@ -657,7 +854,7 @@ var File_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto 
 
 const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDesc = "" +
 	"\n" +
-	"Fyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xeb\x06\n" +
+	"Fyandex/cloud/organizationmanager/v1/idp/synchronization_settings.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xc7\a\n" +
 	"\x17SynchronizationSettings\x120\n" +
 	"\x14subject_container_id\x18\x01 \x01(\tR\x12subjectContainerId\x12V\n" +
 	"\x06filter\x18\x02 \x01(\v2>.yandex.cloud.organizationmanager.v1.idp.SynchronizationFilterR\x06filter\x12m\n" +
@@ -671,7 +868,20 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
 	"\x12replacement_domain\x18\n" +
 	" \x01(\tR\x11replacementDomain\x12:\n" +
-	"\x19enable_password_writeback\x18\v \x01(\bR\x17enablePasswordWriteback\"\xab\x01\n" +
+	"\x19enable_password_writeback\x18\v \x01(\bR\x17enablePasswordWriteback\x12Z\n" +
+	"\rldap_settings\x18\f \x01(\v25.yandex.cloud.organizationmanager.v1.idp.LdapSettingsR\fldapSettings\"\xc1\x04\n" +
+	"\fLdapSettings\x122\n" +
+	"\x15external_id_attribute\x18\x01 \x01(\tR\x13externalIdAttribute\x12!\n" +
+	"\fdn_attribute\x18\x02 \x01(\tR\vdnAttribute\x12*\n" +
+	"\x11user_object_class\x18\x03 \x01(\tR\x0fuserObjectClass\x12,\n" +
+	"\x12group_object_class\x18\x04 \x01(\tR\x10groupObjectClass\x12<\n" +
+	"\x1aaccount_disabled_attribute\x18\x05 \x01(\tR\x18accountDisabledAttribute\x124\n" +
+	"\x16account_disabled_value\x18\x06 \x01(\tR\x14accountDisabledValue\x122\n" +
+	"\x15account_enabled_value\x18\a \x01(\tR\x13accountEnabledValue\x12-\n" +
+	"\x12password_attribute\x18\b \x01(\tR\x11passwordAttribute\x12b\n" +
+	"\x0fdelta_sync_mode\x18\t \x01(\x0e2:.yandex.cloud.organizationmanager.v1.idp.LdapDeltaSyncModeR\rdeltaSyncMode\x12E\n" +
+	"\x1fuse_recursive_membership_filter\x18\n" +
+	" \x01(\bR\x1cuseRecursiveMembershipFilter\"\xab\x01\n" +
 	"\x15SynchronizationFilter\x12%\n" +
 	"\x06domain\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x051-253R\x06domain\x12)\n" +
 	"\x06groups\x18\x02 \x03(\tB\x11\x82\xc81\x04<=10\x8a\xc81\x051-253R\x06groups\x12@\n" +
@@ -683,12 +893,16 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	"\x15GroupAttributeMapping\x12!\n" +
 	"\x06source\x18\x01 \x01(\tB\t\x8a\xc81\x050-253R\x06source\x12[\n" +
 	"\x06target\x18\x02 \x01(\x0e2=.yandex.cloud.organizationmanager.v1.idp.GroupTargetAttributeB\x04\xe8\xc71\x01R\x06target\x12N\n" +
-	"\x04type\x18\x03 \x01(\x0e24.yandex.cloud.organizationmanager.v1.idp.MappingTypeB\x04\xe8\xc71\x01R\x04type*B\n" +
+	"\x04type\x18\x03 \x01(\x0e24.yandex.cloud.organizationmanager.v1.idp.MappingTypeB\x04\xe8\xc71\x01R\x04type*]\n" +
+	"\x11LdapDeltaSyncMode\x12$\n" +
+	" LDAP_DELTA_SYNC_MODE_UNSPECIFIED\x10\x00\x12\"\n" +
+	"\x1eLDAP_DELTA_SYNC_MODE_FULL_SYNC\x10\x01*b\n" +
 	"\vMappingType\x12\x1c\n" +
 	"\x18MAPPING_TYPE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06DIRECT\x10\x01\x12\t\n" +
-	"\x05EMPTY\x10\x02*\xd9\x01\n" +
+	"\x05EMPTY\x10\x02\x12\x1e\n" +
+	"\x1aDIRECT_ARBITRARY_ATTRIBUTE\x10\x03*\xd9\x01\n" +
 	"\x13UserTargetAttribute\x12%\n" +
 	"!USER_TARGET_ATTRIBUTE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tFULL_NAME\x10\x01\x12\x0e\n" +
@@ -712,12 +926,13 @@ const file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_prot
 	" REMOVE_USER_BEHAVIOR_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06REMOVE\x10\x01\x12\t\n" +
-	"\x05BLOCK\x10\x02*c\n" +
+	"\x05BLOCK\x10\x02*r\n" +
 	"\vSessionType\x12\x1c\n" +
 	"\x18SESSION_TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aAD_SYNC\x10\x01\x12\x14\n" +
 	"\x10AD_PASSWORD_HASH\x10\x02\x12\x13\n" +
-	"\x0fAD_USER_CONTROL\x10\x03B~\n" +
+	"\x0fAD_USER_CONTROL\x10\x03\x12\r\n" +
+	"\tLDAP_SYNC\x10\x04B~\n" +
 	"+yandex.cloud.api.organizationmanager.v1.idpZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp;idpb\x06proto3"
 
 var (
@@ -732,37 +947,41 @@ func file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto
 	return file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
+var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_goTypes = []any{
-	(MappingType)(0),                // 0: yandex.cloud.organizationmanager.v1.idp.MappingType
-	(UserTargetAttribute)(0),        // 1: yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
-	(GroupTargetAttribute)(0),       // 2: yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
-	(RemoveUserBehavior)(0),         // 3: yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
-	(SessionType)(0),                // 4: yandex.cloud.organizationmanager.v1.idp.SessionType
-	(*SynchronizationSettings)(nil), // 5: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
-	(*SynchronizationFilter)(nil),   // 6: yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
-	(*UserAttributeMapping)(nil),    // 7: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
-	(*GroupAttributeMapping)(nil),   // 8: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
-	(*durationpb.Duration)(nil),     // 9: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),   // 10: google.protobuf.Timestamp
+	(LdapDeltaSyncMode)(0),          // 0: yandex.cloud.organizationmanager.v1.idp.LdapDeltaSyncMode
+	(MappingType)(0),                // 1: yandex.cloud.organizationmanager.v1.idp.MappingType
+	(UserTargetAttribute)(0),        // 2: yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
+	(GroupTargetAttribute)(0),       // 3: yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
+	(RemoveUserBehavior)(0),         // 4: yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
+	(SessionType)(0),                // 5: yandex.cloud.organizationmanager.v1.idp.SessionType
+	(*SynchronizationSettings)(nil), // 6: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings
+	(*LdapSettings)(nil),            // 7: yandex.cloud.organizationmanager.v1.idp.LdapSettings
+	(*SynchronizationFilter)(nil),   // 8: yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
+	(*UserAttributeMapping)(nil),    // 9: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
+	(*GroupAttributeMapping)(nil),   // 10: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
+	(*durationpb.Duration)(nil),     // 11: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),   // 12: google.protobuf.Timestamp
 }
 var file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_depIdxs = []int32{
-	6,  // 0: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
-	3,  // 1: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
-	9,  // 2: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.synchronization_interval:type_name -> google.protobuf.Duration
-	7,  // 3: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
-	8,  // 4: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
-	10, // 5: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 6: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping.target:type_name -> yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
-	0,  // 7: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
-	2,  // 8: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping.target:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
-	0,  // 9: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8,  // 0: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.filter:type_name -> yandex.cloud.organizationmanager.v1.idp.SynchronizationFilter
+	4,  // 1: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.remove_user_behavior:type_name -> yandex.cloud.organizationmanager.v1.idp.RemoveUserBehavior
+	11, // 2: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.synchronization_interval:type_name -> google.protobuf.Duration
+	9,  // 3: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.user_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping
+	10, // 4: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.group_attribute_mappings:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping
+	12, // 5: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.created_at:type_name -> google.protobuf.Timestamp
+	7,  // 6: yandex.cloud.organizationmanager.v1.idp.SynchronizationSettings.ldap_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.LdapSettings
+	0,  // 7: yandex.cloud.organizationmanager.v1.idp.LdapSettings.delta_sync_mode:type_name -> yandex.cloud.organizationmanager.v1.idp.LdapDeltaSyncMode
+	2,  // 8: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping.target:type_name -> yandex.cloud.organizationmanager.v1.idp.UserTargetAttribute
+	1,  // 9: yandex.cloud.organizationmanager.v1.idp.UserAttributeMapping.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
+	3,  // 10: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping.target:type_name -> yandex.cloud.organizationmanager.v1.idp.GroupTargetAttribute
+	1,  // 11: yandex.cloud.organizationmanager.v1.idp.GroupAttributeMapping.type:type_name -> yandex.cloud.organizationmanager.v1.idp.MappingType
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_init() }
@@ -775,8 +994,8 @@ func file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_synchronization_settings_proto_rawDesc)),
-			NumEnums:      5,
-			NumMessages:   4,
+			NumEnums:      6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

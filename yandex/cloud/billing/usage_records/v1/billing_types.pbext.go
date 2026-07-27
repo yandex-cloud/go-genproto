@@ -102,6 +102,26 @@ func (m *Resource) SetServiceInstanceType(v string) {
 	m.ServiceInstanceType = v
 }
 
+func (m *Resource) SetMeta(v *ResourceMeta) {
+	m.Meta = v
+}
+
+func (m *ResourceMeta) SetService(v string) {
+	m.Service = v
+}
+
+func (m *ResourceMeta) SetResourceType(v string) {
+	m.ResourceType = v
+}
+
+func (m *ResourceMeta) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ResourceMeta) SetFolderId(v string) {
+	m.FolderId = v
+}
+
 func (m *Label) SetKey(v string) {
 	m.Key = v
 }

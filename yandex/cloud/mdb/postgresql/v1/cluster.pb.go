@@ -318,10 +318,14 @@ func (Host_Role) EnumDescriptor() ([]byte, []int) {
 type Host_ReplicaType int32
 
 const (
-	Host_REPLICA_TYPE_UNKNOWN Host_ReplicaType = 0 // Replica type is unknown (we have no data) or it's master
-	Host_ASYNC                Host_ReplicaType = 1
-	Host_SYNC                 Host_ReplicaType = 2
-	Host_QUORUM               Host_ReplicaType = 3
+	// Replica type is unknown (we have no data) or it's master
+	Host_REPLICA_TYPE_UNKNOWN Host_ReplicaType = 0
+	// The replica uses asynchronous replication.
+	Host_ASYNC Host_ReplicaType = 1
+	// The replica is a synchronous standby in priority-based synchronous replication.
+	Host_SYNC Host_ReplicaType = 2
+	// The replica participates in quorum-based synchronous replication.
+	Host_QUORUM Host_ReplicaType = 3
 )
 
 // Enum value maps for Host_ReplicaType.
@@ -1291,10 +1295,12 @@ type Host struct {
 	// Configuration of a PostgreSQL server for the host.
 	Config *HostConfig `protobuf:"bytes,11,opt,name=config,proto3" json:"config,omitempty"`
 	// Flag showing public IP assignment status to this host.
-	AssignPublicIp bool             `protobuf:"varint,12,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	ReplicaType    Host_ReplicaType `protobuf:"varint,13,opt,name=replica_type,json=replicaType,proto3,enum=yandex.cloud.mdb.postgresql.v1.Host_ReplicaType" json:"replica_type,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	AssignPublicIp bool `protobuf:"varint,12,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
+	// ReplicaType represents the current synchronization state of a PostgreSQL replica
+	// as reported by the primary host.
+	ReplicaType   Host_ReplicaType `protobuf:"varint,13,opt,name=replica_type,json=replicaType,proto3,enum=yandex.cloud.mdb.postgresql.v1.Host_ReplicaType" json:"replica_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Host) Reset() {
@@ -1921,8 +1927,10 @@ type PerformanceDiagnostics struct {
 	SessionsSamplingInterval int64 `protobuf:"varint,2,opt,name=sessions_sampling_interval,json=sessionsSamplingInterval,proto3" json:"sessions_sampling_interval,omitempty"`
 	// Interval (in seconds) for pg_stat_statements sampling
 	StatementsSamplingInterval int64 `protobuf:"varint,3,opt,name=statements_sampling_interval,json=statementsSamplingInterval,proto3" json:"statements_sampling_interval,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	// Switches performance diagnostics from standard to advanced mode.
+	AdvancedMode  bool `protobuf:"varint,4,opt,name=advanced_mode,json=advancedMode,proto3" json:"advanced_mode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PerformanceDiagnostics) Reset() {
@@ -1974,6 +1982,13 @@ func (x *PerformanceDiagnostics) GetStatementsSamplingInterval() int64 {
 		return x.StatementsSamplingInterval
 	}
 	return 0
+}
+
+func (x *PerformanceDiagnostics) GetAdvancedMode() bool {
+	if x != nil {
+		return x.AdvancedMode
+	}
+	return false
 }
 
 // Cluster-wide configuration of managed pg_repack.
@@ -2256,11 +2271,12 @@ const file_yandex_cloud_mdb_postgresql_v1_cluster_proto_rawDesc = "" +
 	"serverless\x18\x03 \x01(\bR\n" +
 	"serverless\x12#\n" +
 	"\rdata_transfer\x18\x04 \x01(\bR\fdataTransfer\x12!\n" +
-	"\fyandex_query\x18\x05 \x01(\bR\vyandexQuery\"\xcc\x01\n" +
+	"\fyandex_query\x18\x05 \x01(\bR\vyandexQuery\"\xf1\x01\n" +
 	"\x16PerformanceDiagnostics\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12I\n" +
 	"\x1asessions_sampling_interval\x18\x02 \x01(\x03B\v\xfa\xc71\a1-86400R\x18sessionsSamplingInterval\x12M\n" +
-	"\x1cstatements_sampling_interval\x18\x03 \x01(\x03B\v\xfa\xc71\a1-86400R\x1astatementsSamplingInterval\"E\n" +
+	"\x1cstatements_sampling_interval\x18\x03 \x01(\x03B\v\xfa\xc71\a1-86400R\x1astatementsSamplingInterval\x12#\n" +
+	"\radvanced_mode\x18\x04 \x01(\bR\fadvancedMode\"E\n" +
 	"\rManagedRepack\x124\n" +
 	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\"\xcf\x01\n" +
 	"\x13DiskSizeAutoscaling\x12E\n" +

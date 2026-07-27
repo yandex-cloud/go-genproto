@@ -51,6 +51,50 @@ func (m *SynchronizationSettings) SetEnablePasswordWriteback(v bool) {
 	m.EnablePasswordWriteback = v
 }
 
+func (m *SynchronizationSettings) SetLdapSettings(v *LdapSettings) {
+	m.LdapSettings = v
+}
+
+func (m *LdapSettings) SetExternalIdAttribute(v string) {
+	m.ExternalIdAttribute = v
+}
+
+func (m *LdapSettings) SetDnAttribute(v string) {
+	m.DnAttribute = v
+}
+
+func (m *LdapSettings) SetUserObjectClass(v string) {
+	m.UserObjectClass = v
+}
+
+func (m *LdapSettings) SetGroupObjectClass(v string) {
+	m.GroupObjectClass = v
+}
+
+func (m *LdapSettings) SetAccountDisabledAttribute(v string) {
+	m.AccountDisabledAttribute = v
+}
+
+func (m *LdapSettings) SetAccountDisabledValue(v string) {
+	m.AccountDisabledValue = v
+}
+
+func (m *LdapSettings) SetAccountEnabledValue(v string) {
+	m.AccountEnabledValue = v
+}
+
+func (m *LdapSettings) SetPasswordAttribute(v string) {
+	m.PasswordAttribute = v
+}
+
+func (m *LdapSettings) SetDeltaSyncMode(v LdapDeltaSyncMode) {
+	m.DeltaSyncMode = v
+}
+
+func (m *LdapSettings) SetUseRecursiveMembershipFilter(v bool) {
+	m.UseRecursiveMembershipFilter = v
+}
+
 func (m *SynchronizationFilter) SetDomain(v string) {
 	m.Domain = v
 }

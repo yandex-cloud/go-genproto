@@ -301,28 +301,29 @@ func (PostgresqlHostConfig13_1C_LogErrorVerbosity) EnumDescriptor() ([]byte, []i
 type PostgresqlHostConfig13_1C_LogLevel int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_UNSPECIFIED PostgresqlHostConfig13_1C_LogLevel = 0
-	// Provides successively-more-detailed information for use by developers.
+	// Provides the most detailed diagnostic information for developers.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_DEBUG5 PostgresqlHostConfig13_1C_LogLevel = 1
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG3.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_DEBUG4 PostgresqlHostConfig13_1C_LogLevel = 2
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG2.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_DEBUG3 PostgresqlHostConfig13_1C_LogLevel = 3
-	// Provides successively-more-detailed information for use by developers.
+	// Provides more detailed diagnostic information than DEBUG1.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_DEBUG2 PostgresqlHostConfig13_1C_LogLevel = 4
-	// Provides successively-more-detailed information for use by developers.
+	// Provides diagnostic information for developers.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_DEBUG1 PostgresqlHostConfig13_1C_LogLevel = 5
-	// Reports information of interest to administrators, e.g., checkpoint activity.
+	// Reports information of interest to database administrators.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_LOG PostgresqlHostConfig13_1C_LogLevel = 6
-	// Provides information that might be helpful to users, e.g., notice of truncation of long identifiers.
+	// Reports information that may be helpful to users.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_NOTICE PostgresqlHostConfig13_1C_LogLevel = 7
-	// Provides warnings of likely problems, e.g., COMMIT outside a transaction block.
+	// Reports a warning about a likely problem.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_WARNING PostgresqlHostConfig13_1C_LogLevel = 8
-	// Reports an error that caused the current command to abort.
+	// Reports an error that aborts the current command.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_ERROR PostgresqlHostConfig13_1C_LogLevel = 9
-	// Reports an error that caused the current session to abort.
+	// Reports an error that aborts the current session.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_FATAL PostgresqlHostConfig13_1C_LogLevel = 10
-	// Reports an error that caused all database sessions to abort.
+	// Reports an error that aborts all database sessions.
 	PostgresqlHostConfig13_1C_LOG_LEVEL_PANIC PostgresqlHostConfig13_1C_LogLevel = 11
 )
 
@@ -611,76 +612,154 @@ func (PostgresqlHostConfig13_1C_XmlOption) EnumDescriptor() ([]byte, []int) {
 // parameters which detailed description is available in
 // [PostgreSQL documentation](https://www.postgresql.org/docs/11/runtime-config.html).
 type PostgresqlHostConfig13_1C struct {
-	state                           protoimpl.MessageState                         `protogen:"open.v1"`
-	RecoveryMinApplyDelay           *wrapperspb.Int64Value                         `protobuf:"bytes,1,opt,name=recovery_min_apply_delay,json=recoveryMinApplyDelay,proto3" json:"recovery_min_apply_delay,omitempty"` // in milliseconds.
-	SharedBuffers                   *wrapperspb.Int64Value                         `protobuf:"bytes,2,opt,name=shared_buffers,json=sharedBuffers,proto3" json:"shared_buffers,omitempty"`                             // in bytes.
-	TempBuffers                     *wrapperspb.Int64Value                         `protobuf:"bytes,3,opt,name=temp_buffers,json=tempBuffers,proto3" json:"temp_buffers,omitempty"`                                   // in bytes.
-	WorkMem                         *wrapperspb.Int64Value                         `protobuf:"bytes,4,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`                                               // in bytes.
-	TempFileLimit                   *wrapperspb.Int64Value                         `protobuf:"bytes,5,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`                           // in bytes.
-	BackendFlushAfter               *wrapperspb.Int64Value                         `protobuf:"bytes,6,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
-	OldSnapshotThreshold            *wrapperspb.Int64Value                         `protobuf:"bytes,7,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`               // in milliseconds.
-	MaxStandbyStreamingDelay        *wrapperspb.Int64Value                         `protobuf:"bytes,8,opt,name=max_standby_streaming_delay,json=maxStandbyStreamingDelay,proto3" json:"max_standby_streaming_delay,omitempty"` // in milliseconds.
-	ConstraintExclusion             PostgresqlHostConfig13_1C_ConstraintExclusion  `protobuf:"varint,9,opt,name=constraint_exclusion,json=constraintExclusion,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ConstraintExclusion" json:"constraint_exclusion,omitempty"`
-	CursorTupleFraction             *wrapperspb.DoubleValue                        `protobuf:"bytes,10,opt,name=cursor_tuple_fraction,json=cursorTupleFraction,proto3" json:"cursor_tuple_fraction,omitempty"`
-	FromCollapseLimit               *wrapperspb.Int64Value                         `protobuf:"bytes,11,opt,name=from_collapse_limit,json=fromCollapseLimit,proto3" json:"from_collapse_limit,omitempty"`
-	JoinCollapseLimit               *wrapperspb.Int64Value                         `protobuf:"bytes,12,opt,name=join_collapse_limit,json=joinCollapseLimit,proto3" json:"join_collapse_limit,omitempty"`
-	ForceParallelMode               PostgresqlHostConfig13_1C_ForceParallelMode    `protobuf:"varint,13,opt,name=force_parallel_mode,json=forceParallelMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ForceParallelMode" json:"force_parallel_mode,omitempty"`
-	ClientMinMessages               PostgresqlHostConfig13_1C_LogLevel             `protobuf:"varint,14,opt,name=client_min_messages,json=clientMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"client_min_messages,omitempty"`
-	LogMinMessages                  PostgresqlHostConfig13_1C_LogLevel             `protobuf:"varint,15,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"log_min_messages,omitempty"`
-	LogMinErrorStatement            PostgresqlHostConfig13_1C_LogLevel             `protobuf:"varint,16,opt,name=log_min_error_statement,json=logMinErrorStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"log_min_error_statement,omitempty"`
-	LogMinDurationStatement         *wrapperspb.Int64Value                         `protobuf:"bytes,17,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"` // in milliseconds.
-	LogCheckpoints                  *wrapperspb.BoolValue                          `protobuf:"bytes,18,opt,name=log_checkpoints,json=logCheckpoints,proto3" json:"log_checkpoints,omitempty"`
-	LogConnections                  *wrapperspb.BoolValue                          `protobuf:"bytes,19,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
-	LogDisconnections               *wrapperspb.BoolValue                          `protobuf:"bytes,20,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
-	LogDuration                     *wrapperspb.BoolValue                          `protobuf:"bytes,21,opt,name=log_duration,json=logDuration,proto3" json:"log_duration,omitempty"`
-	LogErrorVerbosity               PostgresqlHostConfig13_1C_LogErrorVerbosity    `protobuf:"varint,22,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
-	LogLockWaits                    *wrapperspb.BoolValue                          `protobuf:"bytes,23,opt,name=log_lock_waits,json=logLockWaits,proto3" json:"log_lock_waits,omitempty"`
-	LogStatement                    PostgresqlHostConfig13_1C_LogStatement         `protobuf:"varint,24,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogStatement" json:"log_statement,omitempty"`
-	LogTempFiles                    *wrapperspb.Int64Value                         `protobuf:"bytes,25,opt,name=log_temp_files,json=logTempFiles,proto3" json:"log_temp_files,omitempty"`
-	SearchPath                      string                                         `protobuf:"bytes,26,opt,name=search_path,json=searchPath,proto3" json:"search_path,omitempty"`
-	RowSecurity                     *wrapperspb.BoolValue                          `protobuf:"bytes,27,opt,name=row_security,json=rowSecurity,proto3" json:"row_security,omitempty"`
-	DefaultTransactionIsolation     PostgresqlHostConfig13_1C_TransactionIsolation `protobuf:"varint,28,opt,name=default_transaction_isolation,json=defaultTransactionIsolation,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_TransactionIsolation" json:"default_transaction_isolation,omitempty"`
-	StatementTimeout                *wrapperspb.Int64Value                         `protobuf:"bytes,29,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`                                                    // in milliseconds.
-	LockTimeout                     *wrapperspb.Int64Value                         `protobuf:"bytes,30,opt,name=lock_timeout,json=lockTimeout,proto3" json:"lock_timeout,omitempty"`                                                                   // in milliseconds.
-	IdleInTransactionSessionTimeout *wrapperspb.Int64Value                         `protobuf:"bytes,31,opt,name=idle_in_transaction_session_timeout,json=idleInTransactionSessionTimeout,proto3" json:"idle_in_transaction_session_timeout,omitempty"` // in milliseconds.
-	ByteaOutput                     PostgresqlHostConfig13_1C_ByteaOutput          `protobuf:"varint,32,opt,name=bytea_output,json=byteaOutput,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ByteaOutput" json:"bytea_output,omitempty"`
-	Xmlbinary                       PostgresqlHostConfig13_1C_XmlBinary            `protobuf:"varint,33,opt,name=xmlbinary,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_XmlBinary" json:"xmlbinary,omitempty"`
-	Xmloption                       PostgresqlHostConfig13_1C_XmlOption            `protobuf:"varint,34,opt,name=xmloption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_XmlOption" json:"xmloption,omitempty"`
-	GinPendingListLimit             *wrapperspb.Int64Value                         `protobuf:"bytes,35,opt,name=gin_pending_list_limit,json=ginPendingListLimit,proto3" json:"gin_pending_list_limit,omitempty"` // in bytes.
-	DeadlockTimeout                 *wrapperspb.Int64Value                         `protobuf:"bytes,36,opt,name=deadlock_timeout,json=deadlockTimeout,proto3" json:"deadlock_timeout,omitempty"`                 // in milliseconds.
-	MaxLocksPerTransaction          *wrapperspb.Int64Value                         `protobuf:"bytes,37,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
-	MaxPredLocksPerTransaction      *wrapperspb.Int64Value                         `protobuf:"bytes,38,opt,name=max_pred_locks_per_transaction,json=maxPredLocksPerTransaction,proto3" json:"max_pred_locks_per_transaction,omitempty"`
-	ArrayNulls                      *wrapperspb.BoolValue                          `protobuf:"bytes,39,opt,name=array_nulls,json=arrayNulls,proto3" json:"array_nulls,omitempty"`
-	BackslashQuote                  PostgresqlHostConfig13_1C_BackslashQuote       `protobuf:"varint,40,opt,name=backslash_quote,json=backslashQuote,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_BackslashQuote" json:"backslash_quote,omitempty"`
-	DefaultWithOids                 *wrapperspb.BoolValue                          `protobuf:"bytes,41,opt,name=default_with_oids,json=defaultWithOids,proto3" json:"default_with_oids,omitempty"`
-	EscapeStringWarning             *wrapperspb.BoolValue                          `protobuf:"bytes,42,opt,name=escape_string_warning,json=escapeStringWarning,proto3" json:"escape_string_warning,omitempty"`
-	LoCompatPrivileges              *wrapperspb.BoolValue                          `protobuf:"bytes,43,opt,name=lo_compat_privileges,json=loCompatPrivileges,proto3" json:"lo_compat_privileges,omitempty"`
-	OperatorPrecedenceWarning       *wrapperspb.BoolValue                          `protobuf:"bytes,44,opt,name=operator_precedence_warning,json=operatorPrecedenceWarning,proto3" json:"operator_precedence_warning,omitempty"`
-	QuoteAllIdentifiers             *wrapperspb.BoolValue                          `protobuf:"bytes,45,opt,name=quote_all_identifiers,json=quoteAllIdentifiers,proto3" json:"quote_all_identifiers,omitempty"`
-	StandardConformingStrings       *wrapperspb.BoolValue                          `protobuf:"bytes,46,opt,name=standard_conforming_strings,json=standardConformingStrings,proto3" json:"standard_conforming_strings,omitempty"`
-	SynchronizeSeqscans             *wrapperspb.BoolValue                          `protobuf:"bytes,47,opt,name=synchronize_seqscans,json=synchronizeSeqscans,proto3" json:"synchronize_seqscans,omitempty"`
-	TransformNullEquals             *wrapperspb.BoolValue                          `protobuf:"bytes,48,opt,name=transform_null_equals,json=transformNullEquals,proto3" json:"transform_null_equals,omitempty"`
-	ExitOnError                     *wrapperspb.BoolValue                          `protobuf:"bytes,49,opt,name=exit_on_error,json=exitOnError,proto3" json:"exit_on_error,omitempty"`
-	SeqPageCost                     *wrapperspb.DoubleValue                        `protobuf:"bytes,50,opt,name=seq_page_cost,json=seqPageCost,proto3" json:"seq_page_cost,omitempty"`
-	RandomPageCost                  *wrapperspb.DoubleValue                        `protobuf:"bytes,51,opt,name=random_page_cost,json=randomPageCost,proto3" json:"random_page_cost,omitempty"`
-	EnableBitmapscan                *wrapperspb.BoolValue                          `protobuf:"bytes,54,opt,name=enable_bitmapscan,json=enableBitmapscan,proto3" json:"enable_bitmapscan,omitempty"`
-	EnableHashagg                   *wrapperspb.BoolValue                          `protobuf:"bytes,55,opt,name=enable_hashagg,json=enableHashagg,proto3" json:"enable_hashagg,omitempty"`
-	EnableHashjoin                  *wrapperspb.BoolValue                          `protobuf:"bytes,56,opt,name=enable_hashjoin,json=enableHashjoin,proto3" json:"enable_hashjoin,omitempty"`
-	EnableIndexscan                 *wrapperspb.BoolValue                          `protobuf:"bytes,57,opt,name=enable_indexscan,json=enableIndexscan,proto3" json:"enable_indexscan,omitempty"`
-	EnableIndexonlyscan             *wrapperspb.BoolValue                          `protobuf:"bytes,58,opt,name=enable_indexonlyscan,json=enableIndexonlyscan,proto3" json:"enable_indexonlyscan,omitempty"`
-	EnableMaterial                  *wrapperspb.BoolValue                          `protobuf:"bytes,59,opt,name=enable_material,json=enableMaterial,proto3" json:"enable_material,omitempty"`
-	EnableMergejoin                 *wrapperspb.BoolValue                          `protobuf:"bytes,60,opt,name=enable_mergejoin,json=enableMergejoin,proto3" json:"enable_mergejoin,omitempty"`
-	EnableNestloop                  *wrapperspb.BoolValue                          `protobuf:"bytes,61,opt,name=enable_nestloop,json=enableNestloop,proto3" json:"enable_nestloop,omitempty"`
-	EnableSeqscan                   *wrapperspb.BoolValue                          `protobuf:"bytes,62,opt,name=enable_seqscan,json=enableSeqscan,proto3" json:"enable_seqscan,omitempty"`
-	EnableSort                      *wrapperspb.BoolValue                          `protobuf:"bytes,63,opt,name=enable_sort,json=enableSort,proto3" json:"enable_sort,omitempty"`
-	EnableTidscan                   *wrapperspb.BoolValue                          `protobuf:"bytes,64,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
-	MaxParallelWorkers              *wrapperspb.Int64Value                         `protobuf:"bytes,65,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
-	MaxParallelWorkersPerGather     *wrapperspb.Int64Value                         `protobuf:"bytes,66,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
-	Timezone                        string                                         `protobuf:"bytes,67,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	EffectiveIoConcurrency          *wrapperspb.Int64Value                         `protobuf:"bytes,68,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
-	EffectiveCacheSize              *wrapperspb.Int64Value                         `protobuf:"bytes,69,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Sets the minimum delay for applying changes during recovery. In milliseconds.
+	RecoveryMinApplyDelay *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=recovery_min_apply_delay,json=recoveryMinApplyDelay,proto3" json:"recovery_min_apply_delay,omitempty"`
+	// Sets the number of shared memory buffers used by the server. In bytes.
+	SharedBuffers *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=shared_buffers,json=sharedBuffers,proto3" json:"shared_buffers,omitempty"`
+	// Sets the maximum number of temporary buffers used by each session. In bytes.
+	TempBuffers *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=temp_buffers,json=tempBuffers,proto3" json:"temp_buffers,omitempty"`
+	// Sets the maximum memory to be used for query workspaces. This much memory can be used by each
+	// internal sort operation and hash table before switching to temporary disk files. In bytes.
+	WorkMem *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`
+	// Limits the total size of all temporary files used by each process. -1 means no limit. In bytes.
+	TempFileLimit *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`
+	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	BackendFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
+	// Time before a snapshot is too old to read pages changed after the snapshot was taken.
+	// A value of -1 disables this feature. In milliseconds.
+	OldSnapshotThreshold *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=old_snapshot_threshold,json=oldSnapshotThreshold,proto3" json:"old_snapshot_threshold,omitempty"`
+	// Sets the maximum delay before canceling queries when a hot standby server is processing streamed WAL data. In milliseconds.
+	MaxStandbyStreamingDelay *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=max_standby_streaming_delay,json=maxStandbyStreamingDelay,proto3" json:"max_standby_streaming_delay,omitempty"`
+	// Enables the planner to use constraints to optimize queries.
+	ConstraintExclusion PostgresqlHostConfig13_1C_ConstraintExclusion `protobuf:"varint,9,opt,name=constraint_exclusion,json=constraintExclusion,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ConstraintExclusion" json:"constraint_exclusion,omitempty"`
+	// Sets the planner's estimate of the fraction of a cursor's rows that will be retrieved.
+	CursorTupleFraction *wrapperspb.DoubleValue `protobuf:"bytes,10,opt,name=cursor_tuple_fraction,json=cursorTupleFraction,proto3" json:"cursor_tuple_fraction,omitempty"`
+	// Sets the FROM-list size beyond which subqueries are not collapsed.
+	FromCollapseLimit *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=from_collapse_limit,json=fromCollapseLimit,proto3" json:"from_collapse_limit,omitempty"`
+	// Sets the FROM-list size beyond which JOIN constructs are not flattened.
+	JoinCollapseLimit *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=join_collapse_limit,json=joinCollapseLimit,proto3" json:"join_collapse_limit,omitempty"`
+	// Forces use of parallel query facilities. If possible, run query using a parallel worker and with parallel restrictions.
+	ForceParallelMode PostgresqlHostConfig13_1C_ForceParallelMode `protobuf:"varint,13,opt,name=force_parallel_mode,json=forceParallelMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ForceParallelMode" json:"force_parallel_mode,omitempty"`
+	// Sets the message levels that are sent to the client.
+	ClientMinMessages PostgresqlHostConfig13_1C_LogLevel `protobuf:"varint,14,opt,name=client_min_messages,json=clientMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"client_min_messages,omitempty"`
+	// Sets the message levels that are logged.
+	LogMinMessages PostgresqlHostConfig13_1C_LogLevel `protobuf:"varint,15,opt,name=log_min_messages,json=logMinMessages,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"log_min_messages,omitempty"`
+	// Causes all statements generating error at or above this level to be logged.
+	LogMinErrorStatement PostgresqlHostConfig13_1C_LogLevel `protobuf:"varint,16,opt,name=log_min_error_statement,json=logMinErrorStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogLevel" json:"log_min_error_statement,omitempty"`
+	// Sets the minimum execution time above which all statements will be logged. In milliseconds.
+	LogMinDurationStatement *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=log_min_duration_statement,json=logMinDurationStatement,proto3" json:"log_min_duration_statement,omitempty"`
+	// Logs each checkpoint.
+	LogCheckpoints *wrapperspb.BoolValue `protobuf:"bytes,18,opt,name=log_checkpoints,json=logCheckpoints,proto3" json:"log_checkpoints,omitempty"`
+	// Logs each successful connection.
+	LogConnections *wrapperspb.BoolValue `protobuf:"bytes,19,opt,name=log_connections,json=logConnections,proto3" json:"log_connections,omitempty"`
+	// Logs end of a session, including duration.
+	LogDisconnections *wrapperspb.BoolValue `protobuf:"bytes,20,opt,name=log_disconnections,json=logDisconnections,proto3" json:"log_disconnections,omitempty"`
+	// Logs the duration of each completed SQL statement.
+	// (-- api-linter: yc::1701::duration-required=disabled --)
+	LogDuration *wrapperspb.BoolValue `protobuf:"bytes,21,opt,name=log_duration,json=logDuration,proto3" json:"log_duration,omitempty"`
+	// Sets the verbosity of logged messages.
+	LogErrorVerbosity PostgresqlHostConfig13_1C_LogErrorVerbosity `protobuf:"varint,22,opt,name=log_error_verbosity,json=logErrorVerbosity,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogErrorVerbosity" json:"log_error_verbosity,omitempty"`
+	// Logs long lock waits.
+	LogLockWaits *wrapperspb.BoolValue `protobuf:"bytes,23,opt,name=log_lock_waits,json=logLockWaits,proto3" json:"log_lock_waits,omitempty"`
+	// Sets the type of statements logged.
+	LogStatement PostgresqlHostConfig13_1C_LogStatement `protobuf:"varint,24,opt,name=log_statement,json=logStatement,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_LogStatement" json:"log_statement,omitempty"`
+	// Log the use of temporary files larger than this number of kilobytes.
+	LogTempFiles *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=log_temp_files,json=logTempFiles,proto3" json:"log_temp_files,omitempty"`
+	// Sets the schema search order for names that are not schema-qualified.
+	SearchPath string `protobuf:"bytes,26,opt,name=search_path,json=searchPath,proto3" json:"search_path,omitempty"`
+	// Enable row security.
+	RowSecurity *wrapperspb.BoolValue `protobuf:"bytes,27,opt,name=row_security,json=rowSecurity,proto3" json:"row_security,omitempty"`
+	// Sets the transaction isolation level of each new transaction.
+	DefaultTransactionIsolation PostgresqlHostConfig13_1C_TransactionIsolation `protobuf:"varint,28,opt,name=default_transaction_isolation,json=defaultTransactionIsolation,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_TransactionIsolation" json:"default_transaction_isolation,omitempty"`
+	// Sets the maximum allowed duration of any statement. In milliseconds.
+	StatementTimeout *wrapperspb.Int64Value `protobuf:"bytes,29,opt,name=statement_timeout,json=statementTimeout,proto3" json:"statement_timeout,omitempty"`
+	// Sets the maximum allowed duration of any wait for a lock. In milliseconds.
+	LockTimeout *wrapperspb.Int64Value `protobuf:"bytes,30,opt,name=lock_timeout,json=lockTimeout,proto3" json:"lock_timeout,omitempty"`
+	// Sets the maximum allowed idle time between queries, when in a transaction. In milliseconds.
+	IdleInTransactionSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,31,opt,name=idle_in_transaction_session_timeout,json=idleInTransactionSessionTimeout,proto3" json:"idle_in_transaction_session_timeout,omitempty"`
+	// Sets the output format for bytea.
+	ByteaOutput PostgresqlHostConfig13_1C_ByteaOutput `protobuf:"varint,32,opt,name=bytea_output,json=byteaOutput,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_ByteaOutput" json:"bytea_output,omitempty"`
+	// Sets how binary values are to be encoded in XML.
+	Xmlbinary PostgresqlHostConfig13_1C_XmlBinary `protobuf:"varint,33,opt,name=xmlbinary,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_XmlBinary" json:"xmlbinary,omitempty"`
+	// Sets whether XML data in implicit parsing and serialization operations is to be considered as documents or content fragments.
+	Xmloption PostgresqlHostConfig13_1C_XmlOption `protobuf:"varint,34,opt,name=xmloption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_XmlOption" json:"xmloption,omitempty"`
+	// Sets the maximum size of the pending list for GIN index. In bytes.
+	GinPendingListLimit *wrapperspb.Int64Value `protobuf:"bytes,35,opt,name=gin_pending_list_limit,json=ginPendingListLimit,proto3" json:"gin_pending_list_limit,omitempty"`
+	// Sets the time to wait on a lock before checking for deadlock. In milliseconds.
+	DeadlockTimeout *wrapperspb.Int64Value `protobuf:"bytes,36,opt,name=deadlock_timeout,json=deadlockTimeout,proto3" json:"deadlock_timeout,omitempty"`
+	// Sets the maximum number of locks per transaction. The shared lock table is sized on the assumption that
+	// at most max_locks_per_transaction * max_connections distinct objects will need to be locked at any one time.
+	MaxLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,37,opt,name=max_locks_per_transaction,json=maxLocksPerTransaction,proto3" json:"max_locks_per_transaction,omitempty"`
+	// Sets the maximum number of predicate locks per transaction.The shared predicate lock table is sized on the assumption that
+	// at most max_pred_locks_per_transaction * max_connections distinct objects will need to be locked at any one time.
+	MaxPredLocksPerTransaction *wrapperspb.Int64Value `protobuf:"bytes,38,opt,name=max_pred_locks_per_transaction,json=maxPredLocksPerTransaction,proto3" json:"max_pred_locks_per_transaction,omitempty"`
+	// Enable input of NULL elements in arrays. When turned on, unquoted NULL in an array input
+	// value means a null value; otherwise it is taken literally.
+	ArrayNulls *wrapperspb.BoolValue `protobuf:"bytes,39,opt,name=array_nulls,json=arrayNulls,proto3" json:"array_nulls,omitempty"`
+	// Sets whether \"\\'\" is allowed in string literals.
+	BackslashQuote PostgresqlHostConfig13_1C_BackslashQuote `protobuf:"varint,40,opt,name=backslash_quote,json=backslashQuote,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig13_1C_BackslashQuote" json:"backslash_quote,omitempty"`
+	// WITH OIDS is no longer supported; this can only be false.
+	DefaultWithOids *wrapperspb.BoolValue `protobuf:"bytes,41,opt,name=default_with_oids,json=defaultWithOids,proto3" json:"default_with_oids,omitempty"`
+	// Warn about backslash escapes in ordinary string literals.
+	EscapeStringWarning *wrapperspb.BoolValue `protobuf:"bytes,42,opt,name=escape_string_warning,json=escapeStringWarning,proto3" json:"escape_string_warning,omitempty"`
+	// Enables backward compatibility mode for privilege checks on large objects. Skips privilege checks
+	// when reading or modifying large objects, for compatibility with PostgreSQL releases prior to 9.0.
+	LoCompatPrivileges *wrapperspb.BoolValue `protobuf:"bytes,43,opt,name=lo_compat_privileges,json=loCompatPrivileges,proto3" json:"lo_compat_privileges,omitempty"`
+	// Emit a warning for constructs that changed meaning since PostgreSQL 9.4.
+	OperatorPrecedenceWarning *wrapperspb.BoolValue `protobuf:"bytes,44,opt,name=operator_precedence_warning,json=operatorPrecedenceWarning,proto3" json:"operator_precedence_warning,omitempty"`
+	// When generating SQL fragments, quote all identifiers.
+	QuoteAllIdentifiers *wrapperspb.BoolValue `protobuf:"bytes,45,opt,name=quote_all_identifiers,json=quoteAllIdentifiers,proto3" json:"quote_all_identifiers,omitempty"`
+	// Causes '...' strings to treat backslashes literally.
+	StandardConformingStrings *wrapperspb.BoolValue `protobuf:"bytes,46,opt,name=standard_conforming_strings,json=standardConformingStrings,proto3" json:"standard_conforming_strings,omitempty"`
+	// Enable synchronized sequential scans.
+	SynchronizeSeqscans *wrapperspb.BoolValue `protobuf:"bytes,47,opt,name=synchronize_seqscans,json=synchronizeSeqscans,proto3" json:"synchronize_seqscans,omitempty"`
+	// Treats \"expr=NULL\" as \"expr IS NULL\". When turned on, expressions of the form expr = NULL
+	// (or NULL = expr) are treated as expr IS NULL, that is, they return true if expr evaluates to the
+	// null value, and false otherwise. The correct behavior of expr = NULL is to always return null (unknown).
+	TransformNullEquals *wrapperspb.BoolValue `protobuf:"bytes,48,opt,name=transform_null_equals,json=transformNullEquals,proto3" json:"transform_null_equals,omitempty"`
+	// Terminate session on any error.
+	ExitOnError *wrapperspb.BoolValue `protobuf:"bytes,49,opt,name=exit_on_error,json=exitOnError,proto3" json:"exit_on_error,omitempty"`
+	// Sets the planner's estimate of the cost of a sequentially fetched disk page.
+	SeqPageCost *wrapperspb.DoubleValue `protobuf:"bytes,50,opt,name=seq_page_cost,json=seqPageCost,proto3" json:"seq_page_cost,omitempty"`
+	// Sets the planner's estimate of the cost of a nonsequentially fetched disk page.
+	RandomPageCost *wrapperspb.DoubleValue `protobuf:"bytes,51,opt,name=random_page_cost,json=randomPageCost,proto3" json:"random_page_cost,omitempty"`
+	// Enables the planner's use of bitmap-scan plans.
+	EnableBitmapscan *wrapperspb.BoolValue `protobuf:"bytes,54,opt,name=enable_bitmapscan,json=enableBitmapscan,proto3" json:"enable_bitmapscan,omitempty"`
+	// Enables the planner's use of hashed aggregation plans.
+	EnableHashagg *wrapperspb.BoolValue `protobuf:"bytes,55,opt,name=enable_hashagg,json=enableHashagg,proto3" json:"enable_hashagg,omitempty"`
+	// Enables the planner's use of hash join plans.
+	EnableHashjoin *wrapperspb.BoolValue `protobuf:"bytes,56,opt,name=enable_hashjoin,json=enableHashjoin,proto3" json:"enable_hashjoin,omitempty"`
+	// Enables the planner's use of index-scan plans.
+	EnableIndexscan *wrapperspb.BoolValue `protobuf:"bytes,57,opt,name=enable_indexscan,json=enableIndexscan,proto3" json:"enable_indexscan,omitempty"`
+	// Enables the planner's use of index-only-scan plans.
+	EnableIndexonlyscan *wrapperspb.BoolValue `protobuf:"bytes,58,opt,name=enable_indexonlyscan,json=enableIndexonlyscan,proto3" json:"enable_indexonlyscan,omitempty"`
+	// Enables the planner's use of materialization.
+	EnableMaterial *wrapperspb.BoolValue `protobuf:"bytes,59,opt,name=enable_material,json=enableMaterial,proto3" json:"enable_material,omitempty"`
+	// Enables the planner's use of merge join plans.
+	EnableMergejoin *wrapperspb.BoolValue `protobuf:"bytes,60,opt,name=enable_mergejoin,json=enableMergejoin,proto3" json:"enable_mergejoin,omitempty"`
+	// Enables the planner's use of nested-loop join plans.
+	EnableNestloop *wrapperspb.BoolValue `protobuf:"bytes,61,opt,name=enable_nestloop,json=enableNestloop,proto3" json:"enable_nestloop,omitempty"`
+	// Enables the planner's use of sequential-scan plans.
+	EnableSeqscan *wrapperspb.BoolValue `protobuf:"bytes,62,opt,name=enable_seqscan,json=enableSeqscan,proto3" json:"enable_seqscan,omitempty"`
+	// Enables the planner's use of explicit sort steps.
+	EnableSort *wrapperspb.BoolValue `protobuf:"bytes,63,opt,name=enable_sort,json=enableSort,proto3" json:"enable_sort,omitempty"`
+	// Enables the planner's use of TID scan plans.
+	EnableTidscan *wrapperspb.BoolValue `protobuf:"bytes,64,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
+	// Sets the maximum number of parallel processes per executor node.
+	MaxParallelWorkers *wrapperspb.Int64Value `protobuf:"bytes,65,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
+	// Sets the maximum number of parallel processes per executor node.
+	MaxParallelWorkersPerGather *wrapperspb.Int64Value `protobuf:"bytes,66,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
+	// Sets the time zone for displaying and interpreting time stamps.
+	Timezone string `protobuf:"bytes,67,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	// Number of simultaneous requests that can be handled efficiently by the disk subsystem.
+	EffectiveIoConcurrency *wrapperspb.Int64Value `protobuf:"bytes,68,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
+	// Sets the planner's assumption about the total size of the data caches. That is, the total
+	// size of the caches (kernel cache and shared buffers) used for PostgreSQL data files.
+	// This is measured in disk pages, which are normally 8 kB each.
+	EffectiveCacheSize *wrapperspb.Int64Value `protobuf:"bytes,69,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *PostgresqlHostConfig13_1C) Reset() {

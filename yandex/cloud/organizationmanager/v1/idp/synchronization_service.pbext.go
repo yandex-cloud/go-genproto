@@ -47,6 +47,10 @@ func (m *CreateSynchronizationSettingsRequest) SetEnablePasswordWriteback(v bool
 	m.EnablePasswordWriteback = v
 }
 
+func (m *CreateSynchronizationSettingsRequest) SetLdapSettings(v *CreateLdapSettingsRequest) {
+	m.LdapSettings = v
+}
+
 func (m *CreateSynchronizationSettingsMetadata) SetSubjectContainerId(v string) {
 	m.SubjectContainerId = v
 }
@@ -95,8 +99,92 @@ func (m *UpdateSynchronizationSettingsRequest) SetEnablePasswordWriteback(v bool
 	m.EnablePasswordWriteback = v
 }
 
+func (m *UpdateSynchronizationSettingsRequest) SetLdapSettings(v *UpdateLdapSettingsRequest) {
+	m.LdapSettings = v
+}
+
 func (m *UpdateSynchronizationSettingsMetadata) SetSubjectContainerId(v string) {
 	m.SubjectContainerId = v
+}
+
+func (m *CreateLdapSettingsRequest) SetExternalIdAttribute(v string) {
+	m.ExternalIdAttribute = v
+}
+
+func (m *CreateLdapSettingsRequest) SetDnAttribute(v string) {
+	m.DnAttribute = v
+}
+
+func (m *CreateLdapSettingsRequest) SetUserObjectClass(v string) {
+	m.UserObjectClass = v
+}
+
+func (m *CreateLdapSettingsRequest) SetGroupObjectClass(v string) {
+	m.GroupObjectClass = v
+}
+
+func (m *CreateLdapSettingsRequest) SetAccountDisabledAttribute(v string) {
+	m.AccountDisabledAttribute = v
+}
+
+func (m *CreateLdapSettingsRequest) SetAccountDisabledValue(v string) {
+	m.AccountDisabledValue = v
+}
+
+func (m *CreateLdapSettingsRequest) SetAccountEnabledValue(v string) {
+	m.AccountEnabledValue = v
+}
+
+func (m *CreateLdapSettingsRequest) SetPasswordAttribute(v string) {
+	m.PasswordAttribute = v
+}
+
+func (m *CreateLdapSettingsRequest) SetDeltaSyncMode(v LdapDeltaSyncMode) {
+	m.DeltaSyncMode = v
+}
+
+func (m *CreateLdapSettingsRequest) SetUseRecursiveMembershipFilter(v bool) {
+	m.UseRecursiveMembershipFilter = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetExternalIdAttribute(v string) {
+	m.ExternalIdAttribute = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetDnAttribute(v string) {
+	m.DnAttribute = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetUserObjectClass(v string) {
+	m.UserObjectClass = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetGroupObjectClass(v string) {
+	m.GroupObjectClass = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetAccountDisabledAttribute(v string) {
+	m.AccountDisabledAttribute = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetAccountDisabledValue(v string) {
+	m.AccountDisabledValue = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetAccountEnabledValue(v string) {
+	m.AccountEnabledValue = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetPasswordAttribute(v string) {
+	m.PasswordAttribute = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetDeltaSyncMode(v LdapDeltaSyncMode) {
+	m.DeltaSyncMode = v
+}
+
+func (m *UpdateLdapSettingsRequest) SetUseRecursiveMembershipFilter(v bool) {
+	m.UseRecursiveMembershipFilter = v
 }
 
 func (m *DeleteSynchronizationSettingsRequest) SetSubjectContainerId(v string) {

@@ -234,6 +234,146 @@ func (x *ListImagesResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ResolveImagesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the parent folder. "baremetal-standard-images" folder contains general images and used by default
+	//
+	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// The maximum number of results per page to return. If the number of available
+	// results is greater than `page_size`,
+	// the service returns a [ResolveImagesResponse.next_page_token]
+	// that can be used to get the next page of results in subsequent resolve requests.
+	// Default value is 20.
+	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Page token. To get the next page of results, set `page_token` to the
+	// [ResolveImagesResponse.next_page_token] returned by a previous resolve request.
+	PageToken string `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	// Sorting order for the listing. Follows the [AIP-132](https://google.aip.dev/132) `order_by` format:
+	// `"field [asc|desc]"`, e.g. `"family desc"`.
+	//
+	// Supported fields: `family`, `imageId`, `createTime`.
+	// Default order: `family asc`.
+	OrderBy       string `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveImagesRequest) Reset() {
+	*x = ResolveImagesRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveImagesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveImagesRequest) ProtoMessage() {}
+
+func (x *ResolveImagesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveImagesRequest.ProtoReflect.Descriptor instead.
+func (*ResolveImagesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ResolveImagesRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ResolveImagesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ResolveImagesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+func (x *ResolveImagesRequest) GetOrderBy() string {
+	if x != nil {
+		return x.OrderBy
+	}
+	return ""
+}
+
+type ResolveImagesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// List of resolved Image resources - one per family, the most recently published.
+	Images []*Image `protobuf:"bytes,1,rep,name=images,proto3" json:"images,omitempty"`
+	// Token for getting the next page of the list. If the number of results is greater than
+	// [ResolveImagesRequest.page_size], use `next_page_token` as the value
+	// for the [ResolveImagesRequest.page_token] parameter in the next resolve request.
+	// Each subsequent page will have its own `next_page_token` to continue paging through the results.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveImagesResponse) Reset() {
+	*x = ResolveImagesResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveImagesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveImagesResponse) ProtoMessage() {}
+
+func (x *ResolveImagesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveImagesResponse.ProtoReflect.Descriptor instead.
+func (*ResolveImagesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ResolveImagesResponse) GetImages() []*Image {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
+func (x *ResolveImagesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_image_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc = "" +
@@ -251,11 +391,21 @@ const file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc = "" +
 	"\x06filter\x18\x05 \x01(\tR\x06filter\"v\n" +
 	"\x12ListImagesResponse\x128\n" +
 	"\x06images\x18\x01 \x03(\v2 .yandex.cloud.baremetal.v2.ImageR\x06images\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xcf\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa3\x01\n" +
+	"\x14ResolveImagesRequest\x12 \n" +
+	"\tfolder_id\x18\x01 \x01(\tB\x03\xe0A\x01R\bfolderId\x12*\n" +
+	"\tpage_size\x18\x02 \x01(\x03B\r\xe0A\x01\xfa\xc71\x06<=1000R\bpageSize\x12\"\n" +
+	"\n" +
+	"page_token\x18\x03 \x01(\tB\x03\xe0A\x01R\tpageToken\x12\x19\n" +
+	"\border_by\x18\x04 \x01(\tR\aorderBy\"y\n" +
+	"\x15ResolveImagesResponse\x128\n" +
+	"\x06images\x18\x01 \x03(\v2 .yandex.cloud.baremetal.v2.ImageR\x06images\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x84\x04\n" +
 	"\fImageService\x12\xa0\x01\n" +
 	"\bGetImage\x12*.yandex.cloud.baremetal.v2.GetImageRequest\x1a .yandex.cloud.baremetal.v2.Image\"F\xdaA\bimage_id\x82\xd3\xe4\x93\x025\x123/baremetal/v2/folders/{folder_id}/images/{image_id}\x12\x9b\x01\n" +
 	"\n" +
-	"ListImages\x12,.yandex.cloud.baremetal.v2.ListImagesRequest\x1a-.yandex.cloud.baremetal.v2.ListImagesResponse\"0\x82\xd3\xe4\x93\x02*\x12(/baremetal/v2/folders/{folder_id}/imagesBl\n" +
+	"ListImages\x12,.yandex.cloud.baremetal.v2.ListImagesRequest\x1a-.yandex.cloud.baremetal.v2.ListImagesResponse\"0\x82\xd3\xe4\x93\x02*\x12(/baremetal/v2/folders/{folder_id}/images\x12\xb2\x01\n" +
+	"\rResolveImages\x12/.yandex.cloud.baremetal.v2.ResolveImagesRequest\x1a0.yandex.cloud.baremetal.v2.ResolveImagesResponse\">\x82\xd3\xe4\x93\x028\x126/baremetal/v2/folders/{folder_id}/images:resolveImagesBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -270,24 +420,29 @@ func file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_baremetal_v2_image_service_proto_goTypes = []any{
-	(*GetImageRequest)(nil),    // 0: yandex.cloud.baremetal.v2.GetImageRequest
-	(*ListImagesRequest)(nil),  // 1: yandex.cloud.baremetal.v2.ListImagesRequest
-	(*ListImagesResponse)(nil), // 2: yandex.cloud.baremetal.v2.ListImagesResponse
-	(*Image)(nil),              // 3: yandex.cloud.baremetal.v2.Image
+	(*GetImageRequest)(nil),       // 0: yandex.cloud.baremetal.v2.GetImageRequest
+	(*ListImagesRequest)(nil),     // 1: yandex.cloud.baremetal.v2.ListImagesRequest
+	(*ListImagesResponse)(nil),    // 2: yandex.cloud.baremetal.v2.ListImagesResponse
+	(*ResolveImagesRequest)(nil),  // 3: yandex.cloud.baremetal.v2.ResolveImagesRequest
+	(*ResolveImagesResponse)(nil), // 4: yandex.cloud.baremetal.v2.ResolveImagesResponse
+	(*Image)(nil),                 // 5: yandex.cloud.baremetal.v2.Image
 }
 var file_yandex_cloud_baremetal_v2_image_service_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.baremetal.v2.ListImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
-	0, // 1: yandex.cloud.baremetal.v2.ImageService.GetImage:input_type -> yandex.cloud.baremetal.v2.GetImageRequest
-	1, // 2: yandex.cloud.baremetal.v2.ImageService.ListImages:input_type -> yandex.cloud.baremetal.v2.ListImagesRequest
-	3, // 3: yandex.cloud.baremetal.v2.ImageService.GetImage:output_type -> yandex.cloud.baremetal.v2.Image
-	2, // 4: yandex.cloud.baremetal.v2.ImageService.ListImages:output_type -> yandex.cloud.baremetal.v2.ListImagesResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: yandex.cloud.baremetal.v2.ListImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
+	5, // 1: yandex.cloud.baremetal.v2.ResolveImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
+	0, // 2: yandex.cloud.baremetal.v2.ImageService.GetImage:input_type -> yandex.cloud.baremetal.v2.GetImageRequest
+	1, // 3: yandex.cloud.baremetal.v2.ImageService.ListImages:input_type -> yandex.cloud.baremetal.v2.ListImagesRequest
+	3, // 4: yandex.cloud.baremetal.v2.ImageService.ResolveImages:input_type -> yandex.cloud.baremetal.v2.ResolveImagesRequest
+	5, // 5: yandex.cloud.baremetal.v2.ImageService.GetImage:output_type -> yandex.cloud.baremetal.v2.Image
+	2, // 6: yandex.cloud.baremetal.v2.ImageService.ListImages:output_type -> yandex.cloud.baremetal.v2.ListImagesResponse
+	4, // 7: yandex.cloud.baremetal.v2.ImageService.ResolveImages:output_type -> yandex.cloud.baremetal.v2.ResolveImagesResponse
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_image_service_proto_init() }
@@ -302,7 +457,7 @@ func file_yandex_cloud_baremetal_v2_image_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
