@@ -26,14 +26,15 @@ const (
 type PostgresqlConfig14_AutoExplainLogFormat int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_AUTO_EXPLAIN_LOG_FORMAT_UNSPECIFIED PostgresqlConfig14_AutoExplainLogFormat = 0
-	// 'text' value for the EXPLAIN output format in auto_explain extension
+	// Formats logged execution plans as plain text.
 	PostgresqlConfig14_AUTO_EXPLAIN_LOG_FORMAT_TEXT PostgresqlConfig14_AutoExplainLogFormat = 1
-	// 'xml' value for the EXPLAIN output format in auto_explain extension
+	// Formats logged execution plans as XML.
 	PostgresqlConfig14_AUTO_EXPLAIN_LOG_FORMAT_XML PostgresqlConfig14_AutoExplainLogFormat = 2
-	// 'json' value for the EXPLAIN output format in auto_explain extension
+	// Formats logged execution plans as JSON.
 	PostgresqlConfig14_AUTO_EXPLAIN_LOG_FORMAT_JSON PostgresqlConfig14_AutoExplainLogFormat = 3
-	// 'yaml' value for the EXPLAIN output format in auto_explain extension
+	// Formats logged execution plans as YAML.
 	PostgresqlConfig14_AUTO_EXPLAIN_LOG_FORMAT_YAML PostgresqlConfig14_AutoExplainLogFormat = 4
 )
 
@@ -85,8 +86,11 @@ func (PostgresqlConfig14_AutoExplainLogFormat) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig14_BackslashQuote int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlConfig14_BackslashQuote = 0
-	// Quotation mark can be represented as \' (same as on).
+	// Legacy invalid value. Do not use.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto.
 	PostgresqlConfig14_BACKSLASH_QUOTE PostgresqlConfig14_BackslashQuote = 1
 	// Quotation mark can be represented as \'.
 	PostgresqlConfig14_BACKSLASH_QUOTE_ON PostgresqlConfig14_BackslashQuote = 2
@@ -144,6 +148,7 @@ func (PostgresqlConfig14_BackslashQuote) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_ByteaOutput int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_BYTEA_OUTPUT_UNSPECIFIED PostgresqlConfig14_ByteaOutput = 0
 	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
 	PostgresqlConfig14_BYTEA_OUTPUT_HEX PostgresqlConfig14_ByteaOutput = 1
@@ -195,6 +200,7 @@ func (PostgresqlConfig14_ByteaOutput) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_ConstraintExclusion int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlConfig14_ConstraintExclusion = 0
 	// Enable planner's use of constraints for all tables.
 	PostgresqlConfig14_CONSTRAINT_EXCLUSION_ON PostgresqlConfig14_ConstraintExclusion = 1
@@ -250,12 +256,14 @@ func (PostgresqlConfig14_ConstraintExclusion) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_ForceParallelMode int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlConfig14_ForceParallelMode = 0
-	// Force parallel mode for all queries that can be executed safely in parallel.
+	// Forces parallel mode for queries considered safe, even when no performance benefit is expected.
 	PostgresqlConfig14_FORCE_PARALLEL_MODE_ON PostgresqlConfig14_ForceParallelMode = 1
-	// Enable parallel mode only if it is expected to increase performance.
+	// Uses parallel mode only when the planner expects it to improve performance.
 	PostgresqlConfig14_FORCE_PARALLEL_MODE_OFF PostgresqlConfig14_ForceParallelMode = 2
-	// Equivalent to on, but generates output identical to the off state.
+	// Behaves like ON, but hides added Gather nodes in EXPLAIN output and
+	// suppresses parallel-worker context lines to stabilize regression-test output.
 	PostgresqlConfig14_FORCE_PARALLEL_MODE_REGRESS PostgresqlConfig14_ForceParallelMode = 3
 )
 
@@ -305,6 +313,7 @@ func (PostgresqlConfig14_ForceParallelMode) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_LogErrorVerbosity int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlConfig14_LogErrorVerbosity = 0
 	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
 	PostgresqlConfig14_LOG_ERROR_VERBOSITY_TERSE PostgresqlConfig14_LogErrorVerbosity = 1
@@ -448,6 +457,7 @@ func (PostgresqlConfig14_LogLevel) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_LogStatement int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_LOG_STATEMENT_UNSPECIFIED PostgresqlConfig14_LogStatement = 0
 	// The filter is disabled, no SQL statements are logged.
 	PostgresqlConfig14_LOG_STATEMENT_NONE PostgresqlConfig14_LogStatement = 1
@@ -507,6 +517,7 @@ func (PostgresqlConfig14_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_PasswordEncryption int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_PASSWORD_ENCRYPTION_UNSPECIFIED PostgresqlConfig14_PasswordEncryption = 0
 	// The method md5 uses a custom less secure challenge-response mechanism. It prevents password sniffing and avoids storing passwords on the server in plain text but provides no protection if an attacker manages to steal the password hash from the server. Also, the MD5 hash algorithm is nowadays no longer considered secure against determined attacks.
 	PostgresqlConfig14_PASSWORD_ENCRYPTION_MD5 PostgresqlConfig14_PasswordEncryption = 1
@@ -619,6 +630,7 @@ func (PostgresqlConfig14_PgHintPlanDebugPrint) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig14_PlanCacheMode int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_PLAN_CACHE_MODE_UNSPECIFIED PostgresqlConfig14_PlanCacheMode = 0
 	// Automatic selection.
 	PostgresqlConfig14_PLAN_CACHE_MODE_AUTO PostgresqlConfig14_PlanCacheMode = 1
@@ -674,6 +686,7 @@ func (PostgresqlConfig14_PlanCacheMode) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_SharedPreloadLibraries int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_SHARED_PRELOAD_LIBRARIES_UNSPECIFIED PostgresqlConfig14_SharedPreloadLibraries = 0
 	// Required for the [auto_explain](https://www.postgresql.org/docs/current/auto-explain.html) extension.
 	PostgresqlConfig14_SHARED_PRELOAD_LIBRARIES_AUTO_EXPLAIN PostgresqlConfig14_SharedPreloadLibraries = 1
@@ -753,6 +766,7 @@ func (PostgresqlConfig14_SharedPreloadLibraries) EnumDescriptor() ([]byte, []int
 type PostgresqlConfig14_SynchronousCommit int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_SYNCHRONOUS_COMMIT_UNSPECIFIED PostgresqlConfig14_SynchronousCommit = 0
 	// Success is reported to the client if the data is in WAL (Write-Ahead Log), and WAL is written to the storage of both the master and its synchronous standby server. Default value.
 	PostgresqlConfig14_SYNCHRONOUS_COMMIT_ON PostgresqlConfig14_SynchronousCommit = 1
@@ -820,6 +834,7 @@ func (PostgresqlConfig14_SynchronousCommit) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_TransactionIsolation int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlConfig14_TransactionIsolation = 0
 	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlConfig14_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlConfig14_TransactionIsolation = 1
@@ -881,6 +896,7 @@ func (PostgresqlConfig14_TransactionIsolation) EnumDescriptor() ([]byte, []int) 
 type PostgresqlConfig14_WalLevel int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_WAL_LEVEL_UNSPECIFIED PostgresqlConfig14_WalLevel = 0
 	// Supports WAL archiving and physical replication.
 	PostgresqlConfig14_WAL_LEVEL_REPLICA PostgresqlConfig14_WalLevel = 1
@@ -932,10 +948,11 @@ func (PostgresqlConfig14_WalLevel) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_XmlBinary int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_XML_BINARY_UNSPECIFIED PostgresqlConfig14_XmlBinary = 0
-	// Base64 encoding.
+	// Encodes binary values using Base64.
 	PostgresqlConfig14_XML_BINARY_BASE64 PostgresqlConfig14_XmlBinary = 1
-	// Hexadecimal encoding.
+	// Encodes binary values using hexadecimal notation.
 	PostgresqlConfig14_XML_BINARY_HEX PostgresqlConfig14_XmlBinary = 2
 )
 
@@ -983,10 +1000,11 @@ func (PostgresqlConfig14_XmlBinary) EnumDescriptor() ([]byte, []int) {
 type PostgresqlConfig14_XmlOption int32
 
 const (
+	// Not specified.
 	PostgresqlConfig14_XML_OPTION_UNSPECIFIED PostgresqlConfig14_XmlOption = 0
-	// XML document.
+	// Treats an XML value as a complete, well-formed document.
 	PostgresqlConfig14_XML_OPTION_DOCUMENT PostgresqlConfig14_XmlOption = 1
-	// XML fragment.
+	// Treats an XML value as a content fragment, which may contain multiple top-level elements or character nodes.
 	PostgresqlConfig14_XML_OPTION_CONTENT PostgresqlConfig14_XmlOption = 2
 )
 
@@ -1070,9 +1088,9 @@ type PostgresqlConfig14 struct {
 	BgwriterLruMaxpages *wrapperspb.Int64Value `protobuf:"bytes,15,opt,name=bgwriter_lru_maxpages,json=bgwriterLruMaxpages,proto3" json:"bgwriter_lru_maxpages,omitempty"`
 	// Multiple of the average buffer usage to free per round.
 	BgwriterLruMultiplier *wrapperspb.DoubleValue `protobuf:"bytes,16,opt,name=bgwriter_lru_multiplier,json=bgwriterLruMultiplier,proto3" json:"bgwriter_lru_multiplier,omitempty"`
-	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	// Specifies how much data the background writer can write before forcing the operating system to issue the writes. In bytes.
 	BgwriterFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=bgwriter_flush_after,json=bgwriterFlushAfter,proto3" json:"bgwriter_flush_after,omitempty"`
-	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	// Specifies how much data a backend can write before forcing the operating system to issue the writes. In bytes.
 	BackendFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,18,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
 	// Time before a snapshot is too old to read pages changed after the snapshot was taken.
 	// A value of -1 disables this feature. In milliseconds.
@@ -1085,7 +1103,7 @@ type PostgresqlConfig14 struct {
 	CheckpointTimeout *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=checkpoint_timeout,json=checkpointTimeout,proto3" json:"checkpoint_timeout,omitempty"`
 	// Time spent flushing dirty buffers during checkpoint, as fraction of checkpoint interval.
 	CheckpointCompletionTarget *wrapperspb.DoubleValue `protobuf:"bytes,23,opt,name=checkpoint_completion_target,json=checkpointCompletionTarget,proto3" json:"checkpoint_completion_target,omitempty"`
-	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	// Specifies how much data can be written during a checkpoint before forcing the operating system to issue the writes. In bytes.
 	CheckpointFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,24,opt,name=checkpoint_flush_after,json=checkpointFlushAfter,proto3" json:"checkpoint_flush_after,omitempty"`
 	// Sets the WAL size that triggers a checkpoint. In bytes.
 	MaxWalSize *wrapperspb.Int64Value `protobuf:"bytes,25,opt,name=max_wal_size,json=maxWalSize,proto3" json:"max_wal_size,omitempty"`
@@ -1195,7 +1213,7 @@ type PostgresqlConfig14 struct {
 	AutovacuumVacuumCostLimit *wrapperspb.Int64Value `protobuf:"bytes,74,opt,name=autovacuum_vacuum_cost_limit,json=autovacuumVacuumCostLimit,proto3" json:"autovacuum_vacuum_cost_limit,omitempty"`
 	// Time to sleep between autovacuum runs. In milliseconds.
 	AutovacuumNaptime *wrapperspb.Int64Value `protobuf:"bytes,75,opt,name=autovacuum_naptime,json=autovacuumNaptime,proto3" json:"autovacuum_naptime,omitempty"`
-	// Forces a switch to the next WAL file if a new file has not been started within N seconds. In milliseconds.
+	// Forces a switch to the next WAL file if no new file has been started within the specified interval. In milliseconds.
 	ArchiveTimeout *wrapperspb.Int64Value `protobuf:"bytes,76,opt,name=archive_timeout,json=archiveTimeout,proto3" json:"archive_timeout,omitempty"`
 	// Sets the size reserved for pg_stat_activity.query, in bytes.
 	TrackActivityQuerySize *wrapperspb.Int64Value `protobuf:"bytes,77,opt,name=track_activity_query_size,json=trackActivityQuerySize,proto3" json:"track_activity_query_size,omitempty"`
@@ -1223,7 +1241,7 @@ type PostgresqlConfig14 struct {
 	EnableTidscan *wrapperspb.BoolValue `protobuf:"bytes,90,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
 	// Maximum number of concurrent worker processes.
 	MaxWorkerProcesses *wrapperspb.Int64Value `protobuf:"bytes,91,opt,name=max_worker_processes,json=maxWorkerProcesses,proto3" json:"max_worker_processes,omitempty"`
-	// Sets the maximum number of parallel processes per executor node.
+	// Sets the maximum number of parallel workers that can be active at one time.
 	MaxParallelWorkers *wrapperspb.Int64Value `protobuf:"bytes,92,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
 	// Sets the maximum number of parallel processes per executor node.
 	MaxParallelWorkersPerGather *wrapperspb.Int64Value `protobuf:"bytes,93,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
@@ -1260,15 +1278,14 @@ type PostgresqlConfig14 struct {
 	PlanCacheMode PostgresqlConfig14_PlanCacheMode `protobuf:"varint,108,opt,name=plan_cache_mode,json=planCacheMode,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PlanCacheMode" json:"plan_cache_mode,omitempty"`
 	// Number of simultaneous requests that can be handled efficiently by the disk subsystem.
 	EffectiveIoConcurrency *wrapperspb.Int64Value `protobuf:"bytes,109,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
-	// Sets the planner's assumption about the total size of the data caches. That is, the total
-	// size of the caches (kernel cache and shared buffers) used for PostgreSQL data files.
-	// This is measured in disk pages, which are normally 8 kB each.
+	// Sets the planner's assumption about the effective size of the disk cache available to a single query. In bytes.
 	EffectiveCacheSize *wrapperspb.Int64Value `protobuf:"bytes,110,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
 	// Lists shared libraries to preload into server.
 	SharedPreloadLibraries []PostgresqlConfig14_SharedPreloadLibraries `protobuf:"varint,111,rep,packed,name=shared_preload_libraries,json=sharedPreloadLibraries,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_SharedPreloadLibraries" json:"shared_preload_libraries,omitempty"`
 	// Sets the minimum statement execution time, that will cause the statement's plan to be logged.
 	// Setting this to 0 logs all plans. -1 (the default) disables logging of plans. For example, if
 	// you set it to 250ms then all statements that run 250ms or longer will be logged. In milliseconds.
+	// (-- api-linter: yc::1701::duration-required=disabled --)
 	AutoExplainLogMinDuration *wrapperspb.Int64Value `protobuf:"bytes,112,opt,name=auto_explain_log_min_duration,json=autoExplainLogMinDuration,proto3" json:"auto_explain_log_min_duration,omitempty"`
 	// Causes EXPLAIN ANALYZE output, rather than just EXPLAIN output,to be printed
 	// when an executionplan is logged. This parameter is off by default.
@@ -1337,39 +1354,82 @@ type PostgresqlConfig14 struct {
 	// Enables the planner's use of gather merge plans.
 	EnableGathermerge *wrapperspb.BoolValue `protobuf:"bytes,139,opt,name=enable_gathermerge,json=enableGathermerge,proto3" json:"enable_gathermerge,omitempty"`
 	// Enables the planner's use of memoization.
-	EnableMemoize                       *wrapperspb.BoolValue   `protobuf:"bytes,140,opt,name=enable_memoize,json=enableMemoize,proto3" json:"enable_memoize,omitempty"`
-	LogRecoveryConflictWaits            *wrapperspb.BoolValue   `protobuf:"bytes,141,opt,name=log_recovery_conflict_waits,json=logRecoveryConflictWaits,proto3" json:"log_recovery_conflict_waits,omitempty"`       // in milliseconds.
-	VacuumFailsafeAge                   *wrapperspb.Int64Value  `protobuf:"bytes,142,opt,name=vacuum_failsafe_age,json=vacuumFailsafeAge,proto3" json:"vacuum_failsafe_age,omitempty"`                              // in milliseconds.
-	VacuumMultixactFailsafeAge          *wrapperspb.Int64Value  `protobuf:"bytes,143,opt,name=vacuum_multixact_failsafe_age,json=vacuumMultixactFailsafeAge,proto3" json:"vacuum_multixact_failsafe_age,omitempty"` // in milliseconds.
-	PgQualstatsEnabled                  *wrapperspb.BoolValue   `protobuf:"bytes,144,opt,name=pg_qualstats_enabled,json=pgQualstatsEnabled,proto3" json:"pg_qualstats_enabled,omitempty"`
-	PgQualstatsTrackConstants           *wrapperspb.BoolValue   `protobuf:"bytes,145,opt,name=pg_qualstats_track_constants,json=pgQualstatsTrackConstants,proto3" json:"pg_qualstats_track_constants,omitempty"`
-	PgQualstatsMax                      *wrapperspb.Int64Value  `protobuf:"bytes,146,opt,name=pg_qualstats_max,json=pgQualstatsMax,proto3" json:"pg_qualstats_max,omitempty"`
-	PgQualstatsResolveOids              *wrapperspb.BoolValue   `protobuf:"bytes,147,opt,name=pg_qualstats_resolve_oids,json=pgQualstatsResolveOids,proto3" json:"pg_qualstats_resolve_oids,omitempty"`
-	PgQualstatsSampleRate               *wrapperspb.DoubleValue `protobuf:"bytes,148,opt,name=pg_qualstats_sample_rate,json=pgQualstatsSampleRate,proto3" json:"pg_qualstats_sample_rate,omitempty"`
-	MaxStackDepth                       *wrapperspb.Int64Value  `protobuf:"bytes,150,opt,name=max_stack_depth,json=maxStackDepth,proto3" json:"max_stack_depth,omitempty"`             // in bytes.
-	Geqo                                *wrapperspb.BoolValue   `protobuf:"bytes,152,opt,name=geqo,proto3" json:"geqo,omitempty"`                                                      // enable Genetic Query Optimizer, by default is on
-	GeqoThreshold                       *wrapperspb.Int64Value  `protobuf:"bytes,153,opt,name=geqo_threshold,json=geqoThreshold,proto3" json:"geqo_threshold,omitempty"`               // The number of tables to use geqo, default is 12
-	GeqoEffort                          *wrapperspb.Int64Value  `protobuf:"bytes,154,opt,name=geqo_effort,json=geqoEffort,proto3" json:"geqo_effort,omitempty"`                        // tradeoff between planning time and query plan quality, default is 5
-	GeqoPoolSize                        *wrapperspb.Int64Value  `protobuf:"bytes,155,opt,name=geqo_pool_size,json=geqoPoolSize,proto3" json:"geqo_pool_size,omitempty"`                // number of individuals in the genetic population, useful values are typically 100 to 1000; default - 0 - choose based on based on geqo_effort
-	GeqoGenerations                     *wrapperspb.Int64Value  `protobuf:"bytes,156,opt,name=geqo_generations,json=geqoGenerations,proto3" json:"geqo_generations,omitempty"`         // the number of generations used by GEQO, useful values are in the same range as the pool size
-	GeqoSelectionBias                   *wrapperspb.DoubleValue `protobuf:"bytes,157,opt,name=geqo_selection_bias,json=geqoSelectionBias,proto3" json:"geqo_selection_bias,omitempty"` // selective pressure within the population
-	GeqoSeed                            *wrapperspb.DoubleValue `protobuf:"bytes,158,opt,name=geqo_seed,json=geqoSeed,proto3" json:"geqo_seed,omitempty"`                              // initial value of the random number generator used by GEQO
-	PgTrgmSimilarityThreshold           *wrapperspb.DoubleValue `protobuf:"bytes,159,opt,name=pg_trgm_similarity_threshold,json=pgTrgmSimilarityThreshold,proto3" json:"pg_trgm_similarity_threshold,omitempty"`
-	PgTrgmWordSimilarityThreshold       *wrapperspb.DoubleValue `protobuf:"bytes,160,opt,name=pg_trgm_word_similarity_threshold,json=pgTrgmWordSimilarityThreshold,proto3" json:"pg_trgm_word_similarity_threshold,omitempty"`
+	EnableMemoize *wrapperspb.BoolValue `protobuf:"bytes,140,opt,name=enable_memoize,json=enableMemoize,proto3" json:"enable_memoize,omitempty"`
+	// Logs standby recovery conflict waits.
+	LogRecoveryConflictWaits *wrapperspb.BoolValue `protobuf:"bytes,141,opt,name=log_recovery_conflict_waits,json=logRecoveryConflictWaits,proto3" json:"log_recovery_conflict_waits,omitempty"`
+	// Age at which VACUUM should trigger failsafe to avoid a wraparound outage.
+	VacuumFailsafeAge *wrapperspb.Int64Value `protobuf:"bytes,142,opt,name=vacuum_failsafe_age,json=vacuumFailsafeAge,proto3" json:"vacuum_failsafe_age,omitempty"`
+	// Multixact age at which VACUUM should trigger failsafe to avoid a wraparound outage.
+	VacuumMultixactFailsafeAge *wrapperspb.Int64Value `protobuf:"bytes,143,opt,name=vacuum_multixact_failsafe_age,json=vacuumMultixactFailsafeAge,proto3" json:"vacuum_multixact_failsafe_age,omitempty"`
+	// Controls whether pg_qualstats collects execution statistics for query predicates,
+	// including filters and join conditions.
+	PgQualstatsEnabled *wrapperspb.BoolValue `protobuf:"bytes,144,opt,name=pg_qualstats_enabled,json=pgQualstatsEnabled,proto3" json:"pg_qualstats_enabled,omitempty"`
+	// Controls whether pg_qualstats keeps separate statistics for predicates containing different constant values
+	PgQualstatsTrackConstants *wrapperspb.BoolValue `protobuf:"bytes,145,opt,name=pg_qualstats_track_constants,json=pgQualstatsTrackConstants,proto3" json:"pg_qualstats_track_constants,omitempty"`
+	// Limits the number of predicate-statistics and query-text entries retained by pg_qualstats.
+	PgQualstatsMax *wrapperspb.Int64Value `protobuf:"bytes,146,opt,name=pg_qualstats_max,json=pgQualstatsMax,proto3" json:"pg_qualstats_max,omitempty"`
+	// Controls whether pg_qualstats resolves object OIDs and stores their names  when collecting statistics.
+	// Enabling this increases memory usage and requires additional system-catalog lookups.
+	PgQualstatsResolveOids *wrapperspb.BoolValue `protobuf:"bytes,147,opt,name=pg_qualstats_resolve_oids,json=pgQualstatsResolveOids,proto3" json:"pg_qualstats_resolve_oids,omitempty"`
+	// Sets the fraction of queries sampled by pg_qualstats. A value of -1 selects an automatic rate
+	// of 1 / max_connections; 0 samples no queries, and 1 samples every query.
+	PgQualstatsSampleRate *wrapperspb.DoubleValue `protobuf:"bytes,148,opt,name=pg_qualstats_sample_rate,json=pgQualstatsSampleRate,proto3" json:"pg_qualstats_sample_rate,omitempty"`
+	// Sets the maximum stack depth, in bytes.
+	MaxStackDepth *wrapperspb.Int64Value `protobuf:"bytes,150,opt,name=max_stack_depth,json=maxStackDepth,proto3" json:"max_stack_depth,omitempty"`
+	// Enables genetic query optimization. This algorithm attempts to do planning
+	// without exhaustive searching, by default is on.
+	Geqo *wrapperspb.BoolValue `protobuf:"bytes,152,opt,name=geqo,proto3" json:"geqo,omitempty"`
+	// Sets the threshold of FROM items beyond which GEQO is used, default is 12.
+	GeqoThreshold *wrapperspb.Int64Value `protobuf:"bytes,153,opt,name=geqo_threshold,json=geqoThreshold,proto3" json:"geqo_threshold,omitempty"`
+	// GEQO: effort is used to set the default for other GEQO parameters.
+	// Tradeoff between planning time and query plan quality, default is 5.
+	GeqoEffort *wrapperspb.Int64Value `protobuf:"bytes,154,opt,name=geqo_effort,json=geqoEffort,proto3" json:"geqo_effort,omitempty"`
+	// GEQO: number of individuals in the population.
+	// Useful values are typically 100 to 1000; default - 0 - choose based on based on geqo_effort.
+	GeqoPoolSize *wrapperspb.Int64Value `protobuf:"bytes,155,opt,name=geqo_pool_size,json=geqoPoolSize,proto3" json:"geqo_pool_size,omitempty"`
+	// GEQO: number of iterations of the algorithm. Zero selects a suitable default value.
+	// Useful values are in the same range as the pool size.
+	GeqoGenerations *wrapperspb.Int64Value `protobuf:"bytes,156,opt,name=geqo_generations,json=geqoGenerations,proto3" json:"geqo_generations,omitempty"`
+	// GEQO: selective pressure within the population.
+	GeqoSelectionBias *wrapperspb.DoubleValue `protobuf:"bytes,157,opt,name=geqo_selection_bias,json=geqoSelectionBias,proto3" json:"geqo_selection_bias,omitempty"`
+	// GEQO: seed for random path selection.
+	GeqoSeed *wrapperspb.DoubleValue `protobuf:"bytes,158,opt,name=geqo_seed,json=geqoSeed,proto3" json:"geqo_seed,omitempty"`
+	// Sets the trigram similarity threshold used by the `%` operator
+	// to determine whether two strings are similar.
+	PgTrgmSimilarityThreshold *wrapperspb.DoubleValue `protobuf:"bytes,159,opt,name=pg_trgm_similarity_threshold,json=pgTrgmSimilarityThreshold,proto3" json:"pg_trgm_similarity_threshold,omitempty"`
+	// Sets the threshold used by the `<%` and `%>` operators when comparing
+	// a string with the most similar continuous part of another string.
+	PgTrgmWordSimilarityThreshold *wrapperspb.DoubleValue `protobuf:"bytes,160,opt,name=pg_trgm_word_similarity_threshold,json=pgTrgmWordSimilarityThreshold,proto3" json:"pg_trgm_word_similarity_threshold,omitempty"`
+	// Sets the threshold used by the `<<%` and `%>>` operators when comparing
+	// a string with parts of another string aligned to word boundaries.
 	PgTrgmStrictWordSimilarityThreshold *wrapperspb.DoubleValue `protobuf:"bytes,161,opt,name=pg_trgm_strict_word_similarity_threshold,json=pgTrgmStrictWordSimilarityThreshold,proto3" json:"pg_trgm_strict_word_similarity_threshold,omitempty"`
-	MaxStandbyArchiveDelay              *wrapperspb.Int64Value  `protobuf:"bytes,162,opt,name=max_standby_archive_delay,json=maxStandbyArchiveDelay,proto3" json:"max_standby_archive_delay,omitempty"` // in milliseconds.
+	// Sets the maximum delay before canceling queries when a hot standby server is processing archived WAL data. In milliseconds.
+	MaxStandbyArchiveDelay *wrapperspb.Int64Value `protobuf:"bytes,162,opt,name=max_standby_archive_delay,json=maxStandbyArchiveDelay,proto3" json:"max_standby_archive_delay,omitempty"`
 	// Terminate any session that exceeds the designated timeout, specified in milliseconds. If a timeout is
 	// not specified, the default session timeout is set to 12 hours. To disable it, specify a value of 0.
-	SessionDurationTimeout   *wrapperspb.Int64Value                  `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`
-	LogReplicationCommands   *wrapperspb.BoolValue                   `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
-	LogAutovacuumMinDuration *wrapperspb.Int64Value                  `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`                                                                         // in milliseconds. The default is 1000 (1 sec).
-	PasswordEncryption       PostgresqlConfig14_PasswordEncryption   `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PasswordEncryption" json:"password_encryption,omitempty"`             // A default value for `` user_password_encryption `` user-level setting, if it not specified for new users. Possible values are `` PASSWORD_ENCRYPTION_MD5 `` or `` PASSWORD_ENCRYPTION_SCRAM_SHA_256 ``. The default is `` PASSWORD_ENCRYPTION_MD5 ``.
-	AutoExplainLogFormat     PostgresqlConfig14_AutoExplainLogFormat `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"` // Selects the `` EXPLAIN `` output format to be used. The allowed values are `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``, `` AUTO_EXPLAIN_LOG_FORMAT_XML ``, `` AUTO_EXPLAIN_LOG_FORMAT_JSON ``, and `` AUTO_EXPLAIN_LOG_FORMAT_YAML ``. The default is `` AUTO_EXPLAIN_LOG_FORMAT_TEXT ``.
+	SessionDurationTimeout *wrapperspb.Int64Value `protobuf:"bytes,163,opt,name=session_duration_timeout,json=sessionDurationTimeout,proto3" json:"session_duration_timeout,omitempty"`
+	// Logs each replication command.
+	LogReplicationCommands *wrapperspb.BoolValue `protobuf:"bytes,164,opt,name=log_replication_commands,json=logReplicationCommands,proto3" json:"log_replication_commands,omitempty"`
+	// Sets the minimum execution time above which autovacuum actions will be logged.
+	// Zero prints all actions. -1 turns autovacuum logging off. In milliseconds. The default is 1000 (1 sec).
+	// (-- api-linter: yc::1701::duration-required=disabled --)
+	LogAutovacuumMinDuration *wrapperspb.Int64Value `protobuf:"bytes,165,opt,name=log_autovacuum_min_duration,json=logAutovacuumMinDuration,proto3" json:"log_autovacuum_min_duration,omitempty"`
+	// A default value for “ user_password_encryption “ user-level setting, if it not specified for new users. Possible values are
+	// “ PASSWORD_ENCRYPTION_MD5 “ or “ PASSWORD_ENCRYPTION_SCRAM_SHA_256 “. The default is “ PASSWORD_ENCRYPTION_MD5 “.
+	PasswordEncryption PostgresqlConfig14_PasswordEncryption `protobuf:"varint,167,opt,name=password_encryption,json=passwordEncryption,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_PasswordEncryption" json:"password_encryption,omitempty"`
+	// Selects the “ EXPLAIN “ output format to be used. The allowed values are “ AUTO_EXPLAIN_LOG_FORMAT_TEXT “,
+	// “ AUTO_EXPLAIN_LOG_FORMAT_XML “, “ AUTO_EXPLAIN_LOG_FORMAT_JSON “, and “ AUTO_EXPLAIN_LOG_FORMAT_YAML “.
+	// The default is “ AUTO_EXPLAIN_LOG_FORMAT_TEXT “.
+	AutoExplainLogFormat PostgresqlConfig14_AutoExplainLogFormat `protobuf:"varint,168,opt,name=auto_explain_log_format,json=autoExplainLogFormat,proto3,enum=yandex.cloud.mdb.postgresql.v1.config.PostgresqlConfig14_AutoExplainLogFormat" json:"auto_explain_log_format,omitempty"`
 	// Sets the maximum allowed idle time between queries, when not in a transaction. In milliseconds.
-	IdleSessionTimeout         *wrapperspb.Int64Value `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`
-	CheckpointWarning          *wrapperspb.Int64Value `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`                              // in milliseconds. Write a message to the server log if checkpoints caused by the filling of WAL segment files happen closer together than this amount of time (which suggests that `` max_wal_size `` ought to be raised). 0 disables the warning.
-	AutovacuumVacuumThreshold  *wrapperspb.Int64Value `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`    // Specifies the minimum number of updated or deleted tuples needed to trigger a VACUUM in any one table. The default is 50 tuples.
-	AutovacuumAnalyzeThreshold *wrapperspb.Int64Value `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"` // Specifies the minimum number of inserted, updated or deleted tuples needed to trigger an ANALYZE in any one table. The default is 50 tuples.
+	IdleSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,173,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`
+	// Sets the interval below which checkpoints triggered by filling WAL segment files cause a warning to be written to the server log.
+	// A value of 0 disables the warning. In milliseconds.
+	CheckpointWarning *wrapperspb.Int64Value `protobuf:"bytes,174,opt,name=checkpoint_warning,json=checkpointWarning,proto3" json:"checkpoint_warning,omitempty"`
+	// Minimum number of tuple updates or deletes prior to vacuum.
+	AutovacuumVacuumThreshold *wrapperspb.Int64Value `protobuf:"bytes,177,opt,name=autovacuum_vacuum_threshold,json=autovacuumVacuumThreshold,proto3" json:"autovacuum_vacuum_threshold,omitempty"`
+	// Minimum number of tuple inserts, updates, or deletes prior to analyze.
+	AutovacuumAnalyzeThreshold *wrapperspb.Int64Value `protobuf:"bytes,178,opt,name=autovacuum_analyze_threshold,json=autovacuumAnalyzeThreshold,proto3" json:"autovacuum_analyze_threshold,omitempty"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -2620,7 +2680,7 @@ var File_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto protoreflect.F
 
 const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = "" +
 	"\n" +
-	"8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x88\x8c\x01\n" +
+	"8yandex/cloud/mdb/postgresql/v1/config/postgresql14.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x9e\x8c\x01\n" +
 	"\x12PostgresqlConfig14\x12N\n" +
 	"\x0fmax_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=16R\x0emaxConnections\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
@@ -2694,9 +2754,9 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = ""
 	"\x1bstandard_conforming_strings\x18B \x01(\v2\x1a.google.protobuf.BoolValueR\x19standardConformingStrings\x12M\n" +
 	"\x14synchronize_seqscans\x18C \x01(\v2\x1a.google.protobuf.BoolValueR\x13synchronizeSeqscans\x12N\n" +
 	"\x15transform_null_equals\x18D \x01(\v2\x1a.google.protobuf.BoolValueR\x13transformNullEquals\x12>\n" +
-	"\rexit_on_error\x18E \x01(\v2\x1a.google.protobuf.BoolValueR\vexitOnError\x12@\n" +
-	"\rseq_page_cost\x18F \x01(\v2\x1c.google.protobuf.DoubleValueR\vseqPageCost\x12F\n" +
-	"\x10random_page_cost\x18G \x01(\v2\x1c.google.protobuf.DoubleValueR\x0erandomPageCost\x12[\n" +
+	"\rexit_on_error\x18E \x01(\v2\x1a.google.protobuf.BoolValueR\vexitOnError\x12I\n" +
+	"\rseq_page_cost\x18F \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\vseqPageCost\x12O\n" +
+	"\x10random_page_cost\x18G \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\x0erandomPageCost\x12[\n" +
 	"\x16autovacuum_max_workers\x18H \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-32R\x14autovacuumMaxWorkers\x12h\n" +
 	"\x1cautovacuum_vacuum_cost_delay\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
 	"\xfa\xc71\x06-1-100R\x19autovacuumVacuumCostDelay\x12j\n" +
@@ -2806,10 +2866,10 @@ const file_yandex_cloud_mdb_postgresql_v1_config_postgresql14_proto_rawDesc = ""
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_TEXT\x10\x01\x12\x1f\n" +
 	"\x1bAUTO_EXPLAIN_LOG_FORMAT_XML\x10\x02\x12 \n" +
 	"\x1cAUTO_EXPLAIN_LOG_FORMAT_JSON\x10\x03\x12 \n" +
-	"\x1cAUTO_EXPLAIN_LOG_FORMAT_YAML\x10\x04\"\x9a\x01\n" +
+	"\x1cAUTO_EXPLAIN_LOG_FORMAT_YAML\x10\x04\"\x9e\x01\n" +
 	"\x0eBackslashQuote\x12\x1f\n" +
-	"\x1bBACKSLASH_QUOTE_UNSPECIFIED\x10\x00\x12\x13\n" +
-	"\x0fBACKSLASH_QUOTE\x10\x01\x12\x16\n" +
+	"\x1bBACKSLASH_QUOTE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x0fBACKSLASH_QUOTE\x10\x01\x1a\x02\b\x01\x12\x16\n" +
 	"\x12BACKSLASH_QUOTE_ON\x10\x02\x12\x17\n" +
 	"\x13BACKSLASH_QUOTE_OFF\x10\x03\x12!\n" +
 	"\x1dBACKSLASH_QUOTE_SAFE_ENCODING\x10\x04\"[\n" +

@@ -118,3 +118,11 @@ func (m *ListVrfOperationsResponse) SetOperations(v []*operation.Operation) {
 func (m *ListVrfOperationsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+func (m *CreateVrfPeeringMetadata) SetVrfId(v string) {
+	m.VrfId = v
+}
+
+func (m *DeleteVrfPeeringMetadata) SetVrfId(v string) {
+	m.VrfId = v
+}

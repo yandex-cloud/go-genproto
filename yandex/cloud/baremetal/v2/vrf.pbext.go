@@ -57,3 +57,7 @@ func (m *StaticRoute) SetNextHopIpAddress(v string) {
 func (m *StaticRoute) SetRedistributionType(v StaticRoute_RedistributionType) {
 	m.RedistributionType = v
 }
+
+func (m *VrfPeeringParams) SetVrfId(v string) {
+	m.VrfId = v
+}

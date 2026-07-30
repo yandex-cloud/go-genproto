@@ -119,12 +119,12 @@ func (m *UpdateNodeGroupRequest) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
 }
 
-func (m *UpdateNodeGroupRequest) SetVariables(v []*Variable) {
-	m.Variables = v
-}
-
 func (m *UpdateNodeGroupRequest) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
 	m.WorkloadIdentityFederation = v
+}
+
+func (m *UpdateNodeGroupRequest) SetVariables(v []*Variable) {
+	m.Variables = v
 }
 
 func (m *UpdateNodeGroupMetadata) SetNodeGroupId(v string) {
@@ -183,12 +183,12 @@ func (m *CreateNodeGroupRequest) SetNodeLabels(v map[string]string) {
 	m.NodeLabels = v
 }
 
-func (m *CreateNodeGroupRequest) SetVariables(v []*Variable) {
-	m.Variables = v
-}
-
 func (m *CreateNodeGroupRequest) SetWorkloadIdentityFederation(v *NodeGroupWorkloadIdentityFederation) {
 	m.WorkloadIdentityFederation = v
+}
+
+func (m *CreateNodeGroupRequest) SetVariables(v []*Variable) {
+	m.Variables = v
 }
 
 func (m *CreateNodeGroupMetadata) SetNodeGroupId(v string) {

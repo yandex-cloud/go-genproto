@@ -24,6 +24,10 @@ func (m *ConnectorSpec) SetProperties(v map[string]string) {
 	m.Properties = v
 }
 
+func (m *ConnectorSpec) SetPlacement(v *ConnectorPlacement) {
+	m.Placement = v
+}
+
 func (m *ConnectorSpec) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMakerSpec) {
 	m.ConnectorConfig = &ConnectorSpec_ConnectorConfigMirrormaker{
 		ConnectorConfigMirrormaker: v,
@@ -40,6 +44,10 @@ func (m *ConnectorSpec) SetConnectorConfigIcebergSink(v *ConnectorConfigIcebergS
 	m.ConnectorConfig = &ConnectorSpec_ConnectorConfigIcebergSink{
 		ConnectorConfigIcebergSink: v,
 	}
+}
+
+func (m *ConnectorPlacement) SetDedicated(v bool) {
+	m.Dedicated = v
 }
 
 type UpdateConnectorSpec_ConnectorConfig = isUpdateConnectorSpec_ConnectorConfig
@@ -406,6 +414,10 @@ func (m *Connector) SetStatus(v Connector_Status) {
 
 func (m *Connector) SetClusterId(v string) {
 	m.ClusterId = v
+}
+
+func (m *Connector) SetPlacement(v *ConnectorPlacement) {
+	m.Placement = v
 }
 
 func (m *Connector) SetConnectorConfigMirrormaker(v *ConnectorConfigMirrorMaker) {

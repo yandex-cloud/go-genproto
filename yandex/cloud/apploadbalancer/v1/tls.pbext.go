@@ -35,3 +35,11 @@ func (m *ClientCertificatesVerification) SetBytes(v string) {
 		Bytes: v,
 	}
 }
+
+func (m *ClientCertificatesVerification) SetAcceptUntrusted(v bool) {
+	m.AcceptUntrusted = v
+}
+
+func (m *ClientCertificatesVerification) SetAllowExpired(v bool) {
+	m.AllowExpired = v
+}

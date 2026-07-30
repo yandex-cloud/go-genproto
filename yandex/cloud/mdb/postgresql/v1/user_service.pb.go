@@ -337,8 +337,9 @@ type UpdateUserRequest struct {
 	// When used in transaction pooling, this setting limits the number of user's active transactions; therefore, in this mode user can open thousands of connections, but only `N` concurrent connections will be opened, where `N` is the value of the setting.
 	//
 	// Minimum value: `10` (default: `50`), when used in session pooling.
-	ConnLimit int64         `protobuf:"varint,6,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
-	Settings  *UserSettings `protobuf:"bytes,7,opt,name=settings,proto3" json:"settings,omitempty"`
+	ConnLimit int64 `protobuf:"varint,6,opt,name=conn_limit,json=connLimit,proto3" json:"conn_limit,omitempty"`
+	// PostgreSQL settings for this user.
+	Settings *UserSettings `protobuf:"bytes,7,opt,name=settings,proto3" json:"settings,omitempty"`
 	// This flag defines whether the user can login to a PostgreSQL database.
 	//
 	// Default value: `true` (login is allowed).

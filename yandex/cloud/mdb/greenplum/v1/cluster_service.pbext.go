@@ -6,6 +6,7 @@ import (
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetClusterRequest) SetClusterId(v string) {
@@ -590,6 +591,10 @@ func (m *RestoreClusterRequest) SetRestoreHba(v bool) {
 
 func (m *RestoreClusterRequest) SetServiceAccountId(v string) {
 	m.ServiceAccountId = v
+}
+
+func (m *RestoreClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
 }
 
 func (m *RestoreClusterMetadata) SetClusterId(v string) {

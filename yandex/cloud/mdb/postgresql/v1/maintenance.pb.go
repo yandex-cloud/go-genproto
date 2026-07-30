@@ -26,14 +26,22 @@ const (
 type WeeklyMaintenanceWindow_WeekDay int32
 
 const (
+	// Not specified.
 	WeeklyMaintenanceWindow_WEEK_DAY_UNSPECIFIED WeeklyMaintenanceWindow_WeekDay = 0
-	WeeklyMaintenanceWindow_MON                  WeeklyMaintenanceWindow_WeekDay = 1
-	WeeklyMaintenanceWindow_TUE                  WeeklyMaintenanceWindow_WeekDay = 2
-	WeeklyMaintenanceWindow_WED                  WeeklyMaintenanceWindow_WeekDay = 3
-	WeeklyMaintenanceWindow_THU                  WeeklyMaintenanceWindow_WeekDay = 4
-	WeeklyMaintenanceWindow_FRI                  WeeklyMaintenanceWindow_WeekDay = 5
-	WeeklyMaintenanceWindow_SAT                  WeeklyMaintenanceWindow_WeekDay = 6
-	WeeklyMaintenanceWindow_SUN                  WeeklyMaintenanceWindow_WeekDay = 7
+	// Monday.
+	WeeklyMaintenanceWindow_MON WeeklyMaintenanceWindow_WeekDay = 1
+	// Tuesday.
+	WeeklyMaintenanceWindow_TUE WeeklyMaintenanceWindow_WeekDay = 2
+	// Wednesday.
+	WeeklyMaintenanceWindow_WED WeeklyMaintenanceWindow_WeekDay = 3
+	// Thursday.
+	WeeklyMaintenanceWindow_THU WeeklyMaintenanceWindow_WeekDay = 4
+	// Friday.
+	WeeklyMaintenanceWindow_FRI WeeklyMaintenanceWindow_WeekDay = 5
+	// Saturday.
+	WeeklyMaintenanceWindow_SAT WeeklyMaintenanceWindow_WeekDay = 6
+	// Sunday.
+	WeeklyMaintenanceWindow_SUN WeeklyMaintenanceWindow_WeekDay = 7
 )
 
 // Enum value maps for WeeklyMaintenanceWindow_WeekDay.
@@ -210,7 +218,7 @@ func (*AnytimeMaintenanceWindow) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_postgresql_v1_maintenance_proto_rawDescGZIP(), []int{1}
 }
 
-// Weelky maintenance window settings.
+// Weekly maintenance window settings.
 type WeeklyMaintenanceWindow struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Day of the week (in `DDD` format).

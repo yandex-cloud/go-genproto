@@ -26,8 +26,11 @@ const (
 type PostgresqlHostConfig15_1C_BackslashQuote int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_BACKSLASH_QUOTE_UNSPECIFIED PostgresqlHostConfig15_1C_BackslashQuote = 0
-	// Quotation mark can be represented as \' (same as on).
+	// Legacy invalid value. Do not use.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/postgresql/v1/config/host15_1c.proto.
 	PostgresqlHostConfig15_1C_BACKSLASH_QUOTE PostgresqlHostConfig15_1C_BackslashQuote = 1
 	// Quotation mark can be represented as \'.
 	PostgresqlHostConfig15_1C_BACKSLASH_QUOTE_ON PostgresqlHostConfig15_1C_BackslashQuote = 2
@@ -85,6 +88,7 @@ func (PostgresqlHostConfig15_1C_BackslashQuote) EnumDescriptor() ([]byte, []int)
 type PostgresqlHostConfig15_1C_ByteaOutput int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_BYTEA_OUTPUT_UNSPECIFIED PostgresqlHostConfig15_1C_ByteaOutput = 0
 	// Each byte is represented by two hexadecimal characters, e.g., 'SELECT '\xDEADBEEF';'.
 	PostgresqlHostConfig15_1C_BYTEA_OUTPUT_HEX PostgresqlHostConfig15_1C_ByteaOutput = 1
@@ -136,6 +140,7 @@ func (PostgresqlHostConfig15_1C_ByteaOutput) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig15_1C_ConstraintExclusion int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_CONSTRAINT_EXCLUSION_UNSPECIFIED PostgresqlHostConfig15_1C_ConstraintExclusion = 0
 	// Enable planner's use of constraints for all tables.
 	PostgresqlHostConfig15_1C_CONSTRAINT_EXCLUSION_ON PostgresqlHostConfig15_1C_ConstraintExclusion = 1
@@ -191,12 +196,14 @@ func (PostgresqlHostConfig15_1C_ConstraintExclusion) EnumDescriptor() ([]byte, [
 type PostgresqlHostConfig15_1C_ForceParallelMode int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_FORCE_PARALLEL_MODE_UNSPECIFIED PostgresqlHostConfig15_1C_ForceParallelMode = 0
-	// Force parallel mode for all queries that can be executed safely in parallel.
+	// Forces parallel mode for queries considered safe, even when no performance benefit is expected.
 	PostgresqlHostConfig15_1C_FORCE_PARALLEL_MODE_ON PostgresqlHostConfig15_1C_ForceParallelMode = 1
-	// Enable parallel mode only if it is expected to increase performance.
+	// Uses parallel mode only when the planner expects it to improve performance.
 	PostgresqlHostConfig15_1C_FORCE_PARALLEL_MODE_OFF PostgresqlHostConfig15_1C_ForceParallelMode = 2
-	// Equivalent to on, but generates output identical to the off state.
+	// Behaves like ON, but hides added Gather nodes in EXPLAIN output and
+	// suppresses parallel-worker context lines to stabilize regression-test output.
 	PostgresqlHostConfig15_1C_FORCE_PARALLEL_MODE_REGRESS PostgresqlHostConfig15_1C_ForceParallelMode = 3
 )
 
@@ -246,6 +253,7 @@ func (PostgresqlHostConfig15_1C_ForceParallelMode) EnumDescriptor() ([]byte, []i
 type PostgresqlHostConfig15_1C_LogErrorVerbosity int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_LOG_ERROR_VERBOSITY_UNSPECIFIED PostgresqlHostConfig15_1C_LogErrorVerbosity = 0
 	// DETAIL, HINT, QUERY, and CONTEXT fields are excluded from the error message.
 	PostgresqlHostConfig15_1C_LOG_ERROR_VERBOSITY_TERSE PostgresqlHostConfig15_1C_LogErrorVerbosity = 1
@@ -389,6 +397,7 @@ func (PostgresqlHostConfig15_1C_LogLevel) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig15_1C_LogStatement int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_LOG_STATEMENT_UNSPECIFIED PostgresqlHostConfig15_1C_LogStatement = 0
 	// The filter is disabled, no SQL statements are logged.
 	PostgresqlHostConfig15_1C_LOG_STATEMENT_NONE PostgresqlHostConfig15_1C_LogStatement = 1
@@ -448,6 +457,7 @@ func (PostgresqlHostConfig15_1C_LogStatement) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig15_1C_TransactionIsolation int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_TRANSACTION_ISOLATION_UNSPECIFIED PostgresqlHostConfig15_1C_TransactionIsolation = 0
 	// This level behaves like `TRANSACTION_ISOLATION_READ_COMMITTED` in PostgreSQL.
 	PostgresqlHostConfig15_1C_TRANSACTION_ISOLATION_READ_UNCOMMITTED PostgresqlHostConfig15_1C_TransactionIsolation = 1
@@ -509,10 +519,11 @@ func (PostgresqlHostConfig15_1C_TransactionIsolation) EnumDescriptor() ([]byte, 
 type PostgresqlHostConfig15_1C_XmlBinary int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_XML_BINARY_UNSPECIFIED PostgresqlHostConfig15_1C_XmlBinary = 0
-	// Base64 encoding.
+	// Encodes binary values using Base64.
 	PostgresqlHostConfig15_1C_XML_BINARY_BASE64 PostgresqlHostConfig15_1C_XmlBinary = 1
-	// Hexadecimal encoding.
+	// Encodes binary values using hexadecimal notation.
 	PostgresqlHostConfig15_1C_XML_BINARY_HEX PostgresqlHostConfig15_1C_XmlBinary = 2
 )
 
@@ -560,10 +571,11 @@ func (PostgresqlHostConfig15_1C_XmlBinary) EnumDescriptor() ([]byte, []int) {
 type PostgresqlHostConfig15_1C_XmlOption int32
 
 const (
+	// Not specified.
 	PostgresqlHostConfig15_1C_XML_OPTION_UNSPECIFIED PostgresqlHostConfig15_1C_XmlOption = 0
-	// XML document.
+	// Treats an XML value as a complete, well-formed document.
 	PostgresqlHostConfig15_1C_XML_OPTION_DOCUMENT PostgresqlHostConfig15_1C_XmlOption = 1
-	// XML fragment.
+	// Treats an XML value as a content fragment, which may contain multiple top-level elements or character nodes.
 	PostgresqlHostConfig15_1C_XML_OPTION_CONTENT PostgresqlHostConfig15_1C_XmlOption = 2
 )
 
@@ -624,7 +636,7 @@ type PostgresqlHostConfig15_1C struct {
 	WorkMem *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=work_mem,json=workMem,proto3" json:"work_mem,omitempty"`
 	// Limits the total size of all temporary files used by each process. -1 means no limit. In bytes.
 	TempFileLimit *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=temp_file_limit,json=tempFileLimit,proto3" json:"temp_file_limit,omitempty"`
-	// Number of pages after which previously performed writes are flushed to disk. In bytes.
+	// Specifies how much data a backend can write before forcing the operating system to issue the writes. In bytes.
 	BackendFlushAfter *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=backend_flush_after,json=backendFlushAfter,proto3" json:"backend_flush_after,omitempty"`
 	// Time before a snapshot is too old to read pages changed after the snapshot was taken.
 	// A value of -1 disables this feature. In milliseconds.
@@ -744,7 +756,7 @@ type PostgresqlHostConfig15_1C struct {
 	EnableSort *wrapperspb.BoolValue `protobuf:"bytes,63,opt,name=enable_sort,json=enableSort,proto3" json:"enable_sort,omitempty"`
 	// Enables the planner's use of TID scan plans.
 	EnableTidscan *wrapperspb.BoolValue `protobuf:"bytes,64,opt,name=enable_tidscan,json=enableTidscan,proto3" json:"enable_tidscan,omitempty"`
-	// Sets the maximum number of parallel processes per executor node.
+	// Sets the maximum number of parallel workers that can be active at one time.
 	MaxParallelWorkers *wrapperspb.Int64Value `protobuf:"bytes,65,opt,name=max_parallel_workers,json=maxParallelWorkers,proto3" json:"max_parallel_workers,omitempty"`
 	// Sets the maximum number of parallel processes per executor node.
 	MaxParallelWorkersPerGather *wrapperspb.Int64Value `protobuf:"bytes,66,opt,name=max_parallel_workers_per_gather,json=maxParallelWorkersPerGather,proto3" json:"max_parallel_workers_per_gather,omitempty"`
@@ -752,9 +764,7 @@ type PostgresqlHostConfig15_1C struct {
 	Timezone string `protobuf:"bytes,67,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	// Number of simultaneous requests that can be handled efficiently by the disk subsystem.
 	EffectiveIoConcurrency *wrapperspb.Int64Value `protobuf:"bytes,68,opt,name=effective_io_concurrency,json=effectiveIoConcurrency,proto3" json:"effective_io_concurrency,omitempty"`
-	// Sets the planner's assumption about the total size of the data caches. That is, the total
-	// size of the caches (kernel cache and shared buffers) used for PostgreSQL data files.
-	// This is measured in disk pages, which are normally 8 kB each.
+	// Sets the planner's assumption about the effective size of the disk cache available to a single query. In bytes.
 	EffectiveCacheSize *wrapperspb.Int64Value `protobuf:"bytes,69,opt,name=effective_cache_size,json=effectiveCacheSize,proto3" json:"effective_cache_size,omitempty"`
 	// Sets the maximum allowed idle time between queries, when not in a transaction. In milliseconds.
 	IdleSessionTimeout *wrapperspb.Int64Value `protobuf:"bytes,73,opt,name=idle_session_timeout,json=idleSessionTimeout,proto3" json:"idle_session_timeout,omitempty"`
@@ -1265,15 +1275,14 @@ var File_yandex_cloud_mdb_postgresql_v1_config_host15_1c_proto protoreflect.File
 
 const file_yandex_cloud_mdb_postgresql_v1_config_host15_1c_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/mdb/postgresql/v1/config/host15_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x899\n" +
+	"5yandex/cloud/mdb/postgresql/v1/config/host15_1c.proto\x12%yandex.cloud.mdb.postgresql.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xa29\n" +
 	"\x19PostgresqlHostConfig15_1C\x12T\n" +
 	"\x18recovery_min_apply_delay\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x15recoveryMinApplyDelay\x12B\n" +
 	"\x0eshared_buffers\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\rsharedBuffers\x12>\n" +
 	"\ftemp_buffers\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtempBuffers\x126\n" +
 	"\bwork_mem\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\aworkMem\x12C\n" +
-	"\x0ftemp_file_limit\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\rtempFileLimit\x12W\n" +
-	"\x13backend_flush_after\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
-	"\xfa\xc71\x060-2048R\x11backendFlushAfter\x12b\n" +
+	"\x0ftemp_file_limit\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\rtempFileLimit\x12Z\n" +
+	"\x13backend_flush_after\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t0-2097152R\x11backendFlushAfter\x12b\n" +
 	"\x16old_snapshot_threshold\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\x0f\xfa\xc71\v-1-86400000R\x14oldSnapshotThreshold\x12Z\n" +
 	"\x1bmax_standby_streaming_delay\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x18maxStandbyStreamingDelay\x12\x87\x01\n" +
 	"\x14constraint_exclusion\x18\t \x01(\x0e2T.yandex.cloud.mdb.postgresql.v1.config.PostgresqlHostConfig15_1C.ConstraintExclusionR\x13constraintExclusion\x12P\n" +
@@ -1318,9 +1327,9 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host15_1c_proto_rawDesc = "" +
 	"\x1bstandard_conforming_strings\x18. \x01(\v2\x1a.google.protobuf.BoolValueR\x19standardConformingStrings\x12M\n" +
 	"\x14synchronize_seqscans\x18/ \x01(\v2\x1a.google.protobuf.BoolValueR\x13synchronizeSeqscans\x12N\n" +
 	"\x15transform_null_equals\x180 \x01(\v2\x1a.google.protobuf.BoolValueR\x13transformNullEquals\x12>\n" +
-	"\rexit_on_error\x181 \x01(\v2\x1a.google.protobuf.BoolValueR\vexitOnError\x12@\n" +
-	"\rseq_page_cost\x182 \x01(\v2\x1c.google.protobuf.DoubleValueR\vseqPageCost\x12F\n" +
-	"\x10random_page_cost\x183 \x01(\v2\x1c.google.protobuf.DoubleValueR\x0erandomPageCost\x12G\n" +
+	"\rexit_on_error\x181 \x01(\v2\x1a.google.protobuf.BoolValueR\vexitOnError\x12I\n" +
+	"\rseq_page_cost\x182 \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\vseqPageCost\x12O\n" +
+	"\x10random_page_cost\x183 \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\x0erandomPageCost\x12G\n" +
 	"\x11enable_bitmapscan\x186 \x01(\v2\x1a.google.protobuf.BoolValueR\x10enableBitmapscan\x12A\n" +
 	"\x0eenable_hashagg\x187 \x01(\v2\x1a.google.protobuf.BoolValueR\renableHashagg\x12C\n" +
 	"\x0fenable_hashjoin\x188 \x01(\v2\x1a.google.protobuf.BoolValueR\x0eenableHashjoin\x12E\n" +
@@ -1341,10 +1350,10 @@ const file_yandex_cloud_mdb_postgresql_v1_config_host15_1c_proto_rawDesc = "" +
 	"\x18effective_io_concurrency\x18D \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
 	"\xfa\xc71\x060-1000R\x16effectiveIoConcurrency\x12g\n" +
 	"\x14effective_cache_size\x18E \x01(\v2\x1b.google.protobuf.Int64ValueB\x18\xfa\xc71\x141048576-549755813888R\x12effectiveCacheSize\x12_\n" +
-	"\x14idle_session_timeout\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\x9a\x01\n" +
+	"\x14idle_session_timeout\x18I \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x12idleSessionTimeout\"\x9e\x01\n" +
 	"\x0eBackslashQuote\x12\x1f\n" +
-	"\x1bBACKSLASH_QUOTE_UNSPECIFIED\x10\x00\x12\x13\n" +
-	"\x0fBACKSLASH_QUOTE\x10\x01\x12\x16\n" +
+	"\x1bBACKSLASH_QUOTE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x0fBACKSLASH_QUOTE\x10\x01\x1a\x02\b\x01\x12\x16\n" +
 	"\x12BACKSLASH_QUOTE_ON\x10\x02\x12\x17\n" +
 	"\x13BACKSLASH_QUOTE_OFF\x10\x03\x12!\n" +
 	"\x1dBACKSLASH_QUOTE_SAFE_ENCODING\x10\x04\"[\n" +

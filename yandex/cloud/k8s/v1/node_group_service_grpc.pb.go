@@ -22,11 +22,11 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	NodeGroupService_Get_FullMethodName            = "/yandex.cloud.k8s.v1.NodeGroupService/Get"
 	NodeGroupService_List_FullMethodName           = "/yandex.cloud.k8s.v1.NodeGroupService/List"
+	NodeGroupService_ListNodes_FullMethodName      = "/yandex.cloud.k8s.v1.NodeGroupService/ListNodes"
 	NodeGroupService_Create_FullMethodName         = "/yandex.cloud.k8s.v1.NodeGroupService/Create"
 	NodeGroupService_Update_FullMethodName         = "/yandex.cloud.k8s.v1.NodeGroupService/Update"
 	NodeGroupService_Delete_FullMethodName         = "/yandex.cloud.k8s.v1.NodeGroupService/Delete"
 	NodeGroupService_ListOperations_FullMethodName = "/yandex.cloud.k8s.v1.NodeGroupService/ListOperations"
-	NodeGroupService_ListNodes_FullMethodName      = "/yandex.cloud.k8s.v1.NodeGroupService/ListNodes"
 )
 
 // NodeGroupServiceClient is the client API for NodeGroupService service.
@@ -36,11 +36,12 @@ const (
 // A set of methods for managing node groups.
 type NodeGroupServiceClient interface {
 	// Returns the specified node group.
-	//
 	// To get the list of available node group, make a [List] request.
 	Get(ctx context.Context, in *GetNodeGroupRequest, opts ...grpc.CallOption) (*NodeGroup, error)
 	// Retrieves the list of node group in the specified Kubernetes cluster.
 	List(ctx context.Context, in *ListNodeGroupsRequest, opts ...grpc.CallOption) (*ListNodeGroupsResponse, error)
+	// Retrieves the list of nodes in the specified Kubernetes cluster.
+	ListNodes(ctx context.Context, in *ListNodeGroupNodesRequest, opts ...grpc.CallOption) (*ListNodeGroupNodesResponse, error)
 	// Creates a node group in the specified Kubernetes cluster.
 	Create(ctx context.Context, in *CreateNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified node group.
@@ -49,8 +50,6 @@ type NodeGroupServiceClient interface {
 	Delete(ctx context.Context, in *DeleteNodeGroupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified node group.
 	ListOperations(ctx context.Context, in *ListNodeGroupOperationsRequest, opts ...grpc.CallOption) (*ListNodeGroupOperationsResponse, error)
-	// Retrieves the list of nodes in the specified Kubernetes cluster.
-	ListNodes(ctx context.Context, in *ListNodeGroupNodesRequest, opts ...grpc.CallOption) (*ListNodeGroupNodesResponse, error)
 }
 
 type nodeGroupServiceClient struct {
@@ -75,6 +74,16 @@ func (c *nodeGroupServiceClient) List(ctx context.Context, in *ListNodeGroupsReq
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListNodeGroupsResponse)
 	err := c.cc.Invoke(ctx, NodeGroupService_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *nodeGroupServiceClient) ListNodes(ctx context.Context, in *ListNodeGroupNodesRequest, opts ...grpc.CallOption) (*ListNodeGroupNodesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListNodeGroupNodesResponse)
+	err := c.cc.Invoke(ctx, NodeGroupService_ListNodes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,16 +130,6 @@ func (c *nodeGroupServiceClient) ListOperations(ctx context.Context, in *ListNod
 	return out, nil
 }
 
-func (c *nodeGroupServiceClient) ListNodes(ctx context.Context, in *ListNodeGroupNodesRequest, opts ...grpc.CallOption) (*ListNodeGroupNodesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListNodeGroupNodesResponse)
-	err := c.cc.Invoke(ctx, NodeGroupService_ListNodes_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // NodeGroupServiceServer is the server API for NodeGroupService service.
 // All implementations should embed UnimplementedNodeGroupServiceServer
 // for forward compatibility.
@@ -138,11 +137,12 @@ func (c *nodeGroupServiceClient) ListNodes(ctx context.Context, in *ListNodeGrou
 // A set of methods for managing node groups.
 type NodeGroupServiceServer interface {
 	// Returns the specified node group.
-	//
 	// To get the list of available node group, make a [List] request.
 	Get(context.Context, *GetNodeGroupRequest) (*NodeGroup, error)
 	// Retrieves the list of node group in the specified Kubernetes cluster.
 	List(context.Context, *ListNodeGroupsRequest) (*ListNodeGroupsResponse, error)
+	// Retrieves the list of nodes in the specified Kubernetes cluster.
+	ListNodes(context.Context, *ListNodeGroupNodesRequest) (*ListNodeGroupNodesResponse, error)
 	// Creates a node group in the specified Kubernetes cluster.
 	Create(context.Context, *CreateNodeGroupRequest) (*operation.Operation, error)
 	// Updates the specified node group.
@@ -151,8 +151,6 @@ type NodeGroupServiceServer interface {
 	Delete(context.Context, *DeleteNodeGroupRequest) (*operation.Operation, error)
 	// Lists operations for the specified node group.
 	ListOperations(context.Context, *ListNodeGroupOperationsRequest) (*ListNodeGroupOperationsResponse, error)
-	// Retrieves the list of nodes in the specified Kubernetes cluster.
-	ListNodes(context.Context, *ListNodeGroupNodesRequest) (*ListNodeGroupNodesResponse, error)
 }
 
 // UnimplementedNodeGroupServiceServer should be embedded to have
@@ -168,6 +166,9 @@ func (UnimplementedNodeGroupServiceServer) Get(context.Context, *GetNodeGroupReq
 func (UnimplementedNodeGroupServiceServer) List(context.Context, *ListNodeGroupsRequest) (*ListNodeGroupsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method List not implemented")
 }
+func (UnimplementedNodeGroupServiceServer) ListNodes(context.Context, *ListNodeGroupNodesRequest) (*ListNodeGroupNodesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListNodes not implemented")
+}
 func (UnimplementedNodeGroupServiceServer) Create(context.Context, *CreateNodeGroupRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Create not implemented")
 }
@@ -179,9 +180,6 @@ func (UnimplementedNodeGroupServiceServer) Delete(context.Context, *DeleteNodeGr
 }
 func (UnimplementedNodeGroupServiceServer) ListOperations(context.Context, *ListNodeGroupOperationsRequest) (*ListNodeGroupOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
-}
-func (UnimplementedNodeGroupServiceServer) ListNodes(context.Context, *ListNodeGroupNodesRequest) (*ListNodeGroupNodesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListNodes not implemented")
 }
 func (UnimplementedNodeGroupServiceServer) testEmbeddedByValue() {}
 
@@ -235,6 +233,24 @@ func _NodeGroupService_List_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(NodeGroupServiceServer).List(ctx, req.(*ListNodeGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NodeGroupService_ListNodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNodeGroupNodesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeGroupServiceServer).ListNodes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NodeGroupService_ListNodes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeGroupServiceServer).ListNodes(ctx, req.(*ListNodeGroupNodesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -311,24 +327,6 @@ func _NodeGroupService_ListOperations_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _NodeGroupService_ListNodes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListNodeGroupNodesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NodeGroupServiceServer).ListNodes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: NodeGroupService_ListNodes_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeGroupServiceServer).ListNodes(ctx, req.(*ListNodeGroupNodesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // NodeGroupService_ServiceDesc is the grpc.ServiceDesc for NodeGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -345,6 +343,10 @@ var NodeGroupService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _NodeGroupService_List_Handler,
 		},
 		{
+			MethodName: "ListNodes",
+			Handler:    _NodeGroupService_ListNodes_Handler,
+		},
+		{
 			MethodName: "Create",
 			Handler:    _NodeGroupService_Create_Handler,
 		},
@@ -359,10 +361,6 @@ var NodeGroupService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOperations",
 			Handler:    _NodeGroupService_ListOperations_Handler,
-		},
-		{
-			MethodName: "ListNodes",
-			Handler:    _NodeGroupService_ListNodes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

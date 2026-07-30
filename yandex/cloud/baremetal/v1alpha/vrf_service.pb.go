@@ -711,6 +711,96 @@ func (x *ListVrfOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type CreateVrfPeeringMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the VRF resource the peering is being created for.
+	VrfId         string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateVrfPeeringMetadata) Reset() {
+	*x = CreateVrfPeeringMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateVrfPeeringMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateVrfPeeringMetadata) ProtoMessage() {}
+
+func (x *CreateVrfPeeringMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateVrfPeeringMetadata.ProtoReflect.Descriptor instead.
+func (*CreateVrfPeeringMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CreateVrfPeeringMetadata) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
+type DeleteVrfPeeringMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the VRF resource the peering is being deleted for.
+	VrfId         string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteVrfPeeringMetadata) Reset() {
+	*x = DeleteVrfPeeringMetadata{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteVrfPeeringMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteVrfPeeringMetadata) ProtoMessage() {}
+
+func (x *DeleteVrfPeeringMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteVrfPeeringMetadata.ProtoReflect.Descriptor instead.
+func (*DeleteVrfPeeringMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DeleteVrfPeeringMetadata) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v1alpha_vrf_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc = "" +
@@ -768,7 +858,11 @@ const file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d2\xdb\a\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"1\n" +
+	"\x18CreateVrfPeeringMetadata\x12\x15\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"1\n" +
+	"\x18DeleteVrfPeeringMetadata\x12\x15\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId2\xdb\a\n" +
 	"\n" +
 	"VrfService\x12\x83\x01\n" +
 	"\x03Get\x12-.yandex.cloud.baremetal.v1alpha.GetVrfRequest\x1a#.yandex.cloud.baremetal.v1alpha.Vrf\"(\x82\xd3\xe4\x93\x02\"\x12 /baremetal/v1alpha/vrfs/{vrf_id}\x12\x88\x01\n" +
@@ -794,7 +888,7 @@ func file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDescGZIP() []byte 
 	return file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_goTypes = []any{
 	(*GetVrfRequest)(nil),             // 0: yandex.cloud.baremetal.v1alpha.GetVrfRequest
 	(*ListVrfRequest)(nil),            // 1: yandex.cloud.baremetal.v1alpha.ListVrfRequest
@@ -807,32 +901,34 @@ var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_goTypes = []any{
 	(*DeleteVrfMetadata)(nil),         // 8: yandex.cloud.baremetal.v1alpha.DeleteVrfMetadata
 	(*ListVrfOperationsRequest)(nil),  // 9: yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest
 	(*ListVrfOperationsResponse)(nil), // 10: yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse
-	nil,                               // 11: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
-	nil,                               // 12: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
-	(*Vrf)(nil),                       // 13: yandex.cloud.baremetal.v1alpha.Vrf
-	(*StaticRoute)(nil),               // 14: yandex.cloud.baremetal.v1alpha.StaticRoute
-	(*fieldmaskpb.FieldMask)(nil),     // 15: google.protobuf.FieldMask
-	(*operation.Operation)(nil),       // 16: yandex.cloud.operation.Operation
+	(*CreateVrfPeeringMetadata)(nil),  // 11: yandex.cloud.baremetal.v1alpha.CreateVrfPeeringMetadata
+	(*DeleteVrfPeeringMetadata)(nil),  // 12: yandex.cloud.baremetal.v1alpha.DeleteVrfPeeringMetadata
+	nil,                               // 13: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
+	nil,                               // 14: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
+	(*Vrf)(nil),                       // 15: yandex.cloud.baremetal.v1alpha.Vrf
+	(*StaticRoute)(nil),               // 16: yandex.cloud.baremetal.v1alpha.StaticRoute
+	(*fieldmaskpb.FieldMask)(nil),     // 17: google.protobuf.FieldMask
+	(*operation.Operation)(nil),       // 18: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_depIdxs = []int32{
-	13, // 0: yandex.cloud.baremetal.v1alpha.ListVrfResponse.vrfs:type_name -> yandex.cloud.baremetal.v1alpha.Vrf
-	14, // 1: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
-	11, // 2: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
-	15, // 3: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
-	14, // 4: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
-	12, // 5: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
-	16, // 6: yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	15, // 0: yandex.cloud.baremetal.v1alpha.ListVrfResponse.vrfs:type_name -> yandex.cloud.baremetal.v1alpha.Vrf
+	16, // 1: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
+	13, // 2: yandex.cloud.baremetal.v1alpha.CreateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest.LabelsEntry
+	17, // 3: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
+	16, // 4: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.static_routes:type_name -> yandex.cloud.baremetal.v1alpha.StaticRoute
+	14, // 5: yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest.LabelsEntry
+	18, // 6: yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 7: yandex.cloud.baremetal.v1alpha.VrfService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetVrfRequest
 	1,  // 8: yandex.cloud.baremetal.v1alpha.VrfService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfRequest
 	3,  // 9: yandex.cloud.baremetal.v1alpha.VrfService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreateVrfRequest
 	5,  // 10: yandex.cloud.baremetal.v1alpha.VrfService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdateVrfRequest
 	7,  // 11: yandex.cloud.baremetal.v1alpha.VrfService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeleteVrfRequest
 	9,  // 12: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsRequest
-	13, // 13: yandex.cloud.baremetal.v1alpha.VrfService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Vrf
+	15, // 13: yandex.cloud.baremetal.v1alpha.VrfService.Get:output_type -> yandex.cloud.baremetal.v1alpha.Vrf
 	2,  // 14: yandex.cloud.baremetal.v1alpha.VrfService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfResponse
-	16, // 15: yandex.cloud.baremetal.v1alpha.VrfService.Create:output_type -> yandex.cloud.operation.Operation
-	16, // 16: yandex.cloud.baremetal.v1alpha.VrfService.Update:output_type -> yandex.cloud.operation.Operation
-	16, // 17: yandex.cloud.baremetal.v1alpha.VrfService.Delete:output_type -> yandex.cloud.operation.Operation
+	18, // 15: yandex.cloud.baremetal.v1alpha.VrfService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 16: yandex.cloud.baremetal.v1alpha.VrfService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 17: yandex.cloud.baremetal.v1alpha.VrfService.Delete:output_type -> yandex.cloud.operation.Operation
 	10, // 18: yandex.cloud.baremetal.v1alpha.VrfService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListVrfOperationsResponse
 	13, // [13:19] is the sub-list for method output_type
 	7,  // [7:13] is the sub-list for method input_type
@@ -853,7 +949,7 @@ func file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_vrf_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

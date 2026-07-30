@@ -21,12 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// PCI topology of the instance.
 type PCITopology int32
 
 const (
+	// Unspecified PCI topology.
 	PCITopology_PCI_TOPOLOGY_UNSPECIFIED PCITopology = 0
-	PCITopology_PCI_TOPOLOGY_V1          PCITopology = 1
-	PCITopology_PCI_TOPOLOGY_V2          PCITopology = 2
+	// Legacy PCI topology.
+	PCITopology_PCI_TOPOLOGY_V1 PCITopology = 1
+	// Modern PCI topology.
+	PCITopology_PCI_TOPOLOGY_V2 PCITopology = 2
 )
 
 // Enum value maps for PCITopology.
@@ -145,10 +149,12 @@ type isHardwareGeneration_Features interface {
 }
 
 type HardwareGeneration_LegacyFeatures struct {
+	// A first hardware generation, by default compatible with all legacy images.
 	LegacyFeatures *LegacyHardwareFeatures `protobuf:"bytes,1,opt,name=legacy_features,json=legacyFeatures,proto3,oneof"`
 }
 
 type HardwareGeneration_Generation2Features struct {
+	// A second hardware generation, which by default assumes PCI_TOPOLOGY_V2 and UEFI boot.
 	Generation2Features *Generation2HardwareFeatures `protobuf:"bytes,2,opt,name=generation2_features,json=generation2Features,proto3,oneof"`
 }
 
@@ -159,8 +165,9 @@ func (*HardwareGeneration_Generation2Features) isHardwareGeneration_Features() {
 // A first hardware generation, by default compatible with all legacy images.
 // Allows switching to PCI_TOPOLOGY_V2 and back.
 type LegacyHardwareFeatures struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PciTopology   PCITopology            `protobuf:"varint,1,opt,name=pci_topology,json=pciTopology,proto3,enum=yandex.cloud.compute.v1.PCITopology" json:"pci_topology,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// PCI topology of the instance.
+	PciTopology   PCITopology `protobuf:"varint,1,opt,name=pci_topology,json=pciTopology,proto3,enum=yandex.cloud.compute.v1.PCITopology" json:"pci_topology,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -205,7 +212,12 @@ func (x *LegacyHardwareFeatures) GetPciTopology() PCITopology {
 // A second hardware generation, which by default assumes PCI_TOPOLOGY_V2
 // and UEFI boot (with UEFI related features).
 type Generation2HardwareFeatures struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the secure boot template containing the UEFI key databases used to verify boot components.
+	// If empty, secure boot is disabled.
+	SecureBootTemplateId string `protobuf:"bytes,1,opt,name=secure_boot_template_id,json=secureBootTemplateId,proto3" json:"secure_boot_template_id,omitempty"`
+	// Whether the virtual Trusted Platform Module (vTPM) is enabled for the instance.
+	VtpmEnabled   bool `protobuf:"varint,2,opt,name=vtpm_enabled,json=vtpmEnabled,proto3" json:"vtpm_enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -240,6 +252,20 @@ func (*Generation2HardwareFeatures) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_compute_v1_hardware_generation_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *Generation2HardwareFeatures) GetSecureBootTemplateId() string {
+	if x != nil {
+		return x.SecureBootTemplateId
+	}
+	return ""
+}
+
+func (x *Generation2HardwareFeatures) GetVtpmEnabled() bool {
+	if x != nil {
+		return x.VtpmEnabled
+	}
+	return false
+}
+
 var File_yandex_cloud_compute_v1_hardware_generation_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_compute_v1_hardware_generation_proto_rawDesc = "" +
@@ -251,8 +277,10 @@ const file_yandex_cloud_compute_v1_hardware_generation_proto_rawDesc = "" +
 	"\n" +
 	"\bfeatures\"a\n" +
 	"\x16LegacyHardwareFeatures\x12G\n" +
-	"\fpci_topology\x18\x01 \x01(\x0e2$.yandex.cloud.compute.v1.PCITopologyR\vpciTopology\"\x1d\n" +
-	"\x1bGeneration2HardwareFeatures*U\n" +
+	"\fpci_topology\x18\x01 \x01(\x0e2$.yandex.cloud.compute.v1.PCITopologyR\vpciTopology\"w\n" +
+	"\x1bGeneration2HardwareFeatures\x125\n" +
+	"\x17secure_boot_template_id\x18\x01 \x01(\tR\x14secureBootTemplateId\x12!\n" +
+	"\fvtpm_enabled\x18\x02 \x01(\bR\vvtpmEnabled*U\n" +
 	"\vPCITopology\x12\x1c\n" +
 	"\x18PCI_TOPOLOGY_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fPCI_TOPOLOGY_V1\x10\x01\x12\x13\n" +

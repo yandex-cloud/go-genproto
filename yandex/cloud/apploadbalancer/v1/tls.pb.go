@@ -115,7 +115,14 @@ type ClientCertificatesVerification struct {
 	// Types that are valid to be assigned to TrustedCa:
 	//
 	//	*ClientCertificatesVerification_Bytes
-	TrustedCa     isClientCertificatesVerification_TrustedCa `protobuf_oneof:"trusted_ca"`
+	TrustedCa isClientCertificatesVerification_TrustedCa `protobuf_oneof:"trusted_ca"`
+	// If true, ALB will not check certification chain.
+	// Backends could use configured client_certificate_forward in Route to proxy certificate and validate it there.
+	// Setting accept_untrusted to true forces ALB to allow expired client certificates too.
+	AcceptUntrusted bool `protobuf:"varint,3,opt,name=accept_untrusted,json=acceptUntrusted,proto3" json:"accept_untrusted,omitempty"`
+	// If true, ALB will allow expired client certificates even if accept_untrusted is set to false.
+	// Setting accept_untrusted to true forces ALB to allow expired client certificates too.
+	AllowExpired  bool `protobuf:"varint,4,opt,name=allow_expired,json=allowExpired,proto3" json:"allow_expired,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -173,6 +180,20 @@ func (x *ClientCertificatesVerification) GetBytes() string {
 	return ""
 }
 
+func (x *ClientCertificatesVerification) GetAcceptUntrusted() bool {
+	if x != nil {
+		return x.AcceptUntrusted
+	}
+	return false
+}
+
+func (x *ClientCertificatesVerification) GetAllowExpired() bool {
+	if x != nil {
+		return x.AllowExpired
+	}
+	return false
+}
+
 type isClientCertificatesVerification_TrustedCa interface {
 	isClientCertificatesVerification_TrustedCa()
 }
@@ -193,10 +214,12 @@ const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
 	"\rtrusted_ca_id\x18\x01 \x01(\tH\x00R\vtrustedCaId\x12*\n" +
 	"\x10trusted_ca_bytes\x18\x02 \x01(\tH\x00R\x0etrustedCaBytesB\f\n" +
 	"\n" +
-	"trusted_ca\"\x84\x01\n" +
+	"trusted_ca\"\xd4\x01\n" +
 	"\x1eClientCertificatesVerification\x12<\n" +
 	"\x1arequire_client_certificate\x18\x01 \x01(\bR\x18requireClientCertificate\x12\x16\n" +
-	"\x05bytes\x18\x02 \x01(\tH\x00R\x05bytesB\f\n" +
+	"\x05bytes\x18\x02 \x01(\tH\x00R\x05bytes\x12)\n" +
+	"\x10accept_untrusted\x18\x03 \x01(\bR\x0facceptUntrusted\x12#\n" +
+	"\rallow_expired\x18\x04 \x01(\bR\fallowExpiredB\f\n" +
 	"\n" +
 	"trusted_caBz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"

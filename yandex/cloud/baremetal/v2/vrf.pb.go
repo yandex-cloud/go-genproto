@@ -321,6 +321,51 @@ func (x *StaticRoute) GetRedistributionType() StaticRoute_RedistributionType {
 	return StaticRoute_REDISTRIBUTION_TYPE_UNSPECIFIED
 }
 
+type VrfPeeringParams struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the VRF peering created for.
+	VrfId         string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VrfPeeringParams) Reset() {
+	*x = VrfPeeringParams{}
+	mi := &file_yandex_cloud_baremetal_v2_vrf_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VrfPeeringParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VrfPeeringParams) ProtoMessage() {}
+
+func (x *VrfPeeringParams) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_vrf_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VrfPeeringParams.ProtoReflect.Descriptor instead.
+func (*VrfPeeringParams) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_vrf_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *VrfPeeringParams) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_vrf_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_vrf_proto_rawDesc = "" +
@@ -355,7 +400,9 @@ const file_yandex_cloud_baremetal_v2_vrf_proto_rawDesc = "" +
 	"\x12RedistributionType\x12#\n" +
 	"\x1fREDISTRIBUTION_TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bDISABLED\x10\x01\x12\v\n" +
-	"\aENABLED\x10\x02Bl\n" +
+	"\aENABLED\x10\x02\"1\n" +
+	"\x10VrfPeeringParams\x12\x1d\n" +
+	"\x06vrf_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\x05vrfIdBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -371,21 +418,22 @@ func file_yandex_cloud_baremetal_v2_vrf_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_baremetal_v2_vrf_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_baremetal_v2_vrf_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_baremetal_v2_vrf_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_baremetal_v2_vrf_proto_goTypes = []any{
 	(Vrf_State)(0),                      // 0: yandex.cloud.baremetal.v2.Vrf.State
 	(StaticRoute_RedistributionType)(0), // 1: yandex.cloud.baremetal.v2.StaticRoute.RedistributionType
 	(*Vrf)(nil),                         // 2: yandex.cloud.baremetal.v2.Vrf
 	(*StaticRoute)(nil),                 // 3: yandex.cloud.baremetal.v2.StaticRoute
-	nil,                                 // 4: yandex.cloud.baremetal.v2.Vrf.AnnotationsEntry
-	(*timestamppb.Timestamp)(nil),       // 5: google.protobuf.Timestamp
+	(*VrfPeeringParams)(nil),            // 4: yandex.cloud.baremetal.v2.VrfPeeringParams
+	nil,                                 // 5: yandex.cloud.baremetal.v2.Vrf.AnnotationsEntry
+	(*timestamppb.Timestamp)(nil),       // 6: google.protobuf.Timestamp
 }
 var file_yandex_cloud_baremetal_v2_vrf_proto_depIdxs = []int32{
 	0, // 0: yandex.cloud.baremetal.v2.Vrf.state:type_name -> yandex.cloud.baremetal.v2.Vrf.State
 	3, // 1: yandex.cloud.baremetal.v2.Vrf.static_routes:type_name -> yandex.cloud.baremetal.v2.StaticRoute
-	5, // 2: yandex.cloud.baremetal.v2.Vrf.create_time:type_name -> google.protobuf.Timestamp
-	5, // 3: yandex.cloud.baremetal.v2.Vrf.update_time:type_name -> google.protobuf.Timestamp
-	4, // 4: yandex.cloud.baremetal.v2.Vrf.annotations:type_name -> yandex.cloud.baremetal.v2.Vrf.AnnotationsEntry
+	6, // 2: yandex.cloud.baremetal.v2.Vrf.create_time:type_name -> google.protobuf.Timestamp
+	6, // 3: yandex.cloud.baremetal.v2.Vrf.update_time:type_name -> google.protobuf.Timestamp
+	5, // 4: yandex.cloud.baremetal.v2.Vrf.annotations:type_name -> yandex.cloud.baremetal.v2.Vrf.AnnotationsEntry
 	1, // 5: yandex.cloud.baremetal.v2.StaticRoute.redistribution_type:type_name -> yandex.cloud.baremetal.v2.StaticRoute.RedistributionType
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
@@ -405,7 +453,7 @@ func file_yandex_cloud_baremetal_v2_vrf_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_vrf_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_vrf_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

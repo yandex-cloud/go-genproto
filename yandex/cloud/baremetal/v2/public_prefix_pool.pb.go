@@ -155,12 +155,12 @@ var File_yandex_cloud_baremetal_v2_public_prefix_pool_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v2_public_prefix_pool_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v2/public_prefix_pool.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xf3\x05\n" +
-	"\x10PublicPrefixPool\x12U\n" +
-	"\x15public_prefix_pool_id\x18\x01 \x01(\tB\"\xe0A\b\xe0A\x03\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=20R\x12publicPrefixPoolId\x12!\n" +
+	"2yandex/cloud/baremetal/v2/public_prefix_pool.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc9\x05\n" +
+	"\x10PublicPrefixPool\x129\n" +
+	"\x15public_prefix_pool_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\x12publicPrefixPoolId\x12!\n" +
 	"\bcloud_id\x18\x02 \x01(\tB\x06\xe0A\x02\xe0A\x05R\acloudId\x12#\n" +
-	"\tfolder_id\x18\x03 \x01(\tB\x06\xe0A\x02\xe0A\x05R\bfolderId\x12=\n" +
-	"\x04name\x18\x04 \x01(\tB)\xe0A\x02\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12/\n" +
+	"\tfolder_id\x18\x03 \x01(\tB\x06\xe0A\x02\xe0A\x05R\bfolderId\x12\x1f\n" +
+	"\x04name\x18\x04 \x01(\tB\v\xe0A\x02\x8a\xc81\x04<=63R\x04name\x12/\n" +
 	"\vdescription\x18\x05 \x01(\tB\r\xe0A\x01\x8a\xc81\x06<=1024R\vdescription\x12\x17\n" +
 	"\x04cidr\x18\x06 \x01(\tB\x03\xe0A\x03R\x04cidr\x12R\n" +
 	"\x14min_available_prefix\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\x03\xe0A\x03R\x12minAvailablePrefix\x12@\n" +
@@ -172,7 +172,7 @@ const file_yandex_cloud_baremetal_v2_public_prefix_pool_proto_rawDesc = "" +
 	" \x03(\v2<.yandex.cloud.baremetal.v2.PublicPrefixPool.AnnotationsEntryB>\xe0A\x01\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\vannotations\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01Bl\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01R\x05stateR\apurposeBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

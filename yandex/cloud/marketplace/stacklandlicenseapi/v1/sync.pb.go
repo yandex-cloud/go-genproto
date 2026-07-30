@@ -8,6 +8,7 @@ package stacklandlicenseapi
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -300,6 +301,7 @@ type LicenseLimit struct {
 	// Metric type (e.g., "stackland.vcpu.cores")
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	// Limit value
+	// Zero is a valid limit value.
 	Limit         int64 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -645,7 +647,7 @@ var File_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto protoreflect
 
 const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\x05\n" +
+	":yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\x05\n" +
 	"\n" +
 	"UsageEntry\x126\n" +
 	"\x0finstallation_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0einstallationId\x12_\n" +
@@ -664,10 +666,10 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\vrecord_hash\x18\v \x01(\tB\n" +
 	"\xe8\xc71\x01\x8a\xc81\x0264R\n" +
 	"recordHash\x12,\n" +
-	"\tsignature\x18\f \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1000R\tsignature\"8\n" +
-	"\fLicenseLimit\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x03R\x05limit\"\xcb\x03\n" +
+	"\tsignature\x18\f \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1000R\tsignature\"B\n" +
+	"\fLicenseLimit\x12\x17\n" +
+	"\x04type\x18\x01 \x01(\tB\x03\xe0A\x02R\x04type\x12\x19\n" +
+	"\x05limit\x18\x02 \x01(\x03B\x03\xe0A\x01R\x05limit\"\xcb\x03\n" +
 	"\aLicense\x12\x1d\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tR\tlicenseId\x12_\n" +

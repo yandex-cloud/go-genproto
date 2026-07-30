@@ -23,3 +23,11 @@ func (m *HardwareGeneration) SetGeneration2Features(v *Generation2HardwareFeatur
 func (m *LegacyHardwareFeatures) SetPciTopology(v PCITopology) {
 	m.PciTopology = v
 }
+
+func (m *Generation2HardwareFeatures) SetSecureBootTemplateId(v string) {
+	m.SecureBootTemplateId = v
+}
+
+func (m *Generation2HardwareFeatures) SetVtpmEnabled(v bool) {
+	m.VtpmEnabled = v
+}

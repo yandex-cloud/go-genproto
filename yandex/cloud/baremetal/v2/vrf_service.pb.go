@@ -742,6 +742,96 @@ func (x *ListVrfOperationsResponse) GetNextPageToken() string {
 	return ""
 }
 
+type MaterializeVrfPeeringMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the VRF resource the peering is being created for.
+	VrfId         string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MaterializeVrfPeeringMetadata) Reset() {
+	*x = MaterializeVrfPeeringMetadata{}
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MaterializeVrfPeeringMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MaterializeVrfPeeringMetadata) ProtoMessage() {}
+
+func (x *MaterializeVrfPeeringMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MaterializeVrfPeeringMetadata.ProtoReflect.Descriptor instead.
+func (*MaterializeVrfPeeringMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *MaterializeVrfPeeringMetadata) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
+type DematerializeVrfPeeringMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the VRF resource the peering is being deleted for.
+	VrfId         string `protobuf:"bytes,1,opt,name=vrf_id,json=vrfId,proto3" json:"vrf_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DematerializeVrfPeeringMetadata) Reset() {
+	*x = DematerializeVrfPeeringMetadata{}
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DematerializeVrfPeeringMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DematerializeVrfPeeringMetadata) ProtoMessage() {}
+
+func (x *DematerializeVrfPeeringMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DematerializeVrfPeeringMetadata.ProtoReflect.Descriptor instead.
+func (*DematerializeVrfPeeringMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *DematerializeVrfPeeringMetadata) GetVrfId() string {
+	if x != nil {
+		return x.VrfId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_vrf_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
@@ -791,7 +881,11 @@ const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xb2\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"6\n" +
+	"\x1dMaterializeVrfPeeringMetadata\x12\x15\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"8\n" +
+	"\x1fDematerializeVrfPeeringMetadata\x12\x15\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId2\xb2\n" +
 	"\n" +
 	"\n" +
 	"VrfService\x12\xb9\x01\n" +
@@ -818,40 +912,42 @@ func file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_yandex_cloud_baremetal_v2_vrf_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_baremetal_v2_vrf_service_proto_goTypes = []any{
-	(*GetVrfRequest)(nil),             // 0: yandex.cloud.baremetal.v2.GetVrfRequest
-	(*ListVrfsRequest)(nil),           // 1: yandex.cloud.baremetal.v2.ListVrfsRequest
-	(*ListVrfsResponse)(nil),          // 2: yandex.cloud.baremetal.v2.ListVrfsResponse
-	(*CreateVrfRequest)(nil),          // 3: yandex.cloud.baremetal.v2.CreateVrfRequest
-	(*CreateVrfMetadata)(nil),         // 4: yandex.cloud.baremetal.v2.CreateVrfMetadata
-	(*UpdateVrfRequest)(nil),          // 5: yandex.cloud.baremetal.v2.UpdateVrfRequest
-	(*UpdateVrfMetadata)(nil),         // 6: yandex.cloud.baremetal.v2.UpdateVrfMetadata
-	(*DeleteVrfRequest)(nil),          // 7: yandex.cloud.baremetal.v2.DeleteVrfRequest
-	(*DeleteVrfMetadata)(nil),         // 8: yandex.cloud.baremetal.v2.DeleteVrfMetadata
-	(*ListVrfOperationsRequest)(nil),  // 9: yandex.cloud.baremetal.v2.ListVrfOperationsRequest
-	(*ListVrfOperationsResponse)(nil), // 10: yandex.cloud.baremetal.v2.ListVrfOperationsResponse
-	(*Vrf)(nil),                       // 11: yandex.cloud.baremetal.v2.Vrf
-	(*fieldmaskpb.FieldMask)(nil),     // 12: google.protobuf.FieldMask
-	(*operation.Operation)(nil),       // 13: yandex.cloud.operation.Operation
+	(*GetVrfRequest)(nil),                   // 0: yandex.cloud.baremetal.v2.GetVrfRequest
+	(*ListVrfsRequest)(nil),                 // 1: yandex.cloud.baremetal.v2.ListVrfsRequest
+	(*ListVrfsResponse)(nil),                // 2: yandex.cloud.baremetal.v2.ListVrfsResponse
+	(*CreateVrfRequest)(nil),                // 3: yandex.cloud.baremetal.v2.CreateVrfRequest
+	(*CreateVrfMetadata)(nil),               // 4: yandex.cloud.baremetal.v2.CreateVrfMetadata
+	(*UpdateVrfRequest)(nil),                // 5: yandex.cloud.baremetal.v2.UpdateVrfRequest
+	(*UpdateVrfMetadata)(nil),               // 6: yandex.cloud.baremetal.v2.UpdateVrfMetadata
+	(*DeleteVrfRequest)(nil),                // 7: yandex.cloud.baremetal.v2.DeleteVrfRequest
+	(*DeleteVrfMetadata)(nil),               // 8: yandex.cloud.baremetal.v2.DeleteVrfMetadata
+	(*ListVrfOperationsRequest)(nil),        // 9: yandex.cloud.baremetal.v2.ListVrfOperationsRequest
+	(*ListVrfOperationsResponse)(nil),       // 10: yandex.cloud.baremetal.v2.ListVrfOperationsResponse
+	(*MaterializeVrfPeeringMetadata)(nil),   // 11: yandex.cloud.baremetal.v2.MaterializeVrfPeeringMetadata
+	(*DematerializeVrfPeeringMetadata)(nil), // 12: yandex.cloud.baremetal.v2.DematerializeVrfPeeringMetadata
+	(*Vrf)(nil),                             // 13: yandex.cloud.baremetal.v2.Vrf
+	(*fieldmaskpb.FieldMask)(nil),           // 14: google.protobuf.FieldMask
+	(*operation.Operation)(nil),             // 15: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v2_vrf_service_proto_depIdxs = []int32{
-	11, // 0: yandex.cloud.baremetal.v2.ListVrfsResponse.vrfs:type_name -> yandex.cloud.baremetal.v2.Vrf
-	11, // 1: yandex.cloud.baremetal.v2.CreateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
-	11, // 2: yandex.cloud.baremetal.v2.UpdateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
-	12, // 3: yandex.cloud.baremetal.v2.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
-	13, // 4: yandex.cloud.baremetal.v2.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	13, // 0: yandex.cloud.baremetal.v2.ListVrfsResponse.vrfs:type_name -> yandex.cloud.baremetal.v2.Vrf
+	13, // 1: yandex.cloud.baremetal.v2.CreateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
+	13, // 2: yandex.cloud.baremetal.v2.UpdateVrfRequest.vrf:type_name -> yandex.cloud.baremetal.v2.Vrf
+	14, // 3: yandex.cloud.baremetal.v2.UpdateVrfRequest.update_mask:type_name -> google.protobuf.FieldMask
+	15, // 4: yandex.cloud.baremetal.v2.ListVrfOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
 	0,  // 5: yandex.cloud.baremetal.v2.VrfService.GetVrf:input_type -> yandex.cloud.baremetal.v2.GetVrfRequest
 	1,  // 6: yandex.cloud.baremetal.v2.VrfService.ListVrfs:input_type -> yandex.cloud.baremetal.v2.ListVrfsRequest
 	3,  // 7: yandex.cloud.baremetal.v2.VrfService.CreateVrf:input_type -> yandex.cloud.baremetal.v2.CreateVrfRequest
 	5,  // 8: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:input_type -> yandex.cloud.baremetal.v2.UpdateVrfRequest
 	7,  // 9: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:input_type -> yandex.cloud.baremetal.v2.DeleteVrfRequest
 	9,  // 10: yandex.cloud.baremetal.v2.VrfService.ListVrfOperations:input_type -> yandex.cloud.baremetal.v2.ListVrfOperationsRequest
-	11, // 11: yandex.cloud.baremetal.v2.VrfService.GetVrf:output_type -> yandex.cloud.baremetal.v2.Vrf
+	13, // 11: yandex.cloud.baremetal.v2.VrfService.GetVrf:output_type -> yandex.cloud.baremetal.v2.Vrf
 	2,  // 12: yandex.cloud.baremetal.v2.VrfService.ListVrfs:output_type -> yandex.cloud.baremetal.v2.ListVrfsResponse
-	13, // 13: yandex.cloud.baremetal.v2.VrfService.CreateVrf:output_type -> yandex.cloud.operation.Operation
-	13, // 14: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:output_type -> yandex.cloud.operation.Operation
-	13, // 15: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:output_type -> yandex.cloud.operation.Operation
+	15, // 13: yandex.cloud.baremetal.v2.VrfService.CreateVrf:output_type -> yandex.cloud.operation.Operation
+	15, // 14: yandex.cloud.baremetal.v2.VrfService.UpdateVrf:output_type -> yandex.cloud.operation.Operation
+	15, // 15: yandex.cloud.baremetal.v2.VrfService.DeleteVrf:output_type -> yandex.cloud.operation.Operation
 	10, // 16: yandex.cloud.baremetal.v2.VrfService.ListVrfOperations:output_type -> yandex.cloud.baremetal.v2.ListVrfOperationsResponse
 	11, // [11:17] is the sub-list for method output_type
 	5,  // [5:11] is the sub-list for method input_type
@@ -872,7 +968,7 @@ func file_yandex_cloud_baremetal_v2_vrf_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
