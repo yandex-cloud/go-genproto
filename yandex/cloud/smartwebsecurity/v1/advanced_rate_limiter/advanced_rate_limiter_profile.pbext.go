@@ -113,6 +113,10 @@ func (m *AdvancedRateLimiterRule_DynamicQuota) SetCharacteristics(v []*AdvancedR
 	m.Characteristics = v
 }
 
+func (m *AdvancedRateLimiterRule_DynamicQuota) SetBanPeriod(v int64) {
+	m.BanPeriod = v
+}
+
 type AdvancedRateLimiterRule_DynamicQuota_Characteristic_CharacteristicSpecifier = isAdvancedRateLimiterRule_DynamicQuota_Characteristic_CharacteristicSpecifier
 
 func (m *AdvancedRateLimiterRule_DynamicQuota_Characteristic) SetCharacteristicSpecifier(v AdvancedRateLimiterRule_DynamicQuota_Characteristic_CharacteristicSpecifier) {

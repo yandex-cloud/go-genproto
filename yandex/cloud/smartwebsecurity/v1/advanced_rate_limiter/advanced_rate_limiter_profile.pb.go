@@ -523,8 +523,10 @@ type AdvancedRateLimiterRule_DynamicQuota struct {
 	Period int64 `protobuf:"varint,4,opt,name=period,proto3" json:"period,omitempty"`
 	// List of characteristics.
 	Characteristics []*AdvancedRateLimiterRule_DynamicQuota_Characteristic `protobuf:"bytes,5,rep,name=characteristics,proto3" json:"characteristics,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Duration of the temporary ban, in seconds.
+	BanPeriod     int64 `protobuf:"varint,6,opt,name=ban_period,json=banPeriod,proto3" json:"ban_period,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AdvancedRateLimiterRule_DynamicQuota) Reset() {
@@ -590,6 +592,13 @@ func (x *AdvancedRateLimiterRule_DynamicQuota) GetCharacteristics() []*AdvancedR
 		return x.Characteristics
 	}
 	return nil
+}
+
+func (x *AdvancedRateLimiterRule_DynamicQuota) GetBanPeriod() int64 {
+	if x != nil {
+		return x.BanPeriod
+	}
+	return 0
 }
 
 type AdvancedRateLimiterRule_DynamicQuota_Characteristic struct {
@@ -807,7 +816,7 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"\bcloud_id\x18\t \x01(\tR\acloudId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xff\x12\n" +
 	"\x17AdvancedRateLimiterRule\x12\x80\x01\n" +
 	"\fstatic_quota\x18\x05 \x01(\v2[.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuotaH\x00R\vstaticQuota\x12\x83\x01\n" +
 	"\rdynamic_quota\x18\x06 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuotaH\x00R\fdynamicQuota\x12>\n" +
@@ -819,13 +828,15 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\x12)\n" +
 	"\x05limit\x18\x03 \x01(\x03B\x13\xfa\xc71\x0f1-9999999999999R\x05limit\x12T\n" +
-	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x1a\xe8\v\n" +
+	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x1a\x94\f\n" +
 	"\fDynamicQuota\x12t\n" +
 	"\x06action\x18\x01 \x01(\x0e2V.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\x12)\n" +
 	"\x05limit\x18\x03 \x01(\x03B\x13\xfa\xc71\x0f1-9999999999999R\x05limit\x12T\n" +
 	"\x06period\x18\x04 \x01(\x03B<\xfa\xc7181,5,10,30,60,120,180,240,300,600,900,1200,1800,2700,3600R\x06period\x12\x9e\x01\n" +
-	"\x0fcharacteristics\x18\x05 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.CharacteristicB\a\x82\xc81\x03<=3R\x0fcharacteristics\x1a\xf4\a\n" +
+	"\x0fcharacteristics\x18\x05 \x03(\v2k.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.CharacteristicB\a\x82\xc81\x03<=3R\x0fcharacteristics\x12*\n" +
+	"\n" +
+	"ban_period\x18\x06 \x01(\x03B\v\xfa\xc71\a0-86400R\tbanPeriod\x1a\xf4\a\n" +
 	"\x0eCharacteristic\x12\xb8\x01\n" +
 	"\x15simple_characteristic\x18\x01 \x01(\v2\x80\x01.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.SimpleCharacteristicH\x00R\x14simpleCharacteristic\x12\xae\x01\n" +
 	"\x12key_characteristic\x18\x02 \x01(\v2}.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuota.Characteristic.KeyCharacteristicH\x00R\x11keyCharacteristic\x12)\n" +

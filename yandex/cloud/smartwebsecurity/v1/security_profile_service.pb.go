@@ -644,13 +644,13 @@ var File_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto protore
 
 const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDesc = "" +
 	"\n" +
-	"?yandex/cloud/smartwebsecurity/v1/security_profile_service.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"Q\n" +
+	"?yandex/cloud/smartwebsecurity/v1/security_profile_service.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x1a\x1dyandex/cloud/validation.proto\"Q\n" +
 	"\x19GetSecurityProfileRequest\x124\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x11securityProfileId\"@\n" +
 	"\x1bListSecurityProfilesRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\"~\n" +
 	"\x1cListSecurityProfilesResponse\x12^\n" +
-	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xa5\a\n" +
+	"\x11security_profiles\x18\x01 \x03(\v21.yandex.cloud.smartwebsecurity.v1.SecurityProfileR\x10securityProfiles\"\xaa\a\n" +
 	"\x1cCreateSecurityProfileRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12b\n" +
 	"\x06labels\x18\x02 \x03(\v2J.yandex.cloud.smartwebsecurity.v1.CreateSecurityProfileRequest.LabelsEntryR\x06labels\x12>\n" +
@@ -660,9 +660,9 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_service_proto_rawDe
 	"\x0esecurity_rules\x18\x06 \x03(\v2..yandex.cloud.smartwebsecurity.v1.SecurityRuleR\rsecurityRules\x12\x1d\n" +
 	"\n" +
 	"captcha_id\x18\a \x01(\tR\tcaptchaId\x12F\n" +
-	" advanced_rate_limiter_profile_id\x18\b \x01(\tR\x1cadvancedRateLimiterProfileId\x128\n" +
+	" advanced_rate_limiter_profile_id\x18\b \x01(\tR\x1cadvancedRateLimiterProfileId\x12=\n" +
 	"\x18disallow_data_processing\x18\n" +
-	" \x01(\bR\x16disallowDataProcessing\x12v\n" +
+	" \x01(\bB\x03\xe0A\x02R\x16disallowDataProcessing\x12v\n" +
 	"\x14analyze_request_body\x18\t \x01(\v2D.yandex.cloud.smartwebsecurity.v1.SecurityProfile.AnalyzeRequestBodyR\x12analyzeRequestBody\x12]\n" +
 	"\vlog_options\x18\v \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityProfile.LogOptionsR\n" +
 	"logOptions\x12$\n" +

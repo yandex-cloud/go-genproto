@@ -248,10 +248,14 @@ type SecurityProfile_LogOptions_Output int32
 
 const (
 	SecurityProfile_LogOptions_OUTPUT_UNSPECIFIED SecurityProfile_LogOptions_Output = 0
-	// Write logs to Cloud Logging.
+	// Deprecated. Write logs to Cloud Logging. Use MONIUM instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/smartwebsecurity/v1/security_profile.proto.
 	SecurityProfile_LogOptions_CLOUD_LOGGING SecurityProfile_LogOptions_Output = 1
 	// Write logs to Audit Trails.
 	SecurityProfile_LogOptions_AUDIT_TRAILS SecurityProfile_LogOptions_Output = 2
+	// Write logs to Monium.
+	SecurityProfile_LogOptions_MONIUM SecurityProfile_LogOptions_Output = 3
 )
 
 // Enum value maps for SecurityProfile_LogOptions_Output.
@@ -260,11 +264,13 @@ var (
 		0: "OUTPUT_UNSPECIFIED",
 		1: "CLOUD_LOGGING",
 		2: "AUDIT_TRAILS",
+		3: "MONIUM",
 	}
 	SecurityProfile_LogOptions_Output_value = map[string]int32{
 		"OUTPUT_UNSPECIFIED": 0,
 		"CLOUD_LOGGING":      1,
 		"AUDIT_TRAILS":       2,
+		"MONIUM":             3,
 	}
 )
 
@@ -304,6 +310,8 @@ const (
 	SecurityRule_RuleCondition_ALLOW SecurityRule_RuleCondition_Action = 1
 	// Deny request.
 	SecurityRule_RuleCondition_DENY SecurityRule_RuleCondition_Action = 2
+	// Redirect request to CAPTCHA.
+	SecurityRule_RuleCondition_CAPTCHA SecurityRule_RuleCondition_Action = 3
 )
 
 // Enum value maps for SecurityRule_RuleCondition_Action.
@@ -312,11 +320,13 @@ var (
 		0: "ACTION_UNSPECIFIED",
 		1: "ALLOW",
 		2: "DENY",
+		3: "CAPTCHA",
 	}
 	SecurityRule_RuleCondition_Action_value = map[string]int32{
 		"ACTION_UNSPECIFIED": 0,
 		"ALLOW":              1,
 		"DENY":               2,
+		"CAPTCHA":            3,
 	}
 )
 
@@ -1001,7 +1011,7 @@ type SecurityProfile_LogOptions struct {
 	EnabledActions []SecurityProfile_LogOptions_Action `protobuf:"varint,4,rep,packed,name=enabled_actions,json=enabledActions,proto3,enum=yandex.cloud.smartwebsecurity.v1.SecurityProfile_LogOptions_Action" json:"enabled_actions,omitempty"`
 	// Percentage of ALLOW verdicts to discard from logging (0-100).
 	DiscardAllowPercentage int64 `protobuf:"varint,5,opt,name=discard_allow_percentage,json=discardAllowPercentage,proto3" json:"discard_allow_percentage,omitempty"`
-	// List of log destinations: Cloud Logging and/or Audit Trails.
+	// List of log destinations: Cloud Logging, Audit Trails, and/or Monium.
 	Outputs       []SecurityProfile_LogOptions_Output `protobuf:"varint,6,rep,packed,name=outputs,proto3,enum=yandex.cloud.smartwebsecurity.v1.SecurityProfile_LogOptions_Output" json:"outputs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2794,7 +2804,7 @@ var File_yandex_cloud_smartwebsecurity_v1_security_profile_proto protoreflect.Fi
 
 const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x9a\x11\n" +
+	"7yandex/cloud/smartwebsecurity/v1/security_profile.proto\x12 yandex.cloud.smartwebsecurity.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xaa\x11\n" +
 	"\x0fSecurityProfile\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x12\x92\x01\n" +
@@ -2827,7 +2837,7 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06IGNORE\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02\x1a\xaf\x05\n" +
+	"\x04DENY\x10\x02\x1a\xbf\x05\n" +
 	"\n" +
 	"LogOptions\x12 \n" +
 	"\flog_group_id\x18\x01 \x01(\tR\n" +
@@ -2847,18 +2857,20 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
 	"\x04DENY\x10\x02\x12\v\n" +
-	"\aCAPTCHA\x10\x03\"E\n" +
+	"\aCAPTCHA\x10\x03\"U\n" +
 	"\x06Output\x12\x16\n" +
-	"\x12OUTPUT_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rCLOUD_LOGGING\x10\x01\x12\x10\n" +
-	"\fAUDIT_TRAILS\x10\x02\x1a9\n" +
+	"\x12OUTPUT_UNSPECIFIED\x10\x00\x12\x15\n" +
+	"\rCLOUD_LOGGING\x10\x01\x1a\x02\b\x01\x12\x10\n" +
+	"\fAUDIT_TRAILS\x10\x02\x12\n" +
+	"\n" +
+	"\x06MONIUM\x10\x03\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"D\n" +
 	"\rDefaultAction\x12\x1e\n" +
 	"\x1aDEFAULT_ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02J\x04\b\x11\x10\x13\"\x81\n" +
+	"\x04DENY\x10\x02J\x04\b\x11\x10\x13\"\x8e\n" +
 	"\n" +
 	"\fSecurityRule\x12e\n" +
 	"\x0erule_condition\x18\x04 \x01(\v2<.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleConditionH\x00R\rruleCondition\x12k\n" +
@@ -2868,14 +2880,15 @@ const file_yandex_cloud_smartwebsecurity_v1_security_profile_proto_rawDesc = "" 
 	"\bpriority\x18\x02 \x01(\x03B\f\xfa\xc71\b1-999999R\bpriority\x12\x17\n" +
 	"\adry_run\x18\x03 \x01(\bR\x06dryRun\x12+\n" +
 	"\vdescription\x18\a \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12$\n" +
-	"\x0ecustom_page_id\x18\t \x01(\tR\fcustomPageId\x1a\xf4\x01\n" +
+	"\x0ecustom_page_id\x18\t \x01(\tR\fcustomPageId\x1a\x81\x02\n" +
 	"\rRuleCondition\x12a\n" +
 	"\x06action\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.RuleCondition.ActionB\x04\xe8\xc71\x01R\x06action\x12I\n" +
-	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"5\n" +
+	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"B\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05ALLOW\x10\x01\x12\b\n" +
-	"\x04DENY\x10\x02\x1a\xec\x01\n" +
+	"\x04DENY\x10\x02\x12\v\n" +
+	"\aCAPTCHA\x10\x03\x1a\xec\x01\n" +
 	"\x0fSmartProtection\x12]\n" +
 	"\x04mode\x18\x01 \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.SecurityRule.SmartProtection.ModeB\x04\xe8\xc71\x01R\x04mode\x12I\n" +
 	"\tcondition\x18\x02 \x01(\v2+.yandex.cloud.smartwebsecurity.v1.ConditionR\tcondition\"/\n" +
