@@ -3607,7 +3607,9 @@ type StepdownHostsRequest struct {
 	// Required. ID of the MongoDB cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Required. Name of the hosts to resetup.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	// Optional. ID of the availability zone stepdown hosts from.
+	ZoneId        string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3656,12 +3658,21 @@ func (x *StepdownHostsRequest) GetHostNames() []string {
 	return nil
 }
 
+func (x *StepdownHostsRequest) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
 type StepdownHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. ID of the MongoDB cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Required. The name of hosts to resetup.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	// The ID of the availability zone stepdown hosts from.
+	ZoneId        string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3708,6 +3719,13 @@ func (x *StepdownHostsMetadata) GetHostNames() []string {
 		return x.HostNames
 	}
 	return nil
+}
+
+func (x *StepdownHostsMetadata) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
 }
 
 type HostSpec struct {
@@ -8044,17 +8062,19 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"s\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\"\x96\x01\n" +
 	"\x14StepdownHostsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12.\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tB\x0f\x82\xc81\x02>0\x8a\xc81\x05<=253R\thostNames\"U\n" +
+	"host_names\x18\x02 \x03(\tB\x0f\x82\xc81\x02>0\x8a\xc81\x05<=253R\thostNames\x12!\n" +
+	"\azone_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\"n\n" +
 	"\x15StepdownHostsMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\xec\x04\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\x12\x17\n" +
+	"\azone_id\x18\x03 \x01(\tR\x06zoneId\"\xec\x04\n" +
 	"\bHostSpec\x12!\n" +
 	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
 	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +

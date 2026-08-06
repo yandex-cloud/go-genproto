@@ -75,6 +75,10 @@ func (m *UpdateDatabaseRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
 	m.DeletionProtection = v
 }
 
+func (m *UpdateDatabaseRequest) SetOwner(v string) {
+	m.Owner = v
+}
+
 func (m *UpdateDatabaseMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

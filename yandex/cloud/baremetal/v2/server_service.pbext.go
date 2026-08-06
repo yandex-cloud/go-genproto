@@ -95,6 +95,10 @@ func (m *DeleteServerRequest) SetServerId(v string) {
 	m.ServerId = v
 }
 
+func (m *SkipQuarantineServerRequest) SetServerId(v string) {
+	m.ServerId = v
+}
+
 func (m *PowerOffServerRequest) SetCloudId(v string) {
 	m.CloudId = v
 }

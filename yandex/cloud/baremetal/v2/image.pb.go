@@ -29,23 +29,35 @@ type Image_Status int32
 const (
 	// Unspecified image status.
 	Image_STATUS_UNSPECIFIED Image_Status = 0
+	// Image is being imported.
+	Image_IMPORTING Image_Status = 1
+	// Image has been imported and is awaiting moderation.
+	Image_IMPORTED Image_Status = 2
 	// Image is published and available to users.
 	Image_PUBLISHED Image_Status = 3
 	// Image is disabled for new installations but preserved for existing servers.
 	Image_DISABLED Image_Status = 4
+	// Image encountered an error during import.
+	Image_ERROR Image_Status = 5
 )
 
 // Enum value maps for Image_Status.
 var (
 	Image_Status_name = map[int32]string{
 		0: "STATUS_UNSPECIFIED",
+		1: "IMPORTING",
+		2: "IMPORTED",
 		3: "PUBLISHED",
 		4: "DISABLED",
+		5: "ERROR",
 	}
 	Image_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
+		"IMPORTING":          1,
+		"IMPORTED":           2,
 		"PUBLISHED":          3,
 		"DISABLED":           4,
+		"ERROR":              5,
 	}
 )
 
@@ -180,7 +192,7 @@ var File_yandex_cloud_baremetal_v2_image_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_image_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/baremetal/v2/image.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf5\x02\n" +
+	"%yandex/cloud/baremetal/v2/image.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9d\x03\n" +
 	"\x05Image\x12!\n" +
 	"\bimage_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\aimageId\x12 \n" +
 	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x12\x17\n" +
@@ -189,11 +201,14 @@ const file_yandex_cloud_baremetal_v2_image_proto_rawDesc = "" +
 	"\x05state\x18\x06 \x01(\x0e2'.yandex.cloud.baremetal.v2.Image.StatusB\x03\xe0A\x03R\x05state\x12B\n" +
 	"\fpublish_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\vpublishTime\x12\x1e\n" +
 	"\bcloud_id\x18\n" +
-	" \x01(\tB\x03\xe0A\x02R\acloudId\"=\n" +
+	" \x01(\tB\x03\xe0A\x02R\acloudId\"e\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tIMPORTING\x10\x01\x12\f\n" +
+	"\bIMPORTED\x10\x02\x12\r\n" +
 	"\tPUBLISHED\x10\x03\x12\f\n" +
-	"\bDISABLED\x10\x04J\x04\b\x04\x10\x05J\x04\b\b\x10\n" +
+	"\bDISABLED\x10\x04\x12\t\n" +
+	"\x05ERROR\x10\x05J\x04\b\x04\x10\x05J\x04\b\b\x10\n" +
 	"Bl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 

@@ -7,6 +7,7 @@
 package k8s
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -99,12 +100,12 @@ var File_yandex_cloud_k8s_v1_resource_preset_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_k8s_v1_resource_preset_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/k8s/v1/resource_preset.proto\x12\x13yandex.cloud.k8s.v1\"s\n" +
-	"\x0eResourcePreset\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05cores\x18\x02 \x01(\x03R\x05cores\x12#\n" +
-	"\rcore_fraction\x18\x03 \x01(\x03R\fcoreFraction\x12\x16\n" +
-	"\x06memory\x18\x04 \x01(\x03R\x06memoryBV\n" +
+	")yandex/cloud/k8s/v1/resource_preset.proto\x12\x13yandex.cloud.k8s.v1\x1a\x1dyandex/cloud/validation.proto\"\x99\x01\n" +
+	"\x0eResourcePreset\x12\x17\n" +
+	"\x02id\x18\x01 \x01(\tB\a\x8a\xc81\x03>=1R\x02id\x12\x1d\n" +
+	"\x05cores\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\x05cores\x12.\n" +
+	"\rcore_fraction\x18\x03 \x01(\x03B\t\xfa\xc71\x051-100R\fcoreFraction\x12\x1f\n" +
+	"\x06memory\x18\x04 \x01(\x03B\a\xfa\xc71\x03>=1R\x06memoryBV\n" +
 	"\x17yandex.cloud.api.k8s.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/k8s/v1;k8sb\x06proto3"
 
 var (

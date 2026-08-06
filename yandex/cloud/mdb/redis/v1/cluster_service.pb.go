@@ -94,6 +94,8 @@ const (
 	StartClusterFailoverRequest_SWITCH_TO_HOSTNAMES StartClusterFailoverRequest_FailoverType = 1
 	// Switch master role away from hosts identified by the provided hostnames.
 	StartClusterFailoverRequest_SWITCH_FROM_HOSTNAMES StartClusterFailoverRequest_FailoverType = 2
+	// Switch master role away from the specified availability zone.
+	StartClusterFailoverRequest_SWITCH_FROM_ZONE StartClusterFailoverRequest_FailoverType = 3
 )
 
 // Enum value maps for StartClusterFailoverRequest_FailoverType.
@@ -102,11 +104,13 @@ var (
 		0: "FAILOVER_TYPE_UNSPECIFIED",
 		1: "SWITCH_TO_HOSTNAMES",
 		2: "SWITCH_FROM_HOSTNAMES",
+		3: "SWITCH_FROM_ZONE",
 	}
 	StartClusterFailoverRequest_FailoverType_value = map[string]int32{
 		"FAILOVER_TYPE_UNSPECIFIED": 0,
 		"SWITCH_TO_HOSTNAMES":       1,
 		"SWITCH_FROM_HOSTNAMES":     2,
+		"SWITCH_FROM_ZONE":          3,
 	}
 )
 
@@ -1926,7 +1930,9 @@ type StartClusterFailoverRequest struct {
 	// List of hostnames. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	// The type of failover request.
-	FailoverType  StartClusterFailoverRequest_FailoverType `protobuf:"varint,3,opt,name=failover_type,json=failoverType,proto3,enum=yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest_FailoverType" json:"failover_type,omitempty"`
+	FailoverType StartClusterFailoverRequest_FailoverType `protobuf:"varint,3,opt,name=failover_type,json=failoverType,proto3,enum=yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest_FailoverType" json:"failover_type,omitempty"`
+	// ZoneID to switch hosts from.
+	ZoneId        string `protobuf:"bytes,4,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1982,12 +1988,21 @@ func (x *StartClusterFailoverRequest) GetFailoverType() StartClusterFailoverRequ
 	return StartClusterFailoverRequest_FAILOVER_TYPE_UNSPECIFIED
 }
 
+func (x *StartClusterFailoverRequest) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
+}
+
 type StartClusterFailoverMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Redis cluster on which failover will be initiated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// List of hostnames which should not be masters. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
-	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
+	// The ID of the availability zone failover hosts from.
+	ZoneId        string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2034,6 +2049,13 @@ func (x *StartClusterFailoverMetadata) GetHostNames() []string {
 		return x.HostNames
 	}
 	return nil
+}
+
+func (x *StartClusterFailoverMetadata) GetZoneId() string {
+	if x != nil {
+		return x.ZoneId
+	}
+	return ""
 }
 
 type LogRecord struct {
@@ -4073,22 +4095,25 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x1dRescheduleMaintenanceMetadata\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12?\n" +
-	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xc1\x02\n" +
+	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xf0\x02\n" +
 	"\x1bStartClusterFailoverRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12(\n" +
 	"\n" +
 	"host_names\x18\x02 \x03(\tB\t\x8a\xc81\x05<=253R\thostNames\x12h\n" +
-	"\rfailover_type\x18\x03 \x01(\x0e2C.yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverTypeR\ffailoverType\"a\n" +
+	"\rfailover_type\x18\x03 \x01(\x0e2C.yandex.cloud.mdb.redis.v1.StartClusterFailoverRequest.FailoverTypeR\ffailoverType\x12\x17\n" +
+	"\azone_id\x18\x04 \x01(\tR\x06zoneId\"w\n" +
 	"\fFailoverType\x12\x1d\n" +
 	"\x19FAILOVER_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13SWITCH_TO_HOSTNAMES\x10\x01\x12\x19\n" +
-	"\x15SWITCH_FROM_HOSTNAMES\x10\x02\"\\\n" +
+	"\x15SWITCH_FROM_HOSTNAMES\x10\x02\x12\x14\n" +
+	"\x10SWITCH_FROM_ZONE\x10\x03\"u\n" +
 	"\x1cStartClusterFailoverMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
-	"host_names\x18\x02 \x03(\tR\thostNames\"\xce\x01\n" +
+	"host_names\x18\x02 \x03(\tR\thostNames\x12\x17\n" +
+	"\azone_id\x18\x03 \x01(\tR\x06zoneId\"\xce\x01\n" +
 	"\tLogRecord\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12K\n" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.redis.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +

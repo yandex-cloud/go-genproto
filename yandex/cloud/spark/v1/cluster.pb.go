@@ -1025,7 +1025,9 @@ type ResourcePool struct {
 	// ID of the preset for computational resources allocated to a instance (e.g., CPU, memory, etc.).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Scale Policy.
-	ScalePolicy   *ScalePolicy `protobuf:"bytes,2,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
+	ScalePolicy *ScalePolicy `protobuf:"bytes,2,opt,name=scale_policy,json=scalePolicy,proto3" json:"scale_policy,omitempty"`
+	// Run pool nodes on preemptible (interruptible) VMs.
+	Preemptible   bool `protobuf:"varint,3,opt,name=preemptible,proto3" json:"preemptible,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1072,6 +1074,13 @@ func (x *ResourcePool) GetScalePolicy() *ScalePolicy {
 		return x.ScalePolicy
 	}
 	return nil
+}
+
+func (x *ResourcePool) GetPreemptible() bool {
+	if x != nil {
+		return x.Preemptible
+	}
+	return false
 }
 
 // Scale Policy.
@@ -1601,10 +1610,11 @@ const file_yandex_cloud_spark_v1_cluster_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\x01 \x03(\tR\x10securityGroupIds\"\x99\x01\n" +
 	"\rResourcePools\x12A\n" +
 	"\x06driver\x18\x01 \x01(\v2#.yandex.cloud.spark.v1.ResourcePoolB\x04\xe8\xc71\x01R\x06driver\x12E\n" +
-	"\bexecutor\x18\x02 \x01(\v2#.yandex.cloud.spark.v1.ResourcePoolB\x04\xe8\xc71\x01R\bexecutor\"\x97\x01\n" +
+	"\bexecutor\x18\x02 \x01(\v2#.yandex.cloud.spark.v1.ResourcePoolB\x04\xe8\xc71\x01R\bexecutor\"\xb9\x01\n" +
 	"\fResourcePool\x12:\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10resourcePresetId\x12K\n" +
-	"\fscale_policy\x18\x02 \x01(\v2\".yandex.cloud.spark.v1.ScalePolicyB\x04\xe8\xc71\x01R\vscalePolicy\"\xc8\x02\n" +
+	"\fscale_policy\x18\x02 \x01(\v2\".yandex.cloud.spark.v1.ScalePolicyB\x04\xe8\xc71\x01R\vscalePolicy\x12 \n" +
+	"\vpreemptible\x18\x03 \x01(\bR\vpreemptible\"\xc8\x02\n" +
 	"\vScalePolicy\x12P\n" +
 	"\vfixed_scale\x18\x01 \x01(\v2-.yandex.cloud.spark.v1.ScalePolicy.FixedScaleH\x00R\n" +
 	"fixedScale\x12M\n" +

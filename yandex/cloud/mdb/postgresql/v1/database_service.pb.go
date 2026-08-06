@@ -337,8 +337,10 @@ type UpdateDatabaseRequest struct {
 	//
 	// Default value: `unspecified` (inherits cluster's deletion_protection)
 	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Optional. Name of the user to be assigned as the new owner of the database.
+	Owner         string `protobuf:"bytes,7,opt,name=owner,proto3" json:"owner,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateDatabaseRequest) Reset() {
@@ -411,6 +413,13 @@ func (x *UpdateDatabaseRequest) GetDeletionProtection() *wrapperspb.BoolValue {
 		return x.DeletionProtection
 	}
 	return nil
+}
+
+func (x *UpdateDatabaseRequest) GetOwner() string {
+	if x != nil {
+		return x.Owner
+	}
+	return ""
 }
 
 type UpdateDatabaseMetadata struct {
@@ -603,7 +612,7 @@ const file_yandex_cloud_mdb_postgresql_v1_database_service_proto_rawDesc = "" +
 	"\x16CreateDatabaseMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +
-	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"\xaa\x03\n" +
+	"\rdatabase_name\x18\x02 \x01(\tR\fdatabaseName\"\xe0\x03\n" +
 	"\x15UpdateDatabaseRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12C\n" +
@@ -614,7 +623,8 @@ const file_yandex_cloud_mdb_postgresql_v1_database_service_proto_rawDesc = "" +
 	"\n" +
 	"extensions\x18\x04 \x03(\v2).yandex.cloud.mdb.postgresql.v1.ExtensionR\n" +
 	"extensions\x12K\n" +
-	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"\\\n" +
+	"\x13deletion_protection\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\x124\n" +
+	"\x05owner\x18\a \x01(\tB\x1e\xe8\xc71\x00\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x05owner\"\\\n" +
 	"\x16UpdateDatabaseMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12#\n" +

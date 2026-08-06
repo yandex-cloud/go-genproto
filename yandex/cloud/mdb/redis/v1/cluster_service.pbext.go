@@ -363,12 +363,20 @@ func (m *StartClusterFailoverRequest) SetFailoverType(v StartClusterFailoverRequ
 	m.FailoverType = v
 }
 
+func (m *StartClusterFailoverRequest) SetZoneId(v string) {
+	m.ZoneId = v
+}
+
 func (m *StartClusterFailoverMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
 func (m *StartClusterFailoverMetadata) SetHostNames(v []string) {
 	m.HostNames = v
+}
+
+func (m *StartClusterFailoverMetadata) SetZoneId(v string) {
+	m.ZoneId = v
 }
 
 func (m *LogRecord) SetTimestamp(v *timestamppb.Timestamp) {

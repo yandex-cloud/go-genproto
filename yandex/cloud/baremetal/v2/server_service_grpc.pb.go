@@ -26,6 +26,7 @@ const (
 	ServerService_BatchCreateServers_FullMethodName   = "/yandex.cloud.baremetal.v2.ServerService/BatchCreateServers"
 	ServerService_UpdateServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/UpdateServer"
 	ServerService_DeleteServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/DeleteServer"
+	ServerService_SkipQuarantineServer_FullMethodName = "/yandex.cloud.baremetal.v2.ServerService/SkipQuarantineServer"
 	ServerService_PowerOffServer_FullMethodName       = "/yandex.cloud.baremetal.v2.ServerService/PowerOffServer"
 	ServerService_PowerOnServer_FullMethodName        = "/yandex.cloud.baremetal.v2.ServerService/PowerOnServer"
 	ServerService_RebootServer_FullMethodName         = "/yandex.cloud.baremetal.v2.ServerService/RebootServer"
@@ -66,6 +67,11 @@ type ServerServiceClient interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteServer(ctx context.Context, in *DeleteServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Skips the quarantine for the specified server.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	SkipQuarantineServer(ctx context.Context, in *SkipQuarantineServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Powers off the specified server.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
@@ -170,6 +176,16 @@ func (c *serverServiceClient) DeleteServer(ctx context.Context, in *DeleteServer
 	return out, nil
 }
 
+func (c *serverServiceClient) SkipQuarantineServer(ctx context.Context, in *SkipQuarantineServerRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, ServerService_SkipQuarantineServer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *serverServiceClient) PowerOffServer(ctx context.Context, in *PowerOffServerRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
@@ -262,6 +278,11 @@ type ServerServiceServer interface {
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
 	DeleteServer(context.Context, *DeleteServerRequest) (*operation.Operation, error)
+	// Skips the quarantine for the specified server.
+	// (-- api-linter: yc::1702::method-no-resource=disabled
+	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	SkipQuarantineServer(context.Context, *SkipQuarantineServerRequest) (*operation.Operation, error)
 	// Powers off the specified server.
 	// (-- api-linter: yc::1702::method-no-resource=disabled
 	// https://google.aip.dev/130 --)
@@ -322,6 +343,9 @@ func (UnimplementedServerServiceServer) UpdateServer(context.Context, *UpdateSer
 }
 func (UnimplementedServerServiceServer) DeleteServer(context.Context, *DeleteServerRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteServer not implemented")
+}
+func (UnimplementedServerServiceServer) SkipQuarantineServer(context.Context, *SkipQuarantineServerRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method SkipQuarantineServer not implemented")
 }
 func (UnimplementedServerServiceServer) PowerOffServer(context.Context, *PowerOffServerRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method PowerOffServer not implemented")
@@ -469,6 +493,24 @@ func _ServerService_DeleteServer_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_SkipQuarantineServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SkipQuarantineServerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).SkipQuarantineServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_SkipQuarantineServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).SkipQuarantineServer(ctx, req.(*SkipQuarantineServerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ServerService_PowerOffServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PowerOffServerRequest)
 	if err := dec(in); err != nil {
@@ -607,6 +649,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteServer",
 			Handler:    _ServerService_DeleteServer_Handler,
+		},
+		{
+			MethodName: "SkipQuarantineServer",
+			Handler:    _ServerService_SkipQuarantineServer_Handler,
 		},
 		{
 			MethodName: "PowerOffServer",

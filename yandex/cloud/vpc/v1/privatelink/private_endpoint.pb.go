@@ -89,7 +89,7 @@ type PrivateEndpoint struct {
 	// Name of the private endpoint.
 	// The name is unique within the folder.
 	// Value must match the regular expression
-	// “\|[a-zA-Z]([-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])?“.
+	// “|[a-z]([-a-z0-9]{0,61}[a-z0-9])?“.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the private endpoint. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`

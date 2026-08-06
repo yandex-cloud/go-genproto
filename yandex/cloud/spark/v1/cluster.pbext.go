@@ -178,6 +178,10 @@ func (m *ResourcePool) SetScalePolicy(v *ScalePolicy) {
 	m.ScalePolicy = v
 }
 
+func (m *ResourcePool) SetPreemptible(v bool) {
+	m.Preemptible = v
+}
+
 type ScalePolicy_ScaleType = isScalePolicy_ScaleType
 
 func (m *ScalePolicy) SetScaleType(v ScalePolicy_ScaleType) {
