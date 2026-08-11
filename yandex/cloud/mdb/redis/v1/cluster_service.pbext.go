@@ -732,3 +732,11 @@ func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 func (m *ConfigSpec) SetModules(v *ValkeyModules) {
 	m.Modules = v
 }
+
+func (m *ConfigSpec) SetTieredStorageEnabled(v *wrapperspb.BoolValue) {
+	m.TieredStorageEnabled = v
+}
+
+func (m *ConfigSpec) SetShardAutoscalingSettings(v *ShardAutoscalingSettings) {
+	m.ShardAutoscalingSettings = v
+}

@@ -4,8 +4,37 @@ package baremetal
 
 import (
 	v2 "github.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2"
+	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 )
+
+func (m *ListStacklandClusterOperationsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ListStacklandClusterOperationsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListStacklandClusterOperationsRequest) SetStacklandClusterId(v string) {
+	m.StacklandClusterId = v
+}
+
+func (m *ListStacklandClusterOperationsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListStacklandClusterOperationsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListStacklandClusterOperationsResponse) SetOperations(v []*operation.Operation) {
+	m.Operations = v
+}
+
+func (m *ListStacklandClusterOperationsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}
 
 func (m *GetStacklandClusterRequest) SetCloudId(v string) {
 	m.CloudId = v

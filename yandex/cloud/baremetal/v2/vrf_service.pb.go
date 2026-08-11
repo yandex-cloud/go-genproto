@@ -885,7 +885,7 @@ const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
 	"\x1dMaterializeVrfPeeringMetadata\x12\x15\n" +
 	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId\"8\n" +
 	"\x1fDematerializeVrfPeeringMetadata\x12\x15\n" +
-	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId2\xb2\n" +
+	"\x06vrf_id\x18\x01 \x01(\tR\x05vrfId2\xae\n" +
 	"\n" +
 	"\n" +
 	"VrfService\x12\xb9\x01\n" +
@@ -896,8 +896,8 @@ const file_yandex_cloud_baremetal_v2_vrf_service_proto_rawDesc = "" +
 	"\tUpdateVrf\x12+.yandex.cloud.baremetal.v2.UpdateVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x88\x01\xdaA\x0fvrf,update_mask\xb2\xd2*\x18\n" +
 	"\x11UpdateVrfMetadata\x12\x03Vrf\x82\xd3\xe4\x93\x02T:\x03vrf2M/baremetal/v2/clouds/{vrf.cloud_id}/folders/{vrf.folder_id}/vrfs/{vrf.vrf_id}\x12\xf1\x01\n" +
 	"\tDeleteVrf\x12+.yandex.cloud.baremetal.v2.DeleteVrfRequest\x1a!.yandex.cloud.operation.Operation\"\x93\x01\xdaA\x19cloud_id,folder_id,vrf_id\xb2\xd2**\n" +
-	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrfs/{vrf_id}\x12\xf3\x01\n" +
-	"\x11ListVrfOperations\x123.yandex.cloud.baremetal.v2.ListVrfOperationsRequest\x1a4.yandex.cloud.baremetal.v2.ListVrfOperationsResponse\"s\xdaA\x19cloud_id,folder_id,vrf_id\x82\xd3\xe4\x93\x02Q\x12O/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrf/{vrf_id}:listOperationsBl\n" +
+	"\x11DeleteVrfMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02C*A/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrfs/{vrf_id}\x12\xef\x01\n" +
+	"\x11ListVrfOperations\x123.yandex.cloud.baremetal.v2.ListVrfOperationsRequest\x1a4.yandex.cloud.baremetal.v2.ListVrfOperationsResponse\"o\xdaA\x19cloud_id,folder_id,vrf_id\x82\xd3\xe4\x93\x02M\x12K/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/vrf/{vrf_id}/operationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

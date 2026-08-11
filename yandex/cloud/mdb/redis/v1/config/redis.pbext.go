@@ -106,6 +106,10 @@ func (m *RedisConfig) SetAuditLog(v *wrapperspb.BoolValue) {
 	m.AuditLog = v
 }
 
+func (m *RedisConfig) SetRebalanceEnabled(v *wrapperspb.BoolValue) {
+	m.RebalanceEnabled = v
+}
+
 func (m *RedisConfig_ClientOutputBufferLimit) SetHardLimit(v *wrapperspb.Int64Value) {
 	m.HardLimit = v
 }

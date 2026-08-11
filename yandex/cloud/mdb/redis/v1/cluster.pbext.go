@@ -175,6 +175,14 @@ func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
 }
 
+func (m *ClusterConfig) SetTieredStorageEnabled(v *wrapperspb.BoolValue) {
+	m.TieredStorageEnabled = v
+}
+
+func (m *ClusterConfig) SetShardAutoscalingSettings(v *ShardAutoscalingSettings) {
+	m.ShardAutoscalingSettings = v
+}
+
 func (m *Shard) SetName(v string) {
 	m.Name = v
 }
@@ -309,4 +317,36 @@ func (m *ValkeyBloom) SetEnabled(v bool) {
 
 func (m *ValkeyBloom) SetVersion(v string) {
 	m.Version = v
+}
+
+func (m *ShardAutoscalingThreshold) SetDownThreshold(v *wrapperspb.Int64Value) {
+	m.DownThreshold = v
+}
+
+func (m *ShardAutoscalingThreshold) SetUpThreshold(v *wrapperspb.Int64Value) {
+	m.UpThreshold = v
+}
+
+func (m *ShardAutoscalingSettings) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ShardAutoscalingSettings) SetMinShards(v int64) {
+	m.MinShards = v
+}
+
+func (m *ShardAutoscalingSettings) SetMaxShards(v int64) {
+	m.MaxShards = v
+}
+
+func (m *ShardAutoscalingSettings) SetCpuThreshold(v *ShardAutoscalingThreshold) {
+	m.CpuThreshold = v
+}
+
+func (m *ShardAutoscalingSettings) SetMemoryThreshold(v *ShardAutoscalingThreshold) {
+	m.MemoryThreshold = v
+}
+
+func (m *ShardAutoscalingSettings) SetNetworkThreshold(v *ShardAutoscalingThreshold) {
+	m.NetworkThreshold = v
 }

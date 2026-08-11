@@ -786,7 +786,7 @@ const file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc = "" +
 	"\n" +
 	"operations\x18\x01 \x03(\v2!.yandex.cloud.operation.OperationR\n" +
 	"operations\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd3\r\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xcf\r\n" +
 	"\x14PrivateSubnetService\x12\xf8\x01\n" +
 	"\x10GetPrivateSubnet\x122.yandex.cloud.baremetal.v2.GetPrivateSubnetRequest\x1a(.yandex.cloud.baremetal.v2.PrivateSubnet\"\x85\x01\xdaA$cloud_id,folder_id,private_subnet_id\x82\xd3\xe4\x93\x02X\x12V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}\x12\xe2\x01\n" +
 	"\x12ListPrivateSubnets\x124.yandex.cloud.baremetal.v2.ListPrivateSubnetsRequest\x1a5.yandex.cloud.baremetal.v2.ListPrivateSubnetsResponse\"_\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02D\x12B/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets\x12\x93\x02\n" +
@@ -795,8 +795,8 @@ const file_yandex_cloud_baremetal_v2_private_subnet_service_proto_rawDesc = "" +
 	"\x13UpdatePrivateSubnet\x125.yandex.cloud.baremetal.v2.UpdatePrivateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"\xea\x01\xdaA\x1aprivate_subnet,update_mask\xb2\xd2*,\n" +
 	"\x1bUpdatePrivateSubnetMetadata\x12\rPrivateSubnet\x82\xd3\xe4\x93\x02\x96\x01:\x0eprivate_subnet2\x83\x01/baremetal/v2/clouds/{private_subnet.cloud_id}/folders/{private_subnet.folder_id}/privateSubnets/{private_subnet.private_subnet_id}\x12\xaf\x02\n" +
 	"\x13DeletePrivateSubnet\x125.yandex.cloud.baremetal.v2.DeletePrivateSubnetRequest\x1a!.yandex.cloud.operation.Operation\"\xbd\x01\xdaA$cloud_id,folder_id,private_subnet_id\xb2\xd2*4\n" +
-	"\x1bDeletePrivateSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02X*V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}\x12\xb3\x02\n" +
-	"\x1bListPrivateSubnetOperations\x12=.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse\"\x94\x01\xdaA$cloud_id,folder_id,private_subnet_id\x82\xd3\xe4\x93\x02g\x12e/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}:listOperationsBl\n" +
+	"\x1bDeletePrivateSubnetMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02X*V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}\x12\xaf\x02\n" +
+	"\x1bListPrivateSubnetOperations\x12=.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsRequest\x1a>.yandex.cloud.baremetal.v2.ListPrivateSubnetOperationsResponse\"\x90\x01\xdaA$cloud_id,folder_id,private_subnet_id\x82\xd3\xe4\x93\x02c\x12a/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/privateSubnets/{private_subnet_id}/operationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

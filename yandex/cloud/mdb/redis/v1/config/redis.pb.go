@@ -157,9 +157,11 @@ type RedisConfig struct {
 	// Enable active (online) memory defragmentation
 	Activedefrag *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=activedefrag,proto3" json:"activedefrag,omitempty"`
 	// Enable/disable audit logs for Valkey
-	AuditLog      *wrapperspb.BoolValue `protobuf:"bytes,25,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	AuditLog *wrapperspb.BoolValue `protobuf:"bytes,25,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
+	// Enables automatic slot rebalancing when shards are added or deleted.
+	RebalanceEnabled *wrapperspb.BoolValue `protobuf:"bytes,26,opt,name=rebalance_enabled,json=rebalanceEnabled,proto3" json:"rebalance_enabled,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *RedisConfig) Reset() {
@@ -367,6 +369,13 @@ func (x *RedisConfig) GetAuditLog() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *RedisConfig) GetRebalanceEnabled() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.RebalanceEnabled
+	}
+	return nil
+}
+
 type RedisConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a Redis cluster (a combination of settings
@@ -498,7 +507,7 @@ var File_yandex_cloud_mdb_redis_v1_config_redis_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xff\x13\n" +
+	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc8\x14\n" +
 	"\vRedisConfig\x12h\n" +
 	"\x10maxmemory_policy\x18\x01 \x01(\x0e2=.yandex.cloud.mdb.redis.v1.config.RedisConfig.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x12>\n" +
 	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\atimeout\x12\x1a\n" +
@@ -529,7 +538,8 @@ const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\x19zset_max_listpack_entries\x18\x16 \x01(\v2\x1b.google.protobuf.Int64ValueB\v\xfa\xc71\a32-2048R\x16zsetMaxListpackEntries\x12V\n" +
 	"\x14aof_max_size_percent\x18\x17 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x041-99R\x11aofMaxSizePercent\x12>\n" +
 	"\factivedefrag\x18\x18 \x01(\v2\x1a.google.protobuf.BoolValueR\factivedefrag\x127\n" +
-	"\taudit_log\x18\x19 \x01(\v2\x1a.google.protobuf.BoolValueR\bauditLog\x1a\xf8\x01\n" +
+	"\taudit_log\x18\x19 \x01(\v2\x1a.google.protobuf.BoolValueR\bauditLog\x12G\n" +
+	"\x11rebalance_enabled\x18\x1a \x01(\v2\x1a.google.protobuf.BoolValueR\x10rebalanceEnabled\x1a\xf8\x01\n" +
 	"\x17ClientOutputBufferLimit\x12C\n" +
 	"\n" +
 	"hard_limit\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\thardLimit\x12C\n" +
@@ -600,17 +610,18 @@ var file_yandex_cloud_mdb_redis_v1_config_redis_proto_depIdxs = []int32{
 	4,  // 20: yandex.cloud.mdb.redis.v1.config.RedisConfig.aof_max_size_percent:type_name -> google.protobuf.Int64Value
 	5,  // 21: yandex.cloud.mdb.redis.v1.config.RedisConfig.activedefrag:type_name -> google.protobuf.BoolValue
 	5,  // 22: yandex.cloud.mdb.redis.v1.config.RedisConfig.audit_log:type_name -> google.protobuf.BoolValue
-	1,  // 23: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.effective_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	1,  // 24: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.user_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	1,  // 25: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.default_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
-	4,  // 26: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.hard_limit:type_name -> google.protobuf.Int64Value
-	4,  // 27: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_limit:type_name -> google.protobuf.Int64Value
-	4,  // 28: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_seconds:type_name -> google.protobuf.Int64Value
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	5,  // 23: yandex.cloud.mdb.redis.v1.config.RedisConfig.rebalance_enabled:type_name -> google.protobuf.BoolValue
+	1,  // 24: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.effective_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	1,  // 25: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.user_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	1,  // 26: yandex.cloud.mdb.redis.v1.config.RedisConfigSet.default_config:type_name -> yandex.cloud.mdb.redis.v1.config.RedisConfig
+	4,  // 27: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.hard_limit:type_name -> google.protobuf.Int64Value
+	4,  // 28: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_limit:type_name -> google.protobuf.Int64Value
+	4,  // 29: yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimit.soft_seconds:type_name -> google.protobuf.Int64Value
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_config_redis_proto_init() }

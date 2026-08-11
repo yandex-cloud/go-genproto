@@ -1620,8 +1620,8 @@ type ResourceOptions_CachingTimes struct {
 	// Use [custom_values] field to specify a custom caching time for a response with specific codes.
 	SimpleValue int64 `protobuf:"varint,1,opt,name=simple_value,json=simpleValue,proto3" json:"simple_value,omitempty"`
 	// Caching time for a response with specific codes. These settings have a higher priority than the value field.
-	// Response code (`304`, `404` for example). Use `any` to specify caching time for all response codes.
-	// Caching time in seconds (`0s`, `600s` for example). Use `0s` to disable caching for a specific response code.
+	// Key: HTTP response code as a string, in the range 100-599 (e.g. `"304"`, `"404"`). Wildcard values such as `any` are not supported.
+	// Value: caching time in seconds as a plain integer (e.g. `0`, `600`). Use `0` to disable caching for a specific response code.
 	CustomValues  map[string]int64 `protobuf:"bytes,2,rep,name=custom_values,json=customValues,proto3" json:"custom_values,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

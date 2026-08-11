@@ -1958,7 +1958,7 @@ const file_yandex_cloud_baremetal_v2_server_service_proto_rawDesc = "" +
 	"\x17REBOOT_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aNETWORK\x10\x01\x12\t\n" +
 	"\x05CDROM\x10\x02\x12\b\n" +
-	"\x04BIOS\x10\x032\xb8\x1a\n" +
+	"\x04BIOS\x10\x032\xb4\x1a\n" +
 	"\rServerService\x12\xcb\x01\n" +
 	"\tGetServer\x12+.yandex.cloud.baremetal.v2.GetServerRequest\x1a!.yandex.cloud.baremetal.v2.Server\"n\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02I\x12G/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}\x12\xc6\x01\n" +
 	"\vListServers\x12-.yandex.cloud.baremetal.v2.ListServersRequest\x1a..yandex.cloud.baremetal.v2.ListServersResponse\"X\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02=\x12;/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers\x12\xed\x01\n" +
@@ -1981,8 +1981,8 @@ const file_yandex_cloud_baremetal_v2_server_service_proto_rawDesc = "" +
 	"\x0fReinstallServer\x121.yandex.cloud.baremetal.v2.ReinstallServerRequest\x1a!.yandex.cloud.operation.Operation\"\xaf\x01\xdaA\x1ccloud_id,folder_id,server_id\xb2\xd2*0\n" +
 	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02V:\x01*\"Q/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:reinstall\x12\x92\x02\n" +
 	"\x11RenewServerRental\x123.yandex.cloud.baremetal.v2.RenewServerRentalRequest\x1a!.yandex.cloud.operation.Operation\"\xa4\x01\xdaA\x1ccloud_id,folder_id,server_id\xb2\xd2*#\n" +
-	"\x19RenewServerRentalMetadata\x12\x06Server\x82\xd3\xe4\x93\x02X:\x01*\"S/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:renewRental\x12\x86\x02\n" +
-	"\x14ListServerOperations\x126.yandex.cloud.baremetal.v2.ListServerOperationsRequest\x1a7.yandex.cloud.baremetal.v2.ListServerOperationsResponse\"}\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02X\x12V/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:listOperationsBl\n" +
+	"\x19RenewServerRentalMetadata\x12\x06Server\x82\xd3\xe4\x93\x02X:\x01*\"S/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:renewRental\x12\x82\x02\n" +
+	"\x14ListServerOperations\x126.yandex.cloud.baremetal.v2.ListServerOperationsRequest\x1a7.yandex.cloud.baremetal.v2.ListServerOperationsResponse\"y\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02T\x12R/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}/operationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

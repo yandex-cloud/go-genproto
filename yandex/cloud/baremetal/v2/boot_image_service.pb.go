@@ -814,7 +814,7 @@ const file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc = "" +
 	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata\"\x9a\x01\n" +
 	"\x17DeleteBootImageMetadata\x12\"\n" +
 	"\rboot_image_id\x18\x01 \x01(\tR\vbootImageId\x12[\n" +
-	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xb9\f\n" +
+	"\x12operation_metadata\x18\x02 \x01(\v2,.yandex.cloud.baremetal.v2.OperationMetadataR\x11operationMetadata2\xb5\f\n" +
 	"\x10BootImageService\x12\xdf\x01\n" +
 	"\fGetBootImage\x12..yandex.cloud.baremetal.v2.GetBootImageRequest\x1a$.yandex.cloud.baremetal.v2.BootImage\"y\xdaA cloud_id,folder_id,boot_image_id\x82\xd3\xe4\x93\x02P\x12N/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}\x12\xd2\x01\n" +
 	"\x0eListBootImages\x120.yandex.cloud.baremetal.v2.ListBootImagesRequest\x1a1.yandex.cloud.baremetal.v2.ListBootImagesResponse\"[\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02@\x12>/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages\x12\x84\x02\n" +
@@ -825,8 +825,8 @@ const file_yandex_cloud_baremetal_v2_boot_image_service_proto_rawDesc = "" +
 	"\x17UpdateBootImageMetadata\x12\tBootImage\x82\xd3\xe4\x93\x02}:\n" +
 	"boot_image2o/baremetal/v2/clouds/{boot_image.cloud_id}/folders/{boot_image.folder_id}/bootImages/{boot_image.boot_image_id}\x12\x97\x02\n" +
 	"\x0fDeleteBootImage\x121.yandex.cloud.baremetal.v2.DeleteBootImageRequest\x1a!.yandex.cloud.operation.Operation\"\xad\x01\xdaA cloud_id,folder_id,boot_image_id\xb2\xd2*0\n" +
-	"\x17DeleteBootImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02P*N/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}\x12\x9b\x02\n" +
-	"\x17ListBootImageOperations\x129.yandex.cloud.baremetal.v2.ListBootImageOperationsRequest\x1a:.yandex.cloud.baremetal.v2.ListBootImageOperationsResponse\"\x88\x01\xdaA cloud_id,folder_id,boot_image_id\x82\xd3\xe4\x93\x02_\x12]/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}:listOperationsBl\n" +
+	"\x17DeleteBootImageMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02P*N/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}\x12\x97\x02\n" +
+	"\x17ListBootImageOperations\x129.yandex.cloud.baremetal.v2.ListBootImageOperationsRequest\x1a:.yandex.cloud.baremetal.v2.ListBootImageOperationsResponse\"\x84\x01\xdaA cloud_id,folder_id,boot_image_id\x82\xd3\xe4\x93\x02[\x12Y/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/bootImages/{boot_image_id}/operationsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
