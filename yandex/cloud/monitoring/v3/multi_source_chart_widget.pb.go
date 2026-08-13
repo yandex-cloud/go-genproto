@@ -1121,8 +1121,10 @@ type MultiSourceChartWidget_VisualizationSettings struct {
 	TilesSettings *MultiSourceChartWidget_VisualizationSettings_TilesSettings `protobuf:"bytes,10,opt,name=tiles_settings,json=tilesSettings,proto3" json:"tiles_settings,omitempty"`
 	// Hide chart partial data.
 	HidePartialData bool `protobuf:"varint,12,opt,name=hide_partial_data,json=hidePartialData,proto3" json:"hide_partial_data,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Settings for the categorical bar chart.
+	BarChartSettings *BarChartSettings `protobuf:"bytes,13,opt,name=bar_chart_settings,json=barChartSettings,proto3" json:"bar_chart_settings,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *MultiSourceChartWidget_VisualizationSettings) Reset() {
@@ -1230,6 +1232,13 @@ func (x *MultiSourceChartWidget_VisualizationSettings) GetHidePartialData() bool
 		return x.HidePartialData
 	}
 	return false
+}
+
+func (x *MultiSourceChartWidget_VisualizationSettings) GetBarChartSettings() *BarChartSettings {
+	if x != nil {
+		return x.BarChartSettings
+	}
+	return nil
 }
 
 // Series override settings.
@@ -2964,7 +2973,7 @@ var File_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto protoreflect
 
 const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xc6M\n" +
+	":yandex/cloud/monitoring/v3/multi_source_chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a3yandex/cloud/monitoring/v3/bar_chart_settings.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xa2N\n" +
 	"\x16MultiSourceChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12S\n" +
 	"\atargets\x18\x02 \x03(\v29.yandex.cloud.monitoring.v3.MultiSourceChartWidget.TargetR\atargets\x12`\n" +
@@ -3009,7 +3018,7 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"\x14PrometheusDataSource\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04step\x18\x02 \x01(\x03R\x04stepB\r\n" +
-	"\vdata_source\x1a\xf1!\n" +
+	"\vdata_source\x1a\xcd\"\n" +
 	"\x15VisualizationSettings\x12n\n" +
 	"\x04type\x18\x01 \x01(\x0e2Z.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12v\n" +
@@ -3023,7 +3032,8 @@ const file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_rawDesc = 
 	"showLabels\x12}\n" +
 	"\x0etiles_settings\x18\n" +
 	" \x01(\v2V.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x12*\n" +
-	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x1a\xe7\v\n" +
+	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x12Z\n" +
+	"\x12bar_chart_settings\x18\r \x01(\v2,.yandex.cloud.monitoring.v3.BarChartSettingsR\x10barChartSettings\x1a\xe7\v\n" +
 	"\x13ColorSchemeSettings\x12\x91\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2q.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x8e\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2p.yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x8e\x01\n" +
@@ -3254,10 +3264,11 @@ var file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_goTypes = []
 	(*MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_ThresholdsColorScheme)(nil),          // 39: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
 	(*MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings)(nil),                                   // 40: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings
 	(*Thresholds)(nil),            // 41: yandex.cloud.monitoring.v3.Thresholds
-	(*Downsampling)(nil),          // 42: yandex.cloud.monitoring.v3.Downsampling
-	(UnitFormat)(0),               // 43: yandex.cloud.monitoring.v3.UnitFormat
-	(*wrapperspb.Int64Value)(nil), // 44: google.protobuf.Int64Value
-	(SortOrder)(0),                // 45: yandex.cloud.monitoring.v3.SortOrder
+	(*BarChartSettings)(nil),      // 42: yandex.cloud.monitoring.v3.BarChartSettings
+	(*Downsampling)(nil),          // 43: yandex.cloud.monitoring.v3.Downsampling
+	(UnitFormat)(0),               // 44: yandex.cloud.monitoring.v3.UnitFormat
+	(*wrapperspb.Int64Value)(nil), // 45: google.protobuf.Int64Value
+	(SortOrder)(0),                // 46: yandex.cloud.monitoring.v3.SortOrder
 }
 var file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_depIdxs = []int32{
 	14, // 0: yandex.cloud.monitoring.v3.MultiSourceChartWidget.targets:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.Target
@@ -3279,40 +3290,41 @@ var file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_depIdxs = []
 	30, // 16: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.heatmap_settings:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.HeatmapSettings
 	32, // 17: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.yaxis_settings:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisSettings
 	33, // 18: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.tiles_settings:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings
-	40, // 19: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings
-	18, // 20: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.matcher:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher
-	19, // 21: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.query:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.QueryMatcher
-	20, // 22: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.line:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.LineMatcher
-	21, // 23: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.regexp:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.RegExpMatcher
-	22, // 24: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.values:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValueMatcher
-	0,  // 25: yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValueMatcher.value_type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValuesType
-	42, // 26: yandex.cloud.monitoring.v3.MultiSourceChartWidget.DataSource.MonitoringDataSource.downsampling:type_name -> yandex.cloud.monitoring.v3.Downsampling
-	34, // 27: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
-	35, // 28: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
-	36, // 29: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
-	37, // 30: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
-	39, // 31: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
-	38, // 32: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.constant:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
-	4,  // 33: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisType
-	43, // 34: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	44, // 35: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
-	31, // 36: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis
-	31, // 37: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis
-	45, // 38: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.sort_order:type_name -> yandex.cloud.monitoring.v3.SortOrder
-	7,  // 39: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.sort_field:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.SortField
-	6,  // 40: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
-	9,  // 41: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesVisualizationType
-	8,  // 42: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.YaxisPosition
-	10, // 43: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_style:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
-	11, // 44: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_hiding_type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingType
-	12, // 45: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_legend:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	12, // 46: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_tooltip:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	12, // 47: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_chart:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	48, // [48:48] is the sub-list for method output_type
-	48, // [48:48] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	42, // 19: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.bar_chart_settings:type_name -> yandex.cloud.monitoring.v3.BarChartSettings
+	40, // 20: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings
+	18, // 21: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.matcher:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher
+	19, // 22: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.query:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.QueryMatcher
+	20, // 23: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.line:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.LineMatcher
+	21, // 24: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.regexp:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.RegExpMatcher
+	22, // 25: yandex.cloud.monitoring.v3.MultiSourceChartWidget.OverrideMatcher.values:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValueMatcher
+	0,  // 26: yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValueMatcher.value_type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.ValuesType
+	43, // 27: yandex.cloud.monitoring.v3.MultiSourceChartWidget.DataSource.MonitoringDataSource.downsampling:type_name -> yandex.cloud.monitoring.v3.Downsampling
+	34, // 28: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
+	35, // 29: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
+	36, // 30: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
+	37, // 31: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
+	39, // 32: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
+	38, // 33: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.constant:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
+	4,  // 34: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisType
+	44, // 35: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	45, // 36: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
+	31, // 37: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis
+	31, // 38: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.Yaxis
+	46, // 39: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.sort_order:type_name -> yandex.cloud.monitoring.v3.SortOrder
+	7,  // 40: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.sort_field:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.TilesSettings.SortField
+	6,  // 41: yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
+	9,  // 42: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesVisualizationType
+	8,  // 43: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.YaxisPosition
+	10, // 44: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_style:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
+	11, // 45: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_hiding_type:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingType
+	12, // 46: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_legend:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	12, // 47: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_tooltip:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	12, // 48: yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_chart:type_name -> yandex.cloud.monitoring.v3.MultiSourceChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	49, // [49:49] is the sub-list for method output_type
+	49, // [49:49] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init() }
@@ -3320,6 +3332,7 @@ func file_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto_init() {
 	if File_yandex_cloud_monitoring_v3_multi_source_chart_widget_proto != nil {
 		return
 	}
+	file_yandex_cloud_monitoring_v3_bar_chart_settings_proto_init()
 	file_yandex_cloud_monitoring_v3_downsampling_proto_init()
 	file_yandex_cloud_monitoring_v3_sort_order_proto_init()
 	file_yandex_cloud_monitoring_v3_thresholds_proto_init()

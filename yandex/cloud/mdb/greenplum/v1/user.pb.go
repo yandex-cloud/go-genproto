@@ -22,6 +22,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type UserSettingsConfig_PoolMode int32
+
+const (
+	// PoolMode not explicitly set. Falls back to cluster-level pooling mode.
+	UserSettingsConfig_POOL_MODE_UNSPECIFIED UserSettingsConfig_PoolMode = 0
+	// Assign server connection to a client until it disconnects.
+	UserSettingsConfig_SESSION UserSettingsConfig_PoolMode = 1
+	// Assign server connection to a client for a transaction processing.
+	UserSettingsConfig_TRANSACTION UserSettingsConfig_PoolMode = 2
+)
+
+// Enum value maps for UserSettingsConfig_PoolMode.
+var (
+	UserSettingsConfig_PoolMode_name = map[int32]string{
+		0: "POOL_MODE_UNSPECIFIED",
+		1: "SESSION",
+		2: "TRANSACTION",
+	}
+	UserSettingsConfig_PoolMode_value = map[string]int32{
+		"POOL_MODE_UNSPECIFIED": 0,
+		"SESSION":               1,
+		"TRANSACTION":           2,
+	}
+)
+
+func (x UserSettingsConfig_PoolMode) Enum() *UserSettingsConfig_PoolMode {
+	p := new(UserSettingsConfig_PoolMode)
+	*p = x
+	return p
+}
+
+func (x UserSettingsConfig_PoolMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserSettingsConfig_PoolMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_greenplum_v1_user_proto_enumTypes[0].Descriptor()
+}
+
+func (UserSettingsConfig_PoolMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_greenplum_v1_user_proto_enumTypes[0]
+}
+
+func (x UserSettingsConfig_PoolMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserSettingsConfig_PoolMode.Descriptor instead.
+func (UserSettingsConfig_PoolMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDescGZIP(), []int{1, 0}
+}
+
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// User name
@@ -30,6 +82,8 @@ type User struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Resource group for user's queries
 	ResourceGroup string `protobuf:"bytes,3,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
+	// DB and Pooler specific settings
+	Settings      *UserSettingsConfig `protobuf:"bytes,9,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -85,15 +139,75 @@ func (x *User) GetResourceGroup() string {
 	return ""
 }
 
+func (x *User) GetSettings() *UserSettingsConfig {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+type UserSettingsConfig struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Odyssey® route [server pool mode](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
+	// When POOL_MODE_UNSPECIFIED, uses the cluster-level pooling mode.
+	PoolMode      UserSettingsConfig_PoolMode `protobuf:"varint,1,opt,name=pool_mode,json=poolMode,proto3,enum=yandex.cloud.mdb.greenplum.v1.UserSettingsConfig_PoolMode" json:"pool_mode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserSettingsConfig) Reset() {
+	*x = UserSettingsConfig{}
+	mi := &file_yandex_cloud_mdb_greenplum_v1_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserSettingsConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserSettingsConfig) ProtoMessage() {}
+
+func (x *UserSettingsConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_greenplum_v1_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserSettingsConfig.ProtoReflect.Descriptor instead.
+func (*UserSettingsConfig) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UserSettingsConfig) GetPoolMode() UserSettingsConfig_PoolMode {
+	if x != nil {
+		return x.PoolMode
+	}
+	return UserSettingsConfig_POOL_MODE_UNSPECIFIED
+}
+
 var File_yandex_cloud_mdb_greenplum_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\xb2\x01\n" +
+	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\x87\x02\n" +
 	"\x04User\x12A\n" +
 	"\x04name\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71\x1d^[a-zA-Z_][a-zA-Z0-9_]{0,62}$\x8a\xc81\x041-63R\x04name\x12%\n" +
 	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12@\n" +
-	"\x0eresource_group\x18\x03 \x01(\tB\x19\xf2\xc71\x15^([^\\|/*?.,;\"'<>]+|)$R\rresourceGroupBp\n" +
+	"\x0eresource_group\x18\x03 \x01(\tB\x19\xf2\xc71\x15^([^\\|/*?.,;\"'<>]+|)$R\rresourceGroup\x12M\n" +
+	"\bsettings\x18\t \x01(\v21.yandex.cloud.mdb.greenplum.v1.UserSettingsConfigR\bsettingsJ\x04\b\x04\x10\t\"\xb2\x01\n" +
+	"\x12UserSettingsConfig\x12W\n" +
+	"\tpool_mode\x18\x01 \x01(\x0e2:.yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolModeR\bpoolMode\"C\n" +
+	"\bPoolMode\x12\x19\n" +
+	"\x15POOL_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aSESSION\x10\x01\x12\x0f\n" +
+	"\vTRANSACTION\x10\x02Bp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (
@@ -108,16 +222,21 @@ func file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_greenplum_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_mdb_greenplum_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_yandex_cloud_mdb_greenplum_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_greenplum_v1_user_proto_goTypes = []any{
-	(*User)(nil), // 0: yandex.cloud.mdb.greenplum.v1.User
+	(UserSettingsConfig_PoolMode)(0), // 0: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
+	(*User)(nil),                     // 1: yandex.cloud.mdb.greenplum.v1.User
+	(*UserSettingsConfig)(nil),       // 2: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
 }
 var file_yandex_cloud_mdb_greenplum_v1_user_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: yandex.cloud.mdb.greenplum.v1.User.settings:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
+	0, // 1: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_mode:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_user_proto_init() }
@@ -130,13 +249,14 @@ func file_yandex_cloud_mdb_greenplum_v1_user_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc), len(file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   1,
+			NumEnums:      1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_mdb_greenplum_v1_user_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_mdb_greenplum_v1_user_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_mdb_greenplum_v1_user_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_mdb_greenplum_v1_user_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_mdb_greenplum_v1_user_proto = out.File

@@ -13,3 +13,11 @@ func (m *User) SetPassword(v string) {
 func (m *User) SetResourceGroup(v string) {
 	m.ResourceGroup = v
 }
+
+func (m *User) SetSettings(v *UserSettingsConfig) {
+	m.Settings = v
+}
+
+func (m *UserSettingsConfig) SetPoolMode(v UserSettingsConfig_PoolMode) {
+	m.PoolMode = v
+}

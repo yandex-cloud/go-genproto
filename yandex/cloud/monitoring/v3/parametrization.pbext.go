@@ -128,6 +128,34 @@ func (m *PrometheusQuerySource) SetWorkspaceId(v string) {
 	m.WorkspaceId = v
 }
 
+func (m *InfraEnvironmentValueSource) SetServiceId(v int64) {
+	m.ServiceId = v
+}
+
+type InfraQuerySource_ValueSource = isInfraQuerySource_ValueSource
+
+func (m *InfraQuerySource) SetValueSource(v InfraQuerySource_ValueSource) {
+	m.ValueSource = v
+}
+
+func (m *InfraQuerySource) SetServiceName(v *InfraServiceNameValueSource) {
+	m.ValueSource = &InfraQuerySource_ServiceName{
+		ServiceName: v,
+	}
+}
+
+func (m *InfraQuerySource) SetEnvironment(v *InfraEnvironmentValueSource) {
+	m.ValueSource = &InfraQuerySource_Environment{
+		Environment: v,
+	}
+}
+
+func (m *InfraQuerySource) SetTypes(v *InfraCombinedEventTypesValueSource) {
+	m.ValueSource = &InfraQuerySource_Types{
+		Types: v,
+	}
+}
+
 type QueryParameter_DataSource = isQueryParameter_DataSource
 
 func (m *QueryParameter) SetDataSource(v QueryParameter_DataSource) {
@@ -159,6 +187,12 @@ func (m *QueryParameter) SetMonitoring(v *MonitoringQuerySource) {
 func (m *QueryParameter) SetPrometheus(v *PrometheusQuerySource) {
 	m.DataSource = &QueryParameter_Prometheus{
 		Prometheus: v,
+	}
+}
+
+func (m *QueryParameter) SetInfra(v *InfraQuerySource) {
+	m.DataSource = &QueryParameter_Infra{
+		Infra: v,
 	}
 }
 

@@ -729,6 +729,224 @@ func (x *PrometheusQuerySource) GetWorkspaceId() string {
 	return ""
 }
 
+type InfraServiceNameValueSource struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InfraServiceNameValueSource) Reset() {
+	*x = InfraServiceNameValueSource{}
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InfraServiceNameValueSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InfraServiceNameValueSource) ProtoMessage() {}
+
+func (x *InfraServiceNameValueSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InfraServiceNameValueSource.ProtoReflect.Descriptor instead.
+func (*InfraServiceNameValueSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{11}
+}
+
+type InfraEnvironmentValueSource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Service ID used to select environment values.
+	ServiceId     int64 `protobuf:"varint,1,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InfraEnvironmentValueSource) Reset() {
+	*x = InfraEnvironmentValueSource{}
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InfraEnvironmentValueSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InfraEnvironmentValueSource) ProtoMessage() {}
+
+func (x *InfraEnvironmentValueSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InfraEnvironmentValueSource.ProtoReflect.Descriptor instead.
+func (*InfraEnvironmentValueSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *InfraEnvironmentValueSource) GetServiceId() int64 {
+	if x != nil {
+		return x.ServiceId
+	}
+	return 0
+}
+
+type InfraCombinedEventTypesValueSource struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InfraCombinedEventTypesValueSource) Reset() {
+	*x = InfraCombinedEventTypesValueSource{}
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InfraCombinedEventTypesValueSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InfraCombinedEventTypesValueSource) ProtoMessage() {}
+
+func (x *InfraCombinedEventTypesValueSource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InfraCombinedEventTypesValueSource.ProtoReflect.Descriptor instead.
+func (*InfraCombinedEventTypesValueSource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{13}
+}
+
+type InfraQuerySource struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ValueSource:
+	//
+	//	*InfraQuerySource_ServiceName
+	//	*InfraQuerySource_Environment
+	//	*InfraQuerySource_Types
+	ValueSource   isInfraQuerySource_ValueSource `protobuf_oneof:"value_source"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InfraQuerySource) Reset() {
+	*x = InfraQuerySource{}
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InfraQuerySource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InfraQuerySource) ProtoMessage() {}
+
+func (x *InfraQuerySource) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InfraQuerySource.ProtoReflect.Descriptor instead.
+func (*InfraQuerySource) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *InfraQuerySource) GetValueSource() isInfraQuerySource_ValueSource {
+	if x != nil {
+		return x.ValueSource
+	}
+	return nil
+}
+
+func (x *InfraQuerySource) GetServiceName() *InfraServiceNameValueSource {
+	if x != nil {
+		if x, ok := x.ValueSource.(*InfraQuerySource_ServiceName); ok {
+			return x.ServiceName
+		}
+	}
+	return nil
+}
+
+func (x *InfraQuerySource) GetEnvironment() *InfraEnvironmentValueSource {
+	if x != nil {
+		if x, ok := x.ValueSource.(*InfraQuerySource_Environment); ok {
+			return x.Environment
+		}
+	}
+	return nil
+}
+
+func (x *InfraQuerySource) GetTypes() *InfraCombinedEventTypesValueSource {
+	if x != nil {
+		if x, ok := x.ValueSource.(*InfraQuerySource_Types); ok {
+			return x.Types
+		}
+	}
+	return nil
+}
+
+type isInfraQuerySource_ValueSource interface {
+	isInfraQuerySource_ValueSource()
+}
+
+type InfraQuerySource_ServiceName struct {
+	// Service name value source.
+	ServiceName *InfraServiceNameValueSource `protobuf:"bytes,1,opt,name=service_name,json=serviceName,proto3,oneof"`
+}
+
+type InfraQuerySource_Environment struct {
+	// Environment value source.
+	Environment *InfraEnvironmentValueSource `protobuf:"bytes,2,opt,name=environment,proto3,oneof"`
+}
+
+type InfraQuerySource_Types struct {
+	// Combined event types value source.
+	Types *InfraCombinedEventTypesValueSource `protobuf:"bytes,3,opt,name=types,proto3,oneof"`
+}
+
+func (*InfraQuerySource_ServiceName) isInfraQuerySource_ValueSource() {}
+
+func (*InfraQuerySource_Environment) isInfraQuerySource_ValueSource() {}
+
+func (*InfraQuerySource_Types) isInfraQuerySource_ValueSource() {}
+
 // Query parameter.
 type QueryParameter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -746,6 +964,7 @@ type QueryParameter struct {
 	//
 	//	*QueryParameter_Monitoring
 	//	*QueryParameter_Prometheus
+	//	*QueryParameter_Infra
 	DataSource    isQueryParameter_DataSource `protobuf_oneof:"data_source"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -753,7 +972,7 @@ type QueryParameter struct {
 
 func (x *QueryParameter) Reset() {
 	*x = QueryParameter{}
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[11]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -765,7 +984,7 @@ func (x *QueryParameter) String() string {
 func (*QueryParameter) ProtoMessage() {}
 
 func (x *QueryParameter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[11]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -778,7 +997,7 @@ func (x *QueryParameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryParameter.ProtoReflect.Descriptor instead.
 func (*QueryParameter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{11}
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *QueryParameter) GetMultiselectable() bool {
@@ -834,6 +1053,15 @@ func (x *QueryParameter) GetPrometheus() *PrometheusQuerySource {
 	return nil
 }
 
+func (x *QueryParameter) GetInfra() *InfraQuerySource {
+	if x != nil {
+		if x, ok := x.DataSource.(*QueryParameter_Infra); ok {
+			return x.Infra
+		}
+	}
+	return nil
+}
+
 type isQueryParameter_DataSource interface {
 	isQueryParameter_DataSource()
 }
@@ -848,9 +1076,16 @@ type QueryParameter_Prometheus struct {
 	Prometheus *PrometheusQuerySource `protobuf:"bytes,6,opt,name=prometheus,proto3,oneof"`
 }
 
+type QueryParameter_Infra struct {
+	// Infra source for QueryParameter.
+	Infra *InfraQuerySource `protobuf:"bytes,7,opt,name=infra,proto3,oneof"`
+}
+
 func (*QueryParameter_Monitoring) isQueryParameter_DataSource() {}
 
 func (*QueryParameter_Prometheus) isQueryParameter_DataSource() {}
+
+func (*QueryParameter_Infra) isQueryParameter_DataSource() {}
 
 // Parameter.
 type Parameter struct {
@@ -886,7 +1121,7 @@ type Parameter struct {
 
 func (x *Parameter) Reset() {
 	*x = Parameter{}
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[12]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -898,7 +1133,7 @@ func (x *Parameter) String() string {
 func (*Parameter) ProtoMessage() {}
 
 func (x *Parameter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[12]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -911,7 +1146,7 @@ func (x *Parameter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Parameter.ProtoReflect.Descriptor instead.
 func (*Parameter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{12}
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Parameter) GetName() string {
@@ -1107,7 +1342,7 @@ type Parametrization struct {
 
 func (x *Parametrization) Reset() {
 	*x = Parametrization{}
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[13]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1119,7 +1354,7 @@ func (x *Parametrization) String() string {
 func (*Parametrization) ProtoMessage() {}
 
 func (x *Parametrization) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[13]
+	mi := &file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1132,7 +1367,7 @@ func (x *Parametrization) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Parametrization.ProtoReflect.Descriptor instead.
 func (*Parametrization) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{13}
+	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *Parametrization) GetParameters() []*Parameter {
@@ -1198,7 +1433,17 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"\x15PrometheusQuerySource\x12\x14\n" +
 	"\x05match\x18\x01 \x03(\tR\x05match\x12\x1b\n" +
 	"\tlabel_key\x18\x02 \x01(\tR\blabelKey\x12!\n" +
-	"\fworkspace_id\x18\x03 \x01(\tR\vworkspaceId\"\xc1\x03\n" +
+	"\fworkspace_id\x18\x03 \x01(\tR\vworkspaceId\"\x1d\n" +
+	"\x1bInfraServiceNameValueSource\"<\n" +
+	"\x1bInfraEnvironmentValueSource\x12\x1d\n" +
+	"\n" +
+	"service_id\x18\x01 \x01(\x03R\tserviceId\"$\n" +
+	"\"InfraCombinedEventTypesValueSource\"\xb5\x02\n" +
+	"\x10InfraQuerySource\x12\\\n" +
+	"\fservice_name\x18\x01 \x01(\v27.yandex.cloud.monitoring.v3.InfraServiceNameValueSourceH\x00R\vserviceName\x12[\n" +
+	"\venvironment\x18\x02 \x01(\v27.yandex.cloud.monitoring.v3.InfraEnvironmentValueSourceH\x00R\venvironment\x12V\n" +
+	"\x05types\x18\x03 \x01(\v2>.yandex.cloud.monitoring.v3.InfraCombinedEventTypesValueSourceH\x00R\x05typesB\x0e\n" +
+	"\fvalue_source\"\x87\x04\n" +
 	"\x0eQueryParameter\x12(\n" +
 	"\x0fmultiselectable\x18\x01 \x01(\bR\x0fmultiselectable\x12%\n" +
 	"\x0edefault_values\x18\x02 \x03(\tR\rdefaultValues\x12W\n" +
@@ -1209,7 +1454,8 @@ const file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc = "" +
 	"monitoring\x12S\n" +
 	"\n" +
 	"prometheus\x18\x06 \x01(\v21.yandex.cloud.monitoring.v3.PrometheusQuerySourceH\x00R\n" +
-	"prometheusB\r\n" +
+	"prometheus\x12D\n" +
+	"\x05infra\x18\a \x01(\v2,.yandex.cloud.monitoring.v3.InfraQuerySourceH\x00R\x05infraB\r\n" +
 	"\vdata_source\"\xb0\x06\n" +
 	"\tParameter\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
@@ -1247,45 +1493,53 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescGZIP() []byte 
 	return file_yandex_cloud_monitoring_v3_parametrization_proto_rawDescData
 }
 
-var file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_yandex_cloud_monitoring_v3_parametrization_proto_goTypes = []any{
-	(*LabelValuesParameter)(nil),     // 0: yandex.cloud.monitoring.v3.LabelValuesParameter
-	(*CustomParameter)(nil),          // 1: yandex.cloud.monitoring.v3.CustomParameter
-	(*TextParameter)(nil),            // 2: yandex.cloud.monitoring.v3.TextParameter
-	(*DoubleParameter)(nil),          // 3: yandex.cloud.monitoring.v3.DoubleParameter
-	(*IntegerParameter)(nil),         // 4: yandex.cloud.monitoring.v3.IntegerParameter
-	(*TextValuesParameter)(nil),      // 5: yandex.cloud.monitoring.v3.TextValuesParameter
-	(*WorkspaceParameter)(nil),       // 6: yandex.cloud.monitoring.v3.WorkspaceParameter
-	(*QueryParameterCustomItem)(nil), // 7: yandex.cloud.monitoring.v3.QueryParameterCustomItem
-	(*RelabelItem)(nil),              // 8: yandex.cloud.monitoring.v3.RelabelItem
-	(*MonitoringQuerySource)(nil),    // 9: yandex.cloud.monitoring.v3.MonitoringQuerySource
-	(*PrometheusQuerySource)(nil),    // 10: yandex.cloud.monitoring.v3.PrometheusQuerySource
-	(*QueryParameter)(nil),           // 11: yandex.cloud.monitoring.v3.QueryParameter
-	(*Parameter)(nil),                // 12: yandex.cloud.monitoring.v3.Parameter
-	(*Parametrization)(nil),          // 13: yandex.cloud.monitoring.v3.Parametrization
-	(UnitFormat)(0),                  // 14: yandex.cloud.monitoring.v3.UnitFormat
+	(*LabelValuesParameter)(nil),               // 0: yandex.cloud.monitoring.v3.LabelValuesParameter
+	(*CustomParameter)(nil),                    // 1: yandex.cloud.monitoring.v3.CustomParameter
+	(*TextParameter)(nil),                      // 2: yandex.cloud.monitoring.v3.TextParameter
+	(*DoubleParameter)(nil),                    // 3: yandex.cloud.monitoring.v3.DoubleParameter
+	(*IntegerParameter)(nil),                   // 4: yandex.cloud.monitoring.v3.IntegerParameter
+	(*TextValuesParameter)(nil),                // 5: yandex.cloud.monitoring.v3.TextValuesParameter
+	(*WorkspaceParameter)(nil),                 // 6: yandex.cloud.monitoring.v3.WorkspaceParameter
+	(*QueryParameterCustomItem)(nil),           // 7: yandex.cloud.monitoring.v3.QueryParameterCustomItem
+	(*RelabelItem)(nil),                        // 8: yandex.cloud.monitoring.v3.RelabelItem
+	(*MonitoringQuerySource)(nil),              // 9: yandex.cloud.monitoring.v3.MonitoringQuerySource
+	(*PrometheusQuerySource)(nil),              // 10: yandex.cloud.monitoring.v3.PrometheusQuerySource
+	(*InfraServiceNameValueSource)(nil),        // 11: yandex.cloud.monitoring.v3.InfraServiceNameValueSource
+	(*InfraEnvironmentValueSource)(nil),        // 12: yandex.cloud.monitoring.v3.InfraEnvironmentValueSource
+	(*InfraCombinedEventTypesValueSource)(nil), // 13: yandex.cloud.monitoring.v3.InfraCombinedEventTypesValueSource
+	(*InfraQuerySource)(nil),                   // 14: yandex.cloud.monitoring.v3.InfraQuerySource
+	(*QueryParameter)(nil),                     // 15: yandex.cloud.monitoring.v3.QueryParameter
+	(*Parameter)(nil),                          // 16: yandex.cloud.monitoring.v3.Parameter
+	(*Parametrization)(nil),                    // 17: yandex.cloud.monitoring.v3.Parametrization
+	(UnitFormat)(0),                            // 18: yandex.cloud.monitoring.v3.UnitFormat
 }
 var file_yandex_cloud_monitoring_v3_parametrization_proto_depIdxs = []int32{
-	14, // 0: yandex.cloud.monitoring.v3.DoubleParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	14, // 1: yandex.cloud.monitoring.v3.IntegerParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	7,  // 2: yandex.cloud.monitoring.v3.QueryParameter.custom_items:type_name -> yandex.cloud.monitoring.v3.QueryParameterCustomItem
-	8,  // 3: yandex.cloud.monitoring.v3.QueryParameter.relabel_items:type_name -> yandex.cloud.monitoring.v3.RelabelItem
-	9,  // 4: yandex.cloud.monitoring.v3.QueryParameter.monitoring:type_name -> yandex.cloud.monitoring.v3.MonitoringQuerySource
-	10, // 5: yandex.cloud.monitoring.v3.QueryParameter.prometheus:type_name -> yandex.cloud.monitoring.v3.PrometheusQuerySource
-	0,  // 6: yandex.cloud.monitoring.v3.Parameter.label_values:type_name -> yandex.cloud.monitoring.v3.LabelValuesParameter
-	1,  // 7: yandex.cloud.monitoring.v3.Parameter.custom:type_name -> yandex.cloud.monitoring.v3.CustomParameter
-	2,  // 8: yandex.cloud.monitoring.v3.Parameter.text:type_name -> yandex.cloud.monitoring.v3.TextParameter
-	4,  // 9: yandex.cloud.monitoring.v3.Parameter.integer_parameter:type_name -> yandex.cloud.monitoring.v3.IntegerParameter
-	3,  // 10: yandex.cloud.monitoring.v3.Parameter.double_parameter:type_name -> yandex.cloud.monitoring.v3.DoubleParameter
-	5,  // 11: yandex.cloud.monitoring.v3.Parameter.text_values:type_name -> yandex.cloud.monitoring.v3.TextValuesParameter
-	6,  // 12: yandex.cloud.monitoring.v3.Parameter.workspace_parameter:type_name -> yandex.cloud.monitoring.v3.WorkspaceParameter
-	11, // 13: yandex.cloud.monitoring.v3.Parameter.query:type_name -> yandex.cloud.monitoring.v3.QueryParameter
-	12, // 14: yandex.cloud.monitoring.v3.Parametrization.parameters:type_name -> yandex.cloud.monitoring.v3.Parameter
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	18, // 0: yandex.cloud.monitoring.v3.DoubleParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	18, // 1: yandex.cloud.monitoring.v3.IntegerParameter.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	11, // 2: yandex.cloud.monitoring.v3.InfraQuerySource.service_name:type_name -> yandex.cloud.monitoring.v3.InfraServiceNameValueSource
+	12, // 3: yandex.cloud.monitoring.v3.InfraQuerySource.environment:type_name -> yandex.cloud.monitoring.v3.InfraEnvironmentValueSource
+	13, // 4: yandex.cloud.monitoring.v3.InfraQuerySource.types:type_name -> yandex.cloud.monitoring.v3.InfraCombinedEventTypesValueSource
+	7,  // 5: yandex.cloud.monitoring.v3.QueryParameter.custom_items:type_name -> yandex.cloud.monitoring.v3.QueryParameterCustomItem
+	8,  // 6: yandex.cloud.monitoring.v3.QueryParameter.relabel_items:type_name -> yandex.cloud.monitoring.v3.RelabelItem
+	9,  // 7: yandex.cloud.monitoring.v3.QueryParameter.monitoring:type_name -> yandex.cloud.monitoring.v3.MonitoringQuerySource
+	10, // 8: yandex.cloud.monitoring.v3.QueryParameter.prometheus:type_name -> yandex.cloud.monitoring.v3.PrometheusQuerySource
+	14, // 9: yandex.cloud.monitoring.v3.QueryParameter.infra:type_name -> yandex.cloud.monitoring.v3.InfraQuerySource
+	0,  // 10: yandex.cloud.monitoring.v3.Parameter.label_values:type_name -> yandex.cloud.monitoring.v3.LabelValuesParameter
+	1,  // 11: yandex.cloud.monitoring.v3.Parameter.custom:type_name -> yandex.cloud.monitoring.v3.CustomParameter
+	2,  // 12: yandex.cloud.monitoring.v3.Parameter.text:type_name -> yandex.cloud.monitoring.v3.TextParameter
+	4,  // 13: yandex.cloud.monitoring.v3.Parameter.integer_parameter:type_name -> yandex.cloud.monitoring.v3.IntegerParameter
+	3,  // 14: yandex.cloud.monitoring.v3.Parameter.double_parameter:type_name -> yandex.cloud.monitoring.v3.DoubleParameter
+	5,  // 15: yandex.cloud.monitoring.v3.Parameter.text_values:type_name -> yandex.cloud.monitoring.v3.TextValuesParameter
+	6,  // 16: yandex.cloud.monitoring.v3.Parameter.workspace_parameter:type_name -> yandex.cloud.monitoring.v3.WorkspaceParameter
+	15, // 17: yandex.cloud.monitoring.v3.Parameter.query:type_name -> yandex.cloud.monitoring.v3.QueryParameter
+	16, // 18: yandex.cloud.monitoring.v3.Parametrization.parameters:type_name -> yandex.cloud.monitoring.v3.Parameter
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_parametrization_proto_init() }
@@ -1301,11 +1555,17 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_init() {
 		(*WorkspaceParameter_ProjectId)(nil),
 		(*WorkspaceParameter_FolderId)(nil),
 	}
-	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[11].OneofWrappers = []any{
+	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[14].OneofWrappers = []any{
+		(*InfraQuerySource_ServiceName)(nil),
+		(*InfraQuerySource_Environment)(nil),
+		(*InfraQuerySource_Types)(nil),
+	}
+	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[15].OneofWrappers = []any{
 		(*QueryParameter_Monitoring)(nil),
 		(*QueryParameter_Prometheus)(nil),
+		(*QueryParameter_Infra)(nil),
 	}
-	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[12].OneofWrappers = []any{
+	file_yandex_cloud_monitoring_v3_parametrization_proto_msgTypes[16].OneofWrappers = []any{
 		(*Parameter_LabelValues)(nil),
 		(*Parameter_Custom)(nil),
 		(*Parameter_Text)(nil),
@@ -1321,7 +1581,7 @@ func file_yandex_cloud_monitoring_v3_parametrization_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc), len(file_yandex_cloud_monitoring_v3_parametrization_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

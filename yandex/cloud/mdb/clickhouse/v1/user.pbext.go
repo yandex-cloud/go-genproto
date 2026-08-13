@@ -102,6 +102,10 @@ func (m *UserSettings) SetReplicationAlterPartitionsSync(v *wrapperspb.Int64Valu
 	m.ReplicationAlterPartitionsSync = v
 }
 
+func (m *UserSettings) SetLightweightDeletesSync(v *wrapperspb.Int64Value) {
+	m.LightweightDeletesSync = v
+}
+
 func (m *UserSettings) SetMaxReplicaDelayForDistributedQueries(v *wrapperspb.Int64Value) {
 	m.MaxReplicaDelayForDistributedQueries = v
 }
