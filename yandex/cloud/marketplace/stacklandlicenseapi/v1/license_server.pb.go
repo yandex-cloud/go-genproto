@@ -7,6 +7,7 @@
 package stacklandlicenseapi
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -127,8 +128,20 @@ type LicenseServer struct {
 	ValidUntil *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
 	// PEM-encoded PKIX public key for verifying license signatures
 	LsSigningPublicKey string `protobuf:"bytes,5,opt,name=ls_signing_public_key,json=lsSigningPublicKey,proto3" json:"ls_signing_public_key,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// User-provided human-readable license server name
+	DisplayName string `protobuf:"bytes,6,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	// User-provided license server description
+	Description string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	// Organization that owns the license server
+	OrganizationId string `protobuf:"bytes,8,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	// Billing account associated with the license server
+	BillingAccountId string `protobuf:"bytes,9,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
+	// Timestamp when the license server was created
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	// Timestamp when the license server was last updated
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *LicenseServer) Reset() {
@@ -196,6 +209,48 @@ func (x *LicenseServer) GetLsSigningPublicKey() string {
 	return ""
 }
 
+func (x *LicenseServer) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *LicenseServer) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *LicenseServer) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return ""
+}
+
+func (x *LicenseServer) GetBillingAccountId() string {
+	if x != nil {
+		return x.BillingAccountId
+	}
+	return ""
+}
+
+func (x *LicenseServer) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *LicenseServer) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 // Metadata for register license server operation
 type RegisterLicenseServerMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -255,21 +310,30 @@ var File_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto pr
 
 const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_rawDesc = "" +
 	"\n" +
-	"Dyandex/cloud/marketplace/stacklandlicenseapi/v1/license_server.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbe\x01\n" +
+	"Dyandex/cloud/marketplace/stacklandlicenseapi/v1/license_server.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbe\x01\n" +
 	"\x15LicenseServerMetadata\x12j\n" +
 	"\x06labels\x18\x01 \x03(\v2R.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadata.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa0\x01\n" +
 	"\x0fRegisterRequest\x12b\n" +
-	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadataJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\xee\x01\n" +
-	"\rLicenseServer\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12*\n" +
+	"\bmetadata\x18\x03 \x01(\v2F.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadataR\bmetadataJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\x99\x04\n" +
+	"\rLicenseServer\x12 \n" +
+	"\tserver_id\x18\x01 \x01(\tB\x03\xe0A\bR\bserverId\x12*\n" +
 	"\x11ls_ca_certificate\x18\x02 \x01(\tR\x0flsCaCertificate\x12$\n" +
 	"\x0els_private_key\x18\x03 \x01(\tR\flsPrivateKey\x12;\n" +
 	"\vvalid_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"validUntil\x121\n" +
-	"\x15ls_signing_public_key\x18\x05 \x01(\tR\x12lsSigningPublicKey\"v\n" +
+	"\x15ls_signing_public_key\x18\x05 \x01(\tR\x12lsSigningPublicKey\x12!\n" +
+	"\fdisplay_name\x18\x06 \x01(\tR\vdisplayName\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12,\n" +
+	"\x0forganization_id\x18\b \x01(\tB\x03\xe0A\x05R\x0eorganizationId\x121\n" +
+	"\x12billing_account_id\x18\t \x01(\tB\x03\xe0A\x05R\x10billingAccountId\x12>\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tcreatedAt\x12>\n" +
+	"\n" +
+	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\tupdatedAt\"v\n" +
 	"\x1dRegisterLicenseServerMetadata\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12,\n" +
 	"\x12billing_account_id\x18\x02 \x01(\tR\x10billingAccountIdB\x9e\x01\n" +
@@ -300,11 +364,13 @@ var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_de
 	4, // 0: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadata.labels:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadata.LabelsEntry
 	0, // 1: yandex.cloud.marketplace.stacklandlicenseapi.v1.RegisterRequest.metadata:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServerMetadata
 	5, // 2: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServer.valid_until:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	5, // 3: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServer.created_at:type_name -> google.protobuf.Timestamp
+	5, // 4: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseServer.updated_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_marketplace_stacklandlicenseapi_v1_license_server_proto_init() }

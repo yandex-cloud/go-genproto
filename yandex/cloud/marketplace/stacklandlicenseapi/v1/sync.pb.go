@@ -680,9 +680,9 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\vvalid_until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"validUntil\x12U\n" +
 	"\x06limits\x18\a \x03(\v2=.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimitR\x06limits\x12\x1c\n" +
-	"\tsignature\x18\b \x01(\tR\tsignature\"\xd2\x01\n" +
-	"\vSyncRequest\x129\n" +
-	"\x11license_server_id\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0flicenseServerId\x12]\n" +
+	"\tsignature\x18\b \x01(\tR\tsignature\"\xd1\x01\n" +
+	"\vSyncRequest\x128\n" +
+	"\x11license_server_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0flicenseServerId\x12]\n" +
 	"\x05usage\x18\x04 \x03(\v2;.yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntryB\n" +
 	"\x82\xc81\x06<=1000R\x05usageJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\xdf\x01\n" +
 	"\x0fSyncUsageResult\x12T\n" +

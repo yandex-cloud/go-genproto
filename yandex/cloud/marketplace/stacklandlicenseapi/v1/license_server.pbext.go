@@ -34,6 +34,30 @@ func (m *LicenseServer) SetLsSigningPublicKey(v string) {
 	m.LsSigningPublicKey = v
 }
 
+func (m *LicenseServer) SetDisplayName(v string) {
+	m.DisplayName = v
+}
+
+func (m *LicenseServer) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *LicenseServer) SetOrganizationId(v string) {
+	m.OrganizationId = v
+}
+
+func (m *LicenseServer) SetBillingAccountId(v string) {
+	m.BillingAccountId = v
+}
+
+func (m *LicenseServer) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
+func (m *LicenseServer) SetUpdatedAt(v *timestamppb.Timestamp) {
+	m.UpdatedAt = v
+}
+
 func (m *RegisterLicenseServerMetadata) SetOrganizationId(v string) {
 	m.OrganizationId = v
 }
