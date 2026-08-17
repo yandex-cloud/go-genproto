@@ -918,7 +918,7 @@ const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawD
 	"\x14stackland_cluster_id\x18\x03 \x01(\tB\x03\xe0A\x02R\x12stacklandClusterId\"d\n" +
 	"\"GetStacklandClusterConfigsResponse\x12\x1f\n" +
 	"\bfilename\x18\x01 \x01(\tB\x03\xe0A\x03R\bfilename\x12\x1d\n" +
-	"\acontent\x18\x02 \x01(\fB\x03\xe0A\x03R\acontent2\x80\x11\n" +
+	"\acontent\x18\x02 \x01(\fB\x03\xe0A\x03R\acontent2\xfc\x10\n" +
 	"\x17StacklandClusterService\x12\x95\x02\n" +
 	"\x13GetStacklandCluster\x12<.yandex.cloud.baremetal.v2.extend.GetStacklandClusterRequest\x1a2.yandex.cloud.baremetal.v2.extend.StacklandCluster\"\x8b\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02[\x12Y/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}\x12\xf9\x01\n" +
 	"\x15ListStacklandClusters\x12>.yandex.cloud.baremetal.v2.extend.ListStacklandClustersRequest\x1a?.yandex.cloud.baremetal.v2.extend.ListStacklandClustersResponse\"_\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02D\x12B/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters\x12\xa5\x02\n" +
@@ -928,8 +928,8 @@ const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_service_proto_rawD
 	"\x1eUpdateStacklandClusterMetadata\x12\x10StacklandCluster\x82\xd3\xe4\x93\x02|:\acluster2q/v2/clouds/{cluster.cloud_id}/folders/{cluster.folder_id}/extend/stacklandClusters/{cluster.stackland_cluster_id}\x12\xc5\x02\n" +
 	"\x16DeleteStacklandCluster\x12?.yandex.cloud.baremetal.v2.extend.DeleteStacklandClusterRequest\x1a!.yandex.cloud.operation.Operation\"\xc6\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\xb2\xd2*7\n" +
 	"\x1eDeleteStacklandClusterMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02[*Y/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}\x12\xbd\x02\n" +
-	"\x1aGetStacklandClusterConfigs\x12C.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsRequest\x1aD.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsResponse\"\x93\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02c\x12a/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}:configs\x12\xd0\x02\n" +
-	"\x1eListStacklandClusterOperations\x12G.yandex.cloud.baremetal.v2.extend.ListStacklandClusterOperationsRequest\x1aH.yandex.cloud.baremetal.v2.extend.ListStacklandClusterOperationsResponse\"\x9a\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02j\x12h/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}:listOperationsBz\n" +
+	"\x1aGetStacklandClusterConfigs\x12C.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsRequest\x1aD.yandex.cloud.baremetal.v2.extend.GetStacklandClusterConfigsResponse\"\x93\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02c\x12a/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}:configs\x12\xcc\x02\n" +
+	"\x1eListStacklandClusterOperations\x12G.yandex.cloud.baremetal.v2.extend.ListStacklandClusterOperationsRequest\x1aH.yandex.cloud.baremetal.v2.extend.ListStacklandClusterOperationsResponse\"\x96\x01\xdaA'cloud_id,folder_id,stackland_cluster_id\x82\xd3\xe4\x93\x02f\x12d/v2/clouds/{cloud_id}/folders/{folder_id}/extend/stacklandClusters/{stackland_cluster_id}/operationsBz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"
 
 var (

@@ -198,10 +198,10 @@ const file_yandex_cloud_mdb_opensearch_v1_extension_proto_rawDesc = "" +
 	"cluster_id\x18\x03 \x01(\tR\tclusterId\x12\x18\n" +
 	"\aversion\x18\x04 \x01(\x03R\aversion\x12\x16\n" +
 	"\x06active\x18\x05 \x01(\bR\x06active\x12K\n" +
-	"\x04type\x18\x06 \x01(\x0e27.yandex.cloud.mdb.opensearch.v1.extension.ExtensionTypeR\x04type\"\xd2\x01\n" +
+	"\x04type\x18\x06 \x01(\x0e27.yandex.cloud.mdb.opensearch.v1.extension.ExtensionTypeR\x04type\"\xd3\x01\n" +
 	"\rExtensionSpec\x122\n" +
-	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]+\x8a\xc81\x04<=50R\x04name\x12\x1e\n" +
-	"\x03uri\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x03uri\x12\x1a\n" +
+	"\x04name\x18\x01 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]+\x8a\xc81\x04<=50R\x04name\x12\x1f\n" +
+	"\x03uri\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=128R\x03uri\x12\x1a\n" +
 	"\bdisabled\x18\x03 \x01(\bR\bdisabled\x12Q\n" +
 	"\x04type\x18\x04 \x01(\x0e27.yandex.cloud.mdb.opensearch.v1.extension.ExtensionTypeB\x04\xe8\xc71\x01R\x04typeBs\n" +
 	"\"yandex.cloud.api.mdb.opensearch.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1;opensearchb\x06proto3"

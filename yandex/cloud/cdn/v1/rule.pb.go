@@ -31,13 +31,18 @@ type Rule struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Rule pattern.
 	// Must be a valid regular expression.
-	RulePattern string           `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
-	Options     *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
+	RulePattern string `protobuf:"bytes,3,opt,name=rule_pattern,json=rulePattern,proto3" json:"rule_pattern,omitempty"`
+	// Resource options.
+	Options *ResourceOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
 	// Rules are ordered by weight in ascending order (lower weights execute first)
 	// Weight must be between 0 and 9999 inclusive
-	Weight        int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Weight int64 `protobuf:"varint,5,opt,name=weight,proto3" json:"weight,omitempty"`
+	// ID of origins group. Non zero value overrides parent origin group.
+	OriginsGroupId int64 `protobuf:"varint,6,opt,name=origins_group_id,json=originsGroupId,proto3" json:"origins_group_id,omitempty"`
+	// Protocol used for communication with origin.
+	OriginProtocol OriginProtocol `protobuf:"varint,7,opt,name=origin_protocol,json=originProtocol,proto3,enum=yandex.cloud.cdn.v1.OriginProtocol" json:"origin_protocol,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *Rule) Reset() {
@@ -105,17 +110,33 @@ func (x *Rule) GetWeight() int64 {
 	return 0
 }
 
+func (x *Rule) GetOriginsGroupId() int64 {
+	if x != nil {
+		return x.OriginsGroupId
+	}
+	return 0
+}
+
+func (x *Rule) GetOriginProtocol() OriginProtocol {
+	if x != nil {
+		return x.OriginProtocol
+	}
+	return OriginProtocol_ORIGIN_PROTOCOL_UNSPECIFIED
+}
+
 var File_yandex_cloud_cdn_v1_rule_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cdn_v1_rule_proto_rawDesc = "" +
 	"\n" +
-	"\x1eyandex/cloud/cdn/v1/rule.proto\x12\x13yandex.cloud.cdn.v1\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xca\x01\n" +
+	"\x1eyandex/cloud/cdn/v1/rule.proto\x12\x13yandex.cloud.cdn.v1\x1a\"yandex/cloud/cdn/v1/resource.proto\x1a\x1dyandex/cloud/validation.proto\"\xc2\x02\n" +
 	"\x04Rule\x12\x16\n" +
 	"\x02id\x18\x01 \x01(\x03B\x06\xfa\xc71\x02>0R\x02id\x12 \n" +
 	"\x04name\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x04name\x120\n" +
 	"\frule_pattern\x18\x03 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\vrulePattern\x12>\n" +
 	"\aoptions\x18\x04 \x01(\v2$.yandex.cloud.cdn.v1.ResourceOptionsR\aoptions\x12\x16\n" +
-	"\x06weight\x18\x05 \x01(\x03R\x06weightBV\n" +
+	"\x06weight\x18\x05 \x01(\x03R\x06weight\x12(\n" +
+	"\x10origins_group_id\x18\x06 \x01(\x03R\x0eoriginsGroupId\x12L\n" +
+	"\x0forigin_protocol\x18\a \x01(\x0e2#.yandex.cloud.cdn.v1.OriginProtocolR\x0eoriginProtocolBV\n" +
 	"\x17yandex.cloud.api.cdn.v1Z;github.com/yandex-cloud/go-genproto/yandex/cloud/cdn/v1;cdnb\x06proto3"
 
 var (
@@ -134,14 +155,16 @@ var file_yandex_cloud_cdn_v1_rule_proto_msgTypes = make([]protoimpl.MessageInfo,
 var file_yandex_cloud_cdn_v1_rule_proto_goTypes = []any{
 	(*Rule)(nil),            // 0: yandex.cloud.cdn.v1.Rule
 	(*ResourceOptions)(nil), // 1: yandex.cloud.cdn.v1.ResourceOptions
+	(OriginProtocol)(0),     // 2: yandex.cloud.cdn.v1.OriginProtocol
 }
 var file_yandex_cloud_cdn_v1_rule_proto_depIdxs = []int32{
 	1, // 0: yandex.cloud.cdn.v1.Rule.options:type_name -> yandex.cloud.cdn.v1.ResourceOptions
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: yandex.cloud.cdn.v1.Rule.origin_protocol:type_name -> yandex.cloud.cdn.v1.OriginProtocol
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cdn_v1_rule_proto_init() }

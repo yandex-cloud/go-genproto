@@ -653,6 +653,9 @@ type ClusterConfig struct {
 	// Access policy for external services.
 	Access *Access `protobuf:"bytes,4,opt,name=access,proto3" json:"access,omitempty"`
 	// Snapshot management configuration.
+	// Deprecated: use [BackupRetentionPolicyService.List] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/opensearch/v1/cluster.proto.
 	SnapshotManagement *SnapshotManagement `protobuf:"bytes,5,opt,name=snapshot_management,json=snapshotManagement,proto3" json:"snapshot_management,omitempty"`
 	// Full version.
 	FullVersion string `protobuf:"bytes,6,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
@@ -722,6 +725,7 @@ func (x *ClusterConfig) GetAccess() *Access {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/opensearch/v1/cluster.proto.
 func (x *ClusterConfig) GetSnapshotManagement() *SnapshotManagement {
 	if x != nil {
 		return x.SnapshotManagement
@@ -1771,7 +1775,7 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xaa\x04\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xae\x04\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12J\n" +
 	"\n" +
@@ -1780,8 +1784,8 @@ const file_yandex_cloud_mdb_opensearch_v1_cluster_proto_rawDesc = "" +
 	"\n" +
 	"dashboards\x18\x03 \x01(\v2*.yandex.cloud.mdb.opensearch.v1.DashboardsR\n" +
 	"dashboards\x12>\n" +
-	"\x06access\x18\x04 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12c\n" +
-	"\x13snapshot_management\x18\x05 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementR\x12snapshotManagement\x12!\n" +
+	"\x06access\x18\x04 \x01(\v2&.yandex.cloud.mdb.opensearch.v1.AccessR\x06access\x12g\n" +
+	"\x13snapshot_management\x18\x05 \x01(\v22.yandex.cloud.mdb.opensearch.v1.SnapshotManagementB\x02\x18\x01R\x12snapshotManagement\x12!\n" +
 	"\ffull_version\x18\x06 \x01(\tR\vfullVersion\x12L\n" +
 	"\taudit_log\x18\a \x01(\v2/.yandex.cloud.mdb.opensearch.v1.config.AuditLogR\bauditLog\x12Q\n" +
 	"\rcloud_storage\x18\b \x01(\v2,.yandex.cloud.mdb.opensearch.v1.CloudStorageR\fcloudStorage\"\xac\x06\n" +

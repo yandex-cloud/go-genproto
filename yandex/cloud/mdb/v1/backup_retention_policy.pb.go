@@ -26,6 +26,12 @@ const (
 // Message to describe a crontab schedule.
 type CronTab struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// Minute in cron format. Valid values: 0-59, *, ranges (0-30), steps (*/5), lists (0,15,30,45).
+	// Defaults to "". Support depends on the database engine.
+	Minute string `protobuf:"bytes,1,opt,name=minute,proto3" json:"minute,omitempty"`
+	// Hour in cron format. Valid values: 0-23, *, ranges (8-18), steps (*/2), lists (0,12).
+	// Defaults to "". Support depends on the database engine.
+	Hour string `protobuf:"bytes,2,opt,name=hour,proto3" json:"hour,omitempty"`
 	// Day of month in cron format. Valid values: 1-31, *, ranges (1-15), steps (*/2, 1-15/3), lists (1,15,28).
 	// Defaults to "*".
 	DayOfMonth string `protobuf:"bytes,3,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"`
@@ -67,6 +73,20 @@ func (x *CronTab) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CronTab.ProtoReflect.Descriptor instead.
 func (*CronTab) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CronTab) GetMinute() string {
+	if x != nil {
+		return x.Minute
+	}
+	return ""
+}
+
+func (x *CronTab) GetHour() string {
+	if x != nil {
+		return x.Hour
+	}
+	return ""
 }
 
 func (x *CronTab) GetDayOfMonth() string {
@@ -375,12 +395,14 @@ var File_yandex_cloud_mdb_v1_backup_retention_policy_proto protoreflect.FileDesc
 
 const file_yandex_cloud_mdb_v1_backup_retention_policy_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/mdb/v1/backup_retention_policy.proto\x12\x13yandex.cloud.mdb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"u\n" +
-	"\aCronTab\x12 \n" +
+	"1yandex/cloud/mdb/v1/backup_retention_policy.proto\x12\x13yandex.cloud.mdb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x8d\x01\n" +
+	"\aCronTab\x12\x16\n" +
+	"\x06minute\x18\x01 \x01(\tR\x06minute\x12\x12\n" +
+	"\x04hour\x18\x02 \x01(\tR\x04hour\x12 \n" +
 	"\fday_of_month\x18\x03 \x01(\tR\n" +
 	"dayOfMonth\x12\x14\n" +
 	"\x05month\x18\x04 \x01(\tR\x05month\x12\x1e\n" +
-	"\vday_of_week\x18\x05 \x01(\tR\tdayOfWeekJ\x04\b\x01\x10\x03R\x06minuteR\x04hour\"\xc5\x02\n" +
+	"\vday_of_week\x18\x05 \x01(\tR\tdayOfWeek\"\xc5\x02\n" +
 	"\x15BackupRetentionPolicy\x12!\n" +
 	"\tpolicy_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bpolicyId\x12+\n" +
 	"\n" +

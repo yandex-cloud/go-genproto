@@ -1021,6 +1021,9 @@ type User struct {
 	// Quotas assigned to the user.
 	Quotas []*UserQuota `protobuf:"bytes,5,rep,name=quotas,proto3" json:"quotas,omitempty"`
 	// Connection Manager connection configuration.
+	// Deprecated in favor of user_connection_manager field.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
 	ConnectionManager *ConnectionManager `protobuf:"bytes,6,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
 	// User authentication method.
 	AuthMethod    AuthMethod `protobuf:"varint,7,opt,name=auth_method,json=authMethod,proto3,enum=yandex.cloud.mdb.clickhouse.v1.AuthMethod" json:"auth_method,omitempty"`
@@ -1093,6 +1096,7 @@ func (x *User) GetQuotas() []*UserQuota {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
 func (x *User) GetConnectionManager() *ConnectionManager {
 	if x != nil {
 		return x.ConnectionManager
@@ -3783,6 +3787,9 @@ func (x *UserQuota) GetExecutionTime() *wrapperspb.Int64Value {
 }
 
 // Connection Manager connection configuration.
+// Deprecated in favor of yandex.cloud.priv.mdb.v1.UserConnectionManager message.
+//
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/clickhouse/v1/user.proto.
 type ConnectionManager struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of Connection Manager connection.
@@ -3933,15 +3940,15 @@ var File_yandex_cloud_mdb_clickhouse_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/mdb/clickhouse/v1/user.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x03\n" +
+	")yandex/cloud/mdb/clickhouse/v1/user.proto\x12\x1eyandex.cloud.mdb.clickhouse.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xd3\x03\n" +
 	"\x04User\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12L\n" +
 	"\vpermissions\x18\x03 \x03(\v2*.yandex.cloud.mdb.clickhouse.v1.PermissionR\vpermissions\x12H\n" +
 	"\bsettings\x18\x04 \x01(\v2,.yandex.cloud.mdb.clickhouse.v1.UserSettingsR\bsettings\x12A\n" +
-	"\x06quotas\x18\x05 \x03(\v2).yandex.cloud.mdb.clickhouse.v1.UserQuotaR\x06quotas\x12`\n" +
-	"\x12connection_manager\x18\x06 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.ConnectionManagerR\x11connectionManager\x12K\n" +
+	"\x06quotas\x18\x05 \x03(\v2).yandex.cloud.mdb.clickhouse.v1.UserQuotaR\x06quotas\x12d\n" +
+	"\x12connection_manager\x18\x06 \x01(\v21.yandex.cloud.mdb.clickhouse.v1.ConnectionManagerB\x02\x18\x01R\x11connectionManager\x12K\n" +
 	"\vauth_method\x18\a \x01(\x0e2*.yandex.cloud.mdb.clickhouse.v1.AuthMethodR\n" +
 	"authMethod\"1\n" +
 	"\n" +
@@ -4230,9 +4237,9 @@ const file_yandex_cloud_mdb_clickhouse_v1_user_proto_rawDesc = "" +
 	"\vresult_rows\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\n" +
 	"resultRows\x128\n" +
 	"\tread_rows\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\breadRows\x12B\n" +
-	"\x0eexecution_time\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\rexecutionTime\"8\n" +
+	"\x0eexecution_time\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\rexecutionTime\"<\n" +
 	"\x11ConnectionManager\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\xc4\x03\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId:\x02\x18\x01\"\xc4\x03\n" +
 	"\bUserSpec\x12 \n" +
 	"\x04name\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\x04name\x12%\n" +
 	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12G\n" +

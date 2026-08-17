@@ -46,6 +46,10 @@ func (m *ListRawSessionStatesRequest) SetPageToken(v string) {
 	m.PageToken = v
 }
 
+func (m *ListRawSessionStatesRequest) SetExtendedFilter(v []*ExtendedSessionFilter) {
+	m.ExtendedFilter = v
+}
+
 func (m *ListRawSessionStatesResponse) SetSessionStates(v []*SessionState) {
 	m.SessionStates = v
 }
@@ -60,4 +64,16 @@ func (m *ListRawStatementsResponse) SetStatements(v []*QueryStatement) {
 
 func (m *ListRawStatementsResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
+}
+
+func (m *ExtendedSessionFilter) SetFieldName(v SessionField) {
+	m.FieldName = v
+}
+
+func (m *ExtendedSessionFilter) SetValue(v string) {
+	m.Value = v
+}
+
+func (m *ExtendedSessionFilter) SetOperator(v Operator) {
+	m.Operator = v
 }

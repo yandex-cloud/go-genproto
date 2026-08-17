@@ -21,3 +21,11 @@ func (m *Rule) SetOptions(v *ResourceOptions) {
 func (m *Rule) SetWeight(v int64) {
 	m.Weight = v
 }
+
+func (m *Rule) SetOriginsGroupId(v int64) {
+	m.OriginsGroupId = v
+}
+
+func (m *Rule) SetOriginProtocol(v OriginProtocol) {
+	m.OriginProtocol = v
+}

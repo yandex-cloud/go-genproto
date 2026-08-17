@@ -191,6 +191,26 @@ func (m *AddClusterZookeeperMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
 
+func (m *MigrateClusterToKeeperRequest) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
+func (m *MigrateClusterToKeeperRequest) SetResources(v *Resources) {
+	m.Resources = v
+}
+
+func (m *MigrateClusterToKeeperRequest) SetHostSpecs(v []*HostSpec) {
+	m.HostSpecs = v
+}
+
+func (m *MigrateClusterToKeeperRequest) SetAllowDegradationToReadOnly(v bool) {
+	m.AllowDegradationToReadOnly = v
+}
+
+func (m *MigrateClusterToKeeperMetadata) SetClusterId(v string) {
+	m.ClusterId = v
+}
+
 func (m *StartClusterRequest) SetClusterId(v string) {
 	m.ClusterId = v
 }

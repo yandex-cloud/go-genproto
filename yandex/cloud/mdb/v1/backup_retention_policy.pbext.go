@@ -6,6 +6,14 @@ import (
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func (m *CronTab) SetMinute(v string) {
+	m.Minute = v
+}
+
+func (m *CronTab) SetHour(v string) {
+	m.Hour = v
+}
+
 func (m *CronTab) SetDayOfMonth(v string) {
 	m.DayOfMonth = v
 }
