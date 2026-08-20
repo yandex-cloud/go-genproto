@@ -891,7 +891,9 @@ type Access struct {
 	// Allows access for DataTransfer.
 	DataTransfer bool `protobuf:"varint,3,opt,name=data_transfer,json=dataTransfer,proto3" json:"data_transfer,omitempty"`
 	// Allow access for YandexQuery.
-	YandexQuery   bool `protobuf:"varint,5,opt,name=yandex_query,json=yandexQuery,proto3" json:"yandex_query,omitempty"`
+	YandexQuery bool `protobuf:"varint,5,opt,name=yandex_query,json=yandexQuery,proto3" json:"yandex_query,omitempty"`
+	// Allow safety access for trino
+	Trino         bool `protobuf:"varint,6,opt,name=trino,proto3" json:"trino,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -950,6 +952,13 @@ func (x *Access) GetDataTransfer() bool {
 func (x *Access) GetYandexQuery() bool {
 	if x != nil {
 		return x.YandexQuery
+	}
+	return false
+}
+
+func (x *Access) GetTrino() bool {
+	if x != nil {
+		return x.Trino
 	}
 	return false
 }
@@ -1267,12 +1276,13 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"\x06access\x18\x02 \x01(\v2%.yandex.cloud.mdb.greenplum.v1.AccessR\x06access\x12!\n" +
 	"\azone_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
 	"\tsubnet_id\x18\x04 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x12(\n" +
-	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\x8c\x01\n" +
+	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\xa2\x01\n" +
 	"\x06Access\x12\x1b\n" +
 	"\tdata_lens\x18\x01 \x01(\bR\bdataLens\x12\x17\n" +
 	"\aweb_sql\x18\x02 \x01(\bR\x06webSql\x12#\n" +
 	"\rdata_transfer\x18\x03 \x01(\bR\fdataTransfer\x12!\n" +
-	"\fyandex_query\x18\x05 \x01(\bR\vyandexQueryJ\x04\b\x04\x10\x05\"]\n" +
+	"\fyandex_query\x18\x05 \x01(\bR\vyandexQuery\x12\x14\n" +
+	"\x05trino\x18\x06 \x01(\bR\x05trinoJ\x04\b\x04\x10\x05\"]\n" +
 	"\x10RestoreResources\x12,\n" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\"&\n" +

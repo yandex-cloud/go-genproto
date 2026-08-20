@@ -6,12 +6,16 @@ func (m *NodeGroup) SetConfigurationId(v string) {
 	m.ConfigurationId = v
 }
 
-func (m *NodeGroup) SetCount(v int64) {
-	m.Count = v
+func (m *NodeGroup) SetNodeCount(v int64) {
+	m.NodeCount = v
 }
 
 func (m *NodeGroup) SetNodes(v []*Node) {
 	m.Nodes = v
+}
+
+func (m *NodeGroup) SetServerIds(v []string) {
+	m.ServerIds = v
 }
 
 func (m *Node) SetServerId(v string) {

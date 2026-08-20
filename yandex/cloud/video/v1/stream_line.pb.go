@@ -130,7 +130,7 @@ func (x AutoLine_AutoLineStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AutoLine_AutoLineStatus.Descriptor instead.
 func (AutoLine_AutoLineStatus) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{6, 0}
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{7, 0}
 }
 
 // Entity representing the incoming video signal settings.
@@ -149,6 +149,7 @@ type StreamLine struct {
 	// Types that are valid to be assigned to InputType:
 	//
 	//	*StreamLine_RtmpPush
+	//	*StreamLine_SrtPush
 	//	*StreamLine_RtmpPull
 	//	*StreamLine_SrtPull
 	InputType isStreamLine_InputType `protobuf_oneof:"input_type"`
@@ -245,6 +246,15 @@ func (x *StreamLine) GetRtmpPush() *RTMPPushInput {
 	return nil
 }
 
+func (x *StreamLine) GetSrtPush() *SRTPushInput {
+	if x != nil {
+		if x, ok := x.InputType.(*StreamLine_SrtPush); ok {
+			return x.SrtPush
+		}
+	}
+	return nil
+}
+
 func (x *StreamLine) GetRtmpPull() *RTMPPullInput {
 	if x != nil {
 		if x, ok := x.InputType.(*StreamLine_RtmpPull); ok {
@@ -318,6 +328,11 @@ type StreamLine_RtmpPush struct {
 	RtmpPush *RTMPPushInput `protobuf:"bytes,1000,opt,name=rtmp_push,json=rtmpPush,proto3,oneof"`
 }
 
+type StreamLine_SrtPush struct {
+	// Secure Reliable Transport (SRT) push input type.
+	SrtPush *SRTPushInput `protobuf:"bytes,1001,opt,name=srt_push,json=srtPush,proto3,oneof"`
+}
+
 type StreamLine_RtmpPull struct {
 	// Real-Time Messaging Protocol (RTMP) pull input type.
 	RtmpPull *RTMPPullInput `protobuf:"bytes,1002,opt,name=rtmp_pull,json=rtmpPull,proto3,oneof"`
@@ -329,6 +344,8 @@ type StreamLine_SrtPull struct {
 }
 
 func (*StreamLine_RtmpPush) isStreamLine_InputType() {}
+
+func (*StreamLine_SrtPush) isStreamLine_InputType() {}
 
 func (*StreamLine_RtmpPull) isStreamLine_InputType() {}
 
@@ -464,6 +481,63 @@ func (x *RTMPPushInput) GetBackupUrl() string {
 	return ""
 }
 
+// Settings for an SRT (Secure Reliable Transport) push input.
+// Used when the video stream is pushed to an SRT server.
+// @see https://en.wikipedia.org/wiki/Secure_Reliable_Transport
+type SRTPushInput struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// SRT server url.
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// SRT server URL for the signal identified by the backup stream key.
+	BackupUrl     string `protobuf:"bytes,2,opt,name=backup_url,json=backupUrl,proto3" json:"backup_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SRTPushInput) Reset() {
+	*x = SRTPushInput{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SRTPushInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SRTPushInput) ProtoMessage() {}
+
+func (x *SRTPushInput) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SRTPushInput.ProtoReflect.Descriptor instead.
+func (*SRTPushInput) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SRTPushInput) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *SRTPushInput) GetBackupUrl() string {
+	if x != nil {
+		return x.BackupUrl
+	}
+	return ""
+}
+
 // Settings for an RTMP pull input.
 // Used when the service pulls the video stream from an RTMP source.
 // @see https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
@@ -479,7 +553,7 @@ type RTMPPullInput struct {
 
 func (x *RTMPPullInput) Reset() {
 	*x = RTMPPullInput{}
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[3]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -491,7 +565,7 @@ func (x *RTMPPullInput) String() string {
 func (*RTMPPullInput) ProtoMessage() {}
 
 func (x *RTMPPullInput) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[3]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -504,7 +578,7 @@ func (x *RTMPPullInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RTMPPullInput.ProtoReflect.Descriptor instead.
 func (*RTMPPullInput) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{3}
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RTMPPullInput) GetUrl() string {
@@ -536,7 +610,7 @@ type SRTPullInput struct {
 
 func (x *SRTPullInput) Reset() {
 	*x = SRTPullInput{}
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[4]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -548,7 +622,7 @@ func (x *SRTPullInput) String() string {
 func (*SRTPullInput) ProtoMessage() {}
 
 func (x *SRTPullInput) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[4]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -561,7 +635,7 @@ func (x *SRTPullInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SRTPullInput.ProtoReflect.Descriptor instead.
 func (*SRTPullInput) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{4}
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SRTPullInput) GetUrl() string {
@@ -588,7 +662,7 @@ type ManualLine struct {
 
 func (x *ManualLine) Reset() {
 	*x = ManualLine{}
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[5]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -600,7 +674,7 @@ func (x *ManualLine) String() string {
 func (*ManualLine) ProtoMessage() {}
 
 func (x *ManualLine) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[5]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -613,7 +687,7 @@ func (x *ManualLine) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManualLine.ProtoReflect.Descriptor instead.
 func (*ManualLine) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{5}
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{6}
 }
 
 // Represents an automatic line type where the stream control is handled automatically.
@@ -627,7 +701,7 @@ type AutoLine struct {
 
 func (x *AutoLine) Reset() {
 	*x = AutoLine{}
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[6]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -639,7 +713,7 @@ func (x *AutoLine) String() string {
 func (*AutoLine) ProtoMessage() {}
 
 func (x *AutoLine) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[6]
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,7 +726,7 @@ func (x *AutoLine) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AutoLine.ProtoReflect.Descriptor instead.
 func (*AutoLine) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{6}
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AutoLine) GetStatus() AutoLine_AutoLineStatus {
@@ -666,7 +740,7 @@ var File_yandex_cloud_video_v1_stream_line_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x06\n" +
+	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x06\n" +
 	"\n" +
 	"StreamLine\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
@@ -674,7 +748,8 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x14\n" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12I\n" +
 	"\finput_source\x18\x12 \x01(\x0e2&.yandex.cloud.video.v1.LineInputSourceR\vinputSource\x12D\n" +
-	"\trtmp_push\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.RTMPPushInputH\x00R\brtmpPush\x12D\n" +
+	"\trtmp_push\x18\xe8\a \x01(\v2$.yandex.cloud.video.v1.RTMPPushInputH\x00R\brtmpPush\x12A\n" +
+	"\bsrt_push\x18\xe9\a \x01(\v2#.yandex.cloud.video.v1.SRTPushInputH\x00R\asrtPush\x12D\n" +
 	"\trtmp_pull\x18\xea\a \x01(\v2$.yandex.cloud.video.v1.RTMPPullInputH\x00R\brtmpPull\x12A\n" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2#.yandex.cloud.video.v1.SRTPullInputH\x00R\asrtPull\x12E\n" +
 	"\vmanual_line\x18\xd0\x0f \x01(\v2!.yandex.cloud.video.v1.ManualLineH\x01R\n" +
@@ -690,12 +765,16 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
 	"input_typeB\v\n" +
-	"\tline_typeJ\x04\b\x04\x10\x12J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xe9\a\x10\xea\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
+	"\tline_typeJ\x04\b\x04\x10\x12J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
 	"\rPushStreamKey\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1d\n" +
 	"\n" +
 	"backup_key\x18\x02 \x01(\tR\tbackupKey\"@\n" +
 	"\rRTMPPushInput\x12\x10\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
+	"\n" +
+	"backup_url\x18\x02 \x01(\tR\tbackupUrl\"?\n" +
+	"\fSRTPushInput\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1d\n" +
 	"\n" +
 	"backup_url\x18\x02 \x01(\tR\tbackupUrl\"@\n" +
@@ -737,36 +816,38 @@ func file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_video_v1_stream_line_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_video_v1_stream_line_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_yandex_cloud_video_v1_stream_line_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_video_v1_stream_line_proto_goTypes = []any{
 	(LineInputSource)(0),          // 0: yandex.cloud.video.v1.LineInputSource
 	(AutoLine_AutoLineStatus)(0),  // 1: yandex.cloud.video.v1.AutoLine.AutoLineStatus
 	(*StreamLine)(nil),            // 2: yandex.cloud.video.v1.StreamLine
 	(*PushStreamKey)(nil),         // 3: yandex.cloud.video.v1.PushStreamKey
 	(*RTMPPushInput)(nil),         // 4: yandex.cloud.video.v1.RTMPPushInput
-	(*RTMPPullInput)(nil),         // 5: yandex.cloud.video.v1.RTMPPullInput
-	(*SRTPullInput)(nil),          // 6: yandex.cloud.video.v1.SRTPullInput
-	(*ManualLine)(nil),            // 7: yandex.cloud.video.v1.ManualLine
-	(*AutoLine)(nil),              // 8: yandex.cloud.video.v1.AutoLine
-	nil,                           // 9: yandex.cloud.video.v1.StreamLine.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
+	(*SRTPushInput)(nil),          // 5: yandex.cloud.video.v1.SRTPushInput
+	(*RTMPPullInput)(nil),         // 6: yandex.cloud.video.v1.RTMPPullInput
+	(*SRTPullInput)(nil),          // 7: yandex.cloud.video.v1.SRTPullInput
+	(*ManualLine)(nil),            // 8: yandex.cloud.video.v1.ManualLine
+	(*AutoLine)(nil),              // 9: yandex.cloud.video.v1.AutoLine
+	nil,                           // 10: yandex.cloud.video.v1.StreamLine.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_stream_line_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.video.v1.StreamLine.input_source:type_name -> yandex.cloud.video.v1.LineInputSource
 	4,  // 1: yandex.cloud.video.v1.StreamLine.rtmp_push:type_name -> yandex.cloud.video.v1.RTMPPushInput
-	5,  // 2: yandex.cloud.video.v1.StreamLine.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullInput
-	6,  // 3: yandex.cloud.video.v1.StreamLine.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullInput
-	7,  // 4: yandex.cloud.video.v1.StreamLine.manual_line:type_name -> yandex.cloud.video.v1.ManualLine
-	8,  // 5: yandex.cloud.video.v1.StreamLine.auto_line:type_name -> yandex.cloud.video.v1.AutoLine
-	10, // 6: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
-	10, // 7: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
-	9,  // 8: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
-	1,  // 9: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	5,  // 2: yandex.cloud.video.v1.StreamLine.srt_push:type_name -> yandex.cloud.video.v1.SRTPushInput
+	6,  // 3: yandex.cloud.video.v1.StreamLine.rtmp_pull:type_name -> yandex.cloud.video.v1.RTMPPullInput
+	7,  // 4: yandex.cloud.video.v1.StreamLine.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullInput
+	8,  // 5: yandex.cloud.video.v1.StreamLine.manual_line:type_name -> yandex.cloud.video.v1.ManualLine
+	9,  // 6: yandex.cloud.video.v1.StreamLine.auto_line:type_name -> yandex.cloud.video.v1.AutoLine
+	11, // 7: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
+	11, // 8: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
+	10, // 9: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
+	1,  // 10: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_stream_line_proto_init() }
@@ -776,6 +857,7 @@ func file_yandex_cloud_video_v1_stream_line_proto_init() {
 	}
 	file_yandex_cloud_video_v1_stream_line_proto_msgTypes[0].OneofWrappers = []any{
 		(*StreamLine_RtmpPush)(nil),
+		(*StreamLine_SrtPush)(nil),
 		(*StreamLine_RtmpPull)(nil),
 		(*StreamLine_SrtPull)(nil),
 		(*StreamLine_ManualLine)(nil),
@@ -787,7 +869,7 @@ func file_yandex_cloud_video_v1_stream_line_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_stream_line_proto_rawDesc), len(file_yandex_cloud_video_v1_stream_line_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

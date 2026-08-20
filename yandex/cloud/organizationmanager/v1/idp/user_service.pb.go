@@ -1860,8 +1860,14 @@ type PasswordHash struct {
 	PasswordHash string `protobuf:"bytes,1,opt,name=password_hash,json=passwordHash,proto3" json:"password_hash,omitempty"`
 	// Type of the password hash.
 	PasswordHashType PasswordHash_PasswordHashType `protobuf:"varint,2,opt,name=password_hash_type,json=passwordHashType,proto3,enum=yandex.cloud.organizationmanager.v1.idp.PasswordHash_PasswordHashType" json:"password_hash_type,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Timestamp when the password was created.
+	// For synchronized passwords, use the time when the password was last set in the source directory.
+	// If omitted, the current time is used.
+	// Used by [CreateUserRequest] and [SetPasswordHashRequest].
+	// This value is ignored if [CreateUserRequest.password_change_required] or [SetPasswordHashRequest.need_change] is true.
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PasswordHash) Reset() {
@@ -1906,6 +1912,13 @@ func (x *PasswordHash) GetPasswordHashType() PasswordHash_PasswordHashType {
 		return x.PasswordHashType
 	}
 	return PasswordHash_PASSWORD_HASH_TYPE_UNSPECIFIED
+}
+
+func (x *PasswordHash) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
 }
 
 // Request to resolve external IDs to internal user IDs.
@@ -2679,10 +2692,12 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\vneed_change\x18\x03 \x01(\bR\n" +
 	"needChange\"2\n" +
 	"\x17SetPasswordHashMetadata\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xe6\x02\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xda\x03\n" +
 	"\fPasswordHash\x122\n" +
 	"\rpassword_hash\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=512R\fpasswordHash\x12z\n" +
-	"\x12password_hash_type\x18\x02 \x01(\x0e2F.yandex.cloud.organizationmanager.v1.idp.PasswordHash.PasswordHashTypeB\x04\xe8\xc71\x01R\x10passwordHashType\"\xa5\x01\n" +
+	"\x12password_hash_type\x18\x02 \x01(\x0e2F.yandex.cloud.organizationmanager.v1.idp.PasswordHash.PasswordHashTypeB\x04\xe8\xc71\x01R\x10passwordHashType\x12r\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\tcreatedAt\"\xa5\x01\n" +
 	"\x10PasswordHashType\x12\"\n" +
 	"\x1ePASSWORD_HASH_TYPE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -2857,50 +2872,51 @@ var file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_depIdxs = []
 	39, // 14: yandex.cloud.organizationmanager.v1.idp.PasswordMetadata.last_usage:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordMetadata.PasswordUsage
 	30, // 15: yandex.cloud.organizationmanager.v1.idp.SetPasswordHashRequest.hash:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordHash
 	1,  // 16: yandex.cloud.organizationmanager.v1.idp.PasswordHash.password_hash_type:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordHash.PasswordHashType
-	32, // 17: yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsResponse.resolved_users:type_name -> yandex.cloud.organizationmanager.v1.idp.ResolvedUser
-	2,  // 18: yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails.error_code:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails.PasswordWritebackErrorCode
-	42, // 19: yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse.expires_at:type_name -> google.protobuf.Timestamp
-	42, // 20: yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse.operation_expires_at:type_name -> google.protobuf.Timestamp
-	34, // 21: yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest.error_details:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails
-	42, // 22: yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest.expires_at:type_name -> google.protobuf.Timestamp
-	42, // 23: yandex.cloud.organizationmanager.v1.idp.PasswordMetadata.PasswordUsage.used_at:type_name -> google.protobuf.Timestamp
-	3,  // 24: yandex.cloud.organizationmanager.v1.idp.UserService.Get:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserRequest
-	4,  // 25: yandex.cloud.organizationmanager.v1.idp.UserService.List:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUsersRequest
-	6,  // 26: yandex.cloud.organizationmanager.v1.idp.UserService.Create:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateUserRequest
-	8,  // 27: yandex.cloud.organizationmanager.v1.idp.UserService.Update:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateUserRequest
-	10, // 28: yandex.cloud.organizationmanager.v1.idp.UserService.Delete:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserRequest
-	16, // 29: yandex.cloud.organizationmanager.v1.idp.UserService.SetOwnPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.SetOwnPasswordRequest
-	19, // 30: yandex.cloud.organizationmanager.v1.idp.UserService.SetOthersPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.SetOthersPasswordRequest
-	12, // 31: yandex.cloud.organizationmanager.v1.idp.UserService.Suspend:input_type -> yandex.cloud.organizationmanager.v1.idp.SuspendUserRequest
-	14, // 32: yandex.cloud.organizationmanager.v1.idp.UserService.Reactivate:input_type -> yandex.cloud.organizationmanager.v1.idp.ReactivateUserRequest
-	22, // 33: yandex.cloud.organizationmanager.v1.idp.UserService.GeneratePassword:input_type -> yandex.cloud.organizationmanager.v1.idp.GeneratePasswordRequest
-	44, // 34: yandex.cloud.organizationmanager.v1.idp.UserService.GetSelfPasswordMetadata:input_type -> google.protobuf.Empty
-	26, // 35: yandex.cloud.organizationmanager.v1.idp.UserService.ConvertToExternal:input_type -> yandex.cloud.organizationmanager.v1.idp.ConvertToExternalUserRequest
-	28, // 36: yandex.cloud.organizationmanager.v1.idp.UserService.SetPasswordHash:input_type -> yandex.cloud.organizationmanager.v1.idp.SetPasswordHashRequest
-	31, // 37: yandex.cloud.organizationmanager.v1.idp.UserService.ResolveExternalIds:input_type -> yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsRequest
-	35, // 38: yandex.cloud.organizationmanager.v1.idp.UserService.GetPasswordChanges:input_type -> yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesRequest
-	37, // 39: yandex.cloud.organizationmanager.v1.idp.UserService.CommitPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest
-	40, // 40: yandex.cloud.organizationmanager.v1.idp.UserService.Get:output_type -> yandex.cloud.organizationmanager.v1.idp.User
-	5,  // 41: yandex.cloud.organizationmanager.v1.idp.UserService.List:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUsersResponse
-	45, // 42: yandex.cloud.organizationmanager.v1.idp.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	45, // 43: yandex.cloud.organizationmanager.v1.idp.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	45, // 44: yandex.cloud.organizationmanager.v1.idp.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	45, // 45: yandex.cloud.organizationmanager.v1.idp.UserService.SetOwnPassword:output_type -> yandex.cloud.operation.Operation
-	45, // 46: yandex.cloud.organizationmanager.v1.idp.UserService.SetOthersPassword:output_type -> yandex.cloud.operation.Operation
-	45, // 47: yandex.cloud.organizationmanager.v1.idp.UserService.Suspend:output_type -> yandex.cloud.operation.Operation
-	45, // 48: yandex.cloud.organizationmanager.v1.idp.UserService.Reactivate:output_type -> yandex.cloud.operation.Operation
-	23, // 49: yandex.cloud.organizationmanager.v1.idp.UserService.GeneratePassword:output_type -> yandex.cloud.organizationmanager.v1.idp.GeneratePasswordResponse
-	25, // 50: yandex.cloud.organizationmanager.v1.idp.UserService.GetSelfPasswordMetadata:output_type -> yandex.cloud.organizationmanager.v1.idp.PasswordMetadata
-	45, // 51: yandex.cloud.organizationmanager.v1.idp.UserService.ConvertToExternal:output_type -> yandex.cloud.operation.Operation
-	45, // 52: yandex.cloud.organizationmanager.v1.idp.UserService.SetPasswordHash:output_type -> yandex.cloud.operation.Operation
-	33, // 53: yandex.cloud.organizationmanager.v1.idp.UserService.ResolveExternalIds:output_type -> yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsResponse
-	36, // 54: yandex.cloud.organizationmanager.v1.idp.UserService.GetPasswordChanges:output_type -> yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse
-	45, // 55: yandex.cloud.organizationmanager.v1.idp.UserService.CommitPassword:output_type -> yandex.cloud.operation.Operation
-	40, // [40:56] is the sub-list for method output_type
-	24, // [24:40] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	42, // 17: yandex.cloud.organizationmanager.v1.idp.PasswordHash.created_at:type_name -> google.protobuf.Timestamp
+	32, // 18: yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsResponse.resolved_users:type_name -> yandex.cloud.organizationmanager.v1.idp.ResolvedUser
+	2,  // 19: yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails.error_code:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails.PasswordWritebackErrorCode
+	42, // 20: yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse.expires_at:type_name -> google.protobuf.Timestamp
+	42, // 21: yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse.operation_expires_at:type_name -> google.protobuf.Timestamp
+	34, // 22: yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest.error_details:type_name -> yandex.cloud.organizationmanager.v1.idp.PasswordWritebackErrorDetails
+	42, // 23: yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest.expires_at:type_name -> google.protobuf.Timestamp
+	42, // 24: yandex.cloud.organizationmanager.v1.idp.PasswordMetadata.PasswordUsage.used_at:type_name -> google.protobuf.Timestamp
+	3,  // 25: yandex.cloud.organizationmanager.v1.idp.UserService.Get:input_type -> yandex.cloud.organizationmanager.v1.idp.GetUserRequest
+	4,  // 26: yandex.cloud.organizationmanager.v1.idp.UserService.List:input_type -> yandex.cloud.organizationmanager.v1.idp.ListUsersRequest
+	6,  // 27: yandex.cloud.organizationmanager.v1.idp.UserService.Create:input_type -> yandex.cloud.organizationmanager.v1.idp.CreateUserRequest
+	8,  // 28: yandex.cloud.organizationmanager.v1.idp.UserService.Update:input_type -> yandex.cloud.organizationmanager.v1.idp.UpdateUserRequest
+	10, // 29: yandex.cloud.organizationmanager.v1.idp.UserService.Delete:input_type -> yandex.cloud.organizationmanager.v1.idp.DeleteUserRequest
+	16, // 30: yandex.cloud.organizationmanager.v1.idp.UserService.SetOwnPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.SetOwnPasswordRequest
+	19, // 31: yandex.cloud.organizationmanager.v1.idp.UserService.SetOthersPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.SetOthersPasswordRequest
+	12, // 32: yandex.cloud.organizationmanager.v1.idp.UserService.Suspend:input_type -> yandex.cloud.organizationmanager.v1.idp.SuspendUserRequest
+	14, // 33: yandex.cloud.organizationmanager.v1.idp.UserService.Reactivate:input_type -> yandex.cloud.organizationmanager.v1.idp.ReactivateUserRequest
+	22, // 34: yandex.cloud.organizationmanager.v1.idp.UserService.GeneratePassword:input_type -> yandex.cloud.organizationmanager.v1.idp.GeneratePasswordRequest
+	44, // 35: yandex.cloud.organizationmanager.v1.idp.UserService.GetSelfPasswordMetadata:input_type -> google.protobuf.Empty
+	26, // 36: yandex.cloud.organizationmanager.v1.idp.UserService.ConvertToExternal:input_type -> yandex.cloud.organizationmanager.v1.idp.ConvertToExternalUserRequest
+	28, // 37: yandex.cloud.organizationmanager.v1.idp.UserService.SetPasswordHash:input_type -> yandex.cloud.organizationmanager.v1.idp.SetPasswordHashRequest
+	31, // 38: yandex.cloud.organizationmanager.v1.idp.UserService.ResolveExternalIds:input_type -> yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsRequest
+	35, // 39: yandex.cloud.organizationmanager.v1.idp.UserService.GetPasswordChanges:input_type -> yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesRequest
+	37, // 40: yandex.cloud.organizationmanager.v1.idp.UserService.CommitPassword:input_type -> yandex.cloud.organizationmanager.v1.idp.CommitPasswordRequest
+	40, // 41: yandex.cloud.organizationmanager.v1.idp.UserService.Get:output_type -> yandex.cloud.organizationmanager.v1.idp.User
+	5,  // 42: yandex.cloud.organizationmanager.v1.idp.UserService.List:output_type -> yandex.cloud.organizationmanager.v1.idp.ListUsersResponse
+	45, // 43: yandex.cloud.organizationmanager.v1.idp.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	45, // 44: yandex.cloud.organizationmanager.v1.idp.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	45, // 45: yandex.cloud.organizationmanager.v1.idp.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	45, // 46: yandex.cloud.organizationmanager.v1.idp.UserService.SetOwnPassword:output_type -> yandex.cloud.operation.Operation
+	45, // 47: yandex.cloud.organizationmanager.v1.idp.UserService.SetOthersPassword:output_type -> yandex.cloud.operation.Operation
+	45, // 48: yandex.cloud.organizationmanager.v1.idp.UserService.Suspend:output_type -> yandex.cloud.operation.Operation
+	45, // 49: yandex.cloud.organizationmanager.v1.idp.UserService.Reactivate:output_type -> yandex.cloud.operation.Operation
+	23, // 50: yandex.cloud.organizationmanager.v1.idp.UserService.GeneratePassword:output_type -> yandex.cloud.organizationmanager.v1.idp.GeneratePasswordResponse
+	25, // 51: yandex.cloud.organizationmanager.v1.idp.UserService.GetSelfPasswordMetadata:output_type -> yandex.cloud.organizationmanager.v1.idp.PasswordMetadata
+	45, // 52: yandex.cloud.organizationmanager.v1.idp.UserService.ConvertToExternal:output_type -> yandex.cloud.operation.Operation
+	45, // 53: yandex.cloud.organizationmanager.v1.idp.UserService.SetPasswordHash:output_type -> yandex.cloud.operation.Operation
+	33, // 54: yandex.cloud.organizationmanager.v1.idp.UserService.ResolveExternalIds:output_type -> yandex.cloud.organizationmanager.v1.idp.ResolveExternalIdsResponse
+	36, // 55: yandex.cloud.organizationmanager.v1.idp.UserService.GetPasswordChanges:output_type -> yandex.cloud.organizationmanager.v1.idp.GetPasswordChangesResponse
+	45, // 56: yandex.cloud.organizationmanager.v1.idp.UserService.CommitPassword:output_type -> yandex.cloud.operation.Operation
+	41, // [41:57] is the sub-list for method output_type
+	25, // [25:41] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_init() }

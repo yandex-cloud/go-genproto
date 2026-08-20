@@ -275,6 +275,18 @@ func (m *ConversionOptions) SetUnavailableDataSource(v UnavailableDataSourceMode
 	m.UnavailableDataSource = v
 }
 
+func (m *ConversionOptions) SetCluster(v string) {
+	m.Cluster = v
+}
+
+func (m *ConversionOptions) SetService(v string) {
+	m.Service = v
+}
+
+func (m *ConversionOptions) SetMetricNameLabel(v string) {
+	m.MetricNameLabel = v
+}
+
 func (m *ConvertFromGrafanaRequest) SetProjectId(v string) {
 	m.ProjectId = v
 }

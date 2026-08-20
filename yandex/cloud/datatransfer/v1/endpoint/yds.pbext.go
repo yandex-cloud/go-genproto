@@ -42,6 +42,14 @@ func (m *YDSSource) SetConsumer(v string) {
 	m.Consumer = v
 }
 
+func (m *YDSSource) SetAuthentication(v *YDSAuthenticationMethod) {
+	m.Authentication = v
+}
+
+func (m *YDSSource) SetYdbConnection(v *YDSConnection) {
+	m.YdbConnection = v
+}
+
 func (m *YDSTarget) SetDatabase(v string) {
 	m.Database = v
 }
@@ -76,4 +84,70 @@ func (m *YDSTarget) SetSubnetId(v string) {
 
 func (m *YDSTarget) SetSecurityGroups(v []string) {
 	m.SecurityGroups = v
+}
+
+func (m *YDSTarget) SetAuthentication(v *YDSAuthenticationMethod) {
+	m.Authentication = v
+}
+
+func (m *YDSTarget) SetYdbConnection(v *YDSConnection) {
+	m.YdbConnection = v
+}
+
+type YDSAuthenticationMethod_AuthenticationMethod = isYDSAuthenticationMethod_AuthenticationMethod
+
+func (m *YDSAuthenticationMethod) SetAuthenticationMethod(v YDSAuthenticationMethod_AuthenticationMethod) {
+	m.AuthenticationMethod = v
+}
+
+func (m *YDSAuthenticationMethod) SetServiceAccountId(v string) {
+	m.AuthenticationMethod = &YDSAuthenticationMethod_ServiceAccountId{
+		ServiceAccountId: v,
+	}
+}
+
+func (m *OnPremiseYDS) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *OnPremiseYDS) SetStream(v string) {
+	m.Stream = v
+}
+
+func (m *OnPremiseYDS) SetInstance(v string) {
+	m.Instance = v
+}
+
+func (m *OnPremiseYDS) SetTlsMode(v *TLSMode) {
+	m.TlsMode = v
+}
+
+func (m *OnPremiseYDS) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+func (m *ManagedYDS) SetDatabaseId(v string) {
+	m.DatabaseId = v
+}
+
+func (m *ManagedYDS) SetStream(v string) {
+	m.Stream = v
+}
+
+type YDSConnection_Connection = isYDSConnection_Connection
+
+func (m *YDSConnection) SetConnection(v YDSConnection_Connection) {
+	m.Connection = v
+}
+
+func (m *YDSConnection) SetManagedYds(v *ManagedYDS) {
+	m.Connection = &YDSConnection_ManagedYds{
+		ManagedYds: v,
+	}
+}
+
+func (m *YDSConnection) SetOnPremise(v *OnPremiseYDS) {
+	m.Connection = &YDSConnection_OnPremise{
+		OnPremise: v,
+	}
 }

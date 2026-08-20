@@ -306,6 +306,10 @@ func (m *PasswordHash) SetPasswordHashType(v PasswordHash_PasswordHashType) {
 	m.PasswordHashType = v
 }
 
+func (m *PasswordHash) SetCreatedAt(v *timestamppb.Timestamp) {
+	m.CreatedAt = v
+}
+
 func (m *ResolveExternalIdsRequest) SetUserpoolId(v string) {
 	m.UserpoolId = v
 }

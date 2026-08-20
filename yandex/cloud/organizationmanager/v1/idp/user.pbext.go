@@ -73,3 +73,7 @@ func (m *User) SetEmployeeId(v string) {
 func (m *User) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }
+
+func (m *User) SetPasswordCreatedAt(v *timestamppb.Timestamp) {
+	m.PasswordCreatedAt = v
+}

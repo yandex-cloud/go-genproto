@@ -40,6 +40,12 @@ func (m *StreamLine) SetRtmpPush(v *RTMPPushInput) {
 	}
 }
 
+func (m *StreamLine) SetSrtPush(v *SRTPushInput) {
+	m.InputType = &StreamLine_SrtPush{
+		SrtPush: v,
+	}
+}
+
 func (m *StreamLine) SetRtmpPull(v *RTMPPullInput) {
 	m.InputType = &StreamLine_RtmpPull{
 		RtmpPull: v,
@@ -89,6 +95,14 @@ func (m *RTMPPushInput) SetUrl(v string) {
 }
 
 func (m *RTMPPushInput) SetBackupUrl(v string) {
+	m.BackupUrl = v
+}
+
+func (m *SRTPushInput) SetUrl(v string) {
+	m.Url = v
+}
+
+func (m *SRTPushInput) SetBackupUrl(v string) {
 	m.BackupUrl = v
 }
 

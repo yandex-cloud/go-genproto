@@ -132,9 +132,12 @@ type User struct {
 	// User's employee ID
 	EmployeeId string `protobuf:"bytes,17,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	// Timestamp when the user account expires.
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Timestamp when the user's current password was created.
+	// For synchronized passwords, this is the time when the password was last set in the source directory.
+	PasswordCreatedAt *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=password_created_at,json=passwordCreatedAt,proto3" json:"password_created_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
@@ -286,11 +289,18 @@ func (x *User) GetExpiresAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *User) GetPasswordCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.PasswordCreatedAt
+	}
+	return nil
+}
+
 var File_yandex_cloud_organizationmanager_v1_idp_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe9\x05\n" +
+	"2yandex/cloud/organizationmanager/v1/idp/user.proto\x12'yandex.cloud.organizationmanager.v1.idp\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x06\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vuserpool_id\x18\x02 \x01(\tR\n" +
@@ -319,14 +329,15 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_proto_rawDesc = "" +
 	"\vemployee_id\x18\x11 \x01(\tR\n" +
 	"employeeId\x129\n" +
 	"\n" +
-	"expires_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"W\n" +
+	"expires_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12J\n" +
+	"\x13password_created_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\x11passwordCreatedAt\"W\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\r\n" +
 	"\tSUSPENDED\x10\x02\x12\f\n" +
 	"\bDELETING\x10\x03\x12\f\n" +
-	"\bCREATING\x10\x04J\x04\b\x05\x10\x06B~\n" +
+	"\bCREATING\x10\x04J\x04\b\x05\x10\x06J\x04\b\x13\x10\x14B~\n" +
 	"+yandex.cloud.api.organizationmanager.v1.idpZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp;idpb\x06proto3"
 
 var (
@@ -353,11 +364,12 @@ var file_yandex_cloud_organizationmanager_v1_idp_user_proto_depIdxs = []int32{
 	2, // 1: yandex.cloud.organizationmanager.v1.idp.User.created_at:type_name -> google.protobuf.Timestamp
 	2, // 2: yandex.cloud.organizationmanager.v1.idp.User.updated_at:type_name -> google.protobuf.Timestamp
 	2, // 3: yandex.cloud.organizationmanager.v1.idp.User.expires_at:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 4: yandex.cloud.organizationmanager.v1.idp.User.password_created_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_user_proto_init() }

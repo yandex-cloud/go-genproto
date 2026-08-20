@@ -47,6 +47,8 @@ type DashboardServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDashboardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified dashboard.
 	ListOperations(ctx context.Context, in *ListDashboardOperationsRequest, opts ...grpc.CallOption) (*ListDashboardOperationsResponse, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// The method predates this rule; renaming a published rpc is a breaking change. --)
 	// Converts a Grafana dashboard into a Monitoring dashboard draft.
 	//
 	// Nothing is persisted: the caller reviews the returned draft and the
@@ -150,6 +152,8 @@ type DashboardServiceServer interface {
 	Delete(context.Context, *DeleteDashboardRequest) (*operation.Operation, error)
 	// Lists operations for the specified dashboard.
 	ListOperations(context.Context, *ListDashboardOperationsRequest) (*ListDashboardOperationsResponse, error)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// The method predates this rule; renaming a published rpc is a breaking change. --)
 	// Converts a Grafana dashboard into a Monitoring dashboard draft.
 	//
 	// Nothing is persisted: the caller reviews the returned draft and the

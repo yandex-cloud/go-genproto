@@ -106,6 +106,10 @@ const (
 	Server_QUARANTINED Server_State = 10
 	// Server is running normally
 	Server_RUNNING Server_State = 11
+	// Server is being assembled.
+	Server_ASSEMBLING Server_State = 12
+	// Server is under maintenance.
+	Server_MAINTENANCE Server_State = 13
 )
 
 // Enum value maps for Server_State.
@@ -123,6 +127,8 @@ var (
 		9:  "UPDATING",
 		10: "QUARANTINED",
 		11: "RUNNING",
+		12: "ASSEMBLING",
+		13: "MAINTENANCE",
 	}
 	Server_State_value = map[string]int32{
 		"STATE_UNSPECIFIED": 0,
@@ -137,6 +143,8 @@ var (
 		"UPDATING":          9,
 		"QUARANTINED":       10,
 		"RUNNING":           11,
+		"ASSEMBLING":        12,
+		"MAINTENANCE":       13,
 	}
 )
 
@@ -1247,7 +1255,7 @@ var File_yandex_cloud_baremetal_v2_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_server_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/baremetal/v2/server.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\x1a'yandex/cloud/baremetal/v2/storage.proto\x1a2yandex/cloud/baremetal/v2/user_configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\xea\r\n" +
+	"&yandex/cloud/baremetal/v2/server.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\x1a'yandex/cloud/baremetal/v2/storage.proto\x1a2yandex/cloud/baremetal/v2/user_configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x8b\x0e\n" +
 	"\x06Server\x12#\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x06\xe0A\x03\xe0A\bR\bserverId\x12!\n" +
 	"\bcloud_id\x18\x02 \x01(\tB\x06\xe0A\x02\xe0A\x05R\acloudId\x12#\n" +
@@ -1276,7 +1284,7 @@ const file_yandex_cloud_baremetal_v2_server_proto_rawDesc = "" +
 	"\vannotations\x18\x15 \x03(\v22.yandex.cloud.baremetal.v2.Server.AnnotationsEntryB>\xe0A\x01\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\vannotations\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc4\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe5\x01\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVISIONING\x10\x01\x12\f\n" +
@@ -1291,7 +1299,10 @@ const file_yandex_cloud_baremetal_v2_server_proto_rawDesc = "" +
 	"\bUPDATING\x10\t\x12\x0f\n" +
 	"\vQUARANTINED\x10\n" +
 	"\x12\v\n" +
-	"\aRUNNING\x10\v\"X\n" +
+	"\aRUNNING\x10\v\x12\x0e\n" +
+	"\n" +
+	"ASSEMBLING\x10\f\x12\x0f\n" +
+	"\vMAINTENANCE\x10\r\"X\n" +
 	"\x11ProlongationState\x12\"\n" +
 	"\x1ePROLONGATION_STATE_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +

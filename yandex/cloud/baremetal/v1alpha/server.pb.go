@@ -53,6 +53,10 @@ const (
 	Server_QUARANTINED Server_Status = 12
 	// Server is running normaly
 	Server_RUNNING Server_Status = 14
+	// Server is being assembled.
+	Server_ASSEMBLING Server_Status = 15
+	// Server is under maintenance.
+	Server_MAINTENANCE Server_Status = 16
 )
 
 // Enum value maps for Server_Status.
@@ -70,6 +74,8 @@ var (
 		10: "UPDATING",
 		12: "QUARANTINED",
 		14: "RUNNING",
+		15: "ASSEMBLING",
+		16: "MAINTENANCE",
 	}
 	Server_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
@@ -84,6 +90,8 @@ var (
 		"UPDATING":           10,
 		"QUARANTINED":        12,
 		"RUNNING":            14,
+		"ASSEMBLING":         15,
+		"MAINTENANCE":        16,
 	}
 )
 
@@ -1078,7 +1086,7 @@ var File_yandex_cloud_baremetal_v1alpha_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\n" +
-	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\x99\t\n" +
+	"+yandex/cloud/baremetal/v1alpha/server.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2yandex/cloud/baremetal/v1alpha/configuration.proto\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a,yandex/cloud/baremetal/v1alpha/storage.proto\x1a\x1dyandex/cloud/validation.proto\"\xba\t\n" +
 	"\x06Server\x12b\n" +
 	"\x14custom_configuration\x18\x18 \x01(\v2-.yandex.cloud.baremetal.v1alpha.ConfigurationH\x00R\x13customConfiguration\x126\n" +
 	"\x16stock_configuration_id\x18\x19 \x01(\tH\x00R\x14stockConfigurationId\x12\x0e\n" +
@@ -1101,7 +1109,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\x06labels\x18\xc8\x01 \x03(\v22.yandex.cloud.baremetal.v1alpha.Server.LabelsEntryR\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd8\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf9\x01\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fPROVISIONING\x10\x01\x12\f\n" +
@@ -1116,7 +1124,10 @@ const file_yandex_cloud_baremetal_v1alpha_server_proto_rawDesc = "" +
 	"\bUPDATING\x10\n" +
 	"\x12\x0f\n" +
 	"\vQUARANTINED\x10\f\x12\v\n" +
-	"\aRUNNING\x10\x0e\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rB\x0f\n" +
+	"\aRUNNING\x10\x0e\x12\x0e\n" +
+	"\n" +
+	"ASSEMBLING\x10\x0f\x12\x0f\n" +
+	"\vMAINTENANCE\x10\x10\"\x04\b\x02\x10\x02\"\x04\b\v\x10\v\"\x04\b\r\x10\rB\x0f\n" +
 	"\rconfigurationJ\x04\b\b\x10\tJ\x04\b\v\x10\x12J\x04\b\x13\x10\x14J\x04\b\x16\x10\x18J\x04\b\x1a\x10dJ\x05\be\x10\xc8\x01\"\x97\x05\n" +
 	"\x10NetworkInterface\x12j\n" +
 	"\x0eprivate_subnet\x18\a \x01(\v2=.yandex.cloud.baremetal.v1alpha.PrivateSubnetNetworkInterfaceB\x02\x18\x01H\x00R\rprivateSubnet\x12g\n" +

@@ -817,19 +817,19 @@ type GetResourcesRequest struct {
 	// The time portion is ignored; the date is considered to end at 23:59:59.
 	EndDate *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
 	// Optional. List of service instances IDs to filter service instances by.
-	// Note: service_instances_ids filtering supports case-insensitive substring matching.
-	// No wildcards or regex patterns are supported - just simple substring matching.
-	// The filter works with partial service instances IDs, and will match any service instances where
-	// the provided substring appears anywhere in the service_instances_id.
-	// For example, filter "abc" will match service_instances_ids like "abc123", "123abc", or "1abc2".
+	// Filtering is done using case-insensitive substring matching.
+	// The filter matches any service instance where the provided substring appears
+	// anywhere in the service_instances_id.
+	// Example: filter "abc" matches "abc123", "123abc", "1abc2", etc.
+	// No wildcards or regex patterns are supported.
 	// If empty, no filtering by service instance ID is applied.
 	ServiceInstancesIds []string `protobuf:"bytes,4,rep,name=service_instances_ids,json=serviceInstancesIds,proto3" json:"service_instances_ids,omitempty"`
 	// Optional. List of resource IDs to filter resources by.
-	// Note: resource_ids filtering supports case-insensitive substring matching.
-	// No wildcards or regex patterns are supported - just simple substring matching.
-	// The filter works with partial resource IDs, and will match any resource where
-	// the provided substring appears anywhere in the resource_ids.
-	// For example, filter "abc" will match resource_ids like "abc123", "123abc", or "1abc2".
+	// Filtering is done using case-insensitive substring matching.
+	// The filter matches any resource where the provided substring appears anywhere
+	// in the resource_id.
+	// Example: filter "abc" matches "abc123", "123abc", "1abc2", etc.
+	// No wildcards or regex patterns are supported.
 	// If empty, no filtering by resource ID is applied.
 	ResourceIds []string `protobuf:"bytes,5,rep,name=resource_ids,json=resourceIds,proto3" json:"resource_ids,omitempty"`
 	// Optional. Page size for paginated results.

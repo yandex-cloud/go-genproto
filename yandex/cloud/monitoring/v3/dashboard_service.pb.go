@@ -1506,8 +1506,26 @@ type ConversionOptions struct {
 	// What to do with queries whose data source is not available in Monitoring.
 	// If unspecified, `UNAVAILABLE_DATA_SOURCE_MODE_KEEP_QUERIES` is used.
 	UnavailableDataSource UnavailableDataSourceMode `protobuf:"varint,5,opt,name=unavailable_data_source,json=unavailableDataSource,proto3,enum=yandex.cloud.monitoring.v3.UnavailableDataSourceMode" json:"unavailable_data_source,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Optional coordinates of the shard the translated queries should read,
+	// together with the project. They are also where the metric and label name
+	// catalog is read from to reconcile Prometheus-style names against the names
+	// actually stored (a Prometheus exporter and an OTLP push spell the same
+	// metric differently). Either one unset means no catalog: translation still
+	// happens, the selector keeps `*` in place of the missing coordinate, and
+	// every metric and label name is carried over from the source PromQL exactly
+	// as written.
+	Cluster string `protobuf:"bytes,6,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Service half of the shard coordinates; see cluster above.
+	Service string `protobuf:"bytes,7,opt,name=service,proto3" json:"service,omitempty"`
+	// Optional label that holds the metric name in the target shard: "__name__" in a
+	// Prometheus workspace, "sensor" on a migrated intranet shard, "name" on a cloud
+	// one. Unset means the server takes it from the shard catalog, which is right
+	// whenever the catalog is readable; set it when the catalog is unavailable or when
+	// the shard carries several name-like labels and the wrong one would be picked:
+	// with the wrong label the conversion succeeds and every widget renders empty.
+	MetricNameLabel string `protobuf:"bytes,8,opt,name=metric_name_label,json=metricNameLabel,proto3" json:"metric_name_label,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ConversionOptions) Reset() {
@@ -1573,6 +1591,27 @@ func (x *ConversionOptions) GetUnavailableDataSource() UnavailableDataSourceMode
 		return x.UnavailableDataSource
 	}
 	return UnavailableDataSourceMode_UNAVAILABLE_DATA_SOURCE_MODE_UNSPECIFIED
+}
+
+func (x *ConversionOptions) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *ConversionOptions) GetService() string {
+	if x != nil {
+		return x.Service
+	}
+	return ""
+}
+
+func (x *ConversionOptions) GetMetricNameLabel() string {
+	if x != nil {
+		return x.MetricNameLabel
+	}
+	return ""
 }
 
 type ConvertFromGrafanaRequest struct {
@@ -1909,13 +1948,16 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\tpage_size\x18\x05 \x01(\x03R\bpageSize\"c\n" +
 	" ListDashboardLabelValuesResponse\x12!\n" +
 	"\flabel_values\x18\x01 \x03(\tR\vlabelValues\x12\x1c\n" +
-	"\ttruncated\x18\x02 \x01(\bR\ttruncated\"\xc5\x04\n" +
+	"\ttruncated\x18\x02 \x01(\bR\ttruncated\"\xc6\x05\n" +
 	"\x11ConversionOptions\x12]\n" +
 	"\x11query_translation\x18\x01 \x01(\x0e20.yandex.cloud.monitoring.v3.QueryTranslationModeR\x10queryTranslation\x12`\n" +
 	"\x12unsupported_widget\x18\x02 \x01(\x0e21.yandex.cloud.monitoring.v3.UnsupportedWidgetModeR\x11unsupportedWidget\x12@\n" +
 	"\x17prometheus_workspace_id\x18\x03 \x01(\tB\b\x8a\xc81\x04<=50R\x15prometheusWorkspaceId\x12|\n" +
 	"\x0emetric_renames\x18\x04 \x03(\v2@.yandex.cloud.monitoring.v3.ConversionOptions.MetricRenamesEntryB\x13\x82\xc81\x06<=1000\x8a\xc81\x05<=200R\rmetricRenames\x12m\n" +
-	"\x17unavailable_data_source\x18\x05 \x01(\x0e25.yandex.cloud.monitoring.v3.UnavailableDataSourceModeR\x15unavailableDataSource\x1a@\n" +
+	"\x17unavailable_data_source\x18\x05 \x01(\x0e25.yandex.cloud.monitoring.v3.UnavailableDataSourceModeR\x15unavailableDataSource\x12#\n" +
+	"\acluster\x18\x06 \x01(\tB\t\x8a\xc81\x05<=101R\acluster\x12#\n" +
+	"\aservice\x18\a \x01(\tB\t\x8a\xc81\x05<=101R\aservice\x125\n" +
+	"\x11metric_name_label\x18\b \x01(\tB\t\x8a\xc81\x05<=101R\x0fmetricNameLabel\x1a@\n" +
 	"\x12MetricRenamesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xba\x01\n" +

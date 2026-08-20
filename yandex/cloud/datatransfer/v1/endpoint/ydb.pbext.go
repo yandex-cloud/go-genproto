@@ -38,6 +38,14 @@ func (m *YdbSource) SetChangefeedCustomConsumerName(v string) {
 	m.ChangefeedCustomConsumerName = v
 }
 
+func (m *YdbSource) SetAuthentication(v *AuthenticationMethod) {
+	m.Authentication = v
+}
+
+func (m *YdbSource) SetYdbConnection(v *YDBConnection) {
+	m.YdbConnection = v
+}
+
 func (m *YdbTarget) SetDatabase(v string) {
 	m.Database = v
 }
@@ -80,4 +88,62 @@ func (m *YdbTarget) SetDefaultCompression(v YdbDefaultCompression) {
 
 func (m *YdbTarget) SetIsSchemaMigrationDisabled(v bool) {
 	m.IsSchemaMigrationDisabled = v
+}
+
+func (m *YdbTarget) SetAuthentication(v *AuthenticationMethod) {
+	m.Authentication = v
+}
+
+func (m *YdbTarget) SetYdbConnection(v *YDBConnection) {
+	m.YdbConnection = v
+}
+
+type AuthenticationMethod_AuthenticationMethod = isAuthenticationMethod_AuthenticationMethod
+
+func (m *AuthenticationMethod) SetAuthenticationMethod(v AuthenticationMethod_AuthenticationMethod) {
+	m.AuthenticationMethod = v
+}
+
+func (m *AuthenticationMethod) SetServiceAccount(v *AuthenticationMethod_ServiceAccount) {
+	m.AuthenticationMethod = &AuthenticationMethod_ServiceAccount_{
+		ServiceAccount: v,
+	}
+}
+
+func (m *AuthenticationMethod_ServiceAccount) SetServiceAccountId(v string) {
+	m.ServiceAccountId = v
+}
+
+func (m *OnPremiseYDB) SetDatabase(v string) {
+	m.Database = v
+}
+
+func (m *OnPremiseYDB) SetInstance(v string) {
+	m.Instance = v
+}
+
+func (m *OnPremiseYDB) SetTlsMode(v *TLSMode) {
+	m.TlsMode = v
+}
+
+func (m *OnPremiseYDB) SetSubnetId(v string) {
+	m.SubnetId = v
+}
+
+type YDBConnection_Connection = isYDBConnection_Connection
+
+func (m *YDBConnection) SetConnection(v YDBConnection_Connection) {
+	m.Connection = v
+}
+
+func (m *YDBConnection) SetDatabaseId(v string) {
+	m.Connection = &YDBConnection_DatabaseId{
+		DatabaseId: v,
+	}
+}
+
+func (m *YDBConnection) SetOnPremise(v *OnPremiseYDB) {
+	m.Connection = &YDBConnection_OnPremise{
+		OnPremise: v,
+	}
 }

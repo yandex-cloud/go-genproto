@@ -22,14 +22,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// NodeGroup describes a group of nodes with a common role.
+//
+// A group can be filled in one of three ways:
+// 1. New servers only: `configuration_id` and `node_count` are set, `server_ids` is empty.
+// `node_count` new servers of the given configuration will be leased.
+// 2. Mixed group with a default configuration: `configuration_id` and `node_count` are set,
+// `server_ids` is non-empty and `node_count >= len(server_ids)`. Servers listed in
+// `server_ids` must already match `configuration_id` or be custom servers
+// (assembled manually, not via a standard configuration). If `node_count == len(server_ids)`,
+// no new servers are leased; otherwise `node_count - len(server_ids)` new servers of
+// `configuration_id` are leased in addition to the existing ones.
+// 3. Custom servers only: `configuration_id` is empty, `server_ids`
+// is non-empty and contains only custom servers, `node_count == len(server_ids)`.
+//
+// Servers listed in `server_ids` must satisfy (checked synchronously before the
+// create-cluster operation is created): the server's configuration matches
+// `configuration_id` or the server is custom; the server's hardware pool matches the
+// cluster's hardware pool; the server's status is not `QUARANTINED` or `DELETING`.
+// If a server's status is `UPDATING` or `PROVISIONING`, the request is still accepted
+// and the cluster-creation operation waits for the server's current operation to
+// complete before proceeding.
+//
+// A server listed in `server_ids` can belong to only one group within a single request.
 type NodeGroup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the configuration.
+	//
+	// Required when automatically leasing new servers for the group (scenarios 1 and 2).
+	// Left blank when the group consists solely of custom servers (scenario 3).
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
-	// Number of nodes in the group.
-	Count int64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	// Total number of nodes in the group, including both newly leased and
+	// already leased (existing) servers listed in `server_ids`.
+	//
+	// Must be greater than or equal to `len(server_ids)`. The number of new
+	// servers leased for the group is `node_count - len(server_ids)`.
+	//
+	// Required (non-zero) when automatically leasing new servers for the group;
+	NodeCount int64 `protobuf:"varint,5,opt,name=node_count,json=nodeCount,proto3" json:"node_count,omitempty"`
 	// Nodes in the group with detailed information. Set after group is filled.
-	Nodes         []*Node `protobuf:"bytes,3,rep,name=nodes,proto3" json:"nodes,omitempty"`
+	Nodes []*Node `protobuf:"bytes,3,rep,name=nodes,proto3" json:"nodes,omitempty"`
+	// IDs of already leased servers to include in the NodeGroup.
+	//
+	// WARNING: the OS on these servers will be reinstalled as part of cluster
+	// creation, just like for newly leased servers. All data on the servers
+	// will be lost.
+	ServerIds     []string `protobuf:"bytes,4,rep,name=server_ids,json=serverIds,proto3" json:"server_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -71,9 +109,9 @@ func (x *NodeGroup) GetConfigurationId() string {
 	return ""
 }
 
-func (x *NodeGroup) GetCount() int64 {
+func (x *NodeGroup) GetNodeCount() int64 {
 	if x != nil {
-		return x.Count
+		return x.NodeCount
 	}
 	return 0
 }
@@ -81,6 +119,13 @@ func (x *NodeGroup) GetCount() int64 {
 func (x *NodeGroup) GetNodes() []*Node {
 	if x != nil {
 		return x.Nodes
+	}
+	return nil
+}
+
+func (x *NodeGroup) GetServerIds() []string {
+	if x != nil {
+		return x.ServerIds
 	}
 	return nil
 }
@@ -161,11 +206,14 @@ var File_yandex_cloud_baremetal_v2_extend_nodes_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_baremetal_v2_extend_nodes_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/baremetal/v2/extend/nodes.proto\x12 yandex.cloud.baremetal.v2.extend\x1a\x1fgoogle/api/field_behavior.proto\"\x99\x01\n" +
+	",yandex/cloud/baremetal/v2/extend/nodes.proto\x12 yandex.cloud.baremetal.v2.extend\x1a\x1fgoogle/api/field_behavior.proto\"\xd2\x01\n" +
 	"\tNodeGroup\x12.\n" +
-	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\x02R\x0fconfigurationId\x12\x19\n" +
-	"\x05count\x18\x02 \x01(\x03B\x03\xe0A\x02R\x05count\x12A\n" +
-	"\x05nodes\x18\x03 \x03(\v2&.yandex.cloud.baremetal.v2.extend.NodeB\x03\xe0A\x03R\x05nodes\"\xb2\x01\n" +
+	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\x01R\x0fconfigurationId\x12\"\n" +
+	"\n" +
+	"node_count\x18\x05 \x01(\x03B\x03\xe0A\x02R\tnodeCount\x12A\n" +
+	"\x05nodes\x18\x03 \x03(\v2&.yandex.cloud.baremetal.v2.extend.NodeB\x03\xe0A\x03R\x05nodes\x12(\n" +
+	"\n" +
+	"server_ids\x18\x04 \x03(\tB\t\xe0A\x04\xe0A\x01\xe0A\x05R\tserverIdsJ\x04\b\x02\x10\x03\"\xb2\x01\n" +
 	"\x04Node\x12 \n" +
 	"\tserver_id\x18\x01 \x01(\tB\x03\xe0A\x03R\bserverId\x12.\n" +
 	"\x10configuration_id\x18\x02 \x01(\tB\x03\xe0A\x02R\x0fconfigurationId\x127\n" +

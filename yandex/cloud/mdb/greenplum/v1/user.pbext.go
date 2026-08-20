@@ -2,12 +2,20 @@
 
 package greenplum
 
+import (
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+)
+
 func (m *User) SetName(v string) {
 	m.Name = v
 }
 
 func (m *User) SetPassword(v string) {
 	m.Password = v
+}
+
+func (m *User) SetLogin(v *wrapperspb.BoolValue) {
+	m.Login = v
 }
 
 func (m *User) SetResourceGroup(v string) {

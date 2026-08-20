@@ -28,7 +28,7 @@ type InitRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Tool name to check.
 	ToolName string `protobuf:"bytes,1,opt,name=tool_name,json=toolName,proto3" json:"tool_name,omitempty"`
-	// Version to check.
+	// Tool version to check.
 	Version       string `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

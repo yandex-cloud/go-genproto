@@ -10,6 +10,7 @@ import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -80,6 +81,8 @@ type User struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// User password. Used only in create and update requests
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	// Is user allowed to login. Corresponds LOGIN user privilege. Default value: True
+	Login *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=login,proto3" json:"login,omitempty"`
 	// Resource group for user's queries
 	ResourceGroup string `protobuf:"bytes,3,opt,name=resource_group,json=resourceGroup,proto3" json:"resource_group,omitempty"`
 	// DB and Pooler specific settings
@@ -130,6 +133,13 @@ func (x *User) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *User) GetLogin() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.Login
+	}
+	return nil
 }
 
 func (x *User) GetResourceGroup() string {
@@ -196,12 +206,13 @@ var File_yandex_cloud_mdb_greenplum_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1dyandex/cloud/validation.proto\"\x87\x02\n" +
+	"(yandex/cloud/mdb/greenplum/v1/user.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xb9\x02\n" +
 	"\x04User\x12A\n" +
 	"\x04name\x18\x01 \x01(\tB-\xe8\xc71\x01\xf2\xc71\x1d^[a-zA-Z_][a-zA-Z0-9_]{0,62}$\x8a\xc81\x041-63R\x04name\x12%\n" +
-	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12@\n" +
+	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x120\n" +
+	"\x05login\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x12@\n" +
 	"\x0eresource_group\x18\x03 \x01(\tB\x19\xf2\xc71\x15^([^\\|/*?.,;\"'<>]+|)$R\rresourceGroup\x12M\n" +
-	"\bsettings\x18\t \x01(\v21.yandex.cloud.mdb.greenplum.v1.UserSettingsConfigR\bsettingsJ\x04\b\x04\x10\t\"\xb2\x01\n" +
+	"\bsettings\x18\t \x01(\v21.yandex.cloud.mdb.greenplum.v1.UserSettingsConfigR\bsettingsJ\x04\b\x05\x10\t\"\xb2\x01\n" +
 	"\x12UserSettingsConfig\x12W\n" +
 	"\tpool_mode\x18\x01 \x01(\x0e2:.yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolModeR\bpoolMode\"C\n" +
 	"\bPoolMode\x12\x19\n" +
@@ -228,15 +239,17 @@ var file_yandex_cloud_mdb_greenplum_v1_user_proto_goTypes = []any{
 	(UserSettingsConfig_PoolMode)(0), // 0: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
 	(*User)(nil),                     // 1: yandex.cloud.mdb.greenplum.v1.User
 	(*UserSettingsConfig)(nil),       // 2: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
+	(*wrapperspb.BoolValue)(nil),     // 3: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_greenplum_v1_user_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.mdb.greenplum.v1.User.settings:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
-	0, // 1: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_mode:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 0: yandex.cloud.mdb.greenplum.v1.User.login:type_name -> google.protobuf.BoolValue
+	2, // 1: yandex.cloud.mdb.greenplum.v1.User.settings:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
+	0, // 2: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_mode:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_user_proto_init() }

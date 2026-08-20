@@ -240,12 +240,44 @@ func (m *Trail_DataEventsFiltering) SetResourceScopes(v []*Trail_Resource) {
 	m.ResourceScopes = v
 }
 
+func (m *Trail_DataEventsFiltering) SetIncludeRules(v []*Trail_FieldFilterRule) {
+	m.IncludeRules = v
+}
+
+func (m *Trail_DataEventsFiltering) SetExcludeRules(v []*Trail_FieldFilterRule) {
+	m.ExcludeRules = v
+}
+
 func (m *Trail_EventTypes) SetEventTypes(v []string) {
 	m.EventTypes = v
 }
 
 func (m *Trail_ManagementEventsFiltering) SetResourceScopes(v []*Trail_Resource) {
 	m.ResourceScopes = v
+}
+
+func (m *Trail_ManagementEventsFiltering) SetIncludeRules(v []*Trail_FieldFilterRule) {
+	m.IncludeRules = v
+}
+
+func (m *Trail_ManagementEventsFiltering) SetExcludeRules(v []*Trail_FieldFilterRule) {
+	m.ExcludeRules = v
+}
+
+func (m *Trail_FieldFilterRule) SetConditions(v []*Trail_FieldCondition) {
+	m.Conditions = v
+}
+
+func (m *Trail_FieldCondition) SetField(v string) {
+	m.Field = v
+}
+
+func (m *Trail_FieldCondition) SetOperator(v Trail_FieldCondition_Operator) {
+	m.Operator = v
+}
+
+func (m *Trail_FieldCondition) SetValues(v []string) {
+	m.Values = v
 }
 
 func (m *Trail_FilteringPolicy) SetManagementEventsFilter(v *Trail_ManagementEventsFiltering) {

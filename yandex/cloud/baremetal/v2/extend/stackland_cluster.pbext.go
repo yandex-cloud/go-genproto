@@ -98,6 +98,14 @@ func (m *StacklandCluster) SetBastionSpec(v *BastionSpec) {
 	m.BastionSpec = v
 }
 
+func (m *StacklandCluster) SetSettings(v *StacklandClusterSettings) {
+	m.Settings = v
+}
+
+func (m *StacklandClusterSettings) SetPublicNetworkAccess(v StacklandClusterSettings_PublicNetworkAccess) {
+	m.PublicNetworkAccess = v
+}
+
 func (m *StacklandHostRoles) SetControlplane(v []*NodeGroup) {
 	m.Controlplane = v
 }

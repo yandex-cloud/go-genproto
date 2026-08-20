@@ -232,6 +232,10 @@ func (m *Access) SetYandexQuery(v bool) {
 	m.YandexQuery = v
 }
 
+func (m *Access) SetTrino(v bool) {
+	m.Trino = v
+}
+
 func (m *RestoreResources) SetResourcePresetId(v string) {
 	m.ResourcePresetId = v
 }

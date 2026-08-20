@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Version Control Service for managing tool version blacklists.
+// Version Control Service manages tool version blacklists.
 // This service manages obsolete (deprecated/blocked) versions only.
 // API Behavior:
 // - Supported versions: Return successful InitResponse.
@@ -60,7 +60,7 @@ func (c *versionControlServiceClient) Init(ctx context.Context, in *InitRequest,
 // All implementations should embed UnimplementedVersionControlServiceServer
 // for forward compatibility.
 //
-// Version Control Service for managing tool version blacklists.
+// Version Control Service manages tool version blacklists.
 // This service manages obsolete (deprecated/blocked) versions only.
 // API Behavior:
 // - Supported versions: Return successful InitResponse.

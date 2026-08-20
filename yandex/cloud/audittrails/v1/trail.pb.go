@@ -82,9 +82,12 @@ type Trail_Codec int32
 
 const (
 	Trail_CODEC_UNSPECIFIED Trail_Codec = 0
-	Trail_RAW               Trail_Codec = 1
-	Trail_GZIP              Trail_Codec = 2
-	Trail_ZSTD              Trail_Codec = 3
+	// Do not use compression. Insert raw data into the target topic
+	Trail_RAW Trail_Codec = 1
+	// Use GZIP compression.
+	Trail_GZIP Trail_Codec = 2
+	// Use ZSTD compression.
+	Trail_ZSTD Trail_Codec = 3
 )
 
 // Enum value maps for Trail_Codec.
@@ -230,6 +233,59 @@ func (x Trail_EventAccessTypeFilter) Number() protoreflect.EnumNumber {
 // Deprecated: Use Trail_EventAccessTypeFilter.Descriptor instead.
 func (Trail_EventAccessTypeFilter) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 3}
+}
+
+type Trail_FieldCondition_Operator int32
+
+const (
+	// Default enum value for unspecified case. Do not use
+	Trail_FieldCondition_OPERATOR_UNSPECIFIED Trail_FieldCondition_Operator = 0
+	// The scalar field is equal to one of the supplied values.
+	Trail_FieldCondition_IN Trail_FieldCondition_Operator = 1
+	// The scalar field is an IP address belonging to one of the
+	// supplied IP networks.
+	Trail_FieldCondition_IP_IN Trail_FieldCondition_Operator = 2
+)
+
+// Enum value maps for Trail_FieldCondition_Operator.
+var (
+	Trail_FieldCondition_Operator_name = map[int32]string{
+		0: "OPERATOR_UNSPECIFIED",
+		1: "IN",
+		2: "IP_IN",
+	}
+	Trail_FieldCondition_Operator_value = map[string]int32{
+		"OPERATOR_UNSPECIFIED": 0,
+		"IN":                   1,
+		"IP_IN":                2,
+	}
+)
+
+func (x Trail_FieldCondition_Operator) Enum() *Trail_FieldCondition_Operator {
+	p := new(Trail_FieldCondition_Operator)
+	*p = x
+	return p
+}
+
+func (x Trail_FieldCondition_Operator) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Trail_FieldCondition_Operator) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_audittrails_v1_trail_proto_enumTypes[4].Descriptor()
+}
+
+func (Trail_FieldCondition_Operator) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_audittrails_v1_trail_proto_enumTypes[4]
+}
+
+func (x Trail_FieldCondition_Operator) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Trail_FieldCondition_Operator.Descriptor instead.
+func (Trail_FieldCondition_Operator) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 18, 0}
 }
 
 // Trail describes the filtering and destination configuration of the process of sending Audit events
@@ -1265,8 +1321,12 @@ type Trail_DataEventsFiltering struct {
 	Service string `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
 	// A list of resources which will be monitored by the trail
 	ResourceScopes []*Trail_Resource `protobuf:"bytes,4,rep,name=resource_scopes,json=resourceScopes,proto3" json:"resource_scopes,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// List of rules defining which events will be included. Combined using logical OR.
+	IncludeRules []*Trail_FieldFilterRule `protobuf:"bytes,6,rep,name=include_rules,json=includeRules,proto3" json:"include_rules,omitempty"`
+	// List of rules defining which events will be excluded. Combined using logical OR.
+	ExcludeRules  []*Trail_FieldFilterRule `protobuf:"bytes,7,rep,name=exclude_rules,json=excludeRules,proto3" json:"exclude_rules,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Trail_DataEventsFiltering) Reset() {
@@ -1354,6 +1414,20 @@ func (x *Trail_DataEventsFiltering) GetResourceScopes() []*Trail_Resource {
 	return nil
 }
 
+func (x *Trail_DataEventsFiltering) GetIncludeRules() []*Trail_FieldFilterRule {
+	if x != nil {
+		return x.IncludeRules
+	}
+	return nil
+}
+
+func (x *Trail_DataEventsFiltering) GetExcludeRules() []*Trail_FieldFilterRule {
+	if x != nil {
+		return x.ExcludeRules
+	}
+	return nil
+}
+
 type isTrail_DataEventsFiltering_AdditionalRules interface {
 	isTrail_DataEventsFiltering_AdditionalRules()
 }
@@ -1387,8 +1461,9 @@ func (*Trail_DataEventsFiltering_DnsFilter) isTrail_DataEventsFiltering_ServiceS
 
 // Policy with explicitly specified event group
 type Trail_EventTypes struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	EventTypes    []string               `protobuf:"bytes,1,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Array of event type names. Holds at most 1024 elements
+	EventTypes    []string `protobuf:"bytes,1,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1435,8 +1510,12 @@ type Trail_ManagementEventsFiltering struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// A list of resources which will be monitored by the trail
 	ResourceScopes []*Trail_Resource `protobuf:"bytes,1,rep,name=resource_scopes,json=resourceScopes,proto3" json:"resource_scopes,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// List of rules defining which events will be included. Combined using logical OR.
+	IncludeRules []*Trail_FieldFilterRule `protobuf:"bytes,3,rep,name=include_rules,json=includeRules,proto3" json:"include_rules,omitempty"`
+	// List of rules defining which events will be excluded. Combined using logical OR.
+	ExcludeRules  []*Trail_FieldFilterRule `protobuf:"bytes,4,rep,name=exclude_rules,json=excludeRules,proto3" json:"exclude_rules,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Trail_ManagementEventsFiltering) Reset() {
@@ -1476,6 +1555,134 @@ func (x *Trail_ManagementEventsFiltering) GetResourceScopes() []*Trail_Resource 
 	return nil
 }
 
+func (x *Trail_ManagementEventsFiltering) GetIncludeRules() []*Trail_FieldFilterRule {
+	if x != nil {
+		return x.IncludeRules
+	}
+	return nil
+}
+
+func (x *Trail_ManagementEventsFiltering) GetExcludeRules() []*Trail_FieldFilterRule {
+	if x != nil {
+		return x.ExcludeRules
+	}
+	return nil
+}
+
+type Trail_FieldFilterRule struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conditions within one rule are combined using logical AND.
+	Conditions    []*Trail_FieldCondition `protobuf:"bytes,1,rep,name=conditions,proto3" json:"conditions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trail_FieldFilterRule) Reset() {
+	*x = Trail_FieldFilterRule{}
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trail_FieldFilterRule) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trail_FieldFilterRule) ProtoMessage() {}
+
+func (x *Trail_FieldFilterRule) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trail_FieldFilterRule.ProtoReflect.Descriptor instead.
+func (*Trail_FieldFilterRule) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 17}
+}
+
+func (x *Trail_FieldFilterRule) GetConditions() []*Trail_FieldCondition {
+	if x != nil {
+		return x.Conditions
+	}
+	return nil
+}
+
+type Trail_FieldCondition struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Path to a scalar field.
+	//
+	// Examples:
+	// $.details.kind
+	// $.details.user.groups[0]
+	// $.details.items[2].metadata['name']
+	Field string `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	// Condition operator. Controls how values array is interpreted
+	Operator Trail_FieldCondition_Operator `protobuf:"varint,2,opt,name=operator,proto3,enum=yandex.cloud.audittrails.v1.Trail_FieldCondition_Operator" json:"operator,omitempty"`
+	// Textual operands interpreted according to the selected field
+	// and operator.
+	Values        []string `protobuf:"bytes,3,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Trail_FieldCondition) Reset() {
+	*x = Trail_FieldCondition{}
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Trail_FieldCondition) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Trail_FieldCondition) ProtoMessage() {}
+
+func (x *Trail_FieldCondition) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Trail_FieldCondition.ProtoReflect.Descriptor instead.
+func (*Trail_FieldCondition) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 18}
+}
+
+func (x *Trail_FieldCondition) GetField() string {
+	if x != nil {
+		return x.Field
+	}
+	return ""
+}
+
+func (x *Trail_FieldCondition) GetOperator() Trail_FieldCondition_Operator {
+	if x != nil {
+		return x.Operator
+	}
+	return Trail_FieldCondition_OPERATOR_UNSPECIFIED
+}
+
+func (x *Trail_FieldCondition) GetValues() []string {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
 // Combination of policies describing event filtering process of the trail
 // At least one filed must be filled
 type Trail_FilteringPolicy struct {
@@ -1490,7 +1697,7 @@ type Trail_FilteringPolicy struct {
 
 func (x *Trail_FilteringPolicy) Reset() {
 	*x = Trail_FilteringPolicy{}
-	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[18]
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1502,7 +1709,7 @@ func (x *Trail_FilteringPolicy) String() string {
 func (*Trail_FilteringPolicy) ProtoMessage() {}
 
 func (x *Trail_FilteringPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[18]
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1515,7 +1722,7 @@ func (x *Trail_FilteringPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trail_FilteringPolicy.ProtoReflect.Descriptor instead.
 func (*Trail_FilteringPolicy) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 17}
+	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 19}
 }
 
 func (x *Trail_FilteringPolicy) GetManagementEventsFilter() *Trail_ManagementEventsFiltering {
@@ -1542,7 +1749,7 @@ type Trail_DnsDataEventsFilter struct {
 
 func (x *Trail_DnsDataEventsFilter) Reset() {
 	*x = Trail_DnsDataEventsFilter{}
-	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[19]
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1554,7 +1761,7 @@ func (x *Trail_DnsDataEventsFilter) String() string {
 func (*Trail_DnsDataEventsFilter) ProtoMessage() {}
 
 func (x *Trail_DnsDataEventsFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[19]
+	mi := &file_yandex_cloud_audittrails_v1_trail_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1567,7 +1774,7 @@ func (x *Trail_DnsDataEventsFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Trail_DnsDataEventsFilter.ProtoReflect.Descriptor instead.
 func (*Trail_DnsDataEventsFilter) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 18}
+	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP(), []int{0, 20}
 }
 
 func (x *Trail_DnsDataEventsFilter) GetIncludeNonrecursiveQueries() bool {
@@ -1581,7 +1788,7 @@ var File_yandex_cloud_audittrails_v1_trail_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_audittrails_v1_trail_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/audittrails/v1/trail.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x95#\n" +
+	"'yandex/cloud/audittrails/v1/trail.proto\x12\x1byandex.cloud.audittrails.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x80)\n" +
 	"\x05Trail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12?\n" +
@@ -1656,7 +1863,7 @@ const file_yandex_cloud_audittrails_v1_trail_proto_rawDesc = "" +
 	"pathFilter\x1a\xc4\x01\n" +
 	"\x1aEventFilterElementCategory\x12R\n" +
 	"\x05plane\x18\x01 \x01(\x0e26.yandex.cloud.audittrails.v1.Trail.EventCategoryFilterB\x04\xe8\xc71\x01R\x05plane\x12R\n" +
-	"\x04type\x18\x02 \x01(\x0e28.yandex.cloud.audittrails.v1.Trail.EventAccessTypeFilterB\x04\xe8\xc71\x01R\x04type\x1a\xd2\x03\n" +
+	"\x04type\x18\x02 \x01(\x0e28.yandex.cloud.audittrails.v1.Trail.EventAccessTypeFilterB\x04\xe8\xc71\x01R\x04type\x1a\x98\x05\n" +
 	"\x13DataEventsFiltering\x12X\n" +
 	"\x0fincluded_events\x18\x02 \x01(\v2-.yandex.cloud.audittrails.v1.Trail.EventTypesH\x00R\x0eincludedEvents\x12X\n" +
 	"\x0fexcluded_events\x18\x03 \x01(\v2-.yandex.cloud.audittrails.v1.Trail.EventTypesH\x00R\x0eexcludedEvents\x12W\n" +
@@ -1664,17 +1871,33 @@ const file_yandex_cloud_audittrails_v1_trail_proto_rawDesc = "" +
 	"dns_filter\x18\x05 \x01(\v26.yandex.cloud.audittrails.v1.Trail.DnsDataEventsFilterH\x01R\tdnsFilter\x12\x1e\n" +
 	"\aservice\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\aservice\x12`\n" +
 	"\x0fresource_scopes\x18\x04 \x03(\v2+.yandex.cloud.audittrails.v1.Trail.ResourceB\n" +
-	"\x82\xc81\x061-1024R\x0eresourceScopesB\x12\n" +
+	"\x82\xc81\x061-1024R\x0eresourceScopes\x12a\n" +
+	"\rinclude_rules\x18\x06 \x03(\v22.yandex.cloud.audittrails.v1.Trail.FieldFilterRuleB\b\x82\xc81\x04<=64R\fincludeRules\x12a\n" +
+	"\rexclude_rules\x18\a \x03(\v22.yandex.cloud.audittrails.v1.Trail.FieldFilterRuleB\b\x82\xc81\x04<=64R\fexcludeRulesB\x12\n" +
 	"\x10additional_rulesB\x18\n" +
 	"\x16service_specific_rules\x1a9\n" +
 	"\n" +
 	"EventTypes\x12+\n" +
 	"\vevent_types\x18\x01 \x03(\tB\n" +
 	"\x82\xc81\x061-1024R\n" +
-	"eventTypes\x1a}\n" +
+	"eventTypes\x1a\xc9\x02\n" +
 	"\x19ManagementEventsFiltering\x12`\n" +
 	"\x0fresource_scopes\x18\x01 \x03(\v2+.yandex.cloud.audittrails.v1.Trail.ResourceB\n" +
-	"\x82\xc81\x061-1024R\x0eresourceScopes\x1a\x81\x02\n" +
+	"\x82\xc81\x061-1024R\x0eresourceScopes\x12a\n" +
+	"\rinclude_rules\x18\x03 \x03(\v22.yandex.cloud.audittrails.v1.Trail.FieldFilterRuleB\b\x82\xc81\x04<=64R\fincludeRules\x12a\n" +
+	"\rexclude_rules\x18\x04 \x03(\v22.yandex.cloud.audittrails.v1.Trail.FieldFilterRuleB\b\x82\xc81\x04<=64R\fexcludeRulesJ\x04\b\x02\x10\x03\x1an\n" +
+	"\x0fFieldFilterRule\x12[\n" +
+	"\n" +
+	"conditions\x18\x01 \x03(\v21.yandex.cloud.audittrails.v1.Trail.FieldConditionB\b\x82\xc81\x041-64R\n" +
+	"conditions\x1a\xe5\x01\n" +
+	"\x0eFieldCondition\x12\x1a\n" +
+	"\x05field\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x05field\x12\\\n" +
+	"\boperator\x18\x02 \x01(\x0e2:.yandex.cloud.audittrails.v1.Trail.FieldCondition.OperatorB\x04\xe8\xc71\x01R\boperator\x12 \n" +
+	"\x06values\x18\x03 \x03(\tB\b\x82\xc81\x041-64R\x06values\"7\n" +
+	"\bOperator\x12\x18\n" +
+	"\x14OPERATOR_UNSPECIFIED\x10\x00\x12\x06\n" +
+	"\x02IN\x10\x01\x12\t\n" +
+	"\x05IP_IN\x10\x02\x1a\x81\x02\n" +
 	"\x0fFilteringPolicy\x12|\n" +
 	"\x18management_events_filter\x18\x01 \x01(\v2<.yandex.cloud.audittrails.v1.Trail.ManagementEventsFilteringB\x04\xe8\xc71\x00R\x16managementEventsFilter\x12p\n" +
 	"\x13data_events_filters\x18\x02 \x03(\v26.yandex.cloud.audittrails.v1.Trail.DataEventsFilteringB\b\x82\xc81\x04<128R\x11dataEventsFilters\x1a]\n" +
@@ -1717,74 +1940,83 @@ func file_yandex_cloud_audittrails_v1_trail_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_audittrails_v1_trail_proto_rawDescData
 }
 
-var file_yandex_cloud_audittrails_v1_trail_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_yandex_cloud_audittrails_v1_trail_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_yandex_cloud_audittrails_v1_trail_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_audittrails_v1_trail_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_yandex_cloud_audittrails_v1_trail_proto_goTypes = []any{
 	(Trail_Status)(0),                        // 0: yandex.cloud.audittrails.v1.Trail.Status
 	(Trail_Codec)(0),                         // 1: yandex.cloud.audittrails.v1.Trail.Codec
 	(Trail_EventCategoryFilter)(0),           // 2: yandex.cloud.audittrails.v1.Trail.EventCategoryFilter
 	(Trail_EventAccessTypeFilter)(0),         // 3: yandex.cloud.audittrails.v1.Trail.EventAccessTypeFilter
-	(*Trail)(nil),                            // 4: yandex.cloud.audittrails.v1.Trail
-	(*Trail_Destination)(nil),                // 5: yandex.cloud.audittrails.v1.Trail.Destination
-	(*Trail_ObjectStorage)(nil),              // 6: yandex.cloud.audittrails.v1.Trail.ObjectStorage
-	(*Trail_CloudLogging)(nil),               // 7: yandex.cloud.audittrails.v1.Trail.CloudLogging
-	(*Trail_DataStream)(nil),                 // 8: yandex.cloud.audittrails.v1.Trail.DataStream
-	(*Trail_EventRouter)(nil),                // 9: yandex.cloud.audittrails.v1.Trail.EventRouter
-	(*Trail_Filter)(nil),                     // 10: yandex.cloud.audittrails.v1.Trail.Filter
-	(*Trail_PathFilter)(nil),                 // 11: yandex.cloud.audittrails.v1.Trail.PathFilter
-	(*Trail_PathFilterElement)(nil),          // 12: yandex.cloud.audittrails.v1.Trail.PathFilterElement
-	(*Trail_PathFilterElementAny)(nil),       // 13: yandex.cloud.audittrails.v1.Trail.PathFilterElementAny
-	(*Trail_PathFilterElementSome)(nil),      // 14: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome
-	(*Trail_Resource)(nil),                   // 15: yandex.cloud.audittrails.v1.Trail.Resource
-	(*Trail_EventFilter)(nil),                // 16: yandex.cloud.audittrails.v1.Trail.EventFilter
-	(*Trail_EventFilterElement)(nil),         // 17: yandex.cloud.audittrails.v1.Trail.EventFilterElement
-	(*Trail_EventFilterElementCategory)(nil), // 18: yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory
-	(*Trail_DataEventsFiltering)(nil),        // 19: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering
-	(*Trail_EventTypes)(nil),                 // 20: yandex.cloud.audittrails.v1.Trail.EventTypes
-	(*Trail_ManagementEventsFiltering)(nil),  // 21: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering
-	(*Trail_FilteringPolicy)(nil),            // 22: yandex.cloud.audittrails.v1.Trail.FilteringPolicy
-	(*Trail_DnsDataEventsFilter)(nil),        // 23: yandex.cloud.audittrails.v1.Trail.DnsDataEventsFilter
-	nil,                                      // 24: yandex.cloud.audittrails.v1.Trail.LabelsEntry
-	(*timestamppb.Timestamp)(nil),            // 25: google.protobuf.Timestamp
+	(Trail_FieldCondition_Operator)(0),       // 4: yandex.cloud.audittrails.v1.Trail.FieldCondition.Operator
+	(*Trail)(nil),                            // 5: yandex.cloud.audittrails.v1.Trail
+	(*Trail_Destination)(nil),                // 6: yandex.cloud.audittrails.v1.Trail.Destination
+	(*Trail_ObjectStorage)(nil),              // 7: yandex.cloud.audittrails.v1.Trail.ObjectStorage
+	(*Trail_CloudLogging)(nil),               // 8: yandex.cloud.audittrails.v1.Trail.CloudLogging
+	(*Trail_DataStream)(nil),                 // 9: yandex.cloud.audittrails.v1.Trail.DataStream
+	(*Trail_EventRouter)(nil),                // 10: yandex.cloud.audittrails.v1.Trail.EventRouter
+	(*Trail_Filter)(nil),                     // 11: yandex.cloud.audittrails.v1.Trail.Filter
+	(*Trail_PathFilter)(nil),                 // 12: yandex.cloud.audittrails.v1.Trail.PathFilter
+	(*Trail_PathFilterElement)(nil),          // 13: yandex.cloud.audittrails.v1.Trail.PathFilterElement
+	(*Trail_PathFilterElementAny)(nil),       // 14: yandex.cloud.audittrails.v1.Trail.PathFilterElementAny
+	(*Trail_PathFilterElementSome)(nil),      // 15: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome
+	(*Trail_Resource)(nil),                   // 16: yandex.cloud.audittrails.v1.Trail.Resource
+	(*Trail_EventFilter)(nil),                // 17: yandex.cloud.audittrails.v1.Trail.EventFilter
+	(*Trail_EventFilterElement)(nil),         // 18: yandex.cloud.audittrails.v1.Trail.EventFilterElement
+	(*Trail_EventFilterElementCategory)(nil), // 19: yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory
+	(*Trail_DataEventsFiltering)(nil),        // 20: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering
+	(*Trail_EventTypes)(nil),                 // 21: yandex.cloud.audittrails.v1.Trail.EventTypes
+	(*Trail_ManagementEventsFiltering)(nil),  // 22: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering
+	(*Trail_FieldFilterRule)(nil),            // 23: yandex.cloud.audittrails.v1.Trail.FieldFilterRule
+	(*Trail_FieldCondition)(nil),             // 24: yandex.cloud.audittrails.v1.Trail.FieldCondition
+	(*Trail_FilteringPolicy)(nil),            // 25: yandex.cloud.audittrails.v1.Trail.FilteringPolicy
+	(*Trail_DnsDataEventsFilter)(nil),        // 26: yandex.cloud.audittrails.v1.Trail.DnsDataEventsFilter
+	nil,                                      // 27: yandex.cloud.audittrails.v1.Trail.LabelsEntry
+	(*timestamppb.Timestamp)(nil),            // 28: google.protobuf.Timestamp
 }
 var file_yandex_cloud_audittrails_v1_trail_proto_depIdxs = []int32{
-	25, // 0: yandex.cloud.audittrails.v1.Trail.created_at:type_name -> google.protobuf.Timestamp
-	25, // 1: yandex.cloud.audittrails.v1.Trail.updated_at:type_name -> google.protobuf.Timestamp
-	24, // 2: yandex.cloud.audittrails.v1.Trail.labels:type_name -> yandex.cloud.audittrails.v1.Trail.LabelsEntry
-	5,  // 3: yandex.cloud.audittrails.v1.Trail.destination:type_name -> yandex.cloud.audittrails.v1.Trail.Destination
+	28, // 0: yandex.cloud.audittrails.v1.Trail.created_at:type_name -> google.protobuf.Timestamp
+	28, // 1: yandex.cloud.audittrails.v1.Trail.updated_at:type_name -> google.protobuf.Timestamp
+	27, // 2: yandex.cloud.audittrails.v1.Trail.labels:type_name -> yandex.cloud.audittrails.v1.Trail.LabelsEntry
+	6,  // 3: yandex.cloud.audittrails.v1.Trail.destination:type_name -> yandex.cloud.audittrails.v1.Trail.Destination
 	0,  // 4: yandex.cloud.audittrails.v1.Trail.status:type_name -> yandex.cloud.audittrails.v1.Trail.Status
-	10, // 5: yandex.cloud.audittrails.v1.Trail.filter:type_name -> yandex.cloud.audittrails.v1.Trail.Filter
-	22, // 6: yandex.cloud.audittrails.v1.Trail.filtering_policy:type_name -> yandex.cloud.audittrails.v1.Trail.FilteringPolicy
-	6,  // 7: yandex.cloud.audittrails.v1.Trail.Destination.object_storage:type_name -> yandex.cloud.audittrails.v1.Trail.ObjectStorage
-	7,  // 8: yandex.cloud.audittrails.v1.Trail.Destination.cloud_logging:type_name -> yandex.cloud.audittrails.v1.Trail.CloudLogging
-	8,  // 9: yandex.cloud.audittrails.v1.Trail.Destination.data_stream:type_name -> yandex.cloud.audittrails.v1.Trail.DataStream
-	9,  // 10: yandex.cloud.audittrails.v1.Trail.Destination.eventrouter:type_name -> yandex.cloud.audittrails.v1.Trail.EventRouter
+	11, // 5: yandex.cloud.audittrails.v1.Trail.filter:type_name -> yandex.cloud.audittrails.v1.Trail.Filter
+	25, // 6: yandex.cloud.audittrails.v1.Trail.filtering_policy:type_name -> yandex.cloud.audittrails.v1.Trail.FilteringPolicy
+	7,  // 7: yandex.cloud.audittrails.v1.Trail.Destination.object_storage:type_name -> yandex.cloud.audittrails.v1.Trail.ObjectStorage
+	8,  // 8: yandex.cloud.audittrails.v1.Trail.Destination.cloud_logging:type_name -> yandex.cloud.audittrails.v1.Trail.CloudLogging
+	9,  // 9: yandex.cloud.audittrails.v1.Trail.Destination.data_stream:type_name -> yandex.cloud.audittrails.v1.Trail.DataStream
+	10, // 10: yandex.cloud.audittrails.v1.Trail.Destination.eventrouter:type_name -> yandex.cloud.audittrails.v1.Trail.EventRouter
 	1,  // 11: yandex.cloud.audittrails.v1.Trail.DataStream.codec:type_name -> yandex.cloud.audittrails.v1.Trail.Codec
-	11, // 12: yandex.cloud.audittrails.v1.Trail.Filter.path_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilter
-	16, // 13: yandex.cloud.audittrails.v1.Trail.Filter.event_filter:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilter
-	12, // 14: yandex.cloud.audittrails.v1.Trail.PathFilter.root:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElement
-	13, // 15: yandex.cloud.audittrails.v1.Trail.PathFilterElement.any_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElementAny
-	14, // 16: yandex.cloud.audittrails.v1.Trail.PathFilterElement.some_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElementSome
-	15, // 17: yandex.cloud.audittrails.v1.Trail.PathFilterElementAny.resource:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
-	15, // 18: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome.resource:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
-	12, // 19: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome.filters:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElement
-	17, // 20: yandex.cloud.audittrails.v1.Trail.EventFilter.filters:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilterElement
-	18, // 21: yandex.cloud.audittrails.v1.Trail.EventFilterElement.categories:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory
-	11, // 22: yandex.cloud.audittrails.v1.Trail.EventFilterElement.path_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilter
+	12, // 12: yandex.cloud.audittrails.v1.Trail.Filter.path_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilter
+	17, // 13: yandex.cloud.audittrails.v1.Trail.Filter.event_filter:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilter
+	13, // 14: yandex.cloud.audittrails.v1.Trail.PathFilter.root:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElement
+	14, // 15: yandex.cloud.audittrails.v1.Trail.PathFilterElement.any_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElementAny
+	15, // 16: yandex.cloud.audittrails.v1.Trail.PathFilterElement.some_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElementSome
+	16, // 17: yandex.cloud.audittrails.v1.Trail.PathFilterElementAny.resource:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
+	16, // 18: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome.resource:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
+	13, // 19: yandex.cloud.audittrails.v1.Trail.PathFilterElementSome.filters:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilterElement
+	18, // 20: yandex.cloud.audittrails.v1.Trail.EventFilter.filters:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilterElement
+	19, // 21: yandex.cloud.audittrails.v1.Trail.EventFilterElement.categories:type_name -> yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory
+	12, // 22: yandex.cloud.audittrails.v1.Trail.EventFilterElement.path_filter:type_name -> yandex.cloud.audittrails.v1.Trail.PathFilter
 	2,  // 23: yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory.plane:type_name -> yandex.cloud.audittrails.v1.Trail.EventCategoryFilter
 	3,  // 24: yandex.cloud.audittrails.v1.Trail.EventFilterElementCategory.type:type_name -> yandex.cloud.audittrails.v1.Trail.EventAccessTypeFilter
-	20, // 25: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.included_events:type_name -> yandex.cloud.audittrails.v1.Trail.EventTypes
-	20, // 26: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.excluded_events:type_name -> yandex.cloud.audittrails.v1.Trail.EventTypes
-	23, // 27: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.dns_filter:type_name -> yandex.cloud.audittrails.v1.Trail.DnsDataEventsFilter
-	15, // 28: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.resource_scopes:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
-	15, // 29: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering.resource_scopes:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
-	21, // 30: yandex.cloud.audittrails.v1.Trail.FilteringPolicy.management_events_filter:type_name -> yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering
-	19, // 31: yandex.cloud.audittrails.v1.Trail.FilteringPolicy.data_events_filters:type_name -> yandex.cloud.audittrails.v1.Trail.DataEventsFiltering
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	21, // 25: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.included_events:type_name -> yandex.cloud.audittrails.v1.Trail.EventTypes
+	21, // 26: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.excluded_events:type_name -> yandex.cloud.audittrails.v1.Trail.EventTypes
+	26, // 27: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.dns_filter:type_name -> yandex.cloud.audittrails.v1.Trail.DnsDataEventsFilter
+	16, // 28: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.resource_scopes:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
+	23, // 29: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.include_rules:type_name -> yandex.cloud.audittrails.v1.Trail.FieldFilterRule
+	23, // 30: yandex.cloud.audittrails.v1.Trail.DataEventsFiltering.exclude_rules:type_name -> yandex.cloud.audittrails.v1.Trail.FieldFilterRule
+	16, // 31: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering.resource_scopes:type_name -> yandex.cloud.audittrails.v1.Trail.Resource
+	23, // 32: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering.include_rules:type_name -> yandex.cloud.audittrails.v1.Trail.FieldFilterRule
+	23, // 33: yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering.exclude_rules:type_name -> yandex.cloud.audittrails.v1.Trail.FieldFilterRule
+	24, // 34: yandex.cloud.audittrails.v1.Trail.FieldFilterRule.conditions:type_name -> yandex.cloud.audittrails.v1.Trail.FieldCondition
+	4,  // 35: yandex.cloud.audittrails.v1.Trail.FieldCondition.operator:type_name -> yandex.cloud.audittrails.v1.Trail.FieldCondition.Operator
+	22, // 36: yandex.cloud.audittrails.v1.Trail.FilteringPolicy.management_events_filter:type_name -> yandex.cloud.audittrails.v1.Trail.ManagementEventsFiltering
+	20, // 37: yandex.cloud.audittrails.v1.Trail.FilteringPolicy.data_events_filters:type_name -> yandex.cloud.audittrails.v1.Trail.DataEventsFiltering
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_audittrails_v1_trail_proto_init() }
@@ -1815,8 +2047,8 @@ func file_yandex_cloud_audittrails_v1_trail_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_audittrails_v1_trail_proto_rawDesc), len(file_yandex_cloud_audittrails_v1_trail_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   21,
+			NumEnums:      5,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
