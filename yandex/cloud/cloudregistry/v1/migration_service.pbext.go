@@ -13,3 +13,71 @@ func (m *StartCloudMigrationMetadata) SetCloudId(v string) {
 func (m *StartCloudMigrationMetadata) SetRegistryIds(v []string) {
 	m.RegistryIds = v
 }
+
+func (m *StartFolderMigrationRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *StartFolderMigrationMetadata) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *StartFolderMigrationMetadata) SetRegistryIds(v []string) {
+	m.RegistryIds = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetFailedRegistriesLimit(v int64) {
+	m.FailedRegistriesLimit = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetInProgressRegistriesLimit(v int64) {
+	m.InProgressRegistriesLimit = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetFailedRepositoriesLimit(v int64) {
+	m.FailedRepositoriesLimit = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetFailedTagsLimit(v int64) {
+	m.FailedTagsLimit = v
+}
+
+func (m *GetCloudMigrationStatusDashboardRequest) SetInProgressRepositoriesLimit(v int64) {
+	m.InProgressRepositoriesLimit = v
+}
+
+func (m *CloudMigrationStatusDashboard) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *CloudMigrationStatusDashboard) SetStatus(v MigrationStatus) {
+	m.Status = v
+}
+
+func (m *CloudMigrationStatusDashboard) SetProgress(v *CloudMigrationProgressCounters) {
+	m.Progress = v
+}
+
+func (m *CloudMigrationStatusDashboard) SetTopFailedRegistries(v []*MigrationStatusDashboard) {
+	m.TopFailedRegistries = v
+}
+
+func (m *CloudMigrationStatusDashboard) SetTopInProgressRegistries(v []*MigrationStatusDashboard) {
+	m.TopInProgressRegistries = v
+}
+
+func (m *CloudMigrationProgressCounters) SetRegistries(v *MigrationCounters) {
+	m.Registries = v
+}
+
+func (m *CloudMigrationProgressCounters) SetRepositories(v *MigrationCounters) {
+	m.Repositories = v
+}
+
+func (m *CloudMigrationProgressCounters) SetTags(v *MigrationCounters) {
+	m.Tags = v
+}

@@ -50,6 +50,18 @@ func (m *UserSettings) SetAllowIntrospectionFunctions(v *wrapperspb.BoolValue) {
 	m.AllowIntrospectionFunctions = v
 }
 
+func (m *UserSettings) SetAllowReorderPrewhereConditions(v *wrapperspb.BoolValue) {
+	m.AllowReorderPrewhereConditions = v
+}
+
+func (m *UserSettings) SetAsyncSocketForRemote(v *wrapperspb.BoolValue) {
+	m.AsyncSocketForRemote = v
+}
+
+func (m *UserSettings) SetAsyncQuerySendingForRemote(v *wrapperspb.BoolValue) {
+	m.AsyncQuerySendingForRemote = v
+}
+
 func (m *UserSettings) SetConnectTimeout(v *wrapperspb.Int64Value) {
 	m.ConnectTimeout = v
 }
@@ -280,6 +292,14 @@ func (m *UserSettings) SetMaxNetworkBandwidthForUser(v *wrapperspb.Int64Value) {
 
 func (m *UserSettings) SetMaxNetworkBytes(v *wrapperspb.Int64Value) {
 	m.MaxNetworkBytes = v
+}
+
+func (m *UserSettings) SetMaxRemoteReadNetworkBandwidth(v *wrapperspb.Int64Value) {
+	m.MaxRemoteReadNetworkBandwidth = v
+}
+
+func (m *UserSettings) SetMaxRemoteWriteNetworkBandwidth(v *wrapperspb.Int64Value) {
+	m.MaxRemoteWriteNetworkBandwidth = v
 }
 
 func (m *UserSettings) SetMaxTemporaryDataOnDiskSizeForQuery(v *wrapperspb.Int64Value) {
@@ -700,6 +720,10 @@ func (m *UserSettings) SetMaxReadBufferSize(v *wrapperspb.Int64Value) {
 
 func (m *UserSettings) SetInsertKeeperMaxRetries(v *wrapperspb.Int64Value) {
 	m.InsertKeeperMaxRetries = v
+}
+
+func (m *UserSettings) SetDatabaseAtomicWaitForDropAndDetachSynchronously(v *wrapperspb.BoolValue) {
+	m.DatabaseAtomicWaitForDropAndDetachSynchronously = v
 }
 
 func (m *UserSettings) SetDoNotMergeAcrossPartitionsSelectFinal(v *wrapperspb.BoolValue) {

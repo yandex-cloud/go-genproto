@@ -43,3 +43,7 @@ func (m *ClientCertificatesVerification) SetAcceptUntrusted(v bool) {
 func (m *ClientCertificatesVerification) SetAllowExpired(v bool) {
 	m.AllowExpired = v
 }
+
+func (m *ClientCertificateOptions) SetCertificateId(v string) {
+	m.CertificateId = v
+}

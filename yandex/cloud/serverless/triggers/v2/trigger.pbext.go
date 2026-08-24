@@ -116,6 +116,12 @@ func (m *Source) SetTelegramMessage(v *TelegramMessage) {
 	}
 }
 
+func (m *Source) SetYandexMessenger(v *YandexMessenger) {
+	m.Source = &Source_YandexMessenger{
+		YandexMessenger: v,
+	}
+}
+
 func (m *Timer) SetCronExpression(v string) {
 	m.CronExpression = v
 }
@@ -282,6 +288,26 @@ func (m *TelegramMessage) SetAllowedUpdates(v []string) {
 
 func (m *TelegramMessage) SetForce(v bool) {
 	m.Force = v
+}
+
+func (m *YandexMessenger) SetOauthToken(v string) {
+	m.OauthToken = v
+}
+
+func (m *YandexMessenger) SetForce(v bool) {
+	m.Force = v
+}
+
+func (m *YandexMessenger) SetBotId(v string) {
+	m.BotId = v
+}
+
+func (m *YandexMessenger) SetBotLogin(v string) {
+	m.BotLogin = v
+}
+
+func (m *YandexMessenger) SetBotDisplayName(v string) {
+	m.BotDisplayName = v
 }
 
 type Action_Action = isAction_Action

@@ -216,7 +216,7 @@ const file_yandex_cloud_baremetal_v2_extend_nodes_proto_rawDesc = "" +
 	"server_ids\x18\x04 \x03(\tB\t\xe0A\x04\xe0A\x01\xe0A\x05R\tserverIdsJ\x04\b\x02\x10\x03\"\xb2\x01\n" +
 	"\x04Node\x12 \n" +
 	"\tserver_id\x18\x01 \x01(\tB\x03\xe0A\x03R\bserverId\x12.\n" +
-	"\x10configuration_id\x18\x02 \x01(\tB\x03\xe0A\x02R\x0fconfigurationId\x127\n" +
+	"\x10configuration_id\x18\x02 \x01(\tB\x03\xe0A\x01R\x0fconfigurationId\x127\n" +
 	"\x15management_ip_address\x18\x03 \x01(\tB\x03\xe0A\x01R\x13managementIpAddress\x12\x1f\n" +
 	"\bhostname\x18\x04 \x01(\tB\x03\xe0A\x01R\bhostnameBz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"

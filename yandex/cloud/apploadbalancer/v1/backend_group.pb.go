@@ -1423,6 +1423,8 @@ type SecureTransportSettings struct {
 	Sni string `protobuf:"bytes,1,opt,name=sni,proto3" json:"sni,omitempty"`
 	// Validation context for backend TLS connections.
 	ValidationContext *ValidationContext `protobuf:"bytes,3,opt,name=validation_context,json=validationContext,proto3" json:"validation_context,omitempty"`
+	// Client certificate options for backend TLS connections.
+	ClientCertificate *ClientCertificateOptions `protobuf:"bytes,4,opt,name=client_certificate,json=clientCertificate,proto3" json:"client_certificate,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1471,6 +1473,13 @@ func (x *SecureTransportSettings) GetValidationContext() *ValidationContext {
 	return nil
 }
 
+func (x *SecureTransportSettings) GetClientCertificate() *ClientCertificateOptions {
+	if x != nil {
+		return x.ClientCertificate
+	}
+	return nil
+}
+
 // A resource for backend TLS settings.
 type BackendTls struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -1478,6 +1487,8 @@ type BackendTls struct {
 	Sni string `protobuf:"bytes,1,opt,name=sni,proto3" json:"sni,omitempty"`
 	// Validation context for TLS connections.
 	ValidationContext *ValidationContext `protobuf:"bytes,3,opt,name=validation_context,json=validationContext,proto3" json:"validation_context,omitempty"`
+	// Client certificate options for backend TLS connections.
+	ClientCertificate *ClientCertificateOptions `protobuf:"bytes,4,opt,name=client_certificate,json=clientCertificate,proto3" json:"client_certificate,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1522,6 +1533,13 @@ func (x *BackendTls) GetSni() string {
 func (x *BackendTls) GetValidationContext() *ValidationContext {
 	if x != nil {
 		return x.ValidationContext
+	}
+	return nil
+}
+
+func (x *BackendTls) GetClientCertificate() *ClientCertificateOptions {
+	if x != nil {
+		return x.ClientCertificate
 	}
 	return nil
 }
@@ -2019,14 +2037,16 @@ const file_yandex_cloud_apploadbalancer_v1_backend_group_proto_rawDesc = "" +
 	"\x06bucket\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x06bucket\"G\n" +
 	"\x13TargetGroupsBackend\x120\n" +
 	"\x10target_group_ids\x18\x01 \x03(\tB\x06\x82\xc81\x02>0R\x0etargetGroupIds\"\x1c\n" +
-	"\x1aPlaintextTransportSettings\"\xae\x01\n" +
+	"\x1aPlaintextTransportSettings\"\x98\x02\n" +
 	"\x17SecureTransportSettings\x12*\n" +
 	"\x03sni\x18\x01 \x01(\tB\x18\xf2\xc71\v[-.a-z0-9]*\x8a\xc81\x05<=255R\x03sni\x12a\n" +
-	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"\xa1\x01\n" +
+	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContext\x12h\n" +
+	"\x12client_certificate\x18\x04 \x01(\v29.yandex.cloud.apploadbalancer.v1.ClientCertificateOptionsR\x11clientCertificateJ\x04\b\x02\x10\x03\"\x8b\x02\n" +
 	"\n" +
 	"BackendTls\x12*\n" +
 	"\x03sni\x18\x01 \x01(\tB\x18\xf2\xc71\v[-.a-z0-9]*\x8a\xc81\x05<=255R\x03sni\x12a\n" +
-	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContextJ\x04\b\x02\x10\x03\"\xc7\t\n" +
+	"\x12validation_context\x18\x03 \x01(\v22.yandex.cloud.apploadbalancer.v1.ValidationContextR\x11validationContext\x12h\n" +
+	"\x12client_certificate\x18\x04 \x01(\v29.yandex.cloud.apploadbalancer.v1.ClientCertificateOptionsR\x11clientCertificateJ\x04\b\x02\x10\x03\"\xc7\t\n" +
 	"\vHealthCheck\x129\n" +
 	"\atimeout\x18\x01 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\atimeout\x12;\n" +
 	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x04\xe8\xc71\x01R\binterval\x126\n" +
@@ -2101,7 +2121,8 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_goTypes = []any{
 	(*durationpb.Duration)(nil),           // 23: google.protobuf.Duration
 	(*wrapperspb.Int64Value)(nil),         // 24: google.protobuf.Int64Value
 	(*ValidationContext)(nil),             // 25: yandex.cloud.apploadbalancer.v1.ValidationContext
-	(*Payload)(nil),                       // 26: yandex.cloud.apploadbalancer.v1.Payload
+	(*ClientCertificateOptions)(nil),      // 26: yandex.cloud.apploadbalancer.v1.ClientCertificateOptions
+	(*Payload)(nil),                       // 27: yandex.cloud.apploadbalancer.v1.Payload
 }
 var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_depIdxs = []int32{
 	18, // 0: yandex.cloud.apploadbalancer.v1.BackendGroup.labels:type_name -> yandex.cloud.apploadbalancer.v1.BackendGroup.LabelsEntry
@@ -2138,21 +2159,23 @@ var file_yandex_cloud_apploadbalancer_v1_backend_group_proto_depIdxs = []int32{
 	17, // 31: yandex.cloud.apploadbalancer.v1.StreamBackend.healthchecks:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck
 	16, // 32: yandex.cloud.apploadbalancer.v1.StreamBackend.tls:type_name -> yandex.cloud.apploadbalancer.v1.BackendTls
 	25, // 33: yandex.cloud.apploadbalancer.v1.SecureTransportSettings.validation_context:type_name -> yandex.cloud.apploadbalancer.v1.ValidationContext
-	25, // 34: yandex.cloud.apploadbalancer.v1.BackendTls.validation_context:type_name -> yandex.cloud.apploadbalancer.v1.ValidationContext
-	23, // 35: yandex.cloud.apploadbalancer.v1.HealthCheck.timeout:type_name -> google.protobuf.Duration
-	23, // 36: yandex.cloud.apploadbalancer.v1.HealthCheck.interval:type_name -> google.protobuf.Duration
-	19, // 37: yandex.cloud.apploadbalancer.v1.HealthCheck.stream:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck
-	20, // 38: yandex.cloud.apploadbalancer.v1.HealthCheck.http:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.HttpHealthCheck
-	21, // 39: yandex.cloud.apploadbalancer.v1.HealthCheck.grpc:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.GrpcHealthCheck
-	14, // 40: yandex.cloud.apploadbalancer.v1.HealthCheck.plaintext:type_name -> yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
-	15, // 41: yandex.cloud.apploadbalancer.v1.HealthCheck.tls:type_name -> yandex.cloud.apploadbalancer.v1.SecureTransportSettings
-	26, // 42: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.send:type_name -> yandex.cloud.apploadbalancer.v1.Payload
-	26, // 43: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.receive:type_name -> yandex.cloud.apploadbalancer.v1.Payload
-	44, // [44:44] is the sub-list for method output_type
-	44, // [44:44] is the sub-list for method input_type
-	44, // [44:44] is the sub-list for extension type_name
-	44, // [44:44] is the sub-list for extension extendee
-	0,  // [0:44] is the sub-list for field type_name
+	26, // 34: yandex.cloud.apploadbalancer.v1.SecureTransportSettings.client_certificate:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateOptions
+	25, // 35: yandex.cloud.apploadbalancer.v1.BackendTls.validation_context:type_name -> yandex.cloud.apploadbalancer.v1.ValidationContext
+	26, // 36: yandex.cloud.apploadbalancer.v1.BackendTls.client_certificate:type_name -> yandex.cloud.apploadbalancer.v1.ClientCertificateOptions
+	23, // 37: yandex.cloud.apploadbalancer.v1.HealthCheck.timeout:type_name -> google.protobuf.Duration
+	23, // 38: yandex.cloud.apploadbalancer.v1.HealthCheck.interval:type_name -> google.protobuf.Duration
+	19, // 39: yandex.cloud.apploadbalancer.v1.HealthCheck.stream:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck
+	20, // 40: yandex.cloud.apploadbalancer.v1.HealthCheck.http:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.HttpHealthCheck
+	21, // 41: yandex.cloud.apploadbalancer.v1.HealthCheck.grpc:type_name -> yandex.cloud.apploadbalancer.v1.HealthCheck.GrpcHealthCheck
+	14, // 42: yandex.cloud.apploadbalancer.v1.HealthCheck.plaintext:type_name -> yandex.cloud.apploadbalancer.v1.PlaintextTransportSettings
+	15, // 43: yandex.cloud.apploadbalancer.v1.HealthCheck.tls:type_name -> yandex.cloud.apploadbalancer.v1.SecureTransportSettings
+	27, // 44: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.send:type_name -> yandex.cloud.apploadbalancer.v1.Payload
+	27, // 45: yandex.cloud.apploadbalancer.v1.HealthCheck.StreamHealthCheck.receive:type_name -> yandex.cloud.apploadbalancer.v1.Payload
+	46, // [46:46] is the sub-list for method output_type
+	46, // [46:46] is the sub-list for method input_type
+	46, // [46:46] is the sub-list for extension type_name
+	46, // [46:46] is the sub-list for extension extendee
+	0,  // [0:46] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_apploadbalancer_v1_backend_group_proto_init() }

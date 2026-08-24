@@ -125,20 +125,385 @@ func (x *StartCloudMigrationMetadata) GetRegistryIds() []string {
 	return nil
 }
 
+// Request for starting migration for all registries in the specified folder.
+type StartFolderMigrationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder.
+	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartFolderMigrationRequest) Reset() {
+	*x = StartFolderMigrationRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartFolderMigrationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartFolderMigrationRequest) ProtoMessage() {}
+
+func (x *StartFolderMigrationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartFolderMigrationRequest.ProtoReflect.Descriptor instead.
+func (*StartFolderMigrationRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *StartFolderMigrationRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+// Metadata for folder migration operation.
+type StartFolderMigrationMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// IDs of registries selected for migration.
+	RegistryIds   []string `protobuf:"bytes,2,rep,name=registry_ids,json=registryIds,proto3" json:"registry_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartFolderMigrationMetadata) Reset() {
+	*x = StartFolderMigrationMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartFolderMigrationMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartFolderMigrationMetadata) ProtoMessage() {}
+
+func (x *StartFolderMigrationMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartFolderMigrationMetadata.ProtoReflect.Descriptor instead.
+func (*StartFolderMigrationMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *StartFolderMigrationMetadata) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *StartFolderMigrationMetadata) GetRegistryIds() []string {
+	if x != nil {
+		return x.RegistryIds
+	}
+	return nil
+}
+
+// Request for getting migration status dashboard for the specified cloud.
+type GetCloudMigrationStatusDashboardRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cloud.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// Maximum number of failed registry dashboards to return.
+	FailedRegistriesLimit int64 `protobuf:"varint,2,opt,name=failed_registries_limit,json=failedRegistriesLimit,proto3" json:"failed_registries_limit,omitempty"`
+	// Maximum number of in-progress registry dashboards to return.
+	InProgressRegistriesLimit int64 `protobuf:"varint,3,opt,name=in_progress_registries_limit,json=inProgressRegistriesLimit,proto3" json:"in_progress_registries_limit,omitempty"`
+	// Maximum number of failed repositories to return for each registry dashboard.
+	FailedRepositoriesLimit int64 `protobuf:"varint,4,opt,name=failed_repositories_limit,json=failedRepositoriesLimit,proto3" json:"failed_repositories_limit,omitempty"`
+	// Maximum number of failed tags to return for each registry dashboard.
+	FailedTagsLimit int64 `protobuf:"varint,5,opt,name=failed_tags_limit,json=failedTagsLimit,proto3" json:"failed_tags_limit,omitempty"`
+	// Maximum number of in-progress repositories to return for each registry dashboard.
+	InProgressRepositoriesLimit int64 `protobuf:"varint,6,opt,name=in_progress_repositories_limit,json=inProgressRepositoriesLimit,proto3" json:"in_progress_repositories_limit,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) Reset() {
+	*x = GetCloudMigrationStatusDashboardRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCloudMigrationStatusDashboardRequest) ProtoMessage() {}
+
+func (x *GetCloudMigrationStatusDashboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCloudMigrationStatusDashboardRequest.ProtoReflect.Descriptor instead.
+func (*GetCloudMigrationStatusDashboardRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetFailedRegistriesLimit() int64 {
+	if x != nil {
+		return x.FailedRegistriesLimit
+	}
+	return 0
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetInProgressRegistriesLimit() int64 {
+	if x != nil {
+		return x.InProgressRegistriesLimit
+	}
+	return 0
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetFailedRepositoriesLimit() int64 {
+	if x != nil {
+		return x.FailedRepositoriesLimit
+	}
+	return 0
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetFailedTagsLimit() int64 {
+	if x != nil {
+		return x.FailedTagsLimit
+	}
+	return 0
+}
+
+func (x *GetCloudMigrationStatusDashboardRequest) GetInProgressRepositoriesLimit() int64 {
+	if x != nil {
+		return x.InProgressRepositoriesLimit
+	}
+	return 0
+}
+
+// Migration status dashboard for the specified cloud.
+type CloudMigrationStatusDashboard struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cloud.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// Overall migration status of the cloud.
+	Status MigrationStatus `protobuf:"varint,2,opt,name=status,proto3,enum=yandex.cloud.cloudregistry.v1.MigrationStatus" json:"status,omitempty"`
+	// Migration progress counters grouped by resource type.
+	Progress *CloudMigrationProgressCounters `protobuf:"bytes,3,opt,name=progress,proto3" json:"progress,omitempty"`
+	// Top registry dashboards that failed during migration.
+	TopFailedRegistries []*MigrationStatusDashboard `protobuf:"bytes,4,rep,name=top_failed_registries,json=topFailedRegistries,proto3" json:"top_failed_registries,omitempty"`
+	// Top registry dashboards that are currently being migrated.
+	TopInProgressRegistries []*MigrationStatusDashboard `protobuf:"bytes,5,rep,name=top_in_progress_registries,json=topInProgressRegistries,proto3" json:"top_in_progress_registries,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *CloudMigrationStatusDashboard) Reset() {
+	*x = CloudMigrationStatusDashboard{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloudMigrationStatusDashboard) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloudMigrationStatusDashboard) ProtoMessage() {}
+
+func (x *CloudMigrationStatusDashboard) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloudMigrationStatusDashboard.ProtoReflect.Descriptor instead.
+func (*CloudMigrationStatusDashboard) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CloudMigrationStatusDashboard) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *CloudMigrationStatusDashboard) GetStatus() MigrationStatus {
+	if x != nil {
+		return x.Status
+	}
+	return MigrationStatus_MIGRATION_STATUS_UNSPECIFIED
+}
+
+func (x *CloudMigrationStatusDashboard) GetProgress() *CloudMigrationProgressCounters {
+	if x != nil {
+		return x.Progress
+	}
+	return nil
+}
+
+func (x *CloudMigrationStatusDashboard) GetTopFailedRegistries() []*MigrationStatusDashboard {
+	if x != nil {
+		return x.TopFailedRegistries
+	}
+	return nil
+}
+
+func (x *CloudMigrationStatusDashboard) GetTopInProgressRegistries() []*MigrationStatusDashboard {
+	if x != nil {
+		return x.TopInProgressRegistries
+	}
+	return nil
+}
+
+// Cloud migration progress counters.
+type CloudMigrationProgressCounters struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Registry migration counters.
+	Registries *MigrationCounters `protobuf:"bytes,1,opt,name=registries,proto3" json:"registries,omitempty"`
+	// Repository migration counters.
+	Repositories *MigrationCounters `protobuf:"bytes,2,opt,name=repositories,proto3" json:"repositories,omitempty"`
+	// Tag migration counters.
+	Tags          *MigrationCounters `protobuf:"bytes,3,opt,name=tags,proto3" json:"tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloudMigrationProgressCounters) Reset() {
+	*x = CloudMigrationProgressCounters{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloudMigrationProgressCounters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloudMigrationProgressCounters) ProtoMessage() {}
+
+func (x *CloudMigrationProgressCounters) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloudMigrationProgressCounters.ProtoReflect.Descriptor instead.
+func (*CloudMigrationProgressCounters) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CloudMigrationProgressCounters) GetRegistries() *MigrationCounters {
+	if x != nil {
+		return x.Registries
+	}
+	return nil
+}
+
+func (x *CloudMigrationProgressCounters) GetRepositories() *MigrationCounters {
+	if x != nil {
+		return x.Repositories
+	}
+	return nil
+}
+
+func (x *CloudMigrationProgressCounters) GetTags() *MigrationCounters {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
 var File_yandex_cloud_cloudregistry_v1_migration_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/cloudregistry/v1/migration_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
+	"5yandex/cloud/cloudregistry/v1/migration_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/cloudregistry/v1/migration.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
 	"\x1aStartCloudMigrationRequest\x12'\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\"[\n" +
 	"\x1bStartCloudMigrationMetadata\x12\x19\n" +
 	"\bcloud_id\x18\x01 \x01(\tR\acloudId\x12!\n" +
-	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds2\xb9\x01\n" +
+	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\"H\n" +
+	"\x1bStartFolderMigrationRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"^\n" +
+	"\x1cStartFolderMigrationMetadata\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12!\n" +
+	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\"\xaf\x03\n" +
+	"'GetCloudMigrationStatusDashboardRequest\x12'\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12A\n" +
+	"\x17failed_registries_limit\x18\x02 \x01(\x03B\t\xfa\xc71\x050-100R\x15failedRegistriesLimit\x12J\n" +
+	"\x1cin_progress_registries_limit\x18\x03 \x01(\x03B\t\xfa\xc71\x050-100R\x19inProgressRegistriesLimit\x12E\n" +
+	"\x19failed_repositories_limit\x18\x04 \x01(\x03B\t\xfa\xc71\x050-100R\x17failedRepositoriesLimit\x125\n" +
+	"\x11failed_tags_limit\x18\x05 \x01(\x03B\t\xfa\xc71\x050-100R\x0ffailedTagsLimit\x12N\n" +
+	"\x1ein_progress_repositories_limit\x18\x06 \x01(\x03B\t\xfa\xc71\x050-100R\x1binProgressRepositoriesLimit\"\xc0\x03\n" +
+	"\x1dCloudMigrationStatusDashboard\x12\x19\n" +
+	"\bcloud_id\x18\x01 \x01(\tR\acloudId\x12F\n" +
+	"\x06status\x18\x02 \x01(\x0e2..yandex.cloud.cloudregistry.v1.MigrationStatusR\x06status\x12Y\n" +
+	"\bprogress\x18\x03 \x01(\v2=.yandex.cloud.cloudregistry.v1.CloudMigrationProgressCountersR\bprogress\x12k\n" +
+	"\x15top_failed_registries\x18\x04 \x03(\v27.yandex.cloud.cloudregistry.v1.MigrationStatusDashboardR\x13topFailedRegistries\x12t\n" +
+	"\x1atop_in_progress_registries\x18\x05 \x03(\v27.yandex.cloud.cloudregistry.v1.MigrationStatusDashboardR\x17topInProgressRegistries\"\x8e\x02\n" +
+	"\x1eCloudMigrationProgressCounters\x12P\n" +
+	"\n" +
+	"registries\x18\x01 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\n" +
+	"registries\x12T\n" +
+	"\frepositories\x18\x02 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\frepositories\x12D\n" +
+	"\x04tags\x18\x03 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\x04tags2\x90\x04\n" +
 	"\x10MigrationService\x12\xa4\x01\n" +
 	"\n" +
 	"StartCloud\x129.yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest\x1a!.yandex.cloud.operation.Operation\"8\xb2\xd2*4\n" +
-	"\x1bStartCloudMigrationMetadata\x12\x15google.protobuf.EmptyBt\n" +
+	"\x1bStartCloudMigrationMetadata\x12\x15google.protobuf.Empty\x12\xa7\x01\n" +
+	"\vStartFolder\x12:.yandex.cloud.cloudregistry.v1.StartFolderMigrationRequest\x1a!.yandex.cloud.operation.Operation\"9\xb2\xd2*5\n" +
+	"\x1cStartFolderMigrationMetadata\x12\x15google.protobuf.Empty\x12\xaa\x01\n" +
+	" GetCloudMigrationStatusDashboard\x12F.yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest\x1a<.yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard\"\x00Bt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
@@ -153,20 +518,39 @@ func file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP() []
 	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_cloudregistry_v1_migration_service_proto_goTypes = []any{
-	(*StartCloudMigrationRequest)(nil),  // 0: yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
-	(*StartCloudMigrationMetadata)(nil), // 1: yandex.cloud.cloudregistry.v1.StartCloudMigrationMetadata
-	(*operation.Operation)(nil),         // 2: yandex.cloud.operation.Operation
+	(*StartCloudMigrationRequest)(nil),              // 0: yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
+	(*StartCloudMigrationMetadata)(nil),             // 1: yandex.cloud.cloudregistry.v1.StartCloudMigrationMetadata
+	(*StartFolderMigrationRequest)(nil),             // 2: yandex.cloud.cloudregistry.v1.StartFolderMigrationRequest
+	(*StartFolderMigrationMetadata)(nil),            // 3: yandex.cloud.cloudregistry.v1.StartFolderMigrationMetadata
+	(*GetCloudMigrationStatusDashboardRequest)(nil), // 4: yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest
+	(*CloudMigrationStatusDashboard)(nil),           // 5: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard
+	(*CloudMigrationProgressCounters)(nil),          // 6: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters
+	(MigrationStatus)(0),                            // 7: yandex.cloud.cloudregistry.v1.MigrationStatus
+	(*MigrationStatusDashboard)(nil),                // 8: yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	(*MigrationCounters)(nil),                       // 9: yandex.cloud.cloudregistry.v1.MigrationCounters
+	(*operation.Operation)(nil),                     // 10: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cloudregistry_v1_migration_service_proto_depIdxs = []int32{
-	0, // 0: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:input_type -> yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
-	2, // 1: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:output_type -> yandex.cloud.operation.Operation
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	7,  // 0: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.status:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatus
+	6,  // 1: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.progress:type_name -> yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters
+	8,  // 2: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_failed_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	8,  // 3: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_in_progress_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	9,  // 4: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	9,  // 5: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.repositories:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	9,  // 6: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.tags:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	0,  // 7: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:input_type -> yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
+	2,  // 8: yandex.cloud.cloudregistry.v1.MigrationService.StartFolder:input_type -> yandex.cloud.cloudregistry.v1.StartFolderMigrationRequest
+	4,  // 9: yandex.cloud.cloudregistry.v1.MigrationService.GetCloudMigrationStatusDashboard:input_type -> yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest
+	10, // 10: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:output_type -> yandex.cloud.operation.Operation
+	10, // 11: yandex.cloud.cloudregistry.v1.MigrationService.StartFolder:output_type -> yandex.cloud.operation.Operation
+	5,  // 12: yandex.cloud.cloudregistry.v1.MigrationService.GetCloudMigrationStatusDashboard:output_type -> yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_cloudregistry_v1_migration_service_proto_init() }
@@ -174,13 +558,14 @@ func file_yandex_cloud_cloudregistry_v1_migration_service_proto_init() {
 	if File_yandex_cloud_cloudregistry_v1_migration_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_cloudregistry_v1_migration_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

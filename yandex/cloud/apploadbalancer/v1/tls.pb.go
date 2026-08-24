@@ -7,6 +7,7 @@
 package apploadbalancer
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -205,11 +206,57 @@ type ClientCertificatesVerification_Bytes struct {
 
 func (*ClientCertificatesVerification_Bytes) isClientCertificatesVerification_TrustedCa() {}
 
+// Client certificates options for usage during TLS handshake initiation as a client.
+type ClientCertificateOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Client certificate's ID from the [Certificate Manager](/docs/certificate-manager/).
+	CertificateId string `protobuf:"bytes,1,opt,name=certificate_id,json=certificateId,proto3" json:"certificate_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClientCertificateOptions) Reset() {
+	*x = ClientCertificateOptions{}
+	mi := &file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientCertificateOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientCertificateOptions) ProtoMessage() {}
+
+func (x *ClientCertificateOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClientCertificateOptions.ProtoReflect.Descriptor instead.
+func (*ClientCertificateOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ClientCertificateOptions) GetCertificateId() string {
+	if x != nil {
+		return x.CertificateId
+	}
+	return ""
+}
+
 var File_yandex_cloud_apploadbalancer_v1_tls_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/apploadbalancer/v1/tls.proto\x12\x1fyandex.cloud.apploadbalancer.v1\"s\n" +
+	")yandex/cloud/apploadbalancer/v1/tls.proto\x12\x1fyandex.cloud.apploadbalancer.v1\x1a\x1dyandex/cloud/validation.proto\"s\n" +
 	"\x11ValidationContext\x12$\n" +
 	"\rtrusted_ca_id\x18\x01 \x01(\tH\x00R\vtrustedCaId\x12*\n" +
 	"\x10trusted_ca_bytes\x18\x02 \x01(\tH\x00R\x0etrustedCaBytesB\f\n" +
@@ -221,7 +268,9 @@ const file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc = "" +
 	"\x10accept_untrusted\x18\x03 \x01(\bR\x0facceptUntrusted\x12#\n" +
 	"\rallow_expired\x18\x04 \x01(\bR\fallowExpiredB\f\n" +
 	"\n" +
-	"trusted_caBz\n" +
+	"trusted_ca\"G\n" +
+	"\x18ClientCertificateOptions\x12+\n" +
+	"\x0ecertificate_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\rcertificateIdBz\n" +
 	"#yandex.cloud.api.apploadbalancer.v1ZSgithub.com/yandex-cloud/go-genproto/yandex/cloud/apploadbalancer/v1;apploadbalancerb\x06proto3"
 
 var (
@@ -236,10 +285,11 @@ func file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDescData
 }
 
-var file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_yandex_cloud_apploadbalancer_v1_tls_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_apploadbalancer_v1_tls_proto_goTypes = []any{
 	(*ValidationContext)(nil),              // 0: yandex.cloud.apploadbalancer.v1.ValidationContext
 	(*ClientCertificatesVerification)(nil), // 1: yandex.cloud.apploadbalancer.v1.ClientCertificatesVerification
+	(*ClientCertificateOptions)(nil),       // 2: yandex.cloud.apploadbalancer.v1.ClientCertificateOptions
 }
 var file_yandex_cloud_apploadbalancer_v1_tls_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -267,7 +317,7 @@ func file_yandex_cloud_apploadbalancer_v1_tls_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc), len(file_yandex_cloud_apploadbalancer_v1_tls_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

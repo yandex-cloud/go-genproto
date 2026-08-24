@@ -306,12 +306,20 @@ func (m *SecureTransportSettings) SetValidationContext(v *ValidationContext) {
 	m.ValidationContext = v
 }
 
+func (m *SecureTransportSettings) SetClientCertificate(v *ClientCertificateOptions) {
+	m.ClientCertificate = v
+}
+
 func (m *BackendTls) SetSni(v string) {
 	m.Sni = v
 }
 
 func (m *BackendTls) SetValidationContext(v *ValidationContext) {
 	m.ValidationContext = v
+}
+
+func (m *BackendTls) SetClientCertificate(v *ClientCertificateOptions) {
+	m.ClientCertificate = v
 }
 
 type HealthCheck_Healthcheck = isHealthCheck_Healthcheck

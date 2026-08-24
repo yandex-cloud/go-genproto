@@ -20,7 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MigrationService_StartCloud_FullMethodName = "/yandex.cloud.cloudregistry.v1.MigrationService/StartCloud"
+	MigrationService_StartCloud_FullMethodName                       = "/yandex.cloud.cloudregistry.v1.MigrationService/StartCloud"
+	MigrationService_StartFolder_FullMethodName                      = "/yandex.cloud.cloudregistry.v1.MigrationService/StartFolder"
+	MigrationService_GetCloudMigrationStatusDashboard_FullMethodName = "/yandex.cloud.cloudregistry.v1.MigrationService/GetCloudMigrationStatusDashboard"
 )
 
 // MigrationServiceClient is the client API for MigrationService service.
@@ -31,6 +33,10 @@ const (
 type MigrationServiceClient interface {
 	// Starts migration for all registries in the specified cloud.
 	StartCloud(ctx context.Context, in *StartCloudMigrationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Starts migration for all registries in the specified folder.
+	StartFolder(ctx context.Context, in *StartFolderMigrationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Returns migration status dashboard for the specified cloud.
+	GetCloudMigrationStatusDashboard(ctx context.Context, in *GetCloudMigrationStatusDashboardRequest, opts ...grpc.CallOption) (*CloudMigrationStatusDashboard, error)
 }
 
 type migrationServiceClient struct {
@@ -51,6 +57,26 @@ func (c *migrationServiceClient) StartCloud(ctx context.Context, in *StartCloudM
 	return out, nil
 }
 
+func (c *migrationServiceClient) StartFolder(ctx context.Context, in *StartFolderMigrationRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, MigrationService_StartFolder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *migrationServiceClient) GetCloudMigrationStatusDashboard(ctx context.Context, in *GetCloudMigrationStatusDashboardRequest, opts ...grpc.CallOption) (*CloudMigrationStatusDashboard, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloudMigrationStatusDashboard)
+	err := c.cc.Invoke(ctx, MigrationService_GetCloudMigrationStatusDashboard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MigrationServiceServer is the server API for MigrationService service.
 // All implementations should embed UnimplementedMigrationServiceServer
 // for forward compatibility.
@@ -59,6 +85,10 @@ func (c *migrationServiceClient) StartCloud(ctx context.Context, in *StartCloudM
 type MigrationServiceServer interface {
 	// Starts migration for all registries in the specified cloud.
 	StartCloud(context.Context, *StartCloudMigrationRequest) (*operation.Operation, error)
+	// Starts migration for all registries in the specified folder.
+	StartFolder(context.Context, *StartFolderMigrationRequest) (*operation.Operation, error)
+	// Returns migration status dashboard for the specified cloud.
+	GetCloudMigrationStatusDashboard(context.Context, *GetCloudMigrationStatusDashboardRequest) (*CloudMigrationStatusDashboard, error)
 }
 
 // UnimplementedMigrationServiceServer should be embedded to have
@@ -70,6 +100,12 @@ type UnimplementedMigrationServiceServer struct{}
 
 func (UnimplementedMigrationServiceServer) StartCloud(context.Context, *StartCloudMigrationRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method StartCloud not implemented")
+}
+func (UnimplementedMigrationServiceServer) StartFolder(context.Context, *StartFolderMigrationRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartFolder not implemented")
+}
+func (UnimplementedMigrationServiceServer) GetCloudMigrationStatusDashboard(context.Context, *GetCloudMigrationStatusDashboardRequest) (*CloudMigrationStatusDashboard, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCloudMigrationStatusDashboard not implemented")
 }
 func (UnimplementedMigrationServiceServer) testEmbeddedByValue() {}
 
@@ -109,6 +145,42 @@ func _MigrationService_StartCloud_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MigrationService_StartFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartFolderMigrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MigrationServiceServer).StartFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MigrationService_StartFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MigrationServiceServer).StartFolder(ctx, req.(*StartFolderMigrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MigrationService_GetCloudMigrationStatusDashboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCloudMigrationStatusDashboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MigrationServiceServer).GetCloudMigrationStatusDashboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MigrationService_GetCloudMigrationStatusDashboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MigrationServiceServer).GetCloudMigrationStatusDashboard(ctx, req.(*GetCloudMigrationStatusDashboardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MigrationService_ServiceDesc is the grpc.ServiceDesc for MigrationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -119,6 +191,14 @@ var MigrationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartCloud",
 			Handler:    _MigrationService_StartCloud_Handler,
+		},
+		{
+			MethodName: "StartFolder",
+			Handler:    _MigrationService_StartFolder_Handler,
+		},
+		{
+			MethodName: "GetCloudMigrationStatusDashboard",
+			Handler:    _MigrationService_GetCloudMigrationStatusDashboard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

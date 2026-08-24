@@ -1129,7 +1129,7 @@ var File_yandex_cloud_mdb_postgresql_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/mdb/postgresql/v1/user.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a+yandex/cloud/mdb/v1/connectionmanager.proto\x1a\x1dyandex/cloud/validation.proto\"\xab\x06\n" +
+	")yandex/cloud/mdb/postgresql/v1/user.proto\x12\x1eyandex.cloud.mdb.postgresql.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a+yandex/cloud/mdb/v1/connectionmanager.proto\x1a\x1dyandex/cloud/validation.proto\"\xae\x06\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -1138,8 +1138,8 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"conn_limit\x18\x04 \x01(\x03R\tconnLimit\x12H\n" +
 	"\bsettings\x18\x05 \x01(\v2,.yandex.cloud.mdb.postgresql.v1.UserSettingsR\bsettings\x120\n" +
-	"\x05login\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x121\n" +
-	"\x06grants\x18\a \x03(\tB\x19\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
+	"\x05login\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x124\n" +
+	"\x06grants\x18\a \x03(\tB\x1c\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
 	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\x12p\n" +
 	"\x18user_password_encryption\x18\t \x01(\x0e26.yandex.cloud.mdb.postgresql.v1.UserPasswordEncryptionR\x16userPasswordEncryption\x12d\n" +
 	"\x12connection_manager\x18\n" +
@@ -1151,7 +1151,7 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"Permission\x12#\n" +
 	"\rdatabase_name\x18\x01 \x01(\tR\fdatabaseName\"<\n" +
 	"\x11ConnectionManager\x12#\n" +
-	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId:\x02\x18\x01\"\xe7\x06\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId:\x02\x18\x01\"\xea\x06\n" +
 	"\bUserSpec\x124\n" +
 	"\x04name\x18\x01 \x01(\tB \xe8\xc71\x01\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\x04name\x12)\n" +
 	"\bpassword\x18\x02 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x058-128R\bpassword\x12L\n" +
@@ -1159,8 +1159,8 @@ const file_yandex_cloud_mdb_postgresql_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"conn_limit\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\tconnLimit\x12H\n" +
 	"\bsettings\x18\x05 \x01(\v2,.yandex.cloud.mdb.postgresql.v1.UserSettingsR\bsettings\x120\n" +
-	"\x05login\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x121\n" +
-	"\x06grants\x18\a \x03(\tB\x19\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
+	"\x05login\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x124\n" +
+	"\x06grants\x18\a \x03(\tB\x1c\xf2\xc71\x10[a-zA-Z0-9_@.-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
 	"\x13deletion_protection\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\x12p\n" +
 	"\x18user_password_encryption\x18\t \x01(\x0e26.yandex.cloud.mdb.postgresql.v1.UserPasswordEncryptionR\x16userPasswordEncryption\x12G\n" +
 	"\x11generate_password\x18\n" +
