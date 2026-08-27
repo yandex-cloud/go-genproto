@@ -3,6 +3,7 @@
 package clickhouse
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -85,6 +86,10 @@ func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
 
 func (m *UpdateUserRequest) SetAuthMethod(v AuthMethod) {
 	m.AuthMethod = v
+}
+
+func (m *UpdateUserRequest) SetUserConnectionManager(v *v1.UserConnectionManager) {
+	m.UserConnectionManager = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {

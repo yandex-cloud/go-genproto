@@ -4,6 +4,7 @@ package clickhouse
 
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
@@ -953,6 +954,10 @@ func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 
 func (m *ConfigSpec) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 	m.PerformanceDiagnostics = v
+}
+
+func (m *ConfigSpec) SetConnectionManager(v *v1.ClusterConnectionManager) {
+	m.ConnectionManager = v
 }
 
 func (m *ConfigSpec_Clickhouse) SetConfig(v *config.ClickhouseConfig) {

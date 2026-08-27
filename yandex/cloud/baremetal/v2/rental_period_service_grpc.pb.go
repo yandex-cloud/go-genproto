@@ -29,8 +29,7 @@ const (
 // A set of methods to retrieve information about RentalPeriod resources.
 type RentalPeriodServiceClient interface {
 	// Retrieves the list of RentalPeriod resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListRentalPeriods(ctx context.Context, in *ListRentalPeriodsRequest, opts ...grpc.CallOption) (*ListRentalPeriodsResponse, error)
 }
 
@@ -59,8 +58,7 @@ func (c *rentalPeriodServiceClient) ListRentalPeriods(ctx context.Context, in *L
 // A set of methods to retrieve information about RentalPeriod resources.
 type RentalPeriodServiceServer interface {
 	// Retrieves the list of RentalPeriod resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListRentalPeriods(context.Context, *ListRentalPeriodsRequest) (*ListRentalPeriodsResponse, error)
 }
 

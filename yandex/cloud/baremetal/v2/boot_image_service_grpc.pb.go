@@ -36,29 +36,23 @@ const (
 type BootImageServiceClient interface {
 	// Returns the specific BootImage resource.
 	// To get the list of available Image resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetBootImage(ctx context.Context, in *GetBootImageRequest, opts ...grpc.CallOption) (*BootImage, error)
 	// Retrieves the list of BootImage resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListBootImages(ctx context.Context, in *ListBootImagesRequest, opts ...grpc.CallOption) (*ListBootImagesResponse, error)
 	// Creates a boot image in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateBootImage(ctx context.Context, in *CreateBootImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified boot image.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateBootImage(ctx context.Context, in *UpdateBootImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified boot image.
 	// Deleting a boot image removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteBootImage(ctx context.Context, in *DeleteBootImageRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified boot image.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListBootImageOperations(ctx context.Context, in *ListBootImageOperationsRequest, opts ...grpc.CallOption) (*ListBootImageOperationsResponse, error)
 }
 
@@ -138,29 +132,23 @@ func (c *bootImageServiceClient) ListBootImageOperations(ctx context.Context, in
 type BootImageServiceServer interface {
 	// Returns the specific BootImage resource.
 	// To get the list of available Image resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetBootImage(context.Context, *GetBootImageRequest) (*BootImage, error)
 	// Retrieves the list of BootImage resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListBootImages(context.Context, *ListBootImagesRequest) (*ListBootImagesResponse, error)
 	// Creates a boot image in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateBootImage(context.Context, *CreateBootImageRequest) (*operation.Operation, error)
 	// Updates the specified boot image.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateBootImage(context.Context, *UpdateBootImageRequest) (*operation.Operation, error)
 	// Deletes the specified boot image.
 	// Deleting a boot image removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteBootImage(context.Context, *DeleteBootImageRequest) (*operation.Operation, error)
 	// Lists operations for the specified boot image.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListBootImageOperations(context.Context, *ListBootImageOperationsRequest) (*ListBootImageOperationsResponse, error)
 }
 

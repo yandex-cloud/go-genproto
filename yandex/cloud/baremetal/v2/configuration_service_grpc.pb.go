@@ -31,24 +31,17 @@ const (
 // A set of methods to retrieve information about Configuration resources.
 type ConfigurationServiceClient interface {
 	// Retrieves the list of RentalPeriods for the specified Configuration resource.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListConfigurationRentalPeriods(ctx context.Context, in *ListConfigurationRentalPeriodsRequest, opts ...grpc.CallOption) (*ListConfigurationRentalPeriodsResponse, error)
 	// Returns the default storage for the specified configuration.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveConfigurationDefaultStorage(ctx context.Context, in *ResolveConfigurationDefaultStorageRequest, opts ...grpc.CallOption) (*DefaultStorage, error)
 	// Returns the default storages for the specified configurations.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveConfigurationsDefaultStorages(ctx context.Context, in *ResolveConfigurationsDefaultStoragesRequest, opts ...grpc.CallOption) (*ResolveConfigurationsDefaultStoragesResponse, error)
 }
 
@@ -97,24 +90,17 @@ func (c *configurationServiceClient) ResolveConfigurationsDefaultStorages(ctx co
 // A set of methods to retrieve information about Configuration resources.
 type ConfigurationServiceServer interface {
 	// Retrieves the list of RentalPeriods for the specified Configuration resource.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListConfigurationRentalPeriods(context.Context, *ListConfigurationRentalPeriodsRequest) (*ListConfigurationRentalPeriodsResponse, error)
 	// Returns the default storage for the specified configuration.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveConfigurationDefaultStorage(context.Context, *ResolveConfigurationDefaultStorageRequest) (*DefaultStorage, error)
 	// Returns the default storages for the specified configurations.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveConfigurationsDefaultStorages(context.Context, *ResolveConfigurationsDefaultStoragesRequest) (*ResolveConfigurationsDefaultStoragesResponse, error)
 }
 

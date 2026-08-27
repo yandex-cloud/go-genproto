@@ -29,14 +29,12 @@ const (
 //
 // A set of methods to retrieve information about availability zones.
 type ZoneServiceClient interface {
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Returns the specific Zone resource.
 	//
 	// To get the list of Zone resources, make a [List] request.
 	GetZone(ctx context.Context, in *GetZoneRequest, opts ...grpc.CallOption) (*Zone, error)
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Retrieves the list of Zone resources.
 	ListZones(ctx context.Context, in *ListZonesRequest, opts ...grpc.CallOption) (*ListZonesResponse, error)
 }
@@ -75,14 +73,12 @@ func (c *zoneServiceClient) ListZones(ctx context.Context, in *ListZonesRequest,
 //
 // A set of methods to retrieve information about availability zones.
 type ZoneServiceServer interface {
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Returns the specific Zone resource.
 	//
 	// To get the list of Zone resources, make a [List] request.
 	GetZone(context.Context, *GetZoneRequest) (*Zone, error)
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Retrieves the list of Zone resources.
 	ListZones(context.Context, *ListZonesRequest) (*ListZonesResponse, error)
 }

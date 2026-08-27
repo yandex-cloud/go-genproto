@@ -29,3 +29,15 @@ func (m *User) SetSettings(v *UserSettingsConfig) {
 func (m *UserSettingsConfig) SetPoolMode(v UserSettingsConfig_PoolMode) {
 	m.PoolMode = v
 }
+
+func (m *UserSettingsConfig) SetPoolSize(v *wrapperspb.Int64Value) {
+	m.PoolSize = v
+}
+
+func (m *UserSettingsConfig) SetPoolClientIdleTimeout(v *wrapperspb.Int64Value) {
+	m.PoolClientIdleTimeout = v
+}
+
+func (m *UserSettingsConfig) SetPoolIdleInTransactionTimeout(v *wrapperspb.Int64Value) {
+	m.PoolIdleInTransactionTimeout = v
+}

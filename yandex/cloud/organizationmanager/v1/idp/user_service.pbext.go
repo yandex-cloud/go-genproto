@@ -110,6 +110,10 @@ func (m *CreateUserRequest) SetExpiresAt(v *timestamppb.Timestamp) {
 	m.ExpiresAt = v
 }
 
+func (m *CreateUserRequest) SetPasswordChangeRequired(v bool) {
+	m.PasswordChangeRequired = v
+}
+
 func (m *CreateUserMetadata) SetUserId(v string) {
 	m.UserId = v
 }

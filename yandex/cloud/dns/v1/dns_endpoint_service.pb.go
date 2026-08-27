@@ -741,9 +741,9 @@ const file_yandex_cloud_dns_v1_dns_endpoint_service_proto_rawDesc = "" +
 	"\x1fDeleteDnsInboundEndpointRequest\x12C\n" +
 	"\x17dns_inbound_endpoint_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x14dnsInboundEndpointId\"Y\n" +
 	" DeleteDnsInboundEndpointMetadata\x125\n" +
-	"\x17dns_inbound_endpoint_id\x18\x01 \x01(\tR\x14dnsInboundEndpointId\"\xbf\x01\n" +
-	"\x1eListDnsInboundEndpointsRequest\x12%\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
+	"\x17dns_inbound_endpoint_id\x18\x01 \x01(\tR\x14dnsInboundEndpointId\"\xc3\x01\n" +
+	"\x1eListDnsInboundEndpointsRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
 	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +

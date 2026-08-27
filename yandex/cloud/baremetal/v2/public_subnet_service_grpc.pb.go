@@ -37,30 +37,24 @@ type PublicSubnetServiceClient interface {
 	// Returns the specific PublicSubnet resource.
 	//
 	// To get the list of available PublicSubnet resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPublicSubnet(ctx context.Context, in *GetPublicSubnetRequest, opts ...grpc.CallOption) (*PublicSubnet, error)
 	// Retrieves the list of PublicSubnet resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicSubnets(ctx context.Context, in *ListPublicSubnetsRequest, opts ...grpc.CallOption) (*ListPublicSubnetsResponse, error)
 	// Creates a public subnet in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePublicSubnet(ctx context.Context, in *CreatePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified public subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePublicSubnet(ctx context.Context, in *UpdatePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified public subnet.
 	//
 	// Deleting a public subnet removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePublicSubnet(ctx context.Context, in *DeletePublicSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified public subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicSubnetOperations(ctx context.Context, in *ListPublicSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPublicSubnetOperationsResponse, error)
 }
 
@@ -141,30 +135,24 @@ type PublicSubnetServiceServer interface {
 	// Returns the specific PublicSubnet resource.
 	//
 	// To get the list of available PublicSubnet resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPublicSubnet(context.Context, *GetPublicSubnetRequest) (*PublicSubnet, error)
 	// Retrieves the list of PublicSubnet resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicSubnets(context.Context, *ListPublicSubnetsRequest) (*ListPublicSubnetsResponse, error)
 	// Creates a public subnet in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePublicSubnet(context.Context, *CreatePublicSubnetRequest) (*operation.Operation, error)
 	// Updates the specified public subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePublicSubnet(context.Context, *UpdatePublicSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified public subnet.
 	//
 	// Deleting a public subnet removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePublicSubnet(context.Context, *DeletePublicSubnetRequest) (*operation.Operation, error)
 	// Lists operations for the specified public subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicSubnetOperations(context.Context, *ListPublicSubnetOperationsRequest) (*ListPublicSubnetOperationsResponse, error)
 }
 

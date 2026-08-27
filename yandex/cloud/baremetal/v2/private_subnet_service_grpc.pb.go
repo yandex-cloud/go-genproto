@@ -37,30 +37,24 @@ type PrivateSubnetServiceClient interface {
 	// Returns the specific PrivateSubnet resource.
 	//
 	// To get the list of available PrivateSubnet resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPrivateSubnet(ctx context.Context, in *GetPrivateSubnetRequest, opts ...grpc.CallOption) (*PrivateSubnet, error)
 	// Retrieves the list of PrivateSubnet resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateSubnets(ctx context.Context, in *ListPrivateSubnetsRequest, opts ...grpc.CallOption) (*ListPrivateSubnetsResponse, error)
 	// Creates a private subnet in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePrivateSubnet(ctx context.Context, in *CreatePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified private subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePrivateSubnet(ctx context.Context, in *UpdatePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified private subnet.
 	//
 	// Deleting a private subnet removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePrivateSubnet(ctx context.Context, in *DeletePrivateSubnetRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified private subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateSubnetOperations(ctx context.Context, in *ListPrivateSubnetOperationsRequest, opts ...grpc.CallOption) (*ListPrivateSubnetOperationsResponse, error)
 }
 
@@ -141,30 +135,24 @@ type PrivateSubnetServiceServer interface {
 	// Returns the specific PrivateSubnet resource.
 	//
 	// To get the list of available PrivateSubnet resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPrivateSubnet(context.Context, *GetPrivateSubnetRequest) (*PrivateSubnet, error)
 	// Retrieves the list of PrivateSubnet resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateSubnets(context.Context, *ListPrivateSubnetsRequest) (*ListPrivateSubnetsResponse, error)
 	// Creates a private subnet in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePrivateSubnet(context.Context, *CreatePrivateSubnetRequest) (*operation.Operation, error)
 	// Updates the specified private subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePrivateSubnet(context.Context, *UpdatePrivateSubnetRequest) (*operation.Operation, error)
 	// Deletes the specified private subnet.
 	//
 	// Deleting a private subnet removes its data permanently and is irreversible.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePrivateSubnet(context.Context, *DeletePrivateSubnetRequest) (*operation.Operation, error)
 	// Lists operations for the specified private subnet.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateSubnetOperations(context.Context, *ListPrivateSubnetOperationsRequest) (*ListPrivateSubnetOperationsResponse, error)
 }
 

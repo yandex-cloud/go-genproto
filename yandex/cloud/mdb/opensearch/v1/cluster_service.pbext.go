@@ -5,7 +5,6 @@ package opensearch
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/opensearch/v1/config"
 	v11 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/operationlog/v1"
-	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -86,10 +85,6 @@ func (m *CreateClusterRequest) SetMaintenanceWindow(v *MaintenanceWindow) {
 
 func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
 	m.DiskEncryptionKeyId = v
-}
-
-func (m *CreateClusterRequest) SetRetentionPolicies(v []*v1.BackupRetentionPolicySpec) {
-	m.RetentionPolicies = v
 }
 
 func (m *CreateClusterMetadata) SetClusterId(v string) {

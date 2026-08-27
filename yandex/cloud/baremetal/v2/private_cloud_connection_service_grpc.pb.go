@@ -35,24 +35,19 @@ const (
 type PrivateCloudConnectionServiceClient interface {
 	// Returns the specific Private cloud connection resource.
 	// To get the list of available Private cloud connection resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPrivateCloudConnection(ctx context.Context, in *GetPrivateCloudConnectionRequest, opts ...grpc.CallOption) (*PrivateCloudConnection, error)
 	// Retrieves the list of Private cloud connection resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateCloudConnections(ctx context.Context, in *ListPrivateCloudConnectionsRequest, opts ...grpc.CallOption) (*ListPrivateCloudConnectionsResponse, error)
 	// Creates a private cloud connection in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePrivateCloudConnection(ctx context.Context, in *CreatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the routing_instance_id in a private cloud connection.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePrivateCloudConnection(ctx context.Context, in *UpdatePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Removes a private cloud connection and all allocated network resouces.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePrivateCloudConnection(ctx context.Context, in *DeletePrivateCloudConnectionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -122,24 +117,19 @@ func (c *privateCloudConnectionServiceClient) DeletePrivateCloudConnection(ctx c
 type PrivateCloudConnectionServiceServer interface {
 	// Returns the specific Private cloud connection resource.
 	// To get the list of available Private cloud connection resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPrivateCloudConnection(context.Context, *GetPrivateCloudConnectionRequest) (*PrivateCloudConnection, error)
 	// Retrieves the list of Private cloud connection resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPrivateCloudConnections(context.Context, *ListPrivateCloudConnectionsRequest) (*ListPrivateCloudConnectionsResponse, error)
 	// Creates a private cloud connection in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreatePrivateCloudConnection(context.Context, *CreatePrivateCloudConnectionRequest) (*operation.Operation, error)
 	// Updates the routing_instance_id in a private cloud connection.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePrivateCloudConnection(context.Context, *UpdatePrivateCloudConnectionRequest) (*operation.Operation, error)
 	// Removes a private cloud connection and all allocated network resouces.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeletePrivateCloudConnection(context.Context, *DeletePrivateCloudConnectionRequest) (*operation.Operation, error)
 }
 

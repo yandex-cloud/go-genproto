@@ -144,7 +144,10 @@ type Backup struct {
 	// Method of backup creation.
 	Method Backup_BackupMethod `protobuf:"varint,8,opt,name=method,proto3,enum=yandex.cloud.mdb.greenplum.v1.Backup_BackupMethod" json:"method,omitempty"`
 	// Size of the journal associated with backup, in bytes.
-	JournalSize   int64 `protobuf:"varint,9,opt,name=journal_size,json=journalSize,proto3" json:"journal_size,omitempty"`
+	JournalSize int64 `protobuf:"varint,9,opt,name=journal_size,json=journalSize,proto3" json:"journal_size,omitempty"`
+	// Size of data added by this backup to storage shared between backups, in bytes.
+	// This value may change when backups are deleted and shared data is attributed to another backup.
+	SharedSize    int64 `protobuf:"varint,11,opt,name=shared_size,json=sharedSize,proto3" json:"shared_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -242,11 +245,18 @@ func (x *Backup) GetJournalSize() int64 {
 	return 0
 }
 
+func (x *Backup) GetSharedSize() int64 {
+	if x != nil {
+		return x.SharedSize
+	}
+	return 0
+}
+
 var File_yandex_cloud_mdb_greenplum_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/mdb/greenplum/v1/backup.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xcf\x04\n" +
+	"*yandex/cloud/mdb/greenplum/v1/backup.proto\x12\x1dyandex.cloud.mdb.greenplum.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xf6\x04\n" +
 	"\x06Backup\x12\x14\n" +
 	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -258,7 +268,9 @@ const file_yandex_cloud_mdb_greenplum_v1_backup_proto_rawDesc = "" +
 	"\x04size\x18\x06 \x01(\x03R\x04size\x12L\n" +
 	"\x04type\x18\a \x01(\x0e28.yandex.cloud.mdb.greenplum.v1.Backup.BackupCreationTypeR\x04type\x12J\n" +
 	"\x06method\x18\b \x01(\x0e22.yandex.cloud.mdb.greenplum.v1.Backup.BackupMethodR\x06method\x12!\n" +
-	"\fjournal_size\x18\t \x01(\x03R\vjournalSize\"H\n" +
+	"\fjournal_size\x18\t \x01(\x03R\vjournalSize\x12\x1f\n" +
+	"\vshared_size\x18\v \x01(\x03R\n" +
+	"sharedSize\"H\n" +
 	"\fBackupMethod\x12\x1d\n" +
 	"\x19BACKUP_METHOD_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04BASE\x10\x01\x12\x0f\n" +
@@ -267,7 +279,8 @@ const file_yandex_cloud_mdb_greenplum_v1_backup_proto_rawDesc = "" +
 	" BACKUP_CREATION_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tAUTOMATED\x10\x01\x12\n" +
 	"\n" +
-	"\x06MANUAL\x10\x02Bp\n" +
+	"\x06MANUAL\x10\x02J\x04\b\n" +
+	"\x10\vBp\n" +
 	"!yandex.cloud.api.mdb.greenplum.v1ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/greenplum/v1;greenplumb\x06proto3"
 
 var (

@@ -4,6 +4,7 @@ package clickhouse
 
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/clickhouse/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -140,6 +141,10 @@ func (m *ClusterConfig) SetPerformanceDiagnostics(v *PerformanceDiagnostics) {
 
 func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
+}
+
+func (m *ClusterConfig) SetConnectionManager(v *v1.ClusterConnectionManager) {
+	m.ConnectionManager = v
 }
 
 func (m *ClusterConfig_Clickhouse) SetConfig(v *config.ClickhouseConfigSet) {

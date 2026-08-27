@@ -26,7 +26,7 @@ const (
 type UserSettingsConfig_PoolMode int32
 
 const (
-	// PoolMode not explicitly set. Falls back to cluster-level pooling mode.
+	// PoolMode not explicitly set. Falls back to the cluster-level pool.mode setting.
 	UserSettingsConfig_POOL_MODE_UNSPECIFIED UserSettingsConfig_PoolMode = 0
 	// Assign server connection to a client until it disconnects.
 	UserSettingsConfig_SESSION UserSettingsConfig_PoolMode = 1
@@ -159,10 +159,25 @@ func (x *User) GetSettings() *UserSettingsConfig {
 type UserSettingsConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Odyssey® route [server pool mode](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
-	// When POOL_MODE_UNSPECIFIED, uses the cluster-level pooling mode.
-	PoolMode      UserSettingsConfig_PoolMode `protobuf:"varint,1,opt,name=pool_mode,json=poolMode,proto3,enum=yandex.cloud.mdb.greenplum.v1.UserSettingsConfig_PoolMode" json:"pool_mode,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// When POOL_MODE_UNSPECIFIED, uses the cluster-level pool.mode setting.
+	PoolMode UserSettingsConfig_PoolMode `protobuf:"varint,1,opt,name=pool_mode,json=poolMode,proto3,enum=yandex.cloud.mdb.greenplum.v1.UserSettingsConfig_PoolMode" json:"pool_mode,omitempty"`
+	// Odyssey® server [pool size](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
+	// The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+	// Set to zero to disable the limit.
+	// If not set, uses the cluster-level pool.size setting.
+	PoolSize *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=pool_size,json=poolSize,proto3" json:"pool_size,omitempty"`
+	// Odyssey® [client pool idle timeout](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout), in seconds.
+	// Drop stale client connection after this much seconds of idleness, which is not in transaction.
+	// Set to zero to disable.
+	// If not set, uses the cluster-level pool.client_idle_timeout setting.
+	PoolClientIdleTimeout *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=pool_client_idle_timeout,json=poolClientIdleTimeout,proto3" json:"pool_client_idle_timeout,omitempty"`
+	// Odyssey® [client pool idle in transaction timeout](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout), in seconds.
+	// Drop client connection in transaction after this much seconds of idleness.
+	// Set to zero to disable.
+	// If not set, uses the cluster-level pool.idle_in_transaction_timeout setting.
+	PoolIdleInTransactionTimeout *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=pool_idle_in_transaction_timeout,json=poolIdleInTransactionTimeout,proto3" json:"pool_idle_in_transaction_timeout,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *UserSettingsConfig) Reset() {
@@ -202,6 +217,27 @@ func (x *UserSettingsConfig) GetPoolMode() UserSettingsConfig_PoolMode {
 	return UserSettingsConfig_POOL_MODE_UNSPECIFIED
 }
 
+func (x *UserSettingsConfig) GetPoolSize() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.PoolSize
+	}
+	return nil
+}
+
+func (x *UserSettingsConfig) GetPoolClientIdleTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.PoolClientIdleTimeout
+	}
+	return nil
+}
+
+func (x *UserSettingsConfig) GetPoolIdleInTransactionTimeout() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.PoolIdleInTransactionTimeout
+	}
+	return nil
+}
+
 var File_yandex_cloud_mdb_greenplum_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc = "" +
@@ -212,9 +248,12 @@ const file_yandex_cloud_mdb_greenplum_v1_user_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x120\n" +
 	"\x05login\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x05login\x12@\n" +
 	"\x0eresource_group\x18\x03 \x01(\tB\x19\xf2\xc71\x15^([^\\|/*?.,;\"'<>]+|)$R\rresourceGroup\x12M\n" +
-	"\bsettings\x18\t \x01(\v21.yandex.cloud.mdb.greenplum.v1.UserSettingsConfigR\bsettingsJ\x04\b\x05\x10\t\"\xb2\x01\n" +
+	"\bsettings\x18\t \x01(\v21.yandex.cloud.mdb.greenplum.v1.UserSettingsConfigR\bsettingsJ\x04\b\x05\x10\t\"\xc2\x03\n" +
 	"\x12UserSettingsConfig\x12W\n" +
-	"\tpool_mode\x18\x01 \x01(\x0e2:.yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolModeR\bpoolMode\"C\n" +
+	"\tpool_mode\x18\x01 \x01(\x0e2:.yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolModeR\bpoolMode\x12A\n" +
+	"\tpool_size\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\bpoolSize\x12]\n" +
+	"\x18pool_client_idle_timeout\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15poolClientIdleTimeout\x12l\n" +
+	" pool_idle_in_transaction_timeout\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1cpoolIdleInTransactionTimeout\"C\n" +
 	"\bPoolMode\x12\x19\n" +
 	"\x15POOL_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aSESSION\x10\x01\x12\x0f\n" +
@@ -240,16 +279,20 @@ var file_yandex_cloud_mdb_greenplum_v1_user_proto_goTypes = []any{
 	(*User)(nil),                     // 1: yandex.cloud.mdb.greenplum.v1.User
 	(*UserSettingsConfig)(nil),       // 2: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
 	(*wrapperspb.BoolValue)(nil),     // 3: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil),    // 4: google.protobuf.Int64Value
 }
 var file_yandex_cloud_mdb_greenplum_v1_user_proto_depIdxs = []int32{
 	3, // 0: yandex.cloud.mdb.greenplum.v1.User.login:type_name -> google.protobuf.BoolValue
 	2, // 1: yandex.cloud.mdb.greenplum.v1.User.settings:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig
 	0, // 2: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_mode:type_name -> yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.PoolMode
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 3: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_size:type_name -> google.protobuf.Int64Value
+	4, // 4: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_client_idle_timeout:type_name -> google.protobuf.Int64Value
+	4, // 5: yandex.cloud.mdb.greenplum.v1.UserSettingsConfig.pool_idle_in_transaction_timeout:type_name -> google.protobuf.Int64Value
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_user_proto_init() }

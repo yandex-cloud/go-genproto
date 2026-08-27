@@ -32,12 +32,10 @@ type HardwarePoolServiceClient interface {
 	// Returns the specific HardwarePool resource.
 	//
 	// To get the list of available HardwarePool resource, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetHardwarePool(ctx context.Context, in *GetHardwarePoolRequest, opts ...grpc.CallOption) (*HardwarePool, error)
 	// Retrieves the list of HardwarePool resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListHardwarePools(ctx context.Context, in *ListHardwarePoolsRequest, opts ...grpc.CallOption) (*ListHardwarePoolsResponse, error)
 }
 
@@ -78,12 +76,10 @@ type HardwarePoolServiceServer interface {
 	// Returns the specific HardwarePool resource.
 	//
 	// To get the list of available HardwarePool resource, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetHardwarePool(context.Context, *GetHardwarePoolRequest) (*HardwarePool, error)
 	// Retrieves the list of HardwarePool resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListHardwarePools(context.Context, *ListHardwarePoolsRequest) (*ListHardwarePoolsResponse, error)
 }
 

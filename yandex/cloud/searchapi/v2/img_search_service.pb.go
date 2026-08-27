@@ -82,9 +82,9 @@ type ImageSpec_ImageOrientation int32
 
 const (
 	ImageSpec_IMAGE_ORIENTATION_UNSPECIFIED ImageSpec_ImageOrientation = 0
-	// Horizontal orientation.
-	ImageSpec_IMAGE_ORIENTATION_VERTICAL ImageSpec_ImageOrientation = 1
 	// Vertical orientation.
+	ImageSpec_IMAGE_ORIENTATION_VERTICAL ImageSpec_ImageOrientation = 1
+	// Horizontal orientation.
 	ImageSpec_IMAGE_ORIENTATION_HORIZONTAL ImageSpec_ImageOrientation = 2
 	// Square aspect ratio.
 	ImageSpec_IMAGE_ORIENTATION_SQUARE ImageSpec_ImageOrientation = 3

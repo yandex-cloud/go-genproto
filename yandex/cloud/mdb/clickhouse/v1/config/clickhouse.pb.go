@@ -1309,7 +1309,7 @@ type ClickhouseConfig struct {
 	//
 	// For details, see [ClickHouse documentation](https://clickhouse.com/docs/en/integrations/jdbc/jdbc-with-clickhouse).
 	JdbcBridge *ClickhouseConfig_JdbcBridge `protobuf:"bytes,70,opt,name=jdbc_bridge,json=jdbcBridge,proto3" json:"jdbc_bridge,omitempty"`
-	// Enables or disables MySQL interface on ClickHouse server
+	// Enables or disables MySQL interface on ClickHouse server.
 	//
 	// Default value: **false**.
 	//

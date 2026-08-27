@@ -554,8 +554,7 @@ func (x *UpdateServerRequest) GetLabels() map[string]string {
 	return nil
 }
 
-// (-- api-linter: yc::1704::file-separation=disabled
-// Required for backward compatibility with old clients. --)
+// (-- api-linter: yc::1704::file-separation=disabled --)
 type NetworkInterfaceSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// @deprecated. Use `interface` instead.

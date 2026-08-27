@@ -28,8 +28,8 @@ const (
 
 type GetImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Image resource to return.
-	// To get the image ID, use a [ImageService.List] request.
+	// ID of the BootImage resource to return.
+	// To get the BootImage ID, use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -174,7 +174,7 @@ func (x *ListImagesRequest) GetFilter() string {
 
 type ListImagesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Image resources.
+	// List of BootImage resources.
 	Images []*Image `protobuf:"bytes,1,rep,name=images,proto3" json:"images,omitempty"`
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImagesRequest.page_size], use `next_page_token` as the value
@@ -231,15 +231,15 @@ func (x *ListImagesResponse) GetNextPageToken() string {
 
 type CreateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create an image in.
+	// ID of the folder to create a BootImage in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the image.
+	// Name of the BootImage.
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the image.
+	// Description of the BootImage.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// URI of the source image to create the new image from.
+	// URI of the source image to create the new BootImage from.
 	// Currently only supports links to images that are stored in Object Storage.
 	// Currently only supports ISO formats.
 	Uri string `protobuf:"bytes,11,opt,name=uri,proto3" json:"uri,omitempty"`
@@ -316,7 +316,7 @@ func (x *CreateImageRequest) GetLabels() map[string]string {
 
 type CreateImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the image that is being created.
+	// ID of the BootImage that is being created.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -361,15 +361,15 @@ func (x *CreateImageMetadata) GetImageId() string {
 
 type UpdateImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Image resource to update.
-	// To get the image ID, use a [ImageService.List] request.
+	// ID of the BootImage resource to update.
+	// To get the BootImage ID, use a [ImageService.List] request.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
-	// Field mask that specifies which fields of the Image resource are going to be updated.
+	// Field mask that specifies which fields of the BootImage resource are going to be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// Name of the image.
+	// Name of the BootImage.
 	// The name must be unique within the folder.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the image.
+	// Description of the BootImage.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Resource labels as `key:value` pairs.
 	// Existing set of `labels` is completely replaced by the provided set.
@@ -445,7 +445,7 @@ func (x *UpdateImageRequest) GetLabels() map[string]string {
 
 type UpdateImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Image resource that is being updated.
+	// ID of the BootImage resource that is being updated.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -490,8 +490,8 @@ func (x *UpdateImageMetadata) GetImageId() string {
 
 type DeleteImageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the image to delete.
-	// To get the image ID, use a [ImageService.List] request.
+	// ID of the BootImage to delete.
+	// To get the BootImage ID, use a [ImageService.List] request.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -536,7 +536,7 @@ func (x *DeleteImageRequest) GetImageId() string {
 
 type DeleteImageMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Image resource that is being deleted.
+	// ID of the BootImage resource that is being deleted.
 	ImageId       string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -581,7 +581,7 @@ func (x *DeleteImageMetadata) GetImageId() string {
 
 type ListImageOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Image resource to list operations for.
+	// ID of the BootImage resource to list operations for.
 	ImageId string `protobuf:"bytes,1,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is greater than `page_size`,
@@ -649,7 +649,7 @@ func (x *ListImageOperationsRequest) GetPageToken() string {
 
 type ListImageOperationsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of operations for the specified Image resource.
+	// List of operations for the specified BootImage resource.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// Token for getting the next page of the list. If the number of results is greater than
 	// [ListImageOperationsRequest.page_size], use `next_page_token` as the value

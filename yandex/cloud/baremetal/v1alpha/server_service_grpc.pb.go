@@ -52,20 +52,16 @@ type ServerServiceClient interface {
 	BatchCreate(ctx context.Context, in *BatchCreateServersRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified server.
 	Update(ctx context.Context, in *UpdateServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Powers off the specified server.
 	PowerOff(ctx context.Context, in *PowerOffServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Powers on the specified server.
 	PowerOn(ctx context.Context, in *PowerOnServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Reboots the specified server.
 	Reboot(ctx context.Context, in *RebootServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Reinstalls the specified server.
 	Reinstall(ctx context.Context, in *ReinstallServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified server.
@@ -75,8 +71,7 @@ type ServerServiceClient interface {
 	// Stops prolongation of the specified server.
 	StopProlongation(ctx context.Context, in *StopProlongationRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enable prolongation after rental period end
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ProlongateEndedRent(ctx context.Context, in *ProlongateEndedRentRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -235,20 +230,16 @@ type ServerServiceServer interface {
 	BatchCreate(context.Context, *BatchCreateServersRequest) (*operation.Operation, error)
 	// Updates the specified server.
 	Update(context.Context, *UpdateServerRequest) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Powers off the specified server.
 	PowerOff(context.Context, *PowerOffServerRequest) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Powers on the specified server.
 	PowerOn(context.Context, *PowerOnServerRequest) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Reboots the specified server.
 	Reboot(context.Context, *RebootServerRequest) (*operation.Operation, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	// Reinstalls the specified server.
 	Reinstall(context.Context, *ReinstallServerRequest) (*operation.Operation, error)
 	// Lists operations for the specified server.
@@ -258,8 +249,7 @@ type ServerServiceServer interface {
 	// Stops prolongation of the specified server.
 	StopProlongation(context.Context, *StopProlongationRequest) (*operation.Operation, error)
 	// Enable prolongation after rental period end
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ProlongateEndedRent(context.Context, *ProlongateEndedRentRequest) (*operation.Operation, error)
 }
 

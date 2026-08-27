@@ -997,8 +997,11 @@ type ChartWidget_VisualizationSettings struct {
 	HidePartialData bool `protobuf:"varint,12,opt,name=hide_partial_data,json=hidePartialData,proto3" json:"hide_partial_data,omitempty"`
 	// Settings for the categorical bar chart.
 	BarChartSettings *BarChartSettings `protobuf:"bytes,13,opt,name=bar_chart_settings,json=barChartSettings,proto3" json:"bar_chart_settings,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Fill of the area under a series. Defined for line series; for other
+	// visualization types the behaviour is not defined yet.
+	Fill          Fill `protobuf:"varint,14,opt,name=fill,proto3,enum=yandex.cloud.monitoring.v3.Fill" json:"fill,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChartWidget_VisualizationSettings) Reset() {
@@ -1113,6 +1116,13 @@ func (x *ChartWidget_VisualizationSettings) GetBarChartSettings() *BarChartSetti
 		return x.BarChartSettings
 	}
 	return nil
+}
+
+func (x *ChartWidget_VisualizationSettings) GetFill() Fill {
+	if x != nil {
+		return x.Fill
+	}
+	return Fill_FILL_UNSPECIFIED
 }
 
 // Series override settings.
@@ -2475,8 +2485,11 @@ type ChartWidget_SeriesOverrides_SeriesOverrideSettings struct {
 	LineVisibilityInTooltip ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings `protobuf:"varint,15,opt,name=line_visibility_in_tooltip,json=lineVisibilityInTooltip,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings" json:"line_visibility_in_tooltip,omitempty"`
 	// Line visibility in chart. Replaces line_hiding_in_chart.
 	LineVisibilityInChart ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings `protobuf:"varint,16,opt,name=line_visibility_in_chart,json=lineVisibilityInChart,proto3,enum=yandex.cloud.monitoring.v3.ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings" json:"line_visibility_in_chart,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Fill for this series. FILL_UNSPECIFIED leaves the widget setting
+	// in force, any other value overrides it.
+	Fill          Fill `protobuf:"varint,17,opt,name=fill,proto3,enum=yandex.cloud.monitoring.v3.Fill" json:"fill,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) Reset() {
@@ -2618,11 +2631,18 @@ func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) GetLineVisibilityIn
 	return ChartWidget_SeriesOverrides_SeriesOverrideSettings_LINE_OVERRIDE_VISIBILITY_SETTINGS_UNSPECIFIED
 }
 
+func (x *ChartWidget_SeriesOverrides_SeriesOverrideSettings) GetFill() Fill {
+	if x != nil {
+		return x.Fill
+	}
+	return Fill_FILL_UNSPECIFIED
+}
+
 var File_yandex_cloud_monitoring_v3_chart_widget_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a3yandex/cloud/monitoring/v3/bar_chart_settings.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xc6C\n" +
+	"-yandex/cloud/monitoring/v3/chart_widget.proto\x12\x1ayandex.cloud.monitoring.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a3yandex/cloud/monitoring/v3/bar_chart_settings.proto\x1a-yandex/cloud/monitoring/v3/downsampling.proto\x1a%yandex/cloud/monitoring/v3/fill.proto\x1a+yandex/cloud/monitoring/v3/sort_order.proto\x1a+yandex/cloud/monitoring/v3/thresholds.proto\x1a,yandex/cloud/monitoring/v3/unit_format.proto\"\xb2D\n" +
 	"\vChartWidget\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12I\n" +
 	"\aqueries\x18\x02 \x01(\v2/.yandex.cloud.monitoring.v3.ChartWidget.QueriesR\aqueries\x12t\n" +
@@ -2645,7 +2665,7 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12\x1b\n" +
 	"\ttext_mode\x18\x02 \x01(\bR\btextMode\x12\x16\n" +
 	"\x06hidden\x18\x03 \x01(\bR\x06hidden\x12\x12\n" +
-	"\x04name\x18\x04 \x01(\tR\x04name\x1a\x85!\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x1a\xbb!\n" +
 	"\x15VisualizationSettings\x12c\n" +
 	"\x04type\x18\x01 \x01(\x0e2O.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.VisualizationTypeR\x04type\x12\x1c\n" +
 	"\tnormalize\x18\x02 \x01(\bR\tnormalize\x12k\n" +
@@ -2660,7 +2680,8 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x0etiles_settings\x18\n" +
 	" \x01(\v2K.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettingsR\rtilesSettings\x12*\n" +
 	"\x11hide_partial_data\x18\f \x01(\bR\x0fhidePartialData\x12Z\n" +
-	"\x12bar_chart_settings\x18\r \x01(\v2,.yandex.cloud.monitoring.v3.BarChartSettingsR\x10barChartSettings\x1a\x99\v\n" +
+	"\x12bar_chart_settings\x18\r \x01(\v2,.yandex.cloud.monitoring.v3.BarChartSettingsR\x10barChartSettings\x124\n" +
+	"\x04fill\x18\x0e \x01(\x0e2 .yandex.cloud.monitoring.v3.FillR\x04fill\x1a\x99\v\n" +
 	"\x13ColorSchemeSettings\x12\x86\x01\n" +
 	"\tautomatic\x18\x01 \x01(\v2f.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorSchemeH\x00R\tautomatic\x12\x83\x01\n" +
 	"\bstandard\x18\x02 \x01(\v2e.yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorSchemeH\x00R\bstandard\x12\x83\x01\n" +
@@ -2747,13 +2768,13 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x16SERIES_AGGREGATION_MIN\x10\x02\x12\x1a\n" +
 	"\x16SERIES_AGGREGATION_MAX\x10\x03\x12\x1b\n" +
 	"\x17SERIES_AGGREGATION_LAST\x10\x04\x12\x1a\n" +
-	"\x16SERIES_AGGREGATION_SUM\x10\x05J\x04\b\v\x10\f\x1a\xde\x12\n" +
+	"\x16SERIES_AGGREGATION_SUM\x10\x05J\x04\b\v\x10\f\x1a\x94\x13\n" +
 	"\x0fSeriesOverrides\x12\x14\n" +
 	"\x04name\x18\x01 \x01(\tH\x00R\x04name\x12#\n" +
 	"\ftarget_index\x18\x02 \x01(\tH\x00R\vtargetIndex\x12j\n" +
 	"\bsettings\x18\x03 \x01(\v2N.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettingsR\bsettings\x12#\n" +
 	"\roverride_name\x18\x04 \x01(\tR\foverrideName\x12Q\n" +
-	"\amatcher\x18\x05 \x01(\v27.yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcherR\amatcher\x1a\xe3\r\n" +
+	"\amatcher\x18\x05 \x01(\v27.yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcherR\amatcher\x1a\x99\x0e\n" +
 	"\x16SeriesOverrideSettings\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05color\x18\x02 \x01(\tR\x05color\x12c\n" +
@@ -2773,7 +2794,8 @@ const file_yandex_cloud_monitoring_v3_chart_widget_proto_rawDesc = "" +
 	"\x14line_hiding_in_chart\x18\r \x01(\bB\x02\x18\x01R\x11lineHidingInChart\x12\xa8\x01\n" +
 	"\x19line_visibility_in_legend\x18\x0e \x01(\x0e2m.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettingsR\x16lineVisibilityInLegend\x12\xaa\x01\n" +
 	"\x1aline_visibility_in_tooltip\x18\x0f \x01(\x0e2m.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettingsR\x17lineVisibilityInTooltip\x12\xa6\x01\n" +
-	"\x18line_visibility_in_chart\x18\x10 \x01(\x0e2m.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettingsR\x15lineVisibilityInChart\"g\n" +
+	"\x18line_visibility_in_chart\x18\x10 \x01(\x0e2m.yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettingsR\x15lineVisibilityInChart\x124\n" +
+	"\x04fill\x18\x11 \x01(\x0e2 .yandex.cloud.monitoring.v3.FillR\x04fill\"g\n" +
 	"\tLineStyle\x12\x1a\n" +
 	"\x16LINE_STYLE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10LINE_STYLE_SOLID\x10\x01\x12\x13\n" +
@@ -2889,9 +2911,10 @@ var file_yandex_cloud_monitoring_v3_chart_widget_proto_goTypes = []any{
 	(*Thresholds)(nil),            // 37: yandex.cloud.monitoring.v3.Thresholds
 	(*Downsampling)(nil),          // 38: yandex.cloud.monitoring.v3.Downsampling
 	(*BarChartSettings)(nil),      // 39: yandex.cloud.monitoring.v3.BarChartSettings
-	(UnitFormat)(0),               // 40: yandex.cloud.monitoring.v3.UnitFormat
-	(*wrapperspb.Int64Value)(nil), // 41: google.protobuf.Int64Value
-	(SortOrder)(0),                // 42: yandex.cloud.monitoring.v3.SortOrder
+	(Fill)(0),                     // 40: yandex.cloud.monitoring.v3.Fill
+	(UnitFormat)(0),               // 41: yandex.cloud.monitoring.v3.UnitFormat
+	(*wrapperspb.Int64Value)(nil), // 42: google.protobuf.Int64Value
+	(SortOrder)(0),                // 43: yandex.cloud.monitoring.v3.SortOrder
 }
 var file_yandex_cloud_monitoring_v3_chart_widget_proto_depIdxs = []int32{
 	14, // 0: yandex.cloud.monitoring.v3.ChartWidget.queries:type_name -> yandex.cloud.monitoring.v3.ChartWidget.Queries
@@ -2911,39 +2934,41 @@ var file_yandex_cloud_monitoring_v3_chart_widget_proto_depIdxs = []int32{
 	28, // 14: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.yaxis_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings
 	29, // 15: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.tiles_settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings
 	39, // 16: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.bar_chart_settings:type_name -> yandex.cloud.monitoring.v3.BarChartSettings
-	36, // 17: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
-	17, // 18: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.matcher:type_name -> yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher
-	18, // 19: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.query:type_name -> yandex.cloud.monitoring.v3.ChartWidget.QueryMatcher
-	19, // 20: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.line:type_name -> yandex.cloud.monitoring.v3.ChartWidget.LineMatcher
-	20, // 21: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.regexp:type_name -> yandex.cloud.monitoring.v3.ChartWidget.RegExpMatcher
-	21, // 22: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.values:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher
-	0,  // 23: yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher.value_type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValuesType
-	30, // 24: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
-	31, // 25: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
-	32, // 26: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
-	33, // 27: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
-	35, // 28: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
-	34, // 29: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.constant:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
-	4,  // 30: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
-	40, // 31: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
-	41, // 32: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
-	27, // 33: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
-	27, // 34: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
-	42, // 35: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.sort_order:type_name -> yandex.cloud.monitoring.v3.SortOrder
-	7,  // 36: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.sort_field:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.SortField
-	6,  // 37: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
-	9,  // 38: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
-	8,  // 39: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
-	10, // 40: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_style:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
-	11, // 41: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_hiding_type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingType
-	12, // 42: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_legend:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	12, // 43: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_tooltip:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	12, // 44: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_chart:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
-	45, // [45:45] is the sub-list for method output_type
-	45, // [45:45] is the sub-list for method input_type
-	45, // [45:45] is the sub-list for extension type_name
-	45, // [45:45] is the sub-list for extension extendee
-	0,  // [0:45] is the sub-list for field type_name
+	40, // 17: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.fill:type_name -> yandex.cloud.monitoring.v3.Fill
+	36, // 18: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.settings:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings
+	17, // 19: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.matcher:type_name -> yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher
+	18, // 20: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.query:type_name -> yandex.cloud.monitoring.v3.ChartWidget.QueryMatcher
+	19, // 21: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.line:type_name -> yandex.cloud.monitoring.v3.ChartWidget.LineMatcher
+	20, // 22: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.regexp:type_name -> yandex.cloud.monitoring.v3.ChartWidget.RegExpMatcher
+	21, // 23: yandex.cloud.monitoring.v3.ChartWidget.OverrideMatcher.values:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher
+	0,  // 24: yandex.cloud.monitoring.v3.ChartWidget.ValueMatcher.value_type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.ValuesType
+	30, // 25: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.automatic:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.AutomaticColorScheme
+	31, // 26: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.standard:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.StandardColorScheme
+	32, // 27: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.gradient:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.GradientColorScheme
+	33, // 28: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.hash:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.HashColorScheme
+	35, // 29: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.thresholds:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme
+	34, // 30: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.constant:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ConstantColorScheme
+	4,  // 31: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisType
+	41, // 32: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.unit_format:type_name -> yandex.cloud.monitoring.v3.UnitFormat
+	42, // 33: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis.precision:type_name -> google.protobuf.Int64Value
+	27, // 34: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.left:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
+	27, // 35: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.YaxisSettings.right:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.Yaxis
+	43, // 36: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.sort_order:type_name -> yandex.cloud.monitoring.v3.SortOrder
+	7,  // 37: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.sort_field:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.TilesSettings.SortField
+	6,  // 38: yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.aggregation:type_name -> yandex.cloud.monitoring.v3.ChartWidget.VisualizationSettings.ColorSchemeSettings.ThresholdsColorScheme.Aggregation
+	9,  // 39: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesVisualizationType
+	8,  // 40: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.yaxis_position:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.YaxisPosition
+	10, // 41: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_style:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineStyle
+	11, // 42: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_hiding_type:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineHidingType
+	12, // 43: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_legend:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	12, // 44: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_tooltip:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	12, // 45: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.line_visibility_in_chart:type_name -> yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.LineOverrideVisibilitySettings
+	40, // 46: yandex.cloud.monitoring.v3.ChartWidget.SeriesOverrides.SeriesOverrideSettings.fill:type_name -> yandex.cloud.monitoring.v3.Fill
+	47, // [47:47] is the sub-list for method output_type
+	47, // [47:47] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_monitoring_v3_chart_widget_proto_init() }
@@ -2953,6 +2978,7 @@ func file_yandex_cloud_monitoring_v3_chart_widget_proto_init() {
 	}
 	file_yandex_cloud_monitoring_v3_bar_chart_settings_proto_init()
 	file_yandex_cloud_monitoring_v3_downsampling_proto_init()
+	file_yandex_cloud_monitoring_v3_fill_proto_init()
 	file_yandex_cloud_monitoring_v3_sort_order_proto_init()
 	file_yandex_cloud_monitoring_v3_thresholds_proto_init()
 	file_yandex_cloud_monitoring_v3_unit_format_proto_init()

@@ -122,6 +122,10 @@ func (m *ChartWidget_VisualizationSettings) SetBarChartSettings(v *BarChartSetti
 	m.BarChartSettings = v
 }
 
+func (m *ChartWidget_VisualizationSettings) SetFill(v Fill) {
+	m.Fill = v
+}
+
 type ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *ChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v ChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {
@@ -344,6 +348,10 @@ func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityIn
 
 func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInChart(v ChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
 	m.LineVisibilityInChart = v
+}
+
+func (m *ChartWidget_SeriesOverrides_SeriesOverrideSettings) SetFill(v Fill) {
+	m.Fill = v
 }
 
 type ChartWidget_OverrideMatcher_Type = isChartWidget_OverrideMatcher_Type

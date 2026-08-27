@@ -35,8 +35,7 @@ type ConfigurationServiceClient interface {
 	Get(ctx context.Context, in *GetConfigurationRequest, opts ...grpc.CallOption) (*Configuration, error)
 	// Retrieves the list of Configuration resources.
 	List(ctx context.Context, in *ListConfigurationsRequest, opts ...grpc.CallOption) (*ListConfigurationsResponse, error)
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// ConfigurationNetworkInterface is not a resource. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Retrieves the list of ConfigurationNetworkInterface resources.
 	ListConfigurationNetworkInterface(ctx context.Context, in *ListConfigurationNetworkInterfaceRequest, opts ...grpc.CallOption) (*ListConfigurationNetworkInterfaceResponse, error)
 }
@@ -90,8 +89,7 @@ type ConfigurationServiceServer interface {
 	Get(context.Context, *GetConfigurationRequest) (*Configuration, error)
 	// Retrieves the list of Configuration resources.
 	List(context.Context, *ListConfigurationsRequest) (*ListConfigurationsResponse, error)
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// ConfigurationNetworkInterface is not a resource. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// Retrieves the list of ConfigurationNetworkInterface resources.
 	ListConfigurationNetworkInterface(context.Context, *ListConfigurationNetworkInterfaceRequest) (*ListConfigurationNetworkInterfaceResponse, error)
 }

@@ -202,6 +202,10 @@ func (m *MultiSourceChartWidget_VisualizationSettings) SetBarChartSettings(v *Ba
 	m.BarChartSettings = v
 }
 
+func (m *MultiSourceChartWidget_VisualizationSettings) SetFill(v Fill) {
+	m.Fill = v
+}
+
 type MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme = isMultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme
 
 func (m *MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings) SetScheme(v MultiSourceChartWidget_VisualizationSettings_ColorSchemeSettings_Scheme) {
@@ -424,6 +428,10 @@ func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineV
 
 func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetLineVisibilityInChart(v MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings_LineOverrideVisibilitySettings) {
 	m.LineVisibilityInChart = v
+}
+
+func (m *MultiSourceChartWidget_SeriesOverrides_SeriesOverrideSettings) SetFill(v Fill) {
+	m.Fill = v
 }
 
 type MultiSourceChartWidget_OverrideMatcher_Type = isMultiSourceChartWidget_OverrideMatcher_Type

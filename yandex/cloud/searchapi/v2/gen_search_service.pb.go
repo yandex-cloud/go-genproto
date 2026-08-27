@@ -850,7 +850,7 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"2yandex/cloud/searchapi/v2/gen_search_service.proto\x12\x19yandex.cloud.searchapi.v2\x1a\x1cgoogle/api/annotations.proto\x1a,yandex/cloud/searchapi/v2/search_query.proto\x1a\x1dyandex/cloud/validation.proto\"x\n" +
 	"\x10GenSearchMessage\x12)\n" +
 	"\acontent\x18\x01 \x01(\tB\x0f\xe8\xc71\x01\x8a\xc81\a<=16384R\acontent\x129\n" +
-	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\xa0\v\n" +
+	"\x04role\x18\x02 \x01(\x0e2\x1f.yandex.cloud.searchapi.v2.RoleB\x04\xe8\xc71\x01R\x04role\"\x9a\v\n" +
 	"\x10GenSearchRequest\x12R\n" +
 	"\bmessages\x18\x01 \x03(\v2+.yandex.cloud.searchapi.v2.GenSearchMessageB\t\x82\xc81\x051-100R\bmessages\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12L\n" +
@@ -865,15 +865,15 @@ const file_yandex_cloud_searchapi_v2_gen_search_service_proto_rawDesc = "" +
 	"\x13get_partial_results\x18\n" +
 	" \x01(\bR\x11getPartialResults\x12E\n" +
 	"\bmetadata\x18\v \x01(\v2).yandex.cloud.searchapi.v2.SearchMetadataR\bmetadata\x12A\n" +
-	"\x1denable_rich_structured_answer\x18\f \x01(\bR\x1aenableRichStructuredAnswer\x1a5\n" +
+	"\x1denable_rich_structured_answer\x18\f \x01(\bR\x1aenableRichStructuredAnswer\x1a3\n" +
 	"\n" +
-	"SiteOption\x12'\n" +
-	"\x04site\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04site\x1a2\n" +
-	"\tUrlOption\x12%\n" +
-	"\x03url\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x03url\x1a5\n" +
+	"SiteOption\x12%\n" +
+	"\x04site\x18\x01 \x03(\tB\x11\x82\xc81\x03<=5\x8a\xc81\x06<=1024R\x04site\x1a0\n" +
+	"\tUrlOption\x12#\n" +
+	"\x03url\x18\x01 \x03(\tB\x11\x82\xc81\x03<=5\x8a\xc81\x06<=1024R\x03url\x1a3\n" +
 	"\n" +
-	"HostOption\x12'\n" +
-	"\x04host\x18\x01 \x03(\tB\x13\x82\xc81\x05<=100\x8a\xc81\x06<=1024R\x04host\x1a\xad\x03\n" +
+	"HostOption\x12%\n" +
+	"\x04host\x18\x01 \x03(\tB\x11\x82\xc81\x03<=5\x8a\xc81\x06<=1024R\x04host\x1a\xad\x03\n" +
 	"\fSearchFilter\x12\x1e\n" +
 	"\x04date\x18\x01 \x01(\tB\b\x8a\xc81\x04<=25H\x00R\x04date\x12\x1b\n" +
 	"\x04lang\x18\x02 \x01(\tB\x05\x8a\xc81\x012H\x00R\x04lang\x12\\\n" +

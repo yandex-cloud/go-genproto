@@ -37,20 +37,16 @@ type VrfServiceClient interface {
 	// Returns the specific VRF resource.
 	//
 	// To get the list of available VRFs, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetVrf(ctx context.Context, in *GetVrfRequest, opts ...grpc.CallOption) (*Vrf, error)
 	// Retrieves the list of VRF resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListVrfs(ctx context.Context, in *ListVrfsRequest, opts ...grpc.CallOption) (*ListVrfsResponse, error)
 	// Creates a VRF in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateVrf(ctx context.Context, in *CreateVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified VRF resource.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateVrf(ctx context.Context, in *UpdateVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified VRF resource.
 	//
@@ -58,12 +54,10 @@ type VrfServiceClient interface {
 	// The VRF must not have any associated PrivateSubnet resources.
 	// Delete all private subnets before deleting the VRF, otherwise
 	// the request will fail with INVALID_ARGUMENT error.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteVrf(ctx context.Context, in *DeleteVrfRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified vrf.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListVrfOperations(ctx context.Context, in *ListVrfOperationsRequest, opts ...grpc.CallOption) (*ListVrfOperationsResponse, error)
 }
 
@@ -144,20 +138,16 @@ type VrfServiceServer interface {
 	// Returns the specific VRF resource.
 	//
 	// To get the list of available VRFs, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetVrf(context.Context, *GetVrfRequest) (*Vrf, error)
 	// Retrieves the list of VRF resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListVrfs(context.Context, *ListVrfsRequest) (*ListVrfsResponse, error)
 	// Creates a VRF in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateVrf(context.Context, *CreateVrfRequest) (*operation.Operation, error)
 	// Updates the specified VRF resource.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateVrf(context.Context, *UpdateVrfRequest) (*operation.Operation, error)
 	// Deletes the specified VRF resource.
 	//
@@ -165,12 +155,10 @@ type VrfServiceServer interface {
 	// The VRF must not have any associated PrivateSubnet resources.
 	// Delete all private subnets before deleting the VRF, otherwise
 	// the request will fail with INVALID_ARGUMENT error.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteVrf(context.Context, *DeleteVrfRequest) (*operation.Operation, error)
 	// Lists operations for the specified vrf.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListVrfOperations(context.Context, *ListVrfOperationsRequest) (*ListVrfOperationsResponse, error)
 }
 

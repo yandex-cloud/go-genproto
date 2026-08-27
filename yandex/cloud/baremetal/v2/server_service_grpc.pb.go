@@ -44,67 +44,49 @@ type ServerServiceClient interface {
 	// Returns the specific Server resource.
 	//
 	// To get the list of available Server resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetServer(ctx context.Context, in *GetServerRequest, opts ...grpc.CallOption) (*Server, error)
 	// Retrieves the list of Server resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListServers(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error)
 	// Creates a server in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateServer(ctx context.Context, in *CreateServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Creates multiple servers in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	BatchCreateServers(ctx context.Context, in *BatchCreateServersRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateServer(ctx context.Context, in *UpdateServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteServer(ctx context.Context, in *DeleteServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Skips the quarantine for the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	SkipQuarantineServer(ctx context.Context, in *SkipQuarantineServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Powers off the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	PowerOffServer(ctx context.Context, in *PowerOffServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Powers on the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	PowerOnServer(ctx context.Context, in *PowerOnServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reboots the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	RebootServer(ctx context.Context, in *RebootServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reinstalls the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ReinstallServer(ctx context.Context, in *ReinstallServerRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Enable prolongation after rental period end
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	RenewServerRental(ctx context.Context, in *RenewServerRentalRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListServerOperations(ctx context.Context, in *ListServerOperationsRequest, opts ...grpc.CallOption) (*ListServerOperationsResponse, error)
 }
 
@@ -255,67 +237,49 @@ type ServerServiceServer interface {
 	// Returns the specific Server resource.
 	//
 	// To get the list of available Server resources, make a [List] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetServer(context.Context, *GetServerRequest) (*Server, error)
 	// Retrieves the list of Server resources in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListServers(context.Context, *ListServersRequest) (*ListServersResponse, error)
 	// Creates a server in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateServer(context.Context, *CreateServerRequest) (*operation.Operation, error)
 	// Creates multiple servers in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	BatchCreateServers(context.Context, *BatchCreateServersRequest) (*operation.Operation, error)
 	// Updates the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateServer(context.Context, *UpdateServerRequest) (*operation.Operation, error)
 	// Deletes the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteServer(context.Context, *DeleteServerRequest) (*operation.Operation, error)
 	// Skips the quarantine for the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	SkipQuarantineServer(context.Context, *SkipQuarantineServerRequest) (*operation.Operation, error)
 	// Powers off the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	PowerOffServer(context.Context, *PowerOffServerRequest) (*operation.Operation, error)
 	// Powers on the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	PowerOnServer(context.Context, *PowerOnServerRequest) (*operation.Operation, error)
 	// Reboots the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	RebootServer(context.Context, *RebootServerRequest) (*operation.Operation, error)
 	// Reinstalls the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	ReinstallServer(context.Context, *ReinstallServerRequest) (*operation.Operation, error)
 	// Enable prolongation after rental period end
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// Required for backward compatibility with old clients. --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	RenewServerRental(context.Context, *RenewServerRentalRequest) (*operation.Operation, error)
 	// Lists operations for the specified server.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListServerOperations(context.Context, *ListServerOperationsRequest) (*ListServerOperationsResponse, error)
 }
 

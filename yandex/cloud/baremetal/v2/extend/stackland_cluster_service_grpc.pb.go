@@ -36,32 +36,25 @@ const (
 // A set of methods for managing StacklandCluster resources.
 type StacklandClusterServiceClient interface {
 	// Gets Stackland cluster by it's id.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetStacklandCluster(ctx context.Context, in *GetStacklandClusterRequest, opts ...grpc.CallOption) (*StacklandCluster, error)
 	// List Stackland clusters in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusters(ctx context.Context, in *ListStacklandClustersRequest, opts ...grpc.CallOption) (*ListStacklandClustersResponse, error)
 	// Creates new Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateStacklandCluster(ctx context.Context, in *CreateStacklandClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Updates the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateStacklandCluster(ctx context.Context, in *UpdateStacklandClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Deletes the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteStacklandCluster(ctx context.Context, in *DeleteStacklandClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Returns a zip archive with the cluster config.yaml and secrets.yaml.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetStacklandClusterConfigs(ctx context.Context, in *GetStacklandClusterConfigsRequest, opts ...grpc.CallOption) (*GetStacklandClusterConfigsResponse, error)
 	// Lists operations for the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusterOperations(ctx context.Context, in *ListStacklandClusterOperationsRequest, opts ...grpc.CallOption) (*ListStacklandClusterOperationsResponse, error)
 }
 
@@ -150,32 +143,25 @@ func (c *stacklandClusterServiceClient) ListStacklandClusterOperations(ctx conte
 // A set of methods for managing StacklandCluster resources.
 type StacklandClusterServiceServer interface {
 	// Gets Stackland cluster by it's id.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetStacklandCluster(context.Context, *GetStacklandClusterRequest) (*StacklandCluster, error)
 	// List Stackland clusters in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusters(context.Context, *ListStacklandClustersRequest) (*ListStacklandClustersResponse, error)
 	// Creates new Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	CreateStacklandCluster(context.Context, *CreateStacklandClusterRequest) (*operation.Operation, error)
 	// Updates the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdateStacklandCluster(context.Context, *UpdateStacklandClusterRequest) (*operation.Operation, error)
 	// Deletes the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	DeleteStacklandCluster(context.Context, *DeleteStacklandClusterRequest) (*operation.Operation, error)
 	// Returns a zip archive with the cluster config.yaml and secrets.yaml.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetStacklandClusterConfigs(context.Context, *GetStacklandClusterConfigsRequest) (*GetStacklandClusterConfigsResponse, error)
 	// Lists operations for the specified Stackland cluster.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusterOperations(context.Context, *ListStacklandClusterOperationsRequest) (*ListStacklandClusterOperationsResponse, error)
 }
 

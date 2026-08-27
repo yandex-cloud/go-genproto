@@ -41,3 +41,7 @@ func (m *Backup) SetMethod(v Backup_BackupMethod) {
 func (m *Backup) SetJournalSize(v int64) {
 	m.JournalSize = v
 }
+
+func (m *Backup) SetSharedSize(v int64) {
+	m.SharedSize = v
+}

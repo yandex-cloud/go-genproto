@@ -420,9 +420,12 @@ type CreateUserRequest struct {
 	// User's employee ID
 	EmployeeId string `protobuf:"bytes,16,opt,name=employee_id,json=employeeId,proto3" json:"employee_id,omitempty"`
 	// Timestamp when the user account expires.
-	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ExpiresAt *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	// Whether the user must change their password on first login.
+	// Applies only when [PasswordHash] credentials are provided.
+	PasswordChangeRequired bool `protobuf:"varint,19,opt,name=password_change_required,json=passwordChangeRequired,proto3" json:"password_change_required,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *CreateUserRequest) Reset() {
@@ -576,6 +579,13 @@ func (x *CreateUserRequest) GetExpiresAt() *timestamppb.Timestamp {
 		return x.ExpiresAt
 	}
 	return nil
+}
+
+func (x *CreateUserRequest) GetPasswordChangeRequired() bool {
+	if x != nil {
+		return x.PasswordChangeRequired
+	}
+	return false
 }
 
 type isCreateUserRequest_Credentials interface {
@@ -2574,7 +2584,7 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\x8a\xc81\x06<=1000R\x06filter\"\x80\x01\n" +
 	"\x11ListUsersResponse\x12C\n" +
 	"\x05users\x18\x01 \x03(\v2-.yandex.cloud.organizationmanager.v1.idp.UserR\x05users\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xcb\a\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8b\b\n" +
 	"\x11CreateUserRequest\x12-\n" +
 	"\vuserpool_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
 	"userpoolId\x12K\n" +
@@ -2600,8 +2610,9 @@ const file_yandex_cloud_organizationmanager_v1_idp_user_service_proto_rawDesc = 
 	"\vemployee_id\x18\x10 \x01(\tB\t\x8a\xc81\x05<=256R\n" +
 	"employeeId\x12r\n" +
 	"\n" +
-	"expires_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAtB\x13\n" +
-	"\vcredentials\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04\"-\n" +
+	"expires_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampB7\xfa\xc71319700101T000000.000000000-21051231T235959.999999999R\texpiresAt\x128\n" +
+	"\x18password_change_required\x18\x13 \x01(\bR\x16passwordChangeRequiredB\x13\n" +
+	"\vcredentials\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\x04J\x04\b\x12\x10\x13\"-\n" +
 	"\x12CreateUserMetadata\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xc3\x05\n" +
 	"\x11UpdateUserRequest\x12%\n" +

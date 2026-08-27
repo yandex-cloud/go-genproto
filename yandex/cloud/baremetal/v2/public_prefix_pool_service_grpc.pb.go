@@ -32,16 +32,13 @@ const (
 // A set of methods for managing PublicPrefixPool resources.
 type PublicPrefixPoolServiceClient interface {
 	// Returns the specified public prefix pool.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPublicPrefixPool(ctx context.Context, in *GetPublicPrefixPoolRequest, opts ...grpc.CallOption) (*PublicPrefixPool, error)
 	// Lists public prefix pools in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicPrefixPools(ctx context.Context, in *ListPublicPrefixPoolsRequest, opts ...grpc.CallOption) (*ListPublicPrefixPoolsResponse, error)
 	// Updates the specified public prefix pool.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePublicPrefixPool(ctx context.Context, in *UpdatePublicPrefixPoolRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -90,16 +87,13 @@ func (c *publicPrefixPoolServiceClient) UpdatePublicPrefixPool(ctx context.Conte
 // A set of methods for managing PublicPrefixPool resources.
 type PublicPrefixPoolServiceServer interface {
 	// Returns the specified public prefix pool.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetPublicPrefixPool(context.Context, *GetPublicPrefixPoolRequest) (*PublicPrefixPool, error)
 	// Lists public prefix pools in the specified folder.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListPublicPrefixPools(context.Context, *ListPublicPrefixPoolsRequest) (*ListPublicPrefixPoolsResponse, error)
 	// Updates the specified public prefix pool.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	UpdatePublicPrefixPool(context.Context, *UpdatePublicPrefixPoolRequest) (*operation.Operation, error)
 }
 

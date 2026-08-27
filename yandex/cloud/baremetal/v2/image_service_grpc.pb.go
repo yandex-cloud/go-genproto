@@ -32,21 +32,16 @@ const (
 type ImageServiceClient interface {
 	// Returns the specific Image resource.
 	// To get the list of resources, make a [ListImages] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*Image, error)
 	// Retrieves the list of Image resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
 	// Resolves the latest published Image for each available family within the specified folder.
 	// Returns one Image per family - the most recently published one.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveImages(ctx context.Context, in *ResolveImagesRequest, opts ...grpc.CallOption) (*ResolveImagesResponse, error)
 }
 
@@ -96,21 +91,16 @@ func (c *imageServiceClient) ResolveImages(ctx context.Context, in *ResolveImage
 type ImageServiceServer interface {
 	// Returns the specific Image resource.
 	// To get the list of resources, make a [ListImages] request.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	GetImage(context.Context, *GetImageRequest) (*Image, error)
 	// Retrieves the list of Image resources.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
 	// Resolves the latest published Image for each available family within the specified folder.
 	// Returns one Image per family - the most recently published one.
-	// (-- api-linter: yc::1702::method-no-resource=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// https://google.aip.dev/130 --)
-	// (-- api-linter: yc::1705::http-method-mapping=disabled
-	// https://google.aip.dev/130 --)
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	ResolveImages(context.Context, *ResolveImagesRequest) (*ResolveImagesResponse, error)
 }
 
