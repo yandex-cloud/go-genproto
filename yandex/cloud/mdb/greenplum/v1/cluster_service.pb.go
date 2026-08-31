@@ -426,9 +426,11 @@ type CreateClusterRequest struct {
 	// ID of the service account used for access Yandex Cloud resources.
 	ServiceAccountId string `protobuf:"bytes,24,opt,name=service_account_id,json=serviceAccountId,proto3" json:"service_account_id,omitempty"`
 	// Cloud logging configuration
-	Logging       *LoggingConfig `protobuf:"bytes,25,opt,name=logging,proto3" json:"logging,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Logging *LoggingConfig `protobuf:"bytes,25,opt,name=logging,proto3" json:"logging,omitempty"`
+	// ID of the key to encrypt cluster disks.
+	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,26,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CreateClusterRequest) Reset() {
@@ -625,6 +627,13 @@ func (x *CreateClusterRequest) GetServiceAccountId() string {
 func (x *CreateClusterRequest) GetLogging() *LoggingConfig {
 	if x != nil {
 		return x.Logging
+	}
+	return nil
+}
+
+func (x *CreateClusterRequest) GetDiskEncryptionKeyId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.DiskEncryptionKeyId
 	}
 	return nil
 }
@@ -2954,7 +2963,7 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x82\x01\n" +
 	"\x14ListClustersResponse\x12B\n" +
 	"\bclusters\x18\x01 \x03(\v2&.yandex.cloud.mdb.greenplum.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd9\f\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xac\r\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -2982,7 +2991,8 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_rawDesc = "" +
 	"\x15master_host_group_ids\x18\x16 \x03(\tR\x12masterHostGroupIds\x123\n" +
 	"\x16segment_host_group_ids\x18\x17 \x03(\tR\x13segmentHostGroupIds\x12,\n" +
 	"\x12service_account_id\x18\x18 \x01(\tR\x10serviceAccountId\x12F\n" +
-	"\alogging\x18\x19 \x01(\v2,.yandex.cloud.mdb.greenplum.v1.LoggingConfigR\alogging\x1a9\n" +
+	"\alogging\x18\x19 \x01(\v2,.yandex.cloud.mdb.greenplum.v1.LoggingConfigR\alogging\x12Q\n" +
+	"\x16disk_encryption_key_id\x18\x1a \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x12\x10\x13\"6\n" +
@@ -3308,19 +3318,19 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_goTypes = []any{
 	(*MaintenanceWindow)(nil),                        // 47: yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
 	(*CloudStorage)(nil),                             // 48: yandex.cloud.mdb.greenplum.v1.CloudStorage
 	(*LoggingConfig)(nil),                            // 49: yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	(*fieldmaskpb.FieldMask)(nil),                    // 50: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),                    // 51: google.protobuf.Timestamp
-	(*operation.Operation)(nil),                      // 52: yandex.cloud.operation.Operation
-	(*Host)(nil),                                     // 53: yandex.cloud.mdb.greenplum.v1.Host
-	(*Resources)(nil),                                // 54: yandex.cloud.mdb.greenplum.v1.Resources
-	(*GreenplumConfig6)(nil),                         // 55: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	(*DBMSConfig)(nil),                               // 56: yandex.cloud.mdb.greenplum.v1.DBMSConfig
-	(*ConnectionPoolerConfig)(nil),                   // 57: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	(*BackgroundActivitiesConfig)(nil),               // 58: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	(*PXFConfig)(nil),                                // 59: yandex.cloud.mdb.greenplum.v1.PXFConfig
-	(*Backup)(nil),                                   // 60: yandex.cloud.mdb.greenplum.v1.Backup
-	(*GreenplumRestoreConfig)(nil),                   // 61: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
-	(*wrapperspb.StringValue)(nil),                   // 62: google.protobuf.StringValue
+	(*wrapperspb.StringValue)(nil),                   // 50: google.protobuf.StringValue
+	(*fieldmaskpb.FieldMask)(nil),                    // 51: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),                    // 52: google.protobuf.Timestamp
+	(*operation.Operation)(nil),                      // 53: yandex.cloud.operation.Operation
+	(*Host)(nil),                                     // 54: yandex.cloud.mdb.greenplum.v1.Host
+	(*Resources)(nil),                                // 55: yandex.cloud.mdb.greenplum.v1.Resources
+	(*GreenplumConfig6)(nil),                         // 56: yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	(*DBMSConfig)(nil),                               // 57: yandex.cloud.mdb.greenplum.v1.DBMSConfig
+	(*ConnectionPoolerConfig)(nil),                   // 58: yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	(*BackgroundActivitiesConfig)(nil),               // 59: yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	(*PXFConfig)(nil),                                // 60: yandex.cloud.mdb.greenplum.v1.PXFConfig
+	(*Backup)(nil),                                   // 61: yandex.cloud.mdb.greenplum.v1.Backup
+	(*GreenplumRestoreConfig)(nil),                   // 62: yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
 	(*access.ListAccessBindingsRequest)(nil),         // 63: yandex.cloud.access.ListAccessBindingsRequest
 	(*access.SetAccessBindingsRequest)(nil),          // 64: yandex.cloud.access.SetAccessBindingsRequest
 	(*access.UpdateAccessBindingsRequest)(nil),       // 65: yandex.cloud.access.UpdateAccessBindingsRequest
@@ -3337,93 +3347,94 @@ var file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_depIdxs = []int32{
 	33, // 7: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
 	48, // 8: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
 	49, // 9: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	50, // 10: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
-	41, // 11: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntry
-	46, // 12: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
-	31, // 13: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
-	32, // 14: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
-	47, // 15: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	33, // 16: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
-	48, // 17: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
-	49, // 18: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
-	0,  // 19: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.RescheduleType
-	51, // 20: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
-	51, // 21: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
-	51, // 22: yandex.cloud.mdb.greenplum.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
-	42, // 23: yandex.cloud.mdb.greenplum.v1.LogRecord.message:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntry
-	1,  // 24: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceType
-	51, // 25: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	51, // 26: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	22, // 27: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
-	22, // 28: yandex.cloud.mdb.greenplum.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
-	2,  // 29: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceType
-	51, // 30: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
-	51, // 31: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
-	52, // 32: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	53, // 33: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.greenplum.v1.Host
-	54, // 34: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	54, // 35: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	55, // 36: yandex.cloud.mdb.greenplum.v1.ConfigSpec.greenplum_config_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
-	56, // 37: yandex.cloud.mdb.greenplum.v1.ConfigSpec.dbms_config:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfig
-	57, // 38: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
-	58, // 39: yandex.cloud.mdb.greenplum.v1.ConfigSpec.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
-	59, // 40: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfig
-	60, // 41: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.greenplum.v1.Backup
-	51, // 42: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
-	43, // 43: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.LabelsEntry
-	45, // 44: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
-	61, // 45: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
-	54, // 46: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.master_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	54, // 47: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.segment_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
-	47, // 48: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
-	62, // 49: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
-	3,  // 50: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.greenplum.v1.GetClusterRequest
-	4,  // 51: yandex.cloud.mdb.greenplum.v1.ClusterService.List:input_type -> yandex.cloud.mdb.greenplum.v1.ListClustersRequest
-	6,  // 52: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.greenplum.v1.CreateClusterRequest
-	8,  // 53: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
-	11, // 54: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:input_type -> yandex.cloud.mdb.greenplum.v1.ExpandRequest
-	12, // 55: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
-	14, // 56: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.greenplum.v1.StartClusterRequest
-	16, // 57: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.greenplum.v1.StopClusterRequest
-	18, // 58: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
-	20, // 59: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
-	23, // 60: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
-	26, // 61: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
-	27, // 62: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
-	29, // 63: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
-	29, // 64: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
-	34, // 65: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
-	36, // 66: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.greenplum.v1.BackupClusterRequest
-	38, // 67: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest
-	63, // 68: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
-	64, // 69: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
-	65, // 70: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
-	44, // 71: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.greenplum.v1.Cluster
-	5,  // 72: yandex.cloud.mdb.greenplum.v1.ClusterService.List:output_type -> yandex.cloud.mdb.greenplum.v1.ListClustersResponse
-	52, // 73: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
-	52, // 74: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
-	52, // 75: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:output_type -> yandex.cloud.operation.Operation
-	52, // 76: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
-	52, // 77: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
-	52, // 78: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
-	52, // 79: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
-	52, // 80: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
-	24, // 81: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
-	25, // 82: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.greenplum.v1.StreamLogRecord
-	28, // 83: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
-	30, // 84: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
-	30, // 85: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
-	35, // 86: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse
-	52, // 87: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
-	52, // 88: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
-	66, // 89: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
-	52, // 90: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
-	52, // 91: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
-	71, // [71:92] is the sub-list for method output_type
-	50, // [50:71] is the sub-list for method input_type
-	50, // [50:50] is the sub-list for extension type_name
-	50, // [50:50] is the sub-list for extension extendee
-	0,  // [0:50] is the sub-list for field type_name
+	50, // 10: yandex.cloud.mdb.greenplum.v1.CreateClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	51, // 11: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.update_mask:type_name -> google.protobuf.FieldMask
+	41, // 12: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.LabelsEntry
+	46, // 13: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig
+	31, // 14: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.master_config:type_name -> yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec
+	32, // 15: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.segment_config:type_name -> yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec
+	47, // 16: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
+	33, // 17: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.config_spec:type_name -> yandex.cloud.mdb.greenplum.v1.ConfigSpec
+	48, // 18: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.cloud_storage:type_name -> yandex.cloud.mdb.greenplum.v1.CloudStorage
+	49, // 19: yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest.logging:type_name -> yandex.cloud.mdb.greenplum.v1.LoggingConfig
+	0,  // 20: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.reschedule_type:type_name -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.RescheduleType
+	52, // 21: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest.delayed_until:type_name -> google.protobuf.Timestamp
+	52, // 22: yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceMetadata.delayed_until:type_name -> google.protobuf.Timestamp
+	52, // 23: yandex.cloud.mdb.greenplum.v1.LogRecord.timestamp:type_name -> google.protobuf.Timestamp
+	42, // 24: yandex.cloud.mdb.greenplum.v1.LogRecord.message:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord.MessageEntry
+	1,  // 25: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.ServiceType
+	52, // 26: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	52, // 27: yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	22, // 28: yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse.logs:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
+	22, // 29: yandex.cloud.mdb.greenplum.v1.StreamLogRecord.record:type_name -> yandex.cloud.mdb.greenplum.v1.LogRecord
+	2,  // 30: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.service_type:type_name -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.ServiceType
+	52, // 31: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.from_time:type_name -> google.protobuf.Timestamp
+	52, // 32: yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest.to_time:type_name -> google.protobuf.Timestamp
+	53, // 33: yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	54, // 34: yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse.hosts:type_name -> yandex.cloud.mdb.greenplum.v1.Host
+	55, // 35: yandex.cloud.mdb.greenplum.v1.MasterSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	55, // 36: yandex.cloud.mdb.greenplum.v1.SegmentSubclusterConfigSpec.resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	56, // 37: yandex.cloud.mdb.greenplum.v1.ConfigSpec.greenplum_config_6:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumConfig6
+	57, // 38: yandex.cloud.mdb.greenplum.v1.ConfigSpec.dbms_config:type_name -> yandex.cloud.mdb.greenplum.v1.DBMSConfig
+	58, // 39: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pool:type_name -> yandex.cloud.mdb.greenplum.v1.ConnectionPoolerConfig
+	59, // 40: yandex.cloud.mdb.greenplum.v1.ConfigSpec.background_activities:type_name -> yandex.cloud.mdb.greenplum.v1.BackgroundActivitiesConfig
+	60, // 41: yandex.cloud.mdb.greenplum.v1.ConfigSpec.pxf_config:type_name -> yandex.cloud.mdb.greenplum.v1.PXFConfig
+	61, // 42: yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse.backups:type_name -> yandex.cloud.mdb.greenplum.v1.Backup
+	52, // 43: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.time:type_name -> google.protobuf.Timestamp
+	43, // 44: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.labels:type_name -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.LabelsEntry
+	45, // 45: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.environment:type_name -> yandex.cloud.mdb.greenplum.v1.Cluster.Environment
+	62, // 46: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.config:type_name -> yandex.cloud.mdb.greenplum.v1.GreenplumRestoreConfig
+	55, // 47: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.master_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	55, // 48: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.segment_resources:type_name -> yandex.cloud.mdb.greenplum.v1.Resources
+	47, // 49: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.maintenance_window:type_name -> yandex.cloud.mdb.greenplum.v1.MaintenanceWindow
+	50, // 50: yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest.disk_encryption_key_id:type_name -> google.protobuf.StringValue
+	3,  // 51: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:input_type -> yandex.cloud.mdb.greenplum.v1.GetClusterRequest
+	4,  // 52: yandex.cloud.mdb.greenplum.v1.ClusterService.List:input_type -> yandex.cloud.mdb.greenplum.v1.ListClustersRequest
+	6,  // 53: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:input_type -> yandex.cloud.mdb.greenplum.v1.CreateClusterRequest
+	8,  // 54: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:input_type -> yandex.cloud.mdb.greenplum.v1.UpdateClusterRequest
+	11, // 55: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:input_type -> yandex.cloud.mdb.greenplum.v1.ExpandRequest
+	12, // 56: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:input_type -> yandex.cloud.mdb.greenplum.v1.DeleteClusterRequest
+	14, // 57: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:input_type -> yandex.cloud.mdb.greenplum.v1.StartClusterRequest
+	16, // 58: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:input_type -> yandex.cloud.mdb.greenplum.v1.StopClusterRequest
+	18, // 59: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:input_type -> yandex.cloud.mdb.greenplum.v1.MoveClusterRequest
+	20, // 60: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:input_type -> yandex.cloud.mdb.greenplum.v1.RescheduleMaintenanceRequest
+	23, // 61: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsRequest
+	26, // 62: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:input_type -> yandex.cloud.mdb.greenplum.v1.StreamClusterLogsRequest
+	27, // 63: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsRequest
+	29, // 64: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
+	29, // 65: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsRequest
+	34, // 66: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:input_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsRequest
+	36, // 67: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:input_type -> yandex.cloud.mdb.greenplum.v1.BackupClusterRequest
+	38, // 68: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:input_type -> yandex.cloud.mdb.greenplum.v1.RestoreClusterRequest
+	63, // 69: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	64, // 70: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	65, // 71: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	44, // 72: yandex.cloud.mdb.greenplum.v1.ClusterService.Get:output_type -> yandex.cloud.mdb.greenplum.v1.Cluster
+	5,  // 73: yandex.cloud.mdb.greenplum.v1.ClusterService.List:output_type -> yandex.cloud.mdb.greenplum.v1.ListClustersResponse
+	53, // 74: yandex.cloud.mdb.greenplum.v1.ClusterService.Create:output_type -> yandex.cloud.operation.Operation
+	53, // 75: yandex.cloud.mdb.greenplum.v1.ClusterService.Update:output_type -> yandex.cloud.operation.Operation
+	53, // 76: yandex.cloud.mdb.greenplum.v1.ClusterService.Expand:output_type -> yandex.cloud.operation.Operation
+	53, // 77: yandex.cloud.mdb.greenplum.v1.ClusterService.Delete:output_type -> yandex.cloud.operation.Operation
+	53, // 78: yandex.cloud.mdb.greenplum.v1.ClusterService.Start:output_type -> yandex.cloud.operation.Operation
+	53, // 79: yandex.cloud.mdb.greenplum.v1.ClusterService.Stop:output_type -> yandex.cloud.operation.Operation
+	53, // 80: yandex.cloud.mdb.greenplum.v1.ClusterService.Move:output_type -> yandex.cloud.operation.Operation
+	53, // 81: yandex.cloud.mdb.greenplum.v1.ClusterService.RescheduleMaintenance:output_type -> yandex.cloud.operation.Operation
+	24, // 82: yandex.cloud.mdb.greenplum.v1.ClusterService.ListLogs:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterLogsResponse
+	25, // 83: yandex.cloud.mdb.greenplum.v1.ClusterService.StreamLogs:output_type -> yandex.cloud.mdb.greenplum.v1.StreamLogRecord
+	28, // 84: yandex.cloud.mdb.greenplum.v1.ClusterService.ListOperations:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterOperationsResponse
+	30, // 85: yandex.cloud.mdb.greenplum.v1.ClusterService.ListMasterHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
+	30, // 86: yandex.cloud.mdb.greenplum.v1.ClusterService.ListSegmentHosts:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterHostsResponse
+	35, // 87: yandex.cloud.mdb.greenplum.v1.ClusterService.ListBackups:output_type -> yandex.cloud.mdb.greenplum.v1.ListClusterBackupsResponse
+	53, // 88: yandex.cloud.mdb.greenplum.v1.ClusterService.Backup:output_type -> yandex.cloud.operation.Operation
+	53, // 89: yandex.cloud.mdb.greenplum.v1.ClusterService.Restore:output_type -> yandex.cloud.operation.Operation
+	66, // 90: yandex.cloud.mdb.greenplum.v1.ClusterService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	53, // 91: yandex.cloud.mdb.greenplum.v1.ClusterService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	53, // 92: yandex.cloud.mdb.greenplum.v1.ClusterService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	72, // [72:93] is the sub-list for method output_type
+	51, // [51:72] is the sub-list for method input_type
+	51, // [51:51] is the sub-list for extension type_name
+	51, // [51:51] is the sub-list for extension extendee
+	0,  // [0:51] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_greenplum_v1_cluster_service_proto_init() }

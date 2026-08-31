@@ -153,6 +153,8 @@ const (
 	Trigger_DELETING Trigger_Status = 4
 	// The trigger is updating.
 	Trigger_UPDATING Trigger_Status = 5
+	// Trigger failed. The only allowed action is delete.
+	Trigger_ERROR Trigger_Status = 6
 )
 
 // Enum value maps for Trigger_Status.
@@ -164,6 +166,7 @@ var (
 		3: "CREATING",
 		4: "DELETING",
 		5: "UPDATING",
+		6: "ERROR",
 	}
 	Trigger_Status_value = map[string]int32{
 		"STATUS_UNSPECIFIED": 0,
@@ -172,6 +175,7 @@ var (
 		"CREATING":           3,
 		"DELETING":           4,
 		"UPDATING":           5,
+		"ERROR":              6,
 	}
 )
 
@@ -2315,7 +2319,7 @@ var File_yandex_cloud_serverless_triggers_v2_trigger_proto protoreflect.FileDesc
 
 const file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc = "" +
 	"\n" +
-	"1yandex/cloud/serverless/triggers/v2/trigger.proto\x12#yandex.cloud.serverless.triggers.v2\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\x97\x05\n" +
+	"1yandex/cloud/serverless/triggers/v2/trigger.proto\x12#yandex.cloud.serverless.triggers.v2\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'yandex/cloud/logging/v1/log_entry.proto\x1a\x1dyandex/cloud/validation.proto\"\xa2\x05\n" +
 	"\aTrigger\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12)\n" +
 	"\tfolder_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x129\n" +
@@ -2330,7 +2334,7 @@ const file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc = "" +
 	" \x01(\x0e23.yandex.cloud.serverless.triggers.v2.Trigger.StatusR\x06status\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"m\n" +
 	"\x06Status\x12\x16\n" +
 	"\x12STATUS_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
@@ -2339,7 +2343,8 @@ const file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc = "" +
 	"\x06PAUSED\x10\x02\x12\f\n" +
 	"\bCREATING\x10\x03\x12\f\n" +
 	"\bDELETING\x10\x04\x12\f\n" +
-	"\bUPDATING\x10\x05J\x04\b\a\x10\b\"\x93\b\n" +
+	"\bUPDATING\x10\x05\x12\t\n" +
+	"\x05ERROR\x10\x06J\x04\b\a\x10\b\"\x93\b\n" +
 	"\x06Source\x12B\n" +
 	"\x05timer\x18\x01 \x01(\v2*.yandex.cloud.serverless.triggers.v2.TimerH\x00R\x05timer\x12<\n" +
 	"\x03ymq\x18\x02 \x01(\v2(.yandex.cloud.serverless.triggers.v2.YMQH\x00R\x03ymq\x12<\n" +

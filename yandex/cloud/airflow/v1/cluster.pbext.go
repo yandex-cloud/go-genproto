@@ -207,6 +207,20 @@ func (m *S3Config) SetBucket(v string) {
 	m.Bucket = v
 }
 
+func (m *GitSyncUsernameAndPassword) SetUsername(v string) {
+	m.Username = v
+}
+
+func (m *GitSyncUsernameAndPassword) SetPassword(v string) {
+	m.Password = v
+}
+
+type GitSyncConfig_Credentials = isGitSyncConfig_Credentials
+
+func (m *GitSyncConfig) SetCredentials(v GitSyncConfig_Credentials) {
+	m.Credentials = v
+}
+
 func (m *GitSyncConfig) SetRepo(v string) {
 	m.Repo = v
 }
@@ -220,7 +234,15 @@ func (m *GitSyncConfig) SetSubPath(v string) {
 }
 
 func (m *GitSyncConfig) SetSshKey(v string) {
-	m.SshKey = v
+	m.Credentials = &GitSyncConfig_SshKey{
+		SshKey: v,
+	}
+}
+
+func (m *GitSyncConfig) SetUsernameAndPassword(v *GitSyncUsernameAndPassword) {
+	m.Credentials = &GitSyncConfig_UsernameAndPassword{
+		UsernameAndPassword: v,
+	}
 }
 
 type CodeSyncConfig_Source = isCodeSyncConfig_Source

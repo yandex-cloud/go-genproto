@@ -133,6 +133,10 @@ func (m *CreateClusterRequest) SetLogging(v *LoggingConfig) {
 	m.Logging = v
 }
 
+func (m *CreateClusterRequest) SetDiskEncryptionKeyId(v *wrapperspb.StringValue) {
+	m.DiskEncryptionKeyId = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }

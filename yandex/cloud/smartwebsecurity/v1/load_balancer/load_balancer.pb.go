@@ -767,8 +767,10 @@ type SolidWafSettings struct {
 	SolidWafProfileId string `protobuf:"bytes,2,opt,name=solid_waf_profile_id,json=solidWafProfileId,proto3" json:"solid_waf_profile_id,omitempty"`
 	// Session affinity to analyzers. If not set, ConnectionSessionAffinity will be used.
 	SessionAffinity *SessionAffinity `protobuf:"bytes,3,opt,name=session_affinity,json=sessionAffinity,proto3" json:"session_affinity,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// ID of the Solid WAF web app.
+	WebAppId      string `protobuf:"bytes,4,opt,name=web_app_id,json=webAppId,proto3" json:"web_app_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SolidWafSettings) Reset() {
@@ -813,6 +815,13 @@ func (x *SolidWafSettings) GetSessionAffinity() *SessionAffinity {
 		return x.SessionAffinity
 	}
 	return nil
+}
+
+func (x *SolidWafSettings) GetWebAppId() string {
+	if x != nil {
+		return x.WebAppId
+	}
+	return ""
 }
 
 // A domain served by a Smart Web Security load balancer.
@@ -1545,10 +1554,12 @@ const file_yandex_cloud_smartwebsecurity_v1_load_balancer_load_balancer_proto_ra
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12%\n" +
 	"\x0ecertificate_id\x18\x02 \x01(\tR\rcertificateId\x12\x1f\n" +
 	"\x04port\x18\x03 \x01(\x03B\v\xfa\xc71\a0-65535R\x04port\x12!\n" +
-	"\fenable_http1\x18\x04 \x01(\bR\venableHttp1\"\xb5\x01\n" +
+	"\fenable_http1\x18\x04 \x01(\bR\venableHttp1\"\xd3\x01\n" +
 	"\x10SolidWafSettings\x12/\n" +
 	"\x14solid_waf_profile_id\x18\x02 \x01(\tR\x11solidWafProfileId\x12j\n" +
-	"\x10session_affinity\x18\x03 \x01(\v2?.yandex.cloud.smartwebsecurity.v1.load_balancer.SessionAffinityR\x0fsessionAffinityJ\x04\b\x01\x10\x02\"\xf5\x05\n" +
+	"\x10session_affinity\x18\x03 \x01(\v2?.yandex.cloud.smartwebsecurity.v1.load_balancer.SessionAffinityR\x0fsessionAffinity\x12\x1c\n" +
+	"\n" +
+	"web_app_id\x18\x04 \x01(\tR\bwebAppIdJ\x04\b\x01\x10\x02\"\xf5\x05\n" +
 	"\x06Domain\x124\n" +
 	"\x04name\x18\x01 \x01(\tB \xf2\xc71\x1c[a-z][-a-z0-9]{1,56}[a-z0-9]R\x04name\x12k\n" +
 	"\vserver_name\x18\x02 \x01(\tBJ\xe8\xc71\x01\xf2\xc719([*][.])?([a-z0-9]([-a-z0-9]*[a-z0-9])?[.])+[-a-z0-9]{2,}\x8a\xc81\x051-255R\n" +

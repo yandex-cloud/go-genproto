@@ -164,6 +164,10 @@ func (m *SolidWafSettings) SetSessionAffinity(v *SessionAffinity) {
 	m.SessionAffinity = v
 }
 
+func (m *SolidWafSettings) SetWebAppId(v string) {
+	m.WebAppId = v
+}
+
 func (m *Domain) SetName(v string) {
 	m.Name = v
 }
