@@ -185,6 +185,10 @@ func (m *TrinoConfig) SetTls(v *TLSConfig) {
 	m.Tls = v
 }
 
+func (m *TrinoConfig) SetEventListeners(v *EventListenersConfig) {
+	m.EventListeners = v
+}
+
 func (m *CoordinatorConfig) SetResources(v *Resources) {
 	m.Resources = v
 }

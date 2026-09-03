@@ -107,6 +107,10 @@ func (m *TrinoConfigSpec) SetTls(v *TLSConfig) {
 	m.Tls = v
 }
 
+func (m *TrinoConfigSpec) SetEventListeners(v *EventListenersConfigSpec) {
+	m.EventListeners = v
+}
+
 func (m *CreateClusterMetadata) SetClusterId(v string) {
 	m.ClusterId = v
 }
@@ -167,6 +171,10 @@ func (m *UpdateTrinoConfigSpec) SetResourceManagement(v *ResourceManagementConfi
 
 func (m *UpdateTrinoConfigSpec) SetTls(v *TLSConfig) {
 	m.Tls = v
+}
+
+func (m *UpdateTrinoConfigSpec) SetEventListeners(v *UpdateEventListenersSpec) {
+	m.EventListeners = v
 }
 
 func (m *UpdateNetworkConfigSpec) SetSecurityGroupIds(v []string) {

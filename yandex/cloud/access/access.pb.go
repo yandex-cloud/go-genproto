@@ -4,6 +4,8 @@
 // 	protoc        v3.21.12
 // source: yandex/cloud/access/access.proto
 
+// (-- api-linter: yc::1704::version-format=disabled --)
+
 package access
 
 import (
@@ -1344,14 +1346,15 @@ const file_yandex_cloud_access_access_proto_rawDesc = "" +
 	"\vresource_id\x18\x01 \x01(\tR\n" +
 	"resourceId\x12\\\n" +
 	"\x15access_policy_binding\x18\x02 \x01(\v2(.yandex.cloud.access.AccessPolicyBindingR\x13accessPolicyBinding\"\x1a\n" +
-	"\x18BindAccessPolicyResponse\"\x9d\x01\n" +
+	"\x18BindAccessPolicyResponse\"\x9e\x01\n" +
 	"\x19ListAccessBindingsRequest\x12-\n" +
 	"\vresource_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=64R\n" +
 	"resourceId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12)\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x91\x01\n" +
+	"page_token\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x06<=2000R\tpageToken\"\x91\x01\n" +
 	"\x1aListAccessBindingsResponse\x12K\n" +
 	"\x0faccess_bindings\x18\x01 \x03(\v2\".yandex.cloud.access.AccessBindingR\x0eaccessBindings\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa3\x01\n" +

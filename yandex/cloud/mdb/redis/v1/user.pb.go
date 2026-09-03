@@ -289,10 +289,10 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"categories\x128\n" +
 	"\bcommands\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bcommands\x12G\n" +
 	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\x0fsanitizePayload\x12:\n" +
-	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\xf9\x01\n" +
+	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\x9b\x02\n" +
 	"\bUserSpec\x12B\n" +
-	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12)\n" +
-	"\tpasswords\x18\x02 \x03(\tB\v\x82\xc81\x03<=1\x90\xc81\x01R\tpasswords\x12H\n" +
+	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12K\n" +
+	"\tpasswords\x18\x02 \x03(\tB-\xf2\xc71\x1e^[a-zA-Z0-9@=+?*.,!&#$^<>_-]*$\x82\xc81\x03<=1\x90\xc81\x01R\tpasswords\x12H\n" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x124\n" +
 	"\aenabled\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabledBd\n" +
 	"\x1dyandex.cloud.api.mdb.redis.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1;redisb\x06proto3"

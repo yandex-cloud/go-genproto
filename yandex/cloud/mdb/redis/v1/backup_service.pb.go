@@ -197,7 +197,7 @@ func (x *ListBackupsResponse) GetNextPageToken() string {
 
 type DeleteBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the backup to delete.
+	// ID of the backup to delete.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -242,7 +242,7 @@ func (x *DeleteBackupRequest) GetBackupId() string {
 
 type DeleteBackupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the deleting Redis backup.
+	// ID of the deleting Redis backup.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -302,9 +302,9 @@ const file_yandex_cloud_mdb_redis_v1_backup_service_proto_rawDesc = "" +
 	"\abackups\x18\x01 \x03(\v2!.yandex.cloud.mdb.redis.v1.BackupR\abackups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"8\n" +
 	"\x13DeleteBackupRequest\x12!\n" +
-	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"9\n" +
-	"\x14DeleteBackupMetadata\x12!\n" +
-	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId2\xdf\x03\n" +
+	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\"3\n" +
+	"\x14DeleteBackupMetadata\x12\x1b\n" +
+	"\tbackup_id\x18\x01 \x01(\tR\bbackupId2\xdf\x03\n" +
 	"\rBackupService\x12\x84\x01\n" +
 	"\x03Get\x12+.yandex.cloud.mdb.redis.v1.GetBackupRequest\x1a!.yandex.cloud.mdb.redis.v1.Backup\"-\x82\xd3\xe4\x93\x02'\x12%/managed-redis/v1/backups/{backup_id}\x12\x88\x01\n" +
 	"\x04List\x12-.yandex.cloud.mdb.redis.v1.ListBackupsRequest\x1a..yandex.cloud.mdb.redis.v1.ListBackupsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/managed-redis/v1/backups\x12\xbb\x01\n" +

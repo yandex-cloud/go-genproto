@@ -1255,7 +1255,7 @@ var File_yandex_cloud_baremetal_v2_server_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_server_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/baremetal/v2/server.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\x1a'yandex/cloud/baremetal/v2/storage.proto\x1a2yandex/cloud/baremetal/v2/user_configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x8b\x0e\n" +
+	"&yandex/cloud/baremetal/v2/server.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$yandex/cloud/baremetal/v2/disk.proto\x1a'yandex/cloud/baremetal/v2/storage.proto\x1a2yandex/cloud/baremetal/v2/user_configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\x84\x0e\n" +
 	"\x06Server\x12#\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x06\xe0A\x03\xe0A\bR\bserverId\x12!\n" +
 	"\bcloud_id\x18\x02 \x01(\tB\x06\xe0A\x02\xe0A\x05R\acloudId\x12#\n" +
@@ -1270,9 +1270,8 @@ const file_yandex_cloud_baremetal_v2_server_proto_rawDesc = "" +
 	"\x10rental_period_id\x18\n" +
 	" \x01(\tB\x03\xe0A\x03R\x0erentalPeriodId\x12>\n" +
 	"\x15next_rental_period_id\x18\v \x01(\tB\v\xe0A\x02\x8a\xc81\x04<=20R\x12nextRentalPeriodId\x12T\n" +
-	"\x16rental_period_end_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x13rentalPeriodEndTime\x12f\n" +
-	"\x12network_interfaces\x18\r \x03(\v2+.yandex.cloud.baremetal.v2.NetworkInterfaceB\n" +
-	"\xe0A\x02\x82\xc81\x031-2R\x11networkInterfaces\x12g\n" +
+	"\x16rental_period_end_time\x18\f \x01(\v2\x1a.google.protobuf.TimestampB\x03\xe0A\x03R\x13rentalPeriodEndTime\x12_\n" +
+	"\x12network_interfaces\x18\r \x03(\v2+.yandex.cloud.baremetal.v2.NetworkInterfaceB\x03\xe0A\x02R\x11networkInterfaces\x12g\n" +
 	"\x12prolongation_state\x18\x0e \x01(\x0e23.yandex.cloud.baremetal.v2.Server.ProlongationStateB\x03\xe0A\x01R\x11prolongationState\x12:\n" +
 	"\x05disks\x18\x0f \x03(\v2\x1f.yandex.cloud.baremetal.v2.DiskB\x03\xe0A\x03R\x05disks\x12f\n" +
 	"\x14custom_configuration\x18\x11 \x01(\v2,.yandex.cloud.baremetal.v2.UserConfigurationB\x03\xe0A\x05H\x00R\x13customConfiguration\x12;\n" +

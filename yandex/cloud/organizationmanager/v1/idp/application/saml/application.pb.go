@@ -81,6 +81,63 @@ func (GroupDistributionType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_rawDescGZIP(), []int{0}
 }
 
+// Source of the group value provided to the application.
+type GroupAttributeValue int32
+
+const (
+	// The group value source is not specified, treated as NAME.
+	GroupAttributeValue_GROUP_ATTRIBUTE_VALUE_UNSPECIFIED GroupAttributeValue = 0
+	// The group name is provided to the application.
+	GroupAttributeValue_NAME GroupAttributeValue = 1
+	// The group ID is provided to the application.
+	GroupAttributeValue_ID GroupAttributeValue = 2
+	// The group external ID is provided to the application.
+	GroupAttributeValue_EXTERNAL_ID GroupAttributeValue = 3
+)
+
+// Enum value maps for GroupAttributeValue.
+var (
+	GroupAttributeValue_name = map[int32]string{
+		0: "GROUP_ATTRIBUTE_VALUE_UNSPECIFIED",
+		1: "NAME",
+		2: "ID",
+		3: "EXTERNAL_ID",
+	}
+	GroupAttributeValue_value = map[string]int32{
+		"GROUP_ATTRIBUTE_VALUE_UNSPECIFIED": 0,
+		"NAME":                              1,
+		"ID":                                2,
+		"EXTERNAL_ID":                       3,
+	}
+)
+
+func (x GroupAttributeValue) Enum() *GroupAttributeValue {
+	p := new(GroupAttributeValue)
+	*p = x
+	return p
+}
+
+func (x GroupAttributeValue) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GroupAttributeValue) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[1].Descriptor()
+}
+
+func (GroupAttributeValue) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[1]
+}
+
+func (x GroupAttributeValue) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GroupAttributeValue.Descriptor instead.
+func (GroupAttributeValue) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_rawDescGZIP(), []int{1}
+}
+
 // Represents the status of a SAML application.
 type Application_Status int32
 
@@ -126,11 +183,11 @@ func (x Application_Status) String() string {
 }
 
 func (Application_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[2].Descriptor()
 }
 
 func (Application_Status) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[1]
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[2]
 }
 
 func (x Application_Status) Number() protoreflect.EnumNumber {
@@ -179,11 +236,11 @@ func (x SingleLogoutServiceURL_ProtocolBinding) String() string {
 }
 
 func (SingleLogoutServiceURL_ProtocolBinding) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[2].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[3].Descriptor()
 }
 
 func (SingleLogoutServiceURL_ProtocolBinding) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[2]
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[3]
 }
 
 func (x SingleLogoutServiceURL_ProtocolBinding) Number() protoreflect.EnumNumber {
@@ -236,11 +293,11 @@ func (x SecuritySettings_SignatureMode) String() string {
 }
 
 func (SecuritySettings_SignatureMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[4].Descriptor()
 }
 
 func (SecuritySettings_SignatureMode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[3]
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[4]
 }
 
 func (x SecuritySettings_SignatureMode) Number() protoreflect.EnumNumber {
@@ -291,11 +348,11 @@ func (x NameId_Format) String() string {
 }
 
 func (NameId_Format) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[5].Descriptor()
 }
 
 func (NameId_Format) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[4]
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes[5]
 }
 
 func (x NameId_Format) Number() protoreflect.EnumNumber {
@@ -944,8 +1001,10 @@ type GroupClaimsSettings struct {
 	GroupDistributionType GroupDistributionType `protobuf:"varint,1,opt,name=group_distribution_type,json=groupDistributionType,proto3,enum=yandex.cloud.organizationmanager.v1.idp.application.saml.GroupDistributionType" json:"group_distribution_type,omitempty"`
 	// Name of the SAML attribute that contains group information.
 	GroupAttributeName string `protobuf:"bytes,2,opt,name=group_attribute_name,json=groupAttributeName,proto3" json:"group_attribute_name,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Source of the group value provided to the application.
+	GroupAttributeValue GroupAttributeValue `protobuf:"varint,3,opt,name=group_attribute_value,json=groupAttributeValue,proto3,enum=yandex.cloud.organizationmanager.v1.idp.application.saml.GroupAttributeValue" json:"group_attribute_value,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GroupClaimsSettings) Reset() {
@@ -990,6 +1049,13 @@ func (x *GroupClaimsSettings) GetGroupAttributeName() string {
 		return x.GroupAttributeName
 	}
 	return ""
+}
+
+func (x *GroupClaimsSettings) GetGroupAttributeValue() GroupAttributeValue {
+	if x != nil {
+		return x.GroupAttributeValue
+	}
+	return GroupAttributeValue_GROUP_ATTRIBUTE_VALUE_UNSPECIFIED
 }
 
 var File_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto protoreflect.FileDescriptor
@@ -1069,17 +1135,23 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_
 	"\x05EMAIL\x10\x02\"S\n" +
 	"\tAttribute\x12\"\n" +
 	"\x04name\x18\x01 \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=8000R\x04name\x12\"\n" +
-	"\x05value\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05value\"\xdd\x01\n" +
+	"\x05value\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05value\"\xe1\x02\n" +
 	"\x13GroupClaimsSettings\x12\x87\x01\n" +
 	"\x17group_distribution_type\x18\x01 \x01(\x0e2O.yandex.cloud.organizationmanager.v1.idp.application.saml.GroupDistributionTypeR\x15groupDistributionType\x12<\n" +
 	"\x14group_attribute_name\x18\x02 \x01(\tB\n" +
-	"\x8a\xc81\x06<=8000R\x12groupAttributeName*o\n" +
+	"\x8a\xc81\x06<=8000R\x12groupAttributeName\x12\x81\x01\n" +
+	"\x15group_attribute_value\x18\x03 \x01(\x0e2M.yandex.cloud.organizationmanager.v1.idp.application.saml.GroupAttributeValueR\x13groupAttributeValue*o\n" +
 	"\x15GroupDistributionType\x12'\n" +
 	"#GROUP_DISTRIBUTION_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04NONE\x10\x01\x12\x13\n" +
 	"\x0fASSIGNED_GROUPS\x10\x02\x12\x0e\n" +
 	"\n" +
-	"ALL_GROUPS\x10\x03B\xa1\x01\n" +
+	"ALL_GROUPS\x10\x03*_\n" +
+	"\x13GroupAttributeValue\x12%\n" +
+	"!GROUP_ATTRIBUTE_VALUE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04NAME\x10\x01\x12\x06\n" +
+	"\x02ID\x10\x02\x12\x0f\n" +
+	"\vEXTERNAL_ID\x10\x03B\xa1\x01\n" +
 	"<yandex.cloud.api.organizationmanager.v1.idp.application.samlZagithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp/application/saml;samlb\x06proto3"
 
 var (
@@ -1094,52 +1166,54 @@ func file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_p
 	return file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_goTypes = []any{
 	(GroupDistributionType)(0),                  // 0: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupDistributionType
-	(Application_Status)(0),                     // 1: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.Status
-	(SingleLogoutServiceURL_ProtocolBinding)(0), // 2: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.ProtocolBinding
-	(SecuritySettings_SignatureMode)(0),         // 3: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureMode
-	(NameId_Format)(0),                          // 4: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.Format
-	(*Application)(nil),                         // 5: yandex.cloud.organizationmanager.v1.idp.application.saml.Application
-	(*IdentityProviderMetadata)(nil),            // 6: yandex.cloud.organizationmanager.v1.idp.application.saml.IdentityProviderMetadata
-	(*ServiceProvider)(nil),                     // 7: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider
-	(*AssertionConsumerServiceURL)(nil),         // 8: yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL
-	(*SingleLogoutServiceURL)(nil),              // 9: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL
-	(*SecuritySettings)(nil),                    // 10: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings
-	(*AttributeMapping)(nil),                    // 11: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping
-	(*NameId)(nil),                              // 12: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId
-	(*Attribute)(nil),                           // 13: yandex.cloud.organizationmanager.v1.idp.application.saml.Attribute
-	(*GroupClaimsSettings)(nil),                 // 14: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings
-	nil,                                         // 15: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.LabelsEntry
-	(*timestamppb.Timestamp)(nil),               // 16: google.protobuf.Timestamp
-	(*wrapperspb.Int64Value)(nil),               // 17: google.protobuf.Int64Value
+	(GroupAttributeValue)(0),                    // 1: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupAttributeValue
+	(Application_Status)(0),                     // 2: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.Status
+	(SingleLogoutServiceURL_ProtocolBinding)(0), // 3: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.ProtocolBinding
+	(SecuritySettings_SignatureMode)(0),         // 4: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureMode
+	(NameId_Format)(0),                          // 5: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.Format
+	(*Application)(nil),                         // 6: yandex.cloud.organizationmanager.v1.idp.application.saml.Application
+	(*IdentityProviderMetadata)(nil),            // 7: yandex.cloud.organizationmanager.v1.idp.application.saml.IdentityProviderMetadata
+	(*ServiceProvider)(nil),                     // 8: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider
+	(*AssertionConsumerServiceURL)(nil),         // 9: yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL
+	(*SingleLogoutServiceURL)(nil),              // 10: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL
+	(*SecuritySettings)(nil),                    // 11: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings
+	(*AttributeMapping)(nil),                    // 12: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping
+	(*NameId)(nil),                              // 13: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId
+	(*Attribute)(nil),                           // 14: yandex.cloud.organizationmanager.v1.idp.application.saml.Attribute
+	(*GroupClaimsSettings)(nil),                 // 15: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings
+	nil,                                         // 16: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.LabelsEntry
+	(*timestamppb.Timestamp)(nil),               // 17: google.protobuf.Timestamp
+	(*wrapperspb.Int64Value)(nil),               // 18: google.protobuf.Int64Value
 }
 var file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_depIdxs = []int32{
-	1,  // 0: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.status:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Application.Status
-	15, // 1: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Application.LabelsEntry
-	16, // 2: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.created_at:type_name -> google.protobuf.Timestamp
-	16, // 3: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.updated_at:type_name -> google.protobuf.Timestamp
-	7,  // 4: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.service_provider:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider
-	10, // 5: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.security_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings
-	11, // 6: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.attribute_mapping:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping
-	14, // 7: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.group_claims_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings
-	6,  // 8: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.identity_provider_metadata:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.IdentityProviderMetadata
-	8,  // 9: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider.acs_urls:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL
-	9,  // 10: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider.slo_urls:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL
-	17, // 11: yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL.index:type_name -> google.protobuf.Int64Value
-	2,  // 12: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.protocol_binding:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.ProtocolBinding
-	3,  // 13: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.signature_mode:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureMode
-	12, // 14: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping.name_id:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.NameId
-	13, // 15: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping.attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Attribute
-	4,  // 16: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.format:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.Format
+	2,  // 0: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.status:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Application.Status
+	16, // 1: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Application.LabelsEntry
+	17, // 2: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.created_at:type_name -> google.protobuf.Timestamp
+	17, // 3: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.updated_at:type_name -> google.protobuf.Timestamp
+	8,  // 4: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.service_provider:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider
+	11, // 5: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.security_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings
+	12, // 6: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.attribute_mapping:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping
+	15, // 7: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.group_claims_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings
+	7,  // 8: yandex.cloud.organizationmanager.v1.idp.application.saml.Application.identity_provider_metadata:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.IdentityProviderMetadata
+	9,  // 9: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider.acs_urls:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL
+	10, // 10: yandex.cloud.organizationmanager.v1.idp.application.saml.ServiceProvider.slo_urls:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL
+	18, // 11: yandex.cloud.organizationmanager.v1.idp.application.saml.AssertionConsumerServiceURL.index:type_name -> google.protobuf.Int64Value
+	3,  // 12: yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.protocol_binding:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SingleLogoutServiceURL.ProtocolBinding
+	4,  // 13: yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.signature_mode:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.SecuritySettings.SignatureMode
+	13, // 14: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping.name_id:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.NameId
+	14, // 15: yandex.cloud.organizationmanager.v1.idp.application.saml.AttributeMapping.attributes:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.Attribute
+	5,  // 16: yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.format:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.NameId.Format
 	0,  // 17: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings.group_distribution_type:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.GroupDistributionType
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	1,  // 18: yandex.cloud.organizationmanager.v1.idp.application.saml.GroupClaimsSettings.group_attribute_value:type_name -> yandex.cloud.organizationmanager.v1.idp.application.saml.GroupAttributeValue
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_init() }
@@ -1152,7 +1226,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_p
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_application_saml_application_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,

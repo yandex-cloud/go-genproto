@@ -126,19 +126,19 @@ type RedisConfig struct {
 	ClientOutputBufferLimitPubsub *RedisConfig_ClientOutputBufferLimit `protobuf:"bytes,8,opt,name=client_output_buffer_limit_pubsub,json=clientOutputBufferLimitPubsub,proto3" json:"client_output_buffer_limit_pubsub,omitempty"`
 	// Redis connection output buffers limits for clients.
 	ClientOutputBufferLimitNormal *RedisConfig_ClientOutputBufferLimit `protobuf:"bytes,9,opt,name=client_output_buffer_limit_normal,json=clientOutputBufferLimitNormal,proto3" json:"client_output_buffer_limit_normal,omitempty"`
-	// Redis maxmemory percent
+	// Share of the host RAM used as the Redis maxmemory limit, in percent.
 	MaxmemoryPercent *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=maxmemory_percent,json=maxmemoryPercent,proto3" json:"maxmemory_percent,omitempty"`
 	// Maximum time in milliseconds for Lua scripts, 0 - disabled mechanism
 	LuaTimeLimit *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=lua_time_limit,json=luaTimeLimit,proto3" json:"lua_time_limit,omitempty"`
-	// Replication backlog size as a percentage of flavor maxmemory
+	// Replication backlog size as a percentage of the host RAM.
 	ReplBacklogSizePercent *wrapperspb.Int64Value `protobuf:"bytes,12,opt,name=repl_backlog_size_percent,json=replBacklogSizePercent,proto3" json:"repl_backlog_size_percent,omitempty"`
-	// Controls whether all hash slots must be covered by nodes
+	// Controls whether all hash slots must be covered by nodes.
 	ClusterRequireFullCoverage *wrapperspb.BoolValue `protobuf:"bytes,13,opt,name=cluster_require_full_coverage,json=clusterRequireFullCoverage,proto3" json:"cluster_require_full_coverage,omitempty"`
-	// Allows read operations when cluster is down
+	// Allows read operations when cluster is down.
 	ClusterAllowReadsWhenDown *wrapperspb.BoolValue `protobuf:"bytes,14,opt,name=cluster_allow_reads_when_down,json=clusterAllowReadsWhenDown,proto3" json:"cluster_allow_reads_when_down,omitempty"`
-	// Permits Pub/Sub shard operations when cluster is down
+	// Permits Pub/Sub shard operations when cluster is down.
 	ClusterAllowPubsubshardWhenDown *wrapperspb.BoolValue `protobuf:"bytes,15,opt,name=cluster_allow_pubsubshard_when_down,json=clusterAllowPubsubshardWhenDown,proto3" json:"cluster_allow_pubsubshard_when_down,omitempty"`
-	// The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10)
+	// The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
 	LfuDecayTime *wrapperspb.Int64Value `protobuf:"bytes,16,opt,name=lfu_decay_time,json=lfuDecayTime,proto3" json:"lfu_decay_time,omitempty"`
 	// Determines how the frequency counter represents key hits.
 	LfuLogFactor *wrapperspb.Int64Value `protobuf:"bytes,17,opt,name=lfu_log_factor,json=lfuLogFactor,proto3" json:"lfu_log_factor,omitempty"`
@@ -148,11 +148,12 @@ type RedisConfig struct {
 	AllowDataLoss *wrapperspb.BoolValue `protobuf:"bytes,19,opt,name=allow_data_loss,json=allowDataLoss,proto3" json:"allow_data_loss,omitempty"`
 	// Use JIT for lua scripts and functions
 	UseLuajit *wrapperspb.BoolValue `protobuf:"bytes,20,opt,name=use_luajit,json=useLuajit,proto3" json:"use_luajit,omitempty"`
-	// Allow redis to use io-threads
+	// Allow redis to use io-threads. When enabled, the number of threads is
+	// derived from the host class; when disabled, a single thread is used.
 	IoThreadsAllowed *wrapperspb.BoolValue `protobuf:"bytes,21,opt,name=io_threads_allowed,json=ioThreadsAllowed,proto3" json:"io_threads_allowed,omitempty"`
-	// Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist
+	// Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist.
 	ZsetMaxListpackEntries *wrapperspb.Int64Value `protobuf:"bytes,22,opt,name=zset_max_listpack_entries,json=zsetMaxListpackEntries,proto3" json:"zset_max_listpack_entries,omitempty"`
-	// AOF maximum size as a percentage of disk available
+	// AOF maximum size as a percentage of the host disk size.
 	AofMaxSizePercent *wrapperspb.Int64Value `protobuf:"bytes,23,opt,name=aof_max_size_percent,json=aofMaxSizePercent,proto3" json:"aof_max_size_percent,omitempty"`
 	// Enable active (online) memory defragmentation
 	Activedefrag *wrapperspb.BoolValue `protobuf:"bytes,24,opt,name=activedefrag,proto3" json:"activedefrag,omitempty"`
@@ -507,16 +508,15 @@ var File_yandex_cloud_mdb_redis_v1_config_redis_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xc8\x14\n" +
+	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x81\x15\n" +
 	"\vRedisConfig\x12h\n" +
-	"\x10maxmemory_policy\x18\x01 \x01(\x0e2=.yandex.cloud.mdb.redis.v1.config.RedisConfig.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x12>\n" +
-	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\atimeout\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12E\n" +
-	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
-	"\xfa\xc71\x061-1024R\tdatabases\x12\\\n" +
+	"\x10maxmemory_policy\x18\x01 \x01(\x0e2=.yandex.cloud.mdb.redis.v1.config.RedisConfig.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x125\n" +
+	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\atimeout\x12C\n" +
+	"\bpassword\x18\x03 \x01(\tB'\xf2\xc71#[a-zA-Z0-9@=+?*.,!&#$^<>_%-]{0,128}R\bpassword\x12A\n" +
+	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\tdatabases\x12\\\n" +
 	"\x17slowlog_log_slower_than\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x14slowlogLogSlowerThan\x12L\n" +
-	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x124\n" +
-	"\x16notify_keyspace_events\x18\a \x01(\tR\x14notifyKeyspaceEvents\x12\x8f\x01\n" +
+	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x12Q\n" +
+	"\x16notify_keyspace_events\x18\a \x01(\tB\x1b\xf2\xc71\x17[KEg$lshzxeAtmdn]{0,15}R\x14notifyKeyspaceEvents\x12\x8f\x01\n" +
 	"!client_output_buffer_limit_pubsub\x18\b \x01(\v2E.yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimitR\x1dclientOutputBufferLimitPubsub\x12\x8f\x01\n" +
 	"!client_output_buffer_limit_normal\x18\t \x01(\v2E.yandex.cloud.mdb.redis.v1.config.RedisConfig.ClientOutputBufferLimitR\x1dclientOutputBufferLimitNormal\x12R\n" +
 	"\x11maxmemory_percent\x18\n" +

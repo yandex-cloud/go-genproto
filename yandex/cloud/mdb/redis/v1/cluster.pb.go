@@ -26,6 +26,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Deployment environment.
 type Cluster_Environment int32
 
 const (
@@ -210,11 +211,14 @@ func (Cluster_Status) EnumDescriptor() ([]byte, []int) {
 type Cluster_PersistenceMode int32
 
 const (
-	// Cluster persistence mode is on.
+	// Persistence is enabled on every host of the cluster: the append-only file
+	// (AOF) is written on masters and replicas alike.
 	Cluster_ON Cluster_PersistenceMode = 0
-	// Cluster persistence mode is off.
+	// Persistence is disabled: neither the append-only file (AOF) nor RDB
+	// snapshots are written, all data is kept in memory only.
 	Cluster_OFF Cluster_PersistenceMode = 1
-	// Cluster persistence is on for replicas only.
+	// The append-only file (AOF) is written on replicas only, masters do not
+	// persist data to disk.
 	Cluster_ON_REPLICAS Cluster_PersistenceMode = 2
 )
 
@@ -487,7 +491,7 @@ type Cluster struct {
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Name of the Redis cluster.
-	// The name is unique within the folder. 3-63 characters long.
+	// The name is unique within the folder. 1-63 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the Redis cluster. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
@@ -526,8 +530,10 @@ type Cluster struct {
 	AuthSentinel bool `protobuf:"varint,21,opt,name=auth_sentinel,json=authSentinel,proto3" json:"auth_sentinel,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,22,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	// Indicates whether the cluster topology is highly available
+	IsHa          bool `protobuf:"varint,23,opt,name=is_ha,json=isHa,proto3" json:"is_ha,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -714,6 +720,14 @@ func (x *Cluster) GetDiskEncryptionKeyId() *wrapperspb.StringValue {
 	return nil
 }
 
+func (x *Cluster) GetIsHa() bool {
+	if x != nil {
+		return x.IsHa
+	}
+	return false
+}
+
+// Monitoring system.
 type Monitoring struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the monitoring system.
@@ -796,7 +810,8 @@ type ClusterConfig struct {
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Unified configuration of a Redis cluster.
+	// Unified configuration of a Redis cluster. Use this field for all currently
+	// available versions.
 	Redis *config.RedisConfigSet `protobuf:"bytes,9,opt,name=redis,proto3" json:"redis,omitempty"`
 	// Disk size autoscaling settings
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,10,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
@@ -804,9 +819,11 @@ type ClusterConfig struct {
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
 	// Valkey modules settings
 	Modules *ValkeyModules `protobuf:"bytes,14,opt,name=modules,proto3" json:"modules,omitempty"`
-	// Full version
+	// Full version of the server software, including the minor version.
 	FullVersion string `protobuf:"bytes,15,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
-	// Enables tiered storage (disk + NVMe hot tier). Forces edition to 9.1-ts.
+	// Enables tiered storage (disk + NVMe hot tier). Requires the tiered storage
+	// edition: when the flag is set on creation, the cluster version is switched
+	// to that edition.
 	TieredStorageEnabled *wrapperspb.BoolValue `protobuf:"bytes,16,opt,name=tiered_storage_enabled,json=tieredStorageEnabled,proto3" json:"tiered_storage_enabled,omitempty"`
 	// Shard autoscaling settings. When enabled, the cluster can automatically
 	// add or delete shards based on resource utilization metrics.
@@ -859,6 +876,7 @@ func (x *ClusterConfig) GetRedisConfig() isClusterConfig_RedisConfig {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 func (x *ClusterConfig) GetRedisConfig_5_0() *config.RedisConfigSet5_0 {
 	if x != nil {
 		if x, ok := x.RedisConfig.(*ClusterConfig_RedisConfig_5_0); ok {
@@ -868,6 +886,7 @@ func (x *ClusterConfig) GetRedisConfig_5_0() *config.RedisConfigSet5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 func (x *ClusterConfig) GetRedisConfig_6_0() *config.RedisConfigSet6_0 {
 	if x != nil {
 		if x, ok := x.RedisConfig.(*ClusterConfig_RedisConfig_6_0); ok {
@@ -877,6 +896,7 @@ func (x *ClusterConfig) GetRedisConfig_6_0() *config.RedisConfigSet6_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 func (x *ClusterConfig) GetRedisConfig_6_2() *config.RedisConfigSet6_2 {
 	if x != nil {
 		if x, ok := x.RedisConfig.(*ClusterConfig_RedisConfig_6_2); ok {
@@ -886,6 +906,7 @@ func (x *ClusterConfig) GetRedisConfig_6_2() *config.RedisConfigSet6_2 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 func (x *ClusterConfig) GetRedisConfig_7_0() *config.RedisConfigSet7_0 {
 	if x != nil {
 		if x, ok := x.RedisConfig.(*ClusterConfig_RedisConfig_7_0); ok {
@@ -971,21 +992,29 @@ type isClusterConfig_RedisConfig interface {
 
 type ClusterConfig_RedisConfig_5_0 struct {
 	// Configuration of a Redis 5.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_5_0 *config.RedisConfigSet5_0 `protobuf:"bytes,2,opt,name=redis_config_5_0,json=redisConfig_5_0,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_6_0 struct {
 	// Configuration of a Redis 6.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_6_0 *config.RedisConfigSet6_0 `protobuf:"bytes,6,opt,name=redis_config_6_0,json=redisConfig_6_0,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_6_2 struct {
 	// Configuration of a Redis 6.2 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_6_2 *config.RedisConfigSet6_2 `protobuf:"bytes,7,opt,name=redis_config_6_2,json=redisConfig_6_2,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_7_0 struct {
 	// Configuration of a Redis 7.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_7_0 *config.RedisConfigSet7_0 `protobuf:"bytes,8,opt,name=redis_config_7_0,json=redisConfig_7_0,proto3,oneof"`
 }
 
@@ -1248,7 +1277,8 @@ func (x *Service) GetHealth() Service_Health {
 type Resources struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the preset for computational resources available to a host (CPU, memory etc.).
-	// All available presets are listed in the [documentation](/docs/managed-redis/concepts/instance-types).
+	// To get the list of available presets, use a [ResourcePresetService.List] request;
+	// presets are also listed in the [documentation](/docs/managed-redis/concepts/instance-types).
 	ResourcePresetId string `protobuf:"bytes,1,opt,name=resource_preset_id,json=resourcePresetId,proto3" json:"resource_preset_id,omitempty"`
 	// Volume of the storage available to a host, in bytes.
 	DiskSize int64 `protobuf:"varint,2,opt,name=disk_size,json=diskSize,proto3" json:"disk_size,omitempty"`
@@ -1429,13 +1459,15 @@ func (x *DiskSizeAutoscaling) GetDiskSizeLimit() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Settings of the modules that extend the server with additional data types
+// and commands.
 type ValkeyModules struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// valkey-search module settings
+	// valkey-search module settings: vector and full-text search.
 	ValkeySearch *ValkeySearch `protobuf:"bytes,1,opt,name=valkey_search,json=valkeySearch,proto3" json:"valkey_search,omitempty"`
-	// valkey-json module settings
+	// valkey-json module settings: the JSON data type and commands.
 	ValkeyJson *ValkeyJson `protobuf:"bytes,2,opt,name=valkey_json,json=valkeyJson,proto3" json:"valkey_json,omitempty"`
-	// valkey-bloom module settings
+	// valkey-bloom module settings: probabilistic data structures.
 	ValkeyBloom   *ValkeyBloom `protobuf:"bytes,3,opt,name=valkey_bloom,json=valkeyBloom,proto3" json:"valkey_bloom,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1496,9 +1528,9 @@ type ValkeySearch struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Enable valkey-search module
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Controls the amount of threads executing queries
+	// Controls the amount of threads executing queries.
 	ReaderThreads *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=reader_threads,json=readerThreads,proto3" json:"reader_threads,omitempty"`
-	// Controls the amount of threads processing index mutations
+	// Controls the amount of threads processing index mutations.
 	WriterThreads *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=writer_threads,json=writerThreads,proto3" json:"writer_threads,omitempty"`
 	// Module version
 	Version       string `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"`
@@ -1672,9 +1704,10 @@ func (x *ValkeyBloom) GetVersion() string {
 	return ""
 }
 
+// Utilization thresholds of a single metric used by shard autoscaling.
 type ShardAutoscalingThreshold struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Threshold for downscaling
+	// Threshold for downscaling, in percent. Must be lower than [up_threshold].
 	DownThreshold *wrapperspb.Int64Value `protobuf:"bytes,1,opt,name=down_threshold,json=downThreshold,proto3" json:"down_threshold,omitempty"`
 	// Threshold for upscaling
 	UpThreshold   *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=up_threshold,json=upThreshold,proto3" json:"up_threshold,omitempty"`
@@ -1729,10 +1762,14 @@ func (x *ShardAutoscalingThreshold) GetUpThreshold() *wrapperspb.Int64Value {
 type ShardAutoscalingSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Whether shard autoscaling is enabled for the cluster.
+	// When enabled, at least one of the thresholds must have a non-zero
+	// [ShardAutoscalingThreshold.up_threshold].
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Minimum number of shards the cluster can scale down to.
 	MinShards int64 `protobuf:"varint,2,opt,name=min_shards,json=minShards,proto3" json:"min_shards,omitempty"`
 	// Maximum number of shards the cluster can scale up to.
+	// Must be greater than or equal to [min_shards] and must not exceed
+	// the maximum number of shards allowed for the cluster.
 	MaxShards int64 `protobuf:"varint,3,opt,name=max_shards,json=maxShards,proto3" json:"max_shards,omitempty"`
 	// CPU utilization threshold.
 	CpuThreshold *ShardAutoscalingThreshold `protobuf:"bytes,4,opt,name=cpu_threshold,json=cpuThreshold,proto3" json:"cpu_threshold,omitempty"`
@@ -1820,27 +1857,27 @@ var File_yandex_cloud_mdb_redis_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/mdb/redis/v1/cluster.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a,yandex/cloud/mdb/redis/v1/config/redis.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis5_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_2.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis7_0.proto\x1a+yandex/cloud/mdb/redis/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xfd\f\n" +
-	"\aCluster\x12\x14\n" +
-	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12!\n" +
-	"\tfolder_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12?\n" +
+	"'yandex/cloud/mdb/redis/v1/cluster.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a,yandex/cloud/mdb/redis/v1/config/redis.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis5_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_0.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis6_2.proto\x1a/yandex/cloud/mdb/redis/v1/config/redis7_0.proto\x1a+yandex/cloud/mdb/redis/v1/maintenance.proto\x1a\x1dyandex/cloud/validation.proto\"\xd6\f\n" +
+	"\aCluster\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
-	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampB\x04\xe8\xc71\x01R\tcreatedAt\x12\x18\n" +
-	"\x04name\x18\x04 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12F\n" +
-	"\x06labels\x18\x06 \x03(\v2..yandex.cloud.mdb.redis.v1.Cluster.LabelsEntryR\x06labels\x12V\n" +
-	"\venvironment\x18\a \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12E\n" +
+	"\x06labels\x18\x06 \x03(\v2..yandex.cloud.mdb.redis.v1.Cluster.LabelsEntryR\x06labels\x12P\n" +
+	"\venvironment\x18\a \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentR\venvironment\x12E\n" +
 	"\n" +
 	"monitoring\x18\b \x03(\v2%.yandex.cloud.mdb.redis.v1.MonitoringR\n" +
-	"monitoring\x12F\n" +
-	"\x06config\x18\t \x01(\v2(.yandex.cloud.mdb.redis.v1.ClusterConfigB\x04\xe8\xc71\x01R\x06config\x12#\n" +
+	"monitoring\x12@\n" +
+	"\x06config\x18\t \x01(\v2(.yandex.cloud.mdb.redis.v1.ClusterConfigR\x06config\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\x04\xe8\xc71\x01R\tnetworkId\x12G\n" +
-	"\x06health\x18\v \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.HealthB\x04\xe8\xc71\x01R\x06health\x12G\n" +
-	"\x06status\x18\f \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.StatusB\x04\xe8\xc71\x01R\x06status\x12\x18\n" +
-	"\asharded\x18\r \x01(\bR\asharded\x12a\n" +
-	"\x12maintenance_window\x18\x0e \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowB\x04\xe8\xc71\x01R\x11maintenanceWindow\x12\\\n" +
+	" \x01(\tR\tnetworkId\x12A\n" +
+	"\x06health\x18\v \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.HealthR\x06health\x12A\n" +
+	"\x06status\x18\f \x01(\x0e2).yandex.cloud.mdb.redis.v1.Cluster.StatusR\x06status\x12\x18\n" +
+	"\asharded\x18\r \x01(\bR\asharded\x12[\n" +
+	"\x12maintenance_window\x18\x0e \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowR\x11maintenanceWindow\x12\\\n" +
 	"\x11planned_operation\x18\x0f \x01(\v2/.yandex.cloud.mdb.redis.v1.MaintenanceOperationR\x10plannedOperation\x12,\n" +
 	"\x12security_group_ids\x18\x10 \x03(\tR\x10securityGroupIds\x12\x1f\n" +
 	"\vtls_enabled\x18\x11 \x01(\bR\n" +
@@ -1849,7 +1886,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x10persistence_mode\x18\x13 \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12-\n" +
 	"\x12announce_hostnames\x18\x14 \x01(\bR\x11announceHostnames\x12#\n" +
 	"\rauth_sentinel\x18\x15 \x01(\bR\fauthSentinel\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x16 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
+	"\x16disk_encryption_key_id\x18\x16 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12\x13\n" +
+	"\x05is_ha\x18\x17 \x01(\bR\x04isHa\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"I\n" +
@@ -1875,22 +1913,22 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x0fPersistenceMode\x12\x06\n" +
 	"\x02ON\x10\x00\x12\a\n" +
 	"\x03OFF\x10\x01\x12\x0f\n" +
-	"\vON_REPLICAS\x10\x02\"b\n" +
+	"\vON_REPLICAS\x10\x02\"V\n" +
 	"\n" +
-	"Monitoring\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x18\n" +
-	"\x04link\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x04link\"\xd6\t\n" +
+	"Monitoring\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xce\t\n" +
 	"\rClusterConfig\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12`\n" +
-	"\x10redis_config_5_0\x18\x02 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0H\x00R\x0fredisConfig_5_0\x12`\n" +
-	"\x10redis_config_6_0\x18\x06 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0H\x00R\x0fredisConfig_6_0\x12`\n" +
-	"\x10redis_config_6_2\x18\a \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2H\x00R\x0fredisConfig_6_2\x12`\n" +
-	"\x10redis_config_7_0\x18\b \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0H\x00R\x0fredisConfig_7_0\x12H\n" +
-	"\tresources\x18\x03 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12L\n" +
-	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayB\x04\xe8\xc71\x01R\x11backupWindowStart\x12?\n" +
-	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessB\x04\xe8\xc71\x01R\x06access\x12L\n" +
-	"\x05redis\x18\t \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfigSetB\x04\xe8\xc71\x01R\x05redis\x12b\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x12d\n" +
+	"\x10redis_config_5_0\x18\x02 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet5_0B\x02\x18\x01H\x00R\x0fredisConfig_5_0\x12d\n" +
+	"\x10redis_config_6_0\x18\x06 \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_0B\x02\x18\x01H\x00R\x0fredisConfig_6_0\x12d\n" +
+	"\x10redis_config_6_2\x18\a \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet6_2B\x02\x18\x01H\x00R\x0fredisConfig_6_2\x12d\n" +
+	"\x10redis_config_7_0\x18\b \x01(\v23.yandex.cloud.mdb.redis.v1.config.RedisConfigSet7_0B\x02\x18\x01H\x00R\x0fredisConfig_7_0\x12B\n" +
+	"\tresources\x18\x03 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesR\tresources\x12F\n" +
+	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x129\n" +
+	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessR\x06access\x12F\n" +
+	"\x05redis\x18\t \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfigSetR\x05redis\x12b\n" +
 	"\x15disk_size_autoscaling\x18\n" +
 	" \x01(\v2..yandex.cloud.mdb.redis.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\x12V\n" +
 	"\x19backup_retain_period_days\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12B\n" +
@@ -1898,20 +1936,20 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\ffull_version\x18\x0f \x01(\tR\vfullVersion\x12P\n" +
 	"\x16tiered_storage_enabled\x18\x10 \x01(\v2\x1a.google.protobuf.BoolValueR\x14tieredStorageEnabled\x12q\n" +
 	"\x1ashard_autoscaling_settings\x18\x11 \x01(\v23.yandex.cloud.mdb.redis.v1.ShardAutoscalingSettingsR\x18shardAutoscalingSettingsB\x0e\n" +
-	"\fredis_configJ\x04\b\v\x10\r\"F\n" +
-	"\x05Shard\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
+	"\fredis_configJ\x04\b\v\x10\r\":\n" +
+	"\x05Shard\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\"\x96\x05\n" +
-	"\x04Host\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x04name\x12#\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\"\xf2\x04\n" +
+	"\x04Host\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\tclusterId\x12\x1d\n" +
-	"\azone_id\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x06zoneId\x12\x1b\n" +
-	"\tsubnet_id\x18\x04 \x01(\tR\bsubnetId\x12H\n" +
-	"\tresources\x18\x05 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesB\x04\xe8\xc71\x01R\tresources\x12>\n" +
-	"\x04role\x18\x06 \x01(\x0e2$.yandex.cloud.mdb.redis.v1.Host.RoleB\x04\xe8\xc71\x01R\x04role\x12D\n" +
-	"\x06health\x18\a \x01(\x0e2&.yandex.cloud.mdb.redis.v1.Host.HealthB\x04\xe8\xc71\x01R\x06health\x12>\n" +
+	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12\x17\n" +
+	"\azone_id\x18\x03 \x01(\tR\x06zoneId\x12\x1b\n" +
+	"\tsubnet_id\x18\x04 \x01(\tR\bsubnetId\x12B\n" +
+	"\tresources\x18\x05 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesR\tresources\x128\n" +
+	"\x04role\x18\x06 \x01(\x0e2$.yandex.cloud.mdb.redis.v1.Host.RoleR\x04role\x12>\n" +
+	"\x06health\x18\a \x01(\x0e2&.yandex.cloud.mdb.redis.v1.Host.HealthR\x06health\x12>\n" +
 	"\bservices\x18\b \x03(\v2\".yandex.cloud.mdb.redis.v1.ServiceR\bservices\x12\x1d\n" +
 	"\n" +
 	"shard_name\x18\t \x01(\tR\tshardName\x12F\n" +
@@ -1927,10 +1965,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
 	"\x04DEAD\x10\x02\x12\f\n" +
-	"\bDEGRADED\x10\x03\"\x8b\x02\n" +
+	"\bDEGRADED\x10\x03\"\x85\x02\n" +
 	"\aService\x12;\n" +
-	"\x04type\x18\x01 \x01(\x0e2'.yandex.cloud.mdb.redis.v1.Service.TypeR\x04type\x12G\n" +
-	"\x06health\x18\x02 \x01(\x0e2).yandex.cloud.mdb.redis.v1.Service.HealthB\x04\xe8\xc71\x01R\x06health\"G\n" +
+	"\x04type\x18\x01 \x01(\x0e2'.yandex.cloud.mdb.redis.v1.Service.TypeR\x04type\x12A\n" +
+	"\x06health\x18\x02 \x01(\x0e2).yandex.cloud.mdb.redis.v1.Service.HealthR\x06health\"G\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
 	"\x05REDIS\x10\x01\x12\v\n" +
@@ -1939,9 +1977,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x06Health\x12\x12\n" +
 	"\x0eHEALTH_UNKNOWN\x10\x00\x12\t\n" +
 	"\x05ALIVE\x10\x01\x12\b\n" +
-	"\x04DEAD\x10\x02\"~\n" +
-	"\tResources\x122\n" +
-	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\x12\x1b\n" +
+	"\x04DEAD\x10\x02\"x\n" +
+	"\tResources\x12,\n" +
+	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\x12 \n" +
 	"\fdisk_type_id\x18\x03 \x01(\tR\n" +
 	"diskTypeId\">\n" +

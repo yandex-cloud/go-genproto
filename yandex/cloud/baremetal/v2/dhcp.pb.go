@@ -26,8 +26,10 @@ const (
 type DhcpOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Start IP address of the DHCP range (inclusive).
+	// The absence or null value indicates that calculation will be performed based on CIDR.
 	StartIp string `protobuf:"bytes,1,opt,name=start_ip,json=startIp,proto3" json:"start_ip,omitempty"`
 	// End IP address of the DHCP range (inclusive).
+	// The absence or null value indicates that calculation will be performed based on CIDR.
 	EndIp         string `protobuf:"bytes,2,opt,name=end_ip,json=endIp,proto3" json:"end_ip,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -83,8 +85,8 @@ const file_yandex_cloud_baremetal_v2_dhcp_proto_rawDesc = "" +
 	"\n" +
 	"$yandex/cloud/baremetal/v2/dhcp.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\"I\n" +
 	"\vDhcpOptions\x12\x1e\n" +
-	"\bstart_ip\x18\x01 \x01(\tB\x03\xe0A\x02R\astartIp\x12\x1a\n" +
-	"\x06end_ip\x18\x02 \x01(\tB\x03\xe0A\x02R\x05endIpBl\n" +
+	"\bstart_ip\x18\x01 \x01(\tB\x03\xe0A\x01R\astartIp\x12\x1a\n" +
+	"\x06end_ip\x18\x02 \x01(\tB\x03\xe0A\x01R\x05endIpBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (

@@ -324,7 +324,7 @@ type UpdateUserRequest struct {
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	// Field mask that specifies which fields of the Redis User resource should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New passwords the Redis user.
+	// New password of the Redis user, 8-128 characters long.
 	Passwords []string `protobuf:"bytes,4,rep,name=passwords,proto3" json:"passwords,omitempty"`
 	// New set of permissions to grant to the user.
 	Permissions *Permissions `protobuf:"bytes,5,opt,name=permissions,proto3" json:"permissions,omitempty"`

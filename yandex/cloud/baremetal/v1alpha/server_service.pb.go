@@ -308,8 +308,6 @@ type CreateServerRequest struct {
 	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
 	// to interact with other servers on the internal network and on the internet.
-	// Currently up to 2 network interfaces are supported: required private network interface and
-	// optional public network interface.
 	NetworkInterfaces []*NetworkInterfaceSpec `protobuf:"bytes,15,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// Operating system specific settings for provisioning the server. Optional, if omitted, the
 	// server will be created without an operating system.
@@ -473,8 +471,6 @@ type UpdateServerRequest struct {
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
 	// to interact with other servers on the internal network and on the internet.
-	// Currently up to 2 network interfaces are supported: required private network interface and
-	// optional public network interface.
 	NetworkInterfaces []*NetworkInterfaceSpec `protobuf:"bytes,5,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// Resource labels as `key:value` pairs.
 	Labels        map[string]string `protobuf:"bytes,200,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -1606,8 +1602,6 @@ type BatchCreateServersRequest struct {
 	RentalPeriodId string `protobuf:"bytes,11,opt,name=rental_period_id,json=rentalPeriodId,proto3" json:"rental_period_id,omitempty"`
 	// Network configuration for the server. Specifies how the network interface is configured
 	// to interact with other servers on the internal network and on the internet.
-	// Currently up to 2 network interfaces are supported: required private network interface and
-	// optional public network interface.
 	NetworkInterfaces []*NetworkInterfaceSpec `protobuf:"bytes,15,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// Operating system specific settings for provisioning the server. Optional, if omitted, the
 	// server will be created without an operating system.
@@ -2108,7 +2102,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x06filter\x18g \x01(\tR\x06filterJ\x04\b\x02\x10d\"\x84\x01\n" +
 	"\x12ListServerResponse\x12@\n" +
 	"\aservers\x18\x01 \x03(\v2&.yandex.cloud.baremetal.v1alpha.ServerR\aservers\x12&\n" +
-	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x9f\x06\n" +
+	"\x0fnext_page_token\x18d \x01(\tR\rnextPageTokenJ\x04\b\x02\x10d\"\x96\x06\n" +
 	"\x13CreateServerRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
@@ -2116,23 +2110,23 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
 	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12I\n" +
 	"\x10configuration_id\x18\x05 \x01(\tB\x1e\xe8\xc71\x00\xf2\xc71\x14([a-z][a-z0-9]{19})|\x18\x01R\x0fconfigurationId\x122\n" +
-	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
-	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +
+	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12c\n" +
+	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecR\x11networkInterfaces\x12X\n" +
 	"\x10os_settings_spec\x18\x10 \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpec\x12\x95\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2?.yandex.cloud.baremetal.v1alpha.CreateServerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x06\x10\vJ\x04\b\f\x10\x0fJ\x05\b\x11\x10\xc8\x01\"3\n" +
 	"\x14CreateServerMetadata\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xbb\x04\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\"\xb2\x04\n" +
 	"\x13UpdateServerRequest\x125\n" +
 	"\tserver_id\x18\x01 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\bserverId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12:\n" +
 	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-63R\x04name\x12,\n" +
 	"\vdescription\x18\x04 \x01(\tB\n" +
-	"\x8a\xc81\x06<=1024R\vdescription\x12l\n" +
-	"\x12network_interfaces\x18\x05 \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x031-2R\x11networkInterfaces\x12\x95\x01\n" +
+	"\x8a\xc81\x06<=1024R\vdescription\x12c\n" +
+	"\x12network_interfaces\x18\x05 \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecR\x11networkInterfaces\x12\x95\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2?.yandex.cloud.baremetal.v1alpha.UpdateServerRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2197,7 +2191,7 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\tsecret_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bsecretId\x12\x1d\n" +
 	"\n" +
 	"version_id\x18\x02 \x01(\tR\tversionId\x12\x16\n" +
-	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key\"\xd5\x06\n" +
+	"\x03key\x18\x03 \x01(\tB\x04\xe8\xc71\x01R\x03key\"\xcc\x06\n" +
 	"\x19BatchCreateServersRequest\x129\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x1c\xf2\xc71\x10[a-z][a-z0-9.-]*\x8a\xc81\x04<=50R\bfolderId\x12:\n" +
 	"\x04name\x18\x02 \x01(\tB&\xf2\xc71\x1a[a-z]([-a-z0-9]*[a-z0-9])?\x8a\xc81\x042-56R\x04name\x12,\n" +
@@ -2205,8 +2199,8 @@ const file_yandex_cloud_baremetal_v1alpha_server_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1024R\vdescription\x126\n" +
 	"\x10hardware_pool_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=20R\x0ehardwarePoolId\x12I\n" +
 	"\x10configuration_id\x18\x05 \x01(\tB\x1e\xe8\xc71\x00\xf2\xc71\x14([a-z][a-z0-9]{19})|\x18\x01R\x0fconfigurationId\x122\n" +
-	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12l\n" +
-	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecB\a\x82\xc81\x03<=2R\x11networkInterfaces\x12X\n" +
+	"\x10rental_period_id\x18\v \x01(\tB\b\x8a\xc81\x04<=20R\x0erentalPeriodId\x12c\n" +
+	"\x12network_interfaces\x18\x0f \x03(\v24.yandex.cloud.baremetal.v1alpha.NetworkInterfaceSpecR\x11networkInterfaces\x12X\n" +
 	"\x10os_settings_spec\x18\x10 \x01(\v2..yandex.cloud.baremetal.v1alpha.OsSettingsSpecR\x0eosSettingsSpec\x12\x9b\x01\n" +
 	"\x06labels\x18\xc8\x01 \x03(\v2E.yandex.cloud.baremetal.v1alpha.BatchCreateServersRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12 \n" +
 	"\x05count\x18\xac\x02 \x01(\x03B\t\xfa\xc71\x051-100R\x05count\x1a9\n" +

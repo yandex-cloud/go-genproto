@@ -50,6 +50,10 @@ func (m *GroupClaimsSettings) SetGroupDistributionType(v GroupDistributionType) 
 	m.GroupDistributionType = v
 }
 
+func (m *GroupClaimsSettings) SetGroupClaimValue(v GroupClaimValue) {
+	m.GroupClaimValue = v
+}
+
 func (m *ClientGrant) SetClientId(v string) {
 	m.ClientId = v
 }

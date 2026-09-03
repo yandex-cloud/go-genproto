@@ -141,6 +141,63 @@ func (GroupDistributionType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_rawDescGZIP(), []int{1}
 }
 
+// Source of the group value provided to the application
+type GroupClaimValue int32
+
+const (
+	// The group value source is unspecified, treated as NAME
+	GroupClaimValue_GROUP_CLAIM_VALUE_UNSPECIFIED GroupClaimValue = 0
+	// The group name is provided to the application
+	GroupClaimValue_NAME GroupClaimValue = 1
+	// The group ID is provided to the application
+	GroupClaimValue_ID GroupClaimValue = 2
+	// The group external ID is provided to the application
+	GroupClaimValue_EXTERNAL_ID GroupClaimValue = 3
+)
+
+// Enum value maps for GroupClaimValue.
+var (
+	GroupClaimValue_name = map[int32]string{
+		0: "GROUP_CLAIM_VALUE_UNSPECIFIED",
+		1: "NAME",
+		2: "ID",
+		3: "EXTERNAL_ID",
+	}
+	GroupClaimValue_value = map[string]int32{
+		"GROUP_CLAIM_VALUE_UNSPECIFIED": 0,
+		"NAME":                          1,
+		"ID":                            2,
+		"EXTERNAL_ID":                   3,
+	}
+)
+
+func (x GroupClaimValue) Enum() *GroupClaimValue {
+	p := new(GroupClaimValue)
+	*p = x
+	return p
+}
+
+func (x GroupClaimValue) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GroupClaimValue) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_enumTypes[2].Descriptor()
+}
+
+func (GroupClaimValue) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_enumTypes[2]
+}
+
+func (x GroupClaimValue) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GroupClaimValue.Descriptor instead.
+func (GroupClaimValue) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_rawDescGZIP(), []int{2}
+}
+
 // An OAuth application resource.
 type Application struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -274,8 +331,10 @@ type GroupClaimsSettings struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Represents current distribution type of the groups. I.e. which groups are visible for the application users.
 	GroupDistributionType GroupDistributionType `protobuf:"varint,1,opt,name=group_distribution_type,json=groupDistributionType,proto3,enum=yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionType" json:"group_distribution_type,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// Source of the group value provided to the application.
+	GroupClaimValue GroupClaimValue `protobuf:"varint,2,opt,name=group_claim_value,json=groupClaimValue,proto3,enum=yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimValue" json:"group_claim_value,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GroupClaimsSettings) Reset() {
@@ -313,6 +372,13 @@ func (x *GroupClaimsSettings) GetGroupDistributionType() GroupDistributionType {
 		return x.GroupDistributionType
 	}
 	return GroupDistributionType_GROUP_DISTRIBUTION_TYPE_UNSPECIFIED
+}
+
+func (x *GroupClaimsSettings) GetGroupClaimValue() GroupClaimValue {
+	if x != nil {
+		return x.GroupClaimValue
+	}
+	return GroupClaimValue_GROUP_CLAIM_VALUE_UNSPECIFIED
 }
 
 // Represents connection to the OAuth client with specified scopes
@@ -391,9 +457,10 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xa0\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x02\n" +
 	"\x13GroupClaimsSettings\x12\x88\x01\n" +
-	"\x17group_distribution_type\x18\x01 \x01(\x0e2P.yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionTypeR\x15groupDistributionType\"\x8a\x01\n" +
+	"\x17group_distribution_type\x18\x01 \x01(\x0e2P.yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionTypeR\x15groupDistributionType\x12v\n" +
+	"\x11group_claim_value\x18\x02 \x01(\x0e2J.yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimValueR\x0fgroupClaimValue\"\x8a\x01\n" +
 	"\vClientGrant\x12)\n" +
 	"\tclient_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bclientId\x12P\n" +
 	"\x11authorized_scopes\x18\x02 \x03(\tB#\xf2\xc71\f[!#-\\[\\]-~]+\x82\xc81\x061-1000\x8a\xc81\x05<=255R\x10authorizedScopes*W\n" +
@@ -409,7 +476,12 @@ const file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application
 	"\x04NONE\x10\x01\x12\x13\n" +
 	"\x0fASSIGNED_GROUPS\x10\x02\x12\x0e\n" +
 	"\n" +
-	"ALL_GROUPS\x10\x03B\xa4\x01\n" +
+	"ALL_GROUPS\x10\x03*W\n" +
+	"\x0fGroupClaimValue\x12!\n" +
+	"\x1dGROUP_CLAIM_VALUE_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04NAME\x10\x01\x12\x06\n" +
+	"\x02ID\x10\x02\x12\x0f\n" +
+	"\vEXTERNAL_ID\x10\x03B\xa4\x01\n" +
 	"=yandex.cloud.api.organizationmanager.v1.idp.application.oauthZcgithub.com/yandex-cloud/go-genproto/yandex/cloud/organizationmanager/v1/idp/application/oauth;oauthb\x06proto3"
 
 var (
@@ -424,30 +496,32 @@ func file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_
 	return file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_rawDescData
 }
 
-var file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_goTypes = []any{
 	(Status)(0),                   // 0: yandex.cloud.organizationmanager.v1.idp.application.oauth.Status
 	(GroupDistributionType)(0),    // 1: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionType
-	(*Application)(nil),           // 2: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application
-	(*GroupClaimsSettings)(nil),   // 3: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings
-	(*ClientGrant)(nil),           // 4: yandex.cloud.organizationmanager.v1.idp.application.oauth.ClientGrant
-	nil,                           // 5: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(GroupClaimValue)(0),          // 2: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimValue
+	(*Application)(nil),           // 3: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application
+	(*GroupClaimsSettings)(nil),   // 4: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings
+	(*ClientGrant)(nil),           // 5: yandex.cloud.organizationmanager.v1.idp.application.oauth.ClientGrant
+	nil,                           // 6: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_depIdxs = []int32{
-	3, // 0: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.group_claims_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings
-	4, // 1: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.client_grant:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.ClientGrant
+	4, // 0: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.group_claims_settings:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings
+	5, // 1: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.client_grant:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.ClientGrant
 	0, // 2: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.status:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.Status
-	5, // 3: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.LabelsEntry
-	6, // 4: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.created_at:type_name -> google.protobuf.Timestamp
-	6, // 5: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.updated_at:type_name -> google.protobuf.Timestamp
+	6, // 3: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.labels:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.LabelsEntry
+	7, // 4: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.created_at:type_name -> google.protobuf.Timestamp
+	7, // 5: yandex.cloud.organizationmanager.v1.idp.application.oauth.Application.updated_at:type_name -> google.protobuf.Timestamp
 	1, // 6: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings.group_distribution_type:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupDistributionType
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	2, // 7: yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimsSettings.group_claim_value:type_name -> yandex.cloud.organizationmanager.v1.idp.application.oauth.GroupClaimValue
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_init() }
@@ -460,7 +534,7 @@ func file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_rawDesc), len(file_yandex_cloud_organizationmanager_v1_idp_application_oauth_application_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -147,6 +147,8 @@ const (
 	ListClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED ListClusterLogsRequest_ServiceType = 0
 	// Logs of Redis activity.
 	ListClusterLogsRequest_REDIS ListClusterLogsRequest_ServiceType = 1
+	// Valkey audit logs
+	ListClusterLogsRequest_VALKEY_AUDIT ListClusterLogsRequest_ServiceType = 2
 )
 
 // Enum value maps for ListClusterLogsRequest_ServiceType.
@@ -154,10 +156,12 @@ var (
 	ListClusterLogsRequest_ServiceType_name = map[int32]string{
 		0: "SERVICE_TYPE_UNSPECIFIED",
 		1: "REDIS",
+		2: "VALKEY_AUDIT",
 	}
 	ListClusterLogsRequest_ServiceType_value = map[string]int32{
 		"SERVICE_TYPE_UNSPECIFIED": 0,
 		"REDIS":                    1,
+		"VALKEY_AUDIT":             2,
 	}
 )
 
@@ -194,6 +198,8 @@ const (
 	StreamClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED StreamClusterLogsRequest_ServiceType = 0
 	// Logs of Redis activity.
 	StreamClusterLogsRequest_REDIS StreamClusterLogsRequest_ServiceType = 1
+	// Valkey audit logs
+	StreamClusterLogsRequest_VALKEY_AUDIT StreamClusterLogsRequest_ServiceType = 2
 )
 
 // Enum value maps for StreamClusterLogsRequest_ServiceType.
@@ -201,10 +207,12 @@ var (
 	StreamClusterLogsRequest_ServiceType_name = map[int32]string{
 		0: "SERVICE_TYPE_UNSPECIFIED",
 		1: "REDIS",
+		2: "VALKEY_AUDIT",
 	}
 	StreamClusterLogsRequest_ServiceType_value = map[string]int32{
 		"SERVICE_TYPE_UNSPECIFIED": 0,
 		"REDIS":                    1,
+		"VALKEY_AUDIT":             2,
 	}
 )
 
@@ -282,7 +290,7 @@ func (x *EnableShardingClusterMetadata) GetClusterId() string {
 
 type EnableShardingClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the Redis cluster to return.
+	// ID of the Redis cluster to return.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1560,6 +1568,7 @@ type RestoreClusterRequest struct {
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
 	// Configurations for Redis hosts that should be created for
 	// the cluster that is being created from the backup.
+	// If left empty, the hosts are taken from the source cluster of the backup.
 	HostSpecs []*HostSpec `protobuf:"bytes,7,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	// ID of the network to create the Redis cluster in.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -1871,9 +1880,9 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamppb.Timestamp 
 
 type RescheduleMaintenanceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the Redis cluster.
+	// ID of the Redis cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The time until which this maintenance operation is to be delayed.
+	// The time until which this maintenance operation is to be delayed.
 	DelayedUntil  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2367,7 +2376,7 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the Redis cluster.
+	// ID of the Redis cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
@@ -3126,7 +3135,6 @@ type ListClusterShardsRequest struct {
 	// results is larger than [page_size],
 	// the service returns a [ListClusterShardsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	// Default value: 100.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListClusterShardsResponse.next_page_token] returned by the previous list request.
@@ -3750,7 +3758,8 @@ type ConfigSpec struct {
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Unified configuration of a Redis cluster
+	// Unified configuration of a Redis cluster. Use this field for all currently
+	// available versions.
 	Redis *config.RedisConfig `protobuf:"bytes,11,opt,name=redis,proto3" json:"redis,omitempty"`
 	// Disk size autoscaling settings
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,12,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`
@@ -3758,7 +3767,9 @@ type ConfigSpec struct {
 	BackupRetainPeriodDays *wrapperspb.Int64Value `protobuf:"bytes,13,opt,name=backup_retain_period_days,json=backupRetainPeriodDays,proto3" json:"backup_retain_period_days,omitempty"`
 	// Valkey modules settings
 	Modules *ValkeyModules `protobuf:"bytes,14,opt,name=modules,proto3" json:"modules,omitempty"`
-	// Enables tiered storage (disk + NVMe hot tier). Forces edition to 9.1-ts.
+	// Enables tiered storage (disk + NVMe hot tier). Requires the tiered storage
+	// edition: when the flag is set on creation, the cluster version is switched
+	// to that edition.
 	TieredStorageEnabled *wrapperspb.BoolValue `protobuf:"bytes,15,opt,name=tiered_storage_enabled,json=tieredStorageEnabled,proto3" json:"tiered_storage_enabled,omitempty"`
 	// Shard autoscaling settings for the cluster.
 	ShardAutoscalingSettings *ShardAutoscalingSettings `protobuf:"bytes,16,opt,name=shard_autoscaling_settings,json=shardAutoscalingSettings,proto3" json:"shard_autoscaling_settings,omitempty"`
@@ -3810,6 +3821,7 @@ func (x *ConfigSpec) GetRedisSpec() isConfigSpec_RedisSpec {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 func (x *ConfigSpec) GetRedisConfig_5_0() *config.RedisConfig5_0 {
 	if x != nil {
 		if x, ok := x.RedisSpec.(*ConfigSpec_RedisConfig_5_0); ok {
@@ -3819,6 +3831,7 @@ func (x *ConfigSpec) GetRedisConfig_5_0() *config.RedisConfig5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 func (x *ConfigSpec) GetRedisConfig_6_0() *config.RedisConfig6_0 {
 	if x != nil {
 		if x, ok := x.RedisSpec.(*ConfigSpec_RedisConfig_6_0); ok {
@@ -3828,6 +3841,7 @@ func (x *ConfigSpec) GetRedisConfig_6_0() *config.RedisConfig6_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 func (x *ConfigSpec) GetRedisConfig_6_2() *config.RedisConfig6_2 {
 	if x != nil {
 		if x, ok := x.RedisSpec.(*ConfigSpec_RedisConfig_6_2); ok {
@@ -3837,6 +3851,7 @@ func (x *ConfigSpec) GetRedisConfig_6_2() *config.RedisConfig6_2 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 func (x *ConfigSpec) GetRedisConfig_7_0() *config.RedisConfig7_0 {
 	if x != nil {
 		if x, ok := x.RedisSpec.(*ConfigSpec_RedisConfig_7_0); ok {
@@ -3915,21 +3930,29 @@ type isConfigSpec_RedisSpec interface {
 
 type ConfigSpec_RedisConfig_5_0 struct {
 	// Configuration of a Redis 5.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_5_0 *config.RedisConfig5_0 `protobuf:"bytes,2,opt,name=redis_config_5_0,json=redisConfig_5_0,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_6_0 struct {
 	// Configuration of a Redis 6.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_6_0 *config.RedisConfig6_0 `protobuf:"bytes,6,opt,name=redis_config_6_0,json=redisConfig_6_0,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_6_2 struct {
 	// Configuration of a Redis 6.2 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_6_2 *config.RedisConfig6_2 `protobuf:"bytes,7,opt,name=redis_config_6_2,json=redisConfig_6_2,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_7_0 struct {
 	// Configuration of a Redis 7.0 server.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_7_0 *config.RedisConfig7_0 `protobuf:"bytes,8,opt,name=redis_config_7_0,json=redisConfig_7_0,proto3,oneof"`
 }
 
@@ -3965,21 +3988,20 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.redis.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x80\n" +
-	"\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfb\t\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.CreateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x94\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.CreateClusterRequest.LabelsEntryB?\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12L\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12J\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12(\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12'\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12\x18\n" +
+	" \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12\x18\n" +
 	"\asharded\x18\v \x01(\bR\asharded\x12,\n" +
 	"\x12security_group_ids\x18\f \x03(\tR\x10securityGroupIds\x12;\n" +
 	"\vtls_enabled\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
@@ -3998,14 +4020,14 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x94\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8f\a\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x98\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.UpdateClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12F\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x94\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2;.yandex.cloud.mdb.redis.v1.UpdateClusterRequest.LabelsEntryB?\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12F\n" +
 	"\vconfig_spec\x18\x05 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecR\n" +
 	"configSpec\x12.\n" +
 	"\x04name\x18\x06 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12[\n" +
@@ -4013,9 +4035,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\b \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x12]\n" +
 	"\x10persistence_mode\x18\n" +
-	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12(\n" +
+	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12'\n" +
 	"\n" +
-	"network_id\x18\v \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12-\n" +
+	"network_id\x18\v \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12-\n" +
 	"\x12announce_hostnames\x18\f \x01(\bR\x11announceHostnames\x12#\n" +
 	"\rauth_sentinel\x18\r \x01(\bR\fauthSentinel\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -4065,20 +4087,20 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x93\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8e\n" +
 	"\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
-	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x99\x01\n" +
-	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.mdb.redis.v1.RestoreClusterRequest.LabelsEntryBC\xf2\xc71\x0f[-_./\\@0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
+	"\vdescription\x18\x03 \x01(\tB\t\x8a\xc81\x05<=256R\vdescription\x12\x95\x01\n" +
+	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.mdb.redis.v1.RestoreClusterRequest.LabelsEntryB?\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x1c\x12\x14[a-z][-_./\\@0-9a-z]*\x1a\x04<=63R\x06labels\x12V\n" +
 	"\venvironment\x18\x05 \x01(\x0e2..yandex.cloud.mdb.redis.v1.Cluster.EnvironmentB\x04\xe8\xc71\x01R\venvironment\x12L\n" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12B\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12(\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12'\n" +
 	"\n" +
-	"network_id\x18\b \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12%\n" +
+	"network_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
 	"\x12security_group_ids\x18\n" +
 	" \x03(\tR\x10securityGroupIds\x12;\n" +
@@ -4109,10 +4131,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x1bRESCHEDULE_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tIMMEDIATE\x10\x01\x12\x19\n" +
 	"\x15NEXT_AVAILABLE_WINDOW\x10\x02\x12\x11\n" +
-	"\rSPECIFIC_TIME\x10\x03\"\x93\x01\n" +
-	"\x1dRescheduleMaintenanceMetadata\x12+\n" +
+	"\rSPECIFIC_TIME\x10\x03\"\x85\x01\n" +
+	"\x1dRescheduleMaintenanceMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12?\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12?\n" +
 	"\rdelayed_until\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\fdelayedUntilJ\x04\b\x02\x10\x04\"\xf0\x02\n" +
 	"\x1bStartClusterFailoverRequest\x12+\n" +
 	"\n" +
@@ -4137,7 +4159,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x03(\v21.yandex.cloud.mdb.redis.v1.LogRecord.MessageEntryR\amessage\x1a:\n" +
 	"\fMessageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb9\x04\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcb\x04\n" +
 	"\x16ListClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4153,16 +4175,17 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x06filter\x18\t \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\x12\x19\n" +
 	"\border_by\x18\n" +
-	" \x01(\tR\aorderBy\"6\n" +
+	" \x01(\tR\aorderBy\"H\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
-	"\x05REDIS\x10\x01\"{\n" +
+	"\x05REDIS\x10\x01\x12\x10\n" +
+	"\fVALKEY_AUDIT\x10\x02\"{\n" +
 	"\x17ListClusterLogsResponse\x128\n" +
 	"\x04logs\x18\x01 \x03(\v2$.yandex.cloud.mdb.redis.v1.LogRecordR\x04logs\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"{\n" +
 	"\x0fStreamLogRecord\x12<\n" +
 	"\x06record\x18\x01 \x01(\v2$.yandex.cloud.mdb.redis.v1.LogRecordR\x06record\x12*\n" +
-	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xc8\x03\n" +
+	"\x11next_record_token\x18\x02 \x01(\tR\x0fnextRecordToken\"\xda\x03\n" +
 	"\x18StreamClusterLogsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
@@ -4172,10 +4195,11 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12,\n" +
 	"\frecord_token\x18\x06 \x01(\tB\t\x8a\xc81\x05<=100R\vrecordToken\x12\"\n" +
 	"\x06filter\x18\a \x01(\tB\n" +
-	"\x8a\xc81\x06<=1000R\x06filter\"6\n" +
+	"\x8a\xc81\x06<=1000R\x06filter\"H\n" +
 	"\vServiceType\x12\x1c\n" +
 	"\x18SERVICE_TYPE_UNSPECIFIED\x10\x00\x12\t\n" +
-	"\x05REDIS\x10\x01\"\x9e\x01\n" +
+	"\x05REDIS\x10\x01\x12\x10\n" +
+	"\fVALKEY_AUDIT\x10\x02\"\x9e\x01\n" +
 	"\x1cListClusterOperationsRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
@@ -4212,10 +4236,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12J\n" +
 	"\n" +
-	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"e\n" +
-	"\x17AddClusterHostsMetadata\x12+\n" +
+	"host_specs\x18\x02 \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\"W\n" +
+	"\x17AddClusterHostsMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12\x1d\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1d\n" +
 	"\n" +
 	"host_names\x18\x02 \x03(\tR\thostNames\"x\n" +
 	"\x19DeleteClusterHostsRequest\x12+\n" +
@@ -4276,21 +4300,21 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x10replica_priority\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0freplicaPriority\x12(\n" +
 	"\x10assign_public_ip\x18\x03 \x01(\bR\x0eassignPublicIp\x12;\n" +
 	"\vupdate_mask\x18\x04 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
-	"updateMask\"\x81\x02\n" +
-	"\bHostSpec\x12!\n" +
-	"\azone_id\x18\x01 \x01(\tB\b\x8a\xc81\x04<=50R\x06zoneId\x12%\n" +
-	"\tsubnet_id\x18\x02 \x01(\tB\b\x8a\xc81\x04<=50R\bsubnetId\x129\n" +
+	"updateMask\"\xed\x01\n" +
+	"\bHostSpec\x12\x17\n" +
+	"\azone_id\x18\x01 \x01(\tR\x06zoneId\x12\x1b\n" +
+	"\tsubnet_id\x18\x02 \x01(\tR\bsubnetId\x129\n" +
 	"\n" +
 	"shard_name\x18\x03 \x01(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\tshardName\x12F\n" +
 	"\x10replica_priority\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0freplicaPriority\x12(\n" +
-	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\x91\t\n" +
+	"\x10assign_public_ip\x18\x05 \x01(\bR\x0eassignPublicIp\"\xa1\t\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\tR\aversion\x12]\n" +
-	"\x10redis_config_5_0\x18\x02 \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig5_0H\x00R\x0fredisConfig_5_0\x12]\n" +
-	"\x10redis_config_6_0\x18\x06 \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig6_0H\x00R\x0fredisConfig_6_0\x12]\n" +
-	"\x10redis_config_6_2\x18\a \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig6_2H\x00R\x0fredisConfig_6_2\x12]\n" +
-	"\x10redis_config_7_0\x18\b \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig7_0H\x00R\x0fredisConfig_7_0\x12B\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x12a\n" +
+	"\x10redis_config_5_0\x18\x02 \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig5_0B\x02\x18\x01H\x00R\x0fredisConfig_5_0\x12a\n" +
+	"\x10redis_config_6_0\x18\x06 \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig6_0B\x02\x18\x01H\x00R\x0fredisConfig_6_0\x12a\n" +
+	"\x10redis_config_6_2\x18\a \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig6_2B\x02\x18\x01H\x00R\x0fredisConfig_6_2\x12a\n" +
+	"\x10redis_config_7_0\x18\b \x01(\v20.yandex.cloud.mdb.redis.v1.config.RedisConfig7_0B\x02\x18\x01H\x00R\x0fredisConfig_7_0\x12B\n" +
 	"\tresources\x18\x03 \x01(\v2$.yandex.cloud.mdb.redis.v1.ResourcesR\tresources\x12F\n" +
 	"\x13backup_window_start\x18\x04 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x129\n" +
 	"\x06access\x18\x05 \x01(\v2!.yandex.cloud.mdb.redis.v1.AccessR\x06access\x12C\n" +

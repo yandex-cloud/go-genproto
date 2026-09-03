@@ -146,3 +146,7 @@ func (m *GroupClaimsSettings) SetGroupDistributionType(v GroupDistributionType) 
 func (m *GroupClaimsSettings) SetGroupAttributeName(v string) {
 	m.GroupAttributeName = v
 }
+
+func (m *GroupClaimsSettings) SetGroupAttributeValue(v GroupAttributeValue) {
+	m.GroupAttributeValue = v
+}

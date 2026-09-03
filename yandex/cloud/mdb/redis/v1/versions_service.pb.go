@@ -29,7 +29,7 @@ type ListVersionsRequest struct {
 	// The maximum number of results per page that should be returned. If the number of available
 	// results is larger than `page_size`, the service returns a `next_page_token` that can be used
 	// to get the next page of results in subsequent ListVersions requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// Acceptable values are 0 to 1000, inclusive.
 	PageSize int64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. Set `page_token` to the `next_page_token` returned by a previous ListVersions
 	// request to get the next page of results.
