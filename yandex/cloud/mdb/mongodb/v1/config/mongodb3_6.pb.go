@@ -191,6 +191,8 @@ func (MongoCfgConfig3_6_OperationProfiling_Mode) EnumDescriptor() ([]byte, []int
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
 // options described in [MongoDB documentation](https://docs.mongodb.com/v3.6/reference/configuration-options/).
+//
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongodConfig3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongod configuration.
@@ -254,6 +256,7 @@ func (x *MongodConfig3_6) GetNet() *MongodConfig3_6_Network {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongoCfgConfig3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongocfg configuration.
@@ -317,6 +320,7 @@ func (x *MongoCfgConfig3_6) GetNet() *MongoCfgConfig3_6_Network {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongosConfig3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Network settings for mongos.
@@ -362,6 +366,7 @@ func (x *MongosConfig3_6) GetNet() *MongosConfig3_6_Network {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongodConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective mongod settings for a MongoDB 3.6 cluster (a combination of settings defined
@@ -426,6 +431,7 @@ func (x *MongodConfigSet3_6) GetDefaultConfig() *MongodConfig3_6 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongoCfgConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective mongocfg settings for a MongoDB 3.6 cluster (a combination of settings defined
@@ -490,6 +496,7 @@ func (x *MongoCfgConfigSet3_6) GetDefaultConfig() *MongoCfgConfig3_6 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongosConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective settings for a MongoDB 3.6 cluster (a combination of settings defined
@@ -1198,7 +1205,7 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xde\f\n" +
+	"3yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe2\f\n" +
 	"\x0fMongodConfig3_6\x12U\n" +
 	"\astorage\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6.StorageR\astorage\x12w\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2F.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6.OperationProfilingR\x12operationProfiling\x12M\n" +
@@ -1234,7 +1241,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\x84\b\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections:\x02\x18\x01\"\x88\b\n" +
 	"\x11MongoCfgConfig3_6\x12W\n" +
 	"\astorage\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6.StorageR\astorage\x12y\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2H.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6.OperationProfilingR\x12operationProfiling\x12O\n" +
@@ -1256,26 +1263,26 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb3_6_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xd0\x01\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections:\x02\x18\x01\"\xd4\x01\n" +
 	"\x0fMongosConfig3_6\x12M\n" +
 	"\x03net\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6.NetworkR\x03net\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa6\x02\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections:\x02\x18\x01\"\xaa\x02\n" +
 	"\x12MongodConfigSet3_6\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\n" +
 	"userConfig\x12Z\n" +
-	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\rdefaultConfig\"\xae\x02\n" +
+	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig3_6R\rdefaultConfig:\x02\x18\x01\"\xb2\x02\n" +
 	"\x14MongoCfgConfigSet3_6\x12`\n" +
 	"\x10effective_config\x18\x01 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6R\x0feffectiveConfig\x12V\n" +
 	"\vuser_config\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6R\n" +
 	"userConfig\x12\\\n" +
-	"\x0edefault_config\x18\x03 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6R\rdefaultConfig\"\xa6\x02\n" +
+	"\x0edefault_config\x18\x03 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6R\rdefaultConfig:\x02\x18\x01\"\xaa\x02\n" +
 	"\x12MongosConfigSet3_6\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6R\n" +
 	"userConfig\x12Z\n" +
-	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6R\rdefaultConfigBx\n" +
+	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6R\rdefaultConfig:\x02\x18\x01Bx\n" +
 	"&yandex.cloud.api.mdb.mongodb.v1.configZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config;mongodbb\x06proto3"
 
 var (

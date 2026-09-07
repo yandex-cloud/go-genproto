@@ -137,3 +137,7 @@ func (m *StacklandSubdomains) SetPrometheus(v string) {
 func (m *StacklandSubdomains) SetAlertmanager(v string) {
 	m.Alertmanager = v
 }
+
+func (m *StacklandVersion) SetStacklandVersionId(v string) {
+	m.StacklandVersionId = v
+}

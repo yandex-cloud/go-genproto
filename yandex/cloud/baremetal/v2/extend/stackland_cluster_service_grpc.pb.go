@@ -27,6 +27,7 @@ const (
 	StacklandClusterService_DeleteStacklandCluster_FullMethodName         = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/DeleteStacklandCluster"
 	StacklandClusterService_GetStacklandClusterConfigs_FullMethodName     = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/GetStacklandClusterConfigs"
 	StacklandClusterService_ListStacklandClusterOperations_FullMethodName = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/ListStacklandClusterOperations"
+	StacklandClusterService_ListStacklandVersions_FullMethodName          = "/yandex.cloud.baremetal.v2.extend.StacklandClusterService/ListStacklandVersions"
 )
 
 // StacklandClusterServiceClient is the client API for StacklandClusterService service.
@@ -56,6 +57,9 @@ type StacklandClusterServiceClient interface {
 	// Lists operations for the specified Stackland cluster.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusterOperations(ctx context.Context, in *ListStacklandClusterOperationsRequest, opts ...grpc.CallOption) (*ListStacklandClusterOperationsResponse, error)
+	// Lists of available stackland versions.
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	ListStacklandVersions(ctx context.Context, in *ListStacklandVersionsRequest, opts ...grpc.CallOption) (*ListStacklandVersionsResponse, error)
 }
 
 type stacklandClusterServiceClient struct {
@@ -136,6 +140,16 @@ func (c *stacklandClusterServiceClient) ListStacklandClusterOperations(ctx conte
 	return out, nil
 }
 
+func (c *stacklandClusterServiceClient) ListStacklandVersions(ctx context.Context, in *ListStacklandVersionsRequest, opts ...grpc.CallOption) (*ListStacklandVersionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListStacklandVersionsResponse)
+	err := c.cc.Invoke(ctx, StacklandClusterService_ListStacklandVersions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StacklandClusterServiceServer is the server API for StacklandClusterService service.
 // All implementations should embed UnimplementedStacklandClusterServiceServer
 // for forward compatibility.
@@ -163,6 +177,9 @@ type StacklandClusterServiceServer interface {
 	// Lists operations for the specified Stackland cluster.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListStacklandClusterOperations(context.Context, *ListStacklandClusterOperationsRequest) (*ListStacklandClusterOperationsResponse, error)
+	// Lists of available stackland versions.
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	ListStacklandVersions(context.Context, *ListStacklandVersionsRequest) (*ListStacklandVersionsResponse, error)
 }
 
 // UnimplementedStacklandClusterServiceServer should be embedded to have
@@ -192,6 +209,9 @@ func (UnimplementedStacklandClusterServiceServer) GetStacklandClusterConfigs(con
 }
 func (UnimplementedStacklandClusterServiceServer) ListStacklandClusterOperations(context.Context, *ListStacklandClusterOperationsRequest) (*ListStacklandClusterOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListStacklandClusterOperations not implemented")
+}
+func (UnimplementedStacklandClusterServiceServer) ListStacklandVersions(context.Context, *ListStacklandVersionsRequest) (*ListStacklandVersionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListStacklandVersions not implemented")
 }
 func (UnimplementedStacklandClusterServiceServer) testEmbeddedByValue() {}
 
@@ -339,6 +359,24 @@ func _StacklandClusterService_ListStacklandClusterOperations_Handler(srv interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StacklandClusterService_ListStacklandVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListStacklandVersionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StacklandClusterServiceServer).ListStacklandVersions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StacklandClusterService_ListStacklandVersions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StacklandClusterServiceServer).ListStacklandVersions(ctx, req.(*ListStacklandVersionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StacklandClusterService_ServiceDesc is the grpc.ServiceDesc for StacklandClusterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -373,6 +411,10 @@ var StacklandClusterService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListStacklandClusterOperations",
 			Handler:    _StacklandClusterService_ListStacklandClusterOperations_Handler,
+		},
+		{
+			MethodName: "ListStacklandVersions",
+			Handler:    _StacklandClusterService_ListStacklandVersions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -813,6 +813,96 @@ func (x *ChangeFreezeLimitsResponse) GetRemainingSecondsThisYear() int64 {
 	return 0
 }
 
+type CreateChangeFreezeMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the resource.
+	ResourceId    string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateChangeFreezeMetadata) Reset() {
+	*x = CreateChangeFreezeMetadata{}
+	mi := &file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateChangeFreezeMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateChangeFreezeMetadata) ProtoMessage() {}
+
+func (x *CreateChangeFreezeMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateChangeFreezeMetadata.ProtoReflect.Descriptor instead.
+func (*CreateChangeFreezeMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CreateChangeFreezeMetadata) GetResourceId() string {
+	if x != nil {
+		return x.ResourceId
+	}
+	return ""
+}
+
+type TerminateChangeFreezeMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the change freeze.
+	ChangeFreezeId string `protobuf:"bytes,1,opt,name=change_freeze_id,json=changeFreezeId,proto3" json:"change_freeze_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *TerminateChangeFreezeMetadata) Reset() {
+	*x = TerminateChangeFreezeMetadata{}
+	mi := &file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TerminateChangeFreezeMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TerminateChangeFreezeMetadata) ProtoMessage() {}
+
+func (x *TerminateChangeFreezeMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TerminateChangeFreezeMetadata.ProtoReflect.Descriptor instead.
+func (*TerminateChangeFreezeMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *TerminateChangeFreezeMetadata) GetChangeFreezeId() string {
+	if x != nil {
+		return x.ChangeFreezeId
+	}
+	return ""
+}
+
 var File_yandex_cloud_maintenance_v2_change_freeze_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDesc = "" +
@@ -882,7 +972,12 @@ const file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDesc = "" +
 	"resourceId\x12V\n" +
 	"\vconstraints\x18\x02 \x01(\v24.yandex.cloud.maintenance.v2.ChangeFreezeConstraintsR\vconstraints\x123\n" +
 	"\x16used_seconds_this_year\x18\x03 \x01(\x03R\x13usedSecondsThisYear\x12=\n" +
-	"\x1bremaining_seconds_this_year\x18\x04 \x01(\x03R\x18remainingSecondsThisYearBn\n" +
+	"\x1bremaining_seconds_this_year\x18\x04 \x01(\x03R\x18remainingSecondsThisYear\"=\n" +
+	"\x1aCreateChangeFreezeMetadata\x12\x1f\n" +
+	"\vresource_id\x18\x01 \x01(\tR\n" +
+	"resourceId\"I\n" +
+	"\x1dTerminateChangeFreezeMetadata\x12(\n" +
+	"\x10change_freeze_id\x18\x01 \x01(\tR\x0echangeFreezeIdBn\n" +
 	"\x1fyandex.cloud.api.maintenance.v2ZKgithub.com/yandex-cloud/go-genproto/yandex/cloud/maintenance/v2;maintenanceb\x06proto3"
 
 var (
@@ -898,7 +993,7 @@ func file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_maintenance_v2_change_freeze_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_yandex_cloud_maintenance_v2_change_freeze_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_maintenance_v2_change_freeze_proto_goTypes = []any{
 	(ChangeFreeze_Status)(0),              // 0: yandex.cloud.maintenance.v2.ChangeFreeze.Status
 	(*Resource)(nil),                      // 1: yandex.cloud.maintenance.v2.Resource
@@ -912,17 +1007,19 @@ var file_yandex_cloud_maintenance_v2_change_freeze_proto_goTypes = []any{
 	(*GetChangeFreezeLimitsRequest)(nil),  // 9: yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest
 	(*ChangeFreezeConstraints)(nil),       // 10: yandex.cloud.maintenance.v2.ChangeFreezeConstraints
 	(*ChangeFreezeLimitsResponse)(nil),    // 11: yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse
-	(*timestamppb.Timestamp)(nil),         // 12: google.protobuf.Timestamp
+	(*CreateChangeFreezeMetadata)(nil),    // 12: yandex.cloud.maintenance.v2.CreateChangeFreezeMetadata
+	(*TerminateChangeFreezeMetadata)(nil), // 13: yandex.cloud.maintenance.v2.TerminateChangeFreezeMetadata
+	(*timestamppb.Timestamp)(nil),         // 14: google.protobuf.Timestamp
 }
 var file_yandex_cloud_maintenance_v2_change_freeze_proto_depIdxs = []int32{
 	1,  // 0: yandex.cloud.maintenance.v2.ChangeFreeze.resource_path:type_name -> yandex.cloud.maintenance.v2.Resource
-	12, // 1: yandex.cloud.maintenance.v2.ChangeFreeze.start_at:type_name -> google.protobuf.Timestamp
-	12, // 2: yandex.cloud.maintenance.v2.ChangeFreeze.end_at:type_name -> google.protobuf.Timestamp
-	12, // 3: yandex.cloud.maintenance.v2.ChangeFreeze.created_at:type_name -> google.protobuf.Timestamp
+	14, // 1: yandex.cloud.maintenance.v2.ChangeFreeze.start_at:type_name -> google.protobuf.Timestamp
+	14, // 2: yandex.cloud.maintenance.v2.ChangeFreeze.end_at:type_name -> google.protobuf.Timestamp
+	14, // 3: yandex.cloud.maintenance.v2.ChangeFreeze.created_at:type_name -> google.protobuf.Timestamp
 	0,  // 4: yandex.cloud.maintenance.v2.ChangeFreeze.status:type_name -> yandex.cloud.maintenance.v2.ChangeFreeze.Status
-	12, // 5: yandex.cloud.maintenance.v2.ChangeFreeze.updated_at:type_name -> google.protobuf.Timestamp
-	12, // 6: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest.start_at:type_name -> google.protobuf.Timestamp
-	12, // 7: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest.end_at:type_name -> google.protobuf.Timestamp
+	14, // 5: yandex.cloud.maintenance.v2.ChangeFreeze.updated_at:type_name -> google.protobuf.Timestamp
+	14, // 6: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest.start_at:type_name -> google.protobuf.Timestamp
+	14, // 7: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest.end_at:type_name -> google.protobuf.Timestamp
 	1,  // 8: yandex.cloud.maintenance.v2.ListChangeFreezesRequest.resource_path:type_name -> yandex.cloud.maintenance.v2.Resource
 	2,  // 9: yandex.cloud.maintenance.v2.ListChangeFreezesResponse.change_freezes:type_name -> yandex.cloud.maintenance.v2.ChangeFreeze
 	2,  // 10: yandex.cloud.maintenance.v2.TerminateChangeFreezeResponse.change_freeze:type_name -> yandex.cloud.maintenance.v2.ChangeFreeze
@@ -945,7 +1042,7 @@ func file_yandex_cloud_maintenance_v2_change_freeze_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDesc), len(file_yandex_cloud_maintenance_v2_change_freeze_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

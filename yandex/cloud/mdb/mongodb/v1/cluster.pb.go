@@ -26,6 +26,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Deployment environment.
 type Cluster_Environment int32
 
 const (
@@ -486,8 +487,11 @@ func (Service_Health) EnumDescriptor() ([]byte, []int) {
 type AutoCompactConfig_CompactionType int32
 
 const (
-	AutoCompactConfig_COMPACTION_TYPE_UNSPECIFIED    AutoCompactConfig_CompactionType = 0
+	// Compaction type is unspecified. Default value.
+	AutoCompactConfig_COMPACTION_TYPE_UNSPECIFIED AutoCompactConfig_CompactionType = 0
+	// Run compaction on all hosts except primary.
 	AutoCompactConfig_COMPACTION_TYPE_IGNORE_PRIMARY AutoCompactConfig_CompactionType = 1
+	// Switch primary to run compaction on all hosts.
 	AutoCompactConfig_COMPACTION_TYPE_SWITCH_PRIMARY AutoCompactConfig_CompactionType = 2
 )
 
@@ -799,16 +803,12 @@ func (x *Monitoring) GetLink() string {
 
 type ClusterConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of MongoDB server software. Possible values: `3.6`, `4.0`, `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0`, `6.0-enterprise`, `7.0`, `7.0-enterprise`.
+	// Version of MongoDB server software. Possible values: `7.0`, `8.0`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	// MongoDB feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
 	// Possible values:
-	// * `3.6` - persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or lower.
-	// * `4.0` - persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or lower.
-	// * `4.2` - persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or lower.
-	// * `4.4` - persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or lower.
-	// * `5.0` - persist data compatibility for version 5.0. After setting this option the data will not be compatible with 5.0 or lower.
-	// * `6.0` - persist data compatibility for version 6.0. After setting this option the data will not be compatible with 6.0 or lower.
+	// * `7.0` - persist data compatibility for version 7.0. After setting this option the data will not be compatible with 6.0 or lower.
+	// * `8.0` - persist data compatibility for version 8.0. After setting this option the data will not be compatible with 7.0 or lower.
 	FeatureCompatibilityVersion string `protobuf:"bytes,5,opt,name=feature_compatibility_version,json=featureCompatibilityVersion,proto3" json:"feature_compatibility_version,omitempty"`
 	// Configuration for MongoDB servers in the cluster.
 	//
@@ -832,7 +832,7 @@ type ClusterConfig struct {
 	PerformanceDiagnostics *PerformanceDiagnosticsConfig `protobuf:"bytes,13,opt,name=performance_diagnostics,json=performanceDiagnostics,proto3" json:"performance_diagnostics,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,6,opt,name=access,proto3" json:"access,omitempty"`
-	// Configuration and resource allocation for a MongoDB Enterprise cluster.
+	// Configuration and resource allocation for a MongoDB cluster.
 	MongodbConfig *Mongodb `protobuf:"bytes,19,opt,name=mongodb_config,json=mongodbConfig,proto3" json:"mongodb_config,omitempty"`
 	// Full version
 	FullVersion string `protobuf:"bytes,20,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
@@ -893,6 +893,7 @@ func (x *ClusterConfig) GetMongodb() isClusterConfig_Mongodb {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_3_6() *Mongodb3_6 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_3_6); ok {
@@ -902,6 +903,7 @@ func (x *ClusterConfig) GetMongodb_3_6() *Mongodb3_6 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_4_0() *Mongodb4_0 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_4_0); ok {
@@ -911,6 +913,7 @@ func (x *ClusterConfig) GetMongodb_4_0() *Mongodb4_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_4_2() *Mongodb4_2 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_4_2); ok {
@@ -920,6 +923,7 @@ func (x *ClusterConfig) GetMongodb_4_2() *Mongodb4_2 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_4_4() *Mongodb4_4 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_4_4); ok {
@@ -929,6 +933,7 @@ func (x *ClusterConfig) GetMongodb_4_4() *Mongodb4_4 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_5_0() *Mongodb5_0 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_5_0); ok {
@@ -938,6 +943,7 @@ func (x *ClusterConfig) GetMongodb_5_0() *Mongodb5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_6_0() *Mongodb6_0 {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_6_0); ok {
@@ -947,6 +953,7 @@ func (x *ClusterConfig) GetMongodb_6_0() *Mongodb6_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_4_4Enterprise() *Mongodb4_4Enterprise {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_4_4Enterprise); ok {
@@ -956,6 +963,7 @@ func (x *ClusterConfig) GetMongodb_4_4Enterprise() *Mongodb4_4Enterprise {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_5_0Enterprise() *Mongodb5_0Enterprise {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_5_0Enterprise); ok {
@@ -965,6 +973,7 @@ func (x *ClusterConfig) GetMongodb_5_0Enterprise() *Mongodb5_0Enterprise {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 func (x *ClusterConfig) GetMongodb_6_0Enterprise() *Mongodb6_0Enterprise {
 	if x != nil {
 		if x, ok := x.Mongodb.(*ClusterConfig_Mongodb_6_0Enterprise); ok {
@@ -1029,46 +1038,73 @@ type isClusterConfig_Mongodb interface {
 
 type ClusterConfig_Mongodb_3_6 struct {
 	// Configuration and resource allocation for a MongoDB 3.6 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_3_6 *Mongodb3_6 `protobuf:"bytes,2,opt,name=mongodb_3_6,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_4_0 struct {
 	// Configuration and resource allocation for a MongoDB 4.0 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_4_0 *Mongodb4_0 `protobuf:"bytes,4,opt,name=mongodb_4_0,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_4_2 struct {
 	// Configuration and resource allocation for a MongoDB 4.2 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_4_2 *Mongodb4_2 `protobuf:"bytes,7,opt,name=mongodb_4_2,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_4_4 struct {
 	// Configuration and resource allocation for a MongoDB 4.4 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_4_4 *Mongodb4_4 `protobuf:"bytes,8,opt,name=mongodb_4_4,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_5_0 struct {
 	// Configuration and resource allocation for a MongoDB 5.0 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_5_0 *Mongodb5_0 `protobuf:"bytes,10,opt,name=mongodb_5_0,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_6_0 struct {
 	// Configuration and resource allocation for a MongoDB 6.0 cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_6_0 *Mongodb6_0 `protobuf:"bytes,14,opt,name=mongodb_6_0,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_4_4Enterprise struct {
 	// Configuration and resource allocation for a MongoDB 4.4 Enterprise cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_4_4Enterprise *Mongodb4_4Enterprise `protobuf:"bytes,11,opt,name=mongodb_4_4_enterprise,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_5_0Enterprise struct {
 	// Configuration and resource allocation for a MongoDB 5.0 Enterprise cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_5_0Enterprise *Mongodb5_0Enterprise `protobuf:"bytes,12,opt,name=mongodb_5_0_enterprise,proto3,oneof"`
 }
 
 type ClusterConfig_Mongodb_6_0Enterprise struct {
 	// Configuration and resource allocation for a MongoDB 6.0 Enterprise cluster.
+	// Deprecated. Use [mongodb_config] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 	Mongodb_6_0Enterprise *Mongodb6_0Enterprise `protobuf:"bytes,15,opt,name=mongodb_6_0_enterprise,proto3,oneof"`
 }
 
@@ -1090,6 +1126,7 @@ func (*ClusterConfig_Mongodb_5_0Enterprise) isClusterConfig_Mongodb() {}
 
 func (*ClusterConfig_Mongodb_6_0Enterprise) isClusterConfig_Mongodb() {}
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 3.6 cluster.
@@ -1162,6 +1199,7 @@ func (x *Mongodb3_6) GetMongoinfra() *Mongodb3_6_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 4.0 cluster.
@@ -1234,6 +1272,7 @@ func (x *Mongodb4_0) GetMongoinfra() *Mongodb4_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 4.2 cluster.
@@ -1306,6 +1345,7 @@ func (x *Mongodb4_2) GetMongoinfra() *Mongodb4_2_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_4 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 4.4 cluster.
@@ -1378,6 +1418,7 @@ func (x *Mongodb4_4) GetMongoinfra() *Mongodb4_4_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_4Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 4.4 cluster.
@@ -1450,6 +1491,7 @@ func (x *Mongodb4_4Enterprise) GetMongoinfra() *Mongodb4_4Enterprise_MongoInfra 
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 5.0 cluster.
@@ -1522,6 +1564,7 @@ func (x *Mongodb5_0) GetMongoinfra() *Mongodb5_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb5_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 5.0 cluster.
@@ -1594,6 +1637,7 @@ func (x *Mongodb5_0Enterprise) GetMongoinfra() *Mongodb5_0Enterprise_MongoInfra 
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb6_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 6.0 cluster.
@@ -1666,6 +1710,7 @@ func (x *Mongodb6_0) GetMongoinfra() *Mongodb6_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb6_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod in a MongoDB 6.0 cluster.
@@ -5122,20 +5167,20 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"Monitoring\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x12\n" +
-	"\x04link\x18\x03 \x01(\tR\x04link\"\xbc\v\n" +
+	"\x04link\x18\x03 \x01(\tR\x04link\"\xe0\v\n" +
 	"\rClusterConfig\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12B\n" +
-	"\x1dfeature_compatibility_version\x18\x05 \x01(\tR\x1bfeatureCompatibilityVersion\x12K\n" +
-	"\vmongodb_3_6\x18\x02 \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb3_6H\x00R\vmongodb_3_6\x12K\n" +
-	"\vmongodb_4_0\x18\x04 \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_0H\x00R\vmongodb_4_0\x12K\n" +
-	"\vmongodb_4_2\x18\a \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_2H\x00R\vmongodb_4_2\x12K\n" +
-	"\vmongodb_4_4\x18\b \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_4H\x00R\vmongodb_4_4\x12K\n" +
+	"\x1dfeature_compatibility_version\x18\x05 \x01(\tR\x1bfeatureCompatibilityVersion\x12O\n" +
+	"\vmongodb_3_6\x18\x02 \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb3_6B\x02\x18\x01H\x00R\vmongodb_3_6\x12O\n" +
+	"\vmongodb_4_0\x18\x04 \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_0B\x02\x18\x01H\x00R\vmongodb_4_0\x12O\n" +
+	"\vmongodb_4_2\x18\a \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_2B\x02\x18\x01H\x00R\vmongodb_4_2\x12O\n" +
+	"\vmongodb_4_4\x18\b \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb4_4B\x02\x18\x01H\x00R\vmongodb_4_4\x12O\n" +
 	"\vmongodb_5_0\x18\n" +
-	" \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb5_0H\x00R\vmongodb_5_0\x12K\n" +
-	"\vmongodb_6_0\x18\x0e \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb6_0H\x00R\vmongodb_6_0\x12l\n" +
-	"\x16mongodb_4_4_enterprise\x18\v \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterpriseH\x00R\x16mongodb_4_4_enterprise\x12l\n" +
-	"\x16mongodb_5_0_enterprise\x18\f \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterpriseH\x00R\x16mongodb_5_0_enterprise\x12l\n" +
-	"\x16mongodb_6_0_enterprise\x18\x0f \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterpriseH\x00R\x16mongodb_6_0_enterprise\x12F\n" +
+	" \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb5_0B\x02\x18\x01H\x00R\vmongodb_5_0\x12O\n" +
+	"\vmongodb_6_0\x18\x0e \x01(\v2'.yandex.cloud.mdb.mongodb.v1.Mongodb6_0B\x02\x18\x01H\x00R\vmongodb_6_0\x12p\n" +
+	"\x16mongodb_4_4_enterprise\x18\v \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterpriseB\x02\x18\x01H\x00R\x16mongodb_4_4_enterprise\x12p\n" +
+	"\x16mongodb_5_0_enterprise\x18\f \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterpriseB\x02\x18\x01H\x00R\x16mongodb_5_0_enterprise\x12p\n" +
+	"\x16mongodb_6_0_enterprise\x18\x0f \x01(\v22.yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterpriseB\x02\x18\x01H\x00R\x16mongodb_6_0_enterprise\x12F\n" +
 	"\x13backup_window_start\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x12V\n" +
 	"\x19backup_retain_period_days\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x16backupRetainPeriodDays\x12r\n" +
 	"\x17performance_diagnostics\x18\r \x01(\v29.yandex.cloud.mdb.mongodb.v1.PerformanceDiagnosticsConfigR\x16performanceDiagnostics\x12;\n" +
@@ -5143,7 +5188,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\x0emongodb_config\x18\x13 \x01(\v2$.yandex.cloud.mdb.mongodb.v1.MongodbR\rmongodbConfig\x12!\n" +
 	"\ffull_version\x18\x14 \x01(\tR\vfullVersion\x12]\n" +
 	"\x12autocompact_config\x18\x16 \x01(\v2..yandex.cloud.mdb.mongodb.v1.AutoCompactConfigR\x11autocompactConfigB\t\n" +
-	"\amongodbJ\x04\b\x10\x10\x13J\x04\b\x15\x10\x16\"\xd2\v\n" +
+	"\amongodbJ\x04\b\x10\x10\x13J\x04\b\x15\x10\x16\"\xd6\v\n" +
 	"\n" +
 	"Mongodb3_6\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb3_6.MongodR\x06mongod\x12L\n" +
@@ -5169,7 +5214,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet3_6R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet3_6R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd2\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xd6\v\n" +
 	"\n" +
 	"Mongodb4_0\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb4_0.MongodR\x06mongod\x12L\n" +
@@ -5195,7 +5240,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_0R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd2\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xd6\v\n" +
 	"\n" +
 	"Mongodb4_2\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb4_2.MongodR\x06mongod\x12L\n" +
@@ -5221,7 +5266,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_2R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_2R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd2\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xd6\v\n" +
 	"\n" +
 	"Mongodb4_4\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb4_4.MongodR\x06mongod\x12L\n" +
@@ -5247,7 +5292,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc0\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc4\f\n" +
 	"\x15Mongodb4_4_enterprise\x12Q\n" +
 	"\x06mongod\x18\x01 \x01(\v29.yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongodR\x06mongod\x12W\n" +
 	"\bmongocfg\x18\x02 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.Mongodb4_4_enterprise.MongoCfgR\bmongocfg\x12Q\n" +
@@ -5272,7 +5317,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2A.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet4_4_enterpriseR\fconfigMongos\x12l\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet4_4_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd2\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xd6\v\n" +
 	"\n" +
 	"Mongodb5_0\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb5_0.MongodR\x06mongod\x12L\n" +
@@ -5298,7 +5343,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc0\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc4\f\n" +
 	"\x15Mongodb5_0_enterprise\x12Q\n" +
 	"\x06mongod\x18\x01 \x01(\v29.yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongodR\x06mongod\x12W\n" +
 	"\bmongocfg\x18\x02 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.Mongodb5_0_enterprise.MongoCfgR\bmongocfg\x12Q\n" +
@@ -5323,7 +5368,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2A.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet5_0_enterpriseR\fconfigMongos\x12l\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet5_0_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd2\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xd6\v\n" +
 	"\n" +
 	"Mongodb6_0\x12F\n" +
 	"\x06mongod\x18\x01 \x01(\v2..yandex.cloud.mdb.mongodb.v1.Mongodb6_0.MongodR\x06mongod\x12L\n" +
@@ -5349,7 +5394,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0R\fconfigMongos\x12a\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc0\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc4\f\n" +
 	"\x15Mongodb6_0_enterprise\x12Q\n" +
 	"\x06mongod\x18\x01 \x01(\v29.yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongodR\x06mongod\x12W\n" +
 	"\bmongocfg\x18\x02 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.Mongodb6_0_enterprise.MongoCfgR\bmongocfg\x12Q\n" +
@@ -5374,7 +5419,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2A.yandex.cloud.mdb.mongodb.v1.config.MongosConfigSet6_0_enterpriseR\fconfigMongos\x12l\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigSet6_0_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xb4\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xb4\v\n" +
 	"\aMongodb\x12C\n" +
 	"\x06mongod\x18\x01 \x01(\v2+.yandex.cloud.mdb.mongodb.v1.Mongodb.MongodR\x06mongod\x12I\n" +
 	"\bmongocfg\x18\x02 \x01(\v2-.yandex.cloud.mdb.mongodb.v1.Mongodb.MongoCfgR\bmongocfg\x12C\n" +

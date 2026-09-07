@@ -143,6 +143,59 @@ func (RAMType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{1}
 }
 
+// Type of servers represented by a configuration.
+type ServerType int32
+
+const (
+	// Unspecified server type.
+	ServerType_SERVER_TYPE_UNSPECIFIED ServerType = 0
+	// Standard bare metal server.
+	ServerType_SERVER_TYPE_BAREMETAL ServerType = 1
+	// Apple Mac Mini server.
+	ServerType_SERVER_TYPE_MAC_MINI ServerType = 2
+)
+
+// Enum value maps for ServerType.
+var (
+	ServerType_name = map[int32]string{
+		0: "SERVER_TYPE_UNSPECIFIED",
+		1: "SERVER_TYPE_BAREMETAL",
+		2: "SERVER_TYPE_MAC_MINI",
+	}
+	ServerType_value = map[string]int32{
+		"SERVER_TYPE_UNSPECIFIED": 0,
+		"SERVER_TYPE_BAREMETAL":   1,
+		"SERVER_TYPE_MAC_MINI":    2,
+	}
+)
+
+func (x ServerType) Enum() *ServerType {
+	p := new(ServerType)
+	*p = x
+	return p
+}
+
+func (x ServerType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ServerType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes[2].Descriptor()
+}
+
+func (ServerType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes[2]
+}
+
+func (x ServerType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ServerType.Descriptor instead.
+func (ServerType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{2}
+}
+
 // CPU configuration.
 type CPU struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -372,7 +425,9 @@ type Configuration struct {
 	// JBOG GPUs.
 	JbogGpus []*GPUCard `protobuf:"bytes,12,rep,name=jbog_gpus,json=jbogGpus,proto3" json:"jbog_gpus,omitempty"`
 	// RAM type.
-	RamType       RAMType `protobuf:"varint,13,opt,name=ram_type,json=ramType,proto3,enum=yandex.cloud.baremetal.v2.RAMType" json:"ram_type,omitempty"`
+	RamType RAMType `protobuf:"varint,13,opt,name=ram_type,json=ramType,proto3,enum=yandex.cloud.baremetal.v2.RAMType" json:"ram_type,omitempty"`
+	// Type of servers represented by the configuration.
+	ServerType    ServerType `protobuf:"varint,16,opt,name=server_type,json=serverType,proto3,enum=yandex.cloud.baremetal.v2.ServerType" json:"server_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -477,6 +532,13 @@ func (x *Configuration) GetRamType() RAMType {
 	return RAMType_RAM_TYPE_UNSPECIFIED
 }
 
+func (x *Configuration) GetServerType() ServerType {
+	if x != nil {
+		return x.ServerType
+	}
+	return ServerType_SERVER_TYPE_UNSPECIFIED
+}
+
 type DefaultStorage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the configuration.
@@ -551,7 +613,7 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\aGPUCard\x12\x19\n" +
 	"\x05count\x18\x01 \x01(\x03B\x03\xe0A\x02R\x05count\x12\x1b\n" +
 	"\x06vendor\x18\x02 \x01(\tB\x03\xe0A\x02R\x06vendor\x12\x19\n" +
-	"\x05model\x18\x03 \x01(\tB\x03\xe0A\x02R\x05model\"\xc2\x04\n" +
+	"\x05model\x18\x03 \x01(\tB\x03\xe0A\x02R\x05model\"\x95\x05\n" +
 	"\rConfiguration\x121\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x06\xe0A\x05\xe0A\x03R\x0fconfigurationId\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tB\x03\xe0A\x02R\x04name\x12&\n" +
@@ -563,7 +625,9 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\bpsu_type\x18\a \x01(\x0e2\".yandex.cloud.baremetal.v2.PSUTypeB\x03\xe0A\x02R\apsuType\x12;\n" +
 	"\x04gpus\x18\v \x03(\v2\".yandex.cloud.baremetal.v2.GPUCardB\x03\xe0A\x01R\x04gpus\x12D\n" +
 	"\tjbog_gpus\x18\f \x03(\v2\".yandex.cloud.baremetal.v2.GPUCardB\x03\xe0A\x01R\bjbogGpus\x12B\n" +
-	"\bram_type\x18\r \x01(\x0e2\".yandex.cloud.baremetal.v2.RAMTypeB\x03\xe0A\x02R\aramTypeJ\x04\b\b\x10\v\"\x85\x01\n" +
+	"\bram_type\x18\r \x01(\x0e2\".yandex.cloud.baremetal.v2.RAMTypeB\x03\xe0A\x02R\aramType\x12K\n" +
+	"\vserver_type\x18\x10 \x01(\x0e2%.yandex.cloud.baremetal.v2.ServerTypeB\x03\xe0A\x03R\n" +
+	"serverTypeJ\x04\b\b\x10\vJ\x04\b\x0e\x10\x10\"\x85\x01\n" +
 	"\x0eDefaultStorage\x12.\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\bR\x0fconfigurationId\x12C\n" +
 	"\bstorages\x18\x02 \x03(\v2\".yandex.cloud.baremetal.v2.StorageB\x03\xe0A\x02R\bstorages*\x84\x01\n" +
@@ -578,7 +642,12 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\x14RAM_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04DDR3\x10\x01\x12\b\n" +
 	"\x04DDR4\x10\x02\x12\b\n" +
-	"\x04DDR5\x10\x03Bl\n" +
+	"\x04DDR5\x10\x03*^\n" +
+	"\n" +
+	"ServerType\x12\x1b\n" +
+	"\x17SERVER_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
+	"\x15SERVER_TYPE_BAREMETAL\x10\x01\x12\x18\n" +
+	"\x14SERVER_TYPE_MAC_MINI\x10\x02Bl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -593,33 +662,35 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_yandex_cloud_baremetal_v2_configuration_proto_goTypes = []any{
 	(PSUType)(0),                   // 0: yandex.cloud.baremetal.v2.PSUType
 	(RAMType)(0),                   // 1: yandex.cloud.baremetal.v2.RAMType
-	(*CPU)(nil),                    // 2: yandex.cloud.baremetal.v2.CPU
-	(*DiskDriveConfiguration)(nil), // 3: yandex.cloud.baremetal.v2.DiskDriveConfiguration
-	(*GPUCard)(nil),                // 4: yandex.cloud.baremetal.v2.GPUCard
-	(*Configuration)(nil),          // 5: yandex.cloud.baremetal.v2.Configuration
-	(*DefaultStorage)(nil),         // 6: yandex.cloud.baremetal.v2.DefaultStorage
-	(DiskDriveType)(0),             // 7: yandex.cloud.baremetal.v2.DiskDriveType
-	(*Storage)(nil),                // 8: yandex.cloud.baremetal.v2.Storage
+	(ServerType)(0),                // 2: yandex.cloud.baremetal.v2.ServerType
+	(*CPU)(nil),                    // 3: yandex.cloud.baremetal.v2.CPU
+	(*DiskDriveConfiguration)(nil), // 4: yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	(*GPUCard)(nil),                // 5: yandex.cloud.baremetal.v2.GPUCard
+	(*Configuration)(nil),          // 6: yandex.cloud.baremetal.v2.Configuration
+	(*DefaultStorage)(nil),         // 7: yandex.cloud.baremetal.v2.DefaultStorage
+	(DiskDriveType)(0),             // 8: yandex.cloud.baremetal.v2.DiskDriveType
+	(*Storage)(nil),                // 9: yandex.cloud.baremetal.v2.Storage
 }
 var file_yandex_cloud_baremetal_v2_configuration_proto_depIdxs = []int32{
-	7, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
-	2, // 1: yandex.cloud.baremetal.v2.Configuration.cpu:type_name -> yandex.cloud.baremetal.v2.CPU
-	3, // 2: yandex.cloud.baremetal.v2.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	8, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
+	3, // 1: yandex.cloud.baremetal.v2.Configuration.cpu:type_name -> yandex.cloud.baremetal.v2.CPU
+	4, // 2: yandex.cloud.baremetal.v2.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
 	0, // 3: yandex.cloud.baremetal.v2.Configuration.psu_type:type_name -> yandex.cloud.baremetal.v2.PSUType
-	4, // 4: yandex.cloud.baremetal.v2.Configuration.gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
-	4, // 5: yandex.cloud.baremetal.v2.Configuration.jbog_gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
+	5, // 4: yandex.cloud.baremetal.v2.Configuration.gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
+	5, // 5: yandex.cloud.baremetal.v2.Configuration.jbog_gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
 	1, // 6: yandex.cloud.baremetal.v2.Configuration.ram_type:type_name -> yandex.cloud.baremetal.v2.RAMType
-	8, // 7: yandex.cloud.baremetal.v2.DefaultStorage.storages:type_name -> yandex.cloud.baremetal.v2.Storage
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	2, // 7: yandex.cloud.baremetal.v2.Configuration.server_type:type_name -> yandex.cloud.baremetal.v2.ServerType
+	9, // 8: yandex.cloud.baremetal.v2.DefaultStorage.storages:type_name -> yandex.cloud.baremetal.v2.Storage
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_configuration_proto_init() }
@@ -634,7 +705,7 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -7,6 +7,7 @@
 package mongodb
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -77,7 +78,7 @@ func (Backup_BackupType) EnumDescriptor() ([]byte, []int) {
 // [Developer's Guide](/docs/managed-mongodb/concepts).
 type Backup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the backup. Required.
+	// ID of the backup.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// ID of the folder that the backup belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
@@ -197,9 +198,9 @@ var File_yandex_cloud_mdb_mongodb_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mongodb_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"(yandex/cloud/mdb/mongodb/v1/backup.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc6\x03\n" +
-	"\x06Backup\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"(yandex/cloud/mdb/mongodb/v1/backup.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xcc\x03\n" +
+	"\x06Backup\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12*\n" +

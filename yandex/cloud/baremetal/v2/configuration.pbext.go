@@ -86,6 +86,10 @@ func (m *Configuration) SetRamType(v RAMType) {
 	m.RamType = v
 }
 
+func (m *Configuration) SetServerType(v ServerType) {
+	m.ServerType = v
+}
+
 func (m *DefaultStorage) SetConfigurationId(v string) {
 	m.ConfigurationId = v
 }

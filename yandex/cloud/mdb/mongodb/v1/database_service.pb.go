@@ -567,7 +567,7 @@ const file_yandex_cloud_mdb_mongodb_v1_database_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x84\x01\n" +
 	"\x15ListDatabasesResponse\x12C\n" +

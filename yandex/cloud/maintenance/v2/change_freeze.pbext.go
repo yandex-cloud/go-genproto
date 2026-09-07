@@ -153,3 +153,11 @@ func (m *ChangeFreezeLimitsResponse) SetUsedSecondsThisYear(v int64) {
 func (m *ChangeFreezeLimitsResponse) SetRemainingSecondsThisYear(v int64) {
 	m.RemainingSecondsThisYear = v
 }
+
+func (m *CreateChangeFreezeMetadata) SetResourceId(v string) {
+	m.ResourceId = v
+}
+
+func (m *TerminateChangeFreezeMetadata) SetChangeFreezeId(v string) {
+	m.ChangeFreezeId = v
+}

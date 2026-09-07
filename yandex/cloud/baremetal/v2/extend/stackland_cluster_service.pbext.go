@@ -155,3 +155,19 @@ func (m *GetStacklandClusterConfigsResponse) SetFilename(v string) {
 func (m *GetStacklandClusterConfigsResponse) SetContent(v []byte) {
 	m.Content = v
 }
+
+func (m *ListStacklandVersionsRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListStacklandVersionsRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListStacklandVersionsResponse) SetStacklandVersions(v []*StacklandVersion) {
+	m.StacklandVersions = v
+}
+
+func (m *ListStacklandVersionsResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

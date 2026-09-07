@@ -508,12 +508,12 @@ var File_yandex_cloud_mdb_redis_v1_config_redis_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x81\x15\n" +
+	",yandex/cloud/mdb/redis/v1/config/redis.proto\x12 yandex.cloud.mdb.redis.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x8b\x15\n" +
 	"\vRedisConfig\x12h\n" +
 	"\x10maxmemory_policy\x18\x01 \x01(\x0e2=.yandex.cloud.mdb.redis.v1.config.RedisConfig.MaxmemoryPolicyR\x0fmaxmemoryPolicy\x125\n" +
 	"\atimeout\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\atimeout\x12C\n" +
-	"\bpassword\x18\x03 \x01(\tB'\xf2\xc71#[a-zA-Z0-9@=+?*.,!&#$^<>_%-]{0,128}R\bpassword\x12A\n" +
-	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\tdatabases\x12\\\n" +
+	"\bpassword\x18\x03 \x01(\tB'\xf2\xc71#[a-zA-Z0-9@=+?*.,!&#$^<>_%-]{0,128}R\bpassword\x12K\n" +
+	"\tdatabases\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\tdatabases\x12\\\n" +
 	"\x17slowlog_log_slower_than\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x04>=10R\x14slowlogLogSlowerThan\x12L\n" +
 	"\x0fslowlog_max_len\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\rslowlogMaxLen\x12Q\n" +
 	"\x16notify_keyspace_events\x18\a \x01(\tB\x1b\xf2\xc71\x17[KEg$lshzxeAtmdn]{0,15}R\x14notifyKeyspaceEvents\x12\x8f\x01\n" +

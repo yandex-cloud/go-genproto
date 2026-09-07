@@ -227,7 +227,7 @@ type StacklandCluster struct {
 	Cidr string `protobuf:"bytes,15,opt,name=cidr,proto3" json:"cidr,omitempty"`
 	// Version of Stackland to be used.
 	Version string `protobuf:"bytes,16,opt,name=version,proto3" json:"version,omitempty"`
-	// License to activate Stackland.
+	// License to activate Stackland. Supports raw json and encoded base64 formats.
 	License string `protobuf:"bytes,17,opt,name=license,proto3" json:"license,omitempty"`
 	// ID of secret with cluster credentials in lockbox.
 	CredentialsLockboxSecretId string `protobuf:"bytes,18,opt,name=credentials_lockbox_secret_id,json=credentialsLockboxSecretId,proto3" json:"credentials_lockbox_secret_id,omitempty"`
@@ -638,6 +638,51 @@ func (x *StacklandSubdomains) GetAlertmanager() string {
 	return ""
 }
 
+type StacklandVersion struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Stackland version.
+	StacklandVersionId string `protobuf:"bytes,1,opt,name=stackland_version_id,json=stacklandVersionId,proto3" json:"stackland_version_id,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *StacklandVersion) Reset() {
+	*x = StacklandVersion{}
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StacklandVersion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StacklandVersion) ProtoMessage() {}
+
+func (x *StacklandVersion) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StacklandVersion.ProtoReflect.Descriptor instead.
+func (*StacklandVersion) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *StacklandVersion) GetStacklandVersionId() string {
+	if x != nil {
+		return x.StacklandVersionId
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDesc = "" +
@@ -706,7 +751,9 @@ const file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDesc = ""
 	"\n" +
 	"prometheus\x18\x04 \x01(\tB\x03\xe0A\x03R\n" +
 	"prometheus\x12'\n" +
-	"\falertmanager\x18\x05 \x01(\tB\x03\xe0A\x03R\falertmanagerBz\n" +
+	"\falertmanager\x18\x05 \x01(\tB\x03\xe0A\x03R\falertmanager\"I\n" +
+	"\x10StacklandVersion\x125\n" +
+	"\x14stackland_version_id\x18\x01 \x01(\tB\x03\xe0A\bR\x12stacklandVersionIdBz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"
 
 var (
@@ -722,7 +769,7 @@ func file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDescGZIP()
 }
 
 var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_goTypes = []any{
 	(StacklandCluster_State)(0),                       // 0: yandex.cloud.baremetal.v2.extend.StacklandCluster.State
 	(StacklandCluster_StacklandPreset)(0),             // 1: yandex.cloud.baremetal.v2.extend.StacklandCluster.StacklandPreset
@@ -731,27 +778,28 @@ var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_goTypes = []an
 	(*StacklandClusterSettings)(nil),                  // 4: yandex.cloud.baremetal.v2.extend.StacklandClusterSettings
 	(*StacklandHostRoles)(nil),                        // 5: yandex.cloud.baremetal.v2.extend.StacklandHostRoles
 	(*StacklandSubdomains)(nil),                       // 6: yandex.cloud.baremetal.v2.extend.StacklandSubdomains
-	nil,                                               // 7: yandex.cloud.baremetal.v2.extend.StacklandCluster.AnnotationsEntry
-	(*timestamppb.Timestamp)(nil),                     // 8: google.protobuf.Timestamp
-	(*Node)(nil),                                      // 9: yandex.cloud.baremetal.v2.extend.Node
-	(*BastionSpec)(nil),                               // 10: yandex.cloud.baremetal.v2.extend.BastionSpec
-	(*NodeGroup)(nil),                                 // 11: yandex.cloud.baremetal.v2.extend.NodeGroup
+	(*StacklandVersion)(nil),                          // 7: yandex.cloud.baremetal.v2.extend.StacklandVersion
+	nil,                                               // 8: yandex.cloud.baremetal.v2.extend.StacklandCluster.AnnotationsEntry
+	(*timestamppb.Timestamp)(nil),                     // 9: google.protobuf.Timestamp
+	(*Node)(nil),                                      // 10: yandex.cloud.baremetal.v2.extend.Node
+	(*BastionSpec)(nil),                               // 11: yandex.cloud.baremetal.v2.extend.BastionSpec
+	(*NodeGroup)(nil),                                 // 12: yandex.cloud.baremetal.v2.extend.NodeGroup
 }
 var file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.baremetal.v2.extend.StacklandCluster.state:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster.State
-	8,  // 1: yandex.cloud.baremetal.v2.extend.StacklandCluster.create_time:type_name -> google.protobuf.Timestamp
-	8,  // 2: yandex.cloud.baremetal.v2.extend.StacklandCluster.update_time:type_name -> google.protobuf.Timestamp
-	7,  // 3: yandex.cloud.baremetal.v2.extend.StacklandCluster.annotations:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster.AnnotationsEntry
+	9,  // 1: yandex.cloud.baremetal.v2.extend.StacklandCluster.create_time:type_name -> google.protobuf.Timestamp
+	9,  // 2: yandex.cloud.baremetal.v2.extend.StacklandCluster.update_time:type_name -> google.protobuf.Timestamp
+	8,  // 3: yandex.cloud.baremetal.v2.extend.StacklandCluster.annotations:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster.AnnotationsEntry
 	1,  // 4: yandex.cloud.baremetal.v2.extend.StacklandCluster.preset:type_name -> yandex.cloud.baremetal.v2.extend.StacklandCluster.StacklandPreset
 	5,  // 5: yandex.cloud.baremetal.v2.extend.StacklandCluster.host_roles:type_name -> yandex.cloud.baremetal.v2.extend.StacklandHostRoles
-	9,  // 6: yandex.cloud.baremetal.v2.extend.StacklandCluster.bastion_node:type_name -> yandex.cloud.baremetal.v2.extend.Node
+	10, // 6: yandex.cloud.baremetal.v2.extend.StacklandCluster.bastion_node:type_name -> yandex.cloud.baremetal.v2.extend.Node
 	6,  // 7: yandex.cloud.baremetal.v2.extend.StacklandCluster.subdomains:type_name -> yandex.cloud.baremetal.v2.extend.StacklandSubdomains
-	10, // 8: yandex.cloud.baremetal.v2.extend.StacklandCluster.bastion_spec:type_name -> yandex.cloud.baremetal.v2.extend.BastionSpec
+	11, // 8: yandex.cloud.baremetal.v2.extend.StacklandCluster.bastion_spec:type_name -> yandex.cloud.baremetal.v2.extend.BastionSpec
 	4,  // 9: yandex.cloud.baremetal.v2.extend.StacklandCluster.settings:type_name -> yandex.cloud.baremetal.v2.extend.StacklandClusterSettings
 	2,  // 10: yandex.cloud.baremetal.v2.extend.StacklandClusterSettings.public_network_access:type_name -> yandex.cloud.baremetal.v2.extend.StacklandClusterSettings.PublicNetworkAccess
-	11, // 11: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.controlplane:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
-	11, // 12: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.combined:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
-	11, // 13: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.worker:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
+	12, // 11: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.controlplane:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
+	12, // 12: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.combined:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
+	12, // 13: yandex.cloud.baremetal.v2.extend.StacklandHostRoles.worker:type_name -> yandex.cloud.baremetal.v2.extend.NodeGroup
 	14, // [14:14] is the sub-list for method output_type
 	14, // [14:14] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
@@ -772,7 +820,7 @@ func file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_extend_stackland_cluster_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -30,11 +30,11 @@ const (
 	MongodConfig_Storage_WiredTiger_CollectionConfig_COMPRESSOR_UNSPECIFIED MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 0
 	// No compression.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_NONE MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 1
-	// The [Snappy](https://docs.mongodb.com/v7.0/reference/glossary/#std-term-snappy) compression.
+	// The [Snappy](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-snappy) compression.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_SNAPPY MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 2
-	// The [zlib](https://docs.mongodb.com/v7.0/reference/glossary/#std-term-zlib) compression.
+	// The [zlib](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zlib) compression.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_ZLIB MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 3
-	// The [zstd](https://docs.mongodb.com/v7.0/reference/glossary/#std-term-zstd) compression.
+	// The [zstd](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zstd) compression.
 	MongodConfig_Storage_WiredTiger_CollectionConfig_ZSTD MongodConfig_Storage_WiredTiger_CollectionConfig_Compressor = 4
 )
 
@@ -144,11 +144,11 @@ type MongodConfig_Network_Compression_Compressor int32
 const (
 	// Unspecified compression type.
 	MongodConfig_Network_Compression_COMPRESSOR_UNSPECIFIED MongodConfig_Network_Compression_Compressor = 0
-	// The [Snappy](https://docs.mongodb.com/v4.2/reference/glossary/#term-snappy) compression.
+	// The [Snappy](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-snappy) compression.
 	MongodConfig_Network_Compression_SNAPPY MongodConfig_Network_Compression_Compressor = 1
-	// The [zlib](https://docs.mongodb.com/v4.2/reference/glossary/#term-zlib) compression.
+	// The [zlib](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zlib) compression.
 	MongodConfig_Network_Compression_ZLIB MongodConfig_Network_Compression_Compressor = 2
-	// The [zstd](https://docs.mongodb.com/v4.2/reference/glossary/#term-zstd) compression.
+	// The [zstd](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zstd) compression.
 	MongodConfig_Network_Compression_ZSTD MongodConfig_Network_Compression_Compressor = 3
 	// No compression
 	MongodConfig_Network_Compression_DISABLED MongodConfig_Network_Compression_Compressor = 4
@@ -260,11 +260,11 @@ type MongosConfig_Network_Compression_Compressor int32
 const (
 	// Unspecified compression type.
 	MongosConfig_Network_Compression_COMPRESSOR_UNSPECIFIED MongosConfig_Network_Compression_Compressor = 0
-	// The [Snappy](https://docs.mongodb.com/v4.2/reference/glossary/#term-snappy) compression.
+	// The [Snappy](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-snappy) compression.
 	MongosConfig_Network_Compression_SNAPPY MongosConfig_Network_Compression_Compressor = 1
-	// The [zlib](https://docs.mongodb.com/v4.2/reference/glossary/#term-zlib) compression.
+	// The [zlib](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zlib) compression.
 	MongosConfig_Network_Compression_ZLIB MongosConfig_Network_Compression_Compressor = 2
-	// The [zstd](https://docs.mongodb.com/v4.2/reference/glossary/#term-zstd) compression.
+	// The [zstd](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-zstd) compression.
 	MongosConfig_Network_Compression_ZSTD MongosConfig_Network_Compression_Compressor = 3
 	// No compression
 	MongosConfig_Network_Compression_DISABLED MongosConfig_Network_Compression_Compressor = 4
@@ -316,7 +316,7 @@ func (MongosConfig_Network_Compression_Compressor) EnumDescriptor() ([]byte, []i
 }
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
-// options described in [MongoDB documentation](https://docs.mongodb.com/v7.0/reference/configuration-options/).
+// options described in [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/configuration-options/).
 type MongodConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongod configuration.
@@ -801,7 +801,7 @@ type MongodConfig_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
 	WiredTiger *MongodConfig_Storage_WiredTiger `protobuf:"bytes,1,opt,name=wired_tiger,json=wiredTiger,proto3" json:"wired_tiger,omitempty"`
-	// Configuration of the MongoDB [journal](https://docs.mongodb.com/v7.0/reference/glossary/#std-term-journal).
+	// Configuration of the MongoDB [journal](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-journal).
 	Journal       *MongodConfig_Storage_Journal `protobuf:"bytes,2,opt,name=journal,proto3" json:"journal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1027,9 +1027,10 @@ func (x *MongodConfig_Security) GetKmip() *MongodConfig_Security_KMIP {
 
 type MongodConfig_AuditLog struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Audit filter
+	// Audit filter, should be valid JSON object string
 	Filter string `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	// Allows runtime configuration of audit filter and auditAuthorizationSuccess
+	// Allows runtime configuration of audit filter and auditAuthorizationSuccess.
+	// Available for MongoDB Enterprise only.
 	RuntimeConfiguration *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=runtime_configuration,json=runtimeConfiguration,proto3" json:"runtime_configuration,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -1081,10 +1082,11 @@ func (x *MongodConfig_AuditLog) GetRuntimeConfiguration() *wrapperspb.BoolValue 
 
 type MongodConfig_SetParameter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Enables the auditing of authorization successes
+	// Enables the auditing of authorization successes.
+	// See the [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess).
 	AuditAuthorizationSuccess *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=audit_authorization_success,json=auditAuthorizationSuccess,proto3" json:"audit_authorization_success,omitempty"`
 	// Enables or disables the mechanism that controls the rate at which the primary applies its writes with the
-	// goal of keeping the secondary members [majority committed](https://www.mongodb.com/docs/v7.0/reference/command/replSetGetStatus/#replSetGetStatus.optimes.lastCommittedOpTime)
+	// goal of keeping the secondary members [majority committed](https://www.mongodb.com/docs/manual/reference/command/replSetGetStatus/#replSetGetStatus.optimes.lastCommittedOpTime)
 	// lag under a configurable maximum value.
 	EnableFlowControl *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=enable_flow_control,json=enableFlowControl,proto3" json:"enable_flow_control,omitempty"`
 	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
@@ -1780,7 +1782,7 @@ type MongoCfgConfig_OperationProfiling struct {
 	Mode MongoCfgConfig_OperationProfiling_Mode `protobuf:"varint,1,opt,name=mode,proto3,enum=yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig_OperationProfiling_Mode" json:"mode,omitempty"`
 	// The slow operation time threshold, in milliseconds. Operations that run
 	// for longer than this threshold are considered slow, and are processed by the profiler
-	// running in the SLOW_OP mode. For details see [MongoDB documentation](https://www.mongodb.com/docs/v7.0/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs).
+	// running in the SLOW_OP mode. For details see [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs).
 	SlowOpThreshold *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=slow_op_threshold,json=slowOpThreshold,proto3" json:"slow_op_threshold,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -1878,7 +1880,7 @@ func (x *MongoCfgConfig_Network) GetMaxIncomingConnections() *wrapperspb.Int64Va
 type MongoCfgConfig_SetParameter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Enables or disables the mechanism that controls the rate at which the primary applies its writes with the
-	// goal of keeping the secondary members [majority committed](https://www.mongodb.com/docs/v4.2/reference/command/replSetGetStatus/#replSetGetStatus.optimes.lastCommittedOpTime)
+	// goal of keeping the secondary members [majority committed](https://www.mongodb.com/docs/manual/reference/command/replSetGetStatus/#replSetGetStatus.optimes.lastCommittedOpTime)
 	// lag under a configurable maximum value.
 	EnableFlowControl *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=enable_flow_control,json=enableFlowControl,proto3" json:"enable_flow_control,omitempty"`
 	// Enables the auditing of authorization successes

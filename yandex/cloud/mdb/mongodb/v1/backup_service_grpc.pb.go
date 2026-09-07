@@ -36,7 +36,7 @@ type BackupServiceClient interface {
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
-	// Returns the list of available backups for the specified MongoDB cluster.
+	// Deletes the specified MongoDB backup.
 	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -89,7 +89,7 @@ type BackupServiceServer interface {
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
-	// Returns the list of available backups for the specified MongoDB cluster.
+	// Deletes the specified MongoDB backup.
 	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 }
 

@@ -216,6 +216,7 @@ type UserSpec struct {
 	// Name of the MongoDB user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Password of the MongoDB user.
+	// Must not be set for users with the [AuthType.AUTH_TYPE_IAM] authentication type.
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Set of permissions to grant to the user.
 	Permissions []*Permission `protobuf:"bytes,3,rep,name=permissions,proto3" json:"permissions,omitempty"`

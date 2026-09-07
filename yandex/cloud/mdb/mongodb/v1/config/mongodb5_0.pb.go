@@ -312,6 +312,8 @@ func (MongosConfig5_0_Network_Compression_Compressor) EnumDescriptor() ([]byte, 
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
 // options described in [MongoDB documentation](https://docs.mongodb.com/v5.0/reference/configuration-options/).
+//
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongodConfig5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongod configuration.
@@ -384,6 +386,7 @@ func (x *MongodConfig5_0) GetSetParameter() *MongodConfig5_0_SetParameter {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongoCfgConfig5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongocfg configuration.
@@ -447,6 +450,7 @@ func (x *MongoCfgConfig5_0) GetNet() *MongoCfgConfig5_0_Network {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongosConfig5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Network settings for mongos.
@@ -492,6 +496,7 @@ func (x *MongosConfig5_0) GetNet() *MongosConfig5_0_Network {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongodConfigSet5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective mongod settings for a MongoDB 5.0 cluster (a combination of settings defined
@@ -556,6 +561,7 @@ func (x *MongodConfigSet5_0) GetDefaultConfig() *MongodConfig5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongoCfgConfigSet5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective mongocfg settings for a MongoDB 5.0 cluster (a combination of settings defined
@@ -620,6 +626,7 @@ func (x *MongoCfgConfigSet5_0) GetDefaultConfig() *MongoCfgConfig5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto.
 type MongosConfigSet5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Effective mongos settings for a MongoDB 5.0 cluster (a combination of settings defined
@@ -1552,7 +1559,7 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb5_0_proto protoreflect.FileDe
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb5_0_proto_rawDesc = "" +
 	"\n" +
-	"3yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xe8\x13\n" +
+	"3yandex/cloud/mdb/mongodb/v1/config/mongodb5_0.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xec\x13\n" +
 	"\x0fMongodConfig5_0\x12U\n" +
 	"\astorage\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0.StorageR\astorage\x12w\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2F.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0.OperationProfilingR\x12operationProfiling\x12M\n" +
@@ -1607,7 +1614,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb5_0_proto_rawDesc = "" +
 	"\bDISABLED\x10\x04\x1a\xd3\x01\n" +
 	"\fSetParameter\x12J\n" +
 	"\x13enable_flow_control\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x11enableFlowControl\x12w\n" +
-	"&min_snapshot_history_window_in_seconds\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!minSnapshotHistoryWindowInSeconds\"\x84\b\n" +
+	"&min_snapshot_history_window_in_seconds\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!minSnapshotHistoryWindowInSeconds:\x02\x18\x01\"\x88\b\n" +
 	"\x11MongoCfgConfig5_0\x12W\n" +
 	"\astorage\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0.StorageR\astorage\x12y\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2H.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0.OperationProfilingR\x12operationProfiling\x12O\n" +
@@ -1629,7 +1636,7 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb5_0_proto_rawDesc = "" +
 	"\aSLOW_OP\x10\x02\x12\a\n" +
 	"\x03ALL\x10\x03\x1an\n" +
 	"\aNetwork\x12c\n" +
-	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections\"\xa3\x04\n" +
+	"\x18max_incoming_connections\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\f\xfa\xc71\b10-32768R\x16maxIncomingConnections:\x02\x18\x01\"\xa7\x04\n" +
 	"\x0fMongosConfig5_0\x12M\n" +
 	"\x03net\x18\x01 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0.NetworkR\x03net\x1a\xc0\x03\n" +
 	"\aNetwork\x12c\n" +
@@ -1644,22 +1651,22 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb5_0_proto_rawDesc = "" +
 	"\x06SNAPPY\x10\x01\x12\b\n" +
 	"\x04ZLIB\x10\x02\x12\b\n" +
 	"\x04ZSTD\x10\x03\x12\f\n" +
-	"\bDISABLED\x10\x04\"\xa6\x02\n" +
+	"\bDISABLED\x10\x04:\x02\x18\x01\"\xaa\x02\n" +
 	"\x12MongodConfigSet5_0\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0R\n" +
 	"userConfig\x12Z\n" +
-	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0R\rdefaultConfig\"\xae\x02\n" +
+	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongodConfig5_0R\rdefaultConfig:\x02\x18\x01\"\xb2\x02\n" +
 	"\x14MongoCfgConfigSet5_0\x12`\n" +
 	"\x10effective_config\x18\x01 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0R\x0feffectiveConfig\x12V\n" +
 	"\vuser_config\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0R\n" +
 	"userConfig\x12\\\n" +
-	"\x0edefault_config\x18\x03 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0R\rdefaultConfig\"\xa6\x02\n" +
+	"\x0edefault_config\x18\x03 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0R\rdefaultConfig:\x02\x18\x01\"\xaa\x02\n" +
 	"\x12MongosConfigSet5_0\x12^\n" +
 	"\x10effective_config\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0R\x0feffectiveConfig\x12T\n" +
 	"\vuser_config\x18\x02 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0R\n" +
 	"userConfig\x12Z\n" +
-	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0R\rdefaultConfigBx\n" +
+	"\x0edefault_config\x18\x03 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0R\rdefaultConfig:\x02\x18\x01Bx\n" +
 	"&yandex.cloud.api.mdb.mongodb.v1.configZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1/config;mongodbb\x06proto3"
 
 var (

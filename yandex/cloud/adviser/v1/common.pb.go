@@ -263,6 +263,8 @@ const (
 	ResourceType_RESOURCE_TYPE_MANAGED_OPENSEARCH ResourceType = 7
 	// Managed Service for SPQR cluster.
 	ResourceType_RESOURCE_TYPE_MANAGED_SPQR ResourceType = 8
+	// Managed Service for Apache Kafka cluster.
+	ResourceType_RESOURCE_TYPE_MANAGED_KAFKA ResourceType = 9
 )
 
 // Enum value maps for ResourceType.
@@ -277,6 +279,7 @@ var (
 		6: "RESOURCE_TYPE_MANAGED_GREENPLUM",
 		7: "RESOURCE_TYPE_MANAGED_OPENSEARCH",
 		8: "RESOURCE_TYPE_MANAGED_SPQR",
+		9: "RESOURCE_TYPE_MANAGED_KAFKA",
 	}
 	ResourceType_value = map[string]int32{
 		"RESOURCE_TYPE_UNSPECIFIED":        0,
@@ -288,6 +291,7 @@ var (
 		"RESOURCE_TYPE_MANAGED_GREENPLUM":  6,
 		"RESOURCE_TYPE_MANAGED_OPENSEARCH": 7,
 		"RESOURCE_TYPE_MANAGED_SPQR":       8,
+		"RESOURCE_TYPE_MANAGED_KAFKA":      9,
 	}
 )
 
@@ -421,7 +425,7 @@ const file_yandex_cloud_adviser_v1_common_proto_rawDesc = "" +
 	"\x0fIssueVisibility\x12 \n" +
 	"\x1cISSUE_VISIBILITY_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18ISSUE_VISIBILITY_VISIBLE\x10\x01\x12\x1e\n" +
-	"\x1aISSUE_VISIBILITY_DISMISSED\x10\x02*\xc9\x02\n" +
+	"\x1aISSUE_VISIBILITY_DISMISSED\x10\x02*\xea\x02\n" +
 	"\fResourceType\x12\x1d\n" +
 	"\x19RESOURCE_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	" RESOURCE_TYPE_MANAGED_POSTGRESQL\x10\x01\x12\x1f\n" +
@@ -431,7 +435,8 @@ const file_yandex_cloud_adviser_v1_common_proto_rawDesc = "" +
 	" RESOURCE_TYPE_MANAGED_CLICKHOUSE\x10\x05\x12#\n" +
 	"\x1fRESOURCE_TYPE_MANAGED_GREENPLUM\x10\x06\x12$\n" +
 	" RESOURCE_TYPE_MANAGED_OPENSEARCH\x10\a\x12\x1e\n" +
-	"\x1aRESOURCE_TYPE_MANAGED_SPQR\x10\bBb\n" +
+	"\x1aRESOURCE_TYPE_MANAGED_SPQR\x10\b\x12\x1f\n" +
+	"\x1bRESOURCE_TYPE_MANAGED_KAFKA\x10\tBb\n" +
 	"\x1byandex.cloud.api.adviser.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/adviser/v1;adviserb\x06proto3"
 
 var (

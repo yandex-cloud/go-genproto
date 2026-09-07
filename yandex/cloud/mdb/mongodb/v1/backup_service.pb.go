@@ -197,7 +197,7 @@ func (x *ListBackupsResponse) GetNextPageToken() string {
 
 type DeleteBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the backup to delete.
+	// ID of the backup to delete.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -242,7 +242,7 @@ func (x *DeleteBackupRequest) GetBackupId() string {
 
 type DeleteBackupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the deleting MongoDB backup.
+	// ID of the deleting MongoDB backup.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -295,7 +295,7 @@ const file_yandex_cloud_mdb_mongodb_v1_backup_service_proto_rawDesc = "" +
 	"\x12ListBackupsRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"|\n" +
 	"\x13ListBackupsResponse\x12=\n" +

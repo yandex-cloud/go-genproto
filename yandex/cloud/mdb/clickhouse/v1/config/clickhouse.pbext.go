@@ -46,6 +46,14 @@ func (m *ClickhouseConfig) SetDictionariesLazyLoad(v *wrapperspb.BoolValue) {
 	m.DictionariesLazyLoad = v
 }
 
+func (m *ClickhouseConfig) SetShutdownWaitUnfinishedQueries(v *wrapperspb.BoolValue) {
+	m.ShutdownWaitUnfinishedQueries = v
+}
+
+func (m *ClickhouseConfig) SetShutdownWaitUnfinished(v *wrapperspb.Int64Value) {
+	m.ShutdownWaitUnfinished = v
+}
+
 func (m *ClickhouseConfig) SetLogLevel(v ClickhouseConfig_LogLevel) {
 	m.LogLevel = v
 }

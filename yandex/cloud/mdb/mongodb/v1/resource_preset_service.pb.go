@@ -74,7 +74,7 @@ type ListResourcePresetsRequest struct {
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListResourcePresetsResponse.next_page_token]
 	// that can be used to get the next page of results in subsequent list requests.
-	// Acceptable values are 0 to 1000, inclusive. Default value: 100.
+	// Acceptable values are 0 to 1000, inclusive.
 	PageSize int64 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// Page token. To get the next page of results, set [page_token] to the
 	// [ListResourcePresetsResponse.next_page_token] returned by the previous list request.
@@ -193,7 +193,7 @@ const file_yandex_cloud_mdb_mongodb_v1_resource_preset_service_proto_rawDesc = "
 	"\x12resource_preset_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\x10resourcePresetId\"u\n" +
 	"\x1aListResourcePresetsRequest\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageTokenJ\x04\b\x01\x10\x02\"\x9d\x01\n" +
 	"\x1bListResourcePresetsResponse\x12V\n" +

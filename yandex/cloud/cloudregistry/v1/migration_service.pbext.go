@@ -6,6 +6,10 @@ func (m *StartCloudMigrationRequest) SetCloudId(v string) {
 	m.CloudId = v
 }
 
+func (m *StartCloudMigrationRequest) SetDisableRedirects(v bool) {
+	m.DisableRedirects = v
+}
+
 func (m *StartCloudMigrationMetadata) SetCloudId(v string) {
 	m.CloudId = v
 }
@@ -16,6 +20,10 @@ func (m *StartCloudMigrationMetadata) SetRegistryIds(v []string) {
 
 func (m *StartFolderMigrationRequest) SetFolderId(v string) {
 	m.FolderId = v
+}
+
+func (m *StartFolderMigrationRequest) SetDisableRedirects(v bool) {
+	m.DisableRedirects = v
 }
 
 func (m *StartFolderMigrationMetadata) SetFolderId(v string) {
@@ -80,4 +88,60 @@ func (m *CloudMigrationProgressCounters) SetRepositories(v *MigrationCounters) {
 
 func (m *CloudMigrationProgressCounters) SetTags(v *MigrationCounters) {
 	m.Tags = v
+}
+
+func (m *ToggleRegistryRedirectsRequest) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ToggleRegistryRedirectsRequest) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ToggleRegistryRedirectsMetadata) SetRegistryId(v string) {
+	m.RegistryId = v
+}
+
+func (m *ToggleRegistryRedirectsMetadata) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ToggleFolderRedirectsRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ToggleFolderRedirectsRequest) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ToggleFolderRedirectsMetadata) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ToggleFolderRedirectsMetadata) SetRegistryIds(v []string) {
+	m.RegistryIds = v
+}
+
+func (m *ToggleFolderRedirectsMetadata) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ToggleCloudRedirectsRequest) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ToggleCloudRedirectsRequest) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
+func (m *ToggleCloudRedirectsMetadata) SetCloudId(v string) {
+	m.CloudId = v
+}
+
+func (m *ToggleCloudRedirectsMetadata) SetRegistryIds(v []string) {
+	m.RegistryIds = v
+}
+
+func (m *ToggleCloudRedirectsMetadata) SetEnabled(v bool) {
+	m.Enabled = v
 }

@@ -28,9 +28,12 @@ const (
 type StartCloudMigrationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the cloud.
-	CloudId       string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// Whether to disable redirects for registries.
+	// Default value: false.
+	DisableRedirects bool `protobuf:"varint,2,opt,name=disable_redirects,json=disableRedirects,proto3" json:"disable_redirects,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StartCloudMigrationRequest) Reset() {
@@ -68,6 +71,13 @@ func (x *StartCloudMigrationRequest) GetCloudId() string {
 		return x.CloudId
 	}
 	return ""
+}
+
+func (x *StartCloudMigrationRequest) GetDisableRedirects() bool {
+	if x != nil {
+		return x.DisableRedirects
+	}
+	return false
 }
 
 // Metadata for cloud migration operation.
@@ -129,9 +139,12 @@ func (x *StartCloudMigrationMetadata) GetRegistryIds() []string {
 type StartFolderMigrationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder.
-	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Whether to disable redirects for registries.
+	// Default value: false.
+	DisableRedirects bool `protobuf:"varint,2,opt,name=disable_redirects,json=disableRedirects,proto3" json:"disable_redirects,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StartFolderMigrationRequest) Reset() {
@@ -169,6 +182,13 @@ func (x *StartFolderMigrationRequest) GetFolderId() string {
 		return x.FolderId
 	}
 	return ""
+}
+
+func (x *StartFolderMigrationRequest) GetDisableRedirects() bool {
+	if x != nil {
+		return x.DisableRedirects
+	}
+	return false
 }
 
 // Metadata for folder migration operation.
@@ -463,18 +483,368 @@ func (x *CloudMigrationProgressCounters) GetTags() *MigrationCounters {
 	return nil
 }
 
+// Request for toggling whether redirects are allowed for the specified registry.
+type ToggleRegistryRedirectsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the registry.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// Whether redirects are allowed for the registry.
+	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleRegistryRedirectsRequest) Reset() {
+	*x = ToggleRegistryRedirectsRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleRegistryRedirectsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleRegistryRedirectsRequest) ProtoMessage() {}
+
+func (x *ToggleRegistryRedirectsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleRegistryRedirectsRequest.ProtoReflect.Descriptor instead.
+func (*ToggleRegistryRedirectsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ToggleRegistryRedirectsRequest) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *ToggleRegistryRedirectsRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Metadata for the operation of toggling registry redirects behavior.
+type ToggleRegistryRedirectsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the registry.
+	RegistryId string `protobuf:"bytes,1,opt,name=registry_id,json=registryId,proto3" json:"registry_id,omitempty"`
+	// Whether redirects are allowed for the registry.
+	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleRegistryRedirectsMetadata) Reset() {
+	*x = ToggleRegistryRedirectsMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleRegistryRedirectsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleRegistryRedirectsMetadata) ProtoMessage() {}
+
+func (x *ToggleRegistryRedirectsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleRegistryRedirectsMetadata.ProtoReflect.Descriptor instead.
+func (*ToggleRegistryRedirectsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ToggleRegistryRedirectsMetadata) GetRegistryId() string {
+	if x != nil {
+		return x.RegistryId
+	}
+	return ""
+}
+
+func (x *ToggleRegistryRedirectsMetadata) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Request for toggling whether redirects are allowed for all registries in the specified folder.
+type ToggleFolderRedirectsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Whether redirects are allowed for the registries.
+	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleFolderRedirectsRequest) Reset() {
+	*x = ToggleFolderRedirectsRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleFolderRedirectsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleFolderRedirectsRequest) ProtoMessage() {}
+
+func (x *ToggleFolderRedirectsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleFolderRedirectsRequest.ProtoReflect.Descriptor instead.
+func (*ToggleFolderRedirectsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ToggleFolderRedirectsRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ToggleFolderRedirectsRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Metadata for the operation of toggling folder redirects behavior.
+type ToggleFolderRedirectsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the folder.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// IDs of registries affected.
+	RegistryIds []string `protobuf:"bytes,2,rep,name=registry_ids,json=registryIds,proto3" json:"registry_ids,omitempty"`
+	// Whether redirects are allowed for the registries.
+	Enabled       bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleFolderRedirectsMetadata) Reset() {
+	*x = ToggleFolderRedirectsMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleFolderRedirectsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleFolderRedirectsMetadata) ProtoMessage() {}
+
+func (x *ToggleFolderRedirectsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleFolderRedirectsMetadata.ProtoReflect.Descriptor instead.
+func (*ToggleFolderRedirectsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ToggleFolderRedirectsMetadata) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ToggleFolderRedirectsMetadata) GetRegistryIds() []string {
+	if x != nil {
+		return x.RegistryIds
+	}
+	return nil
+}
+
+func (x *ToggleFolderRedirectsMetadata) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Request for toggling whether redirects are allowed for all registries in the specified cloud.
+type ToggleCloudRedirectsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cloud.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// Whether redirects are allowed for the registries.
+	Enabled       bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleCloudRedirectsRequest) Reset() {
+	*x = ToggleCloudRedirectsRequest{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleCloudRedirectsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleCloudRedirectsRequest) ProtoMessage() {}
+
+func (x *ToggleCloudRedirectsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleCloudRedirectsRequest.ProtoReflect.Descriptor instead.
+func (*ToggleCloudRedirectsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ToggleCloudRedirectsRequest) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ToggleCloudRedirectsRequest) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+// Metadata for the operation of toggling cloud redirects behavior.
+type ToggleCloudRedirectsMetadata struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the cloud.
+	CloudId string `protobuf:"bytes,1,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
+	// IDs of registries affected.
+	RegistryIds []string `protobuf:"bytes,2,rep,name=registry_ids,json=registryIds,proto3" json:"registry_ids,omitempty"`
+	// Whether redirects are allowed for the registries.
+	Enabled       bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToggleCloudRedirectsMetadata) Reset() {
+	*x = ToggleCloudRedirectsMetadata{}
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToggleCloudRedirectsMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToggleCloudRedirectsMetadata) ProtoMessage() {}
+
+func (x *ToggleCloudRedirectsMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToggleCloudRedirectsMetadata.ProtoReflect.Descriptor instead.
+func (*ToggleCloudRedirectsMetadata) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ToggleCloudRedirectsMetadata) GetCloudId() string {
+	if x != nil {
+		return x.CloudId
+	}
+	return ""
+}
+
+func (x *ToggleCloudRedirectsMetadata) GetRegistryIds() []string {
+	if x != nil {
+		return x.RegistryIds
+	}
+	return nil
+}
+
+func (x *ToggleCloudRedirectsMetadata) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 var File_yandex_cloud_cloudregistry_v1_migration_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc = "" +
 	"\n" +
-	"5yandex/cloud/cloudregistry/v1/migration_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/cloudregistry/v1/migration.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"E\n" +
+	"5yandex/cloud/cloudregistry/v1/migration_service.proto\x12\x1dyandex.cloud.cloudregistry.v1\x1a yandex/cloud/api/operation.proto\x1a-yandex/cloud/cloudregistry/v1/migration.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"r\n" +
 	"\x1aStartCloudMigrationRequest\x12'\n" +
-	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\"[\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12+\n" +
+	"\x11disable_redirects\x18\x02 \x01(\bR\x10disableRedirects\"[\n" +
 	"\x1bStartCloudMigrationMetadata\x12\x19\n" +
 	"\bcloud_id\x18\x01 \x01(\tR\acloudId\x12!\n" +
-	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\"H\n" +
+	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\"u\n" +
 	"\x1bStartFolderMigrationRequest\x12)\n" +
-	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\"^\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12+\n" +
+	"\x11disable_redirects\x18\x02 \x01(\bR\x10disableRedirects\"^\n" +
 	"\x1cStartFolderMigrationMetadata\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12!\n" +
 	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\"\xaf\x03\n" +
@@ -496,14 +866,42 @@ const file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc = "" +
 	"registries\x18\x01 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\n" +
 	"registries\x12T\n" +
 	"\frepositories\x18\x02 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\frepositories\x12D\n" +
-	"\x04tags\x18\x03 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\x04tags2\x90\x04\n" +
+	"\x04tags\x18\x03 \x01(\v20.yandex.cloud.cloudregistry.v1.MigrationCountersR\x04tags\"i\n" +
+	"\x1eToggleRegistryRedirectsRequest\x12-\n" +
+	"\vregistry_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\n" +
+	"registryId\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\"\\\n" +
+	"\x1fToggleRegistryRedirectsMetadata\x12\x1f\n" +
+	"\vregistry_id\x18\x01 \x01(\tR\n" +
+	"registryId\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\"c\n" +
+	"\x1cToggleFolderRedirectsRequest\x12)\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\"y\n" +
+	"\x1dToggleFolderRedirectsMetadata\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12!\n" +
+	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled\"`\n" +
+	"\x1bToggleCloudRedirectsRequest\x12'\n" +
+	"\bcloud_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12\x18\n" +
+	"\aenabled\x18\x02 \x01(\bR\aenabled\"v\n" +
+	"\x1cToggleCloudRedirectsMetadata\x12\x19\n" +
+	"\bcloud_id\x18\x01 \x01(\tR\acloudId\x12!\n" +
+	"\fregistry_ids\x18\x02 \x03(\tR\vregistryIds\x12\x18\n" +
+	"\aenabled\x18\x03 \x01(\bR\aenabled2\xb5\b\n" +
 	"\x10MigrationService\x12\xa4\x01\n" +
 	"\n" +
 	"StartCloud\x129.yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest\x1a!.yandex.cloud.operation.Operation\"8\xb2\xd2*4\n" +
 	"\x1bStartCloudMigrationMetadata\x12\x15google.protobuf.Empty\x12\xa7\x01\n" +
 	"\vStartFolder\x12:.yandex.cloud.cloudregistry.v1.StartFolderMigrationRequest\x1a!.yandex.cloud.operation.Operation\"9\xb2\xd2*5\n" +
 	"\x1cStartFolderMigrationMetadata\x12\x15google.protobuf.Empty\x12\xaa\x01\n" +
-	" GetCloudMigrationStatusDashboard\x12F.yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest\x1a<.yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard\"\x00Bt\n" +
+	" GetCloudMigrationStatusDashboard\x12F.yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest\x1a<.yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard\"\x00\x12\xb9\x01\n" +
+	"\x17ToggleRegistryRedirects\x12=.yandex.cloud.cloudregistry.v1.ToggleRegistryRedirectsRequest\x1a!.yandex.cloud.operation.Operation\"<\xb2\xd2*8\n" +
+	"\x1fToggleRegistryRedirectsMetadata\x12\x15google.protobuf.Empty\x12\xb3\x01\n" +
+	"\x15ToggleFolderRedirects\x12;.yandex.cloud.cloudregistry.v1.ToggleFolderRedirectsRequest\x1a!.yandex.cloud.operation.Operation\":\xb2\xd2*6\n" +
+	"\x1dToggleFolderRedirectsMetadata\x12\x15google.protobuf.Empty\x12\xb0\x01\n" +
+	"\x14ToggleCloudRedirects\x12:.yandex.cloud.cloudregistry.v1.ToggleCloudRedirectsRequest\x1a!.yandex.cloud.operation.Operation\"9\xb2\xd2*5\n" +
+	"\x1cToggleCloudRedirectsMetadata\x12\x15google.protobuf.EmptyBt\n" +
 	"!yandex.cloud.api.cloudregistry.v1ZOgithub.com/yandex-cloud/go-genproto/yandex/cloud/cloudregistry/v1;cloudregistryb\x06proto3"
 
 var (
@@ -518,7 +916,7 @@ func file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescGZIP() []
 	return file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDescData
 }
 
-var file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_yandex_cloud_cloudregistry_v1_migration_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_yandex_cloud_cloudregistry_v1_migration_service_proto_goTypes = []any{
 	(*StartCloudMigrationRequest)(nil),              // 0: yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
 	(*StartCloudMigrationMetadata)(nil),             // 1: yandex.cloud.cloudregistry.v1.StartCloudMigrationMetadata
@@ -527,27 +925,39 @@ var file_yandex_cloud_cloudregistry_v1_migration_service_proto_goTypes = []any{
 	(*GetCloudMigrationStatusDashboardRequest)(nil), // 4: yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest
 	(*CloudMigrationStatusDashboard)(nil),           // 5: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard
 	(*CloudMigrationProgressCounters)(nil),          // 6: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters
-	(MigrationStatus)(0),                            // 7: yandex.cloud.cloudregistry.v1.MigrationStatus
-	(*MigrationStatusDashboard)(nil),                // 8: yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
-	(*MigrationCounters)(nil),                       // 9: yandex.cloud.cloudregistry.v1.MigrationCounters
-	(*operation.Operation)(nil),                     // 10: yandex.cloud.operation.Operation
+	(*ToggleRegistryRedirectsRequest)(nil),          // 7: yandex.cloud.cloudregistry.v1.ToggleRegistryRedirectsRequest
+	(*ToggleRegistryRedirectsMetadata)(nil),         // 8: yandex.cloud.cloudregistry.v1.ToggleRegistryRedirectsMetadata
+	(*ToggleFolderRedirectsRequest)(nil),            // 9: yandex.cloud.cloudregistry.v1.ToggleFolderRedirectsRequest
+	(*ToggleFolderRedirectsMetadata)(nil),           // 10: yandex.cloud.cloudregistry.v1.ToggleFolderRedirectsMetadata
+	(*ToggleCloudRedirectsRequest)(nil),             // 11: yandex.cloud.cloudregistry.v1.ToggleCloudRedirectsRequest
+	(*ToggleCloudRedirectsMetadata)(nil),            // 12: yandex.cloud.cloudregistry.v1.ToggleCloudRedirectsMetadata
+	(MigrationStatus)(0),                            // 13: yandex.cloud.cloudregistry.v1.MigrationStatus
+	(*MigrationStatusDashboard)(nil),                // 14: yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	(*MigrationCounters)(nil),                       // 15: yandex.cloud.cloudregistry.v1.MigrationCounters
+	(*operation.Operation)(nil),                     // 16: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_cloudregistry_v1_migration_service_proto_depIdxs = []int32{
-	7,  // 0: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.status:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatus
+	13, // 0: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.status:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatus
 	6,  // 1: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.progress:type_name -> yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters
-	8,  // 2: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_failed_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
-	8,  // 3: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_in_progress_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
-	9,  // 4: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
-	9,  // 5: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.repositories:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
-	9,  // 6: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.tags:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	14, // 2: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_failed_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	14, // 3: yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard.top_in_progress_registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationStatusDashboard
+	15, // 4: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.registries:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	15, // 5: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.repositories:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
+	15, // 6: yandex.cloud.cloudregistry.v1.CloudMigrationProgressCounters.tags:type_name -> yandex.cloud.cloudregistry.v1.MigrationCounters
 	0,  // 7: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:input_type -> yandex.cloud.cloudregistry.v1.StartCloudMigrationRequest
 	2,  // 8: yandex.cloud.cloudregistry.v1.MigrationService.StartFolder:input_type -> yandex.cloud.cloudregistry.v1.StartFolderMigrationRequest
 	4,  // 9: yandex.cloud.cloudregistry.v1.MigrationService.GetCloudMigrationStatusDashboard:input_type -> yandex.cloud.cloudregistry.v1.GetCloudMigrationStatusDashboardRequest
-	10, // 10: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:output_type -> yandex.cloud.operation.Operation
-	10, // 11: yandex.cloud.cloudregistry.v1.MigrationService.StartFolder:output_type -> yandex.cloud.operation.Operation
-	5,  // 12: yandex.cloud.cloudregistry.v1.MigrationService.GetCloudMigrationStatusDashboard:output_type -> yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard
-	10, // [10:13] is the sub-list for method output_type
-	7,  // [7:10] is the sub-list for method input_type
+	7,  // 10: yandex.cloud.cloudregistry.v1.MigrationService.ToggleRegistryRedirects:input_type -> yandex.cloud.cloudregistry.v1.ToggleRegistryRedirectsRequest
+	9,  // 11: yandex.cloud.cloudregistry.v1.MigrationService.ToggleFolderRedirects:input_type -> yandex.cloud.cloudregistry.v1.ToggleFolderRedirectsRequest
+	11, // 12: yandex.cloud.cloudregistry.v1.MigrationService.ToggleCloudRedirects:input_type -> yandex.cloud.cloudregistry.v1.ToggleCloudRedirectsRequest
+	16, // 13: yandex.cloud.cloudregistry.v1.MigrationService.StartCloud:output_type -> yandex.cloud.operation.Operation
+	16, // 14: yandex.cloud.cloudregistry.v1.MigrationService.StartFolder:output_type -> yandex.cloud.operation.Operation
+	5,  // 15: yandex.cloud.cloudregistry.v1.MigrationService.GetCloudMigrationStatusDashboard:output_type -> yandex.cloud.cloudregistry.v1.CloudMigrationStatusDashboard
+	16, // 16: yandex.cloud.cloudregistry.v1.MigrationService.ToggleRegistryRedirects:output_type -> yandex.cloud.operation.Operation
+	16, // 17: yandex.cloud.cloudregistry.v1.MigrationService.ToggleFolderRedirects:output_type -> yandex.cloud.operation.Operation
+	16, // 18: yandex.cloud.cloudregistry.v1.MigrationService.ToggleCloudRedirects:output_type -> yandex.cloud.operation.Operation
+	13, // [13:19] is the sub-list for method output_type
+	7,  // [7:13] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -565,7 +975,7 @@ func file_yandex_cloud_cloudregistry_v1_migration_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc), len(file_yandex_cloud_cloudregistry_v1_migration_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

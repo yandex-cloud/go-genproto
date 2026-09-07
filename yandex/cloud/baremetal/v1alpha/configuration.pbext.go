@@ -74,6 +74,10 @@ func (m *Configuration) SetMountingAvailability(v MountingAvailability) {
 	m.MountingAvailability = v
 }
 
+func (m *Configuration) SetServerType(v ServerType) {
+	m.ServerType = v
+}
+
 func (m *ConfigurationNetworkInterface) SetId(v string) {
 	m.Id = v
 }
