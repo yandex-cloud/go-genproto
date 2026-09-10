@@ -20,13 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DashboardService_Get_FullMethodName                = "/yandex.cloud.monitoring.v3.DashboardService/Get"
-	DashboardService_List_FullMethodName               = "/yandex.cloud.monitoring.v3.DashboardService/List"
-	DashboardService_Create_FullMethodName             = "/yandex.cloud.monitoring.v3.DashboardService/Create"
-	DashboardService_Update_FullMethodName             = "/yandex.cloud.monitoring.v3.DashboardService/Update"
-	DashboardService_Delete_FullMethodName             = "/yandex.cloud.monitoring.v3.DashboardService/Delete"
-	DashboardService_ListOperations_FullMethodName     = "/yandex.cloud.monitoring.v3.DashboardService/ListOperations"
-	DashboardService_ConvertFromGrafana_FullMethodName = "/yandex.cloud.monitoring.v3.DashboardService/ConvertFromGrafana"
+	DashboardService_Get_FullMethodName            = "/yandex.cloud.monitoring.v3.DashboardService/Get"
+	DashboardService_List_FullMethodName           = "/yandex.cloud.monitoring.v3.DashboardService/List"
+	DashboardService_Create_FullMethodName         = "/yandex.cloud.monitoring.v3.DashboardService/Create"
+	DashboardService_Update_FullMethodName         = "/yandex.cloud.monitoring.v3.DashboardService/Update"
+	DashboardService_Delete_FullMethodName         = "/yandex.cloud.monitoring.v3.DashboardService/Delete"
+	DashboardService_ListOperations_FullMethodName = "/yandex.cloud.monitoring.v3.DashboardService/ListOperations"
 )
 
 // DashboardServiceClient is the client API for DashboardService service.
@@ -47,13 +46,6 @@ type DashboardServiceClient interface {
 	Delete(ctx context.Context, in *DeleteDashboardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Lists operations for the specified dashboard.
 	ListOperations(ctx context.Context, in *ListDashboardOperationsRequest, opts ...grpc.CallOption) (*ListDashboardOperationsResponse, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// The method predates this rule; renaming a published rpc is a breaking change. --)
-	// Converts a Grafana dashboard into a Monitoring dashboard draft.
-	//
-	// Nothing is persisted: the caller reviews the returned draft and the
-	// diagnostics, then calls [DashboardService.Create] to materialize it.
-	ConvertFromGrafana(ctx context.Context, in *ConvertFromGrafanaRequest, opts ...grpc.CallOption) (*ConvertFromGrafanaResponse, error)
 }
 
 type dashboardServiceClient struct {
@@ -124,16 +116,6 @@ func (c *dashboardServiceClient) ListOperations(ctx context.Context, in *ListDas
 	return out, nil
 }
 
-func (c *dashboardServiceClient) ConvertFromGrafana(ctx context.Context, in *ConvertFromGrafanaRequest, opts ...grpc.CallOption) (*ConvertFromGrafanaResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ConvertFromGrafanaResponse)
-	err := c.cc.Invoke(ctx, DashboardService_ConvertFromGrafana_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // DashboardServiceServer is the server API for DashboardService service.
 // All implementations should embed UnimplementedDashboardServiceServer
 // for forward compatibility.
@@ -152,13 +134,6 @@ type DashboardServiceServer interface {
 	Delete(context.Context, *DeleteDashboardRequest) (*operation.Operation, error)
 	// Lists operations for the specified dashboard.
 	ListOperations(context.Context, *ListDashboardOperationsRequest) (*ListDashboardOperationsResponse, error)
-	// (-- api-linter: yc::1702::method-verb-prefix=disabled
-	// The method predates this rule; renaming a published rpc is a breaking change. --)
-	// Converts a Grafana dashboard into a Monitoring dashboard draft.
-	//
-	// Nothing is persisted: the caller reviews the returned draft and the
-	// diagnostics, then calls [DashboardService.Create] to materialize it.
-	ConvertFromGrafana(context.Context, *ConvertFromGrafanaRequest) (*ConvertFromGrafanaResponse, error)
 }
 
 // UnimplementedDashboardServiceServer should be embedded to have
@@ -185,9 +160,6 @@ func (UnimplementedDashboardServiceServer) Delete(context.Context, *DeleteDashbo
 }
 func (UnimplementedDashboardServiceServer) ListOperations(context.Context, *ListDashboardOperationsRequest) (*ListDashboardOperationsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListOperations not implemented")
-}
-func (UnimplementedDashboardServiceServer) ConvertFromGrafana(context.Context, *ConvertFromGrafanaRequest) (*ConvertFromGrafanaResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ConvertFromGrafana not implemented")
 }
 func (UnimplementedDashboardServiceServer) testEmbeddedByValue() {}
 
@@ -317,24 +289,6 @@ func _DashboardService_ListOperations_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DashboardService_ConvertFromGrafana_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ConvertFromGrafanaRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DashboardServiceServer).ConvertFromGrafana(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: DashboardService_ConvertFromGrafana_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DashboardServiceServer).ConvertFromGrafana(ctx, req.(*ConvertFromGrafanaRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // DashboardService_ServiceDesc is the grpc.ServiceDesc for DashboardService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -366,9 +320,125 @@ var DashboardService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ListOperations",
 			Handler:    _DashboardService_ListOperations_Handler,
 		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "yandex/cloud/monitoring/v3/dashboard_service.proto",
+}
+
+const (
+	DashboardConversionService_ConvertFromGrafana_FullMethodName = "/yandex.cloud.monitoring.v3.DashboardConversionService/ConvertFromGrafana"
+)
+
+// DashboardConversionServiceClient is the client API for DashboardConversionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// A set of methods for turning a dashboard of another monitoring system into a
+// Monitoring one. Separate from [DashboardService] because nothing here touches
+// stored dashboards: every method is stateless and persists nothing.
+type DashboardConversionServiceClient interface {
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// The method predates this rule; renaming a published rpc is a breaking change. --)
+	// Converts a Grafana dashboard into a Monitoring dashboard draft.
+	//
+	// Nothing is persisted: the caller reviews the returned draft and the
+	// diagnostics, then calls [DashboardService.Create] to materialize it.
+	ConvertFromGrafana(ctx context.Context, in *ConvertFromGrafanaRequest, opts ...grpc.CallOption) (*ConvertFromGrafanaResponse, error)
+}
+
+type dashboardConversionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDashboardConversionServiceClient(cc grpc.ClientConnInterface) DashboardConversionServiceClient {
+	return &dashboardConversionServiceClient{cc}
+}
+
+func (c *dashboardConversionServiceClient) ConvertFromGrafana(ctx context.Context, in *ConvertFromGrafanaRequest, opts ...grpc.CallOption) (*ConvertFromGrafanaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConvertFromGrafanaResponse)
+	err := c.cc.Invoke(ctx, DashboardConversionService_ConvertFromGrafana_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DashboardConversionServiceServer is the server API for DashboardConversionService service.
+// All implementations should embed UnimplementedDashboardConversionServiceServer
+// for forward compatibility.
+//
+// A set of methods for turning a dashboard of another monitoring system into a
+// Monitoring one. Separate from [DashboardService] because nothing here touches
+// stored dashboards: every method is stateless and persists nothing.
+type DashboardConversionServiceServer interface {
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled
+	// The method predates this rule; renaming a published rpc is a breaking change. --)
+	// Converts a Grafana dashboard into a Monitoring dashboard draft.
+	//
+	// Nothing is persisted: the caller reviews the returned draft and the
+	// diagnostics, then calls [DashboardService.Create] to materialize it.
+	ConvertFromGrafana(context.Context, *ConvertFromGrafanaRequest) (*ConvertFromGrafanaResponse, error)
+}
+
+// UnimplementedDashboardConversionServiceServer should be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedDashboardConversionServiceServer struct{}
+
+func (UnimplementedDashboardConversionServiceServer) ConvertFromGrafana(context.Context, *ConvertFromGrafanaRequest) (*ConvertFromGrafanaResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConvertFromGrafana not implemented")
+}
+func (UnimplementedDashboardConversionServiceServer) testEmbeddedByValue() {}
+
+// UnsafeDashboardConversionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to DashboardConversionServiceServer will
+// result in compilation errors.
+type UnsafeDashboardConversionServiceServer interface {
+	mustEmbedUnimplementedDashboardConversionServiceServer()
+}
+
+func RegisterDashboardConversionServiceServer(s grpc.ServiceRegistrar, srv DashboardConversionServiceServer) {
+	// If the following call panics, it indicates UnimplementedDashboardConversionServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&DashboardConversionService_ServiceDesc, srv)
+}
+
+func _DashboardConversionService_ConvertFromGrafana_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertFromGrafanaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DashboardConversionServiceServer).ConvertFromGrafana(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DashboardConversionService_ConvertFromGrafana_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DashboardConversionServiceServer).ConvertFromGrafana(ctx, req.(*ConvertFromGrafanaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// DashboardConversionService_ServiceDesc is the grpc.ServiceDesc for DashboardConversionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var DashboardConversionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "yandex.cloud.monitoring.v3.DashboardConversionService",
+	HandlerType: (*DashboardConversionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ConvertFromGrafana",
-			Handler:    _DashboardService_ConvertFromGrafana_Handler,
+			Handler:    _DashboardConversionService_ConvertFromGrafana_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

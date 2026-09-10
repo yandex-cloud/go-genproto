@@ -14,7 +14,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -25,158 +24,48 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateChangeFreezeMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the resource.
-	ResourceId    string `protobuf:"bytes,1,opt,name=resource_id,json=resourceId,proto3" json:"resource_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateChangeFreezeMetadata) Reset() {
-	*x = CreateChangeFreezeMetadata{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateChangeFreezeMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateChangeFreezeMetadata) ProtoMessage() {}
-
-func (x *CreateChangeFreezeMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateChangeFreezeMetadata.ProtoReflect.Descriptor instead.
-func (*CreateChangeFreezeMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *CreateChangeFreezeMetadata) GetResourceId() string {
-	if x != nil {
-		return x.ResourceId
-	}
-	return ""
-}
-
-type TerminateChangeFreezeMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the change freeze.
-	ChangeFreezeId string `protobuf:"bytes,1,opt,name=change_freeze_id,json=changeFreezeId,proto3" json:"change_freeze_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *TerminateChangeFreezeMetadata) Reset() {
-	*x = TerminateChangeFreezeMetadata{}
-	mi := &file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TerminateChangeFreezeMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TerminateChangeFreezeMetadata) ProtoMessage() {}
-
-func (x *TerminateChangeFreezeMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TerminateChangeFreezeMetadata.ProtoReflect.Descriptor instead.
-func (*TerminateChangeFreezeMetadata) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *TerminateChangeFreezeMetadata) GetChangeFreezeId() string {
-	if x != nil {
-		return x.ChangeFreezeId
-	}
-	return ""
-}
-
 var File_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDesc = "" +
 	"\n" +
-	"7yandex/cloud/mdb/mongodb/v1/change_freeze_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/maintenance/v2/change_freeze.proto\x1a&yandex/cloud/operation/operation.proto\"=\n" +
-	"\x1aCreateChangeFreezeMetadata\x12\x1f\n" +
-	"\vresource_id\x18\x01 \x01(\tR\n" +
-	"resourceId\"I\n" +
-	"\x1dTerminateChangeFreezeMetadata\x12(\n" +
-	"\x10change_freeze_id\x18\x01 \x01(\tR\x0echangeFreezeId2\x84\b\n" +
-	"\x13ChangeFreezeService\x12\xdb\x01\n" +
-	"\x06Create\x126.yandex.cloud.maintenance.v2.CreateChangeFreezeRequest\x1a!.yandex.cloud.operation.Operation\"v\xb2\xd2*F\n" +
-	"\x1aCreateChangeFreezeMetadata\x12(yandex.cloud.maintenance.v2.ChangeFreeze\x82\xd3\xe4\x93\x02&:\x01*\"!/managed-mongodb/v1/changeFreezes\x12\xa3\x01\n" +
+	"7yandex/cloud/mdb/mongodb/v1/change_freeze_service.proto\x12\x1byandex.cloud.mdb.mongodb.v1\x1a\x1cgoogle/api/annotations.proto\x1a yandex/cloud/api/operation.proto\x1a/yandex/cloud/maintenance/v2/change_freeze.proto\x1a&yandex/cloud/operation/operation.proto2\xbd\b\n" +
+	"\x13ChangeFreezeService\x12\xf8\x01\n" +
+	"\x06Create\x126.yandex.cloud.maintenance.v2.CreateChangeFreezeRequest\x1a!.yandex.cloud.operation.Operation\"\x92\x01\xb2\xd2*b\n" +
+	"6yandex.cloud.maintenance.v2.CreateChangeFreezeMetadata\x12(yandex.cloud.maintenance.v2.ChangeFreeze\x82\xd3\xe4\x93\x02&:\x01*\"!/managed-mongodb/v1/changeFreezes\x12\xa3\x01\n" +
 	"\x03Get\x123.yandex.cloud.maintenance.v2.GetChangeFreezeRequest\x1a).yandex.cloud.maintenance.v2.ChangeFreeze\"<\x82\xd3\xe4\x93\x026\x124/managed-mongodb/v1/changeFreezes/{change_freeze_id}\x12\xa0\x01\n" +
-	"\x04List\x125.yandex.cloud.maintenance.v2.ListChangeFreezesRequest\x1a6.yandex.cloud.maintenance.v2.ListChangeFreezesResponse\")\x82\xd3\xe4\x93\x02#\x12!/managed-mongodb/v1/changeFreezes\x12\x93\x02\n" +
-	"\tTerminate\x129.yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest\x1a!.yandex.cloud.operation.Operation\"\xa7\x01\xb2\xd2*Z\n" +
-	"\x1dTerminateChangeFreezeMetadata\x129yandex.cloud.maintenance.v2.TerminateChangeFreezeResponse\x82\xd3\xe4\x93\x02C:\x01*\">/managed-mongodb/v1/changeFreezes/{change_freeze_id}:terminate\x12\xaf\x01\n" +
+	"\x04List\x125.yandex.cloud.maintenance.v2.ListChangeFreezesRequest\x1a6.yandex.cloud.maintenance.v2.ListChangeFreezesResponse\")\x82\xd3\xe4\x93\x02#\x12!/managed-mongodb/v1/changeFreezes\x12\xaf\x02\n" +
+	"\tTerminate\x129.yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest\x1a!.yandex.cloud.operation.Operation\"\xc3\x01\xb2\xd2*v\n" +
+	"9yandex.cloud.maintenance.v2.TerminateChangeFreezeMetadata\x129yandex.cloud.maintenance.v2.TerminateChangeFreezeResponse\x82\xd3\xe4\x93\x02C:\x01*\">/managed-mongodb/v1/changeFreezes/{change_freeze_id}:terminate\x12\xaf\x01\n" +
 	"\tGetLimits\x129.yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest\x1a7.yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse\".\x82\xd3\xe4\x93\x02(\x12&/managed-mongodb/v1/changeFreezeLimitsBj\n" +
 	"\x1fyandex.cloud.api.mdb.mongodb.v1ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mongodb/v1;mongodbb\x06proto3"
 
-var (
-	file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescOnce sync.Once
-	file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescData []byte
-)
-
-func file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescGZIP() []byte {
-	file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescOnce.Do(func() {
-		file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDesc), len(file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDesc)))
-	})
-	return file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDescData
-}
-
-var file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_goTypes = []any{
-	(*CreateChangeFreezeMetadata)(nil),      // 0: yandex.cloud.mdb.mongodb.v1.CreateChangeFreezeMetadata
-	(*TerminateChangeFreezeMetadata)(nil),   // 1: yandex.cloud.mdb.mongodb.v1.TerminateChangeFreezeMetadata
-	(*v2.CreateChangeFreezeRequest)(nil),    // 2: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest
-	(*v2.GetChangeFreezeRequest)(nil),       // 3: yandex.cloud.maintenance.v2.GetChangeFreezeRequest
-	(*v2.ListChangeFreezesRequest)(nil),     // 4: yandex.cloud.maintenance.v2.ListChangeFreezesRequest
-	(*v2.TerminateChangeFreezeRequest)(nil), // 5: yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest
-	(*v2.GetChangeFreezeLimitsRequest)(nil), // 6: yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest
-	(*operation.Operation)(nil),             // 7: yandex.cloud.operation.Operation
-	(*v2.ChangeFreeze)(nil),                 // 8: yandex.cloud.maintenance.v2.ChangeFreeze
-	(*v2.ListChangeFreezesResponse)(nil),    // 9: yandex.cloud.maintenance.v2.ListChangeFreezesResponse
-	(*v2.ChangeFreezeLimitsResponse)(nil),   // 10: yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse
+	(*v2.CreateChangeFreezeRequest)(nil),    // 0: yandex.cloud.maintenance.v2.CreateChangeFreezeRequest
+	(*v2.GetChangeFreezeRequest)(nil),       // 1: yandex.cloud.maintenance.v2.GetChangeFreezeRequest
+	(*v2.ListChangeFreezesRequest)(nil),     // 2: yandex.cloud.maintenance.v2.ListChangeFreezesRequest
+	(*v2.TerminateChangeFreezeRequest)(nil), // 3: yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest
+	(*v2.GetChangeFreezeLimitsRequest)(nil), // 4: yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest
+	(*operation.Operation)(nil),             // 5: yandex.cloud.operation.Operation
+	(*v2.ChangeFreeze)(nil),                 // 6: yandex.cloud.maintenance.v2.ChangeFreeze
+	(*v2.ListChangeFreezesResponse)(nil),    // 7: yandex.cloud.maintenance.v2.ListChangeFreezesResponse
+	(*v2.ChangeFreezeLimitsResponse)(nil),   // 8: yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse
 }
 var file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_depIdxs = []int32{
-	2,  // 0: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Create:input_type -> yandex.cloud.maintenance.v2.CreateChangeFreezeRequest
-	3,  // 1: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Get:input_type -> yandex.cloud.maintenance.v2.GetChangeFreezeRequest
-	4,  // 2: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.List:input_type -> yandex.cloud.maintenance.v2.ListChangeFreezesRequest
-	5,  // 3: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Terminate:input_type -> yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest
-	6,  // 4: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.GetLimits:input_type -> yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest
-	7,  // 5: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Create:output_type -> yandex.cloud.operation.Operation
-	8,  // 6: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Get:output_type -> yandex.cloud.maintenance.v2.ChangeFreeze
-	9,  // 7: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.List:output_type -> yandex.cloud.maintenance.v2.ListChangeFreezesResponse
-	7,  // 8: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Terminate:output_type -> yandex.cloud.operation.Operation
-	10, // 9: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.GetLimits:output_type -> yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse
-	5,  // [5:10] is the sub-list for method output_type
-	0,  // [0:5] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	0, // 0: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Create:input_type -> yandex.cloud.maintenance.v2.CreateChangeFreezeRequest
+	1, // 1: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Get:input_type -> yandex.cloud.maintenance.v2.GetChangeFreezeRequest
+	2, // 2: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.List:input_type -> yandex.cloud.maintenance.v2.ListChangeFreezesRequest
+	3, // 3: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Terminate:input_type -> yandex.cloud.maintenance.v2.TerminateChangeFreezeRequest
+	4, // 4: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.GetLimits:input_type -> yandex.cloud.maintenance.v2.GetChangeFreezeLimitsRequest
+	5, // 5: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Create:output_type -> yandex.cloud.operation.Operation
+	6, // 6: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Get:output_type -> yandex.cloud.maintenance.v2.ChangeFreeze
+	7, // 7: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.List:output_type -> yandex.cloud.maintenance.v2.ListChangeFreezesResponse
+	5, // 8: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.Terminate:output_type -> yandex.cloud.operation.Operation
+	8, // 9: yandex.cloud.mdb.mongodb.v1.ChangeFreezeService.GetLimits:output_type -> yandex.cloud.maintenance.v2.ChangeFreezeLimitsResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for extension type_name
+	0, // [0:0] is the sub-list for extension extendee
+	0, // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_init() }
@@ -190,13 +79,12 @@ func file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDesc), len(file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_depIdxs,
-		MessageInfos:      file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto = out.File
 	file_yandex_cloud_mdb_mongodb_v1_change_freeze_service_proto_goTypes = nil

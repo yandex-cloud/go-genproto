@@ -31,6 +31,8 @@ const (
 	AdvancedRateLimiterRule_ACTION_UNSPECIFIED AdvancedRateLimiterRule_Action = 0
 	// Deny request.
 	AdvancedRateLimiterRule_DENY AdvancedRateLimiterRule_Action = 1
+	// Show a CAPTCHA challenge.
+	AdvancedRateLimiterRule_CAPTCHA AdvancedRateLimiterRule_Action = 2
 )
 
 // Enum value maps for AdvancedRateLimiterRule_Action.
@@ -38,10 +40,12 @@ var (
 	AdvancedRateLimiterRule_Action_name = map[int32]string{
 		0: "ACTION_UNSPECIFIED",
 		1: "DENY",
+		2: "CAPTCHA",
 	}
 	AdvancedRateLimiterRule_Action_value = map[string]int32{
 		"ACTION_UNSPECIFIED": 0,
 		"DENY":               1,
+		"CAPTCHA":            2,
 	}
 )
 
@@ -816,7 +820,7 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"\bcloud_id\x18\t \x01(\tR\acloudId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xff\x12\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8c\x13\n" +
 	"\x17AdvancedRateLimiterRule\x12\x80\x01\n" +
 	"\fstatic_quota\x18\x05 \x01(\v2[.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.StaticQuotaH\x00R\vstaticQuota\x12\x83\x01\n" +
 	"\rdynamic_quota\x18\x06 \x01(\v2\\.yandex.cloud.smartwebsecurity.v1.advanced_rate_limiter.AdvancedRateLimiterRule.DynamicQuotaH\x00R\fdynamicQuota\x12>\n" +
@@ -862,10 +866,11 @@ const file_yandex_cloud_smartwebsecurity_v1_advanced_rate_limiter_advanced_rate_
 	"HEADER_KEY\x10\x02\x12\r\n" +
 	"\tQUERY_KEY\x10\x03B \n" +
 	"\x18characteristic_specifier\x12\x04\xc0\xc11\x01J\x04\b\x03\x10\n" +
-	"\"*\n" +
+	"\"7\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04DENY\x10\x01B\x16\n" +
+	"\x04DENY\x10\x01\x12\v\n" +
+	"\aCAPTCHA\x10\x02B\x16\n" +
 	"\x0erule_specifier\x12\x04\xc0\xc11\x01B\xa9\x01\n" +
 	":yandex.cloud.api.smartwebsecurity.v1.advanced_rate_limiterZkgithub.com/yandex-cloud/go-genproto/yandex/cloud/smartwebsecurity/v1/advanced_rate_limiter;smartwebsecurityb\x06proto3"
 

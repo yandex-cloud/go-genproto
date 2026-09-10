@@ -1056,7 +1056,7 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\x1aCLEANUP_POLICY_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15CLEANUP_POLICY_DELETE\x10\x01\x12\x1a\n" +
 	"\x16CLEANUP_POLICY_COMPACT\x10\x02\x12%\n" +
-	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xc1\t\n" +
+	"!CLEANUP_POLICY_COMPACT_AND_DELETE\x10\x03\"\xd0\t\n" +
 	"\fTopicConfig4\x12\\\n" +
 	"\x0ecleanup_policy\x18\x01 \x01(\x0e25.yandex.cloud.mdb.kafka.v1.TopicConfig4.CleanupPolicyR\rcleanupPolicy\x12U\n" +
 	"\x10compression_type\x18\x02 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12K\n" +
@@ -1069,8 +1069,8 @@ const file_yandex_cloud_mdb_kafka_v1_topic_proto_rawDesc = "" +
 	"\fretention_ms\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\vretentionMs\x12G\n" +
 	"\x11max_message_bytes\x18\n" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueR\x0fmaxMessageBytes\x12K\n" +
-	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12@\n" +
-	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\fsegmentBytes\x12@\n" +
+	"\x13min_insync_replicas\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x11minInsyncReplicas\x12O\n" +
+	"\rsegment_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=1048576R\fsegmentBytes\x12@\n" +
 	"\vpreallocate\x18\r \x01(\v2\x1a.google.protobuf.BoolValueB\x02\x18\x01R\vpreallocate\x12e\n" +
 	"\x16message_timestamp_type\x18\x0e \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x14messageTimestampType\"\x8d\x01\n" +
 	"\rCleanupPolicy\x12\x1e\n" +

@@ -2009,7 +2009,7 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\x19UnavailableDataSourceMode\x12,\n" +
 	"(UNAVAILABLE_DATA_SOURCE_MODE_UNSPECIFIED\x10\x00\x12-\n" +
 	")UNAVAILABLE_DATA_SOURCE_MODE_KEEP_QUERIES\x10\x01\x12%\n" +
-	"!UNAVAILABLE_DATA_SOURCE_MODE_DROP\x10\x022\xf6\t\n" +
+	"!UNAVAILABLE_DATA_SOURCE_MODE_DROP\x10\x022\xb7\b\n" +
 	"\x10DashboardService\x12\x8f\x01\n" +
 	"\x03Get\x12/.yandex.cloud.monitoring.v3.GetDashboardRequest\x1a%.yandex.cloud.monitoring.v3.Dashboard\"0\x82\xd3\xe4\x93\x02*\x12(/monitoring/v3/dashboards/{dashboard_id}\x12\x90\x01\n" +
 	"\x04List\x121.yandex.cloud.monitoring.v3.ListDashboardsRequest\x1a2.yandex.cloud.monitoring.v3.ListDashboardsResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/monitoring/v3/dashboards\x12\xad\x01\n" +
@@ -2019,7 +2019,8 @@ const file_yandex_cloud_monitoring_v3_dashboard_service_proto_rawDesc = "" +
 	"\x17UpdateDashboardMetadata\x12\tDashboard\x82\xd3\xe4\x93\x02-:\x01*2(/monitoring/v3/dashboards/{dashboard_id}\x12\xc5\x01\n" +
 	"\x06Delete\x122.yandex.cloud.monitoring.v3.DeleteDashboardRequest\x1a!.yandex.cloud.operation.Operation\"d\xb2\xd2*0\n" +
 	"\x17DeleteDashboardMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02**(/monitoring/v3/dashboards/{dashboard_id}\x12\xc6\x01\n" +
-	"\x0eListOperations\x12:.yandex.cloud.monitoring.v3.ListDashboardOperationsRequest\x1a;.yandex.cloud.monitoring.v3.ListDashboardOperationsResponse\";\x82\xd3\xe4\x93\x025\x123/monitoring/v3/dashboards/{dashboard_id}/operations\x12\xbc\x01\n" +
+	"\x0eListOperations\x12:.yandex.cloud.monitoring.v3.ListDashboardOperationsRequest\x1a;.yandex.cloud.monitoring.v3.ListDashboardOperationsResponse\";\x82\xd3\xe4\x93\x025\x123/monitoring/v3/dashboards/{dashboard_id}/operations2\xdb\x01\n" +
+	"\x1aDashboardConversionService\x12\xbc\x01\n" +
 	"\x12ConvertFromGrafana\x125.yandex.cloud.monitoring.v3.ConvertFromGrafanaRequest\x1a6.yandex.cloud.monitoring.v3.ConvertFromGrafanaResponse\"7\x82\xd3\xe4\x93\x021:\x01*\",/monitoring/v3/dashboards:convertFromGrafanaBk\n" +
 	"\x1eyandex.cloud.api.monitoring.v3ZIgithub.com/yandex-cloud/go-genproto/yandex/cloud/monitoring/v3;monitoringb\x06proto3"
 
@@ -2105,14 +2106,14 @@ var file_yandex_cloud_monitoring_v3_dashboard_service_proto_depIdxs = []int32{
 	10, // 27: yandex.cloud.monitoring.v3.DashboardService.Update:input_type -> yandex.cloud.monitoring.v3.UpdateDashboardRequest
 	12, // 28: yandex.cloud.monitoring.v3.DashboardService.Delete:input_type -> yandex.cloud.monitoring.v3.DeleteDashboardRequest
 	14, // 29: yandex.cloud.monitoring.v3.DashboardService.ListOperations:input_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsRequest
-	21, // 30: yandex.cloud.monitoring.v3.DashboardService.ConvertFromGrafana:input_type -> yandex.cloud.monitoring.v3.ConvertFromGrafanaRequest
+	21, // 30: yandex.cloud.monitoring.v3.DashboardConversionService.ConvertFromGrafana:input_type -> yandex.cloud.monitoring.v3.ConvertFromGrafanaRequest
 	28, // 31: yandex.cloud.monitoring.v3.DashboardService.Get:output_type -> yandex.cloud.monitoring.v3.Dashboard
 	7,  // 32: yandex.cloud.monitoring.v3.DashboardService.List:output_type -> yandex.cloud.monitoring.v3.ListDashboardsResponse
 	34, // 33: yandex.cloud.monitoring.v3.DashboardService.Create:output_type -> yandex.cloud.operation.Operation
 	34, // 34: yandex.cloud.monitoring.v3.DashboardService.Update:output_type -> yandex.cloud.operation.Operation
 	34, // 35: yandex.cloud.monitoring.v3.DashboardService.Delete:output_type -> yandex.cloud.operation.Operation
 	15, // 36: yandex.cloud.monitoring.v3.DashboardService.ListOperations:output_type -> yandex.cloud.monitoring.v3.ListDashboardOperationsResponse
-	22, // 37: yandex.cloud.monitoring.v3.DashboardService.ConvertFromGrafana:output_type -> yandex.cloud.monitoring.v3.ConvertFromGrafanaResponse
+	22, // 37: yandex.cloud.monitoring.v3.DashboardConversionService.ConvertFromGrafana:output_type -> yandex.cloud.monitoring.v3.ConvertFromGrafanaResponse
 	31, // [31:38] is the sub-list for method output_type
 	24, // [24:31] is the sub-list for method input_type
 	24, // [24:24] is the sub-list for extension type_name
@@ -2145,7 +2146,7 @@ func file_yandex_cloud_monitoring_v3_dashboard_service_proto_init() {
 			NumEnums:      5,
 			NumMessages:   22,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_yandex_cloud_monitoring_v3_dashboard_service_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_monitoring_v3_dashboard_service_proto_depIdxs,

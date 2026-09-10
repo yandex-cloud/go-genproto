@@ -116,7 +116,9 @@ type Permissions struct {
 	Categories *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=categories,proto3" json:"categories,omitempty"`
 	// Commands user can execute.
 	Commands *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=commands,proto3" json:"commands,omitempty"`
-	// SanitizePayload parameter.
+	// Deprecated. This parameter is ignored.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/user.proto.
 	SanitizePayload *wrapperspb.StringValue `protobuf:"bytes,5,opt,name=sanitize_payload,json=sanitizePayload,proto3" json:"sanitize_payload,omitempty"`
 	// Databases parameter.
 	Databases     *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=databases,proto3" json:"databases,omitempty"`
@@ -182,6 +184,7 @@ func (x *Permissions) GetCommands() *wrapperspb.StringValue {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/user.proto.
 func (x *Permissions) GetSanitizePayload() *wrapperspb.StringValue {
 	if x != nil {
 		return x.SanitizePayload
@@ -280,15 +283,15 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vacl_options\x18\x05 \x01(\tR\n" +
-	"aclOptions\"\x8c\x03\n" +
+	"aclOptions\"\x90\x03\n" +
 	"\vPermissions\x128\n" +
 	"\bpatterns\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bpatterns\x12F\n" +
 	"\x10pub_sub_channels\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0epubSubChannels\x12<\n" +
 	"\n" +
 	"categories\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
 	"categories\x128\n" +
-	"\bcommands\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bcommands\x12G\n" +
-	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\x0fsanitizePayload\x12:\n" +
+	"\bcommands\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bcommands\x12K\n" +
+	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\x0fsanitizePayload\x12:\n" +
 	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\x9b\x02\n" +
 	"\bUserSpec\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12K\n" +

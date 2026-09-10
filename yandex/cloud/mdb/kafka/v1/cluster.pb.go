@@ -2258,7 +2258,7 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x19offsets_retention_minutes\x18\x13 \x01(\v2\x1b.google.protobuf.Int64ValueR\x17offsetsRetentionMinutes\x12`\n" +
 	"\x17sasl_enabled_mechanisms\x18\x14 \x03(\x0e2(.yandex.cloud.mdb.kafka.v1.SaslMechanismR\x15saslEnabledMechanisms\x12`\n" +
 	"\x1etransactional_id_expiration_ms\x18\x15 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1btransactionalIdExpirationMs\x12l\n" +
-	"\x1alog_message_timestamp_type\x18\x16 \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x17logMessageTimestampType\"\xf1\r\n" +
+	"\x1alog_message_timestamp_type\x18\x16 \x01(\x0e2/.yandex.cloud.mdb.kafka.v1.MessageTimestampTypeR\x17logMessageTimestampType\"\x80\x0e\n" +
 	"\fKafkaConfig4\x12U\n" +
 	"\x10compression_type\x18\x01 \x01(\x0e2*.yandex.cloud.mdb.kafka.v1.CompressionTypeR\x0fcompressionType\x12Z\n" +
 	"\x1blog_flush_interval_messages\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x18logFlushIntervalMessages\x12N\n" +
@@ -2267,8 +2267,8 @@ const file_yandex_cloud_mdb_kafka_v1_cluster_proto_rawDesc = "" +
 	"\x13log_retention_bytes\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11logRetentionBytes\x12K\n" +
 	"\x13log_retention_hours\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\x11logRetentionHours\x12O\n" +
 	"\x15log_retention_minutes\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR\x13logRetentionMinutes\x12E\n" +
-	"\x10log_retention_ms\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x0elogRetentionMs\x12G\n" +
-	"\x11log_segment_bytes\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR\x0flogSegmentBytes\x12T\n" +
+	"\x10log_retention_ms\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x0elogRetentionMs\x12V\n" +
+	"\x11log_segment_bytes\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\r\xfa\xc71\t>=1048576R\x0flogSegmentBytes\x12T\n" +
 	"\x18socket_send_buffer_bytes\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR\x15socketSendBufferBytes\x12Z\n" +
 	"\x1bsocket_receive_buffer_bytes\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR\x18socketReceiveBufferBytes\x12U\n" +
 	"\x19auto_create_topics_enable\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x16autoCreateTopicsEnable\x12B\n" +

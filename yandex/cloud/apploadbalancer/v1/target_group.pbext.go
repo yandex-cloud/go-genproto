@@ -46,6 +46,10 @@ func (m *Target) SetIpAddress(v string) {
 	}
 }
 
+func (m *Target) SetLocality(v *Locality) {
+	m.Locality = v
+}
+
 func (m *Target) SetSubnetId(v string) {
 	m.SubnetId = v
 }
