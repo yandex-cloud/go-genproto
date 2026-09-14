@@ -316,6 +316,14 @@ func (m *IPAllocationPolicy) SetServiceIpv6CidrBlock(v string) {
 	m.ServiceIpv6CidrBlock = v
 }
 
+func (m *IPAllocationPolicy) SetClusterIpv4CidrBlocks(v []string) {
+	m.ClusterIpv4CidrBlocks = v
+}
+
+func (m *IPAllocationPolicy) SetClusterIpv6CidrBlocks(v []string) {
+	m.ClusterIpv6CidrBlocks = v
+}
+
 func (m *MasterMaintenancePolicy) SetAutoUpgrade(v bool) {
 	m.AutoUpgrade = v
 }

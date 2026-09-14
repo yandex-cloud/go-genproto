@@ -1325,6 +1325,7 @@ type IPAllocationPolicy struct {
 	// CIDR block. IP range for allocating pod addresses.
 	// It should not overlap with any subnet in the network the Kubernetes cluster located in. Static routes will be
 	// set up for this CIDR blocks in node subnets.
+	// Deprecated: use cluster_ipv4_cidr_blocks instead.
 	ClusterIpv4CidrBlock string `protobuf:"bytes,1,opt,name=cluster_ipv4_cidr_block,json=clusterIpv4CidrBlock,proto3" json:"cluster_ipv4_cidr_block,omitempty"`
 	// Size of the masks that are assigned for each node in the cluster.
 	// If not specified, 24 is used.
@@ -1333,11 +1334,18 @@ type IPAllocationPolicy struct {
 	// It should not overlap with any subnet in the network the Kubernetes cluster located in.
 	ServiceIpv4CidrBlock string `protobuf:"bytes,2,opt,name=service_ipv4_cidr_block,json=serviceIpv4CidrBlock,proto3" json:"service_ipv4_cidr_block,omitempty"`
 	// IPv6 range for allocating pod IP addresses.
+	// Deprecated: use cluster_ipv6_cidr_blocks instead.
 	ClusterIpv6CidrBlock string `protobuf:"bytes,6,opt,name=cluster_ipv6_cidr_block,json=clusterIpv6CidrBlock,proto3" json:"cluster_ipv6_cidr_block,omitempty"`
 	// IPv6 range for allocating Kubernetes service IP addresses
 	ServiceIpv6CidrBlock string `protobuf:"bytes,7,opt,name=service_ipv6_cidr_block,json=serviceIpv6CidrBlock,proto3" json:"service_ipv6_cidr_block,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// IP ranges for allocating pod addresses (multiple CIDRs for dual-stack or extended address space).
+	// If set, takes precedence over cluster_ipv4_cidr_block.
+	ClusterIpv4CidrBlocks []string `protobuf:"bytes,8,rep,name=cluster_ipv4_cidr_blocks,json=clusterIpv4CidrBlocks,proto3" json:"cluster_ipv4_cidr_blocks,omitempty"`
+	// IPv6 ranges for allocating pod addresses (multiple CIDRs).
+	// If set, takes precedence over cluster_ipv6_cidr_block.
+	ClusterIpv6CidrBlocks []string `protobuf:"bytes,10,rep,name=cluster_ipv6_cidr_blocks,json=clusterIpv6CidrBlocks,proto3" json:"cluster_ipv6_cidr_blocks,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *IPAllocationPolicy) Reset() {
@@ -1403,6 +1411,20 @@ func (x *IPAllocationPolicy) GetServiceIpv6CidrBlock() string {
 		return x.ServiceIpv6CidrBlock
 	}
 	return ""
+}
+
+func (x *IPAllocationPolicy) GetClusterIpv4CidrBlocks() []string {
+	if x != nil {
+		return x.ClusterIpv4CidrBlocks
+	}
+	return nil
+}
+
+func (x *IPAllocationPolicy) GetClusterIpv6CidrBlocks() []string {
+	if x != nil {
+		return x.ClusterIpv6CidrBlocks
+	}
+	return nil
 }
 
 type MasterMaintenancePolicy struct {
@@ -1861,13 +1883,17 @@ const file_yandex_cloud_k8s_v1_cluster_proto_rawDesc = "" +
 	"\x0fMasterEndpoints\x120\n" +
 	"\x14internal_v4_endpoint\x18\x01 \x01(\tR\x12internalV4Endpoint\x120\n" +
 	"\x14external_v4_endpoint\x18\x02 \x01(\tR\x12externalV4Endpoint\x120\n" +
-	"\x14external_v6_endpoint\x18\x03 \x01(\tR\x12externalV6Endpoint\"\xc4\x02\n" +
+	"\x14external_v6_endpoint\x18\x03 \x01(\tR\x12externalV6Endpoint\"\xbc\x03\n" +
 	"\x12IPAllocationPolicy\x125\n" +
 	"\x17cluster_ipv4_cidr_block\x18\x01 \x01(\tR\x14clusterIpv4CidrBlock\x12L\n" +
 	"\x18node_ipv4_cidr_mask_size\x18\x05 \x01(\x03B\x14\xfa\xc71\x100,24,25,26,27,28R\x14nodeIpv4CidrMaskSize\x125\n" +
 	"\x17service_ipv4_cidr_block\x18\x02 \x01(\tR\x14serviceIpv4CidrBlock\x125\n" +
 	"\x17cluster_ipv6_cidr_block\x18\x06 \x01(\tR\x14clusterIpv6CidrBlock\x125\n" +
-	"\x17service_ipv6_cidr_block\x18\a \x01(\tR\x14serviceIpv6CidrBlockJ\x04\b\x03\x10\x05\"\x93\x01\n" +
+	"\x17service_ipv6_cidr_block\x18\a \x01(\tR\x14serviceIpv6CidrBlock\x127\n" +
+	"\x18cluster_ipv4_cidr_blocks\x18\b \x03(\tR\x15clusterIpv4CidrBlocks\x127\n" +
+	"\x18cluster_ipv6_cidr_blocks\x18\n" +
+	" \x03(\tR\x15clusterIpv6CidrBlocksJ\x04\b\x03\x10\x05J\x04\b\t\x10\n" +
+	"\"\x93\x01\n" +
 	"\x17MasterMaintenancePolicy\x12!\n" +
 	"\fauto_upgrade\x18\x01 \x01(\bR\vautoUpgrade\x12U\n" +
 	"\x12maintenance_window\x18\x02 \x01(\v2&.yandex.cloud.k8s.v1.MaintenanceWindowR\x11maintenanceWindow\"\x8a\x01\n" +

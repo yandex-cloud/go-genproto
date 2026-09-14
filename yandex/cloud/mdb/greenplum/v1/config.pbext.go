@@ -234,6 +234,10 @@ func (m *GreenplumConfig6) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleVal
 	m.GpResourceGroupMemoryLimit = v
 }
 
+func (m *GreenplumConfig6) SetTrackActivityQuerySize(v *wrapperspb.Int64Value) {
+	m.TrackActivityQuerySize = v
+}
+
 func (m *DBMSConfig) SetMaxConnections(v *wrapperspb.Int64Value) {
 	m.MaxConnections = v
 }
@@ -364,6 +368,10 @@ func (m *DBMSConfig) SetGpResourceGroupMemoryLimit(v *wrapperspb.DoubleValue) {
 
 func (m *DBMSConfig) SetGpAddColumnInheritsTableSetting(v *wrapperspb.BoolValue) {
 	m.GpAddColumnInheritsTableSetting = v
+}
+
+func (m *DBMSConfig) SetTrackActivityQuerySize(v *wrapperspb.Int64Value) {
+	m.TrackActivityQuerySize = v
 }
 
 func (m *GreenplumConfigSet6) SetEffectiveConfig(v *GreenplumConfig6) {

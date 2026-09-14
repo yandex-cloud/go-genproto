@@ -38,6 +38,10 @@ func (m *MongodConfig) SetChainingAllowed(v *wrapperspb.BoolValue) {
 	m.ChainingAllowed = v
 }
 
+func (m *MongodConfig) SetChangeStreamOptions(v *MongodConfig_ChangeStreamOptions) {
+	m.ChangeStreamOptions = v
+}
+
 func (m *MongodConfig_Storage) SetWiredTiger(v *MongodConfig_Storage_WiredTiger) {
 	m.WiredTiger = v
 }
@@ -204,6 +208,14 @@ func (m *MongodConfig_Oplog) SetMaxSizePercent(v *wrapperspb.Int64Value) {
 
 func (m *MongodConfig_Oplog) SetMinRetentionHours(v *wrapperspb.DoubleValue) {
 	m.MinRetentionHours = v
+}
+
+func (m *MongodConfig_ChangeStreamOptions) SetPreAndPostImages(v *MongodConfig_ChangeStreamOptions_PreAndPostImages) {
+	m.PreAndPostImages = v
+}
+
+func (m *MongodConfig_ChangeStreamOptions_PreAndPostImages) SetExpireAfterSeconds(v *wrapperspb.Int64Value) {
+	m.ExpireAfterSeconds = v
 }
 
 func (m *MongoCfgConfig) SetStorage(v *MongoCfgConfig_Storage) {

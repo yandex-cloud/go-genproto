@@ -58,6 +58,10 @@ func (m *ChangeFreeze) SetUpdatedAt(v *timestamppb.Timestamp) {
 	m.UpdatedAt = v
 }
 
+func (m *ChangeFreezeErrorCode) SetType(v ChangeFreezeErrorCode_Type) {
+	m.Type = v
+}
+
 func (m *CreateChangeFreezeRequest) SetResourceId(v string) {
 	m.ResourceId = v
 }
