@@ -22,55 +22,106 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Backup_BackupType int32
+type Backup_BackupMethod int32
 
 const (
-	Backup_BACKUP_TYPE_UNSPECIFIED Backup_BackupType = 0
-	// Backup created by automated daily schedule
-	Backup_AUTOMATED Backup_BackupType = 1
-	// Backup created by user request
-	Backup_MANUAL Backup_BackupType = 2
+	Backup_BACKUP_METHOD_UNSPECIFIED Backup_BackupMethod = 0
+	// Base backup.
+	Backup_BASE Backup_BackupMethod = 1
+	// Full backup.
+	Backup_FULL Backup_BackupMethod = 2
 )
 
-// Enum value maps for Backup_BackupType.
+// Enum value maps for Backup_BackupMethod.
 var (
-	Backup_BackupType_name = map[int32]string{
-		0: "BACKUP_TYPE_UNSPECIFIED",
-		1: "AUTOMATED",
-		2: "MANUAL",
+	Backup_BackupMethod_name = map[int32]string{
+		0: "BACKUP_METHOD_UNSPECIFIED",
+		1: "BASE",
+		2: "FULL",
 	}
-	Backup_BackupType_value = map[string]int32{
-		"BACKUP_TYPE_UNSPECIFIED": 0,
-		"AUTOMATED":               1,
-		"MANUAL":                  2,
+	Backup_BackupMethod_value = map[string]int32{
+		"BACKUP_METHOD_UNSPECIFIED": 0,
+		"BASE":                      1,
+		"FULL":                      2,
 	}
 )
 
-func (x Backup_BackupType) Enum() *Backup_BackupType {
-	p := new(Backup_BackupType)
+func (x Backup_BackupMethod) Enum() *Backup_BackupMethod {
+	p := new(Backup_BackupMethod)
 	*p = x
 	return p
 }
 
-func (x Backup_BackupType) String() string {
+func (x Backup_BackupMethod) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (Backup_BackupType) Descriptor() protoreflect.EnumDescriptor {
+func (Backup_BackupMethod) Descriptor() protoreflect.EnumDescriptor {
 	return file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes[0].Descriptor()
 }
 
-func (Backup_BackupType) Type() protoreflect.EnumType {
+func (Backup_BackupMethod) Type() protoreflect.EnumType {
 	return &file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes[0]
 }
 
-func (x Backup_BackupType) Number() protoreflect.EnumNumber {
+func (x Backup_BackupMethod) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Backup_BackupType.Descriptor instead.
-func (Backup_BackupType) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use Backup_BackupMethod.Descriptor instead.
+func (Backup_BackupMethod) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDescGZIP(), []int{0, 0}
+}
+
+type Backup_BackupCreationType int32
+
+const (
+	Backup_BACKUP_CREATION_TYPE_UNSPECIFIED Backup_BackupCreationType = 0
+	// Backup created by automated daily schedule
+	Backup_AUTOMATED Backup_BackupCreationType = 1
+	// Backup created by user request
+	Backup_MANUAL Backup_BackupCreationType = 2
+)
+
+// Enum value maps for Backup_BackupCreationType.
+var (
+	Backup_BackupCreationType_name = map[int32]string{
+		0: "BACKUP_CREATION_TYPE_UNSPECIFIED",
+		1: "AUTOMATED",
+		2: "MANUAL",
+	}
+	Backup_BackupCreationType_value = map[string]int32{
+		"BACKUP_CREATION_TYPE_UNSPECIFIED": 0,
+		"AUTOMATED":                        1,
+		"MANUAL":                           2,
+	}
+)
+
+func (x Backup_BackupCreationType) Enum() *Backup_BackupCreationType {
+	p := new(Backup_BackupCreationType)
+	*p = x
+	return p
+}
+
+func (x Backup_BackupCreationType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Backup_BackupCreationType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes[1].Descriptor()
+}
+
+func (Backup_BackupCreationType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes[1]
+}
+
+func (x Backup_BackupCreationType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Backup_BackupCreationType.Descriptor instead.
+func (Backup_BackupCreationType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDescGZIP(), []int{0, 1}
 }
 
 // A SPQR Backup resource. For more information, see the
@@ -93,7 +144,9 @@ type Backup struct {
 	// Size of backup in bytes
 	Size int64 `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`
 	// How this backup was created (manual/automatic/etc...)
-	Type          Backup_BackupType `protobuf:"varint,8,opt,name=type,proto3,enum=yandex.cloud.mdb.spqr.v1.Backup_BackupType" json:"type,omitempty"`
+	Type Backup_BackupCreationType `protobuf:"varint,8,opt,name=type,proto3,enum=yandex.cloud.mdb.spqr.v1.Backup_BackupCreationType" json:"type,omitempty"`
+	// Method of backup creation.
+	Method        Backup_BackupMethod `protobuf:"varint,9,opt,name=method,proto3,enum=yandex.cloud.mdb.spqr.v1.Backup_BackupMethod" json:"method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -177,18 +230,25 @@ func (x *Backup) GetSize() int64 {
 	return 0
 }
 
-func (x *Backup) GetType() Backup_BackupType {
+func (x *Backup) GetType() Backup_BackupCreationType {
 	if x != nil {
 		return x.Type
 	}
-	return Backup_BACKUP_TYPE_UNSPECIFIED
+	return Backup_BACKUP_CREATION_TYPE_UNSPECIFIED
+}
+
+func (x *Backup) GetMethod() Backup_BackupMethod {
+	if x != nil {
+		return x.Method
+	}
+	return Backup_BACKUP_METHOD_UNSPECIFIED
 }
 
 var File_yandex_cloud_mdb_spqr_v1_backup_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDesc = "" +
 	"\n" +
-	"%yandex/cloud/mdb/spqr/v1/backup.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa0\x03\n" +
+	"%yandex/cloud/mdb/spqr/v1/backup.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc3\x04\n" +
 	"\x06Backup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -198,11 +258,15 @@ const file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDesc = "" +
 	"\n" +
 	"started_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12,\n" +
 	"\x12source_shard_names\x18\x06 \x03(\tR\x10sourceShardNames\x12\x12\n" +
-	"\x04size\x18\a \x01(\x03R\x04size\x12?\n" +
-	"\x04type\x18\b \x01(\x0e2+.yandex.cloud.mdb.spqr.v1.Backup.BackupTypeR\x04type\"D\n" +
-	"\n" +
-	"BackupType\x12\x1b\n" +
-	"\x17BACKUP_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\x04size\x18\a \x01(\x03R\x04size\x12G\n" +
+	"\x04type\x18\b \x01(\x0e23.yandex.cloud.mdb.spqr.v1.Backup.BackupCreationTypeR\x04type\x12E\n" +
+	"\x06method\x18\t \x01(\x0e2-.yandex.cloud.mdb.spqr.v1.Backup.BackupMethodR\x06method\"A\n" +
+	"\fBackupMethod\x12\x1d\n" +
+	"\x19BACKUP_METHOD_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04BASE\x10\x01\x12\b\n" +
+	"\x04FULL\x10\x02\"U\n" +
+	"\x12BackupCreationType\x12$\n" +
+	" BACKUP_CREATION_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tAUTOMATED\x10\x01\x12\n" +
 	"\n" +
 	"\x06MANUAL\x10\x02Ba\n" +
@@ -220,22 +284,24 @@ func file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_yandex_cloud_mdb_spqr_v1_backup_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_yandex_cloud_mdb_spqr_v1_backup_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_yandex_cloud_mdb_spqr_v1_backup_proto_goTypes = []any{
-	(Backup_BackupType)(0),        // 0: yandex.cloud.mdb.spqr.v1.Backup.BackupType
-	(*Backup)(nil),                // 1: yandex.cloud.mdb.spqr.v1.Backup
-	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(Backup_BackupMethod)(0),       // 0: yandex.cloud.mdb.spqr.v1.Backup.BackupMethod
+	(Backup_BackupCreationType)(0), // 1: yandex.cloud.mdb.spqr.v1.Backup.BackupCreationType
+	(*Backup)(nil),                 // 2: yandex.cloud.mdb.spqr.v1.Backup
+	(*timestamppb.Timestamp)(nil),  // 3: google.protobuf.Timestamp
 }
 var file_yandex_cloud_mdb_spqr_v1_backup_proto_depIdxs = []int32{
-	2, // 0: yandex.cloud.mdb.spqr.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
-	2, // 1: yandex.cloud.mdb.spqr.v1.Backup.started_at:type_name -> google.protobuf.Timestamp
-	0, // 2: yandex.cloud.mdb.spqr.v1.Backup.type:type_name -> yandex.cloud.mdb.spqr.v1.Backup.BackupType
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 0: yandex.cloud.mdb.spqr.v1.Backup.created_at:type_name -> google.protobuf.Timestamp
+	3, // 1: yandex.cloud.mdb.spqr.v1.Backup.started_at:type_name -> google.protobuf.Timestamp
+	1, // 2: yandex.cloud.mdb.spqr.v1.Backup.type:type_name -> yandex.cloud.mdb.spqr.v1.Backup.BackupCreationType
+	0, // 3: yandex.cloud.mdb.spqr.v1.Backup.method:type_name -> yandex.cloud.mdb.spqr.v1.Backup.BackupMethod
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_spqr_v1_backup_proto_init() }
@@ -248,7 +314,7 @@ func file_yandex_cloud_mdb_spqr_v1_backup_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDesc), len(file_yandex_cloud_mdb_spqr_v1_backup_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -4,6 +4,7 @@ package mysql
 
 import (
 	config "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/mysql/v1/config"
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	timeofday "google.golang.org/genproto/googleapis/type/timeofday"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -147,6 +148,10 @@ func (m *ClusterConfig) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 
 func (m *ClusterConfig) SetFullVersion(v string) {
 	m.FullVersion = v
+}
+
+func (m *ClusterConfig) SetConnectionManager(v *v1.ClusterConnectionManager) {
+	m.ConnectionManager = v
 }
 
 func (m *Host) SetName(v string) {

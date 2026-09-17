@@ -311,7 +311,7 @@ func (MongosConfig4_2_Network_Compression_Compressor) EnumDescriptor() ([]byte, 
 }
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
-// options described in [MongoDB documentation](https://docs.mongodb.com/v4.2/reference/configuration-options/).
+// options described in the [MongoDB documentation](https://docs.mongodb.com/v4.2/reference/configuration-options/).
 //
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto.
 type MongodConfig4_2 struct {
@@ -499,12 +499,12 @@ func (x *MongosConfig4_2) GetNet() *MongosConfig4_2_Network {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto.
 type MongodConfigSet4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongod settings for a MongoDB 4.2 cluster (a combination of settings defined
+	// Effective mongod settings for a StoreDoc 4.2 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongodConfig4_2 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongod settings for a MongoDB 4.2 cluster.
+	// User-defined mongod settings for a StoreDoc 4.2 cluster.
 	UserConfig *MongodConfig4_2 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongod configuration for a MongoDB 4.2 cluster.
+	// Default mongod configuration for a StoreDoc 4.2 cluster.
 	DefaultConfig *MongodConfig4_2 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -564,12 +564,12 @@ func (x *MongodConfigSet4_2) GetDefaultConfig() *MongodConfig4_2 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto.
 type MongoCfgConfigSet4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongocfg settings for a MongoDB 4.2 cluster (a combination of settings defined
+	// Effective mongocfg settings for a StoreDoc 4.2 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongoCfgConfig4_2 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongocfg settings for a MongoDB 4.2 cluster.
+	// User-defined mongocfg settings for a StoreDoc 4.2 cluster.
 	UserConfig *MongoCfgConfig4_2 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongocfg configuration for a MongoDB 4.2 cluster.
+	// Default mongocfg configuration for a StoreDoc 4.2 cluster.
 	DefaultConfig *MongoCfgConfig4_2 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -629,12 +629,12 @@ func (x *MongoCfgConfigSet4_2) GetDefaultConfig() *MongoCfgConfig4_2 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_2.proto.
 type MongosConfigSet4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongos settings for a MongoDB 4.2 cluster (a combination of settings defined
+	// Effective mongos settings for a StoreDoc 4.2 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongosConfig4_2 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongos settings for a MongoDB 4.2 cluster.
+	// User-defined mongos settings for a StoreDoc 4.2 cluster.
 	UserConfig *MongosConfig4_2 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongos configuration for a MongoDB 4.2 cluster.
+	// Default mongos configuration for a StoreDoc 4.2 cluster.
 	DefaultConfig *MongosConfig4_2 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -695,7 +695,7 @@ type MongodConfig4_2_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
 	WiredTiger *MongodConfig4_2_Storage_WiredTiger `protobuf:"bytes,1,opt,name=wired_tiger,json=wiredTiger,proto3" json:"wired_tiger,omitempty"`
-	// Configuration of the MongoDB [journal](https://docs.mongodb.com/v4.2/reference/glossary/#term-journal).
+	// Configuration of the StoreDoc [journal](https://docs.mongodb.com/v4.2/reference/glossary/#term-journal).
 	Journal       *MongodConfig4_2_Storage_Journal `protobuf:"bytes,2,opt,name=journal,proto3" json:"journal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1163,7 +1163,7 @@ type MongodConfig4_2_Network_Compression struct {
 	// - other members of the deployment if the instance is part of a replica set or a sharded cluster
 	// - mongosh
 	// - drivers that support the OP_COMPRESSED message format.
-	// MongoDB supports the following compressors:
+	// StoreDoc supports the following compressors:
 	Compressors   []MongodConfig4_2_Network_Compression_Compressor `protobuf:"varint,1,rep,packed,name=compressors,proto3,enum=yandex.cloud.mdb.mongodb.v1.config.MongodConfig4_2_Network_Compression_Compressor" json:"compressors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1503,7 +1503,7 @@ type MongosConfig4_2_Network_Compression struct {
 	// - other members of the deployment if the instance is part of a replica set or a sharded cluster
 	// - mongosh
 	// - drivers that support the OP_COMPRESSED message format.
-	// MongoDB supports the following compressors:
+	// StoreDoc supports the following compressors:
 	Compressors   []MongosConfig4_2_Network_Compression_Compressor `protobuf:"varint,1,rep,packed,name=compressors,proto3,enum=yandex.cloud.mdb.mongodb.v1.config.MongosConfig4_2_Network_Compression_Compressor" json:"compressors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

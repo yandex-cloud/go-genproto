@@ -29,10 +29,10 @@ const (
 
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB User resource to return.
+	// Name of the StoreDoc User resource to return.
 	// To get the name of the user, use a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -85,7 +85,7 @@ func (x *GetUserRequest) GetUserName() string {
 
 type ListUsersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the cluster to list MongoDB users in.
+	// ID of the cluster to list StoreDoc users in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -152,7 +152,7 @@ func (x *ListUsersRequest) GetPageToken() string {
 
 type ListUsersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB User resources.
+	// List of StoreDoc User resources.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value
@@ -209,7 +209,7 @@ func (x *ListUsersResponse) GetNextPageToken() string {
 
 type CreateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to create a user in.
+	// ID of the StoreDoc cluster to create a user in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Properties of the user to be created.
@@ -264,7 +264,7 @@ func (x *CreateUserRequest) GetUserSpec() *UserSpec {
 
 type CreateUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user is being created in.
+	// ID of the StoreDoc cluster the user is being created in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being created.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -318,18 +318,20 @@ func (x *CreateUserMetadata) GetUserName() string {
 
 type UpdateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to be updated.
 	// To get the name of the user, use a [UserService.List] request.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	// Field mask that specifies which fields of the MongoDB User resource should be updated.
+	// Field mask that specifies which fields of the StoreDoc User resource should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// New password for the user.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
 	// New set of permissions for the user.
 	Permissions []*Permission `protobuf:"bytes,5,rep,name=permissions,proto3" json:"permissions,omitempty"`
+	// Generate password using Connection Manager
+	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,6,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
 	// Deletion Protection inhibits deletion of the user
 	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -401,6 +403,13 @@ func (x *UpdateUserRequest) GetPermissions() []*Permission {
 	return nil
 }
 
+func (x *UpdateUserRequest) GetGeneratePassword() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.GeneratePassword
+	}
+	return nil
+}
+
 func (x *UpdateUserRequest) GetDeletionProtection() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.DeletionProtection
@@ -410,7 +419,7 @@ func (x *UpdateUserRequest) GetDeletionProtection() *wrapperspb.BoolValue {
 
 type UpdateUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being updated.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -464,7 +473,7 @@ func (x *UpdateUserMetadata) GetUserName() string {
 
 type DeleteUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to delete.
@@ -520,7 +529,7 @@ func (x *DeleteUserRequest) GetUserName() string {
 
 type DeleteUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being deleted.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -574,7 +583,7 @@ func (x *DeleteUserMetadata) GetUserName() string {
 
 type GrantUserPermissionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to grant the permission to.
@@ -639,7 +648,7 @@ func (x *GrantUserPermissionRequest) GetPermission() *Permission {
 
 type GrantUserPermissionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being granted a permission.
@@ -694,7 +703,7 @@ func (x *GrantUserPermissionMetadata) GetUserName() string {
 
 type RevokeUserPermissionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to revoke a permission from.
@@ -759,7 +768,7 @@ func (x *RevokeUserPermissionRequest) GetDatabaseName() string {
 
 type RevokeUserPermissionMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster the user belongs to.
+	// ID of the StoreDoc cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user whose permission is being revoked.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -837,7 +846,7 @@ const file_yandex_cloud_mdb_mongodb_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\x8f\x03\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd2\x03\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
@@ -845,8 +854,9 @@ const file_yandex_cloud_mdb_mongodb_v1_user_service_proto_rawDesc = "" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12%\n" +
 	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x05<=128R\bpassword\x12I\n" +
-	"\vpermissions\x18\x05 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\x12K\n" +
-	"\x13deletion_protection\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtectionJ\x04\b\x06\x10\a\"P\n" +
+	"\vpermissions\x18\x05 \x03(\v2'.yandex.cloud.mdb.mongodb.v1.PermissionR\vpermissions\x12G\n" +
+	"\x11generate_password\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\x12K\n" +
+	"\x13deletion_protection\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x12deletionProtection\"P\n" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
@@ -934,27 +944,28 @@ var file_yandex_cloud_mdb_mongodb_v1_user_service_proto_depIdxs = []int32{
 	14, // 1: yandex.cloud.mdb.mongodb.v1.CreateUserRequest.user_spec:type_name -> yandex.cloud.mdb.mongodb.v1.UserSpec
 	15, // 2: yandex.cloud.mdb.mongodb.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
 	16, // 3: yandex.cloud.mdb.mongodb.v1.UpdateUserRequest.permissions:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
-	17, // 4: yandex.cloud.mdb.mongodb.v1.UpdateUserRequest.deletion_protection:type_name -> google.protobuf.BoolValue
-	16, // 5: yandex.cloud.mdb.mongodb.v1.GrantUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
-	0,  // 6: yandex.cloud.mdb.mongodb.v1.UserService.Get:input_type -> yandex.cloud.mdb.mongodb.v1.GetUserRequest
-	1,  // 7: yandex.cloud.mdb.mongodb.v1.UserService.List:input_type -> yandex.cloud.mdb.mongodb.v1.ListUsersRequest
-	3,  // 8: yandex.cloud.mdb.mongodb.v1.UserService.Create:input_type -> yandex.cloud.mdb.mongodb.v1.CreateUserRequest
-	5,  // 9: yandex.cloud.mdb.mongodb.v1.UserService.Update:input_type -> yandex.cloud.mdb.mongodb.v1.UpdateUserRequest
-	7,  // 10: yandex.cloud.mdb.mongodb.v1.UserService.Delete:input_type -> yandex.cloud.mdb.mongodb.v1.DeleteUserRequest
-	9,  // 11: yandex.cloud.mdb.mongodb.v1.UserService.GrantPermission:input_type -> yandex.cloud.mdb.mongodb.v1.GrantUserPermissionRequest
-	11, // 12: yandex.cloud.mdb.mongodb.v1.UserService.RevokePermission:input_type -> yandex.cloud.mdb.mongodb.v1.RevokeUserPermissionRequest
-	13, // 13: yandex.cloud.mdb.mongodb.v1.UserService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.User
-	2,  // 14: yandex.cloud.mdb.mongodb.v1.UserService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListUsersResponse
-	18, // 15: yandex.cloud.mdb.mongodb.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	18, // 16: yandex.cloud.mdb.mongodb.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	18, // 17: yandex.cloud.mdb.mongodb.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	18, // 18: yandex.cloud.mdb.mongodb.v1.UserService.GrantPermission:output_type -> yandex.cloud.operation.Operation
-	18, // 19: yandex.cloud.mdb.mongodb.v1.UserService.RevokePermission:output_type -> yandex.cloud.operation.Operation
-	13, // [13:20] is the sub-list for method output_type
-	6,  // [6:13] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	17, // 4: yandex.cloud.mdb.mongodb.v1.UpdateUserRequest.generate_password:type_name -> google.protobuf.BoolValue
+	17, // 5: yandex.cloud.mdb.mongodb.v1.UpdateUserRequest.deletion_protection:type_name -> google.protobuf.BoolValue
+	16, // 6: yandex.cloud.mdb.mongodb.v1.GrantUserPermissionRequest.permission:type_name -> yandex.cloud.mdb.mongodb.v1.Permission
+	0,  // 7: yandex.cloud.mdb.mongodb.v1.UserService.Get:input_type -> yandex.cloud.mdb.mongodb.v1.GetUserRequest
+	1,  // 8: yandex.cloud.mdb.mongodb.v1.UserService.List:input_type -> yandex.cloud.mdb.mongodb.v1.ListUsersRequest
+	3,  // 9: yandex.cloud.mdb.mongodb.v1.UserService.Create:input_type -> yandex.cloud.mdb.mongodb.v1.CreateUserRequest
+	5,  // 10: yandex.cloud.mdb.mongodb.v1.UserService.Update:input_type -> yandex.cloud.mdb.mongodb.v1.UpdateUserRequest
+	7,  // 11: yandex.cloud.mdb.mongodb.v1.UserService.Delete:input_type -> yandex.cloud.mdb.mongodb.v1.DeleteUserRequest
+	9,  // 12: yandex.cloud.mdb.mongodb.v1.UserService.GrantPermission:input_type -> yandex.cloud.mdb.mongodb.v1.GrantUserPermissionRequest
+	11, // 13: yandex.cloud.mdb.mongodb.v1.UserService.RevokePermission:input_type -> yandex.cloud.mdb.mongodb.v1.RevokeUserPermissionRequest
+	13, // 14: yandex.cloud.mdb.mongodb.v1.UserService.Get:output_type -> yandex.cloud.mdb.mongodb.v1.User
+	2,  // 15: yandex.cloud.mdb.mongodb.v1.UserService.List:output_type -> yandex.cloud.mdb.mongodb.v1.ListUsersResponse
+	18, // 16: yandex.cloud.mdb.mongodb.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 17: yandex.cloud.mdb.mongodb.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 18: yandex.cloud.mdb.mongodb.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	18, // 19: yandex.cloud.mdb.mongodb.v1.UserService.GrantPermission:output_type -> yandex.cloud.operation.Operation
+	18, // 20: yandex.cloud.mdb.mongodb.v1.UserService.RevokePermission:output_type -> yandex.cloud.operation.Operation
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_mongodb_v1_user_service_proto_init() }

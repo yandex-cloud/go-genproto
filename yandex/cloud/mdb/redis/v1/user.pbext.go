@@ -26,6 +26,18 @@ func (m *User) SetAclOptions(v string) {
 	m.AclOptions = v
 }
 
+func (m *User) SetConnectionManager(v *ConnectionManager) {
+	m.ConnectionManager = v
+}
+
+func (m *User) SetAuthType(v AuthType) {
+	m.AuthType = v
+}
+
+func (m *ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
+}
+
 func (m *Permissions) SetPatterns(v *wrapperspb.StringValue) {
 	m.Patterns = v
 }
@@ -64,4 +76,12 @@ func (m *UserSpec) SetPermissions(v *Permissions) {
 
 func (m *UserSpec) SetEnabled(v *wrapperspb.BoolValue) {
 	m.Enabled = v
+}
+
+func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
+}
+
+func (m *UserSpec) SetAuthType(v AuthType) {
+	m.AuthType = v
 }

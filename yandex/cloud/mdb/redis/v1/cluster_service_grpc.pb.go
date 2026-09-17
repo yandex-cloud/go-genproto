@@ -56,42 +56,42 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Redis clusters.
+// A set of methods for managing Valkey clusters.
 type ClusterServiceClient interface {
-	// Returns the specified Redis cluster.
-	// To get the list of available Redis clusters, make a [List] request.
+	// Returns the specified Valkey cluster.
+	// To get the list of available Valkey clusters, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves the list of Redis clusters that belong
+	// Retrieves the list of Valkey clusters that belong
 	// to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a Redis cluster in the specified folder.
+	// Creates a Valkey cluster in the specified folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified Redis cluster.
+	// Updates the specified Valkey cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Redis cluster.
+	// Deletes the specified Valkey cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified Redis cluster.
+	// Start the specified Valkey cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop the specified Redis cluster.
+	// Stop the specified Valkey cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Moves a Redis cluster to the specified folder.
+	// Moves a Valkey cluster to the specified folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a backup for the specified Redis cluster.
+	// Creates a backup for the specified Valkey cluster.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a new Redis cluster using the specified backup.
+	// Creates a new Valkey cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start a manual failover on the specified Redis cluster.
+	// Start a manual failover on the specified Valkey cluster.
 	StartFailover(ctx context.Context, in *StartClusterFailoverRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves logs for the specified Redis cluster.
+	// Retrieves logs for the specified Valkey cluster.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified Redis cluster.
+	// Retrieves the list of available backups for the specified Valkey cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
@@ -116,13 +116,13 @@ type ClusterServiceClient interface {
 	DeleteShard(ctx context.Context, in *DeleteClusterShardRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Rebalances the cluster. Evenly distributes all the hash slots between the shards.
 	Rebalance(ctx context.Context, in *RebalanceClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Enable Sharding on non sharded cluster
+	// Enable Sharding on non sharded cluster.
 	EnableSharding(ctx context.Context, in *EnableShardingClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves a list of access bindings for the specified Redis cluster.
+	// Retrieves a list of access bindings for the specified Valkey cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified Redis cluster.
+	// Sets access bindings for the specified Valkey cluster.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates access bindings for the specified Redis cluster.
+	// Updates access bindings for the specified Valkey cluster.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -437,42 +437,42 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Redis clusters.
+// A set of methods for managing Valkey clusters.
 type ClusterServiceServer interface {
-	// Returns the specified Redis cluster.
-	// To get the list of available Redis clusters, make a [List] request.
+	// Returns the specified Valkey cluster.
+	// To get the list of available Valkey clusters, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves the list of Redis clusters that belong
+	// Retrieves the list of Valkey clusters that belong
 	// to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a Redis cluster in the specified folder.
+	// Creates a Valkey cluster in the specified folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Updates the specified Redis cluster.
+	// Updates the specified Valkey cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified Redis cluster.
+	// Deletes the specified Valkey cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Start the specified Redis cluster.
+	// Start the specified Valkey cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stop the specified Redis cluster.
+	// Stop the specified Valkey cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Moves a Redis cluster to the specified folder.
+	// Moves a Valkey cluster to the specified folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
-	// Creates a backup for the specified Redis cluster.
+	// Creates a backup for the specified Valkey cluster.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
-	// Creates a new Redis cluster using the specified backup.
+	// Creates a new Valkey cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
-	// Start a manual failover on the specified Redis cluster.
+	// Start a manual failover on the specified Valkey cluster.
 	StartFailover(context.Context, *StartClusterFailoverRequest) (*operation.Operation, error)
-	// Retrieves logs for the specified Redis cluster.
+	// Retrieves logs for the specified Valkey cluster.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
 	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of operations for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified Redis cluster.
+	// Retrieves the list of available backups for the specified Valkey cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
@@ -497,13 +497,13 @@ type ClusterServiceServer interface {
 	DeleteShard(context.Context, *DeleteClusterShardRequest) (*operation.Operation, error)
 	// Rebalances the cluster. Evenly distributes all the hash slots between the shards.
 	Rebalance(context.Context, *RebalanceClusterRequest) (*operation.Operation, error)
-	// Enable Sharding on non sharded cluster
+	// Enable Sharding on non sharded cluster.
 	EnableSharding(context.Context, *EnableShardingClusterRequest) (*operation.Operation, error)
-	// Retrieves a list of access bindings for the specified Redis cluster.
+	// Retrieves a list of access bindings for the specified Valkey cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified Redis cluster.
+	// Sets access bindings for the specified Valkey cluster.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	// Updates access bindings for the specified Redis cluster.
+	// Updates access bindings for the specified Valkey cluster.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 

@@ -71,6 +71,10 @@ func (m *UpdateUserRequest) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
+func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
+}
+
 func (m *UpdateUserRequest) SetDeletionProtection(v *wrapperspb.BoolValue) {
 	m.DeletionProtection = v
 }

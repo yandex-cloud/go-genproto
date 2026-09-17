@@ -139,7 +139,7 @@ func (Cluster_Health) EnumDescriptor() ([]byte, []int) {
 type Cluster_Status int32
 
 const (
-	// Cluster status is unknown
+	// Cluster status is unknown.
 	Cluster_STATUS_UNKNOWN Cluster_Status = 0
 	// Cluster is being created
 	Cluster_CREATING Cluster_Status = 1
@@ -268,9 +268,9 @@ type Host_Role int32
 const (
 	// Role of the host in the cluster is unknown. Default value.
 	Host_ROLE_UNKNOWN Host_Role = 0
-	// Host is the master Redis server in the cluster.
+	// Host is the master Valkey server in the cluster.
 	Host_MASTER Host_Role = 1
-	// Host is a replica (standby) Redis server in the cluster.
+	// Host is a replica (standby) Valkey server in the cluster.
 	Host_REPLICA Host_Role = 2
 )
 
@@ -376,11 +376,11 @@ type Service_Type int32
 const (
 	// Service type of the host is unspecified. Default value.
 	Service_TYPE_UNSPECIFIED Service_Type = 0
-	// The host is a Redis server.
+	// The host is a Valkey server.
 	Service_REDIS Service_Type = 1
 	// The host provides a Sentinel-only service (a quorum node).
 	Service_ARBITER Service_Type = 2
-	// The host is a Redis Cluster node.
+	// The host is a Valkey Cluster node.
 	Service_REDIS_CLUSTER Service_Type = 3
 )
 
@@ -479,30 +479,30 @@ func (Service_Health) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDescGZIP(), []int{5, 1}
 }
 
-// Description of a Redis cluster. For more information, see
-// the Managed Service for Redis [documentation](/docs/managed-redis/concepts/).
+// Description of a Valkey cluster. For more information, see
+// the Managed Service for Valkey [documentation](/docs/managed-redis/concepts/).
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
+	// ID of the Valkey cluster.
 	// This ID is assigned by MDB at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the folder that the Redis cluster belongs to.
+	// ID of the folder that the Valkey cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the Redis cluster.
+	// Name of the Valkey cluster.
 	// The name is unique within the folder. 1-63 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Redis cluster. 0-256 characters long.
+	// Description of the Valkey cluster. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Redis cluster as `key:value` pairs.
+	// Custom labels for the Valkey cluster as `key:value` pairs.
 	// Maximum 64 per cluster.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the Redis cluster.
+	// Deployment environment of the Valkey cluster.
 	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Description of monitoring systems relevant to the Redis cluster.
+	// Description of monitoring systems relevant to the Valkey cluster.
 	Monitoring []*Monitoring `protobuf:"bytes,8,rep,name=monitoring,proto3" json:"monitoring,omitempty"`
-	// Configuration of the Redis cluster.
+	// Configuration of the Valkey cluster.
 	Config *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
 	// ID of the network that the cluster belongs to.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -510,7 +510,7 @@ type Cluster struct {
 	Health Cluster_Health `protobuf:"varint,11,opt,name=health,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Health" json:"health,omitempty"`
 	// Cluster status.
 	Status Cluster_Status `protobuf:"varint,12,opt,name=status,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Status" json:"status,omitempty"`
-	// Redis cluster mode on/off.
+	// Valkey cluster mode on/off.
 	Sharded bool `protobuf:"varint,13,opt,name=sharded,proto3" json:"sharded,omitempty"`
 	// Maintenance window for the cluster.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
@@ -734,7 +734,7 @@ type Monitoring struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the monitoring system.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// Link to the monitoring system charts for the Redis cluster.
+	// Link to the monitoring system charts for the Valkey cluster.
 	Link          string `protobuf:"bytes,3,opt,name=link,proto3" json:"link,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -793,9 +793,9 @@ func (x *Monitoring) GetLink() string {
 
 type ClusterConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of Redis server software.
+	// Version of Valkey server software.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// Configuration for Redis servers in the cluster.
+	// Configuration for Valkey servers in the cluster.
 	//
 	// Types that are valid to be assigned to RedisConfig:
 	//
@@ -804,13 +804,13 @@ type ClusterConfig struct {
 	//	*ClusterConfig_RedisConfig_6_2
 	//	*ClusterConfig_RedisConfig_7_0
 	RedisConfig isClusterConfig_RedisConfig `protobuf_oneof:"redis_config"`
-	// Resources allocated to Redis hosts.
+	// Resources allocated to Valkey hosts.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Unified configuration of a Redis cluster. Use this field for all currently
+	// Unified configuration of a Valkey cluster. Use this field for all currently
 	// available versions.
 	Redis *config.RedisConfigSet `protobuf:"bytes,9,opt,name=redis,proto3" json:"redis,omitempty"`
 	// Disk size autoscaling settings
@@ -991,28 +991,28 @@ type isClusterConfig_RedisConfig interface {
 }
 
 type ClusterConfig_RedisConfig_5_0 struct {
-	// Configuration of a Redis 5.0 server.
+	// Configuration of a Valkey 5.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_5_0 *config.RedisConfigSet5_0 `protobuf:"bytes,2,opt,name=redis_config_5_0,json=redisConfig_5_0,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_6_0 struct {
-	// Configuration of a Redis 6.0 server.
+	// Configuration of a Valkey 6.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_6_0 *config.RedisConfigSet6_0 `protobuf:"bytes,6,opt,name=redis_config_6_0,json=redisConfig_6_0,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_6_2 struct {
-	// Configuration of a Redis 6.2 server.
+	// Configuration of a Valkey 6.2 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_6_2 *config.RedisConfigSet6_2 `protobuf:"bytes,7,opt,name=redis_config_6_2,json=redisConfig_6_2,proto3,oneof"`
 }
 
 type ClusterConfig_RedisConfig_7_0 struct {
-	// Configuration of a Redis 7.0 server.
+	// Configuration of a Valkey 7.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster.proto.
 	RedisConfig_7_0 *config.RedisConfigSet7_0 `protobuf:"bytes,8,opt,name=redis_config_7_0,json=redisConfig_7_0,proto3,oneof"`
@@ -1028,10 +1028,10 @@ func (*ClusterConfig_RedisConfig_7_0) isClusterConfig_RedisConfig() {}
 
 type Shard struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the Redis shard. The shard name is assigned by user at creation time, and cannot be changed.
+	// Name of the Valkey shard. The shard name is assigned by user at creation time, and cannot be changed.
 	// 1-63 characters long.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the Redis cluster the shard belongs to. The ID is assigned by MDB at creation time.
+	// ID of the Valkey cluster the shard belongs to. The ID is assigned by MDB at creation time.
 	ClusterId     string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1083,17 +1083,17 @@ func (x *Shard) GetClusterId() string {
 
 type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the Redis host. The host name is assigned by MDB at creation time, and cannot be changed.
+	// Name of the Valkey host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the Redis cluster. The ID is assigned by MDB at creation time.
+	// ID of the Valkey cluster. The ID is assigned by MDB at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the availability zone where the Redis host resides.
+	// ID of the availability zone where the Valkey host resides.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// ID of the subnet that the host belongs to.
 	SubnetId string `protobuf:"bytes,4,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// Resources allocated to the Redis host.
+	// Resources allocated to the Valkey host.
 	Resources *Resources `protobuf:"bytes,5,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Role of the host in the cluster. If the field has default value, it is not returned in the response.
 	Role Host_Role `protobuf:"varint,6,opt,name=role,proto3,enum=yandex.cloud.mdb.redis.v1.Host_Role" json:"role,omitempty"`
@@ -1103,8 +1103,10 @@ type Host struct {
 	Services []*Service `protobuf:"bytes,8,rep,name=services,proto3" json:"services,omitempty"`
 	// Name of the shard that the host belongs to.
 	ShardName string `protobuf:"bytes,9,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	// A replica with a low priority number is considered better for promotion.
-	// A replica with priority of 0 will never be selected by Redis Sentinel for promotion.
+	// Priority of the host as a candidate for promotion to master: the higher the value,
+	// the more preferred the host is. A host with priority 0 is promoted only if there are
+	// no other suitable candidates. The priority is ignored if the host requires a full
+	// resynchronization: in that case the host with the smallest replication lag is promoted.
 	// Works only for non-sharded clusters. Default value is 100.
 	ReplicaPriority *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=replica_priority,json=replicaPriority,proto3" json:"replica_priority,omitempty"`
 	// Flag showing public IP assignment status to this host.

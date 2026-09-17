@@ -34,6 +34,10 @@ func (m *ConnectionPoolerConfig) SetIdleInTransactionTimeout(v *wrapperspb.Int64
 	m.IdleInTransactionTimeout = v
 }
 
+func (m *ConnectionPoolerConfig) SetPoolDiscard(v *wrapperspb.BoolValue) {
+	m.PoolDiscard = v
+}
+
 func (m *BackgroundActivityStartAt) SetHours(v int64) {
 	m.Hours = v
 }

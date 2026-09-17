@@ -3,6 +3,7 @@
 package spqr
 
 import (
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -32,6 +33,14 @@ func (m *SPQRConfig) SetBalancer(v *BalancerSettings) {
 
 func (m *SPQRConfig) SetLogLevel(v LogLevel) {
 	m.LogLevel = v
+}
+
+func (m *SPQRConfig) SetUseSpqrguard(v *wrapperspb.BoolValue) {
+	m.UseSpqrguard = v
+}
+
+func (m *SPQRConfig) SetForbidDirectShardQueries(v *wrapperspb.BoolValue) {
+	m.ForbidDirectShardQueries = v
 }
 
 func (m *RouterConfig) SetConfig(v *RouterSettings) {
@@ -120,6 +129,38 @@ func (m *RouterSettings) SetDefaultTargetSessionAttrs(v RouterSettings_TargetSes
 
 func (m *RouterSettings) SetDefaultCommitStrategy(v RouterSettings_CommitStrategy) {
 	m.DefaultCommitStrategy = v
+}
+
+func (m *RouterSettings) SetAllowPostprocessing(v *wrapperspb.BoolValue) {
+	m.AllowPostprocessing = v
+}
+
+func (m *RouterSettings) SetAutoRouteRoOnStandby(v *wrapperspb.BoolValue) {
+	m.AutoRouteRoOnStandby = v
+}
+
+func (m *CoordinatorSettings) SetIterationTimeout(v *durationpb.Duration) {
+	m.IterationTimeout = v
+}
+
+func (m *CoordinatorSettings) SetLockIterationTimeout(v *durationpb.Duration) {
+	m.LockIterationTimeout = v
+}
+
+func (m *CoordinatorSettings) SetRouterKeepaliveTime(v *durationpb.Duration) {
+	m.RouterKeepaliveTime = v
+}
+
+func (m *CoordinatorSettings) SetRouterKeepaliveTimeout(v *durationpb.Duration) {
+	m.RouterKeepaliveTimeout = v
+}
+
+func (m *CoordinatorSettings) SetEtcdMaxSendBytes(v *wrapperspb.Int64Value) {
+	m.EtcdMaxSendBytes = v
+}
+
+func (m *CoordinatorSettings) SetEtcdMaxTxnOps(v *wrapperspb.Int64Value) {
+	m.EtcdMaxTxnOps = v
 }
 
 func (m *Resources) SetResourcePresetId(v string) {

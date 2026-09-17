@@ -91,6 +91,7 @@ func (RescheduleMaintenanceRequest_RescheduleType) EnumDescriptor() ([]byte, []i
 type ListClusterLogsRequest_ServiceType int32
 
 const (
+	// Service type is unspecified. Default value.
 	ListClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED ListClusterLogsRequest_ServiceType = 0
 	// Logs of mongod activity.
 	ListClusterLogsRequest_MONGOD ListClusterLogsRequest_ServiceType = 1
@@ -98,7 +99,7 @@ const (
 	ListClusterLogsRequest_MONGOS ListClusterLogsRequest_ServiceType = 2
 	// Logs of mongocfg activity.
 	ListClusterLogsRequest_MONGOCFG ListClusterLogsRequest_ServiceType = 3
-	// MongoDB Enterprise audit logs
+	// StoreDoc Enterprise audit logs
 	ListClusterLogsRequest_AUDIT ListClusterLogsRequest_ServiceType = 4
 )
 
@@ -150,6 +151,7 @@ func (ListClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
 type StreamClusterLogsRequest_ServiceType int32
 
 const (
+	// Service type is unspecified. Default value.
 	StreamClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED StreamClusterLogsRequest_ServiceType = 0
 	// Logs of mongod activity.
 	StreamClusterLogsRequest_MONGOD StreamClusterLogsRequest_ServiceType = 1
@@ -157,7 +159,7 @@ const (
 	StreamClusterLogsRequest_MONGOS StreamClusterLogsRequest_ServiceType = 2
 	// Logs of mongocfg activity.
 	StreamClusterLogsRequest_MONGOCFG StreamClusterLogsRequest_ServiceType = 3
-	// MongoDB Enterprise audit logs
+	// StoreDoc Enterprise audit logs
 	StreamClusterLogsRequest_AUDIT StreamClusterLogsRequest_ServiceType = 4
 )
 
@@ -208,7 +210,7 @@ func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
 
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB Cluster resource to return.
+	// ID of the StoreDoc Cluster resource to return.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -254,7 +256,7 @@ func (x *GetClusterRequest) GetClusterId() string {
 
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to list MongoDB clusters in.
+	// ID of the folder to list StoreDoc clusters in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -335,7 +337,7 @@ func (x *ListClustersRequest) GetFilter() string {
 
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB Cluster resources.
+	// List of StoreDoc Cluster resources.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
@@ -392,24 +394,24 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create MongoDB cluster in.
+	// ID of the folder to create StoreDoc cluster in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the MongoDB cluster. The name must be unique within the folder.
+	// Name of the StoreDoc cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the MongoDB cluster.
+	// Description of the StoreDoc cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MongoDB cluster as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom labels for the StoreDoc cluster as “ key:value “ pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the MongoDB cluster.
+	// Deployment environment of the StoreDoc cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.mongodb.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration and resources for hosts that should be created for the MongoDB cluster.
+	// Configuration and resources for hosts that should be created for the StoreDoc cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Descriptions of databases to be created in the MongoDB cluster.
+	// Descriptions of databases to be created in the StoreDoc cluster.
 	DatabaseSpecs []*DatabaseSpec `protobuf:"bytes,7,rep,name=database_specs,json=databaseSpecs,proto3" json:"database_specs,omitempty"`
-	// Descriptions of database users to be created in the MongoDB cluster.
+	// Descriptions of database users to be created in the StoreDoc cluster.
 	UserSpecs []*UserSpec `protobuf:"bytes,8,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
-	// Individual configurations for hosts that should be created for the MongoDB cluster.
+	// Individual configurations for hosts that should be created for the StoreDoc cluster.
 	HostSpecs []*HostSpec `protobuf:"bytes,9,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	// ID of the network to create the cluster in.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -564,7 +566,7 @@ func (x *CreateClusterRequest) GetRetentionPolicies() []*v1.BackupRetentionPolic
 
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that is being created.
+	// ID of the StoreDoc cluster that is being created.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Log of actions during operation
 	OperationLog  *v11.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
@@ -618,14 +620,14 @@ func (x *CreateClusterMetadata) GetOperationLog() *v11.OperationLog {
 
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB Cluster resource to update.
-	// To get the MongoDB cluster ID use a [ClusterService.List] request.
+	// ID of the StoreDoc Cluster resource to update.
+	// To get the StoreDoc cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the MongoDB Cluster resource should be updated.
+	// Field mask that specifies which fields of the StoreDoc Cluster resource should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New description of the MongoDB cluster.
+	// New description of the StoreDoc cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MongoDB cluster as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom labels for the StoreDoc cluster as “ key:value “ pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
@@ -748,7 +750,7 @@ func (x *UpdateClusterRequest) GetNetworkId() string {
 
 type UpdateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB Cluster resource that is being updated.
+	// ID of the StoreDoc Cluster resource that is being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Log of actions during operation
 	OperationLog  *v11.OperationLog `protobuf:"bytes,2,opt,name=operation_log,json=operationLog,proto3" json:"operation_log,omitempty"`
@@ -802,8 +804,8 @@ func (x *UpdateClusterMetadata) GetOperationLog() *v11.OperationLog {
 
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to delete.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to delete.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -848,7 +850,7 @@ func (x *DeleteClusterRequest) GetClusterId() string {
 
 type DeleteClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that is being deleted.
+	// ID of the StoreDoc cluster that is being deleted.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -893,7 +895,7 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to start.
+	// ID of the StoreDoc cluster to start.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -938,7 +940,7 @@ func (x *StartClusterRequest) GetClusterId() string {
 
 type StartClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -983,7 +985,7 @@ func (x *StartClusterMetadata) GetClusterId() string {
 
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to stop.
+	// ID of the StoreDoc cluster to stop.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1028,7 +1030,7 @@ func (x *StopClusterRequest) GetClusterId() string {
 
 type StopClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1073,7 +1075,7 @@ func (x *StopClusterMetadata) GetClusterId() string {
 
 type MoveClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to move.
+	// ID of the StoreDoc cluster to move.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
@@ -1127,7 +1129,7 @@ func (x *MoveClusterRequest) GetDestinationFolderId() string {
 
 type MoveClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster being moved.
+	// ID of the StoreDoc cluster being moved.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the source folder.
 	SourceFolderId string `protobuf:"bytes,2,opt,name=source_folder_id,json=sourceFolderId,proto3" json:"source_folder_id,omitempty"`
@@ -1190,8 +1192,8 @@ func (x *MoveClusterMetadata) GetDestinationFolderId() string {
 
 type BackupClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to back up.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to back up.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1236,7 +1238,7 @@ func (x *BackupClusterRequest) GetClusterId() string {
 
 type BackupClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that is being backed up.
+	// ID of the StoreDoc cluster that is being backed up.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1284,26 +1286,26 @@ type RestoreClusterRequest struct {
 	// ID of the backup to create a cluster from.
 	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	// Name of the new MongoDB cluster. The name must be unique within the folder.
-	// The name can't be changed after the MongoDB cluster is created.
+	// Name of the new StoreDoc cluster. The name must be unique within the folder.
+	// The name can't be changed after the StoreDoc cluster is created.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the new MongoDB cluster.
+	// Description of the new StoreDoc cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MongoDB cluster as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom labels for the StoreDoc cluster as “ key:value “ pairs. Maximum 64 per resource.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the new MongoDB cluster.
+	// Deployment environment of the new StoreDoc cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.mongodb.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration for the MongoDB cluster to be created.
+	// Configuration for the StoreDoc cluster to be created.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Configurations for MongoDB hosts that should be created for
+	// Configurations for StoreDoc hosts that should be created for
 	// the cluster that is being created from the backup.
 	HostSpecs []*HostSpec `protobuf:"bytes,7,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	// ID of the network to create the MongoDB cluster in.
+	// ID of the network to create the StoreDoc cluster in.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// Required. ID of the folder to create the MongoDB cluster in.
+	// ID of the folder to create the StoreDoc cluster in.
 	FolderId string `protobuf:"bytes,9,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Specification of the moment to which the MongoDB cluster should be restored.
+	// Specification of the moment to which the StoreDoc cluster should be restored.
 	RecoveryTargetSpec *RestoreClusterRequest_RecoveryTargetSpec `protobuf:"bytes,10,opt,name=recovery_target_spec,json=recoveryTargetSpec,proto3" json:"recovery_target_spec,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,11,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -1456,7 +1458,7 @@ func (x *RestoreClusterRequest) GetPartialRestoreSpec() *RestoreClusterRequest_P
 
 type RestoreClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the new MongoDB cluster that is being created from a backup.
+	// ID of the new StoreDoc cluster that is being created from a backup.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the backup that is being used for creating a cluster.
 	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
@@ -1510,7 +1512,7 @@ func (x *RestoreClusterMetadata) GetBackupId() string {
 
 type RescheduleMaintenanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to reschedule the maintenance operation for.
+	// ID of the StoreDoc cluster to reschedule the maintenance operation for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The type of reschedule request.
 	RescheduleType RescheduleMaintenanceRequest_RescheduleType `protobuf:"varint,2,opt,name=reschedule_type,json=rescheduleType,proto3,enum=yandex.cloud.mdb.mongodb.v1.RescheduleMaintenanceRequest_RescheduleType" json:"reschedule_type,omitempty"`
@@ -1574,9 +1576,9 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamppb.Timestamp 
 // Rescheduled maintenance operation metadata.
 type RescheduleMaintenanceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The time until which this maintenance operation is to be delayed.
+	// The time until which this maintenance operation is to be delayed.
 	DelayedUntil  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1682,8 +1684,8 @@ func (x *LogRecord) GetMessage() map[string]string {
 
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to request logs for.
-	// To get the MongoDB cluster ID use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to request logs for.
+	// To get the StoreDoc cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
 	// If no columns are specified, entire log records are returned.
@@ -1936,7 +1938,7 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
@@ -2043,7 +2045,7 @@ func (x *StreamClusterLogsRequest) GetFilter() string {
 
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB Cluster resource to list operations for.
+	// ID of the StoreDoc Cluster resource to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
@@ -2110,7 +2112,7 @@ func (x *ListClusterOperationsRequest) GetPageToken() string {
 
 type ListClusterOperationsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Operation resources for the specified MongoDB cluster.
+	// List of Operation resources for the specified StoreDoc cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
@@ -2167,8 +2169,8 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 
 type ListClusterBackupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token]
@@ -2235,7 +2237,7 @@ func (x *ListClusterBackupsRequest) GetPageToken() string {
 
 type ListClusterBackupsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB Backup resources.
+	// List of StoreDoc Backup resources.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value
@@ -2292,8 +2294,8 @@ func (x *ListClusterBackupsResponse) GetNextPageToken() string {
 
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
@@ -2417,10 +2419,10 @@ func (x *ListClusterHostsResponse) GetNextPageToken() string {
 
 type AddClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to add hosts to.
-	// To get the MongoDB cluster ID use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to add hosts to.
+	// To get the StoreDoc cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Configurations for MongoDB hosts that should be added to the cluster.
+	// Configurations for StoreDoc hosts that should be added to the cluster.
 	HostSpecs     []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2472,7 +2474,7 @@ func (x *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
 
 type AddClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to which the hosts are being added.
+	// ID of the StoreDoc cluster to which the hosts are being added.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being added to the cluster.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2526,8 +2528,8 @@ func (x *AddClusterHostsMetadata) GetHostNames() []string {
 
 type DeleteClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to remove hosts from.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to remove hosts from.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts to delete.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2581,7 +2583,7 @@ func (x *DeleteClusterHostsRequest) GetHostNames() []string {
 
 type DeleteClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to remove hosts from.
+	// ID of the StoreDoc cluster to remove hosts from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being deleted.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2635,10 +2637,10 @@ func (x *DeleteClusterHostsMetadata) GetHostNames() []string {
 
 type UpdateClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to update hosts from.
-	// To get the MongoDB cluster ID, use a [ClusterService.List] request.
+	// ID of the StoreDoc cluster to update hosts from.
+	// To get the StoreDoc cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// New configurations to apply to hosts of a Managed Service for MongoDB cluster.
+	// New configurations to apply to hosts of a Managed Service for StoreDoc cluster.
 	UpdateHostSpecs []*UpdateHostSpec `protobuf:"bytes,2,rep,name=update_host_specs,json=updateHostSpecs,proto3" json:"update_host_specs,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -2690,7 +2692,7 @@ func (x *UpdateClusterHostsRequest) GetUpdateHostSpecs() []*UpdateHostSpec {
 
 type UpdateClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to update host from.
+	// ID of the StoreDoc cluster to update host from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of host that are being updated.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2752,11 +2754,11 @@ type UpdateHostSpec struct {
 	// The time, in seconds, by which the given replica set member lags behind the primary host.
 	SecondaryDelaySecs *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=secondary_delay_secs,json=secondaryDelaySecs,proto3" json:"secondary_delay_secs,omitempty"`
 	// Priority of the host to be elected as the primary in the replica set.
-	// The minimum value is `0` if the Managed Service for MongoDB cluster contains three or more secondary hosts. Otherwise, the minimum value is `1`.
+	// The minimum value is `0` if the Managed Service for StoreDoc cluster contains three or more secondary hosts. Otherwise, the minimum value is `1`.
 	Priority *wrapperspb.DoubleValue `protobuf:"bytes,4,opt,name=priority,proto3" json:"priority,omitempty"`
 	// Determines whether the host should get a public IP address after the update.
 	AssignPublicIp bool `protobuf:"varint,5,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	// Field mask that specifies which fields of the MongoDB host should be updated.
+	// Field mask that specifies which fields of the StoreDoc host should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,6,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	// Host tag list that contains key-value pairs for the given replica set member. For more information about how to specify the tags and what values to choose, see the [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
 	Tags map[string]string `protobuf:"bytes,7,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -2854,7 +2856,7 @@ func (x *UpdateHostSpec) GetVotes() *wrapperspb.Int64Value {
 
 type EnableClusterShardingRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to enable sharding for.
+	// ID of the StoreDoc cluster to enable sharding for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// mongocfg specification for sharding.
 	Mongocfg *EnableClusterShardingRequest_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
@@ -2935,7 +2937,7 @@ func (x *EnableClusterShardingRequest) GetMongoinfra() *EnableClusterShardingReq
 
 type EnableClusterShardingMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that sharding is being enabled for.
+	// ID of the StoreDoc cluster that sharding is being enabled for.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2980,10 +2982,10 @@ func (x *EnableClusterShardingMetadata) GetClusterId() string {
 
 type GetClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that the shard belongs to.
+	// ID of the StoreDoc cluster that the shard belongs to.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB shard to return.
+	// Name of the StoreDoc shard to return.
 	// To get the name of the shard use a [ClusterService.ListShards] request.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3036,7 +3038,7 @@ func (x *GetClusterShardRequest) GetShardName() string {
 
 type ListClusterShardsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to list databases in.
+	// ID of the StoreDoc cluster to list databases in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -3103,7 +3105,7 @@ func (x *ListClusterShardsRequest) GetPageToken() string {
 
 type ListClusterShardsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB shards.
+	// List of StoreDoc shards.
 	Shards []*Shard `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterShardsRequest.page_size], use the [next_page_token] as the value
@@ -3160,10 +3162,10 @@ func (x *ListClusterShardsResponse) GetNextPageToken() string {
 
 type AddClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to add a shard to.
+	// ID of the StoreDoc cluster to add a shard to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB shard to create.
+	// Name of the StoreDoc shard to create.
 	ShardName string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	// Configurations for mongod hosts to be created with the shard.
 	HostSpecs     []*HostSpec `protobuf:"bytes,3,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
@@ -3224,7 +3226,7 @@ func (x *AddClusterShardRequest) GetHostSpecs() []*HostSpec {
 
 type AddClusterShardMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that a shard is being added to.
+	// ID of the StoreDoc cluster that a shard is being added to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard being added.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
@@ -3278,10 +3280,10 @@ func (x *AddClusterShardMetadata) GetShardName() string {
 
 type DeleteClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to delete a shard in.
+	// ID of the StoreDoc cluster to delete a shard in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB shard to delete.
+	// Name of the StoreDoc shard to delete.
 	// To get the name of the shard use a [ClusterService.ListShards] request.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3334,7 +3336,7 @@ func (x *DeleteClusterShardRequest) GetShardName() string {
 
 type DeleteClusterShardMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that a shard is being deleted in.
+	// ID of the StoreDoc cluster that a shard is being deleted in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard being deleted.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
@@ -3388,9 +3390,9 @@ func (x *DeleteClusterShardMetadata) GetShardName() string {
 
 type ResetupHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the hosts to resetup.
+	// Name of the hosts to resetup.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3442,9 +3444,9 @@ func (x *ResetupHostsRequest) GetHostNames() []string {
 
 type ResetupHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of hosts to resetup.
+	// The name of hosts to resetup.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3496,9 +3498,9 @@ func (x *ResetupHostsMetadata) GetHostNames() []string {
 
 type RestartHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the hosts to restart.
+	// Name of the hosts to restart.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3550,9 +3552,9 @@ func (x *RestartHostsRequest) GetHostNames() []string {
 
 type RestartHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of hosts to restart.
+	// The name of hosts to restart.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3604,9 +3606,9 @@ func (x *RestartHostsMetadata) GetHostNames() []string {
 
 type StepdownHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. Name of the hosts to resetup.
+	// Name of the hosts to resetup.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	// Optional. ID of the availability zone stepdown hosts from.
 	ZoneId        string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
@@ -3667,9 +3669,9 @@ func (x *StepdownHostsRequest) GetZoneId() string {
 
 type StepdownHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Required. The name of hosts to resetup.
+	// The name of hosts to resetup.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
 	// The ID of the availability zone stepdown hosts from.
 	ZoneId        string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
@@ -3862,6 +3864,7 @@ func (x *HostSpec) GetVotes() *wrapperspb.Int64Value {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 3.6 hosts.
@@ -3934,6 +3937,7 @@ func (x *MongodbSpec3_6) GetMongoinfra() *MongodbSpec3_6_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 4.0 hosts.
@@ -4006,6 +4010,7 @@ func (x *MongodbSpec4_0) GetMongoinfra() *MongodbSpec4_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 4.2 hosts.
@@ -4078,6 +4083,7 @@ func (x *MongodbSpec4_2) GetMongoinfra() *MongodbSpec4_2_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec4_4 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 4.4 hosts.
@@ -4150,6 +4156,7 @@ func (x *MongodbSpec4_4) GetMongoinfra() *MongodbSpec4_4_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec4_4Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 4.4 hosts.
@@ -4222,6 +4229,7 @@ func (x *MongodbSpec4_4Enterprise) GetMongoinfra() *MongodbSpec4_4Enterprise_Mon
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 5.0 hosts.
@@ -4294,6 +4302,7 @@ func (x *MongodbSpec5_0) GetMongoinfra() *MongodbSpec5_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec5_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 5.0 hosts.
@@ -4366,6 +4375,7 @@ func (x *MongodbSpec5_0Enterprise) GetMongoinfra() *MongodbSpec5_0Enterprise_Mon
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec6_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 6.0 hosts.
@@ -4438,6 +4448,7 @@ func (x *MongodbSpec6_0) GetMongoinfra() *MongodbSpec6_0_MongoInfra {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 type MongodbSpec6_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration and resource allocation for mongod 6.0 hosts.
@@ -4584,17 +4595,15 @@ func (x *MongodbSpec) GetMongoinfra() *MongodbSpec_MongoInfra {
 
 type ConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of MongoDB used in the cluster. Possible values: `3.6`, `4.0`, `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0`, `6.0-enterprise`.
+	// Version of StoreDoc used in the cluster. Possible values: `7.0`, `8.0`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// MongoDB feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
+	// StoreDoc feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
 	// Possible values:
-	// * `3.6` - persist data compatibility for version 3.6. After setting this option the data will not be compatible with 3.4 or older.
-	// * `4.0` - persist data compatibility for version 4.0. After setting this option the data will not be compatible with 3.6 or older.
-	// * `4.2` - persist data compatibility for version 4.2. After setting this option the data will not be compatible with 4.0 or older.
-	// * `4.4` - persist data compatibility for version 4.4. After setting this option the data will not be compatible with 4.2 or older.
-	// * `5.0` - persist data compatibility for version 5.0. After setting this option the data will not be compatible with 4.4 or older.
-	// * `6.0` - persist data compatibility for version 6.0. After setting this option the data will not be compatible with 5.0 or older.
+	// * `7.0` - persist data compatibility for version 7.0. After setting this option the data will not be compatible with 6.0 or lower.
+	// * `8.0` - persist data compatibility for version 8.0. After setting this option the data will not be compatible with 7.0 or lower.
 	FeatureCompatibilityVersion string `protobuf:"bytes,5,opt,name=feature_compatibility_version,json=featureCompatibilityVersion,proto3" json:"feature_compatibility_version,omitempty"`
+	// Configuration for StoreDoc servers in the cluster.
+	//
 	// Types that are valid to be assigned to MongodbSpec:
 	//
 	//	*ConfigSpec_MongodbSpec_3_6
@@ -4615,7 +4624,7 @@ type ConfigSpec struct {
 	PerformanceDiagnostics *PerformanceDiagnosticsConfig `protobuf:"bytes,13,opt,name=performance_diagnostics,json=performanceDiagnostics,proto3" json:"performance_diagnostics,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,6,opt,name=access,proto3" json:"access,omitempty"`
-	// Configuration and resource allocation for a MongoDB 7.0 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc cluster.
 	Mongodb *MongodbSpec `protobuf:"bytes,20,opt,name=mongodb,proto3" json:"mongodb,omitempty"`
 	// AutoCompact config
 	AutocompactConfig *AutoCompactConfig `protobuf:"bytes,22,opt,name=autocompact_config,json=autocompactConfig,proto3" json:"autocompact_config,omitempty"`
@@ -4674,6 +4683,7 @@ func (x *ConfigSpec) GetMongodbSpec() isConfigSpec_MongodbSpec {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_3_6() *MongodbSpec3_6 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_3_6); ok {
@@ -4683,6 +4693,7 @@ func (x *ConfigSpec) GetMongodbSpec_3_6() *MongodbSpec3_6 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_4_0() *MongodbSpec4_0 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_4_0); ok {
@@ -4692,6 +4703,7 @@ func (x *ConfigSpec) GetMongodbSpec_4_0() *MongodbSpec4_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_4_2() *MongodbSpec4_2 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_4_2); ok {
@@ -4701,6 +4713,7 @@ func (x *ConfigSpec) GetMongodbSpec_4_2() *MongodbSpec4_2 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_4_4() *MongodbSpec4_4 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_4_4); ok {
@@ -4710,6 +4723,7 @@ func (x *ConfigSpec) GetMongodbSpec_4_4() *MongodbSpec4_4 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_5_0() *MongodbSpec5_0 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_5_0); ok {
@@ -4719,6 +4733,7 @@ func (x *ConfigSpec) GetMongodbSpec_5_0() *MongodbSpec5_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_6_0() *MongodbSpec6_0 {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_6_0); ok {
@@ -4728,6 +4743,7 @@ func (x *ConfigSpec) GetMongodbSpec_6_0() *MongodbSpec6_0 {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_4_4Enterprise() *MongodbSpec4_4Enterprise {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_4_4Enterprise); ok {
@@ -4737,6 +4753,7 @@ func (x *ConfigSpec) GetMongodbSpec_4_4Enterprise() *MongodbSpec4_4Enterprise {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_5_0Enterprise() *MongodbSpec5_0Enterprise {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_5_0Enterprise); ok {
@@ -4746,6 +4763,7 @@ func (x *ConfigSpec) GetMongodbSpec_5_0Enterprise() *MongodbSpec5_0Enterprise {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 func (x *ConfigSpec) GetMongodbSpec_6_0Enterprise() *MongodbSpec6_0Enterprise {
 	if x != nil {
 		if x, ok := x.MongodbSpec.(*ConfigSpec_MongodbSpec_6_0Enterprise); ok {
@@ -4802,47 +4820,74 @@ type isConfigSpec_MongodbSpec interface {
 }
 
 type ConfigSpec_MongodbSpec_3_6 struct {
-	// Configuration and resource allocation for a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for a StoreDoc 3.6 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_3_6 *MongodbSpec3_6 `protobuf:"bytes,2,opt,name=mongodb_spec_3_6,json=mongodbSpec_3_6,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_4_0 struct {
-	// Configuration and resource allocation for a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.0 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_4_0 *MongodbSpec4_0 `protobuf:"bytes,4,opt,name=mongodb_spec_4_0,json=mongodbSpec_4_0,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_4_2 struct {
-	// Configuration and resource allocation for a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.2 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_4_2 *MongodbSpec4_2 `protobuf:"bytes,7,opt,name=mongodb_spec_4_2,json=mongodbSpec_4_2,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_4_4 struct {
-	// Configuration and resource allocation for a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.4 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_4_4 *MongodbSpec4_4 `protobuf:"bytes,8,opt,name=mongodb_spec_4_4,json=mongodbSpec_4_4,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_5_0 struct {
-	// Configuration and resource allocation for a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 5.0 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_5_0 *MongodbSpec5_0 `protobuf:"bytes,10,opt,name=mongodb_spec_5_0,json=mongodbSpec_5_0,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_6_0 struct {
-	// Configuration and resource allocation for a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 6.0 cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_6_0 *MongodbSpec6_0 `protobuf:"bytes,14,opt,name=mongodb_spec_6_0,json=mongodbSpec_6_0,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_4_4Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 4.4 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 4.4 Enterprise cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_4_4Enterprise *MongodbSpec4_4Enterprise `protobuf:"bytes,11,opt,name=mongodb_spec_4_4_enterprise,json=mongodbSpec_4_4_enterprise,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_5_0Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 5.0 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 5.0 Enterprise cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_5_0Enterprise *MongodbSpec5_0Enterprise `protobuf:"bytes,12,opt,name=mongodb_spec_5_0_enterprise,json=mongodbSpec_5_0_enterprise,proto3,oneof"`
 }
 
 type ConfigSpec_MongodbSpec_6_0Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 6.0 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 6.0 Enterprise cluster.
+	// Deprecated. Use [mongodb] instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster_service.proto.
 	MongodbSpec_6_0Enterprise *MongodbSpec6_0Enterprise `protobuf:"bytes,15,opt,name=mongodb_spec_6_0_enterprise,json=mongodbSpec_6_0_enterprise,proto3,oneof"`
 }
 
@@ -4911,9 +4956,9 @@ func (x *RestoreClusterRequest_RecoveryTargetSpec) GetTimestamp() int64 {
 
 type RestoreClusterRequest_PartialRestoreSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB namespaces restore to
+	// List of StoreDoc namespaces restore to
 	Whitelist []string `protobuf:"bytes,1,rep,name=whitelist,proto3" json:"whitelist,omitempty"`
-	// List of MongoDB namespaces not restore to
+	// List of StoreDoc namespaces not restore to
 	Blacklist     []string `protobuf:"bytes,2,rep,name=blacklist,proto3" json:"blacklist,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -7719,14 +7764,14 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\x13ListClustersRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x12\"\n" +
 	"\x06filter\x18\x04 \x01(\tB\n" +
 	"\x8a\xc81\x06<=1000R\x06filter\"\x80\x01\n" +
 	"\x14ListClustersResponse\x12@\n" +
 	"\bclusters\x18\x01 \x03(\v2$.yandex.cloud.mdb.mongodb.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa8\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc2\t\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -7745,8 +7790,8 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12,\n" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12]\n" +
-	"\x12maintenance_window\x18\r \x01(\v2..yandex.cloud.mdb.mongodb.v1.MaintenanceWindowR\x11maintenanceWindow\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12]\n" +
+	"\x12maintenance_window\x18\r \x01(\v2..yandex.cloud.mdb.mongodb.v1.MaintenanceWindowR\x11maintenanceWindow\x12k\n" +
+	"\x16disk_encryption_key_id\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueB\x18\xf2\xc71\x14[a-zA-Z0-9_.-]{0,50}R\x13diskEncryptionKeyId\x12]\n" +
 	"\x12retention_policies\x18\x0f \x03(\v2..yandex.cloud.mdb.v1.BackupRetentionPolicySpecR\x11retentionPolicies\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -7810,7 +7855,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xe4\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xfe\n" +
 	"\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
@@ -7829,8 +7874,8 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2E.yandex.cloud.mdb.mongodb.v1.RestoreClusterRequest.RecoveryTargetSpecR\x12recoveryTargetSpec\x12,\n" +
 	"\x12security_group_ids\x18\v \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\f \x01(\bR\x12deletionProtection\x12]\n" +
-	"\x12maintenance_window\x18\r \x01(\v2..yandex.cloud.mdb.mongodb.v1.MaintenanceWindowR\x11maintenanceWindow\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12w\n" +
+	"\x12maintenance_window\x18\r \x01(\v2..yandex.cloud.mdb.mongodb.v1.MaintenanceWindowR\x11maintenanceWindow\x12k\n" +
+	"\x16disk_encryption_key_id\x18\x0e \x01(\v2\x1c.google.protobuf.StringValueB\x18\xf2\xc71\x14[a-zA-Z0-9_.-]{0,50}R\x13diskEncryptionKeyId\x12w\n" +
 	"\x14partial_restore_spec\x18\x0f \x01(\v2E.yandex.cloud.mdb.mongodb.v1.RestoreClusterRequest.PartialRestoreSpecR\x12partialRestoreSpec\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -7872,7 +7917,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\tfrom_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bfromTime\x123\n" +
 	"\ato_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x06toTime\x12'\n" +
 	"\tpage_size\x18\x06 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\a \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\x123\n" +
 	"\x16always_next_page_token\x18\b \x01(\bR\x13alwaysNextPageToken\x12\"\n" +
@@ -7916,7 +7961,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x8a\x01\n" +
 	"\x1dListClusterOperationsResponse\x12A\n" +
@@ -7928,7 +7973,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x83\x01\n" +
 	"\x1aListClusterBackupsResponse\x12=\n" +
@@ -7938,7 +7983,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"{\n" +
 	"\x18ListClusterHostsResponse\x127\n" +
@@ -8015,7 +8060,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12'\n" +
 	"\tpage_size\x18\x02 \x01(\x03B\n" +
-	"\xfa\xc71\x06<=1000R\bpageSize\x12(\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12(\n" +
 	"\n" +
 	"page_token\x18\x03 \x01(\tB\t\x8a\xc81\x05<=100R\tpageToken\"\x7f\n" +
 	"\x19ListClusterShardsResponse\x12:\n" +
@@ -8090,7 +8135,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x030-1R\x05votes\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd7\v\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec3_6\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec3_6.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec3_6.MongoCfgR\bmongocfg\x12J\n" +
@@ -8115,7 +8160,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig3_6R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig3_6R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd7\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec4_0\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_0.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_0.MongoCfgR\bmongocfg\x12J\n" +
@@ -8140,7 +8185,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig4_0R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig4_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd7\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec4_2\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_2.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_2.MongoCfgR\bmongocfg\x12J\n" +
@@ -8165,7 +8210,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig4_2R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig4_2R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd7\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec4_4\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4.MongoCfgR\bmongocfg\x12J\n" +
@@ -8190,7 +8235,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig4_4R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig4_4R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc5\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc9\f\n" +
 	"\x19MongodbSpec4_4_enterprise\x12U\n" +
 	"\x06mongod\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4_enterprise.MongodR\x06mongod\x12[\n" +
 	"\bmongocfg\x18\x02 \x01(\v2?.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4_enterprise.MongoCfgR\bmongocfg\x12U\n" +
@@ -8215,7 +8260,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2>.yandex.cloud.mdb.mongodb.v1.config.MongosConfig4_4_enterpriseR\fconfigMongos\x12i\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig4_4_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd7\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec5_0\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0.MongoCfgR\bmongocfg\x12J\n" +
@@ -8240,7 +8285,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc5\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc9\f\n" +
 	"\x19MongodbSpec5_0_enterprise\x12U\n" +
 	"\x06mongod\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0_enterprise.MongodR\x06mongod\x12[\n" +
 	"\bmongocfg\x18\x02 \x01(\v2?.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0_enterprise.MongoCfgR\bmongocfg\x12U\n" +
@@ -8265,7 +8310,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2>.yandex.cloud.mdb.mongodb.v1.config.MongosConfig5_0_enterpriseR\fconfigMongos\x12i\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig5_0_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xd7\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xdb\v\n" +
 	"\x0eMongodbSpec6_0\x12J\n" +
 	"\x06mongod\x18\x01 \x01(\v22.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0.MongodR\x06mongod\x12P\n" +
 	"\bmongocfg\x18\x02 \x01(\v24.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0.MongoCfgR\bmongocfg\x12J\n" +
@@ -8290,7 +8335,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v23.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0R\fconfigMongos\x12^\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v25.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig6_0R\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xc5\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xc9\f\n" +
 	"\x19MongodbSpec6_0_enterprise\x12U\n" +
 	"\x06mongod\x18\x01 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0_enterprise.MongodR\x06mongod\x12[\n" +
 	"\bmongocfg\x18\x02 \x01(\v2?.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0_enterprise.MongoCfgR\bmongocfg\x12U\n" +
@@ -8315,7 +8360,7 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v2>.yandex.cloud.mdb.mongodb.v1.config.MongosConfig6_0_enterpriseR\fconfigMongos\x12i\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig6_0_enterpriseR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xb9\v\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling:\x02\x18\x01\"\xb9\v\n" +
 	"\vMongodbSpec\x12G\n" +
 	"\x06mongod\x18\x01 \x01(\v2/.yandex.cloud.mdb.mongodb.v1.MongodbSpec.MongodR\x06mongod\x12M\n" +
 	"\bmongocfg\x18\x02 \x01(\v21.yandex.cloud.mdb.mongodb.v1.MongodbSpec.MongoCfgR\bmongocfg\x12G\n" +
@@ -8340,21 +8385,21 @@ const file_yandex_cloud_mdb_mongodb_v1_cluster_service_proto_rawDesc = "" +
 	"\rconfig_mongos\x18\x01 \x01(\v20.yandex.cloud.mdb.mongodb.v1.config.MongosConfigR\fconfigMongos\x12[\n" +
 	"\x0fconfig_mongocfg\x18\x02 \x01(\v22.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfigR\x0econfigMongocfg\x12D\n" +
 	"\tresources\x18\x03 \x01(\v2&.yandex.cloud.mdb.mongodb.v1.ResourcesR\tresources\x12d\n" +
-	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\x91\f\n" +
+	"\x15disk_size_autoscaling\x18\x04 \x01(\v20.yandex.cloud.mdb.mongodb.v1.DiskSizeAutoscalingR\x13diskSizeAutoscaling\"\xb5\f\n" +
 	"\n" +
 	"ConfigSpec\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12B\n" +
-	"\x1dfeature_compatibility_version\x18\x05 \x01(\tR\x1bfeatureCompatibilityVersion\x12X\n" +
-	"\x10mongodb_spec_3_6\x18\x02 \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec3_6H\x00R\x0fmongodbSpec_3_6\x12X\n" +
-	"\x10mongodb_spec_4_0\x18\x04 \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_0H\x00R\x0fmongodbSpec_4_0\x12X\n" +
-	"\x10mongodb_spec_4_2\x18\a \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_2H\x00R\x0fmongodbSpec_4_2\x12X\n" +
-	"\x10mongodb_spec_4_4\x18\b \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4H\x00R\x0fmongodbSpec_4_4\x12X\n" +
+	"\x1dfeature_compatibility_version\x18\x05 \x01(\tR\x1bfeatureCompatibilityVersion\x12\\\n" +
+	"\x10mongodb_spec_3_6\x18\x02 \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec3_6B\x02\x18\x01H\x00R\x0fmongodbSpec_3_6\x12\\\n" +
+	"\x10mongodb_spec_4_0\x18\x04 \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_0B\x02\x18\x01H\x00R\x0fmongodbSpec_4_0\x12\\\n" +
+	"\x10mongodb_spec_4_2\x18\a \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_2B\x02\x18\x01H\x00R\x0fmongodbSpec_4_2\x12\\\n" +
+	"\x10mongodb_spec_4_4\x18\b \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4B\x02\x18\x01H\x00R\x0fmongodbSpec_4_4\x12\\\n" +
 	"\x10mongodb_spec_5_0\x18\n" +
-	" \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0H\x00R\x0fmongodbSpec_5_0\x12X\n" +
-	"\x10mongodb_spec_6_0\x18\x0e \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0H\x00R\x0fmongodbSpec_6_0\x12y\n" +
-	"\x1bmongodb_spec_4_4_enterprise\x18\v \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4_enterpriseH\x00R\x1amongodbSpec_4_4_enterprise\x12y\n" +
-	"\x1bmongodb_spec_5_0_enterprise\x18\f \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0_enterpriseH\x00R\x1amongodbSpec_5_0_enterprise\x12y\n" +
-	"\x1bmongodb_spec_6_0_enterprise\x18\x0f \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0_enterpriseH\x00R\x1amongodbSpec_6_0_enterprise\x12F\n" +
+	" \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0B\x02\x18\x01H\x00R\x0fmongodbSpec_5_0\x12\\\n" +
+	"\x10mongodb_spec_6_0\x18\x0e \x01(\v2+.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0B\x02\x18\x01H\x00R\x0fmongodbSpec_6_0\x12}\n" +
+	"\x1bmongodb_spec_4_4_enterprise\x18\v \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec4_4_enterpriseB\x02\x18\x01H\x00R\x1amongodbSpec_4_4_enterprise\x12}\n" +
+	"\x1bmongodb_spec_5_0_enterprise\x18\f \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec5_0_enterpriseB\x02\x18\x01H\x00R\x1amongodbSpec_5_0_enterprise\x12}\n" +
+	"\x1bmongodb_spec_6_0_enterprise\x18\x0f \x01(\v26.yandex.cloud.mdb.mongodb.v1.MongodbSpec6_0_enterpriseB\x02\x18\x01H\x00R\x1amongodbSpec_6_0_enterprise\x12F\n" +
 	"\x13backup_window_start\x18\x03 \x01(\v2\x16.google.type.TimeOfDayR\x11backupWindowStart\x12`\n" +
 	"\x19backup_retain_period_days\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\b\xfa\xc71\x047-35R\x16backupRetainPeriodDays\x12r\n" +
 	"\x17performance_diagnostics\x18\r \x01(\v29.yandex.cloud.mdb.mongodb.v1.PerformanceDiagnosticsConfigR\x16performanceDiagnostics\x12;\n" +

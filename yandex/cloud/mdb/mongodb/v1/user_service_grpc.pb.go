@@ -33,22 +33,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing MongoDB User resources.
+// A set of methods for managing StoreDoc User resources.
 type UserServiceClient interface {
-	// Returns the specified MongoDB User resource.
-	// To get the list of available MongoDB User resources, make a [List] request.
+	// Returns the specified StoreDoc User resource.
+	// To get the list of available StoreDoc User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
-	// Retrieves the list of MongoDB User resources in the specified cluster.
+	// Retrieves the list of StoreDoc User resources in the specified cluster.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Creates a MongoDB user in the specified cluster.
+	// Creates a StoreDoc user in the specified cluster.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified MongoDB user.
+	// Updates the specified StoreDoc user.
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MongoDB user.
+	// Deletes the specified StoreDoc user.
 	Delete(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Grants permission to the specified MongoDB user.
+	// Grants permission to the specified StoreDoc user.
 	GrantPermission(ctx context.Context, in *GrantUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Revokes permission from the specified MongoDB user.
+	// Revokes permission from the specified StoreDoc user.
 	RevokePermission(ctx context.Context, in *RevokeUserPermissionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -134,22 +134,22 @@ func (c *userServiceClient) RevokePermission(ctx context.Context, in *RevokeUser
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing MongoDB User resources.
+// A set of methods for managing StoreDoc User resources.
 type UserServiceServer interface {
-	// Returns the specified MongoDB User resource.
-	// To get the list of available MongoDB User resources, make a [List] request.
+	// Returns the specified StoreDoc User resource.
+	// To get the list of available StoreDoc User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
-	// Retrieves the list of MongoDB User resources in the specified cluster.
+	// Retrieves the list of StoreDoc User resources in the specified cluster.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Creates a MongoDB user in the specified cluster.
+	// Creates a StoreDoc user in the specified cluster.
 	Create(context.Context, *CreateUserRequest) (*operation.Operation, error)
-	// Updates the specified MongoDB user.
+	// Updates the specified StoreDoc user.
 	Update(context.Context, *UpdateUserRequest) (*operation.Operation, error)
-	// Deletes the specified MongoDB user.
+	// Deletes the specified StoreDoc user.
 	Delete(context.Context, *DeleteUserRequest) (*operation.Operation, error)
-	// Grants permission to the specified MongoDB user.
+	// Grants permission to the specified StoreDoc user.
 	GrantPermission(context.Context, *GrantUserPermissionRequest) (*operation.Operation, error)
-	// Revokes permission from the specified MongoDB user.
+	// Revokes permission from the specified StoreDoc user.
 	RevokePermission(context.Context, *RevokeUserPermissionRequest) (*operation.Operation, error)
 }
 

@@ -14,6 +14,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -28,10 +29,10 @@ const (
 
 type GetUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Redis User resource to return.
+	// Name of the Valkey User resource to return.
 	// To get the name of the user, use a [UserService.List] request.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -84,7 +85,7 @@ func (x *GetUserRequest) GetUserName() string {
 
 type ListUsersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the cluster to list Redis users in.
+	// ID of the cluster to list Valkey users in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -151,7 +152,7 @@ func (x *ListUsersRequest) GetPageToken() string {
 
 type ListUsersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Redis User resources.
+	// List of Valkey User resources.
 	Users []*User `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListUsersRequest.page_size], use the [next_page_token] as the value
@@ -208,7 +209,7 @@ func (x *ListUsersResponse) GetNextPageToken() string {
 
 type CreateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to create a user in.
+	// ID of the Valkey cluster to create a user in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Properties of the user to be created.
@@ -263,7 +264,7 @@ func (x *CreateUserRequest) GetUserSpec() *UserSpec {
 
 type CreateUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user is being created in.
+	// ID of the Valkey cluster the user is being created in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being created.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -317,21 +318,23 @@ func (x *CreateUserMetadata) GetUserName() string {
 
 type UpdateUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Redis user to be updated.
+	// Name of the Valkey user to be updated.
 	UserName string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	// Field mask that specifies which fields of the Redis User resource should be updated.
+	// Field mask that specifies which fields of the Valkey User resource should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,3,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New password of the Redis user, 8-128 characters long.
+	// New password of the Valkey user, 8-128 characters long.
 	Passwords []string `protobuf:"bytes,4,rep,name=passwords,proto3" json:"passwords,omitempty"`
 	// New set of permissions to grant to the user.
 	Permissions *Permissions `protobuf:"bytes,5,opt,name=permissions,proto3" json:"permissions,omitempty"`
-	// Is Redis user enabled
-	Enabled       bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Is Valkey user enabled
+	Enabled bool `protobuf:"varint,6,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Generate password using Connection Manager
+	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,7,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *UpdateUserRequest) Reset() {
@@ -406,9 +409,16 @@ func (x *UpdateUserRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *UpdateUserRequest) GetGeneratePassword() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.GeneratePassword
+	}
+	return nil
+}
+
 type UpdateUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being updated.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -462,7 +472,7 @@ func (x *UpdateUserMetadata) GetUserName() string {
 
 type DeleteUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user to delete.
@@ -518,7 +528,7 @@ func (x *DeleteUserRequest) GetUserName() string {
 
 type DeleteUserMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the user that is being deleted.
 	UserName      string `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
@@ -574,7 +584,7 @@ var File_yandex_cloud_mdb_redis_v1_user_service_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_mdb_redis_v1_user_service_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/mdb/redis/v1/user_service.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/mdb/redis/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8a\x01\n" +
+	",yandex/cloud/mdb/redis/v1/user_service.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a$yandex/cloud/mdb/redis/v1/user.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8a\x01\n" +
 	"\x0eGetUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
@@ -596,7 +606,7 @@ const file_yandex_cloud_mdb_redis_v1_user_service_proto_rawDesc = "" +
 	"\x12CreateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"\xd5\x02\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"\x9e\x03\n" +
 	"\x11UpdateUserRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12K\n" +
@@ -605,7 +615,8 @@ const file_yandex_cloud_mdb_redis_v1_user_service_proto_rawDesc = "" +
 	"updateMask\x12%\n" +
 	"\tpasswords\x18\x04 \x03(\tB\a\x82\xc81\x03<=1R\tpasswords\x12H\n" +
 	"\vpermissions\x18\x05 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x12\x18\n" +
-	"\aenabled\x18\x06 \x01(\bR\aenabled\"P\n" +
+	"\aenabled\x18\x06 \x01(\bR\aenabled\x12G\n" +
+	"\x11generate_password\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\"P\n" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
@@ -656,28 +667,30 @@ var file_yandex_cloud_mdb_redis_v1_user_service_proto_goTypes = []any{
 	(*UserSpec)(nil),              // 10: yandex.cloud.mdb.redis.v1.UserSpec
 	(*fieldmaskpb.FieldMask)(nil), // 11: google.protobuf.FieldMask
 	(*Permissions)(nil),           // 12: yandex.cloud.mdb.redis.v1.Permissions
-	(*operation.Operation)(nil),   // 13: yandex.cloud.operation.Operation
+	(*wrapperspb.BoolValue)(nil),  // 13: google.protobuf.BoolValue
+	(*operation.Operation)(nil),   // 14: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_mdb_redis_v1_user_service_proto_depIdxs = []int32{
 	9,  // 0: yandex.cloud.mdb.redis.v1.ListUsersResponse.users:type_name -> yandex.cloud.mdb.redis.v1.User
 	10, // 1: yandex.cloud.mdb.redis.v1.CreateUserRequest.user_spec:type_name -> yandex.cloud.mdb.redis.v1.UserSpec
 	11, // 2: yandex.cloud.mdb.redis.v1.UpdateUserRequest.update_mask:type_name -> google.protobuf.FieldMask
 	12, // 3: yandex.cloud.mdb.redis.v1.UpdateUserRequest.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
-	0,  // 4: yandex.cloud.mdb.redis.v1.UserService.Get:input_type -> yandex.cloud.mdb.redis.v1.GetUserRequest
-	1,  // 5: yandex.cloud.mdb.redis.v1.UserService.List:input_type -> yandex.cloud.mdb.redis.v1.ListUsersRequest
-	3,  // 6: yandex.cloud.mdb.redis.v1.UserService.Create:input_type -> yandex.cloud.mdb.redis.v1.CreateUserRequest
-	5,  // 7: yandex.cloud.mdb.redis.v1.UserService.Update:input_type -> yandex.cloud.mdb.redis.v1.UpdateUserRequest
-	7,  // 8: yandex.cloud.mdb.redis.v1.UserService.Delete:input_type -> yandex.cloud.mdb.redis.v1.DeleteUserRequest
-	9,  // 9: yandex.cloud.mdb.redis.v1.UserService.Get:output_type -> yandex.cloud.mdb.redis.v1.User
-	2,  // 10: yandex.cloud.mdb.redis.v1.UserService.List:output_type -> yandex.cloud.mdb.redis.v1.ListUsersResponse
-	13, // 11: yandex.cloud.mdb.redis.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
-	13, // 12: yandex.cloud.mdb.redis.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
-	13, // 13: yandex.cloud.mdb.redis.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	13, // 4: yandex.cloud.mdb.redis.v1.UpdateUserRequest.generate_password:type_name -> google.protobuf.BoolValue
+	0,  // 5: yandex.cloud.mdb.redis.v1.UserService.Get:input_type -> yandex.cloud.mdb.redis.v1.GetUserRequest
+	1,  // 6: yandex.cloud.mdb.redis.v1.UserService.List:input_type -> yandex.cloud.mdb.redis.v1.ListUsersRequest
+	3,  // 7: yandex.cloud.mdb.redis.v1.UserService.Create:input_type -> yandex.cloud.mdb.redis.v1.CreateUserRequest
+	5,  // 8: yandex.cloud.mdb.redis.v1.UserService.Update:input_type -> yandex.cloud.mdb.redis.v1.UpdateUserRequest
+	7,  // 9: yandex.cloud.mdb.redis.v1.UserService.Delete:input_type -> yandex.cloud.mdb.redis.v1.DeleteUserRequest
+	9,  // 10: yandex.cloud.mdb.redis.v1.UserService.Get:output_type -> yandex.cloud.mdb.redis.v1.User
+	2,  // 11: yandex.cloud.mdb.redis.v1.UserService.List:output_type -> yandex.cloud.mdb.redis.v1.ListUsersResponse
+	14, // 12: yandex.cloud.mdb.redis.v1.UserService.Create:output_type -> yandex.cloud.operation.Operation
+	14, // 13: yandex.cloud.mdb.redis.v1.UserService.Update:output_type -> yandex.cloud.operation.Operation
+	14, // 14: yandex.cloud.mdb.redis.v1.UserService.Delete:output_type -> yandex.cloud.operation.Operation
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_user_service_proto_init() }

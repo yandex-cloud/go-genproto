@@ -4,6 +4,7 @@ package redis
 
 import (
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func (m *GetUserRequest) SetClusterId(v string) {
@@ -72,6 +73,10 @@ func (m *UpdateUserRequest) SetPermissions(v *Permissions) {
 
 func (m *UpdateUserRequest) SetEnabled(v bool) {
 	m.Enabled = v
+}
+
+func (m *UpdateUserRequest) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
 }
 
 func (m *UpdateUserMetadata) SetClusterId(v string) {

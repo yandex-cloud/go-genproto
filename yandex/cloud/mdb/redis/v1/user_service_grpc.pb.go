@@ -31,18 +31,18 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Redis User resources.
+// A set of methods for managing Valkey User resources.
 type UserServiceClient interface {
-	// Returns the specified Redis User resource.
-	// To get the list of available Redis User resources, make a [List] request.
+	// Returns the specified Valkey User resource.
+	// To get the list of available Valkey User resources, make a [List] request.
 	Get(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*User, error)
-	// Retrieves the list of Redis User resources in the specified cluster.
+	// Retrieves the list of Valkey User resources in the specified cluster.
 	List(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Creates a Redis user in the specified cluster.
+	// Creates a Valkey user in the specified cluster.
 	Create(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified Redis user.
+	// Updates the specified Valkey user.
 	Update(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified Redis user.
+	// Deletes the specified Valkey user.
 	Delete(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -108,18 +108,18 @@ func (c *userServiceClient) Delete(ctx context.Context, in *DeleteUserRequest, o
 // All implementations should embed UnimplementedUserServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Redis User resources.
+// A set of methods for managing Valkey User resources.
 type UserServiceServer interface {
-	// Returns the specified Redis User resource.
-	// To get the list of available Redis User resources, make a [List] request.
+	// Returns the specified Valkey User resource.
+	// To get the list of available Valkey User resources, make a [List] request.
 	Get(context.Context, *GetUserRequest) (*User, error)
-	// Retrieves the list of Redis User resources in the specified cluster.
+	// Retrieves the list of Valkey User resources in the specified cluster.
 	List(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Creates a Redis user in the specified cluster.
+	// Creates a Valkey user in the specified cluster.
 	Create(context.Context, *CreateUserRequest) (*operation.Operation, error)
-	// Updates the specified Redis user.
+	// Updates the specified Valkey user.
 	Update(context.Context, *UpdateUserRequest) (*operation.Operation, error)
-	// Deletes the specified Redis user.
+	// Deletes the specified Valkey user.
 	Delete(context.Context, *DeleteUserRequest) (*operation.Operation, error)
 }
 

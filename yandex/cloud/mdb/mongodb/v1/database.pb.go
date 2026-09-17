@@ -23,15 +23,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A MongoDB Database resource. For more information, see the
+// A StoreDoc Database resource. For more information, see the
 // [Developer's Guide](/docs/managed-mongodb/concepts).
 type Database struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the database.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the MongoDB cluster that the database belongs to.
+	// ID of the StoreDoc cluster that the database belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Deletion Protection inhibits deletion of the database
+	// Deletion Protection inhibits deletion of the database.
 	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -90,7 +90,7 @@ func (x *Database) GetDeletionProtection() *wrapperspb.BoolValue {
 
 type DatabaseSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the MongoDB database. 1-63 characters long.
+	// Name of the StoreDoc database. 1-63 characters long.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Deletion Protection inhibits deletion of the database
 	DeletionProtection *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`

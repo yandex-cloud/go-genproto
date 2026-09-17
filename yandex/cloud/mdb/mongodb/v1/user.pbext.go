@@ -18,12 +18,20 @@ func (m *User) SetPermissions(v []*Permission) {
 	m.Permissions = v
 }
 
+func (m *User) SetConnectionManager(v *ConnectionManager) {
+	m.ConnectionManager = v
+}
+
 func (m *User) SetAuthType(v AuthType) {
 	m.AuthType = v
 }
 
 func (m *User) SetDeletionProtection(v *wrapperspb.BoolValue) {
 	m.DeletionProtection = v
+}
+
+func (m *ConnectionManager) SetConnectionId(v string) {
+	m.ConnectionId = v
 }
 
 func (m *Permission) SetDatabaseName(v string) {
@@ -44,6 +52,10 @@ func (m *UserSpec) SetPassword(v string) {
 
 func (m *UserSpec) SetPermissions(v []*Permission) {
 	m.Permissions = v
+}
+
+func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
+	m.GeneratePassword = v
 }
 
 func (m *UserSpec) SetAuthType(v AuthType) {

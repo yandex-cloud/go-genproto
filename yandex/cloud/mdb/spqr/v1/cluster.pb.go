@@ -243,8 +243,10 @@ type Cluster struct {
 	SecurityGroupIds []string `protobuf:"bytes,15,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,16,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Host groups hosting VMs of the cluster.
+	HostGroupIds  []string `protobuf:"bytes,17,rep,name=host_group_ids,json=hostGroupIds,proto3" json:"host_group_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Cluster) Reset() {
@@ -387,6 +389,13 @@ func (x *Cluster) GetDeletionProtection() bool {
 		return x.DeletionProtection
 	}
 	return false
+}
+
+func (x *Cluster) GetHostGroupIds() []string {
+	if x != nil {
+		return x.HostGroupIds
+	}
+	return nil
 }
 
 // Monitoring system.
@@ -610,7 +619,7 @@ var File_yandex_cloud_mdb_spqr_v1_cluster_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_spqr_v1_cluster_proto_rawDesc = "" +
 	"\n" +
-	"&yandex/cloud/mdb/spqr/v1/cluster.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a*yandex/cloud/mdb/spqr/v1/maintenance.proto\"\xc3\t\n" +
+	"&yandex/cloud/mdb/spqr/v1/cluster.proto\x12\x18yandex.cloud.mdb.spqr.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/type/timeofday.proto\x1a%yandex/cloud/mdb/spqr/v1/config.proto\x1a*yandex/cloud/mdb/spqr/v1/maintenance.proto\"\xe9\t\n" +
 	"\aCluster\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\tfolder_id\x18\x02 \x01(\tR\bfolderId\x129\n" +
@@ -632,7 +641,8 @@ const file_yandex_cloud_mdb_spqr_v1_cluster_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\r \x01(\v2+.yandex.cloud.mdb.spqr.v1.MaintenanceWindowR\x11maintenanceWindow\x12[\n" +
 	"\x11planned_operation\x18\x0e \x01(\v2..yandex.cloud.mdb.spqr.v1.MaintenanceOperationR\x10plannedOperation\x12,\n" +
 	"\x12security_group_ids\x18\x0f \x03(\tR\x10securityGroupIds\x12/\n" +
-	"\x13deletion_protection\x18\x10 \x01(\bR\x12deletionProtection\x1a9\n" +
+	"\x13deletion_protection\x18\x10 \x01(\bR\x12deletionProtection\x12$\n" +
+	"\x0ehost_group_ids\x18\x11 \x03(\tR\fhostGroupIds\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"I\n" +

@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VersionsServiceClient interface {
-	// Returns list of available Redis versions.
+	// Returns the list of available Valkey versions.
 	List(ctx context.Context, in *ListVersionsRequest, opts ...grpc.CallOption) (*ListVersionsResponse, error)
 }
 
@@ -52,7 +52,7 @@ func (c *versionsServiceClient) List(ctx context.Context, in *ListVersionsReques
 // All implementations should embed UnimplementedVersionsServiceServer
 // for forward compatibility.
 type VersionsServiceServer interface {
-	// Returns list of available Redis versions.
+	// Returns the list of available Valkey versions.
 	List(context.Context, *ListVersionsRequest) (*ListVersionsResponse, error)
 }
 

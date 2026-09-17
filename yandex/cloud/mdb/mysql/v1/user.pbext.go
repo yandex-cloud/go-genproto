@@ -3,6 +3,7 @@
 package mysql
 
 import (
+	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/mdb/v1"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -36,6 +37,10 @@ func (m *User) SetConnectionManager(v *ConnectionManager) {
 
 func (m *User) SetDeletionProtectionMode(v DeletionProtectionMode) {
 	m.DeletionProtectionMode = v
+}
+
+func (m *User) SetUserConnectionManager(v *v1.UserConnectionManager) {
+	m.UserConnectionManager = v
 }
 
 func (m *Permission) SetDatabaseName(v string) {
@@ -96,4 +101,8 @@ func (m *UserSpec) SetGeneratePassword(v *wrapperspb.BoolValue) {
 
 func (m *UserSpec) SetDeletionProtectionMode(v DeletionProtectionMode) {
 	m.DeletionProtectionMode = v
+}
+
+func (m *UserSpec) SetUserConnectionManager(v *v1.UserConnectionManager) {
+	m.UserConnectionManager = v
 }

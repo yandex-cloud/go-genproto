@@ -629,14 +629,14 @@ const file_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_service_prot
 	"\border_by\x18\x05 \x01(\tB\t\x8a\xc81\x05<=100R\aorderBy\"\x9e\x01\n" +
 	"\x17ListCustomPagesResponse\x12[\n" +
 	"\fcustom_pages\x18\x01 \x03(\v28.yandex.cloud.smartwebsecurity.v1.custom_page.CustomPageR\vcustomPages\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xad\x06\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xc1\x06\n" +
 	"\x17CreateCustomPageRequest\x12!\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bfolderId\x12\xa6\x01\n" +
 	"\x06labels\x18\x02 \x03(\v2Q.yandex.cloud.smartwebsecurity.v1.custom_page.CreateCustomPageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12:\n" +
 	"\x04name\x18\x03 \x01(\tB&\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12+\n" +
 	"\vdescription\x18\x04 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12!\n" +
-	"\fcontent_type\x18\x06 \x01(\tR\vcontentType\x12d\n" +
+	"\acontent\x18\x05 \x01(\tR\acontent\x125\n" +
+	"\fcontent_type\x18\x06 \x01(\tB\x12\xf2\xc71\x0e[\\t\\x20-\\x7E]*R\vcontentType\x12d\n" +
 	"\vstatus_code\x18\a \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.custom_page.CustomPage.StatusCodeR\n" +
 	"statusCode\x12\xbc\x01\n" +
 	"\aheaders\x18\f \x03(\v2R.yandex.cloud.smartwebsecurity.v1.custom_page.CreateCustomPageRequest.HeadersEntryBN\xf2\xc71\x0e[\\t\\x20-\\x7E]*\x82\xc81\x04<=10\x8a\xc81\x05<=256\xb2\xc81'\x12\x1e[!#$%&'*+.^_\\x60|~0-9A-Za-z-]*\x1a\x051-128R\aheaders\x1a9\n" +
@@ -645,7 +645,7 @@ const file_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_service_prot
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a:\n" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\f\"\xf3\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\f\"\x87\a\n" +
 	"\x17UpdateCustomPageRequest\x12*\n" +
 	"\x0ecustom_page_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\fcustomPageId\x12;\n" +
 	"\vupdate_mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
@@ -653,8 +653,8 @@ const file_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_service_prot
 	"\x06labels\x18\x03 \x03(\v2Q.yandex.cloud.smartwebsecurity.v1.custom_page.UpdateCustomPageRequest.LabelsEntryB;\xf2\xc71\v[-_0-9a-z]*\x82\xc81\x04<=64\x8a\xc81\x04<=63\xb2\xc81\x18\x12\x10[a-z][-_0-9a-z]*\x1a\x041-63R\x06labels\x12:\n" +
 	"\x04name\x18\x04 \x01(\tB&\xf2\xc71\x1a[a-zA-Z0-9][a-zA-Z0-9-_.]*\x8a\xc81\x041-50R\x04name\x12+\n" +
 	"\vdescription\x18\x05 \x01(\tB\t\x8a\xc81\x05<=512R\vdescription\x12\x18\n" +
-	"\acontent\x18\x06 \x01(\tR\acontent\x12!\n" +
-	"\fcontent_type\x18\a \x01(\tR\vcontentType\x12d\n" +
+	"\acontent\x18\x06 \x01(\tR\acontent\x125\n" +
+	"\fcontent_type\x18\a \x01(\tB\x12\xf2\xc71\x0e[\\t\\x20-\\x7E]*R\vcontentType\x12d\n" +
 	"\vstatus_code\x18\b \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.custom_page.CustomPage.StatusCodeR\n" +
 	"statusCode\x12\xbc\x01\n" +
 	"\aheaders\x18\f \x03(\v2R.yandex.cloud.smartwebsecurity.v1.custom_page.UpdateCustomPageRequest.HeadersEntryBN\xf2\xc71\x0e[\\t\\x20-\\x7E]*\x82\xc81\x04<=10\x8a\xc81\x05<=256\xb2\xc81'\x12\x1e[!#$%&'*+.^_\\x60|~0-9A-Za-z-]*\x1a\x051-128R\aheaders\x1a9\n" +

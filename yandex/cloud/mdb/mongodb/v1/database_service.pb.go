@@ -29,10 +29,10 @@ const (
 
 type GetDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster that the database belongs to.
+	// ID of the StoreDoc cluster that the database belongs to.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB database to return.
+	// Name of the StoreDoc database to return.
 	// To get the name of the database use a [DatabaseService.List] request.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -85,7 +85,7 @@ func (x *GetDatabaseRequest) GetDatabaseName() string {
 
 type ListDatabasesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to list databases in.
+	// ID of the StoreDoc cluster to list databases in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -152,7 +152,7 @@ func (x *ListDatabasesRequest) GetPageToken() string {
 
 type ListDatabasesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of MongoDB databases.
+	// List of StoreDoc databases.
 	Databases []*Database `protobuf:"bytes,1,rep,name=databases,proto3" json:"databases,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListDatabasesRequest.page_size], use the [next_page_token] as the value
@@ -209,7 +209,7 @@ func (x *ListDatabasesResponse) GetNextPageToken() string {
 
 type CreateDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to create a database in.
+	// ID of the StoreDoc cluster to create a database in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Configuration of the database to create.
@@ -264,9 +264,9 @@ func (x *CreateDatabaseRequest) GetDatabaseSpec() *DatabaseSpec {
 
 type CreateDatabaseMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster where a database is being created.
+	// ID of the StoreDoc cluster where a database is being created.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB database that is being created.
+	// Name of the StoreDoc database that is being created.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -318,7 +318,7 @@ func (x *CreateDatabaseMetadata) GetDatabaseName() string {
 
 type UpdateDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to update a database in.
+	// ID of the StoreDoc cluster to update a database in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to update.
@@ -392,9 +392,9 @@ func (x *UpdateDatabaseRequest) GetDeletionProtection() *wrapperspb.BoolValue {
 
 type UpdateDatabaseMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster where a database is being updated.
+	// ID of the StoreDoc cluster where a database is being updated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB database that is being updated.
+	// Name of the StoreDoc database that is being updated.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -446,7 +446,7 @@ func (x *UpdateDatabaseMetadata) GetDatabaseName() string {
 
 type DeleteDatabaseRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster to delete a database in.
+	// ID of the StoreDoc cluster to delete a database in.
 	// To get the cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the database to delete.
@@ -502,9 +502,9 @@ func (x *DeleteDatabaseRequest) GetDatabaseName() string {
 
 type DeleteDatabaseMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster where a database is being deleted.
+	// ID of the StoreDoc cluster where a database is being deleted.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the MongoDB database that is being deleted.
+	// Name of the StoreDoc database that is being deleted.
 	DatabaseName  string `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

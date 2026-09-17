@@ -23,8 +23,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A SPQR User resource. For more information, see the
-// [Developer's Guide](/docs/managed-spqr/concepts).
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the SPQR user.

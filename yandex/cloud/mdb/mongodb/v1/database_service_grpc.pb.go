@@ -31,18 +31,18 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing MongoDB Database resources.
+// A set of methods for managing StoreDoc Database resources.
 type DatabaseServiceClient interface {
-	// Returns the specified MongoDB Database resource.
-	// To get the list of available MongoDB Database resources, make a [List] request.
+	// Returns the specified StoreDoc Database resource.
+	// To get the list of available StoreDoc Database resources, make a [List] request.
 	Get(ctx context.Context, in *GetDatabaseRequest, opts ...grpc.CallOption) (*Database, error)
-	// Retrieves the list of MongoDB Database resources in the specified cluster.
+	// Retrieves the list of StoreDoc Database resources in the specified cluster.
 	List(ctx context.Context, in *ListDatabasesRequest, opts ...grpc.CallOption) (*ListDatabasesResponse, error)
-	// Creates a new MongoDB database in the specified cluster.
+	// Creates a new StoreDoc database in the specified cluster.
 	Create(ctx context.Context, in *CreateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified MongoDB database.
+	// Updates the specified StoreDoc database.
 	Update(ctx context.Context, in *UpdateDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MongoDB database.
+	// Deletes the specified StoreDoc database.
 	Delete(ctx context.Context, in *DeleteDatabaseRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -108,18 +108,18 @@ func (c *databaseServiceClient) Delete(ctx context.Context, in *DeleteDatabaseRe
 // All implementations should embed UnimplementedDatabaseServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing MongoDB Database resources.
+// A set of methods for managing StoreDoc Database resources.
 type DatabaseServiceServer interface {
-	// Returns the specified MongoDB Database resource.
-	// To get the list of available MongoDB Database resources, make a [List] request.
+	// Returns the specified StoreDoc Database resource.
+	// To get the list of available StoreDoc Database resources, make a [List] request.
 	Get(context.Context, *GetDatabaseRequest) (*Database, error)
-	// Retrieves the list of MongoDB Database resources in the specified cluster.
+	// Retrieves the list of StoreDoc Database resources in the specified cluster.
 	List(context.Context, *ListDatabasesRequest) (*ListDatabasesResponse, error)
-	// Creates a new MongoDB database in the specified cluster.
+	// Creates a new StoreDoc database in the specified cluster.
 	Create(context.Context, *CreateDatabaseRequest) (*operation.Operation, error)
-	// Updates the specified MongoDB database.
+	// Updates the specified StoreDoc database.
 	Update(context.Context, *UpdateDatabaseRequest) (*operation.Operation, error)
-	// Deletes the specified MongoDB database.
+	// Deletes the specified StoreDoc database.
 	Delete(context.Context, *DeleteDatabaseRequest) (*operation.Operation, error)
 }
 

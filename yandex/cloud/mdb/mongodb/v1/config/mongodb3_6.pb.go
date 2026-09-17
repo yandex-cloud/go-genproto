@@ -190,7 +190,7 @@ func (MongoCfgConfig3_6_OperationProfiling_Mode) EnumDescriptor() ([]byte, []int
 }
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
-// options described in [MongoDB documentation](https://docs.mongodb.com/v3.6/reference/configuration-options/).
+// options described in the [MongoDB documentation](https://docs.mongodb.com/v3.6/reference/configuration-options/).
 //
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongodConfig3_6 struct {
@@ -369,12 +369,12 @@ func (x *MongosConfig3_6) GetNet() *MongosConfig3_6_Network {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongodConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongod settings for a MongoDB 3.6 cluster (a combination of settings defined
+	// Effective mongod settings for a StoreDoc 3.6 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongodConfig3_6 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongod settings for a MongoDB 3.6 cluster.
+	// User-defined mongod settings for a StoreDoc 3.6 cluster.
 	UserConfig *MongodConfig3_6 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongod configuration for a MongoDB 3.6 cluster.
+	// Default mongod configuration for a StoreDoc 3.6 cluster.
 	DefaultConfig *MongodConfig3_6 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -434,12 +434,12 @@ func (x *MongodConfigSet3_6) GetDefaultConfig() *MongodConfig3_6 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongoCfgConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongocfg settings for a MongoDB 3.6 cluster (a combination of settings defined
+	// Effective mongocfg settings for a StoreDoc 3.6 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongoCfgConfig3_6 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongocfg settings for a MongoDB 3.6 cluster.
+	// User-defined mongocfg settings for a StoreDoc 3.6 cluster.
 	UserConfig *MongoCfgConfig3_6 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongocfg configuration for a MongoDB 3.6 cluster.
+	// Default mongocfg configuration for a StoreDoc 3.6 cluster.
 	DefaultConfig *MongoCfgConfig3_6 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -499,12 +499,12 @@ func (x *MongoCfgConfigSet3_6) GetDefaultConfig() *MongoCfgConfig3_6 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb3_6.proto.
 type MongosConfigSet3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective settings for a MongoDB 3.6 cluster (a combination of settings defined
+	// Effective settings for a StoreDoc 3.6 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongosConfig3_6 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a MongoDB 3.6 cluster.
+	// User-defined settings for a StoreDoc 3.6 cluster.
 	UserConfig *MongosConfig3_6 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a MongoDB 3.6 cluster.
+	// Default configuration for a StoreDoc 3.6 cluster.
 	DefaultConfig *MongosConfig3_6 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -565,7 +565,7 @@ type MongodConfig3_6_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
 	WiredTiger *MongodConfig3_6_Storage_WiredTiger `protobuf:"bytes,1,opt,name=wired_tiger,json=wiredTiger,proto3" json:"wired_tiger,omitempty"`
-	// Configuration of the MongoDB [journal](https://docs.mongodb.com/v3.6/reference/glossary/#term-journal).
+	// Configuration of the StoreDoc [journal](https://docs.mongodb.com/v3.6/reference/glossary/#term-journal).
 	Journal       *MongodConfig3_6_Storage_Journal `protobuf:"bytes,2,opt,name=journal,proto3" json:"journal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -437,7 +437,7 @@ var File_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_proto protoref
 
 const file_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_proto_rawDesc = "" +
 	"\n" +
-	">yandex/cloud/smartwebsecurity/v1/custom_page/custom_page.proto\x12,yandex.cloud.smartwebsecurity.v1.custom_page\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x95\x11\n" +
+	">yandex/cloud/smartwebsecurity/v1/custom_page/custom_page.proto\x12,yandex.cloud.smartwebsecurity.v1.custom_page\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xa9\x11\n" +
 	"\n" +
 	"CustomPage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
@@ -450,9 +450,9 @@ const file_yandex_cloud_smartwebsecurity_v1_custom_page_custom_page_proto_rawDes
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x18\n" +
-	"\acontent\x18\t \x01(\tR\acontent\x12!\n" +
+	"\acontent\x18\t \x01(\tR\acontent\x125\n" +
 	"\fcontent_type\x18\n" +
-	" \x01(\tR\vcontentType\x12d\n" +
+	" \x01(\tB\x12\xf2\xc71\x0e[\\t\\x20-\\x7E]*R\vcontentType\x12d\n" +
 	"\vstatus_code\x18\v \x01(\x0e2C.yandex.cloud.smartwebsecurity.v1.custom_page.CustomPage.StatusCodeR\n" +
 	"statusCode\x12\xaf\x01\n" +
 	"\aheaders\x18\f \x03(\v2E.yandex.cloud.smartwebsecurity.v1.custom_page.CustomPage.HeadersEntryBN\xf2\xc71\x0e[\\t\\x20-\\x7E]*\x82\xc81\x04<=10\x8a\xc81\x05<=256\xb2\xc81'\x12\x1e[!#$%&'*+.^_\\x60|~0-9A-Za-z-]*\x1a\x051-128R\aheaders\x1a9\n" +

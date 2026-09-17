@@ -100,16 +100,16 @@ func (RedisConfig7_0_MaxmemoryPolicy) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_redis_v1_config_redis7_0_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// Fields and structure of `RedisConfig` reflects Redis configuration file
+// Fields and structure of `RedisConfig` reflect Valkey configuration file
 // parameters.
 type RedisConfig7_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Redis key eviction policy for a dataset that reaches maximum memory,
-	// available to the host. Redis maxmemory setting depends on Managed
-	// Service for Redis [host class](/docs/managed-redis/concepts/instance-types).
+	// Valkey key eviction policy for a dataset that reaches maximum memory,
+	// available to the host. Valkey maxmemory setting depends on Managed
+	// Service for Valkey [host class](/docs/managed-redis/concepts/instance-types).
 	// All policies are described in detail in [Redis documentation](https://redis.io/topics/lru-cache).
 	MaxmemoryPolicy RedisConfig7_0_MaxmemoryPolicy `protobuf:"varint,1,opt,name=maxmemory_policy,json=maxmemoryPolicy,proto3,enum=yandex.cloud.mdb.redis.v1.config.RedisConfig7_0_MaxmemoryPolicy" json:"maxmemory_policy,omitempty"`
-	// Time that Redis keeps the connection open while the client is idle.
+	// Time that Valkey keeps the connection open while the client is idle.
 	// If no new command is sent during that time, the connection is closed.
 	Timeout *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=timeout,proto3" json:"timeout,omitempty"`
 	// Authentication password.
@@ -122,11 +122,11 @@ type RedisConfig7_0 struct {
 	SlowlogMaxLen *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=slowlog_max_len,json=slowlogMaxLen,proto3" json:"slowlog_max_len,omitempty"`
 	// String setting for pub\sub functionality.
 	NotifyKeyspaceEvents string `protobuf:"bytes,7,opt,name=notify_keyspace_events,json=notifyKeyspaceEvents,proto3" json:"notify_keyspace_events,omitempty"`
-	// Redis connection output buffers limits for pubsub operations.
+	// Valkey connection output buffers limits for pubsub operations.
 	ClientOutputBufferLimitPubsub *RedisConfig7_0_ClientOutputBufferLimit `protobuf:"bytes,8,opt,name=client_output_buffer_limit_pubsub,json=clientOutputBufferLimitPubsub,proto3" json:"client_output_buffer_limit_pubsub,omitempty"`
-	// Redis connection output buffers limits for clients.
+	// Valkey connection output buffers limits for clients.
 	ClientOutputBufferLimitNormal *RedisConfig7_0_ClientOutputBufferLimit `protobuf:"bytes,9,opt,name=client_output_buffer_limit_normal,json=clientOutputBufferLimitNormal,proto3" json:"client_output_buffer_limit_normal,omitempty"`
-	// Redis maxmemory percent
+	// Valkey maxmemory percent
 	MaxmemoryPercent *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=maxmemory_percent,json=maxmemoryPercent,proto3" json:"maxmemory_percent,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -234,12 +234,12 @@ func (x *RedisConfig7_0) GetMaxmemoryPercent() *wrapperspb.Int64Value {
 
 type RedisConfigSet7_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective settings for a Redis 7.0 cluster (a combination of settings
+	// Effective settings for a Valkey 7.0 cluster (a combination of settings
 	// defined in [user_config] and [default_config]).
 	EffectiveConfig *RedisConfig7_0 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Redis 7.0 cluster.
+	// User-defined settings for a Valkey 7.0 cluster.
 	UserConfig *RedisConfig7_0 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Redis 7.0 cluster.
+	// Default configuration for a Valkey 7.0 cluster.
 	DefaultConfig *RedisConfig7_0 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

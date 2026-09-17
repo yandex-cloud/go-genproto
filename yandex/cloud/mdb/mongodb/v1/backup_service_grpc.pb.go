@@ -29,14 +29,14 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing MongoDB Backup resources.
+// A set of methods for managing StoreDoc Backup resources.
 type BackupServiceClient interface {
-	// Returns the specified MongoDB backup.
-	// To get the list of available MongoDB backups, make a [List] request.
+	// Returns the specified StoreDoc backup.
+	// To get the list of available StoreDoc backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
-	// Deletes the specified MongoDB backup.
+	// Deletes the specified StoreDoc backup.
 	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -82,14 +82,14 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // All implementations should embed UnimplementedBackupServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing MongoDB Backup resources.
+// A set of methods for managing StoreDoc Backup resources.
 type BackupServiceServer interface {
-	// Returns the specified MongoDB backup.
-	// To get the list of available MongoDB backups, make a [List] request.
+	// Returns the specified StoreDoc backup.
+	// To get the list of available StoreDoc backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
 	// Retrieves the list of backups available for the specified folder.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
-	// Deletes the specified MongoDB backup.
+	// Deletes the specified StoreDoc backup.
 	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 }
 

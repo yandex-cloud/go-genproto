@@ -623,7 +623,7 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\x12;\n" +
 	"\vupdate_mask\x18\x03 \x01(\v2\x1a.google.protobuf.FieldMaskR\n" +
 	"updateMask\x12%\n" +
-	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x058-128R\bpassword\x12F\n" +
+	"\bpassword\x18\x04 \x01(\tB\t\x8a\xc81\x050-128R\bpassword\x12F\n" +
 	"\vpermissions\x18\x05 \x03(\v2$.yandex.cloud.mdb.spqr.v1.PermissionR\vpermissions\x12B\n" +
 	"\bsettings\x18\x06 \x01(\v2&.yandex.cloud.mdb.spqr.v1.UserSettingsR\bsettings\x122\n" +
 	"\x06grants\x18\a \x03(\tB\x1a\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x06grants\x12K\n" +
@@ -631,11 +631,11 @@ const file_yandex_cloud_mdb_spqr_v1_user_service_proto_rawDesc = "" +
 	"\x12UpdateUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +
-	"\tuser_name\x18\x02 \x01(\tR\buserName\"|\n" +
+	"\tuser_name\x18\x02 \x01(\tR\buserName\"}\n" +
 	"\x11DeleteUserRequest\x12+\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12:\n" +
-	"\tuser_name\x18\x02 \x01(\tB\x1d\xe8\xc71\x01\xf2\xc71\r[a-zA-Z0-9_]*\x8a\xc81\x04<=63R\buserName\"P\n" +
+	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
+	"\tuser_name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\buserName\"P\n" +
 	"\x12DeleteUserMetadata\x12\x1d\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x1b\n" +

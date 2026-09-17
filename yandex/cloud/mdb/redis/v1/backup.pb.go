@@ -27,7 +27,7 @@ type Backup_BackupType int32
 
 const (
 	Backup_BACKUP_TYPE_UNSPECIFIED Backup_BackupType = 0
-	// Backup created by automated daily schedule
+	// Backup created by automated daily schedule.
 	Backup_AUTOMATED Backup_BackupType = 1
 	// Backup created by user request
 	Backup_MANUAL Backup_BackupType = 2
@@ -74,8 +74,8 @@ func (Backup_BackupType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_redis_v1_backup_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// Description of a Redis backup. For more information, see
-// the Managed Service for Redis [documentation](/docs/managed-redis/concepts/backup).
+// Description of a Valkey backup. For more information, see
+// the Managed Service for Valkey [documentation](/docs/managed-redis/concepts/backup).
 type Backup struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the backup.
@@ -85,7 +85,7 @@ type Backup struct {
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format
 	// (i.e. when the backup operation was completed).
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// ID of the Redis cluster that the backup was created for.
+	// ID of the Valkey cluster that the backup was created for.
 	SourceClusterId string `protobuf:"bytes,4,opt,name=source_cluster_id,json=sourceClusterId,proto3" json:"source_cluster_id,omitempty"`
 	// Start timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format
 	// (i.e. when the backup operation was started).

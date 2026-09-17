@@ -189,6 +189,10 @@ func (m *TrinoConfig) SetEventListeners(v *EventListenersConfig) {
 	m.EventListeners = v
 }
 
+func (m *TrinoConfig) SetAdditionalProperties(v map[string]string) {
+	m.AdditionalProperties = v
+}
+
 func (m *CoordinatorConfig) SetResources(v *Resources) {
 	m.Resources = v
 }

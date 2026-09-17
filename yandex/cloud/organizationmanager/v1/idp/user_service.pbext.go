@@ -334,6 +334,10 @@ func (m *ResolvedUser) SetUserpoolId(v string) {
 	m.UserpoolId = v
 }
 
+func (m *ResolvedUser) SetPasswordCreatedAt(v *timestamppb.Timestamp) {
+	m.PasswordCreatedAt = v
+}
+
 func (m *ResolveExternalIdsResponse) SetResolvedUsers(v []*ResolvedUser) {
 	m.ResolvedUsers = v
 }

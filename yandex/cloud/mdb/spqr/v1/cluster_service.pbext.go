@@ -446,6 +446,14 @@ func (m *SpqrSpec) SetBalancer(v *BalancerSettings) {
 	m.Balancer = v
 }
 
+func (m *SpqrSpec) SetUseSpqrguard(v *wrapperspb.BoolValue) {
+	m.UseSpqrguard = v
+}
+
+func (m *SpqrSpec) SetForbidDirectShardQueries(v *wrapperspb.BoolValue) {
+	m.ForbidDirectShardQueries = v
+}
+
 func (m *SpqrSpec_Router) SetConfig(v *RouterSettings) {
 	m.Config = v
 }

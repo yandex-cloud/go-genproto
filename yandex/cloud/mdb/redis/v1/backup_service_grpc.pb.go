@@ -29,14 +29,14 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing Redis backups.
+// A set of methods for managing Valkey backups.
 type BackupServiceClient interface {
-	// Returns the specified Redis backup.
-	// To get the list of available Redis backups, make a [List] request.
+	// Returns the specified Valkey backup.
+	// To get the list of available Valkey backups, make a [List] request.
 	Get(ctx context.Context, in *GetBackupRequest, opts ...grpc.CallOption) (*Backup, error)
-	// Retrieves the list of Redis backups available for the specified folder.
+	// Retrieves the list of Valkey backups available for the specified folder.
 	List(ctx context.Context, in *ListBackupsRequest, opts ...grpc.CallOption) (*ListBackupsResponse, error)
-	// Deletes the specified Redis backup.
+	// Deletes the specified Valkey backup.
 	Delete(ctx context.Context, in *DeleteBackupRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -82,14 +82,14 @@ func (c *backupServiceClient) Delete(ctx context.Context, in *DeleteBackupReques
 // All implementations should embed UnimplementedBackupServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing Redis backups.
+// A set of methods for managing Valkey backups.
 type BackupServiceServer interface {
-	// Returns the specified Redis backup.
-	// To get the list of available Redis backups, make a [List] request.
+	// Returns the specified Valkey backup.
+	// To get the list of available Valkey backups, make a [List] request.
 	Get(context.Context, *GetBackupRequest) (*Backup, error)
-	// Retrieves the list of Redis backups available for the specified folder.
+	// Retrieves the list of Valkey backups available for the specified folder.
 	List(context.Context, *ListBackupsRequest) (*ListBackupsResponse, error)
-	// Deletes the specified Redis backup.
+	// Deletes the specified Valkey backup.
 	Delete(context.Context, *DeleteBackupRequest) (*operation.Operation, error)
 }
 

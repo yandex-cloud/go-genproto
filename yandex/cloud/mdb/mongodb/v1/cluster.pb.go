@@ -273,9 +273,9 @@ type Host_Role int32
 const (
 	// Role of the host in the cluster is unknown. Default value.
 	Host_ROLE_UNKNOWN Host_Role = 0
-	// Host is the primary MongoDB server in the cluster.
+	// Host is the primary StoreDoc server in the cluster.
 	Host_PRIMARY Host_Role = 1
-	// Host is a secondary MongoDB server in the cluster.
+	// Host is a secondary StoreDoc server in the cluster.
 	Host_SECONDARY Host_Role = 2
 )
 
@@ -385,7 +385,7 @@ const (
 	Service_MONGOD Service_Type = 1
 	// The host is running a mongos daemon.
 	Service_MONGOS Service_Type = 2
-	// The host is running a MongoDB config server.
+	// The host is running a StoreDoc config server.
 	Service_MONGOCFG Service_Type = 3
 )
 
@@ -536,28 +536,28 @@ func (AutoCompactConfig_CompactionType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_mongodb_v1_cluster_proto_rawDescGZIP(), []int{20, 0}
 }
 
-// A managed MongoDB cluster. For more information, see the [documentation](/docs/managed-mongodb/concepts).
+// A managed StoreDoc cluster. For more information, see the [documentation](/docs/managed-mongodb/concepts).
 type Cluster struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the MongoDB cluster.
+	// ID of the StoreDoc cluster.
 	// This ID is assigned by MDB at creation time.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// ID of the folder that the MongoDB cluster belongs to.
+	// ID of the folder that the StoreDoc cluster belongs to.
 	FolderId string `protobuf:"bytes,2,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Name of the MongoDB cluster.
+	// Name of the StoreDoc cluster.
 	// The name is unique within the folder. 1-63 characters long.
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the MongoDB cluster. 0-256 characters long.
+	// Description of the StoreDoc cluster. 0-256 characters long.
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the MongoDB cluster as “ key:value “ pairs. Maximum 64 per resource.
+	// Custom labels for the StoreDoc cluster as “ key:value “ pairs. Maximum 64 per resource.
 	Labels map[string]string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the MongoDB cluster.
+	// Deployment environment of the StoreDoc cluster.
 	Environment Cluster_Environment `protobuf:"varint,7,opt,name=environment,proto3,enum=yandex.cloud.mdb.mongodb.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Description of monitoring systems relevant to the MongoDB cluster.
+	// Description of monitoring systems relevant to the StoreDoc cluster.
 	Monitoring []*Monitoring `protobuf:"bytes,8,rep,name=monitoring,proto3" json:"monitoring,omitempty"`
-	// Configuration of the MongoDB cluster.
+	// Configuration of the StoreDoc cluster.
 	Config *ClusterConfig `protobuf:"bytes,9,opt,name=config,proto3" json:"config,omitempty"`
 	// ID of the network that the cluster belongs to.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
@@ -571,7 +571,7 @@ type Cluster struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,14,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Planned maintenance operation to be started for the cluster within the nearest [maintenance_window].
 	PlannedOperation *MaintenanceOperation `protobuf:"bytes,15,opt,name=planned_operation,json=plannedOperation,proto3" json:"planned_operation,omitempty"`
-	// User security groups
+	// User security groups.
 	SecurityGroupIds []string `protobuf:"bytes,16,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
 	// Deletion Protection inhibits deletion of the cluster
 	DeletionProtection bool `protobuf:"varint,17,opt,name=deletion_protection,json=deletionProtection,proto3" json:"deletion_protection,omitempty"`
@@ -744,7 +744,7 @@ type Monitoring struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Description of the monitoring system.
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// Link to the monitoring system charts for the MongoDB cluster.
+	// Link to the monitoring system charts for the StoreDoc cluster.
 	Link          string `protobuf:"bytes,3,opt,name=link,proto3" json:"link,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -803,14 +803,14 @@ func (x *Monitoring) GetLink() string {
 
 type ClusterConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of MongoDB server software. Possible values: `7.0`, `8.0`.
+	// Version of StoreDoc server software. Possible values: `7.0`, `8.0`.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// MongoDB feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
+	// StoreDoc feature compatibility version. See usage details in [MongoDB documentation](https://docs.mongodb.com/manual/reference/command/setFeatureCompatibilityVersion/).
 	// Possible values:
 	// * `7.0` - persist data compatibility for version 7.0. After setting this option the data will not be compatible with 6.0 or lower.
 	// * `8.0` - persist data compatibility for version 8.0. After setting this option the data will not be compatible with 7.0 or lower.
 	FeatureCompatibilityVersion string `protobuf:"bytes,5,opt,name=feature_compatibility_version,json=featureCompatibilityVersion,proto3" json:"feature_compatibility_version,omitempty"`
-	// Configuration for MongoDB servers in the cluster.
+	// Configuration for StoreDoc servers in the cluster.
 	//
 	// Types that are valid to be assigned to Mongodb:
 	//
@@ -832,7 +832,7 @@ type ClusterConfig struct {
 	PerformanceDiagnostics *PerformanceDiagnosticsConfig `protobuf:"bytes,13,opt,name=performance_diagnostics,json=performanceDiagnostics,proto3" json:"performance_diagnostics,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,6,opt,name=access,proto3" json:"access,omitempty"`
-	// Configuration and resource allocation for a MongoDB cluster.
+	// Configuration and resource allocation for a StoreDoc cluster.
 	MongodbConfig *Mongodb `protobuf:"bytes,19,opt,name=mongodb_config,json=mongodbConfig,proto3" json:"mongodb_config,omitempty"`
 	// Full version
 	FullVersion string `protobuf:"bytes,20,opt,name=full_version,json=fullVersion,proto3" json:"full_version,omitempty"`
@@ -1037,7 +1037,7 @@ type isClusterConfig_Mongodb interface {
 }
 
 type ClusterConfig_Mongodb_3_6 struct {
-	// Configuration and resource allocation for a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for a StoreDoc 3.6 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1045,7 +1045,7 @@ type ClusterConfig_Mongodb_3_6 struct {
 }
 
 type ClusterConfig_Mongodb_4_0 struct {
-	// Configuration and resource allocation for a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.0 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1053,7 +1053,7 @@ type ClusterConfig_Mongodb_4_0 struct {
 }
 
 type ClusterConfig_Mongodb_4_2 struct {
-	// Configuration and resource allocation for a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.2 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1061,7 +1061,7 @@ type ClusterConfig_Mongodb_4_2 struct {
 }
 
 type ClusterConfig_Mongodb_4_4 struct {
-	// Configuration and resource allocation for a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for a StoreDoc 4.4 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1069,7 +1069,7 @@ type ClusterConfig_Mongodb_4_4 struct {
 }
 
 type ClusterConfig_Mongodb_5_0 struct {
-	// Configuration and resource allocation for a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 5.0 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1077,7 +1077,7 @@ type ClusterConfig_Mongodb_5_0 struct {
 }
 
 type ClusterConfig_Mongodb_6_0 struct {
-	// Configuration and resource allocation for a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for a StoreDoc 6.0 cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1085,7 +1085,7 @@ type ClusterConfig_Mongodb_6_0 struct {
 }
 
 type ClusterConfig_Mongodb_4_4Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 4.4 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 4.4 Enterprise cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1093,7 +1093,7 @@ type ClusterConfig_Mongodb_4_4Enterprise struct {
 }
 
 type ClusterConfig_Mongodb_5_0Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 5.0 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 5.0 Enterprise cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1101,7 +1101,7 @@ type ClusterConfig_Mongodb_5_0Enterprise struct {
 }
 
 type ClusterConfig_Mongodb_6_0Enterprise struct {
-	// Configuration and resource allocation for a MongoDB 6.0 Enterprise cluster.
+	// Configuration and resource allocation for a StoreDoc 6.0 Enterprise cluster.
 	// Deprecated. Use [mongodb_config] instead.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
@@ -1129,13 +1129,13 @@ func (*ClusterConfig_Mongodb_6_0Enterprise) isClusterConfig_Mongodb() {}
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb3_6 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 3.6 cluster.
 	Mongod *Mongodb3_6_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 3.6 cluster.
 	Mongocfg *Mongodb3_6_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 3.6 cluster.
 	Mongos *Mongodb3_6_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 3.6 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 3.6 cluster.
 	Mongoinfra    *Mongodb3_6_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1202,13 +1202,13 @@ func (x *Mongodb3_6) GetMongoinfra() *Mongodb3_6_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 4.0 cluster.
 	Mongod *Mongodb4_0_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 4.0 cluster.
 	Mongocfg *Mongodb4_0_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 4.0 cluster.
 	Mongos *Mongodb4_0_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 4.0 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 4.0 cluster.
 	Mongoinfra    *Mongodb4_0_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1275,13 +1275,13 @@ func (x *Mongodb4_0) GetMongoinfra() *Mongodb4_0_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_2 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 4.2 cluster.
 	Mongod *Mongodb4_2_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 4.2 cluster.
 	Mongocfg *Mongodb4_2_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 4.2 cluster.
 	Mongos *Mongodb4_2_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 4.2 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 4.2 cluster.
 	Mongoinfra    *Mongodb4_2_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1348,13 +1348,13 @@ func (x *Mongodb4_2) GetMongoinfra() *Mongodb4_2_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_4 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 4.4 cluster.
 	Mongod *Mongodb4_4_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 4.4 cluster.
 	Mongocfg *Mongodb4_4_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 4.4 cluster.
 	Mongos *Mongodb4_4_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 4.4 cluster.
 	Mongoinfra    *Mongodb4_4_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1421,13 +1421,13 @@ func (x *Mongodb4_4) GetMongoinfra() *Mongodb4_4_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb4_4Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 4.4 cluster.
 	Mongod *Mongodb4_4Enterprise_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 4.4 cluster.
 	Mongocfg *Mongodb4_4Enterprise_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 4.4 cluster.
 	Mongos *Mongodb4_4Enterprise_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 4.4 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 4.4 cluster.
 	Mongoinfra    *Mongodb4_4Enterprise_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1494,13 +1494,13 @@ func (x *Mongodb4_4Enterprise) GetMongoinfra() *Mongodb4_4Enterprise_MongoInfra 
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb5_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 5.0 cluster.
 	Mongod *Mongodb5_0_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 5.0 cluster.
 	Mongocfg *Mongodb5_0_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 5.0 cluster.
 	Mongos *Mongodb5_0_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 5.0 cluster.
 	Mongoinfra    *Mongodb5_0_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1567,13 +1567,13 @@ func (x *Mongodb5_0) GetMongoinfra() *Mongodb5_0_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb5_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 5.0 cluster.
 	Mongod *Mongodb5_0Enterprise_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 5.0 cluster.
 	Mongocfg *Mongodb5_0Enterprise_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 5.0 cluster.
 	Mongos *Mongodb5_0Enterprise_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 5.0 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 5.0 cluster.
 	Mongoinfra    *Mongodb5_0Enterprise_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1640,13 +1640,13 @@ func (x *Mongodb5_0Enterprise) GetMongoinfra() *Mongodb5_0Enterprise_MongoInfra 
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb6_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 6.0 cluster.
 	Mongod *Mongodb6_0_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 6.0 cluster.
 	Mongocfg *Mongodb6_0_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 6.0 cluster.
 	Mongos *Mongodb6_0_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 6.0 cluster.
 	Mongoinfra    *Mongodb6_0_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1713,13 +1713,13 @@ func (x *Mongodb6_0) GetMongoinfra() *Mongodb6_0_MongoInfra {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/cluster.proto.
 type Mongodb6_0Enterprise struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc 6.0 cluster.
 	Mongod *Mongodb6_0Enterprise_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc 6.0 cluster.
 	Mongocfg *Mongodb6_0Enterprise_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc 6.0 cluster.
 	Mongos *Mongodb6_0Enterprise_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB 6.0 cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc 6.0 cluster.
 	Mongoinfra    *Mongodb6_0Enterprise_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1785,13 +1785,13 @@ func (x *Mongodb6_0Enterprise) GetMongoinfra() *Mongodb6_0Enterprise_MongoInfra 
 
 type Mongodb struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Configuration and resource allocation for mongod in a MongoDB cluster.
+	// Configuration and resource allocation for mongod in a StoreDoc cluster.
 	Mongod *Mongodb_Mongod `protobuf:"bytes,1,opt,name=mongod,proto3" json:"mongod,omitempty"`
-	// Configuration and resource allocation for mongocfg in a MongoDB cluster.
+	// Configuration and resource allocation for mongocfg in a StoreDoc cluster.
 	Mongocfg *Mongodb_MongoCfg `protobuf:"bytes,2,opt,name=mongocfg,proto3" json:"mongocfg,omitempty"`
-	// Configuration and resource allocation for mongos in a MongoDB cluster.
+	// Configuration and resource allocation for mongos in a StoreDoc cluster.
 	Mongos *Mongodb_Mongos `protobuf:"bytes,3,opt,name=mongos,proto3" json:"mongos,omitempty"`
-	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a MongoDB cluster.
+	// Configuration and resource allocation for mongoinfra (mongos+mongocfg) in a StoreDoc cluster.
 	Mongoinfra    *Mongodb_MongoInfra `protobuf:"bytes,4,opt,name=mongoinfra,proto3" json:"mongoinfra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1911,15 +1911,15 @@ func (x *Shard) GetClusterId() string {
 
 type Host struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the MongoDB host. The host name is assigned by MDB at creation time, and cannot be changed.
+	// Name of the StoreDoc host. The host name is assigned by MDB at creation time, and cannot be changed.
 	// 1-63 characters long.
 	// The name is unique across all MDB hosts that exist on the platform, as it defines the FQDN of the host.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the MongoDB host. The ID is assigned by MDB at creation time.
+	// ID of the StoreDoc host. The ID is assigned by MDB at creation time.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// ID of the availability zone where the MongoDB host resides.
+	// ID of the availability zone where the StoreDoc host resides.
 	ZoneId string `protobuf:"bytes,3,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
-	// Resources allocated to the MongoDB host.
+	// Resources allocated to the StoreDoc host.
 	Resources *Resources `protobuf:"bytes,4,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Role of the host in the cluster. If the field has default value, it is not returned in the response.
 	Role Host_Role `protobuf:"varint,5,opt,name=role,proto3,enum=yandex.cloud.mdb.mongodb.v1.Host_Role" json:"role,omitempty"`
@@ -2424,7 +2424,7 @@ type Mongodb3_6_Mongod struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration for a mongod 3.6 hosts.
 	Config *config.MongodConfigSet3_6 `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	// Resources allocated to MongoDB hosts.
+	// Resources allocated to StoreDoc hosts.
 	Resources *Resources `protobuf:"bytes,2,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Disk size autoscaling settings
 	DiskSizeAutoscaling *DiskSizeAutoscaling `protobuf:"bytes,3,opt,name=disk_size_autoscaling,json=diskSizeAutoscaling,proto3" json:"disk_size_autoscaling,omitempty"`

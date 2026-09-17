@@ -63,6 +63,10 @@ func (m *CreateGpuClusterRequest) SetInterconnectType(v GpuInterconnectType) {
 	m.InterconnectType = v
 }
 
+func (m *CreateGpuClusterRequest) SetSubnets(v int64) {
+	m.Subnets = v
+}
+
 func (m *CreateGpuClusterMetadata) SetGpuClusterId(v string) {
 	m.GpuClusterId = v
 }

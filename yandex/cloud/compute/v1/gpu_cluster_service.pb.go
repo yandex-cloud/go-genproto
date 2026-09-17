@@ -245,8 +245,10 @@ type CreateGpuClusterRequest struct {
 	ZoneId string `protobuf:"bytes,5,opt,name=zone_id,json=zoneId,proto3" json:"zone_id,omitempty"`
 	// Type of interconnect to use for this GPU cluster.
 	InterconnectType GpuInterconnectType `protobuf:"varint,6,opt,name=interconnect_type,json=interconnectType,proto3,enum=yandex.cloud.compute.v1.GpuInterconnectType" json:"interconnect_type,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Number of subnets to create for this GPU cluster.
+	Subnets       int64 `protobuf:"varint,7,opt,name=subnets,proto3" json:"subnets,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateGpuClusterRequest) Reset() {
@@ -319,6 +321,13 @@ func (x *CreateGpuClusterRequest) GetInterconnectType() GpuInterconnectType {
 		return x.InterconnectType
 	}
 	return GpuInterconnectType_GPU_INTERCONNECT_TYPE_UNSPECIFIED
+}
+
+func (x *CreateGpuClusterRequest) GetSubnets() int64 {
+	if x != nil {
+		return x.Subnets
+	}
+	return 0
 }
 
 type CreateGpuClusterMetadata struct {
@@ -866,14 +875,15 @@ const file_yandex_cloud_compute_v1_gpu_cluster_service_proto_rawDesc = "" +
 	"\border_by\x18\x05 \x01(\tR\aorderBy\"\x89\x01\n" +
 	"\x17ListGpuClustersResponse\x12F\n" +
 	"\fgpu_clusters\x18\x01 \x03(\v2#.yandex.cloud.compute.v1.GpuClusterR\vgpuClusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xf1\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8b\x03\n" +
 	"\x17CreateGpuClusterRequest\x12\x1b\n" +
 	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12T\n" +
 	"\x06labels\x18\x04 \x03(\v2<.yandex.cloud.compute.v1.CreateGpuClusterRequest.LabelsEntryR\x06labels\x12\x17\n" +
 	"\azone_id\x18\x05 \x01(\tR\x06zoneId\x12Y\n" +
-	"\x11interconnect_type\x18\x06 \x01(\x0e2,.yandex.cloud.compute.v1.GpuInterconnectTypeR\x10interconnectType\x1a9\n" +
+	"\x11interconnect_type\x18\x06 \x01(\x0e2,.yandex.cloud.compute.v1.GpuInterconnectTypeR\x10interconnectType\x12\x18\n" +
+	"\asubnets\x18\a \x01(\x03R\asubnets\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"@\n" +

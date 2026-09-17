@@ -27,7 +27,7 @@ const (
 
 type GetBackupRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis backup to return.
+	// ID of the Valkey backup to return.
 	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -242,7 +242,7 @@ func (x *DeleteBackupRequest) GetBackupId() string {
 
 type DeleteBackupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the deleting Redis backup.
+	// ID of the Valkey backup being deleted.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -316,7 +316,7 @@ func (MongosConfig_Network_Compression_Compressor) EnumDescriptor() ([]byte, []i
 }
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
-// options described in [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/configuration-options/).
+// options described in the [MongoDB documentation](https://www.mongodb.com/docs/manual/reference/configuration-options/).
 type MongodConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// `storage` section of mongod configuration.
@@ -616,12 +616,12 @@ func (x *MongosConfig) GetOperationProfiling() *MongosConfig_OperationProfiling 
 
 type MongodConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongod settings for a MongoDB cluster (a combination of settings defined
+	// Effective mongod settings for a StoreDoc cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongodConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongod settings for a MongoDB cluster.
+	// User-defined mongod settings for a StoreDoc cluster.
 	UserConfig *MongodConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongod configuration for a MongoDB cluster.
+	// Default mongod configuration for a StoreDoc cluster.
 	DefaultConfig *MongodConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -680,12 +680,12 @@ func (x *MongodConfigSet) GetDefaultConfig() *MongodConfig {
 
 type MongoCfgConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongocfg settings for a MongoDB cluster (a combination of settings defined
+	// Effective mongocfg settings for a StoreDoc cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongoCfgConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongocfg settings for a MongoDB cluster.
+	// User-defined mongocfg settings for a StoreDoc cluster.
 	UserConfig *MongoCfgConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongocfg configuration for a MongoDB cluster.
+	// Default mongocfg configuration for a StoreDoc cluster.
 	DefaultConfig *MongoCfgConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -744,12 +744,12 @@ func (x *MongoCfgConfigSet) GetDefaultConfig() *MongoCfgConfig {
 
 type MongosConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongos settings for a MongoDB cluster (a combination of settings defined
+	// Effective mongos settings for a StoreDoc cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongosConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongos settings for a MongoDB cluster.
+	// User-defined mongos settings for a StoreDoc cluster.
 	UserConfig *MongosConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongos configuration for a MongoDB cluster.
+	// Default mongos configuration for a StoreDoc cluster.
 	DefaultConfig *MongosConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -810,7 +810,7 @@ type MongodConfig_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
 	WiredTiger *MongodConfig_Storage_WiredTiger `protobuf:"bytes,1,opt,name=wired_tiger,json=wiredTiger,proto3" json:"wired_tiger,omitempty"`
-	// Configuration of the MongoDB [journal](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-journal).
+	// Configuration of the StoreDoc [journal](https://www.mongodb.com/docs/manual/reference/glossary/#std-term-journal).
 	Journal       *MongodConfig_Storage_Journal `protobuf:"bytes,2,opt,name=journal,proto3" json:"journal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1039,7 +1039,7 @@ type MongodConfig_AuditLog struct {
 	// Audit filter, should be valid JSON object string
 	Filter string `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
 	// Allows runtime configuration of audit filter and auditAuthorizationSuccess.
-	// Available for MongoDB Enterprise only.
+	// Available for StoreDoc Enterprise only.
 	RuntimeConfiguration *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=runtime_configuration,json=runtimeConfiguration,proto3" json:"runtime_configuration,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
@@ -1607,7 +1607,7 @@ type MongodConfig_Network_Compression struct {
 	// - other members of the deployment if the instance is part of a replica set or a sharded cluster
 	// - mongosh
 	// - drivers that support the OP_COMPRESSED message format.
-	// MongoDB supports the following compressors:
+	// StoreDoc supports the following compressors:
 	Compressors   []MongodConfig_Network_Compression_Compressor `protobuf:"varint,1,rep,packed,name=compressors,proto3,enum=yandex.cloud.mdb.mongodb.v1.config.MongodConfig_Network_Compression_Compressor" json:"compressors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2573,7 +2573,7 @@ type MongosConfig_Network_Compression struct {
 	// - other members of the deployment if the instance is part of a replica set or a sharded cluster
 	// - mongosh
 	// - drivers that support the OP_COMPRESSED message format.
-	// MongoDB supports the following compressors:
+	// StoreDoc supports the following compressors:
 	Compressors   []MongosConfig_Network_Compression_Compressor `protobuf:"varint,1,rep,packed,name=compressors,proto3,enum=yandex.cloud.mdb.mongodb.v1.config.MongosConfig_Network_Compression_Compressor" json:"compressors,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

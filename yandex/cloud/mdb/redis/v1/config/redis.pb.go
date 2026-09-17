@@ -100,16 +100,16 @@ func (RedisConfig_MaxmemoryPolicy) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_mdb_redis_v1_config_redis_proto_rawDescGZIP(), []int{0, 0}
 }
 
-// Fields and structure of `RedisConfig` reflects Redis configuration file
+// Fields and structure of `RedisConfig` reflect Valkey configuration file
 // parameters.
 type RedisConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Redis key eviction policy for a dataset that reaches maximum memory,
-	// available to the host. Redis maxmemory setting depends on Managed
-	// Service for Redis [host class](/docs/managed-redis/concepts/instance-types).
+	// Valkey key eviction policy for a dataset that reaches maximum memory,
+	// available to the host. Valkey maxmemory setting depends on Managed
+	// Service for Valkey [host class](/docs/managed-redis/concepts/instance-types).
 	// All policies are described in detail in [Redis documentation](https://redis.io/topics/lru-cache).
 	MaxmemoryPolicy RedisConfig_MaxmemoryPolicy `protobuf:"varint,1,opt,name=maxmemory_policy,json=maxmemoryPolicy,proto3,enum=yandex.cloud.mdb.redis.v1.config.RedisConfig_MaxmemoryPolicy" json:"maxmemory_policy,omitempty"`
-	// Time that Redis keeps the connection open while the client is idle.
+	// Time that Valkey keeps the connection open while the client is idle.
 	// If no new command is sent during that time, the connection is closed.
 	Timeout *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=timeout,proto3" json:"timeout,omitempty"`
 	// Authentication password.
@@ -122,11 +122,11 @@ type RedisConfig struct {
 	SlowlogMaxLen *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=slowlog_max_len,json=slowlogMaxLen,proto3" json:"slowlog_max_len,omitempty"`
 	// String setting for pub\sub functionality.
 	NotifyKeyspaceEvents string `protobuf:"bytes,7,opt,name=notify_keyspace_events,json=notifyKeyspaceEvents,proto3" json:"notify_keyspace_events,omitempty"`
-	// Redis connection output buffers limits for pubsub operations.
+	// Valkey connection output buffers limits for pubsub operations.
 	ClientOutputBufferLimitPubsub *RedisConfig_ClientOutputBufferLimit `protobuf:"bytes,8,opt,name=client_output_buffer_limit_pubsub,json=clientOutputBufferLimitPubsub,proto3" json:"client_output_buffer_limit_pubsub,omitempty"`
-	// Redis connection output buffers limits for clients.
+	// Valkey connection output buffers limits for clients.
 	ClientOutputBufferLimitNormal *RedisConfig_ClientOutputBufferLimit `protobuf:"bytes,9,opt,name=client_output_buffer_limit_normal,json=clientOutputBufferLimitNormal,proto3" json:"client_output_buffer_limit_normal,omitempty"`
-	// Share of the host RAM used as the Redis maxmemory limit, in percent.
+	// Share of the host RAM used as the Valkey maxmemory limit, in percent.
 	MaxmemoryPercent *wrapperspb.Int64Value `protobuf:"bytes,10,opt,name=maxmemory_percent,json=maxmemoryPercent,proto3" json:"maxmemory_percent,omitempty"`
 	// Maximum time in milliseconds for Lua scripts, 0 - disabled mechanism
 	LuaTimeLimit *wrapperspb.Int64Value `protobuf:"bytes,11,opt,name=lua_time_limit,json=luaTimeLimit,proto3" json:"lua_time_limit,omitempty"`
@@ -148,7 +148,7 @@ type RedisConfig struct {
 	AllowDataLoss *wrapperspb.BoolValue `protobuf:"bytes,19,opt,name=allow_data_loss,json=allowDataLoss,proto3" json:"allow_data_loss,omitempty"`
 	// Use JIT for lua scripts and functions
 	UseLuajit *wrapperspb.BoolValue `protobuf:"bytes,20,opt,name=use_luajit,json=useLuajit,proto3" json:"use_luajit,omitempty"`
-	// Allow redis to use io-threads. When enabled, the number of threads is
+	// Allow valkey to use io-threads. When enabled, the number of threads is
 	// derived from the host class; when disabled, a single thread is used.
 	IoThreadsAllowed *wrapperspb.BoolValue `protobuf:"bytes,21,opt,name=io_threads_allowed,json=ioThreadsAllowed,proto3" json:"io_threads_allowed,omitempty"`
 	// Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist.
@@ -379,12 +379,12 @@ func (x *RedisConfig) GetRebalanceEnabled() *wrapperspb.BoolValue {
 
 type RedisConfigSet struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective settings for a Redis cluster (a combination of settings
+	// Effective settings for a Valkey cluster (a combination of settings
 	// defined in [user_config] and [default_config]).
 	EffectiveConfig *RedisConfig `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined settings for a Redis cluster.
+	// User-defined settings for a Valkey cluster.
 	UserConfig *RedisConfig `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default configuration for a Redis cluster.
+	// Default configuration for a Valkey cluster.
 	DefaultConfig *RedisConfig `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

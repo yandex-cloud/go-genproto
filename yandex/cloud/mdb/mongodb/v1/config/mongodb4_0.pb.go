@@ -189,7 +189,7 @@ func (MongoCfgConfig4_0_OperationProfiling_Mode) EnumDescriptor() ([]byte, []int
 }
 
 // Configuration of a mongod daemon. Supported options are a limited subset of all
-// options described in [MongoDB documentation](https://docs.mongodb.com/v4.0/reference/configuration-options/).
+// options described in the [MongoDB documentation](https://docs.mongodb.com/v4.0/reference/configuration-options/).
 //
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto.
 type MongodConfig4_0 struct {
@@ -368,12 +368,12 @@ func (x *MongosConfig4_0) GetNet() *MongosConfig4_0_Network {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto.
 type MongodConfigSet4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongod settings for a MongoDB 4.0 cluster (a combination of settings defined
+	// Effective mongod settings for a StoreDoc 4.0 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongodConfig4_0 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongod settings for a MongoDB 4.0 cluster.
+	// User-defined mongod settings for a StoreDoc 4.0 cluster.
 	UserConfig *MongodConfig4_0 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongod configuration for a MongoDB 4.0 cluster.
+	// Default mongod configuration for a StoreDoc 4.0 cluster.
 	DefaultConfig *MongodConfig4_0 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -433,12 +433,12 @@ func (x *MongodConfigSet4_0) GetDefaultConfig() *MongodConfig4_0 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto.
 type MongoCfgConfigSet4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongocfg settings for a MongoDB 4.0 cluster (a combination of settings defined
+	// Effective mongocfg settings for a StoreDoc 4.0 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongoCfgConfig4_0 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongocfg settings for a MongoDB 4.0 cluster.
+	// User-defined mongocfg settings for a StoreDoc 4.0 cluster.
 	UserConfig *MongoCfgConfig4_0 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongocfg configuration for a MongoDB 4.0 cluster.
+	// Default mongocfg configuration for a StoreDoc 4.0 cluster.
 	DefaultConfig *MongoCfgConfig4_0 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -498,12 +498,12 @@ func (x *MongoCfgConfigSet4_0) GetDefaultConfig() *MongoCfgConfig4_0 {
 // Deprecated: Marked as deprecated in yandex/cloud/mdb/mongodb/v1/config/mongodb4_0.proto.
 type MongosConfigSet4_0 struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Effective mongos settings for a MongoDB 4.0 cluster (a combination of settings defined
+	// Effective mongos settings for a StoreDoc 4.0 cluster (a combination of settings defined
 	// in [user_config] and [default_config]).
 	EffectiveConfig *MongosConfig4_0 `protobuf:"bytes,1,opt,name=effective_config,json=effectiveConfig,proto3" json:"effective_config,omitempty"`
-	// User-defined mongos settings for a MongoDB 4.0 cluster.
+	// User-defined mongos settings for a StoreDoc 4.0 cluster.
 	UserConfig *MongosConfig4_0 `protobuf:"bytes,2,opt,name=user_config,json=userConfig,proto3" json:"user_config,omitempty"`
-	// Default mongos configuration for a MongoDB 4.0 cluster.
+	// Default mongos configuration for a StoreDoc 4.0 cluster.
 	DefaultConfig *MongosConfig4_0 `protobuf:"bytes,3,opt,name=default_config,json=defaultConfig,proto3" json:"default_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -564,7 +564,7 @@ type MongodConfig4_0_Storage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Configuration of the WiredTiger storage engine.
 	WiredTiger *MongodConfig4_0_Storage_WiredTiger `protobuf:"bytes,1,opt,name=wired_tiger,json=wiredTiger,proto3" json:"wired_tiger,omitempty"`
-	// Configuration of the MongoDB [journal](https://docs.mongodb.com/v4.0/reference/glossary/#term-journal).
+	// Configuration of the StoreDoc [journal](https://docs.mongodb.com/v4.0/reference/glossary/#term-journal).
 	Journal       *MongodConfig4_0_Storage_Journal `protobuf:"bytes,2,opt,name=journal,proto3" json:"journal,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

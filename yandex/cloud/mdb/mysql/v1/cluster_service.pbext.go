@@ -611,3 +611,7 @@ func (m *ConfigSpec) SetBackupRetainPeriodDays(v *wrapperspb.Int64Value) {
 func (m *ConfigSpec) SetDiskSizeAutoscaling(v *DiskSizeAutoscaling) {
 	m.DiskSizeAutoscaling = v
 }
+
+func (m *ConfigSpec) SetConnectionManager(v *v1.ClusterConnectionManager) {
+	m.ConnectionManager = v
+}

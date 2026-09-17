@@ -23,20 +23,75 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// A Redis User resource. For more information, see the
+type AuthType int32
+
+const (
+	AuthType_AUTH_TYPE_UNSPECIFIED AuthType = 0
+	// Password-based authentication
+	AuthType_AUTH_TYPE_PASSWORD AuthType = 1
+	// IAM-based authentication
+	AuthType_AUTH_TYPE_IAM AuthType = 2
+)
+
+// Enum value maps for AuthType.
+var (
+	AuthType_name = map[int32]string{
+		0: "AUTH_TYPE_UNSPECIFIED",
+		1: "AUTH_TYPE_PASSWORD",
+		2: "AUTH_TYPE_IAM",
+	}
+	AuthType_value = map[string]int32{
+		"AUTH_TYPE_UNSPECIFIED": 0,
+		"AUTH_TYPE_PASSWORD":    1,
+		"AUTH_TYPE_IAM":         2,
+	}
+)
+
+func (x AuthType) Enum() *AuthType {
+	p := new(AuthType)
+	*p = x
+	return p
+}
+
+func (x AuthType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AuthType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_mdb_redis_v1_user_proto_enumTypes[0].Descriptor()
+}
+
+func (AuthType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_mdb_redis_v1_user_proto_enumTypes[0]
+}
+
+func (x AuthType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AuthType.Descriptor instead.
+func (AuthType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{0}
+}
+
+// A Valkey User resource. For more information, see the
 // [Developer's Guide](/docs/managed-redis/concepts).
 type User struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the Redis user.
+	// Name of the Valkey user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// ID of the Redis cluster the user belongs to.
+	// ID of the Valkey cluster the user belongs to.
 	ClusterId string `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Set of permissions to grant to the user.
 	Permissions *Permissions `protobuf:"bytes,3,opt,name=permissions,proto3" json:"permissions,omitempty"`
-	// Is redis user enabled
+	// Is Valkey user enabled
 	Enabled bool `protobuf:"varint,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Raw ACL string inside of Redis
-	AclOptions    string `protobuf:"bytes,5,opt,name=acl_options,json=aclOptions,proto3" json:"acl_options,omitempty"`
+	// Raw ACL string inside of Valkey
+	AclOptions string `protobuf:"bytes,5,opt,name=acl_options,json=aclOptions,proto3" json:"acl_options,omitempty"`
+	// Connection Manager connection configuration.
+	ConnectionManager *ConnectionManager `protobuf:"bytes,6,opt,name=connection_manager,json=connectionManager,proto3" json:"connection_manager,omitempty"`
+	// Authentication type for the user
+	AuthType      AuthType `protobuf:"varint,7,opt,name=auth_type,json=authType,proto3,enum=yandex.cloud.mdb.redis.v1.AuthType" json:"auth_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -106,6 +161,66 @@ func (x *User) GetAclOptions() string {
 	return ""
 }
 
+func (x *User) GetConnectionManager() *ConnectionManager {
+	if x != nil {
+		return x.ConnectionManager
+	}
+	return nil
+}
+
+func (x *User) GetAuthType() AuthType {
+	if x != nil {
+		return x.AuthType
+	}
+	return AuthType_AUTH_TYPE_UNSPECIFIED
+}
+
+// Connection Manager connection configuration.
+type ConnectionManager struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of Connection Manager connection.
+	ConnectionId  string `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConnectionManager) Reset() {
+	*x = ConnectionManager{}
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConnectionManager) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConnectionManager) ProtoMessage() {}
+
+func (x *ConnectionManager) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConnectionManager.ProtoReflect.Descriptor instead.
+func (*ConnectionManager) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ConnectionManager) GetConnectionId() string {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return ""
+}
+
 type Permissions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Keys patterns user has permission to.
@@ -128,7 +243,7 @@ type Permissions struct {
 
 func (x *Permissions) Reset() {
 	*x = Permissions{}
-	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[1]
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +255,7 @@ func (x *Permissions) String() string {
 func (*Permissions) ProtoMessage() {}
 
 func (x *Permissions) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[1]
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +268,7 @@ func (x *Permissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Permissions.ProtoReflect.Descriptor instead.
 func (*Permissions) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Permissions) GetPatterns() *wrapperspb.StringValue {
@@ -201,21 +316,25 @@ func (x *Permissions) GetDatabases() *wrapperspb.StringValue {
 
 type UserSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the Redis user.
+	// Name of the Valkey user.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Password of the Redis user.
+	// Password of the Valkey user.
 	Passwords []string `protobuf:"bytes,2,rep,name=passwords,proto3" json:"passwords,omitempty"`
 	// Set of permissions to grant to the user.
 	Permissions *Permissions `protobuf:"bytes,3,opt,name=permissions,proto3" json:"permissions,omitempty"`
-	// Is Redis user enabled
-	Enabled       *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Is Valkey user enabled
+	Enabled *wrapperspb.BoolValue `protobuf:"bytes,4,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Generate password using Connection Manager
+	GeneratePassword *wrapperspb.BoolValue `protobuf:"bytes,5,opt,name=generate_password,json=generatePassword,proto3" json:"generate_password,omitempty"`
+	// Authentication type for the user
+	AuthType      AuthType `protobuf:"varint,6,opt,name=auth_type,json=authType,proto3,enum=yandex.cloud.mdb.redis.v1.AuthType" json:"auth_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserSpec) Reset() {
 	*x = UserSpec{}
-	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -227,7 +346,7 @@ func (x *UserSpec) String() string {
 func (*UserSpec) ProtoMessage() {}
 
 func (x *UserSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[2]
+	mi := &file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -240,7 +359,7 @@ func (x *UserSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserSpec.ProtoReflect.Descriptor instead.
 func (*UserSpec) Descriptor() ([]byte, []int) {
-	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{2}
+	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UserSpec) GetName() string {
@@ -271,11 +390,25 @@ func (x *UserSpec) GetEnabled() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *UserSpec) GetGeneratePassword() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.GeneratePassword
+	}
+	return nil
+}
+
+func (x *UserSpec) GetAuthType() AuthType {
+	if x != nil {
+		return x.AuthType
+	}
+	return AuthType_AUTH_TYPE_UNSPECIFIED
+}
+
 var File_yandex_cloud_mdb_redis_v1_user_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"$yandex/cloud/mdb/redis/v1/user.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xbe\x01\n" +
+	"$yandex/cloud/mdb/redis/v1/user.proto\x12\x19yandex.cloud.mdb.redis.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xdd\x02\n" +
 	"\x04User\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
@@ -283,7 +416,11 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x12\x18\n" +
 	"\aenabled\x18\x04 \x01(\bR\aenabled\x12\x1f\n" +
 	"\vacl_options\x18\x05 \x01(\tR\n" +
-	"aclOptions\"\x90\x03\n" +
+	"aclOptions\x12[\n" +
+	"\x12connection_manager\x18\x06 \x01(\v2,.yandex.cloud.mdb.redis.v1.ConnectionManagerR\x11connectionManager\x12@\n" +
+	"\tauth_type\x18\a \x01(\x0e2#.yandex.cloud.mdb.redis.v1.AuthTypeR\bauthType\"8\n" +
+	"\x11ConnectionManager\x12#\n" +
+	"\rconnection_id\x18\x01 \x01(\tR\fconnectionId\"\x90\x03\n" +
 	"\vPermissions\x128\n" +
 	"\bpatterns\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bpatterns\x12F\n" +
 	"\x10pub_sub_channels\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0epubSubChannels\x12<\n" +
@@ -292,12 +429,18 @@ const file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc = "" +
 	"categories\x128\n" +
 	"\bcommands\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\bcommands\x12K\n" +
 	"\x10sanitize_payload\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\x0fsanitizePayload\x12:\n" +
-	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\x9b\x02\n" +
+	"\tdatabases\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR\tdatabases\"\xa6\x03\n" +
 	"\bUserSpec\x12B\n" +
 	"\x04name\x18\x01 \x01(\tB.\xe8\xc71\x01\xf2\xc71\x1e^[a-zA-Z0-9_][a-zA-Z0-9_@.-]*$\x8a\xc81\x04<=32R\x04name\x12K\n" +
 	"\tpasswords\x18\x02 \x03(\tB-\xf2\xc71\x1e^[a-zA-Z0-9@=+?*.,!&#$^<>_-]*$\x82\xc81\x03<=1\x90\xc81\x01R\tpasswords\x12H\n" +
 	"\vpermissions\x18\x03 \x01(\v2&.yandex.cloud.mdb.redis.v1.PermissionsR\vpermissions\x124\n" +
-	"\aenabled\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabledBd\n" +
+	"\aenabled\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x12G\n" +
+	"\x11generate_password\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x10generatePassword\x12@\n" +
+	"\tauth_type\x18\x06 \x01(\x0e2#.yandex.cloud.mdb.redis.v1.AuthTypeR\bauthType*P\n" +
+	"\bAuthType\x12\x19\n" +
+	"\x15AUTH_TYPE_UNSPECIFIED\x10\x00\x12\x16\n" +
+	"\x12AUTH_TYPE_PASSWORD\x10\x01\x12\x11\n" +
+	"\rAUTH_TYPE_IAM\x10\x02Bd\n" +
 	"\x1dyandex.cloud.api.mdb.redis.v1ZCgithub.com/yandex-cloud/go-genproto/yandex/cloud/mdb/redis/v1;redisb\x06proto3"
 
 var (
@@ -312,29 +455,36 @@ func file_yandex_cloud_mdb_redis_v1_user_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_mdb_redis_v1_user_proto_rawDescData
 }
 
-var file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_yandex_cloud_mdb_redis_v1_user_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_yandex_cloud_mdb_redis_v1_user_proto_goTypes = []any{
-	(*User)(nil),                   // 0: yandex.cloud.mdb.redis.v1.User
-	(*Permissions)(nil),            // 1: yandex.cloud.mdb.redis.v1.Permissions
-	(*UserSpec)(nil),               // 2: yandex.cloud.mdb.redis.v1.UserSpec
-	(*wrapperspb.StringValue)(nil), // 3: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),   // 4: google.protobuf.BoolValue
+	(AuthType)(0),                  // 0: yandex.cloud.mdb.redis.v1.AuthType
+	(*User)(nil),                   // 1: yandex.cloud.mdb.redis.v1.User
+	(*ConnectionManager)(nil),      // 2: yandex.cloud.mdb.redis.v1.ConnectionManager
+	(*Permissions)(nil),            // 3: yandex.cloud.mdb.redis.v1.Permissions
+	(*UserSpec)(nil),               // 4: yandex.cloud.mdb.redis.v1.UserSpec
+	(*wrapperspb.StringValue)(nil), // 5: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),   // 6: google.protobuf.BoolValue
 }
 var file_yandex_cloud_mdb_redis_v1_user_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.mdb.redis.v1.User.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
-	3, // 1: yandex.cloud.mdb.redis.v1.Permissions.patterns:type_name -> google.protobuf.StringValue
-	3, // 2: yandex.cloud.mdb.redis.v1.Permissions.pub_sub_channels:type_name -> google.protobuf.StringValue
-	3, // 3: yandex.cloud.mdb.redis.v1.Permissions.categories:type_name -> google.protobuf.StringValue
-	3, // 4: yandex.cloud.mdb.redis.v1.Permissions.commands:type_name -> google.protobuf.StringValue
-	3, // 5: yandex.cloud.mdb.redis.v1.Permissions.sanitize_payload:type_name -> google.protobuf.StringValue
-	3, // 6: yandex.cloud.mdb.redis.v1.Permissions.databases:type_name -> google.protobuf.StringValue
-	1, // 7: yandex.cloud.mdb.redis.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
-	4, // 8: yandex.cloud.mdb.redis.v1.UserSpec.enabled:type_name -> google.protobuf.BoolValue
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	3,  // 0: yandex.cloud.mdb.redis.v1.User.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
+	2,  // 1: yandex.cloud.mdb.redis.v1.User.connection_manager:type_name -> yandex.cloud.mdb.redis.v1.ConnectionManager
+	0,  // 2: yandex.cloud.mdb.redis.v1.User.auth_type:type_name -> yandex.cloud.mdb.redis.v1.AuthType
+	5,  // 3: yandex.cloud.mdb.redis.v1.Permissions.patterns:type_name -> google.protobuf.StringValue
+	5,  // 4: yandex.cloud.mdb.redis.v1.Permissions.pub_sub_channels:type_name -> google.protobuf.StringValue
+	5,  // 5: yandex.cloud.mdb.redis.v1.Permissions.categories:type_name -> google.protobuf.StringValue
+	5,  // 6: yandex.cloud.mdb.redis.v1.Permissions.commands:type_name -> google.protobuf.StringValue
+	5,  // 7: yandex.cloud.mdb.redis.v1.Permissions.sanitize_payload:type_name -> google.protobuf.StringValue
+	5,  // 8: yandex.cloud.mdb.redis.v1.Permissions.databases:type_name -> google.protobuf.StringValue
+	3,  // 9: yandex.cloud.mdb.redis.v1.UserSpec.permissions:type_name -> yandex.cloud.mdb.redis.v1.Permissions
+	6,  // 10: yandex.cloud.mdb.redis.v1.UserSpec.enabled:type_name -> google.protobuf.BoolValue
+	6,  // 11: yandex.cloud.mdb.redis.v1.UserSpec.generate_password:type_name -> google.protobuf.BoolValue
+	0,  // 12: yandex.cloud.mdb.redis.v1.UserSpec.auth_type:type_name -> yandex.cloud.mdb.redis.v1.AuthType
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_mdb_redis_v1_user_proto_init() }
@@ -347,13 +497,14 @@ func file_yandex_cloud_mdb_redis_v1_user_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc), len(file_yandex_cloud_mdb_redis_v1_user_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      1,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_mdb_redis_v1_user_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_mdb_redis_v1_user_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_mdb_redis_v1_user_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_mdb_redis_v1_user_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_mdb_redis_v1_user_proto = out.File

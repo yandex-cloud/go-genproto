@@ -26,11 +26,11 @@ type ResourcePreset struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the ResourcePreset resource.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// IDs of availability zones where the resource preset is available.
+	// IDs of the availability zones where the resource preset is available.
 	ZoneIds []string `protobuf:"bytes,2,rep,name=zone_ids,json=zoneIds,proto3" json:"zone_ids,omitempty"`
-	// Number of CPU cores for a MongoDB host created with the preset.
+	// Number of CPU cores for a StoreDoc host created with the preset.
 	Cores int64 `protobuf:"varint,3,opt,name=cores,proto3" json:"cores,omitempty"`
-	// RAM volume for a MongoDB host created with the preset, in bytes.
+	// RAM volume for a StoreDoc host created with the preset, in bytes.
 	Memory        int64 `protobuf:"varint,4,opt,name=memory,proto3" json:"memory,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

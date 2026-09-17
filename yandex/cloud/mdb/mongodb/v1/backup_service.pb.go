@@ -242,7 +242,7 @@ func (x *DeleteBackupRequest) GetBackupId() string {
 
 type DeleteBackupMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the deleting MongoDB backup.
+	// ID of the StoreDoc backup being deleted.
 	BackupId      string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

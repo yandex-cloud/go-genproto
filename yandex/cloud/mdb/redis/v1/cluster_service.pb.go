@@ -145,7 +145,7 @@ type ListClusterLogsRequest_ServiceType int32
 
 const (
 	ListClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED ListClusterLogsRequest_ServiceType = 0
-	// Logs of Redis activity.
+	// Logs of Valkey activity.
 	ListClusterLogsRequest_REDIS ListClusterLogsRequest_ServiceType = 1
 	// Valkey audit logs
 	ListClusterLogsRequest_VALKEY_AUDIT ListClusterLogsRequest_ServiceType = 2
@@ -196,7 +196,7 @@ type StreamClusterLogsRequest_ServiceType int32
 
 const (
 	StreamClusterLogsRequest_SERVICE_TYPE_UNSPECIFIED StreamClusterLogsRequest_ServiceType = 0
-	// Logs of Redis activity.
+	// Logs of Valkey activity.
 	StreamClusterLogsRequest_REDIS StreamClusterLogsRequest_ServiceType = 1
 	// Valkey audit logs
 	StreamClusterLogsRequest_VALKEY_AUDIT StreamClusterLogsRequest_ServiceType = 2
@@ -245,7 +245,7 @@ func (StreamClusterLogsRequest_ServiceType) EnumDescriptor() ([]byte, []int) {
 
 type EnableShardingClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being switched to sharded mode.
+	// ID of the Valkey cluster that is being switched to sharded mode.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -290,7 +290,7 @@ func (x *EnableShardingClusterMetadata) GetClusterId() string {
 
 type EnableShardingClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to return.
+	// ID of the Valkey cluster to return.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -335,7 +335,7 @@ func (x *EnableShardingClusterRequest) GetClusterId() string {
 
 type GetClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to return.
+	// ID of the Valkey cluster to return.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -381,7 +381,7 @@ func (x *GetClusterRequest) GetClusterId() string {
 
 type ListClustersRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to list Redis clusters in.
+	// ID of the folder to list Valkey clusters in.
 	// To get the folder ID, use a [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -461,7 +461,7 @@ func (x *ListClustersRequest) GetFilter() string {
 
 type ListClustersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Redis clusters.
+	// List of Valkey clusters.
 	Clusters []*Cluster `protobuf:"bytes,1,rep,name=clusters,proto3" json:"clusters,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClustersRequest.page_size], use the [next_page_token] as the value
@@ -518,24 +518,24 @@ func (x *ListClustersResponse) GetNextPageToken() string {
 
 type CreateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the folder to create the Redis cluster in.
+	// ID of the folder to create the Valkey cluster in.
 	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Name of the Redis cluster. The name must be unique within the folder.
+	// Name of the Valkey cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the Redis cluster.
+	// Description of the Valkey cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Redis cluster as `key:value` pairs. Maximum 64 per cluster.
+	// Custom labels for the Valkey cluster as `key:value` pairs. Maximum 64 per cluster.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the Redis cluster.
+	// Deployment environment of the Valkey cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration and resources for hosts that should be created for the Redis cluster.
+	// Configuration and resources for hosts that should be created for the Valkey cluster.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Individual configurations for hosts that should be created for the Redis cluster.
+	// Individual configurations for hosts that should be created for the Valkey cluster.
 	HostSpecs []*HostSpec `protobuf:"bytes,7,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	// ID of the network to create the cluster in.
 	NetworkId string `protobuf:"bytes,10,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// Redis cluster mode on/off.
+	// Valkey cluster mode on/off.
 	Sharded bool `protobuf:"varint,11,opt,name=sharded,proto3" json:"sharded,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,12,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -549,7 +549,7 @@ type CreateClusterRequest struct {
 	AnnounceHostnames bool `protobuf:"varint,16,opt,name=announce_hostnames,json=announceHostnames,proto3" json:"announce_hostnames,omitempty"`
 	// Window of maintenance operations.
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,17,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
-	// Descriptions of users to be created in the Redis cluster.
+	// Descriptions of users to be created in the Valkey cluster.
 	UserSpecs []*UserSpec `protobuf:"bytes,18,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
 	// Allows to use ACL users to auth in sentinel
 	AuthSentinel bool `protobuf:"varint,19,opt,name=auth_sentinel,json=authSentinel,proto3" json:"auth_sentinel,omitempty"`
@@ -717,7 +717,7 @@ func (x *CreateClusterRequest) GetDiskEncryptionKeyId() *wrapperspb.StringValue 
 
 type CreateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being created.
+	// ID of the Valkey cluster that is being created.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -762,14 +762,14 @@ func (x *CreateClusterMetadata) GetClusterId() string {
 
 type UpdateClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to update.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to update.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Field mask that specifies which fields of the Redis cluster should be updated.
+	// Field mask that specifies which fields of the Valkey cluster should be updated.
 	UpdateMask *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
-	// New description of the Redis cluster.
+	// New description of the Valkey cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Redis cluster as “ key:value “ pairs. Maximum 64 per cluster.
+	// Custom labels for the Valkey cluster as “ key:value “ pairs. Maximum 64 per cluster.
 	// For example, "project": "mvp" or "source": "dictionary".
 	// The new set of labels will completely replace the old ones. To add a label, request the current
 	// set with the [ClusterService.Get] method, then send an [ClusterService.Update] request with the new label added to the set.
@@ -919,7 +919,7 @@ func (x *UpdateClusterRequest) GetAuthSentinel() bool {
 
 type UpdateClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being updated.
+	// ID of the Valkey cluster that is being updated.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -964,8 +964,8 @@ func (x *UpdateClusterMetadata) GetClusterId() string {
 
 type DeleteClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to delete.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to delete.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1010,7 +1010,7 @@ func (x *DeleteClusterRequest) GetClusterId() string {
 
 type DeleteClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being deleted.
+	// ID of the Valkey cluster that is being deleted.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1055,7 +1055,7 @@ func (x *DeleteClusterMetadata) GetClusterId() string {
 
 type StartClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to start.
+	// ID of the Valkey cluster to start.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1100,7 +1100,7 @@ func (x *StartClusterRequest) GetClusterId() string {
 
 type StartClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
+	// ID of the Valkey cluster.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1145,7 +1145,7 @@ func (x *StartClusterMetadata) GetClusterId() string {
 
 type StopClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to stop.
+	// ID of the Valkey cluster to stop.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1190,7 +1190,7 @@ func (x *StopClusterRequest) GetClusterId() string {
 
 type StopClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
+	// ID of the Valkey cluster.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1235,7 +1235,7 @@ func (x *StopClusterMetadata) GetClusterId() string {
 
 type MoveClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to move.
+	// ID of the Valkey cluster to move.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the destination folder.
 	DestinationFolderId string `protobuf:"bytes,2,opt,name=destination_folder_id,json=destinationFolderId,proto3" json:"destination_folder_id,omitempty"`
@@ -1289,7 +1289,7 @@ func (x *MoveClusterRequest) GetDestinationFolderId() string {
 
 type MoveClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster being moved.
+	// ID of the Valkey cluster being moved.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the source folder.
 	SourceFolderId string `protobuf:"bytes,2,opt,name=source_folder_id,json=sourceFolderId,proto3" json:"source_folder_id,omitempty"`
@@ -1352,8 +1352,8 @@ func (x *MoveClusterMetadata) GetDestinationFolderId() string {
 
 type UpdateClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to update hosts in.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to update hosts in.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// New configurations to apply to hosts.
 	UpdateHostSpecs []*UpdateHostSpec `protobuf:"bytes,2,rep,name=update_host_specs,json=updateHostSpecs,proto3" json:"update_host_specs,omitempty"`
@@ -1407,7 +1407,7 @@ func (x *UpdateClusterHostsRequest) GetUpdateHostSpecs() []*UpdateHostSpec {
 
 type UpdateClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to update hosts in.
+	// ID of the Valkey cluster to update hosts in.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being updated.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -1461,8 +1461,8 @@ func (x *UpdateClusterHostsMetadata) GetHostNames() []string {
 
 type BackupClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to back up.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to back up.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1507,7 +1507,7 @@ func (x *BackupClusterRequest) GetClusterId() string {
 
 type BackupClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being backed up.
+	// ID of the Valkey cluster that is being backed up.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1555,24 +1555,24 @@ type RestoreClusterRequest struct {
 	// ID of the backup to create a cluster from.
 	// To get the backup ID, use a [ClusterService.ListBackups] request.
 	BackupId string `protobuf:"bytes,1,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
-	// Name of the new Redis cluster. The name must be unique within the folder.
+	// Name of the new Valkey cluster. The name must be unique within the folder.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// Description of the new Redis cluster.
+	// Description of the new Valkey cluster.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// Custom labels for the Redis cluster as “ key:value “ pairs. Maximum 64 per cluster.
+	// Custom labels for the Valkey cluster as “ key:value “ pairs. Maximum 64 per cluster.
 	// For example, "project": "mvp" or "source": "dictionary".
 	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Deployment environment of the new Redis cluster.
+	// Deployment environment of the new Valkey cluster.
 	Environment Cluster_Environment `protobuf:"varint,5,opt,name=environment,proto3,enum=yandex.cloud.mdb.redis.v1.Cluster_Environment" json:"environment,omitempty"`
-	// Configuration for the Redis cluster to be created.
+	// Configuration for the Valkey cluster to be created.
 	ConfigSpec *ConfigSpec `protobuf:"bytes,6,opt,name=config_spec,json=configSpec,proto3" json:"config_spec,omitempty"`
-	// Configurations for Redis hosts that should be created for
+	// Configurations for Valkey hosts that should be created for
 	// the cluster that is being created from the backup.
 	// If left empty, the hosts are taken from the source cluster of the backup.
 	HostSpecs []*HostSpec `protobuf:"bytes,7,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
-	// ID of the network to create the Redis cluster in.
+	// ID of the network to create the Valkey cluster in.
 	NetworkId string `protobuf:"bytes,8,opt,name=network_id,json=networkId,proto3" json:"network_id,omitempty"`
-	// ID of the folder to create the Redis cluster in.
+	// ID of the folder to create the Valkey cluster in.
 	FolderId string `protobuf:"bytes,9,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// User security groups
 	SecurityGroupIds []string `protobuf:"bytes,10,rep,name=security_group_ids,json=securityGroupIds,proto3" json:"security_group_ids,omitempty"`
@@ -1588,11 +1588,11 @@ type RestoreClusterRequest struct {
 	MaintenanceWindow *MaintenanceWindow `protobuf:"bytes,15,opt,name=maintenance_window,json=maintenanceWindow,proto3" json:"maintenance_window,omitempty"`
 	// Allows to use ACL users to auth in sentinel
 	AuthSentinel bool `protobuf:"varint,16,opt,name=auth_sentinel,json=authSentinel,proto3" json:"auth_sentinel,omitempty"`
-	// Redis cluster mode on/off.
+	// Valkey cluster mode on/off.
 	Sharded bool `protobuf:"varint,17,opt,name=sharded,proto3" json:"sharded,omitempty"`
 	// ID of the key to encrypt cluster disks.
 	DiskEncryptionKeyId *wrapperspb.StringValue `protobuf:"bytes,18,opt,name=disk_encryption_key_id,json=diskEncryptionKeyId,proto3" json:"disk_encryption_key_id,omitempty"`
-	// Descriptions of users to be created in the Redis cluster.
+	// Descriptions of users to be created in the Valkey cluster.
 	UserSpecs     []*UserSpec `protobuf:"bytes,19,rep,name=user_specs,json=userSpecs,proto3" json:"user_specs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1763,7 +1763,7 @@ func (x *RestoreClusterRequest) GetUserSpecs() []*UserSpec {
 
 type RestoreClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the new Redis cluster that is being created from a backup.
+	// ID of the new Valkey cluster that is being created from a backup.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// ID of the backup that is being used for creating a cluster.
 	BackupId      string `protobuf:"bytes,2,opt,name=backup_id,json=backupId,proto3" json:"backup_id,omitempty"`
@@ -1817,7 +1817,7 @@ func (x *RestoreClusterMetadata) GetBackupId() string {
 
 type RescheduleMaintenanceRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to reschedule the maintenance operation for.
+	// ID of the Valkey cluster to reschedule the maintenance operation for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The type of reschedule request.
 	RescheduleType RescheduleMaintenanceRequest_RescheduleType `protobuf:"varint,2,opt,name=reschedule_type,json=rescheduleType,proto3,enum=yandex.cloud.mdb.redis.v1.RescheduleMaintenanceRequest_RescheduleType" json:"reschedule_type,omitempty"`
@@ -1880,7 +1880,7 @@ func (x *RescheduleMaintenanceRequest) GetDelayedUntil() *timestamppb.Timestamp 
 
 type RescheduleMaintenanceMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
+	// ID of the Valkey cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The time until which this maintenance operation is to be delayed.
 	DelayedUntil  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=delayed_until,json=delayedUntil,proto3" json:"delayed_until,omitempty"`
@@ -1934,7 +1934,7 @@ func (x *RescheduleMaintenanceMetadata) GetDelayedUntil() *timestamppb.Timestamp
 
 type StartClusterFailoverRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to start failover on.
+	// ID of the Valkey cluster to start failover on.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// List of hostnames. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2006,7 +2006,7 @@ func (x *StartClusterFailoverRequest) GetZoneId() string {
 
 type StartClusterFailoverMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster on which failover will be initiated.
+	// ID of the Valkey cluster on which failover will be initiated.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// List of hostnames which should not be masters. Can be empty for sentinel clusters or can contain multiple hosts for sharded clusters.
 	HostNames []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2123,8 +2123,8 @@ func (x *LogRecord) GetMessage() map[string]string {
 
 type ListClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to request logs for.
-	// To get the Redis cluster ID use a [ClusterService.List] request.
+	// ID of the Valkey cluster to request logs for.
+	// To get the Valkey cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from the logs table to request.
 	// If no columns are specified, entire log records are returned.
@@ -2376,7 +2376,7 @@ func (x *StreamLogRecord) GetNextRecordToken() string {
 
 type StreamClusterLogsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
+	// ID of the Valkey cluster.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Columns from logs table to get in the response.
 	ColumnFilter []string `protobuf:"bytes,2,rep,name=column_filter,json=columnFilter,proto3" json:"column_filter,omitempty"`
@@ -2483,7 +2483,7 @@ func (x *StreamClusterLogsRequest) GetFilter() string {
 
 type ListClusterOperationsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to list operations for.
+	// ID of the Valkey cluster to list operations for.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterOperationsResponse.next_page_token]
@@ -2549,7 +2549,7 @@ func (x *ListClusterOperationsRequest) GetPageToken() string {
 
 type ListClusterOperationsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of operations for the specified Redis cluster.
+	// List of operations for the specified Valkey cluster.
 	Operations []*operation.Operation `protobuf:"bytes,1,rep,name=operations,proto3" json:"operations,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterOperationsRequest.page_size], use the [next_page_token] as the value
@@ -2606,8 +2606,8 @@ func (x *ListClusterOperationsResponse) GetNextPageToken() string {
 
 type ListClusterBackupsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
-	// To get the Redis cluster ID use a [ClusterService.List] request.
+	// ID of the Valkey cluster.
+	// To get the Valkey cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterBackupsResponse.next_page_token]
@@ -2673,7 +2673,7 @@ func (x *ListClusterBackupsRequest) GetPageToken() string {
 
 type ListClusterBackupsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Redis backups.
+	// List of Valkey backups.
 	Backups []*Backup `protobuf:"bytes,1,rep,name=backups,proto3" json:"backups,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterBackupsRequest.page_size], use the [next_page_token] as the value
@@ -2730,8 +2730,8 @@ func (x *ListClusterBackupsResponse) GetNextPageToken() string {
 
 type ListClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster.
-	// To get the Redis cluster ID use a [ClusterService.List] request.
+	// ID of the Valkey cluster.
+	// To get the Valkey cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
 	// results is larger than [page_size], the service returns a [ListClusterHostsResponse.next_page_token]
@@ -2854,10 +2854,10 @@ func (x *ListClusterHostsResponse) GetNextPageToken() string {
 
 type AddClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to add hosts to.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to add hosts to.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Configurations for Redis hosts that should be added to the cluster.
+	// Configurations for Valkey hosts that should be added to the cluster.
 	HostSpecs     []*HostSpec `protobuf:"bytes,2,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2909,7 +2909,7 @@ func (x *AddClusterHostsRequest) GetHostSpecs() []*HostSpec {
 
 type AddClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to which the hosts are being added.
+	// ID of the Valkey cluster to which the hosts are being added.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being added to the cluster.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -2963,8 +2963,8 @@ func (x *AddClusterHostsMetadata) GetHostNames() []string {
 
 type DeleteClusterHostsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to remove hosts from.
-	// To get the Redis cluster ID, use a [ClusterService.List] request.
+	// ID of the Valkey cluster to remove hosts from.
+	// To get the Valkey cluster ID, use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts to delete.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -3018,7 +3018,7 @@ func (x *DeleteClusterHostsRequest) GetHostNames() []string {
 
 type DeleteClusterHostsMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to remove hosts from.
+	// ID of the Valkey cluster to remove hosts from.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Names of hosts that are being deleted.
 	HostNames     []string `protobuf:"bytes,2,rep,name=host_names,json=hostNames,proto3" json:"host_names,omitempty"`
@@ -3072,10 +3072,10 @@ func (x *DeleteClusterHostsMetadata) GetHostNames() []string {
 
 type GetClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the shard belongs to.
+	// ID of the Valkey cluster the shard belongs to.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of Redis shard to return.
+	// Name of Valkey shard to return.
 	// To get the shard name use a [ClusterService.ListShards] request.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3128,7 +3128,7 @@ func (x *GetClusterShardRequest) GetShardName() string {
 
 type ListClusterShardsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to list shards in.
+	// ID of the Valkey cluster to list shards in.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// The maximum number of results per page to return. If the number of available
@@ -3196,7 +3196,7 @@ func (x *ListClusterShardsRequest) GetPageToken() string {
 
 type ListClusterShardsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of Redis shards.
+	// List of Valkey shards.
 	Shards []*Shard `protobuf:"bytes,1,rep,name=shards,proto3" json:"shards,omitempty"`
 	// This token allows you to get the next page of results for list requests. If the number of results
 	// is larger than [ListClusterShardsRequest.page_size], use
@@ -3255,13 +3255,13 @@ func (x *ListClusterShardsResponse) GetNextPageToken() string {
 
 type AddClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to create a shard in.
+	// ID of the Valkey cluster to create a shard in.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// Name of the shard.
 	// The name must be unique within the cluster.
 	ShardName string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	// Configurations for Redis hosts that should be created with the shard.
+	// Configurations for Valkey hosts that should be created with the shard.
 	// Must contain at least one element.
 	HostSpecs     []*HostSpec `protobuf:"bytes,4,rep,name=host_specs,json=hostSpecs,proto3" json:"host_specs,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3321,9 +3321,9 @@ func (x *AddClusterShardRequest) GetHostSpecs() []*HostSpec {
 
 type AddClusterShardMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that a shard is being added to.
+	// ID of the Valkey cluster that a shard is being added to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Redis shard that is being created.
+	// Name of the Valkey shard that is being created.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3375,10 +3375,10 @@ func (x *AddClusterShardMetadata) GetShardName() string {
 
 type DeleteClusterShardRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the shard belongs to.
+	// ID of the Valkey cluster the shard belongs to.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Redis shard to delete.
+	// Name of the Valkey shard to delete.
 	// To get the shard name use a [ClusterService.ListShards] request.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3431,9 +3431,9 @@ func (x *DeleteClusterShardRequest) GetShardName() string {
 
 type DeleteClusterShardMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster the shard belongs to.
+	// ID of the Valkey cluster the shard belongs to.
 	ClusterId string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	// Name of the Redis shard that is being deleted.
+	// Name of the Valkey shard that is being deleted.
 	ShardName     string `protobuf:"bytes,2,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3485,7 +3485,7 @@ func (x *DeleteClusterShardMetadata) GetShardName() string {
 
 type RebalanceClusterRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster to rebalance.
+	// ID of the Valkey cluster to rebalance.
 	// To get the cluster ID use a [ClusterService.List] request.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -3531,7 +3531,7 @@ func (x *RebalanceClusterRequest) GetClusterId() string {
 
 type RebalanceClusterMetadata struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// ID of the Redis cluster that is being rebalancing.
+	// ID of the Valkey cluster that is being rebalancing.
 	ClusterId     string `protobuf:"bytes,1,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3577,15 +3577,17 @@ func (x *RebalanceClusterMetadata) GetClusterId() string {
 type UpdateHostSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Name of the host to update.
-	// To get the Redis host name, use a [ClusterService.ListHosts] request.
+	// To get the Valkey host name, use a [ClusterService.ListHosts] request.
 	HostName string `protobuf:"bytes,1,opt,name=host_name,json=hostName,proto3" json:"host_name,omitempty"`
-	// A replica with a low priority number is considered better for promotion.
-	// A replica with priority of 0 will never be selected by Redis Sentinel for promotion.
+	// Priority of the host as a candidate for promotion to master: the higher the value,
+	// the more preferred the host is. A host with priority 0 is promoted only if there are
+	// no other suitable candidates. The priority is ignored if the host requires a full
+	// resynchronization: in that case the host with the smallest replication lag is promoted.
 	// Works only for non-sharded clusters. Default value is 100.
 	ReplicaPriority *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=replica_priority,json=replicaPriority,proto3" json:"replica_priority,omitempty"`
 	// Whether the host should get a public IP address on update.
 	AssignPublicIp bool `protobuf:"varint,3,opt,name=assign_public_ip,json=assignPublicIp,proto3" json:"assign_public_ip,omitempty"`
-	// Field mask that specifies which fields of the Redis host should be updated.
+	// Field mask that specifies which fields of the Valkey host should be updated.
 	UpdateMask    *fieldmaskpb.FieldMask `protobuf:"bytes,4,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3658,11 +3660,13 @@ type HostSpec struct {
 	// of the network that the cluster belongs to.
 	// The ID of the network is set in the field [Cluster.network_id].
 	SubnetId string `protobuf:"bytes,2,opt,name=subnet_id,json=subnetId,proto3" json:"subnet_id,omitempty"`
-	// ID of the Redis shard the host belongs to.
+	// ID of the Valkey shard the host belongs to.
 	// To get the shard ID use a [ClusterService.ListShards] request.
 	ShardName string `protobuf:"bytes,3,opt,name=shard_name,json=shardName,proto3" json:"shard_name,omitempty"`
-	// A replica with a low priority number is considered better for promotion.
-	// A replica with priority of 0 will never be selected by Redis Sentinel for promotion.
+	// Priority of the host as a candidate for promotion to master: the higher the value,
+	// the more preferred the host is. A host with priority 0 is promoted only if there are
+	// no other suitable candidates. The priority is ignored if the host requires a full
+	// resynchronization: in that case the host with the smallest replication lag is promoted.
 	// Works only for non-sharded clusters. Default value is 100.
 	ReplicaPriority *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=replica_priority,json=replicaPriority,proto3" json:"replica_priority,omitempty"`
 	// Whether the host should get a public IP address on creation.
@@ -3741,9 +3745,9 @@ func (x *HostSpec) GetAssignPublicIp() bool {
 
 type ConfigSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Version of Redis used in the cluster.
+	// Version of Valkey used in the cluster.
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// Configuration of a Redis cluster.
+	// Configuration of a Valkey cluster.
 	//
 	// Types that are valid to be assigned to RedisSpec:
 	//
@@ -3752,13 +3756,13 @@ type ConfigSpec struct {
 	//	*ConfigSpec_RedisConfig_6_2
 	//	*ConfigSpec_RedisConfig_7_0
 	RedisSpec isConfigSpec_RedisSpec `protobuf_oneof:"redis_spec"`
-	// Resources allocated to Redis hosts.
+	// Resources allocated to Valkey hosts.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3" json:"resources,omitempty"`
 	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart *timeofday.TimeOfDay `protobuf:"bytes,4,opt,name=backup_window_start,json=backupWindowStart,proto3" json:"backup_window_start,omitempty"`
 	// Access policy to DB
 	Access *Access `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	// Unified configuration of a Redis cluster. Use this field for all currently
+	// Unified configuration of a Valkey cluster. Use this field for all currently
 	// available versions.
 	Redis *config.RedisConfig `protobuf:"bytes,11,opt,name=redis,proto3" json:"redis,omitempty"`
 	// Disk size autoscaling settings
@@ -3929,28 +3933,28 @@ type isConfigSpec_RedisSpec interface {
 }
 
 type ConfigSpec_RedisConfig_5_0 struct {
-	// Configuration of a Redis 5.0 server.
+	// Configuration of a Valkey 5.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_5_0 *config.RedisConfig5_0 `protobuf:"bytes,2,opt,name=redis_config_5_0,json=redisConfig_5_0,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_6_0 struct {
-	// Configuration of a Redis 6.0 server.
+	// Configuration of a Valkey 6.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_6_0 *config.RedisConfig6_0 `protobuf:"bytes,6,opt,name=redis_config_6_0,json=redisConfig_6_0,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_6_2 struct {
-	// Configuration of a Redis 6.2 server.
+	// Configuration of a Valkey 6.2 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_6_2 *config.RedisConfig6_2 `protobuf:"bytes,7,opt,name=redis_config_6_2,json=redisConfig_6_2,proto3,oneof"`
 }
 
 type ConfigSpec_RedisConfig_7_0 struct {
-	// Configuration of a Redis 7.0 server.
+	// Configuration of a Valkey 7.0 server.
 	//
 	// Deprecated: Marked as deprecated in yandex/cloud/mdb/redis/v1/cluster_service.proto.
 	RedisConfig_7_0 *config.RedisConfig7_0 `protobuf:"bytes,8,opt,name=redis_config_7_0,json=redisConfig_7_0,proto3,oneof"`
@@ -3988,7 +3992,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x8a\xc81\x06<=1000R\x06filter\"~\n" +
 	"\x14ListClustersResponse\x12>\n" +
 	"\bclusters\x18\x01 \x03(\v2\".yandex.cloud.mdb.redis.v1.ClusterR\bclusters\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xfb\t\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x96\n" +
+	"\n" +
 	"\x14CreateClusterRequest\x12)\n" +
 	"\tfolder_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x122\n" +
 	"\x04name\x18\x02 \x01(\tB\x1e\xe8\xc71\x01\xf2\xc71\x0e[a-zA-Z0-9_-]*\x8a\xc81\x04<=63R\x04name\x12+\n" +
@@ -3998,10 +4003,10 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12J\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12'\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecB\x06\x82\xc81\x02>0R\thostSpecs\x12(\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12\x18\n" +
+	" \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12\x18\n" +
 	"\asharded\x18\v \x01(\bR\asharded\x12,\n" +
 	"\x12security_group_ids\x18\f \x03(\tR\x10securityGroupIds\x12;\n" +
 	"\vtls_enabled\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
@@ -4012,15 +4017,15 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x12maintenance_window\x18\x11 \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowR\x11maintenanceWindow\x12K\n" +
 	"\n" +
 	"user_specs\x18\x12 \x03(\v2#.yandex.cloud.mdb.redis.v1.UserSpecB\a\x82\xc81\x03>=0R\tuserSpecs\x12#\n" +
-	"\rauth_sentinel\x18\x13 \x01(\bR\fauthSentinel\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x1a9\n" +
+	"\rauth_sentinel\x18\x13 \x01(\bR\fauthSentinel\x12k\n" +
+	"\x16disk_encryption_key_id\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueB\x18\xf2\xc71\x14[a-zA-Z0-9_.-]{0,50}R\x13diskEncryptionKeyId\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\b\x10\n" +
 	"\"6\n" +
 	"\x15CreateClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8f\a\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x90\a\n" +
 	"\x14UpdateClusterRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12;\n" +
@@ -4035,9 +4040,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x12security_group_ids\x18\b \x03(\tR\x10securityGroupIds\x12/\n" +
 	"\x13deletion_protection\x18\t \x01(\bR\x12deletionProtection\x12]\n" +
 	"\x10persistence_mode\x18\n" +
-	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12'\n" +
+	" \x01(\x0e22.yandex.cloud.mdb.redis.v1.Cluster.PersistenceModeR\x0fpersistenceMode\x12(\n" +
 	"\n" +
-	"network_id\x18\v \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12-\n" +
+	"network_id\x18\v \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12-\n" +
 	"\x12announce_hostnames\x18\f \x01(\bR\x11announceHostnames\x12#\n" +
 	"\rauth_sentinel\x18\r \x01(\bR\fauthSentinel\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -4087,7 +4092,7 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\"6\n" +
 	"\x15BackupClusterMetadata\x12\x1d\n" +
 	"\n" +
-	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\x8e\n" +
+	"cluster_id\x18\x01 \x01(\tR\tclusterId\"\xa9\n" +
 	"\n" +
 	"\x15RestoreClusterRequest\x12!\n" +
 	"\tbackup_id\x18\x01 \x01(\tB\x04\xe8\xc71\x01R\bbackupId\x122\n" +
@@ -4098,9 +4103,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\vconfig_spec\x18\x06 \x01(\v2%.yandex.cloud.mdb.redis.v1.ConfigSpecB\x04\xe8\xc71\x01R\n" +
 	"configSpec\x12B\n" +
 	"\n" +
-	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12'\n" +
+	"host_specs\x18\a \x03(\v2#.yandex.cloud.mdb.redis.v1.HostSpecR\thostSpecs\x12(\n" +
 	"\n" +
-	"network_id\x18\b \x01(\tB\b\x8a\xc81\x04<=50R\tnetworkId\x12%\n" +
+	"network_id\x18\b \x01(\tB\t\x8a\xc81\x05<=150R\tnetworkId\x12%\n" +
 	"\tfolder_id\x18\t \x01(\tB\b\x8a\xc81\x04<=50R\bfolderId\x12,\n" +
 	"\x12security_group_ids\x18\n" +
 	" \x03(\tR\x10securityGroupIds\x12;\n" +
@@ -4111,8 +4116,8 @@ const file_yandex_cloud_mdb_redis_v1_cluster_service_proto_rawDesc = "" +
 	"\x12announce_hostnames\x18\x0e \x01(\bR\x11announceHostnames\x12[\n" +
 	"\x12maintenance_window\x18\x0f \x01(\v2,.yandex.cloud.mdb.redis.v1.MaintenanceWindowR\x11maintenanceWindow\x12#\n" +
 	"\rauth_sentinel\x18\x10 \x01(\bR\fauthSentinel\x12\x18\n" +
-	"\asharded\x18\x11 \x01(\bR\asharded\x12Q\n" +
-	"\x16disk_encryption_key_id\x18\x12 \x01(\v2\x1c.google.protobuf.StringValueR\x13diskEncryptionKeyId\x12K\n" +
+	"\asharded\x18\x11 \x01(\bR\asharded\x12k\n" +
+	"\x16disk_encryption_key_id\x18\x12 \x01(\v2\x1c.google.protobuf.StringValueB\x18\xf2\xc71\x14[a-zA-Z0-9_.-]{0,50}R\x13diskEncryptionKeyId\x12K\n" +
 	"\n" +
 	"user_specs\x18\x13 \x03(\v2#.yandex.cloud.mdb.redis.v1.UserSpecB\a\x82\xc81\x03>=0R\tuserSpecs\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +

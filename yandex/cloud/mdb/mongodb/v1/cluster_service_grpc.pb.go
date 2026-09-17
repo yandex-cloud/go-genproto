@@ -57,33 +57,33 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// A set of methods for managing MongoDB Cluster resources.
+// A set of methods for managing StoreDoc Cluster resources.
 type ClusterServiceClient interface {
-	// Returns the specified MongoDB Cluster resource.
-	// To get the list of available MongoDB Cluster resources, make a [List] request.
+	// Returns the specified StoreDoc Cluster resource.
+	// To get the list of available StoreDoc Cluster resources, make a [List] request.
 	Get(ctx context.Context, in *GetClusterRequest, opts ...grpc.CallOption) (*Cluster, error)
-	// Retrieves the list of MongoDB Cluster resources that belong
+	// Retrieves the list of StoreDoc Cluster resources that belong
 	// to the specified folder.
 	List(ctx context.Context, in *ListClustersRequest, opts ...grpc.CallOption) (*ListClustersResponse, error)
-	// Creates a MongoDB cluster in the specified folder.
+	// Creates a StoreDoc cluster in the specified folder.
 	Create(ctx context.Context, in *CreateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates the specified MongoDB cluster.
+	// Updates the specified StoreDoc cluster.
 	Update(ctx context.Context, in *UpdateClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Deletes the specified MongoDB cluster.
+	// Deletes the specified StoreDoc cluster.
 	Delete(ctx context.Context, in *DeleteClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Start the specified MongoDB cluster.
+	// Start the specified StoreDoc cluster.
 	Start(ctx context.Context, in *StartClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Stop the specified MongoDB cluster.
+	// Stop the specified StoreDoc cluster.
 	Stop(ctx context.Context, in *StopClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Moves the specified MongoDB cluster to the specified folder.
+	// Moves the specified StoreDoc cluster to the specified folder.
 	Move(ctx context.Context, in *MoveClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a backup for the specified MongoDB cluster.
+	// Creates a backup for the specified StoreDoc cluster.
 	Backup(ctx context.Context, in *BackupClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Creates a new MongoDB cluster using the specified backup.
+	// Creates a new StoreDoc cluster using the specified backup.
 	Restore(ctx context.Context, in *RestoreClusterRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(ctx context.Context, in *RescheduleMaintenanceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves logs for the specified MongoDB cluster.
+	// Retrieves logs for the specified StoreDoc cluster.
 	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(ctx context.Context, in *ListClusterLogsRequest, opts ...grpc.CallOption) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
@@ -91,7 +91,7 @@ type ClusterServiceClient interface {
 	StreamLogs(ctx context.Context, in *StreamClusterLogsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[StreamLogRecord], error)
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(ctx context.Context, in *ListClusterOperationsRequest, opts ...grpc.CallOption) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified MongoDB cluster.
+	// Retrieves the list of available backups for the specified StoreDoc cluster.
 	ListBackups(ctx context.Context, in *ListClusterBackupsRequest, opts ...grpc.CallOption) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(ctx context.Context, in *ListClusterHostsRequest, opts ...grpc.CallOption) (*ListClusterHostsResponse, error)
@@ -125,11 +125,11 @@ type ClusterServiceClient interface {
 	// Stepdown hosts.
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	StepdownHosts(ctx context.Context, in *StepdownHostsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Retrieves a list of access bindings for the specified MongoDB cluster.
+	// Retrieves a list of access bindings for the specified StoreDoc cluster.
 	ListAccessBindings(ctx context.Context, in *access.ListAccessBindingsRequest, opts ...grpc.CallOption) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified MongoDB cluster.
+	// Sets access bindings for the specified StoreDoc cluster.
 	SetAccessBindings(ctx context.Context, in *access.SetAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
-	// Updates access bindings for the specified MongoDB cluster.
+	// Updates access bindings for the specified StoreDoc cluster.
 	UpdateAccessBindings(ctx context.Context, in *access.UpdateAccessBindingsRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -454,33 +454,33 @@ func (c *clusterServiceClient) UpdateAccessBindings(ctx context.Context, in *acc
 // All implementations should embed UnimplementedClusterServiceServer
 // for forward compatibility.
 //
-// A set of methods for managing MongoDB Cluster resources.
+// A set of methods for managing StoreDoc Cluster resources.
 type ClusterServiceServer interface {
-	// Returns the specified MongoDB Cluster resource.
-	// To get the list of available MongoDB Cluster resources, make a [List] request.
+	// Returns the specified StoreDoc Cluster resource.
+	// To get the list of available StoreDoc Cluster resources, make a [List] request.
 	Get(context.Context, *GetClusterRequest) (*Cluster, error)
-	// Retrieves the list of MongoDB Cluster resources that belong
+	// Retrieves the list of StoreDoc Cluster resources that belong
 	// to the specified folder.
 	List(context.Context, *ListClustersRequest) (*ListClustersResponse, error)
-	// Creates a MongoDB cluster in the specified folder.
+	// Creates a StoreDoc cluster in the specified folder.
 	Create(context.Context, *CreateClusterRequest) (*operation.Operation, error)
-	// Updates the specified MongoDB cluster.
+	// Updates the specified StoreDoc cluster.
 	Update(context.Context, *UpdateClusterRequest) (*operation.Operation, error)
-	// Deletes the specified MongoDB cluster.
+	// Deletes the specified StoreDoc cluster.
 	Delete(context.Context, *DeleteClusterRequest) (*operation.Operation, error)
-	// Start the specified MongoDB cluster.
+	// Start the specified StoreDoc cluster.
 	Start(context.Context, *StartClusterRequest) (*operation.Operation, error)
-	// Stop the specified MongoDB cluster.
+	// Stop the specified StoreDoc cluster.
 	Stop(context.Context, *StopClusterRequest) (*operation.Operation, error)
-	// Moves the specified MongoDB cluster to the specified folder.
+	// Moves the specified StoreDoc cluster to the specified folder.
 	Move(context.Context, *MoveClusterRequest) (*operation.Operation, error)
-	// Creates a backup for the specified MongoDB cluster.
+	// Creates a backup for the specified StoreDoc cluster.
 	Backup(context.Context, *BackupClusterRequest) (*operation.Operation, error)
-	// Creates a new MongoDB cluster using the specified backup.
+	// Creates a new StoreDoc cluster using the specified backup.
 	Restore(context.Context, *RestoreClusterRequest) (*operation.Operation, error)
 	// Reschedules planned maintenance operation.
 	RescheduleMaintenance(context.Context, *RescheduleMaintenanceRequest) (*operation.Operation, error)
-	// Retrieves logs for the specified MongoDB cluster.
+	// Retrieves logs for the specified StoreDoc cluster.
 	// See the [Logs](/yandex-mdb-guide/concepts/logs.html) section in the developers guide for detailed logs description.
 	ListLogs(context.Context, *ListClusterLogsRequest) (*ListClusterLogsResponse, error)
 	// Same as ListLogs but using server-side streaming. Also allows for 'tail -f' semantics.
@@ -488,7 +488,7 @@ type ClusterServiceServer interface {
 	StreamLogs(*StreamClusterLogsRequest, grpc.ServerStreamingServer[StreamLogRecord]) error
 	// Retrieves the list of Operation resources for the specified cluster.
 	ListOperations(context.Context, *ListClusterOperationsRequest) (*ListClusterOperationsResponse, error)
-	// Retrieves the list of available backups for the specified MongoDB cluster.
+	// Retrieves the list of available backups for the specified StoreDoc cluster.
 	ListBackups(context.Context, *ListClusterBackupsRequest) (*ListClusterBackupsResponse, error)
 	// Retrieves a list of hosts for the specified cluster.
 	ListHosts(context.Context, *ListClusterHostsRequest) (*ListClusterHostsResponse, error)
@@ -522,11 +522,11 @@ type ClusterServiceServer interface {
 	// Stepdown hosts.
 	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
 	StepdownHosts(context.Context, *StepdownHostsRequest) (*operation.Operation, error)
-	// Retrieves a list of access bindings for the specified MongoDB cluster.
+	// Retrieves a list of access bindings for the specified StoreDoc cluster.
 	ListAccessBindings(context.Context, *access.ListAccessBindingsRequest) (*access.ListAccessBindingsResponse, error)
-	// Sets access bindings for the specified MongoDB cluster.
+	// Sets access bindings for the specified StoreDoc cluster.
 	SetAccessBindings(context.Context, *access.SetAccessBindingsRequest) (*operation.Operation, error)
-	// Updates access bindings for the specified MongoDB cluster.
+	// Updates access bindings for the specified StoreDoc cluster.
 	UpdateAccessBindings(context.Context, *access.UpdateAccessBindingsRequest) (*operation.Operation, error)
 }
 
