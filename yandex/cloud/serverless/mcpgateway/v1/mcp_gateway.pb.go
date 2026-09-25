@@ -1909,9 +1909,9 @@ const file_yandex_cloud_serverless_mcpgateway_v1_mcp_gateway_proto_rawDesc = "" 
 	"logGroupId\x12\x1d\n" +
 	"\tfolder_id\x18\x03 \x01(\tH\x00R\bfolderId\x12D\n" +
 	"\tmin_level\x18\x04 \x01(\x0e2'.yandex.cloud.logging.v1.LogLevel.LevelR\bminLevelB\r\n" +
-	"\vdestination\"\xb1\x02\n" +
-	"\aMcpTool\x12C\n" +
-	"\x04name\x18\x01 \x01(\tB/\xe8\xc71\x01\xf2\xc71\x1e([a-zA-Z][-a-zA-Z0-9_]{0,63})?\x8a\xc81\x05<=128R\x04name\x12-\n" +
+	"\vdestination\"\xab\x02\n" +
+	"\aMcpTool\x12=\n" +
+	"\x04name\x18\x01 \x01(\tB)\xe8\xc71\x01\xf2\xc71\x18([-.0-9A-Z_a-z]{1,128})?\x8a\xc81\x05<=128R\x04name\x12-\n" +
 	"\vdescription\x18\x02 \x01(\tB\v\x8a\xc81\a<=65536R\vdescription\x12*\n" +
 	"\x11input_json_schema\x18\x03 \x01(\tR\x0finputJsonSchema\x12R\n" +
 	"\x06action\x18\x04 \x01(\v24.yandex.cloud.serverless.mcpgateway.v1.McpToolActionB\x04\xe8\xc71\x01R\x06action\x12,\n" +

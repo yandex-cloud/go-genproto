@@ -93,6 +93,63 @@ func (ProductType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{0}
 }
 
+// License validity type.
+type LicenseType int32
+
+const (
+	// The type is omitted. It is treated as term for backward compatibility.
+	LicenseType_LICENSE_TYPE_UNSPECIFIED LicenseType = 0
+	// License with a fixed validity period.
+	LicenseType_LICENSE_TYPE_TERM LicenseType = 1
+	// License without a contractual expiration date.
+	LicenseType_LICENSE_TYPE_PERPETUAL LicenseType = 2
+	// Trial license with a fixed validity period.
+	LicenseType_LICENSE_TYPE_TRIAL LicenseType = 3
+)
+
+// Enum value maps for LicenseType.
+var (
+	LicenseType_name = map[int32]string{
+		0: "LICENSE_TYPE_UNSPECIFIED",
+		1: "LICENSE_TYPE_TERM",
+		2: "LICENSE_TYPE_PERPETUAL",
+		3: "LICENSE_TYPE_TRIAL",
+	}
+	LicenseType_value = map[string]int32{
+		"LICENSE_TYPE_UNSPECIFIED": 0,
+		"LICENSE_TYPE_TERM":        1,
+		"LICENSE_TYPE_PERPETUAL":   2,
+		"LICENSE_TYPE_TRIAL":       3,
+	}
+)
+
+func (x LicenseType) Enum() *LicenseType {
+	p := new(LicenseType)
+	*p = x
+	return p
+}
+
+func (x LicenseType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LicenseType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[1].Descriptor()
+}
+
+func (LicenseType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[1]
+}
+
+func (x LicenseType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use LicenseType.Descriptor instead.
+func (LicenseType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{1}
+}
+
 // Sync status enum
 type SyncStatus int32
 
@@ -134,11 +191,11 @@ func (x SyncStatus) String() string {
 }
 
 func (SyncStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[1].Descriptor()
+	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[2].Descriptor()
 }
 
 func (SyncStatus) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[1]
+	return &file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes[2]
 }
 
 func (x SyncStatus) Number() protoreflect.EnumNumber {
@@ -147,7 +204,7 @@ func (x SyncStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SyncStatus.Descriptor instead.
 func (SyncStatus) EnumDescriptor() ([]byte, []int) {
-	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{1}
+	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{2}
 }
 
 // Usage data entry for a single installation
@@ -364,12 +421,14 @@ type License struct {
 	BillingAccountId string `protobuf:"bytes,4,opt,name=billing_account_id,json=billingAccountId,proto3" json:"billing_account_id,omitempty"`
 	// Timestamp when the license was issued
 	IssuedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=issued_at,json=issuedAt,proto3" json:"issued_at,omitempty"`
-	// Timestamp when the license expires
+	// Timestamp when the license expires. Absent for perpetual licenses.
 	ValidUntil *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`
 	// List of limits for this license
 	Limits []*LicenseLimit `protobuf:"bytes,7,rep,name=limits,proto3" json:"limits,omitempty"`
 	// Digital signature for this license
-	Signature     string `protobuf:"bytes,8,opt,name=signature,proto3" json:"signature,omitempty"`
+	Signature string `protobuf:"bytes,8,opt,name=signature,proto3" json:"signature,omitempty"`
+	// License validity type
+	LicenseType   LicenseType `protobuf:"varint,9,opt,name=license_type,json=licenseType,proto3,enum=yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType" json:"license_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -460,10 +519,20 @@ func (x *License) GetSignature() string {
 	return ""
 }
 
+func (x *License) GetLicenseType() LicenseType {
+	if x != nil {
+		return x.LicenseType
+	}
+	return LicenseType_LICENSE_TYPE_UNSPECIFIED
+}
+
 // Request to synchronize licenses and submit usage data
 type SyncRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// License server ID
+	// Deprecated. The server is selected from the authenticated service
+	// account binding; this value is ignored when present.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto.
 	LicenseServerId string `protobuf:"bytes,3,opt,name=license_server_id,json=licenseServerId,proto3" json:"license_server_id,omitempty"`
 	// Usage data for audit
 	Usage         []*UsageEntry `protobuf:"bytes,4,rep,name=usage,proto3" json:"usage,omitempty"`
@@ -501,6 +570,7 @@ func (*SyncRequest) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP(), []int{3}
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto.
 func (x *SyncRequest) GetLicenseServerId() string {
 	if x != nil {
 		return x.LicenseServerId
@@ -669,7 +739,7 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\tsignature\x18\f \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1000R\tsignature\"B\n" +
 	"\fLicenseLimit\x12\x17\n" +
 	"\x04type\x18\x01 \x01(\tB\x03\xe0A\x02R\x04type\x12\x19\n" +
-	"\x05limit\x18\x02 \x01(\x03B\x03\xe0A\x01R\x05limit\"\xcb\x03\n" +
+	"\x05limit\x18\x02 \x01(\x03B\x03\xe0A\x01R\x05limit\"\xac\x04\n" +
 	"\aLicense\x12\x1d\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tR\tlicenseId\x12_\n" +
@@ -680,9 +750,11 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\vvalid_until\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"validUntil\x12U\n" +
 	"\x06limits\x18\a \x03(\v2=.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimitR\x06limits\x12\x1c\n" +
-	"\tsignature\x18\b \x01(\tR\tsignature\"\xd1\x01\n" +
-	"\vSyncRequest\x128\n" +
-	"\x11license_server_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0flicenseServerId\x12]\n" +
+	"\tsignature\x18\b \x01(\tR\tsignature\x12_\n" +
+	"\flicense_type\x18\t \x01(\x0e2<.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseTypeR\vlicenseType\"\xcf\x01\n" +
+	"\vSyncRequest\x126\n" +
+	"\x11license_server_id\x18\x03 \x01(\tB\n" +
+	"\x8a\xc81\x04<=50\x18\x01R\x0flicenseServerId\x12]\n" +
 	"\x05usage\x18\x04 \x03(\v2;.yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntryB\n" +
 	"\x82\xc81\x06<=1000R\x05usageJ\x04\b\x01\x10\x03R\x0forganization_idR\x12billing_account_id\"\xdf\x01\n" +
 	"\x0fSyncUsageResult\x12T\n" +
@@ -701,7 +773,12 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\x16PRODUCT_TYPE_AI_STUDIO\x10\x03\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_SPEECHSENSE\x10\x04\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_ROBOTICS_AI\x10\x05\x12\x13\n" +
-	"\x0fPRODUCT_TYPE_S3\x10\x06*I\n" +
+	"\x0fPRODUCT_TYPE_S3\x10\x06*v\n" +
+	"\vLicenseType\x12\x1c\n" +
+	"\x18LICENSE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
+	"\x11LICENSE_TYPE_TERM\x10\x01\x12\x1a\n" +
+	"\x16LICENSE_TYPE_PERPETUAL\x10\x02\x12\x16\n" +
+	"\x12LICENSE_TYPE_TRIAL\x10\x03*I\n" +
 	"\n" +
 	"SyncStatus\x12\x1b\n" +
 	"\x17SYNC_STATUS_UNSPECIFIED\x10\x00\x12\x06\n" +
@@ -722,35 +799,37 @@ func file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescGZIP
 	return file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDescData
 }
 
-var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_goTypes = []any{
 	(ProductType)(0),              // 0: yandex.cloud.marketplace.stacklandlicenseapi.v1.ProductType
-	(SyncStatus)(0),               // 1: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
-	(*UsageEntry)(nil),            // 2: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
-	(*LicenseLimit)(nil),          // 3: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimit
-	(*License)(nil),               // 4: yandex.cloud.marketplace.stacklandlicenseapi.v1.License
-	(*SyncRequest)(nil),           // 5: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest
-	(*SyncUsageResult)(nil),       // 6: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult
-	(*SyncUsageMetadata)(nil),     // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageMetadata
-	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(LicenseType)(0),              // 1: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType
+	(SyncStatus)(0),               // 2: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
+	(*UsageEntry)(nil),            // 3: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
+	(*LicenseLimit)(nil),          // 4: yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimit
+	(*License)(nil),               // 5: yandex.cloud.marketplace.stacklandlicenseapi.v1.License
+	(*SyncRequest)(nil),           // 6: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest
+	(*SyncUsageResult)(nil),       // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult
+	(*SyncUsageMetadata)(nil),     // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageMetadata
+	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.product_type:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.ProductType
-	8,  // 1: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.timestamp:type_name -> google.protobuf.Timestamp
-	8,  // 2: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.server_timestamp:type_name -> google.protobuf.Timestamp
+	9,  // 1: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.timestamp:type_name -> google.protobuf.Timestamp
+	9,  // 2: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.server_timestamp:type_name -> google.protobuf.Timestamp
 	0,  // 3: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.product_type:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.ProductType
-	8,  // 4: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.issued_at:type_name -> google.protobuf.Timestamp
-	8,  // 5: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.valid_until:type_name -> google.protobuf.Timestamp
-	3,  // 6: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.limits:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimit
-	2,  // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest.usage:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
-	4,  // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.licenses:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.License
-	1,  // 9: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.sync_status:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	9,  // 4: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.issued_at:type_name -> google.protobuf.Timestamp
+	9,  // 5: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.valid_until:type_name -> google.protobuf.Timestamp
+	4,  // 6: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.limits:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimit
+	1,  // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.license_type:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType
+	3,  // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest.usage:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
+	5,  // 9: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.licenses:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.License
+	2,  // 10: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.sync_status:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_init() }
@@ -763,7 +842,7 @@ func file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc), len(file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,

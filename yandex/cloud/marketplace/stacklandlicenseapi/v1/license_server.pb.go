@@ -122,7 +122,8 @@ type LicenseServer struct {
 	ServerId string `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	// License server CA certificate
 	LsCaCertificate string `protobuf:"bytes,2,opt,name=ls_ca_certificate,json=lsCaCertificate,proto3" json:"ls_ca_certificate,omitempty"`
-	// Private key for the license server
+	// Private key for the license server. Populated only in Create and Register
+	// operation responses; GetLicenseServer and ListLicenseServers omit it.
 	LsPrivateKey string `protobuf:"bytes,3,opt,name=ls_private_key,json=lsPrivateKey,proto3" json:"ls_private_key,omitempty"`
 	// Timestamp when the credentials expire
 	ValidUntil *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=valid_until,json=validUntil,proto3" json:"valid_until,omitempty"`

@@ -100,6 +100,10 @@ func (m *UtteranceSynthesisResponse) SetWordTimings(v []*WordTiming) {
 	m.WordTimings = v
 }
 
+func (m *UtteranceSynthesisResponse) SetChunkType(v UtteranceSynthesisResponse_ChunkType) {
+	m.ChunkType = v
+}
+
 func (m *AudioTemplate) SetAudio(v *AudioContent) {
 	m.Audio = v
 }
@@ -300,4 +304,8 @@ func (m *StreamSynthesisResponse) SetLengthMs(v int64) {
 
 func (m *StreamSynthesisResponse) SetWordTimings(v []*WordTiming) {
 	m.WordTimings = v
+}
+
+func (m *StreamSynthesisResponse) SetChunkType(v StreamSynthesisResponse_ChunkType) {
+	m.ChunkType = v
 }

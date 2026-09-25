@@ -7,6 +7,7 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,7 +28,9 @@ type DhcpOptions struct {
 	// Start IP address of the DHCP range (inclusive).
 	StartIp string `protobuf:"bytes,2,opt,name=start_ip,json=startIp,proto3" json:"start_ip,omitempty"`
 	// End IP address of the DHCP range (inclusive).
-	EndIp         string `protobuf:"bytes,3,opt,name=end_ip,json=endIp,proto3" json:"end_ip,omitempty"`
+	EndIp string `protobuf:"bytes,3,opt,name=end_ip,json=endIp,proto3" json:"end_ip,omitempty"`
+	// DNS configuration handed out to servers via DHCP.
+	DnsOptions    *DnsOptions `protobuf:"bytes,4,opt,name=dns_options,json=dnsOptions,proto3" json:"dns_options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,14 +79,174 @@ func (x *DhcpOptions) GetEndIp() string {
 	return ""
 }
 
+func (x *DhcpOptions) GetDnsOptions() *DnsOptions {
+	if x != nil {
+		return x.DnsOptions
+	}
+	return nil
+}
+
+// DNS configuration distributed through DHCP.
+type DnsOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// DNS servers handed out to servers via DHCP option 6.
+	// The order is preserved.
+	Servers []*DnsServer `protobuf:"bytes,1,rep,name=servers,proto3" json:"servers,omitempty"`
+	// DNS Domain name handed out to servers via DHCP options 15 and 119.
+	DomainName    string `protobuf:"bytes,2,opt,name=domain_name,json=domainName,proto3" json:"domain_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DnsOptions) Reset() {
+	*x = DnsOptions{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DnsOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DnsOptions) ProtoMessage() {}
+
+func (x *DnsOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DnsOptions.ProtoReflect.Descriptor instead.
+func (*DnsOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DnsOptions) GetServers() []*DnsServer {
+	if x != nil {
+		return x.Servers
+	}
+	return nil
+}
+
+func (x *DnsOptions) GetDomainName() string {
+	if x != nil {
+		return x.DomainName
+	}
+	return ""
+}
+
+// Represents a DNS server specified either by an IP address or by a Cloud DNS inbound endpoint.
+type DnsServer struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Server:
+	//
+	//	*DnsServer_IpAddress
+	//	*DnsServer_DnsInboundEndpointId
+	Server        isDnsServer_Server `protobuf_oneof:"server"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DnsServer) Reset() {
+	*x = DnsServer{}
+	mi := &file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DnsServer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DnsServer) ProtoMessage() {}
+
+func (x *DnsServer) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DnsServer.ProtoReflect.Descriptor instead.
+func (*DnsServer) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DnsServer) GetServer() isDnsServer_Server {
+	if x != nil {
+		return x.Server
+	}
+	return nil
+}
+
+func (x *DnsServer) GetIpAddress() string {
+	if x != nil {
+		if x, ok := x.Server.(*DnsServer_IpAddress); ok {
+			return x.IpAddress
+		}
+	}
+	return ""
+}
+
+func (x *DnsServer) GetDnsInboundEndpointId() string {
+	if x != nil {
+		if x, ok := x.Server.(*DnsServer_DnsInboundEndpointId); ok {
+			return x.DnsInboundEndpointId
+		}
+	}
+	return ""
+}
+
+type isDnsServer_Server interface {
+	isDnsServer_Server()
+}
+
+type DnsServer_IpAddress struct {
+	// Manual DNS server IP address.
+	IpAddress string `protobuf:"bytes,1,opt,name=ip_address,json=ipAddress,proto3,oneof"`
+}
+
+type DnsServer_DnsInboundEndpointId struct {
+	// ID of the Cloud DNS inbound endpoint.
+	DnsInboundEndpointId string `protobuf:"bytes,2,opt,name=dns_inbound_endpoint_id,json=dnsInboundEndpointId,proto3,oneof"`
+}
+
+func (*DnsServer_IpAddress) isDnsServer_Server() {}
+
+func (*DnsServer_DnsInboundEndpointId) isDnsServer_Server() {}
+
 var File_yandex_cloud_baremetal_v1alpha_dhcp_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/baremetal/v1alpha/dhcp.proto\x12\x1eyandex.cloud.baremetal.v1alpha\"E\n" +
+	")yandex/cloud/baremetal/v1alpha/dhcp.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1dyandex/cloud/validation.proto\"\x92\x01\n" +
 	"\vDhcpOptions\x12\x19\n" +
 	"\bstart_ip\x18\x02 \x01(\tR\astartIp\x12\x15\n" +
-	"\x06end_ip\x18\x03 \x01(\tR\x05endIpJ\x04\b\x01\x10\x02Br\n" +
+	"\x06end_ip\x18\x03 \x01(\tR\x05endIp\x12K\n" +
+	"\vdns_options\x18\x04 \x01(\v2*.yandex.cloud.baremetal.v1alpha.DnsOptionsR\n" +
+	"dnsOptionsJ\x04\b\x01\x10\x02\"\xe0\x01\n" +
+	"\n" +
+	"DnsOptions\x12L\n" +
+	"\aservers\x18\x01 \x03(\v2).yandex.cloud.baremetal.v1alpha.DnsServerB\a\x82\xc81\x03<=3R\aservers\x12\x83\x01\n" +
+	"\vdomain_name\x18\x02 \x01(\tBb\xf2\xc71U([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?([.][a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*)|\x8a\xc81\x05<=253R\n" +
+	"domainName\"\x86\x02\n" +
+	"\tDnsServer\x12\x95\x01\n" +
+	"\n" +
+	"ip_address\x18\x01 \x01(\tBt\xf2\xc71h(?:0|[1-9][0-9]?|1[0-9]{2}|2[0-4][0-9]|25[0-5])(?:[.](?:0|[1-9][0-9]?|1[0-9]{2}|2[0-4][0-9]|25[0-5])){3}\x8a\xc81\x04<=15H\x00R\tipAddress\x12Q\n" +
+	"\x17dns_inbound_endpoint_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220H\x00R\x14dnsInboundEndpointIdB\x0e\n" +
+	"\x06server\x12\x04\xc0\xc11\x01Br\n" +
 	"\"yandex.cloud.api.baremetal.v1alphaZLgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v1alpha;baremetalb\x06proto3"
 
 var (
@@ -98,16 +261,20 @@ func file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_yandex_cloud_baremetal_v1alpha_dhcp_proto_goTypes = []any{
 	(*DhcpOptions)(nil), // 0: yandex.cloud.baremetal.v1alpha.DhcpOptions
+	(*DnsOptions)(nil),  // 1: yandex.cloud.baremetal.v1alpha.DnsOptions
+	(*DnsServer)(nil),   // 2: yandex.cloud.baremetal.v1alpha.DnsServer
 }
 var file_yandex_cloud_baremetal_v1alpha_dhcp_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: yandex.cloud.baremetal.v1alpha.DhcpOptions.dns_options:type_name -> yandex.cloud.baremetal.v1alpha.DnsOptions
+	2, // 1: yandex.cloud.baremetal.v1alpha.DnsOptions.servers:type_name -> yandex.cloud.baremetal.v1alpha.DnsServer
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_dhcp_proto_init() }
@@ -115,13 +282,17 @@ func file_yandex_cloud_baremetal_v1alpha_dhcp_proto_init() {
 	if File_yandex_cloud_baremetal_v1alpha_dhcp_proto != nil {
 		return
 	}
+	file_yandex_cloud_baremetal_v1alpha_dhcp_proto_msgTypes[2].OneofWrappers = []any{
+		(*DnsServer_IpAddress)(nil),
+		(*DnsServer_DnsInboundEndpointId)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDesc), len(file_yandex_cloud_baremetal_v1alpha_dhcp_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

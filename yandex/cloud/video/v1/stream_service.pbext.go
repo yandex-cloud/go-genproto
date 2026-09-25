@@ -205,3 +205,25 @@ func (m *PerformStreamActionRequest) SetStop(v *StopAction) {
 func (m *PerformStreamActionMetadata) SetStreamId(v string) {
 	m.StreamId = v
 }
+
+type UpdateTranslationOptionsRequest_Option = isUpdateTranslationOptionsRequest_Option
+
+func (m *UpdateTranslationOptionsRequest) SetOption(v UpdateTranslationOptionsRequest_Option) {
+	m.Option = v
+}
+
+func (m *UpdateTranslationOptionsRequest) SetStreamId(v string) {
+	m.StreamId = v
+}
+
+func (m *UpdateTranslationOptionsRequest) SetEnableTranslation(v *EnableTranslationOption) {
+	m.Option = &UpdateTranslationOptionsRequest_EnableTranslation{
+		EnableTranslation: v,
+	}
+}
+
+func (m *UpdateTranslationOptionsRequest) SetDisableTranslation(v *DisableTranslationOption) {
+	m.Option = &UpdateTranslationOptionsRequest_DisableTranslation{
+		DisableTranslation: v,
+	}
+}

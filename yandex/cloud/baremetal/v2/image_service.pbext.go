@@ -61,3 +61,45 @@ func (m *ResolveImagesResponse) SetImages(v []*Image) {
 func (m *ResolveImagesResponse) SetNextPageToken(v string) {
 	m.NextPageToken = v
 }
+
+type ListCompatibleImagesRequest_Configuration = isListCompatibleImagesRequest_Configuration
+
+func (m *ListCompatibleImagesRequest) SetConfiguration(v ListCompatibleImagesRequest_Configuration) {
+	m.Configuration = v
+}
+
+func (m *ListCompatibleImagesRequest) SetFolderId(v string) {
+	m.FolderId = v
+}
+
+func (m *ListCompatibleImagesRequest) SetStockConfigurationId(v string) {
+	m.Configuration = &ListCompatibleImagesRequest_StockConfigurationId{
+		StockConfigurationId: v,
+	}
+}
+
+func (m *ListCompatibleImagesRequest) SetCustomConfiguration(v *UserConfiguration) {
+	m.Configuration = &ListCompatibleImagesRequest_CustomConfiguration{
+		CustomConfiguration: v,
+	}
+}
+
+func (m *ListCompatibleImagesRequest) SetImageFolderId(v string) {
+	m.ImageFolderId = v
+}
+
+func (m *ListCompatibleImagesRequest) SetPageSize(v int64) {
+	m.PageSize = v
+}
+
+func (m *ListCompatibleImagesRequest) SetPageToken(v string) {
+	m.PageToken = v
+}
+
+func (m *ListCompatibleImagesResponse) SetImages(v []*Image) {
+	m.Images = v
+}
+
+func (m *ListCompatibleImagesResponse) SetNextPageToken(v string) {
+	m.NextPageToken = v
+}

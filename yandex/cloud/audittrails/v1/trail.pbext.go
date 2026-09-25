@@ -92,6 +92,12 @@ func (m *Trail_Destination) SetEventrouter(v *Trail_EventRouter) {
 	}
 }
 
+func (m *Trail_Destination) SetMonium(v *Trail_Monium) {
+	m.Destination = &Trail_Destination_Monium{
+		Monium: v,
+	}
+}
+
 func (m *Trail_ObjectStorage) SetBucketId(v string) {
 	m.BucketId = v
 }

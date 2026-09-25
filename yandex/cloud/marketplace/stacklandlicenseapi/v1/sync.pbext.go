@@ -94,6 +94,10 @@ func (m *License) SetSignature(v string) {
 	m.Signature = v
 }
 
+func (m *License) SetLicenseType(v LicenseType) {
+	m.LicenseType = v
+}
+
 func (m *SyncRequest) SetLicenseServerId(v string) {
 	m.LicenseServerId = v
 }

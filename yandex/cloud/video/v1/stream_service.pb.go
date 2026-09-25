@@ -13,6 +13,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	fieldmaskpb "google.golang.org/protobuf/types/known/fieldmaskpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -1241,11 +1242,182 @@ func (x *PerformStreamActionMetadata) GetStreamId() string {
 	return ""
 }
 
+type UpdateTranslationOptionsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ID of the stream for which to set an option.
+	StreamId string `protobuf:"bytes,1,opt,name=stream_id,json=streamId,proto3" json:"stream_id,omitempty"`
+	// Specifies which option to set for the stream.
+	//
+	// Types that are valid to be assigned to Option:
+	//
+	//	*UpdateTranslationOptionsRequest_EnableTranslation
+	//	*UpdateTranslationOptionsRequest_DisableTranslation
+	Option        isUpdateTranslationOptionsRequest_Option `protobuf_oneof:"option"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTranslationOptionsRequest) Reset() {
+	*x = UpdateTranslationOptionsRequest{}
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTranslationOptionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTranslationOptionsRequest) ProtoMessage() {}
+
+func (x *UpdateTranslationOptionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTranslationOptionsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTranslationOptionsRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *UpdateTranslationOptionsRequest) GetStreamId() string {
+	if x != nil {
+		return x.StreamId
+	}
+	return ""
+}
+
+func (x *UpdateTranslationOptionsRequest) GetOption() isUpdateTranslationOptionsRequest_Option {
+	if x != nil {
+		return x.Option
+	}
+	return nil
+}
+
+func (x *UpdateTranslationOptionsRequest) GetEnableTranslation() *EnableTranslationOption {
+	if x != nil {
+		if x, ok := x.Option.(*UpdateTranslationOptionsRequest_EnableTranslation); ok {
+			return x.EnableTranslation
+		}
+	}
+	return nil
+}
+
+func (x *UpdateTranslationOptionsRequest) GetDisableTranslation() *DisableTranslationOption {
+	if x != nil {
+		if x, ok := x.Option.(*UpdateTranslationOptionsRequest_DisableTranslation); ok {
+			return x.DisableTranslation
+		}
+	}
+	return nil
+}
+
+type isUpdateTranslationOptionsRequest_Option interface {
+	isUpdateTranslationOptionsRequest_Option()
+}
+
+type UpdateTranslationOptionsRequest_EnableTranslation struct {
+	// Enable neurotranslations for the stream.
+	EnableTranslation *EnableTranslationOption `protobuf:"bytes,1000,opt,name=enable_translation,json=enableTranslation,proto3,oneof"`
+}
+
+type UpdateTranslationOptionsRequest_DisableTranslation struct {
+	// Disable neurotranslations for the stream.
+	DisableTranslation *DisableTranslationOption `protobuf:"bytes,1001,opt,name=disable_translation,json=disableTranslation,proto3,oneof"`
+}
+
+func (*UpdateTranslationOptionsRequest_EnableTranslation) isUpdateTranslationOptionsRequest_Option() {
+}
+
+func (*UpdateTranslationOptionsRequest_DisableTranslation) isUpdateTranslationOptionsRequest_Option() {
+}
+
+// Parameters for the enable translation option.
+type EnableTranslationOption struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnableTranslationOption) Reset() {
+	*x = EnableTranslationOption{}
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnableTranslationOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnableTranslationOption) ProtoMessage() {}
+
+func (x *EnableTranslationOption) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnableTranslationOption.ProtoReflect.Descriptor instead.
+func (*EnableTranslationOption) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{20}
+}
+
+// Parameters for the disable translation option.
+type DisableTranslationOption struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DisableTranslationOption) Reset() {
+	*x = DisableTranslationOption{}
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisableTranslationOption) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisableTranslationOption) ProtoMessage() {}
+
+func (x *DisableTranslationOption) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisableTranslationOption.ProtoReflect.Descriptor instead.
+func (*DisableTranslationOption) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP(), []int{21}
+}
+
 var File_yandex_cloud_video_v1_stream_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\n" +
-	"*yandex/cloud/video/v1/stream_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\"yandex/cloud/video/v1/stream.proto\"=\n" +
+	"*yandex/cloud/video/v1/stream_service.proto\x12\x15yandex.cloud.video.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a yandex/cloud/api/operation.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\x1a\"yandex/cloud/video/v1/stream.proto\"=\n" +
 	"\x10GetStreamRequest\x12)\n" +
 	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamId\"\xe4\x01\n" +
 	"\x12ListStreamsRequest\x12+\n" +
@@ -1330,8 +1502,14 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\n" +
 	"StopAction\":\n" +
 	"\x1bPerformStreamActionMetadata\x12\x1b\n" +
-	"\tstream_id\x18\x01 \x01(\tR\bstreamId2\x93\n" +
-	"\n" +
+	"\tstream_id\x18\x01 \x01(\tR\bstreamId\"\xaa\x02\n" +
+	"\x1fUpdateTranslationOptionsRequest\x12)\n" +
+	"\tstream_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bstreamId\x12`\n" +
+	"\x12enable_translation\x18\xe8\a \x01(\v2..yandex.cloud.video.v1.EnableTranslationOptionH\x00R\x11enableTranslation\x12c\n" +
+	"\x13disable_translation\x18\xe9\a \x01(\v2/.yandex.cloud.video.v1.DisableTranslationOptionH\x00R\x12disableTranslationB\x0e\n" +
+	"\x06option\x12\x04\xc0\xc11\x01J\x05\b\x02\x10\xe8\a\"\x19\n" +
+	"\x17EnableTranslationOption\"\x1a\n" +
+	"\x18DisableTranslationOption2\xc3\v\n" +
 	"\rStreamService\x12t\n" +
 	"\x03Get\x12'.yandex.cloud.video.v1.GetStreamRequest\x1a\x1d.yandex.cloud.video.v1.Stream\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/video/v1/streams/{stream_id}\x12x\n" +
 	"\x04List\x12).yandex.cloud.video.v1.ListStreamsRequest\x1a*.yandex.cloud.video.v1.ListStreamsResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/video/v1/streams\x12\x90\x01\n" +
@@ -1345,7 +1523,8 @@ const file_yandex_cloud_video_v1_stream_service_proto_rawDesc = "" +
 	"\vBatchDelete\x120.yandex.cloud.video.v1.BatchDeleteStreamsRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*3\n" +
 	"\x1aBatchDeleteStreamsMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/video/v1/streams:batchDelete\x12\xc6\x01\n" +
 	"\rPerformAction\x121.yandex.cloud.video.v1.PerformStreamActionRequest\x1a!.yandex.cloud.operation.Operation\"_\xb2\xd2*%\n" +
-	"\x1bPerformStreamActionMetadata\x12\x06Stream\x82\xd3\xe4\x93\x020:\x01*\"+/video/v1/streams/{stream_id}:performActionB\\\n" +
+	"\x1bPerformStreamActionMetadata\x12\x06Stream\x82\xd3\xe4\x93\x020:\x01*\"+/video/v1/streams/{stream_id}:performAction\x12\xad\x01\n" +
+	"\x18UpdateTranslationOptions\x126.yandex.cloud.video.v1.UpdateTranslationOptionsRequest\x1a\x16.google.protobuf.Empty\"A\x82\xd3\xe4\x93\x02;:\x01*26/video/v1/streams/{stream_id}:updateTranslationOptionsB\\\n" +
 	"\x19yandex.cloud.api.video.v1Z?github.com/yandex-cloud/go-genproto/yandex/cloud/video/v1;videob\x06proto3"
 
 var (
@@ -1360,72 +1539,80 @@ func file_yandex_cloud_video_v1_stream_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_video_v1_stream_service_proto_rawDescData
 }
 
-var file_yandex_cloud_video_v1_stream_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_yandex_cloud_video_v1_stream_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_yandex_cloud_video_v1_stream_service_proto_goTypes = []any{
-	(*GetStreamRequest)(nil),            // 0: yandex.cloud.video.v1.GetStreamRequest
-	(*ListStreamsRequest)(nil),          // 1: yandex.cloud.video.v1.ListStreamsRequest
-	(*ListStreamsResponse)(nil),         // 2: yandex.cloud.video.v1.ListStreamsResponse
-	(*BatchGetStreamsRequest)(nil),      // 3: yandex.cloud.video.v1.BatchGetStreamsRequest
-	(*BatchGetStreamsResponse)(nil),     // 4: yandex.cloud.video.v1.BatchGetStreamsResponse
-	(*CreateStreamRequest)(nil),         // 5: yandex.cloud.video.v1.CreateStreamRequest
-	(*OnDemandParams)(nil),              // 6: yandex.cloud.video.v1.OnDemandParams
-	(*ScheduleParams)(nil),              // 7: yandex.cloud.video.v1.ScheduleParams
-	(*CreateStreamMetadata)(nil),        // 8: yandex.cloud.video.v1.CreateStreamMetadata
-	(*UpdateStreamRequest)(nil),         // 9: yandex.cloud.video.v1.UpdateStreamRequest
-	(*UpdateStreamMetadata)(nil),        // 10: yandex.cloud.video.v1.UpdateStreamMetadata
-	(*DeleteStreamRequest)(nil),         // 11: yandex.cloud.video.v1.DeleteStreamRequest
-	(*DeleteStreamMetadata)(nil),        // 12: yandex.cloud.video.v1.DeleteStreamMetadata
-	(*BatchDeleteStreamsRequest)(nil),   // 13: yandex.cloud.video.v1.BatchDeleteStreamsRequest
-	(*BatchDeleteStreamsMetadata)(nil),  // 14: yandex.cloud.video.v1.BatchDeleteStreamsMetadata
-	(*PerformStreamActionRequest)(nil),  // 15: yandex.cloud.video.v1.PerformStreamActionRequest
-	(*PublishAction)(nil),               // 16: yandex.cloud.video.v1.PublishAction
-	(*StopAction)(nil),                  // 17: yandex.cloud.video.v1.StopAction
-	(*PerformStreamActionMetadata)(nil), // 18: yandex.cloud.video.v1.PerformStreamActionMetadata
-	nil,                                 // 19: yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
-	nil,                                 // 20: yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
-	(*Stream)(nil),                      // 21: yandex.cloud.video.v1.Stream
-	(*wrapperspb.BoolValue)(nil),        // 22: google.protobuf.BoolValue
-	(*timestamppb.Timestamp)(nil),       // 23: google.protobuf.Timestamp
-	(*fieldmaskpb.FieldMask)(nil),       // 24: google.protobuf.FieldMask
-	(*operation.Operation)(nil),         // 25: yandex.cloud.operation.Operation
+	(*GetStreamRequest)(nil),                // 0: yandex.cloud.video.v1.GetStreamRequest
+	(*ListStreamsRequest)(nil),              // 1: yandex.cloud.video.v1.ListStreamsRequest
+	(*ListStreamsResponse)(nil),             // 2: yandex.cloud.video.v1.ListStreamsResponse
+	(*BatchGetStreamsRequest)(nil),          // 3: yandex.cloud.video.v1.BatchGetStreamsRequest
+	(*BatchGetStreamsResponse)(nil),         // 4: yandex.cloud.video.v1.BatchGetStreamsResponse
+	(*CreateStreamRequest)(nil),             // 5: yandex.cloud.video.v1.CreateStreamRequest
+	(*OnDemandParams)(nil),                  // 6: yandex.cloud.video.v1.OnDemandParams
+	(*ScheduleParams)(nil),                  // 7: yandex.cloud.video.v1.ScheduleParams
+	(*CreateStreamMetadata)(nil),            // 8: yandex.cloud.video.v1.CreateStreamMetadata
+	(*UpdateStreamRequest)(nil),             // 9: yandex.cloud.video.v1.UpdateStreamRequest
+	(*UpdateStreamMetadata)(nil),            // 10: yandex.cloud.video.v1.UpdateStreamMetadata
+	(*DeleteStreamRequest)(nil),             // 11: yandex.cloud.video.v1.DeleteStreamRequest
+	(*DeleteStreamMetadata)(nil),            // 12: yandex.cloud.video.v1.DeleteStreamMetadata
+	(*BatchDeleteStreamsRequest)(nil),       // 13: yandex.cloud.video.v1.BatchDeleteStreamsRequest
+	(*BatchDeleteStreamsMetadata)(nil),      // 14: yandex.cloud.video.v1.BatchDeleteStreamsMetadata
+	(*PerformStreamActionRequest)(nil),      // 15: yandex.cloud.video.v1.PerformStreamActionRequest
+	(*PublishAction)(nil),                   // 16: yandex.cloud.video.v1.PublishAction
+	(*StopAction)(nil),                      // 17: yandex.cloud.video.v1.StopAction
+	(*PerformStreamActionMetadata)(nil),     // 18: yandex.cloud.video.v1.PerformStreamActionMetadata
+	(*UpdateTranslationOptionsRequest)(nil), // 19: yandex.cloud.video.v1.UpdateTranslationOptionsRequest
+	(*EnableTranslationOption)(nil),         // 20: yandex.cloud.video.v1.EnableTranslationOption
+	(*DisableTranslationOption)(nil),        // 21: yandex.cloud.video.v1.DisableTranslationOption
+	nil,                                     // 22: yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
+	nil,                                     // 23: yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
+	(*Stream)(nil),                          // 24: yandex.cloud.video.v1.Stream
+	(*wrapperspb.BoolValue)(nil),            // 25: google.protobuf.BoolValue
+	(*timestamppb.Timestamp)(nil),           // 26: google.protobuf.Timestamp
+	(*fieldmaskpb.FieldMask)(nil),           // 27: google.protobuf.FieldMask
+	(*operation.Operation)(nil),             // 28: yandex.cloud.operation.Operation
+	(*emptypb.Empty)(nil),                   // 29: google.protobuf.Empty
 }
 var file_yandex_cloud_video_v1_stream_service_proto_depIdxs = []int32{
-	21, // 0: yandex.cloud.video.v1.ListStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
-	21, // 1: yandex.cloud.video.v1.BatchGetStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
-	22, // 2: yandex.cloud.video.v1.CreateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
-	19, // 3: yandex.cloud.video.v1.CreateStreamRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
+	24, // 0: yandex.cloud.video.v1.ListStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
+	24, // 1: yandex.cloud.video.v1.BatchGetStreamsResponse.streams:type_name -> yandex.cloud.video.v1.Stream
+	25, // 2: yandex.cloud.video.v1.CreateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
+	22, // 3: yandex.cloud.video.v1.CreateStreamRequest.labels:type_name -> yandex.cloud.video.v1.CreateStreamRequest.LabelsEntry
 	6,  // 4: yandex.cloud.video.v1.CreateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
 	7,  // 5: yandex.cloud.video.v1.CreateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
-	23, // 6: yandex.cloud.video.v1.ScheduleParams.start_time:type_name -> google.protobuf.Timestamp
-	23, // 7: yandex.cloud.video.v1.ScheduleParams.finish_time:type_name -> google.protobuf.Timestamp
-	24, // 8: yandex.cloud.video.v1.UpdateStreamRequest.field_mask:type_name -> google.protobuf.FieldMask
-	22, // 9: yandex.cloud.video.v1.UpdateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
-	20, // 10: yandex.cloud.video.v1.UpdateStreamRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
+	26, // 6: yandex.cloud.video.v1.ScheduleParams.start_time:type_name -> google.protobuf.Timestamp
+	26, // 7: yandex.cloud.video.v1.ScheduleParams.finish_time:type_name -> google.protobuf.Timestamp
+	27, // 8: yandex.cloud.video.v1.UpdateStreamRequest.field_mask:type_name -> google.protobuf.FieldMask
+	25, // 9: yandex.cloud.video.v1.UpdateStreamRequest.auto_publish:type_name -> google.protobuf.BoolValue
+	23, // 10: yandex.cloud.video.v1.UpdateStreamRequest.labels:type_name -> yandex.cloud.video.v1.UpdateStreamRequest.LabelsEntry
 	6,  // 11: yandex.cloud.video.v1.UpdateStreamRequest.on_demand:type_name -> yandex.cloud.video.v1.OnDemandParams
 	7,  // 12: yandex.cloud.video.v1.UpdateStreamRequest.schedule:type_name -> yandex.cloud.video.v1.ScheduleParams
 	16, // 13: yandex.cloud.video.v1.PerformStreamActionRequest.publish:type_name -> yandex.cloud.video.v1.PublishAction
 	17, // 14: yandex.cloud.video.v1.PerformStreamActionRequest.stop:type_name -> yandex.cloud.video.v1.StopAction
-	0,  // 15: yandex.cloud.video.v1.StreamService.Get:input_type -> yandex.cloud.video.v1.GetStreamRequest
-	1,  // 16: yandex.cloud.video.v1.StreamService.List:input_type -> yandex.cloud.video.v1.ListStreamsRequest
-	3,  // 17: yandex.cloud.video.v1.StreamService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetStreamsRequest
-	5,  // 18: yandex.cloud.video.v1.StreamService.Create:input_type -> yandex.cloud.video.v1.CreateStreamRequest
-	9,  // 19: yandex.cloud.video.v1.StreamService.Update:input_type -> yandex.cloud.video.v1.UpdateStreamRequest
-	11, // 20: yandex.cloud.video.v1.StreamService.Delete:input_type -> yandex.cloud.video.v1.DeleteStreamRequest
-	13, // 21: yandex.cloud.video.v1.StreamService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteStreamsRequest
-	15, // 22: yandex.cloud.video.v1.StreamService.PerformAction:input_type -> yandex.cloud.video.v1.PerformStreamActionRequest
-	21, // 23: yandex.cloud.video.v1.StreamService.Get:output_type -> yandex.cloud.video.v1.Stream
-	2,  // 24: yandex.cloud.video.v1.StreamService.List:output_type -> yandex.cloud.video.v1.ListStreamsResponse
-	4,  // 25: yandex.cloud.video.v1.StreamService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetStreamsResponse
-	25, // 26: yandex.cloud.video.v1.StreamService.Create:output_type -> yandex.cloud.operation.Operation
-	25, // 27: yandex.cloud.video.v1.StreamService.Update:output_type -> yandex.cloud.operation.Operation
-	25, // 28: yandex.cloud.video.v1.StreamService.Delete:output_type -> yandex.cloud.operation.Operation
-	25, // 29: yandex.cloud.video.v1.StreamService.BatchDelete:output_type -> yandex.cloud.operation.Operation
-	25, // 30: yandex.cloud.video.v1.StreamService.PerformAction:output_type -> yandex.cloud.operation.Operation
-	23, // [23:31] is the sub-list for method output_type
-	15, // [15:23] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	20, // 15: yandex.cloud.video.v1.UpdateTranslationOptionsRequest.enable_translation:type_name -> yandex.cloud.video.v1.EnableTranslationOption
+	21, // 16: yandex.cloud.video.v1.UpdateTranslationOptionsRequest.disable_translation:type_name -> yandex.cloud.video.v1.DisableTranslationOption
+	0,  // 17: yandex.cloud.video.v1.StreamService.Get:input_type -> yandex.cloud.video.v1.GetStreamRequest
+	1,  // 18: yandex.cloud.video.v1.StreamService.List:input_type -> yandex.cloud.video.v1.ListStreamsRequest
+	3,  // 19: yandex.cloud.video.v1.StreamService.BatchGet:input_type -> yandex.cloud.video.v1.BatchGetStreamsRequest
+	5,  // 20: yandex.cloud.video.v1.StreamService.Create:input_type -> yandex.cloud.video.v1.CreateStreamRequest
+	9,  // 21: yandex.cloud.video.v1.StreamService.Update:input_type -> yandex.cloud.video.v1.UpdateStreamRequest
+	11, // 22: yandex.cloud.video.v1.StreamService.Delete:input_type -> yandex.cloud.video.v1.DeleteStreamRequest
+	13, // 23: yandex.cloud.video.v1.StreamService.BatchDelete:input_type -> yandex.cloud.video.v1.BatchDeleteStreamsRequest
+	15, // 24: yandex.cloud.video.v1.StreamService.PerformAction:input_type -> yandex.cloud.video.v1.PerformStreamActionRequest
+	19, // 25: yandex.cloud.video.v1.StreamService.UpdateTranslationOptions:input_type -> yandex.cloud.video.v1.UpdateTranslationOptionsRequest
+	24, // 26: yandex.cloud.video.v1.StreamService.Get:output_type -> yandex.cloud.video.v1.Stream
+	2,  // 27: yandex.cloud.video.v1.StreamService.List:output_type -> yandex.cloud.video.v1.ListStreamsResponse
+	4,  // 28: yandex.cloud.video.v1.StreamService.BatchGet:output_type -> yandex.cloud.video.v1.BatchGetStreamsResponse
+	28, // 29: yandex.cloud.video.v1.StreamService.Create:output_type -> yandex.cloud.operation.Operation
+	28, // 30: yandex.cloud.video.v1.StreamService.Update:output_type -> yandex.cloud.operation.Operation
+	28, // 31: yandex.cloud.video.v1.StreamService.Delete:output_type -> yandex.cloud.operation.Operation
+	28, // 32: yandex.cloud.video.v1.StreamService.BatchDelete:output_type -> yandex.cloud.operation.Operation
+	28, // 33: yandex.cloud.video.v1.StreamService.PerformAction:output_type -> yandex.cloud.operation.Operation
+	29, // 34: yandex.cloud.video.v1.StreamService.UpdateTranslationOptions:output_type -> google.protobuf.Empty
+	26, // [26:35] is the sub-list for method output_type
+	17, // [17:26] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_stream_service_proto_init() }
@@ -1446,13 +1633,17 @@ func file_yandex_cloud_video_v1_stream_service_proto_init() {
 		(*PerformStreamActionRequest_Publish)(nil),
 		(*PerformStreamActionRequest_Stop)(nil),
 	}
+	file_yandex_cloud_video_v1_stream_service_proto_msgTypes[19].OneofWrappers = []any{
+		(*UpdateTranslationOptionsRequest_EnableTranslation)(nil),
+		(*UpdateTranslationOptionsRequest_DisableTranslation)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_stream_service_proto_rawDesc), len(file_yandex_cloud_video_v1_stream_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

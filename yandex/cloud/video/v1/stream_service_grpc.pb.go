@@ -12,6 +12,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,14 +21,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StreamService_Get_FullMethodName           = "/yandex.cloud.video.v1.StreamService/Get"
-	StreamService_List_FullMethodName          = "/yandex.cloud.video.v1.StreamService/List"
-	StreamService_BatchGet_FullMethodName      = "/yandex.cloud.video.v1.StreamService/BatchGet"
-	StreamService_Create_FullMethodName        = "/yandex.cloud.video.v1.StreamService/Create"
-	StreamService_Update_FullMethodName        = "/yandex.cloud.video.v1.StreamService/Update"
-	StreamService_Delete_FullMethodName        = "/yandex.cloud.video.v1.StreamService/Delete"
-	StreamService_BatchDelete_FullMethodName   = "/yandex.cloud.video.v1.StreamService/BatchDelete"
-	StreamService_PerformAction_FullMethodName = "/yandex.cloud.video.v1.StreamService/PerformAction"
+	StreamService_Get_FullMethodName                      = "/yandex.cloud.video.v1.StreamService/Get"
+	StreamService_List_FullMethodName                     = "/yandex.cloud.video.v1.StreamService/List"
+	StreamService_BatchGet_FullMethodName                 = "/yandex.cloud.video.v1.StreamService/BatchGet"
+	StreamService_Create_FullMethodName                   = "/yandex.cloud.video.v1.StreamService/Create"
+	StreamService_Update_FullMethodName                   = "/yandex.cloud.video.v1.StreamService/Update"
+	StreamService_Delete_FullMethodName                   = "/yandex.cloud.video.v1.StreamService/Delete"
+	StreamService_BatchDelete_FullMethodName              = "/yandex.cloud.video.v1.StreamService/BatchDelete"
+	StreamService_PerformAction_FullMethodName            = "/yandex.cloud.video.v1.StreamService/PerformAction"
+	StreamService_UpdateTranslationOptions_FullMethodName = "/yandex.cloud.video.v1.StreamService/UpdateTranslationOptions"
 )
 
 // StreamServiceClient is the client API for StreamService service.
@@ -63,6 +65,10 @@ type StreamServiceClient interface {
 	// Performs a specific action on a stream, such as publishing or stopping.
 	// Actions change the stream's state without modifying its content or metadata.
 	PerformAction(ctx context.Context, in *PerformStreamActionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Update translation options for the onair stream.
+	// Only works with streams created on stream lines with enabled neurotranslation.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	UpdateTranslationOptions(ctx context.Context, in *UpdateTranslationOptionsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type streamServiceClient struct {
@@ -153,6 +159,16 @@ func (c *streamServiceClient) PerformAction(ctx context.Context, in *PerformStre
 	return out, nil
 }
 
+func (c *streamServiceClient) UpdateTranslationOptions(ctx context.Context, in *UpdateTranslationOptionsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, StreamService_UpdateTranslationOptions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // StreamServiceServer is the server API for StreamService service.
 // All implementations should embed UnimplementedStreamServiceServer
 // for forward compatibility.
@@ -186,6 +202,10 @@ type StreamServiceServer interface {
 	// Performs a specific action on a stream, such as publishing or stopping.
 	// Actions change the stream's state without modifying its content or metadata.
 	PerformAction(context.Context, *PerformStreamActionRequest) (*operation.Operation, error)
+	// Update translation options for the onair stream.
+	// Only works with streams created on stream lines with enabled neurotranslation.
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	UpdateTranslationOptions(context.Context, *UpdateTranslationOptionsRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedStreamServiceServer should be embedded to have
@@ -218,6 +238,9 @@ func (UnimplementedStreamServiceServer) BatchDelete(context.Context, *BatchDelet
 }
 func (UnimplementedStreamServiceServer) PerformAction(context.Context, *PerformStreamActionRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method PerformAction not implemented")
+}
+func (UnimplementedStreamServiceServer) UpdateTranslationOptions(context.Context, *UpdateTranslationOptionsRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateTranslationOptions not implemented")
 }
 func (UnimplementedStreamServiceServer) testEmbeddedByValue() {}
 
@@ -383,6 +406,24 @@ func _StreamService_PerformAction_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _StreamService_UpdateTranslationOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTranslationOptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(StreamServiceServer).UpdateTranslationOptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: StreamService_UpdateTranslationOptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(StreamServiceServer).UpdateTranslationOptions(ctx, req.(*UpdateTranslationOptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // StreamService_ServiceDesc is the grpc.ServiceDesc for StreamService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -421,6 +462,10 @@ var StreamService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PerformAction",
 			Handler:    _StreamService_PerformAction_Handler,
+		},
+		{
+			MethodName: "UpdateTranslationOptions",
+			Handler:    _StreamService_UpdateTranslationOptions_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

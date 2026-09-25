@@ -176,6 +176,68 @@ func (ContainerAudio_ContainerAudioType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{3, 0}
 }
 
+// The general model emits AUDIO_TEXT_COMBINED or NO_SPEAKABLE_TEXT.
+// The livetts model emits AUDIO_ONLY, TEXT_ONLY, or NO_SPEAKABLE_TEXT.
+type UtteranceSynthesisResponse_ChunkType int32
+
+const (
+	// Chunk type is not specified.
+	UtteranceSynthesisResponse_CHUNK_TYPE_UNSPECIFIED UtteranceSynthesisResponse_ChunkType = 0
+	// Audio without text.
+	UtteranceSynthesisResponse_AUDIO_ONLY UtteranceSynthesisResponse_ChunkType = 1
+	// Text without audio.
+	UtteranceSynthesisResponse_TEXT_ONLY UtteranceSynthesisResponse_ChunkType = 2
+	// Audio with corresponding text.
+	UtteranceSynthesisResponse_AUDIO_TEXT_COMBINED UtteranceSynthesisResponse_ChunkType = 3
+	// Input contained no speakable text.
+	UtteranceSynthesisResponse_NO_SPEAKABLE_TEXT UtteranceSynthesisResponse_ChunkType = 4
+)
+
+// Enum value maps for UtteranceSynthesisResponse_ChunkType.
+var (
+	UtteranceSynthesisResponse_ChunkType_name = map[int32]string{
+		0: "CHUNK_TYPE_UNSPECIFIED",
+		1: "AUDIO_ONLY",
+		2: "TEXT_ONLY",
+		3: "AUDIO_TEXT_COMBINED",
+		4: "NO_SPEAKABLE_TEXT",
+	}
+	UtteranceSynthesisResponse_ChunkType_value = map[string]int32{
+		"CHUNK_TYPE_UNSPECIFIED": 0,
+		"AUDIO_ONLY":             1,
+		"TEXT_ONLY":              2,
+		"AUDIO_TEXT_COMBINED":    3,
+		"NO_SPEAKABLE_TEXT":      4,
+	}
+)
+
+func (x UtteranceSynthesisResponse_ChunkType) Enum() *UtteranceSynthesisResponse_ChunkType {
+	p := new(UtteranceSynthesisResponse_ChunkType)
+	*p = x
+	return p
+}
+
+func (x UtteranceSynthesisResponse_ChunkType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UtteranceSynthesisResponse_ChunkType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[3].Descriptor()
+}
+
+func (UtteranceSynthesisResponse_ChunkType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[3]
+}
+
+func (x UtteranceSynthesisResponse_ChunkType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UtteranceSynthesisResponse_ChunkType.Descriptor instead.
+func (UtteranceSynthesisResponse_ChunkType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{7, 0}
+}
+
 type DurationHint_DurationHintPolicy int32
 
 const (
@@ -215,11 +277,11 @@ func (x DurationHint_DurationHintPolicy) String() string {
 }
 
 func (DurationHint_DurationHintPolicy) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[3].Descriptor()
+	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[4].Descriptor()
 }
 
 func (DurationHint_DurationHintPolicy) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[3]
+	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[4]
 }
 
 func (x DurationHint_DurationHintPolicy) Number() protoreflect.EnumNumber {
@@ -266,11 +328,11 @@ func (x UtteranceSynthesisRequest_LoudnessNormalizationType) String() string {
 }
 
 func (UtteranceSynthesisRequest_LoudnessNormalizationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[4].Descriptor()
+	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[5].Descriptor()
 }
 
 func (UtteranceSynthesisRequest_LoudnessNormalizationType) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[4]
+	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[5]
 }
 
 func (x UtteranceSynthesisRequest_LoudnessNormalizationType) Number() protoreflect.EnumNumber {
@@ -280,6 +342,68 @@ func (x UtteranceSynthesisRequest_LoudnessNormalizationType) Number() protorefle
 // Deprecated: Use UtteranceSynthesisRequest_LoudnessNormalizationType.Descriptor instead.
 func (UtteranceSynthesisRequest_LoudnessNormalizationType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{14, 0}
+}
+
+// The general model emits AUDIO_TEXT_COMBINED or NO_SPEAKABLE_TEXT.
+// The livetts model emits AUDIO_ONLY, TEXT_ONLY, or NO_SPEAKABLE_TEXT.
+type StreamSynthesisResponse_ChunkType int32
+
+const (
+	// Chunk type is not specified.
+	StreamSynthesisResponse_CHUNK_TYPE_UNSPECIFIED StreamSynthesisResponse_ChunkType = 0
+	// Audio without text.
+	StreamSynthesisResponse_AUDIO_ONLY StreamSynthesisResponse_ChunkType = 1
+	// Text without audio.
+	StreamSynthesisResponse_TEXT_ONLY StreamSynthesisResponse_ChunkType = 2
+	// Audio with corresponding text.
+	StreamSynthesisResponse_AUDIO_TEXT_COMBINED StreamSynthesisResponse_ChunkType = 3
+	// Input contained no speakable text.
+	StreamSynthesisResponse_NO_SPEAKABLE_TEXT StreamSynthesisResponse_ChunkType = 4
+)
+
+// Enum value maps for StreamSynthesisResponse_ChunkType.
+var (
+	StreamSynthesisResponse_ChunkType_name = map[int32]string{
+		0: "CHUNK_TYPE_UNSPECIFIED",
+		1: "AUDIO_ONLY",
+		2: "TEXT_ONLY",
+		3: "AUDIO_TEXT_COMBINED",
+		4: "NO_SPEAKABLE_TEXT",
+	}
+	StreamSynthesisResponse_ChunkType_value = map[string]int32{
+		"CHUNK_TYPE_UNSPECIFIED": 0,
+		"AUDIO_ONLY":             1,
+		"TEXT_ONLY":              2,
+		"AUDIO_TEXT_COMBINED":    3,
+		"NO_SPEAKABLE_TEXT":      4,
+	}
+)
+
+func (x StreamSynthesisResponse_ChunkType) Enum() *StreamSynthesisResponse_ChunkType {
+	p := new(StreamSynthesisResponse_ChunkType)
+	*p = x
+	return p
+}
+
+func (x StreamSynthesisResponse_ChunkType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (StreamSynthesisResponse_ChunkType) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[6].Descriptor()
+}
+
+func (StreamSynthesisResponse_ChunkType) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes[6]
+}
+
+func (x StreamSynthesisResponse_ChunkType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use StreamSynthesisResponse_ChunkType.Descriptor instead.
+func (StreamSynthesisResponse_ChunkType) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP(), []int{19, 0}
 }
 
 type AudioContent struct {
@@ -722,6 +846,7 @@ func (x *WordTiming) GetLengthMs() int64 {
 	return 0
 }
 
+// With the `livetts` model, `audio_chunk` and `text_chunk` are never returned together in the same response message.
 type UtteranceSynthesisResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Part of synthesized audio.
@@ -733,7 +858,10 @@ type UtteranceSynthesisResponse struct {
 	// Length of the audio chunk in milliseconds.
 	LengthMs int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
 	// Per-word timings for this audio chunk.
-	WordTimings   []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
+	// The `livetts` model does not return word timings.
+	WordTimings []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
+	// See ChunkType.
+	ChunkType     UtteranceSynthesisResponse_ChunkType `protobuf:"varint,6,opt,name=chunk_type,json=chunkType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisResponse_ChunkType" json:"chunk_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -803,13 +931,22 @@ func (x *UtteranceSynthesisResponse) GetWordTimings() []*WordTiming {
 	return nil
 }
 
+func (x *UtteranceSynthesisResponse) GetChunkType() UtteranceSynthesisResponse_ChunkType {
+	if x != nil {
+		return x.ChunkType
+	}
+	return UtteranceSynthesisResponse_CHUNK_TYPE_UNSPECIFIED
+}
+
 type AudioTemplate struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Audio file.
 	Audio *AudioContent `protobuf:"bytes,1,opt,name=audio,proto3" json:"audio,omitempty"`
 	// Template and description of its variables.
+	// Not supported by the `livetts` model because audio templates are not supported.
 	TextTemplate *TextTemplate `protobuf:"bytes,2,opt,name=text_template,json=textTemplate,proto3" json:"text_template,omitempty"`
 	// Describing variables in audio.
+	// Not supported by the `livetts` model because audio templates are not supported.
 	Variables     []*AudioVariable `protobuf:"bytes,3,rep,name=variables,proto3" json:"variables,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1195,11 +1332,13 @@ type Hints_Voice struct {
 
 type Hints_AudioTemplate struct {
 	// Template for synthesizing.
+	// Not supported by the `livetts` model.
 	AudioTemplate *AudioTemplate `protobuf:"bytes,2,opt,name=audio_template,json=audioTemplate,proto3,oneof"`
 }
 
 type Hints_Speed struct {
 	// Hint to change speed.
+	// Not yet supported by the `livetts` model.
 	Speed float64 `protobuf:"fixed64,3,opt,name=speed,proto3,oneof"`
 }
 
@@ -1217,11 +1356,13 @@ type Hints_Role struct {
 
 type Hints_PitchShift struct {
 	// Hint to increase (or decrease) speaker's pitch, measured in Hz. Valid values are in range [-1000;1000], default value is 0.
+	// Not supported by the `livetts` model.
 	PitchShift float64 `protobuf:"fixed64,6,opt,name=pitch_shift,json=pitchShift,proto3,oneof"`
 }
 
 type Hints_Duration struct {
 	// Hint to limit both minimum and maximum audio duration.
+	// Not supported by the `livetts` model.
 	Duration *DurationHint `protobuf:"bytes,7,opt,name=duration,proto3,oneof"`
 }
 
@@ -1257,6 +1398,7 @@ type UtteranceSynthesisRequest struct {
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,5,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
 	// Specifies type of loudness normalization.
 	// Optional. Default: `LUFS`.
+	// The `MAX_PEAK` value is not supported by the `livetts` model.
 	LoudnessNormalizationType UtteranceSynthesisRequest_LoudnessNormalizationType `protobuf:"varint,6,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.UtteranceSynthesisRequest_LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 	// Optional. Automatically split long text to several utterances and bill accordingly. Some degradation in service quality is possible.
 	UnsafeMode    bool `protobuf:"varint,7,opt,name=unsafe_mode,json=unsafeMode,proto3" json:"unsafe_mode,omitempty"`
@@ -1365,6 +1507,7 @@ type UtteranceSynthesisRequest_Text struct {
 
 type UtteranceSynthesisRequest_TextTemplate struct {
 	// Text template instance, e.g. `{"Hello, {username}" with username="Alice"}`.
+	// Not supported by the `livetts` model.
 	TextTemplate *TextTemplate `protobuf:"bytes,3,opt,name=text_template,json=textTemplate,proto3,oneof"`
 }
 
@@ -1381,16 +1524,19 @@ type SynthesisOptions struct {
 	// The role or speaking style. Can be used to specify pronunciation character for the speaker.
 	Role string `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
 	// Speed multiplier (default: 1.0).
+	// Not yet supported by the `livetts` model.
 	Speed float64 `protobuf:"fixed64,4,opt,name=speed,proto3" json:"speed,omitempty"`
 	// Volume adjustment:
 	// * For `MAX_PEAK`: range is (0, 1], default 0.7.
 	// * For `LUFS`: range is [-145, 0), default -19.
 	Volume float64 `protobuf:"fixed64,5,opt,name=volume,proto3" json:"volume,omitempty"`
 	// Pitch adjustment, in Hz, range [-1000, 1000], default 0.
+	// Not supported by the `livetts` model.
 	PitchShift float64 `protobuf:"fixed64,6,opt,name=pitch_shift,json=pitchShift,proto3" json:"pitch_shift,omitempty"`
 	// Specifies output audio format. Default: 22050Hz, linear 16-bit signed little-endian PCM, with WAV header.
 	OutputAudioSpec *AudioFormatOptions `protobuf:"bytes,7,opt,name=output_audio_spec,json=outputAudioSpec,proto3" json:"output_audio_spec,omitempty"`
 	// Loudness normalization type for output (default: `LUFS`).
+	// The `MAX_PEAK` value is not supported by the `livetts` model.
 	LoudnessNormalizationType LoudnessNormalizationType `protobuf:"varint,8,opt,name=loudness_normalization_type,json=loudnessNormalizationType,proto3,enum=speechkit.tts.v3.LoudnessNormalizationType" json:"loudness_normalization_type,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
@@ -1667,6 +1813,7 @@ func (*StreamSynthesisRequest_SynthesisInput) isStreamSynthesisRequest_Event() {
 
 func (*StreamSynthesisRequest_ForceSynthesis) isStreamSynthesisRequest_Event() {}
 
+// With the `livetts` model, `audio_chunk` and `text_chunk` are never returned together in the same response message.
 type StreamSynthesisResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Part of synthesized audio.
@@ -1678,7 +1825,10 @@ type StreamSynthesisResponse struct {
 	// Length of the audio chunk in milliseconds.
 	LengthMs int64 `protobuf:"varint,4,opt,name=length_ms,json=lengthMs,proto3" json:"length_ms,omitempty"`
 	// Per-word timings for this audio chunk (milliseconds from stream start).
-	WordTimings   []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
+	// The `livetts` model does not return word timings.
+	WordTimings []*WordTiming `protobuf:"bytes,5,rep,name=word_timings,json=wordTimings,proto3" json:"word_timings,omitempty"`
+	// See ChunkType.
+	ChunkType     StreamSynthesisResponse_ChunkType `protobuf:"varint,6,opt,name=chunk_type,json=chunkType,proto3,enum=speechkit.tts.v3.StreamSynthesisResponse_ChunkType" json:"chunk_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1748,6 +1898,13 @@ func (x *StreamSynthesisResponse) GetWordTimings() []*WordTiming {
 	return nil
 }
 
+func (x *StreamSynthesisResponse) GetChunkType() StreamSynthesisResponse_ChunkType {
+	if x != nil {
+		return x.ChunkType
+	}
+	return StreamSynthesisResponse_CHUNK_TYPE_UNSPECIFIED
+}
+
 var File_yandex_cloud_ai_tts_v3_tts_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
@@ -1786,7 +1943,7 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"WordTiming\x12\x12\n" +
 	"\x04word\x18\x01 \x01(\tR\x04word\x12\x19\n" +
 	"\bstart_ms\x18\x02 \x01(\x03R\astartMs\x12\x1b\n" +
-	"\tlength_ms\x18\x03 \x01(\x03R\blengthMs\"\x90\x02\n" +
+	"\tlength_ms\x18\x03 \x01(\x03R\blengthMs\"\xdf\x03\n" +
 	"\x1aUtteranceSynthesisResponse\x12=\n" +
 	"\vaudio_chunk\x18\x01 \x01(\v2\x1c.speechkit.tts.v3.AudioChunkR\n" +
 	"audioChunk\x12:\n" +
@@ -1794,7 +1951,16 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"text_chunk\x18\x02 \x01(\v2\x1b.speechkit.tts.v3.TextChunkR\ttextChunk\x12\x19\n" +
 	"\bstart_ms\x18\x03 \x01(\x03R\astartMs\x12\x1b\n" +
 	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs\x12?\n" +
-	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings\"\xc9\x01\n" +
+	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings\x12U\n" +
+	"\n" +
+	"chunk_type\x18\x06 \x01(\x0e26.speechkit.tts.v3.UtteranceSynthesisResponse.ChunkTypeR\tchunkType\"v\n" +
+	"\tChunkType\x12\x1a\n" +
+	"\x16CHUNK_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\n" +
+	"AUDIO_ONLY\x10\x01\x12\r\n" +
+	"\tTEXT_ONLY\x10\x02\x12\x17\n" +
+	"\x13AUDIO_TEXT_COMBINED\x10\x03\x12\x15\n" +
+	"\x11NO_SPEAKABLE_TEXT\x10\x04\"\xc9\x01\n" +
 	"\rAudioTemplate\x124\n" +
 	"\x05audio\x18\x01 \x01(\v2\x1e.speechkit.tts.v3.AudioContentR\x05audio\x12C\n" +
 	"\rtext_template\x18\x02 \x01(\v2\x1e.speechkit.tts.v3.TextTemplateR\ftextTemplate\x12=\n" +
@@ -1857,7 +2023,7 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"\aoptions\x18\x01 \x01(\v2\".speechkit.tts.v3.SynthesisOptionsH\x00R\aoptions\x12K\n" +
 	"\x0fsynthesis_input\x18\x02 \x01(\v2 .speechkit.tts.v3.SynthesisInputH\x00R\x0esynthesisInput\x12P\n" +
 	"\x0fforce_synthesis\x18\x03 \x01(\v2%.speechkit.tts.v3.ForceSynthesisEventH\x00R\x0eforceSynthesisB\a\n" +
-	"\x05Event\"\x8d\x02\n" +
+	"\x05Event\"\xd9\x03\n" +
 	"\x17StreamSynthesisResponse\x12=\n" +
 	"\vaudio_chunk\x18\x01 \x01(\v2\x1c.speechkit.tts.v3.AudioChunkR\n" +
 	"audioChunk\x12:\n" +
@@ -1865,7 +2031,16 @@ const file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc = "" +
 	"text_chunk\x18\x02 \x01(\v2\x1b.speechkit.tts.v3.TextChunkR\ttextChunk\x12\x19\n" +
 	"\bstart_ms\x18\x03 \x01(\x03R\astartMs\x12\x1b\n" +
 	"\tlength_ms\x18\x04 \x01(\x03R\blengthMs\x12?\n" +
-	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings*`\n" +
+	"\fword_timings\x18\x05 \x03(\v2\x1c.speechkit.tts.v3.WordTimingR\vwordTimings\x12R\n" +
+	"\n" +
+	"chunk_type\x18\x06 \x01(\x0e23.speechkit.tts.v3.StreamSynthesisResponse.ChunkTypeR\tchunkType\"v\n" +
+	"\tChunkType\x12\x1a\n" +
+	"\x16CHUNK_TYPE_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\n" +
+	"AUDIO_ONLY\x10\x01\x12\r\n" +
+	"\tTEXT_ONLY\x10\x02\x12\x17\n" +
+	"\x13AUDIO_TEXT_COMBINED\x10\x03\x12\x15\n" +
+	"\x11NO_SPEAKABLE_TEXT\x10\x04*`\n" +
 	"\x19LoudnessNormalizationType\x12+\n" +
 	"'LOUDNESS_NORMALIZATION_TYPE_UNSPECIFIED\x10\x00\x12\f\n" +
 	"\bMAX_PEAK\x10\x01\x12\b\n" +
@@ -1884,68 +2059,72 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_ai_tts_v3_tts_proto_rawDescData
 }
 
-var file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_yandex_cloud_ai_tts_v3_tts_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
 var file_yandex_cloud_ai_tts_v3_tts_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_yandex_cloud_ai_tts_v3_tts_proto_goTypes = []any{
 	(LoudnessNormalizationType)(0),                           // 0: speechkit.tts.v3.LoudnessNormalizationType
 	(RawAudio_AudioEncoding)(0),                              // 1: speechkit.tts.v3.RawAudio.AudioEncoding
 	(ContainerAudio_ContainerAudioType)(0),                   // 2: speechkit.tts.v3.ContainerAudio.ContainerAudioType
-	(DurationHint_DurationHintPolicy)(0),                     // 3: speechkit.tts.v3.DurationHint.DurationHintPolicy
-	(UtteranceSynthesisRequest_LoudnessNormalizationType)(0), // 4: speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
-	(*AudioContent)(nil),                                     // 5: speechkit.tts.v3.AudioContent
-	(*AudioFormatOptions)(nil),                               // 6: speechkit.tts.v3.AudioFormatOptions
-	(*RawAudio)(nil),                                         // 7: speechkit.tts.v3.RawAudio
-	(*ContainerAudio)(nil),                                   // 8: speechkit.tts.v3.ContainerAudio
-	(*TextVariable)(nil),                                     // 9: speechkit.tts.v3.TextVariable
-	(*AudioVariable)(nil),                                    // 10: speechkit.tts.v3.AudioVariable
-	(*WordTiming)(nil),                                       // 11: speechkit.tts.v3.WordTiming
-	(*UtteranceSynthesisResponse)(nil),                       // 12: speechkit.tts.v3.UtteranceSynthesisResponse
-	(*AudioTemplate)(nil),                                    // 13: speechkit.tts.v3.AudioTemplate
-	(*AudioChunk)(nil),                                       // 14: speechkit.tts.v3.AudioChunk
-	(*TextChunk)(nil),                                        // 15: speechkit.tts.v3.TextChunk
-	(*TextTemplate)(nil),                                     // 16: speechkit.tts.v3.TextTemplate
-	(*DurationHint)(nil),                                     // 17: speechkit.tts.v3.DurationHint
-	(*Hints)(nil),                                            // 18: speechkit.tts.v3.Hints
-	(*UtteranceSynthesisRequest)(nil),                        // 19: speechkit.tts.v3.UtteranceSynthesisRequest
-	(*SynthesisOptions)(nil),                                 // 20: speechkit.tts.v3.SynthesisOptions
-	(*SynthesisInput)(nil),                                   // 21: speechkit.tts.v3.SynthesisInput
-	(*ForceSynthesisEvent)(nil),                              // 22: speechkit.tts.v3.ForceSynthesisEvent
-	(*StreamSynthesisRequest)(nil),                           // 23: speechkit.tts.v3.StreamSynthesisRequest
-	(*StreamSynthesisResponse)(nil),                          // 24: speechkit.tts.v3.StreamSynthesisResponse
+	(UtteranceSynthesisResponse_ChunkType)(0),                // 3: speechkit.tts.v3.UtteranceSynthesisResponse.ChunkType
+	(DurationHint_DurationHintPolicy)(0),                     // 4: speechkit.tts.v3.DurationHint.DurationHintPolicy
+	(UtteranceSynthesisRequest_LoudnessNormalizationType)(0), // 5: speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
+	(StreamSynthesisResponse_ChunkType)(0),                   // 6: speechkit.tts.v3.StreamSynthesisResponse.ChunkType
+	(*AudioContent)(nil),                                     // 7: speechkit.tts.v3.AudioContent
+	(*AudioFormatOptions)(nil),                               // 8: speechkit.tts.v3.AudioFormatOptions
+	(*RawAudio)(nil),                                         // 9: speechkit.tts.v3.RawAudio
+	(*ContainerAudio)(nil),                                   // 10: speechkit.tts.v3.ContainerAudio
+	(*TextVariable)(nil),                                     // 11: speechkit.tts.v3.TextVariable
+	(*AudioVariable)(nil),                                    // 12: speechkit.tts.v3.AudioVariable
+	(*WordTiming)(nil),                                       // 13: speechkit.tts.v3.WordTiming
+	(*UtteranceSynthesisResponse)(nil),                       // 14: speechkit.tts.v3.UtteranceSynthesisResponse
+	(*AudioTemplate)(nil),                                    // 15: speechkit.tts.v3.AudioTemplate
+	(*AudioChunk)(nil),                                       // 16: speechkit.tts.v3.AudioChunk
+	(*TextChunk)(nil),                                        // 17: speechkit.tts.v3.TextChunk
+	(*TextTemplate)(nil),                                     // 18: speechkit.tts.v3.TextTemplate
+	(*DurationHint)(nil),                                     // 19: speechkit.tts.v3.DurationHint
+	(*Hints)(nil),                                            // 20: speechkit.tts.v3.Hints
+	(*UtteranceSynthesisRequest)(nil),                        // 21: speechkit.tts.v3.UtteranceSynthesisRequest
+	(*SynthesisOptions)(nil),                                 // 22: speechkit.tts.v3.SynthesisOptions
+	(*SynthesisInput)(nil),                                   // 23: speechkit.tts.v3.SynthesisInput
+	(*ForceSynthesisEvent)(nil),                              // 24: speechkit.tts.v3.ForceSynthesisEvent
+	(*StreamSynthesisRequest)(nil),                           // 25: speechkit.tts.v3.StreamSynthesisRequest
+	(*StreamSynthesisResponse)(nil),                          // 26: speechkit.tts.v3.StreamSynthesisResponse
 }
 var file_yandex_cloud_ai_tts_v3_tts_proto_depIdxs = []int32{
-	6,  // 0: speechkit.tts.v3.AudioContent.audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	7,  // 1: speechkit.tts.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.tts.v3.RawAudio
-	8,  // 2: speechkit.tts.v3.AudioFormatOptions.container_audio:type_name -> speechkit.tts.v3.ContainerAudio
+	8,  // 0: speechkit.tts.v3.AudioContent.audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	9,  // 1: speechkit.tts.v3.AudioFormatOptions.raw_audio:type_name -> speechkit.tts.v3.RawAudio
+	10, // 2: speechkit.tts.v3.AudioFormatOptions.container_audio:type_name -> speechkit.tts.v3.ContainerAudio
 	1,  // 3: speechkit.tts.v3.RawAudio.audio_encoding:type_name -> speechkit.tts.v3.RawAudio.AudioEncoding
 	2,  // 4: speechkit.tts.v3.ContainerAudio.container_audio_type:type_name -> speechkit.tts.v3.ContainerAudio.ContainerAudioType
-	14, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
-	15, // 6: speechkit.tts.v3.UtteranceSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
-	11, // 7: speechkit.tts.v3.UtteranceSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
-	5,  // 8: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
-	16, // 9: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	10, // 10: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
-	9,  // 11: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
-	3,  // 12: speechkit.tts.v3.DurationHint.policy:type_name -> speechkit.tts.v3.DurationHint.DurationHintPolicy
-	13, // 13: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
-	17, // 14: speechkit.tts.v3.Hints.duration:type_name -> speechkit.tts.v3.DurationHint
-	16, // 15: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
-	18, // 16: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
-	6,  // 17: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	4,  // 18: speechkit.tts.v3.UtteranceSynthesisRequest.loudness_normalization_type:type_name -> speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
-	6,  // 19: speechkit.tts.v3.SynthesisOptions.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
-	0,  // 20: speechkit.tts.v3.SynthesisOptions.loudness_normalization_type:type_name -> speechkit.tts.v3.LoudnessNormalizationType
-	20, // 21: speechkit.tts.v3.StreamSynthesisRequest.options:type_name -> speechkit.tts.v3.SynthesisOptions
-	21, // 22: speechkit.tts.v3.StreamSynthesisRequest.synthesis_input:type_name -> speechkit.tts.v3.SynthesisInput
-	22, // 23: speechkit.tts.v3.StreamSynthesisRequest.force_synthesis:type_name -> speechkit.tts.v3.ForceSynthesisEvent
-	14, // 24: speechkit.tts.v3.StreamSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
-	15, // 25: speechkit.tts.v3.StreamSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
-	11, // 26: speechkit.tts.v3.StreamSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	16, // 5: speechkit.tts.v3.UtteranceSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
+	17, // 6: speechkit.tts.v3.UtteranceSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
+	13, // 7: speechkit.tts.v3.UtteranceSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
+	3,  // 8: speechkit.tts.v3.UtteranceSynthesisResponse.chunk_type:type_name -> speechkit.tts.v3.UtteranceSynthesisResponse.ChunkType
+	7,  // 9: speechkit.tts.v3.AudioTemplate.audio:type_name -> speechkit.tts.v3.AudioContent
+	18, // 10: speechkit.tts.v3.AudioTemplate.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	12, // 11: speechkit.tts.v3.AudioTemplate.variables:type_name -> speechkit.tts.v3.AudioVariable
+	11, // 12: speechkit.tts.v3.TextTemplate.variables:type_name -> speechkit.tts.v3.TextVariable
+	4,  // 13: speechkit.tts.v3.DurationHint.policy:type_name -> speechkit.tts.v3.DurationHint.DurationHintPolicy
+	15, // 14: speechkit.tts.v3.Hints.audio_template:type_name -> speechkit.tts.v3.AudioTemplate
+	19, // 15: speechkit.tts.v3.Hints.duration:type_name -> speechkit.tts.v3.DurationHint
+	18, // 16: speechkit.tts.v3.UtteranceSynthesisRequest.text_template:type_name -> speechkit.tts.v3.TextTemplate
+	20, // 17: speechkit.tts.v3.UtteranceSynthesisRequest.hints:type_name -> speechkit.tts.v3.Hints
+	8,  // 18: speechkit.tts.v3.UtteranceSynthesisRequest.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	5,  // 19: speechkit.tts.v3.UtteranceSynthesisRequest.loudness_normalization_type:type_name -> speechkit.tts.v3.UtteranceSynthesisRequest.LoudnessNormalizationType
+	8,  // 20: speechkit.tts.v3.SynthesisOptions.output_audio_spec:type_name -> speechkit.tts.v3.AudioFormatOptions
+	0,  // 21: speechkit.tts.v3.SynthesisOptions.loudness_normalization_type:type_name -> speechkit.tts.v3.LoudnessNormalizationType
+	22, // 22: speechkit.tts.v3.StreamSynthesisRequest.options:type_name -> speechkit.tts.v3.SynthesisOptions
+	23, // 23: speechkit.tts.v3.StreamSynthesisRequest.synthesis_input:type_name -> speechkit.tts.v3.SynthesisInput
+	24, // 24: speechkit.tts.v3.StreamSynthesisRequest.force_synthesis:type_name -> speechkit.tts.v3.ForceSynthesisEvent
+	16, // 25: speechkit.tts.v3.StreamSynthesisResponse.audio_chunk:type_name -> speechkit.tts.v3.AudioChunk
+	17, // 26: speechkit.tts.v3.StreamSynthesisResponse.text_chunk:type_name -> speechkit.tts.v3.TextChunk
+	13, // 27: speechkit.tts.v3.StreamSynthesisResponse.word_timings:type_name -> speechkit.tts.v3.WordTiming
+	6,  // 28: speechkit.tts.v3.StreamSynthesisResponse.chunk_type:type_name -> speechkit.tts.v3.StreamSynthesisResponse.ChunkType
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_ai_tts_v3_tts_proto_init() }
@@ -1983,7 +2162,7 @@ func file_yandex_cloud_ai_tts_v3_tts_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc), len(file_yandex_cloud_ai_tts_v3_tts_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      7,
 			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,

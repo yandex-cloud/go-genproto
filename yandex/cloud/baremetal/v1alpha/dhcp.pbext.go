@@ -9,3 +9,33 @@ func (m *DhcpOptions) SetStartIp(v string) {
 func (m *DhcpOptions) SetEndIp(v string) {
 	m.EndIp = v
 }
+
+func (m *DhcpOptions) SetDnsOptions(v *DnsOptions) {
+	m.DnsOptions = v
+}
+
+func (m *DnsOptions) SetServers(v []*DnsServer) {
+	m.Servers = v
+}
+
+func (m *DnsOptions) SetDomainName(v string) {
+	m.DomainName = v
+}
+
+type DnsServer_Server = isDnsServer_Server
+
+func (m *DnsServer) SetServer(v DnsServer_Server) {
+	m.Server = v
+}
+
+func (m *DnsServer) SetIpAddress(v string) {
+	m.Server = &DnsServer_IpAddress{
+		IpAddress: v,
+	}
+}
+
+func (m *DnsServer) SetDnsInboundEndpointId(v string) {
+	m.Server = &DnsServer_DnsInboundEndpointId{
+		DnsInboundEndpointId: v,
+	}
+}

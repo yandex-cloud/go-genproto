@@ -407,7 +407,9 @@ type DhcpOptionsSpec struct {
 	StartIp string `protobuf:"bytes,1,opt,name=start_ip,json=startIp,proto3" json:"start_ip,omitempty"`
 	// End IP address of the DHCP range (inclusive).
 	// The absence or null value indicates that calculation will be performed based on CIDR.
-	EndIp         string `protobuf:"bytes,2,opt,name=end_ip,json=endIp,proto3" json:"end_ip,omitempty"`
+	EndIp string `protobuf:"bytes,2,opt,name=end_ip,json=endIp,proto3" json:"end_ip,omitempty"`
+	// DNS configuration handed out to servers via DHCP.
+	DnsOptions    *DnsOptions `protobuf:"bytes,3,opt,name=dns_options,json=dnsOptions,proto3" json:"dns_options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -454,6 +456,13 @@ func (x *DhcpOptionsSpec) GetEndIp() string {
 		return x.EndIp
 	}
 	return ""
+}
+
+func (x *DhcpOptionsSpec) GetDnsOptions() *DnsOptions {
+	if x != nil {
+		return x.DnsOptions
+	}
+	return nil
 }
 
 type CreatePrivateSubnetMetadata struct {
@@ -859,7 +868,7 @@ var File_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto protoreflec
 
 const file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_rawDesc = "" +
 	"\n" +
-	";yandex/cloud/baremetal/v1alpha/private_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a3yandex/cloud/baremetal/v1alpha/private_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"e\n" +
+	";yandex/cloud/baremetal/v1alpha/private_subnet_service.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/baremetal/v1alpha/dhcp.proto\x1a3yandex/cloud/baremetal/v1alpha/private_subnet.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"e\n" +
 	"\x17GetPrivateSubnetRequest\x12D\n" +
 	"\x11private_subnet_id\x18\x02 \x01(\tB\x18\xf2\xc71\x0e[a-z][a-z0-9]*\x8a\xc81\x0220R\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xd6\x01\n" +
 	"\x18ListPrivateSubnetRequest\x129\n" +
@@ -889,10 +898,12 @@ const file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_rawDesc =
 	"\x04cidr\x18\x02 \x01(\tR\x04cidr\x12R\n" +
 	"\fdhcp_options\x18\x03 \x01(\v2/.yandex.cloud.baremetal.v1alpha.DhcpOptionsSpecR\vdhcpOptions\x12\x1d\n" +
 	"\n" +
-	"gateway_ip\x18\x04 \x01(\tR\tgatewayIp\"C\n" +
+	"gateway_ip\x18\x04 \x01(\tR\tgatewayIp\"\x90\x01\n" +
 	"\x0fDhcpOptionsSpec\x12\x19\n" +
 	"\bstart_ip\x18\x01 \x01(\tR\astartIp\x12\x15\n" +
-	"\x06end_ip\x18\x02 \x01(\tR\x05endIp\"O\n" +
+	"\x06end_ip\x18\x02 \x01(\tR\x05endIp\x12K\n" +
+	"\vdns_options\x18\x03 \x01(\v2*.yandex.cloud.baremetal.v1alpha.DnsOptionsR\n" +
+	"dnsOptions\"O\n" +
 	"\x1bCreatePrivateSubnetMetadata\x12*\n" +
 	"\x11private_subnet_id\x18\x02 \x01(\tR\x0fprivateSubnetIdJ\x04\b\x01\x10\x02\"\xc4\x04\n" +
 	"\x1aUpdatePrivateSubnetRequest\x12D\n" +
@@ -966,35 +977,37 @@ var file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_goTypes = [
 	nil,                           // 13: yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest.LabelsEntry
 	nil,                           // 14: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.LabelsEntry
 	(*PrivateSubnet)(nil),         // 15: yandex.cloud.baremetal.v1alpha.PrivateSubnet
-	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
-	(*operation.Operation)(nil),   // 17: yandex.cloud.operation.Operation
+	(*DnsOptions)(nil),            // 16: yandex.cloud.baremetal.v1alpha.DnsOptions
+	(*fieldmaskpb.FieldMask)(nil), // 17: google.protobuf.FieldMask
+	(*operation.Operation)(nil),   // 18: yandex.cloud.operation.Operation
 }
 var file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_depIdxs = []int32{
 	15, // 0: yandex.cloud.baremetal.v1alpha.ListPrivateSubnetResponse.private_subnets:type_name -> yandex.cloud.baremetal.v1alpha.PrivateSubnet
 	4,  // 1: yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest.vrf_options_spec:type_name -> yandex.cloud.baremetal.v1alpha.VrfOptionsSpec
 	13, // 2: yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest.LabelsEntry
 	5,  // 3: yandex.cloud.baremetal.v1alpha.VrfOptionsSpec.dhcp_options:type_name -> yandex.cloud.baremetal.v1alpha.DhcpOptionsSpec
-	16, // 4: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
-	4,  // 5: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.vrf_options_spec:type_name -> yandex.cloud.baremetal.v1alpha.VrfOptionsSpec
-	14, // 6: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.LabelsEntry
-	17, // 7: yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
-	0,  // 8: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetPrivateSubnetRequest
-	1,  // 9: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetRequest
-	3,  // 10: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest
-	7,  // 11: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest
-	9,  // 12: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeletePrivateSubnetRequest
-	11, // 13: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsRequest
-	15, // 14: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Get:output_type -> yandex.cloud.baremetal.v1alpha.PrivateSubnet
-	2,  // 15: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetResponse
-	17, // 16: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Create:output_type -> yandex.cloud.operation.Operation
-	17, // 17: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Update:output_type -> yandex.cloud.operation.Operation
-	17, // 18: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Delete:output_type -> yandex.cloud.operation.Operation
-	12, // 19: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsResponse
-	14, // [14:20] is the sub-list for method output_type
-	8,  // [8:14] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	16, // 4: yandex.cloud.baremetal.v1alpha.DhcpOptionsSpec.dns_options:type_name -> yandex.cloud.baremetal.v1alpha.DnsOptions
+	17, // 5: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.update_mask:type_name -> google.protobuf.FieldMask
+	4,  // 6: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.vrf_options_spec:type_name -> yandex.cloud.baremetal.v1alpha.VrfOptionsSpec
+	14, // 7: yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.labels:type_name -> yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest.LabelsEntry
+	18, // 8: yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsResponse.operations:type_name -> yandex.cloud.operation.Operation
+	0,  // 9: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Get:input_type -> yandex.cloud.baremetal.v1alpha.GetPrivateSubnetRequest
+	1,  // 10: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.List:input_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetRequest
+	3,  // 11: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Create:input_type -> yandex.cloud.baremetal.v1alpha.CreatePrivateSubnetRequest
+	7,  // 12: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Update:input_type -> yandex.cloud.baremetal.v1alpha.UpdatePrivateSubnetRequest
+	9,  // 13: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Delete:input_type -> yandex.cloud.baremetal.v1alpha.DeletePrivateSubnetRequest
+	11, // 14: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.ListOperations:input_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsRequest
+	15, // 15: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Get:output_type -> yandex.cloud.baremetal.v1alpha.PrivateSubnet
+	2,  // 16: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.List:output_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetResponse
+	18, // 17: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Create:output_type -> yandex.cloud.operation.Operation
+	18, // 18: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Update:output_type -> yandex.cloud.operation.Operation
+	18, // 19: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.Delete:output_type -> yandex.cloud.operation.Operation
+	12, // 20: yandex.cloud.baremetal.v1alpha.PrivateSubnetService.ListOperations:output_type -> yandex.cloud.baremetal.v1alpha.ListPrivateSubnetOperationsResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_init() }
@@ -1002,6 +1015,7 @@ func file_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto_init() {
 	if File_yandex_cloud_baremetal_v1alpha_private_subnet_service_proto != nil {
 		return
 	}
+	file_yandex_cloud_baremetal_v1alpha_dhcp_proto_init()
 	file_yandex_cloud_baremetal_v1alpha_private_subnet_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

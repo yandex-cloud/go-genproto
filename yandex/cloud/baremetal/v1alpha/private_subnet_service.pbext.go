@@ -87,6 +87,10 @@ func (m *DhcpOptionsSpec) SetEndIp(v string) {
 	m.EndIp = v
 }
 
+func (m *DhcpOptionsSpec) SetDnsOptions(v *DnsOptions) {
+	m.DnsOptions = v
+}
+
 func (m *CreatePrivateSubnetMetadata) SetPrivateSubnetId(v string) {
 	m.PrivateSubnetId = v
 }

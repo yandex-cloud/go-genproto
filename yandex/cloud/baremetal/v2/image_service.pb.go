@@ -374,11 +374,192 @@ func (x *ResolveImagesResponse) GetNextPageToken() string {
 	return ""
 }
 
+type ListCompatibleImagesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Folder of the server being configured. Used to check configuration access.
+	FolderId string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	// Exactly one configuration must be provided.
+	//
+	// Types that are valid to be assigned to Configuration:
+	//
+	//	*ListCompatibleImagesRequest_StockConfigurationId
+	//	*ListCompatibleImagesRequest_CustomConfiguration
+	Configuration isListCompatibleImagesRequest_Configuration `protobuf_oneof:"configuration"`
+	// Folder containing images. Defaults to "baremetal-standard-images".
+	ImageFolderId string `protobuf:"bytes,4,opt,name=image_folder_id,json=imageFolderId,proto3" json:"image_folder_id,omitempty"`
+	// Maximum number of compatible images to return. Defaults to 20; maximum 1000.
+	PageSize int64 `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	// Token from the previous response. Keep the configuration and folders unchanged.
+	PageToken     string `protobuf:"bytes,6,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCompatibleImagesRequest) Reset() {
+	*x = ListCompatibleImagesRequest{}
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCompatibleImagesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCompatibleImagesRequest) ProtoMessage() {}
+
+func (x *ListCompatibleImagesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCompatibleImagesRequest.ProtoReflect.Descriptor instead.
+func (*ListCompatibleImagesRequest) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ListCompatibleImagesRequest) GetFolderId() string {
+	if x != nil {
+		return x.FolderId
+	}
+	return ""
+}
+
+func (x *ListCompatibleImagesRequest) GetConfiguration() isListCompatibleImagesRequest_Configuration {
+	if x != nil {
+		return x.Configuration
+	}
+	return nil
+}
+
+func (x *ListCompatibleImagesRequest) GetStockConfigurationId() string {
+	if x != nil {
+		if x, ok := x.Configuration.(*ListCompatibleImagesRequest_StockConfigurationId); ok {
+			return x.StockConfigurationId
+		}
+	}
+	return ""
+}
+
+func (x *ListCompatibleImagesRequest) GetCustomConfiguration() *UserConfiguration {
+	if x != nil {
+		if x, ok := x.Configuration.(*ListCompatibleImagesRequest_CustomConfiguration); ok {
+			return x.CustomConfiguration
+		}
+	}
+	return nil
+}
+
+func (x *ListCompatibleImagesRequest) GetImageFolderId() string {
+	if x != nil {
+		return x.ImageFolderId
+	}
+	return ""
+}
+
+func (x *ListCompatibleImagesRequest) GetPageSize() int64 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListCompatibleImagesRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type isListCompatibleImagesRequest_Configuration interface {
+	isListCompatibleImagesRequest_Configuration()
+}
+
+type ListCompatibleImagesRequest_StockConfigurationId struct {
+	// ID of an existing stock configuration.
+	StockConfigurationId string `protobuf:"bytes,2,opt,name=stock_configuration_id,json=stockConfigurationId,proto3,oneof"`
+}
+
+type ListCompatibleImagesRequest_CustomConfiguration struct {
+	// Complete custom configuration, in the same format as for server creation.
+	// The configuration does not need to be saved first.
+	CustomConfiguration *UserConfiguration `protobuf:"bytes,3,opt,name=custom_configuration,json=customConfiguration,proto3,oneof"`
+}
+
+func (*ListCompatibleImagesRequest_StockConfigurationId) isListCompatibleImagesRequest_Configuration() {
+}
+
+func (*ListCompatibleImagesRequest_CustomConfiguration) isListCompatibleImagesRequest_Configuration() {
+}
+
+type ListCompatibleImagesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Available compatible images ordered by image ID ascending.
+	// Empty when installation is forbidden for the configuration or no image matches.
+	// Compatibility is checked again when the server is created or reinstalled.
+	Images []*Image `protobuf:"bytes,1,rep,name=images,proto3" json:"images,omitempty"`
+	// Token for the next page; empty when there are no more compatible images.
+	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListCompatibleImagesResponse) Reset() {
+	*x = ListCompatibleImagesResponse{}
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListCompatibleImagesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListCompatibleImagesResponse) ProtoMessage() {}
+
+func (x *ListCompatibleImagesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListCompatibleImagesResponse.ProtoReflect.Descriptor instead.
+func (*ListCompatibleImagesResponse) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListCompatibleImagesResponse) GetImages() []*Image {
+	if x != nil {
+		return x.Images
+	}
+	return nil
+}
+
+func (x *ListCompatibleImagesResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
+}
+
 var File_yandex_cloud_baremetal_v2_image_service_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc = "" +
 	"\n" +
-	"-yandex/cloud/baremetal/v2/image_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a%yandex/cloud/baremetal/v2/image.proto\x1a\x1dyandex/cloud/validation.proto\"[\n" +
+	"-yandex/cloud/baremetal/v2/image_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a%yandex/cloud/baremetal/v2/image.proto\x1a2yandex/cloud/baremetal/v2/user_configuration.proto\x1a\x1dyandex/cloud/validation.proto\"[\n" +
 	"\x0fGetImageRequest\x12 \n" +
 	"\tfolder_id\x18\x01 \x01(\tB\x03\xe0A\x02R\bfolderId\x12&\n" +
 	"\bimage_id\x18\x02 \x01(\tB\v\xe0A\x02\x8a\xc81\x04<=20R\aimageId\"\xb8\x01\n" +
@@ -400,11 +581,25 @@ const file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc = "" +
 	"\border_by\x18\x04 \x01(\tR\aorderBy\"y\n" +
 	"\x15ResolveImagesResponse\x128\n" +
 	"\x06images\x18\x01 \x03(\v2 .yandex.cloud.baremetal.v2.ImageR\x06images\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\x84\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xdf\x02\n" +
+	"\x1bListCompatibleImagesRequest\x12$\n" +
+	"\tfolder_id\x18\x01 \x01(\tB\a\xe0A\x02\xe8\xc71\x01R\bfolderId\x126\n" +
+	"\x16stock_configuration_id\x18\x02 \x01(\tH\x00R\x14stockConfigurationId\x12a\n" +
+	"\x14custom_configuration\x18\x03 \x01(\v2,.yandex.cloud.baremetal.v2.UserConfigurationH\x00R\x13customConfiguration\x12&\n" +
+	"\x0fimage_folder_id\x18\x04 \x01(\tR\rimageFolderId\x12'\n" +
+	"\tpage_size\x18\x05 \x01(\x03B\n" +
+	"\xfa\xc71\x060-1000R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x06 \x01(\tR\tpageTokenB\x0f\n" +
+	"\rconfiguration\"\x80\x01\n" +
+	"\x1cListCompatibleImagesResponse\x128\n" +
+	"\x06images\x18\x01 \x03(\v2 .yandex.cloud.baremetal.v2.ImageR\x06images\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken2\xd2\x05\n" +
 	"\fImageService\x12\xa0\x01\n" +
 	"\bGetImage\x12*.yandex.cloud.baremetal.v2.GetImageRequest\x1a .yandex.cloud.baremetal.v2.Image\"F\xdaA\bimage_id\x82\xd3\xe4\x93\x025\x123/baremetal/v2/folders/{folder_id}/images/{image_id}\x12\x9b\x01\n" +
 	"\n" +
-	"ListImages\x12,.yandex.cloud.baremetal.v2.ListImagesRequest\x1a-.yandex.cloud.baremetal.v2.ListImagesResponse\"0\x82\xd3\xe4\x93\x02*\x12(/baremetal/v2/folders/{folder_id}/images\x12\xb2\x01\n" +
+	"ListImages\x12,.yandex.cloud.baremetal.v2.ListImagesRequest\x1a-.yandex.cloud.baremetal.v2.ListImagesResponse\"0\x82\xd3\xe4\x93\x02*\x12(/baremetal/v2/folders/{folder_id}/images\x12\xcb\x01\n" +
+	"\x14ListCompatibleImages\x126.yandex.cloud.baremetal.v2.ListCompatibleImagesRequest\x1a7.yandex.cloud.baremetal.v2.ListCompatibleImagesResponse\"B\x82\xd3\xe4\x93\x02<:\x01*\"7/baremetal/v2/folders/{folder_id}/images:listCompatible\x12\xb2\x01\n" +
 	"\rResolveImages\x12/.yandex.cloud.baremetal.v2.ResolveImagesRequest\x1a0.yandex.cloud.baremetal.v2.ResolveImagesResponse\">\x82\xd3\xe4\x93\x028\x126/baremetal/v2/folders/{folder_id}/images:resolveImagesBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
@@ -420,29 +615,36 @@ func file_yandex_cloud_baremetal_v2_image_service_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_image_service_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_baremetal_v2_image_service_proto_goTypes = []any{
-	(*GetImageRequest)(nil),       // 0: yandex.cloud.baremetal.v2.GetImageRequest
-	(*ListImagesRequest)(nil),     // 1: yandex.cloud.baremetal.v2.ListImagesRequest
-	(*ListImagesResponse)(nil),    // 2: yandex.cloud.baremetal.v2.ListImagesResponse
-	(*ResolveImagesRequest)(nil),  // 3: yandex.cloud.baremetal.v2.ResolveImagesRequest
-	(*ResolveImagesResponse)(nil), // 4: yandex.cloud.baremetal.v2.ResolveImagesResponse
-	(*Image)(nil),                 // 5: yandex.cloud.baremetal.v2.Image
+	(*GetImageRequest)(nil),              // 0: yandex.cloud.baremetal.v2.GetImageRequest
+	(*ListImagesRequest)(nil),            // 1: yandex.cloud.baremetal.v2.ListImagesRequest
+	(*ListImagesResponse)(nil),           // 2: yandex.cloud.baremetal.v2.ListImagesResponse
+	(*ResolveImagesRequest)(nil),         // 3: yandex.cloud.baremetal.v2.ResolveImagesRequest
+	(*ResolveImagesResponse)(nil),        // 4: yandex.cloud.baremetal.v2.ResolveImagesResponse
+	(*ListCompatibleImagesRequest)(nil),  // 5: yandex.cloud.baremetal.v2.ListCompatibleImagesRequest
+	(*ListCompatibleImagesResponse)(nil), // 6: yandex.cloud.baremetal.v2.ListCompatibleImagesResponse
+	(*Image)(nil),                        // 7: yandex.cloud.baremetal.v2.Image
+	(*UserConfiguration)(nil),            // 8: yandex.cloud.baremetal.v2.UserConfiguration
 }
 var file_yandex_cloud_baremetal_v2_image_service_proto_depIdxs = []int32{
-	5, // 0: yandex.cloud.baremetal.v2.ListImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
-	5, // 1: yandex.cloud.baremetal.v2.ResolveImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
-	0, // 2: yandex.cloud.baremetal.v2.ImageService.GetImage:input_type -> yandex.cloud.baremetal.v2.GetImageRequest
-	1, // 3: yandex.cloud.baremetal.v2.ImageService.ListImages:input_type -> yandex.cloud.baremetal.v2.ListImagesRequest
-	3, // 4: yandex.cloud.baremetal.v2.ImageService.ResolveImages:input_type -> yandex.cloud.baremetal.v2.ResolveImagesRequest
-	5, // 5: yandex.cloud.baremetal.v2.ImageService.GetImage:output_type -> yandex.cloud.baremetal.v2.Image
-	2, // 6: yandex.cloud.baremetal.v2.ImageService.ListImages:output_type -> yandex.cloud.baremetal.v2.ListImagesResponse
-	4, // 7: yandex.cloud.baremetal.v2.ImageService.ResolveImages:output_type -> yandex.cloud.baremetal.v2.ResolveImagesResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	7, // 0: yandex.cloud.baremetal.v2.ListImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
+	7, // 1: yandex.cloud.baremetal.v2.ResolveImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
+	8, // 2: yandex.cloud.baremetal.v2.ListCompatibleImagesRequest.custom_configuration:type_name -> yandex.cloud.baremetal.v2.UserConfiguration
+	7, // 3: yandex.cloud.baremetal.v2.ListCompatibleImagesResponse.images:type_name -> yandex.cloud.baremetal.v2.Image
+	0, // 4: yandex.cloud.baremetal.v2.ImageService.GetImage:input_type -> yandex.cloud.baremetal.v2.GetImageRequest
+	1, // 5: yandex.cloud.baremetal.v2.ImageService.ListImages:input_type -> yandex.cloud.baremetal.v2.ListImagesRequest
+	5, // 6: yandex.cloud.baremetal.v2.ImageService.ListCompatibleImages:input_type -> yandex.cloud.baremetal.v2.ListCompatibleImagesRequest
+	3, // 7: yandex.cloud.baremetal.v2.ImageService.ResolveImages:input_type -> yandex.cloud.baremetal.v2.ResolveImagesRequest
+	7, // 8: yandex.cloud.baremetal.v2.ImageService.GetImage:output_type -> yandex.cloud.baremetal.v2.Image
+	2, // 9: yandex.cloud.baremetal.v2.ImageService.ListImages:output_type -> yandex.cloud.baremetal.v2.ListImagesResponse
+	6, // 10: yandex.cloud.baremetal.v2.ImageService.ListCompatibleImages:output_type -> yandex.cloud.baremetal.v2.ListCompatibleImagesResponse
+	4, // 11: yandex.cloud.baremetal.v2.ImageService.ResolveImages:output_type -> yandex.cloud.baremetal.v2.ResolveImagesResponse
+	8, // [8:12] is the sub-list for method output_type
+	4, // [4:8] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_image_service_proto_init() }
@@ -451,13 +653,18 @@ func file_yandex_cloud_baremetal_v2_image_service_proto_init() {
 		return
 	}
 	file_yandex_cloud_baremetal_v2_image_proto_init()
+	file_yandex_cloud_baremetal_v2_user_configuration_proto_init()
+	file_yandex_cloud_baremetal_v2_image_service_proto_msgTypes[5].OneofWrappers = []any{
+		(*ListCompatibleImagesRequest_StockConfigurationId)(nil),
+		(*ListCompatibleImagesRequest_CustomConfiguration)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_image_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

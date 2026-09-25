@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ImageService_GetImage_FullMethodName      = "/yandex.cloud.baremetal.v2.ImageService/GetImage"
-	ImageService_ListImages_FullMethodName    = "/yandex.cloud.baremetal.v2.ImageService/ListImages"
-	ImageService_ResolveImages_FullMethodName = "/yandex.cloud.baremetal.v2.ImageService/ResolveImages"
+	ImageService_GetImage_FullMethodName             = "/yandex.cloud.baremetal.v2.ImageService/GetImage"
+	ImageService_ListImages_FullMethodName           = "/yandex.cloud.baremetal.v2.ImageService/ListImages"
+	ImageService_ListCompatibleImages_FullMethodName = "/yandex.cloud.baremetal.v2.ImageService/ListCompatibleImages"
+	ImageService_ResolveImages_FullMethodName        = "/yandex.cloud.baremetal.v2.ImageService/ResolveImages"
 )
 
 // ImageServiceClient is the client API for ImageService service.
@@ -37,6 +38,10 @@ type ImageServiceClient interface {
 	// Retrieves the list of Image resources.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListImages(ctx context.Context, in *ListImagesRequest, opts ...grpc.CallOption) (*ListImagesResponse, error)
+	// Lists images available for installation on the selected configuration.
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	ListCompatibleImages(ctx context.Context, in *ListCompatibleImagesRequest, opts ...grpc.CallOption) (*ListCompatibleImagesResponse, error)
 	// Resolves the latest published Image for each available family within the specified folder.
 	// Returns one Image per family - the most recently published one.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
@@ -73,6 +78,16 @@ func (c *imageServiceClient) ListImages(ctx context.Context, in *ListImagesReque
 	return out, nil
 }
 
+func (c *imageServiceClient) ListCompatibleImages(ctx context.Context, in *ListCompatibleImagesRequest, opts ...grpc.CallOption) (*ListCompatibleImagesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCompatibleImagesResponse)
+	err := c.cc.Invoke(ctx, ImageService_ListCompatibleImages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *imageServiceClient) ResolveImages(ctx context.Context, in *ResolveImagesRequest, opts ...grpc.CallOption) (*ResolveImagesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResolveImagesResponse)
@@ -96,6 +111,10 @@ type ImageServiceServer interface {
 	// Retrieves the list of Image resources.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
 	ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error)
+	// Lists images available for installation on the selected configuration.
+	// (-- api-linter: yc::1702::method-no-resource=disabled --)
+	// (-- api-linter: yc::1705::http-method-mapping=disabled --)
+	ListCompatibleImages(context.Context, *ListCompatibleImagesRequest) (*ListCompatibleImagesResponse, error)
 	// Resolves the latest published Image for each available family within the specified folder.
 	// Returns one Image per family - the most recently published one.
 	// (-- api-linter: yc::1702::method-no-resource=disabled --)
@@ -116,6 +135,9 @@ func (UnimplementedImageServiceServer) GetImage(context.Context, *GetImageReques
 }
 func (UnimplementedImageServiceServer) ListImages(context.Context, *ListImagesRequest) (*ListImagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListImages not implemented")
+}
+func (UnimplementedImageServiceServer) ListCompatibleImages(context.Context, *ListCompatibleImagesRequest) (*ListCompatibleImagesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListCompatibleImages not implemented")
 }
 func (UnimplementedImageServiceServer) ResolveImages(context.Context, *ResolveImagesRequest) (*ResolveImagesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ResolveImages not implemented")
@@ -176,6 +198,24 @@ func _ImageService_ListImages_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ImageService_ListCompatibleImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompatibleImagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImageServiceServer).ListCompatibleImages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImageService_ListCompatibleImages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImageServiceServer).ListCompatibleImages(ctx, req.(*ListCompatibleImagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ImageService_ResolveImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResolveImagesRequest)
 	if err := dec(in); err != nil {
@@ -208,6 +248,10 @@ var ImageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListImages",
 			Handler:    _ImageService_ListImages_Handler,
+		},
+		{
+			MethodName: "ListCompatibleImages",
+			Handler:    _ImageService_ListCompatibleImages_Handler,
 		},
 		{
 			MethodName: "ResolveImages",
