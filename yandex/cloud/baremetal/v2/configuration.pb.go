@@ -196,6 +196,59 @@ func (ServerType) EnumDescriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{2}
 }
 
+// Mode of the network interface.
+type ConfigurationNetworkInterface_InterfaceMode int32
+
+const (
+	// Unspecified interface mode.
+	ConfigurationNetworkInterface_INTERFACE_MODE_UNSPECIFIED ConfigurationNetworkInterface_InterfaceMode = 0
+	// Private network interface mode.
+	ConfigurationNetworkInterface_PRIVATE ConfigurationNetworkInterface_InterfaceMode = 1
+	// Public network interface mode.
+	ConfigurationNetworkInterface_PUBLIC ConfigurationNetworkInterface_InterfaceMode = 2
+)
+
+// Enum value maps for ConfigurationNetworkInterface_InterfaceMode.
+var (
+	ConfigurationNetworkInterface_InterfaceMode_name = map[int32]string{
+		0: "INTERFACE_MODE_UNSPECIFIED",
+		1: "PRIVATE",
+		2: "PUBLIC",
+	}
+	ConfigurationNetworkInterface_InterfaceMode_value = map[string]int32{
+		"INTERFACE_MODE_UNSPECIFIED": 0,
+		"PRIVATE":                    1,
+		"PUBLIC":                     2,
+	}
+)
+
+func (x ConfigurationNetworkInterface_InterfaceMode) Enum() *ConfigurationNetworkInterface_InterfaceMode {
+	p := new(ConfigurationNetworkInterface_InterfaceMode)
+	*p = x
+	return p
+}
+
+func (x ConfigurationNetworkInterface_InterfaceMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ConfigurationNetworkInterface_InterfaceMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes[3].Descriptor()
+}
+
+func (ConfigurationNetworkInterface_InterfaceMode) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes[3]
+}
+
+func (x ConfigurationNetworkInterface_InterfaceMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ConfigurationNetworkInterface_InterfaceMode.Descriptor instead.
+func (ConfigurationNetworkInterface_InterfaceMode) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{5, 0}
+}
+
 // CPU configuration.
 type CPU struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -594,6 +647,152 @@ func (x *DefaultStorage) GetStorages() []*Storage {
 	return nil
 }
 
+type ConfigurationNetworkInterface struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the network interface
+	// Not used while creating interfaces
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Name of the network interface
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Id of the configuration
+	ConfigurationId string `protobuf:"bytes,3,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
+	// Link speed in gigabits per second
+	LinkSpeedGbps int64 `protobuf:"varint,4,opt,name=link_speed_gbps,json=linkSpeedGbps,proto3" json:"link_speed_gbps,omitempty"`
+	// Available modes for the network interface
+	AvailableModes []ConfigurationNetworkInterface_InterfaceMode `protobuf:"varint,5,rep,packed,name=available_modes,json=availableModes,proto3,enum=yandex.cloud.baremetal.v2.ConfigurationNetworkInterface_InterfaceMode" json:"available_modes,omitempty"`
+	// MC-LAG configuration options for aggregated interfaces
+	McLagOptions *ConfigurationNetworkInterface_MCLagAggregationOptions `protobuf:"bytes,6,opt,name=mc_lag_options,json=mcLagOptions,proto3" json:"mc_lag_options,omitempty"`
+	// Primary mode of the network interface.
+	MainMode      ConfigurationNetworkInterface_InterfaceMode `protobuf:"varint,7,opt,name=main_mode,json=mainMode,proto3,enum=yandex.cloud.baremetal.v2.ConfigurationNetworkInterface_InterfaceMode" json:"main_mode,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfigurationNetworkInterface) Reset() {
+	*x = ConfigurationNetworkInterface{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigurationNetworkInterface) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigurationNetworkInterface) ProtoMessage() {}
+
+func (x *ConfigurationNetworkInterface) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigurationNetworkInterface.ProtoReflect.Descriptor instead.
+func (*ConfigurationNetworkInterface) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ConfigurationNetworkInterface) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ConfigurationNetworkInterface) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ConfigurationNetworkInterface) GetConfigurationId() string {
+	if x != nil {
+		return x.ConfigurationId
+	}
+	return ""
+}
+
+func (x *ConfigurationNetworkInterface) GetLinkSpeedGbps() int64 {
+	if x != nil {
+		return x.LinkSpeedGbps
+	}
+	return 0
+}
+
+func (x *ConfigurationNetworkInterface) GetAvailableModes() []ConfigurationNetworkInterface_InterfaceMode {
+	if x != nil {
+		return x.AvailableModes
+	}
+	return nil
+}
+
+func (x *ConfigurationNetworkInterface) GetMcLagOptions() *ConfigurationNetworkInterface_MCLagAggregationOptions {
+	if x != nil {
+		return x.McLagOptions
+	}
+	return nil
+}
+
+func (x *ConfigurationNetworkInterface) GetMainMode() ConfigurationNetworkInterface_InterfaceMode {
+	if x != nil {
+		return x.MainMode
+	}
+	return ConfigurationNetworkInterface_INTERFACE_MODE_UNSPECIFIED
+}
+
+// MC-LAG aggregation options for the network interface.
+type ConfigurationNetworkInterface_MCLagAggregationOptions struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Number of interfaces in the MC-LAG aggregation.
+	InterfaceCount int64 `protobuf:"varint,1,opt,name=interface_count,json=interfaceCount,proto3" json:"interface_count,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ConfigurationNetworkInterface_MCLagAggregationOptions) Reset() {
+	*x = ConfigurationNetworkInterface_MCLagAggregationOptions{}
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfigurationNetworkInterface_MCLagAggregationOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfigurationNetworkInterface_MCLagAggregationOptions) ProtoMessage() {}
+
+func (x *ConfigurationNetworkInterface_MCLagAggregationOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfigurationNetworkInterface_MCLagAggregationOptions.ProtoReflect.Descriptor instead.
+func (*ConfigurationNetworkInterface_MCLagAggregationOptions) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *ConfigurationNetworkInterface_MCLagAggregationOptions) GetInterfaceCount() int64 {
+	if x != nil {
+		return x.InterfaceCount
+	}
+	return 0
+}
+
 var File_yandex_cloud_baremetal_v2_configuration_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
@@ -630,7 +829,22 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"serverTypeJ\x04\b\b\x10\vJ\x04\b\x0e\x10\x10\"\x85\x01\n" +
 	"\x0eDefaultStorage\x12.\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x03\xe0A\bR\x0fconfigurationId\x12C\n" +
-	"\bstorages\x18\x02 \x03(\v2\".yandex.cloud.baremetal.v2.StorageB\x03\xe0A\x02R\bstorages*\x84\x01\n" +
+	"\bstorages\x18\x02 \x03(\v2\".yandex.cloud.baremetal.v2.StorageB\x03\xe0A\x02R\bstorages\"\xf2\x04\n" +
+	"\x1dConfigurationNetworkInterface\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12)\n" +
+	"\x10configuration_id\x18\x03 \x01(\tR\x0fconfigurationId\x12&\n" +
+	"\x0flink_speed_gbps\x18\x04 \x01(\x03R\rlinkSpeedGbps\x12o\n" +
+	"\x0favailable_modes\x18\x05 \x03(\x0e2F.yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.InterfaceModeR\x0eavailableModes\x12v\n" +
+	"\x0emc_lag_options\x18\x06 \x01(\v2P.yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.MCLagAggregationOptionsR\fmcLagOptions\x12c\n" +
+	"\tmain_mode\x18\a \x01(\x0e2F.yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.InterfaceModeR\bmainMode\x1aB\n" +
+	"\x17MCLagAggregationOptions\x12'\n" +
+	"\x0finterface_count\x18\x01 \x01(\x03R\x0einterfaceCount\"H\n" +
+	"\rInterfaceMode\x12\x1e\n" +
+	"\x1aINTERFACE_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aPRIVATE\x10\x01\x12\n" +
+	"\n" +
+	"\x06PUBLIC\x10\x02*\x84\x01\n" +
 	"\aPSUType\x12\x18\n" +
 	"\x14PSU_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fPSU_TYPE_SINGLE\x10\x01\x12\x11\n" +
@@ -662,35 +876,41 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_configuration_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_yandex_cloud_baremetal_v2_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_yandex_cloud_baremetal_v2_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_yandex_cloud_baremetal_v2_configuration_proto_goTypes = []any{
-	(PSUType)(0),                   // 0: yandex.cloud.baremetal.v2.PSUType
-	(RAMType)(0),                   // 1: yandex.cloud.baremetal.v2.RAMType
-	(ServerType)(0),                // 2: yandex.cloud.baremetal.v2.ServerType
-	(*CPU)(nil),                    // 3: yandex.cloud.baremetal.v2.CPU
-	(*DiskDriveConfiguration)(nil), // 4: yandex.cloud.baremetal.v2.DiskDriveConfiguration
-	(*GPUCard)(nil),                // 5: yandex.cloud.baremetal.v2.GPUCard
-	(*Configuration)(nil),          // 6: yandex.cloud.baremetal.v2.Configuration
-	(*DefaultStorage)(nil),         // 7: yandex.cloud.baremetal.v2.DefaultStorage
-	(DiskDriveType)(0),             // 8: yandex.cloud.baremetal.v2.DiskDriveType
-	(*Storage)(nil),                // 9: yandex.cloud.baremetal.v2.Storage
+	(PSUType)(0),    // 0: yandex.cloud.baremetal.v2.PSUType
+	(RAMType)(0),    // 1: yandex.cloud.baremetal.v2.RAMType
+	(ServerType)(0), // 2: yandex.cloud.baremetal.v2.ServerType
+	(ConfigurationNetworkInterface_InterfaceMode)(0), // 3: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.InterfaceMode
+	(*CPU)(nil),                           // 4: yandex.cloud.baremetal.v2.CPU
+	(*DiskDriveConfiguration)(nil),        // 5: yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	(*GPUCard)(nil),                       // 6: yandex.cloud.baremetal.v2.GPUCard
+	(*Configuration)(nil),                 // 7: yandex.cloud.baremetal.v2.Configuration
+	(*DefaultStorage)(nil),                // 8: yandex.cloud.baremetal.v2.DefaultStorage
+	(*ConfigurationNetworkInterface)(nil), // 9: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
+	(*ConfigurationNetworkInterface_MCLagAggregationOptions)(nil), // 10: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.MCLagAggregationOptions
+	(DiskDriveType)(0), // 11: yandex.cloud.baremetal.v2.DiskDriveType
+	(*Storage)(nil),    // 12: yandex.cloud.baremetal.v2.Storage
 }
 var file_yandex_cloud_baremetal_v2_configuration_proto_depIdxs = []int32{
-	8, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
-	3, // 1: yandex.cloud.baremetal.v2.Configuration.cpu:type_name -> yandex.cloud.baremetal.v2.CPU
-	4, // 2: yandex.cloud.baremetal.v2.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
-	0, // 3: yandex.cloud.baremetal.v2.Configuration.psu_type:type_name -> yandex.cloud.baremetal.v2.PSUType
-	5, // 4: yandex.cloud.baremetal.v2.Configuration.gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
-	5, // 5: yandex.cloud.baremetal.v2.Configuration.jbog_gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
-	1, // 6: yandex.cloud.baremetal.v2.Configuration.ram_type:type_name -> yandex.cloud.baremetal.v2.RAMType
-	2, // 7: yandex.cloud.baremetal.v2.Configuration.server_type:type_name -> yandex.cloud.baremetal.v2.ServerType
-	9, // 8: yandex.cloud.baremetal.v2.DefaultStorage.storages:type_name -> yandex.cloud.baremetal.v2.Storage
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	11, // 0: yandex.cloud.baremetal.v2.DiskDriveConfiguration.type:type_name -> yandex.cloud.baremetal.v2.DiskDriveType
+	4,  // 1: yandex.cloud.baremetal.v2.Configuration.cpu:type_name -> yandex.cloud.baremetal.v2.CPU
+	5,  // 2: yandex.cloud.baremetal.v2.Configuration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	0,  // 3: yandex.cloud.baremetal.v2.Configuration.psu_type:type_name -> yandex.cloud.baremetal.v2.PSUType
+	6,  // 4: yandex.cloud.baremetal.v2.Configuration.gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
+	6,  // 5: yandex.cloud.baremetal.v2.Configuration.jbog_gpus:type_name -> yandex.cloud.baremetal.v2.GPUCard
+	1,  // 6: yandex.cloud.baremetal.v2.Configuration.ram_type:type_name -> yandex.cloud.baremetal.v2.RAMType
+	2,  // 7: yandex.cloud.baremetal.v2.Configuration.server_type:type_name -> yandex.cloud.baremetal.v2.ServerType
+	12, // 8: yandex.cloud.baremetal.v2.DefaultStorage.storages:type_name -> yandex.cloud.baremetal.v2.Storage
+	3,  // 9: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.available_modes:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.InterfaceMode
+	10, // 10: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.mc_lag_options:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.MCLagAggregationOptions
+	3,  // 11: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.main_mode:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface.InterfaceMode
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_configuration_proto_init() }
@@ -705,8 +925,8 @@ func file_yandex_cloud_baremetal_v2_configuration_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   5,
+			NumEnums:      4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

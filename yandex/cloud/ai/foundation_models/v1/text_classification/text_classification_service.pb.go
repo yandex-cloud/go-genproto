@@ -25,10 +25,10 @@ const (
 // Request for the service to classify text with tuned model.
 // The names of the classes between which the model will be distributing requests must be specified during model tuning;
 // therefore, they are not provided in the request.
-// For examples of usage, see [step-by-step guides](/docs/foundation-models/operations/classifier/additionally-trained).
+// For examples of usage, see [step-by-step guides](/docs/ai-studio/operations/classifier/additionally-trained).
 type TextClassificationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [URI](/docs/foundation-models/concepts/classifier/models) of your tuned classifier model.
+	// The [URI](/docs/ai-studio/concepts/classifier/models) of your tuned classifier model.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Text for classification.
 	Text          string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
@@ -146,10 +146,10 @@ func (x *TextClassificationResponse) GetInputTokens() int64 {
 }
 
 // Request for the service to classify text.
-// For examples of usage, see [step-by-step guides](/docs/foundation-models/operations/classifier/readymade).
+// For examples of usage, see [step-by-step guides](/docs/ai-studio/operations/classifier/readymade).
 type FewShotTextClassificationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [URI](/docs/foundation-models/concepts/classifier/models) of the classifier model.
+	// The [URI](/docs/ai-studio/concepts/classifier/models) of the classifier model.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Text description of the classification task.
 	TaskDescription string `protobuf:"bytes,2,opt,name=task_description,json=taskDescription,proto3" json:"task_description,omitempty"`

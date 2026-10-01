@@ -26,7 +26,7 @@ const (
 // Request for the service to obtain text embeddings.
 type TextEmbeddingRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [model URI](/docs/foundation-models/concepts/embeddings) to be used for obtaining text embeddings.
+	// The [model URI](/docs/ai-studio/concepts/embeddings) to be used for obtaining text embeddings.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// The input text for which the embedding is requested.
 	Text string `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`

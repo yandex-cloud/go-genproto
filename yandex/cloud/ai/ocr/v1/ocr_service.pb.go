@@ -33,14 +33,13 @@ type RecognizeTextRequest struct {
 	Source isRecognizeTextRequest_Source `protobuf_oneof:"source"`
 	// Specifications of the ([MIME type](https://en.wikipedia.org/wiki/Media_type)). Each specification contains the file to analyze and features to use for analysis. Restrictions:
 	// * Supported file formats: `JPEG`, `PNG`, `PDF`.
-	// * Maximum file size: see [documentation](/docs/vision/concepts/limits).
+	// * Maximum file size: see [documentation](/docs/vision/concepts/ocr/index#image-requirements).
 	// * Image size should not exceed 20M pixels (length x width).
-	// * The number of pages in a PDF file should not exceed 1.
 	MimeType string `protobuf:"bytes,2,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
 	// [List of the languages](/docs/vision/concepts/ocr/supported-languages) to recognize text.
 	// Specified in [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) format (for example, `ru`).
 	LanguageCodes []string `protobuf:"bytes,3,rep,name=language_codes,json=languageCodes,proto3" json:"language_codes,omitempty"`
-	// [Model](/docs/vision/concepts/ocr/template-recognition#models) to use for text detection.
+	// [Model](/docs/vision/concepts/ocr/models#document-models) to use for text detection.
 	Model         string `protobuf:"bytes,4,opt,name=model,proto3" json:"model,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

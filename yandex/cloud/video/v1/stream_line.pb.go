@@ -7,6 +7,7 @@
 package video
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -160,6 +161,8 @@ type StreamLine struct {
 	//	*StreamLine_ManualLine
 	//	*StreamLine_AutoLine
 	LineType isStreamLine_LineType `protobuf_oneof:"line_type"`
+	// Processing settings.
+	ProcessingSettings *StreamLineProcessingSettings `protobuf:"bytes,17,opt,name=processing_settings,json=processingSettings,proto3" json:"processing_settings,omitempty"`
 	// Timestamp when the stream line was initially created in the system.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	// Timestamp of the last modification to the stream line or its metadata.
@@ -294,6 +297,13 @@ func (x *StreamLine) GetAutoLine() *AutoLine {
 		if x, ok := x.LineType.(*StreamLine_AutoLine); ok {
 			return x.AutoLine
 		}
+	}
+	return nil
+}
+
+func (x *StreamLine) GetProcessingSettings() *StreamLineProcessingSettings {
+	if x != nil {
+		return x.ProcessingSettings
 	}
 	return nil
 }
@@ -736,11 +746,380 @@ func (x *AutoLine) GetStatus() AutoLine_AutoLineStatus {
 	return AutoLine_AUTO_LINE_STATUS_UNSPECIFIED
 }
 
+type StreamLineProcessingSettings struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Settings for stream line summarization.
+	Summarization *StreamLineProcessingSettings_Summarization `protobuf:"bytes,1,opt,name=summarization,proto3" json:"summarization,omitempty"`
+	// Settings for stream line translation.
+	Translation   *StreamLineProcessingSettings_Translation `protobuf:"bytes,2,opt,name=translation,proto3" json:"translation,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings) Reset() {
+	*x = StreamLineProcessingSettings{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *StreamLineProcessingSettings) GetSummarization() *StreamLineProcessingSettings_Summarization {
+	if x != nil {
+		return x.Summarization
+	}
+	return nil
+}
+
+func (x *StreamLineProcessingSettings) GetTranslation() *StreamLineProcessingSettings_Translation {
+	if x != nil {
+		return x.Translation
+	}
+	return nil
+}
+
+type StreamLineProcessingSettings_Summarization struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable line summarization.
+	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Input tracks.
+	Tracks        []*StreamLineProcessingSettings_InputTrack `protobuf:"bytes,2,rep,name=tracks,proto3" json:"tracks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_Summarization) Reset() {
+	*x = StreamLineProcessingSettings_Summarization{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_Summarization) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_Summarization) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_Summarization) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_Summarization.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_Summarization) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 0}
+}
+
+func (x *StreamLineProcessingSettings_Summarization) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *StreamLineProcessingSettings_Summarization) GetTracks() []*StreamLineProcessingSettings_InputTrack {
+	if x != nil {
+		return x.Tracks
+	}
+	return nil
+}
+
+type StreamLineProcessingSettings_Translation struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Enable line translation.
+	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
+	// Input tracks.
+	Tracks        []*StreamLineProcessingSettings_TranslationTrack `protobuf:"bytes,2,rep,name=tracks,proto3" json:"tracks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_Translation) Reset() {
+	*x = StreamLineProcessingSettings_Translation{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_Translation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_Translation) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_Translation) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_Translation.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_Translation) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 1}
+}
+
+func (x *StreamLineProcessingSettings_Translation) GetEnable() bool {
+	if x != nil {
+		return x.Enable
+	}
+	return false
+}
+
+func (x *StreamLineProcessingSettings_Translation) GetTracks() []*StreamLineProcessingSettings_TranslationTrack {
+	if x != nil {
+		return x.Tracks
+	}
+	return nil
+}
+
+type StreamLineProcessingSettings_TranslationTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Input track settings.
+	InputTrack *StreamLineProcessingSettings_InputTrack `protobuf:"bytes,1,opt,name=input_track,json=inputTrack,proto3" json:"input_track,omitempty"`
+	// Settings for target subtitle tracks.
+	Subtitles []*StreamLineProcessingSettings_SubtitleTrack `protobuf:"bytes,3,rep,name=subtitles,proto3" json:"subtitles,omitempty"`
+	// Settings for target audio tracks.
+	Audios        []*StreamLineProcessingSettings_AudioTrack `protobuf:"bytes,4,rep,name=audios,proto3" json:"audios,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) Reset() {
+	*x = StreamLineProcessingSettings_TranslationTrack{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_TranslationTrack) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_TranslationTrack.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_TranslationTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 2}
+}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) GetInputTrack() *StreamLineProcessingSettings_InputTrack {
+	if x != nil {
+		return x.InputTrack
+	}
+	return nil
+}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) GetSubtitles() []*StreamLineProcessingSettings_SubtitleTrack {
+	if x != nil {
+		return x.Subtitles
+	}
+	return nil
+}
+
+func (x *StreamLineProcessingSettings_TranslationTrack) GetAudios() []*StreamLineProcessingSettings_AudioTrack {
+	if x != nil {
+		return x.Audios
+	}
+	return nil
+}
+
+type StreamLineProcessingSettings_InputTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Input audio track index (one-based).
+	TrackIndex int64 `protobuf:"varint,1,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
+	// Source track language represented as a three-letter code according to ISO 639-2/T.
+	SrcLang       string `protobuf:"bytes,2,opt,name=src_lang,json=srcLang,proto3" json:"src_lang,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_InputTrack) Reset() {
+	*x = StreamLineProcessingSettings_InputTrack{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_InputTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_InputTrack) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_InputTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_InputTrack.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_InputTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 3}
+}
+
+func (x *StreamLineProcessingSettings_InputTrack) GetTrackIndex() int64 {
+	if x != nil {
+		return x.TrackIndex
+	}
+	return 0
+}
+
+func (x *StreamLineProcessingSettings_InputTrack) GetSrcLang() string {
+	if x != nil {
+		return x.SrcLang
+	}
+	return ""
+}
+
+type StreamLineProcessingSettings_AudioTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Target language represented as a three-letter code according to ISO 639-2/T.
+	DstLang       string `protobuf:"bytes,1,opt,name=dst_lang,json=dstLang,proto3" json:"dst_lang,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_AudioTrack) Reset() {
+	*x = StreamLineProcessingSettings_AudioTrack{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_AudioTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_AudioTrack) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_AudioTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_AudioTrack.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_AudioTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 4}
+}
+
+func (x *StreamLineProcessingSettings_AudioTrack) GetDstLang() string {
+	if x != nil {
+		return x.DstLang
+	}
+	return ""
+}
+
+type StreamLineProcessingSettings_SubtitleTrack struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Language of subtitles represented as a three-letter code according to ISO 639-2/T.
+	DstLang       string `protobuf:"bytes,2,opt,name=dst_lang,json=dstLang,proto3" json:"dst_lang,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamLineProcessingSettings_SubtitleTrack) Reset() {
+	*x = StreamLineProcessingSettings_SubtitleTrack{}
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamLineProcessingSettings_SubtitleTrack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamLineProcessingSettings_SubtitleTrack) ProtoMessage() {}
+
+func (x *StreamLineProcessingSettings_SubtitleTrack) ProtoReflect() protoreflect.Message {
+	mi := &file_yandex_cloud_video_v1_stream_line_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamLineProcessingSettings_SubtitleTrack.ProtoReflect.Descriptor instead.
+func (*StreamLineProcessingSettings_SubtitleTrack) Descriptor() ([]byte, []int) {
+	return file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP(), []int{8, 5}
+}
+
+func (x *StreamLineProcessingSettings_SubtitleTrack) GetDstLang() string {
+	if x != nil {
+		return x.DstLang
+	}
+	return ""
+}
+
 var File_yandex_cloud_video_v1_stream_line_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\n" +
-	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xed\x06\n" +
+	"'yandex/cloud/video/v1/stream_line.proto\x12\x15yandex.cloud.video.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\xd3\a\n" +
 	"\n" +
 	"StreamLine\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
@@ -754,7 +1133,8 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\bsrt_pull\x18\xeb\a \x01(\v2#.yandex.cloud.video.v1.SRTPullInputH\x00R\asrtPull\x12E\n" +
 	"\vmanual_line\x18\xd0\x0f \x01(\v2!.yandex.cloud.video.v1.ManualLineH\x01R\n" +
 	"manualLine\x12?\n" +
-	"\tauto_line\x18\xd1\x0f \x01(\v2\x1f.yandex.cloud.video.v1.AutoLineH\x01R\bautoLine\x129\n" +
+	"\tauto_line\x18\xd1\x0f \x01(\v2\x1f.yandex.cloud.video.v1.AutoLineH\x01R\bautoLine\x12d\n" +
+	"\x13processing_settings\x18\x11 \x01(\v23.yandex.cloud.video.v1.StreamLineProcessingSettingsR\x12processingSettings\x129\n" +
 	"\n" +
 	"created_at\x18d \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -765,7 +1145,7 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +
 	"\n" +
 	"input_typeB\v\n" +
-	"\tline_typeJ\x04\b\x04\x10\x12J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
+	"\tline_typeJ\x04\b\x04\x10\x11J\x04\b\x13\x10dJ\x05\bf\x10\xc8\x01J\x06\b\xc9\x01\x10\xe8\aJ\x06\b\xec\a\x10\xd0\x0f\"@\n" +
 	"\rPushStreamKey\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1d\n" +
 	"\n" +
@@ -794,7 +1174,31 @@ const file_yandex_cloud_video_v1_stream_line_proto_rawDesc = "" +
 	"\x1cAUTO_LINE_STATUS_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vDEACTIVATED\x10\x01\x12\n" +
 	"\n" +
-	"\x06ACTIVE\x10\x02*S\n" +
+	"\x06ACTIVE\x10\x02\"\xc5\b\n" +
+	"\x1cStreamLineProcessingSettings\x12g\n" +
+	"\rsummarization\x18\x01 \x01(\v2A.yandex.cloud.video.v1.StreamLineProcessingSettings.SummarizationR\rsummarization\x12a\n" +
+	"\vtranslation\x18\x02 \x01(\v2?.yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationR\vtranslation\x1a\x7f\n" +
+	"\rSummarization\x12\x16\n" +
+	"\x06enable\x18\x01 \x01(\bR\x06enable\x12V\n" +
+	"\x06tracks\x18\x02 \x03(\v2>.yandex.cloud.video.v1.StreamLineProcessingSettings.InputTrackR\x06tracks\x1a\x83\x01\n" +
+	"\vTranslation\x12\x16\n" +
+	"\x06enable\x18\x01 \x01(\bR\x06enable\x12\\\n" +
+	"\x06tracks\x18\x02 \x03(\v2D.yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrackR\x06tracks\x1a\xb8\x02\n" +
+	"\x10TranslationTrack\x12e\n" +
+	"\vinput_track\x18\x01 \x01(\v2>.yandex.cloud.video.v1.StreamLineProcessingSettings.InputTrackB\x04\xe8\xc71\x01R\n" +
+	"inputTrack\x12_\n" +
+	"\tsubtitles\x18\x03 \x03(\v2A.yandex.cloud.video.v1.StreamLineProcessingSettings.SubtitleTrackR\tsubtitles\x12V\n" +
+	"\x06audios\x18\x04 \x03(\v2>.yandex.cloud.video.v1.StreamLineProcessingSettings.AudioTrackR\x06audiosJ\x04\b\x02\x10\x03\x1a\x87\x01\n" +
+	"\n" +
+	"InputTrack\x12(\n" +
+	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
+	"trackIndex\x12O\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB4\xf2\xc71+ara|deu|eng|spa|fra|ita|jpn|kor|rus|tur|zho\x8a\xc81\x013R\asrcLang\x1aA\n" +
+	"\n" +
+	"AudioTrack\x123\n" +
+	"\bdst_lang\x18\x01 \x01(\tB\x18\xe8\xc71\x01\xf2\xc71\veng|kaz|rus\x8a\xc81\x013R\adstLang\x1aJ\n" +
+	"\rSubtitleTrack\x123\n" +
+	"\bdst_lang\x18\x02 \x01(\tB\x18\xe8\xc71\x01\xf2\xc71\veng|kaz|rus\x8a\xc81\x013R\adstLangJ\x04\b\x01\x10\x02*S\n" +
 	"\x0fLineInputSource\x12!\n" +
 	"\x1dLINE_INPUT_SOURCE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03ANY\x10\x01\x12\b\n" +
@@ -816,20 +1220,27 @@ func file_yandex_cloud_video_v1_stream_line_proto_rawDescGZIP() []byte {
 }
 
 var file_yandex_cloud_video_v1_stream_line_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_yandex_cloud_video_v1_stream_line_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_yandex_cloud_video_v1_stream_line_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_yandex_cloud_video_v1_stream_line_proto_goTypes = []any{
-	(LineInputSource)(0),          // 0: yandex.cloud.video.v1.LineInputSource
-	(AutoLine_AutoLineStatus)(0),  // 1: yandex.cloud.video.v1.AutoLine.AutoLineStatus
-	(*StreamLine)(nil),            // 2: yandex.cloud.video.v1.StreamLine
-	(*PushStreamKey)(nil),         // 3: yandex.cloud.video.v1.PushStreamKey
-	(*RTMPPushInput)(nil),         // 4: yandex.cloud.video.v1.RTMPPushInput
-	(*SRTPushInput)(nil),          // 5: yandex.cloud.video.v1.SRTPushInput
-	(*RTMPPullInput)(nil),         // 6: yandex.cloud.video.v1.RTMPPullInput
-	(*SRTPullInput)(nil),          // 7: yandex.cloud.video.v1.SRTPullInput
-	(*ManualLine)(nil),            // 8: yandex.cloud.video.v1.ManualLine
-	(*AutoLine)(nil),              // 9: yandex.cloud.video.v1.AutoLine
-	nil,                           // 10: yandex.cloud.video.v1.StreamLine.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 11: google.protobuf.Timestamp
+	(LineInputSource)(0),                 // 0: yandex.cloud.video.v1.LineInputSource
+	(AutoLine_AutoLineStatus)(0),         // 1: yandex.cloud.video.v1.AutoLine.AutoLineStatus
+	(*StreamLine)(nil),                   // 2: yandex.cloud.video.v1.StreamLine
+	(*PushStreamKey)(nil),                // 3: yandex.cloud.video.v1.PushStreamKey
+	(*RTMPPushInput)(nil),                // 4: yandex.cloud.video.v1.RTMPPushInput
+	(*SRTPushInput)(nil),                 // 5: yandex.cloud.video.v1.SRTPushInput
+	(*RTMPPullInput)(nil),                // 6: yandex.cloud.video.v1.RTMPPullInput
+	(*SRTPullInput)(nil),                 // 7: yandex.cloud.video.v1.SRTPullInput
+	(*ManualLine)(nil),                   // 8: yandex.cloud.video.v1.ManualLine
+	(*AutoLine)(nil),                     // 9: yandex.cloud.video.v1.AutoLine
+	(*StreamLineProcessingSettings)(nil), // 10: yandex.cloud.video.v1.StreamLineProcessingSettings
+	nil,                                  // 11: yandex.cloud.video.v1.StreamLine.LabelsEntry
+	(*StreamLineProcessingSettings_Summarization)(nil),    // 12: yandex.cloud.video.v1.StreamLineProcessingSettings.Summarization
+	(*StreamLineProcessingSettings_Translation)(nil),      // 13: yandex.cloud.video.v1.StreamLineProcessingSettings.Translation
+	(*StreamLineProcessingSettings_TranslationTrack)(nil), // 14: yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrack
+	(*StreamLineProcessingSettings_InputTrack)(nil),       // 15: yandex.cloud.video.v1.StreamLineProcessingSettings.InputTrack
+	(*StreamLineProcessingSettings_AudioTrack)(nil),       // 16: yandex.cloud.video.v1.StreamLineProcessingSettings.AudioTrack
+	(*StreamLineProcessingSettings_SubtitleTrack)(nil),    // 17: yandex.cloud.video.v1.StreamLineProcessingSettings.SubtitleTrack
+	(*timestamppb.Timestamp)(nil),                         // 18: google.protobuf.Timestamp
 }
 var file_yandex_cloud_video_v1_stream_line_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.video.v1.StreamLine.input_source:type_name -> yandex.cloud.video.v1.LineInputSource
@@ -839,15 +1250,23 @@ var file_yandex_cloud_video_v1_stream_line_proto_depIdxs = []int32{
 	7,  // 4: yandex.cloud.video.v1.StreamLine.srt_pull:type_name -> yandex.cloud.video.v1.SRTPullInput
 	8,  // 5: yandex.cloud.video.v1.StreamLine.manual_line:type_name -> yandex.cloud.video.v1.ManualLine
 	9,  // 6: yandex.cloud.video.v1.StreamLine.auto_line:type_name -> yandex.cloud.video.v1.AutoLine
-	11, // 7: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
-	11, // 8: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 9: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
-	1,  // 10: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	10, // 7: yandex.cloud.video.v1.StreamLine.processing_settings:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings
+	18, // 8: yandex.cloud.video.v1.StreamLine.created_at:type_name -> google.protobuf.Timestamp
+	18, // 9: yandex.cloud.video.v1.StreamLine.updated_at:type_name -> google.protobuf.Timestamp
+	11, // 10: yandex.cloud.video.v1.StreamLine.labels:type_name -> yandex.cloud.video.v1.StreamLine.LabelsEntry
+	1,  // 11: yandex.cloud.video.v1.AutoLine.status:type_name -> yandex.cloud.video.v1.AutoLine.AutoLineStatus
+	12, // 12: yandex.cloud.video.v1.StreamLineProcessingSettings.summarization:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.Summarization
+	13, // 13: yandex.cloud.video.v1.StreamLineProcessingSettings.translation:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.Translation
+	15, // 14: yandex.cloud.video.v1.StreamLineProcessingSettings.Summarization.tracks:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.InputTrack
+	14, // 15: yandex.cloud.video.v1.StreamLineProcessingSettings.Translation.tracks:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrack
+	15, // 16: yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrack.input_track:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.InputTrack
+	17, // 17: yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrack.subtitles:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.SubtitleTrack
+	16, // 18: yandex.cloud.video.v1.StreamLineProcessingSettings.TranslationTrack.audios:type_name -> yandex.cloud.video.v1.StreamLineProcessingSettings.AudioTrack
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_video_v1_stream_line_proto_init() }
@@ -869,7 +1288,7 @@ func file_yandex_cloud_video_v1_stream_line_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_video_v1_stream_line_proto_rawDesc), len(file_yandex_cloud_video_v1_stream_line_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   9,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

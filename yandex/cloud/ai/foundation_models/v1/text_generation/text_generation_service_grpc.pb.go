@@ -29,7 +29,7 @@ const (
 //
 // Service for text generation.
 type TextGenerationServiceClient interface {
-	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [synchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	Completion(ctx context.Context, in *CompletionRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[CompletionResponse], error)
 }
 
@@ -66,7 +66,7 @@ type TextGenerationService_CompletionClient = grpc.ServerStreamingClient[Complet
 //
 // Service for text generation.
 type TextGenerationServiceServer interface {
-	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [synchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	Completion(*CompletionRequest, grpc.ServerStreamingServer[CompletionResponse]) error
 }
 
@@ -138,7 +138,7 @@ const (
 //
 // Service for asynchronous text generation.
 type TextGenerationAsyncServiceClient interface {
-	// A method for generating text completions in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [asynchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	Completion(ctx context.Context, in *CompletionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
 
@@ -166,7 +166,7 @@ func (c *textGenerationAsyncServiceClient) Completion(ctx context.Context, in *C
 //
 // Service for asynchronous text generation.
 type TextGenerationAsyncServiceServer interface {
-	// A method for generating text completions in [asynchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [asynchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	Completion(context.Context, *CompletionRequest) (*operation.Operation, error)
 }
 
@@ -244,7 +244,7 @@ const (
 //
 // Service for text generation.
 type TextGenerationBatchServiceClient interface {
-	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [synchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	// Note: Not implemented yet
 	Completion(ctx context.Context, in *BatchCompletionRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 }
@@ -273,7 +273,7 @@ func (c *textGenerationBatchServiceClient) Completion(ctx context.Context, in *B
 //
 // Service for text generation.
 type TextGenerationBatchServiceServer interface {
-	// A method for generating text completions in [synchronous mode](/docs/foundation-models/concepts/#working-mode).
+	// A method for generating text completions in [synchronous mode](/docs/ai-studio/concepts/generation/index#working-mode).
 	// Note: Not implemented yet
 	Completion(context.Context, *BatchCompletionRequest) (*operation.Operation, error)
 }

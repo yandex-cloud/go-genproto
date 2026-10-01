@@ -839,7 +839,7 @@ func (x *VideoFeatures_SpeechToText) GetUrls() []*VideoFeatures_SpeechToText_Spe
 // Contains a URL to a summarization result for a specific audio track.
 type VideoFeatures_Summary_SummaryURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL to the summarization result file.
+	// Short-lived URL to the summarization result file.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	// Input audio track index (one-based) that was summarized.
 	TrackIndex int64 `protobuf:"varint,2,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`
@@ -903,7 +903,7 @@ func (x *VideoFeatures_Summary_SummaryURL) GetSrcLang() string {
 // Contains a URL to a speech-to-text result for a specific audio track.
 type VideoFeatures_SpeechToText_SpeechToTextURL struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// URL to the speech-to-text result file.
+	// Short-lived URL to the speech-to-text result file.
 	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
 	// Input audio track index (one-based) that was transcribed.
 	TrackIndex int64 `protobuf:"varint,2,opt,name=track_index,json=trackIndex,proto3" json:"track_index,omitempty"`

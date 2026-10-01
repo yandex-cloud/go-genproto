@@ -1577,7 +1577,7 @@ func (*SummarizationProperty_JsonSchema) isSummarizationProperty_ResponseFormat(
 // Represents transcription summarization options.
 type SummarizationOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
+	// The [ID of the model](/docs/speechkit/stt/llm-results) to be used for completion generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// A list of suimmarizations to perform with transcription.
 	Properties    []*SummarizationProperty `protobuf:"bytes,2,rep,name=properties,proto3" json:"properties,omitempty"`
@@ -3553,7 +3553,7 @@ func (x *ConversationAnalysis) GetTotalSpeechRatio() float64 {
 	return 0
 }
 
-// An object representing the number of content [tokens](/docs/foundation-models/concepts/yandexgpt/tokens) used by the completion model.
+// An object representing the number of content tokens used by the completion model.
 type ContentUsage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The number of tokens in the textual part of the model input.

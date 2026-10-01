@@ -25,10 +25,10 @@ const (
 )
 
 // Request for the service to generate an image.
-// For examples of usage, see [step-by-step guide](/docs/foundation-models/operations/yandexart/request).
+// For examples of usage, see [step-by-step guide](/docs/ai-studio/operations/generation/yandexart-request-ui).
 type ImageGenerationRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [model URI](/docs/foundation-models/concepts/yandexart/models) to be used for image generation.
+	// The [model URI](/docs/ai-studio/concepts/generation/models) to be used for image generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// A list of messages representing the context for the image generation model.
 	Messages []*Message `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`

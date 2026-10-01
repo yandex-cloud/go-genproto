@@ -30,6 +30,7 @@ const (
 // A set of methods for the Vision OCR service.
 type TextRecognitionServiceClient interface {
 	// To send the image for text recognition.
+	// For PDF files, synchronous recognition supports only single-page documents.
 	Recognize(ctx context.Context, in *RecognizeTextRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[RecognizeTextResponse], error)
 }
 
@@ -67,6 +68,7 @@ type TextRecognitionService_RecognizeClient = grpc.ServerStreamingClient[Recogni
 // A set of methods for the Vision OCR service.
 type TextRecognitionServiceServer interface {
 	// To send the image for text recognition.
+	// For PDF files, synchronous recognition supports only single-page documents.
 	Recognize(*RecognizeTextRequest, grpc.ServerStreamingServer[RecognizeTextResponse]) error
 }
 

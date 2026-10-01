@@ -29,7 +29,7 @@ const (
 // Request for the service to generate text completion.
 type CompletionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for completion generation.
+	// The [ID of the model](/docs/ai-studio/concepts/generation/models) to be used for completion generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Configuration options for completion generation.
 	CompletionOptions *v1.CompletionOptions `protobuf:"bytes,2,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`
@@ -237,7 +237,7 @@ func (x *CompletionResponse) GetModelVersion() string {
 // Request for the service to generate batch text completion.
 type BatchCompletionRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The [ID of the model](/docs/foundation-models/concepts/yandexgpt/models) to be used for batch completion generation.
+	// The [ID of the model](/docs/ai-studio/concepts/generation/models) to be used for batch completion generation.
 	ModelUri string `protobuf:"bytes,1,opt,name=model_uri,json=modelUri,proto3" json:"model_uri,omitempty"`
 	// Configuration options for completion generation.
 	CompletionOptions *v1.CompletionOptions `protobuf:"bytes,2,opt,name=completion_options,json=completionOptions,proto3" json:"completion_options,omitempty"`

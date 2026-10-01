@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // A set of methods for the Translate service.
-// Make sure you send your [authentication](/docs/translate/api-ref/authentication) credentials in the `Authorization` header of each request.
+// Make sure you send your [authentication](/docs/ai-studio/api-ref/authentication) credentials in the `Authorization` header of each request.
 type TranslationServiceClient interface {
 	// Translates the text to the specified language.
 	Translate(ctx context.Context, in *TranslateRequest, opts ...grpc.CallOption) (*TranslateResponse, error)
@@ -82,7 +82,7 @@ func (c *translationServiceClient) ListLanguages(ctx context.Context, in *ListLa
 // for forward compatibility.
 //
 // A set of methods for the Translate service.
-// Make sure you send your [authentication](/docs/translate/api-ref/authentication) credentials in the `Authorization` header of each request.
+// Make sure you send your [authentication](/docs/ai-studio/api-ref/authentication) credentials in the `Authorization` header of each request.
 type TranslationServiceServer interface {
 	// Translates the text to the specified language.
 	Translate(context.Context, *TranslateRequest) (*TranslateResponse, error)

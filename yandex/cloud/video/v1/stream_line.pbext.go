@@ -70,6 +70,10 @@ func (m *StreamLine) SetAutoLine(v *AutoLine) {
 	}
 }
 
+func (m *StreamLine) SetProcessingSettings(v *StreamLineProcessingSettings) {
+	m.ProcessingSettings = v
+}
+
 func (m *StreamLine) SetCreatedAt(v *timestamppb.Timestamp) {
 	m.CreatedAt = v
 }
@@ -124,4 +128,56 @@ func (m *SRTPullInput) SetBackupUrl(v string) {
 
 func (m *AutoLine) SetStatus(v AutoLine_AutoLineStatus) {
 	m.Status = v
+}
+
+func (m *StreamLineProcessingSettings) SetSummarization(v *StreamLineProcessingSettings_Summarization) {
+	m.Summarization = v
+}
+
+func (m *StreamLineProcessingSettings) SetTranslation(v *StreamLineProcessingSettings_Translation) {
+	m.Translation = v
+}
+
+func (m *StreamLineProcessingSettings_Summarization) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *StreamLineProcessingSettings_Summarization) SetTracks(v []*StreamLineProcessingSettings_InputTrack) {
+	m.Tracks = v
+}
+
+func (m *StreamLineProcessingSettings_Translation) SetEnable(v bool) {
+	m.Enable = v
+}
+
+func (m *StreamLineProcessingSettings_Translation) SetTracks(v []*StreamLineProcessingSettings_TranslationTrack) {
+	m.Tracks = v
+}
+
+func (m *StreamLineProcessingSettings_TranslationTrack) SetInputTrack(v *StreamLineProcessingSettings_InputTrack) {
+	m.InputTrack = v
+}
+
+func (m *StreamLineProcessingSettings_TranslationTrack) SetSubtitles(v []*StreamLineProcessingSettings_SubtitleTrack) {
+	m.Subtitles = v
+}
+
+func (m *StreamLineProcessingSettings_TranslationTrack) SetAudios(v []*StreamLineProcessingSettings_AudioTrack) {
+	m.Audios = v
+}
+
+func (m *StreamLineProcessingSettings_InputTrack) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *StreamLineProcessingSettings_InputTrack) SetSrcLang(v string) {
+	m.SrcLang = v
+}
+
+func (m *StreamLineProcessingSettings_AudioTrack) SetDstLang(v string) {
+	m.DstLang = v
+}
+
+func (m *StreamLineProcessingSettings_SubtitleTrack) SetDstLang(v string) {
+	m.DstLang = v
 }

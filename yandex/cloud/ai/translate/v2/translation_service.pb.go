@@ -89,8 +89,8 @@ type TranslateRequest struct {
 	// The maximum total length of all strings is 10000 characters.
 	Texts []string `protobuf:"bytes,4,rep,name=texts,proto3" json:"texts,omitempty"`
 	// ID of the folder to which you have access.
-	// Required for authorization with a [user account](/docs/iam/concepts/users/accounts).
-	// Do not specify this field if you make the request on behalf of a [service account](/docs/iam/concepts/users/accounts#sa).
+	// Required for authorization with a [user account](https://yandex.cloud/docs/iam/concepts/users/accounts).
+	// Do not specify this field if you make the request on behalf of a [service account](https://yandex.cloud/docs/iam/concepts/users/accounts#sa).
 	FolderId string `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	// Model ID if you use custom model.
 	Model string `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`
@@ -526,8 +526,8 @@ func (x *DetectLanguageResponse) GetLanguageCode() string {
 type ListLanguagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the folder to which you have access.
-	// Required for authorization with a [user account](/docs/iam/concepts/users/accounts).
-	// Do not specify this field if you make the request on behalf of a [service account](/docs/iam/concepts/users/accounts#sa).
+	// Required for authorization with a [user account](https://yandex.cloud/docs/iam/concepts/users/accounts).
+	// Do not specify this field if you make the request on behalf of a [service account](https://yandex.cloud/docs/iam/concepts/users/accounts#sa).
 	FolderId      string `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

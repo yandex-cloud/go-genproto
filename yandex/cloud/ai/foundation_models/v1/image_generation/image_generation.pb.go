@@ -133,7 +133,6 @@ func (x *AspectRatio) GetHeightRatio() int64 {
 type ImageGenerationOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The [MIME type](https://en.wikipedia.org/wiki/Media_type) of generated image format.
-	// For possible specifications, see [documentation](/docs/foundation-models/concepts).
 	MimeType string `protobuf:"bytes,1,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
 	// Seed for image generation. It serves as a starting point for image generation from noise. If set to 0 or not provided, a randomly generated value will be used.
 	Seed int64 `protobuf:"varint,2,opt,name=seed,proto3" json:"seed,omitempty"`

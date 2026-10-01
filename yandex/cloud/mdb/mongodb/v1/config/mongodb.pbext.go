@@ -194,6 +194,10 @@ func (m *MongodConfig_SetParameter) SetRedactClientLogData(v *wrapperspb.BoolVal
 	m.RedactClientLogData = v
 }
 
+func (m *MongodConfig_SetParameter) SetAllowDiskUseByDefault(v *wrapperspb.BoolValue) {
+	m.AllowDiskUseByDefault = v
+}
+
 func (m *MongodConfig_SetParameter_MirrorReads) SetSamplingRate(v *wrapperspb.DoubleValue) {
 	m.SamplingRate = v
 }
@@ -322,6 +326,10 @@ func (m *MongosConfig) SetBalancerConfig(v *MongosConfig_BalancerConfig) {
 	m.BalancerConfig = v
 }
 
+func (m *MongosConfig) SetReplication(v *MongosConfig_Replication) {
+	m.Replication = v
+}
+
 func (m *MongosConfig_Network) SetMaxIncomingConnections(v *wrapperspb.Int64Value) {
 	m.MaxIncomingConnections = v
 }
@@ -332,6 +340,10 @@ func (m *MongosConfig_Network) SetCompression(v *MongosConfig_Network_Compressio
 
 func (m *MongosConfig_Network_Compression) SetCompressors(v []MongosConfig_Network_Compression_Compressor) {
 	m.Compressors = v
+}
+
+func (m *MongosConfig_Replication) SetLocalPingThresholdMs(v *wrapperspb.Int64Value) {
+	m.LocalPingThresholdMs = v
 }
 
 func (m *MongosConfig_SetParameter) SetAuditAuthorizationSuccess(v *wrapperspb.BoolValue) {

@@ -438,7 +438,7 @@ func (*Message_ToolCallList) isMessage_Content() {}
 
 func (*Message_ToolResultList) isMessage_Content() {}
 
-// An object representing the number of content [tokens](/docs/foundation-models/concepts/yandexgpt/tokens) used by the completion model.
+// An object representing the number of content [tokens](/docs/ai-studio/concepts/generation/tokens) used by the completion model.
 type ContentUsage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The number of tokens in the textual part of the model input.

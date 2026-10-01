@@ -57,3 +57,7 @@ func (m *UserConfiguration) SetDiskDrives(v []*DiskDriveConfiguration) {
 func (m *UserConfiguration) SetRam(v *UserRAM) {
 	m.Ram = v
 }
+
+func (m *UserConfiguration) SetNetworkInterfaces(v []*ConfigurationNetworkInterface) {
+	m.NetworkInterfaces = v
+}

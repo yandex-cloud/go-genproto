@@ -104,6 +104,10 @@ func (m *CreateStreamLineRequest) SetAutoLine(v *AutoLineParams) {
 	}
 }
 
+func (m *CreateStreamLineRequest) SetProcessingSettings(v *StreamLineProcessingSettings) {
+	m.ProcessingSettings = v
+}
+
 func (m *CreateStreamLineRequest) SetLabels(v map[string]string) {
 	m.Labels = v
 }
@@ -150,6 +154,10 @@ func (m *UpdateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_SrtPull{
 		SrtPull: v,
 	}
+}
+
+func (m *UpdateStreamLineRequest) SetProcessingSettings(v *StreamLineProcessingSettings) {
+	m.ProcessingSettings = v
 }
 
 func (m *UpdateStreamLineRequest) SetLabels(v map[string]string) {
