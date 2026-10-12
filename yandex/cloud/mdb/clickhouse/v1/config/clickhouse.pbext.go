@@ -234,6 +234,14 @@ func (m *ClickhouseConfig) SetQueryMetricLogRetentionTime(v *wrapperspb.Int64Val
 	m.QueryMetricLogRetentionTime = v
 }
 
+func (m *ClickhouseConfig) SetAutomaticallyDetachedDataPartsRetentionTime(v *wrapperspb.Int64Value) {
+	m.AutomaticallyDetachedDataPartsRetentionTime = v
+}
+
+func (m *ClickhouseConfig) SetManuallyDetachedDataPartsRetentionTime(v *wrapperspb.Int64Value) {
+	m.ManuallyDetachedDataPartsRetentionTime = v
+}
+
 func (m *ClickhouseConfig) SetAccessControlImprovements(v *ClickhouseConfig_AccessControlImprovements) {
 	m.AccessControlImprovements = v
 }
@@ -624,6 +632,18 @@ func (m *ClickhouseConfig_ExternalDictionary) SetPostgresqlSource(v *ClickhouseC
 	}
 }
 
+func (m *ClickhouseConfig_ExternalDictionary) SetPostgresqlSourceV2(v *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) {
+	m.Source = &ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_{
+		PostgresqlSourceV2: v,
+	}
+}
+
+func (m *ClickhouseConfig_ExternalDictionary) SetYtSourceV2(v *ClickhouseConfig_ExternalDictionary_YtSourceV2) {
+	m.Source = &ClickhouseConfig_ExternalDictionary_YtSourceV2_{
+		YtSourceV2: v,
+	}
+}
+
 func (m *ClickhouseConfig_ExternalDictionary_Structure) SetId(v *ClickhouseConfig_ExternalDictionary_Structure_Id) {
 	m.Id = v
 }
@@ -910,6 +930,82 @@ func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSource) SetInvalidateQuer
 
 func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSource) SetSslMode(v ClickhouseConfig_ExternalDictionary_PostgresqlSource_SslMode) {
 	m.SslMode = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetDb(v string) {
+	m.Db = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetTable(v string) {
+	m.Table = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetReplicas(v []*ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) {
+	m.Replicas = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetPort(v int64) {
+	m.Port = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetUser(v string) {
+	m.User = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetInvalidateQuery(v string) {
+	m.InvalidateQuery = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetSslMode(v ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_SslMode) {
+	m.SslMode = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetWhere(v string) {
+	m.Where = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetQuery(v string) {
+	m.Query = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2) SetBackgroundReconnect(v *wrapperspb.BoolValue) {
+	m.BackgroundReconnect = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) SetHost(v string) {
+	m.Host = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) SetPriority(v int64) {
+	m.Priority = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) SetPort(v int64) {
+	m.Port = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) SetUser(v string) {
+	m.User = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_PostgresqlSourceV2_Replica) SetPassword(v string) {
+	m.Password = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_YtSourceV2) SetHttpProxyUrls(v []string) {
+	m.HttpProxyUrls = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_YtSourceV2) SetCypressPath(v string) {
+	m.CypressPath = v
+}
+
+func (m *ClickhouseConfig_ExternalDictionary_YtSourceV2) SetOauthToken(v string) {
+	m.OauthToken = v
 }
 
 func (m *ClickhouseConfig_GraphiteRollup) SetName(v string) {
