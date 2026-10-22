@@ -1791,10 +1791,12 @@ type ShardAutoscalingSettings struct {
 	// [ShardAutoscalingThreshold.up_threshold].
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Minimum number of shards the cluster can scale down to.
+	// Zero means unspecified; the API requires a positive value when autoscaling is enabled.
 	MinShards int64 `protobuf:"varint,2,opt,name=min_shards,json=minShards,proto3" json:"min_shards,omitempty"`
 	// Maximum number of shards the cluster can scale up to.
 	// Must be greater than or equal to [min_shards] and must not exceed
 	// the maximum number of shards allowed for the cluster.
+	// Zero means unspecified; the API requires a positive value when autoscaling is enabled.
 	MaxShards int64 `protobuf:"varint,3,opt,name=max_shards,json=maxShards,proto3" json:"max_shards,omitempty"`
 	// CPU utilization threshold.
 	CpuThreshold *ShardAutoscalingThreshold `protobuf:"bytes,4,opt,name=cpu_threshold,json=cpuThreshold,proto3" json:"cpu_threshold,omitempty"`
@@ -2040,9 +2042,9 @@ const file_yandex_cloud_mdb_redis_v1_cluster_proto_rawDesc = "" +
 	"\x18ShardAutoscalingSettings\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12&\n" +
 	"\n" +
-	"min_shards\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=1R\tminShards\x12&\n" +
+	"min_shards\x18\x02 \x01(\x03B\a\xfa\xc71\x03>=0R\tminShards\x12&\n" +
 	"\n" +
-	"max_shards\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=1R\tmaxShards\x12Y\n" +
+	"max_shards\x18\x03 \x01(\x03B\a\xfa\xc71\x03>=0R\tmaxShards\x12Y\n" +
 	"\rcpu_threshold\x18\x04 \x01(\v24.yandex.cloud.mdb.redis.v1.ShardAutoscalingThresholdR\fcpuThreshold\x12_\n" +
 	"\x10memory_threshold\x18\x05 \x01(\v24.yandex.cloud.mdb.redis.v1.ShardAutoscalingThresholdR\x0fmemoryThreshold\x12a\n" +
 	"\x11network_threshold\x18\x06 \x01(\v24.yandex.cloud.mdb.redis.v1.ShardAutoscalingThresholdR\x10networkThresholdBd\n" +

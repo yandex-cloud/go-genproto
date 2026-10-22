@@ -42,6 +42,10 @@ func (m *ClickhouseConfig) SetBackgroundCommonPoolSize(v *wrapperspb.Int64Value)
 	m.BackgroundCommonPoolSize = v
 }
 
+func (m *ClickhouseConfig) SetMaxBackupsIoThreadPoolSize(v *wrapperspb.Int64Value) {
+	m.MaxBackupsIoThreadPoolSize = v
+}
+
 func (m *ClickhouseConfig) SetDictionariesLazyLoad(v *wrapperspb.BoolValue) {
 	m.DictionariesLazyLoad = v
 }

@@ -3,6 +3,7 @@
 package stacklandlicenseapi
 
 import (
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -96,6 +97,10 @@ func (m *License) SetSignature(v string) {
 
 func (m *License) SetLicenseType(v LicenseType) {
 	m.LicenseType = v
+}
+
+func (m *License) SetMetadata(v *structpb.Struct) {
+	m.Metadata = v
 }
 
 func (m *SyncRequest) SetLicenseServerId(v string) {

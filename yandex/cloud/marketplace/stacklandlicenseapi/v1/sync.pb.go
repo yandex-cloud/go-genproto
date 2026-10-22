@@ -11,6 +11,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -432,7 +433,9 @@ type License struct {
 	// Digital signature for this license
 	Signature string `protobuf:"bytes,8,opt,name=signature,proto3" json:"signature,omitempty"`
 	// License validity type
-	LicenseType   LicenseType `protobuf:"varint,9,opt,name=license_type,json=licenseType,proto3,enum=yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType" json:"license_type,omitempty"`
+	LicenseType LicenseType `protobuf:"varint,9,opt,name=license_type,json=licenseType,proto3,enum=yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType" json:"license_type,omitempty"`
+	// License metadata. Included in the signature when non-empty.
+	Metadata      *structpb.Struct `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -528,6 +531,13 @@ func (x *License) GetLicenseType() LicenseType {
 		return x.LicenseType
 	}
 	return LicenseType_LICENSE_TYPE_UNSPECIFIED
+}
+
+func (x *License) GetMetadata() *structpb.Struct {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
 }
 
 // Request to synchronize licenses and submit usage data
@@ -721,7 +731,7 @@ var File_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto protoreflect
 
 const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = "" +
 	"\n" +
-	":yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\x05\n" +
+	":yandex/cloud/marketplace/stacklandlicenseapi/v1/sync.proto\x12/yandex.cloud.marketplace.stacklandlicenseapi.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1dyandex/cloud/validation.proto\"\x91\x05\n" +
 	"\n" +
 	"UsageEntry\x126\n" +
 	"\x0finstallation_id\x18\x01 \x01(\tB\r\xe8\xc71\x01\x8a\xc81\x05<=100R\x0einstallationId\x12_\n" +
@@ -743,7 +753,7 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\tsignature\x18\f \x01(\tB\x0e\xe8\xc71\x01\x8a\xc81\x06<=1000R\tsignature\"B\n" +
 	"\fLicenseLimit\x12\x17\n" +
 	"\x04type\x18\x01 \x01(\tB\x03\xe0A\x02R\x04type\x12\x19\n" +
-	"\x05limit\x18\x02 \x01(\x03B\x03\xe0A\x01R\x05limit\"\xac\x04\n" +
+	"\x05limit\x18\x02 \x01(\x03B\x03\xe0A\x01R\x05limit\"\xe1\x04\n" +
 	"\aLicense\x12\x1d\n" +
 	"\n" +
 	"license_id\x18\x01 \x01(\tR\tlicenseId\x12_\n" +
@@ -755,7 +765,9 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"validUntil\x12U\n" +
 	"\x06limits\x18\a \x03(\v2=.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimitR\x06limits\x12\x1c\n" +
 	"\tsignature\x18\b \x01(\tR\tsignature\x12_\n" +
-	"\flicense_type\x18\t \x01(\x0e2<.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseTypeR\vlicenseType\"\xcf\x01\n" +
+	"\flicense_type\x18\t \x01(\x0e2<.yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseTypeR\vlicenseType\x123\n" +
+	"\bmetadata\x18\n" +
+	" \x01(\v2\x17.google.protobuf.StructR\bmetadata\"\xcf\x01\n" +
 	"\vSyncRequest\x126\n" +
 	"\x11license_server_id\x18\x03 \x01(\tB\n" +
 	"\x8a\xc81\x04<=50\x18\x01R\x0flicenseServerId\x12]\n" +
@@ -817,6 +829,7 @@ var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_goTypes = []
 	(*SyncUsageResult)(nil),       // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult
 	(*SyncUsageMetadata)(nil),     // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageMetadata
 	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),       // 10: google.protobuf.Struct
 }
 var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_depIdxs = []int32{
 	0,  // 0: yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry.product_type:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.ProductType
@@ -827,14 +840,15 @@ var file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_depIdxs = []
 	9,  // 5: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.valid_until:type_name -> google.protobuf.Timestamp
 	4,  // 6: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.limits:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseLimit
 	1,  // 7: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.license_type:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.LicenseType
-	3,  // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest.usage:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
-	5,  // 9: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.licenses:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.License
-	2,  // 10: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.sync_status:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	10, // 8: yandex.cloud.marketplace.stacklandlicenseapi.v1.License.metadata:type_name -> google.protobuf.Struct
+	3,  // 9: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncRequest.usage:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.UsageEntry
+	5,  // 10: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.licenses:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.License
+	2,  // 11: yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncUsageResult.sync_status:type_name -> yandex.cloud.marketplace.stacklandlicenseapi.v1.SyncStatus
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_init() }
