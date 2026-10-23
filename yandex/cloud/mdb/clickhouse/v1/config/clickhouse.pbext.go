@@ -238,6 +238,18 @@ func (m *ClickhouseConfig) SetQueryMetricLogRetentionTime(v *wrapperspb.Int64Val
 	m.QueryMetricLogRetentionTime = v
 }
 
+func (m *ClickhouseConfig) SetS3QueueLogEnabled(v *wrapperspb.BoolValue) {
+	m.S3QueueLogEnabled = v
+}
+
+func (m *ClickhouseConfig) SetS3QueueLogRetentionSize(v *wrapperspb.Int64Value) {
+	m.S3QueueLogRetentionSize = v
+}
+
+func (m *ClickhouseConfig) SetS3QueueLogRetentionTime(v *wrapperspb.Int64Value) {
+	m.S3QueueLogRetentionTime = v
+}
+
 func (m *ClickhouseConfig) SetAutomaticallyDetachedDataPartsRetentionTime(v *wrapperspb.Int64Value) {
 	m.AutomaticallyDetachedDataPartsRetentionTime = v
 }
