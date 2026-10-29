@@ -2908,7 +2908,7 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"\fsubtitle_ids\x18\x03 \x03(\tR\vsubtitleIds\x12b\n" +
 	"\x14translation_settings\x18\x04 \x01(\v2/.yandex.cloud.video.v1.VideoTranslationSettingsR\x13translationSettings\x12h\n" +
 	"\x16summarization_settings\x18\x05 \x01(\v21.yandex.cloud.video.v1.VideoSummarizationSettingsR\x15summarizationSettings\x12g\n" +
-	"\x17speech_to_text_settings\x18\x06 \x01(\v20.yandex.cloud.video.v1.VideoSpeechToTextSettingsR\x14speechToTextSettings\"\xa2\x06\n" +
+	"\x17speech_to_text_settings\x18\x06 \x01(\v20.yandex.cloud.video.v1.VideoSpeechToTextSettingsR\x14speechToTextSettings\"\xa6\x06\n" +
 	"\x18VideoTranslationSettings\x12X\n" +
 	"\x06tracks\x18\x01 \x03(\v2@.yandex.cloud.video.v1.VideoTranslationSettings.TranslationTrackR\x06tracks\x1a\xa4\x02\n" +
 	"\x10TranslationTrack\x12a\n" +
@@ -2920,9 +2920,9 @@ const file_yandex_cloud_video_v1_video_service_proto_rawDesc = "" +
 	"InputTrack\x12(\n" +
 	"\vtrack_index\x18\x01 \x01(\x03B\a\xfa\xc71\x03>=1R\n" +
 	"trackIndex\x12R\n" +
-	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLang\x1a\x90\x01\n" +
-	"\rSubtitleTrack\x12[\n" +
-	"\bdst_lang\x18\x01 \x01(\tB@\xe8\xc71\x01\xf2\xc713ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
+	"\bsrc_lang\x18\x02 \x01(\tB7\xf2\xc71,|ara|deu|eng|fra|ita|jpn|kor|rus|spa|tur|zho\x8a\xc81\x030,3R\asrcLang\x1a\x94\x01\n" +
+	"\rSubtitleTrack\x12_\n" +
+	"\bdst_lang\x18\x01 \x01(\tBD\xe8\xc71\x01\xf2\xc717ara|deu|eng|fra|ita|jpn|kaz|kor|rus|spa|tur|ukr|vie|zho\x8a\xc81\x013R\adstLang\x12\"\n" +
 	"\x05label\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05label\x1ae\n" +
 	"\n" +
 	"AudioTrack\x123\n" +

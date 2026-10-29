@@ -106,6 +106,18 @@ func (m *StacklandClusterSettings) SetPublicNetworkAccess(v StacklandClusterSett
 	m.PublicNetworkAccess = v
 }
 
+func (m *StacklandClusterSettings) SetComponents(v []*StacklandComponentSettings) {
+	m.Components = v
+}
+
+func (m *StacklandComponentSettings) SetComponent(v StacklandComponentSettings_Component) {
+	m.Component = v
+}
+
+func (m *StacklandComponentSettings) SetEnabled(v bool) {
+	m.Enabled = v
+}
+
 func (m *StacklandHostRoles) SetControlplane(v []*NodeGroup) {
 	m.Controlplane = v
 }
