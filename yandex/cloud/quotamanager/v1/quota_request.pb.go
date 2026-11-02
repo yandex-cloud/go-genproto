@@ -155,7 +155,8 @@ func (QuotaRequest_QuotaLimit_Status) EnumDescriptor() ([]byte, []int) {
 type QuotaRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the quota request.
-	Id       string    `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The resource associated with the quota request.
 	Resource *Resource `protobuf:"bytes,2,opt,name=resource,proto3" json:"resource,omitempty"`
 	// Creation timestamp.
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
@@ -163,6 +164,8 @@ type QuotaRequest struct {
 	Status QuotaRequest_Status `protobuf:"varint,4,opt,name=status,proto3,enum=yandex.cloud.quotamanager.v1.QuotaRequest_Status" json:"status,omitempty"`
 	// Quota limits
 	QuotaLimits []*QuotaRequest_QuotaLimit `protobuf:"bytes,5,rep,name=quota_limits,json=quotaLimits,proto3" json:"quota_limits,omitempty"`
+	// ID of the issue.
+	IssueId string `protobuf:"bytes,6,opt,name=issue_id,json=issueId,proto3" json:"issue_id,omitempty"`
 	// ID of the subject who created quota request.
 	CreatedBy     string `protobuf:"bytes,7,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -234,6 +237,13 @@ func (x *QuotaRequest) GetQuotaLimits() []*QuotaRequest_QuotaLimit {
 	return nil
 }
 
+func (x *QuotaRequest) GetIssueId() string {
+	if x != nil {
+		return x.IssueId
+	}
+	return ""
+}
+
 func (x *QuotaRequest) GetCreatedBy() string {
 	if x != nil {
 		return x.CreatedBy
@@ -252,8 +262,9 @@ type QuotaRequest_QuotaLimit struct {
 	// Unit of quota.
 	Unit string `protobuf:"bytes,4,opt,name=unit,proto3" json:"unit,omitempty"`
 	// Status of current quota limit.
-	Status  QuotaRequest_QuotaLimit_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.quotamanager.v1.QuotaRequest_QuotaLimit_Status" json:"status,omitempty"`
-	Message string                         `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	Status QuotaRequest_QuotaLimit_Status `protobuf:"varint,5,opt,name=status,proto3,enum=yandex.cloud.quotamanager.v1.QuotaRequest_QuotaLimit_Status" json:"status,omitempty"`
+	// Human-readable reason for rejecting the requested quota limit.
+	Message string `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
 	// ID of the subject who modified quota limit.
 	ModifiedBy    string `protobuf:"bytes,7,opt,name=modified_by,json=modifiedBy,proto3" json:"modified_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -343,14 +354,15 @@ var File_yandex_cloud_quotamanager_v1_quota_request_proto protoreflect.FileDescr
 
 const file_yandex_cloud_quotamanager_v1_quota_request_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/quotamanager/v1/quota_request.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\"\xeb\x06\n" +
+	"0yandex/cloud/quotamanager/v1/quota_request.proto\x12\x1cyandex.cloud.quotamanager.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a+yandex/cloud/quotamanager/v1/resource.proto\"\x80\a\n" +
 	"\fQuotaRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12B\n" +
 	"\bresource\x18\x02 \x01(\v2&.yandex.cloud.quotamanager.v1.ResourceR\bresource\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12I\n" +
 	"\x06status\x18\x04 \x01(\x0e21.yandex.cloud.quotamanager.v1.QuotaRequest.StatusR\x06status\x12X\n" +
-	"\fquota_limits\x18\x05 \x03(\v25.yandex.cloud.quotamanager.v1.QuotaRequest.QuotaLimitR\vquotaLimits\x12\x1d\n" +
+	"\fquota_limits\x18\x05 \x03(\v25.yandex.cloud.quotamanager.v1.QuotaRequest.QuotaLimitR\vquotaLimits\x12\x19\n" +
+	"\bissue_id\x18\x06 \x01(\tR\aissueId\x12\x1d\n" +
 	"\n" +
 	"created_by\x18\a \x01(\tR\tcreatedBy\x1a\x97\x03\n" +
 	"\n" +
@@ -379,7 +391,7 @@ const file_yandex_cloud_quotamanager_v1_quota_request_proto_rawDesc = "" +
 	"PROCESSING\x10\x02\x12\r\n" +
 	"\tPROCESSED\x10\x03\x12\f\n" +
 	"\bCANCELED\x10\x04\x12\f\n" +
-	"\bDELETING\x10\x05J\x04\b\x06\x10\aBq\n" +
+	"\bDELETING\x10\x05Bq\n" +
 	" yandex.cloud.api.quotamanager.v1ZMgithub.com/yandex-cloud/go-genproto/yandex/cloud/quotamanager/v1;quotamanagerb\x06proto3"
 
 var (

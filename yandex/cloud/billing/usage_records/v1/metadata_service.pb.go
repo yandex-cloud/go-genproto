@@ -154,27 +154,33 @@ type GetUsageResponse struct {
 	// Contains cloud entities that the user has access to within the specified date range.
 	// Note: Empty cloud_id values are considered as "consumption outside the cloud"
 	// and represented with an empty string id and name "Usage is out of scope of the Cloud"
+	// The list is sorted by cloud name in ascending order.
 	Clouds []*Cloud `protobuf:"bytes,1,rep,name=clouds,proto3" json:"clouds,omitempty"`
 	// List of available label keys for the current user/context (billing_account_id with sub-accounts)
 	// Contains all label keys that exist in usage records
 	// within the specified date range.
 	// These keys can be used for filtering and grouping in reports or
 	// passed to the GetLabel method to retrieve possible values.
+	// The list is sorted in ascending order.
 	LabelKeys []string `protobuf:"bytes,2,rep,name=label_keys,json=labelKeys,proto3" json:"label_keys,omitempty"`
 	// List of available services for the current user/context (billing_account_id with sub-accounts)
 	// Contains service entities with their IDs, names and descriptions that
 	// have usage records within the specified billing account and date range.
 	// Services represent the top-level grouping of cloud offerings.
+	// The list is sorted by service name in ascending order.
 	Services []*Service `protobuf:"bytes,3,rep,name=services,proto3" json:"services,omitempty"`
 	// List of available SKUs for the current user/context (billing_account_id with sub-accounts)
 	// Contains SKU entities with their IDs, names, translations and pricing units
 	// that have usage records within the specified billing account and date range.
 	// SKUs represent specific service offerings
+	// The list is sorted by SKU name in ascending order.
 	Skus []*SKU `protobuf:"bytes,4,rep,name=skus,proto3" json:"skus,omitempty"`
 	// List of available BillingAccounts for the current user/context (billing_account_id with sub-accounts)
 	// Contains billing account entities that the user has access to and
 	// that have usage records within the specified date range.
 	// Includes both the main account and any sub-accounts.
+	// Sub-accounts are sorted by name in ascending order.
+	// The master account is placed last in the list.
 	BillingAccounts []*BillingAccount `protobuf:"bytes,5,rep,name=billing_accounts,json=billingAccounts,proto3" json:"billing_accounts,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -335,6 +341,7 @@ type GetServiceInstanceResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// List of available service instances for the current user/context (billing_account_id with sub-accounts)
 	// Contains service instance entities that the user has access to within the specified date range.
+	// The list is sorted by service instance name in ascending order.
 	ServiceInstances []*ServiceInstance `protobuf:"bytes,1,rep,name=service_instances,json=serviceInstances,proto3" json:"service_instances,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
@@ -398,14 +405,12 @@ type GetLabelRequest struct {
 	// Additional filter that works alongside the billing_account_id and date range.
 	// When specified, includes labels where cloud_id matches any of the provided values.
 	// Acts as an OR condition (cloud_id IN cloud_ids).
-	// If specified, will be used for addditional authorization check to provided clouds.
 	// If empty, this filter is not applied.
 	CloudIds []string `protobuf:"bytes,9,rep,name=cloud_ids,json=cloudIds,proto3" json:"cloud_ids,omitempty"`
 	// Optional. Folder IDs filter.
 	// Additional filter that works alongside the billing_account_id and date range.
 	// When specified, includes labels where folder_id matches any of the provided values.
 	// Acts as an OR condition (folder_id IN folder_ids).
-	// If specified, will be used for addditional authorization check to provided folders.
 	// If empty, this filter is not applied.
 	FolderIds []string `protobuf:"bytes,10,rep,name=folder_ids,json=folderIds,proto3" json:"folder_ids,omitempty"`
 	// Label key to filter values for. If specified, response will contain values
@@ -740,6 +745,7 @@ type GetCloudResponse struct {
 	// List of clouds matching the request criteria
 	// Contains CloudInfo objects for each cloud that matches the specified
 	// filtering criteria
+	// The list is sorted by cloud name in ascending order.
 	// Note: only clouds with at least one folder are included in the response.
 	Items []*GetCloudResponse_CloudInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Token for getting the next page of results.
@@ -933,6 +939,7 @@ type GetResourcesResponse struct {
 	// List of service instances matching the request criteria
 	// Contains ServiceInstanceInfo objects for each service instance that matches the specified
 	// filtering criteria
+	// The list is sorted by service instance name in ascending order.
 	// Note: only service instances with at least one resource are included in the response.
 	Items []*GetResourcesResponse_ServiceInstanceInfo `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
 	// Token for getting the next page of results.
@@ -998,7 +1005,7 @@ type GetCloudResponse_CloudInfo struct {
 	// List of folders belonging to this cloud
 	// Contains folder entities that belong to this cloud
 	// and match any folder ID filtering criteria from the request.
-	// The list is sorted by folder ID in ascending order.
+	// The list is sorted by folder name in ascending order.
 	// Only folders that had usage during the specified date range are included.
 	Folders       []*Folder `protobuf:"bytes,2,rep,name=folders,proto3" json:"folders,omitempty"`
 	unknownFields protoimpl.UnknownFields

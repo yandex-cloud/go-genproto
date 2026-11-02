@@ -26,6 +26,10 @@ func (m *QuotaRequest) SetQuotaLimits(v []*QuotaRequest_QuotaLimit) {
 	m.QuotaLimits = v
 }
 
+func (m *QuotaRequest) SetIssueId(v string) {
+	m.IssueId = v
+}
+
 func (m *QuotaRequest) SetCreatedBy(v string) {
 	m.CreatedBy = v
 }

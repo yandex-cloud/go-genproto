@@ -735,7 +735,7 @@ func (x *SKUUsageReportResponse) GetEntitiesData() []*SKUUsageReportEntityData {
 // with both summary totals and detailed breakdowns for each individual resource.
 // The response includes:
 // 1. Overall totals for the entire period (cost, credits, expense)
-// 2. Entity-level totals for each resource
+// 2. Entity-level totals for each unique resource-id and service instance type combination
 // 3. Time series breakdown for each resource according to the requested aggregation period
 type ResourceUsageReportResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`

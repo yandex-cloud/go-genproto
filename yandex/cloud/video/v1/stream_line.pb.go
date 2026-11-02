@@ -857,6 +857,7 @@ func (x *StreamLineProcessingSettings_Summarization) GetTracks() []*StreamLinePr
 type StreamLineProcessingSettings_Translation struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Enable line translation.
+	// Neurotranslations and neurosubtitles cannot be enabled in low latency mode.
 	Enable bool `protobuf:"varint,1,opt,name=enable,proto3" json:"enable,omitempty"`
 	// Input tracks.
 	Tracks        []*StreamLineProcessingSettings_TranslationTrack `protobuf:"bytes,2,rep,name=tracks,proto3" json:"tracks,omitempty"`
