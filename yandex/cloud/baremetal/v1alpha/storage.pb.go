@@ -144,10 +144,14 @@ type StoragePartition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Partition type.
 	Type StoragePartitionType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.baremetal.v1alpha.StoragePartitionType" json:"type,omitempty"`
-	// Size of the storage partition in gibibytes (2^30 bytes).
+	// Deprecated. Size of the storage partition in gibibytes (2^30 bytes). Use size_bytes instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/storage.proto.
 	SizeGib int64 `protobuf:"varint,2,opt,name=size_gib,json=sizeGib,proto3" json:"size_gib,omitempty"`
 	// Storage mount point.
-	MountPoint    string `protobuf:"bytes,3,opt,name=mount_point,json=mountPoint,proto3" json:"mount_point,omitempty"`
+	MountPoint string `protobuf:"bytes,3,opt,name=mount_point,json=mountPoint,proto3" json:"mount_point,omitempty"`
+	// Size in bytes.
+	SizeBytes     int64 `protobuf:"varint,4,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -189,6 +193,7 @@ func (x *StoragePartition) GetType() StoragePartitionType {
 	return StoragePartitionType_STORAGE_PARTITION_TYPE_UNSPECIFIED
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/storage.proto.
 func (x *StoragePartition) GetSizeGib() int64 {
 	if x != nil {
 		return x.SizeGib
@@ -201,6 +206,13 @@ func (x *StoragePartition) GetMountPoint() string {
 		return x.MountPoint
 	}
 	return ""
+}
+
+func (x *StoragePartition) GetSizeBytes() int64 {
+	if x != nil {
+		return x.SizeBytes
+	}
+	return 0
 }
 
 // Storage, a OS-level storage entity used for creating partitions. For example, this could
@@ -359,12 +371,14 @@ var File_yandex_cloud_baremetal_v1alpha_storage_proto protoreflect.FileDescripto
 
 const file_yandex_cloud_baremetal_v1alpha_storage_proto_rawDesc = "" +
 	"\n" +
-	",yandex/cloud/baremetal/v1alpha/storage.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a\x1dyandex/cloud/validation.proto\"\x98\x01\n" +
+	",yandex/cloud/baremetal/v1alpha/storage.proto\x12\x1eyandex.cloud.baremetal.v1alpha\x1a)yandex/cloud/baremetal/v1alpha/disk.proto\x1a\x1dyandex/cloud/validation.proto\"\xbb\x01\n" +
 	"\x10StoragePartition\x12H\n" +
-	"\x04type\x18\x01 \x01(\x0e24.yandex.cloud.baremetal.v1alpha.StoragePartitionTypeR\x04type\x12\x19\n" +
-	"\bsize_gib\x18\x02 \x01(\x03R\asizeGib\x12\x1f\n" +
+	"\x04type\x18\x01 \x01(\x0e24.yandex.cloud.baremetal.v1alpha.StoragePartitionTypeR\x04type\x12\x1d\n" +
+	"\bsize_gib\x18\x02 \x01(\x03B\x02\x18\x01R\asizeGib\x12\x1f\n" +
 	"\vmount_point\x18\x03 \x01(\tR\n" +
-	"mountPoint\"\xef\x01\n" +
+	"mountPoint\x12\x1d\n" +
+	"\n" +
+	"size_bytes\x18\x04 \x01(\x03R\tsizeBytes\"\xef\x01\n" +
 	"\aStorage\x12:\n" +
 	"\x04disk\x18\x04 \x01(\v2$.yandex.cloud.baremetal.v1alpha.DiskH\x00R\x04disk\x12:\n" +
 	"\x04raid\x18\x05 \x01(\v2$.yandex.cloud.baremetal.v1alpha.RaidH\x00R\x04raid\x12P\n" +

@@ -280,8 +280,12 @@ type DiskDriveConfiguration struct {
 	Type DiskDriveType `protobuf:"varint,1,opt,name=type,proto3,enum=yandex.cloud.baremetal.v1alpha.DiskDriveType" json:"type,omitempty"`
 	// Number of disk drives.
 	DiskCount int64 `protobuf:"varint,2,opt,name=disk_count,json=diskCount,proto3" json:"disk_count,omitempty"`
-	// Size of a single disk drive in gibibytes (2^30 bytes).
-	DiskSizeGib   int64 `protobuf:"varint,3,opt,name=disk_size_gib,json=diskSizeGib,proto3" json:"disk_size_gib,omitempty"`
+	// Deprecated. Size of a single disk drive in gibibytes (2^30 bytes). Use disk_size_bytes instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
+	DiskSizeGib int64 `protobuf:"varint,3,opt,name=disk_size_gib,json=diskSizeGib,proto3" json:"disk_size_gib,omitempty"`
+	// Size of a single disk drive in bytes.
+	DiskSizeBytes int64 `protobuf:"varint,5,opt,name=disk_size_bytes,json=diskSizeBytes,proto3" json:"disk_size_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -330,9 +334,17 @@ func (x *DiskDriveConfiguration) GetDiskCount() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/configuration.proto.
 func (x *DiskDriveConfiguration) GetDiskSizeGib() int64 {
 	if x != nil {
 		return x.DiskSizeGib
+	}
+	return 0
+}
+
+func (x *DiskDriveConfiguration) GetDiskSizeBytes() int64 {
+	if x != nil {
+		return x.DiskSizeBytes
 	}
 	return 0
 }
@@ -614,12 +626,13 @@ const file_yandex_cloud_baremetal_v1alpha_configuration_proto_rawDesc = "" +
 	"\x05cores\x18\x03 \x01(\x03B\x02\x18\x01R\x05cores\x12%\n" +
 	"\x0ephysical_cores\x18\x04 \x01(\x03R\rphysicalCores\x12+\n" +
 	"\rfrequency_mhz\x18\x05 \x01(\x03B\x06\xfa\xc71\x02>0R\ffrequencyMhz\x12\x18\n" +
-	"\athreads\x18\x06 \x01(\x03R\athreads\"\x9e\x01\n" +
+	"\athreads\x18\x06 \x01(\x03R\athreads\"\xd0\x01\n" +
 	"\x16DiskDriveConfiguration\x12A\n" +
 	"\x04type\x18\x01 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x1d\n" +
 	"\n" +
-	"disk_count\x18\x02 \x01(\x03R\tdiskCount\x12\"\n" +
-	"\rdisk_size_gib\x18\x03 \x01(\x03R\vdiskSizeGib\"\xeb\x04\n" +
+	"disk_count\x18\x02 \x01(\x03R\tdiskCount\x12&\n" +
+	"\rdisk_size_gib\x18\x03 \x01(\x03B\x02\x18\x01R\vdiskSizeGib\x12&\n" +
+	"\x0fdisk_size_bytes\x18\x05 \x01(\x03R\rdiskSizeBytesJ\x04\b\x04\x10\x05\"\xeb\x04\n" +
 	"\rConfiguration\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +

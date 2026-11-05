@@ -13,3 +13,7 @@ func (m *Disk) SetType(v DiskDriveType) {
 func (m *Disk) SetSizeGib(v int64) {
 	m.SizeGib = v
 }
+
+func (m *Disk) SetSizeBytes(v int64) {
+	m.SizeBytes = v
+}

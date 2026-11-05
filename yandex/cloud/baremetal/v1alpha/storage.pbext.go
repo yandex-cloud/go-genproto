@@ -14,6 +14,10 @@ func (m *StoragePartition) SetMountPoint(v string) {
 	m.MountPoint = v
 }
 
+func (m *StoragePartition) SetSizeBytes(v int64) {
+	m.SizeBytes = v
+}
+
 type Storage_StorageType = isStorage_StorageType
 
 func (m *Storage) SetStorageType(v Storage_StorageType) {

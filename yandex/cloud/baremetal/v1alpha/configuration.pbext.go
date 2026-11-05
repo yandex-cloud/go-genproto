@@ -38,6 +38,10 @@ func (m *DiskDriveConfiguration) SetDiskSizeGib(v int64) {
 	m.DiskSizeGib = v
 }
 
+func (m *DiskDriveConfiguration) SetDiskSizeBytes(v int64) {
+	m.DiskSizeBytes = v
+}
+
 func (m *Configuration) SetId(v string) {
 	m.Id = v
 }

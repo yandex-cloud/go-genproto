@@ -85,8 +85,12 @@ type Disk struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Type of the disk drive.
 	Type DiskDriveType `protobuf:"varint,2,opt,name=type,proto3,enum=yandex.cloud.baremetal.v1alpha.DiskDriveType" json:"type,omitempty"`
-	// Size of the disk in gibibytes (2^30 bytes).
-	SizeGib       int64 `protobuf:"varint,3,opt,name=size_gib,json=sizeGib,proto3" json:"size_gib,omitempty"`
+	// Deprecated. Size of the disk in gibibytes (2^30 bytes). Use size_bytes instead.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/disk.proto.
+	SizeGib int64 `protobuf:"varint,3,opt,name=size_gib,json=sizeGib,proto3" json:"size_gib,omitempty"`
+	// Size in bytes.
+	SizeBytes     int64 `protobuf:"varint,4,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,9 +139,17 @@ func (x *Disk) GetType() DiskDriveType {
 	return DiskDriveType_DISK_DRIVE_TYPE_UNSPECIFIED
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/baremetal/v1alpha/disk.proto.
 func (x *Disk) GetSizeGib() int64 {
 	if x != nil {
 		return x.SizeGib
+	}
+	return 0
+}
+
+func (x *Disk) GetSizeBytes() int64 {
+	if x != nil {
+		return x.SizeBytes
 	}
 	return 0
 }
@@ -146,11 +158,13 @@ var File_yandex_cloud_baremetal_v1alpha_disk_proto protoreflect.FileDescriptor
 
 const file_yandex_cloud_baremetal_v1alpha_disk_proto_rawDesc = "" +
 	"\n" +
-	")yandex/cloud/baremetal/v1alpha/disk.proto\x12\x1eyandex.cloud.baremetal.v1alpha\"t\n" +
+	")yandex/cloud/baremetal/v1alpha/disk.proto\x12\x1eyandex.cloud.baremetal.v1alpha\"\x97\x01\n" +
 	"\x04Disk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12A\n" +
-	"\x04type\x18\x02 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x19\n" +
-	"\bsize_gib\x18\x03 \x01(\x03R\asizeGib*L\n" +
+	"\x04type\x18\x02 \x01(\x0e2-.yandex.cloud.baremetal.v1alpha.DiskDriveTypeR\x04type\x12\x1d\n" +
+	"\bsize_gib\x18\x03 \x01(\x03B\x02\x18\x01R\asizeGib\x12\x1d\n" +
+	"\n" +
+	"size_bytes\x18\x04 \x01(\x03R\tsizeBytes*L\n" +
 	"\rDiskDriveType\x12\x1f\n" +
 	"\x1bDISK_DRIVE_TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03HDD\x10\x01\x12\a\n" +
