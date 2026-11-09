@@ -192,6 +192,30 @@ func (m *UpdateVideoMetadata) SetVideoId(v string) {
 	m.VideoId = v
 }
 
+type RenewVideoSourceRequest_Source = isRenewVideoSourceRequest_Source
+
+func (m *RenewVideoSourceRequest) SetSource(v RenewVideoSourceRequest_Source) {
+	m.Source = v
+}
+
+func (m *RenewVideoSourceRequest) SetVideoId(v string) {
+	m.VideoId = v
+}
+
+func (m *RenewVideoSourceRequest) SetTusd(v *VideoTUSDParams) {
+	m.Source = &RenewVideoSourceRequest_Tusd{
+		Tusd: v,
+	}
+}
+
+func (m *RenewVideoSourceRequest) SetAutoTranscode(v AutoTranscode) {
+	m.AutoTranscode = v
+}
+
+func (m *RenewVideoSourceMetadata) SetVideoId(v string) {
+	m.VideoId = v
+}
+
 func (m *TranscodeVideoRequest) SetVideoId(v string) {
 	m.VideoId = v
 }

@@ -25,6 +25,7 @@ const (
 	VideoService_BatchGet_FullMethodName            = "/yandex.cloud.video.v1.VideoService/BatchGet"
 	VideoService_Create_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Create"
 	VideoService_Update_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Update"
+	VideoService_RenewSource_FullMethodName         = "/yandex.cloud.video.v1.VideoService/RenewSource"
 	VideoService_Transcode_FullMethodName           = "/yandex.cloud.video.v1.VideoService/Transcode"
 	VideoService_Delete_FullMethodName              = "/yandex.cloud.video.v1.VideoService/Delete"
 	VideoService_BatchDelete_FullMethodName         = "/yandex.cloud.video.v1.VideoService/BatchDelete"
@@ -61,6 +62,11 @@ type VideoServiceClient interface {
 	// Updates an existing video's metadata and settings.
 	// Only fields specified in the field_mask will be updated.
 	Update(ctx context.Context, in *UpdateVideoRequest, opts ...grpc.CallOption) (*operation.Operation, error)
+	// Renews video source data for further upload.
+	// This method is not applicable to videos in WAIT_UPLOADING and PROCESSING statuses.
+	// Returns an operation which restores the previously uploaded video source upon cancellation.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	RenewSource(ctx context.Context, in *RenewVideoSourceRequest, opts ...grpc.CallOption) (*operation.Operation, error)
 	// Initiates or updates video transcoding with specified parameters.
 	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
 	// or to re-process a completed video with new transcoding settings.
@@ -149,6 +155,16 @@ func (c *videoServiceClient) Update(ctx context.Context, in *UpdateVideoRequest,
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(operation.Operation)
 	err := c.cc.Invoke(ctx, VideoService_Update_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *videoServiceClient) RenewSource(ctx context.Context, in *RenewVideoSourceRequest, opts ...grpc.CallOption) (*operation.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(operation.Operation)
+	err := c.cc.Invoke(ctx, VideoService_RenewSource_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -279,6 +295,11 @@ type VideoServiceServer interface {
 	// Updates an existing video's metadata and settings.
 	// Only fields specified in the field_mask will be updated.
 	Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error)
+	// Renews video source data for further upload.
+	// This method is not applicable to videos in WAIT_UPLOADING and PROCESSING statuses.
+	// Returns an operation which restores the previously uploaded video source upon cancellation.
+	// (-- api-linter: yc::1702::method-verb-prefix=disabled --)
+	RenewSource(context.Context, *RenewVideoSourceRequest) (*operation.Operation, error)
 	// Initiates or updates video transcoding with specified parameters.
 	// Can be used to start transcoding for videos with auto_transcode=DISABLE,
 	// or to re-process a completed video with new transcoding settings.
@@ -336,6 +357,9 @@ func (UnimplementedVideoServiceServer) Create(context.Context, *CreateVideoReque
 }
 func (UnimplementedVideoServiceServer) Update(context.Context, *UpdateVideoRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedVideoServiceServer) RenewSource(context.Context, *RenewVideoSourceRequest) (*operation.Operation, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenewSource not implemented")
 }
 func (UnimplementedVideoServiceServer) Transcode(context.Context, *TranscodeVideoRequest) (*operation.Operation, error) {
 	return nil, status.Error(codes.Unimplemented, "method Transcode not implemented")
@@ -473,6 +497,24 @@ func _VideoService_Update_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VideoServiceServer).Update(ctx, req.(*UpdateVideoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VideoService_RenewSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenewVideoSourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoServiceServer).RenewSource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VideoService_RenewSource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoServiceServer).RenewSource(ctx, req.(*RenewVideoSourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -683,6 +725,10 @@ var VideoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _VideoService_Update_Handler,
+		},
+		{
+			MethodName: "RenewSource",
+			Handler:    _VideoService_RenewSource_Handler,
 		},
 		{
 			MethodName: "Transcode",
