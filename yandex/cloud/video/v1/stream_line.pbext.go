@@ -70,6 +70,10 @@ func (m *StreamLine) SetAutoLine(v *AutoLine) {
 	}
 }
 
+func (m *StreamLine) SetAudioSettings(v *StreamLineAudioSettings) {
+	m.AudioSettings = v
+}
+
 func (m *StreamLine) SetProcessingSettings(v *StreamLineProcessingSettings) {
 	m.ProcessingSettings = v
 }
@@ -128,6 +132,22 @@ func (m *SRTPullInput) SetBackupUrl(v string) {
 
 func (m *AutoLine) SetStatus(v AutoLine_AutoLineStatus) {
 	m.Status = v
+}
+
+func (m *StreamLineAudioSettings) SetAudioTracks(v []*StreamLineAudioSettings_AudioTrack) {
+	m.AudioTracks = v
+}
+
+func (m *StreamLineAudioSettings_AudioTrack) SetTrackIndex(v int64) {
+	m.TrackIndex = v
+}
+
+func (m *StreamLineAudioSettings_AudioTrack) SetLabel(v string) {
+	m.Label = v
+}
+
+func (m *StreamLineAudioSettings_AudioTrack) SetLang(v string) {
+	m.Lang = v
 }
 
 func (m *StreamLineProcessingSettings) SetSummarization(v *StreamLineProcessingSettings_Summarization) {

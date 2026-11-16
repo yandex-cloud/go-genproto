@@ -104,6 +104,10 @@ func (m *CreateStreamLineRequest) SetAutoLine(v *AutoLineParams) {
 	}
 }
 
+func (m *CreateStreamLineRequest) SetAudioSettings(v *StreamLineAudioSettings) {
+	m.AudioSettings = v
+}
+
 func (m *CreateStreamLineRequest) SetProcessingSettings(v *StreamLineProcessingSettings) {
 	m.ProcessingSettings = v
 }
@@ -154,6 +158,10 @@ func (m *UpdateStreamLineRequest) SetSrtPull(v *SRTPullParams) {
 	m.InputParams = &UpdateStreamLineRequest_SrtPull{
 		SrtPull: v,
 	}
+}
+
+func (m *UpdateStreamLineRequest) SetAudioSettings(v *StreamLineAudioSettings) {
+	m.AudioSettings = v
 }
 
 func (m *UpdateStreamLineRequest) SetProcessingSettings(v *StreamLineProcessingSettings) {

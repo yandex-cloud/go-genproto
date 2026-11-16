@@ -61,3 +61,7 @@ func (m *UserConfiguration) SetRam(v *UserRAM) {
 func (m *UserConfiguration) SetNetworkInterfaces(v []*ConfigurationNetworkInterface) {
 	m.NetworkInterfaces = v
 }
+
+func (m *UserConfiguration) SetMountingAvailability(v MountingAvailability) {
+	m.MountingAvailability = v
+}

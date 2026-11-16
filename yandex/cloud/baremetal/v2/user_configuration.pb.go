@@ -22,6 +22,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type MountingAvailability int32
+
+const (
+	// Unspecified mounting availability.
+	MountingAvailability_MOUNTING_AVAILABILITY_UNSPECIFIED MountingAvailability = 0
+	// Mounting is available.
+	MountingAvailability_AVAILABLE MountingAvailability = 1
+	// Mounting is unavailable.
+	MountingAvailability_UNAVAILABLE MountingAvailability = 2
+)
+
+// Enum value maps for MountingAvailability.
+var (
+	MountingAvailability_name = map[int32]string{
+		0: "MOUNTING_AVAILABILITY_UNSPECIFIED",
+		1: "AVAILABLE",
+		2: "UNAVAILABLE",
+	}
+	MountingAvailability_value = map[string]int32{
+		"MOUNTING_AVAILABILITY_UNSPECIFIED": 0,
+		"AVAILABLE":                         1,
+		"UNAVAILABLE":                       2,
+	}
+)
+
+func (x MountingAvailability) Enum() *MountingAvailability {
+	p := new(MountingAvailability)
+	*p = x
+	return p
+}
+
+func (x MountingAvailability) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MountingAvailability) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[0].Descriptor()
+}
+
+func (MountingAvailability) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[0]
+}
+
+func (x MountingAvailability) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MountingAvailability.Descriptor instead.
+func (MountingAvailability) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDescGZIP(), []int{0}
+}
+
 type NetworkInterfacesOptionSpec_InterfaceMode int32
 
 const (
@@ -58,11 +110,11 @@ func (x NetworkInterfacesOptionSpec_InterfaceMode) String() string {
 }
 
 func (NetworkInterfacesOptionSpec_InterfaceMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[0].Descriptor()
+	return file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[1].Descriptor()
 }
 
 func (NetworkInterfacesOptionSpec_InterfaceMode) Type() protoreflect.EnumType {
-	return &file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[0]
+	return &file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes[1]
 }
 
 func (x NetworkInterfacesOptionSpec_InterfaceMode) Number() protoreflect.EnumNumber {
@@ -422,8 +474,10 @@ type UserConfiguration struct {
 	Ram *UserRAM `protobuf:"bytes,5,opt,name=ram,proto3" json:"ram,omitempty"`
 	// Network interfaces of the custom configuration.
 	NetworkInterfaces []*ConfigurationNetworkInterface `protobuf:"bytes,10,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Availability of boot image mounting for this configuration.
+	MountingAvailability MountingAvailability `protobuf:"varint,12,opt,name=mounting_availability,json=mountingAvailability,proto3,enum=yandex.cloud.baremetal.v2.MountingAvailability" json:"mounting_availability,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *UserConfiguration) Reset() {
@@ -498,6 +552,13 @@ func (x *UserConfiguration) GetNetworkInterfaces() []*ConfigurationNetworkInterf
 	return nil
 }
 
+func (x *UserConfiguration) GetMountingAvailability() MountingAvailability {
+	if x != nil {
+		return x.MountingAvailability
+	}
+	return MountingAvailability_MOUNTING_AVAILABILITY_UNSPECIFIED
+}
+
 type NetworkInterfacesOptionSpec_MCLagOptions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -562,7 +623,7 @@ const file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc = "" +
 	"\n" +
 	"\x06PUBLIC\x10\x02\"\n" +
 	"\n" +
-	"\bUserPool\"\xa2\x03\n" +
+	"\bUserPool\"\x93\x04\n" +
 	"\x11UserConfiguration\x121\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\x0fconfigurationId\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tB\x03\xe0A\x02R\x04name\x129\n" +
@@ -571,8 +632,13 @@ const file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc = "" +
 	"diskDrives\x129\n" +
 	"\x03ram\x18\x05 \x01(\v2\".yandex.cloud.baremetal.v2.UserRAMB\x03\xe0A\x02R\x03ram\x12l\n" +
 	"\x12network_interfaces\x18\n" +
-	" \x03(\v28.yandex.cloud.baremetal.v2.ConfigurationNetworkInterfaceB\x03\xe0A\x03R\x11networkInterfacesJ\x04\b\x06\x10\n" +
-	"Bl\n" +
+	" \x03(\v28.yandex.cloud.baremetal.v2.ConfigurationNetworkInterfaceB\x03\xe0A\x03R\x11networkInterfaces\x12i\n" +
+	"\x15mounting_availability\x18\f \x01(\x0e2/.yandex.cloud.baremetal.v2.MountingAvailabilityB\x03\xe0A\x03R\x14mountingAvailabilityJ\x04\b\x06\x10\n" +
+	"J\x04\b\v\x10\f*]\n" +
+	"\x14MountingAvailability\x12%\n" +
+	"!MOUNTING_AVAILABILITY_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tAVAILABLE\x10\x01\x12\x0f\n" +
+	"\vUNAVAILABLE\x10\x02Bl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -587,32 +653,34 @@ func file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDescGZIP() []byt
 	return file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDescData
 }
 
-var file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_yandex_cloud_baremetal_v2_user_configuration_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_yandex_cloud_baremetal_v2_user_configuration_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_yandex_cloud_baremetal_v2_user_configuration_proto_goTypes = []any{
-	(NetworkInterfacesOptionSpec_InterfaceMode)(0), // 0: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec.InterfaceMode
-	(*UserCPU)(nil),                                  // 1: yandex.cloud.baremetal.v2.UserCPU
-	(*UserRAM)(nil),                                  // 2: yandex.cloud.baremetal.v2.UserRAM
-	(*UserNIC)(nil),                                  // 3: yandex.cloud.baremetal.v2.UserNIC
-	(*SelectedNetworkInterfacesOption)(nil),          // 4: yandex.cloud.baremetal.v2.SelectedNetworkInterfacesOption
-	(*NetworkInterfacesOption)(nil),                  // 5: yandex.cloud.baremetal.v2.NetworkInterfacesOption
-	(*NetworkInterfacesOptionSpec)(nil),              // 6: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec
-	(*UserPool)(nil),                                 // 7: yandex.cloud.baremetal.v2.UserPool
-	(*UserConfiguration)(nil),                        // 8: yandex.cloud.baremetal.v2.UserConfiguration
-	(*NetworkInterfacesOptionSpec_MCLagOptions)(nil), // 9: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec.MCLagOptions
-	(*DiskDriveConfiguration)(nil),                   // 10: yandex.cloud.baremetal.v2.DiskDriveConfiguration
-	(*ConfigurationNetworkInterface)(nil),            // 11: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
+	(MountingAvailability)(0),                        // 0: yandex.cloud.baremetal.v2.MountingAvailability
+	(NetworkInterfacesOptionSpec_InterfaceMode)(0),   // 1: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec.InterfaceMode
+	(*UserCPU)(nil),                                  // 2: yandex.cloud.baremetal.v2.UserCPU
+	(*UserRAM)(nil),                                  // 3: yandex.cloud.baremetal.v2.UserRAM
+	(*UserNIC)(nil),                                  // 4: yandex.cloud.baremetal.v2.UserNIC
+	(*SelectedNetworkInterfacesOption)(nil),          // 5: yandex.cloud.baremetal.v2.SelectedNetworkInterfacesOption
+	(*NetworkInterfacesOption)(nil),                  // 6: yandex.cloud.baremetal.v2.NetworkInterfacesOption
+	(*NetworkInterfacesOptionSpec)(nil),              // 7: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec
+	(*UserPool)(nil),                                 // 8: yandex.cloud.baremetal.v2.UserPool
+	(*UserConfiguration)(nil),                        // 9: yandex.cloud.baremetal.v2.UserConfiguration
+	(*NetworkInterfacesOptionSpec_MCLagOptions)(nil), // 10: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec.MCLagOptions
+	(*DiskDriveConfiguration)(nil),                   // 11: yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	(*ConfigurationNetworkInterface)(nil),            // 12: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
 }
 var file_yandex_cloud_baremetal_v2_user_configuration_proto_depIdxs = []int32{
-	1,  // 0: yandex.cloud.baremetal.v2.UserConfiguration.cpu:type_name -> yandex.cloud.baremetal.v2.UserCPU
-	10, // 1: yandex.cloud.baremetal.v2.UserConfiguration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
-	2,  // 2: yandex.cloud.baremetal.v2.UserConfiguration.ram:type_name -> yandex.cloud.baremetal.v2.UserRAM
-	11, // 3: yandex.cloud.baremetal.v2.UserConfiguration.network_interfaces:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
-	4,  // [4:4] is the sub-list for method output_type
-	4,  // [4:4] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	2,  // 0: yandex.cloud.baremetal.v2.UserConfiguration.cpu:type_name -> yandex.cloud.baremetal.v2.UserCPU
+	11, // 1: yandex.cloud.baremetal.v2.UserConfiguration.disk_drives:type_name -> yandex.cloud.baremetal.v2.DiskDriveConfiguration
+	3,  // 2: yandex.cloud.baremetal.v2.UserConfiguration.ram:type_name -> yandex.cloud.baremetal.v2.UserRAM
+	12, // 3: yandex.cloud.baremetal.v2.UserConfiguration.network_interfaces:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
+	0,  // 4: yandex.cloud.baremetal.v2.UserConfiguration.mounting_availability:type_name -> yandex.cloud.baremetal.v2.MountingAvailability
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_user_configuration_proto_init() }
@@ -626,7 +694,7 @@ func file_yandex_cloud_baremetal_v2_user_configuration_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
