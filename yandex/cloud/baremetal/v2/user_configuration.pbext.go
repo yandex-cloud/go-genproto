@@ -65,3 +65,11 @@ func (m *UserConfiguration) SetNetworkInterfaces(v []*ConfigurationNetworkInterf
 func (m *UserConfiguration) SetMountingAvailability(v MountingAvailability) {
 	m.MountingAvailability = v
 }
+
+func (m *UserConfiguration) SetDeviceId(v string) {
+	m.DeviceId = v
+}
+
+func (m *UserConfiguration) SetServerType(v ServerType) {
+	m.ServerType = v
+}

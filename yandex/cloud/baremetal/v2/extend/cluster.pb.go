@@ -24,6 +24,67 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Billing status of cluster or node consumption.
+type BillingStatus int32
+
+const (
+	// Unspecified billing status.
+	BillingStatus_BILLING_STATUS_UNSPECIFIED BillingStatus = 0
+	// Resource is in a trial period.
+	BillingStatus_TRIAL BillingStatus = 1
+	// Resource consumption is not being billed yet.
+	BillingStatus_NOT_BILLING BillingStatus = 2
+	// Resource consumption is being billed.
+	BillingStatus_BILLING BillingStatus = 3
+	// Resource consumption is never billed by the service.
+	BillingStatus_UNBILLABLE BillingStatus = 4
+)
+
+// Enum value maps for BillingStatus.
+var (
+	BillingStatus_name = map[int32]string{
+		0: "BILLING_STATUS_UNSPECIFIED",
+		1: "TRIAL",
+		2: "NOT_BILLING",
+		3: "BILLING",
+		4: "UNBILLABLE",
+	}
+	BillingStatus_value = map[string]int32{
+		"BILLING_STATUS_UNSPECIFIED": 0,
+		"TRIAL":                      1,
+		"NOT_BILLING":                2,
+		"BILLING":                    3,
+		"UNBILLABLE":                 4,
+	}
+)
+
+func (x BillingStatus) Enum() *BillingStatus {
+	p := new(BillingStatus)
+	*p = x
+	return p
+}
+
+func (x BillingStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (BillingStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_yandex_cloud_baremetal_v2_extend_cluster_proto_enumTypes[0].Descriptor()
+}
+
+func (BillingStatus) Type() protoreflect.EnumType {
+	return &file_yandex_cloud_baremetal_v2_extend_cluster_proto_enumTypes[0]
+}
+
+func (x BillingStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use BillingStatus.Descriptor instead.
+func (BillingStatus) EnumDescriptor() ([]byte, []int) {
+	return file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDescGZIP(), []int{0}
+}
+
 type BastionSpec struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Root user SSH key.
@@ -184,7 +245,14 @@ const file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDesc = "" +
 	"\xe0A\x04\x8a\xc81\x03>=6H\x01R\x11passwordPlainText\x12g\n" +
 	"\x17password_lockbox_secret\x18\x04 \x01(\v2(.yandex.cloud.baremetal.v2.LockboxSecretB\x03\xe0A\x04H\x01R\x15passwordLockboxSecretB\x0f\n" +
 	"\assh_key\x12\x04\xc0\xc11\x01B\x10\n" +
-	"\bpassword\x12\x04\xc0\xc11\x01Bz\n" +
+	"\bpassword\x12\x04\xc0\xc11\x01*h\n" +
+	"\rBillingStatus\x12\x1e\n" +
+	"\x1aBILLING_STATUS_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05TRIAL\x10\x01\x12\x0f\n" +
+	"\vNOT_BILLING\x10\x02\x12\v\n" +
+	"\aBILLING\x10\x03\x12\x0e\n" +
+	"\n" +
+	"UNBILLABLE\x10\x04Bz\n" +
 	"(yandex.cloud.api.api.baremetal.v2.extendZNgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2/extend;baremetalb\x06proto3"
 
 var (
@@ -199,13 +267,15 @@ func file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDescGZIP() []byte {
 	return file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDescData
 }
 
+var file_yandex_cloud_baremetal_v2_extend_cluster_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v2_extend_cluster_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_yandex_cloud_baremetal_v2_extend_cluster_proto_goTypes = []any{
-	(*BastionSpec)(nil),      // 0: yandex.cloud.baremetal.v2.extend.BastionSpec
-	(*v2.LockboxSecret)(nil), // 1: yandex.cloud.baremetal.v2.LockboxSecret
+	(BillingStatus)(0),       // 0: yandex.cloud.baremetal.v2.extend.BillingStatus
+	(*BastionSpec)(nil),      // 1: yandex.cloud.baremetal.v2.extend.BastionSpec
+	(*v2.LockboxSecret)(nil), // 2: yandex.cloud.baremetal.v2.LockboxSecret
 }
 var file_yandex_cloud_baremetal_v2_extend_cluster_proto_depIdxs = []int32{
-	1, // 0: yandex.cloud.baremetal.v2.extend.BastionSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v2.LockboxSecret
+	2, // 0: yandex.cloud.baremetal.v2.extend.BastionSpec.password_lockbox_secret:type_name -> yandex.cloud.baremetal.v2.LockboxSecret
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -229,13 +299,14 @@ func file_yandex_cloud_baremetal_v2_extend_cluster_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDesc), len(file_yandex_cloud_baremetal_v2_extend_cluster_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_yandex_cloud_baremetal_v2_extend_cluster_proto_goTypes,
 		DependencyIndexes: file_yandex_cloud_baremetal_v2_extend_cluster_proto_depIdxs,
+		EnumInfos:         file_yandex_cloud_baremetal_v2_extend_cluster_proto_enumTypes,
 		MessageInfos:      file_yandex_cloud_baremetal_v2_extend_cluster_proto_msgTypes,
 	}.Build()
 	File_yandex_cloud_baremetal_v2_extend_cluster_proto = out.File

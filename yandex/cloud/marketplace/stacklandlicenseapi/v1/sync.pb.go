@@ -45,6 +45,8 @@ const (
 	ProductType_PRODUCT_TYPE_S3 ProductType = 6
 	// YDB.
 	ProductType_PRODUCT_TYPE_YDB ProductType = 7
+	// SourceCraft product.
+	ProductType_PRODUCT_TYPE_SOURCECRAFT ProductType = 8
 )
 
 // Enum value maps for ProductType.
@@ -58,6 +60,7 @@ var (
 		5: "PRODUCT_TYPE_ROBOTICS_AI",
 		6: "PRODUCT_TYPE_S3",
 		7: "PRODUCT_TYPE_YDB",
+		8: "PRODUCT_TYPE_SOURCECRAFT",
 	}
 	ProductType_value = map[string]int32{
 		"PRODUCT_TYPE_UNSPECIFIED": 0,
@@ -68,6 +71,7 @@ var (
 		"PRODUCT_TYPE_ROBOTICS_AI": 5,
 		"PRODUCT_TYPE_S3":          6,
 		"PRODUCT_TYPE_YDB":         7,
+		"PRODUCT_TYPE_SOURCECRAFT": 8,
 	}
 )
 
@@ -781,7 +785,7 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\x11SyncUsageMetadata\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12,\n" +
 	"\x12billing_account_id\x18\x02 \x01(\tR\x10billingAccountId\x12*\n" +
-	"\x11license_server_id\x18\x03 \x01(\tR\x0flicenseServerId*\xe5\x01\n" +
+	"\x11license_server_id\x18\x03 \x01(\tR\x0flicenseServerId*\x83\x02\n" +
 	"\vProductType\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16PRODUCT_TYPE_STACKLAND\x10\x01\x12\x19\n" +
@@ -790,7 +794,8 @@ const file_yandex_cloud_marketplace_stacklandlicenseapi_v1_sync_proto_rawDesc = 
 	"\x18PRODUCT_TYPE_SPEECHSENSE\x10\x04\x12\x1c\n" +
 	"\x18PRODUCT_TYPE_ROBOTICS_AI\x10\x05\x12\x13\n" +
 	"\x0fPRODUCT_TYPE_S3\x10\x06\x12\x14\n" +
-	"\x10PRODUCT_TYPE_YDB\x10\a*v\n" +
+	"\x10PRODUCT_TYPE_YDB\x10\a\x12\x1c\n" +
+	"\x18PRODUCT_TYPE_SOURCECRAFT\x10\b*v\n" +
 	"\vLicenseType\x12\x1c\n" +
 	"\x18LICENSE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11LICENSE_TYPE_TERM\x10\x01\x12\x1a\n" +

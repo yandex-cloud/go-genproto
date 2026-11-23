@@ -24,7 +24,7 @@ const (
 // ExternalInstance attachment to external service subscription.
 type ExternalInstance struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional external subscription name.
+	// Optional but recommended name for the external subscription.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Mapping of vendor defined properties in key, value format.
 	Properties map[string]string `protobuf:"bytes,21,rep,name=properties,proto3" json:"properties,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -111,10 +111,12 @@ type isExternalInstance_Vendor interface {
 }
 
 type ExternalInstance_Subscription struct {
+	// Linked external subscription.
 	Subscription *ExternalSubscription `protobuf:"bytes,22,opt,name=subscription,proto3,oneof"`
 }
 
 type ExternalInstance_License struct {
+	// Linked external license.
 	License *ExternalLicense `protobuf:"bytes,23,opt,name=license,proto3,oneof"`
 }
 
@@ -122,13 +124,15 @@ func (*ExternalInstance_Subscription) isExternalInstance_Vendor() {}
 
 func (*ExternalInstance_License) isExternalInstance_Vendor() {}
 
+// ExternalSubscription contains details of a subscription managed by an
+// external provider and linked to a License Manager subscription instance.
 type ExternalSubscription struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// External subscription id.
 	SubscriptionId string `protobuf:"bytes,1,opt,name=subscription_id,json=subscriptionId,proto3" json:"subscription_id,omitempty"`
-	// Optional: paired license id for external subscription.
+	// Optional: paired license for external subscription.
 	LicenseId string `protobuf:"bytes,2,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
-	// Optional: default activation key for external subscription.
+	// Optional: activation key for external subscription.
 	ActivationKey string `protobuf:"bytes,3,opt,name=activation_key,json=activationKey,proto3" json:"activation_key,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

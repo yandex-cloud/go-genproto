@@ -98,6 +98,8 @@ const (
 	RAMType_DDR4 RAMType = 2
 	// DDR5 RAM type.
 	RAMType_DDR5 RAMType = 3
+	// LPDDR5X RAM type.
+	RAMType_LPDDR5X RAMType = 4
 )
 
 // Enum value maps for RAMType.
@@ -107,12 +109,14 @@ var (
 		1: "DDR3",
 		2: "DDR4",
 		3: "DDR5",
+		4: "LPDDR5X",
 	}
 	RAMType_value = map[string]int32{
 		"RAM_TYPE_UNSPECIFIED": 0,
 		"DDR3":                 1,
 		"DDR4":                 2,
 		"DDR5":                 3,
+		"LPDDR5X":              4,
 	}
 )
 
@@ -851,12 +855,13 @@ const file_yandex_cloud_baremetal_v2_configuration_proto_rawDesc = "" +
 	"\rPSU_TYPE_DUAL\x10\x02\x12\x11\n" +
 	"\rPSU_TYPE_QUAD\x10\x03\x12\x10\n" +
 	"\fPSU_TYPE_OCP\x10\x04\x12\x12\n" +
-	"\x0ePSU_TYPE_OTHER\x10\x05*A\n" +
+	"\x0ePSU_TYPE_OTHER\x10\x05*N\n" +
 	"\aRAMType\x12\x18\n" +
 	"\x14RAM_TYPE_UNSPECIFIED\x10\x00\x12\b\n" +
 	"\x04DDR3\x10\x01\x12\b\n" +
 	"\x04DDR4\x10\x02\x12\b\n" +
-	"\x04DDR5\x10\x03*^\n" +
+	"\x04DDR5\x10\x03\x12\v\n" +
+	"\aLPDDR5X\x10\x04*^\n" +
 	"\n" +
 	"ServerType\x12\x1b\n" +
 	"\x17SERVER_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +

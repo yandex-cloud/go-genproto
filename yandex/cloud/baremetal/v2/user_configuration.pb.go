@@ -7,6 +7,7 @@
 package baremetal
 
 import (
+	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -460,24 +461,30 @@ func (*UserPool) Descriptor() ([]byte, []int) {
 	return file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDescGZIP(), []int{6}
 }
 
+// Device orders are identified by device_id and server_type. Physical characteristics
+// may be absent; separate component selections must not accompany device_id.
 type UserConfiguration struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the configuration.
 	ConfigurationId string `protobuf:"bytes,1,opt,name=configuration_id,json=configurationId,proto3" json:"configuration_id,omitempty"`
 	// Name of the configuration.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	// CPU configuration.
+	// CPU configuration. Required for orders without device_id.
 	Cpu *UserCPU `protobuf:"bytes,3,opt,name=cpu,proto3" json:"cpu,omitempty"`
-	// Array of disk drive configurations.
+	// Disk selections. Required for orders without device_id.
 	DiskDrives []*DiskDriveConfiguration `protobuf:"bytes,4,rep,name=disk_drives,json=diskDrives,proto3" json:"disk_drives,omitempty"`
-	// Random-access memory (RAM).
+	// RAM selection. Required for orders without device_id.
 	Ram *UserRAM `protobuf:"bytes,5,opt,name=ram,proto3" json:"ram,omitempty"`
 	// Network interfaces of the custom configuration.
 	NetworkInterfaces []*ConfigurationNetworkInterface `protobuf:"bytes,10,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
 	// Availability of boot image mounting for this configuration.
 	MountingAvailability MountingAvailability `protobuf:"varint,12,opt,name=mounting_availability,json=mountingAvailability,proto3,enum=yandex.cloud.baremetal.v2.MountingAvailability" json:"mounting_availability,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Selects one device instead of CPU, RAM, disks, NIC, PSU and GPU components.
+	DeviceId string `protobuf:"bytes,13,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	// Type of server determined by the selected configuration. Ignored on input.
+	ServerType    ServerType `protobuf:"varint,14,opt,name=server_type,json=serverType,proto3,enum=yandex.cloud.baremetal.v2.ServerType" json:"server_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserConfiguration) Reset() {
@@ -559,6 +566,20 @@ func (x *UserConfiguration) GetMountingAvailability() MountingAvailability {
 	return MountingAvailability_MOUNTING_AVAILABILITY_UNSPECIFIED
 }
 
+func (x *UserConfiguration) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *UserConfiguration) GetServerType() ServerType {
+	if x != nil {
+		return x.ServerType
+	}
+	return ServerType_SERVER_TYPE_UNSPECIFIED
+}
+
 type NetworkInterfacesOptionSpec_MCLagOptions struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -599,7 +620,7 @@ var File_yandex_cloud_baremetal_v2_user_configuration_proto protoreflect.FileDes
 
 const file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc = "" +
 	"\n" +
-	"2yandex/cloud/baremetal/v2/user_configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/configuration.proto\"\xe4\x01\n" +
+	"2yandex/cloud/baremetal/v2/user_configuration.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1fgoogle/api/field_behavior.proto\x1a-yandex/cloud/baremetal/v2/configuration.proto\x1a\x1dyandex/cloud/validation.proto\"\xe4\x01\n" +
 	"\aUserCPU\x12\x13\n" +
 	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x04R\x02id\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tB\x03\xe0A\x03R\x04name\x12\x1b\n" +
@@ -623,17 +644,20 @@ const file_yandex_cloud_baremetal_v2_user_configuration_proto_rawDesc = "" +
 	"\n" +
 	"\x06PUBLIC\x10\x02\"\n" +
 	"\n" +
-	"\bUserPool\"\x93\x04\n" +
+	"\bUserPool\"\x8a\x05\n" +
 	"\x11UserConfiguration\x121\n" +
 	"\x10configuration_id\x18\x01 \x01(\tB\x06\xe0A\b\xe0A\x03R\x0fconfigurationId\x12\x17\n" +
 	"\x04name\x18\x02 \x01(\tB\x03\xe0A\x02R\x04name\x129\n" +
-	"\x03cpu\x18\x03 \x01(\v2\".yandex.cloud.baremetal.v2.UserCPUB\x03\xe0A\x02R\x03cpu\x12W\n" +
-	"\vdisk_drives\x18\x04 \x03(\v21.yandex.cloud.baremetal.v2.DiskDriveConfigurationB\x03\xe0A\x02R\n" +
+	"\x03cpu\x18\x03 \x01(\v2\".yandex.cloud.baremetal.v2.UserCPUB\x03\xe0A\x01R\x03cpu\x12W\n" +
+	"\vdisk_drives\x18\x04 \x03(\v21.yandex.cloud.baremetal.v2.DiskDriveConfigurationB\x03\xe0A\x01R\n" +
 	"diskDrives\x129\n" +
-	"\x03ram\x18\x05 \x01(\v2\".yandex.cloud.baremetal.v2.UserRAMB\x03\xe0A\x02R\x03ram\x12l\n" +
+	"\x03ram\x18\x05 \x01(\v2\".yandex.cloud.baremetal.v2.UserRAMB\x03\xe0A\x01R\x03ram\x12l\n" +
 	"\x12network_interfaces\x18\n" +
 	" \x03(\v28.yandex.cloud.baremetal.v2.ConfigurationNetworkInterfaceB\x03\xe0A\x03R\x11networkInterfaces\x12i\n" +
-	"\x15mounting_availability\x18\f \x01(\x0e2/.yandex.cloud.baremetal.v2.MountingAvailabilityB\x03\xe0A\x03R\x14mountingAvailabilityJ\x04\b\x06\x10\n" +
+	"\x15mounting_availability\x18\f \x01(\x0e2/.yandex.cloud.baremetal.v2.MountingAvailabilityB\x03\xe0A\x03R\x14mountingAvailability\x12(\n" +
+	"\tdevice_id\x18\r \x01(\tB\v\xe0A\x01\x8a\xc81\x04<=50R\bdeviceId\x12K\n" +
+	"\vserver_type\x18\x0e \x01(\x0e2%.yandex.cloud.baremetal.v2.ServerTypeB\x03\xe0A\x03R\n" +
+	"serverTypeJ\x04\b\x06\x10\n" +
 	"J\x04\b\v\x10\f*]\n" +
 	"\x14MountingAvailability\x12%\n" +
 	"!MOUNTING_AVAILABILITY_UNSPECIFIED\x10\x00\x12\r\n" +
@@ -669,6 +693,7 @@ var file_yandex_cloud_baremetal_v2_user_configuration_proto_goTypes = []any{
 	(*NetworkInterfacesOptionSpec_MCLagOptions)(nil), // 10: yandex.cloud.baremetal.v2.NetworkInterfacesOptionSpec.MCLagOptions
 	(*DiskDriveConfiguration)(nil),                   // 11: yandex.cloud.baremetal.v2.DiskDriveConfiguration
 	(*ConfigurationNetworkInterface)(nil),            // 12: yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
+	(ServerType)(0),                                  // 13: yandex.cloud.baremetal.v2.ServerType
 }
 var file_yandex_cloud_baremetal_v2_user_configuration_proto_depIdxs = []int32{
 	2,  // 0: yandex.cloud.baremetal.v2.UserConfiguration.cpu:type_name -> yandex.cloud.baremetal.v2.UserCPU
@@ -676,11 +701,12 @@ var file_yandex_cloud_baremetal_v2_user_configuration_proto_depIdxs = []int32{
 	3,  // 2: yandex.cloud.baremetal.v2.UserConfiguration.ram:type_name -> yandex.cloud.baremetal.v2.UserRAM
 	12, // 3: yandex.cloud.baremetal.v2.UserConfiguration.network_interfaces:type_name -> yandex.cloud.baremetal.v2.ConfigurationNetworkInterface
 	0,  // 4: yandex.cloud.baremetal.v2.UserConfiguration.mounting_availability:type_name -> yandex.cloud.baremetal.v2.MountingAvailability
-	5,  // [5:5] is the sub-list for method output_type
-	5,  // [5:5] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	13, // 5: yandex.cloud.baremetal.v2.UserConfiguration.server_type:type_name -> yandex.cloud.baremetal.v2.ServerType
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_baremetal_v2_user_configuration_proto_init() }
