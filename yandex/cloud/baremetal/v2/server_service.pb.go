@@ -8,6 +8,7 @@ package baremetal
 
 import (
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud"
+	access "github.com/yandex-cloud/go-genproto/yandex/cloud/access"
 	_ "github.com/yandex-cloud/go-genproto/yandex/cloud/api"
 	operation "github.com/yandex-cloud/go-genproto/yandex/cloud/operation"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -1843,7 +1844,7 @@ var File_yandex_cloud_baremetal_v2_server_service_proto protoreflect.FileDescrip
 
 const file_yandex_cloud_baremetal_v2_server_service_proto_rawDesc = "" +
 	"\n" +
-	".yandex/cloud/baremetal/v2/server_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/baremetal/v2/operation.proto\x1a&yandex/cloud/baremetal/v2/server.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x01\n" +
+	".yandex/cloud/baremetal/v2/server_service.proto\x12\x19yandex.cloud.baremetal.v2\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a google/protobuf/field_mask.proto\x1a yandex/cloud/access/access.proto\x1a yandex/cloud/api/operation.proto\x1a)yandex/cloud/baremetal/v2/operation.proto\x1a&yandex/cloud/baremetal/v2/server.proto\x1a&yandex/cloud/operation/operation.proto\x1a\x1dyandex/cloud/validation.proto\"\x8e\x01\n" +
 	"\x10GetServerRequest\x12\x1e\n" +
 	"\bcloud_id\x18\x01 \x01(\tB\x03\xe0A\x02R\acloudId\x12 \n" +
 	"\tfolder_id\x18\x02 \x01(\tB\x03\xe0A\x02R\bfolderId\x128\n" +
@@ -1958,7 +1959,7 @@ const file_yandex_cloud_baremetal_v2_server_service_proto_rawDesc = "" +
 	"\x17REBOOT_MODE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aNETWORK\x10\x01\x12\t\n" +
 	"\x05CDROM\x10\x02\x12\b\n" +
-	"\x04BIOS\x10\x032\xb4\x1a\n" +
+	"\x04BIOS\x10\x032\xe6\x1f\n" +
 	"\rServerService\x12\xcb\x01\n" +
 	"\tGetServer\x12+.yandex.cloud.baremetal.v2.GetServerRequest\x1a!.yandex.cloud.baremetal.v2.Server\"n\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02I\x12G/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}\x12\xc6\x01\n" +
 	"\vListServers\x12-.yandex.cloud.baremetal.v2.ListServersRequest\x1a..yandex.cloud.baremetal.v2.ListServersResponse\"X\xdaA\x12cloud_id,folder_id\x82\xd3\xe4\x93\x02=\x12;/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers\x12\xed\x01\n" +
@@ -1982,7 +1983,12 @@ const file_yandex_cloud_baremetal_v2_server_service_proto_rawDesc = "" +
 	"\x17ReinstallServerMetadata\x12\x15google.protobuf.Empty\x82\xd3\xe4\x93\x02V:\x01*\"Q/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:reinstall\x12\x92\x02\n" +
 	"\x11RenewServerRental\x123.yandex.cloud.baremetal.v2.RenewServerRentalRequest\x1a!.yandex.cloud.operation.Operation\"\xa4\x01\xdaA\x1ccloud_id,folder_id,server_id\xb2\xd2*#\n" +
 	"\x19RenewServerRentalMetadata\x12\x06Server\x82\xd3\xe4\x93\x02X:\x01*\"S/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}:renewRental\x12\x82\x02\n" +
-	"\x14ListServerOperations\x126.yandex.cloud.baremetal.v2.ListServerOperationsRequest\x1a7.yandex.cloud.baremetal.v2.ListServerOperationsResponse\"y\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02T\x12R/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}/operationsBl\n" +
+	"\x14ListServerOperations\x126.yandex.cloud.baremetal.v2.ListServerOperationsRequest\x1a7.yandex.cloud.baremetal.v2.ListServerOperationsResponse\"y\xdaA\x1ccloud_id,folder_id,server_id\x82\xd3\xe4\x93\x02T\x12R/baremetal/v2/clouds/{cloud_id}/folders/{folder_id}/servers/{server_id}/operations\x12\xb5\x01\n" +
+	"\x12ListAccessBindings\x12..yandex.cloud.access.ListAccessBindingsRequest\x1a/.yandex.cloud.access.ListAccessBindingsResponse\">\x82\xd3\xe4\x93\x028\x126/baremetal/v2/servers/{resource_id}:listAccessBindings\x12\xf4\x01\n" +
+	"\x11SetAccessBindings\x12-.yandex.cloud.access.SetAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x8c\x01\xb2\xd2*H\n" +
+	" access.SetAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02::\x01*\"5/baremetal/v2/servers/{resource_id}:setAccessBindings\x12\x80\x02\n" +
+	"\x14UpdateAccessBindings\x120.yandex.cloud.access.UpdateAccessBindingsRequest\x1a!.yandex.cloud.operation.Operation\"\x92\x01\xb2\xd2*K\n" +
+	"#access.UpdateAccessBindingsMetadata\x12$access.AccessBindingsOperationResult\x82\xd3\xe4\x93\x02=:\x01*\"8/baremetal/v2/servers/{resource_id}:updateAccessBindingsBl\n" +
 	"!yandex.cloud.api.api.baremetal.v2ZGgithub.com/yandex-cloud/go-genproto/yandex/cloud/baremetal/v2;baremetalb\x06proto3"
 
 var (
@@ -2000,40 +2006,44 @@ func file_yandex_cloud_baremetal_v2_server_service_proto_rawDescGZIP() []byte {
 var file_yandex_cloud_baremetal_v2_server_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_yandex_cloud_baremetal_v2_server_service_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_yandex_cloud_baremetal_v2_server_service_proto_goTypes = []any{
-	(RebootMode)(0),                          // 0: yandex.cloud.baremetal.v2.RebootMode
-	(*GetServerRequest)(nil),                 // 1: yandex.cloud.baremetal.v2.GetServerRequest
-	(*ListServersRequest)(nil),               // 2: yandex.cloud.baremetal.v2.ListServersRequest
-	(*ListServersResponse)(nil),              // 3: yandex.cloud.baremetal.v2.ListServersResponse
-	(*CreateServerRequest)(nil),              // 4: yandex.cloud.baremetal.v2.CreateServerRequest
-	(*BatchCreateServersRequest)(nil),        // 5: yandex.cloud.baremetal.v2.BatchCreateServersRequest
-	(*UpdateServerRequest)(nil),              // 6: yandex.cloud.baremetal.v2.UpdateServerRequest
-	(*DeleteServerRequest)(nil),              // 7: yandex.cloud.baremetal.v2.DeleteServerRequest
-	(*SkipQuarantineServerRequest)(nil),      // 8: yandex.cloud.baremetal.v2.SkipQuarantineServerRequest
-	(*PowerOffServerRequest)(nil),            // 9: yandex.cloud.baremetal.v2.PowerOffServerRequest
-	(*PowerOnServerRequest)(nil),             // 10: yandex.cloud.baremetal.v2.PowerOnServerRequest
-	(*RebootServerRequest)(nil),              // 11: yandex.cloud.baremetal.v2.RebootServerRequest
-	(*ReinstallServerRequest)(nil),           // 12: yandex.cloud.baremetal.v2.ReinstallServerRequest
-	(*RenewServerRentalRequest)(nil),         // 13: yandex.cloud.baremetal.v2.RenewServerRentalRequest
-	(*ListServerOperationsRequest)(nil),      // 14: yandex.cloud.baremetal.v2.ListServerOperationsRequest
-	(*ListServerOperationsResponse)(nil),     // 15: yandex.cloud.baremetal.v2.ListServerOperationsResponse
-	(*CreateServerMetadata)(nil),             // 16: yandex.cloud.baremetal.v2.CreateServerMetadata
-	(*UpdateServerMetadata)(nil),             // 17: yandex.cloud.baremetal.v2.UpdateServerMetadata
-	(*DeleteServerMetadata)(nil),             // 18: yandex.cloud.baremetal.v2.DeleteServerMetadata
-	(*DeleteServerByUserMetadata)(nil),       // 19: yandex.cloud.baremetal.v2.DeleteServerByUserMetadata
-	(*PowerOffServerMetadata)(nil),           // 20: yandex.cloud.baremetal.v2.PowerOffServerMetadata
-	(*PowerOnServerMetadata)(nil),            // 21: yandex.cloud.baremetal.v2.PowerOnServerMetadata
-	(*RebootServerMetadata)(nil),             // 22: yandex.cloud.baremetal.v2.RebootServerMetadata
-	(*ReinstallServerMetadata)(nil),          // 23: yandex.cloud.baremetal.v2.ReinstallServerMetadata
-	(*BatchCreateServersResponse)(nil),       // 24: yandex.cloud.baremetal.v2.BatchCreateServersResponse
-	(*BatchCreateServersMetadata)(nil),       // 25: yandex.cloud.baremetal.v2.BatchCreateServersMetadata
-	(*QuarantineServerMetadata)(nil),         // 26: yandex.cloud.baremetal.v2.QuarantineServerMetadata
-	(*ToggleServerProlongationMetadata)(nil), // 27: yandex.cloud.baremetal.v2.ToggleServerProlongationMetadata
-	(*RenewServerRentalMetadata)(nil),        // 28: yandex.cloud.baremetal.v2.RenewServerRentalMetadata
-	(*Server)(nil),                           // 29: yandex.cloud.baremetal.v2.Server
-	(*fieldmaskpb.FieldMask)(nil),            // 30: google.protobuf.FieldMask
-	(*OsSettings)(nil),                       // 31: yandex.cloud.baremetal.v2.OsSettings
-	(*operation.Operation)(nil),              // 32: yandex.cloud.operation.Operation
-	(*OperationMetadata)(nil),                // 33: yandex.cloud.baremetal.v2.OperationMetadata
+	(RebootMode)(0),                            // 0: yandex.cloud.baremetal.v2.RebootMode
+	(*GetServerRequest)(nil),                   // 1: yandex.cloud.baremetal.v2.GetServerRequest
+	(*ListServersRequest)(nil),                 // 2: yandex.cloud.baremetal.v2.ListServersRequest
+	(*ListServersResponse)(nil),                // 3: yandex.cloud.baremetal.v2.ListServersResponse
+	(*CreateServerRequest)(nil),                // 4: yandex.cloud.baremetal.v2.CreateServerRequest
+	(*BatchCreateServersRequest)(nil),          // 5: yandex.cloud.baremetal.v2.BatchCreateServersRequest
+	(*UpdateServerRequest)(nil),                // 6: yandex.cloud.baremetal.v2.UpdateServerRequest
+	(*DeleteServerRequest)(nil),                // 7: yandex.cloud.baremetal.v2.DeleteServerRequest
+	(*SkipQuarantineServerRequest)(nil),        // 8: yandex.cloud.baremetal.v2.SkipQuarantineServerRequest
+	(*PowerOffServerRequest)(nil),              // 9: yandex.cloud.baremetal.v2.PowerOffServerRequest
+	(*PowerOnServerRequest)(nil),               // 10: yandex.cloud.baremetal.v2.PowerOnServerRequest
+	(*RebootServerRequest)(nil),                // 11: yandex.cloud.baremetal.v2.RebootServerRequest
+	(*ReinstallServerRequest)(nil),             // 12: yandex.cloud.baremetal.v2.ReinstallServerRequest
+	(*RenewServerRentalRequest)(nil),           // 13: yandex.cloud.baremetal.v2.RenewServerRentalRequest
+	(*ListServerOperationsRequest)(nil),        // 14: yandex.cloud.baremetal.v2.ListServerOperationsRequest
+	(*ListServerOperationsResponse)(nil),       // 15: yandex.cloud.baremetal.v2.ListServerOperationsResponse
+	(*CreateServerMetadata)(nil),               // 16: yandex.cloud.baremetal.v2.CreateServerMetadata
+	(*UpdateServerMetadata)(nil),               // 17: yandex.cloud.baremetal.v2.UpdateServerMetadata
+	(*DeleteServerMetadata)(nil),               // 18: yandex.cloud.baremetal.v2.DeleteServerMetadata
+	(*DeleteServerByUserMetadata)(nil),         // 19: yandex.cloud.baremetal.v2.DeleteServerByUserMetadata
+	(*PowerOffServerMetadata)(nil),             // 20: yandex.cloud.baremetal.v2.PowerOffServerMetadata
+	(*PowerOnServerMetadata)(nil),              // 21: yandex.cloud.baremetal.v2.PowerOnServerMetadata
+	(*RebootServerMetadata)(nil),               // 22: yandex.cloud.baremetal.v2.RebootServerMetadata
+	(*ReinstallServerMetadata)(nil),            // 23: yandex.cloud.baremetal.v2.ReinstallServerMetadata
+	(*BatchCreateServersResponse)(nil),         // 24: yandex.cloud.baremetal.v2.BatchCreateServersResponse
+	(*BatchCreateServersMetadata)(nil),         // 25: yandex.cloud.baremetal.v2.BatchCreateServersMetadata
+	(*QuarantineServerMetadata)(nil),           // 26: yandex.cloud.baremetal.v2.QuarantineServerMetadata
+	(*ToggleServerProlongationMetadata)(nil),   // 27: yandex.cloud.baremetal.v2.ToggleServerProlongationMetadata
+	(*RenewServerRentalMetadata)(nil),          // 28: yandex.cloud.baremetal.v2.RenewServerRentalMetadata
+	(*Server)(nil),                             // 29: yandex.cloud.baremetal.v2.Server
+	(*fieldmaskpb.FieldMask)(nil),              // 30: google.protobuf.FieldMask
+	(*OsSettings)(nil),                         // 31: yandex.cloud.baremetal.v2.OsSettings
+	(*operation.Operation)(nil),                // 32: yandex.cloud.operation.Operation
+	(*OperationMetadata)(nil),                  // 33: yandex.cloud.baremetal.v2.OperationMetadata
+	(*access.ListAccessBindingsRequest)(nil),   // 34: yandex.cloud.access.ListAccessBindingsRequest
+	(*access.SetAccessBindingsRequest)(nil),    // 35: yandex.cloud.access.SetAccessBindingsRequest
+	(*access.UpdateAccessBindingsRequest)(nil), // 36: yandex.cloud.access.UpdateAccessBindingsRequest
+	(*access.ListAccessBindingsResponse)(nil),  // 37: yandex.cloud.access.ListAccessBindingsResponse
 }
 var file_yandex_cloud_baremetal_v2_server_service_proto_depIdxs = []int32{
 	29, // 0: yandex.cloud.baremetal.v2.ListServersResponse.servers:type_name -> yandex.cloud.baremetal.v2.Server
@@ -2070,21 +2080,27 @@ var file_yandex_cloud_baremetal_v2_server_service_proto_depIdxs = []int32{
 	12, // 31: yandex.cloud.baremetal.v2.ServerService.ReinstallServer:input_type -> yandex.cloud.baremetal.v2.ReinstallServerRequest
 	13, // 32: yandex.cloud.baremetal.v2.ServerService.RenewServerRental:input_type -> yandex.cloud.baremetal.v2.RenewServerRentalRequest
 	14, // 33: yandex.cloud.baremetal.v2.ServerService.ListServerOperations:input_type -> yandex.cloud.baremetal.v2.ListServerOperationsRequest
-	29, // 34: yandex.cloud.baremetal.v2.ServerService.GetServer:output_type -> yandex.cloud.baremetal.v2.Server
-	3,  // 35: yandex.cloud.baremetal.v2.ServerService.ListServers:output_type -> yandex.cloud.baremetal.v2.ListServersResponse
-	32, // 36: yandex.cloud.baremetal.v2.ServerService.CreateServer:output_type -> yandex.cloud.operation.Operation
-	32, // 37: yandex.cloud.baremetal.v2.ServerService.BatchCreateServers:output_type -> yandex.cloud.operation.Operation
-	32, // 38: yandex.cloud.baremetal.v2.ServerService.UpdateServer:output_type -> yandex.cloud.operation.Operation
-	32, // 39: yandex.cloud.baremetal.v2.ServerService.DeleteServer:output_type -> yandex.cloud.operation.Operation
-	32, // 40: yandex.cloud.baremetal.v2.ServerService.SkipQuarantineServer:output_type -> yandex.cloud.operation.Operation
-	32, // 41: yandex.cloud.baremetal.v2.ServerService.PowerOffServer:output_type -> yandex.cloud.operation.Operation
-	32, // 42: yandex.cloud.baremetal.v2.ServerService.PowerOnServer:output_type -> yandex.cloud.operation.Operation
-	32, // 43: yandex.cloud.baremetal.v2.ServerService.RebootServer:output_type -> yandex.cloud.operation.Operation
-	32, // 44: yandex.cloud.baremetal.v2.ServerService.ReinstallServer:output_type -> yandex.cloud.operation.Operation
-	32, // 45: yandex.cloud.baremetal.v2.ServerService.RenewServerRental:output_type -> yandex.cloud.operation.Operation
-	15, // 46: yandex.cloud.baremetal.v2.ServerService.ListServerOperations:output_type -> yandex.cloud.baremetal.v2.ListServerOperationsResponse
-	34, // [34:47] is the sub-list for method output_type
-	21, // [21:34] is the sub-list for method input_type
+	34, // 34: yandex.cloud.baremetal.v2.ServerService.ListAccessBindings:input_type -> yandex.cloud.access.ListAccessBindingsRequest
+	35, // 35: yandex.cloud.baremetal.v2.ServerService.SetAccessBindings:input_type -> yandex.cloud.access.SetAccessBindingsRequest
+	36, // 36: yandex.cloud.baremetal.v2.ServerService.UpdateAccessBindings:input_type -> yandex.cloud.access.UpdateAccessBindingsRequest
+	29, // 37: yandex.cloud.baremetal.v2.ServerService.GetServer:output_type -> yandex.cloud.baremetal.v2.Server
+	3,  // 38: yandex.cloud.baremetal.v2.ServerService.ListServers:output_type -> yandex.cloud.baremetal.v2.ListServersResponse
+	32, // 39: yandex.cloud.baremetal.v2.ServerService.CreateServer:output_type -> yandex.cloud.operation.Operation
+	32, // 40: yandex.cloud.baremetal.v2.ServerService.BatchCreateServers:output_type -> yandex.cloud.operation.Operation
+	32, // 41: yandex.cloud.baremetal.v2.ServerService.UpdateServer:output_type -> yandex.cloud.operation.Operation
+	32, // 42: yandex.cloud.baremetal.v2.ServerService.DeleteServer:output_type -> yandex.cloud.operation.Operation
+	32, // 43: yandex.cloud.baremetal.v2.ServerService.SkipQuarantineServer:output_type -> yandex.cloud.operation.Operation
+	32, // 44: yandex.cloud.baremetal.v2.ServerService.PowerOffServer:output_type -> yandex.cloud.operation.Operation
+	32, // 45: yandex.cloud.baremetal.v2.ServerService.PowerOnServer:output_type -> yandex.cloud.operation.Operation
+	32, // 46: yandex.cloud.baremetal.v2.ServerService.RebootServer:output_type -> yandex.cloud.operation.Operation
+	32, // 47: yandex.cloud.baremetal.v2.ServerService.ReinstallServer:output_type -> yandex.cloud.operation.Operation
+	32, // 48: yandex.cloud.baremetal.v2.ServerService.RenewServerRental:output_type -> yandex.cloud.operation.Operation
+	15, // 49: yandex.cloud.baremetal.v2.ServerService.ListServerOperations:output_type -> yandex.cloud.baremetal.v2.ListServerOperationsResponse
+	37, // 50: yandex.cloud.baremetal.v2.ServerService.ListAccessBindings:output_type -> yandex.cloud.access.ListAccessBindingsResponse
+	32, // 51: yandex.cloud.baremetal.v2.ServerService.SetAccessBindings:output_type -> yandex.cloud.operation.Operation
+	32, // 52: yandex.cloud.baremetal.v2.ServerService.UpdateAccessBindings:output_type -> yandex.cloud.operation.Operation
+	37, // [37:53] is the sub-list for method output_type
+	21, // [21:37] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
 	21, // [21:21] is the sub-list for extension extendee
 	0,  // [0:21] is the sub-list for field type_name

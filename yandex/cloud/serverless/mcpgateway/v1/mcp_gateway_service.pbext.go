@@ -75,6 +75,14 @@ func (m *CreateMcpGatewayRequest) SetTransport(v McpTransport) {
 	m.Transport = v
 }
 
+func (m *CreateMcpGatewayRequest) SetResources(v []*McpResource) {
+	m.Resources = v
+}
+
+func (m *CreateMcpGatewayRequest) SetInstructions(v string) {
+	m.Instructions = v
+}
+
 func (m *CreateMcpGatewayMetadata) SetMcpGatewayId(v string) {
 	m.McpGatewayId = v
 }
@@ -125,6 +133,14 @@ func (m *UpdateMcpGatewayRequest) SetPublic(v bool) {
 
 func (m *UpdateMcpGatewayRequest) SetTransport(v McpTransport) {
 	m.Transport = v
+}
+
+func (m *UpdateMcpGatewayRequest) SetResources(v []*McpResource) {
+	m.Resources = v
+}
+
+func (m *UpdateMcpGatewayRequest) SetInstructions(v string) {
+	m.Instructions = v
 }
 
 func (m *UpdateMcpGatewayMetadata) SetMcpGatewayId(v string) {

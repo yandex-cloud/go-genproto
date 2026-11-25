@@ -4,6 +4,7 @@ package mcpgateway
 
 import (
 	v1 "github.com/yandex-cloud/go-genproto/yandex/cloud/logging/v1"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -65,6 +66,14 @@ func (m *McpGateway) SetPublic(v bool) {
 
 func (m *McpGateway) SetTransport(v McpTransport) {
 	m.Transport = v
+}
+
+func (m *McpGateway) SetResources(v []*McpResource) {
+	m.Resources = v
+}
+
+func (m *McpGateway) SetInstructions(v string) {
+	m.Instructions = v
 }
 
 func (m *McpGatewayPreview) SetId(v string) {
@@ -159,6 +168,50 @@ func (m *McpTool) SetAction(v *McpToolAction) {
 
 func (m *McpTool) SetOutputJsonSchema(v string) {
 	m.OutputJsonSchema = v
+}
+
+func (m *McpTool) SetMeta(v *structpb.Struct) {
+	m.Meta = v
+}
+
+func (m *McpResource) SetUri(v string) {
+	m.Uri = v
+}
+
+func (m *McpResource) SetName(v string) {
+	m.Name = v
+}
+
+func (m *McpResource) SetTitle(v string) {
+	m.Title = v
+}
+
+func (m *McpResource) SetDescription(v string) {
+	m.Description = v
+}
+
+func (m *McpResource) SetMimeType(v string) {
+	m.MimeType = v
+}
+
+func (m *McpResource) SetAction(v *McpResourceAction) {
+	m.Action = v
+}
+
+func (m *McpResource) SetMeta(v *structpb.Struct) {
+	m.Meta = v
+}
+
+type McpResourceAction_Action = isMcpResourceAction_Action
+
+func (m *McpResourceAction) SetAction(v McpResourceAction_Action) {
+	m.Action = v
+}
+
+func (m *McpResourceAction) SetMcpCall(v *McpCall) {
+	m.Action = &McpResourceAction_McpCall{
+		McpCall: v,
+	}
 }
 
 type McpToolAction_Action = isMcpToolAction_Action
@@ -297,6 +350,12 @@ func (m *McpCall) SetToolCall(v *McpCall_ToolCall) {
 	}
 }
 
+func (m *McpCall) SetResourceRead(v *McpCall_ResourceRead) {
+	m.Action = &McpCall_ResourceRead_{
+		ResourceRead: v,
+	}
+}
+
 func (m *McpCall) SetTransport(v McpCall_Transport) {
 	m.Transport = v
 }
@@ -341,6 +400,10 @@ func (m *McpCall_ToolCall) SetToolName(v string) {
 
 func (m *McpCall_ToolCall) SetParametersJson(v string) {
 	m.ParametersJson = v
+}
+
+func (m *McpCall_ResourceRead) SetUri(v string) {
+	m.Uri = v
 }
 
 func (m *GrpcCall) SetEndpoint(v string) {
