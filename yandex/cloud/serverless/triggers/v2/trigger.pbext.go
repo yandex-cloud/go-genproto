@@ -484,22 +484,6 @@ func (m *AgentRuntimeCall) SetChannelId(v string) {
 	m.ChannelId = v
 }
 
-func (m *AgentRuntimeCall) SetAgentVersionId(v string) {
-	m.AgentVersionId = v
-}
-
-func (m *AgentRuntimeCall) SetCloudId(v string) {
-	m.CloudId = v
-}
-
-func (m *AgentRuntimeCall) SetFolderId(v string) {
-	m.FolderId = v
-}
-
-func (m *AgentRuntimeCall) SetAttributes(v map[string]string) {
-	m.Attributes = v
-}
-
 func (m *RetryPolicy) SetRetryAttempts(v int64) {
 	m.RetryAttempts = v
 }

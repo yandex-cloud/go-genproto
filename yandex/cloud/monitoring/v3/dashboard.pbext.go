@@ -89,3 +89,7 @@ func (m *Dashboard) SetPresetItems(v []*PresetItem) {
 func (m *Dashboard) SetDefaultPresetTitle(v string) {
 	m.DefaultPresetTitle = v
 }
+
+func (m *Dashboard) SetAnnotationsSettings(v *AnnotationsSettings) {
+	m.AnnotationsSettings = v
+}

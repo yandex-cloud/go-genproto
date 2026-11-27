@@ -111,6 +111,10 @@ func (m *CreateDashboardRequest) SetDefaultPresetTitle(v string) {
 	m.DefaultPresetTitle = v
 }
 
+func (m *CreateDashboardRequest) SetAnnotationsSettings(v *AnnotationsSettings) {
+	m.AnnotationsSettings = v
+}
+
 func (m *CreateDashboardMetadata) SetDashboardId(v string) {
 	m.DashboardId = v
 }
@@ -173,6 +177,10 @@ func (m *UpdateDashboardRequest) SetPresetItems(v []*PresetItem) {
 
 func (m *UpdateDashboardRequest) SetDefaultPresetTitle(v string) {
 	m.DefaultPresetTitle = v
+}
+
+func (m *UpdateDashboardRequest) SetAnnotationsSettings(v *AnnotationsSettings) {
+	m.AnnotationsSettings = v
 }
 
 func (m *UpdateDashboardMetadata) SetDashboardId(v string) {

@@ -1158,6 +1158,7 @@ func (x *LoggingConfig) GetFolderId() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
 func (x *LoggingConfig) GetLogGroupId() string {
 	if x != nil {
 		if x, ok := x.Destination.(*LoggingConfig_LogGroupId); ok {
@@ -1199,6 +1200,8 @@ type LoggingConfig_FolderId struct {
 
 type LoggingConfig_LogGroupId struct {
 	// ID of the log group used for the Cloud Logging.
+	//
+	// Deprecated: Marked as deprecated in yandex/cloud/mdb/greenplum/v1/cluster.proto.
 	LogGroupId string `protobuf:"bytes,3,opt,name=log_group_id,json=logGroupId,proto3,oneof"`
 }
 
@@ -1312,11 +1315,11 @@ const file_yandex_cloud_mdb_greenplum_v1_cluster_proto_rawDesc = "" +
 	"\x12resource_preset_id\x18\x01 \x01(\tR\x10resourcePresetId\x12\x1b\n" +
 	"\tdisk_size\x18\x02 \x01(\x03R\bdiskSize\"&\n" +
 	"\fCloudStorage\x12\x16\n" +
-	"\x06enable\x18\x01 \x01(\bR\x06enable\"\xd5\x02\n" +
+	"\x06enable\x18\x01 \x01(\bR\x06enable\"\xd7\x02\n" +
 	"\rLoggingConfig\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12B\n" +
-	"\tfolder_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12G\n" +
-	"\flog_group_id\x18\x03 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\n" +
+	"\tfolder_id\x18\x02 \x01(\tB#\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?H\x00R\bfolderId\x12I\n" +
+	"\flog_group_id\x18\x03 \x01(\tB%\xf2\xc71\x1f([a-zA-Z][-a-zA-Z0-9_.]{0,63})?\x18\x01H\x00R\n" +
 	"logGroupId\x124\n" +
 	"\x16command_center_enabled\x18\x05 \x01(\bR\x14commandCenterEnabled\x12+\n" +
 	"\x11greenplum_enabled\x18\x06 \x01(\bR\x10greenplumEnabled\x12%\n" +

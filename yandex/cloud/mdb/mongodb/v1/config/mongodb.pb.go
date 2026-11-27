@@ -1137,6 +1137,7 @@ type MongodConfig_SetParameter struct {
 	// The maximum number of documents to insert in a single batch during the cloning step of the migration process.
 	MigrateCloneInsertionBatchSize *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=migrate_clone_insertion_batch_size,json=migrateCloneInsertionBatchSize,proto3" json:"migrate_clone_insertion_batch_size,omitempty"`
 	// Minimum delay before a migrated chunk is deleted from the source shard.
+	// Default: 900 for MongoDB 8.0 and earlier, 3600 for MongoDB 9.0 and later.
 	OrphanCleanupDelaySecs *wrapperspb.Int64Value `protobuf:"bytes,8,opt,name=orphan_cleanup_delay_secs,json=orphanCleanupDelaySecs,proto3" json:"orphan_cleanup_delay_secs,omitempty"`
 	// Specifies the maximum batch size used for updating the persisted chunk cache.
 	PersistedChunkCacheUpdateMaxBatchSize *wrapperspb.Int64Value `protobuf:"bytes,9,opt,name=persisted_chunk_cache_update_max_batch_size,json=persistedChunkCacheUpdateMaxBatchSize,proto3" json:"persisted_chunk_cache_update_max_batch_size,omitempty"`
@@ -2395,6 +2396,8 @@ type MongosConfig_SetParameter struct {
 	// https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess
 	AuditAuthorizationSuccess *wrapperspb.BoolValue `protobuf:"bytes,1,opt,name=audit_authorization_success,json=auditAuthorizationSuccess,proto3" json:"audit_authorization_success,omitempty"`
 	// Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option.
+	// Deprecated: hedged reads are deprecated in MongoDB 8.0 and removed in later versions.
+	// The parameter has no effect in MongoDB 9.0 and later.
 	ReadHedgingMode *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=read_hedging_mode,json=readHedgingMode,proto3" json:"read_hedging_mode,omitempty"`
 	// Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance.
 	ShardingTaskExecutorPoolMaxSize *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=sharding_task_executor_pool_max_size,json=shardingTaskExecutorPoolMaxSize,proto3" json:"sharding_task_executor_pool_max_size,omitempty"`
@@ -2910,7 +2913,7 @@ var File_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto protoreflect.FileDescr
 
 const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\n" +
-	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\xd0)\n" +
+	"0yandex/cloud/mdb/mongodb/v1/config/mongodb.proto\x12\"yandex.cloud.mdb.mongodb.v1.config\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1dyandex/cloud/validation.proto\"\x80+\n" +
 	"\fMongodConfig\x12R\n" +
 	"\astorage\x18\x01 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.StorageR\astorage\x12t\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OperationProfilingR\x12operationProfiling\x12J\n" +
@@ -2920,20 +2923,21 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\rset_parameter\x18\x06 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameterR\fsetParameter\x12L\n" +
 	"\x05oplog\x18\a \x01(\v26.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.OplogR\x05oplog\x12E\n" +
 	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x12x\n" +
-	"\x15change_stream_options\x18\t \x01(\v2D.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.ChangeStreamOptionsR\x13changeStreamOptions\x1a\x8b\t\n" +
+	"\x15change_stream_options\x18\t \x01(\v2D.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.ChangeStreamOptionsR\x13changeStreamOptions\x1a\xa5\t\n" +
 	"\aStorage\x12d\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTigerR\n" +
 	"wiredTiger\x12Z\n" +
-	"\ajournal\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.JournalR\ajournal\x1a\xdb\x06\n" +
+	"\ajournal\x18\x02 \x01(\v2@.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.JournalR\ajournal\x1a\xf5\x06\n" +
 	"\n" +
 	"WiredTiger\x12u\n" +
 	"\rengine_config\x18\x01 \x01(\v2P.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x12\x81\x01\n" +
 	"\x11collection_config\x18\x02 \x01(\v2T.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfigR\x10collectionConfig\x12r\n" +
-	"\findex_config\x18\x03 \x01(\v2O.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfigR\vindexConfig\x1a\x8d\x01\n" +
-	"\fEngineConfig\x12@\n" +
-	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x12;\n" +
+	"\findex_config\x18\x03 \x01(\v2O.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.IndexConfigR\vindexConfig\x1a\xa7\x01\n" +
+	"\fEngineConfig\x12P\n" +
+	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB\x0e\xfa\xc71\n" +
+	"0.25-10000R\vcacheSizeGb\x12E\n" +
 	"\n" +
-	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\tcacheSize\x1a\xf3\x01\n" +
+	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueB\b\xfa\xc71\x040-90R\tcacheSize\x1a\xf3\x01\n" +
 	"\x10CollectionConfig\x12\x8a\x01\n" +
 	"\x10block_compressor\x18\x01 \x01(\x0e2_.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.Storage.WiredTiger.CollectionConfig.CompressorR\x0fblockCompressor\"R\n" +
 	"\n" +
@@ -2983,33 +2987,33 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x0ekey_identifier\x18\x05 \x01(\tR\rkeyIdentifier\x1as\n" +
 	"\bAuditLog\x12\x16\n" +
 	"\x06filter\x18\x01 \x01(\tR\x06filter\x12O\n" +
-	"\x15runtime_configuration\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x14runtimeConfiguration\x1a\xb4\f\n" +
+	"\x15runtime_configuration\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x14runtimeConfiguration\x1a\xb6\r\n" +
 	"\fSetParameter\x12Z\n" +
 	"\x1baudit_authorization_success\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x12J\n" +
-	"\x13enable_flow_control\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x11enableFlowControl\x12w\n" +
-	"&min_snapshot_history_window_in_seconds\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!minSnapshotHistoryWindowInSeconds\x12i\n" +
-	"\x1fflow_control_target_lag_seconds\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x1bflowControlTargetLagSeconds\x12r\n" +
-	"#flow_control_warn_threshold_seconds\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1fflowControlWarnThresholdSeconds\x12w\n" +
-	"&migrate_clone_insertion_batch_delay_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R!migrateCloneInsertionBatchDelayMs\x12p\n" +
-	"\"migrate_clone_insertion_batch_size\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x1emigrateCloneInsertionBatchSize\x12V\n" +
-	"\x19orphan_cleanup_delay_secs\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR\x16orphanCleanupDelaySecs\x12w\n" +
-	"+persisted_chunk_cache_update_max_batch_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR%persistedChunkCacheUpdateMaxBatchSize\x12d\n" +
+	"\x13enable_flow_control\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x11enableFlowControl\x12\x80\x01\n" +
+	"&min_snapshot_history_window_in_seconds\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R!minSnapshotHistoryWindowInSeconds\x12s\n" +
+	"\x1fflow_control_target_lag_seconds\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x1bflowControlTargetLagSeconds\x12{\n" +
+	"#flow_control_warn_threshold_seconds\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1fflowControlWarnThresholdSeconds\x12\x80\x01\n" +
+	"&migrate_clone_insertion_batch_delay_ms\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R!migrateCloneInsertionBatchDelayMs\x12y\n" +
+	"\"migrate_clone_insertion_batch_size\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1emigrateCloneInsertionBatchSize\x12h\n" +
+	"\x19orphan_cleanup_delay_secs\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x16orphanCleanupDelaySecs\x12\x89\x01\n" +
+	"+persisted_chunk_cache_update_max_batch_size\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R%persistedChunkCacheUpdateMaxBatchSize\x12m\n" +
 	"\x1crange_deleter_batch_delay_ms\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x18rangeDeleterBatchDelayMs\x12]\n" +
-	"\x18range_deleter_batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x15rangeDeleterBatchSize\x12l\n" +
+	" \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x18rangeDeleterBatchDelayMs\x12f\n" +
+	"\x18range_deleter_batch_size\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x15rangeDeleterBatchSize\x12l\n" +
 	"\fmirror_reads\x18\f \x01(\v2I.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.SetParameter.MirrorReadsR\vmirrorReads\x12O\n" +
 	"\x16redact_client_log_data\x18\r \x01(\v2\x1a.google.protobuf.BoolValueR\x13redactClientLogData\x12T\n" +
-	"\x19allow_disk_use_by_default\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR\x15allowDiskUseByDefault\x1a\x8d\x01\n" +
-	"\vMirrorReads\x12A\n" +
-	"\rsampling_rate\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\fsamplingRate\x12;\n" +
-	"\vmax_time_ms\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\tmaxTimeMs\x1a\x9c\x01\n" +
-	"\x05Oplog\x12E\n" +
-	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizePercent\x12L\n" +
-	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHours\x1a\x88\x02\n" +
+	"\x19allow_disk_use_by_default\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR\x15allowDiskUseByDefault\x1a\xa8\x01\n" +
+	"\vMirrorReads\x12J\n" +
+	"\rsampling_rate\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x030-1R\fsamplingRate\x12M\n" +
+	"\vmax_time_ms\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\tmaxTimeMs\x1a\xb0\x01\n" +
+	"\x05Oplog\x12P\n" +
+	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x0emaxSizePercent\x12U\n" +
+	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\x11minRetentionHours\x1a\x88\x02\n" +
 	"\x13ChangeStreamOptions\x12\x84\x01\n" +
 	"\x13pre_and_post_images\x18\x01 \x01(\v2U.yandex.cloud.mdb.mongodb.v1.config.MongodConfig.ChangeStreamOptions.PreAndPostImagesR\x10preAndPostImages\x1aj\n" +
 	"\x10PreAndPostImages\x12V\n" +
-	"\x14expire_after_seconds\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12expireAfterSeconds\"\xf5\x0e\n" +
+	"\x14expire_after_seconds\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\xfa\xc71\x03>=0R\x12expireAfterSeconds\"\xa3\x0f\n" +
 	"\x0eMongoCfgConfig\x12T\n" +
 	"\astorage\x18\x01 \x01(\v2:.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.StorageR\astorage\x12v\n" +
 	"\x13operation_profiling\x18\x02 \x01(\v2E.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfilingR\x12operationProfiling\x12L\n" +
@@ -3017,17 +3021,18 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\rset_parameter\x18\x04 \x01(\v2?.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.SetParameterR\fsetParameter\x12X\n" +
 	"\taudit_log\x18\x05 \x01(\v2;.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.AuditLogR\bauditLog\x12N\n" +
 	"\x05oplog\x18\x06 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OplogR\x05oplog\x12E\n" +
-	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\x89\x03\n" +
+	"\x10chaining_allowed\x18\b \x01(\v2\x1a.google.protobuf.BoolValueR\x0fchainingAllowed\x1a\xa3\x03\n" +
 	"\aStorage\x12f\n" +
 	"\vwired_tiger\x18\x01 \x01(\v2E.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTigerR\n" +
-	"wiredTiger\x1a\x95\x02\n" +
+	"wiredTiger\x1a\xaf\x02\n" +
 	"\n" +
 	"WiredTiger\x12w\n" +
-	"\rengine_config\x18\x01 \x01(\v2R.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x1a\x8d\x01\n" +
-	"\fEngineConfig\x12@\n" +
-	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueR\vcacheSizeGb\x12;\n" +
+	"\rengine_config\x18\x01 \x01(\v2R.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.Storage.WiredTiger.EngineConfigR\fengineConfig\x1a\xa7\x01\n" +
+	"\fEngineConfig\x12P\n" +
+	"\rcache_size_gb\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB\x0e\xfa\xc71\n" +
+	"0.25-10000R\vcacheSizeGb\x12E\n" +
 	"\n" +
-	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\tcacheSize\x1a\xa0\x02\n" +
+	"cache_size\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueB\b\xfa\xc71\x040-90R\tcacheSize\x1a\xa0\x02\n" +
 	"\x12OperationProfiling\x12^\n" +
 	"\x04mode\x18\x01 \x01(\x0e2J.yandex.cloud.mdb.mongodb.v1.config.MongoCfgConfig.OperationProfiling.ModeR\x04mode\x12O\n" +
 	"\x11slow_op_threshold\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x0fslowOpThreshold\x12\x16\n" +
@@ -3044,16 +3049,17 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x1baudit_authorization_success\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x12O\n" +
 	"\x16redact_client_log_data\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\x13redactClientLogData\x1a\"\n" +
 	"\bAuditLog\x12\x16\n" +
-	"\x06filter\x18\x01 \x01(\tR\x06filter\x1a\x9c\x01\n" +
-	"\x05Oplog\x12E\n" +
-	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxSizePercent\x12L\n" +
-	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueR\x11minRetentionHoursJ\x04\b\a\x10\b\"\x8c\x1f\n" +
+	"\x06filter\x18\x01 \x01(\tR\x06filter\x1a\xb0\x01\n" +
+	"\x05Oplog\x12P\n" +
+	"\x10max_size_percent\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\t\xfa\xc71\x050-100R\x0emaxSizePercent\x12U\n" +
+	"\x13min_retention_hours\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueB\a\xfa\xc71\x03>=0R\x11minRetentionHoursJ\x04\b\a\x10\b\"\xfd \n" +
 	"\fMongosConfig\x12J\n" +
 	"\x03net\x18\x03 \x01(\v28.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.NetworkR\x03net\x12b\n" +
 	"\rset_parameter\x18\x04 \x01(\v2=.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.SetParameterR\fsetParameter\x12V\n" +
-	"\taudit_log\x18\x05 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.AuditLogR\bauditLog\x12:\n" +
+	"\taudit_log\x18\x05 \x01(\v29.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.AuditLogR\bauditLog\x12F\n" +
 	"\n" +
-	"chunk_size\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueR\tchunkSize\x12t\n" +
+	"chunk_size\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\n" +
+	"\xfa\xc71\x061-1024R\tchunkSize\x12t\n" +
 	"\x13operation_profiling\x18\a \x01(\v2C.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.OperationProfilingR\x12operationProfiling\x12h\n" +
 	"\x0fbalancer_config\x18\b \x01(\v2?.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.BalancerConfigR\x0ebalancerConfig\x12^\n" +
 	"\vreplication\x18\t \x01(\v2<.yandex.cloud.mdb.mongodb.v1.config.MongosConfig.ReplicationR\vreplication\x1a\xba\x03\n" +
@@ -3071,22 +3077,22 @@ const file_yandex_cloud_mdb_mongodb_v1_config_mongodb_proto_rawDesc = "" +
 	"\x04ZSTD\x10\x03\x12\f\n" +
 	"\bDISABLED\x10\x04\x1ai\n" +
 	"\vReplication\x12Z\n" +
-	"\x17local_ping_threshold_ms\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x14localPingThresholdMs\x1a\xc1\r\n" +
+	"\x17local_ping_threshold_ms\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\xfa\xc71\x02>0R\x14localPingThresholdMs\x1a\xa6\x0f\n" +
 	"\fSetParameter\x12Z\n" +
 	"\x1baudit_authorization_success\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x19auditAuthorizationSuccess\x12H\n" +
-	"\x11read_hedging_mode\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0freadHedgingMode\x12j\n" +
-	"$sharding_task_executor_pool_max_size\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fshardingTaskExecutorPoolMaxSize\x12v\n" +
-	"*sharding_task_executor_pool_max_connecting\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueR%shardingTaskExecutorPoolMaxConnecting\x12j\n" +
-	"$sharding_task_executor_pool_min_size\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueR\x1fshardingTaskExecutorPoolMinSize\x12\x82\x01\n" +
-	"0sharding_task_executor_pool_replica_set_matching\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueR*shardingTaskExecutorPoolReplicaSetMatching\x12w\n" +
-	"+sharding_task_executor_pool_host_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueR%shardingTaskExecutorPoolHostTimeoutMs\x12\x85\x01\n" +
-	"2sharding_task_executor_pool_refresh_requirement_ms\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueR,shardingTaskExecutorPoolRefreshRequirementMs\x12}\n" +
-	".sharding_task_executor_pool_refresh_timeout_ms\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueR(shardingTaskExecutorPoolRefreshTimeoutMs\x12\x99\x01\n" +
+	"\x11read_hedging_mode\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x0freadHedgingMode\x12|\n" +
+	"$sharding_task_executor_pool_max_size\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R\x1fshardingTaskExecutorPoolMaxSize\x12\x88\x01\n" +
+	"*sharding_task_executor_pool_max_connecting\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R%shardingTaskExecutorPoolMaxConnecting\x12|\n" +
+	"$sharding_task_executor_pool_min_size\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R\x1fshardingTaskExecutorPoolMinSize\x12\xc0\x01\n" +
+	"0sharding_task_executor_pool_replica_set_matching\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB<\xf2\xc718^(automatic|matchPrimaryNode|matchBusiestNode|disabled)$R*shardingTaskExecutorPoolReplicaSetMatching\x12\x89\x01\n" +
+	"+sharding_task_executor_pool_host_timeout_ms\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R%shardingTaskExecutorPoolHostTimeoutMs\x12\x97\x01\n" +
+	"2sharding_task_executor_pool_refresh_requirement_ms\x18\b \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R,shardingTaskExecutorPoolRefreshRequirementMs\x12\x8f\x01\n" +
+	".sharding_task_executor_pool_refresh_timeout_ms\x18\t \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f1-2147483647R(shardingTaskExecutorPoolRefreshTimeoutMs\x12\x99\x01\n" +
 	">warm_min_connections_in_sharding_task_executor_pool_on_startup\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.BoolValueR5warmMinConnectionsInShardingTaskExecutorPoolOnStartup\x12\xa8\x01\n" +
-	"Fwarm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueR;warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs\x12\x8d\x01\n" +
-	"7sharding_task_executor_pool_max_size_for_config_servers\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueR/shardingTaskExecutorPoolMaxSizeForConfigServers\x12\x8d\x01\n" +
-	"7sharding_task_executor_pool_min_size_for_config_servers\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueR/shardingTaskExecutorPoolMinSizeForConfigServers\x12O\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueR5warmMinConnectionsInShardingTaskExecutorPoolOnStartup\x12\xba\x01\n" +
+	"Fwarm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms\x18\v \x01(\v2\x1b.google.protobuf.Int64ValueB\x10\xfa\xc71\f0-2147483647R;warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs\x12\xa0\x01\n" +
+	"7sharding_task_executor_pool_max_size_for_config_servers\x18\f \x01(\v2\x1b.google.protobuf.Int64ValueB\x11\xfa\xc71\r-1-2147483647R/shardingTaskExecutorPoolMaxSizeForConfigServers\x12\xa0\x01\n" +
+	"7sharding_task_executor_pool_min_size_for_config_servers\x18\r \x01(\v2\x1b.google.protobuf.Int64ValueB\x11\xfa\xc71\r-1-2147483647R/shardingTaskExecutorPoolMinSizeForConfigServers\x12O\n" +
 	"\x16redact_client_log_data\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueR\x13redactClientLogData\x1a\"\n" +
 	"\bAuditLog\x12\x16\n" +
 	"\x06filter\x18\x01 \x01(\tR\x06filter\x1a\xd3\x01\n" +

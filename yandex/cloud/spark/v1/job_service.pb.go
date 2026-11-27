@@ -631,17 +631,17 @@ const file_yandex_cloud_spark_v1_job_service_proto_rawDesc = "" +
 	"\x10CancelJobRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
-	"\x06job_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05jobId\"\xbb\x01\n" +
+	"\x06job_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05jobId\"\xbd\x01\n" +
 	"\x11ListJobLogRequest\x12+\n" +
 	"\n" +
 	"cluster_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tclusterId\x12#\n" +
 	"\x06job_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x05jobId\x12*\n" +
-	"\tpage_size\x18\x03 \x01(\x03B\r\xfa\xc71\t<=1048576R\bpageSize\x12(\n" +
+	"\tpage_size\x18\x03 \x01(\x03B\r\xfa\xc71\t<=1048576R\bpageSize\x12*\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tB\t\x8a\xc81\x05<=200R\tpageToken\"a\n" +
+	"page_token\x18\x04 \x01(\tB\v\x8a\xc81\a<=98304R\tpageToken\"c\n" +
 	"\x12ListJobLogResponse\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\tR\acontent\x121\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tB\t\x8a\xc81\x05<=200R\rnextPageToken2\xf6\x03\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\x123\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tB\v\x8a\xc81\a<=98304R\rnextPageToken2\xf6\x03\n" +
 	"\n" +
 	"JobService\x12W\n" +
 	"\x04List\x12&.yandex.cloud.spark.v1.ListJobsRequest\x1a'.yandex.cloud.spark.v1.ListJobsResponse\x12r\n" +

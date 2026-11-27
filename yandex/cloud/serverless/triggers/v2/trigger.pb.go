@@ -2232,15 +2232,7 @@ func (x *GatewayWebsocketBroadcast) GetServiceAccountId() string {
 type AgentRuntimeCall struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// ID of the Agent Runtime channel to call.
-	ChannelId string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
-	// ID of the agent version to call.
-	AgentVersionId string `protobuf:"bytes,2,opt,name=agent_version_id,json=agentVersionId,proto3" json:"agent_version_id,omitempty"`
-	// ID of the cloud that the agent belongs to.
-	CloudId string `protobuf:"bytes,3,opt,name=cloud_id,json=cloudId,proto3" json:"cloud_id,omitempty"`
-	// ID of the folder that the agent belongs to.
-	FolderId string `protobuf:"bytes,4,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
-	// Additional attributes passed to the agent call.
-	Attributes    map[string]string `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	ChannelId     string `protobuf:"bytes,1,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2280,34 +2272,6 @@ func (x *AgentRuntimeCall) GetChannelId() string {
 		return x.ChannelId
 	}
 	return ""
-}
-
-func (x *AgentRuntimeCall) GetAgentVersionId() string {
-	if x != nil {
-		return x.AgentVersionId
-	}
-	return ""
-}
-
-func (x *AgentRuntimeCall) GetCloudId() string {
-	if x != nil {
-		return x.CloudId
-	}
-	return ""
-}
-
-func (x *AgentRuntimeCall) GetFolderId() string {
-	if x != nil {
-		return x.FolderId
-	}
-	return ""
-}
-
-func (x *AgentRuntimeCall) GetAttributes() map[string]string {
-	if x != nil {
-		return x.Attributes
-	}
-	return nil
 }
 
 // RetryPolicy defines retry behaviour and dead-letter destination for a failed action invocation.
@@ -2791,21 +2755,10 @@ const file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc = "" +
 	"\n" +
 	"gateway_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tgatewayId\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\xe8\xc71\x01R\x04path\x12:\n" +
-	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"\xf7\x02\n" +
+	"\x12service_account_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x10serviceAccountId\"?\n" +
 	"\x10AgentRuntimeCall\x12+\n" +
 	"\n" +
-	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\x126\n" +
-	"\x10agent_version_id\x18\x02 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\x0eagentVersionId\x12'\n" +
-	"\bcloud_id\x18\x03 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\acloudId\x12)\n" +
-	"\tfolder_id\x18\x04 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\bfolderId\x12e\n" +
-	"\n" +
-	"attributes\x18\n" +
-	" \x03(\v2E.yandex.cloud.serverless.triggers.v2.AgentRuntimeCall.AttributesEntryR\n" +
-	"attributes\x1a=\n" +
-	"\x0fAttributesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01J\x04\b\x05\x10\n" +
-	"\"\x84\x01\n" +
+	"channel_id\x18\x01 \x01(\tB\f\xe8\xc71\x01\x8a\xc81\x04<=50R\tchannelId\"\x84\x01\n" +
 	"\vRetryPolicy\x12.\n" +
 	"\x0eretry_attempts\x18\x01 \x01(\x03B\a\xfa\xc71\x031-5R\rretryAttempts\x12E\n" +
 	"\binterval\x18\x02 \x01(\v2\x19.google.protobuf.DurationB\x0e\xe8\xc71\x01\xfa\xc71\x0610s-1mR\binterval\"\x85\x01\n" +
@@ -2854,7 +2807,7 @@ func file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDescGZIP() []byte
 }
 
 var file_yandex_cloud_serverless_triggers_v2_trigger_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_yandex_cloud_serverless_triggers_v2_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_yandex_cloud_serverless_triggers_v2_trigger_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_yandex_cloud_serverless_triggers_v2_trigger_proto_goTypes = []any{
 	(ObjectStorageEventType)(0),         // 0: yandex.cloud.serverless.triggers.v2.ObjectStorageEventType
 	(ContainerRegistryEventType)(0),     // 1: yandex.cloud.serverless.triggers.v2.ContainerRegistryEventType
@@ -2889,14 +2842,13 @@ var file_yandex_cloud_serverless_triggers_v2_trigger_proto_goTypes = []any{
 	(*PutQueueMessage)(nil),             // 30: yandex.cloud.serverless.triggers.v2.PutQueueMessage
 	(*ObjectStorageBucketSettings)(nil), // 31: yandex.cloud.serverless.triggers.v2.ObjectStorageBucketSettings
 	nil,                                 // 32: yandex.cloud.serverless.triggers.v2.Trigger.LabelsEntry
-	nil,                                 // 33: yandex.cloud.serverless.triggers.v2.AgentRuntimeCall.AttributesEntry
-	nil,                                 // 34: yandex.cloud.serverless.triggers.v2.PutQueueMessage.MessageAttributesEntry
-	(*timestamppb.Timestamp)(nil),       // 35: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),         // 36: google.protobuf.Duration
-	(v1.LogLevel_Level)(0),              // 37: yandex.cloud.logging.v1.LogLevel.Level
+	nil,                                 // 33: yandex.cloud.serverless.triggers.v2.PutQueueMessage.MessageAttributesEntry
+	(*timestamppb.Timestamp)(nil),       // 34: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),         // 35: google.protobuf.Duration
+	(v1.LogLevel_Level)(0),              // 36: yandex.cloud.logging.v1.LogLevel.Level
 }
 var file_yandex_cloud_serverless_triggers_v2_trigger_proto_depIdxs = []int32{
-	35, // 0: yandex.cloud.serverless.triggers.v2.Trigger.created_at:type_name -> google.protobuf.Timestamp
+	34, // 0: yandex.cloud.serverless.triggers.v2.Trigger.created_at:type_name -> google.protobuf.Timestamp
 	32, // 1: yandex.cloud.serverless.triggers.v2.Trigger.labels:type_name -> yandex.cloud.serverless.triggers.v2.Trigger.LabelsEntry
 	4,  // 2: yandex.cloud.serverless.triggers.v2.Trigger.source:type_name -> yandex.cloud.serverless.triggers.v2.Source
 	19, // 3: yandex.cloud.serverless.triggers.v2.Trigger.action:type_name -> yandex.cloud.serverless.triggers.v2.Action
@@ -2916,7 +2868,7 @@ var file_yandex_cloud_serverless_triggers_v2_trigger_proto_depIdxs = []int32{
 	16, // 17: yandex.cloud.serverless.triggers.v2.Source.max_message:type_name -> yandex.cloud.serverless.triggers.v2.MaxMessage
 	18, // 18: yandex.cloud.serverless.triggers.v2.Source.yandex_forms:type_name -> yandex.cloud.serverless.triggers.v2.YandexForms
 	29, // 19: yandex.cloud.serverless.triggers.v2.YMQ.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
-	36, // 20: yandex.cloud.serverless.triggers.v2.YMQ.visibility_timeout:type_name -> google.protobuf.Duration
+	35, // 20: yandex.cloud.serverless.triggers.v2.YMQ.visibility_timeout:type_name -> google.protobuf.Duration
 	29, // 21: yandex.cloud.serverless.triggers.v2.YDS.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
 	31, // 22: yandex.cloud.serverless.triggers.v2.Mail.attachments_bucket:type_name -> yandex.cloud.serverless.triggers.v2.ObjectStorageBucketSettings
 	29, // 23: yandex.cloud.serverless.triggers.v2.Mail.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
@@ -2924,7 +2876,7 @@ var file_yandex_cloud_serverless_triggers_v2_trigger_proto_depIdxs = []int32{
 	29, // 25: yandex.cloud.serverless.triggers.v2.ObjectStorage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
 	1,  // 26: yandex.cloud.serverless.triggers.v2.ContainerRegistry.event_type:type_name -> yandex.cloud.serverless.triggers.v2.ContainerRegistryEventType
 	29, // 27: yandex.cloud.serverless.triggers.v2.ContainerRegistry.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
-	37, // 28: yandex.cloud.serverless.triggers.v2.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
+	36, // 28: yandex.cloud.serverless.triggers.v2.Logging.levels:type_name -> yandex.cloud.logging.v1.LogLevel.Level
 	29, // 29: yandex.cloud.serverless.triggers.v2.Logging.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
 	29, // 30: yandex.cloud.serverless.triggers.v2.IoTMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
 	29, // 31: yandex.cloud.serverless.triggers.v2.IoTBrokerMessage.batch_settings:type_name -> yandex.cloud.serverless.triggers.v2.BatchSettings
@@ -2937,16 +2889,15 @@ var file_yandex_cloud_serverless_triggers_v2_trigger_proto_depIdxs = []int32{
 	21, // 38: yandex.cloud.serverless.triggers.v2.Action.transformer:type_name -> yandex.cloud.serverless.triggers.v2.Transformer
 	27, // 39: yandex.cloud.serverless.triggers.v2.Action.retry_policy:type_name -> yandex.cloud.serverless.triggers.v2.RetryPolicy
 	28, // 40: yandex.cloud.serverless.triggers.v2.Action.dead_letter:type_name -> yandex.cloud.serverless.triggers.v2.DeadLetter
-	33, // 41: yandex.cloud.serverless.triggers.v2.AgentRuntimeCall.attributes:type_name -> yandex.cloud.serverless.triggers.v2.AgentRuntimeCall.AttributesEntry
-	36, // 42: yandex.cloud.serverless.triggers.v2.RetryPolicy.interval:type_name -> google.protobuf.Duration
-	30, // 43: yandex.cloud.serverless.triggers.v2.DeadLetter.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v2.PutQueueMessage
-	36, // 44: yandex.cloud.serverless.triggers.v2.BatchSettings.cutoff:type_name -> google.protobuf.Duration
-	34, // 45: yandex.cloud.serverless.triggers.v2.PutQueueMessage.message_attributes:type_name -> yandex.cloud.serverless.triggers.v2.PutQueueMessage.MessageAttributesEntry
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	35, // 41: yandex.cloud.serverless.triggers.v2.RetryPolicy.interval:type_name -> google.protobuf.Duration
+	30, // 42: yandex.cloud.serverless.triggers.v2.DeadLetter.dead_letter_queue:type_name -> yandex.cloud.serverless.triggers.v2.PutQueueMessage
+	35, // 43: yandex.cloud.serverless.triggers.v2.BatchSettings.cutoff:type_name -> google.protobuf.Duration
+	33, // 44: yandex.cloud.serverless.triggers.v2.PutQueueMessage.message_attributes:type_name -> yandex.cloud.serverless.triggers.v2.PutQueueMessage.MessageAttributesEntry
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_yandex_cloud_serverless_triggers_v2_trigger_proto_init() }
@@ -2996,7 +2947,7 @@ func file_yandex_cloud_serverless_triggers_v2_trigger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc), len(file_yandex_cloud_serverless_triggers_v2_trigger_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   32,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
